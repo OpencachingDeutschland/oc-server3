@@ -40,7 +40,6 @@ class OcSmarty extends Smarty
     public function __construct()
     {
         global $opt, $sqldebugger;
-        require_once $opt['rootpath'] . 'lib2/bench.inc.php';
         $this->bench = new CBench();
         $this->bench->start();
 

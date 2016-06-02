@@ -170,8 +170,7 @@ if ($dblink === false) {
 $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 
 // zeitmessung
-require_once $rootpath . 'lib/bench.inc.php';
-$bScriptExecution = new Cbench;
+$bScriptExecution = new CBench;
 $bScriptExecution->start();
 
 function load_domain_settings()
@@ -383,7 +382,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
         tpl_set_var('license_disclaimer', '');
     }
 
-    $bTemplateBuild = new Cbench;
+    $bTemplateBuild = new CBench;
     $bTemplateBuild->Start();
 
     //set {functionsbox}

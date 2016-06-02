@@ -7,8 +7,6 @@
  *  This modules gives you a very usefull SQL debugger for MySQL ...
  ***************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/bench.inc.php';
-
 $sqldebugger = new sqldebugger();
 
 class sqldebugger
@@ -88,7 +86,7 @@ class sqldebugger
         // dont use query cache!
         $sql = $this->insert_nocache($sql);
 
-        $bSqlExecution = new Cbench;
+        $bSqlExecution = new CBench;
         $bSqlExecution->start();
         $rsResult = mysql_query($sql, $dblink);
         $bSqlExecution->stop();

@@ -31,8 +31,8 @@ for a detailed list.
 
 Contributions
 -------------
-Contributing code to Opencaching.de is easy:
-* Sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
+Before contributing code, please read the [OC.de Code Style guidelines](http://wiki.opencaching.de/index.php/OC_Coding_Style). Then
+* sign up to Github and [install Git](https://help.github.com/articles/set-up-git),
 * create a personal fork of this repository using the Fork button above,
 * clone the fork to your development machine,
 * create a feature branch based on master,
@@ -56,6 +56,7 @@ on master:
 
 Related Websites
 ----------------
+* [OC.de Code Style guidelines](http://wiki.opencaching.de/index.php/OC_Coding_Style)
 * [Opencaching.de development todo list](http://redmine.opencaching.de/projects/oc-dev)
 * [Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)

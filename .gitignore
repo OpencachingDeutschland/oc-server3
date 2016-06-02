@@ -53,3 +53,4 @@
 /.vagrant/
 Thumbs.db
 /bin/phpzip.php
+parameters.yml

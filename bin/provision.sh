@@ -77,9 +77,6 @@ ServerAdmin root@localhost
 </Directory>
 
 DocumentRoot "/var/www/html/htdocs"
-ErrorDocument 404 /404.php
-RewriteEngine On
-RewriteRule ^/((OC|GC)[A-Za-z0-9]{1,5})\$ /searchplugin.php?userinput=\$1 [NC]
 
 <Directory "/var/www">
     AllowOverride None
@@ -91,6 +88,16 @@ RewriteRule ^/((OC|GC)[A-Za-z0-9]{1,5})\$ /searchplugin.php?userinput=\$1 [NC]
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
+
+    ErrorDocument 404 /404.php
+
+    RewriteEngine On
+    RewriteRule ^((OC|GC)[A-Za-z0-9]{1,5})$ /searchplugin.php?userinput=\$1 [NC,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule ^(.*)$ /symfony_app.php [QSA,L]
 </Directory>
 
 <Directory "/var/www/html/htdocs/statpics">

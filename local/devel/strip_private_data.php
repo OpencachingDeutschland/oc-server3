@@ -88,8 +88,10 @@ sql(
             `watchmail_hour`=0, `watchmail_nextmail`='', `watchmail_day`=0,
             `activation_code`='', `statpic_logo`=0, `statpic_text`='Opencaching',
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',
-            `language_guessed`=1, `domain`=NULL, `admin`=0, `data_license`=0,
+            `language_guessed`=1, `domain`=NULL, `admin`=0,
             `description`='', `desc_htmledit`=1"
+            // `data_license` setting is retained, so that all content stays tagged with
+            // correct license information.
 );
 
 echo "deleting hidden and locked caches\n";

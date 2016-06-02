@@ -68,7 +68,7 @@ define('NEWCACHES_DAYS', 14);
 define('USR_OPT_GMZOOM', 1);
 define('USR_OPT_SHOWSTATS', 5);
 define('USR_OPT_MAP_MENU', 6);
-define('USR_OPT_MAP_OVERVIEW', 7);
+define('USR_OPT_MAP_OVERVIEW', 7);   // obsolete, no longer supported since Google Maps 3.22
 define('USR_OPT_MAP_MAXCACHES', 8);
 define('USR_OPT_MAP_ICONSET', 9);
 define('USR_OPT_MAP_PREVIEW', 10);

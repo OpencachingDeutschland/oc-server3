@@ -24,7 +24,6 @@
     <file>./Frontend/</file>
     <file>./Modules/</file>
 
-    <exclude-pattern>*/cache/*</exclude-pattern>
     <exclude-pattern>*/cache2/*</exclude-pattern>
     <exclude-pattern>*/images/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>

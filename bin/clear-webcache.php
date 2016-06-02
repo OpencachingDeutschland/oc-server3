@@ -56,8 +56,6 @@ function clearCache()
     unlinkFiles('cache2/smarty/cache', 'tpl');
     unlinkFiles('cache2/smarty/compiled', 'inc');
     unlinkFiles('cache2/smarty/compiled', 'php');
-    unlinkFiles('cache2/captcha', 'jpg');
-    unlinkFiles('cache2/captcha', 'txt');
 }
 
 function unlinkFiles($relbasedir, $ext)

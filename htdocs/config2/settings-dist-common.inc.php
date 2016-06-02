@@ -103,7 +103,7 @@ $opt['logic']['admin']['listingadmin_notification'] = '';  // Email address(es),
 /*
  * html purifier
  */
-$opt['html_purifier']['cache_path'] = dirname(__FILE__) . '/../cache2/html_purifier/';
+$opt['html_purifier']['cache_path'] = __DIR__ . '/../cache2/html_purifier/';
 
 /*
  * CMS links for external pages

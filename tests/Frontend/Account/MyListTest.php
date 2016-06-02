@@ -12,6 +12,9 @@ use Oc\Frontend\AbstractFrontendTest;
 class MyListTest extends AbstractFrontendTest
 {
 
+    /**
+     * @return void
+     */
     public function testMyWatchesPage()
     {
         // check if issue with Undefined variable appears again ;-)

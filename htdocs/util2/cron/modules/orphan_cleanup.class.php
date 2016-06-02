@@ -61,5 +61,4 @@ class orphan_cleanup
         }
         sql_drop_temp_table('tmpsessiondata');
     }
-
 }

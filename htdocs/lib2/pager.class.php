@@ -25,7 +25,7 @@ class pager
         $this->link_url = $link_url;
         $this->min_pages_shown = $min_pages_shown;
         if (($max_pages_shown % 2) == 0) {
-            $tpl->error("pager: max pages shown must be odd");
+            $tpl->error('pager: max pages shown must be odd');
         }
         $this->max_pages_shown = $max_pages_shown;
     }
@@ -53,13 +53,13 @@ class pager
                 $tpl->assign('pages_prev_link', $this->pagelink($current_page - 1, $page_size));
             }
 
-            $pages = array();
+            $pages = [];
             $lrspan = ($this->max_pages_shown - 1) / 2;
             $from_page = max($first_page, $current_page - $lrspan);
             $to_page = min($last_page, max($first_page, $current_page - $lrspan) + $this->max_pages_shown - 1);
             $from_page = max($first_page, $to_page - $this->max_pages_shown + 1);
 
-            for ($page = $from_page; $page <= $to_page; $page ++) {
+            for ($page = $from_page; $page <= $to_page; $page++) {
                 if ($page == $current_page) {
                     $pages[$page] = false;
                 } else {

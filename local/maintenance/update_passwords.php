@@ -23,7 +23,7 @@ if (!$opt['logic']['password_hash']) {
     return;
 }
 
-$rs = sql("SELECT * FROM user WHERE password IS NOT NULL");
+$rs = sql('SELECT * FROM user WHERE password IS NOT NULL');
 while ($r = sql_fetch_array($rs)) {
     $password = $r['password'];
     if (strlen($password) == 128) {

@@ -39,8 +39,8 @@ class maillog
 
             return;
         }
-        if (@mysql_query("USE " . $opt['system']['maillog']['syslog_db_name'], $dbc) === false) {
-            echo $this->name . ": could not open syslog database: " . mysql_error() . "\n";
+        if (@mysql_query('USE ' . $opt['system']['maillog']['syslog_db_name'], $dbc) === false) {
+            echo $this->name . ': could not open syslog database: ' . mysql_error() . "\n";
 
             return;
         }
@@ -52,7 +52,7 @@ class maillog
         $col_program = mysql_real_escape_string($opt['system']['maillog']['column']['program']);
 
         $maillog_where =
-            "`" . $col_hostname . "`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
+            '`' . $col_hostname . "`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
             `" . $col_program . "` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
 
         $rs = @mysql_query(
@@ -70,7 +70,7 @@ class maillog
         }
 
         $last_id = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastid'", 0);
-        $last_date = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastdate'", "");
+        $last_date = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastdate'", '');
 
         // We check for both, new IDs and new creation dates, so that it still works
         // if the syslog DB is re-setup and IDs restarted from 1 (dates are not unique).
@@ -80,7 +80,7 @@ class maillog
         // case some entries with same timestamp as $last_date will be processed redundantly.
 
         $rs = @mysql_query(
-            "SELECT `" . $col_id . "` `id`,
+            'SELECT `' . $col_id . "` `id`,
                       `" . $col_message . "` `message`,
                       `" . $col_created . "` `created`
                  FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
@@ -89,11 +89,11 @@ class maillog
                 $last_id
             ) . "' OR `" . $col_created . "`>'" . mysql_real_escape_string($last_date) . "')
                   AND  " . $maillog_where . "
-             ORDER BY `" . $col_created . "`,`" . $col_id . "`",
+             ORDER BY `" . $col_created . '`,`' . $col_id . '`',
             $dbc
         );
         if ($rs === false) {
-            echo $this->name . ": syslog query error (" . mysql_errno() . "): " . mysql_error() . "\n";
+            echo $this->name . ': syslog query error (' . mysql_errno() . '): ' . mysql_error() . "\n";
 
             return;
         }
@@ -122,7 +122,7 @@ class maillog
                         }
                     }
                 } else {
-                    echo $this->name . ": no email address found for record ID " . $logentry['id'] . "\n";
+                    echo $this->name . ': no email address found for record ID ' . $logentry['id'] . "\n";
                 }
             }
             $last_id = $logentry['id'];

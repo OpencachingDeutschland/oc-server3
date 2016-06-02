@@ -78,9 +78,9 @@ if ($error == false) {
                     $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;
                     $_POST['submitform'] = $_POST['submit'];
 
-                    $desc = iconv("ISO-8859-1", "UTF-8", $desc);
-                    $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-                    $hints = iconv("ISO-8859-1", "UTF-8", $hints);
+                    $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
+                    $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+                    $hints = iconv('ISO-8859-1', 'UTF-8', $hints);
                 }
 
                 // Filter Input

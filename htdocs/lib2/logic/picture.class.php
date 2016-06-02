@@ -12,9 +12,13 @@ require_once __DIR__ . '/const.inc.php';
 
 class picture
 {
+
     public $nPictureId = 0;
+
     public $rePicture;
+
     public $sFileExtension = '';
+
     public $bFilenamesSet = false;
 
     public static function pictureIdFromUUID($uuid)
@@ -26,12 +30,12 @@ class picture
 
     public static function fromUUID($uuid)
     {
-        $pictureid = picture::pictureIdFromUUID($uuid);
+        $pictureid = self::pictureIdFromUUID($uuid);
         if ($pictureid == 0) {
             return null;
         }
 
-        return new picture($pictureid);
+        return new self($pictureid);
     }
 
     public function __construct($nNewPictureId = ID_NEW)
@@ -63,7 +67,7 @@ class picture
         if ($nNewPictureId == ID_NEW) {
             $this->rePicture->addNew(null);
 
-            $sUUID = mb_strtoupper(sql_value("SELECT UUID()", ''));
+            $sUUID = mb_strtoupper(sql_value('SELECT UUID()', ''));
             $this->rePicture->setValue('uuid', $sUUID);
             $this->rePicture->setValue('node', $opt['logic']['node']['id']);
         } else {
@@ -97,9 +101,9 @@ class picture
 
         if (strpos(';' . $opt['logic']['pictures']['extensions'] . ';', ';' . $sExtension . ';') !== false) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function setFilenames($sFilename)
@@ -160,8 +164,8 @@ class picture
             $archive = true;
         }
 
-        sql("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
-        sql_slave("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
+        sql('SET @archive_picop=' . ($archive ? 'TRUE' : 'FALSE'));
+        sql_slave('SET @archive_picop=' . ($archive ? 'TRUE' : 'FALSE'));
 
         sql("SET @original_picid='&1'", $original_id);
         sql_slave("SET @original_picid='&1'", $original_id);
@@ -171,10 +175,10 @@ class picture
 
     private function resetArchiveFlag()
     {
-        sql("SET @archive_picop=FALSE");
-        sql("SET @original_picid=0");
-        sql_slave("SET @archive_picop=FALSE");
-        sql_slave("SET @original_picid=0");
+        sql('SET @archive_picop=FALSE');
+        sql('SET @original_picid=0');
+        sql_slave('SET @archive_picop=FALSE');
+        sql_slave('SET @original_picid=0');
     }
 
     public function getUrl()
@@ -206,9 +210,9 @@ class picture
     {
         if ($value != '') {
             return $this->rePicture->setValue('title', $value);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getSpoiler()
@@ -266,7 +270,7 @@ class picture
         // works intendently before bFilenameSet == true !
         global $opt;
 
-        if (mb_substr($opt['logic']['pictures']['dir'], - 1, 1) != '/') {
+        if (mb_substr($opt['logic']['pictures']['dir'], -1, 1) != '/') {
             $opt['logic']['pictures']['dir'] .= '/';
         }
 
@@ -280,7 +284,7 @@ class picture
     {
         global $opt;
 
-        if (mb_substr($opt['logic']['pictures']['thumb_dir'], - 1, 1) != '/') {
+        if (mb_substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/') {
             $opt['logic']['pictures']['thumb_dir'] .= '/';
         }
 
@@ -298,47 +302,48 @@ class picture
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
             return $this->getObjectId();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function isVisibleOnCachePage()
     {
         if ($this->getObjectType() != OBJECT_CACHELOG) {
             return null;
-        } else {
-            $rs = sql(
-                "SELECT `id`
-                 FROM `cache_logs`
-                 WHERE `cache_id`='&1'
-                 ORDER BY `date`, `id` DESC
-                 LIMIT &2",
-                $this->getCacheId(),
-                MAX_LOGENTRIES_ON_CACHEPAGE
-            );
-        }
-        $firstlogs = false;
-        while ($r = sql_fetch_assoc($rs)) {
-            if ($r['id'] == $this->getLogId()) {
-                $firstlogs = true;
-            }
         }
 
-        sql_free_result($rs);
+		$rs = sql(
+			"SELECT `id`
+			 FROM `cache_logs`
+			 WHERE `cache_id`='&1'
+			 ORDER BY `date`, `id` DESC
+			 LIMIT &2",
+			$this->getCacheId(),
+			MAX_LOGENTRIES_ON_CACHEPAGE
+		);
+		$firstlogs = false;
+		while ($r = sql_fetch_assoc($rs)) {
+			if ($r['id'] == $this->getLogId()) {
+				$firstlogs = true;
+			}
+		}
 
-        return $firstlogs;
+		sql_free_result($rs);
+
+		return $firstlogs;
     }
 
     public function getCacheId()
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
             return sql_value("SELECT `cache_id` FROM `cache_logs` WHERE `id`='&1'", false, $this->getObjectId());
-        } elseif ($this->getObjectType() == OBJECT_CACHE) {
-            return $this->getObjectId();
-        } else {
-            return false;
         }
+        if ($this->getObjectType() == OBJECT_CACHE) {
+            return $this->getObjectId();
+        }
+
+        return false;
     }
 
     public function getObjectId()
@@ -365,11 +370,12 @@ class picture
     {
         if ($this->getObjectType() == OBJECT_CACHE) {
             return sql_value("SELECT `caches`.`user_id` FROM `caches` WHERE `caches`.`cache_id`='&1'", false, $this->getObjectId());
-        } elseif ($this->getObjectType() == OBJECT_CACHELOG) {
-            return sql_value("SELECT `cache_logs`.`user_id` FROM `cache_logs` WHERE `cache_logs`.`id`='&1'", false, $this->getObjectId());
-        } else {
-            return false;
         }
+        if ($this->getObjectType() == OBJECT_CACHELOG) {
+            return sql_value("SELECT `cache_logs`.`user_id` FROM `cache_logs` WHERE `cache_logs`.`id`='&1'", false, $this->getObjectId());
+        }
+
+        return false;
     }
 
     public function getNode()
@@ -428,23 +434,23 @@ class picture
     }
 
     // return true if successful (with insert)
-    public function save($restore = false, $original_id = 0, $original_url = "")
+    public function save($restore = false, $original_id = 0, $original_url = '')
     {
         $undelete = ($original_id != 0);
 
         if ($undelete) {
             if ($this->bFilenamesSet == true) {
                 return false;
-            } else {
-                // restore picture file
-                $this->setUrl($original_url);        // set the url, so that we can
-                $filename = $this->getFilename();    // .. retreive the file path+name
-                $this->setFilenames($filename);      // now set url(s) from the new uuid
-                try {
-                    rename($this->deleted_filename($filename), $this->getFilename());
-                } catch (Exception $e) {
-                    // @todo implement login
-                }
+            }
+
+            // restore picture file
+            $this->setUrl($original_url);        // set the url, so that we can
+            $filename = $this->getFilename();    // .. retreive the file path+name
+            $this->setFilenames($filename);      // now set url(s) from the new uuid
+            try {
+                rename($this->deleted_filename($filename), $this->getFilename());
+            } catch (Exception $e) {
+                // @todo implement login
             }
         }
 
@@ -514,9 +520,9 @@ class picture
         $fna = mb_split('\\/', $filename);
         $fna[] = end($fna);
         $fna[count($fna) - 2] = 'deleted';
-        $dp = "";
+        $dp = '';
         foreach ($fna as $fp) {
-            $dp .= "/" . $fp;
+            $dp .= '/' . $fp;
         }
 
         return substr($dp, 1);
@@ -530,7 +536,8 @@ class picture
 
         if (sql_value("SELECT COUNT(*) FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `caches`.`cache_id`='&2'", 0, $login->userid, $this->getCacheId()) == 0) {
             return false;
-        } elseif ($this->getUserId() == $login->userid) {
+        }
+        if ($this->getUserId() == $login->userid) {
             return true;
         }
 
@@ -542,9 +549,9 @@ class picture
         if ($this->getObjectType() == OBJECT_CACHELOG) {
             $pl = 'viewcache.php?cacheid=' . urlencode($this->getCacheId());
             if (!$this->isVisibleOnCachePage()) {
-                $pl .= "&log=A";
+                $pl .= '&log=A';
             }
-            $pl .= "#log" . urlencode($this->getLogId());
+            $pl .= '#log' . urlencode($this->getLogId());
         } elseif ($this->getObjectType() == OBJECT_CACHE) {
             $pl = 'editcache.php?cacheid=' . urlencode($this->getCacheId()) . '#pictures';
         } else {
@@ -595,14 +602,15 @@ class picture
             }
 
             return $result;
-        } elseif (extension_loaded('gd')) {
+        }
+        if (extension_loaded('gd')) {
             $imageNew = null;
             try {
                 $image = imagecreatefromstring(file_get_contents($tmpFile));
                 $w = imagesx($image);
                 $h = imagesy($image);
                 if (max($w, $h) > 5000) {
-                    throw new Exception("Image too large >5000px");
+                    throw new Exception('Image too large >5000px');
                 }
                 if (max($w, $h) <= $longSideSize) {
                     $result = imagejpeg($image, $this->getFilename(), PICTURE_QUALITY);
@@ -634,9 +642,9 @@ class picture
             }
 
             return $result;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     // rotate image according to EXIF orientation
@@ -652,9 +660,9 @@ class picture
                     $image->clear();
 
                     return true;
-                } else {
-                    $image->clear();
                 }
+
+                $image->clear();
             } catch (Exception $e) {
                 if ($image) {
                     $image->clear();
@@ -675,7 +683,7 @@ class picture
                 case 6:
                     return $image->rotateImage(new ImagickPixel(), 90);
                 case 8:
-                    return $image->rotateImage(new ImagickPixel(), - 90);
+                    return $image->rotateImage(new ImagickPixel(), -90);
             }
         }
 

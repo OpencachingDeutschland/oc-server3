@@ -38,28 +38,28 @@ if (!isset($smiley)) {
     ];
 
     $smiley['text'] = [
-        " :) ",
-        " :-) ",
-        " ;) ",
-        " ;-) ",
-        " :D ",
-        " 8) ",
-        " O:) ",
-        " :-o ",
-        " :o ",
-        " :( ",
-        " :-( ",
-        " ::| ",
-        " :,-( ",
-        " :-* ",
-        " :P ",
-        " :-P ",
-        " :-/ ",
-        " :/ ",
-        " XO ",
-        " :-! ",
-        " :-($) ",
-        " :x ",
+        ' :) ',
+        ' :-) ',
+        ' ;) ',
+        ' ;-) ',
+        ' :D ',
+        ' 8) ',
+        ' O:) ',
+        ' :-o ',
+        ' :o ',
+        ' :( ',
+        ' :-( ',
+        ' ::| ',
+        ' :,-( ',
+        ' :-* ',
+        ' :P ',
+        ' :-P ',
+        ' :-/ ',
+        ' :/ ',
+        ' XO ',
+        ' :-! ',
+        ' :-($) ',
+        ' :x ',
     ];
 
     // This array currently is not used in lib2 code.
@@ -88,8 +88,8 @@ if (!isset($smiley)) {
         '0',
     ];
 
-    $smiley_a = array();
-    for ($n = 0; $n < count($smiley['file']); ++ $n) {
+    $smiley_a = [];
+    for ($n = 0; $n < count($smiley['file']); ++$n) {
         $smiley['image'][$n] = '<img src="' . $opt['template']['smiley'] . $smiley['file'][$n] . '" alt="' . $smiley['text'][$n] . '" border="0" width="18px" height="18px" />';
         $smiley['spaced_image'][$n] = ' ' . $smiley['image'][$n] . ' ';
         $smiley_a[] = [

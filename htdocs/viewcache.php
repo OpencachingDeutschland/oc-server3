@@ -28,7 +28,7 @@ function getChildWaypoints($cacheid)
     if ($count > 0) {
         $formatter = new FormatterCoordinate();
 
-        for ($i = 0; $i < $count; $i ++) {
+        for ($i = 0; $i < $count; $i++) {
             $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
             $waypoints[$i]['coord']['lon'] = $waypoints[$i]['coordinate']->longitude();
             $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');
@@ -69,7 +69,7 @@ if ($cache->allowView() == false) {
 }
 
 if (isset($_REQUEST['visitcounter']) && $_REQUEST['visitcounter'] == 1) {
-    cache::visitCounter($login->userid, $_SERVER["REMOTE_ADDR"], $cacheid);
+    cache::visitCounter($login->userid, $_SERVER['REMOTE_ADDR'], $cacheid);
     exit;
 }
 
@@ -311,7 +311,7 @@ if (isset($logs[$rscount])) {
     unset($logs[$rscount]);
     $tpl->assign('morelogs', true);
 }
-$loganz = sizeof($logs);
+$loganz = count($logs);
 $tpl->assign('logs', $logs);
 $tpl->assign('loganz', $loganz);
 
@@ -391,11 +391,11 @@ if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y') {
  */
 $tpl->assign('show_logpics', $logpics ? 1 : 0);
 if ($logpics) {
-    LogPics::setPaging(LogPics::FOR_CACHE_GALLERY, 0, $cacheid, "viewcache.php?cacheid=" . $cacheid . "&logpics=1");
+    LogPics::setPaging(LogPics::FOR_CACHE_GALLERY, 0, $cacheid, 'viewcache.php?cacheid=' . $cacheid . '&logpics=1');
     $tpl->assign(
         'subtitle',
         "&lt;&lt; <a href='viewcache.php?cacheid=" . $cacheid . "'>" .
-        $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . "</a>"
+        $translate->t('Back to the cache description', '', basename(__FILE__), __LINE__) . '</a>'
     );
 } else {
     $tpl->assign('logpics', LogPics::get(LogPics::FOR_CACHE_STAT, 0, $cacheid));

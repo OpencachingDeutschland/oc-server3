@@ -13,7 +13,6 @@ class sitemapxml
     public $sDefaultChangeFreq = 'monthly';
     public $nMaxFileSize = 9961472; // max file size, 10MB by specification
     public $nMaxUrlCount = 50000;   // max number of URLs per file, 50000 by specification
-
     public $sPath = '';
     public $sDomain = '';
     public $oIndexFile = false;
@@ -24,10 +23,10 @@ class sitemapxml
 
     public function open($sPath, $sDomain)
     {
-        if (substr($sPath, - 1, 1) != '/') {
+        if (substr($sPath, -1, 1) != '/') {
             $sPath .= '/';
         }
-        if (substr($sDomain, - 1, 1) != '/') {
+        if (substr($sDomain, -1, 1) != '/') {
             $sDomain .= '/';
         }
 

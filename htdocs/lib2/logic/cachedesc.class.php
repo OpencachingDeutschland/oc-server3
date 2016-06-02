@@ -90,12 +90,12 @@ class cachedesc
 
     public function getIsDescHtml()
     {
-        return ($this->reCacheDesc->getValue('desc_html') != 0);
+        return $this->reCacheDesc->getValue('desc_html') != 0;
     }
 
     public function getDescHtmlEdit()
     {
-        return ($this->reCacheDesc->getValue('desc_htmledit') != 0);
+        return $this->reCacheDesc->getValue('desc_htmledit') != 0;
     }
 
     public function getHint()

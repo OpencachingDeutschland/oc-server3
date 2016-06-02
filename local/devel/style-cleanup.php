@@ -24,7 +24,7 @@
 # have a restricted environent like an old Windows PHP. Keep it simple and
 # do not include other OC code.
 
-$exclude = array(
+$exclude = [
     'htdocs/cache',
     'htdocs/cache2',
     'htdocs/lib2/smarty',
@@ -32,7 +32,7 @@ $exclude = array(
     'htdocs/templates2/mail',
     'htdocs/var',
     'htdocs/vendor',
-);
+];
 
 chdir(__DIR__ . '/../..');
 
@@ -47,7 +47,6 @@ echo
 class StyleCleanup
 {
     const TABWIDTH = 4;
-
     private $exclude_dirs;
     private $basedir;
     private $files_modified;
@@ -76,7 +75,6 @@ class StyleCleanup
     private function cleanup($path)
     {
         if (!in_array(substr($path, strlen($this->basedir) + 1), $this->exclude_dirs)) {
-
             # process files in $path
 
             $files = array_merge(
@@ -106,7 +104,6 @@ class StyleCleanup
                 foreach ($lines as &$line) {
                     if ((trim($line, " \n") != '' || substr($line, -1) != "\n")
                         && !preg_match("/^ *(\\*|\/\/|#) *\n$/", $line)) {
-
                         $old_line = $line;
                         $line = rtrim($line);   # trims " \t\n\r\0\x0B"
                         $line = $this->expandTabs($line);
@@ -114,13 +111,13 @@ class StyleCleanup
 
                         if ($line != $old_line) {
                             $file_modified = true;
-                            ++ $this->lines_modified;
+                            ++$this->lines_modified;
                         }
                     }
                     if (preg_match('/\<\?\s/', $line)) {   # relies on \n at EOL
                         self::warn('short open tag in line ' . $n . ' of ' . $display_filepath);
                     }
-                    ++ $n;
+                    ++$n;
                 }
 
                 # remove PHP close tags and empty lines from end of file
@@ -131,17 +128,17 @@ class StyleCleanup
                     if ($trimmed_line == '?>' || $trimmed_line == '') {
                         unset($lines[$l]);
                         $file_modified = true;
-                        ++ $this->lines_modified;
+                        ++$this->lines_modified;
                     } else {
                         break;
                     }
-                    -- $l;
+                    --$l;
                 }
 
                 if ($file_modified) {
                     echo 'cleaned ' . substr($filepath, 2) . "\n";
                     file_put_contents($filepath, implode('', $lines));
-                    ++ $this->files_modified;
+                    ++$this->files_modified;
                 }
             }
 

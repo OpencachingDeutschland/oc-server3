@@ -27,10 +27,12 @@
     <exclude-pattern>*/cache2/*</exclude-pattern>
     <exclude-pattern>*/images/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
-
     <exclude-pattern>*/htdocs/okapi/*</exclude-pattern>
     <exclude-pattern>*/htdocs/resource2/tinymce/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/resource2/ocstyle/js/communicator-api/*</exclude-pattern>
+    <exclude-pattern>*/htdocs/resource2/ocstyle/js/enlargeit/*</exclude-pattern>
     <exclude-pattern>*/htdocs/templates2/*</exclude-pattern>
+    <exclude-pattern>*/tests/OcCodeStyle/*</exclude-pattern>
 
     <!--
     You can hard-code command line values into your custom standard.
@@ -59,12 +61,20 @@
         <exclude name="PSR2R.WhiteSpace.TabAndSpace"/>
         <exclude name="PSR2R.WhiteSpace.TabIndent"/>
         <exclude name="PSR2R.WhiteSpace.EmptyEnclosingLine"/>
+        <exclude name="PSR2R.ControlStructures.SwitchDeclaration.BreakIndent"/>
+        <!-- ConditionalExpressionOrder (Yoda Comparison) is buggy, so we don't use it at the moment -->
+        <exclude name="PSR2R.ControlStructures.ConditionalExpressionOrder"/>
+        <exclude name="Squiz.WhiteSpace.MemberVarSpacing"/>
     </rule>
 
     <rule ref="Squiz.Commenting.FunctionComment">
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
         <exclude name="Squiz.Commenting.FunctionComment.InvalidReturn"/>
+        <exclude name="Squiz.Commenting.FunctionComment.EmptyThrows"/>
+        <exclude name="Squiz.Commenting.FunctionComment.IncorrectParamVarName"/>
     </rule>
+
+    <rule ref="./OcCodeStyle/Sniffs/WhiteSpace/MemberVarSpacingSniff.php"/>
 
 </ruleset>

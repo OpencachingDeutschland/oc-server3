@@ -19,7 +19,7 @@ function get_npas($cache_id)
              ORDER BY `npa_types`.`ordinal` ASC",
         $cache_id
     );
-    $npas = array();
+    $npas = [];
     while ($rNPA = sql_fetch_array($rsNPA)) {
         $npas[] = $rNPA;
     }
@@ -34,14 +34,14 @@ function get_desc_npas($cache_id)
 
     $npas = get_npas($cache_id);
     if ($npas) {
-        $desc = "<p>" . str_replace('%1', helppagelink('npa'), _('This geocache is probably placed within the following protected areas (%1Info</a>):')) . "</p>\n" .
+        $desc = '<p>' . str_replace('%1', helppagelink('npa'), _('This geocache is probably placed within the following protected areas (%1Info</a>):')) . "</p>\n" .
             "<ul>\n";
         foreach ($npas as $npa) {
-            $desc .= "<li>" . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=" . urlencode($npa['npaTypeName'] . ' ' . $npa['npaName']) . "' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
+            $desc .= '<li>' . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=" . urlencode($npa['npaTypeName'] . ' ' . $npa['npaName']) . "' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
         }
         $desc .= "</ul>\n";
     } else {
-        $desc = "";
+        $desc = '';
     }
 
     return $desc;

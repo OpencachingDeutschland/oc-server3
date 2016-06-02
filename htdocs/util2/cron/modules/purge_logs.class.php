@@ -20,18 +20,18 @@ class purge_logs
 
         if ($opt['logic']['logs']['purge_email'] > 0) {
             sql(
-                "DELETE FROM `email_user` WHERE date_created < NOW() - INTERVAL &1 DAY",
+                'DELETE FROM `email_user` WHERE date_created < NOW() - INTERVAL &1 DAY',
                 $opt['logic']['logs']['purge_email']
             );
             sql(
-                "DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)",
+                'DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)',
                 $opt['logic']['logs']['purge_email']
             );
         }
 
         if ($opt['logic']['logs']['purge_userdata'] > 0) {
             sql(
-                "DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)",
+                'DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)',
                 $opt['logic']['logs']['purge_userdata']
             );
         }

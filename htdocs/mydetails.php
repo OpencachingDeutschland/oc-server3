@@ -71,7 +71,7 @@ function change()
 
         sql_free_result($rs);
 
-        $error = substr($error, 0, - 2);
+        $error = substr($error, 0, -2);
 
         $tpl->assign('error', $bError);
         $tpl->assign('errormsg', $error);
@@ -98,7 +98,7 @@ function changetext()
 
     if (isset($_REQUEST['save'])) {
         $purifier = new OcHTMLPurifier($opt);
-        $desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
+        $desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : '';
         $desc_htmledit = isset($_REQUEST['descMode']) && $_REQUEST['descMode'] == '2' ? '0' : '1';
         sql(
             "

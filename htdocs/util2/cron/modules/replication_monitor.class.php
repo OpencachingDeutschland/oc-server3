@@ -29,9 +29,9 @@ class replication_monitor
         }
 
         if (count($known_ids) > 0) {
-            sql("DELETE FROM `sys_repl_slaves` WHERE `id` NOT IN (" . implode(',', $known_ids) . ")");
+            sql('DELETE FROM `sys_repl_slaves` WHERE `id` NOT IN (' . implode(',', $known_ids) . ')');
         } else {
-            sql("DELETE FROM `sys_repl_slaves`");
+            sql('DELETE FROM `sys_repl_slaves`');
         }
 
         // now, clean up sys_repl_exclude
@@ -48,7 +48,7 @@ class replication_monitor
         $nOnline = 0;
         $sLogName = '';
         $sLogPos = '';
-        $nTimeDiff = - 1;
+        $nTimeDiff = -1;
 
         $slave = $opt['db']['slaves'][$id];
         if ($slave['active'] == true) {
@@ -59,13 +59,13 @@ class replication_monitor
             if ($dblink !== false) {
                 if (mysql_select_db($opt['db']['placeholder']['db'], $dblink)) {
                     // read slave time
-                    $rs = mysql_query("SELECT `data` FROM `sys_repl_timestamp`", $dblink);
+                    $rs = mysql_query('SELECT `data` FROM `sys_repl_timestamp`', $dblink);
                     if ($rs !== false) {
                         $rTime = mysql_fetch_assoc($rs);
                         mysql_free_result($rs);
 
                         // read current master db time
-                        $nMasterTime = sql_value("SELECT NOW()", null);
+                        $nMasterTime = sql_value('SELECT NOW()', null);
 
                         $nTimeDiff = strtotime($nMasterTime) - strtotime($rTime['data']);
                         if ($nTimeDiff < $opt['db']['slave']['max_behind']) {
@@ -74,7 +74,7 @@ class replication_monitor
                     }
 
                     // update logpos
-                    $rs = mysql_query("SHOW SLAVE STATUS");
+                    $rs = mysql_query('SHOW SLAVE STATUS');
                     $r = mysql_fetch_assoc($rs);
                     mysql_free_result($rs);
                     $sLogName = $r['Master_Log_File'];
@@ -88,7 +88,7 @@ class replication_monitor
         if ($nOnline != sql_value("SELECT `online` FROM `sys_repl_slaves` WHERE `id`='&1'", 0, $id)) {
             mail(
                 $opt['db']['error']['mail'],
-                "MySQL Slave Server Id " . $id . " (" . $slave['server'] . ") is now " . (($nOnline != 0) ? 'Online' : 'Offline'),
+                'MySQL Slave Server Id ' . $id . ' (' . $slave['server'] . ') is now ' . (($nOnline != 0) ? 'Online' : 'Offline'),
                 ''
             );
         }
@@ -107,7 +107,7 @@ class replication_monitor
         );
 
         // update time_diff?
-        if ($nTimeDiff != - 1) {
+        if ($nTimeDiff != -1) {
             sql("UPDATE `sys_repl_slaves` SET `time_diff`='&1' WHERE `id`='&2'", $nTimeDiff, $id);
         }
     }

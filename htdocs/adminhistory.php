@@ -22,7 +22,7 @@ if (($login->admin & ADMIN_USER) != ADMIN_USER) {
 if (isset($_REQUEST['wp'])) {
     $cache_id = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", 0, $_REQUEST['wp']);
 } else {
-    $cache_id = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : - 1;
+    $cache_id = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : -1;
 }
 
 $showhistory = false;

@@ -168,7 +168,7 @@ function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, 
     if (isset($opt['domain'][$primary_domain]['url'])) {
         $primary_site_url = $opt['domain'][$primary_domain]['url'];
     }
-    if (substr($primary_site_url, - 1, 1) != '/') {
+    if (substr($primary_site_url, -1, 1) != '/') {
         $primary_site_url .= '/';
     }
 
@@ -193,7 +193,7 @@ function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, 
     } else {
         $current_site_url = 'x://' . $current_domain . parse_url($primary_site_url, PHP_URL_PATH);
     }
-    if (substr($current_site_url, - 1, 1) != '/') {
+    if (substr($current_site_url, -1, 1) != '/') {
         $current_site_url .= '/';
     }
 

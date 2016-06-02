@@ -32,7 +32,7 @@ while ($r = sql_fetch_assoc($rs)) {
         die($result);
     }
 
-    ++ $n;
+    ++$n;
 }
 sql_free_result($rs);
 

@@ -98,7 +98,7 @@ $opt['db']['slave']['max_behind'] = 180;
 // TODO: use this slave when a specific slave must be connected
 // (e.g. xml-interface and mapserver-results)
 // you can use -1 to use the master (not recommended, because replicated to slaves)
-$opt['db']['slave']['primary'] = - 1;
+$opt['db']['slave']['primary'] = -1;
 
 // ... how long a query can take without warning (0 <= disabled)
 $opt['db']['warn']['time'] = 0;
@@ -523,8 +523,8 @@ $opt['map']['maxcachereducedsize'] = 10 * 1048576; // = 10MB
 
 // max number of caches displayed in google maps
 if (isset($_SERVER['HTTP_USER_AGENT'])) {
-    $user_agent = " " . $_SERVER['HTTP_USER_AGENT'];
-    if (strpos($user_agent, "MSIE") && !strpos($user_agent, "Opera")) {
+    $user_agent = ' ' . $_SERVER['HTTP_USER_AGENT'];
+    if (strpos($user_agent, 'MSIE') && !strpos($user_agent, 'Opera')) {
         $opt['map']['maxrecords'] = 200;
     } else {
         $opt['map']['maxrecords'] = 2500;

@@ -41,7 +41,7 @@ $starttime = microtime(true);
 
 foreach ($sendto as $receiver) {
     $receiver = trim($receiver);
-    echo ++ $n . "/$total: $receiver";
+    echo ++$n . "/$total: $receiver";
     mail(
         $receiver,
         $subject,

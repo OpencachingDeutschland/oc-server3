@@ -13,7 +13,7 @@ $cookie = new cookie();
 class cookie
 {
     public $changed = false;
-    public $values = array();
+    public $values = [];
     public $session_initalized = false;
 
     public function __construct()
@@ -31,12 +31,11 @@ class cookie
             if ($decoded !== false) {
                 $this->values = @unserialize($decoded);
                 if (!is_array($this->values)) {
-                    $this->values = array();
+                    $this->values = [];
                 }
             } else {
-                $this->values = array();
+                $this->values = [];
             }
-
         }
     }
 
@@ -125,9 +124,9 @@ class cookie
 
         if ($opt['session']['mode'] == SAVE_SESSION) {
             return isset($_SESSION[$name]) ? $_SESSION[$name] : $default;
-        } else {
-            return isset($this->values[$name]) ? $this->values[$name] : $default;
         }
+
+        return isset($this->values[$name]) ? $this->values[$name] : $default;
     }
 
     public function is_set($name)
@@ -136,9 +135,9 @@ class cookie
 
         if ($opt['session']['mode'] == SAVE_SESSION) {
             return isset($_SESSION[$name]);
-        } else {
-            return isset($this->values[$name]);
         }
+
+        return isset($this->values[$name]);
     }
 
     public function un_set($name)

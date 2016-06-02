@@ -43,23 +43,27 @@
  * Copyright 2007 Opencaching.de
  */
 
-/*
+/**
  * Smarty plugin for gettext compilation
  *
  * Find all {t}...{/t} and translate its input with gettext
  *
+ * @param string $source
+ * @param \Smarty_Compiler $smarty
+ *
+ * @return string
  */
-function smarty_prefilter_t($source, &$smarty)
+function smarty_prefilter_t($source, \Smarty_Compiler &$smarty)
 {
     $output = '';
     $output_start = 0;
 
     $end = 0;
     while (($start = smarty_prefilter_t_strpos_multi(
-            $source,
-            [$smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter],
-            $end
-        )) !== false) {
+        $source,
+        [$smarty->left_delimiter . 't ', $smarty->left_delimiter . 't' . $smarty->right_delimiter],
+        $end
+    )) !== false) {
         $end = mb_strpos($source, $smarty->left_delimiter . '/t' . $smarty->right_delimiter, $start);
         $block_t = mb_substr($source, $start, $end - $start);
 
@@ -81,19 +85,26 @@ function smarty_prefilter_t($source, &$smarty)
     return $output;
 }
 
-/* $block ... {t[ a=$a|nbsp b="a" ...]}
+/**
+ * {t[ a=$a|nbsp b="a" ...]}
  *
+ * @param string $block
+ * @param string $message
+ * @param \Smarty_Compiler $smarty
+ * @param int $line
+ *
+ * @return string
  */
-function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
+function smarty_prefilter_t_process_block($block, $message, \Smarty_Compiler &$smarty, $line)
 {
     if ($message != '') {
         $start_attr = mb_strpos($block, ' ');
         if ($start_attr !== false) {
             if ((mb_substr($block, 0, 1) != $smarty->left_delimiter) || $start_attr == 1 || mb_substr(
-                    $block,
-                    - 1,
-                    1
-                ) != $smarty->right_delimiter
+                $block,
+                -1,
+                1
+            ) != $smarty->right_delimiter
             ) {
                 $smarty->_syntax_error("internal processing error: '$block'", E_USER_ERROR, __FILE__, __LINE__);
             }
@@ -105,14 +116,14 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
             if (isset($attrs['plural']) && isset($attrs['count'])) {
                 $message = smarty_prefilter_t_gettext($message, [], $smarty, $line);
 
-                if ((mb_substr($attrs['plural'], 0, 1) == '"') && mb_substr($attrs['plural'], - 1, 1) == '"') {
+                if ((mb_substr($attrs['plural'], 0, 1) == '"') && mb_substr($attrs['plural'], -1, 1) == '"') {
                     $attrs['plural'] = mb_substr($attrs['plural'], 1, mb_strlen($attrs['plural']) - 2);
                 }
                 $attrs['plural'] = smarty_prefilter_t_gettext($attrs['plural'], [], $smarty, $line);
 
                 // rebuild block with replaced plural
                 $block = '';
-                foreach ($attrs AS $k => $v) {
+                foreach ($attrs as $k => $v) {
                     if ($block != '') {
                         $block .= ' ';
                     }
@@ -140,10 +151,11 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
  *   we need the same source, expect _parse_vars_props at the end
  *
  * @param string $tag_args
+ * @param \Smarty_Compiler $smarty
  *
  * @return array
  */
-function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
+function smarty_prefilter_t_parse_attrs($tag_args, \Smarty_Compiler &$smarty)
 {
 
     /* Tokenize tag attributes. */
@@ -241,7 +253,7 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                 __LINE__
             );
         } else {
-            $smarty->_syntax_error("missing attribute value", E_USER_ERROR, __FILE__, __LINE__);
+            $smarty->_syntax_error('missing attribute value', E_USER_ERROR, __FILE__, __LINE__);
         }
     }
 
@@ -252,6 +264,12 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
     return $attrs;
 }
 
+/**
+ * @param string $haystack
+ * @param string $needles
+ *
+ * @return bool|int
+ */
 function smarty_prefilter_t_strpos_multi($haystack, $needles)
 {
     $arg = func_get_args();
@@ -274,7 +292,15 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
     return $start;
 }
 
-function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
+/**
+ * @param string $message
+ * @param array $attrs
+ * @param \Smarty_Compiler $smarty
+ * @param int $line
+ *
+ * @return string
+ */
+function smarty_prefilter_t_gettext($message, array $attrs, \Smarty_Compiler &$smarty, $line)
 {
     global $opt, $translate;
 
@@ -304,7 +330,7 @@ function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
             $trans = mb_ereg_replace('%' . $number, $smarty->left_delimiter . $attr . $smarty->right_delimiter, $trans);
         }
 
-        $number ++;
+        $number++;
     }
 
     return $trans;

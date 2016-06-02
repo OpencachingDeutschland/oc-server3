@@ -85,8 +85,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', 'editcache.php?cacheid=' . urlencode($cache_id));
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -162,7 +162,7 @@ if ($error == false) {
                     strtotime($cache_record['date_hidden'])
                 );  // Ocprop
 
-                if (is_null($cache_record['date_activate'])) {
+                if (($cache_record['date_activate'] === null)) {
                     $cache_activate_day = isset($_POST['activate_day']) ? $_POST['activate_day'] : date('d');
                     $cache_activate_month = isset($_POST['activate_month']) ? $_POST['activate_month'] : date('m');
                     $cache_activate_year = isset($_POST['activate_year']) ? $_POST['activate_year'] : date('Y');
@@ -206,7 +206,7 @@ if ($error == false) {
                             $status = 1;
                         }
                     } else {
-                        if (is_null($cache_record['date_activate'])) {
+                        if (($cache_record['date_activate'] === null)) {
                             $publish = 'notnow';
                         } else {
                             $publish = 'later';
@@ -220,7 +220,7 @@ if ($error == false) {
                     }
                 }
 
-                $bAdmin = sqlValue("SELECT `admin` FROM `user` WHERE `user_id` = &1", 0, $usr['userid']);
+                $bAdmin = sqlValue('SELECT `admin` FROM `user` WHERE `user_id` = &1', 0, $usr['userid']);
 
                 if ($status == 7 && ($bAdmin & ADMIN_USER) != ADMIN_USER) {
                     $status = $status_old;
@@ -256,7 +256,7 @@ if ($error == false) {
 
                 // name
                 $name_not_ok = false;
-                if ($cache_name == "") {
+                if ($cache_name == '') {
                     $name_not_ok = true;
                 }
 
@@ -275,14 +275,14 @@ if ($error == false) {
 
                     if ($coords_lon < 0) {
                         $coords_lonEW = 'W';
-                        $coords_lon = - $coords_lon;
+                        $coords_lon = -$coords_lon;
                     } else {
                         $coords_lonEW = 'E';
                     }
 
                     if ($coords_lat < 0) {
                         $coords_latNS = 'S';
-                        $coords_lat = - $coords_lat;
+                        $coords_lat = -$coords_lat;
                     } else {
                         $coords_latNS = 'N';
                     }
@@ -290,8 +290,8 @@ if ($error == false) {
                     $coords_lat_h = floor($coords_lat);
                     $coords_lon_h = floor($coords_lon);
 
-                    $coords_lat_min = sprintf("%02.3f", round(($coords_lat - $coords_lat_h) * 60, 3));
-                    $coords_lon_min = sprintf("%02.3f", round(($coords_lon - $coords_lon_h) * 60, 3));
+                    $coords_lat_min = sprintf('%02.3f', round(($coords_lat - $coords_lat_h) * 60, 3));
+                    $coords_lon_min = sprintf('%02.3f', round(($coords_lon - $coords_lon_h) * 60, 3));
                 }
 
                 //here we validate the data
@@ -348,7 +348,7 @@ if ($error == false) {
                 }
 
                 //check GC waypoint
-                $wpgc_not_ok = $wp_gc != "" && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
+                $wpgc_not_ok = $wp_gc != '' && !preg_match('/^(?:GC|CX)[0-9A-Z]{3,6}$/', $wp_gc);
                 if ($wpgc_not_ok) {
                     $error = true;
                 }
@@ -444,12 +444,12 @@ if ($error == false) {
                     )) {
                         $cache_lat = $coords_lat_h + $coords_lat_min / 60;
                         if ($coords_latNS == 'S') {
-                            $cache_lat = - $cache_lat;
+                            $cache_lat = -$cache_lat;
                         }
 
                         $cache_lon = $coords_lon_h + $coords_lon_min / 60;
                         if ($coords_lonEW == 'W') {
-                            $cache_lon = - $cache_lon;
+                            $cache_lon = -$cache_lon;
                         }
 
                         if ($publish == 'now') {
@@ -584,20 +584,20 @@ if ($error == false) {
                         db_slave_exclude();
 
                         // update cache attributes
-                        $attriblist = "999";
-                        for ($i = 0; $i < count($cache_attribs); $i ++) {
+                        $attriblist = '999';
+                        for ($i = 0; $i < count($cache_attribs); $i++) {
                             if ($cache_attribs[$i] + 0 > 0) {
                                 sql(
                                     "INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES('&1', '&2')",
                                     $cache_id,
                                     $cache_attribs[$i] + 0
                                 );
-                                $attriblist .= "," . ($cache_attribs[$i] + 0);
+                                $attriblist .= ',' . ($cache_attribs[$i] + 0);
                             }
                         }
 
                         sql(
-                            "DELETE FROM `caches_attributes` WHERE `cache_id`='&1' AND `attrib_id` NOT IN (" . $attriblist . ")",
+                            "DELETE FROM `caches_attributes` WHERE `cache_id`='&1' AND `attrib_id` NOT IN (" . $attriblist . ')',
                             // SQL injections in $attriblist prevented by adding 0 above
                             $cache_id
                         );
@@ -716,7 +716,7 @@ if ($error == false) {
                         $line = mb_ereg_replace('{name}', escape_javascript($record['name']), $line);
                         $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
                         $group_line .= $line;
-                        $nLineAttrCount ++;
+                        $nLineAttrCount++;
 
                         $line = $cache_attrib_js;
                         $line = mb_ereg_replace('{id}', $record['id'], $line);
@@ -773,7 +773,7 @@ if ($error == false) {
 
                 //difficulty
                 $difficulty_options = '';
-                for ($i = 2; $i <= 10; $i ++) {
+                for ($i = 2; $i <= 10; $i++) {
                     if ($cache_difficulty == $i) {
                         $difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
                     } else {
@@ -785,7 +785,7 @@ if ($error == false) {
 
                 //build terrain options
                 $terrain_options = '';
-                for ($i = 2; $i <= 10; $i ++) {
+                for ($i = 2; $i <= 10; $i++) {
                     if ($cache_terrain == $i) {
                         $terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
                     } else {
@@ -858,7 +858,7 @@ if ($error == false) {
                         $desclang
                     );
                     $row = sql_fetch_array($resp);
-                    if (mb_strpos($row['desc'], "http://img.groundspeak.com/") !== false) {
+                    if (mb_strpos($row['desc'], 'http://img.groundspeak.com/') !== false) {
                         $gc_com_refs = true;
                     }
                     sql_free_result($resp);
@@ -874,11 +874,11 @@ if ($error == false) {
                 tpl_set_var('cache_descs', $cache_descs);
 
                 if ($gc_com_refs) {
-                    tpl_set_var('gc_com_refs_start', "");
-                    tpl_set_var('gc_com_refs_end', "");
+                    tpl_set_var('gc_com_refs_start', '');
+                    tpl_set_var('gc_com_refs_end', '');
                 } else {
-                    tpl_set_var('gc_com_refs_start', "<!--");
-                    tpl_set_var('gc_com_refs_end', "-->");
+                    tpl_set_var('gc_com_refs_start', '<!--');
+                    tpl_set_var('gc_com_refs_end', '-->');
                 }
 
                 //Status
@@ -910,7 +910,7 @@ if ($error == false) {
                 } else {
                     $statusoptions .=
                         '<option value="7" selected="selected">'
-                        . htmlspecialchars(t("Locked, invisible"), ENT_COMPAT, 'UTF-8')
+                        . htmlspecialchars(t('Locked, invisible'), ENT_COMPAT, 'UTF-8')
                         . '</option>';
                 }
                 tpl_set_var('statusoptions', $statusoptions);
@@ -940,7 +940,7 @@ if ($error == false) {
                     $tmp = mb_ereg_replace('{publish_notnow_checked}', ($publish == 'notnow') ? 'checked' : '', $tmp);
 
                     $activation_hours = '';
-                    for ($i = 0; $i <= 23; $i ++) {
+                    for ($i = 0; $i <= 23; $i++) {
                         if ($cache_activate_hour == $i) {
                             $activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
                         } else {
@@ -968,7 +968,7 @@ if ($error == false) {
                         $cache_id
                     );
 
-                    for ($i = 0; $i < mysql_num_rows($rspictures); $i ++) {
+                    for ($i = 0; $i < mysql_num_rows($rspictures); $i++) {
                         $tmpline = ($i == 0 ? $pictureline0 : $pictureline);
                         $pic_record = sql_fetch_array($rspictures);
 
@@ -1029,7 +1029,7 @@ if ($error == false) {
                 if ($lon_not_ok || $lat_not_ok || $hidden_date_not_ok || $name_not_ok) {
                     tpl_set_var('general_message', $error_general);
                 } else {
-                    tpl_set_var('general_message', "");
+                    tpl_set_var('general_message', '');
                 }
 
                 tpl_set_var('cacheid_urlencode', htmlspecialchars(urlencode($cache_id), ENT_COMPAT, 'UTF-8'));

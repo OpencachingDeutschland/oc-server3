@@ -12,6 +12,10 @@ use Oc\Frontend\AbstractFrontendTest;
 class LoginTest extends AbstractFrontendTest
 {
 
+    /**
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @return void
+     */
     public function testLoginFormOnStartPage()
     {
         $page = $this->session->getPage();

@@ -89,9 +89,9 @@ $tpl->assign('cacheid', $cacheid);
 $tpl->assign('cachename', $cache->getName());
 $tpl->assign('help_reportreasons', helppagelink('report_reasons'));
 
-$open_reports = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `status`=1", 0);
+$open_reports = sql_value('SELECT COUNT(*) FROM `cache_reports` WHERE `status`=1', 0);
 $processing_reports = sql_value(
-    "SELECT COUNT(*) FROM `cache_reports` WHERE `status`=2 AND DATEDIFF(NOW(),`lastmodified`) <= 180",
+    'SELECT COUNT(*) FROM `cache_reports` WHERE `status`=2 AND DATEDIFF(NOW(),`lastmodified`) <= 180',
     0
 );
 $tpl->assign('open_reports', $open_reports);

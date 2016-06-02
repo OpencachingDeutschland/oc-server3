@@ -20,7 +20,6 @@ class PresenterCacheNote
     const tpl_note = 'note';
     const tpl_incl_coord = 'inclCoord';
     const image = 'resource2/ocstyle/images/misc/wp_note.png';
-
     private $request;
     private $translator;
     private $coordinate;
@@ -51,6 +50,7 @@ class PresenterCacheNote
 
     /**
      * @param \OcSmarty $template
+     * @return void
      */
     public function prepare($template)
     {

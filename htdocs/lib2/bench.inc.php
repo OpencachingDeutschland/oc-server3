@@ -22,7 +22,7 @@ class Cbench
     {
         list($usec, $sec) = explode(' ', microtime());
 
-        return ((float)$usec + (float)$sec);
+        return (float)$usec + (float)$sec;
     }
 
     public function start()

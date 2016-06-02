@@ -184,7 +184,7 @@ $opt['db']['slave']['max_behind'] = 180;
 // use this slave when a specific slave must be connected
 // (e.g. xml-interface and mapserver-results)
 // you can use -1 to use the master (not recommended, because replicated to slaves)
-$opt['db']['slave']['primary'] = - 1;
+$opt['db']['slave']['primary'] = -1;
 
 
 /* post_config() is invoked directly before the first HTML line of the main.tpl.php is sent to the client.

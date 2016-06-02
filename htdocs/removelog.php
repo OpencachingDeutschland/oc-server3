@@ -160,28 +160,28 @@ if ($error == false) {
 
                     while ($r = sql_fetch_assoc($rs)) {
                         if (!$ownlog) {
-                            sql("SET @archive_picop=TRUE");
+                            sql('SET @archive_picop=TRUE');
                         } else {
-                            sql("SET @archive_picop=FALSE");
+                            sql('SET @archive_picop=FALSE');
                         }
 
                         sql("DELETE FROM `pictures` WHERE `id`='&1'", $r['id']);
-                        $archived = (sqlValue("SELECT `id` FROM `pictures_modified` WHERE `id`=" . $r['id'], 0) > 0);
+                        $archived = (sqlValue('SELECT `id` FROM `pictures_modified` WHERE `id`=' . $r['id'], 0) > 0);
                         $fna = mb_split('\\/', $r['url']);
                         $filename = end($fna);
                         $path = $opt['logic']['pictures']['dir'];
-                        if (mb_substr($path, - 1, 1) != '/') {
+                        if (mb_substr($path, -1, 1) != '/') {
                             $path .= '/';
                         }
 
                         if ($archived) {
-                            @rename($path . $filename, $path . "deleted/" . $filename);
+                            @rename($path . $filename, $path . 'deleted/' . $filename);
                         } else {
                             @unlink($path . $filename);
                         }
 
                         $path = $opt['logic']['pictures']['thumb_dir'];
-                        if (mb_substr($path, - 1, 1) != '/') {
+                        if (mb_substr($path, -1, 1) != '/') {
                             $path .= '/';
                         }
                         $path .= mb_strtoupper(mb_substr($filename, 0, 1)) . '/' .
@@ -235,19 +235,19 @@ if ($error == false) {
                 // quickfix: this is coded in res_logentry_logitem.tpl (after smarty migration)
                 switch ($log_record['log_type']) {
                     case 1:
-                        $sLogTypeText = t("%1 found the Geocache", $log_record['log_username']);
+                        $sLogTypeText = t('%1 found the Geocache', $log_record['log_username']);
                         break;
                     case 2:
                         $sLogTypeText = t("%1 didn't find the Geoacache", $log_record['log_username']);
                         break;
                     case 3:
-                        $sLogTypeText = t("%1 wrote a note", $log_record['log_username']);
+                        $sLogTypeText = t('%1 wrote a note', $log_record['log_username']);
                         break;
                     case 7:
-                        $sLogTypeText = t("%1 has visited the event", $log_record['log_username']);
+                        $sLogTypeText = t('%1 has visited the event', $log_record['log_username']);
                         break;
                     case 8:
-                        $sLogTypeText = t("%1 wants to visit the event", $log_record['log_username']);
+                        $sLogTypeText = t('%1 wants to visit the event', $log_record['log_username']);
                         break;
                     default:
                         $sLogTypeText = $log_record['log_username'];
@@ -262,15 +262,15 @@ if ($error == false) {
                 if ($log_record['oc_team_comment']) {
                     $teamimg = '<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" title="' . t('OC team comment') . '" /> ';
                 } else {
-                    $teamimg = "";
+                    $teamimg = '';
                 }
-                tpl_set_var('logimage', $teamimg . icon_log_type($log_record['icon_small'], ""));
+                tpl_set_var('logimage', $teamimg . icon_log_type($log_record['icon_small'], ''));
 
                 tpl_set_var(
                     'date',
                     htmlspecialchars(strftime($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8')
                 );
-                tpl_set_var('time', substr($log_record['log_date'], 11) == "00:00:00" ? "" : ", " . substr($log_record['log_date'], 11, 5));
+                tpl_set_var('time', substr($log_record['log_date'], 11) == '00:00:00' ? '' : ', ' . substr($log_record['log_date'], 11, 5));
                 tpl_set_var('userid', htmlspecialchars($log_record['log_user_id'] + 0, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('username', htmlspecialchars($log_record['log_username'], ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('typetext', htmlspecialchars($sLogTypeText, ENT_COMPAT, 'UTF-8'));

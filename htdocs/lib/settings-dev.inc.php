@@ -109,8 +109,8 @@ $safemode_zip = '/var/www/html/bin/phpzip.php';
 $zip_basedir = $dev_basepath . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/') . 'download/zip/';
 $zip_wwwdir = 'download/zip/';
 
-$googlemap_key = "<key>";
-$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE
+$googlemap_key = '<key>';
+$googlemap_type = 'G_MAP_TYPE'; // alternativ: _HYBRID_TYPE
 
 $opt['translate']['debug'] = false;
 
@@ -138,7 +138,7 @@ $opt['db']['slave']['max_behind'] = 180;
 // use this slave when a specific slave must be connected
 // (e.g. xml-interface and mapserver-results)
 // you can use -1 to use the master (not recommended, because replicated to slaves)
-$opt['db']['slave']['primary'] = - 1;
+$opt['db']['slave']['primary'] = -1;
 
 // NL translation is incomplete, but can be tested
 $opt['template']['locales']['NL']['status'] = OC_LOCALE_ACTIVE;

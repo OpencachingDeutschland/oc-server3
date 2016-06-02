@@ -107,5 +107,5 @@ class phpbbtopics
 
 function sort_compare_updated($a, $b)
 {
-    return ($b['updated'] - $a['updated']);
+    return $b['updated'] - $a['updated'];
 }

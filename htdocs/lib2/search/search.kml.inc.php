@@ -42,8 +42,8 @@ function search_output()
 
     $kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
     $style = $opt['template']['style'];
-    $kmlDetailHead = file_get_contents("resource2/misc/google-earth/search.result.caches.kml.head.xml");
-    $kmlDetailHead = mb_ereg_replace("{site_url}", $opt['page']['default_absolute_url'], $kmlDetailHead);
+    $kmlDetailHead = file_get_contents('resource2/misc/google-earth/search.result.caches.kml.head.xml');
+    $kmlDetailHead = mb_ereg_replace('{site_url}', $opt['page']['default_absolute_url'], $kmlDetailHead);
 
     $rsMinMax = sql_slave('
         SELECT

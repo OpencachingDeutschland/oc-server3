@@ -41,9 +41,9 @@ class picture_cleanup
                 $instance['filesize'] = @filesize($instance['pic']->getFilename());
             }
 
-            for ($n = 1; $n < count($instances); ++ $n) {
+            for ($n = 1; $n < count($instances); ++$n) {
                 if ($instances[$n]['filesize'] !== false) {// ensure that pic is stored locally
-                    for ($nn = $n - 1; $nn >= 0; -- $nn) {
+                    for ($nn = $n - 1; $nn >= 0; --$nn) {
                         if ($instances[$nn]['filesize'] === $instances[$n]['filesize']) {
                             if (file_get_contents($instances[$nn]['pic']->getFilename())
                                 == file_get_contents($instances[$n]['pic']->getFilename())

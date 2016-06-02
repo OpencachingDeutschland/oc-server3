@@ -35,6 +35,6 @@ class IntegerValidator extends NumericValidator
 
     protected function getValue($value)
     {
-        return (int) $value;
+        return (int)$value;
     }
 }

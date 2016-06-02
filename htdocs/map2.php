@@ -175,7 +175,7 @@ if ($sGMInitWaypoint != '') {
         if ($cache->allowView()) {
             $nGMInitLon = $cache->getLongitude();
             $nGMInitLat = $cache->getLatitude();
-            $nGMInitZoom = - 1;
+            $nGMInitZoom = -1;
             $bGMInitCookiePos = false;
         } else {
             $sGMInitWaypoint = '';
@@ -191,7 +191,7 @@ if ($login->userid != 0) {
     $nUserLon = $user->getLongitude();
     $tpl->assign('username', $user->getUsername());
 } else {
-    $tpl->assign('username', "");
+    $tpl->assign('username', '');
 }
 $tpl->assign('nUserLon', $nUserLon);
 $tpl->assign('nUserLat', $nUserLat);
@@ -230,9 +230,9 @@ sql_free_result($rsCacheSize);
 /* assign attributes */
 $tpl->assign('aAttributes', attribute::getSelectableAttrbutesListArray());
 
-$aAttributesDisabled = array();
+$aAttributesDisabled = [];
 $maxaid = 0;
-$rs = sql("SELECT `id` FROM `cache_attrib`");
+$rs = sql('SELECT `id` FROM `cache_attrib`');
 while ($r = sql_fetch_assoc($rs)) {
     $aAttributesDisabled[] = $r['id'];
     if ($r['id'] > $maxaid) {
@@ -260,11 +260,11 @@ $tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);
 $tpl->assign('msie', $useragent_msie);
 $tpl->assign('old_msie', $useragent_msie && ($useragent_msie_version <= 6));
 
-$tpl->assign('help_oconly', helppagelink("OConly"));
-$tpl->assign('help_map', helppagelink("*map2"));
-$tpl->assign('help_wps', helppagelink("additional_waypoints"));
-$tpl->assign('help_note', helppagelink("usernote"));
-$tpl->assign('help_previewpics', helppagelink("previewpics"));
+$tpl->assign('help_oconly', helppagelink('OConly'));
+$tpl->assign('help_map', helppagelink('*map2'));
+$tpl->assign('help_wps', helppagelink('additional_waypoints'));
+$tpl->assign('help_note', helppagelink('usernote'));
+$tpl->assign('help_previewpics', helppagelink('previewpics'));
 
 $tpl->display();
 
@@ -273,7 +273,7 @@ function cache_locate($nLat, $nLon, $nDistance)
     global $login;
 
     $rsCache = sql_slave(
-        "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
+        'SELECT ' . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
                                   `caches`.`wp_oc`
                              FROM `caches`
                        INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
@@ -434,7 +434,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 
     echo '<caches>' . "\n";
     $rs = sql_slave(
-        "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`,
+        'SELECT ' . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`,
                           `caches`.`name`, `caches`.`wp_oc`
                      FROM `map2_data`
                INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
@@ -450,7 +450,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
     $caches_found = 0;
     while ($r = sql_fetch_assoc($rs)) {
         echo '<cache name="' . xmlentities($r['name']) . '" wpoc="' . xmlentities($r['wp_oc']) . '" />' . "\n";
-        ++ $caches_found;
+        ++$caches_found;
     }
     sql_free_result($rs);
 
@@ -459,10 +459,10 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
             . '&string=' . urlencode($sName));
         if ($result) {
             $json = json_decode($result, true);
-            if (!is_null($json['words']) && !is_null($json['position']) && count($json['position']) == 2) {
+            if (($json['words'] !== null) && ($json['position'] !== null) && count($json['position']) == 2) {
                 echo '<coord name="' . xmlentities(implode('.', $json['words'])) .
-                    '" latitude="' . xmlentities($json["position"][0]) .
-                    '" longitude="' . xmlentities($json["position"][1]) . '" />' . "\n";
+                    '" latitude="' . xmlentities($json['position'][0]) .
+                    '" longitude="' . xmlentities($json['position'][1]) . '" />' . "\n";
             }
         }
     }
@@ -489,11 +489,11 @@ function output_searchresult(
         "SELECT `slave_id`
         FROM `map2_result`
         WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()",
-        - 2,
+        -2,
         $nResultId,
         $opt['map']['maxcacheage']
     );
-    if ($nSlaveId == - 2) {
+    if ($nSlaveId == -2) {
         echo '<searchresult count="0" available="0">';
         echo '</searchresult>';
         exit;
@@ -559,7 +559,7 @@ function output_searchresult(
         ' maxrecordreached="' . ($bMaxRecordReached ? '1' : '0') . '">' . "\n";
 
     if (!$bMaxRecordReached) {
-        $namequery = ($cachenames ? ", `caches`.`name` AS `cachename`" : "");
+        $namequery = ($cachenames ? ', `caches`.`name` AS `cachename`' : '');
         $rs = sql_slave(
             "SELECT SQL_BUFFER_RESULT
                             distinct `caches`.`wp_oc`,

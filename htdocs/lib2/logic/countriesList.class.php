@@ -36,9 +36,9 @@ class countriesList
 
         if ($isDefault == 0) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     public function getDefaultRS()

@@ -22,7 +22,6 @@ class PresenterCoordinate
     const lon_deg = 'lon_deg';
     const lon_min = 'lon_min';
     const coord_error = 'coord_error';
-
     private $coordinate;
     private $request;
     private $translator;
@@ -92,6 +91,7 @@ class PresenterCoordinate
      * @todo add phpdoc parameter for $template
      *
      * @param $template
+     * @return void
      */
     public function prepare($template)
     {

@@ -47,7 +47,7 @@ require_once $opt['rootpath'] . 'lib/settings.inc.php';
 require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
 
 // check for banned UAs
-$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 foreach ($opt['page']['banned_user_agents'] as $ua) {
     if (strpos($useragent, $ua) !== false) {
         die();
@@ -106,7 +106,7 @@ function explode_multi($str, $sep)
 
     while ($nCurPos < mb_strlen($str)) {
         $nNextSep = mb_strlen($str);
-        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos ++) {
+        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos++) {
             $nThisPos = mb_strpos($str, mb_substr($sep, $nSepPos, 1), $nCurPos);
             if ($nThisPos !== false) {
                 if ($nNextSep > $nThisPos) {
@@ -158,12 +158,12 @@ function sqlValue($sql, $default)
     if ($r = sql_fetch_row($rs)) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
     }
+
+    return $default;
 }
 
 function sql_value_slave($sql, $default)
@@ -172,12 +172,12 @@ function sql_value_slave($sql, $default)
     if ($r = sql_fetch_row($rs)) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
     }
+
+    return $default;
 }
 
 function getSysConfig($name, $default)
@@ -287,10 +287,10 @@ function sql_internal($_dblink, $sql, $bSlave)
         // muss dieses & ersetzt werden, oder ist es escaped?
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) && (mb_substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 1) {
-            $nextarg ++;
+            $nextarg++;
         } else {
             $nextchar = mb_substr($sql, $nextarg + 1, 1);
             if (is_numeric($nextchar)) {
@@ -301,7 +301,7 @@ function sql_internal($_dblink, $sql, $bSlave)
                 while (mb_ereg_match('^[0-9]{1}', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = mb_substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -333,13 +333,13 @@ function sql_internal($_dblink, $sql, $bSlave)
                         // Anführungszeichen weg machen und NULL einsetzen
                         $filtered_sql = mb_substr($filtered_sql, 0, mb_strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
-                        $sqlpos ++;
+                        $sqlpos++;
                     } else {
                         $filtered_sql .= 'NULL';
                     }
                 }
 
-                $sqlpos ++;
+                $sqlpos++;
             } else {
                 $arglength = 0;
                 $arg = '';
@@ -348,7 +348,7 @@ function sql_internal($_dblink, $sql, $bSlave)
                 while (mb_ereg_match('^[a-zA-Z0-9]{1}', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = mb_substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -377,12 +377,12 @@ function sql_internal($_dblink, $sql, $bSlave)
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) &&
                (mb_substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 0) {
             // \& ersetzen durch &
             $filtered_sql = mb_substr($filtered_sql, 0, $nextarg) . '&' . mb_substr($filtered_sql, $nextarg + 2);
-            $nextarg --;
+            $nextarg--;
         }
 
         $nextarg = mb_strpos($filtered_sql, '\&', $nextarg + 2);
@@ -407,7 +407,7 @@ function sql_internal($_dblink, $sql, $bSlave)
     } else {
         // Zeitmessung für die Ausführung
         require_once $opt['rootpath'] . 'lib/bench.inc.php';
-        $cSqlExecution = new Cbench;
+        $cSqlExecution = new Cbench();
         $cSqlExecution->start();
 
         $result = mysql_query($filtered_sql, $_dblink);
@@ -418,8 +418,8 @@ function sql_internal($_dblink, $sql, $bSlave)
         $cSqlExecution->stop();
 
         if ($sql_warntime > 0 && $cSqlExecution->diff() > $sql_warntime) {
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
-            sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+            sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
         }
     }
 
@@ -454,7 +454,7 @@ function sql_error()
     global $db_error;
 
     $db_error += 1;
-    $msql_error = mysql_errno() . ": " . mysql_error();
+    $msql_error = mysql_errno() . ': ' . mysql_error();
     if ($db_error > 1) {
         $msql_error .= "\n(** error recursion **)";
     }
@@ -471,7 +471,7 @@ function sql_error()
 
     if ($interface_output == 'html') {
         // display errorpage
-        $errmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
+        $errmsg = $dberrormsg . ($debug_page ? '<br />' . $msql_error : '');
         if ($db_error <= 1) {
             tpl_errorMsg('sql_error', $errmsg);
         } else {
@@ -539,9 +539,9 @@ function sql_fetch_column($rs)
     while ($r = sql_fetch_row($rs)) {
         if (count($r) != 1) {
             return null;
-        } else {
-            $col[] = $r[0];
         }
+
+        $col[] = $r[0];
     }
     sql_free_result($rs);
 
@@ -568,7 +568,7 @@ function mb_trim($str)
 
     $bLoop = true;
     while ($bLoop == true) {
-        $sPos = mb_substr($str, - 1, 1);
+        $sPos = mb_substr($str, -1, 1);
 
         if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
             $str = mb_substr($str, 0, mb_strlen($str) - 1);
@@ -593,7 +593,7 @@ function db_disconnect()
     if (($dbpconnect == false) && ($dblink_slave !== false)) {
         @mysql_close($dblink_slave);
         $dblink_slave = false;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     }
 }
 
@@ -657,12 +657,12 @@ function db_connect_anyslave()
 
     $id = sqlValue(
         "SELECT `id`, `weight`*RAND() AS `w` FROM `sys_repl_slaves` WHERE `active`=1 AND `online`=1 AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'" . ($nMaxTimeDiff + 0) . "') ORDER BY `w` DESC LIMIT 1",
-        - 1
+        -1
     );
 
-    if ($id == - 1) {
+    if ($id == -1) {
         $dblink_slave = $dblink;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     } else {
         db_connect_slave($id);
     }
@@ -672,9 +672,9 @@ function db_connect_primary_slave()
 {
     global $opt, $dblink, $dblink_slave, $dbslaveid;
 
-    if ($opt['db']['slave']['primary'] == - 1) {
+    if ($opt['db']['slave']['primary'] == -1) {
         $dblink_slave = $dblink;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     } else {
         db_connect_slave($opt['db']['slave']['primary']);
     }
@@ -756,14 +756,14 @@ function fetch_email_template($filename, $language, $domain)
     $mailtext = read_file($rootpath . '/lang/de/ocstyle/email/' . $language . '/' . $filename . '.email');
 
     $urls = get_site_urls($domain);
-    $mailtext = mb_ereg_replace("{site_url}", $urls['site_url'], $mailtext);
+    $mailtext = mb_ereg_replace('{site_url}', $urls['site_url'], $mailtext);
     if ($urls['shortlink_url']) {
-        $mailtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $mailtext);
+        $mailtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $mailtext);
     } else {
-        $mailtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $mailtext);
+        $mailtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $mailtext);
     }
 
-    $mailtext = mb_ereg_replace("{email_contact}", $opt['mail']['contact'], $mailtext);
+    $mailtext = mb_ereg_replace('{email_contact}', $opt['mail']['contact'], $mailtext);
 
     return $mailtext;
 }

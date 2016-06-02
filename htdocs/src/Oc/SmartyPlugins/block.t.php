@@ -3,36 +3,36 @@
  *  You can find the license in the docs directory
  *
  *  Unicode Reminder メモ
- *
+ ***************************************************************************/
+/**
  *  For more information about this smarty-extension see
  *  prefilter.t.php
  *
  *  This extension probably is OBSOLETE: {t} blocks are handled by
  *  prefilter.t.php when precompiling the templates via clear-webcache.php.
  *  smarty_block_t() probably never gets called.
- ***************************************************************************
+ *
  * Replaces arguments in a string with their values.
  * Arguments are represented by % followed by their number.
  *
- * @param    string    Source string
- * @param    mixed    Arguments, can be passed in an array or through single variables.
+ * @param string $str
  *
- * @returns    string    Modified string
+ * @return string
  */
 function smarty_gettext_strarg($str)
 {
     $tr = [];
     $p = 0;
 
-    for ($i = 1; $i < func_num_args(); $i ++) {
+    for ($i = 1; $i < func_num_args(); $i++) {
         $arg = func_get_arg($i);
 
         if (is_array($arg)) {
             foreach ($arg as $aarg) {
-                $tr['%' . ++ $p] = $aarg;
+                $tr['%' . ++$p] = $aarg;
             }
         } else {
-            $tr['%' . ++ $p] = $arg;
+            $tr['%' . ++$p] = $arg;
         }
     }
 
@@ -49,13 +49,20 @@ function smarty_gettext_strarg($str)
  *   - escape - Valid is "js" to escape a string for usage inside JS string
  *   - plural - The plural version of the text (2nd parameter of ngettext())
  *   - count - The item count for plural mode (3rd parameter of ngettext())
+ *
+ * @param array $params
+ * @param string $text
+ * @param \OcSmarty $smarty
+ * @param bool $repeat
+ *
+ * @return string
  */
-function smarty_block_t($params, $text, &$smarty, &$repeat)
+function smarty_block_t(array $params, $text, \OcSmarty &$smarty, &$repeat)
 {
     global $opt;
 
     if ($repeat) {
-        return;
+        return '';
     }
 
     $escape = isset($params['escape']) ? $params['escape'] : '';

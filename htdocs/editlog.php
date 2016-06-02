@@ -112,11 +112,11 @@ if ($error == false) {
                 $log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : (substr(
                     $log_record['date'],
                     11
-                ) == "00:00:00" ? "" : date('H', strtotime($log_record['date'])));
+                ) == '00:00:00' ? '' : date('H', strtotime($log_record['date'])));
                 $log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : (substr(
                     $log_record['date'],
                     11
-                ) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
+                ) == '00:00:00' ? '' : date('i', strtotime($log_record['date'])));
                 $top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
                 $top_cache = isset($_POST['rating']) ? $_POST['rating'] + 0 : 0;
                 $oc_team_comment = isset($_POST['submitform']) ? @$_POST['teamcomment'] + 0 : ($log_record['oc_team_comment'] == 1);
@@ -221,7 +221,7 @@ if ($error == false) {
 
                 // fuer alte Versionen von OCProp
                 if ($descMode != 1 && isset($_POST['submit']) && !isset($_POST['version2'])) {
-                    $log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
+                    $log_text = iconv('ISO-8859-1', 'UTF-8', $log_text);
                 }
 
                 $log_text = processEditorInput($oldDescMode, $descMode, $log_text);
@@ -229,8 +229,8 @@ if ($error == false) {
                 //validate date
                 $date_ok = false;
                 if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
-                    ("$log_time_hour$log_time_minute" == "" || is_numeric($log_time_hour)) &&
-                    ($log_time_minute == "" || is_numeric($log_time_minute))
+                    ("$log_time_hour$log_time_minute" == '' || is_numeric($log_time_hour)) &&
+                    ($log_time_minute == '' || is_numeric($log_time_minute))
                 ) {
                     $date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
                         && ($log_date_year >= 2000)
@@ -277,7 +277,7 @@ if ($error == false) {
                 if ($date_ok && $logtype_ok && $pw_ok && isset($_POST['submitform'])) { // Ocprop
                     // 00:00:01 = "00:00 was logged"
                     // 00:00:00 = "no time was logged"
-                    if ("$log_time_hour$log_time_minute" != "" &&
+                    if ("$log_time_hour$log_time_minute" != '' &&
                         $log_time_hour == 0 && $log_time_minute == 0
                     ) {
                         $log_time_second = 1;
@@ -525,5 +525,5 @@ function is_latest_log($cache_id, $log_id)
         $cache_id
     );
 
-    return ($log_id == $lastest_log_id);
+    return $log_id == $lastest_log_id;
 }

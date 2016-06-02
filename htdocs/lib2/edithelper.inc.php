@@ -83,10 +83,10 @@ function html2plaintext($text, $texthtml0, $wrap)
         $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
     } else {
         // convert smilies ...
-        for ($n = 0; $n < count($smiley['image']); $n ++) {
+        for ($n = 0; $n < count($smiley['image']); $n++) {
             $text = mb_ereg_replace(
-                "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
-                "[s![" . $smiley['text'][$n] . "]!s]",
+                '<img [^>]*?src=[^>]+?' . str_replace('.', '\.', $smiley['file'][$n]) . '[^>]+?>',
+                '[s![' . $smiley['text'][$n] . ']!s]',
                 $text
             );
             // the [s[ ]s] is needed to protect the spaces around the smileys
@@ -107,7 +107,7 @@ function html2plaintext($text, $texthtml0, $wrap)
         );
 
         // remove e.g. trailing \n created from </p> by html2text
-        while (substr($text, - 2) == "\n\n") {
+        while (substr($text, -2) == "\n\n") {
             $text = substr($text, 0, strlen($text) - 1);
         }
     }

@@ -12,9 +12,9 @@ class crypt
     public static function encryptPassword($password)
     {
         // Calls the password encryption chained
-        $pwmd5 = crypt::firstStagePasswordEncryption($password);
+        $pwmd5 = self::firstStagePasswordEncryption($password);
 
-        return crypt::secondStagePasswordEncryption($pwmd5);
+        return self::secondStagePasswordEncryption($pwmd5);
     }
 
     public static function firstStagePasswordEncryption($password)

@@ -20,7 +20,6 @@ class mailcheck
 {
     public $sHostname = 'somehost.org';
     public $sFrom = 'postmaster@somehost.org';
-
     public $nConnectTimeout = 15; // (sec)
     public $nReadTimeout = 25;   // (sec)
 
@@ -50,17 +49,17 @@ class mailcheck
 
         // sort MX records
         $mxs = [];
-        for ($i = 0; $i < count($mx_records); $i ++) {
+        for ($i = 0; $i < count($mx_records); $i++) {
             $mxs[$i] = [
                 'mx' => $mx_records[$i],
                 'prio' => $mx_weight[$i]
             ];
         }
-        usort($mxs, "mailcheck_cmp");
+        usort($mxs, 'mailcheck_cmp');
         reset($mxs);
 
         // check address with each MX until one mailserver can be connected
-        for ($i = 0; $i < count($mxs); $i ++) {
+        for ($i = 0; $i < count($mxs); $i++) {
             $retval = $this->pCheckAddress($sAddress, $mxs[$i]['mx']);
             if ($retval != CA_ERROR_CONNECT) {
                 return $retval;
@@ -92,7 +91,7 @@ class mailcheck
             return CA_ERROR_CONNECT;
         }
 
-        $sResp = $this->send_command($fp, "HELO " . $this->sHostname);
+        $sResp = $this->send_command($fp, 'HELO ' . $this->sHostname);
         $sCode = $this->extract_return_code($sResp);
         if ($sCode != '220') {
             $this->close($fp);
@@ -100,7 +99,7 @@ class mailcheck
             return CA_ERROR_UNKOWN;
         }
 
-        $sResp = $this->send_command($fp, "MAIL FROM: <" . $this->sFrom . ">");
+        $sResp = $this->send_command($fp, 'MAIL FROM: <' . $this->sFrom . '>');
         $sCode = $this->extract_return_code($sResp);
         if ($sCode != '250') {
             $this->close($fp);
@@ -108,17 +107,19 @@ class mailcheck
             return CA_ERROR_UNKOWN;
         }
 
-        $sResp = $this->send_command($fp, "RCPT TO: <" . $sAddress . ">");
+        $sResp = $this->send_command($fp, 'RCPT TO: <' . $sAddress . '>');
         $sCode = $this->extract_return_code($sResp);
         if (strlen($sCode) == 3 && substr($sCode, 0, 1) == '4') {
             $this->close($fp);
 
             return CA_ERROR_TEMPORARY;
-        } elseif ($sCode == '553' && $sCode == '550') {
+        }
+        if ($sCode == '553' && $sCode == '550') {
             $this->close($fp);
 
             return CA_ERROR_USER_UNKOWN;
-        } elseif ($sCode == '250') {
+        }
+        if ($sCode == '250') {
             $this->close($fp);
 
             return CA_OK;
@@ -142,7 +143,8 @@ class mailcheck
 
         if ($nPos1 === false && $nPos2 === false) {
             return $sResp;
-        } elseif ($nPos1 === false) {
+        }
+        if ($nPos1 === false) {
             $nPos = $nPos2;
         } elseif ($nPos2 === false) {
             $nPos = $nPos1;
@@ -166,10 +168,10 @@ class mailcheck
 
     public function get_data($fp)
     {
-        $s = "";
+        $s = '';
         stream_set_timeout($fp, $this->nReadTimeout);
 
-        for ($i = 0; $i < 2; $i ++) {
+        for ($i = 0; $i < 2; $i++) {
             $s .= fgets($fp, 1024);
         }
 
@@ -183,5 +185,5 @@ function mailcheck_cmp($a, $b)
         return 0;
     }
 
-    return (($a['prio'] + 0) < ($b['prio'] + 0)) ? - 1 : 1;
+    return (($a['prio'] + 0) < ($b['prio'] + 0)) ? -1 : 1;
 }

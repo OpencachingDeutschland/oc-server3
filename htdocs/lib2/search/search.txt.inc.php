@@ -111,7 +111,7 @@ function search_output()
             false,
             true
         );
-        if ($license != "") {
+        if ($license != '') {
             $license = "\r\n\r\n$license";
         }
 
@@ -136,7 +136,7 @@ function search_output()
         $thisline = mb_ereg_replace('{siteurl}', $opt['page']['default_absolute_url'], $thisline);
         $thisline = mb_ereg_replace('{owner}', $r['username'], $thisline);
 
-        $flags = array();
+        $flags = [];
         if ($r['needs_maintenance'] > 0 || $r['listing_outdated']) {
             if ($r['needs_maintenance'] > 0) {
                 $flags[] = 'geocache needs maintenance';
@@ -180,9 +180,9 @@ function search_output()
             $thislog = $txtLogs;
 
             $thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
-            $dateformat = "d.m.Y H:i";
-            if (substr($rLog['date'], 11) == "00:00:00") {
-                $dateformat = "d.m.Y";
+            $dateformat = 'd.m.Y H:i';
+            if (substr($rLog['date'], 11) == '00:00:00') {
+                $dateformat = 'd.m.Y';
             }
             $thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
             $thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
@@ -213,7 +213,7 @@ function search_output()
 
 function decodeEntities($str)
 {
-    return html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
 }
 
 function html2txt($html)

@@ -155,7 +155,7 @@ function sqldbg_execute($sql, $bSlave)
     global $sqldbg_cmdNo;
     global $sqldbg_sumTimes;
 
-    $sqldbg_cmdNo ++;
+    $sqldbg_cmdNo++;
 
     echo '<p class="sqlno"><span class="white">/*</span> SQL command ' . $sqldbg_cmdNo . ' ';
     if ($bSlave) {
@@ -230,7 +230,7 @@ function sqldbg_execute($sql, $bSlave)
 
         while ($r = sql_fetch_assoc($rs)) {
             $usebr = true;
-            $nLine ++;
+            $nLine++;
             if ($bFirstLine == true) {
                 echo '<tr>' . "\n";
                 foreach ($r as $field => $value) {
@@ -290,7 +290,7 @@ function sqldbg_execute($sql, $bSlave)
     // dont use query cache!
     $sql = sqldbg_insert_nocache($sql);
 
-    $bSqlExecution = new Cbench;
+    $bSqlExecution = new Cbench();
     $bSqlExecution->start();
     $rsResult = mysql_query($sql, $dblink);
     $bError = ($rsResult == false);

@@ -17,30 +17,30 @@ function get_cache_condition_history($cache_id)
         $cache_id
     );
     $nm = $lo = 0;
-    $cond = array(
-        array(
+    $cond = [
+        [
             'needs_maintenance' => $nm,
             'listing_outdated' => $lo,
             'date' => '0000-00-00 00:00:00'
-        )
-    );
+        ]
+    ];
     while ($r = sql_fetch_assoc($rs)) {
         if ($r['needs_maintenance'] != $nm || $r['listing_outdated'] != $lo) {
             $nm = $r['needs_maintenance'];
             $lo = $r['listing_outdated'];
-            $cond[] = array(
+            $cond[] = [
                 'needs_maintenance' => $nm,
                 'listing_outdated' => $lo,
                 'date' => $r['date']
-            );
+            ];
         }
     }
     sql_free_result($rs);
-    $cond[] = array(
+    $cond[] = [
         'needs_maintenance' => $nm,
         'listing_outdated' => $lo,
         'date' => '9999-12-31 23:59:59'
-    );
+    ];
 
     return $cond;
 }

@@ -52,7 +52,7 @@ if ($argc < 4) {
             $er->resendActivationCodes();
             break;
         default:
-            die('invalid option: '. $option . "\n");
+            die('invalid option: ' . $option . "\n");
     }
 }
 
@@ -80,7 +80,7 @@ class EmailRecovery
 
     private static function verifyDateTime($datetime)
     {
-        return preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/", $datetime);
+        return preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/', $datetime);
     }
 
     private static function message($level, $text)
@@ -91,8 +91,8 @@ class EmailRecovery
     private function getDateCondition($table, $field)
     {
         return
-            "`" . $table . "`.`" . $field . "` >= '" . sql_escape($this->fromDateTime) . "'" .
-            " AND `" . $table . "`.`" . $field . "` <= '" . sql_escape($this->toDateTime) . "'";
+            '`' . $table . '`.`' . $field . "` >= '" . sql_escape($this->fromDateTime) . "'" .
+            ' AND `' . $table . '`.`' . $field . "` <= '" . sql_escape($this->toDateTime) . "'";
     }
 
     private function showObjectCount($table, $dateField, $description, $andWhere = '')
@@ -258,7 +258,7 @@ class EmailRecovery
 
     public function resendCacheNotifications()
     {
-        $notifies_wating = sql_value("SELECT COUNT(*) FROM `notify_waiting`", 0);
+        $notifies_wating = sql_value('SELECT COUNT(*) FROM `notify_waiting`', 0);
 
         $rs = sql(
             "SELECT `cache_id`, `latitude`, `longitude`
@@ -279,7 +279,7 @@ class EmailRecovery
         sql_free_result($rs);
 
         $new_notifications =
-            sql_value("SELECT COUNT(*) FROM `notify_waiting`", 0) - $notifies_wating;
+            sql_value('SELECT COUNT(*) FROM `notify_waiting`', 0) - $notifies_wating;
         self::message(0, $new_notifications . ' new cache notifications will be sent');
     }
     
@@ -297,7 +297,7 @@ class EmailRecovery
         while ($r = sql_fetch_assoc($rs)) {
             $user = new user($r['user_id']);
             $user->sendRegistrationCode();
-            ++ $n;
+            ++$n;
         }
         sql_free_result($rs);
         self::message(0, $n . ' users have been re-sent the activation code');

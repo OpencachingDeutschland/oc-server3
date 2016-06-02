@@ -22,9 +22,7 @@ class cachelog
     const LOGTYPE_DISABLED = 11;
     const LOGTYPE_LOCKED = 13;
     const LOGTYPE_LOCKED_INVISIBLE = 14;
-
     public $nLogId = 0;
-
     public $reCacheLog;
 
     public static function logIdFromUUID($uuid)
@@ -41,7 +39,7 @@ class cachelog
             return null;
         }
 
-        return new cachelog($logid);
+        return new self($logid);
     }
 
     public static function createNew($nCacheId, $nUserId)
@@ -57,7 +55,7 @@ class cachelog
             return false;
         }
 
-        $oCacheLog = new cachelog(ID_NEW);
+        $oCacheLog = new self(ID_NEW);
         $oCacheLog->setUserId($nUserId);
         $oCacheLog->setCacheId($nCacheId);
         $oCacheLog->setNode($opt['logic']['node']['id']);
@@ -77,7 +75,7 @@ class cachelog
             return false;
         }
 
-        $oCacheLog = new cachelog(ID_NEW);
+        $oCacheLog = new self(ID_NEW);
         $oCacheLog->setUserId($nUserId);
         $oCacheLog->setCacheId($oCache->getCacheId());
         $oCacheLog->setNode($opt['logic']['node']['id']);
@@ -321,7 +319,8 @@ class cachelog
         );
         if ($allow == 1) {
             return true;
-        } elseif ($login->userid == sql_value(
+        }
+        if ($login->userid == sql_value(
             "SELECT `user_id` FROM `caches` WHERE `cache_id`='&1'",
             0,
             $this->getCacheId()
@@ -421,6 +420,6 @@ class cachelog
             $masslogs = 0;
         }
 
-        return ($masslogs > $opt['logic']['masslog']['count']);
+        return $masslogs > $opt['logic']['masslog']['count'];
     }
 }

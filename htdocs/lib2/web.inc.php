@@ -53,39 +53,39 @@ function helppageurl($ocpage)
     $help_locale = $opt['template']['locale'];
     $helppage = sql_value(
         "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-        "",
+        '',
         $ocpage,
         $help_locale
     );
-    if ($helppage == "") {
+    if ($helppage == '') {
         $helppage = sql_value(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
-            "",
+            '',
             $ocpage
         );
     }
-    if ($helppage == "") {
+    if ($helppage == '') {
         $helppage = sql_value(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-            "",
+            '',
             $ocpage,
             $opt['template']['default']['fallback_locale']
         );
-        if ($helppage != "") {
+        if ($helppage != '') {
             $help_locale = $opt['template']['default']['fallback_locale'];
         }
     }
 
-    if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage])) {
+    if ($helppage == '' && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage])) {
         $helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
     }
 
-    if (substr($helppage, 0, 1) == "!") {
+    if (substr($helppage, 0, 1) == '!') {
         substr($helppage, 1);
-    } elseif ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki'])) {
+    } elseif ($helppage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
         return $opt['locale'][$help_locale]['helpwiki'] . str_replace(' ', '_', $helppage);
     } else {
-        return "";
+        return '';
     }
 }
 
@@ -94,12 +94,12 @@ function helppagelink($ocpage, $title = 'Instructions')
     global $translate;
 
     $helpurl = helppageurl($ocpage);
-    if ($helpurl == "") {
-        return "";
-    } else {
-        $imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
-        $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
-
-        return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
+    if ($helpurl == '') {
+        return '';
     }
+
+    $imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
+    $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
+
+    return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
 }

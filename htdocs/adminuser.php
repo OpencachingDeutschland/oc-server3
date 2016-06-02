@@ -181,7 +181,7 @@ function searchUser()
     }
     $tpl->assign('candisable', $user->canDisable());
     $tpl->assign('candelete', $user->canDelete());
-    $tpl->assign('cansetemail', !$user->missedDataLicenseMail() && $r['email'] != "");
+    $tpl->assign('cansetemail', !$user->missedDataLicenseMail() && $r['email'] != '');
     $tpl->assign('licensefunctions', $opt['logic']['license']['admin']);
 
     $tpl->display();

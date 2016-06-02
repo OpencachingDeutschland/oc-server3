@@ -12,25 +12,34 @@ use Behat\Mink\Session;
 
 abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var string
+     */
     protected $dir;
 
-    /** @var  GoutteDriver $driver */
+    /** @var  \Behat\Mink\Driver\GoutteDriver $driver */
     protected $driver;
 
-    /** @var  Session $session */
+    /** @var  \Behat\Mink\Session $session */
     protected $session;
 
     /** @var  string $baseUrl */
     protected $baseUrl;
 
+    /**
+     * AbstractFrontendTest constructor.
+     */
     public function __construct()
     {
         parent::__construct();
-        require_once(__DIR__ . '/../../htdocs/vendor/autoload.php');
+        require_once __DIR__ . '/../../htdocs/vendor/autoload.php';
         $this->dir = __DIR__;
         $this->baseUrl = 'http://local.opencaching.de';
     }
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
@@ -44,6 +53,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
      * helper method for pages which needs an active login
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @return void
      */
     protected function login()
     {

@@ -30,7 +30,7 @@ class gcwp_update
                 $errors = true;
             } else {
                 foreach ($wpdata as $line) {
-                    $waypoints = explode(",", trim($line));
+                    $waypoints = explode(',', trim($line));
                     if (count($waypoints) == 2) {
                         sql(
                             "UPDATE `caches` SET `wp_gc_maintained`='&2' WHERE `wp_oc`='&1'",

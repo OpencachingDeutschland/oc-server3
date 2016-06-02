@@ -11,7 +11,7 @@ class RSSParser
     /**
      * parse
      *
-     * @param int    $items number of feeditems to parse from feed
+     * @param integer    $items number of feeditems to parse from feed
      * @param string $url   url of the feed to parse
      *
      * @return string $item feeditems as HTML-string
@@ -25,7 +25,7 @@ class RSSParser
         }
 
         // error
-        $rss = array();
+        $rss = [];
 
         // check $url
         if (preg_match('!^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|localhost|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\:\,\?\'\\\+&amp;%\$#\=~_\-]+))*$!', $url)) {
@@ -46,39 +46,39 @@ class RSSParser
                     $xml = new SimpleXMLElement($data);
 
                     $i = 0;
-                    $headlines = array();
+                    $headlines = [];
                     // walk through items
                     foreach ($xml->channel->item as $item) {
                         // check length
                         if ($items != 0 && $i >= $items) {
                             break;
-                        } else {
-                            // add html
-                            if ($includetext) {
-                                // fill array
-                                $rss[] = array(
-                                    'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
-                                    'title' => $item->title,
-                                    'link' => $item->link,
-                                    'description' => $item->description
-                                );
-                                // increment counter
-                                $i ++;
-                                // htmlspecialchars_decode() works around inconsistent HTML encoding
-                                // e.g. in SMF Forum Threads
-                            } elseif (!in_array(htmlspecialchars_decode($item->title), $headlines) &&
-                                strpos($item->title, 'VERSCHOBEN') === false
-                            ) { // hack to exclude forum thread-move messages
-                                // fill array
-                                $rss[] = array(
-                                    'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
-                                    'title' => $item->title,
-                                    'link' => $item->link
-                                );
-                                $headlines[] = "" . htmlspecialchars_decode($item->title);
-                                // increment counter
-                                $i ++;
-                            }
+                        }
+
+                        // add html
+                        if ($includetext) {
+                            // fill array
+                            $rss[] = [
+                                'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
+                                'title' => $item->title,
+                                'link' => $item->link,
+                                'description' => $item->description
+                            ];
+                            // increment counter
+                            $i++;
+                            // htmlspecialchars_decode() works around inconsistent HTML encoding
+                            // e.g. in SMF Forum Threads
+                        } elseif (!in_array(htmlspecialchars_decode($item->title), $headlines) &&
+                            strpos($item->title, 'VERSCHOBEN') === false
+                        ) { // hack to exclude forum thread-move messages
+                            // fill array
+                            $rss[] = [
+                                'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
+                                'title' => $item->title,
+                                'link' => $item->link
+                            ];
+                            $headlines[] = '' . htmlspecialchars_decode($item->title);
+                            // increment counter
+                            $i++;
                         }
                     }
                 } catch (Exception $e) {
@@ -86,7 +86,6 @@ class RSSParser
             }
         }
 
-        // return
         return $rss;
     }
 }

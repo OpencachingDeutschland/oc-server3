@@ -24,9 +24,9 @@ if (count($argv) != 2 || $argv[1] != 'run') {
         "\n");
 }
 
-sql("DELETE FROM `gk_item_waypoint`");
+sql('DELETE FROM `gk_item_waypoint`');
 
-$rsItems = sql("SELECT DISTINCT `itemid` AS `id` FROM `gk_move`");
+$rsItems = sql('SELECT DISTINCT `itemid` AS `id` FROM `gk_move`');
 while ($rItem = sql_fetch_assoc($rsItems)) {
     $lastmove = sql_value(
         "SELECT `id` FROM `gk_move`

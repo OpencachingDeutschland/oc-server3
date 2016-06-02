@@ -1,13 +1,14 @@
 <?php
 /**
  * Smarty plugin
- *
- * @package Smarty
- * @subpackage plugins
- ***
  * Smarty {season winter='...' spring='...' summer='...' autumn='...'} function plugin
+ *
+ * @param array $params
+ * @param \OcSmarty $smarty
+ *
+ * @return string
  */
-function smarty_function_season($params, &$smarty)
+function smarty_function_season(array $params, \OcSmarty &$smarty)
 {
     $seasons = [];
 
@@ -80,25 +81,19 @@ function smarty_function_season($params, &$smarty)
     ];
 
     $nTimestamp = time();
-    for ($nIndex = 0; $nIndex < count($seasons); $nIndex ++) {
+    for ($nIndex = 0; $nIndex < count($seasons); $nIndex++) {
         if (strtotime($seasons[$nIndex][0]) > $nTimestamp) {
             return $params['winter'];
-        } //'';
-        else {
-            if (strtotime($seasons[$nIndex][1]) > $nTimestamp) {
-                return $params['spring'];
-            } //'resource2/ocstyle/css/seasons/style_spring.css';
-            else {
-                if (strtotime($seasons[$nIndex][2]) > $nTimestamp) {
-                    return $params['summer'];
-                } //'resource2/ocstyle/css/seasons/style_summer.css';
-                else {
-                    if (strtotime($seasons[$nIndex][3]) > $nTimestamp) {
-                        return $params['autumn'];
-                    }
-                }
-            }
-        } //'resource2/ocstyle/css/seasons/style_autumn.css';
+        }
+        if (strtotime($seasons[$nIndex][1]) > $nTimestamp) {
+            return $params['spring'];
+        }
+        if (strtotime($seasons[$nIndex][2]) > $nTimestamp) {
+            return $params['summer'];
+        }
+        if (strtotime($seasons[$nIndex][3]) > $nTimestamp) {
+            return $params['autumn'];
+        }
     }
 
     return '';

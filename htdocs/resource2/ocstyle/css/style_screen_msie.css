@@ -13,15 +13,15 @@
 .exportlist { background: white; }
 .exportbutton { padding: 1px; width:180px; }
 input.formbutton {
-		border: none !important;
-		filter: progid:DXImageTransform.Microsoft.glow(color=#5f90bb,strength=1);
+        border: none !important;
+        filter: progid:DXImageTransform.Microsoft.glow(color=#5f90bb,strength=1);
 }
 /* IE 7 Hack */
 *div.attribgroup {
-	display: inline;
-	margin: 0px;
-	padding-right: 0.6em;
-	padding-bottom: 0.6em;
+    display: inline;
+    margin: 0px;
+    padding-right: 0.6em;
+    padding-bottom: 0.6em;
 }
 /* MSIE hacks */
 * html .page-container-1 {top: 29px;}

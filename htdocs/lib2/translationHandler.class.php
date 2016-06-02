@@ -13,7 +13,7 @@ class TranslationHandler
      */
     public function createMessageFiles()
     {
-        $rs = sqlf("SELECT DISTINCT `lang` FROM `sys_trans_text`");
+        $rs = sqlf('SELECT DISTINCT `lang` FROM `sys_trans_text`');
         while ($r = sql_fetch_assoc($rs)) {
             $this->createMessageFile($r['lang']);
         }
@@ -65,7 +65,7 @@ class TranslationHandler
             $language_upper
         );
 
-        $variables = array();
+        $variables = [];
         $this->loadNodeTextFile($variables, $opt['logic']['node']['id'] . '.txt', $language_lower);
         $this->loadNodeTextFile(
             $variables,
@@ -106,8 +106,8 @@ class TranslationHandler
     {
         $text = mb_ereg_replace('\\\\', '\\\\', $text);
         $text = mb_ereg_replace('"', '\"', $text);
-        $text = mb_ereg_replace("\r", "", $text);
-        while (mb_substr($text, - 1, 1) == "\n") {
+        $text = mb_ereg_replace("\r", '', $text);
+        while (mb_substr($text, -1, 1) == "\n") {
             $text = mb_substr($text, 0, mb_strlen($text) - 1);
         }
         $text = mb_ereg_replace("\n", "\\n\"\n\"", $text);
@@ -158,7 +158,7 @@ class TranslationHandler
     public function clearReferences()
     {
         global $opt, $db;
-        sqlf("DELETE FROM `sys_trans_ref`");
+        sqlf('DELETE FROM `sys_trans_ref`');
     }
 
     /* import strings from given field to sys_trans_text
@@ -193,7 +193,7 @@ class TranslationHandler
             );
         }
         sql_free_result($rs);
-        sqlf("UPDATE `&1` SET `&2`=0", $table, $fid);
+        sqlf('UPDATE `&1` SET `&2`=0', $table, $fid);
         sqlf(
             "UPDATE `&1`, `sys_trans`
             SET `&1`.`&3`=`sys_trans`.`id`
@@ -238,7 +238,7 @@ class TranslationHandler
 
         // replace variables in string
         if (mb_ereg_search_init($langstr)) {
-            while (false != $vars = mb_ereg_search_regs("%[^%]*%")) {
+            while (false != $vars = mb_ereg_search_regs('%[^%]*%')) {
                 foreach ($vars as $curly_pattern) {
                     // $curly_pattern contatins %pattern% in replacement string
                     $pattern = mb_substr($curly_pattern, 1, mb_strlen($curly_pattern) - 2);

@@ -29,7 +29,7 @@ if (isset($_REQUEST['new'])) {
     } else {
         $tpl->assign('emailadr', $user->getEMail());
         if ($user->missedDataLicenseMail()) {
-            $tpl->assign('datalicensemail', "<br /><br />" . file_get_contents("resource2/misc/datalicensemail.html"));
+            $tpl->assign('datalicensemail', '<br /><br />' . file_get_contents('resource2/misc/datalicensemail.html'));
         }
         $tpl->assign('orgpage', $orgpage);
     }

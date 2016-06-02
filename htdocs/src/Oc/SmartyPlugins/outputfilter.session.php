@@ -12,11 +12,22 @@
  *
  ***************************************************************************/
 
-function smarty_outputfilter_session($tpl_output, &$smarty)
+/**
+ * @param string $tpl_output
+ * @param \OcSmarty $smarty
+ *
+ * @return string
+ */
+function smarty_outputfilter_session($tpl_output, \OcSmarty &$smarty)
 {
     return html_insert_sid($tpl_output);
 }
 
+/**
+ * @param string $text
+ *
+ * @return string
+ */
 function html_insert_sid($text)
 {
     global $opt;
@@ -40,7 +51,12 @@ function html_insert_sid($text)
     return $text;
 }
 
-function html_insert_sid_callback($match)
+/**
+ * @param array $match
+ *
+ * @return string
+ */
+function html_insert_sid_callback(array $match)
 {
     global $opt;
 
@@ -62,9 +78,9 @@ function html_insert_sid_callback($match)
         return 'href=' . $match[1] . $match[2] . '?' . urlencode(session_name()) . '=' . urlencode(
             session_id()
         ) . $match[3];
-    } else {
-        return 'href=' . $match[1] . $match[2] . '&' . urlencode(session_name()) . '=' . urlencode(
-            session_id()
-        ) . $match[3];
     }
+
+    return 'href=' . $match[1] . $match[2] . '&' . urlencode(session_name()) . '=' . urlencode(
+        session_id()
+    ) . $match[3];
 }

@@ -7,7 +7,7 @@
  *  Business layer constant definitions
  ***************************************************************************/
 
-define('ID_NEW', - 1);
+define('ID_NEW', -1);
 
 define('RE_TYPE_INT', 1);
 define('RE_TYPE_STRING', 2);

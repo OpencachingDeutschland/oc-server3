@@ -28,7 +28,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
 
     if (!$error_handled) {
         $error_handled = true;
-        $errtitle = "PHP-Fehler";
+        $errtitle = 'PHP-Fehler';
 
         $error = "($errno) $errstr at line $errline in $errfile";
         php_errormail($error);
@@ -36,7 +36,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
         if (display_error()) {
             $errmsg = $error;
         } else {
-            $errmsg = "";
+            $errmsg = '';
         }
 
         require __DIR__ . '/../html/error.php';
@@ -53,7 +53,7 @@ function shutdownhandler()
     global $error_handled;
 
     if (!$error_handled &&
-        function_exists("error_get_last") && /* PHP >= 5.2.0 */
+        function_exists('error_get_last') && /* PHP >= 5.2.0 */
         ($error = error_get_last()) &&
         in_array(
             $error['type'],
@@ -67,12 +67,12 @@ function shutdownhandler()
     ) {
         $error_handled = true;
 
-        $error = "(" . $error['type'] . ") " . $error['message'] .
-            " at line " . $error['line'] . " of " . $error['file'];
+        $error = '(' . $error['type'] . ') ' . $error['message'] .
+            ' at line ' . $error['line'] . ' of ' . $error['file'];
         php_errormail($error);
 
-        $errtitle = "PHP-Fehler";
-        $errmsg = "";
+        $errtitle = 'PHP-Fehler';
+        $errmsg = '';
         if (display_error()) {
             $errmsg = $error;
         }
@@ -115,7 +115,7 @@ function admin_errormail($to, $errortype, $message, $headers)
 {
     global $opt;
     $errorlog_dir = $opt['rootpath'] . 'var/errorlog';
-    $errorlog_path = $errorlog_dir . "/errorlog-" . date("Y-m-d");
+    $errorlog_path = $errorlog_dir . '/errorlog-' . date('Y-m-d');
 
     $error_mail_limit = 32768;    // send max 32 KB = ca. 5-20 errors per day/logfile
 
@@ -125,7 +125,7 @@ function admin_errormail($to, $errortype, $message, $headers)
         @mkdir($errorlog_dir);
     }
     $old_logsize = @filesize($errorlog_path) + 0;
-    $msg = date("Y-m-d H:i:s.u") . " " . $errortype . "\n" . $message . "\n" .
+    $msg = date('Y-m-d H:i:s.u') . ' ' . $errortype . "\n" . $message . "\n" .
         "-------------------------------------------------------------------------\n\n";
     try {
         error_log(
@@ -143,15 +143,15 @@ function admin_errormail($to, $errortype, $message, $headers)
     if ($old_logsize < $error_mail_limit && $new_logsize >= $error_mail_limit) {
         mb_send_mail(
             $to,
-            "too many " . $errortype,
-            "Errors/Warnings are recorded in " . $errorlog_path . ".\n" .
+            'too many ' . $errortype,
+            'Errors/Warnings are recorded in ' . $errorlog_path . ".\n" .
             "Email Reporting is DISABLED for today now. Please check the logfile\n" .
-            "and RENAME or delete it when done, so that logging is re-enabled.",
+            'and RENAME or delete it when done, so that logging is re-enabled.',
             $headers
         );
 
         return false;
-    } else {
-        return ($old_logsize < $error_mail_limit);
     }
+
+    return $old_logsize < $error_mail_limit;
 }

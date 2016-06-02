@@ -62,7 +62,7 @@ function unlinkFiles($relbasedir, $ext)
 {
     global $opt;
 
-    if (substr($relbasedir, - 1, 1) != '/') {
+    if (substr($relbasedir, -1, 1) != '/') {
         $relbasedir .= '/';
     }
 
@@ -70,7 +70,7 @@ function unlinkFiles($relbasedir, $ext)
         if ($dh = opendir($opt['rootpath'] . $relbasedir)) {
             while (($file = readdir($dh)) !== false) {
                 if ($file != '.' && $file != '..' && is_file($opt['rootpath'] . $relbasedir . $file)) {
-                    if (substr($file, - (strlen($ext) + 1), strlen($ext) + 1) == '.' . $ext) {
+                    if (substr($file, -(strlen($ext) + 1), strlen($ext) + 1) == '.' . $ext) {
                         unlink($opt['rootpath'] . $relbasedir . $file);
                     }
                 }
@@ -91,7 +91,7 @@ function createMenuCache()
             set_php_locale();
 
             if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
-                die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+                die('setlocale() failed to set language to ' . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
             }
 
             // this will create the cache file
@@ -129,7 +129,7 @@ function precompileAllTemplates()
 
     if ($hDir = opendir($opt['stylepath'])) {
         while (($sFilename = readdir($hDir)) !== false) {
-            if (substr($sFilename, - 4) == '.tpl') {
+            if (substr($sFilename, -4) == '.tpl') {
                 //echo substr($sFilename, 0, strlen($sFilename) - 4) . "\n";
                 precompileTemplate(substr($sFilename, 0, strlen($sFilename) - 4));
             }
@@ -170,7 +170,7 @@ function precompileTemplateWithLanguage($sTemplate, $sLanguage)
     set_php_locale();
 
     if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
-        die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+        die('setlocale() failed to set language to ' . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
     }
 
     $preTemplate = new OcSmarty();

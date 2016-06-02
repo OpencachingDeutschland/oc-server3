@@ -14,7 +14,6 @@ class sitemaps
 {
     public $name = 'sitemaps';
     public $interval = 604800; // once a week
-
     public $oSitemapXML = false;
 
     public function run()
@@ -87,7 +86,7 @@ class sitemaps
 
     public function write_newcaches_urls()
     {
-        $nCount = sql_value("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1", 0);
+        $nCount = sql_value('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1', 0);
         $nIndex = 0;
         while ($nIndex < $nCount) {
             $this->oSitemapXML->write('newcaches.php?startat=' . $nIndex, time(), 'always');
@@ -97,7 +96,7 @@ class sitemaps
 
     public function write_viewprofile_urls()
     {
-        $rs = sql("SELECT SQL_BUFFER_RESULT `user_id` FROM `user`");
+        $rs = sql('SELECT SQL_BUFFER_RESULT `user_id` FROM `user`');
         while ($r = sql_fetch_assoc($rs)) {
             $this->oSitemapXML->write('viewprofile.php?userid=' . $r['user_id'], time() - 31 * 24 * 60 * 60);
         }
@@ -107,7 +106,7 @@ class sitemaps
     public function write_viewlogs_urls()
     {
         $rs = sql(
-            "SELECT SQL_BUFFER_RESULT MAX(`last_modified`) AS `d`, `cache_id` FROM `cache_logs` GROUP BY `cache_id`"
+            'SELECT SQL_BUFFER_RESULT MAX(`last_modified`) AS `d`, `cache_id` FROM `cache_logs` GROUP BY `cache_id`'
         );
         while ($r = sql_fetch_assoc($rs)) {
             $this->oSitemapXML->write('viewlogs.php?cacheid=' . $r['cache_id'], strtotime($r['d']));

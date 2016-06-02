@@ -20,7 +20,7 @@ function get_logtype_names()
         $locale = $opt['template']['locale'];
     }
 
-    $log_types = array();
+    $log_types = [];
     $rs = sql(
         "SELECT
              `log_types`.`id`,
@@ -80,16 +80,16 @@ function get_cache_log_types($cache_id, $old_logtype, $statuslogs = true)
     $cache_status = $rCache['status'];
     $owner = $login->userid == ($rCache['user_id']);
     $admin_report = admin_has_open_report($cache_id);
-    $admin_locked = $login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], array(
+    $admin_locked = $login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [
             6,
             7
-        ));
+        ]);
 
     // build result list
     //
     // Pay attention to okapi/services/logs/submit.php when changing this!
 
-    $allowed_logtypes = array();
+    $allowed_logtypes = [];
     if ($owner || $admin_report || $admin_locked) {
         $allowed_logtypes[] = 3;   // note
     }
@@ -138,30 +138,32 @@ function teamcomment_allowed($cache_id, $logtype_id, $old_teamcomment = false)
 
     if (!$login->hasAdminPriv(ADMIN_USER)) {
         return false;
-    } elseif ($logtype_id != 3 && ($logtype_id < 9 || $logtype_id > 14)) {
+    }
+    if ($logtype_id != 3 && ($logtype_id < 9 || $logtype_id > 14)) {
         return false;
-    } elseif ($old_teamcomment) {
+    }
+    if ($old_teamcomment) {
         return true;
-    } else {
-        $rs = sql("SELECT `user_id`,`status` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
-        if ($rCache = sql_fetch_array($rs)) {
-            if ($login->userid == $rCache['user_id']) {
-                // not allowed for own caches
-                $allowed = false;
-            } elseif (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id)) {
-                // allowed for report processing by admins
-                $allowed = true;
-            } elseif ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [6,7])) {
-                // allowed for admins && locked caches, see http://forum.opencaching.de/index.php?topic=3102.msg39517#msg39517
-                $allowed = true;
-            } else {
-                $allowed = false;
-            }
+    }
+
+    $rs = sql("SELECT `user_id`,`status` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
+    if ($rCache = sql_fetch_array($rs)) {
+        if ($login->userid == $rCache['user_id']) {
+            // not allowed for own caches
+            $allowed = false;
+        } elseif (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id)) {
+            // allowed for report processing by admins
+            $allowed = true;
+        } elseif ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [6, 7])) {
+            // allowed for admins && locked caches, see http://forum.opencaching.de/index.php?topic=3102.msg39517#msg39517
+            $allowed = true;
         } else {
             $allowed = false;
         }
-        sql_free_result($rs);
-
-        return $allowed;
+    } else {
+        $allowed = false;
     }
+    sql_free_result($rs);
+
+    return $allowed;
 }

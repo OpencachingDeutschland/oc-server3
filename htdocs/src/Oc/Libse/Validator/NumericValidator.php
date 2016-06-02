@@ -7,6 +7,8 @@
 
 namespace Oc\Libse\Validator;
 
+use InvalidArgumentException;
+
 abstract class NumericValidator
 {
     private $min;
@@ -27,7 +29,7 @@ abstract class NumericValidator
         }
 
         if ($this->min > $this->max) {
-            throw new \InvalidArgumentException();
+            throw new InvalidArgumentException();
         }
     }
 

@@ -285,17 +285,17 @@ function mnu_MainMenuIndexFromPageId($menustructure, $pageid)
     /* selmenuitem contains the selected (bold) menu item */
     global $mnu_selmenuitem;
 
-    for ($i = 0, $ret = - 1; ($i < count($menustructure)) && ($ret == - 1); $i ++) {
+    for ($i = 0, $ret = -1; ($i < count($menustructure)) && ($ret == -1); $i++) {
         if ($menustructure[$i]['siteid'] == $pageid) {
             $mnu_selmenuitem = $menustructure[$i];
 
             return $i;
-        } else {
-            if (isset($menustructure[$i]['submenu'])) {
-                $ret = mnu_MainMenuIndexFromPageId($menustructure[$i]['submenu'], $pageid);
-                if ($ret != - 1) {
-                    return $i;
-                }
+        }
+
+        if (isset($menustructure[$i]['submenu'])) {
+            $ret = mnu_MainMenuIndexFromPageId($menustructure[$i]['submenu'], $pageid);
+            if ($ret != -1) {
+                return $i;
             }
         }
     }
@@ -313,7 +313,7 @@ function mnu_EchoMainMenu($selmenuid)
     global $menu;
     $c = 0;
     $max = count($menu);
-    for ($i = 0; $i < $max; $i ++) {
+    for ($i = 0; $i < $max; $i++) {
         if ($menu[$i]['visible'] == true) {
             $sTarget = isset($menu[$i]['target']) ? $menu[$i]['target'] : '';
             $sItem = '<a href="' . $menu[$i]['filename'] . '" ' . $sTarget . '>' . htmlspecialchars(t($menu[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a>';
@@ -328,7 +328,7 @@ function mnu_EchoMainMenu($selmenuid)
 
             echo $sItem . "\n";
 
-            $c ++;
+            $c++;
         }
     }
 }
@@ -348,7 +348,7 @@ function mnu_EchoSubMenu($menustructure, $pageid, $level, $bHasSubmenu)
 
     if (!$bHasSubmenu) {
         /* prüfen, ob ein Submenü vorhanden ist */
-        for ($i = 0, $bSubmenu = false; ($i < count($menustructure)) && ($bSubmenu == false); $i ++) {
+        for ($i = 0, $bSubmenu = false; ($i < count($menustructure)) && ($bSubmenu == false); $i++) {
             if (isset($menustructure[$i]['submenu'])) {
                 $bSubmenu = true;
             }
@@ -365,7 +365,7 @@ function mnu_EchoSubMenu($menustructure, $pageid, $level, $bHasSubmenu)
         }
     }
     $maxMenuStructure = count($menustructure);
-    for ($i = 0; $i < $maxMenuStructure; $i ++) {
+    for ($i = 0; $i < $maxMenuStructure; $i++) {
         if ($menustructure[$i]['visible'] == true) {
             if ($menustructure[$i]['siteid'] == $pageid) {
                 echo '<li class="' . $cssclass . ' group_active"><a href="' . $menustructure[$i]['filename'] . '">' . htmlspecialchars(t($menustructure[$i]['menustring']), ENT_COMPAT, 'UTF-8') . '</a></li>' . "\n";
@@ -397,7 +397,7 @@ function mnu_EchoSubMenu($menustructure, $pageid, $level, $bHasSubmenu)
  */
 function mnu_IsMenuParentOf($parentmenuitems, $menuitemid)
 {
-    for ($i = 0; $i < count($parentmenuitems); $i ++) {
+    for ($i = 0; $i < count($parentmenuitems); $i++) {
         if ($parentmenuitems[$i]['siteid'] == $menuitemid) {
             return true;
         }
@@ -439,19 +439,19 @@ function mnu_EchoBreadCrumb($pageid, $mainmenuindex)
 function mnu_prv_EchoBreadCrumbSubItem($pageid, $menustructure)
 {
     $maxMenuStructure = count($menustructure);
-    for ($i = 0; $i < $maxMenuStructure; $i ++) {
+    for ($i = 0; $i < $maxMenuStructure; $i++) {
         if ($menustructure[$i]['siteid'] == $pageid) {
             echo '&nbsp;&gt;&nbsp;' . htmlspecialchars(t($menustructure[$i]['menustring']), ENT_COMPAT, 'UTF-8');
 
             return;
-        } else {
-            if (isset($menustructure[$i]['submenu'])) {
-                if (mnu_IsMenuParentOf($menustructure[$i]['submenu'], $pageid)) {
-                    echo '&nbsp;&gt;&nbsp;' . htmlspecialchars(t($menustructure[$i]['menustring']), ENT_COMPAT, 'UTF-8');
-                    mnu_prv_EchoBreadCrumbSubItem($pageid, $menustructure[$i]['submenu']);
+        }
 
-                    return;
-                }
+        if (isset($menustructure[$i]['submenu'])) {
+            if (mnu_IsMenuParentOf($menustructure[$i]['submenu'], $pageid)) {
+                echo '&nbsp;&gt;&nbsp;' . htmlspecialchars(t($menustructure[$i]['menustring']), ENT_COMPAT, 'UTF-8');
+                mnu_prv_EchoBreadCrumbSubItem($pageid, $menustructure[$i]['submenu']);
+
+                return;
             }
         }
     }
@@ -464,7 +464,7 @@ function mnu_prv_EchoBreadCrumbSubItem($pageid, $menustructure)
 function mnu_EchoHelpLink($tplname)
 {
     $helplink = helppagelink($tplname);
-    if ($helplink != "") {
+    if ($helplink != '') {
         echo $helplink . '<img src="resource2/ocstyle/images/misc/32x32-help.png" /></a>';
     }
 }

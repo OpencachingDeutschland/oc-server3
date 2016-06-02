@@ -8,6 +8,11 @@
 
 require_once $opt['rootpath'] . 'lib2/smiley.inc.php';
 
+/**
+ * @param string $string
+ *
+ * @return string
+ */
 function smarty_modifier_smiley($string)
 {
     global $smiley;

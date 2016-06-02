@@ -24,10 +24,7 @@ class GeoDb
         }
         sql_free_result($rs);
 
-        sqll("
-            DELETE FROM `cache_location`
-            WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)"
-        );
+        sqll('DELETE FROM `cache_location` WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)');
     }
 
     private static function setCacheLocation($cache_id)
@@ -95,8 +92,8 @@ class GeoDb
         $rs = sqll(
             "SELECT
                 `geodb_coordinates`.`loc_id` `loc_id`,
-                (( " . $lon . " - `geodb_coordinates`.`lon` ) * ( " . $lon . " - `geodb_coordinates`.`lon` ) +
-                 ( " . $lat . " - `geodb_coordinates`.`lat` ) * ( " . $lat . " - `geodb_coordinates`.`lat` )) `dist`
+                (( " . $lon . ' - `geodb_coordinates`.`lon` ) * ( ' . $lon . " - `geodb_coordinates`.`lon` ) +
+                 ( " . $lat . ' - `geodb_coordinates`.`lat` ) * ( ' . $lat . " - `geodb_coordinates`.`lat` )) `dist`
              FROM `geodb_coordinates`
              INNER JOIN `geodb_locations` ON `geodb_coordinates`.`loc_id`=`geodb_locations`.`loc_id`
              WHERE
@@ -110,9 +107,9 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['loc_id'];
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public static function landFromLocid($locid)
@@ -137,9 +134,9 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['land'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public static function regierungsbezirkFromLocid($locid)
@@ -163,9 +160,9 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['regierungsbezirk'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public static function landkreisFromLocid($locid)
@@ -189,9 +186,8 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['regierungsbezirk'];
-        } else {
-            return '';
         }
-    }
 
+        return '';
+    }
 }

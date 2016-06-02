@@ -23,7 +23,7 @@ class labels
         $f = fopen($opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php', 'w');
         fwrite($f, "<?php\n");
 
-        $a = array();
+        $a = [];
         $rs = sql(
             "SELECT
                  `cache_attrib`.`id`,
@@ -129,7 +129,7 @@ class labels
         fwrite($f, 'labels::addLabels("log_types", "' . str_replace('"', '\\"', serialize($a)) . '");' . "\n");
 
         $nLastGroup = 1;
-        $a = array();
+        $a = [];
         $rs = sql(
             "SELECT
                  `countries_options`.`country`,
@@ -157,7 +157,7 @@ class labels
         sql_free_result($rs);
         fwrite($f, 'labels::addLabels("usercountrieslist", "' . str_replace('"', '\\"', serialize($a)) . '");' . "\n");
 
-        fwrite($f, "?>");
+        fwrite($f, '?>');
         fclose($f);
     }
 
@@ -170,9 +170,9 @@ class labels
     {
         if (isset(self::$aLabels[$name])) {
             return self::$aLabels[$name];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public static function getLabelValue($name, $id)
@@ -180,11 +180,11 @@ class labels
         if (isset(self::$aLabels[$name])) {
             if (isset(self::$aLabels[$name][$id])) {
                 return self::$aLabels[$name][$id];
-            } else {
-                return false;
             }
-        } else {
+
             return false;
         }
+
+        return false;
     }
 }

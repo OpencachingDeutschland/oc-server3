@@ -31,7 +31,7 @@ function hint_rot13($in)
     $out = '';
     $decode = true;
     $max = strlen($in);
-    for ($i = 0; $i < $max; ++ $i) {
+    for ($i = 0; $i < $max; ++$i) {
         $c = $in[$i];
         if ($decode && $c == '[') {
             $out .= '[';

@@ -188,7 +188,7 @@ function process_new_cache($notify)
             mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
         }
     } else {
-        echo "Unknown notification type: " . $notify['type'] . "<br />";
+        echo 'Unknown notification type: ' . $notify['type'] . '<br />';
     }
 
     // logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)

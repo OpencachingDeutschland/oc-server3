@@ -2,17 +2,16 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
  ***
  * Smarty plugin
  *
  * Type:     modifier<br>
  * Name:     base64encode<br>
  * Example:  {$text|base64encode}
+ *
  * @version  1.0
  *
- * @param string
+ * @param string $string
  *
  * @return string
  */

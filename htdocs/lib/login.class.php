@@ -18,7 +18,7 @@
  *
  ***************************************************************************/
 
-define('LOGIN_UNKNOWN_ERROR', - 1);     // unkown error occured
+define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured
 define('LOGIN_OK', 0);            // login succeeded
 define('LOGIN_BADUSERPW', 1);     // bad username or password
 define('LOGIN_TOOMUCHLOGINS', 2); // too many logins in short time
@@ -211,8 +211,8 @@ class login
         );
         if ($logins_count > $opt['page']['max_logins_per_hour']) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

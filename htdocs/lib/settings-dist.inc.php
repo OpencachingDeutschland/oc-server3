@@ -124,10 +124,6 @@ $opt['db']['dateformat'] = 'Y-m-d H:i:s';
 $sql_errormail = 'root';
 $sql_warntime = 180;
 
-// sql debugging
-$sql_allow_debug = 0;
-$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';  // min. 24 chars
-
 // replacements for sql()
 $sql_replacements['db'] = $dbname;
 $sql_replacements['tmpdb'] = $tmpdbname;

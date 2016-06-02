@@ -95,11 +95,6 @@ $sql_errormail = 'root';
 $dberrormail = $sql_errormail;
 $sql_warntime = 100000;
 
-$sql_allow_debug = 0;
-
-// minimum of 24 chars
-$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';
-
 // replacements for sql()
 $sql_replacements['db'] = $dbname;
 $sql_replacements['tmpdb'] = $tmpdbname;

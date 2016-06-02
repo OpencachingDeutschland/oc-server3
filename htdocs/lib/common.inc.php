@@ -325,6 +325,15 @@ function tpl_clear_page_functions()
 //read the templates and echo it to the user
 function tpl_BuildTemplate($dbdisconnect = true)
 {
+    global $sql_debug, $sqldbg_cmdNo;
+
+    if (isset($sql_debug) && $sql_debug) {
+        if (!isset($sqldbg_cmdNo) || $sqldbg_cmdNo == 0) {
+            echo 'No SQL commands on this page.';
+        }
+        die();
+    }
+
     //template handling vars
     global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate, $usr;
     //language specific expression

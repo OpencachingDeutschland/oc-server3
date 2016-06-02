@@ -406,8 +406,7 @@ function sql_internal($_dblink, $sql, $bSlave)
         }
     } else {
         // Zeitmessung für die Ausführung
-        require_once $opt['rootpath'] . 'lib/bench.inc.php';
-        $cSqlExecution = new Cbench;
+        $cSqlExecution = new CBench;
         $cSqlExecution->start();
 
         $result = mysql_query($filtered_sql, $_dblink);

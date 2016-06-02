@@ -9,8 +9,6 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-require_once $opt['rootpath'] . 'lib/bench.inc.php';
-
 $sqldbg_cmdNo = 0;
 $sqldbg_sumTimes = 0;
 
@@ -290,7 +288,7 @@ function sqldbg_execute($sql, $bSlave)
     // dont use query cache!
     $sql = sqldbg_insert_nocache($sql);
 
-    $bSqlExecution = new Cbench;
+    $bSqlExecution = new CBench;
     $bSqlExecution->start();
     $rsResult = mysql_query($sql, $dblink);
     $bError = ($rsResult == false);

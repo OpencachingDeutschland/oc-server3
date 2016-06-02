@@ -1,14 +1,13 @@
 <?php
-/****************************************************************************
- * For license information see doc/license.txt
+/***************************************************************************
+ *  For license information see doc/license.txt
  *
- * Unicode Reminder メモ
- ****************************************************************************/
+ *  Unicode Reminder メモ
+ *
+ *  Exact time mesurement
+ ***************************************************************************/
 
-//
-// bench.inc.php
-//
-class Cbench
+class CBench
 {
     public $start;
     public $stop;
@@ -38,11 +37,15 @@ class Cbench
 
     public function diff()
     {
-        return $this->stop - $this->start;
+        $result = $this->stop - $this->start;
+
+        return $result;
     }
 
     public function runTime()
     {
-        return $this->getmicrotime() - $this->start;
+        $result = $this->getmicrotime() - $this->start;
+
+        return $result;
     }
 }

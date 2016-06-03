@@ -43,12 +43,14 @@ class autoarchive
             SELECT `caches`.`cache_id`,
                    `caches`.`user_id`,
                    DATEDIFF(NOW(), `listing_last_modified`) AS `listing_age`,
-                   (SELECT MAX(`date_modified`) FROM `cache_status_modified` `csm`
-                    WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2)
-                   `disable_date`,
-                   (SELECT MAX(`user_id`) FROM `cache_status_modified` `csm`
-                    WHERE `csm`.`cache_id`=`cache_id` AND `csm`.`date_modified`=`disable_date`)
-                   `disabled_by`,
+                   (SELECT `date_modified` FROM `cache_status_modified` `csm`
+                    WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2
+                    ORDER BY `date_modified` DESC
+                    LIMIT 1) `disable_date`,
+                   (SELECT `user_id` FROM `cache_status_modified` `csm`
+                    WHERE `csm`.`cache_id`=`caches`.`cache_id` AND `csm`.`new_state`=2
+                    ORDER BY `date_modified` DESC
+                    LIMIT 1) `disabled_by`,
                    IFNULL(DATEDIFF(NOW(), `user`.`last_login`), 150) `login_lag`,
                    `ca`.`attrib_id` IS NOT NULL `seasonal_cache`
             FROM `caches`
@@ -69,10 +71,20 @@ class autoarchive
                                 ($rCache['disabled_by'] == $rCache['user_id'] && $rCache['login_lag'] >= $rCache['listing_age']))
                             &&
                             sql_value(
-                                "SELECT MAX(`date`) FROM `cache_logs` WHERE `cache_logs`.`cache_id`='&1'",
+                                "SELECT MAX(`date`) FROM `cache_logs`
+                                 WHERE `cache_logs`.`cache_id`='&1'",
                                 '',
                                 $rCache['cache_id']
-                            ) < $rCache['disable_date']
+                            ) <= $rCache['disable_date']
+                            &&
+                            sql_value(
+                                "SELECT `type` FROM `cache_logs`
+                                 WHERE `cache_id`='&1'
+                                 ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+                                 LIMIT 1",
+                                '',
+                                $rCache['cache_id']
+                            ) == cachelog::LOGTYPE_DISABLED
                         )
                     )
                 )

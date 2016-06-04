@@ -487,8 +487,13 @@ class html2text
 
         $text = trim(stripslashes($this->html));
 
-        // Run our defined search-and-replace
+        // Run our defined search-and-replace;
+        // disable 'deprecated' warning because /e modifiers are used;
+        // @todo: eliminate /e modifiers for PHP 7 compatibility
+        $erep = error_reporting();
+        error_reporting($erep & ~E_DEPRECATED);
         $text = preg_replace($this->search, $this->replace, $text);
+        error_reporting($erep);
 
         // Strip any other HTML tags
         $text = strip_tags($text, $this->allowed_tags);

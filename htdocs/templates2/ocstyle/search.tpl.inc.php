@@ -14,11 +14,10 @@
     $unknown_searchtype = _('unknown search type');
 
     // search.php -> search.tpl
-    $error_plz = '<tr><td colspan="3"><span class="errormsg">' . _('The postal code could not be found') . '</span></td></tr>';
-    $error_ort = '<tr><td colspan="3"><span class="errormsg">' . _('There does no city exist with this name') . '</span></td></tr>';
-    $error_locidnocoords = '<tr><td colspan="3"><span class="errormsg">' . _('There are no Koordinates available for the selected city') . '</span></td></tr>';
-    $error_noort = '<tr><td colspan="3"><span class="errormsg">' . _('The entered city is not valid.') . '</span></td></tr>';
-    $error_nowaypointfound = '<tr><td colspan="3"><span class="errormsg">' . _('There does no cache exist with this waypoint') . '</span></td></tr>';
+    $error_plz = '<tr><td colspan="3"><span class="errormsg">' . _('The postal code could not be found.') . '</span></td></tr>';
+    $error_ort = '<tr><td colspan="3"><span class="errormsg">' . _('The city could not be found.') . '</span></td></tr>';
+    $error_locidnocoords = '<tr><td colspan="3"><span class="errormsg">' . _('There are no coordinates available for the selected city') . '</span></td></tr>';
+    $error_nowaypointfound = '<tr><td colspan="3"><span class="errormsg">' . _('There is no cache with this waypoint.') . '</span></td></tr>';
     $error_nocoords = '<tr><td colspan="3"><span class="errormsg">' . _('The entered coordinates are no valid.') . '</span></td></tr>';
     $error_nofulltext = '<tr><td colspan="3"><span class="errormsg">' . _('The entered text is invalid.') . '</span></td></tr>';
     $error_fulltexttoolong = '<tr><td colspan="3"><span class="errormsg">' . _('The entered text contains more than 50 words.') . '</span></td></tr>';

@@ -586,7 +586,7 @@ function sql_fetch_column($rs)
             $result[] = $r[0];
         }
     }
-    mysql_free_result($rs);
+    sql_free_result($rs);
 
     return $result;
 }

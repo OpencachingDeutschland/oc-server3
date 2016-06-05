@@ -32,15 +32,36 @@
 
     <div class="changelog-changes">
 
-    <p id="current"><strong>Laufende Änderungen</strong></p>
+    <p id="v3.0.19"><strong>OC 3.0 Version 19</strong> &ndash; xx. Juni 2016</p>
+    <p>Geändert / verbessert:</p>
     <ul>
         <li>Entschlüsselte Hinweise können wieder verschlüsselt weden.</li>
         <li>Hinweisteile in [ ] werden beim Entschlüsseln ignoriert.</li>
+        <li>wählbarer Radius für die Suche nach Caches im Umkreis von Orten oder von Caches</li>
         <li>Man kann zwischen den angehängten Bildern einer Cachebeschreibung blättern.</li>
         <li>Vergrößerte Bilder werden mit einem Rechtsklick nicht mehr geschlossen.</li>
+        <li>Safari-Caches werden bei der regionalen Fundstatistik im Benutzerprofil nicht mehr mitgezählt.</li>
+        <li>Cachelisten können nicht mehr versehentlich mit dem Name &bdquo;Neue Cacheliste&ldquo;
+            erstellt werden.</li>
+        <li>Zeilenabstände bei großer Schrift in Cachebeschreibungen und Druckansicht verbessert
+            und vereinheitlicht.</li>
         <li>Der Opencaching-Chat entfällt.</li>
-        <li>Bugfix: Druckansicht von Cachebeschreibungen erscheint in gewählter Sprache.</li>
-        <li>Bugfix: Keine OConly-Benachrichtigungen für ignorierte Caches. [Bug von Version 9]</li>
+        <li>Die Karteneinstellung für die Einblendung der kleinen Übersichtskarte entfällt
+            (Übersichtskarte ist nicht mehr verfügbar).</li>
+        <li>vollständige formale Überarbeitung des Programmcodes (PSR-2, Composer u.a.)</li>
+        <li>Vorbereitungen für eine Neuorganisation des Programmcodes (PSR-4, Symfony, Frontend-Tests)</li>
+    </ul>
+    <br />
+
+    <p>Korrigiert (Bugfixes):</p>
+    <ul>
+        <li>Zusätzliche Wegpunkte in GPX-Dateien werden wieder korrekt gekennzeichnet
+            (erscheinen z.B. in GSAK nicht mehr als separate Caches). [Bug von Version 9]</li>
+        <li>Druckansicht von Cachebeschreibungen erscheint in gewählter Sprache.</li>
+        <li>Druckansicht und TXT-Download mehrsprachiger Cachebeschreibungen korrigiert
+            [Bug von Version 14/15]</li>
+        <li>Keine OConly-Benachrichtigungen für ignorierte Caches. [Bug von Version 9]</li>
+        <li>diverse kleine Fehlerkorrekturen</li>
     </ul>
     <br />
 

@@ -9,3 +9,7 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.token_legacy_authenticator:
         class: AppBundle\Legacy\Security\LegacyAuthenticator
+
+    app.service.field_note:
+        class: AppBundle\Service\FieldNoteService
+        arguments: ['@doctrine.orm.default_entity_manager', '@translator']

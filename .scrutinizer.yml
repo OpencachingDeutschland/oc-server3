@@ -6,12 +6,13 @@ build:
         before:
             - cd htdocs/
             - composer install
+            - cp app/config/parameters.yml.dist app/config/parameters.yml
     tests:
         override:
             -
                 command: './bin/console code:sniff --xml'
                 analysis:
-                    file: '../tests/cs-data'
+                    file: './tests/cs-data'
                     format: 'php-cs-checkstyle'
 
 filter:

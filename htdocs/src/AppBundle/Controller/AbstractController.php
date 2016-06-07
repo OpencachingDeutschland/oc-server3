@@ -30,4 +30,34 @@ class AbstractController extends Controller
             $this->setTarget($masterRequest->getUri());
         }
     }
+
+    /**
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function addErrorMessage($message)
+    {
+        $this->addFlash('error', $message);
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function addSuccessMessage($message)
+    {
+        $this->addFlash('success', $message);
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function addInfoMessage($message)
+    {
+        $this->addFlash('info', $message);
+    }
 }

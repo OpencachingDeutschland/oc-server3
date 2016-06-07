@@ -114,7 +114,7 @@ class coordinate
         $nLonMin = ($nLonMin - $nLonSec);
         $nLonSec = $nLonSec * 60;
         $sLon = $bLonE ? 'E ' : 'W ';
-        $sLon .= sprintf("%02d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
+        $sLon .= sprintf("%03d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
 
         return [
             'lat' => $sLat,

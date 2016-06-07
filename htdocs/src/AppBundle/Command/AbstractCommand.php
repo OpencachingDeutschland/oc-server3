@@ -5,11 +5,11 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-namespace Oc\Console\Command;
+namespace AppBundle\Command;
 
 use Symfony\Component\Console\Command\Command;
 
-class AbstractCommand extends Command
+abstract class AbstractCommand extends Command
 {
     const CODE_SUCCESS  = 0;
     const CODE_ERROR    = 1;
@@ -27,6 +27,6 @@ class AbstractCommand extends Command
     {
         parent::__construct($name);
 
-        $this->rootPath = realpath(__DIR__ . '/../../../../');
+        $this->rootPath = realpath(__DIR__ . '/../../../');
     }
 }

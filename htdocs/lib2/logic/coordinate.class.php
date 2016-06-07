@@ -111,8 +111,8 @@ class coordinate
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
         $nLonSec = $nLonMin - floor($nLonMin);
-        $nLonMin = ($nLonMin - $nLonSec);
-        $nLonSec = $nLonSec * 60;
+        $nLonMin -= $nLonSec;
+        $nLonSec *= 60;
         $sLon = $bLonE ? 'E ' : 'W ';
         $sLon .= sprintf("%03d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
 
@@ -142,8 +142,8 @@ class coordinate
         //Geographische Länge lw und Breite bw im WGS84 Datum
         if ($this->nLon == 0 || $this->nLat == 0) {
             return [
-                'zone' => "",
-                'letter' => "",
+                'zone' => '',
+                'letter' => '',
                 'north' => 'N ' . 0,
                 'east' => 'E ' . 0
             ];
@@ -151,8 +151,8 @@ class coordinate
         if ($this->nLon <= - 180 || $this->nLon > 180 || $this->nLat <= - 80 || $this->nLat >= 84) {
             // Werte nicht im Bereich des UTM Systems -180° <= nLon < +180°, -80° < nLat < 84° N
             return [
-                "",
-                "",
+                '',
+                '',
                 0,
                 0
             ];
@@ -386,7 +386,7 @@ class coordinate
            gegeben sein. Berechnet werden Rechtswert rw und Hochwert hw.*/
 
         //Geographische Länge lp und Breite bp im Potsdam Datum
-        if ($lp == "" || $bp == "") {
+        if ($lp == '' || $bp == '') {
             return [
                 0,
                 0

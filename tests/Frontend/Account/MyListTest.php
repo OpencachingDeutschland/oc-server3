@@ -11,7 +11,10 @@ use Oc\Frontend\AbstractFrontendTest;
 
 class MyListTest extends AbstractFrontendTest
 {
-
+    /**
+     * @group frontend
+     * @group frontend-account
+     */
     public function testMyWatchesPage()
     {
         // check if issue with Undefined variable appears again ;-)

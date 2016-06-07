@@ -15,7 +15,7 @@ class AbstractController extends Controller
      *
      * There is no container available in the constructor of a controller, so we override setContainer() and use this
      *
-     * @param ContainerInterface|null $container A ContainerInterface instance or null
+     * @param \Symfony\Component\DependencyInjection\ContainerInterface|null $container A ContainerInterface instance or null.
      *
      * @return void
      */

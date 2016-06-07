@@ -42,7 +42,7 @@ class LegacyUser implements UserInterface
      * and populated in any number of different ways when the user object
      * is created.
      *
-     * @return (Role|string)[] The user roles
+     * @return array The user roles
      */
     public function getRoles()
     {
@@ -104,6 +104,7 @@ class LegacyUser implements UserInterface
      *
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
+     * @return void
      */
     public function eraseCredentials()
     {
@@ -113,7 +114,7 @@ class LegacyUser implements UserInterface
     /**
      * @param string $userName
      *
-     * @return LegacyUser
+     * @return \AppBundle\Legacy\User\LegacyUser
      */
     public function setUserName($userName)
     {
@@ -125,7 +126,7 @@ class LegacyUser implements UserInterface
     /**
      * @param int $id
      *
-     * @return LegacyUser
+     * @return \AppBundle\Legacy\User\LegacyUser
      */
     public function setId($id)
     {

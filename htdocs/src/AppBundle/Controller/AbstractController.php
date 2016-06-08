@@ -23,6 +23,10 @@ class AbstractController extends Controller
     {
         parent::setContainer($container);
 
+        if ($container === null) {
+            return;
+        }
+
         $requestStack = $container->get('request_stack');
         /** @var \Symfony\Component\HttpFoundation\Request $masterRequest */
         $masterRequest = $requestStack->getMasterRequest();

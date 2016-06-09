@@ -14,7 +14,8 @@ class MyListTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-account
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     *
+     * @return void
      */
     public function testMyWatchesPage()
     {

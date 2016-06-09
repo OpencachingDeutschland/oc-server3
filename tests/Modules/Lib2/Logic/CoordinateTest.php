@@ -31,6 +31,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getUTM()
+     *
+     * @return void
      */
     public function testUTM()
     {
@@ -78,6 +80,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getGK()
+     *
+     * @return void
      */
 
     public function testGK()
@@ -106,6 +110,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getSwissGrid()
+     *
+     * @return void
      */
     public function testSwissGrid()
     {
@@ -133,6 +139,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getRD()
+     *
+     * @return void
      */
     public function testDutchGrid()
     {
@@ -151,6 +159,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getQTH()
+     *
+     * @return void
      */
     public function testQTHLocator()
     {
@@ -178,6 +188,8 @@ class CoordinateTest extends AbstractModuleTest
     /**
      * @group unit-tests
      * @covers \coordinate::getDecimalMinutes
+     *
+     * @return void
      */
     public function testFormatConversions()
     {

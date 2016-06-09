@@ -15,7 +15,10 @@ class WayPointSearchTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-search
-     * @throws ElementNotFoundException
+     *
+     * @throws ElementNotFoundException if element userinput is not found
+     *
+     * @return void
      */
     public function testOcWayPointSearch()
     {
@@ -32,7 +35,10 @@ class WayPointSearchTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-search
-     * @throws ElementNotFoundException
+     *
+     * @throws ElementNotFoundException if element userinput is not found
+     *
+     * @return void
      */
     public function testInvalidOcWayPointSearch()
     {

@@ -45,6 +45,8 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
      * helper method for pages which needs an active login
      *
      * @throws ElementNotFoundException
+     *
+     * @return void
      */
     protected function login()
     {

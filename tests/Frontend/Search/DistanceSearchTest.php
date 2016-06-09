@@ -15,7 +15,10 @@ class DistanceSearchTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-search
-     * @throws ElementNotFoundException
+     *
+     * @throws ElementNotFoundException if the searched element is not found
+     *
+     * @return void
      */
     public function testDistanceSearch()
     {
@@ -34,7 +37,10 @@ class DistanceSearchTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-search
+     *
      * @throws ElementNotFoundException
+     *
+     * @return void
      */
     public function testInvalidOcWayPointSearch()
     {

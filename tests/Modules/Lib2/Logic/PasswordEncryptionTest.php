@@ -11,7 +11,12 @@ use Oc\Modules\AbstractModuleTest;
 
 class PasswordEncryptionTest extends AbstractModuleTest
 {
-
+    /**
+     * @group unit-tests
+     * @covers \crypt::encryptPassword()
+     *
+     * @return void
+     */
     public function testPasswordEncryption()
     {
         global $opt;
@@ -31,5 +36,4 @@ class PasswordEncryptionTest extends AbstractModuleTest
             $encryptedPassword
         );
     }
-
 }

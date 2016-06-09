@@ -8,6 +8,7 @@
 namespace Oc\Frontend;
 
 use Behat\Mink\Driver\GoutteDriver;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 
 abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
@@ -43,7 +44,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
     /**
      * helper method for pages which needs an active login
      *
-     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws ElementNotFoundException
      */
     protected function login()
     {

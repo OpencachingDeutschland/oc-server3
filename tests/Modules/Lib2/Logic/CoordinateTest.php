@@ -25,14 +25,18 @@ N 52.67578° E 006.77300°
 OC85A9 Europa (Norwegen)
 N 60.63367° E 004.81313°
 */
+
 class CoordinateTest extends AbstractModuleTest
 {
     /**
+     * @group unit-tests
      * @covers \coordinate::getUTM()
+     *
+     * @return void
      */
     public function testUTM()
     {
-        $coord = new \coordinate(51.52775, - 120.89720);
+        $coord = new \coordinate(51.52775, -120.89720);
         $utm = $coord->getUTM();
 
         self::assertEquals('10', $utm['zone']);
@@ -40,7 +44,7 @@ class CoordinateTest extends AbstractModuleTest
         self::assertEquals('N 5710611', $utm['north']);
         self::assertEquals('E 645865', $utm['east']);
 
-        $coord = new \coordinate(- 8.81687, 13.24057);
+        $coord = new \coordinate(-8.81687, 13.24057);
         $utm = $coord->getUTM();
 
         self::assertEquals('33', $utm['zone']);
@@ -74,17 +78,20 @@ class CoordinateTest extends AbstractModuleTest
     }
 
     /**
+     * @group unit-tests
      * @covers \coordinate::getGK()
+     *
+     * @return void
      */
 
     public function testGK()
     {
-        $coord = new \coordinate(51.52775, - 120.89720);
+        $coord = new \coordinate(51.52775, -120.89720);
         $gk = $coord->getGK();
 
         self::assertEquals('R -39562771 H 5710022', $gk);
 
-        $coord = new \coordinate(- 8.81687, 13.24057);
+        $coord = new \coordinate(-8.81687, 13.24057);
         $gk = $coord->getGK();
 
         self::assertEquals('R 4636588 H -975608', $gk);
@@ -101,16 +108,19 @@ class CoordinateTest extends AbstractModuleTest
     }
 
     /**
+     * @group unit-tests
      * @covers \coordinate::getSwissGrid()
+     *
+     * @return void
      */
     public function testSwissGrid()
     {
-        $coord = new \coordinate(51.52775, - 120.89720);
+        $coord = new \coordinate(51.52775, -120.89720);
         $swissGrid = $coord->getSwissGrid();
 
         self::assertEquals('-3944504 / 8019927', $swissGrid['coord']);
 
-        $coord = new \coordinate(- 8.81687, 13.24057);
+        $coord = new \coordinate(-8.81687, 13.24057);
         $swissGrid = $coord->getSwissGrid();
 
         self::assertEquals('1499586 / -6904936', $swissGrid['coord']);
@@ -127,7 +137,10 @@ class CoordinateTest extends AbstractModuleTest
     }
 
     /**
+     * @group unit-tests
      * @covers \coordinate::getRD()
+     *
+     * @return void
      */
     public function testDutchGrid()
     {
@@ -144,16 +157,19 @@ class CoordinateTest extends AbstractModuleTest
     }
 
     /**
+     * @group unit-tests
      * @covers \coordinate::getQTH()
+     *
+     * @return void
      */
     public function testQTHLocator()
     {
-        $coord = new \coordinate(51.52775, - 120.89720);
+        $coord = new \coordinate(51.52775, -120.89720);
         $qthLocator = $coord->getQTH();
 
         self::assertEquals('CO91NM', $qthLocator);
 
-        $coord = new \coordinate(- 8.81687, 13.24057);
+        $coord = new \coordinate(-8.81687, 13.24057);
         $qthLocator = $coord->getQTH();
 
         self::assertEquals('JI61OE', $qthLocator);
@@ -170,11 +186,14 @@ class CoordinateTest extends AbstractModuleTest
     }
 
     /**
+     * @group unit-tests
      * @covers \coordinate::getDecimalMinutes
+     *
+     * @return void
      */
     public function testFormatConversions()
     {
-        $coord = new \coordinate(51.52775, - 120.89720);
+        $coord = new \coordinate(51.52775, -120.89720);
         $decimalMin = $coord->getDecimalMinutes();
 
         self::assertEquals("N 51° 31.665'", $decimalMin['lat']);
@@ -185,7 +204,7 @@ class CoordinateTest extends AbstractModuleTest
         self::assertEquals("N 51° 31' 39''", $decimalMinSec['lat']);
         self::assertEquals("W 120° 53' 49''", $decimalMinSec['lon']);
 
-        $coord = new \coordinate(- 8.81687, 13.24057);
+        $coord = new \coordinate(-8.81687, 13.24057);
         $decimalMin = $coord->getDecimalMinutes();
 
         self::assertEquals("S 08° 49.012'", $decimalMin['lat']);

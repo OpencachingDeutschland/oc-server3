@@ -103,7 +103,8 @@ function php_errormail($errmsg)
     }
 
     if ($sendMail === false) {
-        throw new \RuntimeException('the E-Mail can not be send.');
+        // @todo implement logging
+        // throw new \RuntimeException('the E-Mail can not be send.');
     }
 }
 

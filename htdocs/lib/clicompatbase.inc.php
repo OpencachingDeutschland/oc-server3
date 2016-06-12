@@ -510,7 +510,8 @@ function sql_warn($warnmessage)
     if (admin_errormail($sql_errormail, 'sql_warn', $email_content, $emailheaders)) {
         $sendMail = @mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
         if ($sendMail === false) {
-            throw new \RuntimeException('the E-Mail can not be send.');
+            // @todo implement logging
+            // throw new \RuntimeException('the E-Mail can not be send.');
         }
     }
 }

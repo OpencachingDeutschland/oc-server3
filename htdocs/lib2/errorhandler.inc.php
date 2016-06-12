@@ -103,7 +103,8 @@ function php_errormail($errmsg)
     }
 
     if ($sendMail === false) {
-        throw new \RuntimeException('the E-Mail can not be send.');
+        // @todo implement logging
+        // throw new \RuntimeException('the E-Mail can not be send.');
     }
 }
 
@@ -134,7 +135,7 @@ function admin_errormail($to, $errortype, $message, $headers)
             $errorlog_path
         );
     } catch (Exception $e) {
-        // @todo implement login
+        // @todo implement logging
     }
     // @filesize() may still return the old size here, because logging takes place
     // asynchronously. Instead we calculate the new size:

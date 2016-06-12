@@ -98,7 +98,7 @@ function cracklib_checkpw($pw, $addwords)
             try {
                 dl('crack.so');
             } catch (Exception $e) {
-                // @todo implement login
+                // @todo implement logging
             }
         }
 

@@ -209,7 +209,7 @@ class cookie
                     try {
                         session_destroy();
                     } catch (Exception $e) {
-                        // @todo implement login
+                        // @todo implement logging
                     }
                 } else {
                     session_write_close();

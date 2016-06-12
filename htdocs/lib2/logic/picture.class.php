@@ -443,7 +443,7 @@ class picture
                 try {
                     rename($this->deleted_filename($filename), $this->getFilename());
                 } catch (Exception $e) {
-                    // @todo implement login
+                    // @todo implement logging
                 }
             }
         }
@@ -490,20 +490,20 @@ class picture
             try {
                 rename($filename, $this->deleted_filename($filename));
             } catch (Exception $e) {
-                // @todo implement login
+                // @todo implement logging
             }
         } else {
             try {
                 unlink($filename);
             } catch (Exception $e) {
-                // @todo implement login
+                // @todo implement logging
             }
         }
 
         try {
             unlink($this->getThumbFilename());
         } catch (Exception $e) {
-            // @todo implement login
+            // @todo implement logging
         }
 
         return true;

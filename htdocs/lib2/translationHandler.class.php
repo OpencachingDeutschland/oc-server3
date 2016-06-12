@@ -96,7 +96,7 @@ class TranslationHandler
                 )
             );
         } catch (Exception $e) {
-            // @todo implement login
+            // @todo implement logging
         }
     }
 

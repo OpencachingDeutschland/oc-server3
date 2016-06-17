@@ -13,6 +13,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Geocache
 {
+    const GEOCACHE_TYPE_UNKNOWN = 1;
+    const GEOCACHE_TYPE_TRADITIONAL = 2;
+    const GEOCACHE_TYPE_MULTI = 3;
+    const GEOCACHE_TYPE_VIRTUAL = 4;
+    const GEOCACHE_TYPE_WEBCAM = 5;
+    const GEOCACHE_TYPE_EVENT = 6;
+    const GEOCACHE_TYPE_QUIZ = 7;
+    const GEOCACHE_TYPE_MATH = 8;
+    const GEOCACHE_TYPE_MOVING = 9;
+    const GEOCACHE_TYPE_DRIVE_IN = 10;
+
+    const EVENT_CACHE_TYPES = [
+        self::GEOCACHE_TYPE_EVENT,
+    ];
+
     /**
      * @var string
      *
@@ -91,9 +106,9 @@ class Geocache
     private $latitude;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="type", type="boolean", nullable=false)
+     * @ORM\Column(name="type", type="integer", nullable=false)
      */
     private $type;
 
@@ -287,7 +302,7 @@ class Geocache
     /**
      * Set node
      *
-     * @param bool $node
+     * @param int $node
      *
      * @return \AppBundle\Entity\Geocache
      */
@@ -527,7 +542,7 @@ class Geocache
     /**
      * Set type
      *
-     * @param bool $type
+     * @param int $type
      *
      * @return \AppBundle\Entity\Geocache
      */

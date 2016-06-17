@@ -30,7 +30,10 @@ yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
 yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
+yum -y install gcc-c++ ruby ruby-devel
 
+label "Install crowdin-cli"
+gem install crowdin-cli
 
 label "Adjust Apache and MariaDB configuration"
 # set max_allowed_packet
@@ -234,6 +237,8 @@ chmod 0777 /usr/bin/composer
 label "Composer install"
 cd /var/www/html/htdocs && composer install
 
+label "Download translations from Crowdin"
+cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
 
 label "Install Database Dump from '$DUMP_URL'"
 label "Download SQL Dump"

@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FieldNote
 {
+    const LOG_TYPE_FOUND = GeocacheLog::LOG_TYPE_FOUND;
+    const LOG_TYPE_NOT_FOUND = GeocacheLog::LOG_TYPE_NOT_FOUND;
+    const LOG_TYPE_NOTE = GeocacheLog::LOG_TYPE_NOTE;
+    const LOG_TYPE_NEEDS_MAINTENANCE = 1000;
+    
     /**
      * @var int
      *

@@ -357,7 +357,7 @@ class User
     /**
      * Set node
      *
-     * @param bool $node
+     * @param int $node
      *
      * @return \AppBundle\Entity\User
      */
@@ -1043,7 +1043,7 @@ class User
     /**
      * Get watchmailNextmail
      *
-     * @return \DateTime
+     * @return \DateTime|string
      */
     public function getWatchmailNextmail()
     {

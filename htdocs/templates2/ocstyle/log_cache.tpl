@@ -215,6 +215,7 @@ function show_tip(text)
 <input type="hidden" name="scrollposy" value="{$scrollposy}" />
 <input type="hidden" id="needs_maintenance2" name="needs_maintenance2" value="0" />
 <input type="hidden" id="listing_outdated2" name="listing_outdated2" value="0" />
+<input type="hidden" id="fieldnoteid" name="fieldnoteid" value="{$fieldnoteid}" />
 <table class="table">
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr><td colspan="2"></td></tr>

@@ -31,5 +31,8 @@ filter:
         - 'htdocs/vendor/*'
 
 checks:
-    php: true
+    php:
+        excluded_dependencies:
+            - symfony/symfony
+            - twig/extensions
     javascript: true

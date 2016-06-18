@@ -398,8 +398,8 @@ function mapLoad()
 	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);
 	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);
 
-	moInfoWindow = new google.maps.InfoWindow();
-	moWpInfoWindow = new google.maps.InfoWindow();
+    moInfoWindow = new google.maps.InfoWindow();
+    moWpInfoWindow = new google.maps.InfoWindow();
 
 	moSearchList = document.getElementById('mapselectlist');
 	moMapSearch = document.getElementById('mapsearch');
@@ -487,17 +487,19 @@ function map_mousemove(event)
 
 function map_clicked()
 {
-	if (bFullscreen)
-	{
-		if (document.getElementById("sidebar").style.display != 'none')
-			toggle_sidebar();
-	}
-	else
-		dataload_on_filterchange();
-	mapselectlist_hide();		// firefox needs this
-	moWpInfoWindow.close();
-	close_infowindow(true);
-	permalinkbox_hide();
+    if (bFullscreen)
+    {
+        if (document.getElementById("sidebar").style.display != 'none') {
+            toggle_sidebar();
+        }
+    }
+    else {
+        dataload_on_filterchange();
+    }
+    mapselectlist_hide();        // firefox needs this
+    moWpInfoWindow.close();
+    close_infowindow(true);
+    permalinkbox_hide();
 }
 
 function updateCopyrights()
@@ -505,21 +507,29 @@ function updateCopyrights()
 	if (copyrightDiv == null )
 		return;
 
-	var newMapType = moMap.getMapTypeId();
+    var newMapType = moMap.getMapTypeId();
+    var mapIcon = document.querySelector("#googlemap .gm-style div a div");
 
-	if (newMapType == "OSM" || newMapType == "MQ" || newMapType == "OCM")
-	{
-		{/literal}
-		if (newMapType == "OCM")
-			copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
-		else
-			copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
-		if (newMapType == "MQ")
-			copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
-		{literal}
-	}
-	else
-		copyrightDiv.innerHTML = "";
+    if (newMapType == "OSM" || newMapType == "MQ" || newMapType == "OCM")
+    {
+        {/literal}
+        if (newMapType == "OCM")
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
+        else
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
+        if (newMapType == "MQ")
+            copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
+        {literal}
+        if (mapIcon != null) {
+            mapIcon.style.display = "none";
+        }
+    }
+    else {
+        copyrightDiv.innerHTML = "";
+        if (mapIcon != null) {
+            mapIcon.style.display = "block";
+        }
+    }
 }
 
 
@@ -631,7 +641,7 @@ function dataload_on_filterchange()
 {
 	if (bFilterChanged)
 		queue_dataload(100);
-}	
+}
 
 function data_load()
 {
@@ -2337,7 +2347,7 @@ function toggle_attribselection(bSaveCookies)
 								<img src="resource2/{$opt.template.style}/images/misc/hint.gif" alt="" />
 								<small>{t 1=$maxrecords}Max. %1 caches can be displayed with Microsoft Internet Explorer.{/t}
 							</td></tr>
-						{/if} 
+						{/if}
 						<tr><td>{t}Cache icons:{/t}</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
 						<tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off):{/t}</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
 						<tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}OK{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>

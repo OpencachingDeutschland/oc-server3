@@ -1266,3 +1266,5 @@ div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
 .flash-messages .alert-success { color: #4F8A10; background-color: #DFF2BF; }
 .flash-messages .alert-info { color: #00529B; background-color: #BDE5F8; }
 .flash-messages .alert-danger { color: #D8000C; background-color: #FFBABA; }
+
+#googlemap .gm-style div a div {display:none;}

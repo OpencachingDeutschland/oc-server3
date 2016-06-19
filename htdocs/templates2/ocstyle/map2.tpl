@@ -426,6 +426,7 @@ function mapLoad()
 	google.maps.event.addListener(moMap, "maptypeid_changed", function(){map_maptypechanged()});
 	google.maps.event.addListener(moMap, "mousemove", function(event){map_mousemove(event)});
 	google.maps.event.addListener(moMap, "click", function(){map_clicked()});
+	google.maps.event.addListener(moMap, "tilesloaded", function(){updateCopyrights()});
 	// google.maps.event.addListener(moMap, "rightclick", function(){toggle_sidebar(false)});
 
 	if (msInitWaypoint != "")

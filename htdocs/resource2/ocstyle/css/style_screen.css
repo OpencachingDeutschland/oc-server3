@@ -1253,3 +1253,5 @@ div.mapoptions td {
 div.gm-stars { display:none; }
 div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
 .gm-iw, .gm-iw-table { font-size:11px; }
+
+#googlemap .gm-style div a div {display:none;}

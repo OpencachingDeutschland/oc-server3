@@ -67,6 +67,7 @@
             <li>Druckansicht und TXT-Download mehrsprachiger Cachebeschreibungen korrigiert
                 [Bug von Version 14/15]</li>
             <li>Keine OConly-Benachrichtigungen für ignorierte Caches. [Bug von Version 9]</li>
+            <li>Anpassung der Cachemap an Google Richtlinien</li>
             <li>diverse kleine Fehlerkorrekturen</li>
         </ul>
         <br />

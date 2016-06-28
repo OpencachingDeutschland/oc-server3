@@ -83,7 +83,8 @@ function html2plaintext($text, $texthtml0, $wrap)
         $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
     } else {
         // convert smilies ...
-        for ($n = 0; $n < count($smiley['image']); $n ++) {
+        $countSmileyImage = count($smiley['image']);
+        for ($n = 0; $n < $countSmileyImage; $n ++) {
             $text = mb_ereg_replace(
                 "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
                 "[s![" . $smiley['text'][$n] . "]!s]",

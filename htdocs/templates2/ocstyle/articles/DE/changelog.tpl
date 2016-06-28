@@ -38,7 +38,7 @@
         </ul>
         <br />
 
-        <p id="v3.0.19"><strong>OC 3.0 Version 19</strong> &ndash; xx. Juni 2016</p>
+        <p id="v3.0.19"><strong>OC 3.0 Version 19</strong> &ndash; 28. Juni 2016</p>
         <p>Geändert / verbessert:</p>
         <ul>
             <li>Entschlüsselte Hinweise können wieder verschlüsselt weden.</li>

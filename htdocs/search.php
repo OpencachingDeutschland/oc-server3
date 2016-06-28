@@ -2405,7 +2405,7 @@ function outputLocidSelectionForm($locSql, $options)
     global $tpl;
     global $locline, $bgcolor1, $bgcolor2;
 
-    require_once __DIR__ . '/lib2/logic/geodb.inc.php';
+    require_once __DIR__ . '/lib2/logic/geodb.class.php';
 
     $urlparamString = prepareLocSelectionForm($options) . '&locid={locid}';
 

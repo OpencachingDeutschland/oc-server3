@@ -397,7 +397,8 @@ function mnu_EchoSubMenu($menustructure, $pageid, $level, $bHasSubmenu)
  */
 function mnu_IsMenuParentOf($parentmenuitems, $menuitemid)
 {
-    for ($i = 0; $i < count($parentmenuitems); $i ++) {
+    $countParentMenuItems = count($parentmenuitems);
+    for ($i = 0; $i < $countParentMenuItems; $i ++) {
         if ($parentmenuitems[$i]['siteid'] == $menuitemid) {
             return true;
         }

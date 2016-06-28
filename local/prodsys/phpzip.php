@@ -82,7 +82,8 @@ function checkpath($path)
         return false;
     }
 
-    for ($i = 0; $i < count($parts); $i ++) {
+    $countParts = count($parts);
+    for ($i = 0; $i < $countParts; $i ++) {
         if (($parts[$i] == '..') || ($parts[$i] == '.')) {
             return false;
         }

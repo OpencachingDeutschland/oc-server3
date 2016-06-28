@@ -28,7 +28,8 @@ class maillog
     {
         global $opt;
 
-        $dbc = mysql_connect(
+        // @todo change deprecated function
+        $dbc = @mysql_connect(
             $opt['system']['maillog']['syslog_db_host'],
             $opt['system']['maillog']['syslog_db_user'],
             $opt['system']['maillog']['syslog_db_password'],

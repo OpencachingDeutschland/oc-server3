@@ -50,7 +50,8 @@ class mailcheck
 
         // sort MX records
         $mxs = [];
-        for ($i = 0; $i < count($mx_records); $i ++) {
+        $countMxRecords = count($mx_records);
+        for ($i = 0; $i < $countMxRecords; $i ++) {
             $mxs[$i] = [
                 'mx' => $mx_records[$i],
                 'prio' => $mx_weight[$i]
@@ -60,7 +61,8 @@ class mailcheck
         reset($mxs);
 
         // check address with each MX until one mailserver can be connected
-        for ($i = 0; $i < count($mxs); $i ++) {
+        $countMxs = count($mxs);
+        for ($i = 0; $i < $countMxs; $i ++) {
             $retval = $this->pCheckAddress($sAddress, $mxs[$i]['mx']);
             if ($retval != CA_ERROR_CONNECT) {
                 return $retval;

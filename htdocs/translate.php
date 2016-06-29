@@ -688,7 +688,8 @@ function xmlexport()
         $writer->writeAttribute('id', $r['id']);
 
         $writer->writeElement('code', $r['text']);
-        for ($n = 0; $n < count($lang); $n ++) {
+        $countLang = count($lang);
+        for ($n = 0; $n < $countLang; $n ++) {
             $writer->writeElement(
                 $lang[$n],
                 sql_value(
@@ -895,7 +896,8 @@ function textimport($lang)
 
     $saTexts = [];
 
-    for ($i = 0; $i + 1 < count($lines); $i += 4) {
+    $countLines = count($lines);
+    for ($i = 0; $i + 1 < $countLines; $i += 4) {
         $nId = trim($lines[$i]);
         $sEnText = trim($lines[$i + 1]);
         $sLangText = trim($lines[$i + 2]);

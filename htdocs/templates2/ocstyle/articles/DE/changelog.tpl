@@ -14,6 +14,7 @@
 
     <p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im Opencaching- und im <em>Altmetall</em>-Blog:</p>
     <ul>
+        <li><a href="https://blog.dafb-o.de/oc-3-0v18-marker-bei-koordinatensuche-fotos-sortieren-koordinatenumrechnung/">Version 18</a>: Marker bei Koordinatensuche, Fotos sortieren, Koordinatenumrechnung</li>
         <li><a href="http://blog.opencaching.de/2016/03/oc-3-0v17-wartungszustand-loggen-koordinatenhistorien/">Version 17</a>: Wartungszustand loggen, Koordinatenhistorien</li>
         <li><a href="http://blog.opencaching.de/2016/02/oc-30v16/">Version 16</a>: Sortierbare Suche, Unicode-Zeichen uvm.</li>
         <li><a href="http://blog.opencaching.de/2015/09/oc-30v14/">Version 15</a>: Weitergabe privater Cachelisten, Lesezeichen für Cachelisten, Anzeige der Empfehlungen</li>

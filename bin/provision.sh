@@ -30,7 +30,10 @@ yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
 yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
+yum -y install gcc-c++ ruby ruby-devel
 
+label "Install crowdin-cli"
+gem install crowdin-cli
 
 label "Adjust Apache and MariaDB configuration"
 # set max_allowed_packet
@@ -77,9 +80,6 @@ ServerAdmin root@localhost
 </Directory>
 
 DocumentRoot "/var/www/html/htdocs"
-ErrorDocument 404 /404.php
-RewriteEngine On
-RewriteRule ^/((OC|GC)[A-Za-z0-9]{1,5})\$ /searchplugin.php?userinput=\$1 [NC]
 
 <Directory "/var/www">
     AllowOverride None
@@ -91,6 +91,16 @@ RewriteRule ^/((OC|GC)[A-Za-z0-9]{1,5})\$ /searchplugin.php?userinput=\$1 [NC]
     Options Indexes FollowSymLinks
     AllowOverride None
     Require all granted
+
+    ErrorDocument 404 /404.php
+
+    RewriteEngine On
+    RewriteRule ^((OC|GC)[A-Za-z0-9]{1,5})$ /searchplugin.php?userinput=\$1 [NC,L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule ^(.*)$ /symfony_app.php [QSA,L]
 </Directory>
 
 <Directory "/var/www/html/htdocs/statpics">
@@ -217,7 +227,6 @@ sed -i 's/\/path\/to\/htdocs\/download\/zip\//\/var\/www\/html\/htdocs\/download
 
 label "Install Composer"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '92102166af5abdb03f49ce52a40591073a7b859a86e8ff13338cf7db58a19f7844fbc0bb79b2773bf30791e935dbd938') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/bin/composer
@@ -227,6 +236,8 @@ chmod 0777 /usr/bin/composer
 label "Composer install"
 cd /var/www/html/htdocs && composer install
 
+label "Download translations from Crowdin"
+cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
 
 label "Install Database Dump from '$DUMP_URL'"
 label "Download SQL Dump"

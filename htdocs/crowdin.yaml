@@ -1,0 +1,11 @@
+project_identifier: opencaching
+base_url: https://api.crowdin.com
+base_path: /var/www/html/htdocs/
+
+files:
+  -
+    source: /app/Resources/translations/constants.en.yml
+    translation: /app/Resources/translations/constants.%two_letters_code%.yml
+  -
+    source: /app/Resources/translations/messages.en.yml
+    translation: /app/Resources/translations/messages.%two_letters_code%.yml

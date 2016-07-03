@@ -5,7 +5,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/web.inc.php';
 
 $sUserCountry = $login->getUserCountry();
 

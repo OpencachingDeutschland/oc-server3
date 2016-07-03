@@ -318,8 +318,7 @@ function sql_internal($dblink, $sql)
     } else {
         // measure time
         if ($opt['db']['warn']['time'] > 0) {
-            require_once $opt['rootpath'] . 'lib2/bench.inc.php';
-            $cSqlExecution = new Cbench;
+            $cSqlExecution = new CBench;
             $cSqlExecution->start();
         }
 

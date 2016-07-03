@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching)
 Opencaching.de Code Repository
 ==============================
 
@@ -28,6 +28,10 @@ so do not derive any working-branches from it. Use master instead.
 
 Major OC.de site updates are version-tagged. See the [changelog](http://www.opencaching.de/articles.php?page=changelog&locale=EN)
 for a detailed list.
+
+Translation [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching)
+-----------
+This Project uses crowdin to translate all words and strings in the code. It starts with Version 3.0.19 of this code. We are looking for native speakers who will help to translate. There is a review process wich needs at least two translators to validate the translation of each other. To join the translation team - use this invitation url: (https://crowdin.com/project/opencaching/invite)
 
 Contributions
 -------------

@@ -42,13 +42,9 @@ function scan($dir, $subdirs)
 function test_encoding($path)
 {
     static $ur_exclude = [  // no unicode reminder needed
-        'lang/de/ocstyle/search1/search.result.caches',
-        'lib2/b2evo-captcha',
-        'lib2/HTMLPurifier',
         'lib2/html2text.class.php',
         'lib2/imagebmp.inc.php',
         'lib2/Net/IDNA2',
-        'lib2/smarty',
     ];
 
     $contents = file_get_contents($path, false, null, 0, 2048);

@@ -170,8 +170,7 @@ if ($dblink === false) {
 $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 
 // zeitmessung
-require_once $rootpath . 'lib/bench.inc.php';
-$bScriptExecution = new Cbench;
+$bScriptExecution = new CBench;
 $bScriptExecution->start();
 
 function load_domain_settings()
@@ -325,6 +324,15 @@ function tpl_clear_page_functions()
 //read the templates and echo it to the user
 function tpl_BuildTemplate($dbdisconnect = true)
 {
+    global $sql_debug, $sqldbg_cmdNo;
+
+    if (isset($sql_debug) && $sql_debug) {
+        if (!isset($sqldbg_cmdNo) || $sqldbg_cmdNo == 0) {
+            echo 'No SQL commands on this page.';
+        }
+        die();
+    }
+
     //template handling vars
     global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate, $usr;
     //language specific expression
@@ -383,7 +391,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
         tpl_set_var('license_disclaimer', '');
     }
 
-    $bTemplateBuild = new Cbench;
+    $bTemplateBuild = new CBench;
     $bTemplateBuild->Start();
 
     //set {functionsbox}

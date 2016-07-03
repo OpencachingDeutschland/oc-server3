@@ -6,6 +6,9 @@
  ***************************************************************************/
 
 // prevent old OCProp versions
+use AppBundle\Entity\FieldNote;
+use AppBundle\Entity\GeocacheLog;
+
 if ((isset($_POST['submit']) || isset($_POST['submitform'])) && !isset($_POST['version3'])) {
     die('Your client may be outdated!');
 }
@@ -28,12 +31,24 @@ if ($login->userid == 0) {
     $tpl->redirect_login();
 }
 
+// get user object
+$user = new user($login->userid);
+
 // get cache_id if not given
 $cacheId = 0;
 if (isset($_REQUEST['wp'])) {
     $cacheId = cache::cacheIdFromWP($_REQUEST['wp']);
 } elseif (isset($_REQUEST['cacheid'])) { // Ocprop
     $cacheId = $_REQUEST['cacheid'];
+}
+
+$fieldNote = [];
+if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform'])) {
+    $rs = sql('SELECT * FROM field_note WHERE `id` = &1 AND `user_id` = &2', (int)$_GET['fieldnoteid'], (int)$user->getUserId());
+    $fieldNote = sql_fetch_assoc($rs);
+    if (!empty($fieldNote)) {
+        $cacheId = $fieldNote['geocache_id'];
+    }
 }
 
 // check adminstatus of user
@@ -55,8 +70,6 @@ if ($cacheId != 0) {
     // check log allowed, depending on cache state and logged in user
     $validate['logAllowed'] = $cache->allowLog();
 
-    // get user object
-    $user = new user($login->userid);
     // is user cache owner
     $isOwner = ($user->getUserId() == $cache->getUserId());
 
@@ -95,8 +108,8 @@ if ($cacheId != 0) {
     $logDateDay = (isset($_POST['logday'])) ? trim($_POST['logday']) : ($datesaved ? $defaultLogDay : date('d'));
     $logDateMonth = (isset($_POST['logmonth'])) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date('m'));
     $logDateYear = (isset($_POST['logyear'])) ? trim($_POST['logyear']) : ($datesaved ? $defaultLogYear : date('Y'));
-    $logTimeHour = (isset($_POST['loghour'])) ? trim($_POST['loghour']) : "";
-    $logTimeMinute = (isset($_POST['logminute'])) ? trim($_POST['logminute']) : "";
+    $logTimeHour = (isset($_POST['loghour'])) ? trim($_POST['loghour']) : '';
+    $logTimeMinute = (isset($_POST['logminute'])) ? trim($_POST['logminute']) : '';
     $needsMaintenance = (isset($_POST['needs_maintenance2'])) ? ($_POST['needs_maintenance2']) + 0 : (isset($_POST['needs_maintenance']) ? ($_POST['needs_maintenance']) + 0 : 0);
     $listingOutdated = (isset($_POST['listing_outdated2'])) ? ($_POST['listing_outdated2']) + 0 : (isset($_POST['listing_outdated']) ? ($_POST['listing_outdated']) + 0 : 0);
     $confirmListingOk = (isset($_POST['confirm_listing_ok'])) ? $_POST['confirm_listing_ok'] + 0 : 0;
@@ -104,6 +117,36 @@ if ($cacheId != 0) {
     $rateCache = (isset($_POST['rating'])) ? $_POST['rating'] + 0 : 0;
     $ocTeamComment = (isset($_REQUEST['teamcomment'])) ? $_REQUEST['teamcomment'] != 0 : 0;
     $suppressMasslogWarning = (isset($_REQUEST['suppressMasslogWarning'])) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
+
+    if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform']) && !empty($fieldNote)) {
+        $_POST['descMode'] = 3;
+        $fieldNoteDate = DateTime::createFromFormat('Y-m-d H:i:s', $fieldNote['date']);
+        $logDateDay = $fieldNoteDate->format('d');
+        $logDateMonth = $fieldNoteDate->format('m');
+        $logDateYear = $fieldNoteDate->format('Y');
+        $logTimeHour = $fieldNoteDate->format('H');
+        $logTimeMinute = $fieldNoteDate->format('i');
+        $logText = $fieldNote['text'];
+        switch ($fieldNote['type']) {
+            case FieldNote::LOG_TYPE_FOUND:
+                if (in_array($cache->getType(), \AppBundle\Entity\Geocache::EVENT_CACHE_TYPES)) {
+                    $logType = GeocacheLog::LOG_TYPE_ATTENDED;
+                } else {
+                    $logType = GeocacheLog::LOG_TYPE_FOUND;
+                }
+                break;
+            case FieldNote::LOG_TYPE_NOT_FOUND:
+                $logType = GeocacheLog::LOG_TYPE_NOT_FOUND;
+                break;
+            case FieldNote::LOG_TYPE_NOTE:
+                $logType = GeocacheLog::LOG_TYPE_NOTE;
+                break;
+            case FieldNote::LOG_TYPE_NEEDS_MAINTENANCE:
+                $logType = GeocacheLog::LOG_TYPE_NOTE;
+                $needsMaintenance = GeocacheLog::NEEDS_MAINTENANCE_ACTIVATE;
+                break;
+        }
+    }
 
     if (!in_array($logType, $logtype_allows_nm) || $cache->getType() == 6) {
         $needsMaintenance = $listingOutdated = 0;
@@ -276,6 +319,13 @@ if ($cacheId != 0) {
             // clear statpic
             $statPic = $user->getStatpic();
             $statPic->deleteFile();
+
+            // delete field note
+            if (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) {
+                sql('DELETE FROM field_note WHERE `id` = &1 AND `user_id` = &2', (int)$_REQUEST['fieldnoteid'], $user->getUserId());
+
+                $tpl->redirect('/field-notes/');
+            }
         }
 
         // finished, redirect to listing
@@ -324,6 +374,7 @@ if ($cacheId != 0) {
     // smiley list
     $tpl->assign('smilies', $smiley_a);
     $tpl->assign('smileypath', $opt['template']['smiley']);
+    $tpl->assign('fieldnoteid', (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) ? $_REQUEST['fieldnoteid'] : '');
 
     // DNF state
     $dnf_by_logger =

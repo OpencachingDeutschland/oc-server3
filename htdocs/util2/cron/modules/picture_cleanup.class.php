@@ -40,8 +40,8 @@ class picture_cleanup
                 $instance['pic'] = new picture($instance['picid']);
                 $instance['filesize'] = @filesize($instance['pic']->getFilename());
             }
-
-            for ($n = 1; $n < count($instances); ++ $n) {
+            $countInstances = count($instances);
+            for ($n = 1; $n < $countInstances; ++ $n) {
                 if ($instances[$n]['filesize'] !== false) {// ensure that pic is stored locally
                     for ($nn = $n - 1; $nn >= 0; -- $nn) {
                         if ($instances[$nn]['filesize'] === $instances[$n]['filesize']) {

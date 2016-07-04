@@ -35,8 +35,13 @@ class UploadFieldNotesDataProvider
      */
     public function getData($userId)
     {
+        $date = $this->fieldNoteService->getLatestFieldNoteOrLogDate($userId);
+        if ($date !== null) {
+            $date = $date->format(DateUtil::DATE_FORMAT_MYSQL);
+        }
+
         return [
-            UploadFieldNotesType::FIELD_IGNORE_DATE => $this->fieldNoteService->getLatestFieldNoteOrLogDate($userId)->format(DateUtil::DATE_FORMAT_MYSQL)
+            UploadFieldNotesType::FIELD_IGNORE_DATE => $date,
         ];
     }
 }

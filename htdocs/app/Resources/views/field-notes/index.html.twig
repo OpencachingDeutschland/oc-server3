@@ -52,9 +52,11 @@
         </div>
 
         <div>
-            {{ form_widget(form.ignore) }}
-            {{ form_label(form.ignore) }}
-            {{ form_errors(form.ignore) }}
+            {% if form.ignore is defined %}
+                {{ form_widget(form.ignore) }}
+                {{ form_label(form.ignore) }}
+                {{ form_errors(form.ignore) }}
+            {% endif %}
         </div>
         <div>
             <input type="submit" value="{{ 'field_notes.btn.upload' | trans }}" class="btn btn-default"/>

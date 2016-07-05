@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+    bootstrap="./htdocs/vendor/autoload.php"
+    verbose="true">
     <testsuites>
         <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
         <testsuite name="login">
             <directory>tests/Oc/Login/LoginTest</directory>
+        </testsuite>
+        <testsuite name="coords">
+            <directory>tests/Modules/Lib2/Logic</directory>
         </testsuite>
     </testsuites>
 </phpunit>

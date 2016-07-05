@@ -630,30 +630,21 @@ class coordinate
 
         $params = [
             'key' => $opt['lib']['w3w']['apikey'],
-            'position' => sprintf('%f,%f', $this->nLat, $this->nLon),
+            'coords' => sprintf('%f,%f', $this->nLat, $this->nLon),
             'lang' => strtolower($language),
         ];
         $params_str = http_build_query($params);
-        $context = stream_context_create(
-            [
-                'http' => [
-                    'method' => 'POST',
-                    'header' => "Content-Type: application/x-www-form-urlencoded\r\n" .
-                        "Content-Length: " . strlen($params_str) . "\r\n",
-                    'content' => $params_str,
-                ],
-            ]
-        );
 
-        $result = @file_get_contents('http://api.what3words.com/position', false, $context);
+        $result = @file_get_contents('https://api.what3words.com/v2/reverse?' . $params_str);
         if ($result === false) {
             return false;
         }
+
         $json = json_decode($result, true);
         if (!isset($json['words'])) {
             return false;
         }
 
-        return implode('.', $json['words']);
+        return $json['words'];
     }
 }

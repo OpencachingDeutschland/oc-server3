@@ -345,7 +345,7 @@ function mapLoad()
 	if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-	var maptypes = ['OSM', 'MQ', 'OCM',
+	var maptypes = ['OSM', 'OCM',
 	                google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
 	                google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
   var initType = google.maps.MapTypeId.ROADMAP;
@@ -395,7 +395,6 @@ function mapLoad()
 	{literal}
 
 	setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
-	setMapType("MQ"," MapQuest", "http://otile1.mqcdn.com/tiles/1.0.0/osm/", 19);
 	setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);
 
     moInfoWindow = new google.maps.InfoWindow();
@@ -511,15 +510,13 @@ function updateCopyrights()
     var newMapType = moMap.getMapTypeId();
     var mapIcon = document.querySelector("#googlemap .gm-style div a div");
 
-    if (newMapType == "OSM" || newMapType == "MQ" || newMapType == "OCM")
+    if (newMapType == "OSM" || newMapType == "OCM")
     {
         {/literal}
         if (newMapType == "OCM")
             copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
         else
             copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
-        if (newMapType == "MQ")
-            copyrightDiv.innerHTML += ', ' + '{t escape=js}tiles provided by <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>{/t}' + ' <img src="http://developer.mapquest.com/content/osm/mq_logo.png" />';
         {literal}
         if (mapIcon != null) {
             mapIcon.style.display = "none";

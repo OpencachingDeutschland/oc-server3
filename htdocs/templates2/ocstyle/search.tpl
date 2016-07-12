@@ -539,7 +539,7 @@ function switchAttributeCat2()
                     <option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>
                     <option value="S" {if $latS_sel}selected="selected"{/if}>{t}S{/t}</option>
                 </select>&nbsp;
-                <input type="text" tabindex="8" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" onfocus="textonfocus(2)"/>&nbsp;°&nbsp;
+                <input type="text" tabindex="8" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;°&nbsp;
                 <input type="text" tabindex="9" name="lat_min" maxlength="6" value="{$lat_min}" class="input50" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;'&nbsp;
                 <br />
                 <select tabindex="10" name="lonEW" onfocus="bydistance_set_radiobutton(2)">

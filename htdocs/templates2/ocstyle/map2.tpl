@@ -367,11 +367,6 @@ function mapLoad()
 		scaleControl: true,
 		streetViewControl: false,
 
-		overviewMapControl: true,  {/literal}
-		{if $opt_overview==1}
-		overviewMapControlOptions: {literal}{ opened: true }{/literal},
-		{/if}  {literal}
-
 		styles:
 			[ { featureType:"poi.business", elementType:"labels", stylers: [{ visibility:"off" }] },
 			  { featureType:"poi.government", elementType:"labels", stylers: [{ visibility:"off" }] } ]
@@ -1574,7 +1569,6 @@ function toggle_settings()
 		// set controls to config values
 		document.getElementById('opt_menumap0').selected    = "{if $opt_menumap == 0}selected{/if}";
 		document.getElementById('opt_menumap1').selected    = "{if $opt_menumap == 1}selected{/if}";
-		document.getElementById('opt_overview').checked     = "{if $opt_overview == 1}checked{/if}";
 		document.getElementById('opt_maxcaches').value      = "{$opt_maxcaches}";
 		document.getElementById('opt_cacheicons1').selected = "{if $opt_cacheicons == 1}selected{/if}";
 		document.getElementById('opt_cacheicons2').selected = "{if $opt_cacheicons == 2}selected{/if}";

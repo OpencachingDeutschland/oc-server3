@@ -17,6 +17,7 @@
 
 # files created when running the OC software
 /htdocs/cache2/*
+/htdocs/cache/*
 /htdocs/download/*
 /htdocs/images/statpics/*
 /htdocs/images/uploads/*

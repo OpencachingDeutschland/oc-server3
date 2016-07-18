@@ -9,3 +9,22 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.token_legacy_authenticator:
         class: AppBundle\Legacy\Security\LegacyAuthenticator
+
+    app.form.upload_field_note:
+        class: AppBundle\Form\UploadFieldNotesType
+        arguments: ['@translator']
+        tags:
+            - { name: form.type }
+
+    app.service.field_note:
+        class: AppBundle\Service\FieldNoteService
+        arguments: ['@doctrine.orm.default_entity_manager', '@translator']
+
+    app.dataprovider.upload_field_note:
+        class: AppBundle\Form\DataProvider\UploadFieldNotesDataProvider
+        arguments: ['@app.service.field_note']
+
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }

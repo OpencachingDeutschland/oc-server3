@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% set page_title = 'field_notes.field_notes' | trans %}
+{% set page_title_image = "resource2/ocstyle/images/misc/32x32-home.png" %}
+
+{% import 'macros/geocache.twig' as geocache %}
+
+{% block body %}
+    {% if fieldNotes %}
+        <font size="2">
+            <form method="post" action="{{ path('field-notes.delete-multiple') }}">
+                <table class="searchtable field-notes-table" border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkall" onClick="toggleChecks(this, 'selected-field-notes[]')" /></th>
+                            <th colspan="2">{{ 'field_notes.header.geocache' | trans }}</th>
+                            <th class="nowrap">{{ 'field_notes.header.date' | trans }}</th>
+                            <th class="nowrap">{{ 'field_notes.header.log_type' | trans }}</th>
+                            <th class="nowrap">{{ 'field_notes.header.actions' | trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fieldNote in fieldNotes %}
+                            <tr>
+                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><input type="checkbox" name="selected-field-notes[]" value="{{ fieldNote.id }}" /></td>
+                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ geocache.geocacheIcon(fieldNote.geocache.type) }}</td>
+                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/viewcache.php?cacheid={{ fieldNote.geocache.cacheId }}">{{ fieldNote.geocache.name }}</a><br />{{ fieldNote.text | truncate(65, true) }}</td>
+                                <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ fieldNote.date | date('field_notes.date_format' | trans | desc('Y-m-d H:i')) }}</td>
+                                <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ ('field_notes.log_type.' ~ fieldNote.type) | trans({}, 'constants') }}</td>
+                                <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/log.php?fieldnoteid={{ fieldNote.id }}">{{ 'field_notes.btn.log_it' | trans }}</a>&nbsp;|&nbsp;<a href="{{ path('field-notes.delete', {id: fieldNote.id}) }}">{{ 'field_notes.btn.delete' | trans }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <br />
+                <input type="submit" name="submit" class="btn btn-danger" value="{{ 'field_notes.btn.delete_selected' | trans }}" />
+            </form>
+        </font>
+    {% else %}
+        <h3>{{ 'field_notes.msg.no_field_notes' | trans }}</h3>
+    {% endif %}
+
+    <hr align="left" class="spacer" />
+
+    <h3>{{ 'field_notes.msg.upload_new_field_notes' | trans }}</h3>
+    {{ form_start(form) }}
+        {#{ form_widget(form) }#}
+        <div>
+            {{ form_widget(form.file) }}
+            {{ form_label(form.file) }}
+            {{ form_errors(form.file) }}
+        </div>
+
+        <div>
+            {% if form.ignore is defined %}
+                {{ form_widget(form.ignore) }}
+                {{ form_label(form.ignore) }}
+                {{ form_errors(form.ignore) }}
+            {% endif %}
+        </div>
+        <div>
+            <input type="submit" value="{{ 'field_notes.btn.upload' | trans }}" class="btn btn-default"/>
+        </div>
+    {{ form_end(form) }}
+
+{% endblock %}

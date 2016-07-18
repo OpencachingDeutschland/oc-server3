@@ -9,8 +9,6 @@
 
 namespace Oc\Modules\Lib2\Logic;
 
-use Oc\Modules\AbstractModuleTest;
-
 /*
 Testdaten:
 OCADD6 Nordhalbkugel, Westen (USA)
@@ -26,215 +24,217 @@ OC85A9 Europa (Norwegen)
 N 60.63367° E 004.81313°
 */
 
-class CoordinateTest extends AbstractModuleTest
+class CoordinateTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @group unit-tests
-     * @covers \coordinate::getUTM()
-     *
-     * @return void
-     */
-    public function testUTM()
+
+    public function setUp()
     {
-        $coord = new \coordinate(51.52775, -120.89720);
-        $utm = $coord->getUTM();
+        global $opt;
+        $opt['lib']['w3w']['apikey'] = 'GETAPIKEY';
+    }
 
-        self::assertEquals('10', $utm['zone']);
-        self::assertEquals('U', $utm['letter']);
-        self::assertEquals('N 5710611', $utm['north']);
-        self::assertEquals('E 645865', $utm['east']);
 
-        $coord = new \coordinate(-8.81687, 13.24057);
-        $utm = $coord->getUTM();
-
-        self::assertEquals('33', $utm['zone']);
-        self::assertEquals('L', $utm['letter']);
-        self::assertEquals('N 9024939', $utm['north']);
-        self::assertEquals('E 306489', $utm['east']);
-
-        $coord = new \coordinate(52.67578, 6.77300);
-        $utm = $coord->getUTM();
-
-        self::assertEquals('32', $utm['zone']);
-        self::assertEquals('U', $utm['letter']);
-        self::assertEquals('N 5838532', $utm['north']);
-        self::assertEquals('E 349438', $utm['east']);
-
-        $coord = new \coordinate(60.63367, 4.81313);
-        $utm = $coord->getUTM();
-
-        self::assertEquals('32', $utm['zone']);
-        self::assertEquals('V', $utm['letter']);
-        self::assertEquals('N 6729280', $utm['north']);
-        self::assertEquals('E 271052', $utm['east']);
-
-        $coord = new \coordinate(58.682079, 5.793595);
-        $utm = $coord->getUTM();
-
-        self::assertEquals('32', $utm['zone']);
-        self::assertEquals('V', $utm['letter']);
-        self::assertEquals('N 6509097', $utm['north']);
-        self::assertEquals('E 314134', $utm['east']);
+    public function utmProvider()
+    {
+        return [
+            [51.52775, -120.89720, '10', 'U', 'N 5710611', 'E 645865'],
+            [-8.81687, 13.24057, '33', 'L', 'N 9024939', 'E 306489'],
+            [52.67578, 6.77300, '32', 'U', 'N 5838532', 'E 349438'],
+            [60.63367, 4.81313, '32', 'V', 'N 6729280', 'E 271052'],
+            [58.682079, 5.793595, '32', 'V', 'N 6509097', 'E 314134'],
+        ];
     }
 
     /**
      * @group unit-tests
-     * @covers \coordinate::getGK()
+     * @covers       \coordinate::getUTM()
+     * @dataProvider utmProvider
      *
      * @return void
      */
-
-    public function testGK()
+    public function testUTM($lat, $lon, $zone, $letter, $north, $east)
     {
-        $coord = new \coordinate(51.52775, -120.89720);
-        $gk = $coord->getGK();
+        $coord = new \coordinate($lat, $lon);
+        $utm = $coord->getUTM();
 
-        self::assertEquals('R -39562771 H 5710022', $gk);
+        self::assertEquals($zone, $utm['zone']);
+        self::assertEquals($letter, $utm['letter']);
+        self::assertEquals($north, $utm['north']);
+        self::assertEquals($east, $utm['east']);
+    }
 
-        $coord = new \coordinate(-8.81687, 13.24057);
-        $gk = $coord->getGK();
-
-        self::assertEquals('R 4636588 H -975608', $gk);
-
-        $coord = new \coordinate(52.67578, 6.77300);
-        $gk = $coord->getGK();
-
-        self::assertEquals('R 2552325 H 5838386', $gk);
-
-        $coord = new \coordinate(60.63367, 4.81313);
-        $gk = $coord->getGK();
-
-        self::assertEquals('R 2435086 H 6724824', $gk);
+    public function gkProvider()
+    {
+        return [
+            [51.52775, -120.89720, 'R -39562771 H 5710022'],
+            [-8.81687, 13.24057, 'R 4636588 H -975608'],
+            [52.67578, 6.77300, 'R 2552325 H 5838386'],
+            [60.63367, 4.81313, 'R 2435086 H 6724824'],
+        ];
     }
 
     /**
      * @group unit-tests
-     * @covers \coordinate::getSwissGrid()
+     * @covers       \coordinate::getGK()
+     * @dataProvider gkProvider
      *
      * @return void
      */
-    public function testSwissGrid()
+
+    public function testGK($lat, $lon, $expectedGK)
     {
-        $coord = new \coordinate(51.52775, -120.89720);
-        $swissGrid = $coord->getSwissGrid();
+        $coord = new \coordinate($lat, $lon);
+        $gk = $coord->getGK();
 
-        self::assertEquals('-3944504 / 8019927', $swissGrid['coord']);
+        self::assertEquals($expectedGK, $gk);
+    }
 
-        $coord = new \coordinate(-8.81687, 13.24057);
-        $swissGrid = $coord->getSwissGrid();
-
-        self::assertEquals('1499586 / -6904936', $swissGrid['coord']);
-
-        $coord = new \coordinate(52.67578, 6.77300);
-        $swissGrid = $coord->getSwissGrid();
-
-        self::assertEquals('554738 / 837985', $swissGrid['coord']);
-
-        $coord = new \coordinate(60.63367, 4.81313);
-        $swissGrid = $coord->getSwissGrid();
-
-        self::assertEquals('451121 / 1739767', $swissGrid['coord']);
+    public function swissGridProvider()
+    {
+        return [
+            [51.52775, -120.89720, '-3944504 / 8019927'],
+            [-8.81687, 13.24057, '1499586 / -6904936'],
+            [52.67578, 6.77300, '554738 / 837985'],
+            [60.63367, 4.81313, '451121 / 1739767'],
+        ];
     }
 
     /**
      * @group unit-tests
-     * @covers \coordinate::getRD()
+     * @covers       \coordinate::getSwissGrid()
+     * @dataProvider swissGridProvider
      *
      * @return void
      */
-    public function testDutchGrid()
+    public function testSwissGrid($lat, $lon, $expectedSG)
+    {
+        $coord = new \coordinate($lat, $lon);
+        $swissGrid = $coord->getSwissGrid();
+
+        self::assertEquals($expectedSG, $swissGrid['coord']);
+    }
+
+    public function dutchGridProvider()
+    {
+        return [
+            [52.67578, 6.77300, 'X 248723 Y 521824'],
+            [60.63367, 4.81313, 'X 123409 Y 1408833'],
+        ];
+    }
+
+    /**
+     * @group unit-tests
+     * @covers       \coordinate::getRD()
+     * @dataProvider dutchGridProvider
+     *
+     * @return void
+     */
+    public function testDutchGrid($lat, $lon, $expectedDG)
     {
         // DutchGrid Berechnungen funktionieren nur auf dem Nord-Ost-Quadranten
-        $coord = new \coordinate(52.67578, 6.77300);
+        $coord = new \coordinate($lat, $lon);
         $dutchGrid = $coord->getRD();
 
-        self::assertEquals('X 248723 Y 521824', $dutchGrid);
+        self::assertEquals($expectedDG, $dutchGrid);
+    }
 
-        $coord = new \coordinate(60.63367, 4.81313);
-        $dutchGrid = $coord->getRD();
-
-        self::assertEquals('X 123409 Y 1408833', $dutchGrid);
+    public function qthProvider()
+    {
+        return [
+            [51.52775, -120.89720, 'CO91NM'],
+            [-8.81687, 13.24057, 'JI61OE'],
+            [52.67578, 6.77300, 'JO32JQ'],
+            [60.63367, 4.81313, 'JP20JP'],
+        ];
     }
 
     /**
      * @group unit-tests
-     * @covers \coordinate::getQTH()
+     * @covers       \coordinate::getQTH()
+     * @dataProvider qthProvider
      *
      * @return void
      */
-    public function testQTHLocator()
+    public function testQTHLocator($lat, $lon, $expectedQTH)
     {
-        $coord = new \coordinate(51.52775, -120.89720);
+        $coord = new \coordinate($lat, $lon);
         $qthLocator = $coord->getQTH();
 
-        self::assertEquals('CO91NM', $qthLocator);
+        self::assertEquals($expectedQTH, $qthLocator);
+    }
 
-        $coord = new \coordinate(-8.81687, 13.24057);
-        $qthLocator = $coord->getQTH();
-
-        self::assertEquals('JI61OE', $qthLocator);
-
-        $coord = new \coordinate(52.67578, 6.77300);
-        $qthLocator = $coord->getQTH();
-
-        self::assertEquals('JO32JQ', $qthLocator);
-
-        $coord = new \coordinate(60.63367, 4.81313);
-        $qthLocator = $coord->getQTH();
-
-        self::assertEquals('JP20JP', $qthLocator);
+    public function what3WordsProvider()
+    {
+        return [
+            [52.473570, 13.371317, 'DE', 'gewinn.kopf.digitalen'],
+            [60.168947, 24.958826, 'DE', 'kurzem.knie.ringen'],
+            [45.999639, -1.213892, 'DE', 'bewohnbar.modernes.empfundenen'],
+            [52.473570, 13.371317, 'EN', 'steer.removed.smashes'],
+            [60.168947, 24.958826, 'EN', 'dished.mailing.starred'],
+            [45.999639, -1.213892, 'EN', 'declaim.alright.loaning'],
+        ];
     }
 
     /**
      * @group unit-tests
-     * @covers \coordinate::getDecimalMinutes
+     * @covers       \coordinate::getW3W
+     * @dataProvider what3WordsProvider
+     *
+     * @param $lat
+     * @param $lon
+     * @param $language
+     * @param $expectedW3W
+     */
+    public function testWhat3Words($lat, $lon, $language, $expectedW3W)
+    {
+        $coord = new \coordinate($lat, $lon);
+        $w3w = $coord->getW3W($language);
+
+        self::assertEquals($expectedW3W, $w3w);
+    }
+
+    public function formatProvider()
+    {
+        return [
+            [
+                51.52775,
+                -120.89720,
+                ['lat' => "N 51° 31.665'", 'lon' => "W 120° 53.832'"],
+                ['lat' => "N 51° 31' 39''", 'lon' => "W 120° 53' 49''"]
+            ],
+            [
+                -8.81687,
+                13.24057,
+                ['lat' => "S 08° 49.012'", 'lon' => "E 013° 14.434'"],
+                ['lat' => "S 08° 49' 00''", 'lon' => "E 013° 14' 26''"]
+            ],
+            [
+                52.67578,
+                6.77300,
+                ['lat' => "N 52° 40.547'", 'lon' => "E 006° 46.380'"],
+                ['lat' => "N 52° 40' 32''", 'lon' => "E 006° 46' 22''"]
+            ],
+            [
+                60.63367,
+                4.81313,
+                ['lat' => "N 60° 38.020'", 'lon' => "E 004° 48.788'"],
+                ['lat' => "N 60° 38' 01''", 'lon' => "E 004° 48' 47''"]
+            ],
+        ];
+    }
+
+    /**
+     * @group unit-tests
+     * @covers       \coordinate::getDecimalMinutes
+     * @dataProvider formatProvider
      *
      * @return void
      */
-    public function testFormatConversions()
+    public function testFormatConversions($lat, $lon, $expectedMin, $expectedMinSec)
     {
-        $coord = new \coordinate(51.52775, -120.89720);
-        $decimalMin = $coord->getDecimalMinutes();
+        $coord = new \coordinate($lat, $lon);
 
-        self::assertEquals("N 51° 31.665'", $decimalMin['lat']);
-        self::assertEquals("W 120° 53.832'", $decimalMin['lon']);
-
-        $decimalMinSec = $coord->getDecimalMinutesSeconds();
-
-        self::assertEquals("N 51° 31' 39''", $decimalMinSec['lat']);
-        self::assertEquals("W 120° 53' 49''", $decimalMinSec['lon']);
-
-        $coord = new \coordinate(-8.81687, 13.24057);
-        $decimalMin = $coord->getDecimalMinutes();
-
-        self::assertEquals("S 08° 49.012'", $decimalMin['lat']);
-        self::assertEquals("E 013° 14.434'", $decimalMin['lon']);
-
-        $decimalMinSec = $coord->getDecimalMinutesSeconds();
-
-        self::assertEquals("S 08° 49' 00''", $decimalMinSec['lat']);
-        self::assertEquals("E 013° 14' 26''", $decimalMinSec['lon']);
-
-        $coord = new \coordinate(52.67578, 6.77300);
-        $decimalMin = $coord->getDecimalMinutes();
-
-        self::assertEquals("N 52° 40.547'", $decimalMin['lat']);
-        self::assertEquals("E 006° 46.380'", $decimalMin['lon']);
-
-        $decimalMinSec = $coord->getDecimalMinutesSeconds();
-
-        self::assertEquals("N 52° 40' 32''", $decimalMinSec['lat']);
-        self::assertEquals("E 006° 46' 22''", $decimalMinSec['lon']);
-
-        $coord = new \coordinate(60.63367, 4.81313);
-        $decimalMin = $coord->getDecimalMinutes();
-
-        self::assertEquals("N 60° 38.020'", $decimalMin['lat']);
-        self::assertEquals("E 004° 48.788'", $decimalMin['lon']);
-
-        $decimalMinSec = $coord->getDecimalMinutesSeconds();
-
-        self::assertEquals("N 60° 38' 01''", $decimalMinSec['lat']);
-        self::assertEquals("E 004° 48' 47''", $decimalMinSec['lon']);
+        self::assertEquals($expectedMin, $coord->getDecimalMinutes());
+        self::assertEquals($expectedMinSec, $coord->getDecimalMinutesSeconds());
     }
 }

@@ -73,3 +73,13 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+jms_translation:
+    configs:
+        app:
+            output_format: yml
+            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src/AppBundle"]
+            output_dir: "%kernel.root_dir%/Resources/translations"
+            ignored_domains: [routes]
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]

@@ -71,7 +71,7 @@
             </td>
         {/if}
         <td style="text-align:right; padding-bottom:2px"><p class="inheader">
-            <span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}&sortby={$sortby}{if $sortorder}&sortorder={$sortorder}{/if}{if $creationdate}$&creationdate=1{/if}">{t}Save options{/t}</a>]</span>
+            <span style="white-space:nowrap">[<a href="query.php?action=save&queryid={$queryid}&sortby={$sortby}{if $sortorder}&sortorder={$sortorder}{/if}{if $creationdate}&creationdate=1{/if}">{t}Save options{/t}</a>]</span>
             {if !$disable_edit_options}&nbsp;<span style="white-space:nowrap">[<a href="search.php?queryid={$queryid}&showresult=0&sortby={$sortby}">{t}Edit options{/t}</a>]</span>{/if}</p>
         </td>
     </tr></table>

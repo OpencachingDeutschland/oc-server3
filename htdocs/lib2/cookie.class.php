@@ -25,11 +25,13 @@ class cookie
                 $this->init_session();
             }
         } elseif (isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
-            //get the cookievars-array
-            $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data']);
+            // get the cookievars-array
+            // returns false in strict mode, if not valid base64 input
+            $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data'], true);
 
             if ($decoded !== false) {
-                $this->values = @unserialize($decoded);
+                //$this->values = @unserialize($decoded); // not secure with user input
+                $this->values = @json_decode($decoded, true, 2);
                 if (!is_array($this->values)) {
                     $this->values = array();
                 }
@@ -178,7 +180,8 @@ class cookie
                 } else {
                     setcookie(
                         $opt['session']['cookiename'] . 'data',
-                        base64_encode(serialize($this->values)),
+                        //base64_encode(serialize($this->values)), // serialize not secure with external client data
+                        base64_encode(json_encode($this->values)),
                         time() + 31536000,
                         $opt['session']['path'],
                         $opt['session']['domain'],

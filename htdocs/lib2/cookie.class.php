@@ -165,8 +165,8 @@ class cookie
         if ($opt['session']['mode'] == SAVE_SESSION) {
             // is automatically sent
         } else {
-            if ($this->changed == true) {
-                if (count($this->values) == 0) {
+            if ($this->changed === true) {
+                if (count($this->values) === 0) {
                     setcookie(
                         $opt['session']['cookiename'] . 'data',
                         false,

@@ -3,7 +3,7 @@ title:"\u0412\u043C\u044A\u043A\u043D\u0438 \u0435\u043C\u043E\u0442\u0438\u043A
 desc:"\u0415\u043C\u043E\u0442\u0438\u043A\u043E\u043D\u0438",
 cool:"Cool",
 cry:"Cry",
-embarassed:"Embarassed",
+embarrassed:"Embarrassed",
 foot_in_mouth:"Foot in mouth",
 frown:"Frown",
 innocent:"Innocent",

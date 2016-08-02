@@ -86,9 +86,12 @@ $homecoords = ($login->logged_in() &&
 // stored query etc.) or for other purpose (e.g. user profile cache lists):
 $called_by_search = isset($_REQUEST['calledbysearch']) ? $_REQUEST['calledbysearch'] <> 0 : true;
 $called_by_profile_query = false;
+$load_query = false;
+$show_lastsearchbutton = true;
 
 if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop: showresult, queryid
     $bCookieQueryid = false;
+    $load_query = true;
     $queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] : 0;
     if ($queryid &&
         sql_value("SELECT `user_id` FROM `queries` WHERE `id`='&1'", 0, $queryid)
@@ -97,15 +100,26 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
     }
 } else {
     $bCookieQueryid = true;
+    $load_query = true;
     $queryid = $cookie->get('lastqueryid', false);
     if ($queryid === false ||
         sql_value("SELECT COUNT(*) FROM `queries` WHERE id='&1'", 0, $queryid) == 0
     ) {
+        $show_lastsearchbutton = false;
+    }
+    if (!isset($_REQUEST['lastsearch'])) {
         $queryid = 0;
+    }
+    if ($queryid === false ||
+        sql_value("SELECT COUNT(*) FROM `queries` WHERE id='&1'", 0, $queryid) == 0
+    ) {
+        $queryid = 0;
+        $load_query = false;
     }
 
     newquery:
     if ($queryid == 0) {
+        $load_query = false;
         // initialize search form with defaults, as we have no parameters
         // or saved query to start from
 
@@ -462,8 +476,8 @@ if ($bRememberQuery) {
             serialize($options)
         );
         $options['queryid'] = sql_insert_id();
+        $cookie->set('lastqueryid', $options['queryid']);
     }
-    $cookie->set('lastqueryid', $options['queryid']);
 }
 
 // remove old queries (after 1 hour without use);
@@ -1598,10 +1612,13 @@ function outputSearchForm($options)
     global $tpl, $login, $opt;
     global $error_ort, $error_plz, $error_locidnocoords, $error_nowaypointfound, $error_nocoords, $error_nofulltext, $error_fulltexttoolong;
     global $cache_attrib_jsarray_line, $cache_attrib_group, $cache_attrib_img_line1, $cache_attrib_img_line2;
+    global $load_query, $show_lastsearchbutton ;
 
     $tpl->assign('formmethod', 'get');
 
     $tpl->assign('logged_in', $login->logged_in());
+    $tpl->assign('load_query', $load_query == false);
+    $tpl->assign('show_lastsearchbutton', $show_lastsearchbutton == true);
 
     //sort search by (radio button + 1 checkbox)
 
@@ -1690,6 +1707,7 @@ function outputSearchForm($options)
         'cachename',
         isset($options['cachename']) ? htmlspecialchars($options['cachename'], ENT_COMPAT, 'UTF-8') : ''
     );
+    $tpl->assign('searchtype_byname', $options['searchtype'] == 'byname');
 
     // distance
     $tpl->assign('distance', isset($options['distance']) ? $options['distance'] : DEFAULT_SEARCH_DISTANCE);
@@ -1798,7 +1816,7 @@ function outputSearchForm($options)
 
     $dfromortplz_checked = in_array($options['searchtype'], ['byplz', 'byort']);
     $dfromwaypoint_checked = ($options['searchtype'] == 'bywaypoint');
-    $dfromcoords_checked = ($options['searchtype'] == 'coords');
+    $dfromcoords_checked = ($options['searchtype'] == 'bycoords');
     if (!$dfromortplz_checked && !$dfromwaypoint_checked && !$dfromcoords_checked) {
         $dfromcoords_checked = true;  // default
     }
@@ -1806,11 +1824,17 @@ function outputSearchForm($options)
     $tpl->assign('dfromwaypoint_checked', $dfromwaypoint_checked);
     $tpl->assign('dfromcoords_checked', $dfromcoords_checked);
 
+    $tpl->assign('searchtype_byortplz', in_array($options['searchtype'], ['byplz', 'byort']));
+    $tpl->assign('searchtype_bywaypoint', $options['searchtype'] == 'bywaypoint');
+    $tpl->assign('searchtype_bycoords', $options['searchtype'] == 'bycoords');
+    
     // owner
     $tpl->assign('owner', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
+    $tpl->assign('searchtype_byowner', $options['searchtype'] == 'byowner');
 
     // finder
     $tpl->assign('finder', isset($options['finder']) ? htmlspecialchars($options['finder'], ENT_COMPAT, 'UTF-8') : '');
+    $tpl->assign('searchtype_byfinder', $options['searchtype'] == 'byfinder');
 
     // country options
     $rs = sql(
@@ -2202,7 +2226,11 @@ function outputSearchForm($options)
             $tpl->assign('ft_pictures_checked', $options['ft_pictures'] == 1);
         }
     }
+    $tpl->assign('searchtype_byfulltext', $options['searchtype'] == 'byfulltext');
 
+    //all
+    $tpl->assign('searchtype_byall', $options['searchtype'] == 'all');
+    
     // error messages
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {

@@ -20,11 +20,13 @@ class SessionDataCookie implements SessionDataInterface
 
         if (isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
             //get the cookievars-array
-            $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data']);
+            echo $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data'], true);
 
             if ($decoded !== false) {
                 // TODO replace by safe function
-                $this->values = @unserialize($decoded);
+                $this->values = @unserialize($decoded); // bad
+                //$this->values = @json_decode($decoded, true); // safe
+                //print_r($this->values);
                 if (!is_array($this->values)) {
                     $this->values = array();
                 }
@@ -74,26 +76,40 @@ class SessionDataCookie implements SessionDataInterface
         global $opt;
 
         if ($this->changed === true) {
-            if (count($this->values) === 0) {
-                setcookie(
-                    $opt['session']['cookiename'] . 'data',
-                    false,
-                    time() + 31536000,
-                    $opt['session']['path'],
-                    $opt['session']['domain'],
-                    0
-                );
+
+            $value = null;
+            if (count($this->values) > 0) {
+                // TODO replace by safe function
+                $value = base64_encode(serialize($this->values)); // bad
+                //$value = base64_encode(json_encode($this->values)); // safe
             } else {
-                setcookie(
-                    $opt['session']['cookiename'] . 'data',
-                    // TODO replace by safe function
-                    base64_encode(serialize($this->values)),
-                    time() + 31536000,
-                    $opt['session']['path'],
-                    $opt['session']['domain'],
-                    0
-                );
+                $value = false;
             }
+            // https used for request and https is available, then set cookie https only
+            $https_session = $opt['page']['https']['active']
+                && $opt['page']['https']['mode'] != HTTPS_DISABLED
+                && $this->is_set('sessionid') // only force https while login
+                && !empty($this->get('sessionid'));
+
+            setcookie(
+                $opt['session']['cookiename'] . 'data',
+                $value,
+                time() + 365 * 24 * 60 * 60,
+                $opt['session']['path'],
+                $opt['session']['domain'],
+                $https_session // https only?
+            );
+
+            // if site is requested by http no session data is visible, so set cookie as flag to redirect to https
+            setcookie(
+                $opt['session']['cookiename'] . 'https_session',
+                $https_session,
+                time() + 365 * 24 * 60 * 60,
+                $opt['session']['path'],
+                $opt['session']['domain'],
+                0, // must be available for http
+                1 // communication only, no js
+            );
         }
     }
 
@@ -106,6 +122,6 @@ class SessionDataCookie implements SessionDataInterface
     public function close()
     {
         // TODO really nothing?
-        // maybe destroy cookies here
+        // maybe destroy variables here
     }
 }

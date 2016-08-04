@@ -2875,6 +2875,12 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2618', 'There i
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2619', 'Enter a valid waypoint, please!\\nFormat: OCxxxx(x) / GCx(xxxx)', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2620', 'The entered coordinates are no valid.', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2621', 'Enter a postal code or city, please!', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2622', 'Last search', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2623', 'Reset search', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2624', 'show all search options', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2625', 'hide all additional search options', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2626', 'Select at least one cachetype!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2627', 'Select at least one cachesize!', '2016-08-02 15:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7513,6 +7519,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2619', 'DE', 'Gebe bitte einen gültigen Wegpunkt ein.\\nFormat: OCxxxx(x) / GCx(xxxx)', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2620', 'DE', 'Die eingegebenen Koordinaten sind ungültig.', '2016-03-14 04:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2621', 'DE', 'Gebe bitte einen Ortsname oder eine Postleitzahl ein.', '2016-03-14 04:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2622', 'DE', 'Letzte Suche', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2623', 'DE', 'Suche zurücksetzen', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2624', 'DE', 'Zeige alle Suchoptionen', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2625', 'DE', 'Verberge alle zusätzlichen Suchoptionen', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2626', 'DE', 'Wähle mindestens einen Cachetype aus!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2627', 'DE', 'Wähle mindestens eine Cachegröße aus!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

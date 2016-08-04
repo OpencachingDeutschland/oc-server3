@@ -13,30 +13,143 @@ var mnAttributesShowCat2 = 1;
 var maAttributes = new Array({$attributes_jsarray});
 var cachetypes = {$cachetypes|@count};
 var cachesizes = {$cachesizes|@count};
+var dfHideSearchOpt = [];
 
 {literal}
 
-function bydistance_set_radiobutton(index) {
+function showSearchOpt(a)
+{
+    for (i=0; typeof document.getElementsByClassName(a)[i] != 'undefined'; i++) {
+        var e = document.getElementsByClassName(a)[i];
+
+        if(!e)return true;
+
+        e.style.display = "table-row";
+    }
+
+    return true;
+}
+
+function hideSearchOpt(a)
+{
+    for (i=0; typeof document.getElementsByClassName(a)[i] != 'undefined'; i++) {
+        var e = document.getElementsByClassName(a)[i];
+
+        if(!e)return true;
+
+        e.style.display = "none";
+    }
+
+    return true;
+}
+
+function showAllSearchOpt()
+{
+    for (var i = 0; i <= dfHideSearchOpt.length; i++) {
+        showSearchOpt(dfHideSearchOpt[i]);
+    }
+    showHideAllButton();
+}
+
+function hideAllSearchOpt()
+{
+    for (var i = 0; i <= dfHideSearchOpt.length; i++) {
+        hideSearchOpt(dfHideSearchOpt[i]);
+    }
+    showShowAllButton();
+}
+
+function showShowAllButton()
+{
+    document.getElementById("showAllButton").style.display = "table-row";
+    document.getElementById("hideAllButton").style.display = "none";
+
+    return true;
+}
+
+function showHideAllButton()
+{
+    document.getElementById("showAllButton").style.display = "none";
+    document.getElementById("hideAllButton").style.display = "table-row";
+
+    return true;
+}
+
+window.onload = function ()
+{
+    {/literal}
+    {if !$load_query}
+        showShowAllButton();
+    {/if}
+    {if $searchtype_byortplz || $searchtype_bywaypoint ||$searchtype_bycoords || $load_query}
+        showSearchOpt('search_bydistance');
+    {else}
+        hideSearchOpt('search_bydistance');
+        dfHideSearchOpt.push("search_bydistance");
+    {/if}
+    {if $searchtype_byname || $load_query}
+        showSearchOpt('search_byname');
+    {else}
+        hideSearchOpt('search_byname');
+        dfHideSearchOpt.push("search_byname");
+    {/if}
+    {if $searchtype_byfulltext || $load_query}
+        showSearchOpt('search_byfulltext');
+    {else}
+        hideSearchOpt('search_byfulltext');
+        dfHideSearchOpt.push("search_byfulltext");
+    {/if}
+    {if $searchtype_byowner || $load_query}
+        showSearchOpt('search_byowner');
+    {else}
+        hideSearchOpt('search_byowner');
+        dfHideSearchOpt.push("search_byowner");
+    {/if}
+    {if $searchtype_byfinder || $load_query}
+        showSearchOpt('search_byfinder');
+    {else}
+        hideSearchOpt('search_byfinder');
+        dfHideSearchOpt.push("search_byfinder");
+    {/if}
+    {if $searchtype_byall || $load_query}
+        showSearchOpt('search_byall');
+    {else}
+        hideSearchOpt('search_byall');
+        dfHideSearchOpt.push("search_byall");
+    {/if}
+    {literal}
+};
+
+function bydistance_set_radiobutton(index)
+{
     document.searchbydistance.searchto[index].checked = "checked";
 }
 
-function _sbn_click()
+function _sbn_click(submitType)
 {
+    if (check_cachetypesize(submitType) == false) {
+        return false;
+    }
+
     if (document.searchbyname.cachename.value == "")
     {
         alert("{/literal}{t}Enter a name, please!{/t}{literal}");
-        resetbutton('submit_cachename');
+        resetbutton(submitType);
         return false;
     }
     return true;
 }
 
-function _sbft_click()
+function _sbft_click(submitType)
 {
+    if (check_cachetypesize(submitType) == false) {
+        return false;
+    }
+
     if (document.searchbyfulltext.fulltext.value == "")
     {
         alert("{/literal}{t}Fill out the text field, please!{/t}{literal}");
-        resetbutton('submit_ft');
+        resetbutton(submitType);
         return false;
     }
 
@@ -46,15 +159,19 @@ function _sbft_click()
        (document.searchbyfulltext.ft_pictures.checked == false))
     {
         alert("{/literal}{t}You have to check at least one field!{/t}{literal}");
-        resetbutton('submit_ft');
+        resetbutton(submitType);
         return false;
     }
 
     return true;
 }
 
-function _sbd_click()
+function _sbd_click(submitType)
 {
+    if (check_cachetypesize(submitType) == false) {
+        return false;
+    }
+
     if (isNaN(document.searchbydistance.distance.value))
     {
         alert("{/literal}{t}The maximum distance must be a number!{/t}{literal}");
@@ -98,23 +215,70 @@ function _sbd_click()
     return true;
 }
 
-function _sbo_click()
+function _sbo_click(submitType)
 {
+    if (check_cachetypesize(submitType) == false) {
+        return false;
+    }
+
     if (document.searchbyowner.owner.value == "")
     {
         alert("{/literal}{t}Enter the owner, please!{/t}{literal}");
-        resetbutton('submit_owner');
+        resetbutton(submitType);
         return false;
     }
     return true;
 }
 
-function _sbf_click()
+function _sbf_click(submitType)
 {
+    if (check_cachetypesize(submitType) == false) {
+        return false;
+    }
+
     if (document.searchbyfinder.finder.value == "")
     {
         alert("{/literal}{t}Enter the username, please!{/t}{literal}");
-        resetbutton('submit_finder');
+        resetbutton(submitType);
+        return false;
+    }
+    return true;
+}
+
+function _sba_click(submitType)
+{
+    return check_cachetypesize(submitType);
+}
+
+function check_cachetypesize(submitType)
+{
+    var check_cachetype = false;
+    var check_cachesize = false;
+
+    for (i = 1; i <= cachetypes; i++)
+    {
+        if (document.getElementById('cachetype' + i).checked == true)
+        {
+            check_cachetype = true;
+        }
+    }
+
+    for (i = 1; i <= cachesizes; i++)
+    {
+        if (document.getElementById('cachesize' + i).checked == true)
+        {
+            check_cachesize = true;
+        }
+    }
+
+    if (check_cachetype == false || check_cachesize == false) {
+        if (check_cachetype == false) {
+            alert("{/literal}{t}Select at least one cachetype!{/t}{literal}");
+        }
+        if (check_cachesize == false) {
+            alert("{/literal}{t}Select at least one cachesize!{/t}{literal}");
+        }
+        resetbutton(submitType);
         return false;
     }
     return true;
@@ -304,7 +468,19 @@ function switchAttributeCat2()
 </script>
 {/literal}
 
-<div class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Search for caches{/t}</div>
+<div id="hos" class="content2-pagetitle"><img src="resource2/ocstyle/images/misc/32x32-search.png" style="margin-right: 10px;" width="32" height="32" alt="" />{t}Search for caches{/t}</div> <!-- head of search -->
+
+<table cellspacing="0" cellpadding="0" style="width:98.1%">
+    <tr>
+        <td class="nav4">
+            <ul>
+                <li class="group noicon"><a href="query.php">{t}Stored queries{/t}</a></li>
+                {if $show_lastsearchbutton}<li class="group noicon"><a href="search.php?lastsearch=1#hos">{t}Last search{/t}</a>{/if}
+                <li class="group noicon"><a href="search.php#hos" onclick="location.reload()">{t}Reset search{/t}</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
 
 <form name="optionsform" style="display:inline;">
 
@@ -478,12 +654,25 @@ function switchAttributeCat2()
 {/literal}
 
 <div class="searchdiv2">
+
     <table class="table">
 
-    {$ortserror}
-    <tr><td class="separator"></td></tr>
+        <tr id="showAllButton" style="display: none;">
+            <td colspan="2">
+                <input type="button" style="width: auto;" class="formbutton" value="&nbsp;&nbsp;{t}show all search options{/t}&nbsp;&nbsp;" onclick="return showAllSearchOpt();" />&nbsp;
+            </td>
+        </tr>
+        <tr id="hideAllButton" style="display: none;">
+            <td colspan="2">
+                <input type="button" style="width: auto;" class="formbutton"  value="&nbsp;&nbsp;{t}hide all additional search options{/t}&nbsp;&nbsp;" onclick="return hideAllSearchOpt();" />&nbsp;
+            </td>
+        </tr>
 
-    <form action="search.php" onsubmit="return(_sbd_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
+        <tr class="search_bydistance"><td class="separator"></td></tr>
+
+    {$ortserror}
+
+    <form action="search.php" onsubmit="return(_sbd_click('submit_dist'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
         <input type="hidden" name="output" value="HTML" />
@@ -509,7 +698,7 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_bydistance">
             <td class="formlabel">{t}Perimeter:{/t}</td>
             <td>
                 <input type="text" tabindex="1" name="distance" value="{$distance}" maxlength="4" class="input50" />&nbsp;
@@ -520,19 +709,19 @@ function switchAttributeCat2()
                 </select>
             </td>
         </tr>
-        <tr>
+        <tr class="search_bydistance">
             {* exchanged tab order for radio button and input; see http://redmine.opencaching.de/issues/239 *}
             <td class=""><input type="radio" tabindex="4" id="sbortplz" name="searchto" value="searchbyortplz" {if $dfromortplz_checked}checked="checked"{/if}><label for="sbortplz">... {t}from city or postal code:{/t}</label></td>
             <td><input type="text" tabindex="3" name="ortplz" value="{$ortplz}" class="input200" onfocus="bydistance_set_radiobutton(0)"/> &nbsp;</td>
             <td></td>  {* creates empty fourth column which is used by text search options *}
         </tr>
-        <tr>
+        <tr class="search_bydistance">
             {* exchanged tab order for radio button and input; see http://redmine.opencaching.de/issues/239 *}
             <td class=""><input type="radio" tabindex="5" id="sbwaypoint" name="searchto" value="searchbywaypoint" {if $dfromwaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from geocache:{/t}</label></td>
             <td><input type="text" tabindex="4" name="waypoint" value="{$waypoint}" maxlength="7" class="input70" onfocus="bydistance_set_radiobutton(1)"/>
             &nbsp;({t}waypoint{/t})</td>
         </tr>
-        <tr>
+        <tr class="search_bydistance">
             <td valign="top"><input type="radio" tabindex="6" id="sbcoords" name="searchto" value="searchbycoords" {if $dfromcoords_checked}checked="checked"{/if}><label for="sbcoords">... {t}from coordinates:{/t}</label></td>
             <td valign="top">
                 <select tabindex="7" name="latNS" onfocus="bydistance_set_radiobutton(2)">
@@ -553,9 +742,9 @@ function switchAttributeCat2()
         </tr>
     </form>
 
-    <tr><td class="separator"></td></tr>
+    <tr class="search_byname"><td class="separator"></td></tr>
 
-    <form action="search.php" onsubmit="return(_sbn_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
+    <form action="search.php" onsubmit="return(_sbn_click('submit_cachename'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyname" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyname" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
@@ -582,16 +771,16 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_byname">
             <td class="formlabel">{t}Cachename{/t}{t}#colonspace#{/t}:</td>
             <td><input type="text" name="cachename" value="{$cachename}" class="input200" /></td>
             <td><input type="submit" name="submit_cachename" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_cachename')" /></td>
         </tr>
     </form>
 
-    <tr><td class="separator"></td></tr>
+    <tr class="search_byfulltext"><td class="separator"></td></tr>
 
-    <form action="search.php" onsubmit="return(_sbft_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
+    <form action="search.php" onsubmit="return(_sbft_click('submit_ft'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfulltext" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyfulltext" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
@@ -618,12 +807,12 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_byfulltext">
             <td class="formlabel">{t}Text{/t}{t}#colonspace#{/t}:</td>
             <td><input type="text" name="fulltext" value="{$fulltext}" class="input200" /></td>
             <td><input type="submit" name="submit_ft" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_ft')" /></td>
         </tr>
-        <tr>
+        <tr class="search_byfulltext">
             <td>... {t}in{/t}{t}#colonspace#{/t}:</td>
             <td colspan="4">
                 <input type="checkbox" name="ft_desc" id="ft_desc" class="checkbox" value="1" {if $ft_desc_checked}checked="checked"{/if} /> <label for="ft_desc">{t}Description{/t}</label> &nbsp;
@@ -633,11 +822,10 @@ function switchAttributeCat2()
             </td>
         </tr>
     </form>
-
     {$fulltexterror}
-    <tr><td class="separator"></td></tr>
+    <tr class="search_byowner"><td class="separator"></td></tr>
 
-    <form action="search.php" onsubmit="return(_sbo_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
+    <form action="search.php" onsubmit="return(_sbo_click('submit_owner'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyowner" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
@@ -664,16 +852,15 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_byowner">
             <td class="formlabel">{t}Owner:{/t}</td>
             <td><input type="text" name="owner" value="{$owner}" maxlength="40" class="input200" /></td>
             <td><input type="submit" name="submit_owner" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_owner')" /></td>
         </tr>
     </form>
+    <tr class="search_byfinder"><td class="separator"></td></tr>
 
-    <tr><td class="separator"></td></tr>
-
-    <form action="search.php" onsubmit="return(_sbf_click());" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
+    <form action="search.php" onsubmit="return(_sbf_click('submit_finder'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyfinder" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyfinder" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
@@ -700,7 +887,7 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_byfinder">
             <td class="formlabel">{t}Log entries:{/t}</td>
             <td colspan="2">
                 <select name="logtype">
@@ -710,17 +897,16 @@ function switchAttributeCat2()
                 </select>
             </td>
         </tr>
-        <tr>
+        <tr class="search_byfinder">
             <td>... {t}by user:{/t}</td>
             <td><input type="text" name="finder" value="{$finder}" maxlength="40" class="input200" /></td>
             <td><input type="submit" name="submit_finder" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_finder')" /></td>
         </tr>
     </form>
-
     {if $logged_in}
-    <tr><td class="separator"></td></tr>
+    <tr class="search_byall"><td class="separator"></td></tr>
 
-    <form action="search.php" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchall" dir="ltr" style="display:inline;">
+    <form action="search.php" onsubmit="return(_sba_click('submit_all'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchall" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchall" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
@@ -747,14 +933,13 @@ function switchAttributeCat2()
         <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
         <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
-        <tr>
+        <tr class="search_byall">
             <td class="formlabel">{t}All caches{/t}</td>
             <td></td>
             <td><input type="submit" name="submit_all" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_all')" /></td>
         </tr>
     </form>
     {/if}
-
     </table>
 </div>
 

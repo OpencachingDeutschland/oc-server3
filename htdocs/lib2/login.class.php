@@ -287,7 +287,7 @@ class login
     public function system_login($username)
     {
         $this->pClear();
-        if ($username != "") {
+        if ($username != '') {
             $rs = sql(
                 "SELECT `user_id`,`username`,`admin` FROM `user`
                  WHERE `username`='&1' AND `is_active_flag`",

@@ -17,7 +17,7 @@
         {t}Error message{/t}{t}#colonspace#{/t}:
 
         {if $id==ERROR_UNKNOWN}
-            ({$id}) {t}An unkown error occurred.{/t}
+            ({$id}) {t}An unknown error occurred.{/t}
         {elseif $id==ERROR_TEMPLATE_NOT_FOUND}
             ({$id}) {t}Template does not exist.{/t}
         {elseif $id==ERROR_COMPILATION_FAILED}
@@ -51,7 +51,7 @@
             ({$id}) {t}You are already logged in.<br />
             Please <a href="login.php?action=logout">logout</a> to login again.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_FORMAT}
-            ({$id}) {t}Unkown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.{/t}
+            ({$id}) {t}Unknown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_MANY}
             ({$id}) {t 1=$p1|escape}There exists more than one cache with the waypoint &quot;%1&quot;.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_NOTFOUND}

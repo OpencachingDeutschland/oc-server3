@@ -1037,7 +1037,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('101', 'Estonian
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('102', 'Esperanto', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('103', 'Greek', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('104', 'Danish', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('105', 'An unkown error occurred.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('105', 'An unknown error occurred.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('106', 'Template does not exist.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('107', 'Sorry, you are not allowed to view this page.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('108', 'Sorry, the requested cache does not exist.', '2010-08-28 11:48:03');
@@ -1173,7 +1173,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('249', 'El Salva
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('250', 'Sao Tome And Principe', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('251', 'Suriname', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('252', 'Somalia', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('253', 'Unkown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('253', 'Unknown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('254', 'There exists more than one cache with the waypoint \&quot;%1\&quot;.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('255', 'The waypoint \&quot;%1\&quot; was not found.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('256', 'Senegal', '2010-08-28 11:48:03');
@@ -1583,7 +1583,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('676', 'Send', '
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('677', 'E-Mail from', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('678', 'Sorry, the requested user account is deactivated.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('679', 'Sorry, there is no E-Mail address for the user requested.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('680', 'An unkown error occurred and the E-Mail was not sent.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('680', 'An unknown error occurred and the E-Mail was not sent.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('681', '\'%1\' contacted you via %2 The user profile: %2viewprofile.php?userid=%3 To reply this E-Mail use the E-Mail link on the users profile.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('682', 'Subject:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('683', 'All information will be handled confidential and not published to third parties!', '2010-08-28 11:48:04');
@@ -7606,7 +7606,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('102', 'EN', 'Esperanto', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('103', 'EN', 'Greek', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('104', 'EN', 'Danish', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'EN', 'An unkown error occurred.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'EN', 'An unknown error occurred.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('106', 'EN', 'Template does not exist.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'EN', 'Sorry, you are not allowed to view this page.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'EN', 'Sorry, the requested cache does not exist.', '2010-08-28 11:48:07');
@@ -7742,7 +7742,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'EN', 'Sao Tome And Principe', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'EN', 'Suriname', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'EN', 'Somalia', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'EN', 'Unkown waypoint format. The following formats are valid: OCxxxx, NCxxxx and GCxxxx, where xxxx is any number or characters.', '2010-08-28 11:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'EN', 'Unknown waypoint format. The following formats are valid: OCxxxx, NCxxxx and GCxxxx, where xxxx is any number or characters.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'EN', 'More than one cache with the waypoint \&quot;%1\&quot; exists.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'EN', 'The waypoint \&quot;%1\&quot; was not found.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'EN', 'Senegal', '2010-08-28 11:48:07');
@@ -8152,7 +8152,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('677', 'EN', 'E-mail from', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('678', 'EN', 'Sorry, the requested user account is deactivated.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('679', 'EN', 'Sorry, there is no e-mail address for this user.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'EN', 'An unkown error occurred and the e-mail was not sent.', '2010-08-28 11:48:08');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'EN', 'An unknown error occurred and the e-mail was not sent.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'EN', '\'%1\' contacted you via %2.\r\nThe user profile: %2viewprofile.php?userid=%3\r\nTo answer this e-mail use the e-mail link at the user\'s profile.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('682', 'EN', 'Subject:', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('683', 'EN', 'All information will be handled confidential and will not be disclosed to third parties!', '2010-08-28 11:48:08');

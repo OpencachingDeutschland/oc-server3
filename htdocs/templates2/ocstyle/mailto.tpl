@@ -82,8 +82,8 @@
                         <span class="smalltext">{t}To protect you and us from abuse:{/t}</span>
                         <ul style="margin:0; line-height:1.1em">
                             <li class="smalltext">{t}Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!{/t}</li>
-                            <li class="smalltext">{t}All relevant informations will be logged (date/time, sender/receiver and IP address){/t}</li>
-                            <li class="smalltext">{t}All informations will be handled confidential and not published to third parties!{/t}</li>
+                            <li class="smalltext">{t}All relevant information will be logged (date/time, sender/receiver and IP address){/t}</li>
+                            <li class="smalltext">{t}All information will be handled confidential and not published to third parties!{/t}</li>
                         </ul>
                     </div>
                 </td>

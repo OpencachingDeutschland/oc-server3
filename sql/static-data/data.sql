@@ -1049,7 +1049,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('113', 'HTML Tag
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('114', 'Description', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('115', 'Create a cache', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('116', 'Admin', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('117', 'Informations', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('117', 'Information', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('118', 'Caches', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('119', 'My profile', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('120', 'New logs', '2010-08-28 11:48:03');
@@ -1493,7 +1493,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('584', 'Picture 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('585', 'There are no pictures for the Geocache.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('586', 'As preview picture', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('587', 'My profile data', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('588', 'The following informations are stored in your userprofile:', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('588', 'The following information are stored in your userprofile:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('590', 'Username:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('591', 'The country is not valid.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('592', 'The entered radius is not valid.', '2010-08-28 11:48:04');
@@ -1586,7 +1586,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('679', 'Sorry, t
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('680', 'An unkown error occured and the E-Mail was not sent.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('681', '\'%1\' contacted you via %2 The user profile: %2viewprofile.php?userid=%3 To reply this E-Mail use the E-Mail link on the users profile.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('682', 'Subject:', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('683', 'All informations will be handled confidential and not published to third parties!', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('683', 'All information will be handled confidential and not published to third parties!', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('684', '\'%1\' with the E-Mail address %2 contacted you via %3 The user profile: %3viewprofile.php?userid=%4 Use the reply button of your E-Mail agent to answer this E-Mail.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('685', 'E-Mail to %1 was sent', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('686', 'Content:', '2010-08-28 11:48:04');
@@ -1597,7 +1597,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('690', 'Send my 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('691', 'This enables the receiver to answer your E-Mail directly with his E-Mail agent. You may enable this option by default in your <a href=\"myprofile.php\">user profile</a>.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('692', 'To protect you and us from abuse:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('693', 'Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('694', 'All relevant informations will be logged (date/time, sender/receiver and IP address)', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('694', 'All relevant information will be logged (date/time, sender/receiver and IP address)', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('696', 'Sorry, the Geocache is not published.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('697', 'Show all logentries', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('698', 'Show Geocache', '2010-08-28 11:48:04');
@@ -1815,7 +1815,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1279', '\&lt;ht
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1292', 'Setting smilies is not supported', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1296', 'Only the following picture formats are allowed: %1.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1297', 'at (time)', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1298', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the %1Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\" /> Number of users that recommend this cache<br /> <img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\" /> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\" />', '2010-08-28 12:03:52');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1298', 'The following list is generated automatically by the given recommendations of the users. You can find more information on regional classification in the %1Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\" /> Number of users that recommend this cache<br /> <img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\" /> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\" />', '2010-08-28 12:03:52');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1299', 'File upload failed!', '2010-08-29 17:44:48');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1300', 'XML file could not be loaded!', '2010-08-29 17:44:53');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1301', 'SQL Export', '2010-08-29 17:45:41');
@@ -2207,9 +2207,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1758', 'The acc
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1759', 'Note:', '2011-05-20 23:48:12');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1760', 'Include a coordinate in the note', '2011-05-20 23:48:12');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1761', 'The note is not visible to other users. The note and the optional coordinate will be included in GPX-file downloads and sent to the GPS device.', '2011-05-20 23:48:12');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1763', 'Your browser has rejected our cookie.<br /> You can find more informations about this topic in the <a href=\"%1\">Opencaching help</a>.', '2011-05-20 23:48:15');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1763', 'Your browser has rejected our cookie.<br /> You can find more information about this topic in the <a href=\"%1\">Opencaching help</a>.', '2011-05-20 23:48:15');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1764', 'Personal cache note', '2011-05-20 23:48:29');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1765', 'This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.', '2011-05-20 23:48:29');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1765', 'This geocache is probably placed within a nature protection area! See %1here</a> for further information, please.', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1766', 'This geocache is probably placed within the following protected areas (%1Info</a>):', '2011-05-20 23:48:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1767', 'Quick translation', '2011-07-10 18:02:33');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1768', 'Disable', '2011-07-10 18:02:33');
@@ -2800,7 +2800,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2517', 'share p
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2518', 'total recommendations', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2519', 'Gauss-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2520', 'Show inconsistencies', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2521', 'This table contains some false positives. References from the \"libse\" code (personal cache notes, additional waypoints) are not detected, as well as textes which are passed by variable to translation functions and multiline texts. \"Help\", \"Forum\", \"Teamblog\" and \"Informations\" are referenced in local configuration files. So be very careful before deleting anything.', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2521', 'This table contains some false positives. References from the \"libse\" code (personal cache notes, additional waypoints) are not detected, as well as textes which are passed by variable to translation functions and multiline texts. \"Help\", \"Forum\", \"Teamblog\" and \"Information\" are referenced in local configuration files. So be very careful before deleting anything.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2522', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2523', 'Official OC logos (up-to-date):', '2015-11-24 23:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2524', 'Stored query', '2015-01-20 20:37:00');
@@ -7444,7 +7444,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2518', 'DE', 'Empfehlungen gesamt', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'DE', 'Gauß-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2520', 'DE', 'Inkonsistenzen anzeigen', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2521', 'DE', 'Diese Tabelle enthält einige Fehleinträge. Referenzen aus dem \"libse\"-Code (persönliche Cachenotizen, zusätzliche Wegpunkte) werden nicht erkannt, ebenso wie Texte, die als Variable an Übersetzungsfunktionen übergeben werden, und mehrzeilige Texte. \"Help\", \"Forum\", \"Teamblog\" and \"Informations\" werden in lokalen Konfigurationsdateien verwendet. Daher ist beim Löschen von Einträgen Vorsicht geboten.', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2521', 'DE', 'Diese Tabelle enthält einige Fehleinträge. Referenzen aus dem \"libse\"-Code (persönliche Cachenotizen, zusätzliche Wegpunkte) werden nicht erkannt, ebenso wie Texte, die als Variable an Übersetzungsfunktionen übergeben werden, und mehrzeilige Texte. \"Help\", \"Forum\", \"Teamblog\" and \"Information\" werden in lokalen Konfigurationsdateien verwendet. Daher ist beim Löschen von Einträgen Vorsicht geboten.', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'DE', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'DE', 'Offizielle OC-Logos (up-to-date):', '2015-11-24 23:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'DE', 'Gespeicherte Suche', '2015-01-20 20:37:00');
@@ -8384,7 +8384,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'EN', 'Setting smilies is not supported.', '2010-08-28 11:48:08');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'EN', 'Only the following picture formats are allowed: %1.', '2010-08-28 11:50:56');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'EN', 'am', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'EN', 'The following list is generated automatically by the given recommendations of the users. You can find more informations on regional classification in the %1Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\" /> Number of users that recommend this cache<br /> <img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\" /> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\" />', '2010-08-29 22:49:51');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'EN', 'The following list is generated automatically by the given recommendations of the users. You can find more informationon regional classification in the %1Wiki</a>.<br /> <br /> The numbers in the list below means:<br /> <img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommendations\" /> Number of users that recommend this cache<br /> <img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Found\" /> Checks = Number of time the cache was found<br /> Index tries to take the number of recommendations and founds in an order to show \'the best\' geocache first.<br /> <img src=\"images/tops-formula.png\" border=\"0\" alt=\"Formula\" />', '2010-08-29 22:49:51');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'EN', 'File upload failed!', '2010-08-29 22:50:32');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'EN', 'XML file could not be loaded!', '2010-08-29 22:50:38');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'EN', 'SQL Export', '2010-08-29 23:28:25');

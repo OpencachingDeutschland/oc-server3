@@ -12,7 +12,7 @@ $tpl->menuitem = MNU_START_REGISTER;
 
 $countriesList = new countriesList();
 
-// Read register informations
+// Read register information
 $show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] + 0 : 0;
 $username = isset($_POST['username']) ? $_POST['username'] : '';
 $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';

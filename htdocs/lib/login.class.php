@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  This class provides access to the login user data. Informations are
+ *  This class provides access to the login user data. Information are
  *  stored in a cookie.
  *
  *  Methods:

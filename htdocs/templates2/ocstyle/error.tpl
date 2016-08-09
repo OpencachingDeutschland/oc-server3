@@ -46,7 +46,7 @@
             ({$id}) {t}Mail template does not exist.{/t}
         {elseif $id==ERROR_NO_COOKIES}
             ({$id}) {t 1=$opt.cms.login 2=$opt.page.sitename}Your browser has rejected our cookie.<br />
-            You can find more informations about this topic in the <a href="%1">Opencaching help</a>.{/t}
+            You can find more information about this topic in the <a href="%1">Opencaching help</a>.{/t}
         {elseif $id==ERROR_ALREADY_LOGGEDIN}
             ({$id}) {t}You are already logged in.<br />
             Please <a href="login.php?action=logout">logout</a> to login again.{/t}

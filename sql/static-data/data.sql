@@ -1787,7 +1787,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('915', 'Scan com
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('916', 'Current file:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('921', 'Info', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('922', 'INTERNAL_LANG', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('923', 'The compilation of the template faild. This should be a temporary failure. Please try again in some minutes.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('923', 'The compilation of the template failed. This should be a temporary failure. Please try again in some minutes.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('933', 'Scan source codes', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('954', 'Default', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1059', 'There already exists an account with that username.', '2010-08-28 11:48:04');

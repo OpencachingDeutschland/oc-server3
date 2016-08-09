@@ -21,7 +21,7 @@
         {elseif $id==ERROR_TEMPLATE_NOT_FOUND}
             ({$id}) {t}Template does not exist.{/t}
         {elseif $id==ERROR_COMPILATION_FAILED}
-            ({$id}) {t}The compilation of the template faild. This should be a temporary failure. Please try again in some minutes.{/t}
+            ({$id}) {t}The compilation of the template failed. This should be a temporary failure. Please try again in some minutes.{/t}
         {elseif $id==ERROR_NO_ACCESS}
             ({$id}) {t}Sorry, you are not allowed to view this page.{/t}
         {elseif $id==ERROR_CACHE_NOT_EXISTS}

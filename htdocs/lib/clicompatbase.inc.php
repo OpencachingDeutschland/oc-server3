@@ -98,7 +98,7 @@ function escape_javascript($text)
     return str_replace('\'', '\\\'', str_replace('"', '&quot;', $text));
 }
 
-// called if mysql_query faild, sends email to sysadmin
+// called if mysql_query failed, sends email to sysadmin
 function sql_failed($sql)
 {
     sql_error();

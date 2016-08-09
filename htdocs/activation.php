@@ -22,7 +22,7 @@ $email = isset($_REQUEST['email']) ? trim($_REQUEST['email']) :
 $tpl->assign('errorEMail', false);
 $tpl->assign('errorCode', false);
 $tpl->assign('errorAlreadyActivated', false);
-$tpl->assign('sucess', false);
+$tpl->assign('success', false);
 
 if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
     $email_not_ok = is_valid_email_address($email) ? false : true;
@@ -34,7 +34,7 @@ if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
             if (($r['code'] == $code) && ($code != '')) {
                 // ok, account aktivieren
                 sql("UPDATE `user` SET `is_active_flag`=1, `activation_code`='' WHERE `user_id`='&1'", $r['id']);
-                $tpl->assign('sucess', true);
+                $tpl->assign('success', true);
             } else {
                 if ($r['code'] == '') {
                     $tpl->assign('errorAlreadyActivated', true);

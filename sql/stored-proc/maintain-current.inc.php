@@ -1088,7 +1088,7 @@ sql(
                     
             IF (SELECT COUNT(*) FROM `cache_waypoint_pool` WHERE `uuid`=NEW.`uuid`) = 0 THEN
 
-                /* waypoint reservation was not successfull. Maybe we are on a development machine, where cronjob for waypoint pool
+                /* waypoint reservation was not successful. Maybe we are on a development machine, where cronjob for waypoint pool
                  * generation did not run or the pool is empty. To get a valid waypoint, we simply increment the highest used waypoint by one.
                  * NOTE: This ignores the setting of opt[logic][waypoint_pool][fill_gaps]
                  * CAUTION: This statement is realy slow and you should always keep your waypoint pool filled with some waypoint on a production server

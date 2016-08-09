@@ -574,7 +574,7 @@ class user
         return $this->reUser->getAnyChanged();
     }
 
-    // return if successfull (with insert)
+    // return if successful (with insert)
     public function save()
     {
         $bNeedStatpicClear = $this->reUser->getChanged('username');

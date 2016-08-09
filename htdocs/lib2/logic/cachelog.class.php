@@ -272,10 +272,10 @@ class cachelog
         return $this->reCacheLog->getAnyChanged();
     }
 
-    // return if successfull (with insert)
+    // return if successful (with insert)
     public function save()
     {
-        // additional safeguard against setting unallowd log flags
+        // additional safeguard against setting not allowed log flags
         if (!sql_value(
             "SELECT `maintenance_logs` FROM `log_types` WHERE `id`='&1'",
             false,

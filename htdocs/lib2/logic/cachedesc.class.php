@@ -113,7 +113,7 @@ class cachedesc
         return $this->reCacheDesc->getAnyChanged();
     }
 
-    // return if successfull (with insert)
+    // return if successful (with insert)
     public function save()
     {
         sql_slave_exclude();

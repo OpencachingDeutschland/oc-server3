@@ -159,7 +159,7 @@ class useroptions
         return false;
     }
 
-    // return if successfull (with insert)
+    // return if successful (with insert)
     public function save()
     {
         foreach ($this->nOptions as $record) {

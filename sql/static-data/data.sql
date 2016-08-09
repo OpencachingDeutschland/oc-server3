@@ -1098,7 +1098,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('165', 'Mayotte'
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('166', 'The activation code was sent with an E-Mail to you.<br /> Please follow the instructions in the E-Mail.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('167', 'To create an account on %1, you have to enter a vaild E-Mail address and an username. An E-Mail will be sent to the address you supplied with an activation code.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('168', 'There already exists an account with that E-Mail address. It\'s not possible the register a scond account with the same E-Mail address.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('171', 'The activation code or E-Mail was incorrect.<br /> The activation of your account was not successfull<br /> Please use the E-Mail where the registration mail was sent to.<br /> <br /> Please check if you have mistyped - if you cannot solve the problem yourself, contact us via <a href=\"mailto:%1\">%1</a>', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('171', 'The activation code or E-Mail was incorrect.<br /> The activation of your account was not successful<br /> Please use the E-Mail where the registration mail was sent to.<br /> <br /> Please check if you have mistyped - if you cannot solve the problem yourself, contact us via <a href=\"mailto:%1\">%1</a>', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('172', 'Yemen', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('173', 'Samoa', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('174', 'Go', '2010-08-28 11:48:03');
@@ -1147,7 +1147,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('222', 'Remind m
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('223', 'Tonga', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('224', 'Please fill in username and password!', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('225', 'Logout was successful.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('226', 'The login was not successfull.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('226', 'The login was not successful.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('227', 'The entered username or password did not match.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('228', 'Your tried to login more than %1 times in the last hour. The next login will not be allowed before one hour since the first try has passed.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('229', 'Your account is not acivated.', '2010-08-28 11:48:03');
@@ -1384,7 +1384,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('462', 'The news
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('463', 'Newsentry:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('464', 'Topic:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('465', 'Are there any news about Geocaching?<br /> Here you can create a newsentry, that will be shown on the start page.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('466', 'The activation of your account was successfull. You can now login on the login page.<br /><br /> <a href=\"login.php\">Go to the login page</a>', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('466', 'The activation of your account was successful. You can now login on the login page.<br /><br /> <a href=\"login.php\">Go to the login page</a>', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('467', 'Hint', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('468', 'Activate account', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('469', 'Best regards,<br/>the Opencaching team', '2010-08-28 11:48:04');

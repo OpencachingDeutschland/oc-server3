@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 {strip}
-{if $sucess==true}
+{if $success==true}
 
     <div class="content2-pagetitle">
         <img src="resource2/{$opt.template.style}/images/profile/32x32-profile.png" style="margin-right: 10px;" width="32" height="32" alt="" />
@@ -13,7 +13,7 @@
     </div>
     <div class="content-txtbox-noshade">
         <p style="line-height: 1.6em;">
-            {t}The activation of your account was successfull. You can now login on the login page.<br /><br />
+            {t}The activation of your account was successful. You can now login on the login page.<br /><br />
             <a href="login.php">Go to the login page</a>{/t}
         </p>
         <div class="buffer" style="width: 500px;">&nbsp;</div>
@@ -49,7 +49,7 @@
 
           <p style="line-height: 1.6em;">
                 {t 1=$opt.mail.contact}The activation code or E-Mail was incorrect.<br />
-                The activation of your account was not successfull<br />
+                The activation of your account was not successful<br />
                 Please use the E-Mail where the registration mail was sent to.<br />
                 <br />
                 Please check if you have mistyped - if you cannot solve the problem yourself,

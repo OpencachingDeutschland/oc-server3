@@ -1832,7 +1832,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1311', 'Toggle 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1312', 'Commit', '2010-08-29 17:45:41');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1315', 'Date:', '2010-09-06 22:30:43');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1316', 'Log-entry:', '2010-09-06 22:30:43');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1317', 'passwort to log:', '2010-09-06 22:30:44');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1317', 'password to log:', '2010-09-06 22:30:44');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1319', 'Invalid password!', '2010-09-06 22:30:49');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1322', 'New log-entry', '2010-09-06 22:30:56');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1323', 'Type of log-entry:', '2010-09-06 22:30:56');
@@ -8401,7 +8401,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1312', 'EN', 'Commit', '2010-08-29 23:27:44');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1315', 'EN', 'Date:', '2010-09-10 23:33:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1316', 'EN', 'Log-entry:', '2010-09-10 23:56:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1317', 'EN', 'Passwort to log:', '2010-09-10 23:57:19');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1317', 'EN', 'Password to log:', '2010-09-10 23:57:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1319', 'EN', 'Invalid password!', '2010-09-11 00:06:49');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1322', 'EN', 'New log-entry', '2010-09-11 00:07:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1323', 'EN', 'Type of log-entry:', '2010-09-11 00:06:42');

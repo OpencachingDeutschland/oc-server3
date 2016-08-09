@@ -18,7 +18,7 @@
  *
  ***************************************************************************/
 
-define('LOGIN_UNKNOWN_ERROR', - 1);     // unkown error occured
+define('LOGIN_UNKNOWN_ERROR', - 1);     // unkown error occurred
 define('LOGIN_OK', 0);            // login succeeded
 define('LOGIN_BADUSERPW', 1);     // bad username or password
 define('LOGIN_TOOMUCHLOGINS', 2); // too many logins in short time

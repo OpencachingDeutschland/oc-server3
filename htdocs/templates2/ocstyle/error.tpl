@@ -6,18 +6,18 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
     <img src="resource2/{$opt.template.style}/images/misc/32x32-gears.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-    {t}An error occured while processing the page{/t}
+    {t}An error occurred while processing the page{/t}
 </div>
 
 <div class="content-txtbox-noshade">
-    <p style="line-height: 1.6em;">{t}An error occured while processing the page. If you've called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.{/t}</p>
-    <p style="line-height: 1.6em;"><strong>{t}The following error occured:{/t}</strong></p>
+    <p style="line-height: 1.6em;">{t}An error occurred while processing the page. If you've called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.{/t}</p>
+    <p style="line-height: 1.6em;"><strong>{t}The following error occurred:{/t}</strong></p>
     <p style="line-height: 1.6em;">
         {t}Page:{/t} {$page|escape}<br/>
         {t}Error message{/t}{t}#colonspace#{/t}:
 
         {if $id==ERROR_UNKNOWN}
-            ({$id}) {t}An unkown error occured.{/t}
+            ({$id}) {t}An unkown error occurred.{/t}
         {elseif $id==ERROR_TEMPLATE_NOT_FOUND}
             ({$id}) {t}Template does not exist.{/t}
         {elseif $id==ERROR_COMPILATION_FAILED}

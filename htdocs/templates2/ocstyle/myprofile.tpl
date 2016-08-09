@@ -212,7 +212,7 @@
             {if $errorUnknown==true}
                 <tr>
                     <td colspan="2">
-                        <span class="errormsg">{t}An unknown error occured.{/t}</span>
+                        <span class="errormsg">{t}An unknown error occurred.{/t}</span>
                     </td>
                 </tr>
             {/if}

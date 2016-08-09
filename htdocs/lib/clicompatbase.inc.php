@@ -426,7 +426,7 @@ function sql_error()
         if ($db_error <= 1) {
             tpl_errorMsg('sql_error', $errmsg);
         } else {
-            // datbase error recursion, because another error occured while trying to
+            // datbase error recursion, because another error occurred while trying to
             // build the error template (e.g. because connection was lost, or an error mail
             // could not load translations from database)
 

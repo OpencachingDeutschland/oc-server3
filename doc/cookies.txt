@@ -11,13 +11,14 @@ Contents:  - login/session data  (login.class.php)
            - country & language selection  (common.inc.php)
            - last search query-id  (search.php)
            - translation interface mode  (translate.php)
-Protocol:  http/https; depends on $opt['page']['https']['mode'] and protocol during login
+isSecure:  false/true; depends on $opt['page']['https']['mode'] and protocol during login
 
 Name:      $opt['session']['cookiename'] . 'https_session'
 File:      cookie.class.php
 Type:      temporary, session created over https and while session is active
 Contents:  session data only available with https -> force redirect to https if http is used
-Protocol:  http/https
+isSecure:  false
+isHttpOnly: true; avoid attacks by js
 
 Name:      'ocgmlastpos'
 Type:      permanent

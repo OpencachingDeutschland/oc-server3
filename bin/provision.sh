@@ -258,6 +258,43 @@ else
     exit 1;
 fi
 
+label "updating database structures ..."
+cd /var/www/html
+
+php bin/dbsv-update.php
+
+if [ -f "sql/stored-proc/maintain.php" ]; then
+    label "reinstall triggers (new) ..."
+    cd sql/stored-proc
+    php maintain.php
+    cd ../..
+elif [ -f "htdocs/doc/sql/stored-proc/maintain.php" ]; then
+    label "-- reinstall triggers (old) ..."
+    cd htdocs/doc/sql/stored-proc
+    php maintain.php
+    cd ../../../..
+else
+    label "error: maintain.php not found"
+fi
+
+if [ -f "sql/static-data/data.sql" ]; then
+  label "importing static data (new) ..."
+  mysql -u root -hlocalhost -proot opencaching < sql/static-data/data.sql
+elif [ -f "htdocs/doc/sql/static-data/data.sql" ]; then
+  echo "-- importing static data (old) ..."
+  mysql -u root -hlocalhost -proot opencaching < htdocs/doc/sql/static-data/data.sql
+else
+  echo "error: data.sql not found"
+  exit
+fi
+
+label "symfony migrations ..."
+chmod 755 ./htdocs/bin/console
+./htdocs/bin/console doctrine:migrations:migrate -n
+
+echo "-- updating OKAPI database ..."
+php bin/okapi-update.php|grep -i -e current -e mutation
+
 echo "export PS1='\[\033[38;5;11m\]OCdev:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]'" >> /home/vagrant/.bashrc
 echo "cd /var/www/html/" >> /home/vagrant/.bashrc
 echo "alias la='ls -alh'" >> /home/vagrant/.bashrc

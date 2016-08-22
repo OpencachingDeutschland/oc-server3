@@ -11,7 +11,7 @@ function errorLabel {
     echo -e "\n\033[0;31m=> ${1}\033[0m\n"
 }
 
-if [[ -z "$DUMP_URL" ]]; then
+if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
     errorLabel "No dump url given.\nPlease edit provision.sh and enter an url for the sql dump\nRun 'vagrant provision' if you are done.\n\n"
     exit 1
 fi
@@ -203,11 +203,6 @@ cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/
 echo "extension=imagick.so" >> /etc/php.ini.tmp
 mv /etc/php.ini.tmp /etc/php.ini
 
-
-label "Install imagick"
-printf "\n" | pecl install imagick
-
-
 label "Setup database user"
 mysqladmin -u root password root
 mysql -u root -proot -e "CREATE USER 'opencaching';"
@@ -240,10 +235,14 @@ label "Download translations from Crowdin"
 cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
 
 label "Install Database Dump from '$DUMP_URL'"
-label "Download SQL Dump"
-curl -o opencaching_dump.sql.gz "$DUMP_URL"
-gzip -d opencaching_dump.sql.gz
 
+if [ -f opencaching_dump.sql ]; then
+    label "now download is needed..."
+else
+    label "Download SQL Dump"
+    curl -o opencaching_dump.sql.gz "$DUMP_URL"
+    gzip -d opencaching_dump.sql.gz
+fi
 if [ -f opencaching_dump.sql ]; then
     label "Import SQL Dump"
     mysql -uroot -proot < opencaching_dump.sql

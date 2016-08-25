@@ -252,7 +252,7 @@ if [ -f opencaching_dump.sql ]; then
     cd /var/www/html/ && php bin/dbupdate.php
 
     label "Install OKAPI"
-    curl http://local.opencaching.de/okapi/update?install=true
+    curl http://local.team-opencaching.de/okapi/update?install=true
 else
     errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
     exit 1;

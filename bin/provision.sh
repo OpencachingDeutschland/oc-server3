@@ -300,4 +300,8 @@ echo "cd /var/www/html/" >> /home/vagrant/.bashrc
 echo "alias la='ls -alh'" >> /home/vagrant/.bashrc
 echo "alias ..='cd ..'" >> /home/vagrant/.bashrc
 
+label "setting up phpunit"
+cd /usr/local/bin && sudo ln -s /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
+sudo chmod 755 phpunit
+
 label "All done, have fun."

@@ -216,6 +216,7 @@ cd /var/www/html
 cp ./htdocs/config2/settings-sample-vagrant.inc.php ./htdocs/config2/settings.inc.php
 cp ./htdocs/lib/settings-sample-vagrant.inc.php ./htdocs/lib/settings.inc.php
 cp ./htdocs/statpics/htaccess-dist ./htdocs/statpics/.htaccess
+cp ./htdocs/app/config/parameters_vagrant.yml ./htdocs/app/config/parameters.yml
 
 cp /var/www/html/local/prodsys/phpzip.php /var/www/html/bin/
 sed -i 's/\/path\/to\/htdocs\/download\/zip\//\/var\/www\/html\/htdocs\/download\/zip\//' /var/www/html/bin/phpzip.php

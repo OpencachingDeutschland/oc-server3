@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\FieldNote;
+use AppBundle\Exception\WrongDateFormatException;
 use AppBundle\Exception\WrongFileFormatException;
 use AppBundle\Service\Interfaces\FieldNoteServiceInterface;
 use AppBundle\Service\Traits\ErrorTrait;
@@ -45,6 +46,7 @@ class FieldNoteService implements FieldNoteServiceInterface
      * @param null|\DateTime $ignoreBeforeDate
      *
      * @return bool
+     * @throws \AppBundle\Exception\WrongDateFormatException
      * @throws \AppBundle\Exception\WrongFileFormatException
      */
     public function importFromFile($fileName, $userId, DateTime $ignoreBeforeDate = null)
@@ -65,6 +67,11 @@ class FieldNoteService implements FieldNoteServiceInterface
                 $data[1],
                 new DateTimeZone('UTC')
             );
+            if (!$date) {
+                throw new WrongDateFormatException(
+                    $this->translator->trans('field_notes.error.wrong_date_format')
+                );
+            }
 
             if ($ignoreBeforeDate !== null && $date < $ignoreBeforeDate) {
                 continue;

@@ -35,7 +35,7 @@ class FieldNotesController extends AbstractController
             $file = $form->getData()[UploadFieldNotesType::FIELD_FILE];
             try {
                 $ignoreDate = null;
-                if ($form->getData()[UploadFieldNotesType::FIELD_IGNORE] && $form->getData()[UploadFieldNotesType::FIELD_IGNORE_DATE]) {
+                if (!empty($form->getData()[UploadFieldNotesType::FIELD_IGNORE])) {
                     $ignoreDate = DateUtil::dateTimeFromMySqlFormat($form->getData()[UploadFieldNotesType::FIELD_IGNORE_DATE]);
                 }
                 $fieldNoteService->importFromFile($file->getRealPath(), $user->getId(), $ignoreDate);

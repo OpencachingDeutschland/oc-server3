@@ -5,7 +5,7 @@ VM_IP		= "10.10.0.101"   # IP of the VM, must be unique in your network
 VM_MEMORY	= 1024
 VM_CPUS		= 1
 VM_NAME		= "OpenCaching DEV VM"
-VM_HOST		= "local.opencaching.de"
+VM_HOST		= "local.team-opencaching.de"
 
 if Vagrant::Util::Platform.windows?
   HOSTS_FILE = ENV['SystemRoot'] + '\system32\drivers\etc\hosts'

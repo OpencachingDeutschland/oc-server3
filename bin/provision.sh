@@ -12,8 +12,7 @@ function errorLabel {
 }
 
 if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
-    errorLabel "No dump url given.\nPlease edit provision.sh and enter an url for the sql dump\nRun 'vagrant provision' if you are done.\n\n"
-    exit 1
+    errorLabel "No dump url given.\n\nwe will import a minimal dump\n\n"
 fi
 
 label "Install required components"
@@ -235,28 +234,34 @@ cd /var/www/html/htdocs && composer install
 label "Download translations from Crowdin"
 cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
 
-label "Install Database Dump from '$DUMP_URL'"
-
-if [ -f opencaching_dump.sql ]; then
-    label "now download is needed..."
+if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
+    label "import minimal dump to database"
+    mysql -uroot -proot < /var/www/html/sql/dump_v158.sql
 else
-    label "Download SQL Dump"
-    curl -o opencaching_dump.sql.gz "$DUMP_URL"
-    gzip -d opencaching_dump.sql.gz
-fi
-if [ -f opencaching_dump.sql ]; then
-    label "Import SQL Dump"
-    mysql -uroot -proot < opencaching_dump.sql
+    if [ -f opencaching_dump.sql ]; then
+        label "now download is needed..."
+    else
+        label "Install Database Dump from '$DUMP_URL'"
+        label "Download SQL Dump"
+        curl -o opencaching_dump.sql.gz "$DUMP_URL"
+        gzip -d opencaching_dump.sql.gz
+    fi
 
-    label "Run database and cache updates"
-    cd /var/www/html/ && php bin/dbupdate.php
-
-    label "Install OKAPI"
-    curl http://local.team-opencaching.de/okapi/update?install=true
-else
-    errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
-    exit 1;
+    if [ -f opencaching_dump.sql ]; then
+        label "Import SQL Dump"
+        mysql -uroot -proot < opencaching_dump.sql
+    else
+        errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
+        exit 1;
+    fi
 fi
+
+label "Run database and cache updates"
+cd /var/www/html/ && php bin/dbupdate.php
+
+label "Install OKAPI"
+curl http://local.opencaching.de/okapi/update?install=true
+
 
 label "updating database structures ..."
 cd /var/www/html

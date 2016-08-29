@@ -53,3 +53,6 @@ Thumbs.db
 parameters.yml
 .crowdin.yaml
 htdocs/app/Resources/translations
+
+/htdocs/bin/*.zip
+/htdocs/bin/translation

@@ -28,6 +28,7 @@
     <tr><td><img src="{$opt.page.teampic_url}mic@.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br />Pressesprecher; Anwendersupport, Datenpflege, Forenmoderation</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br />Leiter Technik/Systemadministration</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}pirate77.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=152708">pirate77</a><br />Leiter Anwendersupport und Datenpflege; Wiki</td></tr>
+    <tr><td><img src="{$opt.page.teampic_url}teiling88.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br />Entwicklungsbeauftragter</td></tr>
     <tr><td></td><td></td><td></td></tr>
     <tr><th colspan="3"><br /><span class="content-title-noshade-size1">Weitere Teammitglieder</span></th></tr>
     <tr><td></td><td></td><td></td></tr>
@@ -45,7 +46,6 @@
     <tr><td><img src="{$opt.page.teampic_url}slini11.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br />Softwareentwicklung</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}spike05de.png" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=130977">Spike05de</a><br />Anwendersupport, Datenpflege</td></tr>
     <tr><td><img src="{$opt.page.teampic_url}steingesicht.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br />Datenpflege, Forenmoderation</td></tr>
-    <tr><td><img src="{$opt.page.teampic_url}dummy.jpg" /></td><td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br />Softwareentwicklung</td></tr>
     <tr><td>&nbsp;</td></tr>
   </table>
 

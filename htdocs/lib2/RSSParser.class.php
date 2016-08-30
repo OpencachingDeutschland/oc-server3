@@ -13,6 +13,7 @@ class RSSParser
      *
      * @param int    $items number of feeditems to parse from feed
      * @param string $url   url of the feed to parse
+     * @param boolean $includetext
      *
      * @return string $item feeditems as HTML-string
      */

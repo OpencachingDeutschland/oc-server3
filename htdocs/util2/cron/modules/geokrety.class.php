@@ -61,12 +61,20 @@ class geokrety
 
     /* remove given file
      */
+
+    /**
+     * @param string $file
+     */
     public function removeXML($file)
     {
         @unlink($file);
     }
 
     /* import the given XML file
+     */
+
+    /**
+     * @param string $file
      */
     public function importXML($file)
     {
@@ -124,6 +132,9 @@ class geokrety
         setSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], strtotime($startupdate)));
     }
 
+    /**
+     * @param DOMNode $element
+     */
     public function importGeoKret($element)
     {
         global $opt;
@@ -204,6 +215,9 @@ class geokrety
     }
 
 
+    /**
+     * @param DOMNode $element
+     */
     public function importMove($element)
     {
         global $opt;
@@ -292,6 +306,9 @@ class geokrety
     }
 
 
+    /**
+     * @param integer $id
+     */
     public function checkGeoKretType($id, $name)
     {
         sql(
@@ -302,6 +319,9 @@ class geokrety
     }
 
 
+    /**
+     * @param integer $id
+     */
     public function checkUser($id, $name)
     {
         if ($id == 0) {
@@ -312,6 +332,9 @@ class geokrety
     }
 
 
+    /**
+     * @param integer $id
+     */
     public function checkMoveType($id, $name)
     {
         sql(
@@ -322,6 +345,9 @@ class geokrety
     }
 
 
+    /**
+     * @param string $element
+     */
     public function GetNodeValue(&$domnode, $element)
     {
         $subnode = $domnode->getElementsByTagName($element);
@@ -333,6 +359,12 @@ class geokrety
     }
 
 
+    /**
+     * @param string $element
+     * @param string $attr
+     *
+     * @return string
+     */
     public function GetNodeAttribute(&$domnode, $element, $attr)
     {
         $subnode = $domnode->getElementsByTagName($element);

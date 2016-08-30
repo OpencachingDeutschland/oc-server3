@@ -26,6 +26,9 @@
 *           Returns: if $file specified - true if OK
                      if $file not specified - image data
 */
+/**
+ * @param resource $img
+ */
 function imagebmp($img,$file="",$RLE=0)
 {
 
@@ -463,6 +466,9 @@ function freaddword($f)
 
 
 
+/**
+ * @param integer $byte
+ */
 function RetBits($byte,$start,$len)
 {
 $bin=decbin8($byte);
@@ -474,6 +480,10 @@ return $r;
 
 
 $CurrentBit=0;
+/**
+ * @param resource $f
+ * @param integer $count
+ */
 function freadbits($f,$count)
 {
  global $CurrentBit,$SMode;
@@ -505,6 +515,10 @@ function RGBToHex($Red,$Green,$Blue)
         {
                 return chr($n & 255).chr(($n >> 8) & 255).chr(($n >> 16) & 255).chr(($n >> 24) & 255);
         }
+
+        /**
+         * @param integer $n
+         */
         function int_to_word($n)
         {
                 return chr($n & 255).chr(($n >> 8) & 255);
@@ -516,6 +530,9 @@ function decbin8($d)
 return decbinx($d,8);
 };
 
+/**
+ * @param integer $n
+ */
 function decbinx($d,$n)
 {
 $bin=decbin($d);

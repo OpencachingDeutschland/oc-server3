@@ -84,6 +84,11 @@ function smarty_prefilter_t($source, &$smarty)
 /* $block ... {t[ a=$a|nbsp b="a" ...]}
  *
  */
+/**
+ * @param string $block
+ * @param string $message
+ * @param integer $line
+ */
 function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
 {
     if ($message != '') {
@@ -252,6 +257,9 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
     return $attrs;
 }
 
+/**
+ * @param string[] $needles
+ */
 function smarty_prefilter_t_strpos_multi($haystack, $needles)
 {
     $arg = func_get_args();

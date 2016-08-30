@@ -489,6 +489,9 @@ function process_log_watch($user_id, $log_id)
     );
 }
 
+/**
+ * @param string $watchtext
+ */
 function insert_maintenance_flags($rLog, $language, $watchtext)
 {
     global $translate;
@@ -515,6 +518,9 @@ function insert_maintenance_flags($rLog, $language, $watchtext)
     return mb_ereg_replace('{maintenance_flags}', $flagtext, $watchtext);
 }
 
+/**
+ * @param string $domain
+ */
 function is_existent_maildomain($domain)
 {
     $smtp_serverlist = [];

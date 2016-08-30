@@ -262,6 +262,9 @@ class cachelog
         return $this->reCacheLog->getValue('owner_notified') != 0;
     }
 
+    /**
+     * @param integer $value
+     */
     public function setOwnerNotified($value)
     {
         return $this->reCacheLog->setValue('owner_notified', $value ? 1 : 0);

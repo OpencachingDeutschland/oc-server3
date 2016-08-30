@@ -367,6 +367,9 @@ exit;
 /* end parameter reading */
 
 
+/**
+ * @param integer $sessionid
+ */
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
     global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist;

@@ -1486,6 +1486,10 @@ if ($options['showresult'] == 1) {
         }
 
         // helper function for output modules
+
+        /**
+         * @param string $str
+         */
         function append_output($str)
         {
             global $db, $content, $bUseZip;

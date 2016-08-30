@@ -182,6 +182,9 @@ function display()
     $tpl->display();
 }
 
+/**
+ * @param user $user
+ */
 function assignFromUser($user)
 {
     global $tpl;

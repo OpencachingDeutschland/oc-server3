@@ -570,6 +570,9 @@ function decodeEntities($str)
     return $str;
 }
 
+/**
+ * @return string
+ */
 function changePlaceholder($str, $inverse = false)
 {
     static $translate = array(

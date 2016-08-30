@@ -159,6 +159,9 @@ function ftsearch_hash(&$str)
 }
 
 // str = long text
+/**
+ * @param boolean $simple
+ */
 function ftsearch_split(&$str, $simple)
 {
     global $ftsearch_ignores;
@@ -488,6 +491,9 @@ function ftsearch_delete_entries($object_type, $object_id, $cache_id)
     sql("DELETE FROM `search_index_times` WHERE `object_type`='&1' AND `object_id`='&2'", $object_type, $object_id);
 }
 
+/**
+ * @param integer $object_type
+ */
 function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last_modified)
 {
     ftsearch_delete_entries($object_type, $object_id, $cache_id);

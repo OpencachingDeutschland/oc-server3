@@ -84,6 +84,9 @@ class translate
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function v($message)
     {
         if ($message) {

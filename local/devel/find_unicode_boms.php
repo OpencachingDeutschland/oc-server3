@@ -39,6 +39,9 @@ function scan($dir, $subdirs)
 }
 
 
+/**
+ * @param string $path
+ */
 function testforbom($path)
 {
     $filestart = file_get_contents($path, false, null, 0, 2);

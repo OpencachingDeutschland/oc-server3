@@ -147,6 +147,9 @@ function sqldbg_begin()
     <?php
 }
 
+/**
+ * @param string $sql
+ */
 function sqldbg_execute($sql, $bSlave)
 {
     global $dblink;

@@ -245,6 +245,9 @@ $tpl->display();
 /* $truncatLastInsert = true   for downloaded file
  * $truncatLastInsert = false  to sign self generated file (in function export)
  */
+/**
+ * @param boolean $truncateLastInsert
+ */
 function calcDataSqlChecksum($truncateLastInsert)
 {
     global $opt;
@@ -388,6 +391,10 @@ function clearCache()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param string $relbasedir
+ * @param string $ext
+ */
 function unlinkFiles($relbasedir, $ext)
 {
     global $opt;
@@ -479,6 +486,9 @@ function resetIds()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param integer $freeId
+ */
 function useId($freeId)
 {
     $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
@@ -488,6 +498,9 @@ function useId($freeId)
     setId($lastId, $freeId);
 }
 
+/**
+ * @param integer $oldId
+ */
 function setId($oldId, $newId)
 {
     global $transIdCols;
@@ -566,6 +579,9 @@ function export()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param string $dir
+ */
 function enumSqlFiles($dir)
 {
     $retval = [];

@@ -333,7 +333,7 @@
                                 <img src="./images/npa.gif" alt="" />
                             </td>
                             <td style="text-align:left; vertical-align:top">
-                                {t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
+                                {t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See %1here</a> for further information, please.{/t}<br />
                                 <font size="2">
                                     {foreach from=$npaareasWarning item=npaItem name=npaareas}
                                         {$npaItem.npaTypeName|escape}

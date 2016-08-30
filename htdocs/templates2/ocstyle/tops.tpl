@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <td style="padding-bottom:20px;">
-            {t 1=$helppagelink 2=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more informations on
+            {t 1=$helppagelink 2=$opt.template.style}The following list is generated automatically by the given recommendations of the users. You can find more information on
             regional classification in the %1Wiki</a>.<br />
             <br />
             The numbers in the list below means:<br />

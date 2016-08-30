@@ -6,22 +6,22 @@
 {* OCSTYLE *}
 <div class="content2-pagetitle">
     <img src="resource2/{$opt.template.style}/images/misc/32x32-gears.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-    {t}An error occured while processing the page{/t}
+    {t}An error occurred while processing the page{/t}
 </div>
 
 <div class="content-txtbox-noshade">
-    <p style="line-height: 1.6em;">{t}An error occured while processing the page. If you've called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.{/t}</p>
-    <p style="line-height: 1.6em;"><strong>{t}The following error occured:{/t}</strong></p>
+    <p style="line-height: 1.6em;">{t}An error occurred while processing the page. If you've called this page from an hyperlink on our site and this error persists some time, please contact us via E-Mail.{/t}</p>
+    <p style="line-height: 1.6em;"><strong>{t}The following error occurred:{/t}</strong></p>
     <p style="line-height: 1.6em;">
         {t}Page:{/t} {$page|escape}<br/>
         {t}Error message{/t}{t}#colonspace#{/t}:
 
         {if $id==ERROR_UNKNOWN}
-            ({$id}) {t}An unkown error occured.{/t}
+            ({$id}) {t}An unknown error occurred.{/t}
         {elseif $id==ERROR_TEMPLATE_NOT_FOUND}
             ({$id}) {t}Template does not exist.{/t}
         {elseif $id==ERROR_COMPILATION_FAILED}
-            ({$id}) {t}The compilation of the template faild. This should be a temporary failure. Please try again in some minutes.{/t}
+            ({$id}) {t}The compilation of the template failed. This should be a temporary failure. Please try again in some minutes.{/t}
         {elseif $id==ERROR_NO_ACCESS}
             ({$id}) {t}Sorry, you are not allowed to view this page.{/t}
         {elseif $id==ERROR_CACHE_NOT_EXISTS}
@@ -46,12 +46,12 @@
             ({$id}) {t}Mail template does not exist.{/t}
         {elseif $id==ERROR_NO_COOKIES}
             ({$id}) {t 1=$opt.cms.login 2=$opt.page.sitename}Your browser has rejected our cookie.<br />
-            You can find more informations about this topic in the <a href="%1">Opencaching help</a>.{/t}
+            You can find more information about this topic in the <a href="%1">Opencaching help</a>.{/t}
         {elseif $id==ERROR_ALREADY_LOGGEDIN}
             ({$id}) {t}You are already logged in.<br />
             Please <a href="login.php?action=logout">logout</a> to login again.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_FORMAT}
-            ({$id}) {t}Unkown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.{/t}
+            ({$id}) {t}Unknown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_MANY}
             ({$id}) {t 1=$p1|escape}There exists more than one cache with the waypoint &quot;%1&quot;.{/t}
         {elseif $id==ERROR_SEARCHPLUGIN_WAYPOINT_NOTFOUND}

@@ -74,7 +74,7 @@ class View
         }
         catch (Exception $e)
         {
-            # Error occured. Make sure the lock is released and rethrow.
+            # Error occurred. Make sure the lock is released and rethrow.
 
             $lock->release();
             throw $e;

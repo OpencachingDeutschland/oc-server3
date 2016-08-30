@@ -66,7 +66,7 @@
             <p><small>{t}This table contains some false positives. References from the "libse" code
                 (personal cache notes, additional waypoints) are not detected, as well as textes which
                 are passed by variable to translation functions and multiline texts. "Help", "Forum",
-                "Teamblog" and "Informations" are referenced in local configuration files. So be very
+                "Teamblog" and "Information" are referenced in local configuration files. So be very
                 careful before deleting anything.{/t}
               </small></p>
         {elseif $action=="listall"}

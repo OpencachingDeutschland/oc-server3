@@ -75,7 +75,7 @@ Garmin.RemoteTransfer.MESSAGES = {
 	/**
 	 * Message used for general exceptions
 	 */
-	generalException: "An error occured while completing the request.",
+	generalException: "An error occurred while completing the request.",
 	/**
 	 * Message used when there is no response from the request.
 	 */

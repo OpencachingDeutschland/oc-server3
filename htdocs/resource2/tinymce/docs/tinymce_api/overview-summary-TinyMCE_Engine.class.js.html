@@ -1395,7 +1395,7 @@ TinyMCE_Engine.<span class="reserved">prototype</span> = {
 				<span class="reserved">if</span> (tinyMCE.isGecko &amp;&amp; e.type == <span class="literal">"keyup"</span> &amp;&amp; e.keyCode == 9)
 					tinyMCE.handleVisualAid(tinyMCE.selectedInstance.getBody(), true, tinyMCE.settings[<span class="literal">'visual'</span>], tinyMCE.selectedInstance);
 
-				<span class="comment">// Fix empty elements on return/enter, check where enter occured</span>
+				<span class="comment">// Fix empty elements on return/enter, check where enter occurred</span>
 				<span class="reserved">if</span> (tinyMCE.isMSIE &amp;&amp; e.type == <span class="literal">"keydown"</span> &amp;&amp; e.keyCode == 13)
 					tinyMCE.enterKeyElement = tinyMCE.selectedInstance.getFocusElement();
 

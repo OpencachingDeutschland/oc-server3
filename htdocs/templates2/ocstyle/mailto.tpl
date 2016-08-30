@@ -82,8 +82,8 @@
                         <span class="smalltext">{t}To protect you and us from abuse:{/t}</span>
                         <ul style="margin:0; line-height:1.1em">
                             <li class="smalltext">{t}Only E-Mail that regards Geocaching are allowed. Spaming is not allowed!{/t}</li>
-                            <li class="smalltext">{t}All relevant informations will be logged (date/time, sender/receiver and IP address){/t}</li>
-                            <li class="smalltext">{t}All informations will be handled confidential and not published to third parties!{/t}</li>
+                            <li class="smalltext">{t}All relevant information will be logged (date/time, sender/receiver and IP address){/t}</li>
+                            <li class="smalltext">{t}All information will be handled confidential and not published to third parties!{/t}</li>
                         </ul>
                     </div>
                 </td>
@@ -91,7 +91,7 @@
             <tr><td class="spacer" colspan="2"></td></tr>
 
             {if $errorUnkown==true}
-                <tr><td colspan="2" class="errormsg">{t}An unkown error occured and the E-Mail was not sent.{/t}</td></tr>
+                <tr><td colspan="2" class="errormsg">{t}An unknown error occurred and the E-Mail was not sent.{/t}</td></tr>
             {/if}
 
             <tr>

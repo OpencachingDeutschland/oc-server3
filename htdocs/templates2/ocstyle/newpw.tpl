@@ -44,7 +44,7 @@
         {elseif $emailRequested==true}
             <tr><td width="150px">&nbsp;</td><td><span class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}<br />{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</span></td></tr>
         {elseif $emailErrorUnknown==true}
-            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occured. The security code could not be sent to you.{/t}</span></td></tr>
+            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occurred. The security code could not be sent to you.{/t}</span></td></tr>
         {/if}
         <tr><td class="spacer" colspan="2"></td></tr>
     </table>
@@ -68,7 +68,7 @@
         <tr><td class="spacer" colspan="2"></td></tr>
 
         {if $errorUnknown==true}
-            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unkown error occured.{/t}</span></td></tr>
+            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occurred.{/t}</span></td></tr>
         {/if}
         <tr>
             <td>{t}E-Mail-Address:{/t}</td>

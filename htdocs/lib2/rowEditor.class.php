@@ -9,7 +9,7 @@ class rowEditor
 {
     public $sTable;
     public $sAutoIncrementField = null;
-    public $pk;     // (idx:name; type, default, nullable, value, insertfunction)
+    public $pk; // (idx:name; type, default, nullable, value, insertfunction)
     public $fields; // (idx:name; type, default, nullable, value, changed, insertfunction)
 
     // status var
@@ -292,7 +292,7 @@ class rowEditor
             if ($i == $index) {
                 return $k;
             }
-            $i ++;
+            $i++;
         }
     }
 

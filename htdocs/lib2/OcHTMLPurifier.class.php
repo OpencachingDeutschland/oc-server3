@@ -50,8 +50,8 @@ class OcHTMLPurifier extends HTMLPurifier
         $config->set('Attr.IDPrefix', 'custom_');
 
         // enable 'display' and 'visibility' styles for mystery descriptions
-        $config->set('CSS.AllowTricky', true);                // + display, visibility, overflow
-        $config->set('CSS.ForbiddenProperties', 'overflow');  // - overflow
+        $config->set('CSS.AllowTricky', true); // + display, visibility, overflow
+        $config->set('CSS.ForbiddenProperties', 'overflow'); // - overflow
 
         // prepare additional definitions
         $def = $config->getHTMLDefinition(true);
@@ -65,7 +65,7 @@ class OcHTMLPurifier extends HTMLPurifier
         ); //  HTML5 attribs currently not supported by TinyMCE
         $def->addElement('legend', 'Inline', 'Flow', 'Common');
         $def->addElement('q', 'Inline', 'Inline', 'Common', ['cite' => 'URI']);
-        $def->addElement('strike', 'Inline', 'Inline', 'Common');   // -> wird in CSS umgewandelt
+        $def->addElement('strike', 'Inline', 'Inline', 'Common'); // -> wird in CSS umgewandelt
         $def->addElement(
             'area',
             'Inline',

@@ -312,7 +312,7 @@ function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
             $trans = mb_ereg_replace('%' . $number, $smarty->left_delimiter . $attr . $smarty->right_delimiter, $trans);
         }
 
-        $number ++;
+        $number++;
     }
 
     return $trans;

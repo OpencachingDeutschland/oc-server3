@@ -51,7 +51,7 @@ $rsNewLogs = sql(
     WHERE cache_logs.cache_id=caches.cache_id
     AND cache_logs.owner_notified=0"
 );
-for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i ++) {
+for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i++) {
     $rNewLog = sql_fetch_array($rsNewLogs);
 
     $rsNotified = sql(
@@ -134,7 +134,7 @@ $rsUsers = sql(
     WHERE `user`.`watchmail_nextmail`<NOW()",
     $opt['template']['default']['locale']
 );
-for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
+for ($i = 0; $i < mysql_num_rows($rsUsers); $i++) {
     $rUser = sql_fetch_array($rsUsers);
 
     if ($rUser['watchmail_nextmail'] != '0000-00-00 00:00:00') {
@@ -158,7 +158,7 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 );
                 if (mysql_num_rows($rsWatchesOwner) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesOwner); $j ++) {
+                    for ($j = 0; $j < mysql_num_rows($rsWatchesOwner); $j++) {
                         $rWatch = sql_fetch_array($rsWatchesOwner);
                         $logtexts .= $rWatch['watchtext'];
                     }
@@ -183,7 +183,7 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i ++) {
                 );
                 if (mysql_num_rows($rsWatchesLog) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesLog); $j ++) {
+                    for ($j = 0; $j < mysql_num_rows($rsWatchesLog); $j++) {
                         $rWatch = sql_fetch_array($rsWatchesLog);
                         $logtexts .= $rWatch['watchtext'];
                     }
@@ -594,7 +594,7 @@ function CheckDaemon($PidFile)
         $pid_daemon = fgets($pidfile, 20);
         fclose($pidfile);
 
-        $pid_daemon = (int) $pid_daemon;
+        $pid_daemon = (int)$pid_daemon;
 
         // process running?
         if (posix_kill($pid_daemon, 0)) {

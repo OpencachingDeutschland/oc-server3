@@ -689,7 +689,7 @@ function xmlexport()
 
         $writer->writeElement('code', $r['text']);
         $countLang = count($lang);
-        for ($n = 0; $n < $countLang; $n ++) {
+        for ($n = 0; $n < $countLang; $n++) {
             $writer->writeElement(
                 $lang[$n],
                 sql_value(
@@ -817,7 +817,7 @@ function xmlimport3()
 
     $nCount = isset($_REQUEST['count']) ? $_REQUEST['count'] + 0 : 0;
 
-    for ($nIndex = 1; $nIndex <= $nCount; $nIndex ++) {
+    for ($nIndex = 1; $nIndex <= $nCount; $nIndex++) {
         if (isset($_REQUEST['useitem' . $nIndex]) && ($_REQUEST['useitem' . $nIndex] == '1')) {
             $sCode = base64_decode($_REQUEST['code' . $nIndex]);
             $transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCode);

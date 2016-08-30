@@ -314,7 +314,7 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
     $sZoomIn = str_replace("\r", "", $sZoomIn);
     $sLines = mb_split("\n", $sZoomIn);
     $countSLines = count($sLines);
-    for ($i = 0; $i < $countSLines; $i ++) {
+    for ($i = 0; $i < $countSLines; $i++) {
         $sLines[$i] = str_pad($sLines[$i], ($nColumnsCount - 1), ' ');
     }
 
@@ -322,8 +322,8 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
     $nDegreePerColumn = ($lon_to - $lon_from) / $nColumnsCount;
 
     $countSLines = count($sLines);
-    for ($nLine = 0; $nLine < $countSLines; $nLine ++) {
-        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn ++) {
+    for ($nLine = 0; $nLine < $countSLines; $nLine++) {
+        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn++) {
             if (substr($sLines[$nLine], $nColumn, 1) == '#') {
                 $nLat = $lat_to - $nDegreePerLine * $nLine;
                 $nLon = $lon_from + $nDegreePerColumn * $nColumn;

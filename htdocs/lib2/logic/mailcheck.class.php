@@ -22,7 +22,7 @@ class mailcheck
     public $sFrom = 'postmaster@somehost.org';
 
     public $nConnectTimeout = 15; // (sec)
-    public $nReadTimeout = 25;   // (sec)
+    public $nReadTimeout = 25; // (sec)
 
     /* check if the mailserver of $sAddress
      * explicit says that the user does not exist
@@ -51,7 +51,7 @@ class mailcheck
         // sort MX records
         $mxs = [];
         $countMxRecords = count($mx_records);
-        for ($i = 0; $i < $countMxRecords; $i ++) {
+        for ($i = 0; $i < $countMxRecords; $i++) {
             $mxs[$i] = [
                 'mx' => $mx_records[$i],
                 'prio' => $mx_weight[$i]
@@ -62,7 +62,7 @@ class mailcheck
 
         // check address with each MX until one mailserver can be connected
         $countMxs = count($mxs);
-        for ($i = 0; $i < $countMxs; $i ++) {
+        for ($i = 0; $i < $countMxs; $i++) {
             $retval = $this->pCheckAddress($sAddress, $mxs[$i]['mx']);
             if ($retval != CA_ERROR_CONNECT) {
                 return $retval;
@@ -171,7 +171,7 @@ class mailcheck
         $s = "";
         stream_set_timeout($fp, $this->nReadTimeout);
 
-        for ($i = 0; $i < 2; $i ++) {
+        for ($i = 0; $i < 2; $i++) {
             $s .= fgets($fp, 1024);
         }
 
@@ -185,5 +185,5 @@ function mailcheck_cmp($a, $b)
         return 0;
     }
 
-    return (($a['prio'] + 0) < ($b['prio'] + 0)) ? - 1 : 1;
+    return (($a['prio'] + 0) < ($b['prio'] + 0)) ? -1 : 1;
 }

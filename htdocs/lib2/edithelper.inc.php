@@ -84,7 +84,7 @@ function html2plaintext($text, $texthtml0, $wrap)
     } else {
         // convert smilies ...
         $countSmileyImage = count($smiley['image']);
-        for ($n = 0; $n < $countSmileyImage; $n ++) {
+        for ($n = 0; $n < $countSmileyImage; $n++) {
             $text = mb_ereg_replace(
                 "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
                 "[s![" . $smiley['text'][$n] . "]!s]",

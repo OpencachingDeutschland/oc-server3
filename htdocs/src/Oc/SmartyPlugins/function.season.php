@@ -81,7 +81,7 @@ function smarty_function_season($params, &$smarty)
 
     $nTimestamp = time();
     $countSeason = count($seasons);
-    for ($nIndex = 0; $nIndex < $countSeason; $nIndex ++) {
+    for ($nIndex = 0; $nIndex < $countSeason; $nIndex++) {
         if (strtotime($seasons[$nIndex][0]) > $nTimestamp) {
             return $params['winter'];
         } //'';

@@ -35,3 +35,6 @@ $opt['db']['placeholder']['db'] = 'opencaching';
 $opt['db']['placeholder']['tmpdb'] = 'octmp';
 
 $opt['charset']['mysql'] = 'utf8mb4';
+
+// activate debug for vagrant system
+// $opt['debug'] = true;

@@ -202,8 +202,10 @@ cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/
 echo "extension=imagick.so" >> /etc/php.ini.tmp
 mv /etc/php.ini.tmp /etc/php.ini
 
-label "Setup database user"
+label "Setup database"
 mysqladmin -u root password root
+mysql -u root -proot -e 'DROP DATABASE IF EXISTS opencaching;'
+mysql -u root -proot -e 'CREATE DATABASE opencaching;'
 mysql -u root -proot -e "CREATE USER 'opencaching';"
 mysql -u root -proot -e "GRANT SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREATE, DROP, ALTER, INDEX, CREATE TEMPORARY TABLES, LOCK TABLES, EVENT ON \`opencaching\`.* TO 'opencaching'@'%';"
 mysql -u root -proot -e "GRANT GRANT OPTION ON \`opencaching\`.* TO 'opencaching'@'%';"
@@ -236,7 +238,7 @@ cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
 
 if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
     label "import minimal dump to database"
-    mysql -uroot -proot < /var/www/html/sql/dump_v158.sql
+    mysql -uroot -proot opencaching < /var/www/html/sql/dump_v158.sql
 else
     if [ -f opencaching_dump.sql ]; then
         label "now download is needed..."
@@ -260,7 +262,7 @@ label "Run database and cache updates"
 cd /var/www/html/ && php bin/dbupdate.php
 
 label "Install OKAPI"
-curl http://local.opencaching.de/okapi/update?install=true
+curl http://local.team-opencaching.de/okapi/update?install=true
 
 
 label "updating database structures ..."
@@ -306,7 +308,7 @@ echo "alias la='ls -alh'" >> /home/vagrant/.bashrc
 echo "alias ..='cd ..'" >> /home/vagrant/.bashrc
 
 label "setting up phpunit"
-cd /usr/local/bin && sudo ln -s /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
+cd /usr/local/bin && sudo ln -sf /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
 sudo chmod 755 phpunit
 
 label "All done, have fun."

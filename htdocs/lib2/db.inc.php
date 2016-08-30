@@ -80,8 +80,8 @@ $db['dblink_slave'] = false;
 $db['slave_id'] = - 1;
 $db['slave_server'] = '';
 $db['temptable_initialized'] = false;
-$db['temptables'] = array();
-$db['temptables_slave'] = array();
+$db['temptables'] = [];
+$db['temptables_slave'] = [];
 $db['mode'] = DB_MODE_USER;
 $db['error'] = false;
 
@@ -108,7 +108,7 @@ function sql($sql)
     global $db;
 
     // establish db connection
-    if ($db['connected'] != true) {
+    if ($db['connected'] !== true) {
         sql_connect();
     }
 
@@ -121,9 +121,8 @@ function sql($sql)
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        $args = array_merge([0], $tmp_args);
+        unset($tmp_args, $args[0]);
     }
 
     return sql_internal($db['dblink'], $sql, $args);
@@ -147,8 +146,7 @@ function sql_slave($sql)
 
         // correct indizes
         $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        unset($tmp_args, $args[0]);
     }
 
     return sql_internal($db['dblink_slave'], $sql, $args);
@@ -159,8 +157,7 @@ function sql_internal($dblink, $sql)
     global $opt, $db, $sqldebugger;
 
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
+    unset($args[0], $args[1]);
 
     /* as an option, you can give as second parameter an array
      * with all values for the placeholder. The array has to be
@@ -172,8 +169,7 @@ function sql_internal($dblink, $sql)
 
         // correct indizes
         $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        unset($tmp_args, $args[0]);
     }
 
     $sqlpos = 0;
@@ -187,8 +183,8 @@ function sql_internal($dblink, $sql)
         while ((($nextarg - $escapesCount - 1) > 0) && (substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
             $escapesCount ++;
         }
-        if (($escapesCount % 2) == 1) {
-            $nextarg ++;
+        if (($escapesCount % 2) === 1) {
+            $nextarg++;
         } else {
             $nextchar = substr($sql, $nextarg + 1, 1);
             if (is_numeric($nextchar)) {
@@ -196,7 +192,7 @@ function sql_internal($dblink, $sql)
                 $arg = '';
 
                 // find next non-digit
-                while (preg_match('/^[0-9]{1}/', $nextchar) == 1) {
+                while (preg_match('/^[0-9]{1}/', $nextchar) === 1) {
                     $arg .= $nextchar;
 
                     $arglength ++;
@@ -309,9 +305,9 @@ function sql_internal($dblink, $sql)
         - block DROP/DELETE
     */
 
-    if (isset($db['debug']) && ($db['debug'] == true)) {
-        require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
-        $result = $sqldebugger->execute($filtered_sql, $dblink, ($dblink === $db['dblink_slave']), $db['slave_server']);
+    if (isset($db['debug']) && ($db['debug'] === true)) {
+        require_once __DIR__ . '/../lib2/sqldebugger.class.php';
+        $result = $sqldebugger->execute($filtered_sql, $dblink, $dblink === $db['dblink_slave'], $db['slave_server']);
         if ($result === false) {
             sql_error($filtered_sql);
         }
@@ -331,8 +327,8 @@ function sql_internal($dblink, $sql)
             $cSqlExecution->stop();
 
             if ($cSqlExecution->diff() > $opt['db']['warn']['time']) {
-                $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
-                sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+                $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+                sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
             }
         }
     }
@@ -385,8 +381,7 @@ function sqlf_value($sql, $default)
     $nOldMode = $db['mode'];
     $db['mode'] = DB_MODE_FRAMEWORK;
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
+    unset($args[0], $args[1]);
     $result = sql_value($sql, $default, $args);
     $db['mode'] = $nOldMode;
 
@@ -399,8 +394,7 @@ function sqll_value($sql, $default)
     $nOldMode = $db['mode'];
     $db['mode'] = DB_MODE_BUSINESSLAYER;
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
+    unset($args[0], $args[1]);
     $result = sql_value($sql, $default, $args);
     $db['mode'] = $nOldMode;
 
@@ -417,7 +411,7 @@ function sql_escape($value)
     }
 
     // establish db connection
-    if ($db['connected'] != true) {
+    if ($db['connected'] !== true) {
         sql_connect();
     }
 
@@ -438,17 +432,15 @@ function sql_escape_backtick($value)
 function sql_value($sql, $default)
 {
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
+    unset($args[0], $args[1]);
 
     if (isset($args[2]) && is_array($args[2])) {
         $tmp_args = $args[2];
         unset($args);
 
         // correct indizes
-        $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        $args = array_merge([0], $tmp_args);
+        unset($tmp_args, $args[0]);
     }
 
     return sql_value_internal(false, $sql, $default, $args);
@@ -457,8 +449,7 @@ function sql_value($sql, $default)
 function sql_value_slave($sql, $default)
 {
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
+    unset($args[0], $args[1]);
 
     if (isset($args[2]) && is_array($args[2])) {
         $tmp_args = $args[2];
@@ -466,8 +457,7 @@ function sql_value_slave($sql, $default)
 
         // correct indizes
         $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        unset($tmp_args, $args[0]);
     }
 
     return sql_value_internal(true, $sql, $default, $args);
@@ -476,9 +466,7 @@ function sql_value_slave($sql, $default)
 function sql_value_internal($bQuerySlave, $sql, $default)
 {
     $args = func_get_args();
-    unset($args[0]);
-    unset($args[1]);
-    unset($args[2]);
+    unset($args[0], $args[1], $args[2]);
 
     /* as an option, you can give as third parameter an array
      * with all values for the placeholder. The array has to be
@@ -490,8 +478,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
 
         // correct indizes
         $args = array_merge(array(0), $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
+        unset($tmp_args, $args[0]);
     }
 
     if ($bQuerySlave == true) {
@@ -575,6 +562,11 @@ function sql_fetch_row($rs)
     return $retval;
 }
 
+/**
+ * @param $rs
+ *
+ * @return array
+ */
 function sql_fetch_column($rs)
 {
     global $opt;
@@ -666,7 +658,7 @@ function sql_temp_table_slave($table)
         sql_connect_anyslave();
     }
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         sqlf_slave(
             "INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')",
             mysql_thread_id($db['dblink_slave']),
@@ -684,7 +676,7 @@ function sql_drop_temp_table($table)
 
     sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         sqlf(
             "DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1' AND `name`='&2'",
             mysql_thread_id($db['dblink']),
@@ -699,7 +691,7 @@ function sql_rename_temp_table($table, $newname)
 {
     global $db, $opt;
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         sqlf(
             "UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'",
             mysql_thread_id($db['dblink']),
@@ -720,7 +712,7 @@ function sql_drop_temp_table_slave($table)
 
     sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         sqlf_slave(
             "DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1' AND `name`='&2'",
             mysql_thread_id($db['dblink']),
@@ -728,15 +720,14 @@ function sql_drop_temp_table_slave($table)
         );
     }
 
-    unset($db['temptables'][$table]);
-    unset($db['temptables_slave'][$table]);
+    unset($db['temptables'][$table], $db['temptables_slave'][$table]);
 }
 
 function sql_rename_temp_table_slave($table, $newname)
 {
     global $db, $opt;
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         sqlf(
             "UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'",
             mysql_thread_id($db['dblink']),
@@ -747,8 +738,7 @@ function sql_rename_temp_table_slave($table, $newname)
 
     sqlf_slave('ALTER TABLE &tmpdb.`&1` RENAME &tmpdb.`&2`', $table, $newname);
 
-    unset($db['temptables'][$table]);
-    unset($db['temptables_slave'][$table]);
+    unset($db['temptables'][$table], $db['temptables_slave'][$table]);
     $db['temptables'][$newname] = $newname;
     $db['temptables_slave'][$newname] = $newname;
 }
@@ -758,15 +748,15 @@ function sql_connect($username = null, $password = null, $raiseError = true)
 {
     global $opt, $db;
 
-    if ($username == null) {
+    if ($username === null) {
         $username = $opt['db']['username'];
     }
-    if ($password == null) {
+    if ($password === null) {
         $password = $opt['db']['password'];
     }
 
     //connect to the database by the given method - no php error reporting!
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         $db['dblink'] = @mysql_pconnect($opt['db']['servername'], $username, $password);
     } else {
         $db['dblink'] = @mysql_connect($opt['db']['servername'], $username, $password);
@@ -776,7 +766,7 @@ function sql_connect($username = null, $password = null, $raiseError = true)
         mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'", $db['dblink']);
 
         //database connection established ... set the used database
-        if (@mysql_select_db($opt['db']['placeholder']['db'], $db['dblink']) == false) {
+        if (@mysql_select_db($opt['db']['placeholder']['db'], $db['dblink']) === false) {
             //error while setting the database ... disconnect
             sql_disconnect();
             $db['dblink'] = false;
@@ -785,7 +775,7 @@ function sql_connect($username = null, $password = null, $raiseError = true)
 
     // output the error form if there was an error
     if ($db['dblink'] === false) {
-        if ($raiseError == true) {
+        if ($raiseError === true) {
             sql_error();
         }
     } else {
@@ -886,14 +876,14 @@ function sql_connect_slave($id)
     // for display in SQL debugger
     $db['slave_server'] = $slave['server'];
 
-    if ($opt['db']['pconnect'] == true) {
+    if ($opt['db']['pconnect'] === true) {
         $db['dblink_slave'] = @mysql_pconnect($slave['server'], $slave['username'], $slave['password']);
     } else {
         $db['dblink_slave'] = @mysql_connect($slave['server'], $slave['username'], $slave['password']);
     }
 
     if ($db['dblink_slave'] !== false) {
-        if (mysql_select_db($opt['db']['placeholder']['db'], $db['dblink_slave']) == false) {
+        if (mysql_select_db($opt['db']['placeholder']['db'], $db['dblink_slave']) === false) {
             sql_error();
         }
 
@@ -919,7 +909,7 @@ function sql_connect_maintenance()
     if ($db['dblink'] === false) {
         sql_disconnect();
         sql_connect();
-        if ($db['connected'] == false) {
+        if ($db['connected'] === false) {
             $tpl->error(ERROR_DB_COULD_NOT_RECONNECT);
         }
 
@@ -935,15 +925,15 @@ function sql_disconnect()
     global $opt, $db;
     sql_disconnect_slave();
 
-    if (($opt['db']['pconnect'] == true) && ($db['dblink'] !== false)) {
+    if ($db['dblink'] !== false && $opt['db']['pconnect'] === true) {
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $table) {
                 sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
             }
 
             sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
-            $db['temptables'] = array();
-            $db['temptables_slave'] = array();
+            $db['temptables'] = [];
+            $db['temptables_slave'] = [];
         }
     }
 
@@ -952,7 +942,7 @@ function sql_disconnect()
     }
 
     //is connected and no persistent connect used?
-    if (($opt['db']['pconnect'] == false) && ($db['dblink'] !== false)) {
+    if ($db['dblink'] !== false && $opt['db']['pconnect'] === false) {
         mysql_close($db['dblink']);
         $db['dblink'] = false;
         $db['connected'] = false;
@@ -968,13 +958,12 @@ function sql_disconnect_slave()
         return;
     }
 
-    if (($opt['db']['pconnect'] == true) && ($db['dblink'] !== false)) {
+    if ($db['dblink'] !== false && $opt['db']['pconnect'] === true) {
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $k => $table) {
                 if (isset($db['temptables_slave'][$table])) {
                     sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
-                    unset($db['temptables_slave'][$table]);
-                    unset($db['temptables'][$k]);
+                    unset($db['temptables_slave'][$table], $db['temptables'][$k]);
                 }
             }
 
@@ -984,7 +973,7 @@ function sql_disconnect_slave()
                     mysql_thread_id($db['dblink_slave'])
                 );
             }
-            $db['temptables_slave'] = array();
+            $db['temptables_slave'] = [];
         }
     }
 
@@ -995,51 +984,52 @@ function sql_disconnect_slave()
     }
 
     //is connected and no persistent connect used?
-    if (($opt['db']['pconnect'] == false) && ($db['dblink_slave'] !== false)) {
+    if ($db['dblink_slave'] !== false && $opt['db']['pconnect'] === false) {
         mysql_close($db['dblink_slave']);
     }
     $db['dblink_slave'] = false;
 }
 
-function sql_error($sqlstatement = "")
+function sql_error($sqlstatement = '')
 {
     global $tpl, $opt, $db;
     global $bSmartyNoTranslate;
 
     $errno = mysql_errno();
     $error = mysql_error();
-    if ($sqlstatement != "") {
+    if ($sqlstatement !== '') {
         $error .= "\n\nSQL statement: " . $sqlstatement;
     }
 
-    if ($db['error'] == true) {
+    if ($db['error'] === true) {
         // datbase error recursion, because another error occured while trying to
         // build the error template (e.g. because connection was lost, or an error mail
         // could not load translations from database)
 
-        if ($opt['db']['error']['display'] == true) {
+        if ($opt['db']['error']['display'] === true) {
             $errmsg = 'MySQL error recursion (' . $errno . '): ' . $error;
         } else {
-            $errmsg = "";
+            $errmsg = '';
         }
         $errtitle = 'Datenbankfehler';
-        require 'html/error.php';
+        require __DIR__ . '/../html/error.php';
         exit;
     }
     $db['error'] = true;
 
-    if ($db['connected'] == false) {
+    if ($db['connected'] === false) {
         $bSmartyNoTranslate = true;
     }
 
     if ($opt['db']['error']['mail'] != '') {
         $subject = '[' . $opt['page']['domain'] . '] SQL error';
-        if (admin_errormail($opt['db']['error']['mail'],
+        if (admin_errormail(
+            $opt['db']['error']['mail'],
             $subject,
             str_replace("\n", "\r\n", $error) . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from']
+            'From: ' . $opt['mail']['from']
         )) {
-            require_once $opt['rootpath'] . 'lib2/mail.class.php';
+            require_once __DIR__ . '/../lib2/mail.class.php';
 
             $mail = new mail();
             $mail->subject = $subject;
@@ -1056,9 +1046,9 @@ function sql_error($sqlstatement = "")
         }
     }
 
-    if ($opt['gui'] == GUI_HTML) {
+    if ($opt['gui'] === GUI_HTML) {
         if (isset($tpl)) {
-            if ($opt['db']['error']['display'] == true) {
+            if ($opt['db']['error']['display'] === true) {
                 $tpl->error('MySQL error (' . $errno . '): ' . $error);
             } else {
                 $tpl->error('A database command could not be performed.');
@@ -1072,7 +1062,7 @@ function sql_error($sqlstatement = "")
         }
     } else {
         // CLI script, simple text output
-        if ($opt['db']['error']['display'] == true) {
+        if ($opt['db']['error']['display'] === true) {
             die('MySQL error (' . $errno . '): ' . $error . "\n");
         } else {
             die("A database command could not be performed.\n");
@@ -1086,12 +1076,13 @@ function sql_warn($warnmessage)
 
     if ($opt['db']['error']['mail'] != '') {
         $subject = '[' . $opt['page']['domain'] . '] SQL error';
-        if (admin_errormail($opt['db']['error']['mail'],
+        if (admin_errormail(
+            $opt['db']['error']['mail'],
             $subject,
             $warnmessage . "\n" . print_r(debug_backtrace(), true),
-            "From: " . $opt['mail']['from']
+            'From: ' . $opt['mail']['from']
         )) {
-            require_once $opt['rootpath'] . 'lib2/mail.class.php';
+            require_once __DIR__ . '/../lib2/mail.class.php';
             $mail = new mail();
             $mail->name = 'sql_warn';
             $mail->subject = $subject;
@@ -1111,17 +1102,17 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
     fwrite($f, "SET NAMES 'utf8';\n");
 
     if ($truncate == true) {
-        fwrite($f, "TRUNCATE TABLE `" . sql_escape($table) . "`;\n");
+        fwrite($f, 'TRUNCATE TABLE `' . sql_escape($table) . "`;\n");
     }
 
     while ($r = sql_fetch_assoc($rs)) {
-        $fields = array();
-        $values = array();
+        $fields = [];
+        $values = [];
 
         foreach ($r as $k => $v) {
             $fields[] = '`' . sql_escape($k) . '`';
             if ($v === null) {
-                $values[] = "NULL";
+                $values[] = 'NULL';
             } else {
                 $values[] = "'" . sql_escape($v) . "'";
             }
@@ -1130,15 +1121,15 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 
         fwrite(
             $f,
-            "INSERT INTO `" . sql_escape($table) . "` (" . implode(', ', $fields) . ")"
-            . " VALUES (" . implode(', ', $values) . ");\n"
+            'INSERT INTO `' . sql_escape($table) . '` (' . implode(', ', $fields) . ')'
+            . ' VALUES (' . implode(', ', $values) . ");\n"
         );
     }
 }
 
 function sql_export_table($f, $table)
 {
-    $primary = array();
+    $primary = [];
     $rsIndex = sql("SHOW INDEX FROM `&1`", $table);
     while ($r = sql_fetch_assoc($rsIndex)) {
         if ($r['Key_name'] == 'PRIMARY') {
@@ -1147,7 +1138,7 @@ function sql_export_table($f, $table)
     }
     sql_free_result($rsIndex);
 
-    $sql = "SELECT * FROM `" . sql_escape($table) . "`";
+    $sql = 'SELECT * FROM `' . sql_escape($table) . '`';
     if (count($primary) > 0) {
         $sql .= ' ORDER BY ' . implode(', ', $primary);
     }
@@ -1195,7 +1186,7 @@ function sql_export_structure($f, $table)
     $sTableSql = preg_replace("/,\n +?(KEY )?`okapi_syncbase`.+?(,)?\n/", "\\2\n", $sTableSql);
 
     fwrite($f, "SET NAMES 'utf8';\n");
-    fwrite($f, "DROP TABLE IF EXISTS `" . sql_escape($table) . "`;\n");
+    fwrite($f, 'DROP TABLE IF EXISTS `' . sql_escape($table) . "`;\n");
     fwrite($f, $sTableSql . " ;\n");
 }
 
@@ -1312,7 +1303,7 @@ function sql_dropProcedure($name)
 
 function sql_dropTrigger($triggername)
 {
-    $rs = sql("SHOW TRIGGERS");
+    $rs = sql('SHOW TRIGGERS');
     while ($r = sql_fetch_assoc($rs)) {
         if ($r['Trigger'] == $triggername) {
             sql('DROP TRIGGER `&1`', $triggername);

@@ -181,7 +181,7 @@ function sql_internal($dblink, $sql)
         // & escaped?
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) && (substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) === 1) {
             $nextarg++;
@@ -195,7 +195,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[0-9]{1}/', $nextchar) === 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -221,13 +221,13 @@ function sql_internal($dblink, $sql)
                         // strip apostroph and insert NULL
                         $filtered_sql = substr($filtered_sql, 0, strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
-                        $sqlpos ++;
+                        $sqlpos++;
                     } else {
                         $filtered_sql .= 'NULL';
                     }
                 }
 
-                $sqlpos ++;
+                $sqlpos++;
             } else {
                 $arglength = 0;
                 $arg = '';
@@ -237,7 +237,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[a-zA-Z0-9_]{1}/', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -284,12 +284,12 @@ function sql_internal($dblink, $sql)
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0)
             && (substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 0) {
             // strip escapes of &
             $filtered_sql = substr($filtered_sql, 0, $nextarg) . '&' . substr($filtered_sql, $nextarg + 2);
-            $nextarg --;
+            $nextarg--;
         }
 
         $nextarg = strpos($filtered_sql, '\&', $nextarg + 2);
@@ -336,6 +336,9 @@ function sql_internal($dblink, $sql)
     return $result;
 }
 
+/**
+ * @param string $sql
+ */
 function sqlf($sql)
 {
     global $db;
@@ -349,6 +352,9 @@ function sqlf($sql)
     return $result;
 }
 
+/**
+ * @param string $sql
+ */
 function sqlf_slave($sql)
 {
     global $db;
@@ -362,6 +368,9 @@ function sqlf_slave($sql)
     return $result;
 }
 
+/**
+ * @param string $sql
+ */
 function sqll($sql)
 {
     global $db;
@@ -375,6 +384,10 @@ function sqll($sql)
     return $result;
 }
 
+/**
+ * @param string $sql
+ * @param integer $default
+ */
 function sqlf_value($sql, $default)
 {
     global $db;
@@ -388,6 +401,10 @@ function sqlf_value($sql, $default)
     return $result;
 }
 
+/**
+ * @param string $sql
+ * @param integer $default
+ */
 function sqll_value($sql, $default)
 {
     global $db;
@@ -463,6 +480,9 @@ function sql_value_slave($sql, $default)
     return sql_value_internal(true, $sql, $default, $args);
 }
 
+/**
+ * @param boolean $bQuerySlave
+ */
 function sql_value_internal($bQuerySlave, $sql, $default)
 {
     $args = func_get_args();
@@ -563,7 +583,7 @@ function sql_fetch_row($rs)
 }
 
 /**
- * @param $rs
+ * @param resource $rs
  *
  * @return array
  */
@@ -616,11 +636,17 @@ function sql_insert_id_slave()
     return mysql_insert_id($db['dblink_slave']);
 }
 
+/**
+ * @param resource $rs
+ */
 function sql_num_rows($rs)
 {
     return mysql_num_rows($rs);
 }
 
+/**
+ * @param string $table
+ */
 function sql_temp_table($table)
 {
     global $db, $opt;
@@ -650,6 +676,9 @@ function sql_temp_table($table)
     $db['temptables'][$table] = $table;
 }
 
+/**
+ * @param string $table
+ */
 function sql_temp_table_slave($table)
 {
     global $db, $opt;
@@ -670,6 +699,9 @@ function sql_temp_table_slave($table)
     $db['temptables_slave'][$table] = $table;
 }
 
+/**
+ * @param string $table
+ */
 function sql_drop_temp_table($table)
 {
     global $db, $opt;
@@ -706,6 +738,9 @@ function sql_rename_temp_table($table, $newname)
     $db['temptables'][$newname] = $newname;
 }
 
+/**
+ * @param string $table
+ */
 function sql_drop_temp_table_slave($table)
 {
     global $db, $opt;
@@ -826,7 +861,7 @@ function sql_connect_anyslave()
         AND `online`= 1
         AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'&1')
         ORDER BY `w` DESC LIMIT 1",
-        - 1,
+        -1,
         $nMaxTimeDiff
     );
 
@@ -1070,6 +1105,9 @@ function sql_error($sqlstatement = '')
     }
 }
 
+/**
+ * @param string $warnmessage
+ */
 function sql_warn($warnmessage)
 {
     global $opt;
@@ -1097,6 +1135,9 @@ function sql_warn($warnmessage)
     }
 }
 
+/**
+ * @param resource $rs
+ */
 function sql_export_recordset($f, $rs, $table, $truncate = true)
 {
     fwrite($f, "SET NAMES 'utf8';\n");
@@ -1127,6 +1168,9 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
     }
 }
 
+/**
+ * @param resource $f
+ */
 function sql_export_table($f, $table)
 {
     $primary = [];
@@ -1148,6 +1192,10 @@ function sql_export_table($f, $table)
     sql_free_result($rs);
 }
 
+/**
+ * @param string $filename
+ * @param string[] $tables
+ */
 function sql_export_tables_to_file($filename, $tables)
 {
     $f = fopen($filename, 'w');
@@ -1175,6 +1223,9 @@ function sql_export_table_to_file($filename, $table)
     fclose($f);
 }
 
+/**
+ * @param resource $f
+ */
 function sql_export_structure($f, $table)
 {
     $rs = sql("SHOW CREATE TABLE `&1`", $table);
@@ -1190,6 +1241,9 @@ function sql_export_structure($f, $table)
     fwrite($f, $sTableSql . " ;\n");
 }
 
+/**
+ * @param string $filename
+ */
 function sql_export_structure_to_file($filename, $table)
 {
     $f = fopen($filename, 'w');
@@ -1263,6 +1317,9 @@ function sql_index_exists($table, $index)
 }
 
 // test if a function or procedure exists
+/**
+ * @param string $type
+ */
 function sql_fp_exists($type, $name)
 {
     global $opt;

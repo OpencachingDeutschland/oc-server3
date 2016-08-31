@@ -104,8 +104,8 @@ $opt['lib']['garmin']['domain'] = 'local.team-opencaching.de';
 $opt['lib']['garmin']['url'] = 'http://local.team-opencaching.de/';
 $opt['lib']['garmin']['page_url'] = $opt['lib']['garmin']['url'] . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/');
 
-// developer.what3words.com API Key
-$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+// only for local.team-opencaching.de usage
+$opt['lib']['w3w']['apikey'] = 'X27PDW41';
 
 // other settings
 $opt['page']['showdonations'] = true;

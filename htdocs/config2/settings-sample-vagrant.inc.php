@@ -36,5 +36,8 @@ $opt['db']['placeholder']['tmpdb'] = 'octmp';
 
 $opt['charset']['mysql'] = 'utf8mb4';
 
+// only for local.team-opencaching.de usage
+$opt['lib']['w3w']['apikey'] = 'X27PDW41';
+
 // activate debug for vagrant system
 // $opt['debug'] = true;

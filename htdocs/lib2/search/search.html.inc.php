@@ -202,6 +202,10 @@ function search_output()
 }
 
 
+/**
+ * @param string $interval
+ * @param string $dateTimeEnd
+ */
 function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
 {
     //Parse about any English textual datetime

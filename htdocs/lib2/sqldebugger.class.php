@@ -105,6 +105,9 @@ class sqldebugger
         return $rsResult;
     }
 
+    /**
+     * @param string $sql
+     */
     public function strip_temptable($sql)
     {
         $start = stripos($sql, 'SELECT ');
@@ -116,6 +119,9 @@ class sqldebugger
         return substr($sql, $start);
     }
 
+    /**
+     * @param string $sql
+     */
     public function strip_from($sql)
     {
         $start = stripos($sql, 'FROM ');
@@ -127,6 +133,9 @@ class sqldebugger
         return 'SELECT * ' . substr($sql, $start);
     }
 
+    /**
+     * @param string $sql
+     */
     public function insert_nocache($sql)
     {
         if (strtoupper(substr($sql, 0, 7)) == 'SELECT ') {

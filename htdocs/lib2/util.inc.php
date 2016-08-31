@@ -246,11 +246,21 @@ function explode_multi($str, $sep)
     return $ret;
 }
 
+/**
+ * @param string $name
+ * @param string $default
+ *
+ * @return string
+ */
 function getSysConfig($name, $default)
 {
     return sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='&1'", $default, $name);
 }
 
+/**
+ * @param string $name
+ * @param string $value
+ */
 function setSysConfig($name, $value)
 {
     sql(
@@ -333,6 +343,9 @@ function help_latToDegreeStr($lat)
 }
 
 
+/**
+ * @return string
+ */
 function escape_javascript($text)
 {
     return str_replace('\'', '\\\'', str_replace('"', '&quot;', $text));

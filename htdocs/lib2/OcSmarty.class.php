@@ -370,6 +370,10 @@ class OcSmarty extends Smarty
     }
 
     // show an error dialog
+
+    /**
+     * @param integer $id
+     */
     public function error($id)
     {
         $this->clear_all_assign();
@@ -425,6 +429,9 @@ class OcSmarty extends Smarty
         return $opt['template']['style'] . '|' . $opt['template']['locale'] . '|' . $this->compile_id;
     }
 
+    /**
+     * @param string $page
+     */
     public function redirect($page)
     {
         global $cookie, $opt;

@@ -112,6 +112,10 @@ function php_errormail($errmsg)
 // throttle admin error mails;
 // currently used only for SQL errors and warnings
 
+/**
+ * @param string $errortype
+ * @param string $message
+ */
 function admin_errormail($to, $errortype, $message, $headers)
 {
     global $opt;

@@ -102,6 +102,9 @@ class picture
         }
     }
 
+    /**
+     * @param string $sFilename
+     */
     public function setFilenames($sFilename)
     {
         global $opt;
@@ -129,6 +132,9 @@ class picture
         return $this->nPictureId;
     }
 
+    /**
+     * @param boolean $bRestoring
+     */
     private function setArchiveFlag($bRestoring, $original_id = 0)
     {
         global $login;
@@ -177,11 +183,17 @@ class picture
         sql_slave("SET @original_picid=0");
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return $this->rePicture->getValue('url');
     }
 
+    /**
+     * @param string $value
+     */
     public function setUrl($value)
     {
         return $this->rePicture->setValue('url', $value);
@@ -226,6 +238,9 @@ class picture
         return $this->rePicture->getValue('local') != 0;
     }
 
+    /**
+     * @param integer $value
+     */
     public function setLocal($value)
     {
         return $this->rePicture->setValue('local', $value ? 1 : 0);
@@ -294,6 +309,9 @@ class picture
         return $opt['logic']['pictures']['thumb_dir'] . $dir1 . '/' . $dir2 . '/' . $filename;
     }
 
+    /**
+     * @return string
+     */
     public function getLogId()
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
@@ -330,6 +348,9 @@ class picture
         return $firstlogs;
     }
 
+    /**
+     * @return string
+     */
     public function getCacheId()
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
@@ -509,6 +530,9 @@ class picture
         return true;
     }
 
+    /**
+     * @param string $filename
+     */
     private function deleted_filename($filename)
     {
         $fna = mb_split('\\/', $filename);
@@ -665,6 +689,9 @@ class picture
         return move_uploaded_file($tmpFile, $this->getFilename());
     }
 
+    /**
+     * @param Imagick $image
+     */
     public function imagick_rotate(&$image)
     {
         $exif = $image->getImageProperties();

@@ -203,6 +203,9 @@ function html2txt($html)
     return $str;
 }
 
+/**
+ * @param string $str
+ */
 function lf2crlf($str)
 {
     return str_replace("\r\r\n", "\r\n", str_replace("\n", "\r\n", $str));

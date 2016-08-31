@@ -2340,7 +2340,9 @@ class Net_IDNA2
         }
 
         // No input, no output, what else did you expect?
-        if (empty($decoded)) return '';
+        if (empty($decoded)) {
+            return '';
+        }
 
         // Anchors for iteration
         $last_begin = 0;
@@ -2438,7 +2440,9 @@ class Net_IDNA2
             $arr = explode('.', $input);
             foreach ($arr as $k => $v) {
                 $conv = $this->_decode($v);
-                if ($conv) $arr[$k] = $conv;
+                if ($conv) {
+                    $arr[$k] = $conv;
+                }
             }
             $return = $email_pref . '@' . join('.', $arr);
         } elseif (preg_match('![:\./]!', $input)) { // Or a complete domain name (with or without paths / parameters)
@@ -2452,7 +2456,9 @@ class Net_IDNA2
                 $arr = explode('.', $parsed['host']);
                 foreach ($arr as $k => $v) {
                     $conv = $this->_decode($v);
-                    if ($conv) $arr[$k] = $conv;
+                    if ($conv) {
+                        $arr[$k] = $conv;
+                    }
                 }
                 $parsed['host'] = join('.', $arr);
                 if (isset($parsed['scheme'])) {
@@ -2463,7 +2469,9 @@ class Net_IDNA2
                 $arr = explode('.', $input);
                 foreach ($arr as $k => $v) {
                     $conv = $this->_decode($v);
-                    if ($conv) $arr[$k] = $conv;
+                    if ($conv) {
+                        $arr[$k] = $conv;
+                    }
                 }
                 $return = join('.', $arr);
             }

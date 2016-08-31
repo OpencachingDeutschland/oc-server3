@@ -50,6 +50,11 @@ class geomath
         }
     }
 
+    /**
+     * @param integer $parShortText
+     *
+     * @return string
+     */
     public static function Bearing2Text($parBearing, $parShortText, $language)
     {
         global $opt, $translate;

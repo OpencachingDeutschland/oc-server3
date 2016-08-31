@@ -22,7 +22,7 @@ class RealValidator extends NumericValidator
 
     protected function getMinValue()
     {
-        return - 1e38;
+        return -1e38;
     }
 
     protected function getMaxValue()

@@ -285,7 +285,7 @@ class ss_zip
     /** Removes entry from the archive.
      * please be very carefull with this function, there is no undo after you save the archive
      *
-     * @return bool true on success or false on failure
+     * @return boolean|null true on success or false on failure
      *
      * @param int $idx
      */
@@ -336,6 +336,10 @@ class ss_zip
         return $idx >= 0 and $idx < $this->cnt;
     }
 
+    /**
+     * @param string $name
+     * @param string $data
+     */
     public function _write($name, $data)
     {
         $fp = fopen($name, "w");

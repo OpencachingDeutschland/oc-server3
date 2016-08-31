@@ -137,6 +137,11 @@ class mailcheck
         fclose($fp);
     }
 
+    /**
+     * @param string $sResp
+     *
+     * @return string
+     */
     public function extract_return_code($sResp)
     {
         $nPos1 = strpos($sResp, ' ');
@@ -159,6 +164,9 @@ class mailcheck
         return substr($sResp, 0, $nPos);
     }
 
+    /**
+     * @param string $out
+     */
     public function send_command($fp, $out)
     {
         fwrite($fp, $out . "\r\n");

@@ -21,7 +21,7 @@ require_once __DIR__ . '/../lib2/charset.inc.php';
 require_once __DIR__ . '/../lib2/const.inc.php';
 require_once __DIR__ . '/../lib2/logic/data-license.inc.php';
 require_once __DIR__ . '/../lib2/logic/npas.inc.php';
-require_once __DIR__ .' /../lib2/logic/geomath.class.php';
+require_once __DIR__ . ' /../lib2/logic/geomath.class.php';
 
 if ($error == true) {
     echo 'Unable to connect to database';
@@ -367,6 +367,9 @@ exit;
 /* end parameter reading */
 
 
+/**
+ * @param integer $sessionid
+ */
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
     global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3, $safemode_zip, $safemode_zip, $sCharset, $bAttrlist;
@@ -386,7 +389,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $logtypes = [];
     $rs = sql('SELECT `id`, `de` FROM log_types');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $logtypes[$r['id']] = $r['de'];
     }
@@ -394,7 +397,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachetypes = [];
     $rs = sql('SELECT `id`, `short`, `de` FROM cache_type');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachetypes[$r['id']]['de'] = $r['de'];
         $cachetypes[$r['id']]['short'] = $r['short'];
@@ -403,7 +406,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachestatus = [];
     $rs = sql('SELECT `id`, `de` FROM cache_status');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachestatus[$r['id']]['de'] = $r['de'];
     }
@@ -411,7 +414,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $counties = [];
     $rs = sql('SELECT `short`, `de` FROM countries');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $counties[$r['short']]['de'] = $r['de'];
     }
@@ -419,7 +422,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $cachesizes = [];
     $rs = sql('SELECT `id`, `de` FROM cache_size');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $cachesizes[$r['id']]['de'] = $r['de'];
     }
@@ -427,7 +430,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $languages = [];
     $rs = sql('SELECT `short`, `de` FROM languages');
-    for ($i = 0; $i < mysql_num_rows($rs); $i ++) {
+    for ($i = 0; $i < mysql_num_rows($rs); $i++) {
         $r = sql_fetch_array($rs);
         $languages[$r['short']]['de'] = $r['de'];
     }
@@ -438,7 +441,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     $objecttypes['3'] = 'cachedesc';
     $objecttypes['1'] = 'cachelog';
     $objecttypes['6'] = 'picture';
-    $objecttypes['8'] = 'cachelist';    // not implemented yet
+    $objecttypes['8'] = 'cachelist'; // not implemented yet
 
     /* end now a few dynamically loaded constants */
 
@@ -451,7 +454,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     while (file_exists(
         $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml'
     )) {
-        $fileid ++;
+        $fileid++;
     }
 
     $xmlfilename = $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml';
@@ -1309,7 +1312,7 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
 //    echo $startat . ' ' . $endat . '<br><br>';
 //    echo '<table>';
 //    echo '<tr><td>sql-start</td><td>sql-count</td><td>count</td><td>begin</td><td>end</td></tr>';
-    for ($i = 0; $i < 6; $i ++) {
+    for ($i = 0; $i < 6; $i++) {
         if (($startat >= $recordnr[$i]) && ($startat + 500 < $recordnr[$i + 1])) {
             if ($recordnr[$i + 1] - $startat > 500) {
                 $limits[$i] = ['start' => $startat - $recordnr[$i], 'count' => 500];
@@ -1431,7 +1434,7 @@ function xmlentities($str)
     $from[4] = '\'';
     $to[4] = '&apos;';
 
-    for ($i = 0; $i <= 4; $i ++) {
+    for ($i = 0; $i <= 4; $i++) {
         $str = mb_ereg_replace($from[$i], $to[$i], $str);
     }
 
@@ -1510,13 +1513,13 @@ function unlinkrecursiv($path)
 
     $hDir = opendir($path);
     if ($hDir === false) {
-        ++ $notunlinked;
+        ++$notunlinked;
     } else {
         while (false !== ($file = readdir($hDir))) {
             if (($file != '.') && ($file != '..')) {
                 if (is_dir($path . $file)) {
                     if (unlinkrecursiv($path . $file . '/') == false) {
-                        $notunlinked ++;
+                        $notunlinked++;
                     }
                 } else {
                     if ((mb_substr($file, - 4) == '.zip') ||
@@ -1526,7 +1529,7 @@ function unlinkrecursiv($path)
                     ) {
                         @unlink($path . $file);
                     } else {
-                        $notunlinked ++;
+                        $notunlinked++;
                     }
                 }
             }

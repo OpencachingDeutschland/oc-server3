@@ -411,9 +411,9 @@ class cache
     }
 
     /**
-     * @param $cacheId
-     * @param $start
-     * @param $count
+     * @param integer $cacheId
+     * @param integer $start
+     * @param integer $count
      * @param bool $deleted
      * @param bool $protect_old_coords
      *

@@ -26,6 +26,9 @@ class xml2Array
         $this->stack_ref =& $this->stack[count($this->stack) - 1];
     }
 
+    /**
+     * @param false|string $strInputXML
+     */
     public function parse($strInputXML)
     {
 

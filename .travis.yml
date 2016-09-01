@@ -1,9 +1,21 @@
 language: php
 php:
-  - 5.4
-  - 5.5
+#  - 5.4
+#  - 5.5
   - 5.6
-  - 7.0
+#  - 7.0
+
+before_script:
+    - if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi
+
+services:
+  - mysql
+
+before_install:
+ - chmod +x build/travis-ci.sh
+
+install:
+    - build/travis-ci.sh
 
 matrix:
   allow_failures:

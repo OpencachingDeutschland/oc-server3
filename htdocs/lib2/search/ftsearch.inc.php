@@ -144,6 +144,11 @@ $ftsearch_simplerules[] = [
 
 /* end conversion rules */
 
+/**
+ * @param $str
+ *
+ * @return array
+ */
 function ftsearch_hash(&$str)
 {
     $astr = ftsearch_split($str, true);
@@ -158,9 +163,12 @@ function ftsearch_hash(&$str)
     return $astr;
 }
 
-// str = long text
 /**
- * @param boolean $simple
+ * str = single word
+ * @param $str
+ * @param $simple
+ *
+ * @return array
  */
 function ftsearch_split(&$str, $simple)
 {
@@ -227,7 +235,12 @@ function ftsearch_load_ignores()
     }
 }
 
-// str = single word
+/**
+ * str = single word
+ * @param $str
+ *
+ * @return mixed|string
+ */
 function ftsearch_text2simple($str)
 {
     global $ftsearch_simplerules;
@@ -240,19 +253,24 @@ function ftsearch_text2simple($str)
     }
 
     // doppelte chars ersetzen
-    for ($c = ord('a'); $c <= ord('z'); $c ++) {
+    $ordZ = ord('z');
+    for ($c = ord('a'); $c <= $ordZ; $c ++) {
         $old_str = '';
-        while ($old_str != $str) {
+        while ($old_str !== $str) {
             $old_str = $str;
             $str = mb_ereg_replace(chr($c) . chr($c), chr($c), $str);
         }
-        $old_str = '';
     }
 
     return $str;
 }
 
-// str = single word
+/**
+ * str = single word
+ * @param $str
+ *
+ * @return mixed|string
+ */
 function ftsearch_text2sort($str)
 {
     $str = mb_strtolower($str);
@@ -338,6 +356,9 @@ function ftsearch_refresh_all_caches()
     sql_free_result($rs);
 }
 
+/**
+ * @param $cache_id
+ */
 function ftsearch_refresh_cache($cache_id)
 {
     $rs = sql("SELECT `name`, `last_modified` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
@@ -376,6 +397,9 @@ function ftsearch_refresh_all_cache_desc()
     sql_free_result($rs);
 }
 
+/**
+ * @param $id
+ */
 function ftsearch_refresh_cache_desc($id)
 {
     $rs = sql(
@@ -419,6 +443,9 @@ function ftsearch_refresh_all_pictures()
     sql_free_result($rs);
 }
 
+/**
+ * @param $id
+ */
 function ftsearch_refresh_picture($id)
 {
     $rs = sql(
@@ -485,6 +512,11 @@ function ftsearch_refresh_cache_logs($id)
     sql_free_result($rs);
 }
 
+/**
+ * @param $object_type
+ * @param $object_id
+ * @param $cache_id
+ */
 function ftsearch_delete_entries($object_type, $object_id, $cache_id)
 {
     sql("DELETE FROM `search_index` WHERE `object_type`='&1' AND `cache_id`='&2'", $object_type, $cache_id);
@@ -492,7 +524,11 @@ function ftsearch_delete_entries($object_type, $object_id, $cache_id)
 }
 
 /**
- * @param integer $object_type
+ * @param $object_type
+ * @param $object_id
+ * @param $cache_id
+ * @param $text
+ * @param $last_modified
  */
 function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last_modified)
 {
@@ -518,13 +554,14 @@ function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last
     );
 }
 
+/**
+ * @param $text
+ *
+ * @return mixed|string
+ */
 function ftsearch_strip_html($text)
 {
-    $text = str_replace("\n", ' ', $text);
-    $text = str_replace("\r", ' ', $text);
-    $text = str_replace('<br />', ' ', $text);
-    $text = str_replace('<br/>', ' ', $text);
-    $text = str_replace('<br>', ' ', $text);
+    $text = str_replace(["\n", "\r", '<br />', '<br/>', '<br>'], ' ', $text);
     $text = strip_tags($text);
     $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
 

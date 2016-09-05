@@ -148,7 +148,10 @@ function sqldbg_begin()
 }
 
 /**
- * @param string $sql
+ * @param $sql
+ * @param $bSlave
+ *
+ * @return resource
  */
 function sqldbg_execute($sql, $bSlave)
 {
@@ -329,6 +332,11 @@ function sqldbg_end()
     exit;
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_strip_temptable($sql)
 {
     $start = mb_strpos(mb_strtoupper($sql), 'SELECT ');
@@ -340,6 +348,11 @@ function sqldbg_strip_temptable($sql)
     return mb_substr($sql, $start);
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_strip_from($sql)
 {
     $start = mb_strpos(mb_strtoupper($sql), 'FROM ');
@@ -351,6 +364,11 @@ function sqldbg_strip_from($sql)
     return 'SELECT * ' . mb_substr($sql, $start);
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_insert_nocache($sql)
 {
     if (mb_strtoupper(mb_substr($sql, 0, 7)) == 'SELECT ') {

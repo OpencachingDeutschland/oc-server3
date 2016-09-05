@@ -7,6 +7,7 @@ use AppBundle\Entity\FieldNote;
 interface FieldNoteServiceInterface extends ErrorInterface
 {
     const FIELD_NOTE_DATETIME_FORMAT = 'Y-m-d\TH:i:s\Z';
+    const FIELD_NOTE_DATETIME_FORMAT_SHORT = 'Y-m-d\TH:i\Z';
     const LOG_TYPE = [
         'Found it' => FieldNote::LOG_TYPE_FOUND,
         "Didn't find it" => FieldNote::LOG_TYPE_NOT_FOUND,

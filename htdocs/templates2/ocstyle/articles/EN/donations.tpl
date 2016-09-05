@@ -20,17 +20,15 @@
 
             <h1>Donate by PayPal:</h1>
 
-            <p>The PayPal fees are 1.9% + 0.35 &euro;. So when donating 2 &euro;, we will receive 1,61 &euro; (~80%), and when donating 10 &euro;, we will receive 9.46 &euro; (~95%).</p>
+            <p>The paypal.me site has no fees.</p>
 
-            <p>For Paypal donations, please click the following image:<br />
+            <p>For PayPal donations, please click the following image:<br />
                 <div style="margin-left:50px;">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <input type="hidden" name="cmd" value="_s-xclick" />
-                        <input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6" />
-                        <input type="image" src="resource2/{$opt.template.style}/images/misc/donate.gif" border="0" name="submit" alt="Pay with PayPal" />
-                    </form>
+                    <a href="https://www.paypal.me/opencaching">
+                        <img src="resource2/{$opt.template.style}/images/misc/donate.gif" border="0" alt="Mit PayPal bezahlen" />
+                    </a>
                 </div>
-            </p></p>
+            </p>
 
             <h1>Donate with Flattr:</h1>
             <div style="margin-left:50px;">

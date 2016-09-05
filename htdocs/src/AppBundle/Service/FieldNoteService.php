@@ -62,16 +62,7 @@ class FieldNoteService implements FieldNoteServiceInterface
                 );
             }
 
-            $date = DateTime::createFromFormat(
-                self::FIELD_NOTE_DATETIME_FORMAT,
-                $data[1],
-                new DateTimeZone('UTC')
-            );
-            if (!$date) {
-                throw new WrongDateFormatException(
-                    $this->translator->trans('field_notes.error.wrong_date_format')
-                );
-            }
+            $date = $this->getDate($data[1]);
 
             if ($ignoreBeforeDate !== null && $date < $ignoreBeforeDate) {
                 continue;
@@ -147,5 +138,35 @@ class FieldNoteService implements FieldNoteServiceInterface
         }
 
         return $max;
+    }
+
+    /**
+     * @param string $dateString
+     *
+     * @throws \AppBundle\Exception\WrongDateFormatException
+     * @return \DateTime
+     */
+    protected function getDate($dateString)
+    {
+        $format = null;
+        if (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}Z/', $dateString)) {
+            $format = self::FIELD_NOTE_DATETIME_FORMAT_SHORT;
+        } elseif (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z/', $dateString)) {
+            $format = self::FIELD_NOTE_DATETIME_FORMAT;
+        }
+
+        if ($format === null) {
+            throw new WrongDateFormatException(
+                $this->translator->trans('field_notes.error.wrong_date_format')
+            );
+        }
+
+        $date = DateTime::createFromFormat(
+            $format,
+            $dateString,
+            new DateTimeZone('UTC')
+        );
+
+        return $date;
     }
 }

@@ -52,7 +52,7 @@ class FieldNoteService implements FieldNoteServiceInterface
     public function importFromFile($fileName, $userId, DateTime $ignoreBeforeDate = null)
     {
         $content = file_get_contents($fileName);
-        $content = str_replace('\xFF\xFE', '', $content); // remove UTF16(LE) BOM
+        $content = str_replace("\xFF\xFE", '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
         $rows = ArrayUtil::trimExplode("\n", $content);
         foreach ($rows as $row) {

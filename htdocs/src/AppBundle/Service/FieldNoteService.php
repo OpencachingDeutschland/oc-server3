@@ -52,6 +52,7 @@ class FieldNoteService implements FieldNoteServiceInterface
     public function importFromFile($fileName, $userId, DateTime $ignoreBeforeDate = null)
     {
         $content = file_get_contents($fileName);
+        $content = str_replace('\xFF\xFE', '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
         $rows = ArrayUtil::trimExplode("\n", $content);
         foreach ($rows as $row) {
@@ -76,8 +77,18 @@ class FieldNoteService implements FieldNoteServiceInterface
                 continue;
             }
             $type = self::LOG_TYPE[$data[2]];
-            
-            $geocache = $this->entityManager->getRepository('AppBundle:Geocache')->findOneBy(['wpOc' => $data[0]]);
+
+            if (strtoupper(substr($data[0], 0, 2)) == 'GC') {
+                $query = $this->entityManager->createQueryBuilder()
+                    ->select('g')
+                    ->from('AppBundle:Geocache', 'g')
+                    ->where("IFELSE(g.wpGcMaintained = '', g.wpGc, g.wpGcMaintained) = :code")
+                    ->setParameter('code', $data[0])
+                    ->getQuery();
+                $geocache = $query->getOneOrNullResult();
+            } else {
+                $geocache = $this->entityManager->getRepository('AppBundle:Geocache')->findOneBy(['wpOc' => $data[0]]);
+            }
             if (!$geocache) {
                 $this->addError(
                     /** @Desc("Geocache ""%code%"" not found.") */

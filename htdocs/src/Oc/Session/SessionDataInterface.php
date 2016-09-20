@@ -7,6 +7,8 @@
  *  Interface for session data handling
  ***************************************************************************/
 
+namespace Oc\Session;
+
 interface SessionDataInterface
 {
     public function __construct();

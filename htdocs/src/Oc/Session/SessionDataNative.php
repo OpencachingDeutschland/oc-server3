@@ -6,7 +6,8 @@
  *
  *  Session data handling with build-in php session
  ***************************************************************************/
-require_once 'SessionDataInterface.class.php';
+
+namespace Oc\Session;
 
 /**
  * Class SessionDataNative
@@ -18,28 +19,42 @@ class SessionDataNative implements SessionDataInterface
     public $values = array();
     public $session_initialized = false;
 
+    /**
+     * SessionDataNative constructor.
+     */
     public function __construct()
     {
-        if (isset($_REQUEST['SESSION']) && $_REQUEST['SESSION'] != '') {
-            $this->init_session();
+        if (isset($_REQUEST['SESSION']) && $_REQUEST['SESSION'] !== '') {
+            $this->initSession();
         }
     }
 
-    private function init_session()
+    /**
+     *
+     */
+    private function initSession()
     {
         global $opt;
 
         if ($this->session_initialized !== true) {
             session_name('SESSION');
-            session_set_cookie_params($opt['session']['expire']['cookie'], $opt['session']['path'],
-                $opt['session']['domain']);
+            session_set_cookie_params(
+                $opt['session']['expire']['cookie'],
+                $opt['session']['path'],
+                $opt['session']['domain']
+            );
             session_start();
 
             if ($opt['session']['check_referer']) {
                 if (isset($_SERVER['REFERER'])) {
                     // TODO fix the following if statement, seems corrupted
-                    if (strtolower(substr('http' + strstr($_SERVER['REFERER'], '://'), 0,
-                            strlen($opt['page']['absolute_http_url']))) != strtolower($opt['page']['absolute_http_url'])
+                    if (strtolower(
+                            substr(
+                                'http' + strstr($_SERVER['REFERER'], '://'),
+                                0,
+                                strlen($opt['page']['absolute_http_url'])
+                            )
+                        ) != strtolower($opt['page']['absolute_http_url'])
                     ) {
                         $this->createNewSession();
                     }
@@ -61,6 +76,9 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
+    /**
+     *
+     */
     private function createNewSession()
     {
         session_regenerate_id();
@@ -73,6 +91,11 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @param null $default
+     */
     public function set($name, $value, $default = null)
     {
         if (!isset($_SESSION[$name]) || $_SESSION[$name] != $value) {
@@ -89,16 +112,30 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
+    /**
+     * @param $name
+     * @param null $default
+     *
+     * @return null
+     */
     public function get($name, $default = null)
     {
         return isset($_SESSION[$name]) ? $_SESSION[$name] : $default;
     }
 
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
     public function is_set($name)
     {
         return isset($_SESSION[$name]);
     }
 
+    /**
+     * @param $name
+     */
     public function un_set($name)
     {
         if (isset($_SESSION[$name])) {
@@ -124,7 +161,7 @@ class SessionDataNative implements SessionDataInterface
             if (count($_SESSION) === 0) {
                 try {
                     session_destroy();
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     // @todo implement logging
                 }
             } else {

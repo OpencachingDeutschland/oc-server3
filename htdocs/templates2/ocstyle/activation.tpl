@@ -36,7 +36,7 @@
         <table class="table">
           <tr>
                 <td>{t}E-Mail:{/t}</td>
-                <td><input type="text" name="email" maxlength="60" value="{$email|escape}" class="input200" />{if $errorEMail==true} &nbsp;<span class="errormsg">{t}E-Mail-Adress is not valid.{/t}</span>{/if}</td>
+                <td><input type="email" name="email" maxlength="60" value="{$email|escape}" class="input200" />{if $errorEMail==true} &nbsp;<span class="errormsg">{t}E-Mail-Adress is not valid.{/t}</span>{/if}</td>
           </tr>
           <tr>
                 <td>{t}Activation code:{/t}</td>

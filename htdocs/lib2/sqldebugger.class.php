@@ -9,21 +9,38 @@
 
 $sqldebugger = new sqldebugger();
 
+/**
+ * Class sqldebugger
+ */
 class sqldebugger
 {
     public $commands = array();
     public $cancel = false;
 
+    /**
+     * @return bool
+     */
     public function getCancel()
     {
         return $this->cancel;
     }
 
+    /**
+     * @return array
+     */
     public function getCommands()
     {
         return $this->commands;
     }
 
+    /**
+     * @param $sql
+     * @param $dblink
+     * @param $bQuerySlave
+     * @param $sServer
+     *
+     * @return resource
+     */
     public function execute($sql, $dblink, $bQuerySlave, $sServer)
     {
         global $db;
@@ -107,6 +124,8 @@ class sqldebugger
 
     /**
      * @param string $sql
+     *
+     * @return string
      */
     public function strip_temptable($sql)
     {
@@ -121,6 +140,8 @@ class sqldebugger
 
     /**
      * @param string $sql
+     *
+     * @return string
      */
     public function strip_from($sql)
     {
@@ -135,6 +156,8 @@ class sqldebugger
 
     /**
      * @param string $sql
+     *
+     * @return string
      */
     public function insert_nocache($sql)
     {

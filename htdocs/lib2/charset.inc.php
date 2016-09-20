@@ -20,12 +20,17 @@ $utf_punct = "                ------|_'','\"\"\"\"++*>....        %%´\"\"`\"\"^
 
 // convert utf-8 string to iso-8859-1 and use replacement characters if possible
 
+/**
+ * @param $s
+ *
+ * @return string
+ */
 function utf8ToIso88591($s)
 {
     global $utf_xlatin, $utf_punct;
 
     $pos = 0;
-    $result = "";
+    $result = '';
 
     while ($pos < strlen($s)) {
         $c1 = ord($s[$pos++]);

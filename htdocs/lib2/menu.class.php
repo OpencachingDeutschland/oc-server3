@@ -13,11 +13,17 @@ define('MNU_ROOT', 0);
 
 $menu = new Menu();
 
+/**
+ * Class Menu
+ */
 class Menu
 {
     public $nSelectedItem = 0;
     public $sMenuFilename = '';
 
+    /**
+     * Menu constructor.
+     */
     public function __construct()
     {
         global $opt, $login, $build_map_towns_menu;
@@ -34,8 +40,9 @@ class Menu
         // add country-dependent town list for small map
         $country = $login->getUserCountry();
         if ($opt['map']['towns']['enable'] &&
-            isset($build_map_towns_menu) && $build_map_towns_menu &&   // optimization
-            isset($opt['map']['towns'][$country]['enable']) && $opt['map']['towns'][$country]['enable']
+            isset($build_map_towns_menu, $opt['map']['towns'][$country]['enable'])
+            && $build_map_towns_menu // optimization
+            && $opt['map']['towns'][$country]['enable']
         ) {
             $rsTowns = sqlf(
                 "
@@ -149,6 +156,9 @@ class Menu
         fclose($f);
     }
 
+    /**
+     * clears menu cache
+     */
     public function clearCache()
     {
         global $opt;
@@ -166,6 +176,11 @@ class Menu
         }
     }
 
+    /**
+     * @param $id
+     *
+     * @return int
+     */
     public function pGetMenuSublevel($id)
     {
         $parent = sqlf_value("SELECT `parent` FROM `sys_menu` WHERE `id`='&1'", 0, $id);
@@ -176,16 +191,27 @@ class Menu
         return 0;
     }
 
+    /**
+     * @param $item
+     */
     public function SetSelectItem($item)
     {
         $this->nSelectedItem = $item;
     }
 
+    /**
+     * @param $item
+     *
+     * @return int
+     */
     public function GetSelectItem($item)
     {
         return $this->nSelectedItem;
     }
 
+    /**
+     * @return array
+     */
     public function GetBreadcrumb()
     {
         global $menuitem;
@@ -207,6 +233,9 @@ class Menu
         return array_reverse($retval);
     }
 
+    /**
+     * @return array
+     */
     public function GetTopMenu()
     {
         global $menuitem, $login;
@@ -227,6 +256,9 @@ class Menu
         return $retval;
     }
 
+    /**
+     * @return array
+     */
     public function GetSubMenu()
     {
         global $menuitem, $login;
@@ -247,6 +279,11 @@ class Menu
         return $retval;
     }
 
+    /**
+     * @param $menuid
+     * @param $ids
+     * @param $items
+     */
     public function pAppendSubMenu($menuid, $ids, &$items)
     {
         global $menuitem, $login;
@@ -264,6 +301,9 @@ class Menu
         }
     }
 
+    /**
+     * @return array
+     */
     public function GetSelectedMenuIds()
     {
         global $menuitem;
@@ -285,6 +325,9 @@ class Menu
         return $retval;
     }
 
+    /**
+     * @return string
+     */
     public function getMenuColor()
     {
         global $menuitem;
@@ -305,6 +348,9 @@ class Menu
         }
     }
 
+    /**
+     * @return string
+     */
     public function GetMenuTitle()
     {
         global $menuitem;

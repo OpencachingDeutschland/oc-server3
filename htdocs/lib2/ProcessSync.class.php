@@ -8,11 +8,19 @@
  * also used in lib1
  ****************************************************************************/
 
+/**
+ * Class ProcessSync
+ */
 class ProcessSync
 {
     public $pidfile_path;
 
 
+    /**
+     * ProcessSync constructor.
+     *
+     * @param $name
+     */
     public function __construct($name)
     {
         global $opt;
@@ -20,8 +28,11 @@ class ProcessSync
     }
 
 
-    // Enter code section which must not run concurrently
-
+    /**
+     * Enter code section which must not run concurrently
+     *
+     * @return bool
+     */
     public function Enter()
     {
         if (!$this->CheckDaemon()) {
@@ -29,29 +40,31 @@ class ProcessSync
         }
 
         if (file_exists($this->pidfile_path)) {
-            echo "Error: Pidfile (" . $this->pidfile_path . ") already present\n";
+            echo 'Error: PidFile (' . $this->pidfile_path . ") already present\n";
 
             return false;
         } else {
-            if ($pidfile = @fopen($this->pidfile_path, "w")) {
+            if ($pidfile = @fopen($this->pidfile_path, 'w')) {
                 fputs($pidfile, posix_getpid());
                 fclose($pidfile);
 
                 return true;
             } else {
-                echo "can't create Pidfile " . $this->pidfile_path . "\n";
+                echo "can't create PidFile " . $this->pidfile_path . "\n";
 
                 return false;
             }
         }
     }
 
-
-    // checks if other instance of process is running
-
+    /**
+     * checks if other instance of process is running
+     *
+     * @return bool
+     */
     private function CheckDaemon()
     {
-        if ($pidfile = @fopen($this->pidfile_path, "r")) {
+        if ($pidfile = @fopen($this->pidfile_path, 'r')) {
             $pid_daemon = fgets($pidfile, 20);
             fclose($pidfile);
 
@@ -59,19 +72,19 @@ class ProcessSync
 
             // bad PID file, e.g. due to system malfunction while creating the file?
             if ($pid_daemon <= 0) {
-                echo "removing bad pid_file (" . $this->pidfile_path . ")\n";
+                echo 'removing bad PidFile (' . $this->pidfile_path . ")\n";
                 unlink($this->pidfile_path);
 
                 return false;
             } // process running?
             elseif (posix_kill($pid_daemon, 0)) {
                 // yes, good bye
-                echo "Error: process for " . $this->pidfile_path . " is already running with pid=$pid_daemon\n";
+                echo 'Error: process for ' . $this->pidfile_path . " is already running with pid=$pid_daemon\n";
 
                 return false;
             } else {
                 // no, remove pid_file
-                echo "process not running, removing old pid_file (" . $this->pidfile_path . ")\n";
+                echo 'process not running, removing old PidFile (' . $this->pidfile_path . ")\n";
                 unlink($this->pidfile_path);
 
                 return true;
@@ -82,18 +95,21 @@ class ProcessSync
     }
 
 
-    // Leave code section which must not run concurrently
-
+    /**
+     * Leave code section which must not run concurrently
+     *
+     * @param bool $message
+     */
     public function Leave($message = false)
     {
-        if ($pidfile = @fopen($this->pidfile_path, "r")) {
-            $pid = fgets($pidfile, 20);
-            fclose($pidfile);
-            if ($pid == posix_getpid()) {
+        if ($pidFile = @fopen($this->pidfile_path, 'r')) {
+            $pid = fgets($pidFile, 20);
+            fclose($pidFile);
+            if ($pid === posix_getpid()) {
                 unlink($this->pidfile_path);
             }
         } else {
-            echo "Error: can't delete own pidfile (" . $this->pidfile_path . ")\n";
+            echo "Error: can't delete own PidFile (" . $this->pidfile_path . ")\n";
         }
 
         if ($message) {

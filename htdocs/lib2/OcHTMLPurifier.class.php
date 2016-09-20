@@ -15,12 +15,20 @@ require_once __DIR__ . '/Net/IDNA2.php';
 // Also used for lib1 code.
 
 
+/**
+ * Class OcHTMLPurifier
+ */
 class OcHTMLPurifier extends HTMLPurifier
 {
     // $opt needs to be passed as parameter here because it resides in another
     // namespace in OKAPI. All options used here must be included in the
     // $opt['html_purifier'] array.
 
+    /**
+     * OcHTMLPurifier constructor.
+     *
+     * @param null|Optional $opt
+     */
     public function __construct($opt)
     {
         // prepare config
@@ -89,6 +97,12 @@ class OcHTMLPurifier extends HTMLPurifier
     }
 
 
+    /**
+     * @param String $text
+     * @param null $config
+     *
+     * @return mixed
+     */
     public function purify($text, $config = null)
     {
         // HTMLPurifier deletes spaces between images; apply space protection:

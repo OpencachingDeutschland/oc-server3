@@ -8,6 +8,9 @@
  *  Output is formatted by templates2/<style>/res_pager.tpl.
  ***************************************************************************/
 
+/**
+ * Class pager
+ */
 class pager
 {
     private $link_url;
@@ -15,22 +18,34 @@ class pager
     private $max_pages_shown;
 
 
-    // Use {page} in link_url als placeholder for the selected page number
-    // and/or {offset} for the 0-based data offset of the selected page.
-
+    /**
+     * pager constructor.
+     *
+     * Use {page} in link_url als placeholder for the selected page number
+     * and/or {offset} for the 0-based data offset of the selected page.
+     *
+     * @param $link_url
+     * @param int $min_pages_shown
+     * @param int $max_pages_shown
+     */
     public function __construct($link_url, $min_pages_shown = 2, $max_pages_shown = 15)
     {
         global $tpl;
 
         $this->link_url = $link_url;
         $this->min_pages_shown = $min_pages_shown;
-        if (($max_pages_shown % 2) == 0) {
-            $tpl->error("pager: max pages shown must be odd");
+        if (($max_pages_shown % 2) === 0) {
+            $tpl->error('pager: max pages shown must be odd');
         }
         $this->max_pages_shown = $max_pages_shown;
     }
 
 
+    /**
+     * @param $current_page
+     * @param $total_pages
+     * @param bool $page_size
+     */
     public function make_from_pagenr($current_page, $total_pages, $page_size = false)
     {
         global $tpl;
@@ -84,6 +99,11 @@ class pager
     }
 
 
+    /**
+     * @param $current_offset
+     * @param $total_items
+     * @param $page_size
+     */
     public function make_from_offset($current_offset, $total_items, $page_size)
     {
         $this->make_from_pagenr(
@@ -94,6 +114,12 @@ class pager
     }
 
 
+    /**
+     * @param $page
+     * @param $page_size
+     *
+     * @return string
+     */
     private function pagelink($page, $page_size)
     {
         return mb_ereg_replace(

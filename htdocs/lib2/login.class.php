@@ -36,14 +36,38 @@ $login = new login();
 
 class login
 {
+    /**
+     * @var int|mixed|string
+     */
     public $userid = 0;
+    /**
+     * @var mixed|string
+     */
     public $username = '';
+    /**
+     * @var int|mixed|string
+     */
     public $lastlogin = 0;
+    /**
+     * @var bool
+     */
     public $permanent = false;
+    /**
+     * @var mixed|string
+     */
     public $sessionid = '';
+    /**
+     * @var bool
+     */
     public $verified = false;
+    /**
+     * @var int
+     */
     public $admin = 0;
 
+    /**
+     * login constructor.
+     */
     public function __construct()
     {
         global $cookie;
@@ -88,6 +112,9 @@ class login
         // $cookie->set('admin', $this->admin);   nonsense
     }
 
+    /**
+     * @return void
+     */
     public function verify()
     {
         global $opt;
@@ -176,6 +203,13 @@ class login
         return;
     }
 
+    /**
+     * @param $user
+     * @param $password
+     * @param $permanent
+     *
+     * @return int
+     */
     public function try_login($user, $password, $permanent)
     {
         if ($password == '') {
@@ -187,18 +221,21 @@ class login
         return $this->try_login_encrypted($user, $encryptedPassword, $permanent);
     }
 
+    /**
+     * @return bool
+     */
     public function checkLoginsCount()
     {
         global $opt;
 
         // cleanup old entries
         // (execute only every 50 search calls)
-        if (mt_rand(1, 50) == 1) {
+        if (mt_rand(1, 50) === 1) {
             sqlf("DELETE FROM `sys_logins` WHERE `date_created`<'&1'", date('Y-m-d H:i:s', time() - 3600));
         }
 
         // check the number of logins in the last hour ...
-        $logins_count = sqlf_value(
+        $loginAttemptsCount = sqlf_value(
             "
             SELECT COUNT(*) `count`
             FROM `sys_logins`
@@ -208,13 +245,20 @@ class login
             $_SERVER['REMOTE_ADDR'],
             date('Y-m-d H:i:s', time() - 3600)
         );
-        if ($logins_count > $opt['page']['max_logins_per_hour']) {
+        if ($loginAttemptsCount > $opt['page']['max_logins_per_hour']) {
             return false;
         } else {
             return true;
         }
     }
 
+    /**
+     * @param $user
+     * @param $encryptedPassword
+     * @param $permanent
+     *
+     * @return int
+     */
     public function try_login_encrypted($user, $encryptedPassword, $permanent)
     {
         $this->pClear();
@@ -253,7 +297,13 @@ class login
             if ($rUser['is_active_flag'] != 0) {
                 // begin session
                 $uuid = self::create_sessionid();
-                sqlf("INSERT INTO `sys_sessions` (`uuid`, `user_id`, `permanent`) VALUES ('&1', '&2', '&3')", $uuid, $rUser['user_id'], ($permanent != false ? 1 : 0));
+                sqlf(
+                    "INSERT INTO `sys_sessions` (`uuid`, `user_id`, `permanent`)
+                      VALUES ('&1', '&2', '&3')",
+                    $uuid,
+                    $rUser['user_id'],
+                    ($permanent != false ? 1 : 0)
+                );
                 $this->userid = $rUser['user_id'];
                 $this->username = $rUser['username'];
                 $this->permanent = $permanent;
@@ -283,7 +333,13 @@ class login
         return $retval;
     }
 
-    // login for cronjobs, command line tools ...
+    /**
+     * login for cronjobs, command line tools ...
+     *
+     * @param $username
+     *
+     * @return bool
+     */
     public function system_login($username)
     {
         $this->pClear();
@@ -306,6 +362,9 @@ class login
         return ($this->userid > 0);
     }
 
+    /**
+     * @return string
+     */
     private static function create_sessionid()
     {
         return sprintf(
@@ -321,6 +380,9 @@ class login
         );
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getUserCountry()
     {
         global $opt, $cookie;
@@ -362,6 +424,11 @@ class login
         $this->pClear();
     }
 
+    /**
+     * @param bool $privilege
+     *
+     * @return bool
+     */
     public function hasAdminPriv($privilege = false)
     {
         if ($privilege === false) {
@@ -371,6 +438,9 @@ class login
         return ($this->admin & $privilege) == $privilege;
     }
 
+    /**
+     * @return bool
+     */
     public function listingAdmin()
     {
         global $opt;
@@ -378,6 +448,9 @@ class login
         return $this->hasAdminPriv(ADMIN_LISTING) && $opt['logic']['admin']['enable_listing_admins'];
     }
 
+    /**
+     * @return bool
+     */
     public function logged_in()
     {
         return $this->userid > 0;

@@ -74,7 +74,7 @@
  ***************************************************************************/
 
 $db['connected'] = false;
-$db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER);
+$db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) === DEBUG_SQLDEBUGGER);
 $db['dblink'] = false;
 $db['dblink_slave'] = false;
 $db['slave_id'] = - 1;
@@ -85,6 +85,9 @@ $db['temptables_slave'] = [];
 $db['mode'] = DB_MODE_USER;
 $db['error'] = false;
 
+/**
+ *
+ */
 function sql_enable_debugger()
 {
     global $opt, $db;
@@ -93,16 +96,11 @@ function sql_enable_debugger()
     $db['debug'] = true;
 }
 
-/*
-    sql("SELECT id FROM &tmpdb.table WHERE a=&1 AND &tmpdb.b='&2'", 12345, 'abc');
-
-    Important: only use ASCII charecters with ord() < 128 in your queries, otherwise
-               they will fail when $opt['charset']['mysql'] is not UTF-8.
-               However, parameters pased with &x or escaped with sql_escape will be
-               converted from UTF-8 to $opt['charset']['iconv'].
-
-    returns: recordset or false
-*/
+/**
+ * @param $sql
+ *
+ * @return resource
+ */
 function sql($sql)
 {
     global $db;
@@ -120,7 +118,7 @@ function sql($sql)
         $tmp_args = $args[1];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -128,6 +126,11 @@ function sql($sql)
     return sql_internal($db['dblink'], $sql, $args);
 }
 
+/**
+ * @param $sql
+ *
+ * @return resource
+ */
 function sql_slave($sql)
 {
     global $db;
@@ -144,7 +147,7 @@ function sql_slave($sql)
         $tmp_args = $args[1];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge(array(0), $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -152,6 +155,12 @@ function sql_slave($sql)
     return sql_internal($db['dblink_slave'], $sql, $args);
 }
 
+/**
+ * @param $dblink
+ * @param $sql
+ *
+ * @return resource
+ */
 function sql_internal($dblink, $sql)
 {
     global $opt, $db, $sqldebugger;
@@ -161,13 +170,13 @@ function sql_internal($dblink, $sql)
 
     /* as an option, you can give as second parameter an array
      * with all values for the placeholder. The array has to be
-     * with numeric indizes.
+     * with numeric indices.
      */
     if (isset($args[2]) && is_array($args[2])) {
         $tmp_args = $args[2];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge(array(0), $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -336,6 +345,11 @@ function sql_internal($dblink, $sql)
     return $result;
 }
 
+/**
+ * @param $sql
+ *
+ * @return resource
+ */
 function sqlf($sql)
 {
     global $db;
@@ -349,6 +363,11 @@ function sqlf($sql)
     return $result;
 }
 
+/**
+ * @param $sql
+ *
+ * @return resource
+ */
 function sqlf_slave($sql)
 {
     global $db;
@@ -362,6 +381,11 @@ function sqlf_slave($sql)
     return $result;
 }
 
+/**
+ * @param $sql
+ *
+ * @return resource
+ */
 function sqll($sql)
 {
     global $db;
@@ -375,6 +399,12 @@ function sqll($sql)
     return $result;
 }
 
+/**
+ * @param $sql
+ * @param $default
+ *
+ * @return mixed
+ */
 function sqlf_value($sql, $default)
 {
     global $db;
@@ -388,6 +418,12 @@ function sqlf_value($sql, $default)
     return $result;
 }
 
+/**
+ * @param $sql
+ * @param $default
+ *
+ * @return mixed
+ */
 function sqll_value($sql, $default)
 {
     global $db;
@@ -401,6 +437,11 @@ function sqll_value($sql, $default)
     return $result;
 }
 
+/**
+ * @param $value
+ *
+ * @return mixed|string
+ */
 function sql_escape($value)
 {
     global $db, $opt;
@@ -421,6 +462,11 @@ function sql_escape($value)
     return $value;
 }
 
+/**
+ * @param $value
+ *
+ * @return mixed|string
+ */
 function sql_escape_backtick($value)
 {
     $value = sql_escape($value);
@@ -429,6 +475,12 @@ function sql_escape_backtick($value)
     return $value;
 }
 
+/**
+ * @param $sql
+ * @param $default
+ *
+ * @return mixed
+ */
 function sql_value($sql, $default)
 {
     $args = func_get_args();
@@ -438,7 +490,7 @@ function sql_value($sql, $default)
         $tmp_args = $args[2];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -446,6 +498,12 @@ function sql_value($sql, $default)
     return sql_value_internal(false, $sql, $default, $args);
 }
 
+/**
+ * @param $sql
+ * @param $default
+ *
+ * @return mixed
+ */
 function sql_value_slave($sql, $default)
 {
     $args = func_get_args();
@@ -455,7 +513,7 @@ function sql_value_slave($sql, $default)
         $tmp_args = $args[2];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge(array(0), $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -463,6 +521,13 @@ function sql_value_slave($sql, $default)
     return sql_value_internal(true, $sql, $default, $args);
 }
 
+/**
+ * @param $bQuerySlave
+ * @param $sql
+ * @param $default
+ *
+ * @return mixed
+ */
 function sql_value_internal($bQuerySlave, $sql, $default)
 {
     $args = func_get_args();
@@ -470,13 +535,13 @@ function sql_value_internal($bQuerySlave, $sql, $default)
 
     /* as an option, you can give as third parameter an array
      * with all values for the placeholder. The array has to be
-     * with numeric indizes.
+     * with numeric indices.
      */
     if (isset($args[3]) && is_array($args[3])) {
         $tmp_args = $args[3];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge(array(0), $tmp_args);
         unset($tmp_args, $args[0]);
     }
@@ -505,6 +570,11 @@ function sql_value_internal($bQuerySlave, $sql, $default)
     Replacement for builtin MySQL functions
     (includes database charset conversion)
 */
+/**
+ * @param $rs
+ *
+ * @return array
+ */
 function sql_fetch_array($rs)
 {
     global $opt;
@@ -520,6 +590,11 @@ function sql_fetch_array($rs)
     return $retval;
 }
 
+/**
+ * @param $rs
+ *
+ * @return array
+ */
 function sql_fetch_assoc($rs)
 {
     global $opt;
@@ -535,6 +610,11 @@ function sql_fetch_assoc($rs)
     return $retval;
 }
 
+/**
+ * @param $rs
+ *
+ * @return array
+ */
 function sql_fetch_assoc_table($rs)
 {
     $result = array();
@@ -547,6 +627,11 @@ function sql_fetch_assoc_table($rs)
 }
 
 // returns false if no more matching rows exist
+/**
+ * @param $rs
+ *
+ * @return array
+ */
 function sql_fetch_row($rs)
 {
     global $opt;
@@ -583,6 +668,9 @@ function sql_fetch_column($rs)
     return $result;
 }
 
+/**
+ * @return int
+ */
 function sql_affected_rows()
 {
     global $db;
@@ -590,6 +678,9 @@ function sql_affected_rows()
     return mysql_affected_rows($db['dblink']);
 }
 
+/**
+ * @return int
+ */
 function sql_affected_rows_slave()
 {
     global $db;
@@ -597,11 +688,19 @@ function sql_affected_rows_slave()
     return mysql_affected_rows($db['dblink_slave']);
 }
 
+/**
+ * @param $rs
+ *
+ * @return bool
+ */
 function sql_free_result($rs)
 {
     return mysql_free_result($rs);
 }
 
+/**
+ * @return int
+ */
 function sql_insert_id()
 {
     global $db;
@@ -609,6 +708,9 @@ function sql_insert_id()
     return mysql_insert_id($db['dblink']);
 }
 
+/**
+ * @return int
+ */
 function sql_insert_id_slave()
 {
     global $db;
@@ -616,11 +718,19 @@ function sql_insert_id_slave()
     return mysql_insert_id($db['dblink_slave']);
 }
 
+/**
+ * @param $rs
+ *
+ * @return int
+ */
 function sql_num_rows($rs)
 {
     return mysql_num_rows($rs);
 }
 
+/**
+ * @param $table
+ */
 function sql_temp_table($table)
 {
     global $db, $opt;
@@ -650,6 +760,9 @@ function sql_temp_table($table)
     $db['temptables'][$table] = $table;
 }
 
+/**
+ * @param $table
+ */
 function sql_temp_table_slave($table)
 {
     global $db, $opt;
@@ -670,6 +783,9 @@ function sql_temp_table_slave($table)
     $db['temptables_slave'][$table] = $table;
 }
 
+/**
+ * @param $table
+ */
 function sql_drop_temp_table($table)
 {
     global $db, $opt;
@@ -687,6 +803,10 @@ function sql_drop_temp_table($table)
     unset($db['temptables'][$table]);
 }
 
+/**
+ * @param $table
+ * @param $newname
+ */
 function sql_rename_temp_table($table, $newname)
 {
     global $db, $opt;
@@ -706,6 +826,9 @@ function sql_rename_temp_table($table, $newname)
     $db['temptables'][$newname] = $newname;
 }
 
+/**
+ * @param $table
+ */
 function sql_drop_temp_table_slave($table)
 {
     global $db, $opt;
@@ -723,6 +846,10 @@ function sql_drop_temp_table_slave($table)
     unset($db['temptables'][$table], $db['temptables_slave'][$table]);
 }
 
+/**
+ * @param $table
+ * @param $newname
+ */
 function sql_rename_temp_table_slave($table, $newname)
 {
     global $db, $opt;
@@ -744,6 +871,11 @@ function sql_rename_temp_table_slave($table, $newname)
 }
 
 //database handling
+/**
+ * @param null $username
+ * @param null $password
+ * @param bool $raiseError
+ */
 function sql_connect($username = null, $password = null, $raiseError = true)
 {
     global $opt, $db;
@@ -783,6 +915,9 @@ function sql_connect($username = null, $password = null, $raiseError = true)
     }
 }
 
+/**
+ *
+ */
 function sql_slave_exclude()
 {
     global $login;
@@ -797,6 +932,9 @@ function sql_slave_exclude()
     );
 }
 
+/**
+ *
+ */
 function sql_connect_anyslave()
 {
     global $db, $opt, $login;
@@ -833,6 +971,9 @@ function sql_connect_anyslave()
     sql_connect_slave($id);
 }
 
+/**
+ *
+ */
 function sql_connect_master_as_slave()
 {
     global $db;
@@ -850,6 +991,9 @@ function sql_connect_master_as_slave()
     $db['slave_server'] = 'master';
 }
 
+/**
+ * @param $id
+ */
 function sql_connect_slave($id)
 {
     global $opt, $db;
@@ -901,6 +1045,9 @@ function sql_connect_slave($id)
     }
 }
 
+/**
+ * @return bool
+ */
 function sql_connect_maintenance()
 {
     global $tpl, $db, $opt;
@@ -920,6 +1067,9 @@ function sql_connect_maintenance()
 }
 
 //disconnect the databse
+/**
+ *
+ */
 function sql_disconnect()
 {
     global $opt, $db;
@@ -950,6 +1100,9 @@ function sql_disconnect()
 }
 
 //disconnect the databse
+/**
+ *
+ */
 function sql_disconnect_slave()
 {
     global $opt, $db;
@@ -990,6 +1143,9 @@ function sql_disconnect_slave()
     $db['dblink_slave'] = false;
 }
 
+/**
+ * @param string $sqlstatement
+ */
 function sql_error($sqlstatement = '')
 {
     global $tpl, $opt, $db;
@@ -1070,6 +1226,9 @@ function sql_error($sqlstatement = '')
     }
 }
 
+/**
+ * @param $warnmessage
+ */
 function sql_warn($warnmessage)
 {
     global $opt;
@@ -1097,6 +1256,12 @@ function sql_warn($warnmessage)
     }
 }
 
+/**
+ * @param $f
+ * @param $rs
+ * @param $table
+ * @param bool $truncate
+ */
 function sql_export_recordset($f, $rs, $table, $truncate = true)
 {
     fwrite($f, "SET NAMES 'utf8';\n");
@@ -1127,6 +1292,10 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
     }
 }
 
+/**
+ * @param $f
+ * @param $table
+ */
 function sql_export_table($f, $table)
 {
     $primary = [];
@@ -1148,6 +1317,10 @@ function sql_export_table($f, $table)
     sql_free_result($rs);
 }
 
+/**
+ * @param $filename
+ * @param $tables
+ */
 function sql_export_tables_to_file($filename, $tables)
 {
     $f = fopen($filename, 'w');
@@ -1168,6 +1341,10 @@ function sql_export_tables_to_file($filename, $tables)
     fclose($f);
 }
 
+/**
+ * @param $filename
+ * @param $table
+ */
 function sql_export_table_to_file($filename, $table)
 {
     $f = fopen($filename, 'w');
@@ -1175,6 +1352,10 @@ function sql_export_table_to_file($filename, $table)
     fclose($f);
 }
 
+/**
+ * @param $f
+ * @param $table
+ */
 function sql_export_structure($f, $table)
 {
     $rs = sql("SHOW CREATE TABLE `&1`", $table);
@@ -1190,6 +1371,10 @@ function sql_export_structure($f, $table)
     fwrite($f, $sTableSql . " ;\n");
 }
 
+/**
+ * @param $filename
+ * @param $table
+ */
 function sql_export_structure_to_file($filename, $table)
 {
     $f = fopen($filename, 'w');
@@ -1198,6 +1383,11 @@ function sql_export_structure_to_file($filename, $table)
 }
 
 // test if a database table exists
+/**
+ * @param $table
+ *
+ * @return bool
+ */
 function sql_table_exists($table)
 {
     global $opt;
@@ -1213,6 +1403,12 @@ function sql_table_exists($table)
 }
 
 // test if a database field exists
+/**
+ * @param $table
+ * @param $field
+ *
+ * @return bool
+ */
 function sql_field_exists($table, $field)
 {
     global $opt;
@@ -1229,6 +1425,12 @@ function sql_field_exists($table, $field)
 }
 
 // get type of a database field
+/**
+ * @param $table
+ * @param $field
+ *
+ * @return string
+ */
 function sql_field_type($table, $field)
 {
     global $opt;
@@ -1247,6 +1449,12 @@ function sql_field_type($table, $field)
 }
 
 // test if a database index exists
+/**
+ * @param $table
+ * @param $index
+ *
+ * @return bool
+ */
 function sql_index_exists($table, $index)
 {
     global $opt;
@@ -1263,6 +1471,12 @@ function sql_index_exists($table, $index)
 }
 
 // test if a function or procedure exists
+/**
+ * @param $type
+ * @param $name
+ *
+ * @return bool
+ */
 function sql_fp_exists($type, $name)
 {
     global $opt;
@@ -1278,29 +1492,48 @@ function sql_fp_exists($type, $name)
 }
 
 // test if a function exists
+/**
+ * @param $name
+ *
+ * @return bool
+ */
 function sql_function_exists($name)
 {
     return sql_fp_exists('FUNCTION', $name);
 }
 
 // delete a function
+/**
+ * @param $name
+ */
 function sql_dropFunction($name)
 {
     sql('DROP FUNCTION IF EXISTS `&1`', $name);
 }
 
 // test if a procedure exists
+/**
+ * @param $name
+ *
+ * @return bool
+ */
 function sql_procedure_exists($name)
 {
     return sql_fp_exists('PROCEDURE', $name);
 }
 
 // delete a procedure
+/**
+ * @param $name
+ */
 function sql_dropProcedure($name)
 {
     sql('DROP PROCEDURE IF EXISTS `&1`', $name);
 }
 
+/**
+ * @param $triggername
+ */
 function sql_dropTrigger($triggername)
 {
     $rs = sql('SHOW TRIGGERS');

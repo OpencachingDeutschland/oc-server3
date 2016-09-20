@@ -9,7 +9,6 @@
 
 $error_handled = false;
 
-
 function register_errorhandlers()
 {
     global $opt;
@@ -20,6 +19,12 @@ function register_errorhandlers()
     }
 }
 
+/**
+ * @param $errno
+ * @param $errstr
+ * @param $errfile
+ * @param $errline
+ */
 function errorhandler($errno, $errstr, $errfile, $errline)
 {
     // will catch a few runtime errors
@@ -67,12 +72,12 @@ function shutdownhandler()
     ) {
         $error_handled = true;
 
-        $error = "(" . $error['type'] . ") " . $error['message'] .
-            " at line " . $error['line'] . " of " . $error['file'];
+        $error = '(' . $error['type'] . ') ' . $error['message'] .
+            ' at line ' . $error['line'] . ' of ' . $error['file'];
         php_errormail($error);
 
-        $errtitle = "PHP-Fehler";
-        $errmsg = "";
+        $errtitle = 'PHP-Fehler';
+        $errmsg = '';
         if (display_error()) {
             $errmsg = $error;
         }
@@ -81,6 +86,9 @@ function shutdownhandler()
     }
 }
 
+/**
+ * @return bool
+ */
 function display_error()
 {
     global $opt, $debug_page;
@@ -89,6 +97,9 @@ function display_error()
     (isset($debug_page) && $debug_page);
 }
 
+/**
+ * @param $errmsg
+ */
 function php_errormail($errmsg)
 {
     global $opt, $sql_errormail, $absolute_server_URI;
@@ -108,13 +119,14 @@ function php_errormail($errmsg)
     }
 }
 
-
-// throttle admin error mails;
-// currently used only for SQL errors and warnings
-
 /**
+ * throttle admin error mails;
+ * currently used only for SQL errors and warnings
+ *
  * @param string $errortype
  * @param string $message
+ *
+ * @return bool
  */
 function admin_errormail($to, $errortype, $message, $headers)
 {

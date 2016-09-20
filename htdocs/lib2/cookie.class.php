@@ -10,12 +10,27 @@
 
 $cookie = new cookie();
 
+/**
+ * Class cookie
+ */
 class cookie
 {
+    /**
+     * @var bool
+     */
     public $changed = false;
+    /**
+     * @var array
+     */
     public $values = array();
+    /**
+     * @var bool
+     */
     public $session_initialized = false;
 
+    /**
+     * cookie constructor.
+     */
     public function __construct()
     {
         global $opt;
@@ -39,13 +54,20 @@ class cookie
         }
     }
 
+    /**
+     *
+     */
     public function init_session()
     {
         global $opt;
 
         if ($this->session_initialized !== true) {
             session_name('SESSION');
-            session_set_cookie_params($opt['session']['expire']['cookie'], $opt['session']['path'], $opt['session']['domain']);
+            session_set_cookie_params(
+                $opt['session']['expire']['cookie'],
+                $opt['session']['path'],
+                $opt['session']['domain']
+            );
             session_start();
 
             if ($opt['session']['check_referer']) {
@@ -72,6 +94,9 @@ class cookie
         }
     }
 
+    /**
+     *
+     */
     public function createNewSession()
     {
         session_regenerate_id();
@@ -84,6 +109,11 @@ class cookie
         }
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @param null $default
+     */
     public function set($name, $value, $default = null)
     {
         global $opt;
@@ -119,6 +149,12 @@ class cookie
         }
     }
 
+    /**
+     * @param $name
+     * @param string $default
+     *
+     * @return mixed|string
+     */
     public function get($name, $default = '')
     {
         global $opt;
@@ -130,6 +166,11 @@ class cookie
         }
     }
 
+    /**
+     * @param $name
+     *
+     * @return bool
+     */
     public function is_set($name)
     {
         global $opt;
@@ -141,6 +182,9 @@ class cookie
         }
     }
 
+    /**
+     * @param $name
+     */
     public function un_set($name)
     {
         global $opt;
@@ -158,6 +202,9 @@ class cookie
         }
     }
 
+    /**
+     *
+     */
     public function header()
     {
         global $opt;
@@ -189,6 +236,9 @@ class cookie
         }
     }
 
+    /**
+     *
+     */
     public function debug()
     {
         global $opt;
@@ -200,20 +250,21 @@ class cookie
         exit;
     }
 
+    /**
+     *
+     */
     public function close()
     {
         global $opt;
-        if ($opt['session']['mode'] == SAVE_SESSION) {
-            if ($this->session_initialized === true) {
-                if (count($_SESSION) === 0) {
-                    try {
-                        session_destroy();
-                    } catch (Exception $e) {
-                        // @todo implement logging
-                    }
-                } else {
-                    session_write_close();
+        if ($this->session_initialized === true && $opt['session']['mode'] == SAVE_SESSION) {
+            if (count($_SESSION) === 0) {
+                try {
+                    session_destroy();
+                } catch (Exception $e) {
+                    // @todo implement logging
                 }
+            } else {
+                session_write_close();
             }
         }
     }

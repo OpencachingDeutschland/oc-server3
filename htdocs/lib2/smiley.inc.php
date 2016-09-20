@@ -24,7 +24,7 @@ if (!isset($smiley)) {
         'smiley-surprised.gif',
         'smiley-frown.gif',
         'smiley-frown.gif',
-        'smiley-embarrassed.gif',
+        'smiley-embarassed.gif',
         'smiley-cry.gif',
         'smiley-kiss.gif',
         'smiley-tongue-out.gif',

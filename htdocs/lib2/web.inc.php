@@ -38,6 +38,9 @@ if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
         $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
     }
     $opt['page']['force_https_login'] = true;
+} elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
+    // during login was https active -> session data is https only -> redirect to https
+    $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 }
 
 

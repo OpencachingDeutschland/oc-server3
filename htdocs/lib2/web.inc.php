@@ -19,13 +19,13 @@ if (!isset($opt['rootpath'])) {
 }
 
 // chicken-egg problem ...
-require_once $opt['rootpath'] . 'lib2/const.inc.php';
+require_once __DIR__ . '/const.inc.php';
 
 // do all output in HTML format
 $opt['gui'] = GUI_HTML;
 
 // include the main library
-require_once $opt['rootpath'] . 'lib2/common.inc.php';
+require_once __DIR__ . '/common.inc.php';
 
 // enforce http or https?
 if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
@@ -38,6 +38,9 @@ if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
         $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
     }
     $opt['page']['force_https_login'] = true;
+} elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
+    // during login was https active -> session data is https only -> redirect to https
+    $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 }
 
 

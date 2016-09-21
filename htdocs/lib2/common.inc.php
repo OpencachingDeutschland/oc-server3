@@ -43,9 +43,9 @@ mb_internal_encoding('UTF-8');
 mb_regex_encoding('UTF-8');
 
 // set options
-require_once $opt['rootpath'] . 'config2/settings-dist.inc.php';
-require_once $opt['rootpath'] . 'config2/settings.inc.php';
-require_once $opt['rootpath'] . 'config2/verify-settings.inc.php';
+require_once __DIR__.'/../config2/settings-dist.inc.php';
+require_once __DIR__.'/../config2/settings.inc.php';
+require_once __DIR__.'/../config2/verify-settings.inc.php';
 
 foreach ($opt['page']['banned_user_agents'] as $ua) {
     if (strpos($useragent, $ua) !== false) {
@@ -69,10 +69,10 @@ if (($opt['debug'] & DEBUG_FORCE_TRANSLATE) != DEBUG_FORCE_TRANSLATE) {
     }
 }
 
-require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
+require_once __DIR__ . '/errorhandler.inc.php';
 configure_php();
 
-require $opt['rootpath'] . 'lib2/cookie.class.php';
+require __DIR__ . '/cookie.class.php';
 normalize_settings();
 set_language();
 set_usercountry();

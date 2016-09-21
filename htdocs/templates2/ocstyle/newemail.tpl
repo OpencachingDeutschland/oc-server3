@@ -31,7 +31,7 @@
         <tr>
             <td>{t}New E-Mail address:{/t}</td>
             <td>
-                <input name="email" maxlength="60" type="text" value="{$email|escape}" class="input200" />
+                <input name="email" maxlength="60" type="email" value="{$email|escape}" class="input200" />
             </td>
         </tr>
         <tr>

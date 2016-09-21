@@ -30,7 +30,7 @@
         <tr>
             <td>{t}E-Mail-Address:{/t}</td>
             <td>
-                <input name="email" type="text" value="{$emailrq|escape}" maglength="60" class="input200" />
+                <input name="email" type="email" value="{$emailrq|escape}" maglength="60" class="input200" />
             </td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@
         <tr>
             <td>{t}E-Mail-Address:{/t}</td>
             <td>
-                <input name="email" type="text" value="{$emailch|escape}" maglength="60" class="input200" />
+                <input name="email" type="email" value="{$emailch|escape}" maglength="60" class="input200" />
             </td>
         </tr>
         {if $emailRqErrorNotFound==true}

@@ -30,7 +30,7 @@ tpl_set_var('runtime', '');
 $sLoggedOut =
     '<form action="' . ($opt['page']['https']['force_login'] ? $opt['page']['absolute_https_url'] : '') . 'login.php" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;"><b>'
     . t('User:')
-    . '</b>&nbsp;&nbsp;<input name="email" size="10" type="email" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;<b>'
+    . '</b>&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;<b>'
     . t('Password:')
     . '</b>&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input type="submit" name="LogMeIn" value="'
     . t('Login')

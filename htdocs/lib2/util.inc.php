@@ -15,7 +15,12 @@
  * Revision 4
  */
 
-function is_valid_email_address($email)
+/**
+ * @param $eMail
+ *
+ * @return int
+ */
+function is_valid_email_address($eMail)
 {
     /*
      * NO-WS-CTL       =       %d1-8 /         ; US-ASCII control characters
@@ -33,7 +38,6 @@ function is_valid_email_address($email)
     $cr = "\\x0d";
     $lf = "\\x0a";
     $crlf = "($cr$lf)";
-
 
     /*
      *
@@ -54,7 +58,6 @@ function is_valid_email_address($email)
     $text = "([\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f]|$obs_text)";
     $obs_qp = "(\\x5c[\\x00-\\x7f])";
     $quoted_pair = "(\\x5c$text|$obs_qp)";
-
 
     /*
      *
@@ -84,7 +87,6 @@ function is_valid_email_address($email)
     $cfws = "(($fws?$comment)*($fws?$comment|$fws))";
     $cfws = "$fws*";
 
-
     /*
      *
      * atext           =       ALPHA / DIGIT / ; Any character except controls,
@@ -104,7 +106,6 @@ function is_valid_email_address($email)
     $atext = "($alpha|$digit|[\\x21\\x23-\\x27\\x2a\\x2b\\x2d\\x2e\\x3d\\x3f\\x5e\\x5f\\x60\\x7b-\\x7e])";
     $atom = "($cfws?$atext+$cfws?)";
 
-
     /*
      *
      * qtext           =       NO-WS-CTL /     ; Non white space controls
@@ -122,7 +123,6 @@ function is_valid_email_address($email)
     $qcontent = "($qtext|$quoted_pair)";
     $quoted_string = "($cfws?\\x22($fws?$qcontent)*$fws?\\x22$cfws?)";
     $word = "($atom|$quoted_string)";
-
 
     /*
      *
@@ -179,28 +179,32 @@ function is_valid_email_address($email)
     $done = 0;
 
     while (!$done) {
-        $new = preg_replace("!$comment!", '', $email);
-        if (strlen($new) == strlen($email)) {
+        $new = preg_replace("!$comment!", '', $eMail);
+        if (strlen($new) == strlen($eMail)) {
             $done = 1;
         }
-        $email = $new;
+        $eMail = $new;
     }
-
 
     /*
      * now match what's left
      */
 
-    return preg_match("!^$addr_spec$!", $email) ? 1 : 0;
+    return preg_match("!^$addr_spec$!", $eMail) ? 1 : 0;
 }
 
+/**
+ * @param $str
+ *
+ * @return string
+ */
 function mb_trim($str)
 {
     $bLoop = true;
-    while ($bLoop == true) {
+    while ($bLoop === true) {
         $sPos = mb_substr($str, 0, 1);
 
-        if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
+        if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
             $str = mb_substr($str, 1, mb_strlen($str) - 1);
         } else {
             $bLoop = false;
@@ -208,10 +212,10 @@ function mb_trim($str)
     }
 
     $bLoop = true;
-    while ($bLoop == true) {
+    while ($bLoop === true) {
         $sPos = mb_substr($str, - 1, 1);
 
-        if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
+        if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
             $str = mb_substr($str, 0, mb_strlen($str) - 1);
         } else {
             $bLoop = false;
@@ -221,7 +225,14 @@ function mb_trim($str)
     return $str;
 }
 
-// explode with more than one separator
+/**
+ * explode with more than one separator
+ *
+ * @param $str
+ * @param $sep
+ *
+ * @return array
+ */
 function explode_multi($str, $sep)
 {
     $ret = array();
@@ -229,12 +240,11 @@ function explode_multi($str, $sep)
 
     while ($nCurPos < mb_strlen($str)) {
         $nNextSep = mb_strlen($str);
-        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos ++) {
+        $sepLength = mb_strlen($sep);
+        for ($nSepPos = 0; $nSepPos < $sepLength; $nSepPos ++) {
             $nThisPos = mb_strpos($str, mb_substr($sep, $nSepPos, 1), $nCurPos);
-            if ($nThisPos !== false) {
-                if ($nNextSep > $nThisPos) {
-                    $nNextSep = $nThisPos;
-                }
+            if ($nThisPos !== false && $nNextSep > $nThisPos) {
+                $nNextSep = $nThisPos;
             }
         }
 
@@ -270,7 +280,13 @@ function setSysConfig($name, $value)
     );
 }
 
-function read_file($filename, $maxlength)
+/**
+ * @param $filename
+ * @param $maxLength
+ *
+ * @return bool|string
+ */
+function read_file($filename, $maxLength = 4096)
 {
     $content = '';
 
@@ -279,7 +295,7 @@ function read_file($filename, $maxlength)
         return false;
     }
 
-    while ($line = fread($f, 4096)) {
+    while ($line = fread($f, $maxLength)) {
         $content .= $line;
     }
     fclose($f);
@@ -287,19 +303,37 @@ function read_file($filename, $maxlength)
     return $content;
 }
 
-// encodes &<>"'
+/**
+ * encodes &<>"'
+ *
+ * @param $str
+ *
+ * @return string
+ */
 function xmlentities($str)
 {
     return htmlspecialchars(xmlfilterevilchars($str), ENT_QUOTES, 'UTF-8');
 }
 
-// encodes &<>
-// This is ok for XML content text between tags, but not for XML attribute contents.
+//
+/**
+ * encodes &<>
+ * This is ok for XML content text between tags, but not for XML attribute contents.
+ *
+ * @param $str
+ *
+ * @return string
+ */
 function text_xmlentities($str)
 {
     return htmlspecialchars(xmlfilterevilchars($str), ENT_NOQUOTES, 'UTF-8');
 }
 
+/**
+ * @param $str
+ *
+ * @return string
+ */
 function xmlfilterevilchars($str)
 {
     // the same for for ISO-8859-1 and UTF-8
@@ -307,43 +341,56 @@ function xmlfilterevilchars($str)
     return mb_ereg_replace('[\x{00}-\x{08}\x{0B}\x{0C}\x{0E}-\x{1F}]*', '', $str);
 }
 
-
-// decimal longitude to string E/W hhh°mm.mmm
+/**
+ * decimal longitude to string E/W hhh°mm.mmm
+ *
+ * @param $lon
+ *
+ * @return string
+ */
 function help_lonToDegreeStr($lon)
 {
     if ($lon < 0) {
-        $retval = 'W ';
+        $retVal = 'W ';
         $lon = - $lon;
     } else {
-        $retval = 'E ';
+        $retVal = 'E ';
     }
 
-    $retval = $retval . sprintf("%03d", floor($lon)) . '° ';
-    $lon = $lon - floor($lon);
-    $retval = $retval . sprintf("%06.3f", round($lon * 60, 3)) . '\'';
+    $retVal = $retVal . sprintf('%03d', floor($lon)) . '° ';
+    $lon -= floor($lon);
+    $retVal = $retVal . sprintf('%06.3f', round($lon * 60, 3)) . '\'';
 
-    return $retval;
+    return $retVal;
 }
 
-// decimal latitude to string N/S hh°mm.mmm
+/**
+ * decimal latitude to string N/S hh°mm.mmm
+ *
+ * @param $lat
+ *
+ * @return string
+ */
 function help_latToDegreeStr($lat)
 {
     if ($lat < 0) {
-        $retval = 'S ';
+        $retVal = 'S ';
         $lat = - $lat;
     } else {
-        $retval = 'N ';
+        $retVal = 'N ';
     }
 
-    $retval = $retval . sprintf("%02d", floor($lat)) . '° ';
-    $lat = $lat - floor($lat);
-    $retval = $retval . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
+    $retVal = $retVal . sprintf("%02d", floor($lat)) . '° ';
+    $lat -= floor($lat);
+    $retVal = $retVal . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
 
-    return $retval;
+    return $retVal;
 }
 
 
 /**
+ * @param $text
+ *
  * @return string
  */
 function escape_javascript($text)
@@ -352,19 +399,25 @@ function escape_javascript($text)
 }
 
 
-// perform str_rot13 without renaming parts in []
+/**
+ * perform str_rot13 without renaming parts in []
+ *
+ * @param $str
+ *
+ * @return string
+ */
 function str_rot13_gc($str)
 {
     $delimiter[0][0] = '[';
     $delimiter[0][1] = ']';
 
-    $retval = '';
+    $retVal = '';
 
-    while (mb_strlen($retval) < mb_strlen($str)) {
+    while (mb_strlen($retVal) < mb_strlen($str)) {
         $nNextStart = false;
         $sNextEndChar = '';
         foreach ($delimiter as $del) {
-            $nThisStart = mb_strpos($str, $del[0], mb_strlen($retval));
+            $nThisStart = mb_strpos($str, $del[0], mb_strlen($retVal));
 
             if ($nThisStart !== false) {
                 if (($nNextStart > $nThisStart) || ($nNextStart === false)) {
@@ -375,33 +428,39 @@ function str_rot13_gc($str)
         }
 
         if ($nNextStart === false) {
-            $retval .= str_rot13(mb_substr($str, mb_strlen($retval), mb_strlen($str) - mb_strlen($retval)));
+            $retVal .= str_rot13(mb_substr($str, mb_strlen($retVal), mb_strlen($str) - mb_strlen($retVal)));
         } else {
             // crypted part
-            $retval .= str_rot13(mb_substr($str, mb_strlen($retval), $nNextStart - mb_strlen($retval)));
+            $retVal .= str_rot13(mb_substr($str, mb_strlen($retVal), $nNextStart - mb_strlen($retVal)));
 
             // uncrypted part
             $nNextEnd = mb_strpos($str, $sNextEndChar, $nNextStart);
 
             if ($nNextEnd === false) {
-                $retval .= mb_substr($str, $nNextStart, mb_strlen($str) - mb_strlen($retval));
+                $retVal .= mb_substr($str, $nNextStart, mb_strlen($str) - mb_strlen($retVal));
             } else {
-                $retval .= mb_substr($str, $nNextStart, $nNextEnd - $nNextStart + 1);
+                $retVal .= mb_substr($str, $nNextStart, $nNextEnd - $nNextStart + 1);
             }
         }
     }
 
-    return $retval;
+    return $retVal;
 }
 
 
-// format number with 1000s dots
+/**
+ * format number with 1000s dots
+ *
+ * @param $n
+ *
+ * @return mixed|string
+ */
 function number1000($n)
 {
     global $opt;
 
     if (isset($opt['locale'][$opt['template']['locale']]['format']['dot1000']) &&
-        $opt['locale'][$opt['template']['locale']]['format']['dot1000'] == ','
+        $opt['locale'][$opt['template']['locale']]['format']['dot1000'] === ','
     ) {
         return number_format($n);
     } else {

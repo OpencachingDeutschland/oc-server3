@@ -29,6 +29,6 @@ abstract class AbstractCommand extends Command
     {
         parent::__construct($name);
 
-        $this->rootPath = dirname(__DIR__ . '/../../../');
+        $this->rootPath = realpath(__DIR__ . '/../../../');
     }
 }

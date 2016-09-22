@@ -11,6 +11,8 @@
  *
  ***************************************************************************/
 
+use Oc\Util\ProcessSync;
+
 $opt['rootpath'] = __DIR__ . '/../../';
 require $opt['rootpath'] . 'lib2/cli.inc.php';
 
@@ -29,8 +31,8 @@ if ($processUser['name'] != $opt['cron']['username']) {
 }
 
 // ensure that we do not run concurrently
-$process_sync = new ProcessSync('runcron');
-if ($process_sync->Enter()) {
+$processSync = new ProcessSync('runcron');
+if ($processSync->enter()) {
     // Run as system user, if possible.
     // This is relevant e.g. for publishing and for auto-archiving caches.
     if ($opt['logic']['systemuser']['user'] != '') {
@@ -59,7 +61,7 @@ if ($process_sync->Enter()) {
         }
     }
 
-    $process_sync->Leave();
+    $processSync->leave();
 }
 
 

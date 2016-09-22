@@ -9,16 +9,17 @@
  * on new caches and new OConly attributes.
  ***************************************************************************/
 
-// needs absolute rootpath because called as cronjob
-$rootpath = __DIR__ . '/../../';
+// needs absolute rootPath because called as cronjob
+use Oc\Util\ProcessSync;
 
-require_once $rootpath . 'lib/clicompatbase.inc.php';
-require_once $rootpath . 'lib2/translate.class.php';
+$rootPath = __DIR__ . '/../../';
+
+require_once $rootPath . 'lib/clicompatbase.inc.php';
+require_once $rootPath . 'lib2/translate.class.php';
 require_once __DIR__ . '/settings.inc.php';
-require_once $rootpath . 'lib/consts.inc.php';
-require_once $rootpath . 'lib2/ProcessSync.class.php';
-require_once $rootpath . 'lib/logic.inc.php';
-require_once $rootpath . 'lib2/logic/geomath.class.php';
+require_once $rootPath . 'lib/consts.inc.php';
+require_once $rootPath . 'lib/logic.inc.php';
+require_once $rootPath . 'lib2/logic/geomath.class.php';
 
 if (!Cronjobs::enabled()) {
     exit;
@@ -31,8 +32,8 @@ if ($dblink === false) {
     exit;
 }
 
-$process_sync = new ProcessSync('run_notify');
-if ($process_sync->Enter()) {
+$processSync = new ProcessSync('run_notify');
+if ($processSync->enter()) {
     // send out everything that has to be sent
     $rsNotify = sql(
         "SELECT
@@ -70,13 +71,13 @@ if ($process_sync->Enter()) {
     }
     mysql_free_result($rsNotify);
 
-    $process_sync->Leave();
+    $processSync->leave();
 }
 
 
 function process_new_cache($notify)
 {
-    global $opt, $debug, $debug_mailto, $rootpath, $translate;
+    global $opt, $debug, $debug_mailto, $rootPath, $translate;
     global $maildomain, $mailfrom;
 
     //echo "process_new_cache(".$notify['id'].")\n";

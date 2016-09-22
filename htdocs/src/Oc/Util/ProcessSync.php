@@ -5,15 +5,17 @@
  * Unicode Reminder メモ
  *
  * synchronization of processes which must not run concurrently;
- * also used in lib1
  ****************************************************************************/
+
+namespace Oc\Util;
 
 /**
  * Class ProcessSync
  */
 class ProcessSync
 {
-    public $pidfile_path;
+    /** @var string $pidFilePath */
+    private $pidFilePath;
 
 
     /**
@@ -23,8 +25,7 @@ class ProcessSync
      */
     public function __construct($name)
     {
-        global $opt;
-        $this->pidfile_path = $opt['rootpath'] . "cache2/$name.pid";
+        $this->pidFilePath = __DIR__ . '/../../../cache2/' . $name . '.pid';
     }
 
 
@@ -33,24 +34,24 @@ class ProcessSync
      *
      * @return bool
      */
-    public function Enter()
+    public function enter()
     {
-        if (!$this->CheckDaemon()) {
+        if (!$this->checkDaemon()) {
             return false;
         }
 
-        if (file_exists($this->pidfile_path)) {
-            echo 'Error: PidFile (' . $this->pidfile_path . ") already present\n";
+        if (file_exists($this->pidFilePath)) {
+            echo 'Error: PidFile (' . $this->pidFilePath . ") already present\n";
 
             return false;
         } else {
-            if ($pidfile = @fopen($this->pidfile_path, 'w')) {
-                fputs($pidfile, posix_getpid());
-                fclose($pidfile);
+            if ($pidFile = @fopen($this->pidFilePath, 'w')) {
+                fwrite($pidFile, posix_getpid());
+                fclose($pidFile);
 
                 return true;
             } else {
-                echo "can't create PidFile " . $this->pidfile_path . "\n";
+                echo "can't create PidFile " . $this->pidFilePath . "\n";
 
                 return false;
             }
@@ -62,30 +63,30 @@ class ProcessSync
      *
      * @return bool
      */
-    private function CheckDaemon()
+    private function checkDaemon()
     {
-        if ($pidfile = @fopen($this->pidfile_path, 'r')) {
-            $pid_daemon = fgets($pidfile, 20);
-            fclose($pidfile);
+        if ($pidFile = @fopen($this->pidFilePath, 'r')) {
+            $pidDaemon = fgets($pidFile, 20);
+            fclose($pidFile);
 
-            $pid_daemon = (int)$pid_daemon;
+            $pidDaemon = (int)$pidDaemon;
 
             // bad PID file, e.g. due to system malfunction while creating the file?
-            if ($pid_daemon <= 0) {
-                echo 'removing bad PidFile (' . $this->pidfile_path . ")\n";
-                unlink($this->pidfile_path);
+            if ($pidDaemon <= 0) {
+                echo 'removing bad PidFile (' . $this->pidFilePath . ")\n";
+                unlink($this->pidFilePath);
 
                 return false;
             } // process running?
-            elseif (posix_kill($pid_daemon, 0)) {
+            elseif (posix_kill($pidDaemon, 0)) {
                 // yes, good bye
-                echo 'Error: process for ' . $this->pidfile_path . " is already running with pid=$pid_daemon\n";
+                echo 'Error: process for ' . $this->pidFilePath . " is already running with pid=$pidDaemon\n";
 
                 return false;
             } else {
                 // no, remove pid_file
-                echo 'process not running, removing old PidFile (' . $this->pidfile_path . ")\n";
-                unlink($this->pidfile_path);
+                echo 'process not running, removing old PidFile (' . $this->pidFilePath . ")\n";
+                unlink($this->pidFilePath);
 
                 return true;
             }
@@ -100,16 +101,16 @@ class ProcessSync
      *
      * @param bool $message
      */
-    public function Leave($message = false)
+    public function leave($message = false)
     {
-        if ($pidFile = @fopen($this->pidfile_path, 'r')) {
+        if ($pidFile = @fopen($this->pidFilePath, 'r')) {
             $pid = fgets($pidFile, 20);
             fclose($pidFile);
             if ($pid === posix_getpid()) {
-                unlink($this->pidfile_path);
+                unlink($this->pidFilePath);
             }
         } else {
-            echo "Error: can't delete own PidFile (" . $this->pidfile_path . ")\n";
+            echo "Error: can't delete own PidFile (" . $this->pidFilePath . ")\n";
         }
 
         if ($message) {

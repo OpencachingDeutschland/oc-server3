@@ -72,7 +72,13 @@ if (($opt['debug'] & DEBUG_FORCE_TRANSLATE) != DEBUG_FORCE_TRANSLATE) {
 require_once __DIR__ . '/errorhandler.inc.php';
 configure_php();
 
-require __DIR__ . '/cookie.class.php';
+if ($opt['session']['mode'] == SAVE_SESSION) {
+    // Do not use, not completely implemented yet
+    $cookie = new Oc\Session\SessionDataNative();
+} else {
+    $cookie = new Oc\Session\SessionDataCookie();
+}
+
 normalize_settings();
 set_language();
 set_usercountry();

@@ -5,7 +5,7 @@
 
 
 Name:      $opt['session']['cookiename'] . 'data'
-File:      cookie.class.php
+File:      src/Oc/Session/SessionDataCookie.php
 Type:      permanent
 Contents:  - login/session data  (login.class.php)
            - country & language selection  (common.inc.php)
@@ -14,7 +14,7 @@ Contents:  - login/session data  (login.class.php)
 isSecure:  false/true; depends on $opt['page']['https']['mode'] and protocol during login
 
 Name:      $opt['session']['cookiename'] . 'https_session'
-File:      cookie.class.php
+File:      src/Oc/Session/SessionDataCookie.php
 Type:      temporary, session created over https and while session is active
 Contents:  session data only available with https -> force redirect to https if http is used
 isSecure:  false

@@ -23,6 +23,7 @@ class CodeSnifferCommand extends AbstractCommand
 
     /**
      * @return void
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
     {
@@ -43,6 +44,9 @@ class CodeSnifferCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

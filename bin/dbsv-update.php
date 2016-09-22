@@ -18,10 +18,10 @@
  */
 
 if (!isset($opt['rootpath'])) {
-    $opt['rootpath'] = dirname(__FILE__) . '/../htdocs/';
+    $opt['rootpath'] = __DIR__ . '/../htdocs/';
 }
-require_once $opt['rootpath'] . 'lib2/cli.inc.php';
-require_once $opt['rootpath'] . 'lib2/search/search.inc.php';
+require_once __DIR__ .'/../htdocs/lib2/cli.inc.php';
+require_once __DIR__ .'/../htdocs/lib2/search/search.inc.php';
 
 if (!sql_field_exists('cache_attrib', 'gc_id')) {
     die(

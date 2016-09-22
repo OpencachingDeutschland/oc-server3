@@ -11,6 +11,8 @@
  * style      get/post/cookie   used style
  ****************************************************************************/
 
+use Oc\Util\CBench;
+
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];
 } else {
@@ -353,8 +355,8 @@ function tpl_BuildTemplate($dbdisconnect = true)
     tpl_set_var('print_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
 
     if (isset($bScriptExecution)) {
-        $bScriptExecution->Stop();
-        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->Diff()));
+        $bScriptExecution->stop();
+        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->diff()));
     } else {
         tpl_set_var('scripttime', sprintf('%1.3f', 0));
     }
@@ -395,7 +397,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
     }
 
     $bTemplateBuild = new CBench;
-    $bTemplateBuild->Start();
+    $bTemplateBuild->start();
 
     //set {functionsbox}
     global $page_functions, $functionsbox_start_tag, $functionsbox_middle_tag, $functionsbox_end_tag;

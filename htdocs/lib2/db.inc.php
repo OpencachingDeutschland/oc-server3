@@ -7,6 +7,7 @@
  *  This module includes all database function necessary to do queries from
  *  the database.
  ***************************************************************************/
+use Oc\Util\CBench;
 
 /***************************************************************************
  * Overview:

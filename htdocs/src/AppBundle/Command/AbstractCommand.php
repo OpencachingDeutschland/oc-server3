@@ -22,11 +22,13 @@ abstract class AbstractCommand extends Command
 
     /**
      * @param string|null $name
+     *
+     * @throws \Symfony\Component\Console\Exception\LogicException
      */
     public function __construct($name = null)
     {
         parent::__construct($name);
 
-        $this->rootPath = realpath(__DIR__ . '/../../../');
+        $this->rootPath = dirname(__DIR__ . '/../../../');
     }
 }

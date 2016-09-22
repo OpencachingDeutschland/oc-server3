@@ -12,13 +12,13 @@
 
 $rootpath = $opt['rootpath'] = __DIR__ . '/../htdocs/';
 chdir($rootpath);
-require_once 'lib2/cli.inc.php';
+require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 
 echo "updating composer dependencies\n";
 system('composer install --ignore-platform-reqs');
 
 echo "applying sql deltas\n";
-require 'dbsv-update.php';
+require __DIR__ . '/dbsv-update.php';
 
 echo "importing data.sql\n";
 system(

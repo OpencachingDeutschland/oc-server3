@@ -17,7 +17,7 @@ if (!isset($opt['rootpath'])) {
 }
 require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 
-if ($argc != 2 || $argv[1] != 'pass2') {
+if ($argc !== 2 || $argv[1] !== 'pass2') {
     // stop apache
     system($opt['httpd']['stop']);
 
@@ -49,8 +49,6 @@ if ($argc != 2 || $argv[1] != 'pass2') {
 
 function clearCache()
 {
-    global $tpl, $translang, $translate;
-
     unlinkFiles('cache2', 'php');
 
     unlinkFiles('cache2/smarty/cache', 'tpl');
@@ -58,20 +56,20 @@ function clearCache()
     unlinkFiles('cache2/smarty/compiled', 'php');
 }
 
-function unlinkFiles($relbasedir, $ext)
+function unlinkFiles($relBaseDir, $ext)
 {
     global $opt;
 
-    if (substr($relbasedir, - 1, 1) != '/') {
-        $relbasedir .= '/';
+    if (substr($relBaseDir, - 1, 1) !== '/') {
+        $relBaseDir .= '/';
     }
 
-    if ($opt['rootpath'] . $relbasedir) {
-        if ($dh = opendir($opt['rootpath'] . $relbasedir)) {
+    if ($opt['rootpath'] . $relBaseDir) {
+        if ($dh = opendir($opt['rootpath'] . $relBaseDir)) {
             while (($file = readdir($dh)) !== false) {
-                if ($file != '.' && $file != '..' && is_file($opt['rootpath'] . $relbasedir . $file)) {
-                    if (substr($file, - (strlen($ext) + 1), strlen($ext) + 1) == '.' . $ext) {
-                        unlink($opt['rootpath'] . $relbasedir . $file);
+                if ($file !== '.' && $file !== '..' && is_file($opt['rootpath'] . $relBaseDir . $file)) {
+                    if (substr($file, - (strlen($ext) + 1), strlen($ext) + 1) === '.' . $ext) {
+                        unlink($opt['rootpath'] . $relBaseDir . $file);
                     }
                 }
             }
@@ -85,13 +83,13 @@ function createMenuCache()
     global $opt, $translate;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
+        if ($opt['template']['locales'][$sLanguage]['status'] !== OC_LOCALE_DISABLED) {
             // cheating a little bit
             $opt['template']['locale'] = $sLanguage;
             set_php_locale();
 
-            if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
-                die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+            if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') !== $sLanguage) {
+                die('setlocale() failed to set language to ' . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
             }
 
             // this will create the cache file
@@ -109,7 +107,7 @@ function createLabelCache()
     global $opt;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
+        if ($opt['template']['locales'][$sLanguage]['status'] !== OC_LOCALE_DISABLED) {
             // cheating a little bit
             $opt['template']['locale'] = $sLanguage;
 
@@ -129,9 +127,8 @@ function precompileAllTemplates()
 
     if ($hDir = opendir($opt['stylepath'])) {
         while (($sFilename = readdir($hDir)) !== false) {
-            if (substr($sFilename, - 4) == '.tpl') {
-                //echo substr($sFilename, 0, strlen($sFilename) - 4) . "\n";
-                precompileTemplate(substr($sFilename, 0, strlen($sFilename) - 4));
+            if (substr($sFilename, - 4) === '.tpl') {
+                preCompileTemplate(substr($sFilename, 0, strlen($sFilename) - 4));
             }
         }
         closedir($hDir);
@@ -141,7 +138,7 @@ function precompileAllTemplates()
     $sCompileDir = $opt['rootpath'] . 'cache2/smarty/compiled/';
     if ($hDir = opendir($sCompileDir)) {
         while (($sFilename = readdir($hDir)) !== false) {
-            if (filetype($sCompileDir . $sFilename) == 'file') {
+            if (filetype($sCompileDir . $sFilename) === 'file') {
                 chown($sCompileDir . $sFilename, $opt['httpd']['user']);
                 chgrp($sCompileDir . $sFilename, $opt['httpd']['group']);
             }
@@ -150,18 +147,18 @@ function precompileAllTemplates()
     }
 }
 
-function precompileTemplate($sTemplate)
+function preCompileTemplate($sTemplate)
 {
     global $opt;
 
     foreach ($opt['locale'] as $sLanguage => $v) {
-        if ($opt['template']['locales'][$sLanguage]['status'] != OC_LOCALE_DISABLED) {
-            precompileTemplateWithLanguage($sTemplate, $sLanguage);
+        if ($opt['template']['locales'][$sLanguage]['status'] !== OC_LOCALE_DISABLED) {
+            preCompileTemplateWithLanguage($sTemplate, $sLanguage);
         }
     }
 }
 
-function precompileTemplateWithLanguage($sTemplate, $sLanguage)
+function preCompileTemplateWithLanguage($sTemplate, $sLanguage)
 {
     global $opt, $translate;
 
@@ -169,8 +166,8 @@ function precompileTemplateWithLanguage($sTemplate, $sLanguage)
     $opt['template']['locale'] = $sLanguage;
     set_php_locale();
 
-    if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') != $sLanguage) {
-        die("setlocale() failed to set language to " . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
+    if ($translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') !== $sLanguage) {
+        die('setlocale() failed to set language to ' . $sLanguage . ". Is the translation of INTERNAL_LANG correct?\n");
     }
 
     $preTemplate = new OcSmarty();

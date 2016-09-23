@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require_once $opt['rootpath'] . 'lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
 
 $itemWps = [];
 

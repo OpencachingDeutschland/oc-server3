@@ -9,6 +9,8 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
+use Oc\Util\CBench;
+
 $sqldbg_cmdNo = 0;
 $sqldbg_sumTimes = 0;
 
@@ -299,7 +301,7 @@ function sqldbg_execute($sql, $bSlave)
     $rsResult = mysql_query($sql, $dblink);
     $bError = ($rsResult == false);
     $bSqlExecution->stop();
-    $sqldbg_sumTimes += $bSqlExecution->Diff();
+    $sqldbg_sumTimes += $bSqlExecution->diff();
 
     if ($bError == true) {
         echo '<div class="error">Error while executing SQL command!</div>';
@@ -313,7 +315,7 @@ function sqldbg_execute($sql, $bSlave)
         echo '</div>';
     }
 
-    echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->Diff()) . ' sek.</div>';
+    echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->diff()) . ' sek.</div>';
     echo '<div class="affectedrows">Number of affected rows: ' . mysql_affected_rows($dblink) . '</div>';
 
     echo '<div class="white">*/</div></div>';

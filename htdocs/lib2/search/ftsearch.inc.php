@@ -9,135 +9,135 @@
 
 /* begin conversion rules */
 
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'qu',
     'k'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ts',
     'z'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'tz',
     'z'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'alp',
     'alb'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'y',
     'i'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ai',
     'ei'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ou',
     'u'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'th',
     't'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ph',
     'f'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'oh',
     'o'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ah',
     'a'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'eh',
     'e'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'aux',
     'o'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'eau',
     'o'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'eux',
     'oe'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     '^ch',
     'sch'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ck',
     'k'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ie',
     'i'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ih',
     'i'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ent',
     'end'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'uh',
     'u'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'sh',
     'sch'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ver',
     'wer'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'dt',
     't'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'hard',
     'hart'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'egg',
     'ek'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'eg',
     'ek'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'cr',
     'kr'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ca',
     'ka'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'ce',
     'ze'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'x',
     'ks'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     've',
     'we'
 ];
-$ftsearch_simplerules[] = [
+$ftSearchSimpleRules[] = [
     'va',
     'wa'
 ];
@@ -243,12 +243,12 @@ function ftsearch_load_ignores()
  */
 function ftsearch_text2simple($str)
 {
-    global $ftsearch_simplerules;
+    global $ftSearchSimpleRules;
 
     $str = ftsearch_text2sort($str);
 
     // regeln anwenden
-    foreach ($ftsearch_simplerules as $rule) {
+    foreach ($ftSearchSimpleRules as $rule) {
         $str = mb_ereg_replace($rule[0], $rule[1], $str);
     }
 
@@ -367,6 +367,7 @@ function ftsearch_refresh_cache($cache_id)
     }
     sql_free_result($rs);
 }
+
 
 function ftsearch_refresh_all_cache_desc()
 {

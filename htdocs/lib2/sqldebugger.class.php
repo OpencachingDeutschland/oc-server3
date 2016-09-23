@@ -7,6 +7,8 @@
  *  This modules gives you a very usefull SQL debugger for MySQL ...
  ***************************************************************************/
 
+use Oc\Util\CBench;
+
 $sqldebugger = new sqldebugger();
 
 /**
@@ -115,7 +117,7 @@ class sqldebugger
             $command['warnings'][] = $r['Message'];
         }
 
-        $command['runtime'] = $bSqlExecution->Diff();
+        $command['runtime'] = $bSqlExecution->diff();
 
         $this->commands[] = $command;
 

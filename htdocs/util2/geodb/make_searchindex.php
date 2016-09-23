@@ -19,7 +19,7 @@ sql('DELETE FROM geodb_search');
 $rs = sql(
     "SELECT `loc_id`, `text_val`
     FROM `geodb_textdata`
-    WHERE `text_type`=500100000
+    WHERE `text_type` = 500100000
     AND text_locale IN ('da', 'de', 'en', 'fi', 'fr', 'it', 'nl', 'rm')"
 );
 
@@ -29,31 +29,26 @@ while ($r = sql_fetch_array($rs)) {
 
     foreach ($simpleTextsArray as $text) {
         if ($text !== '') {
-            if (nonalpha($text)) {
+            if (nonAlpha($text)) {
                 die($text . "\n");
             }
 
-            $simpleTexts = search_text2simple($text);
+            $simpleText = search_text2simple($text);
 
             sql(
                 "INSERT INTO `geodb_search` (`loc_id`, `sort`, `simple`, `simplehash`)
                  VALUES ('&1', '&2', '&3', '&4')",
                 $r['loc_id'],
                 $text,
-                $simpleTexts,
-                sprintf("%u", crc32($simpleTexts))
+                $simpleText,
+                sprintf('%u', crc32($simpleText))
             );
         }
     }
 }
 mysql_free_result($rs);
 
-/**
- * @param $str
- *
- * @return bool
- */
-function nonalpha($str)
+function nonAlpha($str)
 {
     $strLength = mb_strlen($str);
     for ($i = 0; $i < $strLength; $i ++) {

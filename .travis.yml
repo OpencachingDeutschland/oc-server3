@@ -8,7 +8,13 @@ php:
 before_script:
     - if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi
 
-script:
+services:
+  - mysql
+
+before_install:
+ - chmod +x build/travis-ci.sh
+
+install:
     - build/travis-ci.sh
 
 matrix:

@@ -15,4 +15,7 @@
             <directory>Modules/Lib2/Logic</directory>
         </testsuite>
     </testsuites>
+    <php>
+        <env name="URL" value="http://local.team-opencaching.de"/>
+    </php>
 </phpunit>

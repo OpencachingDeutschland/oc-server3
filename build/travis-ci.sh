@@ -35,7 +35,7 @@ label "Run database and cache updates"
 php ./bin/dbupdate.php
 
 label "Install OKAPI"
-curl http://localhost/okapi/update?install=true
+curl http://localhost/htdocs/okapi/update?install=true
 
 label "updating database structures ..."
 

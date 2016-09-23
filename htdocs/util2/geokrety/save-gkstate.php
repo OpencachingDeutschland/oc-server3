@@ -35,7 +35,7 @@ sql('DROP TABLE IF EXISTS _backup_gk_move');
 sql('DROP TABLE IF EXISTS _backup_gk_move_waypoint');
 sql('DROP TABLE IF EXISTS _backup_gk_user');
 
-foreach (glob($opt['rootpath'] . "cache2/geokrety/import-*.xml") as $f) {
+foreach (glob($opt['rootpath'] . 'cache2/geokrety/import-*.xml') as $f) {
     unlink($f);
 }
 

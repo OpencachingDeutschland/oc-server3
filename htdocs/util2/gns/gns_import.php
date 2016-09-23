@@ -25,7 +25,7 @@ $opt['rootpath'] = '../../';
 require_once __DIR__.'/../../lib2/cli.inc.php';
 
 /* defaults */
-$importfiles = [
+$importFiles = [
     'gm.txt',
     'au.txt',
     'sz.txt'
@@ -33,18 +33,18 @@ $importfiles = [
 
 sql('TRUNCATE TABLE gns_locations');
 
-foreach ($importfiles as $filename) {
-    importGns($filename, $dblink);
+foreach ($importFiles as $filename) {
+    importGns($filename);
 }
 
 
-function importGns($filename, $dblink)
+function importGns($filename)
 {
     echo "Importing '$filename'...\n";
-    $file = fopen($filename, "r");
+    $file = fopen($filename, 'r');
     $cnt = 0;
     while ($line = fgets($file, 4096)) {
-        if ($cnt ++ == 0) {// skip first line
+        if ($cnt ++ === 0) { // skip first line
             continue;
         }
 

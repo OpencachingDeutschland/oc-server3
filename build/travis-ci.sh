@@ -8,7 +8,7 @@ function errorLabel {
     echo -e "\n\033[0;31m=> ${1}\033[0m\n"
 }
 
-label "Setup database"
+label "setup database"
 mysqladmin -u root password root
 mysql -u root -proot -e 'DROP DATABASE IF EXISTS opencaching;'
 mysql -u root -proot -e 'CREATE DATABASE opencaching;'
@@ -32,10 +32,10 @@ cd ./htdocs && composer install
 cd ..
 
 label "Run database and cache updates"
-php ./bin/dbupdate.php
+sudo php ./bin/dbupdate.php
 
 label "Install OKAPI"
-curl http://localhost/htdocs/okapi/update?install=true
+curl http://127.0.0.1/okapi/update?install=true
 
 label "updating database structures ..."
 
@@ -57,10 +57,10 @@ fi
 
 if [ -f "./sql/static-data/data.sql" ]; then
   label "importing static data (new) ..."
-  mysql -u root -hlocalhost -proot opencaching < ./sql/static-data/data.sql
+  mysql -u root -h127.0.0.1 -proot opencaching < ./sql/static-data/data.sql
 elif [ -f "./htdocs/doc/sql/static-data/data.sql" ]; then
   echo "-- importing static data (old) ..."
-  mysql -u root -hlocalhost -proot opencaching < ./htdocs/doc/sql/static-data/data.sql
+  mysql -u root -h127.0.0.1 -proot opencaching < ./htdocs/doc/sql/static-data/data.sql
 else
   echo "error: data.sql not found"
   exit

@@ -38,7 +38,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $this->driver = new GoutteDriver();
         $this->session = new Session($this->driver);
         $this->session->start();
-        $this->session->visit($this->baseUrl);
+        $this->session->visit($this->baseUrl . '/index.php?locale=EN');
     }
 
     /**
@@ -54,6 +54,6 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $page->fillField('email', 'root');
         $page->fillField('password', 'developer');
 
-        $page->pressButton('Anmelden');
+        $page->pressButton('Login');
     }
 }

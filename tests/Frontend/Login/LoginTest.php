@@ -25,12 +25,12 @@ class LoginTest extends AbstractFrontendTest
         $page->fillField('email', 'root');
         $page->fillField('password', 'developer');
 
-        $page->pressButton('Anmelden');
+        $page->pressButton('Login');
 
         $page->clickLink('root');
 
         $pageTitle = $page->find('css', '.content2-pagetitle');
 
-        self::assertEquals('Herzlich willkommen root', $pageTitle->getText());
+        self::assertEquals('Hello root', $pageTitle->getText());
     }
 }

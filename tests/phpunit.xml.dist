@@ -15,7 +15,19 @@
             <directory>Modules/Lib2/Logic</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory>.</directory>
+            <exclude>
+                <directory>tests</directory>
+                <directory>htdocs/vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
     <php>
         <env name="URL" value="http://local.team-opencaching.de"/>
     </php>
+    <logging>
+        <log type="coverage-clover" target="../build/logs/clover.xml"/>
+    </logging>
 </phpunit>

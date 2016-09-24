@@ -7,7 +7,7 @@ php:
 sudo: required
 
 before_script:
-  - if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi
+  #- if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi
 
 services:
   - mysql
@@ -30,7 +30,7 @@ install:
     - build/travis-ci.sh
 
 script:
-    - URL=http://127.0.0.1 phpunit
+    - URL=http://127.0.0.1 phpunit --group unit-tests
 
 matrix:
   allow_failures:

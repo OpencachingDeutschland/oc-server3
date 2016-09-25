@@ -29,7 +29,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         parent::__construct();
         require_once __DIR__ . '/../../htdocs/vendor/autoload.php';
         $this->dir = __DIR__;
-        $this->baseUrl = 'http://local.team-opencaching.de';
+        $this->baseUrl = getenv('URL');
     }
 
     public function setUp()
@@ -38,7 +38,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $this->driver = new GoutteDriver();
         $this->session = new Session($this->driver);
         $this->session->start();
-        $this->session->visit($this->baseUrl);
+        $this->session->visit($this->baseUrl . '/index.php?locale=EN');
     }
 
     /**
@@ -54,6 +54,6 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $page->fillField('email', 'root');
         $page->fillField('password', 'developer');
 
-        $page->pressButton('Anmelden');
+        $page->pressButton('Login');
     }
 }

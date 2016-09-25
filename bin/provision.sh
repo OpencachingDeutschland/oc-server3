@@ -29,7 +29,7 @@ yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
 yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
-yum -y install gcc-c++ ruby ruby-devel
+yum -y install gcc-c++ ruby ruby-devel php-xdebug
 
 label "Install crowdin-cli"
 gem install crowdin-cli
@@ -170,6 +170,7 @@ rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 yum -y install yum-plugin-replace
 yum -y replace php-common --replace-with=php56w-common
 yum -y install phpmyadmin
+yum -y install php56w-pecl-xdebug.x86_64
 
 cat <<EOF > /etc/httpd/conf.d/phpMyAdmin.conf
 Alias /phpMyAdmin /usr/share/phpMyAdmin

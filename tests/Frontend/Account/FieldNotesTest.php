@@ -58,7 +58,11 @@ class FieldNotesTest extends AbstractFrontendTest
 
         $page->pressButton('testing-fieldNotes-submit-button');
         $errorMessage = $page->find('css', '.flash-messages');
-        self::assertEquals('Geocache "OC10FC7" not found.', $errorMessage->getText());
+        if ($errorMessage !== null) {
+            self::assertEquals('Geocache "OC10FC7" not found.', $errorMessage->getText());
+        } else {
+            self::fail(__METHOD__ . ' failed');
+        }
 
         /** @var array $fieldNotesRow */
         $fieldNotesRow[1] = $page->find('css', '.testing-fieldNotes-rows1');
@@ -73,7 +77,11 @@ class FieldNotesTest extends AbstractFrontendTest
 
         /** @var NodeElement $fieldNote */
         foreach ($fieldNotesRow as $key => $fieldNote) {
-            self::assertEquals($fieldNotesResult[$key], $fieldNote->getText());
+            if ($fieldNote !== null) {
+                self::assertEquals($fieldNotesResult[$key], $fieldNote->getText());
+            } else {
+                self::fail(__METHOD__ . ' failed');
+            }
         }
 
         $page->checkField('testing-fieldNote-checkbox1');
@@ -82,6 +90,10 @@ class FieldNotesTest extends AbstractFrontendTest
         $page->pressButton('Delete selected');
 
         $errorMessage = $page->find('css', '.flash-messages');
-        self::assertEquals('Field Notes successfully deleted.', $errorMessage->getText());
+        if ($errorMessage !== null) {
+            self::assertEquals('Field Notes successfully deleted.', $errorMessage->getText());
+        } else {
+            self::fail(__METHOD__ . ' failed');
+        }
     }
 }

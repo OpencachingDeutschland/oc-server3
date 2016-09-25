@@ -27,7 +27,7 @@ if ($argc !== 2 || $argv[1] !== 'pass2') {
     $webCache->clearCache();
 
     echo "clearing symfony caches\n";
-    system('php ' . __DIR__ . '/../htdocs/bin/console clear:cache');
+    system('php ' . __DIR__ . '/../htdocs/bin/console cache:clear');
 
     echo "Create translation files for gettext()\n";
     $translationHandler->createMessageFiles();

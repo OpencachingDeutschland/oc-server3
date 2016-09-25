@@ -19,19 +19,17 @@ class picture
 
     public static function pictureIdFromUUID($uuid)
     {
-        $pictureid = sql_value("SELECT `id` FROM `pictures` WHERE `uuid`='&1'", 0, $uuid);
-
-        return $pictureid;
+        return sql_value("SELECT `id` FROM `pictures` WHERE `uuid`='&1'", 0, $uuid);
     }
 
     public static function fromUUID($uuid)
     {
-        $pictureid = picture::pictureIdFromUUID($uuid);
-        if ($pictureid == 0) {
+        $pictureId = picture::pictureIdFromUUID($uuid);
+        if ($pictureId == 0) {
             return null;
         }
 
-        return new picture($pictureid);
+        return new picture($pictureId);
     }
 
     public function __construct($nNewPictureId = ID_NEW)
@@ -281,7 +279,7 @@ class picture
         // works intendently before bFilenameSet == true !
         global $opt;
 
-        if (mb_substr($opt['logic']['pictures']['dir'], - 1, 1) != '/') {
+        if (mb_substr($opt['logic']['pictures']['dir'], -1, 1) != '/') {
             $opt['logic']['pictures']['dir'] .= '/';
         }
 
@@ -295,7 +293,7 @@ class picture
     {
         global $opt;
 
-        if (mb_substr($opt['logic']['pictures']['thumb_dir'], - 1, 1) != '/') {
+        if (mb_substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/') {
             $opt['logic']['pictures']['thumb_dir'] .= '/';
         }
 
@@ -385,9 +383,17 @@ class picture
     public function getUserId()
     {
         if ($this->getObjectType() == OBJECT_CACHE) {
-            return sql_value("SELECT `caches`.`user_id` FROM `caches` WHERE `caches`.`cache_id`='&1'", false, $this->getObjectId());
+            return sql_value(
+                "SELECT `caches`.`user_id` FROM `caches` WHERE `caches`.`cache_id`='&1'",
+                false,
+                $this->getObjectId()
+            );
         } elseif ($this->getObjectType() == OBJECT_CACHELOG) {
-            return sql_value("SELECT `cache_logs`.`user_id` FROM `cache_logs` WHERE `cache_logs`.`id`='&1'", false, $this->getObjectId());
+            return sql_value(
+                "SELECT `cache_logs`.`user_id` FROM `cache_logs` WHERE `cache_logs`.`id`='&1'",
+                false,
+                $this->getObjectId()
+            );
         } else {
             return false;
         }
@@ -458,11 +464,11 @@ class picture
                 return false;
             } else {
                 // restore picture file
-                $this->setUrl($original_url);        // set the url, so that we can
-                $filename = $this->getFilename();    // .. retreive the file path+name
-                $this->setFilenames($filename);      // now set url(s) from the new uuid
+                $this->setUrl($original_url);     // set the url, so that we can
+                $filename = $this->getFilename(); // .. retrieve the file path+name
+                $this->setFilenames($filename);   // now set url(s) from the new uuid
                 try {
-                    rename($this->deleted_filename($filename), $this->getFilename());
+                    rename($this->deletedFilename($filename), $this->getFilename());
                 } catch (Exception $e) {
                     // @todo implement logging
                 }
@@ -509,7 +515,7 @@ class picture
         // archive picture if picture record has been archived
         if (sql_value("SELECT `id` FROM `pictures_modified` WHERE `id`='&1'", 0, $this->getPictureId()) != 0) {
             try {
-                rename($filename, $this->deleted_filename($filename));
+                rename($filename, $this->deletedFilename($filename));
             } catch (Exception $e) {
                 // @todo implement logging
             }
@@ -532,15 +538,17 @@ class picture
 
     /**
      * @param string $filename
+     *
+     * @return string
      */
-    private function deleted_filename($filename)
+    private function deletedFilename($filename)
     {
         $fna = mb_split('\\/', $filename);
         $fna[] = end($fna);
         $fna[count($fna) - 2] = 'deleted';
-        $dp = "";
+        $dp = '';
         foreach ($fna as $fp) {
-            $dp .= "/" . $fp;
+            $dp .= '/' . $fp;
         }
 
         return substr($dp, 1);
@@ -552,7 +560,14 @@ class picture
 
         $login->verify();
 
-        if (sql_value("SELECT COUNT(*) FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND `caches`.`cache_id`='&2'", 0, $login->userid, $this->getCacheId()) == 0) {
+        if (sql_value(
+                "SELECT COUNT(*)
+                FROM `caches`
+                INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+                WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+                AND `caches`.`cache_id`='&2'", 0, $login->userid, $this->getCacheId()
+            ) == 0
+        ) {
             return false;
         } elseif ($this->getUserId() == $login->userid) {
             return true;
@@ -691,6 +706,8 @@ class picture
 
     /**
      * @param Imagick $image
+     *
+     * @return bool
      */
     public function imagick_rotate(&$image)
     {
@@ -702,7 +719,7 @@ class picture
                 case 6:
                     return $image->rotateImage(new ImagickPixel(), 90);
                 case 8:
-                    return $image->rotateImage(new ImagickPixel(), - 90);
+                    return $image->rotateImage(new ImagickPixel(), -90);
             }
         }
 
@@ -711,7 +728,7 @@ class picture
 
     public function up()
     {
-        $prevpos = sql_value(
+        $prevPos = sql_value(
             "
             SELECT MAX(`seq`)
             FROM `pictures`
@@ -722,8 +739,8 @@ class picture
             $this->getPosition()
         );
 
-        if ($prevpos) {
-            $maxpos = sql_value(
+        if ($prevPos) {
+            $maxPos = sql_value(
                 "
                 SELECT MAX(`seq`)
                 FROM `pictures`
@@ -740,7 +757,7 @@ class picture
                 SET `seq`='&2'
                 WHERE `id`='&1'",
                 $this->getPictureId(),
-                $maxpos + 1
+                $maxPos + 1
             );
             sql(
                 "
@@ -748,7 +765,7 @@ class picture
                 WHERE `object_type`='&1' AND `object_id`='&2' AND `seq`='&3'",
                 $this->getObjectType(),
                 $this->getObjectId(),
-                $prevpos,
+                $prevPos,
                 $this->getPosition()
             );
             sql(
@@ -757,9 +774,9 @@ class picture
                 SET `seq`='&2'
                 WHERE `id`='&1'",
                 $this->getPictureId(),
-                $prevpos
+                $prevPos
             );
-            $this->rePicture->setValue('seq', $prevpos);
+            $this->rePicture->setValue('seq', $prevPos);
 
             return true;
         }

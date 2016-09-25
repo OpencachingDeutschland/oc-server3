@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once __DIR__.'/../../lib2/cli.inc.php';
-require_once __DIR__.'/../../lib2/search/search.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/search/search.inc.php';
 
 
 $rsLocations = sql("SELECT `uni`, `lat`, `lon`, `rc`, `cc1`, `adm1` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");

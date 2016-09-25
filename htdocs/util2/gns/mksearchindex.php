@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once __DIR__.'/../../lib2/cli.inc.php';
-require_once __DIR__.'/../../lib2/search/search.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/search/search.inc.php';
 
 
 $doubleindex['sankt'] = 'st';
@@ -27,7 +27,7 @@ while ($r = sql_fetch_array($rs)) {
     foreach ($simpleTextsArray as $text) {
         if ($text !== '') {
             if (nonAlpha($text)) {
-                die($r['uni'] . ' ' . $text . "\n");// obsolete for the same reason as above
+                die($r['uni'] . ' ' . $text . "\n"); // obsolete for the same reason as above
             }
 
             $simpleText = search_text2simple($text);
@@ -60,7 +60,7 @@ mysql_free_result($rs);
 function nonAlpha($str)
 {
     $strLength = mb_strlen($str);
-    for ($i = 0; $i < $strLength; $i ++) {
+    for ($i = 0; $i < $strLength; $i++) {
         if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z')))) {
             return true;
         }

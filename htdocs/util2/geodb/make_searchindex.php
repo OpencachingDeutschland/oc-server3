@@ -51,7 +51,7 @@ mysql_free_result($rs);
 function nonAlpha($str)
 {
     $strLength = mb_strlen($str);
-    for ($i = 0; $i < $strLength; $i ++) {
+    for ($i = 0; $i < $strLength; $i++) {
         if (!((ord(mb_substr($str, $i, 1)) >= ord('a')) && (ord(mb_substr($str, $i, 1)) <= ord('z')))) {
             return true;
         }

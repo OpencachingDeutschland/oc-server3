@@ -22,7 +22,7 @@
 // ported from lib1 to lib2 / untested!
 
 $opt['rootpath'] = '../../';
-require_once __DIR__.'/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
 
 /* defaults */
 $importFiles = [
@@ -44,7 +44,7 @@ function importGns($filename)
     $file = fopen($filename, 'r');
     $cnt = 0;
     while ($line = fgets($file, 4096)) {
-        if ($cnt ++ === 0) { // skip first line
+        if ($cnt++ === 0) { // skip first line
             continue;
         }
 

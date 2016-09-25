@@ -23,6 +23,10 @@ class attribute
         return self::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
 
+    /**
+     * @param boolean $bOnlySelectable
+     * @param boolean $firstLetterUppercase
+     */
     public static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
     {
         global $opt;

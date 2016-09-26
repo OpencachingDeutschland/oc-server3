@@ -10,8 +10,8 @@
 header('Content-type: text/html; charset=utf-8');
 
 $opt['rootpath'] = '../../';
-require __DIR__.'/../../lib2/web.inc.php';
-require __DIR__.'/../../templates2/ocstyle/search.tpl.inc.php';
+require __DIR__ . '/../../lib2/web.inc.php';
+require __DIR__ . '/../../templates2/ocstyle/search.tpl.inc.php';
 
 $bBox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
 $aBox = mb_split(',', $bBox);

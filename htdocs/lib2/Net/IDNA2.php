@@ -2768,7 +2768,7 @@ class Net_IDNA2
      *
      * @param int $d One digit to encode
      *
-     * @return char  Encoded digit
+     * @return string  Encoded digit
      * @access private
      */
     private function _encodeDigit($d)
@@ -2779,7 +2779,7 @@ class Net_IDNA2
     /**
      * Decode a certain digit.
      *
-     * @param char $cp One digit (character) to decode
+     * @param string $cp One digit (character) to decode
      *
      * @return int     Decoded digit
      * @access private
@@ -2793,7 +2793,7 @@ class Net_IDNA2
     /**
      * Do Nameprep according to RFC3491 and RFC3454.
      *
-     * @param array $input Unicode Characters
+     * @param string $input Unicode Characters
      *
      * @return string      Unicode Characters, Nameprep'd
      * @throws Exception
@@ -2893,7 +2893,7 @@ class Net_IDNA2
      *
      * @param integer $char 32bit UCS4 code point
      *
-     * @return array        Either Hangul Syllable decomposed or original 32bit
+     * @return integer[]        Either Hangul Syllable decomposed or original 32bit
      *                      value as one value array
      * @access private
      */

@@ -51,7 +51,7 @@ class CodeSnifferCommand extends AbstractCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $command = $input->getOption(self::OPTION_FIX) ? 'phpcbf' : 'phpcs';
-        $cmd = 'vendor/bin/' . ($command) . ' -s --standard=../tests/ruleset.xml';
+        $cmd = 'vendor/bin/' . ($command) . ' -n -p --colors -s --standard=../tests/ruleset.xml';
         if ($input->getOption(self::OPTION_DIR)) {
             $cmd .= ' ' . $input->getOption(self::OPTION_DIR);
         }

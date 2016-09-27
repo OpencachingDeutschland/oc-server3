@@ -34,7 +34,7 @@ class ArrayUtil
     public static function humanLangImplode(array $pieces, $conjunction = 'and', $glue = ',')
     {
         $lastElement = array_pop($pieces);
-        if ($pieces) {
+        if (!empty($pieces)) {
             return implode($glue . ' ', $pieces) . ' ' . $conjunction . ' ' . $lastElement;
         }
 

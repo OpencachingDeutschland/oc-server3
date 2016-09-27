@@ -7,15 +7,10 @@
 
 namespace Oc\Frontend\Login;
 
-use Behat\Mink\Element\NodeElement;
 use Oc\Frontend\AbstractFrontendTest;
 
 class FieldNotesTest extends AbstractFrontendTest
 {
-    private function cleanUpFieldNotesTable()
-    {
-
-    }
 
     /**
      * @group frontend
@@ -59,7 +54,7 @@ class FieldNotesTest extends AbstractFrontendTest
         $page->pressButton('testing-fieldNotes-submit-button');
         $errorMessage = $page->find('css', '.flash-messages');
         if ($errorMessage !== null) {
-            self::assertEquals('Geocache "OC10FC7" not found.', $errorMessage->getText());
+            self::assertEquals('Geocache OC10FC7 not found.', $errorMessage->getText());
         } else {
             self::fail(__METHOD__ . ' failed');
         }
@@ -75,7 +70,7 @@ class FieldNotesTest extends AbstractFrontendTest
         $fieldNotesResult[3] = 'Naafbachtal II DEF 456 2016-06-02 18:05 Not found Log it | Delete';
         $fieldNotesResult[4] = 'Testcache111 222 2016-06-02 18:06 Needs maintainance Log it | Delete';
 
-        /** @var NodeElement $fieldNote */
+        /** @var \Behat\Mink\Element\NodeElement $fieldNote */
         foreach ($fieldNotesRow as $key => $fieldNote) {
             if ($fieldNote !== null) {
                 self::assertEquals($fieldNotesResult[$key], $fieldNote->getText());

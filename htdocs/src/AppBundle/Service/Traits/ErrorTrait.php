@@ -11,11 +11,17 @@ trait ErrorTrait
 
     /**
      * @param string $text
+     * @param null|string $context
      *
      * @return void
      */
-    protected function addError($text)
+    protected function addError($text, $context = null)
     {
+        if ($context !== null) {
+            $this->errors[$context] = $text;
+
+            return;
+        }
         $this->errors[] = $text;
     }
 

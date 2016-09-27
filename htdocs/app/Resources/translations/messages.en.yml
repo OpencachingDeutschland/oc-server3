@@ -1,3 +1,7 @@
+array_util:
+    human_lang_implode:
+        and: and
+
 field_notes:
     btn:
         delete: Delete
@@ -10,7 +14,7 @@ field_notes:
 
     error:
         # Desc: Geocache "%code%" not found.
-        geocache_not_found: 'Geocache "%code%" not found.'
+        geocache_not_found: 'Geocache %code% not found.|Geocaches %code% not found.'
 
         # Desc: Log type "%type%" is not implemented.
         log_type_not_implemented: 'Log type "%type%" is not implemented.'

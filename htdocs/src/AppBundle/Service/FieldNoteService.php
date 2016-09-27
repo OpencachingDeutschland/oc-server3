@@ -55,6 +55,7 @@ class FieldNoteService implements FieldNoteServiceInterface
         $content = str_replace("\xFF\xFE", '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
         $rows = ArrayUtil::trimExplode("\n", $content);
+        $notFoundGeocacheCodes = [];
         foreach ($rows as $row) {
             $data = str_getcsv($row, ',', '"', '""');
             if (count($data) !== 4) {
@@ -90,9 +91,18 @@ class FieldNoteService implements FieldNoteServiceInterface
                 $geocache = $this->entityManager->getRepository('AppBundle:Geocache')->findOneBy(['wpOc' => $data[0]]);
             }
             if (!$geocache) {
+                $notFoundGeocacheCodes[] = $data[0];
                 $this->addError(
                     /** @Desc("Geocache ""%code%"" not found.") */
-                    $this->translator->trans('field_notes.error.geocache_not_found', ['%code%' => $data[0]])
+                    $this->translator->transChoice(
+                        'field_notes.error.geocache_not_found',
+                        count($notFoundGeocacheCodes),
+                        ['%code%' => ArrayUtil::humanLangImplode(
+                            $notFoundGeocacheCodes,
+                            $this->translator->trans('array_util.human_lang_implode.and')
+                        )]
+                    ),
+                    'geocache-not-found'
                 );
                 continue;
             }
@@ -177,6 +187,7 @@ class FieldNoteService implements FieldNoteServiceInterface
             $dateString,
             new DateTimeZone('UTC')
         );
+        $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 
         return $date;
     }

@@ -23,4 +23,21 @@ class ArrayUtil
 
         return $result;
     }
+
+    /**
+     * @param array $pieces
+     * @param string $conjunction
+     * @param string $glue
+     *
+     * @return mixed|string
+     */
+    public static function humanLangImplode(array $pieces, $conjunction = 'and', $glue = ',')
+    {
+        $lastElement = array_pop($pieces);
+        if ($pieces) {
+            return implode($glue . ' ', $pieces) . ' ' . $conjunction . ' ' . $lastElement;
+        }
+
+        return $lastElement;
+    }
 }

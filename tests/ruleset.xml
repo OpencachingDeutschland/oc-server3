@@ -42,9 +42,11 @@
     <!--
     You can hard-code command line values into your custom standard.
      -->
+    <!--
     <arg value="p"/>
     <arg value="n"/>
     <arg name="colors"/>
+    -->
 
     <!--
        You can hard-code custom php.ini settings into your custom standard.

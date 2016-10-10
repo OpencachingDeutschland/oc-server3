@@ -7,7 +7,7 @@
 
 // used in both lib1 and lib2 code
 
-require_once 'smiley.inc.php';
+require_once __DIR__ . '/smiley.inc.php';
 
 
 /**
@@ -58,6 +58,13 @@ function processEditorInput($oldDescMode, $descMode, $text)
 //
 // If $wrap is > 0, longer lines will be wrapped to new lines.
 
+/**
+ * @param $text
+ * @param $texthtml0
+ * @param $wrap
+ *
+ * @return mixed|string
+ */
 function html2plaintext($text, $texthtml0, $wrap)
 {
     global $opt, $smiley;
@@ -83,7 +90,8 @@ function html2plaintext($text, $texthtml0, $wrap)
         $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
     } else {
         // convert smilies ...
-        for ($n = 0; $n < count($smiley['image']); $n ++) {
+        $countSmileyImage = count($smiley['image']);
+        for ($n = 0; $n < $countSmileyImage; $n++) {
             $text = mb_ereg_replace(
                 "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
                 "[s![" . $smiley['text'][$n] . "]!s]",
@@ -116,6 +124,9 @@ function html2plaintext($text, $texthtml0, $wrap)
 }
 
 
+/**
+ * @return string
+ */
 function editorJsPath()
 {
     return 'resource2/ocstyle/js/editor.js?ft=' . filemtime('resource2/ocstyle/js/editor.js');

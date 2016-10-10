@@ -66,13 +66,13 @@ echo "clearing user data\n";
 sql('TRUNCATE `cache_adoption`');
 sql('TRUNCATE `cache_ignore`');
 sql('CALL sp_updateall_ignorestat(@c)');
-sql('DELETE FROM `cache_lists` WHERE `is_public`<2');  // trigger deletes dependent data
+sql('DELETE FROM `cache_lists` WHERE `is_public`<2'); // trigger deletes dependent data
 sql('TRUNCATE `cache_list_bookmarks`');
 sql('TRUNCATE `cache_list_watches`');
 sql('TRUNCATE `cache_watches`');
 sql('CALL sp_updateall_watchstat(@c)');
 sql('CALL sp_updateall_cachelist_counts(@c)');
-sql('DELETE FROM `coordinates` WHERE `type`=2');   // personal cache notes and coords
+sql('DELETE FROM `coordinates` WHERE `type`=2'); // personal cache notes and coords
 sql('TRUNCATE `queries`');
 sql('TRUNCATE `user_options`');
 sql(
@@ -88,8 +88,10 @@ sql(
             `watchmail_hour`=0, `watchmail_nextmail`='', `watchmail_day`=0,
             `activation_code`='', `statpic_logo`=0, `statpic_text`='Opencaching',
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',
-            `language_guessed`=1, `domain`=NULL, `admin`=0, `data_license`=0,
+            `language_guessed`=1, `domain`=NULL, `admin`=0,
             `description`='', `desc_htmledit`=1"
+            // `data_license` setting is retained, so that all content stays tagged with
+            // correct license information.
 );
 
 echo "deleting hidden and locked caches\n";
@@ -111,7 +113,7 @@ $rs = sql(
          SELECT `user_id` FROM `cache_logs`)"
 );
 while ($r = sql_fetch_assoc($rs)) {
-    echo ".";
+    echo '.';
     sql("DELETE FROM `user` WHERE `user_id`='&1'", $r['user_id']);
 }
 echo "\n";
@@ -137,7 +139,7 @@ if (sql_table_exists('okapi_vars')) {
 
 echo "clearing other nonpublic data\n";
 sql('TRUNCATE `news`');
-$rs = sql("SHOW TABLES WHERE `Tables_in_" . $opt['db']['placeholder']['db'] . "` LIKE '\_%'");
+$rs = sql('SHOW TABLES WHERE `Tables_in_' . $opt['db']['placeholder']['db'] . "` LIKE '\_%'");
 $tables = sql_fetch_column($rs);
 foreach ($tables as $table) {
     sql('DROP TABLE ' . $table);

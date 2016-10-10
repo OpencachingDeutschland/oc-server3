@@ -12,6 +12,8 @@
  ****************************************************************************/
 
 // needs absolute rootpath because called as cronjob
+use Oc\Util\ProcessSync;
+
 $opt['rootpath'] = __DIR__ . '/../../';
 
 require __DIR__ . '/../../lib2/cli.inc.php';
@@ -21,8 +23,8 @@ if (!Cronjobs::enabled()) {
     exit;
 }
 
-$process_sync = new ProcessSync('fill_searchindex');
-if ($process_sync->Enter()) {
+$processSync = new ProcessSync('fill_searchindex');
+if ($processSync->enter()) {
     ftsearch_refresh();
-    $process_sync->Leave();
+    $processSync->leave();
 }

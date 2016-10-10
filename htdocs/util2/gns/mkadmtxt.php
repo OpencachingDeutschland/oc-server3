@@ -10,20 +10,20 @@
  ***************************************************************************/
 
 $opt['rootpath'] = '../../';
-require_once $opt['rootpath'] . 'lib2/cli.inc.php';
-require_once $opt['rootpath'] . 'lib2/search/search.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/search/search.inc.php';
 
 
 $rsLocations = sql("SELECT `uni`, `lat`, `lon`, `rc`, `cc1`, `adm1` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
 while ($rLocations = sql_fetch_array($rsLocations)) {
-    $minlat = geomath::getMinLat($rLocations['lon'], $rLocations['lat'], 10, 1);
-    $maxlat = geomath::getMaxLat($rLocations['lon'], $rLocations['lat'], 10, 1);
-    $minlon = geomath::getMinLon($rLocations['lon'], $rLocations['lat'], 10, 1);
-    $maxlon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
+    $minLat = geomath::getMinLat($rLocations['lon'], $rLocations['lat'], 10, 1);
+    $maxLat = geomath::getMaxLat($rLocations['lon'], $rLocations['lat'], 10, 1);
+    $minLon = geomath::getMinLon($rLocations['lon'], $rLocations['lat'], 10, 1);
+    $maxLon = geomath::getMaxLon($rLocations['lon'], $rLocations['lat'], 10, 1);
 
     // den nächsgelegenen Ort in den geodb ermitteln
     $sql =
-        "SELECT " .
+        'SELECT ' .
             geomath::getSqlDistanceFormula(
                 $rLocations['lon'],
                 $rLocations['lat'],
@@ -36,8 +36,8 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
             `geodb_coordinates`.`loc_id` `loc_id`
          FROM `geodb_coordinates`
          WHERE
-            `lon` > '" . sql_escape($minlon) . "' AND `lon` < '" . sql_escape($maxlon) . "' AND
-            `lat` > '" . sql_escape($minlat) . "' AND `lat` < '" . sql_escape($maxlat) . "'
+            `lon` > '" . sql_escape($minLon) . "' AND `lon` < '" . sql_escape($maxLon) . "' AND
+            `lat` > '" . sql_escape($minLat) . "' AND `lat` < '" . sql_escape($maxLat) . "'
          HAVING `distance` < 10
          ORDER BY `distance` ASC
          LIMIT 1";
@@ -47,11 +47,11 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
         $r = sql_fetch_array($rs);
         mysql_free_result($rs);
 
-        $locid = $r['loc_id'];
+        $locId = $r['loc_id'];
 
-        $admtxt1 = GeoDb::landFromLocid($locid);
-        if ($admtxt1 == '0') {
-            $admtxt1 = '';
+        $admTxt1 = GeoDb::landFromLocid($locId);
+        if ($admTxt1 == '0') {
+            $admTxt1 = '';
         }
 
         // bundesland ermitteln
@@ -71,35 +71,33 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
         );
         if (mysql_num_rows($rsAdm2) == 1) {
             $rAdm2 = sql_fetch_array($rsAdm2);
-            $admtxt2 = $rAdm2['short_form'];
+            $admTxt2 = $rAdm2['short_form'];
 
-            if ($admtxt2 == '') {
-                $admtxt2 = $rAdm2['full_name'];
+            if ($admTxt2 === '') {
+                $admTxt2 = $rAdm2['full_name'];
             }
         } else {
-            $admtxt3 = '';
+            $admTxt2 = '';
         }
 
-        $admtxt3 = GeoDb::regierungsbezirkFromLocid($locid);
-        if ($admtxt3 == '0') {
-            $admtxt3 = '';
+        $admTxt3 = GeoDb::regierungsbezirkFromLocid($locId);
+        if ($admTxt3 == '0') {
+            $admTxt3 = '';
         }
 
-        $admtxt4 = GeoDb::landkreisFromLocid($locid);
-        if ($admtxt4 == '0') {
-            $admtxt4 = '';
+        $admTxt4 = GeoDb::landkreisFromLocid($locId);
+        if ($admTxt4 == '0') {
+            $admTxt4 = '';
         }
         sql(
             "UPDATE `gns_locations` SET `admtxt1`='&1', `admtxt2`='&2', `admtxt3`='&3', `admtxt4`='&4'
             WHERE uni='&5'",
-            $admtxt1,
-            $admtxt2,
-            $admtxt3,
-            $admtxt4,
+            $admTxt1,
+            $admTxt2,
+            $admTxt3,
+            $admTxt4,
             $rLocations['uni']
         );
-    } else {
-        // was tun?
     }
 }
 

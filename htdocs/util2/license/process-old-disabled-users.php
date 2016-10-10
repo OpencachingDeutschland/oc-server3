@@ -11,15 +11,15 @@
  *  It is strongly recommended to do intensive test before using this script
  ***************************************************************************/
 
-$opt['rootpath'] = '../../';
-require_once $opt['rootpath'] . 'lib2/cli.inc.php';
-require_once $opt['rootpath'] . 'lib2/logic/user.class.php';
+$opt['rootpath'] = __DIR__ . '/../../';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/logic/user.class.php';
 
 $login->admin = ADMIN_USER;
 
 $rs = sql(
-    "SELECT `user_id`,`username` FROM `user`
-    WHERE `is_active_flag`=0 AND `data_license`=0"
+    'SELECT `user_id`,`username` FROM `user`
+     WHERE `is_active_flag`=0 AND `data_license`=0'
 );
 
 $n = 0;

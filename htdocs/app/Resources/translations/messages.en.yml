@@ -1,0 +1,60 @@
+array_util:
+    human_lang_implode:
+        and: and
+
+field_notes:
+    btn:
+        delete: Delete
+        delete_selected: 'Delete selected'
+        log_it: 'Log it'
+        upload: Upload
+
+    # Desc: Y-m-d H:i
+    date_format: 'Y-m-d H:i'
+
+    error:
+        # Desc: Geocache "%code%" not found.
+        geocache_not_found: 'Geocache %code% not found.|Geocaches %code% not found.'
+
+        # Desc: Log type "%type%" is not implemented.
+        log_type_not_implemented: 'Log type "%type%" is not implemented.'
+        wrong_date_format: 'The date in this file is in wrong format.'
+        wrong_file_format: 'This file seems not to be a field notes file.'
+
+    field_notes: 'Field Notes'
+
+    header:
+        actions: Actions
+        date: Date
+        geocache: Cache
+        log_type: 'Log type'
+
+    msg:
+        no_field_notes: 'You don''t have any Field Notes.'
+        upload_new_field_notes: 'Upload new Field Notes'
+
+    success:
+        deleted: 'Field Note successfully deleted.'
+        deleted_multiple: 'Field Notes successfully deleted.'
+
+    upload:
+        file: 'Field Notes file (geocache_visits.txt)'
+
+        label:
+            # Desc: Ignore Field Notes before %date%
+            ignore: 'Ignore Field Notes before %date%'
+
+        success: 'Field Notes successfully uploaded.'
+
+geocache:
+    type:
+        drivein: 'Drive in Cache'
+        event: 'Event Cache'
+        math: 'Math/Physics Cache'
+        moving: 'Moving Cache'
+        multi: 'Multi Cache'
+        quiz: 'Quiz Cache'
+        traditional: 'Traditional Cache'
+        unknown: 'Unknown Cache'
+        virtual: 'Virtual Cache'
+        webcam: 'Webcam Cache'

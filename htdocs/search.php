@@ -86,9 +86,12 @@ $homecoords = ($login->logged_in() &&
 // stored query etc.) or for other purpose (e.g. user profile cache lists):
 $called_by_search = isset($_REQUEST['calledbysearch']) ? $_REQUEST['calledbysearch'] <> 0 : true;
 $called_by_profile_query = false;
+$load_query = false;
+$show_lastsearchbutton = true;
 
 if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop: showresult, queryid
     $bCookieQueryid = false;
+    $load_query = true;
     $queryid = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] : 0;
     if ($queryid &&
         sql_value("SELECT `user_id` FROM `queries` WHERE `id`='&1'", 0, $queryid)
@@ -97,15 +100,26 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
     }
 } else {
     $bCookieQueryid = true;
+    $load_query = true;
     $queryid = $cookie->get('lastqueryid', false);
     if ($queryid === false ||
         sql_value("SELECT COUNT(*) FROM `queries` WHERE id='&1'", 0, $queryid) == 0
     ) {
+        $show_lastsearchbutton = false;
+    }
+    if (!isset($_REQUEST['lastsearch'])) {
         $queryid = 0;
+    }
+    if ($queryid === false ||
+        sql_value("SELECT COUNT(*) FROM `queries` WHERE id='&1'", 0, $queryid) == 0
+    ) {
+        $queryid = 0;
+        $load_query = false;
     }
 
     newquery:
     if ($queryid == 0) {
+        $load_query = false;
         // initialize search form with defaults, as we have no parameters
         // or saved query to start from
 
@@ -131,7 +145,7 @@ if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop:
     }
 }
 
-$queryid += 0;  // safety measure: force $queryid to be numeric
+$queryid += 0; // safety measure: force $queryid to be numeric
 
 
 //=========================================================
@@ -152,7 +166,7 @@ if ($queryid != 0) {
     if (sql_num_rows($query_rs) == 0) {
         // can happen if logged out after query was created (fix for RT #3915)
         $queryid = 0;
-        goto newquery;  // goto needs PHP 5.3
+        goto newquery; // goto needs PHP 5.3
         /*
         $tpl->error($error_query_not_found);
         */
@@ -188,7 +202,7 @@ if ($queryid != 0) {
         }
 
         // get findername from finderid
-        $options['finderid'] = isset($options['finderid']) ? $options['finderid'] + 0 : 0;  // Ocprop
+        $options['finderid'] = isset($options['finderid']) ? $options['finderid'] + 0 : 0; // Ocprop
         if (isset($options['finder']) && $options['finderid'] > 0) {
             $rs_name = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $options['finderid']);
             if (sql_num_rows($rs_name) == 1) {
@@ -200,7 +214,7 @@ if ($queryid != 0) {
         }
 
         // get ownername from ownerid
-        $options['ownerid'] = isset($options['ownerid']) ? $options['ownerid'] + 0 : 0;  // Ocprop
+        $options['ownerid'] = isset($options['ownerid']) ? $options['ownerid'] + 0 : 0; // Ocprop
         if (isset($options['owner']) && $options['ownerid'] > 0) {
             $rs_name = sql("SELECT `username` FROM `user` WHERE `user_id`='&1'", $options['ownerid']);
             if (sql_num_rows($rs_name) == 1) {
@@ -237,10 +251,10 @@ if ($queryid != 0) {
     }
 
     // get the search options parameters and store them in the queries table (to view "the next page")
-    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0;  // Ocprop
-    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0;  // Ocprop
+    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0; // Ocprop
+    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0; // Ocprop
     $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? $_REQUEST['f_disabled'] : 0;
-    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1;  // Ocprop
+    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1; // Ocprop
     // f_inactive formerly was used for both, archived and disabled caches.
     // After adding the separate f_disabled option, it is used only for archived
     // caches, but keeps its name for compatibility with existing stored or
@@ -248,15 +262,15 @@ if ($queryid != 0) {
     $options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
     $options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
     $options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? $_REQUEST['f_geokrets'] : 0;
-    $options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0;  // Ocprop: 0
+    $options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0; // Ocprop: 0
     $options['showresult'] = isset($_REQUEST['showresult']) ? $_REQUEST['showresult'] : 0;
-    $options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML';  // Ocprop: HTML
+    $options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML'; // Ocprop: HTML
     $options['bbox'] = isset($_REQUEST['bbox']) ? $_REQUEST['bbox'] : false;
 
     if (isset($_REQUEST['cache_attribs'])) {
         if ($_REQUEST['cache_attribs'] != '') {
             $aAttribs = mb_split(';', $_REQUEST['cache_attribs']);
-            for ($i = 0; $i < count($aAttribs); $i ++) {
+            for ($i = 0; $i < count($aAttribs); $i++) {
                 $options['cache_attribs'][$aAttribs[$i] + 0] = $aAttribs[$i] + 0;
             }
             unset($aAttribs);
@@ -270,7 +284,7 @@ if ($queryid != 0) {
     if (isset($_REQUEST['cache_attribs_not'])) {
         if ($_REQUEST['cache_attribs_not'] != '') {
             $aAttribs = mb_split(';', $_REQUEST['cache_attribs_not']);
-            for ($i = 0; $i < count($aAttribs); $i ++) {
+            for ($i = 0; $i < count($aAttribs); $i++) {
                 $options['cache_attribs_not'][$aAttribs[$i] + 0] = $aAttribs[$i] + 0;
             }
             unset($aAttribs);
@@ -308,7 +322,7 @@ if ($queryid != 0) {
 
         $options['finderid'] = isset($_REQUEST['finderid']) ? $_REQUEST['finderid'] : 0;
         $options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
-        $options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7';  // Ocprop
+        $options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7'; // Ocprop
     } elseif ((isset($_REQUEST['searchbyortplz']) && is_numeric($_REQUEST['ortplz']))
               || isset($_REQUEST['searchbyplz'])) {
         $options['searchtype'] = 'byplz';
@@ -381,7 +395,7 @@ if ($queryid != 0) {
         if (!$list->allowView($password)) {
             $tpl->redirect("cachelists.php");
         }
-        $options['cachelist'] = cachelist::getListById($options['listid']);  // null for invalid ID
+        $options['cachelist'] = cachelist::getListById($options['listid']); // null for invalid ID
         $options['cachelist_pw'] = $password;
     } elseif (isset($_REQUEST['searchall'])) {
         if (!$login->logged_in() &&
@@ -462,8 +476,8 @@ if ($bRememberQuery) {
             serialize($options)
         );
         $options['queryid'] = sql_insert_id();
+        $cookie->set('lastqueryid', $options['queryid']);
     }
-    $cookie->set('lastqueryid', $options['queryid']);
 }
 
 // remove old queries (after 1 hour without use);
@@ -659,7 +673,7 @@ if ($options['showresult'] == 1) {
                                 }
                                 $sqlhashes .= '`gns_search`.`simplehash`=' . sprintf("%u", crc32($searchstring));
 
-                                $wordscount ++;
+                                $wordscount++;
                             }
                         }
 
@@ -1001,7 +1015,7 @@ if ($options['showresult'] == 1) {
                 $sql_where[] = '`s' . $n . '`.`hash`=\'' . sql_escape($h) . '\'';
                 $sql_where[] = '`s' . $n . '`.`object_type` IN (' . implode(',', $ft_types) . ')';
 
-                $n ++;
+                $n++;
             }
 
             $sqlFilter =
@@ -1159,7 +1173,7 @@ if ($options['showresult'] == 1) {
         if ($options['cachetype'] != '') {
             $types = explode(';', $options['cachetype']);
             if (count($types) < sql_value_slave("SELECT COUNT(*) FROM `cache_type`", 0)) {
-                for ($i = 0; $i < count($types); $i ++) {
+                for ($i = 0; $i < count($types); $i++) {
                     $types[$i] = "'" . sql_escape($types[$i]) . "'";
                 }
                 $sql_where[] = '`caches`.`type` IN (' . implode(',', $types) . ')';
@@ -1169,7 +1183,7 @@ if ($options['showresult'] == 1) {
         if ($options['cachesize'] != '') {
             $sizes = explode(';', $options['cachesize']);
             if (count($sizes) < sql_value_slave("SELECT COUNT(*) FROM `cache_size`", 0)) {
-                for ($i = 0; $i < count($sizes); $i ++) {
+                for ($i = 0; $i < count($sizes); $i++) {
                     $sizes[$i] = "'" . sql_escape($sizes[$i]) . "'";
                 }
                 $sql_where[] = '`caches`.`size` IN (' . implode(',', $sizes) . ')';
@@ -1254,7 +1268,7 @@ if ($options['showresult'] == 1) {
     //  X6. load output module and output-dependent options
     //=================================================================
 
-    $output_module = mb_strtolower($options['output']);  // Ocprop: HTML, gpx
+    $output_module = mb_strtolower($options['output']); // Ocprop: HTML, gpx
 
     $map2_bounds = ($output_module == 'map2bounds');
     if ($map2_bounds) {
@@ -1472,6 +1486,10 @@ if ($options['showresult'] == 1) {
         }
 
         // helper function for output modules
+
+        /**
+         * @param string $str
+         */
         function append_output($str)
         {
             global $db, $content, $bUseZip;
@@ -1598,10 +1616,13 @@ function outputSearchForm($options)
     global $tpl, $login, $opt;
     global $error_ort, $error_plz, $error_locidnocoords, $error_nowaypointfound, $error_nocoords, $error_nofulltext, $error_fulltexttoolong;
     global $cache_attrib_jsarray_line, $cache_attrib_group, $cache_attrib_img_line1, $cache_attrib_img_line2;
+    global $load_query, $show_lastsearchbutton;
 
     $tpl->assign('formmethod', 'get');
 
     $tpl->assign('logged_in', $login->logged_in());
+    $tpl->assign('load_query', $load_query == false);
+    $tpl->assign('show_lastsearchbutton', $show_lastsearchbutton == true);
 
     //sort search by (radio button + 1 checkbox)
 
@@ -1690,6 +1711,7 @@ function outputSearchForm($options)
         'cachename',
         isset($options['cachename']) ? htmlspecialchars($options['cachename'], ENT_COMPAT, 'UTF-8') : ''
     );
+    $tpl->assign('searchtype_byname', $options['searchtype'] == 'byname');
 
     // distance
     $tpl->assign('distance', isset($options['distance']) ? $options['distance'] : DEFAULT_SEARCH_DISTANCE);
@@ -1798,19 +1820,25 @@ function outputSearchForm($options)
 
     $dfromortplz_checked = in_array($options['searchtype'], ['byplz', 'byort']);
     $dfromwaypoint_checked = ($options['searchtype'] == 'bywaypoint');
-    $dfromcoords_checked = ($options['searchtype'] == 'coords');
+    $dfromcoords_checked = ($options['searchtype'] == 'bycoords');
     if (!$dfromortplz_checked && !$dfromwaypoint_checked && !$dfromcoords_checked) {
-        $dfromcoords_checked = true;  // default
+        $dfromcoords_checked = true; // default
     }
     $tpl->assign('dfromortplz_checked', $dfromortplz_checked);
     $tpl->assign('dfromwaypoint_checked', $dfromwaypoint_checked);
     $tpl->assign('dfromcoords_checked', $dfromcoords_checked);
 
+    $tpl->assign('searchtype_byortplz', in_array($options['searchtype'], ['byplz', 'byort']));
+    $tpl->assign('searchtype_bywaypoint', $options['searchtype'] == 'bywaypoint');
+    $tpl->assign('searchtype_bycoords', $options['searchtype'] == 'bycoords');
+    
     // owner
     $tpl->assign('owner', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
+    $tpl->assign('searchtype_byowner', $options['searchtype'] == 'byowner');
 
     // finder
     $tpl->assign('finder', isset($options['finder']) ? htmlspecialchars($options['finder'], ENT_COMPAT, 'UTF-8') : '');
+    $tpl->assign('searchtype_byfinder', $options['searchtype'] == 'byfinder');
 
     // country options
     $rs = sql(
@@ -2023,7 +2051,7 @@ function outputSearchForm($options)
             $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
 
             $group_line .= $line;
-            $nLineAttrCount2 ++;
+            $nLineAttrCount2++;
         }
         sql_free_result($rs);
 
@@ -2134,7 +2162,7 @@ function outputSearchForm($options)
             $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
 
             $group_line .= $line;
-            $nLineAttrCount1 ++;
+            $nLineAttrCount1++;
         }
         sql_free_result($rs);
 
@@ -2202,7 +2230,11 @@ function outputSearchForm($options)
             $tpl->assign('ft_pictures_checked', $options['ft_pictures'] == 1);
         }
     }
+    $tpl->assign('searchtype_byfulltext', $options['searchtype'] == 'byfulltext');
 
+    //all
+    $tpl->assign('searchtype_byall', $options['searchtype'] == 'all');
+    
     // error messages
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {
@@ -2277,7 +2309,7 @@ function prepareLocSelectionForm($options)
 
 function outputUniidSelectionForm($uniSql, $options)
 {
-    global $tpl;  // settings
+    global $tpl; // settings
     global $locline, $secondlocationname;
 
     $urlparamString = prepareLocSelectionForm($options);
@@ -2387,7 +2419,7 @@ function outputUniidSelectionForm($uniSql, $options)
         $thislocation = mb_ereg_replace('{locid}', urlencode($r['uni_id']), $thislocation);
         $thislocation = mb_ereg_replace('{nr}', $nr, $thislocation);
 
-        $nr ++;
+        $nr++;
         $locations .= $thislocation . "\n";
     }
     sql_free_result($rs);
@@ -2480,7 +2512,7 @@ function outputLocidSelectionForm($locSql, $options)
             $thislocation = mb_ereg_replace('{bgcolor}', $bgcolor2, $thislocation);
         }
 
-        $nr ++;
+        $nr++;
         $locations .= $thislocation . "\n";
     }
 

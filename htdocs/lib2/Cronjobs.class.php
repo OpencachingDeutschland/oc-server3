@@ -5,10 +5,16 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+/**
+ * Class Cronjobs
+ *
+ * Cronjobs are disabled if the website is down (for maintenance).
+ */
 class Cronjobs
 {
-    // Cronjobs are disabled if the website is down (for maintenance).
-
+    /**
+     * @return bool
+     */
     public static function enabled()
     {
         global $argv, $http_response_header, $opt;

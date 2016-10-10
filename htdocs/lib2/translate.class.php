@@ -5,8 +5,13 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/translationHandler.class.php';
+require_once __DIR__ . '/translationHandler.class.php';
 
+/**
+ * @param int $backtrace_level
+ *
+ * @return translate|translateEdit
+ */
 function createTranslate($backtrace_level = 0)
 {
     $access = new translateAccess();
@@ -26,9 +31,23 @@ function createTranslate($backtrace_level = 0)
 
 $translate = createTranslate();
 
+/**
+ * Class translate
+ */
 class translate
 {
-    /* translate the given string
+    /**
+     * translate the given string
+     *
+     * @param $message
+     * @param $style
+     * @param $resource_name
+     * @param $line
+     * @param string $plural
+     * @param int $count
+     * @param null $lang
+     *
+     * @return string
      */
     public function t($message, $style, $resource_name, $line, $plural = '', $count = 1, $lang = null)
     {
@@ -70,7 +89,12 @@ class translate
         return $trans;
     }
 
-    /* strip whitespaces
+    /**
+     * strip whitespaces
+     *
+     * @param $text
+     *
+     * @return string
      */
     protected function prepare_text($text)
     {
@@ -84,6 +108,9 @@ class translate
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function v($message)
     {
         if ($message) {
@@ -111,17 +138,37 @@ class translate
     }
 }
 
+/**
+ * Class translateEdit
+ */
 class translateEdit extends translate
 {
     private $editAll;
     private $backtrace_level;
 
+    /**
+     * translateEdit constructor.
+     *
+     * @param bool $editAll
+     * @param int $backtrace_level
+     */
     public function __construct($editAll = true, $backtrace_level = 0)
     {
         $this->editAll = $editAll;
         $this->backtrace_level = $backtrace_level;
     }
 
+    /**
+     * @param $message
+     * @param $style
+     * @param $resource_name
+     * @param $line
+     * @param string $plural
+     * @param int $count
+     * @param null $lang
+     *
+     * @return string
+     */
     public function t($message, $style, $resource_name, $line, $plural = '', $count = 1, $lang = null)
     {
         global $opt;

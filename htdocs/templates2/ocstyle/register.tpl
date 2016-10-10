@@ -120,7 +120,7 @@
             <tr>
                 <td width="145" valign="top">{t}E-Mail:{/t}</td>
                 <td valign="top">
-                    <input type="text" name="email" maxlength="80" value="{$email|escape}" class="input200" /> *&nbsp;
+                    <input type="email" name="email" maxlength="80" value="{$email|escape}" class="input200" /> *&nbsp;
                     {if $error_email_not_ok==1}
                         <span class="errormsg">{t}The E-Mail is not valid.{/t}</span>
                     {elseif $error_email_exists==1}

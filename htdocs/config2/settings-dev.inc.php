@@ -83,7 +83,7 @@ $opt['page']['develsystem'] = true;
 $opt['page']['max_logins_per_hour'] = 1000;    // for development ...
 
 $opt['mail']['from'] = 'root';
-$opt['mail']['subject'] = '[local.opencaching.de] ';
+$opt['mail']['subject'] = '[local.team-opencaching.de] ';
 
 /* disable cronjobs which are not needed on devel site
  */
@@ -100,12 +100,12 @@ $opt['logic']['logs']['purge_userdata'] = 0;
  * see https://my.garmin.com/api/communicator/key-generator.jsp
  */
 $opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
-$opt['lib']['garmin']['domain'] = 'local.opencaching.de';
-$opt['lib']['garmin']['url'] = 'http://local.opencaching.de/';
+$opt['lib']['garmin']['domain'] = 'local.team-opencaching.de';
+$opt['lib']['garmin']['url'] = 'http://local.team-opencaching.de/';
 $opt['lib']['garmin']['page_url'] = $opt['lib']['garmin']['url'] . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/');
 
-// developer.what3words.com API Key
-$opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
+// only for local.team-opencaching.de usage
+$opt['lib']['w3w']['apikey'] = 'X27PDW41';
 
 // other settings
 $opt['page']['showdonations'] = true;

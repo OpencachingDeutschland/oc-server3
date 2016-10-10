@@ -11,6 +11,8 @@
  * style      get/post/cookie   used style
  ****************************************************************************/
 
+use Oc\Util\CBench;
+
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];
 } else {
@@ -170,8 +172,7 @@ if ($dblink === false) {
 $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
 
 // zeitmessung
-require_once $rootpath . 'lib/bench.inc.php';
-$bScriptExecution = new Cbench;
+$bScriptExecution = new CBench;
 $bScriptExecution->start();
 
 function load_domain_settings()
@@ -276,6 +277,9 @@ function set_cookie_setting($name, $value)
 //set no_eval true to prevent this contents from php-parsing.
 //Important when replacing something that the user has posted
 //in HTML code and could contain \<\? php-Code \?\>
+/**
+ * @param string $name
+ */
 function tpl_set_var($name, $value, $no_eval = true)
 {
     global $vars, $no_eval_vars;
@@ -325,6 +329,15 @@ function tpl_clear_page_functions()
 //read the templates and echo it to the user
 function tpl_BuildTemplate($dbdisconnect = true)
 {
+    global $sql_debug, $sqldbg_cmdNo;
+
+    if (isset($sql_debug) && $sql_debug) {
+        if (!isset($sqldbg_cmdNo) || $sqldbg_cmdNo == 0) {
+            echo 'No SQL commands on this page.';
+        }
+        die();
+    }
+
     //template handling vars
     global $style, $stylepath, $tplname, $vars, $langpath, $locale, $opt, $oc_nodeid, $translate, $usr;
     //language specific expression
@@ -342,8 +355,8 @@ function tpl_BuildTemplate($dbdisconnect = true)
     tpl_set_var('print_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
 
     if (isset($bScriptExecution)) {
-        $bScriptExecution->Stop();
-        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->Diff()));
+        $bScriptExecution->stop();
+        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->diff()));
     } else {
         tpl_set_var('scripttime', sprintf('%1.3f', 0));
     }
@@ -383,8 +396,8 @@ function tpl_BuildTemplate($dbdisconnect = true)
         tpl_set_var('license_disclaimer', '');
     }
 
-    $bTemplateBuild = new Cbench;
-    $bTemplateBuild->Start();
+    $bTemplateBuild = new CBench;
+    $bTemplateBuild->start();
 
     //set {functionsbox}
     global $page_functions, $functionsbox_start_tag, $functionsbox_middle_tag, $functionsbox_end_tag;
@@ -496,6 +509,9 @@ function http_write_no_cache()
 }
 
 //redirect to another site to display, i.e. to view a cache after logging
+/**
+ * @param string $page
+ */
 function tpl_redirect($page)
 {
     global $absolute_server_URI;
@@ -515,6 +531,9 @@ function tpl_redirect($page)
 //process the template replacements
 //no_eval_replace - if true, variables will be replaced that are
 //                  marked as "no_eval"
+/**
+ * @param string $str
+ */
 function tpl_do_replace($str)
 {
     global $vars, $no_eval_vars;
@@ -542,6 +561,10 @@ function tpl_do_replace($str)
     return $str;
 }
 
+/**
+ * @param string $tplnameError
+ * @param string $msg
+ */
 function tpl_errorMsg($tplnameError, $msg)
 {
     global $tplname;
@@ -570,6 +593,9 @@ function load_gettext()
     textdomain('messages');
 }
 
+/**
+ * @param string $sCode
+ */
 function tpl_do_translation($sCode)
 {
     global $opt, $style, $tplname;
@@ -598,6 +624,9 @@ function tpl_do_translation($sCode)
     return $sResultCode;
 }
 
+/**
+ * @param string $sCode
+ */
 function gettext_do_html($sCode)
 {
     $sResultCode = '';
@@ -627,6 +656,9 @@ function gettext_do_html($sCode)
     return $sResultCode;
 }
 
+/**
+ * @return string
+ */
 function t($str)
 {
     global $translate;

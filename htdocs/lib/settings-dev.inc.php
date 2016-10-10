@@ -52,6 +52,7 @@ if (!isset($debug_page)) {
     $debug_page = true;
 }
 $develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten</center></font></div>';
+$sql_debug = isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug'] == 1;
 
 //site in service? Set to false when doing bigger work on the database to prevent error's
 if (!isset($site_in_service)) {
@@ -71,7 +72,7 @@ $opt['db']['error']['mail'] = 'root';
 
 // EMail address of the sender and team
 if (!isset($maildomain)) {
-    $maildomain = 'local.opencaching.de';
+    $maildomain = 'local.team-opencaching.de';
 }
 if (!isset($emailaddr)) {
     $emailaddr = 'root@' . $maildomain;
@@ -94,11 +95,6 @@ $opt['db']['dateformat'] = 'Y-m-d H:i:s';
 $sql_errormail = 'root';
 $dberrormail = $sql_errormail;
 $sql_warntime = 100000;
-
-$sql_allow_debug = 0;
-
-// minimum of 24 chars
-$sql_debug_cryptkey = 'this is my very, very secret \'secret key\'';
 
 // replacements for sql()
 $sql_replacements['db'] = $dbname;

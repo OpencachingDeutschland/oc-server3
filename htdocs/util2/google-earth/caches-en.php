@@ -1,3 +1,3 @@
 <?php
 $_REQUEST['locale'] = 'EN';
-include 'caches.php';
+require_once __DIR__ . '/caches.php';

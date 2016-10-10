@@ -186,7 +186,7 @@ if ($error == false) {
                         }
                         $path .= mb_strtoupper(mb_substr($filename, 0, 1)) . '/' .
                             mb_strtoupper(mb_substr($filename, 1, 1)) . '/';
-                        @unlink($path . $filename);  // Thumb
+                        @unlink($path . $filename); // Thumb
 
                         /* lib2 code would be ...
                         $rs = sql("SELECT `id` FROM `pictures` WHERE `object_type`=1 AND `object_id`='&1'", $log_id);

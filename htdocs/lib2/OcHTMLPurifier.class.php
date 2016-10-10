@@ -15,12 +15,20 @@ require_once __DIR__ . '/Net/IDNA2.php';
 // Also used for lib1 code.
 
 
+/**
+ * Class OcHTMLPurifier
+ */
 class OcHTMLPurifier extends HTMLPurifier
 {
     // $opt needs to be passed as parameter here because it resides in another
     // namespace in OKAPI. All options used here must be included in the
     // $opt['html_purifier'] array.
 
+    /**
+     * OcHTMLPurifier constructor.
+     *
+     * @param null|Optional $opt
+     */
     public function __construct($opt)
     {
         // prepare config
@@ -50,8 +58,8 @@ class OcHTMLPurifier extends HTMLPurifier
         $config->set('Attr.IDPrefix', 'custom_');
 
         // enable 'display' and 'visibility' styles for mystery descriptions
-        $config->set('CSS.AllowTricky', true);                // + display, visibility, overflow
-        $config->set('CSS.ForbiddenProperties', 'overflow');  // - overflow
+        $config->set('CSS.AllowTricky', true); // + display, visibility, overflow
+        $config->set('CSS.ForbiddenProperties', 'overflow'); // - overflow
 
         // prepare additional definitions
         $def = $config->getHTMLDefinition(true);
@@ -65,7 +73,7 @@ class OcHTMLPurifier extends HTMLPurifier
         ); //  HTML5 attribs currently not supported by TinyMCE
         $def->addElement('legend', 'Inline', 'Flow', 'Common');
         $def->addElement('q', 'Inline', 'Inline', 'Common', ['cite' => 'URI']);
-        $def->addElement('strike', 'Inline', 'Inline', 'Common');   // -> wird in CSS umgewandelt
+        $def->addElement('strike', 'Inline', 'Inline', 'Common'); // -> wird in CSS umgewandelt
         $def->addElement(
             'area',
             'Inline',
@@ -89,6 +97,12 @@ class OcHTMLPurifier extends HTMLPurifier
     }
 
 
+    /**
+     * @param String $text
+     * @param null $config
+     *
+     * @return mixed
+     */
     public function purify($text, $config = null)
     {
         // HTMLPurifier deletes spaces between images; apply space protection:

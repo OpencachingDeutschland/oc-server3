@@ -48,14 +48,14 @@ if ($action == 'edit') {
     }
 
     $hours = array();
-    for ($i = 0; $i < 24; $i ++) {
+    for ($i = 0; $i < 24; $i++) {
         $hours[] = [
             'value' => $i,
             'time' => mktime($i, 0, 0)
         ];
     }
     $weekdays = array();
-    for ($i = 1; $i <= 7; $i ++) {
+    for ($i = 1; $i <= 7; $i++) {
         $weekdays[] = array(
             'value' => $i,
             'time' => mktime(0, 0, 0, 0, $i + 5, 2000)

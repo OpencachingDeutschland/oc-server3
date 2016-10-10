@@ -6,6 +6,7 @@
  *
  * For license information see doc/license.txt
  ****************************************************************************/
+use Oc\Util\CBench;
 
 /****************************************************************************
  *
@@ -61,11 +62,6 @@ register_errorhandlers();
 $dblink_slave = false;
 $db_error = 0;
 
-// sql debugger?
-if (!isset($sql_allow_debug)) {
-    $sql_allow_debug = 0;
-}
-
 // prepare EMail-From
 $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
 
@@ -96,49 +92,6 @@ function read_file($file = '')
     fclose($fh);
 
     return $content;
-}
-
-// explode with more than one separator
-function explode_multi($str, $sep)
-{
-    $ret = [];
-    $nCurPos = 0;
-
-    while ($nCurPos < mb_strlen($str)) {
-        $nNextSep = mb_strlen($str);
-        for ($nSepPos = 0; $nSepPos < mb_strlen($sep); $nSepPos ++) {
-            $nThisPos = mb_strpos($str, mb_substr($sep, $nSepPos, 1), $nCurPos);
-            if ($nThisPos !== false) {
-                if ($nNextSep > $nThisPos) {
-                    $nNextSep = $nThisPos;
-                }
-            }
-        }
-
-        $ret[] = mb_substr($str, $nCurPos, $nNextSep - $nCurPos);
-
-        $nCurPos = $nNextSep + 1;
-    }
-
-    return $ret;
-}
-
-function mb_strpos_multi($haystack, $needles)
-{
-    $arg = func_get_args();
-    $start = false;
-
-    foreach ($needles as $needle) {
-        $thisstart = mb_strpos($haystack, $needle, $arg[2]);
-        if ($start == false) {
-            $start = $thisstart;
-        } elseif ($thisstart == false) {
-        } elseif ($start > $thisstart) {
-            $start = $thisstart;
-        }
-    }
-
-    return $start;
 }
 
 function escape_javascript($text)
@@ -406,8 +359,7 @@ function sql_internal($_dblink, $sql, $bSlave)
         }
     } else {
         // Zeitmessung für die Ausführung
-        require_once $opt['rootpath'] . 'lib/bench.inc.php';
-        $cSqlExecution = new Cbench;
+        $cSqlExecution = new CBench;
         $cSqlExecution->start();
 
         $result = mysql_query($filtered_sql, $_dblink);
@@ -418,8 +370,8 @@ function sql_internal($_dblink, $sql, $bSlave)
         $cSqlExecution->stop();
 
         if ($sql_warntime > 0 && $cSqlExecution->diff() > $sql_warntime) {
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
-            sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+            sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
         }
     }
 

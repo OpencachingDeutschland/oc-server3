@@ -24,6 +24,7 @@
         <meta http-equiv="gallerimg" content="no" />
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <base href="/" />
         <link rel="SHORTCUT ICON" href="favicon.ico" />
         <link rel="apple-touch-icon" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />

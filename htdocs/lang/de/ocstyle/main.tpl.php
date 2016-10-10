@@ -145,10 +145,11 @@ $smarty_dummy = 0;
                         <td><strong>{t}Language:{/t}&nbsp;</strong></td>
                         <td>
 <?php
-                            foreach ($opt['template']['locales'] AS $k => $lang)
-                                if ($lang['status'] == OC_LOCALE_ACTIVE)
+                            foreach ($opt['template']['locales'] AS $k => $lang) {
+                                                            if ($lang['status'] == OC_LOCALE_ACTIVE)
                                     echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
-?>
+                            }
+                            ?>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
@@ -205,11 +206,12 @@ $smarty_dummy = 0;
                     <ul>
 <?php
                         // $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
-                        if ($pageidx >= 0)
-                            mnu_EchoMainMenu($menu[$pageidx]['siteid']);
-                        else
-                            mnu_EchoMainMenu(-1);
-?>
+                        if ($pageidx >= 0) {
+                                                    mnu_EchoMainMenu($menu[$pageidx]['siteid']);
+                        } else {
+                                                    mnu_EchoMainMenu(-1);
+                        }
+                        ?>
                     </ul>
                 </div>
 

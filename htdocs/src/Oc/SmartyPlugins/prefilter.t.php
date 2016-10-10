@@ -49,6 +49,12 @@
  * Find all {t}...{/t} and translate its input with gettext
  *
  */
+/**
+ * @param $source
+ * @param $smarty
+ *
+ * @return string
+ */
 function smarty_prefilter_t($source, &$smarty)
 {
     $output = '';
@@ -84,6 +90,14 @@ function smarty_prefilter_t($source, &$smarty)
 /* $block ... {t[ a=$a|nbsp b="a" ...]}
  *
  */
+/**
+ * @param $block
+ * @param $message
+ * @param $smarty
+ * @param $line
+ *
+ * @return string
+ */
 function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
 {
     if ($message != '') {
@@ -112,7 +126,7 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
 
                 // rebuild block with replaced plural
                 $block = '';
-                foreach ($attrs AS $k => $v) {
+                foreach ($attrs as $k => $v) {
                     if ($block != '') {
                         $block .= ' ';
                     }
@@ -252,6 +266,12 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
     return $attrs;
 }
 
+/**
+ * @param $haystack
+ * @param $needles
+ *
+ * @return bool|int
+ */
 function smarty_prefilter_t_strpos_multi($haystack, $needles)
 {
     $arg = func_get_args();
@@ -274,6 +294,14 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
     return $start;
 }
 
+/**
+ * @param $message
+ * @param $attrs
+ * @param $smarty
+ * @param $line
+ *
+ * @return string
+ */
 function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
 {
     global $opt, $translate;
@@ -304,7 +332,7 @@ function smarty_prefilter_t_gettext($message, $attrs, &$smarty, $line)
             $trans = mb_ereg_replace('%' . $number, $smarty->left_delimiter . $attr . $smarty->right_delimiter, $trans);
         }
 
-        $number ++;
+        $number++;
     }
 
     return $trans;

@@ -7,25 +7,42 @@
  *  This modules gives you a very usefull SQL debugger for MySQL ...
  ***************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/bench.inc.php';
+use Oc\Util\CBench;
 
 $sqldebugger = new sqldebugger();
 
+/**
+ * Class sqldebugger
+ */
 class sqldebugger
 {
     public $commands = array();
     public $cancel = false;
 
+    /**
+     * @return bool
+     */
     public function getCancel()
     {
         return $this->cancel;
     }
 
+    /**
+     * @return array
+     */
     public function getCommands()
     {
         return $this->commands;
     }
 
+    /**
+     * @param $sql
+     * @param $dblink
+     * @param $bQuerySlave
+     * @param $sServer
+     *
+     * @return resource
+     */
     public function execute($sql, $dblink, $bQuerySlave, $sServer)
     {
         global $db;
@@ -88,7 +105,7 @@ class sqldebugger
         // dont use query cache!
         $sql = $this->insert_nocache($sql);
 
-        $bSqlExecution = new Cbench;
+        $bSqlExecution = new CBench;
         $bSqlExecution->start();
         $rsResult = mysql_query($sql, $dblink);
         $bSqlExecution->stop();
@@ -100,13 +117,18 @@ class sqldebugger
             $command['warnings'][] = $r['Message'];
         }
 
-        $command['runtime'] = $bSqlExecution->Diff();
+        $command['runtime'] = $bSqlExecution->diff();
 
         $this->commands[] = $command;
 
         return $rsResult;
     }
 
+    /**
+     * @param string $sql
+     *
+     * @return string
+     */
     public function strip_temptable($sql)
     {
         $start = stripos($sql, 'SELECT ');
@@ -118,6 +140,11 @@ class sqldebugger
         return substr($sql, $start);
     }
 
+    /**
+     * @param string $sql
+     *
+     * @return string
+     */
     public function strip_from($sql)
     {
         $start = stripos($sql, 'FROM ');
@@ -129,6 +156,11 @@ class sqldebugger
         return 'SELECT * ' . substr($sql, $start);
     }
 
+    /**
+     * @param string $sql
+     *
+     * @return string
+     */
     public function insert_nocache($sql)
     {
         if (strtoupper(substr($sql, 0, 7)) == 'SELECT ') {

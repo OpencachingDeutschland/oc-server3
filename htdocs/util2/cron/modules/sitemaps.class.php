@@ -61,6 +61,9 @@ class sitemaps
         $this->ping_searchengine('http://www.bing.com/webmaster/ping.aspx?siteMap=' . $url);
     }
 
+    /**
+     * @param string $url
+     */
     public function ping_searchengine($url)
     {
         $curl = curl_init($url);

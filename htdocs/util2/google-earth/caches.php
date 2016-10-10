@@ -10,33 +10,30 @@
 header('Content-type: text/html; charset=utf-8');
 
 $opt['rootpath'] = '../../';
-require $opt['rootpath'] . 'lib2/web.inc.php';
-require $opt['rootpath'] . 'templates2/ocstyle/search.tpl.inc.php';
+require __DIR__ . '/../../lib2/web.inc.php';
+require __DIR__ . '/../../templates2/ocstyle/search.tpl.inc.php';
 
-$bbox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
-$abox = mb_split(',', $bbox);
+$bBox = isset($_REQUEST['BBOX']) ? $_REQUEST['BBOX'] : '0,0,0,0';
+$aBox = mb_split(',', $bBox);
 
-if (count($abox) != 4) {
-    exit;
-}
-
-if (!is_numeric($abox[0])) {
-    exit;
-}
-if (!is_numeric($abox[1])) {
-    exit;
-}
-if (!is_numeric($abox[2])) {
-    exit;
-}
-if (!is_numeric($abox[3])) {
+if (count($aBox) != 4) {
     exit;
 }
 
-$lat_from = $abox[1];
-$lon_from = $abox[0];
-$lat_to = $abox[3];
-$lon_to = $abox[2];
+if (!is_numeric($aBox[0])) {
+    exit;
+}
+if (!is_numeric($aBox[1])) {
+    exit;
+}
+if (!is_numeric($aBox[2])) {
+    exit;
+}
+if (!is_numeric($aBox[3])) {
+    exit;
+}
+
+list($lonFrom, $latFrom, $latTo, $lonTo) = $aBox;
 
 /*
  kml processing
@@ -194,8 +191,8 @@ $kmlTimeFormat = 'Y-m-d\TH:i:s\Z';
 
 echo mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $kmlHead);
 
-if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2)) {
-    echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to);
+if ((abs($lonFrom - $lonTo) > 2) || (abs($latFrom - $latTo) > 2)) {
+    echoZoomIn($lonFrom, $lonTo, $latFrom, $latTo);
 } else {
     $rs = sql(
         "SELECT `caches`.`cache_id` AS `cacheid`,
@@ -224,52 +221,52 @@ if ((abs($lon_from - $lon_to) > 2) || (abs($lat_from - $lat_to) > 2)) {
                                             `caches`.`latitude`>='&3' AND
                                             `caches`.`latitude`<='&4' AND
                                             `stt_type`.`lang`='&5' AND `stt_size`.`lang`='&5'",
-        $lon_from,
-        $lon_to,
-        $lat_from,
-        $lat_to,
+        $lonFrom,
+        $lonTo,
+        $latFrom,
+        $latTo,
         $opt['template']['locale']
     );
 
     $nCount = 0;
     while ($r = sql_fetch_array($rs)) {
-        $nCount = $nCount + 1;
-        $thisline = $kmlLine;
+        $nCount++;
+        $thisLine = $kmlLine;
 
-        $typeimgurl = '<img src="' . $opt['page']['default_absolute_url'] . 'resource2/' . $opt['template']['style'] . '/images/cacheicon/' . $r['icon_large'] . '" alt="' . $r['typedesc'] . '" title="' . $r['typedesc'] . '" />';
+        $typeImgUrl = '<img src="' . $opt['page']['default_absolute_url'] . 'resource2/' . $opt['template']['style'] . '/images/cacheicon/' . $r['icon_large'] . '" alt="' . $r['typedesc'] . '" title="' . $r['typedesc'] . '" />';
 
-        $thisline = mb_ereg_replace('{icon}', $r['kml_name'], $thisline);
-        $thisline = mb_ereg_replace('{typeimgurl}', $typeimgurl, $thisline);
+        $thisLine = mb_ereg_replace('{icon}', $r['kml_name'], $thisLine);
+        $thisLine = mb_ereg_replace('{typeimgurl}', $typeImgUrl, $thisLine);
 
         $lat = sprintf('%01.5f', $r['latitude']);
-        $thisline = mb_ereg_replace('{lat}', $lat, $thisline);
+        $thisLine = mb_ereg_replace('{lat}', $lat, $thisLine);
 
         $lon = sprintf('%01.5f', $r['longitude']);
-        $thisline = mb_ereg_replace('{lon}', $lon, $thisline);
+        $thisLine = mb_ereg_replace('{lon}', $lon, $thisLine);
 
         $time = date($kmlTimeFormat, strtotime($r['date_hidden']));
-        $thisline = mb_ereg_replace('{time}', $time, $thisline);
+        $thisLine = mb_ereg_replace('{time}', $time, $thisLine);
 
-        $thisline = mb_ereg_replace('{name}', xmlentities($r['name']), $thisline);
+        $thisLine = mb_ereg_replace('{name}', xmlentities($r['name']), $thisLine);
 
-        $thisline = mb_ereg_replace('{type}', xmlentities($r['typedesc']), $thisline);
-        $thisline = mb_ereg_replace('{size}', xmlentities($r['sizedesc']), $thisline);
+        $thisLine = mb_ereg_replace('{type}', xmlentities($r['typedesc']), $thisLine);
+        $thisLine = mb_ereg_replace('{size}', xmlentities($r['sizedesc']), $thisLine);
 
         $difficulty = sprintf('%01.1f', $r['difficulty'] / 2);
-        $thisline = mb_ereg_replace('{difficulty}', $difficulty, $thisline);
+        $thisLine = mb_ereg_replace('{difficulty}', $difficulty, $thisLine);
 
         $terrain = sprintf('%01.1f', $r['terrain'] / 2);
-        $thisline = mb_ereg_replace('{terrain}', $terrain, $thisline);
+        $thisLine = mb_ereg_replace('{terrain}', $terrain, $thisLine);
 
         $time = date($kmlTimeFormat, strtotime($r['date_hidden']));
-        $thisline = mb_ereg_replace('{time}', $time, $thisline);
+        $thisLine = mb_ereg_replace('{time}', $time, $thisLine);
 
-        $thisline = mb_ereg_replace('{username}', xmlentities($r['username']), $thisline);
-        $thisline = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisline);
+        $thisLine = mb_ereg_replace('{username}', xmlentities($r['username']), $thisLine);
+        $thisLine = mb_ereg_replace('{cacheid}', xmlentities($r['cacheid']), $thisLine);
 
-        $thisline = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisline);
+        $thisLine = mb_ereg_replace('{urlbase}', xmlentities($opt['page']['default_absolute_url']), $thisLine);
 
-        echo $thisline;
+        echo $thisLine;
     }
     sql_free_result($rs);
 }
@@ -311,17 +308,19 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
 ';
 
     // prepare lines
-    $sZoomIn = str_replace("\r", "", $sZoomIn);
+    $sZoomIn = str_replace("\r", '', $sZoomIn);
     $sLines = mb_split("\n", $sZoomIn);
-    for ($i = 0; $i < count($sLines); $i ++) {
+    $countSLines = count($sLines);
+    for ($i = 0; $i < $countSLines; $i++) {
         $sLines[$i] = str_pad($sLines[$i], ($nColumnsCount - 1), ' ');
     }
 
     $nDegreePerLine = ($lat_to - $lat_from) / count($sLines);
     $nDegreePerColumn = ($lon_to - $lon_from) / $nColumnsCount;
 
-    for ($nLine = 0; $nLine < count($sLines); $nLine ++) {
-        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn ++) {
+    $countSLines = count($sLines);
+    for ($nLine = 0; $nLine < $countSLines; $nLine++) {
+        for ($nColumn = 0; $nColumn < $nColumnsCount; $nColumn++) {
             if (substr($sLines[$nLine], $nColumn, 1) == '#') {
                 $nLat = $lat_to - $nDegreePerLine * $nLine;
                 $nLon = $lon_from + $nDegreePerColumn * $nColumn;

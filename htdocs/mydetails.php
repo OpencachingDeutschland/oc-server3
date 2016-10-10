@@ -128,6 +128,9 @@ function display()
 }
 
 
+/**
+ * @param boolean $include_editor
+ */
 function assignFromDB($userid, $include_editor)
 {
     global $tpl, $opt, $smilies, $_REQUEST;

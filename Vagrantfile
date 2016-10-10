@@ -2,10 +2,10 @@
 # vi: set ft=ruby :
 
 VM_IP		= "10.10.0.101"   # IP of the VM, must be unique in your network
-VM_MEMORY	= 512
+VM_MEMORY	= 1024
 VM_CPUS		= 1
 VM_NAME		= "OpenCaching DEV VM"
-VM_HOST		= "local.opencaching.de"
+VM_HOST		= "local.team-opencaching.de"
 
 if Vagrant::Util::Platform.windows?
   HOSTS_FILE = ENV['SystemRoot'] + '\system32\drivers\etc\hosts'
@@ -33,6 +33,7 @@ Vagrant.configure(2) do |config|
 	config.vm.synced_folder "local/", 	"/var/www/html/local",	type: SYNCED_FOLDER_TYPE
 	config.vm.synced_folder "sql/", 	"/var/www/html/sql",	type: SYNCED_FOLDER_TYPE
 	config.vm.synced_folder "tests/", 	"/var/www/html/tests",	type: SYNCED_FOLDER_TYPE
+	config.vm.synced_folder "build/", 	"/var/www/html/build",	type: SYNCED_FOLDER_TYPE
 	if SYNCED_FOLDER_TYPE == "nfs"
 		config.nfs.map_uid = Process.uid
 		config.nfs.map_gid = Process.gid

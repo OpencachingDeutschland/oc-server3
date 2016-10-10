@@ -5,13 +5,12 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-require_once __DIR__. '/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class mail extends Smarty
 {
     public $name = 'sys_nothing';
     public $main_template = 'sys_main';
-    public $compile_id = null;
     public $recipient_locale = null;
 
     public $from = '';
@@ -23,6 +22,9 @@ class mail extends Smarty
 
     public $headers = array();
 
+    /**
+     * mail constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -50,6 +52,9 @@ class mail extends Smarty
         $this->from = $opt['mail']['from'];
     }
 
+    /**
+     * @return string
+     */
     public function get_compile_id()
     {
         global $opt;
@@ -57,6 +62,10 @@ class mail extends Smarty
         return 'mail|' . $opt['template']['locale'] . '|' . $this->compile_id;
     }
 
+    /**
+     * @param $name
+     * @param $rs
+     */
     public function assign_rs($name, $rs)
     {
         $items = array();
@@ -66,6 +75,11 @@ class mail extends Smarty
         $this->assign($name, $items);
     }
 
+    /**
+     * @param bool $page_url
+     *
+     * @return bool
+     */
     public function send($page_url = false)
     {
         global $tpl, $opt;
@@ -125,38 +139,44 @@ class mail extends Smarty
             $aAddHeaders[] = 'Return-Path: ' . $this->returnPath;
         }
 
-        $mailheaders = implode("\n", array_merge($aAddHeaders, $this->headers));
+        $mailHeaders = implode("\n", array_merge($aAddHeaders, $this->headers));
 
-        return mb_send_mail($this->to, $opt['mail']['subject'] . $this->subject, $body, $mailheaders);
+        return mb_send_mail($this->to, $opt['mail']['subject'] . $this->subject, $body, $mailHeaders);
     }
 
+    /**
+     * @param string $domain
+     *
+     * @return bool
+     */
     public static function is_existent_maildomain($domain)
     {
-        if ($domain == "localhost") {
+        if ($domain === 'localhost') {
             return true;
         }  // allow maintenance mails e.g. to root
 
-        $smtp_serverlist = array();
-        $smtp_serverweight = array();
+        $smtpServerList = [];
+        $smtpServerWeight = [];
 
-        if (getmxrr($domain, $smtp_serverlist, $smtp_serverweight) != false) {
-            if (count($smtp_serverlist) > 0) {
-                return true;
-            }
+        if (getmxrr($domain, $smtpServerList, $smtpServerWeight) !== false && count($smtpServerList) > 0) {
+            return true;
+
         }
 
         // check if A exists
         $a = dns_get_record($domain, DNS_A);
-        if (count($a) > 0) {
-            return true;
-        }
 
-        return false;
+        return count($a) > 0;
     }
 
+    /**
+     * @param string $mail
+     *
+     * @return string
+     */
     public static function getToMailDomain($mail)
     {
-        if ($mail == '') {
+        if ($mail === '') {
             return '';
         }
 

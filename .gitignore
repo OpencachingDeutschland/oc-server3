@@ -17,6 +17,7 @@
 
 # files created when running the OC software
 /htdocs/cache2/*
+/htdocs/opencaching_dump.sql
 /htdocs/cache/*
 /htdocs/download/*
 /htdocs/images/statpics/*
@@ -52,3 +53,7 @@ Thumbs.db
 parameters.yml
 .crowdin.yaml
 htdocs/app/Resources/translations
+
+/htdocs/bin/*.zip
+/htdocs/bin/translation
+/build/logs

@@ -23,18 +23,16 @@
 
             <h1>Per PayPal spenden:</h1>
 
-            <p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) betragen die Geb&uuml;hren f&uuml;r uns 1,9% + 0,35 &euro;.
-            So erreichen uns von einer 2,- &euro; Spende 1,61 &euro; (~80%) und von einer 10,- &euro; Spende 9,46 &euro; (~95%).</p>
+            <p>Bei einer Spende &uuml;ber PayPal (Spenden-Button) fallen <strong>keine</strong> Gebühren an.</p>
 
-            <p>Um per Paypal zu spenden, bitte auf folgendes Bild klicken:<br />
+            <p>
+                Um per PayPal zu spenden, bitte auf folgendes Bild klicken:<br />
                 <div style="margin-left:50px;">
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <input type="hidden" name="cmd" value="_s-xclick" />
-                        <input type="hidden" name="hosted_button_id" value="EP7T62APWTCU6" />
-                        <input type="image" src="resource2/{$opt.template.style}/images/misc/donate.gif" border="0" name="submit" alt="Mit PayPal bezahlen" />
-                    </form>
+                    <a href="https://www.paypal.me/opencaching">
+                        <img src="resource2/{$opt.template.style}/images/misc/donate.gif" border="0" alt="Mit PayPal bezahlen" />
+                    </a>
                 </div>
-            </p></p>
+            </p>
 
             <h1>Per Flattr spenden:</h1>
 

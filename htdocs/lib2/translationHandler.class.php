@@ -7,20 +7,27 @@
 
 $translationHandler = new TranslationHandler();
 
+/**
+ * Class TranslationHandler
+ */
 class TranslationHandler
 {
-    /* create all files in cache2/translate
+    /**
+     * create all files in cache2/translate
      */
     public function createMessageFiles()
     {
-        $rs = sqlf("SELECT DISTINCT `lang` FROM `sys_trans_text`");
+        $rs = sqlf('SELECT DISTINCT `lang` FROM `sys_trans_text`');
         while ($r = sql_fetch_assoc($rs)) {
             $this->createMessageFile($r['lang']);
         }
         sql_free_result($rs);
     }
 
-    /* create file in cache2/translate/$language/LC_MESSAGES/...
+    /**
+     * create file in cache2/translate/$language/LC_MESSAGES/...
+     *
+     * @param $language
      */
     private function createMessageFile($language)
     {
@@ -100,7 +107,12 @@ class TranslationHandler
         }
     }
 
-    /* escape string for po-file
+    /**
+     * escape string for po-file
+     *
+     * @param $text
+     *
+     * @return string
      */
     private function escape_text($text)
     {
@@ -115,6 +127,11 @@ class TranslationHandler
         return $text;
     }
 
+    /**
+     * @param $text
+     *
+     * @return string
+     */
     private function prepare_text($text)
     {
         $text = mb_ereg_replace("\t", ' ', $text);
@@ -127,7 +144,12 @@ class TranslationHandler
         return $text;
     }
 
-    /* add text to database
+    /**
+     * add text to database
+     *
+     * @param $text
+     * @param $resource_name
+     * @param $line
      */
     public function addText($text, $resource_name, $line)
     {
@@ -153,7 +175,8 @@ class TranslationHandler
         );
     }
 
-    /* clear sys_trans_ref to begin new translation of resource
+    /**
+     * clear sys_trans_ref to begin new translation of resource
      */
     public function clearReferences()
     {
@@ -161,7 +184,12 @@ class TranslationHandler
         sqlf("DELETE FROM `sys_trans_ref`");
     }
 
-    /* import strings from given field to sys_trans_text
+    /**
+     * import strings from given field to sys_trans_text
+     *
+     * @param $table
+     * @param string $fname
+     * @param string $fid
      */
     public function importFromTable($table, $fname = 'name', $fid = 'trans_id')
     {
@@ -204,7 +232,14 @@ class TranslationHandler
         );
     }
 
-    /* import variables for substition from config2/nodetext/
+    /**
+     * import variables for substition from config2/nodetext/
+     *
+     * @param $variables
+     * @param $file
+     * @param $language
+     *
+     * @return bool
      */
     public function loadNodeTextFile(&$variables, $file, $language)
     {
@@ -232,12 +267,19 @@ class TranslationHandler
         return false;
     }
 
+    /**
+     * @param $variables
+     * @param $lang
+     * @param $str
+     *
+     * @return string
+     */
     public function substitueVariables(&$variables, $lang, $str)
     {
-        $langstr = $str;
+        $langStr = $str;
 
         // replace variables in string
-        if (mb_ereg_search_init($langstr)) {
+        if (mb_ereg_search_init($langStr)) {
             while (false != $vars = mb_ereg_search_regs("%[^%]*%")) {
                 foreach ($vars as $curly_pattern) {
                     // $curly_pattern contatins %pattern% in replacement string
@@ -248,13 +290,13 @@ class TranslationHandler
                         if (isset($variables[$lang][$pattern])) {
                             $pattern_replacement = $variables[$lang][$pattern];
 
-                            $langstr = mb_ereg_replace($curly_pattern, $pattern_replacement, $langstr);
+                            $langstr = mb_ereg_replace($curly_pattern, $pattern_replacement, $langStr);
                         }
                     }
                 }
             }
         }
 
-        return $langstr;
+        return $langStr;
     }
 }

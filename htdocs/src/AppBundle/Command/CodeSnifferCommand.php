@@ -23,6 +23,7 @@ class CodeSnifferCommand extends AbstractCommand
 
     /**
      * @return void
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
     {
@@ -43,11 +44,14 @@ class CodeSnifferCommand extends AbstractCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
      * @return int|null
+     * @throws \Symfony\Component\Process\Exception\RuntimeException
+     * @throws \Symfony\Component\Process\Exception\LogicException
+     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $command = $input->getOption(self::OPTION_FIX) ? 'phpcbf' : 'phpcs';
-        $cmd = 'vendor/bin/' . ($command) . ' -s --standard=../tests/ruleset.xml';
+        $cmd = 'vendor/bin/' . ($command) . ' -n -p --colors -s --standard=../tests/ruleset.xml';
         if ($input->getOption(self::OPTION_DIR)) {
             $cmd .= ' ' . $input->getOption(self::OPTION_DIR);
         }

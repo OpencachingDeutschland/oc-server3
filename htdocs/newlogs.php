@@ -69,7 +69,7 @@ if (isset($ownerid)) {
     $tpl->cache_lifetime = 900;
     $tpl->cache_id = $exclude_country;
     $logcount = 250;
-    $paging = false;  // paging would have poor performance for all logs
+    $paging = false; // paging would have poor performance for all logs
     $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
 } else {
     // latest logs for all countries or for one country
@@ -88,7 +88,7 @@ if (isset($ownerid)) {
     $tpl->cache_lifetime = 300;
     $tpl->cache_id = $country;
     $logcount = 250;
-    $paging = false;  // paging would have poor performance for all logs
+    $paging = false; // paging would have poor performance for all logs
     $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
     $optimize_for_latest_logs = ($country == '' || $country == $opt['page']['main_country']);
 }
@@ -247,7 +247,7 @@ if (!$tpl->is_cached()) {
             }
             sql_free_result($rsPic);
         }
-        $pics --;
+        $pics--;
 
         $rLog['first'] = false;
         if (isset($caches_logged)) {

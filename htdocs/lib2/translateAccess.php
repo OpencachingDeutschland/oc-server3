@@ -7,10 +7,16 @@
 
 require_once __DIR__ . '/logic/const.inc.php';
 
+/**
+ * Class translateAccess
+ */
 class translateAccess
 {
     private $languages = false;
 
+    /**
+     * @return bool
+     */
     public function hasAccess()
     {
         global $login;
@@ -22,6 +28,11 @@ class translateAccess
         }
     }
 
+    /**
+     * @param $language
+     *
+     * @return bool
+     */
     public function mayTranslate($language)
     {
         global $login;
@@ -33,6 +44,9 @@ class translateAccess
         }
     }
 
+    /**
+     * @return bool
+     */
     private function getLanguages()
     {
         if ($this->languages === false) {
@@ -42,6 +56,9 @@ class translateAccess
         return $this->languages;
     }
 
+    /**
+     *
+     */
     private function loadLanguages()
     {
         global $login;

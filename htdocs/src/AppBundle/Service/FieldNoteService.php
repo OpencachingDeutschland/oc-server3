@@ -3,6 +3,7 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\FieldNote;
+use AppBundle\Exception\WrongDateFormatException;
 use AppBundle\Exception\WrongFileFormatException;
 use AppBundle\Service\Interfaces\FieldNoteServiceInterface;
 use AppBundle\Service\Traits\ErrorTrait;
@@ -45,13 +46,16 @@ class FieldNoteService implements FieldNoteServiceInterface
      * @param null|\DateTime $ignoreBeforeDate
      *
      * @return bool
+     * @throws \AppBundle\Exception\WrongDateFormatException
      * @throws \AppBundle\Exception\WrongFileFormatException
      */
     public function importFromFile($fileName, $userId, DateTime $ignoreBeforeDate = null)
     {
         $content = file_get_contents($fileName);
+        $content = str_replace("\xFF\xFE", '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
         $rows = ArrayUtil::trimExplode("\n", $content);
+        $notFoundGeocacheCodes = [];
         foreach ($rows as $row) {
             $data = str_getcsv($row, ',', '"', '""');
             if (count($data) !== 4) {
@@ -60,11 +64,7 @@ class FieldNoteService implements FieldNoteServiceInterface
                 );
             }
 
-            $date = DateTime::createFromFormat(
-                self::FIELD_NOTE_DATETIME_FORMAT,
-                $data[1],
-                new DateTimeZone('UTC')
-            );
+            $date = $this->getDate($data[1]);
 
             if ($ignoreBeforeDate !== null && $date < $ignoreBeforeDate) {
                 continue;
@@ -78,12 +78,31 @@ class FieldNoteService implements FieldNoteServiceInterface
                 continue;
             }
             $type = self::LOG_TYPE[$data[2]];
-            
-            $geocache = $this->entityManager->getRepository('AppBundle:Geocache')->findOneBy(['wpOc' => $data[0]]);
+
+            if (strtoupper(substr($data[0], 0, 2)) == 'GC') {
+                $query = $this->entityManager->createQueryBuilder()
+                    ->select('g')
+                    ->from('AppBundle:Geocache', 'g')
+                    ->where("IFELSE(g.wpGcMaintained = '', g.wpGc, g.wpGcMaintained) = :code")
+                    ->setParameter('code', $data[0])
+                    ->getQuery();
+                $geocache = $query->getOneOrNullResult();
+            } else {
+                $geocache = $this->entityManager->getRepository('AppBundle:Geocache')->findOneBy(['wpOc' => $data[0]]);
+            }
             if (!$geocache) {
+                $notFoundGeocacheCodes[] = $data[0];
                 $this->addError(
                     /** @Desc("Geocache ""%code%"" not found.") */
-                    $this->translator->trans('field_notes.error.geocache_not_found', ['%code%' => $data[0]])
+                    $this->translator->transChoice(
+                        'field_notes.error.geocache_not_found',
+                        count($notFoundGeocacheCodes),
+                        ['%code%' => ArrayUtil::humanLangImplode(
+                            $notFoundGeocacheCodes,
+                            $this->translator->trans('array_util.human_lang_implode.and')
+                        )]
+                    ),
+                    'geocache-not-found'
                 );
                 continue;
             }
@@ -140,5 +159,36 @@ class FieldNoteService implements FieldNoteServiceInterface
         }
 
         return $max;
+    }
+
+    /**
+     * @param string $dateString
+     *
+     * @throws \AppBundle\Exception\WrongDateFormatException
+     * @return \DateTime
+     */
+    protected function getDate($dateString)
+    {
+        $format = null;
+        if (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}Z/', $dateString)) {
+            $format = self::FIELD_NOTE_DATETIME_FORMAT_SHORT;
+        } elseif (preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z/', $dateString)) {
+            $format = self::FIELD_NOTE_DATETIME_FORMAT;
+        }
+
+        if ($format === null) {
+            throw new WrongDateFormatException(
+                $this->translator->trans('field_notes.error.wrong_date_format')
+            );
+        }
+
+        $date = DateTime::createFromFormat(
+            $format,
+            $dateString,
+            new DateTimeZone('UTC')
+        );
+        $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
+
+        return $date;
     }
 }

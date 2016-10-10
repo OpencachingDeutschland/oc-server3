@@ -19,13 +19,13 @@ if (!isset($opt['rootpath'])) {
 }
 
 // chicken-egg problem ...
-require_once $opt['rootpath'] . 'lib2/const.inc.php';
+require_once __DIR__ . '/const.inc.php';
 
 // do all output in HTML format
 $opt['gui'] = GUI_HTML;
 
 // include the main library
-require_once $opt['rootpath'] . 'lib2/common.inc.php';
+require_once __DIR__ . '/common.inc.php';
 
 // enforce http or https?
 if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
@@ -38,6 +38,9 @@ if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
         $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
     }
     $opt['page']['force_https_login'] = true;
+} elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
+    // during login was https active -> session data is https only -> redirect to https
+    $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
 }
 
 
@@ -53,39 +56,39 @@ function helppageurl($ocpage)
     $help_locale = $opt['template']['locale'];
     $helppage = sql_value(
         "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-        "",
+        '',
         $ocpage,
         $help_locale
     );
-    if ($helppage == "") {
+    if ($helppage == '') {
         $helppage = sql_value(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
-            "",
+            '',
             $ocpage
         );
     }
-    if ($helppage == "") {
+    if ($helppage == '') {
         $helppage = sql_value(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-            "",
+            '',
             $ocpage,
             $opt['template']['default']['fallback_locale']
         );
-        if ($helppage != "") {
+        if ($helppage != '') {
             $help_locale = $opt['template']['default']['fallback_locale'];
         }
     }
 
-    if ($helppage == "" && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage])) {
+    if ($helppage == '' && isset($opt['locale'][$opt['template']['locale']]['help'][$ocpage])) {
         $helppage = $opt['locale'][$opt['template']['locale']]['help'][$ocpage];
     }
 
-    if (substr($helppage, 0, 1) == "!") {
+    if (substr($helppage, 0, 1) == '!') {
         substr($helppage, 1);
-    } elseif ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki'])) {
+    } elseif ($helppage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
         return $opt['locale'][$help_locale]['helpwiki'] . str_replace(' ', '_', $helppage);
     } else {
-        return "";
+        return '';
     }
 }
 
@@ -94,12 +97,12 @@ function helppagelink($ocpage, $title = 'Instructions')
     global $translate;
 
     $helpurl = helppageurl($ocpage);
-    if ($helpurl == "") {
-        return "";
+    if ($helpurl == '') {
+        return '';
     } else {
         $imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
-        $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
+        $imgtitle = 'alt="' . $imgtitle . '" title="' . $imgtitle . '"';
 
-        return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
+        return '<a class="nooutline" href="' . $helpurl . '" ' . $imgtitle . ' target="_blank">';
     }
 }

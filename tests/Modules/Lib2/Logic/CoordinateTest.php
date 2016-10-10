@@ -30,7 +30,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         global $opt;
-        $opt['lib']['w3w']['apikey'] = 'GETAPIKEY';
+        $opt['lib']['w3w']['apikey'] = 'X27PDW41';
     }
 
 

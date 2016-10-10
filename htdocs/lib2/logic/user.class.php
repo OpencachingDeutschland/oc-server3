@@ -143,6 +143,9 @@ class user
         return $this->reUser->getValue('username');
     }
 
+    /**
+     * @param string $value
+     */
     public function setUsername($value)
     {
         if (!mb_ereg_match(REGEX_USERNAME, $value)) {
@@ -210,6 +213,9 @@ class user
         return $this->reUser->getValue('first_name');
     }
 
+    /**
+     * @param string $value
+     */
     public function setFirstName($value)
     {
         if ($value != '') {
@@ -226,6 +232,9 @@ class user
         return $this->reUser->getValue('last_name');
     }
 
+    /**
+     * @param string $value
+     */
     public function setLastName($value)
     {
         if ($value != '') {
@@ -275,6 +284,9 @@ class user
         return $this->reUser->getValue('latitude');
     }
 
+    /**
+     * @param double $value
+     */
     public function setLatitude($value)
     {
         if (($value + 0) > 90 || ($value + 0) < - 90) {
@@ -289,6 +301,9 @@ class user
         return $this->reUser->getValue('longitude');
     }
 
+    /**
+     * @param double $value
+     */
     public function setLongitude($value)
     {
         if (($value + 0) > 180 || ($value + 0) < - 180) {
@@ -303,6 +318,9 @@ class user
         return $this->reUser->getValue('notify_radius');
     }
 
+    /**
+     * @param integer $value
+     */
     public function setNotifyRadius($value)
     {
         if (($value + 0) < 0 || ($value + 0) > 150) {
@@ -317,6 +335,9 @@ class user
         return $this->reUser->getValue('notify_oconly') != 0;
     }
 
+    /**
+     * @param boolean $value
+     */
     public function setNotifyOconly($value)
     {
         return $this->reUser->setValue('notify_oconly', $value ? 1 : 0);
@@ -397,6 +418,9 @@ class user
         return $this->reUser->getValue('new_pw_code');
     }
 
+    /**
+     * @param string|null $value
+     */
     public function setNewPWCode($value)
     {
         return $this->reUser->setValue('new_pw_code', $value);
@@ -407,6 +431,9 @@ class user
         return $this->reUser->getValue('new_pw_date');
     }
 
+    /**
+     * @param integer|null $value
+     */
     public function setNewPWDate($value)
     {
         return $this->reUser->setValue('new_pw_date', $value);
@@ -417,6 +444,9 @@ class user
         return $this->reUser->getValue('new_email_code');
     }
 
+    /**
+     * @param string|null $value
+     */
     public function setNewEMailCode($value)
     {
         return $this->reUser->setValue('new_email_code', $value);
@@ -427,6 +457,9 @@ class user
         return $this->reUser->getValue('new_email_date');
     }
 
+    /**
+     * @param integer|null $value
+     */
     public function setNewEMailDate($value)
     {
         return $this->reUser->setValue('new_email_date', $value);
@@ -493,6 +526,9 @@ class user
         return $this->reUser->getValue('watchmail_nextmail');
     }
 
+    /**
+     * @param string $value
+     */
     public function setWatchmailNext($value)
     {
         return $this->reUser->setValue('watchmail_nextmail', $value);

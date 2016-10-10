@@ -5,15 +5,24 @@
  *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
+/**
+ * Class translate_filescan
+ */
 class translate_filescan
 {
     private $msFilename;
     private $msContent;
     public $textlist;
 
+    /**
+     * translate_filescan constructor.
+     *
+     * @param $sFilename
+     */
     public function __construct($sFilename)
     {
-        $this->filelist = array();
+        $this->filelist = [];
         $this->msFilename = $sFilename;
 
         $sContent = '';
@@ -76,6 +85,12 @@ class translate_filescan
         }
     }
 
+    /**
+     * @param $sCode
+     * @param $nStartSearch
+     *
+     * @return bool|int
+     */
     public function findEndOfPHPString($sCode, $nStartSearch)
     {
         $nEnd = 0;
@@ -116,6 +131,11 @@ class translate_filescan
     }
 
     // TODO: performance ... scan once at __construct and store line positions
+    /**
+     * @param $nPos
+     *
+     * @return int
+     */
     public function findLineOfPos($nPos)
     {
         $nLine = 1;

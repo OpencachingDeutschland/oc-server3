@@ -157,8 +157,8 @@ class coordinate
                 0
             ];
         }
-        $lw = (float) $this->nLon;
-        $bw = (float) $this->nLat;
+        $lw = (float)$this->nLon;
+        $bw = (float)$this->nLat;
 
         //WGS84 Datum
         //Große Halbachse a und Abplattung f
@@ -177,9 +177,9 @@ class coordinate
 
         //Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         //Längenzone lz und Breitenzone (Band) bz
         $lzn = intval(($lw + 180) / 6) + 1;
@@ -205,7 +205,7 @@ class coordinate
         if ($lzn < 10) {
             $lz = "0" . $lzn;
         }
-        $bd = (int) (1 + ($bw + 80) / 8);
+        $bd = (int)(1 + ($bw + 80) / 8);
         $bz = substr($b_sel, $bd - 1, 1);
 
         //Geographische Breite in Radianten br
@@ -250,20 +250,20 @@ class coordinate
         $ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
                 $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
 
-        $nk = $nw - (int) $nw;
+        $nk = $nw - (int)$nw;
         if ($nk < 0.5) {
-            $nw = '' . (int) $nw;
+            $nw = '' . (int)$nw;
         } else {
-            $nw = '' . ((int) $nw + 1);
+            $nw = '' . ((int)$nw + 1);
         }
 
         while (strlen($nw) < 7) {
             $nw = '0' . $nw;
         }
 
-        $nk = $ew - (int) $ew;
+        $nk = $ew - (int)$ew;
         if ($nk < 0.5) {
-            $ew = '0' . (int) $ew;
+            $ew = '0' . (int)$ew;
         } else {
             $ew = '0' . intval($ew + 1);
         }
@@ -285,6 +285,10 @@ class coordinate
         return 'R ' . floor($result[0]) . ' H ' . floor($result[1]);
     }
 
+    /**
+     * @param integer $bw
+     * @param integer $lw
+     */
     public function wgs2pot($bw, $lw)
     {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
@@ -313,8 +317,8 @@ class coordinate
                 0
             ];
         }
-        $lw = (float) $lw;
-        $bw = (float) $bw;
+        $lw = (float)$lw;
+        $bw = (float)$bw;
 
         // Quellsystem WGS 84 Datum
         // Große Halbachse a und Abplattung fq
@@ -392,8 +396,8 @@ class coordinate
                 0
             ];
         }
-        $lp = (float) $lp;
-        $bp = (float) $bp;
+        $lp = (float)$lp;
+        $bp = (float)$bp;
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
@@ -411,9 +415,9 @@ class coordinate
 
         // Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         // Breite in Radianten
         $br = $bp * pi() / 180;
@@ -451,18 +455,18 @@ class coordinate
         $rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
             $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
 
-        $nk = $hw - (int) $hw;
+        $nk = $hw - (int)$hw;
         if ($nk < 0.5) {
-            $hw = (int) $hw;
+            $hw = (int)$hw;
         } else {
-            $hw = ((int) $hw) + 1;
+            $hw = ((int)$hw) + 1;
         }
 
-        $nk = $rw - (int) $rw;
+        $nk = $rw - (int)$rw;
         if ($nk < 0.5) {
-            $rw = (int) $rw;
+            $rw = (int)$rw;
         } else {
-            $rw = (int) ($rw + 1);
+            $rw = (int)($rw + 1);
         }
 
         return [
@@ -481,8 +485,8 @@ class coordinate
         $lat_base = 52.15517440;
         $lon_base = 5.38720621;
 
-        for ($i = 0; $i <= 6; $i ++) {
-            for ($j = 0; $j <= 5; $j ++) {
+        for ($i = 0; $i <= 6; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 $rpq[$i][$j] = 0;
                 $spq[$i][$j] = 0;
             }
@@ -517,8 +521,8 @@ class coordinate
         $xOrigin = 0;
         $yOrigin = 0;
 
-        for ($q = 0; $q <= 5; $q ++) {
-            for ($p = 0; $p <= 6; $p ++) {
+        for ($q = 0; $q <= 5; $q++) {
+            for ($p = 0; $p <= 6; $p++) {
                 $xOrigin = $xOrigin + ($rpq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
                 $yOrigin = $yOrigin + ($spq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
             }
@@ -584,6 +588,9 @@ class coordinate
         ];
     }
 
+    /**
+     * @param string $name
+     */
     public static function parseRequestLat($name)
     {
         if (!isset($_REQUEST[$name . 'NS']) || !isset($_REQUEST[$name . 'Lat']) || !isset($_REQUEST[$name . 'LatMin'])) {
@@ -602,6 +609,9 @@ class coordinate
         return $lat;
     }
 
+    /**
+     * @param string $name
+     */
     public static function parseRequestLon($name)
     {
         if (!isset($_REQUEST[$name . 'EW']) || !isset($_REQUEST[$name . 'Lon']) || !isset($_REQUEST[$name . 'LonMin'])) {

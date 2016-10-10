@@ -5,11 +5,14 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+/**
+ * Class rowEditor
+ */
 class rowEditor
 {
     public $sTable;
     public $sAutoIncrementField = null;
-    public $pk;     // (idx:name; type, default, nullable, value, insertfunction)
+    public $pk; // (idx:name; type, default, nullable, value, insertfunction)
     public $fields; // (idx:name; type, default, nullable, value, changed, insertfunction)
 
     // status var
@@ -17,172 +20,250 @@ class rowEditor
     public $bExist = false;
     public $bAddNew = false;
 
-    /* primaryKey may be an array
+    /**
+     * primaryKey may be an array
+     *
+     * @param string $sTable
      */
     public function __construct($sTable)
     {
-        $this->pk = array();
-        $this->fields = array();
+        $this->pk = [];
+        $this->fields = [];
         $this->sTable = $sTable;
     }
 
+    /**
+     * @param string $sField
+     * @param boolean $bNullable
+     * @param integer $nInsertFunction
+     */
     public function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_INT,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
 
         if (($nInsertFunction & RE_INSERT_AUTOINCREMENT) == RE_INSERT_AUTOINCREMENT) {
             $this->sAutoIncrementField = $sField;
         }
     }
 
+    /**
+     * @param $sField
+     * @param $nDefault
+     * @param $bNullable
+     * @param int $nInsertFunction
+     */
     public function addPKFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_FLOAT,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param $sField
+     * @param $nDefault
+     * @param $bNullable
+     * @param int $nInsertFunction
+     */
     public function addPKDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_DOUBLE,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param $sField
+     * @param $sDefault
+     * @param $bNullable
+     * @param int $nInsertFunction
+     */
     public function addPKString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
         if (($nInsertFunction & RE_INSERT_AUTOUUID) == RE_INSERT_AUTOUUID) {
             die('rowEditor: RE_INSERT_AUTOUUID not supported for primary key fields');
         }
 
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_STRING,
             'default' => $sDefault,
             'nullable' => $bNullable,
             'value' => $sDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param $sField
+     * @param $bDefault
+     * @param $bNullable
+     * @param int $nInsertFunction
+     */
     public function addPKBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_BOOLEAN,
             'default' => $bDefault,
             'nullable' => $bNullable,
             'value' => $bDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param $sField
+     * @param $dDefault
+     * @param $bNullable
+     * @param int $nInsertFunction
+     */
     public function addPKDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->pk[$sField] = array(
+        $this->pk[$sField] = [
             'type' => RE_TYPE_DATE,
             'default' => $dDefault,
             'nullable' => $bNullable,
             'value' => $dDefault,
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param boolean $bNullable
+     * @param integer $nInsertFunction
+     */
     public function addInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_INT,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param integer $nDefault
+     * @param boolean $bNullable
+     */
     public function addFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_FLOAT,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param integer $nDefault
+     * @param boolean $bNullable
+     */
     public function addDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_DOUBLE,
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param boolean $bNullable
+     * @param integer $nInsertFunction
+     */
     public function addString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_STRING,
             'default' => $sDefault,
             'nullable' => $bNullable,
             'value' => $sDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param boolean $bNullable
+     */
     public function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_BOOLEAN,
             'default' => $bDefault,
             'nullable' => $bNullable,
             'value' => $bDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param string $sField
+     * @param boolean $bNullable
+     * @param integer $nInsertFunction
+     */
     public function addDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
-        $this->fields[$sField] = array(
+        $this->fields[$sField] = [
             'type' => RE_TYPE_DATE,
             'default' => $dDefault,
             'nullable' => $bNullable,
             'value' => $dDefault,
             'changed => false',
             'insertfunction' => $nInsertFunction
-        );
+        ];
     }
 
+    /**
+     * @param $sField
+     */
     public function removePK($sField)
     {
         unset($this->pk[$sField]);
     }
 
+    /**
+     * @param $sField
+     */
     public function removeField($sField)
     {
         unset($this->fields[$sField]);
     }
 
     /* PKValues may be an string, indized or ordered array
+     */
+    /**
+     * @param $PKValues
+     *
+     * @return bool
      */
     public function load($PKValues)
     {
@@ -210,6 +291,9 @@ class rowEditor
         return true;
     }
 
+    /**
+     * @param $PKValues
+     */
     public function addNew($PKValues)
     {
         $this->pSetPK($PKValues);
@@ -219,11 +303,17 @@ class rowEditor
         $this->bAddNew = true;
     }
 
+    /**
+     * @return bool
+     */
     public function exist()
     {
         return $this->bExist;
     }
 
+    /**
+     * @param mixed $PKValues
+     */
     public function pSetPK($PKValues)
     {
         $this->pResetValues();
@@ -243,6 +333,11 @@ class rowEditor
         }
     }
 
+    /**
+     * @param $index
+     *
+     * @return int|string
+     */
     public function pGetPKKey($index)
     {
         if (isset($this->pk[$index])) {
@@ -254,10 +349,13 @@ class rowEditor
             if ($i == $index) {
                 return $k;
             }
-            $i ++;
+            $i++;
         }
     }
 
+    /**
+     *
+     */
     public function pResetValues()
     {
         foreach ($this->fields as $k => $field) {
@@ -266,6 +364,12 @@ class rowEditor
         }
     }
 
+    /**
+     * @param $type
+     * @param $value
+     *
+     * @return bool|false|int|null
+     */
     public function pFormatValue($type, $value)
     {
         if ($value === null) {
@@ -289,6 +393,12 @@ class rowEditor
         return $value;
     }
 
+    /**
+     * @param $type
+     * @param $value
+     *
+     * @return false|int|string
+     */
     public function pFormatValueSql($type, $value)
     {
         if ($type == RE_TYPE_INT) {
@@ -310,14 +420,17 @@ class rowEditor
         return $value;
     }
 
+    /**
+     * @return string
+     */
     public function pBuildSelect()
     {
-        $fselect = array();
+        $fSelect = [];
         $sql = 'SELECT ';
         foreach ($this->fields as $k => $field) {
-            $fselect[] = '`' . sql_escape($k) . '`';
+            $fSelect[] = '`' . sql_escape($k) . '`';
         }
-        $sql .= join(', ', $fselect);
+        $sql .= join(', ', $fSelect);
 
         $sql .= ' FROM `' . sql_escape($this->sTable) . '`';
         $sql .= ' WHERE ' . $this->pBuildPK();
@@ -325,20 +438,28 @@ class rowEditor
         return $sql;
     }
 
+    /**
+     * @return string
+     */
     public function pBuildPK()
     {
-        $fwhere = array();
+        $fWhere = [];
         foreach ($this->pk as $k => $field) {
             if ($field['value'] === null) {
-                $fwhere[] = 'ISNULL(`' . sql_escape($k) . '`)';
+                $fWhere[] = 'ISNULL(`' . sql_escape($k) . '`)';
             } else {
-                $fwhere[] = '`' . sql_escape($k) . '`=\'' . sql_escape($field['value']) . '\'';
+                $fWhere[] = '`' . sql_escape($k) . '`=\'' . sql_escape($field['value']) . '\'';
             }
         }
 
-        return join(' AND ', $fwhere);
+        return join(' AND ', $fWhere);
     }
 
+    /**
+     * @param string $sField
+     *
+     * @return mixed
+     */
     public function getValue($sField)
     {
         if (isset($this->pk[$sField])) {
@@ -348,16 +469,29 @@ class rowEditor
         return $this->fields[$sField]['value'];
     }
 
+    /**
+     * @param $sField
+     *
+     * @return mixed
+     */
     public function getDefault($sField)
     {
         return $this->fields[$sField]['default'];
     }
 
+    /**
+     * @param string $sField
+     *
+     * @return mixed
+     */
     public function getChanged($sField)
     {
         return $this->fields[$sField]['changed'];
     }
 
+    /**
+     * @return bool
+     */
     public function getAnyChanged()
     {
         foreach ($this->fields as $field) {
@@ -367,6 +501,11 @@ class rowEditor
         }
     }
 
+    /**
+     * @param string $sField
+     *
+     * @return bool
+     */
     public function setValue($sField, $sValue)
     {
         if ($this->bLoaded == false || ($this->bAddNew == false && $this->bExist == false)) {
@@ -390,6 +529,9 @@ class rowEditor
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function save()
     {
         if ($this->bLoaded == false || ($this->bAddNew == false && $this->bExist == false)) {
@@ -422,7 +564,7 @@ class rowEditor
             /* reload the record to get the actual stored values
              * (inserted values maybe truncated by mysql or trigger could modify values)
              */
-            $pkv = array();
+            $pkv = [];
             foreach ($this->pk as $k => $v) {
                 $pkv[$k] = $this->pk[$k]['value'];
             }
@@ -453,19 +595,22 @@ class rowEditor
 
     public function reload()
     {
-        $pkv = array();
+        $pkv = [];
         foreach ($this->pk as $k => $v) {
             $pkv[$k] = $this->pk[$k]['value'];
         }
         $this->load($pkv);
     }
 
+    /**
+     * @return string
+     */
     public function pBuildInsert()
     {
         $sql = 'INSERT IGNORE INTO `' . sql_escape($this->sTable) . '` (';
 
-        $sFields = array();
-        $sValues = array();
+        $sFields = [];
+        $sValues = [];
 
         foreach ($this->pk as $k => $field) {
             if (isset($this->fields[$k])) {
@@ -526,6 +671,9 @@ class rowEditor
         return $sql;
     }
 
+    /**
+     * @return string
+     */
     public function pBuildUpdate()
     {
         $sql = 'UPDATE IGNORE `' . sql_escape($this->sTable) . '` SET ';
@@ -556,6 +704,11 @@ class rowEditor
         return $sql;
     }
 
+    /**
+     * @param string $field
+     *
+     * @return bool
+     */
     public function saveField($field)
     {
         if ($this->bLoaded == false || $this->bExist == false || $this->bAddNew == true) {

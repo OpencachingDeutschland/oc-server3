@@ -6,6 +6,7 @@
  *
  * For license information see doc/license.txt
  ****************************************************************************/
+use Oc\Util\CBench;
 
 /****************************************************************************
  *
@@ -369,8 +370,8 @@ function sql_internal($_dblink, $sql, $bSlave)
         $cSqlExecution->stop();
 
         if ($sql_warntime > 0 && $cSqlExecution->diff() > $sql_warntime) {
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : "";
-            sql_warn("execution took " . $cSqlExecution->diff() . " seconds" . $ua);
+            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+            sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
         }
     }
 

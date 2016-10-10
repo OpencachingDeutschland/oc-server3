@@ -35,6 +35,9 @@ class PresenterCoordinate
         $this->init(0, 0);
     }
 
+    /**
+     * @param boolean $request
+     */
     private function initRequest($request)
     {
         if ($request) {
@@ -44,6 +47,9 @@ class PresenterCoordinate
         return new RequestHttp();
     }
 
+    /**
+     * @param boolean $translator
+     */
     private function initTranslator($translator)
     {
         if ($translator) {

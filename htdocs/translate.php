@@ -245,6 +245,9 @@ $tpl->display();
 /* $truncatLastInsert = true   for downloaded file
  * $truncatLastInsert = false  to sign self generated file (in function export)
  */
+/**
+ * @param boolean $truncateLastInsert
+ */
 function calcDataSqlChecksum($truncateLastInsert)
 {
     global $opt;
@@ -388,6 +391,10 @@ function clearCache()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param string $relbasedir
+ * @param string $ext
+ */
 function unlinkFiles($relbasedir, $ext)
 {
     global $opt;
@@ -479,6 +486,9 @@ function resetIds()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param integer $freeId
+ */
 function useId($freeId)
 {
     $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
@@ -488,6 +498,9 @@ function useId($freeId)
     setId($lastId, $freeId);
 }
 
+/**
+ * @param integer $oldId
+ */
 function setId($oldId, $newId)
 {
     global $transIdCols;
@@ -566,6 +579,9 @@ function export()
     $tpl->redirect('translate.php?translang=' . $translang);
 }
 
+/**
+ * @param string $dir
+ */
 function enumSqlFiles($dir)
 {
     $retval = [];
@@ -689,7 +705,7 @@ function xmlexport()
 
         $writer->writeElement('code', $r['text']);
         $countLang = count($lang);
-        for ($n = 0; $n < $countLang; $n ++) {
+        for ($n = 0; $n < $countLang; $n++) {
             $writer->writeElement(
                 $lang[$n],
                 sql_value(
@@ -817,7 +833,7 @@ function xmlimport3()
 
     $nCount = isset($_REQUEST['count']) ? $_REQUEST['count'] + 0 : 0;
 
-    for ($nIndex = 1; $nIndex <= $nCount; $nIndex ++) {
+    for ($nIndex = 1; $nIndex <= $nCount; $nIndex++) {
         if (isset($_REQUEST['useitem' . $nIndex]) && ($_REQUEST['useitem' . $nIndex] == '1')) {
             $sCode = base64_decode($_REQUEST['code' . $nIndex]);
             $transId = sql_value("SELECT `id` FROM `sys_trans` WHERE `text`='&1'", 0, $sCode);

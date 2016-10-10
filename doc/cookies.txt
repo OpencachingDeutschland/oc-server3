@@ -5,12 +5,20 @@
 
 
 Name:      $opt['session']['cookiename'] . 'data'
-File:      cookie.class.php
-Type:      permament
+File:      src/Oc/Session/SessionDataCookie.php
+Type:      permanent
 Contents:  - login/session data  (login.class.php)
            - country & language selection  (common.inc.php)
            - last search query-id  (search.php)
            - translation interface mode  (translate.php)
+isSecure:  false/true; depends on $opt['page']['https']['mode'] and protocol during login
+
+Name:      $opt['session']['cookiename'] . 'https_session'
+File:      src/Oc/Session/SessionDataCookie.php
+Type:      temporary, session created over https and while session is active
+Contents:  session data only available with https -> force redirect to https if http is used
+isSecure:  false
+isHttpOnly: true; avoid attacks by js
 
 Name:      'ocgmlastpos'
 Type:      permanent
@@ -27,7 +35,7 @@ Type:      temporary, discarded when browser closes
 Contents:  current map filter settings
 File:      map2.tpl
 
-Nmae:      'ocgmfilter_saved'
+Name:      'ocgmfilter_saved'
 Type:      permanent
 Contents:  saved map filter settings
 File:      map2.tpl

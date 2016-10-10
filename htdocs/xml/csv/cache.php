@@ -43,6 +43,6 @@ if ($cache === null) {
         echo ';';
         echo '"' . mb_ereg_replace('"', '\"', $cache->getWPGC()) . '"';
         echo ';';
-        echo '""';  // obsolete Navicache WP
+        echo '""'; // obsolete Navicache WP
     }
 }

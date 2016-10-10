@@ -22,6 +22,8 @@ abstract class AbstractCommand extends Command
 
     /**
      * @param string|null $name
+     *
+     * @throws \Symfony\Component\Console\Exception\LogicException
      */
     public function __construct($name = null)
     {

@@ -11,6 +11,8 @@
  * style      get/post/cookie   used style
  ****************************************************************************/
 
+use Oc\Util\CBench;
+
 if (isset($opt['rootpath'])) {
     $rootpath = $opt['rootpath'];
 } else {
@@ -275,6 +277,9 @@ function set_cookie_setting($name, $value)
 //set no_eval true to prevent this contents from php-parsing.
 //Important when replacing something that the user has posted
 //in HTML code and could contain \<\? php-Code \?\>
+/**
+ * @param string $name
+ */
 function tpl_set_var($name, $value, $no_eval = true)
 {
     global $vars, $no_eval_vars;
@@ -350,8 +355,8 @@ function tpl_BuildTemplate($dbdisconnect = true)
     tpl_set_var('print_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
 
     if (isset($bScriptExecution)) {
-        $bScriptExecution->Stop();
-        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->Diff()));
+        $bScriptExecution->stop();
+        tpl_set_var('scripttime', sprintf('%1.3f', $bScriptExecution->diff()));
     } else {
         tpl_set_var('scripttime', sprintf('%1.3f', 0));
     }
@@ -392,7 +397,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
     }
 
     $bTemplateBuild = new CBench;
-    $bTemplateBuild->Start();
+    $bTemplateBuild->start();
 
     //set {functionsbox}
     global $page_functions, $functionsbox_start_tag, $functionsbox_middle_tag, $functionsbox_end_tag;
@@ -504,6 +509,9 @@ function http_write_no_cache()
 }
 
 //redirect to another site to display, i.e. to view a cache after logging
+/**
+ * @param string $page
+ */
 function tpl_redirect($page)
 {
     global $absolute_server_URI;
@@ -523,6 +531,9 @@ function tpl_redirect($page)
 //process the template replacements
 //no_eval_replace - if true, variables will be replaced that are
 //                  marked as "no_eval"
+/**
+ * @param string $str
+ */
 function tpl_do_replace($str)
 {
     global $vars, $no_eval_vars;
@@ -550,6 +561,10 @@ function tpl_do_replace($str)
     return $str;
 }
 
+/**
+ * @param string $tplnameError
+ * @param string $msg
+ */
 function tpl_errorMsg($tplnameError, $msg)
 {
     global $tplname;
@@ -578,6 +593,9 @@ function load_gettext()
     textdomain('messages');
 }
 
+/**
+ * @param string $sCode
+ */
 function tpl_do_translation($sCode)
 {
     global $opt, $style, $tplname;
@@ -606,6 +624,9 @@ function tpl_do_translation($sCode)
     return $sResultCode;
 }
 
+/**
+ * @param string $sCode
+ */
 function gettext_do_html($sCode)
 {
     $sResultCode = '';
@@ -635,6 +656,9 @@ function gettext_do_html($sCode)
     return $sResultCode;
 }
 
+/**
+ * @return string
+ */
 function t($str)
 {
     global $translate;

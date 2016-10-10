@@ -72,7 +72,7 @@ $opt['db']['error']['mail'] = 'root';
 
 // EMail address of the sender and team
 if (!isset($maildomain)) {
-    $maildomain = 'local.opencaching.de';
+    $maildomain = 'local.team-opencaching.de';
 }
 if (!isset($emailaddr)) {
     $emailaddr = 'root@' . $maildomain;

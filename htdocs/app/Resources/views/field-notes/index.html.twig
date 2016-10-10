@@ -12,7 +12,9 @@
                 <table class="searchtable field-notes-table" border="0" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="checkall" onClick="toggleChecks(this, 'selected-field-notes[]')" /></th>
+                            <th>
+                                <input type="checkbox" id="checkall" onClick="toggleChecks(this, 'selected-field-notes[]')" />
+                            </th>
                             <th colspan="2">{{ 'field_notes.header.geocache' | trans }}</th>
                             <th class="nowrap">{{ 'field_notes.header.date' | trans }}</th>
                             <th class="nowrap">{{ 'field_notes.header.log_type' | trans }}</th>
@@ -21,8 +23,8 @@
                     </thead>
                     <tbody>
                         {% for fieldNote in fieldNotes %}
-                            <tr>
-                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><input type="checkbox" name="selected-field-notes[]" value="{{ fieldNote.id }}" /></td>
+                            <tr class="testing-fieldNotes-row{{ loop.index }}">
+                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><input type="checkbox" id="testing-fieldNote-checkbox{{ loop.index }}" name="selected-field-notes[]" value="{{ fieldNote.id }}" /></td>
                                 <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ geocache.geocacheIcon(fieldNote.geocache.type) }}</td>
                                 <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/viewcache.php?cacheid={{ fieldNote.geocache.cacheId }}">{{ fieldNote.geocache.name }}</a><br />{{ fieldNote.text | truncate(65, true) }}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ fieldNote.date | date('field_notes.date_format' | trans | desc('Y-m-d H:i')) }}</td>
@@ -44,7 +46,6 @@
 
     <h3>{{ 'field_notes.msg.upload_new_field_notes' | trans }}</h3>
     {{ form_start(form) }}
-        {#{ form_widget(form) }#}
         <div>
             {{ form_widget(form.file) }}
             {{ form_label(form.file) }}
@@ -59,7 +60,7 @@
             {% endif %}
         </div>
         <div>
-            <input type="submit" value="{{ 'field_notes.btn.upload' | trans }}" class="btn btn-default"/>
+            <input type="submit" id="testing-fieldNotes-submit-button" value="{{ 'field_notes.btn.upload' | trans }}" class="btn btn-default"/>
         </div>
     {{ form_end(form) }}
 

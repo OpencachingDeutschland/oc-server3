@@ -11,7 +11,7 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require_once $opt['rootpath'] . 'lib2/cli.inc.php';
+require_once __DIR__ . '/../../lib2/cli.inc.php';
 
 if (count($argv) != 2 || $argv[1] != 'run') {
     die("\n" .
@@ -24,11 +24,11 @@ if (count($argv) != 2 || $argv[1] != 'run') {
         "\n");
 }
 
-sql("DELETE FROM `gk_item_waypoint`");
+sql('DELETE FROM `gk_item_waypoint`');
 
-$rsItems = sql("SELECT DISTINCT `itemid` AS `id` FROM `gk_move`");
+$rsItems = sql('SELECT DISTINCT `itemid` AS `id` FROM `gk_move`');
 while ($rItem = sql_fetch_assoc($rsItems)) {
-    $lastmove = sql_value(
+    $lastMove = sql_value(
         "SELECT `id` FROM `gk_move`
         WHERE `itemid`='&1' AND `logtypeid`<>2
         /* TODO: How does Geokrety.org order moves with same date? We assume by ID: */
@@ -45,7 +45,7 @@ while ($rItem = sql_fetch_assoc($rsItems)) {
          LEFT JOIN `gk_move` ON `gk_move`.`id`=`gk_move_waypoint`.`id`
          WHERE `gk_move`.`id`='&1' AND `logtypeid` IN (0,3) AND `wp`<>''
         )",
-        $lastmove
+        $lastMove
     );
 }
 sql_free_result($rsItems);

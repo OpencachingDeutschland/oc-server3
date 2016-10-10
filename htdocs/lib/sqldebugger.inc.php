@@ -9,6 +9,8 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
+use Oc\Util\CBench;
+
 $sqldbg_cmdNo = 0;
 $sqldbg_sumTimes = 0;
 
@@ -147,6 +149,12 @@ function sqldbg_begin()
     <?php
 }
 
+/**
+ * @param $sql
+ * @param $bSlave
+ *
+ * @return resource
+ */
 function sqldbg_execute($sql, $bSlave)
 {
     global $dblink;
@@ -293,7 +301,7 @@ function sqldbg_execute($sql, $bSlave)
     $rsResult = mysql_query($sql, $dblink);
     $bError = ($rsResult == false);
     $bSqlExecution->stop();
-    $sqldbg_sumTimes += $bSqlExecution->Diff();
+    $sqldbg_sumTimes += $bSqlExecution->diff();
 
     if ($bError == true) {
         echo '<div class="error">Error while executing SQL command!</div>';
@@ -307,7 +315,7 @@ function sqldbg_execute($sql, $bSlave)
         echo '</div>';
     }
 
-    echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->Diff()) . ' sek.</div>';
+    echo '<div class="runtime">Runtime: ' . sprintf('%01.5f', $bSqlExecution->diff()) . ' sek.</div>';
     echo '<div class="affectedrows">Number of affected rows: ' . mysql_affected_rows($dblink) . '</div>';
 
     echo '<div class="white">*/</div></div>';
@@ -326,6 +334,11 @@ function sqldbg_end()
     exit;
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_strip_temptable($sql)
 {
     $start = mb_strpos(mb_strtoupper($sql), 'SELECT ');
@@ -337,6 +350,11 @@ function sqldbg_strip_temptable($sql)
     return mb_substr($sql, $start);
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_strip_from($sql)
 {
     $start = mb_strpos(mb_strtoupper($sql), 'FROM ');
@@ -348,6 +366,11 @@ function sqldbg_strip_from($sql)
     return 'SELECT * ' . mb_substr($sql, $start);
 }
 
+/**
+ * @param $sql
+ *
+ * @return string
+ */
 function sqldbg_insert_nocache($sql)
 {
     if (mb_strtoupper(mb_substr($sql, 0, 7)) == 'SELECT ') {

@@ -7,7 +7,7 @@ require __DIR__ . '/lib2/web.inc.php';
 $login->verify();
 $env = 'prod';
 $debug = false;
-if (isset($opt['debug']) && $opt['debug']) {
+if (isset($opt['debug']) && $opt['debug'] && $_SERVER['HTTP_HOST'] !== 'test.opencaching.de') {
     $env = 'dev';
     $debug = true;
 }
@@ -24,9 +24,9 @@ $request->setLocale($locale);
 $response = $kernel->handle($request);
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
-    || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
     || $request->getRequestFormat() !== 'html'
     || preg_match('/\/_/', $request->getPathInfo()) === 1 // e.g. /_profiler/
+    || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
 ) {
     $response->send();
     $kernel->terminate($request, $response);
@@ -36,7 +36,7 @@ if ($request->isXmlHttpRequest()
 $response->sendHeaders();
 
 if ($response->getStatusCode() === 404) {
-    include '404.php';
+    include __DIR__ . '/404.php';
     exit;
 }
 

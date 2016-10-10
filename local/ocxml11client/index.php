@@ -1279,11 +1279,19 @@ function removedObject($uuid)
     }
 }
 
+/**
+ * @param string $recordtype
+ * @param string $info
+ */
 function importError($recordtype, $uuid, $r, $info)
 {
     echo 'error: ' . $recordtype . ' (' . $uuid . '): ' . $info . "\n";
 }
 
+/**
+ * @param string $recordtype
+ * @param string $info
+ */
 function importWarn($recordtype, $uuid, $r, $info)
 {
     echo 'warn: ' . $recordtype . ' (' . $uuid . '): ' . $info . "\n";

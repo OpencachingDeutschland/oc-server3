@@ -54,6 +54,9 @@ abstract class PresenterChildWp
         $this->onDoSubmit($this->coordinate->getCoordinate(), $this->getDesc());
     }
 
+    /**
+     * @param \Oc\Libse\Coordinate\CoordinateCoordinate $coordinate
+     */
     abstract protected function onDoSubmit($coordinate, $description);
 
     protected function getType()
@@ -74,6 +77,9 @@ abstract class PresenterChildWp
         $this->typeImages = $childWpHandler->getChildNamesAndImages();
     }
 
+    /**
+     * @param \Oc\Libse\Coordinate\CoordinateCoordinate $coords
+     */
     public function initCoordinate($coords)
     {
         $this->coordinate->init($coords->latitude(), $coords->longitude());

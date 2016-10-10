@@ -7,10 +7,15 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
+use Oc\Util\CBench;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once $opt['rootpath'] . 'lib2/db.inc.php';
 require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
 
+/**
+ * Class OcSmarty
+ */
 class OcSmarty extends Smarty
 {
     public $name = 'sys_nothing';
@@ -37,6 +42,9 @@ class OcSmarty extends Smarty
     public $body_load = [];
     public $body_unload = [];
 
+    /**
+     * OcSmarty constructor.
+     */
     public function __construct()
     {
         global $opt, $sqldebugger;
@@ -107,6 +115,10 @@ class OcSmarty extends Smarty
 
     /* ATTENTION: copied from internal implementation!
      */
+    /**
+     * @param $resource_name
+     * @param null $compile_id
+     */
     public function compile($resource_name, $compile_id = null)
     {
         if (!isset($compile_id)) {
@@ -139,6 +151,11 @@ class OcSmarty extends Smarty
         $this->_cache_including = $_cache_including;
     }
 
+    /**
+     * @param null $dummy1
+     * @param null $dummy2
+     * @param null $dummy3
+     */
     public function display($dummy1 = null, $dummy2 = null, $dummy3 = null)
     {
         global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
@@ -369,7 +386,11 @@ class OcSmarty extends Smarty
         exit;
     }
 
-    // show an error dialog
+    /**
+     * show an error dialog
+     *
+     * @param integer $id
+     */
     public function error($id)
     {
         $this->clear_all_assign();
@@ -393,6 +414,13 @@ class OcSmarty extends Smarty
     }
 
     // check if this template is valid
+    /**
+     * @param null $dummy1
+     * @param null $dummy2
+     * @param null $dummy3
+     *
+     * @return bool|false|string
+     */
     public function is_cached($dummy1 = null, $dummy2 = null, $dummy3 = null)
     {
         global $login;
@@ -407,6 +435,9 @@ class OcSmarty extends Smarty
         return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
+    /**
+     * @return string
+     */
     public function get_cache_id()
     {
         global $opt;
@@ -418,6 +449,9 @@ class OcSmarty extends Smarty
         return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id);
     }
 
+    /**
+     * @return string
+     */
     public function get_compile_id()
     {
         global $opt;
@@ -425,6 +459,9 @@ class OcSmarty extends Smarty
         return $opt['template']['style'] . '|' . $opt['template']['locale'] . '|' . $this->compile_id;
     }
 
+    /**
+     * @param string $page
+     */
     public function redirect($page)
     {
         global $cookie, $opt;
@@ -463,6 +500,9 @@ class OcSmarty extends Smarty
         exit;
     }
 
+    /**
+     * redirect login function
+     */
     public function redirect_login()
     {
         global $opt;
@@ -478,6 +518,10 @@ class OcSmarty extends Smarty
         $this->redirect('login.php?target=' . urlencode($target));
     }
 
+    /**
+     * @param $name
+     * @param $rs
+     */
     public function assign_rs($name, $rs)
     {
         $items = [];
@@ -487,21 +531,33 @@ class OcSmarty extends Smarty
         $this->assign($name, $items);
     }
 
+    /**
+     * @param $src
+     */
     public function add_header_javascript($src)
     {
         $this->header_javascript[] = $src;
     }
 
+    /**
+     * @param $script
+     */
     public function add_body_load($script)
     {
         $this->body_load[] = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function add_body_unload($script)
     {
         $this->body_unload[] = $script;
     }
 
+    /**
+     * setting http header
+     */
     public function header()
     {
         global $opt;
@@ -526,8 +582,13 @@ class OcSmarty extends Smarty
         }
     }
 
-    /* - trim target and strip newlines
+    /**
+     * - trim target and strip newlines
      * - use sDefault if sTarget is absolute and sDefault!=null
+     * @param $sTarget
+     * @param null $sDefault
+     *
+     * @return null|string
      */
     public function checkTarget($sTarget, $sDefault = null)
     {

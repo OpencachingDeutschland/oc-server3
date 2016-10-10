@@ -678,7 +678,7 @@ function format_wp($wp)
  * @param $admins
  * @param $wp_oc
  * @param $r
- * @param $field
+ * @param string $field
  * @param $oldvalue
  * @param $newvalue
  */

@@ -103,6 +103,6 @@ function helppagelink($ocpage, $title = 'Instructions')
         $imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
         $imgtitle = 'alt="' . $imgtitle . '" title="' . $imgtitle . '"';
 
-        return '<a class="nooutline" href="' . $helpurl . '" ' . $imgtitle . ' target="_blank">';
+        return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
     }
 }

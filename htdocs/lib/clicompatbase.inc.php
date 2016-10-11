@@ -33,7 +33,7 @@ if (isset($opt['rootpath'])) {
 } elseif (isset($rootpath)) {
     $opt['rootpath'] = $rootpath;
 } else {
-    $rootpath = './';
+    $rootpath = __DIR__.'/../';
     $opt['rootpath'] = $rootpath;
 }
 

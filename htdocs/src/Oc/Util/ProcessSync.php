@@ -106,7 +106,7 @@ class ProcessSync
         if ($pidFile = @fopen($this->pidFilePath, 'r')) {
             $pid = fgets($pidFile, 20);
             fclose($pidFile);
-            if ($pid === posix_getpid()) {
+            if ($pid == posix_getpid()) {
                 unlink($this->pidFilePath);
             }
         } else {

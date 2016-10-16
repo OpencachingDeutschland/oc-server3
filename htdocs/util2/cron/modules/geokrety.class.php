@@ -52,7 +52,7 @@ class geokrety
         $modifiedsince = strtotime(
             getSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], time() - 60 * 60 * 24 * 9.5))
         );
-        if (!@copy('http://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedsince - 1), $path)) {
+        if (!@copy('https://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedsince - 1), $path)) {
             return false;
         }
 

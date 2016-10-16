@@ -194,7 +194,7 @@ function post_config()
         'menustring' => t('Geokrety'),
         'siteid' => 'geokrety',
         'visible' => true,
-        'filename' => 'http://geokrety.org/index.php?lang=' . (isset($locale) ? strtolower($locale) : 'de')
+        'filename' => 'https://geokrety.org/index.php?lang=' . (isset($locale) ? strtolower($locale) : 'de')
     ];
 
     $menu[] = [

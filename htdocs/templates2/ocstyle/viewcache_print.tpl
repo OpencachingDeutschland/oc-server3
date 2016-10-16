@@ -374,7 +374,7 @@
         <tr>
             <td>
               {foreach from=$geokret item=geokretItem name=geokret}
-                    <a href="http://geokrety.org/konkret.php?id={$geokretItem.id}" target="_blank">{$geokretItem.itemname|escape}</a> von {$geokretItem.username|escape}
+                    <a href="https://geokrety.org/konkret.php?id={$geokretItem.id}" target="_blank">{$geokretItem.itemname|escape}</a> von {$geokretItem.username|escape}
                     {if !$smarty.foreach.geokret.last}<br />{/if}
                 {/foreach}
             </td>

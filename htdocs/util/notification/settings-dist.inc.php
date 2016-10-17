@@ -14,4 +14,4 @@ $mailfrom = 'noreply@' . $maildomain;
 $debug = false;
 $debug_mailto = 'abc@xyz.de';
 
-$notifypid = $rootpath . 'cache/notify.pid';
+$notifypid = $rootpath . 'cache2/notify.pid';

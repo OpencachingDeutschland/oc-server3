@@ -2882,6 +2882,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2624', 'show al
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2625', 'hide all additional search options', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2626', 'Select at least one cachetype!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2627', 'Select at least one cachesize!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2628', 'The user <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> does not own any caches that fit to your search options.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2629', 'The user <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> does not own any logs that fit to your search options.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2630', 'The user <b>%1%2</b> doesn\'t exsist.', '2016-10-17 03:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7526,6 +7529,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2625', 'DE', 'Verberge alle zusätzlichen Suchoptionen', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2626', 'DE', 'Wähle mindestens einen Cachetype aus!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2627', 'DE', 'Wähle mindestens eine Cachegröße aus!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2628', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Caches, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2629', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Logs, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> exestiert nicht.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');

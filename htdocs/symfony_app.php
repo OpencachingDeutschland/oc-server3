@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 require __DIR__ . '/lib2/web.inc.php';
 $login->verify();
 $env = 'prod';
-$debug = false;
+$debug = true;
 if (isset($opt['debug']) && $opt['debug'] && $_SERVER['HTTP_HOST'] !== 'test.opencaching.de') {
     $env = 'dev';
     $debug = true;

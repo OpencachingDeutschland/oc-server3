@@ -39,6 +39,36 @@
         </ul>
         <br />
 
+        <p id="v3.1.1"><strong>OC 3.1 Version 1</strong> &ndash; 24. Oktober 2016</p>
+        <p>neu:</p>
+        <ul>
+            <li>Field Notes (<a href="https://github.com/mirsch" target="_blank">mirsch</a>)</li>
+            <li>Einführung von Crowdin für die Übersetzung</li>
+            <li>Einführung von Travis</li>
+            <li>Bereitstellung eines Minimaldumps</li>
+        </ul>
+        <p>Geändert / verbessert:</p>
+        <ul>
+            <li>SessionCookie Daten werden nur noch über HTTPS übermittelt (<a href="https://github.com/rotzbua" target="_blank">rotzbua</a>)</li>
+            <li>Warnung wenn kein Cachetype/Cachegröße bei der Suche aktiviert ist</li>
+            <li>Übersichtlichere Nachbearbeitung der Suchoptionen</li>
+            <li>Implementierung erster HTML5 Features</li>
+            <li>Aktualisierung der Spendenseite</li>
+            <li>Anpassung Gekrety Verlinkungen (HTTPS)</li>
+            <li>Update der What3Words API (<a href="https://github.com/mbirth" target="_blank">mbirth</a>)</li>
+            <li>Automatisches aktualisieren der crowdin Übersetzungen</li>
+        </ul>
+        <br />
+
+        <p>Korrigiert (Bugfixes):</p>
+        <ul>
+            <li>Cachetypenanzeige bei Suche über die Nutzerstatistiken fehlerhaft</li>
+            <li>Aufräumarbeiten</li>
+            <li>Karten Bugfixes.</li>
+            <li>diverse kleine Fehlerkorrekturen</li>
+        </ul>
+        <br />
+
         <p id="v3.0.19"><strong>OC 3.0 Version 19</strong> &ndash; 28. Juni 2016</p>
         <p>Geändert / verbessert:</p>
         <ul>

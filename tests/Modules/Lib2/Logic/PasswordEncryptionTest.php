@@ -5,7 +5,7 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Modules\Lib2\Logic;
+namespace OcTest\Modules\Lib2\Logic;
 
 use Oc\Modules\AbstractModuleTest;
 

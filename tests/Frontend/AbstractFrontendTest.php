@@ -5,7 +5,7 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Frontend;
+namespace OcTest\Frontend;
 
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Exception\ElementNotFoundException;

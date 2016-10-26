@@ -5,7 +5,7 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Modules;
+namespace OcTest\Modules;
 
 abstract class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {

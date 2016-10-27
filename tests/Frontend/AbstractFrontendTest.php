@@ -27,7 +27,6 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
     public function __construct()
     {
         parent::__construct();
-        require_once __DIR__ . '/../../htdocs/vendor/autoload.php';
         $this->dir = __DIR__;
         $this->baseUrl = getenv('URL');
     }

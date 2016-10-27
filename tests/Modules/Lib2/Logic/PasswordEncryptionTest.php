@@ -7,7 +7,7 @@
 
 namespace OcTest\Modules\Lib2\Logic;
 
-use Oc\Modules\AbstractModuleTest;
+use OcTest\Modules\AbstractModuleTest;
 
 class PasswordEncryptionTest extends AbstractModuleTest
 {

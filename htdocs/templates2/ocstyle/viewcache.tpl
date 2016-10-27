@@ -217,7 +217,7 @@
                     </td></tr>
                     <tr><td style="vertical-align:top; width:370px">
         <p style="line-height: 1.6em;">
-            <img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a href="#" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}&country={$cache.countryCode}&desclang={$cache.desclanguage}','{t escape=js}Coordinates{/t}','width=280,height=550,resizable=no,scrollbars=1')">{t}Convert coordinates{/t}</a><br />
+            <img src="resource2/{$opt.template.style}/images/viewcache/map.png" class="icon16" alt="" title="" align="middle" />&nbsp;<a style="cursor:pointer;" onclick="window.open('coordinates.php?lat={$cache.latitude}&lon={$cache.longitude}&popup=y&wp={$cache.wpoc}&country={$cache.countryCode}&desclang={$cache.desclanguage}','{t escape=js}Coordinates{/t}','width=280,height=550,resizable=no,scrollbars=1')">{t}Convert coordinates{/t}</a><br />
             <!-- <img src="resource2/{$opt.template.style}/images/viewcache/box.png" class="icon16" alt="" title="" align="middle" />&nbsp;Cache type: <b>Traditional</b><br /> -->
             <img src="resource2/{$opt.template.style}/images/viewcache/package_green.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Size:{/t} <b>{$cache.sizeName|escape}</b><br />
             <img src="resource2/{$opt.template.style}/images/viewcache/page.png" class="icon16" alt="" title="" align="middle" />

@@ -38,9 +38,9 @@
                             </td>
                             <td {if $lastadm1!=$topItem.adm1}style="padding-top:12px"{/if}>
                                 {if $topItem.adm3==null}
-                                    <a href="#{$topItem.adm1|urlencode}null"><i>({t}without regional reference{/t})</i><br /></a>
+                                    <a href="tops.php#{$topItem.adm1|urlencode}null"><i>({t}without regional reference{/t})</i><br /></a>
                                 {else}
-                                    <a href="#{$topItem.adm1|urlencode}{$topItem.adm3|urlencode}">{$topItem.adm3|escape}</a><br />
+                                    <a href="tops.php#{$topItem.adm1|urlencode}{$topItem.adm3|urlencode}">{$topItem.adm3|escape}</a><br />
                                 {/if}
                             </td>
                         </tr>

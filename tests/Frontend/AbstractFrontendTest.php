@@ -5,7 +5,7 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Frontend;
+namespace OcTest\Frontend;
 
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -27,7 +27,6 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
     public function __construct()
     {
         parent::__construct();
-        require_once __DIR__ . '/../../htdocs/vendor/autoload.php';
         $this->dir = __DIR__;
         $this->baseUrl = getenv('URL');
     }

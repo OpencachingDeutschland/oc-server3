@@ -5,10 +5,10 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Frontend\Login;
+namespace OcTest\Frontend\Login;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Oc\Frontend\AbstractFrontendTest;
+use OcTest\Frontend\AbstractFrontendTest;
 
 class DistanceSearchTest extends AbstractFrontendTest
 {

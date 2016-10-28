@@ -15,7 +15,6 @@ else
   SYNCED_FOLDER_TYPE = 'nfs'
 end
 
-
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -27,13 +26,7 @@ Vagrant.configure(2) do |config|
 	config.vm.network "forwarded_port", guest: 443,		host: 443,  auto_correct: true # https
 	config.vm.network "forwarded_port", guest: 3306,	host: 3306,	auto_correct: true # mysql
 
-	config.vm.synced_folder "bin/", 	"/var/www/html/bin",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "htdocs/",	"/var/www/html/htdocs",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "doc/", 	"/var/www/html/doc",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "local/", 	"/var/www/html/local",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "sql/", 	"/var/www/html/sql",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "tests/", 	"/var/www/html/tests",	type: SYNCED_FOLDER_TYPE
-	config.vm.synced_folder "build/", 	"/var/www/html/build",	type: SYNCED_FOLDER_TYPE
+	config.vm.synced_folder "./", 	"/var/www/html/",	type: SYNCED_FOLDER_TYPE
 	if SYNCED_FOLDER_TYPE == "nfs"
 		config.nfs.map_uid = Process.uid
 		config.nfs.map_gid = Process.gid

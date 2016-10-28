@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+    bootstrap="htdocs/vendor/autoload.php"
+    colors="true"
+    verbose="true"
+>
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests/**</directory>
+        </testsuite>
+
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>htdocs/**</directory>
+            <exclude>
+                <directory>htdocs/bin/**</directory>
+                <directory>htdocs/cache2/**</directory>
+                <directory>htdocs/config/**</directory>
+                <directory>htdocs/doc/**</directory>
+                <directory>htdocs/download/**</directory>
+                <directory>htdocs/html/**</directory>
+                <directory>htdocs/images/**</directory>
+                <directory>htdocs/lang/**</directory>
+                <directory>htdocs/okapi/**</directory>
+                <directory>htdocs/resource2/**</directory>
+                <directory>htdocs/template2/**</directory>
+                <directory>htdocs/var/**</directory>
+                <directory>htdocs/vendor/**</directory>
+                <directory>htdocs/xml/**</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="URL" value="http://local.team-opencaching.de"/>
+    </php>
+</phpunit>

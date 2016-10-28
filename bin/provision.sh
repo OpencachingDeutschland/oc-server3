@@ -311,9 +311,8 @@ echo "alias ..='cd ..'" >> /home/vagrant/.bashrc
 label "setting up phpunit"
 cd /usr/local/bin && sudo ln -sf /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
 sudo chmod 755 phpunit
-cd /var/www/html && sudo ln -sf /var/www/html/tests/phpunit.xml.dist
 
-cd /var/www/html && sudo ln -sf /var/www/html/dev-ops/psh.phar
+cd /var/www/html
 sudo chmod 755 psh.phar
 
 label "All done, have fun."

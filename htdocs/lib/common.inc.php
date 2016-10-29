@@ -60,7 +60,7 @@ if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
 load_domain_settings();
 
 // load HTML specific includes
-require_once $rootpath . 'lib/cookie.class.php';
+require_once __DIR__ . '/cookie.class.php';
 
 //site in service?
 if ($site_in_service == false) {
@@ -123,8 +123,8 @@ load_gettext();
 //open a databse connection
 db_connect();
 
-require $opt['rootpath'] . 'lib/auth.inc.php';
-require_once $opt['rootpath'] . 'lib2/translate.class.php';
+require_once __DIR__ . '/auth.inc.php';
+require_once __DIR__ . '/../lib2/translate.class.php';
 
 //load language specific strings
 require_once $langpath . '/expressions.inc.php';

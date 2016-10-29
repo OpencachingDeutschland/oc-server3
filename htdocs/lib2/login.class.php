@@ -71,7 +71,7 @@ class login
     public function __construct()
     {
         global $cookie;
-        
+
         // TODO good input evaluation
         if ($cookie->is_set('userid') && $cookie->is_set('username')) {
             $this->userid = $cookie->get('userid') + 0;

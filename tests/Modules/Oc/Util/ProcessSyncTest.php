@@ -30,6 +30,9 @@ class ProcessSyncTest extends AbstractModuleTest
         }
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testEnterMethod()
     {
         self::assertTrue($this->processSync->enter());
@@ -37,11 +40,17 @@ class ProcessSyncTest extends AbstractModuleTest
         self::assertTrue($this->processSync->leave());
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testLeaveMethod()
     {
         self::assertFalse($this->processSync->leave('test message'));
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testCheckDaemonMethod()
     {
         $file = fopen($this->pidFIlePath . $this->name . '.pid', 'w');

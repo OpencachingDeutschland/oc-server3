@@ -17,6 +17,9 @@ class CBenchTest extends AbstractModuleTest
         $this->cBench = new CBench();
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testStartMethod()
     {
         self::assertEquals(0, $this->cBench->start);
@@ -26,6 +29,9 @@ class CBenchTest extends AbstractModuleTest
         self::assertInternalType('float', $this->cBench->start);
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testStopMethod()
     {
         self::assertEquals(0, $this->cBench->stop);

@@ -19,6 +19,9 @@ class SessionDataCookieTest extends AbstractModuleTest
         $this->sessionDataCookie = new SessionDataCookie();
     }
 
+    /**
+     * @group unit-tests
+     */
     public function testSessionDataCookieConstructor()
     {
         $this->sessionDataCookie->set('testKey', 'testValue');

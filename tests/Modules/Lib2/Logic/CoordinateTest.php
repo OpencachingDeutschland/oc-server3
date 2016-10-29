@@ -7,7 +7,7 @@
  * Coordinate Calculation Test
  ****************************************************************************/
 
-namespace Oc\Modules\Lib2\Logic;
+namespace OcTest\Modules\Lib2\Logic;
 
 /*
 Testdaten:

@@ -5,9 +5,9 @@
  * Unicode Reminder メモ
  ****************************************************************************/
 
-namespace Oc\Frontend\Login;
+namespace OcTest\Frontend\Login;
 
-use Oc\Frontend\AbstractFrontendTest;
+use OcTest\Frontend\AbstractFrontendTest;
 
 class MyListTest extends AbstractFrontendTest
 {

@@ -312,4 +312,7 @@ label "setting up phpunit"
 cd /usr/local/bin && sudo ln -sf /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
 sudo chmod 755 phpunit
 
+cd /var/www/html
+sudo chmod 755 psh.phar
+
 label "All done, have fun."

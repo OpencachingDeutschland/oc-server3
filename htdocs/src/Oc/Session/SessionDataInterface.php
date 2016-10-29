@@ -23,7 +23,5 @@ interface SessionDataInterface
 
     public function header();
 
-    public function debug();
-
     public function close();
 }

@@ -85,10 +85,4 @@ class cookie
             }
         }
     }
-
-    public function debug()
-    {
-        print_r($this->values);
-        exit;
-    }
 }

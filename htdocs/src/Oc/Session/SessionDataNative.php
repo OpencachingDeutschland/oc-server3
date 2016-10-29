@@ -149,12 +149,6 @@ class SessionDataNative implements SessionDataInterface
         // is automatically sent
     }
 
-    public function debug()
-    {
-        print_r($_SESSION);
-        exit;
-    }
-
     public function close()
     {
         if ($this->session_initialized === true) {

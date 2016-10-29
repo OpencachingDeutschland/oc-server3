@@ -19,8 +19,8 @@ class CBench
      */
     public function __construct()
     {
-        $this->start = 0;
-        $this->stop = 0;
+        $this->start = 0.00;
+        $this->stop = 0.00;
     }
 
     /**
@@ -52,7 +52,7 @@ class CBench
     /**
      * diff between stop and start value
      *
-     * @return int
+     * @return float
      */
     public function diff()
     {

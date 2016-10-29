@@ -134,12 +134,6 @@ class SessionDataCookie implements SessionDataInterface
         }
     }
 
-    public function debug()
-    {
-        print_r($this->values);
-        exit;
-    }
-
     public function close()
     {
         // TODO really nothing?

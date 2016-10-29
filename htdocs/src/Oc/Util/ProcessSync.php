@@ -1,9 +1,7 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- *
  * Unicode Reminder メモ
- *
  * synchronization of processes which must not run concurrently;
  ****************************************************************************/
 
@@ -40,21 +38,15 @@ class ProcessSync
             return false;
         }
 
-        if (file_exists($this->pidFilePath)) {
-            echo 'Error: PidFile (' . $this->pidFilePath . ") already present\n";
+        if ($pidFile = @fopen($this->pidFilePath, 'w')) {
+            fwrite($pidFile, posix_getpid());
+            fclose($pidFile);
+
+            return true;
+        } else {
+            echo "can't create PidFile " . $this->pidFilePath . "\n";
 
             return false;
-        } else {
-            if ($pidFile = @fopen($this->pidFilePath, 'w')) {
-                fwrite($pidFile, posix_getpid());
-                fclose($pidFile);
-
-                return true;
-            } else {
-                echo "can't create PidFile " . $this->pidFilePath . "\n";
-
-                return false;
-            }
         }
     }
 
@@ -65,11 +57,11 @@ class ProcessSync
      */
     private function checkDaemon()
     {
-        if ($pidFile = @fopen($this->pidFilePath, 'r')) {
+        if (file_exists($this->pidFilePath) && $pidFile = @fopen($this->pidFilePath, 'r')) {
             $pidDaemon = fgets($pidFile, 20);
             fclose($pidFile);
 
-            $pidDaemon = (int)$pidDaemon;
+            $pidDaemon = (int) $pidDaemon;
 
             // bad PID file, e.g. due to system malfunction while creating the file?
             if ($pidDaemon <= 0) {
@@ -77,8 +69,7 @@ class ProcessSync
                 unlink($this->pidFilePath);
 
                 return false;
-            } // process running?
-            elseif (posix_kill($pidDaemon, 0)) {
+            } elseif (posix_kill($pidDaemon, 0)) { // process running?
                 // yes, good bye
                 echo 'Error: process for ' . $this->pidFilePath . " is already running with pid=$pidDaemon\n";
 
@@ -90,9 +81,9 @@ class ProcessSync
 
                 return true;
             }
-        } else {
-            return true;
         }
+
+        return true;
     }
 
 
@@ -100,21 +91,26 @@ class ProcessSync
      * Leave code section which must not run concurrently
      *
      * @param bool $message
+     * @return bool
      */
     public function leave($message = false)
     {
+        if ($message) {
+            echo $message . "\n";
+        }
+
         if ($pidFile = @fopen($this->pidFilePath, 'r')) {
             $pid = fgets($pidFile, 20);
             fclose($pidFile);
             if ($pid == posix_getpid()) {
                 unlink($this->pidFilePath);
             }
-        } else {
-            echo "Error: can't delete own PidFile (" . $this->pidFilePath . ")\n";
+
+            return true;
         }
 
-        if ($message) {
-            echo $message . "\n";
-        }
+        echo "Error: can't delete own PidFile (" . $this->pidFilePath . ")\n";
+
+        return false;
     }
 }

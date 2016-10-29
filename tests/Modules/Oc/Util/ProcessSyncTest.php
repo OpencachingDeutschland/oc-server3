@@ -13,6 +13,11 @@ class ProcessSyncTest extends AbstractModuleTest
     private $name = 'test';
 
     /**
+     * @var string
+     */
+    private $pidFIlePath = __DIR__ . '/../../../../htdocs/cache2/';
+
+    /**
      * @var ProcessSync
      */
     private $processSync;
@@ -20,6 +25,9 @@ class ProcessSyncTest extends AbstractModuleTest
     public function setUp()
     {
         $this->processSync = new ProcessSync($this->name);
+        if (file_exists($this->pidFIlePath . $this->name . '.pid')) {
+            unlink($this->pidFIlePath . $this->name . '.pid');
+        }
     }
 
     public function testEnterMethod()
@@ -36,18 +44,25 @@ class ProcessSyncTest extends AbstractModuleTest
 
     public function testCheckDaemonMethod()
     {
-        $file = fopen(__DIR__ . '/../../../../htdocs/cache2/' . $this->name . '.pid', 'w');
+        $file = fopen($this->pidFIlePath . $this->name . '.pid', 'w');
         fwrite($file, 'pid file', 100);
         fclose($file);
 
         self::assertFalse($this->processSync->enter());
 
-        $file = fopen(__DIR__ . '/../../../../htdocs/cache2/' . $this->name . '.pid', 'w');
+        $file = fopen($this->pidFIlePath . $this->name . '.pid', 'w');
         fwrite($file, '10000', 100);
         fclose($file);
 
+        self::assertTrue($this->processSync->enter());
+        self::assertTrue($this->processSync->leave());
+
+        $file = fopen($this->pidFIlePath . $this->name . '.pid', 'w');
+        fwrite($file, '10000', 100);
+        fclose($file);
+
+        chmod($this->pidFIlePath . $this->name . '.pid', 000);
+
         self::assertFalse($this->processSync->enter());
-
-
     }
 }

@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  You may enter special or testing settings for your developer maching here
- *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
@@ -26,6 +25,6 @@ if (defined('HTTPS_ENABLED')) {
 }
 
 // common developer system settings
-require 'settings-dev.inc.php';
+require __DIR__ . '/settings-dev.inc.php';
 
 $sql_errormail = 'root';

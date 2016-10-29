@@ -27,7 +27,7 @@
  ****************************************************************************/
 
     //Menü laden
-    global $mnu_bgcolor, $mnu_selmenuitem, $develwarning, $tpl_subtitle, $opt, $rootpath, $usr;
+    global $mnu_bgcolor, $mnu_selmenuitem, $develWarning, $tpl_subtitle, $opt, $rootpath, $usr;
 
     require_once $stylepath . '/lib/menu.php';
     if (function_exists('post_config')) {
@@ -189,7 +189,7 @@ $smarty_dummy = 0;
                 {backgroundimage}
 
               <!-- HEADER -->
-                <?php echo isset($develwarning) ? $develwarning : '' ?>
+                <?php echo isset($develWarning) ? $develWarning : '' ?>
 
                 <!-- Header banner -->
                 <div class="header">

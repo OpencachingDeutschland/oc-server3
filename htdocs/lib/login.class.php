@@ -4,17 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *  This class provides access to the login user data. Informations are
- *  stored in a cookie.
- *
- *  Methods:
- *    verify()        validate the login-session
- *
- *  Properties:
- *    userid          Integer 0 if no login, userid otherwise
- *    username        String username or ''
- *
- *  !! See also lib2/login.class.php. !!
+ * see lib2/login.class.php. !!
  *
  ***************************************************************************/
 

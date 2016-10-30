@@ -1,12 +1,9 @@
 <?php
 /****************************************************************************
  *  For license information see doc/license.txt
- *
  *  edit a cache listing
- *
  *  used template(s): editcache
  *  GET/POST Parameter: cacheid
- *
  *  Unicode Reminder メモ
  *****************************************************************************/
 
@@ -74,10 +71,9 @@ function getWaypoints($cacheid)
 
 //Preprocessing
 if ($error == false) {
-    //cacheid
     $cache_id = 0;
-    if (isset($_REQUEST['cacheid'])) {  // Ocprop
-        $cache_id = $_REQUEST['cacheid'];
+    if (isset($_REQUEST['cacheid'])) {
+        $cache_id = (int) $_REQUEST['cacheid'];
     }
 
     if ($usr === false) {
@@ -85,8 +81,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', 'editcache.php?cacheid=' . urlencode($cache_id));
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -275,14 +271,14 @@ if ($error == false) {
 
                     if ($coords_lon < 0) {
                         $coords_lonEW = 'W';
-                        $coords_lon = - $coords_lon;
+                        $coords_lon = -$coords_lon;
                     } else {
                         $coords_lonEW = 'E';
                     }
 
                     if ($coords_lat < 0) {
                         $coords_latNS = 'S';
-                        $coords_lat = - $coords_lat;
+                        $coords_lat = -$coords_lat;
                     } else {
                         $coords_latNS = 'N';
                     }
@@ -441,15 +437,16 @@ if ($error == false) {
                         $time_not_ok || $way_length_not_ok || $size_not_ok ||
                         $activate_date_not_ok || $status_not_ok || $diff_not_ok ||
                         $attribs_not_ok || $wpgc_not_ok
-                    )) {
+                    )
+                    ) {
                         $cache_lat = $coords_lat_h + $coords_lat_min / 60;
                         if ($coords_latNS == 'S') {
-                            $cache_lat = - $cache_lat;
+                            $cache_lat = -$cache_lat;
                         }
 
                         $cache_lon = $coords_lon_h + $coords_lon_min / 60;
                         if ($coords_lonEW == 'W') {
-                            $cache_lon = - $cache_lon;
+                            $cache_lon = -$cache_lon;
                         }
 
                         if ($publish == 'now') {
@@ -585,7 +582,7 @@ if ($error == false) {
 
                         // update cache attributes
                         $attriblist = "999";
-                        for ($i = 0; $i < count($cache_attribs); $i ++) {
+                        for ($i = 0; $i < count($cache_attribs); $i++) {
                             if ($cache_attribs[$i] + 0 > 0) {
                                 sql(
                                     "INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES('&1', '&2')",
@@ -716,7 +713,7 @@ if ($error == false) {
                         $line = mb_ereg_replace('{name}', escape_javascript($record['name']), $line);
                         $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
                         $group_line .= $line;
-                        $nLineAttrCount ++;
+                        $nLineAttrCount++;
 
                         $line = $cache_attrib_js;
                         $line = mb_ereg_replace('{id}', $record['id'], $line);
@@ -773,7 +770,7 @@ if ($error == false) {
 
                 //difficulty
                 $difficulty_options = '';
-                for ($i = 2; $i <= 10; $i ++) {
+                for ($i = 2; $i <= 10; $i++) {
                     if ($cache_difficulty == $i) {
                         $difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
                     } else {
@@ -785,7 +782,7 @@ if ($error == false) {
 
                 //build terrain options
                 $terrain_options = '';
-                for ($i = 2; $i <= 10; $i ++) {
+                for ($i = 2; $i <= 10; $i++) {
                     if ($cache_terrain == $i) {
                         $terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
                     } else {
@@ -940,7 +937,7 @@ if ($error == false) {
                     $tmp = mb_ereg_replace('{publish_notnow_checked}', ($publish == 'notnow') ? 'checked' : '', $tmp);
 
                     $activation_hours = '';
-                    for ($i = 0; $i <= 23; $i ++) {
+                    for ($i = 0; $i <= 23; $i++) {
                         if ($cache_activate_hour == $i) {
                             $activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
                         } else {
@@ -968,7 +965,7 @@ if ($error == false) {
                         $cache_id
                     );
 
-                    for ($i = 0; $i < mysql_num_rows($rspictures); $i ++) {
+                    for ($i = 0; $i < mysql_num_rows($rspictures); $i++) {
                         $tmpline = ($i == 0 ? $pictureline0 : $pictureline);
                         $pic_record = sql_fetch_array($rspictures);
 

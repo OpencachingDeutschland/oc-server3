@@ -45,13 +45,25 @@ $opt['logic']['node']['id'] = $oc_nodeid;
 //name of the cookie
 $opt['cookie']['name'] = 'oc_devel';
 $opt['cookie']['path'] = '/';
-$opt['cookie']['domain'] = '';
+$opt['cookie']['domain'] = '.team-opencaching.de';
+$opt['session']['cookiename'] = 'ocvagrant';
+
+//name of the cookie
+if (!isset($cookiename)) {
+    $cookiename = $opt['cookie']['name'];
+}
+if (!isset($cookiepath)) {
+    $cookiepath = $opt['cookie']['path'];
+}
+if (!isset($cookiedomain)) {
+    $cookiedomain = $opt['cookie']['domain'];
+}
 
 //Debug?
 if (!isset($debug_page)) {
     $debug_page = true;
 }
-$develwarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten</center></font></div>';
+$develWarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten</center></font></div>';
 $sql_debug = isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug'] == 1;
 
 //site in service? Set to false when doing bigger work on the database to prevent error's

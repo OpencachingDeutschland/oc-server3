@@ -1,26 +1,20 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *  This class provides access to the login user data. Informations are
  *  stored in a cookie.
- *
  *  Methods:
  *    verify()        validate the login-session (automatically invoked)
  *    try_login()     try to login with the given user/password
  *    logout()        logout the user
- *
  *  Properties:
  *    userid          Integer 0 if no login, userid otherwise
  *    username        String username or ''
- *
  *  !! See also lib/login.class.php. !!
- *
  ***************************************************************************/
 
-define('LOGIN_UNKNOWN_ERROR', - 1);     // unkown error occured
+define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured
 define('LOGIN_OK', 0);                 // login succeeded
 define('LOGIN_BADUSERPW', 1);          // bad username or password
 define('LOGIN_TOOMUCHLOGINS', 2);      // too many logins in short time
@@ -71,7 +65,7 @@ class login
     public function __construct()
     {
         global $cookie;
-        
+
         // TODO good input evaluation
         if ($cookie->is_set('userid') && $cookie->is_set('username')) {
             $this->userid = $cookie->get('userid') + 0;
@@ -208,7 +202,6 @@ class login
      * @param $user
      * @param $password
      * @param $permanent
-     *
      * @return int
      */
     public function try_login($user, $password, $permanent)
@@ -257,7 +250,6 @@ class login
      * @param $user
      * @param $encryptedPassword
      * @param $permanent
-     *
      * @return int
      */
     public function try_login_encrypted($user, $encryptedPassword, $permanent)
@@ -338,7 +330,6 @@ class login
      * login for cronjobs, command line tools ...
      *
      * @param $username
-     *
      * @return bool
      */
     public function system_login($username)
@@ -427,7 +418,6 @@ class login
 
     /**
      * @param bool $privilege
-     *
      * @return bool
      */
     public function hasAdminPriv($privilege = false)

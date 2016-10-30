@@ -14,10 +14,8 @@ $tpl->menuitem = MNU_START_REGISTER_ACTIVATION;
 // We use short param codes 'u' and 'c' to generate short-enough activation
 // url that will not be wrapped in plain-text emails.
 
-$code = isset($_REQUEST['code']) ? trim($_REQUEST['code']) :
-    (isset($_REQUEST['c']) ? trim($_REQUEST['c']) : '');
-$email = isset($_REQUEST['email']) ? trim($_REQUEST['email']) :
-    (isset($_REQUEST['e']) ? trim($_REQUEST['e']) : '');
+$code = isset($_REQUEST['code']) ? trim($_REQUEST['code']) : (isset($_REQUEST['c']) ? trim($_REQUEST['c']) : '');
+$email = isset($_REQUEST['email']) ? trim($_REQUEST['email']) : (isset($_REQUEST['e']) ? trim($_REQUEST['e']) : '');
 
 $tpl->assign('errorEMail', false);
 $tpl->assign('errorCode', false);

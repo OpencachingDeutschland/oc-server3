@@ -67,7 +67,7 @@ if ($sMode == 'locate') {
                        WHERE option_id=6 AND user_id='&1'", true, $login->userid))
 ) {
     $fullscreen = true;
-    $tpl->popup = true;        // disables page header and -frame
+    $tpl->popup = true; // disables page header and -frame
     $tpl->popupmargin = false;
 } else {
     $fullscreen = false;
@@ -450,7 +450,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
     $caches_found = 0;
     while ($r = sql_fetch_assoc($rs)) {
         echo '<cache name="' . xmlentities($r['name']) . '" wpoc="' . xmlentities($r['wp_oc']) . '" />' . "\n";
-        ++ $caches_found;
+        ++$caches_found;
     }
     sql_free_result($rs);
 
@@ -489,7 +489,7 @@ function output_searchresult(
         "SELECT `slave_id`
         FROM `map2_result`
         WHERE `result_id`='&1' AND DATE_ADD(`date_created`, INTERVAL '&2' SECOND)>NOW()",
-        - 2,
+        -2,
         $nResultId,
         $opt['map']['maxcacheage']
     );

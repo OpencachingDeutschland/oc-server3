@@ -534,7 +534,7 @@ class html2text
         if (substr($link, 0, 7) == 'http://' || substr($link, 0, 8) == 'https://' ||
             substr($link, 0, 7) == 'mailto:'
         ) {
-            $this->_link_count ++;
+            $this->_link_count++;
             $this->_link_list .= "[" . $this->_link_count . "] $link\n";
             $additional = ' [' . $this->_link_count . ']';
         } elseif (substr($link, 0, 11) == 'javascript:') {
@@ -542,7 +542,7 @@ class html2text
             $additional = '';
             // what about href="#anchor" ?
         } else {
-            $this->_link_count ++;
+            $this->_link_count++;
             $this->_link_list .= "[" . $this->_link_count . "] " . $this->url;
             if (substr($link, 0, 1) != '/') {
                 $this->_link_list .= '/';

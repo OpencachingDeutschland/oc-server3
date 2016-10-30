@@ -12,7 +12,7 @@ checkJob(new autoarchive());
 class autoarchive
 {
     public $name = 'autoarchive';
-    public $interval = 43200;  // twice per day
+    public $interval = 43200; // twice per day
 
 
     public function run()
@@ -97,7 +97,7 @@ class autoarchive
                     'maintain the cache and re-enable the listing.',
                     $months
                 );
-                ++ $archived;
+                ++$archived;
 
                 // This limit throttles archiving. If something goes wrong, it won't
                 // produce too much trouble.

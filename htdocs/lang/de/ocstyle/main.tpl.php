@@ -34,6 +34,13 @@
         post_config();
     }
 
+    $parts = parse_url($_SERVER['REQUEST_URI']);
+    parse_str($parts['query'], $params);
+    $langUrl = $parts['path'];
+    unset($params['locale']);
+    $params['locale'] = '';
+    $langUrl .= '?' . http_build_query($params);
+
     require_once $rootpath . 'lib2/smarty/ocplugins/function.season.php';
 
     $sUserCountry = getUserCountry();
@@ -145,10 +152,12 @@ $smarty_dummy = 0;
                         <td><strong>{t}Language:{/t}&nbsp;</strong></td>
                         <td>
 <?php
-                            foreach ($opt['template']['locales'] AS $k => $lang) {
-                                                            if ($lang['status'] == OC_LOCALE_ACTIVE)
-                                    echo '<a style="text-decoration: none;" href="index.php?locale=' . $k . '"><img src="' . $lang['flag'] . '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
-                            }
+foreach ($opt['template']['locales'] AS $k => $lang) {
+    if ($lang['status'] == OC_LOCALE_ACTIVE) {
+        echo '<a style="text-decoration: none;" href="'.$langUrl . $k . '"><img src="' . $lang['flag'] .
+            '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
+    }
+}
                             ?>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>

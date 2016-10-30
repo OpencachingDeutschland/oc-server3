@@ -1,9 +1,7 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
@@ -105,8 +103,8 @@ class OcSmarty extends Smarty
             }
             reset($_REQUEST);
 
-            if (mb_substr($target, - 1) == '?' || mb_substr($target, - 1) == '&') {
-                $target = mb_substr($target, 0, - 1);
+            if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
+                $target = mb_substr($target, 0, -1);
             }
 
             $this->target = $target;
@@ -260,18 +258,21 @@ class OcSmarty extends Smarty
 
         // build address for switching locales and countries
         $base_pageadr = $_SERVER['REQUEST_URI'];
+
+
+
         // workaround for http://redmine.opencaching.de/issues/703
-        $strange_things_pos = strpos($base_pageadr, ".php/");
+        $strange_things_pos = strpos($base_pageadr, '.php/');
         if ($strange_things_pos) {
             $base_pageadr = substr($base_pageadr, 0, $strange_things_pos + 4);
         }
-        $lpos = strpos($base_pageadr, "locale=");
+        $lpos = strpos($base_pageadr, 'locale=');
         if ($this->change_country_inpage) {
             if (!$lpos) {
-                $lpos = strpos($base_pageadr, "usercountry=");
+                $lpos = strpos($base_pageadr, 'usercountry=');
             }
             if (!$lpos) {
-                $lpos = strpos($base_pageadr, "country=");
+                $lpos = strpos($base_pageadr, 'country=');
             }
         }
         if ($lpos) {
@@ -317,7 +318,7 @@ class OcSmarty extends Smarty
         } else {
             $this->assign('sys_dbconnected', false);
         }
-        $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
+        $this->assign('sys_dbslave', ($db['slave_id'] != -1));
 
         if ($this->template_exists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
@@ -405,7 +406,7 @@ class OcSmarty extends Smarty
 
         $args = func_get_args();
         unset($args[0]);
-        for ($i = 1; isset($args[$i]); $i ++) {
+        for ($i = 1; isset($args[$i]); $i++) {
             $this->assign('p' . $i, $args[$i]);
         }
 
@@ -418,7 +419,6 @@ class OcSmarty extends Smarty
      * @param null $dummy1
      * @param null $dummy2
      * @param null $dummy3
-     *
      * @return bool|false|string
      */
     public function is_cached($dummy1 = null, $dummy2 = null, $dummy3 = null)
@@ -585,9 +585,9 @@ class OcSmarty extends Smarty
     /**
      * - trim target and strip newlines
      * - use sDefault if sTarget is absolute and sDefault!=null
+     *
      * @param $sTarget
      * @param null $sDefault
-     *
      * @return null|string
      */
     public function checkTarget($sTarget, $sDefault = null)

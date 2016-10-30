@@ -36,7 +36,7 @@ function showstats($header, $condition, $limit)
 
     $n = 1;
     while ($r = sql_fetch_assoc($rs)) {
-        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($n ++) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . "</td><td>&nbsp;&nbsp;" . $r['name'] . "</td></tr>\n";
+        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($n++) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . "</td><td>&nbsp;&nbsp;" . $r['name'] . "</td></tr>\n";
     }
     sql_free_result($rs);
 

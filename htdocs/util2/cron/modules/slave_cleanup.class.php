@@ -28,7 +28,7 @@ class slave_cleanup
         }
         sql_free_result($rs);
 
-        $this->cleanup_slave(- 1);
+        $this->cleanup_slave(-1);
     }
 
     public function cleanup_slave($slaveId)

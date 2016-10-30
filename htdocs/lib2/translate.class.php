@@ -159,10 +159,10 @@ class translateEdit extends translate
     }
 
     /**
-     * @param $message
-     * @param $style
-     * @param $resource_name
-     * @param $line
+     * @param string $message
+     * @param string $style
+     * @param string $resource_name
+     * @param string $line
      * @param string $plural
      * @param int $count
      * @param null $lang

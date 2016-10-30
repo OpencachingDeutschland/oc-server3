@@ -15,7 +15,7 @@ $watch = isset($_REQUEST['watch']);
 $dontwatch = isset($_REQUEST['dontwatch']);
 $bookmark = isset($_REQUEST['bookmark']);
 $unbookmark = isset($_REQUEST['unbookmark']);
-$invalid_waypoints = isset($_REQUEST['invalidwp']) ? '&invalidwp='.urlencode($_REQUEST['invalidwp']) : '';
+$invalid_waypoints = isset($_REQUEST['invalidwp']) ? '&invalidwp=' . urlencode($_REQUEST['invalidwp']) : '';
 
 if ($id) {
     $login->verify();

@@ -28,7 +28,7 @@ function getChildWaypoints($cacheid)
     if ($count > 0) {
         $formatter = new FormatterCoordinate();
 
-        for ($i = 0; $i < $count; $i ++) {
+        for ($i = 0; $i < $count; $i++) {
             $waypoints[$i]['coord']['lat'] = $waypoints[$i]['coordinate']->latitude();
             $waypoints[$i]['coord']['lon'] = $waypoints[$i]['coordinate']->longitude();
             $waypoints[$i]['coordinateHtml'] = $formatter->formatHtml($waypoints[$i]['coordinate'], '<br />');

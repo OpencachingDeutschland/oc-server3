@@ -665,7 +665,7 @@ function t($str)
 
     $str = $translate->t($str, '', basename(__FILE__), __LINE__);
     $args = func_get_args();
-    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex --) {
+    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex--) {
         $str = str_replace('%' . $nIndex, $args[$nIndex], $str);
     }
 

@@ -15,11 +15,11 @@
  *   bin/dbsv-update.php will then migrate the tables' charset.
  */
 $opt['charset']['iconv'] = 'UTF-8'; // 'ISO-8859-1'; // use iconv compatible charset-name
-$opt['charset']['mysql'] = 'utf8';     // use mysql compatible charset-name
+$opt['charset']['mysql'] = 'utf8'; // use mysql compatible charset-name
 
 // handling of SQL and PHP errors
 $opt['db']['error']['display'] = false;
-$opt['db']['error']['mail'] = 'root';  // set '' to disable
+$opt['db']['error']['mail'] = 'root'; // set '' to disable
 
 // page title
 $opt['page']['title'] = 'OPENCACHING';
@@ -57,7 +57,7 @@ $opt['page']['main_locale'] = 'DE';
  * Additionally, the cookie domain (different vor lib1 and lib2) can be overwritten.
  * See examples for overriding in settings-sample.inc.php.
  */
-$opt['page']['meta']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur';  // 5-10 keywords are recommended
+$opt['page']['meta']['keywords'] = 'Geocaching, Geocache, Cache, Schatzsuche, GPS, kostenlos, GPX, Koordinaten, Hobby, Natur'; // 5-10 keywords are recommended
 // see http://forum.opencaching.de/index.php?topic=3065.0
 // and http://forum.opencaching.de/index.php?topic=3065.0 regarding description
 $opt['page']['meta']['description'] = 'Opencaching.de ist das freie Portal für Geocaching, ein Schatzsuche-Spiel. Mittels GPS-Koordinaten sind Behälter oder Objekte zu finden.';
@@ -98,7 +98,7 @@ $opt['logic']['rating']['percentageOfFounds'] = 10;
 // see also setting in lib/settings.inc.php!
 $opt['logic']['admin']['team_comments_only_for_reports'] = true;
 $opt['logic']['admin']['enable_listing_admins'] = false;
-$opt['logic']['admin']['listingadmin_notification'] = '';  // Email address(es), comma separated
+$opt['logic']['admin']['listingadmin_notification'] = ''; // Email address(es), comma separated
 
 /*
  * html purifier

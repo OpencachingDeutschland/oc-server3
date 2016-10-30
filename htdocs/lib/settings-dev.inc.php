@@ -125,11 +125,11 @@ $opt['translate']['debug'] = false;
 /* maximum number of failed logins per hour before that IP address is blocked
  * (used to prevent brute-force-attacks)
  */
-$opt['page']['max_logins_per_hour'] = 1000;    // for development ...
+$opt['page']['max_logins_per_hour'] = 1000; // for development ...
 $opt['page']['headoverlay'] = 'oc_head_alpha3';
 
 // data license
-$opt['logic']['license']['disclaimer'] = true;   // also in lib2/settings-dist.inc.php
+$opt['logic']['license']['disclaimer'] = true; // also in lib2/settings-dist.inc.php
 $opt['logic']['license']['terms'] = $absolute_server_URI . 'articles.php?page=impressum#datalicense';
 
 $opt['logic']['admin']['listingadmin_notification'] = 'root';

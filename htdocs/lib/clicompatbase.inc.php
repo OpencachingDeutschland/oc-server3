@@ -65,6 +65,12 @@ $db_error = 0;
 // prepare EMail-From
 $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
 
+/**
+ * @param string $module
+ * @param integer $eventid
+ * @param integer $objectid2
+ * @param string $logtext
+ */
 function logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
 {
     sql(
@@ -105,6 +111,9 @@ function sql_failed($sql)
     sql_error();
 }
 
+/**
+ * @param string $sql
+ */
 function sqlValue($sql, $default)
 {
     $rs = sql($sql);
@@ -133,11 +142,21 @@ function sql_value_slave($sql, $default)
     }
 }
 
+/**
+ * @param string $name
+ * @param string $default
+ *
+ * @return string
+ */
 function getSysConfig($name, $default)
 {
     return sqlValue('SELECT `value` FROM `sysconfig` WHERE `name`=\'' . sql_escape($name) . '\'', $default);
 }
 
+/**
+ * @param string $name
+ * @param string $value
+ */
 function setSysConfig($name, $value)
 {
     if (sqlValue('SELECT COUNT(*) FROM sysconfig WHERE name=\'' . sql_escape($name) . '\'', 0) == 1) {
@@ -449,6 +468,9 @@ function sql_error()
     die('sql_error');
 }
 
+/**
+ * @param string $warnmessage
+ */
 function sql_warn($warnmessage)
 {
     global $sql_errormail;
@@ -471,6 +493,9 @@ function sql_warn($warnmessage)
 /*
     Ersatz für die in Mysql eingebauten Funktionen
 */
+/**
+ * @param resource $rs
+ */
 function sql_fetch_array($rs)
 {
     return mysql_fetch_array($rs);
@@ -486,6 +511,9 @@ function sql_fetch_row($rs)
     return mysql_fetch_row($rs);
 }
 
+/**
+ * @param resource $rs
+ */
 function sql_fetch_column($rs)
 {
     $col = [];
@@ -695,6 +723,9 @@ function get_site_urls($domain)
     ];
 }
 
+/**
+ * @param string $filename
+ */
 function fetch_email_template($filename, $language, $domain)
 {
     global $opt, $rootpath;

@@ -60,7 +60,7 @@ if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
 load_domain_settings();
 
 // load HTML specific includes
-require_once __DIR__ . '/cookie.class.php';
+$cookie = new \Oc\Session\SessionDataCookie();
 
 //site in service?
 if ($site_in_service == false) {

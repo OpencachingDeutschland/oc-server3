@@ -1,15 +1,12 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *   get/set has to be commited with save
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
 require_once __DIR__ . '/logtypes.inc.php';
-require_once __DIR__ . '/../../lib/cache.inc.php';
 
 class cache
 {
@@ -19,7 +16,6 @@ class cache
 
     /**
      * @param $wp
-     *
      * @return int|null
      */
     public static function cacheIdFromWP($wp)
@@ -45,7 +41,6 @@ class cache
 
     /**
      * @param $wp
-     *
      * @return cache|null
      */
     public static function fromWP($wp)
@@ -60,7 +55,6 @@ class cache
 
     /**
      * @param $uuid
-     *
      * @return mixed
      */
     public static function cacheIdFromUUID($uuid)
@@ -72,7 +66,6 @@ class cache
 
     /**
      * @param $uuid
-     *
      * @return cache|null
      */
     public static function fromUUID($uuid)
@@ -298,7 +291,41 @@ class cache
 
     public function getConditionHistory()
     {
-        return get_cache_condition_history($this->nCacheId);
+        $cache_id = $this->nCacheId;
+        $rs = sql(
+            "SELECT `date`, `needs_maintenance`, `listing_outdated`
+         FROM `cache_logs`
+         WHERE `cache_id`='&1' AND (`needs_maintenance` IS NOT NULL OR `listing_outdated` IS NOT NULL)
+         ORDER BY `date`, `id`",
+            $cache_id
+        );
+        $nm = $lo = 0;
+        $cond = [
+            [
+                'needs_maintenance' => $nm,
+                'listing_outdated' => $lo,
+                'date' => '0000-00-00 00:00:00'
+            ]
+        ];
+        while ($r = sql_fetch_assoc($rs)) {
+            if ($r['needs_maintenance'] != $nm || $r['listing_outdated'] != $lo) {
+                $nm = $r['needs_maintenance'];
+                $lo = $r['listing_outdated'];
+                $cond[] = [
+                    'needs_maintenance' => $nm,
+                    'listing_outdated' => $lo,
+                    'date' => $r['date']
+                ];
+            }
+        }
+        sql_free_result($rs);
+        $cond[] = [
+            'needs_maintenance' => $nm,
+            'listing_outdated' => $lo,
+            'date' => '9999-12-31 23:59:59'
+        ];
+
+        return $cond;
     }
 
     // other
@@ -342,7 +369,6 @@ class cache
      * @param $nVisitUserId
      * @param $sRemoteAddr
      * @param $nCacheId
-     *
      * @return void
      */
     public static function visitCounter($nVisitUserId, $sRemoteAddr, $nCacheId)
@@ -397,7 +423,6 @@ class cache
 
     /**
      * @param $cacheId
-     *
      * @return array
      */
     public static function getLogsCount($cacheId)
@@ -416,7 +441,6 @@ class cache
      * @param integer $count
      * @param bool $deleted
      * @param bool $protect_old_coords
-     *
      * @return array
      */
     public static function getLogsArray($cacheId, $start, $count, $deleted = false, $protect_old_coords = false)
@@ -521,7 +545,7 @@ class cache
                 if (!$newcoord) {
                     $newcoord = $coords[$coordpos];
                 }
-                ++ $coordpos;
+                ++$coordpos;
             }
             if ($newcoord) {
                 $distance = geomath::calcDistance(
@@ -554,7 +578,7 @@ class cache
             $original = count($coords) - 1;
             $lastlogdate = $logs[count($logs) - 1]['order_date'];
             while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
-                -- $original;
+                --$original;
             }
             $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
             $logs[] = [
@@ -570,7 +594,6 @@ class cache
      * @param $userId
      * @param $reportReason
      * @param $reportNote
-     *
      * @return bool
      */
     public function report($userId, $reportReason, $reportNote)
@@ -589,7 +612,6 @@ class cache
 
     /**
      * @param $userId
-     *
      * @return bool|string
      */
     public function addAdoption($userId)
@@ -623,7 +645,6 @@ class cache
 
     /**
      * @param int $userId
-     *
      * @return bool
      */
     public function cancelAdoption($userId)
@@ -647,7 +668,6 @@ class cache
 
     /**
      * @param int $userId
-     *
      * @return bool
      */
     public function commitAdoption($userId)
@@ -656,11 +676,12 @@ class cache
 
         // cache_adoption exists?
         if (sql_value(
-            "SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'",
-            0,
-            $this->nCacheId,
-            $userId
-        ) == 0) {
+                "SELECT COUNT(*) FROM `cache_adoption` WHERE `cache_id`='&1' AND `user_id`='&2'",
+                0,
+                $this->nCacheId,
+                $userId
+            ) == 0
+        ) {
             return false;
         }
 
@@ -954,7 +975,7 @@ class cache
             $logTypes[$i]['selected'] = ($logtype == $defaultLogType) ? true : false;
             $logTypes[$i]['name'] = $logtypeNames[$logtype];
             $logTypes[$i]['id'] = $logtype;
-            $i ++;
+            $i++;
         }
 
         // return

@@ -114,8 +114,8 @@ class OcSmarty extends Smarty
     /* ATTENTION: copied from internal implementation!
      */
     /**
-     * @param $resource_name
-     * @param null $compile_id
+     * @param string $resource_name
+     * @param string $compile_id
      */
     public function compile($resource_name, $compile_id = null)
     {

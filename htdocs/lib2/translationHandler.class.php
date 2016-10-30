@@ -236,8 +236,8 @@ class TranslationHandler
      * import variables for substition from config2/nodetext/
      *
      * @param $variables
-     * @param $file
-     * @param $language
+     * @param string $file
+     * @param string $language
      *
      * @return bool
      */
@@ -269,7 +269,7 @@ class TranslationHandler
 
     /**
      * @param $variables
-     * @param $lang
+     * @param string $lang
      * @param $str
      *
      * @return string

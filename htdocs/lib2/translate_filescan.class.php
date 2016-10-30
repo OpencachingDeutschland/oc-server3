@@ -86,8 +86,8 @@ class translate_filescan
     }
 
     /**
-     * @param $sCode
-     * @param $nStartSearch
+     * @param string $sCode
+     * @param integer $nStartSearch
      *
      * @return bool|int
      */
@@ -132,7 +132,7 @@ class translate_filescan
 
     // TODO: performance ... scan once at __construct and store line positions
     /**
-     * @param $nPos
+     * @param integer $nPos
      *
      * @return int
      */

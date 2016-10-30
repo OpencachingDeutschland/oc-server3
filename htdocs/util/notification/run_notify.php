@@ -198,6 +198,9 @@ function process_new_cache($notify)
     return 0;
 }
 
+/**
+ * @param string $domain
+ */
 function is_existent_maildomain($domain)
 {
     $smtp_serverlist = [];

@@ -17,12 +17,12 @@ class LogPics
     const FOR_STARTPAGE_GALLERY = 1;
     const FOR_NEWPICS_GALLERY = 2;
     const FOR_USER_STAT = 3;
-    const FOR_USER_GALLERY = 4;   // params: userid
+    const FOR_USER_GALLERY = 4; // params: userid
     const FOR_MYHOME_GALLERY = 5;
-    const FOR_CACHE_STAT = 6;     // params: cacheid
-    const FOR_CACHE_GALLERY = 7;  // params: cacheid
+    const FOR_CACHE_STAT = 6; // params: cacheid
+    const FOR_CACHE_GALLERY = 7; // params: cacheid
 
-    const MAX_PICTURES_PER_GALLERY_PAGE = 48;   // must be multiple of 6
+    const MAX_PICTURES_PER_GALLERY_PAGE = 48; // must be multiple of 6
 
 
     public static function get($purpose, $userid = 0, $cacheid = 0)
@@ -30,7 +30,7 @@ class LogPics
         global $login;
 
         $fields =
-          "`pics`.`uuid` AS `pic_uuid`,
+            "`pics`.`uuid` AS `pic_uuid`,
            `pics`.`url` AS `pic_url`,
            `pics`.`title`,
            `pics`.`date_created`,

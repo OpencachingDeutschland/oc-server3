@@ -317,12 +317,36 @@ if ($queryid != 0) {
 
         $options['ownerid'] = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
         $options['owner'] = isset($_REQUEST['owner']) ? stripslashes($_REQUEST['owner']) : '';
+
+        if (isset($options['owner'])) {
+            $rs_name = sql("SELECT `user_id` FROM `user` WHERE `username`='&1'", $options['owner']);
+            if (sql_num_rows($rs_name) == 1) {
+                $record_id = sql_fetch_array($rs_name);
+                $options['ownerid'] = $record_id['user_id'];
+                $user = new user($options['ownerid']);
+            }
+            unset($record_id);
+            sql_free_result($rs_name);
+        }
+        
     } elseif (isset($_REQUEST['searchbyfinder'])) { // Ocprop
         $options['searchtype'] = 'byfinder';
 
         $options['finderid'] = isset($_REQUEST['finderid']) ? $_REQUEST['finderid'] : 0;
         $options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
         $options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7'; // Ocprop
+
+        if (isset($options['finder'])) {
+            $rs_name = sql("SELECT `user_id` FROM `user` WHERE `username`='&1'", $options['finder']);
+            if (sql_num_rows($rs_name) == 1) {
+                $record_id = sql_fetch_array($rs_name);
+                $options['finderid'] = $record_id['user_id'];
+                $user = new user($options['finderid']);
+            }
+            unset($record_id);
+            sql_free_result($rs_name);
+        }
+        
     } elseif ((isset($_REQUEST['searchbyortplz']) && is_numeric($_REQUEST['ortplz']))
               || isset($_REQUEST['searchbyplz'])) {
         $options['searchtype'] = 'byplz';

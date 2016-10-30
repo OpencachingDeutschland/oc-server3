@@ -32,7 +32,7 @@ function search_output()
     global $opt, $tpl, $login;
     global $enable_mapdisplay;
     global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
-    global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints;
+    global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints, $user;
 
     $tpl->name = 'search.result.caches';
     $tpl->menuitem = MNU_CACHES_SEARCH_RESULT;
@@ -197,6 +197,16 @@ function search_output()
         $tpl->assign('disable_edit_options', true);
     }
 
+    if (isset($user) && isset($options['owner'])) {
+        $tpl->assign('owner', isset($user) ? $user->getUsername() : '');
+        $tpl->assign('ownerid', isset($user) ? $user->getUserId() : '');
+    } elseif (isset($user) && isset($options['finder'])) {
+        $tpl->assign('finder', isset($user) ? $user->getUsername() : '');
+        $tpl->assign('finderid', isset($user) ? $user->getUserId() : '');
+    } else {
+        $tpl->assign('owner_not', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
+        $tpl->assign('finder_not', isset($options['finder']) ? htmlspecialchars($options['finder'], ENT_COMPAT, 'UTF-8') : '');
+    }
 
     $tpl->display();
 }

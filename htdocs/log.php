@@ -77,7 +77,7 @@ if ($cacheId != 0) {
     $tpl->assign('ratingallowed', $user->allowRatings());
     $tpl->assign('givenratings', $user->getGivenRatings());
     $tpl->assign('maxratings', $user->getMaxRatings());
-    $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()));
+    $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
     $tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
     $tpl->assign('isowner', $isOwner);
 

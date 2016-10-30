@@ -58,3 +58,7 @@ htdocs/app/Resources/translations
 /htdocs/bin/translation
 /build/logs
 /build/artifacts
+
+/*.msi
+/*.log
+/*.cab

@@ -9,7 +9,7 @@
  */
 class ss_zip
 {
-    /** contains whole zipfile
+    /** contains whole zipFile
      *
      * @see ss_zip::archive()
      * @see ss_zip::ss_zip()
@@ -34,30 +34,31 @@ class ss_zip
     public $cdir = [];
 
     /**    constructor
-     *
-     * @param string $zipfile if not empty must contain path to valid zip file, ss_zip will try to open and parse it.
+
+*
+*@param string $zipFile if not empty must contain path to valid zip file, ss_zip will try to open and parse it.
      *               If this parameter is empty, the new empty zip archive is created. This parameter has no meaning in
      *               LIGHT verion, please upgrade to PROfessional version.
-     * @param int $complevel compression level, 1-minimal compression, 9-maximal, default is 6
+     * @param int $compLevel compression level, 1-minimal compression, 9-maximal, default is 6
      */
-    public function __construct($zipfile = '', $complevel = 6)
+    public function __construct($zipFile = '', $compLevel = 6)
     {
         $this->clear();
-        if ($complevel < 1) {
-            $complevel = 1;
+        if ($compLevel < 1) {
+            $compLevel = 1;
         }
-        if ($complevel > 9) {
-            $complevel = 9;
+        if ($compLevel > 9) {
+            $compLevel = 9;
         }
-        $this->complevel = $complevel;
-        $this->open($zipfile);
+        $this->complevel = $compLevel;
+        $this->open($zipFile);
     }
 
     /**Resets the object, clears all the structures
      */
     public function clear()
     {
-        $this->zipfile = "";
+        $this->zipfile = '';
         $this->complevel = 6;
         $this->cnt = 0;
         $this->offset = 0;
@@ -69,7 +70,7 @@ class ss_zip
     /**opens zip file.
      * <center><hr nashade>*** This functionality is available in PRO version only. ***<br><a
      * href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center> This
-     * function opens file pointed by zipfile parameter and creates all necessary structures
+     * function opens file pointed by zipFile parameter and creates all necessary structures
      *
      * @param string $zipfile path to the file
      * @param boolean $append if true the newlly opened archive will be appended to existing object structure
@@ -79,9 +80,10 @@ class ss_zip
     }
 
 
-    /**saves to the disc or sends zipfile to the browser.
+    /**saves to the disc or sends zipFile to the browser.
+
      *
-     * @param string $zipfile path under which to store the file on the server or file name under which
+*@param string $zipFile path under which to store the file on the server or file name under which
      *                                     the
      *                             browser will receive it. If you are saving to the server, you are responsible to
      *                             obtain appropriate write permissions for this operation.
@@ -95,22 +97,22 @@ class ss_zip
      *        function. The only exception is that other headers may be sent. See <a
      *        href='http://php.net/header' target='_blank'>http://php.net/header</a>
      */
-    public function save($zipfile, $where = 'f')
+    public function save($zipFile, $where = 'f')
     {
         if (!$this->zipfile) {
             $this->archive();
         }
-        $zipfile = trim($zipfile);
+        $zipFile = trim($zipFile);
 
         if (strtolower(trim($where)) === 'f') {
-            $this->_write($zipfile, $this->zipfile);
+            $this->_write($zipFile, $this->zipfile);
         } elseif (strtolower(trim($where)) === 'r') {
-            $zipfile = basename($zipfile);
+            $zipFile = basename($zipFile);
             print $this->archive();
         } else {
-            $zipfile = basename($zipfile);
-            header("Content-type: application/octet-stream");
-            header("Content-disposition: attachment; filename=\"$zipfile\"");
+            $zipFile = basename($zipFile);
+            header('Content-type: application/octet-stream');
+            header("Content-disposition: attachment; filename=\"$zipFile\"");
             print $this->archive();
         }
     }

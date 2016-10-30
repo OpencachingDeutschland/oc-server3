@@ -17,7 +17,7 @@
 
  ****************************************************************************/
 
-$rating_tpl =    '<tr>
+$rating_tpl = '<tr>
                 <td valign="top">' . t('Recommendations:') . '</td>
                 <td valign="top">
                     {rating_msg}

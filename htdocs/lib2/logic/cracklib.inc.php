@@ -34,7 +34,7 @@ function cracklib_checkpw($pw, $addwords)
 
     // min. 4 different chars
     $chars = array();
-    for ($i = 0; $i < mb_strlen($pw); $i ++) {
+    for ($i = 0; $i < mb_strlen($pw); $i++) {
         $chars[mb_substr($pw, $i, 1)] = true;
     }
 

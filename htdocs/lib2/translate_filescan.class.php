@@ -140,9 +140,9 @@ class translate_filescan
     {
         $nLine = 1;
 
-        for ($n = 0; $n < $nPos; $n ++) {
+        for ($n = 0; $n < $nPos; $n++) {
             if (substr($this->msContent, $n, 1) == "\n") {
-                $nLine ++;
+                $nLine++;
             }
         }
 

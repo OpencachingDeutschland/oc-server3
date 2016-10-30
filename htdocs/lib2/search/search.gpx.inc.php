@@ -391,7 +391,7 @@ function search_output()
                 $thislog = mb_ereg_replace('{username}', text_xmlentities($rLog['username']), $thislog);
 
                 if ($rLog['type'] == 3 && $rLog['needs_maintenance'] == 2) {
-                    $logtype = 'Needs Maintenance';   // with capital M, other than cache attribute
+                    $logtype = 'Needs Maintenance'; // with capital M, other than cache attribute
                 } elseif (isset($gpxLogType[$rLog['type']])) {
                     $logtype = $gpxLogType[$rLog['type']];
                 } else {
@@ -512,28 +512,28 @@ function search_output()
             switch ($childWaypoint['type']) {
                 case 1:
                     $wp_typename = "Parking Area";
-                    break;  // well-known garmin symbols
+                    break; // well-known garmin symbols
                 case 2:
                     $wp_typename = "Flag, Green";
-                    break;   // stage / ref point
+                    break; // stage / ref point
                 case 3:
                     $wp_typename = "Flag, Blue";
-                    break;    // path
+                    break; // path
                 case 4:
                     $wp_typename = "Circle with X";
                     break; // final
                 case 5:
                     $wp_typename = "Diamond, Green";
-                    break;  // point of interest
+                    break; // point of interest
                 default:
                     $wp_typename = "Flag, Blue";
-                    break;  // for the case new types are forgotten here ..
+                    break; // for the case new types are forgotten here ..
             }
             $thiswp = mb_ereg_replace('{type}', text_xmlentities($wp_typename), $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
             $waypoints .= $thiswp;
-            ++ $n;
+            ++$n;
         }
 
         if ($cacheNote && !empty($cacheNote['latitude']) && !empty($cacheNote['longitude'])) {

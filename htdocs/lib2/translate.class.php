@@ -51,7 +51,7 @@ class translate
      */
     public function t($message, $style, $resource_name, $line, $plural = '', $count = 1, $lang = null)
     {
-        global $opt, $locale;    // $locale is for lib1 compatibility
+        global $opt, $locale; // $locale is for lib1 compatibility
 
         if ($message == '') {
             return '';

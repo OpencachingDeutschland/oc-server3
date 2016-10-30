@@ -272,16 +272,16 @@ class Net_IDNA2
      * @access private
      */
     private static $_np_prohibit_ranges = array(
-        array(0x80,     0x9F    ),
-        array(0x2060,   0x206F  ),
-        array(0x1D173,  0x1D17A ),
-        array(0xE000,   0xF8FF  ),
-        array(0xF0000,  0xFFFFD ),
+        array(0x80, 0x9F),
+        array(0x2060, 0x206F),
+        array(0x1D173, 0x1D17A),
+        array(0xE000, 0xF8FF),
+        array(0xF0000, 0xFFFFD),
         array(0x100000, 0x10FFFD),
-        array(0xFDD0,   0xFDEF  ),
-        array(0xD800,   0xDFFF  ),
-        array(0x2FF0,   0x2FFB  ),
-        array(0xE0020,  0xE007F )
+        array(0xFDD0, 0xFDEF),
+        array(0xD800, 0xDFFF),
+        array(0x2FF0, 0x2FFB),
+        array(0xE0020, 0xE007F)
     );
 
     /**
@@ -2282,7 +2282,7 @@ class Net_IDNA2
                     break;
 
                 default:
-                    throw new InvalidArgumentException('Set Parameter: Unknown parameter '.$v.' for option '.$k);
+                    throw new InvalidArgumentException('Set Parameter: Unknown parameter ' . $v . ' for option ' . $k);
                 }
 
                 break;
@@ -2299,7 +2299,7 @@ class Net_IDNA2
                 if (in_array($v, array('2003', '2008'))) {
                     $this->_version = $v;
                 } else {
-                    throw new InvalidArgumentException('Set Parameter: Invalid parameter '.$v.' for option '.$k);
+                    throw new InvalidArgumentException('Set Parameter: Invalid parameter ' . $v . ' for option ' . $k);
                 }
                 break;
 
@@ -2328,8 +2328,7 @@ class Net_IDNA2
         // Forcing conversion of input to UCS4 array
         // If one time encoding is given, use this, else the objects property
         switch (($one_time_encoding) ? $one_time_encoding : $this->_api_encoding) {
-        case 'utf8':
-            $decoded = $this->_utf8_to_ucs4($decoded);
+        case 'utf8' : $decoded = $this->_utf8_to_ucs4($decoded);
             break;
         case 'ucs4_string':
             $decoded = $this->_ucs4_string_to_ucs4($decoded);
@@ -2351,7 +2350,7 @@ class Net_IDNA2
 
         foreach ($decoded as $k => $v) {
             // Make sure to use just the plain dot
-            switch($v) {
+            switch ($v) {
             case 0x3002:
             case 0xFF0E:
             case 0xFF61:
@@ -2372,11 +2371,11 @@ class Net_IDNA2
                 // Skip first char
                 if ($k) {
                     $encoded = '';
-                    $encoded = $this->_encode(array_slice($decoded, $last_begin, (($k)-$last_begin)));
+                    $encoded = $this->_encode(array_slice($decoded, $last_begin, (($k) - $last_begin)));
                     if ($encoded) {
                         $output .= $encoded;
                     } else {
-                        $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($k)-$last_begin)));
+                        $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($k) - $last_begin)));
                     }
                     $output .= chr($decoded[$k]);
                 }
@@ -2387,11 +2386,11 @@ class Net_IDNA2
         if ($last_begin) {
             $inp_len = sizeof($decoded);
             $encoded = '';
-            $encoded = $this->_encode(array_slice($decoded, $last_begin, (($inp_len)-$last_begin)));
+            $encoded = $this->_encode(array_slice($decoded, $last_begin, (($inp_len) - $last_begin)));
             if ($encoded) {
                 $output .= $encoded;
             } else {
-                $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($inp_len)-$last_begin)));
+                $output .= $this->_ucs4_to_utf8(array_slice($decoded, $last_begin, (($inp_len) - $last_begin)));
             }
             return $output;
         }
@@ -2423,7 +2422,7 @@ class Net_IDNA2
             case 'ucs4_array':
                 break;
             default:
-                throw new InvalidArgumentException('Unknown encoding '.$one_time_encoding);
+                throw new InvalidArgumentException('Unknown encoding ' . $one_time_encoding);
             }
         }
         // Make sure to drop any newline characters around
@@ -2481,8 +2480,7 @@ class Net_IDNA2
         // The output is UTF-8 by default, other output formats need conversion here
         // If one time encoding is given, use this, else the objects property
         switch (($one_time_encoding) ? $one_time_encoding : $this->_api_encoding) {
-        case 'utf8':
-            return $return;
+        case 'utf8' : return $return;
             break;
         case 'ucs4_string':
             return $this->_ucs4_to_ucs4_string($this->_utf8_to_ucs4($return));
@@ -2637,9 +2635,8 @@ class Net_IDNA2
                     $delta++;
                 } else if ($decoded[$i] == $cur_code) {
                     for ($q = $delta, $k = $this->_base; 1; $k += $this->_base) {
-                        $t = ($k <= $bias)?
-                            $this->_tmin :
-                            (($k >= $bias + $this->_tmax)? $this->_tmax : $k - $bias);
+                        $t = ($k <= $bias) ?
+                            $this->_tmin : (($k >= $bias + $this->_tmax) ? $this->_tmax : $k - $bias);
 
                         if ($q < $t) {
                             break;
@@ -2707,14 +2704,13 @@ class Net_IDNA2
         $idx      = 0;
         $char     = $this->_initial_n;
 
-        for ($enco_idx = ($delim_pos)? ($delim_pos + 1) : 0; $enco_idx < $enco_len; ++$deco_len) {
-            for ($old_idx = $idx, $w = 1, $k = $this->_base; 1 ; $k += $this->_base) {
+        for ($enco_idx = ($delim_pos) ? ($delim_pos + 1) : 0; $enco_idx < $enco_len; ++$deco_len) {
+            for ($old_idx = $idx, $w = 1, $k = $this->_base; 1; $k += $this->_base) {
                 $digit = $this->_decodeDigit($encoded{$enco_idx++});
                 $idx += $digit * $w;
 
                 $t = ($k <= $bias) ?
-                    $this->_tmin :
-                    (($k >= $bias + $this->_tmax)? $this->_tmax : ($k - $bias));
+                    $this->_tmin : (($k >= $bias + $this->_tmax) ? $this->_tmax : ($k - $bias));
 
                 if ($digit < $t) {
                     break;
@@ -2725,7 +2721,7 @@ class Net_IDNA2
 
             $bias      = $this->_adapt($idx - $old_idx, $deco_len + 1, $is_first);
             $is_first  = false;
-            $char     += (int) ($idx / ($deco_len + 1));
+            $char     += (int)($idx / ($deco_len + 1));
             $idx      %= ($deco_len + 1);
 
             if ($deco_len > 0) {
@@ -2753,14 +2749,14 @@ class Net_IDNA2
      */
     private function _adapt($delta, $npoints, $is_first)
     {
-        $delta = (int) ($is_first ? ($delta / $this->_damp) : ($delta / 2));
-        $delta += (int) ($delta / $npoints);
+        $delta = (int)($is_first ? ($delta / $this->_damp) : ($delta / 2));
+        $delta += (int)($delta / $npoints);
 
         for ($k = 0; $delta > (($this->_base - $this->_tmin) * $this->_tmax) / 2; $k += $this->_base) {
-            $delta = (int) ($delta / ($this->_base - $this->_tmin));
+            $delta = (int)($delta / ($this->_base - $this->_tmin));
         }
 
-        return (int) ($k + ($this->_base - $this->_tmin + 1) * $delta / ($delta + $this->_skew));
+        return (int)($k + ($this->_base - $this->_tmin + 1) * $delta / ($delta + $this->_skew));
     }
 
     /**
@@ -2787,7 +2783,7 @@ class Net_IDNA2
     private function _decodeDigit($cp)
     {
         $cp = ord($cp);
-        return ($cp - 48 < 10)? $cp - 22 : (($cp - 65 < 26)? $cp - 65 : (($cp - 97 < 26)? $cp - 97 : $this->_base));
+        return ($cp - 48 < 10) ? $cp - 22 : (($cp - 65 < 26) ? $cp - 65 : (($cp - 97 < 26) ? $cp - 97 : $this->_base));
     }
 
     /**
@@ -2870,7 +2866,7 @@ class Net_IDNA2
                     // Rewind the for loop by one, since there can be more possible compositions
                     $i--;
                     $out_len--;
-                    $last_class = ($i == $last_starter)? 0 : $this->_getCombiningClass($output[$i - 1]);
+                    $last_class = ($i == $last_starter) ? 0 : $this->_getCombiningClass($output[$i - 1]);
 
                     continue;
                 }
@@ -2907,7 +2903,7 @@ class Net_IDNA2
 
         $result   = array();
         $T        = $this->_tbase + $sindex % $this->_tcount;
-        $result[] = (int)($this->_lbase +  $sindex / $this->_ncount);
+        $result[] = (int)($this->_lbase + $sindex / $this->_ncount);
         $result[] = (int)($this->_vbase + ($sindex % $this->_ncount) / $this->_tcount);
 
         if ($T != $this->_tbase) {
@@ -2993,7 +2989,7 @@ class Net_IDNA2
      */
     private function _getCombiningClass($char)
     {
-        return isset(self::$_np_norm_combcls[$char])? self::$_np_norm_combcls[$char] : 0;
+        return isset(self::$_np_norm_combcls[$char]) ? self::$_np_norm_combcls[$char] : 0;
     }
 
     /**
@@ -3127,7 +3123,7 @@ class Net_IDNA2
                 $output[$out_len] = $v;
                 ++$out_len;
                 if ('add' == $mode) {
-                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
+                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte ' . $k);
                 }
                 continue;
             }
@@ -3151,10 +3147,10 @@ class Net_IDNA2
                     $next_byte = 4;
                     $v = ($v - 252) << 30;
                 } else {
-                    throw new UnexpectedValueException('This might be UTF-8, but I don\'t understand it at byte '.$k);
+                    throw new UnexpectedValueException('This might be UTF-8, but I don\'t understand it at byte ' . $k);
                 }
                 if ('add' == $mode) {
-                    $output[$out_len] = (int) $v;
+                    $output[$out_len] = (int)$v;
                     ++$out_len;
                     continue;
                 }
@@ -3163,7 +3159,7 @@ class Net_IDNA2
                 if (!$this->_allow_overlong && $test == 'range') {
                     $test = 'none';
                     if (($v < 0xA0 && $start_byte == 0xE0) || ($v < 0x90 && $start_byte == 0xF0) || ($v > 0x8F && $start_byte == 0xF4)) {
-                        throw new OutOfRangeException('Bogus UTF-8 character detected (out of legal range) at byte '.$k);
+                        throw new OutOfRangeException('Bogus UTF-8 character detected (out of legal range) at byte ' . $k);
                     }
                 }
                 if ($v >> 6 == 2) { // Bit mask must be 10xxxxxx
@@ -3171,7 +3167,7 @@ class Net_IDNA2
                     $output[($out_len - 1)] += $v;
                     --$next_byte;
                 } else {
-                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte '.$k);
+                    throw new UnexpectedValueException('Conversion from UTF-8 to UCS-4 failed: malformed input at byte ' . $k);
                 }
                 if ($next_byte < 0) {
                     $mode = 'next';
@@ -3213,14 +3209,14 @@ class Net_IDNA2
                 // 4 bytes
                 $output .= chr(240 + ($v >> 18))
                     . chr(128 + (($v >> 12) & 63))
-                    . chr(128 + (($v >>  6) & 63))
+                    . chr(128 + (($v >> 6) & 63))
                     . chr(128 + ($v & 63));
             } else if ($v < 1 << 26) {
                 // 5 bytes
                 $output .= chr(248 + ($v >> 24))
                     . chr(128 + (($v >> 18) & 63))
                     . chr(128 + (($v >> 12) & 63))
-                    . chr(128 + (($v >>  6) & 63))
+                    . chr(128 + (($v >> 6) & 63))
                     . chr(128 + ($v & 63));
             } else if ($v < 1 << 31) {
                 // 6 bytes
@@ -3228,7 +3224,7 @@ class Net_IDNA2
                     . chr(128 + (($v >> 24) & 63))
                     . chr(128 + (($v >> 18) & 63))
                     . chr(128 + (($v >> 12) & 63))
-                    . chr(128 + (($v >>  6) & 63))
+                    . chr(128 + (($v >> 6) & 63))
                     . chr(128 + ($v & 63));
             } else {
                 throw new UnexpectedValueException('Conversion from UCS-4 to UTF-8 failed: malformed input');
@@ -3288,7 +3284,7 @@ class Net_IDNA2
                 $out_len++;
                 $output[$out_len] = 0;
             }
-            $output[$out_len] += ord($input{$i}) << (8 * (3 - ($i % 4) ) );
+            $output[$out_len] += ord($input{$i}) << (8 * (3 - ($i % 4)));
         }
         return $output;
     }
@@ -3339,7 +3335,7 @@ class Net_IDNA2
         $return = '';
 
         for ($i = $w; $i > -1; $i--) {
-            $return .= ($octet & (1 << $i))? '1' : '0';
+            $return .= ($octet & (1 << $i)) ? '1' : '0';
         }
 
         return $return;

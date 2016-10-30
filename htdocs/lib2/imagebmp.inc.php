@@ -491,7 +491,7 @@ function freaddword($f)
 }
 
 /**
- * @param $byte
+ * @param integer $byte
  * @param $start
  * @param $len
  *
@@ -508,8 +508,8 @@ function RetBits($byte, $start, $len)
 
 $CurrentBit = 0;
 /**
- * @param $f
- * @param $count
+ * @param resource $f
+ * @param integer $count
  *
  * @return number
  */
@@ -564,7 +564,7 @@ function int_to_dword($n)
 }
 
 /**
- * @param $n
+ * @param integer $n
  *
  * @return string
  */
@@ -585,7 +585,7 @@ function decbin8($d)
 
 /**
  * @param $d
- * @param $n
+ * @param integer $n
  *
  * @return string
  */

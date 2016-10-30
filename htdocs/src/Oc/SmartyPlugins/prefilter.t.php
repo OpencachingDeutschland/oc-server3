@@ -91,10 +91,10 @@ function smarty_prefilter_t($source, &$smarty)
  *
  */
 /**
- * @param $block
- * @param $message
+ * @param string $block
+ * @param string $message
  * @param $smarty
- * @param $line
+ * @param integer $line
  *
  * @return string
  */
@@ -268,7 +268,7 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
 
 /**
  * @param $haystack
- * @param $needles
+ * @param string[] $needles
  *
  * @return bool|int
  */

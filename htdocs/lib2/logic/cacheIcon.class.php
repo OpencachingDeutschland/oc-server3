@@ -10,7 +10,7 @@ class CacheIcon
 
     public static function get($user_id, $cache_id, $cache_status, $cache_userid, $iconname)
     {
-        $iconname = mb_eregi_replace("cache/", "", $iconname);   // for old cache_type table contents
+        $iconname = mb_eregi_replace("cache/", "", $iconname); // for old cache_type table contents
         $iconext = "." . mb_eregi_replace("^.*\.", "", $iconname);
         $iconname = mb_eregi_replace("\..*", "", $iconname);
 
@@ -30,7 +30,7 @@ class CacheIcon
                 break;
             case 5:
                 $iconname .= "-s";
-                break;      // fix for RT ticket #3403
+                break; // fix for RT ticket #3403
             case 6:
                 $iconname .= "-a";
                 break;

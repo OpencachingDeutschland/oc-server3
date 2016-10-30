@@ -367,7 +367,7 @@ function get_archive_data($caches)
     $rs = sql("SELECT * FROM `caches` WHERE `cache_id` IN " . $cachelist);
     while ($r = sql_fetch_assoc($rs)) {
         $nextcd[$r['wp_oc']] = $r;
-        $user_id = $r['user_id'];     // is used later for logs
+        $user_id = $r['user_id']; // is used later for logs
     }
     sql_free_result($rs);
 
@@ -467,7 +467,7 @@ function get_archive_data($caches)
         "SELECT * FROM `caches_attributes_modified`
          WHERE `cache_id` IN " . $cachelist . "  /* OConly attrib is shown, but not restorable */
          ORDER BY `date_modified` ASC"
-    );   // order doesn't matter as long it is date only
+    ); // order doesn't matter as long it is date only
     while ($r = sql_fetch_assoc($rs)) {
         append_data(
             $data,
@@ -623,7 +623,7 @@ function get_archive_data($caches)
         "SELECT *, " . $piccacheid . "AS `cache_id` FROM `pictures_modified`
          WHERE " . $piccacheid . " IN " . $cachelist . "
          ORDER BY `date_modified` ASC"
-    );  // order is relevant for the case of restore-reverts
+    ); // order is relevant for the case of restore-reverts
     while ($r = sql_fetch_assoc($rs)) {
         $r['date_modified'] = substr($r['date_modified'], 0, 10);
         switch ($r['operation']) {
@@ -727,7 +727,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 {
     global $opt, $login;
 
-    sql("SET @restoredby='&1'", $login->userid);         // is evaluated by trigger functions
+    sql("SET @restoredby='&1'", $login->userid); // is evaluated by trigger functions
     sql_slave("SET @restoredby='&1'", $login->userid);
 
     $restored = array();
@@ -1014,12 +1014,12 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             }
                             $logs_restored = true;
                         }
-                       // if it was not already restored by a later restore operation ...
+                        // if it was not already restored by a later restore operation ...
                     } elseif (sql_value("SELECT `id` FROM `cache_logs` WHERE `id`='&1'", 0, $revert_logid) == 0) {
                         // id, uuid, date_created and last_modified are set automatically;
                         // picture will be updated automatically on picture-restore
                         $log = new cachelog();
-                        $log->setNode($r['node']);  // cachelog class currently does not initialize node field
+                        $log->setNode($r['node']); // cachelog class currently does not initialize node field
                         $log->setCacheId($r['cache_id']);
                         $log->setUserId($r['user_id']);
                         $log->setType($r['type'], true);
@@ -1071,7 +1071,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                 }  // not already processed
 
                 if ($error != "") {
-                    $restored[$wp]['internal error - could not $error log ' + $r['id'] + "/" + $logid];
+                    $restored[$wp]['internal error - could not $error log ' +$r['id'] + "/" +$logid];
                 }
                 if ($logs_restored) {
                     $restored[$wp]['logs'] = true;
@@ -1203,7 +1203,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                 }  // not already processed
 
                 if ($error != "") {
-                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] + "/" + $picid] = true;
+                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] + "/" +$picid] = true;
                 }
                 if ($pics_restored) {
                     $restored[$wp]['pictures'] = true;

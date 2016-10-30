@@ -75,11 +75,18 @@ class picture
         }
     }
 
+    /**
+     * @return bool
+     */
     public function exist()
     {
         return $this->rePicture->exist();
     }
 
+    /**
+     * @param $sFilename
+     * @return bool
+     */
     public static function allowedExtension($sFilename)
     {
         global $opt;
@@ -120,11 +127,13 @@ class picture
         $sUUID = $this->getUUID();
 
         $this->setUrl($opt['logic']['pictures']['url'] . $sUUID . '.' . $sExtension);
-        //$this->setThumbUrl($opt['logic']['pictures']['thumb_url'] . substr($sUUID, 0, 1) . '/' . substr($sUUID, 1, 1) . '/' . $sUUID . '.' . $sExtension);
 
         $this->bFilenamesSet = true;
     }
 
+    /**
+     * @return int
+     */
     public function getPictureId()
     {
         return $this->nPictureId;
@@ -132,6 +141,7 @@ class picture
 
     /**
      * @param boolean $bRestoring
+     * @param int $original_id
      */
     private function setArchiveFlag($bRestoring, $original_id = 0)
     {
@@ -146,12 +156,6 @@ class picture
         // close before the targetet DB operation as possible.
 
         if ($this->getObjectType() == 1) {
-            /*
-            $owner_id = sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`=
-                                     IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`='&1'),
-                                       (SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`='&1'))",
-                                                       0, $this->getObjectId());
-            */
             $logger_id = sql_value(
                 "SELECT
                     IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`='&1'),
@@ -191,27 +195,42 @@ class picture
 
     /**
      * @param string $value
+     * @return bool
      */
     public function setUrl($value)
     {
         return $this->rePicture->setValue('url', $value);
     }
 
+    /**
+     * @return mixed
+     */
     public function getThumbUrl()
     {
         return $this->rePicture->getValue('thumb_url');
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setThumbUrl($value)
     {
         return $this->rePicture->setValue('thumb_url', $value);
     }
 
+    /**
+     * @return mixed
+     */
     public function getTitle()
     {
         return $this->rePicture->getValue('title');
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setTitle($value)
     {
         if ($value != '') {
@@ -221,16 +240,26 @@ class picture
         }
     }
 
+    /**
+     * @return bool
+     */
     public function getSpoiler()
     {
         return $this->rePicture->getValue('spoiler') != 0;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setSpoiler($value)
     {
         return $this->rePicture->setValue('spoiler', $value ? 1 : 0);
     }
 
+    /**
+     * @return bool
+     */
     public function getLocal()
     {
         return $this->rePicture->getValue('local') != 0;
@@ -238,42 +267,67 @@ class picture
 
     /**
      * @param integer $value
+     * @return bool
      */
     public function setLocal($value)
     {
         return $this->rePicture->setValue('local', $value ? 1 : 0);
     }
 
+    /**
+     * @return bool
+     */
     public function getUnknownFormat()
     {
         return $this->rePicture->getValue('unknown_format') != 0;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setUnknownFormat($value)
     {
         return $this->rePicture->setValue('unknown_format', $value ? 1 : 0);
     }
 
+    /**
+     * @return bool
+     */
     public function getDisplay()
     {
         return $this->rePicture->getValue('display') != 0;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setDisplay($value)
     {
         return $this->rePicture->setValue('display', $value ? 1 : 0);
     }
 
+    /**
+     * @return bool
+     */
     public function getMapPreview()
     {
         return $this->rePicture->getValue('mappreview') != 0;
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setMapPreview($value)
     {
         return $this->rePicture->setValue('mappreview', $value ? 1 : 0);
     }
 
+    /**
+     * @return string
+     */
     public function getFilename()
     {
         // works intendently before bFilenameSet == true !
@@ -289,6 +343,9 @@ class picture
         return $opt['logic']['pictures']['dir'] . end($fna);
     }
 
+    /**
+     * @return string
+     */
     public function getThumbFilename()
     {
         global $opt;
@@ -319,6 +376,9 @@ class picture
         }
     }
 
+    /**
+     * @return bool|null
+     */
     public function isVisibleOnCachePage()
     {
         if ($this->getObjectType() != OBJECT_CACHELOG) {
@@ -360,26 +420,43 @@ class picture
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getObjectId()
     {
         return $this->rePicture->getValue('object_id');
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setObjectId($value)
     {
         return $this->rePicture->setValue('object_id', $value + 0);
     }
 
+    /**
+     * @return mixed
+     */
     public function getObjectType()
     {
         return $this->rePicture->getValue('object_type');
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setObjectType($value)
     {
         return $this->rePicture->setValue('object_type', $value + 0);
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function getUserId()
     {
         if ($this->getObjectType() == OBJECT_CACHE) {
@@ -399,36 +476,58 @@ class picture
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getNode()
     {
         return $this->rePicture->getValue('node');
     }
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public function setNode($value)
     {
         return $this->rePicture->setValue('node', $value);
     }
 
+    /**
+     * @return mixed
+     */
     public function getUUID()
     {
         return $this->rePicture->getValue('uuid');
     }
 
+    /**
+     * @return mixed
+     */
     public function getLastModified()
     {
         return $this->rePicture->getValue('last_modified');
     }
 
+    /**
+     * @return mixed
+     */
     public function getDateCreated()
     {
         return $this->rePicture->getValue('date_created');
     }
 
+    /**
+     * @return mixed
+     */
     public function getPosition()
     {
         return $this->rePicture->getValue('seq');
     }
 
+    /**
+     * @return bool|null
+     */
     public function getAnyChanged()
     {
         return $this->rePicture->getAnyChanged();
@@ -438,6 +537,9 @@ class picture
     // This is a quick test for Ocprop dups and may be extended for any
     // picture uploads by comparing the file sizes and contents.
 
+    /**
+     * @return bool
+     */
     public function is_duplicate()
     {
         global $ocpropping;
@@ -454,7 +556,14 @@ class picture
         ) > 0;
     }
 
-    // return true if successful (with insert)
+    /**
+     * return true if successful (with insert)
+     *
+     * @param bool $restore
+     * @param int $original_id
+     * @param string $original_url
+     * @return bool
+     */
     public function save($restore = false, $original_id = 0, $original_url = "")
     {
         $undelete = ($original_id != 0);
@@ -500,6 +609,10 @@ class picture
         return $bRetVal;
     }
 
+    /**
+     * @param bool $restore
+     * @return bool
+     */
     public function delete($restore = false)
     {
         // see also removelog.php, 'remove log pictures'
@@ -561,13 +674,15 @@ class picture
         $login->verify();
 
         if (sql_value(
-                "SELECT COUNT(*)
-                FROM `caches`
-                INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
-                AND `caches`.`cache_id`='&2'", 0, $login->userid, $this->getCacheId()
-            ) == 0
-        ) {
+            "SELECT COUNT(*)
+            FROM `caches`
+            INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+            WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+            AND `caches`.`cache_id`='&2'",
+            0,
+            $login->userid,
+            $this->getCacheId()
+        ) == 0) {
             return false;
         } elseif ($this->getUserId() == $login->userid) {
             return true;
@@ -576,6 +691,9 @@ class picture
         return false;
     }
 
+    /**
+     * @return bool|string
+     */
     public function getPageLink()
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
@@ -603,6 +721,11 @@ class picture
         $longSideSize:  if longer side of picture > $longSideSize, then it will be prop. shrinked to
         returns: true if no error occur, otherwise false
     */
+    /**
+     * @param $tmpFile
+     * @param $longSideSize
+     * @return bool
+     */
     public function rotate_and_shrink($tmpFile, $longSideSize)
     {
         global $opt;
@@ -678,7 +801,12 @@ class picture
         }
     }
 
-    // rotate image according to EXIF orientation
+    /**
+     * rotate image according to EXIF orientation
+     *
+     * @param $tmpFile
+     * @return bool
+     */
     public function rotate($tmpFile)
     {
         if (extension_loaded('imagick')) {
@@ -726,6 +854,9 @@ class picture
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function up()
     {
         $prevPos = sql_value(

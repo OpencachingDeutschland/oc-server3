@@ -20,10 +20,9 @@ class cache
      */
     public static function cacheIdFromWP($wp)
     {
-        $cacheId = 0;
         if (mb_strtoupper(mb_substr($wp, 0, 2)) === 'GC') {
             $rs = sql("SELECT `cache_id` FROM `caches` WHERE `wp_gc_maintained`='&1'", $wp);
-            if (sql_num_rows($rs) != 1) {
+            if (sql_num_rows($rs) !== 1) {
                 sql_free_result($rs);
 
                 return null;
@@ -46,7 +45,7 @@ class cache
     public static function fromWP($wp)
     {
         $cacheId = self::cacheIdFromWP($wp);
-        if ($cacheId == 0) {
+        if ($cacheId === 0) {
             return null;
         }
 
@@ -71,7 +70,7 @@ class cache
     public static function fromUUID($uuid)
     {
         $cacheId = self::cacheIdFromUUID($uuid);
-        if ($cacheId == 0) {
+        if ($cacheId === 0) {
             return null;
         }
 
@@ -124,11 +123,17 @@ class cache
         }
     }
 
+    /**
+     * @return bool
+     */
     public function exist()
     {
         return $this->reCache->exist();
     }
 
+    /**
+     * @return int
+     */
     public function getCacheId()
     {
         return $this->nCacheId;

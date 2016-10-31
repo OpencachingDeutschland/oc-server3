@@ -189,7 +189,7 @@
         <tr><td class="spacer" colspan="2">&nbsp;</td></tr>
         {else}
         <tr>
-            <td class="header-small" colspan="2">
+            <td class="header-small searcherror" colspan="2">
                 &nbsp;&nbsp;<img src="resource2/ocstyle/images/log/16x16-dnf.png"/>&nbsp;
                 {if $owner}
                     {t 1=$ownerid 2=$owner}The user <b><a href="viewprofile.php?userid=%1">%2</a></b> does not own any caches that fit to your search options.{/t}

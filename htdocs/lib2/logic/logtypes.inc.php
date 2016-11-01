@@ -91,28 +91,28 @@ function get_cache_log_types($cache_id, $old_logtype, $statuslogs = true)
 
     $allowed_logtypes = array();
     if ($owner || $admin_report || $admin_locked) {
-        $allowed_logtypes[] = 3;   // note
+        $allowed_logtypes[] = 3; // note
     }
     if (($owner && $statuslogs) || $admin_report) {
         if ($cache_status != 5 && (($cache_status != 4 && $cache_status != 7) || $admin_report)) {
-            $allowed_logtypes[] = 10;  // ready for search
-            $allowed_logtypes[] = 11;  // temporarily not available
-            $allowed_logtypes[] = 9;   // archived
-            $allowed_logtypes[] = 13;  // locked
+            $allowed_logtypes[] = 10; // ready for search
+            $allowed_logtypes[] = 11; // temporarily not available
+            $allowed_logtypes[] = 9; // archived
+            $allowed_logtypes[] = 13; // locked
         }
         if ($admin_report || $old_logtype == 14) {
             $allowed_logtypes[] = 14;
         }  // locked, invisible
     }
     if ($cache_type == 6) { // event
-        $allowed_logtypes[] = 8;   // will attend
-        $allowed_logtypes[] = 7;   // attended
+        $allowed_logtypes[] = 8; // will attend
+        $allowed_logtypes[] = 7; // attended
     } else {
-        $allowed_logtypes[] = 1;   // found
-        $allowed_logtypes[] = 2;   // not found
+        $allowed_logtypes[] = 1; // found
+        $allowed_logtypes[] = 2; // not found
     }
     if (!($owner || $admin_report || $admin_locked)) {
-        $allowed_logtypes[] = 3;   // note
+        $allowed_logtypes[] = 3; // note
     }
 
     // always allow to keep the existing logtype when the log is edited by an admin
@@ -151,7 +151,7 @@ function teamcomment_allowed($cache_id, $logtype_id, $old_teamcomment = false)
             } elseif (!$opt['logic']['admin']['team_comments_only_for_reports'] || admin_has_open_report($cache_id)) {
                 // allowed for report processing by admins
                 $allowed = true;
-            } elseif ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [6,7])) {
+            } elseif ($login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [6, 7])) {
                 // allowed for admins && locked caches, see http://forum.opencaching.de/index.php?topic=3102.msg39517#msg39517
                 $allowed = true;
             } else {

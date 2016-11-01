@@ -14,14 +14,13 @@ $tpl->popup = 1;
 $tpl->assign('popup', true);
 $tpl->assign('garmin', true);
 
-// get cacheid
-$cacheid = 0;
+$cacheId = 0;
 if (isset($_REQUEST['cacheid'])) {
-    $cacheid = $_REQUEST['cacheid'] + 0;
+    $cacheId = $_REQUEST['cacheid'] + 0;
 } elseif (isset($_REQUEST['uuid'])) {
-    $cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
+    $cacheId = cache::cacheIdFromUUID($_REQUEST['uuid']);
 } elseif (isset($_REQUEST['wp'])) {
-    $cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
+    $cacheId = cache::cacheIdFromWP($_REQUEST['wp']);
 }
 
 // When the domain does not fit the api key, you must be redirected to the correct domain.
@@ -30,7 +29,7 @@ if (isset($_REQUEST['cacheid'])) {
 // be needed.
 
 if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUEST['redirect'])) {
-    $redirect = $opt['lib']['garmin']['page_url'] . 'garmin.php?redirect=1&cacheid=' . $cacheid;
+    $redirect = $opt['lib']['garmin']['page_url'] . 'garmin.php?redirect=1&cacheid=' . $cacheId;
     if (isset($_REQUEST['templocale'])) {
         $redirect .= '&templocale=' . $_REQUEST['templocale'];
     }
@@ -38,13 +37,13 @@ if (($opt['lib']['garmin']['domain'] != $_SERVER['HTTP_HOST']) && !isset($_REQUE
     exit;
 }
 
-$cache = new cache($cacheid);
+$cache = new cache($cacheId);
 
-if ($cache->exist() == false) {
+if ($cache->exist() === false) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
 }
 
-if ($cache->allowView() == false) {
+if ($cache->allowView() === false) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
@@ -116,7 +115,7 @@ $rs = sql(
      LEFT JOIN `cache_location`
         ON `caches`.`cache_id` = `cache_location`.`cache_id`
      WHERE `caches`.`cache_id`='&1'",
-    $cacheid,
+    $cacheId,
     $opt['template']['locale'],
     $sPreferedDescLang,
     $login->userid

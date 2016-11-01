@@ -86,8 +86,8 @@ class translate_filescan
     }
 
     /**
-     * @param $sCode
-     * @param $nStartSearch
+     * @param string $sCode
+     * @param integer $nStartSearch
      *
      * @return bool|int
      */
@@ -132,7 +132,7 @@ class translate_filescan
 
     // TODO: performance ... scan once at __construct and store line positions
     /**
-     * @param $nPos
+     * @param integer $nPos
      *
      * @return int
      */
@@ -140,9 +140,9 @@ class translate_filescan
     {
         $nLine = 1;
 
-        for ($n = 0; $n < $nPos; $n ++) {
+        for ($n = 0; $n < $nPos; $n++) {
             if (substr($this->msContent, $n, 1) == "\n") {
-                $nLine ++;
+                $nLine++;
             }
         }
 

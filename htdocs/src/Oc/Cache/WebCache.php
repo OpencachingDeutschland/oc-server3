@@ -44,8 +44,8 @@ class WebCache
     }
 
     /**
-     * @param $relBaseDir
-     * @param $ext
+     * @param string $relBaseDir
+     * @param string $ext
      */
     private function unlinkFiles($relBaseDir, $ext)
     {
@@ -144,7 +144,7 @@ class WebCache
     }
 
     /**
-     * @param $sTemplate
+     * @param string $sTemplate
      */
     private function preCompileTemplate($sTemplate)
     {

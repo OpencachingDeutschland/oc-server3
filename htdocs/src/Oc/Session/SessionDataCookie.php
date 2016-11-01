@@ -63,7 +63,7 @@ class SessionDataCookie implements SessionDataInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @param null $default
      *
      * @return mixed|null
@@ -74,7 +74,7 @@ class SessionDataCookie implements SessionDataInterface
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      */

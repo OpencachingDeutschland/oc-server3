@@ -12,7 +12,7 @@ class sitemapxml
 {
     public $sDefaultChangeFreq = 'monthly';
     public $nMaxFileSize = 9961472; // max file size, 10MB by specification
-    public $nMaxUrlCount = 50000;   // max number of URLs per file, 50000 by specification
+    public $nMaxUrlCount = 50000; // max number of URLs per file, 50000 by specification
 
     public $sPath = '';
     public $sDomain = '';
@@ -46,6 +46,11 @@ class sitemapxml
     /* sChaneFreq = {always, hourly, daily, weekly, monthly, yearly, never}
      * nPriority  = {0.0 to 1.0}
      */
+
+    /**
+     * @param string $sFile
+     * @param integer $dLastMod
+     */
     public function write($sFile, $dLastMod, $sChangeFreq = false, $nPriority = 0.5)
     {
         if ($sChangeFreq == false) {
@@ -62,6 +67,9 @@ class sitemapxml
         $this->writeInternal($sXML);
     }
 
+    /**
+     * @param string $str
+     */
     public function writeInternal($str)
     {
         global $opt;
@@ -75,7 +83,7 @@ class sitemapxml
 
         // open new XML file?
         if ($this->oSitemapFile === false) {
-            $this->nSitemapIndex ++;
+            $this->nSitemapIndex++;
             $sFilename = 'sitemap-' . $this->nSitemapIndex . '.xml.gz';
             $this->oSitemapFile = gzopen($this->sPath . $sFilename, 'wb');
 
@@ -91,7 +99,7 @@ class sitemapxml
         // write string to XML
         gzwrite($this->oSitemapFile, $str);
         $this->nWrittenSize += strlen($str);
-        $this->nWrittenCount ++;
+        $this->nWrittenCount++;
     }
 
     public function close()

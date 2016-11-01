@@ -123,7 +123,7 @@ class geokrety
                         break;
                 }
 
-                $nRecordsCount ++;
+                $nRecordsCount++;
             }
         } while ($xr->next());
 
@@ -267,7 +267,7 @@ class geokrety
         $waypoints = $element->getElementsByTagName('waypoints');
         if ($waypoints->length > 0) {
             $wpItems = $waypoints->item(0)->getElementsByTagName('waypoint');
-            for ($i = 0; $i < $wpItems->length; $i ++) {
+            for ($i = 0; $i < $wpItems->length; $i++) {
                 $wp = mb_trim($wpItems->item($i)->nodeValue);
                 if ($wp != '') {
                     sql("INSERT INTO `gk_move_waypoint` (`id`, `wp`) VALUES ('&1', '&2')", $id, $wp);
@@ -299,7 +299,7 @@ class geokrety
                 WHERE `id`='&2' AND `wp`!=''",
                 $gkid,
                 $r['id']
-            );  // "late log" bugfix: replaced $id paramter by $r['id']
+            ); // "late log" bugfix: replaced $id paramter by $r['id']
         } else {
             // do nothing
         }

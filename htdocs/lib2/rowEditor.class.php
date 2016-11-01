@@ -490,7 +490,7 @@ class rowEditor
     }
 
     /**
-     * @return bool
+     * @return boolean|null
      */
     public function getAnyChanged()
     {

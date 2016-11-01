@@ -177,7 +177,7 @@ if ($error == false) {
                 tpl_set_var('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
 
                 if (isset($_POST['descMode'])) {
-                    $descMode = $_POST['descMode'] + 0;  // Ocprop: 2
+                    $descMode = $_POST['descMode'] + 0; // Ocprop: 2
                     if (($descMode < 1) || ($descMode > 3)) {
                         $descMode = 3;
                     }
@@ -435,7 +435,7 @@ if ($error == false) {
                 tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('cacheid', $log_record['cache_id']);
-                tpl_set_var('reset', $reset);  // obsolete
+                tpl_set_var('reset', $reset); // obsolete
                 tpl_set_var('submit', $submit);
                 tpl_set_var('logid', $log_id);
                 tpl_set_var('date_message', !$date_ok ? $date_message : '');

@@ -51,7 +51,7 @@ class translate
      */
     public function t($message, $style, $resource_name, $line, $plural = '', $count = 1, $lang = null)
     {
-        global $opt, $locale;    // $locale is for lib1 compatibility
+        global $opt, $locale; // $locale is for lib1 compatibility
 
         if ($message == '') {
             return '';
@@ -159,10 +159,10 @@ class translateEdit extends translate
     }
 
     /**
-     * @param $message
-     * @param $style
-     * @param $resource_name
-     * @param $line
+     * @param string $message
+     * @param string $style
+     * @param string $resource_name
+     * @param string $line
      * @param string $plural
      * @param int $count
      * @param null $lang

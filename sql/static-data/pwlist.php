@@ -1,9 +1,7 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *  Read anti-cracking password list into database
  ***************************************************************************/
 
@@ -18,7 +16,7 @@ if ($pwf) {
     while (!feof($pwf)) {
         $pw = fgets($pwf);
         sql("INSERT IGNORE INTO `pw_dict` (`pw`) VALUES ('&1')", trim($pw));
-        ++ $n;
+        ++$n;
     }
     fclose($pwf);
 

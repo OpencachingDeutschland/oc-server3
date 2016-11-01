@@ -280,7 +280,7 @@ class Menu
     }
 
     /**
-     * @param $menuid
+     * @param integer|null $menuid
      * @param $ids
      * @param $items
      */
@@ -302,7 +302,7 @@ class Menu
     }
 
     /**
-     * @return array
+     * @return integer[]
      */
     public function GetSelectedMenuIds()
     {

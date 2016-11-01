@@ -61,7 +61,7 @@ class ProcessSync
             $pidDaemon = fgets($pidFile, 20);
             fclose($pidFile);
 
-            $pidDaemon = (int) $pidDaemon;
+            $pidDaemon = (int)$pidDaemon;
 
             // bad PID file, e.g. due to system malfunction while creating the file?
             if ($pidDaemon <= 0) {

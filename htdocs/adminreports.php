@@ -93,7 +93,7 @@ if ($id == 0) {
                     INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
                     INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
                      LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
-                         WHERE `cr`.`status` < 3 
+                         WHERE `cr`.`status` < 3
                          ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1) DESC,
                                     `cr`.`status` ASC,
                                                 `cr`.`lastmodified` ASC",

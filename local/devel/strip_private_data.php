@@ -90,12 +90,12 @@ sql(
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',
             `language_guessed`=1, `domain`=NULL, `admin`=0,
             `description`='', `desc_htmledit`=1"
-            // `data_license` setting is retained, so that all content stays tagged with
-            // correct license information.
 );
+// `data_license` setting is retained, so that all content stays tagged with
+// correct license information.
 
 echo "deleting hidden and locked caches\n";
-$rs = sql("SELECT `cache_id` FROM `caches` WHERE `status`>3");
+$rs = sql('SELECT `cache_id` FROM `caches` WHERE `status`>3');
 while ($r = sql_fetch_assoc($rs)) {
     echo '.';
     sql("DELETE FROM `caches` WHERE `cache_id`='&1'", $r['cache_id']);
@@ -105,12 +105,12 @@ mysql_free_result($rs);
 
 echo "deleting inactive users\n";
 $rs = sql(
-    "SELECT `user_id`
+    'SELECT `user_id`
      FROM `user`
      WHERE `user_id` NOT IN
         (SELECT `user_id` FROM `caches`
          UNION
-         SELECT `user_id` FROM `cache_logs`)"
+         SELECT `user_id` FROM `cache_logs`)'
 );
 while ($r = sql_fetch_assoc($rs)) {
     echo '.';

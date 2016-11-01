@@ -16,26 +16,26 @@ $opt['rootpath'] = __DIR__ . '/../../htdocs/';
 require $opt['rootpath'] . 'lib2/cli.inc.php';
 
 $rs = sql(
-    "SELECT `id`, `cache_id`, `latitude`, `longitude`
+    'SELECT `id`, `cache_id`, `latitude`, `longitude`
      FROM `cache_coordinates`
-     ORDER BY `cache_id`, `date_created`"
+     ORDER BY `cache_id`, `date_created`'
 );
 $duplicates = [];
 $last_cache_id = null;
 
 while ($r = sql_fetch_assoc($rs)) {
-    $lat_rounded = round($r['latitude'], 6);
-    $long_rounded = round($r['longitude'], 6);
+    $latRounded = round($r['latitude'], 6);
+    $longRounded = round($r['longitude'], 6);
 
     if ($r['cache_id'] === $last_cache_id) {
-        if ($lat_rounded == $last_latitude && $long_rounded == $last_longitude) {
+        if ($latRounded == $lastLatitude && $longRounded == $lastLongitude) {
             $duplicates[] = $r['id'];
         }
     } else {
         $last_cache_id = $r['cache_id'];
     }
-    $last_latitude = $lat_rounded;
-    $last_longitude = $long_rounded;
+    $lastLatitude = $latRounded;
+    $lastLongitude = $longRounded;
 }
 sql_free_result($rs);
 
@@ -43,8 +43,8 @@ if ($duplicates) {
     if ($argc == 2 && $argv[1] == 'go') {
         echo 'deleting ' . count($duplicates) . " duplicate coordinate records\n";
         sql(
-            "DELETE FROM `cache_coordinates`
-             WHERE `id` IN (" . implode(',', $duplicates) . ")"
+            'DELETE FROM `cache_coordinates`
+             WHERE `id` IN (' . implode(',', $duplicates) . ')'
         );
     } else {
         echo

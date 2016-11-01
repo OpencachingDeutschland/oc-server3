@@ -32,9 +32,9 @@ if ($argc < 3 || $argc > 4) {
     );
 }
 
-$er = new EmailRecovery($argv[1], $argv[2], $errormsg);
-if ($errormsg != '') {
-    die($errormsg . "\n");
+$er = new EmailRecovery($argv[1], $argv[2], $errorMsg);
+if ($errorMsg !== '') {
+    die($errorMsg . "\n");
 }
 
 if ($argc < 4) {
@@ -62,16 +62,16 @@ class EmailRecovery
     private $fromDateTime;
     private $toDateTime;
 
-    public function __construct($fromDT, $toDT, &$errormsg)
+    public function __construct($fromDT, $toDT, &$errorMsg)
     {
         if (!self::verifyDateTime($fromDT)) {
-            $errormsg = 'invalid from-datetime (must be SQL format): "' . $fromDT . '"';
+            $errorMsg = 'invalid from-datetime (must be SQL format): "' . $fromDT . '"';
         } elseif (!self::verifyDateTime($toDT)) {
-            $errormsg = 'invalid from-datetime (must be SQL format): "' . $toDT . '"';
+            $errorMsg = 'invalid from-datetime (must be SQL format): "' . $toDT . '"';
         } else {
             $this->fromDateTime = $fromDT;
             $this->toDateTime = $toDT;
-            $errormsg = '';
+            $errorMsg = '';
         }
     }
 
@@ -91,16 +91,16 @@ class EmailRecovery
     private function getDateCondition($table, $field)
     {
         return
-            "`" . $table . "`.`" . $field . "` >= '" . sql_escape($this->fromDateTime) . "'" .
-            " AND `" . $table . "`.`" . $field . "` <= '" . sql_escape($this->toDateTime) . "'";
+            '`' . $table . '`.`' . $field . "` >= '" . sql_escape($this->fromDateTime) . "'" .
+            ' AND `' . $table . '`.`' . $field . "` <= '" . sql_escape($this->toDateTime) . "'";
     }
 
     private function showObjectCount($table, $dateField, $description, $andWhere = '')
     {
         $objectCount = sql_value(
-            "SELECT COUNT(*)
-             FROM `" . $table . "`
-             WHERE " . $this->getDateCondition($table, $dateField) .
+            'SELECT COUNT(*)
+             FROM `' . $table . '`
+             WHERE ' . $this->getDateCondition($table, $dateField) .
                        ($andWhere ? ' AND (' . $andWhere . ')' : ''),
             0
         );
@@ -110,6 +110,9 @@ class EmailRecovery
 
     # display summary of information that was not sent to the users
 
+    /**
+     *
+     */
     public function showLosses()
     {
         self::message(0, 'In the given time interval');
@@ -144,7 +147,7 @@ class EmailRecovery
         echo "\n";
         self::message(0, 'Deleted logs:');
         $rs = sql(
-            "SELECT
+            'SELECT
                 `caches`.`wp_oc`,
                 `user1`.`username` `logger_name`,
                 `user2`.`username` `deleter_name`,
@@ -153,8 +156,8 @@ class EmailRecovery
              JOIN `user` `user1` ON `user1`.`user_id` = `cache_logs_archived`.`user_id`
              JOIN `user` `user2` ON `user2`.`user_id` = `cache_logs_archived`.`deleted_by`
              JOIN `caches` ON `caches`.`cache_id` = `cache_logs_archived`.`cache_id`
-             WHERE " . $this->getDateCondition('cache_logs_archived', 'deletion_date') . "
-             ORDER BY `cache_logs_archived`.`deletion_date` DESC"
+             WHERE ' . $this->getDateCondition('cache_logs_archived', 'deletion_date') . '
+             ORDER BY `cache_logs_archived`.`deletion_date` DESC'
         );
         while ($r = sql_fetch_assoc($rs)) {
             self::message(
@@ -170,11 +173,11 @@ class EmailRecovery
         echo "\n";
         self::message(0, 'Registered users:');
         $rs = sql(
-            "SELECT
+            'SELECT
                 `date_created` `registration_date`,
                 `username`
              FROM `user`
-             WHERE " .
+             WHERE ' .
                 $this->getDateCondition('user', 'date_created') . "
                 AND last_login IS NULL AND `activation_code` <> ''
              ORDER BY `date_created` DESC"
@@ -187,13 +190,13 @@ class EmailRecovery
         echo "\n";
         self::message(0, 'Private emails sent:');
         $rs = sql(
-            "SELECT
+            'SELECT
                 `email_user`.`date_created` `emaildate`,
                 `user`.`username` `sender_name`
              FROM `email_user`
              JOIN `user` ON `user`.`user_id` = `email_user`.`from_user_id`
-             WHERE " . $this->getDateCondition('email_user', 'date_created') . "
-             ORDER BY `email_user`.`date_created` DESC"
+             WHERE ' . $this->getDateCondition('email_user', 'date_created') . '
+             ORDER BY `email_user`.`date_created` DESC'
         );
         while ($r = sql_fetch_assoc($rs)) {
             self::message(2, $r['emaildate'] . ' from:' . $r['sender_name']);

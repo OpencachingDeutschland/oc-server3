@@ -4,7 +4,7 @@
 #
 # This script writes every 10 seconds the current timestamp to
 # table sys_repl_timestamp. This enables the cron-module
-# repliaction_monitor to check if the mysql replication slave(s) is up to
+# replication_monitor to check if the mysql replication slave(s) is up to
 # date and online.
 #
 # You should place this bash script outside the PHP configured

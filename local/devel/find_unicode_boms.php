@@ -8,8 +8,7 @@
  ***************************************************************************/
 
 chdir(__DIR__ . '/../../htdocs');
-require_once 'lib2/cli.inc.php';
-
+require_once __DIR__ . '/../../htdocs/lib2/cli.inc.php';
 
 scan('.', false);
 
@@ -18,7 +17,6 @@ foreach (['api', 'lang', 'lib', 'lib2', 'okapi', 'src', 'templates2', 'util', 'u
 }
 
 exit;
-
 
 function scan($dir, $subdirs)
 {
@@ -30,7 +28,7 @@ function scan($dir, $subdirs)
                 scan($path, $subdirs);
             } else {
                 if (is_file($path) && ((substr($file, - 4) === '.tpl') || (substr($file, - 4) === '.php'))) {
-                    testforbom($path);
+                    testForBom($path);
                 }
             }
         }
@@ -42,7 +40,7 @@ function scan($dir, $subdirs)
 /**
  * @param string $path
  */
-function testforbom($path)
+function testForBom($path)
 {
     $filestart = file_get_contents($path, false, null, 0, 2);
     if (ord($filestart) > 126) {

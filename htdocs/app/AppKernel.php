@@ -59,8 +59,8 @@ class AppKernel extends Kernel
 
     /**
      * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
-     *
      * @return void
+     * @throws \Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

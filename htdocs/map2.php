@@ -434,7 +434,7 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
 
     echo '<caches>' . "\n";
     $rs = sql_slave(
-        "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`,
+        'SELECT ' . geomath::getSqlDistanceFormula($nLon, $nLat, 0) . " AS `distance`,
                           `caches`.`name`, `caches`.`wp_oc`
                      FROM `map2_data`
                INNER JOIN `caches` ON `map2_data`.`cache_id`=`caches`.`cache_id`
@@ -455,14 +455,14 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
     sql_free_result($rs);
 
     if (!$caches_found && preg_match('/^[^\s[:punct:]]{2,}\.[^\s[:punct:]]{2,}\.[^\s[:punct:]]{2,}$/', $sName)) {
-        $result = @file_get_contents('http://api.what3words.com/w3w?key=' . $opt['lib']['w3w']['apikey']
-            . '&string=' . urlencode($sName));
+        $result = @file_get_contents('https://api.what3words.com/v2/forward?key=' . $opt['lib']['w3w']['apikey']
+            . '&addr=' . urlencode($sName));
         if ($result) {
             $json = json_decode($result, true);
-            if (!is_null($json['words']) && !is_null($json['position']) && count($json['position']) == 2) {
+            if ($json['words'] !== null && $json['geometry'] !== null && count($json['geometry']) === 2) {
                 echo '<coord name="' . xmlentities(implode('.', $json['words'])) .
-                    '" latitude="' . xmlentities($json["position"][0]) .
-                    '" longitude="' . xmlentities($json["position"][1]) . '" />' . "\n";
+                    '" latitude="' . xmlentities($json['lat']) .
+                    '" longitude="' . xmlentities($json['lng']) . '" />' . "\n";
             }
         }
     }

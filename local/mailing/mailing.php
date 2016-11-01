@@ -19,9 +19,9 @@ ini_set('memory_limit', '128M');
 $addresses = file('addresses.txt');
 $protocol = @file('sent.txt');
 if ($protocol === false) {
-    $sendto = $addresses;
+    $sendTo = $addresses;
 } else {
-    $sendto = array_diff($addresses, $protocol);
+    $sendTo = array_diff($addresses, $protocol);
 }
 
 // read message text
@@ -30,16 +30,16 @@ if (empty($message)) {
     die();
 }
 
-$total = count($sendto);
+$total = count($sendTo);
 $n = 0;
 echo 'sending email to ' . $total . ' of ' . count($addresses) . " recipients\n\n";
 
 $subject = '....';
 $from_adr = 'user@do.main';
 
-$starttime = microtime(true);
+$startTime = microtime(true);
 
-foreach ($sendto as $receiver) {
+foreach ($sendTo as $receiver) {
     $receiver = trim($receiver);
     echo ++ $n . "/$total: $receiver";
     mail(
@@ -55,4 +55,4 @@ foreach ($sendto as $receiver) {
     file_put_contents('sent.txt', "$receiver\n", FILE_APPEND);
 }
 
-echo 'Time needed: ' . (microtime(true) - $starttime) . "s\n";
+echo 'Time needed: ' . (microtime(true) - $startTime) . "s\n";

@@ -12,7 +12,7 @@ class Recommendation
     /**
      * @param $logId
      */
-    public function discardRecommendation($logId)
+    public static function discardRecommendation($logId)
     {
         $rsLog = sql(
             "SELECT

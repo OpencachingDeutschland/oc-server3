@@ -13,6 +13,7 @@
  *  Unicode Reminder メモ
  *****************************************************************************/
 
+use Oc\GeoCache\Recommendation;
 use Oc\GeoCache\StatisticPicture;
 
 require_once __DIR__ . '/lib/consts.inc.php';
@@ -301,7 +302,7 @@ if ($error == false) {
                     // evtl. discard cache recommendation if the log type was changed from
                     // 'found' or 'attended' to something else
                     if (!$top_option) {
-                        (new\Oc\GeoCache\Recommendation())->discardRecommendation($log_id);
+                        Recommendation::discardRecommendation($log_id);
                     }
 
                     // store changed data

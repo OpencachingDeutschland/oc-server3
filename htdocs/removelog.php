@@ -9,6 +9,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use Oc\GeoCache\Recommendation;
 use Oc\GeoCache\StatisticPicture;
 
 require_once __DIR__ . '/lib/consts.inc.php';
@@ -202,7 +203,7 @@ if ($error == false) {
                     sql_free_result($rs);
 
                     // evtl. discard cache recommendation
-                    (new\Oc\GeoCache\Recommendation())->discardRecommendation($log_id);
+                    Recommendation::discardRecommendation($log_id);
 
                     // move to archive, even if own log (uuids are used for OKAPI replication)
                     sql(

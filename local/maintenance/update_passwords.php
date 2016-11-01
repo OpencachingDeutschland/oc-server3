@@ -23,23 +23,23 @@ if (!$opt['logic']['password_hash']) {
     return;
 }
 
-$rs = sql("SELECT * FROM user WHERE password IS NOT NULL");
+$rs = sql('SELECT * FROM user WHERE password IS NOT NULL');
 while ($r = sql_fetch_array($rs)) {
     $password = $r['password'];
-    if (strlen($password) == 128) {
-        echo "Password seems to be already converted, ommit this password\n";
+    if (strlen($password) === 128) {
+        echo "Password seems to be already converted, omit this password\n";
         continue;
     }
     if (strlen($password) < 32) {
         $password = crypt::firstStagePasswordEncryption($password);
     }
-    $pwhash = crypt::secondStagePasswordEncryption($password);
+    $pwHash = crypt::secondStagePasswordEncryption($password);
 
-    $oldpw = sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id']);
-    sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $pwhash, $r['user_id']);
+    $oldPw = sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id']);
+    sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $pwHash, $r['user_id']);
 
-    if ($pwhash != sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id'])) {
-        sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $oldpw, $r['user_id']);
+    if ($pwHash != sql_value("SELECT `password` FROM `user` WHERE `user_id`='&1'", '', $r['user_id'])) {
+        sql("UPDATE `user` SET `password`='&1' WHERE `user_id`='&2'", $oldPw, $r['user_id']);
         echo "Error!\nCould not store new password. Password field not updated to 128 chars?\n\n";
         break;
     }

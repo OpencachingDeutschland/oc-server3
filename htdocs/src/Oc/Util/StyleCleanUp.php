@@ -12,7 +12,7 @@ class StyleCleanUp
     const TABWIDTH = 4;
 
     /**
-     * @var string
+     * @var array
      */
     private $excludeDirs;
 
@@ -22,12 +22,12 @@ class StyleCleanUp
     private $basedir;
 
     /**
-     * @var string
+     * @var int
      */
     private $filesModified;
 
     /**
-     * @var string
+     * @var int
      */
     private $linesModified;
 

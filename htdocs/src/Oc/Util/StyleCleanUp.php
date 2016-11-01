@@ -9,10 +9,10 @@ namespace Oc\Util;
 
 class StyleCleanUp
 {
-    const TABWIDTH = 4;
+    private $tabWith = 4;
 
     /**
-     * @var string
+     * @var array
      */
     private $excludeDirs;
 
@@ -22,12 +22,12 @@ class StyleCleanUp
     private $basedir;
 
     /**
-     * @var string
+     * @var int
      */
     private $filesModified;
 
     /**
-     * @var string
+     * @var int
      */
     private $linesModified;
 
@@ -82,7 +82,7 @@ class StyleCleanUp
                 # detect illegal characters at start of PHP or XML file
 
                 if (count($lines) && preg_match('/^(.+?)\<\?/', $lines[0], $matches)) {
-                    self::warn(
+                    $this->warn(
                         'invalid character(s) "' . $matches[1] . '" at start of ' . $displayFilePath
                     );
                 }
@@ -108,7 +108,7 @@ class StyleCleanUp
                         }
                     }
                     if (preg_match('/\<\?\s/', $line)) {   # relies on \n at EOL
-                        self::warn('short open tag in line ' . $n . ' of ' . $displayFilePath);
+                        $this->warn('short open tag in line ' . $n . ' of ' . $displayFilePath);
                     }
                     ++$n;
                 }
@@ -151,12 +151,12 @@ class StyleCleanUp
      * @param $line
      * @return string
      */
-    private static function expandTabs($line)
+    private function expandTabs($line)
     {
         while (($tabPos = strpos($line, "\t")) !== false) {
             $line =
                 substr($line, 0, $tabPos)
-                . substr('    ', 0, self::TABWIDTH - ($tabPos % self::TABWIDTH))
+                . substr('    ', 0, $this->tabWith - ($tabPos % $this->tabWith))
                 . substr($line, $tabPos + 1);
         }
 
@@ -166,7 +166,7 @@ class StyleCleanUp
     /**
      * @param $msg
      */
-    private static function warn($msg)
+    private function warn($msg)
     {
         echo '! ' . $msg . "\n";
     }

@@ -1,2 +1,2 @@
 <?php
-include 'xml11.htm';
+include __DIR__ . '/xml11.htm';

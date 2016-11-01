@@ -1,13 +1,12 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  submit a new cache
- *
  *  used template(s): newcache, viewcache, login
- *
  *  Unicode Reminder メモ
  ***************************************************************************/
+
+use Oc\GeoCache\StatisticPicture;
 
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
@@ -58,10 +57,10 @@ if ($error == false) {
             if ($sel_type == 4 || $sel_type == 5) {
                 $sel_size = 7;
             } else {
-                $sel_size = - 1;
+                $sel_size = -1;
             }
         } else {
-            $sel_size = isset($_POST['size']) ? $_POST['size'] : - 1;  // Ocprop
+            $sel_size = isset($_POST['size']) ? $_POST['size'] : -1;  // Ocprop
         }
         $sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
         $sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();  // Ocprop
@@ -120,7 +119,10 @@ if ($error == false) {
                 $oldDescMode = $descMode;
             }
         } else {
-            if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'", 1) == 1) {
+            if (sqlValue(
+                    "SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'", 1
+                ) == 1
+            ) {
                 $descMode = 1;
             } else {
                 $descMode = 3;
@@ -156,9 +158,12 @@ if ($error == false) {
         if ($descMode == 3) {
             // TinyMCE
             $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
-            $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=0&lang=' . strtolower($locale) . '"></script>' . "\n";
+            $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=0&lang=' . strtolower(
+                    $locale
+                ) . '"></script>' . "\n";
         }
-        $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
+        $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath(
+            ) . '"></script>' . "\n";
         tpl_set_var('htmlheaders', $headers);
 
         //effort
@@ -237,7 +242,7 @@ if ($error == false) {
         // fill activate hours
         $activate_hour = isset($_POST['activate_hour']) ? $_POST['activate_hour'] + 0 : date('H') + 0;
         $activation_hours = '';
-        for ($i = 0; $i <= 23; $i ++) {
+        for ($i = 0; $i <= 23; $i++) {
             if ($activate_hour == $i) {
                 $activation_hours .= '<option value="' . $i . '" selected="selected">' . $i . '</option>';
             } else {
@@ -259,7 +264,7 @@ if ($error == false) {
         //difficulty
         $difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;  // Ocprop
         $difficulty_options = '<option value="1">' . $sel_message . '</option>';
-        for ($i = 2; $i <= 10; $i ++) {
+        for ($i = 2; $i <= 10; $i++) {
             if ($difficulty == $i) {
                 $difficulty_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
             } else {
@@ -272,7 +277,7 @@ if ($error == false) {
         //terrain
         $terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1;  // Ocprop
         $terrain_options = '<option value="1">' . $sel_message . '</option>';
-        for ($i = 2; $i <= 10; $i ++) {
+        for ($i = 2; $i <= 10; $i++) {
             if ($terrain == $i) {
                 $terrain_options .= '<option value="' . $i . '" selected="selected">' . $i / 2 . '</option>';
             } else {
@@ -283,8 +288,10 @@ if ($error == false) {
         tpl_set_var('terrain_options', $terrain_options);
 
         //sizeoptions
-        $sSelected = ($sel_size == - 1) ? ' selected="selected"' : '';
-        $sizes = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
+        $sSelected = ($sel_size == -1) ? ' selected="selected"' : '';
+        $sizes = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(
+                t('Please select!'), ENT_COMPAT, 'UTF-8'
+            ) . '</option>';
         $rsSizes = sql(
             "SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name`
                   FROM `cache_size`
@@ -295,23 +302,31 @@ if ($error == false) {
         );
         while ($rSize = sql_fetch_assoc($rsSizes)) {
             $sSelected = ($rSize['id'] == $sel_size) ? ' selected="selected"' : '';
-            $sizes .= '<option value="' . $rSize['id'] . '"' . $sSelected . '>' . htmlspecialchars($rSize['name'], ENT_COMPAT, 'UTF-8') . '</option>';
+            $sizes .= '<option value="' . $rSize['id'] . '"' . $sSelected . '>' . htmlspecialchars(
+                    $rSize['name'], ENT_COMPAT, 'UTF-8'
+                ) . '</option>';
         }
         sql_free_result($rsSizes);
         tpl_set_var('sizeoptions', $sizes);
 
         //typeoptions
-        $sSelected = ($sel_type == - 1) ? ' selected="selected"' : '';
-        $types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(t('Please select!'), ENT_COMPAT, 'UTF-8') . '</option>';
-        $rsTypes = sql("SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
+        $sSelected = ($sel_type == -1) ? ' selected="selected"' : '';
+        $types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(
+                t('Please select!'), ENT_COMPAT, 'UTF-8'
+            ) . '</option>';
+        $rsTypes = sql(
+            "SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
                               FROM `cache_type`
                          LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
                          LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
                                    `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-                          ORDER BY `cache_type`.`ordinal` ASC");
+                          ORDER BY `cache_type`.`ordinal` ASC"
+        );
         while ($rType = sql_fetch_assoc($rsTypes)) {
             $sSelected = ($rType['id'] == $sel_type) ? ' selected="selected"' : '';
-            $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' . htmlspecialchars($rType['name'], ENT_COMPAT, 'UTF-8') . '</option>';
+            $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' . htmlspecialchars(
+                    $rType['name'], ENT_COMPAT, 'UTF-8'
+                ) . '</option>';
         }
         sql_free_result($rsTypes);
         tpl_set_var('typeoptions', $types);
@@ -376,7 +391,11 @@ if ($error == false) {
 
         while ($record = sql_fetch_assoc($rs)) {
             $sSelected = ($record['short'] == $sel_lang) ? ' selected="selected"' : '';
-            $langsoptions .= '<option value="' . htmlspecialchars($record['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($record['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+            $langsoptions .= '<option value="' . htmlspecialchars(
+                    $record['short'], ENT_COMPAT, 'UTF-8'
+                ) . '"' . $sSelected . '>' . htmlspecialchars(
+                    $record['name'], ENT_COMPAT, 'UTF-8'
+                ) . '</option>' . "\n";
         }
 
         tpl_set_var('langoptions', $langsoptions);
@@ -399,7 +418,10 @@ if ($error == false) {
 
         if ($show_all_countries == 0) {
             tpl_set_var('show_all_countries', '0');
-            tpl_set_var('show_all_countries_submit', '<input type="submit" id="showallcountries" class="formbutton" name="show_all_countries_submit" value="' . $show_all . '" onclick="submitbutton(\'showallcountries\')" />');
+            tpl_set_var(
+                'show_all_countries_submit',
+                '<input type="submit" id="showallcountries" class="formbutton" name="show_all_countries_submit" value="' . $show_all . '" onclick="submitbutton(\'showallcountries\')" />'
+            );
 
             $rs = sql(
                 "SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
@@ -434,14 +456,18 @@ if ($error == false) {
         // build the "country" dropdown list, preselect $sel_country
         while ($record = sql_fetch_array($rs)) {
             $sSelected = ($record['short'] == $sel_country) ? ' selected="selected"' : '';
-            $countriesoptions .= '<option value="' . htmlspecialchars($record['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($record['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+            $countriesoptions .= '<option value="' . htmlspecialchars(
+                    $record['short'], ENT_COMPAT, 'UTF-8'
+                ) . '"' . $sSelected . '>' . htmlspecialchars(
+                    $record['name'], ENT_COMPAT, 'UTF-8'
+                ) . '</option>' . "\n";
         }
         sql_free_result($rs);
 
         tpl_set_var('countryoptions', $countriesoptions);
 
         // cache-attributes
-        $cache_attribs = isset($_POST['cache_attribs']) ? mb_split(';', $_POST['cache_attribs']) : array();
+        $cache_attribs = isset($_POST['cache_attribs']) ? mb_split(';', $_POST['cache_attribs']) : [];
 
         // cache-attributes
         $bBeginLine = true;
@@ -508,7 +534,7 @@ if ($error == false) {
                 $line = mb_ereg_replace('{name}', escape_javascript($record['name']), $line);
                 $line = mb_ereg_replace('{color}', $rAttrGroup['color'], $line);
                 $group_line .= $line;
-                $nLineAttrCount ++;
+                $nLineAttrCount++;
 
                 $line = $cache_attrib_js;
                 $line = mb_ereg_replace('{id}', $record['id'], $line);
@@ -604,7 +630,7 @@ if ($error == false) {
 
                 $latitude = $lat_h + $lat_min / 60;
                 if ($latNS == 'S') {
-                    $latitude = - $latitude;
+                    $latitude = -$latitude;
                 }
 
                 if ($latitude == 0) {
@@ -649,7 +675,7 @@ if ($error == false) {
 
                 $longitude = $lon_h + $lon_min / 60;
                 if ($lonEW == 'W') {
-                    $longitude = - $longitude;
+                    $longitude = -$longitude;
                 }
 
                 if ($longitude == 0) {
@@ -721,8 +747,13 @@ if ($error == false) {
 
             //check date_activate
             $activation_date_not_ok = true;
-            if (is_numeric($activate_day) && is_numeric($activate_month) && is_numeric($activate_year) && is_numeric($activate_hour)) {
-                $activation_date_not_ok = ((checkdate($activate_month, $activate_day, $activate_year) == false) || $activate_hour < 0 || $activate_hour > 23);
+            if (is_numeric($activate_day) && is_numeric($activate_month) && is_numeric($activate_year) && is_numeric(
+                    $activate_hour
+                )
+            ) {
+                $activation_date_not_ok = ((checkdate(
+                            $activate_month, $activate_day, $activate_year
+                        ) == false) || $activate_hour < 0 || $activate_hour > 23);
             }
             if ($activation_date_not_ok == false) {
                 if (!($publish == 'now2' || $publish == 'later' || $publish == 'notnow')) {
@@ -754,7 +785,7 @@ if ($error == false) {
 
             //cache-size
             $size_not_ok = false;
-            if ($sel_size == - 1) {
+            if ($sel_size == -1) {
                 tpl_set_var('size_message', $size_not_ok_message);
                 $error = true;
                 $size_not_ok = true;
@@ -762,7 +793,7 @@ if ($error == false) {
 
             //cache-type
             $type_not_ok = false;
-            if ($sel_type == - 1) {
+            if ($sel_type == -1) {
                 tpl_set_var('type_message', $type_not_ok_message);
                 $error = true;
                 $type_not_ok = true;
@@ -903,7 +934,7 @@ if ($error == false) {
                 );
 
                 // insert cache-attributes
-                for ($i = 0; $i < count($cache_attribs); $i ++) {
+                for ($i = 0; $i < count($cache_attribs); $i++) {
                     if (($cache_attribs[$i] + 0) > 0) {
                         sql(
                             "INSERT INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES ('&1', '&2')",
@@ -914,12 +945,11 @@ if ($error == false) {
                 }
 
                 // only if cache is published NOW or activate_date is in the past
-                if ($publish == 'now2' || ($publish == 'later' && mktime($activate_hour, 0, 0, $activate_month, $activate_day, $activate_year) <= $today)) {
-                    //do event handling
-                    include_once(__DIR__ . '/lib/eventhandler.inc.php');
-
-                    event_notify_new_cache($cache_id + 0);
-                    event_new_cache($usr['userid'] + 0);
+                if ($publish == 'now2' ||
+                    ($publish == 'later'
+                        && mktime($activate_hour, 0, 0, $activate_month, $activate_day, $activate_year) <= $today)
+                ) {
+                    StatisticPicture::deleteStatisticPicture($usr['userid']);
                 }
 
                 // redirection

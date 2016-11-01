@@ -1,5 +1,6 @@
 project_identifier: opencaching
-base_url: https://api.crowdin.com
+base_url: https://api.crowdin.com #Your personal key can be found at https://crowdin.com/project/opencaching/settings#api
+api_key:
 base_path: /var/www/html/htdocs/
 
 files:

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # enter url for SQL dump. e.g. http://opencaching.de/dump.sql
+#DUMP_URL="http://cdn.opencaching.de/opencaching_dump.sql.gz"
 DUMP_URL=""
 
 function label {
@@ -25,11 +26,13 @@ systemctl enable httpd.service
 firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
+sudo ln -sf /var/www/html/bin/translations.sh
 yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
 yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
 yum -y install gcc-c++ ruby ruby-devel php-xdebug
+yum -y install unzip
 
 label "Install crowdin-cli"
 gem install crowdin-cli
@@ -200,11 +203,11 @@ mv /etc/sysconfig/selinux.tmp /etc/sysconfig/selinux
 
 label "Adjust php.ini"
 cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' > /etc/php.ini.tmp
-echo "extension=imagick.so" >> /etc/php.ini.tmp
 mv /etc/php.ini.tmp /etc/php.ini
 
 label "Setup database"
 mysqladmin -u root password root
+mysqladmin -u root -proot flush-privileges
 mysql -u root -proot -e 'DROP DATABASE IF EXISTS opencaching;'
 mysql -u root -proot -e 'CREATE DATABASE opencaching;'
 mysql -u root -proot -e "CREATE USER 'opencaching';"
@@ -234,9 +237,7 @@ chmod 0777 /usr/bin/composer
 label "Composer install"
 cd /var/www/html/htdocs && composer install
 
-label "Download translations from Crowdin"
-cd /var/www/html/htdocs && crowdin-cli --identity=.crowdin.yaml download
-
+label Insert OC SQL Dump...
 if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
     label "import minimal dump to database"
     mysql -uroot -proot opencaching < /var/www/html/sql/dump_v158.sql
@@ -314,5 +315,13 @@ sudo chmod 755 phpunit
 
 cd /var/www/html
 sudo chmod 755 psh.phar
+
+label "setting up translation"
+cd /var/www/html/bin/
+sudo chmod 755 translation
+cd /usr/local/bin && sudo ln -sf /var/www/html/bin/translation
+
+label "get latest translation"
+translation
 
 label "All done, have fun."

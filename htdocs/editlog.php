@@ -17,7 +17,6 @@ require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
 require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
-require_once __DIR__ . '/lib/recommendation.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
 //Preprocessing
@@ -300,7 +299,7 @@ if ($error == false) {
                     // evtl. discard cache recommendation if the log type was changed from
                     // 'found' or 'attended' to something else
                     if (!$top_option) {
-                        discard_recommendation($log_id);
+                        (new\Oc\GeoCache\Recommendation())->discardRecommendation($log_id);
                     }
 
                     // store changed data

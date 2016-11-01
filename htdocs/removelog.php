@@ -13,7 +13,6 @@ require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
 require_once $stylepath . '/lib/icons.inc.php';
-require_once __DIR__ . '/lib/recommendation.inc.php';
 require_once __DIR__ . '/lib/logic.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
@@ -201,7 +200,7 @@ if ($error == false) {
                     sql_free_result($rs);
 
                     // evtl. discard cache recommendation
-                    discard_recommendation($log_id);
+                    (new\Oc\GeoCache\Recommendation())->discardRecommendation($log_id);
 
                     // move to archive, even if own log (uuids are used for OKAPI replication)
                     sql(

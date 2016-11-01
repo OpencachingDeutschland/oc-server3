@@ -8,11 +8,12 @@
  * Schutz über htpasswd!
  ***************************************************************************/
 
+use Oc\GeoCache\StatisticPicture;
+
 header('Content-type: text/html; charset=utf-8');
 
 $rootpath = __DIR__ . '/../../';
 require_once $rootpath . 'lib/common.inc.php';
-require_once $rootpath . 'lib/eventhandler.inc.php';
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 
@@ -47,9 +48,9 @@ if ($action == 'changeowner') {
 
     sql("UPDATE caches SET user_id='&1' WHERE cache_id='&2'", $rUser['user_id'], $rCache['cache_id']);
 
-    // send event to delete statpic
-    event_change_statpic($rCache['user_id']);
-    event_change_statpic($rUser['user_id']);
+    // delete statpic
+    StatisticPicture::deleteStatisticPicture($rCache['user_id']);
+    StatisticPicture::deleteStatisticPicture($rUser['user_id']);
 
     echo 'Besitzer geändert';
 

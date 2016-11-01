@@ -9,6 +9,8 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use Oc\GeoCache\StatisticPicture;
+
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
@@ -222,9 +224,7 @@ if ($error == false) {
                     // do not use slave server for the next time ...
                     db_slave_exclude();
 
-                    //call eventhandler
-                    require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
-                    event_remove_log($log_record['cache_id'], $log_record['log_user_id']);
+                    StatisticPicture::deleteStatisticPicture($log_record['log_user_id']);
 
                     //cache anzeigen
                     tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']));

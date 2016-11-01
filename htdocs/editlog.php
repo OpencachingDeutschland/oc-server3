@@ -13,6 +13,8 @@
  *  Unicode Reminder メモ
  *****************************************************************************/
 
+use Oc\GeoCache\StatisticPicture;
+
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
@@ -339,9 +341,7 @@ if ($error == false) {
 
                     //update user-stat if type changed
                     if ($log_record['logtype'] != $log_type) {
-                        //call eventhandler
-                        require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
-                        event_change_log_type($log_record['cache_id'], $usr['userid'] + 0);
+                        StatisticPicture::deleteStatisticPicture($usr['userid']);
                     }
 
                     // update top-list

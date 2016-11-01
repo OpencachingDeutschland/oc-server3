@@ -1,15 +1,12 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *  Searches for files which are no longer Unicode-encoded
  ***************************************************************************/
 
 chdir(__DIR__ . '/../../htdocs');
-require_once 'lib2/cli.inc.php';
-
+require_once __DIR__ . '/../../htdocs/lib2/cli.inc.php';
 
 scan('.', false);
 
@@ -19,18 +16,17 @@ foreach (['api', 'lang', 'lib', 'lib2', 'src/Oc', 'templates2', 'util', 'util2',
 
 exit;
 
-
-function scan($dir, $subdirs)
+function scan($dir, $subDirs)
 {
     $hDir = opendir($dir);
     if ($hDir !== false) {
         while (($file = readdir($hDir)) !== false) {
             $path = $dir . '/' . $file;
-            if (is_dir($path) && substr($file, 0, 1) !== '.' && $subdirs) {
-                scan($path, $subdirs);
+            if ($subDirs && is_dir($path) && substr($file, 0, 1) !== '.') {
+                scan($path, $subDirs);
             } else {
-                if (is_file($path) && ((substr($file, - 4) === '.tpl') || (substr($file, - 4) === '.php'))) {
-                    test_encoding($path);
+                if (is_file($path) && ((substr($file, -4) === '.tpl') || (substr($file, -4) === '.php'))) {
+                    testEncoding($path);
                 }
             }
         }
@@ -38,8 +34,10 @@ function scan($dir, $subdirs)
     }
 }
 
-
-function test_encoding($path)
+/**
+ * @param $path
+ */
+function testEncoding($path)
 {
     static $ur_exclude = [  // no unicode reminder needed
         'lib2/html2text.class.php',
@@ -48,11 +46,11 @@ function test_encoding($path)
     ];
 
     $contents = file_get_contents($path, false, null, 0, 2048);
-    $ur = stripos($contents, "Unicode Reminder");
+    $ur = stripos($contents, 'Unicode Reminder');
     if ($ur) {
-        if (mb_trim(mb_substr($contents, $ur + 17, 2)) != "メモ") {
-            $ur = mb_stripos($contents, "Unicode Reminder");
-            if (mb_trim(mb_substr($contents, $ur + 17, 2)) != "メモ") {
+        if (mb_trim(mb_substr($contents, $ur + 17, 2)) !== 'メモ') {
+            $ur = mb_stripos($contents, 'Unicode Reminder');
+            if (mb_trim(mb_substr($contents, $ur + 17, 2)) !== 'メモ') {
                 echo "Bad Unicode Reminder found in $path: " . mb_trim(mb_substr($contents, $ur + 17, 2)) . "\n";
             } else {
                 echo "Unexpected non-ASCII chars (BOMs?) in header of $path\n";

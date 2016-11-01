@@ -8,9 +8,9 @@
 
 /****************************************************************************
  * Unicode Reminder メモ
- * all login/logout related functions (reduced to auth_user, becuase
+ * all login/logout related functions (reduced to auth_user, because
  * all other functions are handled by lib2/login.class.php)
- * Dont include this file by hand - it will be included from common.inc.php
+ * Don't include this file by hand - it will be included from common.inc.php
  ****************************************************************************/
 
 require __DIR__ . '/login.class.php';

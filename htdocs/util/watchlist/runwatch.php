@@ -17,8 +17,8 @@ require_once $rootpath . 'lib/clicompatbase.inc.php';
 require_once $rootpath . 'lib2/translate.class.php';
 require_once __DIR__ . '/settings.inc.php';
 require_once $rootpath . 'lib/consts.inc.php';
-require_once $rootpath . 'lib/logic.inc.php';
 require_once $rootpath . 'lib2/edithelper.inc.php';
+require_once __DIR__ . '/../../lib2/logic/logtypes.inc.php';
 
 if (!Cronjobs::enabled()) {
     exit;

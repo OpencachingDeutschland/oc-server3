@@ -18,7 +18,6 @@ require_once $rootPath . 'lib/clicompatbase.inc.php';
 require_once $rootPath . 'lib2/translate.class.php';
 require_once __DIR__ . '/settings.inc.php';
 require_once $rootPath . 'lib/consts.inc.php';
-require_once $rootPath . 'lib/logic.inc.php';
 require_once $rootPath . 'lib2/logic/geomath.class.php';
 
 if (!Cronjobs::enabled()) {
@@ -30,6 +29,32 @@ db_connect();
 if ($dblink === false) {
     echo 'Unable to connect to database';
     exit;
+}
+
+// These functions are needed for notification emails in the recipient's
+// language. Looks like there is no way to query this "inline" in LEFT-JOIN-
+// statements (the ON clause cannot access user.language).
+
+function getCacheTypeName($cacheType, $language)
+{
+    return sqlValue(
+        "SELECT IFNULL(`stt`.`text`, `cache_type`.`en`)
+         FROM `cache_type`
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id` AND `stt`.`lang`='" . sql_escape($language) . "'
+         WHERE `cache_type`.`id`='" . sql_escape($cacheType) . "'",
+        ''
+    );
+}
+
+function getCacheSizeName($cacheSize, $language)
+{
+    return sqlValue(
+        "SELECT IFNULL(`stt`.`text`, `cache_size`.`en`)
+         FROM `cache_size`
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_size`.`trans_id` AND `stt`.`lang`='" . sql_escape($language) . "'
+         WHERE `cache_size`.`id`='" . sql_escape($cacheSize) . "'",
+        ''
+    );
 }
 
 $processSync = new ProcessSync('run_notify');
@@ -86,7 +111,7 @@ function process_new_cache($notify)
     // fetch email template
     switch ($notify['type']) {
         case NOTIFY_NEW_CACHE: // Type: new cache
-            $mailbody = fetch_email_template('notify_newcache', $notify['recp_lang'], $notify['recp_domain']);
+            $mailBody = fetch_email_template('notify_newcache', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
                 $translate->t(
                     $notify['oconly'] ? 'New OConly cache:' : 'New cache:',
@@ -101,7 +126,7 @@ function process_new_cache($notify)
             break;
 
         case NOTIFY_NEW_OCONLY: // Type: new OConly flag
-            $mailbody = fetch_email_template('notify_newoconly', $notify['recp_lang'], $notify['recp_domain']);
+            $mailBody = fetch_email_template('notify_newoconly', $notify['recp_lang'], $notify['recp_domain']);
             $mailsubject = '[' . $maildomain . '] ' .
                 $translate->t(
                     'Cache was marked as OConly:',
@@ -121,23 +146,23 @@ function process_new_cache($notify)
     }
 
     if (!$error) {
-        $mailbody = mb_ereg_replace('{username}', $notify['recpname'], $mailbody);
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace('{username}', $notify['recpname'], $mailBody);
+        $mailBody = mb_ereg_replace(
             '{date}',
             date($opt['locale'][$notify['recp_lang']]['format']['phpdate'], strtotime($notify['date_hidden'])),
-            $mailbody
+            $mailBody
         );
-        $mailbody = mb_ereg_replace('{cacheid}', $notify['cache_id'], $mailbody);
-        $mailbody = mb_ereg_replace('{wp_oc}', $notify['wp_oc'], $mailbody);
-        $mailbody = mb_ereg_replace('{user}', $notify['username'], $mailbody);
-        $mailbody = mb_ereg_replace('{cachename}', $notify['cachename'], $mailbody);
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace('{cacheid}', $notify['cache_id'], $mailBody);
+        $mailBody = mb_ereg_replace('{wp_oc}', $notify['wp_oc'], $mailBody);
+        $mailBody = mb_ereg_replace('{user}', $notify['username'], $mailBody);
+        $mailBody = mb_ereg_replace('{cachename}', $notify['cachename'], $mailBody);
+        $mailBody = mb_ereg_replace(
             '{distance}',
             round(geomath::calcDistance($notify['lat1'], $notify['lon1'], $notify['lat2'], $notify['lon2'], 1), 1),
-            $mailbody
+            $mailBody
         );
-        $mailbody = mb_ereg_replace('{unit}', 'km', $mailbody);
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace('{unit}', 'km', $mailBody);
+        $mailBody = mb_ereg_replace(
             '{bearing}',
             geomath::Bearing2Text(
                 geomath::calcBearing(
@@ -149,19 +174,19 @@ function process_new_cache($notify)
                 0,
                 $notify['recp_lang']
             ),
-            $mailbody
+            $mailBody
         );
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace(
             '{cachetype}',
-            get_cachetype_name($notify['cachetype'], $notify['recp_lang']),
-            $mailbody
+            getCacheTypeName($notify['cachetype'], $notify['recp_lang']),
+            $mailBody
         );
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace(
             '{cachesize}',
-            get_cachesize_name($notify['cachesize'], $notify['recp_lang']),
-            $mailbody
+            getCacheSizeName($notify['cachesize'], $notify['recp_lang']),
+            $mailBody
         );
-        $mailbody = mb_ereg_replace(
+        $mailBody = mb_ereg_replace(
             '{oconly-}',
             $notify['oconly'] ? $translate->t(
                 'OConly-',
@@ -172,7 +197,7 @@ function process_new_cache($notify)
                 1,
                 $notify['recp_lang']
             ) : '',
-            $mailbody
+            $mailBody
         );
 
         /* begin send out everything that has to be sent */
@@ -186,7 +211,7 @@ function process_new_cache($notify)
         }
 
         if (is_existent_maildomain(getToMailDomain($mailadr))) {
-            mb_send_mail($mailadr, $mailsubject, $mailbody, $email_headers);
+            mb_send_mail($mailadr, $mailsubject, $mailBody, $email_headers);
         }
     } else {
         echo "Unknown notification type: " . $notify['type'] . "<br />";

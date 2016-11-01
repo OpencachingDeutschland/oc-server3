@@ -16,8 +16,8 @@ require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
 require_once $stylepath . '/lib/icons.inc.php';
-require_once __DIR__ . '/lib/logic.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
+require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
 
 //Preprocessing
 if ($error == false) {

@@ -965,7 +965,8 @@ if ($error == false) {
                         $cache_id
                     );
 
-                    for ($i = 0; $i < mysql_num_rows($rspictures); $i++) {
+                    $countRsPictures = mysql_num_rows($rspictures);
+                    for ($i = 0; $i < $countRsPictures; $i++) {
                         $tmpline = ($i == 0 ? $pictureline0 : $pictureline);
                         $pic_record = sql_fetch_array($rspictures);
 
@@ -1050,11 +1051,7 @@ if ($error == false) {
 
                 tpl_set_var('reset', $reset);  // obsolete
                 tpl_set_var('submit', $submit);
-            } else {
-                //TODO: not the owner
             }
-        } else {
-            //TODO: cache not exist
         }
     }
 }

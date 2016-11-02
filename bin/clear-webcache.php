@@ -45,11 +45,8 @@ if ($argc !== 2 || $argv[1] !== 'pass2') {
     $webCache->createLabelCache();
 
     echo "Precompiling template files\n";
-<<<<<<< HEAD
+	
     $webCache->preCompileAllTemplates(); #TODO We need to fix this in DEV Environment, to prevent problems with chmod
-=======
-    $webCache->preCompileAllTemplates(); #@ToDo We need to fix this in DEV Environment, to prevent problems with chmod
->>>>>>> a7283f42a0ea140f20967346534de3401c02f01e
 
     // start apache
     system($opt['httpd']['start']);

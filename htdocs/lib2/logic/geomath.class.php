@@ -51,8 +51,9 @@ class geomath
     }
 
     /**
+     * @param $parBearing
      * @param integer $parShortText
-     *
+     * @param $language
      * @return string
      */
     public static function Bearing2Text($parBearing, $parShortText, $language)

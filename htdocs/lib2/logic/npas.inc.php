@@ -1,12 +1,15 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- *
  * Unicode Reminder メモ
- *
  * Nature Protection Area functions
- ****************************************************************************/
+ ***************************************************************************
 
+ /*
+ *
+ * @param $cache_id
+ * @return array
+ */
 function get_npas($cache_id)
 {
     $rsNPA = sql(

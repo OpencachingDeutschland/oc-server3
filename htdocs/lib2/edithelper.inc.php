@@ -22,6 +22,12 @@ require_once __DIR__ . '/smiley.inc.php';
  * or the new mode if the user hit another mode button
  */
 
+/**
+ * @param $oldDescMode
+ * @param $descMode
+ * @param $text
+ * @return mixed|string
+ */
 function processEditorInput($oldDescMode, $descMode, $text)
 {
     global $opt, $smiley;

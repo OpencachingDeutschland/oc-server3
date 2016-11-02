@@ -109,6 +109,7 @@ class translate
     }
 
     /**
+     * @param $message
      * @return string
      */
     public function v($message)

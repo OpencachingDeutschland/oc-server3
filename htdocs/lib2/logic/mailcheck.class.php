@@ -165,6 +165,7 @@ class mailcheck
     }
 
     /**
+     * @param $fp
      * @param string $out
      * @return string
      */

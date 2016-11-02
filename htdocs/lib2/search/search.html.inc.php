@@ -214,6 +214,7 @@ function search_output()
 
 /**
  * @param string $interval
+ * @param $dateTimeBegin
  * @param string $dateTimeEnd
  * @return false|float|string
  */

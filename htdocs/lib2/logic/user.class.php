@@ -1032,10 +1032,10 @@ class user
      * disables user (if not disabled), removes all licensed content from db and
      * replaces every picture with a dummy one
      *
+     * @param bool $old_disabled
      * @return string error message, if anything went wrong, true otherwise
-     *
      * old_disabled: the user was disabled already before license transition
-     *               and therefore could not accept/decline the license
+     * and therefore could not accept/decline the license
      */
     public function disduelicense($old_disabled = false)
     {

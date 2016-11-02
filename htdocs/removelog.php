@@ -9,13 +9,15 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
+use Oc\GeoCache\Recommendation;
+use Oc\GeoCache\StatisticPicture;
+
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
 require_once $stylepath . '/lib/icons.inc.php';
-require_once __DIR__ . '/lib/recommendation.inc.php';
-require_once __DIR__ . '/lib/logic.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
+require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
 
 //Preprocessing
 if ($error == false) {
@@ -201,7 +203,7 @@ if ($error == false) {
                     sql_free_result($rs);
 
                     // evtl. discard cache recommendation
-                    discard_recommendation($log_id);
+                    Recommendation::discardRecommendation($log_id);
 
                     // move to archive, even if own log (uuids are used for OKAPI replication)
                     sql(
@@ -223,9 +225,7 @@ if ($error == false) {
                     // do not use slave server for the next time ...
                     db_slave_exclude();
 
-                    //call eventhandler
-                    require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
-                    event_remove_log($log_record['cache_id'], $log_record['log_user_id']);
+                    StatisticPicture::deleteStatisticPicture($log_record['log_user_id']);
 
                     //cache anzeigen
                     tpl_redirect('viewcache.php?cacheid=' . urlencode($log_record['cache_id']));

@@ -7,6 +7,7 @@
  *  Unicode Reminder メモ
  *****************************************************************************/
 
+use Oc\GeoCache\StatisticPicture;
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
 
@@ -599,14 +600,7 @@ if ($error == false) {
                             $cache_id
                         );
 
-                        //call eventhandler
-                        require_once $opt['rootpath'] . 'lib/eventhandler.inc.php';
-                        event_edit_cache($cache_id, $usr['userid'] + 0);
-
-                        // if old status is not yet published and new status is published => notify-event
-                        if ($status_old == 5 && $status != 5) {
-                            event_notify_new_cache($cache_id);
-                        }
+                        StatisticPicture::deleteStatisticPicture($usr['userid']);
 
                         //display cache-page
                         tpl_redirect('viewcache.php?cacheid=' . urlencode($cache_id));

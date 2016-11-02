@@ -334,27 +334,33 @@ if (isset($_REQUEST['sessionid'])) {
     } else {
         // return all records
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4',
+            'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`)) 
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4',
             $sessionid
         );
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_caches` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=2',
+            'CREATE TEMPORARY TABLE `tmpxml_caches` (`id` INT(11), PRIMARY KEY (`id`))
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=2',
             $sessionid
         );
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_cachedescs` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=3',
+            'CREATE TEMPORARY TABLE `tmpxml_cachedescs` (`id` INT(11), PRIMARY KEY (`id`))
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=3',
             $sessionid
         );
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_cachelogs` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=1',
+            'CREATE TEMPORARY TABLE `tmpxml_cachelogs` (`id` INT(11), PRIMARY KEY (`id`))
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=1',
             $sessionid
         );
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_pictures` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=6',
+            'CREATE TEMPORARY TABLE `tmpxml_pictures` (`id` INT(11), PRIMARY KEY (`id`))
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=6',
             $sessionid
         );
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_removedobjects` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=7',
+            'CREATE TEMPORARY TABLE `tmpxml_removedobjects` (`id` INT(11), PRIMARY KEY (`id`))
+             SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=7',
             $sessionid
         );
 
@@ -530,20 +536,20 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `caches`.`cache_id` `id`, `caches`.`uuid` `uuid`, `caches`.`user_id` `user_id`,
-                                        `user`.`uuid` `useruuid`, `user`.`username` `username`, `caches`.`name` `name`,
-                                        `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`type` `type`,
-                                        `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
-                                        `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`, `caches`.`way_length` `way_length`,
-                                        `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`,
-                                        `caches`.`wp_gc_maintained`,
-                                        `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`,
-                                        `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
-                                        `caches`.`listing_last_modified` `listing_last_modified`, `cache_status`.`allow_user_view`,
-                                        `caches`.`needs_maintenance`, `caches`.`listing_outdated`
-                                   FROM `tmpxml_caches`
-                             INNER JOIN `caches` ON `tmpxml_caches`.`id`=`caches`.`cache_id`
-                             INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-                             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`'
+                    `user`.`uuid` `useruuid`, `user`.`username` `username`, `caches`.`name` `name`,
+                    `caches`.`longitude` `longitude`, `caches`.`latitude` `latitude`, `caches`.`type` `type`,
+                    `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
+                    `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`,
+                    `caches`.`way_length` `way_length`, `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`,
+                    `caches`.`wp_gc_maintained`, `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, 
+                    `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`,
+                    `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
+                    `caches`.`listing_last_modified` `listing_last_modified`, `cache_status`.`allow_user_view`,
+                    `caches`.`needs_maintenance`, `caches`.`listing_outdated`
+               FROM `tmpxml_caches`
+         INNER JOIN `caches` ON `tmpxml_caches`.`id`=`caches`.`cache_id`
+         INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
+         INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`'
     );
     while ($r = sql_fetch_array($rs)) {
         $bAllowView = ($r['allow_user_view'] == 1);
@@ -655,13 +661,15 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         if ($ocxmlversion >= 13) {
             $rsWaypoints = sql(
                 "SELECT `coordinates`.`id`, `coordinates`.`subtype` AS `type`,
-                                       `coordinates`.`latitude`, `coordinates`.`longitude`,
-                                                                 `coordinates`.`description`,
-                                       `coordinates_type`.`name` AS `type_name`
-                                  FROM `coordinates`
-                            INNER JOIN `coordinates_type` ON `coordinates_type`.`id`=`coordinates`.`subtype`
-                                 WHERE `cache_id`='&1' AND `type`=1
-                              ORDER BY `coordinates`.`id` ASC",
+                        `coordinates`.`latitude`, `coordinates`.`longitude`,
+                        `coordinates`.`description`,
+                        `coordinates_type`.`name` AS `type_name`
+                 FROM `coordinates`
+                 INNER JOIN `coordinates_type`
+                   ON `coordinates_type`.`id`=`coordinates`.`subtype`
+                 WHERE `cache_id`='&1'
+                   AND `type`=1
+                 ORDER BY `coordinates`.`id` ASC",
                 $r['id']
             );
             fwrite($f, $t2 . '<wpts>' . "\n");
@@ -685,17 +693,17 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     mysql_free_result($rs);
 
     $rs = sql(
-        'SELECT SQL_BUFFER_RESULT `cache_desc`.`id` `id`, `cache_desc`.`uuid` `uuid`, `cache_desc`.`cache_id` `cache_id`,
-                                        `cache_desc`.`language` `language`, `cache_desc`.`short_desc` `short_desc`,
-                                        `cache_desc`.`desc` `desc`, `cache_desc`.`desc_html` `desc_html`, `cache_desc`.`hint` `hint`,
-                                        `cache_desc`.`last_modified` `last_modified`, `caches`.`uuid` `cacheuuid`, `cache_desc`.`node` `node`,
-                                        `cache_status`.`allow_user_view`,
-                                        `caches`.`user_id`, `user`.`username`, `user`.`data_license`
-                                   FROM `tmpxml_cachedescs`
-                             INNER JOIN `cache_desc` ON `tmpxml_cachedescs`.`id`=`cache_desc`.`id`
-                             INNER JOIN `caches` ON `caches`.`cache_id`=`cache_desc`.`cache_id`
-                             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                                                     INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`'
+        'SELECT SQL_BUFFER_RESULT `cache_desc`.`id` `id`, `cache_desc`.`uuid` `uuid`,
+            `cache_desc`.`cache_id` `cache_id`, `cache_desc`.`language` `language`,
+            `cache_desc`.`short_desc` `short_desc`, `cache_desc`.`desc` `desc`, `cache_desc`.`desc_html` `desc_html`,
+            `cache_desc`.`hint` `hint`, `cache_desc`.`last_modified` `last_modified`, `caches`.`uuid` `cacheuuid`,
+            `cache_desc`.`node` `node`, `cache_status`.`allow_user_view`,
+            `caches`.`user_id`, `user`.`username`, `user`.`data_license`
+         FROM `tmpxml_cachedescs`
+         INNER JOIN `cache_desc` ON `tmpxml_cachedescs`.`id`=`cache_desc`.`id`
+         INNER JOIN `caches` ON `caches`.`cache_id`=`cache_desc`.`cache_id`
+         INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+         INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`'
     );
     while ($r = sql_fetch_array($rs)) {
         $bAllowView = ($r['allow_user_view'] == 1);
@@ -765,23 +773,30 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         $rating_condition = "";
     }
     $rs = sql(
-        'SELECT SQL_BUFFER_RESULT `cache_logs`.`id` `id`, `cache_logs`.`cache_id` `cache_id`, `cache_logs`.`user_id` `user_id`,
-                                        `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `cache_logs`.`text` `text`, `cache_logs`.`text_html` `text_html`,
-                                        `cache_logs`.`oc_team_comment`,
-                                        `cache_logs`.`date_created` `date_created`, `cache_logs`.`last_modified` `last_modified`,
-                                        `cache_logs`.`log_last_modified` `log_last_modified`,
-                                        `cache_logs`.`uuid` `uuid`, `user`.`username` `username`, `caches`.`uuid` `cacheuuid`,
-                                        `cache_logs`.`needs_maintenance`, `cache_logs`.`listing_outdated`,
-                                        `user`.`uuid` `useruuid`, `cache_logs`.`node` `node`, IF(NOT ISNULL(`cache_rating`.`cache_id`) AND `cache_logs`.`type` IN (1,7), 1, 0) AS `recommended`,
-                                        `cache_status`.`allow_user_view`,
-                                        `user`.`data_license`,
-                                        `caches`.`country` AS `language`  /* hack */
-                                   FROM `cache_logs`
-                             INNER JOIN `tmpxml_cachelogs` ON `cache_logs`.`id`=`tmpxml_cachelogs`.`id`
-                             INNER JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
-                             INNER JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-                             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-                              LEFT JOIN `cache_rating` ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id` AND `cache_logs`.`user_id`=`cache_rating`.`user_id` ' . $rating_condition
+        'SELECT SQL_BUFFER_RESULT `cache_logs`.`id` `id`, `cache_logs`.`cache_id` `cache_id`,
+             `cache_logs`.`user_id` `user_id`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`,
+             `cache_logs`.`text` `text`, `cache_logs`.`text_html` `text_html`, `cache_logs`.`oc_team_comment`,
+             `cache_logs`.`date_created` `date_created`, `cache_logs`.`last_modified` `last_modified`,
+             `cache_logs`.`log_last_modified` `log_last_modified`,
+             `cache_logs`.`uuid` `uuid`, `user`.`username` `username`, `caches`.`uuid` `cacheuuid`,
+             `cache_logs`.`needs_maintenance`, `cache_logs`.`listing_outdated`,
+             `user`.`uuid` `useruuid`, `cache_logs`.`node` `node`,
+             IF(NOT ISNULL(`cache_rating`.`cache_id`) AND `cache_logs`.`type` IN (1,7), 1, 0) AS `recommended`,
+             `cache_status`.`allow_user_view`,
+             `user`.`data_license`,
+             `caches`.`country` AS `language`  /* hack */
+         FROM `cache_logs`
+         INNER JOIN `tmpxml_cachelogs`
+           ON `cache_logs`.`id`=`tmpxml_cachelogs`.`id`
+         INNER JOIN `user`
+           ON `cache_logs`.`user_id`=`user`.`user_id`
+         INNER JOIN `caches`
+           ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+         INNER JOIN `cache_status`
+           ON `caches`.`status`=`cache_status`.`id`
+         LEFT JOIN `cache_rating`
+           ON `cache_logs`.`cache_id`=`cache_rating`.`cache_id`
+           AND `cache_logs`.`user_id`=`cache_rating`.`user_id` ' . $rating_condition
     );
     while ($r = sql_fetch_array($rs)) {
         $bAllowView = ($r['allow_user_view'] == 1);
@@ -873,26 +888,26 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `pictures`.`id` `id`, `pictures`.`url` `url`, `pictures`.`title` `title`,
-                                        `pictures`.`object_id` `object_id`, `pictures`.`object_type` `object_type`,
-                                        `pictures`.`date_created` `date_created`, `pictures`.`uuid` `uuid`,
-                                        `pictures`.`last_modified` `last_modified`, `pictures`.`display` `display`,
-                                        `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`,
-                                        `pictures`.`mappreview`, `pictures`.`seq`,
-                                        IFNULL(`c1`.`cache_id`,`c2`.`cache_id`) AS `cache_id`,
-                                        IFNULL(`c1`.`country`,`c2`.`country`) AS `language`,  /* hack */
-                                        IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv`,
-                                        IFNULL(`u1`.`user_id`,`u2`.`user_id`) AS `user_id`,
-                                        IFNULL(`u1`.`username`,`u2`.`username`) AS `username`,
-                                        IFNULL(`u1`.`data_license`,`u2`.`data_license`) AS `data_license`
-                                   FROM `tmpxml_pictures`
-                             INNER JOIN `pictures` ON `tmpxml_pictures`.`id`=`pictures`.`id`
-                              LEFT JOIN `caches` AS `c1` ON `pictures`.`object_type`=2 AND `pictures`.`object_id`=`c1`.`cache_id`
-                              LEFT JOIN `cache_logs` ON `pictures`.`object_type`=1 AND `pictures`.`object_id`=`cache_logs`.`id`
-                              LEFT JOIN `caches` AS `c2` ON `cache_logs`.`cache_id`=`c2`.`cache_id`
-                              LEFT JOIN `cache_status` AS `cs1` ON `c1`.`status`=`cs1`.`id`
-                              LEFT JOIN `cache_status` AS `cs2` ON `c2`.`status`=`cs2`.`id`
-                              LEFT JOIN `user` `u1` ON `u1`.`user_id`=`cache_logs`.`user_id`
-                              LEFT JOIN `user` `u2` ON `u2`.`user_id`=`c1`.`user_id`'
+                    `pictures`.`object_id` `object_id`, `pictures`.`object_type` `object_type`,
+                    `pictures`.`date_created` `date_created`, `pictures`.`uuid` `uuid`,
+                    `pictures`.`last_modified` `last_modified`, `pictures`.`display` `display`,
+                    `pictures`.`spoiler` `spoiler`, `pictures`.`node` `node`,
+                    `pictures`.`mappreview`, `pictures`.`seq`,
+                    IFNULL(`c1`.`cache_id`,`c2`.`cache_id`) AS `cache_id`,
+                    IFNULL(`c1`.`country`,`c2`.`country`) AS `language`,  /* hack */
+                    IFNULL(`cs1`.`allow_user_view`, `cs2`.`allow_user_view`) AS `auv`,
+                    IFNULL(`u1`.`user_id`,`u2`.`user_id`) AS `user_id`,
+                    IFNULL(`u1`.`username`,`u2`.`username`) AS `username`,
+                    IFNULL(`u1`.`data_license`,`u2`.`data_license`) AS `data_license`
+        FROM `tmpxml_pictures`
+        INNER JOIN `pictures` ON `tmpxml_pictures`.`id`=`pictures`.`id`
+        LEFT JOIN `caches` AS `c1` ON `pictures`.`object_type`=2 AND `pictures`.`object_id`=`c1`.`cache_id`
+        LEFT JOIN `cache_logs` ON `pictures`.`object_type`=1 AND `pictures`.`object_id`=`cache_logs`.`id`
+        LEFT JOIN `caches` AS `c2` ON `cache_logs`.`cache_id`=`c2`.`cache_id`
+        LEFT JOIN `cache_status` AS `cs1` ON `c1`.`status`=`cs1`.`id`
+        LEFT JOIN `cache_status` AS `cs2` ON `c2`.`status`=`cs2`.`id`
+        LEFT JOIN `user` `u1` ON `u1`.`user_id`=`cache_logs`.`user_id`
+        LEFT JOIN `user` `u2` ON `u2`.`user_id`=`c1`.`user_id`'
     );
     while ($r = sql_fetch_array($rs)) {
         $bAllowView = ($r['auv'] == 1);
@@ -941,9 +956,11 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     mysql_free_result($rs);
 
     $rs = sql(
-        'SELECT SQL_BUFFER_RESULT `removed_objects`.`id` `id`, `removed_objects`.`localid` `localid`, `removed_objects`.`uuid` `uuid`,
-                                        `removed_objects`.`type` `type`, `removed_objects`.`removed_date` `removed_date`, `removed_objects`.`node` `node`
-                                   FROM `tmpxml_removedobjects`, `removed_objects` WHERE `removed_objects`.`id`=`tmpxml_removedobjects`.`id`'
+        'SELECT SQL_BUFFER_RESULT `removed_objects`.`id` `id`, `removed_objects`.`localid` `localid`,
+             `removed_objects`.`uuid` `uuid`, `removed_objects`.`type` `type`,
+             `removed_objects`.`removed_date` `removed_date`, `removed_objects`.`node` `node`
+         FROM `tmpxml_removedobjects`, `removed_objects`
+         WHERE `removed_objects`.`id`=`tmpxml_removedobjects`.`id`'
     );
     while ($r = sql_fetch_array($rs)) {
         fwrite($f, $t1 . '<removedobject>' . "\n");
@@ -1021,7 +1038,8 @@ function startXmlSession(
 
     // session anlegen
     sql(
-        "INSERT INTO `xmlsession` (`last_use`, `modified_since`, `date_created`, `agent`) VALUES (NOW(), '&1', NOW(), '&2')",
+        "INSERT INTO `xmlsession` (`last_use`, `modified_since`, `date_created`, `agent`)
+         VALUES (NOW(), '&1', NOW(), '&2')",
         date('Y-m-d H:i:s', strtotime($sModifiedSince)),
         $sAgent
     );
@@ -1062,7 +1080,12 @@ function startXmlSession(
         if ($bCachedesc == 1) {
             sql(
                 "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
-                 SELECT &1, 3, `cache_desc`.`id` FROM `cache_desc` INNER JOIN `caches` ON `cache_desc`.`cache_id`=`caches`.`cache_id` WHERE `cache_desc`.`last_modified` >= '&2' AND `caches`.`status`!=5",
+                 SELECT &1, 3, `cache_desc`.`id`
+                 FROM `cache_desc`
+                 INNER JOIN `caches`
+                   ON `cache_desc`.`cache_id`=`caches`.`cache_id`
+                 WHERE `cache_desc`.`last_modified` >= '&2'
+                 AND `caches`.`status`!=5",
                 $sessionid,
                 $sModifiedSince
             );
@@ -1072,7 +1095,12 @@ function startXmlSession(
         if ($bCachelog == 1) {
             sql(
                 "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
-                 SELECT &1, 1, `cache_logs`.`id` FROM `cache_logs` INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id` WHERE `cache_logs`.`last_modified` >= '&2' AND `caches`.`status`!=5",
+                 SELECT &1, 1, `cache_logs`.`id`
+                 FROM `cache_logs`
+                 INNER JOIN `caches`
+                   ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+                 WHERE `cache_logs`.`last_modified` >= '&2'
+                 AND `caches`.`status`!=5",
                 $sessionid,
                 $sModifiedSince
             );
@@ -1202,7 +1230,8 @@ function startXmlSession(
             sql(
                 "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
                  SELECT DISTINCT &1, 3, `cache_desc`.`id` FROM `cache_desc`, `tmpxmlSesssionCaches`
-                 WHERE `cache_desc`.`cache_id`=`tmpxmlSesssionCaches`.`cache_id` AND `cache_desc`.`last_modified` >= '&2'",
+                 WHERE `cache_desc`.`cache_id`=`tmpxmlSesssionCaches`.`cache_id`
+                 AND `cache_desc`.`last_modified` >= '&2'",
                 $sessionid,
                 $sModifiedSince
             );
@@ -1260,7 +1289,9 @@ function startXmlSession(
     }
 
     sql(
-        'UPDATE `xmlsession` SET `caches`=&1, `cachedescs`=&2, `cachelogs`=&3, `users`=&4, `pictures`=&5, `removedobjects`=&6 WHERE `id`=&7 LIMIT 1',
+        'UPDATE `xmlsession` SET `caches` = &1, `cachedescs` = &2,
+                `cachelogs` = &3, `users` = &4, `pictures`=&5, `removedobjects` = &6
+         WHERE `id` = &7 LIMIT 1',
         $recordcount['caches'],
         $recordcount['cachedescs'],
         $recordcount['cachelogs'],
@@ -1280,7 +1311,10 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
     /* begin calculate which records to transfer */
 
     $rs = sql(
-        'SELECT `users`, `caches`, `cachedescs`, `cachelogs`, `pictures`, `removedobjects` FROM `xmlsession` WHERE `id`=&1 AND `cleaned`=0',
+        'SELECT `users`, `caches`, `cachedescs`, `cachelogs`, `pictures`, `removedobjects`
+         FROM `xmlsession`
+         WHERE `id` = &1
+         AND `cleaned`=0',
         $sessionid + 0
     );
     if (mysql_num_rows($rs) == 0) {
@@ -1359,42 +1393,48 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
     /* end calculate which records to transfer */
 
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4
+        'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4
          LIMIT &2, &3',
         $sessionid,
         $limits[0]['start'],
         $limits[0]['count']
     );
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_caches` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=2
+        'CREATE TEMPORARY TABLE `tmpxml_caches` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=2
          LIMIT &2, &3',
         $sessionid,
         $limits[1]['start'],
         $limits[1]['count']
     );
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_cachedescs` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=3
+        'CREATE TEMPORARY TABLE `tmpxml_cachedescs` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=3
          LIMIT &2, &3',
         $sessionid,
         $limits[2]['start'],
         $limits[2]['count']
     );
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_cachelogs` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=1
+        'CREATE TEMPORARY TABLE `tmpxml_cachelogs` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=1
          LIMIT &2, &3',
         $sessionid,
         $limits[3]['start'],
         $limits[3]['count']
     );
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_pictures` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=6
+        'CREATE TEMPORARY TABLE `tmpxml_pictures` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=6
          LIMIT &2, &3',
         $sessionid,
         $limits[4]['start'],
         $limits[4]['count']
     );
     sql(
-        'CREATE TEMPORARY TABLE `tmpxml_removedobjects` (`id` INT(11), PRIMARY KEY (`id`)) SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=7
+        'CREATE TEMPORARY TABLE `tmpxml_removedobjects` (`id` INT(11), PRIMARY KEY (`id`))
+         SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=7
          LIMIT &2, &3',
         $sessionid,
         $limits[5]['start'],

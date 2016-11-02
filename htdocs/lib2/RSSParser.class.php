@@ -19,7 +19,7 @@ class RSSParser
      */
     public static function parse($items, $url, $timeout, $includetext)
     {
-        global $opt, $tpl;
+        global $tpl;
 
         if ($items <= 0) {
             return '';

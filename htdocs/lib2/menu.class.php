@@ -261,7 +261,7 @@ class Menu
      */
     public function GetSubMenu()
     {
-        global $menuitem, $login;
+        global $menuitem;
 
         $ids = $this->GetSelectedMenuIds();
         $topmenu = array_pop($ids);

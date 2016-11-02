@@ -963,8 +963,6 @@ class cache
 
     public function getUserLogTypes($userLogType, $oldLogType = 0)
     {
-        global $translate, $login;
-
         $logTypes = [];
 
         $logtypeNames = get_logtype_names();

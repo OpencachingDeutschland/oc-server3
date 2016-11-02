@@ -57,7 +57,7 @@ class geomath
      */
     public static function Bearing2Text($parBearing, $parShortText, $language)
     {
-        global $opt, $translate;
+        global $translate;
 
         if ($parShortText == 0) {
             if ($parBearing === false) {

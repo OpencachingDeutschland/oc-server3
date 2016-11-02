@@ -72,8 +72,6 @@ class sitemapxml
      */
     public function writeInternal($str)
     {
-        global $opt;
-
         // close the last file?
         if (($this->oSitemapFile !== false) && (($this->nWrittenSize + strlen($str) > $this->nMaxFileSize) || ($this->nWrittenCount >= $this->nMaxUrlCount))) {
             gzwrite($this->oSitemapFile, '</urlset>');

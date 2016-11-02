@@ -33,7 +33,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
 
     if (!$error_handled) {
         $error_handled = true;
-        $errtitle = "PHP-Fehler";
+        $errtitle = 'PHP-Fehler';
 
         $error = "($errno) $errstr at line $errline in $errfile";
         php_errormail($error);
@@ -41,7 +41,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
         if (display_error()) {
             $errmsg = $error;
         } else {
-            $errmsg = "";
+            $errmsg = '';
         }
 
         require __DIR__ . '/../html/error.php';

@@ -616,9 +616,6 @@ class picture
     public function delete($restore = false)
     {
         // see also removelog.php, 'remove log pictures'
-
-        global $opt;
-
         // delete record, image and thumb
         $this->setArchiveFlag($restore);
         sql("DELETE FROM `pictures` WHERE `id`='&1'", $this->nPictureId);

@@ -215,6 +215,7 @@ function search_output()
 /**
  * @param string $interval
  * @param string $dateTimeEnd
+ * @return false|float|string
  */
 function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
 {

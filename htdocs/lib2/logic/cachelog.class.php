@@ -264,6 +264,7 @@ class cachelog
 
     /**
      * @param integer $value
+     * @return bool
      */
     public function setOwnerNotified($value)
     {

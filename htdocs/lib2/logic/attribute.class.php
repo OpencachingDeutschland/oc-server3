@@ -24,8 +24,10 @@ class attribute
     }
 
     /**
+     * @param $cacheId
      * @param boolean $bOnlySelectable
      * @param boolean $firstLetterUppercase
+     * @return array
      */
     public static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
     {

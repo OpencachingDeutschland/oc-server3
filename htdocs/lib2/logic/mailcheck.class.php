@@ -166,6 +166,7 @@ class mailcheck
 
     /**
      * @param string $out
+     * @return string
      */
     public function send_command($fp, $out)
     {
@@ -176,7 +177,7 @@ class mailcheck
 
     public function get_data($fp)
     {
-        $s = "";
+        $s = '';
         stream_set_timeout($fp, $this->nReadTimeout);
 
         for ($i = 0; $i < 2; $i++) {

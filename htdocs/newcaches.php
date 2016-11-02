@@ -23,7 +23,7 @@ if ($startat < 0) {
 }
 
 $tpl->caching = true;
-$tpl->cache_id = $startat . "-" . $country . "-" . $cachetype;
+$tpl->cache_id = $startat . '-' . $country . '-' . $cachetype;
 $tpl->cache_lifetime = 300;
 if ($startat > 10 * $perpage) {
     $tpl->cache_lifetime = 3600;

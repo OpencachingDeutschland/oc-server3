@@ -57,7 +57,6 @@ class attribute
         );
         while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
             $attr = array();
-            $bFirst = true;
             $bSearchGroupDefault = false;
 
             if ($cacheId == 0) {
@@ -83,9 +82,9 @@ class attribute
                     LEFT JOIN `sys_trans_text` AS `tt2`
                         ON `t2`.`id`=`tt2`.`trans_id`
                         AND `tt2`.`lang`='&1'
-                    WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . "
+                    WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . '
                     AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                    ORDER BY `cache_attrib`.`group_id` ASC",
+                    ORDER BY `cache_attrib`.`group_id` ASC',
                     $opt['template']['locale'],
                     $rAttrGroup['id']
                 );

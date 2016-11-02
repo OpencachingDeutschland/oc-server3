@@ -164,8 +164,6 @@ class login
 
     public function hasAdminPriv($privilege = false)
     {
-        global $cookie;
-
         $this->verify();
 
         if ($privilege === false) {

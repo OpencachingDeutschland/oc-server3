@@ -41,10 +41,10 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
                     $gcwp,
                     $source
                 );
-                echo "ok";
+                echo 'ok';
             }
         } else {
-            echo "error: missing parameter(s)";
+            echo 'error: missing parameter(s)';
         }
     }
 } else {

@@ -46,8 +46,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', htmlspecialchars('editdesc.php?descid=' . urlencode($descid), ENT_COMPAT, 'UTF-8'));
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -276,7 +276,8 @@ if ($error == false) {
                 );
                 while ($rLanguage = sql_fetch_assoc($rsLanguages)) {
                     $sSelected = ($rLanguage['short'] == $desc_lang) ? ' selected="selected"' : '';
-                    $languages .= '<option value="' . $rLanguage['short'] . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+                    $languages .= '<option value="' . $rLanguage['short'] . '"' . $sSelected . '>' .
+                        htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
                 }
                 sql_free_result($rsLanguages);
 
@@ -311,8 +312,6 @@ if ($error == false) {
                 }
                 $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
                 tpl_set_var('htmlheaders', $headers);
-            } else {
-                // @todo: not the owner
             }
         } else {
             tpl_errorMsg('editdesc', $error_desc_not_found);

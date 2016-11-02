@@ -114,7 +114,7 @@ if ($error == false) {
                 $log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : (substr(
                     $log_record['date'],
                     11
-                ) == "00:00:00" ? "" : date('H', strtotime($log_record['date'])));
+                ) == '00:00:00' ? '' : date('H', strtotime($log_record['date'])));
                 $log_time_minute = isset($_POST['logminute']) ? trim($_POST['logminute']) : (substr(
                     $log_record['date'],
                     11
@@ -411,7 +411,7 @@ if ($error == false) {
                 $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
                 tpl_set_var('type_edit_disabled', $disable_typechange ? $type_edit_disabled : '');
 
-                // TODO: Enforce the 'diables' when processing the posted data.
+                // TODO: Enforce the 'disables' when processing the posted data.
                 // It's not that urgent, because nothing can be broken by changing
                 // past status log types (it was even allowed up to OC 3.0.17);
                 // just the log history may look weird.
@@ -481,7 +481,8 @@ if ($error == false) {
                 // build smilies
                 $smilies = '';
                 if ($descMode != 3) {
-                    for ($i = 0; $i < count($smiley['show']); $i++) {
+                    $countShow = count($smiley['show']);
+                    for ($i = 0; $i < $countShow; $i++) {
                         if ($smiley['show'][$i] == '1') {
                             $tmp_smiley = $smiley_link;
                             $tmp_smiley = mb_ereg_replace('{smiley_image}', $smiley['image'][$i], $tmp_smiley);
@@ -497,11 +498,7 @@ if ($error == false) {
                     tpl_set_var('smileypath', $opt['template']['smiley']);
                 }
                 tpl_set_var('smilies', $smilies);
-            } else {
-                //TODO: show error
             }
-        } else {
-            //TODO: show error
         }
     }
 }
@@ -512,18 +509,22 @@ tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy
 //make the template and send it out
 tpl_BuildTemplate();
 
-
-function is_latest_log($cache_id, $log_id)
+/**
+ * @param $cache_id
+ * @param $logId
+ * @return bool
+ */
+function is_latest_log($cacheId, $logId)
 {
-    $lastest_log_id = sqlValue(
+    $latestLogId = sqlValue(
         "
         SELECT `id` FROM `cache_logs`
-        WHERE `cache_id`='" . sql_escape($cache_id) . "'
+        WHERE `cache_id`='" . sql_escape($cacheId) . "'
         ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
         LIMIT 1",
         0,
         $cache_id
     );
 
-    return ($log_id == $lastest_log_id);
+    return ($logId == $latestLogId);
 }

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # enter url for SQL dump. e.g. http://opencaching.de/dump.sql
-#DUMP_URL="http://cdn.opencaching.de/opencaching_dump.sql.gz"
 DUMP_URL=""
 
 function label {
@@ -26,7 +25,7 @@ systemctl enable httpd.service
 firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
-sudo ln -sf /var/www/html/bin/translations.sh
+
 yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
 yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
@@ -317,11 +316,11 @@ cd /var/www/html
 sudo chmod 755 psh.phar
 
 label "setting up translation"
-cd /var/www/html/bin/
-sudo chmod 755 translation
-cd /usr/local/bin && sudo ln -sf /var/www/html/bin/translation
+cd /var/www/html/dev-ops/local.team-opencaching.de/actions/
+sudo chmod 755 translations.sh
+cd /usr/local/bin && sudo ln -sf /var/www/html/dev-ops/local.team-opencaching.de/actions/translations.sh
 
 label "get latest translation"
-translation
+translations.sh
 
 label "All done, have fun."

@@ -14,22 +14,22 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../';
-require $opt['rootpath'] . 'lib2/web.inc.php';
+require __DIR__ . '/../lib2/web.inc.php';
 
 if (isset($_REQUEST['report']) && $_REQUEST['report']) {
     header('Content-type: text/plain');
 
     if ($opt['cron']['gcwp']['report']) {
         if (isset($_REQUEST['ocwp']) && isset($_REQUEST['gcwp']) && isset($_REQUEST['source'])) {
-            $ocwp = trim($_REQUEST['ocwp']);
-            $gcwp = trim($_REQUEST['gcwp']);
+            $ocWp = trim($_REQUEST['ocwp']);
+            $gcWp = trim($_REQUEST['gcwp']);
             $source = trim($_REQUEST['source']);
 
             if (!preg_match("/^OC[0-9A-F]{4,6}$/", $ocwp)) {
                 echo "error: invalid ocwp\n";
-            } elseif (!sql_value("SELECT 1 FROM `caches` WHERE `wp_oc`='&1'", 0, $ocwp)) {
+            } elseif (!sql_value("SELECT 1 FROM `caches` WHERE `wp_oc` = '&1'", 0, $ocWp)) {
                 echo "error: unknown ocwp\n";
-            } elseif (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcwp)) {
+            } elseif (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcWp)) {
                 echo "error: invalid gcwp\n";
             } else {
                 sql(
@@ -37,8 +37,8 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
                     INSERT INTO `waypoint_reports`
                     (`date_reported`, `wp_oc`, `wp_external`, `source`)
                     VALUES (NOW(), '&1', '&2', '&3')",
-                    $ocwp,
-                    $gcwp,
+                    $ocWp,
+                    $gcWp,
                     $source
                 );
                 echo 'ok';
@@ -68,17 +68,17 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
 
     if ($opt['cron']['gcwp']['fulllist']) {
         $gzipped_data = '';
-        $cachefile = '../cache2/gc2oc.gz';
-        if (!file_exists($cachefile) || time() - filemtime($cachefile) > 3600 * 4) {
+        $cacheFile = '../cache2/gc2oc.gz';
+        if (!file_exists($cacheFile) || time() - filemtime($cacheFile) > 3600 * 4) {
             $gc2oc = file_get_contents($opt['cron']['gcwp']['fulllist']);
             if ($gc2oc) {
                 $gzipped_data = gzencode($gc2oc);
-                file_put_contents($cachefile, $gzipped_data);
+                file_put_contents($cacheFile, $gzipped_data);
             }
         }
 
-        if (!$gzipped_data && file_exists($cachefile)) {
-            $gzipped_data = file_get_contents($cachefile);
+        if (!$gzipped_data && file_exists($cacheFile)) {
+            $gzipped_data = file_get_contents($cacheFile);
         }
 
         echo $gzipped_data;

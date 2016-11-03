@@ -8,19 +8,19 @@
 class attribute
 {
     /* array with all attributes grouped by attribute group */
-    public static function getAttrbutesListArray($firstLetterUppercase = false)
+    public static function getAttributesListArray($firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal(0, false, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal(0, false, $firstLetterUppercase);
     }
 
-    public static function getSelectableAttrbutesListArray($firstLetterUppercase = false)
+    public static function getSelectableAttributesListArray($firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal(0, true, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal(0, true, $firstLetterUppercase);
     }
 
-    public static function getAttrbutesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
+    public static function getAttributesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
 
     /**
@@ -29,7 +29,7 @@ class attribute
      * @param boolean $firstLetterUppercase
      * @return array
      */
-    public static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
+    public static function getAttributesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
     {
         global $opt;
 

@@ -709,7 +709,7 @@ INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('2', 'Openc
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('3', 'Opencaching Czech', 'www.opencaching.cz', 'OZ');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('4', 'Local Development', '', 'AA');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('6', 'Opencaching Sweden', 'www.opencaching.se', 'OS');
-INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('7', 'Opencaching Great Britan', 'www.opencaching.org.uk', 'OK');
+INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('7', 'Opencaching Great Britan', 'opencache.uk', 'OK');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('8', 'Opencaching Norway', 'www.opencaching.no', 'ON');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('9', 'Opencaching Latvian', 'www.opencaching.lv', 'OV');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('10', 'Opencaching United States', 'www.opencaching.us', 'OU');

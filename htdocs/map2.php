@@ -228,7 +228,7 @@ $tpl->assign_rs('aCacheSize', $rsCacheSize);
 sql_free_result($rsCacheSize);
 
 /* assign attributes */
-$tpl->assign('aAttributes', attribute::getSelectableAttrbutesListArray());
+$tpl->assign('aAttributes', attribute::getSelectableAttributesListArray());
 
 $aAttributesDisabled = array();
 $maxaid = 0;

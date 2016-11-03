@@ -7,7 +7,7 @@
 
 {*
     params
-  attriblist := list of attributes from class attribute::getAttrbutesListArray*
+  attriblist := list of attributes from class attribute::getAttributesListArray*
 
     onmousedown := javascript funtion name to call on mouse down (to change attribute icons)
     inputprefix := name/id-prefix of hidden inputbox with state

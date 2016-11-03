@@ -349,7 +349,7 @@ sql_free_result($rs);
 
 /* attributes and cache lists
  */
-$tpl->assign('attributes', attribute::getAttrbutesListArrayByCacheId($cacheid));
+$tpl->assign('attributes', attribute::getAttributesListArrayByCacheId($cacheid));
 $tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
 $tpl->assign(
     'watchclinfo',

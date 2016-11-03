@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
@@ -35,10 +34,13 @@ if ($article == '') {
         $language = false;
         if ($hDir = opendir($opt['stylepath'] . '/articles/')) {
             while ((($sFile = readdir($hDir)) !== false) && ($language === false)) {
-                if (($sFile != '.') && ($sFile != '..') && (is_dir($opt['stylepath'] . '/articles/' . $sFile))) {
-                    if (file_exists($opt['stylepath'] . '/articles/' . $sFile . '/' . $article . '.tpl')) {
-                        $language = $sFile;
-                    }
+                if ($sFile != '.'
+                    && $sFile != '..'
+                    && is_dir($opt['stylepath'] . '/articles/' . $sFile)
+                    && file_exists($opt['stylepath'] . '/articles/' . $sFile . '/' . $article . '.tpl')
+                ) {
+                    $language = $sFile;
+
                 }
             }
             closedir($hDir);
@@ -73,7 +75,7 @@ if (!$tpl->is_cached()) {
     /* prepare smarty vars for special pages ...
      */
     if ($article == 'cacheinfo') {
-        require_once $opt['rootpath'] . 'lib2/logic/attribute.class.php';
+        require_once __DIR__ . '/lib2/logic/attribute.class.php';
         $attributes = attribute::getSelectableAttributesListArray(true);
         $tpl->assign('attributes', $attributes);
     }

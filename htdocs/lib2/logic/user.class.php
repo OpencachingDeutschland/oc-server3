@@ -145,6 +145,7 @@ class user
 
     /**
      * @param string $value
+     * @return bool
      */
     public function setUsername($value)
     {
@@ -215,6 +216,7 @@ class user
 
     /**
      * @param string $value
+     * @return bool
      */
     public function setFirstName($value)
     {
@@ -234,6 +236,7 @@ class user
 
     /**
      * @param string $value
+     * @return bool
      */
     public function setLastName($value)
     {
@@ -286,6 +289,7 @@ class user
 
     /**
      * @param double $value
+     * @return bool
      */
     public function setLatitude($value)
     {
@@ -303,6 +307,7 @@ class user
 
     /**
      * @param double $value
+     * @return bool
      */
     public function setLongitude($value)
     {
@@ -320,6 +325,7 @@ class user
 
     /**
      * @param integer $value
+     * @return bool
      */
     public function setNotifyRadius($value)
     {
@@ -337,6 +343,7 @@ class user
 
     /**
      * @param boolean $value
+     * @return bool
      */
     public function setNotifyOconly($value)
     {
@@ -420,6 +427,7 @@ class user
 
     /**
      * @param string|null $value
+     * @return bool
      */
     public function setNewPWCode($value)
     {
@@ -433,6 +441,7 @@ class user
 
     /**
      * @param integer|null $value
+     * @return bool
      */
     public function setNewPWDate($value)
     {
@@ -446,6 +455,7 @@ class user
 
     /**
      * @param string|null $value
+     * @return bool
      */
     public function setNewEMailCode($value)
     {
@@ -459,6 +469,7 @@ class user
 
     /**
      * @param integer|null $value
+     * @return bool
      */
     public function setNewEMailDate($value)
     {
@@ -528,6 +539,7 @@ class user
 
     /**
      * @param string $value
+     * @return bool
      */
     public function setWatchmailNext($value)
     {
@@ -1020,10 +1032,10 @@ class user
      * disables user (if not disabled), removes all licensed content from db and
      * replaces every picture with a dummy one
      *
+     * @param bool $old_disabled
      * @return string error message, if anything went wrong, true otherwise
-     *
      * old_disabled: the user was disabled already before license transition
-     *               and therefore could not accept/decline the license
+     * and therefore could not accept/decline the license
      */
     public function disduelicense($old_disabled = false)
     {

@@ -14,12 +14,13 @@ class RSSParser
      *
      * @param int $items number of feeditems to parse from feed
      * @param string $url url of the feed to parse
+     * @param $timeout
      * @param boolean $includetext
      * @return string $item feeditems as HTML-string
      */
     public static function parse($items, $url, $timeout, $includetext)
     {
-        global $opt, $tpl;
+        global $tpl;
 
         if ($items <= 0) {
             return '';

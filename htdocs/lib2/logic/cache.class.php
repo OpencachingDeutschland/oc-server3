@@ -2,7 +2,7 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *  Unicode Reminder メモ
- *   get/set has to be commited with save
+ *   get/set has to be committed with save
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
@@ -963,8 +963,6 @@ class cache
 
     public function getUserLogTypes($userLogType, $oldLogType = 0)
     {
-        global $translate, $login;
-
         $logTypes = [];
 
         $logtypeNames = get_logtype_names();

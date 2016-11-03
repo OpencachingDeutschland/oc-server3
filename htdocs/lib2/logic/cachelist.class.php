@@ -4,7 +4,7 @@
  *
  *  Unicode Reminder メモ
  *
- *   get/set has to be commited with save
+ *   get/set has to be committed with save
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
@@ -21,8 +21,6 @@ class cachelist
 
     public function __construct($nNewCacheListId = ID_NEW, $nUserId = 0)
     {
-        global $opt;
-
         $this->reCachelist = new rowEditor('cache_lists');
         $this->reCachelist->addPKInt('id', null, false, RE_INSERT_AUTOINCREMENT);
         $this->reCachelist->addString('uuid', '', false, RE_INSERT_AUTOUUID);
@@ -143,7 +141,6 @@ class cachelist
     // set description in HTML format, must be purified!
     public function setDescription($desc, $htmledit)
     {
-        global $opt;
         $this->reCachelist->setValue('desc_htmledit', $htmledit ? 1 : 0);
 
         return $this->reCachelist->setValue('description', $desc);
@@ -232,8 +229,6 @@ class cachelist
 
     public function addCacheByWP($wp)
     {
-        global $translate;
-
         $cache = cache::fromWP($wp);
         if (!is_object($cache)) {
             return false;
@@ -242,7 +237,7 @@ class cachelist
         }
     }
 
-    // returns true if all waypoints were valid, or an array of invalid waypoints
+    // returns true if all wayPoints were valid, or an array of invalid wayPoints
     public function addCachesByWPs($wps)
     {
         $wpa = explode(' ', trim($wps));
@@ -270,8 +265,6 @@ class cachelist
 
     public function addCache($cache)
     {
-        global $translate;
-
         if (!$cache->exist() || !$cache->allowView()) {
             return false;
         } else {

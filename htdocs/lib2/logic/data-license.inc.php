@@ -18,6 +18,17 @@
  * username and userlicense are not queried *here* for performance reasons.
  */
 
+/**
+ * @param $userid
+ * @param $username
+ * @param $userlicense
+ * @param $cacheid
+ * @param $language
+ * @param $for_cachedesc
+ * @param $html
+ * @param bool $twolines
+ * @return string
+ */
 function getLicenseDisclaimer(
     $userid,
     $username,

@@ -25,29 +25,29 @@ if ($userid == 0) {
 // user data and basic statistics
 $rs = sql(
     "SELECT `user`.`username`,
-                                        `user`.`last_login`,
-                                        `user`.`accept_mailing`,
-                                        `user`.`pmr_flag`,
-                                        `user`.`date_created`,
-                                        `user`.`password`,
-                                        `user`.`email`,
-                                        `user`.`is_active_flag`,
-                                        `user`.`latitude`,
-                                        `user`.`longitude`,
-                                        `user`.`data_license`,
-                                        IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
-                                        `stat_user`.`hidden`,
-                                        `stat_user`.`found`,
-                                        `stat_user`.`notfound`,
-                                        `stat_user`.`note`,
-                                        `stat_user`.`maintenance`,
-                                        `user`.`uuid`
-                             FROM `user`
-                    LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
-                    LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
-                    LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2'
-                    AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
-                            WHERE `user`.`user_id`='&1'",
+            `user`.`last_login`,
+            `user`.`accept_mailing`,
+            `user`.`pmr_flag`,
+            `user`.`date_created`,
+            `user`.`password`,
+            `user`.`email`,
+            `user`.`is_active_flag`,
+            `user`.`latitude`,
+            `user`.`longitude`,
+            `user`.`data_license`,
+            IFNULL(`sys_trans_text`.`text`,`countries`.`name`) AS `country`,
+            `stat_user`.`hidden`,
+            `stat_user`.`found`,
+            `stat_user`.`notfound`,
+            `stat_user`.`note`,
+            `stat_user`.`maintenance`,
+            `user`.`uuid`
+     FROM `user`
+     LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
+     LEFT JOIN `countries` ON `user`.`country`=`countries`.`short`
+     LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`lang`='&2'
+     AND `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+     WHERE `user`.`user_id`='&1'",
     $userid,
     $opt['template']['locale']
 );
@@ -58,7 +58,7 @@ if ($record === false) {
     $tpl->error(ERROR_USER_NOT_EXISTS);
 }
 
-$active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1", 0, $userid);
+$active = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status` = 1", 0, $userid);
 
 $rs = sql(
     "SELECT IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `u`.`option_value`, `u`.`option_id` AS `option_id`

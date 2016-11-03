@@ -1,12 +1,15 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- *
  * Unicode Reminder メモ
- *
  * Nature Protection Area functions
- ****************************************************************************/
+ ***************************************************************************
 
+ /*
+ *
+ * @param $cache_id
+ * @return array
+ */
 function get_npas($cache_id)
 {
     $rsNPA = sql(
@@ -30,18 +33,23 @@ function get_npas($cache_id)
 
 function get_desc_npas($cache_id)
 {
-    global $opt;
-
     $npas = get_npas($cache_id);
     if ($npas) {
-        $desc = "<p>" . str_replace('%1', helppagelink('npa'), _('This geocache is probably placed within the following protected areas (%1Info</a>):')) . "</p>\n" .
+        $desc = '<p>' .
+            str_replace(
+                '%1',
+                helppagelink('npa'),
+                'This geocache is probably placed within the following protected areas (%1Info</a>):'
+            ) . "</p>\n" .
             "<ul>\n";
         foreach ($npas as $npa) {
-            $desc .= "<li>" . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=" . urlencode($npa['npaTypeName'] . ' ' . $npa['npaName']) . "' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
+            $desc .= '<li>' . $npa['npaTypeName'] . ": <a href='http://www.google.de/search?q=" .
+                urlencode($npa['npaTypeName'] . ' ' . $npa['npaName']) .
+                "' target='_blank'>" . $npa['npaName'] . "</a></li>\n";
         }
         $desc .= "</ul>\n";
     } else {
-        $desc = "";
+        $desc = '';
     }
 
     return $desc;

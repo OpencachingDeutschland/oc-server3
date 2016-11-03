@@ -89,9 +89,22 @@ if (!$tpl->is_cached()) {
     $tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 
     // current cache and log-counters
-    $tpl->assign('count_hiddens', number1000(sql_value_slave('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status`=1', 0)));
-    $tpl->assign('count_founds', number1000(sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type`=1', 0)));
-    $tpl->assign('count_users', number1000(sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id` FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id` FROM `caches`) AS `t`', 0)));
+    $tpl->assign(
+        'count_hiddens',
+        number1000(sql_value_slave('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status` = 1', 0))
+    );
+    $tpl->assign(
+        'count_founds',
+        number1000(sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type` = 1', 0))
+    );
+    $tpl->assign(
+        'count_users',
+        number1000(
+            sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id`
+                             FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id`
+                             FROM `caches`) AS `t`', 0)
+        )
+    );
 
     // get newest events
     $tpl->assign_rs('events', $getNew->rsForSmarty('event'));
@@ -99,7 +112,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign(
         'total_events',
         sql_value_slave(
-            "SELECT COUNT(*) FROM `caches` WHERE `type`=6 AND `date_hidden` >= curdate() AND `status`=1",
+            'SELECT COUNT(*) FROM `caches` WHERE `type` = 6 AND `date_hidden` >= curdate() AND `status` = 1',
             0
         )
     );
@@ -133,10 +146,13 @@ if (!$tpl->is_cached()) {
     // country and language parameters
     $sUserCountryName = sql_value(
         "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
-             FROM `countries`
-        LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-            WHERE `countries`.`short`='&1'",
+         FROM `countries`
+         LEFT JOIN `sys_trans`
+           ON `countries`.`trans_id`=`sys_trans`.`id`
+         LEFT JOIN `sys_trans_text`
+           ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+           AND `sys_trans_text`.`lang`='&2'
+         WHERE `countries`.`short`='&1'",
         '',
         $sUserCountry,
         $opt['template']['locale']

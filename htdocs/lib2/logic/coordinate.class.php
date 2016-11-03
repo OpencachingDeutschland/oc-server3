@@ -288,6 +288,7 @@ class coordinate
     /**
      * @param integer $bw
      * @param integer $lw
+     * @return array
      */
     public function wgs2pot($bw, $lw)
     {
@@ -590,6 +591,7 @@ class coordinate
 
     /**
      * @param string $name
+     * @return bool
      */
     public static function parseRequestLat($name)
     {
@@ -611,6 +613,7 @@ class coordinate
 
     /**
      * @param string $name
+     * @return bool
      */
     public static function parseRequestLon($name)
     {

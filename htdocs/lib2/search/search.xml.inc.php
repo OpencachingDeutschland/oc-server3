@@ -205,6 +205,7 @@ function html2txt($html)
 
 /**
  * @param string $str
+ * @return mixed
  */
 function lf2crlf($str)
 {

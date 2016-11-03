@@ -34,8 +34,9 @@ class rowEditor
 
     /**
      * @param string $sField
+     * @param $nDefault
      * @param boolean $bNullable
-     * @param integer $nInsertFunction
+     * @param int $nInsertFunction
      */
     public function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -143,8 +144,9 @@ class rowEditor
 
     /**
      * @param string $sField
+     * @param $nDefault
      * @param boolean $bNullable
-     * @param integer $nInsertFunction
+     * @param int $nInsertFunction
      */
     public function addInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -162,6 +164,7 @@ class rowEditor
      * @param string $sField
      * @param integer $nDefault
      * @param boolean $bNullable
+     * @param int $nInsertFunction
      */
     public function addFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -179,6 +182,7 @@ class rowEditor
      * @param string $sField
      * @param integer $nDefault
      * @param boolean $bNullable
+     * @param int $nInsertFunction
      */
     public function addDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -194,8 +198,9 @@ class rowEditor
 
     /**
      * @param string $sField
+     * @param $sDefault
      * @param boolean $bNullable
-     * @param integer $nInsertFunction
+     * @param int $nInsertFunction
      */
     public function addString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -211,7 +216,9 @@ class rowEditor
 
     /**
      * @param string $sField
+     * @param $bDefault
      * @param boolean $bNullable
+     * @param int $nInsertFunction
      */
     public function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -227,8 +234,9 @@ class rowEditor
 
     /**
      * @param string $sField
+     * @param $dDefault
      * @param boolean $bNullable
-     * @param integer $nInsertFunction
+     * @param int $nInsertFunction
      */
     public function addDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
     {
@@ -503,7 +511,7 @@ class rowEditor
 
     /**
      * @param string $sField
-     *
+     * @param $sValue
      * @return bool
      */
     public function setValue($sField, $sValue)

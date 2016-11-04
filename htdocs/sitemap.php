@@ -35,12 +35,12 @@ function pAppendSites($parentId, $viewall, $sublevel, &$aItems)
 
     $rs = sql(
         "SELECT `sys_menu`.`id`,
-             IF(`sys_menu`.`title`='',
-             IFNULL(`ttMenu`.`text`, `sys_menu`.`menustring`),
-             IFNULL(`ttTitle`.`text`, `sys_menu`.`title`)) AS `name`,
-             IF(SUBSTR(`sys_menu`.`href`,1,1)='!', SUBSTR(`sys_menu`.`href`,2), `sys_menu`.`href`) AS `href`,
-             SUBSTR(`sys_menu`.`href`,1,1)='!' AS `blanktarget`,
-             `sys_menu`.`sitemap`
+                IF(`sys_menu`.`title`='',
+                IFNULL(`ttMenu`.`text`, `sys_menu`.`menustring`),
+                IFNULL(`ttTitle`.`text`, `sys_menu`.`title`)) AS `name`,
+                IF(SUBSTR(`sys_menu`.`href`,1,1)='!', SUBSTR(`sys_menu`.`href`,2), `sys_menu`.`href`) AS `href`,
+                SUBSTR(`sys_menu`.`href`,1,1)='!' AS `blanktarget`,
+                `sys_menu`.`sitemap`
          FROM `sys_menu`
          LEFT JOIN `sys_trans` AS `tTitle`
            ON `sys_menu`.`title_trans_id`=`tTitle`.`id`

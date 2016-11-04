@@ -170,18 +170,17 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
     // get cache set for this user
     $user_id = $r['user_id'];
     $rs = sql(
-        "SELECT
-            `cache_id`,
-            `wp_oc`,
-            `name`,
-            `latitude`,
-            `longitude`,
-            `status`,
-            LEFT(`listing_last_modified`,10) AS `last_modified`,
-            (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`caches`.`cache_id`) AS `logs`
-        FROM `caches`
-        WHERE `user_id`='&1'
-        AND `status`!=5",
+        "SELECT `cache_id`,
+                `wp_oc`,
+                `name`,
+                `latitude`,
+                `longitude`,
+                `status`,
+                LEFT(`listing_last_modified`,10) AS `last_modified`,
+                (SELECT COUNT(*) FROM `cache_logs` WHERE `cache_logs`.`cache_id`=`caches`.`cache_id`) AS `logs`
+         FROM `caches`
+         WHERE `user_id`='&1'
+         AND `status`!=5",
         $user_id
     );
     $caches = array();
@@ -277,7 +276,7 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         }
     }
 
-    if ($restore_date == "") {
+    if ($restore_date == '') {
         $tpl->assign('error', 'nodate');
         $tpl->display();
     } elseif (count($restore_options) == 0) {
@@ -289,7 +288,7 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         $tpl->display();
     }
 
-    $cacheids = explode(",", urldecode($_REQUEST['cacheids']));
+    $cacheids = explode(',', urldecode($_REQUEST['cacheids']));
     $tpl->assign(
         'restored',
         restore_listings($cacheids, $restore_date, $restore_options, $simulate)
@@ -308,12 +307,12 @@ $tpl->display();
 
 function get_archive_data($caches)
 {
-    $cachelist = "(" . implode(",", $caches) . ")";
+    $cachelist = '(' . implode(',', $caches) . ')';
     $data = array();
     $admins = array();
 
     // make waypoint index
-    $rs = sql("SELECT `cache_id`, `wp_oc` FROM `caches` WHERE `cache_id` IN " . $cachelist);
+    $rs = sql('SELECT `cache_id`, `wp_oc` FROM `caches` WHERE `cache_id` IN ' . $cachelist);
     while ($r = sql_fetch_assoc($rs)) {
         $wp_oc[$r['cache_id']] = $r['wp_oc'];
     }
@@ -321,15 +320,14 @@ function get_archive_data($caches)
 
     // cache coordinates
     $rs = sql(
-        "SELECT
-            `cache_id`,
-            LEFT(`date_created`,10) AS `date_modified`,
-            `longitude`,
-            `latitude`,
-            `restored_by`
-        FROM `cache_coordinates`
-        WHERE `cache_id` IN " . $cachelist . "
-        ORDER BY `date_created` ASC"
+        'SELECT `cache_id`,
+                LEFT(`date_created`,10) AS `date_modified`,
+                `longitude`,
+                `latitude`,
+                `restored_by`
+         FROM `cache_coordinates`
+         WHERE `cache_id` IN ' . $cachelist . '
+         ORDER BY `date_created` ASC'
     );
     // order is relevant, because multiple changes per day possible
     $lastcoord = array();
@@ -346,10 +344,15 @@ function get_archive_data($caches)
     sql_free_result($rs);
 
     // cache country
-    $rs = sql("SELECT `cache_id`, LEFT(`date_created`,10) AS `date_modified`, `country`, `restored_by`
-               FROM `cache_countries`
-                         WHERE `cache_id` IN " . $cachelist . "
-                         ORDER BY `date_created` ASC");
+    $rs = sql(
+        'SELECT `cache_id`,
+                LEFT(`date_created`,10) AS `date_modified`,
+                `country`,
+                `restored_by`
+         FROM `cache_countries`
+         WHERE `cache_id` IN ' . $cachelist . '
+         ORDER BY `date_created` ASC'
+    );
     // order is relevant, because multiple changes per day possible
     $lastcountry = array();
     while ($r = sql_fetch_assoc($rs)) {
@@ -373,14 +376,14 @@ function get_archive_data($caches)
 
     // .. and then the changes
     $rs = sql(
-        "SELECT * FROM `caches_modified`
-        WHERE `cache_id` IN " . $cachelist . "
-        ORDER BY `date_modified` DESC"
+        'SELECT * FROM `caches_modified`
+         WHERE `cache_id` IN ' . $cachelist . '
+         ORDER BY `date_modified` DESC'
     );
     while ($r = sql_fetch_assoc($rs)) {
         $wp = $wp_oc[$r['cache_id']];
         if ($r['name'] != $nextcd[$wp]['name']) {
-            append_data($data, $admins, $wp_oc, $r, "name", $r['name'], $nextcd[$wp]['name']);
+            append_data($data, $admins, $wp_oc, $r, 'name', $r['name'], $nextcd[$wp]['name']);
         }
         if ($r['type'] != $nextcd[$wp]['type']) {
             append_data(
@@ -388,7 +391,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "type",
+                'type',
                 labels::getLabelValue('cache_type', $r['type']),
                 labels::getLabelValue('cache_type', $nextcd[$wp]['type'])
             );
@@ -416,7 +419,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "time",
+                'time',
                 $r['search_time'] . '&nbsp;h',
                 $nextcd[$wp]['search_time'] . '&nbsp;h'
             );
@@ -427,7 +430,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "way",
+                'way',
                 $r['way_length'] . '&nbsp;km',
                 $nextcd[$wp]['way_length'] . '&nbsp;km'
             );
@@ -438,7 +441,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "GC ",
+                'GC ',
                 format_wp($r['wp_gc']),
                 format_wp($nextcd[$wp]['wp_gc'])
             );
@@ -449,7 +452,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "GC ",
+                'GC ',
                 format_wp($r['wp_nc']),
                 format_wp($nextcd[$wp]['wp_nc'])
             );
@@ -464,9 +467,10 @@ function get_archive_data($caches)
 
     // attributes
     $rs = sql(
-        "SELECT * FROM `caches_attributes_modified`
-         WHERE `cache_id` IN " . $cachelist . "  /* OConly attrib is shown, but not restorable */
-         ORDER BY `date_modified` ASC"
+        'SELECT *
+         FROM `caches_attributes_modified`
+         WHERE `cache_id` IN ' . $cachelist . '  /* OConly attrib is shown, but not restorable */
+         ORDER BY `date_modified` ASC'
     ); // order doesn't matter as long it is date only
     while ($r = sql_fetch_assoc($rs)) {
         append_data(
@@ -474,8 +478,8 @@ function get_archive_data($caches)
             $admins,
             $wp_oc,
             $r,
-            "attrib",
-            ($r['was_set'] ? "-" : "+") . labels::getLabelValue('cache_attrib', $r['attrib_id']),
+            'attrib',
+            ($r['was_set'] ? '-' : '+') . labels::getLabelValue('cache_attrib', $r['attrib_id']),
             ''
         );
     }
@@ -485,14 +489,13 @@ function get_archive_data($caches)
     // first the current data ...
     $nextdesc = array();
     $rs = sql(
-        "SELECT
-            `cache_id`,
-            `language`,
-            LENGTH(`desc`) AS `dl`,
-            LENGTH(`hint`) AS `hl`,
-            LENGTH(`short_desc`) AS `sdl`
-        FROM `cache_desc`
-        WHERE `cache_id` IN " . $cachelist
+        'SELECT `cache_id`,
+                `language`,
+                LENGTH(`desc`) AS `dl`,
+                LENGTH(`hint`) AS `hl`,
+                LENGTH(`short_desc`) AS `sdl`
+         FROM `cache_desc`
+         WHERE `cache_id` IN ' . $cachelist
     );
     while ($r = sql_fetch_assoc($rs)) {
         if (!isset($nextdesc[$r['cache_id']])) {
@@ -504,17 +507,16 @@ function get_archive_data($caches)
 
     // ... and then the changes
     $rs = sql(
-        "SELECT
-            `cache_id`,
-            `date_modified`,
-            `language`,
-            LENGTH(`desc`) AS `dl`,
-            LENGTH(`hint`) AS `hl`,
-            LENGTH(`short_desc`) AS `sdl`,
-            `restored_by`
-        FROM `cache_desc_modified`
-        WHERE `cache_id` IN " . $cachelist . "
-        ORDER BY `date_modified` DESC"
+        'SELECT `cache_id`,
+                `date_modified`,
+                `language`,
+                LENGTH(`desc`) AS `dl`,
+                LENGTH(`hint`) AS `hl`,
+                LENGTH(`short_desc`) AS `sdl`,
+                `restored_by`
+         FROM `cache_desc_modified`
+         WHERE `cache_id` IN ' . $cachelist . '
+         ORDER BY `date_modified` DESC'
     );
     // order doesn't matter as long only one change per day is recorded
     while ($r = sql_fetch_assoc($rs)) {
@@ -535,7 +537,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "desc(" . $r['language'] . ")",
+                'desc(' . $r['language'] . ')',
                 $r['dl'] + 0,
                 ($next['dl'] + 0) . ' bytes'
             );
@@ -546,7 +548,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "hint(" . $r['language'] . ")",
+                'hint(' . $r['language'] . ')',
                 $r['hl'] + 0,
                 ($next['hl'] + 0) . ' bytes'
             );
@@ -557,7 +559,7 @@ function get_archive_data($caches)
                 $admins,
                 $wp_oc,
                 $r,
-                "shortdesc(" . $r['language'] . ")",
+                'shortdesc(' . $r['language'] . ')',
                 $r['sdl'] + 0,
                 ($next['sdl'] + 0) . ' bytes'
             );
@@ -569,30 +571,35 @@ function get_archive_data($caches)
 
     // logs
     $rs = sql(
-        "SELECT
-            `op`,
-            LEFT(`date_modified`,10) AS `date_modified`,
-            `cache_id`,
-            `logs`.`user_id`,
-            `type`,
-            `date`,
-            `restored_by`,
-            `username`
-        FROM
-              (SELECT 1 AS `op`, `deletion_date` AS `date_modified`, `cache_id`,
-                    `user_id`, `type`, `date`, `restored_by`
-                   FROM `cache_logs_archived`
-                  WHERE `cache_id` IN " . $cachelist . "AND `deleted_by`='&1' AND `user_id`<>'&1'
-                  UNION
+        'SELECT `op`,
+                LEFT(`date_modified`,10) AS `date_modified`,
+                `cache_id`,
+                `logs`.`user_id`,
+                `type`,
+                `date`,
+                `restored_by`,
+                `username`
+         FROM (SELECT 1 AS `op`,
+                      `deletion_date` AS `date_modified`,
+                      `cache_id`,
+                      `user_id`,
+                      `type`,
+                      `date`,
+                      `restored_by`
+               FROM `cache_logs_archived`
+               WHERE `cache_id` IN ' . $cachelist . "
+                 AND `deleted_by`='&1' AND `user_id`<>'&1'
+                 UNION
                   SELECT 2 AS `op`, `date_modified`, `cache_id`,
                        (SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        (SELECT `type` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        (SELECT `date` FROM `cache_logs_archived` WHERE `id`=`original_id`),
                        `restored_by`
                  FROM `cache_logs_restored`
-                  WHERE `cache_id` IN " . $cachelist . ") `logs`
+                  WHERE `cache_id` IN " . $cachelist . '
+                  ) `logs`
                 INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`
-              ORDER BY `logs`.`date_modified` ASC",
+              ORDER BY `logs`.`date_modified` ASC',
         // order may not be exact when redoing reverts, because delete and insert
         // operations then are so quick that dates in both tables are the same
         $user_id
@@ -603,8 +610,9 @@ function get_archive_data($caches)
             $admins,
             $wp_oc,
             $r,
-            $r["op"] == 1 ? "dellog" : "restorelog",
-            "<a href='viewprofile.php?userid=" . $r['user_id'] . "' target='_blank'>" . $r['username'] . "</a>/" . $r['date'],
+            $r['op'] == 1 ? 'dellog' : 'restorelog',
+            "<a href='viewprofile.php?userid=" . $r['user_id'] .
+            "' target='_blank'>" . $r['username'] . '</a>/' . $r['date'],
             ''
         );
     }
@@ -620,32 +628,32 @@ function get_archive_data($caches)
 
     $piccacheid = "IF(`object_type`=2, `object_id`, IF(`object_type`=1, IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)), 0))";
     $rs = sql(
-        "SELECT *, " . $piccacheid . "AS `cache_id` FROM `pictures_modified`
-         WHERE " . $piccacheid . " IN " . $cachelist . "
-         ORDER BY `date_modified` ASC"
+        'SELECT *, ' . $piccacheid . 'AS `cache_id` FROM `pictures_modified`
+         WHERE ' . $piccacheid . ' IN ' . $cachelist . '
+         ORDER BY `date_modified` ASC'
     ); // order is relevant for the case of restore-reverts
     while ($r = sql_fetch_assoc($rs)) {
         $r['date_modified'] = substr($r['date_modified'], 0, 10);
         switch ($r['operation']) {
             case 'I':
-                $picchange = "add";
+                $picchange = 'add';
                 break;
             case 'U':
-                $picchange = "mod";
+                $picchange = 'mod';
                 break;
             case 'D':
-                $picchange = "del";
+                $picchange = 'del';
                 break;
         }
         switch ($r['object_type']) {
             case 1:
-                $picchange .= "-log";
+                $picchange .= '-log';
                 break;
             case 2:
-                $picchange .= "-cache";
+                $picchange .= '-cache';
                 break;
         }
-        append_data($data, $admins, $wp_oc, $r, $picchange . "pic", $r['title'], '');
+        append_data($data, $admins, $wp_oc, $r, $picchange . 'pic', $r['title'], '');
     }
     sql_free_result($rs);
 
@@ -665,8 +673,8 @@ function get_archive_data($caches)
 
 function format_wp($wp)
 {
-    if ($wp == "") {
-        return "(leer)";
+    if ($wp == '') {
+        return '(leer)';
     } else {
         return $wp;
     }
@@ -695,15 +703,15 @@ function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
         $data[$mdate] = [];
     }
 
-    $text = "<strong";
+    $text = '<strong';
     if ($byadmin) {
         $text .= " class='adminrestore'";
     } else {
         $text .= " class='userchange'";
     }
-    $text .= ">$field</strong>: $oldvalue" . ($newvalue != "" ? " &rarr; $newvalue" : "");
+    $text .= ">$field</strong>: $oldvalue" . ($newvalue != '' ? " &rarr; $newvalue" : '');
     if (isset($data[$mdate][$wp])) {
-        $data[$mdate][$wp] .= ", " . $text;
+        $data[$mdate][$wp] .= ', ' . $text;
     } else {
         $data[$mdate][$wp] = $text;
     }
@@ -717,8 +725,8 @@ function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
         }
         $admins[$mdate][$wp][$r['restored_by'] + 0]
             = "<a href='viewprofile.php?userid=" . $r['restored_by'] . "' target='_blank'>" .
-            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $r['restored_by']) .
-            "</a>";
+            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", '', $r['restored_by']) .
+            '</a>';
     }
 }
 
@@ -743,20 +751,25 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         $user_id = $cache['user_id'];
 
         // coordinates
-        if (in_array("coords", $roptions) &&
+        if (in_array('coords', $roptions) &&
             sql_value(
-                "SELECT `cache_id` FROM `cache_coordinates`
-                WHERE `cache_id`='&1' AND `date_created`>='&2'",
+                "SELECT `cache_id`
+                 FROM `cache_coordinates`
+                 WHERE `cache_id`='&1'
+                   AND `date_created`>='&2'",
                 0,
                 $cacheid,
                 $rdate
             )
         ) {
             $rs = sql(
-                "SELECT `latitude`, `longitude` FROM `cache_coordinates`
-                WHERE `cache_id`='&1' AND `date_created` < '&2'
-                ORDER BY `date_created` DESC
-                LIMIT 1",
+                "SELECT `latitude`,
+                        `longitude`
+                 FROM `cache_coordinates`
+                 WHERE `cache_id`='&1'
+                   AND `date_created` < '&2'
+                 ORDER BY `date_created` DESC
+                 LIMIT 1",
                 $cacheid,
                 $rdate
             );
@@ -776,19 +789,23 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }
 
         // country
-        if (in_array("coords", $roptions) &&
+        if (in_array('coords', $roptions) &&
             sql_value(
-                "SELECT `cache_id` FROM `cache_countries`
-                WHERE `cache_id`='&1' AND `date_created`>='&2'",
+                "SELECT `cache_id`
+                 FROM `cache_countries`
+                 WHERE `cache_id`='&1'
+                   AND `date_created`>='&2'",
                 0,
                 $cacheid,
                 $rdate
             )
         ) {
             $rs = sql(
-                "SELECT `country` FROM `cache_countries`
-                WHERE `cache_id`='&1' AND `date_created` < '&2'
-                ORDER BY `date_created` DESC
+                "SELECT `country`
+                 FROM `cache_countries`
+                 WHERE `cache_id`='&1'
+                   AND `date_created` < '&2'
+                 ORDER BY `date_created` DESC
                 LIMIT 1",
                 $cacheid,
                 $rdate
@@ -809,10 +826,12 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
 
         // other cache data
         $rs = sql(
-            "SELECT * FROM `caches_modified`
-            WHERE `cache_id`='&1' AND `date_modified` >='&2'
-            ORDER BY `date_modified` ASC
-            LIMIT 1",
+            "SELECT *
+             FROM `caches_modified`
+             WHERE `cache_id`='&1'
+               AND `date_modified` >='&2'
+             ORDER BY `date_modified` ASC
+             LIMIT 1",
             $cacheid,
             $rdate
         );
@@ -831,18 +850,18 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         ];
 
         if ($r = sql_fetch_assoc($rs)) {// can be false
-            $setfields = "";
+            $setfields = '';
             foreach ($fields as $field => $ropt) {
                 if (in_array($ropt, $roptions) && $r[$field] != $cache[$field]) {
-                    if ($setfields != "") {
-                        $setfields .= ",";
+                    if ($setfields != '') {
+                        $setfields .= ',';
                     }
                     $setfields .= "`$field`='" . sql_escape($r[$field]) . "'";
                     $restored[$wp][$field] = true;
                 }
             }
-            if ($setfields != "" && !$simulate) {
-                sql("UPDATE `caches` SET " . $setfields . " WHERE `cache_id`='&1'", $cacheid);
+            if ($setfields != '' && !$simulate) {
+                sql('UPDATE `caches` SET ' . $setfields . " WHERE `cache_id`='&1'", $cacheid);
             }
         }
         sql_free_result($rs);
@@ -850,9 +869,12 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         // attributes
         if (in_array('settings', $roptions)) {
             $rs = sql(
-                "SELECT * FROM `caches_attributes_modified`
-                WHERE `cache_id`='&1' AND `date_modified`>='&2' AND `attrib_id` != 6 /* OConly */
-                ORDER BY `date_modified` DESC",
+                "SELECT *
+                 FROM `caches_attributes_modified`
+                 WHERE `cache_id`='&1'
+                   AND `date_modified`>='&2'
+                   AND `attrib_id` != 6 /* OConly */
+                 ORDER BY `date_modified` DESC",
                 $cacheid,
                 $rdate
             );
@@ -866,7 +888,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     if ($r['was_set']) {
                         sql(
                             "INSERT IGNORE INTO `caches_attributes` (`cache_id`,`attrib_id`)
-                            VALUES ('&1','&2')",
+                             VALUES ('&1','&2')",
                             $cacheid,
                             $r['attrib_id']
                         );
@@ -886,9 +908,11 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         // descriptions
         if (in_array('desc', $roptions)) {
             $rs = sql(
-                "SELECT * FROM `cache_desc_modified`
-                WHERE `cache_id`='&1' AND `date_modified`>='&2'
-                ORDER BY `date_modified` DESC",
+                "SELECT *
+                 FROM `cache_desc_modified`
+                 WHERE `cache_id`='&1'
+                   AND `date_modified`>='&2'
+                 ORDER BY `date_modified` DESC",
                 $cacheid,
                 $rdate
             );
@@ -1000,7 +1024,7 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             if (!$simulate) {
                                 sql(
                                     "INSERT INTO `cache_logs_archived`
-                                    SELECT *, '0', '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
+                                     SELECT *, '0', '&2', '&3' FROM `cache_logs` WHERE `id`='&1'",
                                     $revert_logid,
                                     $user_id, // original deletor's ID and not restoring admin's ID!
                                     $login->userid
@@ -1070,8 +1094,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     $logs_processed[] = $revert_logid;
                 }  // not already processed
 
-                if ($error != "") {
-                    $restored[$wp]['internal error - could not $error log ' +$r['id'] + "/" +$logid];
+                if ($error != '') {
+                    $restored[$wp]['internal error - could not $error log ' . $r['id'] . '/' . $logid];
                 }
                 if ($logs_restored) {
                     $restored[$wp]['logs'] = true;
@@ -1081,9 +1105,9 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }  // if logs enabled per roptions
 
         // pictures
-        if (in_array("desc", $roptions) || in_array("logs", $roptions)) {
+        if (in_array('desc', $roptions) || in_array('logs', $roptions)) {
             $rs = sql(
-                "SELECT * FROM `pictures_modified`
+                "SELECT *FROM `pictures_modified`
                         WHERE ((`object_type`=2 AND '&2' AND `object_id`='&3') OR
                                            (`object_type`=1 AND '&1'
                                                   AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != '&5'
@@ -1202,8 +1226,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                     $pics_processed[] = $revert_picid;
                 }  // not already processed
 
-                if ($error != "") {
-                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] + "/" +$picid] = true;
+                if ($error != '') {
+                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] . '/' . $picid] = true;
                 }
                 if ($pics_restored) {
                     $restored[$wp]['pictures'] = true;
@@ -1214,8 +1238,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
         }  // if pics enabled per roptions
     }  // foreach cache(id)
 
-    sql("SET @restoredby=0");
-    sql_slave("SET @restoredby=0");
+    sql('SET @restoredby=0');
+    sql_slave('SET @restoredby=0');
 
     return $restored;
 }

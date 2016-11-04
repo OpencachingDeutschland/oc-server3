@@ -68,7 +68,8 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                 $targeturl .= '&utf8=1&searchbyort=1&f_inactive=1&ort=' . $searchfor . '&sort=' . $order;
                 break;
             case $keyword_zipcode:
-                $targeturl .= '&utf8=1&sort=bydistance&searchbyplz=1&f_inactive=1&plz=' . $searchfor . '&sort=' . $order;
+                $targeturl .= '&utf8=1&sort=bydistance&searchbyplz=1&f_inactive=1&plz=' .
+                    $searchfor . '&sort=' . $order;
                 break;
             case $keyword_cacheid:
                 $targeturl .= '&utf8=1&sort=byname&searchbycacheid=1&f_inactive=1&cacheid=' . $searchfor;
@@ -98,7 +99,14 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                     // get cache_id from DB
                     // GC/NC waypoints can be duplicates -> return first match with least status number
                     $rs = sql(
-                        "SELECT `cache_id` FROM `caches` INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1') AND " . $wpfield . "='&2' ORDER BY `caches`.`status`,`caches`.`cache_id` LIMIT 0,1",
+                        "SELECT `cache_id`
+                         FROM `caches`
+                         INNER JOIN `cache_status`
+                           ON `caches`.`status`=`cache_status`.`id`
+                         WHERE (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`='&1')
+                           AND " . $wpfield . " ='&2'
+                         ORDER BY `caches`.`status`,`caches`.`cache_id`
+                         LIMIT 0,1",
                         $login->userid,
                         $searchfor
                     );
@@ -111,7 +119,7 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                     }
                     sql_free_result($rs);
                 } else {
-                    // wrong waypoint format
+                    // wrong wayPoint format
                     $tpl->error(ERROR_SEARCHPLUGIN_WAYPOINT_FORMAT);
                     exit;
                 }

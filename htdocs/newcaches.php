@@ -30,9 +30,9 @@ if ($startat > 10 * $perpage) {
 }
 
 if (!$tpl->is_cached()) {
-    $cachetype_condition = ($cachetype ? " AND `caches`.`type` = " . sql_escape($cachetype) : "");
+    $cachetype_condition = ($cachetype ? ' AND `caches`.`type` = ' . sql_escape($cachetype) : '');
     if ($bEvents) {
-        $cachetype_condition .= " AND `date_hidden` >= curdate()";
+        $cachetype_condition .= ' AND `date_hidden` >= curdate()';
     }
     $date_field = ($bEvents ? 'date_hidden' : 'date_created');
     $sort_order = ($bEvents ? 'ASC' : 'DESC');
@@ -77,14 +77,14 @@ if (!$tpl->is_cached()) {
     $startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
     $cacheype_par = ($cachetype ? "&cachetype=$cachetype" : '');
     if ($country == '') {
-        $count = sql_value_slave("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1" . $cachetype_condition, 0);
+        $count = sql_value_slave('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status` = 1' . $cachetype_condition, 0);
         $pager = new pager("newcaches.php?startat={offset}" . $cacheype_par);
     } else {
         $count = sql_value_slave(
             "SELECT COUNT(*)
-            FROM `caches`
-            WHERE `caches`.`status`=1
-            AND `caches`.`country`='&1'" . $cachetype_condition,
+             FROM `caches`
+             WHERE `caches`.`status`=1
+             AND `caches`.`country`='&1'" . $cachetype_condition,
             0,
             $country
         );

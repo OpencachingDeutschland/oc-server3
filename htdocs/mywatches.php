@@ -88,24 +88,26 @@ if ($action == 'edit') {
     $tpl->redirect($tpl->checkTarget($target, 'mywatches.php'));
 } else {
     $rs = sql(
-        "
-        SELECT
-            `cache_watches`.`cache_id` AS `cacheid`,
-            `caches`.`wp_oc` AS `wp`,
-            `caches`.`name` AS `name`,
-            `stat_caches`.`last_found` AS `lastfound`,
-            `caches`.`type` AS `type`,
-            `caches`.`status` AS `status`,
-            `ca`.`attrib_id` IS NOT NULL AS `oconly`
-        FROM
-            `cache_watches`
-            INNER JOIN `caches` ON `cache_watches`.`cache_id`=`caches`.`cache_id`
-            INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-            LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-            LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-        WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
-            AND `cache_watches`.`user_id`='&1'
-        ORDER BY `caches`.`name`",
+        "SELECT `cache_watches`.`cache_id` AS `cacheid`,
+                `caches`.`wp_oc` AS `wp`,
+                `caches`.`name` AS `name`,
+                `stat_caches`.`last_found` AS `lastfound`,
+                `caches`.`type` AS `type`,
+                `caches`.`status` AS `status`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+         FROM `cache_watches`
+         INNER JOIN `caches`
+           ON `cache_watches`.`cache_id`=`caches`.`cache_id`
+         INNER JOIN `cache_status`
+           ON `caches`.`status`=`cache_status`.`id`
+         LEFT JOIN `stat_caches`
+           ON `caches`.`cache_id`=`stat_caches`.`cache_id`
+         LEFT JOIN `caches_attributes` `ca`
+           ON `ca`.`cache_id`=`caches`.`cache_id`
+           AND `ca`.`attrib_id`=6
+         WHERE (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&1')
+           AND `cache_watches`.`user_id`='&1'
+         ORDER BY `caches`.`name`",
         $login->userid
     );
 

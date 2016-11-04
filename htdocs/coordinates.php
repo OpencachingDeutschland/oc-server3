@@ -51,9 +51,9 @@ if ($cache_desclang && !in_array($cache_desclang, $w3w_langs)) {
 // 3. primary language of the cache's country
 if ($cache_country) {
     foreach ($opt['locale'] as $l => $data) {
-        if ($data['what3words'] &&
-            in_array($cache_country, $data['primary_lang_of']) &&
-            !in_array($l, $w3w_langs)
+        if ($data['what3words']
+            && in_array($cache_country, $data['primary_lang_of'])
+            && !in_array($l, $w3w_langs)
         ) {
             $w3w_langs[] = $l;
             break;
@@ -62,15 +62,15 @@ if ($cache_country) {
 }
 
 // 4. fallback locale of the site (usually English)
-if ($opt['locale'][$opt['template']['default']['fallback_locale']]['what3words'] &&
-    !in_array($opt['template']['default']['fallback_locale'], $w3w_langs)
+if ($opt['locale'][$opt['template']['default']['fallback_locale']]['what3words']
+    && !in_array($opt['template']['default']['fallback_locale'], $w3w_langs)
 ) {
     $w3w_langs[] = $opt['template']['default']['fallback_locale'];
 }
 
 // 5. main locale of the site
-if ($opt['locale'][$opt['page']['main_locale']]['what3words'] &&
-    !in_array($opt['page']['main_locale'], $w3w_langs)
+if ($opt['locale'][$opt['page']['main_locale']]['what3words']
+    && !in_array($opt['page']['main_locale'], $w3w_langs)
 ) {
     $w3w_langs[] = $opt['page']['main_locale'];
 }
@@ -99,9 +99,9 @@ if ($wp != '') {
         "SELECT `caches`.`name`, `user`.`username`
          FROM `caches`
          INNER JOIN `cache_status`
-             ON `caches`.`status`=`cache_status`.`id`
+           ON `caches`.`status`=`cache_status`.`id`
          INNER JOIN `user`
-             ON `user`.`user_id`=`caches`.`user_id`
+           ON `user`.`user_id`=`caches`.`user_id`
          WHERE `cache_status`.`allow_user_view`= 1
          AND `caches`.`wp_oc`='&1'",
         $wp
@@ -113,7 +113,7 @@ if ($wp != '') {
     sql_free_result($rs);
 }
 $tpl->assign('wp', $wp);
-$childwp = isset($_REQUEST['childwp']) ? $_REQUEST['childwp'] : '';
-$tpl->assign('childwp', $childwp);
+$childWp = isset($_REQUEST['childwp']) ? $_REQUEST['childwp'] : '';
+$tpl->assign('childwp', $childWp);
 
 $tpl->display();

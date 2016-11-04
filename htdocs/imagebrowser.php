@@ -12,7 +12,7 @@ $tpl->popup = true;
 
 $login->verify();
 
-$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
+$cacheId = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
 
 $rs = sql(
     "SELECT `caches`.`name`
@@ -21,7 +21,7 @@ $rs = sql(
     WHERE `caches`.`user_id`='&1'
     AND `cache_id`='&2'",
     $login->userid,
-    $cacheid
+    $cacheId
 );
 $rCache = sql_fetch_assoc($rs);
 sql_free_result($rs);
@@ -38,7 +38,7 @@ $rsPictures = sql(
     WHERE `object_id`=&1
     AND `object_type`=2
     ORDER BY `seq`',
-    $cacheid
+    $cacheId
 );
 $pictures = array();
 while ($rPicture = sql_fetch_assoc($rsPictures)) {

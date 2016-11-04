@@ -136,13 +136,28 @@ function assignFromDB($userid, $include_editor)
     global $tpl, $opt, $smilies, $_REQUEST;
 
     $rs = sql(
-        "SELECT `p`.`id`, IFNULL(`tt`.`text`, `p`.`name`) AS `name`, `p`.`default_value`, `p`.`check_regex`, `p`.`option_order`, `u`.`option_visible`, `p`.`internal_use`, `p`.`option_input`, IFNULL(`u`.`option_value`, `p`.`default_value`) AS `option_value`
-                   FROM `profile_options` AS `p`
-              LEFT JOIN `user_options` AS `u` ON `p`.`id`=`u`.`option_id` AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
-              LEFT JOIN `sys_trans` AS `st` ON `p`.`trans_id`=`st`.`id` AND `p`.`name`=`st`.`text`
-              LEFT JOIN `sys_trans_text` AS `tt` ON `st`.`id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-                  WHERE `optionset`=1
-               ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
+        "SELECT `p`.`id`,
+                IFNULL(`tt`.`text`, `p`.`name`) AS `name`,
+                `p`.`default_value`,
+                `p`.`check_regex`,
+                `p`.`option_order`,
+                `u`.`option_visible`,
+                `p`.`internal_use`,
+                `p`.`option_input`,
+                IFNULL(`u`.`option_value`,
+                `p`.`default_value`) AS `option_value`
+         FROM `profile_options` AS `p`
+         LEFT JOIN `user_options` AS `u`
+           ON `p`.`id`=`u`.`option_id`
+           AND (`u`.`user_id` IS NULL OR `u`.`user_id`='&1')
+         LEFT JOIN `sys_trans` AS `st`
+           ON `p`.`trans_id`=`st`.`id`
+           AND `p`.`name`=`st`.`text`
+         LEFT JOIN `sys_trans_text` AS `tt`
+           ON `st`.`id`=`tt`.`trans_id`
+           AND `tt`.`lang`='&2'
+         WHERE `optionset`=1
+         ORDER BY `p`.`internal_use` DESC, `p`.`option_order`",
         $userid + 0,
         $opt['template']['locale']
     );
@@ -162,20 +177,21 @@ function assignFromDB($userid, $include_editor)
         );
     }
 
-    // Use the same descmode values here like in log and cachedesc editor:
+    // Use the same descMode values here like in log and cacheDesc editor:
     if ($include_editor) {
         if (isset($_REQUEST['descMode'])) {
             $descMode = min(3, max(2, $_REQUEST['descMode'] + 0));
         } else {
+            $descMode = 2;
             if (sql_value("SELECT `desc_htmledit` FROM `user` WHERE `user_id`='&1'", 0, $userid + 0)) {
                 $descMode = 3;
-            } else {
-                $descMode = 2;
             }
         }
         if ($descMode == 3) {
             $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
-            $tpl->add_header_javascript('resource2/tinymce/config/user.js.php?lang=' . strtolower($opt['template']['locale']));
+            $tpl->add_header_javascript(
+                'resource2/tinymce/config/user.js.php?lang=' . strtolower($opt['template']['locale'])
+            );
         }
         $tpl->add_header_javascript(editorJsPath());
         $tpl->assign('descMode', $descMode);

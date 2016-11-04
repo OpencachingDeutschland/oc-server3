@@ -86,84 +86,84 @@ if (calcDataSqlChecksum(true) != getSysConfig('datasql_checksum', '')) {
 }
 
 switch ($action) {
-        case 'selectlang':
-            break;
+    case 'selectlang':
+        break;
 
-        case 'verify':
-            verify();
-            break;
+    case 'verify':
+        verify();
+        break;
 
-        case 'resetids':
-            resetIds();
-            break;
+    case 'resetids':
+        resetIds();
+        break;
 
-        case 'clearcache':
-            clearCache();
-            break;
+    case 'clearcache':
+        clearCache();
+        break;
 
-        case 'export':
-            export();
-            break;
+    case 'export':
+        export();
+        break;
 
-        case 'xmlexport':
-            xmlexport();
-            break;
+    case 'xmlexport':
+        xmlexport();
+        break;
 
-        case 'xmlimport':
-            break;
+    case 'xmlimport':
+        break;
 
-        case 'xmlimport2':
-            xmlimport2();
-            break;
+    case 'xmlimport2':
+        xmlimport2();
+        break;
 
-        case 'xmlimport3':
-            xmlimport3();
-            break;
+    case 'xmlimport3':
+        xmlimport3();
+        break;
 
-        case 'textexportnew':
-            textexport($translang, false);
-            break;
+    case 'textexportnew':
+        textexport($translang, false);
+        break;
 
-        case 'textexportall':
-            textexport($translang, true);
-            break;
+    case 'textexportall':
+        textexport($translang, true);
+        break;
 
-        case 'textimport':
-            break;
+    case 'textimport':
+        break;
 
-        case 'textimport2':
-            textimport($translang);
-            break;
+    case 'textimport2':
+        textimport($translang);
+        break;
 
-        case 'edit':
-            if (!$access->mayTranslate($translang)) {
-                $tpl->error(ERROR_NO_ACCESS);
-            }
-            edit();
-            break;
+    case 'edit':
+        if (!$access->mayTranslate($translang)) {
+            $tpl->error(ERROR_NO_ACCESS);
+        }
+        edit();
+        break;
 
-        case 'copy_en':
-            copy_english_texts();
-            break;
+    case 'copy_en':
+        copy_english_texts();
+        break;
 
-        case 'listfaults':
-            $trans = sql(
-                "SELECT
+    case 'listfaults':
+        $trans = sql(
+            'SELECT
                 `sys_trans`.`id`,
                 `sys_trans`.`text`
              FROM `sys_trans`
              LEFT JOIN `sys_trans_ref`
                 ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
              WHERE ISNULL(`sys_trans_ref`.`trans_id`)
-             ORDER BY `sys_trans`.`id` DESC"
-            );
-            $tpl->assign_rs('trans', $trans);
-            sql_free_result($trans);
-            break;
+             ORDER BY `sys_trans`.`id` DESC'
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
+        break;
 
-        case 'listall':
-            $trans = sql(
-                "SELECT
+    case 'listall':
+        $trans = sql(
+            "SELECT
                 `sys_trans`.`id`,
                 `sys_trans`.`text`,
                 `sys_trans_text`.`text` AS `trans`
@@ -172,48 +172,48 @@ switch ($action) {
                 ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                 AND `sys_trans_text`.`lang`='&1'
              ORDER BY `sys_trans`.`id` DESC",
-                $translang
-            );
-            $tpl->assign_rs('trans', $trans);
-            sql_free_result($trans);
-            break;
+            $translang
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
+        break;
 
-        case 'remove':
-            if (!$access->mayTranslate($translang)) {
-                $tpl->error(ERROR_NO_ACCESS);
-            }
-            remove();
-            break;
+    case 'remove':
+        if (!$access->mayTranslate($translang)) {
+            $tpl->error(ERROR_NO_ACCESS);
+        }
+        remove();
+        break;
 
-        case 'scan':
-            scan();
-            break;
+    case 'scan':
+        scan();
+        break;
 
-        case 'scanstart':
-            scanStart();
-            break;
+    case 'scanstart':
+        scanStart();
+        break;
 
-        case 'scanfile':
-            $filename = isset($_REQUEST['filename']) ? $_REQUEST['filename'] : '';
-            scanFile($filename);
-            exit;
+    case 'scanfile':
+        $filename = isset($_REQUEST['filename']) ? $_REQUEST['filename'] : '';
+        scanFile($filename);
+        exit;
 
-        case 'quicknone':
-            $cookie->un_set('translate_mode');
-            break;
+    case 'quicknone':
+        $cookie->un_set('translate_mode');
+        break;
 
-        case 'quicknew':
-            $cookie->set('translate_mode', 'new');
-            break;
+    case 'quicknew':
+        $cookie->set('translate_mode', 'new');
+        break;
 
-        case 'quickall':
-            $cookie->set('translate_mode', 'all');
-            break;
+    case 'quickall':
+        $cookie->set('translate_mode', 'all');
+        break;
 
-        default:
-            $action = 'listnew';
-            $trans = sql(
-                "SELECT DISTINCT
+    default:
+        $action = 'listnew';
+        $trans = sql(
+            "SELECT DISTINCT
                 `sys_trans`.`id`,
                 `sys_trans`.`text`
              FROM `sys_trans`
@@ -224,10 +224,10 @@ switch ($action) {
                 ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
              WHERE ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`=''
              ORDER BY `sys_trans`.`id` DESC",
-                $translang
-            );
-            $tpl->assign_rs('trans', $trans);
-            sql_free_result($trans);
+            $translang
+        );
+        $tpl->assign_rs('trans', $trans);
+        sql_free_result($trans);
 }
 
 $languages = [];

@@ -19,7 +19,7 @@ if ($login->userid == 0) {
 }
 
 // cache_id valid?
-if (sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id`='&1'", 0, $cache_id) == 0) {
+if (sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id` = '&1'", 0, $cache_id) == 0) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
 }
 

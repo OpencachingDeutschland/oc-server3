@@ -29,14 +29,14 @@ if (!file_exists($filename) ||
     // get detailed info from DB
     $rs = sql(
         "SELECT `user`.`username`,
-             `stat_user`.`hidden`,
-             `stat_user`.`found`,
-             `user`.`statpic_logo`,
-             `user`.`statpic_text`
-        FROM `user`
-        LEFT JOIN `stat_user`
-            ON `user`.`user_id`=`stat_user`.`user_id`
-        WHERE `user`.`user_id`='&1'",
+                `stat_user`.`hidden`,
+                `stat_user`.`found`,
+                `user`.`statpic_logo`,
+                `user`.`statpic_text`
+         FROM `user`
+         LEFT JOIN `stat_user`
+           ON `user`.`user_id`=`stat_user`.`user_id`
+         WHERE `user`.`user_id`='&1'",
         $userid
     );
     if (sql_num_rows($rs) == 1) {
@@ -164,7 +164,7 @@ if (!file_exists($filename) ||
 
     sql(
         "INSERT INTO `user_statpic` (`user_id`, `lang`)
-        VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `date_created`=NOW()",
+         VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `date_created`=NOW()",
         $userid,
         $lang
     );

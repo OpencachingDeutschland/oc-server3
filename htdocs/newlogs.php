@@ -101,7 +101,7 @@ if (isset($_GET['for_maintenance'])) {
 if ($logselection == 1) {
     $add_where .= "AND DATEDIFF(NOW(), {fromtable}.`date`) < 30 ";
 }
-$tpl->cache_id .= "|" . $logselection;
+$tpl->cache_id .= '|' . $logselection;
 
 $tpl->change_country_inpage = true;
 
@@ -161,48 +161,50 @@ if (!$tpl->is_cached()) {
     }
 
     $rsLogs = sql_slave(
-        "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `country_name`,
-            `cache_logs`.`id`,
-            `cache_logs`.`date_created`,
-            `cache_logs`.`date`,
-            `caches`.`name` AS `cachename`,
-            `caches`.`wp_oc`,
-            `caches`.`country` AS `country`,
-            `cache_logs`.`type`,
-            `cache_logs`.`oc_team_comment`,
-            `cache_logs`.`needs_maintenance`,
-            `cache_logs`.`listing_outdated`,
-            `cacheloguser`.`user_id`,
-            `cacheloguser`.`username`,
-            `cache_logs`.`cache_id`,
-            `cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
-            `caches_attributes`.`attrib_id` IS NOT NULL AS `oconly`,
-            '' AS `pic_uuid`,
-            0 AS `picshown`,
-            (SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
-        FROM &loglist
-        INNER JOIN `cache_logs`
-            ON &loglist.`id`=`cache_logs`.`id`
-        INNER JOIN `caches`
-            ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-        INNER JOIN `user` AS `cacheloguser`
-            ON `cache_logs`.`user_id`=`cacheloguser`.`user_id`
-        INNER JOIN `countries`
-            ON `caches`.`country`=`countries`.`short`
-        LEFT JOIN `sys_trans_text`
-            ON `countries`.`trans_id`=`sys_trans_text`.`trans_id`
-            AND `sys_trans_text`.`lang`='&1'
-        LEFT JOIN `cache_logs_restored`
-            ON `cache_logs_restored`.`id`=`cache_logs`.`id`
-        LEFT JOIN `cache_rating`
-            ON `cache_rating`.`cache_id`=`caches`.`cache_id`
-            AND `cache_rating`.`user_id`=`cache_logs`.`user_id`
-            AND `cache_rating`.`rating_date`=`cache_logs`.`date`
-        LEFT JOIN `caches_attributes`
-            ON `caches_attributes`.`cache_id`=`caches`.`cache_id`
-            AND `caches_attributes`.`attrib_id`=6
-        WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
-        ORDER BY " . $orderByCountry . str_replace("{fromtable}", "`cache_logs`", $orderByDate) . "`cache_logs`.`date_created` DESC",
+        "SELECT IFNULL(`sys_trans_text`.`text`,
+                `countries`.`name`) AS `country_name`,
+                `cache_logs`.`id`,
+                `cache_logs`.`date_created`,
+                `cache_logs`.`date`,
+                `caches`.`name` AS `cachename`,
+                `caches`.`wp_oc`,
+                `caches`.`country` AS `country`,
+                `cache_logs`.`type`,
+                `cache_logs`.`oc_team_comment`,
+                `cache_logs`.`needs_maintenance`,
+                `cache_logs`.`listing_outdated`,
+                `cacheloguser`.`user_id`,
+                `cacheloguser`.`username`,
+                `cache_logs`.`cache_id`,
+                `cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
+                `caches_attributes`.`attrib_id` IS NOT NULL AS `oconly`,
+                '' AS `pic_uuid`,
+                0 AS `picshown`,
+                (SELECT COUNT(*) FROM `pictures` WHERE `object_type`=1 AND `object_id`=`cache_logs`.`id`) AS `pics`
+         FROM &loglist
+         INNER JOIN `cache_logs`
+           ON &loglist.`id`=`cache_logs`.`id`
+         INNER JOIN `caches`
+           ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+         INNER JOIN `user` AS `cacheloguser`
+           ON `cache_logs`.`user_id`=`cacheloguser`.`user_id`
+         INNER JOIN `countries`
+           ON `caches`.`country`=`countries`.`short`
+         LEFT JOIN `sys_trans_text`
+           ON `countries`.`trans_id`=`sys_trans_text`.`trans_id`
+           AND `sys_trans_text`.`lang`='&1'
+         LEFT JOIN `cache_logs_restored`
+           ON `cache_logs_restored`.`id`=`cache_logs`.`id`
+         LEFT JOIN `cache_rating`
+           ON `cache_rating`.`cache_id`=`caches`.`cache_id`
+           AND `cache_rating`.`user_id`=`cache_logs`.`user_id`
+           AND `cache_rating`.`rating_date`=`cache_logs`.`date`
+         LEFT JOIN `caches_attributes`
+           ON `caches_attributes`.`cache_id`=`caches`.`cache_id`
+           AND `caches_attributes`.`attrib_id`=6
+         WHERE IFNULL(`cache_logs_restored`.`restored_by`,0)=0
+         ORDER BY " . $orderByCountry . str_replace('{fromtable}', '`cache_logs`', $orderByDate) .
+        '`cache_logs`.`date_created` DESC',
         $opt['template']['locale']
     );
 
@@ -216,14 +218,14 @@ if (!$tpl->is_cached()) {
         if ($pics <= 0 || ($pics == $lines_per_pic && count($newLogs) == 1 && !$newLogs[0]['picshow'])) {
             $rsPic = sql_slave(
                 "SELECT `uuid`,`url`,`title`
-                FROM `pictures`
-                WHERE `object_type`=1
-                AND `object_id`='&1'
-                AND `local`=1
-                AND `display`=1
-                AND `spoiler`=0
-                AND `unknown_format`=0
-                LIMIT 1",
+                 FROM `pictures`
+                 WHERE `object_type`=1
+                   AND `object_id`='&1'
+                   AND `local`=1
+                   AND `display`=1
+                   AND `spoiler`=0
+                   AND `unknown_format`=0
+                 LIMIT 1",
                 $rLog['id']
             );
             if ($rPic = sql_fetch_assoc($rsPic)) {
@@ -275,11 +277,15 @@ if (!$tpl->is_cached()) {
     $tpl->assign(
         'countryName',
         sql_value(
-            "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
-            FROM `countries`
-            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-            WHERE `countries`.`short`='&1'",
+            "SELECT IFNULL(`sys_trans_text`.`text`,
+                    `countries`.`name`)
+             FROM `countries`
+             LEFT JOIN `sys_trans`
+               ON `countries`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='&2'
+             WHERE `countries`.`short`='&1'",
             '',
             $country ? $country : $login->getUserCountry(),
             $opt['template']['locale']
@@ -288,11 +294,15 @@ if (!$tpl->is_cached()) {
     $tpl->assign(
         'mainCountryName',
         sql_value(
-            "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
-            FROM `countries`
-            LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-            WHERE `countries`.`short`='&1'",
+            "SELECT IFNULL(`sys_trans_text`.`text`,
+                    `countries`.`name`)
+             FROM `countries`
+             LEFT JOIN `sys_trans`
+               ON `countries`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='&2'
+             WHERE `countries`.`short`='&1'",
             '',
             $opt['page']['main_country'],
             $opt['template']['locale']
@@ -301,7 +311,7 @@ if (!$tpl->is_cached()) {
 
     $tpl->assign('paging', $paging);
     if ($paging) {
-        $pager = new pager($_SERVER["SCRIPT_NAME"] . '?startat={offset}' . $urlparams);
+        $pager = new pager($_SERVER['SCRIPT_NAME'] . '?startat={offset}' . $urlparams);
         $pager->make_from_offset($startat, $total_logs, $logcount);
     }
 }

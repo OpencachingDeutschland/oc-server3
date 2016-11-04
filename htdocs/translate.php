@@ -148,9 +148,8 @@ switch ($action) {
 
     case 'listfaults':
         $trans = sql(
-            'SELECT
-                `sys_trans`.`id`,
-                `sys_trans`.`text`
+            'SELECT `sys_trans`.`id`,
+                    `sys_trans`.`text`
              FROM `sys_trans`
              LEFT JOIN `sys_trans_ref`
                 ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
@@ -163,14 +162,13 @@ switch ($action) {
 
     case 'listall':
         $trans = sql(
-            "SELECT
-                `sys_trans`.`id`,
-                `sys_trans`.`text`,
-                `sys_trans_text`.`text` AS `trans`
+            "SELECT `sys_trans`.`id`,
+                    `sys_trans`.`text`,
+                    `sys_trans_text`.`text` AS `trans`
              FROM `sys_trans`
              LEFT JOIN `sys_trans_text`
-                ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                AND `sys_trans_text`.`lang`='&1'
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='&1'
              ORDER BY `sys_trans`.`id` DESC",
             $translang
         );
@@ -213,16 +211,16 @@ switch ($action) {
     default:
         $action = 'listnew';
         $trans = sql(
-            "SELECT DISTINCT
-                `sys_trans`.`id`,
-                `sys_trans`.`text`
+            "SELECT DISTINCT `sys_trans`.`id`,
+                             `sys_trans`.`text`
              FROM `sys_trans`
              LEFT JOIN `sys_trans_text`
-                ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                AND `sys_trans_text`.`lang`='&1'
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='&1'
              LEFT JOIN `sys_trans_ref`
-                ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
-             WHERE ISNULL(`sys_trans_text`.`trans_id`) OR `sys_trans_text`.`text`=''
+               ON `sys_trans`.`id`=`sys_trans_ref`.`trans_id`
+             WHERE ISNULL(`sys_trans_text`.`trans_id`)
+               OR `sys_trans_text`.`text`=''
              ORDER BY `sys_trans`.`id` DESC",
             $translang
         );
@@ -247,6 +245,7 @@ $tpl->display();
  */
 /**
  * @param boolean $truncateLastInsert
+ * @return string
  */
 function calcDataSqlChecksum($truncateLastInsert)
 {
@@ -260,11 +259,11 @@ function calcDataSqlChecksum($truncateLastInsert)
 
     // at the end is an INSERT of the current checksum
     // to calculate this checksum, we have to trim the end before that statement and the linefeed before
-    // windows linefeeds will be converted to linux linefeeds
+    // windows lineFeeds will be converted to linux lineFeeds
     $content = str_replace("\r\n", "\n", $content);
 
     if ($truncateLastInsert == true) {
-        $pos = strrpos($content, "INSERT");
+        $pos = strrpos($content, 'INSERT');
         $content = substr($content, 0, $pos);
     }
 
@@ -298,7 +297,8 @@ function edit()
         $usetransid = $_REQUEST['usetrans'] + 0;
 
         $rs = sql(
-            "SELECT `lang`, `text`
+            "SELECT `lang`,
+                    `text`
              FROM `sys_trans_text`
              WHERE `trans_id`='&1'",
             $usetransid
@@ -417,6 +417,9 @@ function unlinkFiles($relbasedir, $ext)
     }
 }
 
+/**
+ *
+ */
 function resetIds()
 {
     global $translang, $tpl;
@@ -429,10 +432,10 @@ function resetIds()
     sql_temp_table('transDeadIds');
     sql(
         "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY)
-            SELECT DISTINCT `sys_trans_ref`.`trans_id`
-            FROM `sys_trans_ref`
-            LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id`
-            WHERE ISNULL(`sys_trans`.`id`)"
+         SELECT DISTINCT `sys_trans_ref`.`trans_id`
+         FROM `sys_trans_ref`
+         LEFT JOIN `sys_trans` ON `sys_trans_ref`.`trans_id`=`sys_trans`.`id`
+         WHERE ISNULL(`sys_trans`.`id`)"
     );
     sql(
         "DELETE `sys_trans_ref`
@@ -444,10 +447,10 @@ function resetIds()
     sql_temp_table('transDeadIds');
     sql(
         "CREATE TEMPORARY TABLE &transDeadIds (`trans_id` INT(11) PRIMARY KEY)
-            SELECT DISTINCT `sys_trans_text`.`trans_id`
-            FROM `sys_trans_text`
-            LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
-            WHERE ISNULL(`sys_trans`.`id`)"
+         SELECT DISTINCT `sys_trans_text`.`trans_id`
+         FROM `sys_trans_text`
+         LEFT JOIN `sys_trans` ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
+         WHERE ISNULL(`sys_trans`.`id`)"
     );
     sql(
         "DELETE `sys_trans_text`
@@ -456,12 +459,11 @@ function resetIds()
     );
     sql_drop_temp_table('transDeadIds');
 
-    // table sys_trans
-    if (sql_value("SELECT COUNT(*) FROM `sys_trans` WHERE `id`=1", 0) == 0) {
+    if (sql_value('SELECT COUNT(*) FROM `sys_trans` WHERE `id`=1', 0) == 0) {
         useId(1);
     }
 
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
 
     while ($id = sql_value(
         "SELECT `s1`.`id`+1
@@ -476,11 +478,11 @@ function resetIds()
             break;
         }
         setId($lastId, $id);
-        $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+        $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
     }
 
     // need alter privileges
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
     sql("ALTER TABLE `sys_trans` AUTO_INCREMENT = &1", $lastId + 1);
 
     $tpl->redirect('translate.php?translang=' . $translang);
@@ -491,7 +493,7 @@ function resetIds()
  */
 function useId($freeId)
 {
-    $lastId = sql_value("SELECT MAX(`id`) FROM `sys_trans`", 0);
+    $lastId = sql_value('SELECT MAX(`id`) FROM `sys_trans`', 0);
     if ($lastId + 1 == $freeId) {
         return;
     }
@@ -500,6 +502,7 @@ function useId($freeId)
 
 /**
  * @param integer $oldId
+ * @param $newId
  */
 function setId($oldId, $newId)
 {
@@ -511,8 +514,8 @@ function setId($oldId, $newId)
 
     foreach ($transIdCols as $col) {
         sql(
-            "UPDATE `" . $col['table'] . "`
-             SET `" . $col['trans_id'] . "`='&1'
+            'UPDATE `' . $col['table'] . '`
+             SET `' . $col['trans_id'] . "`='&1'
              WHERE `" . $col['trans_id'] . "`='&2'",
             $newId,
             $oldId
@@ -568,7 +571,7 @@ function export()
     $f = fopen($opt['rootpath'] . '../sql/static-data/data.sql', 'a');
     fwrite(
         $f,
-        "INSERT INTO `sysconfig` (`name`, `value`)"
+        'INSERT INTO `sysconfig` (`name`, `value`)'
         . " VALUES ('datasql_checksum', '" . sql_escape($checksum) . "')"
         . " ON DUPLICATE KEY UPDATE `value`='" . sql_escape($checksum) . "';\n"
     );
@@ -581,6 +584,7 @@ function export()
 
 /**
  * @param string $dir
+ * @return array
  */
 function enumSqlFiles($dir)
 {
@@ -636,8 +640,7 @@ function scanFile($filename)
 {
     global $msDirlist, $translationHandler;
 
-    /* check if supplied filename is within allowed path!
-     */
+    // check if supplied filename is within allowed path!
     $bFound = false;
     foreach ($msDirlist as $dir) {
         if (substr($dir, - 1) != '/') {
@@ -684,7 +687,7 @@ function xmlexport()
         $lang[] = $k;
     }
 
-    @date_default_timezone_set("GMT");
+    @date_default_timezone_set('GMT');
     $writer = new XMLWriter();
     $writer->openURI('php://output');
     $writer->startDocument('1.0', 'UTF-8', 'yes');
@@ -763,14 +766,6 @@ function xmlimport2()
         $tpl->error($translate->t('XML file could not be loaded!', '', '', 0));
     }
 
-    /* $saTexts[code_text]['id']
-     * $saTexts[code_text]['code']
-     * $saTexts[code_text]['de']['old']
-     * $saTexts[code_text]['de']['new']
-     * $saTexts[code_text]['en']['old']
-     * $saTexts[code_text]['en']['new']
-     * $saTexts[code_text]['...']
-     */
     $saTexts = [];
 
     foreach ($doc->documentElement->childNodes as $textnode) {
@@ -862,19 +857,16 @@ function xmlimport3()
 
 function textexport($translang, $all)
 {
-    global $opt;
-
     header('Content-type: text/plain');
     header('Content-Disposition: attachment; filename="translation.txt"');
 
     $rs = sql(
-        "SELECT
-            `id`,
-            IFNULL(`sys_trans_text`.`text`, `sys_trans`.`text`) AS `text`
+        "SELECT `id`,
+                IFNULL(`sys_trans_text`.`text`, `sys_trans`.`text`) AS `text`
          FROM `sys_trans`
          LEFT JOIN `sys_trans_text`
-            ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
-            AND `sys_trans_text`.`lang`='EN'
+           ON `sys_trans_text`.`trans_id`=`sys_trans`.`id`
+           AND `sys_trans_text`.`lang`='EN'
          ORDER BY `id` ASC"
     );
     while ($r = sql_fetch_assoc($rs)) {
@@ -922,7 +914,9 @@ function textimport($lang)
             $transId = sql_value(
                 "SELECT `trans_id`
                  FROM `sys_trans_text`
-                 WHERE `trans_id`='&1' AND `lang`='EN' AND BINARY `text`='&2'",
+                 WHERE `trans_id`='&1'
+                   AND `lang`='EN'
+                   AND BINARY `text`='&2'",
                 0,
                 $nId,
                 $sEnText
@@ -997,12 +991,12 @@ function copy_english_texts()
     sql_temp_table('transtmp');
     sql(
         "CREATE TEMPORARY TABLE &transtmp
-            SELECT `st`.`id` AS `trans_id`, 'EN' AS `lang`, `st`.`text`
-            FROM `sys_trans` `st`
-            LEFT JOIN `sys_trans_text` `stt`
-                ON `stt`.`trans_id`=`st`.`id`
-                AND `stt`.`lang`='EN'
-            WHERE `stt`.`trans_id` IS NULL"
+         SELECT `st`.`id` AS `trans_id`, 'EN' AS `lang`, `st`.`text`
+         FROM `sys_trans` `st`
+         LEFT JOIN `sys_trans_text` `stt`
+           ON `stt`.`trans_id`=`st`.`id`
+           AND `stt`.`lang`='EN'
+         WHERE `stt`.`trans_id` IS NULL"
     );
     sql(
         "INSERT INTO `sys_trans_text`
@@ -1041,10 +1035,10 @@ function verify()
     foreach ($transIdCols as $col) {
         if (!isset($col['verify']) || $col['verify']) {
             $rs = sql(
-                "SELECT
-                    `" . $col['text'] . "` `text`,
-                    `" . $col['trans_id'] . "` `trans_id`
-                 FROM `" . $col['table'] . "`"
+                'SELECT
+                    `' . $col['text'] . '` `text`,
+                    `' . $col['trans_id'] . '` `trans_id`
+                 FROM `' . $col['table'] . '`'
             );
             while ($r = sql_fetch_assoc($rs)) {
                 $st = sql_value(

@@ -81,14 +81,8 @@ if ($error == false) {
                         tpl_set_var('cacheid_urlencode', htmlspecialchars(urlencode($cache_id), ENT_COMPAT, 'UTF-8'));
                         tpl_set_var('desclang_urlencode', htmlspecialchars(urlencode($desclang), ENT_COMPAT, 'UTF-8'));
                     }
-                } else {
-                    //TODO: desc not exist
                 }
-            } else {
-                //TODO: not the owner
             }
-        } else {
-            //TODO: cache not exist
         }
     }
 }

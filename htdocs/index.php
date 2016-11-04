@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
  ***************************************************************************/
 
@@ -34,7 +33,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('news_onstart', $opt['news']['onstart']);
 
     if ($opt['news']['include'] == '') {
-        $news = array();
+        $news = [];
         $rs = sql_slave(
             'SELECT `news`.`date_created` `date`, `news`.`content` `content`, `news_topics`.`name` `topic`
             FROM `news`
@@ -50,28 +49,17 @@ if (!$tpl->is_cached()) {
         /*
          * changed by bohrsty to fix error in displaying news from blog
          * requires $opt['news']['count'] in settings for number of blog-items
-         * $opt['news']['include'] needs to be the RSS-URL of the blog
-         *
-            $url = $opt['news']['include'];
-            $url = str_replace('{style}', $opt['template']['style'], $url);
-            $newscontent = read_file($url, $opt['news']['maxsize']);
-        */
+         */
         // get newest blog entries
         $tpl->assign('news', $getNew->feedForSmarty('blog'));
         $tpl->assign('newsfeed', $opt['news']['include']);
         $tpl->assign('extern_news', true);
     }
-    /*
-            // forum entries
-            if (file_exists($opt['rootpath'] . 'cache2/phpbb.inc.php'))
-                require_once $opt['rootpath'] . 'cache2/phpbb.inc.php';
-            else
-    */
 
     if ($opt['forum']['url'] != '') {
         /*
-         * changed by bohrsty to add lastest forum-entries using RSS-feed
-         * requires $opt['forum']['count'] in settings for number of lastest forum-posts
+         * changed by bohrsty to add latest forum-entries using RSS-feed
+         * requires $opt['forum']['count'] in settings for number of latest forum-posts
          * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
          */
         // get newest forum posts
@@ -82,9 +70,8 @@ if (!$tpl->is_cached()) {
         $tpl->assign('forum', '');
     }
 
-    $phpbb_topics = array();
+    $phpbb_topics = [];
     $tpl->assign('phpbb_topics', $phpbb_topics);
-//        $tpl->assign('phpbb_enabled', ($opt['cron']['phpbbtopics']['url'] != ''));
     $tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
     $tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 
@@ -100,9 +87,11 @@ if (!$tpl->is_cached()) {
     $tpl->assign(
         'count_users',
         number1000(
-            sql_value_slave('SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id`
+            sql_value_slave(
+                'SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id`
                              FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id`
-                             FROM `caches`) AS `t`', 0)
+                             FROM `caches`) AS `t`', 0
+            )
         )
     );
 
@@ -160,23 +149,29 @@ if (!$tpl->is_cached()) {
     $tpl->assign('usercountry', $sUserCountryName);
     $tpl->assign('usercountryCode', $sUserCountry);
     if ($opt['template']['locale'] == $opt['page']['main_locale']) {
-        $tpl->assign('sections', array(
-            'news',
-            'events',
-            'logpics',
-            'recommendations',
-            'forum',
-            'newcaches'
-        ));
+        $tpl->assign(
+            'sections',
+            [
+                'news',
+                'events',
+                'logpics',
+                'recommendations',
+                'forum',
+                'newcaches'
+            ]
+        );
     } else {
-        $tpl->assign('sections', array(
-            'events',
-            'recommendations',
-            'newcaches',
-            'logpics',
-            'forum',
-            'news'
-        ));
+        $tpl->assign(
+            'sections',
+            [
+                'events',
+                'recommendations',
+                'newcaches',
+                'logpics',
+                'forum',
+                'news'
+            ]
+        );
     }
 }
 

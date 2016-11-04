@@ -73,7 +73,7 @@ if ($sMode == 'locate') {
     $fullscreen = false;
 }
 
-// set queryid data for displaying search results on map
+// set queryId data for displaying search results on map
 $nQueryId = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] + 0 : 0;
 $nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid'] + 0 : 0;
 $tpl->assign('queryid', $nQueryId);
@@ -273,7 +273,7 @@ function cache_locate($nLat, $nLon, $nDistance)
     global $login;
 
     $rsCache = sql_slave(
-        "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
+        'SELECT ' . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
                                   `caches`.`wp_oc`
                              FROM `caches`
                        INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`

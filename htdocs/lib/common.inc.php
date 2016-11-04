@@ -169,7 +169,7 @@ if ($dblink === false) {
 }
 
 // are we Ocprop?
-$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
+$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Ocprop/') !== false;
 
 // zeitmessung
 $bScriptExecution = new CBench;

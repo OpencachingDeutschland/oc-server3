@@ -346,7 +346,7 @@ if ($error == false) {
                 }
 
                 //check GC waypoint
-                $wpgc_not_ok = $wp_gc != "" && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
+                $wpgc_not_ok = $wp_gc != '' && !preg_match("/^(?:GC|CX)[0-9A-Z]{3,6}$/", $wp_gc);
                 if ($wpgc_not_ok) {
                     $error = true;
                 }

@@ -6,8 +6,8 @@
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require_once $opt['rootpath'] . 'lib2/web.inc.php';
-require_once $opt['rootpath'] . 'lib2/logic/cache.class.php';
+require_once __DIR__ . '/../../lib2/web.inc.php';
+require_once __DIR__ . '/../../lib2/logic/cache.class.php';
 
 header('Content-type: text/html; charset=utf-8');
 

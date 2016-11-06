@@ -7,5 +7,5 @@
  * Unicode Reminder メモ
  ***************************************************************************/
 
-$ocxmlversion = 12;
+$ocXmlVersion = 12;
 include __DIR__ . '/ocxml11.php';

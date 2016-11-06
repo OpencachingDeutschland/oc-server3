@@ -2,24 +2,16 @@
 
 namespace okapi\views\devel\tilereport;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Cache;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiRedirectResponse;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
 use okapi\cronjobs\CronJobController;
+use okapi\Db;
+use okapi\Okapi;
+use okapi\OkapiHttpResponse;
 
 class View
 {
     public static function call()
     {
-        # Flush the stats, so the page is fresh upon every request.
+        Okapi::require_developer_cookie();
 
         require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
         CronJobController::force_run("StatsWriterCronJob");

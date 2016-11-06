@@ -2,16 +2,12 @@
 
 namespace okapi\services\caches\save_personal_notes;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\BadRequest;
+use okapi\Okapi;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiAccessToken;
+use okapi\ParamMissing;
 use okapi\Settings;
 
 
@@ -89,6 +85,7 @@ class WebService
             self::update_notes($cache_id, $request->token->user_id, $ret_saved_value);
         }
 
+        Okapi::update_user_activity($request);
         $result = array(
             'saved_value' => $ret_saved_value,
             'replaced' => $ret_replaced

@@ -3,20 +3,12 @@
 namespace okapi\services\caches\map;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\Cache;
 use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\BadRequest;
 use okapi\DoesNotExist;
-use okapi\OkapiInternalRequest;
+use okapi\Okapi;
 use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiLock;
 
 
 class TileTree
@@ -221,6 +213,7 @@ class TileTree
                 # Cache the result.
 
                 # Avoid deadlocks, see https://github.com/opencaching/okapi/issues/388
+                # Possible alternative: https://github.com/opencaching/okapi/issues/388#issuecomment-197673621
                 Db::execute("lock tables okapi_tile_caches write, okapi_tile_caches tc2 read");
                 try {
                     Db::execute("
@@ -242,10 +235,8 @@ class TileTree
                             and z21x between $left_z21x and $right_z21x
                             and z21y between $top_z21y and $bottom_z21y
                     ");
-                    Db::execute("unlock tables;");
-                } catch (Exception $e) {
-                    Db::execute("unlock tables");  // No "finally" in PHP 5.3
-                    throw $e;
+                } finally {
+                    Db::execute("unlock tables");
                 }
                 $test = Db::select_value("
                     select 1

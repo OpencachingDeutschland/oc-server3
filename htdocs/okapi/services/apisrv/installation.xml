@@ -22,7 +22,7 @@
             <li>
                 <p><b>okapi_base_urls</b> - a list of <i>all</i> base URLs allowed to be used
                 when calling OKAPI methods in this installation.</p>
-                
+
                 <p>In theory, once a new base URL appears on this list, it should never
                 disappear (it should be allowed to use it forever). However, for various
                 reasons, we cannot guarantee it will indeed be so. Clients SHOULD use the

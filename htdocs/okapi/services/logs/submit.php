@@ -3,15 +3,15 @@
 namespace okapi\services\logs\submit;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
-use okapi\Settings;
 use okapi\BadRequest;
+use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
+use okapi\Settings;
 
 
 /**
@@ -710,6 +710,7 @@ class WebService
             );
         }
 
+        Okapi::update_user_activity($request);
         return Okapi::formatted_response($request, $result);
     }
 

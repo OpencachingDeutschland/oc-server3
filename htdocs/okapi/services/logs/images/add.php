@@ -3,14 +3,13 @@
 namespace okapi\services\logs\images\add;
 
 use Exception;
-use okapi\Okapi;
 use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\Settings;
-use okapi\BadRequest;
 use okapi\services\logs\images\LogImagesCommon;
+use okapi\Settings;
 
 
 /**
@@ -225,7 +224,7 @@ class WebService
     private static function max_pixels($base64_image)
     {
         $bytes_per_pixel = 5;   # GD needs 5 bytes per pixel for "true color"
-        $available_memory = Okapi::php_ini_get_bytes('memory_limit') - memory_get_usage();
+        $available_memory = Okapi::from_human_to_bytes(ini_get('memory_limit')) - memory_get_usage();
         $available_memory -= 16 * 1024 * 1024;  # reserve
         $available_memory -= strlen($base64_image);  # will be copied for EXIF processing
         $available_memory -= 3 * $bytes_per_pixel * Settings::get('IMAGE_MAX_PIXEL_COUNT');  # processing buffers
@@ -418,6 +417,7 @@ class WebService
             );
         }
 
+        Okapi::update_user_activity($request);
         return Okapi::formatted_response($request, $result);
     }
 }

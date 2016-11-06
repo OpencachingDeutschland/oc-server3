@@ -2,18 +2,10 @@
 
 namespace okapi\views\devel\cronreport;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Cache;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiRedirectResponse;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
 use okapi\cronjobs\CronJobController;
+use okapi\Okapi;
+use okapi\OkapiHttpResponse;
 
 class View
 {
@@ -50,12 +42,33 @@ class View
             $type = $cronjob->get_type();
             $name = $cronjob->get_name();
             print str_pad($type, 11)."  ".str_pad($name, 40)."  ";
-            if (!isset($schedule[$name]))
-                print "NOT YET SCHEDULED\n";
-            elseif ($schedule[$name] <= time())
-                print "DELAYED: should be run ".(time() - $schedule[$name])." seconds ago\n";
-            else
-                print "scheduled to run in ".str_pad($schedule[$name] - time(), 6, " ", STR_PAD_LEFT)." seconds\n";
+            if (!isset($schedule[$name])) {
+                print "NOT YET SCHEDULED";
+            } elseif ($schedule[$name] <= time()) {
+                print "DELAYED: should be run ".(time() - $schedule[$name])." seconds ago";
+            } else {
+                print "scheduled to run in ".str_pad($schedule[$name] - time(), 6, " ", STR_PAD_LEFT)." seconds";
+            }
+            if (isset($schedule[$name])) {
+                $delta = abs(time() - $schedule[$name]);
+                if ($delta > 10 * 60) {
+                    print " (";
+                    print substr(date('c', $schedule[$name]), 11, 8);
+                    print ", ";
+                    $datestr = substr(date('c', $schedule[$name]), 0, 10);
+                    $today = substr(date('c', time()), 0, 10);
+                    $tomorrow = substr(date('c', time() + 86400), 0, 10);
+                    if ($datestr == $today) {
+                        print "today";
+                    } elseif ($datestr == $tomorrow) {
+                        print "tomorrow";
+                    } else {
+                        print $datestr;
+                    }
+                    print ")";
+                }
+            }
+            print "\n";
         }
         print "\n";
         print "Crontab last ping: ";
@@ -64,11 +77,17 @@ class View
         else
             print "NEVER";
         print " (crontab_check_counter: ".Cache::get('crontab_check_counter').").\n";
-        print "clog_revisions_daily: ";
+        print "Debug clog_revisions_daily: ";
         if (Cache::get('clog_revisions_daily'))
         {
-            foreach (Cache::get('clog_revisions_daily') as $time => $rev)
+            $prev = null;
+            foreach (Cache::get('clog_revisions_daily') as $time => $rev) {
+                if ($prev != null) {
+                    print "(+".($rev-$prev).") ";
+                }
                 print "$rev ";
+                $prev = $rev;
+            }
             print "\n";
         } else {
             print "NULL\n";

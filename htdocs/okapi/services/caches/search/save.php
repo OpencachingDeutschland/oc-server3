@@ -4,12 +4,11 @@ namespace okapi\services\caches\search\save;
 
 require_once('searching.inc.php');
 
-use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
 use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
 use okapi\OkapiLock;
+use okapi\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
 class WebService
@@ -144,13 +143,6 @@ class WebService
                             ".implode(" ", $joins)."
                         where (".implode(") and (", $where_conds).")
                     ");
-
-                    # Lock barrier, to make sure the data is visible by other
-                    # sessions. See http://bugs.mysql.com/bug.php?id=36618
-
-                    Db::execute("lock table okapi_search_results write");
-                    Db::execute("unlock tables");
-
                     Db::execute("
                         update okapi_search_sets
                         set params_hash = '".Db::escape_string($params_hash)."'
@@ -160,14 +152,10 @@ class WebService
                     # Some other thread acquired the lock before us and it has
                     # generated the result set. We don't need to do anything.
                 }
-                $lock->release();
             }
-            catch (Exception $e)
+            finally
             {
-                # SQL error? Make sure the lock is released and rethrow.
-
                 $lock->release();
-                throw $e;
             }
         }
 

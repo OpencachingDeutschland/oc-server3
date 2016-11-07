@@ -307,7 +307,7 @@ if ($error == false) {
                 if (($desc_html == 1) && ($desc_htmledit == 1)) {
                     // TinyMCE
                     $headers = tpl_get_var('htmlheaders') . "\n";
-                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
+                    $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tinymce.min.js"></script>' . "\n";
                     $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($desc_record['cache_id'] + 0) . '&lang=' . strtolower($locale) . '"></script>' . "\n";
                 }
                 $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";

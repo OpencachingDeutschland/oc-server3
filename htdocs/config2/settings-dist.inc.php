@@ -230,7 +230,7 @@ $opt['page']['404']['www.opencaching.de'] = [
  *  4 Local Development
  *  5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
  *  6 Opencaching Schweden (www.opencaching.se)
- *  7 Opencaching Großbritannien (www.opencacing.org.uk)
+ *  7 Opencaching Großbritannien (www.opencache.uk)
  *  8 Opencaching Norwegen (www.opencaching.no)
  *  9 Opencaching Lettland (?)
  * 10 Opencaching USA (www.opencaching.us)

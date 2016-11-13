@@ -40,7 +40,7 @@ class RSSParser
             // set short timeout to avoid that the start page gets blocked
             $save_timeout = ini_get('default_socket_timeout');
             ini_set('default_socket_timeout', $timeout);
-            $data = @file_get_contents($url, false, $ctx);
+            $data = @file_get_contents($url, false);
             ini_set('default_socket_timeout', $save_timeout);
 
             // check data

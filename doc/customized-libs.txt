@@ -6,7 +6,7 @@ This list may be incomplete.
 
 
 Smarty
-- Plugins in lib2/smarty/ocplugins
+- Plugins in src/Oc/SmartyPlugins
 - wrapper class in lib2/OcSmarty.class.php
 
 HTML Purifier

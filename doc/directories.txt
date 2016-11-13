@@ -13,6 +13,10 @@ Currently there are three library framworks:
 lib1 code is being ported to lib2 and will completely disappear.
 libse hopefully, too (see http://redmine.opencaching.de/issues/733).
 
+libse was already migrated to htdocs/src. There you will find Classes based on the PSR-4 Standard.
+
+lib1 and lib2 will be replaced oder migrated do htdocs/src.
+
 
 When adding or renaming code directories, add them - if applicable - also
 to file scanning in

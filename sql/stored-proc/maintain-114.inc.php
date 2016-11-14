@@ -13,6 +13,6 @@
 
 sql_dropFunction('dbsvTriggerVersion');
 sql(
-    "CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
-     RETURN 114"
+    'CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
+     RETURN 114'
 );

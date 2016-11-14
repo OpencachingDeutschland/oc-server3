@@ -112,8 +112,8 @@
  5.2 Scripts using slave servers
 
     getNew.class.php -> 404.php, index.php
-		logpics.inc.php -> index.php, myhome.php, newlogpics.php, viewcache.php
-		map2.php
+        logpics.inc.php -> index.php, myhome.php, newlogpics.php, viewcache.php
+        map2.php
     newcaches.php
     newcachesrest.php
     newlogs.php

@@ -70,7 +70,7 @@ if (isset($ownerid)) {
     $tpl->cache_id = $exclude_country;
     $logcount = 250;
     $paging = false; // paging would have poor performance for all logs
-    $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : "";
+    $orderByDate = $logselection == 3 ? "{fromtable}.`order_date` DESC, " : '';
 } else {
     // latest logs for all countries or for one country
     $tpl->name = 'newlogs';

@@ -72,7 +72,7 @@ return;
 // Check if the tables' charset is consistent with $opt['charset']['mysql'].
 // Do an upgrade from utf8 to utf8mb4 if necessary.
 // A downgrade will be denied, because it might lose data.
-// 
+//
 // OKAPI tables upgrade is done by a similar function in OKAPI's update module.
 
 function check_tables_charset($database)

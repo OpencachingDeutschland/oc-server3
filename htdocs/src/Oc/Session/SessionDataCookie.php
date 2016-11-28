@@ -99,7 +99,6 @@ class SessionDataCookie implements SessionDataInterface
         global $opt;
 
         if ($this->changed === true) {
-
             $value = false;
             if (count($this->values) > 0) {
                 // TODO replace by safe function

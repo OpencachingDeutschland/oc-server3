@@ -235,5 +235,4 @@ class LogPics
         $pager = new pager($url . "&startat={offset}");
         $pager->make_from_offset($startat, count($pictures), self::MAX_PICTURES_PER_GALLERY_PAGE);
     }
-
 }

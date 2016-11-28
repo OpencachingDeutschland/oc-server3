@@ -849,7 +849,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
             'wp_nc' => 'waypoints'
         ];
 
-        if ($r = sql_fetch_assoc($rs)) {// can be false
+        if ($r = sql_fetch_assoc($rs)) {
+            // can be false
             $setfields = '';
             foreach ($fields as $field => $ropt) {
                 if (in_array($ropt, $roptions) && $r[$field] != $cache[$field]) {
@@ -929,7 +930,8 @@ function restore_listings($cacheids, $rdate, $roptions, $simulate)
                             $cacheid,
                             $r['language']
                         );
-                    } else {// id, uuid, date_created and last_modified are set automatically
+                    } else {
+                        // id, uuid, date_created and last_modified are set automatically
                         sql(
                             "INSERT INTO `cache_desc`
                             (`node`, `cache_id`, `language`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`)

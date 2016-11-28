@@ -51,7 +51,8 @@ if ($action == 'add') { // Ocprop
         $picture->setObjectType(OBJECT_CACHE);
 
         $cache = null;
-    } elseif (isset($_REQUEST['loguuid'])) {// Ocprop
+    } elseif (isset($_REQUEST['loguuid'])) {
+        // Ocprop
         $cachelog = cachelog::fromUUID($_REQUEST['loguuid']);
         if ($cachelog === null) {
             $tpl->error(ERROR_CACHELOG_NOT_EXISTS);

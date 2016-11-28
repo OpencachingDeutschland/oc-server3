@@ -80,7 +80,8 @@ function cracklib_checkpw($pw, $addwords)
 
     // $pw may not contain one of $addwords[]
     foreach ($wordlist as $v) {
-        if (mb_stripos($pw_lc, $v) !== false) {// mb_stripos needs PHP 5.2
+        if (mb_stripos($pw_lc, $v) !== false) {
+            // mb_stripos needs PHP 5.2
             return false;
         }
     }

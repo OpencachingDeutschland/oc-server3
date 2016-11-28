@@ -7,7 +7,6 @@
 
 class GeoDb
 {
-
     public static function setAllCacheLocations()
     {
         $rs = sqll(
@@ -193,5 +192,4 @@ class GeoDb
             return '';
         }
     }
-
 }

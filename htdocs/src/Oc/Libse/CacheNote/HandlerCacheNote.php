@@ -81,6 +81,5 @@ class HandlerCacheNote
                 TypeCoordinate::UserNote
             );
         }
-
     }
 }

@@ -33,18 +33,24 @@
         <br />Diese Seite steht momentan nicht zur Verfügung. Das Opencaching-Team
         arbeitet bereits daran, das Problem zu beheben.
     </p>
-    <?php if (basename($_SERVER["SCRIPT_FILENAME"]) != 'index.php') { ?>
+    <?php if (basename($_SERVER["SCRIPT_FILENAME"]) != 'index.php') {
+    ?>
         <p><a href="index.php">Zurück zur Startseite</a></p>
-    <?php } ?>
+    <?php
+
+} ?>
     <p>
         <br /><br /><em>This page is currently not available. The Opencaching team
         already works on fixing the problem.
     </p>
-    <?php if ($errmsg != '') { ?>
+    <?php if ($errmsg != '') {
+    ?>
         <br />
         <h1><?= $errtitle ?></h1>
         <p class="errormsg"><?= $errmsg ?></p>
-    <?php } ?>
+    <?php
+
+} ?>
 </div>
 </body>
 </html>

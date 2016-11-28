@@ -431,7 +431,6 @@ function mnu_EchoBreadCrumb($pageid, $mainmenuindex)
             mnu_prv_EchoBreadCrumbSubItem($pageid, $menu[$mainmenuindex]['submenu']);
         }
     }
-
 }
 
 /*

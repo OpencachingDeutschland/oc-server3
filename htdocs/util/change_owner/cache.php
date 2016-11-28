@@ -84,8 +84,7 @@ if ($action == 'changeowner') {
         $cacheid
     );
     $rCache = sql_fetch_assoc($rsCache);
-    sql_free_result($rsCache);
-    ?>
+    sql_free_result($rsCache); ?>
     <html>
     <body>
     <h2>Cacheowner ändern</h2>

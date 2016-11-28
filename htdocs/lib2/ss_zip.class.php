@@ -126,7 +126,6 @@ class ss_zip
      */
     public function add_data($filename, $data = null)
     {
-
         $filename = trim($filename);
         $filename = str_replace('\\', '/', $filename);
         if ($filename[0] == '/') {

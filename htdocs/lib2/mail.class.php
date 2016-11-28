@@ -160,7 +160,6 @@ class mail extends Smarty
 
         if (getmxrr($domain, $smtpServerList, $smtpServerWeight) !== false && count($smtpServerList) > 0) {
             return true;
-
         }
 
         // check if A exists

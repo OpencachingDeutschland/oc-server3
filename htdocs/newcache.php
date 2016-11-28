@@ -105,7 +105,8 @@ if ($error == false) {
         tpl_set_var('short_desc', htmlspecialchars($short_desc, ENT_COMPAT, 'UTF-8'));
 
         // descMode auslesen, falls nicht gesetzt aus dem Profil laden
-        if (isset($_POST['descMode'])) {// Ocprop
+        if (isset($_POST['descMode'])) {
+            // Ocprop
             $descMode = $_POST['descMode'] + 0;
             if (($descMode < 1) || ($descMode > 3)) {
                 $descMode = 3;
@@ -233,8 +234,7 @@ if ($error == false) {
             tpl_set_var('publish_now_checked', 'checked');
         } elseif ($publish == 'later') {
             tpl_set_var('publish_later_checked', 'checked');
-        } else // notnow
-        {
+        } else { // notnow
             $publish = 'notnow';
             tpl_set_var('publish_notnow_checked', 'checked');
         }

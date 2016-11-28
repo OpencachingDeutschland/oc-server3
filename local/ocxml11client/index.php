@@ -90,7 +90,6 @@ function downloadpictures()
         }
     }
     mysql_free_result($rs);
-
 }
 
 function resetdb()

@@ -1452,8 +1452,7 @@ if ($options['showresult'] == 1) {
             } else {
                 $sql .= ' DESC';
             }
-        } else // by name
-        {
+        } else { // by name
             $sql .= '`caches`.`name`';
             if (isset($options['sortorder']) && $options['sortorder'] == 'desc') {
                 $sql .= ' DESC';
@@ -1615,7 +1614,6 @@ if ($options['showresult'] == 1) {
 
 function sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit)
 {
-
     global $sql_select, $sql_from, $sql_innerjoin;
 
     //all target caches are between lat - max_lat_diff and lat + max_lat_diff

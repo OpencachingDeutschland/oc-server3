@@ -89,7 +89,7 @@ echo "\r\n";
 
 foreach ($liste as $lat => $liste2) {
     foreach ($liste2 as $long => $cacheCounts) {
-        echo ($lat * $grid + 0.5 * $grid) . ',' . ($long * $grid + 0.5 * $grid) . ',' .
+        echo($lat * $grid + 0.5 * $grid) . ',' . ($long * $grid + 0.5 * $grid) . ',' .
             $cacheCounts['caches']['all'] . ',' .
             $cacheCounts['logs']['all'];
         foreach ($years as $year => $dummy) {

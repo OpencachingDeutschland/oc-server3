@@ -6,6 +6,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     })
     ->exclude('/htdocs/cache2')
     ->exclude('/htdocs/vendor')
+    ->exclude('/htdocs/okapi')
     ->in(__DIR__ . '/htdocs')
 ;
 

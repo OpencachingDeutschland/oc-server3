@@ -6,11 +6,6 @@
 /htdocs/config2/settings-common.inc.php
 /htdocs/lib/settings.inc.php
 /htdocs/statpics/.htaccess
-/htdocs/util/notification/settings.inc.php
-/htdocs/util/publish_caches/settings.inc.php
-/htdocs/util/watchlist/settings.inc.php
-# obsolete, used for testing old code versions:
-/htdocs/util/mysql_root/settings.inc.php
 
 # automatically created and maintained configuation files
 /htdocs/vendor
@@ -18,16 +13,12 @@
 # files created when running the OC software
 /htdocs/cache2/*
 /htdocs/opencaching_dump.sql
-/htdocs/cache/*
 /htdocs/download/*
 /htdocs/images/statpics/*
 /htdocs/images/uploads/*
 /htdocs/resource2/tinymce/tiny_mce_*.gz
 /htdocs/sitemap*xml*
 /htdocs/var/*
-# obsolete, used when testing old code versions:
-/htdocs/lib2/HTMLPurifier/library/HTMLPurifier/DefinitionCache/*
-/lib/htmlpurifier-4.2.0/library/HTMLPurifier/DefinitionCache/*
 
 # repository files which may be replaced locally
 .editorconfig

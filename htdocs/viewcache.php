@@ -347,7 +347,7 @@ $rs = sql(
      FROM `cache_npa_areas`
      INNER JOIN `npa_areas`
        ON `cache_npa_areas`.`npa_id`=`npa_areas`.`id`
-     INNER JOIN `npa_types` 
+     INNER JOIN `npa_types`
        ON `npa_areas`.`type_id`=`npa_types`.`id`
      WHERE `cache_npa_areas`.`cache_id`='&1'
        AND `npa_types`.`no_warning`=0

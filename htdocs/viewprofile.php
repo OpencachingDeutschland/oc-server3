@@ -156,7 +156,7 @@ if ($show_statistics) {
            ON `caches`.`cache_id`=`cache_logs`.`cache_id`
          INNER JOIN `cache_location`
            ON `cache_location`.`cache_id`=`cache_logs`.`cache_id`
-         LEFT JOIN `countries` 
+         LEFT JOIN `countries`
            ON `countries`.`short`=`caches`.`country`
          LEFT JOIN `sys_trans_text` `stt`
            ON `stt`.`lang`='&2'

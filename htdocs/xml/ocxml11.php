@@ -332,7 +332,7 @@ if (isset($_REQUEST['sessionid'])) {
     } else {
         // return all records
         sql(
-            'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`)) 
+            'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4',
             $sessionid
         );
@@ -554,7 +554,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
                     `caches`.`country` `country`, `caches`.`size` `size`, `caches`.`desc_languages` `desclanguages`,
                     `caches`.`difficulty` `difficulty`, `caches`.`terrain` `terrain`,
                     `caches`.`way_length` `way_length`, `caches`.`search_time` `search_time`, `caches`.`wp_gc` `wp_gc`,
-                    `caches`.`wp_gc_maintained`, `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`, 
+                    `caches`.`wp_gc_maintained`, `caches`.`wp_oc` `wp_oc`, `caches`.`date_hidden` `date_hidden`,
                     `caches`.`date_created` `date_created`, `caches`.`is_publishdate` `is_publishdate`,
                     `caches`.`last_modified` `last_modified`, `caches`.`status` `status`, `caches`.`node` `node`,
                     `caches`.`listing_last_modified` `listing_last_modified`, `cache_status`.`allow_user_view`,
@@ -819,7 +819,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
                                   `user`.`uuid` `useruuid`,
                                   `cache_logs`.`node` `node`,
                                   IF(
-                                     NOT ISNULL(`cache_rating`.`cache_id`) 
+                                     NOT ISNULL(`cache_rating`.`cache_id`)
                                      AND `cache_logs`.`type` IN (1,7), 1, 0)
                                   AS `recommended`,
                                   `cache_status`.`allow_user_view`,
@@ -1179,10 +1179,10 @@ function startXmlSession(
         if ($bPicture == 1) {
             sql(
                 "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
-                 SELECT &1, 6, `pictures`.`id` 
+                 SELECT &1, 6, `pictures`.`id`
                  FROM `pictures`
                  INNER JOIN `caches`
-                   ON `pictures`.`object_type`=2 
+                   ON `pictures`.`object_type`=2
                    AND`pictures`.`object_id`=`caches`.`cache_id`
                  WHERE `pictures`.`last_modified` >= '&2'
                    AND `caches`.`status`!=5

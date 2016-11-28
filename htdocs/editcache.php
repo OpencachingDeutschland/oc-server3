@@ -935,7 +935,7 @@ if ($error == false) {
                          LEFT JOIN `sys_trans_text`
                            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                            AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-                         WHERE `cache_status`.`id` NOT IN (4, 5, 7) 
+                         WHERE `cache_status`.`id` NOT IN (4, 5, 7)
                            OR `cache_status`.`id`='" . sql_escape($status_old + 0) . "'
                          ORDER BY `cache_status`.`id` ASC"
                     );

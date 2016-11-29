@@ -74,13 +74,13 @@ $opt['db']['slaves'] = [];
 
 /*
     $opt['db']['slaves'][0]['server'] = 'slave-ip-or-socket';
-    
+
     // if a slave is no active, the slave will not be tracked
     // by online-check or purge of master logs!
     // Therefore you might have to initialize the replication again,
     // after activating a slave.
     $opt['db']['slaves'][0]['active'] = true;
-    
+
     // relative weight compared to other slaves
     // see doc2/replicaiton.txt (!)
     $opt['db']['slaves'][0]['weight'] = 100;
@@ -148,7 +148,7 @@ $opt['system']['maillog']['inactivity_warning'] = 30;   // warn after N days wit
  * session.use_trans_sid = 0
  *
  * set session.safe_path to a secure place
- * 
+ *
  * other parameters may be customized
  */
 $opt['session']['mode'] = SAVE_COOKIE;     // don't change - other option "SAVE_SESSION" is not implemented properly
@@ -307,7 +307,7 @@ $opt['logic']['cachemaps']['iframe'] = false;
 
 /* Minimap for the new-caches list on the front page.
  * If the url string is empty, no minimap is displayed on the front page.
- * 
+ *
  * Coordinates of new caches are appended to the url.
  */
 $opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';

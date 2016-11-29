@@ -123,9 +123,8 @@ function imagebmp($img, $file = '', $RLE = 0)
 
 
     if ($BitCount <= 8) {
-
         for ($y = $Height - 1; $y >= 0; $y--) {
-            $bWrite = "";
+            $bWrite = '';
             for ($x = 0; $x < $Width; $x++) {
                 $color = imagecolorat($img, $x, $y);
                 $bWrite .= decbinx($color, $BitCount);
@@ -185,11 +184,10 @@ function imagebmp($img, $file = '', $RLE = 0)
             }
             $ret .= $Dopl;
         }
-
     }
 
-    if ($file != "") {
-        $r = ($f = fopen($file, "w"));
+    if ($file != '') {
+        $r = ($f = fopen($file, 'wb'));
         $r = $r and fwrite($f, $ret);
         $r = $r and fclose($f);
 
@@ -322,7 +320,6 @@ function imagecreatefrombmp($file)
                     imagesetpixel($img, $x, $y, $Palette[ord($Data[$x])]);
                 }
                 $Data = '';
-
             }
         }
 
@@ -333,7 +330,7 @@ function imagecreatefrombmp($file)
             /*while(!feof($f))
              echo freadbyte($f)."_".freadbyte($f)."<BR>";*/
             while (true) {
-//break;
+                //break;
                 $y--;
                 $prefix = freadbyte($f);
                 $suffix = freadbyte($f);
@@ -393,9 +390,7 @@ function imagecreatefrombmp($file)
                     imagesetpixel($img, $x, $y, $Palette[ord($Data[$x])]);
                 }
                 $Data = '';
-
             }
-
         }
 
 
@@ -421,7 +416,6 @@ function imagecreatefrombmp($file)
         }
 
         return $img;
-
     }
 
     fclose($f);
@@ -503,7 +497,6 @@ function RetBits($byte, $start, $len)
     $r = bindec(substr($bin, $start, $len));
 
     return $r;
-
 }
 
 $CurrentBit = 0;

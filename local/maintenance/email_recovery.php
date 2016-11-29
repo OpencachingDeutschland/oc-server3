@@ -206,7 +206,7 @@ class EmailRecovery
 
 
     # resend emails
-    
+
     public function resendLogNotifications()
     {
         # delete notification protocol

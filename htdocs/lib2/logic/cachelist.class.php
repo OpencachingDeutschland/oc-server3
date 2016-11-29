@@ -107,7 +107,8 @@ class cachelist
                 $this->getUserId(),
                 $this->getId(),
                 $name
-            )) {// $this->getId() is 0 when creating a new list -> condition has no effect
+            )) {
+                // $this->getId() is 0 when creating a new list -> condition has no effect
                 return ERROR_DUPLICATE_LISTNAME;
             } elseif ($visibility >= 2 && strlen($name) < 10) {
                 return ERROR_BAD_LISTNAME;

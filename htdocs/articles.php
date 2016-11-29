@@ -40,7 +40,6 @@ if ($article == '') {
                     && file_exists($opt['stylepath'] . '/articles/' . $sFile . '/' . $article . '.tpl')
                 ) {
                     $language = $sFile;
-
                 }
             }
             closedir($hDir);

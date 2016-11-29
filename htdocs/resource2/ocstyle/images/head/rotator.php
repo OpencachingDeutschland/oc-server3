@@ -12,10 +12,10 @@
     http://d.alistapart.com/randomizer/rotate.txt
 
     http://www.hiveware.com/imagerotator.php
-    
+
     http://www.automaticlabs.com/
-    
-    
+
+
     DISCLAIMER
     Automatic, Ltd. makes no representations or warranties about
     the suitability of the software, either express or
@@ -25,14 +25,14 @@
     shall not be liable for any damages suffered by licensee
     as a result of using, modifying or distributing this
     software or its derivatives.
-    
-    
+
+
     ABOUT
     This PHP script will randomly select an image file from a
     folder of images on your webserver.  You can then link to it
     as you would any standard image file and you'll see a random
     image each time you reload.
-    
+
     When you want to add or remove images from the rotation-pool,
     just add or remove them from the image rotation folder.
 
@@ -40,10 +40,10 @@
     VERSION CHANGES
     Version 1.0
         - Release version
-    
+
     Version 1.5
         - Tweaked a few boring bugs
-    
+
     Version 2.0
         - Complete rewrite from the ground-up
         - Made it clearer where to make modifications
@@ -60,7 +60,7 @@
           lucky enough to have the GD libraries compiled into PHP on
           your webserver, we generate a replacement "error image" on
           the fly.
-        
+
     Version 2.1
         - Updated a potential security flaw when value-matching
           filenames
@@ -86,10 +86,10 @@
     5. You can also specify the image to display like this:
 
             <img src="http://example.com/rotate.php?img=gorilla.jpg">
-        
+
         This would specify that an image named "gorilla.jpg" located
         in the image-rotation folder should be displayed.
-    
+
     That's it, you're done.
 
 */
@@ -117,18 +117,18 @@ if (!empty($_REQUEST["path"])) {
     If you'd like to enable additional image types other than
     gif, jpg, and png, add a duplicate line to the section below
     for the new image type.
-    
+
     Add the new file-type, single-quoted, inside brackets.
-    
+
     Add the mime-type to be sent to the browser, also single-quoted,
     after the equal sign.
-    
+
     For example:
-    
+
     PDF Files:
 
         $extList['pdf'] = 'application/pdf';
-    
+
     CSS Files:
 
         $extList['css'] = 'text/css';

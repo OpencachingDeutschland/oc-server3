@@ -26,7 +26,6 @@ N 60.63367° E 004.81313°
 
 class CoordinateTest extends \PHPUnit_Framework_TestCase
 {
-
     public function setUp()
     {
         global $opt;

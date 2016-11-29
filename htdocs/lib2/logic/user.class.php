@@ -1267,7 +1267,8 @@ class user
         /*
          * check log or cache
          */
-        if ($object_type == OBJECT_CACHE) {// get filenames of the pictures of $this' caches
+        if ($object_type == OBJECT_CACHE) {
+            // get filenames of the pictures of $this' caches
             $rs = sql(
                 "SELECT `pictures`.`url` " .
                 "FROM `pictures`,`caches` " .
@@ -1276,7 +1277,8 @@ class user
                 OBJECT_CACHE,
                 $this->getUserId()
             );
-        } elseif ($object_type == OBJECT_CACHELOG) {// get filenames of the pictures of $this' logs
+        } elseif ($object_type == OBJECT_CACHELOG) {
+            // get filenames of the pictures of $this' logs
             $rs = sql(
                 "SELECT `pictures`.`url` " .
                 "FROM `pictures`,`cache_logs` " .
@@ -1377,7 +1379,6 @@ class user
                     if (!is_null($rim)) {
                         imagecopyresampled($im, $rim, $dx, $dy, 0, 0, $rsize, $rsize, $rw, $rh);
                     }
-
                 } else {
                     // set text
                     if ($dummytext != '') {
@@ -1554,7 +1555,7 @@ class user
         return $this->reUser->getValue('mailing_problems') & 1;
     }
 
-    function shownDataLicenseMail()
+    public function shownDataLicenseMail()
     {
         return
             $this->reUser->setValue('mailing_problems', $this->reUser->getValue('mailing_problems') & ~1)

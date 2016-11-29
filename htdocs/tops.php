@@ -40,7 +40,7 @@ if (!$tpl->is_cached()) {
          INNER JOIN `user`
            ON `caches`.`user_id`=`user`.`user_id`
          LEFT JOIN `caches_attributes` `ca`
-           ON `ca`.`cache_id`=`caches`.`cache_id` 
+           ON `ca`.`cache_id`=`caches`.`cache_id`
            AND `ca`.`attrib_id`=6
          ORDER BY `adm1` ASC,
            `adm3` ASC,

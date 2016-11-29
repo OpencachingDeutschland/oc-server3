@@ -62,7 +62,7 @@ $opt['db']['placeholder']['tmpdb'] = 'ocdetmp';
  * session.use_trans_sid = 0
  *
  * set session.safe_path to a secure place
- * 
+ *
  * other parameters may be customized
  */
 $opt['session']['mode'] = SAVE_COOKIE;

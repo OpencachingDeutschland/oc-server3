@@ -158,7 +158,7 @@ if ($error == false) {
                          WHERE `languages_list_default`.`lang`='" . sql_escape($locale) . "'
                          AND ISNULL(`cache_desc`.`cache_id`)",
                         0
-                    ) == 0 ) {
+                    ) == 0) {
                         $show_all_langs = 1;
                     }
                 }

@@ -341,7 +341,6 @@ function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
                     </Point>
                 </Placemark>
                 ';
-
             }
         }
     }

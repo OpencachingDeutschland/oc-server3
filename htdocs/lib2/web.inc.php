@@ -28,19 +28,21 @@ $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/common.inc.php';
 
 // enforce http or https?
-if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
-    if ($opt['page']['https']['active']) {
-        $tpl->redirect('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-    }
-    $opt['page']['force_https_login'] = false;
-} elseif ($opt['page']['https']['mode'] == HTTPS_ENFORCED) {
-    if (!$opt['page']['https']['active']) {
-        $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-    }
-    $opt['page']['force_https_login'] = true;
-} elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
-    // during login was https active -> session data is https only -> redirect to https
-    $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+if (!isset($disable_oc_https_redirect) || !$disable_oc_https_redirect) {
+  if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
+      if ($opt['page']['https']['active']) {
+          $tpl->redirect('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+      }
+      $opt['page']['force_https_login'] = false;
+  } elseif ($opt['page']['https']['mode'] == HTTPS_ENFORCED) {
+      if (!$opt['page']['https']['active']) {
+          $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+      }
+      $opt['page']['force_https_login'] = true;
+  } elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
+      // during login was https active -> session data is https only -> redirect to https
+      $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+  }
 }
 
 

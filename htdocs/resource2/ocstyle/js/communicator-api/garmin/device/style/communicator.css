@@ -1,20 +1,20 @@
 #garminDisplay {
-	font-size:11px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-	color: #000000;
-	text-align: left;
-	margin: 0 0 1em 0;
-	border: 2px outset #3D3A21;
-	width: 390px;
-	background: #DDE3D6 url("garmin.jpg") no-repeat 12px 12px;
-	padding: 3px;
+    font-size:11px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    text-align: left;
+    margin: 0 0 1em 0;
+    border: 2px outset #3D3A21;
+    width: 390px;
+    background: #DDE3D6 url("garmin.jpg") no-repeat 12px 12px;
+    padding: 3px;
 }
 
 #garminDisplay input {
-	font-size:10px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:10px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
     color:#ffffff;
     height:18px;
     background-color: #005E9D;
@@ -27,15 +27,15 @@
 }
 
 #garminDisplay select { 
-	font-size:10px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:10px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
     background-color: #666699; 
     color: #ffffff; 
 }
 
 .pluginElement {
-	margin: 5px;
+    margin: 5px;
 }
 
 .actionButton {
@@ -78,8 +78,8 @@
 }
 
 #readMap {
-	width: 100%;
-	height: 200px;
+    width: 100%;
+    height: 200px;
 }
 
 #progressBar {

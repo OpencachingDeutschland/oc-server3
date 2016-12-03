@@ -19,109 +19,109 @@
 
 <body>
 <script language="JavaScript" type="text/javascript">
-	var Assert = YAHOO.util.Assert; 
-	var display;
-	
+    var Assert = YAHOO.util.Assert;
+    var display;
+
     var displayUiGenTestCase = new YAHOO.tool.TestCase({
    
         name: "Garmin Device Display UI Generation Unit Tests",
         
         _should: {
             ignore: {
-            	/* enter list of tests here*/
+                /* enter list of tests here*/
                 //testReadFitnessHistoryDirectory: true //ignore this test
             },
             error: {
-            	//testValidOptionConfigParam: true
+                //testValidOptionConfigParam: true
             }            
         },
         
         setUp: function() {
-	        display = new Garmin.DeviceDisplay("garminDisplayDiv", { 
-				// Status Element Options
-				showStatusElement:			true,
-				statusElementId:			"myStatusBox",
-				statusTextId:				"myStatusText",
-				showProgressBar:			true,
-				progressBarId:				"myProgressBar",
-				progressBarDisplayId:		"myProgressBarDisplay",
-			
-				// Find Devices Element Options
-				showFindDevicesElement:		true,
-				findDevicesElementId:		"myDeviceBox",
-				findDevicesButtonId:		"myFindDevicesButton",
-				//cancelFindDevicesButtonId:	"myCancelFindDevicesButton",
-				//deviceInfoTextId:			"myDeviceInfoText",
-				deviceSelectId:				"myDeviceSelect",
-			
-				// Read Data Element Options
-				showReadDataElement:		true,
-				readDataElementId:			"myReadBox",
-				readDataButtonId:			"myReadDataButton",
-				cancelReadDataButtonId:		"myCancelReadDataButton",
-				showReadTracksSelect:		true,
-				readTracksSelectId:			"myReadTracksSelect",
-				showReadWaypointsSelect:	true,
-				readWaypointsSelectId:		"myReadWaypointsSelect",
-				showReadGoogleMap:			false,
-				readGoogleMapId:			"myReadMap",
-				showReadDataTypesSelect:	true,
-				readDataTypesSelectId:		"myReadDataTypesSelect",
-			
-				// Write Data Element Options (Not yet implemented)
-				showWriteDataElement:		true,
-				writeDataButtonId:			"myWriteDataButton",
-				cancelWriteDataButtonId:	"myCancelWriteDataButton",
-				//writeDataSelectId:		"myWriteDataSelect",
-				//writeDataFilenameId:		"myWriteDataFilename",
-				//writeDataTextId:			"myWriteDataText",
-				getWriteDataFileName:		function(){ return "daaataa.gpx"; },
-				getWriteData:				function() { return "xxyy"; }
-			});
+            display = new Garmin.DeviceDisplay("garminDisplayDiv", {
+                // Status Element Options
+                showStatusElement:            true,
+                statusElementId:            "myStatusBox",
+                statusTextId:                "myStatusText",
+                showProgressBar:            true,
+                progressBarId:                "myProgressBar",
+                progressBarDisplayId:        "myProgressBarDisplay",
+
+                // Find Devices Element Options
+                showFindDevicesElement:        true,
+                findDevicesElementId:        "myDeviceBox",
+                findDevicesButtonId:        "myFindDevicesButton",
+                //cancelFindDevicesButtonId:    "myCancelFindDevicesButton",
+                //deviceInfoTextId:            "myDeviceInfoText",
+                deviceSelectId:                "myDeviceSelect",
+
+                // Read Data Element Options
+                showReadDataElement:        true,
+                readDataElementId:            "myReadBox",
+                readDataButtonId:            "myReadDataButton",
+                cancelReadDataButtonId:        "myCancelReadDataButton",
+                showReadTracksSelect:        true,
+                readTracksSelectId:            "myReadTracksSelect",
+                showReadWaypointsSelect:    true,
+                readWaypointsSelectId:        "myReadWaypointsSelect",
+                showReadGoogleMap:            false,
+                readGoogleMapId:            "myReadMap",
+                showReadDataTypesSelect:    true,
+                readDataTypesSelectId:        "myReadDataTypesSelect",
+
+                // Write Data Element Options (Not yet implemented)
+                showWriteDataElement:        true,
+                writeDataButtonId:            "myWriteDataButton",
+                cancelWriteDataButtonId:    "myCancelWriteDataButton",
+                //writeDataSelectId:        "myWriteDataSelect",
+                //writeDataFilenameId:        "myWriteDataFilename",
+                //writeDataTextId:            "myWriteDataText",
+                getWriteDataFileName:        function(){ return "daaataa.gpx"; },
+                getWriteData:                function() { return "xxyy"; }
+            });
         },
         
         /* clean up the dynamic HTML DOM after each test is run*/
         tearDown: function() {
-        	//document.getElementById("garminDisplayDiv").innerHTML = "";
-    	},
+            //document.getElementById("garminDisplayDiv").innerHTML = "";
+        },
         testUserSpecifiedStatusDivIDs: function() {
-				Assert.isNotNull(display);
-				// Status Element Options
-				Assert.isNotNull( $("myStatusBox") );
-				Assert.isNotNull( $("myStatusText") );
-				Assert.isNotNull( $("myProgressBar") );
-				Assert.isNotNull( $("myProgressBarDisplay") );
-		},
- 		testUserSpecifiedDeviceDivIDs: function() {
-				// Find Devices Element Options
-				Assert.isNotNull("myDeviceBox", $("myDeviceBox") );
-				Assert.isNotNull("myFindDevicesButton", $("myFindDevicesButton") );
-				//Assert.isNotNull("myCancelFindDevicesButton", $("myCancelFindDevicesButton") );
-				//Assert.isNotNull("myDeviceInfoText", $("myDeviceInfoText") );
-				Assert.isNotNull("myDeviceSelect", $("myDeviceSelect") );
-		},
-		testUserSpecifiedReadDivIDs: function() {
-				// Read Data Element Options
-				Assert.isNotNull( $("myReadBox") , "read box");
-				Assert.isNotNull( $("myReadDataButton") , "read data button");
-				Assert.isNotNull( $("myCancelReadDataButton") , "cancel read data button");
-				Assert.isNotNull( $("myReadTracksSelect") , "read tracks select");
-				Assert.isNotNull( $("myReadWaypointsSelect") , "read waypoints select");
-				//Assert.isNotNull( $("myReadMap") );
-				//Assert.isNotNull( $("myReadDataTypesSelect") , "read data types select");
-		},
-		testUserSpecifiedWriteDivIDs: function() {
-				// Write Data Element Options (Not yet implemented)
-				Assert.isNotNull("myWriteDataButton", $("myWriteDataButton") );
-				Assert.isNotNull("myCancelWriteDataButton", $("myCancelWriteDataButton") );
-				//Assert.isNotNull("myWriteDataSelect", $("myWriteDataSelect") );
-				Assert.isNotNull("daaataa.gpx", display.options.getWriteDataFileName() );
-				Assert.isNotNull("xxyy", display.options.getWriteDataFileName() );
-		}
-		      	
-   	});
-   	
-   	
+                Assert.isNotNull(display);
+                // Status Element Options
+                Assert.isNotNull( $("myStatusBox") );
+                Assert.isNotNull( $("myStatusText") );
+                Assert.isNotNull( $("myProgressBar") );
+                Assert.isNotNull( $("myProgressBarDisplay") );
+        },
+         testUserSpecifiedDeviceDivIDs: function() {
+                // Find Devices Element Options
+                Assert.isNotNull("myDeviceBox", $("myDeviceBox") );
+                Assert.isNotNull("myFindDevicesButton", $("myFindDevicesButton") );
+                //Assert.isNotNull("myCancelFindDevicesButton", $("myCancelFindDevicesButton") );
+                //Assert.isNotNull("myDeviceInfoText", $("myDeviceInfoText") );
+                Assert.isNotNull("myDeviceSelect", $("myDeviceSelect") );
+        },
+        testUserSpecifiedReadDivIDs: function() {
+                // Read Data Element Options
+                Assert.isNotNull( $("myReadBox") , "read box");
+                Assert.isNotNull( $("myReadDataButton") , "read data button");
+                Assert.isNotNull( $("myCancelReadDataButton") , "cancel read data button");
+                Assert.isNotNull( $("myReadTracksSelect") , "read tracks select");
+                Assert.isNotNull( $("myReadWaypointsSelect") , "read waypoints select");
+                //Assert.isNotNull( $("myReadMap") );
+                //Assert.isNotNull( $("myReadDataTypesSelect") , "read data types select");
+        },
+        testUserSpecifiedWriteDivIDs: function() {
+                // Write Data Element Options (Not yet implemented)
+                Assert.isNotNull("myWriteDataButton", $("myWriteDataButton") );
+                Assert.isNotNull("myCancelWriteDataButton", $("myCancelWriteDataButton") );
+                //Assert.isNotNull("myWriteDataSelect", $("myWriteDataSelect") );
+                Assert.isNotNull("daaataa.gpx", display.options.getWriteDataFileName() );
+                Assert.isNotNull("xxyy", display.options.getWriteDataFileName() );
+        }
+
+       });
+
+
     //add the test cases and suites
     YAHOO.tool.TestRunner.add(displayUiGenTestCase);
     

@@ -7,7 +7,7 @@
  *  Unicode Reminder メモ
  ***************************************************************************/
 
-// reads from addesses.txt
+// reads from addresses.txt
 // writes protocol sent.txt
 // sends email to all recipients from addresses.txt which are not contained in sent.txt
 //

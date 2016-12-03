@@ -72,7 +72,7 @@ function savequery($queryid, $queryname, $saveas, $submit, $saveas_queryid, $sor
     if ($submit == true) {
         $options = sql_value("SELECT `options` FROM `queries` WHERE `id`='&1'", false, $queryid);
         if (!$options) {
-            $tpl->error(ERROR_UNKNOWN);   // query does not exist
+            $tpl->error(ERROR_UNKNOWN); // query does not exist
         } elseif ($sortby || $sortorder || $creationdate) {
             $oa = unserialize($options);
             if ($sortby) {

@@ -27,7 +27,7 @@ $opt['pictures']['url'] = 'http://www.so-komm-ich-uebers-web-da.hin/www.opencach
 
 // Sessions verwenden?
 $opt['session'] = 1;
-$opt['zip'] = 'gzip';                // 0; zip; bzip2; gzip
+$opt['zip'] = 'gzip'; // 0; zip; bzip2; gzip
 
 // Gebietsauswahl nach Land
 $opt['bycountry'] = 0;

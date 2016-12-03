@@ -35,7 +35,7 @@ function scan($dir, $subDirs)
 }
 
 /**
- * @param $path
+ * @param string $path
  */
 function testEncoding($path)
 {

@@ -52,7 +52,7 @@ if ($argc < 4) {
             $er->resendActivationCodes();
             break;
         default:
-            die('invalid option: '. $option . "\n");
+            die('invalid option: ' . $option . "\n");
     }
 }
 

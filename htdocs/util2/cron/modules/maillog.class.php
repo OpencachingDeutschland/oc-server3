@@ -12,7 +12,7 @@ checkJob(new maillog());
 class maillog
 {
     public $name = 'maillog';
-    public $interval = 600;  // every 10 minutes
+    public $interval = 600; // every 10 minutes
 
 
     public function run()
@@ -34,7 +34,7 @@ class maillog
             $opt['system']['maillog']['syslog_db_user'],
             $opt['system']['maillog']['syslog_db_password'],
             true
-        );  // use separate connection even if on same DB host
+        ); // use separate connection even if on same DB host
         if ($dbc === false) {
             echo $this->name . ": could not connect to syslog database\n";
 
@@ -53,14 +53,14 @@ class maillog
         $col_program = mysql_real_escape_string($opt['system']['maillog']['column']['program']);
 
         $maillog_where =
-            "`" . $col_hostname . "`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
+            '`' . $col_hostname . "`='" . mysql_real_escape_string($opt['system']['maillog']['syslog_oc_host']) . "' AND
             `" . $col_program . "` like '" . mysql_real_escape_string($opt['system']['maillog']['syslog_mta']) . "'";
 
         $rs = @mysql_query(
-            "
-            SELECT TIMESTAMPDIFF(DAY, MAX(" . $col_created . "), NOW())
-            FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
-            WHERE " . $maillog_where
+            '
+            SELECT TIMESTAMPDIFF(DAY, MAX(' . $col_created . '), NOW())
+            FROM `' . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . '`
+            WHERE ' . $maillog_where
         );
         $r = mysql_fetch_row($rs);
         mysql_free_result($rs);
@@ -81,16 +81,16 @@ class maillog
         // case some entries with same timestamp as $last_date will be processed redundantly.
 
         $rs = @mysql_query(
-            "SELECT `" . $col_id . "` `id`,
-                      `" . $col_message . "` `message`,
-                      `" . $col_created . "` `created`
-                 FROM `" . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . "`
-                WHERE `" . $col_created . "`>='" . mysql_real_escape_string($last_date) . "'
+            'SELECT `' . $col_id . '` `id`,
+                      `' . $col_message . '` `message`,
+                      `' . $col_created . '` `created`
+                 FROM `' . mysql_real_escape_string($opt['system']['maillog']['syslog_db_table']) . '`
+                WHERE `' . $col_created . "`>='" . mysql_real_escape_string($last_date) . "'
                   AND (`" . $col_id . "`>'" . mysql_real_escape_string(
                 $last_id
             ) . "' OR `" . $col_created . "`>'" . mysql_real_escape_string($last_date) . "')
-                  AND  " . $maillog_where . "
-             ORDER BY `" . $col_created . "`,`" . $col_id . "`",
+                  AND  " . $maillog_where . '
+             ORDER BY `' . $col_created . '`,`' . $col_id . '`',
             $dbc
         );
         if ($rs === false) {
@@ -100,7 +100,7 @@ class maillog
         }
 
         while ($logentry = mysql_fetch_assoc($rs)) {
-            $message = $logentry['message'];   // latin-1 charset
+            $message = $logentry['message']; // latin-1 charset
             $delivered = strpos($message, 'status=sent') > 0;
             $bounced = strpos($message, 'status=bounced') > 0;
             if ($delivered || $bounced) {

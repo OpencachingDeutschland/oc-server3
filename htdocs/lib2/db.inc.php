@@ -191,7 +191,7 @@ function sql_internal($dblink, $sql)
         // & escaped?
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) && (substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) === 1) {
             $nextarg++;
@@ -205,7 +205,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[0-9]{1}/', $nextchar) === 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -231,13 +231,13 @@ function sql_internal($dblink, $sql)
                         // strip apostroph and insert NULL
                         $filtered_sql = substr($filtered_sql, 0, strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
-                        $sqlpos ++;
+                        $sqlpos++;
                     } else {
                         $filtered_sql .= 'NULL';
                     }
                 }
 
-                $sqlpos ++;
+                $sqlpos++;
             } else {
                 $arglength = 0;
                 $arg = '';
@@ -247,7 +247,7 @@ function sql_internal($dblink, $sql)
                 while (preg_match('/^[a-zA-Z0-9_]{1}/', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -294,12 +294,12 @@ function sql_internal($dblink, $sql)
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0)
             && (substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 0) {
             // strip escapes of &
             $filtered_sql = substr($filtered_sql, 0, $nextarg) . '&' . substr($filtered_sql, $nextarg + 2);
-            $nextarg --;
+            $nextarg--;
         }
 
         $nextarg = strpos($filtered_sql, '\&', $nextarg + 2);
@@ -347,7 +347,7 @@ function sql_internal($dblink, $sql)
 }
 
 /**
- * @param $sql
+ * @param string $sql
  *
  * @return resource
  */
@@ -365,7 +365,7 @@ function sqlf($sql)
 }
 
 /**
- * @param $sql
+ * @param string $sql
  *
  * @return resource
  */
@@ -383,7 +383,7 @@ function sqlf_slave($sql)
 }
 
 /**
- * @param $sql
+ * @param string $sql
  *
  * @return resource
  */
@@ -401,8 +401,8 @@ function sqll($sql)
 }
 
 /**
- * @param $sql
- * @param $default
+ * @param string $sql
+ * @param integer $default
  *
  * @return mixed
  */
@@ -420,8 +420,8 @@ function sqlf_value($sql, $default)
 }
 
 /**
- * @param $sql
- * @param $default
+ * @param string $sql
+ * @param integer $default
  *
  * @return mixed
  */
@@ -441,7 +441,7 @@ function sqll_value($sql, $default)
 /**
  * @param $value
  *
- * @return mixed|string
+ * @return string
  */
 function sql_escape($value)
 {
@@ -466,7 +466,7 @@ function sql_escape($value)
 /**
  * @param $value
  *
- * @return mixed|string
+ * @return string
  */
 function sql_escape_backtick($value)
 {
@@ -523,7 +523,7 @@ function sql_value_slave($sql, $default)
 }
 
 /**
- * @param $bQuerySlave
+ * @param boolean $bQuerySlave
  * @param $sql
  * @param $default
  *
@@ -612,7 +612,7 @@ function sql_fetch_assoc($rs)
 }
 
 /**
- * @param $rs
+ * @param resource $rs
  *
  * @return array
  */
@@ -629,7 +629,7 @@ function sql_fetch_assoc_table($rs)
 
 // returns false if no more matching rows exist
 /**
- * @param $rs
+ * @param resource $rs
  *
  * @return array
  */
@@ -720,7 +720,7 @@ function sql_insert_id_slave()
 }
 
 /**
- * @param $rs
+ * @param resource $rs
  *
  * @return int
  */
@@ -730,7 +730,7 @@ function sql_num_rows($rs)
 }
 
 /**
- * @param $table
+ * @param string $table
  */
 function sql_temp_table($table)
 {
@@ -762,7 +762,7 @@ function sql_temp_table($table)
 }
 
 /**
- * @param $table
+ * @param string $table
  */
 function sql_temp_table_slave($table)
 {
@@ -785,7 +785,7 @@ function sql_temp_table_slave($table)
 }
 
 /**
- * @param $table
+ * @param string $table
  */
 function sql_drop_temp_table($table)
 {
@@ -828,7 +828,7 @@ function sql_rename_temp_table($table, $newname)
 }
 
 /**
- * @param $table
+ * @param string $table
  */
 function sql_drop_temp_table_slave($table)
 {
@@ -965,7 +965,7 @@ function sql_connect_anyslave()
         AND `online`= 1
         AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'&1')
         ORDER BY `w` DESC LIMIT 1",
-        - 1,
+        -1,
         $nMaxTimeDiff
     );
 
@@ -1067,9 +1067,8 @@ function sql_connect_maintenance()
     return true;
 }
 
-//disconnect the databse
 /**
- *
+ * disconnect the database
  */
 function sql_disconnect()
 {
@@ -1100,9 +1099,8 @@ function sql_disconnect()
     }
 }
 
-//disconnect the databse
 /**
- *
+ * disconnect the database
  */
 function sql_disconnect_slave()
 {
@@ -1259,7 +1257,7 @@ function sql_warn($warnmessage)
 
 /**
  * @param $f
- * @param $rs
+ * @param resource $rs
  * @param $table
  * @param bool $truncate
  */
@@ -1294,7 +1292,7 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 }
 
 /**
- * @param $f
+ * @param resource $f
  * @param $table
  */
 function sql_export_table($f, $table)
@@ -1319,8 +1317,8 @@ function sql_export_table($f, $table)
 }
 
 /**
- * @param $filename
- * @param $tables
+ * @param string $filename
+ * @param string[] $tables
  */
 function sql_export_tables_to_file($filename, $tables)
 {
@@ -1354,7 +1352,7 @@ function sql_export_table_to_file($filename, $table)
 }
 
 /**
- * @param $f
+ * @param resource $f
  * @param $table
  */
 function sql_export_structure($f, $table)
@@ -1373,7 +1371,7 @@ function sql_export_structure($f, $table)
 }
 
 /**
- * @param $filename
+ * @param string $filename
  * @param $table
  */
 function sql_export_structure_to_file($filename, $table)
@@ -1473,7 +1471,7 @@ function sql_index_exists($table, $index)
 
 // test if a function or procedure exists
 /**
- * @param $type
+ * @param string $type
  * @param $name
  *
  * @return bool

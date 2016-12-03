@@ -76,11 +76,11 @@ if ($action == 'add') { // Ocprop
     if (isset($_REQUEST['ok'])) { // Ocprop
         $bError = false;
 
-        $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler'] == '1');  // Ocprop
-        $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay'] == '1') == false);  // Ocprop
+        $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler'] == '1'); // Ocprop
+        $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay'] == '1') == false); // Ocprop
         $picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview'] == '1');
 
-        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
+        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : ''; // Ocprop
         if ($title == '' || ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == '')) {
             $tpl->assign('errortitle', true);
             $bError = true;

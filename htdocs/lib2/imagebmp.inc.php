@@ -487,7 +487,7 @@ function freaddword($f)
 /**
  * @param integer $byte
  * @param $start
- * @param $len
+ * @param integer $len
  *
  * @return number
  */
@@ -567,7 +567,7 @@ function int_to_word($n)
 }
 
 /**
- * @param $d
+ * @param integer $d
  *
  * @return string
  */

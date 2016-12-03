@@ -2254,6 +2254,7 @@ class Net_IDNA2
      * @param mixed $option Parameter to set (string: single parameter; array of Parameter => Value pairs)
      * @param string $value Value to use (if parameter 1 is a string)
      * @return boolean       true on success, false otherwise
+     * @throws \InvalidArgumentException
      * @access public
      */
     public function setParams($option, $value = false)

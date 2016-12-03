@@ -298,7 +298,7 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
  * @param $message
  * @param $attrs
  * @param $smarty
- * @param $line
+ * @param integer $line
  *
  * @return string
  */

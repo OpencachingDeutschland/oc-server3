@@ -35,6 +35,9 @@ if ($dblink === false) {
 // language. Looks like there is no way to query this "inline" in LEFT-JOIN-
 // statements (the ON clause cannot access user.language).
 
+/**
+ * @return string
+ */
 function getCacheTypeName($cacheType, $language)
 {
     return sqlValue(
@@ -46,6 +49,9 @@ function getCacheTypeName($cacheType, $language)
     );
 }
 
+/**
+ * @return string
+ */
 function getCacheSizeName($cacheSize, $language)
 {
     return sqlValue(

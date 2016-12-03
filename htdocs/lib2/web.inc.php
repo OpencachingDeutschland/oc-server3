@@ -29,28 +29,30 @@ require_once __DIR__ . '/common.inc.php';
 
 // enforce http or https?
 if (!isset($disable_oc_https_redirect) || !$disable_oc_https_redirect) {
-  if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
-      if ($opt['page']['https']['active']) {
-          $tpl->redirect('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-      }
-      $opt['page']['force_https_login'] = false;
-  } elseif ($opt['page']['https']['mode'] == HTTPS_ENFORCED) {
-      if (!$opt['page']['https']['active']) {
-          $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-      }
-      $opt['page']['force_https_login'] = true;
-  } elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
-      // during login was https active -> session data is https only -> redirect to https
-      $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
-  }
+    if ($opt['page']['https']['mode'] == HTTPS_DISABLED) {
+        if ($opt['page']['https']['active']) {
+            $tpl->redirect('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+        }
+        $opt['page']['force_https_login'] = false;
+    } elseif ($opt['page']['https']['mode'] == HTTPS_ENFORCED) {
+        if (!$opt['page']['https']['active']) {
+            $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+        }
+        $opt['page']['force_https_login'] = true;
+    } elseif (!empty($_COOKIE[$opt['session']['cookiename'] . 'https_session']) && !$opt['page']['https']['active']) {
+        // during login was https active -> session data is https only -> redirect to https
+        $tpl->redirect('https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+    }
 }
 
-
-// external help embedding
-// pay attention to use only ' quotes in $text (escape other ')
-//
-// see corresponding function in lib/common.inc.php
-
+/**
+ * external help embedding
+ * pay attention to use only ' quotes in $text (escape other ')
+ * see corresponding function in lib/common.inc.php
+ *
+ * @param $ocpage
+ * @return string
+ */
 function helppageurl($ocpage)
 {
     global $opt;
@@ -94,6 +96,11 @@ function helppageurl($ocpage)
     }
 }
 
+/**
+ * @param $ocpage
+ * @param string $title
+ * @return string
+ */
 function helppagelink($ocpage, $title = 'Instructions')
 {
     global $translate;

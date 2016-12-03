@@ -23,8 +23,8 @@ function smarty_gettext_strarg($str)
 {
     $tr = [];
     $p = 0;
-
-    for ($i = 1; $i < func_num_args(); $i++) {
+    $funcNumArgs = func_num_args();
+    for ($i = 1; $i < $funcNumArgs; $i++) {
         $arg = func_get_arg($i);
 
         if (is_array($arg)) {

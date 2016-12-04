@@ -76,11 +76,11 @@ if (!file_exists($filename) ||
     }
     sql_free_result($rs);
 
-    $im = ImageCreateFromGIF($tplpath);
-    $clrWhite = ImageColorAllocate($im, 255, 255, 255);
-    $clrBorder = ImageColorAllocate($im, 70, 70, 70);
-    $clrBlack = ImageColorAllocate($im, 0, 0, 0);
-    $clrBlue = ImageColorAllocate($im, 0, 0, 255);
+    $im = imagecreatefromgif($tplpath);
+    $clrWhite = imagecolorallocate($im, 255, 255, 255);
+    $clrBorder = imagecolorallocate($im, 70, 70, 70);
+    $clrBlack = imagecolorallocate($im, 0, 0, 0);
+    $clrBlue = imagecolorallocate($im, 0, 0, 255);
     $drawRectangle = true;
 
     switch ($logo) {
@@ -91,25 +91,25 @@ if (!file_exists($filename) ||
             $fontsize = 10;
             $text = $username;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
             $fontsize = 7.5;
             $text = $text_counterstat;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $text);
             break;
         case 2:
             // write text
             $fontsize = 10;
             $text = $username;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
             $fontsize = 7;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $logotext);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $logotext);
             $fontsize = 7.5;
             $text = $text_counterstat;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $text);
             break;
         case 6:
         case 7:
@@ -118,21 +118,21 @@ if (!file_exists($filename) ||
             $fontsize = 10;
             $text = $username;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
             $fontsize = 7.5;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $logotext);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $logotext);
             break;
         case 8:
             // write text
             $fontsize = 10;
             $text = $username;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 8 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 8 : $maxtextwidth, 20, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 8 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 8 : $maxtextwidth, 20, $clrBlack, $fontfile, $text);
             $fontsize = 8;
             $text = $text_counterstat;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 12 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 12 : $maxtextwidth, 39, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 12 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 12 : $maxtextwidth, 39, $clrBlack, $fontfile, $text);
 
             $drawRectangle = false;
 
@@ -144,23 +144,23 @@ if (!file_exists($filename) ||
             $fontsize = 10;
             $text = $username;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
             $fontsize = 7;
             $text = $text_counterstat;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $text);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $text);
             $fontsize = 8;
             $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            ImageTTFText($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $logotext);
+            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $logotext);
     }
 
     if ($drawRectangle == true) {
         // draw border
-        ImageRectangle($im, 0, 0, imagesx($im) - 1, imagesy($im) - 1, $clrBorder);
+        imagerectangle($im, 0, 0, imagesx($im) - 1, imagesy($im) - 1, $clrBorder);
     }
     // write output
-    Imagejpeg($im, $filename, $jpeg_qualitaet);
-    ImageDestroy($im);
+    imagejpeg($im, $filename, $jpeg_qualitaet);
+    imagedestroy($im);
 
     sql(
         "INSERT INTO `user_statpic` (`user_id`, `lang`)

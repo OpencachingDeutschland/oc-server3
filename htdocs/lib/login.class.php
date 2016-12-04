@@ -160,8 +160,6 @@ class login
         sql_free_result($rs);
 
         $this->pStoreCookie();
-
-        return;
     }
 
     public function hasAdminPriv($privilege = false)

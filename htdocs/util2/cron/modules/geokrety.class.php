@@ -1,11 +1,8 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  *  Unicode Reminder メモ
- *
  *  Import new data from geokrety.org.
- *
  *  See util2/geokrety for check and repair functions.
  *  See discussion in http://redmine.opencaching.de/issues/18.
  ***************************************************************************/
@@ -194,7 +191,6 @@ class geokrety
          * current location of the Kret but something like the last cache where it was logged.
          * Evaluating the 'state' fielt might help, but for now, we import waypoint data
          * from the moves instead.
-         *
          * sql("DELETE FROM `gk_item_waypoint` WHERE id='&1'", $id);
          * $waypoints = $element->getElementsByTagName('waypoints');
          * if ($waypoints->length > 0)
@@ -362,7 +358,6 @@ class geokrety
     /**
      * @param string $element
      * @param string $attr
-     *
      * @return string
      */
     public function GetNodeAttribute(&$domnode, $element, $attr)

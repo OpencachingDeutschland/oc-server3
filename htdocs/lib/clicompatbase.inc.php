@@ -38,9 +38,9 @@ mb_regex_encoding('UTF-8');
 mb_language('uni');
 
 //load default webserver-settings and common includes
-require_once $opt['rootpath'] . 'lib/consts.inc.php';
-require_once $opt['rootpath'] . 'lib/settings.inc.php';
-require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
+require_once __DIR__  . '/consts.inc.php';
+require_once __DIR__  . '/settings.inc.php';
+require_once __DIR__  . '/../lib2/errorhandler.inc.php';
 
 // check for banned UAs
 $useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
@@ -232,13 +232,13 @@ function sql_internal($_dblink, $sql, $bSlave)
 
     /* as an option, you can give as second parameter an array
      * with all values for the placeholder. The array has to be
-     * with numeric indizes.
+     * with numeric indices.
      */
     if (isset($args[3]) && is_array($args[3])) {
         $tmp_args = $args[3];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
@@ -412,7 +412,7 @@ function sql_error()
     global $db_error;
 
     $db_error += 1;
-    $msql_error = mysql_errno() . ": " . mysql_error();
+    $msql_error = mysql_errno() . ': ' . mysql_error();
     if ($db_error > 1) {
         $msql_error .= "\n(** error recursion **)";
     }
@@ -478,6 +478,7 @@ function sql_warn($warnmessage)
 */
 /**
  * @param resource $rs
+ * @return array
  */
 function sql_fetch_array($rs)
 {

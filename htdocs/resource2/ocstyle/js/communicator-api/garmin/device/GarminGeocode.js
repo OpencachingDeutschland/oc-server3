@@ -26,54 +26,54 @@ Garmin.Geocode = function(){}; //just here for jsdoc
 Garmin.Geocode = Class.create();
 Garmin.Geocode.prototype = {
 
-	/** Prototype constructor
-	 */
-	initialize: function() {
-    	this.geocoder = new GClientGeocoder();
-		this._broadcaster = new Garmin.Broadcaster();
-	},
-	
-	/** Takes an address and uses geocoding service to get waypoint.
+    /** Prototype constructor
+     */
+    initialize: function() {
+        this.geocoder = new GClientGeocoder();
+        this._broadcaster = new Garmin.Broadcaster();
+    },
+
+    /** Takes an address and uses geocoding service to get waypoint.
      * Registered listeners will receive either a 'onFinishedFindLatLon(Garmin.Waypoint)' or 'onException(Error)' call.
      * For best results, address should be a comma delineated list of street, suite #, city-state-zip or just zip fields.
      * It's less confusing to the geocoder if the person or business name is excluded.
      * @param {String} comma delineated address.
-	 * @type void
-	 */
-	findLatLng: function(address) {
-		var geo = this;
+     * @type void
+     */
+    findLatLng: function(address) {
+        var geo = this;
         
         geo.geocoder.getLocations(
-        	address,
-        	function(response) {
-        		if (!response) {
-					var err = new Error("Unable to convert address to location: "+address);
-			        geo._broadcaster.dispatch("onException", {msg: err});
-	            } else {
-	        		place = response.Placemark[0];
-			        point = new GLatLng(place.Point.coordinates[1],
-			                            place.Point.coordinates[0]);
+            address,
+            function(response) {
+                if (!response) {
+                    var err = new Error("Unable to convert address to location: "+address);
+                    geo._broadcaster.dispatch("onException", {msg: err});
+                } else {
+                    place = response.Placemark[0];
+                    point = new GLatLng(place.Point.coordinates[1],
+                                        place.Point.coordinates[0]);
 
-					// address is the input string.  AddressDetails is a hash containing the structured address.
-					// See http://www.google.com/apis/maps/documentation/#Geocoding_Structured
-			        var latLng = new Garmin.WayPoint(point.lat(), point.lng(), null, address, place.AddressDetails);
-			        
-			        geo._broadcaster.dispatch("onFinishedFindLatLon", {waypoint: latLng});
-	            }
-        	}
+                    // address is the input string.  AddressDetails is a hash containing the structured address.
+                    // See http://www.google.com/apis/maps/documentation/#Geocoding_Structured
+                    var latLng = new Garmin.WayPoint(point.lat(), point.lng(), null, address, place.AddressDetails);
+
+                    geo._broadcaster.dispatch("onFinishedFindLatLon", {waypoint: latLng});
+                }
+            }
         );
-	},
-	
-	/** Register to be an event listener.  An object that is registered will be dispatched
+    },
+
+    /** Register to be an event listener.  An object that is registered will be dispatched
      * a method if they have a function with the same dispatch name.  So if you register a
      * listener with an onFinishFindDevices, and the onFinishFindDevices message is called, you'll
      * get that message.  See class comments for event types
      *
      * @param {Object} Object that will listen for events coming from this object 
      * @see {Garmin.Broadcaster}
-     */	
-	register: function(listener) {
+     */
+    register: function(listener) {
         this._broadcaster.register(listener);
-	}
+    }
 
 };

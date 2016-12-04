@@ -22,20 +22,20 @@ TODO - This test is still a work in progress. Not really needed, using controlTe
 
 <body>
 <script language="JavaScript" type="text/javascript">
-	var Assert = YAHOO.util.Assert; 
-	var garminPlugin;
-	
+    var Assert = YAHOO.util.Assert;
+    var garminPlugin;
+
     var pluginTestCase = new YAHOO.tool.TestCase({
    
         name: "Garmin Device Plugin Unit Tests",
         
         setUp: function() {
-        	garminPlugin = new Garmin.DevicePlugin();
+            garminPlugin = new Garmin.DevicePlugin();
         }
         
-   	});
-   	
-   	
+       });
+
+
     //add the test cases and suites
     YAHOO.tool.TestRunner.add(pluginTestCase);
     
@@ -51,11 +51,11 @@ TODO - This test is still a work in progress. Not really needed, using controlTe
 
 <p>This page contains unit tests for the Garmin Device Plugin. To see them, take a look at the source.</p>
 <!-- This is where we bind the plugin to the DOM of this page. 
-	This is necessary inorder to be able to find and use the plugin later -->
+    This is necessary inorder to be able to find and use the plugin later -->
 <object id="GarminActiveXControl"
-	style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0"
-	classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5"> <object
-		id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin"
-		width="0" height="0"> </object> </object>
+    style="WIDTH: 0px; HEIGHT: 0px; visible: hidden" height="0" width="0"
+    classid="CLSID:099B5A62-DE20-48C6-BF9E-290A9D1D8CB5"> <object
+        id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin"
+        width="0" height="0"> </object> </object>
 </body>
 </html>

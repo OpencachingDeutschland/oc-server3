@@ -1,23 +1,23 @@
 #garminDisplay {
-	font-size:11px;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-	color: #000000;
-	text-align: center;
-	margin: 0 0 1em 0;
-	/*border: 2px outset #3D3A21;*/
-	height: 390px;
-	width: 390px;
-	background: #FFFFFF url(garmin-white.gif) no-repeat 12px 12px;
-	/*background: #DDE3D6 url("/image/main/upload/garmin.jpg") no-repeat 12px 12px;*/
-	padding: 3px;
-	border:1px solid #B4CFEC;
-	position: relative;
+    font-size:11px;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    text-align: center;
+    margin: 0 0 1em 0;
+    /*border: 2px outset #3D3A21;*/
+    height: 390px;
+    width: 390px;
+    background: #FFFFFF url(garmin-white.gif) no-repeat 12px 12px;
+    /*background: #DDE3D6 url("/image/main/upload/garmin.jpg") no-repeat 12px 12px;*/
+    padding: 3px;
+    border:1px solid #B4CFEC;
+    position: relative;
 }
 
 #garminDisplay input {
-	font-size:10px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:10px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
     color:#ffffff;
     height:18px;
     background-color: #005E9D;
@@ -26,9 +26,9 @@
 }
 
 #garminDisplay input.actionButton {
-	font-size:16px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:16px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
     color:#ffffff;
     background-color: #0077AA;
     border:1px outset #3D3A21;
@@ -42,9 +42,9 @@
 }
 
 #garminDisplay select { 
-	font-size:14px;
-	font-weight: bold;
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    font-size:14px;
+    font-weight: bold;
+    font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
     /*background-color: #666699;*/ 
     background-color: #FFFFFF;
     color: #005E9D;
@@ -53,14 +53,14 @@
 }
 
 #deviceSelectBox {
-   	background: url(choose_bg.png) no-repeat;
-	width: 259px;
-	height: 101px;
-	position: absolute;
-	bottom: 140px;
-	left: 70px;
-	text-align: center;
-	font: 13px "lucida grande",tahoma,verdana,arial,sans-serif;
+       background: url(choose_bg.png) no-repeat;
+    width: 259px;
+    height: 101px;
+    position: absolute;
+    bottom: 140px;
+    left: 70px;
+    text-align: center;
+    font: 13px "lucida grande",tahoma,verdana,arial,sans-serif;
 }
 
 #readBox {
@@ -73,13 +73,13 @@
     margin-top: 60px;
 }
 #statusText {
-   	position: absolute;
-	top: 125px;
-	left: 18px;
-	text-align: center;
-	width: 90%;
-	font: 15px "lucida grande",tahoma,verdana,arial,sans-serif;
-	font-weight: bold;
+       position: absolute;
+    top: 125px;
+    left: 18px;
+    text-align: center;
+    width: 90%;
+    font: 15px "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-weight: bold;
 }
 #buttonDescription {
     font-weight: normal;
@@ -127,11 +127,11 @@
 }
 
 .pluginElement {
-	margin: 5px;
+    margin: 5px;
 }
 
 #deviceSelect {
-	margin-top: 17px;
+    margin-top: 17px;
     width: 220px;
     padding: 5px;
     line-height: 30px;
@@ -139,9 +139,9 @@
 }
 
 #deviceSelectLabel {
-	margin-top: 15px;
-	font-weight: bold;
-	position: relative;
+    margin-top: 15px;
+    font-weight: bold;
+    position: relative;
 }
 
 #aboutElement {
@@ -162,9 +162,9 @@
 }
 
 #progressBar {
-	position: relative;
-	top:65px;
-	left: 8px;
+    position: relative;
+    top:65px;
+    left: 8px;
     height:20px;
     padding-top: 3px;
     border:1px solid black;
@@ -186,45 +186,45 @@
 
 /* Style for the Preview button */
 #readDataButton{
-	border: 0;
-	cursor: pointer;
-	text-align: center;
-	width: 259px;
-	height: 51px;
-	margin: 0;
-	padding: 0;
-	background: url(button_bg.jpg) no-repeat 0 top;
-	color: #fff;
-	font-size: 16px;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    width: 259px;
+    height: 51px;
+    margin: 0;
+    padding: 0;
+    background: url(button_bg.jpg) no-repeat 0 top;
+    color: #fff;
+    font-size: 16px;
 }
 
 /* Style for the Upload button */
 #readSelectedButton {
-	border: 0;
-	cursor: pointer;
-	text-align: center;
-	width: 259px;
-	height: 51px;
-	background: url(button_bg.jpg) no-repeat 0 top;
-	color: #fff;
-	font-size: 16px;
-	position:absolute;
-	top: 195px;
-	left: 65px;
+    border: 0;
+    cursor: pointer;
+    text-align: center;
+    width: 259px;
+    height: 51px;
+    background: url(button_bg.jpg) no-repeat 0 top;
+    color: #fff;
+    font-size: 16px;
+    position:absolute;
+    top: 195px;
+    left: 65px;
 }
 
 #readDataButton:hover, #readSelectedButton:hover {
-	background: url(button_bg.jpg) no-repeat 0 bottom;
+    background: url(button_bg.jpg) no-repeat 0 bottom;
 }
 
 #readDataButton:active, #readSelectedButton:active {
-	background: url(button_bg.jpg) no-repeat 0 top;
+    background: url(button_bg.jpg) no-repeat 0 top;
 }
 
 
 #readBox {
-	position: absolute;
-	bottom: 60px;
-	left: 70px;
-	font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    position: absolute;
+    bottom: 60px;
+    left: 70px;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
 }

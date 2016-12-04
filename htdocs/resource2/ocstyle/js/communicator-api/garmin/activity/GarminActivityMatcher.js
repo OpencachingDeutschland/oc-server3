@@ -48,8 +48,8 @@ Garmin.ActivityMatcher.prototype = {
         
         this.ajaxOptions.onSuccess = function(xhr) {
             this.activityMatches = new Garmin.Axm.ActivityMatch(xhr.responseJSON);
-        	this.callback();
-    	}.bind(this);
+            this.callback();
+        }.bind(this);
         
         this.apiResponse = this.apiRequest.openRequest(this.ajaxUrl, this.ajaxOptions);
     },

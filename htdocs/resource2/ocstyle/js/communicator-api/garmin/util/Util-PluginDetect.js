@@ -20,48 +20,48 @@ if (Garmin == undefined) var Garmin = {};
  * @class PluginDetect
  */
 var PluginDetect = {
-	
-	hasActiveX: (window.ActiveXObject !== undefined),
-	
-	canDetectPlugins: function() {
-	    return ( PluginDetect.hasActiveX || !!navigator.mimeTypes );
-	},
-	
-	detectFlash: function() {
-	    var pluginFound = PluginDetect.detectPluginByMIME('application/x-shockwave-flash');
-	    // if not found, try to initialize with ActiveX
-	    if(!pluginFound && PluginDetect.hasActiveX) {
-			pluginFound = PluginDetect.detectActiveXControl('ShockwaveFlash.ShockwaveFlash.1');
-	    }
-	    return pluginFound;
-	},
-	
-	detectGarminCommunicatorPlugin: function() {
-	    var pluginFound = PluginDetect.detectPluginByMIME('application/vnd-garmin.mygarmin');
-	    // if not found, try to initialize with ActiveX
-	    if(!pluginFound && PluginDetect.hasActiveX) {
-			pluginFound = PluginDetect.detectActiveXControl('GARMINAXCONTROL.GarminAxControl_t.1');
-	    }
-	    return pluginFound;		
-	},
-	
-	detectPluginByMIME: function(mimeTypeName) {
-		if (navigator.mimeTypes) {
-			var mimeType = navigator.mimeTypes[mimeTypeName];
-			return !!(mimeType && mimeType.enabledPlugin);
-		}
-		else {
-			return false;
-		}
-	},
 
-	detectActiveXControl: function(activeXControlName) {
-		try {
-			var control = new ActiveXObject(activeXControlName);
-			return true;
-		}
-		catch (e) {
-			return false;
-		}
-	}
+    hasActiveX: (window.ActiveXObject !== undefined),
+
+    canDetectPlugins: function() {
+        return ( PluginDetect.hasActiveX || !!navigator.mimeTypes );
+    },
+
+    detectFlash: function() {
+        var pluginFound = PluginDetect.detectPluginByMIME('application/x-shockwave-flash');
+        // if not found, try to initialize with ActiveX
+        if(!pluginFound && PluginDetect.hasActiveX) {
+            pluginFound = PluginDetect.detectActiveXControl('ShockwaveFlash.ShockwaveFlash.1');
+        }
+        return pluginFound;
+    },
+
+    detectGarminCommunicatorPlugin: function() {
+        var pluginFound = PluginDetect.detectPluginByMIME('application/vnd-garmin.mygarmin');
+        // if not found, try to initialize with ActiveX
+        if(!pluginFound && PluginDetect.hasActiveX) {
+            pluginFound = PluginDetect.detectActiveXControl('GARMINAXCONTROL.GarminAxControl_t.1');
+        }
+        return pluginFound;
+    },
+
+    detectPluginByMIME: function(mimeTypeName) {
+        if (navigator.mimeTypes) {
+            var mimeType = navigator.mimeTypes[mimeTypeName];
+            return !!(mimeType && mimeType.enabledPlugin);
+        }
+        else {
+            return false;
+        }
+    },
+
+    detectActiveXControl: function(activeXControlName) {
+        try {
+            var control = new ActiveXObject(activeXControlName);
+            return true;
+        }
+        catch (e) {
+            return false;
+        }
+    }
 }

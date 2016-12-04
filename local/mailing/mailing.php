@@ -5,13 +5,12 @@
  * For license information see doc/license.txt
  *
  *  Unicode Reminder メモ
- ***************************************************************************/
-
-// reads from addesses.txt
-// writes protocol sent.txt
-// sends email to all recipients from addresses.txt which are not contained in sent.txt
-//
-// may be resumed after interrupt
+ * reads from addresses.txt
+ * writes protocol sent.txt
+ * sends email to all recipients from addresses.txt which are not contained in sent.txt
+ *
+ * may be resumed after interrupt
+ * ***************************************************************************/
 
 ini_set('memory_limit', '128M');
 

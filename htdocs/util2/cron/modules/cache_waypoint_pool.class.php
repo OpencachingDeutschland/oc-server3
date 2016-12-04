@@ -142,7 +142,8 @@ class cache_waypoint_pool
 
         $wp_value = substr($wp, 2);
         $b36_value = '';
-        for ($i = 0; $i < strlen($wp_value); $i++) {
+        $wpValueLen = strlen($wp_value);
+        for ($i = 0; $i < $wpValueLen; $i++) {
             $b36_value .= substr($b36_chars, strpos($wp_chars, substr($wp_value, $i, 1)), 1);
         }
 
@@ -150,7 +151,8 @@ class cache_waypoint_pool
         $b36_value = strtoupper(base_convert($dec_value, 10, strlen($wp_chars)));
 
         $wp_value = '';
-        for ($i = 0; $i < strlen($b36_value); $i++) {
+        $b36ValueLen = strlen($b36_value);
+        for ($i = 0; $i < $b36ValueLen; $i++) {
             $wp_value .= substr($wp_chars, strpos($b36_chars, substr($b36_value, $i, 1)), 1);
         }
 

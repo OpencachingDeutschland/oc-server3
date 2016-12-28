@@ -17,24 +17,12 @@ libse was already migrated to htdocs/src. There you will find Classes based on t
 
 lib1 and lib2 will be replaced oder migrated do htdocs/src.
 
-
-When adding or renaming code directories, add them - if applicable - also
-to file scanning in
-
-- htdocs/translate.php
-- local/devel/find_bad_encodings.php
-- local/devel/find_unicode_boms.php
-- local/devel/style-cleanup.php
-
-and check if they need .htaccess protection.
-
-
 Main directories
 ----------------
 
 bin         code and database maintenance scripts
 
-doc         documentaion
+doc         documentation
 
 htdocs      everything which regularly runs on the Opencaching website
 
@@ -58,7 +46,7 @@ doc         database documentation, static data and user documentation
 download    temporary files for XML interface requests, see htdocs/xml.
             Directory is configured via lib/settings.inc.php, $zip_basedir
             and $zip_wwwdir.
-            Note that zip downloads via seach.php are not stored in the file
+            Note that zip downloads via search.php are not stored in the file
             system but directly streamed.
 
 html        some alternatives to index.php which may be displayed e.g.

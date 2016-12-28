@@ -12,6 +12,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Changed
 * fix login issue with lib and lib2 components
 * code style improvements based on scrutinizer patches
+* fixing language links #1022
 
 ### Removed
 * not needed sql debug functions

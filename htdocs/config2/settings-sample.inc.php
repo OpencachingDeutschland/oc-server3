@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Production system sample of settings.inc.php - all lib2 settings needed
  *  to run the website. In addition to this, you must create settings.inc.php

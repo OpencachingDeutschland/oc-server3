@@ -4,7 +4,6 @@
  *
  *  remove a cache description
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/lib/common.inc.php';

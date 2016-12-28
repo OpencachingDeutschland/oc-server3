@@ -6,7 +6,6 @@
  *  It removes all data not intended for the public and disables all user
  *  accounts, while keeping the cache listings' status.
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

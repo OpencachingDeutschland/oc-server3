@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Regenerates gk_item_waypoint from gk_move_waypoint.
  *  See http://redmine.opencaching.de/issues/18.

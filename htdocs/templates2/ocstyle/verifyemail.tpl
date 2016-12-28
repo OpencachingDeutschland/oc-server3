@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  ***************************************************************************}
 
 <form action="verifyemail.php" method="post" style="display:inline;">

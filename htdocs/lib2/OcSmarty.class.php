@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *  Unicode Reminder メモ
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 

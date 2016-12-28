@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  retrieves data from pictures table for log picture stats and galleries;
  *  data is mostly processed within res_logpictures.tpl

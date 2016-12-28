@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *  Unicode Reminder メモ
  *  Import new data from geokrety.org.
  *  See util2/geokrety for check and repair functions.
  *  See discussion in http://redmine.opencaching.de/issues/18.

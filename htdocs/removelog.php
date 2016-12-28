@@ -6,7 +6,6 @@
  *
  *  GET/POST-Parameter: logid
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 use Oc\GeoCache\Recommendation;

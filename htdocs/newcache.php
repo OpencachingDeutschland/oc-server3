@@ -3,7 +3,6 @@
  *  For license information see doc/license.txt
  *  submit a new cache
  *  used template(s): newcache, viewcache, login
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 use Oc\GeoCache\StatisticPicture;

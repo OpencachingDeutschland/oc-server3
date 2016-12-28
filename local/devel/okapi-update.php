@@ -6,7 +6,6 @@
  *  OC code branch (Git -> Git). Please do not confuse with OKAPI's internal
  *  update mechanism, which is called via bin/dbupdate.php.
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

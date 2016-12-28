@@ -1,7 +1,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Javascript toolbox; browser-idependend functions
  ***************************************************************************/

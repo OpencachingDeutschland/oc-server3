@@ -3,7 +3,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Create a cronjob to execute this file every minute
  *

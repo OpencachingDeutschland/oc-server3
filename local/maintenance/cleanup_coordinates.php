@@ -9,7 +9,6 @@
  *
  *  Fixes http://redmine.opencaching.de/issues/943
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

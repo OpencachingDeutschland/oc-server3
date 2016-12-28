@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  *
  *  Display a list of cache lists from the variable $cachelists,
  *  provided by cachelist::getLists().

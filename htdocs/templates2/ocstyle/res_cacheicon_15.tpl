@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  ***************************************************************************}
 {strip} {* OCSTYLE *}
 {*cachetype=1 status=1 logtype=0 owner=false small=false*}

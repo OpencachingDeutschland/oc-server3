@@ -4,7 +4,6 @@
  *
  *  Cryptographic library for encryption of passwords.
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 class crypt

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This module is included by each site with HTML-output and contains
  *  functions that are specific to HTML-output. common.inc.php is included

@@ -4,7 +4,6 @@
  *
  * For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  * reads from addresses.txt
  * writes protocol sent.txt
  * sends email to all recipients from addresses.txt which are not contained in sent.txt

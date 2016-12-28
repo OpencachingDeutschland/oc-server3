@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.
  *  See http://redmine.opencaching.de/issues/18.

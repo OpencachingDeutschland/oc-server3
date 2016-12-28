@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Helper tool for tracking down Geokrety table inconsistencies;
  *  creates backups of gk_ tables and initializes archive directory.

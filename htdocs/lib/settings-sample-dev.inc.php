@@ -2,7 +2,6 @@
 /***************************************************************************
  *  You may enter special or testing settings for your developer maching here
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 // installation paths

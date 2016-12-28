@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Settings shared by all configurations of lib1 and lib2.
  *  See also locale.inc.php, which is included in both lib1 and lib2.

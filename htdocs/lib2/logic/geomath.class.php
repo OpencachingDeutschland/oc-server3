@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  In lib2 this file is always included via common.inc.php.
  *  Also used in lib1.

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  - check all slaves and manage table sys_repl_slaves
  *  - check all slaves and purge master logs

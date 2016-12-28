@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Search cache listing by waypoint
  *  Server part of Mozilla search plugin for OC;

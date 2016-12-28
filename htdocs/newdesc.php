@@ -6,7 +6,6 @@
  *
  *  used template(s): newdesc
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/lib/consts.inc.php';

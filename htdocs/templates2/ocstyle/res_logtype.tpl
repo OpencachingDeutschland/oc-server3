@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  ***************************************************************************}
 {* OCSTYLE *}{strip}
 {* strip is needed by search.result.caches.row.tpl *}

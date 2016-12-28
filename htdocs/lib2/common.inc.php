@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This module contains the main initialisation routine and often used
  *  functions. It is included by web.inc.php and cli.inc.php.

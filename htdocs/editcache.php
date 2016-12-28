@@ -4,7 +4,6 @@
  *  edit a cache listing
  *  used template(s): editcache
  *  GET/POST Parameter: cacheid
- *  Unicode Reminder メモ
  *****************************************************************************/
 
 use Oc\GeoCache\StatisticPicture;

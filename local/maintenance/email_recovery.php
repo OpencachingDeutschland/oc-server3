@@ -13,7 +13,6 @@
  *    - email address change requests
  *    - new OConly attribute notifications
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Returns a list of all caches which have been hidden after publish.
  *  This allows an easier synchronization of this information on a

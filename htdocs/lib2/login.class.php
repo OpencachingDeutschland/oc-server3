@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *  Unicode Reminder メモ
  *  This class provides access to the login user data. Informations are
  *  stored in a cookie.
  *  Methods:

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Session data handling with cookies
  *  See doc/cookies.txt for more information in cookies.

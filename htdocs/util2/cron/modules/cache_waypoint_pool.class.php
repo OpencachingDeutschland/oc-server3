@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This cronjob fills the table cache_waypoint_pool with waypoints that
  *  can be assigned to new caches. The code is cpu intensive on database

@@ -3,7 +3,6 @@
  *
  *  You can find the license in the docs directory of the CVS repository
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 // implementation incomplete in sys_main.tpl and missing in main.tpl

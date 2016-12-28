@@ -9,7 +9,6 @@
 
 /****************************************************************************
  *
- *  Unicode Reminder メモ
  *
  * $menu contains the entire menu structure
  *

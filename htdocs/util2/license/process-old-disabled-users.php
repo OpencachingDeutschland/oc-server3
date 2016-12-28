@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Does license-passive-diclined processing on disabled user accounts.
  *  Caution: This will delete cache description and log contents and pictures!

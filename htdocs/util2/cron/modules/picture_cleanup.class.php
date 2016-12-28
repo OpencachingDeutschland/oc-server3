@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Delete duplicate log pictures (produced e.g. by Ocprop)
  ***************************************************************************/

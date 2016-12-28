@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  returns GC -> OC waypoint translation table, if available,
  *  or reports a GC waypoint to the team

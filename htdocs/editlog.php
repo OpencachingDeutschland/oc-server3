@@ -10,7 +10,6 @@
  *  Note: when changing recommendation, the last_modified-date of log-record
  *        has to be updated to trigger resync via xml-interface
  *
- *  Unicode Reminder メモ
  *****************************************************************************/
 
 use Oc\GeoCache\Recommendation;

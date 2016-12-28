@@ -26,7 +26,12 @@ if ($action == 'delete') {
         //   3. we return to mytop5 via browser "back" button
         // -> ignore
     } else {
-        $rs = sql("SELECT `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename` FROM `caches` WHERE `caches`.`cache_id`='&1'", $cache_id);
+        $rs = sql(
+            "SELECT `caches`.`wp_oc` AS `wp`, `caches`.`name` AS `cachename`
+             FROM `caches`
+             WHERE `caches`.`cache_id`='&1'",
+            $cache_id
+        );
         $deletedItem = sql_fetch_assoc($rs);
         $tpl->assign('deleted', true);
         $tpl->assign('deletedItem', $deletedItem);

@@ -2835,7 +2835,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2551', 'When di
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2552', 'When did you abort the cache search?', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2553', 'This geocache description may be outdated.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2554', 'See the log entries for more information.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2555', 'See the <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"#logentries\" class=\"systemlink\">log entries</a></span> for more information.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2555', 'See the <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"%1%2%3#logentries\" class=\"systemlink\">log entries</a></span> for more information.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2556', 'geocache needs maintenance', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2557', 'geocache is ok', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2558', 'description is outdated', '2015-06-17 10:09:14');
@@ -7482,7 +7482,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2552', 'DE', 'Wann hast du die Suche abgebrochen?', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2553', 'DE', 'Diese Cachebeschreibung ist wahrscheinlich veraltet.', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2554', 'DE', 'Weitere Erläuterungen finden sich in den Logeinträgen.', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'DE', 'Weitere Erläuterungen finden sich in den <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\">-<a href=\"#logentries\" class=\"systemlink\">Logeinträgen</a></span>.', '2015-06-17 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'DE', 'Weitere Erläuterungen finden sich in den <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\">-<a href=\"%1%2%3#logentries\" class=\"systemlink\">Logeinträgen</a></span>.', '2013-12-31 14:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2556', 'DE', 'Cache benötigt Wartung', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2557', 'DE', 'Cache ist ok', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2558', 'DE', 'Cachebeschreibung ist veraltet', '2015-06-17 10:09:14');
@@ -12789,7 +12789,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2552', 'FR', 'Quand avez-vous interrompez la recherche de cache\&nbsp;?', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2553', 'FR', 'Cette description de géocache peut être obsolète.', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2554', 'FR', 'Voir les entrées de log pour des informations supplémentaires.', '0000-00-00 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'FR', 'Voir les <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"#logentries\" class=\"systemlink\">log entries</a></span> pour des informations supplémentaires.', '0000-00-00 00:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'FR', 'Voir les <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"%1%2%3#logentries\" class=\"systemlink\">log entries</a></span> pour des informations supplémentaires.', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2556', 'FR', 'la géocache a besoin de maintenance', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2557', 'FR', 'la géocache est ok', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2558', 'FR', 'description est obsolète', '0000-00-00 00:00:00');

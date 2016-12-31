@@ -23,49 +23,49 @@
 /* 1.1 - Page frame                  */
 /*-----------------------------------*/
 html {
-	height: 100%;
+    height: 100%;
 }
  
 body {
-	font-size: 64.5%;
-	margin: 0px auto;
-	height: 100%;
-	padding: 0px;
-	background-color: #3a663a;
-	font-family: arial, sans-serif, Tahoma, Verdana;
+    font-size: 64.5%;
+    margin: 0px auto;
+    height: 100%;
+    padding: 0px;
+    background-color: #3a663a;
+    font-family: arial, sans-serif, Tahoma, Verdana;
 }
 
 body.popup {
-	background: white;
+    background: white;
 }
 
 .page-container-1 {
-	width: 970px;
-	margin: 29px auto auto auto;
-	padding: 0px;
-	background-color: #ffffff;
-	border: solid 1px rgb(100,100,100);
-	position: relative;
+    width: 970px;
+    margin: 29px auto auto auto;
+    padding: 0px;
+    background-color: #ffffff;
+    border: solid 1px rgb(100,100,100);
+    position: relative;
 }
 
 
 #ocmain {
-	height:100%;
-	width:100%;
+    height:100%;
+    width:100%;
 }
 
 #ocmain ul li {
-	font-size: 12px;
+    font-size: 12px;
 }
 
 #ocmain p, #ocmain ul, #ocmain ol {
-	margin-right: 15px;
+    margin-right: 15px;
 }
 
 div#overall {
-	min-width: 970px;
-	width: 100%;
-	overflow: hidden;
+    min-width: 970px;
+    width: 100%;
+    overflow: hidden;
 }
 
 div#bg1 {display: none;}
@@ -77,10 +77,10 @@ div#bg2 {display: none;}
 br {clear: none;}
 
 img {
-	behavior: url(resource2/ocstyle/css/iepngfix.htc);
-	vertical-align: middle;
-	border-width: 0px;
-	border-style: none;
+    behavior: url(resource2/ocstyle/css/iepngfix.htc);
+    vertical-align: middle;
+    border-width: 0px;
+    border-style: none;
 }
 
 /*-----------------------------------*/
@@ -108,52 +108,52 @@ img {
 /* 2.1 - Page Header                 */
 /*-----------------------------------*/
 div#langstripe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	padding-top: 0;
-	height: 31px;
-	background: #abb4bd url(../images/bg-langstripe.png) 0 100% repeat-x;
-	color: black;
-	z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 0;
+    height: 31px;
+    background: #abb4bd url(../images/bg-langstripe.png) 0 100% repeat-x;
+    color: black;
+    z-index: 5;
 }
 
 .header {
-	height: 81px;
+    height: 81px;
 }
 
 .headerimage {
-	height: 80px;
-	width: 970px;
-	overflow: hidden;
-	position: absolute;
-	top: 1px;
-	z-index: 1;
+    height: 80px;
+    width: 970px;
+    overflow: hidden;
+    position: absolute;
+    top: 1px;
+    z-index: 1;
 }
 
 .headerlogo {
-	position: absolute;
-	top: 0px;
-	z-index: 2;
+    position: absolute;
+    top: 0px;
+    z-index: 2;
 }
 
 .headerimagecontent {
-	border: 0px none;
+    border: 0px none;
 }
 
 #debugoc {
-	position: absolute;
-	left: 305px;
-	top: 4px;
-	border: solid 3px red;
-	padding: 15px;
-	z-index: 2;
-	background-color: white;
-	opacity: 0.6; 
-	-moz-opacity: 0.6; 
-	-khtml-opacity: 0.6; 
-	filter: alpha(opacity=60);
+    position: absolute;
+    left: 305px;
+    top: 4px;
+    border: solid 3px red;
+    padding: 15px;
+    z-index: 2;
+    background-color: white;
+    opacity: 0.6; 
+    -moz-opacity: 0.6; 
+    -khtml-opacity: 0.6; 
+    filter: alpha(opacity=60);
 }
 
 /*----------------------------*/
@@ -161,16 +161,16 @@ div#langstripe {
 /* Top line                   */
 /*----------------------------*/
 .nav1 {
-	width: 970px;
-	margin: auto;
-	height:29px;
-	}
+    width: 970px;
+    margin: auto;
+    height:29px;
+    }
 
 .nav1 td {
-	font-size: 1.0em;
-	vertical-align: middle;
-	white-space:nowrap;
-	}
+    font-size: 1.0em;
+    vertical-align: middle;
+    white-space:nowrap;
+    }
 
 /*----------------------------*/
 /* 2.4 - Navigation - Level 2 */
@@ -211,49 +211,49 @@ div#langstripe {
 /*----------------------------*/
 #breadcrumb
 {
-	position:relative;
-	top:4px;
-	margin-left:174px;
-	width:520px;
-	color:#505050;
-	font-size:10px; /* x-small has different size in different browsers */
-	font-family:sans-serif;
-/* 	border-bottom:1px solid #AAAAAA; */
-	text-align:left;
-	margin-top:0.5ex;
-	margin-bottom:1ex;
-	line-height:3ex;
-	text-indent:1ex;
+    position:relative;
+    top:4px;
+    margin-left:174px;
+    width:520px;
+    color:#505050;
+    font-size:10px; /* x-small has different size in different browsers */
+    font-family:sans-serif;
+/*     border-bottom:1px solid #AAAAAA; */
+    text-align:left;
+    margin-top:0.5ex;
+    margin-bottom:1ex;
+    line-height:3ex;
+    text-indent:1ex;
 }
 
 #breadcrumb_fullsize
 {
-	position:relative;
-	top:4px;
-	margin-left:180px;
-	width:620px;
-	color:#505050;
-	font-size:10px; /* x-small has different size in different browsers */
-	font-family:sans-serif;
-	border-bottom:1px solid #AAAAAA;
-	text-align:left;
-	margin-top:0.5ex;
-	margin-bottom:1ex;
-	line-height:3ex;
-	text-indent:1ex;
+    position:relative;
+    top:4px;
+    margin-left:180px;
+    width:620px;
+    color:#505050;
+    font-size:10px; /* x-small has different size in different browsers */
+    font-family:sans-serif;
+    border-bottom:1px solid #AAAAAA;
+    text-align:left;
+    margin-top:0.5ex;
+    margin-bottom:1ex;
+    line-height:3ex;
+    text-indent:1ex;
 }
 
 #suchbox {
-	position: absolute; 
-	top:112px;
-	right: 15px;
+    position: absolute; 
+    top:112px;
+    right: 15px;
 }
 
 div.tplhelp
 {
-	position:absolute;
-	top:136px;
-	right:13px;
+    position:absolute;
+    top:136px;
+    right:13px;
 }
 
 /*.nav4 {overflow: hidden; clear: both; margin: 0px; padding: 0px; color: rgb(75,75,75); font-size: 1.0em;margin: 0;} */
@@ -303,10 +303,10 @@ div.tplhelp
 
 /* Titles */
 .bg-blue02 {
-	background: #e8eff2 url(../images/page/section-bg.png) repeat-x; background-size:contain;
-	background-color: #e8eff2;
-	padding: 2px 0px 2px 6px;
-	margin: 2px 0 14px 0;  /* see adjustment in style_screen_msie.css */
+    background: #e8eff2 url(../images/page/section-bg.png) repeat-x; background-size:contain;
+    background-color: #e8eff2;
+    padding: 2px 0px 2px 6px;
+    margin: 2px 0 14px 0;  /* see adjustment in style_screen_msie.css */
 }
 .content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; min-height:32px; margin: 0px 0px 10px 0px; padding: 0px 0px 2px 0px; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
 
@@ -319,19 +319,19 @@ div.tplhelp
 .content-title-noshade-size2 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 150%;}
 .content-title-noshade-size5 {margin: 0px; padding: 0px; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
 
-.content-title-noshade-size3 { margin: 0px;	padding: 0px;	color: rgb(88,144,168);	font-weight: bold;	font-size: 160%;}
+.content-title-noshade-size3 { margin: 0px;    padding: 0px;    color: rgb(88,144,168);    font-weight: bold;    font-size: 160%;}
 .content-title-noshade-size3 img {
-	padding: 0;
-	margin-top: 0;
-	margin-bottom: 0;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 p.content-title-noshade-size3 { margin:0 !important; }
 
 td.content-title-flag {
-	margin-left:0 !important;
-	padding-left:0 !important;
-	margin-right:3px !important;
-	padding-right:3px !important;
+    margin-left:0 !important;
+    padding-left:0 !important;
+    margin-right:3px !important;
+    padding-right:3px !important;
 }
 
 .content-title-link { font-weight:normal; font-size:80%; }
@@ -356,17 +356,17 @@ h5 {margin: 1.0em 0px 0.5em 0px; font-weight: bold; font-size: 120%;}
 
 /* Boxes */
 .textblock {
-	border: solid 2px #d6e4f0;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	margin: 3px;
-	padding: 6px 6px 6px 8px;
-	min-width: 640px;
+    border: solid 2px #d6e4f0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    margin: 3px;
+    padding: 6px 6px 6px 8px;
+    min-width: 640px;
 }
 
 .wide_textblock {
-	width: 740px;
+    width: 740px;
 }
 
 /* Paragraphs */
@@ -459,25 +459,25 @@ a.boldlink:visited, .content1 b a:visited, .content2 b a:visited, .content3 b a:
 
 /* fat cache and username links */
 a.links:link {
-	font-weight: bold;
-	color: rgb(48,48,48);
-	text-decoration: none;
+    font-weight: bold;
+    color: rgb(48,48,48);
+    text-decoration: none;
 }
 
 a.links:visited {
-	font-weight: bold;
-	color: rgb(128,0,128);
-	text-decoration: none;
+    font-weight: bold;
+    color: rgb(128,0,128);
+    text-decoration: none;
 }
 
 /* a.links:active {
-	background-color: yellow;
-	text-decoration: none;
+    background-color: yellow;
+    text-decoration: none;
 }
 */
 
 a.links:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* other */
@@ -492,17 +492,17 @@ a.info{
 }
 
 a.info:visited {
-	color: black;
-	text-decoration:none;
+    color: black;
+    text-decoration:none;
 }
 
 a.info:hover{
-	z-index:25;
-	background-color:#FFFFFF;
+    z-index:25;
+    background-color:#FFFFFF;
 }
 
 a.info span{
-	display: none
+    display: none
 }
 
 a.info:hover span{ /*the span will display just on :hover state*/
@@ -512,17 +512,17 @@ a.info:hover span{ /*the span will display just on :hover state*/
     border:1px solid #000;
     background-color:#FFFFCC; color:#000;
     text-align: left; font-size: 11px;
-	}
+    }
 /* <---- */
 
 /* external links in Maindiv, decorated with ext-icon */
 
 #ocmain a[href^="http:"], #ocmain a[href^="https:"]
 {
-	padding-right: 14px;
-	background-image: url('../images/misc/linkicon.png');
-	background-repeat: no-repeat;
-	background-position: right center;
+    padding-right: 14px;
+    background-image: url('../images/misc/linkicon.png');
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
 /* internal links without symbol */
@@ -533,13 +533,13 @@ a.info:hover span{ /*the span will display just on :hover state*/
 
 #googlemap a[href], #ocmain a[href^="http://www.opencaching"], #ocmain a[href^="https://www.opencaching"], #ocmain a[href^="http://blog.opencaching"], #ocmain a[href^="http://forum.opencaching"], #ocmain a[href^="http://wiki.opencaching"], #ocmain a[href^="http://opencaching"], #ocmain a[href^="https://opencaching"], #ocmain a[href^="http://test.opencaching"], #ocmain a[href^="https://test.opencaching"], #ocmain a[href^="http://local.opencaching"], #ocmain a[href^="https://local.opencaching"], #ocmain a[href^="http://oc-devel"]
 {
-	padding-right: 0;
-	background-image: none;
+    padding-right: 0;
+    background-image: none;
 }
 
 /* a / no href / onclick=javascript:... */
 .jslink {
-	cursor:pointer;
+    cursor:pointer;
 }
 
 
@@ -547,21 +547,21 @@ a.info:hover span{ /*the span will display just on :hover state*/
 /* SECTION 5 - FORMS / CONTROLS */
 /********************************/
 
-input {	border:1px solid #555;	background-color:white;	padding:1px 2px 1px 2px; font-size:11px;color: black;}
+input {    border:1px solid #555;    background-color:white;    padding:1px 2px 1px 2px; font-size:11px;color: black;}
 
 *.input20  {width:20px;}  /* day,month */
 *.input30  {width:30px;}
 *.input40  {width:40px;}  /* year */
 *.input50  {width:50px;}
 *.input70  {width:70px;}
-*.input100 {width:100px;}	/* log-password */
-*.input120 {width:120px;}	/* emailadress */
-*.input170 {width:170px;}	/* cache lists filter */
+*.input100 {width:100px;}    /* log-password */
+*.input120 {width:120px;}    /* emailadress */
+*.input170 {width:170px;}    /* cache lists filter */
 *.input200 {width:200px;}
 *.input300 {width:300px;}
-*.input350 {width:350px;}	/* overwrite saved query */
-*.input400 {width:400px;}	/* short cachedescription */
-*.input500 {width:500px;}	/* cache list wp inputs, Email subject */
+*.input350 {width:350px;}    /* overwrite saved query */
+*.input400 {width:400px;}    /* short cachedescription */
+*.input500 {width:500px;}    /* cache list wp inputs, Email subject */
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
@@ -571,86 +571,86 @@ select {border:1px solid #555; background-color:white; padding:1px; font-size:11
 select.disabled {border:1px solid #a0a0a0; color:grey; }
 
 input.formbutton_header {
-	width:65px;
-	border:1px solid black;
-	background-color:#dbe6f1;
-	color: #000000;
-	padding:0;
+    width:65px;
+    border:1px solid black;
+    background-color:#dbe6f1;
+    color: #000000;
+    padding:0;
 }
 
 input.formbutton {
-	width:120px;
-	border:1px solid #5f90bb; /* see adjustment in style_screen_msie.css */
-	padding:1px 0px 1px 0;
-	background-color:#dbe6f1;
-	color: #000000;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
+    width:120px;
+    border:1px solid #5f90bb; /* see adjustment in style_screen_msie.css */
+    padding:1px 0px 1px 0;
+    background-color:#dbe6f1;
+    color: #000000;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
 }
 
 input.formbutton:hover {
-	background-color:#e5eef5;
-	box-shadow: 0px 0px 1px #555;
-	-moz-box-shadow: 0px 0px 1px #555;
-	-webkit-box-shadow: 0px 0px 1px #555;
+    background-color:#e5eef5;
+    box-shadow: 0px 0px 1px #555;
+    -moz-box-shadow: 0px 0px 1px #555;
+    -webkit-box-shadow: 0px 0px 1px #555;
 }
 
 input.formbutton_active {
-	width:120px;
-	border:1px solid #5f90bb;
-	padding:1px 0px 1px 0;
-	color: #000000;
-	background-color:#e5eef5;
-	border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	box-shadow: 0px 0px 1px #555;
-	-moz-box-shadow: 0px 0px 1px #555;
-	-webkit-box-shadow: 0px 0px 1px #555;
+    width:120px;
+    border:1px solid #5f90bb;
+    padding:1px 0px 1px 0;
+    color: #000000;
+    background-color:#e5eef5;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    box-shadow: 0px 0px 1px #555;
+    -moz-box-shadow: 0px 0px 1px #555;
+    -webkit-box-shadow: 0px 0px 1px #555;
 }
 
 input.widebutton {
-	width:160px !important;
+    width:160px !important;
 }
 
 .menuBar
 {
-	background-color:#F0F0EE;
-	margin:2px 2px 2px 2px;
-	padding:2px 4px 2px 4px;
-	border:solid 1px #CCCCCC;
-	font-size:smaller;
-	cursor:default;
-	float:left;
+    background-color:#F0F0EE;
+    margin:2px 2px 2px 2px;
+    padding:2px 4px 2px 4px;
+    border:solid 1px #CCCCCC;
+    font-size:smaller;
+    cursor:default;
+    float:left;
 }
 
 .buttonNormal
 {
-	padding:3px 4px 3px 4px;
-	cursor:default;
+    padding:3px 4px 3px 4px;
+    cursor:default;
 }
 
 .buttonSplitter
 {
-	color:#CCCCCC;
+    color:#CCCCCC;
 }
 
 /* Buttons and Dropdown list for data export */
 .exportbutton, .exportlist { 
-	background: rgb(234,239,247);  /* see adjustment in style_screen_msie.css */
-	font-weight: bold; 
-	font-size: 8pt; 
-	border: 1px solid #5f90bb;
-	padding: 2px;  /* see adjustment in style_screen_msie.css */
-	font-family: verdana, tahoma, sans-serif;
-	color: #202020;
+    background: rgb(234,239,247);  /* see adjustment in style_screen_msie.css */
+    font-weight: bold; 
+    font-size: 8pt; 
+    border: 1px solid #5f90bb;
+    padding: 2px;  /* see adjustment in style_screen_msie.css */
+    font-family: verdana, tahoma, sans-serif;
+    color: #202020;
 }
 
 .exportbutton:hover, .exportlist:hover {
-	box-shadow: 0px 0px 1px #555;
-	-moz-box-shadow: 0px 0px 1px #555;
-	-webkit-box-shadow: 0px 0px 1px #555;
+    box-shadow: 0px 0px 1px #555;
+    -moz-box-shadow: 0px 0px 1px #555;
+    -webkit-box-shadow: 0px 0px 1px #555;
 }
 
 /* Chrome/Safari hack */
@@ -661,13 +661,13 @@ input.widebutton {
 /* Editor fields for Descritpions, Logs etc. */
 textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
 textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
-textarea.hint {	width:750px; height:100px; }  /* only cacheditor */
-textarea.logs {	width:640px; height:280px; }  /* only logeditor */
-textarea.reports {	width:640px; height:250px; }  /* only logeditor */
+textarea.hint {    width:750px; height:100px; }  /* only cacheditor */
+textarea.logs {    width:640px; height:280px; }  /* only logeditor */
+textarea.reports {    width:640px; height:250px; }  /* only logeditor */
 textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
 textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
 textarea.userdesc { width:750px; height:400px; }  /* only user desc editor */
-textarea.removelogs {	width:620px; height:200px; }  /* log removal */
+textarea.removelogs {    width:620px; height:200px; }  /* log removal */
 
 label.disabled { color:grey; }
 .formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
@@ -695,24 +695,24 @@ input.waypoint { text-transform: uppercase; }
 img#viewcache-cacheicon { float: left; }
 
 td.listicon {
-	width:1%;
-	margin-right:0 !important;
-	padding-right:1px !important;
-	vertical-align:middle;
+    width:1%;
+    margin-right:0 !important;
+    padding-right:1px !important;
+    vertical-align:middle;
 }
 
 tr.cachelistheader td {
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border-bottom: solid 1px black;
-	border-top: solid 1px black;
-	margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+    margin-bottom: 5px;
 }
 
 tr.cachelistitem td {
-	padding-top: 0.3em;
-	padding-bottom: 0.3em;
-	line-height: 1.4em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    line-height: 1.4em;
 }
 
 /*---------------------------*/
@@ -723,11 +723,11 @@ tr.cachelistitem td {
 p.startmessage { line-height: 1.4em; }
 
 .img-minimap {
-	border: 1px solid #a9a9a9; 
-	padding: 2px; 
-	box-shadow: 1px 2px 2px #555;
-	-moz-box-shadow: 1px 2px 2px #555;
-	-webkit-box-shadow: 1px 2px 2px #555;
+    border: 1px solid #a9a9a9; 
+    padding: 2px; 
+    box-shadow: 1px 2px 2px #555;
+    -moz-box-shadow: 1px 2px 2px #555;
+    -webkit-box-shadow: 1px 2px 2px #555;
 }
 
 /* Viewcache */
@@ -747,53 +747,53 @@ div.viewcache-pictureblock span.title { display: block; max-width: 175px; paddin
 .waypointtable td.wpt_text { padding: 6px 6px 6px 8px; }
 
 .img-shadow {
-	float:left;
-	background: url(shadowAlpha.png) no-repeat bottom right !important;
-	margin: 10px 0 0 10px !important;
-	margin: 10px 0 0 5px;
+    float:left;
+    background: url(shadowAlpha.png) no-repeat bottom right !important;
+    margin: 10px 0 0 10px !important;
+    margin: 10px 0 0 5px;
 }
 
 .img-shadow img {
-	display: block;
-	position: relative;
-	background-color: #fff;
-	border: 1px solid #a9a9a9;
-	margin: -4px 4px 4px -4px;
-	padding: 2px;
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -4px 4px 4px -4px;
+    padding: 2px;
 }
 
 div.isarchived {
-	clear: both;
-	float: left;
-	width: 735px;
-	margin: 0px 0px 10px 0px;
-	padding: 15px;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	background-color:#ffeaea;
+    clear: both;
+    float: left;
+    width: 735px;
+    margin: 0px 0px 10px 0px;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color:#ffeaea;
 }
 
 div.isannotated {
-	clear: both;
-	float: left;
-	width: 735px;
-	margin: 0px 0px 10px 0px;
-	padding: 15px;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	background-color:#f0f0f0;
+    clear: both;
+    float: left;
+    width: 735px;
+    margin: 0px 0px 10px 0px;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color:#f0f0f0;
 }
 
 div#havefound {
-	position: absolute;
-	z-index: 25;
-	top: 180px;
-	right: 20px;
-	padding: 5px 5px 5px 0px;
-	font-weight: bold;
-	height: 35px;
+    position: absolute;
+    z-index: 25;
+    top: 180px;
+    right: 20px;
+    padding: 5px 5px 5px 0px;
+    font-weight: bold;
+    height: 35px;
 }
 
 * html div#havefound {top: 160px;}
@@ -811,25 +811,25 @@ p.printlogheader { font-size:115%; }
 div.viewcache_log-content { font-family: arial, sans serif; line-height: 1.6em; font-size: 12px; margin-left: 20px; margin-top: 5px;}
 
 div.logs {
-	border: 1px solid #ccc;
-	margin: 0 0 10px 0;
-	padding: 3px 5px 5px 5px;
-	background: #fff url(../images/misc/bg-gradient-blue.png) repeat-x top left;
-	/* the gradient image has a height of some 1000 px to work around an MSEI
-	   rendering bug, which will create a blue line at the image bottom at
-	   certain zoom levels. */
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 0 0 10px 0;
+    padding: 3px 5px 5px 5px;
+    background: #fff url(../images/misc/bg-gradient-blue.png) repeat-x top left;
+    /* the gradient image has a height of some 1000 px to work around an MSEI
+       rendering bug, which will create a blue line at the image bottom at
+       certain zoom levels. */
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
 
 p.editlog { font-weight: 400; display:inline; }
 
 /* Logpic galleries */
 .picpaging {
-	text-align: right;
-	font-size: 1.2em;
-	margin: 0 0 6px 0;
+    text-align: right;
+    font-size: 1.2em;
+    margin: 0 0 6px 0;
 }
 
 .img-shadow-loggallery {
@@ -851,13 +851,13 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 .cachelist-tooltip p { margin:0; padding:0; color:rgb(50,50,50); font-size:11px; }
 
 .cachelist-popup {
-	position: absolute;
-	background-color: white;
-	font-size: 12px;
-	right: 72px;
-	padding: 5px 5px 10px 5px;
-	opacity: 0.9;
-	}
+    position: absolute;
+    background-color: white;
+    font-size: 12px;
+    right: 72px;
+    padding: 5px 5px 10px 5px;
+    opacity: 0.9;
+    }
 
 /* Pager */
 .pager { font-size:14px; }
@@ -867,8 +867,8 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 .garmintext { font-size: 1.1em; }
 
 .edit_wptable {
-	background-color:#dddddd;
-	font-size:0.85em;
+    background-color:#dddddd;
+    font-size:0.85em;
 }
 
 /* Articles */
@@ -904,7 +904,7 @@ span.percent { font-size: 11px; }
 div.floatbox { float:right; margin-left:16px; padding-left:16px;}
 
 /* Admin functions */
-.adminrestore {	color: #819ac1; }
+.adminrestore {    color: #819ac1; }
 
 /* RSS feeds */
 #blog div.newsblock { margin-left:20px }
@@ -927,40 +927,40 @@ p.html_css             { text-indent:-1.4em; margin-left:3.4em; margin-bottom:0.
 /* 9.3  Attributes           */
 /*---------------------------*/
 div#attribs1 {
-	max-width: 670px;  /* MSIE needs this */
-	padding: 0;
-	margin: 0;
+    max-width: 670px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
 }
 
 div#attribs2 {
-	max-width: 670px;  /* MSIE needs this */
-	padding: 0;
-	margin: 0;
+    max-width: 670px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
 }
 
 /* attributes on cache page */
 div.attribswide {
-	max-width: 770px;  /* MSIE needs this */
-	padding: 0;
-	margin: 0;
+    max-width: 770px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
 }
 
 div.attribgroup table {
-	border-spacing: 0px;
-	display: inline; 
+    border-spacing: 0px;
+    display: inline; 
 }
 
 div.attribgroup td {
-	padding: 3px 5px 2px 5px;
-	text-align: left;
-	font-size: 120%;
+    padding: 3px 5px 2px 5px;
+    text-align: left;
+    font-size: 120%;
 }
 
 div.attribgroup {
-	display: inline-block; 
-	margin: 0px; 
-	padding-right: 0.6em; 
-	padding-bottom: 0.6em;
+    display: inline-block; 
+    margin: 0px; 
+    padding-right: 0.6em; 
+    padding-bottom: 0.6em;
 }
 
 
@@ -968,36 +968,36 @@ div.attribgroup {
 /* 9.4  Search               */
 /*---------------------------*/
 div.searchdiv {
-	width: 94%;
-	margin: 5px;
-	padding: 5px; 	border: solid 1px rgb(219,230,241);
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    width: 94%;
+    margin: 5px;
+    padding: 5px;     border: solid 1px rgb(219,230,241);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 div.searchdiv2 {
-	margin: 12px 22px 12px 4px;
-	padding: 5px;
-	border: solid 1px #cadbea;
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+    margin: 12px 22px 12px 4px;
+    padding: 5px;
+    border: solid 1px #cadbea;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 div.searchdiv2 td {
-	line-height:1.8em;
+    line-height:1.8em;
 }
 div.searchdiv2 td.separator {
-	height: 0.5em;
+    height: 0.5em;
 }
 div.searchdiv2 td.fieldlabel {
-	line-height: 1.4em;
-	padding-top: 0.3em;
-	padding-bottom: 0.3em;
-	vertical-align: top;
+    line-height: 1.4em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    vertical-align: top;
 }
 
 .searchtable th {margin: 0px; color: #404040; padding: 4px 0px 4px 0px; empty-cells: show; text-align: left; font-size: 12px;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
@@ -1013,243 +1013,243 @@ td.search_listcolor2 { background:#f0f0f0; }
 /* 9.5  Map                  */
 /*---------------------------*/
 .maploading {
-	position: absolute;
-	float:left;
-	left: 120px;
-	top: 80px;
-	font-size: 1.6em;
-	z-index:0;
+    position: absolute;
+    float:left;
+    left: 120px;
+    top: 80px;
+    font-size: 1.6em;
+    z-index:0;
 }
 
 .mapversion {
-	position: absolute;
-	right:5px;
-	bottom:5px;
-	z-index:0;
+    position: absolute;
+    right:5px;
+    bottom:5px;
+    z-index:0;
 }
 
 .maplogin {
-	text-align:left;
-	white-space:nowrap;
-	line-height:1.3em;
+    text-align:left;
+    white-space:nowrap;
+    line-height:1.3em;
 }
 
 #ocmain div.mapform {
-	/*width: 570px;*/
-	height: 40px;
-	text-align: center;
-	vertical-align: middle;
+    /*width: 570px;*/
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 #ocmain table.mapsearch {
-	border-collapse: collapse;
-	width: 100%;
-	height:100%;
+    border-collapse: collapse;
+    width: 100%;
+    height:100%;
 }
 
 #ocmain table.mapsearch td {
-	padding: 0;
-	margin: 0;
-	border-collapse: collapse;
-	height:40px;
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    height:40px;
 }
 
 td.mapheader_spacer {
-	width:40%;
+    width:40%;
 }
 
 #fullmap .mapfilter, #smallmap .mapfilter {
-	border: solid 1px rgb(219,230,241);
-	border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	margin: 3px;
+    border: solid 1px rgb(219,230,241);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    margin: 3px;
 }
 
-#fullmap .pad10, #smallmap .pad10 {	padding: 5px; }
+#fullmap .pad10, #smallmap .pad10 {    padding: 5px; }
 
 .mapfiltertopic {
-	margin: 0px 0px 10px 0px;
-	padding: 3px 14px 2px 12px;
-	background-color: rgb(156,186,214);
-	color: rgb(255,255,255);
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 110%;
-	width: 100%;
-	white-space:nowrap;
+    margin: 0px 0px 10px 0px;
+    padding: 3px 14px 2px 12px;
+    background-color: rgb(156,186,214);
+    color: rgb(255,255,255);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 110%;
+    width: 100%;
+    white-space:nowrap;
 }
 
 .mapfiltertopic_add {
-	text-transform: none;
-	font-weight: normal;
-	font-size: 1em;
+    text-transform: none;
+    font-weight: normal;
+    font-size: 1em;
 }
 
 .mft_withcheckbox {
-	padding-left: 1px;
+    padding-left: 1px;
 }
 
 
 #ocmain input.searchfield {
-	font-size:13px;
-	width: 340px;
+    font-size:13px;
+    width: 340px;
 }
 
 #ocmain input.searchfield_fullscreen {
-	font-size:12px;
-	width: 290px;
+    font-size:12px;
+    width: 290px;
 }
 
 #ocmain div.mappermalink {
-	font-size:small;
-	position:absolute;
-	z-index:999;
-	background-color:white;
-	padding:10px;
-	right:15px;
-	opacity:0.9;
+    font-size:small;
+    position:absolute;
+    z-index:999;
+    background-color:white;
+    padding:10px;
+    right:15px;
+    opacity:0.9;
 }
 
 #ocmain div.mapselectgeocode {
-	position:relative;
-	z-index:998;
-	margin-left:147px;
-	margin-top:0px;
-	width:390px;
-	background-color:white;
+    position:relative;
+    z-index:998;
+    margin-left:147px;
+    margin-top:0px;
+    width:390px;
+    background-color:white;
 }
 
 #ocmain select.mapselectlist {
-	position:absolute;
-	display:none;
-	width:100%;
-	font-size:13px;
+    position:absolute;
+    display:none;
+    width:100%;
+    font-size:13px;
 }
 
 #ocmain select.mapselectlist_fullscreen {
-	position:absolute;
-	display:none;
-	width:100%;
+    position:absolute;
+    display:none;
+    width:100%;
 }
 
 #ocmain option.resultitem {
-	color:red;
+    color:red;
 }
 
 #ocmain div#maphidebox {
-	width: 770px;
-	border: solid 2px grey;
-	-moz-border-radius-topright: 6;
-	-moz-border-radius-bottomright: 6;
-	-moz-border-radius-topleft: 6;
-	-moz-border-radius-bottomleft: 6;
+    width: 770px;
+    border: solid 2px grey;
+    -moz-border-radius-topright: 6;
+    -moz-border-radius-bottomright: 6;
+    -moz-border-radius-topleft: 6;
+    -moz-border-radius-bottomleft: 6;
 }
 
 #ocmain div#maphidebox p {
-	margin-left: 40px;
+    margin-left: 40px;
 }
 
 #ocmain ul.maphidelist li {
-	list-style-type: none;
+    list-style-type: none;
 }
 
 #ocmain table.maphideform td {
-	vertical-align: top;
-	width: 380px;
+    vertical-align: top;
+    width: 380px;
 }
 
 div.mappopup, div.mappopup a {
-	font-family: arial, sans-serif, Tahoma, Verdana !important;
-	font-weight: normal !important;
-	font-size: 11px !important;
-	overflow: hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
+    font-family: arial, sans-serif, Tahoma, Verdana !important;
+    font-weight: normal !important;
+    font-size: 11px !important;
+    overflow: hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
 }
 
 div.mappopup { padding: 3px 0 3px 3px; }
 div.mappopup b { font-weight: bold; }
 
 table.mappopup td {
-	font-size: 11px;
-	white-space: nowrap;
+    font-size: 11px;
+    white-space: nowrap;
 }
 
 td.wppopupheader {
-	font-size:1.15em;
+    font-size:1.15em;
 }
 
 .mapboxframe {
-	border:1px solid #777777;
+    border:1px solid #777777;
 }
 
 .mapboxshadow  {
-	box-shadow: 1px 2px 3px #555;
-	-moz-box-shadow: 1px 2px 3px #555;
-	-webkit-box-shadow: 1px 2px 3px #555;
+    box-shadow: 1px 2px 3px #555;
+    -moz-box-shadow: 1px 2px 3px #555;
+    -webkit-box-shadow: 1px 2px 3px #555;
 }
 
 div.mapcoord_normalscreen {
-	position: absolute;
-	top: 106px;
-	right: 25px;
-	text-align: right;
-	margin-top: 8px;
-	color: grey;
+    position: absolute;
+    top: 106px;
+    right: 25px;
+    text-align: right;
+    margin-top: 8px;
+    color: grey;
 }
 
 div.mapcoord_fullscreen {
-	position: absolute;
-	top: 2px;
-	right: 0px;
-	padding: 1px 4px 1px 4px;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    padding: 1px 4px 1px 4px;
 }
 
 div.mapstat_fullscreen {
-	position:relative;
-	top:21px;
-	padding-right:5px;
-	text-align:right;
+    position:relative;
+    top:21px;
+    padding-right:5px;
+    text-align:right;
 }
 
 #fullmap div.toomanycaches {
-	position:absolute; 
-	left: 140px;
-	top: 80px;
-	border: 1px solid rgb(0,0,60);
-	opacity: 0.7;
-	background: #0035FF;
-	padding:5px 5px 5px 5px;
+    position:absolute; 
+    left: 140px;
+    top: 80px;
+    border: 1px solid rgb(0,0,60);
+    opacity: 0.7;
+    background: #0035FF;
+    padding:5px 5px 5px 5px;
 }
 
 #smallmap div.toomanycaches {
-	position:absolute; 
-	left: 60px;
-	top: 30px;
-	border: 1px solid rgb(0,0,60);
-	opacity: 0.7;
-	background: #0035FF;
-	padding:5px 5px 5px 5px;
+    position:absolute; 
+    left: 60px;
+    top: 30px;
+    border: 1px solid rgb(0,0,60);
+    opacity: 0.7;
+    background: #0035FF;
+    padding:5px 5px 5px 5px;
 }
 
 div.toomanycaches td {
-	width: 250px;
-	color: white;
-	text-align:center;
-	font-size:13px;
-	line-height:1.3em;
+    width: 250px;
+    color: white;
+    text-align:center;
+    font-size:13px;
+    line-height:1.3em;
 }
 
 div.mapoptions {
-	position:absolute;
-	right:100px;
-	top: 80px;
-	opacity: 0.9;
-	background: #FFFFFF;
-	padding:10px 10px 10px 10px;
+    position:absolute;
+    right:100px;
+    top: 80px;
+    opacity: 0.9;
+    background: #FFFFFF;
+    padding:10px 10px 10px 10px;
 }
 
 div.mapoptions td {
-	padding:6px;
+    padding:6px;
 }
 
 /* GM POI InfoWindows */

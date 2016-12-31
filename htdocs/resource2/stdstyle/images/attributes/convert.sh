@@ -2,30 +2,30 @@
 
 function convertRound
 {
-	rm -f "$1-disabled.png"
-	rm -f "$1-no.png"
+    rm -f "$1-disabled.png"
+    rm -f "$1-no.png"
 
-	cp "$1.png" "$1-disabled.png"
-	mogrify -modulate 150,0 "$1-disabled.png"
-	composite -compose src-over -geometry +0+0 "cross-35x35-round.png" "$1-disabled.png" "$1-no.png"
+    cp "$1.png" "$1-disabled.png"
+    mogrify -modulate 150,0 "$1-disabled.png"
+    composite -compose src-over -geometry +0+0 "cross-35x35-round.png" "$1-disabled.png" "$1-no.png"
 }
 function convertTriangle
 {
-	rm -f "$1-disabled.png"
-	rm -f "$1-no.png"
+    rm -f "$1-disabled.png"
+    rm -f "$1-no.png"
 
-	cp "$1.png" "$1-disabled.png"
-	mogrify -modulate 100,0 "$1-disabled.png"
-	composite -compose src-over -geometry +0+0 "cross-40x35-triangle.png" "$1-disabled.png" "$1-no.png"
+    cp "$1.png" "$1-disabled.png"
+    mogrify -modulate 100,0 "$1-disabled.png"
+    composite -compose src-over -geometry +0+0 "cross-40x35-triangle.png" "$1-disabled.png" "$1-no.png"
 }
 function convertRectangle
 {
-	rm -f "$1-disabled.png"
-	rm -f "$1-no.png"
+    rm -f "$1-disabled.png"
+    rm -f "$1-no.png"
 
-	cp "$1.png" "$1-disabled.png"
-	mogrify -modulate 150,0 "$1-disabled.png"
-	composite -compose src-over -geometry +0+0 "cross-35x35-rectangle.png" "$1-disabled.png" "$1-no.png"
+    cp "$1.png" "$1-disabled.png"
+    mogrify -modulate 150,0 "$1-disabled.png"
+    composite -compose src-over -geometry +0+0 "cross-35x35-rectangle.png" "$1-disabled.png" "$1-no.png"
 }
 
 #convertRound "aircraft"
@@ -55,7 +55,7 @@ function convertRectangle
 #convertRound "wwwlink"
 #convertRound "day"
 
-# automatische konvertierung nicht möglich
+# automatische konvertierung nicht mï¿½glich
 #convertRound "bicycles"
 #convertRound "campfires"
 #convertRound "camping"

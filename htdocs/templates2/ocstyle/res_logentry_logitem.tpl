@@ -1,7 +1,5 @@
 {***************************************************************************
 *  You can find the license in the docs directory
-*
-*  Unicode Reminder メモ
 ***************************************************************************}
 <div id="log{$logItem.id}" style="clear:both">
 {if isset($logItem.newcoord) && (!$morelogs || $logItem.type)}

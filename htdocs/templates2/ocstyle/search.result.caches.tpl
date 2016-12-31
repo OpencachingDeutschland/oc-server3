@@ -1,8 +1,6 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder メモ
-*
 *  Output formatter for the 'html' search option:
 *  Show search results.
 ***************************************************************************}

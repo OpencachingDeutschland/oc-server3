@@ -157,7 +157,7 @@ if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid']
 
 // prepare editor and editing
 if ($descMode == 3) {
-    $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+    $tpl->add_header_javascript('resource2/tinymce/tinymce.min.js');
     $tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang=' . strtolower($opt['template']['locale']));
 }
 $tpl->add_header_javascript(editorJsPath());

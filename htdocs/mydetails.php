@@ -187,7 +187,7 @@ function assignFromDB($userid, $include_editor)
             }
         }
         if ($descMode == 3) {
-            $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+            $tpl->add_header_javascript('resource2/tinymce/tinymce.min.js');
             $tpl->add_header_javascript(
                 'resource2/tinymce/config/user.js.php?lang=' . strtolower($opt['template']['locale'])
             );

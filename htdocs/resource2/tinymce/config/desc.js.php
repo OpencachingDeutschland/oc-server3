@@ -9,18 +9,11 @@ if (isset($_REQUEST['lang'])) {
     $lang = $_REQUEST['lang'];
 }
 ?>
-tinyMCE_GZ.init({
-    plugins : 'advhr,contextmenu,emotions,insertdatetime,paste,table',
-    themes : 'advanced',
-    languages : '<?php echo $lang; ?>',
-    disk_cache : true,
-    debug : false
-});
-tinyMCE.init({
+tinymce.init({
     mode : "textareas",
-    theme : "advanced",
+    theme : "modern",
 
-    plugins : "advhr,contextmenu,emotions,insertdatetime,paste,table",
+    plugins : "contextmenu,insertdatetime,paste,table",
 
     theme_advanced_buttons1 : "cut,copy,paste,pasteword,pastetext,removeformat,separator,undo,redo,separator,link,unlink,image,separator,fontselect,fontsizeselect",
     theme_advanced_buttons2 : "bold,italic,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,bullist,numlist,separator,insertdate,inserttime,separator,forecolor,backcolor,charmap,emotions",

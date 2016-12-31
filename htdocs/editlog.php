@@ -456,7 +456,7 @@ if ($error == false) {
                         tpl_set_var('descMode', 2);
                     } else {
                         // TinyMCE
-                        $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
+                        $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tinymce.min.js"></script>' . "\n";
                         $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang=' .
                             strtolower(
                                 $locale

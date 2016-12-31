@@ -62,3 +62,4 @@ htdocs/app/Resources/translations
 /*.msi
 /*.log
 /*.cab
+/htdocs/translations.zip

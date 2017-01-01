@@ -1,8 +1,6 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder メモ
-*
 *  Main template for "navigation frame" of all pages
 ***************************************************************************}
 {* OCSTYLE *}

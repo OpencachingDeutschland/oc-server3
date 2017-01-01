@@ -1,34 +1,34 @@
 #statusBox {
     position: relative;
-	height: 30px;
-	background-color: #B0CC99;
-	border: 5px outset #046380;
-	padding: 10px;
-	width: 505px;
+    height: 30px;
+    background-color: #B0CC99;
+    border: 5px outset #046380;
+    padding: 10px;
+    width: 505px;
 }
 
 #deviceBox {
     position: relative;
-	border: 5px outset #046380;
-	background-color: #677E52;
-	width: 505px;
-	padding: 10px;
+    border: 5px outset #046380;
+    background-color: #677E52;
+    width: 505px;
+    padding: 10px;
 }
 
 #readBox {
     position: relative;
-	border: 5px outset #046380;
-	background-color: #B7CA79;
-	padding: 10px;
+    border: 5px outset #046380;
+    background-color: #B7CA79;
+    padding: 10px;
     width: 505px;
 }
 
 #writeBox {
     position: relative;
-	border: 5px outset #046380;
-	background-color: #F6E8B1;
-	padding: 10px;
-	width: 505px;
+    border: 5px outset #046380;
+    background-color: #F6E8B1;
+    padding: 10px;
+    width: 505px;
 }
 
 #readBox textarea, #writeBox textarea {
@@ -36,8 +36,8 @@
 }
 
 #readMap {
-	width: 400px;
-	height: 400px;
+    width: 400px;
+    height: 400px;
 }
 
 #progressBar {

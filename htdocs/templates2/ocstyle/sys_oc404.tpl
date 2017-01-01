@@ -1,7 +1,5 @@
 {***************************************************************************
 *  You can find the license in the docs directory
-*
-*  Unicode Reminder メモ
 ***************************************************************************}
 {*
  * Template for opencaching.de "page not found" and entry page

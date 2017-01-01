@@ -1,8 +1,6 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder メモ
-*
 *  select on of multiple locations which matched on a location search
 ***************************************************************************}
 

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/lib2/web.inc.php';
@@ -26,11 +25,11 @@ $tpl->assign('isRedirect404', $isRedirect404);
 // determine website url, if is 404 redirection
 if ($isRedirect404) {
     // check length
-    $uril = 70;
+    $uriLength = 70;
     $uri = 'http://' . strtolower($_SERVER['SERVER_NAME']) . $_SERVER['REQUEST_URI'];
-    // limit to $uril
-    if (strlen($uri) > $uril) {
-        $uri = substr($uri, 0, $uril - 3) . '...';
+    // limit to $uriLength
+    if (strlen($uri) > $uriLength) {
+        $uri = substr($uri, 0, $uriLength - 3) . '...';
     }
 
     // assign uri

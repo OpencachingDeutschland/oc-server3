@@ -7,15 +7,29 @@ use okapi\Okapi;
 echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 
 ?>
-<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0" creator="OKAPI ver. <?= $vars['installation']['okapi_version_number'] ?> (rev. <?= $vars['installation']['okapi_git_revision'] ?>)"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="
-http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd
-http://www.opencaching.com/xmlschemas/opencaching/1/0 https://raw.githubusercontent.com/opencaching/okapi/master/etc/nsox.xsd
-http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd
-http://geocaching.com.au/geocache/1 http://geocaching.com.au/geocache/1/geocache.xsd
-http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
-">
+<gpx
+    version="1.0"
+    creator="OKAPI ver. <?= $vars['installation']['okapi_version_number'] ?> (rev. <?= $vars['installation']['okapi_git_revision'] ?>)"
+    xmlns="http://www.topografix.com/GPX/1/0"
+
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1"
+    xmlns:ox="http://www.opencaching.com/xmlschemas/opencaching/1/0"
+    xmlns:gsak="http://www.gsak.net/xmlv1/5"
+    xsi:schemaLocation="
+        http://www.topografix.com/GPX/1/0
+        http://www.topografix.com/GPX/1/0/gpx.xsd
+
+        http://www.groundspeak.com/cache/1/0/1
+        http://www.groundspeak.com/cache/1/0/1/cache.xsd
+
+        http://www.opencaching.com/xmlschemas/opencaching/1/0
+        https://raw.githubusercontent.com/opencaching/okapi/master/etc/nsox.xsd
+
+        http://www.gsak.net/xmlv1/5
+        http://www.gsak.net/xmlv1/5/gsak.xsd
+    "
+>
     <name><?= $vars['installation']['site_name'] ?> Geocache Search Results</name>
     <desc><?= $vars['installation']['site_name'] ?> Geocache Search Results, downloaded via OKAPI - <?= $vars['installation']['okapi_base_url'] . ($vars['alt_wpts'] && $vars['ns_gsak'] ? ' (HasChildren)' : '') ?></desc>
     <author><?= $vars['installation']['site_name'] ?></author>
@@ -41,7 +55,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
             <sym><?= ($vars['mark_found'] && $c['is_found']) ? "Geocache Found" : "Geocache" ?></sym>
             <type>Geocache|<?= $vars['cache_GPX_types'][$c['type']] ?></type>
             <?php if ($vars['ns_ground']) { /* Does user want us to include Groundspeak's <cache> element? */ ?>
-                <groundspeak:cache archived="<?= ($c['status'] == 'Archived') ? "True" : "False" ?>" available="<?= ($c['status'] == 'Available') ? "True" : "False" ?>" id="<?= $c['internal_id'] ?>" xmlns:groundspeak="http://www.groundspeak.com/cache/1/0/1">
+                <groundspeak:cache archived="<?= ($c['status'] == 'Archived') ? "True" : "False" ?>" available="<?= ($c['status'] == 'Available') ? "True" : "False" ?>" id="<?= $c['internal_id'] ?>">
                     <groundspeak:name><?= Okapi::xmlescape(isset($c['name_2']) ? $c['name_2'] : $c['name']) ?></groundspeak:name>
                     <groundspeak:placed_by><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:placed_by>
                     <groundspeak:owner id="<?= $vars['user_uuid_to_internal_id'][$c['owner']['uuid']] ?>"><?= Okapi::xmlescape($c['owner']['username']) ?></groundspeak:owner>
@@ -165,7 +179,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
                 </groundspeak:cache>
             <?php } ?>
             <?php if ($vars['ns_ox']) { /* Does user want us to include Garmin's <opencaching> element? */ ?>
-                <ox:opencaching xmlns:ox="http://www.opencaching.com/xmlschemas/opencaching/1/0">
+                <ox:opencaching>
                     <ox:ratings>
                         <?php if ($c['rating'] !== null) { ?><ox:awesomeness><?= $c['rating'] ?></ox:awesomeness><?php } ?>
                         <ox:difficulty><?= $c['difficulty'] ?></ox:difficulty>
@@ -214,7 +228,7 @@ http://www.gsak.net/xmlv1/5 http://www.gsak.net/xmlv1/5/gsak.xsd
                     <sym><?= $wpt['sym'] ?></sym>
                     <type>Waypoint|<?= $wpt['sym'] ?></type>
                     <?php if ($vars['ns_gsak']) { ?>
-                        <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/5">
+                        <gsak:wptExtension>
                             <gsak:Parent><?= $c['code'] ?></gsak:Parent>
                         </gsak:wptExtension>
                     <?php } ?>

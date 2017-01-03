@@ -1,7 +1,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Javascript toolbox; browser-idependend functions
  ***************************************************************************/
@@ -13,34 +12,34 @@
 
 function getClientWidth()
 {
-	if (typeof(window.innerWidth) == 'number')
-		return window.innerWidth;  // Non-IE
-	else
-		return Math.max(document.documentElement.clientWidth, document.body.clientWidth);  // IE
+    if (typeof(window.innerWidth) == 'number')
+        return window.innerWidth;  // Non-IE
+    else
+        return Math.max(document.documentElement.clientWidth, document.body.clientWidth);  // IE
 }
 
 function getClientHeight()
 {
-	if (typeof(window.innerHeight) == 'number')
-		return window.innerHeight;  // Non-IE
-	else
-		return Math.max(document.documentElement.clientHeight, document.body.clientHeight);  // IE
+    if (typeof(window.innerHeight) == 'number')
+        return window.innerHeight;  // Non-IE
+    else
+        return Math.max(document.documentElement.clientHeight, document.body.clientHeight);  // IE
 }
 
 function getScrollX()
 {
-	if (typeof(window.pageXOffset) == 'number')
-		return window.pageXOffset;  // Non-IE
-	else
-		return Math.max(document.body.scrollLeft, document.documentElement.scrollLeft);  // IE
+    if (typeof(window.pageXOffset) == 'number')
+        return window.pageXOffset;  // Non-IE
+    else
+        return Math.max(document.body.scrollLeft, document.documentElement.scrollLeft);  // IE
 }
 
 function getScrollY()
 {
-	if (typeof(window.pageYOffset) == 'number')
-		return window.pageYOffset;  // Non-IE
-	else
-		return Math.max(document.body.scrollTop, document.documentElement.scrollTop);  // IE
+    if (typeof(window.pageYOffset) == 'number')
+        return window.pageYOffset;  // Non-IE
+    else
+        return Math.max(document.body.scrollTop, document.documentElement.scrollTop);  // IE
 }
 
 
@@ -50,12 +49,12 @@ function getScrollY()
 
 function getDocHeight()
 {
-	var D = document;
-	return Math.max(
-		D.body.scrollHeight, D.documentElement.scrollHeight,
-		D.body.offsetHeight, D.documentElement.offsetHeight,
-		D.body.clientHeight, D.documentElement.clientHeight
-	);
+    var D = document;
+    return Math.max(
+        D.body.scrollHeight, D.documentElement.scrollHeight,
+        D.body.offsetHeight, D.documentElement.offsetHeight,
+        D.body.clientHeight, D.documentElement.clientHeight
+    );
 }
 
 
@@ -63,8 +62,8 @@ function getDocHeight()
 
 function scrolledToBottom(tolerance)
 {
-	// alert(getScrollY() + " " + getClientHeight() + " " + getDocHeight());
-	return getScrollY() + getClientHeight() + tolerance >= getDocHeight();
+    // alert(getScrollY() + " " + getClientHeight() + " " + getDocHeight());
+    return getScrollY() + getClientHeight() + tolerance >= getDocHeight();
 }
 
 
@@ -73,29 +72,29 @@ function scrolledToBottom(tolerance)
 
 function createXMLHttp()
 {
-	if (typeof XMLHttpRequest != 'undefined')
-		return new XMLHttpRequest();
-	else if (window.ActiveXObject)
-	{
-		var avers = ["Microsoft.XmlHttp", "MSXML2.XmlHttp","MSXML2.XmlHttp.3.0", "MSXML2.XmlHttp.4.0","MSXML2.XmlHttp.5.0"];
-		for (var i = avers.length -1; i >= 0; i--)
-		{
-			try
-			{
-				httpObj = new ActiveXObject(avers[i]);
-				return httpObj;
-			}
-			catch(e)
-			{
-			}
-		}
-	}
-	return null;
+    if (typeof XMLHttpRequest != 'undefined')
+        return new XMLHttpRequest();
+    else if (window.ActiveXObject)
+    {
+        var avers = ["Microsoft.XmlHttp", "MSXML2.XmlHttp","MSXML2.XmlHttp.3.0", "MSXML2.XmlHttp.4.0","MSXML2.XmlHttp.5.0"];
+        for (var i = avers.length -1; i >= 0; i--)
+        {
+            try
+            {
+                httpObj = new ActiveXObject(avers[i]);
+                return httpObj;
+            }
+            catch(e)
+            {
+            }
+        }
+    }
+    return null;
 }
 
 function toggleChecks(source, elementName) {
-	var checkboxes = document.getElementsByName(elementName);
-	for (var i = 0, n = checkboxes.length; i < n; i++) {
-		checkboxes[i].checked = source.checked;
-	}
+    var checkboxes = document.getElementsByName(elementName);
+    for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+    }
 }

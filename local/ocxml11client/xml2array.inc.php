@@ -2,12 +2,10 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 class xml2Array
 {
-
     public $stack = [];
     public $stack_ref;
     public $arrOutput = [];
@@ -31,7 +29,6 @@ class xml2Array
      */
     public function parse($strInputXML)
     {
-
         $this->resParser = xml_parser_create("UTF-8");
         xml_set_object($this->resParser, $this);
         xml_set_element_handler($this->resParser, "tagOpen", "tagClosed");

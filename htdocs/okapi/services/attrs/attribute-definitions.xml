@@ -38,9 +38,10 @@ It also defines attribute names and descriptions in several languages.
     -->
 
     <attr acode="A1" categories="de-listing">
-        <opencaching schema="OCDE" id="6"/>
-        <opencaching schema="OCNL" id="6"/>
-        <opencaching schema="OCRO" id="6"/>
+        <opencaching schema="OCDE" id="6" />
+        <opencaching schema="OCNL" id="6" />
+        <opencaching schema="OCRO" id="6" />
+        <opencaching schema="OCUK" id="6" />
         <lang id="en">
             <name>Listed at Opencaching only</name>
             <desc>
@@ -71,7 +72,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Exclusiv Opencaching</name>
             <desc>
-                Această geocutie este publicată exclusiv pe Opencaching. Nu este publicată pe nici un 
+                Această geocutie este publicată exclusiv pe Opencaching. Nu este publicată pe nici un
                 alt site de geocaching.
             </desc>
         </lang>
@@ -96,8 +97,8 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A2" categories="de-cache-types">
         <opencaching schema="OCPL" id="54" />
-        <opencaching schema="OCRO" id="54"/>
         <opencaching schema="OCNL" id="54" />
+        <opencaching schema="OCRO" id="54" />
         <lang id="en">
             <name>Near a Survey Marker</name>
             <desc>
@@ -134,7 +135,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A3" categories="de-cache-types">
         <opencaching schema="OCPL" id="55" />
-        <opencaching schema="OCRO" id="55"/>
+        <opencaching schema="OCRO" id="55" />
         <lang id="en">
             <name>Wherigo Cache</name>
             <desc>
@@ -171,10 +172,11 @@ It also defines attribute names and descriptions in several languages.
     </attr>
 
     <attr acode="A4" categories="de-cache-types">
-        <opencaching schema="OCPL" id="56" />
-        <opencaching schema="OCRO" id="56"/>
         <opencaching schema="OCDE" id="8" />
+        <opencaching schema="OCPL" id="56" />
         <opencaching schema="OCNL" id="56" />
+        <opencaching schema="OCRO" id="8" />
+        <opencaching schema="OCUK" id="8" />
         <lang id="en">
             <name>Letterbox Cache</name>
             <desc>
@@ -214,7 +216,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Geocutie poştală</name>
             <desc>
-                În cutie vei găsi o ştampilă cu care să faci o însemnare în propriul tău 
+                În cutie vei găsi o ştampilă cu care să faci o însemnare în propriul tău
                 carneţel, iar jurnalul din cutie să-l semnezi cu propria ta ştampilă.
                 Atenţie să nu amesteci ştampilele!
             </desc>
@@ -240,7 +242,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A5" categories="de-cache-types">
         <opencaching schema="OCPL" id="43" />
-        <opencaching schema="OCRO" id="43"/>
+        <opencaching schema="OCRO" id="43" />
         <opencaching schema="OCNL" id="43" />
         <lang id="en">
             <name>GeoHotel Cache</name>
@@ -360,7 +362,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A8" categories="de-cache-types">
         <opencaching schema="OCPL" id="51" />
-        <opencaching schema="OCRO" id="51"/>
+        <opencaching schema="OCRO" id="51" />
         <lang id="en">
             <name>Offset cache</name>
             <desc>
@@ -399,7 +401,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A9" categories="de-cache-types">
         <groundspeak id="60" inc="true" name="Wireless Beacon" />
         <opencaching schema="OCPL" id="52" />
-        <opencaching schema="OCRO" id="52"/>
+        <opencaching schema="OCRO" id="52" />
         <opencaching schema="OCNL" id="52" />
         <lang id="en">
             <name>Garmin's wireless beacon</name>
@@ -437,7 +439,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A10" categories="de-cache-types">
         <opencaching schema="OCPL" id="53" />
-        <opencaching schema="OCRO" id="53"/>
+        <opencaching schema="OCRO" id="53" />
         <opencaching schema="OCNL" id="53" />
         <lang id="en">
             <name>Dead Drop USB cache</name>
@@ -478,7 +480,7 @@ It also defines attribute names and descriptions in several languages.
             <name>Dead Drop USB</name>
             <desc>
                 Geocutia este o memorie USB fixată undeva. Aceasta conţine un fişiser
-                README.txt cu descrierea si un fisier LOGBOOK.txt în care poţi să scrii 
+                README.txt cu descrierea si un fisier LOGBOOK.txt în care poţi să scrii
                 despre vizita ta.
             </desc>
         </lang>
@@ -486,6 +488,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A11" categories="de-cache-types">
         <opencaching schema="OCDE" id="31" />
+        <opencaching schema="OCUK" id="31" />
         <lang id="en">
             <name>Has a moving target</name>
             <desc>
@@ -529,6 +532,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A12" categories="de-cache-types">
         <opencaching schema="OCDE" id="32" />
+        <opencaching schema="OCUK" id="32" />
         <lang id="en">
             <name>a webcam is involved</name>
             <desc>
@@ -571,6 +575,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A13" categories="de-cache-types">
         <opencaching schema="OCDE" id="57" />
+        <opencaching schema="OCUK" id="57" />
         <lang id="en">
             <name>Other cache type</name>
             <desc>
@@ -602,6 +607,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A14" categories="de-preconditions">
         <opencaching schema="OCDE" id="54" />
+        <opencaching schema="OCUK" id="54" />
         <lang id="en">
             <name>Investigation required</name>
             <desc>
@@ -633,10 +639,12 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="47" inc="true" name="Field puzzle" />
         <opencaching schema="OCDE" id="55" />
         <opencaching schema="OCRO" id="155" />
+        <opencaching schema="OCUK" id="155" />
         <lang id="en">
-            <name>Puzzle / Mystery</name>
+            <name>Field Puzzle / Mystery</name>
             <desc>
-                Puzzles or mysteries have to be solved before or while seeking this cache.
+                This puzzle or mystery has to be solved (at least in part) in the field, 
+                by visiting the starting coordinates or the places mentioned in the description.
             </desc>
         </lang>
         <lang id="de">
@@ -668,11 +676,12 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A16" categories="de-preconditions">
         <opencaching schema="OCDE" id="56" />
+        <opencaching schema="OCUK" id="56" />
         <lang id="en">
-            <name>Arithmetical problem</name>
+            <name>Mathematical problem</name>
             <desc>
-                Before or while seeking this cache, arithmetical problems must be solved
-                which go beyond very basic calculations.
+                Before or while searching for this cache you will have to solve 
+                some mathematical problem that goes beyond basic arithmetic calculus.
             </desc>
         </lang>
         <lang id="de">
@@ -701,6 +710,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A17" categories="de-preconditions">
         <opencaching schema="OCDE" id="58" />
+        <opencaching schema="OCUK" id="58" />
         <lang id="en">
             <name>Ask owner for start conditions</name>
             <desc>
@@ -732,8 +742,8 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A18" categories="de-accessibility">
         <groundspeak id="24" inc="true" name="Wheelchair accessible" />
         <opencaching schema="OCPL" id="44" />
-        <opencaching schema="OCRO" id="44"/>
         <opencaching schema="OCNL" id="44" />
+        <opencaching schema="OCRO" id="44" />
         <lang id="en">
             <name>Wheelchair accessible</name>
             <desc>
@@ -772,6 +782,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A19" categories="de-accessibility">
         <groundspeak id="53" inc="true" name="Park and grab" />
         <opencaching schema="OCDE" id="24" />
+        <opencaching schema="OCUK" id="24" />
         <lang id="en">
             <name>Near the parking area</name>
             <desc>
@@ -801,7 +812,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A20" categories="de-accessibility">
         <opencaching schema="OCPL" id="84" />
-        <opencaching schema="OCRO" id="84"/>
+        <opencaching schema="OCRO" id="84" />
         <opencaching schema="OCNL" id="84" />
         <lang id="en">
             <name>Access only by walk</name>
@@ -834,6 +845,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="25" />
         <opencaching schema="OCNL" id="25" />
         <opencaching schema="OCRO" id="25" />
+        <opencaching schema="OCUK" id="25" />
         <lang id="en">
             <name>Long walk</name>
             <desc>
@@ -876,7 +888,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Excursie</name>
             <desc>
-                Pentru a ajunge la geocutie este necesar să mergi pe jos o distanţă lungă, 
+                Pentru a ajunge la geocutie este necesar să mergi pe jos o distanţă lungă,
                 de regulă peste 5km dus-întors. În zonele montane distanţa poate fi mai scurtă,
                 dar şi traseul mai dificil. Se recomandă încălţăminte şi echipament adecvat, după caz.
             </desc>
@@ -886,6 +898,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A22" categories="de-accessibility">
         <groundspeak id="11" inc="true" name="May require wading" />
         <opencaching schema="OCDE" id="26" />
+        <opencaching schema="OCUK" id="26" />
         <lang id="en">
             <name>Swamp, marsh or wading</name>
             <desc>
@@ -922,6 +935,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A23" categories="de-accessibility">
         <opencaching schema="OCDE" id="27" />
+        <opencaching schema="OCUK" id="27" />
         <lang id="en">
             <name>Hilly area</name>
             <desc>
@@ -952,6 +966,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A24" categories="de-accessibility">
         <groundspeak id="10" inc="true" name="Difficult climbing" />
         <opencaching schema="OCDE" id="28" />
+        <opencaching schema="OCUK" id="28" />
         <lang id="en">
             <name>Some climbing (no gear needed)</name>
             <desc>
@@ -993,6 +1008,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A25" categories="de-accessibility">
         <groundspeak id="12" inc="true" name="May require swimming" />
         <opencaching schema="OCDE" id="29" />
+        <opencaching schema="OCUK" id="29" />
         <lang id="en">
             <name>Swimming required</name>
             <desc>
@@ -1030,6 +1046,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A26" categories="de-accessibility">
         <groundspeak id="2" inc="true" name="Access or parking fee" />
         <opencaching schema="OCDE" id="36" />
+        <opencaching schema="OCUK" id="36" />
         <lang id="en">
             <name>Access or parking fee</name>
             <desc>
@@ -1060,7 +1077,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A27" categories="de-accessibility">
         <groundspeak id="32" inc="true" name="Bicycles" />
         <opencaching schema="OCPL" id="85" />
-        <opencaching schema="OCRO" id="85"/>
+        <opencaching schema="OCRO" id="85" />
         <opencaching schema="OCNL" id="85" />
         <lang id="en">
             <name>Bikes allowed</name>
@@ -1096,8 +1113,8 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A28" categories="de-location">
         <opencaching schema="OCPL" id="60" />
-        <opencaching schema="OCRO" id="60"/>
         <opencaching schema="OCNL" id="60" />
+        <opencaching schema="OCRO" id="60" />
         <lang id="en">
             <name>Hidden in natural surroundings (forests, mountains, etc.)</name>
             <desc>
@@ -1135,8 +1152,8 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A29" categories="de-location">
         <opencaching schema="OCPL" id="61" />
-        <opencaching schema="OCRO" id="61"/>
         <opencaching schema="OCNL" id="61" />
+        <opencaching schema="OCRO" id="61" />
         <lang id="en">
             <name>Historic site</name>
             <desc>
@@ -1176,6 +1193,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A30" categories="de-location">
         <opencaching schema="OCDE" id="30" />
+        <opencaching schema="OCUK" id="30" />
         <lang id="en">
             <name>Point of interest</name>
             <desc>
@@ -1188,7 +1206,7 @@ It also defines attribute names and descriptions in several languages.
             <name>interessanter Ort</name>
             <desc>
                 Der Geocache ist in unmittelbarer Nähe zu einer Sehenswürdigkeit
-                versteckt. Das kann ein z.B. schöner Aussichtspunkt oder eine größere
+                versteckt. Das kann z.B. ein schöner Aussichtspunkt oder eine größere
                 Burgruine sein. Ein Besuch würde sich auch ohne besonderen Anlass
                 (den Geocache) lohnen.
             </desc>
@@ -1210,11 +1228,25 @@ It also defines attribute names and descriptions in several languages.
         </lang>
         <lang id="nl">
             <name>Interesante plek</name>
+            <desc>
+                Er is een bezienswaardigheid in de cache, als een leuke schilderachtige uitzicht
+                of een groter kasteelruïne. Deze plek is een bezoek aan het nog de moeite waard
+                zonder een nabijgelegen geocache.
+            </desc>
+        </lang>
+        <lang id="ro">
+            <name>Punct de interes</name>
+            <desc>
+                Geocutia se află lângă un punct de interes, precum
+                un loc de belvedere, ruina unui castel, etc. Locul merită vizitat
+                chiar şi dacă nu ar fi o geocutie în apropiere.
+            </desc>
         </lang>
     </attr>
 
     <attr acode="A31" categories="de-location">
         <opencaching schema="OCDE" id="33" />
+        <opencaching schema="OCUK" id="33" />
         <lang id="en">
             <name>Hidden wihin enclosed rooms (caves, buildings etc.)</name>
             <desc>
@@ -1247,6 +1279,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A32" categories="de-location">
         <opencaching schema="OCDE" id="34" />
+        <opencaching schema="OCUK" id="34" />
         <lang id="en">
             <name>Hidden under water</name>
             <desc>
@@ -1282,6 +1315,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="18" />
         <opencaching schema="OCNL" id="18" />
         <opencaching schema="OCRO" id="18" />
+        <opencaching schema="OCUK" id="18" />
         <lang id="en">
             <name>Parking area nearby</name>
             <desc>
@@ -1326,6 +1360,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A34" categories="de-facilities">
         <groundspeak id="26" inc="true" name="Public transportation" />
         <opencaching schema="OCDE" id="19" />
+        <opencaching schema="OCUK" id="19" />
         <lang id="en">
             <name>Public transportation</name>
             <desc>
@@ -1359,7 +1394,8 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A35" categories="de-facilities">
         <groundspeak id="27" inc="true" name="Drinking water nearby" />
         <opencaching schema="OCDE" id="20" />
-        <opencaching schema="OCRO" id="120" />
+        <opencaching schema="OCRO" id="20" />
+        <opencaching schema="OCUK" id="20" />
         <lang id="en">
             <name>Drinking water nearby</name>
             <desc>
@@ -1397,7 +1433,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Apă potabilă</name>
             <desc>
-                Pe traseu sau în apropierea geocutiei există o sursă de apă potabilă, 
+                Pe traseu sau în apropierea geocutiei există o sursă de apă potabilă,
                 de ex. un izvor.
             </desc>
         </lang>
@@ -1406,6 +1442,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A36" categories="de-facilities">
         <groundspeak id="28" inc="true" name="Public restrooms nearby" />
         <opencaching schema="OCDE" id="21" />
+        <opencaching schema="OCUK" id="21" />
         <lang id="en">
             <name>Public restrooms nearby</name>
             <desc>
@@ -1437,6 +1474,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A37" categories="de-facilities">
         <groundspeak id="29" inc="true" name="Telephone nearby" />
         <opencaching schema="OCDE" id="22" />
+        <opencaching schema="OCUK" id="22" />
         <lang id="en">
             <name>Public phone nearby</name>
             <desc>
@@ -1466,6 +1504,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A38" categories="de-facilities">
         <opencaching schema="OCDE" id="23" />
+        <opencaching schema="OCUK" id="23" />
         <lang id="en">
             <name>First aid available</name>
             <desc>
@@ -1501,6 +1540,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="38" />
         <opencaching schema="OCNL" id="38" />
         <opencaching schema="OCRO" id="38" />
+        <opencaching schema="OCUK" id="38" />
         <lang id="en">
             <name>Available 24/7</name>
             <desc>
@@ -1543,8 +1583,9 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="13" inc="false" name="Available at all times" />
         <opencaching schema="OCDE" id="39" />
         <opencaching schema="OCNL" id="39" />
+        <opencaching schema="OCUK" id="39" />
         <lang id="en">
-            <name>Not 24/7</name>
+            <name>Not available 24/7</name>
             <desc>
                 This cache can only be done at certain times of day or week - see the cache
                 description for more details. For example, the cache may be placed in an
@@ -1592,6 +1633,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A41" categories="de-time-and-seasons">
         <groundspeak id="14" inc="false" name="Recommended at night" />
         <opencaching schema="OCDE" id="40" />
+        <opencaching schema="OCUK" id="40" />
         <lang id="en">
             <name>Not recommended at night</name>
             <desc>
@@ -1630,7 +1672,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A42" categories="de-time-and-seasons">
         <groundspeak id="14" inc="true" name="Recommended at night" />
         <opencaching schema="OCPL" id="91" />
-        <opencaching schema="OCRO" id="91"/>
+        <opencaching schema="OCRO" id="91" />
         <opencaching schema="OCNL" id="91" />
         <lang id="en">
             <name>Recommended at night</name>
@@ -1659,8 +1701,8 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Recomandată noaptea</name>
             <desc>
-                Se recomandă să cauţi această cutie noaptea. De obicei ai nevoie de 
-                o lanternă pentru a indentifica indicii reflectorizante care nu sunt 
+                Se recomandă să cauţi această cutie noaptea. De obicei ai nevoie de
+                o lanternă pentru a indentifica indicii reflectorizante care nu sunt
                 vizibile distinct ziua.
             </desc>
         </lang>
@@ -1669,10 +1711,11 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A43" categories="de-time-and-seasons">
         <groundspeak id="52" inc="true" name="Night Cache" />
         <opencaching schema="OCDE" id="1" />
+        <opencaching schema="OCUK" id="1" />
         <lang id="en">
             <name>Only at night</name>
             <desc>
-                This geocache can be found at night only - it is a so-called night cache.
+                This geocache can only be found at night - it is a so-called night cache.
                 There may be reflectors which have to be flashlighted and will point
                 to the hiding place, or other special night-caching mechanisms.
             </desc>
@@ -1708,6 +1751,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A44" categories="de-time-and-seasons">
         <groundspeak id="62" inc="false" name="Seasonal access" />
         <opencaching schema="OCDE" id="42" />
+        <opencaching schema="OCUK" id="42" />
         <lang id="en">
             <name>All seasons</name>
             <desc>
@@ -1773,12 +1817,14 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A46" categories="de-time-and-seasons">
         <opencaching schema="OCDE" id="43" />
+        <opencaching schema="OCUK" id="43" />
         <lang id="en">
-            <name>Breeding season / protected nature</name>
+            <name>Nature preserve / Breeding season</name>
             <desc>
+                May be located inside a nature preserve area, so pay attention 
+                to the local terms and signs regarding nature protection.
                 Don’t seek this cache during animal breeding season! See the cache
-                description on which time of year must be avoided. Also, pay
-                attention to the local terms and signs regarding nature protection.
+                description on which time of year must be avoided. 
             </desc>
         </lang>
         <lang id="de">
@@ -1812,6 +1858,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A47" categories="de-time-and-seasons">
         <groundspeak id="15" inc="true" name="Available during winter" />
         <opencaching schema="OCDE" id="44" />
+        <opencaching schema="OCUK" id="44" />
         <lang id="en">
             <name>Available during winter</name>
             <desc>
@@ -1849,11 +1896,12 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A48" categories="de-time-and-seasons">
         <opencaching schema="OCDE" id="41" />
+        <opencaching schema="OCUK" id="41" />
         <lang id="en">
-            <name>Not at high water level</name>
+            <name>Not available during high tide</name>
             <desc>
                 This cache can be done only at low or normal water level. It is
-                inaccessible during flood.
+                inaccessible during high tide.
             </desc>
         </lang>
         <lang id="de">
@@ -1868,9 +1916,10 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A49" categories="de-tools">
         <opencaching schema="OCPL" id="47" />
-        <opencaching schema="OCRO" id="47"/>
         <opencaching schema="OCDE" id="47" />
         <opencaching schema="OCNL" id="47" />
+        <opencaching schema="OCRO" id="47" />
+        <opencaching schema="OCUK" id="47" />
         <lang id="en">
             <name>Compass required</name>
             <desc>
@@ -1916,8 +1965,8 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A50" categories="de-tools">
         <opencaching schema="OCPL" id="48" />
-        <opencaching schema="OCRO" id="48"/>
         <opencaching schema="OCNL" id="48" />
+        <opencaching schema="OCRO" id="48" />
         <lang id="en">
             <name>Bring something to write with</name>
             <desc>
@@ -1950,7 +1999,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A51" categories="de-tools">
         <opencaching schema="OCPL" id="81" />
-        <opencaching schema="OCRO" id="81"/>
+        <opencaching schema="OCRO" id="81" />
         <opencaching schema="OCNL" id="81" />
         <lang id="en">
             <name>You may need a shovel</name>
@@ -1983,8 +2032,9 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="44" inc="true" name="Flashlight required" />
         <opencaching schema="OCDE" id="48" />
         <opencaching schema="OCPL" id="82" />
-        <opencaching schema="OCRO" id="82"/>
         <opencaching schema="OCNL" id="82" />
+        <opencaching schema="OCRO" id="82" />
+        <opencaching schema="OCUK" id="82" />
         <lang id="en">
             <name>Flashlight required</name>
             <desc>
@@ -2029,6 +2079,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A53" categories="de-tools">
         <groundspeak id="3" inc="true" name="Climbing gear" />
         <opencaching schema="OCDE" id="49" />
+        <opencaching schema="OCUK" id="49" />
         <lang id="en">
             <name>Climbing gear required</name>
             <desc>
@@ -2041,7 +2092,7 @@ It also defines attribute names and descriptions in several languages.
             <name>Kletterzeug</name>
             <desc>
                 Um diesen Cache absolvieren zu können, benötigt ihr neben der normalen
-                Ausrüstung auch noch Kletterausrüstung, und entsprechendes Wissen um
+                Ausrüstung auch noch Kletterausrüstung und entsprechendes Wissen um
                 deren Handhabung und ums Klettern. Laien sollten sich auf jeden Fall
                 von einem erfahrenen Kletterer oder Bergsteiger unterstützen lassen.
             </desc>
@@ -2066,6 +2117,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A54" categories="de-tools">
         <opencaching schema="OCDE" id="50" />
+        <opencaching schema="OCUK" id="50" />
         <lang id="en">
             <name>Cave equipment required</name>
             <desc>
@@ -2083,7 +2135,7 @@ It also defines attribute names and descriptions in several languages.
                 Ausrüstung mitbringen. Vorsicht: Bereits kleinste Höhlensysteme können
                 bei unvorhergesehenen Problemen, z.B. Gewittern (Wasser!) oder einem
                 verstauchten Knöchel, sehr gefährlich werden! Ihr solltet euch vorab
-                gründlich bei erfahreren Höhlengehern informieren. Beachtet auch den
+                gründlich bei erfahrenen Höhlengehern informieren. Beachtet auch den
                 Naturschutz – Fledermausquartiere dürfen nicht gestört werden!
             </desc>
         </lang>
@@ -2115,6 +2167,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A55" categories="de-tools">
         <groundspeak id="5" inc="true" name="Scuba gear" />
         <opencaching schema="OCDE" id="51" />
+        <opencaching schema="OCUK" id="51" />
         <lang id="en">
             <name>Diving equipment required</name>
             <desc>
@@ -2160,10 +2213,11 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="51" inc="true" name="Special tool required" />
         <opencaching schema="OCDE" id="46" />
         <opencaching schema="OCPL" id="83" />
-        <opencaching schema="OCRO" id="83"/>
         <opencaching schema="OCNL" id="83" />
+        <opencaching schema="OCRO" id="46" />
+        <opencaching schema="OCUK" id="46" />
         <lang id="en">
-            <name>Special tools required</name>
+            <name>Special tool required</name>
             <desc>
                 You will need special equipment which is not specified by other attributes.
                 See the cache description on what tools are required.
@@ -2211,10 +2265,11 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="4" inc="true" name="Boat" />
         <opencaching schema="OCDE" id="52" />
         <opencaching schema="OCPL" id="86" />
-        <opencaching schema="OCRO" id="86"/>
         <opencaching schema="OCNL" id="86" />
+        <opencaching schema="OCRO" id="86" />
+        <opencaching schema="OCUK" id="86" />
         <lang id="en">
-            <name>Requires a boat</name>
+            <name>Boat required</name>
             <desc>
                 This cache can usually be found only when using a watercraft.
                 Swimming is difficult or impossible because of the distance or currents.
@@ -2258,7 +2313,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Barcă</name>
             <desc>
-                Ai nevoie de o barcă sau alt mijloc de transport pe apă. 
+                Ai nevoie de o barcă sau alt mijloc de transport pe apă.
                 Nu se recomandă înotul sau nu este fezabil.
             </desc>
         </lang>
@@ -2266,6 +2321,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A58" categories="de-tools">
         <opencaching schema="OCDE" id="35" />
+        <opencaching schema="OCUK" id="35" />
         <lang id="en">
             <name>No GPS required</name>
             <desc>
@@ -2301,8 +2357,9 @@ It also defines attribute names and descriptions in several languages.
         <groundspeak id="23" inc="true" name="Dangerous area" />
         <opencaching schema="OCDE" id="9" />
         <opencaching schema="OCPL" id="90" />
-        <opencaching schema="OCRO" id="90"/>
         <opencaching schema="OCNL" id="90" />
+        <opencaching schema="OCRO" id="9" />
+        <opencaching schema="OCUK" id="9" />
         <lang id="en">
             <name>Dangerous area</name>
             <desc>
@@ -2361,6 +2418,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A60" categories="de-dangers">
         <opencaching schema="OCDE" id="10" />
+        <opencaching schema="OCUK" id="10" />
         <lang id="en">
             <name>Active railway nearby</name>
             <desc>
@@ -2397,6 +2455,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A61" categories="de-dangers">
         <groundspeak id="21" inc="true" name="Cliff / falling rocks" />
         <opencaching schema="OCDE" id="11" />
+        <opencaching schema="OCUK" id="11" />
         <lang id="en">
             <name>Cliff / Rocks</name>
             <desc>
@@ -2444,6 +2503,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="12" />
         <opencaching schema="OCNL" id="12" />
         <opencaching schema="OCRO" id="12" />
+        <opencaching schema="OCUK" id="12" />
         <lang id="en">
             <name>Hunting grounds</name>
             <desc>
@@ -2485,7 +2545,7 @@ It also defines attribute names and descriptions in several languages.
             <name>Teren de vânătoare</name>
             <desc>
                 Atenţie, teren de vânătoare! Geocutia este amplasată pe sau în apropierea
-                acestuia. Ai grijă să porţi haine reflectorizante şi să ai lanternă 
+                acestuia. Ai grijă să porţi haine reflectorizante şi să ai lanternă
                 dacă se face seară. Respectă vânătorii.
             </desc>
         </lang>
@@ -2496,6 +2556,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="13" />
         <opencaching schema="OCNL" id="13" />
         <opencaching schema="OCRO" id="13" />
+        <opencaching schema="OCUK" id="13" />
         <lang id="en">
             <name>Look out for thorns</name>
             <desc>
@@ -2540,6 +2601,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCDE" id="14" />
         <opencaching schema="OCNL" id="14" />
         <opencaching schema="OCRO" id="14" />
+        <opencaching schema="OCUK" id="14" />
         <lang id="en">
             <name>Look out for ticks</name>
             <desc>
@@ -2596,6 +2658,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A65" categories="de-dangers">
         <groundspeak id="20" inc="true" name="Abandoned mines" />
         <opencaching schema="OCDE" id="15" />
+        <opencaching schema="OCUK" id="15" />
         <lang id="en">
             <name>Abandoned mines</name>
             <desc>
@@ -2639,6 +2702,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A66" categories="de-dangers">
         <groundspeak id="17" inc="true" name="Poisonous plants" />
         <opencaching schema="OCDE" id="16" />
+        <opencaching schema="OCUK" id="16" />
         <lang id="en">
             <name>Poisonous plants</name>
             <desc>
@@ -2672,6 +2736,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A67" categories="de-dangers">
         <groundspeak id="18" inc="true" name="Dangerous animals" />
         <opencaching schema="OCDE" id="17" />
+        <opencaching schema="OCUK" id="17" />
         <lang id="en">
             <name>Dangerous animals</name>
             <desc>
@@ -2705,7 +2770,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A68" categories="de-rating">
         <opencaching schema="OCPL" id="40" />
-        <opencaching schema="OCRO" id="40"/>
+        <opencaching schema="OCRO" id="40" />
         <opencaching schema="OCNL" id="40" />
         <lang id="en">
             <name>Quick cache</name>
@@ -2741,6 +2806,7 @@ It also defines attribute names and descriptions in several languages.
 
     <attr acode="A69" categories="de-rating">
         <opencaching schema="OCDE" id="37" />
+        <opencaching schema="OCUK" id="37" />
         <lang id="en">
             <name>Overnight stay necessary</name>
             <desc>
@@ -2782,10 +2848,9 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A70" categories="de-rating">
         <groundspeak id="6" inc="true" name="Recommended for kids" />
         <opencaching schema="OCPL" id="41" />
-        <opencaching schema="OCRO" id="41"/>
         <opencaching schema="OCNL" id="41" />
         <lang id="en">
-            <name>Take your children</name>
+            <name>Bring your children</name>
             <desc>
                 This search is simple and safe. It's okay to take small children
                 with you.
@@ -2815,7 +2880,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Recomandat pentru copii</name>
             <desc>
-                Cutia e uşor de găsit şi nu prezintă pericole. Poţi să mergi la căutat cu 
+                Cutia e uşor de găsit şi nu prezintă pericole. Poţi să mergi la căutat cu
                 copiii.
             </desc>
         </lang>
@@ -2824,13 +2889,15 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A71" categories="de-rating">
         <groundspeak id="6" inc="true" name="Recommended for kids" />
         <opencaching schema="OCDE" id="59" />
+        <opencaching schema="OCRO" id="59" />
+        <opencaching schema="OCUK" id="59" />
         <lang id="en">
-            <name>Suited for children (10-12 yo)</name>
+            <name>Suitable for children</name>
             <desc>
                 This geocache is suitable for children. All challenges can be solved by
-                child in the age of 10 to 12 years and the terrain has no risks
+                children around the age of 10-12 years and the terrain has no risks
                 (like highways, abysms). There should be a large geocache container with
-                trading items inside and the challenges be interesting.
+                trading items inside and the challenges be interesting, playful, educational.
             </desc>
         </lang>
         <lang id="de">
@@ -2838,7 +2905,7 @@ It also defines attribute names and descriptions in several languages.
             <desc>
                 Der Geocache ist kindgerecht aufgebaut: Alle Aufgaben sind von Kindern
                 im Alter von 10 bis 12 Jahren selbstständig lösbar und das Gelände ist
-                nicht gefährlich (keine Haupstraßen, Klippen o.ä.). Am Ende des
+                nicht gefährlich (keine Hauptstraßen, Klippen o.ä.). Am Ende des
                 Geocaches sollte sich eine Box mit Tauschgegenständen befinden, und
                 die Aufgaben sollten interessant aufgebaut sein.
             </desc>
@@ -2891,7 +2958,7 @@ It also defines attribute names and descriptions in several languages.
     <attr acode="A73" categories="de-time-and-seasons">
         <groundspeak id="13" inc="false" name="Available at all times" />
         <opencaching schema="OCPL" id="80" />
-        <opencaching schema="OCRO" id="80"/>
+        <opencaching schema="OCRO" id="80" />
         <lang id="en">
             <name>Available at specified hours (may require access fee)</name>
             <desc>
@@ -2920,7 +2987,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Anumite ore/Cu taxă</name>
             <desc>
-                Geocutia se află într-un loc accesibil doar între anumite ore. Este posibil 
+                Geocutia se află într-un loc accesibil doar între anumite ore. Este posibil
                 să fie necesară plata unei taxe de intrare. De exemplu în incinta unui muzeu.
                 Mai multe informaţii în descriere.
             </desc>
@@ -2948,6 +3015,120 @@ It also defines attribute names and descriptions in several languages.
             <name>Discreţie</name>
             <desc>
                 Fii discret în timp ce cauţi. Încearcă să eviţi să atragi atenţia asupra ta.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A75" categories="de-tools">
+        <opencaching schema="OCUK" id="156" />
+        <lang id="en">
+            <name>Aircraft required</name>
+            <desc>
+                This cache can be accessed mainly by the use of an aircraft.
+                Other means of reaching the cache may exist, but could be most difficult.
+            </desc>
+        </lang>
+        <lang id="pl">
+            <name>Samoloty wymagane</name>
+            <desc>
+                Ta skrzynka można uzyskać głównie poprzez wykorzystanie statku powietrznego.
+                mogą istnieć inne sposoby osiągnięcia cache, lecz może być najtrudniejsze.
+            </desc>
+        </lang>
+        <lang id="de">
+            <name>Flugzeug erforderlich</name>
+            <desc>
+                Dieser Cache kann hauptsächlich durch die Verwendung eines Flugzeugs erreicht werden.
+                Andere Mittel, um den Cache zu erreichen, können existieren, 
+                könnten aber am schwierigsten sein.
+            </desc>
+        </lang>
+        <lang id="nl">
+            <name>Vliegtuigen nodig</name>
+            <desc>
+                Deze cache kan vooral worden geopend door het gebruik van een luchtvaartuig.
+                Andere middel om de cache kunnen bestaan, maar moeilijkste zijn.
+            </desc>
+        </lang>
+        <lang id="ro">
+            <name>Avion</name>
+            <desc>
+                Acestă cutie poate fi căutată cu ajutorul unui avion.
+                Pot exista si alte mijloace de a ajunge în apropierea cutiei, însă acestea 
+                s-ar putea să fie extraordinar de dificile, prin comparaţie.
+            </desc>    
+        </lang>
+    </attr>
+
+    <attr acode="A76" categories="de-accessibility">
+        <opencaching schema="OCUK" id="157" />
+        <lang id="en">
+            <name>Rated on Handicaching.com</name>
+            <desc>
+                Rated on Handycaching.com - This does NOT mean that the cache 
+                is wheelchair accessible. See the rating on Handycaching.com for details. 
+            </desc>
+        </lang>
+        <lang id="pl">
+            <name>Oceniono na Handicaching.com</name>
+            <desc>
+                Oceniono na Handycaching.com - To wcale nie oznacza, że w pamięci podręcznej
+                jest dla osób niepełnosprawnych. Zobacz rekomendację Handycaching.com szczegóły.
+            </desc>
+        </lang>
+        <lang id="de">
+            <name>Bewertung auf Handicaching.com</name>
+            <desc>
+                Bewertet auf Handycaching.com - Dies bedeutet nicht, dass der Cache
+                Ist rollstuhlgerecht. Siehe die Bewertung auf Handycaching.com für Details.
+            </desc>
+        </lang>
+        <lang id="nl">
+            <name>Beoordeeld op Handicaching.com</name>
+            <desc>
+                Beoordeeld op Handycaching.com - Dit betekent niet dat de cache
+                is toegankelijk voor rolstoelgebruikers. Zie de rating op Handycaching.com voor meer informatie.
+            </desc>
+        </lang>
+        <lang id="ro">
+            <name>Evaluată pe Handicaching.com</name>
+            <desc>
+                Evaluată pe Handycaching.com - Aceasta nu înseamnă că geocutia este 
+                accesibilă persoanelor în scaun cu rotile. Verificaţi evaluarea de pe Handycaching.com pentru detalii.
+            </desc>
+        </lang>
+    </attr>
+
+    <attr acode="A77" categories="de-cache-types">
+        <opencaching schema="OCUK" id="158" />
+        <lang id="en">
+            <name>Contains a Munzee</name>
+            <desc>
+                The cache also contains a Munzee or the hideout is very near one.
+            </desc>
+        </lang>
+        <lang id="pl">
+            <name>Zawiera munzee</name>
+            <desc>
+                Pamięć podręczna zawiera również munzee lub kryjówka jest bardzo blisko jeden.
+            </desc>
+        </lang>
+        <lang id="nl">
+            <name>Bevat een munzee</name>
+            <desc>
+                De cache bevat ook een munzee of de schuilplaats is erg in de buurt van één.
+            </desc>
+        </lang>
+        <lang id="ro">
+            <name>Conţine Munzee</name>
+            <desc>
+                Geocutia conţine un Munzee sau există un Munzee în imediata apropiere a acesteia.
+            </desc>
+        </lang>
+        <lang id="de">
+            <name>Enthält einen Munzee</name>
+            <desc>
+                Der Cache enthält auch ein Munzee oder das Versteck ist sehr nah.
             </desc>
         </lang>
     </attr>

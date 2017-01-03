@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -29,10 +28,12 @@ if ($r) {
         if (sql_value(
             "SELECT COUNT(*)
              FROM `cache_logs`
-             INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+             INNER JOIN `caches`
+               ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+             INNER JOIN `cache_status`
+               ON `caches`.`status`=`cache_status`.`id`
              WHERE `cache_logs`.`id`='&1'
-             AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
+             AND (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`='&2' OR '&3')",
             0,
             $r['object_id'],
             $login->userid,
@@ -48,7 +49,8 @@ if ($r) {
         if (sql_value(
             "SELECT COUNT(*)
              FROM `caches`
-             INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
+             INNER JOIN `cache_status`
+               ON `caches`.`status`=`cache_status`.`id`
              WHERE `caches`.`cache_id`='&1'
              AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
             0,
@@ -286,20 +288,16 @@ function thumbpath($name, $object_type)
     if (!in_array($name, ['404', 'intern', 'extern', 'spoiler', 'unknown'])
         || ($object_type != 1 && $object_type != 2)
     ) {
-        if ($debug == 1) {
-            die('Debug: line ' . __LINE__);
-        } else {
-            $name = 'intern';
-            $object_type = $default_object_type;
-        }
+        $name = 'intern';
+        $object_type = $default_object_type;
     }
 
-    $imgdir = 'resource2/' . $opt['template']['style'] . '/images/thumb/';
+    $imgDir = 'resource2/' . $opt['template']['style'] . '/images/thumb/';
     $filename = 'thumb' . $name . '_' . $object_type . '.gif';
-    $thumbpath = $imgdir . strtolower($opt['template']['locale']) . '/' . $filename;
-    if (!file_exists($thumbpath)) {
-        $thumbpath = $imgdir . 'en/' . $filename;
+    $thumbPath = $imgDir . strtolower($opt['template']['locale']) . '/' . $filename;
+    if (!file_exists($thumbPath)) {
+        $thumbPath = $imgDir . 'en/' . $filename;
     }
 
-    return $thumbpath;
+    return $thumbPath;
 }

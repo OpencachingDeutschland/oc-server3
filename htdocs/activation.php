@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $disable_verifyemail = true;
@@ -30,7 +29,7 @@ if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
 
         if ($r = sql_fetch_array($rs)) {
             if (($r['code'] == $code) && ($code != '')) {
-                // ok, account aktivieren
+                // ok, activate account
                 sql("UPDATE `user` SET `is_active_flag`=1, `activation_code`='' WHERE `user_id`='&1'", $r['id']);
                 $tpl->assign('sucess', true);
             } else {

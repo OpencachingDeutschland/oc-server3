@@ -3,7 +3,6 @@
  *
  *  You can find the license in the docs directory of the CVS repository
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 // implementation incomplete in sys_main.tpl and missing in main.tpl
@@ -16,32 +15,32 @@ var bSetTimoutWarning = false;
 
 function initSessionTimeout()
 {
-	var d = document.getElementById('sessionTimout');
-	d.firstChild.nodeValue = nSessionTimeout;
+    var d = document.getElementById('sessionTimout');
+    d.firstChild.nodeValue = nSessionTimeout;
 
-	var oSessionCheck = self.setInterval("checkSessionTimeout()", 60000);
+    var oSessionCheck = self.setInterval("checkSessionTimeout()", 60000);
 }
 
 function checkSessionTimeout()
 {
-	var d = document.getElementById('sessionTimout');
-	d.firstChild.nodeValue = nSessionTimeout;
-	nSessionTimeout = nSessionTimeout - 1;
+    var d = document.getElementById('sessionTimout');
+    d.firstChild.nodeValue = nSessionTimeout;
+    nSessionTimeout = nSessionTimeout - 1;
 
-	if (nSessionTimeout < 10 && bSetTimoutWarning==false)
-	{
-		document.getElementById('sessionWarn').style.display = 'block';
-		bSetTimoutWarning = true;
-	}
+    if (nSessionTimeout < 10 && bSetTimoutWarning==false)
+    {
+        document.getElementById('sessionWarn').style.display = 'block';
+        bSetTimoutWarning = true;
+    }
 
-	if (nSessionTimeout == 0)
-	{
-		self.location = 'login.php?action=logout';
-		self.clearInterval(oSessionCheck);
-	}
+    if (nSessionTimeout == 0)
+    {
+        self.location = 'login.php?action=logout';
+        self.clearInterval(oSessionCheck);
+    }
 }
 
 function cancelSessionTimeout()
 {
-	alert(sSessionId);
+    alert(sSessionId);
 }

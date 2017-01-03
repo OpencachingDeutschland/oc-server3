@@ -1,26 +1,25 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
-// prevent old OCProp versions
+
 use AppBundle\Entity\FieldNote;
 use AppBundle\Entity\GeocacheLog;
 
+// prevent old OCProp versions
 if ((isset($_POST['submit']) || isset($_POST['submitform'])) && !isset($_POST['version3'])) {
     die('Your client may be outdated!');
 }
 
-// include librarys
+// include libraries
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/cache.class.php';
 require_once __DIR__ . '/lib2/logic/user.class.php';
 require_once __DIR__ . '/lib2/logic/cachelog.class.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
-// prepare template and menue
+// prepare template and menu
 $tpl->name = 'log_cache';
 $tpl->menuitem = MNU_CACHES_LOG;
 $tpl->caching = false;
@@ -44,7 +43,14 @@ if (isset($_REQUEST['wp'])) {
 
 $fieldNote = [];
 if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform'])) {
-    $rs = sql('SELECT * FROM field_note WHERE `id` = &1 AND `user_id` = &2', (int)$_GET['fieldnoteid'], (int)$user->getUserId());
+    $rs = sql(
+        'SELECT *
+         FROM field_note
+         WHERE `id` = &1
+           AND `user_id` = &2',
+        (int) $_GET['fieldnoteid'],
+        (int) $user->getUserId()
+    );
     $fieldNote = sql_fetch_assoc($rs);
     if (!empty($fieldNote)) {
         $cacheId = $fieldNote['geocache_id'];
@@ -55,10 +61,10 @@ if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform'])) {
 $useradmin = ($login->hasAdminPriv()) ? 1 : 0;
 
 // prepare array to indicate errors in template
-$validate = array();
+$validate = [];
 
 // log and cache type which can be combined with maintenance state flags
-$rs = sql("SELECT `id` FROM `log_types` WHERE `maintenance_logs`");
+$rs = sql('SELECT `id` FROM `log_types` WHERE `maintenance_logs`');
 $logtype_allows_nm = sql_fetch_column($rs);
 
 // proceed loggable, if valid cache_id
@@ -106,7 +112,9 @@ if ($cacheId != 0) {
     $logText = (isset($_POST['logtext'])) ? ($_POST['logtext']) : '';
     $logType = (isset($_REQUEST['logtype'])) ? ($_REQUEST['logtype'] + 0) : null;
     $logDateDay = (isset($_POST['logday'])) ? trim($_POST['logday']) : ($datesaved ? $defaultLogDay : date('d'));
-    $logDateMonth = (isset($_POST['logmonth'])) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date('m'));
+    $logDateMonth = (isset($_POST['logmonth'])) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date(
+        'm'
+    ));
     $logDateYear = (isset($_POST['logyear'])) ? trim($_POST['logyear']) : ($datesaved ? $defaultLogYear : date('Y'));
     $logTimeHour = (isset($_POST['loghour'])) ? trim($_POST['loghour']) : '';
     $logTimeMinute = (isset($_POST['logminute'])) ? trim($_POST['logminute']) : '';
@@ -162,7 +170,7 @@ if ($cacheId != 0) {
     // if not a found log, ignore the rating
     $rateOption = ($logType == 1 || $logType == 7) + 0;
 
-    // get logtext editormode (from form or from userprofile)
+    // get log text editor mode (from form or from userprofile)
     // 1 = text; 2 = HTML; 3 = tinyMCE
     if (isset($_POST['descMode'])) {
         $descMode = $_POST['descMode'] + 0;  // Ocprop: 2
@@ -202,8 +210,8 @@ if ($cacheId != 0) {
     if (is_numeric($logDateMonth)
         && is_numeric($logDateDay)
         && is_numeric($logDateYear)
-        && ($logTimeHour . $logTimeMinute == "" || is_numeric($logTimeHour))
-        && ($logTimeMinute == "" || is_numeric($logTimeMinute))
+        && ($logTimeHour . $logTimeMinute == '' || is_numeric($logTimeHour))
+        && ($logTimeMinute == '' || is_numeric($logTimeMinute))
     ) {
         $validate['dateOk'] = checkdate($logDateMonth, $logDateDay, $logDateYear)
             && ($logDateYear >= 2000)
@@ -230,7 +238,7 @@ if ($cacheId != 0) {
 
     // Store valid date in temporary cookie; it will be the default for the next log.
     // For a reliable expiration, we need two cookies: One which disappears when the
-    // browsr is closed, and one which disappears after N hours (for users who
+    // browser is closed, and one which disappears after N hours (for users who
     // keep browsers open ...). See also Redmine #205, #704, #894.
 
     if ($validate['dateOk']) {
@@ -266,7 +274,7 @@ if ($cacheId != 0) {
          * set seconds 00:00:01, means "00:00 was logged"
          * set seconds 00:00:00, means "no time was logged"
          */
-        $logTimeSecond = ($logTimeHour . $logTimeMinute != ""
+        $logTimeSecond = ($logTimeHour . $logTimeMinute != ''
                 && $logTimeHour == 0
                 && $logTimeMinute == 0) + 0;
 
@@ -304,8 +312,11 @@ if ($cacheId != 0) {
             // update cache status
             $cache->updateCacheStatus($logType);
 
-            // update rating (if correct logtype, user has ratings to give and is not owner (exept owner adopted cache))
-            if ($rateOption && $user->allowRatings() && (!$isOwner || ($isOwner && $cache->hasAdopted($user->getUserId())))) {
+            // update rating (if correct log type, user has ratings to give
+            // and is not owner (expect owner adopted cache))
+            if ($rateOption && $user->allowRatings()
+                && (!$isOwner || ($isOwner && $cache->hasAdopted($user->getUserId())))
+            ) {
                 if ($rateCache) {
                     $cache->addRecommendation($user->getUserId(), $logDate);
                 } else {
@@ -313,16 +324,19 @@ if ($cacheId != 0) {
                 }
             }
 
-            // save cache
             $cache->save();
 
-            // clear statpic
+            // clear statPic
             $statPic = $user->getStatpic();
             $statPic->deleteFile();
 
             // delete field note
             if (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) {
-                sql('DELETE FROM field_note WHERE `id` = &1 AND `user_id` = &2', (int)$_REQUEST['fieldnoteid'], $user->getUserId());
+                sql(
+                    'DELETE FROM field_note WHERE `id` = &1 AND `user_id` = &2',
+                    (int) $_REQUEST['fieldnoteid'],
+                    $user->getUserId()
+                );
 
                 $tpl->redirect('/field-notes/');
             }
@@ -374,11 +388,12 @@ if ($cacheId != 0) {
     // smiley list
     $tpl->assign('smilies', $smiley_a);
     $tpl->assign('smileypath', $opt['template']['smiley']);
-    $tpl->assign('fieldnoteid', (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) ? $_REQUEST['fieldnoteid'] : '');
+    $tpl->assign(
+        'fieldnoteid', (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) ? $_REQUEST['fieldnoteid'] : ''
+    );
 
     // DNF state
-    $dnf_by_logger =
-        sql_value(
+    $dnf_by_logger = sql_value(
             "SELECT `type`
              FROM `cache_logs`
              WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,2)
@@ -390,7 +405,7 @@ if ($cacheId != 0) {
         ) == 2;
     $tpl->assign('dnf_by_logger', $dnf_by_logger);
 } else {
-    // not loggable
+    // not logAble
     $validate['logAllowed'] = false;
 }
 

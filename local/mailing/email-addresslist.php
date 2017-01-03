@@ -2,13 +2,11 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 header('Content-type: text/html; charset=utf-8');
 
-$opt['rootpath'] = __DIR__ . '/../../htdocs/';
-require $opt['rootpath'] . 'lib2/web.inc.php';
+require __DIR__ . '/../../htdocs/lib2/web.inc.php';
 
 $rs = sql(
     'SELECT email FROM `user`

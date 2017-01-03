@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -45,11 +44,12 @@ if (isset($_REQUEST['ok'])) {
     if ($bError == false) {
         if ($cache->report($login->userid, $reportreason, $reportnote)) {
             $reasontext = sql_value(
-                "
-                SELECT IFNULL(`tt`.`text`, `crr`.`name`)
-                FROM `cache_report_reasons` AS `crr`
-                INNER JOIN `sys_trans_text` AS `tt` ON `tt`.`trans_id`=`crr`.`trans_id`
-                WHERE `crr`.`id` =&1 AND `tt`.`lang`='&2'",
+                "SELECT IFNULL(`tt`.`text`, `crr`.`name`)
+                 FROM `cache_report_reasons` AS `crr`
+                 INNER JOIN `sys_trans_text` AS `tt`
+                   ON `tt`.`trans_id`=`crr`.`trans_id`
+                 WHERE `crr`.`id` = &1
+                   AND `tt`.`lang`='&2'",
                 'unknown',
                 $reportreason,
                 $opt['template']['locale']
@@ -64,19 +64,17 @@ if (isset($_REQUEST['ok'])) {
 }
 
 $rs = sql(
-    "
-    SELECT
-        `cache_report_reasons`.`id`,
-        IFNULL(`sys_trans_text`.`text`,
-        `cache_report_reasons`.`name`) AS `name`
-    FROM `cache_report_reasons`
-    LEFT JOIN `sys_trans`
-        ON `cache_report_reasons`.`trans_id`=`sys_trans`.`id`
-        AND `cache_report_reasons`.`name`=`sys_trans`.`text`
-    LEFT JOIN `sys_trans_text`
-        ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-        AND `sys_trans_text`.`lang`='&1'
-    ORDER BY `order`",
+    "SELECT `cache_report_reasons`.`id`,
+            IFNULL(`sys_trans_text`.`text`,
+            `cache_report_reasons`.`name`) AS `name`
+     FROM `cache_report_reasons`
+     LEFT JOIN `sys_trans`
+       ON `cache_report_reasons`.`trans_id`=`sys_trans`.`id`
+       AND `cache_report_reasons`.`name`=`sys_trans`.`text`
+     LEFT JOIN `sys_trans_text`
+       ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+       AND `sys_trans_text`.`lang`='&1'
+     ORDER BY `order`",
     $opt['template']['locale']
 );
 
@@ -89,7 +87,7 @@ $tpl->assign('cacheid', $cacheid);
 $tpl->assign('cachename', $cache->getName());
 $tpl->assign('help_reportreasons', helppagelink('report_reasons'));
 
-$open_reports = sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `status`=1", 0);
+$open_reports = sql_value('SELECT COUNT(*) FROM `cache_reports` WHERE `status` = 1', 0);
 $processing_reports = sql_value(
     "SELECT COUNT(*) FROM `cache_reports` WHERE `status`=2 AND DATEDIFF(NOW(),`lastmodified`) <= 180",
     0

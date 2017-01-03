@@ -2,9 +2,8 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
- *   get/set has to be commited with save
+ *   get/set has to be committed with save
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
@@ -264,6 +263,7 @@ class cachelog
 
     /**
      * @param integer $value
+     * @return bool
      */
     public function setOwnerNotified($value)
     {

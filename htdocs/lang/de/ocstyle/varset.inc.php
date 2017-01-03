@@ -48,7 +48,7 @@ $target = basename($_SERVER['PHP_SELF']) . '?';
 // REQUEST-Variablen durchlaufen und an target anhaengen
 $allowed = ['cacheid', 'userid', 'logid', 'desclang', 'descid'];
 reset($_REQUEST);
-while (list ($varname, $varvalue) = each($_REQUEST)) {
+while (list($varname, $varvalue) = each($_REQUEST)) {
     if (in_array($varname, $allowed)) {
         $target .= $varname . '=' . $varvalue . '&';
     }
@@ -73,7 +73,7 @@ $error_prefix = '<span class="errormsg">';
 $error_suffix = '</span>';
 
 $htmlnotice =
- '<tr><td class="spacer" colspan="2"></td></tr>
+    '<tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td class="help" colspan="2">
             <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="' . t('Notice') . '" title="' . t('Notice') . '" />

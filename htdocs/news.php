@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -19,12 +18,12 @@ $tpl->cache_lifetime = 3600;
 
 if (!$tpl->is_cached()) {
     $rsNews = sql(
-        "SELECT `news`.`date_created`, `news_topics`.`name`, `news`.`content`
-        FROM `news`
-        INNER JOIN `news_topics`
-            ON `news`.`topic`=`news_topics`.`id`
-        WHERE `news`.`display` = 1
-        ORDER BY `news`.`date_created` DESC LIMIT 250"
+        'SELECT `news`.`date_created`, `news_topics`.`name`, `news`.`content`
+         FROM `news`
+         INNER JOIN `news_topics`
+           ON `news`.`topic`=`news_topics`.`id`
+         WHERE `news`.`display` = 1
+         ORDER BY `news`.`date_created` DESC LIMIT 250'
     );
     $tpl->assign_rs('news', $rsNews);
     sql_free_result($rsNews);

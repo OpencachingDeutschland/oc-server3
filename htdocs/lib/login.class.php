@@ -1,20 +1,23 @@
 <?php
 /***************************************************************************
  *    For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
- *
  * see lib2/login.class.php. !!
- *
  ***************************************************************************/
 
-define('LOGIN_UNKNOWN_ERROR', - 1);     // unkown error occured
-define('LOGIN_OK', 0);            // login succeeded
-define('LOGIN_BADUSERPW', 1);     // bad username or password
-define('LOGIN_TOOMUCHLOGINS', 2); // too many logins in short time
-define('LOGIN_USERNOTACTIVE', 3); // the useraccount locked
-define('LOGIN_EMPTY_USERPASSWORD', 4); // given username/password was empty
-define('LOGIN_LOGOUT_OK', 5);          // logout was successfull
+// unknown error occurred
+define('LOGIN_UNKNOWN_ERROR', -1);
+// login succeeded
+define('LOGIN_OK', 0);
+// bad username or password
+define('LOGIN_BADUSERPW', 1);
+// too many login attempts in short time
+define('LOGIN_TOOMUCHLOGINS', 2);
+// the user account locked
+define('LOGIN_USERNOTACTIVE', 3);
+// given username/password was empty
+define('LOGIN_EMPTY_USERPASSWORD', 4);
+// logout was successfully
+define('LOGIN_LOGOUT_OK', 5);
 
 // login times in seconds
 define('LOGIN_TIME', 60 * 60);
@@ -42,7 +45,6 @@ class login
             $this->permanent = (($cookie->get('permanent') + 0) == 1);
             $this->lastlogin = $cookie->get('lastlogin');
             $this->sessionid = $cookie->get('sessionid');
-            // $this->admin = $cookie->get('admin');      nonsense
             $this->verified = false;
 
             $this->verify();
@@ -73,7 +75,6 @@ class login
         $cookie->set('permanent', ($this->permanent == true ? 1 : 0));
         $cookie->set('lastlogin', $this->lastlogin);
         $cookie->set('sessionid', $this->sessionid);
-        // $cookie->set('admin', $this->admin);      nonsense
     }
 
     public function verify()
@@ -158,14 +159,10 @@ class login
         sql_free_result($rs);
 
         $this->pStoreCookie();
-
-        return;
     }
 
     public function hasAdminPriv($privilege = false)
     {
-        global $cookie;
-
         $this->verify();
 
         if ($privilege === false) {
@@ -188,18 +185,18 @@ class login
 
         // cleanup old entries
         // (execute only every 50 search calls)
-        if (mt_rand(1, 50) == 1) {
+        if (mt_rand(1, 50) === 1) {
             sql("DELETE FROM `sys_logins` WHERE `date_created`<'&1'", date('Y-m-d H:i:s', time() - 3600));
         }
 
-        // check the number of logins in the last hour ...
-        $logins_count = sqlValue(
+        // check the number of login attempts in the last hour ...
+        $loginCount = sqlValue(
             "SELECT COUNT(*) `count` FROM `sys_logins` WHERE `remote_addr`='" . sql_escape(
                 $_SERVER['REMOTE_ADDR']
             ) . "' AND `date_created`>'" . sql_escape(date('Y-m-d H:i:s', time() - 3600)) . "'",
             0
         );
-        if ($logins_count > $opt['page']['max_logins_per_hour']) {
+        if ($loginCount > $opt['page']['max_logins_per_hour']) {
             return false;
         } else {
             return true;

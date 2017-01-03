@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Default settings for all locale options in settings.inc.php
  *  Do not modify this file - use settings.inc.php!

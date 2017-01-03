@@ -3,7 +3,6 @@
  /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Load current stored procs and triggers into database.
  ***************************************************************************/

@@ -27,36 +27,36 @@ Garmin.Measurement = function(value, context){};
 Garmin.Measurement = Class.create();
 Garmin.Measurement.prototype = {
 
-	initialize: function(value, context) {
-		this.value = value;
-		this.context = context;
-	},
-	
-	getContext: function() {
-		return this.context;
-	},
-	
-	setContext: function(context) {
-		this.context = context;
-	},
-	
-	getValue: function() {
-		return this.value;
-	},
-	
-	setValue: function(value) {
-		this.value = value;
-	},
-	
-	printMe: function(tabs) {
-		var output = "";
-		output += tabs + "  [Measurement]\n";
-		output += tabs + "    value: " + this.value + '\n';
-		//output += tabs + "    context: " + this.context + '\n';
-		return output;
-	},
-	
-	toString: function() {
-		return this.value + " " + this.context;
-	}
+    initialize: function(value, context) {
+        this.value = value;
+        this.context = context;
+    },
+
+    getContext: function() {
+        return this.context;
+    },
+
+    setContext: function(context) {
+        this.context = context;
+    },
+
+    getValue: function() {
+        return this.value;
+    },
+
+    setValue: function(value) {
+        this.value = value;
+    },
+
+    printMe: function(tabs) {
+        var output = "";
+        output += tabs + "  [Measurement]\n";
+        output += tabs + "    value: " + this.value + '\n';
+        //output += tabs + "    context: " + this.context + '\n';
+        return output;
+    },
+
+    toString: function() {
+        return this.value + " " + this.context;
+    }
 };

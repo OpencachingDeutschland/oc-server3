@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  In lib2 this file is always included via common.inc.php.
  *  Also used in lib1.
@@ -51,13 +50,14 @@ class geomath
     }
 
     /**
+     * @param $parBearing
      * @param integer $parShortText
-     *
+     * @param $language
      * @return string
      */
     public static function Bearing2Text($parBearing, $parShortText, $language)
     {
-        global $opt, $translate;
+        global $translate;
 
         if ($parShortText == 0) {
             if ($parBearing === false) {

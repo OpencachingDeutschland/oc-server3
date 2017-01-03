@@ -13,7 +13,6 @@
  *    - email address change requests
  *    - new OConly attribute notifications
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';
@@ -52,7 +51,7 @@ if ($argc < 4) {
             $er->resendActivationCodes();
             break;
         default:
-            die('invalid option: '. $option . "\n");
+            die('invalid option: ' . $option . "\n");
     }
 }
 
@@ -206,7 +205,7 @@ class EmailRecovery
 
 
     # resend emails
-    
+
     public function resendLogNotifications()
     {
         # delete notification protocol

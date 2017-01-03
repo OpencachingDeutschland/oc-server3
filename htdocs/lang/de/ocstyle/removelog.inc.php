@@ -8,11 +8,11 @@
  ****************************************************************************/
 
 /****************************************************************************
-           
+
    Unicode Reminder メモ
-                                                                                  
+
      language specific vars
-        
+
  ****************************************************************************/
 
  $error_wrong_node = t('This log entry has been created on another Opencaching website. The cache can only be edited there.');

@@ -1,8 +1,6 @@
 {***************************************************************************
 *  You can find the license in the docs directory
 *
-*  Unicode Reminder メモ
-*
 *  TODO (old, may be outdated):
 *  - monitor and improve DB cleanup
 *  - review/rewrite mapsubmit_click

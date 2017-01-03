@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Remove obsolete functions which were acidentally added to the master
  *  branch maintain.php (but not made it to stable branch).

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Smiley translater for smarty extension, see modifier_smiley.php.
  *  Same content like smilies.class.php.

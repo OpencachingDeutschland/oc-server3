@@ -22,6 +22,12 @@ require_once __DIR__ . '/smiley.inc.php';
  * or the new mode if the user hit another mode button
  */
 
+/**
+ * @param $oldDescMode
+ * @param $descMode
+ * @param $text
+ * @return mixed|string
+ */
 function processEditorInput($oldDescMode, $descMode, $text)
 {
     global $opt, $smiley;
@@ -89,7 +95,7 @@ function html2plaintext($text, $texthtml0, $wrap)
         );
         $text = html_entity_decode($text, ENT_COMPAT, 'UTF-8');
     } else {
-        // convert smilies ...
+        // convert smileys ...
         $countSmileyImage = count($smiley['image']);
         for ($n = 0; $n < $countSmileyImage; $n++) {
             $text = mb_ereg_replace(

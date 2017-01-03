@@ -46,12 +46,13 @@ if ($dblink === false) {
 
 /* begin owner notifies */
 $rsNewLogs = sql(
-    "SELECT cache_logs.id log_id, caches.user_id user_id
+    'SELECT cache_logs.id log_id, caches.user_id user_id
     FROM cache_logs, caches
     WHERE cache_logs.cache_id=caches.cache_id
-    AND cache_logs.owner_notified=0"
+    AND cache_logs.owner_notified=0'
 );
-for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i++) {
+$mysqlNumRows = mysql_num_rows($rsNewLogs);
+for ($i = 0; $i < $mysqlNumRows; $i++) {
     $rNewLog = sql_fetch_array($rsNewLogs);
 
     $rsNotified = sql(
@@ -63,7 +64,7 @@ for ($i = 0; $i < mysql_num_rows($rsNewLogs); $i++) {
         $rNewLog['user_id'],
         $rNewLog['log_id']
     );
-    if (mysql_num_rows($rsNotified) == 0) {
+    if (mysql_num_rows($rsNotified) === 0) {
         // Benachrichtigung speichern
         sql(
             "INSERT IGNORE INTO `watches_notified` (`user_id`, `object_id`, `object_type`, `date_created`)
@@ -84,9 +85,9 @@ mysql_free_result($rsNewLogs);
 
 /* begin cache_watches */
 $rscw = sql(
-    "SELECT `watches_logqueue`.`log_id`, `watches_logqueue`.`user_id`, `cache_logs`.`cache_id`
-                 FROM `watches_logqueue`
-           INNER JOIN `cache_logs` ON `watches_logqueue`.`log_id`=`cache_logs`.`id`"
+    'SELECT `watches_logqueue`.`log_id`, `watches_logqueue`.`user_id`, `cache_logs`.`cache_id`
+     FROM `watches_logqueue`
+     INNER JOIN `cache_logs` ON `watches_logqueue`.`log_id`=`cache_logs`.`id`'
 );
 while ($rcw = mysql_fetch_assoc($rscw)) {
     // Benachrichtigung speichern
@@ -102,7 +103,7 @@ while ($rcw = mysql_fetch_assoc($rscw)) {
     // See http://forum.opencaching.de/index.php?topic=3123.0 on AOL.
     if (sqlValue(
         "SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`)
-                        FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'",
+         FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'",
         1
     )) {
         process_log_watch($rcw['user_id'], $rcw['log_id']);
@@ -134,7 +135,8 @@ $rsUsers = sql(
     WHERE `user`.`watchmail_nextmail`<NOW()",
     $opt['template']['default']['locale']
 );
-for ($i = 0; $i < mysql_num_rows($rsUsers); $i++) {
+$mysqlNumRows = mysql_num_rows($rsUsers);
+for ($i = 0; $i < $mysqlNumRows; $i++) {
     $rUser = sql_fetch_array($rsUsers);
 
     if ($rUser['watchmail_nextmail'] != '0000-00-00 00:00:00') {
@@ -158,7 +160,8 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i++) {
                 );
                 if (mysql_num_rows($rsWatchesOwner) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesOwner); $j++) {
+                    $mysqlNumRowsWatchesOwner = mysql_num_rows($rsWatchesOwner);
+                    for ($j = 0; $j < $mysqlNumRowsWatchesOwner; $j++) {
                         $rWatch = sql_fetch_array($rsWatchesOwner);
                         $logtexts .= $rWatch['watchtext'];
                     }
@@ -183,7 +186,8 @@ for ($i = 0; $i < mysql_num_rows($rsUsers); $i++) {
                 );
                 if (mysql_num_rows($rsWatchesLog) > 0) {
                     $logtexts = '';
-                    for ($j = 0; $j < mysql_num_rows($rsWatchesLog); $j++) {
+                    $mysqlNumRowsWatchesLog = mysql_num_rows($rsWatchesLog);
+                    for ($j = 0; $j < $mysqlNumRowsWatchesLog; $j++) {
                         $rWatch = sql_fetch_array($rsWatchesLog);
                         $logtexts .= $rWatch['watchtext'];
                     }

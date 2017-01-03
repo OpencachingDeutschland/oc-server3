@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  ***************************************************************************}
 {assign var='lastCountry' value=''}
 {strip}

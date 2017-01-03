@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *   get/set has to be commited with save
  *   add/remove etc. is executed instantly
@@ -616,9 +615,6 @@ class picture
     public function delete($restore = false)
     {
         // see also removelog.php, 'remove log pictures'
-
-        global $opt;
-
         // delete record, image and thumb
         $this->setArchiveFlag($restore);
         sql("DELETE FROM `pictures` WHERE `id`='&1'", $this->nPictureId);

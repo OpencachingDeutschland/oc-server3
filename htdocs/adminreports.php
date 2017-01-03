@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -81,22 +80,22 @@ if ($id == 0) {
     // no details, show list of reported caches
     $rs = sql(
         "SELECT `cr`.`id`,
-                               IF(`cr`.`status`=1,'(*) ', '') AS `new`,
-                               `c`.`name`,
-                               `u2`.`username` AS `ownernick`,
-                               `u`.`username`,
-                               IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
-                               `cr`.`lastmodified`,
-                               `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin
-                          FROM `cache_reports` `cr`
-                    INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
-                    INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
-                    INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
-                     LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
-                         WHERE `cr`.`status` < 3
-                         ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid`=&1) DESC,
-                                    `cr`.`status` ASC,
-                                                `cr`.`lastmodified` ASC",
+                IF(`cr`.`status`=1,'(*) ', '') AS `new`,
+                `c`.`name`,
+                `u2`.`username` AS `ownernick`,
+                `u`.`username`,
+                IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
+                `cr`.`lastmodified`,
+                `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin
+         FROM `cache_reports` `cr`
+         INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
+         INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
+         INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
+         LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
+         WHERE `cr`.`status` < 3
+         ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid` = &1) DESC,
+                  `cr`.`status` ASC,
+                  `cr`.`lastmodified` ASC",
         $login->userid
     );
 
@@ -107,25 +106,25 @@ if ($id == 0) {
     // show details of a report
     $rs = sql(
         "SELECT `cr`.`id`, `cr`.`cacheid`, `cr`.`userid`,
-                              `u1`.`username` AS `usernick`,
-                              IFNULL(`cr`.`adminid`, 0) AS `adminid`,
-                              IFNULL(`u2`.`username`, '') AS `adminnick`,
-                              IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
-                              `cr`.`note`,
-                              IFNULL(tt.text, crs.name) AS `status`,
-                              `cr`.`date_created`, `cr`.`lastmodified`,
-                              `c`.`name` AS `cachename`,
-                              `c`.`user_id` AS `ownerid`,
-                              `cr`.`comment`
-                         FROM `cache_reports` AS `cr`
-                    LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
-                  LEFT JOIN `caches` AS `c` ON `c`.`cache_id`=`cr`.`cacheid`
-                  LEFT JOIN `user` AS `u1` ON `u1`.`user_id`=`cr`.`userid`
-                  LEFT JOIN `user` AS `u2` ON `u2`.`user_id`=`cr`.`adminid`
-                  LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
-                  LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-                  LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&2'
-                      WHERE `cr`.`id`=&1",
+                `u1`.`username` AS `usernick`,
+                IFNULL(`cr`.`adminid`, 0) AS `adminid`,
+                IFNULL(`u2`.`username`, '') AS `adminnick`,
+                IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
+                `cr`.`note`,
+                IFNULL(tt.text, crs.name) AS `status`,
+                `cr`.`date_created`, `cr`.`lastmodified`,
+                `c`.`name` AS `cachename`,
+                `c`.`user_id` AS `ownerid`,
+                `cr`.`comment`
+         FROM `cache_reports` AS `cr`
+         LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
+         LEFT JOIN `caches` AS `c` ON `c`.`cache_id`=`cr`.`cacheid`
+         LEFT JOIN `user` AS `u1` ON `u1`.`user_id`=`cr`.`userid`
+         LEFT JOIN `user` AS `u2` ON `u2`.`user_id`=`cr`.`adminid`
+         LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
+         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
+         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&2'
+         WHERE `cr`.`id`= &1",
         $id,
         $opt['template']['locale']
     );
@@ -165,7 +164,11 @@ if ($id == 0) {
         }
 
         if (isset($opt['logic']['adminreports']['external_maintainer'])) {
-            $external_maintainer = @file_get_contents(mb_ereg_replace('%1', $record['cacheid'], $opt['logic']['adminreports']['external_maintainer']['url']));
+            $external_maintainer = @file_get_contents(mb_ereg_replace(
+                '%1',
+                $record['cacheid'],
+                $opt['logic']['adminreports']['external_maintainer']['url']
+            ));
             if ($external_maintainer) {
                 $tpl->assign(
                     'external_maintainer_msg',

@@ -3,7 +3,6 @@
  *  For license information see doc/license.txt
  *  submit a new cache
  *  used template(s): newcache, viewcache, login
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 use Oc\GeoCache\StatisticPicture;
@@ -23,8 +22,8 @@ if ($error == false) {
 
         tpl_set_var('username', '');
         tpl_set_var('target', 'newcache.php');
-        tpl_set_var('message_start', "");
-        tpl_set_var('message_end', "");
+        tpl_set_var('message_start', '');
+        tpl_set_var('message_end', '');
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
@@ -35,7 +34,7 @@ if ($error == false) {
         require_once $stylepath . '/' . $tplname . '.inc.php';
 
         //set template replacements
-        tpl_set_var('reset', $reset);  // obsolete
+        tpl_set_var('reset', $reset); // obsolete
         tpl_set_var('submit', $submit);
         tpl_set_var('general_message', '');
         tpl_set_var('hidden_since_message', '');
@@ -52,7 +51,7 @@ if ($error == false) {
         tpl_set_var('diff_message', '');
         tpl_set_var('safari_message', '');
 
-        $sel_type = isset($_POST['type']) ? $_POST['type'] : 0;  // Ocprop
+        $sel_type = isset($_POST['type']) ? $_POST['type'] : 0; // Ocprop
         if (!isset($_POST['size'])) {
             if ($sel_type == 4 || $sel_type == 5) {
                 $sel_size = 7;
@@ -60,15 +59,15 @@ if ($error == false) {
                 $sel_size = -1;
             }
         } else {
-            $sel_size = isset($_POST['size']) ? $_POST['size'] : -1;  // Ocprop
+            $sel_size = isset($_POST['size']) ? $_POST['size'] : -1; // Ocprop
         }
         $sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;
-        $sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry();  // Ocprop
+        $sel_country = isset($_POST['country']) ? $_POST['country'] : getUserCountry(); // Ocprop
         $show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
         $show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;
 
         //coords
-        $lonEW = isset($_POST['lonEW']) ? $_POST['lonEW'] : $default_EW;  // Ocprop
+        $lonEW = isset($_POST['lonEW']) ? $_POST['lonEW'] : $default_EW; // Ocprop
         if ($lonEW == 'E') {
             tpl_set_var('lonEsel', ' selected="selected"');
             tpl_set_var('lonWsel', '');
@@ -76,13 +75,13 @@ if ($error == false) {
             tpl_set_var('lonEsel', '');
             tpl_set_var('lonWsel', ' selected="selected"');
         }
-        $lon_h = isset($_POST['lon_h']) ? $_POST['lon_h'] : '0';  // Ocprop
+        $lon_h = isset($_POST['lon_h']) ? $_POST['lon_h'] : '0'; // Ocprop
         tpl_set_var('lon_h', htmlspecialchars($lon_h, ENT_COMPAT, 'UTF-8'));
 
-        $lon_min = isset($_POST['lon_min']) ? $_POST['lon_min'] : '00.000';  // Ocprop
+        $lon_min = isset($_POST['lon_min']) ? $_POST['lon_min'] : '00.000'; // Ocprop
         tpl_set_var('lon_min', htmlspecialchars($lon_min, ENT_COMPAT, 'UTF-8'));
 
-        $latNS = isset($_POST['latNS']) ? $_POST['latNS'] : $default_NS;  // Ocprop
+        $latNS = isset($_POST['latNS']) ? $_POST['latNS'] : $default_NS; // Ocprop
         if ($latNS == 'N') {
             tpl_set_var('latNsel', ' selected="selected"');
             tpl_set_var('latSsel', '');
@@ -90,14 +89,14 @@ if ($error == false) {
             tpl_set_var('latNsel', '');
             tpl_set_var('latSsel', ' selected="selected"');
         }
-        $lat_h = isset($_POST['lat_h']) ? $_POST['lat_h'] : '0';  // Ocprop
+        $lat_h = isset($_POST['lat_h']) ? $_POST['lat_h'] : '0'; // Ocprop
         tpl_set_var('lat_h', htmlspecialchars($lat_h, ENT_COMPAT, 'UTF-8'));
 
-        $lat_min = isset($_POST['lat_min']) ? $_POST['lat_min'] : '00.000';  // Ocprop
+        $lat_min = isset($_POST['lat_min']) ? $_POST['lat_min'] : '00.000'; // Ocprop
         tpl_set_var('lat_min', htmlspecialchars($lat_min, ENT_COMPAT, 'UTF-8'));
 
         //name
-        $name = isset($_POST['name']) ? trim($_POST['name']) : '';  // Ocprop
+        $name = isset($_POST['name']) ? trim($_POST['name']) : ''; // Ocprop
         tpl_set_var('name', htmlspecialchars($name, ENT_COMPAT, 'UTF-8'));
 
         //shortdesc
@@ -105,7 +104,8 @@ if ($error == false) {
         tpl_set_var('short_desc', htmlspecialchars($short_desc, ENT_COMPAT, 'UTF-8'));
 
         // descMode auslesen, falls nicht gesetzt aus dem Profil laden
-        if (isset($_POST['descMode'])) {// Ocprop
+        if (isset($_POST['descMode'])) {
+            // Ocprop
             $descMode = $_POST['descMode'] + 0;
             if (($descMode < 1) || ($descMode > 3)) {
                 $descMode = 3;
@@ -119,25 +119,25 @@ if ($error == false) {
                 $oldDescMode = $descMode;
             }
         } else {
+            $descMode = 3;
             if (sqlValue(
-                    "SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'", 1
+                    "SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'",
+                    1
                 ) == 1
             ) {
                 $descMode = 1;
-            } else {
-                $descMode = 3;
             }
             $oldDescMode = $descMode;
         }
 
         // fuer alte Versionen von OCProp
         if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-            $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;  // Ocprop
+            $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1; // Ocprop
             $_POST['submitform'] = $_POST['submit'];
 
-            $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-            $desc = iconv("ISO-8859-1", "UTF-8", $desc);
-            $name = iconv("ISO-8859-1", "UTF-8", $name);
+            $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+            $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
+            $name = iconv('ISO-8859-1', 'UTF-8', $name);
         }
 
         // Text / normal HTML / HTML editor
@@ -162,8 +162,8 @@ if ($error == false) {
                     $locale
                 ) . '"></script>' . "\n";
         }
-        $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath(
-            ) . '"></script>' . "\n";
+        $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() .
+            '"></script>' . "\n";
         tpl_set_var('htmlheaders', $headers);
 
         //effort
@@ -201,7 +201,7 @@ if ($error == false) {
         }
 
         //tos
-        $tos = isset($_POST['TOS']) ? 1 : 0;  // Ocprop
+        $tos = isset($_POST['TOS']) ? 1 : 0; // Ocprop
         if ($tos == 1) {
             tpl_set_var('toschecked', ' checked="checked"');
         } else {
@@ -209,9 +209,9 @@ if ($error == false) {
         }
 
         //hidden_since
-        $hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d');  // Ocprop
-        $hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m');  // Ocprop
-        $hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y');  // Ocprop
+        $hidden_day = isset($_POST['hidden_day']) ? $_POST['hidden_day'] : date('d'); // Ocprop
+        $hidden_month = isset($_POST['hidden_month']) ? $_POST['hidden_month'] : date('m'); // Ocprop
+        $hidden_year = isset($_POST['hidden_year']) ? $_POST['hidden_year'] : date('Y'); // Ocprop
         tpl_set_var('hidden_day', htmlspecialchars($hidden_day, ENT_COMPAT, 'UTF-8'));
         tpl_set_var('hidden_month', htmlspecialchars($hidden_month, ENT_COMPAT, 'UTF-8'));
         tpl_set_var('hidden_year', htmlspecialchars($hidden_year, ENT_COMPAT, 'UTF-8'));
@@ -228,13 +228,12 @@ if ($error == false) {
         tpl_set_var('publish_later_checked', '');
         tpl_set_var('publish_notnow_checked', '');
 
-        $publish = isset($_POST['publish']) ? $_POST['publish'] : 'now2';  // Ocprop
+        $publish = isset($_POST['publish']) ? $_POST['publish'] : 'now2'; // Ocprop
         if ($publish == 'now2') {
             tpl_set_var('publish_now_checked', 'checked');
         } elseif ($publish == 'later') {
             tpl_set_var('publish_later_checked', 'checked');
-        } else // notnow
-        {
+        } else { // notnow
             $publish = 'notnow';
             tpl_set_var('publish_notnow_checked', 'checked');
         }
@@ -258,11 +257,11 @@ if ($error == false) {
 
         // gc- and nc-waypoints
         // fix #4356: gc waypoints are frequently copy&pasted with leading spaces
-        $wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : '';  // Ocprop
+        $wp_gc = isset($_POST['wp_gc']) ? strtoupper(trim($_POST['wp_gc'])) : ''; // Ocprop
         tpl_set_var('wp_gc', htmlspecialchars($wp_gc, ENT_COMPAT, 'UTF-8'));
 
         //difficulty
-        $difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1;  // Ocprop
+        $difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 1; // Ocprop
         $difficulty_options = '<option value="1">' . $sel_message . '</option>';
         for ($i = 2; $i <= 10; $i++) {
             if ($difficulty == $i) {
@@ -275,7 +274,7 @@ if ($error == false) {
         tpl_set_var('difficulty_options', $difficulty_options);
 
         //terrain
-        $terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1;  // Ocprop
+        $terrain = isset($_POST['terrain']) ? $_POST['terrain'] : 1; // Ocprop
         $terrain_options = '<option value="1">' . $sel_message . '</option>';
         for ($i = 2; $i <= 10; $i++) {
             if ($terrain == $i) {
@@ -289,21 +288,31 @@ if ($error == false) {
 
         //sizeoptions
         $sSelected = ($sel_size == -1) ? ' selected="selected"' : '';
-        $sizes = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(
-                t('Please select!'), ENT_COMPAT, 'UTF-8'
+        $sizes = '<option value="-1"' . $sSelected . '>' .
+            htmlspecialchars(
+                t('Please select!'),
+                ENT_COMPAT,
+                'UTF-8'
             ) . '</option>';
         $rsSizes = sql(
-            "SELECT `cache_size`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_size`.`name`) AS `name`
-                  FROM `cache_size`
-             LEFT JOIN `sys_trans` ON `cache_size`.`trans_id`=`sys_trans`.`id`
-             LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-                       `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-              ORDER BY `cache_size`.`ordinal` ASC"
+            "SELECT `cache_size`.`id`,
+                    IFNULL(`sys_trans_text`.`text`,
+                    `cache_size`.`name`) AS `name`
+             FROM `cache_size`
+             LEFT JOIN `sys_trans`
+               ON `cache_size`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+             ORDER BY `cache_size`.`ordinal` ASC"
         );
         while ($rSize = sql_fetch_assoc($rsSizes)) {
             $sSelected = ($rSize['id'] == $sel_size) ? ' selected="selected"' : '';
-            $sizes .= '<option value="' . $rSize['id'] . '"' . $sSelected . '>' . htmlspecialchars(
-                    $rSize['name'], ENT_COMPAT, 'UTF-8'
+            $sizes .= '<option value="' . $rSize['id'] . '"' . $sSelected . '>' .
+                htmlspecialchars(
+                    $rSize['name'],
+                    ENT_COMPAT,
+                    'UTF-8'
                 ) . '</option>';
         }
         sql_free_result($rsSizes);
@@ -311,21 +320,31 @@ if ($error == false) {
 
         //typeoptions
         $sSelected = ($sel_type == -1) ? ' selected="selected"' : '';
-        $types = '<option value="-1"' . $sSelected . '>' . htmlspecialchars(
-                t('Please select!'), ENT_COMPAT, 'UTF-8'
+        $types = '<option value="-1"' . $sSelected . '>' .
+            htmlspecialchars(
+                t('Please select!'),
+                ENT_COMPAT,
+                'UTF-8'
             ) . '</option>';
         $rsTypes = sql(
-            "SELECT `cache_type`.`id`, IFNULL(`sys_trans_text`.`text`, `cache_type`.`en`) AS `name`
-                              FROM `cache_type`
-                         LEFT JOIN `sys_trans` ON `cache_type`.`trans_id`=`sys_trans`.`id`
-                         LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND
-                                   `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
-                          ORDER BY `cache_type`.`ordinal` ASC"
+            "SELECT `cache_type`.`id`,
+                    IFNULL(`sys_trans_text`.`text`,
+                    `cache_type`.`en`) AS `name`
+             FROM `cache_type`
+             LEFT JOIN `sys_trans`
+               ON `cache_type`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='" . sql_escape($locale) . "'
+             ORDER BY `cache_type`.`ordinal` ASC"
         );
         while ($rType = sql_fetch_assoc($rsTypes)) {
             $sSelected = ($rType['id'] == $sel_type) ? ' selected="selected"' : '';
-            $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' . htmlspecialchars(
-                    $rType['name'], ENT_COMPAT, 'UTF-8'
+            $types .= '<option value="' . $rType['id'] . '"' . $sSelected . '>' .
+                htmlspecialchars(
+                    $rType['name'],
+                    ENT_COMPAT,
+                    'UTF-8'
                 ) . '</option>';
         }
         sql_free_result($rsTypes);
@@ -337,7 +356,6 @@ if ($error == false) {
             $show_all_langs = 1;
         }
 
-        //langoptions
         $langsoptions = '';
 
         //check if selected country is in list_default
@@ -361,15 +379,18 @@ if ($error == false) {
             );
 
             $rs = sql(
-                "SELECT `languages`.`short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
-                FROM `languages`
-                INNER JOIN `languages_list_default` ON `languages`.`short`=`languages_list_default`.`show`
-                LEFT JOIN `sys_trans`
-                    ON `languages`.`trans_id`=`sys_trans`.`id`
-                LEFT JOIN `sys_trans_text`
-                    ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                    AND `sys_trans_text`.`lang`='&1'
-                WHERE `languages_list_default`.`lang`='&1' ORDER BY `name` ASC",
+                "SELECT `languages`.`short`,
+                        IFNULL(`sys_trans_text`.`text`,
+                        `languages`.`name`) AS `name`
+                 FROM `languages`
+                 INNER JOIN `languages_list_default`
+                   ON `languages`.`short`=`languages_list_default`.`show`
+                 LEFT JOIN `sys_trans`
+                   ON `languages`.`trans_id`=`sys_trans`.`id`
+                 LEFT JOIN `sys_trans_text`
+                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                   AND `sys_trans_text`.`lang`='&1'
+                 WHERE `languages_list_default`.`lang`='&1' ORDER BY `name` ASC",
                 $locale
             );
         } else {
@@ -377,24 +398,31 @@ if ($error == false) {
             tpl_set_var('show_all_langs_submit', '');
 
             $rs = sql(
-                "SELECT `languages`.`short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
-                FROM `languages`
-                LEFT JOIN `sys_trans`
-                    ON `languages`.`trans_id`=`sys_trans`.`id`
-                LEFT JOIN `sys_trans_text`
-                    ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                    AND `sys_trans_text`.`lang`='&1'
-                ORDER BY `name` ASC",
+                "SELECT `languages`.`short`,
+                 IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
+                 FROM `languages`
+                 LEFT JOIN `sys_trans`
+                   ON `languages`.`trans_id`=`sys_trans`.`id`
+                 LEFT JOIN `sys_trans_text`
+                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                   AND `sys_trans_text`.`lang`='&1'
+                 ORDER BY `name` ASC",
                 $locale
             );
         }
 
         while ($record = sql_fetch_assoc($rs)) {
             $sSelected = ($record['short'] == $sel_lang) ? ' selected="selected"' : '';
-            $langsoptions .= '<option value="' . htmlspecialchars(
-                    $record['short'], ENT_COMPAT, 'UTF-8'
-                ) . '"' . $sSelected . '>' . htmlspecialchars(
-                    $record['name'], ENT_COMPAT, 'UTF-8'
+            $langsoptions .= '<option value="' .
+                htmlspecialchars(
+                    $record['short'],
+                    ENT_COMPAT,
+                    'UTF-8'
+                ) . '"' . $sSelected . '>' .
+                htmlspecialchars(
+                    $record['name'],
+                    ENT_COMPAT,
+                    'UTF-8'
                 ) . '</option>' . "\n";
         }
 
@@ -424,15 +452,19 @@ if ($error == false) {
             );
 
             $rs = sql(
-                "SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-                FROM `countries`
-                INNER JOIN `countries_list_default` ON `countries_list_default`.`show`=`countries`.`short`
-                LEFT JOIN `sys_trans` ON `countries`.`trans_id`=`sys_trans`.`id`
-                LEFT JOIN `sys_trans_text`
-                    ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                    AND `sys_trans_text`.`lang`='&1'
-                WHERE `countries_list_default`.`lang`='&1'
-                ORDER BY `name` ASC",
+                "SELECT `countries`.`short`,
+                        IFNULL(`sys_trans_text`.`text`,
+                        `countries`.`name`) AS `name`
+                 FROM `countries`
+                 INNER JOIN `countries_list_default`
+                   ON `countries_list_default`.`show`=`countries`.`short`
+                 LEFT JOIN `sys_trans`
+                   ON `countries`.`trans_id`=`sys_trans`.`id`
+                 LEFT JOIN `sys_trans_text`
+                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                   AND `sys_trans_text`.`lang`='&1'
+                 WHERE `countries_list_default`.`lang`='&1'
+                 ORDER BY `name` ASC",
                 $locale
             );
         } else {
@@ -440,13 +472,15 @@ if ($error == false) {
             tpl_set_var('show_all_countries_submit', '');
 
             $rs = sql(
-                "SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-                FROM `countries`
-                LEFT JOIN `sys_trans`
-                    ON `countries`.`trans_id`=`sys_trans`.`id`
-                LEFT JOIN `sys_trans_text`
-                    ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                    AND `sys_trans_text`.`lang`='&1'
+                "SELECT `countries`.`short`,
+                        IFNULL(`sys_trans_text`.`text`,
+                        `countries`.`name`) AS `name`
+                 FROM `countries`
+                 LEFT JOIN `sys_trans`
+                   ON `countries`.`trans_id`=`sys_trans`.`id`
+                 LEFT JOIN `sys_trans_text`
+                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                   AND `sys_trans_text`.`lang`='&1'
                 ORDER BY `name` ASC",
                 $locale
             );
@@ -456,10 +490,16 @@ if ($error == false) {
         // build the "country" dropdown list, preselect $sel_country
         while ($record = sql_fetch_array($rs)) {
             $sSelected = ($record['short'] == $sel_country) ? ' selected="selected"' : '';
-            $countriesoptions .= '<option value="' . htmlspecialchars(
-                    $record['short'], ENT_COMPAT, 'UTF-8'
-                ) . '"' . $sSelected . '>' . htmlspecialchars(
-                    $record['name'], ENT_COMPAT, 'UTF-8'
+            $countriesoptions .= '<option value="' .
+                htmlspecialchars(
+                    $record['short'],
+                    ENT_COMPAT,
+                    'UTF-8'
+                ) . '"' . $sSelected . '>' .
+                htmlspecialchars(
+                    $record['name'],
+                    ENT_COMPAT,
+                    'UTF-8'
                 ) . '</option>' . "\n";
         }
         sql_free_result($rs);
@@ -479,45 +519,47 @@ if ($error == false) {
         $cache_attribs_string = '';
 
         $rsAttrGroup = sql(
-            "SELECT
-                `attribute_groups`.`id`,
-                IFNULL(`sys_trans_text`.`text`,
-                `attribute_groups`.`name`) AS `name`,
-                `attribute_categories`.`color`
-                  FROM `attribute_groups`
-            INNER JOIN `attribute_categories` ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
-            LEFT JOIN `sys_trans` ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
-            LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
-            ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
+            "SELECT `attribute_groups`.`id`,
+                    IFNULL(`sys_trans_text`.`text`,
+                    `attribute_groups`.`name`) AS `name`,
+                    `attribute_categories`.`color`
+             FROM `attribute_groups`
+             INNER JOIN `attribute_categories`
+               ON `attribute_groups`.`category_id`=`attribute_categories`.`id`
+             LEFT JOIN `sys_trans`
+               ON `attribute_groups`.`trans_id`=`sys_trans`.`id`
+             LEFT JOIN `sys_trans_text`
+               ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+               AND `sys_trans_text`.`lang`='&1'
+             ORDER BY `attribute_groups`.`category_id` ASC, `attribute_groups`.`id` ASC",
             $locale
         );
         while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
             $group_line = '';
 
             $rs = sql(
-                "SELECT
-                    `cache_attrib`.`id`,
-                    IFNULL(`ttname`.`text`,`cache_attrib`.`name`) AS `name`,
-                    `cache_attrib`.`icon_undef`,
-                    `cache_attrib`.`icon_large`,
-                    IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
-                FROM `cache_attrib`
-                LEFT JOIN `sys_trans` AS `tname`
-                    ON `cache_attrib`.`trans_id`=`tname`.`id`
-                    AND `cache_attrib`.`name`=`tname`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttname`
-                    ON `tname`.`id`=`ttname`.`trans_id`
-                    AND `ttname`.`lang`='&1'
-                LEFT JOIN `sys_trans` AS `tdesc`
-                    ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id`
-                    AND `cache_attrib`.`html_desc`=`tdesc`.`text`
-                LEFT JOIN `sys_trans_text` AS `ttdesc`
-                    ON `tdesc`.`id`=`ttdesc`.`trans_id`
-                    AND `ttdesc`.`lang`='&1'
-                WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id'] + 0) . "
-                AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                AND `cache_attrib`.`selectable`!=0
-                ORDER BY `cache_attrib`.`group_id`, `cache_attrib`.`id`",
+                "SELECT `cache_attrib`.`id`,
+                        IFNULL(`ttname`.`text`,`cache_attrib`.`name`) AS `name`,
+                        `cache_attrib`.`icon_undef`,
+                        `cache_attrib`.`icon_large`,
+                        IFNULL(`ttdesc`.`text`, `cache_attrib`.`html_desc`) AS `html_desc`
+                 FROM `cache_attrib`
+                 LEFT JOIN `sys_trans` AS `tname`
+                   ON `cache_attrib`.`trans_id`=`tname`.`id`
+                   AND `cache_attrib`.`name`=`tname`.`text`
+                 LEFT JOIN `sys_trans_text` AS `ttname`
+                   ON `tname`.`id`=`ttname`.`trans_id`
+                   AND `ttname`.`lang`='&1'
+                 LEFT JOIN `sys_trans` AS `tdesc`
+                   ON `cache_attrib`.`html_desc_trans_id`=`tdesc`.`id`
+                   AND `cache_attrib`.`html_desc`=`tdesc`.`text`
+                 LEFT JOIN `sys_trans_text` AS `ttdesc`
+                   ON `tdesc`.`id`=`ttdesc`.`trans_id`
+                   AND `ttdesc`.`lang`='&1'
+                 WHERE `cache_attrib`.`group_id`=" . ($rAttrGroup['id'] + 0) . '
+                 AND NOT IFNULL(`cache_attrib`.`hidden`, 0) = 1
+                 AND `cache_attrib`.`selectable` != 0
+                 ORDER BY `cache_attrib`.`group_id`, `cache_attrib`.`id`',
                 $locale
             );
             while ($record = sql_fetch_array($rs)) {
@@ -747,13 +789,13 @@ if ($error == false) {
 
             //check date_activate
             $activation_date_not_ok = true;
-            if (is_numeric($activate_day) && is_numeric($activate_month) && is_numeric($activate_year) && is_numeric(
-                    $activate_hour
-                )
+            if (is_numeric($activate_day)
+                && is_numeric($activate_month)
+                && is_numeric($activate_year)
+                && is_numeric($activate_hour)
             ) {
-                $activation_date_not_ok = ((checkdate(
-                            $activate_month, $activate_day, $activate_year
-                        ) == false) || $activate_hour < 0 || $activate_hour > 23);
+                $activation_date_not_ok = ((checkdate($activate_month, $activate_day, $activate_year) == false)
+                    || $activate_hour < 0 || $activate_hour > 23);
             }
             if ($activation_date_not_ok == false) {
                 if (!($publish == 'now2' || $publish == 'later' || $publish == 'notnow')) {
@@ -826,16 +868,28 @@ if ($error == false) {
             }
 
             //no errors?
-            if (!($tos_not_ok || $name_not_ok || $hidden_date_not_ok || $activation_date_not_ok || $lon_not_ok || $lat_not_ok || $time_not_ok || $way_length_not_ok || $size_not_ok || $type_not_ok || $diff_not_ok || $attribs_not_ok || $wpgc_not_ok)) {
+            if (!($tos_not_ok
+                || $name_not_ok
+                || $hidden_date_not_ok
+                || $activation_date_not_ok
+                || $lon_not_ok
+                || $lat_not_ok
+                || $time_not_ok
+                || $way_length_not_ok
+                || $size_not_ok
+                || $type_not_ok
+                || $diff_not_ok
+                || $attribs_not_ok
+                || $wpgc_not_ok)
+            ) {
                 //sel_status
                 $now = getdate();
                 $today = mktime(0, 0, 0, $now['mon'], $now['mday'], $now['year']);
                 $hidden_date = mktime(0, 0, 0, $hidden_month, $hidden_day, $hidden_year);
 
+                $sel_status = 1; //available
                 if (($hidden_date > $today) && ($sel_type != 6)) {
                     $sel_status = 2; //currently not available
-                } else {
-                    $sel_status = 1; //available
                 }
 
                 if ($publish == 'now2') {
@@ -885,8 +939,25 @@ if ($error == false) {
                         `wp_gc`,
                         `node`
                     ) VALUES (
-                        '', '&1', '&2', '&3', '&4', '&5', '&6', '&7', '&8', $activation_date,
-                        '&9', '&10', '&11', '&12', '&13', '&14', '&15', '&16')",
+                        '',
+                        '&1',
+                        '&2',
+                        '&3',
+                        '&4',
+                        '&5',
+                        '&6',
+                        '&7',
+                        '&8',
+                        $activation_date,
+                        '&9',
+                        '&10',
+                        '&11',
+                        '&12',
+                        '&13',
+                        '&14',
+                        '&15',
+                        '&16'
+                        )",
                     $usr['userid'],
                     $name,
                     $longitude,
@@ -912,17 +983,28 @@ if ($error == false) {
                 //add record to cache_desc table
                 sql(
                     "INSERT INTO `cache_desc` (
-                                                `id`,
-                                                `cache_id`,
-                                                `language`,
-                                                `desc`,
-                                                `desc_html`,
-                                                `hint`,
-                                                `short_desc`,
-                                                `last_modified`,
-                                                `desc_htmledit`,
-                                                `node`
-                                            ) VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', NOW(), '&7', '&8')",
+                        `id`,
+                        `cache_id`,
+                        `language`,
+                        `desc`,
+                        `desc_html`,
+                        `hint`,
+                        `short_desc`,
+                        `last_modified`,
+                        `desc_htmledit`,
+                        `node`
+                    ) VALUES (
+                        '',
+                        '&1',
+                        '&2',
+                        '&3',
+                        '&4',
+                        '&5',
+                        '&6',
+                        NOW(),
+                        '&7',
+                        '&8'
+                    )",
                     $cache_id,
                     $sel_lang,
                     $desc,
@@ -933,11 +1015,18 @@ if ($error == false) {
                     $oc_nodeid
                 );
 
+                $acheAttributesCount = count($cache_attribs);
                 // insert cache-attributes
-                for ($i = 0; $i < count($cache_attribs); $i++) {
+                for ($i = 0; $i < $acheAttributesCount; $i++) {
                     if (($cache_attribs[$i] + 0) > 0) {
                         sql(
-                            "INSERT INTO `caches_attributes` (`cache_id`, `attrib_id`) VALUES ('&1', '&2')",
+                            "INSERT INTO `caches_attributes` (
+                                 `cache_id`,
+                                 `attrib_id`
+                             ) VALUES (
+                                 '&1',
+                                 '&2'
+                             )",
                             $cache_id,
                             $cache_attribs[$i] + 0
                         );

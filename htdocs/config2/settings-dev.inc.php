@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Default settings for OC.de developer system. See also
  *    - config2/settings-dist.inc.php for common settings

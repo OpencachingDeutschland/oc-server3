@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Currently not in use
  ***************************************************************************/
@@ -37,7 +36,7 @@ function CheckThrottle()
     }
 
     // remove old entries every 100st call
-    if (mt_rand(0, 100) == 50) {
+    if (mt_rand(0, 100) === 50) {
         sql(
             "DELETE FROM &tmpdb.`sys_accesslog` WHERE `access_time`<CURRENT_TIMESTAMP()-'&2'",
             $ip_numeric,

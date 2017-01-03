@@ -3,22 +3,16 @@
 namespace okapi\services\caches\formatters\garmin;
 
 
-use okapi\Okapi;
+use clsTbsZip;
+use Exception;
 use okapi\Cache;
-use okapi\Settings;
-use okapi\OkapiRequest;
-use okapi\OkapiHttpResponse;
+use okapi\InvalidParam;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
 use okapi\OkapiZIPHttpResponse;
-use okapi\BadRequest;
 use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiAccessToken;
-use okapi\services\caches\search\SearchAssistant;
-
-use \Exception;
-use \clsTbsZip;
+use okapi\Settings;
 
 class WebService
 {
@@ -73,24 +67,31 @@ class WebService
                 break;
         }
 
-        $response->zip->FileAdd($data_filename,
-            OkapiServiceRunner::call($data_method, new OkapiInternalRequest(
-            $request->consumer, $request->token, array(
-                'cache_codes' => $cache_codes,
-                'langpref' => $langpref,
-                'ns_ground' => 'true',
-                'ns_ox' => 'true',
-                'images' => 'ox:all',
-                'attrs' => 'ox:tags',
-                'trackables' => 'desc:count',
-                'alt_wpts' => 'true',
-                'recommendations' => 'desc:count',
-                'latest_logs' => 'true',
-                'lpc' => 'all',
-                'my_notes' => ($request->token != null) ? "desc:text" : "none",
-                'location_source' => $location_source,
-                'location_change_prefix' => $location_change_prefix
-            )))->get_body(), clsTbsZip::TBSZIP_STRING, $data_use_compression);
+        $data_method_params = array(
+            'cache_codes' => $cache_codes,
+            'langpref' => $langpref,
+            'ns_ground' => 'true',
+            'ns_ox' => 'true',
+            'images' => 'ox:all',
+            'attrs' => 'ox:tags',
+            'trackables' => 'desc:count',
+            'alt_wpts' => 'true',
+            'recommendations' => 'desc:count',
+            'latest_logs' => 'true',
+            'lpc' => 'all',
+            'my_notes' => ($request->token != null) ? "desc:text" : "none",
+            'location_source' => $location_source,
+            'location_change_prefix' => $location_change_prefix
+        );
+        if ($request->token !== null) {
+            $data_method_params['mark_found'] = 'true';
+        }
+        $data_contents = OkapiServiceRunner::call($data_method, new OkapiInternalRequest(
+            $request->consumer, $request->token, $data_method_params
+        ))->get_body();
+        $response->zip->FileAdd(
+            $data_filename, $data_contents, clsTbsZip::TBSZIP_STRING, $data_use_compression
+        );
 
         # Then, include all the images.
 

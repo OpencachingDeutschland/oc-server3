@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once $opt['rootpath'] . 'lib2/translate.class.php';
@@ -261,7 +260,7 @@ class Menu
      */
     public function GetSubMenu()
     {
-        global $menuitem, $login;
+        global $menuitem;
 
         $ids = $this->GetSelectedMenuIds();
         $topmenu = array_pop($ids);

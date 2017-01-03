@@ -2,17 +2,13 @@
 
 namespace okapi\services\caches\mark;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
 use okapi\InvalidParam;
-use okapi\BadRequest;
+use okapi\Okapi;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiAccessToken;
-use okapi\Settings;
+use okapi\ParamMissing;
 
 
 class WebService
@@ -82,6 +78,7 @@ class WebService
                 ");
         }
 
+        Okapi::update_user_activity($request);
         $result = array(
             'success' => true,
         );

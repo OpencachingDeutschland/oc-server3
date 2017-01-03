@@ -169,7 +169,7 @@ if ($dblink === false) {
 }
 
 // are we Ocprop?
-$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
+$ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Ocprop/') !== false;
 
 // zeitmessung
 $bScriptExecution = new CBench;
@@ -193,7 +193,7 @@ function load_domain_settings()
 
 // get the language from a given shortage
 // on success return the name, otherwise false
-function db_LanguageFromShort($langcode)
+function db_LanguageFromShort($langCode)
 {
     global $dblink, $locale;
 
@@ -206,11 +206,14 @@ function db_LanguageFromShort($langcode)
     $rs = sql(
         "SELECT IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `text`
         FROM `languages`
-        LEFT JOIN `sys_trans` ON `languages`.`trans_id`=`sys_trans`.`id`
-        LEFT JOIN `sys_trans_text` ON `sys_trans`.`id`=`sys_trans_text`.`trans_id` AND `sys_trans_text`.`lang`='&1'
+        LEFT JOIN `sys_trans`
+          ON `languages`.`trans_id`=`sys_trans`.`id`
+        LEFT JOIN `sys_trans_text`
+          ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+          AND `sys_trans_text`.`lang`='&1'
         WHERE `languages`.`short`='&2'",
         $locale,
-        $langcode
+        $langCode
     );
     if (mysql_num_rows($rs) > 0) {
         $record = sql_fetch_array($rs);
@@ -306,7 +309,12 @@ function tpl_clear_vars()
     unset($GLOBALS['no_eval_vars']);
 }
 
-//page function replaces {functionsbox} in main template
+/**
+ * page function replaces {functionsbox} in main template
+ *
+ * @param $id
+ * @param $html_code
+ */
 function tpl_set_page_function($id, $html_code)
 {
     global $page_functions;
@@ -326,8 +334,12 @@ function tpl_clear_page_functions()
     unset($GLOBALS['page_functions']);
 }
 
-//read the templates and echo it to the user
-function tpl_BuildTemplate($dbdisconnect = true)
+/**
+ * read the templates and echo it to the user
+ *
+ * @param bool $dbDisconnect
+ */
+function tpl_BuildTemplate($dbDisconnect = true)
 {
     global $sql_debug, $sqldbg_cmdNo;
 
@@ -347,12 +359,12 @@ function tpl_BuildTemplate($dbdisconnect = true)
     // country dropdown
     global $tpl_usercountries;
 
-    tpl_set_var('screen_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen.css"));
+    tpl_set_var('screen_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen.css'));
     tpl_set_var(
         'screen_msie_css_time',
-        filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_screen_msie.css")
+        filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen_msie.css')
     );
-    tpl_set_var('print_css_time', filemtime($opt['rootpath'] . "resource2/" . $style . "/css/style_print.css"));
+    tpl_set_var('print_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_print.css'));
 
     if (isset($bScriptExecution)) {
         $bScriptExecution->stop();
@@ -490,7 +502,7 @@ function tpl_BuildTemplate($dbdisconnect = true)
     eval($sCode);
 
     //disconnect the database
-    if ($dbdisconnect) {
+    if ($dbDisconnect) {
         db_disconnect();
     }
 }
@@ -498,14 +510,14 @@ function tpl_BuildTemplate($dbdisconnect = true)
 function http_write_no_cache()
 {
     // HTTP/1.1
-    header("Cache-Control: no-store, no-cache, must-revalidate");
-    header("Cache-Control: post-check=0, pre-check=0", false);
+    header('Cache-Control: no-store, no-cache, must-revalidate');
+    header('Cache-Control: post-check=0, pre-check=0', false);
     // HTTP/1.0
-    header("Pragma: no-cache");
+    header('Pragma: no-cache');
     // Date in the past
-    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
     // always modified
-    header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 }
 
 //redirect to another site to display, i.e. to view a cache after logging
@@ -520,9 +532,9 @@ function tpl_redirect($page)
     http_write_no_cache();
 
     if (!preg_match('/^https?:/i', $page)) {
-        header("Location: " . $absolute_server_URI . $page);
+        header('Location: ' . $absolute_server_URI . $page);
     } else {
-        header("Location: " . $page);
+        header('Location: ' . $page);
     }
 
     exit;
@@ -533,6 +545,7 @@ function tpl_redirect($page)
 //                  marked as "no_eval"
 /**
  * @param string $str
+ * @return string
  */
 function tpl_do_replace($str)
 {
@@ -595,6 +608,7 @@ function load_gettext()
 
 /**
  * @param string $sCode
+ * @return string
  */
 function tpl_do_translation($sCode)
 {
@@ -626,6 +640,7 @@ function tpl_do_translation($sCode)
 
 /**
  * @param string $sCode
+ * @return string
  */
 function gettext_do_html($sCode)
 {
@@ -657,6 +672,7 @@ function gettext_do_html($sCode)
 }
 
 /**
+ * @param $str
  * @return string
  */
 function t($str)
@@ -672,6 +688,10 @@ function t($str)
     return $str;
 }
 
+/**
+ * @param $text
+ * @return string
+ */
 function t_prepare_text($text)
 {
     $text = mb_ereg_replace("\t", ' ', $text);
@@ -684,6 +704,9 @@ function t_prepare_text($text)
     return $text;
 }
 
+/**
+ * @return mixed|null|string
+ */
 function getUserCountry()
 {
     global $opt, $cookie, $usr;
@@ -721,33 +744,36 @@ function getUserCountry()
     return 'GB';
 }
 
-
-// external help embedding
-// pay attention to use only ' quotes in $text (escape other ')
-//
-// see corresponding function in lib2/common.inc.php
-function helppagelink($ocpage)
+/**
+ * external help embedding
+ * pay attention to use only ' quotes in $text (escape other ')
+ *
+ * see corresponding function in lib2/common.inc.php
+ * @param $ocPage
+ * @return string
+ */
+function helppagelink($ocPage)
 {
     global $opt, $locale, $translate;
 
     $help_locale = $locale;
     $rs = sql(
         "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-        $ocpage,
+        $ocPage,
         $help_locale
     );
     if (mysql_num_rows($rs) == 0) {
         mysql_free_result($rs);
         $rs = sql(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
-            $ocpage
+            $ocPage
         );
     }
     if (mysql_num_rows($rs) == 0) {
         mysql_free_result($rs);
         $rs = sql(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
-            $ocpage,
+            $ocPage,
             $opt['template']['default']['fallback_locale']
         );
         if (mysql_num_rows($rs) > 0) {
@@ -757,21 +783,21 @@ function helppagelink($ocpage)
 
     if (mysql_num_rows($rs) > 0) {
         $record = sql_fetch_array($rs);
-        $helppage = $record['helppage'];
+        $helpPage = $record['helppage'];
     } else {
-        $helppage = "";
+        $helpPage = '';
     }
     mysql_free_result($rs);
 
-    $imgtitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
-    $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
+    $imgTitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
+    $imgTitle = "alt='" . $imgTitle . "' title='" . $imgTitle . "'";
 
-    if (substr($helppage, 0, 1) == "!") {
-        return "<a class='nooutline' href='" . substr($helppage, 1) . "' " . $imgtitle . " target='_blank'>";
+    if (substr($helpPage, 0, 1) == "!") {
+        return "<a class='nooutline' href='" . substr($helpPage, 1) . "' " . $imgTitle . " target='_blank'>";
     } else {
-        if ($helppage != "" && isset($opt['locale'][$help_locale]['helpwiki'])) {
+        if ($helpPage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
             return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
-            str_replace(' ', '_', $helppage) . "' " . $imgtitle . " target='_blank'>";
+            str_replace(' ', '_', $helpPage) . "' " . $imgTitle . " target='_blank'>";
         }
     }
 

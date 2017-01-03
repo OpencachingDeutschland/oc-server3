@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  check if the mailserver returns an 550 or 553 code
  *
@@ -165,7 +164,9 @@ class mailcheck
     }
 
     /**
+     * @param $fp
      * @param string $out
+     * @return string
      */
     public function send_command($fp, $out)
     {
@@ -176,7 +177,7 @@ class mailcheck
 
     public function get_data($fp)
     {
-        $s = "";
+        $s = '';
         stream_set_timeout($fp, $this->nReadTimeout);
 
         for ($i = 0; $i < 2; $i++) {

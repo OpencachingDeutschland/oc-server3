@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Production system sample of settings.inc.php - all lib2 settings needed
  *  to run the website. In addition to this, you must create settings.inc.php
@@ -62,7 +61,7 @@ $opt['db']['placeholder']['tmpdb'] = 'ocdetmp';
  * session.use_trans_sid = 0
  *
  * set session.safe_path to a secure place
- * 
+ *
  * other parameters may be customized
  */
 $opt['session']['mode'] = SAVE_COOKIE;

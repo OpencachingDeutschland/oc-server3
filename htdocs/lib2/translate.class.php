@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/translationHandler.class.php';
@@ -40,9 +39,9 @@ class translate
      * translate the given string
      *
      * @param $message
-     * @param $style
-     * @param $resource_name
-     * @param $line
+     * @param string $style
+     * @param string $resource_name
+     * @param string $line
      * @param string $plural
      * @param int $count
      * @param null $lang
@@ -109,6 +108,7 @@ class translate
     }
 
     /**
+     * @param $message
      * @return string
      */
     public function v($message)

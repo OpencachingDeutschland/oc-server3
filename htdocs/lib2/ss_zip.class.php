@@ -126,7 +126,6 @@ class ss_zip
      */
     public function add_data($filename, $data = null)
     {
-
         $filename = trim($filename);
         $filename = str_replace('\\', '/', $filename);
         if ($filename[0] == '/') {
@@ -344,7 +343,7 @@ class ss_zip
      */
     public function _write($name, $data)
     {
-        $fp = fopen($name, "w");
+        $fp = fopen($name, 'w');
         fwrite($fp, $data);
         fclose($fp);
     }
@@ -353,10 +352,13 @@ class ss_zip
 /** debug helper.
  * the only job for this function is take parameter $v and ouput it with print_r() preceding with < xmp > etc
  * The $l is a label like l=myvar
+ *
+ * @param $v
+ * @param string $l
  */
 function dbg($v, $l = 'var')
 {
     echo "<xmp>$l=";
     print_r($v);
-    echo "</xmp>";
+    echo '</xmp>';
 }

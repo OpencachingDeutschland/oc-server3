@@ -152,7 +152,7 @@ $smarty_dummy = 0;
                         <td><strong>{t}Language:{/t}&nbsp;</strong></td>
                         <td>
 <?php
-foreach ($opt['template']['locales'] AS $k => $lang) {
+foreach ($opt['template']['locales'] as $k => $lang) {
     if ($lang['status'] == OC_LOCALE_ACTIVE) {
         echo '<a style="text-decoration: none;" href="'.$langUrl . $k . '"><img src="' . $lang['flag'] .
             '" alt="' . $lang['name'] . '" title="' . $lang['name'] . '" width="24px" height="18px" /></a> ';
@@ -167,10 +167,8 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
                                     global $tpl_usercountries;
                                     $nLastGroup = 0;
                                     $maxUserCountries = count($tpl_usercountries);
-                                    for ($i = 0; $i < $maxUserCountries; $i++)
-                                    {
-                                        if ($nLastGroup != $tpl_usercountries[$i]['group'])
-                                        {
+                                    for ($i = 0; $i < $maxUserCountries; $i++) {
+                                        if ($nLastGroup != $tpl_usercountries[$i]['group']) {
                                             echo '<option disabled="disabled">';
                                             if ($tpl_usercountries[$i]['group'] == 1) {
                                                 echo '- ' . t('This OC node') . ' -';
@@ -216,9 +214,9 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
 <?php
                         // $pageidx is -1 e.g. when calling newcache.php as logged-off-user (-> login.tpl.php)
                         if ($pageidx >= 0) {
-                                                    mnu_EchoMainMenu($menu[$pageidx]['siteid']);
+                            mnu_EchoMainMenu($menu[$pageidx]['siteid']);
                         } else {
-                                                    mnu_EchoMainMenu(-1);
+                            mnu_EchoMainMenu(-1);
                         }
                         ?>
                     </ul>
@@ -239,16 +237,15 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
                 <div class="nav3">
 <?php
                     //SubNavigation
-                    if (isset($menu[$pageidx]['submenu']))
-                    {
-?>
+                    if (isset($menu[$pageidx]['submenu'])) {
+                        ?>
                         <ul>
                             <li class="title">{t}Main menu{/t}</li>
 <?php
-                            mnu_EchoSubMenu($menu[$pageidx]['submenu'], $tplname, 1, false);
-?>
+                            mnu_EchoSubMenu($menu[$pageidx]['submenu'], $tplname, 1, false); ?>
                         </ul>
 <?php
+
                     }
 ?>
                     <!-- Länderknoten -->
@@ -268,9 +265,8 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
 
                     <!-- Paypalbutton -->
 <?php
-                    if (isset($opt['page']['showdonations']) && $opt['page']['showdonations'])
-                    {
-?>
+                    if (isset($opt['page']['showdonations']) && $opt['page']['showdonations']) {
+                        ?>
                         <p class="sidebar-maintitle">{t}Donations{/t}</p>
                         <div style="margin-top:16px;width:100%;text-align:center;">
                             <a href="articles.php?page=donations">
@@ -279,14 +275,14 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
                             &nbsp;
                         </div>
 <?php
+
                     }
 ?>
 
                     <!-- Social Media -->
 <?php
-                    if (isset($opt['page']['showsocialmedia']) && $opt['page']['showsocialmedia'])
-                    {
-?>
+                    if (isset($opt['page']['showsocialmedia']) && $opt['page']['showsocialmedia']) {
+                        ?>
                     <p class="sidebar-maintitle">{t}Social media{/t}</p>
                     <div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center">
                         <table style="margin-left: auto; margin-right: auto;">
@@ -308,6 +304,7 @@ foreach ($opt['template']['locales'] AS $k => $lang) {
                         </table>
                     </div>
 <?php
+
                     }
 ?>
 

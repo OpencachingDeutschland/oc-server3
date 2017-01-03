@@ -21,6 +21,7 @@ use okapi\oauth\OAuthServerException;
 use okapi\oauth\OAuthSignatureMethod_HMAC_SHA1;
 use okapi\oauth\OAuthToken;
 use Pdo;
+use PDOException;
 
 /** Return an array of email addresses which always get notified on OKAPI errors. */
 function get_admin_emails()
@@ -107,7 +108,29 @@ class OkapiExceptionHandler
 
             print $e->getOkapiJSON();
         }
-        else # (ErrorException, MySQL exception etc.)
+        elseif ($e instanceof DbLockWaitTimeoutException)
+        {
+            # As long as it happens occasionally only, it is safe to silently cast
+            # this error into a HTTP 503 response. (In the future, we might want to
+            # measure the frequency of such errors too.)
+
+            if (!headers_sent())
+            {
+                header("HTTP/1.0 503 Service Unavailable");
+                header("Access-Control-Allow-Origin: *");
+                header("Content-Type: application/json; charset=utf-8");
+            }
+
+            print json_encode(array("error" => array(
+                'developer_message' => (
+                    "OKAPI is experiencing an increased server load and cannot handle your ".
+                    "request just now. Please repeat your request in a minute. If this ".
+                    "problem persists, then please contact us at: ".
+                    implode(", ", get_admin_emails())
+                )
+            )));
+        }
+        else # (ErrorException, SQL syntax exception etc.)
         {
             # This one is thrown on PHP notices and warnings - usually this
             # indicates an error in OKAPI method. If thrown, then something
@@ -211,6 +234,7 @@ class OkapiExceptionHandler
     public static function get_exception_info($e)
     {
         $exception_info = "===== ERROR MESSAGE =====\n"
+            .get_class($e).":\n"
             .trim(self::removeSensitiveData($e->getMessage()))
             ."\n=========================\n\n";
         if ($e instanceof FatalError)
@@ -225,6 +249,19 @@ class OkapiExceptionHandler
         {
             $exception_info .= "--- Stack trace ---\n".
                 self::removeSensitiveData($e->getTraceAsString())."\n\n";
+
+            if ($e instanceof DbLockWaitTimeoutException) {
+                $exception_info .= "--- InnoDB status ---\n";
+                try {
+                    $exception_info .= Db::select_row("show engine innodb status")['Status'];
+                } catch (Exception $e2) {
+                    $exception_info .= (
+                        "Could not retrieve. Missing 'GRANT PROCESS'? Error was:\n".
+                        $e2->getMessage()
+                    );
+                }
+                $exception_info .= "\n\n";
+            }
         }
 
         $exception_info .= (isset($_SERVER['REQUEST_URI']) ? "--- OKAPI method called ---\n".
@@ -348,8 +385,17 @@ class InvalidParam extends BadRequest
     }
 }
 
-/** Thrown on invalid SQL queries. */
+/** Generic "catch all" class of all database-related errors. */
 class DbException extends Exception {}
+
+/** Problem while connecting to the database. */
+class DbInitException extends DbException {}
+
+/** "Lock timeout exceeded; try restarting transaction" error. */
+class DbLockWaitTimeoutException extends DbException {}
+
+/** Thrown when select_value or select_row get too many rows. */
+class DbTooManyRowsException extends DbException {}
 
 #
 # Database access abstraction layer.
@@ -411,7 +457,7 @@ class Db
                 $dsn, Settings::get('DB_USERNAME'), Settings::get('DB_PASSWORD'), $options
             );
         } catch (PDOException $e) {
-            throw new DbException($e->getMessage());
+            throw new DbInitException($e->getMessage());
         }
         self::$connected = true;
     }
@@ -425,7 +471,7 @@ class Db
             case 0: return null;
             case 1: return $rows[0];
             default:
-                throw new DbException("Invalid query. Db::select_row returned more than one row for:\n\n".$query."\n");
+                throw new DbTooManyRowsException("Invalid query. Db::select_row returned more than one row for:\n\n".$query."\n");
         }
     }
 
@@ -478,7 +524,7 @@ class Db
             return null;
         if (count($column) == 1)
             return $column[0];
-        throw new DbException("Invalid query. Db::select_value returned more than one row for:\n\n".$query."\n");
+        throw new DbTooManyRowsException("Invalid query. Db::select_value returned more than one row for:\n\n".$query."\n");
     }
 
     /** Fetch all [(A), (B), (C)], return [A, B, C]. */
@@ -535,8 +581,23 @@ class Db
         try {
             return self::$dbh->exec($query);
         } catch (PDOException $e) {
-            list($sqlstate, $errno, $msg) = $e->errorInfo;
-            throw new DbException("SQL Error $errno: $msg\n\nThe query was:\n".$query."\n");
+            self::throwProperDbException($e, $query);
+        }
+    }
+
+    /**
+     * Given a PDOException, check its properties and throw one of the DbException subclasses
+     * based on these properties.
+     *
+     * This allows developers to catch specific subclasses of exceptions in the code.
+     */
+    private static function throwProperDbException($e, $query)
+    {
+        list($sqlstate, $errno, $msg) = $e->errorInfo;
+        $msg = "SQL Error $errno: $msg\n\nThe query was:\n".$query."\n";
+        switch ($errno) {
+            case 1205: throw new DbLockWaitTimeoutException($msg);
+            default: throw new DbException($msg);
         }
     }
 
@@ -590,7 +651,7 @@ class Db
                 }
             }
 
-            throw new DbException("SQL Error $errno: $msg\n\nThe query was:\n".$query."\n");
+            self::throwProperDbException($e, $query);
         }
         return $rs;
     }
@@ -1044,8 +1105,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1315;
-    public static $git_revision = '8893638ba5c9fb5d42e3f09787fa1b72805b5e45';
+    public static $version_number = null;
+    public static $git_revision = null;
 
     private static $okapi_vars = null;
 
@@ -1123,8 +1184,8 @@ class Okapi
     {
         # Make sure we're not sending HUGE emails.
 
-        if (strlen($message) > 10000) {
-            $message = substr($message, 0, 10000)."\n\n...(message clipped at 10k chars)\n";
+        if (strlen($message) > 100000) {
+            $message = substr($message, 0, 100000)."\n\n...(message clipped at 100k chars)\n";
         }
 
         # Make sure we're not spamming.
@@ -1133,10 +1194,7 @@ class Okapi
         try {
             $counter = Cache::get($cache_key);
         } catch (Exception $e) {
-            # See https://github.com/opencaching/okapi/issues/434 on why
-            # we catch any exceptions here, not just DbException.
-
-            # Exceptions can occur during OKAPI update (#156), or when
+            # Exception can occur during OKAPI update (#156, #434), or when
             # the cache table is broken (#340). I am not sure which option is
             # better: 1. notify the admins about the error and risk spamming
             # them, 2. don't notify and don't risk spamming them. Currently,
@@ -1219,6 +1277,8 @@ class Okapi
         $matches = null;
         if (preg_match("#^https?://(www.)?opencaching.([a-z.]+)/$#", $site_url, $matches)) {
             return "Opencaching.".strtoupper($matches[2]);
+        } elseif (preg_match("#^https?://(www.)?opencache.([a-z.]+)/$#", $site_url, $matches)) {
+            return "Opencache.".strtoupper($matches[2]);
         } else {
             return "DEVELSITE";
         }
@@ -1250,7 +1310,7 @@ class Okapi
 
         $mapping = array(
             2 => "OCPL",  // OP
-            6 => "OCORGUK",  // OK
+            6 => "OCUK",  // OK
             10 => "OCUS",  // OU
             14 => "OCNL",  // OB
             16 => "OCRO",  // OR
@@ -1327,9 +1387,9 @@ class Okapi
                     "http://www.opencaching.ro/okapi/",
                 );
                 break;
-            case 'OCORGUK':
+            case 'OCUK':
                 $urls = array(
-                    "https://opencache.uk/okapi/",
+                    "http://opencache.uk/okapi/",
                 );
                 break;
             case 'OCUS':
@@ -1397,14 +1457,20 @@ class Okapi
         if ($nearest_event + 0 <= time())
         {
             require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
-            $nearest_event = CronJobController::run_jobs('pre-request');
-            Okapi::set_var("cron_nearest_event", $nearest_event);
+            try {
+                $nearest_event = CronJobController::run_jobs('pre-request');
+                Okapi::set_var("cron_nearest_event", $nearest_event);
+            } catch (\okapi\cronjobs\JobsAlreadyInProgress $e) {
+                // Ignore.
+            }
         }
     }
 
     /**
      * Check if any cron-5 cronjobs are scheduled to execute and execute
      * them if needed. Reschedule for new executions.
+     *
+     * If other thread is currently handling the jobs, then do nothing.
      */
     public static function execute_cron5_cronjobs()
     {
@@ -1414,8 +1480,12 @@ class Okapi
             set_time_limit(0);
             ignore_user_abort(true);
             require_once($GLOBALS['rootpath']."okapi/cronjobs.php");
-            $nearest_event = CronJobController::run_jobs('cron-5');
-            Okapi::set_var("cron_nearest_event", $nearest_event);
+            try {
+                $nearest_event = CronJobController::run_jobs('cron-5');
+                Okapi::set_var("cron_nearest_event", $nearest_event);
+            } catch (\okapi\cronjobs\JobsAlreadyInProgress $e) {
+                // Ignore.
+            }
         }
     }
 
@@ -1501,7 +1571,7 @@ class Okapi
         static $init_made = false;
         if ($init_made)
             return;
-        ini_set('memory_limit', '256M');
+        self::increase_memory_limit('512M');
         # The memory limit is - among other - crucial for the maximum size
         # of processable images; see services/logs/images/add.php: max_pixels()
         Db::connect();
@@ -1514,6 +1584,19 @@ class Okapi
         if ($allow_cronjobs)
             self::execute_prerequest_cronjobs();
         $init_made = true;
+    }
+
+    /**
+     * Increase memory limit (only if $value is larger than the current memory
+     * limit).
+     */
+    public static function increase_memory_limit($value)
+    {
+        $current = self::from_human_to_bytes(ini_get('memory_limit'));
+        $new = self::from_human_to_bytes($value);
+        if ($current < $new) {
+            ini_set('memory_limit', $value);
+        }
     }
 
     /**
@@ -2088,16 +2171,58 @@ class Okapi
         return $html;
     }
 
-    function php_ini_get_bytes($variable)
-    {
-        $value = trim(ini_get($variable));
-        if (!preg_match("/^[0-9]+[KM]?$/", $value))
-            throw new Exception("Unexpected PHP setting: ".$variable. " = ".$value);
-        $value = str_replace('K', '*1024', $value);
-        $value = str_replace('M', '*1024*1024', $value);
-        $value = eval('return '.$value.';');
-        return $value;
-}
+    /**
+     * Convert strings such as "2M" or "50k" to bytes.
+     */
+    public static function from_human_to_bytes($val) {
+        $val = trim($val);
+        $last = strtolower($val[strlen($val)-1]);
+        switch($last) {
+            case 'g':
+                return $val * 1024 * 1024 * 1024;
+            case 'm':
+                return $val * 1024 * 1024;
+            case 'k':
+                return $val * 1024;
+            default:
+                if (($last < '0') || ($last > '9')) {
+                    throw new Exception("Unknown suffix");
+                } else {
+                    return $val;
+                }
+        }
+    }
+
+    /**
+     * Some pages should be visible only to OKAPI developers (e.g. frequent
+     * stats generation may reduce OKAPI responsiveness). This method verifies
+     * that the requester is a developer. If he isn't, it die()s.
+     */
+    public static function require_developer_cookie() {
+        if (
+            (!isset($_COOKIE['okapi_devel_key']))
+            || (md5($_COOKIE['okapi_devel_key']) != '5753f318c1495c01637f7f6b7fc9c5db')
+        ) {
+            header("Content-Type: text/plain; charset=utf-8");
+            print "I need a cookie!";
+            die();
+        }
+    }
+
+    /**
+     * Update the "last activity" field of the user. As explained in #337, it is stored
+     * in `last_login` column and is needed for some reports. As explained in #439, it
+     * shouldn't be updated automatically on each Level 3 request (because some of these
+     * requests are not necessarilly initiated by the user).
+     */
+    public static function update_user_activity($request) {
+        if ($request && $request->token && $request->token->token_type == "access") {
+            Db::execute("
+                update user set last_login=now()
+                where user_id='".Db::escape_string($request->token->user_id)."'
+            ");
+        }
+    }
 
     # object types in table okapi_submitted_objects
     const OBJECT_TYPE_CACHE = 1;

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Session data handling with cookies
  *  See doc/cookies.txt for more information in cookies.
@@ -99,7 +98,6 @@ class SessionDataCookie implements SessionDataInterface
         global $opt;
 
         if ($this->changed === true) {
-
             $value = false;
             if (count($this->values) > 0) {
                 // TODO replace by safe function

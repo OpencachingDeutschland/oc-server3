@@ -346,16 +346,13 @@ class html2text
 
     /**
      *  Constructor.
-     *
      *  If the HTML source string (or file) is supplied, the class
      *  will instantiate with that source propagated, all that has
      *  to be done it to call get_text().
      *
-     * @param string  $source    HTML content
+     * @param string $source HTML content
      * @param boolean $from_file Indicates $source is a file to pull content from
-     *
      * @access public
-     * @return void
      */
     public function __construct($source = '', $from_file = false)
     {
@@ -427,11 +424,10 @@ class html2text
 
     /**
      *  Sets the allowed HTML tags to pass through to the resulting text.
-     *
      *  Tags should be in the form "<p>", with no corresponding closing tag.
      *
      * @access public
-     * @return void
+     * @param string $allowed_tags
      */
     public function set_allowed_tags($allowed_tags = '')
     {
@@ -444,7 +440,7 @@ class html2text
      *  Sets a base URL to handle relative links.
      *
      * @access public
-     * @return void
+     * @param string $url
      */
     public function set_base_url($url = '')
     {

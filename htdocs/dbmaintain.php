@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -41,40 +40,40 @@ if (isset($_REQUEST['ok'])) {
     $bError = false;
     switch ($proc) {
         case 'sp_updateall_caches_descLanguages':
-            sql("CALL sp_updateall_caches_descLanguages(@c)");
+            sql('CALL sp_updateall_caches_descLanguages(@c)');
             break;
         case 'sp_updateall_logstat':
-            sql("CALL sp_updateall_logstat(@c)");
+            sql('CALL sp_updateall_logstat(@c)');
             break;
         case 'sp_updateall_hiddenstat':
-            sql("CALL sp_updateall_hiddenstat(@c)");
+            sql('CALL sp_updateall_hiddenstat(@c)');
             break;
         case 'sp_updateall_watchstat':
-            sql("CALL sp_updateall_watchstat(@c)");
+            sql('CALL sp_updateall_watchstat(@c)');
             break;
         case 'sp_updateall_ignorestat':
-            sql("CALL sp_updateall_ignorestat(@c)");
+            sql('CALL sp_updateall_ignorestat(@c)');
             break;
         case 'sp_updateall_topratingstat':
-            sql("CALL sp_updateall_topratingstat(@c)");
+            sql('CALL sp_updateall_topratingstat(@c)');
             break;
         case 'sp_updateall_cache_picturestat':
-            sql("CALL sp_updateall_cache_picturestat(@c)");
+            sql('CALL sp_updateall_cache_picturestat(@c)');
             break;
         case 'sp_updateall_cachelog_picturestat':
-            sql("CALL sp_updateall_cachelog_picturestat(@c)");
+            sql('CALL sp_updateall_cachelog_picturestat(@c)');
             break;
         case 'sp_updateall_cache_listingdates':
-            sql("CALL sp_updateall_cache_listingdates(@c)");
+            sql('CALL sp_updateall_cache_listingdates(@c)');
             break;
         case 'sp_updateall_cachelog_logdates':
-            sql("CALL sp_updateall_cachelog_logdates(@c)");
+            sql('CALL sp_updateall_cachelog_logdates(@c)');
             break;
         case 'sp_updateall_rating_dates':
-            sql("CALL sp_updateall_rating_dates(@c)");
+            sql('CALL sp_updateall_rating_dates(@c)');
             break;
         case 'sp_updateall_cachelist_counts':
-            sql("CALL sp_updateall_cachelist_counts(@c)");
+            sql('CALL sp_updateall_cachelist_counts(@c)');
             break;
         default:
             $bError = true;
@@ -82,7 +81,7 @@ if (isset($_REQUEST['ok'])) {
     }
 
     if ($bError === false) {
-        $count = sql_value("SELECT @c", 0);
+        $count = sql_value('SELECT @c', 0);
         $tpl->assign('executed', true);
         $tpl->assign('proc', $proc);
         $tpl->assign('count', $count);

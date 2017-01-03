@@ -2,7 +2,6 @@
 /***************************************************************************
  *    For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Execute search / filtering request for map2.php
  *  (use caching of the same quries)

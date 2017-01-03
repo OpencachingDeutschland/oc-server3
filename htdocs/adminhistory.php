@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -25,17 +24,17 @@ if (isset($_REQUEST['wp'])) {
     $cache_id = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : - 1;
 }
 
-$showhistory = false;
+$showHistory = false;
 $error = '';
 
 if ($cache_id >= 0 && sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id`='&1'", 0, $cache_id) <> 1) {
     $error = $translate->t('Cache not found', '', '', 0);
 } elseif ($cache_id > 0) {
-    $showhistory = true;
+    $showHistory = true;
     $cache = new cache($cache_id);
     $cache->setTplHistoryData(0);
 }
 
-$tpl->assign('showhistory', $showhistory);
+$tpl->assign('showhistory', $showHistory);
 $tpl->assign('error', $error);
 $tpl->display();

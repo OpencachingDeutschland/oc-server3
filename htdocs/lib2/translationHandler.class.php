@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $translationHandler = new TranslationHandler();
@@ -153,8 +152,6 @@ class TranslationHandler
      */
     public function addText($text, $resource_name, $line)
     {
-        global $opt;
-
         if ($text == '') {
             return;
         }
@@ -180,7 +177,6 @@ class TranslationHandler
      */
     public function clearReferences()
     {
-        global $opt, $db;
         sqlf("DELETE FROM `sys_trans_ref`");
     }
 

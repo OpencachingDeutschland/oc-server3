@@ -16,55 +16,55 @@ caches
 ------
 
 last_modified
-	Is updated when any data of a caches record changes which is presented to
-	the user and/or output by export interfaces, including attribures.
-	This triggers an XML interface update (resending) of the cache record,
-	and an update of listing_last_modified and okapi_syncbase.
+    Is updated when any data of a caches record changes which is presented to
+    the user and/or output by export interfaces, including attribures.
+    This triggers an XML interface update (resending) of the cache record,
+    and an update of listing_last_modified and okapi_syncbase.
 
 listing_last_modified
-	The listing modification date, as displayed by viewcache and output via OKAPI,
-	XML interface etc.; added with OC 3.0.6 to fix listing modification date.
-	Is updated when the owner enters/changes/deletes any properties of the cache
-	listing which may be presented to the user or exported via XML interface.
-	This triggers an update of okapi_syncbase.
+    The listing modification date, as displayed by viewcache and output via OKAPI,
+    XML interface etc.; added with OC 3.0.6 to fix listing modification date.
+    Is updated when the owner enters/changes/deletes any properties of the cache
+    listing which may be presented to the user or exported via XML interface.
+    This triggers an update of okapi_syncbase.
 
-	Currently fed directly from cache_desc, caches_logs and pictures [mp3 is
-	missing], and indirectly from caches, caches_attributes and coordinates via
-	caches.last_modified.
+    Currently fed directly from cache_desc, caches_logs and pictures [mp3 is
+    missing], and indirectly from caches, caches_attributes and coordinates via
+    caches.last_modified.
 
 okapi_syncbase
-	Is added by OKAPI upon installation and updated automatically on insertion and
-	any changes of a caches record. This triggers a comparison of the current data
-	of a geocache (everything which can be output by the geocache method) with data
-	in okapi_cache and writing a changelog entry for replication if anything has
-	changed.
+    Is added by OKAPI upon installation and updated automatically on insertion and
+    any changes of a caches record. This triggers a comparison of the current data
+    of a geocache (everything which can be output by the geocache method) with data
+    in okapi_cache and writing a changelog entry for replication if anything has
+    changed.
 
-	As the field is updated if listing_last_modified changes, OKAPI will be
-	notified of any changes of the cache listing. However, the OKAPI geocaches
-	method also outputs additional data like geokrets which is not entered by the
-	user. Therefore okapi_syncbase needs to be updated on some additional events,
-	which is done indirectly via meta_last_modified:
+    As the field is updated if listing_last_modified changes, OKAPI will be
+    notified of any changes of the cache listing. However, the OKAPI geocaches
+    method also outputs additional data like geokrets which is not entered by the
+    user. Therefore okapi_syncbase needs to be updated on some additional events,
+    which is done indirectly via meta_last_modified:
 
 meta_last_modified
-	Is updated if any data changes which is output by OKAPI's geocache method but
-	does not update any other fields of the caches table. This currently applies
-	to geokrets in the cache (gk_item_waypoint table), to log and recommendation
-	statistics (stat_caches table), and to the Cronjob-generated cache_location
-	information.
+    Is updated if any data changes which is output by OKAPI's geocache method but
+    does not update any other fields of the caches table. This currently applies
+    to geokrets in the cache (gk_item_waypoint table), to log and recommendation
+    statistics (stat_caches table), and to the Cronjob-generated cache_location
+    information.
 
-	Updating this field triggers an update of okapi_syncbase. We don't update
-	okapi_syncbase directly, as it may be missing because OKAPI is not installed.
+    Updating this field triggers an update of okapi_syncbase. We don't update
+    okapi_syncbase directly, as it may be missing because OKAPI is not installed.
 
-	Note that this field is NOT updated on cache_logs changes, because OKAPI
-	replication does not include logs in geocaches records but treats them as
-	separate objects.
+    Note that this field is NOT updated on cache_logs changes, because OKAPI
+    replication does not include logs in geocaches records but treats them as
+    separate objects.
 
 flags_last_modified
-	Is updated when logger-supplied cache properties change, which do not update
-	the listing moficiation date but are exported through XML interface.
-	Currently this are the flags needs_maintenance and listing_outdated and the
-	field wp_gc_maintained. Cache lists associated with the cache may be added
-	to update this date.
+    Is updated when logger-supplied cache properties change, which do not update
+    the listing moficiation date but are exported through XML interface.
+    Currently this are the flags needs_maintenance and listing_outdated and the
+    field wp_gc_maintained. Cache lists associated with the cache may be added
+    to update this date.
 
 An additional field may be needed in the future for listing data which is not
 provied by the owner (or admins), like wp_gc_maintained or "logger feedback"
@@ -76,36 +76,36 @@ cache_logs
 ----------
 
 entry_last_modified
-	Is update when the user edits the log or adds/changes/removes log pictures.
-	This is the real modification date of the user-supplied log contents.
+    Is update when the user edits the log or adds/changes/removes log pictures.
+    This is the real modification date of the user-supplied log contents.
 
 last_modified
-	Is updated when
-		- any user-provided log content field changes
-		- the status of the cache changes, via sp_touch_cache()
-	This triggers an XML interface update (resending) of the log record, and an
-	update of listing_last_modified and okapi_syncbase.
+    Is updated when
+        - any user-provided log content field changes
+        - the status of the cache changes, via sp_touch_cache()
+    This triggers an XML interface update (resending) of the log record, and an
+    update of listing_last_modified and okapi_syncbase.
 
-	sp_touch_cache() is an awful hack. Probably its sole purpose is to send
-	log records, cache descriptions and pictures through XML after a cache
-	changes from invisible (state 4,5,7) to visible (1,2,3,6). Then, it may be
-	optimized by
-		- reacting only to changes from cache_status.allow_user_view=0 to
-		  allow_user_view=1, or
-		- introducing a separate flag or date field somewhere which triggers the
-		  XML sending without compromising the logs etc. modification dates
-		  (however, these dates are alredy fucked up for all cache status changes
-		  up to now).
+    sp_touch_cache() is an awful hack. Probably its sole purpose is to send
+    log records, cache descriptions and pictures through XML after a cache
+    changes from invisible (state 4,5,7) to visible (1,2,3,6). Then, it may be
+    optimized by
+        - reacting only to changes from cache_status.allow_user_view=0 to
+          allow_user_view=1, or
+        - introducing a separate flag or date field somewhere which triggers the
+          XML sending without compromising the logs etc. modification dates
+          (however, these dates are alredy fucked up for all cache status changes
+          up to now).
 
 log_last_modified
-	Like caches.listing_last_modified: The log modification date including data
-	in other tables, i.e. in pictures [mp3 may be added]. Added with OC 3.0.7
-	to fix OKAPI log pictures issue.
+    Like caches.listing_last_modified: The log modification date including data
+    in other tables, i.e. in pictures [mp3 may be added]. Added with OC 3.0.7
+    to fix OKAPI log pictures issue.
 
 okapi_syncbase
-	Is added by OKAPI upon installation and updated automatically on insertion
-	and any changes of a log record. This is needed as logs are separate objects
-	in OKAPI replication, too. Further handling similar to caches.okapi_syncbase.
+    Is added by OKAPI upon installation and updated automatically on insertion
+    and any changes of a log record. This is needed as logs are separate objects
+    in OKAPI replication, too. Further handling similar to caches.okapi_syncbase.
 
 
 cache_desc
@@ -114,15 +114,15 @@ mp3
 ----------
 
 last_modified
-	like cache_logs.last_modified;
-	mp3 implementation is incomplete
+    like cache_logs.last_modified;
+    mp3 implementation is incomplete
 
 
 cache_lists
 -----------
 
 last_modified
-	Is updated when any user-provided field or the list content changes.
+    Is updated when any user-provided field or the list content changes.
 
 last_state_change
   Is updated when the list visibility ("is_public") changes.
@@ -132,18 +132,18 @@ coordinates
 -----------
 
 last_modified
-	This was added together with date_created shortly after OC 3.0.5 release,
-	because someone thought that it is needed to solve the listing modification
-	date problem and for adding "additional waypoints" to the XML interface.
-	Then the former was solved via listing_last_modified (which is more universal)
-	and the latter by directly incorporating additional wps into the XML cache
-	records, which is much simpler than separate objects.
+    This was added together with date_created shortly after OC 3.0.5 release,
+    because someone thought that it is needed to solve the listing modification
+    date problem and for adding "additional waypoints" to the XML interface.
+    Then the former was solved via listing_last_modified (which is more universal)
+    and the latter by directly incorporating additional wps into the XML cache
+    records, which is much simpler than separate objects.
 
-	So both fields may be discarded, IF they are not useful for any future
-	purpose (maybe we want to know when a "personal note" was changed?). Currently
-	they are only used within triggers and stored procs, including
-	sp_updateall_cache_listingdates. They are incomplete anyway, because we don't
-	know the dates for data entered prior to release 3.0.6.
+    So both fields may be discarded, IF they are not useful for any future
+    purpose (maybe we want to know when a "personal note" was changed?). Currently
+    they are only used within triggers and stored procs, including
+    sp_updateall_cache_listingdates. They are incomplete anyway, because we don't
+    know the dates for data entered prior to release 3.0.6.
 
 
 Archived user-provided content
@@ -156,13 +156,13 @@ This table probably was added in the beginning of 2012. It archives all
 deleted logs.
 
 last_modified
-	Is updated to current date together with date_created when archiving a log.
-	This does not exactly make sense, and may be changed, but as this field is
-	not used anywhere, it probably doesn't matter.
+    Is updated to current date together with date_created when archiving a log.
+    This does not exactly make sense, and may be changed, but as this field is
+    not used anywhere, it probably doesn't matter.
 
 okapi_syncbase
-	Is added by OKAPI upon installation and set automatically on insertion of a
-	log archive record. This way, OKAPI replication keeps track of deleted logs.
+    Is added by OKAPI upon installation and set automatically on insertion of a
+    log archive record. This way, OKAPI replication keeps track of deleted logs.
 
 
 cache_coordinates
@@ -176,9 +176,9 @@ distance search behaviour, but since OC 3.0.6 are also used for the listing
 restore function (see below).
 
 date_created
-	The date when the record was inserted, which is the creation date of the
-	caches record for new caches, and the modification date for further changes
-	of cache coordinates or country.
+    The date when the record was inserted, which is the creation date of the
+    caches record for new caches, and the modification date for further changes
+    of cache coordinates or country.
 
 
 caches_modified (date only)
@@ -192,10 +192,10 @@ Added with listing versioning & restore function (vandalism reversal) in
 OC 3.0.6 (see restorecaches.php).
 
 date_modified
-	The date when the listing or log property was modified and the old data
-	was stored in the archiving table.
-	Some tables do not record the time to minimize the archived data amount:
-	Only the first data change of each day is backed up.
+    The date when the listing or log property was modified and the old data
+    was stored in the archiving table.
+    Some tables do not record the time to minimize the archived data amount:
+    Only the first data change of each day is backed up.
 
 
 Calculated and statistical content
@@ -205,16 +205,16 @@ cache_location
 --------------
 
 last_modified
-	Is used to keep cache_location in sync with caches, i.e. update the
-	code/adm1..code4/adm4 data if coordinates have changed.
-	(Actually, the location data is updated on any cache record change.)
+    Is used to keep cache_location in sync with caches, i.e. update the
+    code/adm1..code4/adm4 data if coordinates have changed.
+    (Actually, the location data is updated on any cache record change.)
 
 
 cache_visits
 ------------
 
 last_modified
-	Keeps track of multiple visits of the same user or IP within 24 hours.
-	Ony one visit per day is counted.
-	Actually this is rather a "last referenced" field similar to
-	map2_data.date_lastqueried or queries.last_queried.
+    Keeps track of multiple visits of the same user or IP within 24 hours.
+    Ony one visit per day is counted.
+    Actually this is rather a "last referenced" field similar to
+    map2_data.date_lastqueried or queries.last_queried.

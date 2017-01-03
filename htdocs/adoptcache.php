@@ -1,8 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -68,18 +66,24 @@ if ($action == 'listbycache') {
 
 $tpl->error(ERROR_UNKNOWN);
 
-function showAdoptScreen($cacheid, $touerror)
+/**
+ * @param $cacheId
+ * @param $touError
+ */
+function showAdoptScreen($cacheId, $touError)
 {
     global $tpl, $login;
 
     $rs = sql(
-        "SELECT `caches`.`name`, `user`.`username`, `cache_adoption`.`date_created`
+        "SELECT `caches`.`name`,
+                `user`.`username`,
+                `cache_adoption`.`date_created`
          FROM `caches`
          INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
          INNER JOIN `cache_adoption` ON `caches`.`cache_id`=`cache_adoption`.`cache_id`
          WHERE `caches`.`cache_id`='&1'
          AND `cache_adoption`.`user_id`='&2'",
-        $cacheid,
+        $cacheId,
         $login->userid
     );
     $r = sql_fetch_assoc($rs);
@@ -90,19 +94,22 @@ function showAdoptScreen($cacheid, $touerror)
     $tpl->assign('cache', $r);
     sql_free_result($rs);
 
-    if ($touerror != 0) {
+    if ($touError != 0) {
         $tpl->assign('error', 'tou');
     }
 
     $tpl->display();
 }
 
-function listRequestsByCacheId($cacheid)
+/**
+ * @param $cacheId
+ */
+function listRequestsByCacheId($cacheId)
 {
     global $tpl, $login;
 
     // cache exists?
-    $cache = new cache($cacheid);
+    $cache = new cache($cacheId);
     if ($cache->exist() == false) {
         $tpl->error(ERROR_CACHE_NOT_EXISTS);
     }
@@ -124,7 +131,7 @@ function listRequestsByCacheId($cacheid)
          INNER JOIN `user`
              ON `cache_adoption`.`user_id`=`user`.`user_id`
          WHERE `caches`.`cache_id`='&1'",
-        $cacheid
+        $cacheId
     );
     $tpl->assign_rs('adoptions', $rs);
     sql_free_result($rs);
@@ -161,31 +168,38 @@ function listRequestsByUserId()
     $tpl->display();
 }
 
-function addRequest($cacheid, $userid)
+/**
+ * @param $cacheId
+ * @param $userId
+ */
+function addRequest($cacheId, $userId)
 {
     global $tpl;
 
     // cache exists?
-    $cache = new cache($cacheid);
+    $cache = new cache($cacheId);
     if ($cache->exist() == false) {
         $tpl->error(ERROR_CACHE_NOT_EXISTS);
     }
 
-    $adopt_result = $cache->addAdoption($userid);
+    $adopt_result = $cache->addAdoption($userId);
     if ($adopt_result === true) {
-        $tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
+        $tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheId);
     } else {
         $tpl->assign('error', $adopt_result);
-        listRequestsByCacheId($cacheid);
+        listRequestsByCacheId($cacheId);
     }
 }
 
-function commitRequest($cacheid)
+/**
+ * @param $cacheId
+ */
+function commitRequest($cacheId)
 {
     global $tpl, $login;
 
     // cache exists?
-    $cache = new cache($cacheid);
+    $cache = new cache($cacheId);
     if ($cache->exist() == false) {
         $tpl->error(ERROR_CACHE_NOT_EXISTS);
     }
@@ -194,30 +208,34 @@ function commitRequest($cacheid)
         $tpl->error(ERROR_UNKNOWN);
     }
 
-    $tpl->redirect('viewcache.php?cacheid=' . $cacheid);
+    $tpl->redirect('viewcache.php?cacheid=' . $cacheId);
 }
 
-function cancelRequest($cacheid, $userid)
+/**
+ * @param $cacheId
+ * @param $userId
+ */
+function cancelRequest($cacheId, $userId)
 {
     global $tpl, $login;
 
     // cache exists?
-    $cache = new cache($cacheid);
+    $cache = new cache($cacheId);
     if ($cache->exist() == false) {
         $tpl->error(ERROR_CACHE_NOT_EXISTS);
     }
 
-    if ($cache->allowEdit() == false && $login->userid != $userid) {
+    if ($cache->allowEdit() == false && $login->userid != $userId) {
         $tpl->error(ERROR_NO_ACCESS);
     }
 
-    if ($cache->cancelAdoption($userid) == false) {
+    if ($cache->cancelAdoption($userId) == false) {
         $tpl->error(ERROR_UNKNOWN);
     }
 
-    if ($userid == $login->userid) {
+    if ($userId == $login->userid) {
         $tpl->redirect('adoptcache.php');
     } else {
-        $tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheid);
+        $tpl->redirect('adoptcache.php?action=listbycache&cacheid=' . $cacheId);
     }
 }

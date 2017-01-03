@@ -3,21 +3,16 @@
  * ./lib/clicompatbase.inc.php
  * --------------------
  * begin                : Fri September 16 2005
- *
  * For license information see doc/license.txt
  ****************************************************************************/
 use Oc\Util\CBench;
 
 /****************************************************************************
- *
  * Unicode Reminder メモ
- *
  * contains functions that are compatible with the php-CLI-scripts under util.
  * Can be included without including common.inc.php, but will be included from
  * common.inc.php.
- *
  * Global variables that need to be set up when including without common.inc.php:
- *
  * $dblink
  ****************************************************************************/
 
@@ -33,7 +28,7 @@ if (isset($opt['rootpath'])) {
 } elseif (isset($rootpath)) {
     $opt['rootpath'] = $rootpath;
 } else {
-    $rootpath = __DIR__.'/../';
+    $rootpath = __DIR__ . '/../';
     $opt['rootpath'] = $rootpath;
 }
 
@@ -43,9 +38,9 @@ mb_regex_encoding('UTF-8');
 mb_language('uni');
 
 //load default webserver-settings and common includes
-require_once $opt['rootpath'] . 'lib/consts.inc.php';
-require_once $opt['rootpath'] . 'lib/settings.inc.php';
-require_once $opt['rootpath'] . 'lib2/errorhandler.inc.php';
+require_once __DIR__  . '/consts.inc.php';
+require_once __DIR__  . '/settings.inc.php';
+require_once __DIR__  . '/../lib2/errorhandler.inc.php';
 
 // check for banned UAs
 $useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
@@ -67,18 +62,21 @@ $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
 
 /**
  * @param string $module
- * @param integer $eventid
+ * @param integer $eventId
+ * @param $userId
+ * @param $objectid1
  * @param integer $objectid2
  * @param string $logtext
+ * @param $details
  */
-function logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)
+function logentry($module, $eventId, $userId, $objectid1, $objectid2, $logtext, $details)
 {
     sql(
         "INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
          VALUES ('&1', '&2', '&3', '&4', '&5', '&6', '&7')",
         $module,
-        $eventid,
-        $userid,
+        $eventId,
+        $userId,
         $objectid1,
         $objectid2,
         $logtext,
@@ -90,6 +88,7 @@ function logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, 
 // WARNING: no huge files!
 function read_file($file = '')
 {
+    $content = false;
     $fh = fopen($file, 'r');
     if ($fh) {
         $content = fread($fh, filesize($file));
@@ -105,7 +104,7 @@ function escape_javascript($text)
     return str_replace('\'', '\\\'', str_replace('"', '&quot;', $text));
 }
 
-// called if mysql_query faild, sends email to sysadmin
+// called if mysql_query failed, sends email to sysadmin
 function sql_failed($sql)
 {
     sql_error();
@@ -145,7 +144,6 @@ function sql_value_slave($sql, $default)
 /**
  * @param string $name
  * @param string $default
- *
  * @return string
  */
 function getSysConfig($name, $default)
@@ -174,11 +172,10 @@ function setSysConfig($name, $value)
     }
 }
 
-/*
-    sql("SELECT id FROM &tmpdb.table WHERE a=&1 AND &tmpdb.b='&2'", 12345, 'abc');
-
-    returns: recordset or false
-*/
+/**
+ * @param $sql
+ * @return resource
+ */
 function sql($sql)
 {
     global $dblink;
@@ -212,7 +209,7 @@ function sql_slave($sql)
         $tmp_args = $args[1];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
@@ -227,24 +224,21 @@ function sql_slave($sql)
 
 function sql_internal($_dblink, $sql, $bSlave)
 {
-    global $opt;
-    global $sql_debug, $sql_warntime;
+    global $sql_warntime;
     global $sql_replacements;
-    global $sqlcommands;
-    global $dblink_slave;
 
     $args = func_get_args();
     unset($args[0], $args[1], $args[2]);
 
     /* as an option, you can give as second parameter an array
      * with all values for the placeholder. The array has to be
-     * with numeric indizes.
+     * with numeric indices.
      */
     if (isset($args[3]) && is_array($args[3])) {
         $tmp_args = $args[3];
         unset($args);
 
-        // correct indizes
+        // correct indices
         $args = array_merge([0], $tmp_args);
         unset($tmp_args);
         unset($args[0]);
@@ -259,10 +253,10 @@ function sql_internal($_dblink, $sql, $bSlave)
         // muss dieses & ersetzt werden, oder ist es escaped?
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) && (mb_substr($sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 1) {
-            $nextarg ++;
+            $nextarg++;
         } else {
             $nextchar = mb_substr($sql, $nextarg + 1, 1);
             if (is_numeric($nextchar)) {
@@ -273,7 +267,7 @@ function sql_internal($_dblink, $sql, $bSlave)
                 while (mb_ereg_match('^[0-9]{1}', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = mb_substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -290,7 +284,7 @@ function sql_internal($_dblink, $sql, $bSlave)
                         ) {
                             $filtered_sql .= sql_escape($args[$arg]);
                         } elseif ((mb_substr($sql, $sqlpos - $arglength - 1, 1) == '`') &&
-                                  (mb_substr($sql, $sqlpos + 1, 1) == '`')
+                            (mb_substr($sql, $sqlpos + 1, 1) == '`')
                         ) {
                             $filtered_sql .= sql_escape($args[$arg]);
                         } else {
@@ -305,13 +299,13 @@ function sql_internal($_dblink, $sql, $bSlave)
                         // Anführungszeichen weg machen und NULL einsetzen
                         $filtered_sql = mb_substr($filtered_sql, 0, mb_strlen($filtered_sql) - 1);
                         $filtered_sql .= 'NULL';
-                        $sqlpos ++;
+                        $sqlpos++;
                     } else {
                         $filtered_sql .= 'NULL';
                     }
                 }
 
-                $sqlpos ++;
+                $sqlpos++;
             } else {
                 $arglength = 0;
                 $arg = '';
@@ -320,7 +314,7 @@ function sql_internal($_dblink, $sql, $bSlave)
                 while (mb_ereg_match('^[a-zA-Z0-9]{1}', $nextchar) == 1) {
                     $arg .= $nextchar;
 
-                    $arglength ++;
+                    $arglength++;
                     $nextchar = mb_substr($sql, $nextarg + $arglength + 1, 1);
                 }
 
@@ -348,13 +342,13 @@ function sql_internal($_dblink, $sql, $bSlave)
     while ($nextarg !== false) {
         $escapesCount = 0;
         while ((($nextarg - $escapesCount - 1) > 0) &&
-               (mb_substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
-            $escapesCount ++;
+            (mb_substr($filtered_sql, $nextarg - $escapesCount - 1, 1) == '\\')) {
+            $escapesCount++;
         }
         if (($escapesCount % 2) == 0) {
             // \& ersetzen durch &
             $filtered_sql = mb_substr($filtered_sql, 0, $nextarg) . '&' . mb_substr($filtered_sql, $nextarg + 2);
-            $nextarg --;
+            $nextarg--;
         }
 
         $nextarg = mb_strpos($filtered_sql, '\&', $nextarg + 2);
@@ -370,29 +364,22 @@ function sql_internal($_dblink, $sql, $bSlave)
         - DROP/DELETE ggf. blocken
     */
 
-    if (isset($sql_debug) && ($sql_debug == true)) {
-        require_once $opt['rootpath'] . 'lib/sqldebugger.inc.php';
-        $result = sqldbg_execute($filtered_sql, $bSlave);
-        if ($result === false) {
-            sql_error();
-        }
-    } else {
-        // Zeitmessung für die Ausführung
-        $cSqlExecution = new CBench;
-        $cSqlExecution->start();
+    // Zeitmessung für die Ausführung
+    $cSqlExecution = new CBench;
+    $cSqlExecution->start();
 
-        $result = mysql_query($filtered_sql, $_dblink);
-        if ($result === false) {
-            sql_error();
-        }
-
-        $cSqlExecution->stop();
-
-        if ($sql_warntime > 0 && $cSqlExecution->diff() > $sql_warntime) {
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
-            sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
-        }
+    $result = mysql_query($filtered_sql, $_dblink);
+    if ($result === false) {
+        sql_error();
     }
+
+    $cSqlExecution->stop();
+
+    if ($sql_warntime > 0 && $cSqlExecution->diff() > $sql_warntime) {
+        $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
+        sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
+    }
+
 
     return $result;
 }
@@ -425,7 +412,7 @@ function sql_error()
     global $db_error;
 
     $db_error += 1;
-    $msql_error = mysql_errno() . ": " . mysql_error();
+    $msql_error = mysql_errno() . ': ' . mysql_error();
     if ($db_error > 1) {
         $msql_error .= "\n(** error recursion **)";
     }
@@ -442,16 +429,16 @@ function sql_error()
 
     if ($interface_output == 'html') {
         // display errorpage
-        $errmsg = $dberrormsg . ($debug_page ? "<br />" . $msql_error : "");
+        $errmsg = $dberrormsg . ($debug_page ? '<br />' . $msql_error : '');
         if ($db_error <= 1) {
             tpl_errorMsg('sql_error', $errmsg);
         } else {
-            // datbase error recursion, because another error occured while trying to
+            // database error recursion, because another error occurred while trying to
             // build the error template (e.g. because connection was lost, or an error mail
             // could not load translations from database)
 
             $errtitle = 'Datenbankfehler';
-            require 'html/error.php';
+            require __DIR__ . '/../html/error.php';
         }
         exit;
     } elseif ($interface_output == 'plain') {
@@ -482,11 +469,7 @@ function sql_warn($warnmessage)
     $email_content .= print_r(debug_backtrace(), true);
 
     if (admin_errormail($sql_errormail, 'sql_warn', $email_content, $emailheaders)) {
-        $sendMail = @mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
-        if ($sendMail === false) {
-            // @todo implement logging
-            // throw new \RuntimeException('the E-Mail can not be send.');
-        }
+        @mb_send_mail($sql_errormail, 'sql_warn: ' . $absolute_server_URI, $email_content, $emailheaders);
     }
 }
 
@@ -495,6 +478,7 @@ function sql_warn($warnmessage)
 */
 /**
  * @param resource $rs
+ * @return array
  */
 function sql_fetch_array($rs)
 {
@@ -513,6 +497,7 @@ function sql_fetch_row($rs)
 
 /**
  * @param resource $rs
+ * @return array|null
  */
 function sql_fetch_column($rs)
 {
@@ -549,7 +534,7 @@ function mb_trim($str)
 
     $bLoop = true;
     while ($bLoop == true) {
-        $sPos = mb_substr($str, - 1, 1);
+        $sPos = mb_substr($str, -1, 1);
 
         if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
             $str = mb_substr($str, 0, mb_strlen($str) - 1);
@@ -561,7 +546,7 @@ function mb_trim($str)
     return $str;
 }
 
-//disconnect the databse
+//disconnect the database
 function db_disconnect()
 {
     global $dbpconnect, $dblink, $dblink_slave, $dbslaveid;
@@ -574,7 +559,7 @@ function db_disconnect()
     if (($dbpconnect == false) && ($dblink_slave !== false)) {
         @mysql_close($dblink_slave);
         $dblink_slave = false;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     }
 }
 
@@ -638,12 +623,12 @@ function db_connect_anyslave()
 
     $id = sqlValue(
         "SELECT `id`, `weight`*RAND() AS `w` FROM `sys_repl_slaves` WHERE `active`=1 AND `online`=1 AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'" . ($nMaxTimeDiff + 0) . "') ORDER BY `w` DESC LIMIT 1",
-        - 1
+        -1
     );
 
-    if ($id == - 1) {
+    if ($id == -1) {
         $dblink_slave = $dblink;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     } else {
         db_connect_slave($id);
     }
@@ -653,9 +638,9 @@ function db_connect_primary_slave()
 {
     global $opt, $dblink, $dblink_slave, $dbslaveid;
 
-    if ($opt['db']['slave']['primary'] == - 1) {
+    if ($opt['db']['slave']['primary'] == -1) {
         $dblink_slave = $dblink;
-        $dbslaveid = - 1;
+        $dbslaveid = -1;
     } else {
         db_connect_slave($opt['db']['slave']['primary']);
     }
@@ -725,6 +710,7 @@ function get_site_urls($domain)
 
 /**
  * @param string $filename
+ * @return bool|string
  */
 function fetch_email_template($filename, $language, $domain)
 {

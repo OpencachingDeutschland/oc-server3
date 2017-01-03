@@ -2,7 +2,6 @@
 /***************************************************************************
  *    For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 header('Content-type: text/html; charset=utf-8');
@@ -19,6 +18,6 @@ $rs = sql('SELECT `user`.`username`, `stat_user`.`found`
               LIMIT 100');
 while ($r = sql_fetch_assoc($rs)) {
     echo $n . ' ' . $r['username'] . ': ' . $r['found'] . "\n";
-    $n ++;
+    $n++;
 }
 sql_free_result($rs);

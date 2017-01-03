@@ -38,12 +38,12 @@ Garmin.MapController.prototype = {
 
         this.timeToCheck = false;
         try {
-	        this.map = new GMap2( $(mapString) );
-	        this.map.addControl(new GSmallMapControl());
-			this.map.addControl(new GMapTypeControl());
-        	new GKeyboardHandler(this.map);
+            this.map = new GMap2( $(mapString) );
+            this.map.addControl(new GSmallMapControl());
+            this.map.addControl(new GMapTypeControl());
+            new GKeyboardHandler(this.map);
         } catch (e) {
-        	alert("WARNING: application will not function properly with missing Google script element or invalid Google map key.  Error: "+e);
+            alert("WARNING: application will not function properly with missing Google script element or invalid Google map key.  Error: "+e);
         }
         window.onUnload = "GUnload()";
     },
@@ -54,7 +54,7 @@ Garmin.MapController.prototype = {
      * @param (Number) Zoom level
      */
     centerAndScale: function(lat, lon, scale) {
-    	scale = (scale == null ? 13 : scale);
+        scale = (scale == null ? 13 : scale);
         this.map.setCenter(new GLatLng(lat, lon), scale);
     },
     
@@ -67,58 +67,58 @@ Garmin.MapController.prototype = {
         
         // create a smaller version of the whole track
         // create 300 points or so ...
-	    // Problem is that Google Maps dies when you hit near 500 points, so we have to
-	    // ensure that we create fewer than that for the track.
+        // Problem is that Google Maps dies when you hit near 500 points, so we have to
+        // ensure that we create fewer than that for the track.
         var drawAt = Math.ceil(series.getSamplesLength()/300);
         var drawnPoints = new Array();
 
         try {
-        	// create up to 300 points
-			for(var h = 0; h < series.getSamplesLength(); h += drawAt) {
-				drawnPoints.push(this.createNearestValidLocationPoint(series, h, -1));
-		    }
-		    // create the end point
-           	drawnPoints.push(this.createNearestValidLocationPoint(series, series.getSamplesLength()-1, -1));
+            // create up to 300 points
+            for(var h = 0; h < series.getSamplesLength(); h += drawAt) {
+                drawnPoints.push(this.createNearestValidLocationPoint(series, h, -1));
+            }
+            // create the end point
+               drawnPoints.push(this.createNearestValidLocationPoint(series, series.getSamplesLength()-1, -1));
         } catch( e ) {
             alert("GoogleMapControl.drawTrack: " + e.message);
-        }	    
+        }
         
         if (drawnPoints.length > 0) {
-	        //draw the new smaller version
-	        var polyline = new GPolyline(drawnPoints, color, 2, .8)
-			try {
-				this.centerAndScale(drawnPoints[0].lat(), drawnPoints[0].lng());			
-	        	this.map.addOverlay( polyline );
-		        this.addStartFinishMarkers(series);
-		        this.bounds = this.findAZoomLevel(drawnPoints);
-		        this.setOnBounds( this.bounds );
-			} catch(e){ alert("GoogleMapControl.drawTrack, IE error on map.addOverlay("+polyline+") err: "+e); }
+            //draw the new smaller version
+            var polyline = new GPolyline(drawnPoints, color, 2, .8)
+            try {
+                this.centerAndScale(drawnPoints[0].lat(), drawnPoints[0].lng());
+                this.map.addOverlay( polyline );
+                this.addStartFinishMarkers(series);
+                this.bounds = this.findAZoomLevel(drawnPoints);
+                this.setOnBounds( this.bounds );
+            } catch(e){ alert("GoogleMapControl.drawTrack, IE error on map.addOverlay("+polyline+") err: "+e); }
         }
     },
 
-	/**Creates a GLatLng for the sample in the series closest to the index with a valid location (lat and lon).
-	 * @param series - The series to search through.
-	 * @param index - The index to start searching from.
-	 * @param incDirection - The direction to travel for the search.
-	 * @return A GLatLng of the nearest valid location sample found.
-	 */
-	createNearestValidLocationPoint: function(series, index, incDirection) {
-    	var sample = series.findNearestValidLocationSample(index, -1);
-    	if (sample != null) {
-    		var sampleLat = sample.getMeasurement(Garmin.Sample.MEASUREMENT_KEYS.latitude).getValue();
-    		var sampleLon = sample.getMeasurement(Garmin.Sample.MEASUREMENT_KEYS.longitude).getValue();
-    		return new GLatLng(sampleLat, sampleLon);    		
-    	} else {
-			throw new Error("No valid location point in series.");
-    	}
-	},
+    /**Creates a GLatLng for the sample in the series closest to the index with a valid location (lat and lon).
+     * @param series - The series to search through.
+     * @param index - The index to start searching from.
+     * @param incDirection - The direction to travel for the search.
+     * @return A GLatLng of the nearest valid location sample found.
+     */
+    createNearestValidLocationPoint: function(series, index, incDirection) {
+        var sample = series.findNearestValidLocationSample(index, -1);
+        if (sample != null) {
+            var sampleLat = sample.getMeasurement(Garmin.Sample.MEASUREMENT_KEYS.latitude).getValue();
+            var sampleLon = sample.getMeasurement(Garmin.Sample.MEASUREMENT_KEYS.longitude).getValue();
+            return new GLatLng(sampleLat, sampleLon);
+        } else {
+            throw new Error("No valid location point in series.");
+        }
+    },
 
     /** Draw waypoint on map.
      * @param (Garmin.Series) series containing a waypoint to add to the map
      */
     drawWaypoint: function(series) {
-    	var sample = series.getSample(0);
-        this.centerAndScale(sample.getLatitude(), sample.getLongitude(), 15);    	
+        var sample = series.getSample(0);
+        this.centerAndScale(sample.getLatitude(), sample.getLongitude(), 15);
         this.addMarker(sample.getLatitude(), sample.getLongitude());
     },
 
@@ -135,10 +135,10 @@ Garmin.MapController.prototype = {
         return bounds;
     },
     
-	/** Check the new dimensions of the map, and determine the bounds of the tracks
-	 * Then set the map to zoom to that bound level
-   	 * @private
-	 */
+    /** Check the new dimensions of the map, and determine the bounds of the tracks
+     * Then set the map to zoom to that bound level
+        * @private
+     */
     sizeAndSetOnBounds: function() {
         this.map.checkResize();
         this.setOnBounds( this.bounds );
@@ -156,7 +156,7 @@ Garmin.MapController.prototype = {
      * @param {Number} longitude of marker
      */
     addMarker: function(latitude, longitude) {
-    	this.addMarkerWithIcon(latitude, longitude, Garmin.MapIcons.getRedIcon());
+        this.addMarkerWithIcon(latitude, longitude, Garmin.MapIcons.getRedIcon());
     },
 
     /** Adds a marker to the point with the icon specified
@@ -174,8 +174,8 @@ Garmin.MapController.prototype = {
      * @param (Garmin.Series) The series to add markers to
      */
     addStartFinishMarkers: function(series) {
-    	var firstSample = series.getFirstValidLocationSample();
-    	var lastSample = series.getLastValidLocationSample();
+        var firstSample = series.getFirstValidLocationSample();
+        var lastSample = series.getLastValidLocationSample();
         this.addMarkerWithIcon(firstSample.getLatitude(), firstSample.getLongitude(), Garmin.MapIcons.getGreenIcon());
         this.addMarkerWithIcon(lastSample.getLatitude(), lastSample.getLongitude(), Garmin.MapIcons.getRedIcon());
     },

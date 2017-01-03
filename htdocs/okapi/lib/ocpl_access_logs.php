@@ -22,7 +22,7 @@ class OCPLAccessLogs
         // traverse PHP call stack to find out who originally called us
         // first, find first service_runner.php invocation
         // then, find previous class invocation
-        for($i = count($trace)-1; $i >= 0; $i--)
+        for ($i = count($trace) - 1; $i >= 0; $i--)
         {
             $frame = $trace[$i];
             if ($break_next && isset($frame['class']))

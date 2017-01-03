@@ -28,7 +28,7 @@ date         commit ID   change
 2013-02-15   92e522f     adjusted developer and production system:
                          - added index logentries:userid
                          - changed user.password length to 32
-												- removed xmlsession.remote_addr and index remote_addr
+                         - removed xmlsession.remote_addr and index remote_addr
 2013-02-16   06d832c     new table data_licenses
                          added user.data_license
 2013-02-17   b7b51ea     added user.email_problems
@@ -40,7 +40,7 @@ date         commit ID   change
                            - added cache_logs_archived.deletion_date and deleted_by
                            - added tables caches_modified, cache_desc_modified,
                                caches_attributes_modified, cache_logs_restored,
-															cache_pictures_modified and listing_restored
+                              cache_pictures_modified and listing_restored
                            - modified lots of triggers
 2013-03-09   09b51ec     added field 'restored_by' to cache_coordinates, cache_countries,
                            cache_logs_archived, all new tables and to triggers

@@ -4,7 +4,6 @@
  *
  *    This script converts all md5-passwords to salted hash passwords.
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 global $opt;

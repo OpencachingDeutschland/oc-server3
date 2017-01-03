@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 use Oc\Libse\ChildWp\HandlerChildWp;
@@ -73,7 +72,7 @@ if ($sMode == 'locate') {
     $fullscreen = false;
 }
 
-// set queryid data for displaying search results on map
+// set queryId data for displaying search results on map
 $nQueryId = isset($_REQUEST['queryid']) ? $_REQUEST['queryid'] + 0 : 0;
 $nResultId = isset($_REQUEST['resultid']) ? $_REQUEST['resultid'] + 0 : 0;
 $tpl->assign('queryid', $nQueryId);
@@ -228,7 +227,7 @@ $tpl->assign_rs('aCacheSize', $rsCacheSize);
 sql_free_result($rsCacheSize);
 
 /* assign attributes */
-$tpl->assign('aAttributes', attribute::getSelectableAttrbutesListArray());
+$tpl->assign('aAttributes', attribute::getSelectableAttributesListArray());
 
 $aAttributesDisabled = array();
 $maxaid = 0;
@@ -273,7 +272,7 @@ function cache_locate($nLat, $nLon, $nDistance)
     global $login;
 
     $rsCache = sql_slave(
-        "SELECT " . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
+        'SELECT ' . geomath::getSqlDistanceFormula($nLon, $nLat, $nDistance) . " AS `distance`,
                                   `caches`.`wp_oc`
                              FROM `caches`
                        INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`

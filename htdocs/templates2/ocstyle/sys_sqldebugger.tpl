@@ -1,7 +1,6 @@
 {***************************************************************************
  *  You can find the license in the docs directory
  *
- *  Unicode Reminder メモ
  ***************************************************************************}
  {* no - OCSTYLE *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">

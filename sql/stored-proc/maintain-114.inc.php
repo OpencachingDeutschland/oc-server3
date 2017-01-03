@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  initialize trigger version function
  ***************************************************************************/
@@ -13,6 +12,6 @@
 
 sql_dropFunction('dbsvTriggerVersion');
 sql(
-    "CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
-     RETURN 114"
+    'CREATE FUNCTION `dbsvTriggerVersion` () RETURNS INT
+     RETURN 114'
 );

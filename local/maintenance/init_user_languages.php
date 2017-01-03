@@ -3,7 +3,6 @@
  *  For license information see doc/license.txt
  *    This script guesses the primary language of all users who did not login
  *  after release of OC 3.0.14.
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

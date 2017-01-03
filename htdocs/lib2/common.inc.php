@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This module contains the main initialisation routine and often used
  *  functions. It is included by web.inc.php and cli.inc.php.
@@ -43,9 +42,9 @@ mb_internal_encoding('UTF-8');
 mb_regex_encoding('UTF-8');
 
 // set options
-require_once __DIR__.'/../config2/settings-dist.inc.php';
-require_once __DIR__.'/../config2/settings.inc.php';
-require_once __DIR__.'/../config2/verify-settings.inc.php';
+require_once __DIR__ . '/../config2/settings-dist.inc.php';
+require_once __DIR__ . '/../config2/settings.inc.php';
+require_once __DIR__ . '/../config2/verify-settings.inc.php';
 
 foreach ($opt['page']['banned_user_agents'] as $ua) {
     if (strpos($useragent, $ua) !== false) {
@@ -283,7 +282,7 @@ function use_current_protocol($url)
     ) {
         return 'https' . strstr($url, '://');
     } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
-                  == $opt['page']['absolute_https_url']
+                    == $opt['page']['absolute_https_url']
               && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');

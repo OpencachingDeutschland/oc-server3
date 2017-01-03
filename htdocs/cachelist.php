@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Shortcut for cachelist search
  ***************************************************************************/
@@ -33,9 +32,11 @@ if ($id) {
         }
     }
 
-    $tpl->redirect("search.php?searchto=searchbylist&listid=" . $id .
-        ($password != "" ? "&listkey=" . urlencode($password) : "") .
-        "&showresult=1&f_disabled=0&f_inactive=0&f_ignored=1&sort=byname" . $invalid_waypoints);
+    $tpl->redirect(
+        'search.php?searchto=searchbylist&listid=' . $id .
+        ($password != '' ? '&listkey=' . urlencode($password) : '') .
+        '&showresult=1&f_disabled=0&f_inactive=0&f_ignored=1&sort=byname' . $invalid_waypoints
+    );
 } else {
-    $tpl->redirect("cachelists.php");
+    $tpl->redirect('cachelists.php');
 }

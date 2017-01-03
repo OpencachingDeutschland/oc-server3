@@ -2,17 +2,15 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 class CacheIcon
 {
-
     public static function get($user_id, $cache_id, $cache_status, $cache_userid, $iconname)
     {
-        $iconname = mb_eregi_replace("cache/", "", $iconname); // for old cache_type table contents
-        $iconext = "." . mb_eregi_replace("^.*\.", "", $iconname);
-        $iconname = mb_eregi_replace("\..*", "", $iconname);
+        $iconname = mb_eregi_replace('cache/', '', $iconname); // for old cache_type table contents
+        $iconext = '.' . mb_eregi_replace("^.*\.", '', $iconname);
+        $iconname = mb_eregi_replace("\..*", '', $iconname);
 
         // add status
         switch ($cache_status) {
@@ -67,5 +65,4 @@ class CacheIcon
 
         return $iconname . $iconext;
     }
-
 }

@@ -1,6 +1,5 @@
 <?php
 /***************************************************************************
- *  Unicode Reminder メモ
  *
  *  Sample settincs.inc.php file for a developer machine
  ***************************************************************************/
@@ -63,7 +62,7 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
 $opt['session']['mode'] = SAVE_COOKIE;
 $opt['session']['cookiename'] = 'ocvagrant'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
-$opt['session']['domain'] = 'local.team-opencaching.de';    // may be overwritten by $opt['domain'][...]['cookiedomain']
+$opt['session']['domain'] = '.team-opencaching.de';    // may be overwritten by $opt['domain'][...]['cookiedomain']
 
 /* If the Referer was sent by the client and the substring was not found,
  * the embedded session id will be marked as invalid.

@@ -1,7 +1,5 @@
 {***************************************************************************
 *  You can find the license in the docs directory
-*
-*  Unicode Reminder メモ
 ***************************************************************************}
 
 <div class="content-txtbox-noshade">
@@ -121,18 +119,6 @@
     {/if}
     </div>
     <div class="buffer" style="width: 500px;">&nbsp;</div>
-    {*
-        <ul class="nodot">
-            {foreach from=$phpbb_topics item=phpbbItem}
-                <li class="newcache_list_multi" style="margin-bottom: 8px;">
-                    <img src="resource2/ocstyle/images/cacheicon/event-rand1.gif" alt="" style="margin-right: 5px;" width="22" height="22" align="left" border="0" />
-                    {$phpbbItem.updated|date_format:$opt.format.datetime}&nbsp;
-                    <b><a href="{$phpbbItem.link|escape}" target="thegreenhell">{$phpbbItem.title|escape}</a></b>
-                    von {$phpbbItem.username|escape}
-                </li>
-            {/foreach}
-        </ul>
-    *}
 {/if}
 
 {* new caches *}

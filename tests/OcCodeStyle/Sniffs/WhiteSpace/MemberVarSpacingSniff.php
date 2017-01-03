@@ -88,7 +88,7 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
             if ($first === false) {
                 $first = $start;
             }
-        } else if ($tokens[$start]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
+        } elseif ($tokens[$start]['code'] === T_DOC_COMMENT_CLOSE_TAG) {
             $first = $tokens[$start]['comment_opener'];
             $openingBracket = $phpcsFile->findPrevious(T_OPEN_CURLY_BRACKET, ($first - 1), null);
             $isFirst = true;
@@ -148,7 +148,6 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
 
             $phpcsFile->fixer->endChangeset();
         }//end if
-
     }//end processMemberVar()
 
 
@@ -165,7 +164,6 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
         /*
             We don't care about normal variables.
         */
-
     }//end processVariable()
 
 
@@ -182,8 +180,5 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
         /*
             We don't care about normal variables.
         */
-
     }//end processVariableInString()
-
-
 }//end class

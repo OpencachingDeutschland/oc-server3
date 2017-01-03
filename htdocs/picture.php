@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  action   = new
  *           = edit
@@ -51,7 +50,8 @@ if ($action == 'add') { // Ocprop
         $picture->setObjectType(OBJECT_CACHE);
 
         $cache = null;
-    } elseif (isset($_REQUEST['loguuid'])) {// Ocprop
+    } elseif (isset($_REQUEST['loguuid'])) {
+        // Ocprop
         $cachelog = cachelog::fromUUID($_REQUEST['loguuid']);
         if ($cachelog === null) {
             $tpl->error(ERROR_CACHELOG_NOT_EXISTS);
@@ -75,11 +75,11 @@ if ($action == 'add') { // Ocprop
     if (isset($_REQUEST['ok'])) { // Ocprop
         $bError = false;
 
-        $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler'] == '1');  // Ocprop
-        $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay'] == '1') == false);  // Ocprop
+        $picture->setSpoiler(isset($_REQUEST['spoiler']) && $_REQUEST['spoiler'] == '1'); // Ocprop
+        $picture->setDisplay((isset($_REQUEST['notdisplay']) && $_REQUEST['notdisplay'] == '1') == false); // Ocprop
         $picture->setMapPreview(isset($_REQUEST['mappreview']) && $_REQUEST['mappreview'] == '1');
 
-        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : '';  // Ocprop
+        $title = isset($_REQUEST['title']) ? $_REQUEST['title'] : ''; // Ocprop
         if ($title == '' || ($picture->getObjectType() == OBJECT_CACHELOG && trim($title) == '')) {
             $tpl->assign('errortitle', true);
             $bError = true;

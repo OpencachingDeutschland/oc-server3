@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *  Unicode Reminder メモ
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
@@ -45,7 +44,7 @@ class OcSmarty extends Smarty
      */
     public function __construct()
     {
-        global $opt, $sqldebugger;
+        global $opt;
         $this->bench = new CBench();
         $this->bench->start();
 
@@ -156,11 +155,10 @@ class OcSmarty extends Smarty
      */
     public function display($dummy1 = null, $dummy2 = null, $dummy3 = null)
     {
-        global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate;
-        global $useragent_msie, $change_country_inpage;
+        global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate, $useragent_msie;
         $cookie->close();
 
-        // if the user is an admin, dont cache the content
+        // if the user is an admin, don't cache the content
         if (isset($login)) {
             if ($login->admin) {
                 $this->caching = false;
@@ -440,8 +438,6 @@ class OcSmarty extends Smarty
      */
     public function get_cache_id()
     {
-        global $opt;
-
         // $cache_id can be directly supplied from unverified user input (URL params).
         // Probably this is no safety or stability issue, but to be sure we restrict
         // the ID to a reasonable set of characters:

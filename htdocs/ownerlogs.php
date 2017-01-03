@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -38,9 +37,11 @@ $tpl->assign(
     'total_found',
     sql_value(
         "SELECT COUNT(*)
-        FROM `cache_logs`
-        LEFT JOIN `caches` ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-        WHERE `cache_logs`.`type`=1 AND `caches`.`user_id`='&1'",
+         FROM `cache_logs`
+         LEFT JOIN `caches`
+           ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+         WHERE `cache_logs`.`type` = 1
+         AND `caches`.`user_id`='&1'",
         0,
         $login->userid
     )
@@ -49,11 +50,11 @@ $tpl->assign(
     'total_attended',
     sql_value(
         "SELECT COUNT(*)
-        FROM `cache_logs`
-        LEFT JOIN `caches`
-            ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-        WHERE `cache_logs`.`type`=7
-        AND `caches`.`user_id`='&1'",
+         FROM `cache_logs`
+         LEFT JOIN `caches`
+           ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+         WHERE `cache_logs`.`type`=7
+         AND `caches`.`user_id`='&1'",
         0,
         $login->userid
     )
@@ -62,11 +63,11 @@ $tpl->assign(
     'total_dnf',
     sql_value(
         "SELECT COUNT(*)
-        FROM `cache_logs`
-        LEFT JOIN `caches`
-            ON `caches`.`cache_id`=`cache_logs`.`cache_id`
-        WHERE `cache_logs`.`type`=2
-        AND `caches`.`user_id`='&1'",
+         FROM `cache_logs`
+         LEFT JOIN `caches`
+           ON `caches`.`cache_id`=`cache_logs`.`cache_id`
+         WHERE `cache_logs`.`type`=2
+         AND `caches`.`user_id`='&1'",
         0,
         $login->userid
     )
@@ -75,9 +76,10 @@ $tpl->assign(
     'total_recommended',
     sql_value(
         "SELECT COUNT(*)
-        FROM `cache_rating`
-        LEFT JOIN `caches` ON `caches`.`cache_id`=`cache_rating`.`cache_id`
-        WHERE `caches`.`user_id`='&1'",
+         FROM `cache_rating`
+         LEFT JOIN `caches`
+           ON `caches`.`cache_id`=`cache_rating`.`cache_id`
+         WHERE `caches`.`user_id`='&1'",
         0,
         $login->userid
     )

@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  Set template variables for displaying a page browser control.
  *  Output is formatted by templates2/<style>/res_pager.tpl.

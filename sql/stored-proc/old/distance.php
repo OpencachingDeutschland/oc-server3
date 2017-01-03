@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This old script created some stored procedures which are currently not
  *  on use, so you need not to run it. Though the code may me useful some

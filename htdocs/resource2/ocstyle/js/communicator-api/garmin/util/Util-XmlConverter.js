@@ -33,13 +33,13 @@ Garmin.XmlConverter = {
     toDocument: function(fromString) {
         return Try.these(
             function() {
-    		    var theDocument = new ActiveXObject("Microsoft.XMLDOM");
-    		    theDocument.async = "false";
-    		    theDocument.loadXML( fromString );
-    		    return theDocument;
+                var theDocument = new ActiveXObject("Microsoft.XMLDOM");
+                theDocument.async = "false";
+                theDocument.loadXML( fromString );
+                return theDocument;
             },
             function() {
-    		    return new DOMParser().parseFromString(fromString, "text/xml");
+                return new DOMParser().parseFromString(fromString, "text/xml");
             }
         );        
     },
@@ -51,12 +51,12 @@ Garmin.XmlConverter = {
      * @member Garmin.XmlConverter
      */  
     toString: function(fromDocument) {
-		if( window.ActiveXObject !== undefined ) { // Since IE11, this can NOT be shortened to if(window.ActiveXObject)
-			return fromDocument.xml
-		}
-		else {
-			var theXmlSerializer = new XMLSerializer();
-			return theXmlSerializer.serializeToString( fromDocument );
-		}
+        if( window.ActiveXObject !== undefined ) { // Since IE11, this can NOT be shortened to if(window.ActiveXObject)
+            return fromDocument.xml
+        }
+        else {
+            var theXmlSerializer = new XMLSerializer();
+            return theXmlSerializer.serializeToString( fromDocument );
+        }
     }
 };

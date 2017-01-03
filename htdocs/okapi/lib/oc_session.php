@@ -27,10 +27,13 @@ class OCSession
 
         return Db::select_value("
             select sys_sessions.user_id
-            from sys_sessions, user
-            where sys_sessions.uuid = '".Db::escape_string($OC_sessionid)."'
-            and user.user_id = sys_sessions.user_id
-            and user.is_active_flag = 1
+            from
+                sys_sessions,
+                user
+            where
+                sys_sessions.uuid = '".Db::escape_string($OC_sessionid)."'
+                and user.user_id = sys_sessions.user_id
+                and user.is_active_flag = 1
         ");
     }
 }

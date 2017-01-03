@@ -3,7 +3,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *    OC versions < 3.0.9 allowed entering spaces befor and after cache names.
  *  This tool reparis these names. It should no longer be neeeded from

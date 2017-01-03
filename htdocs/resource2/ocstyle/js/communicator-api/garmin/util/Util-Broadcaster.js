@@ -41,45 +41,45 @@ if (Garmin == undefined) var Garmin = {};
 Garmin.Broadcaster = function(){}; //just here for jsdoc
 Garmin.Broadcaster = Class.create();
 Garmin.Broadcaster.prototype = {
-	initialize: function() {
-	    this.responders = new Array();
-	},
+    initialize: function() {
+        this.responders = new Array();
+    },
 
-	/**
+    /**
      * Register an object to listen for events
      * 
      * @param {Object} responder
      * @member Garmin.Broadcaster
      */
-	register: function(responderToAdd) {
-	  if (!this.responders.include(responderToAdd))
-	    this.responders.push(responderToAdd);
-	},
+    register: function(responderToAdd) {
+      if (!this.responders.include(responderToAdd))
+        this.responders.push(responderToAdd);
+    },
 
-	/**
+    /**
      * Unregister an object that is listening
      * 
      * @param {Object} responder
      * @member Garmin.Broadcaster
      */
-	unregister: function(responderToRemove) {
-	  this.responders = this.responders.without(responderToRemove);
-	},
+    unregister: function(responderToRemove) {
+      this.responders = this.responders.without(responderToRemove);
+    },
 
-	/**
+    /**
      * Dispatch an event to all listeners
      * 
      * @param {String} callback
      * @param {Object} json
      * @member Garmin.Broadcaster
      */
-	dispatch: function(callback, json) {
-	  this.responders.each(function(responder) {
-	    if (responder[callback] && typeof responder[callback] == 'function') {
-	      try {
-	        responder[callback].apply(responder, [json]);
-	      } catch (e) { alert(e) }
-	    }
-	  });
-	}
+    dispatch: function(callback, json) {
+      this.responders.each(function(responder) {
+        if (responder[callback] && typeof responder[callback] == 'function') {
+          try {
+            responder[callback].apply(responder, [json]);
+          } catch (e) { alert(e) }
+        }
+      });
+    }
 };

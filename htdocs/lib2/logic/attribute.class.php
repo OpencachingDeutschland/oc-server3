@@ -2,32 +2,33 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 class attribute
 {
     /* array with all attributes grouped by attribute group */
-    public static function getAttrbutesListArray($firstLetterUppercase = false)
+    public static function getAttributesListArray($firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal(0, false, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal(0, false, $firstLetterUppercase);
     }
 
-    public static function getSelectableAttrbutesListArray($firstLetterUppercase = false)
+    public static function getSelectableAttributesListArray($firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal(0, true, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal(0, true, $firstLetterUppercase);
     }
 
-    public static function getAttrbutesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
+    public static function getAttributesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
     {
-        return self::getAttrbutesListArrayInternal($cacheId, false, $firstLetterUppercase);
+        return self::getAttributesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
 
     /**
+     * @param $cacheId
      * @param boolean $bOnlySelectable
      * @param boolean $firstLetterUppercase
+     * @return array
      */
-    public static function getAttrbutesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
+    public static function getAttributesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
     {
         global $opt;
 
@@ -57,7 +58,6 @@ class attribute
         );
         while ($rAttrGroup = sql_fetch_assoc($rsAttrGroup)) {
             $attr = array();
-            $bFirst = true;
             $bSearchGroupDefault = false;
 
             if ($cacheId == 0) {
@@ -83,9 +83,9 @@ class attribute
                     LEFT JOIN `sys_trans_text` AS `tt2`
                         ON `t2`.`id`=`tt2`.`trans_id`
                         AND `tt2`.`lang`='&1'
-                    WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . "
+                    WHERE `cache_attrib`.`group_id`='&2'" . $sAddWhereSql . '
                     AND NOT IFNULL(`cache_attrib`.`hidden`, 0)=1
-                    ORDER BY `cache_attrib`.`group_id` ASC",
+                    ORDER BY `cache_attrib`.`group_id` ASC',
                     $opt['template']['locale'],
                     $rAttrGroup['id']
                 );

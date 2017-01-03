@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 /**
@@ -14,12 +13,13 @@ class RSSParser
      *
      * @param int $items number of feeditems to parse from feed
      * @param string $url url of the feed to parse
+     * @param $timeout
      * @param boolean $includetext
      * @return string $item feeditems as HTML-string
      */
     public static function parse($items, $url, $timeout, $includetext)
     {
-        global $opt, $tpl;
+        global $tpl;
 
         if ($items <= 0) {
             return '';
@@ -39,7 +39,7 @@ class RSSParser
             // set short timeout to avoid that the start page gets blocked
             $save_timeout = ini_get('default_socket_timeout');
             ini_set('default_socket_timeout', $timeout);
-            $data = @file_get_contents($url, false, $ctx);
+            $data = @file_get_contents($url, false);
             ini_set('default_socket_timeout', $save_timeout);
 
             // check data

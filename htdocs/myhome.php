@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -17,10 +16,12 @@ if ($login->userid == 0) {
 
 //get user record
 $rsUser = sql(
-    "SELECT IFNULL(`stat_user`.`found`, 0) AS `found`, IFNULL(`stat_user`.`hidden`, 0) AS `hidden`
-    FROM `user`
-    LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
-    WHERE `user`.`user_id`='&1' LIMIT 1",
+    "SELECT IFNULL(`stat_user`.`found`, 0) AS `found`,
+            IFNULL(`stat_user`.`hidden`, 0) AS `hidden`
+     FROM `user`
+     LEFT JOIN `stat_user`
+       ON `user`.`user_id`=`stat_user`.`user_id`
+     WHERE `user`.`user_id`='&1' LIMIT 1",
     $login->userid
 );
 $rUser = sql_fetch_array($rsUser);
@@ -36,21 +37,32 @@ sql_enable_foundrows();
 $tpl->assign_rs(
     'logs',
     sql(
-        "SELECT SQL_CALC_FOUND_ROWS `cache_logs`.`cache_id` `cacheid`, `cache_logs`.`type` `type`, `cache_logs`.`date` `date`, `caches`.`name` `name`,
-            `user`.`user_id` AS `userid`, `user`.`username`, `caches`.`wp_oc`, `ca`.`attrib_id` IS NOT NULL AS `oconly`,
-            `cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
-            `cache_logs`.`needs_maintenance`,
-            `cache_logs`.`listing_outdated`
-       FROM `cache_logs`
- INNER JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
- INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-  LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id`
-    AND `ca`.`attrib_id`=6
-  LEFT JOIN `cache_rating` ON `cache_rating`.`cache_id`=`caches`.`cache_id`
-  AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
-      WHERE `cache_logs`.`user_id`='&1'
-   ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
-      LIMIT 10",
+        "SELECT SQL_CALC_FOUND_ROWS
+             `cache_logs`.`cache_id` `cacheid`,
+             `cache_logs`.`type` `type`,
+             `cache_logs`.`date` `date`,
+             `caches`.`name` `name`,
+             `user`.`user_id` AS `userid`,
+             `user`.`username`,
+             `caches`.`wp_oc`,
+             `ca`.`attrib_id` IS NOT NULL AS `oconly`,
+             `cache_rating`.`rating_date` IS NOT NULL AND `cache_logs`.`type` IN (1,7) AS `recommended`,
+             `cache_logs`.`needs_maintenance`,
+             `cache_logs`.`listing_outdated`
+         FROM `cache_logs`
+         INNER JOIN `caches`
+           ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+         INNER JOIN `user`
+           ON `caches`.`user_id`=`user`.`user_id`
+         LEFT JOIN `caches_attributes` `ca`
+           ON `ca`.`cache_id`=`caches`.`cache_id`
+           AND `ca`.`attrib_id`=6
+         LEFT JOIN `cache_rating`
+           ON `cache_rating`.`cache_id`=`caches`.`cache_id`
+           AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
+         WHERE `cache_logs`.`user_id`='&1'
+         ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
+         LIMIT 10",
         $login->userid
     )
 );
@@ -85,7 +97,10 @@ $tpl->assign_rs(
 if ($useragent_msie && $useragent_msie_version < 9) {
     $tpl->assign('dotfill', '');
 } else {
-    $tpl->assign('dotfill', '...........................................................................................................');
+    $tpl->assign(
+        'dotfill',
+        '...........................................................................................................'
+    );
 }
 $tpl->add_body_load('myHomeLoad()');
 
@@ -93,12 +108,17 @@ $tpl->add_body_load('myHomeLoad()');
 $tpl->assign_rs(
     'notpublished',
     sql(
-        "SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`date_hidden`,
-                `caches`.`date_activate`, `caches`.`status`, `caches`.`wp_oc`, `caches`.`type`
-           FROM `caches`
-          WHERE `user_id`='&1'
-            AND `caches`.`status` = 5
-       ORDER BY `date_activate` DESC, `caches`.`date_created` DESC",
+        "SELECT `caches`.`cache_id`,
+                `caches`.`name`,
+                `caches`.`date_hidden`,
+                `caches`.`date_activate`,
+                `caches`.`status`,
+                `caches`.`wp_oc`,
+                `caches`.`type`
+         FROM `caches`
+         WHERE `user_id`='&1'
+           AND `caches`.`status` = 5
+         ORDER BY `date_activate` DESC, `caches`.`date_created` DESC",
         $login->userid
     )
 );

@@ -6,7 +6,6 @@
  *
  *  used template(s): newdesc
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/lib/consts.inc.php';
@@ -65,10 +64,9 @@ if ($error == false) {
                         $oldDescMode = $descMode;
                     }
                 } else {
+                    $descMode = 3;
                     if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'", 1) == 1) {
                         $descMode = 1;
-                    } else {
-                        $descMode = 3;
                     }
                     $oldDescMode = $descMode;
                 }
@@ -78,9 +76,9 @@ if ($error == false) {
                     $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;
                     $_POST['submitform'] = $_POST['submit'];
 
-                    $desc = iconv("ISO-8859-1", "UTF-8", $desc);
-                    $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-                    $hints = iconv("ISO-8859-1", "UTF-8", $hints);
+                    $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
+                    $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+                    $hints = iconv('ISO-8859-1', 'UTF-8', $hints);
                 }
 
                 // Filter Input
@@ -93,8 +91,9 @@ if ($error == false) {
                     //check if the entered language already exists
                     $desc_rs = sql(
                         "SELECT `id`
-                        FROM `cache_desc`
-                        WHERE `cache_id`='&1' AND `language`='&2'",
+                         FROM `cache_desc`
+                         WHERE `cache_id`='&1'
+                           AND `language`='&2'",
                         $cache_id,
                         $sel_lang
                     );
@@ -104,20 +103,29 @@ if ($error == false) {
                     if ($desc_lang_exists == false) {
                         //add to DB
                         sql(
-                            "INSERT INTO `cache_desc`
-                                (
-                                    `id`,
-                                    `cache_id`,
-                                    `language`,
-                                    `desc`,
-                                    `desc_html`,
-                                    `desc_htmledit`,
-                                    `hint`,
-                                    `short_desc`,
-                                    `last_modified`,
-                                    `node`
-                                )
-                             VALUES ('', '&1', '&2', '&3', '&4', '&5', '&6', '&7', NOW(), '&8')",
+                            "INSERT INTO `cache_desc` (
+                                `id`,
+                                `cache_id`,
+                                `language`,
+                                `desc`,
+                                `desc_html`,
+                                `desc_htmledit`,
+                                `hint`,
+                                `short_desc`,
+                                `last_modified`,
+                                `node`
+                             ) VALUES (
+                                '',
+                                '&1',
+                                '&2',
+                                '&3',
+                                '&4',
+                                '&5',
+                                '&6',
+                                '&7',
+                                NOW(),
+                                '&8'
+                             )",
                             $cache_id,
                             $sel_lang,
                             $desc,
@@ -149,7 +157,7 @@ if ($error == false) {
                          WHERE `languages_list_default`.`lang`='" . sql_escape($locale) . "'
                          AND ISNULL(`cache_desc`.`cache_id`)",
                         0
-                    ) == 0 ) {
+                    ) == 0) {
                         $show_all_langs = 1;
                     }
                 }
@@ -158,22 +166,25 @@ if ($error == false) {
                 $langoptions = '';
                 $selected = false;
                 $rsLanguages = sql(
-                    "SELECT `short`, IFNULL(`sys_trans_text`.`text`, `languages`.`name`) AS `name`
-                    FROM `languages`
-                    LEFT JOIN `languages_list_default`
-                        ON `languages`.`short`=`languages_list_default`.`show`
-                        AND `languages_list_default`.`lang`='&1'
-                    LEFT JOIN `sys_trans`
-                        ON `languages`.`trans_id`=`sys_trans`.`id`
-                    LEFT JOIN `sys_trans_text`
-                        ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                        AND `sys_trans_text`.`lang`='&1'
-                    WHERE `languages`.`short` NOT IN (
-                        SELECT `language`
-                        FROM `cache_desc`
-                        WHERE `cache_id`='&3')
-                    AND ('&2'=1 OR `languages_list_default`.`show`=`languages`.`short`)
-                    ORDER BY `name` ASC",
+                    "SELECT `short`,
+                            IFNULL(`sys_trans_text`.`text`,
+                            `languages`.`name`) AS `name`
+                     FROM `languages`
+                     LEFT JOIN `languages_list_default`
+                       ON `languages`.`short`=`languages_list_default`.`show`
+                       AND `languages_list_default`.`lang`='&1'
+                     LEFT JOIN `sys_trans`
+                       ON `languages`.`trans_id`=`sys_trans`.`id`
+                     LEFT JOIN `sys_trans_text`
+                       ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                       AND `sys_trans_text`.`lang`='&1'
+                     WHERE `languages`.`short` NOT IN (
+                       SELECT `language`
+                       FROM `cache_desc`
+                       WHERE `cache_id`='&3'
+                     )
+                       AND ('&2'=1 OR `languages_list_default`.`show`=`languages`.`short`)
+                       ORDER BY `name` ASC",
                     $locale,
                     (($show_all_langs == 1) ? 1 : 0),
                     $cache_id
@@ -183,7 +194,9 @@ if ($error == false) {
                     if ($sSelected != '') {
                         $selected = true;
                     }
-                    $langoptions .= '<option value="' . htmlspecialchars($rLanguage['short'], ENT_COMPAT, 'UTF-8') . '"' . $sSelected . '>' . htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
+                    $langoptions .= '<option value="' . htmlspecialchars($rLanguage['short'], ENT_COMPAT, 'UTF-8') .
+                        '"' . $sSelected . '>' .
+                        htmlspecialchars($rLanguage['name'], ENT_COMPAT, 'UTF-8') . '</option>' . "\n";
                 }
                 sql_free_result($rsLanguages);
                 if ($langoptions == '') {
@@ -224,12 +237,9 @@ if ($error == false) {
 
                 tpl_set_var('reset', $reset);  // obsolete
                 tpl_set_var('submit', $submit);
-            } else {
-                //TODO: not the owner
             }
         } else {
             mysql_free_result($cache_rs);
-            //TODO: cache not exist
         }
     }
 }

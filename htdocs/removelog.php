@@ -6,7 +6,6 @@
  *
  *  GET/POST-Parameter: logid
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 use Oc\GeoCache\Recommendation;
@@ -38,30 +37,29 @@ if ($error == false) {
         tpl_set_var('helplink', helppagelink('login'));
     } else {
         $log_rs = sql(
-            "SELECT
-                `cache_logs`.`node` AS `node`,
-                `cache_logs`.`uuid` AS `uuid`,
-                `cache_logs`.`cache_id` AS `cache_id`,
-                `caches`.`user_id` AS `cache_owner_id`,
-                `caches`.`name` AS `cache_name`,
-                `cache_logs`.`text` AS `log_text`,
-                `cache_logs`.`text_html`,
-                `cache_logs`.`type` AS `log_type`,
-                `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
-                `cache_logs`.`user_id` AS `log_user_id`,
-                `cache_logs`.`date` AS `log_date`,
-                `log_types`.`icon_small` AS `icon_small`,
-                `user`.`username` AS `log_username`,
-                IFNULL(`user`.`language`,'&2') AS `log_user_language`,
-                `user`.`domain` AS `log_user_domain`,
-                `caches`.`wp_oc`,
-                `cache_status`.`allow_user_view`
-            FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
-            WHERE `cache_logs`.`id`='&1'
-            AND `cache_logs`.`user_id`=`user`.`user_id`
-            AND `caches`.`cache_id`=`cache_logs`.`cache_id`
-            AND `caches`.`status`=`cache_status`.`id`
-            AND `log_types`.`id`=`cache_logs`.`type`",
+            "SELECT `cache_logs`.`node` AS `node`,
+                    `cache_logs`.`uuid` AS `uuid`,
+                    `cache_logs`.`cache_id` AS `cache_id`,
+                    `caches`.`user_id` AS `cache_owner_id`,
+                    `caches`.`name` AS `cache_name`,
+                    `cache_logs`.`text` AS `log_text`,
+                    `cache_logs`.`text_html`,
+                    `cache_logs`.`type` AS `log_type`,
+                    `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
+                    `cache_logs`.`user_id` AS `log_user_id`,
+                    `cache_logs`.`date` AS `log_date`,
+                    `log_types`.`icon_small` AS `icon_small`,
+                    `user`.`username` AS `log_username`,
+                    IFNULL(`user`.`language`,'&2') AS `log_user_language`,
+                    `user`.`domain` AS `log_user_domain`,
+                    `caches`.`wp_oc`,
+                    `cache_status`.`allow_user_view`
+             FROM `cache_logs`, `caches`, `user`, `cache_status`, `log_types`
+             WHERE `cache_logs`.`id`='&1'
+               AND `cache_logs`.`user_id`=`user`.`user_id`
+               AND `caches`.`cache_id`=`cache_logs`.`cache_id`
+               AND `caches`.`status`=`cache_status`.`id`
+               AND `log_types`.`id`=`cache_logs`.`type`",
             $log_id,
             $opt['template']['default']['locale']
         );
@@ -137,12 +135,36 @@ if ($error == false) {
 
                         // insert log data
                         $email_content = mb_ereg_replace('%log_owner%', $log_user_record['username'], $email_content);
-                        $email_content = mb_ereg_replace('%cache_owner%', $cache_owner_record['username'], $email_content);
-                        $email_content = mb_ereg_replace('%cache_owner_id%', $log_record['cache_owner_id'], $email_content);
-                        $email_content = mb_ereg_replace('%cache_name%', $log_record['cache_name'], $email_content);
-                        $email_content = mb_ereg_replace('%cache_wp%', $log_record['wp_oc'], $email_content);
-                        $email_content = mb_ereg_replace('%log_date%', date($opt['locale'][$locale]['format']['phpdate'], strtotime($log_record['log_date'])), $email_content);
-                        $email_content = mb_ereg_replace('%log_type%', get_logtype_name($log_record['log_type'], $log_record['log_user_language']), $email_content);
+                        $email_content = mb_ereg_replace(
+                            '%cache_owner%',
+                            $cache_owner_record['username'],
+                            $email_content
+                        );
+                        $email_content = mb_ereg_replace(
+                            '%cache_owner_id%',
+                            $log_record['cache_owner_id'],
+                            $email_content
+                        );
+                        $email_content = mb_ereg_replace(
+                            '%cache_name%',
+                            $log_record['cache_name'],
+                            $email_content
+                        );
+                        $email_content = mb_ereg_replace(
+                            '%cache_wp%',
+                            $log_record['wp_oc'],
+                            $email_content
+                        );
+                        $email_content = mb_ereg_replace(
+                            '%log_date%',
+                            date($opt['locale'][$locale]['format']['phpdate'], strtotime($log_record['log_date'])),
+                            $email_content
+                        );
+                        $email_content = mb_ereg_replace(
+                            '%log_type%',
+                            get_logtype_name($log_record['log_type'], $log_record['log_user_language']),
+                            $email_content
+                        );
                         $email_content = mb_ereg_replace('%log_text%', $logtext, $email_content);
                         $email_content = mb_ereg_replace('%comment%', $message, $email_content);
 
@@ -162,9 +184,9 @@ if ($error == false) {
 
                     while ($r = sql_fetch_assoc($rs)) {
                         if (!$ownlog) {
-                            sql("SET @archive_picop=TRUE");
+                            sql('SET @archive_picop=TRUE');
                         } else {
-                            sql("SET @archive_picop=FALSE");
+                            sql('SET @archive_picop=FALSE');
                         }
 
                         sql("DELETE FROM `pictures` WHERE `id`='&1'", $r['id']);
@@ -208,9 +230,9 @@ if ($error == false) {
                     // move to archive, even if own log (uuids are used for OKAPI replication)
                     sql(
                         "INSERT IGNORE INTO `cache_logs_archived`
-                        SELECT *, '0' AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by`
-                        FROM `cache_logs`
-                        WHERE `cache_logs`.`id`='&1' LIMIT 1",
+                         SELECT *, '0' AS `deletion_date`, '&2' AS `deleted_by`, 0 AS `restored_by`
+                         FROM `cache_logs`
+                         WHERE `cache_logs`.`id`='&1' LIMIT 1",
                         $log_id,
                         $usr['userid']
                     );
@@ -235,19 +257,19 @@ if ($error == false) {
                 // quickfix: this is coded in res_logentry_logitem.tpl (after smarty migration)
                 switch ($log_record['log_type']) {
                     case 1:
-                        $sLogTypeText = t("%1 found the Geocache", $log_record['log_username']);
+                        $sLogTypeText = t('%1 found the Geocache', $log_record['log_username']);
                         break;
                     case 2:
                         $sLogTypeText = t("%1 didn't find the Geoacache", $log_record['log_username']);
                         break;
                     case 3:
-                        $sLogTypeText = t("%1 wrote a note", $log_record['log_username']);
+                        $sLogTypeText = t('%1 wrote a note', $log_record['log_username']);
                         break;
                     case 7:
-                        $sLogTypeText = t("%1 has visited the event", $log_record['log_username']);
+                        $sLogTypeText = t('%1 has visited the event', $log_record['log_username']);
                         break;
                     case 8:
-                        $sLogTypeText = t("%1 wants to visit the event", $log_record['log_username']);
+                        $sLogTypeText = t('%1 wants to visit the event', $log_record['log_username']);
                         break;
                     default:
                         $sLogTypeText = $log_record['log_username'];
@@ -259,10 +281,10 @@ if ($error == false) {
                 tpl_set_var('logid_urlencode', htmlspecialchars(urlencode($log_id), ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('logid', htmlspecialchars($log_id, ENT_COMPAT, 'UTF-8'));
 
+                $teamimg = "";
                 if ($log_record['oc_team_comment']) {
-                    $teamimg = '<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" title="' . t('OC team comment') . '" /> ';
-                } else {
-                    $teamimg = "";
+                    $teamimg = '<img src="resource2/ocstyle/images/oclogo/oc-team-comment.png" title="' .
+                        t('OC team comment') . '" /> ';
                 }
                 tpl_set_var('logimage', $teamimg . icon_log_type($log_record['icon_small'], ""));
 
@@ -270,17 +292,21 @@ if ($error == false) {
                     'date',
                     htmlspecialchars(strftime($dateformat, strtotime($log_record['log_date'])), ENT_COMPAT, 'UTF-8')
                 );
-                tpl_set_var('time', substr($log_record['log_date'], 11) == "00:00:00" ? "" : ", " . substr($log_record['log_date'], 11, 5));
+                tpl_set_var(
+                    'time',
+                    substr($log_record['log_date'], 11) == '00:00:00' ? '' : ', ' .
+                        substr(
+                            $log_record['log_date'],
+                            11,
+                            5
+                        )
+                );
                 tpl_set_var('userid', htmlspecialchars($log_record['log_user_id'] + 0, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('username', htmlspecialchars($log_record['log_username'], ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('typetext', htmlspecialchars($sLogTypeText, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('logtext', $log_record['log_text']);
                 tpl_set_var('log_user_name', htmlspecialchars($log_record['log_username'], ENT_COMPAT, 'UTF-8'));
-            } else {
-                //TODO: hm ... no permission to remove the log
             }
-        } else {
-            //TODO: log doesn't exist
         }
     }
 }

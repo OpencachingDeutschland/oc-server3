@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  *
  *  This modules gives you a very usefull SQL debugger for MySQL ...
  ***************************************************************************/

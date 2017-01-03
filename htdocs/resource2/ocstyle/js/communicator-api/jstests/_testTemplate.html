@@ -20,43 +20,43 @@
 
 <body>
 <script language="JavaScript" type="text/javascript">
-	var Assert = YAHOO.util.Assert; 
-	/* GLOBAL VAR DECLARATIONS GO HERE*/
-	//var display;
-	
-	/* NAME YOUR TEST CASE VAR */
+    var Assert = YAHOO.util.Assert;
+    /* GLOBAL VAR DECLARATIONS GO HERE*/
+    //var display;
+
+    /* NAME YOUR TEST CASE VAR */
     var nameYourTestCase = new YAHOO.tool.TestCase({
-   		/* PRETTY NAME FOR YOUR TEST CASE */
+           /* PRETTY NAME FOR YOUR TEST CASE */
         name: "Garmin Device Display UI Generation Unit Tests",
         
         _should: {
             ignore: {
-            	/* LIST OF TESTS TO IGNORE */
+                /* LIST OF TESTS TO IGNORE */
                 //testReadFitnessHistoryDirectory: true //ignore this test
             },
             error: {
-            	/* LIST OF TESTS EXPECTED TO FAIL */
-            	//testValidOptionConfigParam: true
+                /* LIST OF TESTS EXPECTED TO FAIL */
+                //testValidOptionConfigParam: true
             }            
         },
         
         setUp: function() {
-			/* SETUP CODE THAT IS RUN BEFORE EACH TEST */  
+            /* SETUP CODE THAT IS RUN BEFORE EACH TEST */
         },
         
         tearDown: function() {
-        	/* CLEAN UP CODE THAT IS RUN AFTER EACH TEST (MEMORY OR DOM)*/
-    	},
+            /* CLEAN UP CODE THAT IS RUN AFTER EACH TEST (MEMORY OR DOM)*/
+        },
         
         /* TESTS GO HERE */
         testDoesDaftPunkRock: function() {
-        	var hellYeah = true;
-			Assert.isTrue(hellYeah);
-		}
-		      	
-   	});
-   	
-	/* UPDATE WITH YOUR TEST CASE VAR HERE*/   	
+            var hellYeah = true;
+            Assert.isTrue(hellYeah);
+        }
+
+       });
+
+    /* UPDATE WITH YOUR TEST CASE VAR HERE*/
     //add the test cases and suites
     YAHOO.tool.TestRunner.add(nameYourTestCase);
     

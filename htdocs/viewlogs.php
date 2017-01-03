@@ -1,8 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';
@@ -42,17 +40,11 @@ if (isset($_REQUEST['count'])) {
 }
 $admin_access = ($login->admin && ADMIN_USER) > 0;
 $deleted = @$_REQUEST['deleted'] > 0 && $admin_access;
-
-//$tpl->caching = true;
-//$tpl->cache_lifetime = 31*24*60*60;
-//$tpl->cache_id = $cache_id . '|' . $start . '|' . $count;
-
+$rCache = [];
 if ($cache_id != 0) {
     //get cache record
     $rs = sql(
-        "
-            SELECT
-                `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`,
+        "SELECT `caches`.`cache_id`, `caches`.`wp_oc` AS `wpoc`, `caches`.`cache_id` AS `cacheid`,
                 `caches`.`user_id` AS `userid`, `caches`.`name`,
                 `caches`.`status` AS `status`,
                 `caches`.`type` AS `type`,
@@ -62,22 +54,23 @@ if ($cache_id != 0) {
                 IFNULL(`stat_caches`.`will_attend`, 0) AS `willattend`,
                 IFNULL(`stat_caches`.`note`, 0) AS `note`,
                 `cache_status`.`allow_user_view`
-            FROM `caches`
-            INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id`
-            LEFT JOIN `stat_caches` ON `caches`.`cache_id`=`stat_caches`.`cache_id`
-            INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
-            WHERE `caches`.`cache_id`='&1'",
+         FROM `caches`
+         INNER JOIN `cache_status`
+           ON `caches`.`status`=`cache_status`.`id`
+         LEFT JOIN `stat_caches`
+           ON `caches`.`cache_id`=`stat_caches`.`cache_id`
+         INNER JOIN `user`
+           ON `caches`.`user_id`=`user`.`user_id`
+         WHERE `caches`.`cache_id`='&1'",
         $cache_id
     );
     $rCache = sql_fetch_array($rs);
     sql_free_result($rs);
 
-    if ($rCache === false) {
+    if (!is_array($rCache)) {
         $tpl->error(ERROR_CACHE_NOT_EXISTS);
-    } else {
-        if ($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid && !$admin_access) {
-            $tpl->error(ERROR_NO_ACCESS);
-        }
+    } elseif ($rCache['allow_user_view'] != 1 && $rCache['userid'] != $login->userid && !$admin_access) {
+        $tpl->error(ERROR_NO_ACCESS);
     }
 } else {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);

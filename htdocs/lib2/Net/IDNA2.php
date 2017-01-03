@@ -2254,6 +2254,7 @@ class Net_IDNA2
      * @param mixed $option Parameter to set (string: single parameter; array of Parameter => Value pairs)
      * @param string $value Value to use (if parameter 1 is a string)
      * @return boolean       true on success, false otherwise
+     * @throws \InvalidArgumentException
      * @access public
      */
     public function setParams($option, $value = false)
@@ -3374,7 +3375,7 @@ class Net_IDNA2
      * @return Net_IDNA2
      * @access public
      */
-    function getInstance($params = [])
+    public function getInstance($params = [])
     {
         return new Net_IDNA2($params);
     }
@@ -3390,7 +3391,7 @@ class Net_IDNA2
      * @return object Net_IDNA2
      * @access public
      */
-    function singleton($params = [])
+    public function singleton($params = [])
     {
         static $instances;
         if (!isset($instances)) {

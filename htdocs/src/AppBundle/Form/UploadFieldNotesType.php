@@ -36,8 +36,10 @@ class UploadFieldNotesType extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
-     *
      * @return void
+     * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
+     * @throws \Symfony\Component\Form\Exception\LogicException
+     * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

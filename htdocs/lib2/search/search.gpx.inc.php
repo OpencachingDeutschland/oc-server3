@@ -571,6 +571,8 @@ function decodeEntities($str)
 }
 
 /**
+ * @param $str
+ * @param bool $inverse
  * @return string
  */
 function changePlaceholder($str, $inverse = false)

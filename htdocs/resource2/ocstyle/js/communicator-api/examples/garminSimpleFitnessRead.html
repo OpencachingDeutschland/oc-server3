@@ -2,30 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <style type="text/css">
         #main {
-        	font-family: Arial, Helvetica, sans-serif;
-        	font-size: 12px;
-        	border-style: solid;
-        	width: 375px;
-        	background-color:#F3F3F3;
-        	border-color: #999999;
-        	border-width: 1px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            border-style: solid;
+            width: 375px;
+            background-color:#F3F3F3;
+            border-color: #999999;
+            border-width: 1px;
             -moz-border-radius:5px;
             -webkit-border-radius:5px;
             border-radius:5px;
-        	padding-top: 15px;
-        	padding-left:15px;
-        	padding-right:15px;
-        	padding-bottom:5px;
+            padding-top: 15px;
+            padding-left:15px;
+            padding-right:15px;
+            padding-bottom:5px;
         
         }
         
         #titleBox {
-        	font-size: larger;
-        	border-bottom-width: 1px;
-        	border-top-style: none;
-        	border-bottom-style: dotted;
-        	font-variant: small-caps;
-        	font-weight: bold;
+            font-size: larger;
+            border-bottom-width: 1px;
+            border-top-style: none;
+            border-bottom-style: dotted;
+            font-variant: small-caps;
+            font-weight: bold;
         }
         
         #garminDevices {
@@ -44,29 +44,29 @@
         #output {
             margin-top: 10px;
             margin-bottom: 10px;
-        	width: inherit;
-           	height: 300px;
+            width: inherit;
+               height: 300px;
             display: none;
         }
         
         button.fancyButton {
-        	padding: 5px 15px;
-        	background: -moz-linear-gradient(
-        		top,
-        		#ffffff 0%,
-        		#ebebeb 50%,
-        		#dbdbdb 50%,
-        		#b5b5b5);
-        	background: -webkit-gradient(
-        		linear, left top, left bottom, 
-        		from(#ffffff),
-        		color-stop(0.50, #ebebeb),
-        		color-stop(0.50, #dbdbdb),
-        		to(#b5b5b5));
-        	border-radius: 5px;
-        	-moz-border-radius: 5px;
-        	-webkit-border-radius: 5px;
-        	border: 1px solid #949494;
+            padding: 5px 15px;
+            background: -moz-linear-gradient(
+                top,
+                #ffffff 0%,
+                #ebebeb 50%,
+                #dbdbdb 50%,
+                #b5b5b5);
+            background: -webkit-gradient(
+                linear, left top, left bottom, 
+                from(#ffffff),
+                color-stop(0.50, #ebebeb),
+                color-stop(0.50, #dbdbdb),
+                to(#b5b5b5));
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border: 1px solid #949494;
         }
     </style>
 
@@ -74,10 +74,10 @@
         <title>TCX Fitness Read Example</title>
     </head>
 
-	<!-- Prototype -->
+    <!-- Prototype -->
     <script type="text/javascript" src="../prototype/prototype.js"></script>
     
-	<!-- API -->
+    <!-- API -->
     <script type="text/javascript" src="../garmin/util/Util-BrowserDetect.js"></script>
     <script type="text/javascript" src="../garmin/util/Util-Broadcaster.js"></script>
     <script type="text/javascript" src="../garmin/util/Util-PluginDetect.js"></script>
@@ -90,8 +90,8 @@
 
     <script type="text/javascript" src="../garmin/device/GarminDeviceControl.js"></script>
     
-	<!-- Main -->
-    <script type="text/javascript">	
+    <!-- Main -->
+    <script type="text/javascript">    
         Garmin.SimpleFitnessReader = Class.create( {
             initialize: function() {
                 this.contentEl = $('garminDevices');
@@ -108,11 +108,11 @@
                 
                 try 
                 {
-                	this.devControl = new Garmin.DeviceControl();
-                	this.devControl.register(this);
-                	this.devControl.unlock( ["http://developer.garmin.com/",
-                	                         "ee3934433a35ee348583236c2eeadbc1"] );
-                	this.devControl.validatePlugin(); //throws if not available
+                    this.devControl = new Garmin.DeviceControl();
+                    this.devControl.register(this);
+                    this.devControl.unlock( ["http://developer.garmin.com/",
+                                             "ee3934433a35ee348583236c2eeadbc1"] );
+                    this.devControl.validatePlugin(); //throws if not available
                 
                     this.findButton.observe("click", this.findDevices.bind( this ) );
                     this.readButton.observe("click", this.readTCX.bind( this ) );
@@ -278,7 +278,7 @@
         });
     </script>
 
-	<!-- Markup -->
+    <!-- Markup -->
     <body onload="var gTCXReader = new Garmin.SimpleFitnessReader();">
         <div id="main">
             <div id="titleBox">TCX Fitness Read Example</div>

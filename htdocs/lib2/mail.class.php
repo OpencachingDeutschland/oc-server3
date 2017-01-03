@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -160,7 +159,6 @@ class mail extends Smarty
 
         if (getmxrr($domain, $smtpServerList, $smtpServerWeight) !== false && count($smtpServerList) > 0) {
             return true;
-
         }
 
         // check if A exists

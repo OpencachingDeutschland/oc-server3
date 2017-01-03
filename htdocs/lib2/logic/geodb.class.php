@@ -2,12 +2,10 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *  Unicode Reminder メモ
  ***************************************************************************/
 
 class GeoDb
 {
-
     public static function setAllCacheLocations()
     {
         $rs = sqll(
@@ -193,5 +191,4 @@ class GeoDb
             return '';
         }
     }
-
 }

@@ -845,12 +845,10 @@ if ($error == false) {
                         $remove_url =
                             'removedesc.php?cacheid=' . urlencode($cache_id)
                             . '&desclang=' . urlencode($desclang);
-                        $hrefid = 'href_removedesc_' . $desclang;
                         $removedesc =
                             '&nbsp;[<a href="'
-                            . htmlspecialchars($remove_url, ENT_COMPAT, 'UTF-8'). '" '
-                            . 'id="' . $hrefid . '" '
-                            . 'onclick="testListingModified(\'' . $hrefid . '\')" >' . $remove . '</a>]';
+                            . htmlspecialchars($remove_url, ENT_COMPAT, 'UTF-8')
+                            . '" onclick="testListingModified(this)" >' . $remove . '</a>]';
                     } else {
                         $removedesc = '';
                     }
@@ -867,14 +865,12 @@ if ($error == false) {
                     sql_free_result($resp);
 
                     $edit_url = 'editdesc.php?cacheid=' . urlencode($cache_id) . '&desclang=' . urlencode($desclang);
-                    $hrefid = 'href_editdesc_' . $desclang;
 
                     $cache_descs .=
                         '<tr><td colspan="2">'
                         . htmlspecialchars(db_LanguageFromShort($desclang), ENT_COMPAT, 'UTF-8')
-                        . ' [<a href="' . htmlspecialchars($edit_url, ENT_COMPAT, 'UTF-8') . '" '
-                        . 'id="' . $hrefid . '" '
-                        . 'onclick="testListingModified(\'' . $hrefid . '\')" >' . $edit . '</a>]'
+                        . ' [<a href="' . htmlspecialchars($edit_url, ENT_COMPAT, 'UTF-8')
+                        . '" onclick="testListingModified(this)" >' . $edit . '</a>]'
                         . $removedesc . '</td></tr>';
                 }
                 tpl_set_var('cache_descs', $cache_descs);

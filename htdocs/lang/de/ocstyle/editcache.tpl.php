@@ -60,11 +60,11 @@ function setListingModified()
     return true;
 }
 
-function testListingModified(href_id)
+function testListingModified(a)
 {
     if (document.getElementById('listing_modified').value == '1') {
         alert('{savealert}');
-        document.getElementById(href_id).href = 'javascript:void(0)';
+        a.href = 'javascript:void(0)';
     }
 }
 
@@ -140,7 +140,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}Owner:{/t}</td>
         <td>
-            {ownername} [<a href="adoptcache.php?action=listbycache&cacheid={cacheid_urlencode}" id="href_adopt" onclick="testListingModified('href_adopt')" >{t}offer for adoption{/t}</a>]
+            {ownername} [<a href="adoptcache.php?action=listbycache&cacheid={cacheid_urlencode}" onclick="testListingModified(this)" >{t}offer for adoption{/t}</a>]
         </td>
     </tr>
     <tr>
@@ -275,7 +275,7 @@ function toggleAttr(id)
                     <img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
                     {t}Descriptions{/t}&nbsp;&nbsp;
                     <img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="" >
-                    <span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}" id="href_adddesc" onclick="testListingModified('href_adddesc')" >{t}Add description in another language{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}" onclick="testListingModified(this)" >{t}Add description in another language{/t}</a>]</span>
                 </p>
             </div>
         </td>
@@ -296,7 +296,7 @@ function toggleAttr(id)
                     <img src="lang/de/ocstyle/images/description/22x22-image.png" width="22" height="22" align="middle" border="0" />
                     {t}Pictures{/t}&nbsp;&nbsp;
                     <img src="lang/de/ocstyle/images/action/16x16-addimage.png" width="16" height="16" align="middle" border="0" />
-                    <span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}" id="href_addpic" onclick="testListingModified('href_addpic')" >{t}Upload a picture{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}" onclick="testListingModified(this)" >{t}Upload a picture{/t}</a>]</span>
                 </p>
             </div>
         </td>
@@ -311,7 +311,7 @@ function toggleAttr(id)
                 <p class="content-title-noshade-size2">
                     <img src="resource2/ocstyle/images/description/20x20-compass.png" align="middle" border="0" />
                     {t}Additional waypoints{/t}&nbsp;&nbsp;
-                    <span style="font-weight: 400;font-size: small;">[<a href="childwp.php?cacheid={cacheid_urlencode}" id="href_addwp" onclick="testListingModified('href_addwp')" >{t}Add a waypoint{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<a href="childwp.php?cacheid={cacheid_urlencode}" onclick="testListingModified(this)" >{t}Add a waypoint{/t}</a>]</span>
                 </p>
             </div>
         </td>

@@ -54,16 +54,29 @@
 <!--
 var maAttributes = new Array({jsattributes_array});
 
+function setListingModified()
+{
+    document.getElementById('listing_modified').value = '1';
+    return true;
+}
+
+function testListingModified(href_id)
+{
+    if (document.getElementById('listing_modified').value == '1') {
+        alert('{savealert}');
+        document.getElementById(href_id).href = 'javascript:void(0)';
+    }
+}
+
 function _chkVirtual () {
-  if (document.editcache_form.type.value == "4" || document.editcache_form.type.value == "5") {
-    document.editcache_form.size.value = "7";
-    document.editcache_form.size.disabled = true;
-  }
-  else
-  {
-    document.editcache_form.size.disabled = false;
-  }
-  return false;
+    if (document.editcache_form.type.value == '4' || document.editcache_form.type.value == '5') {
+        document.editcache_form.size.value = '7';
+        document.editcache_form.size.disabled = true;
+    }
+    else {
+        document.editcache_form.size.disabled = false;
+    }
+    return false;
 }
 
 function rebuildCacheAttr()
@@ -99,6 +112,7 @@ function toggleAttr(id)
                 maAttributes[i][1] = 0;
 
             rebuildCacheAttr();
+            setListingModified();
             break;
         }
     }
@@ -115,17 +129,18 @@ function toggleAttr(id)
 <input type="hidden" name="cacheid" value="{cacheid}"/> <!-- Ocprop -->
 <input type="hidden" id="cache_attribs" name="cache_attribs" value="{cache_attribs}" />
 <input type="hidden" name="show_all_countries" value="{show_all_countries}"/>
+<input type="hidden" name="listing_modified" value="{listing_modified}" id="listing_modified" />
 <table class="table">
     <tr>
         <td>{t}Name:{/t}</td>
         <td>
-            <input type="text" name="name" value="{name}" maxlength="60" class="input400" />{name_message}
+            <input type="text" name="name" value="{name}" maxlength="60" class="input400" onchange="setListingModified()" />{name_message}
         </td>
     </tr>
     <tr>
         <td>{t}Owner:{/t}</td>
         <td>
-            {ownername} [<a href="adoptcache.php?action=listbycache&cacheid={cacheid_urlencode}">{t}offer for adoption{/t}</a>]
+            {ownername} [<a href="adoptcache.php?action=listbycache&cacheid={cacheid_urlencode}" id="href_adopt" onclick="testListingModified('href_adopt')" >{t}offer for adoption{/t}</a>]
         </td>
     </tr>
     <tr>
@@ -135,7 +150,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}State:{/t}</td>
         <td>
-            <select name="status" class="input200">
+            <select name="status" class="input200" onchange="setListingModified()" >
                 {statusoptions}
             </select>{status_message}{statuschange}
         </td>
@@ -145,7 +160,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}Cachetype:{/t}</td>
         <td>
-            <select name="type" class="input200" onChange="return _chkVirtual()">
+            <select name="type" class="input200" onchange="setListingModified(); return _chkVirtual()" >
                 {typeoptions}
             </select>
         </td>
@@ -153,7 +168,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}Size:{/t}</td>
         <td>
-            <select name="size" class="input200" onChange="return _chkVirtual()">
+            <select name="size" class="input200" onchange="setListingModified(); return _chkVirtual()" >
                 {sizeoptions}
             </select>{size_message}
         </td>
@@ -162,20 +177,20 @@ function toggleAttr(id)
     <tr>
         <td valign="top">{t}Coordinates:{/t}</td>
         <td>
-            <select name="latNS">
+            <select name="latNS" onchange="setListingModified()" >
                 <option value="N"{selLatN}>{t}N{/t}</option>
                 <option value="S"{selLatS}>{t}S{/t}</option>
             </select>
-            &nbsp;<input type="text" name="lat_h" maxlength="3" value="{lat_h}" class="input30" />
-            °&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" />&nbsp;'&nbsp;
+            &nbsp;<input type="text" name="lat_h" maxlength="3" value="{lat_h}" class="input30" onchange="setListingModified()" />
+            °&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" onchange="setListingModified()" />&nbsp;'&nbsp;
             {lat_message}
             &nbsp;&nbsp;
-            <select name="lonEW">
+            <select name="lonEW" onchange="setListingModified()" >
                 <option value="E"{selLonE}>{t}E{/t}</option>
                 <option value="W"{selLonW}>{t}W{/t}</option>
             </select>
-            &nbsp;<input type="text" name="lon_h" maxlength="3" value="{lon_h}" class="input30" />
-            °&nbsp;<input type="text" name="lon_min" maxlength="6" value="{lon_min}" class="input50" />&nbsp;'&nbsp;
+            &nbsp;<input type="text" name="lon_h" maxlength="3" value="{lon_h}" class="input30" onchange="setListingModified()" />
+            °&nbsp;<input type="text" name="lon_min" maxlength="6" value="{lon_min}" class="input50" onchange="setListingModified()" />&nbsp;'&nbsp;
             {lon_message}
         </td>
     </tr>
@@ -184,7 +199,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}Country:{/t}</td>
         <td>
-            <select name="country" class="input200">
+            <select name="country" class="input200" onchange="setListingModified()" >
                 {countryoptions}
             </select>
             &nbsp;{show_all_countries_submit}
@@ -195,11 +210,11 @@ function toggleAttr(id)
     <tr><td>{t}Rating:{/t}</td>
         <td>
             {t}Difficulty:{/t}
-            <select name="difficulty" class="input60">
+            <select name="difficulty" class="input60" onchange="setListingModified()" >
                 {difficultyoptions}
             </select>&nbsp;&nbsp;
             {t}Terrain:{/t}
-            <select name="terrain" class="input60">
+            <select name="terrain" class="input60" onchange="setListingModified()" >
                 {terrainoptions}
             </select>{diff_message}
         </td>
@@ -207,10 +222,10 @@ function toggleAttr(id)
     <tr><td>{t}Time and effort (optional):{/t}</td>
       <td>
             {t}Time effort:{/t}
-                        <input type="text" name="search_time" maxLength="10" value="{search_time}" class="input30" /> h
+                        <input type="text" name="search_time" maxLength="10" value="{search_time}" class="input30" onchange="setListingModified()" /> h
             &nbsp;&nbsp;
             {t}Distance:{/t}
-            <input type="text" name="way_length" maxlength="10" value="{way_length}" class="input30" /> km &nbsp; {effort_message}
+            <input type="text" name="way_length" maxlength="10" value="{way_length}" class="input30" onchange="setListingModified()" /> km &nbsp; {effort_message}
       </td>
     </tr>
     <tr>
@@ -224,7 +239,7 @@ function toggleAttr(id)
     <tr>
         <td>{t}Waypoints (optional):{/t}</td>
         <!-- allow wp_gc copy&paste with leading spaces; will be trimmed later -->
-        <td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input70 waypoint" />
+        <td>geocaching.com: <input type="text" name="wp_gc" value="{wp_gc}" maxlength="12" class="input70 waypoint" onchange="setListingModified()" />
             {wpgc_message}
         </td>
     </tr>
@@ -260,7 +275,7 @@ function toggleAttr(id)
                     <img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
                     {t}Descriptions{/t}&nbsp;&nbsp;
                     <img src="lang/de/ocstyle/images/action/16x16-adddesc.png" width="16" height="16" align="middle" border="0" alt="" >
-                    <span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}">{t}Add description in another language{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<a href="newdesc.php?cacheid={cacheid_urlencode}" id="href_adddesc" onclick="testListingModified('href_adddesc')" >{t}Add description in another language{/t}</a>]</span>
                 </p>
             </div>
         </td>
@@ -281,7 +296,7 @@ function toggleAttr(id)
                     <img src="lang/de/ocstyle/images/description/22x22-image.png" width="22" height="22" align="middle" border="0" />
                     {t}Pictures{/t}&nbsp;&nbsp;
                     <img src="lang/de/ocstyle/images/action/16x16-addimage.png" width="16" height="16" align="middle" border="0" />
-                    <span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}">{t}Upload a picture{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<!-- Ocprop >> --><a href="picture.php?action=add&cacheuuid={cacheuuid_urlencode}" id="href_addpic" onclick="testListingModified('href_addpic')" >{t}Upload a picture{/t}</a>]</span>
                 </p>
             </div>
         </td>
@@ -296,7 +311,7 @@ function toggleAttr(id)
                 <p class="content-title-noshade-size2">
                     <img src="resource2/ocstyle/images/description/20x20-compass.png" align="middle" border="0" />
                     {t}Additional waypoints{/t}&nbsp;&nbsp;
-                    <span style="font-weight: 400;font-size: small;">[<a href="childwp.php?cacheid={cacheid_urlencode}">{t}Add a waypoint{/t}</a>]</span>
+                    <span style="font-weight: 400;font-size: small;">[<a href="childwp.php?cacheid={cacheid_urlencode}" id="href_addwp" onclick="testListingModified('href_addwp')" >{t}Add a waypoint{/t}</a>]</span>
                 </p>
             </div>
         </td>
@@ -324,9 +339,9 @@ function toggleAttr(id)
     <tr>
         <td>{t}Hidden since:{/t}</td><!-- << Ocprop -->
         <td>
-            <input class="input20" type="text" name="hidden_day" maxlength="2" value="{date_day}"/>.
-            <input class="input20" type="text" name="hidden_month" maxlength="2" value="{date_month}"/>.
-            <input class="input40" type="text" name="hidden_year" maxlength="4" value="{date_year}"/>&nbsp;
+            <input class="input20" type="text" name="hidden_day" maxlength="2" value="{date_day}" onchange="setListingModified()" />.
+            <input class="input20" type="text" name="hidden_month" maxlength="2" value="{date_month}" onchange="setListingModified()" />.
+            <input class="input40" type="text" name="hidden_year" maxlength="4" value="{date_year}" onchange="setListingModified()" />&nbsp;
             {date_message}
             &nbsp;
             <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
@@ -339,7 +354,7 @@ function toggleAttr(id)
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td><nobr>{t}Password for 'found' logs:{/t}</nobr></td>
-        <td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
+        <td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20" onchange="setListingModified()" /> &nbsp; {t}(leave blank for no password){/t}</td>
     </tr>
     <tr>
         <td class="help" colspan="2">
@@ -350,11 +365,11 @@ function toggleAttr(id)
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td><nobr><label for="showlists">{t}Show all cache lists{/t}</label></nobr></td>
-        <td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} /></td>
+        <td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} onchange="setListingModified()" /></td>
     </tr>
     <tr>
         <td><nobr><label for="protect_old_coords">{t}Protect old coordinates{/t}</label></nobr></td>
-        <td><input type="checkbox" id="protect_old_coords" name="protect_old_coords" value="1" {protectcoords_checked} /></td>
+        <td><input type="checkbox" id="protect_old_coords" name="protect_old_coords" value="1" {protectcoords_checked} onchange="setListingModified()" /></td>
     </tr>
 
     <tr><td class="spacer" colspan="2"></td></tr>

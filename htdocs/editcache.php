@@ -190,6 +190,7 @@ if ($error == false) {
                 $cache_terrain = isset($_POST['terrain']) ? $_POST['terrain'] : $cache_record['terrain'];  // Ocprop
                 $cache_country = isset($_POST['country']) ? $_POST['country'] : $cache_record['country'];  // Ocprop
                 $show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] : 0;
+                $listing_modified = isset($_POST['listing_modified']) ? $_POST['listing_modified'] + 0 : 0;
                 $status = isset($_POST['status']) ? $_POST['status'] : $cache_record['status'];  // Ocprop
                 $status_old = $cache_record['status'];
                 $search_time = isset($_POST['search_time']) ? $_POST['search_time'] : $cache_record['search_time'];
@@ -844,10 +845,12 @@ if ($error == false) {
                         $remove_url =
                             'removedesc.php?cacheid=' . urlencode($cache_id)
                             . '&desclang=' . urlencode($desclang);
+                        $hrefid = 'href_removedesc_' . $desclang;
                         $removedesc =
                             '&nbsp;[<a href="'
-                            . htmlspecialchars($remove_url, ENT_COMPAT, 'UTF-8')
-                            . '">' . $remove . '</a>]';
+                            . htmlspecialchars($remove_url, ENT_COMPAT, 'UTF-8'). '" '
+                            . 'id="' . $hrefid . '" '
+                            . 'onclick="testListingModified(\'' . $hrefid . '\')" >' . $remove . '</a>]';
                     } else {
                         $removedesc = '';
                     }
@@ -864,12 +867,15 @@ if ($error == false) {
                     sql_free_result($resp);
 
                     $edit_url = 'editdesc.php?cacheid=' . urlencode($cache_id) . '&desclang=' . urlencode($desclang);
+                    $hrefid = 'href_editdesc_' . $desclang;
 
                     $cache_descs .=
                         '<tr><td colspan="2">'
                         . htmlspecialchars(db_LanguageFromShort($desclang), ENT_COMPAT, 'UTF-8')
-                        . ' [<a href="' . htmlspecialchars($edit_url, ENT_COMPAT, 'UTF-8')
-                        . '">' . $edit . '</a>]' . $removedesc . '</td></tr>';
+                        . ' [<a href="' . htmlspecialchars($edit_url, ENT_COMPAT, 'UTF-8') . '" '
+                        . 'id="' . $hrefid . '" '
+                        . 'onclick="testListingModified(\'' . $hrefid . '\')" >' . $edit . '</a>]'
+                        . $removedesc . '</td></tr>';
                 }
                 tpl_set_var('cache_descs', $cache_descs);
 
@@ -914,7 +920,9 @@ if ($error == false) {
                         . '</option>';
                 }
                 tpl_set_var('statusoptions', $statusoptions);
-                tpl_set_var('statuschange', $status_old == 5 ? '' : mb_ereg_replace('%1', $cache_id, $status_change));
+                $statuschange_a_msg =  mb_ereg_replace('%1', $cache_id, $status_change_a);
+                $statuschange_msg =  mb_ereg_replace('{a}', $statuschange_a_msg, $status_change);
+                tpl_set_var('statuschange', $status_old == 5 ? '' : $statuschange_msg);
 
                 // show activation form?
                 if ($status_old == 5) {  // status = not yet published
@@ -1039,6 +1047,8 @@ if ($error == false) {
                 );
                 tpl_set_var('show_all_countries', $show_all_countries);
                 tpl_set_var('show_all_countries_submit', ($show_all_countries == 0) ? $all_countries_submit : '');
+                tpl_set_var('listing_modified', $listing_modified);
+                tpl_set_var('savealert', $savealert);
 
                 $st_hours = floor($search_time);
                 $st_minutes = sprintf('%02.0F', ($search_time - $st_hours) * 60);

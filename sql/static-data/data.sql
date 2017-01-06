@@ -2438,7 +2438,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2027', '%2 has 
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2028', '%2 has locked %1', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2029', 'OC team comment', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2030', 'Maintenance logs', '2013-04-25 23:00:00');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2031', 'To change the state, you need to <a href=\"log.php?cacheid=%1\">log</a> the new state.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2031', 'To change the state, you need to {a}log</a> the new state.', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2035', '%1 has archived the geocache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2036', '%1 has maintained the geocache', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2037', '%1 has disabled the geocache', '2013-04-25 23:00:00');
@@ -2882,6 +2882,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2624', 'show al
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2625', 'hide all additional search options', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2626', 'Select at least one cachetype!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2627', 'Select at least one cachesize!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2631', 'Please save the changed geocache properties first.', '2016-08-02 15:00:00');
 
 -- Table sys_trans_ref
 SET NAMES 'utf8';
@@ -7082,7 +7083,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'DE', '%2 hat %1 gesperrt', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'DE', 'OC-Team-Kommentar', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'DE', 'Wartungslogs', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'DE', 'Um den Status zu ändern, mussst du den neuen Status <a href=\"log.php?cacheid=%1\">loggen</a>.', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'DE', 'Um den Status zu ändern, mussst du den neuen Status {a}loggen</a>.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'DE', '%1 hat den Geocache archiviert', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'DE', '%1 hat den Geocache gewartet', '2013-04-25 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'DE', '%1 hat den Geocache deaktiviert', '2013-04-25 23:00:00');
@@ -7526,6 +7527,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2625', 'DE', 'Verberge alle zusätzlichen Suchoptionen', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2626', 'DE', 'Wähle mindestens einen Cachetype aus!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2627', 'DE', 'Wähle mindestens eine Cachegröße aus!', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2631', 'DE', 'Bitte speichere zuerst die geänderten Cacheeigenschaften.', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'EN', 'Reorder IDs', '2010-09-02 00:15:30');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'EN', 'The database could not be reconnected.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'EN', 'Testing – please do not login', '2010-08-28 11:48:07');
@@ -9007,7 +9009,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'EN', '%2 has locked %1', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'EN', 'OC team comment', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'EN', 'Maintenance logs', '2013-02-19 05:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'EN', 'To change the state, you need to <a href=\"log.php?cacheid=%1\">log</a> the new state.', '2013-05-12 22:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'EN', 'To change the state, you need to {a}log</a> the new state.', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'EN', '%1 has archived the cache', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'EN', '%1 has maintained the cache', '2013-05-12 22:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'EN', '%1 has disabled the cache', '2013-05-12 22:00:00');
@@ -12385,7 +12387,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'FR', '%2 a verrouillé %1', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'FR', 'OC équipe commentaire', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'FR', 'Logs d\'entretien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'FR', 'Pour changer l\'état, vous devez vous <a href=\"log.php?cacheid=%1\">log</a> au nouvel état.', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'FR', 'Pour changer l\'état, vous devez vous {a}log</a> au nouvel état.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'FR', '%1 a archivé la géocache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'FR', '%1 a maintenu la géocache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'FR', '%1 a désactivé la géocache', '2015-08-25 01:29:00');
@@ -14297,7 +14299,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'IT', '%2 ha bloccato %1', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'IT', 'commento dell\'OC team', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'IT', 'Log manutenzione', '2013-05-28 16:52:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'IT', 'Per cambiare lo stato, è necessario  <a href=\"log.php?cacheid=%1\">loggare</a> il nuovo stato.', '2013-05-28 16:52:39');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'IT', 'Per cambiare lo stato, è necessario {a}loggare</a> il nuovo stato.', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'IT', '%1 ha archiviato la cache', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'IT', '%1 fatto manutenzione sulla cache', '2013-05-28 16:52:39');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'IT', '%1 ha disabilitato la cache', '2013-05-28 16:52:39');

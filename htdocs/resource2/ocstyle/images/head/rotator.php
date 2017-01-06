@@ -105,8 +105,8 @@
 
 */
 $folder = '.';
-if (!empty($_REQUEST["path"])) {
-    $folder = basename($_REQUEST["path"]);
+if (!empty($_REQUEST['path'])) {
+    $folder = basename($_REQUEST['path']);
 }
 
 /*
@@ -185,23 +185,23 @@ if ($img != null) {
     header('Content-type: ' . $extList[$imageInfo['extension']]);
 
     // Cache-Lebensdauer (in Minuten)
-    $exp_gmt = gmdate("D, d M Y H:i:s", time() + $interval) . " GMT";
-    $mod_gmt = gmdate("D, d M Y H:i:s", time()) . " GMT";
+    $exp_gmt = gmdate('D, d M Y H:i:s', time() + $interval) . ' GMT';
+    $mod_gmt = gmdate('D, d M Y H:i:s', time()) . ' GMT';
 
-    header("Expires: " . $exp_gmt);
-    header("Last-Modified: " . $mod_gmt);
-    header("Cache-Control: public, max-age=" . $interval);
-    // Speziell f�r MSIE 5
-    header("Cache-Control: pre-check=" . $interval, false);
+    header('Expires: ' . $exp_gmt);
+    header('Last-Modified: ' . $mod_gmt);
+    header('Cache-Control: public, max-age=' . $interval);
+    // Speziell fuer MSIE 5
+    header('Cache-Control: pre-check=' . $interval, false);
 
     readfile($img);
 } else {
     if (function_exists('imagecreate')) {
-        header("Content-type: image/png");
-        $im = @imagecreate(100, 100) or die("Cannot initialize new GD image stream");
+        header('Content-type: image/png');
+        $im = @imagecreate(100, 100) or die('Cannot initialize new GD image stream');
         $background_color = imagecolorallocate($im, 255, 255, 255);
         $text_color = imagecolorallocate($im, 0, 0, 0);
-        imagestring($im, 2, 5, 5, "IMAGE ERROR", $text_color);
+        imagestring($im, 2, 5, 5, 'IMAGE ERROR', $text_color);
         imagepng($im);
         imagedestroy($im);
     }

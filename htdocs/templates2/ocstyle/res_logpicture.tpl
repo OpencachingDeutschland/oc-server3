@@ -1,4 +1,3 @@
-{* Unicode Reminder メモ *}
 <div style="width:{$itemwidth}px; height:{if $loguser || $logdate}150{else}120{/if}px; overflow:hidden">
     <table width="100%" height="100%"><tr>
         <td style="text-align:center; padding:0" align="center" valign="middle">

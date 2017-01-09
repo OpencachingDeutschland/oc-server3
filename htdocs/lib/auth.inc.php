@@ -7,7 +7,6 @@
  ***************************************************************************/
 
 /****************************************************************************
- * Unicode Reminder メモ
  * all login/logout related functions (reduced to auth_user, because
  * all other functions are handled by lib2/login.class.php)
  * Don't include this file by hand - it will be included from common.inc.php

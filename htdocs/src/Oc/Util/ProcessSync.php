@@ -1,7 +1,6 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- * Unicode Reminder メモ
  * synchronization of processes which must not run concurrently;
  ****************************************************************************/
 

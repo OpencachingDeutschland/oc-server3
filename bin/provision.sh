@@ -315,11 +315,10 @@ cd /var/www/html
 sudo chmod 755 psh.phar
 
 label "setting up translation"
-cd /var/www/html/dev-ops/local.team-opencaching.de/actions/
-sudo chmod 755 translations.sh
-cd /usr/local/bin && sudo ln -sf /var/www/html/dev-ops/local.team-opencaching.de/actions/translations.sh
+sudo chmod 755 /var/www/html/dev-ops/local.team-opencaching.de/actions/translation.sh
+cd /usr/local/bin && sudo ln -sf /var/www/html/dev-ops/local.team-opencaching.de/actions/translation.sh
 
 label "get latest translation"
-translations.sh
+cd /var/www/html && ./psh.phar translation
 
 label "All done, have fun."

@@ -2,8 +2,6 @@
 /****************************************************************************
      For license information see doc/license.txt
 
-   Unicode Reminder メモ
-
      variable search template contents
  ****************************************************************************/
 

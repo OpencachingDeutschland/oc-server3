@@ -9,8 +9,6 @@
 
 /****************************************************************************
 
-   Unicode Reminder メモ
-
      remove a cache description
 
         desclang_name

@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * GPX search output (GC compatible)
  * used by Ocprop

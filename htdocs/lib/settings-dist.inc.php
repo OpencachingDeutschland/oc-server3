@@ -4,7 +4,6 @@
  * -------------------
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * sample settings for an OC production system;
  * see header of config2/settings.inc.php for more setting files

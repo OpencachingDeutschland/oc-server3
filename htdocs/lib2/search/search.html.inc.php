@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * HTML search output
  * (Used by Ocprop)

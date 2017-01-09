@@ -2,7 +2,6 @@
 /***************************************************************************
  * You can find the license in the docs directory
  *
- * Unicode Reminder メモ
  *
  * Replacement for smarty-gettext
  *

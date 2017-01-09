@@ -8,7 +8,6 @@
 use Oc\Util\CBench;
 
 /****************************************************************************
- * Unicode Reminder メモ
  * contains functions that are compatible with the php-CLI-scripts under util.
  * Can be included without including common.inc.php, but will be included from
  * common.inc.php.

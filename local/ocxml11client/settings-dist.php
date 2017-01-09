@@ -1,6 +1,4 @@
 <?php
-// Unicode Reminder メモ
-
 // safemode-unzip
 $opt['unzip'] = '/srv/www/htdocs/www.opencaching.de/html/util/safemode_zip/phpunzip.php';
 $opt['rel_tmpdir'] = 'util/ocxml11client/tmp';

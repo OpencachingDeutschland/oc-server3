@@ -1,6 +1,4 @@
 <?php
-// Unicode Reminder メモ
-
 if (!isset($maildomain)) {
     $maildomain = 'opencaching.de';
 }

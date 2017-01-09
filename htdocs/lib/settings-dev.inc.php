@@ -8,13 +8,10 @@
  ****************************************************************************/
 
 /****************************************************************************
- *
- *    Unicode Reminder メモ
- *
- *  Default settings for OC.de developer system. See also
- *    - settings-dist.inc.php for sample settings
- *    - settings.inc.php for local settings
- *    - config2/settings* for version-2-code settings
+ * Default settings for OC.de developer system. See also
+ *   - settings-dist.inc.php for sample settings
+ *   - settings.inc.php for local settings
+ *   - config2/settings* for version-2-code settings
  ****************************************************************************/
 
 //relative path to the root directory
@@ -43,7 +40,7 @@ $oc_nodeid = 4;
 $opt['logic']['node']['id'] = $oc_nodeid;
 
 //name of the cookie
-$opt['cookie']['name'] = 'oc_devel';
+$opt['cookie']['name'] = 'ocvagrant';
 $opt['cookie']['path'] = '/';
 $opt['cookie']['domain'] = '.team-opencaching.de';
 $opt['session']['cookiename'] = 'ocvagrant';

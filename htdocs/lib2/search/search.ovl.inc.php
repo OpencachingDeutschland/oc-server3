@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * OVL search output for TOP25, TOP50 etc.
  ****************************************************************************/

@@ -9,8 +9,6 @@
 
 /****************************************************************************
 
-   Unicode Reminder メモ
-
      set template specific language variables
 
      template replacements:

@@ -4,7 +4,6 @@
  *
  * named consts
  *
- * Unicode Reminder メモ
  ****************************************************************************/
 
 require_once __DIR__ . '/consts-common.inc.php';

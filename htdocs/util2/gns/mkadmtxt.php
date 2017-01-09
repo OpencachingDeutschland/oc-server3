@@ -3,7 +3,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * Dieses Script berechnet andhand von Geodb-Daten die adm1..adm4-Daten
  * für die GNS-DB.

@@ -9,8 +9,6 @@
 
 /****************************************************************************
 
-   Unicode Reminder メモ
-
      edit a cache listing
 
      template replacement(s):

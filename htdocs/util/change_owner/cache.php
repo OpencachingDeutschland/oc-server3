@@ -2,7 +2,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * Script zum ändern der Owners
  * Schutz über htpasswd!

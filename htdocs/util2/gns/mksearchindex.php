@@ -3,7 +3,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * Dieses Script erstellt den Suchindex für Ortsnamen aus den Daten der
  * GNS-DB.

@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * log type definitions and functions
  * replaces the obsolete table `cache_logtype`

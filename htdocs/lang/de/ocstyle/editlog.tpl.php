@@ -10,8 +10,6 @@
 
 /****************************************************************************
 
-   Unicode Reminder メモ
-
      edit a log listing
 
      template replacement(s):

@@ -9,7 +9,6 @@
 
 /****************************************************************************
  *
- * Unicode Reminder メモ
  *
  * Critical error messages for the user
  *

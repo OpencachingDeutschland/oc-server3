@@ -1,5 +1,4 @@
 {* see lib2/logic/logpics.class.php for data retreival *}
-{* Unicode Reminder メモ *}
 
 {if $pages_list}
     <div class="content2-container">

@@ -5,7 +5,6 @@
  * @author Yuriy Horobey, smiledsoft.com
  * @email info@smiledsoft.com
  *
- * Unicode Reminder メモ
  */
 class ss_zip
 {

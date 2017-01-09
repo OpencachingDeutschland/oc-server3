@@ -8,11 +8,7 @@
  ****************************************************************************/
 
 /****************************************************************************
-
-   Unicode Reminder メモ
-
-     language specific vars
-
+ * language specific vars
  ****************************************************************************/
  
  $error_wrong_node = t('this description was created on another Opencaching-webserver and can only be deleted there.');

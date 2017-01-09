@@ -4,7 +4,6 @@
  * -------------------
  * begin                : December 27, 2005
  * For license information see doc/license.txt
- * Unicode Reminder メモ
  ***************************************************************************/
 
 /* begin configuration */

@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * sets up all necessary variables and handle template and database-things
  * also useful functions

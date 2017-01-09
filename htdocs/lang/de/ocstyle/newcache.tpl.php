@@ -9,8 +9,6 @@
 
 /****************************************************************************
 
-   Unicode Reminder メモ
-
      submit a new cache
 
      replacements:

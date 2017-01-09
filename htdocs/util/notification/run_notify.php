@@ -3,7 +3,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * Processes the `notify_waiting` table and sends notification mails
  * on new caches and new OConly attributes.

@@ -13,7 +13,6 @@
 
 /***************************************************************************
  *
- * Unicode Reminder メモ
  *
  * ocxml11-Interface-Client
  * Nicht für Produktivsystem!

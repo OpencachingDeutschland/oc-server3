@@ -1,8 +1,6 @@
 <?php
 /*
-      For license information see doc/license.txt
-
-      Unicode Reminder メモ
+  For license information see doc/license.txt
 
   BBOX=2.38443,45.9322,20.7053,55.0289
 */

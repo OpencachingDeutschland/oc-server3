@@ -2,7 +2,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * This module handles everything which results in the output of a list of
  * caches, including output formatting. It also handles search requests from

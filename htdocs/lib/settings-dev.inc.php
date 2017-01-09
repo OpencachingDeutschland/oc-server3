@@ -8,13 +8,10 @@
  ****************************************************************************/
 
 /****************************************************************************
- *
- *    Unicode Reminder メモ
- *
- *  Default settings for OC.de developer system. See also
- *    - settings-dist.inc.php for sample settings
- *    - settings.inc.php for local settings
- *    - config2/settings* for version-2-code settings
+ * Default settings for OC.de developer system. See also
+ *   - settings-dist.inc.php for sample settings
+ *   - settings.inc.php for local settings
+ *   - config2/settings* for version-2-code settings
  ****************************************************************************/
 
 //relative path to the root directory

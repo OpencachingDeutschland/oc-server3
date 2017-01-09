@@ -3,7 +3,6 @@
 /***************************************************************************
  * For license information see doc/license.txt
  *
- * Unicode Reminder メモ
  *
  * Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert
  * diese in die Table gns_locations.

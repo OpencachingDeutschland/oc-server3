@@ -1,7 +1,6 @@
 <?php
 /****************************************************************************
  * For license information see doc/license.txt
- * Unicode Reminder メモ
  * Nature Protection Area functions
  ***************************************************************************
 

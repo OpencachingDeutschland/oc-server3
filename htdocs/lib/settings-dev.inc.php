@@ -43,7 +43,7 @@ $oc_nodeid = 4;
 $opt['logic']['node']['id'] = $oc_nodeid;
 
 //name of the cookie
-$opt['cookie']['name'] = 'oc_devel';
+$opt['cookie']['name'] = 'ocvagrant';
 $opt['cookie']['path'] = '/';
 $opt['cookie']['domain'] = '.team-opencaching.de';
 $opt['session']['cookiename'] = 'ocvagrant';

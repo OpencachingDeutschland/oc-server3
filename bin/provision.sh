@@ -226,3 +226,5 @@ cp /var/www/html/local/prodsys/phpzip.php /var/www/html/bin/
 sed -i 's/\/path\/to\/htdocs\/download\/zip\//\/var\/www\/html\/htdocs\/download\/zip\//' /var/www/html/bin/phpzip.php
 
 label "All done, have fun."
+
+cd /var/www/html && ./psh.phar init

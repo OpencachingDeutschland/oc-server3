@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 # enter url for SQL dump. e.g. http://opencaching.de/dump.sql
-DUMP_URL=""
-
 function label {
     echo -e "\n\033[0;34m=> ${1}\033[0m\n"
 }
@@ -10,10 +8,6 @@ function label {
 function errorLabel {
     echo -e "\n\033[0;31m=> ${1}\033[0m\n"
 }
-
-if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
-    errorLabel "No dump url given.\n\nwe will import a minimal dump\n\n"
-fi
 
 label "Install required components"
 yum -y install mariadb-server mariadb
@@ -26,7 +20,7 @@ firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
 yum -y install php epel-release php-devel ImageMagick-devel ImageMagick gcc
-yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-mbstring
+yum -y install php-gd php-odbc php-pear php-xml php-xmlrpc php-
 yum -y install php-snmp php-soap curl curl-devel php-mysql php-pdo php-pecl-zip
 yum -y install vim vim-common mutt mlocate man-pages zip mod_ssl patch
 yum -y install gcc-c++ ruby ruby-devel php-xdebug
@@ -198,6 +192,8 @@ systemctl restart httpd
 cat /etc/sysconfig/selinux | sed -e 's/SELINUX=permissive/SELINUX=disabled/' > /etc/sysconfig/selinux.tmp
 mv /etc/sysconfig/selinux.tmp /etc/sysconfig/selinux
 
+cd /var/www/html
+sudo chmod 755 psh.phar
 
 label "Adjust php.ini"
 cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' > /etc/php.ini.tmp
@@ -213,16 +209,10 @@ mysql -u root -proot -e "GRANT SELECT, INSERT, UPDATE, REFERENCES, DELETE, CREAT
 mysql -u root -proot -e "GRANT GRANT OPTION ON \`opencaching\`.* TO 'opencaching'@'%';"
 mysql -u root -proot -e "SET PASSWORD FOR 'opencaching'@'%' = PASSWORD('opencaching');"
 
-
-label "Configure Opencaching"
-cd /var/www/html
-cp ./htdocs/config2/settings-sample-vagrant.inc.php ./htdocs/config2/settings.inc.php
-cp ./htdocs/lib/settings-sample-vagrant.inc.php ./htdocs/lib/settings.inc.php
-cp ./htdocs/statpics/htaccess-dist ./htdocs/statpics/.htaccess
-cp ./htdocs/app/config/parameters_vagrant.yml ./htdocs/app/config/parameters.yml
-
-cp /var/www/html/local/prodsys/phpzip.php /var/www/html/bin/
-sed -i 's/\/path\/to\/htdocs\/download\/zip\//\/var\/www\/html\/htdocs\/download\/zip\//' /var/www/html/bin/phpzip.php
+echo "export PS1='\[\033[38;5;11m\]OCdev:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]'" >> /home/vagrant/.bashrc
+echo "cd /var/www/html/" >> /home/vagrant/.bashrc
+echo "alias la='ls -alh'" >> /home/vagrant/.bashrc
+echo "alias ..='cd ..'" >> /home/vagrant/.bashrc
 
 label "Install Composer"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -231,94 +221,8 @@ php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/bin/composer
 chmod 0777 /usr/bin/composer
 
-
-label "Composer install"
-cd /var/www/html/htdocs && composer install
-
-label Insert OC SQL Dump...
-if [ -z "$DUMP_URL" -a ! -f /var/www/html/htdocs/opencaching_dump.sql ]; then
-    label "import minimal dump to database"
-    mysql -uroot -proot opencaching < /var/www/html/sql/dump_v158.sql
-else
-    if [ -f opencaching_dump.sql ]; then
-        label "now download is needed..."
-    else
-        label "Install Database Dump from '$DUMP_URL'"
-        label "Download SQL Dump"
-        curl -o opencaching_dump.sql.gz "$DUMP_URL"
-        gzip -d opencaching_dump.sql.gz
-    fi
-
-    if [ -f opencaching_dump.sql ]; then
-        label "Import SQL Dump"
-        mysql -uroot -proot < opencaching_dump.sql
-    else
-        errorLabel "Could not download or unpack sql dump from '$DUMP_URL'\n\n"
-        exit 1;
-    fi
-fi
-
-label "Run database and cache updates"
-cd /var/www/html/ && php bin/dbupdate.php
-
-label "Install OKAPI"
-curl http://local.team-opencaching.de/okapi/update?install=true
-
-
-label "updating database structures ..."
-cd /var/www/html
-
-php bin/dbsv-update.php
-
-if [ -f "sql/stored-proc/maintain.php" ]; then
-    label "reinstall triggers (new) ..."
-    cd sql/stored-proc
-    php maintain.php
-    cd ../..
-elif [ -f "htdocs/doc/sql/stored-proc/maintain.php" ]; then
-    label "-- reinstall triggers (old) ..."
-    cd htdocs/doc/sql/stored-proc
-    php maintain.php
-    cd ../../../..
-else
-    label "error: maintain.php not found"
-fi
-
-if [ -f "sql/static-data/data.sql" ]; then
-  label "importing static data (new) ..."
-  mysql -u root -hlocalhost -proot opencaching < sql/static-data/data.sql
-elif [ -f "htdocs/doc/sql/static-data/data.sql" ]; then
-  echo "-- importing static data (old) ..."
-  mysql -u root -hlocalhost -proot opencaching < htdocs/doc/sql/static-data/data.sql
-else
-  echo "error: data.sql not found"
-  exit
-fi
-
-label "symfony migrations ..."
-chmod 755 ./htdocs/bin/console
-./htdocs/bin/console doctrine:migrations:migrate -n
-
-echo "-- updating OKAPI database ..."
-php bin/okapi-update.php|grep -i -e current -e mutation
-
-echo "export PS1='\[\033[38;5;11m\]OCdev:\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\]\\$ \[$(tput sgr0)\]'" >> /home/vagrant/.bashrc
-echo "cd /var/www/html/" >> /home/vagrant/.bashrc
-echo "alias la='ls -alh'" >> /home/vagrant/.bashrc
-echo "alias ..='cd ..'" >> /home/vagrant/.bashrc
-
-label "setting up phpunit"
-cd /usr/local/bin && sudo ln -sf /var/www/html/htdocs/vendor/phpunit/phpunit/phpunit
-sudo chmod 755 phpunit
-
-cd /var/www/html
-sudo chmod 755 psh.phar
-
-label "setting up translation"
-sudo chmod 755 /var/www/html/dev-ops/local.team-opencaching.de/actions/translation.sh
-cd /usr/local/bin && sudo ln -sf /var/www/html/dev-ops/local.team-opencaching.de/actions/translation.sh
-
-label "get latest translation"
-cd /var/www/html && ./psh.phar translation
+# needed?
+cp /var/www/html/local/prodsys/phpzip.php /var/www/html/bin/
+sed -i 's/\/path\/to\/htdocs\/download\/zip\//\/var\/www\/html\/htdocs\/download\/zip\//' /var/www/html/bin/phpzip.php
 
 label "All done, have fun."

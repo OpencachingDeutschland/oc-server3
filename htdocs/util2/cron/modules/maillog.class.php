@@ -22,7 +22,6 @@ class MailLog
         }
     }
 
-
     public function processSysLog()
     {
         global $opt;
@@ -93,7 +92,7 @@ class MailLog
             $dbc
         );
         if ($rs === false) {
-            echo $this->name . ": syslog query error (" . mysql_errno() . "): " . mysql_error() . "\n";
+            echo $this->name . ': syslog query error (' . mysql_errno() . '): ' . mysql_error() . "\n";
 
             return;
         }

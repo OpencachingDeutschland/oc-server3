@@ -31,7 +31,7 @@ install:
     - ./psh.phar travis-ci:init
 
 script:
-    - URL=http://127.0.0.1 phpunit
+    - ./psh.phar travis-ci:unit
 
 matrix:
   allow_failures:

@@ -8,5 +8,28 @@ header: |
 
 
 paths:
-  - dev-ops/local.team-opencaching.de/actions
+  - "dev-ops/local.team-opencaching.de/actions"
 
+templates:
+  - source: "dev-ops/local.team-opencaching.de/templates/config2-settings.inc.php.tpl"
+    destination: "htdocs/config2/settings.inc.php"
+  - source: "dev-ops/local.team-opencaching.de/templates/lib-settings.inc.php.tpl"
+    destination: "htdocs/lib/settings.inc.php"
+  - source: "dev-ops/local.team-opencaching.de/templates/parameters.yml.tpl"
+    destination: "htdocs/app/config/parameters.yml"
+  - source: "htdocs/statpics/htaccess-dist"
+    destination: "htdocs/statpics/.htaccess"
+
+const:
+  DB_USER: "root"
+  DB_PASSWORD: "root"
+  DB_NAME: "opencaching"
+  DB_HOST: "localhost"
+  DIR: "__DIR__"
+
+environments:
+  travis-ci:
+    paths:
+      - "dev-ops/travis-ci/actions"
+    const:
+      DB_HOST: '127.0.0.1'

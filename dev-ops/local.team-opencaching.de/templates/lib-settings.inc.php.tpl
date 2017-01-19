@@ -9,13 +9,13 @@ $dev_codepath = '';
 $dev_baseurl = 'http://local.team-opencaching.de';
 
 // database acccess
-$dbserver = 'localhost';
-$dbusername = 'root';
-$dbpasswd = 'root';
+$dbserver = '__DB_HOST__';
+$dbusername = '__DB_USER__';
+$dbpasswd = '__DB_PASSWORD__';
 $dbpconnect = false;
 
 // database names
-$dbname = 'opencaching';
+$dbname = '__DB_NAME__';
 $tmpdbname = 'octmp';   // empty db with CREATE and DROP privileges
 
 // enable HTTPS

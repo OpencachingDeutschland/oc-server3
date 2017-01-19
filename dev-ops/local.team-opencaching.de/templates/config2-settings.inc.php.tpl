@@ -1,6 +1,5 @@
 <?php
 /***************************************************************************
- *
  *  Sample settincs.inc.php file for a developer machine
  ***************************************************************************/
 
@@ -21,16 +20,16 @@ $debug_startpage_news = false;
 require __DIR__ . '/settings-dev.inc.php';
 
 // database access
-$opt['db']['servername'] = 'localhost';
-$opt['db']['username'] = 'root';
-$opt['db']['password'] = 'root';
+$opt['db']['servername'] = '__DB_HOST__';
+$opt['db']['username'] = '__DB_USER__';
+$opt['db']['password'] = '__DB_PASSWORD__';
 $opt['db']['pconnect'] = false;
 
-$opt['db']['maintenance_user'] = 'root';
-$opt['db']['maintenance_password'] = 'root';
+$opt['db']['maintenance_user'] = '__DB_USER__';
+$opt['db']['maintenance_password'] = '__DB_PASSWORD__';
 
 // database names
-$opt['db']['placeholder']['db'] = 'opencaching';
+$opt['db']['placeholder']['db'] = '__DB_NAME__';
 $opt['db']['placeholder']['tmpdb'] = 'octmp';
 
 $opt['charset']['mysql'] = 'utf8mb4';
@@ -112,11 +111,9 @@ $opt['logic']['license']['admin'] = false;
 /* Sponsoring advertisements
  * (plain HTML)
  */
-$opt['page']['sponsor']['topright'] = ''; // '<div class="site-slogan" style="background-image: url(resource2/ocstyle/images/darkbluetransparent.png);"><div style="width: 100%; text-align: left;"><p class="search"><a href="http://www.wanderjugend.de" target="_blank"><img border="0" align="right" style="margin-left: 10px;" src="resource2/ocstyle/images/dwj.gif" width="40px" height="20px" alt="... die outdoororientierte Jugendorganisation des Deutschen Wanderverbandes" /></a> Unterst&uuml;tzt und gef&ouml;rdert durch<br />die Deutsche Wanderjugend</p> </div></div>';
+$opt['page']['sponsor']['topright'] = '';
 $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
-$opt['page']['sponsor']['popup'] = ''; // '<table><tr><td width="265" style="text-align:right"><font size="1">Unterstützt und gef&ouml;rdert durch<br />die Deutsche Wanderjugend</font></td><td width="40"><img src="images/dwj.gif" border="0" alt="" align="left" /></td></tr></table>';
-
-
+$opt['page']['sponsor']['popup'] = '';
 /* phpbb news integration (index.php)
  */
 $opt['cron']['phpbbtopics']['url'] = 'http://forum.opencaching.de';
@@ -171,14 +168,14 @@ $opt['news']['timeout'] = 10;
 
 /* current forum topcis on start page
  * requires url to be a vaild rss feed
- * -> show the number of 'count' topics from rss feed
- */
+ *  show the number of 'count' topics from rss feed
+*/
 $opt['forum']['url'] = 'http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=50';
 $opt['forum']['count'] = 10;
 $opt['forum']['timeout'] = 10;
 
 /* Wiki news on the 404 page
- */
+*/
 $opt['wikinews']['timeout'] = 10;
 
 // redirect news.php to the following url
@@ -189,36 +186,36 @@ $opt['page']['showsocialmedia'] = true;
 
 
 /*
-         * configure infos on 404.php
-         */
+* configure infos on 404.php
+*/
 $opt['page']['404']['test.opencaching.de'] = [
-    'blog' => [
-        'show' => true,
-        'feedurl' => $opt['news']['include'],
-        'url' => $opt['news']['redirect'],
-    ],
-    'forum' => [
-        'show' => true,
-        'feedurl' => $opt['forum']['url'],
-        'url' => 'http://forum.opencaching.de',
-    ],
-    'wiki' => [
-        'show' => true,
-        'feedurl' => 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss',
-        'url' => 'http://wiki.opencaching.de',
-    ],
-    'newcaches' => [
-        'show' => true,
-        'url' => 'http://test.opencaching.de',
-    ],
+'blog' => [
+'show' => true,
+'feedurl' => $opt['news']['include'],
+'url' => $opt['news']['redirect'],
+],
+'forum' => [
+'show' => true,
+'feedurl' => $opt['forum']['url'],
+'url' => 'http://forum.opencaching.de',
+],
+'wiki' => [
+'show' => true,
+'feedurl' => 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss',
+'url' => 'http://wiki.opencaching.de',
+],
+'newcaches' => [
+'show' => true,
+'url' => 'http://test.opencaching.de',
+],
 ];
 
 
 /* domain specific configuration
- * will be loaded when all standard include files are processed
- * (db-connection exists, menu is loaded, user login validated etc.)
- * Take caution on caching issues (!)
- */
+* will be loaded when all standard include files are processed
+* (db-connection exists, menu is loaded, user login validated etc.)
+* Take caution on caching issues (!)
+*/
 
 $opt['map']['towns']['enable'] = true;  // for releasing v14
 
@@ -231,87 +228,88 @@ define('MNU_API', 1020);
 
 function post_config()
 {
-    global $opt, $menuitem, $tpl, $translate;
+global $opt, $menuitem, $tpl, $translate;
 
-    $domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
-    if ($domain == '') {
-        return;
-    }
+$domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+if ($domain == '') {
+return;
+}
 
-    $menuitem[MNU_INFO] = [
-        'title' => $translate->t('Help', '', '', ''),
-        'menustring' => $translate->t('Help', '', '', ''),
-        'authlevel' => 0,
-        'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
-        'visible' => 1,
-        'sublevel' => 1
-    ];
-    $menuitem[0]['subitems'][] = MNU_INFO;
+$menuitem[MNU_INFO] = [
+'title' => $translate->t('Help', '', '', ''),
+'menustring' => $translate->t('Help', '', '', ''),
+'authlevel' => 0,
+'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
+'visible' => 1,
+'sublevel' => 1
+];
+$menuitem[0]['subitems'][] = MNU_INFO;
 
-    config_domain_test_opencaching_de();
+config_domain_test_opencaching_de();
 
-    /*
-        $menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
-                                    'menustring' => 'Chat/IRC',
-                                    'authlevel' => 0,
-                                    'href' => 'webchat.php',
-                                    'visible' => 1,
-                                    'sublevel' => 1
-                                   );
-        $menuitem[0]['subitems'][] = MNU_CHAT;
-    */
+/*
+$menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
+'menustring' => 'Chat/IRC',
+'authlevel' => 0,
+'href' => 'webchat.php',
+'visible' => 1,
+'sublevel' => 1
+);
+$menuitem[0]['subitems'][] = MNU_CHAT;
+*/
 
-    // geokrety menu contains the language
-    $menuitem[MNU_GEOKRETY] = [
-        'title' => 'Geokrety',
-        'menustring' => 'Geokrety',
-        'authlevel' => 0,
-        'href' => 'http://www.geokrety.org/index.php?lang=' . urlencode(
-                $opt['geokrety']['locales'][$opt['template']['locale']]
-            ),
-        'target' => 'target="_blank"',
-        'visible' => 1,
-        'sublevel' => 1
-    ];
-    $menuitem[0]['subitems'][] = MNU_GEOKRETY;
+// geokrety menu contains the language
+$menuitem[MNU_GEOKRETY] = [
+'title' => 'Geokrety',
+'menustring' => 'Geokrety',
+'authlevel' => 0,
+'href' => 'http://www.geokrety.org/index.php?lang=' .
+urlencode(
+$opt['geokrety']['locales'][$opt['template']['locale']]
+),
+'target' => 'target="_blank"',
+'visible' => 1,
+'sublevel' => 1
+];
+$menuitem[0]['subitems'][] = MNU_GEOKRETY;
 
-    $menuitem[MNU_API] = [
-        'title' => 'API',
-        'menustring' => 'API',
-        'authlevel' => 0,
-        'href' => 'http://local.team-opencaching.de/okapi',
-        # OKAPI does not support https yet
-        'visible' => 1,
-        'sublevel' => 1
-    ];
-    $menuitem[0]['subitems'][] = MNU_API;
+$menuitem[MNU_API] = [
+'title' => 'API',
+'menustring' => 'API',
+'authlevel' => 0,
+'href' => 'http://local.team-opencaching.de/okapi',
+# OKAPI does not support https yet
+'visible' => 1,
+'sublevel' => 1
+];
+$menuitem[0]['subitems'][] = MNU_API;
 }
 
 function config_domain_test_opencaching_de()
 {
-    global $opt, $menuitem, $login, $translate;
+global $opt, $menuitem, $login, $translate;
 
-    $opt['page']['headoverlay'] = 'oc_head_alpha3';
-    $opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login';
+$opt['page']['headoverlay'] = 'oc_head_alpha3';
+$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login';
 
-    /* add additional main menu links
-     */
-    $menuitem[MNU_TEAMBLOG] = [
-        'title' => 'Teamblog',
-        'menustring' => 'Teamblog',
-        'authlevel' => 0,
-        'href' => 'http://blog.opencaching.de/',
-        'visible' => 1,
-        'sublevel' => 1
-    ];
-    $menuitem[MNU_FORUM] = [
-        'title' => 'Forum',
-        'menustring' => 'Forum',
-        'authlevel' => 0,
-        'href' => 'http://forum.opencaching.de',
-        'visible' => 1,
-        'sublevel' => 1
-    ];
-    $menuitem[0]['subitems'][] = MNU_TEAMBLOG;
-    $menuitem[0]['subitems'][] = MNU_FORUM;
+/* add additional main menu links
+*/
+$menuitem[MNU_TEAMBLOG] = [
+'title' => 'Teamblog',
+'menustring' => 'Teamblog',
+'authlevel' => 0,
+'href' => 'http://blog.opencaching.de/',
+'visible' => 1,
+'sublevel' => 1
+];
+$menuitem[MNU_FORUM] = [
+'title' => 'Forum',
+'menustring' => 'Forum',
+'authlevel' => 0,
+'href' => 'http://forum.opencaching.de',
+'visible' => 1,
+'sublevel' => 1
+];
+$menuitem[0]['subitems'][] = MNU_TEAMBLOG;
+$menuitem[0]['subitems'][] = MNU_FORUM;
 }

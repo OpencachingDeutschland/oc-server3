@@ -28,9 +28,10 @@ before_install:
 
 install:
     - build/travis-ci.sh
+    - ./psh.phar travis-ci:init
 
 script:
-    - URL=http://127.0.0.1 phpunit --group unit-tests
+    - ./psh.phar travis-ci:unit
 
 matrix:
   allow_failures:

@@ -6,7 +6,7 @@
 // installation paths
 $dev_basepath = '/var/www/html/';
 $dev_codepath = '*';
-$dev_baseurl = 'http://local.team-opencaching.de';
+$dev_baseurl = '__FRONTEND_URL__';
 
 // enable HTTPS
 if (defined('HTTPS_ENABLED')) {
@@ -277,7 +277,7 @@ $menuitem[MNU_API] = [
 'title' => 'API',
 'menustring' => 'API',
 'authlevel' => 0,
-'href' => 'http://local.team-opencaching.de/okapi',
+'href' => '__FRONTEND_URL__/okapi',
 # OKAPI does not support https yet
 'visible' => 1,
 'sublevel' => 1

@@ -6,7 +6,7 @@
 // installation paths
 $dev_basepath = '/var/www/html/';
 $dev_codepath = '';
-$dev_baseurl = 'http://local.team-opencaching.de';
+$dev_baseurl = '__FRONTEND_URL__';
 
 // database acccess
 $dbserver = '__DB_HOST__';

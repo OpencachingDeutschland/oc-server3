@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# enter url for SQL dump. e.g. http://opencaching.de/dump.sql
 function label {
     echo -e "\n\033[0;34m=> ${1}\033[0m\n"
 }

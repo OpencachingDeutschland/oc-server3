@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
- *
+ *  For license information see doc/license.txt *
  *
  *  Rot13 hint decoder
  ***************************************************************************/

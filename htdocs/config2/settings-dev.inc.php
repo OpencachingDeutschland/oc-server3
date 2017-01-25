@@ -95,14 +95,7 @@ $opt['cron']['geokrety']['run'] = false;
 $opt['logic']['logs']['purge_email'] = 0;
 $opt['logic']['logs']['purge_userdata'] = 0;
 
-/* 3rd party library options
- * see https://my.garmin.com/api/communicator/key-generator.jsp
- */
-$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
-$opt['lib']['garmin']['domain'] = 'local.team-opencaching.de';
-$opt['lib']['garmin']['url'] = 'http://local.team-opencaching.de/';
-$opt['lib']['garmin']['page_url'] = $opt['lib']['garmin']['url'] . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/');
-
+// 3rd party library options
 // only for local.team-opencaching.de usage
 $opt['lib']['w3w']['apikey'] = 'X27PDW41';
 

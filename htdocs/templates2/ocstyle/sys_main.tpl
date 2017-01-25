@@ -99,13 +99,6 @@
             </script>
             <script src="resource2/{$opt.template.style}/js/session.js" type="text/javascript"></script>
         {/if}
-        {if $garmin==true}
-          <script type="text/javascript" src="resource2/{$opt.template.style}/js/communicator-api/prototype/prototype.js"></script>
-          <script type="text/javascript" src="resource2/{$opt.template.style}/js/communicator-api/garmin/device/GarminDeviceDisplay.js"></script>
-          <script type="text/javascript">var garmin_gpx_filename = '{$cache.wpoc}.gpx';</script>
-          <script type="text/javascript" src="resource2/{$opt.template.style}/js/GarminDisplay.js"></script>
-          {* <!-- <script type="text/javascript" src="resource2/{$opt.template.style}/js/search.js"></script> --> *}
-        {/if}
         {foreach from=$opt.page.header_javascript item=scriptItem}
             <script type="text/javascript" src="{$scriptItem}"></script>
         {/foreach}
@@ -113,7 +106,6 @@
 
 {* JS onload() onunload() *}
 <body{if $opt.session.url==true} onload="initSessionTimeout()"{/if}
-{if $garmin==true} onload="load('{$cache.latitude}','{$cache.longitude}','{$cache.cacheid}','{$opt.lib.garmin.url}','{$opt.lib.garmin.key}','{$opt.template.locale}')"{/if}
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
 {if $opt.template.popup!=false} class="popup"{/if}>

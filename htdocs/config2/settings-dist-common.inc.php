@@ -30,7 +30,7 @@ $opt['page']['slogan'] = 'Opencaching.de - Geocaching in Deutschland, Österreic
 // directory of rotator pictures and script, relative to head images dir
 $opt['page']['headimagepath'] = '';
 
-// sponsor link on e.g. print preview and garmin-plugin
+// sponsor link on e.g. print preview
 $opt['page']['sponsor']['popup'] = '';
 $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching community';
 

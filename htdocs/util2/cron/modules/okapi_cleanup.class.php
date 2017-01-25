@@ -2,13 +2,12 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *
  *  Workaround for OKAPI issue #246
  ***************************************************************************/
 
-checkJob(new okapi_cleanup());
+checkJob(new OkapiCleanup());
 
-class okapi_cleanup
+class OkapiCleanup
 {
     public $name = 'okapi_cleanup';
     public $interval = 3600;
@@ -20,7 +19,7 @@ class okapi_cleanup
         $files = glob($opt['okapi']['var_dir'] . '/garmin*.zip');
         foreach ($files as $file) {
             // delete old download files after 24 hours; this large interval filters out any
-            // timezone mismatches in file sysytems (e.g. on unconventional development
+            // timezone mismatches in file systems (e.g. on unconventional development
             // environments)
             if (is_file($file) && (time() - filemtime($file)) > 24 * 3600) {
                 unlink($file);

@@ -27,6 +27,7 @@ const:
   DB_HOST: "localhost"
   FRONTEND_URL: "http://local.team-opencaching.de"
   DIR: "__DIR__"
+  SESSION_DOMAIN: ".team-opencaching.de"
 
 environments:
   travis-ci:
@@ -34,4 +35,5 @@ environments:
       - "dev-ops/travis-ci/actions"
     const:
       DB_HOST: '127.0.0.1'
-      FRONTEND_URL: "http://127.0.0.1"
+      FRONTEND_URL: "http://localhost"
+      SESSION_DOMAIN: "localhost"

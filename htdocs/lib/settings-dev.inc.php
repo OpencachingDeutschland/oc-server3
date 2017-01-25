@@ -114,8 +114,8 @@ $safemode_zip = '/var/www/html/bin/phpzip.php';
 $zip_basedir = $dev_basepath . ($dev_codepath == '*' ? '' : $dev_codepath . 'htdocs/') . 'download/zip/';
 $zip_wwwdir = 'download/zip/';
 
-$googlemap_key = "<key>";
-$googlemap_type = "G_MAP_TYPE"; // alternativ: _HYBRID_TYPE
+$googlemap_key = '<key>';
+$googlemap_type = 'G_MAP_TYPE'; // alternativ: _HYBRID_TYPE
 
 $opt['translate']['debug'] = false;
 

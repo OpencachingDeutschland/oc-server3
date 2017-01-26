@@ -497,7 +497,7 @@ function search_output()
         // additional waypoints, including personal cache note
         $childWaypoints = $childwphandler->getChildWps($r['cacheid']);
         $n = 1;
-        $digits = "%0" . strlen(count($childWaypoints)) . "d";
+        $digits = '%0' . strlen(count($childWaypoints)) . 'd';
 
         foreach ($childWaypoints as $childWaypoint) {
             $thiswp = $gpxWaypoints;

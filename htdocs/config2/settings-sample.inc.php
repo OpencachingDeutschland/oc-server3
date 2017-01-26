@@ -185,14 +185,7 @@ $opt['logic']['waypoint_pool']['fill_gaps'] = false;
  */
 $opt['logic']['systemuser']['user'] = '';
 
-/* 3rd party library options
- * see https://my.garmin.com/api/communicator/key-generator.jsp
- */
-$opt['lib']['garmin']['domain'] = '<domain>';
-$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
-$opt['lib']['garmin']['url'] = 'http://' . $opt['lib']['garmin']['domain'] . '/';
-$opt['lib']['garmin']['page_url'] = 'http://<domain>/';
-
+// 3rd party library options
 // developer.what3words.com API Key
 $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 

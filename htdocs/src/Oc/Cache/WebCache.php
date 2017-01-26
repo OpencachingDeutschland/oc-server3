@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  ***************************************************************************/
 
 namespace Oc\Cache;
@@ -13,7 +12,6 @@ class WebCache
 
     /** @var \translate|\translateEdit $translate */
     private $translate;
-
 
     /**
      * WebCache constructor.

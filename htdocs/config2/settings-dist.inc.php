@@ -484,22 +484,7 @@ $opt['wikinews']['url'] = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Sei
 $opt['wikinews']['count'] = 5;
 $opt['wikinews']['timeout'] = 20;
 
-/* 3rd party library options
-  */
-
-// key provided from garmin (communicator api)
-$opt['lib']['garmin']['key'] = '00112233445566778899AABBCCDDEEFF00';
-
-// domain registered to this key. If the domain does not match the request
-// a redirect to redirect-setting will be done
-// (use exact same url with slashes etc. as registered by garmin)
-$opt['lib']['garmin']['domain'] = 'www.site.org';
-$opt['lib']['garmin']['url'] = 'http://' . $opt['lib']['garmin']['domain'] . '/';
-
-// if the plugin is not called from the correct domain, redirect to this site
-// (e.g. domain called without www. prefix) - must match domain of $opt['lib']['garmin']['url']
-$opt['lib']['garmin']['redirect'] = 'http://www.site.org/garmin.php?redirect=1&cacheid={cacheid}';
-
+// 3rd party library options
 // developer.what3words.com API key
 $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 

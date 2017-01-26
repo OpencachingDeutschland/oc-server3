@@ -45,7 +45,7 @@ while ($r = sql_fetch_assoc($rs)) {
     if ($attr_js != '') {
         $attr_js .= ',';
     }
-    $attr_js .= "new Array(" . $r['id'] . ", " . (isset($attrs[$r['id']]) ? 1 : 0) . ", '../../" . $r['icon_undef'] . "', '../../" . $r['icon_large'] . "')";
+    $attr_js .= 'new Array(' . $r['id'] . ', ' . (isset($attrs[$r['id']]) ? 1 : 0) . ", '../../" . $r['icon_undef'] . "', '../../" . $r['icon_large'] . "')";
 }
 mysql_free_result($rs);
 ?>

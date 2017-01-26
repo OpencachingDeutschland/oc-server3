@@ -480,7 +480,6 @@ $tpl->assign('cachemap', $cachemap);
 $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 $tpl->assign('listing_admin', $login->listingAdmin());
 $tpl->assign('npahelplink', helppagelink('npa'));
-$tpl->assign('garmin_url', $opt['lib']['garmin']['page_url']);
 $tpl->assign('desclang', $desclang);
 
 // display the page

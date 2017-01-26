@@ -7,8 +7,8 @@
 use Oc\Util\CBench;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once $opt['rootpath'] . 'lib2/db.inc.php';
-require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
+require_once __DIR__ . '/db.inc.php';
+require_once __DIR__ . 'logic/labels.inc.php';
 
 /**
  * Class OcSmarty

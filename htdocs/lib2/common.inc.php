@@ -103,7 +103,7 @@ check_useragent();
 /* setup smarty
  *
  */
-require $opt['rootpath'] . 'lib2/OcSmarty.class.php';
+require __DIR__ . '/OcSmarty.class.php';
 $tpl = new OcSmarty();
 
 // include all we need

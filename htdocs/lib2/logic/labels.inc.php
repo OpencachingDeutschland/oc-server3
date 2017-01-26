@@ -5,11 +5,11 @@
  ***************************************************************************/
 
 // try to include cache file
-if (!file_exists($opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php')) {
+if (!file_exists(__DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php')) {
     labels::CreateCacheFile();
 }
 
-require $opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php';
+require __DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php';
 
 class labels
 {

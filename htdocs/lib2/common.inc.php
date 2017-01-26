@@ -11,6 +11,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+$opt['rootpath'] = __DIR__ .'/../';
+
 function __autoload($class_name)
 {
     global $opt;

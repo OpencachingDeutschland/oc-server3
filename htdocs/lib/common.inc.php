@@ -802,3 +802,14 @@ function helppagelink($ocPage)
 
     return '';
 }
+
+function get_logtype_name($logtype, $language)
+{
+    return sqlValue(
+        "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
+         FROM `log_types`
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='" . sql_escape($language) . "'
+         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
+        ''
+    );
+}

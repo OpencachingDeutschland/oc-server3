@@ -21,12 +21,33 @@ function __autoload($class_name)
         return;
     }
 
-    $file1 = $opt['rootpath'] . 'lib2/' . $class_name . '.class.php';
-    $file2 = $opt['rootpath'] . 'lib2/logic/' . $class_name . '.class.php';
+    $file1 = __DIR__ . '/' . $class_name . '.class.php';
+    $file2 = __DIR__ . '/logic/' . $class_name . '.class.php';
     if (file_exists($file1)) {
         require_once $file1;
     } elseif (file_exists($file2)) {
         require_once $file2;
+    }
+}
+
+if (!function_exists('bindtextdomain')) {
+    function bindtextdomain($domain, $directory)
+    {
+        // dummy function for travis
+    }
+}
+
+if (!function_exists('textdomain')) {
+    function textdomain($domain)
+    {
+        // dummy function for travis
+    }
+}
+
+if (!function_exists('gettext')) {
+    function gettext($message)
+    {
+        // dummy function for travis
     }
 }
 
@@ -92,13 +113,13 @@ if (isset($opt['template']['style'])) {
         $opt['template']['style'] = $opt['template']['default']['style'];
     }
 
-    if (!is_dir($opt['rootpath'] . 'templates2/' . $opt['template']['style'])) {
+    if (!is_dir(__DIR__ . '/../templates2/' . $opt['template']['style'])) {
         $opt['template']['style'] = $opt['template']['default']['style'];
     }
 } else {
     $opt['template']['style'] = $opt['template']['default']['style'];
 }
-$opt['stylepath'] = $opt['rootpath'] . 'templates2/' . $opt['template']['style'] . '/';
+$opt['stylepath'] = __DIR__ . '/../templates2/' . $opt['template']['style'] . '/';
 
 check_useragent();
 
@@ -109,14 +130,13 @@ require __DIR__ . '/OcSmarty.class.php';
 $tpl = new OcSmarty();
 
 // include all we need
-require_once $opt['rootpath'] . 'lib2/logic/const.inc.php';
-require_once $opt['rootpath'] . 'lib2/error.inc.php';
-require_once $opt['rootpath'] . 'lib2/util.inc.php';
-require_once $opt['rootpath'] . 'lib2/db.inc.php';
-require_once $opt['rootpath'] . 'lib2/login.class.php';
-require_once $opt['rootpath'] . 'lib2/menu.class.php';
-require_once $opt['rootpath'] . 'lib2/logic/labels.inc.php';
-// require_once $opt['rootpath'] . 'lib2/throttle.inc.php';
+require_once __DIR__ . '/logic/const.inc.php';
+require_once __DIR__ . '/error.inc.php';
+require_once __DIR__ . '/util.inc.php';
+require_once __DIR__ . '/db.inc.php';
+require_once __DIR__ . '/login.class.php';
+require_once __DIR__ . '/menu.class.php';
+require_once __DIR__ . '/logic/labels.inc.php';
 
 // apply post configuration
 if (function_exists('post_config')) {
@@ -241,7 +261,7 @@ function set_language()
         $cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
     }
 
-    bindtextdomain('messages', $opt['rootpath'] . 'cache2/translate');
+    bindtextdomain('messages', __DIR__ . '/../cache2/translate');
     set_php_locale();
     textdomain('messages');
 }

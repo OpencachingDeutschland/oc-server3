@@ -1001,7 +1001,7 @@ if ($options['showresult'] == 1) {
             $sql_from = '`caches`';
             $sql_where[] = '`caches`.`wp_oc`=\'' . sql_escape($options['wp']) . '\'';
         } elseif ($options['searchtype'] == 'byfulltext') {
-            require_once $opt['rootpath'] . 'lib2/search/ftsearch.inc.php';
+            require_once __DIR__ . '/lib2/search/ftsearch.inc.php';
 
             $fulltext = $options['fulltext'];
             $hashes = ftsearch_hash($fulltext);
@@ -1316,7 +1316,7 @@ if ($options['showresult'] == 1) {
 
     if ($map2_bounds && $options['queryid'] == 0) {
         $tpl->error('map2bounds requires queryid');
-    } elseif (!file_exists($opt['rootpath'] . 'lib2/search/search.' . $output_module . '.inc.php')) {
+    } elseif (!file_exists(__DIR__ . '/lib2/search/search.' . $output_module . '.inc.php')) {
         $tpl->error($outputformat_notexist);
     }
 
@@ -1342,7 +1342,7 @@ if ($options['showresult'] == 1) {
     // (map2 module will execute and exit; it will use the variables
     // $cachesFilter, $sqlFilter and $map2_bounds and $options['queryid'].)
 
-    require $opt['rootpath'] . 'lib2/search/search.' . $output_module . '.inc.php';
+    require __DIR__ . '/lib2/search/search.' . $output_module . '.inc.php';
 
     if (!isset($search_output_file_download)) {
         die("search_output_file_download flag not set for '$output_module' search");

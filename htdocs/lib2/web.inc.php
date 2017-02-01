@@ -14,7 +14,7 @@
 
 // setup rootpath
 if (!isset($opt['rootpath'])) {
-    $opt['rootpath'] = './';
+    $opt['rootpath'] = __DIR__ . '/';
 }
 
 // chicken-egg problem ...

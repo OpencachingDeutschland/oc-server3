@@ -4,7 +4,7 @@
  *
  ***************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/translate.class.php';
+require_once __DIR__ . '/translate.class.php';
 
 define('AUTH_LEVEL_ALL', 0);
 define('AUTH_LEVEL_ADMIN', '2');
@@ -27,7 +27,7 @@ class Menu
     {
         global $opt, $login, $build_map_towns_menu;
 
-        $this->sMenuFilename = $opt['rootpath'] . 'cache2/menu-' . $opt['template']['locale'] . '.inc.php';
+        $this->sMenuFilename = __DIR__ . '/../cache2/menu-' . $opt['template']['locale'] . '.inc.php';
 
         if (!file_exists($this->sMenuFilename)) {
             $this->CreateCacheFile();
@@ -89,7 +89,7 @@ class Menu
     {
         global $opt, $translate;
 
-        $f = fopen($this->sMenuFilename, 'w');
+        $f = fopen($this->sMenuFilename, 'wb');
         fwrite($f, "<?php\n");
         fwrite($f, 'global $menuitem;' . "\n");
         fwrite($f, "\n");
@@ -151,7 +151,7 @@ class Menu
 
         fwrite($f, '$menuitem = unserialize("' . str_replace('"', '\\"', serialize($aMenu)) . '");' . "\n");
 
-        fwrite($f, "?>");
+        fwrite($f, '?>');
         fclose($f);
     }
 
@@ -160,9 +160,7 @@ class Menu
      */
     public function clearCache()
     {
-        global $opt;
-
-        $dir = $opt['rootpath'] . 'cache2/';
+        $dir = __DIR__ . '/../cache2/';
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
                 if (filetype($dir . $file) == 'file') {

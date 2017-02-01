@@ -19,7 +19,7 @@ class labels
     {
         global $opt;
 
-        $f = fopen($opt['rootpath'] . 'cache2/labels-' . $opt['template']['locale'] . '.inc.php', 'w');
+        $f = fopen(__DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php', 'wb');
         fwrite($f, "<?php\n");
 
         $a = array();

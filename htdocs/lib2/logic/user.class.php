@@ -1222,7 +1222,7 @@ class user
         global $opt;
 
         // load bmp-support
-        require_once $opt['rootpath'] . 'lib2/imagebmp.inc.php';
+        require_once __DIR__ . '/../imagebmp.inc.php';
 
         // paths cleared by trailing '/'
         if (substr($opt['logic']['pictures']['dir'], - 1) != '/') {

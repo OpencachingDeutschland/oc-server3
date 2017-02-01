@@ -2,7 +2,6 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- *
  * sets up all necessary variables and handle template and database-things
  * also useful functions
  *
@@ -36,7 +35,7 @@ $error = false;
 if (!isset($rootpath)) {
     $rootpath = './';
 }
-require_once $rootpath . 'lib/clicompatbase.inc.php';
+require_once __DIR__ . '/clicompatbase.inc.php';
 
 // enforce http or https?
 if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
@@ -64,7 +63,7 @@ $cookie = new \Oc\Session\SessionDataCookie();
 //site in service?
 if ($site_in_service == false) {
     header('Content-type: text/html; charset=utf-8');
-    $page_content = read_file($rootpath . 'html/outofservice.tpl.php');
+    $page_content = read_file(__DIR__ . '/../html/outofservice.tpl.php');
     die($page_content);
 }
 
@@ -85,7 +84,7 @@ if (isset($_GET['lang'])) {
 }
 
 //are there files for this language?
-if (!file_exists($rootpath . 'lang/' . $lang . '/')) {
+if (!file_exists(__DIR__ . '/../lang/' . $lang . '/')) {
     die('Critical Error: The specified language does not exist!');
 }
 
@@ -98,17 +97,17 @@ if (isset($_GET['style'])) {
 }
 
 //does the style exist?
-if (!file_exists($rootpath . 'lang/' . $lang . '/' . $style . '/')) {
+if (!file_exists(__DIR__ . '/../lang/' . $lang . '/' . $style . '/')) {
     $style = 'ocstyle';
 }
 
-if (!file_exists($rootpath . 'lang/' . $lang . '/' . $style . '/')) {
+if (!file_exists(__DIR__ . '/../lang/' . $lang . '/' . $style . '/')) {
     die('Critical Error: The specified style does not exist!');
 }
 
 //set up the language path
 if (!isset($langpath)) {
-    $langpath = $rootpath . 'lang/' . $lang;
+    $langpath = __DIR__ . '/../lang/' . $lang;
 }
 
 //set up the style path
@@ -358,12 +357,12 @@ function tpl_BuildTemplate($dbDisconnect = true)
     // country dropdown
     global $tpl_usercountries;
 
-    tpl_set_var('screen_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen.css'));
+    tpl_set_var('screen_css_time', filemtime(__DIR__ . '/../resource2/' . $style . '/css/style_screen.css'));
     tpl_set_var(
         'screen_msie_css_time',
-        filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_screen_msie.css')
+        filemtime(__DIR__ . '/../resource2/' . $style . '/css/style_screen_msie.css')
     );
-    tpl_set_var('print_css_time', filemtime($opt['rootpath'] . 'resource2/' . $style . '/css/style_print.css'));
+    tpl_set_var('print_css_time', filemtime(__DIR__ . '/../resource2/' . $style . '/css/style_print.css'));
 
     if (isset($bScriptExecution)) {
         $bScriptExecution->stop();
@@ -600,7 +599,7 @@ function load_gettext()
     }
     $opt['template']['locale'] = $locale;
 
-    bindtextdomain('messages', $rootpath . '/cache2/translate');
+    bindtextdomain('messages', __DIR__ . '/../cache2/translate');
     set_php_locale();
     textdomain('messages');
 }

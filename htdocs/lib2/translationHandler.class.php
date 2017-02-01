@@ -38,14 +38,14 @@ class TranslationHandler
             return;
         }
 
-        if (!is_dir($opt['rootpath'] . 'cache2/translate/' . $language_lower)) {
-            mkdir($opt['rootpath'] . 'cache2/translate/' . $language_lower);
+        if (!is_dir(__DIR__ . '/../cache2/translate/' . $language_lower)) {
+            mkdir(__DIR__ . '/../cache2/translate/' . $language_lower);
         }
-        if (!is_dir($opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES')) {
-            mkdir($opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES');
+        if (!is_dir(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES')) {
+            mkdir(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES');
         }
 
-        $f = fopen($opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po', 'w');
+        $f = fopen(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po', 'wb');
 
         fwrite($f, 'msgid ""' . "\n");
         fwrite($f, 'msgstr ""' . "\n");
@@ -96,9 +96,9 @@ class TranslationHandler
         try {
             exec(
                 'msgfmt -o ' . escapeshellcmd(
-                    $opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo'
+                    __DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo'
                 ) . ' ' . escapeshellcmd(
-                    $opt['rootpath'] . 'cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'
+                    __DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'
                 )
             );
         } catch (Exception $e) {
@@ -239,12 +239,9 @@ class TranslationHandler
      */
     public function loadNodeTextFile(&$variables, $file, $language)
     {
-        // generic load
-        global $opt;
-
-        $filename = $opt['rootpath'] . '/config2/nodetext/' . $file;
+        $filename = __DIR__ . '/../config2/nodetext/' . $file;
         if (file_exists($filename)) {
-            $fhandle = fopen($filename, 'r');
+            $fhandle = fopen($filename, 'rb');
 
             if ($fhandle) {
                 while ($line = fgets($fhandle, 4096)) {

@@ -131,8 +131,8 @@ function php_errormail($errmsg)
 function admin_errormail($to, $errortype, $message, $headers)
 {
     global $opt;
-    $errorlog_dir = $opt['rootpath'] . 'var/errorlog';
-    $errorlog_path = $errorlog_dir . "/errorlog-" . date("Y-m-d");
+    $errorlog_dir = __DIR__ . '/../var/errorlog';
+    $errorlog_path = $errorlog_dir . '/errorlog-' . date('Y-m-d');
 
     $error_mail_limit = 32768;    // send max 32 KB = ca. 5-20 errors per day/logfile
 
@@ -142,7 +142,7 @@ function admin_errormail($to, $errortype, $message, $headers)
         @mkdir($errorlog_dir);
     }
     $old_logsize = @filesize($errorlog_path) + 0;
-    $msg = date("Y-m-d H:i:s.u") . " " . $errortype . "\n" . $message . "\n" .
+    $msg = date('Y-m-d H:i:s.u') . ' ' . $errortype . "\n" . $message . "\n" .
         "-------------------------------------------------------------------------\n\n";
     try {
         error_log(

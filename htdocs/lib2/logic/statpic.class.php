@@ -64,14 +64,11 @@ class statpic
         sql("DELETE FROM `user_statpic` WHERE `user_id`='&1'", $this->nUserId);
     }
 
-
     public function deleteFile()
     {
-        global $opt;
-
         // if data changed - delete statpic of user, if exists - will be recreated on next request
-        if (file_exists($opt['rootpath'] . 'images/statpics/statpic' . $this->nUserId . '.jpg')) {
-            unlink($opt['rootpath'] . 'images/statpics/statpic' . $this->nUserId . '.jpg');
+        if (file_exists(__DIR__ . '/../../images/statpics/statpic' . $this->nUserId . '.jpg')) {
+            unlink(__DIR__ . '/../../images/statpics/statpic' . $this->nUserId . '.jpg');
         }
     }
 }

@@ -103,7 +103,7 @@ function check_tables_charset($database)
     $rs = sql(
         "SELECT TABLE_NAME, TABLE_COLLATION
          FROM INFORMATION_SCHEMA.TABLES
-         WHERE TABLE_SCHEMA='&1' AND TABLE_NAME NOT LIKE 'okapi_%'",
+         WHERE TABLE_SCHEMA='&1' AND TABLE_NAME NOT LIKE 'okapi_%' AND TABLE_NAME NOT LIKE 'migration_versions'",
         $database
     );
 

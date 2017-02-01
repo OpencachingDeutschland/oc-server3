@@ -30,7 +30,7 @@ if (!isset($timezone)) {
 $style = 'ocstyle';
 
 // include common settings of lib1 and lib2
-require_once $rootpath . 'config2/settings-dist-common.inc.php';
+require_once __DIR__ . '/../config2/settings-dist-common.inc.php';
 
 //id of the node; see list in config2/settings-dist.inc.php
 $oc_nodeid = 0;
@@ -145,7 +145,7 @@ $opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
 $opt['template']['default']['locale'] = 'DE';   // can be overwritten by $opt['domain'][<domain>]['locale']
 
 // include all locale settings
-require_once $rootpath . 'config2/locale.inc.php';
+require_once __DIR__ . '/../config2/locale.inc.php';
 
 /* replicated slave databases
  * use same config as in config2/settings.inc.php (!)

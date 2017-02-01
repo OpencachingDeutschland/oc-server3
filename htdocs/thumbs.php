@@ -157,7 +157,7 @@ if ($r) {
                 break;
 
             case 'bmp':
-                require $opt['rootpath'] . 'lib2/imagebmp.inc.php';
+                require __DIR__ . '/lib2/imagebmp.inc.php';
                 $im = imagecreatefrombmp($opt['logic']['pictures']['dir'] . '/' . $filename);
                 break;
         }

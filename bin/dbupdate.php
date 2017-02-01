@@ -2,7 +2,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  ***************************************************************************/
 
 /*
@@ -14,7 +13,7 @@ chdir($rootpath);
 require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 
 echo "updating composer dependencies\n";
-system('composer install --ignore-platform-reqs');
+system('composer install');
 
 echo "applying sql deltas\n";
 require __DIR__ . '/dbsv-update.php';

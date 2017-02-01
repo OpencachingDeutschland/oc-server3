@@ -40,9 +40,10 @@
     $params['locale'] = '';
     $langUrl .= '?' . http_build_query($params);
 
-    require_once $rootpath . 'lib2/smarty/ocplugins/function.season.php';
+    require_once __DIR__ . '/../src/Oc/SmartyPlugins/function.season.php';
 
     $sUserCountry = getUserCountry();
+
     $pageidx = mnu_MainMenuIndexFromPageId($menu, $tplname);
 
     $mnu_bgcolor = '#D5D9FF';

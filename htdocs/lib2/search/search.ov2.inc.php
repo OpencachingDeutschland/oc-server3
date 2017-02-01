@@ -6,11 +6,10 @@
  * OV2 search output
  ****************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/charset.inc.php';
+require_once __DIR__ . '/../charset.inc.php';
 
 $search_output_file_download = true;
 $content_type_plain = 'application/ov2';
-
 
 function search_output()
 {

@@ -6,7 +6,7 @@
  * OVL search output for TOP25, TOP50 etc.
  ****************************************************************************/
 
-require_once $opt['rootpath'] . 'lib2/charset.inc.php';
+require_once __DIR__ . '/../charset.inc.php';
 
 $search_output_file_download = true;
 $content_type_plain = 'application/ovl';

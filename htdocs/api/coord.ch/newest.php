@@ -6,7 +6,7 @@
 header('Content-type: text/html; charset=utf-8');
 
 $opt['rootpath'] = __DIR__ . '/../../';
-require $opt['rootpath'] . 'lib2/web.inc.php';
+require __DIR__ . '/../../lib2/web.inc.php';
 
 $bFirstRow = true;
 

@@ -50,8 +50,8 @@ class OcSmarty extends Smarty
 
         // configuration
         $this->template_dir = $opt['stylepath'];
-        $this->compile_dir = $opt['rootpath'] . 'cache2/smarty/compiled/';
-        $this->cache_dir = $opt['rootpath'] . 'cache2/smarty/cache/';
+        $this->compile_dir = __DIR__ . '/../cache2/smarty/compiled/';
+        $this->cache_dir = __DIR__ . '/../cache2/smarty/cache/';
         $this->plugins_dir = [
             'plugins',
             __DIR__ . '/../src/Oc/SmartyPlugins'
@@ -77,7 +77,7 @@ class OcSmarty extends Smarty
 
         // process debug level
         if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
+            require_once __DIR__ . '/sqldebugger.class.php';
         } elseif (($opt['debug'] & DEBUG_OUTOFSERVICE) == DEBUG_OUTOFSERVICE) {
             $this->name = 'sys_outofservice';
             $this->display();
@@ -329,15 +329,15 @@ class OcSmarty extends Smarty
 
         $this->assign(
             'screen_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen.css")
+            filemtime(__DIR__ . '/../resource2/' . $opt['template']['style'] . '/css/style_screen.css')
         );
         $this->assign(
             'screen_msie_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_screen_msie.css")
+            filemtime(__DIR__ . '/../resource2/' . $opt['template']['style'] . '/css/style_screen_msie.css')
         );
         $this->assign(
             'print_css_time',
-            filemtime($opt['rootpath'] . "resource2/" . $opt['template']['style'] . "/css/style_print.css")
+            filemtime(__DIR__ . '/../resource2/' . $opt['template']['style'] . '/css/style_print.css')
         );
 
         // check if the template is compiled
@@ -357,7 +357,7 @@ class OcSmarty extends Smarty
         }
 
         if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once $opt['rootpath'] . 'lib2/sqldebugger.class.php';
+            require_once __DIR__ . '/sqldebugger.class.php';
 
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 

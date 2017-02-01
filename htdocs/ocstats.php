@@ -10,7 +10,7 @@ require __DIR__ . '/lib2/web.inc.php';
 
 // Parameter
 $jpeg_qualitaet = 80;
-$fontfile = $opt['rootpath'] . 'resource2/' . $opt['template']['style'] . '/fonts/dejavu/ttf/DejaVuSans.ttf';
+$fontfile = __DIR__ . '/resource2/' . $opt['template']['style'] . '/fonts/dejavu/ttf/DejaVuSans.ttf';
 
 // get userid and style from URL
 $userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
@@ -69,7 +69,7 @@ if (!file_exists($filename) ||
         $tplpath = $opt['rootpath'] . $record['tplpath'];
         $maxtextwidth = $record['maxtextwidth'];
     } else {
-        $tplpath = $opt['rootpath'] . 'images/ocstats1.gif';
+        $tplpath = __DIR__ . '/images/ocstats1.gif';
         $maxtextwidth = 60;
         $logo = 1;
     }
@@ -176,5 +176,5 @@ function GetFilename($userid, $lang)
 {
     global $opt;
 
-    return $opt['rootpath'] . 'images/statpics/statpic' . $userid . $lang . '.jpg';
+    return __DIR__ . '/images/statpics/statpic' . $userid . $lang . '.jpg';
 }

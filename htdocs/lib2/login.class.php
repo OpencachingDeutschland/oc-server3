@@ -100,10 +100,9 @@ class login
         global $cookie;
         $cookie->set('userid', $this->userid);
         $cookie->set('username', $this->username);
-        $cookie->set('permanent', ($this->permanent == true ? 1 : 0));
+        $cookie->set('permanent', ($this->permanent === true ? 1 : 0));
         $cookie->set('lastlogin', $this->lastlogin);
         $cookie->set('sessionid', $this->sessionid);
-        // $cookie->set('admin', $this->admin);   nonsense
     }
 
     /**
@@ -123,7 +122,7 @@ class login
             return;
         }
 
-        if ($this->checkLoginsCount() == false) {
+        if ($this->checkLoginsCount() === false) {
             $this->pClear();
 
             return;
@@ -155,6 +154,8 @@ class login
             $min_lastlogin_permanent,
             $min_lastlogin
         );
+
+
         if ($rUser = sql_fetch_assoc($rs)) {
             if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time())) ||
                 (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time()))
@@ -185,7 +186,7 @@ class login
             $this->admin = $rUser['admin'];
             $this->verified = true;
         } else {
-            // prevent bruteforce
+            // prevent brute force
             sql("INSERT INTO `sys_logins` (`remote_addr`, `success`) VALUES ('&1', 0)", $_SERVER['REMOTE_ADDR']);
 
             $this->pClear();
@@ -193,8 +194,6 @@ class login
         sql_free_result($rs);
 
         $this->pStoreCookie();
-
-        return;
     }
 
     /**
@@ -385,6 +384,8 @@ class login
                 return $sCountry;
             }
         }
+
+
 
         // user specified a country?
         if ($this->userid != 0) {

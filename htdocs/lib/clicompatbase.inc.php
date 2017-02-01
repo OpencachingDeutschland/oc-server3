@@ -719,20 +719,20 @@ function fetch_email_template($filename, $language, $domain)
         $language = $opt['template']['default']['locale'];
     }
     $language = strtolower($language);
-    if (!file_exists($rootpath . '/lang/de/ocstyle/email/' . $language . '/' . $filename . '.email')) {
+    if (!file_exists(__DIR__ . '/../lang/de/ocstyle/email/' . $language . '/' . $filename . '.email')) {
         $language = 'en';
     }
-    $mailtext = read_file($rootpath . '/lang/de/ocstyle/email/' . $language . '/' . $filename . '.email');
+    $mailtext = read_file(__DIR__ . '/../lang/de/ocstyle/email/' . $language . '/' . $filename . '.email');
 
     $urls = get_site_urls($domain);
-    $mailtext = mb_ereg_replace("{site_url}", $urls['site_url'], $mailtext);
+    $mailtext = mb_ereg_replace('{site_url}', $urls['site_url'], $mailtext);
     if ($urls['shortlink_url']) {
-        $mailtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $mailtext);
+        $mailtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $mailtext);
     } else {
-        $mailtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $mailtext);
+        $mailtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $mailtext);
     }
 
-    $mailtext = mb_ereg_replace("{email_contact}", $opt['mail']['contact'], $mailtext);
+    $mailtext = mb_ereg_replace('{email_contact}', $opt['mail']['contact'], $mailtext);
 
     return $mailtext;
 }

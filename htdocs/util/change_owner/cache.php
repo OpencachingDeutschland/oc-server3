@@ -12,7 +12,7 @@ use Oc\GeoCache\StatisticPicture;
 header('Content-type: text/html; charset=utf-8');
 
 $rootpath = __DIR__ . '/../../';
-require_once $rootpath . 'lib/common.inc.php';
+require_once __DIR__ . '/../../lib/common.inc.php';
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
 

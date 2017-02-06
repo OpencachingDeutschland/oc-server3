@@ -10,7 +10,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Removed
 
-## unreleased [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
+## [3.1.2] - 2017-02-06 [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
 
 ### Added
 * user search [#1015](http://redmine.opencaching.de/issues/1015)

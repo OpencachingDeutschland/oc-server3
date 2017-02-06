@@ -26,6 +26,20 @@ if (!CreatePidFile($watchpid)) {
     exit;
 }
 
+if (!function_exists('get_logtype_name')) {
+    function get_logtype_name($logtype, $language)
+    {
+        return sqlValue(
+            "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
+         FROM `log_types`
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id`
+         AND `stt`.`lang`='" . sql_escape($language) . "'
+         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
+            ''
+        );
+    }
+}
+
 /* begin with some constants */
 
 $sDateformat = 'Y-m-d H:i:s';
@@ -630,19 +644,5 @@ function CleanupAndExit($PidFile, $message = false)
 
     if ($message) {
         echo $message . "\n";
-    }
-}
-
-if (!function_exists('get_logtype_name')) {
-    function get_logtype_name($logtype, $language)
-    {
-        return sqlValue(
-            "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
-         FROM `log_types`
-         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id`
-         AND `stt`.`lang`='" . sql_escape($language) . "'
-         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
-            ''
-        );
     }
 }

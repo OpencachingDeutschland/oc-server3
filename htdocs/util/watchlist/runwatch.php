@@ -2,10 +2,7 @@
 <?php
 /***************************************************************************
  * For license information see doc/license.txt
- *
- *
  * Ggf. muss die Location des php-Binaries angepasst werden.
- *
  * Dieses Script sucht nach neuen Logs und Caches, die von Usern beobachtet
  * werden und verschickt dann die Emails.
  ***************************************************************************/
@@ -14,7 +11,7 @@
 $rootpath = __DIR__ . '/../../';
 require_once __DIR__ . '/../../lib/clicompatbase.inc.php';
 require_once __DIR__ . '/../../lib2/translate.class.php';
-require_once __DIR__ . '/../../lib/settings.inc.php';
+require_once __DIR__ . '/settings.inc.php';
 require_once __DIR__ . '/../../lib/consts.inc.php';
 require_once __DIR__ . '/../../lib2/edithelper.inc.php';
 require_once __DIR__ . '/../../lib2/logic/logtypes.inc.php';
@@ -25,8 +22,22 @@ if (!Cronjobs::enabled()) {
 
 // use posix pid-files to lock process
 if (!CreatePidFile($watchpid)) {
-    CleanupAndExit($watchpid, "Another instance is running!");
+    CleanupAndExit($watchpid, 'Another instance is running!');
     exit;
+}
+
+if (!function_exists('get_logtype_name')) {
+    function get_logtype_name($logtype, $language)
+    {
+        return sqlValue(
+            "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
+         FROM `log_types`
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id`
+         AND `stt`.`lang`='" . sql_escape($language) . "'
+         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
+            ''
+        );
+    }
 }
 
 /* begin with some constants */
@@ -165,7 +176,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -191,7 +202,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -597,7 +608,7 @@ function CheckDaemon($PidFile)
         $pid_daemon = fgets($pidfile, 20);
         fclose($pidfile);
 
-        $pid_daemon = (int)$pid_daemon;
+        $pid_daemon = (int) $pid_daemon;
 
         // process running?
         if (posix_kill($pid_daemon, 0)) {
@@ -633,19 +644,5 @@ function CleanupAndExit($PidFile, $message = false)
 
     if ($message) {
         echo $message . "\n";
-    }
-}
-
-if (!function_exists('get_logtype_name')) {
-    function get_logtype_name($logtype, $language)
-    {
-        return sqlValue(
-            "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
-         FROM `log_types`
-         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id`
-         AND `stt`.`lang`='" . sql_escape($language) . "'
-         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
-            ''
-        );
     }
 }

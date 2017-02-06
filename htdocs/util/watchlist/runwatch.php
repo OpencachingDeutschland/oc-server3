@@ -23,9 +23,13 @@ if (!Cronjobs::enabled()) {
     exit;
 }
 
+if (!isset($watchpid)) {
+    $watchpid = __DIR__ . '/../../cache2/watch.pid';
+}
+
 // use posix pid-files to lock process
 if (!CreatePidFile($watchpid)) {
-    CleanupAndExit($watchpid, "Another instance is running!");
+    CleanupAndExit($watchpid, 'Another instance is running!');
     exit;
 }
 

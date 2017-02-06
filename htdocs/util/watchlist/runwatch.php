@@ -2,10 +2,7 @@
 <?php
 /***************************************************************************
  * For license information see doc/license.txt
- *
- *
  * Ggf. muss die Location des php-Binaries angepasst werden.
- *
  * Dieses Script sucht nach neuen Logs und Caches, die von Usern beobachtet
  * werden und verschickt dann die Emails.
  ***************************************************************************/
@@ -14,17 +11,13 @@
 $rootpath = __DIR__ . '/../../';
 require_once __DIR__ . '/../../lib/clicompatbase.inc.php';
 require_once __DIR__ . '/../../lib2/translate.class.php';
-require_once __DIR__ . '/../../lib/settings.inc.php';
+require_once __DIR__ . '/settings.inc.php';
 require_once __DIR__ . '/../../lib/consts.inc.php';
 require_once __DIR__ . '/../../lib2/edithelper.inc.php';
 require_once __DIR__ . '/../../lib2/logic/logtypes.inc.php';
 
 if (!Cronjobs::enabled()) {
     exit;
-}
-
-if (!isset($watchpid)) {
-    $watchpid = __DIR__ . '/../../cache2/watch.pid';
 }
 
 // use posix pid-files to lock process
@@ -169,7 +162,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -195,7 +188,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                         $logtexts .= $rWatch['watchtext'];
                     }
 
-                    while ((mb_substr($logtexts, - 1) == "\n") || (mb_substr($logtexts, - 1) == "\r")) {
+                    while ((mb_substr($logtexts, -1) == "\n") || (mb_substr($logtexts, -1) == "\r")) {
                         $logtexts = mb_substr($logtexts, 0, mb_strlen($logtexts) - 1);
                     }
 
@@ -601,7 +594,7 @@ function CheckDaemon($PidFile)
         $pid_daemon = fgets($pidfile, 20);
         fclose($pidfile);
 
-        $pid_daemon = (int)$pid_daemon;
+        $pid_daemon = (int) $pid_daemon;
 
         // process running?
         if (posix_kill($pid_daemon, 0)) {

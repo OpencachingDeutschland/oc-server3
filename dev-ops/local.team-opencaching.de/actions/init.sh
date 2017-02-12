@@ -2,6 +2,7 @@
 
 INCLUDE: ./composer.sh
 INCLUDE: ./.init-database.sh
+INCLUDE: ./import-stored-proc.sh
 INCLUDE: ./import-sql-static.sh
 INCLUDE: ./sf-migrations.sh
 INCLUDE: ./okapi-update.sh

@@ -60,3 +60,5 @@ htdocs/translation.zip
 /*.log
 /*.cab
 /htdocs/translations.zip
+
+.psh.yaml

@@ -18,7 +18,7 @@ system('composer install');
 echo "applying sql deltas\n";
 require __DIR__ . '/dbsv-update.php';
 
-echo "importing data.sql\n";
+echo "importing static-data/data.sql\n";
 system(
     'cat ' . $rootpath . '../sql/static-data/data.sql |' .
     ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']

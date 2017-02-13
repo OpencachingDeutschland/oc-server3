@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INCLUDE: ./.check-git-status.sh.sh
+INCLUDE: ./.check-git-status.sh
 
 systemctl stop httpd.service
 

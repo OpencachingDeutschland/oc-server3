@@ -5,5 +5,7 @@
 # The updated files will be inaccessible until the 'filemodes' script
 # has fixed access rights.
 
+INCLUDE: ./.check-git-status.sh
+
 git pull
-bin/filemodes
+I: sh bin/filemodes

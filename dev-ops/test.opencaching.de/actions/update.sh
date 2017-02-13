@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-INCLUDE: ./.check-git-status.sh
+sh ./dev-ops/test.opencaching.de/actions/.check-git-status.sh
 
 systemctl stop httpd.service
 

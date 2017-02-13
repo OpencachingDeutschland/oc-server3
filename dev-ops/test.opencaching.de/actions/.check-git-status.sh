@@ -8,4 +8,5 @@ fi
 if [ "x`git status|grep -i 'working directory clean'`"  == "x" ]; then
     echo "error: working directory is not clean:"
     git status
+    exit 1;
 fi

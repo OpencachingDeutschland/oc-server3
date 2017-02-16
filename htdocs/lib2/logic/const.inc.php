@@ -60,7 +60,6 @@ define('COORDINATE_USERNOTE', 2);
 define('MAX_LOGENTRIES_ON_CACHEPAGE', 5);
 
 // threshold for caches to be marked as "new"
-// changed from 7 to 14  -- following 2013/6/17
 define('NEWCACHES_DAYS', 31);
 
 // constants for user options (must match values in DB!)

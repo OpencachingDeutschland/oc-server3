@@ -13,6 +13,8 @@
  *  !! See also lib/login.class.php. !!
  ***************************************************************************/
 
+use OcLegacy\Util\PasswordCrypt;
+
 define('LOGIN_UNKNOWN_ERROR', -1);     // unkown error occured
 define('LOGIN_OK', 0);                 // login succeeded
 define('LOGIN_BADUSERPW', 1);          // bad username or password
@@ -208,7 +210,7 @@ class login
             return LOGIN_EMPTY_USERPASSWORD;
         }
 
-        $encryptedPassword = crypt::encryptPassword($password);
+        $encryptedPassword = PasswordCrypt::encryptPassword($password);
 
         return $this->try_login_encrypted($user, $encryptedPassword, $permanent);
     }

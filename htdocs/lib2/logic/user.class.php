@@ -7,6 +7,8 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
+use OcLegacy\Util\PasswordCrypt;
+
 require_once __DIR__ . '/cracklib.inc.php';
 require_once __DIR__ . '/../translate.class.php';
 
@@ -203,7 +205,7 @@ class user
             return false;
         }
 
-        $encryptedPassword = crypt::encryptPassword($password);
+        $encryptedPassword = PasswordCrypt::encryptPassword($password);
 
         return $this->reUser->setValue('password', $encryptedPassword);
     }

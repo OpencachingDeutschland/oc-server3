@@ -3,17 +3,18 @@
  *  For license information see doc/license.txt
  *
  *  Cryptographic library for encryption of passwords.
- *
  ***************************************************************************/
 
-class crypt
+namespace OcLegacy\Util;
+
+class PasswordCrypt
 {
     public static function encryptPassword($password)
     {
         // Calls the password encryption chained
-        $pwmd5 = crypt::firstStagePasswordEncryption($password);
+        $md5 = self::firstStagePasswordEncryption($password);
 
-        return crypt::secondStagePasswordEncryption($pwmd5);
+        return self::secondStagePasswordEncryption($md5);
     }
 
     public static function firstStagePasswordEncryption($password)

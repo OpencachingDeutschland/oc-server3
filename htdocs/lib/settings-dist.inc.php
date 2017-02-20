@@ -47,11 +47,6 @@ if (!isset($debug_page)) {
 }
 $develWarning = '';
 
-//site in service? Set to false when doing bigger work on the database to prevent error's
-if (!isset($site_in_service)) {
-    $site_in_service = true;
-}
-
 /* multi-domain settings
  *
  * If one of the domains matches $_SERVER['SERVER_NAME'], the default values (in

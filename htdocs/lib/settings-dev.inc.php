@@ -63,11 +63,6 @@ if (!isset($debug_page)) {
 $develWarning = '<div id="debugoc"><font size="5" face="arial" color="red"><center>Entwicklersystem - nur Testdaten</center></font></div>';
 $sql_debug = isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug'] == 1;
 
-//site in service? Set to false when doing bigger work on the database to prevent error's
-if (!isset($site_in_service)) {
-    $site_in_service = true;
-}
-
 set_absolute_urls(
     $opt,
     $dev_baseurl,

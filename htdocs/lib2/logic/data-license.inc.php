@@ -62,32 +62,32 @@ function getLicenseDisclaimer(
                 $df = 'd-m-Y';
             }
 
-            $ltext = "&copy; ";
+            $ltext = '&copy; ';
             if ($html) {
                 $ltext .= "<a href='" . $server_address . "viewprofile.php?userid=" . $userid . "' target='_blank'>";
             }
             $ltext .= $username;
             if ($html) {
-                $ltext .= "</a>";
+                $ltext .= '</a>';
             }
-            $ltext .= ", ";
+            $ltext .= ', ';
             if ($html) {
                 $ltext .= "<a href='" . $server_address . "viewcache.php?cacheid=" . $cacheid . "' target='_blank'>";
             }
             $ltext .= $opt['page']['sitename'];
             if ($html) {
-                $ltext .= "</a>";
+                $ltext .= '</a>';
             }
-            $ltext .= ", ";
+            $ltext .= ', ';
             if ($html) {
                 $ltext .= "<a href='" . $lurl . "' target='_blank'>";
             }
-            $ltext .= "CC BY-NC-ND";
+            $ltext .= 'CC BY-NC-ND';
             if ($html) {
-                $ltext .= "</a>";
+                $ltext .= '</a>';
             }
             if ($for_cachedesc) {
-                $ltext .= ", " . $asof . " " . date($df);
+                $ltext .= ', ' . $asof . ' ' . date($df);
             }
         }
 
@@ -96,7 +96,7 @@ function getLicenseDisclaimer(
                 if ($twolines) {
                     $ltext .= ";\r\n";
                 } else {
-                    $ltext .= "; ";
+                    $ltext .= '; ';
                 }
             }
             $ltext .= $translate->t('all log entries &copy; their authors', '', '', 0, '', 1, $language);
@@ -106,6 +106,6 @@ function getLicenseDisclaimer(
     if ($html) {
         return $ltext;
     } else {
-        return mb_ereg_replace("&copy;", "©", $ltext);
+        return mb_ereg_replace('&copy;', '©', $ltext);
     }
 }

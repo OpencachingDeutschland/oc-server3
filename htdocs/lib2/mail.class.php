@@ -31,7 +31,7 @@ class mail extends Smarty
         global $opt;
 
         $this->template_dir = __DIR__ . '/../templates2/mail/';
-        $this->compile_dir = __DIR__ . '/../cache2/smarty/compiled/';
+        $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
         $this->plugins_dir = [
             'plugins',
             __DIR__ . '/../src/Oc/SmartyPlugins'

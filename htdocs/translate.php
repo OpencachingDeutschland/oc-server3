@@ -379,11 +379,11 @@ function clearCache()
 {
     global $tpl, $translang, $translationHandler;
 
-    unlinkFiles('cache2', 'php');
+    unlinkFiles('var/cache2', 'php');
 
-    unlinkFiles('cache2/smarty/cache', 'tpl');
-    unlinkFiles('cache2/smarty/compiled', 'inc');
-    unlinkFiles('cache2/smarty/compiled', 'php');
+    unlinkFiles('var/cache2/smarty/cache', 'tpl');
+    unlinkFiles('var/cache2/smarty/compiled', 'inc');
+    unlinkFiles('var/cache2/smarty/compiled', 'php');
 
     $translationHandler->createMessageFiles();
 

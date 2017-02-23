@@ -261,7 +261,7 @@ function set_language()
         $cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
     }
 
-    bindtextdomain('messages', __DIR__ . '/../cache2/translate');
+    bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     set_php_locale();
     textdomain('messages');
 }

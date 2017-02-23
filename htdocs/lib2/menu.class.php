@@ -27,7 +27,7 @@ class Menu
     {
         global $opt, $login, $build_map_towns_menu;
 
-        $this->sMenuFilename = __DIR__ . '/../cache2/menu-' . $opt['template']['locale'] . '.inc.php';
+        $this->sMenuFilename = __DIR__ . '/../var/cache2/menu-' . $opt['template']['locale'] . '.inc.php';
 
         if (!file_exists($this->sMenuFilename)) {
             $this->CreateCacheFile();
@@ -160,7 +160,7 @@ class Menu
      */
     public function clearCache()
     {
-        $dir = __DIR__ . '/../cache2/';
+        $dir = __DIR__ . '/../var/cache2/';
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
                 if (filetype($dir . $file) == 'file') {

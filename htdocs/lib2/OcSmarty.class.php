@@ -50,8 +50,8 @@ class OcSmarty extends Smarty
 
         // configuration
         $this->template_dir = $opt['stylepath'];
-        $this->compile_dir = __DIR__ . '/../cache2/smarty/compiled/';
-        $this->cache_dir = __DIR__ . '/../cache2/smarty/cache/';
+        $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
+        $this->cache_dir = __DIR__ . '/../var/cache2/smarty/cache/';
         $this->plugins_dir = [
             'plugins',
             __DIR__ . '/../src/Oc/SmartyPlugins'

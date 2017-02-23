@@ -38,10 +38,10 @@ class geokrety
     {
         global $opt;
 
-        if (!@mkdir(__DIR__ . '/../../../cache2/geokrety')) {
+        if (!@mkdir(__DIR__ . '/../../../var/cache2/geokrety')) {
             // die('can\'t create geogrety cache dir');
         }
-        $path = __DIR__ . '/../../../cache2/geokrety/import-' . date('Ymd-His') . '.xml';
+        $path = __DIR__ . '/../../../var/cache2/geokrety/import-' . date('Ymd-His') . '.xml';
 
         // Changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 12h'
         // to safely stay in api-limit, even when client and server are in different time zones.

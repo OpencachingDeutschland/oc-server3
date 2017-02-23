@@ -5,11 +5,11 @@
  ***************************************************************************/
 
 // try to include cache file
-if (!file_exists(__DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php')) {
+if (!file_exists(__DIR__ . '/../../var/cache2/labels-' . $opt['template']['locale'] . '.inc.php')) {
     labels::CreateCacheFile();
 }
 
-require __DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php';
+require __DIR__ . '/../../var/cache2/labels-' . $opt['template']['locale'] . '.inc.php';
 
 class labels
 {
@@ -19,7 +19,7 @@ class labels
     {
         global $opt;
 
-        $f = fopen(__DIR__ . '/../../cache2/labels-' . $opt['template']['locale'] . '.inc.php', 'wb');
+        $f = fopen(__DIR__ . '/../../var/cache2/labels-' . $opt['template']['locale'] . '.inc.php', 'wb');
         fwrite($f, "<?php\n");
 
         $a = array();

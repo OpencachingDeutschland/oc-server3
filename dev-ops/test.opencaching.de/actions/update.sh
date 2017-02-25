@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-touch ./htdocs/maintenance.enable
+INCLUDE: ./activate-maintenance.sh
 
 sh ./dev-ops/test.opencaching.de/actions/.check-git-status.sh
 
@@ -13,4 +13,4 @@ INCLUDE: ./../../local.team-opencaching.de/actions/sf-migrations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/import-translations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/okapi-update.sh
 
-rm ./htdocs/maintenance.enable
+INCLUDE: ./deactivate-maintenance.sh

@@ -33,11 +33,11 @@ class WebCache
      */
     public function clearCache()
     {
-        $this->unlinkFiles('cache2', 'php');
+        $this->unlinkFiles('var/cache2', 'php');
 
-        $this->unlinkFiles('cache2/smarty/cache', 'tpl');
-        $this->unlinkFiles('cache2/smarty/compiled', 'inc');
-        $this->unlinkFiles('cache2/smarty/compiled', 'php');
+        $this->unlinkFiles('var/cache2/smarty/cache', 'tpl');
+        $this->unlinkFiles('var/cache2/smarty/compiled', 'inc');
+        $this->unlinkFiles('var/cache2/smarty/compiled', 'php');
     }
 
     /**
@@ -106,7 +106,7 @@ class WebCache
                 \labels::CreateCacheFile();
 
                 // change to file owner
-                $sFilename = $this->opt['rootpath'] . 'cache2/labels-' . $this->opt['template']['locale'] . '.inc.php';
+                $sFilename = $this->opt['rootpath'] . 'var/cache2/labels-' . $this->opt['template']['locale'] . '.inc.php';
                 chown($sFilename, $this->opt['httpd']['user']);
                 chgrp($sFilename, $this->opt['httpd']['group']);
             }
@@ -128,7 +128,7 @@ class WebCache
         }
 
         // fix file ownership
-        $sCompileDir = $this->opt['rootpath'] . 'cache2/smarty/compiled/';
+        $sCompileDir = $this->opt['rootpath'] . 'var/cache2/smarty/compiled/';
         if ($hDir = opendir($sCompileDir)) {
             while (($sFilename = readdir($hDir)) !== false) {
                 if (filetype($sCompileDir . $sFilename) === 'file') {

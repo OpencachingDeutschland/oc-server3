@@ -67,7 +67,7 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
 
     if ($opt['cron']['gcwp']['fulllist']) {
         $gzipped_data = '';
-        $cacheFile = '../cache2/gc2oc.gz';
+        $cacheFile = '../var/cache2/gc2oc.gz';
         if (!file_exists($cacheFile) || time() - filemtime($cacheFile) > 3600 * 4) {
             $gc2oc = file_get_contents($opt['cron']['gcwp']['fulllist']);
             if ($gc2oc) {

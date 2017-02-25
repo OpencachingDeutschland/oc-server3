@@ -30,6 +30,7 @@
     -->
 
     <exclude-pattern>*/cache2/*</exclude-pattern>
+    <exclude-pattern>*/var/cache2/*</exclude-pattern>
     <exclude-pattern>*/images/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
     <exclude-pattern>*/htdocs/okapi/*</exclude-pattern>

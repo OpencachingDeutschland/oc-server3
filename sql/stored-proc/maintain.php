@@ -49,7 +49,7 @@ if ($dbsv) {
     } else {
         require $versionfile;
     }
-    @unlink($opt['rootpath'] . 'cache2/dbsv-running');
+    @unlink($opt['rootpath'] . 'var/cache2/dbsv-running');
 } else {
     require 'maintain-current.inc.php';
 }

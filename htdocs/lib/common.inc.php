@@ -592,7 +592,7 @@ function load_gettext()
     }
     $opt['template']['locale'] = $locale;
 
-    bindtextdomain('messages', __DIR__ . '/../cache2/translate');
+    bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     set_php_locale();
     textdomain('messages');
 }

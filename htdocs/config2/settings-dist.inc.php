@@ -255,7 +255,7 @@ $opt['logic']['masslog']['count'] = 20;
 
 /* location of uploaded images
  */
-$opt['logic']['pictures']['maxsize'] = 6000 * 1024;
+$opt['logic']['pictures']['maxsize'] = 15000 * 1024;
 $opt['logic']['pictures']['unchg_size'] = 250 * 1024;
 if (extension_loaded('imagick')) {
     $opt['logic']['pictures']['extensions'] = 'jpg;jpeg;gif;png;bmp;tif;psd;pcx;svg;xpm';

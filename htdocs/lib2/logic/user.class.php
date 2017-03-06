@@ -1590,7 +1590,7 @@ class user
         global $opt;
 
         // get number of possible rates
-        return floor($this->getStatFound() * $opt['logic']['rating']['percentageOfFounds'] / 100);
+        return (int) floor($this->getStatFound() * $opt['logic']['rating']['percentageOfFounds'] / 100);
     }
 
     public function allowRatings()
@@ -1603,7 +1603,7 @@ class user
     {
         global $opt;
 
-        return ($opt['logic']['rating']['percentageOfFounds'] - ($this->getStatFound() % $opt['logic']['rating']['percentageOfFounds']));
+        return (int) ($opt['logic']['rating']['percentageOfFounds'] - ($this->getStatFound() % $opt['logic']['rating']['percentageOfFounds']));
     }
 
     public function showStatFounds()

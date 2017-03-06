@@ -371,7 +371,7 @@ $tpl->assign('maintenance', $record['maintenance'] <= 0 ? '0' : $record['mainten
 $tpl->assign('hidden', $record['hidden'] <= 0 ? '0' : $record['hidden']);
 $tpl->assign('active', $active);
 $tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
-$tpl->assign('maxrecommended', floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
+$tpl->assign('maxrecommended', (int) floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
 $tpl->assign('show_statistics', $show_statistics);
 $tpl->assign('show_oconly81', $show_oconly81);
 

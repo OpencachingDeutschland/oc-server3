@@ -14,7 +14,7 @@
 
 # automatically created and maintained configuation files
 /htdocs/vendor
-
+/htdocs/maintenance.enable
 # files created when running the OC software
 /htdocs/cache2/*
 /htdocs/opencaching_dump.sql

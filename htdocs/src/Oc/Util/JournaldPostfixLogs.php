@@ -18,17 +18,24 @@ class JournaldPostfixLogs
     private $config;
 
     /**
+     * @var DbalConnection
+     */
+    private $dbalConnection;
+
+    /**
      * constructor
      *
+     * @param DbalConnection $dbalConnection
      * @param array $config
      * $config = [
      *     'hostname' => 'host.domain.tld',
      *     'status' => ['sent', 'bounced', ...],
      * ]
      */
-    public function __construct($config)
+    public function __construct(DbalConnection $dbalConnection, $config)
     {
         $this->config = $config;
+        $this->dbalConnection = $dbalConnection;
     }
 
     /**
@@ -105,8 +112,6 @@ class JournaldPostfixLogs
      */
     private function egrepStatus(array $status, \DateTimeImmutable $start, \DateTimeImmutable $end)
     {
-
-        // prepare status
         $grepStatus = '';
         foreach ($status as $entry) {
             $grepStatus .= 'status=' . $entry . '|';

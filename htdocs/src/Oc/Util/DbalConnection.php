@@ -1,10 +1,9 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * For license information see doc/license.txt
  *
  * small helper class to get a dbal connection or dbal query builder
  * to refactor sql methods
- *
  ***************************************************************************/
 
 namespace Oc\Util;
@@ -24,6 +23,7 @@ class DbalConnection
         $params['driver'] = 'pdo_mysql';
 
         $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../../app/config/parameters.yml'));
+        $parameters = $parameters['parameters'];
 
         if (isset($parameters['database_host'])) {
             $params['host'] = $parameters['database_host'];
@@ -32,12 +32,15 @@ class DbalConnection
         if (isset($parameters['database_port'])) {
             $params['port'] = $parameters['database_port'];
         }
+
         if (isset($parameters['database_user'])) {
             $params['user'] = $parameters['database_user'];
         }
+
         if (isset($parameters['database_password'])) {
             $params['password'] = $parameters['database_password'];
         }
+
         if (isset($parameters['database_name'])) {
             $params['dbname'] = $parameters['database_name'];
         }

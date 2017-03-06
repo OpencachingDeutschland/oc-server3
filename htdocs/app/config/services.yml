@@ -28,3 +28,6 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    oc.util.dbal_connection:
+        class: Oc\Util\DbalConnection

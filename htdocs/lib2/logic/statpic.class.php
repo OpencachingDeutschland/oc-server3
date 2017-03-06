@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  *  For license information see doc/license.txt
- *
  ***************************************************************************/
 
 class statpic
@@ -39,7 +38,7 @@ class statpic
 
     public function setText($value)
     {
-        if ($value != '') {
+        if ($value !== '') {
             if (!mb_ereg_match(REGEX_STATPIC_TEXT, $value)) {
                 return false;
             }
@@ -50,12 +49,12 @@ class statpic
 
     public function save()
     {
-        $retval = $this->reUser->save();
-        if ($retval) {
+        $retVal = $this->reUser->save();
+        if ($retVal) {
             $this->invalidate();
         }
 
-        return $retval;
+        return $retVal;
     }
 
     // force regeneration of image on next call of ocstats.php

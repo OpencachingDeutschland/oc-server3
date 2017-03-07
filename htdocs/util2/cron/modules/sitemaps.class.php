@@ -26,15 +26,11 @@ class sitemaps
                 $opt['page']['https']['mode'] == HTTPS_ENFORCED ? $opt['page']['absolute_https_url'] : $opt['page']['absolute_http_url']
             );
 
-            $this->oSitemapXML->write('index.php', time(), 'always');
+            $this->oSitemapXML->write('index.php', time(), 'always', 1.0);
+            $this->oSitemapXML->write('tops.php', time() - 24 * 60 * 60, 'daily', 0.5);
+            $this->oSitemapXML->write('newcachesrest.php', time() - 24 * 60 * 60, 'daily', 0.5);
             $this->write_viewacache_urls();
-            $this->write_articles_urls();
-            $this->write_viewlogs_urls();
-            $this->write_viewprofile_urls();
-            $this->oSitemapXML->write('tops.php', time() - 24 * 60 * 60, 'daily');
-            $this->oSitemapXML->write('newcachesrest.php', time() - 24 * 60 * 60, 'daily');
             $this->write_newcaches_urls();
-            $this->oSitemapXML->write('newlogs.php', time(), 'always');
 
             $this->oSitemapXML->close();
 
@@ -52,7 +48,7 @@ class sitemaps
             ($opt['page']['https']['mode'] == HTTPS_ENFORCED ? $opt['page']['absolute_https_url'] : $opt['page']['absolute_http_url']) . 'sitemap.xml'
         );
 
-        $this->ping_searchengine('http://www.google.com/webmasters/tools/ping?sitemap=' . $url);
+        $this->ping_searchengine('http://www.google.com/webmasters/ping?sitemap=' . $url);
         $this->ping_searchengine(
             'http://search.yahooapis.com/SiteExplorerService/V1/updateNotification?appid=USERID&url=' . $url
         );
@@ -92,36 +88,16 @@ class sitemaps
         $nCount = sql_value("SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1", 0);
         $nIndex = 0;
         while ($nIndex < $nCount) {
-            $this->oSitemapXML->write('newcaches.php?startat=' . $nIndex, time(), 'always');
+            $this->oSitemapXML->write('newcaches.php?startat=' . $nIndex, time(), 'always', 0.7);
             $nIndex += 100;
         }
-    }
-
-    public function write_viewprofile_urls()
-    {
-        $rs = sql("SELECT SQL_BUFFER_RESULT `user_id` FROM `user`");
-        while ($r = sql_fetch_assoc($rs)) {
-            $this->oSitemapXML->write('viewprofile.php?userid=' . $r['user_id'], time() - 31 * 24 * 60 * 60);
-        }
-        sql_free_result($rs);
-    }
-
-    public function write_viewlogs_urls()
-    {
-        $rs = sql(
-            "SELECT SQL_BUFFER_RESULT MAX(`last_modified`) AS `d`, `cache_id` FROM `cache_logs` GROUP BY `cache_id`"
-        );
-        while ($r = sql_fetch_assoc($rs)) {
-            $this->oSitemapXML->write('viewlogs.php?cacheid=' . $r['cache_id'], strtotime($r['d']));
-        }
-        sql_free_result($rs);
     }
 
     public function write_articles_urls()
     {
         $rs = sql("SELECT `href` FROM `sys_menu` WHERE `href` LIKE 'articles.php?page=%'");
         while ($r = sql_fetch_assoc($rs)) {
-            $this->oSitemapXML->write($r['href'], time() - 31 * 24 * 60 * 60);
+            $this->oSitemapXML->write($r['href'], time() - 31 * 24 * 60 * 60, 0.3);
         }
         sql_free_result($rs);
     }
@@ -145,7 +121,8 @@ class sitemaps
             );
             $this->oSitemapXML->write(
                 'viewcache.php?wp=' . $r['wp_oc'] . '&desclang=' . $r['language'],
-                strtotime($dLastMod)
+                strtotime($dLastMod),
+                0.6
             );
         }
         sql_free_result($rs);

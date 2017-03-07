@@ -52,8 +52,9 @@ class sitemapxml
      * @param bool $sChangeFreq
      * @param float $nPriority
      */
-    public function write($sFile, $dLastMod, $sChangeFreq = false, $nPriority = 0.5)
+    public function write($sFile, $dLastMod, $sChangeFreq = false, $nPriority )
     {
+        if (!$nPriority) { $nPriority = 0.5; }
         if ($sChangeFreq == false) {
             $sChangeFreq = $this->sDefaultChangeFreq;
         }

@@ -163,7 +163,7 @@ if ($error == false) {
                     $rating_msg = mb_ereg_replace('{max}', floor($user_founds * $rating_percentage / 100), $rating_msg);
                     $rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
                 } else {
-                    $anzahl = ($user_tops + 1 - ($user_founds * $rating_percentage / 100)) / ($rating_percentage / 100);
+                    $anzahl = (int) (($user_tops + 1 - ($user_founds * $rating_percentage / 100)) / ($rating_percentage / 100));
                     if ($anzahl > 1) {
                         $rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
                     } else {

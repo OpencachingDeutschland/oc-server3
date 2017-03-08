@@ -1,13 +1,12 @@
 <?php
-
 /***************************************************************************
- *  For license information see doc/license.txt
- *
+ * For license information see doc/license.txt
  *
  *  Generate sitemap.xml as specified by http://www.sitemaps.org
  *  And send ping to search engines
  ***************************************************************************/
-class sitemapxml
+
+class SiteMapXml
 {
     public $sDefaultChangeFreq = 'monthly';
     public $nMaxFileSize = 9961472; // max file size, 10MB by specification
@@ -15,9 +14,9 @@ class sitemapxml
 
     public $sPath = '';
     public $sDomain = '';
-    public $oIndexFile = false;
-    public $nSitemapIndex = 0;
-    public $oSitemapFile = false;
+    public $oIndexFile;
+    public $nSiteMapIndex = 0;
+    public $oSiteMapFile;
     public $nWrittenSize = 0;
     public $nWrittenCount = 0;
 
@@ -33,7 +32,7 @@ class sitemapxml
         $this->sPath = $sPath;
         $this->sDomain = $sDomain;
 
-        $this->oIndexFile = fopen($sPath . 'sitemap.xml', 'w');
+        $this->oIndexFile = fopen($sPath . 'sitemap.xml', 'wb');
         if ($this->oIndexFile === false) {
             return false;
         }
@@ -49,13 +48,12 @@ class sitemapxml
     /**
      * @param string $sFile
      * @param integer $dLastMod
-     * @param bool $sChangeFreq
+     * @param string $sChangeFreq
      * @param float $nPriority
      */
-    public function write($sFile, $dLastMod, $sChangeFreq = false, $nPriority )
+    public function write($sFile, $dLastMod, $sChangeFreq, $nPriority = 0.5)
     {
-        if (!$nPriority) { $nPriority = 0.5; }
-        if ($sChangeFreq == false) {
+        if (!$sChangeFreq) {
             $sChangeFreq = $this->sDefaultChangeFreq;
         }
 
@@ -75,39 +73,39 @@ class sitemapxml
     public function writeInternal($str)
     {
         // close the last file?
-        if (($this->oSitemapFile !== false) && (($this->nWrittenSize + strlen($str) > $this->nMaxFileSize) || ($this->nWrittenCount >= $this->nMaxUrlCount))) {
-            gzwrite($this->oSitemapFile, '</urlset>');
-            gzclose($this->oSitemapFile);
-            $this->oSitemapFile = false;
+        if (($this->oSiteMapFile !== false) && (($this->nWrittenSize + strlen($str) > $this->nMaxFileSize) || ($this->nWrittenCount >= $this->nMaxUrlCount))) {
+            gzwrite($this->oSiteMapFile, '</urlset>');
+            gzclose($this->oSiteMapFile);
+            $this->oSiteMapFile = false;
         }
 
         // open new XML file?
-        if ($this->oSitemapFile === false) {
-            $this->nSitemapIndex++;
-            $sFilename = 'sitemap-' . $this->nSitemapIndex . '.xml.gz';
-            $this->oSitemapFile = gzopen($this->sPath . $sFilename, 'wb');
+        if ($this->oSiteMapFile === false) {
+            $this->nSiteMapIndex++;
+            $sFilename = 'sitemap-' . $this->nSiteMapIndex . '.xml.gz';
+            $this->oSiteMapFile = gzopen($this->sPath . $sFilename, 'wb');
 
             fwrite($this->oIndexFile, '<sitemap><loc>' . xmlentities($this->sDomain . $sFilename) . '</loc><lastmod>' . xmlentities(date('c')) . '</lastmod></sitemap>');
 
-            gzwrite($this->oSitemapFile, '<?xml version="1.0" encoding="UTF-8"?>' . "\n");
-            gzwrite($this->oSitemapFile, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
+            gzwrite($this->oSiteMapFile, '<?xml version="1.0" encoding="UTF-8"?>' . "\n");
+            gzwrite($this->oSiteMapFile, '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
             // includes end of xml-tag
             $this->nWrittenSize = 108;
             $this->nWrittenCount = 0;
         }
 
         // write string to XML
-        gzwrite($this->oSitemapFile, $str);
+        gzwrite($this->oSiteMapFile, $str);
         $this->nWrittenSize += strlen($str);
         $this->nWrittenCount++;
     }
 
     public function close()
     {
-        if ($this->oSitemapFile !== false) {
-            gzwrite($this->oSitemapFile, '</urlset>');
-            gzclose($this->oSitemapFile);
-            $this->oSitemapFile = false;
+        if ($this->oSiteMapFile !== false) {
+            gzwrite($this->oSiteMapFile, '</urlset>');
+            gzclose($this->oSiteMapFile);
+            $this->oSiteMapFile = false;
         }
 
         if ($this->oIndexFile !== false) {

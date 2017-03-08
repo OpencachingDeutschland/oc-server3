@@ -66,7 +66,7 @@ if (!$tpl->is_cached()) {
          LIMIT " . sprintf('%d', $startat) . ',
                    ' . ($perpage + 0)
     );
-    // see also write_newcaches_urls() in sitemap.class.php
+    // see also writeNewGeocacheUrls() in sitemap.class.php
     while ($rNewCache = sql_fetch_assoc($rsNewCaches)) {
         $newCaches[] = $rNewCache;
     }

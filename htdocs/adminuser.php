@@ -40,9 +40,9 @@ function sendCode()
 {
     global $tpl;
 
-    $userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
 
-    $user = new user($userid);
+    $user = new user($userId);
     if ($user->exist() == false) {
         $tpl->error(ERROR_UNKNOWN);
     }
@@ -55,17 +55,17 @@ function sendCode()
 
 function formAction()
 {
-    global $tpl, $login, $translate;
+    global $tpl, $translate;
 
     $commit = isset($_REQUEST['chkcommit']) ? $_REQUEST['chkcommit'] + 0 : 0;
     $delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete'] + 0 : 0;
     $disable = isset($_REQUEST['chkdisable']) ? $_REQUEST['chkdisable'] + 0 : 0;
-    $emailproblem = isset($_REQUEST['chkemail']) ? $_REQUEST['chkemail'] + 0 : 0;
-    $datalicense = isset($_REQUEST['chkdl']) ? $_REQUEST['chkdl'] + 0 : 0;
-    $userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+    $emailProblem = isset($_REQUEST['chkemail']) ? $_REQUEST['chkemail'] + 0 : 0;
+    $dataLicense = isset($_REQUEST['chkdl']) ? true : false;
+    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
     $disduelicense = isset($_REQUEST['chkdisduelicense']) ? $_REQUEST['chkdisduelicense'] + 0 : 0;
 
-    $user = new user($userid);
+    $user = new user($userId);
     if ($user->exist() == false) {
         $tpl->error(ERROR_UNKNOWN);
     }
@@ -80,9 +80,9 @@ function formAction()
     }
 
     if ($disduelicense == 1) {
-        $errmesg = $user->disduelicense();
-        if ($errmesg !== true) {
-            $tpl->error($errmesg);
+        $errorMessage = $user->disduelicense();
+        if ($errorMessage !== true) {
+            $tpl->error($errorMessage);
         }
     } elseif ($disable == 1) {
         if ($user->disable() == false) {
@@ -92,8 +92,8 @@ function formAction()
         if ($user->delete() == false) {
             $tpl->error(ERROR_UNKNOWN);
         }
-    } elseif ($emailproblem == 1) {
-        $user->addEmailProblem($datalicense);
+    } elseif ($emailProblem == 1) {
+        $user->addEmailProblem($dataLicense);
     }
 
     $tpl->redirect('adminuser.php?action=searchuser&username=' . urlencode($username) .

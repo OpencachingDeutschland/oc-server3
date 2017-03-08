@@ -6,6 +6,8 @@
  *  And send ping to search engines
  ***************************************************************************/
 
+namespace OcLegacy\Util;
+
 class SiteMapXml
 {
     public $sDefaultChangeFreq = 'monthly';

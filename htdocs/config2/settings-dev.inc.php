@@ -87,7 +87,7 @@ $opt['mail']['subject'] = '[local.team-opencaching.de] ';
 /* disable cronjobs which are not needed on devel site
  */
 
-$opt['cron']['sitemaps']['generate'] = false;
+$opt['cron']['sitemaps']['generate'] = true;
 $opt['cron']['geokrety']['run'] = false;
 
 /* Purge log files - age in days (0 = keep infinite)

@@ -37,17 +37,17 @@
         </ul>
         <br />
 
-        <p id="v3.1.2"><strong>OC 3.1 Version 2</strong> &ndash; 27. Januar 2017</p>
+        <p id="v3.1.2"><strong>OC 3.1 Version 2</strong> &ndash; 06. Februar 2017</p>
         <p>neu:</p>
         <ul>
             <li>Benutzer Suche <a href="http://redmine.opencaching.de/issues/1015" target="_blank">#1015</a></li>
-            <li>Empfehlungsstern verschwindet <a href="http://redmine.opencaching.de/issues/1013" target="_blank">#1013</a></li>
-            <li>Versteckte Caches nach Cachetype im Profil... <a href="http://redmine.opencaching.de/issues/1001" target="_blank">#1001</a></li>
         </ul>
         <p>Geändert / verbessert:</p>
         <ul>
             <li>Login Probleme zwischen lib und lib2 Code behoben</li>
             <li>Scrutinizer Patches eingespielt</li>
+            <li>Empfehlungsstern verschwindet <a href="http://redmine.opencaching.de/issues/1013" target="_blank">#1013</a></li>
+            <li>Versteckte Caches nach Cachetype im Profil... <a href="http://redmine.opencaching.de/issues/1001" target="_blank">#1001</a></li>
             <li>Sprach Links <a href="http://redmine.opencaching.de/issues/1022" target="_blank">#1022</a></li>
             <li>Sprach Umschaltung <a href="http://redmine.opencaching.de/issues/995" target="_blank">#995</a></li>
         </ul>

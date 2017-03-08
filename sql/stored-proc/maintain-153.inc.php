@@ -1505,7 +1505,7 @@ sql_dropTrigger('cacheRatingBeforeInsert');
 sql(
     "CREATE TRIGGER `cacheRatingBeforeInsert` BEFORE INSERT ON `cache_rating`
      FOR EACH ROW BEGIN
-        IF ISNULL(NEW.`rating_date`) OR NEW.`rating_date` < '2000' THEN
+        IF ISNULL(NEW.`rating_date`) OR NEW.`rating_date` < '2000-01-01 00:00:00' THEN
             SET NEW.`rating_date` = NOW();
         END IF;
      END;"
@@ -2049,7 +2049,7 @@ sql_dropTrigger('sysTransBeforeInsert');
 sql(
     "CREATE TRIGGER `sysTransBeforeInsert` BEFORE INSERT ON `sys_trans`
      FOR EACH ROW BEGIN
-        IF NEW.`last_modified` < '2000' THEN
+        IF NEW.`last_modified` < '2000-01-01 00:00:00' THEN
             SET NEW.`last_modified`=NOW();
         END IF;
      END;"
@@ -2067,7 +2067,7 @@ sql_dropTrigger('sysTransTextBeforeInsert');
 sql(
     "CREATE TRIGGER `sysTransTextBeforeInsert` BEFORE INSERT ON `sys_trans_text`
      FOR EACH ROW BEGIN
-        IF NEW.`last_modified` < '2000' THEN
+        IF NEW.`last_modified` < '2000-01-01 00:00:00' THEN
             SET NEW.`last_modified`=NOW();
         END IF;
      END;"

@@ -38,14 +38,14 @@ class TranslationHandler
             return;
         }
 
-        if (!is_dir(__DIR__ . '/../cache2/translate/' . $language_lower)) {
-            mkdir(__DIR__ . '/../cache2/translate/' . $language_lower);
+        if (!is_dir(__DIR__ . '/../var/cache2/translate/' . $language_lower)) {
+            mkdir(__DIR__ . '/../var/cache2/translate/' . $language_lower);
         }
-        if (!is_dir(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES')) {
-            mkdir(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES');
+        if (!is_dir(__DIR__ . '/../var/cache2/translate/' . $language_lower . '/LC_MESSAGES')) {
+            mkdir(__DIR__ . '/../var/cache2/translate/' . $language_lower . '/LC_MESSAGES');
         }
 
-        $f = fopen(__DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po', 'wb');
+        $f = fopen(__DIR__ . '/../var/cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po', 'wb');
 
         fwrite($f, 'msgid ""' . "\n");
         fwrite($f, 'msgstr ""' . "\n");
@@ -96,9 +96,9 @@ class TranslationHandler
         try {
             exec(
                 'msgfmt -o ' . escapeshellcmd(
-                    __DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo'
+                    __DIR__ . '/../var/cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.mo'
                 ) . ' ' . escapeshellcmd(
-                    __DIR__ . '/../cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'
+                    __DIR__ . '/../var/cache2/translate/' . $language_lower . '/LC_MESSAGES/messages.po'
                 )
             );
         } catch (Exception $e) {

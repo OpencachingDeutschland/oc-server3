@@ -1,12 +1,11 @@
 #!/usr/bin/php -q
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * For license information see doc/license.txt
  *
+ * create a cronjob to execute this file every minute
  *
- *  Create a cronjob to execute this file every minute
- *
- *  DO NOT RUN THIS JOB AS ROOT!
+ * DO NOT RUN THIS JOB AS ROOT!
  *
  ***************************************************************************/
 
@@ -21,7 +20,8 @@ if (!Cronjobs::enabled()) {
 
 // test for user who runs the cronjob
 $processUser = posix_getpwuid(posix_geteuid());
-if ($processUser['name'] != $opt['cron']['username']) {
+
+if ($processUser['name'] !== $opt['cron']['username']) {
     die(
         "ERROR: runcron must be run by '" . $opt['cron']['username']
         . "' but was called by '" . $processUser['name'] . "'\n" .
@@ -43,7 +43,7 @@ if ($processSync->enter()) {
     $modules_dir = __DIR__ . '/../../util2/cron/modules/';
     $param = count($argv) > 1 ? $argv[1] : '';
 
-    if ($param != '' && substr($param, 0, 1) != '-' && !strstr('/', $param)) {
+    if ($param !== '' && substr($param, 0, 1) !== '-' && !strstr('/', $param)) {
         // run one job manually for debugging purpose
         $ignore_interval = true;
         require $modules_dir . $argv[1] . '.class.php';
@@ -80,7 +80,8 @@ function checkJob(&$job)
         $job->name,
         $max_last_run
     );
-    if ($count != 1) {
+
+    if ($count !== '1') {
         $job->run();
         sqll(
             "INSERT INTO `sys_cron` (`name`, `last_run`)

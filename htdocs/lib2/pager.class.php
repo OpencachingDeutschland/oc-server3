@@ -2,7 +2,6 @@
 /***************************************************************************
  *  For license information see doc/license.txt
  *
- *
  *  Set template variables for displaying a page browser control.
  *  Output is formatted by templates2/<style>/res_pager.tpl.
  ***************************************************************************/
@@ -15,7 +14,6 @@ class pager
     private $link_url;
     private $min_pages_shown;
     private $max_pages_shown;
-
 
     /**
      * pager constructor.
@@ -38,7 +36,6 @@ class pager
         }
         $this->max_pages_shown = $max_pages_shown;
     }
-
 
     /**
      * @param $current_page
@@ -97,7 +94,6 @@ class pager
         }
     }
 
-
     /**
      * @param $current_offset
      * @param $total_items
@@ -111,7 +107,6 @@ class pager
             $page_size
         );
     }
-
 
     /**
      * @param $page

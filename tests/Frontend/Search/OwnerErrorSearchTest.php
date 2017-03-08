@@ -32,7 +32,7 @@ class OwnerErrorSearchTest extends AbstractFrontendTest
         $searchResult = $page->find('css', 'td.searcherror');
         if ($searchTitle !== null && $searchResult !== null) {
             self::assertContains('0 caches matched', $searchTitle->getText());
-//            self::assertContains('The user abecd doesn\'t exsist.', $searchResult->getText());
+//            self::assertContains('The user abecd doesn\'t exist.', $searchResult->getText());
         } else {
             self::fail(__METHOD__ . ' failed');
         }

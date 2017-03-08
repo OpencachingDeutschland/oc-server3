@@ -10,18 +10,19 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Removed
 
-## unreleased [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
+## [3.1.2] - 2017-02-06 [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
 
 ### Added
 * user search [#1015](http://redmine.opencaching.de/issues/1015)
-* recommendation star [#1013](http://redmine.opencaching.de/issues/1013)
-* hidden caches [#1001](http://redmine.opencaching.de/issues/1001)
 * adding psh.phar
 * adding more UnitTests
+* travis ci integration completed 
 
 ### Changed
 * fix login issue with lib and lib2 components
 * code style improvements based on scrutinizer patches
+* recommendation star [#1013](http://redmine.opencaching.de/issues/1013)
+* hidden caches [#1001](http://redmine.opencaching.de/issues/1001)
 * fixing language links [#1022](http://redmine.opencaching.de/issues/1022)
 * fixing language switch [#995](http://redmine.opencaching.de/issues/995)
 

@@ -15,7 +15,7 @@ class ProcessSyncTest extends AbstractModuleTest
     /**
      * @var string
      */
-    private $pidFIlePath = __DIR__ . '/../../../../htdocs/cache2/';
+    private $pidFIlePath = __DIR__ . '/../../../../htdocs/var/cache2/';
 
     /**
      * @var ProcessSync

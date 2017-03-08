@@ -22,7 +22,7 @@ class ProcessSync
      */
     public function __construct($name)
     {
-        $this->pidFilePath = __DIR__ . '/../../../cache2/' . $name . '.pid';
+        $this->pidFilePath = __DIR__ . '/../../../var/cache2/' . $name . '.pid';
     }
 
 

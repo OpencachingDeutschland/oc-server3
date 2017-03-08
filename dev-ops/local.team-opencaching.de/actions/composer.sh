@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-cd htdocs && composer install --optimize-autoloader && cd ..
+cd htdocs && sudo -u apache composer install --optimize-autoloader

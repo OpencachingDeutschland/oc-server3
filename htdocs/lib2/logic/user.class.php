@@ -7,6 +7,8 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
+use OcLegacy\Util\PasswordCrypt;
+
 require_once __DIR__ . '/cracklib.inc.php';
 require_once __DIR__ . '/../translate.class.php';
 
@@ -203,7 +205,7 @@ class user
             return false;
         }
 
-        $encryptedPassword = crypt::encryptPassword($password);
+        $encryptedPassword = PasswordCrypt::encryptPassword($password);
 
         return $this->reUser->setValue('password', $encryptedPassword);
     }
@@ -1508,7 +1510,7 @@ class user
             serialize($backup)
         );
 
-        sql("set @allowdelete=1");
+        sql('SET @allowdelete=1');
         sql("DELETE FROM `user` WHERE `user_id`='&1'", $this->nUserId);
         // all data in depending tables is cleared via trigger
 
@@ -1518,10 +1520,10 @@ class user
     }
 
     // email bounce processing
-    public function addEmailProblem($licensemail = false)
+    public function addEmailProblem($licenseEmail = false)
     {
         // mailing_problems is a bit-flag field to remember nondelivered, important mailings
-        if ($licensemail) {
+        if ($licenseEmail) {
             if (!$this->reUser->setValue('mailing_problems', $this->reUser->getValue('mailing_problems') | 1)) {
                 return false;
             }
@@ -1576,10 +1578,9 @@ class user
     {
         // get number of cache ratings for this user
         return sql_value(
-            "
-                            SELECT COUNT(`user_id`)
-                            FROM `cache_rating`
-                            WHERE `user_id`='&1'",
+            "SELECT COUNT(`user_id`)
+             FROM `cache_rating`
+             WHERE `user_id`='&1'",
             0,
             $this->getUserId()
         );
@@ -1602,13 +1603,14 @@ class user
     public function foundsUntilNextRating()
     {
         global $opt;
+        $rating = $opt['logic']['rating'];
 
-        return (int) ($opt['logic']['rating']['percentageOfFounds'] - ($this->getStatFound() % $opt['logic']['rating']['percentageOfFounds']));
+        return (int) ($rating['percentageOfFounds'] - ($this->getStatFound() % $rating['percentageOfFounds']));
     }
 
     public function showStatFounds()
     {
-        // wether to show the number of founds on log page
+        // whether to show the number of founds on log page
         // TODO: make customisable in user profile, see #241
         return false;
     }
@@ -1654,11 +1656,9 @@ class user
                 $total += $r['count'];
             }
             sql_free_result($rs);
-
+            $locale = $opt['locale'];
             if ($total >= 3 && $first['count'] / $total >= 0.65) {
-                if (isset($opt['locale'][$first['language']])
-                    && $opt['locale'][$first['language']]['mostly_translated']
-                ) {
+                if (isset($locale[$first['language']]) && $locale[$first['language']]['mostly_translated']) {
                     $language = $first['language'];
                 }
             }

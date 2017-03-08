@@ -1,42 +1,39 @@
 <?php
+
 /***************************************************************************
  *  For license information see doc/license.txt
- *
- *
  *  summarize methods to get new events, caches, ratings, etc.
- * @todo check unused functions if the are really unused remove them
  ***************************************************************************/
-
 class getNew
 {
-    // class variables
     private $userCountry;
 
-    // getter/setter
+    /**
+     * @return mixed
+     */
     public function get_userCountry()
     {
         return $this->userCountry;
     }
 
+    /**
+     * @param $userCountry
+     */
     public function set_userCountry($userCountry)
     {
         $this->userCountry = $userCountry;
     }
-
 
     /**
      * constructor
      * creates the object
      *
      * @param string $userCountry country of the loggedin user as parameter for the sql statements
-     *
      */
     public function __construct($userCountry)
     {
-        // set userCountry
         $this->set_userCountry($userCountry);
     }
-
 
     /**
      * rsForSmarty creates the result from database to use with smarty assign-rs method
@@ -44,23 +41,22 @@ class getNew
      *
      * @param string $type type of the "new"-information, i.e. cache, event, rating, etc
      * @param array $args numeric array containing the parameter for "sql_slave"
-     *
      * @return object mysql result used by smarty assign_rs
      */
     public function rsForSmarty($type, $args = null)
     {
-        // check type
-        if (method_exists($this, strtolower($type) . 'Rs')) {
-            return call_user_func(
-                [
-                    $this,
-                    $type . 'Rs'
-                ],
-                $args
-            );
+        switch ($type) {
+            case 'cache':
+                return $this->cacheRs($args);
+                break;
+            case 'event':
+                return $this->eventRs($args);
+                break;
+            case 'rating':
+                return $this->ratingRs($args);
+                break;
         }
     }
-
 
     /**
      * feedForSmarty creates a HTML string to use with smarty assign method
@@ -70,129 +66,130 @@ class getNew
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param boolean $includetext ???following??? add table-tag?
-     *
+     * @param null $includeText
      * @return string HTML string used for smarty assign method
+     * @internal param bool $includetext ???following??? add table-tag?
      */
-    public function feedForSmarty($type, $items = null, $url = null, $timeout = null, $includetext = null)
+    public function feedForSmarty($type, $items = null, $url = null, $timeout = null, $includeText = null)
     {
-        // check type
-        if (method_exists($this, strtolower($type) . 'Feed')) {
-            return call_user_func(
-                [
-                    $this,
-                    $type . 'Feed'
-                ],
-                $items,
-                $url,
-                $timeout,
-                $includetext
-            );
+        switch ($type) {
+            case 'forum':
+                return $this->forumFeed($items, $url, $timeout, $includeText);
+                break;
+            case 'blog':
+                return $this->blogFeed($items, $url, $timeout, $includeText);
+                break;
+            case 'wiki':
+                return $this->wikiFeed($items, $url, $timeout, $includeText);
+                break;
         }
     }
-
 
     /**
      * cacheRs executes the database statements for type "cache"
      *
      * @param array $args numeric array containing the parameter for "sql_slave"
-     *
      * @return object mysql result used by smarty assign_rs
      */
     private function cacheRs($args = null)
     {
-        // global
         global $opt;
 
-        // check $args and set defaults
-        if (is_null($args) || !is_array($args)) {
+        if ($args === null || !is_array($args)) {
             $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
-                10
+                10,
             ];
         }
 
-        // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-                                    `user`.`username` `username`,
-                                    `caches`.`cache_id` `cache_id`,
-                                    `caches`.`name` `name`,
-                                    `caches`.`date_created` `date_created`,
-                                    `caches`.`type`,
-                                    `caches`.`longitude` `longitude`,
-                                    `caches`.`latitude` `latitude`,
-                                    IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-                                    IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-                                    `ca`.`attrib_id` IS NOT NULL AS `oconly`
-                                FROM `caches`
-                                    INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-                                    LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-                                    LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-                                    LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-                                    LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-                                WHERE `caches`.`country`='&1' AND
-                                    `caches`.`type` != 6 AND
-                                    `caches`.`status` = 1
-                                ORDER BY `caches`.`date_created` DESC
-                                LIMIT 0, &3",
+                `user`.`username` `username`,
+                `caches`.`cache_id` `cache_id`,
+                `caches`.`name` `name`,
+                `caches`.`date_created` `date_created`,
+                `caches`.`type`,
+                `caches`.`longitude` `longitude`,
+                `caches`.`latitude` `latitude`,
+                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+            FROM `caches`
+            INNER JOIN `user`
+              ON `user`.`user_id`=`caches`.`user_id`
+            LEFT JOIN `cache_location`
+              ON `caches`.`cache_id`=`cache_location`.`cache_id`
+            LEFT JOIN `countries`
+              ON `countries`.`short`=`caches`.`country`
+            LEFT JOIN `sys_trans_text`
+              ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+              AND `sys_trans_text`.`lang`='&2'
+            LEFT JOIN `caches_attributes` `ca`
+              ON `ca`.`cache_id`=`caches`.`cache_id`
+              AND `ca`.`attrib_id`=6
+            WHERE `caches`.`country`='&1'
+              AND `caches`.`type` != 6
+              AND `caches`.`status` = 1
+            ORDER BY `caches`.`date_created` DESC
+            LIMIT 0, &3",
             $args
         );
     }
-
 
     /**
      * eventRs executes the database statements for type "event"
      *
      * @param array $args numeric array containing the parameter for "sql_slave"
-     *
      * @return object mysql result used by smarty assign_rs
      */
     private function eventRs($args = null)
     {
-        // global
         global $opt;
 
-        // check $args and set defaults
-        if (is_null($args) || !is_array($args)) {
+        if ($args === null || !is_array($args)) {
             $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
-                10
+                10,
             ];
         }
 
-        // execute sql
         return sql_slave(
             "SELECT `user`.`user_id` `user_id`,
-                                `user`.`username` `username`,
-                                `caches`.`cache_id` `cache_id`,
-                                `caches`.`name` `name`,
-                                `caches`.`date_hidden`,
-                                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
-                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
-                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
-                                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
-                                `ca`.`attrib_id` IS NOT NULL AS `oconly`
-                            FROM `caches`
-                                INNER JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
-                                LEFT JOIN `cache_location` ON `caches`.`cache_id`=`cache_location`.`cache_id`
-                                LEFT JOIN `countries` ON `countries`.`short`=`caches`.`country`
-                                LEFT JOIN `sys_trans_text` ON `sys_trans_text`.`trans_id`=`countries`.`trans_id` AND `sys_trans_text`.`lang`='&2'
-                                LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-                            WHERE `caches`.`country`='&1' AND
-                                `caches`.`date_hidden` >= curdate() AND
-                                `caches`.`type` = 6 AND
-                                `caches`.`status`=1
-                            ORDER BY `date_hidden` ASC
-                            LIMIT 0, &3",
+                `user`.`username` `username`,
+                `caches`.`cache_id` `cache_id`,
+                `caches`.`name` `name`,
+                `caches`.`date_hidden`,
+                IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm2`,'') `adm2`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm3`,'') `adm3`,
+                IF(`caches`.`country`=`cache_location`.`code1`,`cache_location`.`adm4`,'') `adm4`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+            FROM `caches`
+            INNER JOIN `user`
+              ON `user`.`user_id`=`caches`.`user_id`
+            LEFT JOIN `cache_location`
+              ON `caches`.`cache_id`=`cache_location`.`cache_id`
+            LEFT JOIN `countries`
+              ON `countries`.`short`=`caches`.`country`
+            LEFT JOIN `sys_trans_text`
+              ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
+              AND `sys_trans_text`.`lang`='&2'
+            LEFT JOIN `caches_attributes` `ca`
+              ON `ca`.`cache_id`=`caches`.`cache_id`
+              AND `ca`.`attrib_id`=6
+            WHERE `caches`.`country`='&1' 
+              AND `caches`.`date_hidden` >= curdate()
+              AND `caches`.`type` = 6
+              AND `caches`.`status`=1
+            ORDER BY `date_hidden` ASC
+            LIMIT 0, &3",
             $args
         );
     }
-
 
     /**
      * ratingDays returns the number of days used for top rating calculation
@@ -201,14 +198,13 @@ class getNew
      */
     public function ratingDays()
     {
-        // global
         global $opt;
 
-        // Calculate days dependend on country selection.
+        // Calculate days depending on country selection.
         // Todo: make default country configurable and use this also for
         // "except of [Germany]" new caches and logs lists
 
-        if ($this->get_userCountry() == 'DE') {
+        if ($this->get_userCountry() === 'DE') {
             return $opt['logic']['rating']['topdays_mainCountry'];
         } else {
             return $opt['logic']['rating']['topdays_otherCountry'];
@@ -219,21 +215,19 @@ class getNew
      * ratingRs executes the database statements for type "rating"
      *
      * @param array $args numeric array containing the parameter for "sql_slave"
-     *
      * @return object mysql result used by smarty assign_rs
      */
     private function ratingRs($args = null)
     {
-        // global
         global $opt;
 
         // check $args and set defaults
-        if (is_null($args) || !is_array($args)) {
+        if ($args === null || !is_array($args)) {
             $args = [
                 $this->get_userCountry(),
                 $opt['template']['locale'],
                 10,
-                $this->ratingDays()
+                $this->ratingDays(),
             ];
         }
 
@@ -282,37 +276,31 @@ class getNew
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param boolean $includetext ???following??? add table-tag?
-     *
+     * @param boolean $includeText ???following??? add table-tag?
      * @return string HTML string used for smarty assign method
      */
-    private function blogFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    private function blogFeed($items = null, $url = null, $timeout = null, $includeText = null)
     {
-        // global
         global $opt;
 
-        // check $items and set defaults
-        if (is_null($items) || !is_numeric($items)) {
+        if (!is_numeric($items) || $items === null) {
             $items = $opt['news']['count'];
         }
 
-        // check $url and set defaults
-        if (is_null($url) || !is_string($url)) {
+        if ($url === null || !is_string($url)) {
             $url = $opt['news']['include'];
         }
-        if (is_null($timeout) || !is_numeric($timeout)) {
+
+        if ($timeout === null || !is_numeric($timeout)) {
             $timeout = $opt['news']['timeout'];
         }
 
-        // check $includetext and set defaults
-        if (is_null($includetext) || !is_bool($includetext)) {
-            $includetext = false;
+        if ($includeText === null || !is_bool($includeText)) {
+            $includeText = false;
         }
 
-        // execute RSSParser
-        return RSSParser::parse($items, $url, $timeout, $includetext);
+        return RSSParser::parse($items, $url, $timeout, $includeText);
     }
-
 
     /**
      * forumFeed executes the RSSParser for type "forum"
@@ -320,72 +308,61 @@ class getNew
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param boolean $includetext ???following??? add table-tag?
-     *
+     * @param boolean $includeText ???following??? add table-tag?
      * @return string HTML string used for smarty assign method
      */
-    private function forumFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    private function forumFeed($items = null, $url = null, $timeout = null, $includeText = null)
     {
-        // global
         global $opt;
 
-        // check $items and set defaults
-        if (is_null($items) || !is_numeric($items)) {
+        if (!is_numeric($items) || $items === null) {
             $items = $opt['forum']['count'];
         }
 
-        // check $url and set defaults
-        if (is_null($url) || !is_string($url)) {
+        if ($url === null || !is_string($url)) {
             $url = $opt['forum']['url'];
         }
-        if (is_null($timeout) || !is_numeric($timeout)) {
+        if ($timeout === null || !is_numeric($timeout)) {
             $timeout = $opt['forum']['timeout'];
         }
 
-        // check $includetext and set defaults
-        if (is_null($includetext) || !is_bool($includetext)) {
-            $includetext = false;
+        if ($includeText === null || !is_bool($includeText)) {
+            $includeText = false;
         }
 
-        // execute RSSParser
-        return RSSParser::parse($items, $url, $timeout, $includetext);
+        return RSSParser::parse($items, $url, $timeout, $includeText);
     }
-
 
     /**
      * wikiFeed executes the RSSParser for type "wiki"
      *
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
-     * @param boolean $includetext ???following??? add table-tag?
+     * @param boolean $includeText ???following??? add table-tag?
      * @param int $timeout maximum seconds to wait for the requested page
-     *
      * @return string HTML string used for smarty assign method
      */
-    private function wikiFeed($items = null, $url = null, $timeout = null, $includetext = null)
+    private function wikiFeed($items = null, $url = null, $timeout = null, $includeText = null)
     {
-        // global
         global $opt;
 
-        // check $items and set defaults
-        if (is_null($items) || !is_numeric($items)) {
+        if (!is_numeric($items) || $items === null) {
             $items = $opt['wikinews']['count'];
         }
 
-        // check $url and set defaults
-        if (is_null($url) || !is_string($url)) {
+        if (!is_string($url) || $url === null) {
             $url = $opt['wikinews']['url'];
         }
-        if (is_null($timeout) || !is_numeric($timeout)) {
+
+        if ($timeout === null || !is_numeric($timeout)) {
             $timeout = $opt['wikinews']['timeout'];
         }
 
-        // check $includetext and set defaults
-        if (is_null($includetext) || !is_bool($includetext)) {
-            $includetext = false;
+        if ($includeText === null || !is_bool($includeText)) {
+            $includeText = false;
         }
 
         // execute RSSParser
-        return RSSParser::parse($items, $url, $timeout, $includetext);
+        return RSSParser::parse($items, $url, $timeout, $includeText);
     }
 }

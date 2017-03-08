@@ -2255,7 +2255,7 @@ sql_dropTrigger('sysTransBeforeInsert');
 sql(
     "CREATE TRIGGER `sysTransBeforeInsert` BEFORE INSERT ON `sys_trans`
      FOR EACH ROW BEGIN
-        IF NEW.`last_modified` < '2000' THEN
+        IF NEW.`last_modified` < '2000-01-01 00:00:00' THEN
             SET NEW.`last_modified`=NOW();
         END IF;
      END;"
@@ -2273,7 +2273,7 @@ sql_dropTrigger('sysTransTextBeforeInsert');
 sql(
     "CREATE TRIGGER `sysTransTextBeforeInsert` BEFORE INSERT ON `sys_trans_text`
      FOR EACH ROW BEGIN
-        IF NEW.`last_modified` < '2000' THEN
+        IF NEW.`last_modified` < '2000-01-01 00:00:00' THEN
             SET NEW.`last_modified`=NOW();
         END IF;
      END;"

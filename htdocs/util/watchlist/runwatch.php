@@ -40,19 +40,12 @@ if (!function_exists('get_logtype_name')) {
     }
 }
 
-/* begin with some constants */
-
 $sDateformat = 'Y-m-d H:i:s';
-
-/* end with some constants */
-
-/* begin db connect */
 db_connect();
 if ($dblink === false) {
     echo 'Unable to connect to database';
     exit;
 }
-/* end db connect */
 
 /* begin owner notifies */
 $rsNewLogs = sql(
@@ -112,7 +105,8 @@ while ($rcw = mysql_fetch_assoc($rscw)) {
     // See also stored procedure sp_notify_new_cache().
     // See http://forum.opencaching.de/index.php?topic=3123.0 on AOL.
     if (sqlValue(
-        "SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,`first_email_problem`)
+        "SELECT `email_problems` = 0 OR DATEDIFF(NOW(),`last_email_problem`) > 1+DATEDIFF(`last_email_problem`,
+                `first_email_problem`)
          FROM `user` WHERE `user_id`='" . sql_escape($rcw['user_id']) . "'",
         1
     )) {

@@ -50,8 +50,8 @@ class OcSmarty extends Smarty
 
         // configuration
         $this->template_dir = $opt['stylepath'];
-        $this->compile_dir = __DIR__ . '/../cache2/smarty/compiled/';
-        $this->cache_dir = __DIR__ . '/../cache2/smarty/cache/';
+        $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
+        $this->cache_dir = __DIR__ . '/../var/cache2/smarty/cache/';
         $this->plugins_dir = [
             'plugins',
             __DIR__ . '/../src/Oc/SmartyPlugins'
@@ -564,14 +564,14 @@ class OcSmarty extends Smarty
             header('Content-type: text/html; charset=utf-8');
 
             // HTTP/1.1
-            header("Cache-Control: no-store, no-cache, must-revalidate");
-            header("Cache-Control: post-check=0, pre-check=0", false);
+            header('Cache-Control: no-store, no-cache, must-revalidate');
+            header('Cache-Control: post-check=0, pre-check=0', false);
             // HTTP/1.0
-            header("Pragma: no-cache");
+            header('Pragma: no-cache');
             // Date in the past
-            header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
             // always modified
-            header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 
             // set the cookie
             $cookie->header();

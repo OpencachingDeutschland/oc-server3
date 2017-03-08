@@ -60,13 +60,6 @@ load_domain_settings();
 // load HTML specific includes
 $cookie = new \Oc\Session\SessionDataCookie();
 
-//site in service?
-if ($site_in_service == false) {
-    header('Content-type: text/html; charset=utf-8');
-    $page_content = read_file(__DIR__ . '/../html/outofservice.tpl.php');
-    die($page_content);
-}
-
 //by default, use start template
 if (!isset($tplname)) {
     $tplname = 'start';
@@ -599,7 +592,7 @@ function load_gettext()
     }
     $opt['template']['locale'] = $locale;
 
-    bindtextdomain('messages', __DIR__ . '/../cache2/translate');
+    bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     set_php_locale();
     textdomain('messages');
 }

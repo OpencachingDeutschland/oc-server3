@@ -2,9 +2,7 @@
 /****************************************************************************
  * For license information see doc/license.txt
  *
- *
  * HTML search output
- * (Used by Ocprop)
  ****************************************************************************/
 
 $search_output_file_download = false;
@@ -25,12 +23,11 @@ $sAddJoin .= ' INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
                     LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
                           AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
 
-
 function search_output()
 {
     global $opt, $tpl, $login;
     global $enable_mapdisplay;
-    global $called_by_search, $called_by_profile_query, $options, $lat_rad, $lon_rad, $distance_unit;
+    global $called_by_search, $options, $lat_rad, $lon_rad, $distance_unit;
     global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints, $user;
 
     $tpl->name = 'search.result.caches';
@@ -41,7 +38,7 @@ function search_output()
 
     // run SQL query
     sql_enable_foundrows();
-    $rs_caches = sql_slave("SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS " . $sql);
+    $rs_caches = sql_slave('SELECT SQL_BUFFER_RESULT SQL_CALC_FOUND_ROWS ' . $sql);
     $resultcount = sql_value_slave('SELECT FOUND_ROWS()', 0);
     sql_foundrows_done();
     $tpl->assign('results_count', $resultcount);
@@ -88,7 +85,8 @@ function search_output()
 
         // decide if the cache is new
         $dDiff = dateDiff('d', $rCache['date_created'], date('Y-m-d'));
-        $rCache['isnew'] = ($dDiff <= NEWCACHES_DAYS);
+
+        $rCache['isnew'] = ($dDiff <= NEWCACHES_DAYS && (int) $rCache['type'] !== 6);
 
         // get last logs
         if ($options['sort'] != 'bymylastlog' || !$login->logged_in()) {
@@ -100,9 +98,9 @@ function search_output()
                 SELECT `cache_logs`.`id`, `cache_logs`.`type`, `cache_logs`.`date`, `log_types`.`icon_small`
                 FROM `cache_logs`, `log_types`
                 WHERE `cache_logs`.`cache_id`='" . sql_escape($rCache['cache_id']) . "'
-                      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . "
+                      AND `log_types`.`id`=`cache_logs`.`type`" . $ownlogs . '
                 ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
-                LIMIT 6";
+                LIMIT 6';
         $rs = sql_slave($sql);
         $rCache['logs'] = sql_fetch_assoc_table($rs);
         $rCache['firstlog'] = array_shift($rCache['logs']);
@@ -224,43 +222,42 @@ function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
 
     $dateTimeBegin = strtotime($dateTimeBegin);
     if ($dateTimeBegin === - 1) {
-        return ("..begin date Invalid");
+        return '..begin date Invalid';
     }
 
     $dateTimeEnd = strtotime($dateTimeEnd);
     if ($dateTimeEnd === - 1) {
-        return ("..end date Invalid");
+        return '..end date Invalid';
     }
 
     $dif = $dateTimeEnd - $dateTimeBegin;
 
     switch ($interval) {
-        case "s"://seconds
-            return ($dif);
+        case 's'://seconds
+            return $dif;
 
-        case "n"://minutes
-            return (floor($dif / 60)); //60s=1m
+        case 'n'://minutes
+            return floor($dif / 60); //60s=1m
 
-        case "h"://hours
-            return (floor($dif / 3600)); //3600s=1h
+        case 'h'://hours
+            return floor($dif / 3600); //3600s=1h
 
-        case "d"://days
-            return (floor($dif / 86400)); //86400s=1d
+        case 'd'://days
+            return floor($dif / 86400); //86400s=1d
 
-        case "ww"://Week
-            return (floor($dif / 604800)); //604800s=1week=1semana
+        case 'ww'://Week
+            return floor($dif / 604800); //604800s=1week=1semana
 
         case "m": //similar result "m" dateDiff Microsoft
-            $monthBegin = (date("Y", $dateTimeBegin) * 12) + date("n", $dateTimeBegin);
-            $monthEnd = (date("Y", $dateTimeEnd) * 12) + date("n", $dateTimeEnd);
-            $monthDiff = $monthEnd - $monthBegin;
+            $monthBegin = (date('Y', $dateTimeBegin) * 12) + date('n', $dateTimeBegin);
+            $monthEnd = (date('Y', $dateTimeEnd) * 12) + date('n', $dateTimeEnd);
 
-            return ($monthDiff);
+            return $monthEnd - $monthBegin;
 
-        case "yyyy": //similar result "yyyy" dateDiff Microsoft
-            return (date("Y", $dateTimeEnd) - date("Y", $dateTimeBegin));
+        case 'yyyy': //similar result "yyyy" dateDiff Microsoft
+            return (date('Y', $dateTimeEnd) - date('Y', $dateTimeBegin));
 
         default:
-            return (floor($dif / 86400)); //86400s=1d
+            return floor($dif / 86400); //86400s=1d
     }
 }

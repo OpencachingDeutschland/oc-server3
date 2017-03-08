@@ -31,7 +31,7 @@ if (!$tpl->is_cached()) {
     // news entries
     $tpl->assign('news_onstart', $opt['news']['onstart']);
 
-    if ($opt['news']['include'] == '') {
+    if ($opt['news']['include'] === '') {
         $news = [];
         $rs = sql_slave(
             'SELECT `news`.`date_created` `date`, `news`.`content` `content`, `news_topics`.`name` `topic`
@@ -55,7 +55,7 @@ if (!$tpl->is_cached()) {
         $tpl->assign('extern_news', true);
     }
 
-    if ($opt['forum']['url'] != '') {
+    if ($opt['forum']['url'] !== '') {
         /*
          * changed by bohrsty to add latest forum-entries using RSS-feed
          * requires $opt['forum']['count'] in settings for number of latest forum-posts

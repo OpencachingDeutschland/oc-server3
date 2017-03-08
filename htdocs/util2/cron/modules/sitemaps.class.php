@@ -7,6 +7,8 @@
  *  And send ping to search engines
  ***************************************************************************/
 
+use OcLegacy\Util\SiteMapXml;
+
 checkJob(new SiteMaps());
 
 class SiteMaps
@@ -15,7 +17,7 @@ class SiteMaps
     public $interval = 604800; // once a week
 
     /**
-     * @var sitemapxml
+     * @var SiteMapXml
      */
     public $oSiteMapXml;
 
@@ -40,7 +42,7 @@ class SiteMaps
 
             $this->oSiteMapXml->close();
 
-            if ($opt['cron']['sitemaps']['submit'] == true) {
+            if ($opt['cron']['sitemaps']['submit'] === true) {
                 $this->pingSearchEngines();
             }
         }

@@ -18,16 +18,13 @@ require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 $webCache = new Oc\Cache\WebCache();
 
 if ($argc !== 2 || $argv[1] !== 'pass2') {
-    // stop apache
-    system($opt['httpd']['stop']);
-
-    echo "Delete cached files\n";
+    echo "delete cached files\n";
     $webCache->clearCache();
 
     echo "clearing symfony caches\n";
     system('php ' . __DIR__ . '/../htdocs/bin/console cache:clear');
 
-    echo "Create translation files for gettext()\n";
+    echo "create translation files for gettext()\n";
     $translationHandler->createMessageFiles();
 
     // After recreation of the message files (.mo files), the translation
@@ -36,16 +33,13 @@ if ($argc !== 2 || $argv[1] !== 'pass2') {
 
     system('php ' . __DIR__ . '/clear-webcache.php pass2');
 } else {
-    echo "Create menu cache file\n";
+    echo "create menu cache file\n";
     $webCache->createMenuCache();
 
-    echo "Create label cache file\n";
+    echo "create label cache file\n";
     $webCache->createLabelCache();
 
     echo "Precompiling template files\n";
 
-    $webCache->preCompileAllTemplates(); #TODO We need to fix this in DEV Environment, to prevent problems with chmod
-
-    // start apache
-    system($opt['httpd']['start']);
+    $webCache->preCompileAllTemplates(); // TODO We need to fix this in DEV Environment, to prevent problems with chmod
 }

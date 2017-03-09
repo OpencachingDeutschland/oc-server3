@@ -4,6 +4,6 @@ git fetch origin
 
 I: sh bin/filemodes
 
-git merge origin/next
+git merge origin/stable
 
 I: sh bin/filemodes

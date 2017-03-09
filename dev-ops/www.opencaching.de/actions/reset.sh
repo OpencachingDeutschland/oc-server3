@@ -3,7 +3,7 @@
 INCLUDE: ./activate-maintenance.sh
 
 git fetch origin
-git reset --hard origin/next
+git reset --hard origin/stable
 INCLUDE: .getlocal.sh
 
 bin/filemodes

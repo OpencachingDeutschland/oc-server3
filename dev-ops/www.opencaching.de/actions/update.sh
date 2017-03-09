@@ -2,7 +2,7 @@
 
 INCLUDE: ./activate-maintenance.sh
 
-sh ./dev-ops/test.opencaching.de/actions/.check-git-status.sh
+sh ./dev-ops/www.opencaching.de/actions/.check-git-status.sh
 
 INCLUDE: .git-checkout.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/composer.sh
@@ -12,7 +12,5 @@ INCLUDE: ./../../local.team-opencaching.de/actions/import-sql-static.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/sf-migrations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/import-translations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/okapi-update.sh
-
-php ./bin/clear-webcache.php
 
 INCLUDE: ./deactivate-maintenance.sh

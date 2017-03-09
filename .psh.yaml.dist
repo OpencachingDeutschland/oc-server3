@@ -40,3 +40,6 @@ environments:
   test:
     paths:
       - "dev-ops/test.opencaching.de/actions"
+  live:
+    paths:
+      - "dev-ops/www.opencaching.de/actions"

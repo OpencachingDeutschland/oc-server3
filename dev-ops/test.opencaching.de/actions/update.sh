@@ -13,4 +13,6 @@ INCLUDE: ./../../local.team-opencaching.de/actions/sf-migrations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/import-translations.sh
 INCLUDE: ./../../local.team-opencaching.de/actions/okapi-update.sh
 
+php ./bin/clear-webcache.php
+
 INCLUDE: ./deactivate-maintenance.sh

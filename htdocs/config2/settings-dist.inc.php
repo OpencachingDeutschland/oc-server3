@@ -546,12 +546,6 @@ $opt['ocnd']['debugtcp'] = true;
 // do not check openssl version (version check is available in php 5.2+)
 $opt['ocnd']['noopensslcheck'] = false;
 
-/* commands to start and stop apache process
- * required to clear the webcache
- */
-$opt['httpd']['stop'] = 'service httpd stop';
-$opt['httpd']['start'] = 'service httpd start';
-
 /* owner and group of files created by apache daemon
  * (used to change ownership in shell scripts)
  */

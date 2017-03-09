@@ -5,11 +5,11 @@
 # The updated files will be inaccessible until the 'filemodes' script
 # has fixed access rights.
 
-touch ./htdocs/maintenance.enable
+INCLUDE: ./activate-maintenance.sh
 
 sh ./dev-ops/test.opencaching.de/actions/.check-git-status.sh
 
 git pull
 I: sh bin/filemodes
 
-rm ./htdocs/maintenance.enable
+INCLUDE: ./deactivate-maintenance.sh

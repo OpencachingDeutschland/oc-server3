@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-systemctl stop httpd.service
+INCLUDE: ./activate-maintenance.sh
 
 git fetch origin
 git reset --hard origin/next
 INCLUDE: .getlocal.sh
 
-# bin/filemodes
+bin/filemodes
 
-systemctl start httpd.service
+INCLUDE: ./deactivate-maintenance.sh

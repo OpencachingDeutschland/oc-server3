@@ -6,9 +6,9 @@
  *  Delete old log entries with personal user data for data privacy
  ***************************************************************************/
 
-checkJob(new purge_logs());
+checkJob(new PurgeLogs());
 
-class purge_logs
+class PurgeLogs
 {
     public $name = 'purge_logs';
     public $interval = 86400; // daily
@@ -19,18 +19,18 @@ class purge_logs
 
         if ($opt['logic']['logs']['purge_email'] > 0) {
             sql(
-                "DELETE FROM `email_user` WHERE date_created < NOW() - INTERVAL &1 DAY",
+                'DELETE FROM `email_user` WHERE date_created < NOW() - INTERVAL &1 DAY',
                 $opt['logic']['logs']['purge_email']
             );
             sql(
-                "DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)",
+                'DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (1,2,3,8)',
                 $opt['logic']['logs']['purge_email']
             );
         }
 
         if ($opt['logic']['logs']['purge_userdata'] > 0) {
             sql(
-                "DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)",
+                "DELETE FROM `logentries` WHERE date_created < NOW() - `INTERVAL` &1 DAY AND eventid IN (6,7)",
                 $opt['logic']['logs']['purge_userdata']
             );
         }

@@ -7,9 +7,9 @@
  *  system failures.
  ***************************************************************************/
 
-checkJob(new orphan_cleanup());
+checkJob(new OrphanCleanup());
 
-class orphan_cleanup
+class OrphanCleanup
 {
     public $name = 'orphan_cleanup';
     public $interval = 86400; // once per day
@@ -24,15 +24,17 @@ class orphan_cleanup
              LEFT JOIN `xmlsession` ON `xmlsession`.`id`=`xmlsession_data`.`session_id`
              WHERE `xmlsession`.`id` IS NULL'
         );
+
         $count = sql_value(
             'SELECT COUNT(*) FROM `xmlsession_data`
              WHERE `session_id` IN (SELECT `session_id` FROM &tmpsessiondata)',
             0
         );
+
         if ($count) {
             sql(
-                "DELETE FROM `xmlsession_data`
-                 WHERE `session_id` IN (SELECT `session_id` FROM &tmpsessiondata)"
+                'DELETE FROM `xmlsession_data`
+                 WHERE `session_id` IN (SELECT `session_id` FROM &tmpsessiondata)'
             );
             echo 'orphan_cleanup: dropped ' . $count . " record(s) from xmlsession_data\n";
         }
@@ -46,15 +48,17 @@ class orphan_cleanup
              LEFT JOIN `map2_result` ON `map2_result`.`result_id`=`map2_data`.`result_id`
              WHERE `map2_result`.`result_id` IS NULL'
         );
+
         $count = sql_value(
-            "SELECT COUNT(*) FROM `map2_data`
-             WHERE `result_id` IN (SELECT `result_id` FROM &tmpsessiondata)",
+            'SELECT COUNT(*) FROM `map2_data`
+             WHERE `result_id` IN (SELECT `result_id` FROM &tmpsessiondata)',
             0
         );
+
         if ($count) {
             sql(
-                "DELETE FROM `map2_data`
-                 WHERE `result_id` IN (SELECT `result_id` FROM &tmpsessiondata)"
+                'DELETE FROM `map2_data`
+                 WHERE `result_id` IN (SELECT `result_id` FROM &tmpsessiondata)'
             );
             echo 'orphan_cleanup: dropped ' . $count . " record(s) from map2_data\n";
         }

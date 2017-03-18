@@ -6,9 +6,9 @@
  *  Replicate database contents between different OC installations/nodes
  ***************************************************************************/
 
-checkJob(new replicate());
+checkJob(new Replicate());
 
-class replicate
+class Replicate
 {
     public $name = 'replicate';
     public $interval = 3600;
@@ -24,8 +24,8 @@ class replicate
             $hidden_caches = file_get_contents($opt['cron']['replicate']['delete_hidden_caches']['url']);
             $hc = explode("\n", trim($hidden_caches));
             $hc_imploded_and_escaped = "'" . implode("','", array_map('sql_escape', $hc)) . "'";
-            sql("SET @allowdelete = 1");
-            sql("DELETE FROM `caches` WHERE `wp_oc` IN (" . $hc_imploded_and_escaped . ")");
+            sql('SET @allowdelete = 1');
+            sql('DELETE FROM `caches` WHERE `wp_oc` IN (' . $hc_imploded_and_escaped . ')');
             // All dependent data in other tables is deleted via trigger.
         }
     }

@@ -6,9 +6,9 @@
  *  See discussion in http://redmine.opencaching.de/issues/18.
  ***************************************************************************/
 
-checkJob(new geokrety());
+checkJob(new Geokrety());
 
-class geokrety
+class Geokrety
 {
     public $name = 'geokrety';
     public $interval = 900;
@@ -19,7 +19,7 @@ class geokrety
 
         if ($opt['cron']['geokrety']['run']) {
             $xmlfile = $this->loadXML();
-            if ($xmlfile == false) {
+            if ($xmlfile === false) {
                 return;
             }
 
@@ -45,18 +45,15 @@ class geokrety
 
         // Changed default-value for getSysConfig() from '2005-01-01 00:00:00' to 'NOW - 9d 12h'
         // to safely stay in api-limit, even when client and server are in different time zones.
-        $modifiedsince = strtotime(
+        $modifiedSince = strtotime(
             getSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], time() - 60 * 60 * 24 * 9.5))
         );
-        if (!@copy('https://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedsince - 1), $path)) {
+        if (!@copy('https://geokrety.org/export.php?modifiedsince=' . date('YmdHis', $modifiedSince - 1), $path)) {
             return false;
         }
 
         return $path;
     }
-
-    /* remove given file
-     */
 
     /**
      * @param string $file
@@ -65,9 +62,6 @@ class geokrety
     {
         @unlink($file);
     }
-
-    /* import the given XML file
-     */
 
     /**
      * @param string $file
@@ -95,16 +89,14 @@ class geokrety
             return;
         }
 
-        $startupdate = $xr->getAttribute('date');
-        if ($startupdate == '') {
+        $startUpdate = $xr->getAttribute('date');
+        if ($startUpdate === '') {
             echo 'error: Date attribute not valid, aborted' . "\n";
 
             return;
         }
-
-        while ($xr->read() && !($xr->name == 'geokret' || $xr->name == 'moves')) {
-            ;
-        }
+//      is probably noot needed
+//        while ($xr->read() && !($xr->name == 'geokret' || $xr->name == 'moves')) {}
 
         $nRecordsCount = 0;
         do {
@@ -125,7 +117,7 @@ class geokrety
 
         $xr->close();
 
-        setSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], strtotime($startupdate)));
+        setSysConfig('geokrety_lastupdate', date($opt['db']['dateformat'], strtotime($startUpdate)));
     }
 
     /**
@@ -137,27 +129,27 @@ class geokrety
 
         $id = $element->getAttribute('id');
 
-        $name = html_entity_decode($this->GetNodeValue($element, 'name'));
-        if ($name == '') {
+        $name = html_entity_decode($this->getNodeValue($element, 'name'));
+        if ($name === '') {
             return;
         }
 
-        $userid = $this->GetNodeAttribute($element, 'owner', 'id') + 0;
-        $username = $this->GetNodeValue($element, 'owner');
-        $this->checkUser($userid, $username);
+        $userId = $this->getNodeAttribute($element, 'owner', 'id') + 0;
+        $username = $this->getNodeValue($element, 'owner');
+        $this->checkUser($userId, $username);
 
-        $typeid = $this->GetNodeAttribute($element, 'type', 'id') + 0;
-        $typename = $this->GetNodeValue($element, 'type');
-        $this->checkGeoKretType($typeid, $typename);
+        $typeId = $this->getNodeAttribute($element, 'type', 'id') + 0;
+        $typename = $this->getNodeValue($element, 'type');
+        $this->checkGeoKretType($typeId, $typename);
 
-        $description = html_entity_decode($this->GetNodeValue($element, 'description'));
-        $datecreated = strtotime($this->GetNodeValue($element, 'datecreated'));
+        $description = html_entity_decode($this->getNodeValue($element, 'description'));
+        $dateCreated = strtotime($this->getNodeValue($element, 'datecreated'));
 
-        $distancetravelled = $this->GetNodeValue($element, 'distancetravelled') + 0;
-        $state = $this->GetNodeValue($element, 'state') + 0;
+        $distanceTravelled = $this->getNodeValue($element, 'distancetravelled') + 0;
+        $state = $this->getNodeValue($element, 'state') + 0;
 
-        $longitude = $this->GetNodeAttribute($element, 'position', 'longitude') + 0;
-        $latitude = $this->GetNodeAttribute($element, 'position', 'latitude') + 0;
+        $longitude = $this->getNodeAttribute($element, 'position', 'longitude') + 0;
+        $latitude = $this->getNodeAttribute($element, 'position', 'latitude') + 0;
 
         sql(
             "INSERT INTO `gk_item`
@@ -170,12 +162,12 @@ class geokrety
             $id,
             $name,
             $description,
-            $userid,
-            date($opt['db']['dateformat'], $datecreated),
-            $distancetravelled,
+            $userId,
+            date($opt['db']['dateformat'], $dateCreated),
+            $distanceTravelled,
             $latitude,
             $longitude,
-            $typeid,
+            $typeId,
             $state
         );
 
@@ -209,7 +201,6 @@ class geokrety
          */
     }
 
-
     /**
      * @param DOMNode $element
      */
@@ -219,24 +210,24 @@ class geokrety
 
         $id = $element->getAttribute('id') + 0;
 
-        $gkid = $this->GetNodeAttribute($element, 'geokret', 'id') + 0;
-        if (sql_value("SELECT COUNT(*) FROM `gk_item` WHERE `id`='&1'", 0, $gkid) == 0) {
+        $gkId = $this->getNodeAttribute($element, 'geokret', 'id') + 0;
+        if (sql_value("SELECT COUNT(*) FROM `gk_item` WHERE `id`='&1'", 0, $gkId) == 0) {
             return;
         }
 
-        $latitude = $this->GetNodeAttribute($element, 'position', 'latitude') + 0;
-        $longitude = $this->GetNodeAttribute($element, 'position', 'longitude') + 0;
+        $latitude = $this->getNodeAttribute($element, 'position', 'latitude') + 0;
+        $longitude = $this->getNodeAttribute($element, 'position', 'longitude') + 0;
 
-        $datelogged = strtotime($this->GetNodeAttribute($element, 'date', 'logged'));
-        $datemoved = strtotime($this->GetNodeAttribute($element, 'date', 'moved'));
-        $userid = $this->GetNodeAttribute($element, 'user', 'id') + 0;
-        $username = $this->GetNodeValue($element, 'user');
-        $this->checkUser($userid, $username);
+        $dateLogged = strtotime($this->getNodeAttribute($element, 'date', 'logged'));
+        $dateMoved = strtotime($this->getNodeAttribute($element, 'date', 'moved'));
+        $userId = $this->getNodeAttribute($element, 'user', 'id') + 0;
+        $username = $this->getNodeValue($element, 'user');
+        $this->checkUser($userId, $username);
 
-        $comment = html_entity_decode($this->GetNodeValue($element, 'comment'));
-        $logtypeid = $this->GetNodeAttribute($element, 'logtype', 'id') + 0;
-        $logtypename = $this->GetNodeValue($element, 'logtype');
-        $this->checkMoveType($logtypeid, $logtypename);
+        $comment = html_entity_decode($this->getNodeValue($element, 'comment'));
+        $logTypeId = $this->getNodeAttribute($element, 'logtype', 'id') + 0;
+        $logTypeName = $this->getNodeValue($element, 'logtype');
+        $this->checkMoveType($logTypeId, $logTypeName);
 
         sql(
             "INSERT INTO `gk_move`
@@ -246,14 +237,14 @@ class geokrety
                 `itemid`='&2', `latitude`='&3', `longitude`='&4', `datemoved`='&5',
                 `datelogged`='&6', `userid`='&7', `comment`='&8', `logtypeid`='&9'",
             $id,
-            $gkid,
+            $gkId,
             $latitude,
             $longitude,
-            date($opt['db']['dateformat'], $datemoved),
-            date($opt['db']['dateformat'], $datelogged),
-            $userid,
+            date($opt['db']['dateformat'], $dateMoved),
+            date($opt['db']['dateformat'], $dateLogged),
+            $userId,
             $comment,
-            $logtypeid
+            $logTypeId
         );
 
         sql("DELETE FROM `gk_move_waypoint` WHERE id='&1'", $id);
@@ -271,13 +262,13 @@ class geokrety
         }
 
         // update the current gk-waypoints based on the last move
-        sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkid);
+        sql("DELETE FROM `gk_item_waypoint` WHERE `id`='&1'", $gkId);
         $rs = sql(
             "
                 SELECT `id`,`logtypeid` FROM `gk_move`
                 WHERE `itemid`='&1' AND `logtypeid`!=2
                 ORDER BY `datemoved` DESC LIMIT 1",
-            $gkid
+            $gkId
         );
         $r = sql_fetch_assoc($rs);
         sql_free_result($rs);
@@ -292,17 +283,16 @@ class geokrety
                 SELECT '&1' AS `id`, `wp`
                 FROM `gk_move_waypoint`
                 WHERE `id`='&2' AND `wp`!=''",
-                $gkid,
+                $gkId,
                 $r['id']
-            ); // "late log" bugfix: replaced $id paramter by $r['id']
-        } else {
-            // do nothing
+            ); // "late log" bugfix: replaced $id parameter by $r['id']
         }
     }
 
 
     /**
      * @param integer $id
+     * @param $name
      */
     public function checkGeoKretType($id, $name)
     {
@@ -316,10 +306,11 @@ class geokrety
 
     /**
      * @param integer $id
+     * @param $name
      */
     public function checkUser($id, $name)
     {
-        if ($id == 0) {
+        if ($id === 0) {
             return;
         }
 
@@ -329,6 +320,7 @@ class geokrety
 
     /**
      * @param integer $id
+     * @param $name
      */
     public function checkMoveType($id, $name)
     {
@@ -341,15 +333,17 @@ class geokrety
 
 
     /**
+     * @param $domNode
      * @param string $element
+     * @return string
      */
-    public function GetNodeValue(&$domnode, $element)
+    public function getNodeValue(&$domNode, $element)
     {
-        $subnode = $domnode->getElementsByTagName($element);
-        if ($subnode->length < 1) {
+        $subNode = $domNode->getElementsByTagName($element);
+        if ($subNode->length < 1) {
             return '';
         } else {
-            return $subnode->item(0)->nodeValue;
+            return $subNode->item(0)->nodeValue;
         }
     }
 
@@ -359,13 +353,13 @@ class geokrety
      * @param string $attr
      * @return string
      */
-    public function GetNodeAttribute(&$domnode, $element, $attr)
+    public function getNodeAttribute(&$domNode, $element, $attr)
     {
-        $subnode = $domnode->getElementsByTagName($element);
-        if ($subnode->length < 1) {
+        $subNode = $domNode->getElementsByTagName($element);
+        if ($subNode->length < 1) {
             return '';
         } else {
-            return $subnode->item(0)->getAttribute($attr);
+            return $subNode->item(0)->getAttribute($attr);
         }
     }
 }

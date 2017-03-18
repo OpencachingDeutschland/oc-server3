@@ -6,9 +6,9 @@
  *  Automatic archiving of disabled caches
  ***************************************************************************/
 
-checkJob(new autoarchive());
+checkJob(new AutoArchive());
 
-class autoarchive
+class AutoArchive
 {
     public $name = 'autoarchive';
     public $interval = 43200; // twice per day
@@ -22,15 +22,15 @@ class autoarchive
             if (!$login->logged_in()) {
                 echo $this->name . ": not logged in / no system user configured\n";
             } elseif ($login->hasAdminPriv(ADMIN_USER)) {
-                $this->archive_disabled_caches();
-                $this->archive_events();
+                $this->archiveDisabledCaches();
+                $this->archiveEvents();
             } else {
                 echo $this->name . ": user '" . $opt['logic']['systemuser']['user'] . "' cannot maintain caches\n";
             }
         }
     }
 
-    public function archive_disabled_caches()
+    public function archiveDisabledCaches()
     {
         // Logging of status changes in cache_status_modified has started on June 1, 2013.
         // For archiving caches that were disabled earlier, we also check the listing
@@ -75,8 +75,7 @@ class autoarchive
                                 '',
                                 $rCache['cache_id']
                             ) <= $rCache['disable_date']
-                            &&
-                            sql_value(
+                            && sql_value(
                                 "SELECT `type` FROM `cache_logs`
                                  WHERE `cache_id`='&1'
                                  ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
@@ -89,7 +88,7 @@ class autoarchive
                 )
             ) {
                 $months = ($rCache['listing_age'] > 366 ? 12 : 6);
-                $this->archive_cache(
+                $this->archiveCache(
                     $rCache['cache_id'],
                     'This cache has been "temporarily unavailable" for more than %1 months now; ' .
                     'therefore it is being archived automatically. The owner may decide to ' .
@@ -108,7 +107,7 @@ class autoarchive
         sql_free_result($rs);
     }
 
-    public function archive_events()
+    public function archiveEvents()
     {
         // To prevent archiving events that were accidentally published with a wrong
         // event date - before the owner notices it - we also apply a limit of one month
@@ -122,7 +121,7 @@ class autoarchive
             LIMIT 1'
         );
         while ($rCache = sql_fetch_assoc($rs)) {
-            $this->archive_cache(
+            $this->archiveCache(
                 $rCache['cache_id'],
                 'This event took place more than five weeks ago; therefore it is ' .
                 'being archived automatically. The owner may re-enable the listing ' .
@@ -132,9 +131,9 @@ class autoarchive
         sql_free_result($rs);
     }
 
-    public function archive_cache($cache_id, $comment, $months = 0)
+    public function archiveCache($cache_id, $comment, $months = 0)
     {
-        global $opt, $login, $translate;
+        global $login, $translate;
 
         $log = cachelog::createNew($cache_id, $login->userid);
         if ($log === false) {

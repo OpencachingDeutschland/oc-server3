@@ -9,9 +9,9 @@
  *
  ***************************************************************************/
 
-checkJob(new cache_location());
+checkJob(new CacheLocation());
 
-class cache_location
+class CacheLocation
 {
     public $name = 'cache_location';
     public $interval = 0;
@@ -54,7 +54,7 @@ class cache_location
             }
             sql_free_result($rsLayers);
 
-            if ($sCode != '') {
+            if ($sCode !== '') {
                 $adm1 = null;
                 $code1 = null;
                 $adm2 = null;
@@ -68,38 +68,38 @@ class cache_location
                     $sCode = mb_substr($sCode, 0, 5);
                 }
 
-                if (mb_strlen($sCode) == 5) {
+                if (mb_strlen($sCode) === 5) {
                     $code4 = $sCode;
                     $adm4 = sql_value("SELECT `name` FROM `nuts_codes` WHERE `code`='&1'", null, $sCode);
                     $sCode = mb_substr($sCode, 0, 4);
                 }
 
-                if (mb_strlen($sCode) == 4) {
+                if (mb_strlen($sCode) === 4) {
                     $code3 = $sCode;
                     $adm3 = sql_value("SELECT `name` FROM `nuts_codes` WHERE `code`='&1'", null, $sCode);
                     $sCode = mb_substr($sCode, 0, 3);
                 }
 
-                if (mb_strlen($sCode) == 3) {
+                if (mb_strlen($sCode) === 3) {
                     $code2 = $sCode;
                     $adm2 = sql_value("SELECT `name` FROM `nuts_codes` WHERE `code`='&1'", null, $sCode);
                     $sCode = mb_substr($sCode, 0, 2);
                 }
 
-                if (mb_strlen($sCode) == 2) {
+                if (mb_strlen($sCode) === 2) {
                     $code1 = $sCode;
 
                     // try to get localised name first
                     $adm1 = sql_value(
                         "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
-                        FROM `countries`
-                        LEFT JOIN `sys_trans`
-                            ON `countries`.`trans_id`=`sys_trans`.`id`
-                            AND `countries`.`name`=`sys_trans`.`text`
-                        LEFT JOIN `sys_trans_text`
-                            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                            AND `sys_trans_text`.`lang`='&2'
-                        WHERE `countries`.`short`='&1'",
+                         FROM `countries`
+                         LEFT JOIN `sys_trans`
+                           ON `countries`.`trans_id`=`sys_trans`.`id`
+                           AND `countries`.`name`=`sys_trans`.`text`
+                         LEFT JOIN `sys_trans_text`
+                           ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                           AND `sys_trans_text`.`lang`='&2'
+                         WHERE `countries`.`short`='&1'",
                         null,
                         $sCode,
                         $opt['template']['default']['locale']
@@ -127,16 +127,16 @@ class cache_location
             } else {
                 $sCountry = sql_value(
                     "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
-                    FROM `caches`
-                    INNER JOIN `countries`
-                        ON `caches`.`country`=`countries`.`short`
-                    LEFT JOIN `sys_trans`
-                        ON `countries`.`trans_id`=`sys_trans`.`id`
-                        AND `countries`.`name`=`sys_trans`.`text`
-                    LEFT JOIN `sys_trans_text`
-                        ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                        AND `sys_trans_text`.`lang`='&2'
-                    WHERE `caches`.`cache_id`='&1'",
+                     FROM `caches`
+                     INNER JOIN `countries`
+                       ON `caches`.`country`=`countries`.`short`
+                     LEFT JOIN `sys_trans`
+                       ON `countries`.`trans_id`=`sys_trans`.`id`
+                       AND `countries`.`name`=`sys_trans`.`text`
+                     LEFT JOIN `sys_trans_text`
+                       ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
+                       AND `sys_trans_text`.`lang`='&2'
+                     WHERE `caches`.`cache_id`='&1'",
                     null,
                     $rCache['cache_id'],
                     $opt['template']['default']['locale']
@@ -149,7 +149,8 @@ class cache_location
                 sql(
                     "INSERT INTO `cache_location` (`cache_id`, `adm1`, `code1`)
                     VALUES ('&1', '&2', '&3')
-                    ON DUPLICATE KEY UPDATE `adm1`='&2', `adm2`=NULL, `adm3`=NULL, `adm4`=NULL, `code1`='&3', `code2`=NULL, `code3`=NULL, `code4`=NULL",
+                    ON DUPLICATE KEY UPDATE `adm1`='&2', `adm2`=NULL, `adm3`=NULL, `adm4`=NULL, 
+                                            `code1`='&3', `code2`=NULL, `code3`=NULL, `code4`=NULL",
                     $rCache['cache_id'],
                     $sCountry,
                     $sCode1

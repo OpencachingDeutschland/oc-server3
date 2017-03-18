@@ -6,14 +6,13 @@
  *  Update GC waypoint data from external sources
  ***************************************************************************/
 
-checkJob(new gcwp_update());
+checkJob(new GcwpUpdate());
 
 
-class gcwp_update
+class GcwpUpdate
 {
     public $name = 'gcwp_update';
     public $interval = 3600; // every hour
-
 
     public function run()
     {
@@ -29,7 +28,7 @@ class gcwp_update
                 $errors = true;
             } else {
                 foreach ($wpdata as $line) {
-                    $waypoints = explode(",", trim($line));
+                    $waypoints = explode(',', trim($line));
                     if (count($waypoints) == 2) {
                         sql(
                             "UPDATE `caches` SET `wp_gc_maintained`='&2' WHERE `wp_oc`='&1'",

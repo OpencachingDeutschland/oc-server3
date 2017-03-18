@@ -6,16 +6,16 @@
  *  Publish new geocaches that are marked for timed publish
  ***************************************************************************/
 
-checkJob(new user_delete());
+checkJob(new UserDelete());
 
-class user_delete
+class UserDelete
 {
     public $name = 'user_delete';
     public $interval = 86400;
 
     public function run()
     {
-        sql('set @allowdelete=1');
+        sql('SET @allowdelete=1');
         sql(
             'DELETE FROM `user`
             WHERE `date_created`<DATE_ADD(NOW(), INTERVAL -21 DAY)

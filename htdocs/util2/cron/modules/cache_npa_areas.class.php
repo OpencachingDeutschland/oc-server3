@@ -9,9 +9,9 @@
  *
  ***************************************************************************/
 
-checkJob(new cache_npa_areas());
+checkJob(new CacheNpaAreas());
 
-class cache_npa_areas
+class CacheNpaAreas
 {
     public $name = 'cache_npa_areas';
     public $interval = 600;

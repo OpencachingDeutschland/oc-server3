@@ -18,7 +18,10 @@ class Cronjobs
     {
         global $argv, $http_response_header, $opt;
 
-        if (!in_array('--auto', $argv)) {
+        // maintenance page is active so no cronjob should be executed
+        if (file_exists(__DIR__ . '/../maintenance.enable')) {
+            return false;
+        } elseif (!in_array('--auto', $argv)) {
             // Cronjob is run manually (testing). We do it this way round
             // (not defaulting to 'auto' when no '--test' param is given),
             // because the effect of forgetting a --test parameter can be worse

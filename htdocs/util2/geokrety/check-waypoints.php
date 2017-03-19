@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * For license information see doc/license.txt
  *
  *
- *  Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.
- *  See http://redmine.opencaching.de/issues/18.
+ * Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.
+ * See http://redmine.opencaching.de/issues/18.
  *
- *  Data import functions are in util2/cron/modules/geokrety.class.php.
+ * Data import functions are in util2/cron/modules/geokrety.class.php.
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../';

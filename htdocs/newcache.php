@@ -228,7 +228,7 @@ if ($error == false) {
         tpl_set_var('publish_later_checked', '');
         tpl_set_var('publish_notnow_checked', '');
 
-        $publish = isset($_POST['publish']) ? $_POST['publish'] : 'now2'; // Ocprop
+        $publish = isset($_POST['publish']) ? $_POST['publish'] : 'notnow'; // Ocprop
         if ($publish == 'now2') {
             tpl_set_var('publish_now_checked', 'checked');
         } elseif ($publish == 'later') {

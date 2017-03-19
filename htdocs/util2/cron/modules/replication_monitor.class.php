@@ -8,9 +8,9 @@
  *  - send warning when too many logs stay on master (file size)
  ***************************************************************************/
 
-checkJob(new replication_monitor());
+checkJob(new ReplicationMonitor());
 
-class replication_monitor
+class ReplicationMonitor
 {
     public $name = 'replication_monitor';
     public $interval = 0;
@@ -23,14 +23,14 @@ class replication_monitor
         $known_ids = [];
 
         foreach ($opt['db']['slaves'] as $k => $v) {
-            $this->check_slave($k);
+            $this->checkSlave($k);
             $known_ids[] = "'" . sql_escape($k) . "'";
         }
 
         if (count($known_ids) > 0) {
-            sql("DELETE FROM `sys_repl_slaves` WHERE `id` NOT IN (" . implode(',', $known_ids) . ")");
+            sql('DELETE FROM `sys_repl_slaves` WHERE `id` NOT IN (' . implode(',', $known_ids) . ')');
         } else {
-            sql("DELETE FROM `sys_repl_slaves`");
+            sql('DELETE FROM `sys_repl_slaves`');
         }
 
         // now, clean up sys_repl_exclude
@@ -40,7 +40,7 @@ class replication_monitor
         );
     }
 
-    public function check_slave($id)
+    public function checkSlave($id)
     {
         global $opt;
         $nActive = 0;
@@ -58,7 +58,7 @@ class replication_monitor
             if ($dblink !== false) {
                 if (mysql_select_db($opt['db']['placeholder']['db'], $dblink)) {
                     // read slave time
-                    $rs = mysql_query("SELECT `data` FROM `sys_repl_timestamp`", $dblink);
+                    $rs = mysql_query('SELECT `data` FROM `sys_repl_timestamp`', $dblink);
                     if ($rs !== false) {
                         $rTime = mysql_fetch_assoc($rs);
                         mysql_free_result($rs);
@@ -93,9 +93,11 @@ class replication_monitor
         }
 
         sql(
-            "INSERT INTO `sys_repl_slaves` (`id`, `server`, `active`, `weight`, `online`, `last_check`, `current_log_name`, `current_log_pos`)
-                                    VALUES ('&1', '&2', '&3', '&4', '&5', NOW(), '&6', '&7')
-                   ON DUPLICATE KEY UPDATE `server`='&2', `active`='&3', `weight`='&4', `online`='&5', `last_check`=NOW(), `current_log_name`='&6', `current_log_pos`='&7'",
+            "INSERT INTO `sys_repl_slaves` 
+             (`id`, `server`, `active`, `weight`, `online`, `last_check`, `current_log_name`, `current_log_pos`)
+             VALUES ('&1', '&2', '&3', '&4', '&5', NOW(), '&6', '&7')
+             ON DUPLICATE KEY UPDATE `server`='&2', `active`='&3', `weight`='&4', `online`='&5', `last_check`=NOW(),
+                                     `current_log_name`='&6', `current_log_pos`='&7'",
             $id,
             $slave['server'],
             $nActive,

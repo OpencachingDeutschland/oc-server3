@@ -8,9 +8,9 @@
  *  server.
  ***************************************************************************/
 
-checkJob(new cache_waypoint_pool());
+checkJob(new CacheWayPointPool());
 
-class cache_waypoint_pool
+class CacheWayPointPool
 {
     public $name = 'cache_waypoint_pool';
     public $interval = 604800; // once a week
@@ -42,7 +42,7 @@ class cache_waypoint_pool
         $rowCount = 0;
         $nInsertCount = 0;
 
-        if ($opt['logic']['waypoint_pool']['fill_gaps'] == true) {
+        if ($opt['logic']['waypoint_pool']['fill_gaps'] === true) {
             // query the first unused waypoint (between other waypoints)
             $rsStartWp = sql(
                 "SELECT SQL_BUFFER_RESULT DECTOWP(WPTODEC(`c`.`wp_oc`, '&1')+1, '&1') AS `free_wp`
@@ -79,21 +79,21 @@ class cache_waypoint_pool
             if ($free_wp == '') {
                 $free_wp = $opt['logic']['waypoint_pool']['prefix'] . '0001';
             }
-            $nInsertCount += $this->fill_turn($free_wp, $max_inserts_count - $nInsertCount);
+            $nInsertCount += $this->fillTurn($free_wp, $max_inserts_count - $nInsertCount);
             $rowCount++;
         }
         sql_free_result($rsStartWp);
 
         if ($rowCount == 0) {
             // new database ...
-            $nInsertCount += $this->fill_turn($opt['logic']['waypoint_pool']['prefix'] . '0001', $max_inserts_count);
+            $nInsertCount += $this->fillTurn($opt['logic']['waypoint_pool']['prefix'] . '0001', $max_inserts_count);
         }
 
         return $nInsertCount;
     }
 
     // search for the next free range and use that waypoints to fill the waypoint pool
-    public function fill_turn($start_wp, $max_inserts_count)
+    public function fillTurn($start_wp, $max_inserts_count)
     {
         global $opt;
 
@@ -121,14 +121,14 @@ class cache_waypoint_pool
         while (($nWaypointsGenerated < $max_inserts_count) && ($start_wp != $end_wp)) {
             sql("INSERT INTO `cache_waypoint_pool` (`wp_oc`) VALUES ('&1')", $start_wp);
             $nWaypointsGenerated++;
-            $start_wp = $this->increment_waypoint($start_wp, $opt['logic']['waypoint_pool']['prefix']);
+            $start_wp = $this->incrementWayPoint($start_wp, $opt['logic']['waypoint_pool']['prefix']);
         }
 
         return $nWaypointsGenerated;
     }
 
     // see mysql functions in doc/sql/stored-proc/maintain.php for explanation
-    public function increment_waypoint($wp, $prefix)
+    public function incrementWayPoint($wp, $prefix)
     {
         global $opt;
 
@@ -157,8 +157,8 @@ class cache_waypoint_pool
 
         if (strlen($wp_value) < 4) {
             return $prefix . substr('0000' . $wp_value, - 4);
-        } else {
-            return $prefix . $wp_value;
         }
+
+        return $prefix . $wp_value;
     }
 }

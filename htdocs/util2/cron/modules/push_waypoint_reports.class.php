@@ -4,9 +4,9 @@
  *
  ***************************************************************************/
 
-checkJob(new push_waypoint_reports());
+checkJob(new PushWayPointReports());
 
-class push_waypoint_reports
+class PushWayPointReports
 {
     public $name = 'push_waypoint_reports';
     public $interval = 120;

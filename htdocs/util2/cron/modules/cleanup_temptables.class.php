@@ -9,9 +9,9 @@
  *
  ***************************************************************************/
 
-checkJob(new cleanup_temptables());
+checkJob(new CleanupTempTables());
 
-class cleanup_temptables
+class CleanupTempTables
 {
     public $name = 'cleanup_temptables';
     public $interval = 86400;

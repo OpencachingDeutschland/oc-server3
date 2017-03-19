@@ -6,9 +6,9 @@
  *  Process system maillog to detect email delivery problems
  ***************************************************************************/
 
-checkJob(new maillog());
+checkJob(new MailLog());
 
-class maillog
+class MailLog
 {
     public $name = 'maillog';
     public $interval = 600; // every 10 minutes
@@ -18,12 +18,12 @@ class maillog
     {
         global $opt;
         if ($opt['system']['maillog']['syslog_db_host'] != '') {
-            $this->process_syslog();
+            $this->processSysLog();
         }
     }
 
 
-    public function process_syslog()
+    public function processSysLog()
     {
         global $opt;
 
@@ -122,7 +122,7 @@ class maillog
                         }
                     }
                 } else {
-                    echo $this->name . ": no email address found for record ID " . $logentry['id'] . "\n";
+                    echo $this->name . ': no email address found for record ID ' . $logentry['id'] . "\n";
                 }
             }
             $last_id = $logentry['id'];

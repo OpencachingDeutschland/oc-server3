@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <?php
 /***************************************************************************
- *  You can find the license in the docs directory
+  * You can find the license in the docs directory
  *
  *  Cronjob to clean up master logs that we dont need any more for any
  *  configured slave server. Run this script once every day.

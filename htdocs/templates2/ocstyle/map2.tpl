@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 *
 *  TODO (old, may be outdated):
 *  - monitor and improve DB cleanup

@@ -1,6 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
- *
+ * You can find the license in the docs directory
  ***************************************************************************}
 {t 1=$domain}welcome at %1!{/t}
 

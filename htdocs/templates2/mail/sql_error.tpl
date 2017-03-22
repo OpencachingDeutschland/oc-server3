@@ -1,6 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
- *
+ * You can find the license in the docs directory
  ***************************************************************************}
 Mysql error {$errno}: {$error}
 ---

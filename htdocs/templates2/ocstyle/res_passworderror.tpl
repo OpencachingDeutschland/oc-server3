@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 <span class="errormsg">
     {t}Your password did not pass our security check.{/t}<br />

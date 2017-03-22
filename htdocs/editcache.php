@@ -1,6 +1,6 @@
 <?php
 /****************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *  edit a cache listing
  *  used template(s): editcache
  *  GET/POST Parameter: cacheid

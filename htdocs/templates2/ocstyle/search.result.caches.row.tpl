@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 *
 *  include file for search.result.caches.tpl
 *  outputs one cache line of the search result

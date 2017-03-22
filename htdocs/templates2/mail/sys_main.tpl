@@ -1,6 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
- *
+ * You can find the license in the docs directory
  ***************************************************************************}
 {t}Hello{/t}{if $username!=''} {$username}{elseif $login.username!=''} {$login.username}{/if},
  

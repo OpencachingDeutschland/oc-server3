@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *
  *  This script converts an OC productive database into a developer DB.
  *  It removes all data not intended for the public and disables all user

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *
  *  Due to a floating point precision problem in the DB row editor, up to
  *  commit 42c1f54 (October 2012) duplicate entries were inserted into

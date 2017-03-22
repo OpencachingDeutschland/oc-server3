@@ -1,7 +1,6 @@
 <?php
 /******************************* ********************************************
- *  For license information see doc/license.txt
- *
+ * for license information see doc/license.txt
  ***************************************************************************/
 
 require __DIR__ . '/lib2/web.inc.php';

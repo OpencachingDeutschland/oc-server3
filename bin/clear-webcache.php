@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  ***************************************************************************/
 
 /*  refresh cached files and translations

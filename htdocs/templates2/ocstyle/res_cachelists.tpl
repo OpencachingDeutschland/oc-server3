@@ -1,5 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
+ * You can find the license in the docs directory
  *
  *
  *  Display a list of cache lists from the variable $cachelists,

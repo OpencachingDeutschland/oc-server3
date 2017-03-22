@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *  trigger and stored procedure definitions for DB version 113
  *  This update includes ALL triggers and procedures, to make sure that we
  *  have a defined starting point. Further updates need not to include

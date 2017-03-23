@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *
  *
  *  Replicate database contents between different OC installations/nodes

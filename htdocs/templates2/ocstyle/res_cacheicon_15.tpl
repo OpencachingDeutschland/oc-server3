@@ -1,6 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
- *
+ * You can find the license in the docs directory
  ***************************************************************************}
 {strip} {* OCSTYLE *}
 {*cachetype=1 status=1 logtype=0 owner=false small=false*}

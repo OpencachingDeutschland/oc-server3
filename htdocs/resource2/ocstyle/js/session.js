@@ -1,8 +1,7 @@
 /***************************************************************************
- *  Opencaching PHP-Session timeout reminder implementation
+ * Opencaching PHP-Session timeout reminder implementation
  *
- *  You can find the license in the docs directory of the CVS repository
- *
+ * You can find the license in the docs directory
  ***************************************************************************/
 
 // implementation incomplete in sys_main.tpl and missing in main.tpl

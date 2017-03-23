@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 *
 *  select on of multiple locations which matched on a location search
 ***************************************************************************}

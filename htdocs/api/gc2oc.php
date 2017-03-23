@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *
  *
  *  returns GC -> OC waypoint translation table, if available,

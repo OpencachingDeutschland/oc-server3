@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *
  *
  *  In lib2 this file is always included via common.inc.php.

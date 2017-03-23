@@ -1,6 +1,5 @@
 {***************************************************************************
- *  You can find the license in the docs directory
- *
+ * You can find the license in the docs directory
  ***************************************************************************}
 
 <form action="verifyemail.php" method="post" style="display:inline;">

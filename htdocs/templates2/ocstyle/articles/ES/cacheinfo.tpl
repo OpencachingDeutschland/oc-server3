@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 
     <div class="content2-pagetitle">

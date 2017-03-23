@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 {*
  * Template for opencaching.de "page not found" and entry page

@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 <div id="log{$logItem.id}" style="clear:both">
 {if isset($logItem.newcoord) && (!$morelogs || $logItem.type)}

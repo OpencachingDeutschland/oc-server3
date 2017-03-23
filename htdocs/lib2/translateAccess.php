@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
- *  For license information see doc/license.txt
- *
+ * for license information see doc/license.txt
  ***************************************************************************/
 
 require_once __DIR__ . '/logic/const.inc.php';

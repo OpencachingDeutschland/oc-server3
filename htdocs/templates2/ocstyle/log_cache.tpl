@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 {* OCSTYLE *}
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>

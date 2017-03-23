@@ -1,7 +1,7 @@
 <?php
 
 /***************************************************************************
- *  For license information see doc/license.txt
+ * for license information see doc/license.txt
  *  summarize methods to get new events, caches, ratings, etc.
  ***************************************************************************/
 class getNew

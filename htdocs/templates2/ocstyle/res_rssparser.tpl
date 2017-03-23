@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
 <div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
     <div class="newsblock">

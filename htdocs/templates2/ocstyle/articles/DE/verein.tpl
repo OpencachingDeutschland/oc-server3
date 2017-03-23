@@ -1,5 +1,5 @@
 {***************************************************************************
-*  You can find the license in the docs directory
+* You can find the license in the docs directory
 ***************************************************************************}
     <div class="content2-pagetitle">
         <img src="resource2/{$opt.template.style}/images/misc/32x32-verein.png" style="margin-right: 10px;" width="32" height="32" alt="" />Der Verein Opencaching Deutschland e.V.

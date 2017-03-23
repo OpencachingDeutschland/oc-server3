@@ -3,7 +3,6 @@
  * ./xml/ocxml13.php
  *
  * For license information see doc/license.txt
- *
  ***************************************************************************/
 
 $ocXmlVersion = 14;

@@ -22,7 +22,7 @@ body.api { background: #f5f1eb; }
 .changelog th { background: #e1d7d8; }
 .changelog td { background: #eee9e9; padding: 8px 16px; }
 
-.apimenu { vertical-align: top; width: 225px; font-size: 15px; padding: 0px 20px 0 32px; }
+.apimenu { vertical-align: top; width: 225px; font-size: 15px; padding: 0 20px 0 32px; }
 .apimenu .revision { float: right; font-size: 11px; color: #888; position: relative; top: -30px; }
 .apimenu a { color: #804937; text-decoration: none; }
 .apimenu a:hover { text-decoration: underline; }

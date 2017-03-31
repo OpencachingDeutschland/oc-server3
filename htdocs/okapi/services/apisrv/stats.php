@@ -2,15 +2,10 @@
 
 namespace okapi\services\apisrv\stats;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Db;
 use okapi\Cache;
+use okapi\Db;
+use okapi\Okapi;
 use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
 use okapi\Settings;
 
 class WebService

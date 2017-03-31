@@ -2,12 +2,12 @@
 
 namespace okapi\services\logs\entry;
 
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
-use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
 use okapi\InvalidParam;
+use okapi\Okapi;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
 
 class WebService
 {

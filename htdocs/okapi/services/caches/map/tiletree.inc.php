@@ -4,7 +4,6 @@ namespace okapi\services\caches\map;
 
 use Exception;
 use okapi\Db;
-use okapi\DoesNotExist;
 use okapi\Okapi;
 use okapi\OkapiInternalConsumer;
 use okapi\OkapiInternalRequest;

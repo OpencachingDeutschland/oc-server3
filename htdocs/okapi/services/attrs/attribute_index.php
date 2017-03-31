@@ -2,17 +2,11 @@
 
 namespace okapi\services\attrs\attribute_index;
 
-use Exception;
-use ErrorException;
 use ArrayObject;
 use okapi\Okapi;
-use okapi\Settings;
-use okapi\Cache;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
 use okapi\services\attrs\AttrHelper;
 
 

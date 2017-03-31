@@ -3,9 +3,6 @@
 namespace okapi;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\views\menu\OkapiMenu;
 
 #
 # All HTTP requests within the /okapi/ path are redirected through this

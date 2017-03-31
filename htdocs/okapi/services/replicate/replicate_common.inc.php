@@ -3,17 +3,12 @@
 namespace okapi\services\replicate;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\BadRequest;
-use okapi\DoesNotExist;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiServiceRunner;
 use okapi\Cache;
+use okapi\Db;
+use okapi\Okapi;
+use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiServiceRunner;
 use okapi\Settings;
 
 class ReplicateCommon
@@ -208,11 +203,10 @@ class ReplicateCommon
 
                 if (($entry['change_type'] == 'replace') && ($geocache_ignored_fields != null)) {
 
-                    # We were called with a non-null ignored fields. Probably
-                    # this call originated from the database update script
-                    # and new fields have been added to the replicate module.
-                    # We will ignore such new fields - this way no unnecessary
-                    # clog entries will be created.
+                    # We were called with a non-null ignored fields. These
+                    # fields should be ignored when comparing objects for
+                    # changes, so that no unnecessary clog entries will be
+                    # created.
 
                     foreach ($geocache_ignored_fields as $field) {
                         unset($entry['data'][$field]);

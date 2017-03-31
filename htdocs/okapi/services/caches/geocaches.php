@@ -2,20 +2,18 @@
 
 namespace okapi\services\caches\geocaches;
 
-use Exception;
 use ArrayObject;
-use okapi\Okapi;
-use okapi\Db;
-use okapi\Settings;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
+use Exception;
 use okapi\BadRequest;
+use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
 use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiAccessToken;
-use okapi\services\caches\search\SearchAssistant;
+use okapi\ParamMissing;
 use okapi\services\attrs\AttrHelper;
+use okapi\Settings;
 
 class WebService
 {
@@ -243,7 +241,13 @@ class WebService
                     case 'type': $entry['type'] = Okapi::cache_type_id2name($row['type']); break;
                     case 'status': $entry['status'] = Okapi::cache_status_id2name($row['status']); break;
                     case 'needs_maintenance': $entry['needs_maintenance'] = $row['needs_maintenance'] > 0; break;
-                    case 'url': $entry['url'] = Settings::get('SITE_URL')."viewcache.php?wp=".$row['wp_oc']; break;
+                    case 'url':
+                        // str_replace is temporary - https://forum.opencaching.pl/viewtopic.php?f=6&t=7089&p=136968#p136968
+                        $entry['url'] = (
+                            str_replace("https://", "http://", Settings::get('SITE_URL')).
+                            "viewcache.php?wp=".$row['wp_oc']
+                        );
+                        break;
                     case 'owner':
                         $owner_ids[$row['wp_oc']] = $row['user_id'];
                         /* continued later */

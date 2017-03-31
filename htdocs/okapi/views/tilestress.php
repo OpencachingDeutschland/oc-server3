@@ -3,22 +3,12 @@
 namespace okapi\views\tilestress;
 
 use Exception;
-
-use okapi\Okapi;
-use okapi\Cache;
 use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiRedirectResponse;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiInternalAccessToken;
-use okapi\Settings;
-use okapi\OkapiLock;
 use okapi\OkapiExceptionHandler;
+use okapi\OkapiInternalAccessToken;
+use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiServiceRunner;
 
 require_once($GLOBALS['rootpath']."okapi/service_runner.php");
 

@@ -2,10 +2,9 @@
 
 namespace okapi\services\apisrv\installation;
 
-use Exception;
 use okapi\Okapi;
-use okapi\Settings;
 use okapi\OkapiRequest;
+use okapi\Settings;
 
 class WebService
 {

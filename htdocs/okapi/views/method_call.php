@@ -2,17 +2,10 @@
 
 namespace okapi\views\method_call;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\OkapiHttpRequest;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
 use okapi\BadRequest;
+use okapi\OkapiHttpRequest;
 use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
-use okapi\views\menu\OkapiMenu;
+use okapi\Settings;
 
 class View
 {

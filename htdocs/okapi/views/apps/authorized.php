@@ -2,11 +2,9 @@
 
 namespace okapi\views\apps\authorized;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Db;
+use okapi\Okapi;
 use okapi\OkapiHttpResponse;
-use okapi\OkapiHttpRequest;
 use okapi\OkapiRedirectResponse;
 use okapi\Settings;
 

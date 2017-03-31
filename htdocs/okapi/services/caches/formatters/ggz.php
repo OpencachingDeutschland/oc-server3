@@ -2,22 +2,8 @@
 
 namespace okapi\services\caches\formatters\ggz;
 
-use okapi\Okapi;
-use okapi\Cache;
-use okapi\Settings;
 use okapi\OkapiRequest;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
-use okapi\BadRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiAccessToken;
 use okapi\OkapiZIPHttpResponse;
-use okapi\services\caches\search\SearchAssistant;
-
-use \ZipArchive;
-use \Exception;
 
 require_once($GLOBALS['rootpath']."okapi/services/caches/formatters/gpx.php");
 

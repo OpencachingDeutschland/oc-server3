@@ -54,7 +54,7 @@ class FieldNoteService implements FieldNoteServiceInterface
         $content = file_get_contents($fileName);
         $content = str_replace("\xFF\xFE", '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
-        $rows = ArrayUtil::trimExplode("\n", $content);
+        $rows = ArrayUtil::trimExplode("\"\n", $content);
         $notFoundGeocacheCodes = [];
         foreach ($rows as $row) {
             $data = str_getcsv($row, ',', '"', '""');
@@ -97,10 +97,12 @@ class FieldNoteService implements FieldNoteServiceInterface
                     $this->translator->transChoice(
                         'field_notes.error.geocache_not_found',
                         count($notFoundGeocacheCodes),
-                        ['%code%' => ArrayUtil::humanLangImplode(
-                            $notFoundGeocacheCodes,
-                            $this->translator->trans('array_util.human_lang_implode.and')
-                        )]
+                        [
+                            '%code%' => ArrayUtil::humanLangImplode(
+                                $notFoundGeocacheCodes,
+                                $this->translator->trans('array_util.human_lang_implode.and')
+                            ),
+                        ]
                     ),
                     'geocache-not-found'
                 );

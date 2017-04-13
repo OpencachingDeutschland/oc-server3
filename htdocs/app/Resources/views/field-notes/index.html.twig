@@ -26,7 +26,7 @@
                             <tr class="testing-fieldNotes-row{{ loop.index }}">
                                 <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><input type="checkbox" id="testing-fieldNote-checkbox{{ loop.index }}" name="selected-field-notes[]" value="{{ fieldNote.id }}" /></td>
                                 <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ geocache.geocacheIcon(fieldNote.geocache.type) }}</td>
-                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/viewcache.php?cacheid={{ fieldNote.geocache.cacheId }}">{{ fieldNote.geocache.name }}</a><br />{{ fieldNote.text | truncate(65, true) }}</td>
+                                <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/viewcache.php?cacheid={{ fieldNote.geocache.cacheId }}">{{ fieldNote.geocache.name }}</a><br />{{ fieldNote.text | raw}}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ fieldNote.date | date('field_notes.date_format' | trans | desc('Y-m-d H:i')) }}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ ('field_notes.log_type.' ~ fieldNote.type) | trans({}, 'constants') }}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/log.php?fieldnoteid={{ fieldNote.id }}">{{ 'field_notes.btn.log_it' | trans }}</a>&nbsp;|&nbsp;<a href="{{ path('field-notes.delete', {id: fieldNote.id}) }}">{{ 'field_notes.btn.delete' | trans }}</a></td>

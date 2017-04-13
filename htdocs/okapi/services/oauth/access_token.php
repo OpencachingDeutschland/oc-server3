@@ -6,7 +6,6 @@ use okapi\Okapi;
 use okapi\OkapiHttpResponse;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
-use okapi\InvalidParam;
 
 class WebService
 {

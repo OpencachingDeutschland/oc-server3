@@ -3,7 +3,6 @@
 namespace okapi;
 
 use Exception;
-use okapi\Locales;
 
 # DO NOT MODIFY THIS FILE. This file should always look like the original here:
 # https://github.com/opencaching/okapi/blob/master/okapi/settings.php

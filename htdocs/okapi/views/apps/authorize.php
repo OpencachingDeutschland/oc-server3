@@ -2,15 +2,13 @@
 
 namespace okapi\views\apps\authorize;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Db;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiHttpRequest;
-use okapi\OkapiRedirectResponse;
-use okapi\Settings;
 use okapi\Locales;
 use okapi\OCSession;
+use okapi\Okapi;
+use okapi\OkapiHttpResponse;
+use okapi\OkapiRedirectResponse;
+use okapi\Settings;
 
 class View
 {
@@ -139,7 +137,7 @@ class View
             where
                 user_id = '".Db::escape_string($OC_user_id)."'
                 and consumer_key = '".Db::escape_string($token['consumer_key'])."'
-        ", 0);
+        ");
 
         if (!$authorized)
         {

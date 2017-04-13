@@ -2,6 +2,7 @@
 
 namespace okapi;
 
+use Exception;
 use okapi\oauth\OAuthDataStore;
 
 class OkapiDataStore extends OAuthDataStore

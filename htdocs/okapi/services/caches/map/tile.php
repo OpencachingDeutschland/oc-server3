@@ -2,27 +2,19 @@
 
 namespace okapi\services\caches\map\tile;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\Cache;
-use okapi\FileCache;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
 use okapi\BadRequest;
-use okapi\DoesNotExist;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiLock;
-
-use okapi\services\caches\map\TileTree;
-use okapi\services\caches\map\TileRenderer;
-use okapi\services\caches\search\SearchAssistant;
+use okapi\Cache;
+use okapi\Db;
+use okapi\InvalidParam;
 use okapi\OkapiConsumer;
+use okapi\OkapiHttpResponse;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
+use okapi\services\caches\map\TileRenderer;
+use okapi\services\caches\map\TileTree;
+use okapi\Settings;
 
 require_once('tiletree.inc.php');
 require_once('tilerenderer.inc.php');

@@ -2,8 +2,6 @@
 
 namespace okapi\views\devel\sysinfo;
 
-use Exception;
-use okapi\Okapi;
 use okapi\OkapiHttpResponse;
 
 class View

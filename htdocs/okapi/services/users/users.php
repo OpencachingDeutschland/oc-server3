@@ -3,13 +3,12 @@
 namespace okapi\services\users\users;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Settings;
 use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\services\caches\search\SearchAssistant;
+use okapi\Settings;
 
 class WebService
 {
@@ -70,7 +69,9 @@ class WebService
                         }
                         break;
                     case 'internal_id': $entry['internal_id'] = $row['user_id']; break;
-                    case 'date_registered': $entry['date_registered'] = date("Y-m-d", strtotime($row['date_created']));
+                    case 'date_registered':
+                        $entry['date_registered'] = date("Y-m-d", strtotime($row['date_created']));
+                        break;
                     case 'caches_found': /* handled separately */ break;
                     case 'caches_notfound': /* handled separately */ break;
                     case 'caches_hidden': /* handled separately */ break;

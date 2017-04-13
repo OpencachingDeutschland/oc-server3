@@ -2,15 +2,8 @@
 
 namespace okapi\views\index;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\OkapiRequest;
 use okapi\OkapiRedirectResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
+use okapi\Settings;
 
 class View
 {

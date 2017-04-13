@@ -2,11 +2,9 @@
 
 namespace okapi\views\changelog;
 
-use Exception;
 use okapi\Okapi;
-use okapi\Settings;
-use okapi\OkapiRequest;
 use okapi\OkapiHttpResponse;
+use okapi\Settings;
 use okapi\views\menu\OkapiMenu;
 
 class View

@@ -2,16 +2,11 @@
 
 namespace okapi\services\apisrv\installations;
 
-use Exception;
 use ErrorException;
-use okapi\Okapi;
-use okapi\Settings;
 use okapi\Cache;
+use okapi\Okapi;
 use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
+use okapi\Settings;
 
 class WebService
 {
@@ -27,8 +22,9 @@ class WebService
         # The list of installations is periodically refreshed by contacting OKAPI
         # repository. This method usually displays the cached version of it.
 
-        $cachekey = 'apisrv/installations';
-        $backupkey = 'apisrv/installations-backup';
+        $VERSION = "2";
+        $cachekey = 'apisrv/installations-v'.$VERSION;
+        $backupkey = 'apisrv/installations-v'.$VERSION.'-backup';
         $results = Cache::get($cachekey);
         if (!$results)
         {
@@ -93,7 +89,7 @@ class WebService
                     'site_name' => $site_name,
                     'okapi_base_url' => $okapi_base_url,
                 );
-                if ($site_url == Settings::get('SITE_URL'))
+                if (in_array($okapi_base_url, Okapi::get_allowed_base_urls()))
                     $i_was_included = true;
             }
 

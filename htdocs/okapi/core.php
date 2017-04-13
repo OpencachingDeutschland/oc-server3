@@ -20,7 +20,7 @@ use okapi\oauth\OAuthServer400Exception;
 use okapi\oauth\OAuthServerException;
 use okapi\oauth\OAuthSignatureMethod_HMAC_SHA1;
 use okapi\oauth\OAuthToken;
-use Pdo;
+use PDO;
 use PDOException;
 
 /** Return an array of email addresses which always get notified on OKAPI errors. */
@@ -716,8 +716,7 @@ class OkapiConsumer extends OAuthConsumer
 
     public function __construct($key, $secret, $name, $url, $email, $bflags=0)
     {
-        $this->key = $key;
-        $this->secret = $secret;
+        parent::__construct($key, $secret, null);
         $this->name = $name;
         $this->url = $url;
         $this->email = $email;
@@ -1105,8 +1104,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = null;
-    public static $git_revision = null;
+    public static $version_number = 1366;
+    public static $git_revision = 'f56cefa0146496096f748d06e277798b27a0a75b';
 
     private static $okapi_vars = null;
 
@@ -1362,6 +1361,7 @@ class Okapi
                 $urls = array(
                     "http://opencaching.pl/okapi/",
                     "http://www.opencaching.pl/okapi/",
+                    "https://opencaching.pl/okapi/",
                 );
                 break;
             case 'OCDE':
@@ -1390,6 +1390,7 @@ class Okapi
             case 'OCUK':
                 $urls = array(
                     "http://opencache.uk/okapi/",
+                    "https://opencache.uk/okapi/",
                 );
                 break;
             case 'OCUS':
@@ -1869,7 +1870,7 @@ class Okapi
         else
         {
             # That's a bug.
-            throw new Exception("Cannot encode as xmlmap: " + print_r($obj, true));
+            throw new Exception("Cannot encode as xmlmap: " . print_r($obj, true));
         }
     }
 

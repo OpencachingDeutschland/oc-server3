@@ -2,11 +2,10 @@
 
 namespace okapi\views\menu;
 
-use Exception;
 use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
 use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiServiceRunner;
 use okapi\Settings;
 
 require_once($GLOBALS['rootpath'].'okapi/service_runner.php');

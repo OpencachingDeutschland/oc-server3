@@ -12,8 +12,6 @@ namespace okapi\services\caches\search\all;
 
 use okapi\Okapi;
 use okapi\OkapiRequest;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
 use okapi\services\caches\search\SearchAssistant;
 
 require_once('searching.inc.php');

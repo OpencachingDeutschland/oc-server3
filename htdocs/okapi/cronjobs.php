@@ -622,7 +622,8 @@ class ChangeLogCheckerJob extends Cron24Job
     public function execute()
     {
         require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
-        ReplicateCommon::verify_clog_consistency();
+        $ignored_fields = array('url');
+        ReplicateCommon::verify_clog_consistency(false, $ignored_fields);
     }
 }
 

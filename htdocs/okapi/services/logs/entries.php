@@ -2,16 +2,12 @@
 
 namespace okapi\services\logs\entries;
 
-use Exception;
-use okapi\Okapi;
 use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
 use okapi\OkapiRequest;
 use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
 use okapi\Settings;
-use okapi\services\caches\search\SearchAssistant;
 
 class WebService
 {

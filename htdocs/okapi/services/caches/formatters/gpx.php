@@ -2,20 +2,18 @@
 
 namespace okapi\services\caches\formatters\gpx;
 
-use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
 use okapi\BadRequest;
-use okapi\ParamMissing;
-use okapi\OkapiAccessToken;
-use okapi\InvalidParam;
-use okapi\services\caches\search\SearchAssistant;
-use okapi\OkapiInternalConsumer;
 use okapi\Db;
-use okapi\Settings;
+use okapi\InvalidParam;
+use okapi\Okapi;
+use okapi\OkapiHttpResponse;
+use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
 use okapi\services\attrs\AttrHelper;
+use okapi\Settings;
 
 class WebService
 {

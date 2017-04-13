@@ -3,14 +3,14 @@
 namespace okapi\services\apiref\method;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
 use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
+use okapi\Okapi;
 use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
+use okapi\Settings;
 
 class WebService
 {

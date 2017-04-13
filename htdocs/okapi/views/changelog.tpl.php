@@ -57,7 +57,7 @@
                                         <th>Version</th>
                                         <th>Date</th>
                                         <th>Change</th>
-                                    </th>
+                                    </tr>
                                 <?php foreach($changes as $change) { ?>
                                     <tr id="v<?= $change['version'] ?>">
                                         <td><a href="https://github.com/opencaching/okapi/tree/<?= $change['commit'] ?>"><?= $change['version'] ?></a></td>

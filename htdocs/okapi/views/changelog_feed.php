@@ -2,11 +2,8 @@
 
 namespace okapi\views\changelog_feed;
 
-use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\OkapiRequest;
 use okapi\OkapiHttpResponse;
+use okapi\Settings;
 use okapi\views\changelog\Changelog;
 
 

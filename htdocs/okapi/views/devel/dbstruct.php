@@ -3,19 +3,12 @@
 namespace okapi\views\devel\dbstruct;
 
 use Exception;
-use okapi\Okapi;
-use okapi\Settings;
-use okapi\Cache;
-use okapi\Db;
-use okapi\OkapiRequest;
-use okapi\OkapiRedirectResponse;
-use okapi\OkapiHttpResponse;
-use okapi\ParamMissing;
-use okapi\InvalidParam;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiInternalConsumer;
 use okapi\BadRequest;
+use okapi\OkapiHttpResponse;
+use okapi\OkapiInternalConsumer;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiServiceRunner;
+use okapi\Settings;
 
 class View
 {

@@ -2,14 +2,13 @@
 
 namespace okapi\services\users\by_internal_ids;
 
-use okapi\Okapi;
 use okapi\Db;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
 use okapi\InvalidParam;
-use okapi\services\caches\search\SearchAssistant;
+use okapi\Okapi;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\ParamMissing;
 
 class WebService
 {

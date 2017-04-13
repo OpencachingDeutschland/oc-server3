@@ -2,15 +2,15 @@
 
 namespace okapi\services\caches\search;
 
-use okapi\Okapi;
-use okapi\Db;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiServiceRunner;
-use okapi\OkapiRequest;
-use okapi\InvalidParam;
-use okapi\BadRequest;
-use okapi\Settings;
 use Exception;
+use okapi\BadRequest;
+use okapi\Db;
+use okapi\InvalidParam;
+use okapi\Okapi;
+use okapi\OkapiInternalRequest;
+use okapi\OkapiRequest;
+use okapi\OkapiServiceRunner;
+use okapi\Settings;
 
 class SearchAssistant
 {

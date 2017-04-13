@@ -131,6 +131,7 @@ class FieldNote
      */
     public function setText($text)
     {
+        $text = str_replace("\n", '<br/>', $text);
         $this->text = $text;
 
         return $this;

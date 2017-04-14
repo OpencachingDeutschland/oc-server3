@@ -1,8 +1,6 @@
 <?php
 /***************************************************************************
  * for license information see doc/license.txt
- *
- *
  *  Session data handling with cookies
  *  See doc/cookies.txt for more information in cookies.
  ***************************************************************************/
@@ -12,6 +10,7 @@ namespace Oc\Session;
 class SessionDataCookie implements SessionDataInterface
 {
     public $changed = false;
+
     public $values = [];
 
     /**
@@ -22,7 +21,7 @@ class SessionDataCookie implements SessionDataInterface
         global $opt;
 
         if (isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
-            //get the cookievars-array
+            //get the cookie_vars-array
             $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data'], true);
 
             if ($decoded !== false) {
@@ -64,7 +63,6 @@ class SessionDataCookie implements SessionDataInterface
     /**
      * @param string $name
      * @param null $default
-     *
      * @return mixed|null
      */
     public function get($name, $default = null)
@@ -74,7 +72,6 @@ class SessionDataCookie implements SessionDataInterface
 
     /**
      * @param string $name
-     *
      * @return bool
      */
     public function is_set($name)
@@ -134,7 +131,12 @@ class SessionDataCookie implements SessionDataInterface
 
     public function close()
     {
-        // TODO really nothing?
-        // maybe destroy variables here
+        global $opt;
+
+        setcookie(
+            $opt['session']['cookiename'] . 'data',
+            '',
+            time() - 1
+        );
     }
 }

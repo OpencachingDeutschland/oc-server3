@@ -12,7 +12,7 @@ class PasswordEncryptionTest extends AbstractModuleTest
 {
     /**
      * @group unit-tests
-     * @covers PasswordCrypt::encryptPassword()
+     * @covers PasswordCrypt::encryptPassword
      *
      * @return void
      */

@@ -22,15 +22,15 @@ if (isset($_REQUEST['watchlist'])) {
     }
 }
 
-$MAXITEMS = 30;
-$startat = isset($_REQUEST['startat']) ? max(0, floor($_REQUEST['startat'] + 0)) : 0;
+$maxItems = 30;
+$startAt = isset($_REQUEST['startat']) ? max(0, floor($_REQUEST['startat'] + 0)) : 0;
 $name_filter = isset($_REQUEST['name']) ? $_REQUEST['name'] : '';
 $by_filter = isset($_REQUEST['by']) ? $_REQUEST['by'] : '';
-$listcount = cachelist::getPublicListCount($name_filter, $by_filter);
+$listCount = cachelist::getPublicListCount($name_filter, $by_filter);
 
 $tpl->assign('name_filter', $name_filter);
 $tpl->assign('by_filter', $by_filter);
-$tpl->assign('cachelists', cachelist::getPublicLists($startat, $MAXITEMS, $name_filter, $by_filter));
+$tpl->assign('cachelists', cachelist::getPublicLists($startAt, $maxItems, $name_filter, $by_filter));
 $tpl->assign('show_bookmarks', true);
 $tpl->assign('show_status', false);
 $tpl->assign('show_user', true);
@@ -40,6 +40,6 @@ $tpl->assign('show_edit', false);
 $tpl->assign('togglewatch', 'cachelists.php');
 
 $pager = new pager("cachelists.php?startat={offset}");
-$pager->make_from_offset($startat, $listcount, $MAXITEMS);
+$pager->make_from_offset($startAt, $listCount, $maxItems);
 
 $tpl->display();

@@ -25,7 +25,6 @@ if (isset($_REQUEST['post'])) {
     }
 }
 
-$attrs = array();
 $rsAttribs = sql(
     "SELECT `caches_attributes`.`attrib_id`
     FROM `caches_attributes`, `caches`
@@ -33,6 +32,8 @@ $rsAttribs = sql(
     AND `caches`.`wp_oc`='&1'",
     $wp
 );
+
+$attrs = [];
 while ($rAttribs = sql_fetch_assoc($rsAttribs)) {
     $attrs[$rAttribs['attrib_id']] = $rAttribs['attrib_id'];
 }

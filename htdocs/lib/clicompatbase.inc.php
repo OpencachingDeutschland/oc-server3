@@ -37,9 +37,9 @@ mb_regex_encoding('UTF-8');
 mb_language('uni');
 
 //load default webserver-settings and common includes
-require_once __DIR__  . '/consts.inc.php';
-require_once __DIR__  . '/settings.inc.php';
-require_once __DIR__  . '/../lib2/errorhandler.inc.php';
+require_once __DIR__ . '/consts.inc.php';
+require_once __DIR__ . '/settings.inc.php';
+require_once __DIR__ . '/../lib2/errorhandler.inc.php';
 
 // check for banned UAs
 $useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
@@ -118,12 +118,13 @@ function sqlValue($sql, $default)
     if ($r = sql_fetch_row($rs)) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
+
     }
+
+    return $default;
 }
 
 function sql_value_slave($sql, $default)
@@ -132,12 +133,12 @@ function sql_value_slave($sql, $default)
     if ($r = sql_fetch_row($rs)) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
     }
+
+    return $default;
 }
 
 /**
@@ -703,7 +704,7 @@ function get_site_urls($domain)
 
     return [
         'site_url' => $site_url,
-        'shortlink_url' => $shortlink_url
+        'shortlink_url' => $shortlink_url,
     ];
 }
 

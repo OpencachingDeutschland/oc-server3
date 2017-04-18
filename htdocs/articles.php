@@ -16,7 +16,7 @@ if (isset($_REQUEST['page']) &&
     $article = $_REQUEST['page'];
 }
 
-if ($article == '') {
+if ($article === '') {
     //no article specified
     $tpl->redirect('index.php');
 } elseif (isset($_REQUEST['wiki'])) {

@@ -7,12 +7,15 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Added
 
 ### Changed
-- change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745) 
+- change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745)
+- increased max image size for log pictures [#1037](http://redmine.opencaching.de/issues/1037)
 
 ### Removed
 
 ### Fixed
 - support c:geo field notes file [#1042](http://redmine.opencaching.de/issues/1042)
+- broken image links
+- fixed display issue in cache recommendation [#1036](http://redmine.opencaching.de/issues/1036)
 
 ## [3.1.2] - 2017-02-06 [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
 

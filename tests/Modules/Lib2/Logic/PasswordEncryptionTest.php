@@ -12,7 +12,7 @@ class PasswordEncryptionTest extends AbstractModuleTest
 {
     /**
      * @group unit-tests
-     * @covers PasswordCrypt::encryptPassword
+     * @covers \OcLegacy\Util\PasswordCrypt::encryptPassword
      *
      * @return void
      */

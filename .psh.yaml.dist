@@ -36,7 +36,7 @@ environments:
     const:
       DB_HOST: '127.0.0.1'
       FRONTEND_URL: "http://localhost"
-      SESSION_DOMAIN: "localhost"
+      SESSION_DOMAIN: ".localhost"
   test:
     paths:
       - "dev-ops/test.opencaching.de/actions"

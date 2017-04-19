@@ -44,7 +44,6 @@ class FieldNoteService implements FieldNoteServiceInterface
      * @param string $fileName
      * @param int $userId
      * @param null|\DateTime $ignoreBeforeDate
-     *
      * @return bool
      * @throws \AppBundle\Exception\WrongDateFormatException
      * @throws \AppBundle\Exception\WrongFileFormatException
@@ -54,6 +53,8 @@ class FieldNoteService implements FieldNoteServiceInterface
         $content = file_get_contents($fileName);
         $content = str_replace("\xFF\xFE", '', $content); // remove UTF16(LE) BOM
         $content = mb_convert_encoding($content, 'UTF-8', 'UCS-2LE');
+        // unify line feeds
+        $content = str_replace("\r\n", "\n", $content);
         $rows = ArrayUtil::trimExplode("\"\n", $content);
         $notFoundGeocacheCodes = [];
         foreach ($rows as $row) {
@@ -72,7 +73,7 @@ class FieldNoteService implements FieldNoteServiceInterface
 
             if (!array_key_exists($data[2], self::LOG_TYPE)) {
                 $this->addError(
-                    /** @Desc("Log type ""%type%"" is not implemented.") */
+                /** @Desc("Log type ""%type%"" is not implemented.") */
                     $this->translator->trans('field_notes.error.log_type_not_implemented', ['%type%' => $data[2]])
                 );
                 continue;
@@ -93,7 +94,7 @@ class FieldNoteService implements FieldNoteServiceInterface
             if (!$geocache) {
                 $notFoundGeocacheCodes[] = $data[0];
                 $this->addError(
-                    /** @Desc("Geocache ""%code%"" not found.") */
+                /** @Desc("Geocache ""%code%"" not found.") */
                     $this->translator->transChoice(
                         'field_notes.error.geocache_not_found',
                         count($notFoundGeocacheCodes),
@@ -128,7 +129,6 @@ class FieldNoteService implements FieldNoteServiceInterface
 
     /**
      * @param int $userId
-     *
      * @return \DateTime|null
      */
     public function getLatestFieldNoteOrLogDate($userId)
@@ -142,7 +142,6 @@ class FieldNoteService implements FieldNoteServiceInterface
     /**
      * @param string $entityName
      * @param int $userId
-     *
      * @return \DateTime|null
      */
     protected function getMaxDateFromEntityByUserId($entityName, $userId)
@@ -153,7 +152,7 @@ class FieldNoteService implements FieldNoteServiceInterface
             ->select('MAX(e.date) AS max_date')
             ->from($entityName, 'e')
             ->where('e.user = :user_id')
-                ->setParameter('user_id', $userId)
+            ->setParameter('user_id', $userId)
             ->setMaxResults(1);
         $result = $query->getQuery()->getResult();
         if ($result && isset($result[0]['max_date'])) {
@@ -165,7 +164,6 @@ class FieldNoteService implements FieldNoteServiceInterface
 
     /**
      * @param string $dateString
-     *
      * @throws \AppBundle\Exception\WrongDateFormatException
      * @return \DateTime
      */

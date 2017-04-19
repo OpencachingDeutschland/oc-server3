@@ -9,7 +9,7 @@ use Oc\Libse\Coordinate\TypeCoordinate;
 
 class HandlerCacheNote
 {
-    public function getCacheNote($userid, $cacheid)
+    public function getCacheNote($userId, $cacheId)
     {
         $rs = sql(
             "SELECT id, latitude, longitude, description
@@ -17,8 +17,8 @@ class HandlerCacheNote
              WHERE user_id = &1
              AND cache_id = &2
              AND type = &3",
-            $userid,
-            $cacheid,
+            $userId,
+            $cacheId,
             TypeCoordinate::UserNote
         );
         $ret = $this->recordToArray(sql_fetch_array($rs));
@@ -39,7 +39,7 @@ class HandlerCacheNote
         return $ret;
     }
 
-    public function save($noteid, $userid, $cacheid, $note, $latitude, $longitude)
+    public function save($noteId, $userId, $cacheId, $note, $latitude, $longitude)
     {
         if (!$note && !$latitude && !$longitude) {
             sql(
@@ -47,19 +47,19 @@ class HandlerCacheNote
                  WHERE user_id = &1
                  AND cache_id = &2
                  AND type = &3",
-                $userid,
-                $cacheid,
+                $userId,
+                $cacheId,
                 TypeCoordinate::UserNote
             );
-        } elseif (!$noteid) {
+        } elseif (!$noteId) {
             sql(
                 "INSERT INTO coordinates(type, latitude, longitude, cache_id, user_id, description)
                  VALUES(&1, &2, &3, &4, &5, '&6')",
                 TypeCoordinate::UserNote,
                 $latitude,
                 $longitude,
-                $cacheid,
-                $userid,
+                $cacheId,
+                $userId,
                 $note
             );
         } else {
@@ -73,9 +73,9 @@ class HandlerCacheNote
                 $latitude,
                 $longitude,
                 $note,
-                $noteid,
-                $userid,
-                $cacheid,
+                $noteId,
+                $userId,
+                $cacheId,
                 TypeCoordinate::UserNote
             );
         }

@@ -35,6 +35,7 @@ class PresenterCoordinate
 
     /**
      * @param boolean $request
+     * @return bool|RequestHttp
      */
     private function initRequest($request)
     {
@@ -47,6 +48,7 @@ class PresenterCoordinate
 
     /**
      * @param boolean $translator
+     * @return bool|TranslatorLanguage
      */
     private function initTranslator($translator)
     {
@@ -93,8 +95,6 @@ class PresenterCoordinate
     }
 
     /**
-     * @todo add phpdoc parameter for $template
-     *
      * @param $template
      */
     public function prepare($template)

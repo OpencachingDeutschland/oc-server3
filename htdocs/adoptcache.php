@@ -14,50 +14,47 @@ if ($login->userid == 0) {
 }
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'listbyuser';
+$cacheId = isset($_REQUEST['cacheid']) ? (int) $_REQUEST['cacheid'] : 0;
 $tpl->assign('action', $action);
 $tpl->assign('error', '');
 if (isset($_REQUEST['cacheid'])) {
-    $tpl->assign('cacheid', $_REQUEST['cacheid'] + 0);
+    $tpl->assign('cacheid', (int) $_REQUEST['cacheid']);
 }
 
-if ($action == 'listbycache') {
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
-    listRequestsByCacheId($cacheid);
-} elseif ($action == 'add') {
+if ($action === 'listbycache') {
+    listRequestsByCacheId($cacheId);
+} elseif ($action === 'add') {
     $tpl->assign('action', 'listbycache');
 
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
-    $tou = isset($_REQUEST['tou']) ? $_REQUEST['tou'] + 0 : 0;
-    $submit = isset($_REQUEST['submit']) ? $_REQUEST['submit'] + 0 : 0;
+    $tou = isset($_REQUEST['tou']) ? (int) $_REQUEST['tou'] : 0;
+    $submit = isset($_REQUEST['submit']) ? (int) $_REQUEST['submit'] : 0;
 
     $username = isset($_REQUEST['username']) ? $_REQUEST['username'] : '';
     $tpl->assign('adoptusername', $username);
 
-    if ($submit == 1) {
-        $userid = sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
-        if ($userid == 0) {
+    if ($submit === 1) {
+        $userId = (int) sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
+        if ($userId === 0) {
             $tpl->assign('error', 'userunknown');
-        } elseif ($tou != 1) {
+        } elseif ($tou !== 1) {
             $tpl->assign('error', 'tou');
         } else {
-            addRequest($cacheid, $userid);
+            addRequest($cacheId, $userId);
         }
     }
 
-    listRequestsByCacheId($cacheid);
-} elseif ($action == 'cancel') {
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
-    $userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
-    cancelRequest($cacheid, $userid);
-} elseif ($action == 'commit') {
-    $cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
-    $submit = isset($_REQUEST['submit']) ? $_REQUEST['submit'] + 0 : 0;
-    $tou = isset($_REQUEST['tou']) ? $_REQUEST['tou'] + 0 : 0;
+    listRequestsByCacheId($cacheId);
+} elseif ($action === 'cancel') {
+    $userId = isset($_REQUEST['userid']) ? (int) $_REQUEST['userid']: 0;
+    cancelRequest($cacheId, $userId);
+} elseif ($action === 'commit') {
+    $submit = isset($_REQUEST['submit']) ? (int) $_REQUEST['submit'] : 0;
+    $tou = isset($_REQUEST['tou']) ? (int) $_REQUEST['tou'] : 0;
 
-    if ($submit == 1 && $tou == 1) {
-        commitRequest($cacheid);
+    if ($submit === 1 && $tou === 1) {
+        commitRequest($cacheId);
     } else {
-        showAdoptScreen($cacheid, $submit);
+        showAdoptScreen($cacheId, $submit);
     }
 } else {
     $tpl->assign('action', 'listbyuser');

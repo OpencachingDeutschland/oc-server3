@@ -45,7 +45,7 @@ class HandlerChildWp
         sql_free_result($rs);
     }
 
-    public function add($cacheid, $type, $lat, $lon, $desc)
+    public function add($cacheId, $type, $lat, $lon, $desc)
     {
         sql(
             "INSERT INTO coordinates(type, subtype, latitude, longitude, cache_id, description)
@@ -54,12 +54,12 @@ class HandlerChildWp
             $type,
             $lat,
             $lon,
-            $cacheid,
+            $cacheId,
             $desc
         );
     }
 
-    public function update($childid, $type, $lat, $lon, $desc)
+    public function update($childId, $type, $lat, $lon, $desc)
     {
         sql(
             "UPDATE coordinates
@@ -69,7 +69,7 @@ class HandlerChildWp
             $lat,
             $lon,
             $desc,
-            $childid
+            $childId
         );
     }
 
@@ -87,13 +87,13 @@ class HandlerChildWp
         return $ret;
     }
 
-    public function getChildWps($cacheid, $include_usernote = false)
+    public function getChildWps($cacheId, $includeUserNote = false)
     {
         global $login;
 
         $type2 = 0;
 
-        if ($include_usernote) {
+        if ($includeUserNote) {
             $type2 = TypeCoordinate::UserNote;
         }
 
@@ -104,7 +104,7 @@ class HandlerChildWp
             AND type IN (&2,&3)
             AND (type=\'&2\' OR (user_id=\'&4\' AND latitude!=0 AND longitude!=0))
             ORDER BY id',
-            $cacheid,
+            $cacheId,
             TypeCoordinate::ChildWaypoint,
             $type2,
             $login->userid
@@ -171,8 +171,8 @@ class HandlerChildWp
         return $ret;
     }
 
-    public function delete($childid)
+    public function delete($childId)
     {
-        sql('DELETE FROM coordinates WHERE id = &1', $childid);
+        sql('DELETE FROM coordinates WHERE id = &1', $childId);
     }
 }

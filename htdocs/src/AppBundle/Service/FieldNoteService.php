@@ -73,7 +73,7 @@ class FieldNoteService implements FieldNoteServiceInterface
 
             if (!array_key_exists($data[2], self::LOG_TYPE)) {
                 $this->addError(
-                /** @Desc("Log type ""%type%"" is not implemented.") */
+                    /** @Desc("Log type ""%type%"" is not implemented.") */
                     $this->translator->trans('field_notes.error.log_type_not_implemented', ['%type%' => $data[2]])
                 );
                 continue;
@@ -94,7 +94,7 @@ class FieldNoteService implements FieldNoteServiceInterface
             if (!$geocache) {
                 $notFoundGeocacheCodes[] = $data[0];
                 $this->addError(
-                /** @Desc("Geocache ""%code%"" not found.") */
+                    /** @Desc("Geocache ""%code%"" not found.") */
                     $this->translator->transChoice(
                         'field_notes.error.geocache_not_found',
                         count($notFoundGeocacheCodes),

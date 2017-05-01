@@ -67,7 +67,16 @@ function logtype_changed()
         datecomment.innerHTML = hint + "{t}When did you abort the cache search?{/t}";
     else
         datecomment.innerHTML = "";
+
+    {if $logpw}
+        if (logtype == 1)
+            document.getElementById("cachelisting--logpw").style.display = "block";
+        else
+            document.getElementById("cachelisting--logpw").style.display = "none";
+    {/if}
+
     {literal}
+
 
     if (logtype == 1 || logtype == 7)
     {
@@ -329,7 +338,7 @@ function show_tip(text)
     {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
     {if $logpw}
-    <tr>
+    <tr id="cachelisting--logpw">
         <td colspan="2">{t}passwort to log:{/t}
             <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if !$validate.logPw}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
         </td>

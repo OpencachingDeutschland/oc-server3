@@ -3,7 +3,6 @@
  * for license information see doc/license.txt
  ***************************************************************************/
 
-
 use AppBundle\Entity\FieldNote;
 use AppBundle\Entity\GeocacheLog;
 

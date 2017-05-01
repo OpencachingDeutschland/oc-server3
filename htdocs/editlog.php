@@ -41,7 +41,7 @@ if ($error == false) {
     } else {
         $useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
 
-        //does log with this logid exist?
+        //does log with this logId exist?
         $log_rs = sql(
             "
                 SELECT
@@ -325,15 +325,15 @@ if ($error == false) {
 
                     // update cache status if changed by logtype
                     if (is_latest_log($log_record['cache_id'], $log_record['log_id'])) {
-                        $newstatus = sqlValue(
+                        $newStatus = sqlValue(
                             "SELECT `cache_status` FROM `log_types`
                              WHERE `id`='" . sql_escape($log_type) . "'",
                             false
                         );
-                        if ($newstatus && $newstatus != $log_record['status']) {
+                        if ($newStatus && $newStatus != $log_record['status']) {
                             sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
                             sql(
-                                "UPDATE `caches` SET `status`='" . sql_escape($newstatus) . "'
+                                "UPDATE `caches` SET `status`='" . sql_escape($newStatus) . "'
                                  WHERE `cache_id`='" . sql_escape($log_record['cache_id']) . "'"
                             );
                         }
@@ -509,7 +509,7 @@ tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy
 tpl_BuildTemplate();
 
 /**
- * @param $cache_id
+ * @param $cacheId
  * @param $logId
  * @return bool
  */
@@ -522,7 +522,7 @@ function is_latest_log($cacheId, $logId)
         ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
         LIMIT 1",
         0,
-        $cache_id
+        $cacheId
     );
 
     return ($logId == $latestLogId);

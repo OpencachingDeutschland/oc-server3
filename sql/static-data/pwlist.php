@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  * for license information see doc/license.txt
- *  Read anti-cracking password list into database
+ * Read anti-cracking password list into database
  ***************************************************************************/
 
 $opt['rootpath'] = __DIR__ . '/../../htdocs/';

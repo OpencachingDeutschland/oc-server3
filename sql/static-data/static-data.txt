@@ -1,14 +1,10 @@
-Unicode Reminder: メモ
-
 The following static data is used by the OC code. Only some of this data is
 included in the Git repo distribution, but for certain countries (as specified)
 it is all included in Opencaching.de developer VMs and databases
 (see http://wiki.opencaching.de/index.php/Entwicklung/Entwicklersystem).
 This is total some hundred MB of SQL dump.
 
-
 See also /doc/license.txt on license terms.
-
 
 Tables:  geodb_coordinates
          geodb_hierarchies

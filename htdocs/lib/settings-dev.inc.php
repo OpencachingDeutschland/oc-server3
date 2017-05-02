@@ -36,7 +36,7 @@ $style = 'ocstyle';
 require_once __DIR__ . '/../config2/settings-dist-common.inc.php';
 
 //id of the node; see config2/settings-dist.inc.php
-$oc_nodeid = 5;
+$oc_nodeid = 4;
 $opt['logic']['node']['id'] = $oc_nodeid;
 
 //name of the cookie

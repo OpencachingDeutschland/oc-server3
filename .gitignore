@@ -62,3 +62,4 @@ htdocs/translation.zip
 /htdocs/translations.zip
 
 .psh.yaml
+/phpunit

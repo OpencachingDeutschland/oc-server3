@@ -1927,5 +1927,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2628', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Caches, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2629', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Logs, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> exestiert nicht.', '2016-10-17 03:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2631', 'DE', 'Handicap', '2017-05-02 23:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'DE', 'Handicap HTML Description', '2017-05-02 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2631', 'DE', 'Handycap: Blind', '2017-05-02 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'DE', 'Handycap: Blind - dieser Cache kann von Menschen mit Sehbehinderung gefunden werden!', '2017-05-02 23:00:00');

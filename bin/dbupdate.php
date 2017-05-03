@@ -20,7 +20,7 @@ require __DIR__ . '/dbsv-update.php';
 
 echo "importing static-data/data.sql\n";
 system(
-    'cat ' . $rootpath . '../sql/static-data/data.sql |' .
+    'cat ' . $rootpath . '../sql/static-data/*.sql |' .
     ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] . ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
 );
 

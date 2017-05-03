@@ -5,10 +5,15 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## unreleased [3.1.2...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...development)
 
 ### Added
+- added handicap cache attribute  [#1031](http://redmine.opencaching.de/issues/1031)
+- added maintenance mode [#841](http://redmine.opencaching.de/issues/841)
 
 ### Changed
 - change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745)
 - increased max image size for log pictures [#1037](http://redmine.opencaching.de/issues/1037)
+- cleaned up old directories [#1033](http://redmine.opencaching.de/issues/1033)
+- support line breaks in filed notes file [#1042](http://redmine.opencaching.de/issues/1042)
+- show only log password if it is needed [#1021](http://redmine.opencaching.de/issues/1021)
 
 ### Removed
 

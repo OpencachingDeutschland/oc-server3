@@ -168,9 +168,9 @@ class labels
     {
         if (isset(self::$aLabels[$name])) {
             return self::$aLabels[$name];
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public static function getLabelValue($name, $id)
@@ -178,11 +178,11 @@ class labels
         if (isset(self::$aLabels[$name])) {
             if (isset(self::$aLabels[$name][$id])) {
                 return self::$aLabels[$name][$id];
-            } else {
-                return false;
             }
-        } else {
+
             return false;
         }
+
+        return false;
     }
 }

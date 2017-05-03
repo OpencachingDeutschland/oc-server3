@@ -2711,3 +2711,5 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2618'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2619', './templates2/ocstyle/search.tpl', '143');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2620', './templates2/ocstyle/search.tpl.inc.php', '22');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2621', './templates2/ocstyle/search.tpl', '126');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2632', 'table:cache_attrib;field=name', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2633', 'table:cache_attrib;field=html_desc', '0');

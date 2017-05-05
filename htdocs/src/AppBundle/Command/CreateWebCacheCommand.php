@@ -5,14 +5,13 @@
 
 namespace AppBundle\Command;
 
-use Oc\Cache\WebCache;
-use Oc\Session\SessionDataCookie;
+use Leafo\ScssPhp\Compiler;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateWebCacheCommand extends AbstractCommand
 {
-    const COMMAND_NAME = 'cache:create-web-cache';
+    const COMMAND_NAME = 'cache:web:create';
 
     /**
      * @return void
@@ -30,33 +29,25 @@ class CreateWebCacheCommand extends AbstractCommand
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
      * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('not complete implemented yet');
-        return self::CODE_ERROR;
-        // TODO implement completely
-        global $opt, $cookie;
+        $output->writeln('generate style.css');
 
-        if (!isset($opt['rootpath'])) {
-            $opt['rootpath'] = __DIR__ . '/../../../../htdocs/';
-        }
+        $scss = new Compiler();
+        $scss->setImportPaths(
+            [
+                __DIR__ . '/../../../vendor/twbs/bootstrap/scss/',
+                __DIR__ . '/../../../theme/scss/',
+            ]
+        );
 
-        $cookie = new SessionDataCookie();
+        file_put_contents(
+            __DIR__.'/../../../web/css/style.css',
+            $scss->compile('@import "all.scss";')
+        );
 
-        require_once __DIR__ . '/../../../lib2/cli.inc.php';
-
-        $webCache = new WebCache();
-
-        $output->writeln('Create menu cache file');
-        $webCache->createMenuCache();
-
-        $output->writeln('Create label cache file');
-        $webCache->createLabelCache();
-
-        $output->writeln('Precompiling template files');
-        $webCache->preCompileAllTemplates();
+        $output->writeln('style.css generated');
     }
 }

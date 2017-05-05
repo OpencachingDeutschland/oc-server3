@@ -13,6 +13,8 @@ if (defined('HTTPS_ENABLED')) {
     $opt['page']['https']['mode'] = HTTPS_ENABLED;
 }
 
+$opt['debug'] = true;
+
 // show blog and forum news on index.php
 $debug_startpage_news = false;
 

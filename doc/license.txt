@@ -239,7 +239,6 @@ Other resources
         Author  : G. Wolfgang
 
 
-
 Data content
 ------------
 

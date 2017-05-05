@@ -10,7 +10,8 @@ class KitchenSinkControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/kitchensink');
-    }
+        $client->request('GET', '/kitchensink');
 
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }

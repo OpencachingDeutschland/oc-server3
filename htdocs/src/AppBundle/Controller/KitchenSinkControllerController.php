@@ -5,16 +5,18 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class StyleGuideController extends Controller
+class KitchenSinkControllerController extends Controller
 {
     /**
-     * @Route("/styleguide")
+     * @Route("/kitchensink")
+     *
+     * @return array
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:StyleGuide:index.html.twig', array(
+        return $this->render('AppBundle:KitchenSinkController:index.html.twig', [
             // ...
-        ));
+        ]);
     }
 
 }

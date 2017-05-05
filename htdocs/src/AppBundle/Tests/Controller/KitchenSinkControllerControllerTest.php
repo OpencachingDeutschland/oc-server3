@@ -4,13 +4,13 @@ namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class StyleGuideControllerTest extends WebTestCase
+class KitchenSinkControllerControllerTest extends WebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/styleguide');
+        $crawler = $client->request('GET', '/kitchensink');
     }
 
 }

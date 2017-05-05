@@ -31,7 +31,6 @@ Vagrant.configure(2) do |config|
 
     config.vm.network :private_network, ip: VM_IP
 
-
     # the image is not compatible with latest vbguest additions,
     # if you have vbguest plugin installed and it automatically tries to update
     # it will break the VM
@@ -41,4 +40,5 @@ Vagrant.configure(2) do |config|
 
     config.ssh.insert_key = false
     config.vm.provision "shell", path: "bin/provision.sh"
+    config.vm.provision :shell, run: "always", :inline => "systemctl status httpd || systemctl start httpd"
 end

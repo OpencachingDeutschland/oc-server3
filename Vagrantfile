@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
     config.vm.network "forwarded_port", guest: 3306,    host: 3306,    auto_correct: true # mysql
 
     config.vm.synced_folder "./", "/var/www/html", id: "v-root", mount_options: ["rw", "tcp", "nolock", "noacl", "async"], type: "nfs", nfs_udp: false
-
+    #config.vm.synced_folder "./", "/var/www/html", create: true, type: "smb"
     config.vm.provider :virtualbox do |v|
         v.name = VM_NAME
         v.customize([

@@ -8,6 +8,7 @@ mysql -u root -proot __DB_NAME__ < htdocs/opencaching_dump.sql
 mysql -u root -proot __DB_NAME__ -e "UPDATE caches SET node = 4;"
 mysql -u root -proot __DB_NAME__ -e "UPDATE cache_logs SET node = 4;"
 
+INCLUDE: sf-migrations.sh
 INCLUDE: db-update.sh
 INCLUDE: import-sql-static.sh
 

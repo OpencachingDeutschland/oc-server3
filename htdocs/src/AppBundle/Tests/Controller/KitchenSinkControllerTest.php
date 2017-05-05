@@ -4,7 +4,7 @@ namespace AppBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class KitchenSinkControllerControllerTest extends WebTestCase
+class KitchenSinkControllerTest extends WebTestCase
 {
     public function testIndex()
     {

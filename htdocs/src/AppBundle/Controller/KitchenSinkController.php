@@ -2,15 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class KitchenSinkControllerController extends Controller
+class KitchenSinkController extends Controller
 {
     /**
      * @Route("/kitchensink")
-     *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {

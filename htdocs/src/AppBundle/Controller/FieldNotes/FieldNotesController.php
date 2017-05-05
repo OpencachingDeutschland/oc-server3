@@ -85,7 +85,7 @@ class FieldNotesController extends AbstractController
         if (!$fieldNote) {
             return $this->redirectToRoute('field-notes');
         }
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($fieldNote);
         $em->flush();
         $this->addSuccessMessage(
@@ -113,7 +113,7 @@ class FieldNotesController extends AbstractController
         }
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         foreach ($selectedFieldNotes as $fieldNoteId) {
             $fieldNote = $repository->findOneBy(['user' => $user->getId(), 'id' => $fieldNoteId]);
             if (!$fieldNote) {

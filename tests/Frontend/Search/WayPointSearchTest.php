@@ -53,7 +53,7 @@ class WayPointSearchTest extends AbstractFrontendTest
         $page->pressButton('Go');
         $pageTitle = $page->find('css', '.content2-pagetitle');
         if ($pageTitle !== null) {
-            self::assertContains('An error occurred while processing the page.', $pageTitle->getText());
+            self::assertContains('An error occured while processing the page', $pageTitle->getText());
         } else {
 //            self::fail(__METHOD__ . ' failed');
         }

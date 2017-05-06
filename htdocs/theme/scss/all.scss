@@ -1,5 +1,56 @@
-@import "bootstrap.scss";
+/*!
+ * Based on Bootstrap 4
+ * Modifyed by OC Theme SCSS
+ */
+@import "components/variables";
 
-h3 {
-  color:red;
-}
+// Core variables and mixins
+@import "../../vendor/twbs/bootstrap/scss/variables";
+@import "../../vendor/twbs/bootstrap/scss/_mixins";
+@import "../../vendor/twbs/bootstrap/scss/_custom";
+
+// Reset and dependencies
+//@import "myscss/normalize";
+@import "../../vendor/twbs/bootstrap/scss/_normalize";
+@import "../../vendor/twbs/bootstrap/scss/_print";
+
+// Core CSS
+@import "../../vendor/twbs/bootstrap/scss/_reboot";
+@import "../../vendor/twbs/bootstrap/scss/_type";
+@import "../../vendor/twbs/bootstrap/scss/_images";
+@import "../../vendor/twbs/bootstrap/scss/_code";
+@import "../../vendor/twbs/bootstrap/scss/_grid";
+@import "../../vendor/twbs/bootstrap/scss/_tables";
+@import "../../vendor/twbs/bootstrap/scss/_forms";
+@import "../../vendor/twbs/bootstrap/scss/_buttons";
+
+// Components
+@import "../../vendor/twbs/bootstrap/scss/_transitions";
+@import "../../vendor/twbs/bootstrap/scss/_dropdown";
+@import "../../vendor/twbs/bootstrap/scss/_button-group";
+@import "../../vendor/twbs/bootstrap/scss/_input-group";
+@import "../../vendor/twbs/bootstrap/scss/_custom-forms";
+@import "../../vendor/twbs/bootstrap/scss/_nav";
+@import "../../vendor/twbs/bootstrap/scss/_navbar";
+@import "../../vendor/twbs/bootstrap/scss/_card";
+@import "../../vendor/twbs/bootstrap/scss/_breadcrumb";
+@import "../../vendor/twbs/bootstrap/scss/_pagination";
+@import "../../vendor/twbs/bootstrap/scss/_badge";
+@import "../../vendor/twbs/bootstrap/scss/_jumbotron";
+@import "../../vendor/twbs/bootstrap/scss/_alert";
+@import "../../vendor/twbs/bootstrap/scss/_progress";
+@import "../../vendor/twbs/bootstrap/scss/_media";
+@import "../../vendor/twbs/bootstrap/scss/_list-group";
+@import "../../vendor/twbs/bootstrap/scss/_responsive-embed";
+@import "../../vendor/twbs/bootstrap/scss/_close";
+
+// Components w/ JavaScript
+@import "../../vendor/twbs/bootstrap/scss/_modal";
+@import "../../vendor/twbs/bootstrap/scss/_tooltip";
+@import "../../vendor/twbs/bootstrap/scss/_popover";
+@import "../../vendor/twbs/bootstrap/scss/_carousel";
+
+// Utility classes
+@import "../../vendor/twbs/bootstrap/scss/_utilities";
+
+// MyStyles

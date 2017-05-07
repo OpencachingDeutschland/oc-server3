@@ -1,5 +1,10 @@
-@import "bootstrap.scss";
+/*!
+ * Based on Bootstrap 4
+ * Modifyed by OC Theme SCSS
+ */
+@import "components/variables";
 
-h3 {
-  color:red;
-}
+// Core variables and mixins
+@import "../../vendor/twbs/bootstrap/scss/bootstrap";
+
+// MyStyles

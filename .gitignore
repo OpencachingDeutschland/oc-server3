@@ -17,6 +17,7 @@
 /htdocs/maintenance.enable
 # files created when running the OC software
 /htdocs/cache2/*
+/htdocs/web/css/*
 /htdocs/opencaching_dump.sql
 /htdocs/download/*
 /htdocs/images/statpics/*

@@ -7,7 +7,9 @@ namespace Oc\Cache;
 
 class WebCache
 {
-    /** @var array $opt */
+    /**
+     * @var array $opt
+     */
     private $opt;
 
     /** @var \translate|\translateEdit $translate */
@@ -24,7 +26,7 @@ class WebCache
         $this->translate = $translate;
 
         if (!isset($this->opt['rootpath'])) {
-            $this->opt['rootpath'] = realpath(__DIR__ . '/../../../') . '/';
+            $this->opt['rootpath'] = dirname(dirname(dirname(__DIR__))) . '/' . '/';
         }
     }
 

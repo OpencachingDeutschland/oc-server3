@@ -11,9 +11,10 @@ namespace Oc\Util;
  */
 class ProcessSync
 {
-    /** @var string $pidFilePath */
+    /**
+     * @var string $pidFilePath
+     */
     private $pidFilePath;
-
 
     /**
      * ProcessSync constructor.
@@ -24,7 +25,6 @@ class ProcessSync
     {
         $this->pidFilePath = __DIR__ . '/../../../var/cache2/' . $name . '.pid';
     }
-
 
     /**
      * Enter code section which must not run concurrently
@@ -42,11 +42,11 @@ class ProcessSync
             fclose($pidFile);
 
             return true;
-        } else {
-            echo "can't create PidFile " . $this->pidFilePath . "\n";
-
-            return false;
         }
+
+        echo "can't create PidFile " . $this->pidFilePath . "\n";
+
+        return false;
     }
 
     /**
@@ -84,7 +84,6 @@ class ProcessSync
 
         return true;
     }
-
 
     /**
      * Leave code section which must not run concurrently

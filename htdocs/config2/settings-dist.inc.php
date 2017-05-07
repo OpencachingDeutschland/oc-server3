@@ -14,7 +14,7 @@ require_once __DIR__. '/settings-dist-common.inc.php';
  *
  * PHP_DEBUG_SKIP
  *
- *  dont use ini_set()
+ *  don't use ini_set()
  *
  * PHP_DEBUG_OFF
  *

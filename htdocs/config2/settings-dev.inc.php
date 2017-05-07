@@ -13,7 +13,7 @@
  *
  * PHP_DEBUG_SKIP
  *
- *  dont use ini_set()
+ *  don't use ini_set()
  *
  * PHP_DEBUG_OFF
  *

@@ -101,7 +101,7 @@ class sqldebugger
             sql_free_result($rs);
         }
 
-        // dont use query cache!
+        // don't use query cache!
         $sql = $this->insert_nocache($sql);
 
         $bSqlExecution = new CBench;

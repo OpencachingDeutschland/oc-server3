@@ -254,12 +254,12 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                 __LINE__
             );
         } else {
-            $smarty->_syntax_error("missing attribute value", E_USER_ERROR, __FILE__, __LINE__);
+            $smarty->_syntax_error('missing attribute value', E_USER_ERROR, __FILE__, __LINE__);
         }
     }
 
     // this call would translate the attrs to php code
-    // we dont need it, because its a prefilter ...
+    // we don't need it, because its a prefilter ...
     //$smarty->_parse_vars_props($attrs);
 
     return $attrs;

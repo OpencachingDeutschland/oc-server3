@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
-  * You can find the license in the docs directory
- *
+ * You can find the license in the docs directory *
  *
  *  For more information about this smarty-extension see
  *  prefilter.t.php
@@ -51,8 +50,6 @@ function smarty_gettext_strarg($str)
  */
 function smarty_block_t($params, $text, &$smarty, &$repeat)
 {
-    global $opt;
-
     if ($repeat) {
         return;
     }

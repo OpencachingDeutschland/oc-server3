@@ -20,5 +20,3 @@ function smarty_modifier_nbsp($string)
 {
     return str_replace(' ', '&nbsp;', $string);
 }
-
-/* vim: set expandtab: */

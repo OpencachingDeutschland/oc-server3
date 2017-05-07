@@ -7,6 +7,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Added
 - added handicap cache attribute  [#1031](http://redmine.opencaching.de/issues/1031)
 - added maintenance mode [#841](http://redmine.opencaching.de/issues/841)
+- added new theme structure and bootstrap 4
 
 ### Changed
 - change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745)

@@ -17,5 +17,4 @@ class KitchenSinkController extends Controller
             // ...
         ]);
     }
-
 }

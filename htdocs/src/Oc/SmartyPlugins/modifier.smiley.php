@@ -6,8 +6,12 @@
  * @subpackage plugins
  */
 
-require_once $opt['rootpath'] . 'lib2/smiley.inc.php';
+require_once __DIR__.'/../../../lib2/smiley.inc.php';
 
+/**
+ * @param $string
+ * @return mixed
+ */
 function smarty_modifier_smiley($string)
 {
     global $smiley;

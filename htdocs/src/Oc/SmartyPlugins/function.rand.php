@@ -4,7 +4,7 @@
  *
  * @package Smarty
  * @subpackage plugins
- ***
+ *
  * Smarty {rand} function plugin
  */
 function smarty_function_rand($params, &$smarty)

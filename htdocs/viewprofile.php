@@ -404,7 +404,7 @@ $tpl->assign('registered', $record['date_created']);
  *   3 = between 6 and 12 months
  *   4 = between 12 and 24 months
  *   5 = more than 12 months
- *   6 = unknown, we need this, because we dont
+ *   6 = unknown, we need this, because we don't
  *       know the last_login of all accounts.
  *       Can be removed after one year.
  *   7 = user account is not active (disabled)

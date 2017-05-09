@@ -14,8 +14,8 @@ function smarty_function_array_search($params, &$smarty)
         return '';
     }
 
-    $retval = array_search($params['needle'], $params['haystack']);
-    $smarty->assign($params['var'], $retval);
+    $returnValue = array_search($params['needle'], $params['haystack']);
+    $smarty->assign($params['var'], $returnValue);
 
     return '';
 }

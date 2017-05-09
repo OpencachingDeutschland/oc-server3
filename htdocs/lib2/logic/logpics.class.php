@@ -16,20 +16,20 @@ class LogPics
     const FOR_STARTPAGE_GALLERY = 1;
     const FOR_NEWPICS_GALLERY = 2;
     const FOR_USER_STAT = 3;
-    const FOR_USER_GALLERY = 4; // params: userid
+    const FOR_USER_GALLERY = 4; // params: userId
     const FOR_MYHOME_GALLERY = 5;
-    const FOR_CACHE_STAT = 6; // params: cacheid
-    const FOR_CACHE_GALLERY = 7; // params: cacheid
+    const FOR_CACHE_STAT = 6; // params: cacheId
+    const FOR_CACHE_GALLERY = 7; // params: cacheId
 
     const MAX_PICTURES_PER_GALLERY_PAGE = 48; // must be multiple of 6
 
 
-    public static function get($purpose, $userid = 0, $cacheid = 0)
+    public static function get($purpose, $userId = 0, $cacheId = 0)
     {
         global $login;
 
         $fields =
-            "`pics`.`uuid` AS `pic_uuid`,
+            '`pics`.`uuid` AS `pic_uuid`,
            `pics`.`url` AS `pic_url`,
            `pics`.`title`,
            `pics`.`date_created`,
@@ -38,13 +38,12 @@ class LogPics
            `logs`.`date` AS `logdate`,
            `pics`.`date_created` < LEFT(NOW(),4) AS `oldyear`,
            `logs`.`id` AS `logid`,
-           `logs`.`type` AS `logtype`";
+           `logs`.`type` AS `logtype`';
 
-        $join_logs = "INNER JOIN `cache_logs` `logs` ON `logs`.`id`=`pics`.`object_id`";
-        $join_caches = "INNER JOIN `caches` ON `caches`.`cache_id`=`logs`.`cache_id`";
-        $join_cachestatus =
-            "INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` AND `allow_user_view`=1";
-        $join_user = "INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`";
+        $joinLogs = 'INNER JOIN `cache_logs` `logs` ON `logs`.`id`=`pics`.`object_id`';
+        $joinCaches = 'INNER JOIN `caches` ON `caches`.`cache_id`=`logs`.`cache_id`';
+        $joinCacheStatus = 'INNER JOIN `cache_status` ON `caches`.`status`=`cache_status`.`id` AND `allow_user_view`=1';
+        $joinUser = 'INNER JOIN `user` ON `user`.`user_id`=`logs`.`user_id`';
 
         $rs = false;
 
@@ -81,10 +80,10 @@ class LogPics
                             `object_id`,
                             LEFT(`date_created`,10)
                         ) `pics`   /* max. 1 pic per cache and day */
-                     $join_logs
-                     $join_caches
-                     $join_cachestatus
-                     $join_user
+                     $joinLogs
+                     $joinCaches
+                     $joinCacheStatus
+                     $joinUser
                      GROUP BY
                         `user`.`user_id`,
                         LEFT(`pics`.`date_created`,10)  /* max. 1 pic per user and day */
@@ -95,7 +94,7 @@ class LogPics
 
             case self::FOR_NEWPICS_GALLERY:
                 // like above, without the "one pic per cache and day" condition
-                // This saves us one grouped subquery.
+                // This saves us one grouped sub-query.
 
                 $rs = sql_slave(
                     "SELECT $fields, `user`.`username`, `pics`.`date_created` AS `picdate`
@@ -108,10 +107,10 @@ class LogPics
                          LIMIT 600
                         ) `pics`
                         /* 10 times reserve for filtering out user dups and invisibles */
-                     $join_logs
-                     $join_caches
-                     $join_cachestatus
-                     $join_user
+                     $joinLogs
+                     $joinCaches
+                     $joinCacheStatus
+                     $joinUser
                      GROUP BY `user`.`user_id`, LEFT(`pics`.`date_created`,10)
                      ORDER BY `date_created` DESC
                      LIMIT &1",
@@ -121,15 +120,15 @@ class LogPics
 
             case self::FOR_USER_STAT:
                 // Consistent with the log statistics, we count all pictures of the
-                // user, also in logs for not publically visible caches.
+                // user, also in logs for not publicly visible caches.
 
                 $result = sql_value_slave(
                     "SELECT COUNT(*)
                      FROM `pictures` `pics`
-                     $join_logs
+                     $joinLogs
                      WHERE `pics`.`object_type`=1 AND `logs`.`user_id`='&1'",
                     0,
-                    $userid
+                    $userId
                 );
                 break;
 
@@ -139,12 +138,12 @@ class LogPics
                 $rs = sql(
                     "SELECT $fields, `logs`.`date` AS `picdate`
                      FROM `pictures` `pics`
-                     $join_logs
-                     $join_caches
-                     $join_cachestatus
+                     $joinLogs
+                     $joinCaches
+                     $joinCacheStatus
                      WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
                      ORDER BY `logs`.`order_date` DESC",
-                    $userid
+                    $userId
                 );
                 break;
 
@@ -155,7 +154,7 @@ class LogPics
                 $rs = sql(
                     "SELECT $fields, `logs`.`date` AS `picdate`
                      FROM `pictures` AS `pics`
-                     $join_logs
+                     $joinLogs
                      WHERE `object_type`=1 AND `logs`.`user_id`='&1'
                      ORDER BY `logs`.`order_date` DESC",
                     $login->userid
@@ -171,13 +170,13 @@ class LogPics
                 $result = sql_value(
                     "SELECT COUNT(*)
                      FROM `pictures` AS `pics`
-                     $join_logs
-                     $join_user
+                     $joinLogs
+                     $joinUser
                      WHERE
                         `object_type`=1 AND `logs`.`cache_id`='&1'
                         AND NOT (`data_license` IN ('&2', '&3'))",
                     0,
-                    $cacheid,
+                    $cacheId,
                     NEW_DATA_LICENSE_ACTIVELY_DECLINED,
                     NEW_DATA_LICENSE_PASSIVELY_DECLINED
                 );
@@ -192,13 +191,13 @@ class LogPics
                 $rs = sql(
                     "SELECT $fields, `user`.`username`, `logs`.`date` AS `picdate`
                      FROM `pictures` AS `pics`
-                     $join_logs
-                     $join_user
+                     $joinLogs
+                     $joinUser
                      WHERE
                         `object_type`=1 AND `logs`.`cache_id`='&1'
                         AND NOT (`data_license` IN ('&2', '&3'))
                      ORDER BY `logs`.`order_date` DESC",
-                    $cacheid,
+                    $cacheId,
                     NEW_DATA_LICENSE_ACTIVELY_DECLINED,
                     NEW_DATA_LICENSE_PASSIVELY_DECLINED
                 );
@@ -222,16 +221,16 @@ class LogPics
     // Set all template variables needed to display a browsed log pictures page;
     // all displaying is done in res_logpictures.tpl
 
-    public static function setPaging($purpose, $userid, $cacheid, $url)
+    public static function setPaging($purpose, $userId, $cacheId, $url)
     {
         global $tpl;
 
-        $startat = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
+        $startAt = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
 
-        $pictures = self::get($purpose, $userid, $cacheid);
-        $tpl->assign('pictures', array_slice($pictures, $startat, self::MAX_PICTURES_PER_GALLERY_PAGE));
+        $pictures = self::get($purpose, $userId, $cacheId);
+        $tpl->assign('pictures', array_slice($pictures, $startAt, self::MAX_PICTURES_PER_GALLERY_PAGE));
 
-        $pager = new pager($url . "&startat={offset}");
-        $pager->make_from_offset($startat, count($pictures), self::MAX_PICTURES_PER_GALLERY_PAGE);
+        $pager = new pager($url . '&startat={offset}');
+        $pager->make_from_offset($startAt, count($pictures), self::MAX_PICTURES_PER_GALLERY_PAGE);
     }
 }

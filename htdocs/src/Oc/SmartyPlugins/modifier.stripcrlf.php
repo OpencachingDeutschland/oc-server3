@@ -20,5 +20,3 @@ function smarty_modifier_stripcrlf($string)
 {
     return str_replace(["\r", "\n"], '', $string);
 }
-
-/* vim: set expandtab: */

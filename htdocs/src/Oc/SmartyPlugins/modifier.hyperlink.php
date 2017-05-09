@@ -19,64 +19,62 @@
 function smarty_modifier_hyperlink($text)
 {
     $texti = mb_strtolower($text);
-    $retval = '';
-    $curpos = 0;
-    $starthttp = mb_strpos($texti, 'http://', $curpos);
-    $starthttps = mb_strpos($texti, 'https://', $curpos);
-    if ($starthttp === false || ($starthttps !== false && $starthttps < $starthttp)) {
-        $starthttp = $starthttps;
+    $returnValue = '';
+    $curPos = 0;
+    $startHttp = mb_strpos($texti, 'http://', $curPos);
+    $startHttps = mb_strpos($texti, 'https://', $curPos);
+    if ($startHttp === false || ($startHttps !== false && $startHttps < $startHttp)) {
+        $startHttp = $startHttps;
     }
-    $endhttp = false;
-    while (($starthttp !== false) || ($endhttp >= mb_strlen($text))) {
-        $endhttp1 = mb_strpos($text, ' ', $starthttp);
-        if ($endhttp1 === false) {
-            $endhttp1 = mb_strlen($text);
+    $endHttp = false;
+    while (($startHttp !== false) || ($endHttp >= mb_strlen($text))) {
+        $endHttp1 = mb_strpos($text, ' ', $startHttp);
+        if ($endHttp1 === false) {
+            $endHttp1 = mb_strlen($text);
         }
-        $endhttp2 = mb_strpos($text, "\n", $starthttp);
-        if ($endhttp2 === false) {
-            $endhttp2 = mb_strlen($text);
+        $endHttp2 = mb_strpos($text, "\n", $startHttp);
+        if ($endHttp2 === false) {
+            $endHttp2 = mb_strlen($text);
         }
-        $endhttp3 = mb_strpos($text, "\r", $starthttp);
-        if ($endhttp3 === false) {
-            $endhttp3 = mb_strlen($text);
+        $endHttp3 = mb_strpos($text, "\r", $startHttp);
+        if ($endHttp3 === false) {
+            $endHttp3 = mb_strlen($text);
         }
-        $endhttp4 = mb_strpos($text, '<', $starthttp);
-        if ($endhttp4 === false) {
-            $endhttp4 = mb_strlen($text);
+        $endHttp4 = mb_strpos($text, '<', $startHttp);
+        if ($endHttp4 === false) {
+            $endHttp4 = mb_strlen($text);
         }
-        $endhttp5 = mb_strpos($text, '] ', $starthttp);
-        if ($endhttp5 === false) {
-            $endhttp5 = mb_strlen($text);
+        $endHttp5 = mb_strpos($text, '] ', $startHttp);
+        if ($endHttp5 === false) {
+            $endHttp5 = mb_strlen($text);
         }
-        $endhttp6 = mb_strpos($text, ')', $starthttp);
-        if ($endhttp6 === false) {
-            $endhttp6 = mb_strlen($text);
+        $endHttp6 = mb_strpos($text, ')', $startHttp);
+        if ($endHttp6 === false) {
+            $endHttp6 = mb_strlen($text);
         }
-        $endhttp7 = mb_strpos($text, '. ', $starthttp);
-        if ($endhttp7 === false) {
-            $endhttp7 = mb_strlen($text);
+        $endHttp7 = mb_strpos($text, '. ', $startHttp);
+        if ($endHttp7 === false) {
+            $endHttp7 = mb_strlen($text);
         }
 
-        $endhttp = min($endhttp1, $endhttp2, $endhttp3, $endhttp4, $endhttp5, $endhttp6, $endhttp7);
+        $endHttp = min($endHttp1, $endHttp2, $endHttp3, $endHttp4, $endHttp5, $endHttp6, $endHttp7);
 
-        $retval .= mb_substr($text, $curpos, $starthttp - $curpos);
-        $url = mb_substr($text, $starthttp, $endhttp - $starthttp);
-        $retval .= '<a href="' . $url . '" alt="" target="_blank">' . $url . '</a>';
+        $returnValue .= mb_substr($text, $curPos, $startHttp - $curPos);
+        $url = mb_substr($text, $startHttp, $endHttp - $startHttp);
+        $returnValue .= '<a href="' . $url . '" alt="" target="_blank">' . $url . '</a>';
 
-        $curpos = $endhttp;
-        if ($curpos >= mb_strlen($text)) {
+        $curPos = $endHttp;
+        if ($curPos >= mb_strlen($text)) {
             break;
         }
-        $starthttp = mb_strpos(mb_strtolower($text), 'http://', $curpos);
-        $starthttps = mb_strpos($texti, 'https://', $curpos);
-        if ($starthttp === false || ($starthttps !== false && $starthttps < $starthttp)) {
-            $starthttp = $starthttps;
+        $startHttp = mb_strpos(mb_strtolower($text), 'http://', $curPos);
+        $startHttps = mb_strpos($texti, 'https://', $curPos);
+        if ($startHttp === false || ($startHttps !== false && $startHttps < $startHttp)) {
+            $startHttp = $startHttps;
         }
     }
 
-    $retval .= mb_substr($text, $curpos);
+    $returnValue .= mb_substr($text, $curPos);
 
-    return $retval;
+    return $returnValue;
 }
-
-/* vim: set expandtab: */

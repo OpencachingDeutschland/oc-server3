@@ -30,17 +30,17 @@ function smarty_function_coordinput($params, &$smarty)
     $lonMin = $lon - floor($lon);
     $lon -= $lonMin;
 
-    $retval = '<select name="' . htmlspecialchars($prefix, ENT_QUOTES, 'UTF-8') . 'NS">';
+    $returnValue = '<select name="' . htmlspecialchars($prefix, ENT_QUOTES, 'UTF-8') . 'NS">';
     if ($bLatNeg) {
-        $retval .= '<option value="N">N</option>';
-        $retval .= '<option value="S" selected="selected">S</option>';
+        $returnValue .= '<option value="N">N</option>';
+        $returnValue .= '<option value="S" selected="selected">S</option>';
     } else {
-        $retval .= '<option value="N" selected="selected">N</option>';
-        $retval .= '<option value="S">S</option>';
+        $returnValue .= '<option value="N" selected="selected">N</option>';
+        $returnValue .= '<option value="S">S</option>';
     }
-    $retval .= '</select>&nbsp;';
+    $returnValue .= '</select>&nbsp;';
 
-    $retval .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' . htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
@@ -49,7 +49,7 @@ function smarty_function_coordinput($params, &$smarty)
             ENT_QUOTES,
             'UTF-8'
         ) . '" size="1" maxlength="2" />&deg; ';
-    $retval .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' . htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
@@ -59,19 +59,19 @@ function smarty_function_coordinput($params, &$smarty)
             'UTF-8'
         ) . '" size="5" maxlength="6" /> \'';
 
-    $retval .= '<br />';
+    $returnValue .= '<br />';
 
-    $retval .= '<select name="' . htmlspecialchars($prefix, ENT_QUOTES, 'UTF-8') . 'EW">';
+    $returnValue .= '<select name="' . htmlspecialchars($prefix, ENT_QUOTES, 'UTF-8') . 'EW">';
     if ($bLonNeg) {
-        $retval .= '<option value="E">E</option>';
-        $retval .= '<option value="W" selected="selected">W</option>';
+        $returnValue .= '<option value="E">E</option>';
+        $returnValue .= '<option value="W" selected="selected">W</option>';
     } else {
-        $retval .= '<option value="E" selected="selected">E</option>';
-        $retval .= '<option value="W">W</option>';
+        $returnValue .= '<option value="E" selected="selected">E</option>';
+        $returnValue .= '<option value="W">W</option>';
     }
-    $retval .= '</select>&nbsp;';
+    $returnValue .= '</select>&nbsp;';
 
-    $retval .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' . htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
@@ -80,7 +80,7 @@ function smarty_function_coordinput($params, &$smarty)
             ENT_QUOTES,
             'UTF-8'
         ) . '" size="2" maxlength="3" />&deg; ';
-    $retval .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' . htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
@@ -90,5 +90,5 @@ function smarty_function_coordinput($params, &$smarty)
             'UTF-8'
         ) . '" size="5" maxlength="6" /> \'';
 
-    return $retval;
+    return $returnValue;
 }

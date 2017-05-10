@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
- *
- *  Sample settincs.inc.php file for a developer machine
+ * Sample settings.inc.php file for a developer machine
  ***************************************************************************/
 
 // installation paths

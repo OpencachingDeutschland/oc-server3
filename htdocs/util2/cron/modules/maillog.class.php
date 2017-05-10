@@ -13,7 +13,6 @@ class MailLog
     public $name = 'maillog';
     public $interval = 600; // every 10 minutes
 
-
     public function run()
     {
         global $opt;
@@ -38,8 +37,8 @@ class MailLog
 
             return;
         }
-        if (@mysql_query("USE " . $opt['system']['maillog']['syslog_db_name'], $dbc) === false) {
-            echo $this->name . ": could not open syslog database: " . mysql_error() . "\n";
+        if (@mysql_query('USE ' . $opt['system']['maillog']['syslog_db_name'], $dbc) === false) {
+            echo $this->name . ': could not open syslog database: ' . mysql_error() . "\n";
 
             return;
         }
@@ -69,12 +68,12 @@ class MailLog
         }
 
         $last_id = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastid'", 0);
-        $last_date = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastdate'", "");
+        $last_date = sql_value("SELECT `value` FROM `sysconfig` WHERE `name`='syslog_maillog_lastdate'", '');
 
         // We check for both, new IDs and new creation dates, so that it still works
-        // if the syslog DB is re-setup and IDs restarted from 1 (dates are not unique).
+        // if the sys-log DB is re-setup and IDs restarted from 1 (dates are not unique).
         //
-        // It happened that old log entries were re-added as duplicates to the syslog table.
+        // It happened that old log entries were re-added as duplicates to the sys-log table.
         // We solve this problem by ignoring entries with higher ID and older timestamp. Worst
         // case some entries with same timestamp as $last_date will be processed redundantly.
 

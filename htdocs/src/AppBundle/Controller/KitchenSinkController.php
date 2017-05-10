@@ -13,9 +13,6 @@ class KitchenSinkController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('AppBundle:KitchenSinkController:index.html.twig', [
-            // ...
-        ]);
+        return $this->render('AppBundle:KitchenSinkController:index.html.twig');
     }
-
 }

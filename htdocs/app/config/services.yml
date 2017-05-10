@@ -31,6 +31,6 @@ services:
 
     oc.util.dbal_connection:
         class: Oc\Util\DbalConnection
-    oc_bundle.postfix.journald_logs:
-        class: OcBundle\Postfix\JournaldLogs
+    oc_bundle.postfix.journal_logs:
+        class: OcBundle\Postfix\JournalLogs
         arguments: ['@oc.util.dbal_connection']

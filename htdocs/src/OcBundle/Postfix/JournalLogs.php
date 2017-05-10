@@ -10,9 +10,9 @@ namespace OcBundle\Postfix;
 use Oc\Util\DbalConnection;
 
 /**
- * Class JournaldLogs
+ * Class JournalLogs
  */
-class JournaldLogs
+class JournalLogs
 {
     /**
      * @var array|bool
@@ -107,7 +107,9 @@ class JournaldLogs
         $grepStatus = substr($grepStatus, 0, -1);
 
         $journalRaw = shell_exec(
-            'journalctl --since="' . $start->format('Y-m-d H:i:s') . '" -u postfix -o json | egrep "' . $grepStatus . '"'
+            'journalctl --since="' . $start->format(
+                'Y-m-d H:i:s'
+            ) . '" -u postfix -o json | egrep "' . $grepStatus . '"'
         );
 
         return explode(PHP_EOL, trim($journalRaw));
@@ -139,6 +141,17 @@ class JournaldLogs
                     break;
             }
         }
+
+        $end = new \DateTimeImmutable();
+
+        $this->dbalConnection->getConnection()
+            ->executeUpdate(
+                'UPDATE `sysconfig` SET `value` = :value WHERE `name` = :name',
+                [
+                    ':name' => '',
+                    ':value' => $end->format('Y-m-d H:i:s'),
+                ]
+            );
     }
 
     /**

@@ -20,6 +20,7 @@ class DbalConnection
 
     public function __construct()
     {
+        $params = [];
         $params['driver'] = 'pdo_mysql';
 
         $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../../app/config/parameters.yml'));
@@ -57,7 +58,7 @@ class DbalConnection
     }
 
     /**
-     * @return \Doctrine\DBAL\Query\QueryBuilder,
+     * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     public function getQueryBuilder()
     {

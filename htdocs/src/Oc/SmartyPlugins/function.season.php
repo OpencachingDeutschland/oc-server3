@@ -97,7 +97,5 @@ function smarty_function_season($params, &$smarty)
         if (strtotime($seasons[$nIndex][3]) > $nTimestamp) {
             return $params['autumn'];
         }
-
-        return '';
     }
 }

@@ -11,8 +11,8 @@ header('Content-type: text/html; charset=utf-8');
 
 $cache = null;
 if (isset($_REQUEST['cacheid'])) {
-    $cacheid = $_REQUEST['cacheid'] + 0;
-    $cache = new cache($cacheid);
+    $cacheId = (int) $_REQUEST['cacheid'];
+    $cache = new cache($cacheId);
 } else {
     if (isset($_REQUEST['uuid'])) {
         $uuid = $_REQUEST['uuid'];

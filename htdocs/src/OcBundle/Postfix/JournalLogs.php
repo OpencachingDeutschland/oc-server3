@@ -149,7 +149,7 @@ class JournalLogs
             ->executeUpdate(
                 'UPDATE `sysconfig` SET `value` = :value WHERE `name` = :name',
                 [
-                    ':name' => '',
+                    ':name' => 'syslog_maillog_lastdate',
                     ':value' => $end->format('Y-m-d H:i:s'),
                 ]
             );

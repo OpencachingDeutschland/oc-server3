@@ -23,7 +23,7 @@
     $default_EW = 'E';
     $date_time_format_message = '&nbsp;' . t('Format:&nbsp;DD-MM-YYYY');
 
-    $error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occured, please check the marked fields.') . "</b></td></tr>";
+    $error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occurred, please check the marked fields.') . "</b></td></tr>";
     $error_long_not_ok = '<span class="errormsg">' . t('Your chosen coordinated are invalid') . '</span>';
     $error_lat_not_ok = $error_long_not_ok . "<br />";
     $error_duplicate_coords = '<span class="errormsg">' . t('Another cache (<a href="viewcache.php?wp=%1">%1</a>) exists at these coords. Maybe you pressed "submit cache" twice. To publish a cache with identical coords, enter other coords first, then edit the listing and change coords.') . '</span>';

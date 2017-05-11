@@ -50,7 +50,7 @@ class AttrHelper
         catch (Exception $e)
         {
             # Failed to read or parse the file (i.e. after a syntax error was
-            # commited). Let's check when the last successful parse occured.
+            # committed). Let's check when the last successful parse occurred.
 
             self::init_from_cache(false);
 

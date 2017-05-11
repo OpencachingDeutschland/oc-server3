@@ -35,5 +35,7 @@ class SeasonTest extends AbstractModuleTest
         $params['season'] = 265;
         self::assertEquals('autumn', \smarty_function_season($params, $smarty));
 
+        $params['season'] = 400;
+        self::assertNull(\smarty_function_season($params, $smarty));
     }
 }

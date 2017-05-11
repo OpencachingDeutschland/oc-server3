@@ -34,11 +34,7 @@ class JournaldPostfixLogsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('process postfix logs');
-
         $journal = $this->getContainer()->get('oc_bundle.postfix.journal_logs');
         $journal->processJournalLogs();
-
-        $output->writeln('process postfix logs finished');
     }
 }

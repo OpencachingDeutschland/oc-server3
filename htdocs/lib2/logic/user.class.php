@@ -1522,7 +1522,7 @@ class user
     // email bounce processing
     public function addEmailProblem($licenseEmail = false)
     {
-        // mailing_problems is a bit-flag field to remember nondelivered, important mailings
+        // mailing_problems is a bit-flag field to remember nonDelivered, important mailings
         if ($licenseEmail) {
             if (!$this->reUser->setValue('mailing_problems', $this->reUser->getValue('mailing_problems') | 1)) {
                 return false;

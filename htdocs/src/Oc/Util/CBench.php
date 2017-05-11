@@ -2,8 +2,7 @@
 /***************************************************************************
  * for license information see doc/license.txt
  *
- *
- *  Exact time mesurement
+ *  Exact time measurement
  ***************************************************************************/
 
 namespace Oc\Util;

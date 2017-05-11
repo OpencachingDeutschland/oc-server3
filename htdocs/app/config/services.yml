@@ -28,3 +28,9 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
+
+    oc.util.dbal_connection:
+        class: Oc\Util\DbalConnection
+    oc_bundle.postfix.journal_logs:
+        class: OcBundle\Postfix\JournalLogs
+        arguments: ['@oc.util.dbal_connection']

@@ -36,6 +36,7 @@ class JournalLogs
      */
     public function __construct(DbalConnection $dbalConnection, $config = false)
     {
+        // TODO move this config to an configuration file
         if (!$config) {
             $config = [
                 'hostname' => 'oc0002.opencaching.de',

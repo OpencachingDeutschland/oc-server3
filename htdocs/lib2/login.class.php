@@ -40,9 +40,9 @@ class login
      */
     public $username = '';
     /**
-     * @var int|mixed|string
+     * @var string
      */
-    public $lastlogin = 0;
+    public $lastlogin = '';
     /**
      * @var bool
      */
@@ -419,7 +419,7 @@ class login
     }
 
     /**
-     * @param bool $privilege
+     * @param int|bool $privilege
      * @return bool
      */
     public function hasAdminPriv($privilege = false)

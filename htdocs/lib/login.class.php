@@ -30,7 +30,7 @@ class login
     public $userid = 0;
     public $username = '';
     public $permanent = false;
-    public $lastlogin = 0;
+    public $lastlogin = '';
     public $sessionid = '';
     public $admin = 0;
     public $verified = false;
@@ -161,6 +161,10 @@ class login
         $this->pStoreCookie();
     }
 
+    /**
+     * @param int|bool $privilege
+     * @return bool
+     */
     public function hasAdminPriv($privilege = false)
     {
         $this->verify();

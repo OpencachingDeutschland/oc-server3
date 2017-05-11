@@ -71,7 +71,7 @@ class JournalLogs
                     $cursor[$key] = $value;
                 }
 
-                $logEntry->id = hexdec($cursor['i']);
+                $logEntry->id = (int) hexdec($cursor['i']);
 
                 $timeStamp = $entry['__REALTIME_TIMESTAMP'];
                 $logEntry->created = \DateTimeImmutable::createFromFormat(

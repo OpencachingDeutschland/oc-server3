@@ -17,8 +17,7 @@ function smarty_function_season($params, &$smarty)
         $season = $params['season'];
     }
 
-    if (($season >= 1 && $season <= 81) || ($season >= 355 && $season <= 366)
-    ) {
+    if ($season <= 81 || $season >= 355) {
         return $params['winter'];
     }
 

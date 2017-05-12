@@ -1156,7 +1156,7 @@ function sql_error($sqlstatement = '')
     }
 
     if ($db['error'] === true) {
-        // datbase error recursion, because another error occured while trying to
+        // database error recursion, because another error occurred while trying to
         // build the error template (e.g. because connection was lost, or an error mail
         // could not load translations from database)
 

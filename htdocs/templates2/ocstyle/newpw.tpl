@@ -42,7 +42,7 @@
         {elseif $emailRequested==true}
             <tr><td width="150px">&nbsp;</td><td><span class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}<br />{t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</span></td></tr>
         {elseif $emailErrorUnknown==true}
-            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occured. The security code could not be sent to you.{/t}</span></td></tr>
+            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occurred. The security code could not be sent to you.{/t}</span></td></tr>
         {/if}
         <tr><td class="spacer" colspan="2"></td></tr>
     </table>
@@ -66,12 +66,12 @@
         <tr><td class="spacer" colspan="2"></td></tr>
 
         {if $errorUnknown==true}
-            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unkown error occured.{/t}</span></td></tr>
+            <tr><td width="150px">&nbsp;</td><td><span class="errormsg">{t}An unknown error occurred.{/t}</span></td></tr>
         {/if}
         <tr>
             <td>{t}E-Mail-Address:{/t}</td>
             <td>
-                <input name="email" type="email" value="{$emailch|escape}" maglength="60" class="input200" />
+                <input name="email" type="email" value="{$emailch|escape}" maxlength="60" class="input200" />
             </td>
         </tr>
         {if $emailRqErrorNotFound==true}
@@ -82,7 +82,7 @@
         <tr>
             <td>{t}Security code:{/t}</td>
             <td>
-          <input name="code" type="text" value="{$code|escape}" maglength="60" class="input100" />
+          <input name="code" type="text" value="{$code|escape}" maxlength="60" class="input100" />
             </td>
         </tr>
         {if $codeErrorDate==true}

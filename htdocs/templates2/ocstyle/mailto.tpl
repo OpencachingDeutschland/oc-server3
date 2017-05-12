@@ -89,7 +89,7 @@
             <tr><td class="spacer" colspan="2"></td></tr>
 
             {if $errorUnkown==true}
-                <tr><td colspan="2" class="errormsg">{t}An unkown error occured and the E-Mail was not sent.{/t}</td></tr>
+                <tr><td colspan="2" class="errormsg">{t}An unknown error occurred and the E-Mail was not sent.{/t}</td></tr>
             {/if}
 
             <tr>

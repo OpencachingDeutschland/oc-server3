@@ -212,7 +212,7 @@ if ($error == false) {
 
                 // Text from textarea; Ocprop
                 if (isset($_POST['logtext'])) {
-                    $log_text = $_POST['logtext'];
+                    $log_text = trim($_POST['logtext']);
                 } else {
                     $log_text = $log_record['text'];
                     if ($descMode == 1) {

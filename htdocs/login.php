@@ -56,7 +56,7 @@ if ($action == 'cookieverify') {
         $tpl->error(ERROR_ALREADY_LOGGEDIN);
     }
 
-    $username = isset($_POST['email']) ? $_POST['email'] : ''; // Ocprop
+    $username = isset($_POST['email']) ? trim($_POST['email']) : ''; // Ocprop
     $password = isset($_POST['password']) ? $_POST['password'] : ''; // Ocprop
 
     $retval = $login->try_login($username, $password, null);

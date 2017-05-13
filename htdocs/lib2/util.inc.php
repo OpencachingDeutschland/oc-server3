@@ -378,9 +378,9 @@ function help_latToDegreeStr($lat)
         $retVal = 'N ';
     }
 
-    $retVal = $retVal . sprintf("%02d", floor($lat)) . '° ';
+    $retVal = $retVal . sprintf('%02d', floor($lat)) . '° ';
     $lat -= floor($lat);
-    $retVal = $retVal . sprintf("%06.3f", round($lat * 60, 3)) . '\'';
+    $retVal = $retVal . sprintf('%06.3f', round($lat * 60, 3)) . '\'';
 
     return $retVal;
 }

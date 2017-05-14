@@ -1932,4 +1932,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2630', 'The use
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2631', 'Please save the changed geocache properties first.', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2632', 'Handycap: Blind', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2633', 'This Cache can be found by blind people.', '2016-08-02 15:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2634', 'More information', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2635', 'Close', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2636', 'This website uses cookies. If you stay on this site you accept the usage of cookies.', '2017-05-14 21:00:00');
 

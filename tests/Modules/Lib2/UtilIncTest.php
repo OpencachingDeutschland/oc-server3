@@ -54,7 +54,6 @@ class UtilIncTest extends AbstractModuleTest
     {
         self::assertTrue((bool) \is_valid_email_address('example@test.com'));
 
-
         self::assertFalse((bool) \is_valid_email_address('example'));
         self::assertFalse((bool) \is_valid_email_address('ääää1230@test.de'));
         self::assertFalse((bool) \is_valid_email_address('!"/()!)"@test.de'));

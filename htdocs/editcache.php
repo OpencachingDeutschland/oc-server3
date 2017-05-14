@@ -134,7 +134,7 @@ if ($error == false) {
                 }
 
                 //here we read all used information from the form if submitted, otherwise from DB
-                $cache_name = trim(isset($_POST['name']) ? $_POST['name'] : $cache_record['name']);  // Ocprop
+                $cache_name = trim(isset($_POST['name']) ? trim($_POST['name']) : $cache_record['name']);  // Ocprop
                 $cache_type = isset($_POST['type']) ? $_POST['type'] : $cache_record['type'];
                 if (!isset($_POST['size'])) {
                     if ($cache_type == 4 || $cache_type == 5) {
@@ -189,8 +189,8 @@ if ($error == false) {
                 $listing_modified = isset($_POST['listing_modified']) ? $_POST['listing_modified'] + 0 : 0;
                 $status = isset($_POST['status']) ? $_POST['status'] : $cache_record['status'];  // Ocprop
                 $status_old = $cache_record['status'];
-                $search_time = isset($_POST['search_time']) ? $_POST['search_time'] : $cache_record['search_time'];
-                $way_length = isset($_POST['way_length']) ? $_POST['way_length'] : $cache_record['way_length'];
+                $search_time = isset($_POST['search_time']) ? trim($_POST['search_time']) : $cache_record['search_time'];
+                $way_length = isset($_POST['way_length']) ? trim($_POST['way_length']) : $cache_record['way_length'];
 
                 if ($status_old == 5 && $status == 5) {
                     if (isset($_POST['publish'])) {  // Ocprop
@@ -262,10 +262,10 @@ if ($error == false) {
                     //get coords from post-form
                     $coords_latNS = $_POST['latNS'];  // Ocprop
                     $coords_lonEW = $_POST['lonEW'];  // Ocprop
-                    $coords_lat_h = $_POST['lat_h'];  // Ocprop
-                    $coords_lon_h = $_POST['lon_h'];  // Ocprop
-                    $coords_lat_min = $_POST['lat_min'];  // Ocprop
-                    $coords_lon_min = $_POST['lon_min'];  // Ocprop
+                    $coords_lat_h = trim($_POST['lat_h']);  // Ocprop
+                    $coords_lon_h = trim($_POST['lon_h']);  // Ocprop
+                    $coords_lat_min = trim($_POST['lat_min']);  // Ocprop
+                    $coords_lon_min = trim($_POST['lon_min']);  // Ocprop
                 } else {
                     //get coords from DB
                     $coords_lon = $cache_record['longitude'];

@@ -45,9 +45,9 @@ if ($error == false) {
                 $show_all_langs = isset($_POST['show_all_langs']) ? $_POST['show_all_langs'] : 0;
                 $short_desc = isset($_POST['short_desc']) ? $_POST['short_desc'] : '';  // Ocprop
 
-                $hints = isset($_POST['hints']) ? $_POST['hints'] : '';  // Ocprop
-                $sel_lang = isset($_POST['desc_lang']) ? $_POST['desc_lang'] : $default_lang;  // Ocprop
-                $desc = isset($_POST['desc']) ? $_POST['desc'] : '';  // Ocprop
+                $hints = isset($_POST['hints']) ? trim($_POST['hints']) : '';  // Ocprop
+                $sel_lang = isset($_POST['desc_lang']) ? trim($_POST['desc_lang']) : $default_lang;  // Ocprop
+                $desc = isset($_POST['desc']) ? trim($_POST['desc']) : '';  // Ocprop
 
                 // read descMode; if not set, initialize from user profile
                 if (isset($_POST['descMode'])) {  // Ocprop

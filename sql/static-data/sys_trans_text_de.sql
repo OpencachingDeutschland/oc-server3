@@ -1929,3 +1929,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> exestiert nicht.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'DE', 'Handycap: Blind', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2633', 'DE', 'Dieser Cache kann von Menschen mit Sehbehinderung gefunden werden.', '2017-05-02 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2634', 'DE', 'Mehr Informationen', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2635', 'DE', 'Schließen', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2636', 'DE', 'Diese Webseite verwendet Cookies. Wenn Sie auf der Seite weitersurfen, stimmen Sie der Cookie-Nutzung zu.', '2017-05-14 21:00:00');

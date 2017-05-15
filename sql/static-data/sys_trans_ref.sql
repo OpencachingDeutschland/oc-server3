@@ -2713,3 +2713,5 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2620'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2621', './templates2/ocstyle/search.tpl', '126');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2632', 'table:cache_attrib;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2633', 'table:cache_attrib;field=html_desc', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2634', './templates2/ocstyle/header/cookie_notice.tpl', '57');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2635', './templates2/ocstyle/header/cookie_notice.tpl', '57');

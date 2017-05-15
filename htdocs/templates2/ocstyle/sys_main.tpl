@@ -108,7 +108,8 @@
 <body{if $opt.session.url==true} onload="initSessionTimeout()"{/if}
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
-{if $opt.template.popup!=false} class="popup"{/if}>
+ class="{if $opt.template.popup!=false}popup{/if}">
+    {include file="header/cookie_notice.tpl"}
     {if $opt.template.popup!=true}
         <div id="overall">
             <div id="langstripe">

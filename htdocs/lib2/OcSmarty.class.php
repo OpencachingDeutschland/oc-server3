@@ -211,6 +211,7 @@ class OcSmarty extends Smarty
         $optn['format'] = $opt['locale'][$opt['template']['locale']]['format'];
         $optn['mail'] = $opt['mail'];
         $optn['lib'] = $opt['lib'];
+        $optn['tracking'] = $opt['tracking'];
         $optn['geokrety'] = $opt['geokrety'];
         $optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
         $optn['help']['oconly'] = helppagelink('oconly', 'OConly');
@@ -256,8 +257,6 @@ class OcSmarty extends Smarty
 
         // build address for switching locales and countries
         $base_pageadr = $_SERVER['REQUEST_URI'];
-
-
 
         // workaround for http://redmine.opencaching.de/issues/703
         $strange_things_pos = strpos($base_pageadr, '.php/');

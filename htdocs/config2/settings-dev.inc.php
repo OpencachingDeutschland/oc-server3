@@ -104,6 +104,8 @@ $opt['page']['showdonations'] = true;
 $opt['page']['showsocialmedia'] = true;
 $opt['page']['headoverlay'] = 'oc_head_alpha3';
 
+$opt['tracking']['googleAnalytics'] = 'UA-59334952-4';
+
 $opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
 $opt['logic']['license']['disclaimer'] = true;
 $opt['logic']['admin']['listingadmin_notification'] = 'root';

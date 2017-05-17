@@ -542,7 +542,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('588', 'The foll
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('590', 'Username:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('591', 'The country is not valid.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('592', 'The entered radius is not valid.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('593', 'An unknown error occurred.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('595', 'New password:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('596', 'Request', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('597', 'Change', '2010-08-28 11:48:04');
@@ -952,7 +951,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1400', 'City:',
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1404', 'Logtype:', '2010-09-07 20:19:02');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1405', 'error while loading the page', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1406', 'In an attempt to create the page, an error has occurred. If you pass through a hyperlink on our side and the problem persists do not hesitate to contact us by email.', '2010-09-07 20:19:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1407', 'The following error occurred:', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1408', 'Page:', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1411', 'are you sure that this log entry shall be removed?', '2010-09-07 20:19:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1412', 'do you want to send {log_user_name} a note?', '2010-09-07 20:19:03');

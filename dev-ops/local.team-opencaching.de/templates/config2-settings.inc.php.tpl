@@ -14,6 +14,8 @@ if (defined('HTTPS_ENABLED')) {
 }
 
 $opt['debug'] = true;
+$opt['httpd']['user'] = 'vagrant';
+$opt['httpd']['group'] = 'vagrant';
 
 // show blog and forum news on index.php
 $debug_startpage_news = false;

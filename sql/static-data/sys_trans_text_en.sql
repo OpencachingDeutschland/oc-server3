@@ -539,7 +539,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'EN', 'Username:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'EN', 'The country is not valid.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'EN', 'The entered radius is not valid.', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'EN', 'An unknown error occurred.', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'EN', 'New password:', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'EN', 'Request', '2010-08-28 11:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'EN', 'Change', '2010-08-28 11:48:07');
@@ -949,7 +948,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1404', 'EN', 'Logtype:', '2010-09-10 23:48:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1405', 'EN', 'Error while loading the page', '2010-09-10 23:48:52');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'EN', 'In an attempt to create the page, an error has occurred. If you pass through a hyperlink on our side and the problem persists do not hesitate to contact us by email.', '2010-09-10 23:48:34');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'EN', 'The following error occurred:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'EN', 'Page:', '2010-09-10 23:48:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'EN', 'Are you sure that this log entry shall be removed?', '2010-09-10 23:47:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'EN', 'Do you want to send {log_user_name} a note? ', '2010-09-10 23:46:49');
@@ -1834,7 +1832,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'EN', '... by log date', '2015-01-20 20:37:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'EN', 'Cache list:', '2015-06-17 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'EN', 'Cache lists:', '2015-06-17 10:09:14');
-
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'EN', 'Handycap: Blind', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2633', 'EN', 'This Cache can be found by blind people.', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2634', 'EN', 'More information', '2017-05-14 21:00:00');

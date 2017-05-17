@@ -252,17 +252,18 @@ if ($queryid != 0) {
     }
 
     // get the search options parameters and store them in the queries table (to view "the next page")
-    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0; // Ocprop
-    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0; // Ocprop
-    $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? $_REQUEST['f_disabled'] : 0;
-    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1; // Ocprop
+    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? (int) $_REQUEST['f_userowner'] : 0; // Ocprop
+    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? (int) $_REQUEST['f_userfound'] : 0; // Ocprop
+    $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? (int) $_REQUEST['f_disabled'] : 0;
     // f_inactive formerly was used for both, archived and disabled caches.
     // After adding the separate f_disabled option, it is used only for archived
     // caches, but keeps its name for compatibility with existing stored or
     // external searches.
-    $options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
-    $options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
-    $options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? $_REQUEST['f_geokrets'] : 0;
+    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? (int) $_REQUEST['f_inactive'] : 1; // Ocprop
+    $options['f_ignored'] = isset($_REQUEST['f_ignored']) ? (int) $_REQUEST['f_ignored'] : 1;
+    $options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? (int) $_REQUEST['f_otherPlatforms'] : 0;
+    $options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? (int) $_REQUEST['f_geokrets'] : 0;
+
     $options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0; // Ocprop: 0
     $options['showresult'] = isset($_REQUEST['showresult']) ? $_REQUEST['showresult'] : 0;
     $options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML'; // Ocprop: HTML
@@ -550,10 +551,21 @@ if (!isset($options['bbox'])) {
 if (!isset($options['f_disabled'])) {
     $options['f_disabled'] = 0;
 }
+if (!isset($options['f_inactive'])) {
+    $options['f_inactive'] = 1;
+}
+if (!isset($options['f_ignored'])) {
+    $options['f_ignored'] = 1;
+}
 if (!isset($options['f_geokrets'])) {
     $options['f_geokrets'] = 0;
 }
-
+if (!isset($options['f_userfound'])) {
+    $options['f_userfound'] = 0;
+}
+if (!isset($options['f_userowner'])) {
+    $options['f_userowner'] = 0;
+}
 if (!isset($options['showresult'])) {
     $options['showresult'] = 0;
 }
@@ -886,7 +898,7 @@ if ($options['showresult'] == 1) {
                 );
             }
             $r = sql_fetch_array($rs);
-            
+
             if ($r) {
                 $lat = $r['latitude'];
                 $lon = $r['longitude'];
@@ -1029,7 +1041,7 @@ if ($options['showresult'] == 1) {
             if (isset($options['ft_pictures']) && $options['ft_pictures']) {
                 $ft_types[] = 6;
             }
-            if (count($ft_types) == 0) {
+            if (count($ft_types) === 0) {
                 $ft_types[] = 0;
             }
 
@@ -1108,17 +1120,11 @@ if ($options['showresult'] == 1) {
         }
 
         // additional options
-        if (!isset($options['f_userowner'])) {
-            $options['f_userowner'] = '0';
-        }
-        if ($options['f_userowner'] != 0) {  // Ocprop
+        if ($options['f_userowner'] === 1) {  // Ocprop
             $sql_where[] = '`caches`.`user_id`!=\'' . $login->userid . '\'';
         }
 
-        if (!isset($options['f_userfound'])) {
-            $options['f_userfound'] = '0';
-        }
-        if ($options['f_userfound'] != 0) {  // Ocprop
+        if ($options['f_userfound'] === 1) {  // Ocprop
             $sql_where[] =
                 "`caches`.`cache_id` NOT IN
                     (SELECT `cache_logs`.`cache_id`
@@ -1127,28 +1133,19 @@ if ($options['showresult'] == 1) {
                         `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'
                         AND `cache_logs`.`type` IN (1, 7))";
         }
-        if (!isset($options['f_inactive'])) {
-            $options['f_inactive'] = '0';
-        }
-        if ($options['f_inactive'] != 0) {  // Ocprop
+        if ($options['f_inactive'] === 1) {  // Ocprop
             $sql_where[] = '`caches`.`status` NOT IN (3,6,7)';
         }
         // f_inactive formerly was used for both, archived and disabled caches.
         // After adding the separate f_disabled option, it is used only for archived
         // caches, but keeps its name for compatibility with existing stored or
         // external searches.
-        if (!isset($options['f_disabled'])) {
-            $options['f_disabled'] = '0';
-        }
-        if ($options['f_disabled'] != 0) {
+        if ($options['f_disabled'] === 1) {
             $sql_where[] = '`caches`.`status`<>2';
         }
 
         if ($login->logged_in()) {
-            if (!isset($options['f_ignored'])) {
-                $options['f_ignored'] = '0';
-            }
-            if ($options['f_ignored'] != 0) {
+            if ($options['f_ignored'] === 1) {
                 // only use this filter, if it is really needed
                 // this enables better caching in map2.php with ignored-filter
                 if (sql_value_slave(
@@ -1163,17 +1160,12 @@ if ($options['showresult'] == 1) {
                 }
             }
         }
-        if (!isset($options['f_otherPlatforms'])) {
-            $options['f_otherPlatforms'] = '0';
-        }
-        if ($options['f_otherPlatforms'] != 0) {
+
+        if ($options['f_otherPlatforms'] === 1) {
             $sql_where[] = "`caches`.`wp_gc_maintained`=''";
         }
 
-        if (!isset($options['f_geokrets'])) {
-            $options['f_geokrets'] = '0';
-        }
-        if ($options['f_geokrets'] != 0) {
+        if ($options['f_geokrets'] === 1) {
             $sql_where[] = "(SELECT COUNT(*) FROM `gk_item_waypoint` WHERE `wp`=`caches`.`wp_oc`)";
         }
 
@@ -1706,27 +1698,27 @@ function outputSearchForm($options)
 
     //hide caches... (checkboxes)
 
-    $tpl->assign('f_userowner_checked', $login->logged_in() && ($options['f_userowner'] == 1));
-    $tpl->assign('hidopt_userowner', ($options['f_userowner'] == 1) ? '1' : '0');
+    $tpl->assign('f_userowner_checked', $login->logged_in() && ($options['f_userowner'] === 1));
+    $tpl->assign('hidopt_userowner', ($options['f_userowner'] === 1) ? '1' : '0');
 
-    $tpl->assign('f_userfound_checked', $login->logged_in() && ($options['f_userfound'] == 1));
-    $tpl->assign('hidopt_userfound', ($options['f_userfound'] == 1) ? '1' : '0');
+    $tpl->assign('f_userfound_checked', $login->logged_in() && ($options['f_userfound'] === 1));
+    $tpl->assign('hidopt_userfound', (string) $options['f_userfound']);
 
-    $tpl->assign('f_ignored_checked', $login->logged_in() && ($options['f_ignored'] == 1));
-    $tpl->assign('hidopt_ignored', ($options['f_ignored'] == 1) ? '1' : '0');
+    $tpl->assign('f_ignored_checked', $login->logged_in() && $options['f_ignored'] === 1);
+    $tpl->assign('hidopt_ignored', (string) $options['f_ignored']);
 
-    $tpl->assign('f_disabled_checked', $options['f_disabled'] == 1);
-    $tpl->assign('hidopt_disabled', ($options['f_disabled'] == 1) ? '1' : '0');
+    $tpl->assign('f_disabled_checked', $options['f_disabled'] === 1);
+    $tpl->assign('hidopt_disabled', (string) $options['f_disabled']);
 
     // archived is called "disabled" here for backward compatibility
-    $tpl->assign('f_inactive_checked', $options['f_inactive'] == 1);
-    $tpl->assign('hidopt_inactive', ($options['f_inactive'] == 1) ? '1' : '0');
+    $tpl->assign('f_inactive_checked', $options['f_inactive'] === 1);
+    $tpl->assign('hidopt_inactive', (string) $options['f_inactive']);
 
-    $tpl->assign('f_otherPlatforms_checked', $options['f_otherPlatforms'] == 1);
-    $tpl->assign('hidopt_otherPlatforms', ($options['f_otherPlatforms'] == 1) ? '1' : '0');
+    $tpl->assign('f_otherPlatforms_checked', $options['f_otherPlatforms'] === 1);
+    $tpl->assign('hidopt_otherPlatforms', (string) $options['f_otherPlatforms']);
 
-    $tpl->assign('f_geokrets_checked', $options['f_geokrets'] == 1);
-    $tpl->assign('hidopt_geokrets', ($options['f_geokrets'] == 1) ? '1' : '0');
+    $tpl->assign('f_geokrets_checked', $options['f_geokrets'] === 1);
+    $tpl->assign('hidopt_geokrets', (string) $options['f_geokrets']);
 
     if (!isset($options['country'])) {
         $options['country'] = '';
@@ -1869,7 +1861,7 @@ function outputSearchForm($options)
     $tpl->assign('searchtype_byortplz', in_array($options['searchtype'], ['byplz', 'byort']));
     $tpl->assign('searchtype_bywaypoint', $options['searchtype'] == 'bywaypoint');
     $tpl->assign('searchtype_bycoords', $options['searchtype'] == 'bycoords');
-    
+
     // owner
     $tpl->assign('owner', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
     $tpl->assign('searchtype_byowner', $options['searchtype'] == 'byowner');
@@ -2266,7 +2258,7 @@ function outputSearchForm($options)
 
     //all
     $tpl->assign('searchtype_byall', $options['searchtype'] == 'all');
-    
+
     // error messages
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {

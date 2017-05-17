@@ -2,12 +2,24 @@ Changes in oc-server 3.1
 
 All notable changes of the oc-server 3.1 release series are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## unreleased [3.1.2...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...development)
+## unreleased [3.1.3...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...development)
+
+### Added
+
+### Changed
+
+### Removed
+
+### Fixed
+
+## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 
 ### Added
 - added handicap cache attribute  [#1031](http://redmine.opencaching.de/issues/1031)
 - added maintenance mode [#841](http://redmine.opencaching.de/issues/841)
 - added new theme structure and bootstrap 4
+- adding google analytics tracking [#1038](http://redmine.opencaching.de/issues/1038)
+- adding cookie notice [#768](http://redmine.opencaching.de/issues/768)
 
 ### Changed
 - change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745)
@@ -15,6 +27,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - cleaned up old directories [#1033](http://redmine.opencaching.de/issues/1033)
 - support line breaks in filed notes file [#1042](http://redmine.opencaching.de/issues/1042)
 - show only log password if it is needed [#1021](http://redmine.opencaching.de/issues/1021)
+- trim input values like listing name [#221](http://redmine.opencaching.de/issues/221)
 
 ### Removed
 

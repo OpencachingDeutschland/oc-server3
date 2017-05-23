@@ -24,22 +24,20 @@ class PageController extends AbstractController
         $repository = $this->getDoctrine()->getRepository('AppBundle:PageGroup');
         $pageBlocksQuery = $repository->getPageBlocksBySlugQuery($slug);
 
-        $result = $pageBlocksQuery->execute();
+        $contentPages = $pageBlocksQuery->execute();
 
-        echo'<pre>';
-        print_r($result);
-        echo'</pre>';
-        die();
-
-
+//        /**
+//         *
+//         * @var array $pageGroup
+//         */
 //        $pageGroup->getPageBlocks();
-//
-//        if (count($contentPages) === 0) {
-//            throw $this->createNotFoundException('Page not found.');
-//        }
+
+        if (count($contentPages) === 0) {
+            throw $this->createNotFoundException('Page not found.');
+        }
 
         return $this->render('@App/Impressum/index.html.twig', [
-//            'contentPages' => $contentPages
+            'contentPages' => $contentPages
         ]);
     }
 

@@ -23,7 +23,7 @@ class PageRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('page_blocks_by_slug');
 
-        $qb->select(['page_group_id', 'page_blocks']);
+        $qb->select(['pageGroup', 'pageBlocks']);
         $qb->from('AppBundle:PageGroup', 'pageGroup')
             ->leftJoin('pageGroup.pageBlocks', 'pageBlocks')
             ->where('pageGroup.slug = :slug')

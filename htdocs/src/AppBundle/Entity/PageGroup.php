@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\OneToMany;
 /**
  * PageGroup
  *
- * @ORM\Table(name="page_group")
+ * @ORM\Table(name="page_groups")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PageRepository")
  */
 class PageGroup

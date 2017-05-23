@@ -40,6 +40,8 @@ class Version20170516084212 extends AbstractMigration
                 active TINYINT(1) NOT null,
             PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
         ');
+
+        $this->addSql('ALTER TABLE page_blocks ADD FOREIGN KEY  (page_group_id) REFERENCES page_groups(id);');
     }
 
     /**

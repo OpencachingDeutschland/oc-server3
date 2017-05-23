@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 /**
  * PageBlock
  *
- * @ORM\Table(name="page_blocks")
+ * @ORM\Table(name="page_block")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PageRepository")
  */
 class PageBlock
@@ -71,7 +71,7 @@ class PageBlock
      * @var integer PageGroup
      *
      * @ManyToOne(targetEntity="PageGroup")
-     * @JoinColumn(name="page_group_id", referencedColumnName="id")
+     * @JoinColumn(name="page_block_id", referencedColumnName="id")
      */
     private $pageGroup;
 

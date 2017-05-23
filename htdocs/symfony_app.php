@@ -29,10 +29,15 @@ if ($response->getStatusCode() === 404) {
     exit;
 }
 
+$excludeRoutes = [
+    'field-notes',
+    'page'
+];
+
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
     || $request->getRequestFormat() !== 'html'
-    || $request->attributes->get('_route') !== 'field-notes'
+    || !in_array($request->attributes->get('_route'), $excludeRoutes)
     || preg_match('/\/_/', $request->getPathInfo()) === 1 // e.g. /_profiler/
     || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
 ) {

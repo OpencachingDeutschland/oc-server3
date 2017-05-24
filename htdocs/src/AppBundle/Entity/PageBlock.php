@@ -70,7 +70,7 @@ class PageBlock
      *
      * @var integer PageGroup
      *
-     * @ManyToOne(targetEntity="PageGroup")
+     * @ManyToOne(targetEntity="PageGroup", inversedBy="pageBlocks")
      * @JoinColumn(name="page_group_id", referencedColumnName="id")
      */
     private $pageGroup;

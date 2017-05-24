@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\PageGroup;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -19,25 +20,23 @@ class PageController extends AbstractController
     public function indexAction($slug)
     {
         $slug = strtolower($slug);
-//        $this->setMenu(MNU_MYPROFILE_CONTENT_PAGES);
+        $this->setMenu(MNU_START);
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:PageGroup');
-        $pageBlocksQuery = $repository->getPageBlocksBySlugQuery($slug);
+        $pageBlocksQueryBuilder = $repository->getPageBlocksBySlugQueryBuilder(
+            $slug,
+            'pageGroup.active = 1 AND pageBlocks.active = 1'
+        );
 
-        $contentPages = $pageBlocksQuery->execute();
+        /** @var PageGroup $pageGroup */
+        $pageGroup = $pageBlocksQueryBuilder->getQuery()->getOneOrNullResult();
 
-//        /**
-//         *
-//         * @var array $pageGroup
-//         */
-//        $pageGroup->getPageBlocks();
-
-        if (count($contentPages) === 0) {
+        if (!$pageGroup || $pageGroup->getPageBlocks()->count() === 0) {
             throw $this->createNotFoundException('Page not found.');
         }
 
-        return $this->render('@App/Impressum/index.html.twig', [
-            'contentPages' => $contentPages
+        return $this->render('@App/Pages/index.html.twig', [
+            'pageGroup' => $pageGroup
         ]);
     }
 

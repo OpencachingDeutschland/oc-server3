@@ -16,10 +16,12 @@ class PageRepository extends EntityRepository
      * Create Query for Static PageBlocks
      *
      * @param string $slug
+     * @param null $filter
+     * @param null $sort
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getPageBlocksBySlugQueryBuilder($slug)
+    public function getPageBlocksBySlugQueryBuilder($slug, $filter = null, $sort = null)
     {
         $qb = $this->createQueryBuilder('page_blocks_by_slug');
 
@@ -29,6 +31,16 @@ class PageRepository extends EntityRepository
             ->where('pageGroup.slug = :slug')
             ->setParameter('slug', $slug);
 
+        if ($filter) {
+            $qb->andWhere($filter);
+        }
+
+        if ($sort) {
+            $qb->addOrderBy($sort);
+        } else {
+            $qb->addOrderBy('pageBlocks.position', 'ASC');
+        }
+
         return $qb;
     }
 
@@ -36,11 +48,13 @@ class PageRepository extends EntityRepository
      * GetBlocksBySlugQuery
      *
      * @param string $slug
+     * @param null $filter
+     * @param null $sort
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getPageBlocksBySlugQuery($slug)
+    public function getPageBlocksBySlugQuery($slug, $filter = null, $sort = null)
     {
-        return $this->getPageBlocksBySlugQueryBuilder($slug)->getQuery();
+        return $this->getPageBlocksBySlugQueryBuilder($slug, $filter, $sort)->getQuery();
     }
 }

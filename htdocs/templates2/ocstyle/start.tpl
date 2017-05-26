@@ -20,8 +20,8 @@
                 <td>
                     <p class="content-title-noshade-size3">
                         <img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="24" height="24" alt="" />
-                        <a href="http://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
-                        &nbsp; <span class="content-title-link">[<a href="http://blog.opencaching.de/">{t}more{/t}...</a>]</span>
+                        <a href="https://blog.opencaching.de/" style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
+                        &nbsp; <span class="content-title-link">[<a href="https://blog.opencaching.de/">{t}more{/t}...</a>]</span>
                     </p>
                 </td>
                 {if "$newsfeed" != ""}

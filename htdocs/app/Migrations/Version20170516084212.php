@@ -12,10 +12,14 @@ class Version20170516084212 extends AbstractMigration
 {
     /**
      * @param Schema $schema
+     * @return void
      */
     public function up(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf(
+            $this->connection->getDatabasePlatform()->getName() != 'mysql',
+            'Migration can only be executed safely on \'mysql\'.'
+        );
 
         $this->addSql('
             CREATE TABLE page_blocks(
@@ -32,7 +36,7 @@ class Version20170516084212 extends AbstractMigration
         $this->addSql('
             CREATE TABLE page_groups(
                 id INT AUTO_INCREMENT NOT null,
-                slug VARCHAR(80) NOT null,
+                slug VARCHAR(80) NOT null UNIQUE ,
                 meta_keywords VARCHAR(255) NOT null,
                 meta_description VARCHAR(255) DEFAULT null,
                 meta_social LONGTEXT DEFAULT null,
@@ -46,10 +50,10 @@ class Version20170516084212 extends AbstractMigration
 
     /**
      * @param Schema $schema
+     * @return void
      */
     public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

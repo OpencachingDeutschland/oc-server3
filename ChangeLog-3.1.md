@@ -11,6 +11,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Removed
 
 ### Fixed
+- fixed cookie notice [#1052](https://redmine.opencaching.de/issues/1052)
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

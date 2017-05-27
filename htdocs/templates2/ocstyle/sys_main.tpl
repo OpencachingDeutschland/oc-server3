@@ -369,8 +369,6 @@
             </script>
             {/literal}
         {/if}
-    {else}
-        asdfasdf
     {/if}
 </body>
 </html>

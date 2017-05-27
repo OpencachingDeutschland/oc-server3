@@ -79,7 +79,9 @@
 
         var cookieNoticeCloseButton = document.getElementById('js--cookie-notice--close-button');
         cookieNoticeCloseButton.onclick = function () {
-            document.cookie = ocCookieNoticeName+"=1; path=/";
+            var expiration = new Date();
+            expiration = new Date(expiration.getTime()+1000*60*60*24*365);
+            document.cookie = ocCookieNoticeName + '=1; path=/; expires=' + expiration.toGMTString() + ';';
             bodyElement.classList.remove("cookie-notice--body");
             return false;
         };

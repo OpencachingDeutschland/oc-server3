@@ -16,31 +16,31 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 
 ### Added
-- added handicap cache attribute  [#1031](http://redmine.opencaching.de/issues/1031)
-- added maintenance mode [#841](http://redmine.opencaching.de/issues/841)
+- added handicap cache attribute  [#1031](https://redmine.opencaching.de/issues/1031)
+- added maintenance mode [#841](https://redmine.opencaching.de/issues/841)
 - added new theme structure and bootstrap 4
-- adding google analytics tracking [#1038](http://redmine.opencaching.de/issues/1038)
-- adding cookie notice [#768](http://redmine.opencaching.de/issues/768)
+- adding google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
+- adding cookie notice [#768](https://redmine.opencaching.de/issues/768)
 
 ### Changed
-- change default geocache publish type [#1040](http://redmine.opencaching.de/issues/1040),[#745](http://redmine.opencaching.de/issues/745)
-- increased max image size for log pictures [#1037](http://redmine.opencaching.de/issues/1037)
-- cleaned up old directories [#1033](http://redmine.opencaching.de/issues/1033)
-- support line breaks in filed notes file [#1042](http://redmine.opencaching.de/issues/1042)
-- show only log password if it is needed [#1021](http://redmine.opencaching.de/issues/1021)
-- trim input values like listing name [#221](http://redmine.opencaching.de/issues/221)
+- change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)
+- increased max image size for log pictures [#1037](https://redmine.opencaching.de/issues/1037)
+- cleaned up old directories [#1033](https://redmine.opencaching.de/issues/1033)
+- support line breaks in filed notes file [#1042](https://redmine.opencaching.de/issues/1042)
+- show only log password if it is needed [#1021](https://redmine.opencaching.de/issues/1021)
+- trim input values like listing name [#221](https://redmine.opencaching.de/issues/221)
 
 ### Removed
 
 ### Fixed
-- support c:geo field notes file [#1042](http://redmine.opencaching.de/issues/1042)
+- support c:geo field notes file [#1042](https://redmine.opencaching.de/issues/1042)
 - broken image links
-- fixed display issue in cache recommendation [#1036](http://redmine.opencaching.de/issues/1036)
+- fixed display issue in cache recommendation [#1036](https://redmine.opencaching.de/issues/1036)
 
 ## [3.1.2] - 2017-02-06 [3.1.1...3.1.2](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.1...3.1.2)
 
 ### Added
-* user search [#1015](http://redmine.opencaching.de/issues/1015)
+* user search [#1015](https://redmine.opencaching.de/issues/1015)
 * adding psh.phar
 * adding more UnitTests
 * travis ci integration completed 
@@ -48,10 +48,10 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Changed
 * fix login issue with lib and lib2 components
 * code style improvements based on scrutinizer patches
-* recommendation star [#1013](http://redmine.opencaching.de/issues/1013)
-* hidden caches [#1001](http://redmine.opencaching.de/issues/1001)
-* fixing language links [#1022](http://redmine.opencaching.de/issues/1022)
-* fixing language switch [#995](http://redmine.opencaching.de/issues/995)
+* recommendation star [#1013](https://redmine.opencaching.de/issues/1013)
+* hidden caches [#1001](https://redmine.opencaching.de/issues/1001)
+* fixing language links [#1022](https://redmine.opencaching.de/issues/1022)
+* fixing language switch [#995](https://redmine.opencaching.de/issues/995)
 
 ### Removed
 * not needed sql debug functions

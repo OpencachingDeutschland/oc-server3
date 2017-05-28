@@ -63,7 +63,7 @@ on development:
 
 Related Websites
 ----------------
-* [Opencaching.de development todo list](http://redmine.opencaching.de/projects/oc-dev)
+* [Opencaching.de Issue Tracker](http://redmine.opencaching.de/projects/oc-dev)
 * [Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
 * [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
 * [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)

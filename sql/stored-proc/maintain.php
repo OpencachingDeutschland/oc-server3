@@ -51,7 +51,7 @@ if ($dbsv) {
     }
     @unlink($opt['rootpath'] . 'var/cache2/dbsv-running');
 } else {
-    require 'maintain-current.inc.php';
+    require __DIR__ . '/maintain-current.inc.php';
 }
 
 

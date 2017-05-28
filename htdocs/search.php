@@ -470,7 +470,7 @@ if ($queryid != 0) {
         // For non-distance-based searches, sort by name instead of distance if
         // no reference coords exist.
         if (!isset($options['lat']) || !isset($options['lon']) || $options['lat'] + $options['lon'] == 0) {
-            if (!$homecoords) {
+            if (!$homecoords && !$options['sort']) {
                 $options['sort'] = 'byname';
             }
         }
@@ -486,7 +486,6 @@ if (isset($_REQUEST['sortorder'])) {
 if (isset($_REQUEST['creationdate'])) {
     $options['creationdate'] = $_REQUEST['creationdate'];
 }
-
 
 //=========================================================
 //  3. query caching
@@ -557,6 +556,7 @@ if (!isset($options['f_geokrets'])) {
 if (!isset($options['showresult'])) {
     $options['showresult'] = 0;
 }
+
 if ($options['showresult'] == 1) {
     //===============================================================
     //  X5. build basic SQL statement depends on search type

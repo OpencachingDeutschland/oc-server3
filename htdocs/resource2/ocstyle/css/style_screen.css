@@ -531,7 +531,24 @@ a.info:hover span{ /*the span will display just on :hover state*/
    as the right-padding is not correctly calculated into the GM InfoWindow
    content size. */
 
-#googlemap a[href], #ocmain a[href^="http://www.opencaching"], #ocmain a[href^="https://www.opencaching"], #ocmain a[href^="http://blog.opencaching"], #ocmain a[href^="http://forum.opencaching"], #ocmain a[href^="http://wiki.opencaching"], #ocmain a[href^="http://opencaching"], #ocmain a[href^="https://opencaching"], #ocmain a[href^="http://test.opencaching"], #ocmain a[href^="https://test.opencaching"], #ocmain a[href^="http://local.opencaching"], #ocmain a[href^="https://local.opencaching"], #ocmain a[href^="http://oc-devel"]
+#googlemap a[href],
+#ocmain a[href^="http://www.opencaching"],
+#ocmain a[href^="https://www.opencaching"],
+#ocmain a[href^="http://blog.opencaching"],
+#ocmain a[href^="https://blog.opencaching"],
+#ocmain a[href^="http://forum.opencaching"],
+#ocmain a[href^="https://forum.opencaching"],
+#ocmain a[href^="http://wiki.opencaching"],
+#ocmain a[href^="https://wiki.opencaching"],
+#ocmain a[href^="http://opencaching"],
+#ocmain a[href^="https://opencaching"],
+#ocmain a[href^="http://test.opencaching"],
+#ocmain a[href^="https://test.opencaching"],
+#ocmain a[href^="http://local.opencaching"],
+#ocmain a[href^="https://local.opencaching"],
+#ocmain a[href^="http://local.team-opencaching.de"],
+#ocmain a[href^="https://local.team-opencaching.de"],
+#ocmain a[href^="http://oc-devel"]
 {
     padding-right: 0;
     background-image: none;

@@ -28,7 +28,7 @@ class Version20170516084212 extends AbstractMigration
                 title VARCHAR(255) NOT null,
                 html LONGTEXT NOT null,
                 position INT DEFAULT null,
-                last_changed DATETIME NOT null,
+                updated_at DATETIME NOT null,
                 active TINYINT(1) NOT null,
             PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
         ');
@@ -40,7 +40,7 @@ class Version20170516084212 extends AbstractMigration
                 meta_keywords VARCHAR(255) NOT null,
                 meta_description VARCHAR(255) DEFAULT null,
                 meta_social LONGTEXT DEFAULT null,
-                last_changed DATETIME NOT null,
+                updated_at DATETIME NOT null,
                 active TINYINT(1) NOT null,
             PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
         ');

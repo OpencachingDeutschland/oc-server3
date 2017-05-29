@@ -54,9 +54,9 @@ class PageBlock
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="last_changed", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime")
      */
-    private $lastChanged;
+    private $updatedAt;
 
     /**
      * @var int
@@ -184,13 +184,13 @@ class PageBlock
     /**
      * Set lastChanged
      *
-     * @param \DateTime $lastChanged
+     * @param \DateTime $updatedAt
      *
      * @return PageBlock
      */
-    public function setLastChanged($lastChanged)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->lastChanged = $lastChanged;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -200,9 +200,9 @@ class PageBlock
      *
      * @return \DateTime
      */
-    public function getLastChanged()
+    public function getUpdatedAt()
     {
-        return $this->lastChanged;
+        return $this->updatedAt;
     }
 
     /**

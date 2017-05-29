@@ -16,7 +16,7 @@ class Version20170526221753 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->addSql('INSERT INTO opencaching.page_blocks (page_group_id, title, html, position, last_changed, active) VALUES (1, \'Impressum\', \'<div style="float: left; width: 50%">
+        $this->addSql('INSERT INTO page_blocks (page_group_id, title, html, position, updated_at, active) VALUES (1, \'Impressum\', \'<div style="float: left; width: 50%">
             <h2>Angaben gem&auml;&szlig; &sect; 5 TMG:</h2>
             <address>
                 Opencaching Deutschland e. V.<br/>
@@ -56,7 +56,7 @@ class Version20170526221753 extends AbstractMigration
                 <dt>E-Mail verein@opencaching.de</dd>
             </dl>
         </div>\', 1, \'2017-05-23 17:32:32\', 1);');
-        $this->addSql('INSERT INTO opencaching.page_blocks (page_group_id, title, html, position, last_changed, active) VALUES (1, \'Haftung für Inhalte\', \'<blockquote>Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten
+        $this->addSql('INSERT INTO page_blocks (page_group_id, title, html, position, updated_at, active) VALUES (1, \'Haftung für Inhalte\', \'<blockquote>Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten
                 nach den allgemeinen Gesetzen
                 verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
                 &uuml;bermittelte oder gespeicherte fremde
@@ -71,7 +71,7 @@ class Version20170526221753 extends AbstractMigration
                 Bei Bekanntwerden von
                 entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
     </blockquote>\', 2, \'2017-05-23 17:33:12\', 1);');
-        $this->addSql('INSERT INTO opencaching.page_blocks (page_group_id, title, html, position, last_changed, active) VALUES (1, \'Haftung für Links\', \'<blockquote>Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf deren
+        $this->addSql('INSERT INTO page_blocks (page_group_id, title, html, position, updated_at, active) VALUES (1, \'Haftung für Links\', \'<blockquote>Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf deren
                 Inhalte wir keinen Einfluss haben. Deshalb k&ouml;nnen wir f&uuml;r diese
                 fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte
                 der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
@@ -84,7 +84,7 @@ class Version20170526221753 extends AbstractMigration
                 Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend
                 entfernen.
     </blockquote>\', 3, \'2017-05-23 17:35:19\', 1);');
-        $this->addSql('INSERT INTO opencaching.page_blocks (page_group_id, title, html, position, last_changed, active) VALUES (1, \'Urheberrecht\', \'<blockquote>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+        $this->addSql('INSERT INTO page_blocks (page_group_id, title, html, position, updated_at, active) VALUES (1, \'Urheberrecht\', \'<blockquote>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
                 Urheberrecht. Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede
                 Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechtes
                 bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw.

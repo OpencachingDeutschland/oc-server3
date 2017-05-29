@@ -61,9 +61,9 @@ class PageGroup
     /**
      * @var bool
      *
-     * @ORM\Column(name="active", type="boolean")
+     * @ORM\Column(name="active", type="boolean", nullable=false )
      */
-    private $active;
+    private $active = '1';
 
     /**
      * One PageGroup has many PageBlocks.

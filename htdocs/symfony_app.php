@@ -24,22 +24,29 @@ $locale = strtolower($opt['template']['locale']);
 $request->setLocale($locale);
 $response = $kernel->handle($request);
 
-if ($response->getStatusCode() === 404) {
-    include __DIR__ . '/404.php';
-    exit;
-}
-
+/**
+ * @var array $excludeRoutes Which route is not to be in legacy page?
+ */
 $excludeRoutes = [
     'field-notes',
     'page'
 ];
 
+if ($response->getStatusCode() === 404) {
+    include __DIR__ . '/404.php';
+    exit;
+}
+
+/**
+ * @var array $excludeRoutes Wich controller should not be compiled in symfony?
+ */
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
     || $request->getRequestFormat() !== 'html'
-    || !in_array($request->attributes->get('_route'), $excludeRoutes)
+    || !in_array($request->attributes->get('_route'), $excludeRoutes, true)
     || preg_match('/\/_/', $request->getPathInfo()) === 1 // e.g. /_profiler/
-    || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
+    || ($response->headers->has('Content-Type')
+    && strpos($response->headers->get('Content-Type'), 'html') === false)
 ) {
     $response->send();
     $kernel->terminate($request, $response);

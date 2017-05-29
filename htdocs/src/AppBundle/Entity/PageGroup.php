@@ -63,7 +63,7 @@ class PageGroup
      *
      * @ORM\Column(name="active", type="boolean", nullable=false )
      */
-    private $active = '1';
+    private $active = true;
 
     /**
      * One PageGroup has many PageBlocks.

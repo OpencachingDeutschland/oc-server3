@@ -77,7 +77,7 @@ class CronJobController
      */
     public static function run_jobs($type, $wait=false)
     {
-        require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
+        require_once __DIR__ . '/service_runner.php';
 
         # We don't want other cronjobs of the same time to run simultanously.
         $lock = OkapiLock::get('cronjobs-'.$type);
@@ -146,7 +146,7 @@ class CronJobController
      */
     public static function force_run($job_name)
     {
-        require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
+        require_once __DIR__ . '/service_runner.php';
 
         foreach (self::get_enabled_cronjobs() as $cronjob)
         {
@@ -605,7 +605,7 @@ class ChangeLogWriterJob extends Cron5Job
     public function get_period() { return 300; }
     public function execute()
     {
-        require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
+        require_once __DIR__ . '/services/replicate/replicate_common.inc.php';
         ReplicateCommon::update_clog_table();
     }
 }
@@ -621,7 +621,7 @@ class ChangeLogCheckerJob extends Cron24Job
     public function get_scheduled_time() { return "04:20"; }
     public function execute()
     {
-        require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
+        require_once __DIR__ . '/services/replicate/replicate_common.inc.php';
         $ignored_fields = array('url');
         ReplicateCommon::verify_clog_consistency(false, $ignored_fields);
     }
@@ -635,7 +635,7 @@ class FulldumpGeneratorJob extends Cron5Job
     public function get_period() { return 7*86400; }
     public function execute()
     {
-        require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
+        require_once __DIR__ . '/services/replicate/replicate_common.inc.php';
         ReplicateCommon::generate_fulldump();
     }
 }
@@ -653,7 +653,7 @@ class TileTreeUpdater extends Cron5Job
         if ($tiletree_revision === $current_clog_revision) {
             # No update necessary.
         } elseif ($tiletree_revision < $current_clog_revision) {
-            require_once($GLOBALS['rootpath']."okapi/services/caches/map/replicate_listener.inc.php");
+            require_once __DIR__ . '/services/caches/map/replicate_listener.inc.php';
             if ($current_clog_revision - $tiletree_revision < 30000)  # In the middle of 2012, OCPL generated 30000 entries per week
             {
                 for ($timeout = time() + 240; time() < $timeout; )  # Try to stop after 4 minutes.
@@ -692,7 +692,7 @@ class ChangeLogCleanerJob extends Cron24Job
     public function get_scheduled_time() { return "04:20"; }
     public function execute()
     {
-        require_once($GLOBALS['rootpath']."okapi/services/replicate/replicate_common.inc.php");
+        require_once __DIR__ . '/services/replicate/replicate_common.inc.php';
         $max_revision = ReplicateCommon::get_revision();
         $cache_key = 'clog_revisions_daily';
         $data = Cache::get($cache_key);
@@ -858,7 +858,7 @@ class LocaleChecker extends Cron5Job
     public function get_period() { return 7*86400; }
     public function execute()
     {
-        require_once($GLOBALS['rootpath']."okapi/locale/locales.php");
+        require_once __DIR__ . '/locale/locales.php';
         $required = Locales::get_required_locales();
         $installed = Locales::get_installed_locales();
         $missing = array();

@@ -111,7 +111,7 @@
                 </ul>
                 <p>You should iterate through this changelog sequentially. All the changes should be applied
                 in the same order as they were listed in the changelog. Single object may appear multiple times
-                inside the changelog. Changelog will contain all the changes which occurred since the time you
+                inside the changelog. Changelog will contain all the changes which occured since the time you
                 specified in the <b>since</b> parameter and it MAY contain some more, which were submitted
                 <b>before</b> this date (see below). The changes which are unnecessary MAY be skipped (ex. when
                 cache description changes multiple times, we may want to include only the last change).</p>

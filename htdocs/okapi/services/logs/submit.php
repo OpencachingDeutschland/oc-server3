@@ -681,11 +681,12 @@ class WebService
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
+        $langprefs = explode("|", $langpref);
 
         # Error messages thrown via CannotPublishException exceptions should be localized.
         # They will be delivered for end user to display in his language.
 
-        Okapi::gettext_domain_init(explode("|", $langpref));
+        Okapi::gettext_domain_init($langprefs);
         try
         {
             # If appropriate, $success_message might be changed inside the _call.

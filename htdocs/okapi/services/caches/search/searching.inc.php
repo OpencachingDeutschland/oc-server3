@@ -23,7 +23,7 @@ class SearchAssistant
      * Initializes an object with a content of the client request.
      * (The request should contain common geocache search parameters.)
      */
-    public  function __construct(OkapiRequest $request)
+    public function __construct(OkapiRequest $request)
     {
         $this->request = $request;
         $this->longitude_expr = NULL;
@@ -511,9 +511,6 @@ class SearchAssistant
 
         if ($tmp = $this->request->get_parameter('name'))
         {
-            # WRTODO: Make this more user-friendly. See:
-            # https://github.com/opencaching/okapi/issues/121
-
             if (strlen($tmp) > 100)
                 throw new InvalidParam('name', "Maximum length of 'name' parameter is 100 characters");
             $tmp = str_replace("*", "%", str_replace("%", "%%", $tmp));

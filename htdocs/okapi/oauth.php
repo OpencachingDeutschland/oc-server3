@@ -172,13 +172,13 @@ class OAuthConsumer {
   public $key;
   public $secret;
 
-  function __construct($key, $secret, $callback_url=NULL) {
+  public function __construct($key, $secret, $callback_url=NULL) {
     $this->key = $key;
     $this->secret = $secret;
     $this->callback_url = $callback_url;
   }
 
-  function __toString() {
+  public function __toString() {
     return "OAuthConsumer[key=$this->key,secret=$this->secret]";
   }
 }
@@ -192,7 +192,7 @@ class OAuthToken {
    * key = the token
    * secret = the token secret
    */
-  function __construct($key, $secret) {
+  public function __construct($key, $secret) {
     $this->key = $key;
     $this->secret = $secret;
   }
@@ -201,14 +201,14 @@ class OAuthToken {
    * generates the basic string serialization of a token that a server
    * would respond to request_token and access_token calls with
    */
-  function to_string() {
+  public function to_string() {
     return "oauth_token=" .
            OAuthUtil::urlencode_rfc3986($this->key) .
            "&oauth_token_secret=" .
            OAuthUtil::urlencode_rfc3986($this->secret);
   }
 
-  function __toString() {
+  public function __toString() {
     return $this->to_string();
   }
 }
@@ -274,7 +274,7 @@ abstract class OAuthSignatureMethod {
  *   - Chapter 9.2 ("HMAC-SHA1")
  */
 class OAuthSignatureMethod_HMAC_SHA1 extends OAuthSignatureMethod {
-  function get_name() {
+  public function get_name() {
     return "HMAC-SHA1";
   }
 
@@ -403,7 +403,7 @@ class OAuthRequest {
   public static $version = '1.0';
   public static $POST_INPUT = 'php://input';
 
-  function __construct($http_method, $http_url, $parameters=NULL) {
+  public function __construct($http_method, $http_url, $parameters=NULL) {
     $parameters = ($parameters) ? $parameters : array();
     $parameters = array_merge( OAuthUtil::parse_parameters(parse_url($http_url, PHP_URL_QUERY)), $parameters);
     $this->parameters = $parameters;
@@ -661,7 +661,7 @@ class OAuthServer {
 
   protected $data_store;
 
-  function __construct($data_store) {
+  public function __construct($data_store) {
     $this->data_store = $data_store;
   }
 
@@ -877,23 +877,23 @@ class OAuthServer {
 }
 
 class OAuthDataStore {
-  function lookup_consumer($consumer_key) {
+  public function lookup_consumer($consumer_key) {
     // implement me
   }
 
-  function lookup_token($consumer, $token_type, $token) {
+  public function lookup_token($consumer, $token_type, $token) {
     // implement me
   }
 
-  function lookup_nonce($consumer, $token, $nonce, $timestamp) {
+  public function lookup_nonce($consumer, $token, $nonce, $timestamp) {
     // implement me
   }
 
-  function new_request_token($consumer, $callback = null) {
+  public function new_request_token($consumer, $callback = null) {
     // return a new token attached to this consumer
   }
 
-  function new_access_token($token, $consumer, $verifier = null) {
+  public function new_access_token($token, $consumer, $verifier = null) {
     // return a new access token attached to this consumer
     // for the user associated with this token if the request token
     // is authorized

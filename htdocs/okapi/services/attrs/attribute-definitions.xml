@@ -29,6 +29,109 @@ This file defines the mapping between:
 
 It also defines attribute names and descriptions in several languages.
 
+
+REFERENCE for Groundspeak's attribute IDs
+=========================================
+
+Use this as reference to map OKAPI attribute ACODES to Groundspeak's equivalent
+attribute in order to help third party applications (eg. c:geo) handle
+common attributes and also evolve OC implementations and GPX exports.
+
+Legend and field usage:
+***********************
+
+- ID        numeric ID
+            (use <groundspeak id="ID" .../>)
+- YES       attribute is present
+            (use <groundspeak ... inc="true" .../>)
+- NO        attribute's inverse meaning is present (ie. NOT attribute)
+            (use <groundspeak ... inc="false" .../>)
+- IMAGE     Groundspeak's base image name. Use as "short_name" if needed.
+- NAME      Attribute name.
+            (use <groundspeak ... name="NAME" .../>)
+
+Note: in Opencaching implementations all attributes are either ON or OFF.
+Inverse meaning is handled by a different attribute.
+
+ID  YES NO  IMAGE               NAME
+===========================================================================
+1   YES NO  dogs                Dogs
+2   YES     fee                 Access or parking fee
+3   YES     rappelling          Climbing gear
+4   YES     boat                Boat
+5   YES     scuba               Scuba gear
+6   YES NO  kids                Recommended for kids
+7   YES NO  onehour             Takes less than an hour
+8   YES NO  scenic              Scenic view
+9   YES NO  hiking              Significant hike
+10  YES NO  climbing            Difficult climbing
+11  YES     wading              May require wading
+12  YES     swimming            May require swimming
+13  YES NO  available           Available at all times
+14  YES NO  night               Recommended at night
+15  YES NO  winter              Available during winter
+17  YES NO  poisonoak           Poison plants
+18  YES     dangerousanimals    Dangerous Animals
+19  YES     ticks               Ticks
+20  YES     mine                Abandoned mines
+21  YES     cliff               Cliff / falling rocks
+22  YES     hunting             Hunting
+23  YES     danger              Dangerous area
+24  YES NO  wheelchair          Wheelchair accessible
+25  YES NO  parking             Parking available
+26  YES     public              Public transportation
+27  YES NO  water               Drinking water nearby
+28  YES NO  restrooms           Public restrooms nearby
+29  YES NO  phone               Telephone nearby
+30  YES NO  picnic              Picnic tables nearby
+31  YES NO  camping             Camping available
+32  YES NO  bicycles            Bicycles
+33  YES NO  motorcycles         Motorcycles
+34  YES NO  quads               Quads
+35  YES NO  jeeps               Off-road vehicles
+36  YES NO  snowmobiles         Snowmobiles
+37  YES NO  horses              Horses
+38  YES NO  campfires           Campfires
+39  YES     thorn               Thorns
+40  YES NO  stealth             Stealth required
+41  YES NO  stroller            Stroller accessible
+42  YES     firstaid            Needs maintenance
+43  YES     cow                 Watch for livestock
+44  YES     flashlight          Flashlight required
+45  YES     landf               Lost And Found Tour ***
+46  YES NO  rv                  Truck Driver/RV
+47  YES NO  field_puzzle        Field Puzzle
+48  YES     UV                  UV Light Required
+49  YES     snowshoes           Snowshoes
+50  YES     skiis               Cross Country Skis
+51  YES     tools               Special Tool Required
+52  YES NO  nightcache          Night Cache
+53  YES NO  parkngrab           Park and Grab
+54  YES NO  abandonedbuilding   Abandoned structure
+55  YES NO  hike_short          Short hike (less than 1km)
+56  YES NO  hike_med            Medium hike (1km-10km)
+57  YES NO  hike_long           Long hike (+10km)
+58  YES NO  fuel                Fuel Nearby
+59  YES NO  food                Food Nearby
+60  YES     wirelessbeacon      Wireless Beacon
+61  YES     partnership         Partnership cache ***
+62  YES NO  seasonal            Seasonal Access
+63  YES NO  tourist             Tourist Friendly
+64  YES NO  treeclimbing        Tree Climbing
+65  YES NO  frontyard           Front Yard (Private Residence)
+66  YES NO  teamwork            Teamwork Required
+67  YES     geotour             GeoTour ***
+
+References:
+***********
+
+Attributes according to Geocaching.com:
+https://www.geocaching.com/about/icons.aspx
+gcTour GreaseMonkey script:
+https://gist.github.com/DieBatzen/5814dc7368c1034470c8/
+
+*** These are special attributes, not available to the regular user.
+
 -->
 
 <xml>
@@ -643,7 +746,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="en">
             <name>Field Puzzle / Mystery</name>
             <desc>
-                This puzzle or mystery has to be solved (at least in part) in the field, 
+                This puzzle or mystery has to be solved (at least in part) in the field,
                 by visiting the starting coordinates or the places mentioned in the description.
             </desc>
         </lang>
@@ -680,7 +783,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="en">
             <name>Mathematical problem</name>
             <desc>
-                Before or while searching for this cache you will have to solve 
+                Before or while searching for this cache you will have to solve
                 some mathematical problem that goes beyond basic arithmetic calculus.
             </desc>
         </lang>
@@ -815,9 +918,9 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCRO" id="84" />
         <opencaching schema="OCNL" id="84" />
         <lang id="en">
-            <name>Access only by walk</name>
+            <name>Access only on foot</name>
             <desc>
-                The cache is accessible by walk only.
+                The cache is accessible only by walking.
             </desc>
         </lang>
         <lang id="pl">
@@ -1821,10 +1924,10 @@ It also defines attribute names and descriptions in several languages.
         <lang id="en">
             <name>Nature preserve / Breeding season</name>
             <desc>
-                May be located inside a nature preserve area, so pay attention 
+                May be located inside a nature preserve area, so pay attention
                 to the local terms and signs regarding nature protection.
                 Don’t seek this cache during animal breeding season! See the cache
-                description on which time of year must be avoided. 
+                description on which time of year must be avoided.
             </desc>
         </lang>
         <lang id="de">
@@ -1968,7 +2071,7 @@ It also defines attribute names and descriptions in several languages.
         <opencaching schema="OCNL" id="48" />
         <opencaching schema="OCRO" id="48" />
         <lang id="en">
-            <name>Bring something to write with</name>
+            <name>Bring your own pen</name>
             <desc>
                 There is no pencil in the cache. Bring something to write with.
             </desc>
@@ -3039,7 +3142,7 @@ It also defines attribute names and descriptions in several languages.
             <name>Flugzeug erforderlich</name>
             <desc>
                 Dieser Cache kann hauptsächlich durch die Verwendung eines Flugzeugs erreicht werden.
-                Andere Mittel, um den Cache zu erreichen, können existieren, 
+                Andere Mittel, um den Cache zu erreichen, können existieren,
                 könnten aber am schwierigsten sein.
             </desc>
         </lang>
@@ -3054,9 +3157,9 @@ It also defines attribute names and descriptions in several languages.
             <name>Avion</name>
             <desc>
                 Acestă cutie poate fi căutată cu ajutorul unui avion.
-                Pot exista si alte mijloace de a ajunge în apropierea cutiei, însă acestea 
+                Pot exista si alte mijloace de a ajunge în apropierea cutiei, însă acestea
                 s-ar putea să fie extraordinar de dificile, prin comparaţie.
-            </desc>    
+            </desc>
         </lang>
     </attr>
 
@@ -3065,8 +3168,8 @@ It also defines attribute names and descriptions in several languages.
         <lang id="en">
             <name>Rated on Handicaching.com</name>
             <desc>
-                Rated on Handycaching.com - This does NOT mean that the cache 
-                is wheelchair accessible. See the rating on Handycaching.com for details. 
+                Rated on Handycaching.com - This does NOT mean that the cache
+                is wheelchair accessible. See the rating on Handycaching.com for details.
             </desc>
         </lang>
         <lang id="pl">
@@ -3093,7 +3196,7 @@ It also defines attribute names and descriptions in several languages.
         <lang id="ro">
             <name>Evaluată pe Handicaching.com</name>
             <desc>
-                Evaluată pe Handycaching.com - Aceasta nu înseamnă că geocutia este 
+                Evaluată pe Handycaching.com - Aceasta nu înseamnă că geocutia este
                 accesibilă persoanelor în scaun cu rotile. Verificaţi evaluarea de pe Handycaching.com pentru detalii.
             </desc>
         </lang>

@@ -24,16 +24,29 @@ class WebService
     private static function arg_desc($arg_node)
     {
         $attrs = $arg_node->attributes();
-        return array(
+        $result = array(
             'name' => (string)$attrs['name'],
             'is_required' => $arg_node->getName() == 'req',
             'is_deprecated' => (isset($attrs['class']) && (strpos($attrs['class'], 'deprecated') !== false)),
             'class' => 'public',
+            'infotags' => [],
             'description' =>
                 (isset($attrs['default']) ? ("<p>Default value: <b>".$attrs['default']."</b></p>") : "").
                 self::get_inner_xml($arg_node),
-
         );
+        if (isset($attrs['infotags'])) {
+            foreach (explode(" ", (string)$attrs['infotags']) as $infotag) {
+                switch ($infotag) {
+                    case 'ocpl-specific':
+                    case 'ocde-specific':
+                        $result['infotags'][] = $infotag;
+                        break;
+                    default:
+                        throw new Exception("Invalid infotag '".$infotag." in $methodname.xml");
+                }
+            }
+        }
+        return $result;
     }
 
     private static function get_inner_xml($node)
@@ -47,7 +60,7 @@ class WebService
 
         /* Find and replace %okapi:plugins%. */
 
-        $s = preg_replace_callback('~%OKAPI:([a-z:/_#]+)%~', array("self", "plugin_callback"), $s);
+        $s = preg_replace_callback('~%OKAPI:([a-z:/_#-]+)%~', array("self", "plugin_callback"), $s);
 
         return $s;
     }
@@ -77,6 +90,9 @@ class WebService
      *
      * <a href="%OKAPI:methodretref:#returned_key%">any text</a> - to reference
      * returned value within current method
+     *
+     * %OKAPI:infotag:TAGNAME% - to output a HTML with a proper infotag "badge".
+     * TAGNAME must match one of the infotags defined in services/apiref/method.
      *
      * NOTE!
      *
@@ -120,6 +136,8 @@ class WebService
                     $result .= $elements[1];
                 }
                 return $result;
+            case 'infotag':
+                return Okapi::format_infotags([$arr[1]]);
             default:
                 throw new Exception("Unknown plugin: ".$input);
         }
@@ -147,7 +165,8 @@ class WebService
                 'min_auth_level' => $options['min_auth_level'],
                 'oauth_consumer' => $options['min_auth_level'] >= 2,
                 'oauth_token' => $options['min_auth_level'] >= 3,
-            )
+            ),
+            "infotags" => [],
         );
         if (!$docs->brief)
             throw new Exception("Missing <brief> element in the $methodname.xml file.");
@@ -167,6 +186,18 @@ class WebService
         if (!$docs->desc)
             throw new Exception("Missing <desc> element in the $methodname.xml file.");
         $result['description'] = self::get_inner_xml($docs->desc);
+        if ($docs->infotags) {
+            foreach (explode(" ", (string)$docs->infotags) as $infotag) {
+                switch ($infotag) {
+                    case 'ocpl-specific':
+                    case 'ocde-specific':
+                        $result['infotags'][] = $infotag;
+                        break;
+                    default:
+                        throw new Exception("Invalid infotag '".$infotag." in $methodname.xml");
+                }
+            }
+        }
         $result['arguments'] = array();
         foreach ($docs->req as $arg) { $result['arguments'][] = self::arg_desc($arg); }
         foreach ($docs->opt as $arg) { $result['arguments'][] = self::arg_desc($arg); }
@@ -207,6 +238,7 @@ class WebService
                 'is_required' => false,
                 'is_deprecated' => false,
                 'class' => 'common-formatting',
+                'infotags' => [],
                 'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
             );
             $result['arguments'][] = array(
@@ -214,6 +246,7 @@ class WebService
                 'is_required' => false,
                 'is_deprecated' => false,
                 'class' => 'common-formatting',
+                'infotags' => [],
                 'description' => "<i>Standard <a href='".Settings::get('SITE_URL')."okapi/introduction.html#common-formatting'>common formatting</a> argument.</i>"
             );
         }

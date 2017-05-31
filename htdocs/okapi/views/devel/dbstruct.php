@@ -143,6 +143,11 @@ class View
             if ($url == $allowed_url) {
                 return;
             }
+            $allowed_url = str_replace("http://", "https://", $allowed_url);
+            $allowed[] = $allowed_url;
+            if ($url == $allowed_url) {
+                return;
+            }
         }
         throw new BadRequest(
             "The following URL is not on our whitelist: \"".$url."\".\n\n".

@@ -475,6 +475,45 @@ rather use <code>if ("z" in reason_stack) { ... }</code>.</p>
 <div class='issue-comments' issue_id='117'></div>
 
 
+<h2 id='oc-branch-differences'>Differences between OCPL and OCDE branches</h2>
+
+<p>Client developers should be aware that the are two primary Opencaching
+codebase branches. Some Opencaching installations are running the OCPL branch,
+some other are running the OCDE branch. (You can read more about this
+<a href='https://github.com/opencaching/opencaching-pl/wiki#brief-introduction-in-english'>here</a>.)</p>
+
+<p>In general, <b>OKAPI supports both of these branches via exactly the same
+API interface</b>, so you don't have to worry about the internal differences.
+However, you should be aware of the fact, that some things work a bit different
+on one branch, than they on the other. (Like, for example, OCDE doesn't have a
+cache rating system, so whenever you ask for the <b>rating</b> field of a
+geocache, you will get <b>null</b>.)</p>
+
+<p>In order for you to easily notice methods, parameters and fields which are
+specific to only a single of these branches, we display the following "tags" in
+many places:</p>
+
+<ul>
+    <li><span class='infotag infotag-ocpl-specific'>OCPL</span> - indicates
+    that a certain method, parameter or field was designed specificly for
+    OCPL-based Opencaching sites,</li>
+
+    <li><span class='infotag infotag-ocde-specific'>OCDE</span> - indicates
+    that a certain method, parameter or field was designed specificly for
+    OCDE-based Opencaching sites.</li>
+</ul>
+
+<p>Please note, that <b>you still MAY use all such "marked" methods, parameters
+and fields on ALL OKAPI sites.</b> Our methods are designed in such a way that,
+even if they are not supported by the underlying Opencaching site, they still
+won't throw errors, etc. At worst, they will "fail silently", or return empty
+results. All these differences should be described in detail in the
+documentation of the affected methods, parameters and fields.</p>
+
+<p>If you have any questions about this, then ask them
+<a href="https://github.com/opencaching/okapi/issues/463">here</a>.</p>
+
+
 <h2 id='participate'>How can I participate in OKAPI development?</h2>
 
 <p>OKAPI is Open Source and everyone is welcome to participate in the development.</p>

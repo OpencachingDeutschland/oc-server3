@@ -14,7 +14,7 @@ class View
         $body = '';
 
         $loaded_extensions = get_loaded_extensions();
-        $query_extensions = array('exif', 'gd', 'imagick');
+        $query_extensions = array('exif', 'gd');
         $ok = array_intersect($query_extensions, $loaded_extensions);
         $missing = array_diff($query_extensions, $loaded_extensions);
         $body .= "Loaded PHP extensions: " . ($ok ? implode(', ', $ok) : "-none-") . "\n";

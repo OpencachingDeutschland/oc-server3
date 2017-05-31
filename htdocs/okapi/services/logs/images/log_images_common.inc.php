@@ -15,7 +15,7 @@ use okapi\Settings;
 
 class LogImagesCommon
 {
-    function validate_image_uuid($request)
+    public function validate_image_uuid($request)
     {
         $image_uuid = $request->get_parameter('image_uuid');
         if (!$image_uuid)
@@ -61,7 +61,7 @@ class LogImagesCommon
     }
 
 
-    function validate_position($request)
+    public function validate_position($request)
     {
         $position = $request->get_parameter('position');
         if ($position !== null && !preg_match("/^-?[0-9]+$/", $position)) {

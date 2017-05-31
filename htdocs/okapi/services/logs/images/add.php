@@ -393,7 +393,8 @@ class WebService
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
-        Okapi::gettext_domain_init(explode("|", $langpref));
+        $langprefs = explode("|", $langpref);
+        Okapi::gettext_domain_init($langprefs);
 
         try
         {

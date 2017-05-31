@@ -5,7 +5,7 @@ if [ "`git branch|grep next`" != "* next" ]; then
   exit 1;
 fi
 
-if [ "x`git status|grep -i 'working directory clean'`"  == "x" -o "x`git status|grep -i 'Arbeitsverzeichnis sauber'`"  == "x" ]; then
+if [ "x`git status|grep -i 'working directory clean'`"  == "x" ]; then
     echo "error: working directory is not clean:"
     git status
     exit 1;

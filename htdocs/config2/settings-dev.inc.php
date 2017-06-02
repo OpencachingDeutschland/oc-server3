@@ -98,13 +98,14 @@ $opt['logic']['logs']['purge_userdata'] = 0;
 // 3rd party library options
 // only for local.team-opencaching.de usage
 $opt['lib']['w3w']['apikey'] = 'X27PDW41';
+$opt['lib']['google']['mapkey']['local.team-opencaching.de'] = 'AIzaSyC8n28u0AELTMd_Mi9KNaMGzluCNWdOIT4';
 
 // other settings
 $opt['page']['showdonations'] = true;
 $opt['page']['showsocialmedia'] = true;
 $opt['page']['headoverlay'] = 'oc_head_alpha3';
 
-$opt['tracking']['googleAnalytics'] = 'UA-59334952-4';
+$opt['tracking']['googleAnalytics'] = '';
 
 $opt['logic']['pictures']['dummy']['replacepic'] = $dev_basepath . $dev_codepath . 'htdocs/images/no_image_license.png';
 $opt['logic']['license']['disclaimer'] = true;

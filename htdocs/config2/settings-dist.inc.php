@@ -489,7 +489,7 @@ $opt['wikinews']['timeout'] = 20;
 $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 
 // Google Maps API key
-// http://code.google.com/intl/de/apis/maps/signup.html
+// https://developers.google.com/maps/documentation/static-maps/?hl=de
 $opt['lib']['google']['mapkey'] = [];
 //$opt['lib']['google']['mapkey']['www.opencaching.xy'] = 'EEFFGGHH...';
 

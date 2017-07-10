@@ -35,7 +35,7 @@ class WebService
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
-        $langpref = explode("|", $langpref);
+        $langprefs = explode("|", $langpref);
 
         $fields = $request->get_parameter('fields');
         if (!$fields) $fields = "name";
@@ -79,8 +79,8 @@ class WebService
 
             # Fill langpref-specific fields.
 
-            $attr['name'] = Okapi::pick_best_language($attr['names'], $langpref);
-            $attr['description'] = Okapi::pick_best_language($attr['descriptions'], $langpref);
+            $attr['name'] = Okapi::pick_best_language($attr['names'], $langprefs);
+            $attr['description'] = Okapi::pick_best_language($attr['descriptions'], $langprefs);
 
             # Fill some other fields (not kept in the cached attrdict).
 

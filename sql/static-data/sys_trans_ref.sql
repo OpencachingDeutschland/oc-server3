@@ -905,9 +905,9 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('590',
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('590', './templates2/ocstyle/remindemail.tpl', '23');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('591', './templates2/ocstyle/myprofile.tpl', '84');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('592', './templates2/ocstyle/myprofile.tpl', '118');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/myprofile.tpl', '215');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/newemail.tpl', '51');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('593', './templates2/ocstyle/newemail.tpl', '101');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('105', './templates2/ocstyle/myprofile.tpl', '215');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('105', './templates2/ocstyle/newemail.tpl', '51');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('105', './templates2/ocstyle/newemail.tpl', '101');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('595', './templates2/ocstyle/newpw.tpl', '96');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('596', './templates2/ocstyle/newemail.tpl', '40');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('597', './templates2/ocstyle/mydetails.tpl', '93');
@@ -1550,7 +1550,7 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1396'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1397', './templates2/ocstyle/search.tpl', '568');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1405', './lang/de/ocstyle/error.tpl.php', '22');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1406', './lang/de/ocstyle/error.tpl.php', '23');
-INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1407', './lang/de/ocstyle/error.tpl.php', '24');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('131', './lang/de/ocstyle/error.tpl.php', '24');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1408', './lang/de/ocstyle/error.tpl.php', '26');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1408', './templates2/ocstyle/error.tpl', '16');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('1411', './lang/de/ocstyle/removelog_cacheowner.tpl.php', '23');
@@ -2713,3 +2713,6 @@ INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2620'
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2621', './templates2/ocstyle/search.tpl', '126');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2632', 'table:cache_attrib;field=name', '0');
 INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2633', 'table:cache_attrib;field=html_desc', '0');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2634', './templates2/ocstyle/header/cookie_notice.tpl', '57');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2635', './templates2/ocstyle/header/cookie_notice.tpl', '57');
+INSERT INTO `sys_trans_ref` (`trans_id`, `resource_name`, `line`) VALUES ('2636', './templates2/ocstyle/header/cookie_notice.tpl', '57');

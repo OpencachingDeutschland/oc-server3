@@ -29,7 +29,7 @@
         {elseif $errorUsernameNotExist==true}
             <tr><td colspan="2" class="errormsg">{t}Username does not exist.{/t}</td></tr>
         {elseif $errorUnkown==true}
-            <tr><td colspan="2" class="errormsg">{t}An unkown error occured.{/t}</td></tr>
+            <tr><td colspan="2" class="errormsg">{t}An unknown error occurred.{/t}</td></tr>
         {elseif $remindMailSent==true}
             <tr><td colspan="2" class="successmsg">{t}The remind E-Mail was sent.{/t}<br />
             {t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</td></tr>

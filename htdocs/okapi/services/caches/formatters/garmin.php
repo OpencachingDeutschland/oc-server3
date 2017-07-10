@@ -33,7 +33,6 @@ class WebService
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
-        $langpref .= "|".Settings::get('SITELANG');
         $images = $request->get_parameter('images');
         if (!$images) $images = "all";
         if (!in_array($images, array("none", "all", "spoilers", "nonspoilers")))

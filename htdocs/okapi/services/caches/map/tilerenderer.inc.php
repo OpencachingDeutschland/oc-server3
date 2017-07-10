@@ -110,7 +110,7 @@ class TileRenderer
         $key = "$name/$opacity/$brightness/$contrast/$r/$g/$b";
         if (!isset($locmem_cache[$key]))
         {
-            # Miss. Check default cache.  WRTODO: upgrade to normal Cache?
+            # Miss. Check default cache.
 
             try
             {

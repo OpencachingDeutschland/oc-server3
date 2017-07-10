@@ -90,6 +90,7 @@ DocumentRoot "/var/www/html/htdocs"
     RewriteEngine On
     RewriteRule ^((OC|GC)[A-Za-z0-9]{1,5})$ /searchplugin.php?userinput=\$1 [NC,L]
 
+    # symfony redirects
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-l
@@ -101,6 +102,7 @@ DocumentRoot "/var/www/html/htdocs"
 </Directory>
 
 <Directory "/var/www/html/htdocs/okapi">
+    DirectorySlash Off
     AllowOverride All
 </Directory>
 

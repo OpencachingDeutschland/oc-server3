@@ -32,16 +32,17 @@
             </li>
          </ul>
     </opt>
-    <opt name='position'>
+    <opt name='position' infotags="ocde-specific">
         <p>If given, it indicates the wanted position of this image on the log
         entry's list of images (do not supply this parameter if you do not want
         to change the order). This parameter takes the same 0-based value as
         described in the <b>add</b> method.</p>
 
-        <p>Some Opencaching installations do not allow the order of log images
-        to be changed. Such installations will ignore this parameter (you can
-        check the <b>position</b> field in the response to verify if the order
-        was actually changed).</p>
+        <p>Please note, that only OCDE-based Opencaching installations allow
+        for the order of log images to be changed. OCPL-based installations
+        will ignore this parameter (you can check the <b>position</b> field in
+        the response to verify if the order has actually been changed or
+        not).</p>
     </opt>
     <common-format-params/>
     <returns>

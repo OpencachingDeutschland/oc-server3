@@ -80,7 +80,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('102', 'DE', 'Esperanto', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('103', 'DE', 'Griechisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('104', 'DE', 'Dänisch', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'DE', 'Ein unbekannter Fehler ist aufgetreten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('106', 'DE', 'Das Template existiert nicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'DE', 'Entschuldigung, aber diese Seite darfst du nicht sehen.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'DE', 'Entschuldigung, aber der angeforderte Cache existiert nicht.', '2010-08-28 11:48:06');
@@ -540,7 +539,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'DE', 'Benutzername:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'DE', 'Das Land ist nicht gültig.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'DE', 'Der eingegebene Radius ist nicht gültig.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'DE', 'Ein unbekannter Fehler ist aufgetreten.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'DE', 'Ein unbekannter Fehler ist aufgetreten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'DE', 'Neues Passwort:', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'DE', 'Anfordern', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'DE', 'Ändern', '2010-08-28 11:48:06');
@@ -950,7 +949,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1404', 'DE', 'Art des Logeintrags:', '2010-09-10 23:48:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1405', 'DE', 'Fehler beim Aufruf der Seite', '2010-09-10 23:48:46');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'DE', 'Bei dem Versuch, die Seite zu erstellen, ist ein Fehler aufgetreten. Solltest du durch einen Link auf unserer Seite hierher gekommen sein und dieses Problem l\&auml;ngere Zeit bestehen, weise uns bitte per E-Mail darauf hin.', '2010-09-10 23:48:34');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'DE', 'Folgender Fehler ist aufgetreten:', '2010-09-10 23:48:25');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'DE', 'Seite:', '2010-09-10 23:48:10');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'DE', 'Bist du sicher, dass dieser Logeintrag entfernt werden soll?', '2010-09-10 23:47:01');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'DE', 'M\&ouml;chtest du {log_user_name} eine Bemerkung dazu senden?', '2010-09-10 23:46:49');
@@ -1926,6 +1924,9 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2627', 'DE', 'Wähle mindestens eine Cachegröße aus!', '2016-08-02 15:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2628', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Caches, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2629', 'DE', 'Der Benutzer <b><a href=\"viewprofile.php?userid=%1\">%2</a></b> besitzt keine Logs, die zu den ausgewählten Suchoptionen passen.', '2016-10-17 03:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> exestiert nicht.', '2016-10-17 03:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2630', 'DE', 'Der Benutzer <b>%1%2</b> existiert nicht.', '2016-10-17 03:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2632', 'DE', 'Handycap: Blind', '2017-05-02 23:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2633', 'DE', 'Dieser Cache kann von Menschen mit Sehbehinderung gefunden werden.', '2017-05-02 23:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2634', 'DE', 'Mehr Informationen', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2635', 'DE', 'Schließen', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2636', 'DE', 'Diese Webseite verwendet Cookies. Wenn Sie auf der Seite weitersurfen, stimmen Sie der Cookie-Nutzung zu.', '2017-05-14 21:00:00');

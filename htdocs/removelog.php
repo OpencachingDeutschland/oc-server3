@@ -105,7 +105,7 @@ if ($error == false) {
                             $log_record['log_user_domain']
                         );
 
-                        $message = isset($_POST['logowner_message']) ? $_POST['logowner_message'] : '';
+                        $message = isset($_POST['logowner_message']) ? trim($_POST['logowner_message']) : '';
                         if ($message != '') {
                             //message to logger
                             $message = $removed_message_title . "\n" . $message . "\n" . $removed_message_end;

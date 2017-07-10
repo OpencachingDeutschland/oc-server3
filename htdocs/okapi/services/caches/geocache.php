@@ -9,7 +9,6 @@ use okapi\OkapiInternalRequest;
 use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
 use okapi\ParamMissing;
-use okapi\Settings;
 
 class WebService
 {
@@ -27,7 +26,6 @@ class WebService
         if (strpos($cache_code, "|") !== false) throw new InvalidParam('cache_code');
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
-        $langpref .= "|".Settings::get('SITELANG');
         $fields = $request->get_parameter('fields');
         if (!$fields) $fields = "code|name|location|type|status";
         $log_fields = $request->get_parameter('log_fields');

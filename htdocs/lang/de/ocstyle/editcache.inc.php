@@ -21,7 +21,7 @@ $error_wrong_node = t('This cache has been created on another Opencaching websit
 $savealert = t('Please save the changed geocache properties first.');
 
 $all_countries_submit = '<input type="submit" name="show_all_countries_submit" id="showallcountries" value="' . t('Show all') . '" class="formbutton" onclick="submitbutton(\'showallcountries\')" />';
-$error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occured, please check the marked fields.') . "</b></td></tr>";
+$error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occurred, please check the marked fields.') . "</b></td></tr>";
 $name_message = '&nbsp;<span class="errormsg">' . t('Cachename is invalid') . '</span>';
 $date_message = '<span class="errormsg">' . t('date is invalid') . '</span>';
 $coords_message = '<span class="errormsg">' . t('The used coordinates are invalid.') . '</span>';

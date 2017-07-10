@@ -25,10 +25,7 @@ class SessionDataCookie implements SessionDataInterface
             $decoded = base64_decode($_COOKIE[$opt['session']['cookiename'] . 'data'], true);
 
             if ($decoded !== false) {
-                // TODO replace by safe function
-                $this->values = @unserialize($decoded); // bad
-                //$this->values = @json_decode($decoded, true); // safe
-                //print_r($this->values);
+                $this->values = @json_decode($decoded, true);
                 if (!is_array($this->values)) {
                     $this->values = [];
                 }
@@ -97,9 +94,7 @@ class SessionDataCookie implements SessionDataInterface
         if ($this->changed === true) {
             $value = false;
             if (count($this->values) > 0) {
-                // TODO replace by safe function
-                $value = base64_encode(serialize($this->values)); // bad
-                //$value = base64_encode(json_encode($this->values)); // safe
+                $value = base64_encode(json_encode($this->values));
             }
             // https used for request and https is available, then set cookie https only
             $https_session = $opt['page']['https']['active']

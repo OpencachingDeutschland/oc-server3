@@ -144,7 +144,7 @@ class View
             if (isset($_POST['authorization_result']))
             {
                 # Not yet authorized, but user have just submitted the authorization form.
-                # WRTODO: CSRF protection
+                # Note, that currently there is no CSRF protection here.
 
                 if ($_POST['authorization_result'] == 'granted')
                 {

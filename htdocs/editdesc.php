@@ -122,8 +122,8 @@ if ($error == false) {
                         $oldDescMode = $descMode;
                     }
 
-                    $short_desc = $_POST['short_desc'];  // Ocprop
-                    $hint = htmlspecialchars($_POST['hints'], ENT_COMPAT, 'UTF-8');
+                    $short_desc = trim($_POST['short_desc']);  // Ocprop
+                    $hint = htmlspecialchars(trim($_POST['hints']), ENT_COMPAT, 'UTF-8');
                     $desclang = $_POST['desclang'];
                     $show_all_langs = isset($_POST['show_all_langs_value']) ? $_POST['show_all_langs_value'] : 0;
                     if (!is_numeric($show_all_langs)) {
@@ -137,7 +137,7 @@ if ($error == false) {
                     }
 
                     // Text from textarea
-                    $desc = $_POST['desc'];  // Ocprop
+                    $desc = trim($_POST['desc']);  // Ocprop
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {

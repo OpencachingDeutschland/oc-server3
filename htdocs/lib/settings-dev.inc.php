@@ -114,6 +114,8 @@ $googlemap_type = 'G_MAP_TYPE'; // alternativ: _HYBRID_TYPE
 
 $opt['translate']['debug'] = false;
 
+$opt['tracking']['googleAnalytics'] = 'UA-59334952-4';
+
 /* maximum number of failed logins per hour before that IP address is blocked
  * (used to prevent brute-force-attacks)
  */

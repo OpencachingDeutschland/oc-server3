@@ -29,9 +29,9 @@ namespace okapi;
 # \okapi\Facade::disable_error_handling();
 
 
-require_once($GLOBALS['rootpath']."okapi/core.php");
+require_once __DIR__ . '/core.php';
 OkapiErrorHandler::$treat_notices_as_errors = true;
-require_once($GLOBALS['rootpath']."okapi/service_runner.php");
+require_once __DIR__ . '/service_runner.php';
 Okapi::init_internals();
 
 /**
@@ -90,7 +90,7 @@ class Facade
      */
     public static function import_search_set($temp_table, $min_store, $max_ref_age)
     {
-        require_once($GLOBALS['rootpath'].'okapi/services/caches/search/save.php');
+        require_once __DIR__ . '/services/caches/search/save.php';
         $tables = array('caches', $temp_table);
         $where_conds = array(
             $temp_table.".cache_id = caches.cache_id",
@@ -161,7 +161,7 @@ class Facade
      */
     public static function database_update()
     {
-        require_once($GLOBALS['rootpath']."okapi/views/update.php");
+        require_once __DIR__ . '/views/update.php';
         $update = new views\update\View;
         $update->call();
     }

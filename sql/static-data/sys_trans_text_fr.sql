@@ -539,7 +539,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'FR', 'Nom d\'utilisateur\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'FR', 'Le pays n\'est pas valide.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'FR', 'Le rayon n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('593', 'FR', 'Une erreur inconnue est survenue.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'FR', 'Nouveau mot de passe\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'FR', 'Demande', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'FR', 'Changement', '2015-08-25 01:28:59');
@@ -949,7 +948,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1404', 'FR', 'Type de log\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1405', 'FR', 'erreur lors de chargement de la page', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'FR', 'Dans une tentative de créer la page, une erreur est survenue. Si vous passez par un lien hypertexte sur notre page et si le problème persiste, ne pas hésiter à nous contacter par e-mail.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1407', 'FR', 'L\'erreur suivante est survenue\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'FR', 'Page\&nbsp;:', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'FR', 'êtes-vous sûr que cette entrée du log doit être supprimé\&nbsp;?', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'FR', 'voulez-vous envoyer à {log_user_name} une note\&nbsp;?', '2015-08-25 01:29:00');

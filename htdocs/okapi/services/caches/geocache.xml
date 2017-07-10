@@ -267,13 +267,13 @@
                 <b>null</b> if unknown,</p>
             </li>
             <li>
-                <p><b>rating</b> - float (between 1 and 5), an overall rating of the cache,
-                or <b>null</b> when the geocache does not have a sufficient amount of votes
-                to have a rating.</p>
+                <p>%OKAPI:infotag:ocpl-specific% <b>rating</b> - float (between 1 and 5), an
+                overall rating of the cache, or <b>null</b> when the geocache does not have a
+                sufficient amount of votes to have a rating.</p>
 
-                <p>Please note: some OC installations do not use the
-                rating/voting system. The <b>rating</b> will always be
-                <b>null</b> on such installations.</p>
+                <p><b>Notice:</b> Only OCPL-based Opencaching installations provide ratings for
+                their geocaches. On OCDE-based installations, this field will always contain
+                <b>null</b>.</p>
             </li>
             <li>
                 <p><b>rating_votes</b> - number of votes submitted for the

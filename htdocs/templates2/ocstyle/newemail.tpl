@@ -46,7 +46,7 @@
             <tr><td>&nbsp;</td><td class="successmsg">{t}An E-Mail was sent to you with the security code.{/t}<br />
             {t}If you do not see any E-Mail, please check the spam folder of your mailbox.{/t}</td></tr>
         {elseif $emailErrorUnkown==true}
-            <tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occured.{/t}</td></tr>
+            <tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occurred.{/t}</td></tr>
         {elseif $emailErrorExists==true}
             <tr><td>&nbsp;</td><td class="errormsg">{t}There already exists an account with that E-Mail address. It's not possible the register a scond account with the same E-Mail address.{/t}</td></tr>
         {/if}
@@ -96,7 +96,7 @@
         {elseif $codeErrorEMailExists==true}
             <tr><td>&nbsp;</td><td class="errormsg">{t}There already exists an account with that E-Mail address. It's not possible the register a scond account with the same E-Mail address.{/t}</td></tr>
         {elseif $codeErrorUnkown==true}
-            <tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occured.{/t}</td></tr>
+            <tr><td>&nbsp;</td><td class="errormsg">{t}An unknown error occurred.{/t}</td></tr>
         {/if}
         <tr><td class="spacer" colspan="2"></td></tr>
         <tr><td class="spacer" colspan="2"></td></tr>

@@ -32,24 +32,32 @@ class OkapiMenu
         $chunks[] = self::link($current_path, "changelog.html", "Changelog");
         $chunks[] = "</div>";
 
-        # We need a list of all methods. We do not need their descriptions, so
-        # we won't use the apiref/method_index method to get it, the static list
-        # within OkapiServiceRunner will do.
+        # Retrieve the index of all methods. Note, that services/apiref/method_index
+        # method caches its results. This may result in delayed propagation of changes
+        # in development environments.
+
+        $method_index_result = OkapiServiceRunner::call(
+            "services/apiref/method_index",
+            new OkapiInternalRequest(new OkapiInternalConsumer(), null, array())
+        );
+        $method_descs = array();
+        foreach ($method_index_result as &$method_desc_ref) {
+            $method_descs[$method_desc_ref['name']] = &$method_desc_ref;
+        }
+
+        # We'll break them up into modules, for readability.
 
         $methodnames = OkapiServiceRunner::$all_names;
         sort($methodnames);
-
-        # We'll break them up into modules, for readability.
 
         $module_methods = array();
         foreach ($methodnames as $methodname)
         {
             $pos = strrpos($methodname, "/");
             $modulename = substr($methodname, 0, $pos);
-            $method_short_name = substr($methodname, $pos + 1);
             if (!isset($module_methods[$modulename]))
                 $module_methods[$modulename] = array();
-            $module_methods[$modulename][] = $method_short_name;
+            $module_methods[$modulename][] = $method_descs[$methodname];
         }
         $modulenames = array_keys($module_methods);
         sort($modulenames);
@@ -58,8 +66,11 @@ class OkapiMenu
         {
             $chunks[] = "<div class='module'>$modulename</div>";
             $chunks[] = "<div class='methods'>";
-            foreach ($module_methods[$modulename] as $method_short_name)
+            foreach ($module_methods[$modulename] as $method_desc) {
+                $method_short_name = $method_desc['short_name'];
+                $chunks[] = Okapi::format_infotags($method_desc['infotags']);
                 $chunks[] = self::link($current_path, "$modulename/$method_short_name.html", "$method_short_name");
+            }
             $chunks[] = "</div>";
         }
         return implode("", $chunks);

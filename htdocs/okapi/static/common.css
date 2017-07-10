@@ -6,10 +6,10 @@ a { cursor: pointer; }
 span.note { color: #888; font-size: 70%; font-weight: normal; }
 
 body.api { background: #f5f1eb; }
-.okd_mid { width: 1025px; margin: 0 auto; background: url(middle.gif) #f5f1eb; background-position: top center; background-repeat: repeat-y; }
-.okd_top { width: 1025px; margin: 0 auto; background: url(top.jpg); background-position: top center; background-repeat: no-repeat; }
-.okd_top_pad { height: 230px; width: 1025px; }
-.okd_bottom { width: 1025px; height: 64px; margin: 0 auto; background: url(bottom.gif); background-position: top center; background-repeat: no-repeat; }
+.okd_mid { width: 1200px; margin: 0 auto; background: url(middle.gif?v2) #f5f1eb; background-position: top center; background-repeat: repeat-y; }
+.okd_top { width: 1200px; margin: 0 auto; background: url(top.jpg?v2); background-position: top center; background-repeat: no-repeat; }
+.okd_top_pad { height: 230px; width: 1200px; }
+.okd_bottom { width: 1200px; height: 64px; margin: 0 auto; background: url(bottom.gif?v2); background-position: top center; background-repeat: no-repeat; }
 .okd_switcher { text-align: right; padding: 30px 30px 0 0; font-size: 11px; color: #888; }
 .okd_switcher select { border: 1px solid #bbb; padding: 2px; font-size: 12px; }
 
@@ -17,6 +17,33 @@ body.api { background: #f5f1eb; }
 .signup td { background: #eee9e9; padding: 8px 16px; }
 .signup input.text { border: 1px solid #aaa; padding: 3px 4px 2px 4px; width: 300px }
 .signup .button { margin-top: 10px; padding: 3px 12px; background: #977; border: 2px solid #744; cursor: pointer; color: #fff; font-weight: bold; }
+
+.infotag {
+    display: inline-block;
+    background: #d9534f;
+    color: #fff !important;
+    font-weight: normal;
+    font-size: 68%;
+    padding: 0.2em 0.4em 0.3em 0.4em;
+    line-height: 1em;
+    border-radius: 2px;
+    cursor: default;
+    position: relative;
+    top: -2px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: baseline;
+}
+a.infotag {
+    cursor: pointer;
+    text-decoration: none !important;
+}
+a.infotag:hover {
+    background: #fff;
+    box-shadow: 0 0 2px #000;
+    color: #000 !important;
+}
 
 .changelog { border: 1px solid #bbb; }
 .changelog th { background: #e1d7d8; }

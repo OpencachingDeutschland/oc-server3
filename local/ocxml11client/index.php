@@ -184,7 +184,7 @@ function getxmlfiles()
                 if ($opt['zip'] == 'bzip2') {
                     $fileext = '.xml.bz2';
                 } else {
-                    die('error: unkown zip method');
+                    die('error: unknown zip method');
                 }
             }
         }

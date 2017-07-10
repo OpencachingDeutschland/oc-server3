@@ -14,7 +14,7 @@ function smarty_function_coordinput($params, &$smarty)
 
     if ($lat < 0) {
         $bLatNeg = true;
-        $lat = - $lat;
+        $lat = -$lat;
     } else {
         $bLatNeg = false;
     }
@@ -23,7 +23,7 @@ function smarty_function_coordinput($params, &$smarty)
 
     if ($lon < 0) {
         $bLonNeg = true;
-        $lon = - $lon;
+        $lon = -$lon;
     } else {
         $bLonNeg = false;
     }
@@ -40,20 +40,24 @@ function smarty_function_coordinput($params, &$smarty)
     }
     $returnValue .= '</select>&nbsp;';
 
-    $returnValue .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' .
+        htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
-        ) . 'Lat" value="' . htmlspecialchars(
+        ) . 'Lat" value="' .
+        htmlspecialchars(
             sprintf('%02d', $lat),
             ENT_QUOTES,
             'UTF-8'
         ) . '" size="1" maxlength="2" />&deg; ';
-    $returnValue .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' .
+        htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
-        ) . 'LatMin" value="' . htmlspecialchars(
+        ) . 'LatMin" value="' .
+        htmlspecialchars(
             sprintf('%06.3f', $latMin * 60),
             ENT_QUOTES,
             'UTF-8'
@@ -71,20 +75,24 @@ function smarty_function_coordinput($params, &$smarty)
     }
     $returnValue .= '</select>&nbsp;';
 
-    $returnValue .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' .
+        htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
-        ) . 'Lon" value="' . htmlspecialchars(
+        ) . 'Lon" value="' .
+        htmlspecialchars(
             sprintf('%03d', $lon),
             ENT_QUOTES,
             'UTF-8'
         ) . '" size="2" maxlength="3" />&deg; ';
-    $returnValue .= '<input type="text" name="' . htmlspecialchars(
+    $returnValue .= '<input type="text" name="' .
+        htmlspecialchars(
             $prefix,
             ENT_QUOTES,
             'UTF-8'
-        ) . 'LonMin" value="' . htmlspecialchars(
+        ) . 'LonMin" value="' .
+        htmlspecialchars(
             sprintf('%06.3f', $lonMin * 60),
             ENT_QUOTES,
             'UTF-8'

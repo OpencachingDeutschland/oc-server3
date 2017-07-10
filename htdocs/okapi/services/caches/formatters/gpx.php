@@ -94,7 +94,7 @@ class WebService
 
         $langpref = $request->get_parameter('langpref');
         if (!$langpref) $langpref = "en";
-        $langpref .= "|".Settings::get('SITELANG');
+        $langprefs = explode("|", $langpref);
         foreach (array('ns_ground', 'ns_gsak', 'ns_ox', 'latest_logs', 'alt_wpts', 'mark_found') as $param)
         {
             $val = $request->get_parameter($param);
@@ -503,7 +503,7 @@ class WebService
         }
 
         ob_start();
-        Okapi::gettext_domain_init(explode("|", $langpref)); # Consumer gets properly localized GPX file.
+        Okapi::gettext_domain_init($langprefs); # Consumer gets properly localized GPX file.
         include 'gpxfile.tpl.php';
         Okapi::gettext_domain_restore();
 

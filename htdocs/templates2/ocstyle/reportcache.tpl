@@ -97,7 +97,7 @@
             <tr><td class="spacer" colspan="2"></td></tr>
 
             {if $errorUnkown==true}
-                <tr><td colspan="2" class="errormsg">{t}An unknown error occured. Reporting failed.{/t}</td></tr>
+                <tr><td colspan="2" class="errormsg">{t}An unknown error occurred. Reporting failed.{/t}</td></tr>
             {/if}
 
             <tr>

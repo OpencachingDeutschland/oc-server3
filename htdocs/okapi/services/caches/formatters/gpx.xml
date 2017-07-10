@@ -36,19 +36,24 @@
         <p>Boolean. If <b>true</b> then response will include
         <a href='http://www.gsak.net/xmlv1/5/gsak.xsd'>GSAK GPX extension</a>.
         This namespace declares an extra &lt;wptExtension&gt; element,
-        which allows including "waypoint inheritance" information (parent-child relations).
-        This in turn allows us to include "alternate waypoints" in the response.</p>
-        <p>We know of <b>at least</b> <a href='http://www.gsak.net/'>one tool</a> that
-        makes use of this.</p>
+        which allows including "waypoint inheritance" information (parent-child relations)
+        via its &lt;Parent&gt; element. This in turn allows us to include
+        "alternate waypoints" in the response.</p>
+
+        <p>This feature was once supported by <a href='http://www.gsak.net/'>GSAK</a>
+        application only, but currently many applications recognize it. As far as we
+        know, it became a "de facto" standard for expressing "alternate waypoints".</p>
     </opt>
     <opt name='ns_ox' default='false'>
-        Boolean. If <b>true</b> then response will include Garmin's
+        <p>Boolean. If <b>true</b> then response will include Garmin's
         <a href='https://github.com/opencaching/okapi/blob/master/etc/nsox.xsd'>OpenCaching.com
         GPX extension</a>. This namespace declares an extra &lt;opencaching&gt; element
         used by Garmin's (former) <b>OpenCaching.com</b> site.
-        The element includes information on cache difficulty, ratings, tags and images.
-        OpenCaching.com no longer exists, but its XML namespace is still used by many
-        Garmin's Geocaching-enabled handheld GPS devices.
+        The element includes information on cache difficulty, ratings, tags and images.</p>
+
+        <p>OpenCaching.com no longer exists, but its XML namespace is still used by many
+        applications (and not only the Garmin ones, e.g. see
+        <a href='http://help.locusmap.eu/topic/how-to-use-gcvotes-functionality-with-opencaching'>here</a>).</p>
     </opt>
     <opt name='images' default='descrefs:nonspoilers'>
         <p>Which images to include (and how to include them). One of the following values:</p>
@@ -91,13 +96,15 @@
                 Such attributes cannot be included as gc:attrs and will be ignored.</p>
             </li>
             <li>
-                <p><b>gc_ocde:attrs</b> - attributes will be listed as Groundspeak's
-                <i>groundspeak:attribute</i> elements (<b>ns_ground</b> has to be <b>true</b>).
-                Opencaching attributes which have no Geocaching.com counterparts will be
-                included according to an Opencaching.DE convention, using "makeshift IDs"
-                which may change in the future.</p>
-                <p>Note that this option is supported only by some OC sites. Other sites will
-                handle <b>gc_ocde:attrs</b> in the same way as <b>gc:attrs</b>.</p>
+                <p>%OKAPI:infotag:ocde-specific% <b>gc_ocde:attrs</b> - attributes will be
+                listed as Groundspeak's <i>groundspeak:attribute</i> elements (<b>ns_ground</b>
+                has to be <b>true</b>). Opencaching attributes which have no Geocaching.com
+                counterparts will be included according to an Opencaching.DE convention, using
+                "makeshift IDs" which may change in the future.</p>
+
+                <p>This alternative is supported only by some OC sites (the ones originating
+                from the OCDE branch). Other sites will handle <b>gc_ocde:attrs</b> in the same
+                way as <b>gc:attrs</b>.</p>
             </li>
         </ul>
 

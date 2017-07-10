@@ -254,15 +254,15 @@ class AttrHelper
 
     /**
      * Get the mapping: A-codes => attribute name. The language for the name
-     * is selected based on the $langpref parameter. The result is cached!
+     * is selected based on the $langprefs parameter. The result is cached!
      */
-    public static function get_acode_to_name_mapping($langpref)
+    public static function get_acode_to_name_mapping($langprefs)
     {
         static $mapping = null;
         if ($mapping !== null)
             return $mapping;
 
-        $cache_key = md5(serialize(array("attrhelper/acode2name", $langpref,
+        $cache_key = md5(serialize(array("attrhelper/acode2name", $langprefs,
             Okapi::$git_revision, self::cache_key_suffix())));
         $mapping = Cache::get($cache_key);
         if (!$mapping)
@@ -272,7 +272,7 @@ class AttrHelper
             foreach (self::$attr_dict as $acode => &$attr_ref)
             {
                 $mapping[$acode] = Okapi::pick_best_language(
-                    $attr_ref['names'], $langpref);
+                    $attr_ref['names'], $langprefs);
             }
             Cache::set($cache_key, $mapping, self::ttl());
         }

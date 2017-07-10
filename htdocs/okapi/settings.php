@@ -317,7 +317,7 @@ final class Settings
      */
     public static function default_gettext_init($langprefs)
     {
-        require_once($GLOBALS['rootpath']."okapi/locale/locales.php");
+        require_once __DIR__ . '/locale/locales.php';
         $locale = Locales::get_best_locale($langprefs);
         putenv("LC_ALL=$locale");
         setlocale(LC_ALL, $locale);

@@ -75,10 +75,10 @@ if ($error == false) {
             tpl_set_var('lonEsel', '');
             tpl_set_var('lonWsel', ' selected="selected"');
         }
-        $lon_h = isset($_POST['lon_h']) ? $_POST['lon_h'] : '0'; // Ocprop
+        $lon_h = isset($_POST['lon_h']) ? trim($_POST['lon_h']) : '0'; // Ocprop
         tpl_set_var('lon_h', htmlspecialchars($lon_h, ENT_COMPAT, 'UTF-8'));
 
-        $lon_min = isset($_POST['lon_min']) ? $_POST['lon_min'] : '00.000'; // Ocprop
+        $lon_min = isset($_POST['lon_min']) ? trim($_POST['lon_min']) : '00.000'; // Ocprop
         tpl_set_var('lon_min', htmlspecialchars($lon_min, ENT_COMPAT, 'UTF-8'));
 
         $latNS = isset($_POST['latNS']) ? $_POST['latNS'] : $default_NS; // Ocprop
@@ -89,10 +89,10 @@ if ($error == false) {
             tpl_set_var('latNsel', '');
             tpl_set_var('latSsel', ' selected="selected"');
         }
-        $lat_h = isset($_POST['lat_h']) ? $_POST['lat_h'] : '0'; // Ocprop
+        $lat_h = isset($_POST['lat_h']) ? trim($_POST['lat_h']) : '0'; // Ocprop
         tpl_set_var('lat_h', htmlspecialchars($lat_h, ENT_COMPAT, 'UTF-8'));
 
-        $lat_min = isset($_POST['lat_min']) ? $_POST['lat_min'] : '00.000'; // Ocprop
+        $lat_min = isset($_POST['lat_min']) ? trim($_POST['lat_min']) : '00.000'; // Ocprop
         tpl_set_var('lat_min', htmlspecialchars($lat_min, ENT_COMPAT, 'UTF-8'));
 
         //name
@@ -100,7 +100,7 @@ if ($error == false) {
         tpl_set_var('name', htmlspecialchars($name, ENT_COMPAT, 'UTF-8'));
 
         //shortdesc
-        $short_desc = isset($_POST['short_desc']) ? $_POST['short_desc'] : '';
+        $short_desc = isset($_POST['short_desc']) ? trim($_POST['short_desc']) : '';
         tpl_set_var('short_desc', htmlspecialchars($short_desc, ENT_COMPAT, 'UTF-8'));
 
         // descMode auslesen, falls nicht gesetzt aus dem Profil laden
@@ -147,7 +147,7 @@ if ($error == false) {
 
         //desc
         if (isset($_POST['desc'])) {
-            $desc = processEditorInput($oldDescMode, $descMode, $_POST['desc']);
+            $desc = trim(processEditorInput($oldDescMode, $descMode, $_POST['desc']));
         } else {
             $desc = '';
         }
@@ -192,7 +192,7 @@ if ($error == false) {
 
 
         //hints
-        $hints = isset($_POST['hints']) ? $_POST['hints'] : '';
+        $hints = isset($_POST['hints']) ? trim($_POST['hints']) : '';
         tpl_set_var('hints', htmlspecialchars($hints, ENT_COMPAT, 'UTF-8'));
 
         // fuer alte Versionen von OCProp
@@ -252,7 +252,7 @@ if ($error == false) {
         tpl_set_var('activation_hours', $activation_hours);
 
         //log-password
-        $log_pw = isset($_POST['log_pw']) ? mb_substr($_POST['log_pw'], 0, 20) : '';
+        $log_pw = isset($_POST['log_pw']) ? mb_substr(trim($_POST['log_pw']), 0, 20) : '';
         tpl_set_var('log_pw', htmlspecialchars($log_pw, ENT_COMPAT, 'UTF-8'));
 
         // gc- and nc-waypoints

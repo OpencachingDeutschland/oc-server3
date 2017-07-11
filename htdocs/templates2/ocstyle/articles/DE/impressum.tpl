@@ -60,11 +60,10 @@
 
     <p>
         Opencaching Deutschland e.V.<br />
-        c/o Michael Vaahsen<br />
-        Am Weiherboden 21a<br />
-        61276 Weilrod<br />
+        c/o Mirco Baumann<br />
+        Am Sternbusch 7<br />
+        46562 Voerde<br />
         <br />
-        Telefon: 0 60 83 / 32 99 654<br />
         E-Mail: verein@opencaching.de<br />
         <br />
     </p>
@@ -74,16 +73,17 @@
     </p>
 
     <p>
-        Laut &sect;10 der Vereinssatzung ist der Vorsitzende alleine vertretungsberechtigt, die zwei weiteren Mitglieder des gesch&auml;ftsf&uuml;hrenden
-        Vorstandes gemeinsam vertretungsberechtigt.
+        Laut &sect;10 der Vereinssatzung vom 30.05.2012 ist der Vorsitzende alleine vertretungsberechtigt, die zwei weiteren Mitglieder des gesch&auml;ftsf&uuml;hrenden
+        Vorstandes gemeinsam vertretungsberechtigt.<br>
+        Mit Eintragung der geänderten Satzung vom 28.05.2017 ist jeder geschäftsführende Vorstand einzeln vertretungsberechtigt.
     </p>
     <p>
-        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 26.11.2013):
+        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 28.05.2017):
     </p>
     <p>
         <ul class="indent narrowlist">
-            <li>Michael Vaahsen, Vorsitzender</li>
-            <li>Mirco Baumann, 2. Vorsitzender</li>
+            <li>Mirco Baumann, 1. Vorsitzender</li>
+            <li>Thomas Eiling, 2. Vorsitzender</li>
             <li>Christoph Convent, Kassenwart</li>
         </ul>
     </p>
@@ -102,7 +102,7 @@
     </p>
 
     <p>
-        Opencaching.de wird im folgenden als Synonym f&uuml;r den Betreiber des
+        Opencaching.de (oder kurz: OC.de) wird im folgenden als Synonym f&uuml;r den Betreiber des
         Internetauftritts verwendet.
     </p>
     <br />

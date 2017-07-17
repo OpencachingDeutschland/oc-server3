@@ -12,6 +12,6 @@
     </div>
 {elseif $cache.listing_outdated>0}
     <div class="isannotated">
-        <p><strong>{t}This geocache description may be outdated.{/t}</strong> {t 1=$smarty.server.PHP_SELF 2="?wp=" 3=$smarty.get.wp}See the <span style="white-space:nowrap"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png"> <a href="%1%2%3#logentries" class="systemlink">log entries</a></span> for more information.{/t}</p>
+        <p><strong>{t}This geocache description may be outdated.{/t}</strong> {t 1=$smarty.server.PHP_SELF 2="?cacheid=" 3=$smarty.get.cacheid}See the <span style="white-space:nowrap"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png"> <a href="%1%2%3#logentries" class="systemlink">log entries</a></span> for more information.{/t}</p>
     </div>
 {/if}

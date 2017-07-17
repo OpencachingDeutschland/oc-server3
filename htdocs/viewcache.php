@@ -46,7 +46,7 @@ $tpl->assign('use_tooltiplib', true);
 // get cacheid
 $cacheid = 0;
 if (isset($_REQUEST['cacheid'])) {
-    $cacheid = $_REQUEST['cacheid'] + 0;
+    $cacheid = (int) $_REQUEST['cacheid'];
 } else {
     if (isset($_REQUEST['uuid'])) {
         $cacheid = cache::cacheIdFromUUID($_REQUEST['uuid']);
@@ -55,6 +55,8 @@ if (isset($_REQUEST['cacheid'])) {
             $cacheid = cache::cacheIdFromWP($_REQUEST['wp']);
         }
     }
+    // compatibility for #1065
+    $_GET['cacheid'] = $cacheid;
 }
 
 $cache = new cache($cacheid);

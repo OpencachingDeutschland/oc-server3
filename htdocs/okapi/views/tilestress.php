@@ -10,8 +10,6 @@ use okapi\OkapiInternalConsumer;
 use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
 
-require_once($GLOBALS['rootpath']."okapi/service_runner.php");
-
 class View
 {
     public static function out($str)
@@ -22,7 +20,7 @@ class View
 
     public static function call()
     {
-        # By default, this view is turned off in the urls.php file.
+        # By default, this view is turned off in the OkapiUrls.php file.
         # This view is for debugging TileMap performace only!
 
         set_time_limit(0);

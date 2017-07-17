@@ -3,8 +3,8 @@
 namespace okapi\views\apps\authorize;
 
 use okapi\Db;
-use okapi\Locales;
-use okapi\OCSession;
+use okapi\lib\OCSession;
+use okapi\locale\Locales;
 use okapi\Okapi;
 use okapi\OkapiHttpResponse;
 use okapi\OkapiRedirectResponse;
@@ -18,8 +18,9 @@ class View
         $langpref = isset($_GET['langpref']) ? $_GET['langpref'] : Settings::get('SITELANG');
         $langprefs = explode("|", $langpref);
         $locales = array();
-        foreach (Locales::$languages as $lang => $attrs)
+        foreach (Locales::$languages as $lang => $attrs) {
             $locales[$attrs['locale']] = $attrs;
+        }
 
         # Current implementation of the "interactivity" parameter is: If developer
         # wants to "confirm_user", then just log out the current user before we
@@ -67,12 +68,12 @@ class View
             include 'authorize.tpl.php';
             $response->body = ob_get_clean();
             Okapi::gettext_domain_restore();
+
             return $response;
         }
 
         # Determine which user is logged in to OC.
 
-        require_once($GLOBALS['rootpath']."okapi/lib/oc_session.php");
         $OC_user_id = OCSession::get_user_id();
 
         # Ensure a user is logged in (or force re-login).
@@ -121,9 +122,13 @@ class View
                 }
             }
 
-            $after_login = "okapi/apps/authorize?oauth_token=$token_key".(($langpref != Settings::get('SITELANG'))?"&langpref=".$langpref:"");
+            $after_login = (
+                "okapi/apps/authorize?oauth_token=$token_key".
+                (($langpref != Settings::get('SITELANG')) ? "&langpref=" . $langpref : "")
+            );
             $login_url = Settings::get('SITE_URL').$login_page."target=".urlencode($after_login)
                 ."&langpref=".$langpref;
+
             return new OkapiRedirectResponse($login_url);
         }
 
@@ -189,9 +194,10 @@ class View
                 $response->content_type = "text/html; charset=utf-8";
                 ob_start();
                 $vars['locale_displayed'] = Okapi::gettext_domain_init($langprefs);
-                include 'authorize.tpl.php';
+                include __DIR__ . '/authorize.tpl.php';
                 $response->body = ob_get_clean();
                 Okapi::gettext_domain_restore();
+
                 return $response;
             }
         }
@@ -207,12 +213,17 @@ class View
         # Redirect to the callback_url.
 
         if ($token['callback']) {
-            return new OkapiRedirectResponse($token['callback'].$callback_concat_char."oauth_token=".$token_key."&oauth_verifier=".$token['verifier']);
+            return new OkapiRedirectResponse(
+                $token['callback'] . $callback_concat_char . "oauth_token=" . $token_key .
+                "&oauth_verifier=" . $token['verifier']
+            );
         } else {
             # Consumer did not provide a callback URL (probably the user is using a desktop
             # or mobile application). We'll just have to display the verifier to the user.
-            return new OkapiRedirectResponse(Settings::get('SITE_URL')."okapi/apps/authorized?oauth_token=".$token_key
-                ."&oauth_verifier=".$token['verifier']."&langpref=".$langpref);
+            return new OkapiRedirectResponse(
+                Settings::get('SITE_URL') . "okapi/apps/authorized?oauth_token=" . $token_key
+                . "&oauth_verifier=" . $token['verifier'] . "&langpref=" . $langpref
+            );
         }
     }
 
@@ -230,6 +241,7 @@ class View
             $results[] = ".".implode(".", array_slice($segments, $to_skip));
             $results[] = implode(".", array_slice($segments, $to_skip));
         }
+
         return $results;
     }
 }

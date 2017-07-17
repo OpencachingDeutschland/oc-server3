@@ -4,13 +4,12 @@ namespace okapi\oauth;
 
 use Exception;
 
-
 # MODIFIED, May 2012, Wojciech Rygielski <rygielski@mimuw.edu.pl>.
 #
-# This is a splightly modifier version of the original library.
+# This is a slightly modified version of the original library.
 # The original library couldn't be used if we wanted to be 100%
 # consistent with the OAuth response codes advice on
-# http://oauth.net/core/1.0a/#http_codes - it threw only one type
+# https://oauth.net/core/1.0a/#http_codes - it threw only one type
 # of Exception. I added many subclasses in order to be able to
 # report the error more properly.
 #
@@ -65,7 +64,7 @@ abstract class OAuthServerException extends OAuthException {
       'reason_stack' => array(),
     );
     $this->provideExtras($extras);
-    $extras['more_info'] = "http://opencaching.pl/okapi/introduction.html#errors";
+    $extras['more_info'] = "https://opencaching.pl/okapi/introduction.html#errors";
     return json_encode(array("error" => $extras));
   }
 }
@@ -929,7 +928,7 @@ class OAuthUtil {
   // parameters, has to do some unescaping
   // Can filter out any non-oauth parameters if needed (default behaviour)
   // May 28th, 2010 - method updated to tjerk.meesters for a speed improvement.
-  //                  see http://code.google.com/p/oauth/issues/detail?id=163
+  //                  see https://code.google.com/archive/p/oauth/issues/163
   public static function split_header($header, $only_allow_oauth_parameters = true) {
     $params = array();
     if (preg_match_all('/('.($only_allow_oauth_parameters ? 'oauth_' : '').'[a-z_-]*)=(:?"([^"]*)"|([^,]*))/', $header, $matches)) {
@@ -1052,5 +1051,3 @@ class OAuthUtil {
     return implode('&', $pairs);
   }
 }
-
-?>

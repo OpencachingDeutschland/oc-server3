@@ -3,6 +3,7 @@
 namespace okapi;
 
 use Exception;
+use okapi\locale\Locales;
 
 # DO NOT MODIFY THIS FILE. This file should always look like the original here:
 # https://github.com/opencaching/okapi/blob/master/okapi/settings.php
@@ -49,12 +50,16 @@ final class Settings
         'SITELANG' => "en",
 
         /**
-         * If set, it will be passed to date_default_timezone_set. OKAPI may
-         * refuse to start if this value is unset (more information here:
-         * https://github.com/opencaching/okapi/issues/177)
+         * If set, it will be passed to date_default_timezone_set.
+         *
+         * If your system is configured properly, then you are not required to
+         * set this value. However, in other cases, OKAPI may refuse to start
+         * if this value is not set (more information here:
+         * https://github.com/opencaching/okapi/issues/177).
+         *
          * You should set it to the timezone used in your country (the one you'd
          * use for your database inserts etc.). Choose one of the values listed
-         * here: http://www.php.net/manual/en/timezones.php
+         * here: https://www.php.net/manual/en/timezones.php
          *
          * E.g. "Europe/Berlin", "America/New_York".
          */
@@ -225,10 +230,10 @@ final class Settings
     {
         try {
             # This is an external code and it MAY generate E_NOTICEs.
-            # We have to temporarilly disable our default error handler.
+            # We have to temporarily disable our default error handler.
 
             OkapiErrorHandler::disable();
-            require_once($GLOBALS['rootpath']."okapi_settings.php");
+            require_once "okapi_settings.php";
             $ref = get_okapi_settings();
             OkapiErrorHandler::reenable();
 
@@ -317,7 +322,6 @@ final class Settings
      */
     public static function default_gettext_init($langprefs)
     {
-        require_once __DIR__ . '/locale/locales.php';
         $locale = Locales::get_best_locale($langprefs);
         putenv("LC_ALL=$locale");
         setlocale(LC_ALL, $locale);

@@ -18,9 +18,9 @@ class View
 
         # Uncomment the following if you want to debug a specific cronjob. It will be run
         # every 5 minutes (run 'crontab -e' to change or disable it) AND additionally
-        # every time you visit http://yoursite/okapi/cron5
+        # every time you visit http(s)://yoursite/okapi/cron5
 
-        # require_once($GLOBALS['rootpath']."okapi/cronjobs.php"); CronJobController::force_run("JOB_NAME"); die();
+        # require_once "okapi/cronjobs.php"; CronJobController::force_run("JOB_NAME"); die();
 
         Okapi::execute_cron5_cronjobs();
     }

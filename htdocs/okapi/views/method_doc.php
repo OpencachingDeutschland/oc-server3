@@ -15,8 +15,7 @@ class View
 {
     public static function call($methodname)
     {
-        require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
-        require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
+        require_once 'okapi/views/menu.inc.php';
 
         try
         {

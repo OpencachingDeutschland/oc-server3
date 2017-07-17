@@ -2,6 +2,8 @@
 
 namespace okapi;
 
+use okapi\lib\OCSession;
+
 # OKAPI Framework -- Wojciech Rygielski <rygielski@mimuw.edu.pl>
 
 # Use this class when you want to use OKAPI's services within OC code.
@@ -24,14 +26,23 @@ namespace okapi;
 
 # EXAMPLE OF USAGE:
 
-# require_once($rootpath.'okapi/facade.php');
+# require_once $rootpath.'okapi/facade.php';
 # \okapi\Facade::schedule_user_entries_check(...);
 # \okapi\Facade::disable_error_handling();
 
+# --------------------
 
+#
+# TETODO: We should probably get to the point at which this can be removed.
+#
+
+if (!in_array($GLOBALS['rootpath'], explode(PATH_SEPARATOR, get_include_path()))) {
+    set_include_path(get_include_path().PATH_SEPARATOR.$GLOBALS['rootpath']);
+}
+
+require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/core.php';
 OkapiErrorHandler::$treat_notices_as_errors = true;
-require_once __DIR__ . '/service_runner.php';
 Okapi::init_internals();
 
 /**
@@ -78,6 +89,16 @@ class Facade
     }
 
     /**
+     * Return ID of currently logged in user or NULL if no user is logged in.
+     * OKAPI detects signed-in users by comparing browser's cookies with database
+     * user sessions.
+     */
+    public static function detect_user_id()
+    {
+        return OCSession::get_user_id();
+    }
+
+    /**
      * Create a search set from a temporary table. This is very similar to
      * the "services/caches/search/save" method, but allows OC server to
      * include its own result instead of using OKAPI's search options. The
@@ -90,7 +111,6 @@ class Facade
      */
     public static function import_search_set($temp_table, $min_store, $max_ref_age)
     {
-        require_once __DIR__ . '/services/caches/search/save.php';
         $tables = array('caches', $temp_table);
         $where_conds = array(
             $temp_table.".cache_id = caches.cache_id",
@@ -161,7 +181,7 @@ class Facade
      */
     public static function database_update()
     {
-        require_once __DIR__ . '/views/update.php';
+        require_once __DIR__ . "/views/update.php";
         $update = new views\update\View;
         $update->call();
     }

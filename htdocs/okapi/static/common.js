@@ -25,12 +25,31 @@ $(function() {
             }
         });
     });
+
+    /**
+     * When present on http(s)://opencaching.xx/okapi/some/path page, return "some/path".
+     */
+    var get_rel_path = function() {
+        var myurl = window.location.href;
+        var possible_prefixes = [
+            okapi_base_url.replace("https://", "http://"),
+            okapi_base_url.replace("http://", "https://")
+        ];
+        for (var i=0; i<possible_prefixes.length; i++) {
+            var prefix = possible_prefixes[i];
+            if (myurl.substr(0, prefix.length) === prefix) {
+                return myurl.substr(prefix.length);
+            }
+        }
+        throw "We're outside of okapi_base_url";
+    };
+
     $('#switcher').change(function() {
-        // We are purposefully removing schemes from these URLs.
-        var current_base_url = $('#switcher option[current]').attr('value').replace(/^https?:/, "");
-        var new_base_url = $('#switcher option:selected').attr('value').replace(/^https?:/, "");
-        if (current_base_url !== new_base_url)
-            window.location.href = window.location.href.replace(current_base_url, new_base_url).replace("https://", "http://");
+        var current_base_url = $('#switcher option[current]').attr('value');
+        var new_base_url = $('#switcher option:selected').attr('value');
+        if (current_base_url !== new_base_url) {
+            window.location.href = new_base_url + get_rel_path();
+        }
     });
     $('#switcher option[current]').attr('selected', true);
 });

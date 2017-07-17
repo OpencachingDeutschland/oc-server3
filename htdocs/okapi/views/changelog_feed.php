@@ -11,7 +11,7 @@ class View
 {
     public static function call()
     {
-        require_once($GLOBALS['rootpath'].'okapi/views/changelog_helper.inc.php');
+        require_once 'okapi/views/changelog_helper.inc.php';
 
         $changelog = new Changelog();
         $changes = array_merge($changelog->unavailable_changes, $changelog->available_changes);

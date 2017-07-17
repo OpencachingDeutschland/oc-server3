@@ -11,8 +11,8 @@ class View
 {
     public static function call()
     {
-        require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
-        require_once($GLOBALS['rootpath'].'okapi/views/changelog_helper.inc.php');
+        require_once 'okapi/views/menu.inc.php';
+        require_once 'okapi/views/changelog_helper.inc.php';
 
         $changelog = new Changelog();
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-11 21:31+0100\n"
-"PO-Revision-Date: 2016-03-11 21:37+0100\n"
+"POT-Creation-Date: 2017-06-15 15:50+0200\n"
+"PO-Revision-Date: 2017-06-15 15:50+0200\n"
 "Last-Translator: Wojciech Rygielski <rygielski@mimuw.edu.pl>\n"
 "Language-Team: \n"
 "Language: pl_PL\n"
@@ -11,14 +11,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: D:/PRIV/Projekty/okapi/okapi\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=3; plural= n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
 
-#: services/caches/formatters/gpx.php:408
+#: services/caches/formatters/gpx.php:409
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
@@ -26,7 +27,7 @@ msgstr ""
 "<b>Współrzędne skrzynki zostały zmienione.</b> Zostały zastąpione Twoimi "
 "osobistymi współrzędnymi, które wprowadziłeś na stronie tej skrzynki."
 
-#: services/caches/formatters/gpx.php:414
+#: services/caches/formatters/gpx.php:415
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
@@ -34,21 +35,21 @@ msgstr ""
 "<b>Współrzędne skrzynki zostały zmienione.</b> Aktualnie wskazują one na "
 "jeden z dodatkowych waypointów, oryginalnie opisanego jako:"
 
-#: services/caches/formatters/gpx.php:427
+#: services/caches/formatters/gpx.php:428
 msgid "Original geocache location"
 msgstr "Oryginalne współrzędne skrzynki"
 
-#: services/caches/formatters/gpx.php:429
+#: services/caches/formatters/gpx.php:430
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
 msgstr "Oryginalne współrzędne skrzynki %s (podane przez autora)"
 
-#: services/caches/formatters/gpxfile.tpl.php:38
-#: services/caches/formatters/gpxfile.tpl.php:73
+#: services/caches/formatters/gpxfile.tpl.php:52
+#: services/caches/formatters/gpxfile.tpl.php:87
 msgid "hidden by"
 msgstr "ukryta przez"
 
-#: services/caches/formatters/gpxfile.tpl.php:75
+#: services/caches/formatters/gpxfile.tpl.php:89
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
@@ -56,7 +57,7 @@ msgstr[0] "%d rekomendacja"
 msgstr[1] "%d rekomendacje"
 msgstr[2] "%d rekomendacji"
 
-#: services/caches/formatters/gpxfile.tpl.php:76
+#: services/caches/formatters/gpxfile.tpl.php:90
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
@@ -64,7 +65,7 @@ msgstr[0] "znaleziona %d raz"
 msgstr[1] "znaleziona %d razy"
 msgstr[2] "znaleziona %d razy"
 
-#: services/caches/formatters/gpxfile.tpl.php:79
+#: services/caches/formatters/gpxfile.tpl.php:93
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
@@ -72,89 +73,136 @@ msgstr[0] "%d GeoKret (lub TravelBug)"
 msgstr[1] "%d GeoKrety (lub TravelBugi)"
 msgstr[2] "%d GeoKretów (lub TravelBugów)"
 
-#: services/caches/formatters/gpxfile.tpl.php:83
+#: services/caches/formatters/gpxfile.tpl.php:97
 msgid "Personal notes"
 msgstr "Osobiste notatki"
 
-#: services/caches/formatters/gpxfile.tpl.php:87
+#: services/caches/formatters/gpxfile.tpl.php:101
 msgid "Attributes"
 msgstr "Atrybuty"
 
-#: services/caches/formatters/gpxfile.tpl.php:91
+#: services/caches/formatters/gpxfile.tpl.php:105
 msgid "Trackables"
 msgstr "Geokrety, Travelbugi itp."
 
-#: services/caches/formatters/gpxfile.tpl.php:101
-#: services/caches/formatters/gpxfile.tpl.php:117
+#: services/caches/formatters/gpxfile.tpl.php:115
+#: services/caches/formatters/gpxfile.tpl.php:131
 msgid "Images"
 msgstr "Obrazki"
 
-#: services/caches/formatters/gpxfile.tpl.php:124
+#: services/caches/formatters/gpxfile.tpl.php:138
 msgid "Spoilers"
 msgstr "Spoilery"
 
-#: services/caches/formatters/gpxfile.tpl.php:133
+#: services/caches/formatters/gpxfile.tpl.php:147
 msgid "Image descriptions"
 msgstr "Opisy obrazków"
 
-#: services/caches/formatters/gpxfile.tpl.php:141
+#: services/caches/formatters/gpxfile.tpl.php:155
 msgid "The cache probably is located in the following protection areas:"
 msgstr "Prawdopodobnie skrzynka znajduje się na terenie obszarów chronionych:"
 
-#: services/caches/geocaches.php:534
+#: services/caches/geocaches.php:541
 msgid "Parts of this geocache listing may be outdated."
 msgstr "Opis tej skrzynki (lub jego część) może nie być aktualny."
 
-#: services/caches/geocaches.php:535
+#: services/caches/geocaches.php:543
 msgid "See the log entries for more information."
 msgstr ""
 "Przejrzyj wpisy w dzienniku w celu uzyskania dokładniejszych informacji."
 
-#: services/caches/geocaches.php:1014
+#: services/caches/geocaches.php:1050
 msgid "Stage"
 msgstr "Etap"
 
-#: services/caches/geocaches.php:1058
+#: services/caches/geocaches.php:1094
 msgid "User location"
 msgstr "Współrzędne użytkownika"
 
-#: services/caches/geocaches.php:1061
+#: services/caches/geocaches.php:1097
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
 msgstr "Twoje osobiste współrzędne skrzynki %s"
 
-#: services/caches/geocaches.php:1221
+#: services/caches/geocaches.php:1256
 msgid "National Park / Landscape"
 msgstr "Park narodowy lub krajobrazowy"
 
-#: services/caches/geocaches.php:1395
+#: services/caches/geocaches.php:1435
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
 "a> site."
 msgstr "Opis <a href='%s'>skrzynki</a> pochodzi z serwisu <a href='%s'>%s</a>."
 
-#: services/caches/geocaches.php:1407
+#: services/caches/geocaches.php:1447
 #, php-format
 msgid ""
-"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>, as of "
 "%s; all log entries &copy; their authors"
 msgstr ""
-"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>, w "
 "dniu %s. Prawa autorskie wpisów do logów należą do ich autorów."
 
-#: services/caches/geocaches.php:1418
+#: services/caches/geocaches.php:1458
 #, php-format
 msgid ""
-"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.en'>CC-BY-NC-ND</a>; all "
 "log entries &copy; their authors"
 msgstr ""
-"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='http://"
+"Prawa autorskie: <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
 "creativecommons.org/licenses/by-nc-nd/3.0/de/deed.pl'>CC-BY-NC-ND</a>. Prawa "
 "autorskie wpisów do logów należą do ich autorów."
+
+#: services/logs/images/add.php:81 services/logs/images/edit.php:55
+#, php-format
+msgid "%s requires all images to have captions. Please provide one."
+msgstr ""
+"%s wymaga, aby wszystkie obrazki miały swoje tytuły. Tytuł nie może pozostać "
+"pusty."
+
+#: services/logs/images/add.php:106
+#, php-format
+msgid ""
+"Your image file is too large (%s.%s MB); %s accepts a maximum image size of "
+"%s.%s MB."
+msgstr ""
+"Twój plik z obrazkiem jest za duży (%s.%s MB). %s akceptuje pliki o "
+"maksymalnym rozmiarze %s.%s MB."
+
+#: services/logs/images/add.php:134 services/logs/images/add.php:159
+#, php-format
+msgid "%s reported an error when it tried to read your file."
+msgstr "Serwis %s zgłosił błąd podczas próby odczytu Twojego pliku."
+
+#: services/logs/images/add.php:138
+msgid ""
+"Make sure you are sending a file in an appropriate format (JPEG, PNG or GIF)."
+msgstr ""
+"Upewnij się, że wysyłasz plik w odpowiednim formacie (JPEG, PNG lub GIF)."
+
+#: services/logs/images/add.php:147
+#, php-format
+msgid ""
+"The image you have uploaded is too large (%s megapixels). Please use an "
+"external application to downscale it first. (You can also contact the "
+"developers of '%s' and ask them to downscale uploaded images automatically.)"
+msgstr ""
+"Przesłany obrazek jest za duży (%s megapikseli). Najpierw użyj zewnętrznej "
+"aplikacji aby zmniejszyć jego wymiary. (Możesz również skontaktować się z "
+"autorami aplikacji '%s' i poprosić ich, aby zmniejszali przesyłane obrazki "
+"automatycznie.)"
+
+#: services/logs/images/add.php:411
+msgid "Image has been successfully saved."
+msgstr "Obrazek został pomyślnie zapisany."
+
+#: services/logs/images/edit.php:215
+msgid "Image properties have been successfully updated."
+msgstr "Właściwości obrazka został pomyślnie zaktualizowane."
 
 #: services/logs/submit.php:75
 msgid ""
@@ -254,7 +302,7 @@ msgstr ""
 msgid "Event caches cannot \"need maintenance\"."
 msgstr "Skrzynki typu Wydarzenie nie mogą \"potrzebować serwisu\"."
 
-#: services/logs/submit.php:690
+#: services/logs/submit.php:693
 msgid "Your cache log entry was posted successfully."
 msgstr "Twój wpis do logbooka został opublikowany pomyślnie."
 
@@ -353,8 +401,8 @@ msgid ""
 "\n"
 "                    <p>This is the list of applications which you granted "
 "access to your <b>%s</b> account.\n"
-"                    This page gives you the ability to revoke all "
-"previously granted privileges.\n"
+"                    This page gives you the ability to revoke all previously "
+"granted privileges.\n"
 "                    Once you click \"remove\" the application will no longer "
 "be able to perform any\n"
 "                    actions on your behalf.</p>\n"

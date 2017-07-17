@@ -27,7 +27,7 @@
 </h1>
 
 <p><b>OKAPI</b> is a publically available
-<a href='http://en.wikipedia.org/wiki/Application_programming_interface'>API</a>
+<a href='https://en.wikipedia.org/wiki/Application_programming_interface'>API</a>
 for "National Opencaching" sites.</p>
 
 <ul>
@@ -58,8 +58,8 @@ Here is the list of other OKAPI installations:</p>
         <a href='https://github.com/opencaching/okapi/'>https://github.com/opencaching/okapi/</a>
     </li>
     <li>
-        OKAPI News blog -
-        <a href='http://opencaching-api.blogspot.com/'>http://opencaching-api.blogspot.com/</a>
+        OKAPI News blog (rarely updated, but still) -
+        <a href='https://opencaching-api.blogspot.com/'>https://opencaching-api.blogspot.com/</a>
     </li>
 </ul>
 
@@ -179,7 +179,7 @@ shouldn't count on it too.</p>
 
 <p>You must assume that our HTML content may contain anything, including
 invalid HTML markup, tracking images (pixels), or even
-<a href='http://en.wikipedia.org/wiki/Cross-site_scripting'>XSS vectors</a>.
+<a href='https://en.wikipedia.org/wiki/Cross-site_scripting'>XSS vectors</a>.
 This also applies to the descriptions included in the GPX files.</p>
 
 
@@ -197,11 +197,11 @@ formatting parameters</i> in your request:</p>
 
         <ul>
             <li>
-                <p><b>json</b> - <a href='http://en.wikipedia.org/wiki/JSON'>JSON</a>
+                <p><b>json</b> - <a href='https://en.wikipedia.org/wiki/JSON'>JSON</a>
                 format (default),</p>
             </li>
             <li>
-                <b>jsonp</b> - <a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a>
+                <b>jsonp</b> - <a href='https://en.wikipedia.org/wiki/JSONP'>JSONP</a>
                 format (if you choose this one then you have to specify the
                 <b>callback</b> parameter too),
             </li>
@@ -242,7 +242,7 @@ extra elements in GPX files or extra keys in JSON responses. Your software
 an Access Token).</p>
 
 <p>The three OAuth request URLs defined in the
-<a href='http://oauth.net/core/1.0a/'>OAuth specification</a> are:</p>
+<a href='https://oauth.net/core/1.0a/'>OAuth specification</a> are:</p>
 
 <ul>
     <li>
@@ -267,8 +267,8 @@ an Access Token).</p>
         method is <b>required</b>.</p>
 
         <p>As the OAuth 1.0a specification states, it should be set to
-        "<i>oob</i>" or a callback URL (this usually starts with http:// or
-        https://, but you can use any other myapp:// scheme).</p>
+        "<i>oob</i>" or a callback URL (this usually starts with https://, but
+        you can use any other scheme, e.g. myapp://).</p>
 
         <p>For most OAuth client libraries, you just should provide
         "<i><?= $vars['site_url'] ?>okapi/services/oauth/request_token?oauth_callback=oob</i>"

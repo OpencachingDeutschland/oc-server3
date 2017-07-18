@@ -67,6 +67,9 @@ class OkapiClient
     protected function prepareResponse($result, $httpCode)
     {
         if (null === $decodedResult = json_decode($result, true)) {
+            echo "\n\n";
+            var_dump($result);
+            echo "\n\n";
             throw new \RuntimeException('no valid response');
         }
 

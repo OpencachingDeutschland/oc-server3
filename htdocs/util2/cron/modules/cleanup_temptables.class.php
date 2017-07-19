@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *
  *  Cleanup the table sys_temptables from entries of dead threads

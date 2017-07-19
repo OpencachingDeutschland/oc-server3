@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *
  *  Production system sample of settings.inc.php - all lib2 settings needed

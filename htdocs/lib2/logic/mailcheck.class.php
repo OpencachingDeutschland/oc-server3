@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *
  *  check if the mailserver returns an 550 or 553 code

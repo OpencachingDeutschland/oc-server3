@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *
  *  Publish new geocaches that are marked for timed publish

@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *  Import new data from geokrety.org.
  *  See util2/geokrety for check and repair functions.
  *  See discussion in http://redmine.opencaching.de/issues/18.

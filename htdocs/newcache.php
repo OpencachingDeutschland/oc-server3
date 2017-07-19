@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *  submit a new cache
  *  used template(s): newcache, viewcache, login
  ***************************************************************************/

@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <?php
  /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *
  *  Load current stored procs and triggers into database.

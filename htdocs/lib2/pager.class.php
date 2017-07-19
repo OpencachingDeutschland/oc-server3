@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *  Set template variables for displaying a page browser control.
  *  Output is formatted by templates2/<style>/res_pager.tpl.

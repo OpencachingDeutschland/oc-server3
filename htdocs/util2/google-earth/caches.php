@@ -1,6 +1,6 @@
 <?php
 /*
-  For license information see doc/license.txt
+  For license information see LICENSE.md
 
   BBOX=2.38443,45.9322,20.7053,55.0289
 */

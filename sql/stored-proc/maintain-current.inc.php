@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *  Current trigger and stored procedure definitions
  ***************************************************************************/
 

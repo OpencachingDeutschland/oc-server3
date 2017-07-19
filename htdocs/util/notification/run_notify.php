@@ -1,7 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * Processes the `notify_waiting` table and sends notification mails

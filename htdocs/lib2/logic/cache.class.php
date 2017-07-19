@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *   get/set has to be committed with save
  *   add/remove etc. is executed instantly
  ***************************************************************************/

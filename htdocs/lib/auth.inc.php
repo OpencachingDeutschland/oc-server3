@@ -3,7 +3,7 @@
  * ./lib/auth.inc.php
  * --------------------
  * begin                : Fri September 16 2005
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  ***************************************************************************/
 
 /****************************************************************************

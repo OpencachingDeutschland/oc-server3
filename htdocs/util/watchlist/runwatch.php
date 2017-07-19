@@ -1,7 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  * Ggf. muss die Location des php-Binaries angepasst werden.
  * Dieses Script sucht nach neuen Logs und Caches, die von Usern beobachtet
  * werden und verschickt dann die Emails.

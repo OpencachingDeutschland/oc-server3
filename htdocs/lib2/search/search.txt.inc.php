@@ -1,6 +1,6 @@
 <?php
 /****************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * Plaintext search output, one file per cache

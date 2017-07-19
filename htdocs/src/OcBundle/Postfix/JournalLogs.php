@@ -1,6 +1,6 @@
 <?php
 /****************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  * extract bounced and sent logs from postfix journal log and process
  * information for mail-log cronjob
  ****************************************************************************/

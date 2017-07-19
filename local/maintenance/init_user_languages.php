@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *    This script guesses the primary language of all users who did not login
  *  after release of OC 3.0.14.
  ***************************************************************************/

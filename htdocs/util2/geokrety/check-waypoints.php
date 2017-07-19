@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * Tests for consistency of gk_item_waypoint und gk_move_waypoint tables.

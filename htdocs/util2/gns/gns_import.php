@@ -1,7 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * Dieses Script liest Dateien von GEOnet Names Server (GNS) ein und importiert

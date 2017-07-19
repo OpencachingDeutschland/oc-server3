@@ -40,7 +40,7 @@ Sponsoring Technology Partner
 -------------
 
 * Atlassian
-* BrowserStack ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/develop/docs/browser-stack.svg)
+* BrowserStack ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
 * CrowdIn
 * HostEurope 
 * Jetbrains 

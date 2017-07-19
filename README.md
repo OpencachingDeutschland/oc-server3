@@ -39,11 +39,15 @@ This Project uses crowdin to translate all words and strings in the code. It sta
 Sponsoring Technology Partner
 -------------
 
-* Atlassian
-* BrowserStack ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
-* CrowdIn
-* HostEurope 
-* Jetbrains 
+* [Atlassian](https://www.atlassian.com/)
+* [BrowserStack]() ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
+* [CrowdIn](https://www.browserstack.com/)
+* [HostEurope](https://www.hosteurope.de/) 
+* [Jetbrains](https://www.jetbrains.com/)
+* [Scrutinizer](https://scrutinizer-ci.com)
+* [Travis-Ci](https://travis-ci.org/)
+
+We thank our technology partners for their support of our open source project!
 
 Contributions
 -------------

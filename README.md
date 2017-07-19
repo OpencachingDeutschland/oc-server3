@@ -40,12 +40,12 @@ Sponsoring Technology Partner
 -------------
 
 * [Atlassian](https://www.atlassian.com/)
-* [BrowserStack]() ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
-* [CrowdIn](https://www.browserstack.com/)
+* [BrowserStack](https://www.browserstack.com/) ![BrowserStack](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/browser-stack.png)
+* [CrowdIn](https://crowdin.com/)
 * [HostEurope](https://www.hosteurope.de/) 
 * [Jetbrains](https://www.jetbrains.com/)
 * [Scrutinizer](https://scrutinizer-ci.com)
-* [Travis-Ci](https://travis-ci.org/)
+* [Travis-Ci](https://travis-ci.org/)   
 
 We thank our technology partners for their support of our open source project!
 

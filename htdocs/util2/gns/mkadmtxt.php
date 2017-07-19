@@ -1,7 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * Dieses Script berechnet andhand von Geodb-Daten die adm1..adm4-Daten

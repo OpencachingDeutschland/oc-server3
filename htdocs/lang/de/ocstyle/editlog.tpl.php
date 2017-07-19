@@ -5,7 +5,7 @@
         begin                : Mon July 5 2004
         copyright            : (C) 2004 The OpenCaching Group
 
-        For license information see doc/license.txt
+        For license information see LICENSE.md
  ****************************************************************************/
 
 /****************************************************************************

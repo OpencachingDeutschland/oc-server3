@@ -80,4 +80,4 @@ Content: all other static data
 Purpose: misc
 Source:  /sql/static-data/data.sql
 Import:  SQL import, or bin/dbupdate.php
-License: see doc/license.txt
+License: see LICENSE.md

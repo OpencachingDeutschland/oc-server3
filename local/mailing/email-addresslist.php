@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  ***************************************************************************/
 
 header('Content-type: text/html; charset=utf-8');

@@ -1,7 +1,7 @@
 #!/usr/local/bin/php -q
 <?php
 /****************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * refresh the search-index of all modified descriptions

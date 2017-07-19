@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  * create a cronjob to execute this file every minute
  *

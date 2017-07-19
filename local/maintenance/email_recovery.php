@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *  This script helps to recover from email losses after an email delivery
  *  problem on the host. It will resend the emails if possible, and inform

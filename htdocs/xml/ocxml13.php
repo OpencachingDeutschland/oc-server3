@@ -2,7 +2,7 @@
 /***************************************************************************
  * ./xml/ocxml13.php
  *
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  ***************************************************************************/
 
 $ocXmlVersion = 13;

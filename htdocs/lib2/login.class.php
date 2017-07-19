@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *  This class provides access to the login user data. Informations are
  *  stored in a cookie.
  *  Methods:

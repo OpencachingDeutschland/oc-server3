@@ -2,7 +2,7 @@
 /***************************************************************************
  * send mailing
  *
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  * reads from addresses.txt
  * writes protocol sent.txt

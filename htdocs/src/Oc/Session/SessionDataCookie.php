@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *  Session data handling with cookies
  *  See doc/cookies.txt for more information in cookies.
  ***************************************************************************/

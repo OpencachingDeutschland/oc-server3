@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *  Smiley translater for smarty extension, see modifier_smiley.php.
  *  Same content like smilies.class.php.

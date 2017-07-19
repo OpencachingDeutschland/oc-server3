@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *    For license information see doc/license.txt
+ *    For license information see LICENSE.md
  ***************************************************************************/
 
 require_once __DIR__ . '/../../util2/google-earth/caches.php';

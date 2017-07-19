@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  * small helper class to get a dbal connection or dbal query builder
  * to refactor sql methods

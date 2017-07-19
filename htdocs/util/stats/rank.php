@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *    For license information see doc/license.txt
+ *    For license information see LICENSE.md
  *
  *
  *  The tool has been portet to lib2; lib1 URL is still provided for

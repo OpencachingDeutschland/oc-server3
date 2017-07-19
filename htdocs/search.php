@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * This module handles everything which results in the output of a list of

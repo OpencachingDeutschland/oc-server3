@@ -2,7 +2,7 @@
 /****************************************************************************
  * ./lib/settings.inc.php
  * -------------------
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  *
  * sample settings for an OC production system;

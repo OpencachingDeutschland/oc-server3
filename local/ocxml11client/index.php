@@ -5,7 +5,7 @@
  * -------------------
  * begin                : Sun January 14 2005
  *
- * For license information see doc/license.txt
+ * For license information see LICENSE.md
  *
  * This code is of 2007 and has to be verified to be compatible with
  * current OC Server Version 3.

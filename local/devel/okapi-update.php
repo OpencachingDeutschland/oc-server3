@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * for license information see doc/license.txt
+ * for license information see LICENSE.md
  *
  *  This script replicates the current OKAPI revision into the current
  *  OC code branch (Git -> Git). Please do not confuse with OKAPI's internal

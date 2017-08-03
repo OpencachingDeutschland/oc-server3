@@ -40,12 +40,11 @@
 
     <p>
         Opencaching Deutschland e.V.<br />
-        c/o Michael Vaahsen<br />
-        Am Weiherboden 21a<br />
-        61276 Weilrod<br />
+        c/o Mirco Baumann<br />
+        Am Sternbusch 7<br />
+        46562 Voerde<br />
         GERMANY<br />
         <br />
-        Phone: +49 (0) 60 83 / 32 99 654<br />
         E-Mail: verein@opencaching.de<br />
         <br />
     </p>
@@ -64,8 +63,8 @@
     </p>
     <p>
         <ul class="indent narrowlist">
-            <li>Michael Vaahsen, chairman</li>
-            <li>Mirco Baumann, vice chairman</li>
+            <li>Mirco Baumann, chairman</li>
+            <li>Thomas Eiling, vice chairman</li>
             <li>Christoph Convent, treasurer</li>
         </ul>
     </p>

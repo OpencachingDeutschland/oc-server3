@@ -4,19 +4,27 @@ namespace okapi\oauth;
 
 use Exception;
 
-# MODIFIED, May 2012, Wojciech Rygielski <rygielski@mimuw.edu.pl>.
+
+# MODIFIED, 2012-2017, Wojciech Rygielski <rygielski@mimuw.edu.pl>.
 #
-# This is a slightly modified version of the original library.
-# The original library couldn't be used if we wanted to be 100%
+# This is a splightly modified version of the original library.
+#
+# 1. The original library couldn't be used if we wanted to be 100%
 # consistent with the OAuth response codes advice on
 # https://oauth.net/core/1.0a/#http_codes - it threw only one type
 # of Exception. I added many subclasses in order to be able to
 # report the error more properly.
 #
-# I also added a helper method for server exception named getOkapiJSON.
+# 2. Added a helper method for server exception named getOkapiJSON.
 # This produces a non-standard (because there is no REST standard for
 # this), JSON-formatted description of the error, to be passed within
-# the response.
+# the response. This is OKAPI-specific.
+#
+# 3. Skipped nonce and timestamp verification for requests made over
+# HTTPS. See here: https://github.com/opencaching/okapi/issues/475
+#
+# 4. Hardcoded information about PLAINTEXT signature method being
+# supported over HTTPS connection. This is OKAPI-specific.
 
 
 /* === The original copyright and permission notice === *//*
@@ -757,10 +765,16 @@ class OAuthServer {
 
     if (!in_array($signature_method,
                   array_keys($this->signature_methods))) {
+      if ($signature_method == 'PLAINTEXT') {
+        throw new OAuthUnsupportedSignatureMethodException(
+          "PLAINTEXT signature method is allowed only over HTTPS connection."
+        );
+      }
       throw new OAuthUnsupportedSignatureMethodException(
         "Signature method '$signature_method' not supported " .
         "try one of the following: " .
-        implode(", ", array_keys($this->signature_methods)) . "."
+        implode(", ", array_keys($this->signature_methods)) . ". " .
+        "PLAINTEXT signature method is allowed only over HTTPS connection."
       );
     }
     return $this->signature_methods[$signature_method];
@@ -818,10 +832,16 @@ class OAuthServer {
         ? $request->get_parameter('oauth_nonce')
         : NULL;
 
-    $this->check_timestamp($timestamp);
-    $this->check_nonce($consumer, $token, $nonce, $timestamp);
-
     $signature_method = $this->get_signature_method($request);
+
+    if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+      # HTTPS connection. Safe to skip timestamp/nonce checks in this case.
+      # https://github.com/opencaching/okapi/issues/475#issuecomment-317169756
+    } else {
+      # Non-HTTPS connection. Timestamp/nonce checks mandatory.
+      $this->check_timestamp($timestamp);
+      $this->check_nonce($consumer, $token, $nonce, $timestamp);
+    }
 
     $signature = $request->get_parameter('oauth_signature');
     $valid_sig = $signature_method->check_signature(

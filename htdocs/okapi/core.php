@@ -19,6 +19,7 @@ use okapi\oauth\OAuthServer;
 use okapi\oauth\OAuthServer400Exception;
 use okapi\oauth\OAuthServerException;
 use okapi\oauth\OAuthSignatureMethod_HMAC_SHA1;
+use okapi\oauth\OAuthSignatureMethod_PLAINTEXT;
 use okapi\oauth\OAuthToken;
 use PDO;
 use PDOException;
@@ -849,8 +850,14 @@ class OkapiOAuthServer extends OAuthServer
     public function __construct($data_store)
     {
         parent::__construct($data_store);
-        # We want HMAC_SHA1 authorization method only.
+
+        # https://github.com/opencaching/okapi/issues/475
+
         $this->add_signature_method(new OAuthSignatureMethod_HMAC_SHA1());
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+            # Request was made over HTTPS. Allow PLAINTEXT method.
+            $this->add_signature_method(new OAuthSignatureMethod_PLAINTEXT());
+        }
     }
 
     /**

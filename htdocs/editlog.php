@@ -305,6 +305,7 @@ if ($error == false) {
                     }
 
                     // store changed data
+                    $cache_ok_sql = ", `needs_maintenance`=1, `listing_outdated`=1";
                     sql(
                         "UPDATE `cache_logs`
                          SET `type`='&1',
@@ -312,7 +313,8 @@ if ($error == false) {
                              `date`='&3',
                              `text`='&4',
                              `text_html`='&5',
-                             `text_htmledit`='&6'
+                             `text_htmledit`='&6'" .
+                             ($log_type == cachelog::LOGTYPE_ACTIVE ? $cache_ok_sql : "") . "
                          WHERE `id`='&7'",
                         $log_type,
                         $oc_team_comment,

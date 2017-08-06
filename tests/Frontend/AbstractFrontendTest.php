@@ -48,6 +48,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
     protected function login()
     {
         $page = $this->session->getPage();
+
         $page->fillField('email', 'root');
         $page->fillField('password', 'developer');
 

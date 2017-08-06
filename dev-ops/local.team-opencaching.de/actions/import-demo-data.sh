@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#DESCRIPTION: imports htdocs/opencaching_dump.sql for demo data
 
 mysql -u root -proot -e 'DROP DATABASE IF EXISTS __DB_NAME__;'
 mysql -u root -proot -e 'CREATE DATABASE __DB_NAME__;'

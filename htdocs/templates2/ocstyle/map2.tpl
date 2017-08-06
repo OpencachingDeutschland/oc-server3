@@ -388,7 +388,6 @@ function mapLoad()
     {literal}
 
     setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
-    setMapType("OCM", "OpenCycleMap", "http://tile.opencyclemap.org/cycle/", 18);
 
     moInfoWindow = new google.maps.InfoWindow();
     moWpInfoWindow = new google.maps.InfoWindow();

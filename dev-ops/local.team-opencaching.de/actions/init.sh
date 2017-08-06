@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#DESCRIPTION: initialisation process to start developing
 
 INCLUDE: ./composer.sh
 INCLUDE: ./.init-database.sh

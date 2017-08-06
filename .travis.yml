@@ -5,6 +5,7 @@ php:
   - 5.6
 #  - 7.0
 sudo: required
+dist: precise
 
 before_script:
   #- if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi

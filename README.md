@@ -19,7 +19,7 @@ Linux, Windows or Mac workstation, but you may also try to set up the code direc
 on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team Member in
 [Opencaching.de forum](http://forum.opencaching.de/) or you start with our new minimal dump.
 
-In the Vagrant System our example login for the opencaching plattform ist root with the password developer.
+In the Vagrant System our example login for the opencaching platform ist root with the password developer.
  
 
 This repo contains three branches:

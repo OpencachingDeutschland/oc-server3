@@ -33,7 +33,7 @@ public Git repository. For data transfer to and from opencaching.de, see
 the legal information at opencaching.de.
 
 The Opencaching Deutschland logo, as it is contained in files like the
-statistics pictures and rotator pictures orverlay, is NOT licensed under GPL. 
+statistics pictures and rotator pictures overlay, is NOT licensed under GPL. 
 Instead it is subject to a special license which can be obtained from 
 Opencaching Deutschland. 
 

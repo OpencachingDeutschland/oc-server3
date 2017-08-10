@@ -14,7 +14,7 @@ class View
 {
     public static function call()
     {
-        require_once 'okapi/views/menu.inc.php';
+        require_once __DIR__ . '/menu.inc.php';
 
         $vars = array(
             'menu' => OkapiMenu::get_menu_html("introduction.html"),
@@ -29,7 +29,7 @@ class View
         $response = new OkapiHttpResponse();
         $response->content_type = "text/html; charset=utf-8";
         ob_start();
-        include 'introduction.tpl.php';
+        require_once __DIR__ . '/introduction.tpl.php';
         $response->body = ob_get_clean();
         return $response;
     }

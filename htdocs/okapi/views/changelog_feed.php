@@ -11,7 +11,7 @@ class View
 {
     public static function call()
     {
-        require_once 'okapi/views/changelog_helper.inc.php';
+        require_once __DIR__ . '/changelog_helper.inc.php';
 
         $changelog = new Changelog();
         $changes = array_merge($changelog->unavailable_changes, $changelog->available_changes);
@@ -25,7 +25,7 @@ class View
         $response = new OkapiHttpResponse();
         $response->content_type = "application/rss+xml; charset=utf-8";
         ob_start();
-        include 'changelog_feed.tpl.php';
+        require_once __DIR__ . '/changelog_feed.tpl.php';
         $response->body = ob_get_clean();
         return $response;
     }

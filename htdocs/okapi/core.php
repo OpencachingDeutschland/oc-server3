@@ -28,7 +28,7 @@ use PDOException;
 function get_admin_emails()
 {
     $emails = array();
-    if (class_exists("okapi\\Settings"))
+    if (class_exists(Settings::class))
     {
         try
         {
@@ -152,13 +152,13 @@ class OkapiExceptionHandler
 
             $exception_info = self::get_exception_info($e);
 
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG')))
+            if (class_exists(Settings::class) && (Settings::get('DEBUG')))
             {
                 print "\n\nBUT! Since the DEBUG flag is on, then you probably ARE a developer yourself.\n";
                 print "Let's cut to the chase then:";
                 print "\n\n".$exception_info;
             }
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS')))
+            if (class_exists(Settings::class) && (Settings::get('DEBUG_PREVENT_EMAILS')))
             {
                 # Sending emails was blocked on admin's demand.
                 # This is possible only on development environment.
@@ -200,7 +200,7 @@ class OkapiExceptionHandler
                     @touch($lock_file);
 
                     $admin_email = implode(", ", get_admin_emails());
-                    $sender_email = class_exists("okapi\\Settings") ? Settings::get('FROM_FIELD') : 'root@localhost';
+                    $sender_email = class_exists(Settings::class) ? Settings::get('FROM_FIELD') : 'root@localhost';
                     $subject = "Fatal error mode: ".$subject;
                     $message = "Fatal error mode: OKAPI will send at most ONE message per minute.\n\n".$message;
                     $headers = (
@@ -310,7 +310,7 @@ class OkapiErrorHandler
     /** Use this AFTER calling a piece of buggy code. */
     public static function reenable()
     {
-        set_error_handler(array('\okapi\OkapiErrorHandler', 'handle'));
+        set_error_handler(array(OkapiErrorHandler::class, 'handle'));
     }
 
     /** Handle FATAL errors (not catchable, report only). */
@@ -319,7 +319,7 @@ class OkapiErrorHandler
         $error = error_get_last();
 
         # We don't know whether this error has been already handled. The error_get_last
-        # function will return E_NOTICE or E_STRICT errors if the stript has shut down
+        # function will return E_NOTICE or E_STRICT errors if the script has shut down
         # correctly. The only error which cannot be recovered from is E_ERROR, we have
         # to check the type then.
 
@@ -332,12 +332,12 @@ class OkapiErrorHandler
 }
 
 # Setting handlers. Errors will now throw exceptions, and all exceptions
-# will be properly handled. (Unfortunetelly, only SOME errors can be caught
+# will be properly handled. (Unfortunately, only SOME errors can be caught
 # this way, PHP limitations...)
 
-set_exception_handler(array('\okapi\OkapiExceptionHandler', 'handle'));
-set_error_handler(array('\okapi\OkapiErrorHandler', 'handle'));
-register_shutdown_function(array('\okapi\OkapiErrorHandler', 'handle_shutdown'));
+set_exception_handler(array(OkapiExceptionHandler::class, 'handle'));
+set_error_handler(array(OkapiErrorHandler::class, 'handle'));
+register_shutdown_function(array(OkapiErrorHandler::class, 'handle_shutdown'));
 
 #
 # Extending exception types (introducing some convenient shortcuts for

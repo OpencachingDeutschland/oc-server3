@@ -20,16 +20,10 @@ use okapi\views\http404\View;
 # variable is being set up by the OC site. If it is called via the controller
 # endpoint (this one!), then we need to set it up ourselves.
 #
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 
 $GLOBALS['rootpath'] = __DIR__.'/../';
-
-#
-# TETODO: We should probably get to the point at which this can be removed.
-#
-
-if (!in_array($GLOBALS['rootpath'], explode(PATH_SEPARATOR, get_include_path()))) {
-    set_include_path(get_include_path().PATH_SEPARATOR.$GLOBALS['rootpath']);
-}
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/core.php';

@@ -7,7 +7,7 @@ use Exception;
 
 # MODIFIED, 2012-2017, Wojciech Rygielski <rygielski@mimuw.edu.pl>.
 #
-# This is a splightly modified version of the original library.
+# This is a slightly modified version of the original library.
 #
 # 1. The original library couldn't be used if we wanted to be 100%
 # consistent with the OAuth response codes advice on

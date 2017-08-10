@@ -233,7 +233,7 @@ final class Settings
             # We have to temporarily disable our default error handler.
 
             OkapiErrorHandler::disable();
-            require_once "okapi_settings.php";
+            require_once __DIR__ . '/../okapi_settings.php';
             $ref = get_okapi_settings();
             OkapiErrorHandler::reenable();
 

@@ -17,7 +17,7 @@ caches
 
 last_modified
     Is updated when any data of a caches record changes which is presented to
-    the user and/or output by export interfaces, including attribures.
+    the user and/or output by export interfaces, including attributes.
     This triggers an XML interface update (resending) of the cache record,
     and an update of listing_last_modified and okapi_syncbase.
 
@@ -61,13 +61,13 @@ meta_last_modified
 
 flags_last_modified
     Is updated when logger-supplied cache properties change, which do not update
-    the listing moficiation date but are exported through XML interface.
+    the listing modification date but are exported through XML interface.
     Currently this are the flags needs_maintenance and listing_outdated and the
     field wp_gc_maintained. Cache lists associated with the cache may be added
     to update this date.
 
 An additional field may be needed in the future for listing data which is not
-provied by the owner (or admins), like wp_gc_maintained or "logger feedback"
+provided by the owner (or admins), like wp_gc_maintained or "logger feedback"
 on cache properties. As soon as this data is output via XML interface, it must
 be incorporated into some new modification date field.
 
@@ -94,7 +94,7 @@ last_modified
           allow_user_view=1, or
         - introducing a separate flag or date field somewhere which triggers the
           XML sending without compromising the logs etc. modification dates
-          (however, these dates are alredy fucked up for all cache status changes
+          (however, these dates are already fucked up for all cache status changes
           up to now).
 
 log_last_modified
@@ -171,7 +171,7 @@ cache_countries
 
 Every time a cache record is created or its coordinates or country are changed,
 the coordinates resp. country are copied into a new record in one or both of
-these tables. These tables were introduced for some sophisticted XML interface
+these tables. These tables were introduced for some sophisticated XML interface
 distance search behaviour, but since OC 3.0.6 are also used for the listing
 restore function (see below).
 

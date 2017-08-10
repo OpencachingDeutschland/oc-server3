@@ -63,6 +63,7 @@ do {
 
 // Ensure that all tables have the right charset, including added tables:
 check_tables_charset($opt['db']['placeholder']['db']);
+check_tables_storage_engine($opt['db']['placeholder']['db']);
 
 return;
 
@@ -98,7 +99,6 @@ function check_tables_charset($database)
     }
 
     # migrate tables
-
     $rs = sql(
         "SELECT TABLE_NAME, TABLE_COLLATION
          FROM INFORMATION_SCHEMA.TABLES
@@ -128,6 +128,32 @@ function check_tables_charset($database)
             }
         }
     }
+    sql_free_result($rs);
+}
+
+function check_tables_storage_engine($database)
+{
+    # migrate tables
+    $rs = sql(
+        "SELECT TABLE_NAME
+         FROM INFORMATION_SCHEMA.TABLES
+         WHERE INFORMATION_SCHEMA.TABLES.ENGINE = 'MyISAM'
+         AND TABLE_SCHEMA='&1'
+         AND TABLE_NAME NOT LIKE 'okapi_%'
+         AND TABLE_NAME NOT LIKE 'nuts_layer'
+         AND TABLE_NAME NOT LIKE 'npa_areas'
+         AND TABLE_NAME NOT LIKE 'migration_versions'",
+        $database
+    );
+
+    while ($table = sql_fetch_assoc($rs)) {
+        sql(
+            'ALTER TABLE `&1`
+             ENGINE=InnoDB;',
+            $table['TABLE_NAME']
+        );
+    }
+
     sql_free_result($rs);
 }
 
@@ -1123,8 +1149,8 @@ function dbv_158()
     sql(
         "ALTER TABLE `cache_logs`
             COMMENT = 'Attention: modifications to this table may need to be " .
-        'applied also to cache_logs_archived, cache_logs_modified ' .
-        "and trigger cacheLogsBeforeUpdate!'"
+                      "applied also to cache_logs_archived, cache_logs_modified " .
+                      "and trigger cacheLogsBeforeUpdate!'"
     );
 }
 

@@ -166,9 +166,9 @@ class OkapiExceptionHandler
             else
             {
                 $requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'cli-execution';
-                $subject = 'OKAPI Method Error - ' .substr(
-                        $requestUri, 0, strpos(
-                        $requestUri.'?', '?'));
+                $subject = 'OKAPI Method Error - '.substr(
+                    $requestUri, 0, strpos($requestUri.'?', '?')
+                );
 
                 $message = (
                     "OKAPI caught the following exception while executing API method request.\n".

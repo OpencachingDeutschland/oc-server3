@@ -3,7 +3,6 @@
 namespace okapi;
 
 use Exception;
-use okapi\views\http404\View;
 
 #
 # All HTTP requests within the /okapi/ path are redirected through this
@@ -20,8 +19,6 @@ use okapi\views\http404\View;
 # variable is being set up by the OC site. If it is called via the controller
 # endpoint (this one!), then we need to set it up ourselves.
 #
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
 
 $GLOBALS['rootpath'] = __DIR__.'/../';
 
@@ -97,7 +94,7 @@ class OkapiScriptEntryPointController
         # None of the patterns matched OR method threw the Http404 exception.
 
         require_once __DIR__ . '/views/http404.php';
-        $response = View::call();
+        $response = \okapi\views\http404\View::call();
         $response->display();
     }
 }

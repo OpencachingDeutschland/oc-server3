@@ -4,7 +4,6 @@ namespace okapi\oauth;
 
 use Exception;
 
-
 # MODIFIED, 2012-2017, Wojciech Rygielski <rygielski@mimuw.edu.pl>.
 #
 # This is a slightly modified version of the original library.

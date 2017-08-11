@@ -8,10 +8,10 @@ namespace okapi;
 # see facade.php. You should not rely on any other file, never!
 
 use ArrayObject;
-use clsTbsZip;
 use ErrorException;
 use Exception;
 use okapi\cronjobs\CronJobController;
+use okapi\lib\ClsTbsZip;
 use okapi\oauth\OAuthConsumer;
 use okapi\oauth\OAuthMissingParameterException;
 use okapi\oauth\OAuthRequest;
@@ -19,6 +19,7 @@ use okapi\oauth\OAuthServer;
 use okapi\oauth\OAuthServer400Exception;
 use okapi\oauth\OAuthServerException;
 use okapi\oauth\OAuthSignatureMethod_HMAC_SHA1;
+use okapi\oauth\OAuthSignatureMethod_PLAINTEXT;
 use okapi\oauth\OAuthToken;
 use PDO;
 use PDOException;
@@ -27,7 +28,7 @@ use PDOException;
 function get_admin_emails()
 {
     $emails = array();
-    if (class_exists("okapi\\Settings"))
+    if (class_exists(Settings::class))
     {
         try
         {
@@ -81,7 +82,7 @@ class OkapiExceptionHandler
         {
             # This is thrown on invalid OAuth requests. There are many subclasses
             # of this exception. All of them result in HTTP 400 or HTTP 401 error
-            # code. See also: http://oauth.net/core/1.0a/#http_codes
+            # code. See also: https://oauth.net/core/1.0a/#http_codes
 
             if ($e instanceof OAuthServer400Exception)
                 header("HTTP/1.0 400 Bad Request");
@@ -151,22 +152,23 @@ class OkapiExceptionHandler
 
             $exception_info = self::get_exception_info($e);
 
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG')))
+            if (class_exists(Settings::class) && (Settings::get('DEBUG')))
             {
                 print "\n\nBUT! Since the DEBUG flag is on, then you probably ARE a developer yourself.\n";
                 print "Let's cut to the chase then:";
                 print "\n\n".$exception_info;
             }
-            if (class_exists("okapi\\Settings") && (Settings::get('DEBUG_PREVENT_EMAILS')))
+            if (class_exists(Settings::class) && (Settings::get('DEBUG_PREVENT_EMAILS')))
             {
                 # Sending emails was blocked on admin's demand.
                 # This is possible only on development environment.
             }
             else
             {
-                $subject = "OKAPI Method Error - ".substr(
-                    $_SERVER['REQUEST_URI'], 0, strpos(
-                    $_SERVER['REQUEST_URI'].'?', '?'));
+                $requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'cli-execution';
+                $subject = 'OKAPI Method Error - '.substr(
+                    $requestUri, 0, strpos($requestUri.'?', '?')
+                );
 
                 $message = (
                     "OKAPI caught the following exception while executing API method request.\n".
@@ -198,7 +200,7 @@ class OkapiExceptionHandler
                     @touch($lock_file);
 
                     $admin_email = implode(", ", get_admin_emails());
-                    $sender_email = class_exists("okapi\\Settings") ? Settings::get('FROM_FIELD') : 'root@localhost';
+                    $sender_email = class_exists(Settings::class) ? Settings::get('FROM_FIELD') : 'root@localhost';
                     $subject = "Fatal error mode: ".$subject;
                     $message = "Fatal error mode: OKAPI will send at most ONE message per minute.\n\n".$message;
                     $headers = (
@@ -308,7 +310,7 @@ class OkapiErrorHandler
     /** Use this AFTER calling a piece of buggy code. */
     public static function reenable()
     {
-        set_error_handler(array('\okapi\OkapiErrorHandler', 'handle'));
+        set_error_handler(array(OkapiErrorHandler::class, 'handle'));
     }
 
     /** Handle FATAL errors (not catchable, report only). */
@@ -317,7 +319,7 @@ class OkapiErrorHandler
         $error = error_get_last();
 
         # We don't know whether this error has been already handled. The error_get_last
-        # function will return E_NOTICE or E_STRICT errors if the stript has shut down
+        # function will return E_NOTICE or E_STRICT errors if the script has shut down
         # correctly. The only error which cannot be recovered from is E_ERROR, we have
         # to check the type then.
 
@@ -330,12 +332,12 @@ class OkapiErrorHandler
 }
 
 # Setting handlers. Errors will now throw exceptions, and all exceptions
-# will be properly handled. (Unfortunetelly, only SOME errors can be caught
+# will be properly handled. (Unfortunately, only SOME errors can be caught
 # this way, PHP limitations...)
 
-set_exception_handler(array('\okapi\OkapiExceptionHandler', 'handle'));
-set_error_handler(array('\okapi\OkapiErrorHandler', 'handle'));
-register_shutdown_function(array('\okapi\OkapiErrorHandler', 'handle_shutdown'));
+set_exception_handler(array(OkapiExceptionHandler::class, 'handle'));
+set_error_handler(array(OkapiErrorHandler::class, 'handle'));
+register_shutdown_function(array(OkapiErrorHandler::class, 'handle_shutdown'));
 
 #
 # Extending exception types (introducing some convenient shortcuts for
@@ -848,8 +850,14 @@ class OkapiOAuthServer extends OAuthServer
     public function __construct($data_store)
     {
         parent::__construct($data_store);
-        # We want HMAC_SHA1 authorization method only.
+
+        # https://github.com/opencaching/okapi/issues/475
+
         $this->add_signature_method(new OAuthSignatureMethod_HMAC_SHA1());
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+            # Request was made over HTTPS. Allow PLAINTEXT method.
+            $this->add_signature_method(new OAuthSignatureMethod_PLAINTEXT());
+        }
     }
 
     /**
@@ -993,26 +1001,24 @@ class OkapiRedirectResponse extends OkapiHttpResponse
     }
 }
 
-require_once __DIR__ . '/lib/tbszip.php';
-
 class OkapiZIPHttpResponse extends OkapiHttpResponse
 {
     public $zip;
 
     public function __construct()
     {
-        $this->zip = new clsTbsZip();
+        $this->zip = new ClsTbsZip();
         $this->zip->CreateNew();
     }
 
     public function print_body()
     {
-        $this->zip->Flush(clsTbsZip::TBSZIP_DOWNLOAD|clsTbsZip::TBSZIP_NOHEADER);
+        $this->zip->Flush(ClsTbsZip::TBSZIP_DOWNLOAD|ClsTbsZip::TBSZIP_NOHEADER);
     }
 
     public function get_body()
     {
-        $this->zip->Flush(clsTbsZip::TBSZIP_STRING);
+        $this->zip->Flush(ClsTbsZip::TBSZIP_STRING);
         return $this->zip->OutputSrc;
     }
 
@@ -1104,8 +1110,8 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
-    public static $version_number = 1390;
-    public static $git_revision = '1fb45e6b7856c856291609e9e07c29b4a941a8d0';
+    public static $version_number = null;
+    public static $git_revision = null;
 
     private static $okapi_vars = null;
 
@@ -1284,29 +1290,16 @@ class Okapi
     }
 
     /**
-     * Return a "schema code" of this OC site.
-     *
-     * While there are only two primary OC_BRANCHes (OCPL and OCDE), sites
-     * based on the same branch may have a different schema of attributes,
-     * cache types, log types, or even database structures. This method returns
-     * a unique internal code which identifies a set of sites that share the
-     * same schema. As all OCPL-based sites currently have different attribute
-     * sets, there is a separate schema for each OCPL site.
+     * Return a "code" of this OC node.
      *
      * These values are used internally only, they SHOULD NOT be exposed to
      * external developers!
      */
-    public static function get_oc_schema_code()
+    public static function get_oc_installation_code()
     {
-        /* All OCDE-based sites use exactly the same schema. */
-
         if (Settings::get('OC_BRANCH') == 'oc.de') {
             return "OCDE";  // OC
         }
-
-        /* All OCPL-based sites use separate schemas. (Hopefully, this will
-         * change in time.) */
-
         $mapping = array(
             2 => "OCPL",  // OP
             6 => "OCUK",  // OK
@@ -1350,13 +1343,9 @@ class Okapi
         /* Currently, there are no config settings which would let us allow
          * to determine the proper values for this list. So, we need to have it
          * hardcoded. (Perhaps we should move this to etc/installations.xml?
-         * But this wouldn't be efficient...)
-         *
-         * TODO: Replace "self::get_oc_schema_code()" by something better.
-         *       Base URls depend on installations, not on schemas.
-         */
+         * But this wouldn't be efficient...) */
 
-        switch (self::get_oc_schema_code()) {
+        switch (self::get_oc_installation_code()) {
             case 'OCPL':
                 $urls = array(
                     "http://opencaching.pl/okapi/",
@@ -1366,6 +1355,11 @@ class Okapi
                 break;
             case 'OCDE':
                 if (in_array(Settings::get('OC_NODE_ID'), array(4,5))) {
+                    /* In OCDE, node_ids 4 and 5 are used to indicate a development
+                     * installation. Other sites rely on the fact, that
+                     * self::get_recommended_base_url() is appended to $urls below.
+                     * For OCDE this is not enough, because they want to test both
+                     * HTTP and HTTPS in their development installations. */
                     $urls = array(
                         preg_replace("/^https:/", "http:", Settings::get('SITE_URL')) . 'okapi/',
                         preg_replace("/^http:/", "https:", Settings::get('SITE_URL')) . 'okapi/',
@@ -1644,7 +1638,6 @@ class Okapi
      */
     public static function register_new_consumer($appname, $appurl, $email)
     {
-        require_once __DIR__ . '/service_runner.php';
         $consumer = new OkapiConsumer(Okapi::generate_key(20), Okapi::generate_key(40),
             $appname, $appurl, $email);
         $sample_cache = OkapiServiceRunner::call("services/caches/search/all",
@@ -1663,9 +1656,10 @@ class Okapi
         print "You don't need Consumer Secret for Level 1 Authentication.\n\n";
         print "Now you can easily access Level 1 OKAPI methods. E.g.:\n";
         print Settings::get('SITE_URL')."okapi/services/caches/geocache?cache_code=$sample_cache_code&consumer_key=$consumer->key\n\n";
-        print "If you plan on using OKAPI for a longer time, then you may want to\n";
-        print "subscribe to the OKAPI News blog to stay up-to-date:\n";
-        print "http://opencaching-api.blogspot.com/\n\n";
+        print "If you plan on using OKAPI for a longer time, then you might also want\n";
+        print "to subscribe to the OKAPI News blog (it is not much updated, but it might\n";
+        print "still be worth the trouble):\n";
+        print "https://opencaching-api.blogspot.com/\n\n";
         print "Have fun!\n\n";
         print "-- \n";
         print "OKAPI Team\n";
@@ -2466,7 +2460,7 @@ abstract class OkapiRequest
 {
     public $consumer;
     public $token;
-    public $etag;  # see: http://en.wikipedia.org/wiki/HTTP_ETag
+    public $etag;  # see: https://en.wikipedia.org/wiki/HTTP_ETag
 
     /**
      * Set this to true, for some method to allow you to set higher "limit"

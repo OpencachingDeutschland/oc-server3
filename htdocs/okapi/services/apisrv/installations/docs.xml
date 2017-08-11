@@ -1,0 +1,41 @@
+<xml>
+    <brief>Get the list of all public OKAPI installations</brief>
+    <issue-id>39</issue-id>
+    <desc>
+        Get the list of all public OKAPI installations. Keep in mind that
+        OKAPI installations might differ slightly. If you plan on using
+        multiple OKAPI installations in your application (which is a very
+        good thing!) you should test it against the one with the <b>lowest</b>
+        OKAPI version number.
+    </desc>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li>
+                <b>site_url</b> - URL of the Opencaching site which is running
+                the OKAPI installation (usually this looks like
+                "https://www.opencaching.<i>xx</i>/", where <b>xx</b> is a top
+                level domain of a country).
+
+                <p>Once OKAPI maintainers are notified that this particular site
+                supports HTTPS, this field will return a HTTPS URL from then on.
+                Otherwise, HTTP URL will be returned.</p>
+            </li>
+            <li>
+                <b>site_name</b> - universal name for this site (should be fine
+                for all languages),
+            </li>
+            <li>
+                <p><b>okapi_base_url</b> - URL of the OKAPI installation (usually this is
+                <b>site_url</b> with "okapi/" appended, but you should not assume
+                that); this value is to be used as a prefix when constructing service
+                method URLs.</p>
+
+                <p>Once OKAPI maintainers are notified that this particular site
+                supports HTTPS, this field will return a HTTPS URL from then on.
+                Otherwise, HTTP URL will be returned.</p>
+            </li>
+        </ul>
+    </returns>
+</xml>

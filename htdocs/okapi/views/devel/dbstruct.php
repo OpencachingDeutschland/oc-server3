@@ -75,7 +75,7 @@ class View
                     "-- Note: The following script has some limitations. It will render database\n".
                     "-- structure compatible, but not necessarilly EXACTLY the same. It might be\n".
                     "-- better to use manual diff instead.\n\n";
-                require_once("comparator.inc.php");
+                require_once "comparator.inc.php";
                 $updater = new \dbStructUpdater();
                 if (isset($_GET['reverse']) && ($_GET['reverse'] == 'true'))
                 {
@@ -129,7 +129,6 @@ class View
      */
     private static function requireSafe($url)
     {
-        require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
         $installations = OkapiServiceRunner::call(
             "services/apisrv/installations",
             new OkapiInternalRequest(

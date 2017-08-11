@@ -8,8 +8,6 @@ use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
 use okapi\Settings;
 
-require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
-
 class OkapiMenu
 {
     private static function link($current_path, $link_path, $link_name)

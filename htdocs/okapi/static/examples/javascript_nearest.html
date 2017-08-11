@@ -10,7 +10,7 @@
                 // Fill the OKAPI installations select-box with dynamic installation list.
 
                 $.ajax({
-                    url: 'http://opencaching.pl/okapi/services/apisrv/installations',
+                    url: 'https://opencaching.pl/okapi/services/apisrv/installations',
                     dataType: 'json',
                     success: function(installations) {
                         for (var i in installations) {
@@ -61,7 +61,7 @@
                                 });
                             },
                             function (error) {
-                                $('#results').text("Your browser refused to give me your location.");
+                                $('#results').text("Error :( Message: " + error.message);
                             }
                         );
                     } else {

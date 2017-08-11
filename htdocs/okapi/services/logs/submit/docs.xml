@@ -1,0 +1,163 @@
+<xml>
+    <brief>Submit a log entry</brief>
+    <issue-id>42</issue-id>
+    <desc>
+        <p>Submit a log entry for the geocache. Please note, that you won't be
+        able to use this method until you learn to handle OAuth.</p>
+    </desc>
+    <req name='cache_code'>
+        <p>Code of the geocache.</p>
+    </req>
+    <req name='logtype'>
+        <p>Type of an entry. This should be one of:</p>
+        <ul>
+            <li>
+                <i>Will attend</i>, <i>Attended</i> or <i>Comment</i> for Event caches;
+            </li>
+            <li>
+                <i>Found it</i>, <i>Didn't find it</i> or <i>Comment</i> for all other
+                cache types.
+            </li>
+        </ul>
+    </req>
+    <opt name='comment'>
+        <p>Text to be submitted with the log entry.</p>
+
+        <p>Note: Some OC sites support only BMP (Basic Multilingual Plane) Unicode
+        characters on some database fields. If you submit characters from outside of
+        the BMP plane (known as "supplementary planes", they include characters such
+        as smiley symbols), then keep in mind that your text might be saved garbled.</p>
+    </opt>
+    <opt name='comment_format' default='auto'>
+        <p>Indicates the format of your <b>comment</b>. Three values allowed:
+        <b>auto</b>, <b>html</b> or <b>plaintext</b>. You should NOT
+        use the <b>auto</b> option, because its exact behavior is unspecified
+        (<a href='https://github.com/opencaching/okapi/issues/124'>more info</a>).
+        It is only included for backward compatibility.</p>
+
+        <p><b>Important note:</b> The subset of allowed HTML elements is left undefined
+        and may change in the future. For future-compatibility, you should use only
+        basic formatting tags.</p>
+    </opt>
+    <opt name='when'>
+        <p>A date and time string. This should be in ISO 8601 format (currently any
+        format acceptable by PHP's <a href='https://php.net/manual/function.strtotime.php'>strtotime</a>
+        function also will do, but most of them don't handle time zones properly,
+        try to use ISO 8601!). You MAY (and are encouraged to) omit the time segment
+        (and just submit a date in "yyyy-mm-dd" format) if the time is either unknown
+        or your user doesn't want to disclose it.</p>
+
+        <p>Indicates when the cache was found. If given, the log will be published
+        with the given date and time. If not, log will be published using the current
+        date and time. If only the date is given, OKAPI will publish the log in a way
+        which most closely resembles "no time given"
+        (<a href="https://github.com/opencaching/okapi/issues/358">more info</a>).</p>
+    </opt>
+    <opt name='password'>
+        <p>Some caches require a password in order to submit a "Found it" log entry.
+        You may check if this cache requires password with <b>req_passwd</b> field
+        of the services/caches/geocache method.</p>
+    </opt>
+    <opt name='langpref' default='en'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which language will be chosen for error messages.</p>
+    </opt>
+    <opt name='on_duplicate' default='silent_success'>
+        <p>How should OKAPI react when you are trying to submit a duplicate entry?
+        One of the following values:</p>
+        <ul>
+            <li><b>silent_success</b> - try to respond with success=true, but don't
+            add a new log entry (existing log_uuid will be returned),</li>
+            <li><b>user_error</b> - respond with success=false and a proper user message,</li>
+            <li><b>continue</b> - don't detect duplicates (note, that this will still
+            fail in some cases, i.e. when you're trying to submit a "Found it" entry for an
+            already found cache).</li>
+        </ul>
+        <p>Note, that duplicate detection may take the <b>when</b> parameter into account.
+        When you don't supply it, "when" is generated for you. This means that you may
+        have to supply the "when" parameter if you want duplicate detection to work.</p>
+    </opt>
+    <opt name='rating'>
+        <p>An integer in range between 1 and 5 - user's optional rating of a found cache.</p>
+        <p>Important: <b>logtype</b> has to be "Found it" in order to use this argument.</p>
+        <p>Note: You should allow your user to <b>not</b> rate a found cache.</p>
+        <p>Note: Currently, some OC installations do not support cache ratings. On such installations
+        user's rating will be <b>ignored</b> (if you include the rating, log entry will be posted
+        successfully, but rating will be ignored).</p>
+    </opt>
+    <opt name='recommend' default='false'>
+        <p>Set to <b>true</b> if the user wants to recommend this cache.</p>
+        <p>Important: <b>logtype</b> has to be "Found it" or "Attended" in order to
+        use this argument. However, some installations do not support recommending
+        event caches (if you include a recommendation, the log entry will be posted
+        successfully, but the recommendation will be <b>ignored</b>).</p>
+        <p>Recommending may only succeed when the user meets certain criteria
+        set on him by the OC site. If criteria are not met, the request will
+        end with user error (HTTP 200, success=false).</p>
+    </opt>
+    <opt name='needs_maintenance' default='false' class='deprecated'>
+        <p>Deprecated (<a href='https://github.com/opencaching/okapi/issues/373'>why?</a>).
+        Use <b>needs_maintenance2</b> instead.</p>
+
+        <p>Passing <b>true</b> here will have exactly the same meaning as passing
+        <b>true</b> to <b>needs_maintenance2</b>. Passing <b>false</b> however has a
+        different meaning - it's the same as passing <b>null</b> (not <b>false</b>!)
+        to <b>needs_maintenance2</b>. Keep this in mind when upgrading your application
+        to <b>needs_maintenance2</b>!</p>
+    </opt>
+    <opt name='needs_maintenance2' default='null'>
+        <p>Valid options include:</p>
+
+        <ul>
+            <li>
+                <p><b>null</b> - indicates that the user doesn't want to include any report
+                on the current condition of the geocache.</p>
+            </li>
+            <li>
+                <p><b>true</b> - use this to indicate that your user thinks that the cache
+                needs some special attention of its owner. Such users should also describe
+                why it needs maintenance (in their comments).</p>
+
+                <p>Note: Depending on OC installation and user's log entry type, OKAPI may
+                actually publish two separate log entries when you set this option to
+                <b>true</b> (one of them with empty comment).</p>
+            </li>
+            <li>
+                <p><b>false</b> - use this to indicate that your user thinks that the cache's
+                condition is fine.</p>
+
+                <p>Note: The <b>false</b> option is not evaluated by all OC sites. Some will
+                just ignore it.</p>
+            </li>
+        </ul>
+
+        <p>Note: Currently, this is not allowed for Event Caches (you will get a HTTP 200
+        "user friendly" response).</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li>
+                <p><b>success</b> - true, if the log entry was submitted
+                successfully,</p>
+            </li>
+            <li>
+                <p><b>message</b> - plain-text string, a message for the user,
+                which acknowledges success or describes an error (usually you
+                want to display this only when success is false),</p>
+            </li>
+            <li>
+                <p><b>log_uuid</b> - ID of the newly created log entry, <b>or
+                null</b> in case of an error. If multiple log entries have been
+                published because <b>needs_maintenance</b> or
+                <b>needs_maintenance2</b> was set to <b>true</b>: The ID of
+                one of those log entries.</p>
+            </li>
+            <li>
+                <p><b>log_uuids</b> - a list of the IDs of the newly created
+                log entries; an empty list in case of an error.</p>
+            </li>
+        </ul>
+    </returns>
+</xml>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+    bootstrap="../htdocs/vendor/autoload.php"
+    colors="true"
+    verbose="true"
+>
+    <testsuites>
+        <testsuite name="default">
+            <directory>./</directory>
+        </testsuite>
+        <testsuite name="login">
+            <directory>Oc/Login/LoginTest</directory>
+        </testsuite>
+        <testsuite name="coords">
+            <directory>Modules/Lib2/Logic</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>.</directory>
+            <exclude>
+                <directory>tests</directory>
+                <directory>htdocs/vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="URL" value="http://local.team-opencaching.de"/>
+    </php>
+</phpunit>

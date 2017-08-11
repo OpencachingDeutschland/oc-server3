@@ -15,8 +15,7 @@ class View
 {
     public static function call($methodname)
     {
-        require_once($GLOBALS['rootpath'].'okapi/service_runner.php');
-        require_once($GLOBALS['rootpath'].'okapi/views/menu.inc.php');
+        require_once __DIR__ . '/menu.inc.php';
 
         try
         {
@@ -38,7 +37,7 @@ class View
         $response = new OkapiHttpResponse();
         $response->content_type = "text/html; charset=utf-8";
         ob_start();
-        include 'method_doc.tpl.php';
+        require_once __DIR__ . '/method_doc.tpl.php';
         $response->body = ob_get_clean();
         return $response;
     }

@@ -1,0 +1,265 @@
+<xml>
+    <brief>Retrieve geocaches in GPX format</brief>
+    <issue-id>40</issue-id>
+    <desc>
+        <p>Produces a standards-compliant Geocaching GPX file.</p>
+        <p>Unlike the services/caches/geocaches method responses, GPX files cannot
+        contain names and descriptions in separate multiple languages. This method
+        will attempt to choose the best language based on your preference
+        (see <b>langpref</b> argument).</p>
+        <p>Remember that a full-blown GPX file is much larger than a basic one.
+        This method can produce many various types of GPX files. The simplest list of
+        waypoints takes ~50 times less space than the same list with cache descriptions
+        and log entries included.</p>
+        <p>Note, that GPX files may contain <a href='%OKAPI:docurl:html%'>unvalidated
+        HTML</a>.</p>
+    </desc>
+    <req name='cache_codes'>
+        <p>Pipe-separated list of cache codes which you are interested in.
+        No more than 500 codes are allowed. This CAN be an empty string (it will
+        result in an empty, but valid, GPX file). All invalid cache codes will
+        be skipped without any notice!</p>
+    </req>
+    <opt name='langpref' default='en'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which language will be chosen for GPX entities.</p>
+    </opt>
+    <opt name='ns_ground' default='false'>
+        Boolean. If <b>true</b> then response will include
+        <a href='http://www.groundspeak.com/cache/1/0/1/cache.xsd'>Groundspeak's
+        GPX extension</a>. This namespace declares an extra &lt;cache&gt; element
+        used by <a href='https://www.geocaching.com/'>geocaching.com</a> and <b>many others</b>.
+        This namespace was initially associatied with geocaching.com, but now seems to
+        be used in every geocaching GPX file. You probably want to have it.
+    </opt>
+    <opt name='ns_gsak' default='false'>
+        <p>Boolean. If <b>true</b> then response will include
+        <a href='http://www.gsak.net/xmlv1/5/gsak.xsd'>GSAK GPX extension</a>.
+        This namespace declares an extra &lt;wptExtension&gt; element,
+        which allows including "waypoint inheritance" information (parent-child relations)
+        via its &lt;Parent&gt; element. This in turn allows us to include
+        "alternate waypoints" in the response.</p>
+
+        <p>This feature was once supported by <a href='http://www.gsak.net/'>GSAK</a>
+        application only, but currently many applications recognize it. As far as we
+        know, it became a "de facto" standard for expressing "alternate waypoints".</p>
+    </opt>
+    <opt name='ns_ox' default='false'>
+        <p>Boolean. If <b>true</b> then response will include Garmin's
+        <a href='https://github.com/opencaching/okapi/blob/master/etc/nsox.xsd'>OpenCaching.com
+        GPX extension</a>. This namespace declares an extra &lt;opencaching&gt; element
+        used by Garmin's (former) <b>OpenCaching.com</b> site.
+        The element includes information on cache difficulty, ratings, tags and images.</p>
+
+        <p>OpenCaching.com no longer exists, but its XML namespace is still used by many
+        applications (and not only the Garmin ones, e.g. see
+        <a href='http://help.locusmap.eu/topic/how-to-use-gcvotes-functionality-with-opencaching'>here</a>).</p>
+    </opt>
+    <opt name='images' default='descrefs:nonspoilers'>
+        <p>Which images to include (and how to include them). One of the following values:</p>
+        <ul>
+            <li><b>none</b> - no images will be included,</li>
+            <li><b>descrefs:thumblinks</b> - all images will be included as "thumbnail"
+                &lt;img&gt; references at the end of each cache description, with a
+                replacement image used for spoilers; the thumbnails are linked to the
+                large images,</li>
+            <li><b>descrefs:nonspoilers</b> - all non-spoiler images will be included
+                as &lt;img&gt; references at the end of each cache description,</li>
+            <li><b>descrefs:all</b> - all images will be included (including spoilers)
+                as &lt;img&gt; references at the end of each cache description,</li>
+            <li><b>ox:all</b> - all images will be included (including spoilers)
+                as Garmin's &lt;ox:image&gt; references.</li>
+        </ul>
+        <p>Note: When using "descrefs:" mode, remember to set <b>ns_ground</b> to <b>true</b>.
+        The default value is "descrefs:nonspoilers" for compatibilty reasons, but for
+        most applications "descrefs:thumblinks" will be the better choice.</p>
+        <p>Note: When using "ox:" mode, remember to set <b>ns_ox</b> to <b>true</b>. You must also
+        include JPEG files along the GPX for this to work properly - see
+        services/caches/formatters/garmin for more information.</p>
+        <p>In the future, more generic ways of including images in GPX files may emerge.</p>
+    </opt>
+    <opt name='attrs' default='desc:text'>
+        <p>This argument controls whether cache attributes are included and how they are included.
+        Pipe-separated list consisting of any set of the following values:</p>
+
+        <ul>
+            <li><b>desc:text</b> - attributes will be listed (in plain-text) within
+            the cache description (<b>ns_ground</b> has to be <b>true</b>),</li>
+            <li><b>ox:tags</b> - attributes will be listed as Garmin's <i>ox:tag</i>
+            elements (<b>ns_ox</b> has to be <b>true</b>),</li>
+            <li>
+                <p><b>gc:attrs</b> - attributes will be listed as Groundspeak's
+                <i>groundspeak:attribute</i> elements (<b>ns_ground</b> has to be <b>true</b>),
+                compatible with Geocaching.com (see the list
+                <a href='https://www.geocaching.com/about/icons.aspx'>here</a>).</p>
+                <p>Note that most Opencaching attributes don't have Geocaching.com counterparts.
+                Such attributes cannot be included as gc:attrs and will be ignored.</p>
+            </li>
+            <li>
+                <p>%OKAPI:infotag:ocde-specific% <b>gc_ocde:attrs</b> - attributes will be
+                listed as Groundspeak's <i>groundspeak:attribute</i> elements (<b>ns_ground</b>
+                has to be <b>true</b>). Opencaching attributes which have no Geocaching.com
+                counterparts will be included according to an Opencaching.DE convention, using
+                "makeshift IDs" which may change in the future.</p>
+
+                <p>This alternative is supported only by some OC sites (the ones originating
+                from the OCDE branch). Other sites will handle <b>gc_ocde:attrs</b> in the same
+                way as <b>gc:attrs</b>.</p>
+            </li>
+        </ul>
+
+        <p>If you don't want any attributes to be included, you must set the <b>attrs</b>
+        parameter to <b>none</b>. Using an empty string won't work this way - it will
+        trigger the default (<b>desc:text</b>) to be selected, for backward-compatibility.</p>
+    </opt>
+    <opt name='protection_areas' default='desc:auto'>
+        <p>This argument controls whether protection area information is included and how
+        it is included.</p>
+        <ul>
+            <li><b>desc:text</b> - if the cache (probably) is located within one or more
+            protection areas, e.g. a nature reserve, a list of the protection areas will
+            be included in the cache description.</li>
+            <li><b>desc:auto</b> - protection area information may be included in the
+            cache description, depending on the installation.</li>
+            <li><b>none</b> - no protection area information will be included in the
+            GPX data.</li>
+        </ul>
+        <p>Note that information on protection areas may be incomplete or outdated
+        or completely missing on some installations.</p>
+    </opt>
+    <opt name='trackables' default='none'>
+        <p>This argument controls whether information on trackables is included and how it is included.
+        One of the following values:</p>
+        <ul>
+            <li><b>none</b> - no trackables-data will be included,</li>
+            <li><b>desc:list</b> - trackables will be listed (in plain-text) within the cache description,</li>
+            <li><b>desc:count</b> - total number of trackables will be included (in plain-text) within the cache description.</li>
+        </ul>
+        <p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+    </opt>
+    <opt name='recommendations' default='none'>
+        <p>This argument controls whether information on recommendations is included and how it is included.
+        One of the following values:</p>
+        <ul>
+            <li><b>none</b> - no recommendations-info will be included,</li>
+            <li><b>desc:count</b> - number of recommendations (and founds) will be included
+                (in plain-text) within the cache description.</li>
+        </ul>
+        <p>Note: When using "desc:" mode, remember to set <b>ns_ground</b> to <b>true</b>.</p>
+    </opt>
+    <opt name='my_notes' default='none'>
+        <p>Allows you to include personal user's notes on each cache. This parameter
+        takes either <b>none</b> (default value), or pipe separeted list of the
+        following values:</p>
+
+        <ul>
+            <li><b>desc:text</b> - include personal notes as part of the cache
+            description.</li>
+
+            <li>
+                <p><b>gc:personal_note</b> - include personal notes as
+                &lt;groundspeak:personal_note&gt; element (under
+                &lt;groundspeak:cache&gt; element).</p>
+
+                <p><b>Warning:</b> This element is not a part of
+                <i>http://www.groundspeak.com/cache/1/0/1</i> groundspeak schema, but it
+                is a <i>http://www.groundspeak.com/cache/1/0/2</i> schema element. Using
+                this option will generate formally invalid XML file.</p>
+            </li>
+        </ul>
+        <p>Note: You need to use Level 3 Authentication in order to set it to anything else than "none".</p>
+    </opt>
+    <opt name='latest_logs' default='false'>
+        <p>Boolean. If <b>true</b> then response will include a couple of
+        latest log entries for this cache (see also the <b>lpc</b> argument).</p>
+        <p>You <b>must</b> set <b>ns_ground</b> argument to <b>true</b> if you want to use this.</p>
+    </opt>
+    <opt name='lpc' default='10'>
+        Log-entries per cache - the number of log entries included in each returned cache.
+        This should be an integer or a special "all" value. Please note, that the <b>ns_ground</b>
+        and <b>latest_logs</b> arguments must be set to <b>true</b> in order for the logs to be included.
+    </opt>
+    <opt name='alt_wpts' default='false'>
+        <p>Boolean. If <b>true</b> then we will include additional (alternate) waypoints in the response.
+        These are all places associated with the cache.</p>
+        <p>Combine this with <b>ns_gsak</b> if you want the result to include additional references between
+        waypoints and their geocaches. Please note that not many applications are currently able to
+        properly understand GSAK metadata.</p>
+    </opt>
+    <opt name='mark_found' default='false'>
+        <p>Boolean. If <b>true</b> then all caches which are already found, will be marked appropriately
+        (i.e. with an "found cache" symbol).</p>
+        <p>This field requires you to use the <b>user_uuid</b> parameter (or Level 3 Authentication).</p>
+    </opt>
+    <opt name="user_uuid">
+        <p>User'd ID. Required to mark found caches using <b>Level 1</b> Authentication.</p>
+        <p>If you use <b>Level 3</b> Authentication, you shouldn't use this parameter. Or, to be exact:</p>
+        <ul>
+            <li><b>user_uuid</b> will be extracted from the Access Token you use. You don't have to provide it.</li>
+            <li>If you provide <b>user_uuid</b>, then it HAS TO match your Access Token. If it doesn't, OKAPI
+            will respond with HTTP 400 error.</li>
+        </ul>
+    </opt>
+    <opt name="location_source" default='default-coords'>
+        <p>If you supply a value, then it must be prefixed with <i>alt_wpt:</i>,
+        and should match one of alternate waypoint types documented in the
+        <a href="%OKAPI:methodretref:services/caches/geocache#alt_wpts%">alt_wpts</a>
+        field returned by <a href="%OKAPI:methodref:services/caches/geocache%">services/caches/geocache</a>
+        method. If the type doesn't match, it will be ignored.</p>
+
+        <p>By default, the <b>lat</b> and <b>lon</b> attributes of the <b>&lt;wpt&gt;</b> element
+        will return the default coordinates of the cache, as supplied by the owner of the cache.
+        This option allows you to replace these coordinates with other set of coordinates, loaded
+        from the <b>alt_wpts</b> field mentioned above.</p>
+
+        <p>This may have some advantages in some scenarios. For example, if your user
+        is driving a car, he might be more interested in the coordinates of the
+        nearest suitable parking spot than in the coordinates of the geocache itself.
+        If you set <b>location_source</b> to <b>alt_wpt:parking</b> then you'll be
+        pre-fetching parking locations (if provided) without the need of loading all
+        other <b>alternate waypoints</b> in your requests.</p>
+
+        <p>Other use case: setting this to <b>alt_wpt:user-coords</b> allows
+        personalized results in some OC installations.</p>
+
+        <ul>
+            <li>If the type provided doesn't match any alternate waypoints, the default
+            coordinates of the geocache will be used.</li>
+
+            <li>
+                <p>If the type matches exactly one alternate waypoint, then:</p>
+
+                <ul>
+                    <li>The <b>lat</b> and <b>lon</b> attributes of the "primary"
+                    <b>&lt;wpt&gt;</b> element will be replaced with the location of
+                    the matched alternate waypoint,</li>
+
+                    <li>The name of the geocache will be prefixed with the value suppiled in
+                    <b><a href="%OKAPI:methodargref:#location_change_prefix%">location_change_prefix</a></b>
+                    parameter,</li>
+
+                    <li>The desription of the waypoint will be included in the
+                    header of the cache description,</li>
+
+                    <li>The matched alternate waypoint will be removed from the list
+                    of alternate waypoins (in order to avoid duplicate locations),</li>
+
+                    <li>Extra alternate waypoint will be created, with the original
+                    location of the geocache.</li>
+                </ul>
+            </li>
+
+            <li>If the type provided matches multiple alternate waypoints, then
+            the first one will be chosen.</li>
+        </ul>
+
+    </opt>
+    <opt name="location_change_prefix" default="#">
+        <p>Prefix to be added to the geocache name, in case its location has been changed due to
+        the <b><a href="%OKAPI:methodargref:#location_source%">location_source</a></b> parameter
+        matching any of the alternate waypoints.</p>
+    </opt>
+    <returns>
+        <p>GPX file. All invalid cache codes will be skipped without any notice!</p>
+    </returns>
+</xml>

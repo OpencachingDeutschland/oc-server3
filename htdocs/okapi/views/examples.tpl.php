@@ -38,7 +38,7 @@ If you're just getting to know OKAPI, you might want to check out
 (<a href='https://raw.github.com/wrygiel/okapi-browser/master/extras/screenshot.png'>screenshot</a>),
 a basic OAuth Console for OKAPI methods. It is an open-source project. You can
 <a href='https://github.com/wrygiel/okapi-browser'>fork it</a> on GitHub or simply
-<a href='http://opencaching.pl/download/okapi-browser/'>install it here</a>.
+<a href='https://opencaching.pl/download/okapi-browser/'>install it here</a>.
 
 <h2 id='libraries'>Are there any client libraries?</h2>
 
@@ -71,9 +71,9 @@ gracefully.</p>
 
 <p>It is possible to access OKAPI directly from user's browser, without the
 need for server backend. OKAPI allows
-<a href='http://en.wikipedia.org/wiki/XMLHttpRequest#Cross-domain_requests'>Cross-domain
+<a href='https://en.wikipedia.org/wiki/XMLHttpRequest#Cross-domain_requests'>Cross-domain
 XHR requests</a>. You can also use
-<a href='http://en.wikipedia.org/wiki/JSONP'>JSONP</a> output format.
+<a href='https://en.wikipedia.org/wiki/JSONP'>JSONP</a> output format.
 There are some limitations of both these techniques though.</p>
 
 <p>This example does the following:</p>
@@ -102,7 +102,7 @@ the <a href='<?= $vars['okapi_base_url'] ?>services/apisrv/installations.html'>a
 and <a href='<?= $vars['okapi_base_url'] ?>services/apiref/method_index.html'>apiref</a>
 modules to dynamically retrieve the current list of OKAPI installations and methods.
 <a href='https://github.com/wrygiel/okapi-browser'>Get the source</a> or
-<a href='http://opencaching.pl/download/okapi-browser/'>try it</a> first.</p>
+<a href='https://opencaching.pl/download/okapi-browser/'>try it</a> first.</p>
 
 <h2 id='comments'>Comments</h2>
 

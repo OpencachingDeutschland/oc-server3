@@ -10,6 +10,11 @@
     Allow from all
   </Directory>
 
+  <Directory "%TRAVIS_BUILD_DIR%/htdocs/">
+        DirectorySlash Off
+        AllowOverride All
+  </Directory>
+
   # Wire up Apache to use Travis CI's php-fpm.
   <IfModule mod_fastcgi.c>
     AddHandler php5-fcgi .php

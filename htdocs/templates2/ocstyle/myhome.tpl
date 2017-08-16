@@ -179,7 +179,7 @@ function myHomeLoad()
             </tr>
             {foreach from=$notpublished item=notpublishedItem}
                 <tr>
-                    <td>{include file="res_cacheicon_22.tpl" cachetype=$notpublishedItem.type} {include file="res_oconly.tpl" oconly=$cacheItem.oconly size="15x21"}</td>
+                    <td>{include file="res_cacheicon_22.tpl" cachetype=$notpublishedItem.type} {include file="res_oconly.tpl" oconly=$notpublishedItem.oconly size="15x21"}</td>
                     <td>{$notpublishedItem.date_activate|date_format:$opt.format.datelong}</td>
                     <td>{include file="res_cachestatus.tpl" status=$notpublishedItem.status}</td>
                     <td><a href="viewcache.php?wp={$notpublishedItem.wp_oc}">{$notpublishedItem.name|escape}</a></td>

@@ -113,8 +113,12 @@ $tpl->assign_rs(
                 `caches`.`date_activate`,
                 `caches`.`status`,
                 `caches`.`wp_oc`,
-                `caches`.`type`
+                `caches`.`type`,
+                `ca`.`attrib_id` IS NOT NULL AS `oconly`
          FROM `caches`
+         LEFT JOIN `caches_attributes` `ca`
+           ON `ca`.`cache_id`=`caches`.`cache_id`
+           AND `ca`.`attrib_id`=6
          WHERE `user_id`='&1'
            AND `caches`.`status` = 5
          ORDER BY `date_activate` DESC, `caches`.`date_created` DESC",

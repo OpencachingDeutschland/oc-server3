@@ -34,11 +34,12 @@
     }
 
     $parts = parse_url($_SERVER['REQUEST_URI']);
-    parse_str($parts['query'], $params);
     $langUrl = $parts['path'];
-    unset($params['locale']);
-    $params['locale'] = '';
-    $langUrl .= '?' . http_build_query($params);
+    if (isset($parts['query'])) {
+        parse_str($parts['query'], $params);
+        $params['locale'] = '';
+        $langUrl .= '?' . http_build_query($params);
+    }
 
     require_once __DIR__ . '/../src/Oc/SmartyPlugins/function.season.php';
 
@@ -364,7 +365,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     }
                 }
             </script>
-            <?php if (!$_SERVER['HTTP_DNT']){ ?>
+            <?php if (!isset($_SERVER['HTTP_DNT']) || !$_SERVER['HTTP_DNT']) { ?>
             <script type="text/javascript">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

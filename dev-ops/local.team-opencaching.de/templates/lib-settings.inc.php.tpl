@@ -8,6 +8,9 @@ $dev_basepath = '/var/www/html/';
 $dev_codepath = '';
 $dev_baseurl = '__FRONTEND_URL__';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 // database access
 $dbserver = '__DB_HOST__';
 $dbusername = '__DB_USER__';

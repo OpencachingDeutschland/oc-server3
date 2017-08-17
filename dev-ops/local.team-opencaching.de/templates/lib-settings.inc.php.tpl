@@ -11,6 +11,10 @@ $dev_baseurl = '__FRONTEND_URL__';
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
+// setting cookie values
+$opt['session']['path'] = '/';
+$opt['session']['domain'] = '.team-opencaching.de';
+
 // database access
 $dbserver = '__DB_HOST__';
 $dbusername = '__DB_USER__';

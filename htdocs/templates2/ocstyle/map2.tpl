@@ -2152,8 +2152,8 @@ function get_mapfilter_params()
     var lon1 = oBounds.getSouthWest().lng();
     var lon2 = oBounds.getNorthEast().lng();
     if (lon2 < lon1) {
-        if (lon2 < 0) lon2 += 180;
-        else lon1 -= 180;
+        lon1 = -180;
+        lon2 = 180;
     }
 
     var sPostBody = 'mode=searchresult&compact=1&resultid=' + mnResultId;

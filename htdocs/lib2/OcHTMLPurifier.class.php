@@ -89,6 +89,7 @@ class OcHTMLPurifier extends HTMLPurifier
 
         // add attributes
         $def->addAttribute('img', 'usemap', 'CDATA');
+        $def->addAttribute('a', 'rel', 'CDATA');
 
         // create parent object with config
         parent::__construct($config);

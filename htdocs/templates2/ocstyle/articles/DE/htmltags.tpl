@@ -46,7 +46,7 @@
     <p><b>Die folgenden speziellen HTML-Attribute sind erlaubt:</b></p>
 
     <p class="indent">
-        <span class="html_attributes">a</span>           href, <i>name</i><sup>2</sup>, target='_blank'<br />
+        <span class="html_attributes">a</span>           href, <i>name</i><sup>2</sup>, rel, target='_blank'<br />
         <span class="html_attributes">area</span>        alt, coords, href, shape, target='_blank'<br />
         <span class="html_attributes">bdo</span>         dir<br />
         <span class="html_attributes">blockquote</span>  cite<br />

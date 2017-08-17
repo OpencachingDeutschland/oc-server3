@@ -8,7 +8,7 @@ $dev_basepath = '/var/www/html/';
 $dev_codepath = '';
 $dev_baseurl = '__FRONTEND_URL__';
 
-// database acccess
+// database access
 $dbserver = '__DB_HOST__';
 $dbusername = '__DB_USER__';
 $dbpasswd = '__DB_PASSWORD__';

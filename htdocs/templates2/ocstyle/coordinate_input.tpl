@@ -19,8 +19,8 @@
   <tr>
     <td>
       <select name="lon_hem" {if $disabled}disabled=""{/if}>
-        <option value="E" {if $lat_hem == 'E'} selected {/if}>{t}E{/t}</option>
-        <option value="W" {if $lat_hem == 'W'} selected {/if}>{t}W{/t}</option>
+        <option value="E" {if $lon_hem == 'E'} selected {/if}>{t}E{/t}</option>
+        <option value="W" {if $lon_hem == 'W'} selected {/if}>{t}W{/t}</option>
       </select>
     </td>
     <td>

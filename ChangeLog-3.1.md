@@ -9,6 +9,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Changed
 
 ### Removed
+- removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)
 
 ### Fixed
 - fixed cookie notice [#1052](https://redmine.opencaching.de/issues/1052)

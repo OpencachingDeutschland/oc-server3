@@ -20,9 +20,21 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         $this->htmlPurifier = new \OcHTMLPurifier($opt);
     }
 
-    public function testHtmlTagArticleIsRemoved()
+    public function testArticleTagIsRemoved()
     {
         $newString = $this->htmlPurifier->purify('<article>lorem ipsum</article>');
+        self::assertEquals('lorem ipsum', $newString);
+    }
+
+    public function testAsideTagArticleIsRemoved()
+    {
+        $newString = $this->htmlPurifier->purify('<aside>lorem ipsum</aside>');
+        self::assertEquals('lorem ipsum', $newString);
+    }
+
+    public function testStrikeTagArticleIsRemoved()
+    {
+        $newString = $this->htmlPurifier->purify('<strike>lorem ipsum</strike>');
         self::assertEquals('lorem ipsum', $newString);
     }
 

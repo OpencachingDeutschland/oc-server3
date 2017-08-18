@@ -15,6 +15,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - fixed sorting issue with guest users #1049](https://redmine.opencaching.de/issues/1049)
 - fixed cache status [#1073](https://redmine.opencaching.de/issues/1073)
 - fixed undefined variable notice [#1080](https://redmine.opencaching.de/issues/1080)
+- fixed wrong directions [#1078](https://redmine.opencaching.de/issues/1078)
+
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

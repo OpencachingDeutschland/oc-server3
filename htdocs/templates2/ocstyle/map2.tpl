@@ -2147,11 +2147,20 @@ function get_attrib_filter_params(no)
 function get_mapfilter_params()
 {
     var oBounds = moMap.getBounds();
+
+    // normalize strange GM longitude values in zoomlevel 3
+    var lon1 = oBounds.getSouthWest().lng();
+    var lon2 = oBounds.getNorthEast().lng();
+    if (lon2 < lon1) {
+        lon1 = -180;
+        lon2 = 180;
+    }
+
     var sPostBody = 'mode=searchresult&compact=1&resultid=' + mnResultId;
     sPostBody += '&lat1=' + oBounds.getSouthWest().lat();
     sPostBody += '&lat2=' + oBounds.getNorthEast().lat();
-    sPostBody += '&lon1=' + oBounds.getSouthWest().lng();
-    sPostBody += '&lon2=' + oBounds.getNorthEast().lng();
+    sPostBody += '&lon1=' + lon1;
+    sPostBody += '&lon2=' + lon2;
 
     {/literal}
     {* - marker tooltips are unreliable in Firefox

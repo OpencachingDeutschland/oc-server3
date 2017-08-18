@@ -1156,6 +1156,14 @@ function dbv_158()
     );
 }
 
+function dbv_159()
+{
+    // optimization for OKAPI-search 'date_hidden' sorting option
+    if (!sql_index_exists('caches', 'date_hidden')) {
+        sql('ALTER TABLE `caches` ADD INDEX `date_hidden` (`date_hidden`)');
+    }
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

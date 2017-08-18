@@ -34,3 +34,7 @@ services:
     oc_bundle.postfix.journal_logs:
         class: OcBundle\Postfix\JournalLogs
         arguments: ['@oc.util.dbal_connection']
+    oc.translation.crowdin_import:
+        class: OcBundle\Translation\CrowdinImport
+        arguments: ['@oc.util.dbal_connection']
+

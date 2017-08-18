@@ -688,10 +688,9 @@ function get_site_urls($domain)
         $site_url = $opt['page']['default_primary_url'];
         $shortlink_url = $opt['page']['default_primary_shortlink_url'];
     } else {
+        $protocol = 'http';
         if (isset($opt['domain'][$domain]['https']['is_default']) && $opt['domain'][$domain]['https']['is_default']) {
             $protocol = 'https';
-        } else {
-            $protocol = 'http';
         }
 
         $site_url = $protocol . strstr($opt['domain'][$domain]['url'], '://');

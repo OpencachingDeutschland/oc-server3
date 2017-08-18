@@ -32,12 +32,6 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         self::assertEquals('lorem ipsum', $newString);
     }
 
-    public function testStrikeTagArticleIsRemoved()
-    {
-        $newString = $this->htmlPurifier->purify('<strike>lorem ipsum</strike>');
-        self::assertEquals('lorem ipsum', $newString);
-    }
-
     public function testHtmlTagAbbrIsAllowed()
     {
         $string = '<abbr>lorem ipsum</abbr>';

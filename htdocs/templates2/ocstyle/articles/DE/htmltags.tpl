@@ -10,7 +10,9 @@
     <p>Alle hier nicht aufgeführten Tags und Attribute werden gefiltert.
     Gegebenenfalls wird die Liste erweitert oder um das eine oder andere Element gekürzt.
     Alle bereits eingestellten Beschreibungen bleiben davon jedoch unberührt.</p>
-    <p><i>Kursiv</i> wiedergegebene Tags und Attribute werden in <a href="https://de.wikipedia.org/wiki/HTML5" target="_blank">HTML5</a> nicht mehr unterstützt und sollten vermieden werden.<br /><br /></p>
+    <p>
+        <i>Kursiv</i> wiedergegebene Tags und Attribute werden in <a href="https://de.wikipedia.org/wiki/HTML5" target="_blank">HTML5</a> nicht mehr unterstützt und sollten vermieden werden.<br /><br />
+    </p>
 
     <div class="content2-container bg-blue02">
       <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;Tags</p>
@@ -19,6 +21,7 @@
     <p><b>Die folgenden HTML-Tags sind erlaubt:</b></p>
 
     <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, article<sup>1</sup>, aside<sup>1</sup>, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i><sup>1</sup>, h1, h2, h3, h4, h5, h6, header<sup>1</sup>, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, strike<sup>1</sup>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
+    </p>
 
     <p><b>Ersatz für nicht erlaubte oder veraltete Tags:</b></p>
     <p class="indent">
@@ -111,5 +114,4 @@
     <p class="html_css">width</p>
     <p class="html_css">word-spacing</p>
     <br />
-
 </div>

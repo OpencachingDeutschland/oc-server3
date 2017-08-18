@@ -25,7 +25,7 @@ class OcHTMLPurifier extends HTMLPurifier
     /**
      * OcHTMLPurifier constructor.
      *
-     * @param null|Optional $opt
+     * @param array $opt
      */
     public function __construct($opt)
     {
@@ -68,7 +68,7 @@ class OcHTMLPurifier extends HTMLPurifier
             'Block',
             'Flow',
             'Common' /* ,array('disabled' => 'Enum#disabled', 'name' => 'ID') */
-        ); //  HTML5 attribs currently not supported by TinyMCE
+        ); //  HTML5 attributes currently not supported by TinyMCE
         $def->addElement('legend', 'Inline', 'Flow', 'Common');
         $def->addElement('q', 'Inline', 'Inline', 'Common', ['cite' => 'URI']);
         $def->addElement('strike', 'Inline', 'Inline', 'Common'); // -> wird in CSS umgewandelt
@@ -97,7 +97,7 @@ class OcHTMLPurifier extends HTMLPurifier
 
 
     /**
-     * @param String $text
+     * @param string $text
      * @param null $config
      *
      * @return mixed
@@ -107,11 +107,11 @@ class OcHTMLPurifier extends HTMLPurifier
         // HTMLPurifier deletes spaces between images; apply space protection:
         do {
             $text0 = $text;
-            $text = mb_ereg_replace(">[\s\t]+<img", ">[s[p[a[c[e]]]]]<img", $text);
+            $text = mb_ereg_replace(">[\s\t]+<img", '>[s[p[a[c[e]]]]]<img', $text);
         } while ($text != $text0);
 
         $text = parent::purify($text, $config);
 
-        return str_replace("[s[p[a[c[e]]]]]<img", " <img", $text);
+        return str_replace('[s[p[a[c[e]]]]]<img', ' <img', $text);
     }
 }

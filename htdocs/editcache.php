@@ -193,8 +193,8 @@ if ($error == false) {
                 $way_length = isset($_POST['way_length']) ? trim($_POST['way_length']) : $cache_record['way_length'];
 
                 if ($status_old == 5 && $status == 5) {
-                    if (isset($_POST['publish'])) {  // Ocprop
-                        $publish = $_POST['publish'];
+                    if (isset($_REQUEST['publish'])) {  // Ocprop; see also res_state_warning.tpl
+                        $publish = $_REQUEST['publish'];
                         if (!($publish == 'now' || $publish == 'later' || $publish == 'notnow')) {
                             // somebody messed up the POST-data, so we do not publish the cache,
                             // since he isn't published right now (status=5)

@@ -1933,5 +1933,8 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2633', 'This Ca
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2634', 'More information', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2635', 'Close', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2636', 'This website uses cookies. If you stay on this site you accept the usage of cookies.', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2637', 'This Geocache has not been published yet.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2638', 'Please verify that the geocache description is complete and all properties and attributes are set properly, according to the <a %1>instructions</a>. Then click <strong><a href=\"editcache.php?cacheid=%2&publish=now#others\">here</a></strong> and \"Save\" to publish your geocache.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2639', 'This geocache will be published on <b>%1</b> at <b>%2</b>.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2640', 'Do you really want to delete the picture \\\'{title}\\\'?', '2017-08-22 18:45:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2641', 'There is already a report in progress for this cache, see below.', '2017-08-23 13:20:00');

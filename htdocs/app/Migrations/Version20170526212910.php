@@ -25,10 +25,10 @@ class Version20170526212910 extends AbstractMigration
             UPDATE sys_menu SET href = 'page/impressum' WHERE menustring ='MNU_START_IMPRINT';
             UPDATE sys_menu SET href = 'page/tos' WHERE menustring ='MNU_START_TOS';
             
-            INSERT INTO page_groups (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
+            INSERT INTO page_group (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
                 VALUE ('impressum','','','',now(),1);
                 
-            INSERT INTO page_groups (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
+            INSERT INTO page_group (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
                 VALUE ('tos','','','',now(),1);
         ");
     }

@@ -669,6 +669,8 @@ class SearchAssistant
                     case 'rcmds%':
                         $cl = "$X_TOPRATINGS / if($X_FOUNDS = 0, 1, $X_FOUNDS)";
                         break;
+                    case 'date_created': $cl = "caches.date_created"; break;
+                    case 'date_hidden': $cl = "caches.date_hidden"; break;
                     default:
                         throw new InvalidParam('order_by', "Unsupported field '$field'");
                 }

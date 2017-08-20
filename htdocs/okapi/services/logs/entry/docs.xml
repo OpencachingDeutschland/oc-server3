@@ -128,10 +128,10 @@
                 </ul>
             </li>
             <li>
-                <p><b>listing_is_outdated</b> - log entry authors may include an
-                additional report on the state of the geocache listing at the given
-                date (indicate if needs to be updated). This information currently
-                cannot be <em>submitted</em> through OKAPI but only retrieved.
+                <p>%OKAPI:infotag:ocde-specific% <b>listing_is_outdated</b> - log entry
+                authors may include an additional report on the state of the geocache
+                listing at the given date (indicate if needs to be updated). This information
+                currently cannot be <em>submitted</em> through OKAPI but only retrieved.
                 Possible values are:</p>
 
                 <ul>
@@ -152,6 +152,7 @@
                         state of the geocache listing.
                     </li>
                 </ul>
+                <p>Please note that OCPL-based installations will always return <b>null</b> here.</p>
             </li>
             <li><b>comment</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>, text entered
                 with the log entry,</li>

@@ -26,7 +26,7 @@
         <b>false</b> in the <b>success</b> field due to restrictions on what
         captions are accepted.</p>
 
-        <p>Note: Some OC sites support only BMP (Basic Multilingual Plane) Unicode
+        <p>Note: Some OCPL-based sites support only BMP (Basic Multilingual Plane) Unicode
         characters on some database fields. If you submit characters from outside of
         the BMP plane (known as "supplementary planes", they include characters such
         as smiley symbols), then keep in mind that your text might be saved garbled.</p>
@@ -37,7 +37,7 @@
         usually will not be shown to users by default, but replaced by a clickable
         placeholder or caption that leads to the image.</p>
     </opt>
-    <opt name='position'>
+    <opt name='position' infotags="ocde-specific">
         <p>Indicates the wanted position of this image on the log entry's list
         of images. By default, new images will be appended to the end of this
         list.</p>
@@ -49,7 +49,7 @@
         value (e.g. greater than the number of images), then OKAPI will try to
         use the its best guess (e.g. append the image to the end).</p>
 
-        <p>Note: Some installations will ignore this option and always append
+        <p>Note: OCPL-based installations will ignore this option and always append
         new images to the end of the list.</p>
     </opt>
     <opt name='langpref' default='en'>

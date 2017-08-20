@@ -22,7 +22,7 @@ class Version20170516084212 extends AbstractMigration
         );
 
         $this->addSql('
-            CREATE TABLE page_blocks(
+            CREATE TABLE page_block(
                 id INT AUTO_INCREMENT NOT null,
                 page_group_id INT NOT null,
                 title VARCHAR(255) NOT null,
@@ -34,7 +34,7 @@ class Version20170516084212 extends AbstractMigration
         ');
 
         $this->addSql('
-            CREATE TABLE page_groups(
+            CREATE TABLE page_group(
                 id INT AUTO_INCREMENT NOT null,
                 slug VARCHAR(80) NOT null UNIQUE ,
                 meta_keywords VARCHAR(255) NOT null,
@@ -45,7 +45,7 @@ class Version20170516084212 extends AbstractMigration
             PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
         ');
 
-        $this->addSql('ALTER TABLE page_blocks ADD FOREIGN KEY  (page_group_id) REFERENCES page_groups(id);');
+        $this->addSql('ALTER TABLE page_block ADD FOREIGN KEY  (page_group_id) REFERENCES page_group(id);');
     }
 
     /**

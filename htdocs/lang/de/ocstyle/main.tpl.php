@@ -37,9 +37,9 @@
     $langUrl = $parts['path'];
     if (isset($parts['query'])) {
         parse_str($parts['query'], $params);
-        $params['locale'] = '';
-        $langUrl .= '?' . http_build_query($params);
     }
+    $params['locale'] = '';
+    $langUrl .= '?' . http_build_query($params);
 
     require_once __DIR__ . '/../src/Oc/SmartyPlugins/function.season.php';
 

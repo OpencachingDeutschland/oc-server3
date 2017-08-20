@@ -8,18 +8,21 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)
+- allow rel attribute in a tags [#1077](https://redmine.opencaching.de/issues/1077)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)
 
 ### Fixed
-- fixed cookie notice [#1052](https://redmine.opencaching.de/issues/1052)
-- fixed sorting issue with guest users [#1049](https://redmine.opencaching.de/issues/1049)
-- fixed cache status [#1073](https://redmine.opencaching.de/issues/1073)
-- fixed undefined variable notice [#1080](https://redmine.opencaching.de/issues/1080)
-- fixed wrong directions [#1078](https://redmine.opencaching.de/issues/1078)
-- fixed wrong oc only flags [#1081](https://redmine.opencaching.de/issues/1081)
-- fixed listing outdated link [#1065](https://redmine.opencaching.de/issues/1065)
+- cookie notice [#1052](https://redmine.opencaching.de/issues/1052)
+- sorting issue with guest users [#1049](https://redmine.opencaching.de/issues/1049)
+- cache status [#1073](https://redmine.opencaching.de/issues/1073)
+- undefined variable notice [#1080](https://redmine.opencaching.de/issues/1080)
+- wrong directions [#1078](https://redmine.opencaching.de/issues/1078)
+- wrong oc only flags [#1081](https://redmine.opencaching.de/issues/1081)
+- listing outdated link [#1065](https://redmine.opencaching.de/issues/1065)
+- empty map on zoom level 3 [#1084](https://redmine.opencaching.de/issues/1084)
+- error page [#1088](https://redmine.opencaching.de/issues/1088)
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

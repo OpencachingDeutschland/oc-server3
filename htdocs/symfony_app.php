@@ -24,6 +24,11 @@ $locale = strtolower($opt['template']['locale']);
 $request->setLocale($locale);
 $response = $kernel->handle($request);
 
+if ($response->getStatusCode() === 404) {
+    include __DIR__ . '/404.php';
+    exit;
+}
+
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
     || $request->getRequestFormat() !== 'html'

@@ -23,7 +23,7 @@
     <opt name='comment'>
         <p>Text to be submitted with the log entry.</p>
 
-        <p>Note: Some OC sites support only BMP (Basic Multilingual Plane) Unicode
+        <p>Note: Some OCPL-based sites support only BMP (Basic Multilingual Plane) Unicode
         characters on some database fields. If you submit characters from outside of
         the BMP plane (known as "supplementary planes", they include characters such
         as smiley symbols), then keep in mind that your text might be saved garbled.</p>
@@ -77,11 +77,11 @@
         When you don't supply it, "when" is generated for you. This means that you may
         have to supply the "when" parameter if you want duplicate detection to work.</p>
     </opt>
-    <opt name='rating'>
+    <opt name='rating' infotags="ocpl-specific">
         <p>An integer in range between 1 and 5 - user's optional rating of a found cache.</p>
         <p>Important: <b>logtype</b> has to be "Found it" in order to use this argument.</p>
         <p>Note: You should allow your user to <b>not</b> rate a found cache.</p>
-        <p>Note: Currently, some OC installations do not support cache ratings. On such installations
+        <p>Note: Currently, OCDE-based installations do not support cache ratings. On such installations
         user's rating will be <b>ignored</b> (if you include the rating, log entry will be posted
         successfully, but rating will be ignored).</p>
     </opt>
@@ -123,10 +123,10 @@
                 <b>true</b> (one of them with empty comment).</p>
             </li>
             <li>
-                <p><b>false</b> - use this to indicate that your user thinks that the cache's
-                condition is fine.</p>
+                <p>%OKAPI:infotag:ocde-specific% <b>false</b> - use this to indicate that
+                your user thinks that the cache's condition is fine.</p>
 
-                <p>Note: The <b>false</b> option is not evaluated by all OC sites. Some will
+                <p>Note: The <b>false</b> option is not evaluated by OCPL-based sites. They will
                 just ignore it.</p>
             </li>
         </ul>

@@ -128,12 +128,12 @@
                 </ul>
             </li>
             <li>
-                <p><b>needs_maintenance</b> - boolean, <b>true</b> if the geocache is
+                <p>%OKAPI:infotag:ocde-specific% <b>needs_maintenance</b> - boolean, <b>true</b> if the geocache is
                 known to be in poor condition, e.g. damaged. Usually there will be further
                 explanations in the log entries.</p>
 
-                <p>Please note that only some OC sites provide this information. Other sites
-                will always return <b>false</b> here.</p>
+                <p>Please note that only OCDE-based Opencaching installations provide this
+                information. ODPL-based sites will always return <b>false</b> here.</p>
             </li>
             <li><b>url</b> - URL of the cache's web page,</li>
             <li>
@@ -350,9 +350,10 @@
                 </ul>
             </li>
             <li>
-                <p><b>preview_image</b> - On some installations, owners may select one of the <b>images</b>
+                <p>%OKAPI:infotag:ocde-specific% <b>preview_image</b> - On OCDE-based
+                installations, owners may select one of the <b>images</b>
                 (see above) as a preview image. You are encouraged to display it as a 'teaser'
-                for this cache. On other installations this functionality is disabled and you
+                for this cache. On OCPL-based installations this functionality is disabled and you
                 will always get the <b>null</b> value here.</p>
 
                 <p>The value of <b>preview_image</b> is either <b>null</b> or a dictionary describing
@@ -497,8 +498,8 @@
             </li>
             <li>
                 <b>date_created</b> - date and time (ISO 8601) when the
-                geocache was listed at the Opencaching site. For some OC installations
-                this is the date when it was published, while for the other it is the
+                geocache was listed at the Opencaching site. For OCDE-based installations
+                this is the date when it was published, while for ODPL installations it is the
                 date when it was originally submitted. These dates differ if the
                 geocache is prepared and then published later.
             </li>

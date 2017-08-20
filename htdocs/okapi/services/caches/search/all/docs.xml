@@ -217,7 +217,7 @@
         it, and you will set this parameter to <b>true</b>, then you will
         <b>always</b> receive an empty result.</p>
     </opt>
-    <opt name='powertrail_ids'>
+    <opt name='powertrail_ids' infotags="ocpl-specific">
         <p>Pipe-separated list of Power Trail IDs. If given, then only
         the caches which belong to at least one of the referenced Power Trails
         will be included. Only <b>active</b> Power Trails are taken into
@@ -256,7 +256,8 @@
         a '-' sign to indicate a descending order.</p>
 
         <p>Currently, fields which you can order by include: <b>code</b>, <b>name</b>,
-        <b>founds</b>, <b>rcmds</b>, <b>rcmds%</b> (tell us if you want more).</p>
+        <b>founds</b>, <b>rcmds</b>, <b>rcmds%</b>, <b>date_created</b>, <b>date_hidden</b>
+        (tell us if you want more).</p>
 
         <p><b>Examples:</b></p>
         <ul>

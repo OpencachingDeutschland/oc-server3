@@ -60,7 +60,7 @@
                                     </tr>
                                 <?php foreach($changes as $change) { ?>
                                     <tr id="v<?= $change['version'] ?>">
-                                        <td><a href="https://github.com/opencaching/okapi/tree/<?= $change['commit'] ?>"><?= $change['version'] ?></a></td>
+                                        <td><a href="https://github.com/opencaching/okapi/commit/<?= $change['commit'] ?>"><?= $change['version'] ?></a></td>
                                         <td><?= substr($change['time'], 0, 10) ?></td>
                                         <td><?= ($change['type'] == 'bugfix' ? 'Fixed: ' : '') . $change['comment'] ?></td>
                                     </tr>

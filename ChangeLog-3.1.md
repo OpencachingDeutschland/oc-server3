@@ -23,6 +23,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - listing outdated link [#1065](https://redmine.opencaching.de/issues/1065)
 - empty map on zoom level 3 [#1084](https://redmine.opencaching.de/issues/1084)
 - error page [#1088](https://redmine.opencaching.de/issues/1088)
+- language switch on lib pages [#1087](https://redmine.opencaching.de/issues/1087)
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

@@ -584,9 +584,9 @@ function tpl_errorMsg($tplnameError, $msg)
 
 function load_gettext()
 {
-    global $cookie, $opt, $rootpath, $locale;
+    global $cookie, $opt, $locale;
 
-    $locale = $cookie->get('locale');
+    $locale = $_REQUEST['locale'] ?: $cookie->get('locale');
     if (!isset($opt['locale'][$locale])) {
         $locale = $opt['template']['default']['locale'];
     }

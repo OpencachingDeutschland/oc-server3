@@ -750,9 +750,9 @@ p.startmessage { line-height: 1.4em; }
 /* Viewcache */
 #cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
 
-div.cachedesc {font-size: 120%; line-height:1.3; padding-bottom:6px; overflow:hidden; }
-div.cachedesc p, div.cachedesc-print p {font-size: 100%; line-height:1.3;}
-div.cachedesc li, div.cachedesc-print li {line-height:1.4;}
+div.cachedesc {font-size: 120%; line-height:1.4; padding-bottom:6px; overflow:hidden; }
+div.cachedesc p, div.cachedesc-print p, div.viewcache_log-content p {font-size: 100%; line-height:1.4; margin-bottom:0.85em; }
+div.cachedesc li, div.cachedesc-print li, div.viewcache_log-content li { line-height:1.55; }
 
 .showcode {font-family: monospace; font-weight: bold; font-size: 13px; color: rgb(255,0,0);}
 
@@ -886,12 +886,12 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 }
 
 /* Articles */
-.article p, p.article { line-height: 1.4em; margin-bottom:0.8em; }
+.article p, p.article { line-height: 1.5em; margin-bottom:1em; }
 .article li { padding-bottom:6px; line-height:1.4; }
 .article ul.narrowlist li { padding-bottom:0px; }
 
-#cachedescinfo p { margin-bottom:12px; }
-table.cachedesctable p { margin-bottom: 6px !important; }
+#cachedescinfo p { margin-bottom:1em; }
+table.cachedesctable p { margin-bottom: 0.65em !important; }
 
 table.teamlist th { background-color:white !important; background-image:none !important; border:0; padding:0 0 6px 0; text-align:left; }
 table.teamlist td { padding: 4px 0px 4px 34px; }

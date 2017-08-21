@@ -12,8 +12,8 @@ function get_okapi_settings()
     # [1] http://code.google.com/p/opencaching-pl/source/browse/trunk/okapi_settings.php
     # [2] http://code.google.com/p/opencaching-api/source/browse/trunk/okapi/settings.php
     # [3] http://code.google.com/p/opencaching-api/issues/detail?id=132
-
-    $opt['rootpath'] = $GLOBALS['rootpath'];
+    date_default_timezone_set('Europe/Berlin');
+    $opt['rootpath'] = isset($GLOBALS['rootpath']) ? $GLOBALS['rootpath'] : __DIR__ . '/';
     require __DIR__ . '/lib2/const.inc.php'; # (into the *local* scope!)
     require __DIR__ . '/config2/settings-dist.inc.php';
     require __DIR__ . '/config2/settings.inc.php';

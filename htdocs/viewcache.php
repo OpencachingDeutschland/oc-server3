@@ -282,6 +282,11 @@ $rs = sql(
 $tpl->assign_rs('pictures', $rs);
 sql_free_result($rs);
 
+$tpl->assign('pictures_per_row', $opt['logic']['pictures']['listing_thumbs_per_row']);
+// REDISGN TODO:
+// This works fine with a static canvas width. Probably needs dynamic calculation
+// in responsive design.
+
 $tpl->assign('childWaypoints', getChildWaypoints($cacheid));
 
 if ($login->userid != 0) {

@@ -462,8 +462,9 @@ function showalllists()
     </div>
 
     <div class="content2-container content2-section-no-p" style="float:left"> {* bottom margin would not work without float:left - why? *}
+        {assign var=piccount value=0} {* see redmine #1092 *}
         {foreach from=$pictures item=pictureItem}
-            <div class="viewcache-pictureblock">
+            <div class="viewcache-pictureblock" {if $piccount++ % $pictures_per_row == 0}style="clear:both"{/if}>
                 <div class="img-shadow">
                     <!-- a href="{$pictureItem.url|escape}" target="_blank" -->
                         <img class="enlargegroup_cachepics" src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" longdesc="{$pictureItem.url|escape}" alt="{$pictureItem.title|escape}" border="0" align="bottom" onclick="enlarge(this)" />

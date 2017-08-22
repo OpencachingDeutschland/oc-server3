@@ -267,6 +267,7 @@ if (extension_loaded('imagick')) {
  */
 $opt['logic']['pictures']['thumb_max_width'] = 175;
 $opt['logic']['pictures']['thumb_max_height'] = 175;
+$opt['logic']['pictures']['listing_thumbs_per_row'] = 4;
 
 /* Defaults for picture replacement on declined license
  *

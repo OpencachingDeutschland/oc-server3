@@ -36,7 +36,7 @@ $safari_not_allowed_message = '<span class="errormsg">' . t('Only virtual caches
 $bad_wpgc_message = '<span class="errormsg">' . t('GC waypoint is invalid, must be GCxxxxx') . '</span>';
 
 $nopictures = '<tr><td colspan="2">' . t('No pictures available') . '</td></tr><tr><td colspan="2">&nbsp;</td></tr>';
-$pic_editdel = '<a href="{link}" target="_blank">{title}</a> [<a href="picture.php?action=edit&uuid={uuid}" onclick="testListingModified(this)">' . t('edit') . '</a>] [<a href="picture.php?action=delete&uuid={uuid}" onclick="testListingModified(this)">' . t('delete') . '</a>]';
+$pic_editdel = '<a href="{link}" target="_blank">{title}</a> [<a onclick="testListingModified(this)" href="picture.php?action=edit&uuid={uuid}">' . t('edit') . '</a>] [<a onclick="testListingModified(this);" href="javascript:if(confirm(\'' . t('Do you really want to delete the picture \\\'{title}\\\'?') . '\')) location.href=\'picture.php?action=delete&uuid={uuid}\'">' . t('delete') . '</a>]';
 $pictureline0 = '<tr><td colspan="2">' . $pic_editdel . '</td></tr>';
 $pictureline = '<tr><td colspan="2">' . $pic_editdel . ' [<a href="picture.php?action=up&uuid={uuid}" onclick="testListingModified(this)">' . t('move up') . '</a>]</td></tr>';
 // Ocprop: <a href=\"http://.*?\.opencaching\.de/images/uploads/.*?\">(.*?)<\/a>.*?\[<a href=\"picture\.php\?action=[a-z]*?\&uuid=(.*?)\">

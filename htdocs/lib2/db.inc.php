@@ -74,7 +74,6 @@ use Oc\Util\CBench;
  ***************************************************************************/
 
 $db['connected'] = false;
-$db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) === DEBUG_SQLDEBUGGER);
 $db['dblink'] = false;
 $db['dblink_slave'] = false;
 $db['slave_id'] = - 1;
@@ -85,16 +84,11 @@ $db['temptables_slave'] = [];
 $db['mode'] = DB_MODE_USER;
 $db['error'] = false;
 
-/**
- *
- */
-function sql_enable_debugger()
-{
-    global $opt, $db;
-
-    $opt['debug'] |= DEBUG_SQLDEBUGGER;
-    $db['debug'] = true;
+$db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER);
+if ($db['debug'] === true) {
+  require_once __DIR__ . '/sqldebugger.class.php';
 }
+
 
 /**
  * @param $sql
@@ -314,8 +308,7 @@ function sql_internal($dblink, $sql)
         - block DROP/DELETE
     */
 
-    if (isset($db['debug']) && ($db['debug'] === true)) {
-        require_once __DIR__ . '/../lib2/sqldebugger.class.php';
+    if ($db['debug'] === true) {
         $result = $sqldebugger->execute($filtered_sql, $dblink, $dblink === $db['dblink_slave'], $db['slave_server']);
         if ($result === false) {
             sql_error($filtered_sql);

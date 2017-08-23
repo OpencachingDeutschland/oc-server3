@@ -75,10 +75,8 @@ class OcSmarty extends Smarty
             $this->force_compile = true;
         }
 
-        // process debug level
-        if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once __DIR__ . '/sqldebugger.class.php';
-        } elseif (($opt['debug'] & DEBUG_OUTOFSERVICE) == DEBUG_OUTOFSERVICE) {
+        // site maintenance
+        if (($opt['debug'] & DEBUG_OUTOFSERVICE) == DEBUG_OUTOFSERVICE) {
             $this->name = 'sys_outofservice';
             $this->display();
         }
@@ -355,9 +353,7 @@ class OcSmarty extends Smarty
             $this->assign('sys_cached', false);
         }
 
-        if (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER) {
-            require_once __DIR__ . '/sqldebugger.class.php';
-
+        if ($db['debug'] === true) {
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 
             $this->clear_all_assign();

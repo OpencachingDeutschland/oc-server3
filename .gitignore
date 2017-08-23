@@ -35,6 +35,9 @@
 /htdocs/util/mysql_root/.htaccess
 /htdocs/util/search_index/.htaccess
 
+# Backup entities generated with doctrine:generate:entities command
+*/Entity/*~
+
 # public OC site files
 /htdocs/robots.txt
 

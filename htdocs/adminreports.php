@@ -187,6 +187,19 @@ if ($id == 0) {
     $tpl->assign('list', false);
     $tpl->assign('otheradmin', $record['adminid'] > 0 && $record['adminid'] != $login->userid);
     $tpl->assign('ownreport', $record['adminid'] == $login->userid);
+    $tpl->assign(
+        'other_report_in_progress',
+        sql_value(
+          "SELECT `id`
+           FROM `cache_reports`
+           WHERE `cacheid`='&1' AND `id`<>'&2' AND `status`='&3'
+           LIMIT 1",
+          null,
+          $record['cacheid'],
+          $record['id'],
+          CACHE_REPORT_INPROGRESS
+        ) !== null
+    );
 
     $cache = new cache($record['cacheid']);
     $cache->setTplHistoryData($id);

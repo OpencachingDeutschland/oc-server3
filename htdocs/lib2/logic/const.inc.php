@@ -87,3 +87,8 @@ define('NEW_DATA_LICENSE_PASSIVELY_DECLINED', 4); // could not accept/decline be
 define('PICTURE_QUALITY', 85);
 define('PICTURE_RESOLUTION', 72);
 define('PICTURE_MAX_LONG_SIDE', 1024);
+
+// cache report status; see cache_report_status.sql
+define('CACHE_REPORT_NEW', 1);
+define('CACHE_REPORT_INPROGRESS', 2);
+define('CACHE_REPORT_DONE', 3);

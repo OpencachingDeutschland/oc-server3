@@ -323,7 +323,7 @@ function toggleAttr(id)
         </td>
     </tr>
     <tr><td class="spacer" colspan="2">&nbsp;</td></tr>
-    <tr>
+    <tr id="others">
         <td class="header-small" colspan="2">
             <div class="content2-container bg-blue02">
                 <p class="content-title-noshade-size2">

@@ -53,5 +53,6 @@ CREATE TABLE `caches` (
   KEY `size` (`size`),
   KEY `difficulty` (`difficulty`),
   KEY `terrain` (`terrain`),
-  KEY `wp_gc_maintained` (`wp_gc_maintained`)
+  KEY `wp_gc_maintained` (`wp_gc_maintained`),
+  KEY `date_hidden` (`date_hidden`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ;

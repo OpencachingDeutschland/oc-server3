@@ -26,6 +26,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - error page [#1088](https://redmine.opencaching.de/issues/1088)
 - language switch on lib pages [#1087](https://redmine.opencaching.de/issues/1087)
 - okapi changelog [#1085](https://redmine.opencaching.de/issues/1085)
+- lib2 SQL debugger [#1093](https://redmine.opencaching.de/issues/1093)
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 

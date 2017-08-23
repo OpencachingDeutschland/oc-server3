@@ -586,7 +586,7 @@ function load_gettext()
 {
     global $cookie, $opt, $locale;
 
-    $locale = $_REQUEST['locale'] ?: $cookie->get('locale');
+    $locale = isset($_REQUEST['locale']) ? $_REQUEST['locale'] : $cookie->get('locale');
     if (!isset($opt['locale'][$locale])) {
         $locale = $opt['template']['default']['locale'];
     }

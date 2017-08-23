@@ -9,6 +9,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)
 - allow rel attribute in a tags [#1077](https://redmine.opencaching.de/issues/1077)
+- admin report warning [#1047](https://redmine.opencaching.de/issues/1047)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)

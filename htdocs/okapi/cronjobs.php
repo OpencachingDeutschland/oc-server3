@@ -924,6 +924,3 @@ class TokenRevokerJob extends Cron5Job
         ");
     }
 }
-
-$generator = new FulldumpGeneratorJob();
-$generator->execute();

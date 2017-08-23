@@ -99,6 +99,9 @@ function editcomment(edit)
         <table class="table" style="width:98%">
             <tr>
                 <td colspan="4">
+                    {if $other_report_in_progress}
+                        <p class="redtext">{t}There is already a report in progress for this cache, see below.{/t}</p>
+                    {/if}
                     <p>{t}Details for report of {/t} <a href="viewcache.php?cacheid={$cacheid}" target="_blank">{$cachename|escape}</a> {t} by {/t} <a href="viewprofile.php?userid={$userid}" target="_blank">{$usernick|escape}</a>
                     &nbsp; &nbsp;
                     [<a href="http://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={$cache.latitude}&amp;origin_long={$cache.longitude}&amp;dist=1&amp;submit3=Search" target="_blank">{t}Nearby search at geocaching.com{/t}</a>]

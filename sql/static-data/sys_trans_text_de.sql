@@ -1930,4 +1930,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2634', 'DE', 'Mehr Informationen', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2635', 'DE', 'Schließen', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2636', 'DE', 'Diese Webseite verwendet Cookies. Wenn Sie auf der Seite weitersurfen, stimmen Sie der Cookie-Nutzung zu.', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2640', 'DE', 'Möchtest du das Bild &bdquo;{title}&ldquo; wirklich löschen?', '2017-08-22 18:45:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2641', 'DE', 'Für diesen Cache ist bereits eine Meldung in Arbeit, siehe unten.', '2017-08-23 13:20:00');

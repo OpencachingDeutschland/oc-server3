@@ -1933,4 +1933,5 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2633', 'This Ca
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2634', 'More information', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2635', 'Close', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2636', 'This website uses cookies. If you stay on this site you accept the usage of cookies.', '2017-05-14 21:00:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2640', 'Do you really want to delete the picture \\\'{title}\\\'?', '2017-08-22 18:45:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2641', 'There is already a report in progress for this cache, see below.', '2017-08-23 13:20:00');

@@ -70,8 +70,8 @@ var mnInitLat = {/literal}{$nGMInitLat}{literal};
 var mnInitLon = {/literal}{$nGMInitLon}{literal};
 var mnInitZoom = {/literal}({$nGMInitZoom} < 0 ? nDefaultZoom : {$nGMInitZoom}){literal};
 var mbInitCookiePos = {/literal}{$bGMInitCookiePos}{literal};
-var msInitWaypoint = "{/literal}{$sGMInitWaypoint}{literal}";
-var msInitType = 'roadmap';
+var msInitWaypoint = '{/literal}{$sGMInitWaypoint}{literal}';
+var msInitType = '{/literal}{$default_maptype}{literal}';
 var msInitSiderbarDisplay = 'none';
 var msInitAttribSelection = false;
 var miQueryID = {/literal}{$queryid}{literal};
@@ -343,12 +343,13 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM', 'OCM',
+    var maptypes = ['OSM',
                     google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
                     google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
-  var initType = google.maps.MapTypeId.ROADMAP;
-  for (var i=0; i<maptypes.length; i++)
-    if (msInitType == maptypes[i])
+
+    var initType = google.maps.MapTypeId.ROADMAP;  // use Google roadmap if default type setting is invalid
+    for (var i=0; i<maptypes.length; i++)
+        if (msInitType == maptypes[i])
             initType = msInitType;
 
     var myOptions = {

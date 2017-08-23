@@ -497,6 +497,11 @@ $opt['lib']['google']['mapkey'] = [];
 /* config of map.php
  */
 
+// default map type (see map.tpl function mapLoad):
+//   'OSM', 'roadmap' (flat Google map), 'terrain' (Google map with terrain),
+//   'satellite' (Google satellite only) or 'hybrid' (satellite + roads overlay)
+$opt['map']['default_type'] = 'OSM';
+
 // search result cache behaviour
 $opt['map']['maxcacheage'] = 3600;
 

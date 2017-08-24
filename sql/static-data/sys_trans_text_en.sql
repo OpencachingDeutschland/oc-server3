@@ -962,7 +962,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1421', 'EN', 'You can add more descriptions in other languages publishing the cache.', '2010-09-10 23:44:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1422', 'EN', 'Short description:', '2010-09-10 23:44:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1423', 'EN', 'Description:', '2010-09-10 23:43:43');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'EN', 'Additional note:', '2010-09-10 23:42:28');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'EN', 'Additional note, will be shown encrypted:', '2010-09-10 23:42:28');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1426', 'EN', 'You can add additional pictures after creating the cache.', '2010-09-10 23:42:15');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1427', 'EN', 'Publication:', '2010-09-10 23:40:53');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'EN', 'Publish now', '2010-09-10 23:40:13');

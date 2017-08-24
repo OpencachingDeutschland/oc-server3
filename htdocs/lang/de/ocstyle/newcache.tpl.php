@@ -306,7 +306,7 @@ function toggleAttr(id)
     {htmlnotice}
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
-        <td colspan="2">{t}Additional note:{/t}</td>
+        <td colspan="2">{t}Additional note, will be shown encrypted:{/t}</td>
     </tr>
     <tr>
         <td colspan="2">

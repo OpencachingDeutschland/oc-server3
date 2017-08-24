@@ -963,7 +963,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1421', 'DE', 'Weitere Beschreibungen in anderen Sprachen können nach dem Veröffentlichen des Caches eingetragen werden.', '2010-09-10 23:44:19');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1422', 'DE', 'Kurzbeschreibung:', '2010-09-10 23:44:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1423', 'DE', 'Beschreibung:', '2010-09-10 23:43:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'DE', 'Zus\&auml;tzlicher Hinweis:', '2010-09-10 23:42:23');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'DE', 'Zusätzlicher Hinweis, wird verschlüsselt angezeigt:', '2010-09-10 23:42:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1426', 'DE', 'Bilder für diesen Cache können nach dem Anlegen des Caches hinzugefügt werden.', '2010-09-10 23:42:12');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1427', 'DE', 'Veröffentlichung:', '2010-09-10 23:40:47');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'DE', 'sofort veröffentlichen', '2012-07-24 21:30:00');

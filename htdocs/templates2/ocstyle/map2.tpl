@@ -1057,7 +1057,7 @@ function init_waypoint_markers(aWaypoints)
 
                 {/literal}
                 var text =
-                    "<div id='mapinfowindow' style='max-height:320px;" + {if $msie}" max-width:" + maxwidth + ";" +{/if} " overflow:auto'><table class='mappopup'>" +
+                    "<div id='mapinfowindow' style='max-height:320px;" + {if $msie}" max-width:" + maxwidth + ";" +{/if} " overflow:auto' class='mappopup'><table class='mappopup'>" +
                     "<tr><td><table cellspacing='0' cellpadding='0'><tr><td>" +
                         "<img src='" + image + "' width='" + imagewidth + "' height='" + imageheight + "' /></td>" +
                         "<td class='wppopupheader'><span style='white-space:normal'>" + typename + "</span></td><td style='vertical-align:top'></td><td class='wppopupheader'>&nbsp;" + preposition + "</span></td>" +

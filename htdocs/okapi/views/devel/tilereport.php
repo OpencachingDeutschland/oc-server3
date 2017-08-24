@@ -13,7 +13,7 @@ class View
     {
         Okapi::require_developer_cookie();
 
-        require_once "okapi/cronjobs.php";
+        require_once __DIR__ . '/../../cronjobs.php';
         CronJobController::force_run("StatsWriterCronJob");
 
         # When services/caches/map/tile method is called, it writes some extra

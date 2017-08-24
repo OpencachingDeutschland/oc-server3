@@ -28,6 +28,8 @@ use okapi\OkapiServiceRunner;
 use okapi\services\replicate\ReplicateCommon;
 use okapi\Settings;
 
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/core.php';
 
 /**
  * Thrown in CronJobController::run_jobs when other thread is already

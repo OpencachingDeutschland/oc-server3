@@ -488,14 +488,16 @@ class ReplicateCommon
 
         $revision = self::get_revision();
         $generated_at = date('c', time());
-        $dir = Okapi::get_var_dir()."/okapi-db-dump";
+        $dir = Okapi::get_var_dir(). '/okapi-db-dump';
         $i = 1;
         $json_files = array();
 
         # Cleanup (from a previous, possibly unsuccessful, execution)
 
         shell_exec("rm -f $dir/*");
-        shell_exec("rmdir $dir");
+        if (is_dir($dir)) {
+            shell_exec("rmdir $dir");
+        }
         shell_exec("mkdir $dir");
         shell_exec("chmod 777 $dir");
 

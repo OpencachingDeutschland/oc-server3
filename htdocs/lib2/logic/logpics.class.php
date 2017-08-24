@@ -17,9 +17,10 @@ class LogPics
     const FOR_NEWPICS_GALLERY = 2;
     const FOR_USER_STAT = 3;
     const FOR_USER_GALLERY = 4; // params: userId
-    const FOR_MYHOME_GALLERY = 5;
-    const FOR_CACHE_STAT = 6; // params: cacheId
-    const FOR_CACHE_GALLERY = 7; // params: cacheId
+    const FOR_OWNLOGS_GALLERY = 5;
+    const FOR_OWNCACHES_GALLERY = 6;
+    const FOR_CACHE_STAT = 7; // params: cacheId
+    const FOR_CACHE_GALLERY = 8; // params: cacheId
 
     const MAX_PICTURES_PER_GALLERY_PAGE = 48; // must be multiple of 6
 
@@ -147,7 +148,7 @@ class LogPics
                 );
                 break;
 
-            case self::FOR_MYHOME_GALLERY:
+            case self::FOR_OWNLOGS_GALLERY:
                 // all picture of one user, with the only exception of zombie pix hanging
                 // by an old log deletion (we should remove those ...)
 
@@ -159,7 +160,25 @@ class LogPics
                      ORDER BY `logs`.`order_date` DESC",
                     $login->userid
                 );
+                break;
 
+            case self::FOR_OWNCACHES_GALLERY:
+                // all picture for the caches of one user
+
+                $rs = sql(
+                    "SELECT
+                        $fields,
+                        `user`.`username`,
+                        `logs`.`date` AS `picdate`,
+                        `caches`.`name` AS `cachename`
+                     FROM `pictures` AS `pics`
+                     $joinLogs
+                     $joinCaches
+                     $joinUser
+                     WHERE `object_type`=1 AND `caches`.`user_id`='&1'
+                     ORDER BY `logs`.`order_date` DESC",
+                    $login->userid
+                );
                 break;
 
             case self::FOR_CACHE_STAT:

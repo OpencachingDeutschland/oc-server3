@@ -60,7 +60,7 @@ function myHomeLoad()
     {t 1=$login.username}Hello %1{/t}
 </div>
 
-{if !$allpics}
+{if $allpics === false}
     {* Geocaches found *}
     <div class="content2-container bg-blue02" style="margin-top:20px;">
         <p class="content-title-noshade-size3">
@@ -98,32 +98,42 @@ function myHomeLoad()
     <p class="content-title-noshade-size3">
         <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
         {t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
-        {if $pictures|@count > 0 && !$allpics}<span class="content-title-link">[<a href="myhome.php?allpics=1">{t}Show all{/t}</a>]</span>{/if}
+        {if $pictures|@count > 0 && $allpics === false}<span class="content-title-link">[<a href="myhome.php?allpics=ownlogs">{t}Show all{/t}</a>]</span>{/if}
     </p>
 </div>
 
 {if $pictures|@count == 0}
-    <p>{t}You did not upload any log pictures yet.{/t}</p>
+    {if $allpics == 'owncaches'}
+        <p>{t}There are no log pictures yet for your caches.{/t}</p>
+    {else}
+        <p>{t}You did not upload any log pictures yet.{/t}</p>
+    {/if}
     <br />
 {else}
     <p style="line-height: 1.6em;">
-        {if !$allpics}
-             <b>{t}Your latest log pictures:{/t}</b></p>
-            {assign var=maxlines value=1}
-        {else}
+        {if $allpics == 'ownlogs'}
             {assign var=subtitle value="{t}Your log pictures:{/t}"}
             {assign var=maxlines value=0}
+        {elseif $allpics == 'owncaches'}
+            {assign var=subtitle value="{t}Log pictures for your caches:{/t}"}
+            {assign var=maxlines value=0}
+        {else}
+            <b>{t}Your latest log pictures:{/t}</b></p>
+            {assign var=maxlines value=1}
         {/if}
     </p>
 
-    {include file="res_logpictures.tpl" logdate=true loguser=false maxlines=$maxlines fullyear=true}
-
-    {if $allpics}
+    {if $allpics == 'owncaches'}
+        {include file="res_logpictures.tpl" logdate=true loguser=true maxlines=$maxlines fullyear=false}
+    {else}
+        {include file="res_logpictures.tpl" logdate=true loguser=false maxlines=$maxlines fullyear=true}
+    {/if}
+    {if $allpics == 'ownlogs'}
         <p>{t}In your <a href="mydetails.php">profile settings</a> you can choose if your log pictures stat and gallery is visible for other users.{/t}</p>
     {/if}
 {/if}
 
-{if !$allpics}
+{if $allpics === false}
     {* Geocaches hidden *}
     <div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px">
         <p class="content-title-noshade-size3">
@@ -167,7 +177,12 @@ function myHomeLoad()
                 </tr>
             {/foreach}
             <tr><td class="spacer" colspan="3"></td></tr>
-            <tr><td colspan="3"><a class="systemlink" href="ownerlogs.php">{t}Show log history{/t}</a></td></tr>
+            <tr>
+                <td colspan="8">
+                    <a class="systemlink" href="ownerlogs.php">{t}Log history{/t}</a>,
+                    <a class="systemlink" href="myhome.php?allpics=owncaches">{t}Log pictures gallery{/t}</a>
+                </td>
+            </tr>
         {/if}
 
         {* ... unpublished caches *}

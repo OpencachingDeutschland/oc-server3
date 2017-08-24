@@ -15,6 +15,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - cache image alignment [#1092](https://redmine.opencaching.de/issues/1092)[#955](https://redmine.opencaching.de/issues/955)
 - ask before delete an image [#1028](https://redmine.opencaching.de/issues/1028)
 - better description for the hint field [#889](https://redmine.opencaching.de/issues/889)
+- add event date to popup [#944](https://redmine.opencaching.de/issues/944)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)

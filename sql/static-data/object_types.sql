@@ -8,4 +8,5 @@ INSERT INTO `object_types` (`id`, `name`) VALUES ('4', 'user');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('5', 'Traveler');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('6', 'Picture');
 INSERT INTO `object_types` (`id`, `name`) VALUES ('7', 'Removed Object');
-INSERT INTO `object_types` (`id`, `name`) VALUES ('8', 'cache list');
+INSERT INTO `object_types` (`id`, `name`) VALUES ('8', 'waypoint');
+INSERT INTO `object_types` (`id`, `name`) VALUES ('9', 'cache list');

@@ -36,6 +36,7 @@ define('OBJECT_TRAVELER', 5);
 define('OBJECT_PICTURE', 6);
 define('OBJECT_REMOVEDOBJECT', 7);
 define('OBJECT_WAYPOINT', 8);
+define('OBJECT_CACHELIST', 9);
 
 // coordinate types
 define('COORDINATE_WAYPOINT', 1);

@@ -257,10 +257,10 @@ if ($error == false) {
                 // quickfix: this is coded in res_logentry_logitem.tpl (after smarty migration)
                 switch ($log_record['log_type']) {
                     case 1:
-                        $sLogTypeText = t('%1 found the Geocache', $log_record['log_username']);
+                        $sLogTypeText = t('%1 found the geocache', $log_record['log_username']);
                         break;
                     case 2:
-                        $sLogTypeText = t("%1 didn't find the Geoacache", $log_record['log_username']);
+                        $sLogTypeText = t("%1 didn't find the geoacache", $log_record['log_username']);
                         break;
                     case 3:
                         $sLogTypeText = t('%1 wrote a note', $log_record['log_username']);

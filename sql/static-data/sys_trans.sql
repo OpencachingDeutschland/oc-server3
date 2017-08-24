@@ -965,7 +965,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1420', 'Languag
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1421', 'You can add more descriptions in other languages publishing the cache.', '2010-09-07 20:19:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1422', 'Short description:', '2010-09-07 20:19:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1423', 'Description:', '2010-09-07 20:19:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1425', 'Additional note:', '2010-09-07 20:19:05');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1425', 'Additional note, will be shown encrypted:', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1426', 'You can add additional pictures after creating the cache.', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1427', 'Publication:', '2010-09-07 20:19:05');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1428', 'Publish now', '2010-09-07 20:19:05');

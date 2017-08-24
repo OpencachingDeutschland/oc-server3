@@ -48,6 +48,8 @@ function processEditorInput($oldDescMode, $descMode, $text)
             // save plain text input => convert to HTML;
             // also implemented in okapi/services/logs/submit.php
             $text = nl2br(htmlspecialchars($text, ENT_COMPAT, 'UTF-8'));
+            $text = str_replace('  ', '&nbsp; ', $text);   // can produce new '  ' ('&nbsp; ' + ' ')
+            $text = str_replace('  ', '&nbsp; ', $text);
         } else {
             // mode switch from HTML editor to plain text, or decode HTML-encoded plain text
             $text = html2plaintext($text, $oldDescMode = 0, 0);

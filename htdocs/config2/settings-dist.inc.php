@@ -388,6 +388,7 @@ $opt['logic']['license']['terms'] = 'articles.php?page=impressum#datalicense';
  */
 $opt['logic']['api']['email_problems']['key'] = '';   // must be set to enable
 $opt['logic']['api']['user_inactivity']['key'] = '';  // must be set to enable
+$opt['logic']['api']['cache_reports']['key'] = '';    // must be set to enable
 
 /* cache report info settings
  */

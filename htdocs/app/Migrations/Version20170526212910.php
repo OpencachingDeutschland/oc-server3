@@ -6,12 +6,13 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Migration to add impressum and tos to the page table.
  */
 class Version20170526212910 extends AbstractMigration
 {
     /**
      * @param Schema $schema
+     *
      * @return void
      */
     public function up(Schema $schema)
@@ -21,25 +22,21 @@ class Version20170526212910 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql("
-            UPDATE sys_menu SET href = 'page/impressum' WHERE menustring ='MNU_START_IMPRINT';
-            UPDATE sys_menu SET href = 'page/tos' WHERE menustring ='MNU_START_TOS';
-            
-            INSERT INTO page_group (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
-                VALUE ('impressum','','','',now(),1);
+        $this->addSql("            
+            INSERT INTO page (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
+                VALUE ('impressum','','','', NOW(),1);
                 
-            INSERT INTO page_group (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
-                VALUE ('tos','','','',now(),1);
+            INSERT INTO page (slug, meta_keywords, meta_description, meta_social, updated_at, active) 
+                VALUE ('tos','','','',NOW(),1);
         ");
     }
 
     /**
      * @param Schema $schema
+     *
      * @return void
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
-
     }
 }

@@ -715,7 +715,7 @@ class User
     }
 
     /**
-     * Set isActiveFlag
+     * Set isActive
      *
      * @param bool $isActiveFlag
      *
@@ -729,7 +729,7 @@ class User
     }
 
     /**
-     * Get isActiveFlag
+     * Get isActive
      *
      * @return bool
      */

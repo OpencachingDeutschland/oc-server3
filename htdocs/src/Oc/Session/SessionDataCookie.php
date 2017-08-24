@@ -118,8 +118,8 @@ class SessionDataCookie implements SessionDataInterface
                 time() + 365 * 24 * 60 * 60,
                 $opt['session']['path'],
                 $opt['session']['domain'],
-                0, // must be available for http
-                1 // communication only, no js
+                false, // must be available for http
+                true // communication only, no js
             );
         }
     }

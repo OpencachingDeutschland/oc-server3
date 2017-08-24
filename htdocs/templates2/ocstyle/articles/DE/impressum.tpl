@@ -1,24 +1,62 @@
-<div class="ctl-impressum">
-    <div class="content2-pagetitle">
-        Impressum
-    </div>
+{***************************************************************************
+* You can find the license in the docs directory
+***************************************************************************}
+<div class="content2-pagetitle">
+    <img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="margin-right: 10px;" width="32" height="32" alt="" /> Impressum
+</div>
 
-    <div style="float: left; width: 50%">
-        <h2>Angaben gem&auml;&szlig; &sect; 5 TMG:</h2>
-        <address>
-            Opencaching Deutschland e. V.<br/>
-            c/o Mirco Baumann<br/>
-            Am Sternbusch 7<br/>
-            46562 Voerde
-        </address>
+<p><em>(Anbieterkennzeichnungspflicht)</em></p>
 
-        <h2>Vertreten durch:</h2>
-        <dl>
-            <dt>
-                <del>Michael Vaahsen</del>
-            </dt>
-            <dd>1. Vorsitzender<br>
-                <i>Amtsniederlegung 31.12.2016*</i></dd>
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        Zweck des Projektes
+    </p>
+</div>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        Geocaching ist eine recht neue Sportart, bei der sich noch keine festen
+        Regeln gebildet haben. Die Sportart steht nach wie vor in einem Wandel,
+        dessen genaues Ergebnis noch nicht abzusehen ist. Geocaching ist dabei auf
+        neue und innovative Technologien angewiesen, deren Verbreitung gerade in
+        den letzten Jahren enorm zugenommen hat, z.B. das Internet und das Global
+        Postitioning System (GPS). Opencaching.de soll eine attraktive "non-Profit"
+        Alternative zu den vorhandenen Anbietern von Geocaching-Daten sein.
+        Ausserdem soll Opencaching.de f&uuml;r alle Nutzer eine offene Plattform bieten,
+        insbesondere f&uuml;r Nutzer die sich an der Weiterentwicklung des Sportes
+        beteiligen wollen.
+    </p>
+    <p>
+        Um die Entwicklung von Anwendungen und Diensten f&uuml;r das Geocaching zu
+        f&ouml;rdern, bietet Opencaching.de alle Stammdaten in einer einfach zu
+        verarbeitenden Form zum Download an. Dabei sind die geltenden Datenschutzhinweise
+        sowie Nutzungsbedingungen zu beachten.
+    </p>
+    <br />
+</div>
+
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        Betreiber des Internetangebotes
+    </p>
+</div>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>    <b>ACHTUNG</b>: Fragen und Hinweise zu Schatzverstecken oder den Nutzungsbedingungen von
+        opencaching.de richten Sie bitte an <b>{$opt.mail.contact}</b><br />
+    </p>
+    <p>
+        Angaben gem. &sect;5 Telemediengesetz<br />
+        Verantwortlich im Sinne des TDG/MDStV<br />
+        <br />
+        Opencaching Deutschland e.V.<br />
+        Eingetragen im Vereinsregister des Amtsgerichtes Bad Homburg v. d. H.,
+        Registernummer 2054
+    </p>
+
+    <p>
+        <b>Postanschrift und Kontaktdaten</b>
+    </p>
 
     <p>
         Opencaching Deutschland e.V.<br />
@@ -70,81 +108,246 @@
     <br />
 </div>
 
-    <div style="float: left; width: 50%">
-        <h2>Registereintrag:</h2>
-        <p>Eingetragen im Vereinsregister.<br/>
-        <dl>
-            <dt>Registergericht Bad Homburg v. d. H.</dt>
-            <dt>Registernummer 2054</dt>
-        </dl>
 
-        <h2>Kontakt:</h2>
-        <dl>
-            <dt>Telefon +49 (0)172-2092626</dd>
-
-            <dt>E-Mail verein@opencaching.de</dd>
-        </dl>
-    </div>
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        Haftungshinweis f&uuml;r externe Links
+    </p>
+</div>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        Trotz sorgf&auml;ltiger inhaltlicher Kontrolle &uuml;bernehmen wir keine Haftung
+        f&uuml;r die Inhalte externer Links. F&uuml;r den Inhalt der verlinkten Seiten sind
+        ausschlie&szlig;lich deren Betreiber verantwortlich. Sollten auf den von uns
+        verlinken Seiten bedenkliche Inhalte zu finden sein, oder auf solche verlinkt
+        werden, bittet Opencaching.de darum per E-Mail dar&uuml;ber informiert zu werden.
+        Der entsprechende Link wird dann gepr&uuml;ft und ggf. unverz&uuml;glich entfernt.
+    </p>
+    <br />
 </div>
 
-<div style="clear: left; padding: 2rem;">
-    *Letzte Aktualisierung: 01.05.2017 - Vorgang zur Eintragung am Amtsgericht ist aktuell offen.
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        <a name="tos"></a>Nutzungsbedingungen
+    </p>
+</div>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        Die Nutzung des Internetangebotes erfolgt ausdr&uuml;cklich auf eigene Gefahr.
+        Opencaching.de &uuml;bernimmt keine wie auch immer geartete Gew&auml;hrleistung
+        f&uuml;r die Richtigkeit der hier ver&ouml;ffentlichten Informationen. Opencaching.de
+        haftet nicht f&uuml;r Sch&auml;den, die aus der Nutzung der hier bereitgestellten
+        Programmen, Dokumenten und Informationen erfolgen. Weiterhin ist Opencaching.de
+        freizuhalten von etwaigen Haftungsanspr&uuml;chen, die sich durch Sch&auml;den,
+        die mittel- oder unmittelbar durch die Inhalte dieser Internetseite entstanden sind,
+        ableiten lassen. Dies gilt auch f&uuml;r die Funktionst&uuml;chtigkeit und durch
+        Programmfehler entstandene Sch&auml;den der hier zum Download angebotenen
+        Bin&auml;rdateien bzw. Programme sowie der angebotenen Datendateien bzw. Dokumente.
+    </p>
+    <p>
+        Nach der Anmeldung hat jeder Benutzer an verschiedenen Stellen die
+        M&ouml;glichkeit, Inhalte in Text und Bildform zu ver&ouml;ffentlichen. Jeder
+        Benutzer hat daf&uuml;r zu sorgen, dass die von ihm ver&ouml;ffentlichten Inhalte
+        gegen keine geltenden Rechtsvorschriften versto&szlig;en. Opencaching.de kann die
+        Einhaltung dieser Vorschriften nur durch Stichproben kontrollieren und ist deshalb
+        darauf angewiesen, dass fragw&uuml;rdige oder rechtswidrige Inhalte von den
+        Benutzern gemeldet werden. Die Meldung kann direkt &uuml;ber den Melde-Hyperlink
+        in jedem Cachelisting oder per E-Mail an <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>
+        erfolgen. Die entsprechenden Inhalte werden dann schnellstm&ouml;glich vom
+        Verein Opencaching Deutschland kontrolliert und bei Bedarf unverz&uuml;glich
+        entfernt.
+    </p>
+    <p>
+        <b>Wie definiert Opencaching.de den Begriff "Geocache"?</b>
+    </p>
+    <p>
+        Ein Geocache ist ein versteckter Beh&auml;lter mit Logbuch, der mit Hilfe
+        geografischer Koordinaten gefunden werden soll. Als Nachweis f&uuml;r den Fund
+        tr&auml;gt sich der Finder vor Ort im Logbuch ein. In Ausnahmef&auml;llen kann
+        auf den Beh&auml;lter an den Koordinaten verzichtet werden (z.B. wenn aufgrund
+        der &ouml;rtlichen Gegebenheiten keine Dose versteckt werden kann). Man spricht
+        dann von einem virtuellen Cache. Der Besuch vor Ort wird in diesem Fall z.B. durch
+        ein (Webcam-)Foto oder durch die Beantwortung einer Frage nachgewiesen, zu der
+        sich die L&ouml;sung nur vor Ort ermitteln l&auml;sst.
+    </p>
+    <p>
+        <b>F&uuml;r das Verstecken von Geocaches, die auf Opencaching.de ver&ouml;ffentlicht
+        werden sollen, gilt grunds&auml;tzlich:</b>
+    </p>
+    <ul class="indent">
+        <li>
+            Das Verstecken eines Geocaches geschieht in eigenem Interesse und auf
+            eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine
+            Haftung f&uuml;r Sch&auml;den die durch einen Geocache entstehen.
+        </li>
+        <li>
+            Geocaches d&uuml;rfen nur an Orten versteckt werden, die von der
+            &Ouml;ffentlichkeit betreten werden d&uuml;rfen.
+        </li>
+        <li>
+            Der Besitzer und/oder Eigent&uuml;mer des Grundst&uuml;cks muss das
+            Legen des Geocaches gestattet haben.
+        </li>
+        <li>
+            Der Geocache, sowie dessen Beschreibung, darf keine rechtswidrigen oder
+            gef&auml;hrliche Inhalte enthalten. Insbesondere sei hier auf das
+            Urheberrecht, den Jugendschutz und den Natur- und Umweltschutz hingewiesen.
+        </li>
+        <li>
+            Nicht erlaubt sind kommerzielle Caches. Ein Cache wird als kommerziell
+            betrachtet, wenn er in Gewinnerzielungsabsicht versteckt wurde. In
+            Zweifelsf&auml;llen ist der nicht-kommerzielle Charakter durch eine
+            entsprechende Klarstellung in der Beschreibung zu unterstreichen.
+            Weiterhin ist jegliche Form der Werbung in Cachelistings, Benutzernamen
+            und Logs unerw&uuml;nscht.
+        </li>
+        <li>
+            Auf alle Gefahren, die durch das Suchen des Geocaches entstehen k&ouml;nnen,
+            muss in der Beschreibung hingewiesen werden.
+        </li>
+        <li>
+            Der Geocache muss als solcher deutlich gekennzeichnet sein und Kontaktangaben
+            des Versteckers enthalten.
+        </li>
+        <li>
+            Der Besitzer des Geocaches ist f&uuml;r alle Sch&auml;den, die durch das
+            Verstecken des Geocaches entstehen, verantwortlich.
+        </li>
+        <li>
+            Der Besitzer verpflichtet sich, den Geocache in einem ordentlichen Zustand
+            zu halten und ihn nach der Nutzung als Geocache wieder zu entsorgen, sowie
+            alle durch den Geocache entstandenen Sch&auml;den wieder zu beseitigen.
+        </li>
+        <li>
+            Der Besitzer des Geocaches erlaubt ausdr&uuml;cklich, dass die
+            unver&auml;nderte Beschreibung des Geocaches auch von Dritten kostenfrei
+            ver&ouml;ffentlicht werden darf.
+        </li>
+        <li>
+            Es ist nicht gestattet Logeintr&auml;ge von Benutzern auf Opencaching.de
+            grunds&auml;tzlich zu verbieten. Ebenso darf der Benutzer nicht gezwungen
+            werden, seine Logeintr&auml;ge auf anderen Webseiten vorzunehmen.
+        </li>
+          <li>
+              Ist der Geocache auch auf anderen Webseiten ver&ouml;ffentlicht, so muss
+              die Beschreibung immer auf allen Webseiten aktuell und vollst&auml;ndig
+              gehalten werden. Aktualisierungen der Beschreibung m&uuml;ssen zeitnah
+              auch auf den anderen Plattformen vorgenommen werden.
+          </li>
+        <li>
+            Des weiteren ist die Anleitung zum Verstecken eines Geocaches auf
+            <a href="http://www.geocaching.de">http://www.geocaching.de</a> zu beachten.
+        </li>
+    </ul>
+
+    <p>
+        <b>F&uuml;r das Suchen eines Geocaches gilt grunds&auml;tzlich:</b>
+    </p>
+    <ul class="indent">
+        <li>
+            Das Suchen eines Geocaches geschieht in eigenem Interesse und auf
+            eigene Gefahr - Opencaching.de &uuml;bernimmt in keinem Fall irgendeine
+            Haftung f&uuml;r Sch&auml;den die durch einen Geocache entstehen.
+        </li>
+        <li>
+            Geocaches, die gegen die oben genannten Richtlinien f&uuml;r das
+            Verstecken eines Geocaches versto&szlig;en, sind unverz&uuml;glich
+            &uuml;ber den Melde-Hyperlink im Cachelisting oder per E-Mail an
+            <a href="mailto:{$opt.mail.contact}">{$opt.mail.contact}</a>
+            zu melden. Damit hilft jeder Benutzer die Qualit&auml;t dieser Geocaching
+            Seite auf hohem Niveau zu halten und so den langfristigen Betrieb zu
+            erm&ouml;glichen.
+        </li>
+        <li>
+            Des weiteren ist die Anleitung zum Suchen eines Geocaches auf
+            <a href="http://www.geocaching.de">http://www.geocaching.de</a>
+            zu beachten.
+        </li>
+    </ul>
+    <br />
 </div>
 
-<div class="content2-pagetitle">
-    Haftung für Inhalte
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        <a name="datalicense"></a>Datenlizenz
+    </p>
 </div>
-<blockquote>Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1 TMG f&uuml;r eigene Inhalte auf diesen Seiten
-            nach den allgemeinen Gesetzen
-            verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-            &uuml;bermittelte oder gespeicherte fremde
-            Informationen zu &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit
-            hinweisen.
-</blockquote>
-<blockquote>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen
-            bleiben
-            hiervon unber&uuml;hrt.
-            Eine diesbez&uuml;gliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
-            Rechtsverletzung m&ouml;glich.
-            Bei Bekanntwerden von
-            entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
-</blockquote>
 
-<div class="content2-pagetitle">
-    Haftung für Links
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/de/" >
+        <img alt="Creative Commons Lizenzvertrag" style="border: 0; padding-right: 15px; padding-bottom: 15px; float: left;" src="https://i.creativecommons.org/l/by-nc-nd/3.0/de/88x31.png" /></a>
+        Alle durch die Benutzer auf Opencaching.de eingebrachten Inhalte stehen unter
+        der Lizenz &bdquo;Creative Commons Attribution-NonCommercial-NoDerivs 3.0&ldquo;, auf Deutsch:
+        &bdquo;Namensnennung-NichtKommerziell-KeineBearbeitung 3.0&ldquo; (CC BY-NC-ND 3.0).
+        Das heißt, die Inhalte dürfen vervielf&auml;ltigt, verbreitet und &ouml;ffentlich
+        zug&auml;nglich gemacht werden. Dabei ist die Namensnennung des Autors/Rechteinhabers in der
+        unten angegebenen Form zu wahren. Eine kommerzielle Nutzung der Inhalte ist in
+        jeglicher Form ausgeschlossen; ebenso d&uuml;rfen keine Ver&auml;nderungen/Abwandlungen
+        der Inhalte vorgenommen werden.
+        <br />
+        <br />
+        Für die Namensnennung ist die Form
+    </p>
+    <p style="font-weight: 800;">
+        &copy; $USERNAME, Opencaching.de, CC BY-NC-ND, Stand: $DATUM
+    </p>
+    <p>
+        zu verwenden, wobei das Datum sich auf den Abrufzeitpunkt von www.opencaching.de bezieht. Bei Fotos und Logeintr&auml;gen kann vom Datum abgesehen werden.
+        <br />
+        <br />
+        Weitere Erläuterungen zur Datenlizenz gibt es im <a href="http://wiki.opencaching.de/index.php/Datenlizenz" target="_blank">Wiki</a>.</p>
+        <p>Aufgrund einiger Rückfragen weisen wir darauf hin, dass die Opencaching.de-Datenlizenz
+        selbstverständlich keine &bdquo;Exklusivlizenz&ldquo; ist. Das heißt, es steht jedem Nutzer frei,
+        seine Inhalte auf Opencaching.de oder an anderer Stelle auch unter weiteren Lizenzen zu
+        veröffentlichen (<em>Mehrfachlizenzierung</em>) und dies auch in den Cachelistings oder Logs zu vermerken.
+    </p>
+    <br />
 </div>
-<blockquote>Unser Angebot enth&auml;lt Links zu externen Webseiten Dritter, auf deren
-            Inhalte wir keinen Einfluss haben. Deshalb k&ouml;nnen wir f&uuml;r diese
-            fremden Inhalte auch keine Gew&auml;hr &uuml;bernehmen. F&uuml;r die Inhalte
-            der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der
-            Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der
-            Verlinkung auf m&ouml;gliche Rechtsverst&ouml;&szlig;e &uuml;berpr&uuml;ft.
-            Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-</blockquote>
-<blockquote>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch
-            ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei
-            Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend
-            entfernen.
-</blockquote>
 
-<div class="content2-pagetitle">
-    Urheberrecht
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        <a name="codelicense"></a>Quellcodelizenz
+    </p>
 </div>
-<blockquote>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
-            Urheberrecht. Die Vervielf&auml;ltigung, Bearbeitung, Verbreitung und jede
-            Art der Verwertung au&szlig;erhalb der Grenzen des Urheberrechtes
-            bed&uuml;rfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
-            Erstellers. Downloads und Kopien dieser Seite sind nur f&uuml;r den privaten,
-            nicht kommerziellen Gebrauch gestattet.
-</blockquote>
-<blockquote>Soweit die Inhalte auf dieser Seite nicht vom Betreiber
-            erstellt wurden, werden die Urheberrechte Dritter
-            beachtet. Insbesondere werden Inhalte Dritter als solche
-            gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen
-            entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend
-            entfernen.
-</blockquote>
 
-<p>Quelle:
-    <a href="https://www.erecht24.de">https://www.e-recht24.de</a>
-</p>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        Die Software, mit der die Plattform Opencaching.de betrieben wird, ist unter der
+        GNU GPL mit zus&auml;tzlichen Einschr&auml;nkungen lizenziert. Der vollst&auml;ndige
+        Wortlaut dieser Lizenz befindet sich
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">hier</a>.
+        Dabei ist zu beachten, dass einige Bestandteile der Software von Drittanbietern
+        stammen. Diese Bestandteile können anderen Lizenzen unterliegen.
+    </p>
+    <p>
+        Eine Aufstellung der Softwarebestandteile von Drittanbietern, die derzeit auf www.opencaching.de
+        verwendet werden, inklusive Lizenzbedingungen und weiterer Angaben gibt es
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/doc/license.txt">hier</a>.
+    </p>
+    <p>
+        Der Quellcode kann via <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a>
+        bezogen werden.
+    </p>
+    <br />
+</div>
+
+<div class="content2-container bg-blue02">
+    <p class="content-title-noshade-size3">
+        &nbsp;<span class="txt-black">§</span> &nbsp;
+        Hinweise zum Datenschutz
+    </p>
+</div>
+<div class="content-txtbox-noshade" style="padding-right: 25px;">
+    <p>
+        Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:
+    </p>
+    <p>
+        <a href="articles.php?page=dsb">https://www.opencaching.de/articles.php?page=dsb</a>
+    </p>
+    <br />
+</div>

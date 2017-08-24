@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Auto-generated Migration: Please modify to your needs!
+ * Migration to create page and page_block table.
  */
 class Version20170516084212 extends AbstractMigration
 {
@@ -22,9 +22,10 @@ class Version20170516084212 extends AbstractMigration
         );
 
         $this->addSql('
-            CREATE TABLE page_block(
+            CREATE TABLE IF NOT EXISTS page_block(
                 id INT AUTO_INCREMENT NOT null,
-                page_group_id INT NOT null,
+                page_id INT NOT null,
+                locale VARCHAR(2) NOT NULL,
                 title VARCHAR(255) NOT null,
                 html LONGTEXT NOT null,
                 position INT DEFAULT null,
@@ -34,7 +35,7 @@ class Version20170516084212 extends AbstractMigration
         ');
 
         $this->addSql('
-            CREATE TABLE page_group(
+            CREATE TABLE IF NOT EXISTS page(
                 id INT AUTO_INCREMENT NOT null,
                 slug VARCHAR(80) NOT null UNIQUE ,
                 meta_keywords VARCHAR(255) NOT null,
@@ -45,7 +46,7 @@ class Version20170516084212 extends AbstractMigration
             PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
         ');
 
-        $this->addSql('ALTER TABLE page_block ADD FOREIGN KEY  (page_group_id) REFERENCES page_group(id);');
+        $this->addSql('ALTER TABLE page_block ADD FOREIGN KEY (page_id) REFERENCES page(id);');
     }
 
     /**
@@ -54,6 +55,5 @@ class Version20170516084212 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        // this down() migration is auto-generated, please modify it to your needs
     }
 }

@@ -24,11 +24,10 @@ $request->setLocale($locale);
 $response = $kernel->handle($request);
 
 /**
- * @var array $excludeRoutes Which route is not to be in legacy page?
+ * @var array $excludeRoutes Which routes should be displayed in the legacy layout?
  */
 $excludeRoutes = [
-    'field-notes',
-    'page'
+    'field-notes'
 ];
 
 if ($response->getStatusCode() === 404) {
@@ -37,7 +36,7 @@ if ($response->getStatusCode() === 404) {
 }
 
 /**
- * @var array $excludeRoutes Wich controller should not be compiled in symfony?
+ * @var array $excludeRoutes Which controller should not be compiled in symfony?
  */
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()

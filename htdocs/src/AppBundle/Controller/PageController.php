@@ -6,6 +6,11 @@ use AppBundle\Entity\PageGroup;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class PageController
+ *
+ * @package AppBundle\Controller
+ */
 class PageController extends AbstractController
 {
     /**
@@ -22,22 +27,34 @@ class PageController extends AbstractController
         $slug = strtolower($slug);
         $this->setMenu(MNU_START);
 
-        $repository = $this->getDoctrine()->getRepository('AppBundle:PageGroup');
-        $pageBlocksQueryBuilder = $repository->getPageBlocksBySlugQueryBuilder(
-            $slug,
-            'pageGroup.active = 1 AND pageBlocks.active = 1'
-        );
+        $pageService = $this->get('oc.page.page_service');
+        $blockService = $this->get('oc.page.block_service');
 
-        /** @var PageGroup $pageGroup */
-        $pageGroup = $pageBlocksQueryBuilder->getQuery()->getOneOrNullResult();
+        $page = $pageService->fetchOneBy([
+            'slug' => $slug,
+            'active' => 1
+        ]);
 
-        if (!$pageGroup || $pageGroup->getPageBlocks()->count() === 0) {
-            throw $this->createNotFoundException('Page not found.');
+        if (!$page) {
+            throw $this->createNotFoundException();
         }
 
-        return $this->render('@App/Pages/index.html.twig', [
-            'pageGroup' => $pageGroup
+        $pageBlocks = $blockService->fetchBy([
+            'page_id' => $page->id,
+            'locale' => $this->getGlobalContext()->getLocale(),
+            'active' => 1
+        ]);
+
+        if (count($pageBlocks) === 0) {
+            return $this->render('@App/Page/fallback.html.twig');
+        }
+
+        return $this->render('@App/Page/index.html.twig', [
+            'page' => $page,
+            'pageBlocks' => $pageBlocks
         ]);
     }
+
+
 
 }

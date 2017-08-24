@@ -9,8 +9,24 @@ namespace Oc\Util;
 
 use Doctrine\DBAL\DriverManager;
 
+/**
+ * Class DbalConnection
+ *
+ * @package Oc\Util
+ */
 class DbalConnection
 {
+    /**
+     * Creates dbal connection.
+     *
+     * @param string $host
+     * @param string $name
+     * @param string $user
+     * @param string $password
+     * @param int $port
+     *
+     * @return \Doctrine\DBAL\Connection
+     */
     public static function createDbalConnection(
         $host,
         $name,
@@ -37,7 +53,7 @@ class DbalConnection
             $params['password'] = $password;
         }
 
-        if ($port) {
+        if ($port !== null) {
             $params['port'] = $port;
         }
 

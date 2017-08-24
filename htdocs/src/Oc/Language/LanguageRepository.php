@@ -1,26 +1,25 @@
 <?php
 
-namespace Oc\User;
+namespace Oc\Language;
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
-use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
- * Class UserRepository
+ * Class LanguageRepository
  *
- * @package Oc\User
+ * @package Oc\Language
  */
-class UserRepository
+class LanguageRepository
 {
     /**
      * Database table name that this repository maintains.
      *
      * @var string
      */
-    const TABLE = 'user';
+    const TABLE = 'languages';
 
     /**
      * @var Connection
@@ -28,7 +27,7 @@ class UserRepository
     private $connection;
 
     /**
-     * UserRepository constructor.
+     * LanguageRepository constructor.
      *
      * @param Connection $connection
      */
@@ -38,9 +37,9 @@ class UserRepository
     }
 
     /**
-     * Fetches all users.
+     * Fetches all languages.
      *
-     * @return UserEntity[]
+     * @return LanguageEntity[]
      *
      * @throws RecordsNotFoundException Thrown when no records are found
      */
@@ -61,48 +60,42 @@ class UserRepository
     }
 
     /**
-     * Fetches a user by its id.
+     * Fetches all translated languages.
      *
-     * @param int $id
+     * @return LanguageEntity[]
      *
-     * @return UserEntity
-     *
-     * @throws RecordNotFoundException Thrown when the request record is not found
+     * @throws RecordsNotFoundException Thrown when no records are found
      */
-    public function fetchOneById($id)
+    public function fetchAllTranslated()
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->where('user_id = :id')
-            ->setParameter(':id', $id)
+            ->where('is_translated = 1')
             ->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException(sprintf(
-                'Record with id #%s not found',
-                $id
-            ));
+            throw new RecordsNotFoundException('No records with given where clause found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $this->getEntityArrayFromDatabaseArray($result);
     }
 
     /**
-     * Creates a user in the database.
+     * Creates a language in the database.
      *
-     * @param UserEntity $entity
+     * @param LanguageEntity $entity
      *
-     * @return UserEntity
+     * @return LanguageEntity
      *
      * @throws RecordAlreadyExistsException
      */
-    public function create(UserEntity $entity)
+    public function create(LanguageEntity $entity)
     {
         if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The user entity already exists');
+            throw new RecordAlreadyExistsException('The entity does already exist.');
         }
 
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
@@ -112,21 +105,21 @@ class UserRepository
             $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->short = $this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * Update a user in the database.
+     * Update a language in the database.
      *
-     * @param UserEntity $entity
+     * @param LanguageEntity $entity
      *
-     * @return UserEntity
+     * @return LanguageEntity
      *
      * @throws RecordNotPersistedException
      */
-    public function update(UserEntity $entity)
+    public function update(LanguageEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -137,24 +130,24 @@ class UserRepository
         $this->connection->update(
             self::TABLE,
             $databaseArray,
-            ['id' => $entity->id]
+            ['short' => $entity->short]
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->short = $this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * Removes a user from the database.
+     * Removes a language from the database.
      *
-     * @param UserEntity $entity
+     * @param LanguageEntity $entity
      *
-     * @return UserEntity
+     * @return LanguageEntity
      *
      * @throws RecordNotPersistedException
      */
-    public function remove(UserEntity $entity)
+    public function remove(LanguageEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -165,10 +158,10 @@ class UserRepository
         $this->connection->delete(
             self::TABLE,
             $databaseArray,
-            ['id' => $entity->id]
+            ['short' => $entity->short]
         );
 
-        $entity->id = null;
+        $entity->short = null;
 
         return $entity;
     }
@@ -178,7 +171,7 @@ class UserRepository
      *
      * @param array $result
      *
-     * @return UserEntity[]
+     * @return LanguageEntity[]
      */
     private function getEntityArrayFromDatabaseArray(array $result)
     {
@@ -194,24 +187,22 @@ class UserRepository
     /**
      * Maps the given entity to the database array.
      *
-     * @param UserEntity $entity
+     * @param LanguageEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(UserEntity $entity)
+    public function getDatabaseArrayFromEntity(LanguageEntity $entity)
     {
         return [
-            'user_id' => $entity->id,
-            'username' => $entity->username,
-            'password' => $entity->password,
-            'email' => $entity->email,
-            'latitude' => $entity->latitude,
-            'longitude' => $entity->longitude,
-            'is_active_flag' => $entity->isActive,
-            'first_name' => $entity->firstname,
-            'last_name' => $entity->lastname,
-            'country' => $entity->country,
-            'language' => $entity->language,
+            'short' => $entity->short,
+            'name' => $entity->name,
+            'native_name' => $entity->nativeName,
+            'de' => $entity->de,
+            'en' => $entity->en,
+            'trans_id' => $entity->translationId,
+            'list_default_de' => $entity->listDefaultDe,
+            'list_default_en' => $entity->listDefaultEn,
+            'is_translated' => $entity->isTranslated
         ];
     }
 
@@ -220,22 +211,20 @@ class UserRepository
      *
      * @param array $data
      *
-     * @return UserEntity
+     * @return LanguageEntity
      */
     public function getEntityFromDatabaseArray(array $data)
     {
-        $entity = new UserEntity();
-        $entity->id = (int) $data['user_id'];
-        $entity->username = (string) $data['username'];
-        $entity->password = (string) $data['password'];
-        $entity->email = (string) $data['email'];
-        $entity->latitude = (double) $data['latitude'];
-        $entity->longitude = (double) $data['longitude'];
-        $entity->isActive = (bool) $data['is_active_flag'];
-        $entity->firstname = (string) $data['first_name'];
-        $entity->lastname = (string) $data['last_name'];
-        $entity->country = (string) $data['country'];
-        $entity->language = strtolower($data['language']);
+        $entity = new LanguageEntity();
+        $entity->short = (string) strtolower($data['short']);
+        $entity->name = (string) $data['name'];
+        $entity->nativeName = (string) $data['native_name'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->translationId = (int) $data['trans_id'];
+        $entity->listDefaultDe = (bool) $data['list_default_de'];
+        $entity->listDefaultEn = (bool) $data['list_default_en'];
+        $entity->isTranslated = (bool) $data['is_translated'];
 
         return $entity;
     }

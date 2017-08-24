@@ -20,3 +20,68 @@ services:
         class: Doctrine\DBAL\Connection
         factory: ['Oc\Util\DbalConnection', createDbalConnection]
         arguments: ["%database_host%", "%database_name%", "%database_user%", "%database_password%", "%database_port%"]
+
+    # GlobalContext
+    oc.global_context.subscriber.global_context_subscriber:
+        class: Oc\GlobalContext\Subscriber\GlobalContextSubscriber
+        arguments: ['@oc.global_context.global_context_factory']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    oc.global_context.global_context_factory:
+        class: Oc\GlobalContext\GlobalContextFactory
+        arguments: ['@oc.global_context.provider.language_provider']
+
+    # GlobalContext / Provider
+    oc.global_context.provider.language_provider:
+        class: Oc\GlobalContext\Provider\LanguageProvider
+        public: false
+        arguments: ['@oc.language.language_service', '@oc.session.session_data_cookie', '@oc.user.user_provider', '%locale%']
+
+    # Session
+    oc.session.session_data_cookie:
+        class: Oc\Session\SessionDataCookie
+
+    # Country
+    oc.country.country_repository:
+        class: Oc\Country\CountryRepository
+        arguments: ['@app.dbal_connection']
+
+    # Language
+    oc.language.language_repository:
+        class: Oc\Language\LanguageRepository
+        arguments: ['@app.dbal_connection']
+
+    oc.language.language_service:
+        class: Oc\Language\LanguageService
+        arguments: ['@oc.language.language_repository']
+
+    # Page
+    oc.page.page_repository:
+        class: Oc\Page\PageRepository
+        arguments: ['@app.dbal_connection']
+
+    oc.page.page_service:
+        class: Oc\Page\PageService
+        arguments: ['@oc.page.page_repository']
+
+    oc.page.block_repository:
+        class: Oc\Page\BlockRepository
+        arguments: ['@app.dbal_connection']
+
+    oc.page.block_service:
+        class: Oc\Page\BlockService
+        arguments: ['@oc.page.block_repository']
+
+    # User
+    oc.user.user_repository:
+        class: Oc\User\UserRepository
+        arguments: ['@app.dbal_connection']
+
+    oc.user.user_service:
+        class: Oc\User\UserService
+        arguments: ['@oc.user.user_repository']
+
+    oc.user.user_provider:
+        class: Oc\User\UserProvider
+        arguments: ['@oc.session.session_data_cookie', '@oc.user.user_service']

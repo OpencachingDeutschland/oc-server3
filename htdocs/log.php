@@ -374,16 +374,17 @@ if ($cacheId != 0) {
     // logtypes
     $tpl->assign('logtype', $logType);
     $tpl->assign('logtypes', $cache->getUserLogTypes($logType));
+    $tpl->assign('typeEditDisabled', false);
     // teamcomment
     $tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));
-    $tpl->assign('octeamcomment', ($ocTeamComment || (!$cache->statusUserLogAllowed() && $useradmin)) ? true : false);
+    $tpl->assign('is_teamcomment', ($ocTeamComment || (!$cache->statusUserLogAllowed() && $useradmin)) ? true : false);
     $tpl->assign('octeamcommentclass', (!$cache->statusUserLogAllowed() && $useradmin) ? 'redtext' : '');
     // masslogs
     $tpl->assign('masslogCount', $opt['logic']['masslog']['count']);
     $tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()) && $suppressMasslogWarning == 0);
     // show number of found on log page
     $tpl->assign('showstatfounds', $user->showStatFounds());
-    $tpl->assign('logpw', $cache->requireLogPW());
+    $tpl->assign('use_log_pw', $cache->requireLogPW());
     // smiley list
     $tpl->assign('smilies', $smiley_a);
     $tpl->assign('smileypath', $opt['template']['smiley']);
@@ -413,4 +414,5 @@ $tpl->assign('logtype_allows_nm', implode(',', $logtype_allows_nm));
 $tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
 $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 $tpl->assign('validate', $validate);
+$tpl->assign('editlog', false);
 $tpl->display();

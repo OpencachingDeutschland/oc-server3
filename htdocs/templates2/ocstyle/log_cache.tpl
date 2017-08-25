@@ -1,5 +1,7 @@
 {***************************************************************************
 * You can find the license in the docs directory
+*
+* ATTN: This template is used for both log.php and editlog.php! 
 ***************************************************************************}
 {* OCSTYLE *}
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
@@ -186,56 +188,68 @@ function show_tip(text)
 
 //-->
 {/literal}
-{*
- * capture allows us to "eval" the link tag with the variable values
- * and save the complete link in the variable "cachelink" to use it in translation
- *}
-{capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
 </script>
 
 <div class="content2-pagetitle">
     <img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />
-    {t 1=$cachelink}Add log-entry for the cache %1{/t}
+    {*
+     * capture allows us to "eval" the link tag with the variable values
+     * and save the complete link in the variable "cachelink" to use it in translation
+     *}
+    {if $editlog}
+        {capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
+        {t 1=$cachelink}Edit log entry for the cache %1{/t}
+    {else}
+        {capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
+        {t 1=$cachelink}Add log-entry for the cache %1{/t}
+    {/if}
 </div>
-<form action="log.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
-{if $masslog==true}
-<p class="redtext">
-    {t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t}
-</p>
-<p>
-    {t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
-</p>
-<p class="spacer_before">
-    <input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show this advice again today.{/t}</label>
-</p>
+<form action="{if $editlog}edit{/if}log.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
+{if !$editlog}
+    {if $masslog==true}
+        <p class="redtext">
+            {t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t}
+        </p>
+        <p>
+            {t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
+        </p>
+        <p class="spacer_before">
+            <input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show this advice again today.{/t}</label>
+        </p>
+    {/if}
 {/if}
 {if $showstatfounds==true}
-<p class="align-right">
-    <b>{t 1=$userFound}You found %1 caches until now.{/t}</b>
-</p>
+    <p class="align-right">
+        <b>{t 1=$userFound}You found %1 caches until now.{/t}</b>
+    </p>
 {/if}
-<input type="hidden" name="cacheid" value="{$cacheid}"/>
-<input type="hidden" name="version3" value="1"/>
+{if $editlog}
+    <input type="hidden" name="logid" value="{$logid}"/>
+    <input type="hidden" name="version2" value="1"/>
+{else}
+    <input type="hidden" name="cacheid" value="{$cacheid}"/>
+    <input type="hidden" name="version3" value="1"/>
+    <input type="hidden" name="fieldnoteid" id="fieldnoteid" value="{$fieldnoteid}" />
+{/if}
 <input id="descMode" type="hidden" name="descMode" value="1" />
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
 <input type="hidden" name="scrollposx" value="{$scrollposx}" />
 <input type="hidden" name="scrollposy" value="{$scrollposy}" />
 <input type="hidden" id="needs_maintenance2" name="needs_maintenance2" value="0" />
 <input type="hidden" id="listing_outdated2" name="listing_outdated2" value="0" />
-<input type="hidden" id="fieldnoteid" name="fieldnoteid" value="{$fieldnoteid}" />
 <table class="table">
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr><td colspan="2"></td></tr>
     <tr>
         <td width="180px">{t}Type of log-entry:{/t}</td>
         <td>
-            <select name="logtype" onChange="return logtype_changed()">
+            <select name="logtype" onChange="return logtype_changed()" {if $typeEditDisabled}disabled class="disabled"{/if}>
                 {foreach from=$logtypes item=logtypeoption}
-                <option value="{$logtypeoption.id}"{if $logtypeoption.selected} selected="selected"{/if}>{$logtypeoption.name|escape}</option>
+                    <option value="{$logtypeoption.id}"{if $logtypeoption.selected} selected="selected"{/if}>{$logtypeoption.name|escape}</option>
                 {/foreach}
             </select>
             {if $octeamcommentallowed}
-            &nbsp; <input type="checkbox" name="teamcomment" value="1" class="checkbox" {if $octeamcomment}checked{/if} id="teamcomment" /> <label for="teamcomment"><span class="{$octeamcommentclass}">{t}OC team comment{/t}</span></label>
+            &nbsp; <input type="checkbox" name="teamcomment" value="1" class="checkbox" {if $is_teamcomment}checked{/if} id="teamcomment" /> <label for="teamcomment"><span class="{$octeamcommentclass}">{t}OC team comment{/t}</span></label>
             {/if}
         </td>
     </tr>
@@ -270,7 +284,7 @@ function show_tip(text)
             <select id="listing_outdated" name="listing_outdated" onchange="logtype_changed()">
                 <option value="0" {if $listing_outdated==0}selected="selected"{/if}>{t}not specified{/t}</option>
                 <option value="2" {if $listing_outdated==2}selected="selected"{/if}>{t}outdated{/t}</option>
-                {if $ownerlog || $cache_listing_is_outdated}<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>{/if}
+                {if $ownerlog || $cache_listing_is_outdated || $editlog}<option value="1" {if $listing_outdated==1}selected="selected"{/if}>{t}up to date{/t}</option>{/if}
             </select>
             </span>
         </td>
@@ -278,7 +292,7 @@ function show_tip(text)
     <tr><td class="spacer" colspan="2" id="confirm_listing_ok_spacer" style="display:none"></td></tr>
     <tr id="confirm_listing_ok_row" style="display:none">
         <td style="vertical-align:top">
-            {if $validate.confirmListingOk===false}<span class="errormsg">{t}Please confirm:{/t}</span>{/if}
+            {if $validate.confirmListingOk==false}<span class="errormsg">{t}Please confirm:{/t}</span>{/if}
         </td>
         <td>
             <input type="checkbox" id="confirm_listing_ok" name="confirm_listing_ok" value="1" class="checkbox" {if $ownerlog}checked{/if}/> <label for="confirm_listing_ok">{t 1=$cache_listing_outdated_log}The problems of the cache description as mentioned in the <a href="%1" target="_blank"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png" /> log entries</a> do no longer exist.{/t} {if $gcwp}{t}All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with{/t} <a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$gcwp}" target="_blank">{$gcwp}</a>.{/if}
@@ -337,7 +351,7 @@ function show_tip(text)
         </tr>
     {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
-    {if $logpw}
+    {if $use_log_pw}
     <tr id="cachelisting--logpw">
         <td colspan="2">{t}passwort to log:{/t}
             <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if !$validate.logPw}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}

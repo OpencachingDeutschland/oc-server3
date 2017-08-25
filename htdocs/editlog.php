@@ -17,10 +17,9 @@ use Oc\GeoCache\StatisticPicture;
 
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/user.class.php';
-require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
-$tpl->name = 'editlog';
+$tpl->name = 'log_cache';
 $tpl->menuitem = MNU_CACHES_EDITLOG;
 $tpl->caching = false;
 
@@ -39,20 +38,26 @@ if (isset($_REQUEST['logid'])) { // Ocprop
 
 $useradmin = ($login->hasAdminPriv() ? 1 : 0);
 
+// log and cache type which can be combined with maintenance state flags
+$rs = sql('SELECT `id` FROM `log_types` WHERE `maintenance_logs`');
+$logtype_allows_nm = sql_fetch_column($rs);
+
 //does log with this logId exist?
 $log_rs = sql(
     "
         SELECT
             `cache_logs`.`id` AS `log_id`,
-            `cache_logs`.`cache_id` AS `cache_id`,
-            `cache_logs`.`node` AS `node`,
-            `cache_logs`.`text` AS `text`,
-            `cache_logs`.`date` AS `date`,
-            `cache_logs`.`user_id` AS `user_id`,
+            `cache_logs`.`cache_id`,
+            `cache_logs`.`node`,
+            `cache_logs`.`text`,
+            `cache_logs`.`date`,
+            `cache_logs`.`needs_maintenance`,
+            `cache_logs`.`listing_outdated`,
+            `cache_logs`.`user_id`,
             `cache_logs`.`type` AS `logtype`,
-            `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
-            `cache_logs`.`text_html` AS `text_html`,
-            `cache_logs`.`text_htmledit` AS `text_htmledit`,
+            `cache_logs`.`oc_team_comment`,
+            `cache_logs`.`text_html`,
+            `cache_logs`.`text_htmledit`,
             `caches`.`name` AS `cachename`,
             `caches`.`type` AS `cachetype`,
             `caches`.`user_id` AS `cache_user_id`,
@@ -75,6 +80,8 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         $tpl->error(ERROR_WRONG_NODE);
         exit;
     }
+
+    $cache = new cache($log_record['cache_id']);
 
     //is this log from this user?
     if ($log_record['user_id'] == $user->getUserId()) {
@@ -118,8 +125,25 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
             )
         ) {
             $oc_team_comment = isset($_POST['teamcomment']) ? $_POST['teamcomment'] != '' : false;
+            $needsMaintenance = isset($_POST['needs_maintenance2']) ? $_POST['needs_maintenance2'] + 0 : (isset($_POST['needs_maintenance']) ? $_POST['needs_maintenance'] + 0 : 0);
+            $listingOutdated = isset($_POST['listing_outdated2']) ? $_POST['listing_outdated2'] + 0 : (isset($_POST['listing_outdated']) ? $_POST['listing_outdated'] + 0 : 0);
+            $confirmListingOk = isset($_POST['confirm_listing_ok']) ? $_POST['confirm_listing_ok'] + 0 : 0;
+
+            if (!in_array($log_type, $logtype_allows_nm) || $cache->getType() == 6) {
+                $needsMaintenance = $listingOutdated = 0;
+            } else {
+                if ($needsMaintenance != 1 && $needsMaintenance != 2) {
+                    $needsMaintenance = 0;
+                }
+                if ($listingOutdated != 1 && $listingOutdated != 2) {
+                    $listingOutdated = 0;
+                }
+            }
         } else {
             $oc_team_comment = ($log_record['oc_team_comment'] == 1);
+            $needsMaintenance = $log_record['needs_maintenance'];
+            $listingOutdated = $log_record['listing_outdated'];
+            $confirmListingOk = ($listingOutdated == 1);
         }
 
         $log_pw = '';
@@ -156,7 +180,6 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         );
 
         // is user cache owner
-        $cache = new cache($log_record['cache_id']);
         $isOwner = ($user->getUserId() == $cache->getUserId());
 
         // assing ratings to template
@@ -264,8 +287,17 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
             $oc_team_comment = 0;
         }
 
+        $validate = [];
+        $validate['dateOk'] = $date_ok;
+        $validate['confirmListingOk'] =
+            $listingOutdated != 1 || !$cache->getListingOutdated() || $confirmListingOk;
+        $validate['logPw'] = $pw_ok || !isset($_POST['submitform']);
+
+        // check for errors
+        $loggable = $logtype_ok && array_product($validate);
+
         //store?
-        if ($date_ok && $logtype_ok && $pw_ok && isset($_POST['submitform'])) { // Ocprop
+        if ($loggable && isset($_POST['submitform'])) { // Ocprop
             // 00:00:01 = "00:00 was logged"
             // 00:00:00 = "no time was logged"
             if ("$log_time_hour$log_time_minute" != "" &&
@@ -301,14 +333,18 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
                  SET `type`='&1',
                      `oc_team_comment`='&2',
                      `date`='&3',
-                     `text`='&4',
-                     `text_html`='&5',
-                     `text_htmledit`='&6'" .
+                     `needs_maintenance`='&4',
+                     `listing_outdated`='&5',
+                     `text`='&6',
+                     `text_html`='&7',
+                     `text_htmledit`='&8'" .
                      ($log_type == cachelog::LOGTYPE_ACTIVE ? $cache_ok_sql : "") . "
-                 WHERE `id`='&7'",
+                 WHERE `id`='&9'",
                 $log_type,
                 $oc_team_comment,
                 $log_date,
+                $needsMaintenance,
+                $listingOutdated,
                 $log_text,
                 (($descMode != 1) ? 1 : 0),
                 (($descMode == 3) ? 1 : 0),
@@ -384,36 +420,23 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
             $log_record['cache_user_id'] == $login->userid
             && !is_latest_log($log_record['cache_id'], $log_record['log_id'])
         );
-
-        $logtype_names = get_logtype_names();
-        $allowed_logtypes = get_cache_log_types(
-            $log_record['cache_id'],
-            $log_record['logtype'],
-            !$disable_statuschange
-        );
-        $logtypeoptions = '';
-        foreach ($allowed_logtypes as $logtype) {
-            $selected = ($log_type == $logtype ? ' selected="selected"' : '');
-            $logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>';
-            $logtypeoptions .= htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8');
-            $logtypeoptions .= '</option>' . "\n";
-        }
         $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
-        $tpl->assign('type_edit_disabled', $disable_typechange);
+        $tpl->assign('typeEditDisabled', $disable_typechange);
 
         // TODO: Enforce the 'disables' when processing the posted data.
         // It's not that urgent, because nothing can be broken by changing
         // past status log types (it was even allowed up to OC 3.0.17);
         // just the log history may look weird.
 
-        //set template vars
+        $tpl->assign('validate', $validate);
+
         $tpl->assign(
-            'teamcommentoption',
+            'octeamcommentallowed',
             teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment'])
         );
         $tpl->assign('is_teamcomment', $oc_team_comment);
         $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
-        $tpl->assign('logtypeoptions', $logtypeoptions);
+        $tpl->assign('logtypes', $cache->getUserLogTypes($log_type));
         $tpl->assign('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
@@ -422,13 +445,39 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('cacheid', $log_record['cache_id']);
         $tpl->assign('logid', $log_id);
-        $tpl->assign('date_ok', $date_ok);
 
-        if ($descMode != 1) {
-            $tpl->assign('logtext', htmlspecialchars($represent_text, ENT_COMPAT, 'UTF-8'), true);
-        } else {
-            $tpl->assign('logtext', $represent_text);
-        }
+        // cache infos
+        $tpl->assign('cachetype', $cache->getType());
+        $tpl->assign('gcwp', $cache->getWPGC_maintained());
+
+        // cache condition flags
+        $tpl->assign('cache_needs_maintenance', $cache->getNeedsMaintenance());
+        $tpl->assign('cache_listing_is_outdated', $cache->getListingOutdated());
+        $tpl->assign('cache_listing_outdated_log', $cache->getListingOutdatedLogUrl());
+        $tpl->assign('needs_maintenance', $needsMaintenance);
+        $tpl->assign('listing_outdated', $listingOutdated);
+        $tpl->assign('condition_history', $cache->getConditionHistory());
+        $tpl->assign('logtype_allows_nm', implode(',', $logtype_allows_nm));
+
+        // user infos
+        $tpl->assign('ownerlog', $login->userid == $cache->getUserId());
+        $tpl->assign('userFound', $user->getStatFound());
+        $tpl->assign('showstatfounds', $user->showStatFounds());
+
+        $tpl->assign('logtext', $represent_text);
+
+        // DNF state
+        $dnf_by_logger = sql_value(
+                "SELECT `type`
+                 FROM `cache_logs`
+                 WHERE `cache_id`='&1' AND `user_id`='&2' AND `type` IN (1,2)
+                 ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+                 LIMIT 1",
+                0,
+                $cache->getCacheId(),
+                $login->userid
+            ) == 2;
+        $tpl->assign('dnf_by_logger', $dnf_by_logger);
 
         // Text / normal HTML / HTML editor
         $tpl->assign('use_tinymce', (($descMode == 3) ? 1 : 0));
@@ -450,7 +499,6 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         $tpl->add_header_javascript(editorJsPath());
 
         $tpl->assign('use_log_pw', $use_log_pw);
-        $tpl->assign('wrong_log_pw', !$pw_ok && isset($_POST['submitform']));
         $tpl->assign('smileypath', $opt['template']['smiley']);
         $tpl->assign('smilies', $smiley_a);
     }
@@ -460,6 +508,7 @@ $tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollpos
 $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 
 //make the template and send it out
+$tpl->assign('editlog', true);
 $tpl->display();
 
 /**

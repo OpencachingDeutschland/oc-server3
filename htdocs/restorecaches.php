@@ -255,14 +255,13 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
 
     $tpl->assign('step', 5);
     $tpl->assign('username', $_REQUEST['username']);
-    $tpl->assign(
-        'disabled',
+    $disabled =
         sql_value(
             "SELECT NOT `is_active_flag` FROM `user` WHERE `username`='&1'",
             0,
             $_REQUEST['username']
-        )
-    );
+        );
+    $tpl->assign('disabled', $disabled);
 
     $simulate = isset($_REQUEST['simulate']) && $_REQUEST['simulate'];
     $tpl->assign('simulate', $simulate);
@@ -275,7 +274,11 @@ if (isset($_REQUEST['finduser']) && isset($_REQUEST['username'])) {
         }
     }
 
-    if ($restore_date == '') {
+    $allowance = isset($_REQUEST['allowance']) && $_REQUEST['allowance'];
+    if (!$disabled && !$simulate && !$allowance) {
+        $tpl->assign('error', 'noallowance');
+        $tpl->display();
+    } elseif ($restore_date == '') {
         $tpl->assign('error', 'nodate');
         $tpl->display();
     } elseif (count($restore_options) == 0) {

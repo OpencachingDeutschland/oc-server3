@@ -404,7 +404,7 @@ if ($error == false) {
                 );
                 $logtypeoptions = '';
                 foreach ($allowed_logtypes as $logtype) {
-                    $selected = ($log_record['logtype'] == $logtype ? ' selected="selected"' : '');
+                    $selected = ($log_type == $logtype ? ' selected="selected"' : '');
                     $logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>';
                     $logtypeoptions .= htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8');
                     $logtypeoptions .= '</option>' . "\n";

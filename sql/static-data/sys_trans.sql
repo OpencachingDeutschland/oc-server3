@@ -916,7 +916,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1358', 'You fou
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1359', 'You havn\'t found this cache, yet', '2010-09-07 19:20:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1360', 'This cache stores a GeoKrety', '2010-09-07 19:20:29');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1361', 'This cache has %1 recommandations', '2010-09-07 19:20:29');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1362', 'Edit log entry for the cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2010-09-07 20:18:59');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1362', 'Edit log entry for the cache %1', '2010-09-07 20:18:59');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1363', 'Type of log-enrty', '2010-09-07 20:18:59');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1364', 'JavaScript is disabled in your browser, you can enter text only. To use HTML, or the editor, please enable JavaScript.', '2010-09-07 20:18:59');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('1365', 'New cache', '2010-09-07 20:19:00');

@@ -15,31 +15,34 @@
 use OcLegacy\GeoCache\Recommendation;
 use Oc\GeoCache\StatisticPicture;
 
-require_once __DIR__ . '/lib/consts.inc.php';
-$opt['gui'] = GUI_HTML;
-require_once __DIR__ . '/lib/common.inc.php';
+require __DIR__ . '/lib2/web.inc.php';
+require_once __DIR__ . '/lib2/logic/user.class.php';
 require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
+require_once __DIR__ . '/lang/de/ocstyle/editlog.inc.php';
+require_once __DIR__ . '/lang/de/ocstyle/rating.inc.php';
+
+$tpl->name = 'editlog';
+$tpl->menuitem = MNU_CACHES_EDITLOG;
+$tpl->caching = false;
+
+// check login
+$login->verify();
+if ($login->userid == 0) {
+    $tpl->redirect_login();
+}
+$user = new user($login->userid);
 
 //Preprocessing
-if ($error == false) {
+{
     //logid
     $log_id = 0;
     if (isset($_REQUEST['logid'])) { // Ocprop
         $log_id = $_REQUEST['logid'];
     }
 
-    if ($usr === false) {
-        $tplname = 'login';
-
-        tpl_set_var('username', '');
-        tpl_set_var('message_start', '');
-        tpl_set_var('message_end', '');
-        tpl_set_var('target', 'editlog.php?logid=' . urlencode($log_id));
-        tpl_set_var('message', $login_required);
-        tpl_set_var('helplink', helppagelink('login'));
-    } else {
-        $useradmin = ($login->admin & ADMIN_USER) ? 1 : 0;
+    {
+        $useradmin = ($login->hasAdminPriv() ? 1 : 0);
 
         //does log with this logId exist?
         $log_rs = sql(
@@ -73,16 +76,13 @@ if ($error == false) {
         if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cache_user_id'] == $login->userid && $log_record['user_id'] == $login->userid)) &&
                 $log_record['status'] != 7) || $useradmin
         ) {
-            require $stylepath . '/editlog.inc.php';
-            require $stylepath . '/rating.inc.php';
-
-            if ($log_record['node'] != $oc_nodeid) {
+            if ($log_record['node'] != $opt['logic']['node']['id']) {
                 tpl_errorMsg('editlog', $error_wrong_node);
                 exit;
             }
 
             //is this log from this user?
-            if ($log_record['user_id'] == $usr['userid']) {
+            if ($log_record['user_id'] == $user->getUserId()) {
                 $tplname = 'editlog';
 
                 //load settings
@@ -100,15 +100,11 @@ if ($error == false) {
                 );
                 $log_date_month = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : date(
                     'm',
-                    strtotime(
-                        $log_record['date']
-                    )
+                    strtotime($log_record['date'])
                 );
                 $log_date_year = isset($_POST['logyear']) ? trim($_POST['logyear']) : date(
                     'Y',
-                    strtotime(
-                        $log_record['date']
-                    )
+                    strtotime($log_record['date'])
                 );
                 $log_time_hour = isset($_POST['loghour']) ? trim($_POST['loghour']) : (substr(
                     $log_record['date'],
@@ -143,24 +139,26 @@ if ($error == false) {
                 }
 
                 // check if user has exceeded his top 10% limit
-                $is_top = sqlValue(
-                    "SELECT COUNT(`cache_id`) FROM `cache_rating` WHERE `user_id`='" . sql_escape(
-                        $usr['userid']
-                    ) . "' AND `cache_id`='" . sql_escape($log_record['cache_id']) . "'",
-                    0
+                $is_top = sql_value(
+                    "SELECT COUNT(`cache_id`)
+                     FROM `cache_rating`
+                     WHERE `user_id`='&1' AND `cache_id`='&2'",
+                    0,
+                    $user->getUserId(),
+                    $log_record['cache_id']
                 );
-                $user_founds = sqlValue(
+                $user_founds = sql_value(
                     "SELECT IFNULL(`found`, 0)
                      FROM `user`
                      LEFT JOIN `stat_user` ON `user`.`user_id`=`stat_user`.`user_id`
-                     WHERE `user`.`user_id`='" . sql_escape(
-                        $usr['userid']
-                    ) . "'",
-                    0
+                     WHERE `user`.`user_id`='&1'",
+                    0,
+                    $user->getUserId()
                 );
-                $user_tops = sqlValue(
-                    "SELECT COUNT(`user_id`) FROM `cache_rating` WHERE `user_id`='" . sql_escape($usr['userid']) . "'",
-                    0
+                $user_tops = sql_value(
+                    "SELECT COUNT(`user_id`) FROM `cache_rating` WHERE `user_id`='&1'",
+                    0,
+                    $user->getUserId()
                 );
 
                 $rating_percentage = $opt['logic']['rating']['percentageOfFounds'];
@@ -185,7 +183,7 @@ if ($error == false) {
                     }
                 }
 
-                tpl_set_var('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
+                $tpl->assign('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
 
                 if (isset($_POST['descMode'])) {
                     $descMode = $_POST['descMode'] + 0; // Ocprop: 2
@@ -337,23 +335,26 @@ if ($error == false) {
 
                     // update cache status if changed by logtype
                     if (is_latest_log($log_record['cache_id'], $log_record['log_id'])) {
-                        $newStatus = sqlValue(
+                        $newStatus = sql_value(
                             "SELECT `cache_status` FROM `log_types`
-                             WHERE `id`='" . sql_escape($log_type) . "'",
-                            false
+                             WHERE `id`='&1'",
+                            false,
+                            $log_type
                         );
                         if ($newStatus && $newStatus != $log_record['status']) {
                             sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
                             sql(
-                                "UPDATE `caches` SET `status`='" . sql_escape($newStatus) . "'
-                                 WHERE `cache_id`='" . sql_escape($log_record['cache_id']) . "'"
+                                "UPDATE `caches` SET `status`='&2'
+                                 WHERE `cache_id`='&1'",
+                                $log_record['cache_id'],
+                                $newStatus
                             );
                         }
                     }
 
                     //update user-stat if type changed
                     if ($log_record['logtype'] != $log_type) {
-                        StatisticPicture::deleteStatisticPicture($usr['userid']);
+                        StatisticPicture::deleteStatisticPicture($user->getUserId());
                     }
 
                     // update top-list
@@ -363,7 +364,7 @@ if ($error == false) {
                                 "INSERT INTO `cache_rating` (`user_id`, `cache_id`, `rating_date`)
                                  VALUES('&1','&2','&3')
                                  ON DUPLICATE KEY UPDATE `rating_date`='&3'",
-                                $usr['userid'],
+                                $user->getUserId(),
                                 $log_record['cache_id'],
                                 $log_date
                             );
@@ -382,20 +383,16 @@ if ($error == false) {
                         } else {
                             sql(
                                 "DELETE FROM `cache_rating` WHERE `user_id`='&1' AND `cache_id`='&2'",
-                                $usr['userid'],
+                                $user->getUserId(),
                                 $log_record['cache_id']
                             );
                         }
                     }
 
-                    // do not use slave server for the next time ...
-                    db_slave_exclude();
-
                     //display cache page
-                    tpl_redirect(
-                        'viewcache.php?cacheid=' . urlencode($log_record['cache_id']) . '&log=A#log' . urlencode(
-                            $log_id
-                        )
+                    $tpl->redirect(
+                        'viewcache.php?cacheid=' . urlencode($log_record['cache_id'])
+                        . '&log=A#log' . urlencode($log_id)
                     );
                     exit;
                 }
@@ -420,7 +417,7 @@ if ($error == false) {
                     $logtypeoptions .= '</option>' . "\n";
                 }
                 $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
-                tpl_set_var('type_edit_disabled', $disable_typechange ? $type_edit_disabled : '');
+                $tpl->assign('type_edit_disabled', $disable_typechange ? $type_edit_disabled : '');
 
                 // TODO: Enforce the 'disables' when processing the posted data.
                 // It's not that urgent, because nothing can be broken by changing
@@ -428,28 +425,27 @@ if ($error == false) {
                 // just the log history may look weird.
 
                 if (teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment'])) {
-                    tpl_set_var(
+                    $tpl->assign(
                         'teamcommentoption',
                         mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field)
                     );
                 } else {
-                    tpl_set_var('teamcommentoption', '');
+                    $tpl->assign('teamcommentoption', '');
                 }
 
                 //set template vars
-                tpl_set_var('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('logtypeoptions', $logtypeoptions);
-                tpl_set_var('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('cacheid', $log_record['cache_id']);
-                tpl_set_var('reset', $reset); // obsolete
-                tpl_set_var('submit', $submit);
-                tpl_set_var('logid', $log_id);
-                tpl_set_var('date_message', !$date_ok ? $date_message : '');
+                $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('logtypeoptions', $logtypeoptions);
+                $tpl->assign('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
+                $tpl->assign('cacheid', $log_record['cache_id']);
+                $tpl->assign('submit', $submit);
+                $tpl->assign('logid', $log_id);
+                $tpl->assign('date_message', !$date_ok ? $date_message : '');
 
                 if ($descMode != 1) {
                     tpl_set_var('logtext', htmlspecialchars($represent_text, ENT_COMPAT, 'UTF-8'), true);
@@ -458,35 +454,32 @@ if ($error == false) {
                 }
 
                 // Text / normal HTML / HTML editor
-                tpl_set_var('use_tinymce', (($descMode == 3) ? 1 : 0));
+                $tpl->assign('use_tinymce', (($descMode == 3) ? 1 : 0));
 
-                $headers = tpl_get_var('htmlheaders') . "\n";
                 if ($descMode == 1) {
-                    tpl_set_var('descMode', 1);
+                    $tpl->assign('descMode', 1);
                 } else {
                     if ($descMode == 2) {
-                        tpl_set_var('descMode', 2);
+                        $tpl->assign('descMode', 2);
                     } else {
                         // TinyMCE
-                        $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
-                        $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/log.js.php?logid=0&lang=' .
-                            strtolower(
-                                $locale
-                            ) . '"></script>' . "\n";
-                        tpl_set_var('descMode', 3);
+                        $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+                        $tpl->add_header_javascript(
+                            'resource2/tinymce/config/log.js.php?lang=' . strtolower($opt['template']['locale'])
+                        );
+                        $tpl->assign('descMode', 3);
                     }
                 }
-                $headers .= '<script language="javascript" type="text/javascript" src="' . editorJsPath() . '"></script>' . "\n";
-                tpl_set_var('htmlheaders', $headers);
+                $tpl->add_header_javascript(editorJsPath());
 
                 if ($use_log_pw == true && $log_pw != '') {
                     if (!$pw_ok && isset($_POST['submitform'])) {
-                        tpl_set_var('log_pw_field', $log_pw_field_pw_not_ok);
+                        $tpl->assign('log_pw_field', $log_pw_field_pw_not_ok);
                     } else {
-                        tpl_set_var('log_pw_field', $log_pw_field);
+                        $tpl->assign('log_pw_field', $log_pw_field);
                     }
                 } else {
-                    tpl_set_var('log_pw_field', '');
+                    $tpl->assign('log_pw_field', '');
                 }
 
                 // build smilies
@@ -506,19 +499,19 @@ if ($error == false) {
                                 ) . '&nbsp;';
                         }
                     }
-                    tpl_set_var('smileypath', $opt['template']['smiley']);
+                    $tpl->assign('smileypath', $opt['template']['smiley']);
                 }
-                tpl_set_var('smilies', $smilies);
+                $tpl->assign('smilies', $smilies);
             }
         }
     }
 }
 
-tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
+$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 
 //make the template and send it out
-tpl_BuildTemplate();
+$tpl->display();
 
 /**
  * @param $cacheId
@@ -527,12 +520,11 @@ tpl_BuildTemplate();
  */
 function is_latest_log($cacheId, $logId)
 {
-    $latestLogId = sqlValue(
-        "
-        SELECT `id` FROM `cache_logs`
-        WHERE `cache_id`='" . sql_escape($cacheId) . "'
-        ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
-        LIMIT 1",
+    $latestLogId = sql_value(
+        "SELECT `id` FROM `cache_logs`
+         WHERE `cache_id`='&1'
+         ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+         LIMIT 1",
         0,
         $cacheId
     );

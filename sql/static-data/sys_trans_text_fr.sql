@@ -913,7 +913,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'FR', 'Vous avez pas encore trouvé ce cache', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'FR', 'Ce cache stocke une Geokrety', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'FR', 'Ce cache a %1 recommandations', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'FR', 'Modifier le entrée du log pour le cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'FR', 'Modifier le entrée du log pour le cache %1', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'FR', 'Type de log-entry', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez saisir du texte seulement. Pour utiliser HTML ou l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'FR', 'Noveau cache', '2015-08-25 01:29:00');

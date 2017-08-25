@@ -914,7 +914,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'DE', 'Du hast diesen Cache nicht gefunden', '2010-09-10 23:58:57');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'DE', 'In diesem Cache ist ein GeoKrety', '2010-09-10 23:58:42');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'DE', 'Dieser Cache hat %1 Empfehlung(en)', '2010-09-10 23:58:30');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'DE', 'Logeintrag f\&uuml;r den Cache <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a> bearbeiten', '2010-09-10 23:58:05');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'DE', 'Logeintrag f\&uuml;r den Cache %1 bearbeiten', '2010-09-10 23:58:05');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'DE', 'Art des Logeintrags:', '2010-09-10 23:57:40');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'DE', 'JavaScript ist bei deinem Browser deaktiviert, du kannst nur Text eingeben. Um HTML oder den Editor zu verwenden, aktiviere bitte JavaScript.', '2010-09-10 23:57:54');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'DE', 'Neuer Cache', '2010-09-10 23:57:04');

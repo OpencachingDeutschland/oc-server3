@@ -1,37 +1,15 @@
-<?php
-/****************************************************************************
-                                            ./lang/de/ocstyle/editlog.tpl.php
-                                                            -------------------
-        begin                : Mon July 5 2004
-        copyright            : (C) 2004 The OpenCaching Group
+{***************************************************************************
+* You can find the license in the docs directory
+***************************************************************************}
 
-        For license information see LICENSE.md
- ****************************************************************************/
-
-/****************************************************************************
-
-     edit a log listing
-
-     template replacement(s):
-
-            cachename
-            logid
-            logtypeoptions
-            date_message
-            logday
-            logmonth
-            logyear
-            logtext
-            reset
-            submit
-
- ****************************************************************************/
-?>
 <script type="text/javascript">
 <!--
+
+{literal}
+
 function insertSmiley(smileySymbol, smileyFile) {
   var myText = document.editform.logtext;
-  var insertText = (descMode == 1 ? smileySymbol : '<img src="{smileypath}' + smileyFile + '" alt="" border="0" width="18px" height="18px" />');
+  var insertText = (descMode == 1 ? smileySymbol : '<img src="{/literal}{$smileypath}{literal}' + smileyFile + '" alt="" border="0" width="18px" height="18px" />');
   myText.focus();
 
   /* for IE and Webkit */
@@ -71,28 +49,31 @@ function _chkFound () {
   return false;
 }
 
+{/literal}
 //-->
 </script>
 
-<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t}Edit log entry for the cache <a href="viewcache.php?cacheid={cacheid}">{cachename}</a>{/t}</div>
+{capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
+
+<div class="content2-pagetitle"><img src="lang/de/ocstyle/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />{t 1=$cachelink}Edit log entry for the cache %1{/t}</div>
 
 <form action="editlog.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
-<input type="hidden" name="logid" value="{logid}"/>
+<input type="hidden" name="logid" value="{$logid}"/>
 <input type="hidden" name="version2" value="1"/>
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
 <input id="descMode" type="hidden" name="descMode" value="1" />
-<input type="hidden" name="scrollposx" value="{scrollposx}" />
-<input type="hidden" name="scrollposy" value="{scrollposy}" />
+<input type="hidden" name="scrollposx" value="{$scrollposx}" />
+<input type="hidden" name="scrollposy" value="{$scrollposy}" />
 
 <table class="table">
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td width="180px">{t}Type of log-enrty{/t}</td>
         <td align="left">
-            <select name="logtype" onChange="return _chkFound()" {type_edit_disabled}>
-                {logtypeoptions}
+            <select name="logtype" onChange="return _chkFound()" {$type_edit_disabled}>
+                {$logtypeoptions}
             </select>
-            {teamcommentoption}
+            {$teamcommentoption}
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
@@ -100,13 +81,13 @@ function _chkFound () {
     <tr>
         <td width="180px">{t}Date / time:{/t}</td>
         <td align="left">
-            <input class="input20" type="text" name="logday" maxlength="2" value="{logday}"/>.
-            <input class="input20" type="text" name="logmonth" maxlength="2" value="{logmonth}"/>.
-            <input class="input40" type="text" name="logyear" maxlength="4" value="{logyear}"/>
+            <input class="input20" type="text" name="logday" maxlength="2" value="{$logday}"/>.
+            <input class="input20" type="text" name="logmonth" maxlength="2" value="{$logmonth}"/>.
+            <input class="input40" type="text" name="logyear" maxlength="4" value="{$logyear}"/>
             &nbsp;&nbsp;&nbsp;
-            <input class="input20" type="text" name="loghour" maxlength="2" value="{loghour}" /> :
-            <input class="input20" type="text" name="logminute" maxlength="2" value="{logminute}" />
-            &nbsp;&nbsp;{date_message}
+            <input class="input20" type="text" name="loghour" maxlength="2" value="{$loghour}" /> :
+            <input class="input20" type="text" name="logminute" maxlength="2" value="{$logminute}" />
+            &nbsp;&nbsp;{$date_message}
         </td>
     </tr>
     <tr>
@@ -117,7 +98,7 @@ function _chkFound () {
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
-    {rating_message}
+    {$rating_message}
 </table>
 <table class="table">
     <tr>
@@ -138,17 +119,17 @@ function _chkFound () {
     </tr>
     <tr>
         <td>
-            <textarea name="logtext" id="logtext" cols="68" rows="25" class="logs" >{logtext}</textarea>
+            <textarea name="logtext" id="logtext" cols="68" rows="25" class="logs" >{$logtext}</textarea>
     </td>
     </tr>
     <tr>
         <td colspan="2">
-            {smilies}
+            {$smilies}
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
 
-        {log_pw_field}
+        {$log_pw_field}
 
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
@@ -159,8 +140,7 @@ function _chkFound () {
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td class="header-small" colspan="2">
-            <!-- <input type="reset" name="reset" value="{reset}" class="formbutton" onclick="flashbutton('reset')" />&nbsp;&nbsp; -->
-            <input type="submit" name="submitform" value="{submit}" class="formbutton" onclick="submitbutton('submitform')" />
+            <input type="submit" name="submitform" value="{$submit}" class="formbutton" onclick="submitbutton('submitform')" />
         </td>
     </tr>
 </table>
@@ -168,7 +148,7 @@ function _chkFound () {
 
 <script type="text/javascript">
 <!--
-    var descMode = {descMode};
+    var descMode = {$descMode};
     OcInitEditor();
     _chkFound();
 //-->

@@ -57,7 +57,7 @@ if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform'])) {
 }
 
 // check adminstatus of user
-$useradmin = ($login->hasAdminPriv()) ? 1 : 0;
+$useradmin = ($login->hasAdminPriv() ? 1 : 0);
 
 // prepare array to indicate errors in template
 $validate = [];

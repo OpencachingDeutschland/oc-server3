@@ -91,6 +91,15 @@ $opt['logic']['waypoint_pool']['fill_gaps'] = false;
  */
 $opt['logic']['rating']['percentageOfFounds'] = 10;
 
+/* main country list threadshold
+ * e.g. 0.01 = countries with at least 1% of total active caches are main countries
+ */
+$opt['logic']['main_countries']['global'] = 0.002;
+$opt['logic']['main_countries']['profile'] = 0.001;
+$opt['logic']['main_countries']['cache'] = 0.0005;
+// minimum caches for a country to appear in global selection list
+$opt['logic']['main_countries']['global_min'] = 3;
+
 /* admin functions
  */
 // admin may use OC-team-comment log flag only when processing a cache report

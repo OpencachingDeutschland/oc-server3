@@ -7,6 +7,7 @@
  *   add/remove etc. is executed instantly
  ***************************************************************************/
 
+use Oc\Country\Country;
 use OcLegacy\Util\PasswordCrypt;
 
 require_once __DIR__ . '/cracklib.inc.php';
@@ -252,7 +253,8 @@ class user
 
     public function getCountry()
     {
-        return countriesList::getCountryLocaleName($this->reUser->getValue('country'));
+        $country = new Country($this->reUser->getValue('country'), 'profile');
+        return $country->getLocaleName();
     }
 
     public function getCountryCode()
@@ -803,7 +805,7 @@ class user
     {
         global $opt, $translate;
 
-        $countriesList = new countriesList();
+        $country = new Country($this->reUser->getValue('country'), 'profile');
 
         $mail = new mail();
         $mail->name = 'register';
@@ -816,7 +818,7 @@ class user
         $mail->assign('userid', $this->getUserId());
         $mail->assign('last_name', $this->getLastName());
         $mail->assign('first_name', $this->getFirstName());
-        $mail->assign('country', $countriesList->getCountryLocaleName($this->getCountryCode()));
+        $mail->assign('country', $country->getLocaleName());
         $mail->assign('code', $this->getActivationCode());
 
         if ($mail->send()) {

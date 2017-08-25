@@ -105,7 +105,7 @@
                     <select name="country" class="input200" >
                         <option value="XX" {if $country=="XX"}selected="selected"{/if}>{t}Not specified{/t}</option>
                         {foreach from=$countries item=countryItem}
-                            <option value="{$countryItem.id}" {if $countryItem.id==$country}selected="selected"{/if}>{$countryItem.name|escape}</option>
+                            <option value="{$countryItem.code}" {if $countryItem.code==$country}selected="selected"{/if}>{$countryItem.name|escape}</option>
                         {/foreach}
                     </select>&nbsp;&nbsp;
                     {if $show_all_countries==0}

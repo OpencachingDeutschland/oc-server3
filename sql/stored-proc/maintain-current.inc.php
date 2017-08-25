@@ -1037,6 +1037,25 @@ sql(
      END;'
 );
 
+// rebuild cache country stats
+sql_dropProcedure('sp_rebuild_country_stat');
+sql(
+    "CREATE PROCEDURE sp_rebuild_country_stat (OUT nModified INT)
+     BEGIN
+        UPDATE `stat_cache_countries` SET `active_caches` =
+          (SELECT COUNT(*) FROM `caches` WHERE `caches`.`country`=`stat_cache_countries`.`country` AND `status`=1);
+        SET nModified = ROW_COUNT();
+
+        INSERT IGNORE INTO `stat_cache_countries`
+          (SELECT `country`, COUNT(*)  FROM `caches` WHERE `status`=1 AND `country`<>'  ' GROUP BY `country`);
+        SET nModified = nModified + ROW_COUNT();
+
+        DELETE FROM `stat_cache_countries` WHERE `country` NOT IN
+          (SELECT DISTINCT `country` FROM `caches` WHERE `status`=1);
+        SET nModified = nModified + ROW_COUNT();
+     END;"
+);
+
 /* Triggers
  */
 sql_dropTrigger('cachesBeforeInsert');
@@ -1115,6 +1134,11 @@ sql(
 
         INSERT IGNORE INTO `cache_countries` (`cache_id`, `date_created`, `country`)
         VALUES (NEW.`cache_id`, NOW(), NEW.`country`);
+
+        IF NEW.`status`=1 THEN
+            INSERT INTO `stat_cache_countries` (`country`, `active_caches`) VALUES (NEW.`country`,1)
+                ON DUPLICATE KEY UPDATE `active_caches`=`active_caches`+1;
+        END IF;
 
         CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
 
@@ -1232,6 +1256,16 @@ sql(
             INSERT IGNORE INTO `cache_countries`
                 (`cache_id`, `date_created`, `country`, `restored_by`)
             VALUES (NEW.`cache_id`, NOW(), NEW.`country`, IFNULL(@restoredby,0));
+        END IF;
+        IF NEW.`status` != OLD.`status` OR NEW.`country` != OLD.`country` THEN
+            IF OLD.`status`=1 THEN
+                UPDATE `stat_cache_countries` SET `active_caches`=`active_caches`-1
+                WHERE `stat_cache_countries`.`country`=OLD.`country`;
+            END IF;
+            IF NEW.`status`=1 THEN
+                INSERT INTO `stat_cache_countries` (`country`, `active_caches`) VALUES (NEW.`country`,1)
+                    ON DUPLICATE KEY UPDATE `active_caches`=`active_caches`+1;
+            END IF;
         END IF;
 
         IF
@@ -1361,7 +1395,12 @@ sql(
      FOR EACH ROW BEGIN
         INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`)
         VALUES (OLD.`cache_id`, OLD.`uuid`, 2, OLD.`node`);
-        
+
+        IF (OLD.`status`=1) THEN
+            UPDATE `stat_cache_countries` SET `active_caches`=`active_caches`-1
+            WHERE `stat_cache_countries`.`country`=OLD.`country`;
+        END IF;
+
         CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
      END;'
 );

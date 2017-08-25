@@ -164,27 +164,15 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
                                 <select id="usercountry" onclick="usercountry_change()">
+                                    <option disabled="disabled">- <?= _t('Many caches') ?> - </option>
 <?php
                                     global $tpl_usercountries;
-                                    $nLastGroup = 0;
-                                    $maxUserCountries = count($tpl_usercountries);
-                                    for ($i = 0; $i < $maxUserCountries; $i++) {
-                                        if ($nLastGroup != $tpl_usercountries[$i]['group']) {
-                                            echo '<option disabled="disabled">';
-                                            if ($tpl_usercountries[$i]['group'] == 1) {
-                                                echo '- ' . t('This OC node') . ' -';
-                                            } elseif ($tpl_usercountries[$i]['group'] == 2) {
-                                                echo '- ' . t('Other OC nodes') . ' -';
-                                            } elseif ($tpl_usercountries[$i]['group'] == 3) {
-                                                echo '- ' . t('Others') . ' -';
-                                            } else {
-                                                echo '-';
-                                            }
-                                            echo '</option>';
+                                    foreach ($tpl_usercountries as $usercountry) {
+                                        if ($usercountry === false) {
+                                            echo '<option disabled="disabled">- ' . t('Less caches') . ' - </option>';
+                                        } else {
+                                            echo '<option value="' . htmlspecialchars($usercountry['code'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$usercountry['code']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($usercountry['name'], ENT_COMPAT, 'UTF-8') . '</option>';
                                         }
-                                        $nLastGroup = $tpl_usercountries[$i]['group'];
-
-                                        echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
                                     }
 ?>
                                 </select>&nbsp;

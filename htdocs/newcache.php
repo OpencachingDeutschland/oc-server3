@@ -6,6 +6,7 @@
  ***************************************************************************/
 
 use Oc\GeoCache\StatisticPicture;
+use Oc\Country\Country;
 
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
@@ -358,7 +359,7 @@ if ($error == false) {
 
         $langsoptions = '';
 
-        //check if selected country is in list_default
+        //check if selected language is in list_default
         if ($show_all_langs == 0) {
             $rs = sql(
                 "SELECT `show` FROM `languages_list_default` WHERE `show`='&1' AND `lang`='&2'",
@@ -431,68 +432,32 @@ if ($error == false) {
         //countryoptions
         $countriesoptions = '';
 
-        //check if selected country is in list_default
-        if ($show_all_countries == 0) {
-            $rs = sql(
-                "SELECT `show` FROM `countries_list_default` WHERE `show`='&1' AND `lang`='&2'",
-                $sel_country,
-                $locale
-            );
-            if (mysql_num_rows($rs) == 0) {
-                $show_all_countries = 1;
-            }
-            sql_free_result($rs);
+        //check if selected country is main countries list
+        $country = new Country($sel_country, 'cache');
+        if ($show_all_countries != 1 && !$country->isMain()) {
+            $show_all_countries = 1;
         }
 
-        if ($show_all_countries == 0) {
+        if ($show_all_countries != 1) {
             tpl_set_var('show_all_countries', '0');
             tpl_set_var(
                 'show_all_countries_submit',
                 '<input type="submit" id="showallcountries" class="formbutton" name="show_all_countries_submit" value="' . $show_all . '" onclick="submitbutton(\'showallcountries\')" />'
             );
-
-            $rs = sql(
-                "SELECT `countries`.`short`,
-                        IFNULL(`sys_trans_text`.`text`,
-                        `countries`.`name`) AS `name`
-                 FROM `countries`
-                 INNER JOIN `countries_list_default`
-                   ON `countries_list_default`.`show`=`countries`.`short`
-                 LEFT JOIN `sys_trans`
-                   ON `countries`.`trans_id`=`sys_trans`.`id`
-                 LEFT JOIN `sys_trans_text`
-                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                   AND `sys_trans_text`.`lang`='&1'
-                 WHERE `countries_list_default`.`lang`='&1'
-                 ORDER BY `name` ASC",
-                $locale
-            );
+            $rs = $country->getMainRS();
         } else {
             tpl_set_var('show_all_countries', '1');
             tpl_set_var('show_all_countries_submit', '');
-
-            $rs = sql(
-                "SELECT `countries`.`short`,
-                        IFNULL(`sys_trans_text`.`text`,
-                        `countries`.`name`) AS `name`
-                 FROM `countries`
-                 LEFT JOIN `sys_trans`
-                   ON `countries`.`trans_id`=`sys_trans`.`id`
-                 LEFT JOIN `sys_trans_text`
-                   ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                   AND `sys_trans_text`.`lang`='&1'
-                ORDER BY `name` ASC",
-                $locale
-            );
+            $rs = $country->getAllRS();
         }
 
         // $opt['locale'][$locale]['country'] would give country of chosen langugage
         // build the "country" dropdown list, preselect $sel_country
         while ($record = sql_fetch_array($rs)) {
-            $sSelected = ($record['short'] == $sel_country) ? ' selected="selected"' : '';
+            $sSelected = ($record['code'] == $sel_country) ? ' selected="selected"' : '';
             $countriesoptions .= '<option value="' .
                 htmlspecialchars(
-                    $record['short'],
+                    $record['code'],
                     ENT_COMPAT,
                     'UTF-8'
                 ) . '"' . $sSelected . '>' .

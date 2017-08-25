@@ -19,7 +19,6 @@ require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/user.class.php';
 require_once __DIR__ . '/lib2/logic/logtypes.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
-require_once __DIR__ . '/lang/de/ocstyle/editlog.inc.php';
 
 $tpl->name = 'editlog';
 $tpl->menuitem = MNU_CACHES_EDITLOG;
@@ -73,7 +72,7 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         $log_record['status'] != 7) || $useradmin
 ) {
     if ($log_record['node'] != $opt['logic']['node']['id']) {
-        tpl_errorMsg('editlog', $error_wrong_node);
+        $tpl->error(ERROR_WRONG_NODE);
         exit;
     }
 
@@ -156,29 +155,17 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
             $user->getUserId()
         );
 
-        $rating_percentage = $opt['logic']['rating']['percentageOfFounds'];
-        if ($is_top || ($user_tops < floor($user_founds * $rating_percentage / 100))) {
-            $rating_msg = mb_ereg_replace(
-                '{chk_sel}',
-                ($is_top ? 'checked' : ''),
-                $rating_allowed . '<br />' . $rating_stat
-            );
-            $rating_msg = mb_ereg_replace('{max}', floor($user_founds * $rating_percentage / 100), $rating_msg);
-            $rating_msg = mb_ereg_replace('{curr}', $user_tops, $rating_msg);
-        } else {
-            $anzahl = (int) (($user_tops + 1 - ($user_founds * $rating_percentage / 100)) / ($rating_percentage / 100));
-            if ($anzahl > 1) {
-                $rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-            } else {
-                $rating_msg = mb_ereg_replace('{anzahl}', $anzahl, $rating_too_few_founds);
-            }
+        // is user cache owner
+        $cache = new cache($log_record['cache_id']);
+        $isOwner = ($user->getUserId() == $cache->getUserId());
 
-            if ($user_tops) {
-                $rating_msg .= '<br />' . $rating_maywithdraw;
-            }
-        }
-
-        $tpl->assign('rating_message', mb_ereg_replace('{rating_msg}', $rating_msg, $rating_tpl));
+        // assing ratings to template
+        $tpl->assign('ratingallowed', $user->allowRatings());
+        $tpl->assign('givenratings', $user->getGivenRatings());
+        $tpl->assign('maxratings', $user->getMaxRatings());
+        $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
+        $tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
+        $tpl->assign('isowner', $isOwner);
 
         if (isset($_POST['descMode'])) {
             $descMode = $_POST['descMode'] + 0; // Ocprop: 2
@@ -412,23 +399,19 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
             $logtypeoptions .= '</option>' . "\n";
         }
         $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
-        $tpl->assign('type_edit_disabled', $disable_typechange ? $type_edit_disabled : '');
+        $tpl->assign('type_edit_disabled', $disable_typechange);
 
         // TODO: Enforce the 'disables' when processing the posted data.
         // It's not that urgent, because nothing can be broken by changing
         // past status log types (it was even allowed up to OC 3.0.17);
         // just the log history may look weird.
 
-        if (teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment'])) {
-            $tpl->assign(
-                'teamcommentoption',
-                mb_ereg_replace('{chk_sel}', ($oc_team_comment ? 'checked' : ''), $teamcomment_field)
-            );
-        } else {
-            $tpl->assign('teamcommentoption', '');
-        }
-
         //set template vars
+        $tpl->assign(
+            'teamcommentoption',
+            teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment'])
+        );
+        $tpl->assign('is_teamcomment', $oc_team_comment);
         $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('logtypeoptions', $logtypeoptions);
         $tpl->assign('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
@@ -438,9 +421,8 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         $tpl->assign('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('cachename', htmlspecialchars($cache_name, ENT_COMPAT, 'UTF-8'));
         $tpl->assign('cacheid', $log_record['cache_id']);
-        $tpl->assign('submit', $submit);
         $tpl->assign('logid', $log_id);
-        $tpl->assign('date_message', !$date_ok ? $date_message : '');
+        $tpl->assign('date_ok', $date_ok);
 
         if ($descMode != 1) {
             $tpl->assign('logtext', htmlspecialchars($represent_text, ENT_COMPAT, 'UTF-8'), true);
@@ -467,36 +449,10 @@ if (($log_record !== false && (($log_record['status'] != 6) || ($log_record['cac
         }
         $tpl->add_header_javascript(editorJsPath());
 
-        if ($use_log_pw == true && $log_pw != '') {
-            if (!$pw_ok && isset($_POST['submitform'])) {
-                $tpl->assign('log_pw_field', $log_pw_field_pw_not_ok);
-            } else {
-                $tpl->assign('log_pw_field', $log_pw_field);
-            }
-        } else {
-            $tpl->assign('log_pw_field', '');
-        }
-
-        // build smilies
-        $smilies = '';
-        if ($descMode != 3) {
-            $countShow = count($smiley['show']);
-            for ($i = 0; $i < $countShow; $i++) {
-                if ($smiley['show'][$i] == '1') {
-                    $tmp_smiley = $smiley_link;
-                    $tmp_smiley = mb_ereg_replace('{smiley_image}', $smiley['image'][$i], $tmp_smiley);
-                    $tmp_smiley = mb_ereg_replace('{smiley_symbol}', $smiley['text'][$i], $tmp_smiley);
-                    $smilies = $smilies . '&nbsp;' .
-                        mb_ereg_replace(
-                            '{smiley_file}',
-                            $smiley['file'][$i],
-                            $tmp_smiley
-                        ) . '&nbsp;';
-                }
-            }
-            $tpl->assign('smileypath', $opt['template']['smiley']);
-        }
-        $tpl->assign('smilies', $smilies);
+        $tpl->assign('use_log_pw', $use_log_pw);
+        $tpl->assign('wrong_log_pw', !$pw_ok && isset($_POST['submitform']));
+        $tpl->assign('smileypath', $opt['template']['smiley']);
+        $tpl->assign('smilies', $smiley_a);
     }
 }
 

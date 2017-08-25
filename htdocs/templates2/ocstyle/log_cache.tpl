@@ -324,17 +324,17 @@ function show_tip(text)
     </td>
     </tr>
     {if $descMode!=3}
-    <tr>
-        <td colspan="2">
-            {strip}
-            {foreach from=$smilies item=smiley}
-                {if $smiley.show}
-                    <a href="javascript:insertSmiley('{$smiley.text}','{$smileypath}{$smiley.file}')">{$smiley.image}</a> &nbsp;
-                {/if}
-            {/foreach}
-            {/strip}
-        </td>
-    </tr>
+        <tr>
+            <td colspan="2">
+                {strip}
+                {foreach from=$smilies item=smiley}
+                    {if $smiley.show}
+                        <a href="javascript:insertSmiley('{$smiley.text}','{$smileypath}{$smiley.file}')">{$smiley.image}</a> &nbsp;
+                    {/if}
+                {/foreach}
+                {/strip}
+            </td>
+        </tr>
     {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
     {if $logpw}

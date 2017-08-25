@@ -7,19 +7,20 @@
 
 {literal}
 
-function insertSmiley(smileySymbol, smileyFile) {
+function insertSmiley(smileySymbol, smileyPath)
+{
   var myText = document.editform.logtext;
-  var insertText = (descMode == 1 ? smileySymbol : '<img src="{/literal}{$smileypath}{literal}' + smileyFile + '" alt="" border="0" width="18px" height="18px" />');
+  var insertText = (descMode == 1 ? smileySymbol : '<img src="' + smileyPath + '" alt="" border="0" width="18px" height="18px" />');
   myText.focus();
 
   /* for IE and Webkit */
-  if(typeof document.selection != 'undefined') {
+  if (typeof document.selection != 'undefined') {
     var range = document.selection.createRange();
     var selText = range.text;
     range.text = insertText + selText;
   }
   /* for Firefox/Mozilla */
-  else if(typeof myText.selectionStart != 'undefined')
+  else if (typeof myText.selectionStart != 'undefined')
   {
     var start = myText.selectionStart;
     var end = myText.selectionEnd;
@@ -70,10 +71,14 @@ function _chkFound () {
     <tr>
         <td width="180px">{t}Type of log-enrty{/t}</td>
         <td align="left">
-            <select name="logtype" onChange="return _chkFound()" {$type_edit_disabled}>
+            <select name="logtype" onChange="return _chkFound()" {if $type_edit_disabled}disabled class="disabled"{/if}>
                 {$logtypeoptions}
             </select>
-            {$teamcommentoption}
+            {if $teamcommentoption}
+                &nbsp;
+                <input type="checkbox" name="teamcomment" value="1" class="checkbox" {if $is_teamcomment}checked{/if} id="teamcomment" />
+                <label for="teamcomment">{t}OC team comment{/t}</label>
+            {/if}
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
@@ -87,7 +92,7 @@ function _chkFound () {
             &nbsp;&nbsp;&nbsp;
             <input class="input20" type="text" name="loghour" maxlength="2" value="{$loghour}" /> :
             <input class="input20" type="text" name="logminute" maxlength="2" value="{$logminute}" />
-            &nbsp;&nbsp;{$date_message}
+            &nbsp;&nbsp;{if !$date_ok}<span class="errormsg">{t}date or time is invalid{/t}</span>{/if}
         </td>
     </tr>
     <tr>
@@ -98,7 +103,21 @@ function _chkFound () {
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
-    {$rating_message}
+    {if $isowner==false}
+    <tr>
+        <td valign="top">{t}Recommendations:{/t}</td>
+        <td valign="top">
+            {if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" id="rating" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;<label for="rating">{t}This cache is one of my recommendations.{/t}</label><br />
+                {t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
+            {else}
+                {t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
+                {if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
+            {/if}
+            <noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>
+        </td>
+    </tr>
+    {/if}
+    <tr><td class="spacer" colspan="2"></td></tr>
 </table>
 <table class="table">
     <tr>
@@ -122,15 +141,33 @@ function _chkFound () {
             <textarea name="logtext" id="logtext" cols="68" rows="25" class="logs" >{$logtext}</textarea>
     </td>
     </tr>
-    <tr>
-        <td colspan="2">
-            {$smilies}
-        </td>
-    </tr>
+    {if $descMode!=3}
+        <tr>
+            <td colspan="2">
+                {strip}
+                {foreach from=$smilies item=smiley}
+                    {if $smiley.show}
+                        <a href="javascript:insertSmiley('{$smiley.text}','{$smileypath}{$smiley.file}')">{$smiley.image}</a> &nbsp;
+                    {/if}
+                {/foreach}
+                {/strip}
+            </td>
+        </tr>
+    {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
-
-        {$log_pw_field}
-
+        {if $use_log_pw}
+            <tr>
+                <td colspan="2">
+                    {t}passwort to log:{/t}
+                    <input class="input100" type="text" name="log_pw" maxlength="20" value="" />
+                    ({t}only for found logs{/t})
+                    {if $wrong_log_pw}
+                        &nbsp; <span class="errormsg">{t}Invalid password!{/t}</span>
+                    {/if}
+                </td>
+            </tr>
+            <tr><td class="spacer" colspan="2"></td></tr>
+        {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td colspan="2">
@@ -140,7 +177,7 @@ function _chkFound () {
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td class="header-small" colspan="2">
-            <input type="submit" name="submitform" value="{$submit}" class="formbutton" onclick="submitbutton('submitform')" />
+            <input type="submit" name="submitform" value="{t}Save{/t}" class="formbutton" onclick="submitbutton('submitform')" />
         </td>
     </tr>
 </table>

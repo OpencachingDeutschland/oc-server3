@@ -1168,10 +1168,10 @@ function dbv_160()
 {
     // initiate refresh of cache desc fulltext search index, see redmine #986
     sql(
-      "UPDATE `search_index_times`
-       SET `last_refresh`='2000-01-01 00:00:00'
-       WHERE `object_type`='&1'",
-      OBJECT_CACHEDESC
+        "UPDATE `search_index_times`
+         SET `last_refresh`='2000-01-01 00:00:00'
+         WHERE `object_type`='&1'",
+        OBJECT_CACHEDESC
     );
 }
 

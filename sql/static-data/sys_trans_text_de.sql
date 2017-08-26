@@ -1946,3 +1946,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2650', 'DE', 'Dieser Cache wird heute um <b>%1</b> Uhr veröffentlicht.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2651', 'DE', 'Dieser Cache wird <b>morgen</b> um <b>%1</b> Uhr veröffentlicht.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2652', 'DE', 'Dieser Cache wird  <b>in %1 Tagen</b> (%2) um <b>%3</b> Uhr veröffentlicht.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2655', 'DE', 'Einfügen:', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2656', 'DE', 'als erstes Bild', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2657', 'DE', 'nach &bdquo;%1&ldquo;', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2658', 'DE', 'als letztes Bild', '2017-08-20 19:30:00');

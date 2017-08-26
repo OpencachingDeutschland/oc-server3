@@ -120,7 +120,17 @@ if ($error == false) {
                 ) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
                 $top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
                 $top_cache = isset($_POST['rating']) ? $_POST['rating'] + 0 : 0;
-                $oc_team_comment = isset($_POST['submitform']) ? @$_POST['teamcomment'] + 0 : ($log_record['oc_team_comment'] == 1);
+
+                if (isset($_POST['submitform']) ||
+                    (
+                        isset($_POST['oldDescMode']) && isset($_POST['descMode'])
+                        && $_POST['oldDescMode'] != $_POST['descMode']
+                    )
+                ) {
+                    $oc_team_comment = isset($_POST['teamcomment']) ? $_POST['teamcomment'] != '' : false;
+                } else {
+                    $oc_team_comment = ($log_record['oc_team_comment'] == 1);
+                }
 
                 $log_pw = '';
                 $use_log_pw = (($log_record['logpw'] == null) || ($log_record['logpw'] == '')) ? false : true;
@@ -404,7 +414,7 @@ if ($error == false) {
                 );
                 $logtypeoptions = '';
                 foreach ($allowed_logtypes as $logtype) {
-                    $selected = ($log_record['logtype'] == $logtype ? ' selected="selected"' : '');
+                    $selected = ($log_type == $logtype ? ' selected="selected"' : '');
                     $logtypeoptions .= '<option value="' . $logtype . '"' . $selected . '>';
                     $logtypeoptions .= htmlspecialchars($logtype_names[$logtype], ENT_COMPAT, 'UTF-8');
                     $logtypeoptions .= '</option>' . "\n";

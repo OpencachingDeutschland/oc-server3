@@ -163,27 +163,29 @@ function editcomment(edit)
         {if !$ownreport}
             <input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
         {else}
-            &nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />
+            &nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />{if $inprogress}&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />{/if}
             </p>
 
-            <div class="content2-container bg-blue02">
-                <p class="content-title-noshade-size2">
-                    <img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" />
-                    {t}Set state{/t}
+            {if $inprogress}
+                <div class="content2-container bg-blue02">
+                    <p class="content-title-noshade-size2">
+                        <img src="resource2/{$opt.template.style}/images/description/22x22-utility.png" style="margin-right: 10px;" width="22" height="22" alt="" />
+                        {t}Set state{/t}
+                    </p>
+                </div>
+
+                <p style="line-height: 1.6em;">
+                    <a href="log.php?cacheid={$cacheid}&logtype=10&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-active.png" />{t}Available{/t}</a>
+                    &nbsp; &nbsp;
+                    <a href="log.php?cacheid={$cacheid}&logtype=11&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" />{t}Temporarily not available{/t}</a>
+                    &nbsp; &nbsp;
+                    <a href="log.php?cacheid={$cacheid}&logtype=9&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" />{t}Archived{/t}</a>
+                    &nbsp; &nbsp;
+                    <a href="log.php?cacheid={$cacheid}&logtype=13&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" />{t}Locked, visible{/t}</a>
+                    &nbsp; &nbsp;
+                    <a href="log.php?cacheid={$cacheid}&logtype=14&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" />{t}Locked, invisible{/t}</a>
                 </p>
-            </div>
-
-            <p style="line-height: 1.6em;">
-                <a href="log.php?cacheid={$cacheid}&logtype=10&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-active.png" />{t}Available{/t}</a>
-                &nbsp; &nbsp;
-                <a href="log.php?cacheid={$cacheid}&logtype=11&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-disabled.png" />{t}Temporarily not available{/t}</a>
-                &nbsp; &nbsp;
-                <a href="log.php?cacheid={$cacheid}&logtype=9&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-archived.png" />{t}Archived{/t}</a>
-                &nbsp; &nbsp;
-                <a href="log.php?cacheid={$cacheid}&logtype=13&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked.png" />{t}Locked, visible{/t}</a>
-                &nbsp; &nbsp;
-                <a href="log.php?cacheid={$cacheid}&logtype=14&teamcomment=1" target="_blank"><img src="resource2/{$opt.template.style}/images/log/16x16-locked-invisible.png" />{t}Locked, invisible{/t}</a>
-            </p>
+            {/if}
             {if $otheradmin}
                 </p><br />{t}Warning: This report is already assigned to another admin. Consult him first before you assume the report!{/t}
             {/if}

@@ -111,6 +111,7 @@ if ($id == 0) {
                 IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
                 `cr`.`note`,
                 IFNULL(tt.text, crs.name) AS `status`,
+                `cr`.`status`='&2' AS `inprogress`,
                 `cr`.`date_created`, `cr`.`lastmodified`,
                 `c`.`name` AS `cachename`,
                 `c`.`user_id` AS `ownerid`,
@@ -121,10 +122,11 @@ if ($id == 0) {
          LEFT JOIN `user` AS `u1` ON `u1`.`user_id`=`cr`.`userid`
          LEFT JOIN `user` AS `u2` ON `u2`.`user_id`=`cr`.`adminid`
          LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
-         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&2'
-         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&2'
+         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&3'
+         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&3'
          WHERE `cr`.`id`= &1",
         $id,
+        CACHE_REPORT_INPROGRESS,
         $opt['template']['locale']
     );
 
@@ -187,6 +189,7 @@ if ($id == 0) {
     $tpl->assign('list', false);
     $tpl->assign('otheradmin', $record['adminid'] > 0 && $record['adminid'] != $login->userid);
     $tpl->assign('ownreport', $record['adminid'] == $login->userid);
+    $tpl->assign('inprogress', $record['inprogress']);
     $tpl->assign(
         'other_report_in_progress',
         sql_value(

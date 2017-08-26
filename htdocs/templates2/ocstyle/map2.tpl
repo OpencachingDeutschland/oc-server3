@@ -1159,6 +1159,7 @@ function parseXML_GetHTML(xmlobject)
     var nTerrain = aCaches[0].getAttribute("terrain");
     var sListedSince = aCaches[0].getAttribute("listed_since");
     var bIsPublishdate = aCaches[0].getAttribute("is_publishdate");
+    var sHiddenOn = aCaches[0].getAttribute("hidden_on");
     var nTopRating = aCaches[0].getAttribute("toprating");
     var nGeoKreties = aCaches[0].getAttribute("geokreties");
     var bFound = aCaches[0].getAttribute("found");
@@ -1191,7 +1192,7 @@ function parseXML_GetHTML(xmlobject)
     sHtml += "<tr><td colspan='3' height='3px'></td></tr>";
 
     sHtml += "<tr><td colspan='2'>" + xmlentities(sTypeText) + " (" + xmlentities(sSizeText) + ")</td><td align='right' rowspan='2'>" + (bOconly==1 ? "{$help_oconly}<img src='resource2/ocstyle/images/misc/is_oconly_small.png' alt='OConly' title='OConly' /></a>" : "") + "</td></tr>";
-    sHtml += "<tr><td colspan='2'>" + (nTypeId == 6 ? "{t escape=js}Event date:{/t}" : (bIsPublishdate == true ? "{t escape=js}Published on:{/t}" : "{t escape=js}Listed since:{/t}")) + " " + xmlentities(sListedSince) + "</td></tr>";
+    sHtml += "<tr><td colspan='2'>" + (nTypeId == 6 ? "{t escape=js}Event date:{/t}" : (bIsPublishdate == true ? "{t escape=js}Published on:{/t}" : "{t escape=js}Listed since:{/t}")) + " " + xmlentities(nTypeId == 6 ? sHiddenOn : sListedSince) + "</td></tr>";
 
     sAddHtml = "";
     if (bOwner==1)

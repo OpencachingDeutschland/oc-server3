@@ -36,7 +36,7 @@
     <h2>{t 1=$username}Restore cache listings of %1{/t}</h2>
 
     {if !$disabled && $step<5}
-        <p class="redtext">{t 1=$username}User '%1' is not disabled. You can view recorded changes, but not revert them.{/t}</p>
+        <p class="redtext">{t 1=$username}User '%1' is not disabled. To reset one or more caches to a previous version, you need the user's permission.{/t}</p>
     {/if}
 
     {if $error != "" && ($error  != "notsure" || !$simulate)}
@@ -52,9 +52,11 @@
             {t}You must choose the listing elements to be restored.{/t} {t}Use your browser's 'back' button to try again.{/t}
         {elseif $error == "notsure"}
             {t}You did not say that you are sure.{/t} {t}Use your browser's 'back' button to try again.{/t}
+        {elseif $error == "noallowance"}
+            {t}You did not confirm that the user has allowed to restore his caches.{/t}
         {/if}
         </p>
-        {if $error!="notsure" && $error!="nodate" && $error!="nochecks"}
+        {if $error != "notsure" && $error != "nodate" && $error != "nochecks" && $error != "noallowance"}
             <br />
             <form method="post" action="restorecaches.php">
                 <input type="hidden" name="finduser" value="1" />
@@ -65,9 +67,7 @@
 
     {* step 3: select caches *}
     {elseif $step == 3}
-        {if $disabled}
-            <p>{t}Please select the listings to restore{/t}:</p>
-        {/if}
+        <p>{t}Please select the listings to restore{/t}:</p>
         <br />
         <form method="post" action="restorecaches.php">
             <input type="hidden" name="caches" value="1" />
@@ -117,10 +117,18 @@
             <input type="hidden" name="username" value="{$username}" />
             <input type="hidden" name="cacheids" value="{$cachelist}" />
             <input type="hidden" name="doit" value="1" />
-            {if $today}
+            {if $today && !$rootadmin}
                 <p class="redtext">{t}The user changed one or more of these caches today, therefore you cannot revert changes. This can be done not before tomorrow.{/t}</p>
             {/if}
-            {if ($disabled && !$today) || $rootadmin}
+            {if !$today || $rootadmin}
+                {if !$disabled}
+                    <div style="margin:2em; padding:1em; border:1px dashed black;">
+                        <table><tr><td class="default">
+                            <input type="checkbox" name="allowance" id="allowance" value="1" />
+                            &nbsp;{t}The user has allowed to reset the selected caches to a previous version.{/t}
+                        </td></tr></table>
+                    </div>
+                {/if}
                 <p>{t}Please select the date from which on all changes are to be reverted.<br />The listing will be reset to the contents it had on that day at 00:00:00.{/t}</p>
             {/if}
             <br />
@@ -134,7 +142,7 @@
 
                 {foreach from=$dates key=date item=caches}
                     <tr>
-                        <td>{if ($disabled && !$today) || $rootadmin}<input type="radio" name="dateselect" value="{$date}" />{/if}</td>
+                        <td>{if !$today || $rootadmin}<input type="radio" name="dateselect" value="{$date}" />{/if}</td>
                         <td>{$date|date_format:$opt.format.date}</td>
                     </tr>
                      {foreach from=$caches key=wp item=text}
@@ -155,29 +163,24 @@
             {if $today && $rootadmin}
                 <p class="redtext">{t}Warning: If you revert any owner-made listing changes of <em>today</em>, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords &amp; country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore <span style="text-decoration:underline">it is strongly recommended to revert vandalism not before the next day!</span>{/t}</p>
             {/if}
-            {if $disabled || $rootadmin}
-                <p>{t}Restore{/t} ...</p>
-                <p>
-                    <input type="checkbox" name="restore_coords" value="1" /> {t}coordinates and country{/t}&nbsp;&nbsp;
-                    <input type="checkbox" name="restore_settings" value="1" /> {t}name, settings, attributes and hide-date{/t} &nbsp;&nbsp;
-                    <input type="checkbox" name="restore_waypoints" value="1" /> {t}GC/NC waypoints{/t} <br />
-                    <input type="checkbox" name="restore_desc" value="1" /> {t}description(s) incl. pictures{/t} &nbsp;&nbsp;
-                    <input type="checkbox" name="restore_logs" value="1" /> {t}logs incl. pictures{/t} &nbsp;&nbsp;
-                    <a href="javascript:checkall('checked')">{t}_all{/t}</a> &nbsp; <a href="javascript:checkall('')">{t}nothing{/t}</a>
-                </p>
-                <p>
-                    <em>{t}Excluded from restore: cache status, OConly attribute, additional waypoints, log password, preview picture status{/t}</em>
-                </p>
-                <p>
-                    <input type="checkbox" name="sure" value="1" /> {t}Sure?{/t} &nbsp;&nbsp;
-                  <input type="checkbox" name="simulate" value="1" /> {t}simulate{/t}
-                </p>
-                <br />
-                <p><input type="submit" class="formbutton" name="revert" value="{t}Revert Vandalism{/t}" style="width:200px" onclick="submitbutton('revert')" /></p>
-                {if !$disabled && $rootadmin}
-                    <p>{t}You are root admin and can override the warnings. Take care!{/t}</p>
-                {/if}
-            {/if}
+            <p>{t}Restore{/t} ...</p>
+            <p>
+                <input type="checkbox" name="restore_coords" value="1" /> {t}coordinates and country{/t}&nbsp;&nbsp;
+                <input type="checkbox" name="restore_settings" value="1" /> {t}name, settings, attributes and hide-date{/t} &nbsp;&nbsp;
+                <input type="checkbox" name="restore_waypoints" value="1" /> {t}GC/NC waypoints{/t} <br />
+                <input type="checkbox" name="restore_desc" value="1" /> {t}description(s) incl. pictures{/t} &nbsp;&nbsp;
+                <input type="checkbox" name="restore_logs" value="1" /> {t}logs incl. pictures{/t} &nbsp;&nbsp;
+                <a href="javascript:checkall('checked')">{t}_all{/t}</a> &nbsp; <a href="javascript:checkall('')">{t}nothing{/t}</a>
+            </p>
+            <p>
+                <em>{t}Excluded from restore: cache status, OConly attribute, additional waypoints, log password, preview picture status{/t}</em>
+            </p>
+            <p>
+                <input type="checkbox" name="sure" value="1" /> {t}Sure?{/t} &nbsp;&nbsp;
+              <input type="checkbox" name="simulate" value="1" /> {t}simulate{/t}
+            </p>
+            <br />
+            <p><input type="submit" class="formbutton" name="revert" value="{t}Revert Vandalism{/t}" style="width:200px" onclick="submitbutton('revert')" /></p>
         </form>
 
     {* step 4: listings are restored - show result *}

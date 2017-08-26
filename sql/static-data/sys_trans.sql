@@ -1937,6 +1937,9 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2637', 'This Ge
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2638', 'Please verify that the geocache description is complete and all properties and attributes are set properly, according to the <a %1>instructions</a>. Then click <strong><a href=\"editcache.php?cacheid=%2&publish=now#others\">here</a></strong> and \"Save\" to publish your geocache.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2640', 'Do you really want to delete the picture \\\'{title}\\\'?', '2017-08-22 18:45:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2641', 'There is already a report in progress for this cache, see below.', '2017-08-23 13:20:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2644', 'User \'%1\' is not disabled. To reset one or more caches to a previous version, you need the user\'s permission.', '2017-08-23 13:20:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2645', 'You did not confirm that the user has allowed to restore his caches.', '2017-08-23 13:20:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2646', 'The user has allowed to reset the selected caches to a previous version.', '2017-08-23 13:20:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2647', 'Admin info:', '2017-08-23 13:20:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2648', 'There already are %1 pending reports for this geocache.', '2017-08-23 13:20:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2649', 'There already is a pending report for this geocache.', '2017-08-23 13:20:00');

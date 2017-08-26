@@ -53,6 +53,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - support line breaks in filed notes file [#1042](https://redmine.opencaching.de/issues/1042)
 - show only log password if it is needed [#1021](https://redmine.opencaching.de/issues/1021)
 - trim input values like listing name [#221](https://redmine.opencaching.de/issues/221)
+- optimize admin view [#1002](https://redmine.opencaching.de/issues/1002)
+
 
 ### Removed
 

@@ -38,7 +38,7 @@
 
         <table class="table">
             <tr>
-                <td colspan="2" class="info">
+                <td colspan="2">
                     {t}Prior to reporting a cache to your Opencaching team you should try to
                     contact the owner, to solve possible problems immediate user to user.
                     This does not apply for caches violating the Opencaching terms of use
@@ -47,7 +47,7 @@
             </tr>
             {if $help_reportreasons}
                 <tr>
-                    <td colspan="2" class="info">
+                    <td colspan="2">
                     <img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="Info" />
                     {$help_reportreasons}{t}Good and inappropriate reasons to report a cache{/t}</a>
                 </tr>
@@ -56,12 +56,25 @@
                 <td class="spacer" colspan="2"></td>
             </tr>
             <tr>
-                <td colspan="2" class="info">
+                <td colspan="2">
                     {t 1=$processing_reports 2=$open_reports}%1 reports are being processed, %2 reports are pending{/t}{if $waitdays_min};
                         {t 1=$waitdays_min 2=$waitdays_max}queuing time for new reports: about %1 to %2 days{/t}
                     {/if}
                 </td>
             </tr>
+            {if $cache_open_reports > 0}
+                <tr><td colspan="2"></td></tr>
+                <tr>
+                    <td colspan="2" class="redtext">
+                        {t}Admin info:{/t}
+                        {if $cache_open_reports > 1}
+                            {t 1=$cache_open_reports}There already are %1 pending reports for this geocache.{/t}</span>
+                        {else}
+                            {t}There already is a pending report for this geocache.{/t}</span>
+                        {/if}
+                    </td>
+                </tr>
+            {/if}
             <tr><td colspan="2">&nbsp;</td></tr>
             <tr>
                 <td colspan="2">{t}Reason:{/t}&nbsp;

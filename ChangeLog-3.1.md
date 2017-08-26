@@ -46,6 +46,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
 - cookie notice [#768](https://redmine.opencaching.de/issues/768)
 - image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
+- new restore functionality for oc support [#1094](https://redmine.opencaching.de/issues/1094)
 
 ### Changed
 - change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)

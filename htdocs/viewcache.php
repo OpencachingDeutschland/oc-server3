@@ -124,7 +124,8 @@ $rs = sql(
             `caches`.`protect_old_coords` OR `user`.`is_active_flag`=0 AS `protect_old_coords`,
             `caches`.`needs_maintenance`,
             `caches`.`listing_outdated`,
-            `caches`.`date_activate`,
+            `caches`.`date_activate` AS `publish_date`,
+            DATEDIFF(DATE(`caches`.`date_activate`), DATE(NOW())) AS `publish_in_days`,
             `cache_desc`.`language` AS `desclanguage`,
             `cache_desc`.`short_desc` AS `shortdesc`,
             `cache_desc`.`desc` AS `desc`,
@@ -489,7 +490,9 @@ $tpl->assign('shortlink_url', $opt['page']['shortlink_url']);
 $tpl->assign('listing_admin', $login->listingAdmin());
 $tpl->assign('npahelplink', helppagelink('npa'));
 $tpl->assign('desclang', $desclang);
-$tpl->assign('date_activate', $rCache['date_activate']);
+
+$tpl->assign('publish_date', $rCache['publish_date']);
+$tpl->assign('publish_in_days', $rCache['publish_in_days']);
 
 // display the page
 $tpl->display();

@@ -12,8 +12,16 @@
     </div>
 {elseif $cache.status==5}
     <div class="isannotated">
-        {if $date_activate}
-          <p style="margin-bottom:0">{t 1=$date_activate|date_format:$opt.format.datelong 2=$date_activate|date_format:$opt.format.time}This geocache will be published on <b>%1</b> at <b>%2</b>.{/t}</p>
+        {if $publish_date}
+            <p style="margin-bottom:0">
+                {if $publish_in_days <= 0}
+                    {t 1=$publish_date|date_format:$opt.format.time}This geocache will be published today at <b>%1</b>.{/t}
+                {elseif $publish_in_days == 1}
+                    {t 1=$publish_date|date_format:$opt.format.time}This geocache will be published <b>tomorrow</b> at <b>%1</b>.{/t}
+                {else}
+                    {t 1=$publish_in_days 2=$publish_date|date_format:$opt.format.datelong 3=$publish_date|date_format:$opt.format.time}This geocache will be published <b>in %1 days</b> (%2) at <b>%3</b>.{/t}
+                {/if}
+           </p>
         {else}
             <p><strong>{t}This Geocache has not been published yet.{/t}</strong></p>
             <p>{t 1="href='articles.php?page=cacheinfo' target='_blank'" 2=$cache.cacheid}Please verify that the geocache description is complete and all properties and attributes are set properly, according to the <a %1>instructions</a>. Then click <strong><a href="editcache.php?cacheid=%2&publish=now#others">here</a></strong> and "Save" to publish your geocache.{/t}

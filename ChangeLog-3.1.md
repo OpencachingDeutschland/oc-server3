@@ -45,8 +45,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - new theme structure and bootstrap 4
 - google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
 - cookie notice [#768](https://redmine.opencaching.de/issues/768)
-
-
+- image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
 
 ### Changed
 - change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)

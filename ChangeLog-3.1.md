@@ -40,11 +40,13 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)
 
 ### Added
-- added handicap cache attribute  [#1031](https://redmine.opencaching.de/issues/1031)
-- added maintenance mode [#841](https://redmine.opencaching.de/issues/841)
-- added new theme structure and bootstrap 4
-- adding google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
-- adding cookie notice [#768](https://redmine.opencaching.de/issues/768)
+- handicap cache attribute  [#1031](https://redmine.opencaching.de/issues/1031)
+- maintenance mode [#841](https://redmine.opencaching.de/issues/841)
+- new theme structure and bootstrap 4
+- google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
+- cookie notice [#768](https://redmine.opencaching.de/issues/768)
+
+
 
 ### Changed
 - change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)

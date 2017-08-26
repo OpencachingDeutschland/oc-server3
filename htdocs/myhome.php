@@ -131,14 +131,20 @@ $tpl->assign_rs(
 // $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
 
 // get log pictures
-$allpics = isset($_REQUEST['allpics']) && $_REQUEST['allpics'];
-$all_pictures = LogPics::get(LogPics::FOR_MYHOME_GALLERY);
-if ($allpics) {
-    LogPics::setPaging(LogPics::FOR_MYHOME_GALLERY, 0, 0, "myhome.php?allpics=1");
+$allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics'] : false;
+if ($allpics === '1') {
+    // downward compatibility for external or bookmarked links, see redmine #39 change
+    $allpics = 'ownlogs';
+}
+if ($allpics == 'ownlogs' || $allpics == 'owncaches') {
+    $gallery =  ($allpics == 'ownlogs' ? LogPics::FOR_OWNLOGS_GALLERY : LogPics::FOR_OWNCACHES_GALLERY);
+    $all_pictures = LogPics::get($gallery);
+    LogPics::setPaging($gallery, 0, 0, "myhome.php?allpics=1");
 } else {
+    $all_pictures = LogPics::get(LogPics::FOR_OWNLOGS_GALLERY);
     $tpl->assign('pictures', $all_pictures);
 }
-$tpl->assign('allpics', $allpics ? 1 : 0);
+$tpl->assign('allpics', $allpics);
 $tpl->assign('total_pictures', count($all_pictures));
 
 // display

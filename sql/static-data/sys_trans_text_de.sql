@@ -1560,7 +1560,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2121', 'DE', 'Du hast {curr} von {max} möglichen Empfehlungen abgegeben.', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2122', 'DE', 'Du benötigst noch {anzahl} Funde, um eine weitere Empfehlung vorzunehmen.', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2123', 'DE', 'Eine Empfehlung kann nur bei einem Gefunden-Logeintrag vorgenommen werden!', '2010-09-10 23:33:33');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'DE', 'Loghistorie anzeigen', '2010-09-10 23:33:33');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'DE', 'Logbildgalerie', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'DE', 'Loghistorie', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'DE', 'Logeinträge für Caches von %1', '2010-09-10 23:33:33');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'DE', 'eigene Logs ausblenden', '2010-09-10 23:33:33');
@@ -1935,6 +1935,8 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2638', 'DE', 'Prüfe bitte, ob die Cachebeschreibung vollständig ist und alle Cacheigenschaften und -attribute gemäß <a %1>Anleitung</a> eingetragen sind. Dann klicke <strong><a href=\"editcache.php?cacheid=%2&publish=now#others\">hier</a></strong> auf &bdquo;Speichern&ldquo;, um deinen Cache zu veröffentlichen.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2640', 'DE', 'Möchtest du das Bild &bdquo;{title}&ldquo; wirklich löschen?', '2017-08-22 18:45:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2641', 'DE', 'Für diesen Cache ist bereits eine Meldung in Arbeit, siehe unten.', '2017-08-23 13:20:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2642', 'DE', 'Logbilder für deine Caches:', '2017-08-24 13:50:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2643', 'DE', 'Es gibt noch keine Logbilder für deine Caches.', '2017-08-24 13:50:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2644', 'DE', 'Der Benutzer \'%1\' ist nicht deaktiviert. Du darfst seine Caches nur zurücksetzen, wenn er sein Einverständnis dazu gegeben hat.', '2017-08-23 13:20:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2645', 'DE', 'Du hast nicht bestätigt, dass der Benutzer mit dem Zurücksetzen der Caches einverstanden ist.', '2017-08-23 13:20:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2646', 'DE', 'Der Benutzer ist damit einverstanden, dass die ausgewählten Cachen zurückgesetzt werden.', '2017-08-23 13:20:00');

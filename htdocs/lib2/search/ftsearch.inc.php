@@ -325,7 +325,7 @@ function ftsearch_text2sort($str)
 function ftsearch_refresh()
 {
     ftsearch_refresh_all_caches();
-    ftsearch_refresh_all_cache_desc();
+    ftsearch_refresh_all_cache_descs();
     ftsearch_refresh_all_pictures();
     ftsearch_refresh_all_cache_logs();
 }
@@ -368,7 +368,7 @@ function ftsearch_refresh_cache($cache_id)
 }
 
 
-function ftsearch_refresh_all_cache_desc()
+function ftsearch_refresh_all_cache_descs()
 {
     $rs = sql(
         'SELECT `cache_desc`.`id`
@@ -406,7 +406,7 @@ function ftsearch_refresh_cache_desc($id)
         "
         SELECT
           `cache_id`,
-          `desc`,
+          CONCAT(`desc`, ' ', `short_desc`) AS `desc`,
           `last_modified`
         FROM `cache_desc`
         WHERE `id`='&1'",

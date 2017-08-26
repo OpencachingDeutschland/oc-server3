@@ -4,7 +4,7 @@ namespace OcTest\Modules\Oc\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
-require_once __DIR__ . '/../../../../htdocs/src/Oc/SmartyPlugins/modifier.urlencode.php';
+require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.urlencode.php';
 
 class ModifierUrlEncodeTest extends AbstractModuleTest
 {

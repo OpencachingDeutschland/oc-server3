@@ -4,7 +4,7 @@ namespace OcTest\Modules\Oc\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
-require_once __DIR__ . '/../../../../htdocs/src/Oc/SmartyPlugins/function.instr.php';
+require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.instr.php';
 
 /**
  * Class RandTest

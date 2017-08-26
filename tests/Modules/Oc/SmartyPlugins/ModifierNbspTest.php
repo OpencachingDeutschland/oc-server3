@@ -4,7 +4,7 @@ namespace OcTest\Modules\Oc\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
-require_once __DIR__ . '/../../../../htdocs/src/Oc/SmartyPlugins/modifier.nbsp.php';
+require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.nbsp.php';
 
 class ModifierNbspTest extends AbstractModuleTest
 {

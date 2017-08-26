@@ -6,6 +6,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Added
 - notice for unpublished cashes [#1063](https://redmine.opencaching.de/issues/1063)
+- notice for reported cashes [#1100](https://redmine.opencaching.de/issues/1100)
 
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)

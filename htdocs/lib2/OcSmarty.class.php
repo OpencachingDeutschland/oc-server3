@@ -54,7 +54,7 @@ class OcSmarty extends Smarty
         $this->cache_dir = __DIR__ . '/../var/cache2/smarty/cache/';
         $this->plugins_dir = [
             'plugins',
-            __DIR__ . '/../src/Oc/SmartyPlugins'
+            __DIR__ . '/../src/OcLegacy/SmartyPlugins'
         ];
 
         // disable caching ... if caching is enabled, 1 hour is default
@@ -62,7 +62,7 @@ class OcSmarty extends Smarty
         $this->cache_lifetime = 3600; // default
 
         // register additional functions
-        require_once __DIR__ . '/../src/Oc/SmartyPlugins/block.nocache.php';
+        require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
         $this->register_block('nocache', 'smarty_block_nocache', false);
         $this->load_filter('pre', 't');
 

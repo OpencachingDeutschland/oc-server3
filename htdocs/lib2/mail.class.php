@@ -33,7 +33,7 @@ class mail extends Smarty
         $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
         $this->plugins_dir = [
             'plugins',
-            __DIR__ . '/../src/Oc/SmartyPlugins'
+            __DIR__ . '/../src/OcLegacy/SmartyPlugins'
         ];
 
         // disable caching ...

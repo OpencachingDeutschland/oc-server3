@@ -41,7 +41,7 @@
     $params['locale'] = '';
     $langUrl .= '?' . http_build_query($params);
 
-    require_once __DIR__ . '/../src/Oc/SmartyPlugins/function.season.php';
+    require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/function.season.php';
 
     $sUserCountry = getUserCountry();
 

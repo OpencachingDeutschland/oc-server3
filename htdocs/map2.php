@@ -251,6 +251,7 @@ $tpl->assign('opt_maxcaches', $useroptions->getOptValue(USR_OPT_MAP_MAXCACHES));
 $tpl->assign('opt_cacheicons', $useroptions->getOptValue(USR_OPT_MAP_ICONSET));
 $tpl->assign('opt_pictures', $useroptions->getOptValue(USR_OPT_MAP_PREVIEW));
 
+$tpl->assign('default_maptype', $opt['map']['default_type']);
 $tpl->assign('maxrecords', $opt['map']['maxrecords'] + 0);
 $tpl->assign('min_maxrecords', $opt['map']['min_maxrecords']);
 $tpl->assign('max_maxrecords', $opt['map']['max_maxrecords']);

@@ -1948,3 +1948,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2649', 'There a
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2650', 'This geocache will be published today at <b>%1</b>.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2651', 'This geocache will be published <b>tomorrow</b> at <b>%1</b>.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2652', 'This geocache will be published <b>in %1 days</b> (%2) at <b>%3</b>.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2655', 'Insert:', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2656', 'as first picture', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2657', 'after "%1"', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2658', 'as last picture', '2017-08-20 19:30:00');

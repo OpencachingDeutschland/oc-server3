@@ -2013,7 +2013,11 @@ sql(
         IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
             SET NEW.`date_created`=NOW();
             SET NEW.`last_modified`=NOW();
-            IF NEW.`seq` = 0 THEN
+            IF NEW.`seq` <= 0 THEN
+                /*
+                 * position numbers always start at 1;
+                 * by default we append the new pic at the end
+                 */
                 SET NEW.`seq` =
                     IFNULL(
                         (SELECT MAX(`seq`)+1

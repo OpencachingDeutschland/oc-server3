@@ -16,6 +16,8 @@ class picture
     public $sFileExtension = '';
     public $bFilenamesSet = false;
 
+    private $originalPosition;
+
     public static function pictureIdFromUUID($uuid)
     {
         return sql_value("SELECT `id` FROM `pictures` WHERE `uuid`='&1'", 0, $uuid);
@@ -63,13 +65,14 @@ class picture
             $sUUID = mb_strtoupper(sql_value("SELECT UUID()", ''));
             $this->rePicture->setValue('uuid', $sUUID);
             $this->rePicture->setValue('node', $opt['logic']['node']['id']);
+            $this->originalPosition = false;
         } else {
             $this->rePicture->load($this->nPictureId);
+            $this->originalPosition = $this->getPosition();
 
             $sFilename = $this->getFilename();
             $fna = mb_split('\\.', $sFilename);
             $this->sFileExtension = mb_strtolower($fna[count($fna) - 1]);
-
             $this->bFilenamesSet = true;
         }
     }
@@ -525,6 +528,19 @@ class picture
     }
 
     /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        if ($this->originalPosition === false) {
+            // position numbers are always >= 1
+            $this->rePicture->setValue('seq', max(1, $position));
+        } else {
+            // repositioning existing pictures is not implemented yet
+        }
+    }
+
+    /**
      * @return bool|null
      */
     public function getAnyChanged()
@@ -586,6 +602,20 @@ class picture
         if ($this->bFilenamesSet == false) {
             return false;
         }
+
+        // produce a position number gap for inserting
+        sql(
+            "UPDATE `pictures`
+             SET `seq`=`seq`+1
+             WHERE `object_type`='&1' AND `object_id`='&2' AND `seq` >= '&3'
+             ORDER BY `seq` DESC",
+            $this->getObjectType(),
+            $this->getObjectId(),
+            $this->getPosition()
+        );
+
+        // The seq numbers need not to be consecutive, so it dosen't matter
+        // if something fails here and leaves the gap open.
 
         $this->setArchiveFlag($restore, $original_id);
         $bRetVal = $this->rePicture->save();
@@ -855,6 +885,8 @@ class picture
      */
     public function up()
     {
+        // TODO: protect the following operations by a transaction
+
         $prevPos = sql_value(
             "
             SELECT MAX(`seq`)
@@ -886,6 +918,10 @@ class picture
                 $this->getPictureId(),
                 $maxPos + 1
             );
+            // If something goes wrong from here (i.e. DB server failure) and
+            // we are moving anything else but the last picture, it will
+            // produce a wrong picture order. No big deal, the user can easily
+            // correct that, but still a transaction would be nice.
             sql(
                 "
                 UPDATE `pictures` SET `seq`='&4'

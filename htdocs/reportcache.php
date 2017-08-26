@@ -86,6 +86,17 @@ $tpl->assign('cacheid', $cacheid);
 $tpl->assign('cachename', $cache->getName());
 $tpl->assign('help_reportreasons', helppagelink('report_reasons'));
 
+if ($login->hasAdminPriv(ADMIN_USER)) {
+    $cache_open_reports = sql_value(
+        "SELECT COUNT(*) FROM `cache_reports` WHERE `cacheid`='&1' AND `status` IN (1,2)",
+        0,
+        $cacheid
+    );
+} else {
+    $cache_open_reports = 0;
+}
+$tpl->assign('cache_open_reports', $cache_open_reports);
+
 $open_reports = sql_value('SELECT COUNT(*) FROM `cache_reports` WHERE `status` = 1', 0);
 $processing_reports = sql_value(
     "SELECT COUNT(*) FROM `cache_reports` WHERE `status`=2 AND DATEDIFF(NOW(),`lastmodified`) <= 180",

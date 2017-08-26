@@ -143,7 +143,7 @@ class LogPics
                      $joinCaches
                      $joinCacheStatus
                      WHERE `object_type`=1 AND `logs`.`user_id`='&1' AND NOT `spoiler`
-                     ORDER BY `logs`.`order_date` DESC",
+                     ORDER BY `logs`.`order_date` DESC, `pics`.`seq` DESC",
                     $userId
                 );
                 break;
@@ -157,7 +157,7 @@ class LogPics
                      FROM `pictures` AS `pics`
                      $joinLogs
                      WHERE `object_type`=1 AND `logs`.`user_id`='&1'
-                     ORDER BY `logs`.`order_date` DESC",
+                     ORDER BY `logs`.`order_date` DESC, `pics`.`seq` DESC",
                     $login->userid
                 );
                 break;
@@ -176,7 +176,7 @@ class LogPics
                      $joinCaches
                      $joinUser
                      WHERE `object_type`=1 AND `caches`.`user_id`='&1'
-                     ORDER BY `logs`.`order_date` DESC",
+                     ORDER BY `logs`.`order_date` DESC, `pics`.`seq` DESC",
                     $login->userid
                 );
                 break;
@@ -215,7 +215,7 @@ class LogPics
                      WHERE
                         `object_type`=1 AND `logs`.`cache_id`='&1'
                         AND NOT (`data_license` IN ('&2', '&3'))
-                     ORDER BY `logs`.`order_date` DESC",
+                     ORDER BY `logs`.`order_date` DESC, `pics`.`seq` DESC",
                     $cacheId,
                     NEW_DATA_LICENSE_ACTIVELY_DECLINED,
                     NEW_DATA_LICENSE_PASSIVELY_DECLINED

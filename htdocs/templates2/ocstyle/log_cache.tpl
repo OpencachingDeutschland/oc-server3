@@ -70,11 +70,11 @@ function logtype_changed()
     else
         datecomment.innerHTML = "";
 
-    {if $logpw}
+    {if $use_log_pw}
         if (logtype == 1)
-            document.getElementById("cachelisting--logpw").style.display = "block";
+            document.getElementById("cachelisting-logpw").style.display = "block";
         else
-            document.getElementById("cachelisting--logpw").style.display = "none";
+            document.getElementById("cachelisting-logpw").style.display = "none";
     {/if}
 
     {literal}
@@ -352,12 +352,12 @@ function show_tip(text)
     {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
     {if $use_log_pw}
-    <tr id="cachelisting--logpw">
-        <td colspan="2">{t}passwort to log:{/t}
-            <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if !$validate.logPw}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
-        </td>
-    </tr>
-    <tr><td class="spacer" colspan="2"></td></tr>
+        <tr id="cachelisting-logpw">
+            <td colspan="2">{t}passwort to log:{/t}
+                <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if !$validate.logPw}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
+            </td>
+        </tr>
+        <tr><td class="spacer" colspan="2"></td></tr>
     {/if}
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>

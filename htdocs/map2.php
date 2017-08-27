@@ -311,6 +311,7 @@ function output_cachexml($sWaypoint)
                  IFNULL(`trans_size_text`.`text`, `cache_size`.`name`) AS `size`,
                  `caches`.`difficulty`, `caches`.`terrain`,
                  `caches`.`date_created`, `caches`.`is_publishdate`,
+                 `caches`.`date_hidden`,
                  IFNULL(`stat_caches`.`toprating`, 0) AS `toprating`,
                  IF(`caches`.`user_id`='&1', 1, 0) AS `owner`,
                  `user`.`username`, `user`.`user_id`,
@@ -395,6 +396,7 @@ function output_cachexml($sWaypoint)
     echo 'terrain="' . xmlentities($rCache['terrain'] / 2) . '" ';
     echo 'listed_since="' . xmlentities(strftime($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_created']))) . '" ';
     echo 'is_publishdate="' . xmlentities($rCache['is_publishdate']) . '" ';
+    echo 'hidden_on="' . xmlentities(strftime($opt['locale'][$opt['template']['locale']]['format']['date'], strtotime($rCache['date_hidden']))) . '" ';
     echo 'toprating="' . xmlentities($rCache['toprating']) . '" ';
     echo 'geokreties="' . xmlentities($nGeokretyCount) . '" ';
     echo 'found="' . xmlentities(($nFoundCount > 0) ? 1 : 0) . '" ';

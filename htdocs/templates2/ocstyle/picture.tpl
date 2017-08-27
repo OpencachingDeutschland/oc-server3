@@ -76,10 +76,10 @@
                 <td valign="top">{t}File:{/t}</td>
                 <td colspan="2">
                     <input type="hidden" name="MAX_FILE_SIZE" value="{$siteSettings.logic.pictures.maxsize}" />
-                    <input class="input300" name="file" type="file" />
+                    <input class="input400" name="file" type="file" />
                 </td>
             </tr>
-   {if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
+            {if $errorfile==ERROR_UPLOAD_ERR_NO_FILE}
                 <tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}No picture file given.{/t}</span></td></tr>
             {elseif $errorfile==ERROR_UPLOAD_ERR_SIZE}
                 <tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t 1=$siteSettings.logic.pictures.maxsize/1024|string_format:"%d"}The file was too big. The maximum file size is %1 KB.{/t}</span></td></tr>
@@ -87,6 +87,30 @@
                 <tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t}The file was not uploaded correctly.{/t}</span></td></tr>
             {elseif $errorfile==ERROR_UPLOAD_ERR_TYPE}
                 <tr><td>&nbsp;</td><td colspan="2"><span class="errormsg">{t 1=$siteSettings.logic.pictures.extensions|upper|replace:";":", "}Only the following picture formats are allowed: %1.{/t}</span></td></tr>
+            {/if}
+
+            {* The code would work for both cache and log pics, but probably noone will need
+               this for logs. (Logs are rarely edited later, usually have few pics and allow
+               easier reordering.)  *}
+
+            {if $allpics|@count > 0 && $objecttype==OBJECT_CACHE}
+                <tr><td class="spacer" colspan="2"></td></tr>
+                <tr>
+                    <td>{t}Insert:{/t}</td>
+                    <td colspan="3">
+                        <select name="position">
+                            <option value="{$allpics.0.seq}" {if $position <= $allpics.0.seq}selected{/if}>{t}as first picture{/t}</option>
+                            {assign var=picpos value=1}
+                            {foreach from=$allpics item=pic}
+                                {if $picpos < $allpics|@count}
+                                    <option value="{$pic.nextseq}" {if $position == $pic.nextseq}selected{/if}>{t 1=$pic.title|escape}after "%1"{/t}</option>
+                                {/if}
+                                {assign var=picpos value=$picpos+1}
+                            {/foreach}
+                            <option value="{$appendseq}" {if $position >= $appendseq}selected{/if}>{t}as last picture{/t}</option>
+                        </select>
+                    </td>
+                </tr>
             {/if}
         {/if}
 

@@ -426,4 +426,38 @@ class cachelog
 
         return ($masslogs > $opt['logic']['masslog']['count']);
     }
+
+    public static function validateDate($year, $month, $day, $hour, $minute, $submit)
+    {
+        $dateOk = false;
+
+        if (is_numeric($month)
+            && is_numeric($day)
+            && is_numeric($year)
+            && ($hour . $minute == '' || is_numeric($hour))
+            && ($minute == '' || is_numeric($minute))
+        ) {
+            $dateOk = checkdate($month, $day, $year)
+                && ($year >= 2000)
+                && ($hour >= 0)
+                && ($hour <= 23)
+                && ($minute >= 0)
+                && ($minute <= 59);
+            if ($dateOk && $submit) {
+                $dateOk = (
+                    mktime(
+                        $hour + 0,
+                        $minute + 0,
+                        0,
+                        $month,
+                        $day,
+                        $year
+                    )
+                    < time()
+                );
+            }
+        }
+
+        return $dateOk;
+    }
 }

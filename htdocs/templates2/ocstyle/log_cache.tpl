@@ -21,8 +21,10 @@ var tip_disable_lo = "{t}You may indicate here if the cache description is up-to
 var tip_dnf_nm = "{t}If you are sure that the geocache is gone, and the owner does not<br />react to your log entry, you may report it to the Opencaching team.<br />Use the 'Report this cache' button above the cache description.{/t}";
 
 var cache_listing_is_outdated = {$cache_listing_is_outdated} + 0;
+var old_listing_outdated = {$old_listing_outdated} + 0;
 var ownerlog = {$ownerlog} + 0;
-var dnf_by_logger = {$dnf_by_logger+0} && !ownerlog;
+var dnf_by_logger = ({$dnf_by_logger} + 0) && !ownerlog;
+var adminAction = {$adminAction} + 0;
 
 {literal}
 
@@ -79,16 +81,19 @@ function logtype_changed()
 
     {literal}
 
-
-    if (logtype == 1 || logtype == 7)
+    var ratinglabel = document.getElementById('ratinglabel');
+    if (ratinglabel !== null)
     {
-        if (document.editform.rating)
+        if (logtype == 1 || logtype == 7)
+        {
             document.editform.rating.disabled = false;
-    }
-    else
-    {
-        if (document.editform.rating)
+            ratinglabel.className = '';
+        }
+        else
+        {
             document.editform.rating.disabled = true;
+            ratinglabel.className = 'disabled';
+        }
     }
 
     var condition_logging = false;
@@ -122,13 +127,13 @@ function logtype_changed()
         lo.className = (!ownerlog && new_logtype == 2 ? 'disabled' : '');
     }
 
-    if ((new_logtype == 10) != (old_logtype == 10))
+    if (!adminAction && (new_logtype == 10) != (old_logtype == 10))
     {
-        nm.value = (old_logtype == 10 ? "0" : "1");
+        nm.value = (new_logtype == 10 ? "1" : "0");
         nm.disabled = (new_logtype == 10);
         nm.className = (new_logtype == 10 ? 'disabled' : '');
 
-        lo.value = (old_logtype == 10 ? "0" : "1");
+        lo.value = (new_logtype == 10 ? "1" : "0");
         lo.disabled = (new_logtype == 10);
         lo.className = (new_logtype == 10 ? 'disabled' : '');
         confirm_Lo.value = (new_logtype == 10 ? "1" : "0");
@@ -143,7 +148,7 @@ function logtype_changed()
     var clo_spacer = document.getElementById('confirm_listing_ok_spacer');
     var clo_row = document.getElementById('confirm_listing_ok_row');
 
-    if (!condition_logging || lo.value != 1 || ownerlog || !cache_listing_is_outdated)
+    if (!condition_logging || old_listing_outdated == 1 || lo.value != 1 || ownerlog || !cache_listing_is_outdated)
     {
         clo_spacer.style.display = 'none';
         clo_row.style.display = 'none';
@@ -190,33 +195,31 @@ function show_tip(text)
 {/literal}
 </script>
 
+{*
+ * capture allows us to "eval" the link tag with the variable values
+ * and save the complete link in the variable "cachelink" to use it in translation
+ *}
+{capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
+
 <div class="content2-pagetitle">
     <img src="resource2/{$opt.template.style}/images/description/22x22-logs.png" style="margin-right: 10px;" width="22" height="22" alt="" />
-    {*
-     * capture allows us to "eval" the link tag with the variable values
-     * and save the complete link in the variable "cachelink" to use it in translation
-     *}
     {if $editlog}
-        {capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
         {t 1=$cachelink}Edit log entry for the cache %1{/t}
     {else}
-        {capture name=cachelink assign=cachelink}<a href="viewcache.php?cacheid={$cacheid}">{$cachename|escape}</a>{/capture}
         {t 1=$cachelink}Add log-entry for the cache %1{/t}
     {/if}
 </div>
 <form action="{if $editlog}edit{/if}log.php" method="post" enctype="application/x-www-form-urlencoded" name="editform" dir="ltr">
-{if !$editlog}
-    {if $masslog==true}
-        <p class="redtext">
-            {t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t}
-        </p>
-        <p>
-            {t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
-        </p>
-        <p class="spacer_before">
-            <input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show this advice again today.{/t}</label>
-        </p>
-    {/if}
+{if !$editlog && $masslog==true}
+    <p class="redtext">
+        {t 1=$masslogCount}You submitted more than %1 identical logs. Please make sure that you are entering the date of your cache visit, not the current date - also when "late logging" old finds.{/t}
+    </p>
+    <p>
+        {t}Wrong log dates can impair several OC functions like searching by last log date. Also, the owner and other caches may think that the cache has been currently found (date and type of the last log are shown in the owner's caches list!), which can adversely affect cache maintenance and lead to more DNFs.{/t}
+    </p>
+    <p class="spacer_before">
+        <input type="checkbox" name="suppressMasslogWarning" value="1" class="checkbox" id="suppressMasslogWarning" /> <label for="suppressMasslogWarning">{t}I know what I am doing, do not show this advice again today.{/t}</label>
+    </p>
 {/if}
 {if $showstatfounds==true}
     <p class="align-right">
@@ -249,7 +252,7 @@ function show_tip(text)
                 {/foreach}
             </select>
             {if $octeamcommentallowed}
-            &nbsp; <input type="checkbox" name="teamcomment" value="1" class="checkbox" {if $is_teamcomment}checked{/if} id="teamcomment" /> <label for="teamcomment"><span class="{$octeamcommentclass}">{t}OC team comment{/t}</span></label>
+                &nbsp; <input type="checkbox" name="teamcomment" value="1" class="checkbox" {if $is_teamcomment}checked{/if} id="teamcomment" /> <label for="teamcomment"><span class="{$octeamcommentclass}">{t}OC team comment{/t}</span></label>
             {/if}
         </td>
     </tr>
@@ -300,18 +303,18 @@ function show_tip(text)
     </tr>
     <tr id="cache_condition_spacer"><td class="spacer" colspan="2"></td></tr>
     {if $isowner==false}
-    <tr>
-        <td valign="top">{t}Recommendations:{/t}</td>
-        <td valign="top">
-            {if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" id="rating" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;<label for="rating">{t}This cache is one of my recommendations.{/t}</label><br />
-                {t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
-            {else}
-                {t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
-                {if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
-            {/if}
-            <noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>
-        </td>
-    </tr>
+        <tr>
+            <td valign="top">{t}Recommendations:{/t}</td>
+            <td valign="top">
+                {if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" id="rating" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;<label for="rating" id="ratinglabel" >{t}This cache is one of my recommendations.{/t}</label><br />
+                    {t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
+                {else}
+                    {t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
+                    {if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
+                {/if}
+                <noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>
+            </td>
+        </tr>
     {/if}
 </table>
 
@@ -354,7 +357,7 @@ function show_tip(text)
     {if $use_log_pw}
         <tr id="cachelisting-logpw">
             <td colspan="2">{t}passwort to log:{/t}
-                <input class="input100" type="text" name="log_pw" maxlength="20" value="" /> {if !$validate.logPw}<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
+                <input class="input100" type="text" name="log_pw" maxlength="20" value="{$log_pw|escape}" /> {if !$validate.logPw}&nbsp;<span class="errormsg">{t}Invalid password!{/t}</span>{else}({if $cachetype==6}{t}only for attended-logs{/t}{else}{t}only for found logs{/t}{/if}){/if}
             </td>
         </tr>
         <tr><td class="spacer" colspan="2"></td></tr>
@@ -378,7 +381,7 @@ function show_tip(text)
 <!--
     var descMode = {$descMode};
     OcInitEditor();
-    var old_logtype = parseInt(document.editform.logtype.value);
+    var old_logtype = 0;
     logtype_changed();
 //-->
 </script>

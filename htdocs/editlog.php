@@ -106,6 +106,7 @@ $log_time_minute =
     : (substr($log_record['date'], 11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
 $top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
 $top_cache = isset($_POST['rating']) ? $_POST['rating'] + 0 : 0;
+$log_pw = isset($_POST['log_pw']) ? $_POST['log_pw'] : '';
 
 if (isset($_POST['submitform']) ||
     (
@@ -193,48 +194,25 @@ $log_text = processEditorInput($oldDescMode, $descMode, $log_text, $represent_te
 // validate input
 $validate = [];
 
-$date_ok = false;
-if (is_numeric($log_date_month) && is_numeric($log_date_day) && is_numeric($log_date_year) &&
-    ("$log_time_hour$log_time_minute" == "" || is_numeric($log_time_hour)) &&
-    ($log_time_minute == "" || is_numeric($log_time_minute))
-) {
-    $date_ok = checkdate($log_date_month, $log_date_day, $log_date_year)
-        && ($log_date_year >= 2000)
-        && ($log_time_hour >= 0) && ($log_time_hour <= 23)
-        && ($log_time_minute >= 0) && ($log_time_minute <= 59);
-    if ($date_ok) {
-        if (isset($_POST['submitform'])) {
-            $checkMkTime = mktime(
-                $log_time_hour + 0,
-                $log_time_minute + 0,
-                0,
-                $log_date_month,
-                $log_date_day,
-                $log_date_year
-            );
-            if ($checkMkTime >= time()) {
-                $date_ok = false;
-            }
-        }
-    }
-}
-$validate['dateOk'] = $date_ok;
+$validate['dateOk'] = cachelog::validateDate(
+    $log_date_year, $log_date_month, $log_date_day,
+    $log_time_hour, $log_time_minute,
+    isset($_POST['submitform'])
+);
 
-$validate['logtypeOk'] = logtype_ok($log_record['cache_id'], $log_type, $log_record['logtype']);
+$validate['logType'] = logtype_ok($log_record['cache_id'], $log_type, $log_record['logtype']);
 
 // not a found log? then ignore the recommendation
 if ($log_type != 1 && $log_type != 7) {
     $top_option = 0;
 }
 
-$pw_ok = true;
-if ($use_log_pw && $log_type == 1) {
-    if (!isset($_POST['log_pw']) || mb_strtolower($log_pw) != mb_strtolower($_POST['log_pw'])) {
-        $pw_ok = false;
-        $all_ok = false;
-    }
+// validate log password
+if ($use_log_pw && $log_type == 1 && isset($_POST['submitform'])) {
+    $validate['logPw'] = $cache->validateLogPW($log_type, $log_pw);
+} else {
+    $validate['logPw'] = true;
 }
-$validate['logPw'] = $pw_ok || !isset($_POST['submitform']);
 
 // ignore unauthorized team comments
 if (!teamcomment_allowed($log_record['cache_id'], $log_type, $log_record['oc_team_comment'])) {
@@ -242,7 +220,8 @@ if (!teamcomment_allowed($log_record['cache_id'], $log_type, $log_record['oc_tea
 }
 
 $validate['confirmListingOk'] =
-    $listingOutdated != 1 || !$cache->getListingOutdated() || $confirmListingOk;
+    $listingOutdated != 1 || $confirmListingOk || $log_record['listing_outdated'] == 1 ||
+    !$cache->getListingOutdatedRelativeToLog($log_id);
 
 // check for errors
 $loggable = array_product($validate);
@@ -301,7 +280,7 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
     );
 
     // update cache status if changed by logtype
-    if (is_latest_log($log_record['cache_id'], $log_record['log_id'])) {
+    if ($cache->isLatestLog($log_record['log_id'])) {
         $newStatus = sql_value(
             "SELECT `cache_status` FROM `log_types`
              WHERE `id`='&1'",
@@ -368,7 +347,7 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
 // build logtype options
 $disable_statuschange = (
     $log_record['cache_user_id'] == $login->userid
-    && !is_latest_log($log_record['cache_id'], $log_record['log_id'])
+    && !$cache->isLatestLog($log_record['log_id'])
 );
 $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
 $tpl->assign('typeEditDisabled', $disable_typechange);
@@ -383,7 +362,8 @@ $tpl->assign('gcwp', $cache->getWPGC_maintained());
 
 // log entry data
 $tpl->assign('logid', $log_id);
-$tpl->assign('logtypes', $cache->getUserLogTypes($log_type));
+
+$tpl->assign('logtypes', $cache->getUserLogTypes($log_type, $log_record['logtype'], !$disable_statuschange));
 $tpl->assign('logday', htmlspecialchars($log_date_day, ENT_COMPAT, 'UTF-8'));
 $tpl->assign('logmonth', htmlspecialchars($log_date_month, ENT_COMPAT, 'UTF-8'));
 $tpl->assign('logyear', htmlspecialchars($log_date_year, ENT_COMPAT, 'UTF-8'));
@@ -391,18 +371,18 @@ $tpl->assign('loghour', htmlspecialchars($log_time_hour, ENT_COMPAT, 'UTF-8'));
 $tpl->assign('logminute', htmlspecialchars($log_time_minute, ENT_COMPAT, 'UTF-8'));
 $tpl->assign('logtext', $represent_text);
 
-$tpl->assign(
-    'octeamcommentallowed',
-    teamcomment_allowed($log_record['cache_id'], 3, $log_record['oc_team_comment'])
-);
+// admin
+$tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3, $log_record['oc_team_comment']));
 $tpl->assign('is_teamcomment', $oc_team_comment);
+$tpl->assign('adminAction', $user->getUserId() != $cache->getUserId() || $cache->teamcommentAllowed(3));
 
 // cache condition flags
 $tpl->assign('cache_needs_maintenance', $cache->getNeedsMaintenance());
-$tpl->assign('cache_listing_is_outdated', $cache->getListingOutdated());
+$tpl->assign('cache_listing_is_outdated', $cache->getListingOutdatedRelativeToLog($log_id));
 $tpl->assign('cache_listing_outdated_log', $cache->getListingOutdatedLogUrl());
 $tpl->assign('needs_maintenance', $needsMaintenance);
 $tpl->assign('listing_outdated', $listingOutdated);
+$tpl->assign('old_listing_outdated', $log_record['listing_outdated']);
 $tpl->assign('condition_history', $cache->getConditionHistory());
 $tpl->assign('logtype_allows_nm', implode(',', $logtype_allows_nm));
 
@@ -418,6 +398,9 @@ $tpl->assign('maxratings', $user->getMaxRatings());
 $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
 $tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
 $tpl->assign('isowner', $user->getUserId() == $cache->getUserId());
+
+// password
+$tpl->assign('log_pw', $log_pw);
 
 // DNF state
 $dnf_by_logger = sql_value(
@@ -461,22 +444,3 @@ $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollpos
 // select template mode and send it out
 $tpl->assign('editlog', true);
 $tpl->display();
-
-/**
- * @param $cacheId
- * @param $logId
- * @return bool
- */
-function is_latest_log($cacheId, $logId)
-{
-    $latestLogId = sql_value(
-        "SELECT `id` FROM `cache_logs`
-         WHERE `cache_id`='&1'
-         ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
-         LIMIT 1",
-        0,
-        $cacheId
-    );
-
-    return ($logId == $latestLogId);
-}

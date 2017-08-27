@@ -79,10 +79,7 @@ function get_cache_log_types($cache_id, $old_logtype, $statuslogs = true)
     $cache_status = $rCache['status'];
     $owner = $login->userid == ($rCache['user_id']);
     $admin_report = admin_has_open_report($cache_id);
-    $admin_locked = $login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], array(
-            6,
-            7
-        ));
+    $admin_locked = $login->hasAdminPriv(ADMIN_USER) && in_array($rCache['status'], [6, 7]);
 
     // build result list
     //
@@ -125,9 +122,9 @@ function get_cache_log_types($cache_id, $old_logtype, $statuslogs = true)
 }
 
 
-function logtype_ok($cache_id, $logtype_id, $old_logtype)
+function logtype_ok($cache_id, $logtype_id, $old_logtype, $statusLogs = true)
 {
-    return in_array($logtype_id, get_cache_log_types($cache_id, $old_logtype));
+    return in_array($logtype_id, get_cache_log_types($cache_id, $old_logtype, $statusLogs));
 }
 
 

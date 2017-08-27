@@ -67,13 +67,9 @@ $rs = sql('SELECT `id` FROM `log_types` WHERE `maintenance_logs`');
 $logtype_allows_nm = sql_fetch_column($rs);
 
 // proceed loggable, if valid cache_id
-$validate['logAllowed'] = true;
 if ($cacheId != 0) {
     // get cache object
     $cache = new cache($cacheId);
-
-    // check log allowed, depending on cache state and logged in user
-    $validate['logAllowed'] = $cache->allowLog();
 
     // is user cache owner
     $isOwner = ($user->getUserId() == $cache->getUserId());
@@ -206,34 +202,11 @@ if ($cacheId != 0) {
     $logText = processEditorInput($oldDescMode, $descMode, $logText, $representLogText);
 
     // validate date
-    if (is_numeric($logDateMonth)
-        && is_numeric($logDateDay)
-        && is_numeric($logDateYear)
-        && ($logTimeHour . $logTimeMinute == '' || is_numeric($logTimeHour))
-        && ($logTimeMinute == '' || is_numeric($logTimeMinute))
-    ) {
-        $validate['dateOk'] = checkdate($logDateMonth, $logDateDay, $logDateYear)
-            && ($logDateYear >= 2000)
-            && ($logTimeHour >= 0)
-            && ($logTimeHour <= 23)
-            && ($logTimeMinute >= 0)
-            && ($logTimeMinute <= 59);
-        if ($validate['dateOk'] && isset($_POST['submitform'])) {
-            $validate['dateOk'] = (
-                mktime(
-                    $logTimeHour + 0,
-                    $logTimeMinute + 0,
-                    0,
-                    $logDateMonth,
-                    $logDateDay,
-                    $logDateYear
-                )
-                < time()
-            );
-        }
-    } else {
-        $validate['dateOk'] = false;
-    }
+    $validate['dateOk'] = cachelog::validateDate(
+        $logDateYear, $logDateMonth, $logDateDay,
+        $logTimeHour, $logTimeMinute,
+        isset($_POST['submitform'])
+    );
 
     // Store valid date in temporary cookie; it will be the default for the next log.
     // For a reliable expiration, we need two cookies: One which disappears when the
@@ -250,9 +223,10 @@ if ($cacheId != 0) {
     $validate['logType'] = $cache->logTypeAllowed($logType);
 
     // check log password
+    $log_pw = isset($_POST['log_pw']) ? $_POST['log_pw'] : '';
     $validate['logPw'] = true;
     if (isset($_POST['submitform']) && $cache->requireLogPW()) {
-        $validate['logPw'] = $cache->validateLogPW($logType, $_POST['log_pw']);
+        $validate['logPw'] = $cache->validateLogPW($logType, $log_pw);
     }
 
     // check listing-ok-confirmation
@@ -349,17 +323,20 @@ if ($cacheId != 0) {
     // user info
     $tpl->assign('userFound', $user->getStatFound());
     $tpl->assign('ownerlog', $login->userid == $cache->getUserId());
+
     // cache infos
     $tpl->assign('cachename', $cache->getName());
     $tpl->assign('cacheid', $cache->getCacheId());
     $tpl->assign('cachetype', $cache->getType());
     $tpl->assign('gcwp', $cache->getWPGC_maintained());
+
     // date/time
     $tpl->assign('logday', $logDateDay);
     $tpl->assign('logmonth', $logDateMonth);
     $tpl->assign('logyear', $logDateYear);
     $tpl->assign('loghour', $logTimeHour);
     $tpl->assign('logminute', $logTimeMinute);
+
     // cache condition flags
     $tpl->assign('cache_needs_maintenance', $cache->getNeedsMaintenance());
     $tpl->assign('cache_listing_is_outdated', $cache->getListingOutdated());
@@ -367,30 +344,39 @@ if ($cacheId != 0) {
     $tpl->assign('needs_maintenance', $needsMaintenance);
     $tpl->assign('listing_outdated', $listingOutdated);
     $tpl->assign('condition_history', $cache->getConditionHistory());
+
     // log text
     $tpl->assign('logtext', $representLogText);
-    // text, <html> or editor
     $tpl->assign('descMode', $descMode);
+
     // logtypes
     $tpl->assign('logtype', $logType);
     $tpl->assign('logtypes', $cache->getUserLogTypes($logType));
     $tpl->assign('typeEditDisabled', false);
-    // teamcomment
+
+    // admin
     $tpl->assign('octeamcommentallowed', $cache->teamcommentAllowed(3));
     $tpl->assign('is_teamcomment', ($ocTeamComment || (!$cache->statusUserLogAllowed() && $useradmin)) ? true : false);
     $tpl->assign('octeamcommentclass', (!$cache->statusUserLogAllowed() && $useradmin) ? 'redtext' : '');
+    $tpl->assign('adminAction', $user->getUserId() != $cache->getUserId() || $cache->teamcommentAllowed(3));
+
     // masslogs
     $tpl->assign('masslogCount', $opt['logic']['masslog']['count']);
     $tpl->assign('masslog', cachelog::isMasslogging($user->getUserId()) && $suppressMasslogWarning == 0);
+
     // show number of found on log page
     $tpl->assign('showstatfounds', $user->showStatFounds());
     $tpl->assign('use_log_pw', $cache->requireLogPW());
+
     // smiley list
     $tpl->assign('smilies', $smiley_a);
     $tpl->assign('smileypath', $opt['template']['smiley']);
     $tpl->assign(
         'fieldnoteid', (isset($_REQUEST['fieldnoteid']) && $_REQUEST['fieldnoteid']) ? $_REQUEST['fieldnoteid'] : ''
     );
+
+    // password
+    $tpl->assign('log_pw', $log_pw);
 
     // DNF state
     $dnf_by_logger = sql_value(
@@ -404,9 +390,6 @@ if ($cacheId != 0) {
             $login->userid
         ) == 2;
     $tpl->assign('dnf_by_logger', $dnf_by_logger);
-} else {
-    // not logAble
-    $validate['logAllowed'] = false;
 }
 
 // prepare template and display

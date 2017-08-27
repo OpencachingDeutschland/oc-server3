@@ -272,8 +272,7 @@ class cache
         $rs = sql(
             "SELECT `id`, `listing_outdated`
              FROM `cache_logs`
-             WHERE `cache_id`='&1'
-             AND `listing_outdated`>0
+             WHERE `cache_id`='&1' AND `listing_outdated`>0
              ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
             // same sorting order as in DB function sp_update_logstat()
             $this->getCacheId()
@@ -286,6 +285,34 @@ class cache
         sql_free_result($rs);
 
         return $url;
+    }
+
+    // test if af the time of insertion of an existing log the listing
+    // was outdated and there is no newer listing-[not]-outdated-log
+
+    public function getListingOutdatedRelativeToLog($logId)
+    {
+        $logDate = sql_value("SELECT `date` FROM `cache_logs` WHERE `id`='&1'", '', $logId);
+
+        return
+            sql_value(
+                "SELECT 1
+                 FROM `cache_logs`
+                 WHERE `cache_id`='&1' AND `date`>'&2' AND `listing_outdated`>0
+                 LIMIT 1",
+                0,
+                $this->getCacheId(),
+                $logDate
+            ) == 0 && sql_value(
+                "SELECT `listing_outdated`
+                 FROM `cache_logs`
+                 WHERE `cache_id`='&1' AND `listing_outdated`>0 AND `id`!='&2'
+                 ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+                 LIMIT 1",
+                0,
+                $this->getCacheId(),
+                $logId
+            ) == 2;
     }
 
     public function setListingOutdated($value)
@@ -963,14 +990,14 @@ class cache
     // $userLogType:
     //   Logtype selected by the user, or null if not applicable
 
-    public function getUserLogTypes($userLogType, $oldLogType = 0)
+    public function getUserLogTypes($userLogType, $oldLogType = 0, $statusLogs = true)
     {
         $logTypes = [];
 
         $logtypeNames = get_logtype_names();
-        $allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType);
+        $allowedLogtypes = get_cache_log_types($this->getCacheId(), $oldLogType, $statusLogs);
         $defaultLogType = $userLogType;
-        if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType)) {
+        if (!logtype_ok($this->getCacheId(), $defaultLogType, $oldLogType, $statusLogs)) {
             $defaultLogType = $allowedLogtypes[0];
         }
 
@@ -1003,5 +1030,24 @@ class cache
             0,
             $this->getCacheId()
         ) == 1;
+    }
+
+    /**
+     * @param $cacheId
+     * @param $logId
+     * @return bool
+     */
+    function isLatestLog($logId)
+    {
+        $latestLogId = sql_value(
+            "SELECT `id` FROM `cache_logs`
+             WHERE `cache_id`='&1'
+             ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
+             LIMIT 1",
+            0,
+            $this->nCacheId
+        );
+
+        return ($logId == $latestLogId);
     }
 }

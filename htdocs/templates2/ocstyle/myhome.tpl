@@ -78,6 +78,7 @@ function myHomeLoad()
             <tr>
                 <td><nobr>
                     {include file="res_logtype.tpl" type=$logItem.type}
+                    {if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
                 </nobr></td>
                 <td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
                 <td>

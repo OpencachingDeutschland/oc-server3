@@ -5,7 +5,7 @@
 
 namespace AppBundle\Command;
 
-use Oc\Cache\WebCache;
+use OcLegacy\Cache\WebCache;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

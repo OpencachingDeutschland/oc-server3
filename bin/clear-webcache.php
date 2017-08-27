@@ -15,7 +15,7 @@ if (!isset($opt['rootpath'])) {
 }
 require_once __DIR__ . '/../htdocs/lib2/cli.inc.php';
 
-$webCache = new Oc\Cache\WebCache();
+$webCache = new OcLegacy\Cache\WebCache();
 
 if ($argc !== 2 || $argv[1] !== 'pass2') {
     echo "delete cached files\n";

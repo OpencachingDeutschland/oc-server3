@@ -2,7 +2,7 @@
 
 namespace OcBundle\Translation;
 
-use Oc\Util\DbalConnection;
+use Doctrine\DBAL\Connection;
 
 /**
  * very quick and dirty solution to import crowdin snippets into the legacy translation system
@@ -10,11 +10,11 @@ use Oc\Util\DbalConnection;
 class CrowdinImport
 {
     /**
-     * @var DbalConnection
+     * @var Connection
      */
     private $connection;
 
-    public function __construct(DbalConnection $connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
@@ -26,7 +26,7 @@ class CrowdinImport
 
         foreach ($translationArray as $translation) {
             foreach (['de', 'fr', 'nl', 'es', 'pl', 'it', 'ru'] as $languageKey) {
-                $this->connection->getConnection()->executeUpdate(
+                $this->connection->executeUpdate(
                     'UPDATE sys_trans_text SET `text` = :text
                      WHERE lang = :langKey AND trans_id = :identifier',
                     [

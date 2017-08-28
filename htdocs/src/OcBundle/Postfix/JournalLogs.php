@@ -7,7 +7,7 @@
 
 namespace OcBundle\Postfix;
 
-use Oc\Util\DbalConnection;
+use Doctrine\DBAL\Connection;
 
 /**
  * Class JournalLogs
@@ -20,21 +20,21 @@ class JournalLogs
     private $config;
 
     /**
-     * @var DbalConnection
+     * @var Connection
      */
-    private $dbalConnection;
+    private $connection;
 
     /**
      * constructor
      *
-     * @param DbalConnection $dbalConnection
+     * @param Connection $connection
      * @param array|bool $config
      * $config = [
      *     'hostname' => 'host.domain.tld',
      *     'status' => ['sent', 'bounced', ...],
      * ]
      */
-    public function __construct(DbalConnection $dbalConnection, $config = false)
+    public function __construct(Connection $connection, $config = false)
     {
         // TODO move this config to a configuration file
         if (!$config) {
@@ -44,7 +44,7 @@ class JournalLogs
             ];
         }
         $this->config = $config;
-        $this->dbalConnection = $dbalConnection;
+        $this->connection = $connection;
     }
 
     /**
@@ -118,7 +118,7 @@ class JournalLogs
 
     public function processJournalLogs()
     {
-        $start = $this->dbalConnection->getConnection()
+        $start = $this->connection
             ->fetchColumn(
                 'SELECT `value` FROM `sysconfig` WHERE `name` = :name',
                 [':name' => 'syslog_maillog_lastdate']
@@ -145,7 +145,7 @@ class JournalLogs
 
         $end = new \DateTimeImmutable();
 
-        $this->dbalConnection->getConnection()
+        $this->connection
             ->executeUpdate(
                 'UPDATE `sysconfig` SET `value` = :value WHERE `name` = :name',
                 [
@@ -161,7 +161,7 @@ class JournalLogs
      */
     private function updateEmailStatusToBounced($email, $dateTime)
     {
-        $this->dbalConnection->getConnection()
+        $this->connection
             ->executeQuery(
                 'UPDATE `user`
                  SET `email_problems`=`email_problems`+1,
@@ -180,7 +180,7 @@ class JournalLogs
      */
     private function updateEmailStatusToSent($email)
     {
-        $this->dbalConnection->getConnection()
+        $this->connection
             ->executeQuery(
                 'UPDATE `user`
                  SET `email_problems`=0

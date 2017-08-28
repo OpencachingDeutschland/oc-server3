@@ -4,7 +4,7 @@ namespace OcTest\Modules\Oc\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
-require_once __DIR__ . '/../../../../htdocs/src/Oc/SmartyPlugins/modifier.format_hour.php';
+require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.format_hour.php';
 
 class ModifierFormatHourTest extends AbstractModuleTest
 {

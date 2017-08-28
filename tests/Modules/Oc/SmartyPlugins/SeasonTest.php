@@ -4,7 +4,7 @@ namespace OcTest\Modules\Oc\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
-require_once __DIR__ . '/../../../../htdocs/src/Oc/SmartyPlugins/function.season.php';
+require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.season.php';
 
 class SeasonTest extends AbstractModuleTest
 {

@@ -3,7 +3,7 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace Oc\Cache;
+namespace OcLegacy\Cache;
 
 class WebCache
 {
@@ -26,7 +26,7 @@ class WebCache
         $this->translate = $translate;
 
         if (!isset($this->opt['rootpath'])) {
-            $this->opt['rootpath'] = dirname(dirname(dirname(__DIR__))) . '/' . '/';
+            $this->opt['rootpath'] = dirname(dirname(dirname(__DIR__))) . '/';
         }
     }
 

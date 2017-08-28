@@ -33,8 +33,14 @@ services:
         class: Oc\Util\DbalConnection
     oc_bundle.postfix.journal_logs:
         class: OcBundle\Postfix\JournalLogs
-        arguments: ['@oc.util.dbal_connection']
+        arguments: ['@app.dbal_connection']
     oc.translation.crowdin_import:
         class: OcBundle\Translation\CrowdinImport
-        arguments: ['@oc.util.dbal_connection']
-
+        arguments: ['@app.dbal_connection']
+    oc.geo_cache.reports:
+        class: Oc\GeoCache\Reports
+        arguments: ['@app.dbal_connection']
+    app.dbal_connection:
+        class: Doctrine\DBAL\Connection
+        factory: ['Oc\Util\DbalConnection', createDbalConnection]
+        arguments: [%database_host%, %database_name%, %database_user%, %database_password%, %database_port%]

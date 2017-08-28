@@ -22,7 +22,14 @@ $login->verify();
 $tpl->assign('error', LOGIN_OK);
 
 $target = isset($_REQUEST['target']) ? $_REQUEST['target'] : 'myhome.php';
-if (mb_strtolower(mb_substr($target, 0, 9)) == 'login.php') {
+
+// #1086 important change don't delete it :-)
+$path = parse_url($target, PHP_URL_PATH);
+if ((($path && !file_exists(__DIR__ . '/' . $path)) || !$path) && strpos($target, 'okapi/apps/') !== 0) {
+    $target = 'myhome.php';
+}
+
+if (mb_strtolower(mb_substr($target, 0, 9)) === 'login.php') {
     $target = 'myhome.php';
 }
 

@@ -18,6 +18,10 @@ class ApiGeocacheController extends Controller
      */
     public function getReportsAction(Request $request)
     {
+        if ($this->container->getParameter('api_secret') === 'ThisTokenIsNotSoSecretChangeIt') {
+            return new JsonResponse(['please change your api_secret to a secure one!']);
+        }
+
         if ($request->get('key') !== $this->container->getParameter('api_secret')) {
             return new JsonResponse([]);
         }

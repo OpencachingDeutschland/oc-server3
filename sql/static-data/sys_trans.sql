@@ -510,7 +510,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('554', 'The foll
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('555', 'Show logentries', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('556', 'Statistic picture', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('558', 'Don\'t use an HTML editor by default.', '2010-08-28 11:48:04');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('559', 'Don\'t log me out after 15 minutes inaktivity.', '2010-08-28 11:48:04');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('559', 'Don\'t log me out after 60 minutes inactivity.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('560', 'I\'m taking an PMR walkie talkie on channel 2 with me.', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('561', 'Others:', '2010-08-28 11:48:04');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('562', 'Do not notify about new Geocaches.', '2010-08-28 11:48:04');

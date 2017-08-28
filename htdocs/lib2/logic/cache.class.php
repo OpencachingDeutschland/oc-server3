@@ -466,6 +466,7 @@ class cache
         $coords = sql_fetch_assoc_table($rsCoords);
 
         if ($coords) {
+            $lastcoorddate = $coords[count($coords)-1]['date'];
             $coords[] = [
                 'date' => '0000-00-00',
                 'latitude' => $coords[count($coords) - 1]['latitude'],
@@ -579,16 +580,18 @@ class cache
         sql_free_result($rsLogs);
 
         if ($coord_changes) {
-            $original = count($coords) - 1;
             $lastlogdate = $logs[count($logs) - 1]['order_date'];
-            while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
-                --$original;
+            if ($lastcoorddate < $lastlogdate) {
+                $original = count($coords) - 1;
+                while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
+                    --$original;
+                }
+                $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
+                $logs[] = [
+                    'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
+                    'movedby' => false
+                ];
             }
-            $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
-            $logs[] = [
-                'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
-                'movedby' => false
-            ];
         }
 
         return $logs;

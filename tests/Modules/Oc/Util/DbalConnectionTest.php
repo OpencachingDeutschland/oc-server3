@@ -10,7 +10,7 @@ class DbalConnectionTest extends AbstractModuleTest
 {
     private function getParameters()
     {
-        $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../../app/config/parameters.yml'));
+        $parameters = Yaml::parse(file_get_contents(__DIR__ . '/../../../../htdocs/app/config/parameters.yml'));
         return $parameters['parameters'];
     }
 

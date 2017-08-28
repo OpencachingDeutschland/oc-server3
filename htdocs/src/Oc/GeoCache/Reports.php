@@ -3,19 +3,18 @@
 namespace Oc\GeoCache;
 
 use Doctrine\DBAL\Connection;
-use Oc\Util\DbalConnection;
 
 class Reports
 {
     /**
-     * @var DbalConnection
+     * @var Connection
      */
     private $connection;
 
     /**
-     * @param DbalConnection $connection
+     * @param Connection $connection
      */
-    public function __construct(DbalConnection $connection)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
@@ -26,7 +25,7 @@ class Reports
      */
     public function getReportStatus(array $wpCodes)
     {
-        $query = $this->connection->getQueryBuilder()
+        $query = $this->connection->createQueryBuilder()
             ->select('DISTINCT(wp_oc)')
             ->from('caches', 'c')
             ->innerJoin('c', 'cache_reports', 'cr', 'cr.cacheid = c.cache_id')

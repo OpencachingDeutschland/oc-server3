@@ -592,6 +592,8 @@ function load_gettext()
     }
     $opt['template']['locale'] = $locale;
 
+    $cookie->set('locale', $opt['template']['locale'], $opt['template']['default']['locale']);
+
     bindtextdomain('messages', __DIR__ . '/../var/cache2/translate');
     set_php_locale();
     textdomain('messages');

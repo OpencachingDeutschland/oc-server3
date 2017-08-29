@@ -20,6 +20,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - save logtyp during edit process [#1099](https://redmine.opencaching.de/issues/1099)
 - show team-comment log flags [#1101](https://redmine.opencaching.de/issues/1101)
 - hide 'original coordinates' if there is an older log [#1102](https://redmine.opencaching.de/issues/1102)
+- change logout time text [#1095](https://redmine.opencaching.de/issues/1095)
 
 ### Removed
 - removed ocm map [#1068](https://redmine.opencaching.de/issues/1068)

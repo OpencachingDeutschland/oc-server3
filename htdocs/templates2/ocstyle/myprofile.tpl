@@ -168,7 +168,7 @@
                     {/if}
                     {if $edit==true}
                         <input type="checkbox" name="permanentLogin" value="1" {if $permanentLogin==true}checked="checked"{/if} id="l_using_permanent_login" class="checkbox" />
-                        <label for="l_using_permanent_login">{t}Don't log me out after 15 minutes inaktivity.{/t}</label><br/>
+                        <label for="l_using_permanent_login">{t}Don't log me out after 60 minutes inactivity.{/t}</label><br/>
                         <div style="padding-left:25px;">
                             <img src="resource2/{$opt.template.style}/images/misc/hint.gif" border="0" width="15" height="11" align="middle" />
                             <span style="color:red; font-size:10px; line-height:1.3em">{t}Attention: If you are using this option, don't forget to log out before other persons can use your computer.
@@ -176,7 +176,7 @@
                         </div>
                     {else}
                         {if $permanentLogin==true}
-                            {t}Don't log me out after 15 minutes inaktivity.{/t}<br />
+                            {t}Don't log me out after 60 minutes inactivity.{/t}<br />
                         {/if}
                     {/if}
                     {if $edit==true}

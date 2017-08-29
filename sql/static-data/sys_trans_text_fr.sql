@@ -507,7 +507,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'FR', 'Afficher entrées du log', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'FR', 'Image de la statistique', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'FR', 'Ne pas utiliser un éditeur HTML par défaut', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'FR', 'Ne pas me déconnecter après 15 minutes d\'inactivité.', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'FR', 'Ne pas me déconnecter après 60 minutes d\'inactivité.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'FR', 'Je prends un talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('561', 'FR', 'Autres\&nbsp;:', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('562', 'FR', 'Alerte de nouvelles géocaches est désactivé.', '2015-08-25 01:28:59');

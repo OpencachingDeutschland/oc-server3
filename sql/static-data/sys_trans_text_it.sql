@@ -507,7 +507,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'IT', 'Visualizza i log', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'IT', 'Statistiche', '2010-09-10 23:15:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'IT', 'Non usare l\'editor HTML di default.', '2010-08-31 20:06:23');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'IT', 'Non disconnettermi dopo 15 minuti di inattività.', '2010-09-01 23:49:02');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'IT', 'Non disconnettermi dopo 60 minuti di inattività.', '2010-09-01 23:49:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'IT', 'Ho con me una radio PMR sul canale 2.', '2010-08-31 20:06:23');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('561', 'IT', 'Altro:', '2010-09-01 23:49:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('562', 'IT', 'La notifica di nuove geocache è disabilitata.', '2010-08-31 20:06:23');

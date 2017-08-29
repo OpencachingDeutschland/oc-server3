@@ -24,6 +24,9 @@ services:
         class: AppBundle\Form\DataProvider\UploadFieldNotesDataProvider
         arguments: ['@app.service.field_note']
 
+    app.library.common_mark_converter:
+        class: League\CommonMark\CommonMarkConverter
+
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:

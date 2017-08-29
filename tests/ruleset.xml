@@ -73,6 +73,10 @@
         <!-- ConditionalExpressionOrder (Yoda Comparison) is buggy, so we don't use it at the moment -->
         <exclude name="PSR2R.ControlStructures.ConditionalExpressionOrder"/>
         <exclude name="Squiz.WhiteSpace.MemberVarSpacing"/>
+        <!-- this is not compatible with symfony annotations -->
+        <exclude name="PSR2R.Namespaces.UnusedUseStatement"/>
+        <!-- this is not compatible with symfony annotations -->
+        <exclude name="PSR2R.Commenting.DocBlockTagTypes.Unknown"/>
     </rule>
 
     <rule ref="Squiz.Commenting.FunctionComment">

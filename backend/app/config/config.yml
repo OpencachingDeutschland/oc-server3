@@ -1,0 +1,19 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@MirschAdminBundle/Resources/config/app/config.yml" }
+
+mirsch_admin:
+    resources:
+        admin_user:
+            entity: 'AppBundle\Entity\AdminUser'
+            repository: 'AppBundle\Entity\AdminUserRepository'
+            interface: 'Mirsch\Bundle\AdminBundle\Model\AdminUserInterface'
+            form: 'AppBundle\Form\AdminUserType'
+
+twig:
+    globals:
+        mirsch_admin_login_box_logo: '<b>Opencaching</b> Admin'
+        mirsch_admin_page_logo: '<b>OC</b> Admin'
+        mirsch_admin_page_logo_mini: '<b>OC</b>'

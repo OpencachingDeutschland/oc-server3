@@ -218,7 +218,7 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('249', 'El Salva
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('250', 'Sao Tome And Principe', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('251', 'Suriname', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('252', 'Somalia', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('253', 'Unkown format of the given waypoint. The following formats are known OCxxxx, NCxxxx and GCxxxx, whereas xxxx can be any number or char.', '2010-08-28 11:48:03');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('253', 'Unkown format of the given waypoint. The known formats are OCxxxxx and GCxxxxx, whereas x can be any number or char.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('254', 'There exists more than one cache with the waypoint \&quot;%1\&quot;.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('255', 'The waypoint \&quot;%1\&quot; was not found.', '2010-08-28 11:48:03');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('256', 'Senegal', '2010-08-28 11:48:03');

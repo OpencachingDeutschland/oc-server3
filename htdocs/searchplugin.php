@@ -77,9 +77,6 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                 $targeturl = 'index.php';
                 $searchfor = mb_trim($searchfor);
                 $target = mb_strtolower(mb_substr($searchfor, 0, 2));
-                if (mb_substr($target, 0, 1) == 'n') {
-                    $target = 'nc';
-                }
                 if (mb_strpos($opt['logic']['ocprefixes'], $target) != false) {
                     $target = 'oc';
                 }
@@ -96,7 +93,7 @@ if (($sourceid == 'mozilla-search') && ($userinput != '')) {
                         $wpfield = "`wp_oc`";
                     }
                     // get cache_id from DB
-                    // GC/NC waypoints can be duplicates -> return first match with least status number
+                    // GC waypoints can be duplicates -> return first match with least status number
                     $rs = sql(
                         "SELECT `cache_id`
                          FROM `caches`

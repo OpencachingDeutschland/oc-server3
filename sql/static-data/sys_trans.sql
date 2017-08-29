@@ -1952,3 +1952,4 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2655', 'Insert:
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2656', 'as first picture', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2657', 'after "%1"', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2658', 'as last picture', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2659', 'Recommendation', '2017-08-20 19:30:00');

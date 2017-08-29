@@ -71,10 +71,12 @@ class translate
                          ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                          AND `sys_trans_text`.`lang`='&1'
                        WHERE `sys_trans`.`text`='&2' LIMIT 1", $lang, $search, $message);
-            $trans = '';
 
             if ($r = sql_fetch_array($rs)) {
                 $trans = $r[0];
+            } else {
+                // string is missing in sys_trans
+                $trans = $message;
             }
 
             sql_free_result($rs);

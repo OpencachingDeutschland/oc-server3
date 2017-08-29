@@ -1908,4 +1908,4 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2611', 'FR', 'Votre rapport de géocache pour', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2612', 'FR', 'convertir', '0000-00-00 00:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2613', 'FR', 'waypoint', '2010-08-28 11:48:08');
-
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'FR', 'Recommandation', '2010-10-04 00:17:39');

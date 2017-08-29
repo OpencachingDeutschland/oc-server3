@@ -312,15 +312,16 @@ function process_owner_log($user_id, $log_id)
             `cache_logs`.`listing_outdated`,
             `user`.`username`,
             `caches`.`name` `cachename`,
-            `caches`.`wp_oc`
-        FROM
-            `cache_logs`,
-            `user`,
-            `caches`
-        WHERE
-            `cache_logs`.`user_id`=`user`.`user_id` AND
-            `cache_logs`.`cache_id`=`caches`.`cache_id` AND
-            `cache_logs`.`id` ='&1'",
+            `caches`.`wp_oc`,
+            `cr`.`user_id` IS NOT NULL AS `recommendation`
+        FROM `cache_logs`
+        JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+        JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+        LEFT JOIN `cache_rating` `cr` ON
+            `cr`.`cache_id`=`cache_logs`.`cache_id` AND
+            `cr`.`rating_date`=`cache_logs`.`date` AND
+            `cache_logs`.`type` IN (1,7)
+        WHERE `cache_logs`.`id` ='&1'",
         $log_id
     );
     $rLog = sql_fetch_array($rsLog);
@@ -347,7 +348,7 @@ function process_owner_log($user_id, $log_id)
             '',
             1,
             $language
-        ) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
+        ) . ' {action}{recommendation}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n\n" . '{text}' . "\n\n\n\n";
 
     $watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
     $watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -355,6 +356,7 @@ function process_owner_log($user_id, $log_id)
     $watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
     $watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
     $watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
+    $watchtext = insert_recommendation($rLog, $language, $watchtext);
     $watchtext = insert_maintenance_flags($rLog, $language, $watchtext);
 
     $domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
@@ -395,11 +397,15 @@ function process_log_watch($user_id, $log_id)
             `cache_logs`.`listing_outdated`,
             `user`.`username`,
             `caches`.`name` `cachename`,
-            `caches`.`wp_oc`
-        FROM
-            `cache_logs`,
-            `user`,
-            `caches`
+            `caches`.`wp_oc`,
+            `cr`.`user_id` IS NOT NULL AS `recommendation`
+        FROM `cache_logs`
+        JOIN `user` ON `cache_logs`.`user_id`=`user`.`user_id`
+        JOIN `caches` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+        LEFT JOIN `cache_rating` `cr` ON
+            `cr`.`cache_id`=`cache_logs`.`cache_id` AND
+            `cr`.`rating_date`=`cache_logs`.`date` AND
+            `cache_logs`.`type` IN (1,7)
         WHERE
             `cache_logs`.`user_id`=`user`.`user_id` AND
             `cache_logs`.`cache_id`=`caches`.`cache_id` AND
@@ -430,7 +436,7 @@ function process_log_watch($user_id, $log_id)
             '',
             1,
             $language
-        ) . ' {action}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
+        ) . ' {action}{recommendation}{maintenance_flags}' . "\n" . '{shortlink_url}{wp_oc}' . "\n{cachelists}\n" . '{text}' . "\n\n\n\n";
 
     $watchtext = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['logdate'])), $watchtext);
     $watchtext = mb_ereg_replace('{wp_oc}', $rLog['wp_oc'], $watchtext);
@@ -438,6 +444,7 @@ function process_log_watch($user_id, $log_id)
     $watchtext = mb_ereg_replace('{user}', $rLog['username'], $watchtext);
     $watchtext = mb_ereg_replace('{cachename}', $rLog['cachename'], $watchtext);
     $watchtext = mb_ereg_replace('{action}', get_logtype_name($rLog['type'], $language), $watchtext);
+    $watchtext = insert_recommendation($rLog, $language, $watchtext);
     $watchtext = insert_maintenance_flags($rLog, $language, $watchtext);
 
     $rsLists = sql(
@@ -495,6 +502,17 @@ function process_log_watch($user_id, $log_id)
         $log_id,
         $watchtext
     );
+}
+
+function insert_recommendation($rLog, $language, $watchtext)
+{
+    global $translate;
+
+    $rtext =
+        $rLog['recommendation']
+        ? ', ' . $translate->t('Recommendation', '', basename(__FILE__), __LINE__, '', 1, $language)
+        : '';
+    return mb_ereg_replace('{recommendation}', $rtext, $watchtext);
 }
 
 /**

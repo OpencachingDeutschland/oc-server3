@@ -1538,3 +1538,4 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'ES', 'Gauß-Krüger', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'ES', 'OConly', '2013-11-03 10:09:14');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'ES', 'Más de 2 años', '2013-11-03 10:09:14');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'ES', 'Recomendacion', '2010-12-09 00:17:56');

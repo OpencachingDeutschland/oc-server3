@@ -82,7 +82,7 @@ if ($error == false) {
                 }
 
                 // Filter Input
-                $desc = processEditorInput($oldDescMode, $descMode, $desc);
+                $desc = processEditorInput($oldDescMode, $descMode, $desc, $representDesc);
 
                 $desc_lang_exists = false;
 
@@ -218,7 +218,7 @@ if ($error == false) {
                 tpl_set_var('show_all_langs', $show_all_langs);
                 tpl_set_var('show_all_langs_submit', ($show_all_langs == 0) ? $show_all_langs_submit : '');
                 tpl_set_var('short_desc', htmlspecialchars($short_desc, ENT_COMPAT, 'UTF-8'));
-                tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
+                tpl_set_var('desc', htmlspecialchars($representDesc, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('hints', htmlspecialchars($hints, ENT_COMPAT, 'UTF-8'));
 
                 // Text / normal HTML / HTML editor

@@ -144,7 +144,7 @@ if ($error == false) {
                         $desc = iconv("ISO-8859-1", "UTF-8", $desc);
                     }
 
-                    $desc = processEditorInput($oldDescMode, $descMode, $desc);
+                    $desc = processEditorInput($oldDescMode, $descMode, $desc, $representDesc);
 
                     if (isset($_POST['submitform'])) {  // Ocprop
                         // prüfen, ob sprache nicht schon vorhanden
@@ -221,15 +221,16 @@ if ($error == false) {
                     $oldDescMode = ($desc_html == 0 ? 0 : ($desc_htmledit ? 3 : 2));
 
                     if ($oldDescMode == 0) {
-                        $desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc']);
+                        $desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc'], $representDesc);
                     } else {
                         $desc = $desc_record['desc'];
+                        $representDesc = $desc;
                     }
                 }
 
                 //here we only set up the template variables
 
-                tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'), true);
+                tpl_set_var('desc', htmlspecialchars($representDesc, ENT_COMPAT, 'UTF-8'), true);
                 tpl_set_var('descMode', $descMode);
                 tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
 

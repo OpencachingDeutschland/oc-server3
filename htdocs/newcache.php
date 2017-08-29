@@ -147,12 +147,13 @@ if ($error == false) {
 
         //desc
         if (isset($_POST['desc'])) {
-            $desc = trim(processEditorInput($oldDescMode, $descMode, $_POST['desc']));
+            $desc = trim(processEditorInput($oldDescMode, $descMode, $_POST['desc'], $representDesc));
         } else {
             $desc = '';
+            $representDesc = '';
         }
 
-        tpl_set_var('desc', htmlspecialchars($desc, ENT_COMPAT, 'UTF-8'));
+        tpl_set_var('desc', htmlspecialchars($representDesc, ENT_COMPAT, 'UTF-8'));
 
         $headers = tpl_get_var('htmlheaders') . "\n";
         if ($descMode == 3) {

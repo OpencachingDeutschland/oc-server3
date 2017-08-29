@@ -235,7 +235,7 @@ if ($error == false) {
                     $log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
                 }
 
-                $log_text = processEditorInput($oldDescMode, $descMode, $log_text);
+                $log_text = processEditorInput($oldDescMode, $descMode, $log_text, $represent_text);
 
                 //validate date
                 $date_ok = false;
@@ -452,9 +452,9 @@ if ($error == false) {
                 tpl_set_var('date_message', !$date_ok ? $date_message : '');
 
                 if ($descMode != 1) {
-                    tpl_set_var('logtext', htmlspecialchars($log_text, ENT_COMPAT, 'UTF-8'), true);
+                    tpl_set_var('logtext', htmlspecialchars($represent_text, ENT_COMPAT, 'UTF-8'), true);
                 } else {
-                    tpl_set_var('logtext', $log_text);
+                    tpl_set_var('logtext', $represent_text);
                 }
 
                 // Text / normal HTML / HTML editor

@@ -203,7 +203,7 @@ if ($cacheId != 0) {
     $tpl->add_header_javascript(editorJsPath());
 
     // check and prepare log text
-    $logText = processEditorInput($oldDescMode, $descMode, $logText);
+    $logText = processEditorInput($oldDescMode, $descMode, $logText, $representLogText);
 
     // validate date
     if (is_numeric($logDateMonth)
@@ -368,7 +368,7 @@ if ($cacheId != 0) {
     $tpl->assign('listing_outdated', $listingOutdated);
     $tpl->assign('condition_history', $cache->getConditionHistory());
     // log text
-    $tpl->assign('logtext', $logText);
+    $tpl->assign('logtext', $representLogText);
     // text, <html> or editor
     $tpl->assign('descMode', $descMode);
     // logtypes

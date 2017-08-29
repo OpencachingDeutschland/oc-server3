@@ -27,7 +27,7 @@ require_once __DIR__ . '/smiley.inc.php';
  * @param $text
  * @return mixed|string
  */
-function processEditorInput($oldDescMode, $descMode, $text)
+function processEditorInput($oldDescMode, $descMode, $text, &$representText)
 {
     global $opt, $smiley;
 
@@ -37,22 +37,26 @@ function processEditorInput($oldDescMode, $descMode, $text)
             $text = nl2br(htmlspecialchars($text));
             // .. and smilies
             $text = str_replace($smiley['text'], $smiley['spaced_image'], $text);
+            $representText = $text;
         } else {
             // save HTML input => verify / tidy / filter;
             // also implemented in okapi/services/logs/submit.php
             $purifier = new OcHTMLPurifier($opt);
             $text = $purifier->purify($text);
+            $representText = $text;
         }
     } else {
         if ($oldDescMode == 1) {
-            // save plain text input => convert to HTML;
+            // keep plain text for re-presenting to the user
+            $representText = $text;
+            // convert to HTML for storing to database
             // also implemented in okapi/services/logs/submit.php
             $text = nl2br(htmlspecialchars($text, ENT_COMPAT, 'UTF-8'));
             $text = str_replace('  ', '&nbsp; ', $text);   // can produce new '  ' ('&nbsp; ' + ' ')
             $text = str_replace('  ', '&nbsp; ', $text);
         } else {
             // mode switch from HTML editor to plain text, or decode HTML-encoded plain text
-            $text = html2plaintext($text, $oldDescMode = 0, 0);
+            $representText = html2plaintext($text, $oldDescMode = 0, 0);
         }
     }
 

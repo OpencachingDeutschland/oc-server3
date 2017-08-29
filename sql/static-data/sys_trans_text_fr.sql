@@ -215,7 +215,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'FR', 'Sao Tomé et Principe', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'FR', 'Suriname', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'FR', 'Somalie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxx, NCxxxx et GCxxxx, tandis que xxxx peut être un nombre quelconque ou char.', '2015-08-25 01:28:59');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxxx et GCxxxxx, tandis que x peut être un nombre quelconque ou char.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'FR', 'Il existe plus d\'une cache avec le waypoint \&quot;%1\&quot;.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'FR', 'Le waypoint \&quot;%1\&quot; n\'est pas trouvé.', '2015-08-25 01:28:59');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'FR', 'Sénégal', '2015-08-25 01:28:59');

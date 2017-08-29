@@ -215,7 +215,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'DE', 'Sao Tomé und Principe', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'DE', 'Suriname', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'DE', 'Somalia', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'DE', 'Unbekanntes Wegpunkt-Format. Zulässig sind die Formate OCxxxx, NCxxxx und GCxxxx, wobei xxxx jeweils für beliebige Zahlen und Buchstaben steht.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'DE', 'Unbekanntes Wegpunkt-Format. Zulässig sind die Formate OCxxxxx und GCxxxxx, wobei x für beliebige Zahlen und Buchstaben steht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'DE', 'Mehrere Caches mit dem Wegpunkt \&quot;%1\&quot; gefunden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'DE', 'Kein Cache mit dem Wegpunkt \&quot;%1\&quot; gefunden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'DE', 'Senegal', '2010-08-28 11:48:06');

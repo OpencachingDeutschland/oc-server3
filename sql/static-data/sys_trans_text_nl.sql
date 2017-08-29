@@ -213,7 +213,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'NL', 'Sao Tomé en Principe', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'NL', 'Suriname', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'NL', 'Somalië', '2011-02-04 19:50:02');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'NL', 'Onbekend waypointformaat. Toegestane formaten zijn: OCxxxx, NCxxxx en GC, waarbij de xxxx elk cijfer en letter kan zijn.', '2011-02-04 19:50:02');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'NL', 'Onbekend waypointformaat. Toegestane formaten zijn: OCxxxxx en GCxxxxx, waarbij de x elk cijfer en letter kan zijn.', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'NL', 'Meerdere caches met waypoint \&quot;%1\&quot; gevonden.', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'NL', 'Geen cache met waipoint \&quot;%1\&quot; gevonden.', '2011-02-04 19:50:02');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'NL', 'Senegal', '2011-02-04 19:50:06');

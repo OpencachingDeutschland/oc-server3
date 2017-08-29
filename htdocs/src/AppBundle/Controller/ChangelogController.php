@@ -4,18 +4,46 @@ namespace AppBundle\Controller;
 
 use League\CommonMark\CommonMarkConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use Twig_Environment;
 
-class ChangelogController extends Controller
+/**
+ * @Route(service="app.controller.changelog_controller")
+ * @package AppBundle\Controller
+ */
+class ChangelogController
 {
+    /**
+     * @var CommonMarkConverter
+     */
+    private $markConverter;
+
+    /**
+     * @var Twig_Environment
+     */
+    private $twig;
+
+    public function __construct(CommonMarkConverter $markConverter, Twig_Environment $twig)
+    {
+        $this->markConverter = $markConverter;
+        $this->twig = $twig;
+    }
+
     /**
      * @Route("/changelog")
      */
     public function indexAction()
     {
-        $markConverter = $this->container->get('app.library.common_mark_converter');
-        $changelog = $markConverter->convertToHtml(file_get_contents(__DIR__ . '/../../../../ChangeLog-3.1.md'));
+        $changelog = $this->markConverter->convertToHtml(file_get_contents(__DIR__ . '/../../../../ChangeLog-3.1.md'));
 
-        return $this->render('AppBundle:ChangelogController:index.html.twig', ['changelog' => $changelog]);
+        $response = new Response();
+        $response->setContent(
+            $this->twig->render(
+                'AppBundle:ChangelogController:index.html.twig',
+                ['changelog' => $changelog]
+            )
+        );
+
+        return $response;
     }
 }

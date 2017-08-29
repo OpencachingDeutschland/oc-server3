@@ -852,6 +852,7 @@ class picture
                 if ($image) {
                     $image->clear();
                 }
+                return false;
             }
         }
 

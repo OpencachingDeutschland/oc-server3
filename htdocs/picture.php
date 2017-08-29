@@ -135,6 +135,12 @@ if ($action == 'add') { // Ocprop
             $fname = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
             $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
+            // SECURITY NOTE (see redmine #1009):
+            //
+            // Calling rotate() or rotate_and_shrink() does not only resolve
+            // image rotations, but also checks for a valid image format.
+            // rotate() requires imagick to do that.
+
             // try saving file if smaller unchg_size and browser native format
             if (in_array(mb_strtolower($ext), ['gif', 'png', 'jpg', 'jpeg'])
                 && ($_FILES['file']['size'] <= $opt['logic']['pictures']['unchg_size'])

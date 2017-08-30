@@ -36,7 +36,14 @@ function processEditorInput($oldDescMode, $descMode, $text, &$representText)
             // mode switch from plain text to HTML editor => convert HTML special chars
             $text = nl2br(htmlspecialchars($text));
             // .. and smilies
+            $text = ' ' . $text . ' ';   // see Redmine #1103
             $text = str_replace($smiley['text'], $smiley['spaced_image'], $text);
+            if (substr($text, 0, 1) == ' ') {
+                $text = substr($text, 1);
+            }
+            if (substr($text, -1) == ' ') {
+                $text = substr($text, 0, strlen($text) - 1);
+            }
             $representText = $text;
         } else {
             // save HTML input => verify / tidy / filter;

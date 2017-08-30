@@ -24,6 +24,13 @@ services:
         class: AppBundle\Form\DataProvider\UploadFieldNotesDataProvider
         arguments: ['@app.service.field_note']
 
+    app.controller.changelog_controller:
+        class: AppBundle\Controller\ChangelogController
+        arguments: ['@app.library.common_mark_converter', '@twig']
+
+    app.library.common_mark_converter:
+        class: League\CommonMark\CommonMarkConverter
+
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:

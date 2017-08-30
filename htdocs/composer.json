@@ -21,7 +21,8 @@
     "jms/translation-bundle": "^1.2",
     "beberlei/DoctrineExtensions": "^1.0",
     "twbs/bootstrap": "4.0.0-alpha.6",
-    "leafo/scssphp": "v0.6.7"
+    "leafo/scssphp": "v0.6.7",
+    "league/commonmark": "^0.15.6"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",

@@ -6,6 +6,10 @@
     colors="true"
     verbose="true"
 >
+    <php>
+        <server name="KERNEL_DIR" value="htdocs/app" />
+    </php>
+
     <testsuites>
         <testsuite name="default">
             <directory>tests/</directory>

@@ -42,6 +42,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - lib2 SQL debugger [#1093](https://redmine.opencaching.de/issues/1093)
 - some missing translations [#1035](https://redmine.opencaching.de/issues/1035)
 - some whitespace issue [#1020](https://redmine.opencaching.de/issues/1020)
+- small smilie replacement issue [#1103](https://redmine.opencaching.de/issues/1103)
 
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)

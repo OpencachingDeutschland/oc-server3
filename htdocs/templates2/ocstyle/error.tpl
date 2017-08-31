@@ -60,6 +60,8 @@
             ({$id}) {t}Switching to db-root failed.{/t}
         {elseif $id==ERROR_PICTURE_NOT_EXISTS}
             ({$id}) {t}Sorry, the requested picture does not exist.{/t}
+        {elseif $id==ERROR_WRONG_NODE}
+            ({$id}) {t}This log entry has been created on another Opencaching website. The cache can only be edited there.{/t}
         {else}
             {$id|escape|nl2br}
         {/if}

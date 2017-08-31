@@ -1661,6 +1661,8 @@ sql(
             OR OLD.`user_id`!=NEW.`user_id`
             OR OLD.`type`!=NEW.`type`
             OR OLD.`date`!=NEW.`date`
+            OR OLD.`needs_maintenance`!=NEW.`needs_maintenance`
+            OR OLD.`listing_outdated`!=NEW.`listing_outdated`
         THEN
             CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
             CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);

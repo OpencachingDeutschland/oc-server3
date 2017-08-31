@@ -141,7 +141,7 @@ function myHomeLoad()
             <img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
             {t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
             {* Ocprop: (find|us|own)erid=([0-9]+) *}
-            {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
+            {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
         </p>
     </div>
 

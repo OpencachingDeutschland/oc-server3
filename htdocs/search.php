@@ -254,6 +254,7 @@ if ($queryid != 0) {
     // get the search options parameters and store them in the queries table (to view "the next page")
     $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0; // Ocprop
     $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0; // Ocprop
+    $options['f_unpublished'] = isset($_REQUEST['f_unpublished']) ? $_REQUEST['f_unpublished'] : 0;
     $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? $_REQUEST['f_disabled'] : 0;
     $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1; // Ocprop
     // f_inactive formerly was used for both, archived and disabled caches.
@@ -1126,6 +1127,12 @@ if ($options['showresult'] == 1) {
                      WHERE
                         `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'
                         AND `cache_logs`.`type` IN (1, 7))";
+        }
+        if (!isset($options['f_unpublished'])) {
+            $options['f_unpublished'] = '0';
+        }
+        if ($options['f_unpublished'] != 0) {
+            $sql_where[] = '`caches`.`status`<>5';
         }
         if (!isset($options['f_inactive'])) {
             $options['f_inactive'] = '0';

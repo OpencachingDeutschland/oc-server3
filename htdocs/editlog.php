@@ -168,12 +168,6 @@ if (isset($_POST['descMode'])) {
     $oldDescMode = $descMode;
 }
 
-// fuer alte Versionen von OCProp
-if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-    $descMode = 1;
-    $_POST['submitform'] = $_POST['submit'];
-}
-
 // Text from textarea; Ocprop
 if (isset($_POST['logtext'])) {
     $log_text = trim($_POST['logtext']);
@@ -182,11 +176,6 @@ if (isset($_POST['logtext'])) {
     if ($descMode == 1) {
         $oldDescMode = 0;
     }   // plain text with encoded HTML entities
-}
-
-// fuer alte Versionen von OCProp
-if ($descMode != 1 && isset($_POST['submit']) && !isset($_POST['version2'])) {
-    $log_text = iconv("ISO-8859-1", "UTF-8", $log_text);
 }
 
 $log_text = processEditorInput($oldDescMode, $descMode, $log_text, $represent_text);

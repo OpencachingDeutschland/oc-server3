@@ -6,11 +6,6 @@
 use AppBundle\Entity\FieldNote;
 use AppBundle\Entity\GeocacheLog;
 
-// prevent old OCProp versions
-if ((isset($_POST['submit']) || isset($_POST['submitform'])) && !isset($_POST['version3'])) {
-    die('Your client may be outdated!');
-}
-
 // include libraries
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/cache.class.php';

@@ -228,10 +228,8 @@ function show_tip(text)
 {/if}
 {if $editlog}
     <input type="hidden" name="logid" value="{$logid}"/>
-    <input type="hidden" name="version2" value="1"/>
 {else}
     <input type="hidden" name="cacheid" value="{$cacheid}"/>
-    <input type="hidden" name="version3" value="1"/>
     <input type="hidden" name="fieldnoteid" id="fieldnoteid" value="{$fieldnoteid}" />
 {/if}
 <input id="descMode" type="hidden" name="descMode" value="1" />

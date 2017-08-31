@@ -272,7 +272,8 @@ class cache
         $rs = sql(
             "SELECT `id`, `listing_outdated`
              FROM `cache_logs`
-             WHERE `cache_id`='&1' AND `listing_outdated`>0
+             WHERE `cache_id`='&1'
+             AND `listing_outdated`>0
              ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC",
             // same sorting order as in DB function sp_update_logstat()
             $this->getCacheId()
@@ -292,21 +293,25 @@ class cache
 
     public function getListingOutdatedRelativeToLog($logId)
     {
-        $logDate = sql_value("SELECT `date` FROM `cache_logs` WHERE `id`='&1'", '', $logId);
+        $logDate = sql_value("SELECT `order_date` FROM `cache_logs` WHERE `id`='&1'", '', $logId);
 
         return
-            sql_value(
+            sql_value(  // Is there a newer log with LO flag?
                 "SELECT 1
                  FROM `cache_logs`
-                 WHERE `cache_id`='&1' AND `date`>'&2' AND `listing_outdated`>0
+                 WHERE `cache_id`='&1'
+                 AND `order_date`>'&2'
+                 AND `listing_outdated`>0
                  LIMIT 1",
                 0,
                 $this->getCacheId(),
                 $logDate
-            ) == 0 && sql_value(
+            ) == 0 && sql_value(  // Was the listing outdated before the log was posted?
                 "SELECT `listing_outdated`
                  FROM `cache_logs`
-                 WHERE `cache_id`='&1' AND `listing_outdated`>0 AND `id`!='&2'
+                 WHERE `cache_id`='&1'
+                 AND `listing_outdated`>0
+                 AND `id`!='&2'
                  ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
                  LIMIT 1",
                 0,
@@ -1033,11 +1038,10 @@ class cache
     }
 
     /**
-     * @param $cacheId
      * @param $logId
      * @return bool
      */
-    function isLatestLog($logId)
+    public function isLatestLog($logId)
     {
         $latestLogId = sql_value(
             "SELECT `id` FROM `cache_logs`

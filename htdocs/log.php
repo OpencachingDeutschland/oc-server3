@@ -203,8 +203,11 @@ if ($cacheId != 0) {
 
     // validate date
     $validate['dateOk'] = cachelog::validateDate(
-        $logDateYear, $logDateMonth, $logDateDay,
-        $logTimeHour, $logTimeMinute,
+        $logDateYear,
+        $logDateMonth,
+        $logDateDay,
+        $logTimeHour,
+        $logTimeMinute,
         isset($_POST['submitform'])
     );
 

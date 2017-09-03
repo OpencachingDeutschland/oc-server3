@@ -30,6 +30,8 @@
     $time_not_ok_message = '<span class="errormsg">' . t('The entered time is invalid.') . '</span>';
     $way_length_not_ok_message = '<span class="errormsg">' . t('The entered distance is invalid, Format: aa.aaa') . '</span>';
     $date_not_ok_message = '<span class="errormsg">' . t('Invalid date, format:DD-MM-JJJJ') . '</span>';
+    $hide_after_publish_message = '<span class="errormsg">' . t('The cache must be hidden before publish.') . '</span>';
+    $event_before_publish_message = '<span class="errormsg">' . t('The event must happen after publish.') . '</span>';
     $name_not_ok_message = '&nbsp;<span class="errormsg">' . t('Cachename is invalid') . '</span>';
     $tos_not_ok_message = '<br/><span class="errormsg">' . t('The cache can only be adopted if you agree our terms of use.') . '</span>';
     $type_not_ok_message = '&nbsp;<span class="errormsg">' . t('No cache-type is chosen.') . '</span>';

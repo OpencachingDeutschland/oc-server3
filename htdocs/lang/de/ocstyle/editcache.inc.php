@@ -24,6 +24,8 @@ $all_countries_submit = '<input type="submit" name="show_all_countries_submit" i
 $error_general = "<tr><td class='error' colspan='2'><b>" . t('Some errors occurred, please check the marked fields.') . "</b></td></tr>";
 $name_message = '&nbsp;<span class="errormsg">' . t('Cachename is invalid') . '</span>';
 $date_message = '<span class="errormsg">' . t('date is invalid') . '</span>';
+$hide_after_publish_message = '<span class="errormsg">' . t('The cache must be hidden before publish.') . '</span>';
+$event_before_publish_message = '<span class="errormsg">' . t('The event must happen after publish.') . '</span>';
 $coords_message = '<span class="errormsg">' . t('The used coordinates are invalid.') . '</span>';
 $time_not_ok_message = '<span class="errormsg">' . t('The entered time is invalid.') . '</span>';
 $way_length_not_ok_message = '<span class="errormsg">' . t('The distance you have entered is invalid. Format aa.aaa') . '</span>';

@@ -1953,3 +1953,5 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2656', 'as firs
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2657', 'after "%1"', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2658', 'as last picture', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2659', 'Recommendation', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2660', 'The cache must be hidden before publish.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2661', 'The event must happen after publish.', '2017-08-20 19:30:00');

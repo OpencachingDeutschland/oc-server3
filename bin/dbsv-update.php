@@ -1175,6 +1175,18 @@ function dbv_160()
     );
 }
 
+function dbv_161()
+{
+    // Discard thumbnails of images that may contain transparency,
+    // because background color has been changed from black to white.
+    sql(
+        "UPDATE `pictures`
+         SET `thumb_last_generated`='0000-00-00 00:00:00', thumb_url=''
+         WHERE `url` RLIKE '\.(png|gif)$'"
+    );
+}
+
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

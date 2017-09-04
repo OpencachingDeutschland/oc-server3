@@ -92,7 +92,7 @@
                 <td valign=top>{t}Home coordinates:{/t}</td>
                 <td>
                     {if $edit==true}
-                        {coordinput prefix="coord" lat=$coordsDecimal.lat lon=$coordsDecimal.lon}
+                        {coordinput prefix="coord" lat=$coordsDecimal.lat laterror=$latitudeError lon=$coordsDecimal.lon lonerror=$longitudeError}
                     {else}
                         {$coords.lat|escape} {$coords.lon|escape}
                     {/if}

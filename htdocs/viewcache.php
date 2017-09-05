@@ -199,6 +199,29 @@ if ($rCache['status'] == 5) {
     }
 }
 
+// try to provide other-language hints if none is available for selected language
+if (trim($rCache['hint']) == '') {
+    $rs = sql(
+        "SELECT
+            `hint`,
+            IFNULL(`stt`.`text`, `native_name`) AS `language`
+         FROM `cache_desc`
+         JOIN `languages`
+            ON `languages`.`short`=`cache_desc`.`language`
+         LEFT JOIN `sys_trans_text` `stt`
+            ON `stt`.`trans_id`=`languages`.`trans_id`
+            AND `stt`.`lang`='&2'
+         WHERE `cache_desc`.`cache_id`='&1'
+         AND TRIM(`hint`) != ''",
+        $cacheid,
+        $opt['template']['locale']
+    );
+    while ($r = sql_fetch_assoc($rs)) {
+        $rCache['hint'] .= '[' . $r['language'] . '] ' . $r['hint'] . '<br />';
+    }
+    sql_free_result($rs);
+}
+
 // format waylength
 if ($rCache['waylength'] < 5) {
     if (round($rCache['waylength'], 2) != round($rCache['waylength'], 1)) {

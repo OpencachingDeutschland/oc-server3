@@ -187,6 +187,7 @@ class OcSmarty extends Smarty
         $optn['page']['absolute_urlpath'] = parse_url($opt['page']['absolute_url'], PHP_URL_PATH);
         $optn['page']['absolute_http_url'] = $opt['page']['absolute_http_url'];
         $optn['page']['default_absolute_url'] = $opt['page']['default_absolute_url'];
+        $optn['page']['slashed_protocol'] = $opt['page']['protocol'] . '://';
         $optn['page']['login_url'] = ($opt['page']['https']['force_login'] ? $opt['page']['absolute_https_url'] : '') . 'login.php';
         $optn['page']['target'] = $this->target;
         $optn['page']['showdonations'] = $opt['page']['showdonations'];

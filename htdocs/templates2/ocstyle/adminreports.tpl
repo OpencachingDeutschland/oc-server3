@@ -160,9 +160,10 @@ function editcomment(edit)
       </div>
 
         <p style="line-height: 1.6em; margin-bottom:24px">
-        {if !$ownreport}
+        {if !$ownreport || $reopenable}
             <input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
-        {else}
+        {/if}
+        {if $ownreport}
             &nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />{if $inprogress}&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />{/if}
             </p>
 

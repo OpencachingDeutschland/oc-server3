@@ -38,7 +38,7 @@ if (isset($_REQUEST['savecomment'])) {
         $comment
     );
 } elseif (isset($_REQUEST['assign']) && $rid > 0 &&
-    ($adminid == 0 || ($adminid != $login->userid && $age >= 14))
+    ($adminid == 0 || $adminid == $login->userid || ($adminid != $login->userid && $age >= 14))
 ) {
     sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
     $tpl->redirect('adminreports.php?id=' . $rid);
@@ -112,21 +112,24 @@ if ($id == 0) {
                 `cr`.`note`,
                 IFNULL(tt.text, crs.name) AS `status`,
                 `cr`.`status`='&2' AS `inprogress`,
+                `cr`.`status`='&3' AS `closed`,
                 `cr`.`date_created`, `cr`.`lastmodified`,
                 `c`.`name` AS `cachename`,
                 `c`.`user_id` AS `ownerid`,
-                `cr`.`comment`
+                `cr`.`comment`,
+                TIMESTAMPDIFF(MINUTE, `lastmodified`, NOW()) AS `minutes_since_change`
          FROM `cache_reports` AS `cr`
          LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
          LEFT JOIN `caches` AS `c` ON `c`.`cache_id`=`cr`.`cacheid`
          LEFT JOIN `user` AS `u1` ON `u1`.`user_id`=`cr`.`userid`
          LEFT JOIN `user` AS `u2` ON `u2`.`user_id`=`cr`.`adminid`
          LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
-         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&3'
-         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&3'
+         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&4'
+         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&4'
          WHERE `cr`.`id`= &1",
         $id,
         CACHE_REPORT_INPROGRESS,
+        CACHE_REPORT_DONE,
         $opt['template']['locale']
     );
 
@@ -155,6 +158,12 @@ if ($id == 0) {
         $tpl->assign('status', $record['status']);
         $tpl->assign('created', $record['date_created']);
         $tpl->assign('lastmodified', $record['lastmodified']);
+        $tpl->assign(
+            'reopenable',
+            $record['adminid'] == $login->userid &&
+            $record['closed'] == 1 &&
+            $record['minutes_since_change'] <= 10
+        );
         $tpl->assign('cachename', $record['cachename']);
         $tpl->assign('ownerid', $record['ownerid']);
         $tpl->assign('admin_comment', $record['comment']);

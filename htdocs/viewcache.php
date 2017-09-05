@@ -294,7 +294,6 @@ $rs = sql(
             `uuid`,
             `url`,
             `title`,
-            `thumb_url`,
             `spoiler`,
             `display`
      FROM `pictures`
@@ -304,8 +303,13 @@ $rs = sql(
      ORDER BY `seq`",
     $cacheid
 );
-$tpl->assign_rs('pictures', $rs);
+$cachepics = [];
+while ($r = sql_fetch_assoc($rs)) {
+    $r['url'] = use_current_protocol($r['url']);
+    $cachepics[] = $r;
+}
 sql_free_result($rs);
+$tpl->assign('pictures', $cachepics);
 
 $tpl->assign('pictures_per_row', $opt['logic']['pictures']['listing_thumbs_per_row']);
 // REDISGN TODO:

@@ -188,13 +188,13 @@
         {else}
         <tr>
             <td class="header-small searcherror" colspan="2">
-                &nbsp;&nbsp;<img src="resource2/ocstyle/images/log/16x16-dnf.png"/>&nbsp;
+                &nbsp;&nbsp;
                 {if $owner}
-                    {t 1=$ownerid 2=$owner}The user <b><a href="viewprofile.php?userid=%1">%2</a></b> does not own any caches that fit to your search options.{/t}
+                    {t 1=$ownerid 2=$owner|escape}The user <b><a href="viewprofile.php?userid=%1">%2</a></b> does not own any caches that fit to your search options.{/t}
                 {elseif $finder}
-                    {t 1=$finderid 2=$finder}The user <b><a href="viewprofile.php?userid=%1">%2</a></b> does not own any logs that fit to your search options.{/t}
+                    {t 1=$finderid 2=$finder|escape}The user <b><a href="viewprofile.php?userid=%1">%2</a></b> does not own any logs that fit to your search options.{/t}
                 {elseif $finder_not || $owner_not}
-                    {t 1=$finder_not 2=$owner_not}The user <b>%1%2</b> doesn't exist.{/t}
+                    {t 1=$finder_not|escape 2=$owner_not|escape}The user <b>%1%2</b> doesn't exist.{/t}
                 {/if}
             </td>
         </tr>

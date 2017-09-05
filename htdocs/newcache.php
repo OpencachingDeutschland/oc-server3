@@ -770,7 +770,6 @@ if ($error == false) {
                 $error = true;
             }
 
-
             //check hidden_since
             $hidden_date_not_ok = true;
             if (is_numeric($hidden_day) && is_numeric($hidden_month) && is_numeric($hidden_year)) {
@@ -779,6 +778,23 @@ if ($error == false) {
             if ($hidden_date_not_ok) {
                 tpl_set_var('hidden_since_message', $date_not_ok_message);
                 $error = true;
+            } else if ($publish != 'notnow') {
+                $hidden_date = mktime(0, 0, 0, $hidden_month, $hidden_day, $hidden_year);
+                if ($publish == 'later') {
+                    // Activation hour can be ignored here. This simplifies checking event dates.
+                    $publish_date = mktime(0, 0, 0, $activate_month, $activate_day, $activate_year);
+                } else {
+                    $publish_date = time();
+                }
+                if ($sel_type == 6 && $hidden_date < $publish_date) {
+                    tpl_set_var('hidden_since_message', $event_before_publish_message);
+                    $hidden_date_not_ok = true;
+                    $error = true;
+                } elseif ($sel_type != 6 && $hidden_date > $publish_date) {
+                    tpl_set_var('hidden_since_message', $hide_after_publish_message);
+                    $hidden_date_not_ok = true;
+                    $error = true;
+                }
             }
 
             //check GC waypoint

@@ -94,6 +94,7 @@ if ($error == false) {
                     `caches`.`name`,
                     `caches`.`type`,
                     `caches`.`size`,
+                    `caches`.`date_created`,
                     `caches`.`date_hidden`,
                     `caches`.`date_activate`,
                     `caches`.`longitude`,
@@ -353,11 +354,43 @@ if ($error == false) {
 
                 //check hidden_since
                 $hidden_date_not_ok = true;
+                $hidden_date_mismatch = false;
                 if (is_numeric($cache_hidden_day) && is_numeric($cache_hidden_month) &&
                     is_numeric($cache_hidden_year)
                 ) {
                     $hidden_date_not_ok =
                         (checkdate($cache_hidden_month, $cache_hidden_day, $cache_hidden_year) == false);
+                }
+                if ($hidden_date_not_ok == false && $publish != 'notnow') {
+                    $hidden_date = mktime(
+                        0,
+                        0,
+                        0,
+                        $cache_hidden_month,
+                        $cache_hidden_day,
+                        $cache_hidden_year
+                    );
+                    if ($status_old != 5) {
+                        // the cache has already been published
+                        $publish_date = strtotime(substr($cache_record['date_created'], 0, 10));
+                    } elseif ($publish == 'later') {
+                        // Activation hour can be ignored here. This simplifies checking event dates.
+                        $publish_date = mktime(
+                            0,
+                            0,
+                            0,
+                            $cache_activate_month,
+                            $cache_activate_day,
+                            $cache_activate_year
+                        );
+                    } else {
+                        // the cache is to be published now
+                        $publish_date = time();
+                    }
+                    if (($cache_type == 6 && $hidden_date < $publish_date) ||
+                        ($cache_type != 6 && $hidden_date > $publish_date)) {
+                        $hidden_date_mismatch = true;
+                    }
                 }
 
                 //check date_activate
@@ -435,7 +468,8 @@ if ($error == false) {
                 if (isset($_POST['submit'])) {  // Ocprop
                     // all validations ok?
                     if (!(
-                        $hidden_date_not_ok || $lat_not_ok || $lon_not_ok || $name_not_ok ||
+                        $hidden_date_not_ok || $hidden_date_mismatch ||
+                        $lat_not_ok || $lon_not_ok || $name_not_ok ||
                         $time_not_ok || $way_length_not_ok || $size_not_ok ||
                         $activate_date_not_ok || $status_not_ok || $diff_not_ok ||
                         $attribs_not_ok || $wpgc_not_ok
@@ -1074,7 +1108,15 @@ if ($error == false) {
                 tpl_set_var('name_message', ($name_not_ok == true) ? $name_message : '');
                 tpl_set_var('lon_message', ($lon_not_ok == true) ? $coords_message : '');
                 tpl_set_var('lat_message', ($lat_not_ok == true) ? $coords_message : '');
-                tpl_set_var('date_message', ($hidden_date_not_ok == true) ? $date_message : '');
+                if ($hidden_date_mismatch == true) {
+                    if ($cache_type == 6) {
+                        tpl_set_var('date_message', $event_before_publish_message);
+                    } else {
+                        tpl_set_var('date_message', $hide_after_publish_message);
+                    }
+                } else {
+                    tpl_set_var('date_message', ($hidden_date_not_ok == true) ? $date_message : '');
+                }
                 tpl_set_var('size_message', ($size_not_ok == true) ? $sizemismatch_message : '');
                 tpl_set_var('wpgc_message', ($wpgc_not_ok == true) ? $bad_wpgc_message : '');
 

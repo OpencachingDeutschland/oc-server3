@@ -9,6 +9,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - notice for reported cashes [#1100](https://redmine.opencaching.de/issues/1100)
 - recommendation notice in log messages [#1090](https://redmine.opencaching.de/issues/1090)
 - check for hidden and publish date [#898](https://redmine.opencaching.de/issues/898)
+- added error message for invalide home cords [#982](https://redmine.opencaching.de/issues/982)
 
 ### Changed
 - activated error_reporting in vagrant dev environment [#1082](https://redmine.opencaching.de/issues/1082)

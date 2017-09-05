@@ -488,14 +488,26 @@ class cache
             return [];
         }
 
-        $rsCoords = sql(
-            "SELECT `date_created` `date`, `latitude`, `longitude`
-             FROM `cache_coordinates`
-             WHERE `cache_id`='&1'
-             ORDER BY `date_created` DESC",
+        $is_quiz_or_safari = sql_value(
+            "SELECT `type`=7 OR `type`=8 OR `attrib_id` IS NOT NULL
+             FROM `caches`
+             LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `attrib_id`=61
+             WHERE `caches`.`cache_id`='&1'",
+            0,
             $cacheId
         );
-        $coords = sql_fetch_assoc_table($rsCoords);
+        if ($is_quiz_or_safari) {
+            $coords = [];
+        } else {
+            $rsCoords = sql(
+                "SELECT `date_created` `date`, `latitude`, `longitude`
+                 FROM `cache_coordinates`
+                 WHERE `cache_id`='&1'
+                 ORDER BY `date_created` DESC",
+                $cacheId
+            );
+            $coords = sql_fetch_assoc_table($rsCoords);
+        }
 
         if ($coords) {
             $lastcoorddate = $coords[count($coords)-1]['date'];

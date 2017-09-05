@@ -63,6 +63,10 @@ function smarty_function_coordinput($params, &$smarty)
             'UTF-8'
         ) . '" size="5" maxlength="6" /> \'';
 
+    if (isset($params['laterror']) && $params['laterror'] == true) {
+        $returnValue .= ' &nbsp; <span class="errormsg">' . gettext('Invalid coordinate') . '</span>';
+    }
+
     $returnValue .= '<br />';
 
     $returnValue .= '<select name="' . htmlspecialchars($prefix, ENT_QUOTES, 'UTF-8') . 'EW">';
@@ -97,6 +101,10 @@ function smarty_function_coordinput($params, &$smarty)
             ENT_QUOTES,
             'UTF-8'
         ) . '" size="5" maxlength="6" /> \'';
+
+    if (isset($params['lonerror']) && $params['lonerror'] == true) {
+        $returnValue .= ' &nbsp; <span class="errormsg">' . gettext('Invalid coordinate') . '</span>';
+    }
 
     return $returnValue;
 }

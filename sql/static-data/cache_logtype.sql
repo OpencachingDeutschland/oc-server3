@@ -1,33 +1,34 @@
 -- Table cache_logtype
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_logtype`;
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('1', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('2', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('3', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('4', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('5', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '7');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('6', '8');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('7', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('8', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('9', '3');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '1');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '2');
-INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES ('10', '3');
+INSERT INTO `cache_logtype` (`cache_type_id`, `log_type_id`) VALUES
+('1', '1'),
+('1', '2'),
+('1', '3'),
+('2', '1'),
+('2', '2'),
+('2', '3'),
+('3', '1'),
+('3', '2'),
+('3', '3'),
+('4', '1'),
+('4', '2'),
+('4', '3'),
+('5', '1'),
+('5', '2'),
+('5', '3'),
+('6', '3'),
+('6', '7'),
+('6', '8'),
+('7', '1'),
+('7', '2'),
+('7', '3'),
+('8', '1'),
+('8', '2'),
+('8', '3'),
+('9', '1'),
+('9', '2'),
+('9', '3'),
+('10', '1'),
+('10', '2'),
+('10', '3');

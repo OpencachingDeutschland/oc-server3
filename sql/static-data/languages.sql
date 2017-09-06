@@ -1,38 +1,38 @@
-
 -- Table languages
 SET NAMES 'utf8';
 TRUNCATE TABLE `languages`;
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('BG', 'Bulgarian', '146', 'български език', 'Bulgarisch', 'Bulgarian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('CA', 'Catalan', '2243', 'Català', 'Katalanisch', 'Catalan', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('CS', 'Czech', '145', 'Čeština', 'Tschechisch', 'Czech', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('DA', 'Danish', '104', 'Dansk', 'Dänisch', 'Danish', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('DE', 'German', '160', 'Deutsch', 'Deutsch', 'German', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EL', 'Greek', '103', 'Ελληνικά', 'Griechisch', 'Greek', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EN', 'English', '159', 'English', 'Englisch', 'English', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EO', 'Esperanto', '102', 'Esperanto', 'Esperanto', 'Esperanto', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('ES', 'Spanish', '157', 'Español', 'Spanisch', 'Spanish', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('ET', 'Estonian', '101', 'Eesti', 'Estnisch', 'Estonian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('EU', 'Basque', '100', 'Euskara', 'Baskisch', 'Basque', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('FI', 'Finnish', '93', 'Suomi', 'Finnisch', 'Finnish', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('FR', 'French', '158', 'Français', 'Französisch', 'French', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('HR', 'Croatian', '92', 'Hrvatski', 'Kroatisch', 'Croatian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('HU', 'Hungarian', '91', 'Magyar', 'Ungarisch', 'Hungarian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('IS', 'Icelandic', '79', 'Íslenska', 'Isländisch', 'Icelandic', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('IT', 'Italian', '78', 'Italiano', 'Italienisch', 'Italian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('JA', 'Japanese', '156', '日本語', 'Japanisch', 'Japanese', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('LB', 'Luxembourgish', '2242', 'Lëtzebuergesch', 'Luxemburgisch', 'Luxembourgish', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('LT', 'Lithuanian', '77', 'Lietuvių', 'Litauisch', 'Lithuanian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('LV', 'Latvian', '76', 'Latviešu', 'Lettisch', 'Latvian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('NL', 'Dutch', '155', 'Nederlands', 'Niederländisch', 'Dutch', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('NO', 'Norwegian', '75', 'Norsk', 'Norwegisch', 'Norwegian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('PL', 'Polish', '74', 'Polski', 'Polnisch', 'Polish', '1', '1');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('PT', 'Portuguese', '64', 'Português', 'Portugiesisch', 'Portuguese', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('RO', 'Romanian', '59', 'Română', 'Rumänisch', 'Romanian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('RU', 'Russian', '49', 'Русский', 'Russisch', 'Russian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('SK', 'Slovak', '48', 'Slovenčina', 'Slowakisch', 'Slovak', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('SL', 'Slovenian', '43', 'Slovenščina', 'Slowenisch', 'Slovenian', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('SV', 'Swedish', '42', 'Svenska', 'Schwedisch', 'Swedish', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('TH', 'Thai', '2241', 'ไทย', 'Thai', 'Thai', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('TR', 'Turkish', '36', 'Türkçe', 'Türkisch', 'Turkish', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('VI', 'Vietnamese', '21', 'Việt Nam', 'Vietnamesisch', 'Vietnamese', '0', '0');
-INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES ('ZH', 'Chinese', '2240', '中文', 'Chinesisch', 'Chinese', '0', '0');
+INSERT INTO `languages` (`short`, `name`, `trans_id`, `native_name`, `de`, `en`, `list_default_de`, `list_default_en`) VALUES
+('BG', 'Bulgarian', '146', 'български език', 'Bulgarisch', 'Bulgarian', '0', '0'),
+('CA', 'Catalan', '2243', 'Català', 'Katalanisch', 'Catalan', '0', '0'),
+('CS', 'Czech', '145', 'Čeština', 'Tschechisch', 'Czech', '0', '0'),
+('DA', 'Danish', '104', 'Dansk', 'Dänisch', 'Danish', '1', '1'),
+('DE', 'German', '160', 'Deutsch', 'Deutsch', 'German', '1', '1'),
+('EL', 'Greek', '103', 'Ελληνικά', 'Griechisch', 'Greek', '0', '0'),
+('EN', 'English', '159', 'English', 'Englisch', 'English', '1', '1'),
+('EO', 'Esperanto', '102', 'Esperanto', 'Esperanto', 'Esperanto', '0', '0'),
+('ES', 'Spanish', '157', 'Español', 'Spanisch', 'Spanish', '1', '1'),
+('ET', 'Estonian', '101', 'Eesti', 'Estnisch', 'Estonian', '0', '0'),
+('EU', 'Basque', '100', 'Euskara', 'Baskisch', 'Basque', '0', '0'),
+('FI', 'Finnish', '93', 'Suomi', 'Finnisch', 'Finnish', '0', '0'),
+('FR', 'French', '158', 'Français', 'Französisch', 'French', '1', '1'),
+('HR', 'Croatian', '92', 'Hrvatski', 'Kroatisch', 'Croatian', '0', '0'),
+('HU', 'Hungarian', '91', 'Magyar', 'Ungarisch', 'Hungarian', '0', '0'),
+('IS', 'Icelandic', '79', 'Íslenska', 'Isländisch', 'Icelandic', '0', '0'),
+('IT', 'Italian', '78', 'Italiano', 'Italienisch', 'Italian', '0', '0'),
+('JA', 'Japanese', '156', '日本語', 'Japanisch', 'Japanese', '0', '0'),
+('LB', 'Luxembourgish', '2242', 'Lëtzebuergesch', 'Luxemburgisch', 'Luxembourgish', '0', '0'),
+('LT', 'Lithuanian', '77', 'Lietuvių', 'Litauisch', 'Lithuanian', '0', '0'),
+('LV', 'Latvian', '76', 'Latviešu', 'Lettisch', 'Latvian', '0', '0'),
+('NL', 'Dutch', '155', 'Nederlands', 'Niederländisch', 'Dutch', '1', '1'),
+('NO', 'Norwegian', '75', 'Norsk', 'Norwegisch', 'Norwegian', '0', '0'),
+('PL', 'Polish', '74', 'Polski', 'Polnisch', 'Polish', '1', '1'),
+('PT', 'Portuguese', '64', 'Português', 'Portugiesisch', 'Portuguese', '0', '0'),
+('RO', 'Romanian', '59', 'Română', 'Rumänisch', 'Romanian', '0', '0'),
+('RU', 'Russian', '49', 'Русский', 'Russisch', 'Russian', '0', '0'),
+('SK', 'Slovak', '48', 'Slovenčina', 'Slowakisch', 'Slovak', '0', '0'),
+('SL', 'Slovenian', '43', 'Slovenščina', 'Slowenisch', 'Slovenian', '0', '0'),
+('SV', 'Swedish', '42', 'Svenska', 'Schwedisch', 'Swedish', '0', '0'),
+('TH', 'Thai', '2241', 'ไทย', 'Thai', 'Thai', '0', '0'),
+('TR', 'Turkish', '36', 'Türkçe', 'Türkisch', 'Turkish', '0', '0'),
+('VI', 'Vietnamese', '21', 'Việt Nam', 'Vietnamesisch', 'Vietnamese', '0', '0'),
+('ZH', 'Chinese', '2240', '中文', 'Chinesisch', 'Chinese', '0', '0');

@@ -58,6 +58,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - non https links in watch emails [#1062](https://redmine.opencaching.de/issues/1062)
 - typ in cache attribute [#1106](https://redmine.opencaching.de/issues/1106)
 - some ssl image issues on listing page [#1107](https://redmine.opencaching.de/issues/1107)
+- only images are allowed for upload [#1009](https://redmine.opencaching.de/issues/1009)
 
 
 ## [3.1.3] - 2017-05-17 [3.1.2...3.1.3](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.2...3.1.3)

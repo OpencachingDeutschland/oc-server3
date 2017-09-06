@@ -296,7 +296,7 @@ function show_tip(text)
             {if $validate.confirmListingOk==false}<span class="errormsg">{t}Please confirm:{/t}</span>{/if}
         </td>
         <td>
-            <input type="checkbox" id="confirm_listing_ok" name="confirm_listing_ok" value="1" class="checkbox" {if $ownerlog}checked{/if}/> <label for="confirm_listing_ok">{t 1=$cache_listing_outdated_log}The problems of the cache description as mentioned in the <a href="%1" target="_blank"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png" /> log entries</a> do no longer exist.{/t} {if $gcwp}{t}All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with{/t} <a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$gcwp}" target="_blank">{$gcwp}</a>.{/if}
+            <input type="checkbox" id="confirm_listing_ok" name="confirm_listing_ok" value="1" class="checkbox" {if $ownerlog}checked{/if}/> <label for="confirm_listing_ok">{t 1=$cache_listing_outdated_log}The problems of the cache description as mentioned in the <a href="%1" target="_blank"><img src="resource2/ocstyle/images/log/16x16-listing-outdated.png" /> log entries</a> do no longer exist.{/t} {if $gcwp}{t}All information (coordinates, container size, difficulty, terrain, description text, encoded hints, additional waypoints) is at least up-to-date with{/t} <a href="http://www.geocaching.com/seek/cache_details.aspx?wp={$gcwp}" target="_blank">{$gcwp}</a>.{/if}</label>
         </td>
     </tr>
     <tr id="cache_condition_spacer"><td class="spacer" colspan="2"></td></tr>

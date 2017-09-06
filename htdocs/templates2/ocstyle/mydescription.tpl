@@ -47,7 +47,7 @@
     <tr>
         <td class="header-small" colspan="2">
             <input type="submit" name="cancel" value="{t}Cancel{/t}" class="formbutton" onclick="submitbutton('cancel')" />&nbsp;&nbsp;
-            <input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')"(/>
+            <input type="submit" name="save" value="{t}Submit{/t}" class="formbutton" onclick="submitbutton('save')" />
         </td>
     </tr>
 </table>

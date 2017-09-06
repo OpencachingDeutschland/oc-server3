@@ -119,7 +119,7 @@ function myHomeLoad()
             {assign var=subtitle value="{t}Log pictures for your caches:{/t}"}
             {assign var=maxlines value=0}
         {else}
-            <b>{t}Your latest log pictures:{/t}</b></p>
+            <b>{t}Your latest log pictures:{/t}</b>
             {assign var=maxlines value=1}
         {/if}
     </p>
@@ -156,9 +156,9 @@ function myHomeLoad()
                 {/if}
             {/foreach}
             <tr>
-                <td colspan="4"><b><span style="line-height:2em">{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
-                <td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></td>
-                <td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></td>
+                <td colspan="4"><span style="line-height:2em"><b>{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span></td>
+                <td style="text-align:right"><span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></span></td>
+                <td style="text-align:right"><span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></span></td>
                 <td style="text-align:left"><span style="line-height:2em"><b>{t}Last log{/t}</b></span></td>
             </tr>
             {foreach from=$caches item=cacheItem}

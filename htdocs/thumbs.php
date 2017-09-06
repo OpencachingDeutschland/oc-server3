@@ -201,6 +201,8 @@ if ($r) {
 
         // Create and save thumb
         $thumbimage = imagecreatetruecolor($thumbwidth, $thumbheight);
+        $white = imagecolorallocate($thumbimage, 255, 255, 255);
+        imagefill($thumbimage, 0, 0, $white);
         imagecopyresampled($thumbimage, $im, 0, 0, 0, 0, $thumbwidth, $thumbheight, $imwidth, $imheight);
 
         // Create directory

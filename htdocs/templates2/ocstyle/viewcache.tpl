@@ -467,7 +467,7 @@ function showalllists()
             <div class="viewcache-pictureblock" {if $piccount++ % $pictures_per_row == 0}style="clear:both"{/if}>
                 <div class="img-shadow">
                     <!-- a href="{$pictureItem.url|escape}" target="_blank" -->
-                        <img class="enlargegroup_cachepics" src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" longdesc="{$pictureItem.url|escape}" alt="{$pictureItem.title|escape}" border="0" align="bottom" onclick="enlarge(this)" />
+                        <img class="enlargegroup_cachepics" src="thumbs.php?type=2&uuid={$pictureItem.uuid|urlencode}" longdesc="{$pictureItem.url|escape}" alt="{$pictureItem.title|escape}" border="0" align="bottom" onclick="enlarge(this)" style="background-color:#fff" />
                     <!-- /a -->
                 </div>
                 <span class="title">{$pictureItem.title|escape}</span>

@@ -1175,6 +1175,49 @@ function dbv_160()
     );
 }
 
+function dbv_161()
+{
+    global $opt;
+
+    // add nuts codes for Bulgaria, Kroatia, Romania and Turkey
+    system(
+        'cat ' . __DIR__. '/../sql/static-data/nuts_codes.sql |' .
+        ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] .
+        ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
+    );
+
+    // recalculate cache locations for these countries
+
+    // temporarily get rid of the update trigger so that we can change last_modified
+    update_triggers();
+    sql(
+        "UPDATE `cache_location`
+         SET `last_modified` = '2000-01-01 00:00:00'
+         WHERE `code1` IN ('BG', 'HR', 'RO', 'TR')"
+    );
+
+    // update the cache locations while trigger is disabled, so that the
+    // modification dates of caches will not be touched
+
+    function checkJob($cacheLocation)   // called from cache_location.class.php
+    {
+        $cacheLocation->run();
+    }
+    include __DIR__ . '/../htdocs/util2/cron/modules/cache_location.class.php';
+    sql("UPDATE `cache_location` SET `last_modified`=NOW() WHERE `code1` IN ('BG', 'HR', 'RO', 'TR')");
+}
+
+function dbv_162()
+{
+    // reinstall the cache locations update trigger
+    //
+    // (dbupdate.php will also do this, but we keep dbsv-update.php self-sustaining here
+    // so that it can be run independently; also the trigger may be needed in future
+    // DB mutations.)
+
+    update_triggers();
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

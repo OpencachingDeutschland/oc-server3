@@ -63,7 +63,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'DE', 'Isländisch', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'DE', 'Startseite', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'DE', 'Auf dieser Website findest du Geocaches aus der ganzen Welt, mit Schwerpunkt Deutschland, \&Ouml;sterreich, Schweiz, Italien und Spanien. Au\&szlig;erdem gibt es das <a href=\"http://wiki.opencaching.de\">Opencaching-Wiki</a> mit Anleitungen und Informationen rund um Opencaching und Geocaching, und ein <a href=\"http://forum.opencaching.de\">Diskussionsforum</a>.', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'DE', 'Bei der Dateiübertragung ist ein Fehler aufgetreten.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'DE', 'Beim Hochladen der Datei ist ein Fehler aufgetreten.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'DE', 'Die Datei war zu groß. Es sind maximal %1 KB erlaubt.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'DE', 'Kein Bild angegeben.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'DE', 'gleiche Cacheart', '2010-09-04 21:39:08');

@@ -5,7 +5,7 @@
 <p>
     <div style="margin-top:4px;">
         <p style="color: 5890a8"><b>{$cachename|escape}</b></p>
-        <p style="color: 5890a8">{t}at (time){/t} {$event_date|date_format:$opt.format.date}</font><br />
+        <p style="color: 5890a8">{t}at (time){/t} {$event_date|date_format:$opt.format.date}<br />
         {t}by{/t} {$owner|escape}</p>
     </div>
     <div style="margin-top:16px;">

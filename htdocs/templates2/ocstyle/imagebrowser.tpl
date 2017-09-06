@@ -44,4 +44,4 @@
     {/foreach}
 </table>
 <p><input type="checkbox" id="insertthumb" style="border:0;" /> <label for="insertthumb">{t}As preview picture{/t}</label></p>
-<p><a href="javascript:CancelSelect();"><a href="javascript:CancelSelect();">{t}Cancel{/t}</a></p>
+<p><a href="javascript:CancelSelect();">{t}Cancel{/t}</a></p>

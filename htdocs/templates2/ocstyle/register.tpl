@@ -79,7 +79,7 @@
                     {/if}
                 </td>
             </tr>
-            <tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
+            <tr><td class="spacer" colspan="2"><div class="mediumspacer"></div></td></tr>
 
             <tr>
                 <td width="145" valign="top">{t}First name:{/t}</td>
@@ -113,7 +113,7 @@
                     {/if}
                 </td>
             </tr>
-            <tr><td class="spacer" colspan="2"><div class="mediumspacer"></td></tr>
+            <tr><td class="spacer" colspan="2"><div class="mediumspacer"></div></td></tr>
 
             <tr>
                 <td width="145" valign="top">{t}E-Mail:{/t}</td>

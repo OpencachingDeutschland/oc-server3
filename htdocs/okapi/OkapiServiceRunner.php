@@ -2,7 +2,7 @@
 
 namespace okapi;
 
-use Exception;
+use okapi\Request\OkapiRequest;
 
 class OkapiServiceRunner
 {
@@ -72,13 +72,13 @@ class OkapiServiceRunner
     public static function options($service_name)
     {
         if (!self::exists($service_name)) {
-            throw new Exception();
+            throw new \Exception();
         }
 
         try {
             return call_user_func(['\\okapi\\' . str_replace('/', '\\', $service_name) . '\\WebService', 'options']);
-        } catch (Exception $e) {
-            throw new Exception("Make sure you've declared your WebService class ".
+        } catch (\Exception $e) {
+            throw new \Exception("Make sure you've declared your WebService class ".
                 'in an valid namespace (' .'okapi\\'.str_replace('/', '\\', $service_name)."); ".
                 $e->getMessage());
         }
@@ -91,12 +91,12 @@ class OkapiServiceRunner
     public static function docs($service_name)
     {
         if (!self::exists($service_name)) {
-            throw new Exception();
+            throw new \Exception();
         }
         try {
             return file_get_contents("$service_name/docs.xml", true);
-        } catch (Exception $e) {
-            throw new Exception("Missing documentation file: $service_name.xml");
+        } catch (\Exception $e) {
+            throw new \Exception("Missing documentation file: $service_name.xml");
         }
     }
 
@@ -114,18 +114,18 @@ class OkapiServiceRunner
         Okapi::init_internals();
 
         if (!self::exists($service_name))
-            throw new Exception("Method does not exist: '$service_name'");
+            throw new \Exception("Method does not exist: '$service_name'");
 
         $options = self::options($service_name);
         if ($options['min_auth_level'] >= 2 && $request->consumer == null)
         {
-            throw new Exception("Method '$service_name' called with mismatched OkapiRequest: ".
+            throw new \Exception("Method '$service_name' called with mismatched OkapiRequest: ".
                 "\$request->consumer MAY NOT be empty for Level 2 and Level 3 methods. Provide ".
                 "a dummy Consumer if you have to.");
         }
         if ($options['min_auth_level'] >= 3 && $request->token == null)
         {
-            throw new Exception("Method '$service_name' called with mismatched OkapiRequest: ".
+            throw new \Exception("Method '$service_name' called with mismatched OkapiRequest: ".
                 "\$request->token MAY NOT be empty for Level 3 methods.");
         }
 

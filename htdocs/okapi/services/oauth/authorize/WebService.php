@@ -2,10 +2,10 @@
 
 namespace okapi\services\oauth\authorize;
 
-use okapi\InvalidParam;
-use okapi\OkapiRedirectResponse;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
+use okapi\Request\OkapiRequest;
+use okapi\Response\OkapiRedirectResponse;
 use okapi\Settings;
 
 class WebService

@@ -2,16 +2,16 @@
 
 namespace okapi\services\caches\map\tile;
 
-use okapi\BadRequest;
 use okapi\Cache;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\OkapiConsumer;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
+use okapi\Response\OkapiHttpResponse;
 use okapi\services\caches\map\TileRenderer;
 use okapi\services\caches\map\TileTree;
 use okapi\Settings;

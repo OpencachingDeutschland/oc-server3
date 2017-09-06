@@ -3,10 +3,10 @@
 namespace okapi\services\logs\entries;
 
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 class WebService
@@ -21,7 +21,7 @@ class WebService
     private static $valid_field_names = array(
         'uuid', 'cache_code', 'date', 'user', 'type', 'was_recommended', 'comment',
         'images', 'internal_id', 'oc_team_entry', 'needs_maintenance2',
-        'listing_is_outdated',
+        'listing_is_outdated', 'location',
     );
 
     public static function call(OkapiRequest $request)
@@ -53,6 +53,8 @@ class WebService
             $ratingdate_condition = 'and cr.rating_date=cl.date';
             $needs_maintenance_SQL = 'cl.needs_maintenance';
             $listing_is_outdated_SQL = 'cl.listing_outdated';
+            $join_SQL = '';
+            $latlong_SQL = ', null as latitude, null as longitude';
         }
         else
         {
@@ -60,6 +62,8 @@ class WebService
             $ratingdate_condition = '';
             $needs_maintenance_SQL = 'IF(cl.type=5, 2, IF(cl.type=6, 1, 0))';
             $listing_is_outdated_SQL = '0';
+            $join_SQL = 'left join cache_moved cm on cm.log_id=cl.id';
+            $latlong_SQL = ', cm.latitude, cm.longitude';
         }
         $rs = Db::query("
             select
@@ -70,6 +74,7 @@ class WebService
                 unix_timestamp(cl.date) as date, cl.text,
                 u.uuid as user_uuid, u.username, u.user_id,
                 if(cr.user_id is null, 0, 1) as was_recommended
+                ".$latlong_SQL."
             from
                 (cache_logs cl,
                 user u,
@@ -82,6 +87,7 @@ class WebService
                         ".Okapi::logtypename2id("Found it").",
                         ".Okapi::logtypename2id("Attended")."
                     )
+                ".$join_SQL."
             where
                 cl.uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $log_uuids))."')
                 and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "cl.deleted = 0" : "true")."
@@ -109,6 +115,7 @@ class WebService
                 'listing_is_outdated' => $flag_options[$row['listing_is_outdated']],
                 'oc_team_entry' => $row['oc_team_entry'] ? true : false,
                 'comment' => Okapi::fix_oc_html($row['text'], Okapi::OBJECT_TYPE_CACHE_LOG),
+                'location' => $row['latitude'] === null ? null : round($row['latitude'], 6)."|".round($row['longitude'], 6),
                 'images' => array(),
                 'internal_id' => $row['id'],
             );

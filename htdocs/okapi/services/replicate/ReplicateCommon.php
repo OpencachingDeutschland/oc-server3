@@ -4,11 +4,11 @@ namespace okapi\services\replicate;
 
 use Exception;
 use okapi\Cache;
+use okapi\Consumer\OkapiInternalConsumer;
 use okapi\Db;
 use okapi\Okapi;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
+use okapi\Request\OkapiInternalRequest;
 use okapi\Settings;
 
 class ReplicateCommon

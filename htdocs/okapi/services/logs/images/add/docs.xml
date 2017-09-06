@@ -54,7 +54,8 @@
     </opt>
     <opt name='langpref' default='en'>
         <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
-        order of preference in which language will be chosen for error messages.</p>
+        order of preference in which language will be chosen for success or
+        error messages.</p>
     </opt>
     <common-format-params/>
     <returns>

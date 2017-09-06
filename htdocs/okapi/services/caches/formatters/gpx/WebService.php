@@ -2,16 +2,16 @@
 
 namespace okapi\services\caches\formatters\gpx;
 
-use okapi\BadRequest;
+use okapi\Consumer\OkapiInternalConsumer;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
+use okapi\Response\OkapiHttpResponse;
 use okapi\services\attrs\AttrHelper;
 use okapi\Settings;
 

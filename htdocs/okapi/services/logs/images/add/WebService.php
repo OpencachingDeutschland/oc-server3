@@ -4,10 +4,10 @@ namespace okapi\services\logs\images\add;
 
 use Exception;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
+use okapi\Request\OkapiRequest;
 use okapi\services\logs\images\LogImagesCommon;
 use okapi\Settings;
 
@@ -420,6 +420,11 @@ class WebService
                 'image_uuid' => null,
                 'position' => null
             );
+        }
+        catch (Exception $e)
+        {
+            Okapi::gettext_domain_restore();
+            throw $e;
         }
 
         Okapi::update_user_activity($request);

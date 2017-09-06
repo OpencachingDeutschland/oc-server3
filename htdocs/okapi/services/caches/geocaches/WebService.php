@@ -4,14 +4,14 @@ namespace okapi\services\caches\geocaches;
 
 use ArrayObject;
 use Exception;
-use okapi\BadRequest;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
 use okapi\Settings;
 
@@ -1114,9 +1114,12 @@ class WebService
                 # OCDE:
                 #  - cache_location entries are created by a cronjob *after* listing the
                 #      caches and may not yet exist.
-                #  - The state is in adm2 field.
+                #  - The adm1 ... adm4 fields represent country and NUTS levels 1 to 3.
+                #      We either pick level 1 or 2 for "state", whatever is the best match
+                #      (see Github issue #498).
+                #  - The "state" (or similar entity) is in adm1 or adm2 field.
                 #  - caches.country overrides cache_location.code1/adm1. If both differ,
-                #      cache_location.adm2 to adm4 is invalid and the state unknown.
+                #      cache_location.adm2 to adm4 are invalid and the state unknown.
                 #  - OCDE databases may contain caches with invalid country code.
                 #      Such errors must be handled gracefully.
                 #  - adm1 should always be ignored. Instead, code1 should be translated
@@ -1145,8 +1148,8 @@ class WebService
                     select
                         c.wp_oc as cache_code,
                         c.country as country_code,
-                        ifnull(if(c.country<>cl.code1,'',cl.adm2),'') as state
-                    from
+                        ifnull(if(c.country<>cl.code1,'',if(c.country in ('DE','UK'),cl.adm2,cl.adm3)),'') as state
+                    from                                 /* see issue #498 on adm2 vs. adm3 */
                         caches c
                         left join cache_location cl on c.cache_id = cl.cache_id
                     where
@@ -1166,6 +1169,8 @@ class WebService
             {
                 # OCPL:
                 #  - cache_location data is entered by the user.
+                #  - Only country (adm1) and NUTS level 2 (adm3) is available for geocaches.
+                #      So we always return the NUTS 2 entity as "state", which is wrong for Germany.
                 #  - The state is in adm3 field.
 
                 # get geocache countries and states

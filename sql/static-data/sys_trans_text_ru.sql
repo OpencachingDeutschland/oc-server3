@@ -1,481 +1,481 @@
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'RU', 'Вы вошли как', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'RU', 'Выход', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('14', 'RU', 'О конфиденциальности', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('15', 'RU', 'О конфиденциальности', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('16', 'RU', 'Контакты', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('17', 'RU', 'Карта сайта', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('18', 'RU', 'Регистрация', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('19', 'RU', 'Новый пользователь зарегистрирован', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('22', 'RU', 'Пользователь', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('23', 'RU', 'Электронный адрес', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'RU', 'Имя', '2010-10-06 22:23:01');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('25', 'RU', 'Фамилия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'RU', 'Страна', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'RU', 'Регистрация', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'RU', 'Недопустимое имя пользователя.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('33', 'RU', 'Не указана', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('34', 'RU', 'Показать все', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('35', 'RU', 'Недопустимый адрес электронной почты.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('36', 'RU', 'Турецкий', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('37', 'RU', 'Пароль:', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('39', 'RU', 'Пароли не совпадают.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'RU', 'Звёздочкой (*) отмечены поля, обязательные для заполнения.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('42', 'RU', 'Шведский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('43', 'RU', 'Словенский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('45', 'RU', 'Использованы, как минимум, 4 разные символа', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('49', 'RU', 'Русский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('51', 'RU', 'Очистить форму', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('55', 'RU', 'Золотые ярлыки', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('56', 'RU', 'Найден', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('59', 'RU', 'Румынский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('60', 'RU', 'Шаг 1', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('63', 'RU', 'Шаг 2', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('64', 'RU', 'Португальский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('70', 'RU', 'Новости', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('71', 'RU', 'Новые тайники', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('73', 'RU', 'Новые отчёты', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('74', 'RU', 'Польский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('75', 'RU', 'Норвежский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('76', 'RU', 'Латвийский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('77', 'RU', 'Литовский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'RU', 'Итальянский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'RU', 'Исландский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'RU', 'Начало', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'RU', 'Всё, что нужно для геокешинга…', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'RU', 'того же типа', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('92', 'RU', 'Хорватский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('93', 'RU', 'Финский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('94', 'RU', 'Да', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('95', 'RU', 'Нет', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('101', 'RU', 'Эстонский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('102', 'RU', 'Эсперанто', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('103', 'RU', 'Греческий', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('104', 'RU', 'Датский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('114', 'RU', 'Описание', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('115', 'RU', 'Создать тайник', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('116', 'RU', 'Admin', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('118', 'RU', 'Тайники', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('119', 'RU', 'Профиль', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('120', 'RU', 'Новые отчёты', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('122', 'RU', 'Новые тайники', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('123', 'RU', 'Об игре', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('125', 'RU', 'Выбор', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('127', 'RU', 'Активация', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('145', 'RU', 'Чешский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('146', 'RU', 'Болгарский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('151', 'RU', 'Дата\&nbsp;регистрации:', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('156', 'RU', 'Японский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('157', 'RU', 'Испанский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('158', 'RU', 'Французский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('159', 'RU', 'Английский', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('160', 'RU', 'Немецкий', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('162', 'RU', 'Зимбабве', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'RU', 'Замбия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'RU', 'ЮАР', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'RU', 'Майотта', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'RU', 'На ваш адрес выслано письмо с кодом активации. Пожалуйста, следуйте инструкциям в письме.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'RU', 'Для регистрации вы должны выбрать имя пользователя (псевдоним, под которым вы будете известны на сайте) \n  и указать действующий адрес электронной почты. \n  На этот адрес будет выслано письмо с кодом активации.\n  Вы можете указать также ваши настоящие имя и фамилию, \n  но это не является обязательным.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'RU', 'Йемен', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'RU', 'Самоа', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'RU', 'Уоллис и Футуна', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('180', 'RU', 'Опубликовать новость', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('181', 'RU', 'Вануату', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('182', 'RU', 'Вьетнам', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('183', 'RU', 'Американские Виргинские острова', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('184', 'RU', 'Британские Виргинские острова', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('185', 'RU', 'Венесуэла', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('192', 'RU', 'Сент-Винсент и Гренадины', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('193', 'RU', 'Ватикан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('194', 'RU', 'Узбекистан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('199', 'RU', 'Языки:', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('201', 'RU', 'Уругвай', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('202', 'RU', 'Код активации:', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('203', 'RU', 'США', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('204', 'RU', 'Внешние малые острова США', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('207', 'RU', 'Вход', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('208', 'RU', 'Пароль', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('209', 'RU', 'Уганда', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('210', 'RU', 'Украина', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('211', 'RU', 'Танзания', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('212', 'RU', 'Тайвань', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('213', 'RU', 'Тувалу', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('214', 'RU', 'Тринидад и Тобаго', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('215', 'RU', 'Турция', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('216', 'RU', 'Не зарегистрированы?', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('217', 'RU', 'Забыли пароль?', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('218', 'RU', 'Забыли адрес электронной почты?', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('223', 'RU', 'Тонга', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'RU', 'Укажите ваши имя пользователя и пароль.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('231', 'RU', 'Тунис', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('232', 'RU', 'Для завершения регистрации введите код активации, который вы получили по электронной почте.', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('233', 'RU', 'Туркмения', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('234', 'RU', 'Токелау', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('235', 'RU', 'Таджикистан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('236', 'RU', 'Таиланд', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('237', 'RU', 'Того', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('238', 'RU', 'Французские Южные и Антарктические территории', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('239', 'RU', 'Чад', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('240', 'RU', 'Тёркс и Кайкос', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('241', 'RU', 'Название', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'RU', 'Свазиленд', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'RU', 'Сирия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'RU', 'Сальвадор', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'RU', 'Сан-Томе и Принсипи', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'RU', 'Суринам', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'RU', 'Сомали', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'RU', 'Сенегал', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('257', 'RU', 'Сан-Марино', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('258', 'RU', 'Сьерра-Леоне', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('259', 'RU', 'Словакия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('260', 'RU', 'Шпицберген и Ян-Майен', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('261', 'RU', 'Словения', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('262', 'RU', 'Остров Святой Елены', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('263', 'RU', 'Сингапур', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('264', 'RU', 'Швеция', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('265', 'RU', 'Судан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('266', 'RU', 'Сейшелы', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('267', 'RU', 'Соломоновы Острова', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('268', 'RU', 'Саудовская Аравия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('269', 'RU', 'Руанда', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('270', 'RU', 'Россия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('271', 'RU', 'Румыния', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('272', 'RU', 'Реюньон', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('273', 'RU', 'Катар', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('274', 'RU', 'Парагвай', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('275', 'RU', 'Палау', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('276', 'RU', 'Португалия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('277', 'RU', 'Пуэрто-Рико', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('278', 'RU', 'Питкерн', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('279', 'RU', 'Сен-Пьер и Микелон', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('280', 'RU', 'Польша', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('281', 'RU', 'Пакистан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('282', 'RU', 'Филиппины', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('283', 'RU', 'Папуа — Новая Гвинея', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('284', 'RU', 'Французская Полинезия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('285', 'RU', 'Перу', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('286', 'RU', 'Панама', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('287', 'RU', 'Оман', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('288', 'RU', 'Новая Зеландия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('289', 'RU', 'Ниуэ', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('290', 'RU', 'Науру', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('291', 'RU', 'Непал', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('292', 'RU', 'Норвегия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('293', 'RU', 'Нидерланды', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('294', 'RU', 'Никарагуа', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('295', 'RU', 'Нигерия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('296', 'RU', 'Норфолк', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('297', 'RU', 'Нигер', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('298', 'RU', 'Новая Каледония', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('299', 'RU', 'Намибия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('300', 'RU', 'Мозамбик', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('301', 'RU', 'Малайзия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('302', 'RU', 'Мексика', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('303', 'RU', 'Малави', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('304', 'RU', 'Мальдивы', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('305', 'RU', 'Маврикий', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('306', 'RU', 'Мальта', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('307', 'RU', 'Монтсеррат', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('308', 'RU', 'Мавритания', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('309', 'RU', 'Мартиника', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('310', 'RU', 'Северные Марианские острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('311', 'RU', 'Макао', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('312', 'RU', 'Монголия', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('313', 'RU', 'Мьянма', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('314', 'RU', 'Мали', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('315', 'RU', 'Македония', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('316', 'RU', 'Маршалловы Острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('317', 'RU', 'Мадагаскар', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('318', 'RU', 'Молдавия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('319', 'RU', 'Монако', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('320', 'RU', 'Марокко', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('321', 'RU', 'Ливия', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('322', 'RU', 'Латвия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('323', 'RU', 'Люксембург', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('324', 'RU', 'Литва', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('325', 'RU', 'Лесото', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('326', 'RU', 'Либерия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('327', 'RU', 'Шри-Ланка', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('328', 'RU', 'Лихтенштейн', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('329', 'RU', 'Сент-Люсия', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('330', 'RU', 'Ливан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('331', 'RU', 'Лаос', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('332', 'RU', 'Казахстан', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('333', 'RU', 'Каймановы острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('334', 'RU', 'Кувейт', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('335', 'RU', 'Южная Корея', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('336', 'RU', 'Северная Корея', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('337', 'RU', 'Сент-Китс и Невис', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('338', 'RU', 'Коморы', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('339', 'RU', 'Кирибати', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('340', 'RU', 'Камбоджа', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('341', 'RU', 'Киргизия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('342', 'RU', 'Кения', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('343', 'RU', 'Япония', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('344', 'RU', 'Иордания', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('345', 'RU', 'Ямайка', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('346', 'RU', 'Италия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('347', 'RU', 'Исландия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('348', 'RU', 'Иран', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('349', 'RU', 'Ирак', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('350', 'RU', 'Британская территория в Индийском океане', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('351', 'RU', 'Индия', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('352', 'RU', 'Израиль', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('353', 'RU', 'Ирландия', '2010-10-06 22:23:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('354', 'RU', 'Индонезия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('355', 'RU', 'Венгрия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('356', 'RU', 'Гаити', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('357', 'RU', 'Хорватия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('358', 'RU', 'Гондурас', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('359', 'RU', 'Херд и Макдоналд', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('360', 'RU', 'Гонконг', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('361', 'RU', 'Гайана', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('362', 'RU', 'Гвинея-Бисау', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('363', 'RU', 'Гуам', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('364', 'RU', 'Гватемала', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('365', 'RU', 'Южная Георгия и Южные Сандвичевы острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('366', 'RU', 'Греция', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('367', 'RU', 'Гваделупа', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('368', 'RU', 'Гвинея', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('369', 'RU', 'Гамбия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('370', 'RU', 'Гренландия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('371', 'RU', 'Гибралтар', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('372', 'RU', 'Гана', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'RU', 'Французская Гвиана', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'RU', 'Грузия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'RU', 'Гренада', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'RU', 'Великобритания', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'RU', 'Габон', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'RU', 'Франция', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'RU', 'Фареры', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('380', 'RU', 'Микронезия', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('381', 'RU', 'Фолклендские острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('382', 'RU', 'Фиджи', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('383', 'RU', 'Финляндия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('384', 'RU', 'Эфиопия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('385', 'RU', 'Испания', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('386', 'RU', 'Эритрея', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('387', 'RU', 'Западная Сахара', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('388', 'RU', 'Египет', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('389', 'RU', 'Эстония', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('390', 'RU', 'Эквадор', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('391', 'RU', 'Алжир', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('392', 'RU', 'Доминиканская Республика', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('393', 'RU', 'Дания', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('394', 'RU', 'Джибути', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('395', 'RU', 'Германия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('396', 'RU', 'Чехия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('397', 'RU', 'Кипр', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('398', 'RU', 'Остров Рождества', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('399', 'RU', 'Кабо-Верде', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('400', 'RU', 'Куба', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('402', 'RU', 'Коста-Рика', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('403', 'RU', 'Колумбия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('404', 'RU', 'Китай', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('405', 'RU', 'Камерун', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('406', 'RU', 'Чили', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('407', 'RU', 'Острова Кука', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('408', 'RU', 'Кот-д’Ивуар', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('409', 'RU', 'Швейцария', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('410', 'RU', 'Конго', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('411', 'RU', 'Центрально-Африканская Республика', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('412', 'RU', 'Кокосовые острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('413', 'RU', 'Канада', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('414', 'RU', 'Белиз', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('415', 'RU', 'Белоруссия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('416', 'RU', 'Ботсвана', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('417', 'RU', 'Буве', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('418', 'RU', 'Бутан', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('419', 'RU', 'Багамы', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('420', 'RU', 'Бразилия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('421', 'RU', 'Боливия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('422', 'RU', 'Бруней', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('423', 'RU', 'Бермуды', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('424', 'RU', 'Бенин', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('425', 'RU', 'Бурунди', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('426', 'RU', 'Бахрейн', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('427', 'RU', 'Болгария', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('428', 'RU', 'Буркина Фасо', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('429', 'RU', 'Бельгия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('430', 'RU', 'Бангладеш', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('431', 'RU', 'Барбадос', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('432', 'RU', 'Босния и Герцеговина', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('433', 'RU', 'Азербайджан', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('434', 'RU', 'Аруба', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('435', 'RU', 'Австралия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('436', 'RU', 'Австрия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('437', 'RU', 'Американское Самоа', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('438', 'RU', 'Аргентина', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('439', 'RU', 'Ангола', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('440', 'RU', 'Нидерландские Антильские острова', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('441', 'RU', 'Армения', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('442', 'RU', 'Албания', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('443', 'RU', 'Ангилья', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('444', 'RU', 'Антигуа и Барбуда', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('445', 'RU', 'Афганистан', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('446', 'RU', 'ОАЭ', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('447', 'RU', 'Андорра', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('454', 'RU', 'Опубликовать новость', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('455', 'RU', 'Сохранить', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('457', 'RU', 'Антиспамерский код:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('458', 'RU', 'Что изображено на рисунке?', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('460', 'RU', 'Электронный адрес:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('461', 'RU', 'Используете HTML-разметку только для шрифтового оформления текста \n  (<b>, <u>, <i>) и ссылок (<a>). Пожалуйста, не используйте таблицы (<table>), разделы (<div>) и т. д.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('462', 'RU', 'В тексте присутствует HTML-разметка.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('463', 'RU', 'Текст:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('464', 'RU', 'Тема:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('468', 'RU', 'Активация', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('472', 'RU', 'Мы уважаем ваше право на неприкосновенность частной жизни. \n  Ваши персональные данные сохраняются в нашей базе данных, \n  но мы не передаём их другим лицам и организациям. \n  Пожалуйста, ознакомьтесь с <a href=\"articles.php?page=dsb\">Положением о конфиденциальности</a>. \n  Если у вас есть вопросы, <a href=\"mailto:%1\">свяжитесь с нами</a> до регистрации.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('480', 'RU', 'Пользователь:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('484', 'RU', 'Профиль', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('487', 'RU', 'Чёрные метки', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('488', 'RU', 'Настройки', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('490', 'RU', 'Радиус не может превышать 150 км. Чтобы отменить уведомления, задайте 0.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('491', 'RU', 'Сменить пароль', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'RU', 'Сменить адрес', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'RU', 'Не найден', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'RU', 'Найдено тайников: %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'RU', 'Ваши последние отчёты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'RU', 'Нет отчётов', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'RU', 'Спрятано тайников: %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'RU', 'Нет спрятанных тайников', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('511', 'RU', 'Отправлено писем: %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('544', 'RU', 'Присылать уведомления о новых тайниках в радиусе %1 км.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('545', 'RU', 'BBCode для форумов:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('548', 'RU', 'HTML:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('552', 'RU', 'Отменить', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('564', 'RU', 'Уведомления:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('565', 'RU', 'Координаты:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('566', 'RU', 'Страна:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('567', 'RU', 'Фамилия:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('568', 'RU', 'Имя:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('570', 'RU', '%1 нашёл тайник', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('581', 'RU', 'Электронный адрес:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('582', 'RU', 'Журнал', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('587', 'RU', 'Профиль', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('588', 'RU', 'Эта информация сохранена в вашем профиле:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'RU', 'Пользователь:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'RU', 'Новый пароль:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'RU', 'Сохранить', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('598', 'RU', 'Получить код', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'RU', 'Для смены пароля вы должны получить защитный код. Код высылается вам по электронной почте, он действителен \n  в течении трёх суток.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'RU', 'Введите ваш электронный адрес, защитный код (который вы получили по электронной почте)\n  и ваш новый пароль.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('610', 'RU', 'Защитный код:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'RU', 'Повторите пароль:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('618', 'RU', 'Сменить адрес электронной почты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('619', 'RU', 'Для смены пароля вы должны получить защитный код. Код высылается вам по электронной почте и действителен в течении трёх суток.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('620', 'RU', 'Новый электронный адрес:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('622', 'RU', 'Введите защитный код, который вы получили по почте.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('623', 'RU', 'Сначала получите защитный код.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('638', 'RU', 'Золотые ярлыки', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('642', 'RU', 'Чёрные метки', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'RU', 'Cписок пуст', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('697', 'RU', 'Показать все отчёты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('704', 'RU', 'Отчитаться', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('706', 'RU', 'Наблюдать', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('708', 'RU', 'Чёрная метка', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('709', 'RU', 'Печать', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('711', 'RU', 'Размер', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('712', 'RU', 'Время на поиск:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('715', 'RU', 'Спрятан:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('716', 'RU', 'Опубликован', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('717', 'RU', 'Обновлён:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('719', 'RU', 'Также опубликован:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('720', 'RU', 'Заметок', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('721', 'RU', 'Наблюдают', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('722', 'RU', 'Чёрных меток', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('723', 'RU', 'Просмотров', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('724', 'RU', 'Атрибуты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('725', 'RU', 'Подсказка', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('726', 'RU', 'Показать', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('727', 'RU', 'Фотографии', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('728', 'RU', 'Полезности', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('731', 'RU', 'все', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('733', 'RU', 'Загрузить как:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('739', 'RU', 'Текстовый файл (.txt)', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('757', 'RU', 'Название:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'RU', 'Координаты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'RU', 'Выполнение этих требований повышает стойкость вашего пароля.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'RU', 'Не используйте распространёные слова.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'RU', 'Не используйте распространённые геокешерские слова.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'RU', 'Не используйте части вашего имени пользователя, настоящего имени или электронного адреса.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('853', 'RU', 'Длина от 6 до 60 символов.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('854', 'RU', 'Введите пароль, который удовлетворяет следующим критериям:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('855', 'RU', 'Ваш пароль не прошёл проверку.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('856', 'RU', 'Черногория', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('857', 'RU', 'Сербия', '2010-10-06 22:23:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('900', 'RU', 'Помощь сайту', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('906', 'RU', 'Условия использования', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'RU', 'RU', '2011-01-05 20:58:32');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'RU', 'Условия использования', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1269', 'RU', 'Карта', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'RU', 'Меню', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1332', 'RU', 'Инфраструктура', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1335', 'RU', 'Время', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1336', 'RU', 'Сезонность', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1338', 'RU', 'Снаряжение', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1339', 'RU', 'Подготовка', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1368', 'RU', 'Размер контейнера:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1369', 'RU', 'Координаты:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'RU', 'Выбор тайников', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1392', 'RU', 'Атрибуты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1416', 'RU', 'Новый тайник', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'RU', 'Если это ваш первый тайник, прочитайте <a href=\"articles.php?page=cacheinfo\">описание</a> отдельных полей.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1423', 'RU', 'Описание:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1490', 'RU', 'Пароль', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1524', 'RU', 'Тип', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'RU', 'Язык:', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1541', 'RU', 'Ночной', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1544', 'RU', 'Опасная зона', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1550', 'RU', 'Железная дорога', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1552', 'RU', 'Охота', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1553', 'RU', 'Колючки', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1554', 'RU', 'Клещи', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1555', 'RU', 'Заброшенные шахты', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1556', 'RU', 'Ядовитые растения', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1557', 'RU', 'Опасные животные', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1558', 'RU', 'Парковка', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1559', 'RU', 'Общественный транспорт', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1560', 'RU', 'Питьевая вода', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1561', 'RU', 'Туалет', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1562', 'RU', 'Телефон', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1563', 'RU', 'Первая помощь', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1566', 'RU', 'Болото', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1567', 'RU', 'Холмистая местность', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1576', 'RU', 'Плата за вход или парковку', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1578', 'RU', 'Круглосуточный', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1580', 'RU', 'Дневной', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1582', 'RU', 'Всесезонный', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1586', 'RU', 'Компас', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1587', 'RU', 'Фонарь', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1588', 'RU', 'Альпинистское снаряжение', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1589', 'RU', 'Пещерное снаряжение', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1591', 'RU', 'Плавсредство', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1594', 'RU', 'Головоломка', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1595', 'RU', 'Математическая задача', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1598', 'RU', 'Детский', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1599', 'RU', 'Действующая железная дорога неподалёку. Будьте осторожны, держитесь на безопасной дистанции, будьте внимательны при переходе.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1601', 'RU', 'Тайник спрятан в охотничьих угодьях. Опасайтесь попасть под выстрел. В сумерках или темноте держите фонарь вклёченным в целях безопасности. ', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1602', 'RU', 'Опасайтесь колючек. Носите подходящую одежду.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1603', 'RU', 'В летнее время опасайтесь клещей. Носите брюки, одежду с длинными рукавами, периодически осматривайте друг друга. Заранее позаботьтесь о прививках против клещевого энцефалита.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1605', 'RU', 'Этот тайник можно искать хоть днём, хоть ночью.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1607', 'RU', 'Этот тайник можно искать только в светлое время суток. Например, скалистая местность с утёсами и обрывами опасна для посещения ночью, а в жилой местности использование фонарей может выглядеть подозрительно.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1609', 'RU', 'Тайник можно искать круглый год, но сложность может зависетьот сезона. Указывайте сложность для хороших условий.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1613', 'RU', 'Для поисков нужен компас.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1614', 'RU', 'Для поисков необходим фонарь. Не забудьте запасной комплект батарей!', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1615', 'RU', 'Для поисков этого тайника вам потребуется альпинистское снаряжения и навыки его правильного использования. Если вы новичок, не ходите на поиски в одиночку, возьмите с собой опытного альпиниста.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1616', 'RU', 'Этот тайник спрятан в пещере, и вам потребуется соответствующее снаряжение. Будьте осторожны, даже маленькие пещеры могут быть таить непредвиденные опасности, такие, как внезапная гроза (берегитесь воды) или вывихнутая лодыжка. Посоветуйтесь с опытными людьми прежде чем лезть в пещеру. Также берегите природу, например, не тревожьте летучих мышей.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1618', 'RU', 'Тайник может быть найден только с использованием плавредства: лодки, катера, яхты… Добраться до тайника вплавь (без лодки) не представляется возможным из-за расстояния, течения или иных препятствий. Подробности должны быть указаны в описании.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1621', 'RU', 'Перед или во время поисков тайника нужно рещить математическую задачу, выходящую за рамки тривиальных арифметических операций.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1624', 'RU', 'Тайник сделан специально для детей. TODO. ', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1626', 'RU', 'Опасайтесь ядовитых растений. Смотрите за детьми и собаками, не давайте им трогать или есть отраву.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1627', 'RU', 'Эта местность населена потенциально опасными животными, например, медведями, ядовитыми змеями, скорпионами, или является природным очагом бешенства.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1628', 'RU', 'Ближняя парковка является хорошей начальной точкой для поисков тайника. Если поблизости нет бесплатных парковок, должен быть установлен атрибут «Плата за вход или парковку».', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1629', 'RU', 'Тайник расположен за городом, но до него можно добраться общественным транспортом. Не устанавливайте этот атрибут для тайников в населённых пунктах.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1630', 'RU', 'По пути к тайнику или поблизости от тайника есть источник питьевой воды. Этот атрибут полезен для планирования встреч, длительных пеших прогулок или посещения тайников в потенциально грязных местах, таких, как пещеры.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1636', 'RU', 'При поисках этого тайника придётся ходить по болоту или преодолевать залитые водой участки местности. Носите подходящую одежду и обувь. После ливня местность может стать непроходимой.', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'RU', 'Путь', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'RU', 'Размер контейнера', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1710', 'RU', 'Новые тайники в %1', '2010-12-06 22:17:36');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2237', 'RU', 'Тайники:', '2010-12-06 22:17:35');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'RU', '<span></span>', '2010-12-09 00:17:58');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'SV', 'SV', '2011-05-15 11:46:05');
+('6', 'RU', 'Вы вошли как', '2010-12-06 22:17:35'),
+('7', 'RU', 'Выход', '2010-12-06 22:17:35'),
+('14', 'RU', 'О конфиденциальности', '2010-12-06 22:17:35'),
+('15', 'RU', 'О конфиденциальности', '2010-12-06 22:17:35'),
+('16', 'RU', 'Контакты', '2010-12-06 22:17:35'),
+('17', 'RU', 'Карта сайта', '2010-12-06 22:17:35'),
+('18', 'RU', 'Регистрация', '2010-12-06 22:17:35'),
+('19', 'RU', 'Новый пользователь зарегистрирован', '2010-12-06 22:17:35'),
+('22', 'RU', 'Пользователь', '2010-12-06 22:17:35'),
+('23', 'RU', 'Электронный адрес', '2010-12-06 22:17:35'),
+('24', 'RU', 'Имя', '2010-10-06 22:23:01'),
+('25', 'RU', 'Фамилия', '2010-10-06 22:23:06'),
+('26', 'RU', 'Страна', '2010-10-06 22:23:06'),
+('27', 'RU', 'Регистрация', '2010-12-06 22:17:35'),
+('29', 'RU', 'Недопустимое имя пользователя.', '2010-12-06 22:17:35'),
+('33', 'RU', 'Не указана', '2010-12-06 22:17:35'),
+('34', 'RU', 'Показать все', '2010-12-06 22:17:35'),
+('35', 'RU', 'Недопустимый адрес электронной почты.', '2010-12-06 22:17:35'),
+('36', 'RU', 'Турецкий', '2010-10-06 22:23:06'),
+('37', 'RU', 'Пароль:', '2010-12-06 22:17:35'),
+('39', 'RU', 'Пароли не совпадают.', '2010-12-06 22:17:35'),
+('41', 'RU', 'Звёздочкой (*) отмечены поля, обязательные для заполнения.', '2010-12-06 22:17:35'),
+('42', 'RU', 'Шведский', '2010-10-06 22:23:06'),
+('43', 'RU', 'Словенский', '2010-10-06 22:23:06'),
+('45', 'RU', 'Использованы, как минимум, 4 разные символа', '2010-12-06 22:17:35'),
+('49', 'RU', 'Русский', '2010-10-06 22:23:06'),
+('51', 'RU', 'Очистить форму', '2010-12-06 22:17:35'),
+('55', 'RU', 'Золотые ярлыки', '2010-12-06 22:17:35'),
+('56', 'RU', 'Найден', '2010-12-06 22:17:35'),
+('59', 'RU', 'Румынский', '2010-10-06 22:23:06'),
+('60', 'RU', 'Шаг 1', '2010-12-06 22:17:35'),
+('63', 'RU', 'Шаг 2', '2010-12-06 22:17:35'),
+('64', 'RU', 'Португальский', '2010-10-06 22:23:06'),
+('70', 'RU', 'Новости', '2010-12-06 22:17:35'),
+('71', 'RU', 'Новые тайники', '2010-12-06 22:17:35'),
+('73', 'RU', 'Новые отчёты', '2010-12-06 22:17:35'),
+('74', 'RU', 'Польский', '2010-10-06 22:23:06'),
+('75', 'RU', 'Норвежский', '2010-10-06 22:23:06'),
+('76', 'RU', 'Латвийский', '2010-10-06 22:23:06'),
+('77', 'RU', 'Литовский', '2010-10-06 22:23:06'),
+('78', 'RU', 'Итальянский', '2010-10-06 22:23:06'),
+('79', 'RU', 'Исландский', '2010-10-06 22:23:06'),
+('80', 'RU', 'Начало', '2010-12-06 22:17:35'),
+('82', 'RU', 'Всё, что нужно для геокешинга…', '2010-12-06 22:17:35'),
+('86', 'RU', 'того же типа', '2010-12-06 22:17:35'),
+('92', 'RU', 'Хорватский', '2010-10-06 22:23:06'),
+('93', 'RU', 'Финский', '2010-10-06 22:23:06'),
+('94', 'RU', 'Да', '2010-10-06 22:23:06'),
+('95', 'RU', 'Нет', '2010-10-06 22:23:06'),
+('101', 'RU', 'Эстонский', '2010-10-06 22:23:06'),
+('102', 'RU', 'Эсперанто', '2010-10-06 22:23:06'),
+('103', 'RU', 'Греческий', '2010-10-06 22:23:06'),
+('104', 'RU', 'Датский', '2010-10-06 22:23:06'),
+('114', 'RU', 'Описание', '2010-12-06 22:17:35'),
+('115', 'RU', 'Создать тайник', '2010-12-06 22:17:35'),
+('116', 'RU', 'Admin', '2010-12-06 22:17:35'),
+('118', 'RU', 'Тайники', '2010-12-06 22:17:35'),
+('119', 'RU', 'Профиль', '2010-12-06 22:17:35'),
+('120', 'RU', 'Новые отчёты', '2010-12-06 22:17:35'),
+('122', 'RU', 'Новые тайники', '2010-12-06 22:17:35'),
+('123', 'RU', 'Об игре', '2010-12-06 22:17:35'),
+('125', 'RU', 'Выбор', '2010-12-06 22:17:35'),
+('127', 'RU', 'Активация', '2010-12-06 22:17:35'),
+('145', 'RU', 'Чешский', '2010-10-06 22:23:06'),
+('146', 'RU', 'Болгарский', '2010-10-06 22:23:06'),
+('151', 'RU', 'Дата\&nbsp;регистрации:', '2010-12-06 22:17:35'),
+('156', 'RU', 'Японский', '2010-10-06 22:23:06'),
+('157', 'RU', 'Испанский', '2010-10-06 22:23:06'),
+('158', 'RU', 'Французский', '2010-10-06 22:23:06'),
+('159', 'RU', 'Английский', '2010-10-06 22:23:06'),
+('160', 'RU', 'Немецкий', '2010-10-06 22:23:06'),
+('162', 'RU', 'Зимбабве', '2010-10-06 22:23:06'),
+('163', 'RU', 'Замбия', '2010-10-06 22:23:06'),
+('164', 'RU', 'ЮАР', '2010-10-06 22:23:06'),
+('165', 'RU', 'Майотта', '2010-12-06 22:17:35'),
+('166', 'RU', 'На ваш адрес выслано письмо с кодом активации. Пожалуйста, следуйте инструкциям в письме.', '2010-12-06 22:17:35'),
+('167', 'RU', 'Для регистрации вы должны выбрать имя пользователя (псевдоним, под которым вы будете известны на сайте) \n  и указать действующий адрес электронной почты. \n  На этот адрес будет выслано письмо с кодом активации.\n  Вы можете указать также ваши настоящие имя и фамилию, \n  но это не является обязательным.', '2010-12-06 22:17:35'),
+('172', 'RU', 'Йемен', '2010-10-06 22:23:06'),
+('173', 'RU', 'Самоа', '2010-10-06 22:23:06'),
+('179', 'RU', 'Уоллис и Футуна', '2010-10-06 22:23:06'),
+('180', 'RU', 'Опубликовать новость', '2010-12-06 22:17:35'),
+('181', 'RU', 'Вануату', '2010-10-06 22:23:06'),
+('182', 'RU', 'Вьетнам', '2010-10-06 22:23:06'),
+('183', 'RU', 'Американские Виргинские острова', '2010-10-06 22:23:06'),
+('184', 'RU', 'Британские Виргинские острова', '2010-10-06 22:23:06'),
+('185', 'RU', 'Венесуэла', '2010-10-06 22:23:06'),
+('192', 'RU', 'Сент-Винсент и Гренадины', '2010-10-06 22:23:06'),
+('193', 'RU', 'Ватикан', '2010-10-06 22:23:06'),
+('194', 'RU', 'Узбекистан', '2010-10-06 22:23:06'),
+('199', 'RU', 'Языки:', '2010-12-06 22:17:35'),
+('201', 'RU', 'Уругвай', '2010-10-06 22:23:06'),
+('202', 'RU', 'Код активации:', '2010-12-06 22:17:35'),
+('203', 'RU', 'США', '2010-10-06 22:23:06'),
+('204', 'RU', 'Внешние малые острова США', '2010-12-06 22:17:35'),
+('207', 'RU', 'Вход', '2010-12-06 22:17:35'),
+('208', 'RU', 'Пароль', '2010-10-06 22:23:06'),
+('209', 'RU', 'Уганда', '2010-10-06 22:23:06'),
+('210', 'RU', 'Украина', '2010-10-06 22:23:06'),
+('211', 'RU', 'Танзания', '2010-10-06 22:23:06'),
+('212', 'RU', 'Тайвань', '2010-10-06 22:23:06'),
+('213', 'RU', 'Тувалу', '2010-10-06 22:23:06'),
+('214', 'RU', 'Тринидад и Тобаго', '2010-10-06 22:23:06'),
+('215', 'RU', 'Турция', '2010-10-06 22:23:06'),
+('216', 'RU', 'Не зарегистрированы?', '2010-12-06 22:17:35'),
+('217', 'RU', 'Забыли пароль?', '2010-12-06 22:17:35'),
+('218', 'RU', 'Забыли адрес электронной почты?', '2010-12-06 22:17:35'),
+('223', 'RU', 'Тонга', '2010-10-06 22:23:06'),
+('224', 'RU', 'Укажите ваши имя пользователя и пароль.', '2010-12-06 22:17:35'),
+('231', 'RU', 'Тунис', '2010-10-06 22:23:06'),
+('232', 'RU', 'Для завершения регистрации введите код активации, который вы получили по электронной почте.', '2010-12-06 22:17:35'),
+('233', 'RU', 'Туркмения', '2010-10-06 22:23:06'),
+('234', 'RU', 'Токелау', '2010-12-06 22:17:35'),
+('235', 'RU', 'Таджикистан', '2010-10-06 22:23:06'),
+('236', 'RU', 'Таиланд', '2010-10-06 22:23:06'),
+('237', 'RU', 'Того', '2010-10-06 22:23:06'),
+('238', 'RU', 'Французские Южные и Антарктические территории', '2010-12-06 22:17:35'),
+('239', 'RU', 'Чад', '2010-10-06 22:23:06'),
+('240', 'RU', 'Тёркс и Кайкос', '2010-12-06 22:17:35'),
+('241', 'RU', 'Название', '2010-12-06 22:17:35'),
+('242', 'RU', 'Свазиленд', '2010-10-06 22:23:06'),
+('243', 'RU', 'Сирия', '2010-10-06 22:23:06'),
+('249', 'RU', 'Сальвадор', '2010-10-06 22:23:06'),
+('250', 'RU', 'Сан-Томе и Принсипи', '2010-12-06 22:17:35'),
+('251', 'RU', 'Суринам', '2010-10-06 22:23:06'),
+('252', 'RU', 'Сомали', '2010-10-06 22:23:06'),
+('256', 'RU', 'Сенегал', '2010-10-06 22:23:06'),
+('257', 'RU', 'Сан-Марино', '2010-10-06 22:23:06'),
+('258', 'RU', 'Сьерра-Леоне', '2010-10-06 22:23:06'),
+('259', 'RU', 'Словакия', '2010-10-06 22:23:06'),
+('260', 'RU', 'Шпицберген и Ян-Майен', '2010-12-06 22:17:35'),
+('261', 'RU', 'Словения', '2010-10-06 22:23:06'),
+('262', 'RU', 'Остров Святой Елены', '2010-10-06 22:23:06'),
+('263', 'RU', 'Сингапур', '2010-10-06 22:23:06'),
+('264', 'RU', 'Швеция', '2010-10-06 22:23:06'),
+('265', 'RU', 'Судан', '2010-10-06 22:23:06'),
+('266', 'RU', 'Сейшелы', '2010-10-06 22:23:06'),
+('267', 'RU', 'Соломоновы Острова', '2010-10-06 22:23:06'),
+('268', 'RU', 'Саудовская Аравия', '2010-10-06 22:23:06'),
+('269', 'RU', 'Руанда', '2010-10-06 22:23:06'),
+('270', 'RU', 'Россия', '2010-10-06 22:23:06'),
+('271', 'RU', 'Румыния', '2010-10-06 22:23:06'),
+('272', 'RU', 'Реюньон', '2010-10-06 22:23:06'),
+('273', 'RU', 'Катар', '2010-10-06 22:23:06'),
+('274', 'RU', 'Парагвай', '2010-10-06 22:23:06'),
+('275', 'RU', 'Палау', '2010-10-06 22:23:06'),
+('276', 'RU', 'Португалия', '2010-10-06 22:23:06'),
+('277', 'RU', 'Пуэрто-Рико', '2010-10-06 22:23:06'),
+('278', 'RU', 'Питкерн', '2010-12-06 22:17:35'),
+('279', 'RU', 'Сен-Пьер и Микелон', '2010-12-06 22:17:35'),
+('280', 'RU', 'Польша', '2010-10-06 22:23:06'),
+('281', 'RU', 'Пакистан', '2010-10-06 22:23:06'),
+('282', 'RU', 'Филиппины', '2010-10-06 22:23:06'),
+('283', 'RU', 'Папуа — Новая Гвинея', '2010-10-06 22:23:06'),
+('284', 'RU', 'Французская Полинезия', '2010-10-06 22:23:06'),
+('285', 'RU', 'Перу', '2010-10-06 22:23:06'),
+('286', 'RU', 'Панама', '2010-10-06 22:23:06'),
+('287', 'RU', 'Оман', '2010-10-06 22:23:06'),
+('288', 'RU', 'Новая Зеландия', '2010-10-06 22:23:06'),
+('289', 'RU', 'Ниуэ', '2010-12-06 22:17:35'),
+('290', 'RU', 'Науру', '2010-10-06 22:23:06'),
+('291', 'RU', 'Непал', '2010-10-06 22:23:06'),
+('292', 'RU', 'Норвегия', '2010-10-06 22:23:06'),
+('293', 'RU', 'Нидерланды', '2010-10-06 22:23:06'),
+('294', 'RU', 'Никарагуа', '2010-10-06 22:23:06'),
+('295', 'RU', 'Нигерия', '2010-10-06 22:23:06'),
+('296', 'RU', 'Норфолк', '2010-12-06 22:17:36'),
+('297', 'RU', 'Нигер', '2010-10-06 22:23:06'),
+('298', 'RU', 'Новая Каледония', '2010-10-06 22:23:06'),
+('299', 'RU', 'Намибия', '2010-10-06 22:23:06'),
+('300', 'RU', 'Мозамбик', '2010-10-06 22:23:06'),
+('301', 'RU', 'Малайзия', '2010-10-06 22:23:06'),
+('302', 'RU', 'Мексика', '2010-10-06 22:23:06'),
+('303', 'RU', 'Малави', '2010-10-06 22:23:06'),
+('304', 'RU', 'Мальдивы', '2010-10-06 22:23:06'),
+('305', 'RU', 'Маврикий', '2010-12-06 22:17:36'),
+('306', 'RU', 'Мальта', '2010-10-06 22:23:06'),
+('307', 'RU', 'Монтсеррат', '2010-12-06 22:17:36'),
+('308', 'RU', 'Мавритания', '2010-10-06 22:23:06'),
+('309', 'RU', 'Мартиника', '2010-10-06 22:23:06'),
+('310', 'RU', 'Северные Марианские острова', '2010-12-06 22:17:36'),
+('311', 'RU', 'Макао', '2010-10-06 22:23:06'),
+('312', 'RU', 'Монголия', '2010-12-06 22:17:36'),
+('313', 'RU', 'Мьянма', '2010-12-06 22:17:36'),
+('314', 'RU', 'Мали', '2010-10-06 22:23:06'),
+('315', 'RU', 'Македония', '2010-10-06 22:23:06'),
+('316', 'RU', 'Маршалловы Острова', '2010-12-06 22:17:36'),
+('317', 'RU', 'Мадагаскар', '2010-10-06 22:23:06'),
+('318', 'RU', 'Молдавия', '2010-10-06 22:23:06'),
+('319', 'RU', 'Монако', '2010-10-06 22:23:06'),
+('320', 'RU', 'Марокко', '2010-10-06 22:23:06'),
+('321', 'RU', 'Ливия', '2010-12-06 22:17:36'),
+('322', 'RU', 'Латвия', '2010-10-06 22:23:06'),
+('323', 'RU', 'Люксембург', '2010-10-06 22:23:06'),
+('324', 'RU', 'Литва', '2010-10-06 22:23:06'),
+('325', 'RU', 'Лесото', '2010-10-06 22:23:06'),
+('326', 'RU', 'Либерия', '2010-10-06 22:23:06'),
+('327', 'RU', 'Шри-Ланка', '2010-10-06 22:23:06'),
+('328', 'RU', 'Лихтенштейн', '2010-10-06 22:23:06'),
+('329', 'RU', 'Сент-Люсия', '2010-12-06 22:17:36'),
+('330', 'RU', 'Ливан', '2010-10-06 22:23:06'),
+('331', 'RU', 'Лаос', '2010-12-06 22:17:36'),
+('332', 'RU', 'Казахстан', '2010-10-06 22:23:06'),
+('333', 'RU', 'Каймановы острова', '2010-12-06 22:17:36'),
+('334', 'RU', 'Кувейт', '2010-10-06 22:23:06'),
+('335', 'RU', 'Южная Корея', '2010-12-06 22:17:36'),
+('336', 'RU', 'Северная Корея', '2010-12-06 22:17:36'),
+('337', 'RU', 'Сент-Китс и Невис', '2010-12-06 22:17:36'),
+('338', 'RU', 'Коморы', '2010-12-06 22:17:36'),
+('339', 'RU', 'Кирибати', '2010-10-06 22:23:06'),
+('340', 'RU', 'Камбоджа', '2010-10-06 22:23:06'),
+('341', 'RU', 'Киргизия', '2010-10-06 22:23:06'),
+('342', 'RU', 'Кения', '2010-10-06 22:23:06'),
+('343', 'RU', 'Япония', '2010-10-06 22:23:06'),
+('344', 'RU', 'Иордания', '2010-10-06 22:23:06'),
+('345', 'RU', 'Ямайка', '2010-10-06 22:23:06'),
+('346', 'RU', 'Италия', '2010-10-06 22:23:06'),
+('347', 'RU', 'Исландия', '2010-10-06 22:23:06'),
+('348', 'RU', 'Иран', '2010-10-06 22:23:06'),
+('349', 'RU', 'Ирак', '2010-10-06 22:23:06'),
+('350', 'RU', 'Британская территория в Индийском океане', '2010-12-06 22:17:36'),
+('351', 'RU', 'Индия', '2010-12-06 22:17:36'),
+('352', 'RU', 'Израиль', '2010-10-06 22:23:06'),
+('353', 'RU', 'Ирландия', '2010-10-06 22:23:06'),
+('354', 'RU', 'Индонезия', '2010-10-06 22:23:07'),
+('355', 'RU', 'Венгрия', '2010-10-06 22:23:07'),
+('356', 'RU', 'Гаити', '2010-10-06 22:23:07'),
+('357', 'RU', 'Хорватия', '2010-10-06 22:23:07'),
+('358', 'RU', 'Гондурас', '2010-10-06 22:23:07'),
+('359', 'RU', 'Херд и Макдоналд', '2010-12-06 22:17:36'),
+('360', 'RU', 'Гонконг', '2010-10-06 22:23:07'),
+('361', 'RU', 'Гайана', '2010-12-06 22:17:36'),
+('362', 'RU', 'Гвинея-Бисау', '2010-10-06 22:23:07'),
+('363', 'RU', 'Гуам', '2010-10-06 22:23:07'),
+('364', 'RU', 'Гватемала', '2010-10-06 22:23:07'),
+('365', 'RU', 'Южная Георгия и Южные Сандвичевы острова', '2010-12-06 22:17:36'),
+('366', 'RU', 'Греция', '2010-10-06 22:23:07'),
+('367', 'RU', 'Гваделупа', '2010-10-06 22:23:07'),
+('368', 'RU', 'Гвинея', '2010-10-06 22:23:07'),
+('369', 'RU', 'Гамбия', '2010-10-06 22:23:07'),
+('370', 'RU', 'Гренландия', '2010-10-06 22:23:07'),
+('371', 'RU', 'Гибралтар', '2010-10-06 22:23:07'),
+('372', 'RU', 'Гана', '2010-10-06 22:23:07'),
+('373', 'RU', 'Французская Гвиана', '2010-10-06 22:23:07'),
+('374', 'RU', 'Грузия', '2010-10-06 22:23:07'),
+('375', 'RU', 'Гренада', '2010-10-06 22:23:07'),
+('376', 'RU', 'Великобритания', '2010-10-06 22:23:07'),
+('377', 'RU', 'Габон', '2010-10-06 22:23:07'),
+('378', 'RU', 'Франция', '2010-10-06 22:23:07'),
+('379', 'RU', 'Фареры', '2010-12-06 22:17:36'),
+('380', 'RU', 'Микронезия', '2010-12-06 22:17:36'),
+('381', 'RU', 'Фолклендские острова', '2010-12-06 22:17:36'),
+('382', 'RU', 'Фиджи', '2010-10-06 22:23:07'),
+('383', 'RU', 'Финляндия', '2010-10-06 22:23:07'),
+('384', 'RU', 'Эфиопия', '2010-10-06 22:23:07'),
+('385', 'RU', 'Испания', '2010-10-06 22:23:07'),
+('386', 'RU', 'Эритрея', '2010-12-06 22:17:36'),
+('387', 'RU', 'Западная Сахара', '2010-10-06 22:23:07'),
+('388', 'RU', 'Египет', '2010-10-06 22:23:07'),
+('389', 'RU', 'Эстония', '2010-10-06 22:23:07'),
+('390', 'RU', 'Эквадор', '2010-10-06 22:23:07'),
+('391', 'RU', 'Алжир', '2010-10-06 22:23:07'),
+('392', 'RU', 'Доминиканская Республика', '2010-10-06 22:23:07'),
+('393', 'RU', 'Дания', '2010-10-06 22:23:07'),
+('394', 'RU', 'Джибути', '2010-10-06 22:23:07'),
+('395', 'RU', 'Германия', '2010-10-06 22:23:07'),
+('396', 'RU', 'Чехия', '2010-10-06 22:23:07'),
+('397', 'RU', 'Кипр', '2010-10-06 22:23:07'),
+('398', 'RU', 'Остров Рождества', '2010-12-06 22:17:36'),
+('399', 'RU', 'Кабо-Верде', '2010-10-06 22:23:07'),
+('400', 'RU', 'Куба', '2010-10-06 22:23:07'),
+('402', 'RU', 'Коста-Рика', '2010-10-06 22:23:07'),
+('403', 'RU', 'Колумбия', '2010-10-06 22:23:07'),
+('404', 'RU', 'Китай', '2010-10-06 22:23:07'),
+('405', 'RU', 'Камерун', '2010-10-06 22:23:07'),
+('406', 'RU', 'Чили', '2010-10-06 22:23:07'),
+('407', 'RU', 'Острова Кука', '2010-12-06 22:17:36'),
+('408', 'RU', 'Кот-д’Ивуар', '2010-12-06 22:17:36'),
+('409', 'RU', 'Швейцария', '2010-10-06 22:23:07'),
+('410', 'RU', 'Конго', '2010-10-06 22:23:07'),
+('411', 'RU', 'Центрально-Африканская Республика', '2010-10-06 22:23:07'),
+('412', 'RU', 'Кокосовые острова', '2010-12-06 22:17:36'),
+('413', 'RU', 'Канада', '2010-10-06 22:23:07'),
+('414', 'RU', 'Белиз', '2010-10-06 22:23:07'),
+('415', 'RU', 'Белоруссия', '2010-10-06 22:23:07'),
+('416', 'RU', 'Ботсвана', '2010-10-06 22:23:07'),
+('417', 'RU', 'Буве', '2010-12-06 22:17:36'),
+('418', 'RU', 'Бутан', '2010-12-06 22:17:36'),
+('419', 'RU', 'Багамы', '2010-10-06 22:23:07'),
+('420', 'RU', 'Бразилия', '2010-10-06 22:23:07'),
+('421', 'RU', 'Боливия', '2010-10-06 22:23:07'),
+('422', 'RU', 'Бруней', '2010-12-06 22:17:36'),
+('423', 'RU', 'Бермуды', '2010-10-06 22:23:07'),
+('424', 'RU', 'Бенин', '2010-10-06 22:23:07'),
+('425', 'RU', 'Бурунди', '2010-12-06 22:17:36'),
+('426', 'RU', 'Бахрейн', '2010-10-06 22:23:07'),
+('427', 'RU', 'Болгария', '2010-10-06 22:23:07'),
+('428', 'RU', 'Буркина Фасо', '2010-10-06 22:23:07'),
+('429', 'RU', 'Бельгия', '2010-10-06 22:23:07'),
+('430', 'RU', 'Бангладеш', '2010-10-06 22:23:07'),
+('431', 'RU', 'Барбадос', '2010-10-06 22:23:07'),
+('432', 'RU', 'Босния и Герцеговина', '2010-10-06 22:23:07'),
+('433', 'RU', 'Азербайджан', '2010-10-06 22:23:07'),
+('434', 'RU', 'Аруба', '2010-12-06 22:17:36'),
+('435', 'RU', 'Австралия', '2010-10-06 22:23:07'),
+('436', 'RU', 'Австрия', '2010-10-06 22:23:07'),
+('437', 'RU', 'Американское Самоа', '2010-12-06 22:17:36'),
+('438', 'RU', 'Аргентина', '2010-10-06 22:23:07'),
+('439', 'RU', 'Ангола', '2010-10-06 22:23:07'),
+('440', 'RU', 'Нидерландские Антильские острова', '2010-12-06 22:17:36'),
+('441', 'RU', 'Армения', '2010-10-06 22:23:07'),
+('442', 'RU', 'Албания', '2010-10-06 22:23:07'),
+('443', 'RU', 'Ангилья', '2010-12-06 22:17:36'),
+('444', 'RU', 'Антигуа и Барбуда', '2010-12-06 22:17:36'),
+('445', 'RU', 'Афганистан', '2010-10-06 22:23:07'),
+('446', 'RU', 'ОАЭ', '2010-12-06 22:17:36'),
+('447', 'RU', 'Андорра', '2010-10-06 22:23:07'),
+('454', 'RU', 'Опубликовать новость', '2010-12-06 22:17:36'),
+('455', 'RU', 'Сохранить', '2010-12-06 22:17:36'),
+('457', 'RU', 'Антиспамерский код:', '2010-12-06 22:17:36'),
+('458', 'RU', 'Что изображено на рисунке?', '2010-12-06 22:17:36'),
+('460', 'RU', 'Электронный адрес:', '2010-12-06 22:17:36'),
+('461', 'RU', 'Используете HTML-разметку только для шрифтового оформления текста \n  (<b>, <u>, <i>) и ссылок (<a>). Пожалуйста, не используйте таблицы (<table>), разделы (<div>) и т. д.', '2010-12-06 22:17:36'),
+('462', 'RU', 'В тексте присутствует HTML-разметка.', '2010-12-06 22:17:36'),
+('463', 'RU', 'Текст:', '2010-12-06 22:17:36'),
+('464', 'RU', 'Тема:', '2010-12-06 22:17:36'),
+('468', 'RU', 'Активация', '2010-12-06 22:17:36'),
+('472', 'RU', 'Мы уважаем ваше право на неприкосновенность частной жизни. \n  Ваши персональные данные сохраняются в нашей базе данных, \n  но мы не передаём их другим лицам и организациям. \n  Пожалуйста, ознакомьтесь с <a href=\"articles.php?page=dsb\">Положением о конфиденциальности</a>. \n  Если у вас есть вопросы, <a href=\"mailto:%1\">свяжитесь с нами</a> до регистрации.', '2010-12-06 22:17:36'),
+('480', 'RU', 'Пользователь:', '2010-12-06 22:17:36'),
+('484', 'RU', 'Профиль', '2010-12-06 22:17:36'),
+('487', 'RU', 'Чёрные метки', '2010-12-06 22:17:36'),
+('488', 'RU', 'Настройки', '2010-12-06 22:17:36'),
+('490', 'RU', 'Радиус не может превышать 150 км. Чтобы отменить уведомления, задайте 0.', '2010-12-06 22:17:36'),
+('491', 'RU', 'Сменить пароль', '2010-12-06 22:17:36'),
+('493', 'RU', 'Сменить адрес', '2010-12-06 22:17:36'),
+('497', 'RU', 'Не найден', '2010-12-06 22:17:36'),
+('502', 'RU', 'Найдено тайников: %1', '2010-12-06 22:17:36'),
+('503', 'RU', 'Ваши последние отчёты', '2010-12-06 22:17:36'),
+('504', 'RU', 'Нет отчётов', '2010-12-06 22:17:36'),
+('505', 'RU', 'Спрятано тайников: %1', '2010-12-06 22:17:36'),
+('507', 'RU', 'Нет спрятанных тайников', '2010-12-06 22:17:36'),
+('511', 'RU', 'Отправлено писем: %1', '2010-12-06 22:17:36'),
+('544', 'RU', 'Присылать уведомления о новых тайниках в радиусе %1 км.', '2010-12-06 22:17:36'),
+('545', 'RU', 'BBCode для форумов:', '2010-12-06 22:17:36'),
+('548', 'RU', 'HTML:', '2010-12-06 22:17:36'),
+('552', 'RU', 'Отменить', '2010-12-06 22:17:36'),
+('564', 'RU', 'Уведомления:', '2010-12-06 22:17:36'),
+('565', 'RU', 'Координаты:', '2010-12-06 22:17:36'),
+('566', 'RU', 'Страна:', '2010-12-06 22:17:36'),
+('567', 'RU', 'Фамилия:', '2010-12-06 22:17:36'),
+('568', 'RU', 'Имя:', '2010-12-06 22:17:36'),
+('570', 'RU', '%1 нашёл тайник', '2010-12-06 22:17:36'),
+('581', 'RU', 'Электронный адрес:', '2010-12-06 22:17:36'),
+('582', 'RU', 'Журнал', '2010-12-06 22:17:36'),
+('587', 'RU', 'Профиль', '2010-12-06 22:17:36'),
+('588', 'RU', 'Эта информация сохранена в вашем профиле:', '2010-12-06 22:17:36'),
+('590', 'RU', 'Пользователь:', '2010-12-06 22:17:36'),
+('595', 'RU', 'Новый пароль:', '2010-12-06 22:17:36'),
+('597', 'RU', 'Сохранить', '2010-12-06 22:17:36'),
+('598', 'RU', 'Получить код', '2010-12-06 22:17:36'),
+('604', 'RU', 'Для смены пароля вы должны получить защитный код. Код высылается вам по электронной почте, он действителен \n  в течении трёх суток.', '2010-12-06 22:17:36'),
+('608', 'RU', 'Введите ваш электронный адрес, защитный код (который вы получили по электронной почте)\n  и ваш новый пароль.', '2010-12-06 22:17:36'),
+('610', 'RU', 'Защитный код:', '2010-12-06 22:17:36'),
+('613', 'RU', 'Повторите пароль:', '2010-12-06 22:17:36'),
+('618', 'RU', 'Сменить адрес электронной почты', '2010-12-06 22:17:36'),
+('619', 'RU', 'Для смены пароля вы должны получить защитный код. Код высылается вам по электронной почте и действителен в течении трёх суток.', '2010-12-06 22:17:36'),
+('620', 'RU', 'Новый электронный адрес:', '2010-12-06 22:17:36'),
+('622', 'RU', 'Введите защитный код, который вы получили по почте.', '2010-12-06 22:17:36'),
+('623', 'RU', 'Сначала получите защитный код.', '2010-12-06 22:17:36'),
+('638', 'RU', 'Золотые ярлыки', '2010-12-06 22:17:36'),
+('642', 'RU', 'Чёрные метки', '2010-12-06 22:17:36'),
+('644', 'RU', 'Cписок пуст', '2010-12-06 22:17:36'),
+('697', 'RU', 'Показать все отчёты', '2010-12-06 22:17:36'),
+('704', 'RU', 'Отчитаться', '2010-12-06 22:17:36'),
+('706', 'RU', 'Наблюдать', '2010-12-06 22:17:36'),
+('708', 'RU', 'Чёрная метка', '2010-12-06 22:17:36'),
+('709', 'RU', 'Печать', '2010-12-06 22:17:36'),
+('711', 'RU', 'Размер', '2010-12-06 22:17:36'),
+('712', 'RU', 'Время на поиск:', '2010-12-06 22:17:36'),
+('715', 'RU', 'Спрятан:', '2010-12-06 22:17:36'),
+('716', 'RU', 'Опубликован', '2010-12-06 22:17:36'),
+('717', 'RU', 'Обновлён:', '2010-12-06 22:17:36'),
+('719', 'RU', 'Также опубликован:', '2010-12-06 22:17:36'),
+('720', 'RU', 'Заметок', '2010-12-06 22:17:36'),
+('721', 'RU', 'Наблюдают', '2010-12-06 22:17:36'),
+('722', 'RU', 'Чёрных меток', '2010-12-06 22:17:36'),
+('723', 'RU', 'Просмотров', '2010-12-06 22:17:36'),
+('724', 'RU', 'Атрибуты', '2010-12-06 22:17:36'),
+('725', 'RU', 'Подсказка', '2010-12-06 22:17:36'),
+('726', 'RU', 'Показать', '2010-12-06 22:17:36'),
+('727', 'RU', 'Фотографии', '2010-12-06 22:17:36'),
+('728', 'RU', 'Полезности', '2010-12-06 22:17:36'),
+('731', 'RU', 'все', '2010-12-06 22:17:36'),
+('733', 'RU', 'Загрузить как:', '2010-12-06 22:17:36'),
+('739', 'RU', 'Текстовый файл (.txt)', '2010-12-06 22:17:36'),
+('757', 'RU', 'Название:', '2010-12-06 22:17:36'),
+('797', 'RU', 'Координаты', '2010-12-06 22:17:36'),
+('847', 'RU', 'Выполнение этих требований повышает стойкость вашего пароля.', '2010-12-06 22:17:36'),
+('850', 'RU', 'Не используйте распространёные слова.', '2010-12-06 22:17:36'),
+('851', 'RU', 'Не используйте распространённые геокешерские слова.', '2010-12-06 22:17:36'),
+('852', 'RU', 'Не используйте части вашего имени пользователя, настоящего имени или электронного адреса.', '2010-12-06 22:17:36'),
+('853', 'RU', 'Длина от 6 до 60 символов.', '2010-12-06 22:17:36'),
+('854', 'RU', 'Введите пароль, который удовлетворяет следующим критериям:', '2010-12-06 22:17:36'),
+('855', 'RU', 'Ваш пароль не прошёл проверку.', '2010-12-06 22:17:36'),
+('856', 'RU', 'Черногория', '2010-10-06 22:23:07'),
+('857', 'RU', 'Сербия', '2010-10-06 22:23:07'),
+('900', 'RU', 'Помощь сайту', '2010-12-06 22:17:36'),
+('906', 'RU', 'Условия использования', '2010-12-06 22:17:36'),
+('922', 'RU', 'RU', '2011-01-05 20:58:32'),
+('1061', 'RU', 'Условия использования', '2010-12-06 22:17:36'),
+('1269', 'RU', 'Карта', '2010-12-06 22:17:36'),
+('1275', 'RU', 'Меню', '2010-12-06 22:17:36'),
+('1332', 'RU', 'Инфраструктура', '2010-12-06 22:17:36'),
+('1335', 'RU', 'Время', '2010-12-06 22:17:36'),
+('1336', 'RU', 'Сезонность', '2010-12-06 22:17:36'),
+('1338', 'RU', 'Снаряжение', '2010-12-06 22:17:36'),
+('1339', 'RU', 'Подготовка', '2010-12-06 22:17:36'),
+('1368', 'RU', 'Размер контейнера:', '2010-12-06 22:17:36'),
+('1369', 'RU', 'Координаты:', '2010-12-06 22:17:36'),
+('1380', 'RU', 'Выбор тайников', '2010-12-06 22:17:36'),
+('1392', 'RU', 'Атрибуты', '2010-12-06 22:17:36'),
+('1416', 'RU', 'Новый тайник', '2010-12-06 22:17:36'),
+('1417', 'RU', 'Если это ваш первый тайник, прочитайте <a href=\"articles.php?page=cacheinfo\">описание</a> отдельных полей.', '2010-12-06 22:17:36'),
+('1423', 'RU', 'Описание:', '2010-12-06 22:17:36'),
+('1490', 'RU', 'Пароль', '2010-12-06 22:17:36'),
+('1524', 'RU', 'Тип', '2010-12-06 22:17:36'),
+('1538', 'RU', 'Язык:', '2010-12-06 22:17:36'),
+('1541', 'RU', 'Ночной', '2010-12-06 22:17:36'),
+('1544', 'RU', 'Опасная зона', '2010-12-06 22:17:36'),
+('1550', 'RU', 'Железная дорога', '2010-12-06 22:17:36'),
+('1552', 'RU', 'Охота', '2010-12-06 22:17:36'),
+('1553', 'RU', 'Колючки', '2010-12-06 22:17:36'),
+('1554', 'RU', 'Клещи', '2010-12-06 22:17:36'),
+('1555', 'RU', 'Заброшенные шахты', '2010-12-06 22:17:36'),
+('1556', 'RU', 'Ядовитые растения', '2010-12-06 22:17:36'),
+('1557', 'RU', 'Опасные животные', '2010-12-06 22:17:36'),
+('1558', 'RU', 'Парковка', '2010-12-06 22:17:36'),
+('1559', 'RU', 'Общественный транспорт', '2010-12-06 22:17:36'),
+('1560', 'RU', 'Питьевая вода', '2010-12-06 22:17:36'),
+('1561', 'RU', 'Туалет', '2010-12-06 22:17:36'),
+('1562', 'RU', 'Телефон', '2010-12-06 22:17:36'),
+('1563', 'RU', 'Первая помощь', '2010-12-06 22:17:36'),
+('1566', 'RU', 'Болото', '2010-12-06 22:17:36'),
+('1567', 'RU', 'Холмистая местность', '2010-12-06 22:17:36'),
+('1576', 'RU', 'Плата за вход или парковку', '2010-12-06 22:17:36'),
+('1578', 'RU', 'Круглосуточный', '2010-12-06 22:17:36'),
+('1580', 'RU', 'Дневной', '2010-12-06 22:17:36'),
+('1582', 'RU', 'Всесезонный', '2010-12-06 22:17:36'),
+('1586', 'RU', 'Компас', '2010-12-06 22:17:36'),
+('1587', 'RU', 'Фонарь', '2010-12-06 22:17:36'),
+('1588', 'RU', 'Альпинистское снаряжение', '2010-12-06 22:17:36'),
+('1589', 'RU', 'Пещерное снаряжение', '2010-12-06 22:17:36'),
+('1591', 'RU', 'Плавсредство', '2010-12-06 22:17:36'),
+('1594', 'RU', 'Головоломка', '2010-12-06 22:17:36'),
+('1595', 'RU', 'Математическая задача', '2010-12-06 22:17:36'),
+('1598', 'RU', 'Детский', '2010-12-06 22:17:36'),
+('1599', 'RU', 'Действующая железная дорога неподалёку. Будьте осторожны, держитесь на безопасной дистанции, будьте внимательны при переходе.', '2010-12-06 22:17:36'),
+('1601', 'RU', 'Тайник спрятан в охотничьих угодьях. Опасайтесь попасть под выстрел. В сумерках или темноте держите фонарь вклёченным в целях безопасности. ', '2010-12-06 22:17:36'),
+('1602', 'RU', 'Опасайтесь колючек. Носите подходящую одежду.', '2010-12-06 22:17:36'),
+('1603', 'RU', 'В летнее время опасайтесь клещей. Носите брюки, одежду с длинными рукавами, периодически осматривайте друг друга. Заранее позаботьтесь о прививках против клещевого энцефалита.', '2010-12-06 22:17:36'),
+('1605', 'RU', 'Этот тайник можно искать хоть днём, хоть ночью.', '2010-12-06 22:17:36'),
+('1607', 'RU', 'Этот тайник можно искать только в светлое время суток. Например, скалистая местность с утёсами и обрывами опасна для посещения ночью, а в жилой местности использование фонарей может выглядеть подозрительно.', '2010-12-06 22:17:36'),
+('1609', 'RU', 'Тайник можно искать круглый год, но сложность может зависетьот сезона. Указывайте сложность для хороших условий.', '2010-12-06 22:17:36'),
+('1613', 'RU', 'Для поисков нужен компас.', '2010-12-06 22:17:36'),
+('1614', 'RU', 'Для поисков необходим фонарь. Не забудьте запасной комплект батарей!', '2010-12-06 22:17:36'),
+('1615', 'RU', 'Для поисков этого тайника вам потребуется альпинистское снаряжения и навыки его правильного использования. Если вы новичок, не ходите на поиски в одиночку, возьмите с собой опытного альпиниста.', '2010-12-06 22:17:36'),
+('1616', 'RU', 'Этот тайник спрятан в пещере, и вам потребуется соответствующее снаряжение. Будьте осторожны, даже маленькие пещеры могут быть таить непредвиденные опасности, такие, как внезапная гроза (берегитесь воды) или вывихнутая лодыжка. Посоветуйтесь с опытными людьми прежде чем лезть в пещеру. Также берегите природу, например, не тревожьте летучих мышей.', '2010-12-06 22:17:36'),
+('1618', 'RU', 'Тайник может быть найден только с использованием плавредства: лодки, катера, яхты… Добраться до тайника вплавь (без лодки) не представляется возможным из-за расстояния, течения или иных препятствий. Подробности должны быть указаны в описании.', '2010-12-06 22:17:36'),
+('1621', 'RU', 'Перед или во время поисков тайника нужно рещить математическую задачу, выходящую за рамки тривиальных арифметических операций.', '2010-12-06 22:17:36'),
+('1624', 'RU', 'Тайник сделан специально для детей. TODO. ', '2010-12-06 22:17:36'),
+('1626', 'RU', 'Опасайтесь ядовитых растений. Смотрите за детьми и собаками, не давайте им трогать или есть отраву.', '2010-12-06 22:17:36'),
+('1627', 'RU', 'Эта местность населена потенциально опасными животными, например, медведями, ядовитыми змеями, скорпионами, или является природным очагом бешенства.', '2010-12-06 22:17:36'),
+('1628', 'RU', 'Ближняя парковка является хорошей начальной точкой для поисков тайника. Если поблизости нет бесплатных парковок, должен быть установлен атрибут «Плата за вход или парковку».', '2010-12-06 22:17:36'),
+('1629', 'RU', 'Тайник расположен за городом, но до него можно добраться общественным транспортом. Не устанавливайте этот атрибут для тайников в населённых пунктах.', '2010-12-06 22:17:36'),
+('1630', 'RU', 'По пути к тайнику или поблизости от тайника есть источник питьевой воды. Этот атрибут полезен для планирования встреч, длительных пеших прогулок или посещения тайников в потенциально грязных местах, таких, как пещеры.', '2010-12-06 22:17:36'),
+('1636', 'RU', 'При поисках этого тайника придётся ходить по болоту или преодолевать залитые водой участки местности. Носите подходящую одежду и обувь. После ливня местность может стать непроходимой.', '2010-12-06 22:17:36'),
+('1658', 'RU', 'Путь', '2010-12-06 22:17:36'),
+('1659', 'RU', 'Размер контейнера', '2010-12-06 22:17:36'),
+('1710', 'RU', 'Новые тайники в %1', '2010-12-06 22:17:36'),
+('2237', 'RU', 'Тайники:', '2010-12-06 22:17:35'),
+('2246', 'RU', '<span></span>', '2010-12-09 00:17:58'),
+('922', 'SV', 'SV', '2011-05-15 11:46:05');

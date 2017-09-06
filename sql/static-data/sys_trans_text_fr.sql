@@ -1,1911 +1,1911 @@
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1', 'FR', 'Réorganiser des IDs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2', 'FR', 'La base de données n\'a pas pu être connecté.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('3', 'FR', 'Test - Ne vous connectez pas, s\'il vous plaît', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('4', 'FR', 'Utilisateur', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('5', 'FR', '(vide)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('6', 'FR', 'Connecté en tant que', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('7', 'FR', 'Déconnexion', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('8', 'FR', 'Recherche de Waypoint\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('9', 'FR', 'Durée page\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('10', 'FR', 'seconde', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('11', 'FR', 'Page en cache\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('12', 'FR', 'DB connecté\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('13', 'FR', 'Créé à\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('14', 'FR', 'Déclaration de confidentialité', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('15', 'FR', 'Empreinte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('16', 'FR', 'Contact', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('17', 'FR', 'Plan du site', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('18', 'FR', 'Inscription', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('19', 'FR', 'Nouvel utilisateur inscrit', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('20', 'FR', 'Note', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('21', 'FR', 'Vietnamien', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('22', 'FR', 'Nom d\'utilisateur', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('23', 'FR', 'E-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('24', 'FR', 'Prénom', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('25', 'FR', 'Nom de famille', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('26', 'FR', 'Pays', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('27', 'FR', 'Créer nouvel utilisateur', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('29', 'FR', 'Le nom d\'utilisateur n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('31', 'FR', 'Le dernier nom n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('32', 'FR', 'Le premier nom n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('33', 'FR', 'Non spécifié', '2016-03-24 19:23:50');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('34', 'FR', 'Montre tout', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('35', 'FR', 'L\'adresse e-mail n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('36', 'FR', 'Turc', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('37', 'FR', 'Votre mot de passe\&nbsp;:', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('39', 'FR', 'Les mots de passe ne correspondent pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('41', 'FR', '* Champ obligatoire', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('42', 'FR', 'Suédois', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('43', 'FR', 'Slovène', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('45', 'FR', 'Au moins 4 caractères différents', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('48', 'FR', 'Slovaque', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('49', 'FR', 'Russe', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('51', 'FR', 'Réinitialiser', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('52', 'FR', 'Recommandations', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('54', 'FR', 'Index', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('55', 'FR', 'Recommandations', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('56', 'FR', 'trouvé', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('57', 'FR', 'par', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('59', 'FR', 'Roumain', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('60', 'FR', 'Étape 1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('63', 'FR', 'Étape 2', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('64', 'FR', 'Portugais', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('65', 'FR', 'Retour', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('70', 'FR', 'Nouvelles', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('71', 'FR', 'Derniers caches', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('73', 'FR', 'Derniers entrées du log', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('74', 'FR', 'Polonais', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('75', 'FR', 'Norvégien', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('76', 'FR', 'Letton', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('77', 'FR', 'Litaunien', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('78', 'FR', 'Italien', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('79', 'FR', 'Islandais', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('80', 'FR', 'Page d\'accueil', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('82', 'FR', 'Sur cette page vous trouverez des Geocaches de tout le monde, en mettant l\'accent sur l\'Allemagne, l\'Autriche, la Suisse, l\'Italie, l\'Espagne et la France. Nous offrons également des informations sur les sujets de géocaching divers et un forum (message board).</p>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('83', 'FR', 'Le fichier n\'est pas téléchargé correctement.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('84', 'FR', 'Le fichier était trop grand. La taille maximale d\'un fichier est de %1 Ko.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('85', 'FR', 'Aucun fichier d\'image donné.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('86', 'FR', 'même type', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('90', 'FR', '%1 caches actives et %2 trouvés par %3 utilisateurs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('91', 'FR', 'Hongrois', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('92', 'FR', 'Croate', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('93', 'FR', 'Finnois', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('94', 'FR', 'Oui', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('95', 'FR', 'Non', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('96', 'FR', 'Salut', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('99', 'FR', 'Cet e-mail a été généré par le site web de %2, car un compte avec cette adresse e-mail a été créé. Si vous ne souhaitez pas recevoir d\'e-mails à l\'avenir, s\'il vous plaît nous contacter par %1.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('100', 'FR', 'Basque', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('101', 'FR', 'Estonien', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('102', 'FR', 'Espéranto', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('103', 'FR', 'Grec', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('104', 'FR', 'Danois', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('105', 'FR', 'Une erreur inconnue est survenue.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('106', 'FR', 'Le modèle n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('107', 'FR', 'Désolé, vous n\'êtes pas autorisé à accéder à cette page.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('108', 'FR', 'Désolé, le cache demandé n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('109', 'FR', 'Désolé, l\'opération demandée ne peut pas être effectuée.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('110', 'FR', 'S\'il vous plaît connectez-vous à continuer\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('111', 'FR', 'Désolé, l\'utilisateur demandé n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('112', 'FR', 'Le modèle mail n\'est pas existe.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('113', 'FR', 'HTML Tags', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('114', 'FR', 'Description', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('115', 'FR', 'Créez un cache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('116', 'FR', 'Admin', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('117', 'FR', 'Informations', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('118', 'FR', 'Caches', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('119', 'FR', 'Mon profil', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('120', 'FR', 'Nouveaux logs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('122', 'FR', 'Nouveaux caches', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('123', 'FR', 'À propos de géocaching', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('124', 'FR', 'Nouvel élément', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('125', 'FR', 'Chercher', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('126', 'FR', 'Traduction', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('127', 'FR', 'Activation', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('128', 'FR', 'Profil de l\'utilisateur', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('129', 'FR', 'Une erreur est survenue lors du traitement de la page.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('130', 'FR', 'Une erreur est survenue lors du traitement de la page. Si vous avez appelé cette page d\'un lien hypertexte sur notre site et cette erreur persiste un certain temps, s\'il vous plaît nous contacter par e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('131', 'FR', 'L\'Erreur suivante est survenue\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('133', 'FR', 'Indication d\'erreur', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('134', 'FR', '%2 a trouvé %1', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('135', 'FR', '%2 ne pas trouvé %1', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('136', 'FR', '%2 ont écrit une note de %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('137', 'FR', '%2 ont visité %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('138', 'FR', '%2 veulent visiter %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('139', 'FR', 'Confirmation de l\'inscription', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('140', 'FR', 'bienvenue à %1!', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('141', 'FR', 'Les données suivantes ont été stockées pour votre compte :', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('142', 'FR', 'Slave', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('144', 'FR', 'Si vous ne vous connectez pas au cours des 14 prochains jours, votre compte sera supprimé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('145', 'FR', 'Tchèque', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('146', 'FR', 'Bulgare', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('147', 'FR', 'Profil de l\'utilisateur de %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('148', 'FR', 'Envoyer un e-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('149', 'FR', 'Divers', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('150', 'FR', 'Je prends une talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('151', 'FR', 'Enregistré\&nbsp;depuis\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('152', 'FR', 'Caches cachés\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('153', 'FR', 'Caches trouvé\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('154', 'FR', '%1 de %2 possibles', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('155', 'FR', 'Néerlandais', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('156', 'FR', 'Japonais', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('157', 'FR', 'Espagnol', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('158', 'FR', 'Français', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('159', 'FR', 'Anglais', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('160', 'FR', 'Allemand', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('161', 'FR', 'Attention\&nbsp;: Si vous utilisez cette option, ne pas oublier de se déconnecter avant que d\'autres personnes peuvent utiliser votre ordinateur. Sinon, ils peuvent utiliser et modifier vos données personnelles.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('162', 'FR', 'Zimbabwe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('163', 'FR', 'Zambie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('164', 'FR', 'Afrique Du Sud', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('165', 'FR', 'Mayotte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('166', 'FR', 'Le code d\'activation a été envoyé par e-mail à vous.<br />S\'il vous plaît suivez les instructions de l\'e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('167', 'FR', 'Pour créer un compte sur %1, vous devez entrer une adresse e-mail vailde et un nom d\'utilisateur. Un e-mail sera envoyé à l\'adresse que vous avez fourni avec un code d\'activation. Seulement un compte peut être créé par adresse e-mail. Prénom, nom et le pays sont en option.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('168', 'FR', 'Il existe déjà un compte avec cette adresse e-mail. Il n\'est pas possible à enregistrer un deuxième compte avec la même adresse e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('171', 'FR', 'Le code d\'activation ou l\'adresse e-mail était incorrecte.<br /> L\'activation de votre compte n\'est pas réussie.<br /> S\'il vous plaît utiliser l\'adresse email où le courrier d\'inscription a été envoyé. <br /> <br /> S\'il vous plaît vérifier si vous avez mal tapé - si vous ne pouvez pas résoudre le problème vous-même, nous contacter via <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('172', 'FR', 'Yémen', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('173', 'FR', 'Samoa', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('174', 'FR', 'Aller', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('175', 'FR', 'Système développeur - seulement des tests', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('179', 'FR', 'Wallis-et-Futuna', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('180', 'FR', 'Diffusez des nouvelles', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('181', 'FR', 'Vanuatu', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('182', 'FR', 'Viet Nam', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('183', 'FR', 'Îles Vierges (États-Unis)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('184', 'FR', 'Îles Vierges (britanniques)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('185', 'FR', 'Venezuela', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('186', 'FR', 'Choisir la langue cible\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('187', 'FR', 'Montrer nouvelles traductions', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('188', 'FR', 'Vider le cache de Smarty', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('189', 'FR', 'Non défini', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('190', 'FR', 'Afficher les traductions qui ne sont plus référencés', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('191', 'FR', 'Montrer toutes les traductions', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('192', 'FR', 'Saint-Vincent et Les Grenadines', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('193', 'FR', 'Cité du Vatican (Saint-Siège)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('194', 'FR', 'Ouzbékistan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('195', 'FR', 'Utilisez des traductions existantes\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('196', 'FR', 'Toutes les traductions\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('197', 'FR', 'Nouvelles traductions\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('198', 'FR', 'Les traductions ne sont plus référencés\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('199', 'FR', 'Langues\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('201', 'FR', 'Uruguay', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('202', 'FR', 'Code d\'activation\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('203', 'FR', 'États Unis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('204', 'FR', 'Îles mineures éloignées des États-Unis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('206', 'FR', 'total\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('207', 'FR', 'Connexion', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('208', 'FR', 'Mot de passe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('209', 'FR', 'Ouganda', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('210', 'FR', 'Ukraine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('211', 'FR', 'Tanzanie, République Unie de', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('212', 'FR', 'Taiwan, province de Chine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('213', 'FR', 'Tuvalu', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('214', 'FR', 'Trinité-Et-Tobago', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('215', 'FR', 'Turquie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('216', 'FR', 'Non enregistré\&nbsp;?', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('217', 'FR', 'Vous avez oublié votre mot de passe\&nbsp;?', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('218', 'FR', 'Vous avez oublié votre adresse e-mail\&nbsp;?', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('219', 'FR', 'Ici vous pouvez trouver plus d\'dépannage\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('221', 'FR', 'Entrer un nouveau mot de passe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('222', 'FR', 'envoyer un rappel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('223', 'FR', 'Tonga', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('224', 'FR', 'Remplir le nom d\'utilisateur et le mot de passe, s\'il vous plaît\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('225', 'FR', 'Déconnexion réussie.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('226', 'FR', 'La connexion n\'est pas réussie.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('227', 'FR', 'Le nom d\'utilisateur ou le mot de passe ne correspondent pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('228', 'FR', 'Vous avez essayé de vous connecter plus de %1 fois pendant la dernière heure. La prochaine connexion ne sera pas autorisé avant qu\'une heure que le premier essai a passé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('229', 'FR', 'Votre compte n\'est pas actif.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('230', 'FR', '\&gt;<a href=\"activation.php\">Voici</a>\&lt; vous pouvez activer votre compte.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('231', 'FR', 'Tunisie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('232', 'FR', 'Pour terminer l\'enregistrement, vous devez saisir votre adresse e-mail et le code d\'activation.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('233', 'FR', 'Turkménistan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('234', 'FR', 'Tokelau', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('235', 'FR', 'Tadjikistan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('236', 'FR', 'Thaïlande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('237', 'FR', 'Togo', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('238', 'FR', 'Terres australes françaises', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('239', 'FR', 'Tchad', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('240', 'FR', 'Îles Turques-Et-Caïques', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('241', 'FR', 'Nom', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('242', 'FR', 'Swaziland', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('243', 'FR', 'République Arabe Syrienne', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('244', 'FR', 'Recommandations de <a href=\"viewprofile.php?userid=%1\">%2</a>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('245', 'FR', 'par %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('246', 'FR', '%1 n\'a pas recommandé de géocache.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('248', 'FR', 'Afficher les recommandations', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('249', 'FR', 'Le Salvador', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('250', 'FR', 'Sao Tomé et Principe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('251', 'FR', 'Suriname', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('252', 'FR', 'Somalie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxxx et GCxxxxx, tandis que x peut être un nombre quelconque ou char.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('254', 'FR', 'Il existe plus d\'une cache avec le waypoint \&quot;%1\&quot;.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('255', 'FR', 'Le waypoint \&quot;%1\&quot; n\'est pas trouvé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('256', 'FR', 'Sénégal', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('257', 'FR', 'San Marino', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('258', 'FR', 'Sierra Leone', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('259', 'FR', 'Slovaquie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('260', 'FR', 'Svalbard Et Jan Mayen', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('261', 'FR', 'Slovénie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('262', 'FR', 'Sainte-Hélène', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('263', 'FR', 'Singapour', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('264', 'FR', 'Suède', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('265', 'FR', 'Soudan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('266', 'FR', 'Seychelles', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('267', 'FR', 'Iles Salomon', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('268', 'FR', 'Arabie Saoudite', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('269', 'FR', 'Rwanda', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('270', 'FR', 'Russie (Fédération Russe)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('271', 'FR', 'Roumanie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('272', 'FR', 'Réunion', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('273', 'FR', 'Qatar', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('274', 'FR', 'Paraguay', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('275', 'FR', 'Palau', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('276', 'FR', 'Portugal', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('277', 'FR', 'Porto Rico', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('278', 'FR', 'Pitcairn', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('279', 'FR', 'Saint-Pierre-et-Miquelon', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('280', 'FR', 'Pologne', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('281', 'FR', 'Pakistan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('282', 'FR', 'Philippines', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('283', 'FR', 'Papouasie Nouvelle Guinée', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('284', 'FR', 'Polynésie française', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('285', 'FR', 'Pérou', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('286', 'FR', 'Panama', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('287', 'FR', 'Oman', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('288', 'FR', 'Nouvelle Zélande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('289', 'FR', 'Niue', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('290', 'FR', 'Nauru', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('291', 'FR', 'Népal', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('292', 'FR', 'Norvège', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('293', 'FR', 'Pays-Bas', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('294', 'FR', 'Nicaragua', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('295', 'FR', 'Nigeria', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('296', 'FR', 'Norfolk Island', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('297', 'FR', 'Niger', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('298', 'FR', 'Nouvelle-Calédonie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('299', 'FR', 'Namibie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('300', 'FR', 'Mozambique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('301', 'FR', 'Malaisie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('302', 'FR', 'Mexique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('303', 'FR', 'Malawi', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('304', 'FR', 'Maldives', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('305', 'FR', 'Ile Maurice', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('306', 'FR', 'Malte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('307', 'FR', 'Montserrat', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('308', 'FR', 'Mauritanie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('309', 'FR', 'Martinique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('310', 'FR', 'Îles Mariannes du Nord', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('311', 'FR', 'Macau', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('312', 'FR', 'Mongolie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('313', 'FR', 'Myanmar', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('314', 'FR', 'Mali', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('315', 'FR', 'Macédoine, Ancienne République yougoslave de', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('316', 'FR', 'Iles Marshall', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('317', 'FR', 'Madagascar', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('318', 'FR', 'Moldova, République de', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('319', 'FR', 'Monaco', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('320', 'FR', 'Maroc', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('321', 'FR', 'Jamahiriya arabe libyenne', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('322', 'FR', 'Lettonie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('323', 'FR', 'Luxembourg', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('324', 'FR', 'Lituanie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('325', 'FR', 'Lesotho', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('326', 'FR', 'Libéria', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('327', 'FR', 'Sri Lanka', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('328', 'FR', 'Liechtenstein', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('329', 'FR', 'Sainte-Lucie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('330', 'FR', 'Liban', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('331', 'FR', 'République démocratique populaire lao', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('332', 'FR', 'Kazakhstan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('333', 'FR', 'Îles Caïmans', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('334', 'FR', 'Koweit', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('335', 'FR', 'Corée, République De', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('336', 'FR', 'République de Corée, République populaire démocratique de', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('337', 'FR', 'Saint-Kitts-Et-Nevis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('338', 'FR', 'Comores', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('339', 'FR', 'Kiribati', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('340', 'FR', 'Cambodge', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('341', 'FR', 'Kirghizstan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('342', 'FR', 'Kenya', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('343', 'FR', 'Japon', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('344', 'FR', 'Jordanie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('345', 'FR', 'Jamaïque', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('346', 'FR', 'Italie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('347', 'FR', 'Islande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('348', 'FR', 'Iran (République islamique d \')', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('349', 'FR', 'Irak', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('350', 'FR', 'Territoire britannique de l\'océan Indien', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('351', 'FR', 'Inde', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('352', 'FR', 'Israël', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('353', 'FR', 'Irlande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('354', 'FR', 'Indonésie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('355', 'FR', 'Hongrie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('356', 'FR', 'Haïti', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('357', 'FR', 'Croatie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('358', 'FR', 'Honduras', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('359', 'FR', 'Heard et Mc Donald Îles', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('360', 'FR', 'Hong Kong', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('361', 'FR', 'Guyane', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('362', 'FR', 'Guinée-Bissau', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('363', 'FR', 'Guam', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('364', 'FR', 'Guatemala', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('365', 'FR', 'Géorgie du Sud et les îles Sandwich du Sud', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('366', 'FR', 'Grèce', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('367', 'FR', 'Guadeloupe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('368', 'FR', 'Guinée', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('369', 'FR', 'Gambie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('370', 'FR', 'Groenland', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('371', 'FR', 'Gibraltar', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('372', 'FR', 'Ghana', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('373', 'FR', 'Guyane française', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('374', 'FR', 'Géorgie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('375', 'FR', 'Grenade', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('376', 'FR', 'Royaume-Uni', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('377', 'FR', 'Gabon', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('378', 'FR', 'France', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('379', 'FR', 'Îles Féroé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('380', 'FR', 'Micronésie, États fédérés de', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('381', 'FR', 'Îles Falkland (Malvinas)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('382', 'FR', 'Fidji', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('383', 'FR', 'Finlande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('384', 'FR', 'Ethiopie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('385', 'FR', 'Espagne', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('386', 'FR', 'Erythrée', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('387', 'FR', 'Sahara Occidental', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('388', 'FR', 'Egypte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('389', 'FR', 'Estonie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('390', 'FR', 'Equateur', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('391', 'FR', 'Algérie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('392', 'FR', 'République Dominicaine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('393', 'FR', 'Danemark', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('394', 'FR', 'Djibouti', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('395', 'FR', 'Allemagne', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('396', 'FR', 'République Tchèque', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('397', 'FR', 'Chypre', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('398', 'FR', 'Christmas Island', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('399', 'FR', 'Cap-Vert', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('400', 'FR', 'Cuba', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('402', 'FR', 'Costa Rica', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('403', 'FR', 'Colombie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('404', 'FR', 'Chine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('405', 'FR', 'Cameroun', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('406', 'FR', 'Chili', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('407', 'FR', 'Iles Cook', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('408', 'FR', 'Côte d\'Ivoire', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('409', 'FR', 'Suisse', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('410', 'FR', 'Congo', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('411', 'FR', 'République Centrafricaine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('412', 'FR', 'Cocos (Keeling) Islands', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('413', 'FR', 'Canada', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('414', 'FR', 'Belize', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('415', 'FR', 'Biélorussie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('416', 'FR', 'Botswana', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('417', 'FR', 'Île Bouvet', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('418', 'FR', 'Bhoutan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('419', 'FR', 'Bahamas', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('420', 'FR', 'Brésil', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('421', 'FR', 'Bolivie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('422', 'FR', 'Brunei Darussalam', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('423', 'FR', 'Bermudes', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('424', 'FR', 'Bénin', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('425', 'FR', 'Burundi', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('426', 'FR', 'Bahreïn', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('427', 'FR', 'Bulgarie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('428', 'FR', 'Burkina Faso', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('429', 'FR', 'Belgique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('430', 'FR', 'Bangladesh', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('431', 'FR', 'Barbade', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('432', 'FR', 'Bosnie-Herzégovine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('433', 'FR', 'Azerbaïdjan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('434', 'FR', 'Aruba', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('435', 'FR', 'Australie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('436', 'FR', 'Autriche', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('437', 'FR', 'Samoa américaines', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('438', 'FR', 'Argentine', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('439', 'FR', 'Angola', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('440', 'FR', 'Antilles Néerlandaises', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('441', 'FR', 'Arménie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('442', 'FR', 'Albanie', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('443', 'FR', 'Anguilla', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('444', 'FR', 'Antigua-Et-Barbuda', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('445', 'FR', 'Afghanistan', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('446', 'FR', 'Emirats Arabes Unis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('447', 'FR', 'Andorre', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('448', 'FR', 'Passage à db-root échoué.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('449', 'FR', '(Avant l\'exportation)', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('450', 'FR', 'Nous mettons à jour %1 et de protéger contre les défauts qu\'il transformation, nous avons mis à la page entière déconnecté.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('452', 'FR', 'Nouvelle enregistrée', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('453', 'FR', 'Merci beaucoup pour votre nouvelle. Nous allons essayer de valider votre inscription dès que possible.<br /><br />Retour<a href=\"index.php\">Start</a>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('454', 'FR', 'Soumettre une nouvelle', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('455', 'FR', 'Soumettre', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('456', 'FR', 'Le code ne correspond pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('457', 'FR', 'Et maintenant remplir le code de protection anti-spam\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('458', 'FR', 'Qu\'est-ce que cette image montre\&nbsp;?', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('459', 'FR', 'L\'adresse e-mail n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('460', 'FR', 'Votre e-mail pour d\'autres questions\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('461', 'FR', 'S\'il vous plaît utilisez uniquement des tags HTML pour formater le texte - par exemple. bold, color ou des hyperlinks. Nous ne voulons pas des tables, divs etc.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('462', 'FR', 'le entre de news est pose de html', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('463', 'FR', 'Nouvelle\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('464', 'FR', 'Sujet\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('465', 'FR', 'Y a t-il des nouvelles de géocaching\&nbsp;?<br />Ici vous pouvez créer un nouvelle qui sera affiché sur la page de démarrage.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('466', 'FR', 'L\'activation de votre compte était réussie. Vous pouvez dès maintenant vous connecter sur la page de connexion.<br /><br /><a href=\"login.php\"> Accédez à la page de connexion</a>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('467', 'FR', 'Indices', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('468', 'FR', 'Activer le compte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('469', 'FR', 'Cordialement,<br/>l\'Opencaching-Team', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('470', 'FR', 'S\'il vous plaît être patient, nous ferons de notre mieux pour obtenir le site de nouveau en ligne dès que possible.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('471', 'FR', 'Le compte n\'a pas pu être créé, la raison est pas connue. Si vous ne pouvez pas résoudre ce problème vous-même, veuillez-vous nous contacter s\'il vous plaît via <a href=\"mailto:%1\">E-Mail</a>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('472', 'FR', 'Nous respectons votre vie privée. Vos données personnelles seront stockées dans notre base de données, mais pas partagés à des tiers. S\'il vous plaît noter que notre <a href=\"articles.php?page=dsb\"> déclaration de confidentialité</a> détaillé. Si vous avez d\'autres questions, s\'il vous plaît <a href=\"mailto:%1\">veuillez-vous nous contacter</a> <b>avant</b> vous créez votre compte.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('473', 'FR', 'Nous devons approuver votre nouvelle avant que nous puissions l\'afficher. Nous essayons de le faire dans les 24h à 48h suivantes. La nouvelle ne peut pas être modifié après que vous avez le soumis. Si vous voulez prendre des changements dans la nouvelle, s\'il vous plaît soumettre de nouveau nouvelle excates. Il est permis de soumettre des nouvelles à propos de tout autour de géocaching - mais il est interdit de soumettre publicité pour des produits ou des géocaches. La décision volontaire pour approuver ou non une nouvelle incombe exclusivement à la discrétion de l\'opérateur de la page Web - il n\'y a pas une exigence de la publication. En cas de doute, s\'il vous plaît soumettre votre nouvelle et attendre si il sera montré - ou de demander par e-mail avant de soumettre <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('474', 'FR', 'Si ce problème persiste sur une longue période, veuillez-vous nous contacter s\'il vous plaît à l\'adresse <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('475', 'FR', '%1 est hors service', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('477', 'FR', 'Total runtime:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('478', 'FR', 'Business layer runtime:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('479', 'FR', 'Framework runtime:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('480', 'FR', 'User runtime:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('481', 'FR', 'SQL Debugger', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('482', 'FR', '%1 des commandes', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('483', 'FR', 'Vue d\'ensemble', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('484', 'FR', 'Profil', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('485', 'FR', 'Les requêtes stockées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('486', 'FR', 'Caches regardées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('487', 'FR', 'Caches ignorées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('488', 'FR', 'Paramètres', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('490', 'FR', 'Le rayon de notification ne doit pas être plus de 150 km. Pour désactiver des notifications, définir le rayon à 0.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('491', 'FR', 'Changer le mot de passe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('493', 'FR', 'Adresse e-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('496', 'FR', 'archivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('497', 'FR', 'pas trouvé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('498', 'FR', 'participation', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('499', 'FR', 'sera présent', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('500', 'FR', 'Bonjour %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('501', 'FR', 'Logs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('502', 'FR', 'Trouve\&nbsp;: %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('503', 'FR', 'Vos dernières entrées du log', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('504', 'FR', 'Aucunes entrées trouvées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('505', 'FR', 'Géocaches cachés\&nbsp;: %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('506', 'FR', 'Vos géocaches cachés', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('507', 'FR', 'Aucuns géocaches cachés', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('508', 'FR', 'Géocaches inédits :', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('512', 'FR', 'Géocache inconnu', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('513', 'FR', 'Géocache traditionnel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('514', 'FR', 'Multicache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('515', 'FR', 'Géocache virtuel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('516', 'FR', 'Webcam Géocache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('517', 'FR', 'Géocache événementiel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('518', 'FR', 'Quiz Géocache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('519', 'FR', 'Géocache physique / math', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('520', 'FR', 'Géocache mouvante', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('521', 'FR', 'Drive-In Géocache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('524', 'FR', 'autre taille', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('525', 'FR', 'micro', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('526', 'FR', 'petit', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('527', 'FR', 'normal', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('528', 'FR', 'grand', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('529', 'FR', 'très grand', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('530', 'FR', 'aucune boîte', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('531', 'FR', 'disponible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('532', 'FR', 'temporairement non disponible', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('533', 'FR', 'caché par les approbateurs pour vérifier', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('534', 'FR', 'pas encore disponible', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('535', 'FR', 'type de cache inconnu', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('536', 'FR', 'Cache traditionelle', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('537', 'FR', 'Cache virtuelle', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('538', 'FR', 'Cache Webcam', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('539', 'FR', 'Cache événementielle', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('540', 'FR', 'Cache mathematique/physique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('541', 'FR', 'Cache mouvante', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('542', 'FR', 'Cache drive-in', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('544', 'FR', 'Je veux être informé sur des nouveaux géocaches dans un rayon de %1 km.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('545', 'FR', 'BBCode pour webforums\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('546', 'FR', '%1-statstic de %2', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('547', 'FR', 'Choisissez logo', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('548', 'FR', 'HTML-Code\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('549', 'FR', 'Texte affiché\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('550', 'FR', 'Texte contient caractères invalides\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('551', 'FR', 'Logos disponibles\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('552', 'FR', 'Annuler', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('553', 'FR', 'Sauvegarder', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('554', 'FR', 'Les paramètres suivants sont stockées pour votre logo\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('555', 'FR', 'Afficher entrées du log', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('556', 'FR', 'Image de la statistique', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('558', 'FR', 'Ne pas utiliser un éditeur HTML par défaut', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('559', 'FR', 'Ne pas me déconnecter après 60 minutes d\'inactivité.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('560', 'FR', 'Je prends un talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('561', 'FR', 'Autres\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('562', 'FR', 'Alerte de nouvelles géocaches est désactivé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('563', 'FR', 'Notifier moi sur les nouvelles géocaches dans un rayon de %1 km.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('564', 'FR', 'Notifications\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('565', 'FR', 'Accueil Coordonnées\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('566', 'FR', 'Pays\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('567', 'FR', 'Nom\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('568', 'FR', 'Prénom\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('569', 'FR', 'Recommandé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('570', 'FR', '%1 trouvé la géocache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('571', 'FR', '%1 n\'a pas trouvé le géoacache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('572', 'FR', '%1 a écrit une note', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('573', 'FR', '%1 a visité l\'événement', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('574', 'FR', '%1 veut visiter l\'événement', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('575', 'FR', '%1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('576', 'FR', 'Èditer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('577', 'FR', 'effacer', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('578', 'FR', 'Ajouter une image', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('579', 'FR', 'Les images pour ce log\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('580', 'FR', 'Retour à la géocache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('581', 'FR', 'Adresse e-mail\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('582', 'FR', 'Logs pour %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('584', 'FR', 'Sélection de photos pour %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('585', 'FR', 'Il n\'y a pas de images pour cette géocache.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('586', 'FR', 'Comme l\'image d\'aperçu', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('587', 'FR', 'Mon profil de données', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('588', 'FR', 'Les informations suivantes sont stockées dans votre profil d\'utilisateur\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('590', 'FR', 'Nom d\'utilisateur\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('591', 'FR', 'Le pays n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('592', 'FR', 'Le rayon n\'est pas valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('595', 'FR', 'Nouveau mot de passe\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('596', 'FR', 'Demande', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('597', 'FR', 'Changement', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('598', 'FR', 'Code demandé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('599', 'FR', 'Nouveau code de mot de passe', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('600', 'FR', 'vous avez demandé à %1 un code de sécurité pour modifier votre mot de passe.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('601', 'FR', 'Le code suivant a été généré : %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('602', 'FR', 'Ce code est 3 jours valable.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('603', 'FR', 'Vous pouvez entrer votre nouveau mot de passe à %1newpw.php.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('604', 'FR', 'Pour changer votre mot de passe, vous devez demander un code de sécurité qui sera vous envoyé par e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('605', 'FR', 'Cet adresse e-mail  n\'est pas enregistré avec un nom d\'utilisateur valide.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('606', 'FR', 'Un e-mail a été vous envoyé avec le code de sécurité.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('607', 'FR', 'Une erreur inconnue est survenue. Le code de sécurité n\'a pas pu être envoyé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('608', 'FR', 'S\'il vous plaît veuillez-vous entrer votre adresse e-mail, le code de sécurité que vous avez reçu et votre nouveau mot de passe. Le code de sécurité est valable seulement 3 jours. Vous devez en demander un nouveau après cette date.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('609', 'FR', 'Le compte d\'utilisateur n\'est pas activé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('610', 'FR', 'Code de sécurité\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('611', 'FR', 'Le code de sécurité est expiré. En demander un nouveau.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('612', 'FR', 'Le code de sécurité ne correspond pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('613', 'FR', 'S\'il\&nbsp;vous\&nbsp;plaît\&nbsp;répéter\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('614', 'FR', 'Le mot de passe a été changé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('615', 'FR', 'Code de sécurité pour la nouvelle adresse e-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('616', 'FR', 'vous avez demandé à %1 un code de sécurité pour modifier votre adresse e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('617', 'FR', 'Vous pouvez vérifier votre nouveau adresse e-mail à %1newemail.php', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('618', 'FR', 'Changer l\'adresse e-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('619', 'FR', 'Pour changer votre adresse e-mail, vous devez demander un code de sécurité. Il sera envoyé à votre nouveau adresse e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('620', 'FR', 'Nouvelle adresse e-mail\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('621', 'FR', 'Cet e-mail est déjà assigné à votre compte.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('622', 'FR', 'S\'il vous plaît entrer le code de sécurité que vous avez reçu. Le code de sécurité est valable seulement 3 jours. Vous devez en demander un nouveau après cette date.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('623', 'FR', 'Demande le code de sécurité premièrement, s\'il vous plaît.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('624', 'FR', 'Il n\'y avait aucune nouvelle adresse e-mail entrée, s\'il vous plaît demander un code de sécurité premièrement.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('625', 'FR', 'L\'adresse e-mail été changé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('626', 'FR', 'Télécharger', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('627', 'FR', 'Aucunes requêtes stockées trouvé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('628', 'FR', 'Avec le téléchargement, vous acceptez le terme <a href=\"articles.php?page=impressum#tos\">d\'utilisation</a> d\'Opencaching.de.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('629', 'FR', 'requête stockées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('630', 'FR', 'options de stockées comme nouvelle recherche', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('631', 'FR', 'Nom de la recherche\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('632', 'FR', 'Vous devez entrer un nom pour cette recherche.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('633', 'FR', 'Il existe déjà une recherche avec ce nom.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('634', 'FR', 'stockées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('635', 'FR', 'Ecrase les anciens options de recherche', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('636', 'FR', '-- Sélectionnez la recherche d\'écraser --', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('637', 'FR', '-- Aucune recherche stockées trouvé --', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('638', 'FR', 'Mes recommandations', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('639', 'FR', 'Votre recommandation pour «\&nbsp;<a href=\"viewcache.php?wp=%1\">%2</a>\&nbsp;» a été supprimée.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('640', 'FR', 'Retirer recommandation', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('641', 'FR', 'Vous n\'avez pas recommandé une géocache.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('642', 'FR', 'Géocaches ignorés', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('643', 'FR', 'supprimer', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('644', 'FR', 'Vous n\'ignorez pas des géocaches en ce moment.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('645', 'FR', 'Géocaches regardées - Paramètres', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('646', 'FR', 'Livraison\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('647', 'FR', 'Immédiat', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('648', 'FR', 'Tous les jours', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('649', 'FR', 'Hebdomadaire', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('650', 'FR', 'Envoyer à\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('651', 'FR', 'heures', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('652', 'FR', 'Envoyer en\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('653', 'FR', 'L\'heure et le jour envoyé est utilisé uniquement avec livraison quotidienne ou hebdomadaire.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('654', 'FR', 'Erreur en essayant de sauver\&nbsp; les paramètres!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('655', 'FR', 'Les paramètres ont été enregistrés.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('656', 'FR', 'Géocaches regardées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('657', 'FR', 'Dernière trouvé', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('658', 'FR', 'Aucunes géocaches regardées.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('659', 'FR', 'E-mail de rappel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('660', 'FR', 'Adresse e-mail de rappel', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('661', 'FR', 'Entrez votre nom d\'utilisateur et nous vous enverrons un rappel par e-mail à votre adresse e-mail.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('662', 'FR', 'Entrez un nom d\'utilisateur.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('663', 'FR', 'Utilisateur n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('664', 'FR', 'L\'e-mail de rappel a été envoyé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('665', 'FR', 'Rappel à votre adresse e-mail', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('666', 'FR', 'Votre adresse e-mail pour vous connecter :', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('667', 'FR', 'vous avez demandé un e-mail de rappel à %1.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('668', 'FR', 'Cache-Recommandations', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('669', 'FR', 'L\'utilisateurs qui a recommandent %1 par %2 a également recommandent les géocaches suivantes\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('670', 'FR', 'Quota', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('671', 'FR', 'Pas de recommandations trouvées.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('672', 'FR', 'Base de données maintenance', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('673', 'FR', 'DB Maintainance', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('674', 'FR', '%1 corrigé %2 entrées', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('675', 'FR', 'Exécuter', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('676', 'FR', 'Envoyer', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('677', 'FR', 'E-Mail de', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('678', 'FR', 'Désolé, le compte d\'utilisateur demandé est désactivé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('679', 'FR', 'Désolé, il n\'y a pas d\'adresse e-mail pour cet utilisateur.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('680', 'FR', 'Une erreur inconnue est survenue et l\'e-mail n\'a pas été envoyé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('681', 'FR', '%1\' avez vous contacté via %2.\r\nLe profil de l\'utilisateur : %2viewprofile.php?userid=%3\r\nPour répondre à cet e-mail, utilisez le lien d\'e-mail sur le profil de l\'utilisateur.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('682', 'FR', 'Objet\&nbsp;:', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('683', 'FR', 'Toutes les informations seront traitées confidentielles et non divulgués à des tiers\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('684', 'FR', '%1\' avec l\'adresse e-mail %2 a vous contacté via %3.\r\nLe profil de l\'utilisateur : %3viewprofile.php?userid=%4\r\nUtilisez le bouton de réponse de votre agent d\'e-mail pour répondre à cette e-mail.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('685', 'FR', 'L\'e-mail à %1 est envoyé.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('686', 'FR', 'Contenu:', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('687', 'FR', 'Envoyer un e-mail à %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('688', 'FR', 'Vous devez entrer un sujet\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('689', 'FR', 'Vous devez entrer un contenu\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('690', 'FR', 'Envoyer mon adresse e-mail avec ce message', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('691', 'FR', 'Cela permet au récepteur de répondre à votre e-mail directement avec son agent d\'e-mail. Vous pouvez activer cette option par défaut dans votre <a href=\"myprofile.php\">profil de l\'utilisateur</a>.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('692', 'FR', 'Pour vous et nous protéger contre les abus\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('693', 'FR', 'Seulement des e-mails qui concernent géocaching sont autorisés. Spaming n\'est pas autorisé\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('694', 'FR', 'Toutes les informations pertinentes seront enregistrées (date / heure, émetteur / récepteur et l\'adresse IP).', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('696', 'FR', 'Désolé, la géocache n\'est pas publiée.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('697', 'FR', 'Afficher tous les logs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('698', 'FR', 'Afficher cette géocache', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'FR', 'Vous êtes déjà connecté.<br /> S\'il vous plaît <a href=\"login.php?action=logout\">déconnecter</a> pour se connecter à nouveau.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('701', 'FR', 'Difficulté\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('702', 'FR', 'Terrain\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('703', 'FR', 'Liste des participants', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('704', 'FR', 'Enregistrer un log', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('705', 'FR', 'Ne regardez pas', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('706', 'FR', 'Regardez', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('707', 'FR', 'N\'ignorez pas', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('708', 'FR', 'Ignorer', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('709', 'FR', 'Vue d\'impression', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('710', 'FR', 'Autres systèmes de coordonnées', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('711', 'FR', 'Taille', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('712', 'FR', 'Temps nécessaire\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('713', 'FR', 'Distance', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('715', 'FR', 'Caché en\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('716', 'FR', 'Listé depuis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('717', 'FR', 'Dernière mise à jour\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('718', 'FR', 'Waypoint', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('719', 'FR', 'Aussi listé au\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('720', 'FR', 'Remarques', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('721', 'FR', 'Observateurs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('722', 'FR', 'Ignoré', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('723', 'FR', 'Visites de la page', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('724', 'FR', 'Attributs de cache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('725', 'FR', 'Indice additionnels', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('726', 'FR', 'Déchiffrer', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('727', 'FR', 'Images', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('728', 'FR', 'Utilités', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('729', 'FR', 'Montrer les recommandations de cache des utilisateurs qui ont recommandé ce géocache\&nbsp;: <a href=\"recommendations.php?cacheid=%1\">tout</a>', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('730', 'FR', 'Chercher des géocaches prés:', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('731', 'FR', 'tous', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('732', 'FR', 'trouvable', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('733', 'FR', 'Télécharger en fichier\&nbsp;:', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('734', 'FR', 'GPS Exchange Format .gpx', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('735', 'FR', 'Fichier waypoint .loc', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('736', 'FR', 'Google Earth .kml', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('737', 'FR', 'TomTom POI .ov2', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('738', 'FR', 'TOP50-Overlay .ovl', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('739', 'FR', 'Fichier text .txt', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('740', 'FR', 'C O P I E', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('741', 'FR', 'Modifier l\'image', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('742', 'FR', 'Désolé, l\'image demandée n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('743', 'FR', 'Désolé, le cachelog demandé n\'existe pas.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('744', 'FR', 'Afficher les statistiques', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('745', 'FR', 'Âge', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('747', 'FR', 'Emplacement', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('748', 'FR', 'MiniMap-Zoom', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('749', 'FR', 'Signaler cache', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('750', 'FR', 'Caches signalés', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('751', 'FR', 'Fichier\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('752', 'FR', 'S\'il vous plaît donner un nom à cette image\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('753', 'FR', 'Ajouter une image pour ces géocaches %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('754', 'FR', 'Ajouter une image pour log %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('755', 'FR', 'Modifier l\'image pour ces géocaches %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('756', 'FR', 'Modifier l\'image pour log %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('757', 'FR', 'Nom\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('758', 'FR', 'Donner un nom à cette image\&nbsp;!', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('759', 'FR', 'Après cliquer <i>télécharger</i>, il peut prendre un certain temps jusqu\'à ce que la page suivante est démontrée.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('760', 'FR', 'Cette image est un spoiler - ne montre pas une vignette.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('761', 'FR', 'Télécharger', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('762', 'FR', 'Seuls les formats d\'image suivants sont autorisés\&nbsp;: %1. Nous recommandons JPEG pour les images.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('763', 'FR', 'La taille de fichier des image ne doit pas %1 Ko. Nous recommandons 640x480 pixel de la taille de l\'image.', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('764', 'FR', 'Rapport pour %1 soumis', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('765', 'FR', 'Raison\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('766', 'FR', 'Commentaire\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('767', 'FR', 'Rapport %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('768', 'FR', 'Vous devez sélectionner une raison pour votre rapport\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('769', 'FR', 'Commentaire\&nbsp;: (obligatoire)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('770', 'FR', 'Il est nécessaire d\'entrer un commentaire pour signaler un cache\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('771', 'FR', 'Une erreur inconnue est survenue. Rapport échoué.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('772', 'FR', 'Rapport caché', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('773', 'FR', 'NOUVEAU', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('774', 'FR', 'En cours', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('775', 'FR', 'Terminé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('776', 'FR', 'Cache sur une propriété privée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('777', 'FR', 'Une violation de copyright', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('778', 'FR', 'Cache est parti', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('779', 'FR', 'Autre raison', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('780', 'FR', 'Le rapport est déjà affecté à un autre administrateur\&nbsp;! Il doit être âgé d\'au moins deux semaines avant de pouvoir l\'assumer.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('781', 'FR', 'Le rapport est déjà affecté à vous\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('782', 'FR', 'Vous ne pouvez pas travailler sur ce rapport\&nbsp;! Un autre administrateur le poursuit déjà.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('783', 'FR', 'Pour travailler sur un rapport vous devez l\'attribuer à vous\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('784', 'FR', 'Aucuns caches signalés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('785', 'FR', 'Détails pour rapport', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('786', 'FR', ' par ', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('787', 'FR', 'pas attribué', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('788', 'FR', 'Attribuer à moi', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('789', 'FR', 'Contacter le propriétaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('792', 'FR', 'Marquer comme terminée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('793', 'FR', 'Action', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('794', 'FR', 'Avant de signaler un cache à l\'équipe d\'Opencaching vous devriez essayer de contacter le propriétaire pour résoudre les problèmes possibles immédiatement de l\'utilisateur à l\'utilisateur. Cela ne vaut pas pour les caches violant les termes d\'utilisation d\'Opencaching d\'une manière qui exige une action immédiate d\'un administrateur d\'Opencaching.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('795', 'FR', 'Ne pas afficher séparément cette image (utilisée dans la description HTML, etc.)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('796', 'FR', 'Aucune information sur les détails de l\'utilisateur trouvé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('797', 'FR', 'Coordonnées', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('798', 'FR', 'Geokrets', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('799', 'FR', 'Détails', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('801', 'FR', 'Détails de l\'utilisateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('802', 'FR', 'Mes détails de profile', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('803', 'FR', 'Les informations supplémentaires suivantes sont stockées dans votre profil de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('805', 'FR', 'Erreur lors de l\'enregistrement.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('806', 'FR', 'Caractères illégaux trouvés dans', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('807', 'FR', 'Les valeurs de champs trop longtemps dans', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('808', 'FR', 'Les valeurs d\'origine ont été restaurés.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('809', 'FR', 'visible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('810', 'FR', 'invisible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('811', 'FR', 'interne', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('812', 'FR', '(*) Nouveaux rapports', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('814', 'FR', 'Statistiques de l\'utilisateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('815', 'FR', 'Afficher', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('817', 'FR', 'La géocache a été verrouillé par un administrateur parce qu\'il n\'a pas respecté les termes d\'utilisation d\'Opencaching. Si vous souhaitez le déverrouiller, contacter nous en utilisant le «\&nbsp;rapport cache\&nbsp;» -link. S\'il vous plaît choisissez «\&nbsp;autre\&nbsp;» comme raison et expliquer brièvement ce que vous avez changé de rendre la liste conforme à nos conditions d\'utilisation. Merci\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('818', 'FR', '/sql/static-data/data.sql a été changé avec la dernière checkout CVS <br />Avant de changer des translastions, de base de données mise à jour avec data.sql\&nbsp;!<br/> \&nbsp;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('819', 'FR', 'Désolé, la géocache est verrouillé et ne peut pas être consulté.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('821', 'FR', 'verrouillé, visible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('822', 'FR', 'verrouillée, invisible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('823', 'FR', 'Dernière mise à jour', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('826', 'FR', '-- S\'il vous plaît sélectionner ! --', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('827', 'FR', 'Adoptions', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('828', 'FR', 'Date', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('829', 'FR', 'Oui, je l\'ai lu et je respecterai les Opencaching.de <a href=\"articles.php?page=impressum#tos\">termes d\'utilisation</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('830', 'FR', 'Pour compléter l\'adoption, vous devez soumettre ce formulaire.<br />Avec soumettant ce formulaire, vous êtes le propriétaire responsable de ce géocache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('831', 'FR', '<strong>%1</strong> vous offert cette géocache pour adoption à %2.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('832', 'FR', 'Merci pour l\'adoption de <strong>%1</strong>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('833', 'FR', 'Engager l\'adoption de %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('834', 'FR', 'Il n\'y a pas de caches qui peuvent être adoptées par vous en ce moment.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('835', 'FR', 'Adopter maintenant', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('836', 'FR', 'Des géocaches qui le propriétaire vous propose pour adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('837', 'FR', 'Oui, j\'ai lu et compris ce qui est précède et je suis d\'accord.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('839', 'FR', 'Offre <b>%1</b> pour adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('840', 'FR', 'Vous n\' avez pas invité tous les utilisateurs à adopter cette cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('841', 'FR', 'Rejeter l\'adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('842', 'FR', 'Liste des utilisateurs auxquels vous avez offert %1 pour adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('843', 'FR', 'Nom d\'utilisateur inconnu', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('844', 'FR', 'Vous ne pouvez pas adopter votre propre cache\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('845', 'FR', 'Désolé, il faut lire et accepter le dessus pour continuer\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('846', 'FR', 'Désolé, il faut lire et accepter les conditions d\'utilisation pour continuer\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('847', 'FR', 'Cette règle garantit que votre mot de passe ne peut pas être deviné par un script automatisé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('849', 'FR', 'Pas tous les caractères sont autorisés. Vous ne pouvez qu\'utiliser lettres latino-européennes, 0-9 et .-_ @=)(/\\\&amp;*+~#.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('850', 'FR', 'Ne pas utiliser les mots du dictionnaire comme «\&nbsp;master\&nbsp;».', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('851', 'FR', 'Ne pas utiliser des mots de géocaching communs.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('852', 'FR', 'Ne pas utiliser des parties de votre nom d\'utilisateur, nom ou adresse e-mail.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('853', 'FR', 'Entre 6 et 60 caractères de longueur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('854', 'FR', 'S\'il vous plaît vérifiez que votre mot de passe correspond aux critères suivants\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('855', 'FR', 'Votre mot de passe n\'a pas passé notre contrôle de sécurité.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('856', 'FR', 'Monténégro', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('857', 'FR', 'Serbie', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('858', 'FR', '* Si l\'utilisateur déconnecté explicitement après la visite de la page ou si la dernière connexion<br />est plus de 90 jours, la dernière connexion ne peut pas être déterminée.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('859', 'FR', 'Gérer les utilisateurs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('860', 'FR', 'Sûr\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('861', 'FR', 'Désactiver (et verrouiller toutes les géocaches appartenant)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('862', 'FR', 'inconnu', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('863', 'FR', 'Dernière connexion connue\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('864', 'FR', 'Géocaches actives\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('865', 'FR', 'Total caché\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('866', 'FR', 'Logs\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('867', 'FR', 'Utilisateur actif\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('868', 'FR', 'Date de création\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('869', 'FR', 'Afficher les détails du compte d\'utilisateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('870', 'FR', 'Détails du compte d\'utilisateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('871', 'FR', 'E-Mail\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('872', 'FR', 'Téléchargement Waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('873', 'FR', 'Nouvelles approuve', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('874', 'FR', 'Ne pas afficher', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('875', 'FR', 'Terrain', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('876', 'FR', 'Difficulté', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('877', 'FR', 'Envoyer cette waypoint à un appareil GPS\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('882', 'FR', 'Meilleures notes actuelles', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('884', 'FR', '%1 Recommandations dans les 30 derniers jours', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('885', 'FR', 'Vous pouvez trouver plus de recommandations \&gt;<a href=\"tops.php\">ici</a>\&lt;.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('887', 'FR', 'Dernière\&nbsp;connexion\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('888', 'FR', 'Dans le dernier mois', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('889', 'FR', 'Entre 1 et 6 mois', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('890', 'FR', 'Entre 6 et 12 mois', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('891', 'FR', 'Entre 1 et 2 ans', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('892', 'FR', 'Le compte d\'utilisateur a été désactivé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('893', 'FR', 'Un nouveau message d\'activation a été envoyé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('894', 'FR', 'de', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('900', 'FR', 'Les dons', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('902', 'FR', 'Texte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('905', 'FR', 'OC-Waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('906', 'FR', 'Conditions d\'utilisation', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('907', 'FR', 'Notre Équipe', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('914', 'FR', 'zone de protection de la nature', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('915', 'FR', 'Balayage complet', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('916', 'FR', 'Fichier en cours\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('921', 'FR', 'Infos', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'FR', 'FR', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('923', 'FR', 'La compilation de ce modèle ratée. Cela devrait être un échec temporaire. S\'il vous plaît essayer de nouveau dans quelques minutes.', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('933', 'FR', 'Scan codes source', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('954', 'FR', 'Par défaut', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1059', 'FR', 'Il existe déjà un compte avec ce nom d\'utilisateur.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1060', 'FR', 'Opencaching-Wiki', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1061', 'FR', 'Conditions d\'utilisation et renseignements juridiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1062', 'FR', 'Performance de la page\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1063', 'FR', 'Création de la page\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1097', 'FR', 'D/T', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1123', 'FR', 'Nom\&nbsp;de\&nbsp;cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1141', 'FR', 'N', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1142', 'FR', 'S', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1143', 'FR', 'E', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1144', 'FR', 'O', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1146', 'FR', 'Kilomètre', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1164', 'FR', 'Quelques autres articles trouvés ...', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1165', 'FR', 'ville, nom de cache ou waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1166', 'FR', 'Afficher un lien vers cette carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1206', 'FR', 'km', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1208', 'FR', 'h', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1269', 'FR', 'Carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1272', 'FR', 'Passer en plein écran', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1275', 'FR', 'Menu', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1278', 'FR', 'Éditeur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1279', 'FR', '\&lt;html\&gt;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1292', 'FR', 'Réglage de smileys n\\\'est pas pris en charge.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1296', 'FR', 'Seulement les formats d\'image suivants sont autorisés\&nbsp;: %1.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1297', 'FR', 'à', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1298', 'FR', 'La liste suivante est automatiquement générée par les recommandations données des utilisateurs. Vous pouvez trouver plus d\'informations sur la classification régionale dans le <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\">Wiki</a>.<br /><br />Les chiffres dans la liste ci-dessous signifie\&nbsp;:<br /><img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommandations\" /> Nombre d\'utilisateurs qui recommandent ce cache<br /><img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Trouvé\" /> Contrôles = Nombre de fois que le cache a été trouvé<br />Index tente de prendre le nombre de recommandations et fonde dans un ordre qui d\'abord montrer «\&nbsp;le meilleur\&nbsp;» géocache.<br /><img src=\"images/tops-formula.png\" border=\"0\" alt=\"formule\" />', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1299', 'FR', 'Téléchargement du fichier raté\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1300', 'FR', 'Le fichier XML n\'a pas pu être téléchargé\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1301', 'FR', 'SQL Export', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1302', 'FR', 'Télécharger XML', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1303', 'FR', 'XML Import', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1304', 'FR', 'Le fichier XML contient des traductions\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1305', 'FR', 'Vérifiez les langues suivantes dans le fichier XML\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1306', 'FR', 'Analyser le fichier', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1307', 'FR', 'Le code de source est modifié, le texte n\'est plus utilisé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1308', 'FR', 'Nouvelle traduction', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1309', 'FR', 'Traduction modifiée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1310', 'FR', 'vieux', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1311', 'FR', 'Basculer tous', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1312', 'FR', 'Commettre', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1315', 'FR', 'Date\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1316', 'FR', 'Log-entry\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1317', 'FR', 'Mot de passe pour vous log\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1319', 'FR', 'Mot de passe incorrect\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1322', 'FR', 'Nouveau log-entry', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1323', 'FR', 'Type de log-entry\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1326', 'FR', 'Recommandations\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1327', 'FR', 'Une recommandation ne peut pas être faite avec un \"trouvé\" ou \"assisté\" log\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1328', 'FR', 'Ce cache est un de mes recommandations.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1329', 'FR', 'Alternativement, vous pouvez retirer une <a href=\"mytop5.php\">recommandation existant<a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1330', 'FR', 'Vous avez donné %1 de %2 recommandations possibles.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1331', 'FR', 'Dangers', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1332', 'FR', 'Infrastructure', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1333', 'FR', 'Waypoints', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1334', 'FR', 'Général', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1335', 'FR', 'Temps', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1336', 'FR', 'Saisonnier', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1337', 'FR', 'Inscription', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1338', 'FR', 'Outils nécessaires', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1339', 'FR', 'Préparation nécessaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1340', 'FR', 'Personnes', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1341', 'FR', 'Transport', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1342', 'FR', 'Propriétés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1343', 'FR', 'Restrictions / Conditions préalables', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1344', 'FR', 'Recommandations / Interdictions', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1345', 'FR', 'Seulement loggable au Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1346', 'FR', 'Temps et des efforts (facultatif)\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1347', 'FR', 'Bien entendu, cet effort ne peut qu\'être estimée et peut varier en fonction des influences enviromentals. Si vous ne pouvez pas faire suffisamment d\'informations détaillées, remplir les deux champs avec un 0 (zéro).', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1348', 'FR', 'Waypoints (facultatif)\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1349', 'FR', 'Cette waypoints seront utilisés pour afficher des liens dans le cache de la vue et dans la page de log.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1350', 'FR', 'Aucunes données seront importées automatiquement de ces services de liste.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1351', 'FR', 'Descriptions', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1352', 'FR', 'Ajouter description dans une autre langue', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1353', 'FR', 'Votre description contient au moins un lien vers une image hébergée sur geocaching.com\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1354', 'FR', 'Pour éviter des problèmes avec geocaching.com veuillez-vous télécharger toutes les images liées à%1 et relier les images dans le code HTML de ceux-ci sur %1.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1355', 'FR', 'Télécharger une image', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1356', 'FR', 'Affiché depuis\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1357', 'FR', 'Ce cache est le vôtre', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1358', 'FR', 'Vous avez trouvé ce cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1359', 'FR', 'Vous avez pas encore trouvé ce cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1360', 'FR', 'Ce cache stocke une Geokrety', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1361', 'FR', 'Ce cache a %1 recommandations', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1362', 'FR', 'Modifier le entrée du log pour le cache %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1363', 'FR', 'Type de log-entry', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1364', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez saisir du texte seulement. Pour utiliser HTML ou l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1365', 'FR', 'Noveau cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1366', 'FR', 'Propriétaire\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1367', 'FR', 'Types de géocaches\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1368', 'FR', 'Taille\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1369', 'FR', 'Coordonnées\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1370', 'FR', 'Notation\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1371', 'FR', 'Difficulté\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1372', 'FR', 'Terrain\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1373', 'FR', 'Effort de temps\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1374', 'FR', 'Avis', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1376', 'FR', 'Invisible depuis\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1377', 'FR', '(Laisser vide pour aucun mot de passe)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1378', 'FR', 'S\'il vous plaît noter la <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">description</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1379', 'FR', 'Moins', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1380', 'FR', 'Recherche de caches', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1381', 'FR', 'Javascript est désactivé, vous ne pouvez pas utiliser les options ci-dessus (caches masquer .. résultats de tri) - recherche de base fonctionne néanmoins.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1382', 'FR', 'Tri des résultats\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1383', 'FR', 'Dernier log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1384', 'FR', 'Afficher les caches recommandées par d\'autres utilisateurs premier', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1386', 'FR', 'Cacher des caches suivants\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1387', 'FR', 'mes propriété', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1388', 'FR', 'mes trouvailles', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1389', 'FR', 'mes ignoré', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1391', 'FR', 'inactif', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1392', 'FR', 'Cache attributs\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1396', 'FR', 'Milles', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1397', 'FR', 'Milles marins', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1399', 'FR', 'Code postal\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1400', 'FR', 'Ville\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1404', 'FR', 'Type de log\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1405', 'FR', 'erreur lors de chargement de la page', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1406', 'FR', 'Dans une tentative de créer la page, une erreur est survenue. Si vous passez par un lien hypertexte sur notre page et si le problème persiste, ne pas hésiter à nous contacter par e-mail.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1408', 'FR', 'Page\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1411', 'FR', 'êtes-vous sûr que cette entrée du log doit être supprimé\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1412', 'FR', 'voulez-vous envoyer à {log_user_name} une note\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1413', 'FR', 'Retirer entrée du log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1414', 'FR', 'date est invalide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1415', 'FR', 'seulement pour les logs trouvés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1416', 'FR', 'Proposez une nouvelle cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1417', 'FR', 'Si ceci est votre première cache sur %1, assurez-vous de vérifier la <a href=\"articles.php?page=cacheinfo\">description</a> des champs individuels.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1418', 'FR', 'Distance\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1419', 'FR', 'L\'effort est seulement estimé et peut varier en fonction des influences de l\'environnement. Si vous ne pouvez pas faire suffisamment d\'informations détaillées, écrire 0 (zéro) dans les deux champs. (Voir aussi\&nbsp;: <a href=\"articles.php?page=cacheinfo#time\" target=\"_blank\">Description</a>)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1420', 'FR', 'Langue\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1421', 'FR', 'Vous pouvez ajouter des descriptions dans d\'autres langues en publiant le cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1422', 'FR', 'Brève description\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1423', 'FR', 'Description\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1425', 'FR', 'Note supplémentaire\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1426', 'FR', 'Vous pouvez ajouter des images supplémentaires après la création du cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1427', 'FR', 'Publication\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1428', 'FR', 'Publier maintenant', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1429', 'FR', 'Publier sur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1430', 'FR', 'Ne pas publier maintenant.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1431', 'FR', 'Je l\'ai lu et accepté les <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">conditions de service d\'Opencaching.de</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1432', 'FR', 'Info : Votre log a été retiré par le propriétaire de la cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1433', 'FR', 'Sélection de ville', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1434', 'FR', 'Total de %1 villes correspondent', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1435', 'FR', 'Pour le critère de recherche aucun résultat clair a été trouvé. S\'il vous plaît choisir l\'emplacement désiré\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1436', 'FR', 'Ajouter le log-entry pour le cache %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1437', 'FR', 'Cache nom est invalide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1438', 'FR', 'Les coordonnées utilisées sont invalides.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1439', 'FR', 'Le temps entré est invalide.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1440', 'FR', 'La distance que vous avez entré est invalide. Format aa.aaa', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1441', 'FR', 'L\'statut de cache ne correspond pas à vos options de publication', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1442', 'FR', 'Choisissez les deux valorisations\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1443', 'FR', 'Aucune photo disponible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1444', 'FR', '%1 caches <span style=\"%2\">assorti</span>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1445', 'FR', 'Résultat %1 à %2 (comme zip)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1446', 'FR', 'cette description a été créé sur un autre serveur d\'Opencaching et ne peut pas y être supprimée.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1447', 'FR', 'la description de cache a été supprimé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1448', 'FR', 'Supprimer cette description de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1451', 'FR', 'S\'il vous plaît ne pas utiliser d\'images qui sont hébergés sur geocaching.com. Au lieu de cela, téléchargez vos photos sur notre serveur.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1452', 'FR', 'Note cryptée\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1453', 'FR', 'Voulez-vous vraiment supprimer cette description de votre \&quot;{cachename}\&quot;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1454', 'FR', 'Oui, supprimer la description de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1455', 'FR', 'Proposez cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1456', 'FR', 'Format:\&nbsp; JJ-MM-AAAA', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1457', 'FR', 'Quelques erreurs se sont produites, s\'il vous plaît vérifier les champs marqués.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1458', 'FR', 'Votre coordonnées saisies est invalides', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1459', 'FR', 'La distance indiquée est invalide, Format\&nbsp;: aa.aaa', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1460', 'FR', 'Date non valide, format\&nbsp;: JJ-MM-AAAA', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1461', 'FR', 'Le cache peut être adoptée uniquement si vous acceptez nos conditions d\'utilisation.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1463', 'FR', 'Aucun type de cache est choisi.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1464', 'FR', 'Aucune cache-taille est choisie.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1466', 'FR', 'Votre cache est ajouté avec succès à la base de données. Vous serez redirigé vers la page de cache, maintenant.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1467', 'FR', 'Sélectionner', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1468', 'FR', '(Erreur interne) la description n\'est pas disponible.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1469', 'FR', '(Erreur interne), il existe déjà une description pour cette langue.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1471', 'FR', 'Il existe déjà une description dans cette langue.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1473', 'FR', 'Êtes-vous sûr de supprimer votre log\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1475', 'FR', 'Une commande de base de données n\'a pas pu être effectuée.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1476', 'FR', 'Modifier le cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1477', 'FR', 'Offre pour l\'adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1478', 'FR', 'Statut\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1479', 'FR', 'Recherche de Waypoint\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1480', 'FR', 'Sites du pays', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1482', 'FR', 'Waypoints\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1483', 'FR', 'heures', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1486', 'FR', 'Si votre navigateur ne supporte pas le transfert automatique s\'il vous plaît cliquez ici.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1489', 'FR', 'FR', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1490', 'FR', 'Mot de passe\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1491', 'FR', 'Modifier la description de cache pour <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1494', 'FR', 'Ajouter', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1495', 'FR', 'Entrez un nom, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1496', 'FR', 'Remplissez le champ de texte, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1497', 'FR', 'Vous devez vérifier au moins un champ !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1498', 'FR', 'La longitude doit être un nombre !\\nFormat : hh ° mm.mmm', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1499', 'FR', 'La latitude doit être un nombre !\\nFormat : hh ° mm.mmm', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1500', 'FR', 'La distance maximale doit être un nombre !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1501', 'FR', 'La distance doit être entre 0 et 9999', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1502', 'FR', 'Entrez le code postal, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1503', 'FR', 'Entrez dans la ville, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1504', 'FR', 'Entrez le propriétaire, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1505', 'FR', 'Entrez le nom d\'utilisateur, s\'il vous plaît !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1506', 'FR', 'également enregistré sur GC.com', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1507', 'FR', 'Le format de sortie sélectionné est inconnu !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1508', 'FR', 'L\'opération de recherche n\'a pas pu être exécuté, s\'il vous plaît entrer de nouveau les données de recherche.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1509', 'FR', 'Trouver', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1512', 'FR', 'Le code postal n\'a pas pu être trouvé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1513', 'FR', 'Il n\'existe aucune ville avec ce nom.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1514', 'FR', 'Il n\'y a pas des coordonnées disponibles pour la ville sélectionnée.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1516', 'FR', 'Le texte entré est invalide.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1517', 'FR', 'Le texte saisi contient plus de 50 mots.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1518', 'FR', 'Tous les pays', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1521', 'FR', 'Cette cache a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1522', 'FR', 'Enregistrer les options', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1523', 'FR', 'Modifier les options', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1524', 'FR', 'Type', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1525', 'FR', 'Derniers logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1526', 'FR', 'Téléchargements', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1527', 'FR', 'Résultats sur cette page\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1529', 'FR', 'Avec le téléchargement, vous acceptez les <a href=\"articles.php?page=impressum#tos\">conditions d\'usage</a> d\'Opencaching.de.\&nbsp;\&nbsp;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1530', 'FR', 'Cette entrée de log a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1531', 'FR', 'Cette description a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1532', 'FR', 'Le propriétaire de le cache a écrit le commentaire suivant :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1533', 'FR', 'Pour des caches virtuelles et webcam, la taille du cache doit être -no boité-\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1537', 'FR', 'Votre code HTML sera à nouveau modifié par un filtre spécial. Cela est nécessaire pour éviter les balises HTML dangereux, tels que\&lt;script\&gt;. Une liste avec des balises HTML autorisés, vous pouvez trouver <a href=\"articles.php?page=htmltags\">ici</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1538', 'FR', 'Langue', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1539', 'FR', 'Non trouvé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1541', 'FR', 'Seulement la nuit', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1542', 'FR', 'Lien hypertexte vers un autre portail de mise en cache seulement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1543', 'FR', 'boîte aux lettres (besoin de timbre)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1544', 'FR', 'Zone dangereuse', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1545', 'FR', 'Cette géocache peut être trouvé dans la nuit seulement - il est appelé <i>cache de nuit</i>. Il pourrait y avoir des réflecteurs qui doivent être flashlighted et pointer sur la cachette ou d\'autres mécanismes de cache de nuit spéciaux.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1546', 'FR', 'Cette géocache est enregistré à Opencaching seulement. Cet attribut permettra aux utilisateurs d\'autres plates-formes de géocaching de trouver des caches d\'OC intéressants rapidement.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1548', 'FR', 'Il y a un tampon dans le cache pour tamponner votre logbook personnel et le logbook du cache sera tamponné avec votre tampon personnel. Prenez soin de ne pas mélanger les tampons et de laisser le tampon du cache dans le cache\&nbsp;! Des boîtes aux lettres populaire peuvent être trouvés sans GPS, peut-être avec une boussole et allures d\'un emplacement - ajouter le «\&nbsp;sans GPS\&nbsp;» attribut pour ceux.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1549', 'FR', 'Le cache se trouve dans une zone dangereuse. Utilisez cet attribut pour marquer des dangers non évidents, comme les routes à grande circulation, terrain escarpé ou les chutes de pierres. Les mesures de sécurité devraient être prises ou le cache être omises, surtout pendant le géocaching avec des enfants, grands groupes ou à des conditions météorologiques défavorables.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1550', 'FR', 'Chemin de fer actif à proximité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1551', 'FR', 'falaises / rocher', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1552', 'FR', 'Chasse', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1553', 'FR', 'Épines', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1554', 'FR', 'Tiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1555', 'FR', 'Mines abandonnées', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1556', 'FR', 'Plantes toxiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1557', 'FR', 'Animaux dangereux', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1558', 'FR', 'Zone de parking à proximité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1559', 'FR', 'Transport public', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1560', 'FR', 'L\'eau potable à proximité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1561', 'FR', 'Toilettes publiques à proximité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1562', 'FR', 'Téléphone public à proximité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1563', 'FR', 'Premiers secours disponibles', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1564', 'FR', 'Près de la zone de stationnement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1565', 'FR', 'Longue marche', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1566', 'FR', 'Marécage, un marais ou pataugeoire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1567', 'FR', 'Région vallonnée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1568', 'FR', 'Certains escalade (aucun engin nécessaire)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1569', 'FR', 'Baigner requise', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1570', 'FR', 'Point d\'intérêt', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1571', 'FR', 'Cible mouvante', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1572', 'FR', 'Webcam', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1573', 'FR', 'Dans des pièces fermées (grottes, bâtiments, etc.)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1575', 'FR', 'Sans GPS (boîte aux lettres, cistes, boussole jonglage ...)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1576', 'FR', 'Frais d\'accès ou de stationnement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1577', 'FR', 'Nuitée nécessaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1578', 'FR', 'Disponible 24 heures', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1579', 'FR', 'Uniquement disponible à des moments précis', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1580', 'FR', 'le jour seulement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1581', 'FR', 'Pas du niveau d\'eau élevé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1582', 'FR', 'Toutes les saisons', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1583', 'FR', 'Saison de reproduction / nature préservée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1584', 'FR', 'Cachette impperméable à la neige', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1585', 'FR', 'Équipement spécial', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1586', 'FR', 'Boussole', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1587', 'FR', 'Lampe de poche', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1588', 'FR', 'Matériel d\'escalade', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1589', 'FR', 'Équipement de grotte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1590', 'FR', 'Équipement de plongée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1591', 'FR', 'Motomarine', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1592', 'FR', 'Avion', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1593', 'FR', 'Enquête', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1594', 'FR', 'Puzzle / Mystère', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1595', 'FR', 'Problème d\'arithmétique', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1596', 'FR', 'Autre type de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1597', 'FR', 'Demander au propriétaire pour les conditions de démarrage', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1598', 'FR', 'Adapté pour les enfants', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1599', 'FR', 'Il y a des chemins de fer actifs à proximité. S\'il vous plaît soyez prudent, garder une distance sécuritaire et traverser les rails seulement aux passages à niveau, etc.\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1600', 'FR', 'Il y a des falaises ou des rochers dangereux à proximité. Méfiez-vous des chutes de pierres sur le côté inférieur, et faire attention à la face supérieure des falaises - en particulier avec des enfants et en faisant du vélo de montagne. Il peut être très dangereux de prendre une pente raide vers une falaise, parce que vous pourriez ne pas remarquer où les premiers terminent et les derniers commencent.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1601', 'FR', 'L géocache est placé dans un terrain de chasse. Au crépuscule et dans l\'obscurité, une lampe de poche ou des phares doivent toujours être utilisés pour des raisons de sécurité. Soyez attentif lors de la rencontre des chasseurs.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1602', 'FR', 'Il y a des épines près du cache. Portez des vêtements appropriés.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1603', 'FR', 'Il y a saisonnellement beaucoup de tiques dans ce domaine. Il est recommandé de porter des pantalons longs et de vérifier vous-même pour les tiques après géocaching. Il y a des cartes de risque pour l\'encéphalite à tiques dans l\'Internet, par exemple, pour l\'Allemagne sur des sites comme www.meningitis.de (FSME chercher là-bas).', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1604', 'FR', 'Dans l\'eau', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1605', 'FR', 'Ce cache peut être fait à la fois à la lumière du jour et de la nuit, et tous les jours ouvrables.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1606', 'FR', 'Ce cache ne peut pas être fait à certains moments de la journée - voir la description de cache pour plus de détails. Par exemple, le cache peut être placé dans une zone avec des heures d\'ouverture limitées.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1607', 'FR', 'Ce cache devraient être tenté pendant le jour seulement. Par exemple, la zone peut être dangereux et contenir des falaises ou des abîmes. Ou en utilisant des lampes de poche peut être infaisable parce que cela aurait paru suspect dans un quartier résidentiel.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1608', 'FR', 'Ce cache peut être fait seulement au niveau de l\'eau est faible ou normal. Au inondation ou de la marée haute, il est pas accessible.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1609', 'FR', 'Ce cache peut être trouvé toute l\'année, tandis que la difficulté peut varier de saisons. Spécifiez la difficulté pour de <i>bonnes</i> conditions.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1610', 'FR', 'Ne cherchez pas ce cache pendant la saison de reproduction des animaux\&nbsp;! S\'il vous plaît indiquer dans la description de cache quelle période de l\'année doit être évitée. Aussi, faites attention aux conditions locales et les signes concernant la protection de la nature.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1611', 'FR', 'Ce cache peut être trouvé même après une chute de neige lourde. Toutes les étapes et la géocache sont cachés dans une manière de neige sûre\&nbsp;: ils ne seront pas couverts par la neige tombée non pas par la neige-pieux créés par des véhicules de déneigement.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1612', 'FR', 'Vous aurez besoin d\'équipement spécial qui est pas spécifié par d\'autres attributs, par exemple, un pointeur laser, talkies-walkies ou un cric de voiture.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1613', 'FR', 'Une boussole est nécessaire.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1614', 'FR', 'Une lampe de poche est nécessaire pour trouver ce cache. Ne pas oublier les piles de rechange\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1615', 'FR', 'Pour ce cache, vous aurez besoin d\'équipement d\'escalade et la connaissance comment l\'utiliser correctement. Si vous êtes un débutant, ne pas le faire seul, mais utiliser le support d\'un grimpeur ou alpiniste expérimenté.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1616', 'FR', 'Ce géocache est caché dans une grotte et vous devez utiliser un équipement approprié pour y accéder. Attention\&nbsp;: Même de petites grottes peuvent vous confronter à des problèmes imprévus et les dangers, comme les orages (l\'eau\&nbsp;!) ou une entorse à la cheville. Avoir des conseils d\'abord de les hommes des cavernes-connu\&nbsp;! Aussi prendre soin de la nature protégée\&nbsp;; par exemple lieux de chauves-souris doivent ne pas être perturbés.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1617', 'FR', 'Vous aurez besoin d\'équipement de plongée pour trouver ce géocache. La profondeur de l\'emplacement du cache de l\'eau est indiquée dans la description. S\'il vous plaît noter que la plongée sécurisé exige une formation spéciale. Sans expérience de plongée, vous pouvez chercher ce cache en compagnie d\'un professeur de plongée.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1618', 'FR', 'Ce cache peut généralement être trouvé en utilisant seulement une motomarine. La natation est impossible en raison de la distance ou des courants. Voir la description de cache pour plus de détails.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1619', 'FR', 'Vous devez enquêter sur des informations supplémentaires avant de pouvoir chercher ce cache. Cela vaut des puzzle/caches mystère.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1620', 'FR', 'Puzzles ou mystères doivent être résolus avant ou tout en cherchant ce cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1621', 'FR', 'Avant ou tout en cherchant ce cache, les problèmes arithmétiques doivent être résolus qui vont au-delà des calculs très élémentaires.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1622', 'FR', 'Ce ne sont pas les standards, les types prédéfinis de cache. Utilisez cet attribut pour les caches, spécial ou inhabituel.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1623', 'FR', 'Avant de faire ce cache, vous devez demander au propriétaire pour les conditions de départ. Par exemple le cache peut être lié à certains événements à des dates différentes.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1624', 'FR', 'Cette géocache est adapté pour les enfants. Tous les défis peuvent être résolus par des enfants de l\'âge de 10 à 12 ans et le terrain n\'a pas de risques (comme les autoroutes, les abîmes). Il devrait y avoir un grand récipient géocache avec des éléments de négociation à l\'intérieur et les défis sont intéressants.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1625', 'FR', 'Ce cache conduit dans un (ancien) zone d\'exploitation minière. Il peut y avoir des dangers par l\'effondrement des galeries d\'accès ou vous pouvez avoir besoin d\'entrer dans les galeries d\'accès. Soyez prudent et utiliser un équipement approprié, surtout dans l\'obscurité. Anciennes mines peuvent être couverts par la préservation historique.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1626', 'FR', 'Il y a des plantes toxiques à proximité du cache. Prenez soin de prévenir les enfants et les chiens de les toucher ou de les manger.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1627', 'FR', 'La région est habitée par des animaux potentiellement dangereux, par exemple, domaines de la rage, des serpents venimeux, des scorpions ou des ours.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1628', 'FR', 'Une zone de parking à proximité est situé comme point de départ pour faire cette cache. Si aucun parking gratuit est disponible, ajouter l\'attribute «\&nbsp;des frais d\'accès ou de stationnement\&nbsp;».', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1629', 'FR', 'Ce cache est situé à l\'extérieur des zones urbaines et a une station de transports en commun à proximité. Ne pas définir cet attribut pour les géocaches dans les zones urbaines qui sont généralement équipées avec les transports publics.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1630', 'FR', 'Il y a de l\'eau potable le long du sentier ou près de la cache. Cet attribut est particulièrement utile pour la planification des caches d\'événements, des randonnées plus longues ou des caches à des endroits probablement sales comme des grottes.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1631', 'FR', 'Il y a des toilettes publiques le long du chemin ou près de la cache. Cet attribut est particulièrement utile pour la planification des caches d\'événements ou de vastes multicaches.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1632', 'FR', 'Il y a un téléphone public le long du chemin ou près de la cache. Surtout pour les caches d\'événements vous devriez vous renseigner pour les téléphones à proximité et définir cet attribut si applicable.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1633', 'FR', 'Il y a un poste de premiers secours, une cabine téléphonique, le sauvetage en montagne ou un arrangement similaire près de la cache. Cet attribut est particulièrement utile dans les zones exigeants, comme les caches, les caches d\'escalade de la grotte, les hautes montagnes ou à l\'eau. Vérifiez si vous pouvez ajouter des numéros de téléphone d\'urgence (comme une opération de sauvetage de montagne) à votre liste de cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1634', 'FR', 'La géocache se trouve à proximité d\'une aire de stationnement, à seulement quelques pas de là - il est un «\&nbsp;cache and dash\&nbsp;».', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1635', 'FR', 'Ce cache nécessite une longue marche - plus de 5 km aller-retour. Dans les montagnes et des autres zones escarpées, la distance pour une «\&nbsp;longue marche\&nbsp;» peut être plus courte. Chaussures de marche et de l\'équipement approprié sont recommandées.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1636', 'FR', 'Ce cache nécessite passant sol marécageux ou marécageuse ou patauger dans l\'eau peu profonde. Portez des vêtements appropriés. Après la pluie, le terrain peut être très exigeant ou non praticable à tous.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1637', 'FR', 'Un ou plusieurs ascensions se trouvent entre vous et le cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1638', 'FR', 'Ce cache nécessite un peu d\'escalade et vous devez peut-être utiliser vos mains, mais vous n\'avez pas besoin de matériel d\'escalade. Soyez très prudent pendant la saison des pluies ou des orages\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1639', 'FR', 'Ce cache prescrit de traverser une rivière ou un lac. L\'eau est raide.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1640', 'FR', 'Il y a un point d\'intérêt à la cache, comme une belle vue pittoresque ou un plus grand château en ruines. Cet endroit vaut le détour même sans une géocache à proximité.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1641', 'FR', 'Cette géocache se déplace autour. Par exemple, le propriétaire pourrait déplacer régulièrement le cache d\'un endroit à un autre, ou les trouveurs feront cette tâche et poster de nouveaux coordonnées dans leurs entrées de journal. Le propriétaire doit mettre à jour les coordonnées dans la description de cache après chaque coup.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1642', 'FR', 'Il existe une webcam à l\'emplacement cible. Vous devez prendre une photo de la webcam de votre visite et l\'inclure dans votre «\&nbsp;trouvé\&nbsp;» entrée du journal. Il peut y avoir des exigences supplémentaires comme une bannière de géocaching sur la photo. L\'adresse de la webcam est inclus dans la description de cache, et il doit être accessible au public, à savoir pas de compte utilisateur ou similaire est nécessaire.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1643', 'FR', 'Cette géocache est pas caché à l\'air libre, mais à l\'intérieur d\'un bâtiment, une grotte ou similaire.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1644', 'FR', 'Ce cache ou l\'un des étages est placée sous l\'eau. Vous pourriez avoir à entrer dans l\'eau, nager ou plonger.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1645', 'FR', 'Ce cache peut être trouvée sans un dispositif GPS. Pas de coordonnées supplémentaires sont utilisés en plus des coordonnées de départ.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1646', 'FR', 'Vous devez payer un frais d\'accès ou de stationnement pour accéder à ce cache, par exemple, si le cache est situé dans un parc d\'attractions. Si il y a des zones de stationnement gratuit à proximité de rechange, s\'il vous plaît de les inclure dans la description de cache. S\'il vous plaît noter nos conditions d\'utilisation actuelles concernant les «\&nbsp;géocaches commerciales\&nbsp;».', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1647', 'FR', 'Ce cache ne peut pas être fait en un seul jour ou une seule nuit. Vous devrez visiter l\'emplacement pour plus d\'une fois ou vous devez passer la nuit. Le temps de préparation n\'est pas inclus dans ce calcul, seulement le temps sur le site.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1648', 'FR', 'Un newsentry a été créé sur Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1650', 'FR', 'La page appelée n\'existe pas !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1652', 'FR', 'Rediriger - Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1653', 'FR', 'Voulez-vous vraiment supprimer la recherche enregistrée\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1654', 'FR', 'Statut', '2010-09-13 00:16:38');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1655', 'FR', 'Définition de l\'état', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1657', 'FR', 'à', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1658', 'FR', 'Itinéraire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1659', 'FR', 'Taille de cache\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1660', 'FR', 'Lien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1661', 'FR', 'Ouvert', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1662', 'FR', 'Ajouter aux Favoris ...', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1663', 'FR', 'Caches affichés :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1664', 'FR', 'Temps de chargement :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1665', 'FR', 'Sec.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1666', 'FR', 'Afficher seulement les géocaches avec les propriétés suivantes\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1667', 'FR', 'Cachetype', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1668', 'FR', 'Boîte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1669', 'FR', 'Cacher', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1670', 'FR', 'Mon propriétaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1672', 'FR', 'GC listings', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1673', 'FR', 'Notation', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1674', 'FR', 'Min. recommandations\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1678', 'FR', 'Saisissez un texte de recherche, s\\\'il vous plaît\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1680', 'FR', 'Waypoint %1 non trouvé\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1681', 'FR', 'D/T\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1683', 'FR', 'Erreur : Impossible de télécharger le résultat de recherche (code d\\\'erreur HTTP %1).', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1684', 'FR', 'Erreur : Impossible de télécharger le résultat de recherche. Les données étaient pas disponibles sur le serveur.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1685', 'FR', 'Il y a %1 géocaches dans la zone sélectionnée correspondant à des options de filtre. S\\\'il vous plaît faire un zoom pour afficher les caches.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1687', 'FR', 'Créez un log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1688', 'FR', 'Modifier log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1689', 'FR', 'Retirer log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1690', 'FR', 'Modifier cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1691', 'FR', 'Ajouter une description', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1692', 'FR', 'Modifier la description', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1693', 'FR', 'Retirer la description', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1694', 'FR', 'Choisir une ville', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1695', 'FR', 'Montrer le résultat de la recherche', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1696', 'FR', 'Résultat', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1697', 'FR', 'Description - Créez un cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1698', 'FR', 'Ajouter une image', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1699', 'FR', 'Message', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1700', 'FR', 'Il n\'y a aucune clé de cartes de google enregistré pour ce domaine.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1701', 'FR', 'Attention\&nbsp;! Cette géocache est \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> Il n\'y a pas une conteneur physique aux coordonnées spécifiées (ou déterminées). Dans l\'intérêt de l\'endroit il ne devrait pas être nécessairement à la recherche\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1702', 'FR', 'Attention\&nbsp;! Cette géocache est \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> La géocache lui-même ou des parties sont manquantes ou il y a d\'autres problèmes qui font une recherche réussie impossible. Dans l\'intérêt de l\'endroit il ne devrait pas être nécessairement à la recherche\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1703', 'FR', 'Vous avez assisté à cet événement\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1704', 'FR', 'Vous avez déjà trouvé cette cache\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1705', 'FR', '<i>Obsolète\&nbsp;: Cet attribut ne peut pas être affecté à de nouvelles caches parce qu\'il ne correspond pas à nos conditions actuelles d\'utilisation.</i><br/>Ce cache est cotée à plusieurs sites de chasse au trésor, et la description de cache au Opencaching peut être incomplète. Liens vers les autres sites peuvent être inclus par le propriétaire de la cache dans la liste. S\'il vous plaît noter que les descriptions et le statut de plusieurs caches-énumérés doivent être également maintenue à tous les sites, y compris Opencaching, conformément à nos conditions d\'utilisation actuelles.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1706', 'FR', 'Ce OC node', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1707', 'FR', 'Autres OC nodes', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1708', 'FR', 'Les prochains événements dans %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1709', 'FR', 'Géocaches avec les plus récommendations dans les derniers %2 jours à %1.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1710', 'FR', 'Derniers caches en %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1711', 'FR', 'Vous avez besion des %1 trouvailles supplémentaires pour faire une autre recommandation.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1713', 'FR', 'Vous avez recommandé cette cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1714', 'FR', 'Révoquer la recommandation', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1717', 'FR', 'S\'il vous plaît sélectionner !', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1718', 'FR', 'Résultats sur cette page', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1722', 'FR', 'Voulez-vous vraiment supprimer cette entrée ?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1723', 'FR', 'Voulez-vous vraiment supprimer cette recommandation ?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1724', 'FR', 'Distance\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1725', 'FR', 'Télécharger en tant que ...', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1726', 'FR', 'Retirer l\'entrée de log pour <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1727', 'FR', 'Ajouter une nouvelle description de cache pour <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1728', 'FR', 'Envoyer à un appareil GPS', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1729', 'FR', 'Histoire de Geokrety', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1730', 'FR', 'Nouvelles topcis de forum (%1)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1731', 'FR', 'Teamblog', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1732', 'FR', 'Forum', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1733', 'FR', 'Geokrety', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1735', 'FR', 'Pour des caches événementielle\&nbsp;: La date de l\'événement\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1736', 'FR', 'ID de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1737', 'FR', 'Liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1738', 'FR', 'Date de l\'événement\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1739', 'FR', 'Trouvé : %1   Caché : %2', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1740', 'FR', '<Utilisateur inconnu>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1745', 'FR', 'Standardlogo', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1747', 'FR', 'Logo alternative par nybbler', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1752', 'FR', 'Alternative logo', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1753', 'FR', 'Slimline', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1754', 'FR', 'Logo rouge, slimline', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1755', 'FR', 'Slimline, sans les statistiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1756', 'FR', 'Slimline rouge, sans les statistiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1757', 'FR', 'Coins ronds', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1758', 'FR', 'Le compte est déjà activé. S\'il vous plaît essayer la <a href=\"login.php\">connexion</a>.<br />Si vous ne pouvez pas vous identifier, s\'il vous plaît lire la page suivante\&nbsp;: <a href=\"%1\">Problèmes de connexion</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1759', 'FR', 'Remarque\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1760', 'FR', 'Coordonnées\&nbsp;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1761', 'FR', 'La note n\'est pas visible aux autres utilisateurs. La note et les coordonnées facultatives seront inclus dans les téléchargements de fichiers GPX-et envoyés à l\'appareil GPS.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1763', 'FR', 'Votre navigateur a rejeté notre cookie.<br />Vous pouvez trouver plus d\'informations sur ce sujet dans le <a href=\"%1\">Opencaching-help</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1764', 'FR', 'Note de cache personnelle', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1765', 'FR', 'Cette géocache est probablement placé dans une zone de protection de la nature\&nbsp;! Voir <a href=\"%1\">ici</a> pour plus d\'informations, s\'il vous plaît.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1766', 'FR', 'Cette géocache est probablement placé dans les zones de protection suivantes (<a href=\"%1\">Info</a>)\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1767', 'FR', 'Traduction rapide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1768', 'FR', 'Désactiver', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1769', 'FR', 'Activer - nouveau', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1770', 'FR', 'Activer - tous', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1771', 'FR', 'Télécharger de texte (nouveau)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1772', 'FR', 'Télécharger de texte (tous)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1773', 'FR', 'Importation de texte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1774', 'FR', 'fichier de texte contient les traductions\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1775', 'FR', 'Waypoints supplémentaires', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1776', 'FR', 'Type de waypoint\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1777', 'FR', 'Sélectionner le type s\'il vous plaît', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1778', 'FR', 'Coordonner\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1779', 'FR', 'Télécharger le fichier GPX (max. 500 caches)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1780', 'FR', 'Ajouter le waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1781', 'FR', 'Ajouter un nouveau', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1782', 'FR', 'Supprimer le waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1783', 'FR', 'Modifier le waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1788', 'FR', 'Place de parking', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1789', 'FR', 'Scène ou point de référence', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1790', 'FR', 'Des waypoints supplémentaires', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1791', 'FR', 'Ajouter un waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1792', 'FR', 'Des waypoints supplémentaires peuvent être saisies pour faciliter la recherche, par exemple en pointant sur une place de parking ou le début d\'un chemin (la description du waypoint peut contenir plus d\'informations). Elles peuvent également préciser les étapes d\'un multicache. Les étapes sont indiquées sur la carte lorsque le cache est sélectionné, sont inclus dans le téléchargement de fichiers GPX et seront envoyés à l\'appareil GPS.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1793', 'FR', 'Aucuns waypoints disponibles', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1794', 'FR', 'Les autres points de passage sont affichés sur la carte lorsque le cache est sélectionné, sont inclus dans le téléchargement de fichiers GPX et seront envoyés à l\'appareil GPS.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1796', 'FR', 'Publié le\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1797', 'FR', 'Changement de log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1798', 'FR', 'Opencaching e.V.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1799', 'FR', 'Uniquement disponible pendant des saisons précises', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1800', 'FR', 'Ce cache peut être fait seulement à certaines saisons - voir la description de cache pour plus de détails. Par exemple, le cache peut être placé dans un labyrinthe de maïs qui n\'existe que pendant la floraison jusqu\'à la saison des récoltes.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1801', 'FR', 'Aider', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1802', 'FR', 'Attention\&nbsp;: Ce rapport est déjà affecté à un autre administrateur. Consultez lui avant vous assumez le rapport\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1803', 'FR', 'nano', '2012-10-11 00:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1804', 'FR', 'Licence de données', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1806', 'FR', 'S\'il vous plaît choisir qu\'une seule des options de suppression/désactiver\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1807', 'FR', 'En soumettant j\'accepte les <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">conditions de service d\'Opencaching.de</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1808', 'FR', 'J\'ai lu et je comprends la <a target=\"_blank\" href=\"articles.php?page=dsb\">déclaration de confidentialité</a>, les <a target=\"_blank\" href=\"articles.php?page=impressum#tos\">conditions de service</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données</a> et les accepter.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1809', 'FR', 'Vous devez accepter la déclaration de confidentialité, des conditions de service et la licence de données pour vous inscrire à %1.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1810', 'FR', 'Lors du téléchargement de ce fichier, vous acceptez nos <a href=\"articles.php?page=impressum#tos\">conditions d\'utilisation</a> et <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">la licence de données</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1811', 'FR', 'Désactiver (et verrouiller toutes les propres géocaches) et supprimer tout le contenu sous licence étrangère', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1812', 'FR', 'ID', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1813', 'FR', 'Propriétaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1814', 'FR', 'Journaliste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1815', 'FR', 'Vous devez vérifier que vous êtes sûr\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1816', 'FR', 'La description de cache a été enlevé parce que le propriétaire a refusé la licence de contenu.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1817', 'FR', 'le statut de l\'utilisateur a été modifié avec succès.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1818', 'FR', 'Spoiler', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1819', 'FR', 'Après l\'enregistrement, vous devrez appuyer sur le bouton de rechargement dans votre navigateur pour voir la photo sélectionnée dans votre profil.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1820', 'FR', 'Vous pouvez maintenant <a href=\"login.php\">vous inscrire</a> avec le nouveau mot de passe.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1821', 'FR', 'OC.de nouvelle', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1822', 'FR', 'OC.de nouvelle, slimline', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1823', 'FR', 'OC.de nouvelle, sans les statistiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1824', 'FR', 'Verifier l\'adresse mail', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1825', 'FR', 'Un ou plusieurs mails ne peuvent pas être livrés à l\'adresse que vous avez spécifié dans votre profil d\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1826', 'FR', 'S\'il vous plaît confirmer que cette adresse e-mail est correcte, ou entrer une nouveau.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1827', 'FR', 'Inscrire une nouvelle adresse e-mail', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1828', 'FR', 'Confirmez cette adresse e-mail', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1829', 'FR', 'Marquer l\'adresse e-mail comme non valide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1830', 'FR', 'mail de licence de données n\'a pas été livré', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1831', 'FR', 'Admins', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1832', 'FR', 'Droits', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1833', 'FR', 'Les droits d\'administrateur peuvent être accordés et révoqués par un administrateurde système avec un accès de base de données.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1834', 'FR', 'Refusé la licence de données', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1835', 'FR', 'Le compte d\'utilisateur a été désactivé parce que l\'utilisateur a refusé la <a href=\"articles.php?page=impressum#datalicense\">licence de données</a>. Des descriptions de cache, des textes de journaux et des photos ont été supprimés.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1838', 'FR', 'Nom d\'utilisateur ou adresse e-mail\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1839', 'FR', 'Vous devez sélectionner une recherche pour écraser.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1840', 'FR', 'Lien vers cette carte\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1841', 'FR', 'Votre Internet Explorer est trop ancienne pour afficher la carte. S\'il vous plaît mettre à jour au moins à la version 7, mieux 8.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1842', 'FR', 'Aller aux coordonnées de la maison', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1843', 'FR', 'Passer à petite carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1844', 'FR', 'Entre 1 et 500 caches doivent être affichés pour le téléchargement.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1846', 'FR', 'Sélectionnez le type de waypoint', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1847', 'FR', 'Invalid coordonner', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1848', 'FR', 'Enregistrédepuis\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1849', 'FR', 'Carte est en cours de mise à jour', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1850', 'FR', 'n\\\'a pas été trouvée (avec les paramètres sélectionnés)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1851', 'FR', 'L\\\'affichage de la carte avec Microsoft Internet Explorer est lente et limité à %1 géocaches. Utiliser un autre navigateur pour de meilleures performances.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1852', 'FR', 'Géocaches trouvées, d\\\'abord la plus proche :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1853', 'FR', 'Lieux trouvés via Google :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1855', 'FR', 'Traditionnel', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1857', 'FR', 'Virtuel', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1859', 'FR', 'Événement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1860', 'FR', 'Quiz', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1861', 'FR', 'Math / Physique', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1862', 'FR', 'En mouvement', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1863', 'FR', 'Drive-In', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1865', 'FR', 'Chargement de la carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1866', 'FR', 'Instructions', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1867', 'FR', 'L\'option de menu «\&nbsp;carte\&nbsp;» affiches\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1868', 'FR', 'Petite carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1869', 'FR', 'Carte en plein écran', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1870', 'FR', 'Voir la carte d\'aperçu\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1871', 'FR', 'Maximum de caches sur la carte<br />(%1-%2, 0=automatique)\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1872', 'FR', 'Icônes de cache\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1873', 'FR', 'OC classique', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1874', 'FR', 'Style OKAPI', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1875', 'FR', 'Vous devez être connecté pour modifier les paramètres de la carte.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1876', 'FR', 'Carte de données \&copy;<a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1877', 'FR', 'tiles fournies par <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1878', 'FR', 'Carte de données \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> and <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributors', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1879', 'FR', 'Rapports de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1880', 'FR', 'Vandalisme', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1881', 'FR', 'Revenir Vandalisme', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1882', 'FR', 'L\'utilisateur \' %1\' est inconnue', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1883', 'FR', '%1 n\'a pas listé des caches', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1884', 'FR', 'Restaurer les listes de cache de %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1885', 'FR', 'L\'utilisateur \' %1\' n\'est pas désactivé. Vous pouvez visualiser les modifications enregistrées, mais ne pas les rétablir.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1886', 'FR', 'Vous n\'avez pas sélectionné de caches.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1887', 'FR', 'Aucunes données enregistrées sont disponible pour ces caches.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1888', 'FR', 'Vous devez sélectionner une date.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1889', 'FR', 'Utilisez le bouton de \"retour\" de votre navigateur pour essayer à nouveau.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1890', 'FR', 'Vous devez choisir les éléments de la liste à restaurer.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1891', 'FR', 'Vous ne dites pas que vous êtes sûr.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1892', 'FR', 'S\'il vous plaît sélectionnez les listes à restaurer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1893', 'FR', 'modifié', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1894', 'FR', 'L\'utilisateur a modifié un ou plusieurs de ces caches aujourd\'hui, donc vous ne pouvez pas annuler les modifications. Cela ne peut pas être fait avant demain.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1895', 'FR', 'rien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1896', 'FR', 'Continue', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1897', 'FR', 'à la sélection de la date', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1898', 'FR', 'S\'il vous plaît sélectionner la date à partir de laquelle toutes les modifications doivent être revenue.<br />La liste sera remise au contenu qu\'il avait ce jour-là à 00:00:00.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1900', 'FR', 'Changements', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1901', 'FR', 'Attention\&nbsp;: Si vous retournez des changements d\'inscription du propriétaire fait <em>today</em>, votre revient sera finale. Il ne peut pas être corrigée / défait après. Seulement des revient de coords \&amp; pays, les logs et de images seront enregistrées dans ce cas, de sorte que tous les autres changements ne seront pas compréhensible. Par conséquent <span style=\"text-decoration:underline\">il est fortement recommandé de revenir vandalisme pas avant le lendemain\&nbsp;!</span>', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1902', 'FR', 'coordonnées et pays', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1903', 'FR', 'Le nom, les paramètres, les attributs et les dates cachés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1904', 'FR', 'GC/NC waypoints', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1905', 'FR', 'description(s) incl. Images', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1906', 'FR', 'logs incl. images', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1907', 'FR', 'rien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1908', 'FR', 'Exclus de restauration\&nbsp;: le statut de cache, l\'attribut OConly, l\'additional waypoints, le mot de passe, le statut de l\'image d\'aperçu', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1909', 'FR', 'simuler', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1910', 'FR', 'Vous êtes administrateur de racine et pouvez remplacer les avertissements. Prendre soin\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1911', 'FR', 'Les listes de cache suivantes auraient été remis à l\'état avant %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1912', 'FR', 'Les listes de cache suivants ont été remis à l\'état avant %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1913', 'FR', 'Restaurer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1914', 'FR', 'tous', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1915', 'FR', 'supprimé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1916', 'FR', 'archivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1919', 'FR', 'Nouveaux log images', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1920', 'FR', 'D', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1921', 'FR', 'T', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1922', 'FR', 'cliquez sur spoiler pour afficher', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1923', 'FR', 'pour', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1924', 'FR', 'Le cache possède %1 %2additional waypoints%3.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1925', 'FR', 'Le cache possède un %2additional waypoint%3.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1926', 'FR', 'Chemin', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1927', 'FR', 'Finale', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1928', 'FR', 'Afficher %1 des images d\'apercu</a><br />(% de la superficie, 0=off)\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1929', 'FR', 'L\'image d\'aperçu pour la carte \&ndash; est affiché lorsque ce cache est sélectionnée sur la carte.<br />Vous ne pouvez avoir qu\'un <em>un</em> image d\'aperçu pour chaque cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1930', 'FR', 'Max. %1 caches peuvent être affichés avec Microsoft Internet Explorer.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1940', 'FR', 'Galerie de images', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1941', 'FR', 'Dates montrent la date de transfert de images qui peut différer de la date de journal. Par conséquent vieilles dates peuvent apparaître dans la liste.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1942', 'FR', 'Un maximum d\'une image par jour et par utilisateur est affiché ici. La petite galerie sur la start page est limitée à une image par cache et jour.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1943', 'FR', 'Toutes les images sont la propriété et sous réserve de <a href=\"articles.php?page=impressum#datalicense\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1944', 'FR', 'Afficher la statistique de l\'image et la galerie', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1945', 'FR', 'Images de log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1946', 'FR', 'Images de log\&nbsp;: %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1947', 'FR', 'Images de log de %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1948', 'FR', 'Vos images de log :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1949', 'FR', 'Vos dernières images de log :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1950', 'FR', 'Dans vos <a href=\"mydetails.php\">profile settings</a> vous pouvez choisir si votre statistique des images de log et votre galerie est visible pour les autres utilisateurs.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1952', 'FR', 'Profil public', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1953', 'FR', 'Vous n\'avez pas encore télécharger des images de log.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1954', 'FR', 'Des images marquées comme spoiler ne sont pas représentés\&nbsp;; donc le nombre des images sur cette page peut être plus faible que dans les statistiques de profil.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1955', 'FR', 'Autre information', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1956', 'FR', 'Image de log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1957', 'FR', 'Des photos de spoiler qui montrent les détails de la cachette ne devraient pas être visibles ici. Si vous rencontrez un spoiler visible ouverte, vous pouvez communiquer avec l\'enregistreur par le bouton e-mail dans son profil et lui demander de le marquer comme spoiler.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'FR', 'Retour à la description de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'FR', 'Page', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'FR', 'à', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'FR', 'À propos d\'Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1964', 'FR', 'Des descriptions de cache, des textes de log et des images ont été supprimés parce que le compte a été désactivé avant la transition à la nouvelle <a href=\"articles.php?page=impressum#datalicense\"> nouvelle licence de données</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1965', 'FR', 'La description de cache a été supprimé parce que le compte du propriétaire était inactive lorsque la <a href=\"articles.php?page=impressum#datalicense\">nouvelle licence de contenu</a> a été lancé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1966', 'FR', 'à partir de', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1967', 'FR', 'toutes les entrées du log \&copy; leurs auteurs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1968', 'FR', 'plus', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1969', 'FR', 'Seulement les <span class=\"public-setting\">entrées verts</span> sont visibles aux autres utilisateurs.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1970', 'FR', 'Date / heure\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1971', 'FR', 'date ou heure invalide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1973', 'FR', 'Généralement, des images de spoiler ne doivent pas être enregistrés. Dans le cas où une exception à cette règle est logique, par exemple, pour documenter votre conclusion ou des problèmes avec la planque, s\'il vous plaît marquer l\'image de sorte de spoiler qu\'il ne sera pas apparaître dans des galeries.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1974', 'FR', 'Si vous ne voyez pas d\'e-mail, s\'il vous plaît vérifier le dossier spam de votre boîte aux lettres.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1975', 'FR', 'Ne pas utiliser des chiffres et lettres faciles à deviner comme «\&nbsp;123456\&nbsp;» ou «\&nbsp;azerty\&nbsp;»', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1976', 'FR', 'actuellement indisponible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1977', 'FR', 'Mot de passe<br />pour des logs \'trouvé\'\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1978', 'FR', 'seulement pour des logs-assisté', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1979', 'FR', 'Contactez journaliste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1980', 'FR', 'Pour des logs «\&nbsp;trouvé\&nbsp;» et «\&nbsp;pas trouvé\&nbsp;»\&nbsp;: Date et heure (en option) de la recherche de cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1982', 'FR', 'Page non trouvée', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1983', 'FR', 'base de données du cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1984', 'FR', 'Ici vous pouvez trouver beaucoup de caches individuels.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1985', 'FR', 'Les nouvelles caches\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1986', 'FR', 'Ici vous pouvez discuter, améliorer ou poser des questions.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1987', 'FR', 'Les nouvelles posts de forum\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1988', 'FR', 'Toute fois il y a des nouvelles à publier, vous les trouverez ici.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1989', 'FR', 'Les nouvelles blogposts\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1990', 'FR', 'Ici, vous obtenez des tutoriels, des guides pratiques et des informations sur géocaching et Opencaching.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1991', 'FR', 'Les articles les plus récents du wiki\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1992', 'FR', 'Pas trouvé\&nbsp;? Contactez-nous à l\'aide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1993', 'FR', 'Opencaching sur Facebook', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1994', 'FR', 'Opencaching sur Google+', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1995', 'FR', 'Opencaching sur Twitter', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1996', 'FR', 'Le site visité <b>%1</b> n\'existe pas, nous avons trouvé des pages appropriées suivantes\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1998', 'FR', 'OK', '2016-03-24 19:23:50');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1999', 'FR', 'affichier', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2000', 'FR', 'Mon dernier log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2001', 'FR', 'Logs propres', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2002', 'FR', 'Géocaches trouvé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2003', 'FR', 'Géocaches enregistrés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2004', 'FR', '%1 de ceux-ci sont actifs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2006', 'FR', 'Supprimé par', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2007', 'FR', 'Les données de l\'utilisateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2008', 'FR', 'Applications d\'OKAPI', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2009', 'FR', 'Apps d\'OKAPI', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2010', 'FR', 'Grande carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2011', 'FR', 'sans logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2012', 'FR', 'avec 5 logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2013', 'FR', 'avec 10 logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2014', 'FR', 'avec tous les logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2015', 'FR', 'Cache safari', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2016', 'FR', 'Cette géocache peut être trouvé aux différents endroits. Les endroits à rechercher sont expliqués dans la description de cache. Ils doivent être situés «\&nbsp;loin de la maison\&nbsp;» et existent pour une période de temps considérable, de sorte qu\'ils peuvent être re-visité plus tard. Il n\'y a pas une boîte et un logbook\&nbsp;; la découverte doit être documentée par une photo et notant les coordonnées.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2017', 'FR', 'Seuls les caches virtuelles peuvent être des caches safari.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2023', 'FR', 'fermé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2025', 'FR', '%2 a archivé %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2026', 'FR', '%2 a maintainted %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2027', 'FR', '%2 a désactivé %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2028', 'FR', '%2 a verrouillé %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2029', 'FR', 'OC équipe commentaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2030', 'FR', 'Logs d\'entretien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2031', 'FR', 'Pour changer l\'état, vous devez vous {a}log</a> au nouvel état.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2035', 'FR', '%1 a archivé la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2036', 'FR', '%1 a maintenu la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2037', 'FR', '%1 a désactivé la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2038', 'FR', '%1 a verrouillé la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2039', 'FR', '%1 a verrouillé et caché la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2040', 'FR', 'Le texte supprimé :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2041', 'FR', 'total', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2042', 'FR', 'Le texte suivant est affiché dans votre <a href=\"viewprofile.php\">profile public</a>\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2043', 'FR', 'aucun texte entré jusqu\'à maintenant', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2045', 'FR', 'Les paramètres de filtre actuels sont enregistré.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2046', 'FR', 'Observateur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2047', 'FR', 'Ignorer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2048', 'FR', 'Log maintenance', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2049', 'FR', 'Visite de page', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2050', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez entrer des textes (HTML) uniquement. Pour utiliser l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2051', 'FR', 'Recommandé sur', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2052', 'FR', 'Protection de la nature', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2053', 'FR', 'Retirer l\'offre d\'adoption', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2055', 'FR', 'Autres rapports pour cette cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2056', 'FR', 'Date du rapport', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2057', 'FR', 'Raison', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2058', 'FR', 'Logs supprimés', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2059', 'FR', 'L\'histoire de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2060', 'FR', 'Code de cache\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2061', 'FR', 'Cache introuvable', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2062', 'FR', 'Les changements d\'état', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2063', 'FR', 'Changé par', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2065', 'FR', 'Invité', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2066', 'FR', 'Ouvrir la conversation dans un nouvel onglet / fenêtre', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2067', 'FR', 'Statut', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2068', 'FR', 'depuis Juin 2013', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2069', 'FR', 'depuis la date de suppression en Février 2012', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2070', 'FR', 'Une ou plusieurs e-mails à cet utilisateur ne pouvaient pas être livrés. Il pourrait être une bonne idée de connecter plus de commentaires sur les géocaches de l\'utilisateur, et / ou d\'utiliser des adresses de contact de rechange comme un compte message de conseil ou d\'une autre plate-forme de géocaching.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2071', 'FR', 'Cette cache a été \"temporairement indisponible\" pendant plus %1 mois maintenant\&nbsp;; par conséquent, il est archivée automatiquement. Le propriétaire peut décider de maintenir le cache et réactiver la liste.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2072', 'FR', 'Cet événement a eu lieu il y a plus de cinq semaines\&nbsp;; par conséquent, il est archivé automatiquement. Le propriétaire peut réactiver la liste si elle devrait rester actif pour une raison exceptionnelle.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2073', 'FR', 'Ce compte d\'utilisateur est désactivé.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2074', 'FR', 'Adoptions', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2075', 'FR', 'depuis Septembre 2012', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2076', 'FR', 'De Propriétaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2077', 'FR', 'Pour Propriétaire', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2078', 'FR', 'Entretien', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2079', 'FR', 'Afficher les détails', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2080', 'FR', 'seulement des caches actives', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2081', 'FR', 'Trouve', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2083', 'FR', 'NOUVEAU', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2084', 'FR', 'montrer archivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2085', 'FR', 'cacher archivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2086', 'FR', 'type de recherche inconnu', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2087', 'FR', 'montrer sur la carte', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2088', 'FR', 'Options de recherche', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2089', 'FR', 'désactivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2090', 'FR', 'archivé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2091', 'FR', 'Test pour et fixer incohérences dans les tables de base de données', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2092', 'FR', 'Vous avez présenté plus de %1 des logs identiques. S\'il vous plaît confirmer que vous entrez la date de votre visite de cache et pas la date actuelle - également quand vous «\&nbsp;late logging\&nbsp;» des anciennes trouvailles.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2093', 'FR', 'De fausses dates de log peuvent nuire à plusieurs fonctions d\'OC comme la recherche par le dernier date de log. En plus, le propriétaire et d\'autres caches peuvent penser que le cache a été trouvé pour le moment (le date et le type du dernier log sont affichés dans la liste des caches du propriétaire\&nbsp;!), Ce qui peut nuire à l\'entretien de la mémoire et conduire à plus de fausses résultats.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2094', 'FR', 'Vous avez trouvé %1 caches jusqu\'à maintenant.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2095', 'FR', 'Ce log existe déjà - vous avez essayé de le soumettre deux fois\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2096', 'FR', '%2 a activé %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2097', 'FR', '%1 a activé la géocache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2098', 'FR', 'convertie de HTML', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2099', 'FR', 'option de recherche inconnue', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2100', 'FR', 'aucune coordonnée disponible', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2101', 'FR', 'Vous pouvez visiter alternativement %1 et entrez le code suivant manuellement :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2102', 'FR', 'Avant que vous pouvez vous connecter pour la première fois, vous devez activer votre compte en cliquant sur le lien suivant :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2103', 'FR', 'Périmètre\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2104', 'FR', 'de coordonnées\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2105', 'FR', 'Entrées du log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2106', 'FR', 'par l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2107', 'FR', 'dans', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2108', 'FR', 'Tous les caches', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2111', 'FR', 'Mes caches', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2112', 'FR', 'Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2113', 'FR', 'Nouvelles articles wiki', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2114', 'FR', 'Principal direction :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2115', 'FR', 'Nouvelles fonctionnalités', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2116', 'FR', 'Informer également sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2117', 'FR', 'Ne pas informer sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2118', 'FR', 'Informer sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2119', 'FR', 'avec la recommandation', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2121', 'FR', 'Vous avez donné {curr} de {max} recommandations possibles.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2122', 'FR', 'Il vous manque {anzahl} trouvés pour faire une autre recommandation.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2123', 'FR', 'Une recommandation ne peut qu\'être fait dans un log \"trouvé\"\&nbsp;!', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2125', 'FR', 'Historique du images du logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2126', 'FR', 'Histoire du logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2127', 'FR', 'Entrées du log pour les caches de %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2128', 'FR', 'Cacher des propres logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2129', 'FR', 'Afficher des propres logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2130', 'FR', 'Entrées du log pour vos géocaches', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2131', 'FR', 'Si vous trouvez un utilisateur qui veut adopter votre géocache, remplissez le nom d\'utilisateur. L\'utilisateur verra alors ce géocache sous Mon profil \&gt; Adoptions. Pour terminer, l\'utilisateur doit accepter nos conditions d\'utilisation et commettre l\'adoption.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2132', 'FR', 'Vous pouvez offrir ce géocache à plus qu\'un utilisateur. Le premier utilisateur commettant l\'adoption deviendra le nouveau propriétaire de ce géocache. Avec l\'adoption, vous allez donner à l\'utilisateur un droit illimité d\'utiliser, de modifier, et de publier le contenu géocache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2133', 'FR', 'Copie EN', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2134', 'FR', 'Je sais ce que je fais, ne montrent plus ce conseil aujourd\'hui.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2135', 'FR', 'Afficher OConly-81 stats', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2136', 'FR', 'Statistiques OConly', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2137', 'FR', 'L\'utilisateur a trouvé <b>%1</b> de <b>81</b> théoriquement des combinaisons terrain / difficulté possibles.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2139', 'FR', 'OConly-81', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2140', 'FR', 'Les utilisateurs ayant des OConly-81 Statistiques\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2141', 'FR', 'OConly-81 Statistiques\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2142', 'FR', 'inactif', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2143', 'FR', '<b>OConly-81</b> est un nouveau défi de trouver des caches d\'OConly dans des conditions variables, p.e. avec des différentes évaluations de difficulté et de terrain. Pour participer, vous pouvez activer les OConly-81 statistiques dans vos <a href=\"mydetails.php\" paramètres de profil d\'utilisateur</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2144', 'FR', 'Les participants', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2146', 'FR', 'Statistiques', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2147', 'FR', 'Terrain global et la répartition de la difficulté de caches d\'OConly actifs\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2148', 'FR', '... par type de cache\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2149', 'FR', '... par région\&nbsp;', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2150', 'FR', 'Cette géocache est probablement placée dans les zones de protection suivantes\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2151', 'FR', 'Aussi repris comme\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2152', 'FR', 'Charger d\'autres logs ...', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2153', 'FR', 'Auto-charge des logs', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2155', 'FR', 'Médias sociaux', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2156', 'FR', 'Suivez-nous\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2157', 'FR', 'Rejoignez les discussions\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2158', 'FR', 'Forum d\'Opencaching', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2159', 'FR', 'Google+ Communauté', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2160', 'FR', 'Groupe Facebook', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2161', 'FR', 'Qu\'un seul compte peut être créé par cette adresse e-mail. Prénom, nom et le pays sont en option.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2162', 'FR', 'Vos entrées du log', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2163', 'FR', 'Il n\'y a pas encore des logs pour vos géocache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2164', 'FR', 'La liste de cache {occode} a été modifié par {username}', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2165', 'FR', 'La description de cache de {occode} a été modifié par {username}', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2166', 'FR', 'Les modifications peuvent être contrôlés via la function de restaurer le vandalisme.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2167', 'FR', 'OC Admins', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2168', 'FR', 'Nouveaux entrées du log pour les caches de %1', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2169', 'FR', 'Voulez-vous vraiment supprimer cette image\&nbsp;?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2170', 'FR', 'Recherche de proximité à geocaching.com', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2171', 'FR', 'S\'il vous plaît envoyez-moi des e-mails sur des nouvelles et des actions sur %1. (max. 2-5 par an)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2172', 'FR', 'Oui, je veux recevoir des emails sur des nouvelles et des actions sur %1. (max. 2-5 par an)', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2173', 'FR', 'Non, je ne veux pas des e-mails sur des nouvelles et des actions sur %1.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2174', 'FR', 'Lettre d\'information\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2175', 'FR', 'Divulguer mon adresse e-mail par défaut en envoyant d\'e-mails aux autres utilisateurs.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2176', 'FR', 'Evénements prévus', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2177', 'FR', 'Une autre cache (<a href=\"viewcache.php?wp=%1\">%1</a>) existe à ces coords. Peut-être que vous avez appuyé sur «\&nbsp;soumettre cache\&nbsp;» deux fois. Pour publier une cache avec des coords identiques, entrez des autres coords d\'abord, puis modifier la liste et changer des coords.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2178', 'FR', 'Waypoint GC est invalide, doit être GCXXXXX', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2179', 'FR', 'Liste de caches safari', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2180', 'FR', 'Ajouter à la liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2181', 'FR', 'Ajouter la géocache à la liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2182', 'FR', 'Ajouter la géocache <b>%1</b> à la liste suivante\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2183', 'FR', 'Nouvelle liste de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2184', 'FR', 'Nom invalide', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2185', 'FR', 'liste publique', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2186', 'FR', 'Vous pouvez gérer vos listes de cache personnelles dans votre <a href=\"mylists.php\">profil d\'utilisateur</a>.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2187', 'FR', 'public', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2188', 'FR', 'privé', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2189', 'FR', 'Listes de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2190', 'FR', 'Depuis Juillet 2015, tous les utilisateurs enregistrés sur Opencaching peuvent créer et publier des propres listes de géocache via leur <a href=\"mylists.php\">profil d\'utilisateur</a>. Les listes suivantes ont été publiées à ce jour\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2191', 'FR', 'Liste de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2192', 'FR', 'Il n\'y a pas encore de listes.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2193', 'FR', 'Mes listes de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2194', 'FR', 'Voulez-vous vraiment supprimer la liste « %1 » ?', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2195', 'FR', 'Créer nouvelle liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2196', 'FR', 'Listes publiques sont affichés dans votre <a href=\"viewprofile.php?userid=%1\">profil utilisateur public</a>, sur le <a href=\"cachelists.php\">page d´sommaire liste</a> et (si activé) dans les listes de cache.', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2197', 'FR', 'Liste de waypoints OC séparées par des espaces.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2198', 'FR', 'Vous pouvez également ajouter des caches via le bouton \"Ajouter à la liste\" dans les listes de cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2199', 'FR', 'Cette étape est facultative, les caches peuvent être ajoutés à la liste plus tard.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2200', 'FR', 'Créez une liste', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2201', 'FR', 'Modifier la liste de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2202', 'FR', 'Ajouter des caches\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2203', 'FR', 'Retirer des caches\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2204', 'FR', 'Les waypoints suivants ne sont pas valides et ne peuvent pas être ajoutés à la liste\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2205', 'FR', 'Afficher toutes les listes de cache', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2206', 'FR', 'Je veux recevoir des notifications à propos de tous les logs de caches dans cette liste.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2207', 'FR', 'Je regarde cette liste.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2208', 'FR', 'regarder', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2209', 'FR', 'ne regarde pas', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2210', 'FR', 'Caches simples :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2211', 'FR', 'Listes\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2212', 'FR', 'éditer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2213', 'FR', 'supprimer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2214', 'FR', 'ne pas ignorer', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2215', 'FR', 'Nom de la liste\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2216', 'FR', 'Par\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2217', 'FR', 'ne regarde pas', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2218', 'FR', 'Une autre de vos listes de cache a déjà ce nom.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2219', 'FR', 'longueur minimale pour les listes publiques est de 10 caractères', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2220', 'FR', 'Vous êtes toujours en train de regarder cette géocache via une ou plusieurs listes de cache.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2221', 'FR', 'Créer un nouveau cachelist', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2222', 'FR', 'visible pour tous les utilisateurs dans les listes de cache', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2223', 'FR', 'semi-public', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2224', 'FR', 'affichage de la listing', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2225', 'FR', 'sans Geokrets', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2226', 'FR', 'caché [cachelist]', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2227', 'FR', 'les coordonner changements', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2228', 'FR', 'Mot de passe pour le partage:', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2229', 'FR', 'La liste a un mot de passe; pour partager cliquez ici', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2230', 'FR', 'Listes propres', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2231', 'FR', 'Listes signet', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2232', 'FR', 'Voulez-vous vraiment supprimer la liste des signets \\\'%1\\\' ?', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2233', 'FR', 'signet', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2234', 'FR', 'Je l\'ai signet cette liste.', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2235', 'FR', 'verrouillée cache / cachée', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2236', 'FR', 'Regardez\&nbsp;:', '2015-08-25 01:29:13');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2237', 'FR', 'Caches\&nbsp;:', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2238', 'FR', 'Lien pour partager cette liste de cache\&nbsp;:', '2010-10-04 00:17:40');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2240', 'FR', 'Chinois', '2015-08-18 15:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2241', 'FR', 'Thaï', '2015-08-18 15:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2242', 'FR', 'Luxembourgeois', '2015-08-18 15:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2243', 'FR', 'Catalan', '2015-08-18 15:00:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2244', 'FR', 'Waypoint\&nbsp;:', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2245', 'FR', 'sans référence régionale', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'FR', '\&nbsp;', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2247', 'FR', 'Utilisateur\&nbsp;:', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2248', 'FR', 'Tous les langues', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2249', 'FR', 'Caches à %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2250', 'FR', 'Nouveaux caches sans %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2251', 'FR', 'Tous les nouveaux logs', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2252', 'FR', 'Nouveaux logs à %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2253', 'FR', 'Nouveaux logs sans %1', '2015-08-25 01:28:59');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2254', 'FR', 'S\'il vous plaît sélectionner une langue.', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2255', 'FR', 'OConly ', '2010-08-28 11:48:07');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2256', 'FR', 'Nouveau Cache:', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2257', 'FR', 'Nouveau cache OConly:', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2258', 'FR', 'Pas de nouveaux entrées de log.', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2259', 'FR', '{user} a fait une entrée de log pour votre cache « {cachename} » :', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2260', 'FR', '{user} a fait une entrée de log pour le cache « {cachename} » :', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2261', 'FR', 'Votre watchlist à partir de', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2262', 'FR', 'Cache a été marquée comme OConly:', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2263', 'FR', 'Vue description', '2010-08-28 11:48:03');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2264', 'FR', 'Type\&nbsp;:', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2265', 'FR', 'Nom : {cachename} par {owner}\r\nCoordonnées : {lon} {lat}\r\nStatut : {status}\r\nCondition: {condition}\r\n\r\nCaché en : {time}\r\nWaypoint : {waypoint}\r\nPays : {country}\r\nType : {type}\r\nBoîte : {container}\r\nD/T : {difficulty}/{terrain}\r\nOnline : {siteurl}viewcache.php?wp={waypoint}\r\n\r\nBrève description : {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nIndice additionnels :\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntrées du log:\r\n{logs}\r\n', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2270', 'FR', 'Berlin', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2271', 'FR', 'Brême', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2272', 'FR', 'Dresde', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2273', 'FR', 'Düsseldorf', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2274', 'FR', 'Erfurt', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2275', 'FR', 'Hambourg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2276', 'FR', 'Hanovre', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2277', 'FR', 'Kiel', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2278', 'FR', 'Mayence', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2279', 'FR', 'Magdebourg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2280', 'FR', 'Munich', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2281', 'FR', 'Potsdam', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2282', 'FR', 'Sarrebruck', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2283', 'FR', 'Schwerin', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2284', 'FR', 'Stuttgart', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2285', 'FR', 'Wiesbaden', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2286', 'FR', 'Francfort-sur-le-Main', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2287', 'FR', 'Dortmund', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2288', 'FR', 'Essen', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2289', 'FR', 'Leipzig', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2290', 'FR', 'Nuremberg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2291', 'FR', 'Bologne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2292', 'FR', 'Bolzano', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2293', 'FR', 'Corsica', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2294', 'FR', 'Cosenza', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2295', 'FR', 'Gênes', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2296', 'FR', 'Milan', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2297', 'FR', 'Naples', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2298', 'FR', 'Palerme', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2299', 'FR', 'Rome', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2300', 'FR', 'Sardaigne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2301', 'FR', 'Udine', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2302', 'FR', 'La Corogne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2303', 'FR', 'Albacete', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2304', 'FR', 'Alicante', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2305', 'FR', 'Almería', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2306', 'FR', 'Ávila', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2307', 'FR', 'Badajoz', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2308', 'FR', 'Barcelona', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2309', 'FR', 'Bilbao', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2310', 'FR', 'Burgos', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2311', 'FR', 'Cáceres', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2312', 'FR', 'Cadix', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2313', 'FR', 'Castellón', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2314', 'FR', 'Ceuta', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2315', 'FR', 'Ciudad Real', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2316', 'FR', 'Córdoba', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2317', 'FR', 'Cuenca', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2318', 'FR', 'Gérone', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2319', 'FR', 'Granada', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2320', 'FR', 'Guadalajara', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2321', 'FR', 'Huesca', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2322', 'FR', 'Huelva', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2323', 'FR', 'Jaén', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2324', 'FR', 'Las Palmas de Gran Canaria', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2325', 'FR', 'León', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2326', 'FR', 'Lérida', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2327', 'FR', 'Logroño', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2328', 'FR', 'Lugo', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2329', 'FR', 'Madrid', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2330', 'FR', 'Malaga', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2331', 'FR', 'Melilla', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2332', 'FR', 'Murcia', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2333', 'FR', 'Ourense', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2334', 'FR', 'Oviedo', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2335', 'FR', 'Palencia', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2336', 'FR', 'Palma de Majorque', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2337', 'FR', 'Pampelune', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2338', 'FR', 'Pontevedra', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2339', 'FR', 'Salamanca', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2340', 'FR', 'San Sebastián', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2341', 'FR', 'Santa Cruz de Tenerife', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2342', 'FR', 'Santander', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2343', 'FR', 'Segovia', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2344', 'FR', 'Sevilla', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2345', 'FR', 'Soria', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2346', 'FR', 'Tarragone', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2347', 'FR', 'Teruel', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2348', 'FR', 'Toledo', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2349', 'FR', 'Valencia', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2350', 'FR', 'Valladolid', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2351', 'FR', 'Vitoria-Gasteiz', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2352', 'FR', 'Zamora', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2353', 'FR', 'Saragosse', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2354', 'FR', 'Paris', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2355', 'FR', 'Marseille', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2356', 'FR', 'Lyon', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2357', 'FR', 'Toulouse', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2358', 'FR', 'Nice', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2359', 'FR', 'Nantes', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2360', 'FR', 'Strasbourg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2361', 'FR', 'Montpellier', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2362', 'FR', 'Bordeaux', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2363', 'FR', 'Lille', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2364', 'FR', 'Rennes', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2365', 'FR', 'Reims', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2366', 'FR', 'Le Havre', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2367', 'FR', 'Saint-Étienne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2368', 'FR', 'Toulon', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2369', 'FR', 'Bregenz', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2370', 'FR', 'Eisenstadt', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2371', 'FR', 'Graz', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2372', 'FR', 'Innsbruck', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2373', 'FR', 'Klagenfurt', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2374', 'FR', 'Linz', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2375', 'FR', 'Salzbourg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2376', 'FR', 'Sankt Pölten', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2377', 'FR', 'Vienne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2378', 'FR', 'Aarau', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2379', 'FR', 'Appenzell', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2380', 'FR', 'Herisau', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2381', 'FR', 'Liestal', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2382', 'FR', 'Bâle', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2383', 'FR', 'Berne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2384', 'FR', 'Fribourg', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2385', 'FR', 'Genève', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2386', 'FR', 'Glaris', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2387', 'FR', 'Coire', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2388', 'FR', 'Delémont', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2389', 'FR', 'Lucerne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2390', 'FR', 'Neuchâtel', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2391', 'FR', 'Lausanne', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2392', 'FR', 'Zurich', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2500', 'FR', 'nord', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2501', 'FR', 'nord-nord-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2502', 'FR', 'nord-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2503', 'FR', 'est-nord-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2504', 'FR', 'est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2505', 'FR', 'est-sud-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2506', 'FR', 'sud-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2507', 'FR', 'sud-sud-est', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2508', 'FR', 'sud', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2509', 'FR', 'sud-sud-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2510', 'FR', 'sud-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2511', 'FR', 'ouest-sud-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2512', 'FR', 'ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2513', 'FR', 'ouest-nord-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2514', 'FR', 'nord-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2515', 'FR', 'nord-nord-ouest', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2516', 'FR', 'ne pas signet', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2517', 'FR', 'partager liste publique', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2518', 'FR', 'recommandations total', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2519', 'FR', 'Gauß-Krüger', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2520', 'FR', 'Afficher les incohérences', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2521', 'FR', 'Ce tableau contient quelques faux positifs. Les références du code \"libse\" (des notes sur de cache personnelle, waypoints supplémentaires) ne sont pas détectés, ainsi que des textes qui sont passés par des fonctions qui sont variables au niveau de la traduction et de textes multi-lignes. \"Aide\", \"Forum\", \"Team Blog\" et \"Informations\" sont référencés dans les fichiers de configuration locale. Soyez donc très prudent avant de supprimer quoi que ce soit.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2522', 'FR', 'OConly', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2523', 'FR', 'Logos OC officiels (mise à jour)\&nbsp;:', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2524', 'FR', 'Requête mémorisée', '2016-03-24 19:23:50');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2525', 'FR', 'Logos alternavite (partiellement obsolète)\&nbsp;:', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2526', 'FR', 'trouvé', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2527', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2528', 'FR', 'participation', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2529', 'FR', 'recommandé', '2010-10-04 00:17:39');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2530', 'FR', 'Nouvelles entrées actuelles', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2531', 'FR', 'Toutes les nouvelles entrées', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2532', 'FR', '... par date du log', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2533', 'FR', 'Des bonnes et inappropriées raisons pour signaler un cache', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2534', 'FR', '%1 rapports sont traités, %2 rapports attendus', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2535', 'FR', 'le temps d\'attente pour les nouveaux rapports\&nbsp;: environ %1 à %2 jours', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2536', 'FR', 'Liste de cache :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2537', 'FR', 'Listes de cache :', '2015-08-25 01:29:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2538', 'FR', 'Ètat de géocache\&nbsp;:', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2539', 'FR', 'non spécifié', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2540', 'FR', 'ok', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2541', 'FR', 'besoin de maintenance', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2542', 'FR', 'La géocache a besoin de maintenance.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2543', 'FR', 'La géocache est en bon ou acceptable état.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2544', 'FR', 'Sélectionnez <i>a besoin de maintenance </i>si la géocache était en mauvais<br/>état à la date indiquée et avait un besoin urgent de maintenance.<br/>Veuillez-vous expliquer pourquoi.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2545', 'FR', 'mise-à-jour', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2546', 'FR', 'obsolète', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2547', 'FR', 'La description de géocache est obsolète.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2548', 'FR', 'La description de géocache est ok.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2549', 'FR', 'Sélectionnez <i>est obsolète</i> si la recherche de géocache est entravée par des<br/>informations obsolètes dansla description, par exemple l\'emplacement s\'est<br/>fortement changé ou si la description manque des informations importantes<br/>qui a été ajouté dans un autre site de géocaching. Veuillez-vous donner des<br/>détails dans votre log.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2550', 'FR', 'Sélectionnez <i>est obsolète</i> si la recherche géocache est entravée par des informations<br/>obsolètesdans la description, par exemple parce que l\'emplacement s\'est fortement<br/>changé. Veuillez-vous donner des détails de votre log.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2551', 'FR', 'Quand avez-vous trouvé la géocache\&nbsp;?', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2552', 'FR', 'Quand avez-vous interrompez la recherche de cache\&nbsp;?', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2553', 'FR', 'Cette description de géocache peut être obsolète.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2554', 'FR', 'Voir les entrées de log pour des informations supplémentaires.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2555', 'FR', 'Voir les <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"%1%2%3#logentries\" class=\"systemlink\">log entries</a></span> pour des informations supplémentaires.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2556', 'FR', 'la géocache a besoin de maintenance', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2557', 'FR', 'la géocache est ok', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2558', 'FR', 'description est obsolète', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2559', 'FR', 'description est ok', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2560', 'FR', 'En vous connectant \"Disponible\", vous confirmez que la géocache est en bon état.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2561', 'FR', 'En vous connectant \"Disponible\", vous confirmez que la géocache est mise-à-jour.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2562', 'FR', 'Vous pouvez y indiquer l\'état actuel de maintenance de la géocache.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2563', 'FR', 'Vous pouvez y indiquer si la description du cache est mise-à-jour.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2564', 'FR', 'Important\&nbsp;:', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2565', 'FR', 'La description de la géocache sur Opencaching doit être resté mise-à-jour ! Les changements de la description sur d\'autres sites doivent être appliqués à la Opencaching listing à temps.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2566', 'FR', 'Dernière modification le', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2567', 'FR', 'Coordonnées originales\&nbsp;:', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2568', 'FR', 'Nouvelles coordonnées\&nbsp;:', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2569', 'FR', 'déplacé vers %1 mètre', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2570', 'FR', 'déplacé vers %1 km', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2571', 'FR', 'Protéger les anciennes coordonnées', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2598', 'FR', 'Sélectionnez <i>ok</i> si vous avez trouvé ou vérifié le cache et tout est ok.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2599', 'FR', 'Sélectionnez <i>mise-à-jour</i> si vous avez vérifié la description complète \&ndash; à partir de la<br />taille de conteneur jusqu\'aux notes codées et wayoints supplémentaires \&ndash; et peut<br />confirmer que tout est mise-à-jour.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2600', 'FR', 'Sélectionnez <i>mise-à-jour</i> si vous avez vérifié la description complète \&ndash; à partir<br />de la taille du conteneur jusqu\'aux notes codées et wayoints supplémentaires \&ndash;,<br />ont comparé à la liste de geocaching.com (%1) et peut confirmer que<br />tout est mise-à-jour.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2601', 'FR', 'Les problèmes de la description du cache comme mentionné dans les <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" /> entrées du log</a> n\'existent plus.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2602', 'FR', 'Toutes les informations (coordonnées, taille du conteneur, difficulté, terrain, le texte de description, des notes codées, waypoints supplémentaires) est au moins mise-à-jour avec', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2603', 'FR', 'Il y a plus de 2 ans', '2013-11-03 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2604', 'FR', 'Administrateur<br />commentaire\&nbsp;:', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2605', 'FR', 'Si vous êtes sûr que le géocache est parti et le propriétaire ne pas réagir<br />à l\'entrée de votre log, vous pouvez le signaler à l\'équipe d\'Opencaching.<br />Utilisez le bouton \'Signaler cette cache\' au-dessus de la description<br />de cache.', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2606', 'FR', 'Image', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2607', 'FR', 'Titre\&nbsp;:', '2015-06-17 10:09:14');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2608', 'FR', 'vers le haut', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2609', 'FR', 'La description est inutilisable', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2610', 'FR', 'Votre géocache', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2611', 'FR', 'Votre rapport de géocache pour', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2612', 'FR', 'convertir', '2017-09-06 18:01:44');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2613', 'FR', 'waypoint', '2010-08-28 11:48:08');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'FR', 'Recommandation', '2010-10-04 00:17:39');
+('1', 'FR', 'Réorganiser des IDs', '2015-08-25 01:28:59'),
+('2', 'FR', 'La base de données n\'a pas pu être connecté.', '2015-08-25 01:28:59'),
+('3', 'FR', 'Test - Ne vous connectez pas, s\'il vous plaît', '2015-08-25 01:28:59'),
+('4', 'FR', 'Utilisateur', '2015-08-25 01:28:59'),
+('5', 'FR', '(vide)', '2015-08-25 01:28:59'),
+('6', 'FR', 'Connecté en tant que', '2010-08-28 11:48:08'),
+('7', 'FR', 'Déconnexion', '2010-10-04 00:17:39'),
+('8', 'FR', 'Recherche de Waypoint\&nbsp;:', '2015-08-25 01:28:59'),
+('9', 'FR', 'Durée page\&nbsp;:', '2015-08-25 01:28:59'),
+('10', 'FR', 'seconde', '2015-08-25 01:28:59'),
+('11', 'FR', 'Page en cache\&nbsp;:', '2015-08-25 01:28:59'),
+('12', 'FR', 'DB connecté\&nbsp;:', '2015-08-25 01:28:59'),
+('13', 'FR', 'Créé à\&nbsp;:', '2015-08-25 01:28:59'),
+('14', 'FR', 'Déclaration de confidentialité', '2015-08-25 01:28:59'),
+('15', 'FR', 'Empreinte', '2015-08-25 01:28:59'),
+('16', 'FR', 'Contact', '2015-08-25 01:28:59'),
+('17', 'FR', 'Plan du site', '2015-08-25 01:28:59'),
+('18', 'FR', 'Inscription', '2015-08-25 01:28:59'),
+('19', 'FR', 'Nouvel utilisateur inscrit', '2015-08-25 01:28:59'),
+('20', 'FR', 'Note', '2015-08-25 01:28:59'),
+('21', 'FR', 'Vietnamien', '2015-08-25 01:28:59'),
+('22', 'FR', 'Nom d\'utilisateur', '2015-08-25 01:28:59'),
+('23', 'FR', 'E-mail', '2015-08-25 01:28:59'),
+('24', 'FR', 'Prénom', '2010-10-04 00:17:39'),
+('25', 'FR', 'Nom de famille', '2010-10-04 00:17:39'),
+('26', 'FR', 'Pays', '2010-10-04 00:17:39'),
+('27', 'FR', 'Créer nouvel utilisateur', '2015-08-25 01:28:59'),
+('29', 'FR', 'Le nom d\'utilisateur n\'est pas valide.', '2015-08-25 01:28:59'),
+('31', 'FR', 'Le dernier nom n\'est pas valide.', '2015-08-25 01:28:59'),
+('32', 'FR', 'Le premier nom n\'est pas valide.', '2015-08-25 01:28:59'),
+('33', 'FR', 'Non spécifié', '2016-03-24 19:23:50'),
+('34', 'FR', 'Montre tout', '2015-08-25 01:28:59'),
+('35', 'FR', 'L\'adresse e-mail n\'est pas valide.', '2015-08-25 01:28:59'),
+('36', 'FR', 'Turc', '2010-10-04 00:17:39'),
+('37', 'FR', 'Votre mot de passe\&nbsp;:', '2010-10-04 00:17:39'),
+('39', 'FR', 'Les mots de passe ne correspondent pas.', '2015-08-25 01:28:59'),
+('41', 'FR', '* Champ obligatoire', '2015-08-25 01:28:59'),
+('42', 'FR', 'Suédois', '2010-10-04 00:17:39'),
+('43', 'FR', 'Slovène', '2010-10-04 00:17:39'),
+('45', 'FR', 'Au moins 4 caractères différents', '2015-08-25 01:28:59'),
+('48', 'FR', 'Slovaque', '2010-10-04 00:17:39'),
+('49', 'FR', 'Russe', '2010-10-04 00:17:39'),
+('51', 'FR', 'Réinitialiser', '2015-08-25 01:28:59'),
+('52', 'FR', 'Recommandations', '2015-08-25 01:28:59'),
+('54', 'FR', 'Index', '2010-10-04 00:17:39'),
+('55', 'FR', 'Recommandations', '2010-10-04 00:17:39'),
+('56', 'FR', 'trouvé', '2010-10-04 00:17:39'),
+('57', 'FR', 'par', '2015-08-25 01:29:13'),
+('59', 'FR', 'Roumain', '2010-10-04 00:17:39'),
+('60', 'FR', 'Étape 1', '2015-08-25 01:28:59'),
+('63', 'FR', 'Étape 2', '2015-08-25 01:28:59'),
+('64', 'FR', 'Portugais', '2010-10-04 00:17:39'),
+('65', 'FR', 'Retour', '2015-08-25 01:28:59'),
+('70', 'FR', 'Nouvelles', '2015-08-25 01:28:59'),
+('71', 'FR', 'Derniers caches', '2015-08-25 01:28:59'),
+('73', 'FR', 'Derniers entrées du log', '2015-08-25 01:28:59'),
+('74', 'FR', 'Polonais', '2010-10-04 00:17:39'),
+('75', 'FR', 'Norvégien', '2010-10-04 00:17:39'),
+('76', 'FR', 'Letton', '2010-10-04 00:17:39'),
+('77', 'FR', 'Litaunien', '2010-10-04 00:17:40'),
+('78', 'FR', 'Italien', '2010-10-04 00:17:40'),
+('79', 'FR', 'Islandais', '2010-10-04 00:17:40'),
+('80', 'FR', 'Page d\'accueil', '2010-10-04 00:17:40'),
+('82', 'FR', 'Sur cette page vous trouverez des Geocaches de tout le monde, en mettant l\'accent sur l\'Allemagne, l\'Autriche, la Suisse, l\'Italie, l\'Espagne et la France. Nous offrons également des informations sur les sujets de géocaching divers et un forum (message board).</p>', '2015-08-25 01:28:59'),
+('83', 'FR', 'Le fichier n\'est pas téléchargé correctement.', '2015-08-25 01:28:59'),
+('84', 'FR', 'Le fichier était trop grand. La taille maximale d\'un fichier est de %1 Ko.', '2015-08-25 01:28:59'),
+('85', 'FR', 'Aucun fichier d\'image donné.', '2015-08-25 01:28:59'),
+('86', 'FR', 'même type', '2015-08-25 01:28:59'),
+('90', 'FR', '%1 caches actives et %2 trouvés par %3 utilisateurs', '2015-08-25 01:28:59'),
+('91', 'FR', 'Hongrois', '2010-10-04 00:17:40'),
+('92', 'FR', 'Croate', '2010-10-04 00:17:40'),
+('93', 'FR', 'Finnois', '2010-10-04 00:17:40'),
+('94', 'FR', 'Oui', '2010-10-04 00:17:40'),
+('95', 'FR', 'Non', '2010-08-28 11:48:08'),
+('96', 'FR', 'Salut', '2010-10-04 00:17:40'),
+('99', 'FR', 'Cet e-mail a été généré par le site web de %2, car un compte avec cette adresse e-mail a été créé. Si vous ne souhaitez pas recevoir d\'e-mails à l\'avenir, s\'il vous plaît nous contacter par %1.', '2015-08-25 01:28:59'),
+('100', 'FR', 'Basque', '2010-10-04 00:17:40'),
+('101', 'FR', 'Estonien', '2015-08-25 01:28:59'),
+('102', 'FR', 'Espéranto', '2010-10-04 00:17:40'),
+('103', 'FR', 'Grec', '2010-10-04 00:17:40'),
+('104', 'FR', 'Danois', '2010-10-04 00:17:40'),
+('105', 'FR', 'Une erreur inconnue est survenue.', '2015-08-25 01:28:59'),
+('106', 'FR', 'Le modèle n\'existe pas.', '2015-08-25 01:28:59'),
+('107', 'FR', 'Désolé, vous n\'êtes pas autorisé à accéder à cette page.', '2015-08-25 01:28:59'),
+('108', 'FR', 'Désolé, le cache demandé n\'existe pas.', '2015-08-25 01:28:59'),
+('109', 'FR', 'Désolé, l\'opération demandée ne peut pas être effectuée.', '2015-08-25 01:28:59'),
+('110', 'FR', 'S\'il vous plaît connectez-vous à continuer\&nbsp;:', '2015-08-25 01:28:59'),
+('111', 'FR', 'Désolé, l\'utilisateur demandé n\'existe pas.', '2015-08-25 01:28:59'),
+('112', 'FR', 'Le modèle mail n\'est pas existe.', '2015-08-25 01:28:59'),
+('113', 'FR', 'HTML Tags', '2015-08-25 01:28:59'),
+('114', 'FR', 'Description', '2010-10-04 00:17:40'),
+('115', 'FR', 'Créez un cache', '2015-08-25 01:28:59'),
+('116', 'FR', 'Admin', '2010-10-04 00:17:40'),
+('117', 'FR', 'Informations', '2010-10-04 00:17:40'),
+('118', 'FR', 'Caches', '2010-10-04 00:17:40'),
+('119', 'FR', 'Mon profil', '2015-08-25 01:28:59'),
+('120', 'FR', 'Nouveaux logs', '2015-08-25 01:28:59'),
+('122', 'FR', 'Nouveaux caches', '2015-08-25 01:28:59'),
+('123', 'FR', 'À propos de géocaching', '2015-08-25 01:28:59'),
+('124', 'FR', 'Nouvel élément', '2015-08-25 01:28:59'),
+('125', 'FR', 'Chercher', '2010-10-04 00:17:40'),
+('126', 'FR', 'Traduction', '2010-10-04 00:17:40'),
+('127', 'FR', 'Activation', '2010-10-04 00:17:40'),
+('128', 'FR', 'Profil de l\'utilisateur', '2015-08-25 01:28:59'),
+('129', 'FR', 'Une erreur est survenue lors du traitement de la page.', '2015-08-25 01:28:59'),
+('130', 'FR', 'Une erreur est survenue lors du traitement de la page. Si vous avez appelé cette page d\'un lien hypertexte sur notre site et cette erreur persiste un certain temps, s\'il vous plaît nous contacter par e-mail.', '2015-08-25 01:28:59'),
+('131', 'FR', 'L\'Erreur suivante est survenue\&nbsp;:', '2015-08-25 01:28:59'),
+('133', 'FR', 'Indication d\'erreur', '2010-10-04 00:17:40'),
+('134', 'FR', '%2 a trouvé %1', '2010-10-04 00:17:40'),
+('135', 'FR', '%2 ne pas trouvé %1', '2010-10-04 00:17:40'),
+('136', 'FR', '%2 ont écrit une note de %1', '2015-08-25 01:28:59'),
+('137', 'FR', '%2 ont visité %1', '2015-08-25 01:28:59'),
+('138', 'FR', '%2 veulent visiter %1', '2015-08-25 01:28:59'),
+('139', 'FR', 'Confirmation de l\'inscription', '2015-08-25 01:28:59'),
+('140', 'FR', 'bienvenue à %1!', '2010-10-04 00:17:40'),
+('141', 'FR', 'Les données suivantes ont été stockées pour votre compte :', '2015-08-25 01:28:59'),
+('142', 'FR', 'Slave', '2010-10-04 00:17:40'),
+('144', 'FR', 'Si vous ne vous connectez pas au cours des 14 prochains jours, votre compte sera supprimé.', '2015-08-25 01:28:59'),
+('145', 'FR', 'Tchèque', '2010-10-04 00:17:40'),
+('146', 'FR', 'Bulgare', '2010-10-04 00:17:40'),
+('147', 'FR', 'Profil de l\'utilisateur de %1', '2015-08-25 01:28:59'),
+('148', 'FR', 'Envoyer un e-mail', '2015-08-25 01:28:59'),
+('149', 'FR', 'Divers', '2010-10-04 00:17:40'),
+('150', 'FR', 'Je prends une talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59'),
+('151', 'FR', 'Enregistré\&nbsp;depuis\&nbsp;:', '2015-08-25 01:28:59'),
+('152', 'FR', 'Caches cachés\&nbsp;:', '2015-08-25 01:28:59'),
+('153', 'FR', 'Caches trouvé\&nbsp;:', '2015-08-25 01:28:59'),
+('154', 'FR', '%1 de %2 possibles', '2015-08-25 01:28:59'),
+('155', 'FR', 'Néerlandais', '2010-10-04 00:17:40'),
+('156', 'FR', 'Japonais', '2010-10-04 00:17:40'),
+('157', 'FR', 'Espagnol', '2010-10-04 00:17:40'),
+('158', 'FR', 'Français', '2015-08-25 01:28:59'),
+('159', 'FR', 'Anglais', '2010-10-04 00:17:40'),
+('160', 'FR', 'Allemand', '2010-10-04 00:17:40'),
+('161', 'FR', 'Attention\&nbsp;: Si vous utilisez cette option, ne pas oublier de se déconnecter avant que d\'autres personnes peuvent utiliser votre ordinateur. Sinon, ils peuvent utiliser et modifier vos données personnelles.', '2015-08-25 01:28:59'),
+('162', 'FR', 'Zimbabwe', '2015-08-25 01:28:59'),
+('163', 'FR', 'Zambie', '2015-08-25 01:28:59'),
+('164', 'FR', 'Afrique Du Sud', '2015-08-25 01:28:59'),
+('165', 'FR', 'Mayotte', '2015-08-25 01:28:59'),
+('166', 'FR', 'Le code d\'activation a été envoyé par e-mail à vous.<br />S\'il vous plaît suivez les instructions de l\'e-mail.', '2015-08-25 01:28:59'),
+('167', 'FR', 'Pour créer un compte sur %1, vous devez entrer une adresse e-mail vailde et un nom d\'utilisateur. Un e-mail sera envoyé à l\'adresse que vous avez fourni avec un code d\'activation. Seulement un compte peut être créé par adresse e-mail. Prénom, nom et le pays sont en option.', '2015-08-25 01:28:59'),
+('168', 'FR', 'Il existe déjà un compte avec cette adresse e-mail. Il n\'est pas possible à enregistrer un deuxième compte avec la même adresse e-mail.', '2015-08-25 01:28:59'),
+('171', 'FR', 'Le code d\'activation ou l\'adresse e-mail était incorrecte.<br /> L\'activation de votre compte n\'est pas réussie.<br /> S\'il vous plaît utiliser l\'adresse email où le courrier d\'inscription a été envoyé. <br /> <br /> S\'il vous plaît vérifier si vous avez mal tapé - si vous ne pouvez pas résoudre le problème vous-même, nous contacter via <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59'),
+('172', 'FR', 'Yémen', '2015-08-25 01:28:59'),
+('173', 'FR', 'Samoa', '2015-08-25 01:28:59'),
+('174', 'FR', 'Aller', '2015-08-25 01:28:59'),
+('175', 'FR', 'Système développeur - seulement des tests', '2015-08-25 01:28:59'),
+('179', 'FR', 'Wallis-et-Futuna', '2015-08-25 01:28:59'),
+('180', 'FR', 'Diffusez des nouvelles', '2015-08-25 01:28:59'),
+('181', 'FR', 'Vanuatu', '2015-08-25 01:28:59'),
+('182', 'FR', 'Viet Nam', '2015-08-25 01:28:59'),
+('183', 'FR', 'Îles Vierges (États-Unis)', '2015-08-25 01:28:59'),
+('184', 'FR', 'Îles Vierges (britanniques)', '2015-08-25 01:28:59'),
+('185', 'FR', 'Venezuela', '2015-08-25 01:28:59'),
+('186', 'FR', 'Choisir la langue cible\&nbsp;:', '2015-08-25 01:28:59'),
+('187', 'FR', 'Montrer nouvelles traductions', '2015-08-25 01:28:59'),
+('188', 'FR', 'Vider le cache de Smarty', '2015-08-25 01:28:59'),
+('189', 'FR', 'Non défini', '2015-08-25 01:28:59'),
+('190', 'FR', 'Afficher les traductions qui ne sont plus référencés', '2015-08-25 01:28:59'),
+('191', 'FR', 'Montrer toutes les traductions', '2015-08-25 01:28:59'),
+('192', 'FR', 'Saint-Vincent et Les Grenadines', '2015-08-25 01:28:59'),
+('193', 'FR', 'Cité du Vatican (Saint-Siège)', '2015-08-25 01:28:59'),
+('194', 'FR', 'Ouzbékistan', '2015-08-25 01:28:59'),
+('195', 'FR', 'Utilisez des traductions existantes\&nbsp;:', '2015-08-25 01:28:59'),
+('196', 'FR', 'Toutes les traductions\&nbsp;:', '2015-08-25 01:28:59'),
+('197', 'FR', 'Nouvelles traductions\&nbsp;:', '2015-08-25 01:28:59'),
+('198', 'FR', 'Les traductions ne sont plus référencés\&nbsp;:', '2015-08-25 01:28:59'),
+('199', 'FR', 'Langues\&nbsp;:', '2015-08-25 01:28:59'),
+('201', 'FR', 'Uruguay', '2015-08-25 01:28:59'),
+('202', 'FR', 'Code d\'activation\&nbsp;:', '2015-08-25 01:28:59'),
+('203', 'FR', 'États Unis', '2015-08-25 01:28:59'),
+('204', 'FR', 'Îles mineures éloignées des États-Unis', '2015-08-25 01:28:59'),
+('206', 'FR', 'total\&nbsp;:', '2015-08-25 01:29:00'),
+('207', 'FR', 'Connexion', '2015-08-25 01:28:59'),
+('208', 'FR', 'Mot de passe', '2015-08-25 01:28:59'),
+('209', 'FR', 'Ouganda', '2015-08-25 01:28:59'),
+('210', 'FR', 'Ukraine', '2015-08-25 01:28:59'),
+('211', 'FR', 'Tanzanie, République Unie de', '2015-08-25 01:28:59'),
+('212', 'FR', 'Taiwan, province de Chine', '2015-08-25 01:28:59'),
+('213', 'FR', 'Tuvalu', '2015-08-25 01:28:59'),
+('214', 'FR', 'Trinité-Et-Tobago', '2015-08-25 01:28:59'),
+('215', 'FR', 'Turquie', '2015-08-25 01:28:59'),
+('216', 'FR', 'Non enregistré\&nbsp;?', '2015-08-25 01:28:59'),
+('217', 'FR', 'Vous avez oublié votre mot de passe\&nbsp;?', '2015-08-25 01:28:59'),
+('218', 'FR', 'Vous avez oublié votre adresse e-mail\&nbsp;?', '2015-08-25 01:28:59'),
+('219', 'FR', 'Ici vous pouvez trouver plus d\'dépannage\&nbsp;:', '2015-08-25 01:28:59'),
+('221', 'FR', 'Entrer un nouveau mot de passe', '2015-08-25 01:28:59'),
+('222', 'FR', 'envoyer un rappel', '2015-08-25 01:28:59'),
+('223', 'FR', 'Tonga', '2015-08-25 01:28:59'),
+('224', 'FR', 'Remplir le nom d\'utilisateur et le mot de passe, s\'il vous plaît\&nbsp;!', '2015-08-25 01:28:59'),
+('225', 'FR', 'Déconnexion réussie.', '2015-08-25 01:28:59'),
+('226', 'FR', 'La connexion n\'est pas réussie.', '2015-08-25 01:28:59'),
+('227', 'FR', 'Le nom d\'utilisateur ou le mot de passe ne correspondent pas.', '2015-08-25 01:28:59'),
+('228', 'FR', 'Vous avez essayé de vous connecter plus de %1 fois pendant la dernière heure. La prochaine connexion ne sera pas autorisé avant qu\'une heure que le premier essai a passé.', '2015-08-25 01:28:59'),
+('229', 'FR', 'Votre compte n\'est pas actif.', '2015-08-25 01:28:59'),
+('230', 'FR', '\&gt;<a href=\"activation.php\">Voici</a>\&lt; vous pouvez activer votre compte.', '2015-08-25 01:28:59'),
+('231', 'FR', 'Tunisie', '2015-08-25 01:28:59'),
+('232', 'FR', 'Pour terminer l\'enregistrement, vous devez saisir votre adresse e-mail et le code d\'activation.', '2015-08-25 01:28:59'),
+('233', 'FR', 'Turkménistan', '2015-08-25 01:28:59'),
+('234', 'FR', 'Tokelau', '2015-08-25 01:28:59'),
+('235', 'FR', 'Tadjikistan', '2015-08-25 01:28:59'),
+('236', 'FR', 'Thaïlande', '2015-08-25 01:28:59'),
+('237', 'FR', 'Togo', '2015-08-25 01:28:59'),
+('238', 'FR', 'Terres australes françaises', '2015-08-25 01:28:59'),
+('239', 'FR', 'Tchad', '2015-08-25 01:28:59'),
+('240', 'FR', 'Îles Turques-Et-Caïques', '2015-08-25 01:28:59'),
+('241', 'FR', 'Nom', '2015-08-25 01:28:59'),
+('242', 'FR', 'Swaziland', '2015-08-25 01:28:59'),
+('243', 'FR', 'République Arabe Syrienne', '2015-08-25 01:28:59'),
+('244', 'FR', 'Recommandations de <a href=\"viewprofile.php?userid=%1\">%2</a>', '2015-08-25 01:28:59'),
+('245', 'FR', 'par %1', '2015-08-25 01:28:59'),
+('246', 'FR', '%1 n\'a pas recommandé de géocache.', '2015-08-25 01:28:59'),
+('248', 'FR', 'Afficher les recommandations', '2015-08-25 01:28:59'),
+('249', 'FR', 'Le Salvador', '2015-08-25 01:28:59'),
+('250', 'FR', 'Sao Tomé et Principe', '2015-08-25 01:28:59'),
+('251', 'FR', 'Suriname', '2015-08-25 01:28:59'),
+('252', 'FR', 'Somalie', '2015-08-25 01:28:59'),
+('253', 'FR', 'Un format inconnu du waypoint. Les formats suivants sont connus OCxxxxx et GCxxxxx, tandis que x peut être un nombre quelconque ou char.', '2015-08-25 01:28:59'),
+('254', 'FR', 'Il existe plus d\'une cache avec le waypoint \&quot;%1\&quot;.', '2015-08-25 01:28:59'),
+('255', 'FR', 'Le waypoint \&quot;%1\&quot; n\'est pas trouvé.', '2015-08-25 01:28:59'),
+('256', 'FR', 'Sénégal', '2015-08-25 01:28:59'),
+('257', 'FR', 'San Marino', '2015-08-25 01:28:59'),
+('258', 'FR', 'Sierra Leone', '2015-08-25 01:28:59'),
+('259', 'FR', 'Slovaquie', '2015-08-25 01:28:59'),
+('260', 'FR', 'Svalbard Et Jan Mayen', '2015-08-25 01:28:59'),
+('261', 'FR', 'Slovénie', '2015-08-25 01:28:59'),
+('262', 'FR', 'Sainte-Hélène', '2015-08-25 01:28:59'),
+('263', 'FR', 'Singapour', '2015-08-25 01:28:59'),
+('264', 'FR', 'Suède', '2015-08-25 01:28:59'),
+('265', 'FR', 'Soudan', '2015-08-25 01:28:59'),
+('266', 'FR', 'Seychelles', '2015-08-25 01:28:59'),
+('267', 'FR', 'Iles Salomon', '2015-08-25 01:28:59'),
+('268', 'FR', 'Arabie Saoudite', '2015-08-25 01:28:59'),
+('269', 'FR', 'Rwanda', '2015-08-25 01:28:59'),
+('270', 'FR', 'Russie (Fédération Russe)', '2015-08-25 01:28:59'),
+('271', 'FR', 'Roumanie', '2015-08-25 01:28:59'),
+('272', 'FR', 'Réunion', '2015-08-25 01:28:59'),
+('273', 'FR', 'Qatar', '2015-08-25 01:28:59'),
+('274', 'FR', 'Paraguay', '2015-08-25 01:28:59'),
+('275', 'FR', 'Palau', '2015-08-25 01:28:59'),
+('276', 'FR', 'Portugal', '2015-08-25 01:28:59'),
+('277', 'FR', 'Porto Rico', '2015-08-25 01:28:59'),
+('278', 'FR', 'Pitcairn', '2015-08-25 01:28:59'),
+('279', 'FR', 'Saint-Pierre-et-Miquelon', '2015-08-25 01:28:59'),
+('280', 'FR', 'Pologne', '2015-08-25 01:28:59'),
+('281', 'FR', 'Pakistan', '2015-08-25 01:28:59'),
+('282', 'FR', 'Philippines', '2015-08-25 01:28:59'),
+('283', 'FR', 'Papouasie Nouvelle Guinée', '2015-08-25 01:28:59'),
+('284', 'FR', 'Polynésie française', '2015-08-25 01:28:59'),
+('285', 'FR', 'Pérou', '2015-08-25 01:28:59'),
+('286', 'FR', 'Panama', '2015-08-25 01:28:59'),
+('287', 'FR', 'Oman', '2015-08-25 01:28:59'),
+('288', 'FR', 'Nouvelle Zélande', '2015-08-25 01:28:59'),
+('289', 'FR', 'Niue', '2015-08-25 01:28:59'),
+('290', 'FR', 'Nauru', '2015-08-25 01:28:59'),
+('291', 'FR', 'Népal', '2015-08-25 01:28:59'),
+('292', 'FR', 'Norvège', '2015-08-25 01:28:59'),
+('293', 'FR', 'Pays-Bas', '2015-08-25 01:28:59'),
+('294', 'FR', 'Nicaragua', '2015-08-25 01:28:59'),
+('295', 'FR', 'Nigeria', '2015-08-25 01:28:59'),
+('296', 'FR', 'Norfolk Island', '2015-08-25 01:28:59'),
+('297', 'FR', 'Niger', '2015-08-25 01:28:59'),
+('298', 'FR', 'Nouvelle-Calédonie', '2015-08-25 01:28:59'),
+('299', 'FR', 'Namibie', '2015-08-25 01:28:59'),
+('300', 'FR', 'Mozambique', '2015-08-25 01:28:59'),
+('301', 'FR', 'Malaisie', '2015-08-25 01:28:59'),
+('302', 'FR', 'Mexique', '2015-08-25 01:28:59'),
+('303', 'FR', 'Malawi', '2015-08-25 01:28:59'),
+('304', 'FR', 'Maldives', '2015-08-25 01:28:59'),
+('305', 'FR', 'Ile Maurice', '2015-08-25 01:28:59'),
+('306', 'FR', 'Malte', '2015-08-25 01:28:59'),
+('307', 'FR', 'Montserrat', '2015-08-25 01:28:59'),
+('308', 'FR', 'Mauritanie', '2015-08-25 01:28:59'),
+('309', 'FR', 'Martinique', '2015-08-25 01:28:59'),
+('310', 'FR', 'Îles Mariannes du Nord', '2015-08-25 01:28:59'),
+('311', 'FR', 'Macau', '2015-08-25 01:28:59'),
+('312', 'FR', 'Mongolie', '2015-08-25 01:28:59'),
+('313', 'FR', 'Myanmar', '2015-08-25 01:28:59'),
+('314', 'FR', 'Mali', '2015-08-25 01:28:59'),
+('315', 'FR', 'Macédoine, Ancienne République yougoslave de', '2015-08-25 01:28:59'),
+('316', 'FR', 'Iles Marshall', '2015-08-25 01:28:59'),
+('317', 'FR', 'Madagascar', '2015-08-25 01:28:59'),
+('318', 'FR', 'Moldova, République de', '2015-08-25 01:28:59'),
+('319', 'FR', 'Monaco', '2015-08-25 01:28:59'),
+('320', 'FR', 'Maroc', '2015-08-25 01:28:59'),
+('321', 'FR', 'Jamahiriya arabe libyenne', '2015-08-25 01:28:59'),
+('322', 'FR', 'Lettonie', '2015-08-25 01:28:59'),
+('323', 'FR', 'Luxembourg', '2015-08-25 01:28:59'),
+('324', 'FR', 'Lituanie', '2015-08-25 01:28:59'),
+('325', 'FR', 'Lesotho', '2015-08-25 01:28:59'),
+('326', 'FR', 'Libéria', '2015-08-25 01:28:59'),
+('327', 'FR', 'Sri Lanka', '2015-08-25 01:28:59'),
+('328', 'FR', 'Liechtenstein', '2015-08-25 01:28:59'),
+('329', 'FR', 'Sainte-Lucie', '2015-08-25 01:28:59'),
+('330', 'FR', 'Liban', '2015-08-25 01:28:59'),
+('331', 'FR', 'République démocratique populaire lao', '2015-08-25 01:28:59'),
+('332', 'FR', 'Kazakhstan', '2015-08-25 01:28:59'),
+('333', 'FR', 'Îles Caïmans', '2015-08-25 01:28:59'),
+('334', 'FR', 'Koweit', '2015-08-25 01:28:59'),
+('335', 'FR', 'Corée, République De', '2015-08-25 01:28:59'),
+('336', 'FR', 'République de Corée, République populaire démocratique de', '2015-08-25 01:28:59'),
+('337', 'FR', 'Saint-Kitts-Et-Nevis', '2015-08-25 01:28:59'),
+('338', 'FR', 'Comores', '2015-08-25 01:28:59'),
+('339', 'FR', 'Kiribati', '2015-08-25 01:28:59'),
+('340', 'FR', 'Cambodge', '2015-08-25 01:28:59'),
+('341', 'FR', 'Kirghizstan', '2015-08-25 01:28:59'),
+('342', 'FR', 'Kenya', '2015-08-25 01:28:59'),
+('343', 'FR', 'Japon', '2015-08-25 01:28:59'),
+('344', 'FR', 'Jordanie', '2015-08-25 01:28:59'),
+('345', 'FR', 'Jamaïque', '2015-08-25 01:28:59'),
+('346', 'FR', 'Italie', '2015-08-25 01:28:59'),
+('347', 'FR', 'Islande', '2015-08-25 01:28:59'),
+('348', 'FR', 'Iran (République islamique d \')', '2015-08-25 01:28:59'),
+('349', 'FR', 'Irak', '2015-08-25 01:28:59'),
+('350', 'FR', 'Territoire britannique de l\'océan Indien', '2015-08-25 01:28:59'),
+('351', 'FR', 'Inde', '2015-08-25 01:28:59'),
+('352', 'FR', 'Israël', '2015-08-25 01:28:59'),
+('353', 'FR', 'Irlande', '2015-08-25 01:28:59'),
+('354', 'FR', 'Indonésie', '2015-08-25 01:28:59'),
+('355', 'FR', 'Hongrie', '2015-08-25 01:28:59'),
+('356', 'FR', 'Haïti', '2015-08-25 01:28:59'),
+('357', 'FR', 'Croatie', '2015-08-25 01:28:59'),
+('358', 'FR', 'Honduras', '2015-08-25 01:28:59'),
+('359', 'FR', 'Heard et Mc Donald Îles', '2015-08-25 01:28:59'),
+('360', 'FR', 'Hong Kong', '2015-08-25 01:28:59'),
+('361', 'FR', 'Guyane', '2015-08-25 01:28:59'),
+('362', 'FR', 'Guinée-Bissau', '2015-08-25 01:28:59'),
+('363', 'FR', 'Guam', '2015-08-25 01:28:59'),
+('364', 'FR', 'Guatemala', '2015-08-25 01:28:59'),
+('365', 'FR', 'Géorgie du Sud et les îles Sandwich du Sud', '2015-08-25 01:28:59'),
+('366', 'FR', 'Grèce', '2015-08-25 01:28:59'),
+('367', 'FR', 'Guadeloupe', '2015-08-25 01:28:59'),
+('368', 'FR', 'Guinée', '2015-08-25 01:28:59'),
+('369', 'FR', 'Gambie', '2015-08-25 01:28:59'),
+('370', 'FR', 'Groenland', '2015-08-25 01:28:59'),
+('371', 'FR', 'Gibraltar', '2015-08-25 01:28:59'),
+('372', 'FR', 'Ghana', '2015-08-25 01:28:59'),
+('373', 'FR', 'Guyane française', '2015-08-25 01:28:59'),
+('374', 'FR', 'Géorgie', '2015-08-25 01:28:59'),
+('375', 'FR', 'Grenade', '2015-08-25 01:28:59'),
+('376', 'FR', 'Royaume-Uni', '2015-08-25 01:28:59'),
+('377', 'FR', 'Gabon', '2015-08-25 01:28:59'),
+('378', 'FR', 'France', '2015-08-25 01:28:59'),
+('379', 'FR', 'Îles Féroé', '2015-08-25 01:28:59'),
+('380', 'FR', 'Micronésie, États fédérés de', '2015-08-25 01:28:59'),
+('381', 'FR', 'Îles Falkland (Malvinas)', '2015-08-25 01:28:59'),
+('382', 'FR', 'Fidji', '2015-08-25 01:28:59'),
+('383', 'FR', 'Finlande', '2015-08-25 01:28:59'),
+('384', 'FR', 'Ethiopie', '2015-08-25 01:28:59'),
+('385', 'FR', 'Espagne', '2015-08-25 01:28:59'),
+('386', 'FR', 'Erythrée', '2015-08-25 01:28:59'),
+('387', 'FR', 'Sahara Occidental', '2015-08-25 01:28:59'),
+('388', 'FR', 'Egypte', '2015-08-25 01:28:59'),
+('389', 'FR', 'Estonie', '2015-08-25 01:28:59'),
+('390', 'FR', 'Equateur', '2015-08-25 01:28:59'),
+('391', 'FR', 'Algérie', '2015-08-25 01:28:59'),
+('392', 'FR', 'République Dominicaine', '2015-08-25 01:28:59'),
+('393', 'FR', 'Danemark', '2015-08-25 01:28:59'),
+('394', 'FR', 'Djibouti', '2015-08-25 01:28:59'),
+('395', 'FR', 'Allemagne', '2015-08-25 01:28:59'),
+('396', 'FR', 'République Tchèque', '2015-08-25 01:28:59'),
+('397', 'FR', 'Chypre', '2015-08-25 01:28:59'),
+('398', 'FR', 'Christmas Island', '2015-08-25 01:28:59'),
+('399', 'FR', 'Cap-Vert', '2015-08-25 01:28:59'),
+('400', 'FR', 'Cuba', '2015-08-25 01:28:59'),
+('402', 'FR', 'Costa Rica', '2015-08-25 01:28:59'),
+('403', 'FR', 'Colombie', '2015-08-25 01:28:59'),
+('404', 'FR', 'Chine', '2015-08-25 01:28:59'),
+('405', 'FR', 'Cameroun', '2015-08-25 01:28:59'),
+('406', 'FR', 'Chili', '2015-08-25 01:28:59'),
+('407', 'FR', 'Iles Cook', '2015-08-25 01:28:59'),
+('408', 'FR', 'Côte d\'Ivoire', '2015-08-25 01:28:59'),
+('409', 'FR', 'Suisse', '2015-08-25 01:28:59'),
+('410', 'FR', 'Congo', '2015-08-25 01:28:59'),
+('411', 'FR', 'République Centrafricaine', '2015-08-25 01:28:59'),
+('412', 'FR', 'Cocos (Keeling) Islands', '2015-08-25 01:28:59'),
+('413', 'FR', 'Canada', '2015-08-25 01:28:59'),
+('414', 'FR', 'Belize', '2015-08-25 01:28:59'),
+('415', 'FR', 'Biélorussie', '2015-08-25 01:28:59'),
+('416', 'FR', 'Botswana', '2015-08-25 01:28:59'),
+('417', 'FR', 'Île Bouvet', '2015-08-25 01:28:59'),
+('418', 'FR', 'Bhoutan', '2015-08-25 01:28:59'),
+('419', 'FR', 'Bahamas', '2015-08-25 01:28:59'),
+('420', 'FR', 'Brésil', '2015-08-25 01:28:59'),
+('421', 'FR', 'Bolivie', '2015-08-25 01:28:59'),
+('422', 'FR', 'Brunei Darussalam', '2015-08-25 01:28:59'),
+('423', 'FR', 'Bermudes', '2015-08-25 01:28:59'),
+('424', 'FR', 'Bénin', '2015-08-25 01:28:59'),
+('425', 'FR', 'Burundi', '2015-08-25 01:28:59'),
+('426', 'FR', 'Bahreïn', '2015-08-25 01:28:59'),
+('427', 'FR', 'Bulgarie', '2015-08-25 01:28:59'),
+('428', 'FR', 'Burkina Faso', '2015-08-25 01:28:59'),
+('429', 'FR', 'Belgique', '2015-08-25 01:28:59'),
+('430', 'FR', 'Bangladesh', '2015-08-25 01:28:59'),
+('431', 'FR', 'Barbade', '2015-08-25 01:28:59'),
+('432', 'FR', 'Bosnie-Herzégovine', '2015-08-25 01:28:59'),
+('433', 'FR', 'Azerbaïdjan', '2015-08-25 01:28:59'),
+('434', 'FR', 'Aruba', '2015-08-25 01:28:59'),
+('435', 'FR', 'Australie', '2015-08-25 01:28:59'),
+('436', 'FR', 'Autriche', '2015-08-25 01:28:59'),
+('437', 'FR', 'Samoa américaines', '2015-08-25 01:28:59'),
+('438', 'FR', 'Argentine', '2015-08-25 01:28:59'),
+('439', 'FR', 'Angola', '2015-08-25 01:28:59'),
+('440', 'FR', 'Antilles Néerlandaises', '2015-08-25 01:28:59'),
+('441', 'FR', 'Arménie', '2015-08-25 01:28:59'),
+('442', 'FR', 'Albanie', '2015-08-25 01:28:59'),
+('443', 'FR', 'Anguilla', '2015-08-25 01:28:59'),
+('444', 'FR', 'Antigua-Et-Barbuda', '2015-08-25 01:28:59'),
+('445', 'FR', 'Afghanistan', '2015-08-25 01:28:59'),
+('446', 'FR', 'Emirats Arabes Unis', '2015-08-25 01:28:59'),
+('447', 'FR', 'Andorre', '2015-08-25 01:28:59'),
+('448', 'FR', 'Passage à db-root échoué.', '2015-08-25 01:28:59'),
+('449', 'FR', '(Avant l\'exportation)', '2015-08-25 01:28:59'),
+('450', 'FR', 'Nous mettons à jour %1 et de protéger contre les défauts qu\'il transformation, nous avons mis à la page entière déconnecté.', '2015-08-25 01:28:59'),
+('452', 'FR', 'Nouvelle enregistrée', '2015-08-25 01:28:59'),
+('453', 'FR', 'Merci beaucoup pour votre nouvelle. Nous allons essayer de valider votre inscription dès que possible.<br /><br />Retour<a href=\"index.php\">Start</a>', '2015-08-25 01:28:59'),
+('454', 'FR', 'Soumettre une nouvelle', '2015-08-25 01:28:59'),
+('455', 'FR', 'Soumettre', '2015-08-25 01:28:59'),
+('456', 'FR', 'Le code ne correspond pas.', '2015-08-25 01:28:59'),
+('457', 'FR', 'Et maintenant remplir le code de protection anti-spam\&nbsp;:', '2015-08-25 01:28:59'),
+('458', 'FR', 'Qu\'est-ce que cette image montre\&nbsp;?', '2015-08-25 01:28:59'),
+('459', 'FR', 'L\'adresse e-mail n\'est pas valide.', '2015-08-25 01:28:59'),
+('460', 'FR', 'Votre e-mail pour d\'autres questions\&nbsp;:', '2015-08-25 01:28:59'),
+('461', 'FR', 'S\'il vous plaît utilisez uniquement des tags HTML pour formater le texte - par exemple. bold, color ou des hyperlinks. Nous ne voulons pas des tables, divs etc.', '2015-08-25 01:28:59'),
+('462', 'FR', 'le entre de news est pose de html', '2010-08-28 11:48:08'),
+('463', 'FR', 'Nouvelle\&nbsp;:', '2015-08-25 01:28:59'),
+('464', 'FR', 'Sujet\&nbsp;:', '2015-08-25 01:28:59'),
+('465', 'FR', 'Y a t-il des nouvelles de géocaching\&nbsp;?<br />Ici vous pouvez créer un nouvelle qui sera affiché sur la page de démarrage.', '2015-08-25 01:28:59'),
+('466', 'FR', 'L\'activation de votre compte était réussie. Vous pouvez dès maintenant vous connecter sur la page de connexion.<br /><br /><a href=\"login.php\"> Accédez à la page de connexion</a>', '2015-08-25 01:28:59'),
+('467', 'FR', 'Indices', '2015-08-25 01:28:59'),
+('468', 'FR', 'Activer le compte', '2015-08-25 01:28:59'),
+('469', 'FR', 'Cordialement,<br/>l\'Opencaching-Team', '2015-08-25 01:28:59'),
+('470', 'FR', 'S\'il vous plaît être patient, nous ferons de notre mieux pour obtenir le site de nouveau en ligne dès que possible.', '2015-08-25 01:28:59'),
+('471', 'FR', 'Le compte n\'a pas pu être créé, la raison est pas connue. Si vous ne pouvez pas résoudre ce problème vous-même, veuillez-vous nous contacter s\'il vous plaît via <a href=\"mailto:%1\">E-Mail</a>', '2015-08-25 01:28:59'),
+('472', 'FR', 'Nous respectons votre vie privée. Vos données personnelles seront stockées dans notre base de données, mais pas partagés à des tiers. S\'il vous plaît noter que notre <a href=\"articles.php?page=dsb\"> déclaration de confidentialité</a> détaillé. Si vous avez d\'autres questions, s\'il vous plaît <a href=\"mailto:%1\">veuillez-vous nous contacter</a> <b>avant</b> vous créez votre compte.', '2015-08-25 01:28:59'),
+('473', 'FR', 'Nous devons approuver votre nouvelle avant que nous puissions l\'afficher. Nous essayons de le faire dans les 24h à 48h suivantes. La nouvelle ne peut pas être modifié après que vous avez le soumis. Si vous voulez prendre des changements dans la nouvelle, s\'il vous plaît soumettre de nouveau nouvelle excates. Il est permis de soumettre des nouvelles à propos de tout autour de géocaching - mais il est interdit de soumettre publicité pour des produits ou des géocaches. La décision volontaire pour approuver ou non une nouvelle incombe exclusivement à la discrétion de l\'opérateur de la page Web - il n\'y a pas une exigence de la publication. En cas de doute, s\'il vous plaît soumettre votre nouvelle et attendre si il sera montré - ou de demander par e-mail avant de soumettre <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59'),
+('474', 'FR', 'Si ce problème persiste sur une longue période, veuillez-vous nous contacter s\'il vous plaît à l\'adresse <a href=\"mailto:%1\">%1</a>.', '2015-08-25 01:28:59'),
+('475', 'FR', '%1 est hors service', '2015-08-25 01:28:59'),
+('477', 'FR', 'Total runtime:', '2015-08-25 01:28:59'),
+('478', 'FR', 'Business layer runtime:', '2015-08-25 01:28:59'),
+('479', 'FR', 'Framework runtime:', '2015-08-25 01:28:59'),
+('480', 'FR', 'User runtime:', '2015-08-25 01:28:59'),
+('481', 'FR', 'SQL Debugger', '2015-08-25 01:28:59'),
+('482', 'FR', '%1 des commandes', '2015-08-25 01:28:59'),
+('483', 'FR', 'Vue d\'ensemble', '2015-08-25 01:28:59'),
+('484', 'FR', 'Profil', '2015-08-25 01:28:59'),
+('485', 'FR', 'Les requêtes stockées', '2015-08-25 01:28:59'),
+('486', 'FR', 'Caches regardées', '2015-08-25 01:28:59'),
+('487', 'FR', 'Caches ignorées', '2015-08-25 01:28:59'),
+('488', 'FR', 'Paramètres', '2015-08-25 01:28:59'),
+('490', 'FR', 'Le rayon de notification ne doit pas être plus de 150 km. Pour désactiver des notifications, définir le rayon à 0.', '2015-08-25 01:28:59'),
+('491', 'FR', 'Changer le mot de passe', '2015-08-25 01:28:59'),
+('493', 'FR', 'Adresse e-mail', '2015-08-25 01:28:59'),
+('496', 'FR', 'archivé', '2015-08-25 01:29:00'),
+('497', 'FR', 'pas trouvé', '2015-08-25 01:28:59'),
+('498', 'FR', 'participation', '2015-08-25 01:28:59'),
+('499', 'FR', 'sera présent', '2015-08-25 01:28:59'),
+('500', 'FR', 'Bonjour %1', '2015-08-25 01:28:59'),
+('501', 'FR', 'Logs', '2015-08-25 01:28:59'),
+('502', 'FR', 'Trouve\&nbsp;: %1', '2015-08-25 01:28:59'),
+('503', 'FR', 'Vos dernières entrées du log', '2015-08-25 01:28:59'),
+('504', 'FR', 'Aucunes entrées trouvées', '2015-08-25 01:28:59'),
+('505', 'FR', 'Géocaches cachés\&nbsp;: %1', '2015-08-25 01:28:59'),
+('506', 'FR', 'Vos géocaches cachés', '2015-08-25 01:28:59'),
+('507', 'FR', 'Aucuns géocaches cachés', '2015-08-25 01:28:59'),
+('508', 'FR', 'Géocaches inédits :', '2015-08-25 01:28:59'),
+('512', 'FR', 'Géocache inconnu', '2015-08-25 01:28:59'),
+('513', 'FR', 'Géocache traditionnel', '2015-08-25 01:28:59'),
+('514', 'FR', 'Multicache', '2015-08-25 01:28:59'),
+('515', 'FR', 'Géocache virtuel', '2015-08-25 01:28:59'),
+('516', 'FR', 'Webcam Géocache', '2015-08-25 01:28:59'),
+('517', 'FR', 'Géocache événementiel', '2015-08-25 01:28:59'),
+('518', 'FR', 'Quiz Géocache', '2015-08-25 01:28:59'),
+('519', 'FR', 'Géocache physique / math', '2015-08-25 01:28:59'),
+('520', 'FR', 'Géocache mouvante', '2015-08-25 01:28:59'),
+('521', 'FR', 'Drive-In Géocache', '2015-08-25 01:28:59'),
+('524', 'FR', 'autre taille', '2015-08-25 01:28:59'),
+('525', 'FR', 'micro', '2015-08-25 01:28:59'),
+('526', 'FR', 'petit', '2015-08-25 01:28:59'),
+('527', 'FR', 'normal', '2015-08-25 01:28:59'),
+('528', 'FR', 'grand', '2015-08-25 01:28:59'),
+('529', 'FR', 'très grand', '2015-08-25 01:28:59'),
+('530', 'FR', 'aucune boîte', '2015-08-25 01:28:59'),
+('531', 'FR', 'disponible', '2015-08-25 01:29:00'),
+('532', 'FR', 'temporairement non disponible', '2015-08-25 01:28:59'),
+('533', 'FR', 'caché par les approbateurs pour vérifier', '2015-08-25 01:28:59'),
+('534', 'FR', 'pas encore disponible', '2015-08-25 01:28:59'),
+('535', 'FR', 'type de cache inconnu', '2015-08-25 01:28:59'),
+('536', 'FR', 'Cache traditionelle', '2015-08-25 01:28:59'),
+('537', 'FR', 'Cache virtuelle', '2015-08-25 01:28:59'),
+('538', 'FR', 'Cache Webcam', '2015-08-25 01:28:59'),
+('539', 'FR', 'Cache événementielle', '2015-08-25 01:28:59'),
+('540', 'FR', 'Cache mathematique/physique', '2015-08-25 01:28:59'),
+('541', 'FR', 'Cache mouvante', '2015-08-25 01:28:59'),
+('542', 'FR', 'Cache drive-in', '2015-08-25 01:28:59'),
+('544', 'FR', 'Je veux être informé sur des nouveaux géocaches dans un rayon de %1 km.', '2015-08-25 01:28:59'),
+('545', 'FR', 'BBCode pour webforums\&nbsp;:', '2015-08-25 01:28:59'),
+('546', 'FR', '%1-statstic de %2', '2015-08-25 01:28:59'),
+('547', 'FR', 'Choisissez logo', '2015-08-25 01:28:59'),
+('548', 'FR', 'HTML-Code\&nbsp;:', '2015-08-25 01:28:59'),
+('549', 'FR', 'Texte affiché\&nbsp;:', '2015-08-25 01:28:59'),
+('550', 'FR', 'Texte contient caractères invalides\&nbsp;!', '2015-08-25 01:28:59'),
+('551', 'FR', 'Logos disponibles\&nbsp;:', '2015-08-25 01:28:59'),
+('552', 'FR', 'Annuler', '2015-08-25 01:28:59'),
+('553', 'FR', 'Sauvegarder', '2015-08-25 01:28:59'),
+('554', 'FR', 'Les paramètres suivants sont stockées pour votre logo\&nbsp;:', '2015-08-25 01:28:59'),
+('555', 'FR', 'Afficher entrées du log', '2015-08-25 01:28:59'),
+('556', 'FR', 'Image de la statistique', '2015-08-25 01:28:59'),
+('558', 'FR', 'Ne pas utiliser un éditeur HTML par défaut', '2015-08-25 01:28:59'),
+('559', 'FR', 'Ne pas me déconnecter après 60 minutes d\'inactivité.', '2015-08-25 01:28:59'),
+('560', 'FR', 'Je prends un talkie-walkie PMR sur le canal 2 avec moi.', '2015-08-25 01:28:59'),
+('561', 'FR', 'Autres\&nbsp;:', '2015-08-25 01:28:59'),
+('562', 'FR', 'Alerte de nouvelles géocaches est désactivé.', '2015-08-25 01:28:59'),
+('563', 'FR', 'Notifier moi sur les nouvelles géocaches dans un rayon de %1 km.', '2015-08-25 01:28:59'),
+('564', 'FR', 'Notifications\&nbsp;:', '2015-08-25 01:28:59'),
+('565', 'FR', 'Accueil Coordonnées\&nbsp;:', '2015-08-25 01:28:59'),
+('566', 'FR', 'Pays\&nbsp;:', '2015-08-25 01:28:59'),
+('567', 'FR', 'Nom\&nbsp;:', '2015-08-25 01:28:59'),
+('568', 'FR', 'Prénom\&nbsp;:', '2015-08-25 01:28:59'),
+('569', 'FR', 'Recommandé', '2015-08-25 01:28:59'),
+('570', 'FR', '%1 trouvé la géocache', '2015-08-25 01:28:59'),
+('571', 'FR', '%1 n\'a pas trouvé le géoacache', '2015-08-25 01:28:59'),
+('572', 'FR', '%1 a écrit une note', '2015-08-25 01:28:59'),
+('573', 'FR', '%1 a visité l\'événement', '2015-08-25 01:28:59'),
+('574', 'FR', '%1 veut visiter l\'événement', '2015-08-25 01:28:59'),
+('575', 'FR', '%1', '2015-08-25 01:28:59'),
+('576', 'FR', 'Èditer', '2015-08-25 01:29:00'),
+('577', 'FR', 'effacer', '2015-08-25 01:29:13'),
+('578', 'FR', 'Ajouter une image', '2015-08-25 01:28:59'),
+('579', 'FR', 'Les images pour ce log\&nbsp;:', '2015-08-25 01:28:59'),
+('580', 'FR', 'Retour à la géocache', '2015-08-25 01:28:59'),
+('581', 'FR', 'Adresse e-mail\&nbsp;:', '2015-08-25 01:28:59'),
+('582', 'FR', 'Logs pour %1', '2015-08-25 01:28:59'),
+('584', 'FR', 'Sélection de photos pour %1', '2015-08-25 01:28:59'),
+('585', 'FR', 'Il n\'y a pas de images pour cette géocache.', '2015-08-25 01:28:59'),
+('586', 'FR', 'Comme l\'image d\'aperçu', '2015-08-25 01:28:59'),
+('587', 'FR', 'Mon profil de données', '2015-08-25 01:28:59'),
+('588', 'FR', 'Les informations suivantes sont stockées dans votre profil d\'utilisateur\&nbsp;:', '2015-08-25 01:28:59'),
+('590', 'FR', 'Nom d\'utilisateur\&nbsp;:', '2015-08-25 01:28:59'),
+('591', 'FR', 'Le pays n\'est pas valide.', '2015-08-25 01:28:59'),
+('592', 'FR', 'Le rayon n\'est pas valide.', '2015-08-25 01:28:59'),
+('595', 'FR', 'Nouveau mot de passe\&nbsp;:', '2015-08-25 01:28:59'),
+('596', 'FR', 'Demande', '2015-08-25 01:28:59'),
+('597', 'FR', 'Changement', '2015-08-25 01:28:59'),
+('598', 'FR', 'Code demandé', '2015-08-25 01:28:59'),
+('599', 'FR', 'Nouveau code de mot de passe', '2015-08-25 01:28:59'),
+('600', 'FR', 'vous avez demandé à %1 un code de sécurité pour modifier votre mot de passe.', '2015-08-25 01:28:59'),
+('601', 'FR', 'Le code suivant a été généré : %1', '2015-08-25 01:28:59'),
+('602', 'FR', 'Ce code est 3 jours valable.', '2015-08-25 01:28:59'),
+('603', 'FR', 'Vous pouvez entrer votre nouveau mot de passe à %1newpw.php.', '2015-08-25 01:28:59'),
+('604', 'FR', 'Pour changer votre mot de passe, vous devez demander un code de sécurité qui sera vous envoyé par e-mail.', '2015-08-25 01:28:59'),
+('605', 'FR', 'Cet adresse e-mail  n\'est pas enregistré avec un nom d\'utilisateur valide.', '2015-08-25 01:28:59'),
+('606', 'FR', 'Un e-mail a été vous envoyé avec le code de sécurité.', '2015-08-25 01:28:59'),
+('607', 'FR', 'Une erreur inconnue est survenue. Le code de sécurité n\'a pas pu être envoyé.', '2015-08-25 01:28:59'),
+('608', 'FR', 'S\'il vous plaît veuillez-vous entrer votre adresse e-mail, le code de sécurité que vous avez reçu et votre nouveau mot de passe. Le code de sécurité est valable seulement 3 jours. Vous devez en demander un nouveau après cette date.', '2015-08-25 01:28:59'),
+('609', 'FR', 'Le compte d\'utilisateur n\'est pas activé.', '2015-08-25 01:28:59'),
+('610', 'FR', 'Code de sécurité\&nbsp;:', '2015-08-25 01:28:59'),
+('611', 'FR', 'Le code de sécurité est expiré. En demander un nouveau.', '2015-08-25 01:28:59'),
+('612', 'FR', 'Le code de sécurité ne correspond pas.', '2015-08-25 01:28:59'),
+('613', 'FR', 'S\'il\&nbsp;vous\&nbsp;plaît\&nbsp;répéter\&nbsp;:', '2015-08-25 01:28:59'),
+('614', 'FR', 'Le mot de passe a été changé.', '2015-08-25 01:28:59'),
+('615', 'FR', 'Code de sécurité pour la nouvelle adresse e-mail', '2015-08-25 01:28:59'),
+('616', 'FR', 'vous avez demandé à %1 un code de sécurité pour modifier votre adresse e-mail.', '2015-08-25 01:28:59'),
+('617', 'FR', 'Vous pouvez vérifier votre nouveau adresse e-mail à %1newemail.php', '2015-08-25 01:28:59'),
+('618', 'FR', 'Changer l\'adresse e-mail', '2015-08-25 01:28:59'),
+('619', 'FR', 'Pour changer votre adresse e-mail, vous devez demander un code de sécurité. Il sera envoyé à votre nouveau adresse e-mail.', '2015-08-25 01:28:59'),
+('620', 'FR', 'Nouvelle adresse e-mail\&nbsp;:', '2015-08-25 01:28:59'),
+('621', 'FR', 'Cet e-mail est déjà assigné à votre compte.', '2015-08-25 01:28:59'),
+('622', 'FR', 'S\'il vous plaît entrer le code de sécurité que vous avez reçu. Le code de sécurité est valable seulement 3 jours. Vous devez en demander un nouveau après cette date.', '2015-08-25 01:28:59'),
+('623', 'FR', 'Demande le code de sécurité premièrement, s\'il vous plaît.', '2015-08-25 01:28:59'),
+('624', 'FR', 'Il n\'y avait aucune nouvelle adresse e-mail entrée, s\'il vous plaît demander un code de sécurité premièrement.', '2015-08-25 01:28:59'),
+('625', 'FR', 'L\'adresse e-mail été changé.', '2015-08-25 01:28:59'),
+('626', 'FR', 'Télécharger', '2015-08-25 01:28:59'),
+('627', 'FR', 'Aucunes requêtes stockées trouvé', '2015-08-25 01:28:59'),
+('628', 'FR', 'Avec le téléchargement, vous acceptez le terme <a href=\"articles.php?page=impressum#tos\">d\'utilisation</a> d\'Opencaching.de.', '2015-08-25 01:28:59'),
+('629', 'FR', 'requête stockées', '2015-08-25 01:28:59'),
+('630', 'FR', 'options de stockées comme nouvelle recherche', '2015-08-25 01:28:59'),
+('631', 'FR', 'Nom de la recherche\&nbsp;:', '2015-08-25 01:28:59'),
+('632', 'FR', 'Vous devez entrer un nom pour cette recherche.', '2015-08-25 01:28:59'),
+('633', 'FR', 'Il existe déjà une recherche avec ce nom.', '2015-08-25 01:28:59'),
+('634', 'FR', 'stockées', '2015-08-25 01:28:59'),
+('635', 'FR', 'Ecrase les anciens options de recherche', '2015-08-25 01:28:59'),
+('636', 'FR', '-- Sélectionnez la recherche d\'écraser --', '2015-08-25 01:28:59'),
+('637', 'FR', '-- Aucune recherche stockées trouvé --', '2015-08-25 01:28:59'),
+('638', 'FR', 'Mes recommandations', '2015-08-25 01:28:59'),
+('639', 'FR', 'Votre recommandation pour «\&nbsp;<a href=\"viewcache.php?wp=%1\">%2</a>\&nbsp;» a été supprimée.', '2015-08-25 01:28:59'),
+('640', 'FR', 'Retirer recommandation', '2015-08-25 01:28:59'),
+('641', 'FR', 'Vous n\'avez pas recommandé une géocache.', '2015-08-25 01:28:59'),
+('642', 'FR', 'Géocaches ignorés', '2015-08-25 01:28:59'),
+('643', 'FR', 'supprimer', '2015-08-25 01:28:59'),
+('644', 'FR', 'Vous n\'ignorez pas des géocaches en ce moment.', '2015-08-25 01:28:59'),
+('645', 'FR', 'Géocaches regardées - Paramètres', '2015-08-25 01:28:59'),
+('646', 'FR', 'Livraison\&nbsp;:', '2015-08-25 01:28:59'),
+('647', 'FR', 'Immédiat', '2015-08-25 01:28:59'),
+('648', 'FR', 'Tous les jours', '2015-08-25 01:28:59'),
+('649', 'FR', 'Hebdomadaire', '2015-08-25 01:28:59'),
+('650', 'FR', 'Envoyer à\&nbsp;:', '2015-08-25 01:28:59'),
+('651', 'FR', 'heures', '2015-08-25 01:28:59'),
+('652', 'FR', 'Envoyer en\&nbsp;:', '2015-08-25 01:28:59'),
+('653', 'FR', 'L\'heure et le jour envoyé est utilisé uniquement avec livraison quotidienne ou hebdomadaire.', '2015-08-25 01:28:59'),
+('654', 'FR', 'Erreur en essayant de sauver\&nbsp; les paramètres!', '2015-08-25 01:28:59'),
+('655', 'FR', 'Les paramètres ont été enregistrés.', '2015-08-25 01:28:59'),
+('656', 'FR', 'Géocaches regardées', '2015-08-25 01:28:59'),
+('657', 'FR', 'Dernière trouvé', '2015-08-25 01:28:59'),
+('658', 'FR', 'Aucunes géocaches regardées.', '2015-08-25 01:28:59'),
+('659', 'FR', 'E-mail de rappel', '2015-08-25 01:28:59'),
+('660', 'FR', 'Adresse e-mail de rappel', '2015-08-25 01:28:59'),
+('661', 'FR', 'Entrez votre nom d\'utilisateur et nous vous enverrons un rappel par e-mail à votre adresse e-mail.', '2015-08-25 01:28:59'),
+('662', 'FR', 'Entrez un nom d\'utilisateur.', '2015-08-25 01:28:59'),
+('663', 'FR', 'Utilisateur n\'existe pas.', '2015-08-25 01:28:59'),
+('664', 'FR', 'L\'e-mail de rappel a été envoyé.', '2015-08-25 01:28:59'),
+('665', 'FR', 'Rappel à votre adresse e-mail', '2015-08-25 01:28:59'),
+('666', 'FR', 'Votre adresse e-mail pour vous connecter :', '2015-08-25 01:28:59'),
+('667', 'FR', 'vous avez demandé un e-mail de rappel à %1.', '2015-08-25 01:28:59'),
+('668', 'FR', 'Cache-Recommandations', '2015-08-25 01:28:59'),
+('669', 'FR', 'L\'utilisateurs qui a recommandent %1 par %2 a également recommandent les géocaches suivantes\&nbsp;:', '2015-08-25 01:28:59'),
+('670', 'FR', 'Quota', '2015-08-25 01:28:59'),
+('671', 'FR', 'Pas de recommandations trouvées.', '2015-08-25 01:28:59'),
+('672', 'FR', 'Base de données maintenance', '2015-08-25 01:28:59'),
+('673', 'FR', 'DB Maintainance', '2015-08-25 01:28:59'),
+('674', 'FR', '%1 corrigé %2 entrées', '2015-08-25 01:28:59'),
+('675', 'FR', 'Exécuter', '2010-08-28 11:48:08'),
+('676', 'FR', 'Envoyer', '2010-08-28 11:48:08'),
+('677', 'FR', 'E-Mail de', '2010-08-28 11:48:08'),
+('678', 'FR', 'Désolé, le compte d\'utilisateur demandé est désactivé.', '2015-08-25 01:28:59'),
+('679', 'FR', 'Désolé, il n\'y a pas d\'adresse e-mail pour cet utilisateur.', '2015-08-25 01:28:59'),
+('680', 'FR', 'Une erreur inconnue est survenue et l\'e-mail n\'a pas été envoyé.', '2015-08-25 01:28:59'),
+('681', 'FR', '%1\' avez vous contacté via %2.\r\nLe profil de l\'utilisateur : %2viewprofile.php?userid=%3\r\nPour répondre à cet e-mail, utilisez le lien d\'e-mail sur le profil de l\'utilisateur.', '2015-08-25 01:28:59'),
+('682', 'FR', 'Objet\&nbsp;:', '2010-08-28 11:48:08'),
+('683', 'FR', 'Toutes les informations seront traitées confidentielles et non divulgués à des tiers\&nbsp;!', '2015-08-25 01:28:59'),
+('684', 'FR', '%1\' avec l\'adresse e-mail %2 a vous contacté via %3.\r\nLe profil de l\'utilisateur : %3viewprofile.php?userid=%4\r\nUtilisez le bouton de réponse de votre agent d\'e-mail pour répondre à cette e-mail.', '2010-08-28 11:48:08'),
+('685', 'FR', 'L\'e-mail à %1 est envoyé.', '2015-08-25 01:28:59'),
+('686', 'FR', 'Contenu:', '2010-08-28 11:48:08'),
+('687', 'FR', 'Envoyer un e-mail à %1', '2015-08-25 01:28:59'),
+('688', 'FR', 'Vous devez entrer un sujet\&nbsp;!', '2015-08-25 01:28:59'),
+('689', 'FR', 'Vous devez entrer un contenu\&nbsp;!', '2015-08-25 01:28:59'),
+('690', 'FR', 'Envoyer mon adresse e-mail avec ce message', '2015-08-25 01:28:59'),
+('691', 'FR', 'Cela permet au récepteur de répondre à votre e-mail directement avec son agent d\'e-mail. Vous pouvez activer cette option par défaut dans votre <a href=\"myprofile.php\">profil de l\'utilisateur</a>.', '2015-08-25 01:28:59'),
+('692', 'FR', 'Pour vous et nous protéger contre les abus\&nbsp;:', '2015-08-25 01:28:59'),
+('693', 'FR', 'Seulement des e-mails qui concernent géocaching sont autorisés. Spaming n\'est pas autorisé\&nbsp;!', '2015-08-25 01:28:59'),
+('694', 'FR', 'Toutes les informations pertinentes seront enregistrées (date / heure, émetteur / récepteur et l\'adresse IP).', '2015-08-25 01:28:59'),
+('696', 'FR', 'Désolé, la géocache n\'est pas publiée.', '2015-08-25 01:28:59'),
+('697', 'FR', 'Afficher tous les logs', '2015-08-25 01:28:59'),
+('698', 'FR', 'Afficher cette géocache', '2010-08-28 11:48:08'),
+('699', 'FR', 'Vous êtes déjà connecté.<br /> S\'il vous plaît <a href=\"login.php?action=logout\">déconnecter</a> pour se connecter à nouveau.', '2015-08-25 01:28:59'),
+('701', 'FR', 'Difficulté\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2010-08-28 11:48:08'),
+('702', 'FR', 'Terrain\&nbsp;:\&nbsp;%1\&nbsp;des\&nbsp;5', '2015-08-25 01:28:59'),
+('703', 'FR', 'Liste des participants', '2015-08-25 01:28:59'),
+('704', 'FR', 'Enregistrer un log', '2015-08-25 01:28:59'),
+('705', 'FR', 'Ne regardez pas', '2015-08-25 01:29:13'),
+('706', 'FR', 'Regardez', '2015-08-25 01:29:13'),
+('707', 'FR', 'N\'ignorez pas', '2015-08-25 01:28:59'),
+('708', 'FR', 'Ignorer', '2010-08-28 11:48:08'),
+('709', 'FR', 'Vue d\'impression', '2010-08-28 11:48:08'),
+('710', 'FR', 'Autres systèmes de coordonnées', '2010-08-28 11:48:08'),
+('711', 'FR', 'Taille', '2015-08-25 01:28:59'),
+('712', 'FR', 'Temps nécessaire\&nbsp;:', '2015-08-25 01:28:59'),
+('713', 'FR', 'Distance', '2010-08-28 11:48:08'),
+('715', 'FR', 'Caché en\&nbsp;:', '2015-08-25 01:28:59'),
+('716', 'FR', 'Listé depuis', '2015-08-25 01:28:59'),
+('717', 'FR', 'Dernière mise à jour\&nbsp;:', '2015-08-25 01:28:59'),
+('718', 'FR', 'Waypoint', '2010-08-28 11:48:08'),
+('719', 'FR', 'Aussi listé au\&nbsp;:', '2015-08-25 01:28:59'),
+('720', 'FR', 'Remarques', '2015-08-25 01:28:59'),
+('721', 'FR', 'Observateurs', '2015-08-25 01:28:59'),
+('722', 'FR', 'Ignoré', '2010-08-28 11:48:08'),
+('723', 'FR', 'Visites de la page', '2015-08-25 01:28:59'),
+('724', 'FR', 'Attributs de cache', '2015-08-25 01:28:59'),
+('725', 'FR', 'Indice additionnels', '2015-08-25 01:28:59'),
+('726', 'FR', 'Déchiffrer', '2010-08-28 11:48:08'),
+('727', 'FR', 'Images', '2010-08-28 11:48:08'),
+('728', 'FR', 'Utilités', '2010-08-28 11:48:08'),
+('729', 'FR', 'Montrer les recommandations de cache des utilisateurs qui ont recommandé ce géocache\&nbsp;: <a href=\"recommendations.php?cacheid=%1\">tout</a>', '2015-08-25 01:28:59'),
+('730', 'FR', 'Chercher des géocaches prés:', '2010-08-28 11:48:08'),
+('731', 'FR', 'tous', '2010-08-28 11:48:08'),
+('732', 'FR', 'trouvable', '2010-08-28 11:48:08'),
+('733', 'FR', 'Télécharger en fichier\&nbsp;:', '2010-08-28 11:48:08'),
+('734', 'FR', 'GPS Exchange Format .gpx', '2010-08-28 11:48:08'),
+('735', 'FR', 'Fichier waypoint .loc', '2015-08-25 01:28:59'),
+('736', 'FR', 'Google Earth .kml', '2010-08-28 11:48:08'),
+('737', 'FR', 'TomTom POI .ov2', '2015-08-25 01:28:59'),
+('738', 'FR', 'TOP50-Overlay .ovl', '2015-08-25 01:28:59'),
+('739', 'FR', 'Fichier text .txt', '2015-08-25 01:28:59'),
+('740', 'FR', 'C O P I E', '2010-08-28 11:48:08'),
+('741', 'FR', 'Modifier l\'image', '2015-08-25 01:28:59'),
+('742', 'FR', 'Désolé, l\'image demandée n\'existe pas.', '2015-08-25 01:28:59'),
+('743', 'FR', 'Désolé, le cachelog demandé n\'existe pas.', '2015-08-25 01:28:59'),
+('744', 'FR', 'Afficher les statistiques', '2015-08-25 01:28:59'),
+('745', 'FR', 'Âge', '2015-08-25 01:28:59'),
+('747', 'FR', 'Emplacement', '2015-08-25 01:28:59'),
+('748', 'FR', 'MiniMap-Zoom', '2015-08-25 01:28:59'),
+('749', 'FR', 'Signaler cache', '2015-08-25 01:28:59'),
+('750', 'FR', 'Caches signalés', '2015-08-25 01:28:59'),
+('751', 'FR', 'Fichier\&nbsp;:', '2015-08-25 01:28:59'),
+('752', 'FR', 'S\'il vous plaît donner un nom à cette image\&nbsp;!', '2015-08-25 01:28:59'),
+('753', 'FR', 'Ajouter une image pour ces géocaches %1', '2015-08-25 01:28:59'),
+('754', 'FR', 'Ajouter une image pour log %1', '2015-08-25 01:28:59'),
+('755', 'FR', 'Modifier l\'image pour ces géocaches %1', '2015-08-25 01:28:59'),
+('756', 'FR', 'Modifier l\'image pour log %1', '2015-08-25 01:28:59'),
+('757', 'FR', 'Nom\&nbsp;:', '2015-08-25 01:28:59'),
+('758', 'FR', 'Donner un nom à cette image\&nbsp;!', '2015-08-25 01:28:59'),
+('759', 'FR', 'Après cliquer <i>télécharger</i>, il peut prendre un certain temps jusqu\'à ce que la page suivante est démontrée.', '2015-08-25 01:28:59'),
+('760', 'FR', 'Cette image est un spoiler - ne montre pas une vignette.', '2015-08-25 01:28:59'),
+('761', 'FR', 'Télécharger', '2015-08-25 01:28:59'),
+('762', 'FR', 'Seuls les formats d\'image suivants sont autorisés\&nbsp;: %1. Nous recommandons JPEG pour les images.', '2015-08-25 01:28:59'),
+('763', 'FR', 'La taille de fichier des image ne doit pas %1 Ko. Nous recommandons 640x480 pixel de la taille de l\'image.', '2015-08-25 01:28:59'),
+('764', 'FR', 'Rapport pour %1 soumis', '2015-08-25 01:28:59'),
+('765', 'FR', 'Raison\&nbsp;:', '2015-08-25 01:28:59'),
+('766', 'FR', 'Commentaire\&nbsp;:', '2015-08-25 01:29:00'),
+('767', 'FR', 'Rapport %1', '2015-08-25 01:29:00'),
+('768', 'FR', 'Vous devez sélectionner une raison pour votre rapport\&nbsp;!', '2015-08-25 01:29:00'),
+('769', 'FR', 'Commentaire\&nbsp;: (obligatoire)', '2015-08-25 01:29:00'),
+('770', 'FR', 'Il est nécessaire d\'entrer un commentaire pour signaler un cache\&nbsp;!', '2015-08-25 01:29:00'),
+('771', 'FR', 'Une erreur inconnue est survenue. Rapport échoué.', '2015-08-25 01:29:00'),
+('772', 'FR', 'Rapport caché', '2015-08-25 01:29:00'),
+('773', 'FR', 'NOUVEAU', '2015-08-25 01:29:00'),
+('774', 'FR', 'En cours', '2015-08-25 01:29:00'),
+('775', 'FR', 'Terminé', '2015-08-25 01:29:00'),
+('776', 'FR', 'Cache sur une propriété privée', '2015-08-25 01:29:00'),
+('777', 'FR', 'Une violation de copyright', '2015-08-25 01:29:00'),
+('778', 'FR', 'Cache est parti', '2015-08-25 01:29:00'),
+('779', 'FR', 'Autre raison', '2015-08-25 01:29:00'),
+('780', 'FR', 'Le rapport est déjà affecté à un autre administrateur\&nbsp;! Il doit être âgé d\'au moins deux semaines avant de pouvoir l\'assumer.', '2015-08-25 01:29:00'),
+('781', 'FR', 'Le rapport est déjà affecté à vous\&nbsp;!', '2015-08-25 01:29:00'),
+('782', 'FR', 'Vous ne pouvez pas travailler sur ce rapport\&nbsp;! Un autre administrateur le poursuit déjà.', '2015-08-25 01:29:00'),
+('783', 'FR', 'Pour travailler sur un rapport vous devez l\'attribuer à vous\&nbsp;!', '2015-08-25 01:29:00'),
+('784', 'FR', 'Aucuns caches signalés', '2015-08-25 01:29:00'),
+('785', 'FR', 'Détails pour rapport', '2015-08-25 01:29:00'),
+('786', 'FR', ' par ', '2015-08-25 01:29:00'),
+('787', 'FR', 'pas attribué', '2015-08-25 01:29:00'),
+('788', 'FR', 'Attribuer à moi', '2015-08-25 01:29:00'),
+('789', 'FR', 'Contacter le propriétaire', '2015-08-25 01:29:00'),
+('792', 'FR', 'Marquer comme terminée', '2015-08-25 01:29:00'),
+('793', 'FR', 'Action', '2015-08-25 01:29:00'),
+('794', 'FR', 'Avant de signaler un cache à l\'équipe d\'Opencaching vous devriez essayer de contacter le propriétaire pour résoudre les problèmes possibles immédiatement de l\'utilisateur à l\'utilisateur. Cela ne vaut pas pour les caches violant les termes d\'utilisation d\'Opencaching d\'une manière qui exige une action immédiate d\'un administrateur d\'Opencaching.', '2015-08-25 01:29:00'),
+('795', 'FR', 'Ne pas afficher séparément cette image (utilisée dans la description HTML, etc.)', '2015-08-25 01:29:00'),
+('796', 'FR', 'Aucune information sur les détails de l\'utilisateur trouvé.', '2015-08-25 01:29:00'),
+('797', 'FR', 'Coordonnées', '2015-08-25 01:29:00'),
+('798', 'FR', 'Geokrets', '2015-08-25 01:29:00'),
+('799', 'FR', 'Détails', '2015-08-25 01:29:00'),
+('801', 'FR', 'Détails de l\'utilisateur', '2015-08-25 01:29:00'),
+('802', 'FR', 'Mes détails de profile', '2015-08-25 01:29:00'),
+('803', 'FR', 'Les informations supplémentaires suivantes sont stockées dans votre profil de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00'),
+('805', 'FR', 'Erreur lors de l\'enregistrement.', '2015-08-25 01:29:00'),
+('806', 'FR', 'Caractères illégaux trouvés dans', '2015-08-25 01:29:00'),
+('807', 'FR', 'Les valeurs de champs trop longtemps dans', '2015-08-25 01:29:00'),
+('808', 'FR', 'Les valeurs d\'origine ont été restaurés.', '2015-08-25 01:29:00'),
+('809', 'FR', 'visible', '2015-08-25 01:29:00'),
+('810', 'FR', 'invisible', '2015-08-25 01:29:00'),
+('811', 'FR', 'interne', '2015-08-25 01:29:00'),
+('812', 'FR', '(*) Nouveaux rapports', '2015-08-25 01:29:00'),
+('814', 'FR', 'Statistiques de l\'utilisateur', '2015-08-25 01:29:00'),
+('815', 'FR', 'Afficher', '2015-08-25 01:29:00'),
+('817', 'FR', 'La géocache a été verrouillé par un administrateur parce qu\'il n\'a pas respecté les termes d\'utilisation d\'Opencaching. Si vous souhaitez le déverrouiller, contacter nous en utilisant le «\&nbsp;rapport cache\&nbsp;» -link. S\'il vous plaît choisissez «\&nbsp;autre\&nbsp;» comme raison et expliquer brièvement ce que vous avez changé de rendre la liste conforme à nos conditions d\'utilisation. Merci\&nbsp;!', '2015-08-25 01:29:00'),
+('818', 'FR', '/sql/static-data/data.sql a été changé avec la dernière checkout CVS <br />Avant de changer des translastions, de base de données mise à jour avec data.sql\&nbsp;!<br/> \&nbsp;', '2015-08-25 01:29:00'),
+('819', 'FR', 'Désolé, la géocache est verrouillé et ne peut pas être consulté.', '2015-08-25 01:29:00'),
+('821', 'FR', 'verrouillé, visible', '2015-08-25 01:29:00'),
+('822', 'FR', 'verrouillée, invisible', '2015-08-25 01:29:00'),
+('823', 'FR', 'Dernière mise à jour', '2015-08-25 01:29:00'),
+('826', 'FR', '-- S\'il vous plaît sélectionner ! --', '2015-08-25 01:29:00'),
+('827', 'FR', 'Adoptions', '2015-08-25 01:29:00'),
+('828', 'FR', 'Date', '2015-08-25 01:29:00'),
+('829', 'FR', 'Oui, je l\'ai lu et je respecterai les Opencaching.de <a href=\"articles.php?page=impressum#tos\">termes d\'utilisation</a>.', '2015-08-25 01:29:00'),
+('830', 'FR', 'Pour compléter l\'adoption, vous devez soumettre ce formulaire.<br />Avec soumettant ce formulaire, vous êtes le propriétaire responsable de ce géocache.', '2015-08-25 01:29:00'),
+('831', 'FR', '<strong>%1</strong> vous offert cette géocache pour adoption à %2.', '2015-08-25 01:29:00'),
+('832', 'FR', 'Merci pour l\'adoption de <strong>%1</strong>.', '2015-08-25 01:29:00'),
+('833', 'FR', 'Engager l\'adoption de %1', '2015-08-25 01:29:00'),
+('834', 'FR', 'Il n\'y a pas de caches qui peuvent être adoptées par vous en ce moment.', '2015-08-25 01:29:00'),
+('835', 'FR', 'Adopter maintenant', '2015-08-25 01:29:00'),
+('836', 'FR', 'Des géocaches qui le propriétaire vous propose pour adoption', '2015-08-25 01:29:00'),
+('837', 'FR', 'Oui, j\'ai lu et compris ce qui est précède et je suis d\'accord.', '2015-08-25 01:29:00'),
+('839', 'FR', 'Offre <b>%1</b> pour adoption', '2015-08-25 01:29:00'),
+('840', 'FR', 'Vous n\' avez pas invité tous les utilisateurs à adopter cette cache.', '2015-08-25 01:29:00'),
+('841', 'FR', 'Rejeter l\'adoption', '2015-08-25 01:29:00'),
+('842', 'FR', 'Liste des utilisateurs auxquels vous avez offert %1 pour adoption', '2015-08-25 01:29:00'),
+('843', 'FR', 'Nom d\'utilisateur inconnu', '2015-08-25 01:29:00'),
+('844', 'FR', 'Vous ne pouvez pas adopter votre propre cache\&nbsp;!', '2015-08-25 01:29:00'),
+('845', 'FR', 'Désolé, il faut lire et accepter le dessus pour continuer\&nbsp;!', '2015-08-25 01:29:00'),
+('846', 'FR', 'Désolé, il faut lire et accepter les conditions d\'utilisation pour continuer\&nbsp;!', '2015-08-25 01:29:00'),
+('847', 'FR', 'Cette règle garantit que votre mot de passe ne peut pas être deviné par un script automatisé.', '2015-08-25 01:29:00'),
+('849', 'FR', 'Pas tous les caractères sont autorisés. Vous ne pouvez qu\'utiliser lettres latino-européennes, 0-9 et .-_ @=)(/\\\&amp;*+~#.', '2015-08-25 01:29:00'),
+('850', 'FR', 'Ne pas utiliser les mots du dictionnaire comme «\&nbsp;master\&nbsp;».', '2015-08-25 01:29:00'),
+('851', 'FR', 'Ne pas utiliser des mots de géocaching communs.', '2015-08-25 01:29:00'),
+('852', 'FR', 'Ne pas utiliser des parties de votre nom d\'utilisateur, nom ou adresse e-mail.', '2015-08-25 01:29:00'),
+('853', 'FR', 'Entre 6 et 60 caractères de longueur', '2015-08-25 01:29:00'),
+('854', 'FR', 'S\'il vous plaît vérifiez que votre mot de passe correspond aux critères suivants\&nbsp;:', '2015-08-25 01:29:00'),
+('855', 'FR', 'Votre mot de passe n\'a pas passé notre contrôle de sécurité.', '2015-08-25 01:29:00'),
+('856', 'FR', 'Monténégro', '2015-08-25 01:29:00'),
+('857', 'FR', 'Serbie', '2015-08-25 01:29:00'),
+('858', 'FR', '* Si l\'utilisateur déconnecté explicitement après la visite de la page ou si la dernière connexion<br />est plus de 90 jours, la dernière connexion ne peut pas être déterminée.', '2015-08-25 01:29:00'),
+('859', 'FR', 'Gérer les utilisateurs', '2015-08-25 01:29:00'),
+('860', 'FR', 'Sûr\&nbsp;?', '2015-08-25 01:29:00'),
+('861', 'FR', 'Désactiver (et verrouiller toutes les géocaches appartenant)', '2015-08-25 01:29:00'),
+('862', 'FR', 'inconnu', '2015-08-25 01:29:00'),
+('863', 'FR', 'Dernière connexion connue\&nbsp;:', '2015-08-25 01:29:00'),
+('864', 'FR', 'Géocaches actives\&nbsp;:', '2015-08-25 01:29:00'),
+('865', 'FR', 'Total caché\&nbsp;:', '2015-08-25 01:29:00'),
+('866', 'FR', 'Logs\&nbsp;:', '2015-08-25 01:29:00'),
+('867', 'FR', 'Utilisateur actif\&nbsp;:', '2015-08-25 01:29:00'),
+('868', 'FR', 'Date de création\&nbsp;:', '2015-08-25 01:29:00'),
+('869', 'FR', 'Afficher les détails du compte d\'utilisateur', '2015-08-25 01:29:00'),
+('870', 'FR', 'Détails du compte d\'utilisateur', '2015-08-25 01:29:00'),
+('871', 'FR', 'E-Mail\&nbsp;:', '2015-08-25 01:29:00'),
+('872', 'FR', 'Téléchargement Waypoint', '2015-08-25 01:29:00'),
+('873', 'FR', 'Nouvelles approuve', '2015-08-25 01:29:00'),
+('874', 'FR', 'Ne pas afficher', '2015-08-25 01:29:00'),
+('875', 'FR', 'Terrain', '2015-08-25 01:29:00'),
+('876', 'FR', 'Difficulté', '2015-08-25 01:29:00'),
+('877', 'FR', 'Envoyer cette waypoint à un appareil GPS\&nbsp;:', '2015-08-25 01:29:00'),
+('882', 'FR', 'Meilleures notes actuelles', '2015-08-25 01:29:00'),
+('884', 'FR', '%1 Recommandations dans les 30 derniers jours', '2015-08-25 01:29:00'),
+('885', 'FR', 'Vous pouvez trouver plus de recommandations \&gt;<a href=\"tops.php\">ici</a>\&lt;.', '2015-08-25 01:29:00'),
+('887', 'FR', 'Dernière\&nbsp;connexion\&nbsp;:', '2015-08-25 01:29:00'),
+('888', 'FR', 'Dans le dernier mois', '2015-08-25 01:29:00'),
+('889', 'FR', 'Entre 1 et 6 mois', '2015-08-25 01:29:00'),
+('890', 'FR', 'Entre 6 et 12 mois', '2015-08-25 01:29:00'),
+('891', 'FR', 'Entre 1 et 2 ans', '2015-08-25 01:29:00'),
+('892', 'FR', 'Le compte d\'utilisateur a été désactivé.', '2015-08-25 01:29:00'),
+('893', 'FR', 'Un nouveau message d\'activation a été envoyé.', '2015-08-25 01:29:00'),
+('894', 'FR', 'de', '2015-08-25 01:29:00'),
+('900', 'FR', 'Les dons', '2015-08-25 01:29:00'),
+('902', 'FR', 'Texte', '2015-08-25 01:29:00'),
+('905', 'FR', 'OC-Waypoint', '2015-08-25 01:29:00'),
+('906', 'FR', 'Conditions d\'utilisation', '2015-08-25 01:29:00'),
+('907', 'FR', 'Notre Équipe', '2015-08-25 01:29:00'),
+('914', 'FR', 'zone de protection de la nature', '2015-08-25 01:29:00'),
+('915', 'FR', 'Balayage complet', '2015-08-25 01:29:00'),
+('916', 'FR', 'Fichier en cours\&nbsp;:', '2015-08-25 01:29:00'),
+('921', 'FR', 'Infos', '2015-08-25 01:29:00'),
+('922', 'FR', 'FR', '2010-08-28 11:48:08'),
+('923', 'FR', 'La compilation de ce modèle ratée. Cela devrait être un échec temporaire. S\'il vous plaît essayer de nouveau dans quelques minutes.', '2010-08-28 11:48:08'),
+('933', 'FR', 'Scan codes source', '2015-08-25 01:29:00'),
+('954', 'FR', 'Par défaut', '2015-08-25 01:29:00'),
+('1059', 'FR', 'Il existe déjà un compte avec ce nom d\'utilisateur.', '2015-08-25 01:29:00'),
+('1060', 'FR', 'Opencaching-Wiki', '2015-08-25 01:29:00'),
+('1061', 'FR', 'Conditions d\'utilisation et renseignements juridiques', '2015-08-25 01:29:00'),
+('1062', 'FR', 'Performance de la page\&nbsp;:', '2015-08-25 01:29:00'),
+('1063', 'FR', 'Création de la page\&nbsp;:', '2015-08-25 01:29:00'),
+('1097', 'FR', 'D/T', '2015-08-25 01:29:00'),
+('1123', 'FR', 'Nom\&nbsp;de\&nbsp;cache', '2015-08-25 01:29:00'),
+('1141', 'FR', 'N', '2015-08-25 01:29:00'),
+('1142', 'FR', 'S', '2015-08-25 01:29:00'),
+('1143', 'FR', 'E', '2015-08-25 01:29:00'),
+('1144', 'FR', 'O', '2015-08-25 01:29:00'),
+('1146', 'FR', 'Kilomètre', '2015-08-25 01:29:00'),
+('1164', 'FR', 'Quelques autres articles trouvés ...', '2015-08-25 01:29:00'),
+('1165', 'FR', 'ville, nom de cache ou waypoint', '2015-08-25 01:29:00'),
+('1166', 'FR', 'Afficher un lien vers cette carte', '2015-08-25 01:29:00'),
+('1206', 'FR', 'km', '2015-08-25 01:29:00'),
+('1208', 'FR', 'h', '2015-08-25 01:29:00'),
+('1269', 'FR', 'Carte', '2015-08-25 01:29:00'),
+('1272', 'FR', 'Passer en plein écran', '2015-08-25 01:29:00'),
+('1275', 'FR', 'Menu', '2015-08-25 01:29:00'),
+('1278', 'FR', 'Éditeur', '2015-08-25 01:29:00'),
+('1279', 'FR', '\&lt;html\&gt;', '2015-08-25 01:29:00'),
+('1292', 'FR', 'Réglage de smileys n\\\'est pas pris en charge.', '2015-08-25 01:29:00'),
+('1296', 'FR', 'Seulement les formats d\'image suivants sont autorisés\&nbsp;: %1.', '2015-08-25 01:29:00'),
+('1297', 'FR', 'à', '2015-08-25 01:29:00'),
+('1298', 'FR', 'La liste suivante est automatiquement générée par les recommandations données des utilisateurs. Vous pouvez trouver plus d\'informations sur la classification régionale dans le <a href=\"http://wiki.opencaching.de/index.php/Empfehlungen\">Wiki</a>.<br /><br />Les chiffres dans la liste ci-dessous signifie\&nbsp;:<br /><img src=\"images/rating-star.gif\" border=\"0\" alt=\"Recommandations\" /> Nombre d\'utilisateurs qui recommandent ce cache<br /><img src=\"resource2/%2/images/log/16x16-found.png\" width=\"16\" height=\"16\" border=\"0\" alt=\"Trouvé\" /> Contrôles = Nombre de fois que le cache a été trouvé<br />Index tente de prendre le nombre de recommandations et fonde dans un ordre qui d\'abord montrer «\&nbsp;le meilleur\&nbsp;» géocache.<br /><img src=\"images/tops-formula.png\" border=\"0\" alt=\"formule\" />', '2015-08-25 01:29:00'),
+('1299', 'FR', 'Téléchargement du fichier raté\&nbsp;!', '2015-08-25 01:29:00'),
+('1300', 'FR', 'Le fichier XML n\'a pas pu être téléchargé\&nbsp;!', '2015-08-25 01:29:00'),
+('1301', 'FR', 'SQL Export', '2015-08-25 01:29:00'),
+('1302', 'FR', 'Télécharger XML', '2015-08-25 01:29:00'),
+('1303', 'FR', 'XML Import', '2015-08-25 01:29:00'),
+('1304', 'FR', 'Le fichier XML contient des traductions\&nbsp;:', '2015-08-25 01:29:00'),
+('1305', 'FR', 'Vérifiez les langues suivantes dans le fichier XML\&nbsp;:', '2015-08-25 01:29:00'),
+('1306', 'FR', 'Analyser le fichier', '2015-08-25 01:29:00'),
+('1307', 'FR', 'Le code de source est modifié, le texte n\'est plus utilisé', '2015-08-25 01:29:00'),
+('1308', 'FR', 'Nouvelle traduction', '2015-08-25 01:29:00'),
+('1309', 'FR', 'Traduction modifiée', '2015-08-25 01:29:00'),
+('1310', 'FR', 'vieux', '2015-08-25 01:29:00'),
+('1311', 'FR', 'Basculer tous', '2015-08-25 01:29:00'),
+('1312', 'FR', 'Commettre', '2015-08-25 01:29:00'),
+('1315', 'FR', 'Date\&nbsp;:', '2015-08-25 01:29:00'),
+('1316', 'FR', 'Log-entry\&nbsp;:', '2015-08-25 01:29:00'),
+('1317', 'FR', 'Mot de passe pour vous log\&nbsp;:', '2015-08-25 01:29:00'),
+('1319', 'FR', 'Mot de passe incorrect\&nbsp;!', '2015-08-25 01:29:00'),
+('1322', 'FR', 'Nouveau log-entry', '2015-08-25 01:29:00'),
+('1323', 'FR', 'Type de log-entry\&nbsp;:', '2015-08-25 01:29:00'),
+('1326', 'FR', 'Recommandations\&nbsp;:', '2015-08-25 01:29:00'),
+('1327', 'FR', 'Une recommandation ne peut pas être faite avec un \"trouvé\" ou \"assisté\" log\&nbsp;!', '2015-08-25 01:29:00'),
+('1328', 'FR', 'Ce cache est un de mes recommandations.', '2015-08-25 01:29:00'),
+('1329', 'FR', 'Alternativement, vous pouvez retirer une <a href=\"mytop5.php\">recommandation existant<a>.', '2015-08-25 01:29:00'),
+('1330', 'FR', 'Vous avez donné %1 de %2 recommandations possibles.', '2015-08-25 01:29:00'),
+('1331', 'FR', 'Dangers', '2015-08-25 01:29:00'),
+('1332', 'FR', 'Infrastructure', '2015-08-25 01:29:00'),
+('1333', 'FR', 'Waypoints', '2015-08-25 01:29:00'),
+('1334', 'FR', 'Général', '2015-08-25 01:29:00'),
+('1335', 'FR', 'Temps', '2015-08-25 01:29:00'),
+('1336', 'FR', 'Saisonnier', '2015-08-25 01:29:00'),
+('1337', 'FR', 'Inscription', '2015-08-25 01:29:00'),
+('1338', 'FR', 'Outils nécessaires', '2015-08-25 01:29:00'),
+('1339', 'FR', 'Préparation nécessaire', '2015-08-25 01:29:00'),
+('1340', 'FR', 'Personnes', '2015-08-25 01:29:00'),
+('1341', 'FR', 'Transport', '2015-08-25 01:29:00'),
+('1342', 'FR', 'Propriétés', '2015-08-25 01:29:00'),
+('1343', 'FR', 'Restrictions / Conditions préalables', '2015-08-25 01:29:00'),
+('1344', 'FR', 'Recommandations / Interdictions', '2015-08-25 01:29:00'),
+('1345', 'FR', 'Seulement loggable au Opencaching', '2015-08-25 01:29:00'),
+('1346', 'FR', 'Temps et des efforts (facultatif)\&nbsp;:', '2015-08-25 01:29:00'),
+('1347', 'FR', 'Bien entendu, cet effort ne peut qu\'être estimée et peut varier en fonction des influences enviromentals. Si vous ne pouvez pas faire suffisamment d\'informations détaillées, remplir les deux champs avec un 0 (zéro).', '2015-08-25 01:29:00'),
+('1348', 'FR', 'Waypoints (facultatif)\&nbsp;:', '2015-08-25 01:29:00'),
+('1349', 'FR', 'Cette waypoints seront utilisés pour afficher des liens dans le cache de la vue et dans la page de log.', '2015-08-25 01:29:00'),
+('1350', 'FR', 'Aucunes données seront importées automatiquement de ces services de liste.', '2015-08-25 01:29:00'),
+('1351', 'FR', 'Descriptions', '2015-08-25 01:29:00'),
+('1352', 'FR', 'Ajouter description dans une autre langue', '2015-08-25 01:29:00'),
+('1353', 'FR', 'Votre description contient au moins un lien vers une image hébergée sur geocaching.com\&nbsp;!', '2015-08-25 01:29:00'),
+('1354', 'FR', 'Pour éviter des problèmes avec geocaching.com veuillez-vous télécharger toutes les images liées à%1 et relier les images dans le code HTML de ceux-ci sur %1.', '2015-08-25 01:29:00'),
+('1355', 'FR', 'Télécharger une image', '2015-08-25 01:29:00'),
+('1356', 'FR', 'Affiché depuis\&nbsp;:', '2015-08-25 01:29:00'),
+('1357', 'FR', 'Ce cache est le vôtre', '2015-08-25 01:29:00'),
+('1358', 'FR', 'Vous avez trouvé ce cache', '2015-08-25 01:29:00'),
+('1359', 'FR', 'Vous avez pas encore trouvé ce cache', '2015-08-25 01:29:00'),
+('1360', 'FR', 'Ce cache stocke une Geokrety', '2015-08-25 01:29:00'),
+('1361', 'FR', 'Ce cache a %1 recommandations', '2015-08-25 01:29:00'),
+('1362', 'FR', 'Modifier le entrée du log pour le cache %1', '2015-08-25 01:29:00'),
+('1363', 'FR', 'Type de log-entry', '2015-08-25 01:29:00'),
+('1364', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez saisir du texte seulement. Pour utiliser HTML ou l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00'),
+('1365', 'FR', 'Noveau cache', '2015-08-25 01:29:00'),
+('1366', 'FR', 'Propriétaire\&nbsp;:', '2015-08-25 01:29:00'),
+('1367', 'FR', 'Types de géocaches\&nbsp;:', '2015-08-25 01:29:00'),
+('1368', 'FR', 'Taille\&nbsp;:', '2015-08-25 01:29:00'),
+('1369', 'FR', 'Coordonnées\&nbsp;:', '2015-08-25 01:29:00'),
+('1370', 'FR', 'Notation\&nbsp;:', '2015-08-25 01:29:00'),
+('1371', 'FR', 'Difficulté\&nbsp;:', '2015-08-25 01:29:00'),
+('1372', 'FR', 'Terrain\&nbsp;:', '2015-08-25 01:29:00'),
+('1373', 'FR', 'Effort de temps\&nbsp;:', '2015-08-25 01:29:00'),
+('1374', 'FR', 'Avis', '2015-08-25 01:29:00'),
+('1376', 'FR', 'Invisible depuis\&nbsp;:', '2015-08-25 01:29:00'),
+('1377', 'FR', '(Laisser vide pour aucun mot de passe)', '2015-08-25 01:29:00'),
+('1378', 'FR', 'S\'il vous plaît noter la <a href=\"articles.php?page=cacheinfo#logpw\" target=\"_blank\">description</a>', '2015-08-25 01:29:00'),
+('1379', 'FR', 'Moins', '2015-08-25 01:29:00'),
+('1380', 'FR', 'Recherche de caches', '2015-08-25 01:29:00'),
+('1381', 'FR', 'Javascript est désactivé, vous ne pouvez pas utiliser les options ci-dessus (caches masquer .. résultats de tri) - recherche de base fonctionne néanmoins.', '2015-08-25 01:29:00'),
+('1382', 'FR', 'Tri des résultats\&nbsp;:', '2015-08-25 01:29:00'),
+('1383', 'FR', 'Dernier log', '2015-08-25 01:29:00'),
+('1384', 'FR', 'Afficher les caches recommandées par d\'autres utilisateurs premier', '2015-08-25 01:29:00'),
+('1386', 'FR', 'Cacher des caches suivants\&nbsp;:', '2015-08-25 01:29:00'),
+('1387', 'FR', 'mes propriété', '2015-08-25 01:29:00'),
+('1388', 'FR', 'mes trouvailles', '2015-08-25 01:29:00'),
+('1389', 'FR', 'mes ignoré', '2015-08-25 01:29:00'),
+('1391', 'FR', 'inactif', '2015-08-25 01:29:00'),
+('1392', 'FR', 'Cache attributs\&nbsp;:', '2015-08-25 01:29:00'),
+('1396', 'FR', 'Milles', '2015-08-25 01:29:00'),
+('1397', 'FR', 'Milles marins', '2015-08-25 01:29:00'),
+('1399', 'FR', 'Code postal\&nbsp;:', '2015-08-25 01:29:00'),
+('1400', 'FR', 'Ville\&nbsp;:', '2015-08-25 01:29:00'),
+('1404', 'FR', 'Type de log\&nbsp;:', '2015-08-25 01:29:00'),
+('1405', 'FR', 'erreur lors de chargement de la page', '2015-08-25 01:29:00'),
+('1406', 'FR', 'Dans une tentative de créer la page, une erreur est survenue. Si vous passez par un lien hypertexte sur notre page et si le problème persiste, ne pas hésiter à nous contacter par e-mail.', '2015-08-25 01:29:00'),
+('1408', 'FR', 'Page\&nbsp;:', '2015-08-25 01:29:00'),
+('1411', 'FR', 'êtes-vous sûr que cette entrée du log doit être supprimé\&nbsp;?', '2015-08-25 01:29:00'),
+('1412', 'FR', 'voulez-vous envoyer à {log_user_name} une note\&nbsp;?', '2015-08-25 01:29:00'),
+('1413', 'FR', 'Retirer entrée du log', '2015-08-25 01:29:00'),
+('1414', 'FR', 'date est invalide', '2015-08-25 01:29:00'),
+('1415', 'FR', 'seulement pour les logs trouvés', '2015-08-25 01:29:00'),
+('1416', 'FR', 'Proposez une nouvelle cache', '2015-08-25 01:29:00'),
+('1417', 'FR', 'Si ceci est votre première cache sur %1, assurez-vous de vérifier la <a href=\"articles.php?page=cacheinfo\">description</a> des champs individuels.', '2015-08-25 01:29:00'),
+('1418', 'FR', 'Distance\&nbsp;:', '2015-08-25 01:29:00'),
+('1419', 'FR', 'L\'effort est seulement estimé et peut varier en fonction des influences de l\'environnement. Si vous ne pouvez pas faire suffisamment d\'informations détaillées, écrire 0 (zéro) dans les deux champs. (Voir aussi\&nbsp;: <a href=\"articles.php?page=cacheinfo#time\" target=\"_blank\">Description</a>)', '2015-08-25 01:29:00'),
+('1420', 'FR', 'Langue\&nbsp;:', '2015-08-25 01:29:00'),
+('1421', 'FR', 'Vous pouvez ajouter des descriptions dans d\'autres langues en publiant le cache.', '2015-08-25 01:29:00'),
+('1422', 'FR', 'Brève description\&nbsp;:', '2015-08-25 01:29:00'),
+('1423', 'FR', 'Description\&nbsp;:', '2015-08-25 01:29:00'),
+('1425', 'FR', 'Note supplémentaire\&nbsp;:', '2015-08-25 01:29:00'),
+('1426', 'FR', 'Vous pouvez ajouter des images supplémentaires après la création du cache.', '2015-08-25 01:29:00'),
+('1427', 'FR', 'Publication\&nbsp;:', '2015-08-25 01:29:00'),
+('1428', 'FR', 'Publier maintenant', '2015-08-25 01:29:00'),
+('1429', 'FR', 'Publier sur', '2015-08-25 01:29:00'),
+('1430', 'FR', 'Ne pas publier maintenant.', '2015-08-25 01:29:00'),
+('1431', 'FR', 'Je l\'ai lu et accepté les <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">conditions de service d\'Opencaching.de</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00'),
+('1432', 'FR', 'Info : Votre log a été retiré par le propriétaire de la cache.', '2015-08-25 01:29:00'),
+('1433', 'FR', 'Sélection de ville', '2015-08-25 01:29:00'),
+('1434', 'FR', 'Total de %1 villes correspondent', '2015-08-25 01:29:00'),
+('1435', 'FR', 'Pour le critère de recherche aucun résultat clair a été trouvé. S\'il vous plaît choisir l\'emplacement désiré\&nbsp;:', '2015-08-25 01:29:00'),
+('1436', 'FR', 'Ajouter le log-entry pour le cache %1', '2015-08-25 01:29:00'),
+('1437', 'FR', 'Cache nom est invalide', '2015-08-25 01:29:00'),
+('1438', 'FR', 'Les coordonnées utilisées sont invalides.', '2015-08-25 01:29:00'),
+('1439', 'FR', 'Le temps entré est invalide.', '2015-08-25 01:29:00'),
+('1440', 'FR', 'La distance que vous avez entré est invalide. Format aa.aaa', '2015-08-25 01:29:00'),
+('1441', 'FR', 'L\'statut de cache ne correspond pas à vos options de publication', '2015-08-25 01:29:00'),
+('1442', 'FR', 'Choisissez les deux valorisations\&nbsp;!', '2015-08-25 01:29:00'),
+('1443', 'FR', 'Aucune photo disponible', '2015-08-25 01:29:00'),
+('1444', 'FR', '%1 caches <span style=\"%2\">assorti</span>', '2015-08-25 01:29:00'),
+('1445', 'FR', 'Résultat %1 à %2 (comme zip)', '2015-08-25 01:29:00'),
+('1446', 'FR', 'cette description a été créé sur un autre serveur d\'Opencaching et ne peut pas y être supprimée.', '2015-08-25 01:29:00'),
+('1447', 'FR', 'la description de cache a été supprimé', '2015-08-25 01:29:00'),
+('1448', 'FR', 'Supprimer cette description de cache', '2015-08-25 01:29:00'),
+('1451', 'FR', 'S\'il vous plaît ne pas utiliser d\'images qui sont hébergés sur geocaching.com. Au lieu de cela, téléchargez vos photos sur notre serveur.', '2015-08-25 01:29:00'),
+('1452', 'FR', 'Note cryptée\&nbsp;:', '2015-08-25 01:29:00'),
+('1453', 'FR', 'Voulez-vous vraiment supprimer cette description de votre \&quot;{cachename}\&quot;', '2015-08-25 01:29:00'),
+('1454', 'FR', 'Oui, supprimer la description de cache', '2015-08-25 01:29:00'),
+('1455', 'FR', 'Proposez cache', '2015-08-25 01:29:00'),
+('1456', 'FR', 'Format:\&nbsp; JJ-MM-AAAA', '2015-08-25 01:29:00'),
+('1457', 'FR', 'Quelques erreurs se sont produites, s\'il vous plaît vérifier les champs marqués.', '2015-08-25 01:29:00'),
+('1458', 'FR', 'Votre coordonnées saisies est invalides', '2015-08-25 01:29:00'),
+('1459', 'FR', 'La distance indiquée est invalide, Format\&nbsp;: aa.aaa', '2015-08-25 01:29:00'),
+('1460', 'FR', 'Date non valide, format\&nbsp;: JJ-MM-AAAA', '2015-08-25 01:29:00'),
+('1461', 'FR', 'Le cache peut être adoptée uniquement si vous acceptez nos conditions d\'utilisation.', '2015-08-25 01:29:00'),
+('1463', 'FR', 'Aucun type de cache est choisi.', '2015-08-25 01:29:00'),
+('1464', 'FR', 'Aucune cache-taille est choisie.', '2015-08-25 01:29:00'),
+('1466', 'FR', 'Votre cache est ajouté avec succès à la base de données. Vous serez redirigé vers la page de cache, maintenant.', '2015-08-25 01:29:00'),
+('1467', 'FR', 'Sélectionner', '2015-08-25 01:29:00'),
+('1468', 'FR', '(Erreur interne) la description n\'est pas disponible.', '2015-08-25 01:29:00'),
+('1469', 'FR', '(Erreur interne), il existe déjà une description pour cette langue.', '2015-08-25 01:29:00'),
+('1471', 'FR', 'Il existe déjà une description dans cette langue.', '2015-08-25 01:29:00'),
+('1473', 'FR', 'Êtes-vous sûr de supprimer votre log\&nbsp;?', '2015-08-25 01:29:00'),
+('1475', 'FR', 'Une commande de base de données n\'a pas pu être effectuée.', '2015-08-25 01:29:00'),
+('1476', 'FR', 'Modifier le cache <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2015-08-25 01:29:00'),
+('1477', 'FR', 'Offre pour l\'adoption', '2015-08-25 01:29:00'),
+('1478', 'FR', 'Statut\&nbsp;:', '2015-08-25 01:29:00'),
+('1479', 'FR', 'Recherche de Waypoint\&nbsp;:', '2015-08-25 01:29:00'),
+('1480', 'FR', 'Sites du pays', '2015-08-25 01:29:00'),
+('1482', 'FR', 'Waypoints\&nbsp;:', '2015-08-25 01:29:00'),
+('1483', 'FR', 'heures', '2015-08-25 01:29:00'),
+('1486', 'FR', 'Si votre navigateur ne supporte pas le transfert automatique s\'il vous plaît cliquez ici.', '2015-08-25 01:29:00'),
+('1489', 'FR', 'FR', '2015-08-25 01:29:00'),
+('1490', 'FR', 'Mot de passe\&nbsp;:', '2015-08-25 01:29:00'),
+('1491', 'FR', 'Modifier la description de cache pour <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00'),
+('1494', 'FR', 'Ajouter', '2015-08-25 01:29:00'),
+('1495', 'FR', 'Entrez un nom, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1496', 'FR', 'Remplissez le champ de texte, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1497', 'FR', 'Vous devez vérifier au moins un champ !', '2015-08-25 01:29:00'),
+('1498', 'FR', 'La longitude doit être un nombre !\\nFormat : hh ° mm.mmm', '2015-08-25 01:29:00'),
+('1499', 'FR', 'La latitude doit être un nombre !\\nFormat : hh ° mm.mmm', '2015-08-25 01:29:00'),
+('1500', 'FR', 'La distance maximale doit être un nombre !', '2015-08-25 01:29:00'),
+('1501', 'FR', 'La distance doit être entre 0 et 9999', '2015-08-25 01:29:00'),
+('1502', 'FR', 'Entrez le code postal, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1503', 'FR', 'Entrez dans la ville, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1504', 'FR', 'Entrez le propriétaire, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1505', 'FR', 'Entrez le nom d\'utilisateur, s\'il vous plaît !', '2015-08-25 01:29:00'),
+('1506', 'FR', 'également enregistré sur GC.com', '2015-08-25 01:29:00'),
+('1507', 'FR', 'Le format de sortie sélectionné est inconnu !', '2015-08-25 01:29:00'),
+('1508', 'FR', 'L\'opération de recherche n\'a pas pu être exécuté, s\'il vous plaît entrer de nouveau les données de recherche.', '2015-08-25 01:29:00'),
+('1509', 'FR', 'Trouver', '2015-08-25 01:29:00'),
+('1512', 'FR', 'Le code postal n\'a pas pu être trouvé.', '2015-08-25 01:29:00'),
+('1513', 'FR', 'Il n\'existe aucune ville avec ce nom.', '2015-08-25 01:29:00'),
+('1514', 'FR', 'Il n\'y a pas des coordonnées disponibles pour la ville sélectionnée.', '2015-08-25 01:29:00'),
+('1516', 'FR', 'Le texte entré est invalide.', '2015-08-25 01:29:00'),
+('1517', 'FR', 'Le texte saisi contient plus de 50 mots.', '2015-08-25 01:29:00'),
+('1518', 'FR', 'Tous les pays', '2015-08-25 01:29:00'),
+('1521', 'FR', 'Cette cache a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00'),
+('1522', 'FR', 'Enregistrer les options', '2015-08-25 01:29:00'),
+('1523', 'FR', 'Modifier les options', '2015-08-25 01:29:00'),
+('1524', 'FR', 'Type', '2015-08-25 01:29:00'),
+('1525', 'FR', 'Derniers logs', '2015-08-25 01:29:00'),
+('1526', 'FR', 'Téléchargements', '2015-08-25 01:29:00'),
+('1527', 'FR', 'Résultats sur cette page\&nbsp;:', '2015-08-25 01:29:00'),
+('1529', 'FR', 'Avec le téléchargement, vous acceptez les <a href=\"articles.php?page=impressum#tos\">conditions d\'usage</a> d\'Opencaching.de.\&nbsp;\&nbsp;', '2015-08-25 01:29:00'),
+('1530', 'FR', 'Cette entrée de log a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00'),
+('1531', 'FR', 'Cette description a été créé sur un autre site d\'Opencaching. Le cache ne peut pas y être modifié.', '2015-08-25 01:29:00'),
+('1532', 'FR', 'Le propriétaire de le cache a écrit le commentaire suivant :', '2015-08-25 01:29:00'),
+('1533', 'FR', 'Pour des caches virtuelles et webcam, la taille du cache doit être -no boité-\&nbsp;!', '2015-08-25 01:29:00'),
+('1537', 'FR', 'Votre code HTML sera à nouveau modifié par un filtre spécial. Cela est nécessaire pour éviter les balises HTML dangereux, tels que\&lt;script\&gt;. Une liste avec des balises HTML autorisés, vous pouvez trouver <a href=\"articles.php?page=htmltags\">ici</a>.', '2015-08-25 01:29:00'),
+('1538', 'FR', 'Langue', '2015-08-25 01:29:00'),
+('1539', 'FR', 'Non trouvé', '2015-08-25 01:29:00'),
+('1541', 'FR', 'Seulement la nuit', '2015-08-25 01:29:00'),
+('1542', 'FR', 'Lien hypertexte vers un autre portail de mise en cache seulement', '2015-08-25 01:29:00'),
+('1543', 'FR', 'boîte aux lettres (besoin de timbre)', '2015-08-25 01:29:00'),
+('1544', 'FR', 'Zone dangereuse', '2015-08-25 01:29:00'),
+('1545', 'FR', 'Cette géocache peut être trouvé dans la nuit seulement - il est appelé <i>cache de nuit</i>. Il pourrait y avoir des réflecteurs qui doivent être flashlighted et pointer sur la cachette ou d\'autres mécanismes de cache de nuit spéciaux.', '2015-08-25 01:29:00'),
+('1546', 'FR', 'Cette géocache est enregistré à Opencaching seulement. Cet attribut permettra aux utilisateurs d\'autres plates-formes de géocaching de trouver des caches d\'OC intéressants rapidement.', '2015-08-25 01:29:00'),
+('1548', 'FR', 'Il y a un tampon dans le cache pour tamponner votre logbook personnel et le logbook du cache sera tamponné avec votre tampon personnel. Prenez soin de ne pas mélanger les tampons et de laisser le tampon du cache dans le cache\&nbsp;! Des boîtes aux lettres populaire peuvent être trouvés sans GPS, peut-être avec une boussole et allures d\'un emplacement - ajouter le «\&nbsp;sans GPS\&nbsp;» attribut pour ceux.', '2015-08-25 01:29:00'),
+('1549', 'FR', 'Le cache se trouve dans une zone dangereuse. Utilisez cet attribut pour marquer des dangers non évidents, comme les routes à grande circulation, terrain escarpé ou les chutes de pierres. Les mesures de sécurité devraient être prises ou le cache être omises, surtout pendant le géocaching avec des enfants, grands groupes ou à des conditions météorologiques défavorables.', '2015-08-25 01:29:00'),
+('1550', 'FR', 'Chemin de fer actif à proximité', '2015-08-25 01:29:00'),
+('1551', 'FR', 'falaises / rocher', '2015-08-25 01:29:00'),
+('1552', 'FR', 'Chasse', '2015-08-25 01:29:00'),
+('1553', 'FR', 'Épines', '2015-08-25 01:29:00'),
+('1554', 'FR', 'Tiques', '2015-08-25 01:29:00'),
+('1555', 'FR', 'Mines abandonnées', '2015-08-25 01:29:00'),
+('1556', 'FR', 'Plantes toxiques', '2015-08-25 01:29:00'),
+('1557', 'FR', 'Animaux dangereux', '2015-08-25 01:29:00'),
+('1558', 'FR', 'Zone de parking à proximité', '2015-08-25 01:29:00'),
+('1559', 'FR', 'Transport public', '2015-08-25 01:29:00'),
+('1560', 'FR', 'L\'eau potable à proximité', '2015-08-25 01:29:00'),
+('1561', 'FR', 'Toilettes publiques à proximité', '2015-08-25 01:29:00'),
+('1562', 'FR', 'Téléphone public à proximité', '2015-08-25 01:29:00'),
+('1563', 'FR', 'Premiers secours disponibles', '2015-08-25 01:29:00'),
+('1564', 'FR', 'Près de la zone de stationnement', '2015-08-25 01:29:00'),
+('1565', 'FR', 'Longue marche', '2015-08-25 01:29:00'),
+('1566', 'FR', 'Marécage, un marais ou pataugeoire', '2015-08-25 01:29:00'),
+('1567', 'FR', 'Région vallonnée', '2015-08-25 01:29:00'),
+('1568', 'FR', 'Certains escalade (aucun engin nécessaire)', '2015-08-25 01:29:00'),
+('1569', 'FR', 'Baigner requise', '2015-08-25 01:29:00'),
+('1570', 'FR', 'Point d\'intérêt', '2015-08-25 01:29:00'),
+('1571', 'FR', 'Cible mouvante', '2015-08-25 01:29:00'),
+('1572', 'FR', 'Webcam', '2015-08-25 01:29:00'),
+('1573', 'FR', 'Dans des pièces fermées (grottes, bâtiments, etc.)', '2015-08-25 01:29:00'),
+('1575', 'FR', 'Sans GPS (boîte aux lettres, cistes, boussole jonglage ...)', '2015-08-25 01:29:00'),
+('1576', 'FR', 'Frais d\'accès ou de stationnement', '2015-08-25 01:29:00'),
+('1577', 'FR', 'Nuitée nécessaire', '2015-08-25 01:29:00'),
+('1578', 'FR', 'Disponible 24 heures', '2015-08-25 01:29:00'),
+('1579', 'FR', 'Uniquement disponible à des moments précis', '2015-08-25 01:29:00'),
+('1580', 'FR', 'le jour seulement', '2015-08-25 01:29:00'),
+('1581', 'FR', 'Pas du niveau d\'eau élevé', '2015-08-25 01:29:00'),
+('1582', 'FR', 'Toutes les saisons', '2015-08-25 01:29:00'),
+('1583', 'FR', 'Saison de reproduction / nature préservée', '2015-08-25 01:29:00'),
+('1584', 'FR', 'Cachette impperméable à la neige', '2015-08-25 01:29:00'),
+('1585', 'FR', 'Équipement spécial', '2015-08-25 01:29:00'),
+('1586', 'FR', 'Boussole', '2015-08-25 01:29:00'),
+('1587', 'FR', 'Lampe de poche', '2015-08-25 01:29:00'),
+('1588', 'FR', 'Matériel d\'escalade', '2015-08-25 01:29:00'),
+('1589', 'FR', 'Équipement de grotte', '2015-08-25 01:29:00'),
+('1590', 'FR', 'Équipement de plongée', '2015-08-25 01:29:00'),
+('1591', 'FR', 'Motomarine', '2015-08-25 01:29:00'),
+('1592', 'FR', 'Avion', '2015-08-25 01:29:00'),
+('1593', 'FR', 'Enquête', '2015-08-25 01:29:00'),
+('1594', 'FR', 'Puzzle / Mystère', '2015-08-25 01:29:00'),
+('1595', 'FR', 'Problème d\'arithmétique', '2015-08-25 01:29:00'),
+('1596', 'FR', 'Autre type de cache', '2015-08-25 01:29:00'),
+('1597', 'FR', 'Demander au propriétaire pour les conditions de démarrage', '2015-08-25 01:29:00'),
+('1598', 'FR', 'Adapté pour les enfants', '2015-08-25 01:29:00'),
+('1599', 'FR', 'Il y a des chemins de fer actifs à proximité. S\'il vous plaît soyez prudent, garder une distance sécuritaire et traverser les rails seulement aux passages à niveau, etc.\&nbsp;!', '2015-08-25 01:29:00'),
+('1600', 'FR', 'Il y a des falaises ou des rochers dangereux à proximité. Méfiez-vous des chutes de pierres sur le côté inférieur, et faire attention à la face supérieure des falaises - en particulier avec des enfants et en faisant du vélo de montagne. Il peut être très dangereux de prendre une pente raide vers une falaise, parce que vous pourriez ne pas remarquer où les premiers terminent et les derniers commencent.', '2015-08-25 01:29:00'),
+('1601', 'FR', 'L géocache est placé dans un terrain de chasse. Au crépuscule et dans l\'obscurité, une lampe de poche ou des phares doivent toujours être utilisés pour des raisons de sécurité. Soyez attentif lors de la rencontre des chasseurs.', '2015-08-25 01:29:00'),
+('1602', 'FR', 'Il y a des épines près du cache. Portez des vêtements appropriés.', '2015-08-25 01:29:00'),
+('1603', 'FR', 'Il y a saisonnellement beaucoup de tiques dans ce domaine. Il est recommandé de porter des pantalons longs et de vérifier vous-même pour les tiques après géocaching. Il y a des cartes de risque pour l\'encéphalite à tiques dans l\'Internet, par exemple, pour l\'Allemagne sur des sites comme www.meningitis.de (FSME chercher là-bas).', '2015-08-25 01:29:00'),
+('1604', 'FR', 'Dans l\'eau', '2015-08-25 01:29:00'),
+('1605', 'FR', 'Ce cache peut être fait à la fois à la lumière du jour et de la nuit, et tous les jours ouvrables.', '2015-08-25 01:29:00'),
+('1606', 'FR', 'Ce cache ne peut pas être fait à certains moments de la journée - voir la description de cache pour plus de détails. Par exemple, le cache peut être placé dans une zone avec des heures d\'ouverture limitées.', '2015-08-25 01:29:00'),
+('1607', 'FR', 'Ce cache devraient être tenté pendant le jour seulement. Par exemple, la zone peut être dangereux et contenir des falaises ou des abîmes. Ou en utilisant des lampes de poche peut être infaisable parce que cela aurait paru suspect dans un quartier résidentiel.', '2015-08-25 01:29:00'),
+('1608', 'FR', 'Ce cache peut être fait seulement au niveau de l\'eau est faible ou normal. Au inondation ou de la marée haute, il est pas accessible.', '2015-08-25 01:29:00'),
+('1609', 'FR', 'Ce cache peut être trouvé toute l\'année, tandis que la difficulté peut varier de saisons. Spécifiez la difficulté pour de <i>bonnes</i> conditions.', '2015-08-25 01:29:00'),
+('1610', 'FR', 'Ne cherchez pas ce cache pendant la saison de reproduction des animaux\&nbsp;! S\'il vous plaît indiquer dans la description de cache quelle période de l\'année doit être évitée. Aussi, faites attention aux conditions locales et les signes concernant la protection de la nature.', '2015-08-25 01:29:00'),
+('1611', 'FR', 'Ce cache peut être trouvé même après une chute de neige lourde. Toutes les étapes et la géocache sont cachés dans une manière de neige sûre\&nbsp;: ils ne seront pas couverts par la neige tombée non pas par la neige-pieux créés par des véhicules de déneigement.', '2015-08-25 01:29:00'),
+('1612', 'FR', 'Vous aurez besoin d\'équipement spécial qui est pas spécifié par d\'autres attributs, par exemple, un pointeur laser, talkies-walkies ou un cric de voiture.', '2015-08-25 01:29:00'),
+('1613', 'FR', 'Une boussole est nécessaire.', '2015-08-25 01:29:00'),
+('1614', 'FR', 'Une lampe de poche est nécessaire pour trouver ce cache. Ne pas oublier les piles de rechange\&nbsp;!', '2015-08-25 01:29:00'),
+('1615', 'FR', 'Pour ce cache, vous aurez besoin d\'équipement d\'escalade et la connaissance comment l\'utiliser correctement. Si vous êtes un débutant, ne pas le faire seul, mais utiliser le support d\'un grimpeur ou alpiniste expérimenté.', '2015-08-25 01:29:00'),
+('1616', 'FR', 'Ce géocache est caché dans une grotte et vous devez utiliser un équipement approprié pour y accéder. Attention\&nbsp;: Même de petites grottes peuvent vous confronter à des problèmes imprévus et les dangers, comme les orages (l\'eau\&nbsp;!) ou une entorse à la cheville. Avoir des conseils d\'abord de les hommes des cavernes-connu\&nbsp;! Aussi prendre soin de la nature protégée\&nbsp;; par exemple lieux de chauves-souris doivent ne pas être perturbés.', '2015-08-25 01:29:00'),
+('1617', 'FR', 'Vous aurez besoin d\'équipement de plongée pour trouver ce géocache. La profondeur de l\'emplacement du cache de l\'eau est indiquée dans la description. S\'il vous plaît noter que la plongée sécurisé exige une formation spéciale. Sans expérience de plongée, vous pouvez chercher ce cache en compagnie d\'un professeur de plongée.', '2015-08-25 01:29:00'),
+('1618', 'FR', 'Ce cache peut généralement être trouvé en utilisant seulement une motomarine. La natation est impossible en raison de la distance ou des courants. Voir la description de cache pour plus de détails.', '2015-08-25 01:29:00'),
+('1619', 'FR', 'Vous devez enquêter sur des informations supplémentaires avant de pouvoir chercher ce cache. Cela vaut des puzzle/caches mystère.', '2015-08-25 01:29:00'),
+('1620', 'FR', 'Puzzles ou mystères doivent être résolus avant ou tout en cherchant ce cache.', '2015-08-25 01:29:00'),
+('1621', 'FR', 'Avant ou tout en cherchant ce cache, les problèmes arithmétiques doivent être résolus qui vont au-delà des calculs très élémentaires.', '2015-08-25 01:29:00'),
+('1622', 'FR', 'Ce ne sont pas les standards, les types prédéfinis de cache. Utilisez cet attribut pour les caches, spécial ou inhabituel.', '2015-08-25 01:29:00'),
+('1623', 'FR', 'Avant de faire ce cache, vous devez demander au propriétaire pour les conditions de départ. Par exemple le cache peut être lié à certains événements à des dates différentes.', '2015-08-25 01:29:00'),
+('1624', 'FR', 'Cette géocache est adapté pour les enfants. Tous les défis peuvent être résolus par des enfants de l\'âge de 10 à 12 ans et le terrain n\'a pas de risques (comme les autoroutes, les abîmes). Il devrait y avoir un grand récipient géocache avec des éléments de négociation à l\'intérieur et les défis sont intéressants.', '2015-08-25 01:29:00'),
+('1625', 'FR', 'Ce cache conduit dans un (ancien) zone d\'exploitation minière. Il peut y avoir des dangers par l\'effondrement des galeries d\'accès ou vous pouvez avoir besoin d\'entrer dans les galeries d\'accès. Soyez prudent et utiliser un équipement approprié, surtout dans l\'obscurité. Anciennes mines peuvent être couverts par la préservation historique.', '2015-08-25 01:29:00'),
+('1626', 'FR', 'Il y a des plantes toxiques à proximité du cache. Prenez soin de prévenir les enfants et les chiens de les toucher ou de les manger.', '2015-08-25 01:29:00'),
+('1627', 'FR', 'La région est habitée par des animaux potentiellement dangereux, par exemple, domaines de la rage, des serpents venimeux, des scorpions ou des ours.', '2015-08-25 01:29:00'),
+('1628', 'FR', 'Une zone de parking à proximité est situé comme point de départ pour faire cette cache. Si aucun parking gratuit est disponible, ajouter l\'attribute «\&nbsp;des frais d\'accès ou de stationnement\&nbsp;».', '2015-08-25 01:29:00'),
+('1629', 'FR', 'Ce cache est situé à l\'extérieur des zones urbaines et a une station de transports en commun à proximité. Ne pas définir cet attribut pour les géocaches dans les zones urbaines qui sont généralement équipées avec les transports publics.', '2015-08-25 01:29:00'),
+('1630', 'FR', 'Il y a de l\'eau potable le long du sentier ou près de la cache. Cet attribut est particulièrement utile pour la planification des caches d\'événements, des randonnées plus longues ou des caches à des endroits probablement sales comme des grottes.', '2015-08-25 01:29:00'),
+('1631', 'FR', 'Il y a des toilettes publiques le long du chemin ou près de la cache. Cet attribut est particulièrement utile pour la planification des caches d\'événements ou de vastes multicaches.', '2015-08-25 01:29:00'),
+('1632', 'FR', 'Il y a un téléphone public le long du chemin ou près de la cache. Surtout pour les caches d\'événements vous devriez vous renseigner pour les téléphones à proximité et définir cet attribut si applicable.', '2015-08-25 01:29:00'),
+('1633', 'FR', 'Il y a un poste de premiers secours, une cabine téléphonique, le sauvetage en montagne ou un arrangement similaire près de la cache. Cet attribut est particulièrement utile dans les zones exigeants, comme les caches, les caches d\'escalade de la grotte, les hautes montagnes ou à l\'eau. Vérifiez si vous pouvez ajouter des numéros de téléphone d\'urgence (comme une opération de sauvetage de montagne) à votre liste de cache.', '2015-08-25 01:29:00'),
+('1634', 'FR', 'La géocache se trouve à proximité d\'une aire de stationnement, à seulement quelques pas de là - il est un «\&nbsp;cache and dash\&nbsp;».', '2015-08-25 01:29:00'),
+('1635', 'FR', 'Ce cache nécessite une longue marche - plus de 5 km aller-retour. Dans les montagnes et des autres zones escarpées, la distance pour une «\&nbsp;longue marche\&nbsp;» peut être plus courte. Chaussures de marche et de l\'équipement approprié sont recommandées.', '2015-08-25 01:29:00'),
+('1636', 'FR', 'Ce cache nécessite passant sol marécageux ou marécageuse ou patauger dans l\'eau peu profonde. Portez des vêtements appropriés. Après la pluie, le terrain peut être très exigeant ou non praticable à tous.', '2015-08-25 01:29:00'),
+('1637', 'FR', 'Un ou plusieurs ascensions se trouvent entre vous et le cache.', '2015-08-25 01:29:00'),
+('1638', 'FR', 'Ce cache nécessite un peu d\'escalade et vous devez peut-être utiliser vos mains, mais vous n\'avez pas besoin de matériel d\'escalade. Soyez très prudent pendant la saison des pluies ou des orages\&nbsp;!', '2015-08-25 01:29:00'),
+('1639', 'FR', 'Ce cache prescrit de traverser une rivière ou un lac. L\'eau est raide.', '2015-08-25 01:29:00'),
+('1640', 'FR', 'Il y a un point d\'intérêt à la cache, comme une belle vue pittoresque ou un plus grand château en ruines. Cet endroit vaut le détour même sans une géocache à proximité.', '2015-08-25 01:29:00'),
+('1641', 'FR', 'Cette géocache se déplace autour. Par exemple, le propriétaire pourrait déplacer régulièrement le cache d\'un endroit à un autre, ou les trouveurs feront cette tâche et poster de nouveaux coordonnées dans leurs entrées de journal. Le propriétaire doit mettre à jour les coordonnées dans la description de cache après chaque coup.', '2015-08-25 01:29:00'),
+('1642', 'FR', 'Il existe une webcam à l\'emplacement cible. Vous devez prendre une photo de la webcam de votre visite et l\'inclure dans votre «\&nbsp;trouvé\&nbsp;» entrée du journal. Il peut y avoir des exigences supplémentaires comme une bannière de géocaching sur la photo. L\'adresse de la webcam est inclus dans la description de cache, et il doit être accessible au public, à savoir pas de compte utilisateur ou similaire est nécessaire.', '2015-08-25 01:29:00'),
+('1643', 'FR', 'Cette géocache est pas caché à l\'air libre, mais à l\'intérieur d\'un bâtiment, une grotte ou similaire.', '2015-08-25 01:29:00'),
+('1644', 'FR', 'Ce cache ou l\'un des étages est placée sous l\'eau. Vous pourriez avoir à entrer dans l\'eau, nager ou plonger.', '2015-08-25 01:29:00'),
+('1645', 'FR', 'Ce cache peut être trouvée sans un dispositif GPS. Pas de coordonnées supplémentaires sont utilisés en plus des coordonnées de départ.', '2015-08-25 01:29:00'),
+('1646', 'FR', 'Vous devez payer un frais d\'accès ou de stationnement pour accéder à ce cache, par exemple, si le cache est situé dans un parc d\'attractions. Si il y a des zones de stationnement gratuit à proximité de rechange, s\'il vous plaît de les inclure dans la description de cache. S\'il vous plaît noter nos conditions d\'utilisation actuelles concernant les «\&nbsp;géocaches commerciales\&nbsp;».', '2015-08-25 01:29:00'),
+('1647', 'FR', 'Ce cache ne peut pas être fait en un seul jour ou une seule nuit. Vous devrez visiter l\'emplacement pour plus d\'une fois ou vous devez passer la nuit. Le temps de préparation n\'est pas inclus dans ce calcul, seulement le temps sur le site.', '2015-08-25 01:29:00'),
+('1648', 'FR', 'Un newsentry a été créé sur Opencaching', '2015-08-25 01:29:00'),
+('1650', 'FR', 'La page appelée n\'existe pas !', '2015-08-25 01:29:00'),
+('1652', 'FR', 'Rediriger - Opencaching', '2015-08-25 01:29:00'),
+('1653', 'FR', 'Voulez-vous vraiment supprimer la recherche enregistrée\&nbsp;?', '2015-08-25 01:29:00'),
+('1654', 'FR', 'Statut', '2010-09-13 00:16:38'),
+('1655', 'FR', 'Définition de l\'état', '2015-08-25 01:29:00'),
+('1657', 'FR', 'à', '2015-08-25 01:29:00'),
+('1658', 'FR', 'Itinéraire', '2015-08-25 01:29:00'),
+('1659', 'FR', 'Taille de cache\&nbsp;:', '2015-08-25 01:29:00'),
+('1660', 'FR', 'Lien', '2015-08-25 01:29:00'),
+('1661', 'FR', 'Ouvert', '2015-08-25 01:29:00'),
+('1662', 'FR', 'Ajouter aux Favoris ...', '2015-08-25 01:29:00'),
+('1663', 'FR', 'Caches affichés :', '2015-08-25 01:29:00'),
+('1664', 'FR', 'Temps de chargement :', '2015-08-25 01:29:00'),
+('1665', 'FR', 'Sec.', '2015-08-25 01:29:00'),
+('1666', 'FR', 'Afficher seulement les géocaches avec les propriétés suivantes\&nbsp;:', '2015-08-25 01:29:00'),
+('1667', 'FR', 'Cachetype', '2015-08-25 01:29:00'),
+('1668', 'FR', 'Boîte', '2015-08-25 01:29:00'),
+('1669', 'FR', 'Cacher', '2015-08-25 01:29:00'),
+('1670', 'FR', 'Mon propriétaire', '2015-08-25 01:29:00'),
+('1672', 'FR', 'GC listings', '2015-08-25 01:29:00'),
+('1673', 'FR', 'Notation', '2015-08-25 01:29:00'),
+('1674', 'FR', 'Min. recommandations\&nbsp;:', '2015-08-25 01:29:00'),
+('1678', 'FR', 'Saisissez un texte de recherche, s\\\'il vous plaît\&nbsp;!', '2015-08-25 01:29:00'),
+('1680', 'FR', 'Waypoint %1 non trouvé\&nbsp;!', '2015-08-25 01:29:00'),
+('1681', 'FR', 'D/T\&nbsp;:', '2015-08-25 01:29:00'),
+('1683', 'FR', 'Erreur : Impossible de télécharger le résultat de recherche (code d\\\'erreur HTTP %1).', '2015-08-25 01:29:00'),
+('1684', 'FR', 'Erreur : Impossible de télécharger le résultat de recherche. Les données étaient pas disponibles sur le serveur.', '2015-08-25 01:29:00'),
+('1685', 'FR', 'Il y a %1 géocaches dans la zone sélectionnée correspondant à des options de filtre. S\\\'il vous plaît faire un zoom pour afficher les caches.', '2015-08-25 01:29:00'),
+('1687', 'FR', 'Créez un log', '2015-08-25 01:29:00'),
+('1688', 'FR', 'Modifier log', '2015-08-25 01:29:00'),
+('1689', 'FR', 'Retirer log', '2015-08-25 01:29:00'),
+('1690', 'FR', 'Modifier cache', '2015-08-25 01:29:00'),
+('1691', 'FR', 'Ajouter une description', '2015-08-25 01:29:00'),
+('1692', 'FR', 'Modifier la description', '2015-08-25 01:29:00'),
+('1693', 'FR', 'Retirer la description', '2015-08-25 01:29:00'),
+('1694', 'FR', 'Choisir une ville', '2015-08-25 01:29:00'),
+('1695', 'FR', 'Montrer le résultat de la recherche', '2015-08-25 01:29:00'),
+('1696', 'FR', 'Résultat', '2015-08-25 01:29:00'),
+('1697', 'FR', 'Description - Créez un cache', '2015-08-25 01:29:00'),
+('1698', 'FR', 'Ajouter une image', '2015-08-25 01:29:00'),
+('1699', 'FR', 'Message', '2015-08-25 01:29:00'),
+('1700', 'FR', 'Il n\'y a aucune clé de cartes de google enregistré pour ce domaine.', '2015-08-25 01:29:00'),
+('1701', 'FR', 'Attention\&nbsp;! Cette géocache est \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> Il n\'y a pas une conteneur physique aux coordonnées spécifiées (ou déterminées). Dans l\'intérêt de l\'endroit il ne devrait pas être nécessairement à la recherche\&nbsp;!', '2015-08-25 01:29:00'),
+('1702', 'FR', 'Attention\&nbsp;! Cette géocache est \&quot;<span class=\"errormsg\">%1</span>\&quot;!</strong> La géocache lui-même ou des parties sont manquantes ou il y a d\'autres problèmes qui font une recherche réussie impossible. Dans l\'intérêt de l\'endroit il ne devrait pas être nécessairement à la recherche\&nbsp;!', '2015-08-25 01:29:00'),
+('1703', 'FR', 'Vous avez assisté à cet événement\&nbsp;!', '2015-08-25 01:29:00'),
+('1704', 'FR', 'Vous avez déjà trouvé cette cache\&nbsp;!', '2015-08-25 01:29:00'),
+('1705', 'FR', '<i>Obsolète\&nbsp;: Cet attribut ne peut pas être affecté à de nouvelles caches parce qu\'il ne correspond pas à nos conditions actuelles d\'utilisation.</i><br/>Ce cache est cotée à plusieurs sites de chasse au trésor, et la description de cache au Opencaching peut être incomplète. Liens vers les autres sites peuvent être inclus par le propriétaire de la cache dans la liste. S\'il vous plaît noter que les descriptions et le statut de plusieurs caches-énumérés doivent être également maintenue à tous les sites, y compris Opencaching, conformément à nos conditions d\'utilisation actuelles.', '2015-08-25 01:29:00'),
+('1706', 'FR', 'Ce OC node', '2015-08-25 01:29:00'),
+('1707', 'FR', 'Autres OC nodes', '2015-08-25 01:29:00'),
+('1708', 'FR', 'Les prochains événements dans %1', '2015-08-25 01:29:00'),
+('1709', 'FR', 'Géocaches avec les plus récommendations dans les derniers %2 jours à %1.', '2015-08-25 01:29:00'),
+('1710', 'FR', 'Derniers caches en %1', '2015-08-25 01:29:00'),
+('1711', 'FR', 'Vous avez besion des %1 trouvailles supplémentaires pour faire une autre recommandation.', '2015-08-25 01:29:00'),
+('1713', 'FR', 'Vous avez recommandé cette cache.', '2015-08-25 01:29:00'),
+('1714', 'FR', 'Révoquer la recommandation', '2015-08-25 01:29:00'),
+('1717', 'FR', 'S\'il vous plaît sélectionner !', '2015-08-25 01:29:00'),
+('1718', 'FR', 'Résultats sur cette page', '2015-08-25 01:29:00'),
+('1722', 'FR', 'Voulez-vous vraiment supprimer cette entrée ?', '2015-08-25 01:29:00'),
+('1723', 'FR', 'Voulez-vous vraiment supprimer cette recommandation ?', '2015-08-25 01:29:00'),
+('1724', 'FR', 'Distance\&nbsp;:', '2015-08-25 01:29:00'),
+('1725', 'FR', 'Télécharger en tant que ...', '2015-08-25 01:29:00'),
+('1726', 'FR', 'Retirer l\'entrée de log pour <a href=\"viewcache.php?cacheid={cacheid}\">{cachename}</a>', '2015-08-25 01:29:00'),
+('1727', 'FR', 'Ajouter une nouvelle description de cache pour <a href=\"viewcache.php?cacheid={cacheid}\">{name}</a>', '2015-08-25 01:29:00'),
+('1728', 'FR', 'Envoyer à un appareil GPS', '2015-08-25 01:29:00'),
+('1729', 'FR', 'Histoire de Geokrety', '2015-08-25 01:29:00'),
+('1730', 'FR', 'Nouvelles topcis de forum (%1)', '2015-08-25 01:29:00'),
+('1731', 'FR', 'Teamblog', '2015-08-25 01:29:00'),
+('1732', 'FR', 'Forum', '2015-08-25 01:29:00'),
+('1733', 'FR', 'Geokrety', '2015-08-25 01:29:00'),
+('1735', 'FR', 'Pour des caches événementielle\&nbsp;: La date de l\'événement\&nbsp;!', '2015-08-25 01:29:00'),
+('1736', 'FR', 'ID de l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00'),
+('1737', 'FR', 'Liste', '2015-08-25 01:29:00'),
+('1738', 'FR', 'Date de l\'événement\&nbsp;:', '2015-08-25 01:29:00'),
+('1739', 'FR', 'Trouvé : %1   Caché : %2', '2015-08-25 01:29:00'),
+('1740', 'FR', '<Utilisateur inconnu>', '2015-08-25 01:29:00'),
+('1745', 'FR', 'Standardlogo', '2015-08-25 01:29:00'),
+('1747', 'FR', 'Logo alternative par nybbler', '2015-08-25 01:29:00'),
+('1752', 'FR', 'Alternative logo', '2015-08-25 01:29:00'),
+('1753', 'FR', 'Slimline', '2015-08-25 01:29:00'),
+('1754', 'FR', 'Logo rouge, slimline', '2015-08-25 01:29:00'),
+('1755', 'FR', 'Slimline, sans les statistiques', '2015-08-25 01:29:00'),
+('1756', 'FR', 'Slimline rouge, sans les statistiques', '2015-08-25 01:29:00'),
+('1757', 'FR', 'Coins ronds', '2015-08-25 01:29:00'),
+('1758', 'FR', 'Le compte est déjà activé. S\'il vous plaît essayer la <a href=\"login.php\">connexion</a>.<br />Si vous ne pouvez pas vous identifier, s\'il vous plaît lire la page suivante\&nbsp;: <a href=\"%1\">Problèmes de connexion</a>', '2015-08-25 01:29:00'),
+('1759', 'FR', 'Remarque\&nbsp;:', '2015-08-25 01:29:00'),
+('1760', 'FR', 'Coordonnées\&nbsp;', '2015-08-25 01:29:00'),
+('1761', 'FR', 'La note n\'est pas visible aux autres utilisateurs. La note et les coordonnées facultatives seront inclus dans les téléchargements de fichiers GPX-et envoyés à l\'appareil GPS.', '2015-08-25 01:29:00'),
+('1763', 'FR', 'Votre navigateur a rejeté notre cookie.<br />Vous pouvez trouver plus d\'informations sur ce sujet dans le <a href=\"%1\">Opencaching-help</a>.', '2015-08-25 01:29:00'),
+('1764', 'FR', 'Note de cache personnelle', '2015-08-25 01:29:00'),
+('1765', 'FR', 'Cette géocache est probablement placé dans une zone de protection de la nature\&nbsp;! Voir <a href=\"%1\">ici</a> pour plus d\'informations, s\'il vous plaît.', '2015-08-25 01:29:00'),
+('1766', 'FR', 'Cette géocache est probablement placé dans les zones de protection suivantes (<a href=\"%1\">Info</a>)\&nbsp;:', '2015-08-25 01:29:00'),
+('1767', 'FR', 'Traduction rapide', '2015-08-25 01:29:00'),
+('1768', 'FR', 'Désactiver', '2015-08-25 01:29:00'),
+('1769', 'FR', 'Activer - nouveau', '2015-08-25 01:29:00'),
+('1770', 'FR', 'Activer - tous', '2015-08-25 01:29:00'),
+('1771', 'FR', 'Télécharger de texte (nouveau)', '2015-08-25 01:29:00'),
+('1772', 'FR', 'Télécharger de texte (tous)', '2015-08-25 01:29:00'),
+('1773', 'FR', 'Importation de texte', '2015-08-25 01:29:00'),
+('1774', 'FR', 'fichier de texte contient les traductions\&nbsp;:', '2015-08-25 01:29:00'),
+('1775', 'FR', 'Waypoints supplémentaires', '2015-08-25 01:29:00'),
+('1776', 'FR', 'Type de waypoint\&nbsp;:', '2015-08-25 01:29:00'),
+('1777', 'FR', 'Sélectionner le type s\'il vous plaît', '2015-08-25 01:29:00'),
+('1778', 'FR', 'Coordonner\&nbsp;:', '2015-08-25 01:29:00'),
+('1779', 'FR', 'Télécharger le fichier GPX (max. 500 caches)', '2015-08-25 01:29:00'),
+('1780', 'FR', 'Ajouter le waypoint', '2015-08-25 01:29:00'),
+('1781', 'FR', 'Ajouter un nouveau', '2015-08-25 01:29:00'),
+('1782', 'FR', 'Supprimer le waypoint', '2015-08-25 01:29:00'),
+('1783', 'FR', 'Modifier le waypoint', '2015-08-25 01:29:00'),
+('1788', 'FR', 'Place de parking', '2015-08-25 01:29:00'),
+('1789', 'FR', 'Scène ou point de référence', '2015-08-25 01:29:00'),
+('1790', 'FR', 'Des waypoints supplémentaires', '2015-08-25 01:29:00'),
+('1791', 'FR', 'Ajouter un waypoint', '2015-08-25 01:29:00'),
+('1792', 'FR', 'Des waypoints supplémentaires peuvent être saisies pour faciliter la recherche, par exemple en pointant sur une place de parking ou le début d\'un chemin (la description du waypoint peut contenir plus d\'informations). Elles peuvent également préciser les étapes d\'un multicache. Les étapes sont indiquées sur la carte lorsque le cache est sélectionné, sont inclus dans le téléchargement de fichiers GPX et seront envoyés à l\'appareil GPS.', '2015-08-25 01:29:00'),
+('1793', 'FR', 'Aucuns waypoints disponibles', '2015-08-25 01:29:00'),
+('1794', 'FR', 'Les autres points de passage sont affichés sur la carte lorsque le cache est sélectionné, sont inclus dans le téléchargement de fichiers GPX et seront envoyés à l\'appareil GPS.', '2015-08-25 01:29:00'),
+('1796', 'FR', 'Publié le\&nbsp;:', '2015-08-25 01:29:00'),
+('1797', 'FR', 'Changement de log', '2015-08-25 01:29:00'),
+('1798', 'FR', 'Opencaching e.V.', '2015-08-25 01:29:00'),
+('1799', 'FR', 'Uniquement disponible pendant des saisons précises', '2015-08-25 01:29:00'),
+('1800', 'FR', 'Ce cache peut être fait seulement à certaines saisons - voir la description de cache pour plus de détails. Par exemple, le cache peut être placé dans un labyrinthe de maïs qui n\'existe que pendant la floraison jusqu\'à la saison des récoltes.', '2015-08-25 01:29:00'),
+('1801', 'FR', 'Aider', '2015-08-25 01:29:00'),
+('1802', 'FR', 'Attention\&nbsp;: Ce rapport est déjà affecté à un autre administrateur. Consultez lui avant vous assumez le rapport\&nbsp;!', '2015-08-25 01:29:00'),
+('1803', 'FR', 'nano', '2012-10-11 00:00:00'),
+('1804', 'FR', 'Licence de données', '2015-08-25 01:29:00'),
+('1806', 'FR', 'S\'il vous plaît choisir qu\'une seule des options de suppression/désactiver\&nbsp;!', '2015-08-25 01:29:00'),
+('1807', 'FR', 'En soumettant j\'accepte les <a href=\"articles.php?page=impressum#tos\" target=\"_blank\">conditions de service d\'Opencaching.de</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00'),
+('1808', 'FR', 'J\'ai lu et je comprends la <a target=\"_blank\" href=\"articles.php?page=dsb\">déclaration de confidentialité</a>, les <a target=\"_blank\" href=\"articles.php?page=impressum#tos\">conditions de service</a> et la <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">licence de données</a> et les accepter.', '2015-08-25 01:29:00'),
+('1809', 'FR', 'Vous devez accepter la déclaration de confidentialité, des conditions de service et la licence de données pour vous inscrire à %1.', '2015-08-25 01:29:00'),
+('1810', 'FR', 'Lors du téléchargement de ce fichier, vous acceptez nos <a href=\"articles.php?page=impressum#tos\">conditions d\'utilisation</a> et <a href=\"articles.php?page=impressum#datalicense\" target=\"_blank\">la licence de données</a>.', '2015-08-25 01:29:00'),
+('1811', 'FR', 'Désactiver (et verrouiller toutes les propres géocaches) et supprimer tout le contenu sous licence étrangère', '2015-08-25 01:29:00'),
+('1812', 'FR', 'ID', '2015-08-25 01:29:00'),
+('1813', 'FR', 'Propriétaire', '2015-08-25 01:29:00'),
+('1814', 'FR', 'Journaliste', '2015-08-25 01:29:00'),
+('1815', 'FR', 'Vous devez vérifier que vous êtes sûr\&nbsp;!', '2015-08-25 01:29:00'),
+('1816', 'FR', 'La description de cache a été enlevé parce que le propriétaire a refusé la licence de contenu.', '2015-08-25 01:29:00'),
+('1817', 'FR', 'le statut de l\'utilisateur a été modifié avec succès.', '2015-08-25 01:29:00'),
+('1818', 'FR', 'Spoiler', '2015-08-25 01:29:00'),
+('1819', 'FR', 'Après l\'enregistrement, vous devrez appuyer sur le bouton de rechargement dans votre navigateur pour voir la photo sélectionnée dans votre profil.', '2015-08-25 01:29:00'),
+('1820', 'FR', 'Vous pouvez maintenant <a href=\"login.php\">vous inscrire</a> avec le nouveau mot de passe.', '2015-08-25 01:29:00'),
+('1821', 'FR', 'OC.de nouvelle', '2015-08-25 01:29:00'),
+('1822', 'FR', 'OC.de nouvelle, slimline', '2015-08-25 01:29:00'),
+('1823', 'FR', 'OC.de nouvelle, sans les statistiques', '2015-08-25 01:29:00'),
+('1824', 'FR', 'Verifier l\'adresse mail', '2015-08-25 01:29:00'),
+('1825', 'FR', 'Un ou plusieurs mails ne peuvent pas être livrés à l\'adresse que vous avez spécifié dans votre profil d\'utilisateur\&nbsp;:', '2015-08-25 01:29:00'),
+('1826', 'FR', 'S\'il vous plaît confirmer que cette adresse e-mail est correcte, ou entrer une nouveau.', '2015-08-25 01:29:00'),
+('1827', 'FR', 'Inscrire une nouvelle adresse e-mail', '2015-08-25 01:29:00'),
+('1828', 'FR', 'Confirmez cette adresse e-mail', '2015-08-25 01:29:00'),
+('1829', 'FR', 'Marquer l\'adresse e-mail comme non valide', '2015-08-25 01:29:00'),
+('1830', 'FR', 'mail de licence de données n\'a pas été livré', '2015-08-25 01:29:00'),
+('1831', 'FR', 'Admins', '2015-08-25 01:29:00'),
+('1832', 'FR', 'Droits', '2015-08-25 01:29:00'),
+('1833', 'FR', 'Les droits d\'administrateur peuvent être accordés et révoqués par un administrateurde système avec un accès de base de données.', '2015-08-25 01:29:00'),
+('1834', 'FR', 'Refusé la licence de données', '2015-08-25 01:29:00'),
+('1835', 'FR', 'Le compte d\'utilisateur a été désactivé parce que l\'utilisateur a refusé la <a href=\"articles.php?page=impressum#datalicense\">licence de données</a>. Des descriptions de cache, des textes de journaux et des photos ont été supprimés.', '2015-08-25 01:29:00'),
+('1838', 'FR', 'Nom d\'utilisateur ou adresse e-mail\&nbsp;:', '2015-08-25 01:29:00'),
+('1839', 'FR', 'Vous devez sélectionner une recherche pour écraser.', '2015-08-25 01:29:00'),
+('1840', 'FR', 'Lien vers cette carte\&nbsp;:', '2015-08-25 01:29:00'),
+('1841', 'FR', 'Votre Internet Explorer est trop ancienne pour afficher la carte. S\'il vous plaît mettre à jour au moins à la version 7, mieux 8.', '2015-08-25 01:29:00'),
+('1842', 'FR', 'Aller aux coordonnées de la maison', '2015-08-25 01:29:00'),
+('1843', 'FR', 'Passer à petite carte', '2015-08-25 01:29:00'),
+('1844', 'FR', 'Entre 1 et 500 caches doivent être affichés pour le téléchargement.', '2015-08-25 01:29:00'),
+('1846', 'FR', 'Sélectionnez le type de waypoint', '2015-08-25 01:29:00'),
+('1847', 'FR', 'Invalid coordonner', '2015-08-25 01:29:00'),
+('1848', 'FR', 'Enregistrédepuis\&nbsp;:', '2015-08-25 01:29:00'),
+('1849', 'FR', 'Carte est en cours de mise à jour', '2015-08-25 01:29:00'),
+('1850', 'FR', 'n\\\'a pas été trouvée (avec les paramètres sélectionnés)', '2015-08-25 01:29:00'),
+('1851', 'FR', 'L\\\'affichage de la carte avec Microsoft Internet Explorer est lente et limité à %1 géocaches. Utiliser un autre navigateur pour de meilleures performances.', '2015-08-25 01:29:00'),
+('1852', 'FR', 'Géocaches trouvées, d\\\'abord la plus proche :', '2015-08-25 01:29:00'),
+('1853', 'FR', 'Lieux trouvés via Google :', '2015-08-25 01:29:00'),
+('1855', 'FR', 'Traditionnel', '2015-08-25 01:29:00'),
+('1857', 'FR', 'Virtuel', '2015-08-25 01:29:00'),
+('1859', 'FR', 'Événement', '2015-08-25 01:29:00'),
+('1860', 'FR', 'Quiz', '2015-08-25 01:29:00'),
+('1861', 'FR', 'Math / Physique', '2015-08-25 01:29:00'),
+('1862', 'FR', 'En mouvement', '2015-08-25 01:29:00'),
+('1863', 'FR', 'Drive-In', '2015-08-25 01:29:00'),
+('1865', 'FR', 'Chargement de la carte', '2015-08-25 01:29:00'),
+('1866', 'FR', 'Instructions', '2015-08-25 01:29:00'),
+('1867', 'FR', 'L\'option de menu «\&nbsp;carte\&nbsp;» affiches\&nbsp;:', '2015-08-25 01:29:00'),
+('1868', 'FR', 'Petite carte', '2015-08-25 01:29:00'),
+('1869', 'FR', 'Carte en plein écran', '2015-08-25 01:29:00'),
+('1870', 'FR', 'Voir la carte d\'aperçu\&nbsp;:', '2015-08-25 01:29:00'),
+('1871', 'FR', 'Maximum de caches sur la carte<br />(%1-%2, 0=automatique)\&nbsp;:', '2015-08-25 01:29:00'),
+('1872', 'FR', 'Icônes de cache\&nbsp;:', '2015-08-25 01:29:00'),
+('1873', 'FR', 'OC classique', '2015-08-25 01:29:00'),
+('1874', 'FR', 'Style OKAPI', '2015-08-25 01:29:00'),
+('1875', 'FR', 'Vous devez être connecté pour modifier les paramètres de la carte.', '2015-08-25 01:29:00'),
+('1876', 'FR', 'Carte de données \&copy;<a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> contributors', '2015-08-25 01:29:00'),
+('1877', 'FR', 'tiles fournies par <a href=\"http://www.mapquest.com/\" target=\"_blank\">MapQuest</a>', '2015-08-25 01:29:00'),
+('1878', 'FR', 'Carte de données \&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a> and <a href=\"http://www.thunderforest.com/opencyclemap/\" target=\"_blank\">OpenCycleMap</a> contributors', '2015-08-25 01:29:00'),
+('1879', 'FR', 'Rapports de cache', '2015-08-25 01:29:00'),
+('1880', 'FR', 'Vandalisme', '2015-08-25 01:29:00'),
+('1881', 'FR', 'Revenir Vandalisme', '2015-08-25 01:29:00'),
+('1882', 'FR', 'L\'utilisateur \' %1\' est inconnue', '2015-08-25 01:29:00'),
+('1883', 'FR', '%1 n\'a pas listé des caches', '2015-08-25 01:29:00'),
+('1884', 'FR', 'Restaurer les listes de cache de %1', '2015-08-25 01:29:00'),
+('1885', 'FR', 'L\'utilisateur \' %1\' n\'est pas désactivé. Vous pouvez visualiser les modifications enregistrées, mais ne pas les rétablir.', '2015-08-25 01:29:00'),
+('1886', 'FR', 'Vous n\'avez pas sélectionné de caches.', '2015-08-25 01:29:00'),
+('1887', 'FR', 'Aucunes données enregistrées sont disponible pour ces caches.', '2015-08-25 01:29:00'),
+('1888', 'FR', 'Vous devez sélectionner une date.', '2015-08-25 01:29:00'),
+('1889', 'FR', 'Utilisez le bouton de \"retour\" de votre navigateur pour essayer à nouveau.', '2015-08-25 01:29:00'),
+('1890', 'FR', 'Vous devez choisir les éléments de la liste à restaurer.', '2015-08-25 01:29:00'),
+('1891', 'FR', 'Vous ne dites pas que vous êtes sûr.', '2015-08-25 01:29:00'),
+('1892', 'FR', 'S\'il vous plaît sélectionnez les listes à restaurer', '2015-08-25 01:29:00'),
+('1893', 'FR', 'modifié', '2015-08-25 01:29:00'),
+('1894', 'FR', 'L\'utilisateur a modifié un ou plusieurs de ces caches aujourd\'hui, donc vous ne pouvez pas annuler les modifications. Cela ne peut pas être fait avant demain.', '2015-08-25 01:29:00'),
+('1895', 'FR', 'rien', '2015-08-25 01:29:00'),
+('1896', 'FR', 'Continue', '2015-08-25 01:29:00'),
+('1897', 'FR', 'à la sélection de la date', '2015-08-25 01:29:00'),
+('1898', 'FR', 'S\'il vous plaît sélectionner la date à partir de laquelle toutes les modifications doivent être revenue.<br />La liste sera remise au contenu qu\'il avait ce jour-là à 00:00:00.', '2015-08-25 01:29:00'),
+('1900', 'FR', 'Changements', '2015-08-25 01:29:00'),
+('1901', 'FR', 'Attention\&nbsp;: Si vous retournez des changements d\'inscription du propriétaire fait <em>today</em>, votre revient sera finale. Il ne peut pas être corrigée / défait après. Seulement des revient de coords \&amp; pays, les logs et de images seront enregistrées dans ce cas, de sorte que tous les autres changements ne seront pas compréhensible. Par conséquent <span style=\"text-decoration:underline\">il est fortement recommandé de revenir vandalisme pas avant le lendemain\&nbsp;!</span>', '2015-08-25 01:29:00'),
+('1902', 'FR', 'coordonnées et pays', '2015-08-25 01:29:00'),
+('1903', 'FR', 'Le nom, les paramètres, les attributs et les dates cachés', '2015-08-25 01:29:00'),
+('1904', 'FR', 'GC/NC waypoints', '2015-08-25 01:29:00'),
+('1905', 'FR', 'description(s) incl. Images', '2015-08-25 01:29:00'),
+('1906', 'FR', 'logs incl. images', '2015-08-25 01:29:00'),
+('1907', 'FR', 'rien', '2015-08-25 01:29:00'),
+('1908', 'FR', 'Exclus de restauration\&nbsp;: le statut de cache, l\'attribut OConly, l\'additional waypoints, le mot de passe, le statut de l\'image d\'aperçu', '2015-08-25 01:29:00'),
+('1909', 'FR', 'simuler', '2015-08-25 01:29:00'),
+('1910', 'FR', 'Vous êtes administrateur de racine et pouvez remplacer les avertissements. Prendre soin\&nbsp;!', '2015-08-25 01:29:00'),
+('1911', 'FR', 'Les listes de cache suivantes auraient été remis à l\'état avant %1', '2015-08-25 01:29:00'),
+('1912', 'FR', 'Les listes de cache suivants ont été remis à l\'état avant %1', '2015-08-25 01:29:00'),
+('1913', 'FR', 'Restaurer', '2015-08-25 01:29:00'),
+('1914', 'FR', 'tous', '2015-08-25 01:29:00'),
+('1915', 'FR', 'supprimé', '2015-08-25 01:29:00'),
+('1916', 'FR', 'archivé', '2015-08-25 01:29:00'),
+('1919', 'FR', 'Nouveaux log images', '2015-08-25 01:29:00'),
+('1920', 'FR', 'D', '2015-08-25 01:29:00'),
+('1921', 'FR', 'T', '2015-08-25 01:29:00'),
+('1922', 'FR', 'cliquez sur spoiler pour afficher', '2015-08-25 01:29:00'),
+('1923', 'FR', 'pour', '2015-08-25 01:29:00'),
+('1924', 'FR', 'Le cache possède %1 %2additional waypoints%3.', '2015-08-25 01:29:00'),
+('1925', 'FR', 'Le cache possède un %2additional waypoint%3.', '2015-08-25 01:29:00'),
+('1926', 'FR', 'Chemin', '2015-08-25 01:29:00'),
+('1927', 'FR', 'Finale', '2015-08-25 01:29:00'),
+('1928', 'FR', 'Afficher %1 des images d\'apercu</a><br />(% de la superficie, 0=off)\&nbsp;:', '2015-08-25 01:29:00'),
+('1929', 'FR', 'L\'image d\'aperçu pour la carte \&ndash; est affiché lorsque ce cache est sélectionnée sur la carte.<br />Vous ne pouvez avoir qu\'un <em>un</em> image d\'aperçu pour chaque cache.', '2015-08-25 01:29:00'),
+('1930', 'FR', 'Max. %1 caches peuvent être affichés avec Microsoft Internet Explorer.', '2015-08-25 01:29:00'),
+('1940', 'FR', 'Galerie de images', '2015-08-25 01:29:00'),
+('1941', 'FR', 'Dates montrent la date de transfert de images qui peut différer de la date de journal. Par conséquent vieilles dates peuvent apparaître dans la liste.', '2015-08-25 01:29:00'),
+('1942', 'FR', 'Un maximum d\'une image par jour et par utilisateur est affiché ici. La petite galerie sur la start page est limitée à une image par cache et jour.', '2015-08-25 01:29:00'),
+('1943', 'FR', 'Toutes les images sont la propriété et sous réserve de <a href=\"articles.php?page=impressum#datalicense\">licence de données d\'Opencaching.de</a>.', '2015-08-25 01:29:00'),
+('1944', 'FR', 'Afficher la statistique de l\'image et la galerie', '2015-08-25 01:29:00'),
+('1945', 'FR', 'Images de log', '2015-08-25 01:29:00'),
+('1946', 'FR', 'Images de log\&nbsp;: %1', '2015-08-25 01:29:00'),
+('1947', 'FR', 'Images de log de %1', '2015-08-25 01:29:00'),
+('1948', 'FR', 'Vos images de log :', '2015-08-25 01:29:00'),
+('1949', 'FR', 'Vos dernières images de log :', '2015-08-25 01:29:00'),
+('1950', 'FR', 'Dans vos <a href=\"mydetails.php\">profile settings</a> vous pouvez choisir si votre statistique des images de log et votre galerie est visible pour les autres utilisateurs.', '2015-08-25 01:29:00'),
+('1952', 'FR', 'Profil public', '2015-08-25 01:29:00'),
+('1953', 'FR', 'Vous n\'avez pas encore télécharger des images de log.', '2015-08-25 01:29:00'),
+('1954', 'FR', 'Des images marquées comme spoiler ne sont pas représentés\&nbsp;; donc le nombre des images sur cette page peut être plus faible que dans les statistiques de profil.', '2015-08-25 01:29:00'),
+('1955', 'FR', 'Autre information', '2015-08-25 01:29:00'),
+('1956', 'FR', 'Image de log', '2015-08-25 01:29:00'),
+('1957', 'FR', 'Des photos de spoiler qui montrent les détails de la cachette ne devraient pas être visibles ici. Si vous rencontrez un spoiler visible ouverte, vous pouvez communiquer avec l\'enregistreur par le bouton e-mail dans son profil et lui demander de le marquer comme spoiler.', '2015-08-25 01:29:00'),
+('1958', 'FR', 'Retour à la description de cache', '2015-08-25 01:29:00'),
+('1960', 'FR', 'Page', '2015-08-25 01:29:00'),
+('1962', 'FR', 'à', '2015-08-25 01:29:00'),
+('1963', 'FR', 'À propos d\'Opencaching', '2015-08-25 01:29:00'),
+('1964', 'FR', 'Des descriptions de cache, des textes de log et des images ont été supprimés parce que le compte a été désactivé avant la transition à la nouvelle <a href=\"articles.php?page=impressum#datalicense\"> nouvelle licence de données</a>.', '2015-08-25 01:29:00'),
+('1965', 'FR', 'La description de cache a été supprimé parce que le compte du propriétaire était inactive lorsque la <a href=\"articles.php?page=impressum#datalicense\">nouvelle licence de contenu</a> a été lancé.', '2015-08-25 01:29:00'),
+('1966', 'FR', 'à partir de', '2015-08-25 01:29:00'),
+('1967', 'FR', 'toutes les entrées du log \&copy; leurs auteurs', '2015-08-25 01:29:00'),
+('1968', 'FR', 'plus', '2015-08-25 01:29:00'),
+('1969', 'FR', 'Seulement les <span class=\"public-setting\">entrées verts</span> sont visibles aux autres utilisateurs.', '2015-08-25 01:29:00'),
+('1970', 'FR', 'Date / heure\&nbsp;:', '2015-08-25 01:29:00'),
+('1971', 'FR', 'date ou heure invalide', '2015-08-25 01:29:00'),
+('1973', 'FR', 'Généralement, des images de spoiler ne doivent pas être enregistrés. Dans le cas où une exception à cette règle est logique, par exemple, pour documenter votre conclusion ou des problèmes avec la planque, s\'il vous plaît marquer l\'image de sorte de spoiler qu\'il ne sera pas apparaître dans des galeries.', '2015-08-25 01:29:00'),
+('1974', 'FR', 'Si vous ne voyez pas d\'e-mail, s\'il vous plaît vérifier le dossier spam de votre boîte aux lettres.', '2015-08-25 01:29:00'),
+('1975', 'FR', 'Ne pas utiliser des chiffres et lettres faciles à deviner comme «\&nbsp;123456\&nbsp;» ou «\&nbsp;azerty\&nbsp;»', '2015-08-25 01:29:00'),
+('1976', 'FR', 'actuellement indisponible', '2015-08-25 01:29:00'),
+('1977', 'FR', 'Mot de passe<br />pour des logs \'trouvé\'\&nbsp;:', '2015-08-25 01:29:00'),
+('1978', 'FR', 'seulement pour des logs-assisté', '2015-08-25 01:29:00'),
+('1979', 'FR', 'Contactez journaliste', '2015-08-25 01:29:00'),
+('1980', 'FR', 'Pour des logs «\&nbsp;trouvé\&nbsp;» et «\&nbsp;pas trouvé\&nbsp;»\&nbsp;: Date et heure (en option) de la recherche de cache.', '2015-08-25 01:29:00'),
+('1982', 'FR', 'Page non trouvée', '2015-08-25 01:29:00'),
+('1983', 'FR', 'base de données du cache', '2015-08-25 01:29:00'),
+('1984', 'FR', 'Ici vous pouvez trouver beaucoup de caches individuels.', '2015-08-25 01:29:00'),
+('1985', 'FR', 'Les nouvelles caches\&nbsp;:', '2015-08-25 01:29:00'),
+('1986', 'FR', 'Ici vous pouvez discuter, améliorer ou poser des questions.', '2015-08-25 01:29:00'),
+('1987', 'FR', 'Les nouvelles posts de forum\&nbsp;:', '2015-08-25 01:29:00'),
+('1988', 'FR', 'Toute fois il y a des nouvelles à publier, vous les trouverez ici.', '2015-08-25 01:29:00'),
+('1989', 'FR', 'Les nouvelles blogposts\&nbsp;:', '2015-08-25 01:29:00'),
+('1990', 'FR', 'Ici, vous obtenez des tutoriels, des guides pratiques et des informations sur géocaching et Opencaching.', '2015-08-25 01:29:00'),
+('1991', 'FR', 'Les articles les plus récents du wiki\&nbsp;:', '2015-08-25 01:29:00'),
+('1992', 'FR', 'Pas trouvé\&nbsp;? Contactez-nous à l\'aide', '2015-08-25 01:29:00'),
+('1993', 'FR', 'Opencaching sur Facebook', '2015-08-25 01:29:00'),
+('1994', 'FR', 'Opencaching sur Google+', '2015-08-25 01:29:00'),
+('1995', 'FR', 'Opencaching sur Twitter', '2015-08-25 01:29:00'),
+('1996', 'FR', 'Le site visité <b>%1</b> n\'existe pas, nous avons trouvé des pages appropriées suivantes\&nbsp;:', '2015-08-25 01:29:00'),
+('1998', 'FR', 'OK', '2016-03-24 19:23:50'),
+('1999', 'FR', 'affichier', '2015-08-25 01:29:00'),
+('2000', 'FR', 'Mon dernier log', '2015-08-25 01:29:00'),
+('2001', 'FR', 'Logs propres', '2015-08-25 01:29:00'),
+('2002', 'FR', 'Géocaches trouvé', '2015-08-25 01:29:00'),
+('2003', 'FR', 'Géocaches enregistrés', '2015-08-25 01:29:00'),
+('2004', 'FR', '%1 de ceux-ci sont actifs', '2015-08-25 01:29:00'),
+('2006', 'FR', 'Supprimé par', '2015-08-25 01:29:00'),
+('2007', 'FR', 'Les données de l\'utilisateur', '2015-08-25 01:29:00'),
+('2008', 'FR', 'Applications d\'OKAPI', '2015-08-25 01:29:00'),
+('2009', 'FR', 'Apps d\'OKAPI', '2015-08-25 01:29:00'),
+('2010', 'FR', 'Grande carte', '2015-08-25 01:29:00'),
+('2011', 'FR', 'sans logs', '2015-08-25 01:29:00'),
+('2012', 'FR', 'avec 5 logs', '2015-08-25 01:29:00'),
+('2013', 'FR', 'avec 10 logs', '2015-08-25 01:29:00'),
+('2014', 'FR', 'avec tous les logs', '2015-08-25 01:29:00'),
+('2015', 'FR', 'Cache safari', '2015-08-25 01:29:00'),
+('2016', 'FR', 'Cette géocache peut être trouvé aux différents endroits. Les endroits à rechercher sont expliqués dans la description de cache. Ils doivent être situés «\&nbsp;loin de la maison\&nbsp;» et existent pour une période de temps considérable, de sorte qu\'ils peuvent être re-visité plus tard. Il n\'y a pas une boîte et un logbook\&nbsp;; la découverte doit être documentée par une photo et notant les coordonnées.', '2015-08-25 01:29:00'),
+('2017', 'FR', 'Seuls les caches virtuelles peuvent être des caches safari.', '2015-08-25 01:29:00'),
+('2023', 'FR', 'fermé', '2015-08-25 01:29:00'),
+('2025', 'FR', '%2 a archivé %1', '2015-08-25 01:29:00'),
+('2026', 'FR', '%2 a maintainted %1', '2015-08-25 01:29:00'),
+('2027', 'FR', '%2 a désactivé %1', '2015-08-25 01:29:00'),
+('2028', 'FR', '%2 a verrouillé %1', '2015-08-25 01:29:00'),
+('2029', 'FR', 'OC équipe commentaire', '2015-08-25 01:29:00'),
+('2030', 'FR', 'Logs d\'entretien', '2015-08-25 01:29:00'),
+('2031', 'FR', 'Pour changer l\'état, vous devez vous {a}log</a> au nouvel état.', '2015-08-25 01:29:00'),
+('2035', 'FR', '%1 a archivé la géocache', '2015-08-25 01:29:00'),
+('2036', 'FR', '%1 a maintenu la géocache', '2015-08-25 01:29:00'),
+('2037', 'FR', '%1 a désactivé la géocache', '2015-08-25 01:29:00'),
+('2038', 'FR', '%1 a verrouillé la géocache', '2015-08-25 01:29:00'),
+('2039', 'FR', '%1 a verrouillé et caché la géocache', '2015-08-25 01:29:00'),
+('2040', 'FR', 'Le texte supprimé :', '2015-08-25 01:29:00'),
+('2041', 'FR', 'total', '2015-08-25 01:29:00'),
+('2042', 'FR', 'Le texte suivant est affiché dans votre <a href=\"viewprofile.php\">profile public</a>\&nbsp;:', '2015-08-25 01:29:00'),
+('2043', 'FR', 'aucun texte entré jusqu\'à maintenant', '2015-08-25 01:29:00'),
+('2045', 'FR', 'Les paramètres de filtre actuels sont enregistré.', '2015-08-25 01:29:00'),
+('2046', 'FR', 'Observateur', '2015-08-25 01:29:00'),
+('2047', 'FR', 'Ignorer', '2015-08-25 01:29:00'),
+('2048', 'FR', 'Log maintenance', '2015-08-25 01:29:00'),
+('2049', 'FR', 'Visite de page', '2015-08-25 01:29:00'),
+('2050', 'FR', 'JavaScript est désactivé dans votre navigateur, vous pouvez entrer des textes (HTML) uniquement. Pour utiliser l\'éditeur, s\'il vous plaît activer JavaScript.', '2015-08-25 01:29:00'),
+('2051', 'FR', 'Recommandé sur', '2015-08-25 01:29:00'),
+('2052', 'FR', 'Protection de la nature', '2015-08-25 01:29:00'),
+('2053', 'FR', 'Retirer l\'offre d\'adoption', '2015-08-25 01:29:00'),
+('2055', 'FR', 'Autres rapports pour cette cache', '2015-08-25 01:29:00'),
+('2056', 'FR', 'Date du rapport', '2015-08-25 01:29:00'),
+('2057', 'FR', 'Raison', '2015-08-25 01:29:00'),
+('2058', 'FR', 'Logs supprimés', '2015-08-25 01:29:00'),
+('2059', 'FR', 'L\'histoire de cache', '2015-08-25 01:29:00'),
+('2060', 'FR', 'Code de cache\&nbsp;:', '2015-08-25 01:29:00'),
+('2061', 'FR', 'Cache introuvable', '2015-08-25 01:29:00'),
+('2062', 'FR', 'Les changements d\'état', '2015-08-25 01:29:00'),
+('2063', 'FR', 'Changé par', '2015-08-25 01:29:00'),
+('2065', 'FR', 'Invité', '2015-08-25 01:29:00'),
+('2066', 'FR', 'Ouvrir la conversation dans un nouvel onglet / fenêtre', '2015-08-25 01:29:00'),
+('2067', 'FR', 'Statut', '2015-08-25 01:29:00'),
+('2068', 'FR', 'depuis Juin 2013', '2015-08-25 01:29:00'),
+('2069', 'FR', 'depuis la date de suppression en Février 2012', '2015-08-25 01:29:00'),
+('2070', 'FR', 'Une ou plusieurs e-mails à cet utilisateur ne pouvaient pas être livrés. Il pourrait être une bonne idée de connecter plus de commentaires sur les géocaches de l\'utilisateur, et / ou d\'utiliser des adresses de contact de rechange comme un compte message de conseil ou d\'une autre plate-forme de géocaching.', '2015-08-25 01:29:00'),
+('2071', 'FR', 'Cette cache a été \"temporairement indisponible\" pendant plus %1 mois maintenant\&nbsp;; par conséquent, il est archivée automatiquement. Le propriétaire peut décider de maintenir le cache et réactiver la liste.', '2015-08-25 01:29:00'),
+('2072', 'FR', 'Cet événement a eu lieu il y a plus de cinq semaines\&nbsp;; par conséquent, il est archivé automatiquement. Le propriétaire peut réactiver la liste si elle devrait rester actif pour une raison exceptionnelle.', '2015-08-25 01:29:00'),
+('2073', 'FR', 'Ce compte d\'utilisateur est désactivé.', '2015-08-25 01:29:00'),
+('2074', 'FR', 'Adoptions', '2015-08-25 01:29:00'),
+('2075', 'FR', 'depuis Septembre 2012', '2015-08-25 01:29:00'),
+('2076', 'FR', 'De Propriétaire', '2015-08-25 01:29:00'),
+('2077', 'FR', 'Pour Propriétaire', '2015-08-25 01:29:00'),
+('2078', 'FR', 'Entretien', '2015-08-25 01:29:00'),
+('2079', 'FR', 'Afficher les détails', '2015-08-25 01:29:00'),
+('2080', 'FR', 'seulement des caches actives', '2015-08-25 01:29:00'),
+('2081', 'FR', 'Trouve', '2015-08-25 01:29:00'),
+('2083', 'FR', 'NOUVEAU', '2015-08-25 01:29:00'),
+('2084', 'FR', 'montrer archivé', '2015-08-25 01:29:00'),
+('2085', 'FR', 'cacher archivé', '2015-08-25 01:29:00'),
+('2086', 'FR', 'type de recherche inconnu', '2015-08-25 01:29:00'),
+('2087', 'FR', 'montrer sur la carte', '2015-08-25 01:29:00'),
+('2088', 'FR', 'Options de recherche', '2015-08-25 01:29:00'),
+('2089', 'FR', 'désactivé', '2015-08-25 01:29:00'),
+('2090', 'FR', 'archivé', '2015-08-25 01:29:00'),
+('2091', 'FR', 'Test pour et fixer incohérences dans les tables de base de données', '2015-08-25 01:29:00'),
+('2092', 'FR', 'Vous avez présenté plus de %1 des logs identiques. S\'il vous plaît confirmer que vous entrez la date de votre visite de cache et pas la date actuelle - également quand vous «\&nbsp;late logging\&nbsp;» des anciennes trouvailles.', '2015-08-25 01:29:00'),
+('2093', 'FR', 'De fausses dates de log peuvent nuire à plusieurs fonctions d\'OC comme la recherche par le dernier date de log. En plus, le propriétaire et d\'autres caches peuvent penser que le cache a été trouvé pour le moment (le date et le type du dernier log sont affichés dans la liste des caches du propriétaire\&nbsp;!), Ce qui peut nuire à l\'entretien de la mémoire et conduire à plus de fausses résultats.', '2015-08-25 01:29:00'),
+('2094', 'FR', 'Vous avez trouvé %1 caches jusqu\'à maintenant.', '2015-08-25 01:29:00'),
+('2095', 'FR', 'Ce log existe déjà - vous avez essayé de le soumettre deux fois\&nbsp;!', '2015-08-25 01:29:00'),
+('2096', 'FR', '%2 a activé %1', '2015-08-25 01:29:00'),
+('2097', 'FR', '%1 a activé la géocache', '2015-08-25 01:29:00'),
+('2098', 'FR', 'convertie de HTML', '2015-08-25 01:29:00'),
+('2099', 'FR', 'option de recherche inconnue', '2015-08-25 01:29:00'),
+('2100', 'FR', 'aucune coordonnée disponible', '2015-08-25 01:29:00'),
+('2101', 'FR', 'Vous pouvez visiter alternativement %1 et entrez le code suivant manuellement :', '2015-08-25 01:29:00'),
+('2102', 'FR', 'Avant que vous pouvez vous connecter pour la première fois, vous devez activer votre compte en cliquant sur le lien suivant :', '2015-08-25 01:29:00'),
+('2103', 'FR', 'Périmètre\&nbsp;:', '2015-08-25 01:29:00'),
+('2104', 'FR', 'de coordonnées\&nbsp;:', '2015-08-25 01:29:00'),
+('2105', 'FR', 'Entrées du log', '2015-08-25 01:29:00'),
+('2106', 'FR', 'par l\'utilisateur\&nbsp;:', '2015-08-25 01:29:00'),
+('2107', 'FR', 'dans', '2015-08-25 01:29:00'),
+('2108', 'FR', 'Tous les caches', '2015-08-25 01:29:00'),
+('2111', 'FR', 'Mes caches', '2015-08-25 01:29:00'),
+('2112', 'FR', 'Opencaching', '2015-08-25 01:29:00'),
+('2113', 'FR', 'Nouvelles articles wiki', '2015-08-25 01:29:00'),
+('2114', 'FR', 'Principal direction :', '2015-08-25 01:29:00'),
+('2115', 'FR', 'Nouvelles fonctionnalités', '2015-08-25 01:29:00'),
+('2116', 'FR', 'Informer également sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00'),
+('2117', 'FR', 'Ne pas informer sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00'),
+('2118', 'FR', 'Informer sur des nouvelles caches marqués %1OConly%2.', '2015-08-25 01:29:00'),
+('2119', 'FR', 'avec la recommandation', '2015-08-25 01:29:00'),
+('2121', 'FR', 'Vous avez donné {curr} de {max} recommandations possibles.', '2015-08-25 01:29:00'),
+('2122', 'FR', 'Il vous manque {anzahl} trouvés pour faire une autre recommandation.', '2015-08-25 01:29:00'),
+('2123', 'FR', 'Une recommandation ne peut qu\'être fait dans un log \"trouvé\"\&nbsp;!', '2015-08-25 01:29:00'),
+('2125', 'FR', 'Historique du images du logs', '2015-08-25 01:29:00'),
+('2126', 'FR', 'Histoire du logs', '2015-08-25 01:29:00'),
+('2127', 'FR', 'Entrées du log pour les caches de %1', '2015-08-25 01:29:00'),
+('2128', 'FR', 'Cacher des propres logs', '2015-08-25 01:29:00'),
+('2129', 'FR', 'Afficher des propres logs', '2015-08-25 01:29:00'),
+('2130', 'FR', 'Entrées du log pour vos géocaches', '2015-08-25 01:29:00'),
+('2131', 'FR', 'Si vous trouvez un utilisateur qui veut adopter votre géocache, remplissez le nom d\'utilisateur. L\'utilisateur verra alors ce géocache sous Mon profil \&gt; Adoptions. Pour terminer, l\'utilisateur doit accepter nos conditions d\'utilisation et commettre l\'adoption.', '2015-08-25 01:29:00'),
+('2132', 'FR', 'Vous pouvez offrir ce géocache à plus qu\'un utilisateur. Le premier utilisateur commettant l\'adoption deviendra le nouveau propriétaire de ce géocache. Avec l\'adoption, vous allez donner à l\'utilisateur un droit illimité d\'utiliser, de modifier, et de publier le contenu géocache.', '2015-08-25 01:29:00'),
+('2133', 'FR', 'Copie EN', '2015-08-25 01:29:00'),
+('2134', 'FR', 'Je sais ce que je fais, ne montrent plus ce conseil aujourd\'hui.', '2015-08-25 01:29:00'),
+('2135', 'FR', 'Afficher OConly-81 stats', '2015-08-25 01:29:00'),
+('2136', 'FR', 'Statistiques OConly', '2015-08-25 01:29:00'),
+('2137', 'FR', 'L\'utilisateur a trouvé <b>%1</b> de <b>81</b> théoriquement des combinaisons terrain / difficulté possibles.', '2015-08-25 01:29:00'),
+('2139', 'FR', 'OConly-81', '2015-08-25 01:29:00'),
+('2140', 'FR', 'Les utilisateurs ayant des OConly-81 Statistiques\&nbsp;:', '2015-08-25 01:29:00'),
+('2141', 'FR', 'OConly-81 Statistiques\&nbsp;:', '2015-08-25 01:29:00'),
+('2142', 'FR', 'inactif', '2015-08-25 01:29:00'),
+('2143', 'FR', '<b>OConly-81</b> est un nouveau défi de trouver des caches d\'OConly dans des conditions variables, p.e. avec des différentes évaluations de difficulté et de terrain. Pour participer, vous pouvez activer les OConly-81 statistiques dans vos <a href=\"mydetails.php\" paramètres de profil d\'utilisateur</a>.', '2015-08-25 01:29:00'),
+('2144', 'FR', 'Les participants', '2015-08-25 01:29:00'),
+('2146', 'FR', 'Statistiques', '2015-08-25 01:29:00'),
+('2147', 'FR', 'Terrain global et la répartition de la difficulté de caches d\'OConly actifs\&nbsp;:', '2015-08-25 01:29:00'),
+('2148', 'FR', '... par type de cache\&nbsp;:', '2015-08-25 01:29:00'),
+('2149', 'FR', '... par région\&nbsp;', '2015-08-25 01:29:00'),
+('2150', 'FR', 'Cette géocache est probablement placée dans les zones de protection suivantes\&nbsp;:', '2015-08-25 01:29:00'),
+('2151', 'FR', 'Aussi repris comme\&nbsp;:', '2015-08-25 01:29:00'),
+('2152', 'FR', 'Charger d\'autres logs ...', '2015-08-25 01:29:00'),
+('2153', 'FR', 'Auto-charge des logs', '2015-08-25 01:29:00'),
+('2155', 'FR', 'Médias sociaux', '2015-08-25 01:29:00'),
+('2156', 'FR', 'Suivez-nous\&nbsp;:', '2015-08-25 01:29:00'),
+('2157', 'FR', 'Rejoignez les discussions\&nbsp;:', '2015-08-25 01:29:00'),
+('2158', 'FR', 'Forum d\'Opencaching', '2015-08-25 01:29:00'),
+('2159', 'FR', 'Google+ Communauté', '2015-08-25 01:29:00'),
+('2160', 'FR', 'Groupe Facebook', '2015-08-25 01:29:00'),
+('2161', 'FR', 'Qu\'un seul compte peut être créé par cette adresse e-mail. Prénom, nom et le pays sont en option.', '2015-08-25 01:29:00'),
+('2162', 'FR', 'Vos entrées du log', '2015-08-25 01:29:00'),
+('2163', 'FR', 'Il n\'y a pas encore des logs pour vos géocache.', '2015-08-25 01:29:00'),
+('2164', 'FR', 'La liste de cache {occode} a été modifié par {username}', '2015-08-25 01:29:00'),
+('2165', 'FR', 'La description de cache de {occode} a été modifié par {username}', '2015-08-25 01:29:00'),
+('2166', 'FR', 'Les modifications peuvent être contrôlés via la function de restaurer le vandalisme.', '2015-08-25 01:29:00'),
+('2167', 'FR', 'OC Admins', '2015-08-25 01:29:00'),
+('2168', 'FR', 'Nouveaux entrées du log pour les caches de %1', '2015-08-25 01:29:00'),
+('2169', 'FR', 'Voulez-vous vraiment supprimer cette image\&nbsp;?', '2015-08-25 01:29:00'),
+('2170', 'FR', 'Recherche de proximité à geocaching.com', '2015-08-25 01:29:00'),
+('2171', 'FR', 'S\'il vous plaît envoyez-moi des e-mails sur des nouvelles et des actions sur %1. (max. 2-5 par an)', '2015-08-25 01:29:00'),
+('2172', 'FR', 'Oui, je veux recevoir des emails sur des nouvelles et des actions sur %1. (max. 2-5 par an)', '2015-08-25 01:29:00'),
+('2173', 'FR', 'Non, je ne veux pas des e-mails sur des nouvelles et des actions sur %1.', '2015-08-25 01:29:00'),
+('2174', 'FR', 'Lettre d\'information\&nbsp;:', '2015-08-25 01:29:00'),
+('2175', 'FR', 'Divulguer mon adresse e-mail par défaut en envoyant d\'e-mails aux autres utilisateurs.', '2015-08-25 01:29:00'),
+('2176', 'FR', 'Evénements prévus', '2015-08-25 01:29:00'),
+('2177', 'FR', 'Une autre cache (<a href=\"viewcache.php?wp=%1\">%1</a>) existe à ces coords. Peut-être que vous avez appuyé sur «\&nbsp;soumettre cache\&nbsp;» deux fois. Pour publier une cache avec des coords identiques, entrez des autres coords d\'abord, puis modifier la liste et changer des coords.', '2015-08-25 01:29:00'),
+('2178', 'FR', 'Waypoint GC est invalide, doit être GCXXXXX', '2015-08-25 01:29:00'),
+('2179', 'FR', 'Liste de caches safari', '2015-08-25 01:29:00'),
+('2180', 'FR', 'Ajouter à la liste', '2015-08-25 01:29:00'),
+('2181', 'FR', 'Ajouter la géocache à la liste', '2015-08-25 01:29:00'),
+('2182', 'FR', 'Ajouter la géocache <b>%1</b> à la liste suivante\&nbsp;:', '2015-08-25 01:29:00'),
+('2183', 'FR', 'Nouvelle liste de cache', '2015-08-25 01:29:00'),
+('2184', 'FR', 'Nom invalide', '2015-08-25 01:29:00'),
+('2185', 'FR', 'liste publique', '2015-08-25 01:29:00'),
+('2186', 'FR', 'Vous pouvez gérer vos listes de cache personnelles dans votre <a href=\"mylists.php\">profil d\'utilisateur</a>.', '2015-08-25 01:29:00'),
+('2187', 'FR', 'public', '2015-08-25 01:29:00'),
+('2188', 'FR', 'privé', '2015-08-25 01:29:00'),
+('2189', 'FR', 'Listes de cache', '2015-08-25 01:29:00'),
+('2190', 'FR', 'Depuis Juillet 2015, tous les utilisateurs enregistrés sur Opencaching peuvent créer et publier des propres listes de géocache via leur <a href=\"mylists.php\">profil d\'utilisateur</a>. Les listes suivantes ont été publiées à ce jour\&nbsp;:', '2015-08-25 01:29:00'),
+('2191', 'FR', 'Liste de cache', '2015-08-25 01:29:00'),
+('2192', 'FR', 'Il n\'y a pas encore de listes.', '2015-08-25 01:29:00'),
+('2193', 'FR', 'Mes listes de cache', '2015-08-25 01:29:00'),
+('2194', 'FR', 'Voulez-vous vraiment supprimer la liste « %1 » ?', '2015-08-25 01:29:00'),
+('2195', 'FR', 'Créer nouvelle liste', '2015-08-25 01:29:00'),
+('2196', 'FR', 'Listes publiques sont affichés dans votre <a href=\"viewprofile.php?userid=%1\">profil utilisateur public</a>, sur le <a href=\"cachelists.php\">page d´sommaire liste</a> et (si activé) dans les listes de cache.', '2015-08-25 01:29:13'),
+('2197', 'FR', 'Liste de waypoints OC séparées par des espaces.', '2015-08-25 01:29:00'),
+('2198', 'FR', 'Vous pouvez également ajouter des caches via le bouton \"Ajouter à la liste\" dans les listes de cache.', '2015-08-25 01:29:00'),
+('2199', 'FR', 'Cette étape est facultative, les caches peuvent être ajoutés à la liste plus tard.', '2015-08-25 01:29:00'),
+('2200', 'FR', 'Créez une liste', '2015-08-25 01:29:00'),
+('2201', 'FR', 'Modifier la liste de cache', '2015-08-25 01:29:00'),
+('2202', 'FR', 'Ajouter des caches\&nbsp;:', '2015-08-25 01:29:00'),
+('2203', 'FR', 'Retirer des caches\&nbsp;:', '2015-08-25 01:29:00'),
+('2204', 'FR', 'Les waypoints suivants ne sont pas valides et ne peuvent pas être ajoutés à la liste\&nbsp;:', '2015-08-25 01:29:00'),
+('2205', 'FR', 'Afficher toutes les listes de cache', '2015-08-25 01:29:00'),
+('2206', 'FR', 'Je veux recevoir des notifications à propos de tous les logs de caches dans cette liste.', '2015-08-25 01:29:00'),
+('2207', 'FR', 'Je regarde cette liste.', '2015-08-25 01:29:00'),
+('2208', 'FR', 'regarder', '2015-08-25 01:29:00'),
+('2209', 'FR', 'ne regarde pas', '2015-08-25 01:29:00'),
+('2210', 'FR', 'Caches simples :', '2015-08-25 01:29:00'),
+('2211', 'FR', 'Listes\&nbsp;:', '2015-08-25 01:29:00'),
+('2212', 'FR', 'éditer', '2015-08-25 01:29:00'),
+('2213', 'FR', 'supprimer', '2015-08-25 01:29:00'),
+('2214', 'FR', 'ne pas ignorer', '2015-08-25 01:29:00'),
+('2215', 'FR', 'Nom de la liste\&nbsp;:', '2015-08-25 01:29:00'),
+('2216', 'FR', 'Par\&nbsp;:', '2015-08-25 01:29:00'),
+('2217', 'FR', 'ne regarde pas', '2015-08-25 01:29:00'),
+('2218', 'FR', 'Une autre de vos listes de cache a déjà ce nom.', '2015-08-25 01:29:00'),
+('2219', 'FR', 'longueur minimale pour les listes publiques est de 10 caractères', '2015-08-25 01:29:00'),
+('2220', 'FR', 'Vous êtes toujours en train de regarder cette géocache via une ou plusieurs listes de cache.', '2015-08-25 01:29:00'),
+('2221', 'FR', 'Créer un nouveau cachelist', '2015-08-25 01:29:13'),
+('2222', 'FR', 'visible pour tous les utilisateurs dans les listes de cache', '2015-08-25 01:29:13'),
+('2223', 'FR', 'semi-public', '2015-08-25 01:29:13'),
+('2224', 'FR', 'affichage de la listing', '2015-08-25 01:29:13'),
+('2225', 'FR', 'sans Geokrets', '2015-08-25 01:29:00'),
+('2226', 'FR', 'caché [cachelist]', '2015-08-25 01:29:13'),
+('2227', 'FR', 'les coordonner changements', '2015-08-25 01:29:13'),
+('2228', 'FR', 'Mot de passe pour le partage:', '2015-08-25 01:29:13'),
+('2229', 'FR', 'La liste a un mot de passe; pour partager cliquez ici', '2015-08-25 01:29:13'),
+('2230', 'FR', 'Listes propres', '2015-08-25 01:29:13'),
+('2231', 'FR', 'Listes signet', '2015-08-25 01:29:13'),
+('2232', 'FR', 'Voulez-vous vraiment supprimer la liste des signets \\\'%1\\\' ?', '2015-08-25 01:29:13'),
+('2233', 'FR', 'signet', '2015-08-25 01:29:13'),
+('2234', 'FR', 'Je l\'ai signet cette liste.', '2015-08-25 01:29:13'),
+('2235', 'FR', 'verrouillée cache / cachée', '2015-08-25 01:29:13'),
+('2236', 'FR', 'Regardez\&nbsp;:', '2015-08-25 01:29:13'),
+('2237', 'FR', 'Caches\&nbsp;:', '2010-10-04 00:17:40'),
+('2238', 'FR', 'Lien pour partager cette liste de cache\&nbsp;:', '2010-10-04 00:17:40'),
+('2240', 'FR', 'Chinois', '2015-08-18 15:00:00'),
+('2241', 'FR', 'Thaï', '2015-08-18 15:00:00'),
+('2242', 'FR', 'Luxembourgeois', '2015-08-18 15:00:00'),
+('2243', 'FR', 'Catalan', '2015-08-18 15:00:00'),
+('2244', 'FR', 'Waypoint\&nbsp;:', '2010-08-28 11:48:08'),
+('2245', 'FR', 'sans référence régionale', '2010-08-28 11:48:08'),
+('2246', 'FR', '\&nbsp;', '2010-08-28 11:48:08'),
+('2247', 'FR', 'Utilisateur\&nbsp;:', '2015-08-25 01:28:59'),
+('2248', 'FR', 'Tous les langues', '2015-08-25 01:28:59'),
+('2249', 'FR', 'Caches à %1', '2015-08-25 01:28:59'),
+('2250', 'FR', 'Nouveaux caches sans %1', '2015-08-25 01:28:59'),
+('2251', 'FR', 'Tous les nouveaux logs', '2015-08-25 01:28:59'),
+('2252', 'FR', 'Nouveaux logs à %1', '2015-08-25 01:28:59'),
+('2253', 'FR', 'Nouveaux logs sans %1', '2015-08-25 01:28:59'),
+('2254', 'FR', 'S\'il vous plaît sélectionner une langue.', '2015-08-25 01:29:00'),
+('2255', 'FR', 'OConly ', '2010-08-28 11:48:07'),
+('2256', 'FR', 'Nouveau Cache:', '2010-08-28 11:48:03'),
+('2257', 'FR', 'Nouveau cache OConly:', '2010-08-28 11:48:03'),
+('2258', 'FR', 'Pas de nouveaux entrées de log.', '2010-08-28 11:48:03'),
+('2259', 'FR', '{user} a fait une entrée de log pour votre cache « {cachename} » :', '2010-08-28 11:48:03'),
+('2260', 'FR', '{user} a fait une entrée de log pour le cache « {cachename} » :', '2010-08-28 11:48:03'),
+('2261', 'FR', 'Votre watchlist à partir de', '2010-08-28 11:48:03'),
+('2262', 'FR', 'Cache a été marquée comme OConly:', '2010-08-28 11:48:03'),
+('2263', 'FR', 'Vue description', '2010-08-28 11:48:03'),
+('2264', 'FR', 'Type\&nbsp;:', '2015-08-25 01:29:00'),
+('2265', 'FR', 'Nom : {cachename} par {owner}\r\nCoordonnées : {lon} {lat}\r\nStatut : {status}\r\nCondition: {condition}\r\n\r\nCaché en : {time}\r\nWaypoint : {waypoint}\r\nPays : {country}\r\nType : {type}\r\nBoîte : {container}\r\nD/T : {difficulty}/{terrain}\r\nOnline : {siteurl}viewcache.php?wp={waypoint}\r\n\r\nBrève description : {shortdesc}\r\n\r\nDescription{htmlwarn}:\r\n<===================>\r\n{desc}\r\n<===================>\r\n\r\nIndice additionnels :\r\n<===================>\r\n{hints}\r\n<===================>\r\nA|B|C|D|E|F|G|H|I|J|K|L|M\r\nN|O|P|Q|R|S|T|U|V|W|X|Y|Z\r\n\r\nEntrées du log:\r\n{logs}\r\n', '2015-06-17 10:09:14'),
+('2270', 'FR', 'Berlin', '2013-11-03 10:09:14'),
+('2271', 'FR', 'Brême', '2013-11-03 10:09:14'),
+('2272', 'FR', 'Dresde', '2013-11-03 10:09:14'),
+('2273', 'FR', 'Düsseldorf', '2013-11-03 10:09:14'),
+('2274', 'FR', 'Erfurt', '2013-11-03 10:09:14'),
+('2275', 'FR', 'Hambourg', '2013-11-03 10:09:14'),
+('2276', 'FR', 'Hanovre', '2013-11-03 10:09:14'),
+('2277', 'FR', 'Kiel', '2013-11-03 10:09:14'),
+('2278', 'FR', 'Mayence', '2013-11-03 10:09:14'),
+('2279', 'FR', 'Magdebourg', '2013-11-03 10:09:14'),
+('2280', 'FR', 'Munich', '2013-11-03 10:09:14'),
+('2281', 'FR', 'Potsdam', '2013-11-03 10:09:14'),
+('2282', 'FR', 'Sarrebruck', '2013-11-03 10:09:14'),
+('2283', 'FR', 'Schwerin', '2013-11-03 10:09:14'),
+('2284', 'FR', 'Stuttgart', '2013-11-03 10:09:14'),
+('2285', 'FR', 'Wiesbaden', '2013-11-03 10:09:14'),
+('2286', 'FR', 'Francfort-sur-le-Main', '2013-11-03 10:09:14'),
+('2287', 'FR', 'Dortmund', '2013-11-03 10:09:14'),
+('2288', 'FR', 'Essen', '2013-11-03 10:09:14'),
+('2289', 'FR', 'Leipzig', '2013-11-03 10:09:14'),
+('2290', 'FR', 'Nuremberg', '2013-11-03 10:09:14'),
+('2291', 'FR', 'Bologne', '2013-11-03 10:09:14'),
+('2292', 'FR', 'Bolzano', '2013-11-03 10:09:14'),
+('2293', 'FR', 'Corsica', '2013-11-03 10:09:14'),
+('2294', 'FR', 'Cosenza', '2013-11-03 10:09:14'),
+('2295', 'FR', 'Gênes', '2013-11-03 10:09:14'),
+('2296', 'FR', 'Milan', '2013-11-03 10:09:14'),
+('2297', 'FR', 'Naples', '2013-11-03 10:09:14'),
+('2298', 'FR', 'Palerme', '2013-11-03 10:09:14'),
+('2299', 'FR', 'Rome', '2013-11-03 10:09:14'),
+('2300', 'FR', 'Sardaigne', '2013-11-03 10:09:14'),
+('2301', 'FR', 'Udine', '2013-11-03 10:09:14'),
+('2302', 'FR', 'La Corogne', '2013-11-03 10:09:14'),
+('2303', 'FR', 'Albacete', '2013-11-03 10:09:14'),
+('2304', 'FR', 'Alicante', '2013-11-03 10:09:14'),
+('2305', 'FR', 'Almería', '2013-11-03 10:09:14'),
+('2306', 'FR', 'Ávila', '2013-11-03 10:09:14'),
+('2307', 'FR', 'Badajoz', '2013-11-03 10:09:14'),
+('2308', 'FR', 'Barcelona', '2013-11-03 10:09:14'),
+('2309', 'FR', 'Bilbao', '2013-11-03 10:09:14'),
+('2310', 'FR', 'Burgos', '2013-11-03 10:09:14'),
+('2311', 'FR', 'Cáceres', '2013-11-03 10:09:14'),
+('2312', 'FR', 'Cadix', '2013-11-03 10:09:14'),
+('2313', 'FR', 'Castellón', '2013-11-03 10:09:14'),
+('2314', 'FR', 'Ceuta', '2013-11-03 10:09:14'),
+('2315', 'FR', 'Ciudad Real', '2013-11-03 10:09:14'),
+('2316', 'FR', 'Córdoba', '2013-11-03 10:09:14'),
+('2317', 'FR', 'Cuenca', '2013-11-03 10:09:14'),
+('2318', 'FR', 'Gérone', '2013-11-03 10:09:14'),
+('2319', 'FR', 'Granada', '2013-11-03 10:09:14'),
+('2320', 'FR', 'Guadalajara', '2013-11-03 10:09:14'),
+('2321', 'FR', 'Huesca', '2013-11-03 10:09:14'),
+('2322', 'FR', 'Huelva', '2013-11-03 10:09:14'),
+('2323', 'FR', 'Jaén', '2013-11-03 10:09:14'),
+('2324', 'FR', 'Las Palmas de Gran Canaria', '2013-11-03 10:09:14'),
+('2325', 'FR', 'León', '2013-11-03 10:09:14'),
+('2326', 'FR', 'Lérida', '2013-11-03 10:09:14'),
+('2327', 'FR', 'Logroño', '2013-11-03 10:09:14'),
+('2328', 'FR', 'Lugo', '2013-11-03 10:09:14'),
+('2329', 'FR', 'Madrid', '2013-11-03 10:09:14'),
+('2330', 'FR', 'Malaga', '2013-11-03 10:09:14'),
+('2331', 'FR', 'Melilla', '2013-11-03 10:09:14'),
+('2332', 'FR', 'Murcia', '2013-11-03 10:09:14'),
+('2333', 'FR', 'Ourense', '2013-11-03 10:09:14'),
+('2334', 'FR', 'Oviedo', '2013-11-03 10:09:14'),
+('2335', 'FR', 'Palencia', '2013-11-03 10:09:14'),
+('2336', 'FR', 'Palma de Majorque', '2013-11-03 10:09:14'),
+('2337', 'FR', 'Pampelune', '2013-11-03 10:09:14'),
+('2338', 'FR', 'Pontevedra', '2013-11-03 10:09:14'),
+('2339', 'FR', 'Salamanca', '2013-11-03 10:09:14'),
+('2340', 'FR', 'San Sebastián', '2013-11-03 10:09:14'),
+('2341', 'FR', 'Santa Cruz de Tenerife', '2013-11-03 10:09:14'),
+('2342', 'FR', 'Santander', '2013-11-03 10:09:14'),
+('2343', 'FR', 'Segovia', '2013-11-03 10:09:14'),
+('2344', 'FR', 'Sevilla', '2013-11-03 10:09:14'),
+('2345', 'FR', 'Soria', '2013-11-03 10:09:14'),
+('2346', 'FR', 'Tarragone', '2013-11-03 10:09:14'),
+('2347', 'FR', 'Teruel', '2013-11-03 10:09:14'),
+('2348', 'FR', 'Toledo', '2013-11-03 10:09:14'),
+('2349', 'FR', 'Valencia', '2013-11-03 10:09:14'),
+('2350', 'FR', 'Valladolid', '2013-11-03 10:09:14'),
+('2351', 'FR', 'Vitoria-Gasteiz', '2013-11-03 10:09:14'),
+('2352', 'FR', 'Zamora', '2013-11-03 10:09:14'),
+('2353', 'FR', 'Saragosse', '2013-11-03 10:09:14'),
+('2354', 'FR', 'Paris', '2013-11-03 10:09:14'),
+('2355', 'FR', 'Marseille', '2013-11-03 10:09:14'),
+('2356', 'FR', 'Lyon', '2013-11-03 10:09:14'),
+('2357', 'FR', 'Toulouse', '2013-11-03 10:09:14'),
+('2358', 'FR', 'Nice', '2013-11-03 10:09:14'),
+('2359', 'FR', 'Nantes', '2013-11-03 10:09:14'),
+('2360', 'FR', 'Strasbourg', '2013-11-03 10:09:14'),
+('2361', 'FR', 'Montpellier', '2013-11-03 10:09:14'),
+('2362', 'FR', 'Bordeaux', '2013-11-03 10:09:14'),
+('2363', 'FR', 'Lille', '2013-11-03 10:09:14'),
+('2364', 'FR', 'Rennes', '2013-11-03 10:09:14'),
+('2365', 'FR', 'Reims', '2013-11-03 10:09:14'),
+('2366', 'FR', 'Le Havre', '2013-11-03 10:09:14'),
+('2367', 'FR', 'Saint-Étienne', '2013-11-03 10:09:14'),
+('2368', 'FR', 'Toulon', '2013-11-03 10:09:14'),
+('2369', 'FR', 'Bregenz', '2013-11-03 10:09:14'),
+('2370', 'FR', 'Eisenstadt', '2013-11-03 10:09:14'),
+('2371', 'FR', 'Graz', '2013-11-03 10:09:14'),
+('2372', 'FR', 'Innsbruck', '2013-11-03 10:09:14'),
+('2373', 'FR', 'Klagenfurt', '2013-11-03 10:09:14'),
+('2374', 'FR', 'Linz', '2013-11-03 10:09:14'),
+('2375', 'FR', 'Salzbourg', '2013-11-03 10:09:14'),
+('2376', 'FR', 'Sankt Pölten', '2013-11-03 10:09:14'),
+('2377', 'FR', 'Vienne', '2013-11-03 10:09:14'),
+('2378', 'FR', 'Aarau', '2013-11-03 10:09:14'),
+('2379', 'FR', 'Appenzell', '2013-11-03 10:09:14'),
+('2380', 'FR', 'Herisau', '2013-11-03 10:09:14'),
+('2381', 'FR', 'Liestal', '2013-11-03 10:09:14'),
+('2382', 'FR', 'Bâle', '2013-11-03 10:09:14'),
+('2383', 'FR', 'Berne', '2013-11-03 10:09:14'),
+('2384', 'FR', 'Fribourg', '2013-11-03 10:09:14'),
+('2385', 'FR', 'Genève', '2013-11-03 10:09:14'),
+('2386', 'FR', 'Glaris', '2013-11-03 10:09:14'),
+('2387', 'FR', 'Coire', '2013-11-03 10:09:14'),
+('2388', 'FR', 'Delémont', '2013-11-03 10:09:14'),
+('2389', 'FR', 'Lucerne', '2013-11-03 10:09:14'),
+('2390', 'FR', 'Neuchâtel', '2013-11-03 10:09:14'),
+('2391', 'FR', 'Lausanne', '2013-11-03 10:09:14'),
+('2392', 'FR', 'Zurich', '2013-11-03 10:09:14'),
+('2500', 'FR', 'nord', '2013-11-03 10:09:14'),
+('2501', 'FR', 'nord-nord-est', '2013-11-03 10:09:14'),
+('2502', 'FR', 'nord-est', '2013-11-03 10:09:14'),
+('2503', 'FR', 'est-nord-est', '2013-11-03 10:09:14'),
+('2504', 'FR', 'est', '2013-11-03 10:09:14'),
+('2505', 'FR', 'est-sud-est', '2013-11-03 10:09:14'),
+('2506', 'FR', 'sud-est', '2013-11-03 10:09:14'),
+('2507', 'FR', 'sud-sud-est', '2013-11-03 10:09:14'),
+('2508', 'FR', 'sud', '2013-11-03 10:09:14'),
+('2509', 'FR', 'sud-sud-ouest', '2013-11-03 10:09:14'),
+('2510', 'FR', 'sud-ouest', '2013-11-03 10:09:14'),
+('2511', 'FR', 'ouest-sud-ouest', '2013-11-03 10:09:14'),
+('2512', 'FR', 'ouest', '2013-11-03 10:09:14'),
+('2513', 'FR', 'ouest-nord-ouest', '2013-11-03 10:09:14'),
+('2514', 'FR', 'nord-ouest', '2013-11-03 10:09:14'),
+('2515', 'FR', 'nord-nord-ouest', '2013-11-03 10:09:14'),
+('2516', 'FR', 'ne pas signet', '2013-11-03 10:09:14'),
+('2517', 'FR', 'partager liste publique', '2013-11-03 10:09:14'),
+('2518', 'FR', 'recommandations total', '2013-11-03 10:09:14'),
+('2519', 'FR', 'Gauß-Krüger', '2013-11-03 10:09:14'),
+('2520', 'FR', 'Afficher les incohérences', '2017-09-06 18:01:44'),
+('2521', 'FR', 'Ce tableau contient quelques faux positifs. Les références du code \"libse\" (des notes sur de cache personnelle, waypoints supplémentaires) ne sont pas détectés, ainsi que des textes qui sont passés par des fonctions qui sont variables au niveau de la traduction et de textes multi-lignes. \"Aide\", \"Forum\", \"Team Blog\" et \"Informations\" sont référencés dans les fichiers de configuration locale. Soyez donc très prudent avant de supprimer quoi que ce soit.', '2017-09-06 18:01:44'),
+('2522', 'FR', 'OConly', '2013-11-03 10:09:14'),
+('2523', 'FR', 'Logos OC officiels (mise à jour)\&nbsp;:', '2017-09-06 18:01:44'),
+('2524', 'FR', 'Requête mémorisée', '2016-03-24 19:23:50'),
+('2525', 'FR', 'Logos alternavite (partiellement obsolète)\&nbsp;:', '2017-09-06 18:01:44'),
+('2526', 'FR', 'trouvé', '2010-10-04 00:17:39'),
+('2527', 'FR', 'non\&nbsp;trouvé', '2010-10-04 00:17:39'),
+('2528', 'FR', 'participation', '2010-10-04 00:17:39'),
+('2529', 'FR', 'recommandé', '2010-10-04 00:17:39'),
+('2530', 'FR', 'Nouvelles entrées actuelles', '2017-09-06 18:01:44'),
+('2531', 'FR', 'Toutes les nouvelles entrées', '2017-09-06 18:01:44'),
+('2532', 'FR', '... par date du log', '2017-09-06 18:01:44'),
+('2533', 'FR', 'Des bonnes et inappropriées raisons pour signaler un cache', '2017-09-06 18:01:44'),
+('2534', 'FR', '%1 rapports sont traités, %2 rapports attendus', '2017-09-06 18:01:44'),
+('2535', 'FR', 'le temps d\'attente pour les nouveaux rapports\&nbsp;: environ %1 à %2 jours', '2017-09-06 18:01:44'),
+('2536', 'FR', 'Liste de cache :', '2015-08-25 01:29:00'),
+('2537', 'FR', 'Listes de cache :', '2015-08-25 01:29:00'),
+('2538', 'FR', 'Ètat de géocache\&nbsp;:', '2017-09-06 18:01:44'),
+('2539', 'FR', 'non spécifié', '2017-09-06 18:01:44'),
+('2540', 'FR', 'ok', '2017-09-06 18:01:44'),
+('2541', 'FR', 'besoin de maintenance', '2017-09-06 18:01:44'),
+('2542', 'FR', 'La géocache a besoin de maintenance.', '2017-09-06 18:01:44'),
+('2543', 'FR', 'La géocache est en bon ou acceptable état.', '2017-09-06 18:01:44'),
+('2544', 'FR', 'Sélectionnez <i>a besoin de maintenance </i>si la géocache était en mauvais<br/>état à la date indiquée et avait un besoin urgent de maintenance.<br/>Veuillez-vous expliquer pourquoi.', '2017-09-06 18:01:44'),
+('2545', 'FR', 'mise-à-jour', '2017-09-06 18:01:44'),
+('2546', 'FR', 'obsolète', '2017-09-06 18:01:44'),
+('2547', 'FR', 'La description de géocache est obsolète.', '2017-09-06 18:01:44'),
+('2548', 'FR', 'La description de géocache est ok.', '2017-09-06 18:01:44'),
+('2549', 'FR', 'Sélectionnez <i>est obsolète</i> si la recherche de géocache est entravée par des<br/>informations obsolètes dansla description, par exemple l\'emplacement s\'est<br/>fortement changé ou si la description manque des informations importantes<br/>qui a été ajouté dans un autre site de géocaching. Veuillez-vous donner des<br/>détails dans votre log.', '2017-09-06 18:01:44'),
+('2550', 'FR', 'Sélectionnez <i>est obsolète</i> si la recherche géocache est entravée par des informations<br/>obsolètesdans la description, par exemple parce que l\'emplacement s\'est fortement<br/>changé. Veuillez-vous donner des détails de votre log.', '2017-09-06 18:01:44'),
+('2551', 'FR', 'Quand avez-vous trouvé la géocache\&nbsp;?', '2017-09-06 18:01:44'),
+('2552', 'FR', 'Quand avez-vous interrompez la recherche de cache\&nbsp;?', '2017-09-06 18:01:44'),
+('2553', 'FR', 'Cette description de géocache peut être obsolète.', '2017-09-06 18:01:44'),
+('2554', 'FR', 'Voir les entrées de log pour des informations supplémentaires.', '2017-09-06 18:01:44'),
+('2555', 'FR', 'Voir les <span style=\"white-space:nowrap\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\"> <a href=\"%1%2%3#logentries\" class=\"systemlink\">log entries</a></span> pour des informations supplémentaires.', '2017-09-06 18:01:44'),
+('2556', 'FR', 'la géocache a besoin de maintenance', '2017-09-06 18:01:44'),
+('2557', 'FR', 'la géocache est ok', '2017-09-06 18:01:44'),
+('2558', 'FR', 'description est obsolète', '2017-09-06 18:01:44'),
+('2559', 'FR', 'description est ok', '2017-09-06 18:01:44'),
+('2560', 'FR', 'En vous connectant \"Disponible\", vous confirmez que la géocache est en bon état.', '2017-09-06 18:01:44'),
+('2561', 'FR', 'En vous connectant \"Disponible\", vous confirmez que la géocache est mise-à-jour.', '2017-09-06 18:01:44'),
+('2562', 'FR', 'Vous pouvez y indiquer l\'état actuel de maintenance de la géocache.', '2017-09-06 18:01:44'),
+('2563', 'FR', 'Vous pouvez y indiquer si la description du cache est mise-à-jour.', '2017-09-06 18:01:44'),
+('2564', 'FR', 'Important\&nbsp;:', '2017-09-06 18:01:44'),
+('2565', 'FR', 'La description de la géocache sur Opencaching doit être resté mise-à-jour ! Les changements de la description sur d\'autres sites doivent être appliqués à la Opencaching listing à temps.', '2017-09-06 18:01:44'),
+('2566', 'FR', 'Dernière modification le', '2017-09-06 18:01:44'),
+('2567', 'FR', 'Coordonnées originales\&nbsp;:', '2015-06-17 10:09:14'),
+('2568', 'FR', 'Nouvelles coordonnées\&nbsp;:', '2015-06-17 10:09:14'),
+('2569', 'FR', 'déplacé vers %1 mètre', '2015-06-17 10:09:14'),
+('2570', 'FR', 'déplacé vers %1 km', '2015-06-17 10:09:14'),
+('2571', 'FR', 'Protéger les anciennes coordonnées', '2015-06-17 10:09:14'),
+('2598', 'FR', 'Sélectionnez <i>ok</i> si vous avez trouvé ou vérifié le cache et tout est ok.', '2017-09-06 18:01:44'),
+('2599', 'FR', 'Sélectionnez <i>mise-à-jour</i> si vous avez vérifié la description complète \&ndash; à partir de la<br />taille de conteneur jusqu\'aux notes codées et wayoints supplémentaires \&ndash; et peut<br />confirmer que tout est mise-à-jour.', '2017-09-06 18:01:44'),
+('2600', 'FR', 'Sélectionnez <i>mise-à-jour</i> si vous avez vérifié la description complète \&ndash; à partir<br />de la taille du conteneur jusqu\'aux notes codées et wayoints supplémentaires \&ndash;,<br />ont comparé à la liste de geocaching.com (%1) et peut confirmer que<br />tout est mise-à-jour.', '2017-09-06 18:01:44'),
+('2601', 'FR', 'Les problèmes de la description du cache comme mentionné dans les <a href=\"%1\" target=\"_blank\"><img src=\"resource2/ocstyle/images/log/16x16-listing-outdated.png\" /> entrées du log</a> n\'existent plus.', '2017-09-06 18:01:44'),
+('2602', 'FR', 'Toutes les informations (coordonnées, taille du conteneur, difficulté, terrain, le texte de description, des notes codées, waypoints supplémentaires) est au moins mise-à-jour avec', '2017-09-06 18:01:44'),
+('2603', 'FR', 'Il y a plus de 2 ans', '2013-11-03 10:09:14'),
+('2604', 'FR', 'Administrateur<br />commentaire\&nbsp;:', '2017-09-06 18:01:44'),
+('2605', 'FR', 'Si vous êtes sûr que le géocache est parti et le propriétaire ne pas réagir<br />à l\'entrée de votre log, vous pouvez le signaler à l\'équipe d\'Opencaching.<br />Utilisez le bouton \'Signaler cette cache\' au-dessus de la description<br />de cache.', '2017-09-06 18:01:44'),
+('2606', 'FR', 'Image', '2017-09-06 18:01:44'),
+('2607', 'FR', 'Titre\&nbsp;:', '2015-06-17 10:09:14'),
+('2608', 'FR', 'vers le haut', '2017-09-06 18:01:44'),
+('2609', 'FR', 'La description est inutilisable', '2017-09-06 18:01:44'),
+('2610', 'FR', 'Votre géocache', '2017-09-06 18:01:44'),
+('2611', 'FR', 'Votre rapport de géocache pour', '2017-09-06 18:01:44'),
+('2612', 'FR', 'convertir', '2017-09-06 18:01:44'),
+('2613', 'FR', 'waypoint', '2010-08-28 11:48:08'),
+('2659', 'FR', 'Recommandation', '2010-10-04 00:17:39'),

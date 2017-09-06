@@ -1,4 +1,3 @@
-
 -- Table cache_status
 SET NAMES 'utf8';
 TRUNCATE TABLE `cache_status`;

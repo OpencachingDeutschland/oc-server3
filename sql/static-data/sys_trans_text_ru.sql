@@ -479,4 +479,3 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2237', 'RU', 'Тайники:', '2010-12-06 22:17:35');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2246', 'RU', '<span></span>', '2010-12-09 00:17:58');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('922', 'SV', 'SV', '2011-05-15 11:46:05');
-

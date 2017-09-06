@@ -124,4 +124,3 @@ INSERT INTO `towns` (`country`, `name`, `trans_id`, `coord_lat`, `coord_long`, `
 INSERT INTO `towns` (`country`, `name`, `trans_id`, `coord_lat`, `coord_long`, `maplist`) VALUES ('FR', 'Le Havre', '2366', '49.495894', '0.134411', '1');
 INSERT INTO `towns` (`country`, `name`, `trans_id`, `coord_lat`, `coord_long`, `maplist`) VALUES ('FR', 'Saint-Étienne', '2367', '45.438936', '4.388351', '1');
 INSERT INTO `towns` (`country`, `name`, `trans_id`, `coord_lat`, `coord_long`, `maplist`) VALUES ('FR', 'Toulon', '2368', '43.124417', '5.93102', '1');
-

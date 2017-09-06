@@ -8,6 +8,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - notice for unpublished cashes [#1063](https://redmine.opencaching.de/issues/1063)
 - notice for reported cashes [#1100](https://redmine.opencaching.de/issues/1100)
 - recommendation notice in log messages [#1090](https://redmine.opencaching.de/issues/1090)
+- image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
+- new restore functionality for oc support [#1094](https://redmine.opencaching.de/issues/1094)
 - check for hidden and publish date [#898](https://redmine.opencaching.de/issues/898)
 - added error message for invalid home cords [#982](https://redmine.opencaching.de/issues/982)
 - admins can reopen cache reports [#1003](https://redmine.opencaching.de/issues/1003)
@@ -18,13 +20,16 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - allow rel attribute in a tags [#1077](https://redmine.opencaching.de/issues/1077)
 - admin report warning [#1047](https://redmine.opencaching.de/issues/1047)
 - increase text line height [#1091](https://redmine.opencaching.de/issues/1091)
-- cache image alignment [#1092](https://redmine.opencaching.de/issues/1092)[#955](https://redmine.opencaching.de/issues/955)
+- cache image alignment [#1092](https://redmine.opencaching.de/issues/1092)
+- map popup window design for additional waypoints [#955](https://redmine.opencaching.de/issues/955)
 - ask before delete an image [#1028](https://redmine.opencaching.de/issues/1028)
 - better description for the hint field [#889](https://redmine.opencaching.de/issues/889)
 - add event date to popup [#944](https://redmine.opencaching.de/issues/944)
 - save logtyp during edit process [#1099](https://redmine.opencaching.de/issues/1099)
 - show team-comment log flags [#1101](https://redmine.opencaching.de/issues/1101)
 - hide 'original coordinates' if there is an older log [#1102](https://redmine.opencaching.de/issues/1102)
+- optimize admin view [#1002](https://redmine.opencaching.de/issues/1002)
+- support subtitle search of caches [#986](https://redmine.opencaching.de/issues/986)
 - change logout time text [#1095](https://redmine.opencaching.de/issues/1095)
 - behavior during wrong password input [#998](https://redmine.opencaching.de/issues/998)
 - hide coordinate history of quiz and safari caches [#958](https://redmine.opencaching.de/issues/958)
@@ -62,8 +67,6 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - new theme structure and bootstrap 4
 - google analytics tracking [#1038](https://redmine.opencaching.de/issues/1038)
 - cookie notice [#768](https://redmine.opencaching.de/issues/768)
-- image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
-- new restore functionality for oc support [#1094](https://redmine.opencaching.de/issues/1094)
 
 ### Changed
 - change default geocache publish type [#1040](https://redmine.opencaching.de/issues/1040),[#745](https://redmine.opencaching.de/issues/745)
@@ -72,9 +75,6 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - support line breaks in filed notes file [#1042](https://redmine.opencaching.de/issues/1042)
 - show only log password if it is needed [#1021](https://redmine.opencaching.de/issues/1021)
 - trim input values like listing name [#221](https://redmine.opencaching.de/issues/221)
-- optimize admin view [#1002](https://redmine.opencaching.de/issues/1002)
-- support subtitle search of caches [#986](https://redmine.opencaching.de/issues/986)
-
 
 ### Removed
 

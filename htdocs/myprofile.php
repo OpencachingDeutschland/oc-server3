@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Oc\Country\Country;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'myprofile';
@@ -156,14 +158,18 @@ function change()
         $showAllCountries = 1;
     }
 
-    $countriesList = new countriesList();
-    $rs = $countriesList->getRS($user->getCountryCode(), $showAllCountries != 0);
+    $country = new Country($user->getCountryCode(), 'profile');
+    if (!$country->isMain()) {
+        $showAllCountries = 1;
+    }
+    if ($showAllCountries == 1) {
+        $rs = $country->getAllRS();
+    } else {
+        $rs = $country->getMainRS();
+    }
+
     $tpl->assign_rs('countries', $rs);
     sql_free_result($rs);
-    $showAllCountries = 1;
-    if ($countriesList->defaultUsed() == true) {
-        $showAllCountries = 0;
-    }
     $tpl->assign('showAllCountries', $showAllCountries);
 
     $tpl->assign('edit', true);

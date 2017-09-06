@@ -30,6 +30,7 @@ $procedures[] = 'sp_updateall_cache_listingdates';
 $procedures[] = 'sp_updateall_cachelog_logdates';
 $procedures[] = 'sp_updateall_rating_dates';
 $procedures[] = 'sp_updateall_cachelist_counts';
+$procedures[] = 'sp_rebuild_country_stat';
 
 $tpl->assign('procedures', $procedures);
 
@@ -73,6 +74,9 @@ if (isset($_REQUEST['ok'])) {
             break;
         case 'sp_updateall_cachelist_counts':
             sql('CALL sp_updateall_cachelist_counts(@c)');
+            break;
+        case 'sp_rebuild_country_stat':
+            sql('CALL sp_rebuild_country_stat(@c)');
             break;
         default:
             $bError = true;

@@ -5,6 +5,7 @@
  ***************************************************************************/
 
 use Oc\Util\CBench;
+use Oc\Country\Country;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/db.inc.php';
@@ -211,7 +212,8 @@ class OcSmarty extends Smarty
         $optn['lib'] = $opt['lib'];
         $optn['tracking'] = $opt['tracking'];
         $optn['geokrety'] = $opt['geokrety'];
-        $optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
+        $country = new Country($opt['page']['main_country'], 'global');
+        $optn['template']['usercountrieslist'] = $country->getGobalSelectionList($opt['logic']['main_countries']['global_min']);
         $optn['help']['oconly'] = helppagelink('oconly', 'OConly');
         $optn['msie'] = $useragent_msie;
 

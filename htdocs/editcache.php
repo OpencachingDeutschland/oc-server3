@@ -9,6 +9,7 @@
 use Oc\GeoCache\StatisticPicture;
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
+use Oc\Country\Country;
 
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
@@ -657,54 +658,20 @@ if ($error == false) {
                 //build countrylist
                 $countriesoptions = '';
 
-                //check if selected country is in list_default
-                if ($show_all_countries == 0) {
-                    $rs = sql(
-                        "SELECT `show` FROM `countries_list_default` WHERE `show`='&1' AND `lang`='&2'",
-                        $cache_country,
-                        $locale
-                    );
-                    if (mysql_num_rows($rs) == 0) {
-                        $show_all_countries = 1;
-                    }
-                    sql_free_result($rs);
+                $country = new Country($cache_country, 'cache');
+                if ($show_all_countries != 1 && !$country->isMain()) {
+                    $show_all_countries = 1;
                 }
-
-                //get the record
-                if ($show_all_countries == 0) {
-                    $rs = sql(
-                        "SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-                         FROM `countries`
-                         INNER JOIN `countries_list_default`
-                           ON `countries_list_default`.`show`=`countries`.`short`
-                         LEFT JOIN `sys_trans`
-                           ON `countries`.`trans_id`=`sys_trans`.`id`
-                         LEFT JOIN `sys_trans_text`
-                           ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                           AND `sys_trans_text`.`lang`='&1'
-                         WHERE `countries_list_default`.`lang`='&1'
-                         ORDER BY `name` ASC",
-                        $locale
-                    );
+                if ($show_all_countries == 1) {
+                    $rs = $country->getAllRS();
                 } else {
-                    $rs = sql(
-                        "SELECT `countries`.`short`, IFNULL(`sys_trans_text`.`text`, `countries`.`name`) AS `name`
-                         FROM `countries`
-                         LEFT JOIN `sys_trans`
-                           ON `countries`.`trans_id`=`sys_trans`.`id`
-                         LEFT JOIN `sys_trans_text`
-                           ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-                         AND `sys_trans_text`.`lang`='&1'
-                         ORDER BY `name` ASC",
-                        $locale
-                    );
+                    $rs = $country->getMainRS();
                 }
-
                 while ($record = sql_fetch_assoc($rs)) {
-                    $sSelected = ($record['short'] == $cache_country) ? ' selected="selected"' : '';
+                    $sSelected = ($record['code'] == $cache_country) ? ' selected="selected"' : '';
                     $countriesoptions .=
                         '<option value="'
-                        . htmlspecialchars($record['short'], ENT_COMPAT, 'UTF-8')
+                        . htmlspecialchars($record['code'], ENT_COMPAT, 'UTF-8')
                         . '"' . $sSelected . '>'
                         . htmlspecialchars($record['name'], ENT_COMPAT, 'UTF-8')
                         . '</option>' . "\n";

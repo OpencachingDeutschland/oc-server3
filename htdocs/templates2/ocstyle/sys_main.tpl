@@ -146,21 +146,13 @@
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
                             <select id="usercountry" onclick="usercountry_change()">
+                                <option disabled="disabled">- {t}Many caches{/t} - </option>
                                 {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
-                                    {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
-                                        <option disabled="disabled">
-                                            {if $countryItem.group==1}
-                                                - {t}This OC node{/t} -
-                                            {elseif $countryItem.group==2}
-                                                - {t}Other OC nodes{/t} -
-                                            {elseif $countryItem.group==3}
-                                                - {t}Others{/t} -
-                                            {else}
-                                                -
-                                            {/if}
-                                        </option>
+                                    {if $countryItem === false}
+                                        <option disabled="disabled">- {t}Less caches{/t} - </option>
+                                    {else}
+                                        <option value="{$countryItem.code|escape}"{if $opt.template.country==$countryItem.code} selected="selected"{/if}>{$countryItem.name|escape}</option>
                                     {/if}
-                                    <option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
                                 {/foreach}
                             </select>&nbsp;
                         </td>

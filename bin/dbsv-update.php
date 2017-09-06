@@ -1175,6 +1175,23 @@ function dbv_160()
     );
 }
 
+function dbv_161()
+{
+    if (!sql_table_exists('stat_cache_countries')) {
+        sql(
+            "CREATE TABLE `stat_cache_countries` (
+                `country` char(2) NOT NULL,
+                `active_caches` int(10) NOT NULL,
+                PRIMARY KEY (`country`),
+                KEY `active_caches` (`active_caches`)
+             ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT='via Trigger (caches)'"
+        );
+    }
+    update_triggers();
+    sql("CALL sp_rebuild_country_stat(@dummy)");
+    sql("ALTER TABLE `countries_list_default` COMMENT='obsolete'");
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

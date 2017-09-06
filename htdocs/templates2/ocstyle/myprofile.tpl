@@ -72,7 +72,7 @@
                         <select name="country"class="public-setting">
                             <option value="XX" {if $countryCode=="XX"}selected="selected"{/if}>{t}Not defined{/t}</option>
                             {foreach from=$countries item=countryItem}
-                                <option value="{$countryItem.id|escape}" {if $countryCode==$countryItem.id}selected="selected"{/if}>{$countryItem.name|escape}</option>
+                                <option value="{$countryItem.code|escape}" {if $countryCode==$countryItem.code}selected="selected"{/if}>{$countryItem.name|escape}</option>
                             {/foreach}
                         </select>
                         {if $showAllCountries==false}

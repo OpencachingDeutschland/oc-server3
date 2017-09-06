@@ -3,12 +3,12 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Oc\Country\Country;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'register';
 $tpl->menuitem = MNU_START_REGISTER;
-
-$countriesList = new countriesList();
 
 // Read register information
 $show_all_countries = isset($_POST['show_all_countries']) ? $_POST['show_all_countries'] + 0 : 0;
@@ -18,7 +18,7 @@ $first_name = isset($_POST['first_name']) ? trim($_POST['first_name']) : '';
 $password = isset($_POST['password1']) ? $_POST['password1'] : '';
 $password2 = isset($_POST['password2']) ? $_POST['password2'] : '';
 $email = isset($_POST['email']) ? mb_trim($_POST['email']) : '';
-$country = isset($_POST['country']) ? $_POST['country'] : 'XX';
+$sel_country = isset($_POST['country']) ? $_POST['country'] : 'XX';
 $tos = isset($_POST['TOS']) ? ($_POST['TOS'] == 'ON') : false;
 
 if (isset($_POST['show_all_countries_submit'])) {
@@ -54,7 +54,7 @@ if (isset($_POST['show_all_countries_submit'])) {
         $tpl->assign('error_password_diffs', 1);
     }
 
-    if (!$user->setCountryCode(($country == 'XX') ? null : $country)) {
+    if (!$user->setCountryCode(($sel_country == 'XX') ? null : $sel_country)) {
         $bError = true;
         $tpl->assign('error_unkown', 1);
     }
@@ -96,17 +96,21 @@ if (isset($_POST['show_all_countries_submit'])) {
     }
 }
 
-$rs = $countriesList->getRS(($country == 'XX') ? null : $country, $show_all_countries);
+$country = new Country($sel_country == 'XX' ? $opt['page']['main_country'] : $sel_country, 'profile');
+if (!$country->isMain()) {
+    $show_all_countries = 1;
+}
+if ($show_all_countries == 1) {
+    $rs = $country->getAllRS();
+} else {
+    $rs = $country->getMainRS();
+}
 $tpl->assign_rs('countries', $rs);
 sql_free_result($rs);
 
-if (!$countriesList->defaultUsed()) {
-    $show_all_countries = 1;
-}
-
 $tpl->assign('show_all_countries', $show_all_countries);
-$tpl->assign('country', $country);
-$tpl->assign('country_full', $countriesList->getCountryLocaleName($country));
+$tpl->assign('country', $sel_country);
+$tpl->assign('country_full', $country->getLocaleName());
 
 $tpl->assign('email', $email);
 $tpl->assign('first_name', $first_name);

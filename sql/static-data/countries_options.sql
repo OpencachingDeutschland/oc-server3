@@ -34,6 +34,7 @@ INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('PT', '1', '40.3632883409158', '-2.98828125', '6', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('RO', '1', '45.8747122489048', '24.93896484375', '7', '16');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('RU', '1', '59.1759282492714', '92.109375', '3', '0');
+INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SA', '1', '24.45', '43.55', '6', '1');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SE', '1', '62.5731057844998', '14.9853515625', '5', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SI', '1', '46.0160387383342', '14.798583984375', '8', '0');
 INSERT INTO `countries_options` (`country`, `display`, `gmLat`, `gmLon`, `gmZoom`, `nodeId`) VALUES ('SK', '1', '48.6220164284684', '18.907470703125', '8', '0');

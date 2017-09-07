@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-15 15:43+0200\n"
-"PO-Revision-Date: 2017-06-15 15:43+0200\n"
+"POT-Creation-Date: 2017-09-04 10:10+0200\n"
+"PO-Revision-Date: 2017-09-04 10:30+0200\n"
 "Last-Translator: following <following@online.de>\n"
 "Language-Team: following <following@online.de>\n"
 "Language: de\n"
@@ -14,11 +14,11 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: .git\n"
 
-#: services/caches/formatters/gpx.php:409
+#: services/caches/formatters/gpx/WebService.php:409
 msgid ""
 "<b>Geocache coordinates have been changed.</b> They have been replaced with "
 "your own custom coordinates which you have provided for this geocache."
@@ -26,7 +26,7 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie wurden durch deine "
 "eigenen Koordinaten aus der persönlichen Notiz für diesen Cache ersetzt."
 
-#: services/caches/formatters/gpx.php:415
+#: services/caches/formatters/gpx/WebService.php:415
 msgid ""
 "<b>Geocache coordinates have been changed.</b> Currently they point to one "
 "of the alternate waypoints originally described as:"
@@ -34,97 +34,97 @@ msgstr ""
 "<b>Die Koordinaten des Geocaches wurden geändert.</b> Sie zeigen zurzeit auf "
 "einen der zusätzlichen Wegpunkte mit der ursprünglichen Beschreibung:"
 
-#: services/caches/formatters/gpx.php:428
+#: services/caches/formatters/gpx/WebService.php:428
 msgid "Original geocache location"
 msgstr "Originalposition des Caches"
 
-#: services/caches/formatters/gpx.php:430
+#: services/caches/formatters/gpx/WebService.php:430
 #, php-format
 msgid "Original (owner-supplied) location of the %s geocache"
 msgstr "Originale, vom Besitzer angegebene Position des Geocaches %s"
 
-#: services/caches/formatters/gpxfile.tpl.php:52
-#: services/caches/formatters/gpxfile.tpl.php:87
+#: services/caches/formatters/gpx/gpxfile.tpl.php:52
+#: services/caches/formatters/gpx/gpxfile.tpl.php:87
 msgid "hidden by"
 msgstr "versteckt von"
 
-#: services/caches/formatters/gpxfile.tpl.php:89
+#: services/caches/formatters/gpx/gpxfile.tpl.php:89
 #, php-format
 msgid "%d recommendation"
 msgid_plural "%d recommendations"
 msgstr[0] "%d Empfehlung"
 msgstr[1] "%d Empfehlungen"
 
-#: services/caches/formatters/gpxfile.tpl.php:90
+#: services/caches/formatters/gpx/gpxfile.tpl.php:90
 #, php-format
 msgid "found %d time"
 msgid_plural "found %d times"
 msgstr[0] "%d mal gefunden"
 msgstr[1] "%d mal gefunden"
 
-#: services/caches/formatters/gpxfile.tpl.php:93
+#: services/caches/formatters/gpx/gpxfile.tpl.php:93
 #, php-format
 msgid "%d trackable"
 msgid_plural "%d trackables"
 msgstr[0] "%d Geokret"
 msgstr[1] "%d Geokrets"
 
-#: services/caches/formatters/gpxfile.tpl.php:97
+#: services/caches/formatters/gpx/gpxfile.tpl.php:97
 msgid "Personal notes"
 msgstr "Persönliche Notizen"
 
-#: services/caches/formatters/gpxfile.tpl.php:101
+#: services/caches/formatters/gpx/gpxfile.tpl.php:101
 msgid "Attributes"
 msgstr "Attribute"
 
-#: services/caches/formatters/gpxfile.tpl.php:105
+#: services/caches/formatters/gpx/gpxfile.tpl.php:105
 msgid "Trackables"
 msgstr "Geokrets"
 
-#: services/caches/formatters/gpxfile.tpl.php:115
-#: services/caches/formatters/gpxfile.tpl.php:131
+#: services/caches/formatters/gpx/gpxfile.tpl.php:115
+#: services/caches/formatters/gpx/gpxfile.tpl.php:131
 msgid "Images"
 msgstr "Bilder"
 
-#: services/caches/formatters/gpxfile.tpl.php:138
+#: services/caches/formatters/gpx/gpxfile.tpl.php:138
 msgid "Spoilers"
 msgstr "Spoiler"
 
-#: services/caches/formatters/gpxfile.tpl.php:147
+#: services/caches/formatters/gpx/gpxfile.tpl.php:147
 msgid "Image descriptions"
 msgstr "Bildbeschreibungen"
 
-#: services/caches/formatters/gpxfile.tpl.php:155
+#: services/caches/formatters/gpx/gpxfile.tpl.php:155
 msgid "The cache probably is located in the following protection areas:"
 msgstr ""
 "Der Geocache befindet sich wahrscheinlich in den folgenden Schutzgebieten:"
 
-#: services/caches/geocaches.php:541
+#: services/caches/geocaches/WebService.php:541
 msgid "Parts of this geocache listing may be outdated."
 msgstr "Teile dieser Cachebeschreibung sind wahrscheinlich veraltet."
 
-#: services/caches/geocaches.php:543
+#: services/caches/geocaches/WebService.php:543
 msgid "See the log entries for more information."
 msgstr "Weitere Informationen dazu finden sich in den Logeinträgen."
 
-#: services/caches/geocaches.php:1050
+#: services/caches/geocaches/WebService.php:1049
 msgid "Stage"
 msgstr "Station"
 
-#: services/caches/geocaches.php:1094
+#: services/caches/geocaches/WebService.php:1093
 msgid "User location"
 msgstr "Benutzerkoordinaten"
 
-#: services/caches/geocaches.php:1097
+#: services/caches/geocaches/WebService.php:1096
 #, php-format
 msgid "Your own custom coordinates for the %s geocache"
 msgstr "Die Koordinaten für den Geocache %s aus deiner persönlichen Notiz"
 
-#: services/caches/geocaches.php:1256
+#: services/caches/geocaches/WebService.php:1260
 msgid "National Park / Landscape"
 msgstr "Nationalpark / Landschaft"
 
-#: services/caches/geocaches.php:1435
+#: services/caches/geocaches/WebService.php:1438
 #, php-format
 msgid ""
 "This <a href='%s'>geocache</a> description comes from the <a href='%s'>%s</"
@@ -132,7 +132,7 @@ msgid ""
 msgstr ""
 "Diese <a href='%s'>Cache</a>-Beschreibung stammt von <a href='%s'>%s</a>."
 
-#: services/caches/geocaches.php:1447
+#: services/caches/geocaches/WebService.php:1450
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
@@ -143,7 +143,7 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>, Stand: %s; "
 "alle Logeinträge &copy; jeweiliger Autor"
 
-#: services/caches/geocaches.php:1458
+#: services/caches/geocaches/WebService.php:1461
 #, php-format
 msgid ""
 "&copy; <a href='%s'>%s</a>, <a href='%s'>%s</a>, <a href='https://"
@@ -154,12 +154,14 @@ msgstr ""
 "creativecommons.org/licenses/by-nc-nd/3.0/de/'>CC-BY-NC-ND</a>; alle "
 "Logeinträge &copy; jeweiliger Autor"
 
-#: services/logs/images/add.php:81 services/logs/images/edit.php:55
+#: services/logs/images/add/WebService.php:79
+#: services/logs/images/edit/WebService.php:53
 #, php-format
 msgid "%s requires all images to have captions. Please provide one."
 msgstr ""
+"Für das Hochladen auf %s wird ein Bildtitel benötigt. Bitte gib einen ein."
 
-#: services/logs/images/add.php:106
+#: services/logs/images/add/WebService.php:104
 #, php-format
 msgid ""
 "Your image file is too large (%s.%s MB); %s accepts a maximum image size of "
@@ -168,33 +170,39 @@ msgstr ""
 "Das hochgeladene Bild ist zu groß (%s,%s MB); die maximale Bildgröße bei %s "
 "ist %s,%s MB."
 
-#: services/logs/images/add.php:134 services/logs/images/add.php:159
+#: services/logs/images/add/WebService.php:132
+#: services/logs/images/add/WebService.php:157
 #, php-format
 msgid "%s reported an error when it tried to read your file."
-msgstr ""
+msgstr "%s konnte deine Bilddatei nicht verarbeiten."
 
-#: services/logs/images/add.php:138
+#: services/logs/images/add/WebService.php:136
 msgid ""
 "Make sure you are sending a file in an appropriate format (JPEG, PNG or GIF)."
 msgstr ""
+"Überprüfe bitte, ob es sich um eines der akzeptierten Bildformate handelt "
+"(JPEG, PNG oder GIF)."
 
-#: services/logs/images/add.php:147
+#: services/logs/images/add/WebService.php:145
 #, php-format
 msgid ""
 "The image you have uploaded is too large (%s megapixels). Please use an "
 "external application to downscale it first. (You can also contact the "
 "developers of '%s' and ask them to downscale uploaded images automatically.)"
 msgstr ""
+"Das hochgeladene Bild ist zu groß (%s Megapixel). Bitte verkleinere es mit "
+"einem Bildbearbeitungsprogramm. (Du kannst auch die Entwickler von '%s' "
+"darum bitten, hochgeladene Bilder automatisch zu verkleinern.)"
 
-#: services/logs/images/add.php:411
+#: services/logs/images/add/WebService.php:408
 msgid "Image has been successfully saved."
-msgstr ""
+msgstr "Das Bild wurde erfolgreich gespeichert."
 
-#: services/logs/images/edit.php:215
+#: services/logs/images/edit/WebService.php:213
 msgid "Image properties have been successfully updated."
-msgstr ""
+msgstr "Die Bildeigenschaften wurden geändert."
 
-#: services/logs/submit.php:75
+#: services/logs/submit/WebService.php:75
 msgid ""
 "You are trying to publish a log entry with a date in future. Cache log "
 "entries are allowed to be published in the past, but NOT in the future."
@@ -202,7 +210,7 @@ msgstr ""
 "Das Datum deines Logeintrags liegt in der Zukunft. Cache-Logs können nur für "
 "die Vergangenheit oder für heute eingetragen werden."
 
-#: services/logs/submit.php:111
+#: services/logs/submit/WebService.php:111
 #, php-format
 msgid ""
 "However, your cache rating was ignored, because %s does not have a rating "
@@ -210,7 +218,7 @@ msgid ""
 msgstr ""
 "Deine Cachewertung wurde jedoch ignoriert, weil %s kein Bewertungssystem hat."
 
-#: services/logs/submit.php:136
+#: services/logs/submit/WebService.php:136
 #, php-format
 msgid ""
 "However, your cache recommendation was ignored, because %s does not allow "
@@ -219,7 +227,7 @@ msgstr ""
 "Deine Empfehlung wurde jedoch ignoriert, weil auf %s keine Event-Caches "
 "empfohlen werden können."
 
-#: services/logs/submit.php:185
+#: services/logs/submit/WebService.php:185
 #, php-format
 msgid ""
 "However, your \"does not need maintenance\" flag was ignored, because %s "
@@ -228,7 +236,7 @@ msgstr ""
 "Deine Angabe \"benötigt Wartung\" wurde jedoch ignoriert, weil es diese "
 "Funktion bei %s nicht gibt. "
 
-#: services/logs/submit.php:215
+#: services/logs/submit/WebService.php:215
 msgid ""
 "This cache is an Event cache. You cannot \"Find\" it (but you can attend it, "
 "or comment on it)!"
@@ -236,7 +244,7 @@ msgstr ""
 "Dies ist ein Event-Cache. Du kannst ihn nicht \"finden\" (aber du kannst am "
 "Event teilnehmen oder einen Hinweis loggen)."
 
-#: services/logs/submit.php:224
+#: services/logs/submit/WebService.php:224
 msgid ""
 "This cache is NOT an Event cache. You cannot \"Attend\" it (but you can find "
 "it, or comment on it)!"
@@ -244,58 +252,66 @@ msgstr ""
 "Dies ist KEIN Event-Cache. Du kannst an ihm nicht \"teilnehmen\" (aber du "
 "kannst ihn finden oder kommentieren)."
 
-#: services/logs/submit.php:234
+#: services/logs/submit/WebService.php:234
 msgid "Your have to supply some text for your comment."
 msgstr "Du musst einen Text für dein Hinweislog eingeben!"
 
-#: services/logs/submit.php:250
+#: services/logs/submit/WebService.php:250
 msgid "This cache requires a password. You didn't provide one!"
 msgstr ""
 "Dieser Cache kann nur mit Kennwort geloggt werden, aber du hast keines "
 "angegeben."
 
-#: services/logs/submit.php:254
+#: services/logs/submit/WebService.php:254
 msgid "Invalid password!"
 msgstr "Ungültiges Kennwort!"
 
-#: services/logs/submit.php:399
+#: services/logs/submit/WebService.php:399
 msgid "You have already submitted a log entry with exactly the same contents."
 msgstr ""
 "Du hast bereits einen Logeintrag mit genau dem gleichen Inhalt gemacht."
 
-#: services/logs/submit.php:426
+#: services/logs/submit/WebService.php:433
 msgid ""
 "You have already submitted a \"Found it\" log entry once. Now you may submit "
 "\"Comments\" only!"
 msgstr ""
-"Du hast diesen Cache bereits als gefunden geloggt. Ein zweites Fundlog ist "
-"nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
+"Du hast diesen Cache bereits als \"gefunden\" geloggt. Ein zweites Fundlog "
+"ist nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
 
-#: services/logs/submit.php:432
+#: services/logs/submit/WebService.php:435
+msgid ""
+"You have already submitted an \"Attended\" log entry once. Now you may "
+"submit \"Comments\" only!"
+msgstr ""
+"Du hast dieses Event bereits als \"teilgenommen\" geloggt. Eine zweite "
+"Teilnahme ist nicht möglich, aber du kannst stattdessen einen Hinweis loggen."
+
+#: services/logs/submit/WebService.php:445
 msgid "You are the owner of this cache. You may submit \"Comments\" only!"
 msgstr ""
 "Als Besitzer des Caches kannst du nur Hinweise loggen, keine Funde oder "
 "Nichtfunde."
 
-#: services/logs/submit.php:454
+#: services/logs/submit/WebService.php:467
 msgid "You have already rated this cache once. Your rating cannot be changed."
 msgstr ""
 "Du hast diesen Cache bereits bewertet. Deine Bewertung ist nicht änderbar."
 
-#: services/logs/submit.php:475
+#: services/logs/submit/WebService.php:488
 msgid "You have already recommended this cache once."
 msgstr "Du hast diesen Cache bereits empfohlen."
 
-#: services/logs/submit.php:491
+#: services/logs/submit/WebService.php:504
 msgid "You don't have any recommendations to give. Find more caches first!"
 msgstr ""
-"Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können!"
+"Du musst mehr Caches finden, um eine weitere Bewertung abgeben zu können."
 
-#: services/logs/submit.php:542
+#: services/logs/submit/WebService.php:555
 msgid "Event caches cannot \"need maintenance\"."
 msgstr "Event-Caches können keine \"Wartung benötigen\"."
 
-#: services/logs/submit.php:693
+#: services/logs/submit/WebService.php:706
 msgid "Your cache log entry was posted successfully."
 msgstr "Dein Log wurde veröffentlicht."
 

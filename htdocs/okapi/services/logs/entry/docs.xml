@@ -155,7 +155,19 @@
                 <p>Please note that OCPL-based installations will always return <b>null</b> here.</p>
             </li>
             <li><b>comment</b> - <a href='%OKAPI:docurl:html%'>HTML string</a>, text entered
-                with the log entry,</li>
+                with the log entry,
+            </li>
+            <li>
+                <p><b>location</b> - the location of the geocache that was provided
+                by the logger, in "lat|lon" format (<i>lat</i> and <i>lon</i> are
+                in full degrees with a dot as a decimal point); <b>null</b>
+                if no location was provided. For "Moved" logs this is the location
+                where the cache has been moved to, for all other types of log the
+                location where the cache has been found.</p>
+                <p>Note that currently no OC site allows to log a location for other
+                types than "Moved", so <em>currently</em> it is always <b>null</b>
+                for other logs than "Moved".</p>
+            </li>
             <li>
                 <p><b>images</b> - list of dictionaries, each dictionary represents one
                 image saved along with the log; each dictionary has the following

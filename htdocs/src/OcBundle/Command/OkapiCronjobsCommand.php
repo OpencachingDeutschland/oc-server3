@@ -25,8 +25,7 @@ class OkapiCronjobsCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        require_once __DIR__.'/../../../okapi/core.php';
-        require_once __DIR__.'/../../../okapi/vendor/autoload.php';
+        require_once __DIR__.'/../../../okapi/autoload.php';
         Okapi::execute_cron5_cronjobs();
     }
 }

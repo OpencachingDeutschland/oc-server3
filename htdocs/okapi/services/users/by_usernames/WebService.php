@@ -3,12 +3,12 @@
 namespace okapi\services\users\by_usernames;
 
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 class WebService

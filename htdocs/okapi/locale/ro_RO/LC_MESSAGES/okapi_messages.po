@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: OKAPI\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-15 15:43+0200\n"
-"PO-Revision-Date: 2017-06-15 15:43+0200\n"
+"PO-Revision-Date: 2017-09-06 13:13+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro_RO\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1));\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: .git\n"
 
@@ -171,6 +171,8 @@ msgstr ""
 #, php-format
 msgid "%s requires all images to have captions. Please provide one."
 msgstr ""
+"%s solicită ca toate imaginile să aibe o scurtă descriere. Te rog să scrii "
+"aceste descrieri."
 
 #: services/logs/images/add.php:106
 #, php-format
@@ -184,11 +186,14 @@ msgstr ""
 #, php-format
 msgid "%s reported an error when it tried to read your file."
 msgstr ""
+"%s a raportat o eroare atunci când a încercat să citească fişierul tău."
 
 #: services/logs/images/add.php:138
 msgid ""
 "Make sure you are sending a file in an appropriate format (JPEG, PNG or GIF)."
 msgstr ""
+"Asigură-te că încarci o imagine folosind unul din formatele suportate (JPEG, "
+"PNG sau GIF)."
 
 #: services/logs/images/add.php:147
 #, php-format
@@ -197,14 +202,17 @@ msgid ""
 "external application to downscale it first. (You can also contact the "
 "developers of '%s' and ask them to downscale uploaded images automatically.)"
 msgstr ""
+"Imaginea pe care ai încărcat-o este prea mare (%s megapixeli). Te rog "
+"foloseşte o aplicaţie cu care să o micşorezi. (Totodata, poţi solicita "
+"dezvoltatorilor '%s' şi să le ceri să micşoreze automat imaginile încărcate.)"
 
 #: services/logs/images/add.php:411
 msgid "Image has been successfully saved."
-msgstr ""
+msgstr "Imaginea a fost salvată cu succes."
 
 #: services/logs/images/edit.php:215
 msgid "Image properties have been successfully updated."
-msgstr ""
+msgstr "Parametrii imaginii au fost actualizaţi cu succes."
 
 #: services/logs/submit.php:75
 msgid ""

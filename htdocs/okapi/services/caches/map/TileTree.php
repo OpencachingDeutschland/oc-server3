@@ -3,11 +3,11 @@
 namespace okapi\services\caches\map;
 
 use Exception;
+use okapi\Consumer\OkapiInternalConsumer;
 use okapi\Db;
 use okapi\Okapi;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiInternalRequest;
 use okapi\OkapiServiceRunner;
+use okapi\Request\OkapiInternalRequest;
 
 
 class TileTree

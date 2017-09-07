@@ -3,11 +3,11 @@
 namespace okapi\services\caches\save_personal_notes;
 
 use okapi\Db;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 

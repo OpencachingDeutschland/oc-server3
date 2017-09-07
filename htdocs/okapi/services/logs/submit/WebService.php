@@ -3,14 +3,14 @@
 namespace okapi\services\logs\submit;
 
 use Exception;
-use okapi\BadRequest;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 
@@ -290,28 +290,31 @@ class WebService
                 $value_for_text_html_field = 1;
             }
         }
-        elseif ($comment_format == 'auto')
-        {
-            # 'Auto' is for backward compatibility. Before the "comment_format"
-            # was introduced, OKAPI used a weird format in between (it allowed
-            # HTML, but applied nl2br too).
-
-            $formatted_comment = nl2br($comment);
-            $value_for_text_html_field = 1;
-        }
         else
         {
-            $formatted_comment = $comment;
+            if ($comment_format == 'auto')
+            {
+                # 'Auto' is for backward compatibility. Before the "comment_format"
+                # was introduced, OKAPI used a weird format in between (it allowed
+                # HTML, but applied nl2br too).
+
+                $formatted_comment = nl2br($comment);
+            }
+            else
+            {
+                $formatted_comment = $comment;
+            }
+            $value_for_text_html_field = 1;
 
             # For user-supplied HTML comments, OC sites require us to do
             # additional HTML purification prior to the insertion into the
             # database.
 
+            # NOTICE: We are including EXTERNAL OCDE libraries here! This
+            # code does not belong to OKAPI!
+
             if (Settings::get('OC_BRANCH') == 'oc.de')
             {
-                # NOTICE: We are including EXTERNAL OCDE library here! This
-                # code does not belong to OKAPI!
-
                 $opt['rootpath'] = $GLOBALS['rootpath'];
                 $opt['html_purifier'] = Settings::get('OCDE_HTML_PURIFIER_SETTINGS');
                 require_once $GLOBALS['rootpath'] . 'lib2/OcHTMLPurifier.class.php';
@@ -321,11 +324,10 @@ class WebService
             }
             else
             {
-                # TODO: Add OCPL HTML filtering.
-                # See https://github.com/opencaching/okapi/issues/412.
+                require_once $GLOBALS['rootpath'] . 'lib/class.inputfilter.php';
+                $myFilter = new \InputFilter($allowedtags, $allowedattr, 0, 0, 1);
+                $formatted_comment = $myFilter->process($formatted_comment);
             }
-
-            $value_for_text_html_field = 1;
         }
 
         if (Settings::get('OC_BRANCH') == 'oc.pl')
@@ -405,29 +407,42 @@ class WebService
 
         # Check if already found it (and make sure the user is not the owner).
         #
-        # OCPL forbids logging 'Found it' or "Didn't find" for an already found cache,
-        # while OCDE allows all kinds of duplicate logs.
+        # OCPL forbids logging 'Found it', 'Attended' and "Didn't find" for an
+        # already found/attended cache, while OCDE allows all kinds of duplicate logs.
+        #
+        # Duplicate 'Will attend' logs are currently allowed by OCPL code, though
+        # this may be unintentional and change in the future.
 
         if (
             Settings::get('OC_BRANCH') == 'oc.pl'
-            && (($logtype == 'Found it') || ($logtype == "Didn't find it"))
+            && in_array($logtype, ['Found it', 'Attended', "Didn't find it"])
         ) {
+            $matching_logtype = ($logtype == "Didn't find it" ? 'Found it' : $logtype);
             $has_already_found_it = Db::select_value("
                 select 1
                 from cache_logs
                 where
                     user_id = '".Db::escape_string($user['internal_id'])."'
                     and cache_id = '".Db::escape_string($cache['internal_id'])."'
-                    and type = '".Db::escape_string(Okapi::logtypename2id("Found it"))."'
+                    and type = '".Db::escape_string(Okapi::logtypename2id($matching_logtype))."'
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
+                limit 1
+                /* there should be maximum 1 of these logs, but who knows ... */
             ");
             if ($has_already_found_it) {
-                throw new CannotPublishException(_(
-                    "You have already submitted a \"Found it\" log entry once. ".
-                    "Now you may submit \"Comments\" only!"
-                ));
+                throw new CannotPublishException(
+                    $matching_logtype == 'Found it'
+                    ? _("You have already submitted a \"Found it\" log entry once. ".
+                        "Now you may submit \"Comments\" only!")
+                    : _("You have already submitted an \"Attended\" log entry once. ".
+                        "Now you may submit \"Comments\" only!")
+                );
             }
-            if ($user['uuid'] == $cache['owner']['uuid']) {
+
+            # OCPL owners are allowed to attend their own events, but not to
+            # search their own caches.
+
+            if ($user['uuid'] == $cache['owner']['uuid'] && $logtype != 'Attended') {
                 throw new CannotPublishException(_(
                     "You are the owner of this cache. You may submit ".
                     "\"Comments\" only!"
@@ -710,6 +725,11 @@ class WebService
                 'log_uuids' => array()
             );
         }
+        catch (Exception $e)
+        {
+            Okapi::gettext_domain_restore();
+            throw $e;
+        }
 
         Okapi::update_user_activity($request);
         return Okapi::formatted_response($request, $result);
@@ -726,7 +746,7 @@ class WebService
         {
             # OCPL doesn't use triggers for this. We need to update manually.
 
-            if ($logtype == 'Found it')
+            if ($logtype == 'Found it' || $logtype == 'Attended')
             {
                 Db::execute("
                     update caches
@@ -739,7 +759,7 @@ class WebService
                     where cache_id = '".Db::escape_string($cache_internal_id)."'
                 ");
             }
-            elseif ($logtype == "Didn't find it")
+            elseif ($logtype == "Didn't find it" || $logtype == 'Will attend')
             {
                 Db::execute("
                     update caches

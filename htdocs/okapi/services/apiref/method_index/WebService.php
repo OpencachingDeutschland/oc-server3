@@ -3,14 +3,14 @@
 namespace okapi\services\apiref\method_index;
 
 use okapi\Cache;
+use okapi\Consumer\OkapiInternalConsumer;
 use okapi\Okapi;
-use okapi\OkapiInternalConsumer;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
-use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 
 class WebService

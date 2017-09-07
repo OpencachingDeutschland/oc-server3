@@ -60,7 +60,8 @@
     </opt>
     <opt name='langpref' default='en'>
         <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
-        order of preference in which language will be chosen for error messages.</p>
+        order of preference in which language will be chosen for success or error
+        messages.</p>
     </opt>
     <opt name='on_duplicate' default='silent_success'>
         <p>How should OKAPI react when you are trying to submit a duplicate entry?

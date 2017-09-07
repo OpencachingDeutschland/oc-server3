@@ -2,14 +2,14 @@
 
 namespace okapi\services\caches\shortcuts\search_and_retrieve;
 
-use okapi\BadRequest;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiHttpResponse;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
-use okapi\ParamMissing;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
+use okapi\Response\OkapiHttpResponse;
 
 class WebService
 {

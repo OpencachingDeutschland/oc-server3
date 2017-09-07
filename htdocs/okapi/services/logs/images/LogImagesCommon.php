@@ -8,8 +8,8 @@ namespace okapi\services\logs\images;
 
 use Exception;
 use okapi\Db;
-use okapi\InvalidParam;
-use okapi\ParamMissing;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Settings;
 
 

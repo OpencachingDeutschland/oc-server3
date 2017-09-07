@@ -3,10 +3,10 @@
 namespace okapi\services\caches\search\nearest;
 
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
+use okapi\Request\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
 class WebService

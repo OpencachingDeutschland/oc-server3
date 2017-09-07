@@ -3,13 +3,13 @@
 namespace okapi\services\caches\search;
 
 use Exception;
-use okapi\BadRequest;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\BadRequest;
+use okapi\Exception\InvalidParam;
 use okapi\Okapi;
-use okapi\OkapiInternalRequest;
-use okapi\OkapiRequest;
 use okapi\OkapiServiceRunner;
+use okapi\Request\OkapiInternalRequest;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 class SearchAssistant

@@ -4,10 +4,10 @@ namespace okapi\services\users\users;
 
 use Exception;
 use okapi\Db;
-use okapi\InvalidParam;
+use okapi\Exception\InvalidParam;
+use okapi\Exception\ParamMissing;
 use okapi\Okapi;
-use okapi\OkapiRequest;
-use okapi\ParamMissing;
+use okapi\Request\OkapiRequest;
 use okapi\Settings;
 
 class WebService

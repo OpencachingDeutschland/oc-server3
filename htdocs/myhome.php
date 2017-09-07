@@ -140,7 +140,7 @@ if ($allpics === '1') {
 if ($allpics == 'ownlogs' || $allpics == 'owncaches') {
     $gallery =  ($allpics == 'ownlogs' ? LogPics::FOR_OWNLOGS_GALLERY : LogPics::FOR_OWNCACHES_GALLERY);
     $all_pictures = LogPics::get($gallery);
-    LogPics::setPaging($gallery, 0, 0, "myhome.php?allpics=1");
+    LogPics::setPaging($gallery, 0, 0, "myhome.php?allpics=" . $allpics);
 } else {
     $all_pictures = LogPics::get(LogPics::FOR_OWNLOGS_GALLERY);
     $tpl->assign('pictures', $all_pictures);

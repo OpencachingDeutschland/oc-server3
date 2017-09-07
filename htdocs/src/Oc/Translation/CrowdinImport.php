@@ -1,6 +1,6 @@
 <?php
 
-namespace OcBundle\Translation;
+namespace Oc\Translation;
 
 use Doctrine\DBAL\Connection;
 

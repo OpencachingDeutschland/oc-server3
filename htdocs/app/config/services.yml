@@ -39,10 +39,10 @@ services:
     oc.util.dbal_connection:
         class: Oc\Util\DbalConnection
     oc_bundle.postfix.journal_logs:
-        class: OcBundle\Postfix\JournalLogs
+        class: Oc\Postfix\JournalLogs
         arguments: ['@app.dbal_connection']
     oc.translation.crowdin_import:
-        class: OcBundle\Translation\CrowdinImport
+        class: Oc\Translation\CrowdinImport
         arguments: ['@app.dbal_connection']
     oc.geo_cache.reports:
         class: Oc\GeoCache\Reports

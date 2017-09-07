@@ -3,7 +3,7 @@
  * For license information see LICENSE.md
  ***************************************************************************/
 
-namespace OcBundle\Command;
+namespace AppBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;

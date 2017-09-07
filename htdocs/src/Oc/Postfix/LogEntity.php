@@ -1,6 +1,6 @@
 <?php
 
-namespace OcBundle\Postfix;
+namespace Oc\Postfix;
 
 class LogEntity
 {

@@ -5,7 +5,7 @@
  * information for mail-log cronjob
  ****************************************************************************/
 
-namespace OcBundle\Postfix;
+namespace Oc\Postfix;
 
 use Doctrine\DBAL\Connection;
 

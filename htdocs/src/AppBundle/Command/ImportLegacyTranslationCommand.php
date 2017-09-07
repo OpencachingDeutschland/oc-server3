@@ -3,16 +3,18 @@
  * For license information see LICENSE.md
  ***************************************************************************/
 
-namespace OcBundle\Command;
+namespace AppBundle\Command;
 
-use okapi\Okapi;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class OkapiCronjobsCommand extends ContainerAwareCommand
+/**
+ * very quick and dirty solution to import crowdin snippets into the legacy translation system
+ */
+class ImportLegacyTranslationCommand extends ContainerAwareCommand
 {
-    const COMMAND_NAME = 'okapi:cronjobs';
+    const COMMAND_NAME = 'translation:update-legacy-translation';
 
     protected function configure()
     {
@@ -20,13 +22,11 @@ class OkapiCronjobsCommand extends ContainerAwareCommand
 
         $this
             ->setName(self::COMMAND_NAME)
-            ->setDescription('executes okapi5 cronjobs');
+            ->setDescription('import translation from crowdin into legacy translation system');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        require_once __DIR__.'/../../../okapi/autoload.php';
-        Okapi::execute_prerequest_cronjobs();
-        Okapi::execute_cron5_cronjobs();
+        $this->getContainer()->get('oc.translation.crowdin_import')->importTranslations();
     }
 }

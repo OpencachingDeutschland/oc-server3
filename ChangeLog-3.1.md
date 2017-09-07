@@ -5,8 +5,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## unreleased [3.1.3...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...development)
 
 ### Added
-- notice for unpublished cashes [#1063](https://redmine.opencaching.de/issues/1063)
-- notice for reported cashes [#1100](https://redmine.opencaching.de/issues/1100)
+- notice for unpublished caches [#1063](https://redmine.opencaching.de/issues/1063)
+- notice for reported caches [#1100](https://redmine.opencaching.de/issues/1100)
 - recommendation notice in log messages [#1090](https://redmine.opencaching.de/issues/1090)
 - image gallery for own caches [#39](https://redmine.opencaching.de/issues/39)
 - new restore functionality for oc support [#1094](https://redmine.opencaching.de/issues/1094)

@@ -360,7 +360,7 @@ if (isset($_REQUEST['log'])) {
     }
 }
 
-$logs = cache::getLogsArray($cacheid, 0, $rscount + 1, false, $rCache['protect_old_coords']);
+$logs = $cache->getLogsArray(0, $rscount + 1, false, $rCache['protect_old_coords']);
 
 if (isset($logs[$rscount])) {
     unset($logs[$rscount]);

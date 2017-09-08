@@ -5,7 +5,7 @@
 {if isset($logItem.newcoord) && (!$morelogs || $logItem.type)}
     <p>
         &nbsp;<img src="resource2/{$opt.template.style}/images/log/16x16-moved.png" width="16" height="16" />
-        {if $logItem.type}{t}New coordinates:{/t}{else}{t}Original coordinates:{/t}{/if}&nbsp;
+        {if $logItem.cache_moved}{t}New coordinates:{/t}{else}{if $logItem.type}{t}Coordinates:{/t}{else}{t}Original coordinates:{/t}{/if}{/if}&nbsp;
         <strong>{$logItem.newcoord.lat} {$logItem.newcoord.lon}</strong>{if $logItem.movedbym},
         {t 1=$logItem.movedbym}moved by %1 meters{/t}{elseif $logItem.movedbykm},
         {t 1=$logItem.movedbykm}moved by %1 km{/t}{/if}

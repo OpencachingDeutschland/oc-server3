@@ -16,9 +16,9 @@
 # endpoint (this one!), then we need to set it up ourselves.
 #
 
-use okapi\Core\Exception\OkapiExceptionHandler;
-use okapi\Core\Okapi;
-use okapi\Core\OkapiErrorHandler;
+use okapi\core\Exception\OkapiExceptionHandler;
+use okapi\core\Okapi;
+use okapi\core\OkapiErrorHandler;
 use okapi\lib\OkapiScriptEntryPointController;
 
 $GLOBALS['rootpath'] = __DIR__.'/../';

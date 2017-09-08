@@ -2,9 +2,9 @@
 
 namespace okapi\views\devel\clogentry;
 
-use okapi\Core\Db;
-use okapi\Core\Exception\ParamMissing;
-use okapi\Core\Response\OkapiHttpResponse;
+use okapi\core\Db;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Response\OkapiHttpResponse;
 
 class View
 {

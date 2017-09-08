@@ -1,6 +1,6 @@
 <?php
 
-use okapi\Core\Okapi;
+use okapi\core\Okapi;
 
 # Shortcuts
 $m = $vars['method'];

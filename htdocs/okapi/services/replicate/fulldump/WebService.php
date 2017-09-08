@@ -2,11 +2,11 @@
 
 namespace okapi\services\replicate\fulldump;
 
-use okapi\Core\Cache;
-use okapi\Core\Db;
-use okapi\Core\Exception\BadRequest;
-use okapi\Core\Request\OkapiRequest;
-use okapi\Core\Response\OkapiHttpResponse;
+use okapi\core\Cache;
+use okapi\core\Db;
+use okapi\core\Exception\BadRequest;
+use okapi\core\Request\OkapiRequest;
+use okapi\core\Response\OkapiHttpResponse;
 
 class WebService
 {

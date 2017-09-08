@@ -3,12 +3,12 @@
 namespace okapi\views\tilestress;
 
 use Exception;
-use okapi\Core\Consumer\OkapiInternalConsumer;
-use okapi\Core\Db;
-use okapi\Core\Exception\OkapiExceptionHandler;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
-use okapi\Core\Token\OkapiInternalAccessToken;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Db;
+use okapi\core\Exception\OkapiExceptionHandler;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Token\OkapiInternalAccessToken;
 
 class View
 {

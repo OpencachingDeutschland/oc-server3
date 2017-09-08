@@ -2,11 +2,11 @@
 
 namespace okapi\services\caches\search\nearest;
 
-use okapi\Core\Db;
-use okapi\Core\Exception\InvalidParam;
-use okapi\Core\Exception\ParamMissing;
-use okapi\Core\Okapi;
-use okapi\Core\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
 class WebService

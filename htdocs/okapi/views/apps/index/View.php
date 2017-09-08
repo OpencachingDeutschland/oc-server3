@@ -2,10 +2,10 @@
 
 namespace okapi\views\apps\index;
 
-use okapi\Core\Db;
-use okapi\Core\Okapi;
-use okapi\Core\Response\OkapiHttpResponse;
-use okapi\Core\Response\OkapiRedirectResponse;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\Response\OkapiHttpResponse;
+use okapi\core\Response\OkapiRedirectResponse;
 use okapi\lib\OCSession;
 use okapi\Settings;
 

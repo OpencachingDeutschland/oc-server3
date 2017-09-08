@@ -2,14 +2,14 @@
 
 namespace okapi;
 
-use okapi\Core\Cache;
-use okapi\Core\Consumer\OkapiFacadeConsumer;
-use okapi\Core\Db;
-use okapi\Core\Okapi;
-use okapi\Core\OkapiErrorHandler;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
-use okapi\Core\Token\OkapiFacadeAccessToken;
+use okapi\core\Cache;
+use okapi\core\Consumer\OkapiFacadeConsumer;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\OkapiErrorHandler;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Token\OkapiFacadeAccessToken;
 use okapi\lib\OCSession;
 
 # OKAPI Framework -- Wojciech Rygielski <rygielski@mimuw.edu.pl>
@@ -143,7 +143,7 @@ class Facade
         Db::execute("
             update caches
             set okapi_syncbase = now()
-            where wp_oc in ('".implode("','", array_map('\okapi\Core\Db::escape_string', $cache_codes))."')
+            where wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
         ");
     }
 

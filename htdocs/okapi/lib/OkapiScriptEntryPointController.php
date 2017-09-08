@@ -2,9 +2,9 @@
 
 namespace okapi\lib;
 
-use okapi\Core\Exception\Http404;
-use okapi\Core\Okapi;
-use okapi\Core\OkapiUrls;
+use okapi\core\Exception\Http404;
+use okapi\core\Okapi;
+use okapi\core\OkapiUrls;
 use okapi\views\http404\View as Http404View;
 
 class OkapiScriptEntryPointController

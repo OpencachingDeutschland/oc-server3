@@ -2,10 +2,10 @@
 
 namespace okapi\views\menu;
 
-use okapi\Core\Consumer\OkapiInternalConsumer;
-use okapi\Core\Okapi;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
 use okapi\Settings;
 
 class OkapiMenu

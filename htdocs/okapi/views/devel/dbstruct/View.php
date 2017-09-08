@@ -3,11 +3,11 @@
 namespace okapi\views\devel\dbstruct;
 
 use Exception;
-use okapi\Core\Consumer\OkapiInternalConsumer;
-use okapi\Core\Exception\BadRequest;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
-use okapi\Core\Response\OkapiHttpResponse;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Exception\BadRequest;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Response\OkapiHttpResponse;
 use okapi\lib\DbStructUpdater;
 use okapi\Settings;
 

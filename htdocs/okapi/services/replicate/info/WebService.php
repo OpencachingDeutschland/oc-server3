@@ -2,9 +2,9 @@
 
 namespace okapi\services\replicate\info;
 
-use okapi\Core\Cache;
-use okapi\Core\Okapi;
-use okapi\Core\Request\OkapiRequest;
+use okapi\core\Cache;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\replicate\ReplicateCommon;
 
 class WebService

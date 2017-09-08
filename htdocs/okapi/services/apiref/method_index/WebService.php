@@ -2,12 +2,12 @@
 
 namespace okapi\services\apiref\method_index;
 
-use okapi\Core\Cache;
-use okapi\Core\Consumer\OkapiInternalConsumer;
-use okapi\Core\Okapi;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
-use okapi\Core\Request\OkapiRequest;
+use okapi\core\Cache;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Request\OkapiRequest;
 use okapi\Settings;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

@@ -2,10 +2,10 @@
 
 namespace okapi\views\devel\tilereport;
 
-use okapi\Core\CronJob\CronJobController;
-use okapi\Core\Db;
-use okapi\Core\Okapi;
-use okapi\Core\Response\OkapiHttpResponse;
+use okapi\core\CronJob\CronJobController;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\Response\OkapiHttpResponse;
 
 class View
 {

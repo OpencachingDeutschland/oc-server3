@@ -2,11 +2,11 @@
 
 namespace okapi\services\caches\map;
 
-use okapi\Core\Consumer\OkapiInternalConsumer;
-use okapi\Core\Db;
-use okapi\Core\Exception\InvalidParam;
-use okapi\Core\OkapiServiceRunner;
-use okapi\Core\Request\OkapiInternalRequest;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
 
 class ReplicateListener
 {

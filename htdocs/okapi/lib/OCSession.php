@@ -2,7 +2,7 @@
 
 namespace okapi\lib;
 
-use okapi\Core\Db;
+use okapi\core\Db;
 use okapi\Settings;
 
 /**

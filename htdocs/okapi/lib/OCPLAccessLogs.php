@@ -76,7 +76,7 @@ class OCPLAccessLogs
                 if (count($cache_ids) == 1)
                     $cache_ids_where = "= '" . Db::escape_string($cache_ids[0]) . "'";
                 else
-                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Core\Db::escape_string', $cache_ids)) . "')";
+                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\core\Db::escape_string', $cache_ids)) . "')";
             } else {
                 $cache_ids_where = "= '" . Db::escape_string($cache_ids) . "'";
             }
@@ -124,7 +124,7 @@ class OCPLAccessLogs
                 if (count($cache_ids_filterd) == 1)
                     $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd[0]) . "'";
                 else
-                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\Core\Db::escape_string', $cache_ids_filterd)) . "')";
+                    $cache_ids_where = "in ('" . implode("','", array_map('\okapi\core\Db::escape_string', $cache_ids_filterd)) . "')";
             } else {
                 $cache_ids_where = "= '" . Db::escape_string($cache_ids_filterd) . "'";
             }

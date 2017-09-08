@@ -3,6 +3,8 @@
 namespace okapi;
 
 use Exception;
+use okapi\Core\Okapi;
+use okapi\Core\OkapiErrorHandler;
 use okapi\locale\Locales;
 
 # DO NOT MODIFY THIS FILE. This file should always look like the original here:
@@ -213,7 +215,7 @@ final class Settings
          * used in OCPL code. As OKAPI always resamples uploaded images - which
          * involves a bit of quality loss - we set a higher default:
          */
-        'JPEG_QUALITY' => 80
+        'JPEG_QUALITY' => 80,
 
     );
 

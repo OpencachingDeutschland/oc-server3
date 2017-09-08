@@ -2,8 +2,8 @@
 
 namespace okapi\lib;
 
+use okapi\Core\Db;
 use okapi\Settings;
-use okapi\Db;
 
 /**
  * Use this class to access OC session variables. This is especially useful if

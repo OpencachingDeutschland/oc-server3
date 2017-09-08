@@ -3,13 +3,15 @@
 namespace okapi\views\update;
 
 use Exception;
-use okapi\Cache;
-use okapi\CronJob\CronJobController;
-use okapi\Db;
-use okapi\Okapi;
-use okapi\OkapiLock;
+use okapi\Core\Cache;
+use okapi\Core\CronJob\CronJobController;
+use okapi\Core\Db;
+use okapi\Core\Okapi;
+use okapi\Core\OkapiLock;
 use okapi\services\replicate\ReplicateCommon;
 use okapi\Settings;
+
+;
 
 class View
 {
@@ -103,7 +105,7 @@ class View
             self::out("It is up-to-date.\n\n");
         }
         elseif ($max_ver < $current_ver)
-            throw new Exception();
+            throw new Exception("Your database version (".$current_ver.") is ahead of time.");
         else
         {
             self::out("Updating to version $max_ver... PLEASE WAIT\n\n");
@@ -147,7 +149,7 @@ class View
                 okapi_stats_hourly sh
             where
                 sh.consumer_key = c.`key`
-                and sh.service_name in ('".implode("','", array_map('\okapi\Db::escape_string', $service_names))."')
+                and sh.service_name in ('".implode("','", array_map('\okapi\Core\Db::escape_string', $service_names))."')
                 ".(($days != null) ? "and sh.period_start > date_add(now(), interval '".Db::escape_string(-$days)."' day)" : "")."
         ");
     }

@@ -2,13 +2,13 @@
 
 namespace okapi\services\users\by_internal_ids;
 
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
+use okapi\Core\Db;
+use okapi\Core\Exception\InvalidParam;
+use okapi\Core\Exception\ParamMissing;
+use okapi\Core\Okapi;
+use okapi\Core\OkapiServiceRunner;
+use okapi\Core\Request\OkapiInternalRequest;
+use okapi\Core\Request\OkapiRequest;
 
 class WebService
 {
@@ -37,7 +37,7 @@ class WebService
         $rs = Db::query("
             select user_id, uuid
             from user
-            where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_ids))."')
+            where user_id in ('".implode("','", array_map('\okapi\Core\Db::escape_string', $internal_ids))."')
         ");
         $internalid2useruuid = array();
         while ($row = Db::fetch_assoc($rs))

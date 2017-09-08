@@ -2,11 +2,11 @@
 
 namespace okapi\views\apps\index;
 
-use okapi\Db;
+use okapi\Core\Db;
+use okapi\Core\Okapi;
+use okapi\Core\Response\OkapiHttpResponse;
+use okapi\Core\Response\OkapiRedirectResponse;
 use okapi\lib\OCSession;
-use okapi\Okapi;
-use okapi\Response\OkapiHttpResponse;
-use okapi\Response\OkapiRedirectResponse;
 use okapi\Settings;
 
 class View

@@ -2,9 +2,9 @@
 
 namespace okapi\services\logs\images\delete;
 
-use okapi\Db;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\Core\Db;
+use okapi\Core\Okapi;
+use okapi\Core\Request\OkapiRequest;
 use okapi\services\logs\images\LogImagesCommon;
 use okapi\Settings;
 

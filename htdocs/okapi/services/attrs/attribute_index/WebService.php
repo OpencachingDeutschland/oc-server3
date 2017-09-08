@@ -3,10 +3,10 @@
 namespace okapi\services\attrs\attribute_index;
 
 use ArrayObject;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
+use okapi\Core\Okapi;
+use okapi\Core\OkapiServiceRunner;
+use okapi\Core\Request\OkapiInternalRequest;
+use okapi\Core\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
 
 

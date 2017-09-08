@@ -3,11 +3,11 @@
 namespace okapi\services\logs\images\add;
 
 use Exception;
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\Core\Db;
+use okapi\Core\Exception\InvalidParam;
+use okapi\Core\Exception\ParamMissing;
+use okapi\Core\Okapi;
+use okapi\Core\Request\OkapiRequest;
 use okapi\services\logs\images\LogImagesCommon;
 use okapi\Settings;
 

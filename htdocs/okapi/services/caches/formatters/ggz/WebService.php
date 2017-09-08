@@ -2,8 +2,8 @@
 
 namespace okapi\services\caches\formatters\ggz;
 
+use okapi\Core\Request\OkapiRequest;
 use okapi\OkapiZIPHttpResponse;
-use okapi\Request\OkapiRequest;
 
 class WebService
 {

@@ -2,7 +2,7 @@
 
 namespace okapi\views\devel\sysinfo;
 
-use okapi\Response\OkapiHttpResponse;
+use okapi\Core\Response\OkapiHttpResponse;
 
 class View
 {

@@ -2,7 +2,7 @@
 
 namespace okapi\views\changelog_feed;
 
-use okapi\Response\OkapiHttpResponse;
+use okapi\Core\Response\OkapiHttpResponse;
 use okapi\Settings;
 use okapi\views\changelog\ChangelogHelper;
 

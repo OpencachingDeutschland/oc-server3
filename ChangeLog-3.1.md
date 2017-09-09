@@ -11,6 +11,8 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Removed
 
 ### Fixed
+- fix okapi replication urls [#1089](https://redmine.opencaching.de/issues/1089)
+
 
 ## unreleased [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)
 

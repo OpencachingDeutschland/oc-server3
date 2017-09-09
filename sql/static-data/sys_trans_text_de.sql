@@ -1419,6 +1419,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1957', 'DE', '\&bdquo;Spoiler\&ldquo;-Bilder, die Details des Verstecks zeigen, sollten hier nicht sichbar sein. Falls du trotzdem ein offen sichtbares Spoilerfoto findest, kannst du den Logger über die E-Mail-Funktion in seinem Profil kontaktieren und ihn bitten, es als Spoiler zu kennzeichnen.', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1958', 'DE', 'zurück zur Cachebeschreibung', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1960', 'DE', 'Seite', '2013-02-19 05:48:07');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1961', 'DE', 'zu', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1962', 'DE', 'bei', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1963', 'DE', 'Über Opencaching', '2013-02-19 05:48:07');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('1964', 'DE', 'Cachebeschreibungen, Logtexte und Bilder des Benutzers wurden entfernt, weil die Deaktivierung vor der Umstellung auf die <a href=\"articles.php?page=impressum#datalicense\">neue Datenlizenz</a> stattfand.', '2013-02-19 05:48:07');

@@ -79,7 +79,8 @@ if ($cache_id != 0) {
 $rCache['adminlog'] = ($login->admin & ADMIN_USER);
 $tpl->assign('cache', $rCache);
 
-$tpl->assign('logs', cache::getLogsArray($cache_id, $start, $count, $deleted, $rCache['protect_old_coords']));
+$cache = new cache($cache_id);
+$tpl->assign('logs', $cache->getLogsArray($start, $count, $deleted, $rCache['protect_old_coords']));
 $tpl->assign('tagloadlogs', $tagloadlogs);
 
 

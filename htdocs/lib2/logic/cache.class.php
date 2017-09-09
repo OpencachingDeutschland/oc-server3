@@ -364,6 +364,23 @@ class cache
         return $cond;
     }
 
+    /**
+     * @param int $attr_id
+     * @return bool
+     */
+    public function hasAttribute($attr_id)
+    {
+        return sql_value(
+            "SELECT 1
+             FROM `caches_attributes` `ca`
+             WHERE `ca`.`cache_id`='&1'
+             AND `attrib_id`='&2'",
+            0,
+            $this->nCacheId,
+            $attr_id
+        ) == 1;
+    }
+
     // other
     public function getAnyChanged()
     {
@@ -472,14 +489,13 @@ class cache
     }
 
     /**
-     * @param integer $cacheId
      * @param integer $start
      * @param integer $count
      * @param bool $deleted
      * @param bool $protect_old_coords
      * @return array
      */
-    public static function getLogsArray($cacheId, $start, $count, $deleted = false, $protect_old_coords = false)
+    public function getLogsArray($start, $count, $deleted = false, $protect_old_coords = false)
     {
         global $login, $translate;
 
@@ -488,35 +504,51 @@ class cache
             return [];
         }
 
-        $is_quiz_or_safari = sql_value(
-            "SELECT `type`=7 OR `type`=8 OR `attrib_id` IS NOT NULL
-             FROM `caches`
-             LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `attrib_id`=61
-             WHERE `caches`.`cache_id`='&1'",
-            0,
-            $cacheId
-        );
-        if ($is_quiz_or_safari) {
-            $coords = [];
-        } else {
+        $coords = [];
+        if ($this->getType() != 7 && $this->getType() != 8 &&  // quiz cache
+            $this->hasAttribute(61) != true &&                 // safari cache
+            $this->getStatus() != 5                            // unpublished cache
+        ) {
             $rsCoords = sql(
-                "SELECT `date_created` `date`, `latitude`, `longitude`
+                "SELECT
+                    `date_created` `date`,
+                    `date_created` - INTERVAL 4 SECOND AS `adjusted_date_created`,
+                     /*
+                        The first cache_coordinates entry is created immediately after
+                        creating inserting cache into caches table. This usually takes
+                        a few milliseconds. We apply a 4 seconds 'safety margin' for
+                        detecting the original coords. In the extremly unlikely case that
+                        it took more than 4 seconds AND the owner did a coordinate change
+                        before publish AND someone posts a log entry with date inbetween
+                        the coord change and the publish, the coords before the change
+                        will be exposed (which would be unpleasant but not critical).
+
+                        Increasing the 4 seconds lag would increase the chance that
+                        original coords which were set immediately before publish are
+                        hidden (which would be unpleasant but not critical).
+
+                        4 seconds was chosen as estimated shortest interval someone will
+                        need to change coordinates of an unpublished cache AND publish
+                        it, minus 1 second.
+                     */
+                    `latitude`,
+                    `longitude`
                  FROM `cache_coordinates`
                  WHERE `cache_id`='&1'
                  ORDER BY `date_created` DESC",
-                $cacheId
+                $this->nCacheId
             );
-            $coords = sql_fetch_assoc_table($rsCoords);
-        }
-
-        if ($coords) {
-            $lastcoorddate = $coords[count($coords)-1]['date'];
-            $coords[] = [
-                'date' => '0000-00-00',
-                'latitude' => $coords[count($coords) - 1]['latitude'],
-                'longitude' => $coords[count($coords) - 1]['longitude']
-            ];
-            $current_coord = new coordinate($coords[0]['latitude'], $coords[0]['longitude']);
+            $publish_date = $this->getDateCreated();
+            while ($rCoord = sql_fetch_assoc($rsCoords)) {
+                $coords[] = $rCoord;
+                if (strtotime($rCoord['adjusted_date_created']) <= $publish_date) {
+                    // This are the cache coords at publish time, which we will
+                    // show as "original coords". Older coordinate changes
+                    // (before publish) are discarded.
+                    break;
+                }
+            }
+            sql_free_result($rsCoords);
         }
 
         if ($deleted && ($login->admin && ADMIN_USER) > 0) {
@@ -548,7 +580,8 @@ class cache
                     `cache_logs`.`picture`,
                     ' . $delfields . ",
                     `user`.`username` AS `username`,
-                    IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
+                    IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`,
+                    FALSE AS `cache_moved`
              FROM $table AS `cache_logs`
              INNER JOIN `user`
                  ON `user`.`user_id` = `cache_logs`.`user_id`
@@ -560,14 +593,17 @@ class cache
              WHERE `cache_logs`.`cache_id`='&1'
              ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `id` DESC
              LIMIT &2, &3",
-            $cacheId,
+            $this->nCacheId,
             $start + 0,
             $count + 0
         );
 
         $logs = [];
-        $coordpos = 0;
-        $coord_changes = false;
+        $coord_changes = (count($coords) > 1);
+        if ($coord_changes) {
+            $coordpos = 0;
+            $current_coord = new coordinate($coords[0]['latitude'], $coords[0]['longitude']);
+        }
 
         while ($rLog = sql_fetch_assoc($rsLogs)) {
             $pictures = [];
@@ -589,33 +625,40 @@ class cache
             $rLog['pictures'] = $pictures;
             $rLog['text'] = use_current_protocol_in_html($rLog['text']);
 
-            $newcoord = false;
-            while ($coordpos < count($coords) && $coords[$coordpos]['date'] > $rLog['order_date']) {
-                if (!$newcoord) {
-                    $newcoord = $coords[$coordpos];
-                }
-                ++$coordpos;
-            }
-            if ($newcoord) {
-                $distance = geomath::calcDistance(
-                    $newcoord['latitude'],
-                    $newcoord['longitude'],
-                    $coords[$coordpos]['latitude'],
-                    $coords[$coordpos]['longitude']
-                );
-                if (abs($distance) > 0.005) {
-                    $new = new coordinate($newcoord['latitude'], $newcoord['longitude']);
-                    $rLog['newcoord'] = $new->getDecimalMinutes($protect_old_coords && $new != $current_coord);
-                    if ($protect_old_coords) {
-                        $rLog['movedbykm'] = false;
-                    } elseif ($distance <= 1) {
-                        $rLog['movedbym'] = floor($distance * 1000);
-                    } elseif ($distance < 10) {
-                        $rLog['movedbykm'] = sprintf('%1.1f', $distance);
-                    } else {
-                        $rLog['movedbykm'] = round($distance);
+            if ($coord_changes) {
+                $newcoord = false;
+                while ($coordpos < count($coords) && $coords[$coordpos]['date'] > $rLog['order_date']) {
+                    if (!$newcoord) {
+                        $newcoord = new coordinate($coords[$coordpos]['latitude'], $coords[$coordpos]['longitude']);
                     }
-                    $coord_changes = true;
+                    ++$coordpos;
+                }
+                if ($newcoord) {
+                    if ($coordpos < count($coords)) {
+                        $distance = geomath::calcDistance(
+                            $newcoord->nLat,
+                            $newcoord->nLon,
+                            $coords[$coordpos]['latitude'],
+                            $coords[$coordpos]['longitude']
+                        );
+                        if (abs($distance) > 0.005) {
+                            $rLog['newcoord'] = $newcoord->getDecimalMinutes($protect_old_coords && $new != $current_coord);
+                            if ($protect_old_coords) {
+                                $rLog['movedbykm'] = false;
+                            } elseif ($distance <= 1) {
+                                $rLog['movedbym'] = floor($distance * 1000);
+                            } elseif ($distance < 10) {
+                                $rLog['movedbykm'] = sprintf('%1.1f', $distance);
+                            } else {
+                                $rLog['movedbykm'] = round($distance);
+                            }
+                            $rLog['cache_moved'] = true;
+                        }
+                    } else {
+                        // This is the original coord of the cache.
+                        $rLog['newcoord'] = $newcoord->getDecimalMinutes($protect_old_coords);
+                        $rLog['cache_moved'] = false;
+                    }
                 }
             }
 
@@ -623,19 +666,17 @@ class cache
         }
         sql_free_result($rsLogs);
 
-        if ($coord_changes) {
-            $lastlogdate = $logs[count($logs) - 1]['order_date'];
-            if ($lastcoorddate < $lastlogdate) {
-                $original = count($coords) - 1;
-                while ($original > 0 && $coords[$original - 1]['date'] < $lastlogdate) {
-                    --$original;
-                }
-                $coord = new coordinate($coords[$original]['latitude'], $coords[$original]['longitude']);
-                $logs[] = [
-                    'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
-                    'movedby' => false
-                ];
-            }
+        // Append a dummy log entry for the original coordinate, if it was
+        // not added to a a real log entry because there are logs older than the
+        // OC cache listing (cmp. https://redmine.opencaching.de/issues/1102):
+
+        if ($coord_changes && $coordpos < count($coords) && count($logs) > 0) {
+            $coord = new coordinate($coords[$coordpos]['latitude'], $coords[$coordpos]['longitude']);
+            $logs[] = [
+                'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
+                'cache_moved' => false,
+                'type' => false
+            ];
         }
 
         return $logs;

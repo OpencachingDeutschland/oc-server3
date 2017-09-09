@@ -2,7 +2,7 @@
 SET NAMES 'utf8';
 TRUNCATE TABLE `nodes`;
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('1', 'Opencaching Germany', 'www.opencaching.de', 'OC');
-INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('2', 'Opencaching Poland', 'www.opencaching.pl', 'OP');
+INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('2', 'Opencaching Poland', 'opencaching.pl', 'OP');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('3', 'Opencaching Czech', 'www.opencaching.cz', 'OZ');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('4', 'Local Development', '', 'AA');
 INSERT INTO `nodes` (`id`, `name`, `url`, `waypoint_prefix`) VALUES ('6', 'Opencaching Sweden', 'www.opencaching.se', 'OS');

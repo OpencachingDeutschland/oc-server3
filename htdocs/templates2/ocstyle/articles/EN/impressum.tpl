@@ -301,7 +301,7 @@
 <div class="content-txtbox-noshade" style="padding-right: 25px;">
     <p>
         Our data privacy disclaimer and policy is available at
-        <a href="articles.php?page=dsb">http://www.opencaching.de/articles.php?page=dsb</a>.
+        <a href="articles.php?page=dsb">https://www.opencaching.de/articles.php?page=dsb</a>.
     </p>
 
     <br />

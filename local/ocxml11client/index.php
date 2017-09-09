@@ -16,7 +16,7 @@
  * Nicht für Produktivsystem!
  *
  * Die Dokuemntation beachten:
- * http://www.opencaching.de/doc/xml/xml11.htm
+ * https://www.opencaching.de/doc/xml/xml11.htm
  *
  * TODO:
  * - removed_objects ... Abhängigkeiten prüfen
@@ -1048,7 +1048,7 @@ function ImportPictureArray($r)
 {
     /*
         [ID][__DATA] => DCFDE050-B42F-A76A-E9C7-BCCCC8812A23
-        [URL][__DATA] => http://www.opencaching.de/images/uploads/DCFDE050-B42F-A76A-E9C7-BCCCC8812A23.jpg
+        [URL][__DATA] => https://www.opencaching.de/images/uploads/DCFDE050-B42F-A76A-E9C7-BCCCC8812A23.jpg
         [TITLE][__DATA] => Cache
         [OBJECT][__ATTR][TYPE] => 2
         [OBJECT][__DATA] => 42264069-CDD6-5997-104A-AEDA9CEF4E18

@@ -295,7 +295,7 @@
             <li>HTML-Filterfunktionen für Logs und Cachebeschreibungen verbessert
                 (<a href="http://redmine.opencaching.de/issues/79">#79</a>),
                 eine Liste der jetzt verwendbaren HTML-Elemente ist
-                <a href="http://www.opencaching.de/articles.php?page=htmltags">hier</a>
+                <a href="https://www.opencaching.de/articles.php?page=htmltags">hier</a>
                 zu finden.
             </li>
             <li>
@@ -775,7 +775,7 @@
         <p id="v3.0.1"><strong>OC 3.0 Version 1</strong> &ndash; 8. August 2012</p>
         <p>Neu:</p>
         <ul>
-            <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="http://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>
+            <li>Kurzadressen für Direktzugriff auf Cachelistings, z.B. <a href="https://www.opencaching.de/OCD93B">http://opencaching.de/OCD93B</a></li>
             <li>Anzeige &bdquo;Du hast dieses Event besucht&ldquo; in Karten-Popup-Fenstern
             <li>englische Übersetzung der Seiten <a href="./articles.php?page=geocaching">Über Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cachebeschreibung</a>, <a href="./articles.php?page=impressum">Impressum &amp; Nutzungsbedingungen</a>, <a href="./articles.php?page=dsb">Datenschutzbelehrung</a>, <a href="./articles.php?page=donations">Spenden</a>, <a href="./articles.php?page=contact">Kontakt</a> und <a href="./articles.php?page=team">Teamliste</a> (umschalten auf englischsprachige Seite oben mit <img src="images/flag/EN.png" />)
             <li>Versionsgeschichte</li>

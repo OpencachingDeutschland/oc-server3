@@ -11,7 +11,7 @@
         Hier m&ouml;chten wir euch unser Team vorstellen, das hinter den Kulissen von Opencaching.de unerm&uuml;dlich
         für euch werkelt.
         Wir freuen uns &uuml;ber eure Anregungen, Vorschl&auml;ge und Kritik. Auf der
-        <a href="http://www.opencaching.de/articles.php?page=contact">Kontakt-Seite</a>
+        <a href="https://www.opencaching.de/articles.php?page=contact">Kontakt-Seite</a>
         habt ihr M&ouml;glichkeiten, euch n&auml;her über Opencaching zu informieren oder mit uns in Kontakt zu treten.
         Natürlich k&ouml;nt ihr unsere
         Teammitglieder auch direkt &uuml;ber eines der Benutzerprofile anschreiben.

@@ -54,7 +54,7 @@ $develWarning = '';
  * than one locale on one server with multiple default-locales.
  * Must be overwritten in BOTH lib1 and lib2 settings.inc.php!!
  */
-//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+//$opt['domain']['www.opencaching.de']['url'] = 'https://www.opencaching.de/';
 //$opt['domain']['www.opencaching.de']['shortlink_domain'] = 'opencaching.de';
 //$opt['domain']['www.opencaching.de']['sitename'] = 'Opencaching.de';
 //$opt['domain']['www.opencaching.de']['locale'] = 'DE';
@@ -71,7 +71,7 @@ $develWarning = '';
 //$opt['domain']['www.opencaching.de']['https']['is_default'] = false;
 //$opt['domain']['www.opencaching.de']['https']['force_login'] = true;
 
-//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
+//$opt['domain']['www.opencaching.pl']['url'] = 'https://opencaching.pl/';
 //$opt['domain']['www.opencaching.pl']['sitename'] = 'Opencaching.PL';
 //$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
 //$opt['domain']['www.opencaching.pl']['fallback_locale'] = 'EN';
@@ -85,7 +85,7 @@ $develWarning = '';
 // Supply the site's primary URL and the shortlink domain here.
 // Can be overriden by domain settings.
 // Set shortlink domain to false if not available.
-set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 1);
+set_absolute_urls($opt, 'https://www.opencaching.de/', 'opencaching.de', 1);
 
 // 'From' EMail address for admin error messages and log removals
 if (!isset($emailaddr)) {

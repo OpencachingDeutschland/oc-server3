@@ -179,7 +179,7 @@
     <li>Improved HTML filters for logs and cache descriptions
     (<a href="http://redmine.opencaching.de/issues/79">#79</a>),
     a list of allowed HTML elements can be found
-    <a href="http://www.opencaching.de/articles.php?page=htmltags&locale=EN">here</a>.
+    <a href="https://www.opencaching.de/articles.php?page=htmltags&locale=EN">here</a>.
     </li>
     <li>
     Popups of the HTML-editor are not cropped any more when using large fonts.
@@ -648,7 +648,7 @@
      <p id="v3.0.1"><strong>OC 3.0 Release 1</strong> &ndash; 8 August 2012</p>
    <p>New:</p>
      <ul>
-       <li>URL shortener for direct cache listing access, e.g. <a href="http://www.opencaching.de/OCD93B">http://www.opencaching.de/OCD93B</a></li>
+       <li>URL shortener for direct cache listing access, e.g. <a href="https://www.opencaching.de/OCD93B">https://www.opencaching.de/OCD93B</a></li>
        <li>englisch translation of <a href="./articles.php?page=geocaching">About Geocaching</a>, <a href="./articles.php?page=cacheinfo">Cache descriptions</a>, <a href="./articles.php?page=impressum">Legal information</a>, <a href="./articles.php?page=dsb">Privacy statement</a>, <a href="./articles.php?page=donations">Donations</a>, <a href="./articles.php?page=contact">Contact</a> and <a href="./articles.php?page=team">Team members' list</a> pages; team list, legal information and donations pages have been updated</li>
        <li>display of "You have attended this event" in map popups</li>
        <li>changelog</li>

@@ -3,7 +3,7 @@
 Opencaching.de Code Repository
 ==============================
 
-[Opencaching.de](http://www.opencaching.de) is a major Geocaching website in Germany.
+[Opencaching.de](https://www.opencaching.de) is a major Geocaching website in Germany.
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major
 [Opencaching code forks](http://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
@@ -30,7 +30,7 @@ This repo contains three branches:
 The *next* branch is now and then resetted to development state and rebuilt from there,
 so do not derive any working-branches from it. Use development instead.
 
-Major OC.de site updates are version-tagged. See the [changelog](http://www.opencaching.de/articles.php?page=changelog&locale=EN)
+Major OC.de site updates are version-tagged. See the [changelog](https://www.opencaching.de/articles.php?page=changelog&locale=EN)
 for a detailed list.
 
 Translation [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching)

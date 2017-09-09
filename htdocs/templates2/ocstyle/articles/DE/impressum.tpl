@@ -347,7 +347,7 @@
         Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:
     </p>
     <p>
-        <a href="articles.php?page=dsb">http://www.opencaching.de/articles.php?page=dsb</a>
+        <a href="articles.php?page=dsb">https://www.opencaching.de/articles.php?page=dsb</a>
     </p>
     <br />
 </div>

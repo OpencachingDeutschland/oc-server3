@@ -483,7 +483,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     if ($bDocType == '1') {
         fwrite(
             $f,
-            '<!DOCTYPE oc11xml PUBLIC "-//Opencaching Network//DTD OCXml V 1.' . ($ocXmlVersion % 10) . '//EN" "http://www.opencaching.de/xml/ocxml' . $ocXmlVersion . '.dtd">' . "\n"
+            '<!DOCTYPE oc11xml PUBLIC "-//Opencaching Network//DTD OCXml V 1.' . ($ocXmlVersion % 10) . '//EN" "https://www.opencaching.de/xml/ocxml' . $ocXmlVersion . '.dtd">' . "\n"
         );
     }
     if ($bOcXmlTag == '1') {

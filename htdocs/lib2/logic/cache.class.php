@@ -531,13 +531,14 @@ class cache
         }
 
         $rsLogs = sql(
-            'SELECT `cache_logs`.`user_id` AS `userid`,
+            "SELECT `cache_logs`.`user_id` AS `userid`,
                     `cache_logs`.`id` AS `id`,
                     `cache_logs`.`uuid` AS `uuid`,
                     `cache_logs`.`date` AS `date`,
                     `cache_logs`.`order_date` AS `order_date`,
                     `cache_logs`.`entry_last_modified`,
-                    DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
+                    (`cache_logs`.`node` != 1 OR `cache_logs`.`entry_last_modified` != '2017-02-14 22:49:20')  /* see redmine #1109 */
+                    AND DATEDIFF(`cache_logs`.`entry_last_modified`, `cache_logs`.`date_created`) >= 1 AS `late_modified`,
                     substr(`cache_logs`.`date`,12) AS `time`,  /* 00:00:01 = 00:00 logged, 00:00:00 = no time */
                     `cache_logs`.`type` AS `type`,
                     `cache_logs`.`oc_team_comment` AS `oc_team_comment`,
@@ -546,7 +547,7 @@ class cache
                     `cache_logs`.`text` AS `text`,
                     `cache_logs`.`text_html` AS `texthtml`,
                     `cache_logs`.`picture`,
-                    ' . $delfields . ",
+                    " . $delfields . ",
                     `user`.`username` AS `username`,
                     IF(ISNULL(`cache_rating`.`cache_id`), 0, `cache_logs`.`type` IN (1,7)) AS `recommended`
              FROM $table AS `cache_logs`

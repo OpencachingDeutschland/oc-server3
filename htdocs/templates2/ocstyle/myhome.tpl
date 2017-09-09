@@ -125,7 +125,7 @@ function myHomeLoad()
     </p>
 
     {if $allpics == 'owncaches'}
-        {include file="res_logpictures.tpl" logdate=true loguser=true maxlines=$maxlines fullyear=false}
+        {include file="res_logpictures.tpl" logdate=true loguser=true maxlines=$maxlines shortyear=true}
     {else}
         {include file="res_logpictures.tpl" logdate=true loguser=false maxlines=$maxlines fullyear=true}
     {/if}

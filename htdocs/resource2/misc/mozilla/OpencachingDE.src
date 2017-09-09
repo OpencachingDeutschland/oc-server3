@@ -5,12 +5,12 @@
    name="Opencaching.de"
    description="Opencaching-Suche"
    method="GET"
-   action="http://www.opencaching.de/searchplugin.php"
+   action="https://www.opencaching.de/searchplugin.php"
    update=""
    updateCheckDays=0
    queryEncoding="ISO-8859-1"
    queryCharset="ISO-8859-1"
-   searchForm="http://www.opencaching.de/search.php"
+   searchForm="https://www.opencaching.de/search.php"
 >
 
 <input name="userinput" user>
@@ -27,8 +27,8 @@
     resultItemEnd="<!--n-->"
 >
 <browser
- update="http://www.opencaching.de/resource2/misc/mozilla/OpencachingDE.src"
- updateicon="http://www.opencaching.de/resource2/misc/mozilla/OpencachingDE.png"
+ update="https://www.opencaching.de/resource2/misc/mozilla/OpencachingDE.src"
+ updateicon="https://www.opencaching.de/resource2/misc/mozilla/OpencachingDE.png"
  updatecheckdays="30"
 >
 </search>

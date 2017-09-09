@@ -184,10 +184,10 @@ $opt['debug'] = DEBUG_DEVELOPER;
 /* other template options
  *
  */
-$opt['page']['origin_url'] = 'http://www.opencaching.de/';  // production installation for this OC site
+$opt['page']['origin_url'] = 'https://www.opencaching.de/';  // production installation for this OC site
 $opt['page']['develsystem'] = false;
-$opt['page']['teampic_url'] = 'http://www.opencaching.de/images/team/';
-$opt['page']['teammember_url'] = 'http://www.opencaching.de/';
+$opt['page']['teampic_url'] = 'https://www.opencaching.de/images/team/';
+$opt['page']['teammember_url'] = 'https://www.opencaching.de/';
 
 /*
  * configure infos on 404.php
@@ -217,19 +217,19 @@ $opt['page']['404']['www.opencaching.de'] = [
 
     'newcaches' => [
         'show' => true,
-        'url' => 'http://www.opencaching.de',
+        'url' => 'https://www.opencaching.de',
         'urlname' => '',  // optional: show other name than the url-domain
     ],
 ];
 
 /* Well known node id's - required for synchronization
  *  1 Opencaching Deutschland (www.opencaching.de)
- *  2 Opencaching Polen (www.opencaching.pl)
+ *  2 Opencaching Polen (opencaching.pl)
  *  3 Opencaching Tschechien (www.opencaching.cz)
  *  4 Local Development
  *  5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
  *  6 Opencaching Schweden (www.opencaching.se)
- *  7 Opencaching Großbritannien (www.opencache.uk)
+ *  7 Opencaching Großbritannien (opencache.uk)
  *  8 Opencaching Norwegen (www.opencaching.no)
  *  9 Opencaching Lettland (?)
  * 10 Opencaching USA (www.opencaching.us)

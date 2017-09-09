@@ -8,7 +8,7 @@
 
 <p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you, the users of opencaching.de, opencaching.it, opencachingspain.es and opencaching.fr.</p>
 
-<p>We appreciate your suggetions and comments. On the <a href="http://www.opencaching.de/articles.php?page=contact">contact page</a>, you will find information on how to contact us. Of course, you may also send Emails directly to the team members by their Opencaching.de user profiles.</p>
+<p>We appreciate your suggetions and comments. On the <a href="https://www.opencaching.de/articles.php?page=contact">contact page</a>, you will find information on how to contact us. Of course, you may also send Emails directly to the team members by their Opencaching.de user profiles.</p>
 
 <p>At this occasion, we would also like to thank all Opencaching users and unnamed aides and supporters, who contributed to Opencaching's success by their suggestions and commitment.</p>
 

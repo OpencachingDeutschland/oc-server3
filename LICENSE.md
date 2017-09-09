@@ -41,7 +41,7 @@ If you are using this source code to establish a geocache listing service
 or some sort of service which can be compared with it, you agree to 
 publish your geocaching data via XML Interface and/or OKAPI the same way
 and under the same (or less restrictive) conditions as opencaching.de does;
-see http://www.opencaching.de/doc/xml and http://www.opencaching.de/okapi.
+see https://www.opencaching.de/doc/xml and https://www.opencaching.de/okapi.
 
 
 A different license may apply to third party components being used.

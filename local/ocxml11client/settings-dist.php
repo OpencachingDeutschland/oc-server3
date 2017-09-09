@@ -40,7 +40,7 @@ $opt['distance'] = 150;
 // sonstige Einstellungen
 $opt['tmpdir'] = 'tmp/';
 $opt['archivdir'] = 'data-files/';
-$opt['url'] = 'http://www.opencaching.de/xml/ocxml11.php?modifiedsince={modifiedsince}&user={user}&cache={cache}&cachedesc={cachedesc}&cachelog={cachelog}&picture={picture}&picturefromcachelog={picturefromcachelog}&removedobject={removedobject}&session={session}&zip={zip}&charset=utf-8';
+$opt['url'] = 'https://www.opencaching.de/xml/ocxml11.php?modifiedsince={modifiedsince}&user={user}&cache={cache}&cachedesc={cachedesc}&cachelog={cachelog}&picture={picture}&picturefromcachelog={picturefromcachelog}&removedobject={removedobject}&session={session}&zip={zip}&charset=utf-8';
 $opt['urlappend_country'] = '&country={country}';
 $opt['urlappend_coords'] = '&lon={lon}&lat={lat}&distance={distance}';
-$opt['url_getsession'] = 'http://www.opencaching.de/xml/ocxml11.php?sessionid={sessionid}&file={file}&zip={zip}&charset=utf-8';
+$opt['url_getsession'] = 'https://www.opencaching.de/xml/ocxml11.php?sessionid={sessionid}&file={file}&zip={zip}&charset=utf-8';

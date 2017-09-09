@@ -109,7 +109,7 @@ $opt['template']['default']['locale'] = 'DE'; // can be overwritten by $opt['dom
  * Must be overwritten in BOTH lib1 and lib2 settings.inc.php,
  * and BEFORE calling set_absolute_urls!
  */
-//$opt['domain']['www.opencaching.de']['url'] = 'http://www.opencaching.de/';
+//$opt['domain']['www.opencaching.de']['url'] = 'https://www.opencaching.de/';
 //$opt['domain']['www.opencaching.de']['shortlink_domain'] = 'opencaching.de';
 //$opt['domain']['www.opencaching.de']['sitename'] = 'Opencaching.de';
 //$opt['domain']['www.opencaching.de']['locale'] = 'DE';
@@ -126,7 +126,7 @@ $opt['template']['default']['locale'] = 'DE'; // can be overwritten by $opt['dom
 //$opt['domain']['www.opencaching.de']['https']['is_default'] = false;
 //$opt['domain']['www.opencaching.de']['https']['force_login'] = true;
 
-//$opt['domain']['www.opencaching.pl']['url'] = 'http://www.opencaching.pl/';
+//$opt['domain']['www.opencaching.pl']['url'] = 'https://opencaching.pl/';
 //$opt['domain']['www.opencaching.pl']['sitename'] = 'Opencaching.PL';
 //$opt['domain']['www.opencaching.pl']['locale'] = 'PL';
 //$opt['domain']['www.opencaching.pl']['fallback_locale'] = 'EN';
@@ -140,7 +140,7 @@ $opt['template']['default']['locale'] = 'DE'; // can be overwritten by $opt['dom
 // Supply the site's primary URL and the shortlink domain here.
 // Can be overriden by domain settings.
 // Set shortlink domain to false if not available.
-set_absolute_urls($opt, 'http://www.opencaching.de/', 'opencaching.de', 2);
+set_absolute_urls($opt, 'https://www.opencaching.de/', 'opencaching.de', 2);
 
 /* The OC site's ID; see settings-dist.inc.php for known IDs.
  */
@@ -244,6 +244,6 @@ function post_config()
             config_domain_www_opencachingspain_es();
             break;
         default:
-            $tpl->redirect('http://www.opencaching.de/index.php');
+            $tpl->redirect('https://www.opencaching.de/index.php');
     }
 }

@@ -11,7 +11,7 @@
   <NetworkLink>
     <name>Opencaching</name>
     <Url>
-      <href>http://www.opencaching.de/util2/google-earth/caches.php</href>
+      <href>https://www.opencaching.de/util2/google-earth/caches.php</href>
       <viewRefreshTime>1</viewRefreshTime>
       <viewRefreshMode>onStop</viewRefreshMode>
     </Url>

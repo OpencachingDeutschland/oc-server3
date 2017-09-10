@@ -620,6 +620,7 @@ class cache
                 if (trim($rPicture['title']) == '') {
                     $rPicture['title'] = $translate->t('Picture', '', '', 0) . ' ' . (count($pictures) + 1);
                 }
+                $rPicture['url'] = use_current_protocol($rPicture['url']);
                 $pictures[] = $rPicture;
             }
             sql_free_result($rsPictures);

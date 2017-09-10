@@ -30,10 +30,11 @@
                 </td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}cyberturm.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=266420">Cyberturm</a><br/>treasurer</td>
+                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>treasurer & head of system
+                    administration
+                </td>
             </tr>
-
             <tr>
                 <th colspan="3"><br/><span class="content-title-noshade-size1">other members of the Management Board</span>
                 </th>
@@ -52,24 +53,12 @@
                 </td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>head of system
-                    administration
-                </td>
-            </tr>
-            <tr>
                 <td></td>
             </tr>
             <tr>
                 <th colspan="3"><br/><span class="content-title-noshade-size1">Team members</span></th>
             <tr>
                 <td></td>
-            </tr>
-            <tr>
-                <td><img src="{$opt.page.teampic_url}bundy609.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=189552">Bundy609</a><br/>user support,
-                    data maintenance
-                </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
@@ -89,26 +78,9 @@
                 </td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a><br/>user
-                    support, data maintenance, wiki
-                </td>
-            </tr>
-            <tr>
-                <td><img src="{$opt.page.teampic_url}ralf20.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a><br/>data maintenance
-                </td>
-            </tr>
-            <tr>
                 <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>software
                     development
-                </td>
-            </tr>
-            <tr>
-                <td><img src="{$opt.page.teampic_url}steingesicht.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a><br/>data
-                    maintenance, message board moderation
                 </td>
             </tr>
             <tr>

@@ -47,10 +47,10 @@
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}cyberturm.png"/></td>
+            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=266420">Cyberturm</a>
-                <br/>Kassenwart
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a>
+                <br/>Kassenwart & Leiter Technik/Systemadministration
             </td>
         </tr>
         <tr>
@@ -72,13 +72,6 @@
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a>
-                <br/>Leiter Technik/Systemadministration
-            </td>
-        </tr>
-        <tr>
             <td></td>
             <td></td>
             <td></td>
@@ -90,13 +83,6 @@
             <td></td>
             <td></td>
             <td></td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}bundy609.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=189552">Bundy609</a>
-                <br/>Anwendersupport, Datenpflege
-            </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
@@ -120,34 +106,11 @@
                 <br/>Datenpflege
             </td>
         </tr>
-
-        <tr>
-            <td><img src="{$opt.page.teampic_url}mrspommelhorst.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=144252">Mrs.Pommelhorst</a>
-                <br/>Anwendersupport, Datenpflege, Wiki
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}ralf20.png"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=165920">Ralf20</a>
-                <br/>Datenpflege
-            </td>
-        </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a>
                 <br/>Softwareentwicklung
-            </td>
-        </tr>
-
-        <tr>
-            <td><img src="{$opt.page.teampic_url}steingesicht.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=165774">Steingesicht</a>
-                <br/>Datenpflege, Forenmoderation
             </td>
         </tr>
         <tr>

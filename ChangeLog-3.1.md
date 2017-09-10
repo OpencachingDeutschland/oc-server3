@@ -5,6 +5,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ## unreleased [3.1.4...development](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.4...development)
 
 ### Added
+- add github to left panel [#1112](https://redmine.opencaching.de/issues/1112)
 
 ### Changed
 

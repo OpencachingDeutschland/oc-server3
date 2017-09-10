@@ -42,6 +42,7 @@ sql('TRUNCATE `logentries`');
 sql('TRUNCATE `pictures_modified`');
 sql('TRUNCATE `saved_texts`');
 sql('TRUNCATE `sys_login_stat`');
+sql('TRUNCATE `waypoint_reports`');
 
 echo "clearing temporary data\n";
 sql('TRUNCATE `cache_maps`');
@@ -87,7 +88,7 @@ sql(
             `watchmail_hour`=0, `watchmail_nextmail`='', `watchmail_day`=0,
             `activation_code`='', `statpic_logo`=0, `statpic_text`='Opencaching',
             `no_htmledit_flag`=0, `notify_radius`=0, `notify_oconly`=1, `language`='DE',
-            `language_guessed`=1, `domain`=NULL, `admin`=0,
+            `language_guessed`=1, `domain`=NULL, `admin`=0, `admin_password`=NULL, `roles`='',
             `description`='', `desc_htmledit`=1"
 );
 // `data_license` setting is retained, so that all content stays tagged with
@@ -128,6 +129,7 @@ if (sql_table_exists('okapi_vars')) {
     sql('TRUNCATE `okapi_nonces`');
     sql('TRUNCATE `okapi_search_results`');
     sql('TRUNCATE `okapi_search_sets`');
+    sql('TRUNCATE `okapi_submitted_objects`');
     sql('TRUNCATE `okapi_stats_hourly`');
     sql('TRUNCATE `okapi_stats_monthly`');
     sql('TRUNCATE `okapi_stats_temp`');

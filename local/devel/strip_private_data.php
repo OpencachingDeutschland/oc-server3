@@ -42,6 +42,8 @@ sql('TRUNCATE `logentries`');
 sql('TRUNCATE `pictures_modified`');
 sql('TRUNCATE `saved_texts`');
 sql('TRUNCATE `sys_login_stat`');
+sql('TRUNCATE `user_statpic`');
+sql('TRUNCATE `waypoint_reports`');
 
 echo "clearing temporary data\n";
 sql('TRUNCATE `cache_maps`');
@@ -53,6 +55,9 @@ sql('TRUNCATE `replication`');
 sql('TRUNCATE `replication_notimported`');
 sql('TRUNCATE `replication_overwrite`');
 sql('TRUNCATE `sys_logins`');
+sql('TRUNCATE `sys_repl_exclude`');
+sql('TRUNCATE `sys_repl_slaves`');
+sql('TRUNCATE `sys_repl_timestamp`');
 sql('TRUNCATE `sys_sessions`');
 sql('TRUNCATE `sys_temptables`');
 sql('TRUNCATE `watches_logqueue`');
@@ -61,7 +66,7 @@ sql('TRUNCATE `watches_waiting`');
 sql('TRUNCATE `xmlsession`');
 sql('TRUNCATE `xmlsession_data`');
 
-echo "clearing user data\n";
+echo "clearing nonpublic user data\n";
 sql('TRUNCATE `cache_adoption`');
 sql('TRUNCATE `cache_ignore`');
 sql('CALL sp_updateall_ignorestat(@c)');
@@ -72,13 +77,15 @@ sql('TRUNCATE `cache_watches`');
 sql('CALL sp_updateall_watchstat(@c)');
 sql('CALL sp_updateall_cachelist_counts(@c)');
 sql('DELETE FROM `coordinates` WHERE `type`=2'); // personal cache notes and coords
+sql('TRUNCATE `field_note`');
 sql('TRUNCATE `queries`');
 sql('TRUNCATE `user_options`');
 sql(
     "UPDATE `user`
         SET
             `is_active_flag`=0,
-            `last_login`=NULL, `password`=NULL, `email`=NULL, `email_problems`=0,
+            `last_login`=NULL, `password`=NULL, `admin_password`=NULL, `roles`='',
+            `email`=NULL, `email_problems`=0,
             `first_email_problem`=NULL, `last_email_problem`=NULL, `mailing_problems`=0,
             `accept_mailing`=0, `usermail_send_addr`=0, `latitude`=0, `longitude`=0,
             `last_name`='', `first_name`='', `country`=NULL, `pmr_flag`=0,
@@ -102,6 +109,19 @@ while ($r = sql_fetch_assoc($rs)) {
 echo "\n";
 mysql_free_result($rs);
 
+echo "clearing nonpublic cache data\n";
+sql(
+    "UPDATE caches
+     SET
+        `logpw`='', `date_activate`=null, `show_cachelists`=1,
+        `protect_old_coords` = (`status` IN (6,7))
+    "
+);
+sql('UPDATE `cache_desc` SET `desc_htmledit`=`desc_html`');
+
+echo "clearing nonpublic log data\n";
+sql('UPDATE `cache_logs` SET `text_htmledit`=`text_html`, `order_date`=`date`');
+
 echo "deleting inactive users\n";
 $rs = sql(
     'SELECT `user_id`
@@ -122,12 +142,14 @@ echo "clearing OKAPI data\n";
 if (sql_table_exists('okapi_vars')) {
     echo "clearing OKAPI data\n";
     sql('TRUNCATE `okapi_authorizations`');
-    sql('TRUNCATE `okapi_cache_logs`');
+    sql('TRUNCATE `okapi_cache`');
     sql('TRUNCATE `okapi_cache_reads`');
+    sql('TRUNCATE `okapi_clog`');
     sql('TRUNCATE `okapi_consumers`');
     sql('TRUNCATE `okapi_nonces`');
     sql('TRUNCATE `okapi_search_results`');
     sql('TRUNCATE `okapi_search_sets`');
+    sql('TRUNCATE `okapi_submitted_objects`');
     sql('TRUNCATE `okapi_stats_hourly`');
     sql('TRUNCATE `okapi_stats_monthly`');
     sql('TRUNCATE `okapi_stats_temp`');

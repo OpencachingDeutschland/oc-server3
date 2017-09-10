@@ -1403,7 +1403,20 @@ sql(
      FOR EACH ROW BEGIN
         /* dont overwrite `last_modified` while XML client is running */
         IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN
-            SET NEW.`last_modified`=NOW();
+            IF
+                NEW.`id` != OLD.`id`
+                OR NEW.`uuid` != OLD.`uuid`
+                OR NEW.`node` != OLD.`node`
+                OR NEW.`date_created` != OLD.`date_created`
+                OR NEW.`cache_id` != OLD.`cache_id`
+                OR NEW.`language` != OLD.`language`
+                OR NEW.`desc` != OLD.`desc`
+                OR NEW.`desc_html` != OLD.`desc_html`
+                OR NEW.`hint` != OLD.`hint`
+                OR NEW.`short_desc` != OLD.`short_desc`
+            THEN
+                SET NEW.`last_modified`=NOW();
+            END IF;
         END IF;
      END;'
 );
@@ -1821,7 +1834,6 @@ sql(
             OR NEW.`name` != BINARY OLD.`name`
             OR NEW.`is_public` != OLD.`is_public`
             OR NEW.`description` != BINARY OLD.`description`
-            OR NEW.`desc_htmledit` != OLD.`desc_htmledit`
         THEN
             /* dont overwrite date values while XML client is running */
             IF ISNULL(@XMLSYNC) OR @XMLSYNC!=1 THEN

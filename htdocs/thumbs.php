@@ -21,8 +21,6 @@ $rs = sql(
     $uuid
 );
 $r = sql_fetch_array($rs);
-// fix so we don't need to change something in the database
-$r['thumb_url'] = str_replace('http://', 'https://', $r['thumb_url']);
 sql_free_result($rs);
 if ($r) {
     if ($r['object_type'] == 1) {

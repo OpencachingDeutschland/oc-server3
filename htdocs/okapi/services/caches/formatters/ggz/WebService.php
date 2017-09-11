@@ -2,8 +2,9 @@
 
 namespace okapi\services\caches\formatters\ggz;
 
-use okapi\OkapiZIPHttpResponse;
-use okapi\Request\OkapiRequest;
+use okapi\core\Request\OkapiRequest;
+use okapi\core\Response\OkapiZIPHttpResponse;
+use okapi\services\caches\formatters\gpx\WebService as GpxWebService;
 
 class WebService
 {
@@ -16,9 +17,9 @@ class WebService
 
     public static function call(OkapiRequest $request)
     {
-        $gpx_result = \okapi\services\caches\formatters\gpx\WebService::create_gpx(
+        $gpx_result = GpxWebService::create_gpx(
                 $request,
-                \okapi\services\caches\formatters\gpx\WebService::FLAG_CREATE_GGZ_IDX
+                GpxWebService::FLAG_CREATE_GGZ_IDX
         );
 
         $response = new OkapiZIPHttpResponse();

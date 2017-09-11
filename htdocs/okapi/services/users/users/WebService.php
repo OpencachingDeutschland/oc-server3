@@ -3,11 +3,11 @@
 namespace okapi\services\users\users;
 
 use Exception;
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\Settings;
 
 class WebService
@@ -42,7 +42,7 @@ class WebService
         $rs = Db::query("
             select user_id, uuid, username, admin, latitude, longitude, date_created
             from user
-            where uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $user_uuids))."')
+            where uuid in ('".implode("','", array_map('\okapi\core\Db::escape_string', $user_uuids))."')
         ");
         $results = array();
         $id2uuid = array();
@@ -114,7 +114,7 @@ class WebService
                 $rs = Db::query("
                     select user_id, founds_count, notfounds_count, hidden_count
                     from user
-                    where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
+                    where user_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($id2uuid)))."')
                 ");
             }
             else
@@ -131,7 +131,7 @@ class WebService
                         user u
                         left join stat_user su
                             on su.user_id = u.user_id
-                    where u.user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
+                    where u.user_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($id2uuid)))."')
                 ");
             }
 
@@ -150,7 +150,7 @@ class WebService
                 $rs = Db::query("
                     select user_id, count(*) as rcmds_given
                     from cache_rating
-                    where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($id2uuid)))."')
+                    where user_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($id2uuid)))."')
                     group by user_id
                 ");
                 $rcmds_counts = array();

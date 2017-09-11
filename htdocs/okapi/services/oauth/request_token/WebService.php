@@ -2,10 +2,10 @@
 
 namespace okapi\services\oauth\request_token;
 
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
-use okapi\Response\OkapiHttpResponse;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
+use okapi\core\Response\OkapiHttpResponse;
 
 class WebService
 {

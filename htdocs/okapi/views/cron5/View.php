@@ -2,7 +2,7 @@
 
 namespace okapi\views\cron5;
 
-use okapi\Okapi;
+use okapi\core\Okapi;
 
 /**
  * This is an entry point for system's crontab. System's crontab will be

@@ -3,12 +3,11 @@
 namespace okapi\services\attrs\attribute_index;
 
 use ArrayObject;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
-
 
 class WebService
 {

@@ -3,13 +3,13 @@
 namespace okapi\services\caches\search;
 
 use Exception;
-use okapi\Db;
-use okapi\Exception\BadRequest;
-use okapi\Exception\InvalidParam;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\BadRequest;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Request\OkapiRequest;
 use okapi\Settings;
 
 class SearchAssistant
@@ -153,7 +153,7 @@ class SearchAssistant
                 }
             }
             if (count($types) > 0)
-                $where_conds[] = "caches.type $operator ('".implode("','", array_map('\okapi\Db::escape_string', $types))."')";
+                $where_conds[] = "caches.type $operator ('".implode("','", array_map('\okapi\core\Db::escape_string', $types))."')";
             else if ($operator == "in")
                 $where_conds[] = "false";
         }
@@ -183,7 +183,7 @@ class SearchAssistant
                     throw new InvalidParam('size2', "'$name' is not a valid cache size.");
                 }
             }
-            $where_conds[] = "caches.size $operator ('".implode("','", array_map('\okapi\Db::escape_string', $types))."')";
+            $where_conds[] = "caches.size $operator ('".implode("','", array_map('\okapi\core\Db::escape_string', $types))."')";
         }
 
         #
@@ -204,7 +204,7 @@ class SearchAssistant
                 throw new InvalidParam('status', "'$name' is not a valid cache status.");
             }
         }
-        $where_conds[] = "caches.status in ('".implode("','", array_map('\okapi\Db::escape_string', $codes))."')";
+        $where_conds[] = "caches.status in ('".implode("','", array_map('\okapi\core\Db::escape_string', $codes))."')";
 
         #
         # owner_uuid
@@ -230,7 +230,7 @@ class SearchAssistant
             $user_ids = array();
             foreach ($users as $user)
                 $user_ids[] = $user['internal_id'];
-            $where_conds[] = "caches.user_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $user_ids))."')";
+            $where_conds[] = "caches.user_id $operator ('".implode("','", array_map('\okapi\core\Db::escape_string', $user_ids))."')";
         }
 
         #
@@ -382,7 +382,7 @@ class SearchAssistant
             {
                 $found_cache_ids = self::get_found_cache_ids(array($this->request->token->user_id));
                 $operator = ($tmp == 'found_only') ? "in" : "not in";
-                $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
+                $where_conds[] = "caches.cache_id $operator ('".implode("','", array_map('\okapi\core\Db::escape_string', $found_cache_ids))."')";
             }
         }
 
@@ -400,7 +400,7 @@ class SearchAssistant
             }
             $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
-            $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
+            $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', $found_cache_ids))."')";
         }
 
         #
@@ -417,7 +417,7 @@ class SearchAssistant
             }
             $internal_user_ids = array_map(create_function('$user', 'return $user["internal_id"];'), $users);
             $found_cache_ids = self::get_found_cache_ids($internal_user_ids);
-            $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('\okapi\Db::escape_string', $found_cache_ids))."')";
+            $where_conds[] = "caches.cache_id not in ('".implode("','", array_map('\okapi\core\Db::escape_string', $found_cache_ids))."')";
         }
 
         #
@@ -446,7 +446,7 @@ class SearchAssistant
                         and clw.user_id = '".Db::escape_string($this->request->token->user_id)."'
                     "));
                 }
-                $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $watched_cache_ids))."')";
+                $where_conds[] = "caches.cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', $watched_cache_ids))."')";
             }
         }
 
@@ -488,7 +488,7 @@ class SearchAssistant
                 where user_id = '".Db::escape_string($this->request->token->user_id)."'
             ");
             $not = ($ignored_status == 'notignored_only' ? 'not' : '');
-            $where_conds[] = "caches.cache_id ".$not." in ('".implode("','", array_map('\okapi\Db::escape_string', $ignored_cache_ids))."')";
+            $where_conds[] = "caches.cache_id ".$not." in ('".implode("','", array_map('\okapi\core\Db::escape_string', $ignored_cache_ids))."')";
         }
 
         #
@@ -578,7 +578,7 @@ class SearchAssistant
                 $where_conds[] = 'PowerTrail.status = 1';
                 if ($powertrail_ids) {
                     $where_conds[] = "PowerTrail.id in ('".implode(
-                        "','", array_map('\okapi\Db::escape_string', explode("|", $powertrail_ids))
+                        "','", array_map('\okapi\core\Db::escape_string', explode("|", $powertrail_ids))
                     )."')";
                 }
             } else {
@@ -854,7 +854,7 @@ class SearchAssistant
             select cache_id
             from cache_logs
             where
-                user_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_user_ids))."')
+                user_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', $internal_user_ids))."')
                 and type in (
                     '".Db::escape_string(Okapi::logtypename2id("Found it"))."',
                     '".Db::escape_string(Okapi::logtypename2id("Attended"))."'

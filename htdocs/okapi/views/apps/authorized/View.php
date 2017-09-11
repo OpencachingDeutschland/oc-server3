@@ -2,10 +2,10 @@
 
 namespace okapi\views\apps\authorized;
 
-use okapi\Db;
-use okapi\Okapi;
-use okapi\Response\OkapiHttpResponse;
-use okapi\Response\OkapiRedirectResponse;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\Response\OkapiHttpResponse;
+use okapi\core\Response\OkapiRedirectResponse;
 use okapi\Settings;
 
 class View

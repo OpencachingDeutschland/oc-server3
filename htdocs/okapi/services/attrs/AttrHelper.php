@@ -3,10 +3,9 @@
 namespace okapi\services\attrs;
 
 use Exception;
-use okapi\Cache;
-use okapi\Okapi;
+use okapi\core\Cache;
+use okapi\core\Okapi;
 use okapi\Settings;
-
 
 class AttrHelper
 {

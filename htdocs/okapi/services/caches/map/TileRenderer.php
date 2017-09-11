@@ -3,11 +3,10 @@
 namespace okapi\services\caches\map;
 
 use Exception;
-use okapi\Cache;
-use okapi\Db;
-use okapi\FileCache;
-use okapi\Okapi;
-
+use okapi\core\Cache;
+use okapi\core\Db;
+use okapi\core\FileCache;
+use okapi\core\Okapi;
 
 class TileRenderer
 {

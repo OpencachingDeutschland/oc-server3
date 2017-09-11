@@ -2,8 +2,8 @@
 
 namespace okapi\views\signup;
 
-use okapi\Okapi;
-use okapi\Response\OkapiHttpResponse;
+use okapi\core\Okapi;
+use okapi\core\Response\OkapiHttpResponse;
 use okapi\Settings;
 use okapi\views\menu\OkapiMenu;
 

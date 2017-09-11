@@ -2,11 +2,11 @@
 
 namespace okapi\services\caches\search\by_urls;
 
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\Settings;
 
 class WebService
@@ -119,7 +119,7 @@ class WebService
                 select cache_id, wp_oc
                 from caches
                 where
-                    cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', $internal_ids))."')
+                    cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', $internal_ids))."')
                     and status in (1,2,3)
             ");
             $dict = array();
@@ -143,7 +143,7 @@ class WebService
                 select uuid, wp_oc
                 from caches
                 where
-                    uuid in ('".implode("','", array_map('\okapi\Db::escape_string', $uuids))."')
+                    uuid in ('".implode("','", array_map('\okapi\core\Db::escape_string', $uuids))."')
                     and status in (1,2,3)
             ");
             $dict = array();

@@ -3,12 +3,12 @@
 namespace okapi\services\replicate;
 
 use Exception;
-use okapi\Cache;
-use okapi\Consumer\OkapiInternalConsumer;
-use okapi\Db;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
+use okapi\core\Cache;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
 use okapi\Settings;
 
 class ReplicateCommon
@@ -373,7 +373,7 @@ class ReplicateCommon
                     $data_values[] = gzdeflate(serialize($entry));
                 Db::execute("
                     insert into okapi_clog (data)
-                    values ('".implode("'),('", array_map('\okapi\Db::escape_string', $data_values))."');
+                    values ('".implode("'),('", array_map('\okapi\core\Db::escape_string', $data_values))."');
                 ");
             }
 

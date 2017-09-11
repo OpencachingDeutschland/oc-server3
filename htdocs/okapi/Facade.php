@@ -2,10 +2,15 @@
 
 namespace okapi;
 
-use okapi\Consumer\OkapiFacadeConsumer;
+use okapi\core\Cache;
+use okapi\core\Consumer\OkapiFacadeConsumer;
+use okapi\core\Db;
+use okapi\core\Okapi;
+use okapi\core\OkapiErrorHandler;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Token\OkapiFacadeAccessToken;
 use okapi\lib\OCSession;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Token\OkapiFacadeAccessToken;
 
 # OKAPI Framework -- Wojciech Rygielski <rygielski@mimuw.edu.pl>
 
@@ -29,7 +34,7 @@ use okapi\Token\OkapiFacadeAccessToken;
 
 # EXAMPLE OF USAGE:
 
-# require_once $rootpath.'okapi/facade.php';
+# require_once $rootpath.'okapi/Facade.php';
 # \okapi\Facade::schedule_user_entries_check(...);
 # \okapi\Facade::disable_error_handling();
 
@@ -138,7 +143,7 @@ class Facade
         Db::execute("
             update caches
             set okapi_syncbase = now()
-            where wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+            where wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
         ");
     }
 
@@ -183,8 +188,7 @@ class Facade
      */
     public static function database_update()
     {
-        $update = new views\update\View;
-        $update::call();
+        views\update\View::call();
     }
 
     /**

@@ -2,11 +2,11 @@
 
 namespace okapi\services\caches\search\save;
 
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Okapi;
-use okapi\OkapiLock;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Okapi;
+use okapi\core\OkapiLock;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
 class WebService

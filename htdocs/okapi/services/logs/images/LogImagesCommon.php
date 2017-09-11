@@ -7,15 +7,14 @@
 namespace okapi\services\logs\images;
 
 use Exception;
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
 use okapi\Settings;
-
 
 class LogImagesCommon
 {
-    public function validate_image_uuid($request)
+    public static function validate_image_uuid($request)
     {
         $image_uuid = $request->get_parameter('image_uuid');
         if (!$image_uuid)
@@ -61,7 +60,7 @@ class LogImagesCommon
     }
 
 
-    public function validate_position($request)
+    public static function validate_position($request)
     {
         $position = $request->get_parameter('position');
         if ($position !== null && !preg_match("/^-?[0-9]+$/", $position)) {

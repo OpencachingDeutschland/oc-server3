@@ -2,7 +2,7 @@
 
 namespace okapi\services\caches\formatters\gpx;
 
-use okapi\Okapi;
+use okapi\core\Okapi;
 
 echo '<?xml version="1.0" encoding="utf-8"?>'."\n";
 

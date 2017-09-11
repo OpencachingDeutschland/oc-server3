@@ -2,16 +2,16 @@
 
 namespace okapi\services\caches\formatters\gpx;
 
-use okapi\Consumer\OkapiInternalConsumer;
-use okapi\Db;
-use okapi\Exception\BadRequest;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
-use okapi\Response\OkapiHttpResponse;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Db;
+use okapi\core\Exception\BadRequest;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Request\OkapiRequest;
+use okapi\core\Response\OkapiHttpResponse;
 use okapi\services\attrs\AttrHelper;
 use okapi\Settings;
 
@@ -374,7 +374,7 @@ class WebService
         $rs = Db::query("
             select uuid, user_id
             from user
-            where uuid in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($dict)))."')
+            where uuid in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($dict)))."')
         ");
         while ($row = Db::fetch_assoc($rs))
             $dict[$row['uuid']] = $row['user_id'];

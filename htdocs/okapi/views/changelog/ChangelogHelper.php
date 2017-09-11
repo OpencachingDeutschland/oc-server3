@@ -4,8 +4,8 @@ namespace okapi\views\changelog;
 
 use ErrorException;
 use Exception;
-use okapi\Cache;
-use okapi\Okapi;
+use okapi\core\Cache;
+use okapi\core\Okapi;
 
 
 class ChangelogHelper

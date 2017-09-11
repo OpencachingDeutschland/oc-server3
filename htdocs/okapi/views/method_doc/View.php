@@ -2,12 +2,12 @@
 
 namespace okapi\views\method_doc;
 
-use okapi\Exception\BadRequest;
-use okapi\Exception\Http404;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Response\OkapiHttpResponse;
+use okapi\core\Exception\BadRequest;
+use okapi\core\Exception\Http404;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Response\OkapiHttpResponse;
 use okapi\Settings;
 use okapi\views\menu\OkapiMenu;
 

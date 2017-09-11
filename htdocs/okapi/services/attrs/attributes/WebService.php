@@ -2,14 +2,13 @@
 
 namespace okapi\services\attrs\attributes;
 
-use okapi\Db;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
 use okapi\Settings;
-
 
 class WebService
 {

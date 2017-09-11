@@ -4,14 +4,14 @@ namespace okapi\services\caches\geocaches;
 
 use ArrayObject;
 use Exception;
-use okapi\Db;
-use okapi\Exception\BadRequest;
-use okapi\Exception\InvalidParam;
-use okapi\Exception\ParamMissing;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Request\OkapiRequest;
+use okapi\core\Db;
+use okapi\core\Exception\BadRequest;
+use okapi\core\Exception\InvalidParam;
+use okapi\core\Exception\ParamMissing;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
 use okapi\Settings;
 
@@ -175,7 +175,7 @@ class WebService
                     caches c
                     left join stat_caches as sc on c.cache_id = sc.cache_id
                 where
-                    wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                    wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                     and status in (1,2,3)
             ");
         }
@@ -206,7 +206,7 @@ class WebService
                 from
                     caches c
                 where
-                    wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                    wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                     and c.status in (1,2,3)
             ");
         }
@@ -367,7 +367,7 @@ class WebService
             $rs = Db::query("
                 select user_id, uuid, username
                 from user
-                where user_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_values($owner_ids)))."')
+                where user_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_values($owner_ids)))."')
             ");
             $tmp = array();
             while ($row = Db::fetch_assoc($rs))
@@ -520,7 +520,7 @@ class WebService
             $rs = Db::query("
                 select cache_id, language, `desc`, short_desc, hint
                 from cache_desc
-                where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                where cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
             while ($row = Db::fetch_assoc($rs))
             {
@@ -607,7 +607,7 @@ class WebService
                 select object_id, uuid, url, title, spoiler, ".$preview_field." as preview
                 from pictures
                 where
-                    object_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                    object_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
                     and display = 1
                     and object_type = 2
                     and unknown_format = 0
@@ -666,7 +666,7 @@ class WebService
             $rs = Db::query("
                 select cache_id, attrib_id
                 from caches_attributes
-                where cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                where cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
             ");
             while ($row = Db::fetch_assoc($rs))
             {
@@ -723,7 +723,7 @@ class WebService
                 select cache_id, uuid
                 from cache_logs
                 where
-                    cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                    cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
                     and ".((Settings::get('OC_BRANCH') == 'oc.pl') ? "deleted = 0" : "true")."
                 order by cache_id, ".$logs_order_field_SQL." desc, date_created desc, id desc
             ");
@@ -810,7 +810,7 @@ class WebService
                     select cache_id, max(date) as date, group_concat(`desc`) as `desc`
                     from cache_notes
                     where
-                        cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                        cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
                         and user_id = '".Db::escape_string($request->token->user_id)."'
                     group by cache_id
                 ");
@@ -824,7 +824,7 @@ class WebService
                     from coordinates
                     where
                         type = 2  -- personal note
-                        and cache_id in ('".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."')
+                        and cache_id in ('".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."')
                         and user_id = '".Db::escape_string($request->token->user_id)."'
                     group by cache_id
                 ");
@@ -851,7 +851,7 @@ class WebService
                     gk_item gki
                 where
                     gkiw.id = gki.id
-                    and gkiw.wp in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                    and gkiw.wp in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
             ");
             $trs = array();
             while ($row = Db::fetch_assoc($rs))
@@ -885,7 +885,7 @@ class WebService
                 $rs = Db::query("
                     select wp as cache_code, count(*) as count
                     from gk_item_waypoint
-                    where wp in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                    where wp in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                     group by wp
                 ");
                 $tr_counts = new ArrayObject();
@@ -955,7 +955,7 @@ class WebService
 
             foreach ($results as &$result_ref)
                 $result_ref['alt_wpts'] = array();
-            $cache_codes_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
+            $cache_codes_escaped_and_imploded = "'".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
             if (Settings::get('OC_BRANCH') == 'oc.pl')
             {
@@ -1136,7 +1136,7 @@ class WebService
                         inner join countries on countries.short=c.country
                         inner join sys_trans_text stt on stt.trans_id = countries.trans_id
                     where
-                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                 ");
                 $country_codes2names = array();
                 while ($row = Db::fetch_assoc($rs))
@@ -1153,7 +1153,7 @@ class WebService
                         caches c
                         left join cache_location cl on c.cache_id = cl.cache_id
                     where
-                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                 ");
                 while ($row = Db::fetch_assoc($rs))
                 {
@@ -1183,7 +1183,7 @@ class WebService
                         caches c,
                         cache_location cl
                     where
-                        c.wp_oc in ('".implode("','", array_map('\okapi\Db::escape_string', $cache_codes))."')
+                        c.wp_oc in ('".implode("','", array_map('\okapi\core\Db::escape_string', $cache_codes))."')
                         and c.cache_id = cl.cache_id
                 ");
                 while ($row = Db::fetch_assoc($rs))
@@ -1227,7 +1227,7 @@ class WebService
 
         if (in_array('protection_areas', $fields))
         {
-            $cache_ids_escaped_and_imploded = "'".implode("','", array_map('\okapi\Db::escape_string', array_keys($cacheid2wptcode)))."'";
+            $cache_ids_escaped_and_imploded = "'".implode("','", array_map('\okapi\core\Db::escape_string', array_keys($cacheid2wptcode)))."'";
 
             if (Settings::get('OC_BRANCH') == 'oc.de')
             {

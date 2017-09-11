@@ -10,8 +10,8 @@
 
 namespace okapi\services\caches\search\all;
 
-use okapi\Okapi;
-use okapi\Request\OkapiRequest;
+use okapi\core\Okapi;
+use okapi\core\Request\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
 class WebService

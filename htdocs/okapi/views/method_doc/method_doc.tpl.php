@@ -1,5 +1,7 @@
 <?php
 
+use okapi\core\Okapi;
+
 # Shortcuts
 $m = $vars['method'];
 
@@ -29,7 +31,7 @@ $m = $vars['method'];
 
                         <h1>
                             <?= $m['brief_description'] ?>
-                            <?= \okapi\Okapi::format_infotags($m['infotags']) ?>
+                            <?= Okapi::format_infotags($m['infotags']) ?>
                             <div class='subh1'>:: <b><?= $m['name'] ?></b> method</div>
                         </h1>
                         <table class='method' cellspacing='1px'>
@@ -62,7 +64,7 @@ $m = $vars['method'];
                                     <td class='argdesc'>
                                         <?php if (count($arg['infotags']) > 0) { ?>
                                             <div style='float: right'>
-                                                <?= \okapi\Okapi::format_infotags($arg['infotags']) ?>
+                                                <?= Okapi::format_infotags($arg['infotags']) ?>
                                             </div>
                                         <?php } ?>
                                         <?= $arg['description'] ?>

@@ -2,11 +2,11 @@
 
 namespace okapi\views\introduction;
 
-use okapi\Consumer\OkapiInternalConsumer;
-use okapi\Okapi;
-use okapi\OkapiServiceRunner;
-use okapi\Request\OkapiInternalRequest;
-use okapi\Response\OkapiHttpResponse;
+use okapi\core\Consumer\OkapiInternalConsumer;
+use okapi\core\Okapi;
+use okapi\core\OkapiServiceRunner;
+use okapi\core\Request\OkapiInternalRequest;
+use okapi\core\Response\OkapiHttpResponse;
 use okapi\Settings;
 use okapi\views\menu\OkapiMenu;
 

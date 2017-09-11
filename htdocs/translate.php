@@ -525,9 +525,9 @@ function export()
 {
     global $opt, $tpl, $translang;
 
-    $structure = enumSqlFiles(__DIR__ . '/../sql/tables');
+    $structure = enumSqlFiles(__DIR__ . '/../sql/tables-current');
     foreach ($structure as $sTable) {
-        sql_export_structure_to_file(__DIR__ . '/../sql/tables/' . $sTable . '.sql', $sTable);
+        sql_export_structure_to_file(__DIR__ . '/../sql/tables-current/' . $sTable . '.sql', $sTable);
     }
 
     // static data tables

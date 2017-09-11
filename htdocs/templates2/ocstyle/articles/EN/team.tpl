@@ -80,7 +80,21 @@
             <tr>
                 <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>software
-                    development
+                    development & public relation
+                </td>
+            </tr>
+            <tr>
+                <td><img src="{$opt.page.teampic_url}nlubisch.jpg"/></td>
+                <td>
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a>
+                    <br/>development
+                </td>
+            </tr>
+            <tr>
+                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+                <td>
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a>
+                    <br/>development
                 </td>
             </tr>
             <tr>

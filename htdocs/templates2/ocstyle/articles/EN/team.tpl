@@ -20,7 +20,7 @@
             <tr>
                 <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br/>
-                    chairman & system administration
+                    chairman & software development
                 </td>
             </tr>
             <tr>

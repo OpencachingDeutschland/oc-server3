@@ -37,7 +37,7 @@
             <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
             <td>
                 <a href="{$opt.page.teammember_url}/viewprofile.php?userid=244244">ClanFamily</a><br/>
-                1. Vorsitzender & Entwickler
+                1. Vorsitzender & Softwareentwicklung
             </td>
         </tr>
         <tr>

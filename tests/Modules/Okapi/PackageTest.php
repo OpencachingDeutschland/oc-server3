@@ -3,8 +3,9 @@
 namespace OcTest\Modules\Okapi;
 
 use OcTest\Modules\AbstractModuleTest;
+use okapi\core\Okapi;
 
-require_once __DIR__ . '/../../../htdocs/okapi/Okapi.php';
+require_once __DIR__ . '/../../../htdocs/okapi/autoload.php';
 
 class PackageTest extends AbstractModuleTest
 {
@@ -12,7 +13,7 @@ class PackageTest extends AbstractModuleTest
     {
         $message = 'please use the okapi release Package from http://rygielski.net/r/okapi-latest';
 
-        self::assertNotNull(\okapi\Okapi::$version_number, $message);
-        self::assertNotNull(\okapi\Okapi::$git_revision, $message);
+        self::assertNotNull(Okapi::$version_number, $message);
+        self::assertNotNull(Okapi::$git_revision, $message);
     }
 }

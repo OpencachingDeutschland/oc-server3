@@ -24,7 +24,8 @@
 
     <table class="table teamlist">
         <tr>
-            <th colspan="3"><br/><span class="content-title-noshade-size1">Geschäftsführender Vorstand</span>
+            <th colspan="3"><br/>
+                <span class="content-title-noshade-size1">Geschäftsführender Vorstand</span>
             </th>
         </tr>
         <tr>
@@ -35,22 +36,22 @@
         <tr>
             <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}/viewprofile.php?userid=244244">ClanFamily</a>
-                <br/>1. Vorsitzender & Entwickler
+                <a href="{$opt.page.teammember_url}/viewprofile.php?userid=244244">ClanFamily</a><br/>
+                1. Vorsitzender & Entwickler
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}teiling88.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a>
-                <br/>2. Vorsitzender & Entwicklungsleiter
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br/>
+                2. Vorsitzender & Entwicklungsleiter
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a>
-                <br/>Kassenwart & Leiter Technik/Systemadministration
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
+                Kassenwart & Leiter Technik/Systemadministration
             </td>
         </tr>
         <tr>
@@ -60,15 +61,15 @@
         <tr>
             <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a>
-                <br/>Pressesprecher; Support-Team, Datenpflege, Forenmoderation
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
+                Pressesprecher; Support-Team, Datenpflege, Forenmoderation
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}dogesu.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a>
-                <br/>Leitung Support-Team, Datenpflege
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br/>
+                Leitung Support-Team, Datenpflege
             </td>
         </tr>
         <tr>
@@ -87,50 +88,50 @@
         <tr>
             <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a>
-                <br/>Cachekarten, Systemüberwachung
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
+                Cachekarten, Systemüberwachung
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a>
-                <br/>Datenpflege, Softwareentwicklung
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br/>
+                Datenpflege, Softwareentwicklung
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}friedrichfroebel.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a>
-                <br/>Wiki, Forenmoderation
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br/>
+                Wiki, Forenmoderation
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}hanekju.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a>
-                <br/>Datenpflege
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>
+                Datenpflege
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a>
-                <br/>Softwareentwicklung & Öffentlichkeitsarbeit
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                Softwareentwicklung & Öffentlichkeitsarbeit
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}nlubisch.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a>
-                <br/>Softwareentwicklung
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a><br/>
+                Softwareentwicklung
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a>
-                <br/>Softwareentwicklung
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a><br/>
+                Softwareentwicklung
             </td>
         </tr>
         <tr>

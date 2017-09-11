@@ -19,30 +19,31 @@
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br/>chairman;
-                    system administration
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br/>
+                    chairman & system administration
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}teiling88.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br/>vice chairman;
-                    head of development
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br/>
+                    vice chairman & head of development
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>treasurer & head of system
-                    administration
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
+                    treasurer & head of system administration
                 </td>
             </tr>
             <tr>
-                <th colspan="3"><br/><span class="content-title-noshade-size1">other members of the Management Board</span>
+                <th colspan="3"><br/>
+                    <span class="content-title-noshade-size1">other members of the Management Board</span>
                 </th>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>press spokesman; user
-                    support, data maintenance, message board moderation
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
+                    press spokesman; user support, data maintenance, message board moderation
                 </td>
             </tr>
             <tr>
@@ -62,8 +63,8 @@
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>cache maps, system
-                    surveillance
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
+                    cache maps, system surveillance
                 </td>
             </tr>
             <tr>
@@ -74,33 +75,34 @@
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}friedrichfroebel.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br/>wiki,
-                    message board moderation
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br/>
+                    wiki, message board moderation
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}hanekju.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>data maintenance
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>
+                    data maintenance
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>software
-                    development & public relation
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                    software development & public relation
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}nlubisch.jpg"/></td>
                 <td>
-                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a>
-                    <br/>development
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a><br/>
+                    software development
                 </td>
             </tr>
             <tr>
                 <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
                 <td>
-                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a>
-                    <br/>development
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a><br/>
+                    software development
                 </td>
             </tr>
             <tr>

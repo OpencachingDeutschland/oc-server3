@@ -114,24 +114,24 @@
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
+            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
-                Softwareentwicklung & Öffentlichkeitsarbeit
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">mirsch</a><br/>
+                Softwareentwicklung
             </td>
         </tr>
         <tr>
             <td><img src="{$opt.page.teampic_url}nlubisch.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">NLubisch</a><br/>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                 Softwareentwicklung
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+            <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">Mirsch</a><br/>
-                Softwareentwicklung
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                Softwareentwicklung & Öffentlichkeitsarbeit
             </td>
         </tr>
         <tr>

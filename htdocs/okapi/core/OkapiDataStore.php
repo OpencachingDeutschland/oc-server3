@@ -1,6 +1,6 @@
 <?php
 
-namespace okapi\Core;
+namespace okapi\core;
 
 use Exception;
 use okapi\core\Consumer\OkapiConsumer;

@@ -8,7 +8,6 @@ use okapi\core\Request\OkapiRequest;
 use okapi\services\logs\images\LogImagesCommon;
 use okapi\Settings;
 
-
 class WebService
 {
     public static function options()

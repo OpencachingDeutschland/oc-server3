@@ -1,6 +1,6 @@
 <?php
 
-namespace okapi\Core;
+namespace okapi\core;
 
 use okapi\core\Consumer\OkapiConsumer;
 use okapi\core\CronJob\CronJobController;
@@ -22,8 +22,15 @@ class Okapi
     public static $server;
 
     /* These two get replaced in automatically deployed packages. */
+    /*
     public static $version_number = null;
     public static $git_revision = null;
+    */
+
+    # temporary workaround until postcommit.py is updated on the OCPL deployment server;
+    # last-but-one version number is inserted manually here
+    public static $version_number = 1609;
+    public static $git_revision = '60c156cd418c19da7accdee4170e57ff1f35e253';
 
     private static $okapi_vars = null;
 

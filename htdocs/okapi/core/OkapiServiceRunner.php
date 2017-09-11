@@ -1,6 +1,6 @@
 <?php
 
-namespace okapi\Core;
+namespace okapi\core;
 
 use okapi\core\Request\OkapiRequest;
 use okapi\Settings;

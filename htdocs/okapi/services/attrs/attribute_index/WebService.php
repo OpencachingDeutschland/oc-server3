@@ -9,7 +9,6 @@ use okapi\core\Request\OkapiInternalRequest;
 use okapi\core\Request\OkapiRequest;
 use okapi\services\attrs\AttrHelper;
 
-
 class WebService
 {
     public static function options()

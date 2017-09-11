@@ -2,6 +2,8 @@
 
 namespace okapi\core\OAuth;
 
+use okapi\core\Exception\OAuthClientException;
+
 class OAuthRequest {
     protected $parameters;
     protected $http_method;

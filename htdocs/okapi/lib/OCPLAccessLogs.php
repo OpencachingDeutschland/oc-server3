@@ -3,6 +3,8 @@
 namespace okapi\lib;
 
 use okapi\Settings;
+use okapi\core\Db;
+use okapi\core\Request\OkapiRequest;
 
 /**
  * This is a (hopefully temporary) class which holds all functionality related

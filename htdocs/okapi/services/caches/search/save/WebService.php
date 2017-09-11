@@ -9,8 +9,6 @@ use okapi\core\OkapiLock;
 use okapi\core\Request\OkapiRequest;
 use okapi\services\caches\search\SearchAssistant;
 
-;
-
 class WebService
 {
     public static function options()

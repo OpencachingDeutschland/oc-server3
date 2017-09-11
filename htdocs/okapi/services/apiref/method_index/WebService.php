@@ -12,7 +12,6 @@ use okapi\Settings;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-
 class WebService
 {
     public static function options()

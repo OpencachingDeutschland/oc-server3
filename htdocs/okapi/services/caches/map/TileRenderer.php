@@ -8,7 +8,6 @@ use okapi\core\Db;
 use okapi\core\FileCache;
 use okapi\core\Okapi;
 
-
 class TileRenderer
 {
     /**

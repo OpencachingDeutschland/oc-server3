@@ -10,7 +10,6 @@ use okapi\core\Request\OkapiInternalRequest;
 use okapi\core\Request\OkapiRequest;
 use okapi\Settings;
 
-
 class WebService
 {
     public static function options()

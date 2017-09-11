@@ -1,6 +1,6 @@
 <?php
 
-namespace okapi\Core;
+namespace okapi\core;
 
 #
 # Database access abstraction layer.

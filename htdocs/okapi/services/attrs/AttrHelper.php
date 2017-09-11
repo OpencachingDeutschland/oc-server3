@@ -7,7 +7,6 @@ use okapi\core\Cache;
 use okapi\core\Okapi;
 use okapi\Settings;
 
-
 class AttrHelper
 {
     /**

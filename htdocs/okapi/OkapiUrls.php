@@ -1,6 +1,6 @@
 <?php
 
-namespace okapi\Core;
+namespace okapi;
 
 # This is the list of OKAPI views. Regexps are mapped to namespaces.
 # Each namespace should expose the Webservice class with a method "call".
@@ -29,6 +29,7 @@ class OkapiUrls
         '^devel/cronreport$' => 'devel/cronreport',
         '^devel/tilereport$' => 'devel/tilereport',
         '^devel/clogentry$' => 'devel/clogentry',
+        '^devel/test$' => 'devel/test',
         '^devel/sysinfo$' => 'devel/sysinfo',
 
         # For debugging TileMap performance only.

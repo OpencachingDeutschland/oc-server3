@@ -1,10 +1,9 @@
 <?php
 
-namespace okapi\lib;
+namespace okapi;
 
 use okapi\core\Exception\Http404;
 use okapi\core\Okapi;
-use okapi\core\OkapiUrls;
 use okapi\views\http404\View as Http404View;
 
 class OkapiScriptEntryPointController

@@ -2,7 +2,6 @@
 
 namespace okapi\services\caches\formatters\garmin;
 
-
 use Exception;
 use okapi\core\Cache;
 use okapi\core\Exception\InvalidParam;

@@ -8,8 +8,6 @@ use okapi\core\Exception\OkapiExceptionHandler;
 use okapi\core\Okapi;
 use okapi\core\OkapiLock;
 
-;
-
 class CronJobController
 {
     /** Return the list of all currently enabled cronjobs. */

@@ -3,6 +3,7 @@
 namespace okapi\services\caches\map\tile;
 
 use okapi\core\Cache;
+use okapi\core\Consumer\OkapiConsumer;
 use okapi\core\Db;
 use okapi\core\Exception\BadRequest;
 use okapi\core\Exception\InvalidParam;
@@ -11,7 +12,6 @@ use okapi\core\OkapiServiceRunner;
 use okapi\core\Request\OkapiInternalRequest;
 use okapi\core\Request\OkapiRequest;
 use okapi\core\Response\OkapiHttpResponse;
-use okapi\OkapiConsumer;
 use okapi\services\caches\map\TileRenderer;
 use okapi\services\caches\map\TileTree;
 use okapi\Settings;

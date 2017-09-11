@@ -9,7 +9,6 @@ use okapi\core\Okapi;
 use okapi\core\OkapiServiceRunner;
 use okapi\core\Request\OkapiInternalRequest;
 
-
 class TileTree
 {
     # Static flags (stored in the database).

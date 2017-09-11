@@ -16,10 +16,11 @@
 # endpoint (this one!), then we need to set it up ourselves.
 #
 
+namespace okapi;
+
 use okapi\core\Exception\OkapiExceptionHandler;
 use okapi\core\Okapi;
 use okapi\core\OkapiErrorHandler;
-use okapi\lib\OkapiScriptEntryPointController;
 
 $GLOBALS['rootpath'] = __DIR__.'/../';
 

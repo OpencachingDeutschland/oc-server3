@@ -9,6 +9,8 @@ CREATE TABLE `user` (
   `last_login` date DEFAULT NULL,
   `username` varchar(60) NOT NULL,
   `password` varchar(128) DEFAULT NULL,
+  `admin_password` binary(60) DEFAULT NULL,
+  `roles` text,
   `email` varchar(60) DEFAULT NULL,
   `email_problems` int(10) NOT NULL DEFAULT '0',
   `first_email_problem` date DEFAULT NULL,

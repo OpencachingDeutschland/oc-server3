@@ -1224,6 +1224,79 @@ function dbv_163()
     update_triggers();
 }
 
+function dbv_164()
+{
+    global $opt;
+
+    // correct spelling of lots of NUTS 1 entities from lower- to uppercase;
+    // add missing NUTS 1 and 3 codes for Norway;
+    // change UK NUTS codes from UK to GB, which is the "OC country code" for UK
+    system(
+        'cat ' . __DIR__. '/../sql/static-data/nuts_codes.sql |' .
+        ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] .
+        ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
+    );
+    sql(
+        "UPDATE `nuts_layer`
+         SET `code` = CONCAT('GB', SUBSTR(`code`, 3))
+         WHERE `code` LIKE 'UK%'"
+    );
+
+    // update NUTS 1 cache location names
+    sql(
+        "UPDATE
+            `cache_location` `cl`,
+            (SELECT `code`, `name` FROM `nuts_codes` WHERE `code` LIKE '___') AS `nc`
+         SET `adm2` = `nc`.`name`
+         WHERE `nc`.`code` = `cl`.`code2`
+         AND `cl`.`code1` != 'DE'"   // optimization - there are no changes for Germany
+    );
+
+    // Update outdated Sweden NUTS 2 and 3 codes in nuts_layer table.
+    // NUTS 1 would need completely new geographic data; but the
+    // cache_location cronjob won't need them - L1 and L2 data is derived from L3. 
+    $sweden_nuts = [
+        'SE01'  => 'SE11',
+        'SE010' => 'SE110',
+        'SE02'  => 'SE12',
+        'SE021' => 'SE121',
+        'SE022' => 'SE122',
+        'SE023' => 'SE123',
+        'SE024' => 'SE124',
+        'SE025' => 'SE125',
+        'SE09'  => 'SE21',
+        'SE091' => 'SE211',
+        'SE092' => 'SE212',
+        'SE093' => 'SE213',
+        'SE094' => 'SE214',
+        'SE04'  => 'SE22',
+        'SE041' => 'SE221',
+        'SE044' => 'SE224',
+        'SE0A'  => 'SE23',
+        'SE0A1' => 'SE231',
+        'SE0A2' => 'SE232',
+        'SE06'  => 'SE31',
+        'SE061' => 'SE311',
+        'SE062' => 'SE312',
+        'SE063' => 'SE313',
+        'SE07'  => 'SE32',
+        'SE071' => 'SE321',
+        'SE072' => 'SE322',
+        'SE08'  => 'SE33',
+        'SE081' => 'SE331',
+        'SE082' => 'SE332'
+    ];
+    foreach ($sweden_nuts as $old => $new) {
+        sql("UPDATE `nuts_layer` SET `code`='&2' WHERE `code`='&1'", $old, $new);
+    }
+
+    // recalculate all UK, Norway, Sweden locations
+    sql(
+        "DELETE FROM `cache_location`
+         WHERE `code1` IN ('UK', 'NO', 'SE')"
+    );
+    // Next cache_location cronjob run will fill in the CL data.
+}
 
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.

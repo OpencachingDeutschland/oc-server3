@@ -74,15 +74,15 @@
                     window.setTimeout('resetbutton(\'' + bname + '\')', 350);
                 }
 
-                img1 = new Image();
+                var img1 = new Image();
                 img1.src = "resource2/ocstyle/images/page/nav2-bg.png";
-                img2 = new Image();
+                var img2 = new Image();
                 img2.src = "resource2/ocstyle/images/page/nav2-sel-bg.png";
-                img3 = new Image();
+                var img3 = new Image();
                 img3.src = "resource2/ocstyle/images/page/nav3-title-bg.png";
-                img4 = new Image();
+                var img4 = new Image();
                 img4.src = "resource2/ocstyle/images/page/section-bg.png";
-                img5 = new Image();
+                var img5 = new Image();
                 img5.src = "resource2/ocstyle/images/page/listheader-bg.png";
             //-->
             </script>

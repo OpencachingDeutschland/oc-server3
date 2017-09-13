@@ -45,6 +45,7 @@ Sponsoring Technology Partner
 * [CrowdIn](https://crowdin.com/)
 * [HostEurope](https://www.hosteurope.de/) 
 * [Jetbrains](https://www.jetbrains.com/)
+* [Sentry](https://sentry.io/) ![Sentry](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/sentry.png)
 * [Scrutinizer](https://scrutinizer-ci.com)
 * [Travis-Ci](https://travis-ci.org/)   
 

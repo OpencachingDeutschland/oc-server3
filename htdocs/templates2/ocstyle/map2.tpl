@@ -343,7 +343,7 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM', 'OCM',
+    var maptypes = ['OSM',
                     google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
                     google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
   var initType = google.maps.MapTypeId.ROADMAP;
@@ -355,7 +355,8 @@ function mapLoad()
         zoom: mnInitZoom,
         center: new google.maps.LatLng(mnInitLat, mnInitLon),
         mapTypeId: initType,
-        backgroundColor: "#d0dccc",
+        backgroundColor: '#d0dccc',
+        gestureHandling: 'greedy',
 
         mapTypeControl: true,
         mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_RIGHT },
@@ -387,7 +388,7 @@ function mapLoad()
     {/if}
     {literal}
 
-    setMapType("OSM", "OpenStreetMap", "http://tile.openstreetmap.org/", 18);
+    setMapType("OSM", "OpenStreetMap", "https://tile.openstreetmap.org/", 18);
 
     moInfoWindow = new google.maps.InfoWindow();
     moWpInfoWindow = new google.maps.InfoWindow();
@@ -506,9 +507,9 @@ function updateCopyrights()
     {
         {/literal}
         if (newMapType == "OCM")
-            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> and <a href="http://www.thunderforest.com/opencyclemap/" target="_blank">OpenCycleMap</a> contributors{/t}';
         else
-            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
+            copyrightDiv.innerHTML = '{t escape=js}Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors{/t}';
         {literal}
         if (mapIcon != null) {
             mapIcon.style.display = "none";

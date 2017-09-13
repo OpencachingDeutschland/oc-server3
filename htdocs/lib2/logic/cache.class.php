@@ -515,7 +515,7 @@ class cache
                     `date_created` - INTERVAL 4 SECOND AS `adjusted_date_created`,
                      /*
                         The first cache_coordinates entry is created immediately after
-                        creating inserting cache into caches table. This usually takes
+                        inserting the cache into caches table. This usually takes
                         a few milliseconds. We apply a 4 seconds 'safety margin' for
                         detecting the original coords. In the extremly unlikely case that
                         it took more than 4 seconds AND the owner did a coordinate change
@@ -605,6 +605,7 @@ class cache
             $coordpos = 0;
             $current_coord = new coordinate($coords[0]['latitude'], $coords[0]['longitude']);
         }
+        $displayed_coord_changes = 0;
 
         while ($rLog = sql_fetch_assoc($rsLogs)) {
             $pictures = [];
@@ -655,6 +656,7 @@ class cache
                                 $rLog['movedbykm'] = round($distance);
                             }
                             $rLog['cache_moved'] = true;
+                            ++$displayed_coord_changes;
                         }
                     } else {
                         // This is the original coord of the cache.
@@ -672,7 +674,7 @@ class cache
         // not added to a a real log entry because there are logs older than the
         // OC cache listing (cmp. https://redmine.opencaching.de/issues/1102):
 
-        if ($coord_changes && $coordpos < count($coords) && count($logs) > 0) {
+        if ($displayed_coord_changes > 0 && $coordpos < count($coords) && count($logs) > 0) {
             $coord = new coordinate($coords[$coordpos]['latitude'], $coords[$coordpos]['longitude']);
             $logs[] = [
                 'newcoord' => $coord->getDecimalMinutes($protect_old_coords),

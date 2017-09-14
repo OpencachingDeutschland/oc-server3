@@ -1218,6 +1218,34 @@ function dbv_162()
     update_triggers();
 }
 
+function dbv_163()
+{
+    // fix cache_location triggers
+    update_triggers();
+}
+
+function dbv_164()
+{
+    global $opt;
+
+    // update NUTS codes
+    system(
+        'cat ' . __DIR__. '/../sql/static-data/nuts_codes.sql |' .
+        ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] .
+        ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
+    );
+
+    // update NUTS level 1 cache location names
+    sql(
+        "UPDATE
+            `cache_location` `cl`,
+            (SELECT `code`, `name` FROM `nuts_codes` WHERE `code` LIKE '___') AS `nc`
+         SET `adm2` = `nc`.`name`
+         WHERE `nc`.`code` = `cl`.`code2`
+         AND `cl`.`code1` != 'DE'"   // optimization - there are no changes for Germany
+    );
+}
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

@@ -1488,7 +1488,6 @@ sql(
     'CREATE TRIGGER `cacheLocationBeforeInsert` BEFORE INSERT ON `cache_location`
      FOR EACH ROW BEGIN
         SET NEW.`last_modified`=NOW();
-        UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
      END;'
 );
 
@@ -1497,17 +1496,6 @@ sql(
     'CREATE TRIGGER `cacheLocationBeforeUpdate` BEFORE UPDATE ON `cache_location`
      FOR EACH ROW BEGIN
         SET NEW.`last_modified`=NOW();
-        UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=NEW.`cache_id`;
-     END;'
-);
-
-sql_dropTrigger('cacheLocationAfterDelete');
-sql(
-    'CREATE TRIGGER `cacheLocationAfterDelete` AFTER DELETE ON `cache_location`
-     FOR EACH ROW BEGIN
-        IF IFNULL(@deleting_cache,0)=0 THEN
-            UPDATE `caches` SET `meta_last_modified`=NOW() WHERE `caches`.`cache_id`=OLD.`cache_id`;
-        END IF;
      END;'
 );
 

@@ -1218,6 +1218,13 @@ function dbv_162()
     update_triggers();
 }
 
+function dbv_163()
+{
+    // fix cache_location triggers
+    update_triggers();
+}
+
+
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.
 //

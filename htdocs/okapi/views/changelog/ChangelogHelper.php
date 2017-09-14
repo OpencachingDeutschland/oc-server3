@@ -4,6 +4,7 @@ namespace okapi\views\changelog;
 
 use ErrorException;
 use Exception;
+use okapi\Settings;
 use okapi\core\Cache;
 use okapi\core\Okapi;
 
@@ -15,10 +16,19 @@ class ChangelogHelper
 
     public function __construct()
     {
-        $cache_key = 'changelog';
-        $cache_backup_key = 'changelog-backup';
+        # For testing a changelog update, developers can supply a "source" parameter
+        # with some local URL of the new changes.xml file:
 
-        $changes_xml = Cache::get($cache_key);
+        if (Settings::get('DEBUG') && isset($_REQUEST['source'])) {
+            $cache_key = false;
+            $changes_xml = false;
+            $changes_url = $_REQUEST['source'];
+        } else {
+            $cache_key = 'changelog';
+            $cache_backup_key = 'changelog-backup';
+            $changes_xml = Cache::get($cache_key);
+            $changes_url = 'https://raw.githubusercontent.com/opencaching/okapi/master/etc/changes.xml';
+        }
         $changelog = null;
 
         if (!$changes_xml)
@@ -34,26 +44,25 @@ class ChangelogHelper
                     )
                 );
                 $context = stream_context_create($opts);
-                $changes_xml = file_get_contents(
-                    # TODO: load from OKAPI repo
-                    'https://raw.githubusercontent.com/opencaching/okapi/master/etc/changes.xml',
-                    false,
-                    $context
-                );
+                $changes_xml = file_get_contents($changes_url, false, $context);
                 $changelog = simplexml_load_string($changes_xml);
                 if (!$changelog) {
                     throw new ErrorException();
                 }
-                Cache::set($cache_key, $changes_xml, 3600);
-                Cache::set($cache_backup_key, $changes_xml, 3600*24*30);
+                if ($cache_key) {
+                    Cache::set($cache_key, $changes_xml, 3600);
+                    Cache::set($cache_backup_key, $changes_xml, 3600*24*30);
+                }
             }
             catch (Exception $e)
             {
                 # GitHub failed on us. User backup list, if available.
 
-                $changes_xml = Cache::get($cache_backup_key);
-                if ($changes_xml) {
-                    Cache::set($cache_key, $changes_xml, 3600*12);
+                if ($cache_key) {
+                    $changes_xml = Cache::get($cache_backup_key);
+                    if ($changes_xml) {
+                        Cache::set($cache_key, $changes_xml, 3600*12);
+                    }
                 }
             }
         }

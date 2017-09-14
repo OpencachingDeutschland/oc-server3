@@ -50,7 +50,7 @@ class WebService
             throw new ParamMissing($name);
         $ret = intval($val);
         if ($ret < 0 || ("$ret" !== $val))
-            throw new InvalidParam($name, "Expecting non-negative integer.");
+            throw new InvalidParam($name, "Expecting non-negative integer, got '".$val."'.");
         return $ret;
     }
 

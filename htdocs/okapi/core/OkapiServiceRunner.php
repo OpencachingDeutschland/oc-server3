@@ -33,6 +33,7 @@ class OkapiServiceRunner
         'services/caches/search/by_urls',
         'services/caches/search/save',
         'services/caches/shortcuts/search_and_retrieve',
+        'services/caches/edit',
         'services/caches/geocache',
         'services/caches/geocaches',
         'services/caches/mark',

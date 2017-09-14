@@ -93,6 +93,11 @@
                 site to fit this restriction. Larger images may have been
                 uploaded in the past, or by other means than OKAPI.</p>
             </li>
+            <li>
+                <p><b>geocache_passwd_max_length</b> - the maximum length of
+                a password that will be accepted by
+                <a href='%OKAPI:methodargref:services/caches/edit%'>services/caches/edit</a>.</p>
+            </li>
         </ul>
     </returns>
 </xml>

@@ -1,0 +1,50 @@
+<xml>
+    <brief>Change the properties of a geocache</brief>
+    <issue-id>510</issue-id>
+    <desc>
+        <p>This method allows your users to change properties of an owned
+        geocache. Currently, only the log password can be changed.
+        Let us know if you need to edit other geocache properties.</p>
+    </desc>
+    <req name='cache_code'>
+        <p>Code of the geocache.</p>
+    </req>
+    <opt name='passwd'>
+        <p>String - the new password for 'Found it' or 'Attended' log entries.
+        If you supply an empty string, the password will be cleared, i.e.
+        the geocache will not require a log password.</p>
+        <p>You may query the maximum accepted password length for the OC site by
+        <a href='%OKAPI:methodargref:services/apisrv/installation%'>services/apsrv/installation</a>.
+        There may also be installation-dependent restrictions on which
+        geocaches may have passwords. <b>success</b> will be <b>false</b> and
+        an explanation message will be returned if a password is rejected.</p>
+    </opt>
+    <opt name='langpref' default='en'>
+        <p>Pipe-separated list of ISO 639-1 language codes. This indicates the
+        order of preference in which language will be chosen for the
+        <b>messages</b> return value.</p>
+    </opt>
+    <common-format-params/>
+    <returns>
+        <p>A dictionary of the following structure:</p>
+        <ul>
+            <li>
+                <p><b>success</b> - boolean,</p>
+                <ul>
+                    <li><b>true</b> if all of the supplied geocache properties
+                    were saved successfully or if no property to be changed was
+                    supplied. The geocache's <b>last_modified</b> date has been
+                    updated if any property was changed,</li>
+                    <li><b>false</b> if nothing was saved, which means that at
+                    least one of the supplied parameters was not acceptable.</li>
+                </ul>
+            </li>
+            <li>
+                <p><b>messages</b> - a dictionary of the supplied parameters
+                that were not acceptable, each entry giving a plain-text string
+                that explains the reason of rejection. The dictionary is empty
+                in case of success.</p>
+            </li>
+        </ul>
+    </returns>
+</xml>

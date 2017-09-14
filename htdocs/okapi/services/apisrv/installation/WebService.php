@@ -4,6 +4,7 @@ namespace okapi\services\apisrv\installation;
 
 use okapi\core\Okapi;
 use okapi\core\Request\OkapiRequest;
+use okapi\core\Db;
 use okapi\Settings;
 
 class WebService
@@ -29,6 +30,8 @@ class WebService
         $result['mobile_registration_url'] = Settings::get('MOBILE_REGISTRATION_URL');
         $result['image_max_upload_size'] = Settings::get('IMAGE_MAX_UPLOAD_SIZE');
         $result['image_rcmd_max_pixels'] = Settings::get('IMAGE_MAX_PIXEL_COUNT');
+        $result['geocache_passwd_max_length'] = Db::field_length('caches', 'logpw');
+
         return Okapi::formatted_response($request, $result);
     }
 }

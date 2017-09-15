@@ -426,7 +426,8 @@ if ($queryid != 0) {
     } elseif (isset($_REQUEST['searchall'])) {
         if (!$login->logged_in() &&
             !(isset($_REQUEST['country']) && $_REQUEST['country'] != '') &&
-            !(isset($_REQUEST['language']) && $_REQUEST['language'] != '')
+            !(isset($_REQUEST['language']) && $_REQUEST['language'] != '') &&
+            !(isset($_REQUEST['cache_attribs']) && $_REQUEST['cache_attribs'] == 61)  // map Safari button
         ) {
             // This operation is very expensive and therefore available only
             // for logged-in users.

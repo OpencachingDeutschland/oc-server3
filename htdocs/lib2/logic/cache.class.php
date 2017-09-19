@@ -950,7 +950,7 @@ class cache
             sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $rCache['user_id'])
         );
 
-        $tpl->assign('deleted_logs', $this->getLogsArray($this->getCacheId(), 0, 1000, true));
+        $tpl->assign('deleted_logs', $this->getLogsArray(0, 1000, true));
 
         // status changes
         $rs = sql(

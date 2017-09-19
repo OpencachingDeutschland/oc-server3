@@ -1186,9 +1186,10 @@ function dbv_161()
         ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
     );
 
-    // recalculate cache locations for these countries
+    // initiate recalculation of cache locations for these countries
 
-    // temporarily get rid of the update trigger so that we can change last_modified
+    // temporarily get rid of the update trigger so that we can change last_modified;
+    // trigger will be fixed and reinstalled by mutation 163
     update_triggers();
     sql(
         "UPDATE `cache_location`
@@ -1196,26 +1197,12 @@ function dbv_161()
          WHERE `code1` IN ('BG', 'HR', 'RO', 'TR')"
     );
 
-    // update the cache locations while trigger is disabled, so that the
-    // modification dates of caches will not be touched
-
-    function checkJob($cacheLocation)   // called from cache_location.class.php
-    {
-        $cacheLocation->run();
-    }
-    include __DIR__ . '/../htdocs/util2/cron/modules/cache_location.class.php';
-    sql("UPDATE `cache_location` SET `last_modified`=NOW() WHERE `code1` IN ('BG', 'HR', 'RO', 'TR')");
+    // Cache locations will be updated by the next cronjob run.
 }
 
 function dbv_162()
 {
-    // reinstall the cache locations update trigger
-    //
-    // (dbupdate.php will also do this, but we keep dbsv-update.php self-sustaining here
-    // so that it can be run independently; also the trigger may be needed in future
-    // DB mutations.)
-
-    update_triggers();
+   // dummy function for obsolete mutation
 }
 
 function dbv_163()

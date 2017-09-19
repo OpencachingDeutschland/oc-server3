@@ -9,6 +9,14 @@
  *
  ***************************************************************************/
 
+// This file is also included in bin/dbsv-update.php! If you change anything
+// here, take care that the DB mutation 161 still works, i.e. it should at
+// least not crash. If keeping it downward compatible is expensive, you may
+// simply decide to remove the "CacheLocation" inclusion and call from the
+// DB mutation 161; the only negative effect might be that on some lately
+// updated developer or test machine caches.last_modified=NOW() is set
+// for some eastern european caches.
+
 checkJob(new CacheLocation());
 
 class CacheLocation

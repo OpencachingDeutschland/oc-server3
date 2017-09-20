@@ -285,7 +285,7 @@
         <tr>
             <td colspan="2"><p>
                 <img src="resource2/{$opt.template.style}/images/viewcache/print-18.png" class="icon16" alt="" />
-                <select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt">
+                <select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value+'&nocrypt='+bNoCrypt" onfocus="this.selectedIndex=0">
                     <option value="#">{t}Print{/t} …</option>
                     <option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=N">{t}without logs{/t}</option>
                     <option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=5">{t}with 5 logs{/t}</option>
@@ -293,7 +293,7 @@
                     <option value="viewcache.php?cacheid={$cache.cacheid}&{if $desclang}desclang={$desclang}&{/if}print=y&log=A">{t}with all logs{/t}</option>
                 </select>&nbsp;
                 <img src="resource2/{$opt.template.style}/images/viewcache/16x16-save.png" class="icon16" alt="" />
-                <select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value">
+                <select class="exportlist" onchange="location.href=this.options[this.selectedIndex].value" onfocus="this.selectedIndex=0">
                     <option value="#">{t}Download as...{/t}</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=gpx">GPX</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=loc">LOC</option>

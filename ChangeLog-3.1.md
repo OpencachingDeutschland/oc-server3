@@ -18,6 +18,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - add missing snippet [#1111](https://redmine.opencaching.de/issues/1111)
 - mixed content issue on listing page [#1114](https://redmine.opencaching.de/issues/1114)
 - map display issue [#1122](https://redmine.opencaching.de/issues/1122)
+- view issue on admin panel [#1128](https://redmine.opencaching.de/issues/1128)
 
 
 ## unreleased [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)

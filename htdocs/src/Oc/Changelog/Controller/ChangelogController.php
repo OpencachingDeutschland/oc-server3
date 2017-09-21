@@ -34,7 +34,7 @@ class ChangelogController extends Controller
     }
 
     /**
-     * @Route(path="/changelog")
+     * @Route(path="/changelog", name="changelog.index")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

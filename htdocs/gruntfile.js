@@ -11,7 +11,8 @@ module.exports = function (grunt) {
         clean: {
             all: '<%= dirs.destination %>',
             css: '<%= dirs.destination %>/css/',
-            js: '<%= dirs.destination %>/js/'
+            js: '<%= dirs.destination %>/js/',
+            images: '<%= dirs.destination %>/images/'
         },
         scsslint: {
             development: [
@@ -21,6 +22,13 @@ module.exports = function (grunt) {
                 config: '.scss-lint.yml',
                 reporterOutput: 'scss-lint-report.xml',
                 colorizeOutput: true
+            }
+        },
+        copyto: {
+            images: {
+                files: [
+                    {cwd: '<%= dirs.source %>/images/', src: ['**/*'], dest: '<%= dirs.destination %>/images/', expand: true}
+                ],
             }
         },
         sass: {
@@ -88,6 +96,14 @@ module.exports = function (grunt) {
             },
         },
         watch: {
+            images: {
+                files: [
+                    '<%= dirs.source %>/images/**/*'
+                ],
+                tasks: [
+                    'copyto:images'
+                ]
+            },
             css: {
                 files: [
                     '<%= dirs.source %>/scss/**/*.scss'

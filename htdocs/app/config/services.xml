@@ -23,5 +23,20 @@
 
         <service id="Oc\FieldNotes\Persistence\FieldNoteService" public="true"/>
         <service id="OcLegacy\Translation\TranslationService" public="true"/>
+
+        <service id="Oc\Menu\MenuBuilder" public="true" autowire="false">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+
+            <tag name="knp_menu.menu_builder" method="createMainMenu" alias="main" />
+        </service>
+
+        <service id="Oc\Menu\Renderer\MainRenderer" public="true" autowire="false">
+            <argument type="service" id="knp_menu.matcher"/>
+
+            <tag name="knp_menu.renderer" alias="main"/>
+        </service>
+
+
     </services>
 </container>

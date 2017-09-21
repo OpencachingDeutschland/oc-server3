@@ -1,0 +1,43 @@
+@import 'global';
+
+.sidebar {
+    background-color: $sidebar---color-background;
+    height: 100vh;
+    color: $sidebar---color-text;
+
+    &__brand {
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        padding: .5rem .5rem 0;
+
+        &-logo {
+            width: 2rem;
+        }
+
+        &-text {
+            padding-left: .5rem;
+            padding-top: .75rem;
+            font-size: 1.5rem;
+        }
+    }
+
+    &__profile {
+        margin-top: $sidebar---margin-top;
+        text-align: center;
+
+        &-image {
+            width: 8rem;
+            border-radius: 50%;
+        }
+
+        &-text {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__navigation {
+        margin-top: $sidebar---margin-top;
+        font-size: 0.9rem;
+    }
+}

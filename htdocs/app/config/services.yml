@@ -50,4 +50,4 @@ services:
     app.dbal_connection:
         class: Doctrine\DBAL\Connection
         factory: ['Oc\Util\DbalConnection', createDbalConnection]
-        arguments: [%database_host%, %database_name%, %database_user%, %database_password%, %database_port%]
+        arguments: ["%database_host%", "%database_name%", "%database_user%", "%database_password%", "%database_port%"]

@@ -17,7 +17,6 @@ if (isset($opt['debug']) && $opt['debug']) {
 $loader = require __DIR__ . '/app/autoload.php';
 
 $kernel = new AppKernel($env, $debug);
-$kernel->loadClassCache();
 $request = Request::createFromGlobals();
 
 $locale = strtolower($opt['template']['locale']);

@@ -9,4 +9,3 @@ INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUE
 INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('6', 'very large', '529', '6', 'extrem groß', 'very large');
 INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('7', 'no container', '530', '8', 'kein Behälter', 'no container');
 INSERT INTO `cache_size` (`id`, `name`, `trans_id`, `ordinal`, `de`, `en`) VALUES ('8', 'nano', '1803', '1', 'nano', 'nano');
-

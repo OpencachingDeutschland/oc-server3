@@ -1,4 +1,3 @@
-
 -- Table countries_list_default
 SET NAMES 'utf8';
 TRUNCATE TABLE `countries_list_default`;

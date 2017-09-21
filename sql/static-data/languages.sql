@@ -1,4 +1,3 @@
-
 -- Table languages
 SET NAMES 'utf8';
 TRUNCATE TABLE `languages`;

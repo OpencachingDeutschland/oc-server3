@@ -235,4 +235,3 @@ INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('ZA', 'South Africa', '164', 'Südafrika', 'South Africa', '0', 'suedafrika', '0', 'south africa');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('ZM', 'Zambia', '163', 'Sambia', 'Zambia', '0', 'sambia', '0', 'zambia');
 INSERT INTO `countries` (`short`, `name`, `trans_id`, `de`, `en`, `list_default_de`, `sort_de`, `list_default_en`, `sort_en`) VALUES ('ZW', 'Zimbabwe', '162', 'Simbabwe', 'Zimbabwe', '0', 'simbabwe', '0', 'zimbabwe');
-

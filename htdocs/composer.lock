@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "620a47702005307770fa7f46d5d3978b",
+    "content-hash": "dd738155b1f3699e90cacf9d83f7b849",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1559,6 +1559,32 @@
                 "service proxies"
             ],
             "time": "2015-08-09T04:28:19+00:00"
+        },
+        {
+            "name": "opencaching/okapi",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpencachingDeutschland/okapi-subtree-for-composer-usage.git",
+                "reference": "c1eeaab91c3c84fe5fd64d98176fbac76cf6ab2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/okapi-subtree-for-composer-usage/zipball/c1eeaab91c3c84fe5fd64d98176fbac76cf6ab2e",
+                "reference": "c1eeaab91c3c84fe5fd64d98176fbac76cf6ab2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "okapi\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2017-09-15T21:55:23+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5099,10 +5125,18 @@
             "time": "2016-11-23T20:04:58+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.1.x-dev",
+            "alias_normalized": "1.1.9999999.9999999-dev",
+            "version": "9999999-dev",
+            "package": "opencaching/okapi"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twbs/bootstrap": 10
+        "twbs/bootstrap": 10,
+        "opencaching/okapi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -4,7 +4,7 @@
 
 use okapi\Settings;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function get_admin_emails()
 {

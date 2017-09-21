@@ -1,5 +1,0 @@
-Views in this directory are NOT services. They can disappear at any time.
-
-These views help us develop OKAPI in a proper way across different OC
-installations. They do not (or at least should not) expose any sensitive
-data.

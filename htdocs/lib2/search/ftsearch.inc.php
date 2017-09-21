@@ -8,137 +8,40 @@
 
 /* begin conversion rules */
 
-$ftSearchSimpleRules[] = [
-    'qu',
-    'k'
-];
-$ftSearchSimpleRules[] = [
-    'ts',
-    'z'
-];
-$ftSearchSimpleRules[] = [
-    'tz',
-    'z'
-];
-$ftSearchSimpleRules[] = [
-    'alp',
-    'alb'
-];
-$ftSearchSimpleRules[] = [
-    'y',
-    'i'
-];
-$ftSearchSimpleRules[] = [
-    'ai',
-    'ei'
-];
-$ftSearchSimpleRules[] = [
-    'ou',
-    'u'
-];
-$ftSearchSimpleRules[] = [
-    'th',
-    't'
-];
-$ftSearchSimpleRules[] = [
-    'ph',
-    'f'
-];
-$ftSearchSimpleRules[] = [
-    'oh',
-    'o'
-];
-$ftSearchSimpleRules[] = [
-    'ah',
-    'a'
-];
-$ftSearchSimpleRules[] = [
-    'eh',
-    'e'
-];
-$ftSearchSimpleRules[] = [
-    'aux',
-    'o'
-];
-$ftSearchSimpleRules[] = [
-    'eau',
-    'o'
-];
-$ftSearchSimpleRules[] = [
-    'eux',
-    'oe'
-];
-$ftSearchSimpleRules[] = [
-    '^ch',
-    'sch'
-];
-$ftSearchSimpleRules[] = [
-    'ck',
-    'k'
-];
-$ftSearchSimpleRules[] = [
-    'ie',
-    'i'
-];
-$ftSearchSimpleRules[] = [
-    'ih',
-    'i'
-];
-$ftSearchSimpleRules[] = [
-    'ent',
-    'end'
-];
-$ftSearchSimpleRules[] = [
-    'uh',
-    'u'
-];
-$ftSearchSimpleRules[] = [
-    'sh',
-    'sch'
-];
-$ftSearchSimpleRules[] = [
-    'ver',
-    'wer'
-];
-$ftSearchSimpleRules[] = [
-    'dt',
-    't'
-];
-$ftSearchSimpleRules[] = [
-    'hard',
-    'hart'
-];
-$ftSearchSimpleRules[] = [
-    'egg',
-    'ek'
-];
-$ftSearchSimpleRules[] = [
-    'eg',
-    'ek'
-];
-$ftSearchSimpleRules[] = [
-    'cr',
-    'kr'
-];
-$ftSearchSimpleRules[] = [
-    'ca',
-    'ka'
-];
-$ftSearchSimpleRules[] = [
-    'ce',
-    'ze'
-];
-$ftSearchSimpleRules[] = [
-    'x',
-    'ks'
-];
-$ftSearchSimpleRules[] = [
-    've',
-    'we'
-];
-$ftSearchSimpleRules[] = [
-    'va',
-    'wa'
+$ftSearchSimpleRules = [
+    ['qu', 'k'],
+    ['ts', 'z'],
+    ['tz', 'z'],
+    ['alp', 'alb'],
+    ['y', 'i'],
+    ['ai', 'ei'],
+    ['ou', 'u'],
+    ['th', 't'],
+    ['ph','f'],
+    ['oh', 'o'],
+    ['ah', 'a'],
+    ['eh', 'e'],
+    ['aux', 'o'],
+    ['eau', 'o'],
+    ['eux', 'oe'],
+    ['ch', 'sch'],
+    ['ck', 'k'],
+    ['ie', 'i'],
+    ['ih', 'i'],
+    ['ent', 'end'],
+    ['uh', 'u'],
+    ['sh', 'sch'],
+    ['ver', 'wer'],
+    ['dt', 't'],
+    ['hard', 'hart'],
+    ['egg', 'ek'],
+    ['eg', 'ek'],
+    ['cr', 'kr'],
+    ['ca', 'ka'],
+    ['ce', 'ze'],
+    ['x', 'ks'],
+    ['ve', 'we'],
+    ['va', 'wa'],
 ];
 
 /* end conversion rules */
@@ -324,234 +227,88 @@ function ftsearch_text2sort($str)
 
 function ftsearch_refresh()
 {
-    ftsearch_refresh_all_caches();
-    ftsearch_refresh_all_cache_descs();
-    ftsearch_refresh_all_pictures();
-    ftsearch_refresh_all_cache_logs();
-}
+    // The search index needs to calculated for all objects-types-by-cache which
+    // are in `search_index_times` table. While we are doing that, new entries may
+    // be added to `search_index_times`. To ensure consistency, we create a "snapshot"
+    // of the current set of entries, for which we will (re)calculate the index.
 
-function ftsearch_refresh_all_caches()
-{
+    $snapshot_time = sql_value('SELECT NOW()', null);
+    sql("UPDATE `search_index_times` SET `last_refresh`='&1'", $snapshot_time);
+
+    // Now we will process all the snapshotted entries.
+
     $rs = sql(
-        'SELECT `caches`.`cache_id`
-         FROM `caches`
-         LEFT JOIN `search_index_times`
-             ON `caches`.`cache_id`=`search_index_times`.`object_id`
-             AND 2 =`search_index_times`.`object_type`
-         WHERE `caches`.`status`!= 5
-         AND ISNULL(`search_index_times`.`object_id`)
-         UNION DISTINCT
-         SELECT `caches`.`cache_id`
-         FROM `caches`
-         INNER JOIN `search_index_times`
-             ON `search_index_times`.`object_type`=2
-             AND `caches`.`cache_id`=`search_index_times`.`object_id`
-         WHERE `caches`.`last_modified` > `search_index_times`.`last_refresh`
-             AND `caches`.`status`!=5'
-    );
+        "SELECT `object_type`, `object_id` AS `cache_id`
+         FROM `search_index_times`
+         WHERE `last_refresh` = '&1'
+         ORDER BY cache_id",
+        $snapshot_time);
+
     while ($r = sql_fetch_assoc($rs)) {
-        ftsearch_refresh_cache($r['cache_id']);
-    }
-    sql_free_result($rs);
-}
-
-/**
- * @param $cache_id
- */
-function ftsearch_refresh_cache($cache_id)
-{
-    $rs = sql("SELECT `name`, `last_modified` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
-    if ($r = sql_fetch_assoc($rs)) {
-        ftsearch_set_entries(2, $cache_id, $cache_id, $r['name'], $r['last_modified']);
-    }
-    sql_free_result($rs);
-}
-
-
-function ftsearch_refresh_all_cache_descs()
-{
-    $rs = sql(
-        'SELECT `cache_desc`.`id`
-         FROM `cache_desc`
-         INNER JOIN `caches`
-             ON `caches`.`cache_id`=`cache_desc`.`cache_id`
-         LEFT JOIN `search_index_times`
-             ON `cache_desc`.`id`=`search_index_times`.`object_id`
-             AND 3=`search_index_times`.`object_type`
-         WHERE `caches`.`status`!= 5
-             AND ISNULL(`search_index_times`.`object_id`)
-         UNION DISTINCT
-         SELECT `cache_desc`.`id`
-         FROM `cache_desc`
-         INNER JOIN `caches`
-             ON `caches`.`cache_id`=`cache_desc`.`cache_id`
-         INNER JOIN `search_index_times`
-             ON `search_index_times`.`object_type` = 3
-             AND `cache_desc`.`id`=`search_index_times`.`object_id`
-         WHERE `cache_desc`.`last_modified`>`search_index_times`.`last_refresh`
-             AND `caches`.`status`!=5'
-    );
-    while ($r = sql_fetch_assoc($rs)) {
-        ftsearch_refresh_cache_desc($r['id']);
-    }
-    sql_free_result($rs);
-}
-
-/**
- * @param $id
- */
-function ftsearch_refresh_cache_desc($id)
-{
-    $rs = sql(
-        "
-        SELECT
-          `cache_id`,
-          CONCAT(`desc`, ' ', `short_desc`) AS `desc`,
-          `last_modified`
-        FROM `cache_desc`
-        WHERE `id`='&1'",
-        $id
-    );
-    if ($r = sql_fetch_assoc($rs)) {
-        $r['desc'] = ftsearch_strip_html($r['desc']);
-        ftsearch_set_entries(3, $id, $r['cache_id'], $r['desc'], $r['last_modified']);
-    }
-    sql_free_result($rs);
-}
-
-function ftsearch_refresh_all_pictures()
-{
-    $rs = sql(
-        '
-        SELECT `pictures`.`id`
-        FROM `pictures`
-        LEFT JOIN `search_index_times`
-            ON `pictures`.`id`=`search_index_times`.`object_id`
-            AND 6=`search_index_times`.`object_type`
-        WHERE ISNULL(`search_index_times`.`object_id`)
-        UNION DISTINCT
-        SELECT `pictures`.`id`
-        FROM `pictures`
-        INNER JOIN `search_index_times`
-            ON `search_index_times`.`object_type`= 6
-            AND `pictures`.`id`=`search_index_times`.`object_id`
-        WHERE `pictures`.`last_modified`>`search_index_times`.`last_refresh`'
-    );
-    while ($r = sql_fetch_assoc($rs)) {
-        ftsearch_refresh_picture($r['id']);
-    }
-    sql_free_result($rs);
-}
-
-/**
- * @param $id
- */
-function ftsearch_refresh_picture($id)
-{
-    $rs = sql(
-        "
-        SELECT
-            `caches`.`cache_id`,
-            `pictures`.`title`,
-            `pictures`.`last_modified`
-        FROM `pictures`
-        INNER JOIN `caches`
-            ON `pictures`.`object_type`=2
-            AND `caches`.`cache_id`=`pictures`.`object_id`
-        WHERE `pictures`.`id`='&1'
-        UNION DISTINCT
-        SELECT
-            `cache_logs`.`cache_id`,
-            `pictures`.`title`,
-            `pictures`.`last_modified`
-        FROM `pictures`
-        INNER JOIN `cache_logs`
-            ON `pictures`.`object_type`= 1
-            AND `cache_logs`.`id`=`pictures`.`object_id`
-        WHERE `pictures`.`id`='&1'
-        LIMIT 1",
-        $id
-    );
-    if ($r = sql_fetch_assoc($rs)) {
-        ftsearch_set_entries(6, $id, $r['cache_id'], $r['title'], $r['last_modified']);
-    }
-    sql_free_result($rs);
-}
-
-function ftsearch_refresh_all_cache_logs()
-{
-    $rs = sql(
-        '
-        SELECT `cache_logs`.`id`
-        FROM `cache_logs`
-        LEFT JOIN `search_index_times`
-            ON `cache_logs`.`id`=`search_index_times`.`object_id`
-            AND 1=`search_index_times`.`object_type`
-        WHERE ISNULL(`search_index_times`.`object_id`)
-        UNION DISTINCT
-        SELECT `cache_logs`.`id`
-        FROM `cache_logs`
-        INNER JOIN `search_index_times`
-            ON `search_index_times`.`object_type`= 1
-            AND `cache_logs`.`id`=`search_index_times`.`object_id`
-        WHERE `cache_logs`.`last_modified`>`search_index_times`.`last_refresh`'
-    );
-    while ($r = sql_fetch_assoc($rs)) {
-        ftsearch_refresh_cache_logs($r['id']);
-    }
-    sql_free_result($rs);
-}
-
-function ftsearch_refresh_cache_logs($id)
-{
-    $rs = sql("SELECT `cache_id`, `text`, `last_modified` FROM `cache_logs` WHERE `id`='&1'", $id);
-    if ($r = sql_fetch_assoc($rs)) {
-        $r['text'] = ftsearch_strip_html($r['text']);
-        ftsearch_set_entries(1, $id, $r['cache_id'], $r['text'], $r['last_modified']);
-    }
-    sql_free_result($rs);
-}
-
-/**
- * @param $object_type
- * @param $object_id
- * @param $cache_id
- */
-function ftsearch_delete_entries($object_type, $object_id, $cache_id)
-{
-    sql("DELETE FROM `search_index` WHERE `object_type`='&1' AND `cache_id`='&2'", $object_type, $cache_id);
-    sql("DELETE FROM `search_index_times` WHERE `object_type`='&1' AND `object_id`='&2'", $object_type, $object_id);
-}
-
-/**
- * @param $object_type
- * @param $object_id
- * @param $cache_id
- * @param $text
- * @param $last_modified
- */
-function ftsearch_set_entries($object_type, $object_id, $cache_id, &$text, $last_modified)
-{
-    ftsearch_delete_entries($object_type, $object_id, $cache_id);
-
-    $ahash = ftsearch_hash($text);
-    foreach ($ahash as $k => $h) {
+        // discard old search index entries for this cache & object type
         sql(
-            "INSERT INTO `search_index` (`object_type`, `cache_id`, `hash`, `count`)
-            VALUES ('&1', '&2', '&3', '&4') ON DUPLICATE KEY UPDATE `count`=`count`+1",
-            $object_type,
-            $cache_id,
-            $h,
-            1
+            "DELETE FROM `search_index`
+             WHERE `object_type`='&1'
+             AND `cache_id`='&2'",
+            $r['object_type'],
+            $r['cache_id']
+        );
+
+        // fetch current texts for this cache & object type
+        switch ($r['object_type']) {
+            case 2:  // cache titles
+                $texts_sql = "SELECT `name` AS `text` FROM `caches` WHERE `cache_id`='&1'";
+                break;
+
+            case 1:  // log texts
+                $texts_sql = "SELECT `text` FROM `cache_logs` WHERE `cache_id`='&1'";
+                break;
+
+            case 3:  // cache description texts
+                $texts_sql = "SELECT CONCAT(`desc`, ' ', `short_desc`) AS `text` FROM `cache_desc` WHERE `cache_id`='&1'";
+                break;
+
+            case 6:  // picture titles
+                $texts_sql =
+                    "SELECT `title` AS `text` FROM `pictures` WHERE `object_type`=2 AND `object_id`='&1'
+                     UNION
+                     SELECT `title` AS `text` FROM `pictures` JOIN `cache_logs` ON `cache_logs`.`id`=`object_id`
+                     WHERE `object_type`=1 AND `cache_logs`.`cache_id`='&1'";
+                break;
+        }
+        $texts = sql_fetch_column(sql($texts_sql, $r['cache_id']));
+
+        // insert hashes for these text into the search index
+        foreach ($texts as $text) {
+            if ($r['object_type'] == 1 || $r['object_type'] == 3) {
+                // cache description and log texts are in HTML format 
+                $text = ftsearch_strip_html($text);
+            }
+            $hashes = ftsearch_hash($text);
+            foreach ($hashes as $hash) {
+                sql(
+                    "INSERT INTO `search_index` (`object_type`, `cache_id`, `hash`, `count`)
+                     VALUES ('&1', '&2', '&3', 1)
+                     ON DUPLICATE KEY UPDATE `count`=`count`+1",
+                    $r['object_type'],
+                    $r['cache_id'],
+                    $hash
+                );
+            }
+        }
+
+        // discard the to-be-updated flag, if it was not touched while we were processing it
+        sql(
+            "DELETE FROM `search_index_times`
+             WHERE `object_type` = '&1'
+             AND `object_id` = '&2'
+             AND `last_refresh` = '&3'",
+            $r['object_type'],
+            $r['cache_id'],
+            $snapshot_time
         );
     }
-    sql(
-        "INSERT INTO `search_index_times` (`object_id`, `object_type`, `last_refresh`)
-        VALUES ('&1', '&2', '&3') ON DUPLICATE KEY UPDATE `last_refresh`='&3'",
-        $object_id,
-        $object_type,
-        $last_modified
-    );
+    sql_free_result($rs);
 }
 
 /**

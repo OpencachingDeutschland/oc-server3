@@ -1,0 +1,27 @@
+@import 'global';
+
+.header {
+    @extend %fixed-top;
+    @include make-row();
+
+    line-height: $header-height;
+    height: $header-height;
+    background-color: $header-bg-color;
+    color: $header-color;
+    border-bottom: 1px solid $gray-dark;
+
+    &__brand {
+        @include make-col(2);
+
+        padding-left: 3.5rem;
+        font-weight: bold;
+
+        &:hover {
+            background-color: $gray-light;
+        }
+    }
+
+    &__items {
+        @include make-col(10);
+    }
+}

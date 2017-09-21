@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6647f03b374a66a5f3afbae49f0f94a8",
+    "content-hash": "dd09cb002ff41386428394ab63b244c1",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1773,6 +1773,48 @@
             "time": "2015-08-09T04:28:19+00:00"
         },
         {
+            "name": "opencaching/kitchensink-bundle",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpencachingDeutschland/symfony-kitchensink-bundle.git",
+                "reference": "04a9fbb4f1592dace51fb8f686c52f45f4bdf6fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/symfony-kitchensink-bundle/zipball/04a9fbb4f1592dace51fb8f686c52f45f4bdf6fb",
+                "reference": "04a9fbb4f1592dace51fb8f686c52f45f4bdf6fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6",
+                "symfony/symfony": "^3.1"
+            },
+            "require-dev": {
+                "janpiet/php-version-transpiler": "dev-master",
+                "phpunit/phpunit": "^5.5",
+                "squizlabs/php_codesniffer": "^2.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BestIt\\KitchensinkBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Björn Lange",
+                    "email": "lange@bestit-online.de"
+                }
+            ],
+            "description": "Helps you create a kitchensink incl. route, template and services.",
+            "time": "2017-10-26T20:14:39+00:00"
+        },
+        {
             "name": "opencaching/okapi",
             "version": "dev-master",
             "source": {
@@ -3036,16 +3078,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.0.0-beta",
+            "version": "v4.0.0-beta.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "35f80bb12e4e71fd777ee60ffa43711d8f84b1a6"
+                "reference": "fc94de5b8b5b329a298eeeb76174b146ff17af2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/35f80bb12e4e71fd777ee60ffa43711d8f84b1a6",
-                "reference": "35f80bb12e4e71fd777ee60ffa43711d8f84b1a6",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/fc94de5b8b5b329a298eeeb76174b146ff17af2d",
+                "reference": "fc94de5b8b5b329a298eeeb76174b146ff17af2d",
                 "shasum": ""
             },
             "replace": {
@@ -3083,7 +3125,7 @@
                 "sass",
                 "web"
             ],
-            "time": "2017-08-11T03:56:35+00:00"
+            "time": "2017-10-19T19:23:29+00:00"
         },
         {
             "name": "twig/extensions",
@@ -5344,8 +5386,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twbs/bootstrap": 10,
-        "opencaching/okapi": 20
+        "opencaching/okapi": 20,
+        "twbs/bootstrap": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,

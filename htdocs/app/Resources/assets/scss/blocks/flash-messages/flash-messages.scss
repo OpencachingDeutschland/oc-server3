@@ -1,0 +1,37 @@
+@import 'global';
+
+.flash-messages {
+    @include make-container();
+
+    &__alert {
+        @include make-row();
+        @include make-col(12);
+
+        border: 0.1rem solid;
+        margin: .75rem 0;
+        padding: .5rem 1rem;
+
+        ul {
+            margin: 0 1rem;
+            padding: 0;
+        }
+
+        &--success {
+            color: $color__success-text;
+            background-color: $color__success-background;
+            border-color: $color__success-border;
+        }
+
+        &--info {
+            color: $color__info-text;
+            background-color: $color__info-background;
+            border-color: $color__info-border;
+        }
+
+        &--error {
+            color: $color__error-text;
+            background-color: $color__error-background;
+            border-color: $color__error-border;
+        }
+    }
+}

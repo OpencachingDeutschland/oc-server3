@@ -2,50 +2,15 @@
 
 namespace OcTest\Frontend\Changelog;
 
-use Doctrine\DBAL\Connection;
-use Oc\Changelog\Controller\ChangelogController;
-use Psr\Container\ContainerInterface;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Client;
+use OcTest\Frontend\AbstractFrontendTest;
 
-class ChangelogControllerTest extends WebTestCase
+class ChangelogControllerTest extends AbstractFrontendTest
 {
-    /**
-     * @var Connection
-     */
-    private $connection;
-
-    /**
-     * @var Client
-     */
-    private $client;
-
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    public function setUp()
+    public function testIndexAction()
     {
-        $this->client = self::createClient();
-        $this->container = self::$kernel->getContainer();
-        $this->connection = $this->container->get(Connection::class);
-        $this->connection->beginTransaction();
-    }
+        $this->session->visit($this->baseUrl . '/changelog');
+        $page = $this->session->getPage();
 
-    public function test_index_action()
-    {
-        $controller = $this->container->get(ChangelogController::class);
-
-        $response = $controller->indexAction();
-        self::assertInstanceOf(Response::class, $response);
-        self::assertContains('Changes in oc-server 3.1', $response->getContent());
-    }
-
-    public function tearDown()
-    {
-        $this->connection->rollBack();
-        parent::tearDown();
+        self::assertContains('Changes in oc-server 3.1', $page->getContent());
     }
 }

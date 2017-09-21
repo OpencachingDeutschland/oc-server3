@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale|slice(0, 2) }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
+
+        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
+        {% endblock %}
+    </head>
+    <body>
+        {% include '_components/header/header.html.twig' %}
+
+        <main class="main">
+            <div class="main__inner">
+
+                <div class="main__inner-navigation">
+                    {% include '_components/navigation/navigation.html.twig' %}
+                </div>
+
+                <div class="main__inner-content main-inner-content">
+                    {% block flash_messages %}
+                        <div class="main-inner-content__flash-messages">
+                            {% include '_components/flash-messages/flash-messages.html.twig' %}
+                        </div>
+                    {% endblock %}
+
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </main>
+
+        {% include '_components/footer/footer.html.twig' %}
+
+        {% block javascripts %}
+            <script src="{{ asset('assets/js/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

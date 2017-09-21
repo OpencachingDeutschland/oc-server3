@@ -17,7 +17,7 @@
 /htdocs/maintenance.enable
 # files created when running the OC software
 /htdocs/cache2/*
-/htdocs/web/css/*
+/htdocs/web
 /htdocs/opencaching_dump.sql
 /htdocs/download/*
 /htdocs/images/statpics/*
@@ -66,4 +66,5 @@ htdocs/translation.zip
 
 .psh.yaml
 /phpunit
-/htdocs/node_modules/
+/htdocs/node_modules
+/htdocs/scss-lint-report.xml

@@ -1,0 +1,26 @@
+@import 'global';
+
+.legacy-flash-messages {
+    width: 98%;
+
+    &__alert {
+        border: 1px solid;
+        margin: 10px 0;
+        padding: 15px 10px;
+
+        &--success {
+            color: $l-color__success-text;
+            background-color: $l-color__success-background;
+        }
+
+        &--info {
+            color: $l-color__info--text;
+            background-color: $l-color__info--background;
+        }
+
+        &--error {
+            color: $l-color__error-text;
+            background-color: $l-color__error-background;
+        }
+    }
+}

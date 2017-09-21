@@ -1,0 +1,23 @@
+@import '~bootstrap/scss/variables';
+
+$gray-lighter: $gray-500;
+$gray-light: $gray-600;
+$gray: $gray-700;
+$gray-dark: $gray-800;
+$gray-darker: $gray-900;
+
+$header-height: 3rem;
+$header-bg-color: $gray;
+$header-color: $white;
+
+$color__error-text: $white;
+$color__error-background: lighten($red, 10%);
+$color__error-border: $red;
+
+$color__info-text: $white;
+$color__info-background: lighten($blue, 10%);
+$color__info-border: $blue;
+
+$color__success-text: $white;
+$color__success-background: lighten($green, 10%);
+$color__success-border: $green;

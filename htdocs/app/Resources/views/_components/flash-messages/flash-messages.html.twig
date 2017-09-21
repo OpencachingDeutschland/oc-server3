@@ -1,0 +1,28 @@
+{% if legacy is not defined %}
+    {% set legacy = false %}
+{% endif %}
+
+{% if legacy == true %}
+    {% set flashMessageClassBase = 'legacy-flash-messages' %}
+{% else %}
+    {% set flashMessageClassBase = 'flash-messages' %}
+{% endif %}
+
+{% if app.session is defined and app.session.flashBag is defined %}
+    <div class="{{ flashMessageClassBase }}">
+        {% include '_components/flash-messages/flash-message.html.twig' with {
+            'legacy': legacy,
+            'type': 'success'
+        } %}
+
+        {% include '_components/flash-messages/flash-message.html.twig' with {
+            'legacy': legacy,
+            'type': 'info'
+        } %}
+
+        {% include '_components/flash-messages/flash-message.html.twig' with {
+            'legacy': legacy,
+            'type': 'error'
+        } %}
+    </div>
+{% endif %}

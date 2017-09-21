@@ -19,12 +19,13 @@
     "twig/extensions": "^1.3",
     "jms/translation-bundle": "^1.2",
     "beberlei/DoctrineExtensions": "^1.0",
-    "twbs/bootstrap": "v4.0.0-beta",
     "leafo/scssphp": "v0.6.7",
     "league/commonmark": "^0.15.6",
     "sentry/sentry": "^1.7",
     "opencaching/okapi": "dev-master",
-    "endroid/qrcode": "^2.4"
+    "opencaching/kitchensink-bundle": "1.0.6",
+    "endroid/qrcode": "^2.4",
+    "twbs/bootstrap": "v4.0.0-beta.2"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",

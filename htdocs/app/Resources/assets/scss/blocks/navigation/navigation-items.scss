@@ -1,0 +1,36 @@
+@import 'global';
+
+.navigation-items {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    .navigation-items__item {
+        display: inline-block;
+        padding: .6rem 0;
+        border-left: 1px solid $gray-light;
+        border-right: 1px solid $gray-light;
+        border-bottom: 1px solid $gray-light;
+
+        &--last {
+            border-bottom-left-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+
+        &-icon {
+            margin: 0 .5rem;
+        }
+
+        &-text {
+            margin: 0 .5rem;
+            color: $blue;
+        }
+
+        &:hover {
+            background-color: $gray-lighter;
+        }
+    }
+}

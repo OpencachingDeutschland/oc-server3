@@ -225,7 +225,10 @@ function ftsearch_text2sort($str)
     return $str;
 }
 
-function ftsearch_refresh()
+/**
+ * @param int $maxentries
+ */
+function ftsearch_refresh($maxentries = PHP_INT_MAX)
 {
     // The search index needs to calculated for all objects-types-by-cache which
     // are in `search_index_times` table. While we are doing that, new entries may
@@ -233,7 +236,14 @@ function ftsearch_refresh()
     // of the current set of entries, for which we will (re)calculate the index.
 
     $snapshot_time = sql_value('SELECT NOW()', null);
-    sql("UPDATE `search_index_times` SET `last_refresh`='&1'", $snapshot_time);
+    sql(
+        "UPDATE `search_index_times`
+         SET `last_refresh`='&1'
+         ORDER BY `last_refresh`
+         LIMIT &2",
+        $snapshot_time,
+        $maxentries
+    );
 
     // Now we will process all the snapshotted entries.
 

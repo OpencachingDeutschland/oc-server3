@@ -21,6 +21,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - map display issue [#1122](https://redmine.opencaching.de/issues/1122)
 - view issue on admin panel [#1128](https://redmine.opencaching.de/issues/1128)
 - download selection box [#1129](https://redmine.opencaching.de/issues/1129)
+- fix encoding issue with npa areas [#1133](https://redmine.opencaching.de/issues/1133)
 
 
 ## unreleased [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)

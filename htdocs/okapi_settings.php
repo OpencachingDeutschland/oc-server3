@@ -39,7 +39,7 @@ function get_okapi_settings()
         'DB_CHARSET'       => $opt['charset']['mysql'],
         'SITELANG'         => strtolower($opt['template']['default']['locale']),
         'TIMEZONE'         => $opt['php']['timezone'],
-        'SITE_URL'         => $opt['page']['absolute_url'],
+        'SITE_URL'         => $opt['page']['default_primary_url'],
         'REGISTRATION_URL' => $opt['page']['https']['mode'] != HTTPS_DISABLED
                                   ? 'https://' . $opt['page']['domain'] . '/register.php'
                                   : $opt['page']['absolute_url'] . 'register.php',

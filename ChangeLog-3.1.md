@@ -10,6 +10,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 ### Changed
 - show safari caches for guest users [#1127](https://redmine.opencaching.de/issues/1127)
 - change meta tags [#1131](https://redmine.opencaching.de/issues/1131)
+- usability improvement in admin report interface [#1132](https://redmine.opencaching.de/issues/1132git p)
 
 ### Removed
 - removed changed dates which was caused during db update [#1109](https://redmine.opencaching.de/issues/1109)

@@ -153,16 +153,14 @@ function editcomment(edit)
         </table>
 
         <div class="content2-container bg-blue02">
-          <p class="content-title-noshade-size2">
+            <p class="content-title-noshade-size2">
                 <img src="resource2/{$opt.template.style}/images/description/22x22-misc.png" style="margin-right: 10px;" width="22" height="22" alt="" />
-              {t}Action{/t}
-          </p>
-      </div>
+                {t}Action{/t}
+            </p>
+        </div>
 
         <p style="line-height: 1.6em; margin-bottom:24px">
-        {if !$ownreport || $reopenable}
-            <input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" />
-        {/if}
+        <input type="submit" name="assign" value="{t}Assign to me{/t}" class="formbutton" onclick="submitbutton('assign')" {if $ownreport && !$reopenable}disabled style="background-color:#eee; border:1px solid #ccc"{/if} />&nbsp;
         {if $ownreport}
             &nbsp;<input type="submit" name="contact" value="{t}Contact owner{/t}" class="formbutton" onclick="submitbutton('contact')" />&nbsp;&nbsp;<input type="submit" name="contact_reporter" value="{t}Contact reporter{/t}" class="formbutton" onclick="submitbutton('contact_reporter')" />{if $inprogress}&nbsp;&nbsp;<input type="submit" name="done" value="{t}Mark as finished{/t}" class="formbutton" onclick="submitbutton('done')" />{/if}
             </p>

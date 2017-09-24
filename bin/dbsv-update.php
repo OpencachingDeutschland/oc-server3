@@ -1,6 +1,9 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
+ *
+ * UTF-8 trigger: äöü
+ * (avoids auto-detecting this file as ISO-8859-1-encoded by some editors)
  ***************************************************************************/
 
 /*
@@ -1283,6 +1286,103 @@ function dbv_164()
          WHERE `code1` IN ('UK', 'NO', 'SE')"
     );
     // Next cache_location cronjob run will fill in the CL data.
+}
+
+function dbv_165()
+{
+    // remove trailing "\r" and double-spaces from ~ 7600 NPA names
+    sql("UPDATE `npa_areas` SET `name` = REPLACE(REPLACE(`name`, '  ', ' '), '\r', '')");
+
+    // fix broken non-ASCII characters in NPA names
+    $npa_names = [
+        'Bürgerheide',
+        'Bärwalder Ländchen',
+        'Biosphärenreservat Schorfheide - Chorin',
+        'Biosphärenreservat Spreewald',
+        'Calau/Altdöbern/Reddern',
+        'Diedersdorfer Heide und Großbeerener Graben',
+        'Diehloer Höhen',
+        'Ehemaliges Grubengelände Finkenheerd',
+        'Elbaue Mühlberg',
+        'Elsteraue zwischen Herzberg und Übigau',
+        'Fürstenberger Wald- und Seengebiet',
+        'Fauler See, Märkischer Naturgarten, Güldendorfer Mühlental, Eichwald und Buschmühle',
+        'Göhlensee',
+        'Görnsee und Görnberg',
+        'Groß-Leuthener See und Dollgen See',
+        'Groß-See',
+        'Grubenseen in der Rückersdorfer Heide',
+        'Gubener Fließtäler',
+        'Hügelgebiet um den Langen Berg',
+        'Hohenleipisch-Sornoer-Altmoränenlandschaft',
+        'Hoher Fläming - Belziger Landschaftswiesen',
+        'Königswald mit Havelseen und Seeburger Agrarlandschaft',
+        'Körbaer Teich und Lebusaer Waldgebiet',
+        'Köthener See',
+        'Kiesgruben Eisenhüttenstadt',
+        'Lampfert bei Kröbeln',
+        'LSG-Auf\'m Hoevel',
+        'LSG-Brünen Ost',
+        'LSG-Grünlandniederung Gesthuysen und Vynsche Ley',
+        'LSG-Hauptterrasse südlich Hünxe',
+        'LSG-Offenland zwischen der Hees und Fürstenberg',
+        'LSG-Ostmünsterland',
+        'LSG-Südlich Gahlen',
+        'LSG-Südlicher Tüschenwald',
+        'LSG-Stammshütte',
+        'Müggelspree-Löcknitzer Wald- und Seengebiet',
+        'Märkische Schweiz',
+        'Merzdorf / Hirschfelder Waldhöhen',
+        'Naturpark Märkische Schweiz',
+        'Nauen-Brieselang-Krämer',
+        'Niederungssystem des Fredersdorfer Mühlenfließes und seiner Vorfluter',
+        'Niederungssystem des Neuenhagener Mühlenfließes und seiner Vorfluter',
+        'Niederungssystem des Zinndorfer Mühlenfließes und seiner Vorfluter',
+        'Neißeaue im Kreis Forst',
+        'Neißeaue um Grießen',
+        'Norduckermärkische Seenlandschaft',
+        'NSG Diergardt\'scher Wald',
+        'NSG Plaesterlegge - Auf\'m Kipp',
+        'NSG Vor\'m Haengeberg',
+        'Oderhänge Seelow-Lebus',
+        'Odervorland Groß Neuendorf-Lebus',
+        'Ölsiger Luch',
+        'Pfählingsee - Prierowsee',
+        'Rückersdorf-Drößiger-Heidelandschaft',
+        'Reptener Mühlenfließ',
+        'Südostniederbarnimer Weiherketten',
+        'Scharmützelseegebiet',
+        'Schlagsdorfer Waldhöhen',
+        'Seenkette des Platkower Mühlenfließes / Heidelandschaft Worin',
+        'Spreeaue südlich Cottbus',
+        'Staubeckenlandschaft Bräsinchen - Spremberg',
+        'Steinitz-Geisendorfer Endmoränenlandschaft',
+        'Taeler Brühl- und Schleidgraben',
+        'Teupitz - Köriser Seengebiet',
+        'Trepliner Seen, Booßener und Altzeschdorfer Mühlenfließ',
+        'Wald- und Restseengebiet Döbern',
+        'Wiesen- und Ackerlandschaft Ströbitz/Kolkwitz',
+        'Wiesen- und Teichlandschaft Kolkwitz/Hänchen',
+    ];
+    foreach ($npa_names as $npa_name) {
+        $wrong_name = str_replace(['Ä', 'ä', 'Ö', 'ö', 'Ü', 'ü', "'"], '?', $npa_name);
+        $wrong_name = str_replace('ß', 'á',  $wrong_name);
+        sql("UPDATE `npa_areas` SET `name`='&2' WHERE `name`=BINARY '&1'", $wrong_name, $npa_name);
+    }
+    $npa_names = [
+        'LSG-Am Vinnenberger Busch - Gro?er Dyk' => 'LSG-Dingdener und Brüner Höhen',
+        'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstra?e'
+            => 'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstraße',
+        'LSG-Dingdener und Br?ner H÷hen' => 'LSG-Am Vinnenberger Busch - Großer Dyk',
+        'LSG-Hufscher Berg - L÷wenberg' => 'LSG-Hufscher Berg - Löwenberg',
+        'LSG-Landwehren s?dlich der Weseler Stra?e' => 'LSG-Landwehren südlich der Weseler Straße',
+        'LSG-Niederung K÷rversley/ Marienbaumer Graben' => 'LSG-Niederung Körversley/ Marienbaumer Graben',
+        'LSG-Niederungen s?dlich und ÷stlich Grenzdyck' => 'LSG-Niederungen südlich und östlich Grenzdyck',
+        'LSG-Tannenspeet - Gro?enbusch' => 'LSG-Tannenspeet - Großenbusch',
+    ];
+    foreach ($npa_names as $wrong_name => $npa_name) {
+        sql("UPDATE `npa_areas` SET `name`='&2' WHERE `name`=BINARY '&1'", $wrong_name, $npa_name);
+    }
 }
 
 // When adding new mutations, take care that they behave well if run multiple

@@ -284,4 +284,16 @@ class Db
         }
         return false;
     }
+
+    public static function field_length($table, $field)
+    {
+        return self::select_value("
+            select character_maximum_length
+            from information_schema.columns
+            where
+                table_schema='".self::escape_string(Settings::get('DB_NAME'))."'
+                and table_name='".self::escape_string($table)."'
+                and column_name='".self::escape_string($field)."'
+        ");
+    }
 }

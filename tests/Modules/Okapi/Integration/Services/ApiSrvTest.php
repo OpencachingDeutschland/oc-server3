@@ -25,7 +25,7 @@ class ApiSrvTest extends AbstractModuleTest
 
         $response = $client->get('services/apisrv/installation');
 
-        self::assertCount(11, $response);
+        self::assertGreaterThanOrEqual(12, $response);
     }
 
     public function testApiSrvInstallationsMethod()

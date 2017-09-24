@@ -3,6 +3,8 @@ namespace okapi\core\Exception;
 
 use okapi\Settings;
 
+# BEWARE: This class is also used in native OCPL code.
+
 /** A base class for all bad request exceptions. */
 class BadRequest extends \Exception
 {

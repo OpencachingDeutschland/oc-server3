@@ -139,7 +139,7 @@ class CronJobController
             if (($tmp->get_name() == $job_name) || ($tmp->get_name() == "okapi\\cronjobs\\".$job_name))
                 $thejob = $tmp;
         if ($thejob == null)
-            throw new \Exception("Could not reset schedule for job $job_name. $jon_name not found.");
+            throw new \Exception("Could not reset schedule for job $job_name. $job_name not found.");
 
         # We have to acquire lock on the schedule. This might take some time if cron-5 jobs are
         # currently being run.

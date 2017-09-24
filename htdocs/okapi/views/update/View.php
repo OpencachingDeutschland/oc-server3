@@ -763,4 +763,22 @@ class View
     private static function ver115() { Db::execute("alter table okapi_stats_monthly engine=MyISAM"); }
     private static function ver116() { Db::execute("alter table okapi_cache_reads engine=MyISAM"); }
     private static function ver117() { Db::execute("alter table okapi_cache engine=MyISAM"); }
+
+    private static function ver118()
+    {
+        # dummy mutation after accidentially deploying a DB mutation to OCPL
+        # which is still in development
+    }
+
+    private static function ver119()
+    {
+        # another fix for the accidential code deployment, see
+        # https://github.com/opencaching/okapi/pull/487#issuecomment-329170043
+
+        if (Settings::get('OC_BRANCH') == 'oc.pl' && Db::field_exists('reports', 'uuid')) {
+            Db::execute("
+                ALTER TABLE `reports` CHANGE `uuid` `uuid` VARCHAR(36) NULL DEFAULT NULL
+            ");
+        }
+    }
 }

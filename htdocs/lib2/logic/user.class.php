@@ -1605,7 +1605,7 @@ class user
         global $opt;
         $rating = $opt['logic']['rating'];
 
-        return ceil($rating['percentageOfFounds'] - ($this->getStatFound() % $rating['percentageOfFounds']));
+        return round($rating['percentageOfFounds'] - ($this->getStatFound() % $rating['percentageOfFounds']));
     }
 
     public function showStatFounds()

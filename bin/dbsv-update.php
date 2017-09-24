@@ -1,9 +1,6 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- * UTF-8 trigger: äöü
- * (avoids auto-detecting this file as ISO-8859-1-encoded by some editors)
  ***************************************************************************/
 
 /*
@@ -1135,6 +1132,8 @@ function dbv_156()  // clean up data created by bad cacheLogsBeforeUpdate trigge
     sql("DELETE FROM `cache_logs_modified` WHERE `date` = '0000-00-00 00:00:00'");
 }
 
+/***** OC release 3.0.19 *****/
+
 function dbv_157()   // discard news entry system
 {
     // The feature of displaying news via `news` table stays for now,
@@ -1159,6 +1158,8 @@ function dbv_158()
     );
 }
 
+/***** OC release 3.1.4 *****/
+
 function dbv_159()
 {
     // optimization for OKAPI-search 'date_hidden' sorting option
@@ -1169,13 +1170,7 @@ function dbv_159()
 
 function dbv_160()
 {
-    // initiate refresh of cache desc fulltext search index, see redmine #986
-    sql(
-        "UPDATE `search_index_times`
-         SET `last_refresh`='2000-01-01 00:00:00'
-         WHERE `object_type`='&1'",
-        OBJECT_CACHEDESC
-    );
+    // dummy function for obsolete mutation, replaced by 165
 }
 
 function dbv_161()
@@ -1205,7 +1200,7 @@ function dbv_161()
 
 function dbv_162()
 {
-   // dummy function for obsolete mutation
+   // dummy function for obsolete mutation, replaced by 163
 }
 
 function dbv_163()
@@ -1213,6 +1208,8 @@ function dbv_163()
     // fix cache_location triggers
     update_triggers();
 }
+
+/***** OC release 3.1.5 *****/
 
 function dbv_164()
 {
@@ -1384,6 +1381,33 @@ function dbv_165()
         sql("UPDATE `npa_areas` SET `name`='&2' WHERE `name`=BINARY '&1'", $wrong_name, $npa_name);
     }
 }
+
+function dbv_166()
+{
+    // initiate complete rebuild of fulltext search index;
+    // see https://redmine.opencaching.de/issues/1043
+
+    sql("TRUNCATE TABLE `search_index`");
+    sql("TRUNCATE TABLE `search_index_times`");
+
+    // Adjust the search_index_times definition to the changed implementation.
+    // Field types are all ok.
+    sql("ALTER TABLE `search_index_times` COMMENT = 'search_index entries that need an update'");
+    sql(
+        "ALTER TABLE `search_index_times`
+         CHANGE COLUMN `object_id` `object_id` int(10) unsigned NOT NULL COMMENT 'cache ID'"
+    );
+
+    sql(
+        "INSERT INTO `search_index_times`
+         (`object_type`, `object_id`, `last_refresh`)
+         SELECT 2, `cache_id`, NOW() FROM `caches` UNION   -- cache names
+         SELECT 1, `cache_id`, NOW() FROM `caches` UNION   -- log entries
+         SELECT 3, `cache_id`, NOW() FROM `caches` UNION   -- cache descriptions
+         SELECT 6, `cache_id`, NOW() FROM `caches`         -- picture titles"
+    );
+}
+
 
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.

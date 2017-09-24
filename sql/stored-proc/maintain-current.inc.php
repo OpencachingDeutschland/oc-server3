@@ -1037,6 +1037,20 @@ sql(
      END;'
 );
 
+// indicate that the fulltext search index needs an update
+sql_dropProcedure('sp_update_searchindex');
+sql(
+    'CREATE PROCEDURE sp_update_searchindex (
+        IN nObjectType INT(3) UNSIGNED,
+        IN nCacheId INT(11) UNSIGNED
+     )
+     BEGIN
+        INSERT INTO `search_index_times` (`object_type`, `object_id`, `last_refresh`)
+        VALUES (nObjectType, nCacheId, NOW())
+        ON DUPLICATE KEY UPDATE `last_refresh`=NOW();
+     END'
+);
+
 /* Triggers
  */
 sql_dropTrigger('cachesBeforeInsert');
@@ -1117,6 +1131,7 @@ sql(
         VALUES (NEW.`cache_id`, NOW(), NEW.`country`);
 
         CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
+        CALL sp_update_searchindex(2, NEW.`cache_id`);
 
         IF NEW.`status`=1 THEN
             CALL sp_notify_new_cache(NEW.`cache_id`, NEW.`longitude`, NEW.`latitude`, 1);
@@ -1268,6 +1283,9 @@ sql(
             INSERT INTO `cache_adoptions` (`cache_id`,`date`,`from_user_id`,`to_user_id`)
             VALUES (NEW.`cache_id`, NEW.`last_modified`, OLD.`user_id`, NEW.`user_id`);
         END IF;
+        IF NEW.`name`!=OLD.`name` THEN
+            CALL sp_update_searchindex(2, NEW.`cache_id`);
+        END IF;
         IF NEW.`user_id`!=OLD.`user_id` OR NEW.`status`!=OLD.`status` THEN
             CALL sp_update_hiddenstat(OLD.`user_id`, OLD.`status`, TRUE);
             CALL sp_update_hiddenstat(NEW.`user_id`, NEW.`status`, FALSE);
@@ -1341,10 +1359,11 @@ sql(
             DELETE FROM `rating_tops` WHERE `cache_id`=OLD.`cache_id`;
             /*
                 DELETE FROM `search_index` WHERE `cache_id`=OLD.`cache_id`;
-                DELETE FROM `search_index_times` WHERE `object_type`=2 AND `object_id`=OLD.`cache_id`;
+                DELETE FROM `search_index_times` WHERE `object_id`=OLD.`cache_id`;
 
-                Deleting this would be performance critical.
-                The leftover data won't hurt and will be automaticall rebuilt via cronjob.
+                Without an cache_id index, this would be extremely unperformant.
+                But an additional index for >10 million records consumes loads of disk space.
+                Therefore we just leave the old orphan data for now; it won't do any harm.
             */
             DELETE FROM `stat_cache_logs` WHERE `cache_id`=OLD.`cache_id`;
             DELETE FROM `stat_caches` WHERE `cache_id`=OLD.`cache_id`;
@@ -1394,6 +1413,7 @@ sql(
             INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`, `restored_by`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL, IFNULL(@restoredby,0));
         END IF;
         CALL sp_update_caches_descLanguages(NEW.`cache_id`);
+        CALL sp_update_searchindex(3, NEW.`cache_id`);
      END;'
 );
 
@@ -1445,6 +1465,9 @@ sql(
                 INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `desc`) VALUES (NEW.`cache_id`, NEW.`language`, NOW(), NULL);
             END IF;
         END IF;
+        IF NEW.`desc`!=OLD.`desc` OR NEW.`short_desc`!=OLD.`short_desc` THEN
+            CALL sp_update_searchindex(3, NEW.`cache_id`);
+        END IF;
      END;'
 );
 
@@ -1465,6 +1488,7 @@ sql(
                 INSERT IGNORE INTO `cache_desc_modified` (`cache_id`, `language`, `date_modified`, `date_created`, `desc`, `desc_html`, `desc_htmledit`, `hint`, `short_desc`, `restored_by`) VALUES (OLD.`cache_id`, OLD.`language`, NOW(), OLD.`date_created`, OLD.`desc`, OLD.`desc_html`, OLD.`desc_htmledit`, OLD.`hint`, OLD.`short_desc`, IFNULL(@restoredby,0));
             END IF;
             CALL sp_update_caches_descLanguages(OLD.`cache_id`);
+            CALL sp_update_searchindex(3, OLD.`cache_id`);
         END IF;
      END;'
 );
@@ -1579,6 +1603,8 @@ sql(
             END IF;
         UNTIL done END REPEAT;
         CLOSE cur1;
+
+        CALL sp_update_searchindex(1, NEW.`cache_id`);
     END;'
 );
 
@@ -1671,6 +1697,9 @@ sql(
             CALL sp_update_logstat(OLD.`cache_id`, OLD.`user_id`, OLD.`type`, TRUE);
             CALL sp_update_logstat(NEW.`cache_id`, NEW.`user_id`, NEW.`type`, FALSE);
         END IF;
+        IF NEW.`text`!=OLD.`text` THEN
+            CALL sp_update_searchindex(1, NEW.`cache_id`);
+        END IF;
      END;'
 );
 
@@ -1698,6 +1727,7 @@ sql(
 
         INSERT IGNORE INTO `removed_objects` (`localId`, `uuid`, `type`, `node`)
         VALUES (OLD.`id`, OLD.`uuid`, 1, OLD.`node`);
+        CALL sp_update_searchindex(1, OLD.`cache_id`);
      END;'
 );
 
@@ -2063,9 +2093,14 @@ sql(
         END IF;
         IF NEW.`object_type`=1 THEN
            CALL sp_update_cachelog_picturestat(NEW.`object_id`, FALSE);
+           CALL sp_update_searchindex(
+              6,
+              (SELECT `cache_id` FROM `cache_logs` WHERE `id`=NEW.`object_id`)
+           );
         ELSEIF NEW.`object_type`=2 THEN
            CALL sp_update_cache_picturestat(NEW.`object_id`, FALSE);
            CALL sp_update_cache_listingdate(NEW.`object_id`);
+           CALL sp_update_searchindex(6, NEW.`object_id`);
         END IF;
      END;"
 );
@@ -2162,6 +2197,18 @@ sql(
                 /* mappreview is not archived, can be safely set to 0 on restore */
             END IF;
         END IF;
+
+        IF NEW.`title`!=OLD.`title` THEN
+            IF NEW.`object_type`=2 THEN
+                CALL sp_update_searchindex(6, NEW.`object_id`);
+            ELSEIF NEW.`object_type`=1 THEN
+                CALL sp_update_searchindex(
+                    6,
+                    (SELECT `cache_id` FROM `cache_logs` WHERE `id`=NEW.`object_id`)
+                );
+            END IF;
+            /* We ignore NEW.`object_id`!=OLD.`object_id` here, because that will never happen. */
+        END IF;
      END;"
 );
 
@@ -2198,9 +2245,14 @@ sql(
 
         IF OLD.`object_type`=1 THEN
             CALL sp_update_cachelog_picturestat(OLD.`object_id`, TRUE);
+            CALL sp_update_searchindex(
+                6,
+                (SELECT `cache_id` FROM `cache_logs` WHERE `id`=OLD.`object_id`)
+            );
         ELSEIF OLD.`object_type`=2 THEN
             CALL sp_update_cache_picturestat(OLD.`object_id`, TRUE);
             CALL sp_update_cache_listingdate(OLD.`object_id`);
+            CALL sp_update_searchindex(6, OLD.`object_id`);
         END IF;
      END;"
 );

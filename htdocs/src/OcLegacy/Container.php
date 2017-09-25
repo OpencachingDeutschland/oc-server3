@@ -15,6 +15,9 @@ class Container
         self::getContainer()->get($key);
     }
 
+    /**
+     * @return Container
+     */
     private static function getContainer()
     {
         $containerFile = __DIR__ . '/../../var/cache2/container.php';
@@ -25,24 +28,32 @@ class Container
         );
 
         if (!$containerConfigCache->isFresh()) {
-            $container = new ContainerBuilder();
-            $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
-            $loader->load('services_oc.yml');
-
-            $loader->load('parameters.yml');
-
-            $container->compile();
-
-            $dumper = new PhpDumper($container);
-            $containerConfigCache->write(
-                $dumper->dump(['class' => 'OcLegacyContainer']),
-                $container->getResources()
-            );
+            self::genereateContainer($containerConfigCache);
         }
 
         require_once $containerFile;
-        $container = new \OcLegacyContainer();
 
-        return $container;
+        return new \OcLegacyContainer();
+    }
+
+    /**
+     * @param ConfigCache $containerConfigCache
+     * @return ContainerBuilder
+     */
+    private static function genereateContainer(ConfigCache $containerConfigCache)
+    {
+        $container = new ContainerBuilder();
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
+        $loader->load('services_oc.yml');
+
+        $loader->load('parameters.yml');
+
+        $container->compile();
+
+        $dumper = new PhpDumper($container);
+        $containerConfigCache->write(
+            $dumper->dump(['class' => 'OcLegacyContainer']),
+            $container->getResources()
+        );
     }
 }

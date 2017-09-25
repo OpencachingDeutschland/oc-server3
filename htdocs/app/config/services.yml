@@ -3,10 +3,10 @@
 parameters:
 #    parameter_name: value
 
+imports:
+    - { resource: services_oc.yml }
+
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.token_legacy_authenticator:
         class: AppBundle\Legacy\Security\LegacyAuthenticator
 
@@ -28,26 +28,7 @@ services:
         class: AppBundle\Controller\ChangelogController
         arguments: ['@app.library.common_mark_converter', '@twig']
 
-    app.library.common_mark_converter:
-        class: League\CommonMark\CommonMarkConverter
-
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
-
-    oc.util.dbal_connection:
-        class: Oc\Util\DbalConnection
-    oc_bundle.postfix.journal_logs:
-        class: Oc\Postfix\JournalLogs
-        arguments: ['@app.dbal_connection']
-    oc.translation.crowdin_import:
-        class: Oc\Translation\CrowdinImport
-        arguments: ['@app.dbal_connection']
-    oc.geo_cache.reports:
-        class: Oc\GeoCache\Reports
-        arguments: ['@app.dbal_connection']
-    app.dbal_connection:
-        class: Doctrine\DBAL\Connection
-        factory: ['Oc\Util\DbalConnection', createDbalConnection]
-        arguments: ["%database_host%", "%database_name%", "%database_user%", "%database_password%", "%database_port%"]

@@ -2,6 +2,7 @@
 
 namespace OcLegacy;
 
+use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
@@ -18,22 +19,29 @@ class Container
     {
         $containerFile = __DIR__ . '/../../var/cache2/container.php';
 
-        if (file_exists($containerFile)) {
-            require_once $containerFile;
-            $container = new \ProjectServiceContainer();
-        } else {
+        $containerConfigCache = new ConfigCache(
+            $containerFile,
+            false
+        );
+
+        if (!$containerConfigCache->isFresh()) {
             $container = new ContainerBuilder();
             $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
             $loader->load('services_oc.yml');
 
-            // adding parameters to the container
             $loader->load('parameters.yml');
 
             $container->compile();
 
             $dumper = new PhpDumper($container);
-            file_put_contents($containerFile, $dumper->dump());
+            $containerConfigCache->write(
+                $dumper->dump(['class' => 'OcLegacyContainer']),
+                $container->getResources()
+            );
         }
+
+        require_once $containerFile;
+        $container = new \OcLegacyContainer();
 
         return $container;
     }

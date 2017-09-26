@@ -14,6 +14,9 @@ class CrowdinImport
      */
     private $connection;
 
+    /**
+     * @param Connection $connection
+     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;

@@ -10,6 +10,9 @@ services:
     oc.translation.crowdin_import:
         class: Oc\Translation\CrowdinImport
         arguments: ['@app.dbal_connection']
+    oc.translation.crowdin_export:
+        class: Oc\Translation\CrowdinExport
+        arguments: ['@app.dbal_connection']
     oc.geo_cache.reports:
         class: Oc\GeoCache\Reports
         arguments: ['@app.dbal_connection']

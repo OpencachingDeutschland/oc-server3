@@ -9,12 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * very quick and dirty solution to import crowdin snippets into the legacy translation system
- */
-class ImportLegacyTranslationCommand extends ContainerAwareCommand
+class ExportLegacyTranslationCommand extends ContainerAwareCommand
 {
-    const COMMAND_NAME = 'translation:import-legacy-translation';
+    const COMMAND_NAME = 'translation:export-legacy-translation';
 
     protected function configure()
     {
@@ -22,11 +19,11 @@ class ImportLegacyTranslationCommand extends ContainerAwareCommand
 
         $this
             ->setName(self::COMMAND_NAME)
-            ->setDescription('import translation from crowdin into legacy translation system');
+            ->setDescription('export translation legacy translation system to crowdin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get('oc.translation.crowdin_import')->importTranslations();
+        $this->getContainer()->get('oc.translation.crowdin_export')->exportTranslations();
     }
 }

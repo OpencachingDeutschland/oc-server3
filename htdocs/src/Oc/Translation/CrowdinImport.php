@@ -36,7 +36,7 @@ class CrowdinImport
                         'text' => $translation->$languageKey,
                         'id' => $translation->identifier,
                         'langKey' => $languageKey,
-                        'identifier' => $translation->identifier
+                        'identifier' => $translation->identifier,
                     ]
                 );
             }
@@ -52,7 +52,7 @@ class CrowdinImport
         $csvHeadline = [];
         $translationStructs = [];
         if (($handle = fopen($path, 'rb')) !== false) {
-            while (($data = fgetcsv($handle, 0, ';')) !== false) {
+            while (($data = fgetcsv($handle)) !== false) {
                 if (!$csvHeadline) {
                     $csvHeadline = array_values($data);
                     continue;

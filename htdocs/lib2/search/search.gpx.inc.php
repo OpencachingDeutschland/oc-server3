@@ -433,14 +433,22 @@ function search_output()
         $thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
 
         // attributes
+        $addAttributes = [-1];  // dummy
+        if ($r['type'] == 10) {   // Drive-in
+            $addAttributes[] = 24;  // near the car / park and grab
+        }
         $rsAttributes = sql_slave(
-            '
+            "
             SELECT `gc_id`, `gc_inc`, `gc_name`
             FROM `caches_attributes`
             INNER JOIN `cache_attrib`
                 ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
             WHERE `caches_attributes`.`cache_id`=&1
-            AND `gc_id` > 0',
+            AND `gc_id` > 0
+            UNION
+            SELECT `gc_id`, `gc_inc`, `gc_name`
+            FROM `cache_attrib`
+            WHERE `id` IN ('" . implode("','", array_map('sql_escape', $addAttributes)) . "')",
             $r['cacheid']
         );
         $gc_ids = [];

@@ -14,4 +14,4 @@ cd htdocs && rm translation.zip
 ./htdocs/bin/console translation:update nl --force
 ./htdocs/bin/console translation:update pl --force
 ./htdocs/bin/console translation:update ru --force
-./htdocs/bin/console translation:update-legacy-translation
+./htdocs/bin/console translation:import-legacy-translation

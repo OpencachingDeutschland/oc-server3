@@ -1,6 +1,9 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
+ *
+ * UTF-8 trigger: äöü
+ * (avoids auto-detecting this file as ISO-8859-1-encoded by some editors)
  ***************************************************************************/
 
 /*

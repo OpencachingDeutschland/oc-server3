@@ -396,4 +396,6 @@ $tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollpos
 $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 $tpl->assign('validate', $validate);
 $tpl->assign('editlog', false);
+
+$tpl->acceptsAndPurifiesHtmlInput();
 $tpl->display();

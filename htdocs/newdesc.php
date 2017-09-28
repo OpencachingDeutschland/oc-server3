@@ -38,6 +38,7 @@ if ($error == false) {
 
             if ($cache_record['user_id'] == $usr['userid']) {
                 $tplname = 'newdesc';
+                tpl_acceptsAndPurifiesHtmlInput();
 
                 require $stylepath . '/newdesc.inc.php';
 

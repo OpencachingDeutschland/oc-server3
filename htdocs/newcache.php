@@ -32,6 +32,7 @@ if ($error == false) {
         //set here the template to process
         $tplname = 'newcache';
         require_once $stylepath . '/' . $tplname . '.inc.php';
+        tpl_acceptsAndPurifiesHtmlInput();
 
         //set template replacements
         tpl_set_var('reset', $reset); // obsolete

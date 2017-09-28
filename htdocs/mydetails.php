@@ -113,6 +113,7 @@ function changetext()
         assignFromDB($login->userid, true);
         $tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
         $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+        $tpl->acceptsAndPurifiesHtmlInput();
         $tpl->display();
     }
 }

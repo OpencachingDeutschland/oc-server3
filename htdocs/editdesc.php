@@ -82,6 +82,7 @@ if ($error == false) {
 
             if ($desc_record['user_id'] == $usr['userid'] || $login->listingAdmin()) {
                 $tplname = 'editdesc';
+                tpl_acceptsAndPurifiesHtmlInput();
 
                 tpl_set_var('desc_err', '');
                 $show_all_langs = false;

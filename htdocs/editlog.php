@@ -432,4 +432,6 @@ $tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollpos
 
 // select template mode and send it out
 $tpl->assign('editlog', true);
+
+$tpl->acceptsAndPurifiesHtmlInput();
 $tpl->display();

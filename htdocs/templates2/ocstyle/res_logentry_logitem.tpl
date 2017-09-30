@@ -74,11 +74,15 @@
     {/if}
 
     <div class="viewcache_log-content" style="margin-top: 15px;">
+        {strip}
+        {if !$logItem.paragraphed_text}<p>{/if}
         {if $logItem.texthtml}
-            <p>{$logItem.text}</p>
+            {$logItem.text}
         {else}
-            <p>{$logItem.text|smiley|hyperlink}</p>
+            {$logItem.text|smiley|hyperlink}
         {/if}
+        {if !$logItem.paragraphed_text}</p>{/if}
+        {/strip}
 
         {foreach from=$logItem.pictures item=pictureItem name=pictures}
             {if $smarty.foreach.pictures.first}

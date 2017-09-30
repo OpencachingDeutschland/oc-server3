@@ -897,7 +897,6 @@ class cache
         sql("DELETE FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", $this->nCacheId, $nUserId);
     }
 
-
     // retrieves admin cache history data and stores it to template variables
     // for display by adminhistory.tpl and adminreports.tpl
     public function setTplHistoryData($exclude_report_id)
@@ -1026,28 +1025,78 @@ class cache
         sql_free_result($rs);
     }
 
-
     public function logTypeAllowed($logType, $oldLogType = 0)
     {
         // check if given logType is valid for this cache type
         return logtype_ok($this->getCacheId(), $logType, $oldLogType);
     }
 
-
-    public function updateCacheStatus($logType)
+    /**
+     * @param int $logId
+     * @param int $oldLogType
+     * @param int $newLogType
+     */
+    public function updateCacheStatusFromLatestLog($logId, $oldLogType, $newLogType)
     {
-        // get cache status
-        $cacheStatus = sql_value(
-            "SELECT `cache_status` FROM `log_types` WHERE `id`='&1'",
-            0,
-            $logType
-        );
-        // set status, if not 0
-        if ($cacheStatus != 0) {
-            $this->setStatus($cacheStatus);
+        if ($newLogType != $oldLogType) {
+            // get new cache-status property of the new log type
+            $cacheStatus = sql_value(
+                "SELECT `cache_status` FROM `log_types` WHERE `id`='&1'",
+                0,
+                $newLogType
+            );
+
+            if ($cacheStatus != 0) {
+                // If the new log type is a status-changing type, it's easy -
+                // we can directly change the cache status:
+
+                $this->setStatus($cacheStatus);
+            } else {
+                // If the new log type is not status-changing, but the old type was, the
+                // cache status may need to be recalculated. To keep things simple, we will
+                // always recalculate the cache status in this case.
+
+                $cacheStatus = sql_value(
+                    "SELECT `cache_status` FROM `log_types` WHERE `id`='&1'",
+                    0,
+                    $oldLogType
+                );
+                if ($cacheStatus != 0) {
+                    // The only safe way to restore an old cache status is from table
+                    // cache_status_modified. This is available since April 2013. As we
+                    // do not allow status-changes by editing logs that are older than
+                    // half a year, this is ok.
+
+                    // The cache status is updated in a separate operation immediatly
+                    // (usually within a millisecond or so) after saving a log, so we must
+                    // apply some time lag to be on the safe side. It should be safe to
+                    // assume that users will not edit the log type twice within <= 2 seconds:
+
+                    $logCreated = sql_value(
+                        "SELECT `date_created` FROM `cache_logs` WHERE `id`='&1'",
+                        null,
+                        $logId
+                    );
+                    $oldCacheStatus = sql_value(
+                        "SELECT `old_state`
+                         FROM `cache_status_modified`
+                         WHERE `cache_id`='&1'
+                         AND '&2' <= `date_modified`
+                         AND TIMESTAMPDIFF(SECOND, '&2', `date_modified`) <= 2
+                         ORDER BY `date_modified` DESC
+                         LIMIT 1",
+                        0,
+                        $this->getCacheId(),
+                        $logCreated
+                    );
+
+                    if ($oldCacheStatus > 0) {
+                        $this->setStatus($oldCacheStatus);
+                    }
+                }
+            }
         }
     }
-
 
     // $userLogType:
     //   Logtype selected by the user, or null if not applicable
@@ -1098,11 +1147,11 @@ class cache
      * @param $logId
      * @return bool
      */
-    public function isLatestLog($logId)
+    public function statusChangeAllowedForLog($logId)
     {
         $latestLogId = sql_value(
             "SELECT `id` FROM `cache_logs`
-             WHERE `cache_id`='&1'
+             WHERE `cache_id`='&1' AND DATEDIFF(NOW(), `date_created`) < 180
              ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
              LIMIT 1",
             0,

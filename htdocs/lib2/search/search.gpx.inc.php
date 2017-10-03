@@ -439,7 +439,8 @@ function search_output()
             FROM `caches_attributes`
             INNER JOIN `cache_attrib`
                 ON `cache_attrib`.`id`=`caches_attributes`.`attrib_id`
-            WHERE `caches_attributes`.`cache_id`=&1',
+            WHERE `caches_attributes`.`cache_id`=&1
+            AND `gc_id` > 0',
             $r['cacheid']
         );
         $gc_ids = [];

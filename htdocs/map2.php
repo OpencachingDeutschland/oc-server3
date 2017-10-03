@@ -460,9 +460,9 @@ function output_namesearch($sName, $nLat, $nLon, $nResultId)
         if ($result) {
             $json = json_decode($result, true);
             if ($json['words'] !== null && $json['geometry'] !== null && count($json['geometry']) === 2) {
-                echo '<coord name="' . xmlentities(implode('.', $json['words'])) .
-                    '" latitude="' . xmlentities($json['lat']) .
-                    '" longitude="' . xmlentities($json['lng']) . '" />' . "\n";
+                echo '<coord name="' . xmlentities($json['words']) .
+                    '" latitude="' . xmlentities($json['geometry']['lat']) .
+                    '" longitude="' . xmlentities($json['geometry']['lng']) . '" />' . "\n";
             }
         }
     }

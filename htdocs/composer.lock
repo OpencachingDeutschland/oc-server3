@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dc145671cbc2df3e3476a60b0de7e4c",
+    "content-hash": "2c81b90a7ba60141145269eaa29735e0",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1562,16 +1562,16 @@
         },
         {
             "name": "opencaching/okapi",
-            "version": "1.1.0",
+            "version": "dev-feature/last-steps-for-composer-integration",
             "source": {
                 "type": "git",
-                "url": "https://github.com/OpencachingDeutschland/okapi-subtree-for-composer-usage.git",
-                "reference": "0bfafc59b4f5f639acd1fe7eb178d5c293b71ed0"
+                "url": "https://github.com/teiling88/okapi.git",
+                "reference": "b5efedc0e285d75bcfa540c34a0916a546bd40b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpencachingDeutschland/okapi-subtree-for-composer-usage/zipball/0bfafc59b4f5f639acd1fe7eb178d5c293b71ed0",
-                "reference": "0bfafc59b4f5f639acd1fe7eb178d5c293b71ed0",
+                "url": "https://api.github.com/repos/teiling88/okapi/zipball/b5efedc0e285d75bcfa540c34a0916a546bd40b3",
+                "reference": "b5efedc0e285d75bcfa540c34a0916a546bd40b3",
                 "shasum": ""
             },
             "require": {
@@ -1580,11 +1580,13 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "okapi\\": ""
+                    "okapi\\": "okapi/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
-            "time": "2017-09-26T17:21:41+00:00"
+            "support": {
+                "source": "https://github.com/teiling88/okapi/tree/feature/last-steps-for-composer-integration"
+            },
+            "time": "2017-10-04T19:07:12+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5128,7 +5130,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "twbs/bootstrap": 10
+        "twbs/bootstrap": 10,
+        "opencaching/okapi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

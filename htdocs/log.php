@@ -281,7 +281,7 @@ if ($cacheId != 0) {
             $cacheLog->save();
 
             // update cache status
-            $cache->updateCacheStatus($logType);
+            $cache->updateCacheStatusFromLatestLog($cacheLog->getLogId(), 0, $logType);
 
             // update rating (if correct log type, user has ratings to give
             // and is not owner (expect owner adopted cache))

@@ -268,23 +268,12 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
         $log_id
     );
 
-    // update cache status if changed by logtype
-    if ($cache->isLatestLog($log_record['log_id'])) {
-        $newStatus = sql_value(
-            "SELECT `cache_status` FROM `log_types`
-             WHERE `id`='&1'",
-            false,
-            $log_type
-        );
-        if ($newStatus && $newStatus != $log_record['status']) {
-            sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
-            sql(
-                "UPDATE `caches` SET `status`='&2'
-                 WHERE `cache_id`='&1'",
-                $log_record['cache_id'],
-                $newStatus
-            );
-        }
+    // Update cache status if changed by logtype. To keep things simple, we implement
+    // this feature only for the latest log.
+    $statusChangeAllowed = $cache->statusChangeAllowedForLog($log_record['log_id']);
+    if ($statusChangeAllowed) {
+        $cache->updateCacheStatusFromLatestLog($log_id, $log_record['logtype'], $log_type);
+        $cache->save();
     }
 
     // update user-stat if type changed
@@ -334,10 +323,7 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
 
 
 // build logtype options
-$disable_statuschange = (
-    $log_record['cache_user_id'] == $login->userid
-    && !$cache->isLatestLog($log_record['log_id'])
-);
+$disable_statuschange = !$cache->statusChangeAllowedForLog($log_record['log_id']);
 $disable_typechange = $disable_statuschange && $log_record['is_status_log'];
 $tpl->assign('typeEditDisabled', $disable_typechange);
 

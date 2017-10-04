@@ -5,7 +5,9 @@
 
 namespace OcTest\Modules;
 
-abstract class AbstractModuleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+abstract class AbstractModuleTest extends TestCase
 {
     protected $dir;
 

@@ -577,6 +577,7 @@ class cache
                     `cache_logs`.`needs_maintenance` AS `needs_maintenance`,
                     `cache_logs`.`listing_outdated` AS `listing_outdated`,
                     `cache_logs`.`text` AS `text`,
+                    `cache_logs`.`text` REGEXP '^<p[ >].*</p>$' AS `paragraphed_text`,  /* see redmine #1139 */
                     `cache_logs`.`text_html` AS `texthtml`,
                     `cache_logs`.`picture`,
                     " . $delfields . ",

@@ -160,7 +160,7 @@
 
         <div class="content2-container-2col-left" id="cache_name_block">
             <span class="content-title-noshade-size5">{$cache.name|escape}</span>
-            {if $cache.shortdesc!=''}
+            {if $cache.shortdesc|trim != ''}
                 <!-- <br /> --><p class="content-title-noshade-size1">&nbsp;{$cache.shortdesc|escape}</p>
             {/if}
 

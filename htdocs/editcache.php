@@ -126,6 +126,7 @@ if ($error == false) {
         if ($cache_record !== false) {
             if ($cache_record['user_id'] == $usr['userid'] || $login->listingAdmin()) {
                 $tplname = 'editcache';
+                tpl_acceptsAndPurifiesHtmlInput();
 
                 require $stylepath . '/editcache.inc.php';
 

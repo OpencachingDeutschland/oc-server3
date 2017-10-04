@@ -326,6 +326,14 @@ function tpl_clear_page_functions()
 }
 
 /**
+ * see OcSmarty::acceptsAndPurifiesHtmlInput
+ */
+function tpl_acceptsAndPurifiesHtmlInput()
+{
+    header('X-XSS-Protection: 0');
+}
+
+/**
  * read the templates and echo it to the user
  *
  * @param bool $dbDisconnect

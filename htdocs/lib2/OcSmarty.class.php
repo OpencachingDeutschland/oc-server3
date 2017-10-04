@@ -597,4 +597,17 @@ class OcSmarty extends Smarty
 
         return $sTarget;
     }
+
+     public function acceptsAndPurifiesHtmlInput()
+     {
+        // Prevent false XSS detection of harmless HTML code
+        // see https://redmine.opencaching.de/issues/1137
+        // see https://stackoverflow.com/questions/43249998/chrome-err-blocked-by-xss-auditor-details
+
+        // XSS protection can be safely disabled if user-supplied content cannot inject JavaScript,
+        // see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
+        // This is ensured by HTMLpurifier in OC code.
+
+        header('X-XSS-Protection: 0');
+     }
 }

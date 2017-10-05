@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c81b90a7ba60141145269eaa29735e0",
+    "content-hash": "4b44991c0ca049836a802b1591960417",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1562,16 +1562,16 @@
         },
         {
             "name": "opencaching/okapi",
-            "version": "dev-feature/last-steps-for-composer-integration",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/teiling88/okapi.git",
-                "reference": "b5efedc0e285d75bcfa540c34a0916a546bd40b3"
+                "url": "https://github.com/opencaching/okapi.git",
+                "reference": "429977b75fe260aa3aa240e8005edb84524f2354"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/teiling88/okapi/zipball/b5efedc0e285d75bcfa540c34a0916a546bd40b3",
-                "reference": "b5efedc0e285d75bcfa540c34a0916a546bd40b3",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/429977b75fe260aa3aa240e8005edb84524f2354",
+                "reference": "429977b75fe260aa3aa240e8005edb84524f2354",
                 "shasum": ""
             },
             "require": {
@@ -1584,9 +1584,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/teiling88/okapi/tree/feature/last-steps-for-composer-integration"
+                "source": "https://github.com/opencaching/okapi/tree/master",
+                "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2017-10-04T19:07:12+00:00"
+            "time": "2017-10-05T01:00:09+00:00"
         },
         {
             "name": "paragonie/random_compat",

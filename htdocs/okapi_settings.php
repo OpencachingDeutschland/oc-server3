@@ -17,8 +17,8 @@ function get_okapi_settings()
     require __DIR__ . '/lib2/const.inc.php'; # (into the *local* scope!)
     require __DIR__ . '/config2/settings-dist.inc.php';
     require __DIR__ . '/config2/settings.inc.php';
-    
-    return array(
+
+    return [
 
         # Settings which ARE NOT present in settings.inc.php:
 
@@ -26,12 +26,11 @@ function get_okapi_settings()
 
         # Settings which ARE present in settings.inc.php:
 
-        'ADMINS'           => array($opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl', 'following@oconly.de'),
+        'ADMINS'           => [$opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl', 'following@oconly.de'],
         'FROM_FIELD'       => $opt['mail']['contact'],
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
-        'DEBUG_PREVENT_SEMAPHORES'
-                           => !$opt['php']['semaphores'], # not available on old developer system
+        'DEBUG_PREVENT_SEMAPHORES' => !$opt['php']['semaphores'], # not available on old developer system
         'DB_SERVER'        => $opt['db']['servername'],
         'DB_NAME'          => $opt['db']['placeholder']['db'],
         'DB_USERNAME'      => $opt['db']['username'],
@@ -51,8 +50,9 @@ function get_okapi_settings()
         'SITE_LOGO'        => $opt['page']['absolute_url'] . 'resource2/' . $opt['template']['default']['style'] . '/images/oclogo/oc_logo_alpha3.png',
         'OC_NODE_ID'       => $opt['logic']['node']['id'],
         'OC_COOKIE_NAME'   => $opt['session']['cookiename'] . 'data',
+        'VERSION_FILE'     => __DIR__ . '/okapi/meta.php',
         'OCDE_HTML_PURIFIER_SETTINGS'
                            => $opt['html_purifier'],
         'GITHUB_ACCESS_TOKEN' => $opt['okapi']['github_access_token'],
-    );
+    ];
 }

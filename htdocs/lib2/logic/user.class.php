@@ -1605,6 +1605,11 @@ class user
         global $opt;
         $rating = $opt['logic']['rating'];
 
+        /*
+         * The following calculation only works for integer values of
+         * $rating['percentageOfFounds']. For non-integers, the (int) would produce
+         * wrong results, because the result must be rounded UP, while (int) rounds DOWN.
+         */
         return (int) ($rating['percentageOfFounds'] - ($this->getStatFound() % $rating['percentageOfFounds']));
     }
 

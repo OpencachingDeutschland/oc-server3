@@ -1,6 +1,4 @@
-<?php
-return [
-    'version_number' => 1656,
-    'git_revision' => '429977b75fe260aa3aa240e8005edb84524f2354
-',
+<?php return [
+    'version_number' => 1658,
+    'git_revision' => 'af0236ccdd85a01d81c89eea6fe1d8149f4b086e',
 ];

@@ -22,7 +22,8 @@
     "twbs/bootstrap": "v4.0.0-beta",
     "leafo/scssphp": "v0.6.7",
     "league/commonmark": "^0.15.6",
-    "sentry/sentry": "^1.7"
+    "sentry/sentry": "^1.7",
+    "opencaching/okapi": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
@@ -35,6 +36,12 @@
     "fig-r/psr2r-sniffer": "^0.3.0",
     "sensio/generator-bundle": "^3.0"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/opencaching/okapi"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "OcTest\\": "../tests",

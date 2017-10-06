@@ -29,6 +29,6 @@ class OkapiHelper
     {
         $okapiRootPath = dirname(dirname(__DIR__)) . '/htdocs/vendor/opencaching/okapi';
 
-        return shell_exec('cd ' . $okapiRootPath . ' && git rev-parse HEAD');
+        return trim(shell_exec('cd ' . $okapiRootPath . ' && git rev-parse HEAD'));
     }
 }

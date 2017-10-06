@@ -359,6 +359,8 @@ $menu->SetSelectItem($tpl->menuitem);
 
 $tpl->title = $menu->GetMenuTitle() . ' ' . $record['username'];
 
+$user = new user($userid);
+$ratingParams = $user->getRatingParameters();
 
 $tpl->assign('username', $record['username']);
 $tpl->assign('userid', $userid);
@@ -369,16 +371,14 @@ $tpl->assign('note', $record['note'] <= 0 ? '0' : $record['note']);
 $tpl->assign('maintenance', $record['maintenance'] <= 0 ? '0' : $record['maintenance']);
 $tpl->assign('hidden', $record['hidden'] <= 0 ? '0' : $record['hidden']);
 $tpl->assign('active', $active);
-$tpl->assign('recommended', sql_value("SELECT COUNT(*) FROM `cache_rating` WHERE `user_id`='&1'", 0, $userid));
-$tpl->assign('maxrecommended', (int) floor($record['found'] * $opt['logic']['rating']['percentageOfFounds'] / 100));
+$tpl->assign('recommended', $ratingParams['givenRatings']);
+$tpl->assign('maxrecommended', $ratingParams['maxRatings']);
 $tpl->assign('show_statistics', $show_statistics);
 $tpl->assign('show_oconly81', $show_oconly81);
 
 $tpl->assign('oconly_hidden', $oconly_hidden);
 $tpl->assign('oconly_hidden_active', $oconly_hidden_active);
 $tpl->assign('oconly_recommended', $oconly_recommended);
-
-$user = new user($userid);
 
 $picstat = ($useropt->getOptValue(USR_OPT_PICSTAT) == 1) && !$user->getLicenseDeclined();
 $tpl->assign('show_picstat', $picstat);

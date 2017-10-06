@@ -1586,26 +1586,25 @@ class user
         );
     }
 
-    public function getMaxRatings()
+    public function getRatingParameters()
     {
         global $opt;
 
-        // get number of possible rates
-        return (int) floor($this->getStatFound() * $opt['logic']['rating']['percentageOfFounds'] / 100);
+        $findsPerRating = $opt['logic']['rating']['findsPerRating'];
+        $finds = $this->getStatFound();
+        $ratings = $this->getGivenRatings();
+
+        return [
+            'maxRatings' => floor($finds / $findsPerRating),
+            'givenRatings' => $ratings,
+            'findsUntilNextRating' => ($ratings + 1) * $findsPerRating - $finds,
+        ];
     }
 
     public function allowRatings()
     {
-        // new ratings allowed, if "given ratings" < "max ratings"
-        return ($this->getGivenRatings() < $this->getMaxRatings());
-    }
-
-    public function foundsUntilNextRating()
-    {
-        global $opt;
-        $rating = $opt['logic']['rating'];
-
-        return (int) ($rating['percentageOfFounds'] - ($this->getStatFound() % $rating['percentageOfFounds']));
+        $ratingParams = $this->getRatingParameters();
+        return $ratingParams['givenRatings'] < $ratingParams['maxRatings'];
     }
 
     public function showStatFounds()

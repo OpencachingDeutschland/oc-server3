@@ -87,9 +87,9 @@ $opt['logic']['waypoint_pool']['valid_chars'] = '0123456789ABCDEF';
 // fill_gaps = false: continue with the last waypoint
 $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 
-/* geocache recommendation settings
+/* number of finds needed to give one recommendation
  */
-$opt['logic']['rating']['percentageOfFounds'] = 10;
+$opt['logic']['rating']['findsPerRating'] = 10;
 
 /* admin functions
  */

@@ -70,11 +70,12 @@ if ($cacheId != 0) {
     $isOwner = ($user->getUserId() == $cache->getUserId());
 
     // assing ratings to template
-    $tpl->assign('ratingallowed', $user->allowRatings());
-    $tpl->assign('givenratings', $user->getGivenRatings());
-    $tpl->assign('maxratings', $user->getMaxRatings());
+    $ratingParams = $user->getRatingParameters();
+    $tpl->assign('ratingallowed', $ratingParams['givenRatings'] < $ratingParams['maxRatings']); 
+    $tpl->assign('givenratings', $ratingParams['givenRatings']);
+    $tpl->assign('maxratings', $ratingParams['maxRatings']);
     $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
-    $tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
+    $tpl->assign('findsuntilnextrating', $ratingParams['findsUntilNextRating']);
     $tpl->assign('isowner', $isOwner);
 
     // check and prepare form values

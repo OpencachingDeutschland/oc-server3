@@ -307,7 +307,7 @@ function show_tip(text)
                 {if ($ratingallowed==true || $israted==true)}<input type="hidden" name="ratingoption" value="1"><input type="checkbox" id="rating" name="rating" value="1" class="checkbox" {if $israted==true}checked{/if}/>&nbsp;<label for="rating" id="ratinglabel" >{t}This cache is one of my recommendations.{/t}</label><br />
                     {t 1=$givenratings 2=$maxratings}You have given %1 of %2 possible recommendations.{/t}
                 {else}
-                    {t 1=$foundsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
+                    {t 1=$findsuntilnextrating}You need additional %1 finds, to make another recommendation.{/t}
                     {if ($givenratings > 0 && $givenratings==$maxratings && $israted==false)}<br />{t}Alternatively, you can withdraw a <a href="mytop5.php">existing recommendation</a>.{/t}{/if}
                 {/if}
                 <noscript><br />{t}A recommendation can only be made with a "found" or "attended" log!{/t}</noscript>

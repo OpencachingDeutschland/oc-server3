@@ -367,11 +367,12 @@ $tpl->assign('userFound', $user->getStatFound());
 $tpl->assign('showstatfounds', $user->showStatFounds());
 
 // recommendation-related data
-$tpl->assign('ratingallowed', $user->allowRatings());
-$tpl->assign('givenratings', $user->getGivenRatings());
-$tpl->assign('maxratings', $user->getMaxRatings());
+$ratingParams = $user->getRatingParameters();
+$tpl->assign('ratingallowed', $ratingParams['givenRatings'] < $ratingParams['maxRatings']);
+$tpl->assign('givenratings', $ratingParams['givenRatings']);
+$tpl->assign('maxratings', $ratingParams['maxRatings']);
 $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
-$tpl->assign('foundsuntilnextrating', $user->foundsUntilNextRating());
+$tpl->assign('findsuntilnextrating', $ratingParams['findsUntilNextRating']);
 $tpl->assign('isowner', $user->getUserId() == $cache->getUserId());
 
 // password

@@ -22,7 +22,6 @@ filter:
     excluded_paths:
         - 'bin/*'
         - 'doc/*'
-        - 'htdocs/okapi/*'
         - 'htdocs/resource2/tinymce/*'
         - 'htdocs/resource2/ocstyle/js/communicator-api/*'
         - 'htdocs/resource2/ocstyle/js/enlargeit/*'

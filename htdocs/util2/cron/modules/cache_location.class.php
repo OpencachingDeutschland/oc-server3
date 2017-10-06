@@ -149,7 +149,7 @@ class CacheLocation
                 sql(
                     "INSERT INTO `cache_location` (`cache_id`, `adm1`, `code1`)
                     VALUES ('&1', '&2', '&3')
-                    ON DUPLICATE KEY UPDATE `adm1`='&2', `adm2`=NULL, `adm3`=NULL, `adm4`=NULL, 
+                    ON DUPLICATE KEY UPDATE `adm1`='&2', `adm2`=NULL, `adm3`=NULL, `adm4`=NULL,
                                             `code1`='&3', `code2`=NULL, `code3`=NULL, `code4`=NULL",
                     $rCache['cache_id'],
                     $sCountry,

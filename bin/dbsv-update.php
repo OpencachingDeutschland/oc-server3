@@ -1241,7 +1241,7 @@ function dbv_164()
 
     // Update outdated Sweden NUTS 2 and 3 codes in nuts_layer table.
     // NUTS 1 would need completely new geographic data; but the
-    // cache_location cronjob won't need them - L1 and L2 data is derived from L3. 
+    // cache_location cronjob won't need them - L1 and L2 data is derived from L3.
     $sweden_nuts = [
         'SE01'  => 'SE11',
         'SE010' => 'SE110',

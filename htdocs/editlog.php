@@ -101,7 +101,7 @@ $log_time_hour =
     ? trim($_POST['loghour'])
     : (substr($log_record['date'], 11) == '00:00:00' ? '' : date('H', strtotime($log_record['date'])));
 $log_time_minute =
-    isset($_POST['logminute']) 
+    isset($_POST['logminute'])
     ? trim($_POST['logminute'])
     : (substr($log_record['date'], 11) == "00:00:00" ? "" : date('i', strtotime($log_record['date'])));
 $top_option = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
@@ -137,7 +137,7 @@ if (isset($_POST['submitform']) ||
     $confirmListingOk = ($listingOutdated == 1);
 }
 
-// do not ask for PW again if it was alredy supplied when submitting the log 
+// do not ask for PW again if it was alredy supplied when submitting the log
 $use_log_pw = $log_record['logpw'] != '' && $log_record['logtype'] != 1;
 
 // editor mode switching

@@ -93,7 +93,7 @@ class ReplicationMonitor
         }
 
         sql(
-            "INSERT INTO `sys_repl_slaves` 
+            "INSERT INTO `sys_repl_slaves`
              (`id`, `server`, `active`, `weight`, `online`, `last_check`, `current_log_name`, `current_log_pos`)
              VALUES ('&1', '&2', '&3', '&4', '&5', NOW(), '&6', '&7')
              ON DUPLICATE KEY UPDATE `server`='&2', `active`='&3', `weight`='&4', `online`='&5', `last_check`=NOW(),

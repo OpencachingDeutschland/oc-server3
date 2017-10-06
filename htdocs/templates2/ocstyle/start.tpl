@@ -34,28 +34,13 @@
         </table>
     </div>
 </div>
-{if !$extern_news}
-    <table border="0" cellspacing="0" cellpadding="0">
-        {foreach name=news from=$news item=newsitem}
-            <tr>
-                <td>
-                    <b>{$newsitem.date|date_format:$opt.format.datetime} ({$newsitem.topic})</b>
-                    {$newsitem.content}
-                    {if !$smarty.foreach.news.last}
-                        <hr />
-                    {/if}
-                </td>
-            </tr>
-            <tr><td class="spacer"></td></tr>
-        {/foreach}
-    </table>
-{else}
+{if $extern_news}
     <div id="blog">
-{if $news|@count}
-        {include file="res_rssparser.tpl" rss=$news}
-{else}
-        <p><em>{t}currently not available{/t}</em></p>
-{/if}
+        {if $news|@count}
+            {include file="res_rssparser.tpl" rss=$news}
+        {else}
+            <p><em>{t}currently not available{/t}</em></p>
+        {/if}
     </div>
     <div class="buffer" style="width: 500px;">&nbsp;</div>
 {/if}
@@ -103,12 +88,12 @@
 
 {* forum news *}
 {elseif $section == 'forum'}
-{if $phpbb_enabled==true}
+{if $forum_enabled==true}
     <div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
     <div class="content2-container bg-blue02">
         <p class="content-title-noshade-size3">
             <img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" alt="" width="24" height="24" />
-            <a href="{$phpbb_link|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$phpbb_name|escape}New forum topcis (%1){/t}</a>
+            <a href="{$forum_url|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$forum_name|escape}New forum topcis (%1){/t}</a>
         </p>
     </div>
     <div id="forum">

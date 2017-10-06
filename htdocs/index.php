@@ -29,22 +29,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('pictures', LogPics::get(LogPics::FOR_STARTPAGE_GALLERY));
 
     // news entries
-    $tpl->assign('news_onstart', $opt['news']['onstart']);
-
-    if ($opt['news']['include'] === '') {
-        $news = [];
-        $rs = sql_slave(
-            'SELECT `news`.`date_created` `date`, `news`.`content` `content`, `news_topics`.`name` `topic`
-            FROM `news`
-            INNER JOIN `news_topics` ON (`news`.`topic` = `news_topics`.`id`)
-            WHERE `news`.`display` = 1
-            ORDER BY `news`.`date_created` DESC LIMIT 0, 6'
-        );
-        $tpl->assign_rs('news', $rs);
-        sql_free_result($rs);
-
-        $tpl->assign('extern_news', false);
-    } else {
+    if ($opt['news']['include'] != '') {
         /*
          * changed by bohrsty to fix error in displaying news from blog
          * requires $opt['news']['count'] in settings for number of blog-items
@@ -53,6 +38,8 @@ if (!$tpl->is_cached()) {
         $tpl->assign('news', $getNew->feedForSmarty('blog'));
         $tpl->assign('newsfeed', $opt['news']['include']);
         $tpl->assign('extern_news', true);
+    } else {
+        $tpl->assign('extern_news', false);
     }
 
     if ($opt['forum']['url'] !== '') {
@@ -62,17 +49,13 @@ if (!$tpl->is_cached()) {
          * requires $opt['forum']['url'] in settings: RSS-feed-URL of the forum
          */
         // get newest forum posts
-        $tpl->assign('phpbb_enabled', true);
+        $tpl->assign('forum_enabled', true);
         $tpl->assign('forum', $getNew->feedForSmarty('forum'));
+        $tpl->assign('forum_url', $opt['forum']['url']);
+        $tpl->assign('forum_name', $opt['forum']['name']);
     } else {
-        $tpl->assign('phpbb_enabled', false);
-        $tpl->assign('forum', '');
+        $tpl->assign('forum_enabled', false);
     }
-
-    $phpbb_topics = [];
-    $tpl->assign('phpbb_topics', $phpbb_topics);
-    $tpl->assign('phpbb_name', $opt['cron']['phpbbtopics']['name']);
-    $tpl->assign('phpbb_link', $opt['cron']['phpbbtopics']['link']);
 
     // current cache and log-counters
     $tpl->assign(

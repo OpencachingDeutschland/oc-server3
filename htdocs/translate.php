@@ -549,7 +549,6 @@ function export()
     $stab[] = 'languages_list_default';
     $stab[] = 'logentries_types';
     $stab[] = 'log_types';
-    $stab[] = 'news_topics';
     $stab[] = 'nodes';
     $stab[] = 'object_types';
     $stab[] = 'profile_options';

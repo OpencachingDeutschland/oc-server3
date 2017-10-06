@@ -122,5 +122,5 @@ if (isset($debug_startpage_news) && $debug_startpage_news) {
     // Forum topics on start page
     $opt['forum']['count'] = 8;
     $opt['forum']['url'] = 'http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=25';
-    $opt['cron']['phpbbtopics']['name'] = 'forum.opencaching.de';
+    $opt['forum']['name'] = 'forum.opencaching.de';
 }

@@ -121,12 +121,11 @@ $opt['logic']['license']['admin'] = false;
 $opt['page']['sponsor']['topright'] = '';
 $opt['page']['sponsor']['bottom'] = 'Driven by the Opencaching Community';
 $opt['page']['sponsor']['popup'] = '';
-/* phpbb news integration (index.php)
+
+/* forum news integration (index.php)
  */
-$opt['cron']['phpbbtopics']['url'] = 'http://forum.opencaching.de';
-$opt['cron']['phpbbtopics']['forumids'] = [];
-$opt['cron']['phpbbtopics']['name'] = 'forum.opencaching.de';
-$opt['cron']['phpbbtopics']['link'] = 'http://forum.opencaching.de';
+$opt['forum']['url'] = 'http://forum.opencaching.de';
+$opt['forum']['name'] = 'forum.opencaching.de';
 
 /* Well known node id's - required for synchronization
  * 1 Opencaching Deutschland (www.opencaching.de)

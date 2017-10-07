@@ -181,7 +181,7 @@ class getNew
             LEFT JOIN `caches_attributes` `ca`
               ON `ca`.`cache_id`=`caches`.`cache_id`
               AND `ca`.`attrib_id`=6
-            WHERE `caches`.`country`='&1' 
+            WHERE `caches`.`country`='&1'
               AND `caches`.`date_hidden` >= curdate()
               AND `caches`.`type` = 6
               AND `caches`.`status`=1

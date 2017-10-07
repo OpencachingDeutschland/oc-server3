@@ -291,7 +291,7 @@ function ftsearch_refresh($maxentries = PHP_INT_MAX)
         // insert hashes for these text into the search index
         foreach ($texts as $text) {
             if ($r['object_type'] == 1 || $r['object_type'] == 3) {
-                // cache description and log texts are in HTML format 
+                // cache description and log texts are in HTML format
                 $text = ftsearch_strip_html($text);
             }
             $hashes = ftsearch_hash($text);

@@ -1,7 +1,7 @@
 {***************************************************************************
 * You can find the license in the docs directory
 *
-* ATTN: This template is used for both log.php and editlog.php! 
+* ATTN: This template is used for both log.php and editlog.php!
 ***************************************************************************}
 {* OCSTYLE *}
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>

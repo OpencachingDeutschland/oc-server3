@@ -39,10 +39,11 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         self::assertEquals($string, $newString);
     }
 
-    public function testHtmlTagAIsAllowed()
+    public function testHtmlTagAIsAllowedAndProtectedWithNoOpener()
     {
         $string = '<a href="http://www.google.de" target="_blank">lorem ipsum</a>';
+        $stringProtected = '<a href="http://www.google.de" target="_blank" rel="noreferrer noopener">lorem ipsum</a>';
         $newString = $this->htmlPurifier->purify($string);
-        self::assertEquals($string, $newString);
+        self::assertEquals($stringProtected, $newString);
     }
 }

@@ -2,15 +2,15 @@
 
 namespace OcTest\Modules;
 
+use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use PHPUnit_Framework_TestCase;
 
 /**
  * Class TestCase
  *
  * @package OcTest\Modules\Oc
  */
-class TestCase extends PHPUnit_Framework_TestCase
+class TestCase extends PHPUnitTestCase
 {
     /**
      * Creates a mock with best practice settings.

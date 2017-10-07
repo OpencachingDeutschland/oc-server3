@@ -28,7 +28,7 @@ function search_output()
 
     $gpxHead =
         '<?xml version="1.0" encoding="utf-8"?>
-<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="' . $server_name . ' - ' . $server_address . '" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd" xmlns="http://www.topografix.com/GPX/1/0">
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0" creator="' . $server_name . ' - ' . $server_address . '" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.groundspeak.com/cache/1/0/1 http://www.groundspeak.com/cache/1/0/1/cache.xsd https://github.com/opencaching/gpx-extension-v1 https://raw.githubusercontent.com/opencaching/gpx-extension-v1/master/schema.xsd http://www.gsak.net/xmlv1/4 http://www.gsak.net/xmlv1/4/gsak.xsd" xmlns="http://www.topografix.com/GPX/1/0">
   <name>Cache listing generated from ' . $server_name . '</name>
   <desc>This is a waypoint file generated from ' . $server_name . '{wpchildren}</desc>
   <author>Opencaching.de</author>
@@ -68,8 +68,15 @@ function search_output()
       <groundspeak:travelbugs>
 {geokrety}      </groundspeak:travelbugs>
     </groundspeak:cache>
+    <oc:cache xmlns:oc="https://github.com/opencaching/gpx-extension-v1">
+      <oc:type>{oc_type}</oc:type>
+      <oc:size>{oc_size}</oc:size>
+{oc_trip_time}{oc_trip_distance}      <oc:requires_password>{oc_password}</oc:requires_password>
+{oc_gcwp}      <oc:logs>
+{oc_logs}      </oc:logs>
+    </oc:cache>
   </wpt>
-{cache_waypoints}';
+{cache_waypoints}';   // There is no line feed at the end of Groundspeak GPX files!
     /* Ocprop:
      *    <wpt\s+lat=\"([0-9\-\+\.]+)\"\s+lon=\"([0-9\-\+\.]+)\">
      *    <time>(.*?)<\/time>
@@ -105,6 +112,15 @@ function search_output()
           <groundspeak:name>{gkname}</groundspeak:name>
         </groundspeak:travelbug>';
 
+    $gpxOcTripTime = '      <oc:trip_time>{time}</oc:trip_time>';
+    $gpxOcTripDistance = '      <oc:trip_distance>{distance}</oc:trip_distance>';
+    $gpxOcOtherCode = '      <oc:other_code>{code}</oc:other_code>';
+
+    $gpxOcLog = '        <oc:log id="{id}" uuid="{uuid}">
+{oc_team_entry}        </oc:log>';
+
+    $gpxOcTeamEntry = '          <oc:site_team_entry>{teamentry}</oc:site_team_entry>';
+
     $gpxWaypoints = '  <wpt lat="{wp_lat}" lon="{wp_lon}">
     <time>{time}</time>
     <name>{name}</name>
@@ -117,40 +133,57 @@ function search_output()
     <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/4">
       <gsak:Parent>{parent}</gsak:Parent>
     </gsak:wptExtension>
-  </wpt>
-';
+  </wpt>';
 
     $gpxFoot = '</gpx>';
 
     $gpxTimeFormat = 'Y-m-d\TH:i:s\Z';
 
     $gpxStatus[0] = 'available="False" archived="False"'; // other (unavailable, not archived)
-    $gpxStatus[1] = 'available="True" archived="False"'; //available, not archived
-    $gpxStatus[2] = 'available="False" archived="False"'; //unavailable, not archived
-    $gpxStatus[3] = 'available="False" archived="True"'; //unavailable, archived
-    $gpxStatus[6] = 'available="False" archived="True"'; //locked, visible
+    $gpxStatus[1] = 'available="True" archived="False"';  // available, not archived
+    $gpxStatus[2] = 'available="False" archived="False"'; // unavailable, not archived
+    $gpxStatus[3] = 'available="False" archived="True"';  // unavailable, archived
+    $gpxStatus[6] = 'available="False" archived="True"';  // locked, visible
 
-    $gpxContainer[0] = 'Other';
+    $gpxContainer[1] = 'Other';
     $gpxContainer[2] = 'Micro';
     $gpxContainer[3] = 'Small';
     $gpxContainer[4] = 'Regular';
     $gpxContainer[5] = 'Large';
-    $gpxContainer[6] = 'Large';
-    $gpxContainer[7] = 'Virtual';
-    $gpxContainer[8] = 'Micro';
+    $gpxContainer[6] = 'Large';     // very large
+    $gpxContainer[7] = 'Virtual';   // no container
+    $gpxContainer[8] = 'Micro';     // nano
 
-    // cache types known by gpx
-    $gpxType[0] = 'Unknown Cache';
+    $gpxOcSize[1] = 'Other';
+    $gpxOcSize[2] = 'Micro';
+    $gpxOcSize[3] = 'Small';
+    $gpxOcSize[4] = 'Regular';
+    $gpxOcSize[5] = 'Large';
+    $gpxOcSize[6] = 'Very large';
+    $gpxOcSize[7] = 'No container';
+    $gpxOcSize[8] = 'Nano';
+
+    $gpxType[1] = 'Unknown Cache';
     $gpxType[2] = 'Traditional Cache';
     $gpxType[3] = 'Multi-cache';
     $gpxType[4] = 'Virtual Cache';
     $gpxType[5] = 'Webcam Cache';
     $gpxType[6] = 'Event Cache';
+    $gpxType[7] = 'Unknown Cache';        // quiz cache
+    $gpxType[8] = 'Unknown Cache';        // maths/physics cache
+    $gpxType[9] = 'Unknown Cache';        // moving cache
+    $gpxType[10] = 'Traditional Cache';   // drive-in cache
 
-    // unknown ... converted
-    $gpxType[7] = 'Unknown Cache';
-    $gpxType[8] = 'Unknown Cache';
-    $gpxType[10] = 'Traditional Cache';
+    $gpxOcType[1] = 'Other Cache';
+    $gpxOcType[2] = 'Traditional Cache';
+    $gpxOcType[3] = 'Multi-cache';
+    $gpxOcType[4] = 'Virtual Cache';
+    $gpxOcType[5] = 'Webcam Cache';
+    $gpxOcType[6] = 'Event Cache';
+    $gpxOcType[7] = 'Quiz Cache';
+    $gpxOcType[8] = 'Quiz Cache';         // maths/physics cache
+    $gpxOcType[9] = 'Moving Cache';
+    $gpxOcType[10] = 'Traditional Cache'; // drive-in cache
 
     $gpxLogType[0] = 'Other';
     $gpxLogType[1] = 'Found it';
@@ -161,8 +194,8 @@ function search_output()
     $gpxLogType[9] = 'Archive';
     $gpxLogType[10] = 'Owner Maintenance';
     $gpxLogType[11] = 'Temporarily Disable Listing';
-    $gpxLogType[13] = 'Archive';
-    $gpxLogType[14] = 'Archive';
+    $gpxLogType[13] = 'Archive';          // locked
+    $gpxLogType[14] = 'Archive';          // locked/invisible
 
     $gpxSymNormal = 'Geocache';
     $gpxSymFound = 'Geocache Found';
@@ -187,18 +220,22 @@ function search_output()
     $rs = sql_slave(
         "SELECT SQL_BUFFER_RESULT
             &searchtmp.`cache_id` `cacheid`,
-            &searchtmp.`longitude` `longitude`,
-            &searchtmp.`latitude` `latitude`,
+            &searchtmp.`longitude`,
+            &searchtmp.`latitude`,
             `caches`.`wp_oc` `waypoint`,
-            `caches`.`date_hidden` `date_hidden`,
-            `caches`.`name` `name`,
-            `caches`.`country` `country`,
-            `caches`.`terrain` `terrain`,
-            `caches`.`difficulty` `difficulty`,
-            `caches`.`desc_languages` `desc_languages`,
-            `caches`.`size` `size`,
-            `caches`.`type` `type`,
-            `caches`.`status` `status`,
+            `caches`.`date_hidden`,
+            `caches`.`name`,
+            `caches`.`country`,
+            `caches`.`terrain`,
+            `caches`.`difficulty`,
+            `caches`.`search_time`,
+            `caches`.`way_length`,
+            `caches`.`desc_languages`,
+            `caches`.`size`,
+            `caches`.`type`,
+            `caches`.`logpw` != '' AS `requires_password`,
+            `caches`.`status`,
+            `caches`.`wp_gc_maintained`,
             `caches`.`user_id` `userid`,
             `caches`.`needs_maintenance`,
             `caches`.`listing_outdated`,
@@ -284,13 +321,25 @@ function search_output()
         if (isset($gpxType[$r['type']])) {
             $thisline = mb_ereg_replace('{type}', $gpxType[$r['type']], $thisline);
         } else {
-            $thisline = mb_ereg_replace('{type}', $gpxType[0], $thisline);
+            $thisline = mb_ereg_replace('{type}', $gpxType[1], $thisline);
+        }
+
+        if (isset($gpxOcType[$r['type']])) {
+            $thisline = mb_ereg_replace('{oc_type}', $gpxOcType[$r['type']], $thisline);
+        } else {
+            $thisline = mb_ereg_replace('{oc_type}', $gpxOcType[1], $thisline);
         }
 
         if (isset($gpxContainer[$r['size']])) {
             $thisline = mb_ereg_replace('{container}', $gpxContainer[$r['size']], $thisline);
         } else {
-            $thisline = mb_ereg_replace('{container}', $gpxContainer[0], $thisline);
+            $thisline = mb_ereg_replace('{container}', $gpxContainer[1], $thisline);
+        }
+
+        if (isset($gpxOcSize[$r['size']])) {
+            $thisline = mb_ereg_replace('{oc_size}', $gpxOcSize[$r['size']], $thisline);
+        } else {
+            $thisline = mb_ereg_replace('{oc_size}', $gpxOcSize[1], $thisline);
         }
 
         if (isset($gpxStatus[$r['status']])) {
@@ -313,6 +362,29 @@ function search_output()
         $r['terrain'] -= $r['terrain'] % 2;
         $thisline = mb_ereg_replace('{terrain}', ($r['terrain'] / 2) . $sTerrDecimals, $thisline);
 
+        if ($r['search_time'] > 0) {
+            $trip_time = mb_ereg_replace('{time}', $r['search_time'], $gpxOcTripTime . "\n");
+        } else {
+            $trip_time = '';
+        }
+        $thisline = mb_ereg_replace('{oc_trip_time}', $trip_time, $thisline);
+
+        if ($r['way_length'] > 0) {
+            $trip_distance = mb_ereg_replace('{distance}', $r['way_length'], $gpxOcTripDistance . "\n");
+        } else {
+            $trip_distance = '';
+        }
+        $thisline = mb_ereg_replace('{oc_trip_distance}', $trip_distance, $thisline);
+
+        $thisline = mb_ereg_replace('{oc_password}', $r['requires_password'] ? 'true' : 'false', $thisline);
+
+        if ($r['wp_gc_maintained'] <> '') {
+            $gcwp = mb_ereg_replace('{code}', $r['wp_gc_maintained'], $gpxOcOtherCode . "\n");
+        } else {
+            $gcwp = '';
+        }
+        $thisline = mb_ereg_replace('{oc_gcwp}', $gcwp, $thisline);
+
         $thisline = mb_ereg_replace('{owner}', text_xmlentities($r['username']), $thisline);
         $thisline = mb_ereg_replace('{userid}', $r['userid'], $thisline);
 
@@ -323,7 +395,8 @@ function search_output()
         }
 
         // clear cache specific data
-        $logentries = '';
+        $gc_logentries = '';
+        $oc_logentries = '';
         $cacheNote = false;
         $attribentries = '';
         $waypoints = '';
@@ -342,7 +415,7 @@ function search_output()
                 $thislog = mb_ereg_replace('{type}', $gpxLogType[3], $thislog);
                 $thislog = mb_ereg_replace('{text}', text_xmlentities($cacheNote['note']), $thislog);
 
-                $logentries .= $thislog . "\n";
+                $gc_logentries .= $thislog . "\n";
             }
         }
 
@@ -360,7 +433,9 @@ function search_output()
                 "
                 SELECT
                     `cache_logs`.`id`,
+                    `cache_logs`.`uuid`,
                     `cache_logs`.`type`,
+                    `cache_logs`.`oc_team_comment`,
                     `cache_logs`.`date`,
                     `cache_logs`.`text`,
                     `cache_logs`.`needs_maintenance`,
@@ -383,6 +458,8 @@ function search_output()
             );
 
             while ($rLog = sql_fetch_array($rsLogs)) {
+                // groundspeak:log
+
                 $thislog = $gpxLog;
                 $thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
                 $thislog = mb_ereg_replace('{date}', date($gpxTimeFormat, strtotime($rLog['date'])), $thislog);
@@ -425,12 +502,26 @@ function search_output()
                 }
                 $thislog = mb_ereg_replace('{text}', text_xmlentities($logtext), $thislog);
 
-                $logentries .= $thislog . "\n";
+                $gc_logentries .= $thislog . "\n";
+
+                // oc:log
+
+                $thislog = $gpxOcLog;
+                $thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
+                $thislog = mb_ereg_replace('{uuid}', $rLog['uuid'], $thislog);
+                if ($rLog['oc_team_comment']) {
+                    $teamentry = mb_ereg_replace('{teamentry}', 'true', $gpxOcTeamEntry . "\n");
+                } else {
+                    $teamentry = '';
+                }
+                $thislog = mb_ereg_replace('{oc_team_entry}', $teamentry, $thislog);
+                $oc_logentries .= $thislog . "\n";
             }
         }
         mysql_free_result($rsLogs);
 
-        $thisline = mb_ereg_replace('{logs}', $logentries, $thisline);
+        $thisline = mb_ereg_replace('{logs}', $gc_logentries, $thisline);
+        $thisline = mb_ereg_replace('{oc_logs}', $oc_logentries, $thisline);
 
         // attributes
         $addAttributes = [-1];  // dummy
@@ -540,7 +631,7 @@ function search_output()
             $thiswp = mb_ereg_replace('{type}', text_xmlentities($wp_typename), $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
-            $waypoints .= $thiswp;
+            $waypoints .= $thiswp. "\n";
             ++$n;
         }
 
@@ -556,11 +647,12 @@ function search_output()
             $thiswp = mb_ereg_replace('{type}', "Reference Point", $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
-            $waypoints .= $thiswp;
+            $waypoints .= $thiswp . "\n";
         }
 
         $thisline = mb_ereg_replace('{cache_waypoints}', $waypoints, $thisline);
 
+        // There is no line feed at the end of Groundspeak GPX files, so we omit the LF, too.
         append_output($thisline);
     }
     mysql_free_result($rs);

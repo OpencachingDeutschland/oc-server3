@@ -11,9 +11,9 @@ paths:
   - "dev-ops/local.team-opencaching.de/actions"
 
 templates:
-  - source: "dev-ops/local.team-opencaching.de/templates/config2-settings.inc.php.tpl"
+  - source: "dev-ops/local.team-opencaching.de/templates/config2-settings.inc.tpl.php"
     destination: "htdocs/config2/settings.inc.php"
-  - source: "dev-ops/local.team-opencaching.de/templates/lib-settings.inc.php.tpl"
+  - source: "dev-ops/local.team-opencaching.de/templates/lib-settings.inc.tpl.php"
     destination: "htdocs/lib/settings.inc.php"
   - source: "dev-ops/local.team-opencaching.de/templates/parameters.yml.tpl"
     destination: "htdocs/app/config/parameters.yml"

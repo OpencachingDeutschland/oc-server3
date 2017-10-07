@@ -1,0 +1,35 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services_oc.xml"/>
+    </imports>
+    <services>
+        <service class="AppBundle\Legacy\Security\LegacyAuthenticator" id="app.token_legacy_authenticator"/>
+
+        <service class="AppBundle\Form\UploadFieldNotesType" id="app.form.upload_field_note">
+            <argument type="service" id="translator"/>
+
+            <tag name="form.type"/>
+        </service>
+
+        <service class="AppBundle\Service\FieldNoteService" id="app.service.field_note">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="translator"/>
+        </service>
+
+        <service class="AppBundle\Form\DataProvider\UploadFieldNotesDataProvider"
+                 id="app.dataprovider.upload_field_note">
+            <argument type="service" id="app.service.field_note"/>
+        </service>
+
+        <service class="AppBundle\Controller\ChangelogController" id="app.controller.changelog_controller">
+            <argument type="service" id="app.library.common_mark_converter"/>
+            <argument type="service" id="twig"/>
+        </service>
+
+        <service class="Twig_Extensions_Extension_Text" id="twig.extension.text">
+            <tag name="twig.extension"/>
+        </service>
+    </services>
+</container>

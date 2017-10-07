@@ -399,27 +399,6 @@ $opt['logic']['cache_reports']['max_processperday'] = 20;  // set to 0 to disabl
  */
 $opt['cron']['username'] = 'apache';   // system username for cronjobs
 
-/* phpbb news integration (index.php, outdated)
- *
- * Set url='' to disable the cronjob task and hide the section on start page.
- * Topics from different subforum will be merged and sorted by date.
- * forumids defines what subforums to query
- * count defines number of postings shown
- * maxcontentlength defines where to strip to content
- */
-
-/* example   $opt['cron']['phpbbtopics']['url'] = 'http://www.geoclub.de/feed.php?f={id}';
-             $opt['cron']['phpbbtopics']['forumids'] = array(125, 126, 127);
-             $opt['cron']['phpbbtopics']['name'] = 'geoclub.de';
-             $opt['cron']['phpbbtopics']['link'] = 'http://www.geoclub.de/viewforum.php?f=52';
-*/
-$opt['cron']['phpbbtopics']['url'] = '';
-$opt['cron']['phpbbtopics']['forumids'] = [];
-$opt['cron']['phpbbtopics']['name'] = '';
-$opt['cron']['phpbbtopics']['link'] = '';
-$opt['cron']['phpbbtopics']['count'] = 5;
-$opt['cron']['phpbbtopics']['maxcontentlength'] = 230;
-
 /* generate sitemap.xml and upload to search engines
  *
  * NOTE
@@ -456,21 +435,10 @@ $opt['mail']['usermail'] = 'usermail@devel.opencaching.de';
 // contact address
 $opt['mail']['contact'] = 'contact@devel.opencaching.de';
 
-/* index.php news section configuration
- * include '' => from table 'news', else from RSS feed
-  */
+// blog news on start page
 $opt['news']['include'] = '';
 $opt['news']['count'] = 3;
 $opt['news']['timeout'] = 20;
-
-// redirect news.php to the following url
-$opt['news']['redirect'] = '';
-
-// maximum size of the include file
-$opt['news']['maxsize'] = 25 * 1024;
-
-// show news block in start page
-$opt['news']['onstart'] = true;
 
 /* current forum topcis on start page
  * requires url to be a vaild rss feed
@@ -479,6 +447,8 @@ $opt['news']['onstart'] = true;
 $opt['forum']['url'] = '';
 $opt['forum']['count'] = 5;
 $opt['forum']['timeout'] = 20;
+$opt['forum']['url'] = '';
+$opt['forum']['name'] = '';
 
 // settings for Wiki news on the 404 page
 $opt['wikinews']['url'] = 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss';

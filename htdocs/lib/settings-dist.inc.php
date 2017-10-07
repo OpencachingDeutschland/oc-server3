@@ -97,10 +97,6 @@ if (!isset($opt['mail']['contact'])) {
     $opt['mail']['contact'] = 'contact@do.main';
 }
 
-// news settings
-$use_news_approving = true;
-$news_approver_email = 'news-approver@<do.main>';
-
 //local database settings
 $dbusername = 'username';
 $dbname = 'database';

@@ -85,10 +85,6 @@ if (!isset($opt['mail']['contact'])) {
     $opt['mail']['contact'] = 'contact@' . $maildomain;
 }
 
-// news settings
-$use_news_approving = true;
-$news_approver_email = 'root';
-
 $opt['page']['showdonations'] = true;
 $opt['page']['showsocialmedia'] = true;
 

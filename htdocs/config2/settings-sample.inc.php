@@ -213,15 +213,7 @@ $opt['page']['showsocialmedia'] = true;
  */
 // $opt['forum']['url'] = ''http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=50';
 // $opt['forum']['count'] = 8;
-
-/* old news integration (index.php)
- */
-$opt['cron']['phpbbtopics']['url'] = '';
-$opt['cron']['phpbbtopics']['forumids'] = [];
-$opt['cron']['phpbbtopics']['name'] = '';
-$opt['cron']['phpbbtopics']['link'] = '';
-$opt['cron']['phpbbtopics']['count'] = 5;
-$opt['cron']['phpbbtopics']['maxcontentlength'] = 230;
+// $opt['forum']['name'] = 'forum.opencaching.de';
 
 
 function post_config()

@@ -75,6 +75,15 @@ foreach ($opt['page']['banned_user_agents'] as $ua) {
     }
 }
 
+// backward compatibility for old settings
+if ($opt['forum']['url'] == '' &&
+    isset($opt['cron']['phpbbtopics']['url']) && $opt['cron']['phpbbtopics']['url'] != '' &&
+    isset($opt['cron']['phpbbtopics']['name']) && $opt['cron']['phpbbtopics']['name'] != '') {
+
+    $opt['forum']['url'] = $opt['cron']['phpbbtopics']['url'];
+    $opt['forum']['name'] = $opt['cron']['phpbbtopics']['name'];
+}
+
 set_domain_config();
 
 if (!(isset($_REQUEST['sqldebug']) && $_REQUEST['sqldebug'] == '1')) {

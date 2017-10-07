@@ -48,6 +48,7 @@ Sponsoring Technology Partner
 * [Sentry](https://sentry.io/) ![Sentry](https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3/development/doc/sentry.png)
 * [Scrutinizer](https://scrutinizer-ci.com)
 * [Travis-Ci](https://travis-ci.org/)   
+* [Codecov](https://codecov.io/)   
 
 We thank our technology partners for their support of our open source project!
 

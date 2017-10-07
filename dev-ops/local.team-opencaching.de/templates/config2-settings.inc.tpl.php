@@ -160,15 +160,15 @@ $opt['logic']['waypoint_pool']['fill_gaps'] = false;
 $opt['logic']['cracklib'] = false;
 
 /* News configuration
-         *
-         * filename to the include file containing the newscontent
-         * (RSS format)
-         * if no filename is given, the own news-code is used
-         * (table news and newstopic.php)
-         *
-         * you have to correct entries in table sys_menu and
-         * lang/de/stdtyle/lib/menu.php respectivly
-         */
+ *
+ * filename to the include file containing the newscontent
+ * (RSS format)
+ * if no filename is given, the own news-code is used
+ * (table news and newstopic.php)
+ *
+ * you have to correct entries in table sys_menu and
+ * lang/de/stdtyle/lib/menu.php respectivly
+ */
 $opt['news']['include'] = 'http://blog.opencaching.de/feed/';
 $opt['news']['count'] = 8;
 $opt['news']['timeout'] = 10;
@@ -196,25 +196,25 @@ $opt['page']['showsocialmedia'] = true;
 * configure infos on 404.php
 */
 $opt['page']['404']['test.opencaching.de'] = [
-'blog' => [
-'show' => true,
-'feedurl' => $opt['news']['include'],
-'url' => $opt['news']['redirect'],
-],
-'forum' => [
-'show' => true,
-'feedurl' => $opt['forum']['url'],
-'url' => 'http://forum.opencaching.de',
-],
-'wiki' => [
-'show' => true,
-'feedurl' => 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss',
-'url' => 'http://wiki.opencaching.de',
-],
-'newcaches' => [
-'show' => true,
-'url' => 'http://test.opencaching.de',
-],
+    'blog' => [
+        'show' => true,
+        'feedurl' => $opt['news']['include'],
+        'url' => $opt['news']['redirect'],
+    ],
+    'forum' => [
+        'show' => true,
+        'feedurl' => $opt['forum']['url'],
+        'url' => 'http://forum.opencaching.de',
+    ],
+    'wiki' => [
+        'show' => true,
+        'feedurl' => 'http://wiki.opencaching.de/index.php/Spezial:Neue_Seiten?feed=rss',
+        'url' => 'http://wiki.opencaching.de',
+    ],
+    'newcaches' => [
+        'show' => true,
+        'url' => 'http://test.opencaching.de',
+    ],
 ];
 
 
@@ -235,88 +235,88 @@ define('MNU_API', 1020);
 
 function post_config()
 {
-global $opt, $menuitem, $tpl, $translate;
+    global $opt, $menuitem, $tpl, $translate;
 
-$domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
-if ($domain == '') {
-return;
-}
+    $domain = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+    if ($domain == '') {
+        return;
+    }
 
-$menuitem[MNU_INFO] = [
-'title' => $translate->t('Help', '', '', ''),
-'menustring' => $translate->t('Help', '', '', ''),
-'authlevel' => 0,
-'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
-'visible' => 1,
-'sublevel' => 1
-];
-$menuitem[0]['subitems'][] = MNU_INFO;
+    $menuitem[MNU_INFO] = [
+        'title' => $translate->t('Help', '', '', ''),
+        'menustring' => $translate->t('Help', '', '', ''),
+        'authlevel' => 0,
+        'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
+        'visible' => 1,
+        'sublevel' => 1,
+    ];
+    $menuitem[0]['subitems'][] = MNU_INFO;
 
-config_domain_test_opencaching_de();
+    config_domain_test_opencaching_de();
 
-/*
-$menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
-'menustring' => 'Chat/IRC',
-'authlevel' => 0,
-'href' => 'webchat.php',
-'visible' => 1,
-'sublevel' => 1
-);
-$menuitem[0]['subitems'][] = MNU_CHAT;
-*/
+    /*
+    $menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
+    'menustring' => 'Chat/IRC',
+    'authlevel' => 0,
+    'href' => 'webchat.php',
+    'visible' => 1,
+    'sublevel' => 1
+    );
+    $menuitem[0]['subitems'][] = MNU_CHAT;
+    */
 
 // geokrety menu contains the language
-$menuitem[MNU_GEOKRETY] = [
-'title' => 'Geokrety',
-'menustring' => 'Geokrety',
-'authlevel' => 0,
-'href' => 'http://www.geokrety.org/index.php?lang=' .
-urlencode(
-$opt['geokrety']['locales'][$opt['template']['locale']]
-),
-'target' => 'target="_blank"',
-'visible' => 1,
-'sublevel' => 1
-];
-$menuitem[0]['subitems'][] = MNU_GEOKRETY;
+    $menuitem[MNU_GEOKRETY] = [
+        'title' => 'Geokrety',
+        'menustring' => 'Geokrety',
+        'authlevel' => 0,
+        'href' => 'http://www.geokrety.org/index.php?lang=' .
+            urlencode(
+                $opt['geokrety']['locales'][$opt['template']['locale']]
+            ),
+        'target' => 'target="_blank"',
+        'visible' => 1,
+        'sublevel' => 1,
+    ];
+    $menuitem[0]['subitems'][] = MNU_GEOKRETY;
 
-$menuitem[MNU_API] = [
-'title' => 'API',
-'menustring' => 'API',
-'authlevel' => 0,
-'href' => '__FRONTEND_URL__/okapi',
+    $menuitem[MNU_API] = [
+        'title' => 'API',
+        'menustring' => 'API',
+        'authlevel' => 0,
+        'href' => '__FRONTEND_URL__/okapi',
 # OKAPI does not support https yet
-'visible' => 1,
-'sublevel' => 1
-];
-$menuitem[0]['subitems'][] = MNU_API;
+        'visible' => 1,
+        'sublevel' => 1,
+    ];
+    $menuitem[0]['subitems'][] = MNU_API;
 }
 
 function config_domain_test_opencaching_de()
 {
-global $opt, $menuitem, $login, $translate;
+    global $opt, $menuitem, $login, $translate;
 
-$opt['page']['headoverlay'] = 'oc_head_alpha3';
-$opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login';
+    $opt['page']['headoverlay'] = 'oc_head_alpha3';
+    $opt['cms']['login'] = 'http://wiki.opencaching.de/index.php/Login';
 
-/* add additional main menu links
-*/
-$menuitem[MNU_TEAMBLOG] = [
-'title' => 'Teamblog',
-'menustring' => 'Teamblog',
-'authlevel' => 0,
-'href' => 'http://blog.opencaching.de/',
-'visible' => 1,
-'sublevel' => 1
-];
-$menuitem[MNU_FORUM] = [
-'title' => 'Forum',
-'menustring' => 'Forum',
-'authlevel' => 0,
-'href' => 'http://forum.opencaching.de',
-'visible' => 1,
-'sublevel' => 1
-];
-$menuitem[0]['subitems'][] = MNU_TEAMBLOG;
-$menuitem[0]['subitems'][] = MNU_FORUM;
+    /* add additional main menu links
+    */
+    $menuitem[MNU_TEAMBLOG] = [
+        'title' => 'Teamblog',
+        'menustring' => 'Teamblog',
+        'authlevel' => 0,
+        'href' => 'http://blog.opencaching.de/',
+        'visible' => 1,
+        'sublevel' => 1,
+    ];
+    $menuitem[MNU_FORUM] = [
+        'title' => 'Forum',
+        'menustring' => 'Forum',
+        'authlevel' => 0,
+        'href' => 'http://forum.opencaching.de',
+        'visible' => 1,
+        'sublevel' => 1,
+    ];
+    $menuitem[0]['subitems'][] = MNU_TEAMBLOG;
+    $menuitem[0]['subitems'][] = MNU_FORUM;
 }

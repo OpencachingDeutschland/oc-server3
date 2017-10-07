@@ -34,6 +34,9 @@ install:
 script:
     - ./psh.phar travis-ci:unit
 
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+
 matrix:
   allow_failures:
     - php: 7.0

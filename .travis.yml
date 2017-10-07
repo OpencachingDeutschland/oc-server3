@@ -32,7 +32,10 @@ install:
     - ./psh.phar travis-ci:init
 
 script:
-    - ./psh.phar travis-ci:unit
+    - URL=http://localhost htdocs/vendor/phpunit/phpunit/phpunit --stop-on-failure --stop-on-error --debug --verbose --coverage-clover=coverage.xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
 
 matrix:
   allow_failures:

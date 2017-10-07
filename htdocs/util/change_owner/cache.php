@@ -7,7 +7,7 @@
  * Schutz über htpasswd!
  ***************************************************************************/
 
-use Oc\GeoCache\StatisticPicture;
+use Oc\Geocache\StatisticPicture;
 
 header('Content-type: text/html; charset=utf-8');
 

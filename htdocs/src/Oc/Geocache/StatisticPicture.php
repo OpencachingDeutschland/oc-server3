@@ -3,7 +3,7 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace Oc\GeoCache;
+namespace Oc\Geocache;
 
 class StatisticPicture
 {

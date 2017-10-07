@@ -3,7 +3,7 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace OcLegacy\GeoCache;
+namespace OcLegacy\Geocache;
 
 class Recommendation
 {

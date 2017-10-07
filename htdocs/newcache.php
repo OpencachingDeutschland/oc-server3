@@ -5,7 +5,7 @@
  *  used template(s): newcache, viewcache, login
  ***************************************************************************/
 
-use Oc\GeoCache\StatisticPicture;
+use Oc\Geocache\StatisticPicture;
 
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;

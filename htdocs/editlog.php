@@ -12,8 +12,8 @@
  *
  *****************************************************************************/
 
-use OcLegacy\GeoCache\Recommendation;
-use Oc\GeoCache\StatisticPicture;
+use OcLegacy\Geocache\Recommendation;
+use Oc\Geocache\StatisticPicture;
 
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/logic/user.class.php';

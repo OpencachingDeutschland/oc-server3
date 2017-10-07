@@ -23,17 +23,28 @@ $locale = strtolower($opt['template']['locale']);
 $request->setLocale($locale);
 $response = $kernel->handle($request);
 
+/**
+ * @var array $excludeRoutes Which routes should be displayed in the legacy layout?
+ */
+$excludeRoutes = [
+    'field-notes'
+];
+
 if ($response->getStatusCode() === 404) {
     include __DIR__ . '/404.php';
     exit;
 }
 
+/**
+ * @var array $excludeRoutes Which controller should not be compiled in symfony?
+ */
 if ($request->isXmlHttpRequest()
     || $response->isRedirection()
     || $request->getRequestFormat() !== 'html'
-    || $request->attributes->get('_route') !== 'field-notes'
+    || !in_array($request->attributes->get('_route'), $excludeRoutes, true)
     || preg_match('/\/_/', $request->getPathInfo()) === 1 // e.g. /_profiler/
-    || ($response->headers->has('Content-Type') && strpos($response->headers->get('Content-Type'), 'html') === false)
+    || ($response->headers->has('Content-Type')
+    && strpos($response->headers->get('Content-Type'), 'html') === false)
 ) {
     $response->send();
     $kernel->terminate($request, $response);

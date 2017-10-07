@@ -6,7 +6,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: de
 
 framework:
     #esi:             ~
@@ -25,6 +25,7 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
+        storage_id: session.storage.php_bridge
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         #handler_id:  session.handler.native_file
         #save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"

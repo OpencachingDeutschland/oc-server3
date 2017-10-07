@@ -3,19 +3,54 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Legacy\Traits\LegacyTemplateTrait;
+use Oc\GlobalContext\GlobalContext;
+use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
-class AbstractController extends Controller
+/**
+ * Class AbstractController
+ *
+ * @package AppBundle\Controller
+ */
+abstract class AbstractController extends Controller
 {
     use LegacyTemplateTrait;
+
+    /**
+     * Fetches the global context from the master request.
+     *
+     * @return GlobalContext
+     */
+    public function getGlobalContext()
+    {
+        $requestStack = $this->get('request_stack');
+
+        $masterRequest = $requestStack->getMasterRequest();
+
+        if ($masterRequest === null) {
+            throw new RuntimeException('No master request found.');
+        }
+
+        /**
+         * @var GlobalContext $globalContext
+         */
+        $globalContext = $masterRequest->get('global_context');
+
+        if ($globalContext === null) {
+            throw new RuntimeException('Global context not found on master request');
+        }
+
+        return $globalContext;
+    }
 
     /**
      * Sets the container.
      *
      * There is no container available in the constructor of a controller, so we override setContainer() and use this
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerInterface|null $container A ContainerInterface instance or null.
+     * @param ContainerInterface|null $container A ContainerInterface instance or null.
      *
      * @return void
      */
@@ -28,7 +63,9 @@ class AbstractController extends Controller
         }
 
         $requestStack = $container->get('request_stack');
-        /** @var \Symfony\Component\HttpFoundation\Request $masterRequest */
+        /**
+         * @var Request $masterRequest
+         */
         $masterRequest = $requestStack->getMasterRequest();
         if ($masterRequest) {
             $this->setTarget($masterRequest->getUri());

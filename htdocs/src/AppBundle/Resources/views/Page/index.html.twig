@@ -1,0 +1,17 @@
+{% extends 'page.html.twig' %}
+
+{% set page_title = '' %}
+{% set page_title_image = "" %}
+
+{% block body %}
+
+    {% for pageBlock in pageBlocks %}
+    <div class="ctl-impressum">
+        <div class="content2-pagetitle">
+            {{ pageBlock.title}}
+        </div>
+            {{ pageBlock.html  | raw }}
+    </div>
+    {% endfor %}
+
+{% endblock %}

@@ -18,6 +18,8 @@
         <meta name="description" content="{$opt.page.meta.description|escape}" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta http-equiv="Content-Style-Type" content="text/css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <meta http-equiv="Content-Language" content="{$opt.template.locale}" />
         <meta http-equiv="gallerimg" content="no" />
         <meta http-equiv="cache-control" content="no-cache" />
@@ -330,12 +332,7 @@
                                 {if ($opt.template.caching == true)}
                                     {t}Page cached:{/t} {if $sys_cached==true}{t}Yes{/t}{else}{t}No{/t}{/if}<br />
                                 {/if}
-                                {*
-                                {t}DB connected:{/t}
-                                {if $sys_dbconnected==true}{t}Yes{/t}{else}{t}No{/t}{/if}
-                                {if $sys_dbslave==true}, {t}Slave{/t}{/if}
-                                <br />
-                                *}
+
                             {/nocache}
                             {t}Created at:{/t} {"0"|date_format:$opt.format.datetime}
                         </small>

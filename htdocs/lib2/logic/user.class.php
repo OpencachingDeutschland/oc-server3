@@ -626,8 +626,6 @@ class user
     // return if successfull (with insert)
     public function save()
     {
-        $bNeedStatpicClear = $this->reUser->getChanged('username');
-
         sql_slave_exclude();
         if ($this->reUser->save()) {
             if ($this->getUserId() == ID_NEW) {

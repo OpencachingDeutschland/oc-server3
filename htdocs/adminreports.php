@@ -117,7 +117,7 @@ if ($id == 0) {
                 `c`.`name` AS `cachename`,
                 `c`.`user_id` AS `ownerid`,
                 `cr`.`comment`,
-                TIMESTAMPDIFF(MINUTE, `lastmodified`, NOW()) AS `minutes_since_change`
+                DATEDIFF(NOW(),`lastmodified`) AS `days_since_change`
          FROM `cache_reports` AS `cr`
          LEFT JOIN `cache_report_reasons` AS `crr` ON `cr`.`reason`=`crr`.`id`
          LEFT JOIN `caches` AS `c` ON `c`.`cache_id`=`cr`.`cacheid`
@@ -162,7 +162,7 @@ if ($id == 0) {
             'reopenable',
             $record['adminid'] == $login->userid &&
             $record['closed'] == 1 &&
-            $record['minutes_since_change'] <= 10
+            $record['days_since_change'] <= 45
         );
         $tpl->assign('cachename', $record['cachename']);
         $tpl->assign('ownerid', $record['ownerid']);

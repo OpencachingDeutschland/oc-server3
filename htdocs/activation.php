@@ -33,7 +33,7 @@ if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
             );
 
         if ($activation) {
-            if (($activation['code'] === $code) && ($code !== '')) {
+            if ($activation['code'] === $code) {
                 $connection->update(
                     'user',
                     [

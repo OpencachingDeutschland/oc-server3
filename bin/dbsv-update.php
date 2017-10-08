@@ -1413,15 +1413,6 @@ function dbv_167()
     sql("DELETE FROM `sys_cron` WHERE `name` = 'okapi_cleanup'");
 }
 
-function dbv_168()
-{
-    sql(
-        "CREATE TABLE IF NOT EXISTS `cache_attrib_conflicts` (
-            `attrib1_id` int(10) NOT NULL,
-            `attrib2_id` int(10) NOT NULL
-         ) ENGINE=MyISAM"
-    );
-}
 
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.

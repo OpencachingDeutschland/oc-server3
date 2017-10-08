@@ -13,7 +13,7 @@ class Container
 {
     public static function get($key)
     {
-        self::getContainer()->get($key);
+        return self::getContainer()->get($key);
     }
 
     /**
@@ -44,10 +44,11 @@ class Container
     private static function generateContainer(ConfigCache $containerConfigCache)
     {
         $container = new ContainerBuilder();
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
+        $fileLocator = new FileLocator(__DIR__ . '/../../app/config');
+        $loader = new XmlFileLoader($container, $fileLocator);
         $loader->load('services_oc.xml');
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
+        $loader = new YamlFileLoader($container, $fileLocator);
         $loader->load('parameters.yml');
 
         $container->compile();

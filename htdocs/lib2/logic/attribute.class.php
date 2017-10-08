@@ -143,4 +143,24 @@ class attribute
 
         return $attributes;
     }
+
+    /**
+     * @param $attribId
+     * @return array
+     */
+    public static function getConflictingAttribIds($attribId)
+    {
+        static $conflicts = [];
+
+        if (!$conflicts) {
+            $rs = sql('SELECT `attrib1_id`, `attrib2_id` FROM `cache_attrib_conflicts`');
+            while ($r = sql_fetch_array($rs)) {
+                $conflicts[$r[0]][] = $r[1];
+                $conflicts[$r[1]][] = $r[0];
+            }
+            sql_free_result($rs);
+        }
+
+        return isset($conflicts[$attribId]) ? $conflicts[$attribId] : [];
+    }
 }

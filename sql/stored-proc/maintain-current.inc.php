@@ -2387,19 +2387,7 @@ sql_dropTrigger('userBeforeDelete');
 sql(
     "CREATE TRIGGER `userBeforeDelete` BEFORE DELETE ON `user`
      FOR EACH ROW BEGIN
-        IF IFNULL(@allowdelete,0)=0 THEN
-            CALL error_set_allowdelete_to_delete_users();
-            /*
-                There are exactly four reasons to delete a user record:
-
-                1. account was not activated -> see user_delete.class.php
-                2. Get rid of obsolete data on a test or developer machine.
-                3. Get rid of a bad user record which was left over by a user creating bug.
-                4. Remove replicated data from other nodes which are no longer useful.
-
-                Do NOT delete a user record for any other reason!
-            */
-        ELSEIF IFNULL(@fastdelete,0) = 0 THEN
+        IF IFNULL(@fastdelete,0) = 0 THEN
             /*
                 use 'fastdelete' only to delete bulk data and if you are sure that
                 you can handle all dependent data on your own

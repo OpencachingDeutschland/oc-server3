@@ -21,13 +21,13 @@ $tpl->assign('errorAlreadyActivated', false);
 $tpl->assign('sucess', false);
 
 if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
-    $email_not_ok = is_valid_email_address($email) ? false : true;
+    $emailNotOk = is_valid_email_address($email) ? false : true;
 
-    if ($email_not_ok === false) {
+    if ($emailNotOk === false) {
         /** @var Doctrine\DBAL\Connection $connection */
         $connection = OcLegacy\Container::get('app.dbal_connection');
         $activation = $connection
-            ->fetchAll(
+            ->fetchAssoc(
                 'SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`=:email',
                 [':email' => $email]
             );

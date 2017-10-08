@@ -29,7 +29,7 @@ class Container
         );
 
         if (!$containerConfigCache->isFresh()) {
-            self::genereateContainer($containerConfigCache);
+            self::generateContainer($containerConfigCache);
         }
 
         require_once $containerFile;
@@ -41,7 +41,7 @@ class Container
      * @param ConfigCache $containerConfigCache
      * @return ContainerBuilder
      */
-    private static function genereateContainer(ConfigCache $containerConfigCache)
+    private static function generateContainer(ConfigCache $containerConfigCache)
     {
         $container = new ContainerBuilder();
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));

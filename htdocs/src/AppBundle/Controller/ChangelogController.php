@@ -39,7 +39,7 @@ class ChangelogController
         $response = new Response();
         $response->setContent(
             $this->twig->render(
-                'AppBundle:ChangelogController:index.html.twig',
+                'changelog/index.html.twig',
                 ['changelog' => $changelog]
             )
         );

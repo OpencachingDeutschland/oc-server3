@@ -6,16 +6,26 @@ use AppBundle\Controller\AbstractController;
 use AppBundle\Form\UploadFieldNotesType;
 use AppBundle\Util\DateUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class FieldNotesController
+ *
+ * @package AppBundle\Controller\FieldNotes
+ */
 class FieldNotesController extends AbstractController
 {
     /**
+     * Index action for field-notes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     *
      * @Route("/field-notes/", name="field-notes")
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
@@ -26,24 +36,38 @@ class FieldNotesController extends AbstractController
         $dataProvider = $this->get('app.dataprovider.upload_field_note');
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
-        $fieldNotes = $repository->findBy(['user' => $user->getId()], ['date' => 'ASC', 'id' => 'ASC']);
+        $fieldNotes = $repository->findBy([
+            'user' => $user->getId()
+        ], [
+            'date' => 'ASC',
+            'id' => 'ASC'
+        ]);
 
         $form = $this->createForm(UploadFieldNotesType::class, $dataProvider->getData($user->getId()));
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            /**
+             * @var UploadedFile $file
+             */
             $file = $form->getData()[UploadFieldNotesType::FIELD_FILE];
+
             try {
                 $ignoreDate = null;
+
                 if (!empty($form->getData()[UploadFieldNotesType::FIELD_IGNORE])) {
-                    $ignoreDate = DateUtil::dateTimeFromMySqlFormat($form->getData()[UploadFieldNotesType::FIELD_IGNORE_DATE]);
+                    $ignoreDate = DateUtil::dateTimeFromMySqlFormat(
+                        $form->getData()[UploadFieldNotesType::FIELD_IGNORE_DATE]
+                    );
                 }
+
                 $fieldNoteService->importFromFile($file->getRealPath(), $user->getId(), $ignoreDate);
             } catch (\Exception $e) {
                 $this->addErrorMessage($e->getMessage());
 
                 return $this->redirectToRoute('field-notes');
             }
+
             if ($fieldNoteService->hasErrors()) {
                 foreach ($fieldNoteService->getErrors() as $error) {
                     $this->addErrorMessage($error);
@@ -51,6 +75,7 @@ class FieldNotesController extends AbstractController
 
                 return $this->redirectToRoute('field-notes');
             }
+
             $this->addSuccessMessage(
                 $this->get('translator')->trans('field_notes.upload.success')
             );
@@ -69,11 +94,13 @@ class FieldNotesController extends AbstractController
     }
 
     /**
-     * @Route("/field-notes/delete/{id}", name="field-notes.delete")
+     * Action to delete one field-note.
      *
      * @param int $id
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
+     *
+     * @Route("/field-notes/delete/{id}", name="field-notes.delete")
      */
     public function deleteAction($id)
     {
@@ -81,13 +108,19 @@ class FieldNotesController extends AbstractController
         $user = $this->getUser();
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
-        $fieldNote = $repository->findOneBy(['user' => $user->getId(), 'id' => $id]);
+        $fieldNote = $repository->findOneBy([
+            'user' => $user->getId(),
+            'id' => $id
+        ]);
+
         if (!$fieldNote) {
             return $this->redirectToRoute('field-notes');
         }
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($fieldNote);
         $em->flush();
+
         $this->addSuccessMessage(
             $this->get('translator')->trans('field_notes.success.deleted')
         );
@@ -96,11 +129,13 @@ class FieldNotesController extends AbstractController
     }
 
     /**
+     * Action to delete multiple field-notes.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     *
      * @Route("/field-notes/delete-multiple/", name="field-notes.delete-multiple")
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteMultipleAction(Request $request)
     {
@@ -114,13 +149,19 @@ class FieldNotesController extends AbstractController
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
         $em = $this->getDoctrine()->getManager();
+
         foreach ($selectedFieldNotes as $fieldNoteId) {
-            $fieldNote = $repository->findOneBy(['user' => $user->getId(), 'id' => $fieldNoteId]);
+            $fieldNote = $repository->findOneBy([
+                'user' => $user->getId(),
+                'id' => $fieldNoteId
+            ]);
+
             if (!$fieldNote) {
                 continue;
             }
             $em->remove($fieldNote);
         }
+
         $em->flush();
 
         $this->addSuccessMessage(

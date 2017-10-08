@@ -1,15 +1,6 @@
-{% block stylesheets %}{% endblock %}
-
 <div class="content2-pagetitle">
     {% if page_title_image %}
         <img src="{{ page_title_image }}" style="margin-right: 10px;" width="32" height="32" />
     {% endif %}
     {{ page_title }}
 </div>
-
-{% include 'partials/flash-messages.twig' %}
-
-{% block body %}{% endblock %}
-
-{% block javascripts %}{% endblock %}
-</body>

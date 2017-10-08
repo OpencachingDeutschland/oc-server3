@@ -8,9 +8,6 @@ $dev_basepath = '/var/www/html/';
 $dev_codepath = '*';
 $dev_baseurl = '__FRONTEND_URL__';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
 // enable HTTPS
 if (defined('HTTPS_ENABLED')) {
     $opt['page']['https']['mode'] = HTTPS_ENABLED;

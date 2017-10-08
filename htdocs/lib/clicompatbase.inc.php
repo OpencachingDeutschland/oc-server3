@@ -53,6 +53,15 @@ foreach ($opt['page']['banned_user_agents'] as $ua) {
 date_default_timezone_set($timezone);
 register_errorhandlers();
 
+if (isset($debug_page) && $debug_page)
+{
+    ini_set('display_errors', true);
+    ini_set('error_reporting', E_ALL);
+} else {
+    ini_set('display_errors', false);
+    ini_set('error_reporting', E_ALL & ~E_NOTICE);
+}
+
 $dblink_slave = false;
 $db_error = 0;
 

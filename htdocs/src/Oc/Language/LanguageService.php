@@ -50,7 +50,7 @@ class LanguageService
     public function fetchAllTranslated()
     {
         try {
-            $result = $this->languageRepository->fetchAll();
+            $result = $this->languageRepository->fetchAllTranslated();
         } catch (RecordsNotFoundException $e) {
             $result = [];
         }

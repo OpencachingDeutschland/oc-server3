@@ -2,7 +2,6 @@
 
 namespace Oc\Country;
 
-use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**

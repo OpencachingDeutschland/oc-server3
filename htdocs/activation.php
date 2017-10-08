@@ -20,19 +20,33 @@ $tpl->assign('errorCode', false);
 $tpl->assign('errorAlreadyActivated', false);
 $tpl->assign('sucess', false);
 
-if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
-    $email_not_ok = is_valid_email_address($email) ? false : true;
+if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
+    $emailNotOk = is_valid_email_address($email) ? false : true;
 
-    if ($email_not_ok === false) {
-        $rs = sql("SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`='&1'", $email);
+    if ($emailNotOk === false) {
+        /** @var Doctrine\DBAL\Connection $connection */
+        $connection = OcLegacy\Container::get('app.dbal_connection');
+        $activation = $connection
+            ->fetchAssoc(
+                'SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`=:email',
+                [':email' => $email]
+            );
 
-        if ($r = sql_fetch_array($rs)) {
-            if (($r['code'] == $code) && ($code != '')) {
-                // ok, activate account
-                sql("UPDATE `user` SET `is_active_flag`=1, `activation_code`='' WHERE `user_id`='&1'", $r['id']);
+        if ($activation) {
+            if ($activation['code'] === $code) {
+                $connection->update(
+                    'user',
+                    [
+                        'is_active_flag' => 1,
+                        'activation_code' => '',
+                    ],
+                    [
+                        'user_id' => $activation['id']
+                    ]
+                );
                 $tpl->assign('sucess', true);
             } else {
-                if ($r['code'] == '') {
+                if ($activation['code'] === '') {
                     $tpl->assign('errorAlreadyActivated', true);
                 } else {
                     $tpl->assign('errorCode', true);
@@ -41,7 +55,6 @@ if (isset($_REQUEST['submit']) || ($code != '' && $email != '')) {
         } else {
             $tpl->assign('errorCode', true);
         }
-        sql_free_result($rs);
     } else {
         $tpl->assign('errorEMail', true);
     }

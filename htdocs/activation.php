@@ -46,7 +46,7 @@ if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
                 );
                 $tpl->assign('sucess', true);
             } else {
-                if ($r['code'] === '') {
+                if ($activation['code'] === '') {
                     $tpl->assign('errorAlreadyActivated', true);
                 } else {
                     $tpl->assign('errorCode', true);

@@ -102,6 +102,56 @@ class UserServiceTest extends TestCase
     }
 
     /**
+     * Tests fetching one record by with success - no exception is thrown.
+     *
+     * @return void
+     */
+    public function testFetchingOneByReturnsEntity()
+    {
+        $userEntity = new UserEntity();
+
+        $whereClause = [
+            'username' => '__foobar__'
+        ];
+
+        $userRepository = $this->createMock(UserRepository::class);
+        $userRepository->method('fetchOneBy')
+            ->with($whereClause)
+            ->willReturn($userEntity);
+
+        $userService = new UserService($userRepository);
+
+        $result = $userService->fetchOneBy($whereClause);
+
+        self::assertSame($userEntity, $result);
+    }
+
+    /**
+     * Tests fetching one record by - exception is thrown because there is no record.
+     *
+     * @return void
+     */
+    public function testFetchingOneByThrowsException()
+    {
+        $exception = new RecordNotFoundException('Record with id #1 not found');
+
+        $whereClause = [
+            'username' => '__foobar__'
+        ];
+
+        $userRepository = $this->createMock(UserRepository::class);
+        $userRepository->method('fetchOneBy')
+            ->with($whereClause)
+            ->willThrowException($exception);
+
+        $userService = new UserService($userRepository);
+
+        $result = $userService->fetchOneBy($whereClause);
+
+        self::assertNull($result);
+    }
+
+    /**
      * Tests that create returns the entity.
      *
      * @return void

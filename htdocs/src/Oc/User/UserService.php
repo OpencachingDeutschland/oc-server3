@@ -61,6 +61,17 @@ class UserService
         return $result;
     }
 
+    public function fetchOneBy(array $where)
+    {
+        try {
+            $result = $this->userRepository->fetchOneBy($where);
+        } catch (RecordNotFoundException $e) {
+            $result = null;
+        }
+
+        return $result;
+    }
+
     /**
      * Creates a user in the database.
      *

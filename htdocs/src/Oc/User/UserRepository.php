@@ -71,20 +71,40 @@ class UserRepository
      */
     public function fetchOneById($id)
     {
-        $statement = $this->connection->createQueryBuilder()
+        return $this->fetchOneBy([
+            'user_id' => $id
+        ]);
+    }
+
+    /**
+     * Fetches a user by given where array.
+     *
+     * @param array $where
+     *
+     * @return UserEntity|null
+     *
+     * @throws RecordNotFoundException Thrown when no record is found
+     */
+    public function fetchOneBy(array $where = [])
+    {
+        $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->where('user_id = :id')
-            ->setParameter(':id', $id)
-            ->execute();
+            ->setMaxResults(1);
+
+
+        if (count($where) > 0) {
+            foreach ($where as $column => $value) {
+                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+            }
+        }
+
+        $statement = $queryBuilder->execute();
 
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException(sprintf(
-                'Record with id #%s not found',
-                $id
-            ));
+            throw new RecordNotFoundException('Record with given where clause not found');
         }
 
         return $this->getEntityFromDatabaseArray($result);
@@ -137,7 +157,7 @@ class UserRepository
         $this->connection->update(
             self::TABLE,
             $databaseArray,
-            ['id' => $entity->id]
+            ['user_id' => $entity->id]
         );
 
         $entity->id = (int) $this->connection->lastInsertId();
@@ -165,7 +185,7 @@ class UserRepository
         $this->connection->delete(
             self::TABLE,
             $databaseArray,
-            ['id' => $entity->id]
+            ['user_id' => $entity->id]
         );
 
         $entity->id = null;

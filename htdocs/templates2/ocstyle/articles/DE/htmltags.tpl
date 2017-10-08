@@ -20,7 +20,7 @@
 
     <p><b>Die folgenden HTML-Tags sind erlaubt:</b></p>
 
-    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, article<sup>1</sup>, aside<sup>1</sup>, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i><sup>1</sup>, h1, h2, h3, h4, h5, h6, header<sup>1</sup>, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, strike<sup>1</sup>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
+    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i>, h1, h2, h3, h4, h5, h6, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, <i>strike</i>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
     </p>
 
     <p><b>Ersatz für nicht erlaubte oder veraltete Tags:</b></p>
@@ -33,23 +33,18 @@
         <br />
     </p>
 
-    <p>
-        <sup>1</sup> Wird beim Speichern in andere Elemente umgewandelt.<br />
-        <br />
-    </p>
-
     <div id="htmlattributes" class="content2-container bg-blue02">
       <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;Attribute</p>
     </div>
 
     <p><b>Die folgenden allgemeinen HTML-Attribute sind erlaubt:</b></p>
 
-    <p class="indent">class, dir, id<sup>2</sup>, lang, style, title</p>
+    <p class="indent">class, dir, id<sup>1</sup>, lang, style, title</p>
 
     <p><b>Die folgenden speziellen HTML-Attribute sind erlaubt:</b></p>
 
     <p class="indent">
-        <span class="html_attributes">a</span>           href, <i>name</i><sup>2</sup>, rel, target='_blank'<br />
+        <span class="html_attributes">a</span>           href, <i>name</i><sup>1</sup>, rel, target='_blank'<br />
         <span class="html_attributes">area</span>        alt, coords, href, shape, target='_blank'<br />
         <span class="html_attributes">bdo</span>         dir<br />
         <span class="html_attributes">blockquote</span>  cite<br />
@@ -58,9 +53,9 @@
         <span class="html_attributes">del</span>         cite<br />
         <span class="html_attributes"><i>font</i></span> color, size<br />
         <span class="html_attributes">hr</span>          <i>size</i>, <i>noshade</i><br />
-        <span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap<sup>2</sup>, <i>vspace</i>, width<br />
+        <span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap<sup>1</sup>, <i>vspace</i>, width<br />
         <span class="html_attributes">ins</span>         cite<br />
-        <span class="html_attributes">map</span>         name<sup>2</sup><br />
+        <span class="html_attributes">map</span>         name<sup>1</sup><br />
         <span class="html_attributes">ol</span>          <i>compact</i>, type<br />
         <span class="html_attributes">q</span>           cite<br />
         <span class="html_attributes">table</span>       <i>align</i>, <i>bgcolor</i>, <i>border</i>, <i>cellpadding</i>, <i>cellspacing</i>, <i>frame</i>, <i>rules</i>, <i>summary</i>, <i>width</i><br />
@@ -82,7 +77,7 @@
     </p>
 
     <p>
-        <sup>2</sup> Die IDs bzw. Namen müssen mit <code>custom_</code> beginnen.
+        <sup>1</sup> Die IDs bzw. Namen müssen mit <code>custom_</code> beginnen.
         <br /><br />
     </p>
 

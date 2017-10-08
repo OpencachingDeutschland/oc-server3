@@ -49,7 +49,7 @@ $nowaypoints = '<tr><td colspan="2">' . t('No waypoints available') . '</td></tr
 $waypointline = '<tr bgcolor="#ffffff"><td><table class="narrowtable" cellspacing="0" cellpadding="0"><tr><td><img src="{wp_image}" /></td><td>{wp_type}</td></tr></table></td><td><table class="narrowtable"><tr><td style="white-space:nowrap">{wp_coordinate}</td></tr></table></tp><td>{wp_show_description}</td><td>[<a href="childwp.php?cacheid={cacheid}&childid={childid}" onclick="testListingModified(this)">' . t('Edit') . '</a>] [<a href="childwp.php?cacheid={cacheid}&deleteid={childid}" onclick="testListingModified(this)">' . t('Delete') . '</a>]</td></tr>';
 $waypointlines = '<tr><td colspan="2"><table class="edit_wptable">{lines}</table></td></tr><tr><td colspan="2">&nbsp;</td></tr>';
 
-$cache_attrib_js = "new Array({id}, {selected}, '{img_undef}', '{img_large}')";
+$cache_attrib_js = "[{id}, {selected}, '{img_undef}', '{img_large}', [{conflicting_attribs}]]";
 $cache_attrib_pic = '<img id="attr{attrib_id}" src="{attrib_pic}" border="0" onmousedown="toggleAttr({attrib_id})" onmouseover="Tip(\'{html_desc}\', TITLE, \'{name}\', TITLEBGCOLOR, \'{color}\', TITLEFONTCOLOR, \'#000000\', BGCOLOR, \'#FFFFFF\', BORDERCOLOR, \'{color}\', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, \'#000080\', WIDTH, 500)" onmouseout="UnTip()" />&nbsp;';
 
 $cache_attrib_group =

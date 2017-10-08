@@ -45,7 +45,7 @@
 
     $sel_message = t('Select');
 
-    $cache_attrib_js = "new Array({id}, {selected}, '{img_undef}', '{img_large}')";
+    $cache_attrib_js = "[{id}, {selected}, '{img_undef}', '{img_large}', [{conflicting_attribs}]]";
     $cache_attrib_pic = '<img id="attr{attrib_id}" src="{attrib_pic}" border="0" onmousedown="toggleAttr({attrib_id})" onmouseover="Tip(\'{html_desc}\', TITLE, \'{name}\', TITLEBGCOLOR, \'{color}\', TITLEFONTCOLOR, \'#000000\', BGCOLOR, \'#FFFFFF\', BORDERCOLOR, \'{color}\', CLICKCLOSE, true, DELAY, 0, FADEIN, false, FADEOUT, false, FONTCOLOR, \'#000080\', WIDTH, 500)" onmouseout="UnTip()" />&nbsp;';
 
     $cache_attrib_group =

@@ -143,4 +143,37 @@ class attribute
 
         return $attributes;
     }
+
+    /**
+     * @param $attribId
+     * @return array
+     */
+    public static function getConflictingAttribIds($attribId)
+    {
+        static $conflicts = [
+            [1, 38],    // only at night - 24/7
+            [1, 40],    // only at night - only by day
+            [24, 25],   // near the parking area - long walk
+            [24, 27],   // near the parking area - hilly area
+            [24, 29],   // near the parking area - swimming required
+            [24, 50],   // near the parking area - cave equipment
+            [24, 51],   // near the parking area - diving equipment
+            [24, 52],   // near the parking area - watercraft
+            [38, 39],   // 24/7 - only at specified times
+            [38, 40],   // 24/7 - only by day
+            [42, 43],   // all seasons - breeding season
+            [42, 60]    // all seassons - only during specified seasons
+        ];
+
+        static $conflictsByAttr = [];
+
+        if (!$conflictsByAttr) {
+            foreach ($conflicts as $conflict) {
+                $conflictsByAttr[$conflict[0]][] = $conflict[1];
+                $conflictsByAttr[$conflict[1]][] = $conflict[0];
+            }
+        }
+
+        return isset($conflictsByAttr[$attribId]) ? $conflictsByAttr[$attribId] : [];
+    }
 }

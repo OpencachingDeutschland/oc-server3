@@ -10,12 +10,6 @@
         <testsuite name="default">
             <directory>./</directory>
         </testsuite>
-        <testsuite name="login">
-            <directory>Oc/Login/LoginTest</directory>
-        </testsuite>
-        <testsuite name="coords">
-            <directory>Modules/Lib2/Logic</directory>
-        </testsuite>
     </testsuites>
     <filter>
         <whitelist>

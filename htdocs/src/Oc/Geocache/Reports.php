@@ -1,6 +1,6 @@
 <?php
 
-namespace Oc\GeoCache;
+namespace Oc\Geocache;
 
 use Doctrine\DBAL\Connection;
 

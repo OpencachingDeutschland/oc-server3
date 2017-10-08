@@ -27,7 +27,7 @@
             <argument type="service" id="app.dbal_connection"/>
         </service>
 
-        <service class="Oc\GeoCache\Reports" id="oc.geo_cache.reports">
+        <service class="Oc\Geocache\Reports" id="oc.geo_cache.reports">
             <argument type="service" id="app.dbal_connection"/>
         </service>
 

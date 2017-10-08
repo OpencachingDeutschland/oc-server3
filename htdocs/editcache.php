@@ -6,7 +6,7 @@
  *  GET/POST Parameter: cacheid
  *****************************************************************************/
 
-use Oc\GeoCache\StatisticPicture;
+use Oc\Geocache\StatisticPicture;
 use Oc\Libse\ChildWp\HandlerChildWp;
 use Oc\Libse\Coordinate\FormatterCoordinate;
 

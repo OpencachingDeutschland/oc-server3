@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use Oc\GeoCache\Reports;
+use Oc\Geocache\Reports;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;

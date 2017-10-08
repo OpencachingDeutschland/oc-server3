@@ -8,8 +8,8 @@
  *
  ***************************************************************************/
 
-use OcLegacy\GeoCache\Recommendation;
-use Oc\GeoCache\StatisticPicture;
+use OcLegacy\Geocache\Recommendation;
+use Oc\Geocache\StatisticPicture;
 
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;

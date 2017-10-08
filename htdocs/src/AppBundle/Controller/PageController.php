@@ -46,10 +46,10 @@ class PageController extends AbstractController
         ]);
 
         if (count($pageBlocks) === 0) {
-            return $this->render('@App/Page/fallback.html.twig');
+            return $this->render('page/fallback.html.twig');
         }
 
-        return $this->render('@App/Page/index.html.twig', [
+        return $this->render('page/index.html.twig', [
             'page' => $page,
             'pageBlocks' => $pageBlocks
         ]);

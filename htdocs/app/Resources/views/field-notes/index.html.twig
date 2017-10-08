@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'index/legacy/base.html.twig' %}
 
 {% set page_title = 'field_notes.field_notes' | trans %}
 {% set page_title_image = "resource2/ocstyle/images/misc/32x32-home.png" %}
 
-{% import 'macros/geocache.twig' as geocache %}
+{% import 'macros/geocache.html.twig' as geocache %}
 
 {% block body %}
     {% if fieldNotes %}

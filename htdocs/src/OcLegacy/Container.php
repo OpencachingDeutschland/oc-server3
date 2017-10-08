@@ -6,6 +6,7 @@ use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class Container
@@ -43,9 +44,10 @@ class Container
     private static function genereateContainer(ConfigCache $containerConfigCache)
     {
         $container = new ContainerBuilder();
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
-        $loader->load('services_oc.yml');
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
+        $loader->load('services_oc.xml');
 
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../app/config'));
         $loader->load('parameters.yml');
 
         $container->compile();

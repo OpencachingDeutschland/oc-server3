@@ -31,24 +31,7 @@
             <argument type="service" id="app.dbal_connection"/>
         </service>
 
-        <service id="oc.global_context.subscriber.global_context_subscriber"
-                 class="Oc\GlobalContext\Subscriber\GlobalContextSubscriber">
-            <argument type="service" id="oc.global_context.global_context_factory"/>
 
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="oc.global_context.global_context_factory" class="Oc\GlobalContext\GlobalContextFactory">
-            <argument type="service" id="oc.global_context.provider.language_provider"/>
-        </service>
-
-        <service id="oc.global_context.provider.language_provider" class="Oc\GlobalContext\Provider\LanguageProvider"
-                 public="false">
-            <argument type="service" id="oc.language.language_service"/>
-            <argument type="service" id="oc.session.session_data_cookie"/>
-            <argument type="service" id="oc.user.user_provider"/>
-            <argument>%locale%</argument>
-        </service>
 
         <service id="oc.session.session_data_cookie" class="Oc\Session\SessionDataCookie"/>
 

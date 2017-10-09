@@ -6,12 +6,20 @@ trait OkapiCredentialsTrait
 {
     public function getOkapiUrl()
     {
-        return getenv('URL') . '/okapi';
+        $url = getenv('OKAPI_LOCAL_URL');
+        if (!$url) {
+            $url = getenv('URL');
+        }
+        return $url . '/okapi';
     }
 
     public function getConsumerKey()
     {
-        return 'yT2eV9xhwTuHKWVKxdWZ';
+        $consumer_key = getenv('OKAPI_LOCAL_CONSUMER_KEY');
+        if (!$consumer_key) {
+            $consumer_key = 'yT2eV9xhwTuHKWVKxdWZ';
+        }
+        return $consumer_key;
     }
 
     /**

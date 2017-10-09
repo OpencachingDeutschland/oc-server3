@@ -26,7 +26,7 @@ class AttrsTest extends AbstractModuleTest
 
         $response = $client->get('services/attrs/attribute_index', ['consumer_key' => $this->getConsumerKey()]);
 
-        self::assertCount(77, $response);
+        self::assertGreaterThanOrEqual(77, $response);
     }
 
     public function testAttrsAttributeMethodNeedsConsumerKey()
@@ -76,8 +76,6 @@ class AttrsTest extends AbstractModuleTest
 
         self::assertArrayHasKey('A1', $response);
         self::assertArrayHasKey('A2', $response);
-
-
 
         self::assertEquals('Listed at Opencaching only', $response['A1']['name']);
     }

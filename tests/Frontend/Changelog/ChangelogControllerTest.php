@@ -3,6 +3,7 @@
 namespace OcTest\Frontend\Changelog;
 
 use Doctrine\DBAL\Connection;
+use Oc\Changelog\Controller\ChangelogController;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,13 +30,13 @@ class ChangelogControllerTest extends WebTestCase
     {
         $this->client = self::createClient();
         $this->container = self::$kernel->getContainer();
-        $this->connection = $this->container->get('app.dbal_connection');
+        $this->connection = $this->container->get(Connection::class);
         $this->connection->beginTransaction();
     }
 
     public function test_index_action()
     {
-        $controller = $this->container->get('app.controller.changelog_controller');
+        $controller = $this->container->get(ChangelogController::class);
 
         $response = $controller->indexAction();
         self::assertInstanceOf(Response::class, $response);

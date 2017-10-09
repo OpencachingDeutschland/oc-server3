@@ -1,18 +1,42 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace Oc\Page\Controller;
 
+use Oc\AbstractController;
 use AppBundle\Entity\PageGroup;
+use Oc\Page\BlockService;
+use Oc\Page\PageService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageController
  *
- * @package AppBundle\Controller
+ * @package Oc\Page\Controller
  */
 class PageController extends AbstractController
 {
+    /**
+     * @var PageService
+     */
+    private $pageService;
+    /**
+     * @var BlockService
+     */
+    private $blockService;
+
+    /**
+     * PageController constructor.
+     *
+     * @param PageService $pageService
+     * @param BlockService $blockService
+     */
+    public function __construct(PageService $pageService, BlockService $blockService)
+    {
+        $this->pageService = $pageService;
+        $this->blockService = $blockService;
+    }
+
     /**
      * Index action to show given page by slug.
      *
@@ -27,10 +51,7 @@ class PageController extends AbstractController
         $slug = strtolower($slug);
         $this->setMenu(MNU_START);
 
-        $pageService = $this->get('oc.page.page_service');
-        $blockService = $this->get('oc.page.block_service');
-
-        $page = $pageService->fetchOneBy([
+        $page = $this->pageService->fetchOneBy([
             'slug' => $slug,
             'active' => 1
         ]);
@@ -39,7 +60,7 @@ class PageController extends AbstractController
             throw $this->createNotFoundException();
         }
 
-        $pageBlocks = $blockService->fetchBy([
+        $pageBlocks = $this->blockService->fetchBy([
             'page_id' => $page->id,
             'locale' => $this->getGlobalContext()->getLocale(),
             'active' => 1
@@ -54,7 +75,4 @@ class PageController extends AbstractController
             'pageBlocks' => $pageBlocks
         ]);
     }
-
-
-
 }

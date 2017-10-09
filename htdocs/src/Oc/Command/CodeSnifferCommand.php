@@ -3,13 +3,21 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace AppBundle\Command;
+namespace Oc\Command;
 
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Exception\LogicException;
+use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
+/**
+ * Class CodeSnifferCommand
+ *
+ * @package Oc\Command
+ */
 class CodeSnifferCommand extends AbstractCommand
 {
     const COMMAND_NAME = 'code:sniff';
@@ -20,8 +28,11 @@ class CodeSnifferCommand extends AbstractCommand
     const OPTION_DIR = 'dir';
 
     /**
+     * Configures the command.
+     *
      * @return void
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     protected function configure()
     {
@@ -38,13 +49,16 @@ class CodeSnifferCommand extends AbstractCommand
     }
 
     /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * Executes the command.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
      *
      * @return int|null
-     * @throws \Symfony\Component\Process\Exception\RuntimeException
-     * @throws \Symfony\Component\Process\Exception\LogicException
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @throws RuntimeException
+     * @throws LogicException
+     * @throws InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

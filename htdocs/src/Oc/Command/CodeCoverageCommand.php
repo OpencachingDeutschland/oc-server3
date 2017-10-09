@@ -3,20 +3,29 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace AppBundle\Command;
+namespace Oc\Command;
 
 use InvalidArgumentException;
 use SimpleXMLElement;
+use Symfony\Component\Console\Exception\InvalidArgumentException as ConsoleInvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class CodeCoverageCommand
+ *
+ * @package Oc\Command
+ */
 class CodeCoverageCommand extends AbstractCommand
 {
     const COMMAND_NAME = 'build:code-coverage';
 
     /**
+     * Configures the command.
+     *
      * @return void
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @throws ConsoleInvalidArgumentException
      */
     protected function configure()
     {
@@ -28,11 +37,14 @@ class CodeCoverageCommand extends AbstractCommand
     }
 
     /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * Executes the command.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
      *
      * @return int|null
-     * @throws \InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

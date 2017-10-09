@@ -4,6 +4,8 @@
  * create / redirect to statpic
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $jpegQuality = 80;
@@ -16,8 +18,8 @@ if (!isset($opt['locale'][$lang])) {
     $lang = $opt['template']['locale'];
 }
 
-/** @var Doctrine\DBAL\Connection $connection */
-$connection = OcLegacy\Container::get('app.dbal_connection');
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
 
 $fileName = __DIR__ . '/images/statpics/statpic' . $userId . $lang . '.jpg';
 $userStatisticPicture = (int) $connection->createQueryBuilder()

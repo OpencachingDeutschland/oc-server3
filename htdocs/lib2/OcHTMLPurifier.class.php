@@ -59,7 +59,15 @@ class OcHTMLPurifier extends HTMLPurifier
         $config->set('CSS.AllowTricky', true); // + display, visibility, overflow
         $config->set('CSS.ForbiddenProperties', 'overflow'); // - overflow
 
-        // prepare additional definitions
+        // disable tags
+        $config->set(
+            'HTML.ForbiddenElements',
+            [
+                'basefont',   // workaround for HTMLPurifier bug, which allows this in the <body>
+            ]
+        );
+
+        // prepare additional tag and attibute definitions
         $def = $config->getHTMLDefinition(true);
 
         // add tags

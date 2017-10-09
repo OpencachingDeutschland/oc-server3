@@ -17,7 +17,7 @@
 
     <p><b>The following HTML tags are allowed:</b></p>
 
-    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i>, h1, h2, h3, h4, h5, h6, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, <i>strike</i>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
+    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i><sup>1</sup>, h1, h2, h3, h4, h5, h6, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, strike<sup>1</sup>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
 
     <p><b>Replacements for unsupported or obsolete tags:</b></p>
     <p class="indent">
@@ -29,18 +29,23 @@
         <br />
     </p>
 
+    <p>
+        <sup>1</sup> Are converted to other elements in input mode "Editor".<br />
+        <br />
+    </p>
+
     <div id="htmlattributes"  class="content2-container bg-blue02">
       <p class="content-title-noshade-size2" style="margin:0 !important">&nbsp;Attributes    </p>
     </div>
 
     <p><b>The following common HTML attributes are allowed:</b></p>
 
-    <p class="indent">class, dir, id<sup>1</sup>, lang, style, title</p>
+    <p class="indent">class, dir, id<sup>2</sup>, lang, style, title</p>
 
     <p><b>The following special HTML attributes are allowed:</b></p>
 
     <p class="indent">
-        <span class="html_attributes">a</span>           href, <i>name</i><sup>1</sup>, rel, target='_blank'<br />
+        <span class="html_attributes">a</span>           href, <i>name</i><sup>2</sup>, rel, target='_blank'<br />
         <span class="html_attributes">area</span>        alt, coords, href, shape, target='_blank'<br />
         <span class="html_attributes">bdo</span>         dir<br />
         <span class="html_attributes">blockquote</span>  cite<br />
@@ -49,9 +54,9 @@
         <span class="html_attributes">del</span>         cite<br />
         <span class="html_attributes"><i>font</i></span> color, size<br />
         <span class="html_attributes">hr</span>          <i>size</i>, <i>noshade</i><br />
-        <span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap<sup>1</sup>, <i>vspace</i>, width<br />
+        <span class="html_attributes">img</span>         <i>align</i>, alt, <i>border</i>, height, <i>hspace</i>, src, usemap<sup>2</sup>, <i>vspace</i>, width<br />
         <span class="html_attributes">ins</span>         cite<br />
-        <span class="html_attributes">map</span>         name<sup>1</sup><br />
+        <span class="html_attributes">map</span>         name<sup>2</sup><br />
         <span class="html_attributes">ol</span>          <i>compact</i>, type<br />
         <span class="html_attributes">q</span>           cite<br />
         <span class="html_attributes">table</span>       <i>align</i>, <i>bgcolor</i>, <i>border</i>, <i>cellpadding</i>, <i>cellspacing</i>, <i>frame</i>, <i>rules</i>, <i>summary</i>, <i>width</i><br />
@@ -73,7 +78,7 @@
     </p>
 
     <p>
-        <sup>1</sup> IDs and names must start with <code>custom_</code>.
+        <sup>2</sup> IDs and names must start with <code>custom_</code>.
         <br /><br />
     </p>
 
@@ -85,18 +90,19 @@
     <p>The following CSS styles are allowed:</p>
 
     <p class="html_css">background, background-attachment, background-color, background-image, <span class="nowrap">background-position,</span> <span class="nowrap">background-repeat</span></p>
-    <p class="html_css">border, border-bottom, border-bottom-color, border-bottom-style, <span class="nowrap">border-bottom-width,</span> <span class="nowrap">border-collapse,</span> <span class="nowrap">border-left,</span> <span class="nowrap">border-left-color,</span> <span class="nowrap">border-left-style,</span> <span class="nowrap">border-left-width,</span> <span class="nowrap">border-right,</span> <span class="nowrap">border-right-color,</span> <span class="nowrap">border-right-style,</span> <span class="nowrap">border-right-width,</span> <span class="nowrap">border-spacing</p>
+    <p class="html_css">border, border-bottom, border-bottom-color, border-bottom-style, <span class="nowrap">border-bottom-width,</span> <span class="nowrap">border-collapse,</span> <span class="nowrap">border-color</span> <span class="nowrap">border-left,</span> <span class="nowrap">border-left-color,</span> <span class="nowrap">border-left-style,</span> <span class="nowrap">border-left-width,</span> <span class="nowrap">border-right,</span> <span class="nowrap">border-right-color,</span> <span class="nowrap">border-right-style,</span> <span class="nowrap">border-right-width,</span> <span class="nowrap">border-spacing</span> <span class="nowrap">border-style</span> <span class="nowrap">border-top,</span> <span class="nowrap">border-top-color,</span> <span class="nowrap">border-top-style</span> <span class="nowrap">border-width</span></p>
     <p class="html_css">caption-side<br />
     <p class="html_css">clear</p>
     <p class="html_css">color</p>
     <p class="html_css">display</p>
     <p class="html_css">float</p>
-    <p class="html_css">font, font-family, font-size, font-variant, font-weight</p>
+    <p class="html_css">font, font-family, font-size, font-style, font-variant, font-weight</p>
     <p class="html_css">height</p>
     <p class="html_css">letter-spacing</p>
     <p class="html_css">line-height</p>
     <p class="html_css">list-style, list-style-image, list-style-position, list-style-type</p>
     <p class="html_css">margin, margin-bottom, margin-left, margin-right, margin-top</p>
+    <p class="html_css">min-height, max-height, min-width, max-width</p>
     <p class="html_css">padding, padding-bottom, padding-left, padding-right, padding-top</p>
     <p class="html_css">table-layout</p>
     <p class="html_css">text-align, text-decoration, text-indent, text-transform</p>

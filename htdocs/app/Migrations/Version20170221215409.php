@@ -26,9 +26,5 @@ class Version20170221215409 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
-        $this->addSql('ALTER TABLE `user` DROP `admin_password`');
-        $this->addSql('ALTER TABLE `user` DROP `roles`');
     }
 }

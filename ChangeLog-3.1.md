@@ -13,6 +13,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - usability improvement in admin report interface [#1132](https://redmine.opencaching.de/issues/1132)
 - updated html-purifier to prevent xss attack via user content [#1142](https://redmine.opencaching.de/issues/1142)
 - HTML Purifier Settings and Documentation [#1151](https://redmine.opencaching.de/issues/1151)
+- improve NUTS entity display [#1126](https://redmine.opencaching.de/issues/1126)
 
 ### Removed
 - removed changed dates which was caused during db update [#1109](https://redmine.opencaching.de/issues/1109)

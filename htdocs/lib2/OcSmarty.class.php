@@ -478,15 +478,15 @@ class OcSmarty extends Smarty
         if ($opt['session']['mode'] == SAVE_SESSION) {
             if (defined('SID') && SID != '' && session_id() != '') {
                 if (strpos($page, '?') === false) {
-                    header("Location: " . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
+                    header('Location: ' . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
                 } else {
-                    header("Location: " . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
+                    header('Location: ' . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
                 }
             } else {
-                header("Location: " . $page);
+                header('Location: ' . $page);
             }
         } else {
-            header("Location: " . $page);
+            header('Location: ' . $page);
         }
         exit;
     }

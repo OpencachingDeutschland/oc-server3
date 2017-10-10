@@ -6,25 +6,28 @@
 namespace Oc\Command;
 
 use Oc\Translation\CrowdinExport;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ExportLegacyTranslationCommand
- *
- * @package Oc\Command
- */
-class ExportLegacyTranslationCommand extends ContainerAwareCommand
+class ExportLegacyTranslationCommand extends SymfonyCommand
 {
-    const COMMAND_NAME = 'translation:export-legacy-translation';
+    /**
+     * @var CrowdinExport
+     */
+    private $crowdinExport;
+
+    public function __construct(CrowdinExport $crowdinExport)
+    {
+        parent::__construct();
+        $this->crowdinExport = $crowdinExport;
+    }
 
     /**
      * Configures the command.
      *
      * @return void
-     *
      * @throws InvalidArgumentException
      */
     protected function configure()
@@ -32,7 +35,7 @@ class ExportLegacyTranslationCommand extends ContainerAwareCommand
         parent::configure();
 
         $this
-            ->setName(self::COMMAND_NAME)
+            ->setName('translation:export-legacy-translation')
             ->setDescription('export translation legacy translation system to crowdin');
     }
 
@@ -41,11 +44,10 @@ class ExportLegacyTranslationCommand extends ContainerAwareCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
-     *
      * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->getContainer()->get(CrowdinExport::class)->exportTranslations();
+        $this->crowdinExport->exportTranslations();
     }
 }

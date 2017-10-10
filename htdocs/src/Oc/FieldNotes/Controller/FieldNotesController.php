@@ -20,6 +20,23 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FieldNotesController extends AbstractController
 {
+
+    /**
+     * @var FieldNoteService
+     */
+    private $fieldNoteService;
+
+    /**
+     * @var UploadFieldNotesDataProvider
+     */
+    private $dataProvider;
+
+    public function __construct(FieldNoteService $fieldNoteService, UploadFieldNotesDataProvider $dataProvider)
+    {
+        $this->fieldNoteService = $fieldNoteService;
+        $this->dataProvider = $dataProvider;
+    }
+
     /**
      * Index action for field-notes.
      *
@@ -34,9 +51,6 @@ class FieldNotesController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $fieldNoteService = $this->get(FieldNoteService::class);
-        $dataProvider = $this->get(UploadFieldNotesDataProvider::class);
-
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
         $fieldNotes = $repository->findBy([
             'user' => $user->getId()
@@ -45,7 +59,7 @@ class FieldNotesController extends AbstractController
             'id' => 'ASC'
         ]);
 
-        $form = $this->createForm(UploadFieldNotesType::class, $dataProvider->getData($user->getId()));
+        $form = $this->createForm(UploadFieldNotesType::class, $this->dataProvider->getData($user->getId()));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,15 +77,15 @@ class FieldNotesController extends AbstractController
                     );
                 }
 
-                $fieldNoteService->importFromFile($file->getRealPath(), $user->getId(), $ignoreDate);
+                $this->fieldNoteService->importFromFile($file->getRealPath(), $user->getId(), $ignoreDate);
             } catch (\Exception $e) {
                 $this->addErrorMessage($e->getMessage());
 
                 return $this->redirectToRoute('field-notes');
             }
 
-            if ($fieldNoteService->hasErrors()) {
-                foreach ($fieldNoteService->getErrors() as $error) {
+            if ($this->fieldNoteService->hasErrors()) {
+                foreach ($this->fieldNoteService->getErrors() as $error) {
                     $this->addErrorMessage($error);
                 }
 

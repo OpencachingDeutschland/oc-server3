@@ -9,7 +9,7 @@ function errorLabel {
 }
 
 label "Install required components"
-yum -y install mariadb-server mariadb
+yum -y install mariadb-server mariadb htop
 systemctl start mariadb.service
 systemctl enable mariadb.service
 yum -y install httpd

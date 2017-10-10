@@ -16,8 +16,8 @@ class Version20170830005500 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->addSql('ALTER TABLE languages ADD is_translated TINYINT DEFAULT 0 NOT NULL;');
-        $this->addSql('UPDATE languages SET is_translated = 1 WHERE short IN (\'DE\', \'EN\', \'FR\', \'IT\', \'ES\');');
+        $this->addSql('ALTER TABLE `languages` ADD `is_translated` TINYINT DEFAULT 0 NOT NULL;');
+        $this->addSql('UPDATE `languages` SET `is_translated` = 1 WHERE short IN (\'DE\', \'EN\', \'FR\', \'IT\', \'ES\');');
     }
 
     /**
@@ -26,5 +26,6 @@ class Version20170830005500 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
+        $this->addSql('ALTER TABLE `languages` DROP `is_translated`');
     }
 }

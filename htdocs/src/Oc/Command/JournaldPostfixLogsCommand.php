@@ -6,7 +6,7 @@
 namespace Oc\Command;
 
 use Oc\Postfix\JournalLogs;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,9 +16,18 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @package Oc\Command
  */
-class JournaldPostfixLogsCommand extends ContainerAwareCommand
+class JournaldPostfixLogsCommand extends SymfonyCommand
 {
-    const COMMAND_NAME = 'postfix:processing-logs';
+    /**
+     * @var JournalLogs
+     */
+    private $journalLogs;
+
+    public function __construct(JournalLogs $journalLogs)
+    {
+        parent::__construct();
+        $this->journalLogs = $journalLogs;
+    }
 
     /**
      * Configures the command.
@@ -32,7 +41,7 @@ class JournaldPostfixLogsCommand extends ContainerAwareCommand
         parent::configure();
 
         $this
-            ->setName(self::COMMAND_NAME)
+            ->setName('postfix:processing-logs')
             ->setDescription('process postfix logs for support');
     }
 
@@ -46,7 +55,6 @@ class JournaldPostfixLogsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $journal = $this->getContainer()->get(JournalLogs::class);
-        $journal->processJournalLogs();
+        $this->journalLogs->processJournalLogs();
     }
 }

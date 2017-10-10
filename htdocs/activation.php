@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 $disable_verifyemail = true;
 require __DIR__ . '/lib2/web.inc.php';
 
@@ -24,8 +26,8 @@ if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
     $emailNotOk = is_valid_email_address($email) ? false : true;
 
     if ($emailNotOk === false) {
-        /** @var Doctrine\DBAL\Connection $connection */
-        $connection = OcLegacy\Container::get('app.dbal_connection');
+        /** @var Connection $connection */
+        $connection = AppKernel::Container()->get(Connection::class);
         $activation = $connection
             ->fetchAssoc(
                 'SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`=:email',

@@ -1,10 +1,29 @@
 <?php
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
+    /**
+     * For legacy reasons.
+     *
+     * @var AppKernel
+     */
+    private static $instance;
+
+    /**
+     * Boots the current kernel.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot();
+        self::$instance = $this;
+    }
+
     /**
      * @return array
      */
@@ -65,5 +84,28 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
+    }
+
+    /**
+     * Get instance of AppKernel.
+     *
+     * @return AppKernel
+     */
+    public static function getInstance()
+    {
+        return self::$instance;
+    }
+
+    /**
+     * Dependency injection container.
+     *
+     * Is not named as getContainer because this is a function of the Kernel.
+     * It acts as a shortcut for the legacy application to get the container.
+     *
+     * @return ContainerInterface
+     */
+    public static function Container()
+    {
+       return self::getInstance()->getContainer();
     }
 }

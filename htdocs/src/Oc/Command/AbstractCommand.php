@@ -3,10 +3,16 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace AppBundle\Command;
+namespace Oc\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Exception\LogicException;
 
+/**
+ * Class AbstractCommand
+ *
+ * @package Oc\Command
+ */
 abstract class AbstractCommand extends Command
 {
     const CODE_SUCCESS  = 0;
@@ -21,7 +27,7 @@ abstract class AbstractCommand extends Command
     /**
      * @param string|null $name
      *
-     * @throws \Symfony\Component\Console\Exception\LogicException
+     * @throws LogicException
      */
     public function __construct($name = null)
     {

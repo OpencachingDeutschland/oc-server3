@@ -1,8 +1,10 @@
 <?php
 
-namespace AppBundle\Controller\FieldNotes;
+namespace Oc\FieldNotes\Controller;
 
-use AppBundle\Controller\AbstractController;
+use AppBundle\Form\DataProvider\UploadFieldNotesDataProvider;
+use AppBundle\Service\FieldNoteService;
+use Oc\AbstractController;
 use AppBundle\Form\UploadFieldNotesType;
 use AppBundle\Util\DateUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class FieldNotesController
  *
- * @package AppBundle\Controller\FieldNotes
+ * @package Oc\FieldNotes\Controller
  */
 class FieldNotesController extends AbstractController
 {
@@ -32,8 +34,8 @@ class FieldNotesController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $fieldNoteService = $this->get('app.service.field_note');
-        $dataProvider = $this->get('app.dataprovider.upload_field_note');
+        $fieldNoteService = $this->get(FieldNoteService::class);
+        $dataProvider = $this->get(UploadFieldNotesDataProvider::class);
 
         $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
         $fieldNotes = $repository->findBy([

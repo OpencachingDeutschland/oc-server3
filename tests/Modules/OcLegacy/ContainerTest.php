@@ -2,16 +2,24 @@
 
 namespace OcTest\Modules\OcLegacy;
 
+use AppKernel;
 use Doctrine\DBAL\Connection;
-use OcLegacy\Container;
 use OcTest\Modules\AbstractModuleTest;
 
+/**
+ * Class ContainerTest
+ *
+ * @package OcTest\Modules\OcLegacy
+ */
 class ContainerTest extends AbstractModuleTest
 {
     public function testIfContainerReturnServiceId()
     {
-        self::assertInstanceOf(Connection::class, Container::get('app.dbal_connection'));
+        $kernel = new AppKernel('prod', false);
+        $kernel->boot();
+
+        self::assertInstanceOf(Connection::class, AppKernel::Container()->get(Connection::class));
         // cached container
-        self::assertInstanceOf(Connection::class, Container::get('app.dbal_connection'));
+        self::assertInstanceOf(Connection::class, AppKernel::Container()->get(Connection::class));
     }
 }

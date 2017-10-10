@@ -3,19 +3,28 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace AppBundle\Command;
+namespace Oc\Command;
 
 use Leafo\ScssPhp\Compiler;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class CreateWebCacheCommand
+ *
+ * @package Oc\Command
+ */
 class CreateWebCacheCommand extends AbstractCommand
 {
     const COMMAND_NAME = 'cache:web:create';
 
     /**
+     * Configures the command.
+     *
      * @return void
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     protected function configure()
     {
@@ -27,9 +36,12 @@ class CreateWebCacheCommand extends AbstractCommand
     }
 
     /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @return void
+     * Executes the command.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     *
+     * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -3,19 +3,28 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-namespace AppBundle\Command;
+namespace Oc\Command;
 
 use OcLegacy\Cache\WebCache;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class ClearWebCacheCommand
+ *
+ * @package Oc\Command
+ */
 class ClearWebCacheCommand extends AbstractCommand
 {
     const COMMAND_NAME = 'cache:clear-web-cache';
 
     /**
+     * Configures the command.
+     *
      * @return void
-     * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
+     *
+     * @throws InvalidArgumentException
      */
     protected function configure()
     {
@@ -27,8 +36,10 @@ class ClearWebCacheCommand extends AbstractCommand
     }
 
     /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * Executes the command.
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
      *
      * @return int|null
      */

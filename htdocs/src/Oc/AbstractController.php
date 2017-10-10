@@ -1,20 +1,20 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace Oc;
 
 use AppBundle\Legacy\Traits\LegacyTemplateTrait;
 use Oc\GlobalContext\GlobalContext;
 use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller as FrameworkController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AbstractController
  *
- * @package AppBundle\Controller
+ * @package Oc
  */
-abstract class AbstractController extends Controller
+abstract class AbstractController extends FrameworkController
 {
     use LegacyTemplateTrait;
 

@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'tops';
@@ -12,8 +14,10 @@ $tpl->caching = true;
 $tpl->cache_lifetime = 600;
 
 if (!$tpl->is_cached()) {
-    $rs = sql(
-        "SELECT IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
+    /** @var Doctrine\DBAL\Connection $connection */
+    $connection = AppKernel::Container()->get(Connection::class);
+    $rs = $connection->fetchAll(
+        '"SELECT IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
                 IF(`cache_location`.`code1`=`caches`.`country`,`cache_location`.`adm3`,NULL) AS `adm3`,
                 `caches`.`country` AS `code1`,
                 `rating_tops`.`rating` AS `idx`,
@@ -32,7 +36,7 @@ if (!$tpl->is_cached()) {
            ON `countries`.`short`=`caches`.`country`
          LEFT JOIN `sys_trans_text`
            ON `sys_trans_text`.`trans_id`=`countries`.`trans_id`
-           AND `sys_trans_text`.`lang`='&1'
+           AND `sys_trans_text`.`lang`= :lang
          INNER JOIN `stat_caches`
            ON `rating_tops`.`cache_id`=`stat_caches`.`cache_id`
          INNER JOIN `user`
@@ -43,11 +47,10 @@ if (!$tpl->is_cached()) {
          ORDER BY `adm1` ASC,
            `adm3` ASC,
            `rating_tops`.`rating` DESC,
-           `caches`.`name` ASC",
-        $opt['template']['locale']
+           `caches`.`name` ASC',
+        ['lang' => $opt['template']['locale']]
     );
-    $tpl->assign_rs('tops', $rs);
-    sql_free_result($rs);
+    $tpl->assign('tops', $rs);
 }
 
 $tpl->assign('helppagelink', helppagelink('tops'));

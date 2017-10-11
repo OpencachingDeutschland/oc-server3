@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $login->verify();
@@ -42,19 +44,21 @@ if (isset($_REQUEST['ok'])) {
 $tpl->assign('statpic_text', isset($_REQUEST['statpic_text']) ? $_REQUEST['statpic_text'] : $sp->getText());
 $tpl->assign('statpic_style', isset($_REQUEST['statpic_style']) ? $_REQUEST['statpic_style'] : $sp->getStyle());
 
-$rs = sql(
-    "SELECT
+/** @var Doctrine\DBAL\Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+$rs = $connection->fetchAll(
+    'SELECT
          `statpics`.`id`,
          `statpics`.`previewpath`,
          IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`
      FROM `statpics`
      LEFT JOIN `sys_trans_text`
          ON `statpics`.`trans_id`=`sys_trans_text`.`trans_id`
-         AND `sys_trans_text`.`lang`='&1'
-     ORDER BY `statpics`.`id` ASC",
-    $opt['template']['locale']
+         AND `sys_trans_text`.`lang`= :lang
+     ORDER BY `statpics`.`id` ASC',
+    ['lang' => $opt['template']['locale']]
 );
-$tpl->assign_rs('statpics', $rs);
-sql_free_result($rs);
+
+$tpl->assign('statpics', $rs);
 
 $tpl->display();

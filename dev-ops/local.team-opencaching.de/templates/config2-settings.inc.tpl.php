@@ -121,7 +121,8 @@ $opt['page']['sponsor']['popup'] = '';
 
 /* forum news integration (index.php)
  */
-$opt['forum']['url'] = 'http://forum.opencaching.de';
+$opt['forum']['url'] = 'https://forum.opencaching.de/index.php?action=.xml;type=rss;limit=10';
+$opt['forum']['link'] = 'http://forum.opencaching.de';
 $opt['forum']['name'] = 'forum.opencaching.de';
 
 /* Well known node id's - required for synchronization

@@ -52,6 +52,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        # Mapping is currently for the doctrine entities in the Oc namespace.
+        # Will be removed with my upcoming refactoring of field-notes.
+        mappings:
+            Oc:
+                type: annotation
+                prefix: Oc\
+                dir: '%kernel.project_dir%/src/Oc/'
+                is_bundle: false
         dql:
             string_functions:
                 ifelse: DoctrineExtensions\Query\Mysql\IfElse
@@ -74,7 +82,7 @@ jms_translation:
     configs:
         app:
             output_format: yml
-            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src/AppBundle"]
+            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
             output_dir: "%kernel.root_dir%/Resources/translations"
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]

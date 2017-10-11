@@ -2,16 +2,18 @@
 
 namespace Oc\FieldNotes\Controller;
 
-use AppBundle\Form\DataProvider\UploadFieldNotesDataProvider;
-use AppBundle\Service\FieldNoteService;
 use Oc\AbstractController;
-use AppBundle\Form\UploadFieldNotesType;
-use AppBundle\Util\DateUtil;
+use Oc\FieldNotes\Entity\FieldNote;
+use Oc\FieldNotes\FieldNoteService;
+use Oc\FieldNotes\Form\DataProvider\UploadFieldNotesDataProvider;
+use Oc\FieldNotes\Form\UploadFieldNotesType;
+use Oc\Util\DateUtil;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class FieldNotesController
@@ -31,10 +33,26 @@ class FieldNotesController extends AbstractController
      */
     private $dataProvider;
 
-    public function __construct(FieldNoteService $fieldNoteService, UploadFieldNotesDataProvider $dataProvider)
-    {
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * FieldNotesController constructor.
+     *
+     * @param FieldNoteService $fieldNoteService
+     * @param UploadFieldNotesDataProvider $dataProvider
+     * @param TranslatorInterface $translator
+     */
+    public function __construct(
+        FieldNoteService $fieldNoteService,
+        UploadFieldNotesDataProvider $dataProvider,
+        TranslatorInterface $translator
+    ) {
         $this->fieldNoteService = $fieldNoteService;
         $this->dataProvider = $dataProvider;
+        $this->translator = $translator;
     }
 
     /**
@@ -51,7 +69,7 @@ class FieldNotesController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
+        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
         $fieldNotes = $repository->findBy([
             'user' => $user->getId()
         ], [
@@ -93,19 +111,19 @@ class FieldNotesController extends AbstractController
             }
 
             $this->addSuccessMessage(
-                $this->get('translator')->trans('field_notes.upload.success')
+                $this->translator->trans('field_notes.upload.success')
             );
 
             return $this->redirectToRoute('field-notes');
         }
 
         $this->setMenu(MNU_MYPROFILE_FIELD_NOTES);
-        $this->setTitle($this->get('translator')->trans('field_notes.field_notes'));
+        $this->setTitle($this->translator->trans('field_notes.field_notes'));
 
         return $this->render('field-notes/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'fieldNotes' => $fieldNotes,
+            'fieldNotes' => $fieldNotes
         ]);
     }
 
@@ -123,7 +141,7 @@ class FieldNotesController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
+        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
         $fieldNote = $repository->findOneBy([
             'user' => $user->getId(),
             'id' => $id
@@ -138,7 +156,7 @@ class FieldNotesController extends AbstractController
         $em->flush();
 
         $this->addSuccessMessage(
-            $this->get('translator')->trans('field_notes.success.deleted')
+            $this->translator->trans('field_notes.success.deleted')
         );
 
         return $this->redirectToRoute('field-notes');
@@ -163,7 +181,7 @@ class FieldNotesController extends AbstractController
             return $this->redirectToRoute('field-notes');
         }
 
-        $repository = $this->getDoctrine()->getRepository('AppBundle:FieldNote');
+        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
         $em = $this->getDoctrine()->getManager();
 
         foreach ($selectedFieldNotes as $fieldNoteId) {
@@ -181,7 +199,7 @@ class FieldNotesController extends AbstractController
         $em->flush();
 
         $this->addSuccessMessage(
-            $this->get('translator')->trans('field_notes.success.deleted_multiple')
+            $this->translator->trans('field_notes.success.deleted_multiple')
         );
 
         return $this->redirectToRoute('field-notes');

@@ -2,8 +2,8 @@
 
 namespace Oc;
 
-use AppBundle\Legacy\Traits\LegacyTemplateTrait;
 use Oc\GlobalContext\GlobalContext;
+use OcLegacy\Template\LegacyTemplateTrait;
 use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as FrameworkController;
 use Symfony\Component\DependencyInjection\ContainerInterface;

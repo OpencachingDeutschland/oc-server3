@@ -3,7 +3,7 @@
 namespace Oc\Page\Controller;
 
 use Oc\AbstractController;
-use AppBundle\Entity\PageGroup;
+use Oc\GeoCache\Entity\PageGroup;
 use Oc\Page\BlockService;
 use Oc\Page\PageService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -23,7 +23,7 @@
     <file>../local/</file>
     <file>../bin/</file>
     -->
-    <file>../htdocs/src/AppBundle/</file>
+    <file>../htdocs/src/</file>
     <!--
     <file>./Frontend/</file>
     <file>./Modules/</file>

@@ -16,6 +16,27 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GeoCacheController extends Controller
 {
+    /**
+     * @var Reports
+     */
+    private $reports;
+
+    /**
+     * @var
+     */
+    private $secret;
+
+    /**
+     * GeoCacheController constructor.
+     *
+     * @param Reports $reports
+     * @param string $secret
+     */
+    public function __construct(Reports $reports, $secret)
+    {
+        $this->reports = $reports;
+        $this->secret = $secret;
+    }
 
     /**
      * @param Request $request
@@ -26,20 +47,13 @@ class GeoCacheController extends Controller
      */
     public function getReportsAction(Request $request)
     {
-        //TODO: may 'api_secret' be 'secret'?
-        if ($this->container->getParameter('api_secret') === 'ThisTokenIsNotSoSecretChangeIt') {
-            return new JsonResponse(['please change your api_secret to a secure one!']);
-        }
-
-        if ($request->get('key') !== $this->container->getParameter('api_secret')) {
+        if ($this->secret === 'ThisTokenIsNotSoSecretChangeIt' || $request->get('key') !== $this->secret) {
             return new JsonResponse([]);
         }
 
-        /** @var Reports $reports */
-        $reports = $this->container->get('oc.geo_cache.reports');
         $geoCachesArray = explode('|', $request->get('geocaches'));
 
-        $geoCaches = $reports->getReportStatus($geoCachesArray);
+        $geoCaches = $this->reports->getReportStatus($geoCachesArray);
 
         return new JsonResponse($geoCaches);
     }

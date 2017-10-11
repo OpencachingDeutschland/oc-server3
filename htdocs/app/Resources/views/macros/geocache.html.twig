@@ -1,32 +1,32 @@
 {% macro geocacheIcon(type) %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_UNKNOWN') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_UNKNOWN') %}
         <img src="resource2/ocstyle/images/cacheicon/unknown.gif" alt="{{ 'geocache.type.unknown' | trans }}" title="{{ 'geocache.type.unknown' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_TRADITIONAL') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_TRADITIONAL') %}
         <img src="resource2/ocstyle/images/cacheicon/traditional.gif" alt="{{ 'geocache.type.traditional' | trans }}" title="{{ 'geocache.type.traditional' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_MULTI') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_MULTI') %}
         <img src="resource2/ocstyle/images/cacheicon/multi.gif" alt="{{ 'geocache.type.multi' | trans }}" title="{{ 'geocache.type.multi' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_VIRTUAL') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_VIRTUAL') %}
         <img src="resource2/ocstyle/images/cacheicon/virtual.gif" alt="{{ 'geocache.type.virtual' | trans }}" title="{{ 'geocache.type.virtual' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_WEBCAM') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_WEBCAM') %}
         <img src="resource2/ocstyle/images/cacheicon/webcam.gif" alt="{{ 'geocache.type.webcam' | trans }}" title="{{ 'geocache.type.webcam' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_EVENT') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_EVENT') %}
         <img src="resource2/ocstyle/images/cacheicon/event.gif" alt="{{ 'geocache.type.event' | trans }}" title="{{ 'geocache.type.event' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_QUIZ') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_QUIZ') %}
         <img src="resource2/ocstyle/images/cacheicon/mystery.gif" alt="{{ 'geocache.type.quiz' | trans }}" title="{{ 'geocache.type.quiz' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_MATH') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_MATH') %}
         <img src="resource2/ocstyle/images/cacheicon/mathe.gif" alt="{{ 'geocache.type.math' | trans }}" title="{{ 'geocache.type.math' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_MOVING') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_MOVING') %}
         <img src="resource2/ocstyle/images/cacheicon/moving.gif" alt="{{ 'geocache.type.moving' | trans }}" title="{{ 'geocache.type.moving' | trans }}" />
     {% endif %}
-    {% if type == constant('AppBundle\\Entity\\Geocache::GEOCACHE_TYPE_DRIVE_IN') %}
+    {% if type == constant('Oc\\GeoCache\\Entity\\Geocache::GEOCACHE_TYPE_DRIVE_IN') %}
         <img src="resource2/ocstyle/images/cacheicon/drivein.gif" alt="{{ 'geocache.type.drivein' | trans }}" title="{{ 'geocache.type.drivein' | trans }}" />
     {% endif %}
 {% endmacro %}

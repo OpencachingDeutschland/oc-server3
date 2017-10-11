@@ -3,8 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-use AppBundle\Entity\FieldNote;
-use AppBundle\Entity\GeocacheLog;
+use Oc\FieldNotes\Entity\FieldNote;
+use Oc\GeoCache\Entity\GeocacheLog;
 
 // include libraries
 require __DIR__ . '/lib2/web.inc.php';
@@ -128,7 +128,7 @@ if ($cacheId != 0) {
         $logText = $fieldNote['text'];
         switch ($fieldNote['type']) {
             case FieldNote::LOG_TYPE_FOUND:
-                if (in_array($cache->getType(), \AppBundle\Entity\Geocache::EVENT_CACHE_TYPES)) {
+                if (in_array($cache->getType(), \Oc\GeoCache\Entity\Geocache::EVENT_CACHE_TYPES)) {
                     $logType = GeocacheLog::LOG_TYPE_ATTENDED;
                 } else {
                     $logType = GeocacheLog::LOG_TYPE_FOUND;

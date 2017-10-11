@@ -4,39 +4,18 @@
     <services>
         <defaults autowire="true" autoconfigure="true" public="false" />
 
-        <prototype namespace="AppBundle\" resource="../../src/AppBundle/*" exclude="../../src/AppBundle/{Entity,Repository}" />
         <prototype namespace="Oc\" resource="../../src/Oc/*" />
+        <prototype namespace="OcDev\" resource="../../src/OcDev/*" />
+        <prototype namespace="OcLegacy\" resource="../../src/OcLegacy/*" />
 
         <service id="Doctrine\DBAL\Connection" alias="database_connection" public="true" />
         <service id="League\CommonMark\CommonMarkConverter" />
 
-        <service class="AppBundle\Legacy\Security\LegacyAuthenticator" id="app.token_legacy_authenticator"/>
-
-        <service id="Oc\Session\SessionDataCookie" />
-
         <service id="Oc\Session\SessionDataInterface" alias="Oc\Session\SessionDataCookie" />
 
-        <service id="AppBundle\Form\UploadFieldNotesType">
-            <argument type="service" id="translator"/>
-
-            <tag name="form.type"/>
+        <service id="Oc\GeoCache\Controller\GeoCacheController">
+            <argument key="$secret">%secret%</argument>
         </service>
-
-        <service id="AppBundle\Service\FieldNoteService" autowire="false" public="true">
-            <argument type="service" id="doctrine.orm.default_entity_manager"/>
-            <argument type="service" id="translator"/>
-        </service>
-
-        <service id="AppBundle\Form\DataProvider\UploadFieldNotesDataProvider" autowire="false" public="true">
-            <argument type="service" id="AppBundle\Service\FieldNoteService"/>
-        </service>
-
-        <service class="Twig_Extensions_Extension_Text" id="twig.extension.text">
-            <tag name="twig.extension"/>
-        </service>
-
-        <service id="Oc\Translation\CrowdinExport" public="true" />
-        <service id="Oc\Translation\CrowdinImport" public="true" />
 
         <service id="Oc\GlobalContext\Provider\LanguageProvider">
             <argument key="$defaultLanguage">%locale%</argument>

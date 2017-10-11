@@ -93,7 +93,7 @@
     <div class="content2-container bg-blue02">
         <p class="content-title-noshade-size3">
             <img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" alt="" width="24" height="24" />
-            <a href="{$forum_url|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$forum_name|escape}New forum topcis (%1){/t}</a>
+            <a href="{$forum_link|escape}" style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$forum_name|escape}New forum topcis (%1){/t}</a>
         </p>
     </div>
     <div id="forum">

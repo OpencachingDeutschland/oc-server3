@@ -19,9 +19,10 @@ function getWaypoints($cacheId)
     global $waypointline;
     global $waypointlines;
     global $nowaypoints;
+    global $login;
 
     $wpHandler = new HandlerChildWp();
-    $wayPoints = $wpHandler->getChildWps($cacheId);
+    $wayPoints = $wpHandler->getChildWps($cacheId, $login->userid);
     $ret = '';
 
     if (!empty($wayPoints)) {

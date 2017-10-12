@@ -17,31 +17,21 @@ class ControllerChildWp
     const req_child_id = 'childid';
     const req_delete_id = 'deleteid';
 
+    /**
+     * @var RequestHttp
+     */
     private $request;
+
+    /**
+     * @var TranslatorLanguage
+     */
     private $translator;
 
-    public function __construct($request = false, $translator = false)
+
+    public function __construct(RequestHttp $request, TranslatorLanguage $translator)
     {
-        $this->request = $this->initRequest($request);
-        $this->translator = $this->initTranslator($translator);
-    }
-
-    private function initRequest($request)
-    {
-        if ($request) {
-            return $request;
-        }
-
-        return new RequestHttp();
-    }
-
-    private function initTranslator($translator)
-    {
-        if ($translator) {
-            return $translator;
-        }
-
-        return new TranslatorLanguage();
+        $this->request = $request;
+        $this->translator = $translator;
     }
 
     public function createPresenter($template, $cacheManager, $childWpHandler)

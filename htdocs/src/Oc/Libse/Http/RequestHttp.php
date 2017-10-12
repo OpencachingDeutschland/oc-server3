@@ -21,15 +21,15 @@ class RequestHttp
 
     public function get($key, $defaultValue = '')
     {
-        return self::getValue($this->valid_values, $key, $defaultValue);
+        return $this->getValue($this->valid_values, $key, $defaultValue);
     }
 
     public function getForValidation($key, $defaultValue = '')
     {
-        return self::getValue($this->raw_values, $key, $defaultValue);
+        return $this->getValue($this->raw_values, $key, $defaultValue);
     }
 
-    private static function getValue($values, $key, $defaultValue)
+    private function getValue($values, $key, $defaultValue)
     {
         if (array_key_exists($key, $values)) {
             return $values[$key];

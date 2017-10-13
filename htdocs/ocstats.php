@@ -51,7 +51,7 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
         $found = (int) $userData['found'];
         $hidden = (int) $userData['hidden'];
         $logo = (int) $userData['statpic_logo'];
-        $logoText = (int) $userData['statpic_text'];
+        $logoText = $userData['statpic_text'];
 
         $textCounterStatistic = $translate->t('Finds: %1  Hidden: %2', '', '', 0, '', 0, $lang);
         $textCounterStatistic = str_replace(['%1', '%2'], [$found, $hidden], $textCounterStatistic);

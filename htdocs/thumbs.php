@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $login->verify();
@@ -13,89 +15,100 @@ $showspoiler = isset($_REQUEST['showspoiler']) ? $_REQUEST['showspoiler'] + 0 : 
 $default_object_type = isset($_REQUEST['type']) && ($_REQUEST['type'] == 1 || $_REQUEST['type'] == 2) ? $_REQUEST['type'] + 0 : 1;
 
 if (($opt['debug'] & DEBUG_DEVELOPER) != DEBUG_DEVELOPER) {
-    $debug = 0;
+    $debug = false;
 }
 
-$rs = sql(
-    "SELECT `local`, `spoiler`, `url`, `thumb_last_generated`, `last_modified`, `unknown_format`, `uuid`, `thumb_url`, `object_type`, `object_id` FROM `pictures` WHERE `uuid`='&1'",
-    $uuid
+/** @var Doctrine\DBAL\Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+$r = $connection->fetchAssoc(
+    'SELECT `local`,
+            `spoiler`,
+            `url`,
+            `thumb_last_generated`,
+            `last_modified`,
+            `unknown_format`,
+            `uuid`,
+            `thumb_url`,
+            `object_type`,
+            `object_id`
+     FROM `pictures`
+     WHERE `uuid`= :uuid',
+    ['uuid' => $uuid]
 );
-$r = sql_fetch_array($rs);
-sql_free_result($rs);
 if ($r) {
     if ($r['object_type'] == 1) {
-        if (sql_value(
-            "SELECT COUNT(*)
-             FROM `cache_logs`
-             INNER JOIN `caches`
-               ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-             INNER JOIN `cache_status`
-               ON `caches`.`status`=`cache_status`.`id`
-             WHERE `cache_logs`.`id`='&1'
-             AND (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`='&2' OR '&3')",
-            0,
-            $r['object_id'],
-            $login->userid,
-            $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
-        ) == 0) {
-            if ($debug == 1) {
+        $check = (int) $connection
+            ->fetchColumn('SELECT COUNT(*)
+                           FROM `cache_logs`
+                           INNER JOIN `caches`
+                             ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+                           INNER JOIN `cache_status`
+                             ON `caches`.`status`=`cache_status`.`id`
+                           WHERE `cache_logs`.`id`=:id
+                           AND (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`= :userId OR :admin)',
+                [
+                    'id' => $r['object_id'],
+                    'userId' => $login->userid,
+                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+                ]
+            );
+
+        if ($check === 0) {
+            if ($debug) {
                 die('Debug: line ' . __LINE__);
-            } else {
-                $tpl->redirect(thumbpath('extern', 1));
             }
+            $tpl->redirect(thumbpath('extern', 1));
+
         }
     } elseif ($r['object_type'] == 2) {
-        if (sql_value(
-            "SELECT COUNT(*)
-             FROM `caches`
-             INNER JOIN `cache_status`
-               ON `caches`.`status`=`cache_status`.`id`
-             WHERE `caches`.`cache_id`='&1'
-             AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`='&2' OR '&3')",
-            0,
-            $r['object_id'],
-            $login->userid,
-            $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
-        ) == 0) {
-            if ($debug == 1) {
+        $check = (int) $connection
+            ->fetchColumn('SELECT COUNT(*)
+                           FROM `caches`
+                           INNER JOIN `cache_status`
+                             ON `caches`.`status`=`cache_status`.`id`
+                           WHERE `caches`.`cache_id`= :id
+                           AND (`cache_status`.`allow_user_view`=1 OR `caches`.`user_id`=:userId OR :admin)',
+                [
+                    'id' => $r['object_id'],
+                    'userId' => $login->userid,
+                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+                ]
+            );
+        if ($check === 0) {
+            if ($debug) {
                 die('Debug: line ' . __LINE__);
-            } else {
-                $tpl->redirect(thumbpath('extern', 2));
             }
+            $tpl->redirect(thumbpath('extern', 2));
         }
     } else {
-        if ($debug == 1) {
+        if ($debug) {
             die('Debug: line ' . __LINE__);
-        } else {
-            $tpl->redirect(thumbpath('intern', $default_object_type));
         }
+        $tpl->redirect(thumbpath('intern', $default_object_type));
     }
 
     if ($r['local'] == 0) {
-        if ($debug == 1) {
+        if ($debug) {
             die('Debug: line ' . __LINE__);
-        } else {
-            $tpl->redirect(thumbpath('extern', $r['object_type']));
         }
+        $tpl->redirect(thumbpath('extern', $r['object_type']));
     }
 
     if (($r['spoiler'] == 1) && ($showspoiler != 1)) {
-        if ($debug == 1) {
+        if ($debug) {
             die('Debug: line ' . __LINE__);
-        } else {
-            $tpl->redirect(thumbpath('spoiler', $r['object_type']));
         }
+        $tpl->redirect(thumbpath('spoiler', $r['object_type']));
     }
 
     $imgurl = $r['url'];
     $urlparts = mb_split('/', $imgurl);
 
     if (!file_exists($opt['logic']['pictures']['dir'] . '/' . $urlparts[count($urlparts) - 1])) {
-        if ($debug == 1) {
+        if ($debug) {
             die('Debug: line ' . __LINE__);
-        } else {
-            $tpl->redirect(thumbpath('intern', $r['object_type']));
         }
+        $tpl->redirect(thumbpath('intern', $r['object_type']));
     }
 
     // generate new thumb?
@@ -117,11 +130,10 @@ if ($r) {
 
     if ($bGenerate) {
         if ($r['unknown_format'] == 1) {
-            if ($debug == 1) {
+            if ($debug) {
                 die('Debug: line ' . __LINE__);
-            } else {
-                $tpl->redirect(thumbpath('format', $r['object_type']));
             }
+            $tpl->redirect(thumbpath('format', $r['object_type']));
         }
 
         // ok, let's see if the file format is supported
@@ -132,17 +144,14 @@ if ($r) {
         if (mb_strpos(';' . $opt['logic']['pictures']['extensions'] . ';', ';' . $extension . ';') === false) {
             sql("UPDATE `pictures` SET `unknown_format`=1 WHERE `uuid`='&1'", $r['uuid']);
 
-            if ($debug == 1) {
+            if ($debug) {
                 die('Debug: line ' . __LINE__);
-            } else {
-                $tpl->redirect(thumbpath('format', $r['object_type']));
             }
+            $tpl->redirect(thumbpath('format', $r['object_type']));
         }
 
-        if ($extension == 'jpeg') {
-            $extension = 'jpg';
-        }
         switch ($extension) {
+            case 'jpeg':
             case 'jpg':
                 $im = imagecreatefromjpeg($opt['logic']['pictures']['dir'] . '/' . $filename);
                 break;
@@ -161,14 +170,13 @@ if ($r) {
                 break;
         }
 
-        if ($im == '') {
+        if (!isset($im)) {
             sql("UPDATE `pictures` SET `unknown_format`=1 WHERE `uuid`='&1'", $r['uuid']);
 
-            if ($debug == 1) {
+            if ($debug) {
                 die('Debug: line ' . __LINE__);
-            } else {
-                $tpl->redirect(thumbpath('format', $r['object_type']));
             }
+            $tpl->redirect(thumbpath('format', $r['object_type']));
         }
 
         $imheight = imagesy($im);
@@ -224,6 +232,7 @@ if ($r) {
             . mb_substr($filename, 1, 1);
 
         switch ($extension) {
+            case 'jepg':
             case 'jpg':
                 imagejpeg($thumbimage, $savedir . '/' . $filename);
                 break;
@@ -251,32 +260,29 @@ if ($r) {
             $r['uuid']
         );
 
-        if ($debug == 1) {
+        if ($debug) {
             die($opt['logic']['pictures']['thumb_url'] . '/' . $filename);
-        } else {
-            $tpl->redirect(
-                use_current_protocol(
-                    $opt['logic']['pictures']['thumb_url'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr(
-                        $filename,
-                        1,
-                        1
-                    ) . '/' . $filename
-                )
-            );
         }
+        $tpl->redirect(
+            use_current_protocol(
+                $opt['logic']['pictures']['thumb_url'] . '/' . mb_substr($filename, 0, 1) . '/' . mb_substr(
+                    $filename,
+                    1,
+                    1
+                ) . '/' . $filename
+            )
+        );
     } else {
-        if ($debug == 1) {
+        if ($debug) {
             die($r['thumb_url']);
-        } else {
-            $tpl->redirect(use_current_protocol($r['thumb_url']));
         }
+        $tpl->redirect(use_current_protocol($r['thumb_url']));
     }
 } else {
-    if ($debug == 1) {
+    if ($debug) {
         die('Debug: line ' . __LINE__);
-    } else {
-        $tpl->redirect(thumbpath('404', $default_object_type));
     }
+    $tpl->redirect(thumbpath('404', $default_object_type));
 }
 
 

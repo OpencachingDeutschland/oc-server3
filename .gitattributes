@@ -1,1 +1,3 @@
 *.php eol=lf
+htdocs/resource2/ocstyle/js/* linguist-vendored
+htdocs/resource2/tinymce/* linguist-vendored

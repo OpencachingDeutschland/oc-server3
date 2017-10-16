@@ -1,22 +1,13 @@
 <?php
 
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__ . '/lib2/web.inc.php';
 $login->verify();
-$env = 'prod';
-$debug = true;
-
-if (isset($opt['debug']) && $opt['debug']) {
-    $env = 'dev';
-    $debug = true;
-    Debug::enable();
-}
 
 $loader = require __DIR__ . '/app/autoload.php';
 
-$kernel = new AppKernel($env, $debug);
+$kernel = AppKernel::getInstance();
 $request = Request::createFromGlobals();
 
 $locale = strtolower($opt['template']['locale']);

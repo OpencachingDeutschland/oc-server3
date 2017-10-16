@@ -12,7 +12,10 @@
  *  to the root.
  ***************************************************************************/
 
+use Symfony\Component\Debug\Debug;
+
 // setup rootpath
+
 if (!isset($opt['rootpath'])) {
     $opt['rootpath'] = __DIR__ . '/';
 }
@@ -25,6 +28,21 @@ $opt['gui'] = GUI_HTML;
 
 // include the main library
 require_once __DIR__ . '/common.inc.php';
+
+
+//Bootstrap kernel
+$env = 'prod';
+// at the moment important for live instance
+// has to be analyzed why
+$debug = true;
+
+if (isset($opt['debug']) && $opt['debug']) {
+    $env = 'dev';
+    Debug::enable();
+}
+
+$kernel = new AppKernel($env, $debug);
+$kernel->boot();
 
 // enforce http or https?
 if (!isset($disable_oc_https_redirect) || !$disable_oc_https_redirect) {

@@ -1413,6 +1413,22 @@ function dbv_167()
     sql("DELETE FROM `sys_cron` WHERE `name` = 'okapi_cleanup'");
 }
 
+function dbv_168()
+{
+    // add nuts entity display selection to countries
+    if (!sql_field_exists('countries', 'adm_display2')) {
+        sql('ALTER TABLE `countries` ADD COLUMN `adm_display2` TINYINT(1) NOT NULL');
+    }
+    if (!sql_field_exists('countries', 'adm_display3')) {
+        sql('ALTER TABLE `countries` ADD COLUMN `adm_display3` TINYINT(1) NOT NULL');
+    }
+
+    // improve some NUTS 2 entity names
+    sql("UPDATE `cache_location` SET `adm3`='Burgenland' WHERE `code3`='AT11'");
+    sql("UPDATE `cache_location` SET `adm3`='Prov. Limburg' WHERE `code3`='BE22'");
+    sql("UPDATE `cache_location` SET `adm3`='Luxembourg' WHERE `code3`='BE34'");
+}
+
 
 // When adding new mutations, take care that they behave well if run multiple
 // times. This improves robustness of database versioning.

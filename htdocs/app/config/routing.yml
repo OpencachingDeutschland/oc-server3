@@ -1,3 +1,7 @@
-app:
-    resource: "@AppBundle/Controller/"
+oc:
+    resource: "../../src/Oc/"
+    type:     annotation
+
+oc_dev:
+    resource: "../../src/OcDev/"
     type:     annotation

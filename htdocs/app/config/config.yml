@@ -3,8 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.xml }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: de
 
@@ -25,7 +23,7 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        storage_id: session.storage.php_bridge
+        storage_id: session.storage.native
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         #handler_id:  session.handler.native_file
         #save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
@@ -49,17 +47,19 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        # Mapping is currently for the doctrine entities in the Oc namespace.
+        # Will be removed with my upcoming refactoring of field-notes.
+        mappings:
+            Oc:
+                type: annotation
+                prefix: Oc\
+                dir: '%kernel.project_dir%/src/Oc/'
+                is_bundle: false
         dql:
             string_functions:
                 ifelse: DoctrineExtensions\Query\Mysql\IfElse
@@ -82,7 +82,7 @@ jms_translation:
     configs:
         app:
             output_format: yml
-            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src/AppBundle"]
+            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
             output_dir: "%kernel.root_dir%/Resources/translations"
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]

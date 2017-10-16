@@ -52,6 +52,7 @@ if (!$tpl->is_cached()) {
         $tpl->assign('forum_enabled', true);
         $tpl->assign('forum', $getNew->feedForSmarty('forum'));
         $tpl->assign('forum_url', $opt['forum']['url']);
+        $tpl->assign('forum_link', $opt['forum']['link']);
         $tpl->assign('forum_name', $opt['forum']['name']);
     } else {
         $tpl->assign('forum_enabled', false);

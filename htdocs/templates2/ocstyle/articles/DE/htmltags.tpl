@@ -20,7 +20,7 @@
 
     <p><b>Die folgenden HTML-Tags sind erlaubt:</b></p>
 
-    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, article<sup>1</sup>, aside<sup>1</sup>, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i><sup>1</sup>, h1, h2, h3, h4, h5, h6, header<sup>1</sup>, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, strike<sup>1</sup>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
+    <p class="indent">!--, a, abbr, <i>acronym</i>, address, area, b, bdo, <i>big</i>, blockquote, br, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, <i>font</i><sup>1</sup>, h1, h2, h3, h4, h5, h6, hr, i, img, ins, kbd, legend, li, map, ol, p, pre, q, samp, small, span, strike<sup>1</sup>, strong, sub, sup, table, tbody, td, th, thead, tfoot, tr, <i>tt</i>, u, ul, var<br />
     </p>
 
     <p><b>Ersatz für nicht erlaubte oder veraltete Tags:</b></p>
@@ -34,7 +34,7 @@
     </p>
 
     <p>
-        <sup>1</sup> Wird beim Speichern in andere Elemente umgewandelt.<br />
+        <sup>1</sup> Wird im Eingabemodus „Editor“ in andere Elemente umgewandelt.<br />
         <br />
     </p>
 
@@ -93,18 +93,19 @@
     <p><b>Die folgenden CSS-Stile sind erlaubt:</b></p>
 
     <p class="html_css">background, background-attachment, background-color, background-image, <span class="nowrap">background-position,</span> <span class="nowrap">background-repeat</span></p>
-    <p class="html_css">border, border-bottom, border-bottom-color, border-bottom-style, <span class="nowrap">border-bottom-width,</span> <span class="nowrap">border-collapse,</span> <span class="nowrap">border-left,</span> <span class="nowrap">border-left-color,</span> <span class="nowrap">border-left-style,</span> <span class="nowrap">border-left-width,</span> <span class="nowrap">border-right,</span> <span class="nowrap">border-right-color,</span> <span class="nowrap">border-right-style,</span> <span class="nowrap">border-right-width,</span> <span class="nowrap">border-spacing</p>
+    <p class="html_css">border, border-bottom, border-bottom-color, border-bottom-style, <span class="nowrap">border-bottom-width,</span> <span class="nowrap">border-collapse,</span> <span class="nowrap">border-color</span> <span class="nowrap">border-left,</span> <span class="nowrap">border-left-color,</span> <span class="nowrap">border-left-style,</span> <span class="nowrap">border-left-width,</span> <span class="nowrap">border-right,</span> <span class="nowrap">border-right-color,</span> <span class="nowrap">border-right-style,</span> <span class="nowrap">border-right-width,</span> <span class="nowrap">border-spacing</span> <span class="nowrap">border-style</span> <span class="nowrap">border-top,</span> <span class="nowrap">border-top-color,</span> <span class="nowrap">border-top-style</span> <span class="nowrap">border-width</span></p>
     <p class="html_css">caption-side<br />
     <p class="html_css">clear</p>
     <p class="html_css">color</p>
     <p class="html_css">display</p>
     <p class="html_css">float</p>
-    <p class="html_css">font, font-family, font-size, font-variant, font-weight</p>
+    <p class="html_css">font, font-family, font-size, font-style, font-variant, font-weight</p>
     <p class="html_css">height</p>
     <p class="html_css">letter-spacing</p>
     <p class="html_css">line-height</p>
     <p class="html_css">list-style, list-style-image, list-style-position, list-style-type</p>
     <p class="html_css">margin, margin-bottom, margin-left, margin-right, margin-top</p>
+    <p class="html_css">min-height, max-height, min-width, max-width</p>
     <p class="html_css">padding, padding-bottom, padding-left, padding-right, padding-top</p>
     <p class="html_css">table-layout</p>
     <p class="html_css">text-align, text-decoration, text-indent, text-transform</p>

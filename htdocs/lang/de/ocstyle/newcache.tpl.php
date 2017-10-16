@@ -99,8 +99,15 @@ function toggleAttr(id)
     {
         if (maAttributes[i][0] == id)
         {
-            if (maAttributes[i][1] == 0)
+            if (maAttributes[i][1] == 0) {
                 maAttributes[i][1] = 1;
+                for (a = 0; a < maAttributes[i][4].length; a++)
+                    for (n = 0; n < maAttributes.length; n++)
+                        if (maAttributes[n][0] == maAttributes[i][4][a]) {
+                            maAttributes[n][1] = 0;
+                            break;
+                        }
+            }
             else
                 maAttributes[i][1] = 0;
 

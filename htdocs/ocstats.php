@@ -1,33 +1,40 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- *
- *  Create / redirect to statpic
+ * create / redirect to statpic
  ***************************************************************************/
+
+use Doctrine\DBAL\Connection;
 
 require __DIR__ . '/lib2/web.inc.php';
 
-// Parameter
-$jpeg_qualitaet = 80;
-$fontfile = __DIR__ . '/resource2/' . $opt['template']['style'] . '/fonts/dejavu/ttf/DejaVuSans.ttf';
+$jpegQuality = 80;
+$fontFile = __DIR__ . '/resource2/' . $opt['template']['style'] . '/fonts/dejavu/ttf/DejaVuSans.ttf';
 
-// get userid and style from URL
-$userid = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+$userId = isset($_REQUEST['userid']) ? (int) $_REQUEST['userid'] : 0;
 $lang = isset($_REQUEST['lang']) ? mb_strtoupper($_REQUEST['lang']) : $opt['template']['locale'];
 
 if (!isset($opt['locale'][$lang])) {
     $lang = $opt['template']['locale'];
 }
 
-$filename = GetFilename($userid, $lang);
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
 
-if (!file_exists($filename) ||
-    sql_value("SELECT COUNT(*) FROM `user_statpic` WHERE `user_id`='&1' AND `lang`='&2'", 0, $userid, $lang) == 0
-) {
-    // get detailed info from DB
-    $rs = sql(
-        "SELECT `user`.`username`,
+$fileName = __DIR__ . '/images/statpics/statpic' . $userId . $lang . '.jpg';
+$userStatisticPicture = (int) $connection->createQueryBuilder()
+    ->select('COUNT(*)')
+    ->from('user_statpic')
+    ->where('user_id = :userId')
+    ->andWhere('lang = :lang')
+    ->setParameter('userId', $userId)
+    ->setParameter('lang', $lang)
+    ->execute()
+    ->fetchColumn();
+
+if ($userStatisticPicture === 0 || !file_exists($fileName)) {
+    $userData = $connection->fetchAssoc(
+        'SELECT `user`.`username`,
                 `stat_user`.`hidden`,
                 `stat_user`.`found`,
                 `user`.`statpic_logo`,
@@ -35,47 +42,47 @@ if (!file_exists($filename) ||
          FROM `user`
          LEFT JOIN `stat_user`
            ON `user`.`user_id`=`stat_user`.`user_id`
-         WHERE `user`.`user_id`='&1'",
-        $userid
-    );
-    if (sql_num_rows($rs) == 1) {
-        $record = sql_fetch_array($rs);
-        $username = $record['username'];
-        $found = isset($record['found']) ? $record['found'] : 0;
-        $hidden = isset($record['hidden']) ? $record['hidden'] : 0;
-        $logo = isset($record['statpic_logo']) ? $record['statpic_logo'] : 0;
-        $logotext = isset($record['statpic_text']) ? $record['statpic_text'] : 'Opencaching';
+         WHERE `user`.`user_id`= :userId',
+        ['userId' => $userId]
+        );
 
-        $text_counterstat = $translate->t('Finds: %1  Hidden: %2', '', '', 0, '', 0, $lang);
-        $text_counterstat = str_replace('%1', $found, $text_counterstat);
-        $text_counterstat = str_replace('%2', $hidden, $text_counterstat);
+    if (is_array($userData)) {
+        $username = $userData['username'];
+        $found = (int) $userData['found'];
+        $hidden = (int) $userData['hidden'];
+        $logo = (int) $userData['statpic_logo'];
+        $logoText = $userData['statpic_text'];
+
+        $textCounterStatistic = $translate->t('Finds: %1  Hidden: %2', '', '', 0, '', 0, $lang);
+        $textCounterStatistic = str_replace(['%1', '%2'], [$found, $hidden], $textCounterStatistic);
     } else {
-        $userid = 0;
+        $userId = 0;
         $username = $translate->t('<User not known>', '', '', 0, '', 0, $lang);
         $found = 0;
         $hidden = 0;
         $logo = 0;
-        $logotext = 'Opencaching';
+        $logoText = 'Opencaching';
     }
-    sql_free_result($rs);
-
-    $filename = GetFilename($userid, $lang);
 
     // Bild existiert nicht => neu erstellen
-    $rs = sql("SELECT `tplpath`, `maxtextwidth` FROM `statpics` WHERE `id`='&1'", $logo);
+    $statPics = $connection->createQueryBuilder()
+        ->select('tplpath, maxtextwidth')
+        ->from('statpics')
+        ->where('id = :id')
+        ->setParameter(':id', $logo)
+        ->execute()
+        ->fetch(PDO::FETCH_ASSOC);
 
-    if (sql_num_rows($rs) == 1) {
-        $record = sql_fetch_array($rs);
-        $tplpath = $opt['rootpath'] . $record['tplpath'];
-        $maxtextwidth = $record['maxtextwidth'];
+    if (is_array($statPics)) {
+        $tplPath = $opt['rootpath'] . $statPics['tplpath'];
+        $maxTextWidth = $statPics['maxtextwidth'];
     } else {
-        $tplpath = __DIR__ . '/images/ocstats1.gif';
-        $maxtextwidth = 60;
+        $tplPath = __DIR__ . '/images/ocstats1.gif';
+        $maxTextWidth = 60;
         $logo = 1;
     }
-    sql_free_result($rs);
 
-    $im = imagecreatefromgif($tplpath);
+    $im = imagecreatefromgif($tplPath);
     $clrWhite = imagecolorallocate($im, 255, 255, 255);
     $clrBorder = imagecolorallocate($im, 70, 70, 70);
     $clrBlack = imagecolorallocate($im, 0, 0, 0);
@@ -87,51 +94,51 @@ if (!file_exists($filename) ||
         case 5:
         case 10:
             // write text
-            $fontsize = 10;
+            $fontSize = 10;
             $text = $username;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
-            $fontsize = 7.5;
-            $text = $text_counterstat;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $text);
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
+            $fontSize = 7.5;
+            $text = $textCounterStatistic;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 32, $clrBlack, $fontFile, $text);
             break;
         case 2:
             // write text
-            $fontsize = 10;
+            $fontSize = 10;
             $text = $username;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
-            $fontsize = 7;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $logotext);
-            $fontsize = 7.5;
-            $text = $text_counterstat;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $text);
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
+            $fontSize = 7;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $logoText);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 29, $clrBlack, $fontFile, $logoText);
+            $fontSize = 7.5;
+            $text = $textCounterStatistic;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 45, $clrBlack, $fontFile, $text);
             break;
         case 6:
         case 7:
         case 11:
             // write text
-            $fontsize = 10;
+            $fontSize = 10;
             $text = $username;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
-            $fontsize = 7.5;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 32, $clrBlack, $fontfile, $logotext);
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
+            $fontSize = 7.5;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $logoText);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 32, $clrBlack, $fontFile, $logoText);
             break;
         case 8:
             // write text
-            $fontsize = 10;
+            $fontSize = 10;
             $text = $username;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 8 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 8 : $maxtextwidth, 20, $clrBlack, $fontfile, $text);
-            $fontsize = 8;
-            $text = $text_counterstat;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 12 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 12 : $maxtextwidth, 39, $clrBlack, $fontfile, $text);
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 8 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 8 : $maxTextWidth, 20, $clrBlack, $fontFile, $text);
+            $fontSize = 8;
+            $text = $textCounterStatistic;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 12 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 12 : $maxTextWidth, 39, $clrBlack, $fontFile, $text);
 
             $drawRectangle = false;
 
@@ -140,41 +147,33 @@ if (!file_exists($filename) ||
         case 9:
         default:
             // write text
-            $fontsize = 10;
+            $fontSize = 10;
             $text = $username;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 15, $clrBlack, $fontfile, $text);
-            $fontsize = 7;
-            $text = $text_counterstat;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $text);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 29, $clrBlack, $fontfile, $text);
-            $fontsize = 8;
-            $textsize = imagettfbbox($fontsize, 0, $fontfile, $logotext);
-            imagettftext($im, $fontsize, 0, (imagesx($im) - ($textsize[2] - $textsize[0]) - 5 > $maxtextwidth) ? imagesx($im) - ($textsize[2] - $textsize[0]) - 5 : $maxtextwidth, 45, $clrBlack, $fontfile, $logotext);
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
+            $fontSize = 7;
+            $text = $textCounterStatistic;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 29, $clrBlack, $fontFile, $text);
+            $fontSize = 8;
+            $textSize = imagettfbbox($fontSize, 0, $fontFile, $logoText);
+            imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 45, $clrBlack, $fontFile, $logoText);
     }
 
-    if ($drawRectangle == true) {
+    if ($drawRectangle === true) {
         // draw border
         imagerectangle($im, 0, 0, imagesx($im) - 1, imagesy($im) - 1, $clrBorder);
     }
     // write output
-    imagejpeg($im, $filename, $jpeg_qualitaet);
+    imagejpeg($im, $fileName, $jpegQuality);
     imagedestroy($im);
 
-    sql(
-        "INSERT INTO `user_statpic` (`user_id`, `lang`)
-         VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `date_created`=NOW()",
-        $userid,
-        $lang
+    $connection->executeQuery(
+        'INSERT INTO `user_statpic` (`user_id`, `lang`)
+         VALUES (:userId, :lang) ON DUPLICATE KEY UPDATE `date_created`=NOW()',
+        ['userId'=> $userId, 'lang' => $lang]
     );
 }
 
-// Redirect auf das gespeicherte Bild
-$tpl->redirect('images/statpics/statpic' . $userid . $lang . '.jpg');
-
-function GetFilename($userid, $lang)
-{
-    global $opt;
-
-    return __DIR__ . '/images/statpics/statpic' . $userid . $lang . '.jpg';
-}
+// redirect to the generated statistics picture
+$tpl->redirect('images/statpics/statpic' . $userId . $lang . '.jpg');

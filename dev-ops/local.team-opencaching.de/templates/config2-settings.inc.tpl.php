@@ -8,9 +8,6 @@ $dev_basepath = '/var/www/html/';
 $dev_codepath = '*';
 $dev_baseurl = '__FRONTEND_URL__';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
 // enable HTTPS
 if (defined('HTTPS_ENABLED')) {
     $opt['page']['https']['mode'] = HTTPS_ENABLED;
@@ -124,7 +121,8 @@ $opt['page']['sponsor']['popup'] = '';
 
 /* forum news integration (index.php)
  */
-$opt['forum']['url'] = 'http://forum.opencaching.de';
+$opt['forum']['url'] = 'https://forum.opencaching.de/index.php?action=.xml;type=rss;limit=10';
+$opt['forum']['link'] = 'http://forum.opencaching.de';
 $opt['forum']['name'] = 'forum.opencaching.de';
 
 /* Well known node id's - required for synchronization

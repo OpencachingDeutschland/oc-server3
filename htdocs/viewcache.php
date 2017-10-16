@@ -146,9 +146,23 @@ $rs = sql(
             `user`.`username` AS `username`,
             IFNULL(`cache_location`.`code1`, '') AS `code1`,
             IFNULL(`trans2`.`text`, IFNULL(`cache_location`.`adm1`,'')) AS `adm1`,
-            IFNULL(`cache_location`.`adm2`, '') AS `adm2`,
-            IFNULL(`cache_location`.`adm3`, '') AS `adm3`,
-            IFNULL(`cache_location`.`adm4`, '') AS `adm4`
+            IF(
+                `countries`.`adm_display2`=2, `cache_location`.`adm2`,
+                IF (
+                    `countries`.`adm_display2`=3, `cache_location`.`adm3`,
+                    IF (
+                        `countries`.`adm_display2`=4, `cache_location`.`adm4`,
+                        NULL
+                    )
+                )
+            ) AS `adm2`,
+            IF (
+                `countries`.`adm_display3`=3, `cache_location`.`adm3`,
+                IF (
+                    `countries`.`adm_display3`=4, `cache_location`.`adm4`,
+                    NULL
+                )
+            ) AS `adm3`
      FROM `caches`
      INNER JOIN `user`
        ON `caches`.`user_id`=`user`.`user_id`

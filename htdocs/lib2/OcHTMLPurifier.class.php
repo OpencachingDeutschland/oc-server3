@@ -59,7 +59,15 @@ class OcHTMLPurifier extends HTMLPurifier
         $config->set('CSS.AllowTricky', true); // + display, visibility, overflow
         $config->set('CSS.ForbiddenProperties', 'overflow'); // - overflow
 
-        // prepare additional definitions
+        // disable tags
+        $config->set(
+            'HTML.ForbiddenElements',
+            [
+                'basefont',   // workaround for HTMLPurifier bug, which allows this in the <body>
+            ]
+        );
+
+        // prepare additional tag and attibute definitions
         $def = $config->getHTMLDefinition(true);
 
         // add tags
@@ -88,8 +96,9 @@ class OcHTMLPurifier extends HTMLPurifier
         $def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', ['name' => 'ID']);
 
         // add attributes
-        $def->addAttribute('img', 'usemap', 'CDATA');
         $def->addAttribute('a', 'rel', 'CDATA');
+        $def->addAttribute('img', 'usemap', 'CDATA');
+        $def->addAttribute('map', 'name', 'CDATA');   // workaround for HTMLPurifer bug
 
         // create parent object with config
         parent::__construct($config);

@@ -92,7 +92,13 @@ function editcomment(edit)
             <tr><td colspan="5">&nbsp;</td></tr>
             <tr><td colspan=5>{t}No reported caches{/t}</td></tr>
         {/foreach}
-            <tr><td colspan="5">last closed cache reports</td></tr>
+        </table>
+        {if $reportedcaches != NULL and $otheradmins==0}
+            <p style="line-height: 2.5m;">{t}(*) New reports{/t}</p>
+        {/if}
+
+        <table class="narrowtable">
+            <tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
         {foreach from=$lastClosedReportedCaches item=rc}
             <tr>
             {if $rc.otheradmin > $otheradmins}
@@ -109,13 +115,10 @@ function editcomment(edit)
                 <td>{$rc.adminname|escape}</td>
             {/if}
             <td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.date}</td></tr>
-        {foreachelse}
+            {foreachelse}
             <tr><td colspan=5>No closed cache reports</td></tr>
         {/foreach}
         </table>
-        {if $reportedcaches != NULL and $otheradmins==0}
-            <p style="line-height: 2.5m;">{t}(*) New reports{/t}</p>
-        {/if}
     {else}
         <table class="table" style="width:98%">
             <tr>

@@ -119,7 +119,28 @@ if ($id === 0) {
         ['userId' => $login->userid]
     );
 
+    $lastClosedReportedCaches = $connection->fetchAll(
+        'SELECT `cr`.`id`,
+                IF(`cr`.`status`=1,\'(*) \', \'\') AS `new`,
+                `c`.`name`,
+                `u2`.`username` AS `ownernick`,
+                `u`.`username`,
+                IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),\'.\'),`u3`.`username`) AS `adminname`,
+                `cr`.`lastmodified`,
+                `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!= :userId AS otheradmin
+         FROM `cache_reports` `cr`
+         INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
+         INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
+         INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
+         LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
+         WHERE `cr`.`status` = 3
+         ORDER BY `cr`.`lastmodified` DESC
+         LIMIT 100',
+        ['userId' => $login->userid]
+    );
+
     $tpl->assign('reportedcaches', $rs);
+    $tpl->assign('lastClosedReportedCaches', $lastClosedReportedCaches);
     $tpl->assign('list', true);
 } else {
     // show details of a report

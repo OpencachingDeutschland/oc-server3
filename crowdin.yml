@@ -1,0 +1,3 @@
+files:
+  - source: /htdocs/app/Resources/translations/*en.yml
+    translation: /htdocs/app/Resources/translations/%file_name%.%two_letters_code%.yml

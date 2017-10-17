@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'adminreports';
@@ -11,7 +13,7 @@ $tpl->menuitem = MNU_ADMIN_REPORTS;
 $error = 0;
 
 $login->verify();
-if ($login->userid == 0) {
+if ($login->userid === 0) {
     $tpl->redirect_login();
 }
 
@@ -19,46 +21,65 @@ if (($login->admin & ADMIN_USER) != ADMIN_USER) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
-$id = isset($_REQUEST['id']) ? $_REQUEST['id'] + 0 : 0;
-$rid = isset($_REQUEST['rid']) ? $_REQUEST['rid'] + 0 : 0;
-$cacheid = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : 0;
-$ownerid = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] + 0 : 0;
-$reporterid = sql_value("SELECT `userid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
-$adminid = sql_value("SELECT `adminid` FROM `cache_reports` WHERE `id`=&1", 0, $rid);
-$age = sql_value("SELECT DATEDIFF(NOW(),`lastmodified`) FROM `cache_reports` WHERE `id`=&1", 0, $rid);
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+
+$id = (int) isset($_REQUEST['id']) ? $_REQUEST['id'] : 0;
+$rId = (int) isset($_REQUEST['rid']) ? $_REQUEST['rid'] : 0;
+$cacheId = (int) isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] : 0;
+$ownerId = (int) isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
+
+$reportData = $connection
+    ->fetchAssoc(
+        'SELECT `userid`, `adminid`, DATEDIFF(NOW(),`lastmodified`) AS age 
+         FROM `cache_reports`
+         WHERE `id`= :id',
+        ['id' => $rId]
+    );
+
+$reporterId = (int) $reportData['userid'];
+$adminId = (int) $reportData['adminid'];
+$age = $reportData['age'];
 
 if (isset($_REQUEST['savecomment'])) {
     $comment = isset($_REQUEST['commenteditor']) ? $_REQUEST['commenteditor'] : '';
-    $id = $rid;
-    sql(
-        "UPDATE `cache_reports`
-         SET `comment`='&2'
-         WHERE `id`='&1'",
-        $id,
-        $comment
+    $id = $rId;
+    $connection->update(
+        'cache_reports',
+        ['comment' => $comment],
+        ['id' => $id]
     );
-} elseif (isset($_REQUEST['assign']) && $rid > 0 &&
-    ($adminid == 0 || $adminid == $login->userid || ($adminid != $login->userid && $age >= 14))
+} elseif (
+    isset($_REQUEST['assign']) &&
+    $rId > 0 &&
+    ($adminId === 0 || $adminId === $login->userid || ($adminId !== $login->userid && $age >= 14))
 ) {
-    sql("UPDATE `cache_reports` SET `status`=2, `adminid`=&2 WHERE `id`=&1", $rid, $login->userid);
-    $tpl->redirect('adminreports.php?id=' . $rid);
-} elseif (isset($_REQUEST['contact']) && $ownerid > 0) {
-    $wp_oc = sql_value("SELECT `wp_oc` FROM `caches` WHERE `cache_id`='&1'", '', $cacheid);
-    $tpl->redirect('mailto.php?userid=' . urlencode($ownerid) . '&wp=' . $wp_oc);
-} elseif (isset($_REQUEST['contact_reporter']) && $reporterid > 0) {
-    $tpl->redirect('mailto.php?userid=' . urlencode($reporterid) . '&reportid=' . $rid);
-} elseif (isset($_REQUEST['done']) && $adminid == $login->userid) {
-    sql("UPDATE `cache_reports` SET `status`=3 WHERE `id`=&1", $rid);
-    $tpl->redirect('adminreports.php?id=' . $rid);
-} elseif (isset($_REQUEST['assign']) && ($adminid == 0 || $adminid != $login->userid)) {
+    $connection->update(
+        'cache_reports',
+        [
+            'status' => 2,
+            'adminid' => $login->userid,
+        ],
+        ['id' => $rId]
+    );
+    $tpl->redirect('adminreports.php?id=' . $rId);
+} elseif (isset($_REQUEST['contact']) && $ownerId > 0) {
+    $wp_oc = sql_value("SELECT `wp_oc` FROM `caches` WHERE `cache_id`='&1'", '', $cacheId);
+    $tpl->redirect('mailto.php?userid=' . urlencode($ownerId) . '&wp=' . $wp_oc);
+} elseif (isset($_REQUEST['contact_reporter']) && $reporterId > 0) {
+    $tpl->redirect('mailto.php?userid=' . urlencode($reporterId) . '&reportid=' . $rId);
+} elseif (isset($_REQUEST['done']) && $adminId == $login->userid) {
+    sql("UPDATE `cache_reports` SET `status`=3 WHERE `id`=&1", $rId);
+    $tpl->redirect('adminreports.php?id=' . $rId);
+} elseif (isset($_REQUEST['assign']) && ($adminId === 0 || $adminId !== $login->userid)) {
     $error = 1;
     $id = 0;
-    if ($rid > 0) {
-        $id = $rid;
+    if ($rId > 0) {
+        $id = $rId;
     }
-} elseif (isset($_REQUEST['assign']) && $adminid == $login->userid) {
+} elseif (isset($_REQUEST['assign']) && $adminId === $login->userid) {
     $error = 2;
-    $id = $rid;
+    $id = $rId;
 } elseif (isset($_REQUEST['statusActive']) ||
     isset($_REQUEST['statusTNA']) ||
     isset($_REQUEST['statusArchived']) ||
@@ -66,53 +87,73 @@ if (isset($_REQUEST['savecomment'])) {
     isset($_REQUEST['statusLockedVisible']) ||
     isset($_REQUEST['statusLockedInvisible'])
 ) {
-    if ($adminid == 0) {
-        $id = $rid;
+    if ($adminId === 0) {
+        $id = $rId;
         $error = 4;
-    } elseif ($adminid != $login->userid) {
-        $id = $rid;
+    } elseif ($adminId !== $login->userid) {
+        $id = $rId;
         $error = 3;
     }
 }
 
-if ($id == 0) {
+if ($id === 0) {
     // no details, show list of reported caches
-    $rs = sql(
-        "SELECT `cr`.`id`,
-                IF(`cr`.`status`=1,'(*) ', '') AS `new`,
+    $rs = $connection->fetchAll(
+        'SELECT `cr`.`id`,
+                IF(`cr`.`status`=1,\'(*) \', \'\') AS `new`,
                 `c`.`name`,
                 `u2`.`username` AS `ownernick`,
                 `u`.`username`,
-                IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),'.'),`u3`.`username`) AS `adminname`,
+                IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),\'.\'),`u3`.`username`) AS `adminname`,
                 `cr`.`lastmodified`,
-                `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!=&1 AS otheradmin
+                `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!= :userId AS otheradmin
          FROM `cache_reports` `cr`
          INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
          INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
          INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
          LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
          WHERE `cr`.`status` < 3
-         ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid` = &1) DESC,
+         ORDER BY (`cr`.`adminid` IS NULL OR `cr`.`adminid` = :userId) DESC,
                   `cr`.`status` ASC,
-                  `cr`.`lastmodified` ASC",
-        $login->userid
+                  `cr`.`lastmodified` ASC',
+        ['userId' => $login->userid]
     );
 
-    $tpl->assign_rs('reportedcaches', $rs);
-    sql_free_result($rs);
+    $lastClosedReportedCaches = $connection->fetchAll(
+        'SELECT `cr`.`id`,
+                IF(`cr`.`status`=1,\'(*) \', \'\') AS `new`,
+                `c`.`name`,
+                `u2`.`username` AS `ownernick`,
+                `u`.`username`,
+                IF(LENGTH(`u3`.`username`)>10, CONCAT(LEFT(`u3`.`username`,9),\'.\'),`u3`.`username`) AS `adminname`,
+                `cr`.`lastmodified`,
+                `cr`.`adminid` IS NOT NULL AND `cr`.`adminid`!= :userId AS otheradmin
+         FROM `cache_reports` `cr`
+         INNER JOIN `caches` `c` ON `c`.`cache_id` = `cr`.`cacheid`
+         INNER JOIN `user` `u` ON `u`.`user_id`  = `cr`.`userid`
+         INNER JOIN `user` AS `u2` ON `u2`.`user_id`=`c`.`user_id`
+         LEFT JOIN `user` AS `u3` ON `u3`.`user_id`=`cr`.`adminid`
+         WHERE `cr`.`status` = 3
+         ORDER BY `cr`.`lastmodified` DESC
+         LIMIT 100',
+        ['userId' => $login->userid]
+    );
+
+    $tpl->assign('reportedcaches', $rs);
+    $tpl->assign('lastClosedReportedCaches', $lastClosedReportedCaches);
     $tpl->assign('list', true);
 } else {
     // show details of a report
-    $rs = sql(
-        "SELECT `cr`.`id`, `cr`.`cacheid`, `cr`.`userid`,
+    $record = $connection->fetchAssoc(
+        'SELECT `cr`.`id`, `cr`.`cacheid`, `cr`.`userid`,
                 `u1`.`username` AS `usernick`,
                 IFNULL(`cr`.`adminid`, 0) AS `adminid`,
-                IFNULL(`u2`.`username`, '') AS `adminnick`,
+                IFNULL(`u2`.`username`, \'\') AS `adminnick`,
                 IFNULL(`tt2`.`text`, `crr`.`name`) AS `reason`,
                 `cr`.`note`,
                 IFNULL(tt.text, crs.name) AS `status`,
-                `cr`.`status`='&2' AS `inprogress`,
-                `cr`.`status`='&3' AS `closed`,
+                `cr`.`status`= :inProgress AS `inprogress`,
+                `cr`.`status`= :done AS `closed`,
                 `cr`.`date_created`, `cr`.`lastmodified`,
                 `c`.`name` AS `cachename`,
                 `c`.`user_id` AS `ownerid`,
@@ -124,16 +165,18 @@ if ($id == 0) {
          LEFT JOIN `user` AS `u1` ON `u1`.`user_id`=`cr`.`userid`
          LEFT JOIN `user` AS `u2` ON `u2`.`user_id`=`cr`.`adminid`
          LEFT JOIN `cache_report_status` AS `crs` ON `cr`.`status`=`crs`.`id`
-         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`='&4'
-         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`='&4'
-         WHERE `cr`.`id`= &1",
-        $id,
-        CACHE_REPORT_INPROGRESS,
-        CACHE_REPORT_DONE,
-        $opt['template']['locale']
+         LEFT JOIN `sys_trans_text` AS `tt` ON `crs`.`trans_id`=`tt`.`trans_id` AND `tt`.`lang`= :locale
+         LEFT JOIN `sys_trans_text` AS `tt2` ON `crr`.`trans_id`=`tt2`.`trans_id` AND `tt2`.`lang`= :locale
+         WHERE `cr`.`id`=  :id',
+        [
+            'id' => $id,
+            'inProgress' => CACHE_REPORT_INPROGRESS,
+            'done' => CACHE_REPORT_DONE,
+            'locale' => $opt['template']['locale'],
+        ]
     );
 
-    if ($record = sql_fetch_assoc($rs)) {
+    if ($record) {
         $note = trim($record['note']);
         $note = nl2br(htmlentities($note));
         $note = preg_replace(
@@ -170,15 +213,17 @@ if ($id == 0) {
         if (isset($opt['logic']['adminreports']['cachexternal'])) {
             $tpl->assign('cachexternal', $opt['logic']['adminreports']['cachexternal']);
         } else {
-            $tpl->assign('cachexternal', array());
+            $tpl->assign('cachexternal', []);
         }
 
         if (isset($opt['logic']['adminreports']['external_maintainer'])) {
-            $external_maintainer = @file_get_contents(mb_ereg_replace(
-                '%1',
-                $record['cacheid'],
-                $opt['logic']['adminreports']['external_maintainer']['url']
-            ));
+            $external_maintainer = @file_get_contents(
+                mb_ereg_replace(
+                    '%1',
+                    $record['cacheid'],
+                    $opt['logic']['adminreports']['external_maintainer']['url']
+                )
+            );
             if ($external_maintainer) {
                 $tpl->assign(
                     'external_maintainer_msg',
@@ -193,25 +238,23 @@ if ($id == 0) {
             }
         }
     }
-    sql_free_result($rs);
 
     $tpl->assign('list', false);
     $tpl->assign('otheradmin', $record['adminid'] > 0 && $record['adminid'] != $login->userid);
     $tpl->assign('ownreport', $record['adminid'] == $login->userid);
     $tpl->assign('inprogress', $record['inprogress']);
-    $tpl->assign(
-        'other_report_in_progress',
-        sql_value(
-          "SELECT `id`
+    $otherReportInProgress = $connection->fetchColumn(
+        'SELECT `id`
            FROM `cache_reports`
-           WHERE `cacheid`='&1' AND `id`<>'&2' AND `status`='&3'
-           LIMIT 1",
-          null,
-          $record['cacheid'],
-          $record['id'],
-          CACHE_REPORT_INPROGRESS
-        ) !== null
+           WHERE `cacheid`= :cacheId AND `id`<> :id AND `status`= :reportInProgress
+           LIMIT 1',
+        [
+            'cacheId' => $record['cacheid'],
+            'id' => $record['id'],
+            'reportInProgress' => CACHE_REPORT_INPROGRESS,
+        ]
     );
+    $tpl->assign('other_report_in_progress', $otherReportInProgress > 0);
 
     $cache = new cache($record['cacheid']);
     $cache->setTplHistoryData($id);

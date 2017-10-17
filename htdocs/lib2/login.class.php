@@ -69,7 +69,7 @@ class login
 
         // TODO good input evaluation
         if ($cookie->is_set('userid') && $cookie->is_set('username')) {
-            $this->userid = $cookie->get('userid') + 0;
+            $this->userid = (int) $cookie->get('userid');
             $this->username = $cookie->get('username');
             $this->permanent = (($cookie->get('permanent') + 0) == 1);
             $this->lastlogin = $cookie->get('lastlogin');
@@ -297,7 +297,7 @@ class login
                     $rUser['user_id'],
                     ($permanent != false ? 1 : 0)
                 );
-                $this->userid = $rUser['user_id'];
+                $this->userid = (int) $rUser['user_id'];
                 $this->username = $rUser['username'];
                 $this->permanent = $permanent;
                 $this->lastlogin = date('Y-m-d H:i:s');
@@ -343,7 +343,7 @@ class login
             );
             if ($rUser = sql_fetch_assoc($rs)) {
                 $this->username = $rUser['username'];
-                $this->userid = $rUser['user_id'];
+                $this->userid = (int) $rUser['user_id'];
                 $this->admin = $rUser['admin'];
                 $this->verified = true;
                 sqlf("UPDATE `user` SET `user`.`last_login`=NOW() WHERE `user`.`user_id`='&1'", $this->userid);
@@ -386,8 +386,6 @@ class login
                 return $sCountry;
             }
         }
-
-
 
         // user specified a country?
         if ($this->userid != 0) {

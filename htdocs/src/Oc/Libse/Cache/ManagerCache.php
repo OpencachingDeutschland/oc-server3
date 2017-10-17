@@ -25,11 +25,11 @@ class ManagerCache
             return false;
         }
 
-        return $this->connection
+        return (int) $this->connection
                 ->fetchColumn(
                     'SELECT COUNT(*) FROM `caches` WHERE `cache_id` = :cacheId',
                     ['cacheId' => $cacheId]
-                ) == 1;
+                ) === 1;
     }
 
     public function userMayModify($cacheId)
@@ -38,8 +38,12 @@ class ManagerCache
 
         $login->verify();
 
-        $cacheOwner = sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`=&1", -1, $cacheId);
+        $cacheOwner = (int) $this->connection
+            ->fetchColumn(
+                'SELECT `user_id` FROM `caches` WHERE `cache_id`= :cacheId',
+                ['cacheId' => $cacheId]
+            );
 
-        return $cacheOwner == $login->userid;
+        return $cacheOwner === $login->userid;
     }
 }

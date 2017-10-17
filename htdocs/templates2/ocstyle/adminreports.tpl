@@ -98,8 +98,8 @@ function editcomment(edit)
         {/if}
 
         <table class="narrowtable">
-            <tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
-        {foreach from=$lastClosedReportedCaches item=rc}
+            <tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
+            {foreach from=$lastClosedReportedCaches item=rc}
             <tr>
             {if $rc.otheradmin > $otheradmins}
                 <td colspan="5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>

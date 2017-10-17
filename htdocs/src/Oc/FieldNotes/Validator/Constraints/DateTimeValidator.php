@@ -1,0 +1,43 @@
+<?php
+
+namespace Oc\FieldNotes\Validator\Constraints;
+
+use DateTime as PHPDateTime;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidator;
+
+/**
+ * Class DateTimeValidator
+ *
+ * @package Oc\FieldNotes\Validator\Constraints
+ */
+class DateTimeValidator extends ConstraintValidator
+{
+    const FORMAT_LONG = 'Y-m-d\TH:i:s\Z';
+
+    const FORMAT_LONG_EXPANDED = 'YYYY-MM-DDThh:mm:ssZ';
+
+    const FORMAT_SHORT = 'Y-m-d\TH:i\Z';
+
+    const FORMAT_SHORT_EXPANDED = 'YYYY-MM-DDThh:mmZ';
+
+    /**
+     * Checks if the passed value is valid.
+     *
+     * @param mixed $value The value that should be validated
+     * @param Constraint $constraint The constraint for the validation
+     */
+    public function validate($value, Constraint $constraint)
+    {
+        $dateFormatLong = PHPDateTime::createFromFormat(self::FORMAT_LONG, $value);
+        $dateFormatShort = PHPDateTime::createFromFormat(self::FORMAT_SHORT, $value);
+
+        if ($dateFormatLong === false && $dateFormatShort === false) {
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('%datetime%', $value)
+                ->setParameter('%expectedFormatLong%', self::FORMAT_LONG_EXPANDED)
+                ->setParameter('%expectedFormatShort%', self::FORMAT_SHORT_EXPANDED)
+                ->addViolation();
+        }
+    }
+}

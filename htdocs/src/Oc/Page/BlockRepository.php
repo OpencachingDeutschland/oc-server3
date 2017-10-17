@@ -98,6 +98,8 @@ class BlockRepository
         );
 
         $entity->id = (int) $this->connection->lastInsertId();
+
+        return $entity;
     }
 
     /**
@@ -143,11 +145,8 @@ class BlockRepository
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
         $this->connection->delete(
             self::TABLE,
-            $databaseArray,
             ['id' => $entity->id]
         );
 
@@ -188,8 +187,8 @@ class BlockRepository
         $entity = new BlockEntity();
         $entity->id = (int) $data['id'];
         $entity->pageId = (int) $data['page_id'];
-        $entity->title = (string) $data['title'];
-        $entity->html = (string) $data['html'];
+        $entity->title = $data['title'];
+        $entity->html = $data['html'];
         $entity->position = (int) $data['position'];
         $entity->updatedAt = new DateTime($data['updated_at']);
         $entity->active = (bool) $data['active'];

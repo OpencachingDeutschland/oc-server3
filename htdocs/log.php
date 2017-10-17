@@ -4,7 +4,13 @@
  ***************************************************************************/
 
 use Oc\FieldNotes\Entity\FieldNote;
+use Oc\FieldNotes\Enum\LogType as FieldNotesLogType;
+use Oc\FieldNotes\Persistence\FieldNoteEntity;
+use Oc\FieldNotes\Persistence\FieldNoteService;
 use Oc\GeoCache\Entity\GeocacheLog;
+use Oc\GeoCache\Enum\GeoCacheType;
+use Oc\GeoCache\Enum\LogType as GeoCacheLogType;
+use Oc\GeoCache\Enum\NeedMaintenance;
 
 // include libraries
 require __DIR__ . '/lib2/web.inc.php';
@@ -35,19 +41,20 @@ if (isset($_REQUEST['wp'])) {
     $cacheId = $_REQUEST['cacheid'];
 }
 
-$fieldNote = [];
+/**
+ * @var FieldNoteEntity|null $fieldNote
+ */
+$fieldNote = null;
 if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform'])) {
-    $rs = sql(
-        'SELECT *
-         FROM field_note
-         WHERE `id` = &1
-           AND `user_id` = &2',
-        (int) $_GET['fieldnoteid'],
-        (int) $user->getUserId()
-    );
-    $fieldNote = sql_fetch_assoc($rs);
-    if (!empty($fieldNote)) {
-        $cacheId = $fieldNote['geocache_id'];
+    $fieldNoteService = AppKernel::Container()->get(FieldNoteService::class);
+
+    $fieldNote = $fieldNoteService->fetchOneBy([
+        'id' => (int) $_GET['fieldnoteid'],
+        'user_id' => (int) $user->getUserId()
+    ]);
+
+    if ($fieldNote !== null) {
+        $cacheId = $fieldNote->geocacheId;
     }
 }
 
@@ -117,32 +124,32 @@ if ($cacheId != 0) {
     $ocTeamComment = isset($_REQUEST['teamcomment']) ? $_REQUEST['teamcomment'] != 0 : 0;
     $suppressMasslogWarning = isset($_REQUEST['suppressMasslogWarning']) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
 
-    if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform']) && !empty($fieldNote)) {
+    if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform']) && $fieldNote !== null) {
         $_POST['descMode'] = 3;
-        $fieldNoteDate = DateTime::createFromFormat('Y-m-d H:i:s', $fieldNote['date']);
+        $fieldNoteDate = $fieldNote->date;
         $logDateDay = $fieldNoteDate->format('d');
         $logDateMonth = $fieldNoteDate->format('m');
         $logDateYear = $fieldNoteDate->format('Y');
         $logTimeHour = $fieldNoteDate->format('H');
         $logTimeMinute = $fieldNoteDate->format('i');
-        $logText = $fieldNote['text'];
-        switch ($fieldNote['type']) {
-            case FieldNote::LOG_TYPE_FOUND:
-                if (in_array($cache->getType(), \Oc\GeoCache\Entity\Geocache::EVENT_CACHE_TYPES)) {
-                    $logType = GeocacheLog::LOG_TYPE_ATTENDED;
+        $logText = $fieldNote->text;
+        switch ($fieldNote->type) {
+            case FieldNotesLogType::FOUND:
+                if (GeoCacheType::isEventType($cache->getType())) {
+                    $logType = GeoCacheLogType::ATTENDED;
                 } else {
-                    $logType = GeocacheLog::LOG_TYPE_FOUND;
+                    $logType = GeoCacheLogType::FOUND;
                 }
                 break;
-            case FieldNote::LOG_TYPE_NOT_FOUND:
-                $logType = GeocacheLog::LOG_TYPE_NOT_FOUND;
+            case FieldNotesLogType::NOT_FOUND:
+                $logType = GeoCacheLogType::NOT_FOUND;
                 break;
-            case FieldNote::LOG_TYPE_NOTE:
-                $logType = GeocacheLog::LOG_TYPE_NOTE;
+            case FieldNotesLogType::NOTE:
+                $logType = GeoCacheLogType::NOTE;
                 break;
-            case FieldNote::LOG_TYPE_NEEDS_MAINTENANCE:
-                $logType = GeocacheLog::LOG_TYPE_NOTE;
-                $needsMaintenance = GeocacheLog::NEEDS_MAINTENANCE_ACTIVATE;
+            case FieldNotesLogType::NEEDS_MAINTENANCE:
+                $logType = GeoCacheLogType::NOTE;
+                $needsMaintenance = NeedMaintenance::ACTIVATE;
                 break;
         }
     }

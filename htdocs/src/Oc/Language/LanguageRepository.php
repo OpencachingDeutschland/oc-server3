@@ -153,11 +153,8 @@ class LanguageRepository
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
         $this->connection->delete(
             self::TABLE,
-            $databaseArray,
             ['short' => $entity->short]
         );
 
@@ -216,11 +213,11 @@ class LanguageRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LanguageEntity();
-        $entity->short = (string) strtolower($data['short']);
-        $entity->name = (string) $data['name'];
-        $entity->nativeName = (string) $data['native_name'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
+        $entity->short = strtolower($data['short']);
+        $entity->name = $data['name'];
+        $entity->nativeName = $data['native_name'];
+        $entity->de = $data['de'];
+        $entity->en = $data['en'];
         $entity->translationId = (int) $data['trans_id'];
         $entity->listDefaultDe = (bool) $data['list_default_de'];
         $entity->listDefaultEn = (bool) $data['list_default_en'];

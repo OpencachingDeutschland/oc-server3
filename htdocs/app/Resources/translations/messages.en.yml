@@ -1,3 +1,7 @@
+general:
+    error:
+        unknown_error: 'An unknown error occurred!'
+
 field_notes:
     btn:
         delete: Delete
@@ -9,12 +13,7 @@ field_notes:
     date_format: 'Y-m-d H:i'
 
     error:
-        # Desc: Geocache "%code%" not found.
-        geocache_not_found: 'Geocache "%code%" not found.'
-
-        # Desc: Log type "%type%" is not implemented.
-        log_type_not_implemented: 'Log type "%type%" is not implemented.'
-        wrong_date_format: 'The date in this file is in wrong format.'
+        line_prefix: 'Line %line%:'
         wrong_file_format: 'This file seems not to be a field notes file.'
 
     field_notes: 'Field Notes'
@@ -34,12 +33,9 @@ field_notes:
         deleted_multiple: 'Field Notes successfully deleted.'
 
     upload:
-        file: 'Field Notes file (geocache_visits.txt)'
-
         label:
-            # Desc: Ignore Field Notes before %date%
             ignore: 'Ignore Field Notes before %date%'
-
+        file: 'Field Notes file (geocache_visits.txt)'
         success: 'Field Notes successfully uploaded.'
 
 geocache:
@@ -54,6 +50,10 @@ geocache:
         unknown: 'Unknown Cache'
         virtual: 'Virtual Cache'
         webcam: 'Webcam Cache'
+
+page:
+    fallback:
+        not_translated: 'This page currently has no translation.'
 
 array_util:
   human_lang_implode:

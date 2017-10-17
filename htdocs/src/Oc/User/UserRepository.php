@@ -160,11 +160,8 @@ class UserRepository
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
         $this->connection->delete(
             self::TABLE,
-            $databaseArray,
             ['id' => $entity->id]
         );
 
@@ -226,15 +223,15 @@ class UserRepository
     {
         $entity = new UserEntity();
         $entity->id = (int) $data['user_id'];
-        $entity->username = (string) $data['username'];
-        $entity->password = (string) $data['password'];
-        $entity->email = (string) $data['email'];
+        $entity->username = $data['username'];
+        $entity->password = $data['password'];
+        $entity->email = $data['email'];
         $entity->latitude = (double) $data['latitude'];
         $entity->longitude = (double) $data['longitude'];
         $entity->isActive = (bool) $data['is_active_flag'];
-        $entity->firstname = (string) $data['first_name'];
-        $entity->lastname = (string) $data['last_name'];
-        $entity->country = (string) $data['country'];
+        $entity->firstname = $data['first_name'];
+        $entity->lastname = $data['last_name'];
+        $entity->country = $data['country'];
         $entity->language = strtolower($data['language']);
 
         return $entity;

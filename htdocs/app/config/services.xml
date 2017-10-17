@@ -20,5 +20,7 @@
         <service id="Oc\GlobalContext\Provider\LanguageProvider">
             <argument key="$defaultLanguage">%locale%</argument>
         </service>
+
+        <service id="Oc\FieldNotes\Persistence\FieldNoteService" public="true"/>
     </services>
 </container>

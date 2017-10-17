@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'admins';
@@ -11,41 +13,47 @@ $tpl->menuitem = MNU_ADMIN_ADMINS;
 $error = 0;
 
 $login->verify();
-if ($login->userid == 0) {
+if ($login->userid === 0) {
     $tpl->redirect_login();
 }
 
 if ($login->admin == 0) {
     $tpl->error(ERROR_NO_ACCESS);
 }
-$admin = [];
-$rs = sql('SELECT `user_id`, `username`, `admin` FROM `user` WHERE `admin` ORDER BY username');
-while ($record = sql_fetch_assoc($rs)) {
-    $admin['id'] = $record['user_id'];
-    $admin['name'] = $record['username'];
-    $rights = array();
-    if ($record['admin'] & ADMIN_TRANSLATE) {
+
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+
+$admins = $connection->fetchAll(
+    'SELECT `user_id` as id, `username` as name, `admin`
+     FROM `user`
+     WHERE `admin`
+     ORDER BY username'
+);
+
+foreach($admins as &$admin) {
+    $rights = [];
+
+    if ($admin['admin'] & ADMIN_TRANSLATE) {
         $rights[] = 'translate';
     }
-    if ($record['admin'] & ADMIN_MAINTAINANCE) {
+    if ($admin['admin'] & ADMIN_MAINTAINANCE) {
         $rights[] = 'dbmaint';
     }
-    if ($record['admin'] & ADMIN_USER) {
+    if ($admin['admin'] & ADMIN_USER) {
         $rights[] = 'user/caches';
     }
-    if ($record['admin'] & ADMIN_RESTORE) {
+    if ($admin['admin'] & ADMIN_RESTORE) {
         $rights[] = 'vand.restore';
     }
-    if ($record['admin'] & 128) {
+    if ($admin['admin'] & 128) {
         $rights[] = 'root';
     }
-    if ($record['admin'] & ADMIN_LISTING) {
+    if ($admin['admin'] & ADMIN_LISTING) {
         $rights[] = 'listing';
     }
     $admin['rights'] = implode(', ', $rights);
-    $admins[] = $admin;
 }
-sql_free_result($rs);
 
 $tpl->assign('admins', $admins);
 $tpl->display();

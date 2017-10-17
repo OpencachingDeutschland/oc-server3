@@ -26,8 +26,6 @@
 /htdocs/sitemap*xml*
 /htdocs/var/*
 
-# repository files which may be replaced locally
-.editorconfig
 /htdocs/util/archive/.htaccess
 /htdocs/util/attributes/.htaccess
 /htdocs/util/change_owner/.htaccess

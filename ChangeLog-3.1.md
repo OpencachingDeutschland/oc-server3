@@ -6,6 +6,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Added
 - add github to left panel [#1112](https://redmine.opencaching.de/issues/1112)
+- add table for closed cache reports [#1155](https://redmine.opencaching.de/issues/1155)
 
 ### Changed
 - show safari caches for guest users [#1127](https://redmine.opencaching.de/issues/1127)

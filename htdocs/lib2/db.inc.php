@@ -1,18 +1,15 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- *
  *  This module includes all database function necessary to do queries from
  *  the database.
  ***************************************************************************/
+
 use Oc\Util\CBench;
 
 /***************************************************************************
  * Overview:
- *
  * sql_enable_debugger()           ... enables Sqldebug if not not already done by config
- *
  * sql($sql)                       ... Query SQL and return result
  * sql_escape($value)              ... Escape parameter for SQL-use
  * sql_escape_backtick($value)     ... escape $value for use within backticks
@@ -33,12 +30,10 @@ use Oc\Util\CBench;
  * sql_export_recordset($f, $rs)   ... export recordset to file
  * sql_export_table($f, $table)    ... export table to file
  * sql_export_table_to_file($filename, $table)
- *
  * sql_table_exists                ... tests if a table exists
  * sql_field_exists                ... tests if a table and a field in this table exist
  * sql_field_type                  ... queries the type of a field (uppercase letters)
  * sql_index_exists                ... tests if a table and an index of this table exist
- *
  * // slave query functions
  * sql_slave_exclude()             ... do not use slave servers for the current user
  * until the slaves have replicated to this point
@@ -52,20 +47,17 @@ use Oc\Util\CBench;
  * sql_connect_anyslave()
  * sql_connect_slave($id)
  * sqlf_slave($sql)
- *
  * // for sqldebugger
  * sqlf($sql)                    ... sql for framwork functions
  * sqll($sql)                    ... sql for business layer functions
  * sqlf_value($sql, $default)    ... sql_value for framwork functions
  * sqll_value($sql, $default)    ... sql_value for business layer functions
- *
  * // only for internal use      ... invoked automatically
  * sql_connect()                 ... connect to the database
  * sql_disconnect()              ... disconnect database
  * sql_disconnect_slave()        ... disconnect slave database
  * sql_error()                   ... report an error and stop processing
  * sql_warn($warnmessage)        ... report a warning and resume processing
- *
  * // for maintenance functions
  * sql_connect_maintenance()       ... connect the database with more privileges
  * sql_dropFunction                ... drops stored function
@@ -76,7 +68,7 @@ use Oc\Util\CBench;
 $db['connected'] = false;
 $db['dblink'] = false;
 $db['dblink_slave'] = false;
-$db['slave_id'] = - 1;
+$db['slave_id'] = -1;
 $db['slave_server'] = '';
 $db['temptable_initialized'] = false;
 $db['temptables'] = [];
@@ -86,13 +78,13 @@ $db['error'] = false;
 
 $db['debug'] = (($opt['debug'] & DEBUG_SQLDEBUGGER) == DEBUG_SQLDEBUGGER);
 if ($db['debug'] === true) {
-  require_once __DIR__ . '/sqldebugger.class.php';
+    require_once __DIR__ . '/sqldebugger.class.php';
 }
 
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
- *
  * @return resource
  */
 function sql($sql)
@@ -121,8 +113,8 @@ function sql($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
- *
  * @return resource
  */
 function sql_slave($sql)
@@ -142,7 +134,7 @@ function sql_slave($sql)
         unset($args);
 
         // correct indices
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
 
@@ -150,9 +142,9 @@ function sql_slave($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $dblink
  * @param $sql
- *
  * @return resource
  */
 function sql_internal($dblink, $sql)
@@ -171,7 +163,7 @@ function sql_internal($dblink, $sql)
         unset($args);
 
         // correct indices
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
 
@@ -210,9 +202,13 @@ function sql_internal($dblink, $sql)
                     if (is_numeric($args[$arg])) {
                         $filtered_sql .= $args[$arg];
                     } else {
-                        if ((substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (substr($sql, $sqlpos + 1, 1) == '\'')) {
+                        if ((substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (substr(
+                                    $sql, $sqlpos + 1, 1
+                                ) == '\'')) {
                             $filtered_sql .= sql_escape($args[$arg]);
-                        } elseif ((substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (substr($sql, $sqlpos + 1, 1) == '`')) {
+                        } elseif ((substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (substr(
+                                    $sql, $sqlpos + 1, 1
+                                ) == '`')) {
                             $filtered_sql .= sql_escape_backtick($args[$arg]);
                         } else {
                             sql_error($sql);
@@ -262,7 +258,9 @@ function sql_internal($dblink, $sql)
                         $filtered_sql .= '`';
                     }
 
-                    $filtered_sql .= sql_escape_backtick($opt['db']['placeholder']['tmpdb']) . '`.`' . sql_escape_backtick($db['temptables'][$arg]);
+                    $filtered_sql .= sql_escape_backtick(
+                            $opt['db']['placeholder']['tmpdb']
+                        ) . '`.`' . sql_escape_backtick($db['temptables'][$arg]);
 
                     if (substr($sql, $nextarg + $arglength + 1, 1) != '`') {
                         $filtered_sql .= '`';
@@ -339,8 +337,8 @@ function sql_internal($dblink, $sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
- *
  * @return resource
  */
 function sqlf($sql)
@@ -357,8 +355,8 @@ function sqlf($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
- *
  * @return resource
  */
 function sqlf_slave($sql)
@@ -375,8 +373,8 @@ function sqlf_slave($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
- *
  * @return resource
  */
 function sqll($sql)
@@ -393,9 +391,9 @@ function sqll($sql)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @param integer $default
- *
  * @return mixed
  */
 function sqlf_value($sql, $default)
@@ -412,9 +410,9 @@ function sqlf_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @param integer $default
- *
  * @return mixed
  */
 function sqll_value($sql, $default)
@@ -431,8 +429,8 @@ function sqll_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
- *
  * @return string
  */
 function sql_escape($value)
@@ -456,8 +454,8 @@ function sql_escape($value)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
- *
  * @return string
  */
 function sql_escape_backtick($value)
@@ -469,9 +467,9 @@ function sql_escape_backtick($value)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @param $default
- *
  * @return mixed
  */
 function sql_value($sql, $default)
@@ -492,9 +490,9 @@ function sql_value($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @param $default
- *
  * @return mixed
  */
 function sql_value_slave($sql, $default)
@@ -507,7 +505,7 @@ function sql_value_slave($sql, $default)
         unset($args);
 
         // correct indices
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
 
@@ -515,10 +513,10 @@ function sql_value_slave($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param boolean $bQuerySlave
  * @param $sql
  * @param $default
- *
  * @return mixed
  */
 function sql_value_internal($bQuerySlave, $sql, $default)
@@ -535,7 +533,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
         unset($args);
 
         // correct indices
-        $args = array_merge(array(0), $tmp_args);
+        $args = array_merge([0], $tmp_args);
         unset($tmp_args, $args[0]);
     }
 
@@ -564,8 +562,8 @@ function sql_value_internal($bQuerySlave, $sql, $default)
     (includes database charset conversion)
 */
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- *
  * @return array
  */
 function sql_fetch_array($rs)
@@ -584,8 +582,8 @@ function sql_fetch_array($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- *
  * @return array
  */
 function sql_fetch_assoc($rs)
@@ -604,13 +602,13 @@ function sql_fetch_assoc($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
- *
  * @return array
  */
 function sql_fetch_assoc_table($rs)
 {
-    $result = array();
+    $result = [];
     while ($r = sql_fetch_assoc($rs)) {
         $result[] = $r;
     }
@@ -621,8 +619,8 @@ function sql_fetch_assoc_table($rs)
 
 // returns false if no more matching rows exist
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
- *
  * @return array
  */
 function sql_fetch_row($rs)
@@ -641,14 +639,14 @@ function sql_fetch_row($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- *
  * @return array
  */
 function sql_fetch_column($rs)
 {
     global $opt;
-    $result = array();
+    $result = [];
     while ($r = mysql_fetch_row($rs)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             $result[] = iconv($opt['charset']['iconv'], 'UTF-8', $r[0]);
@@ -662,6 +660,7 @@ function sql_fetch_column($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_affected_rows()
@@ -672,6 +671,7 @@ function sql_affected_rows()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_affected_rows_slave()
@@ -682,8 +682,8 @@ function sql_affected_rows_slave()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- *
  * @return bool
  */
 function sql_free_result($rs)
@@ -692,6 +692,7 @@ function sql_free_result($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_insert_id()
@@ -702,6 +703,7 @@ function sql_insert_id()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return int
  */
 function sql_insert_id_slave()
@@ -712,8 +714,8 @@ function sql_insert_id_slave()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
- *
  * @return int
  */
 function sql_num_rows($rs)
@@ -722,6 +724,7 @@ function sql_num_rows($rs)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_temp_table($table)
@@ -747,13 +750,17 @@ function sql_temp_table($table)
             $db['temptable_initialized'] = true;
         }
 
-        sqlf("INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')", mysql_thread_id($db['dblink']), $table);
+        sqlf(
+            "INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')",
+            mysql_thread_id($db['dblink']), $table
+        );
     }
 
     $db['temptables'][$table] = $table;
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_temp_table_slave($table)
@@ -777,6 +784,7 @@ function sql_temp_table_slave($table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_drop_temp_table($table)
@@ -797,6 +805,7 @@ function sql_drop_temp_table($table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $newname
  */
@@ -820,6 +829,7 @@ function sql_rename_temp_table($table, $newname)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
 function sql_drop_temp_table_slave($table)
@@ -840,6 +850,7 @@ function sql_drop_temp_table_slave($table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $newname
  */
@@ -865,6 +876,7 @@ function sql_rename_temp_table_slave($table, $newname)
 
 //database handling
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param null $username
  * @param null $password
  * @param bool $raiseError
@@ -888,7 +900,9 @@ function sql_connect($username = null, $password = null, $raiseError = true)
     }
 
     if ($db['dblink'] !== false) {
-        mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'", $db['dblink']);
+        mysql_query(
+            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'", $db['dblink']
+        );
 
         //database connection established ... set the used database
         if (@mysql_select_db($opt['db']['placeholder']['db'], $db['dblink']) === false) {
@@ -909,7 +923,7 @@ function sql_connect($username = null, $password = null, $raiseError = true)
 }
 
 /**
- *
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
 function sql_slave_exclude()
 {
@@ -926,7 +940,7 @@ function sql_slave_exclude()
 }
 
 /**
- *
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
 function sql_connect_anyslave()
 {
@@ -965,7 +979,7 @@ function sql_connect_anyslave()
 }
 
 /**
- *
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
 function sql_connect_master_as_slave()
 {
@@ -979,19 +993,20 @@ function sql_connect_master_as_slave()
     }
 
     // use existing master connection
-    $db['slave_id'] = - 1;
+    $db['slave_id'] = -1;
     $db['dblink_slave'] = $db['dblink'];
     $db['slave_server'] = 'master';
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $id
  */
 function sql_connect_slave($id)
 {
     global $opt, $db;
 
-    if ($id == - 1) {
+    if ($id == -1) {
         sql_connect_master_as_slave();
 
         return;
@@ -1024,10 +1039,16 @@ function sql_connect_slave($id)
             sql_error();
         }
 
-        mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink_slave']) . "'", $db['dblink_slave']);
+        mysql_query(
+            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink_slave']) . "'",
+            $db['dblink_slave']
+        );
 
         // initialize temp tables on slave server
-        $rs = sqlf_slave("SELECT `threadid`, `name` FROM `sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink_slave']));
+        $rs = sqlf_slave(
+            "SELECT `threadid`, `name` FROM `sys_temptables` WHERE `threadid`='&1'",
+            mysql_thread_id($db['dblink_slave'])
+        );
         while ($r = sql_fetch_assoc($rs)) {
             sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $r['name']);
         }
@@ -1039,6 +1060,7 @@ function sql_connect_slave($id)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @return bool
  */
 function sql_connect_maintenance()
@@ -1060,6 +1082,7 @@ function sql_connect_maintenance()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
 function sql_disconnect()
@@ -1092,6 +1115,7 @@ function sql_disconnect()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
 function sql_disconnect_slave()
@@ -1135,6 +1159,7 @@ function sql_disconnect_slave()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sqlstatement
  */
 function sql_error($sqlstatement = '')
@@ -1202,7 +1227,11 @@ function sql_error($sqlstatement = '')
             }
         } else {
             if ($opt['db']['error']['display'] == true) {
-                die('<html><body>' . htmlspecialchars('MySQL error (' . $errno . '): ' . str_replace("\n,", "<br />", $error)) . '</body></html>');
+                die(
+                    '<html><body>' . htmlspecialchars(
+                        'MySQL error (' . $errno . '): ' . str_replace("\n,", "<br />", $error)
+                    ) . '</body></html>'
+                );
             } else {
                 die('<html><body>A database command could not be performed</body></html>');
             }
@@ -1218,6 +1247,7 @@ function sql_error($sqlstatement = '')
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $warnmessage
  */
 function sql_warn($warnmessage)
@@ -1248,6 +1278,7 @@ function sql_warn($warnmessage)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $f
  * @param resource $rs
  * @param $table
@@ -1284,6 +1315,7 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $f
  * @param $table
  */
@@ -1309,6 +1341,7 @@ function sql_export_table($f, $table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $filename
  * @param string[] $tables
  */
@@ -1333,6 +1366,7 @@ function sql_export_tables_to_file($filename, $tables)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $filename
  * @param $table
  */
@@ -1344,6 +1378,7 @@ function sql_export_table_to_file($filename, $table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $f
  * @param $table
  */
@@ -1363,6 +1398,7 @@ function sql_export_structure($f, $table)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $filename
  * @param $table
  */
@@ -1375,8 +1411,8 @@ function sql_export_structure_to_file($filename, $table)
 
 // test if a database table exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
- *
  * @return bool
  */
 function sql_table_exists($table)
@@ -1384,20 +1420,20 @@ function sql_table_exists($table)
     global $opt;
 
     return sql_value(
-        "SELECT COUNT(*)
+            "SELECT COUNT(*)
          FROM `information_schema`.`tables`
          WHERE `table_schema`='&1' AND `table_name`='&2'",
-        0,
-        $opt['db']['placeholder']['db'],
-        $table
-    ) > 0;
+            0,
+            $opt['db']['placeholder']['db'],
+            $table
+        ) > 0;
 }
 
 // test if a database field exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $field
- *
  * @return bool
  */
 function sql_field_exists($table, $field)
@@ -1405,21 +1441,21 @@ function sql_field_exists($table, $field)
     global $opt;
 
     return sql_value(
-        "SELECT COUNT(*)
+            "SELECT COUNT(*)
          FROM `information_schema`.`columns`
          WHERE `table_schema`='&1' AND `table_name`='&2' AND `column_name`='&3'",
-        0,
-        $opt['db']['placeholder']['db'],
-        $table,
-        $field
-    ) > 0;
+            0,
+            $opt['db']['placeholder']['db'],
+            $table,
+            $field
+        ) > 0;
 }
 
 // get type of a database field
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $field
- *
  * @return string
  */
 function sql_field_type($table, $field)
@@ -1441,9 +1477,9 @@ function sql_field_type($table, $field)
 
 // test if a database index exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $table
  * @param $index
- *
  * @return bool
  */
 function sql_index_exists($table, $index)
@@ -1451,21 +1487,21 @@ function sql_index_exists($table, $index)
     global $opt;
 
     return sql_value(
-        "SELECT COUNT(*)
+            "SELECT COUNT(*)
          FROM `information_schema`.`statistics`
          WHERE `table_schema`='&1' AND `table_name`='&2' AND `index_name`='&3'",
-        0,
-        $opt['db']['placeholder']['db'],
-        $table,
-        $index
-    ) > 0;
+            0,
+            $opt['db']['placeholder']['db'],
+            $table,
+            $index
+        ) > 0;
 }
 
 // test if a function or procedure exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $type
  * @param $name
- *
  * @return bool
  */
 function sql_fp_exists($type, $name)
@@ -1484,8 +1520,8 @@ function sql_fp_exists($type, $name)
 
 // test if a function exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
- *
  * @return bool
  */
 function sql_function_exists($name)
@@ -1495,6 +1531,7 @@ function sql_function_exists($name)
 
 // delete a function
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
 function sql_dropFunction($name)
@@ -1504,8 +1541,8 @@ function sql_dropFunction($name)
 
 // test if a procedure exists
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
- *
  * @return bool
  */
 function sql_procedure_exists($name)
@@ -1515,6 +1552,7 @@ function sql_procedure_exists($name)
 
 // delete a procedure
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
 function sql_dropProcedure($name)
@@ -1523,6 +1561,7 @@ function sql_dropProcedure($name)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $triggername
  */
 function sql_dropTrigger($triggername)

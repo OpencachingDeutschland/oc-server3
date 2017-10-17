@@ -5,6 +5,7 @@
  * begin                : Fri September 16 2005
  * For license information see LICENSE.md
  ****************************************************************************/
+
 use Oc\Util\CBench;
 
 /****************************************************************************
@@ -53,8 +54,7 @@ foreach ($opt['page']['banned_user_agents'] as $ua) {
 date_default_timezone_set($timezone);
 register_errorhandlers();
 
-if (isset($debug_page) && $debug_page)
-{
+if (isset($debug_page) && $debug_page) {
     ini_set('display_errors', true);
     ini_set('error_reporting', E_ALL);
 } else {
@@ -113,12 +113,17 @@ function escape_javascript($text)
 }
 
 // called if mysql_query failed, sends email to sysadmin
+/**
+ * @param $sql
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function sql_failed($sql)
 {
     sql_error();
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  */
 function sqlValue($sql, $default)
@@ -136,6 +141,12 @@ function sqlValue($sql, $default)
     return $default;
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $sql
+ * @param $default
+ * @return mixed
+ */
 function sql_value_slave($sql, $default)
 {
     $rs = sql_slave($sql);
@@ -151,6 +162,7 @@ function sql_value_slave($sql, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $name
  * @param string $default
  * @return string
@@ -161,6 +173,7 @@ function getSysConfig($name, $default)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $name
  * @param string $value
  */
@@ -182,6 +195,7 @@ function setSysConfig($name, $value)
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @return resource
  */
@@ -206,6 +220,11 @@ function sql($sql)
     return sql_internal($dblink, $sql, false, $args);
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $sql
+ * @return resource
+ */
 function sql_slave($sql)
 {
     global $dblink_slave;
@@ -231,6 +250,13 @@ function sql_slave($sql)
     return sql_internal($dblink_slave, $sql, true, $args);
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $_dblink
+ * @param $sql
+ * @param $bSlave
+ * @return resource
+ */
 function sql_internal($_dblink, $sql, $bSlave)
 {
     global $sql_warntime;
@@ -393,6 +419,11 @@ function sql_internal($_dblink, $sql, $bSlave)
     return $result;
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $value
+ * @return false|string
+ */
 function sql_escape($value)
 {
     global $dblink;
@@ -402,6 +433,11 @@ function sql_escape($value)
     return $value;
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $value
+ * @return false|mixed|string
+ */
 function sql_escape_backtick($value)
 {
     $value = sql_escape($value);
@@ -410,6 +446,9 @@ function sql_escape_backtick($value)
     return $value;
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function sql_error()
 {
     global $debug_page;
@@ -465,6 +504,7 @@ function sql_error()
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $warnmessage
  */
 function sql_warn($warnmessage)
@@ -486,6 +526,7 @@ function sql_warn($warnmessage)
     Ersatz für die in Mysql eingebauten Funktionen
 */
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array
  */
@@ -494,17 +535,28 @@ function sql_fetch_array($rs)
     return mysql_fetch_array($rs);
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $rs
+ * @return array
+ */
 function sql_fetch_assoc($rs)
 {
     return mysql_fetch_assoc($rs);
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $rs
+ * @return array
+ */
 function sql_fetch_row($rs)
 {
     return mysql_fetch_row($rs);
 }
 
 /**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array|null
  */
@@ -523,6 +575,11 @@ function sql_fetch_column($rs)
     return $col;
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $rs
+ * @return bool
+ */
 function sql_free_result($rs)
 {
     return mysql_free_result($rs);
@@ -555,7 +612,10 @@ function mb_trim($str)
     return $str;
 }
 
-//disconnect the database
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * disconnect the database
+ */
 function db_disconnect()
 {
     global $dbpconnect, $dblink, $dblink_slave, $dbslaveid;
@@ -572,7 +632,10 @@ function db_disconnect()
     }
 }
 
-//database handling
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * database handling
+ */
 function db_connect()
 {
     global $dblink, $dbpconnect, $dbusername, $dbname, $dbserver, $dbpasswd, $dbpconnect;
@@ -597,6 +660,9 @@ function db_connect()
     }
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function db_slave_exclude()
 {
     global $usr;
@@ -611,6 +677,9 @@ function db_slave_exclude()
     );
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function db_connect_anyslave()
 {
     global $dblink, $dblink_slave, $opt, $usr, $dbslaveid;
@@ -643,6 +712,9 @@ function db_connect_anyslave()
     }
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ */
 function db_connect_primary_slave()
 {
     global $opt, $dblink, $dblink_slave, $dbslaveid;
@@ -655,6 +727,10 @@ function db_connect_primary_slave()
     }
 }
 
+/**
+ * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
+ * @param $id
+ */
 function db_connect_slave($id)
 {
     global $opt, $dblink_slave, $dbpconnect, $dbname, $dbslaveid;

@@ -89,12 +89,36 @@ function editcomment(edit)
             {/if}
             <td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.date}</td></tr>
         {foreachelse}
+            <tr><td colspan="5">&nbsp;</td></tr>
             <tr><td colspan=5>{t}No reported caches{/t}</td></tr>
         {/foreach}
         </table>
         {if $reportedcaches != NULL and $otheradmins==0}
             <p style="line-height: 2.5m;">{t}(*) New reports{/t}</p>
         {/if}
+
+        <table class="narrowtable">
+            <tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Date{/t}</th></tr>
+        {foreach from=$lastClosedReportedCaches item=rc}
+            <tr>
+            {if $rc.otheradmin > $otheradmins}
+                <td colspan="5"><p style="line-height: 2.5em;">{t}(*) New reports{/t}</p>
+                </td></tr>
+                <tr><th>{t}ID{/t}</th><th>{t}Name{/t}</th><th>{t}Owner{/t}</th><th>{t}Reporter{/t}</th><th>{t}Admin{/t}</th><th>{t}Date{/t}</th></tr>
+                {assign var="otheradmins" value=$rc.otheradmin}
+            {/if}
+            <td><a href="adminreports.php?id={$rc.id}">{$rc.id}</a></td>
+            <td><a href="adminreports.php?id={$rc.id}">{$rc.new|escape}{$rc.name|escape}</a></td>
+            <td>{$rc.ownernick|escape}</td>
+            <td>{$rc.username|escape}</td>
+            {if $otheradmins}
+                <td>{$rc.adminname|escape}</td>
+            {/if}
+            <td style="white-space: nowrap;">{$rc.lastmodified|date_format:$opt.format.date}</td></tr>
+            {foreachelse}
+            <tr><td colspan=5>No closed cache reports</td></tr>
+        {/foreach}
+        </table>
     {else}
         <table class="table" style="width:98%">
             <tr>
@@ -191,7 +215,7 @@ function editcomment(edit)
         {/if}
         <br />
 
-        {include file=adminhistory.tpl reportdisplay=true showhistory=true}
+        {include file="adminhistory.tpl" reportdisplay=true showhistory=true}
     {/if}
     </div>
 

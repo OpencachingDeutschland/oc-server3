@@ -24,30 +24,32 @@ class GeoCacheController extends Controller
     /**
      * @var
      */
-    private $secret;
+    private $apiSecret;
 
     /**
      * GeoCacheController constructor.
      *
      * @param Reports $reports
-     * @param string $secret
+     * @param string $apiSecret
      */
-    public function __construct(Reports $reports, $secret)
+    public function __construct(Reports $reports, $apiSecret)
     {
         $this->reports = $reports;
-        $this->secret = $secret;
+        $this->apiSecret = $apiSecret;
     }
 
     /**
      * @param Request $request
-     *
      * @return Response
-     *
      * @Route("/api/geocache/getReports")
      */
     public function getReportsAction(Request $request)
     {
-        if ($this->secret === 'ThisTokenIsNotSoSecretChangeIt' || $request->get('key') !== $this->secret) {
+        if ($this->apiSecret === 'ThisTokenIsNotSoSecretChangeIt') {
+            return new JsonResponse(['please change your api_secret to a secure one!']);
+        }
+
+        if ($request->get('key') !== $this->apiSecret) {
             return new JsonResponse([]);
         }
 

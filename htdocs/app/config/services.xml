@@ -14,7 +14,7 @@
         <service id="Oc\Session\SessionDataInterface" alias="Oc\Session\SessionDataCookie" />
 
         <service id="Oc\GeoCache\Controller\GeoCacheController">
-            <argument key="$secret">%secret%</argument>
+            <argument key="$apiSecret">%api_secret%</argument>
         </service>
 
         <service id="Oc\GlobalContext\Provider\LanguageProvider">

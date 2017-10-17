@@ -64,12 +64,15 @@ if (isset($_REQUEST['savecomment'])) {
     );
     $tpl->redirect('adminreports.php?id=' . $rId);
 } elseif (isset($_REQUEST['contact']) && $ownerId > 0) {
-    $wp_oc = sql_value("SELECT `wp_oc` FROM `caches` WHERE `cache_id`='&1'", '', $cacheId);
+    $wp_oc = $connection->fetchColumn(
+        'SELECT `wp_oc` FROM `caches` WHERE `cache_id`= :cacheId',
+        ['cacheId' => $cacheId]
+    );
     $tpl->redirect('mailto.php?userid=' . urlencode($ownerId) . '&wp=' . $wp_oc);
 } elseif (isset($_REQUEST['contact_reporter']) && $reporterId > 0) {
     $tpl->redirect('mailto.php?userid=' . urlencode($reporterId) . '&reportid=' . $rId);
-} elseif (isset($_REQUEST['done']) && $adminId == $login->userid) {
-    sql("UPDATE `cache_reports` SET `status`=3 WHERE `id`=&1", $rId);
+} elseif (isset($_REQUEST['done']) && $adminId === $login->userid) {
+    $connection->update('cache_reports', ['status' => 3], ['id' => $rId]);
     $tpl->redirect('adminreports.php?id=' . $rId);
 } elseif (isset($_REQUEST['assign']) && ($adminId === 0 || $adminId !== $login->userid)) {
     $error = 1;

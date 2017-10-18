@@ -33,6 +33,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - gpx attribute near by care [#1136](https://redmine.opencaching.de/issues/1136)
 - statistic picture text [#1156](https://redmine.opencaching.de/issues/1156)
 - geocache api secret [#1158](https://redmine.opencaching.de/issues/1158)
+- anchor links on cacheinfo page [#1159](https://redmine.opencaching.de/issues/1159)
 
 
 ## [3.1.4] [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)

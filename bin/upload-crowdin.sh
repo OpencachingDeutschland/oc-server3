@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
-php ./upload-crowdin.php
+DIR="$(cd "$(dirname "$0")" && pwd)"
+php $DIR/upload-crowdin.php

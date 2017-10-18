@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/virtual.gif" width="32" border="0" height="32" align="left" alt="" title="Virtueller Cache" /></td>
-                    <td><p><span class="subtitle">Virtueller Cache</span>: Am Ziel befindet sich weder ein Beh&auml;lter noch ein Logbuch. Stattdessen ist dort eine Aufgabe zu l&ouml;sen, bevor man den Cache loggen kann &ndash; z.&nbsp;B. indem man etwas abliest, ein Foto macht usw. Eine besondere Form von virtuellen Caches sind <a href="#attr61">Safari-Caches</a>.</p></td>
+                    <td><p><span class="subtitle">Virtueller Cache</span>: Am Ziel befindet sich weder ein Beh&auml;lter noch ein Logbuch. Stattdessen ist dort eine Aufgabe zu l&ouml;sen, bevor man den Cache loggen kann &ndash; z.&nbsp;B. indem man etwas abliest, ein Foto macht usw. Eine besondere Form von virtuellen Caches sind <a href="articles.php?page=cacheinfo#attr61">Safari-Caches</a>.</p></td>
                 </tr>
                 <tr>
                     <td valign="top" style="padding-top:5px"><img src="resource2/ocstyle/images/cacheicon/webcam.gif" width="32" border="0" height="32" align="left" alt="" title="Webcam"></td>
@@ -147,7 +147,7 @@
             Bei den Angaben f&uuml;r deine eigenen Caches solltest du von gew&ouml;hnlichen, trockenen Witterungsverh&auml;ltnissen ausgehen.
         </p>
         <p>
-            <a href="#attributedesc">Siehe unten</a> für eine ausführliche Erläuterung der Attribute.
+            <a href="articles.php?page=cacheinfo#attributedesc">Siehe unten</a> für eine ausführliche Erläuterung der Attribute.
         </p>
 
         <p><b>Kurzbeschreibung:</b> Kannst du den Charakter des Caches in einem kurzen Satz oder in Stichworten beschreiben?</p>

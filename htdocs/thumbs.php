@@ -38,18 +38,19 @@ $r = $connection->fetchAssoc(
 if ($r) {
     if ($r['object_type'] == 1) {
         $check = (int) $connection
-            ->fetchColumn('SELECT COUNT(*)
-                           FROM `cache_logs`
-                           INNER JOIN `caches`
-                             ON `cache_logs`.`cache_id`=`caches`.`cache_id`
-                           INNER JOIN `cache_status`
-                             ON `caches`.`status`=`cache_status`.`id`
-                           WHERE `cache_logs`.`id`=:id
-                           AND (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`= :userId OR :admin)',
+            ->fetchColumn(
+                'SELECT COUNT(*)
+                 FROM `cache_logs`
+                 INNER JOIN `caches`
+                   ON `cache_logs`.`cache_id`=`caches`.`cache_id`
+                 INNER JOIN `cache_status`
+                   ON `caches`.`status`=`cache_status`.`id`
+                 WHERE `cache_logs`.`id`=:id
+                   AND (`cache_status`.`allow_user_view` = 1 OR `caches`.`user_id`= :userId OR :admin)',
                 [
                     'id' => $r['object_id'],
                     'userId' => $login->userid,
-                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0,
                 ]
             );
 
@@ -62,7 +63,8 @@ if ($r) {
         }
     } elseif ($r['object_type'] == 2) {
         $check = (int) $connection
-            ->fetchColumn('SELECT COUNT(*)
+            ->fetchColumn(
+                'SELECT COUNT(*)
                            FROM `caches`
                            INNER JOIN `cache_status`
                              ON `caches`.`status`=`cache_status`.`id`
@@ -71,7 +73,7 @@ if ($r) {
                 [
                     'id' => $r['object_id'],
                     'userId' => $login->userid,
-                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0
+                    'admin' => $login->hasAdminPriv(ADMIN_USER) ? 1 : 0,
                 ]
             );
         if ($check === 0) {
@@ -232,7 +234,7 @@ if ($r) {
             . mb_substr($filename, 1, 1);
 
         switch ($extension) {
-            case 'jepg':
+            case 'jpeg':
             case 'jpg':
                 imagejpeg($thumbimage, $savedir . '/' . $filename);
                 break;

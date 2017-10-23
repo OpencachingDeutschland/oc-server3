@@ -116,9 +116,13 @@ class login
             $min_lastlogin_permanent,
             $min_lastlogin
         );
+
+        // sys_session.last_login controls the automatic logout of users at the OC website.
+        // user.last_login gives the overall last login date, including OKAPI logins.
+
         if ($rUser = sql_fetch_assoc($rs)) {
-            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time())) ||
-                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time()))
+            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time())) ||
+                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time()))
             ) {
                 sql(
                     "UPDATE `sys_sessions`

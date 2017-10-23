@@ -239,11 +239,8 @@ class login
             $_SERVER['REMOTE_ADDR'],
             date('Y-m-d H:i:s', time() - 3600)
         );
-        if ($loginAttemptsCount > $opt['page']['max_logins_per_hour']) {
-            return false;
-        } else {
-            return true;
-        }
+
+        return !($loginAttemptsCount > $opt['page']['max_logins_per_hour']);
     }
 
     /**

@@ -120,6 +120,7 @@ function searchUser()
                 `activation_code`,
                 `first_name`,
                 `last_name`,
+                `last_login`,
                 `data_license`='&2' AS `license_declined`
          FROM `user`
          WHERE `username`='&1'
@@ -157,19 +158,6 @@ function searchUser()
         0,
         $r['user_id']
     );
-
-    $r['last_known_login'] = sql_value(
-        "SELECT MAX(`last_login`) FROM `sys_sessions` WHERE `user_id`='&1'",
-        0,
-        $r['user_id']
-    );
-    if (!$r['last_known_login']) {
-        $r['last_known_login'] = sql_value(
-            "SELECT `last_login` FROM `user` WHERE `user_id`='&1'",
-            0,
-            $r['user_id']
-        );
-    }
 
     $tpl->assign('user', $r);
 

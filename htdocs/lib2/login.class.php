@@ -144,23 +144,23 @@ class login
             AND `user`.`is_active_flag`= 1
             AND `sys_sessions`.`uuid`='&1'
             AND `sys_sessions`.`user_id`='&2'
-            AND
-                (
-                  (`sys_sessions`.`permanent`=1
-                   AND `sys_sessions`.`last_login`>'&3')
+            AND (
+                (`sys_sessions`.`permanent`=1 AND `sys_sessions`.`last_login`>'&3')
                 OR
-                  (`sys_sessions`.`permanent`=0 AND `sys_sessions`.`last_login`>'&4')
-                )",
+                (`sys_sessions`.`permanent`=0 AND `sys_sessions`.`last_login`>'&4')
+            )",
             $this->sessionid,
             $this->userid,
             $min_lastlogin_permanent,
             $min_lastlogin
         );
 
+        // sys_session.last_login controls the automatic logout of users at the OC website.
+        // user.last_login gives the overall last login date, including OKAPI logins.
 
         if ($rUser = sql_fetch_assoc($rs)) {
-            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time())) ||
-                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time()))
+            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time())) ||
+                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time()))
             ) {
                 sqlf(
                     "UPDATE `sys_sessions` SET `sys_sessions`.`last_login`=NOW()

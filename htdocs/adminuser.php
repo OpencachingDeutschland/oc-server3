@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'adminuser';
@@ -23,13 +25,13 @@ if (isset($_REQUEST['success']) && $_REQUEST['success']) {
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'display';
 
-if ($action == 'searchuser') {
+if ($action === 'searchuser') {
     searchUser();
-} elseif ($action == 'sendcode') {
+} elseif ($action === 'sendcode') {
     sendCode();
-} elseif ($action == 'formaction') {
+} elseif ($action === 'formaction') {
     formAction();
-} elseif ($action == 'display') {
+} elseif ($action === 'display') {
     $tpl->display();
 }
 
@@ -109,8 +111,10 @@ function searchUser()
     $tpl->assign('username', $username);
     $tpl->assign('msg', $msg);
 
-    $rs = sql(
-        "SELECT `user_id`,
+    /** @var Connection $connection */
+    $connection = AppKernel::Container()->get(Connection::class);
+    $r = $connection->fetchAssoc(
+        'SELECT `user_id`,
                 `username`,
                 `email`,
                 `email_problems`,
@@ -120,56 +124,43 @@ function searchUser()
                 `activation_code`,
                 `first_name`,
                 `last_name`,
-                `data_license`='&2' AS `license_declined`
+                `last_login`,
+                `data_license`=:dataLicense AS `license_declined`
          FROM `user`
-         WHERE `username`='&1'
-         OR `email`='&1'",
-        $username,
-        NEW_DATA_LICENSE_ACTIVELY_DECLINED
+         WHERE `username`= :user
+         OR `email`=:user',
+        [
+            'user' => $username,
+            'dataLicense' => NEW_DATA_LICENSE_ACTIVELY_DECLINED
+        ]
     );
-    $r = sql_fetch_assoc($rs);
-    sql_free_result($rs);
-    if ($r == false) {
+
+    if (!$r) {
         $tpl->assign('error', 'userunknown');
         $tpl->display();
     }
 
     $tpl->assign('showdetails', true);
 
-    $r['hidden'] = sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $r['user_id']);
-    $r['hidden_active'] = sql_value(
-        "SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=1",
-        0,
-        $r['user_id']
+    $r['hidden'] = (int) $connection->fetchColumn(
+        'SELECT COUNT(*) FROM `caches` WHERE `user_id`=:userId', [':userId' => $r['user_id']]
     );
-    $r['logentries'] = sql_value(
-        "SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'",
-        0,
-        $r['user_id']
+    $r['hidden_active'] = (int) $connection->fetchColumn(
+        'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status`=1',
+        [':userId' => $r['user_id']]
     );
-    $r['deleted_logentries'] = sql_value(
-        "SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`='&1'",
-        0,
-        $r['user_id']
+    $r['logentries'] = (int) $connection->fetchColumn(
+        'SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`= :userId',
+        [':userId' => $r['user_id']]
     );
-    $r['reports'] = sql_value(
-        "SELECT COUNT(*) FROM `cache_reports` WHERE `userid`='&1'",
-        0,
-        $r['user_id']
+    $r['deleted_logentries'] = (int) $connection->fetchColumn(
+        'SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`= :userId',
+        [':userId' => $r['user_id']]
     );
-
-    $r['last_known_login'] = sql_value(
-        "SELECT MAX(`last_login`) FROM `sys_sessions` WHERE `user_id`='&1'",
-        0,
-        $r['user_id']
+    $r['reports'] = (int) $connection->fetchColumn(
+        'SELECT COUNT(*) FROM `cache_reports` WHERE `userid`= :userId',
+        [':userId' => $r['user_id']]
     );
-    if (!$r['last_known_login']) {
-        $r['last_known_login'] = sql_value(
-            "SELECT `last_login` FROM `user` WHERE `user_id`='&1'",
-            0,
-            $r['user_id']
-        );
-    }
 
     $tpl->assign('user', $r);
 

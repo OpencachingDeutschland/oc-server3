@@ -35,6 +35,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 - geocache api secret [#1158](https://redmine.opencaching.de/issues/1158)
 - anchor links on cacheinfo page [#1159](https://redmine.opencaching.de/issues/1159)
 - fix thumbnail issue with jpeg images [#1161](https://redmine.opencaching.de/issues/1161)
+- user lastLogin value for admin report [#1163](https://redmine.opencaching.de/issues/1163)
 
 
 ## [3.1.4] [3.1.3...3.1.4](https://github.com/OpencachingDeutschland/oc-server3/compare/3.1.3...3.1.4)

@@ -101,7 +101,7 @@
             </tr>
             <tr>
                 <td>{t}Last known login:{/t}</td>
-                <td>{if $user.last_known_login}{$user.last_known_login|date_format:$opt.format.date}{else}{t}Unknown{/t}{/if}</td>
+                <td>{if $user.last_login}{$user.last_login|date_format:$opt.format.date}{else}{t}Unknown{/t}{/if}</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

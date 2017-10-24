@@ -157,10 +157,12 @@ class login
             $min_lastlogin
         );
 
+        // sys_session.last_login controls the automatic logout of users at the OC website.
+        // user.last_login gives the overall last login date, including OKAPI logins.
 
         if ($rUser = sql_fetch_assoc($rs)) {
-            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time())) ||
-                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time()))
+            if ((($this->permanent == true) && (strtotime($rUser['last_login']) + LOGIN_TIME_PERMANENT / 2 < time())) ||
+                (($this->permanent == false) && (strtotime($rUser['last_login']) + LOGIN_TIME / 2 < time()))
             ) {
                 sqlf(
                     "UPDATE `sys_sessions` SET `sys_sessions`.`last_login`=NOW()
@@ -239,11 +241,8 @@ class login
             $_SERVER['REMOTE_ADDR'],
             date('Y-m-d H:i:s', time() - 3600)
         );
-        if ($loginAttemptsCount > $opt['page']['max_logins_per_hour']) {
-            return false;
-        } else {
-            return true;
-        }
+
+        return !($loginAttemptsCount > $opt['page']['max_logins_per_hour']);
     }
 
     /**

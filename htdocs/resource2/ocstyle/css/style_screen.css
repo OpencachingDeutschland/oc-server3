@@ -22,10 +22,8 @@
 /*-----------------------------------*/
 /* 1.1 - Page frame                  */
 /*-----------------------------------*/
-html {
-    height: 100%;
-}
- 
+html {height: 100%;}
+
 body {
     font-size: 64.5%;
     margin: 0 auto;
@@ -35,9 +33,7 @@ body {
     font-family: arial, sans-serif, Tahoma, Verdana;
 }
 
-body.popup {
-    background: white;
-}
+body.popup {background: white;}
 
 .page-container-1 {
     width: 970px;
@@ -47,7 +43,6 @@ body.popup {
     border: solid 1px rgb(100,100,100);
     position: relative;
 }
-
 
 #ocmain {
     height:100%;
@@ -119,9 +114,7 @@ div#langstripe {
     z-index: 5;
 }
 
-.header {
-    height: 81px;
-}
+.header {height: 81px;}
 
 .headerimage {
     height: 80px;
@@ -138,9 +131,7 @@ div#langstripe {
     z-index: 2;
 }
 
-.headerimagecontent {
-    border: 0 none;
-}
+.headerimagecontent {border: 0 none;}
 
 #debugoc {
     position: absolute;
@@ -365,9 +356,7 @@ h5 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 120%;}
     min-width: 640px;
 }
 
-.wide_textblock {
-    width: 740px;
-}
+.wide_textblock {width: 740px;}
 
 /* Paragraphs */
 p {margin: 0 0 0.5em 0; padding: 0; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
@@ -377,7 +366,7 @@ p.indent {margin-left:2em; margin-bottom:1.3em !important;}
 
 /* Lists */
 ul.noindent {margin: 0 0 7px 15px; padding: 0; list-style-type: disc; list-style-position: outside; font-size: 120%;}
-ul.indent {margin: 0 0 7px 15px; padding: 0 0 0 15px; list-style-type: disc; font-family: arial; font-size: 11px;}
+ul.indent {margin: 0 0 7px 15px; padding: 0 0 0 15px; list-style-type: disc; font-family: arial, serif; font-size: 11px;}
 ul.indent li {margin-bottom:4px}
 ul.linklist-noindent {margin: -0.3em 0 0.5em 0; padding: 0; list-style-type: none; line-height: 1.2em; font-size: 120%; }
 ul.linklist-indent {margin: -0.3em 0 0.5em 0; padding: 0 0 0 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
@@ -470,12 +459,6 @@ a.links:visited {
     text-decoration: none;
 }
 
-/* a.links:active {
-    background-color: yellow;
-    text-decoration: none;
-}
-*/
-
 a.links:hover {
     text-decoration: underline;
 }
@@ -555,9 +538,7 @@ a.info:hover span{ /*the span will display just on :hover state*/
 }
 
 /* a / no href / onclick=javascript:... */
-.jslink {
-    cursor:pointer;
-}
+.jslink {cursor:pointer;}
 
 
 /********************************/
@@ -582,7 +563,7 @@ input {    border:1px solid #555;    background-color:white;    padding:1px 2px 
 
 input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
 
-input.radio {border:0px; border-width: 0; width:12px; height:12px; background-color: transparent;}
+input.radio {border:0; width:12px; height:12px; background-color: transparent;}
 
 select {border:1px solid #555; background-color:white; padding:1px; font-size:11px; color: black;}
 select.disabled {border:1px solid #a0a0a0; color:grey; }
@@ -631,8 +612,7 @@ input.widebutton {
     width:160px !important;
 }
 
-.menuBar
-{
+.menuBar {
     background-color:#F0F0EE;
     margin:2px 2px 2px 2px;
     padding:2px 4px 2px 4px;
@@ -878,7 +858,6 @@ div.cachelistinfo { border:1px solid #a0a0a0; }
 
 /* Pager */
 .pager { font-size:14px; }
-.smallpager { }
 
 .edit_wptable {
     background-color:#dddddd;
@@ -988,7 +967,6 @@ div.searchdiv {
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 
 div.searchdiv2 {
@@ -998,7 +976,6 @@ div.searchdiv2 {
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 
 div.searchdiv2 td {
@@ -1270,7 +1247,6 @@ div.mapoptions td {
 div.gm-stars { display:none; }
 div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
 .gm-iw, .gm-iw-table { font-size:11px; }
-
 
 /*
  * flash messages

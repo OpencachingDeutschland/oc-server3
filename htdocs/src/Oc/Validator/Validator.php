@@ -5,11 +5,6 @@ namespace Oc\Validator;
 use Oc\Validator\Exception\ValidationException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-/**
- * Class Validator
- *
- * @package Oc\Validator
- */
 class Validator
 {
     /**

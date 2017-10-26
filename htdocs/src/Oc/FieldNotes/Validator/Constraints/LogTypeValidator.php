@@ -6,11 +6,6 @@ use Oc\FieldNotes\Enum\LogType as FieldNotesLogType;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * Class LogTypeValidator
- *
- * @package Oc\FieldNotes\Validator\Constraints
- */
 class LogTypeValidator extends ConstraintValidator
 {
     /**

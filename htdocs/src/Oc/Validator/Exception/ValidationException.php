@@ -6,11 +6,6 @@ use Exception;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
-/**
- * Class ValidationException
- *
- * @package Oc\Validator\Exception
- */
 class ValidationException extends Exception
 {
     /**

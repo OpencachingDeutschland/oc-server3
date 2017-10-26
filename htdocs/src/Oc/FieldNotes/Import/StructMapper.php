@@ -4,11 +4,6 @@ namespace Oc\FieldNotes\Import;
 
 use Oc\FieldNotes\Struct\FieldNote;
 
-/**
- * Class StructMapper
- *
- * @package Oc\FieldNotes\Import
- */
 class StructMapper
 {
     /**

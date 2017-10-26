@@ -6,11 +6,6 @@ use Oc\GeoCache\Enum\WaypointType;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class GeoCacheService
- *
- * @package Oc\GeoCache\Persistence\GeoCache
- */
 class GeoCacheService
 {
     /**
@@ -19,8 +14,6 @@ class GeoCacheService
     private $geoCacheRepository;
 
     /**
-     * GeoCacheService constructor.
-     *
      * @param GeoCacheRepository $geoCacheRepository
      */
     public function __construct(GeoCacheRepository $geoCacheRepository)

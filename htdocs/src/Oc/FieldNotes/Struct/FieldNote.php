@@ -2,15 +2,10 @@
 
 namespace Oc\FieldNotes\Struct;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Oc\FieldNotes\Validator\Constraints as FieldNoteAssert;
 use Oc\Validator\Constraints as OcAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Class FieldNote
- *
- * @package Oc\FieldNotes\Struct
- */
 class FieldNote
 {
     /**

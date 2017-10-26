@@ -7,11 +7,6 @@ use Oc\GeoCache\Exception\UnknownWaypointTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * Class WaypointValidator
- *
- * @package Oc\Validator\Constraints
- */
 class WaypointValidator extends ConstraintValidator
 {
     /**

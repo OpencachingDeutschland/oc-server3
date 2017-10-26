@@ -4,11 +4,6 @@ namespace Oc\GeoCache\Enum;
 
 use Oc\GeoCache\Exception\UnknownWaypointTypeException;
 
-/**
- * Class WaypointType
- *
- * @package Oc\GeoCache\Enum
- */
 class WaypointType
 {
     /**

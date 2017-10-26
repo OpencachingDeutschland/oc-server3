@@ -2,11 +2,6 @@
 
 namespace Oc\GeoCache\Enum;
 
-/**
- * Class NeedMaintenance
- *
- * @package Oc\GeoCache\Enum
- */
 class NeedMaintenance
 {
     /**

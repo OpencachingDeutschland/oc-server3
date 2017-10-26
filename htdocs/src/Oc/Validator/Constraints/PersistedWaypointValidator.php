@@ -5,11 +5,6 @@ namespace Oc\Validator\Constraints;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * Class PersistedWaypointValidator
- *
- * @package Oc\Validator\Constraints
- */
 class PersistedWaypointValidator extends WaypointValidator
 {
     /**

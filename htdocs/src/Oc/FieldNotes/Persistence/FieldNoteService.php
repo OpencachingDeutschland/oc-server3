@@ -5,11 +5,6 @@ namespace Oc\FieldNotes\Persistence;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class FieldNoteService
- *
- * @package Oc\FieldNotes\Persistence
- */
 class FieldNoteService
 {
     /**
@@ -18,8 +13,6 @@ class FieldNoteService
     private $fieldNoteRepository;
 
     /**
-     * FieldNoteService constructor.
-     *
      * @param FieldNoteRepository $fieldNoteRepository
      */
     public function __construct(FieldNoteRepository $fieldNoteRepository)

@@ -5,11 +5,6 @@ namespace Oc\GeoCache\Persistence\GeoCacheLog;
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCacheEntity
- *
- * @package Oc\GeoCache\Persistence\GeoCacheLog
- */
 class GeoCacheLogEntity extends AbstractEntity
 {
     /**

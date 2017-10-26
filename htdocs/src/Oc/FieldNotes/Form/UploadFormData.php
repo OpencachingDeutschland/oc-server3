@@ -5,11 +5,6 @@ namespace Oc\FieldNotes\Form;
 use DateTime;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-/**
- * Class UploadFormData
- *
- * @package Oc\FieldNotes\Form
- */
 class UploadFormData
 {
     /**

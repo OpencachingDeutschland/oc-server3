@@ -2,11 +2,6 @@
 
 namespace Oc\GeoCache\Enum;
 
-/**
- * Class GeoCacheType
- *
- * @package Oc\GeoCache\Enum
- */
 class GeoCacheType
 {
     /**

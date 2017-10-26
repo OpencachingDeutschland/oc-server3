@@ -5,11 +5,6 @@ namespace Oc\FieldNotes\Import\Context;
 use Oc\FieldNotes\Form\UploadFormData;
 use Oc\FieldNotes\Struct\FieldNote;
 
-/**
- * Class ImportContext
- *
- * @package Oc\FieldNotes\Import\Context
- */
 class ImportContext
 {
     /**
@@ -23,8 +18,6 @@ class ImportContext
     private $formData;
 
     /**
-     * ImportContext constructor.
-     *
      * @param FieldNote[] $fieldNotes
      * @param UploadFormData $formData
      */
@@ -53,6 +46,4 @@ class ImportContext
     {
         return $this->formData;
     }
-
-
 }

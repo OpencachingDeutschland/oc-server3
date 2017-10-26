@@ -2,15 +2,10 @@
 
 namespace Oc\FieldNotes\Form;
 
-use Oc\FieldNotes\Persistence\FieldNoteService;
 use DateTime;
+use Oc\FieldNotes\Persistence\FieldNoteService;
 use Oc\GeoCache\Persistence\GeoCacheLog\GeoCacheLogService;
 
-/**
- * Class UploadFormDataFactory
- *
- * @package Oc\FieldNotes\Form
- */
 class UploadFormDataFactory
 {
     /**
@@ -24,8 +19,6 @@ class UploadFormDataFactory
     private $geoCacheLogService;
 
     /**
-     * UploadFormDataFactory constructor.
-     *
      * @param FieldNoteService $fieldNoteService
      * @param GeoCacheLogService $geoCacheLogService
      */
@@ -69,8 +62,6 @@ class UploadFormDataFactory
     }
 
     /**
-     * Fetches the latest log date.
-     *
      * @param $userId
      *
      * @return DateTime|null

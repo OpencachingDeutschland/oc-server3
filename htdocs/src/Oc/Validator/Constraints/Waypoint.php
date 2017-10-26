@@ -5,9 +5,6 @@ namespace Oc\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Class Waypoint
- *
- * @package Oc\Validator\Constraints
  * @Annotation
  */
 class Waypoint extends Constraint

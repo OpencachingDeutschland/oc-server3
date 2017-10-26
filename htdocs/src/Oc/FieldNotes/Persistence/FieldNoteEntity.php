@@ -6,11 +6,6 @@ use DateTime;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class FieldNoteEntity
- *
- * @package Oc\FieldNotes\Persistence
- */
 class FieldNoteEntity extends AbstractEntity
 {
     /**

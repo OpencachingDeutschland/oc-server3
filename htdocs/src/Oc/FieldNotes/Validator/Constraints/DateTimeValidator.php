@@ -6,11 +6,6 @@ use DateTime as PHPDateTime;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * Class DateTimeValidator
- *
- * @package Oc\FieldNotes\Validator\Constraints
- */
 class DateTimeValidator extends ConstraintValidator
 {
     const FORMAT_LONG = 'Y-m-d\TH:i:s\Z';

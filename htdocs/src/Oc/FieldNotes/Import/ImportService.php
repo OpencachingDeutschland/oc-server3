@@ -2,12 +2,12 @@
 
 namespace Oc\FieldNotes\Import;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Oc\FieldNotes\Context\HandleFormContext;
 use Oc\FieldNotes\Exception\FileFormatException;
 use Oc\FieldNotes\Form\UploadFormData;
 use Oc\FieldNotes\Import\Context\ImportContext;
-use Doctrine\ORM\EntityManagerInterface;
 use Oc\Validator\Exception\ValidationException;
 use Oc\Validator\Validator;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -15,11 +15,6 @@ use Symfony\Component\ExpressionLanguage\Node\Node;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
-/**
- * Class ImportService
- *
- * @package Oc\FieldNotes\Import
- */
 class ImportService
 {
     /**
@@ -48,8 +43,6 @@ class ImportService
     private $importer;
 
     /**
-     * ImportService constructor.
-     *
      * @param Importer $importer
      * @param FileParser $fileParser
      * @param Validator $validator

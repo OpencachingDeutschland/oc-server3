@@ -2,11 +2,6 @@
 
 namespace Oc\FieldNotes\Context;
 
-/**
- * Class HandleFormContext
- *
- * @package Oc\FieldNotes\Context
- */
 class HandleFormContext
 {
     /**
@@ -20,8 +15,6 @@ class HandleFormContext
     private $errors;
 
     /**
-     * HandleFormContext constructor.
-     *
      * @param bool $success
      * @param array $errors
      */
@@ -32,8 +25,6 @@ class HandleFormContext
     }
 
     /**
-     * Was the handling of the form successful?
-     *
      * @return bool
      */
     public function isSuccess()

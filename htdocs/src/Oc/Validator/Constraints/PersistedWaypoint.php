@@ -3,9 +3,6 @@
 namespace Oc\Validator\Constraints;
 
 /**
- * Class PersistedWaypoint
- *
- * @package Oc\Validator\Constraints
  * @Annotation
  */
 class PersistedWaypoint extends Waypoint

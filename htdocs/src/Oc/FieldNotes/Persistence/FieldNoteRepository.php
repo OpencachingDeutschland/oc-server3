@@ -10,11 +10,6 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class FieldNoteRepository
- *
- * @package Oc\FieldNotes\Persistence
- */
 class FieldNoteRepository
 {
     /**
@@ -34,8 +29,6 @@ class FieldNoteRepository
     private $geoCacheRepository;
 
     /**
-     * FieldNoteRepository constructor.
-     *
      * @param Connection $connection
      * @param GeoCacheRepository $geoCacheRepository
      */

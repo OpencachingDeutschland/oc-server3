@@ -11,11 +11,6 @@ use Oc\FieldNotes\Persistence\FieldNoteService;
 use Oc\FieldNotes\Struct\FieldNote;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 
-/**
- * Class Importer
- *
- * @package Oc\FieldNotes\Import
- */
 class Importer
 {
     /**
@@ -29,8 +24,6 @@ class Importer
     private $fieldNoteService;
 
     /**
-     * Importer constructor.
-     *
      * @param GeoCacheService $geoCacheService
      * @param FieldNoteService $fieldNoteService
      */

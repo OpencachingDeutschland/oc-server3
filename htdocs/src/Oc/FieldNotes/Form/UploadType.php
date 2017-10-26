@@ -10,7 +10,6 @@ use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -25,8 +24,6 @@ class UploadType extends AbstractType
     protected $translator;
 
     /**
-     * UploadType constructor.
-     *
      * @param TranslatorInterface $translator
      */
     public function __construct(TranslatorInterface $translator)
@@ -93,8 +90,6 @@ class UploadType extends AbstractType
     }
 
     /**
-     * Returns formatted date.
-     *
      * @param DateTime $date
      *
      * @return string

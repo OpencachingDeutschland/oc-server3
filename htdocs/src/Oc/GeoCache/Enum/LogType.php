@@ -2,11 +2,6 @@
 
 namespace Oc\GeoCache\Enum;
 
-/**
- * Class LogType
- *
- * @package Oc\GeoCache\Enum
- */
 class LogType
 {
     /**

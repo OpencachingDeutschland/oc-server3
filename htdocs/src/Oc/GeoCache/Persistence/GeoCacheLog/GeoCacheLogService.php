@@ -2,15 +2,9 @@
 
 namespace Oc\GeoCache\Persistence\GeoCacheLog;
 
-use Oc\GeoCache\Enum\WaypointType;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class GeoCacheLogService
- *
- * @package Oc\GeoCache\Persistence\GeoCacheLog
- */
 class GeoCacheLogService
 {
     /**
@@ -19,8 +13,6 @@ class GeoCacheLogService
     private $geoCacheRepository;
 
     /**
-     * GeoCacheLogService constructor.
-     *
      * @param GeoCacheLogRepository $geoCacheRepository
      */
     public function __construct(GeoCacheLogRepository $geoCacheRepository)

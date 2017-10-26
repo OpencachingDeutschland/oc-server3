@@ -10,11 +10,6 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class GeoCacheRepository
- *
- * @package Oc\GeoCache\Persistence\GeoCache
- */
 class GeoCacheRepository
 {
     /**

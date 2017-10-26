@@ -88,6 +88,8 @@ class CountryRepository
         );
 
         $entity->short = $this->connection->lastInsertId();
+
+        return $entity;
     }
 
     /**
@@ -133,11 +135,8 @@ class CountryRepository
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
         $this->connection->delete(
             self::TABLE,
-            $databaseArray,
             ['short' => $entity->short]
         );
 
@@ -178,15 +177,15 @@ class CountryRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CountryEntity();
-        $entity->short = (string) $data['short'];
-        $entity->name = (string) $data['name'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
+        $entity->short = $data['short'];
+        $entity->name = $data['name'];
+        $entity->de = $data['de'];
+        $entity->en = $data['en'];
         $entity->translationId = (int) $data['trans_id'];
         $entity->listDefaultDe = (bool) $data['list_default_de'];
         $entity->listDefaultEn = (bool) $data['list_default_en'];
-        $entity->sortDe = (string) $data['sort_de'];
-        $entity->sortEn = (string) $data['sort_en'];
+        $entity->sortDe = $data['sort_de'];
+        $entity->sortEn = $data['sort_en'];
 
         return $entity;
     }

@@ -1262,6 +1262,6 @@ div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
 .btn { padding: 5px; cursor: pointer; }
 input[type="file"] { border:0; }
 hr.spacer { width:98%; margin: 20px 0; }
-form[name="upload_field_notes"] div { margin-bottom:10px; }
+form[name="upload"] div { margin-bottom:10px; }
 
 #googlemap .gm-style div a div {display:none;}

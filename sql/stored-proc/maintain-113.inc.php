@@ -1369,15 +1369,6 @@ sql(
                 END;'
 );
 
-sql_dropTrigger('newsBeforeInsert');
-sql(
-    'CREATE TRIGGER `newsBeforeInsert` BEFORE INSERT ON `news`
-            FOR EACH ROW
-                BEGIN
-                    SET NEW.`date_created`=NOW();
-                END;'
-);
-
 sql_dropTrigger('picturesBeforeInsert');
 sql(
     "CREATE TRIGGER `picturesBeforeInsert` BEFORE INSERT ON `pictures`

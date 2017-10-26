@@ -3,13 +3,11 @@
 namespace Oc\FieldNotes\Controller;
 
 use Oc\AbstractController;
-use Oc\FieldNotes\Entity\FieldNote;
-use Oc\FieldNotes\FieldNoteService;
-use Oc\FieldNotes\Form\DataProvider\UploadFieldNotesDataProvider;
-use Oc\FieldNotes\Form\UploadFieldNotesType;
-use Oc\Util\DateUtil;
+use Oc\FieldNotes\Form\UploadFormDataFactory;
+use Oc\FieldNotes\Import\ImportService;
+use Oc\FieldNotes\Form\UploadType;
+use Oc\FieldNotes\Persistence\FieldNoteService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +20,10 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class FieldNotesController extends AbstractController
 {
+    /**
+     * @var ImportService
+     */
+    private $importService;
 
     /**
      * @var FieldNoteService
@@ -29,30 +31,32 @@ class FieldNotesController extends AbstractController
     private $fieldNoteService;
 
     /**
-     * @var UploadFieldNotesDataProvider
-     */
-    private $dataProvider;
-
-    /**
      * @var TranslatorInterface
      */
     private $translator;
+    /**
+     * @var UploadFormDataFactory
+     */
+    private $formDataFactory;
 
     /**
      * FieldNotesController constructor.
      *
+     * @param ImportService $importService
      * @param FieldNoteService $fieldNoteService
-     * @param UploadFieldNotesDataProvider $dataProvider
+     * @param UploadFormDataFactory $formDataFactory
      * @param TranslatorInterface $translator
      */
     public function __construct(
+        ImportService $importService,
         FieldNoteService $fieldNoteService,
-        UploadFieldNotesDataProvider $dataProvider,
+        UploadFormDataFactory $formDataFactory,
         TranslatorInterface $translator
     ) {
+        $this->importService = $importService;
         $this->fieldNoteService = $fieldNoteService;
-        $this->dataProvider = $dataProvider;
         $this->translator = $translator;
+        $this->formDataFactory = $formDataFactory;
     }
 
     /**
@@ -67,43 +71,24 @@ class FieldNotesController extends AbstractController
     public function indexAction(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
+
+        $this->setMenu(MNU_MYPROFILE_FIELD_NOTES);
+        $this->setTitle($this->translator->trans('field_notes.field_notes'));
+
         $user = $this->getUser();
 
-        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
-        $fieldNotes = $repository->findBy([
-            'user' => $user->getId()
-        ], [
-            'date' => 'ASC',
-            'id' => 'ASC'
-        ]);
+        $fieldNotes = $this->fieldNoteService->getUserListing($user->getId());
 
-        $form = $this->createForm(UploadFieldNotesType::class, $this->dataProvider->getData($user->getId()));
+        $fieldNoteFormData = $this->formDataFactory->create($user->getId());
+
+        $form = $this->createForm(UploadType::class, $fieldNoteFormData);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /**
-             * @var UploadedFile $file
-             */
-            $file = $form->getData()[UploadFieldNotesType::FIELD_FILE];
+            $formHandleContext = $this->importService->handleFormData($fieldNoteFormData);
 
-            try {
-                $ignoreDate = null;
-
-                if (!empty($form->getData()[UploadFieldNotesType::FIELD_IGNORE])) {
-                    $ignoreDate = DateUtil::dateTimeFromMySqlFormat(
-                        $form->getData()[UploadFieldNotesType::FIELD_IGNORE_DATE]
-                    );
-                }
-
-                $this->fieldNoteService->importFromFile($file->getRealPath(), $user->getId(), $ignoreDate);
-            } catch (\Exception $e) {
-                $this->addErrorMessage($e->getMessage());
-
-                return $this->redirectToRoute('field-notes');
-            }
-
-            if ($this->fieldNoteService->hasErrors()) {
-                foreach ($this->fieldNoteService->getErrors() as $error) {
+            if (!$formHandleContext->isSuccess()) {
+                foreach ($formHandleContext->getErrors() as $error) {
                     $this->addErrorMessage($error);
                 }
 
@@ -116,9 +101,6 @@ class FieldNotesController extends AbstractController
 
             return $this->redirectToRoute('field-notes');
         }
-
-        $this->setMenu(MNU_MYPROFILE_FIELD_NOTES);
-        $this->setTitle($this->translator->trans('field_notes.field_notes'));
 
         return $this->render('field-notes/index.html.twig', [
             'user' => $user,
@@ -141,19 +123,16 @@ class FieldNotesController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
-        $fieldNote = $repository->findOneBy([
-            'user' => $user->getId(),
-            'id' => $id
+        $fieldNote = $this->fieldNoteService->fetchOneBy([
+            'id' => $id,
+            'user_id' => $user->getId()
         ]);
 
-        if (!$fieldNote) {
+        if ($fieldNote === null) {
             return $this->redirectToRoute('field-notes');
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($fieldNote);
-        $em->flush();
+        $this->fieldNoteService->remove($fieldNote);
 
         $this->addSuccessMessage(
             $this->translator->trans('field_notes.success.deleted')
@@ -181,22 +160,18 @@ class FieldNotesController extends AbstractController
             return $this->redirectToRoute('field-notes');
         }
 
-        $repository = $this->getDoctrine()->getRepository(FieldNote::class);
-        $em = $this->getDoctrine()->getManager();
-
         foreach ($selectedFieldNotes as $fieldNoteId) {
-            $fieldNote = $repository->findOneBy([
-                'user' => $user->getId(),
-                'id' => $fieldNoteId
+            $fieldNote = $this->fieldNoteService->fetchOneBy([
+                'id' => $fieldNoteId,
+                'user_id' => $user->getId()
             ]);
 
-            if (!$fieldNote) {
+            if ($fieldNote === null) {
                 continue;
             }
-            $em->remove($fieldNote);
-        }
 
-        $em->flush();
+            $this->fieldNoteService->remove($fieldNote);
+        }
 
         $this->addSuccessMessage(
             $this->translator->trans('field_notes.success.deleted_multiple')

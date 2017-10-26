@@ -1139,7 +1139,6 @@ function dbv_157()   // discard news entry system
     // The feature of displaying news via `news` table stays for now,
     // but the feature of entering news via the OC website is discarded.
 
-    sql('TRUNCATE TABLE `news`');
     sql(
         "UPDATE `user`
          SET `admin` = `admin` \& ~'&1'

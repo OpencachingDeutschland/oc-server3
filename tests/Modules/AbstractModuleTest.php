@@ -11,10 +11,18 @@ abstract class AbstractModuleTest extends PHPUnitTestCase
 {
     protected $dir;
 
-    public function __construct($name = null, array $data = array(), $dataName = '')
+    public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
 
         $this->dir = __DIR__;
+    }
+
+    public function bootSymfonyKernel()
+    {
+        $debug = true;
+
+        $kernel = new \AppKernel('test', $debug);
+        $kernel->boot();
     }
 }

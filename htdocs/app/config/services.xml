@@ -22,5 +22,6 @@
         </service>
 
         <service id="Oc\FieldNotes\Persistence\FieldNoteService" public="true"/>
+        <service id="OcLegacy\Translation\TranslationService" public="true"/>
     </services>
 </container>

@@ -4,8 +4,8 @@ namespace Oc\FieldNotes\Controller;
 
 use Oc\AbstractController;
 use Oc\FieldNotes\Form\UploadFormDataFactory;
-use Oc\FieldNotes\Import\ImportService;
 use Oc\FieldNotes\Form\UploadType;
+use Oc\FieldNotes\Import\ImportService;
 use Oc\FieldNotes\Persistence\FieldNoteService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -55,8 +55,8 @@ class FieldNotesController extends AbstractController
     ) {
         $this->importService = $importService;
         $this->fieldNoteService = $fieldNoteService;
-        $this->translator = $translator;
         $this->formDataFactory = $formDataFactory;
+        $this->translator = $translator;
     }
 
     /**

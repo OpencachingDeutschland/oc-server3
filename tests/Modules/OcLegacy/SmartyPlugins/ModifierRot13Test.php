@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Oc\SmartyPlugins;
+namespace OcTest\Modules\OcLegacy\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 

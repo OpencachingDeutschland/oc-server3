@@ -1,8 +1,12 @@
 <?php
 /**
- * Smarty {translation key="snippet.key"} function plugin
+ * Smarty {translation key="snippet.key"} function plugin *
+ *
+ * @param $params
+ * @param $smarty
+ * @return string
  */
-function smarty_function_translation($params, &$smarty)
+function smarty_function_translation($params)
 {
     global $opt;
     $translation = AppKernel::Container()->get(OcLegacy\Translation\TranslationService::class);

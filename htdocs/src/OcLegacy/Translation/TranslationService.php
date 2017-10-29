@@ -3,6 +3,7 @@
 namespace OcLegacy\Translation;
 
 use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -12,31 +13,19 @@ class TranslationService implements TranslatorInterface
 
     public function __construct()
     {
-        $translator = new Translator('de', new \Symfony\Component\Translation\MessageSelector());
+        $translator = new Translator('de', new MessageSelector());
         $translator->setFallbackLocales(['en']);
 
         $yamlLoader = new YamlFileLoader();
         $translator->addLoader('yml', $yamlLoader);
 
         foreach (['de', 'fr', 'nl', 'es', 'pl', 'it', 'ru'] as $languageKey) {
-            $translator->addResource(
-                'yml',
-                __DIR__ . '/../../../app/Resources/translations/constants.' . $languageKey . '.yml',
-                $languageKey
-            );
-            $translator->addResource(
-                'yml',
-                __DIR__ . '/../../../app/Resources/translations/messages.' . $languageKey . '.yml',
-                $languageKey
-            );
-            $translator->addResource(
-                'yml',
-                __DIR__ . '/../../../app/Resources/translations/validators.' . $languageKey . '.yml',
-                $languageKey
-            );
+            $translator->addResource('yml', __DIR__ . '/../../../app/Resources/translations/constants.' . $languageKey . '.yml', $languageKey);
+            $translator->addResource('yml', __DIR__ . '/../../../app/Resources/translations/messages.' . $languageKey . '.yml', $languageKey);
+            $translator->addResource('yml', __DIR__ . '/../../../app/Resources/translations/validators.' . $languageKey . '.yml', $languageKey);
         }
-        $this->translator = $translator;
 
+        $this->translator = $translator;
     }
 
     /**

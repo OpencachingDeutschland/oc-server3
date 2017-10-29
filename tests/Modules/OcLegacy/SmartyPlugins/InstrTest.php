@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Oc\SmartyPlugins;
+namespace OcTest\Modules\OcLegacy\SmartyPlugins;
 
 use OcTest\Modules\AbstractModuleTest;
 
@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 /**
  * Class RandTest
  *
- * @package OcTest\Modules\Oc\SmartyPlugins
+ * @package OcTest\Modules\OcLegacy\SmartyPlugins
  */
 class InstrTest extends AbstractModuleTest
 {

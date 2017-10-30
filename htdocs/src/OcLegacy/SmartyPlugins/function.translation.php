@@ -2,8 +2,7 @@
 /**
  * Smarty {translation key="snippet.key"} function plugin *
  *
- * @param $params
- * @param $smarty
+ * @param array $params
  * @return string
  */
 function smarty_function_translation($params)

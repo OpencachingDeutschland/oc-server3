@@ -29,7 +29,7 @@ class TranslationService implements TranslatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function trans($id, array $parameters = [], $domain = null, $locale = null)
     {
@@ -37,7 +37,7 @@ class TranslationService implements TranslatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
     {
@@ -45,7 +45,7 @@ class TranslationService implements TranslatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setLocale($locale)
     {
@@ -53,7 +53,7 @@ class TranslationService implements TranslatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLocale()
     {

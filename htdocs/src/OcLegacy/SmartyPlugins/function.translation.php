@@ -5,7 +5,7 @@
  * @param array $params
  * @return string
  */
-function smarty_function_translation($params)
+function smarty_function_translation(array $params)
 {
     global $opt;
 

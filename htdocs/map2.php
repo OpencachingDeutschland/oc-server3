@@ -380,7 +380,7 @@ function output_cachexml($sWaypoint)
     }
 
     $wphandler = new HandlerChildWp();
-    $waypoints = $wphandler->getChildWps($rCache['cache_id'], true);
+    $waypoints = $wphandler->getChildWps($rCache['cache_id'], $login->userid, true);
 
     echo '<caches>' . "\n";
     echo '  <cache ';

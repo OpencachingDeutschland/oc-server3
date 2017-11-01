@@ -3,7 +3,6 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-use Oc\Libse\Cache\ManagerCache;
 use Oc\Libse\ChildWp\ControllerChildWp;
 use Oc\Libse\ChildWp\HandlerChildWp;
 
@@ -21,7 +20,7 @@ if ($login->userid == 0) {
 $isSubmit = isset($_POST['submitform']);
 $redirect = isset($_POST['back']);
 
-$cacheManager = new ManagerCache();
+$cacheManager = AppKernel::Container()->get(Oc\Libse\Cache\ManagerCache::class);;
 $handler = new HandlerChildWp();
 $controller = new ControllerChildWp();
 $presenter = $controller->createPresenter($tpl, $cacheManager, $handler);

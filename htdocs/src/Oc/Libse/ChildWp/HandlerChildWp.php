@@ -5,6 +5,7 @@
 
 namespace Oc\Libse\ChildWp;
 
+use Doctrine\DBAL\Connection;
 use Oc\Libse\CacheNote\PresenterCacheNote;
 use Oc\Libse\Coordinate\CoordinateCoordinate;
 use Oc\Libse\Coordinate\TypeCoordinate;
@@ -13,109 +14,114 @@ use Oc\Libse\Language\TranslatorLanguage;
 class HandlerChildWp
 {
     private $childWpTypes = [];
+
     private $translator;
 
-    public function __construct()
+    /**
+     * @var Connection
+     */
+    private $connection;
+
+    /**
+     * @var TranslatorLanguage
+     */
+    private $translatorLanguage;
+
+    public function __construct(Connection $connection, TranslatorLanguage $translatorLanguage)
     {
         global $opt;
 
-        $this->translator = new TranslatorLanguage();
+        $this->connection = $connection;
+        $this->translatorLanguage = $translatorLanguage;
 
         // read available types from DB
-        $rs = sql(
+        $rs = $this->connection->fetchAll(
             "SELECT `coordinates_type`.`id`,
-            IFNULL(`trans`.`text`,
-            `coordinates_type`.`name`) AS `name`,
-            `coordinates_type`.`image`,
-            IFNULL(`trans_pp`.`text`,
-            `coordinates_type`.`preposition`) AS `preposition`
-            FROM `coordinates_type`
-            LEFT JOIN `sys_trans_text` `trans`
-                ON `coordinates_type`.`trans_id`=`trans`.`trans_id`
-                AND `trans`.`lang`='&1'
-            LEFT JOIN `sys_trans_text` `trans_pp`
-                ON `coordinates_type`.`pp_trans_id`=`trans_pp`.`trans_id`
-                AND `trans_pp`.`lang`='&1'",
-            $opt['template']['locale']
+                    IFNULL(`trans`.`text`, `coordinates_type`.`name`) AS `name`,
+                    `coordinates_type`.`image`,
+                    IFNULL(`trans_pp`.`text`,
+                    `coordinates_type`.`preposition`) AS `preposition`
+             FROM `coordinates_type` 
+             LEFT JOIN `sys_trans_text` `trans`
+               ON `coordinates_type`.`trans_id`=`trans`.`trans_id`
+               AND `trans`.`lang`='&1'
+             LEFT JOIN `sys_trans_text` `trans_pp`
+               ON `coordinates_type`.`pp_trans_id`=`trans_pp`.`trans_id`
+               AND `trans_pp`.`lang`= :lang",
+            [':lang' => $opt['template']['locale']]
         );
-        while ($r = sql_fetch_assoc($rs)) {
+
+        foreach ($rs as $r) {
             $type = new TypeChildWp($r['id'], $r['name'], $r['preposition'], $r['image']);
             $this->childWpTypes[$type->getId()] = $type;
         }
-        sql_free_result($rs);
     }
 
-    public function add($cacheId, $type, $lat, $lon, $desc)
+    public function add($cacheId, $type, $lat, $lon, $description)
     {
-        sql(
-            "INSERT INTO coordinates(type, subtype, latitude, longitude, cache_id, description)
-            VALUES(&1, &2, &3, &4, &5, '&6')",
-            TypeCoordinate::ChildWaypoint,
-            $type,
-            $lat,
-            $lon,
-            $cacheId,
-            $desc
-        );
+        $data = [
+            'type' => TypeCoordinate::ChildWaypoint,
+            'subtype' => $type,
+            'latitude' => $lat,
+            'longitude' => $lon,
+            'cache_id' => $cacheId,
+            'description' => $description,
+        ];
+
+        $this->connection->insert('coordinates', $data);
     }
 
-    public function update($childId, $type, $lat, $lon, $desc)
+    public function update($childId, $type, $lat, $lon, $description)
     {
-        sql(
-            "UPDATE coordinates
-            SET subtype = &1, latitude = &2, longitude = &3, description = '&4'
-            WHERE id = &5",
-            $type,
-            $lat,
-            $lon,
-            $desc,
-            $childId
-        );
+        $data = [
+            'subtype' => $type,
+            'latitude' => $lat,
+            'longitude' => $lon,
+            'description' => $description,
+        ];
+
+        $this->connection->update('coordinates', $data, ['id' => $childId]);
     }
 
-    public function getChildWp($childid)
+    public function getChildWp($childId)
     {
-        $rs = sql(
+        $rs = $this->connection->fetchAssoc(
             'SELECT id, cache_id, type, subtype, latitude, longitude, description
-             FROM coordinates
-             WHERE id = &1',
-            $childid
+                 FROM coordinates
+                 WHERE id = :id',
+            ['id' => $childId]
         );
-        $ret = $this->recordToArray(sql_fetch_array($rs));
-        mysql_free_result($rs);
 
-        return $ret;
+        return $this->recordToArray($rs);
     }
 
-    public function getChildWps($cacheId, $includeUserNote = false)
+    public function getChildWps($cacheId, $userId, $includeUserNote = false)
     {
-        global $login;
-
         $type2 = 0;
 
         if ($includeUserNote) {
             $type2 = TypeCoordinate::UserNote;
         }
 
-        $rs = sql(
+        $rs = $this->connection->fetchAll(
             'SELECT id, cache_id, type, subtype, latitude, longitude, description
             FROM coordinates
-            WHERE cache_id = &1
-            AND type IN (&2,&3)
-            AND (type=\'&2\' OR (user_id=\'&4\' AND latitude!=0 AND longitude!=0))
+            WHERE cache_id = :cacheId
+            AND type IN (:type1, :type2)
+            AND (type=:type1 OR (user_id= :userId AND latitude!=0 AND longitude!=0))
             ORDER BY id',
-            $cacheId,
-            TypeCoordinate::ChildWaypoint,
-            $type2,
-            $login->userid
+            [
+                'cacheId' => $cacheId,
+                'type1' => TypeCoordinate::ChildWaypoint,
+                'type2' => $type2,
+                'userId' => $userId,
+            ]
         );
         $ret = [];
 
-        while ($r = sql_fetch_array($rs)) {
+        foreach ($rs as $r) {
             $ret[] = $this->recordToArray($r);
         }
-
-        mysql_free_result($rs);
 
         return $ret;
     }
@@ -164,7 +170,7 @@ class HandlerChildWp
             }
         } else {
             $ret['type'] = 0;
-            $ret['name'] = $this->translator->translate('Personal cache note');
+            $ret['name'] = $this->translatorLanguage->translate('Personal cache note');
             $ret['image'] = PresenterCacheNote::image;
         }
 
@@ -173,6 +179,6 @@ class HandlerChildWp
 
     public function delete($childId)
     {
-        sql('DELETE FROM coordinates WHERE id = &1', $childId);
+        $this->connection->delete('coordinates', ['id' => $childId]);
     }
 }

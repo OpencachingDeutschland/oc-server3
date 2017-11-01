@@ -1,8 +1,6 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- *
  * TODO: use cache() class at all
  ***************************************************************************/
 
@@ -20,8 +18,9 @@ $login->verify();
 
 function getChildWaypoints($cacheid)
 {
+    global $login;
     $wphandler = new HandlerChildWp();
-    $waypoints = $wphandler->getChildWps($cacheid);
+    $waypoints = $wphandler->getChildWps($cacheid, $login->userid);
     $count = count($waypoints);
 
     if ($count > 0) {

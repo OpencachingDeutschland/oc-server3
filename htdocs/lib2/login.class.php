@@ -386,8 +386,6 @@ class login
             }
         }
 
-
-
         // user specified a country?
         if ($this->userid != 0) {
             $sCountry = sql_value("SELECT `country` FROM `user` WHERE `user_id`='&1'", null, $this->userid);

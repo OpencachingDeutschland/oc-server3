@@ -204,7 +204,7 @@ function search_output()
     $children = '';
     $rs = sql('SELECT &searchtmp.`cache_id` `cacheid` FROM &searchtmp');
     while ($r = sql_fetch_array($rs)) {
-        if (count($childwphandler->getChildWps($r['cacheid']))) {
+        if (count($childwphandler->getChildWps($r['cacheid'], $login->userid))) {
             $children = ' (HasChildren)';
             break;
         }
@@ -595,7 +595,7 @@ function search_output()
         $thisline = mb_ereg_replace('{geokrety}', $gkentries, $thisline);
 
         // additional waypoints, including personal cache note
-        $childWaypoints = $childwphandler->getChildWps($r['cacheid']);
+        $childWaypoints = $childwphandler->getChildWps($r['cacheid'], $login->userid);
         $n = 1;
         $digits = '%0' . strlen(count($childWaypoints)) . 'd';
 

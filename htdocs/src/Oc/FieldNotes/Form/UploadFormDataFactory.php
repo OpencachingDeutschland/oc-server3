@@ -62,7 +62,7 @@ class UploadFormDataFactory
     }
 
     /**
-     * @param $userId
+     * @param int $userId
      *
      * @return DateTime|null
      */
@@ -81,7 +81,7 @@ class UploadFormDataFactory
     /**
      * Fetches the latest field note date.
      *
-     * @param $userId
+     * @param int $userId
      *
      * @return DateTime|null
      */

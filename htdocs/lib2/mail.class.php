@@ -37,7 +37,7 @@ class mail extends Smarty
         ];
 
         // disable caching ...
-        $this->caching = false;
+        $this->caching = 0;
 
         // register additional functions
         $this->load_filter('pre', 't');

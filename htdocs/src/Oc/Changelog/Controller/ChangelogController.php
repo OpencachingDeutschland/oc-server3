@@ -35,6 +35,8 @@ class ChangelogController extends Controller
 
     /**
      * @Route(path="/changelog")
+     *
+     * @return Response
      */
     public function indexAction()
     {

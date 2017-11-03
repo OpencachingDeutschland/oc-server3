@@ -192,7 +192,7 @@ class FieldNoteRepository
             $databaseArray
         );
 
-        $entity->id = $this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
@@ -220,7 +220,7 @@ class FieldNoteRepository
             ['id' => $entity->id]
         );
 
-        $entity->id = $this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }

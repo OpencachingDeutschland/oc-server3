@@ -26,8 +26,8 @@ class user
      */
     public static function fromEMail($email)
     {
-        $userId = sql_value("SELECT `user_id` FROM `user` WHERE `email`='&1'", 0, $email);
-        if ($userId == 0) {
+        $userId = (int) sql_value("SELECT `user_id` FROM `user` WHERE `email`='&1'", 0, $email);
+        if ($userId === 0) {
             return null;
         }
 
@@ -41,8 +41,8 @@ class user
      */
     public static function fromUsername($username)
     {
-        $userId = sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
-        if ($userId == 0) {
+        $userId = (int) sql_value("SELECT `user_id` FROM `user` WHERE `username`='&1'", 0, $username);
+        if ($userId === 0) {
             return null;
         }
 
@@ -101,7 +101,7 @@ class user
 
         $this->nUserId = $nNewUserId + 0;
 
-        if ($nNewUserId == ID_NEW) {
+        if ($nNewUserId === ID_NEW) {
             $this->reUser->addNew(null);
         } else {
             $this->reUser->load($this->nUserId);
@@ -121,7 +121,7 @@ class user
      */
     public static function existUsername($username)
     {
-        return (sql_value("SELECT COUNT(*) FROM `user` WHERE `username`='&1'", 0, $username) != 0);
+        return sql_value("SELECT COUNT(*) FROM `user` WHERE `username`='&1'", 0, $username) != 0;
     }
 
     /**
@@ -131,7 +131,7 @@ class user
      */
     public static function existEMail($email)
     {
-        return (sql_value("SELECT COUNT(*) FROM `user` WHERE `email`='&1'", 0, $email) != 0);
+        return sql_value("SELECT COUNT(*) FROM `user` WHERE `email`='&1'", 0, $email) != 0;
     }
 
     public function getUserId()
@@ -221,7 +221,7 @@ class user
      */
     public function setFirstName($value)
     {
-        if ($value != '') {
+        if ($value !== '') {
             if (!mb_ereg_match(REGEX_FIRST_NAME, $value)) {
                 return false;
             }
@@ -241,7 +241,7 @@ class user
      */
     public function setLastName($value)
     {
-        if ($value != '') {
+        if ($value !== '') {
             if (!mb_ereg_match(REGEX_LAST_NAME, $value)) {
                 return false;
             }
@@ -264,9 +264,9 @@ class user
     {
         if ($value !== null && (sql_value("SELECT COUNT(*) FROM countries WHERE short='&1'", 0, $value) == 0)) {
             return false;
-        } else {
-            return $this->reUser->setValue('country', $value);
         }
+
+        return $this->reUser->setValue('country', $value);
     }
 
     public function getLanguageCode()
@@ -278,9 +278,9 @@ class user
     {
         if ($value !== null && (sql_value("SELECT COUNT(*) FROM languages WHERE short='&1'", 0, $value) == 0)) {
             return false;
-        } else {
-            return $this->reUser->setValue('language', $value);
         }
+
+        return $this->reUser->setValue('language', $value);
     }
 
     public function getLatitude()
@@ -312,7 +312,7 @@ class user
      */
     public function setLongitude($value)
     {
-        if (($value + 0) > 180 || ($value + 0) < - 180) {
+        if (($value + 0) > 180 || ($value + 0) < -180) {
             return false;
         }
 
@@ -551,36 +551,36 @@ class user
     {
         if ($this->reUserStat->exist()) {
             return $this->reUserStat->getValue('found');
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public function getStatNotFound()
     {
         if ($this->reUserStat->exist()) {
             return $this->reUserStat->getValue('notfound');
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public function getStatNote()
     {
         if ($this->reUserStat->exist()) {
             return $this->reUserStat->getValue('note');
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public function getStatHidden()
     {
         if ($this->reUserStat->exist()) {
             return $this->reUserStat->getValue('hidden');
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public function getDateRegistered()
@@ -623,7 +623,7 @@ class user
         return $this->reUser->getAnyChanged();
     }
 
-    // return if successfull (with insert)
+    // return if successful (with insert)
     public function save()
     {
         sql_slave_exclude();
@@ -634,9 +634,9 @@ class user
             $this->getStatpic()->invalidate();
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getStatpic()
@@ -646,7 +646,7 @@ class user
 
     public static function createCode()
     {
-        return mb_strtoupper(mb_substr(md5(uniqid('')), 0, 13));
+        return mb_strtoupper(mb_substr(md5(uniqid('', true)), 0, 13));
     }
 
     public function requestNewPWCode()
@@ -658,7 +658,7 @@ class user
         }
 
         $email = $this->getEMail();
-        if ($email === null || $email == '') {
+        if ($email === null || $email === '') {
             return false;
         }
 
@@ -666,7 +666,7 @@ class user
             return false;
         }
 
-        $this->setNewPWCode($this->createCode());
+        $this->setNewPWCode(self::createCode());
         if (!$this->reUser->saveField('new_pw_code')) {
             return false;
         }
@@ -710,11 +710,13 @@ class user
             return false;
         }
 
-        if (mb_strtolower($this->getEMail()) == mb_strtolower($email)) {
+        $storedEMail = $this->getEMail();
+
+        if (mb_strtolower($storedEMail) == mb_strtolower($email)) {
             return false;
         }
 
-        if ($this->getEMail() === null || $this->getEMail() == '') {
+        if ($storedEMail === null || $storedEMail == '') {
             return false;
         }
 
@@ -722,7 +724,7 @@ class user
             return false;
         }
 
-        $this->setNewEMailCode($this->createCode());
+        $this->setNewEMailCode(self::createCode());
         if (!$this->reUser->saveField('new_email_code')) {
             return false;
         }
@@ -777,7 +779,7 @@ class user
         }
 
         $email = $this->getEMail();
-        if ($email === null || $email == '') {
+        if ($email === null || $email === '') {
             return false;
         }
 
@@ -814,14 +816,14 @@ class user
         $mail->assign('userid', $this->getUserId());
         $mail->assign('last_name', $this->getLastName());
         $mail->assign('first_name', $this->getFirstName());
-        $mail->assign('country', $countriesList->getCountryLocaleName($this->getCountryCode()));
+        $mail->assign('country', $countriesList::getCountryLocaleName($this->getCountryCode()));
         $mail->assign('code', $this->getActivationCode());
 
         if ($mail->send()) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function sendEMail($nFromUserId, $sSubject, $sText, $bSendEMailAddress)
@@ -840,11 +842,11 @@ class user
             return false;
         }
 
-        if ($sSubject == '') {
+        if ($sSubject === '') {
             return false;
         }
 
-        if ($sText == '') {
+        if ($sText === '') {
             return false;
         }
 
@@ -860,7 +862,7 @@ class user
         if ($fromUser->getIsActive() == false) {
             return false;
         }
-        if ($fromUser->getEMail() === null || $fromUser->getEMail() == '') {
+        if ($fromUser->getEMail() === null || $fromUser->getEMail() === '') {
             return false;
         }
 
@@ -909,9 +911,9 @@ class user
             );
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function canDisable()
@@ -925,9 +927,9 @@ class user
 
         if ($this->getIsActive() != 0) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function disable()
@@ -987,7 +989,7 @@ class user
             $error = true;
             $cache = new cache($rCache['cache_id']);
             if ($cache->setStatus(6) && $cache->save()) {
-                $log = cachelog::createNew($rCache['cache_id'], $login->userid, true);
+                $log = cachelog::createNew($rCache['cache_id'], $login->userid);
                 if ($log !== false) {
                     $log->setType(cachelog::LOGTYPE_LOCKED, true);
                     $log->setOcTeamComment(true);
@@ -1022,9 +1024,9 @@ class user
 
         if ($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**

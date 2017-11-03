@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $sUserCountry = $login->getUserCountry();
@@ -18,6 +20,9 @@ $tpl->cache_lifetime = 300;
 $tpl->cache_id = $sUserCountry . '|' . $opt['page']['protocol'];
 
 if (!$tpl->is_cached()) {
+    /** @var Connection $connection */
+    $connection = AppKernel::Container()->get(Connection::class);
+
     // welcome message
     if (isset($opt['page']['message'])) {
         $tpl->assign('message', $opt['page']['message']);
@@ -61,19 +66,24 @@ if (!$tpl->is_cached()) {
     // current cache and log-counters
     $tpl->assign(
         'count_hiddens',
-        number1000(sql_value_slave('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status` = 1', 0))
+        number1000((int) $connection->fetchColumn('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status` = 1'))
     );
     $tpl->assign(
         'count_founds',
-        number1000(sql_value_slave('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type` = 1', 0))
+        number1000((int) $connection->fetchColumn('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type` = 1'))
     );
     $tpl->assign(
         'count_users',
         number1000(
-            sql_value_slave(
-                'SELECT COUNT(*) AS `users` FROM (SELECT DISTINCT `user_id`
-                             FROM `cache_logs` UNION DISTINCT SELECT DISTINCT `user_id`
-                             FROM `caches`) AS `t`', 0
+            (int) $connection->fetchColumn(
+                'SELECT COUNT(*) AS `users`
+                 FROM (
+                       SELECT DISTINCT `user_id`
+                       FROM `cache_logs` 
+                       UNION DISTINCT
+                       SELECT DISTINCT `user_id`
+                       FROM `caches`
+                 ) AS `t`'
             )
         )
     );
@@ -83,9 +93,12 @@ if (!$tpl->is_cached()) {
     // get total event count for all countries
     $tpl->assign(
         'total_events',
-        sql_value_slave(
-            'SELECT COUNT(*) FROM `caches` WHERE `type` = 6 AND `date_hidden` >= curdate() AND `status` = 1',
-            0
+        (int) $connection->fetchColumn(
+            'SELECT COUNT(*)
+             FROM `caches`
+             WHERE `type` = 6
+             AND `date_hidden` >= curdate()
+             AND `status` = 1'
         )
     );
 
@@ -116,18 +129,19 @@ if (!$tpl->is_cached()) {
     $tpl->assign('toprating_days', $getNew->ratingDays());
 
     // country and language parameters
-    $sUserCountryName = sql_value(
-        "SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
+    $sUserCountryName = $connection->fetchColumn(
+        'SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
          FROM `countries`
          LEFT JOIN `sys_trans`
            ON `countries`.`trans_id`=`sys_trans`.`id`
          LEFT JOIN `sys_trans_text`
            ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
-           AND `sys_trans_text`.`lang`='&2'
-         WHERE `countries`.`short`='&1'",
-        '',
-        $sUserCountry,
-        $opt['template']['locale']
+           AND `sys_trans_text`.`lang`= :lang
+         WHERE `countries`.`short`= :short',
+        [
+            ':lang' => $opt['template']['locale'],
+            ':short' => $sUserCountry,
+        ]
     );
     $tpl->assign('usercountry', $sUserCountryName);
     $tpl->assign('usercountryCode', $sUserCountry);
@@ -140,7 +154,7 @@ if (!$tpl->is_cached()) {
                 'logpics',
                 'recommendations',
                 'forum',
-                'newcaches'
+                'newcaches',
             ]
         );
     } else {
@@ -152,7 +166,7 @@ if (!$tpl->is_cached()) {
                 'newcaches',
                 'logpics',
                 'forum',
-                'news'
+                'news',
             ]
         );
     }

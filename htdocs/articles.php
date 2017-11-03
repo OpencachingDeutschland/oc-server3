@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 //get the article name to display
@@ -57,10 +59,12 @@ $tpl->caching = true;
 $tpl->cache_id = 'articles|' . $language . '|' . $article;
 $tpl->cache_lifetime = 43200;
 
-$tpl->menuitem = sql_value(
-    "SELECT `id` FROM `sys_menu` WHERE `href`='&1' LIMIT 1",
-    0,
-    'articles.php?page=' . urlencode($article)
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+
+$tpl->menuitem = $connection->fetchColumn(
+    "SELECT `id` FROM `sys_menu` WHERE `href`= :href LIMIT 1",
+    [':href' => 'articles.php?page=' . urlencode($article)]
 );
 if ($tpl->menuitem == 0) {
     $tpl->redirect('index.php');
@@ -72,7 +76,7 @@ if (!$tpl->is_cached()) {
 
     /* prepare smarty vars for special pages ...
      */
-    if ($article == 'cacheinfo') {
+    if ($article === 'cacheinfo') {
         require_once __DIR__ . '/lib2/logic/attribute.class.php';
         $attributes = attribute::getSelectableAttributesListArray(true);
         $tpl->assign('attributes', $attributes);

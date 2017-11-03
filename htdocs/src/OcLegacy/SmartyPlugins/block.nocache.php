@@ -13,6 +13,13 @@
  *
  * {nocache name="<unique blockname>" <varname1>=$<value1> [...]}...{/nocache}
  */
+/**
+ * @param $param
+ * @param $content
+ * @param $smarty
+ * @param $repeat
+ * @return mixed
+ */
 function smarty_block_nocache($param, $content, &$smarty, &$repeat)
 {
     static $counter = [];

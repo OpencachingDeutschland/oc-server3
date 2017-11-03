@@ -6,7 +6,11 @@
  * @subpackage plugins
  * Smarty {coordinput prefix="coord" lat=48.12345 lon=9.12345} function plugin
  */
-function smarty_function_coordinput($params, &$smarty)
+/**
+ * @param $params
+ * @return string
+ */
+function smarty_function_coordinput($params)
 {
     $prefix = $params['prefix'];
     $lat = $params['lat'] + 0;

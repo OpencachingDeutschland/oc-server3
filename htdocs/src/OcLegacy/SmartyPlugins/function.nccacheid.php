@@ -6,7 +6,11 @@
  * @subpackage plugins
  * Smarty {nccacheid wp=$wpnc} function plugin
  */
-function smarty_function_nccacheid($params, &$smarty)
+/**
+ * @param $params
+ * @return float|int
+ */
+function smarty_function_nccacheid($params)
 {
     return hexdec(mb_substr($params['wp'], 1));
 }

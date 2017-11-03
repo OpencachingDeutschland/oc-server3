@@ -44,7 +44,7 @@ function sendCode()
     $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
 
     $user = new user($userId);
-    if ($user->exist() == false) {
+    if ($user->exist() === false) {
         $tpl->error(ERROR_UNKNOWN);
     }
 
@@ -67,7 +67,7 @@ function formAction()
     $disduelicense = isset($_REQUEST['chkdisduelicense']) ? $_REQUEST['chkdisduelicense'] + 0 : 0;
 
     $user = new user($userId);
-    if ($user->exist() == false) {
+    if ($user->exist() === false) {
         $tpl->error(ERROR_UNKNOWN);
     }
     $username = $user->getUsername();

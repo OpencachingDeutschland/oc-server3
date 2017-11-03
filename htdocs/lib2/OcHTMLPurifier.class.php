@@ -75,7 +75,7 @@ class OcHTMLPurifier extends HTMLPurifier
             'fieldset',
             'Block',
             'Flow',
-            'Common' /* ,array('disabled' => 'Enum#disabled', 'name' => 'ID') */
+            'Common'
         ); //  HTML5 attributes currently not supported by TinyMCE
         $def->addElement('legend', 'Inline', 'Flow', 'Common');
         $def->addElement('q', 'Inline', 'Inline', 'Common', ['cite' => 'URI']);

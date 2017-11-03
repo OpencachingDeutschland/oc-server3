@@ -3,13 +3,15 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
 
 $tpl->name = 'adminhistory';
 $tpl->menuitem = MNU_ADMIN_HISTORY;
 
 $login->verify();
-if ($login->userid == 0) {
+if ($login->userid === 0) {
     $tpl->redirect_login();
 }
 
@@ -17,20 +19,28 @@ if (($login->admin & ADMIN_USER) != ADMIN_USER) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+
 if (isset($_REQUEST['wp'])) {
-    $cache_id = sql_value("SELECT `cache_id` FROM `caches` WHERE `wp_oc`='&1'", 0, $_REQUEST['wp']);
+    $cacheId = $connection->fetchColumn(
+        'SELECT `cache_id` FROM `caches` WHERE `wp_oc`=:wp',
+        [':wp' => $_REQUEST['wp']]
+    );
 } else {
-    $cache_id = isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] + 0 : - 1;
+    $cacheId = isset($_REQUEST['cacheid']) ? (int) $_REQUEST['cacheid'] : -1;
 }
 
 $showHistory = false;
 $error = '';
 
-if ($cache_id >= 0 && sql_value("SELECT COUNT(*) FROM `caches` WHERE `cache_id`='&1'", 0, $cache_id) <> 1) {
+if ($cacheId >= 0 &&
+    $connection->fetchColumn('SELECT COUNT(*) FROM `caches` WHERE `cache_id`=:id',[':id' => $cacheId]) <> 1)
+{
     $error = $translate->t('Cache not found', '', '', 0);
-} elseif ($cache_id > 0) {
+} elseif ($cacheId > 0) {
     $showHistory = true;
-    $cache = new cache($cache_id);
+    $cache = new cache($cacheId);
     $cache->setTplHistoryData(0);
 }
 

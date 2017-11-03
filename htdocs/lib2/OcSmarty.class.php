@@ -58,7 +58,7 @@ class OcSmarty extends Smarty
         ];
 
         // disable caching ... if caching is enabled, 1 hour is default
-        $this->caching = false;
+        $this->caching = 0;
         $this->cache_lifetime = 3600; // default
 
         // register additional functions
@@ -159,7 +159,7 @@ class OcSmarty extends Smarty
         // if the user is an admin, don't cache the content
         if (isset($login)) {
             if ($login->admin) {
-                $this->caching = false;
+                $this->caching = 0;
             }
         }
 
@@ -172,6 +172,7 @@ class OcSmarty extends Smarty
         // ... and some of the $opt
         $locale = $opt['template']['locale'];
 
+        $optn = [];
         $optn['debug'] = $opt['debug'];
         $optn['template']['locales'] = $opt['template']['locales'];
         $optn['template']['locale'] = $opt['template']['locale'];
@@ -225,14 +226,16 @@ class OcSmarty extends Smarty
             $optn['session']['id'] = session_id();
         }
 
+        $loginn = [
+            'username' => '',
+            'userid' => '',
+            'admin' => '',
+        ];
+
         if (isset($login)) {
             $loginn['username'] = $login->username;
             $loginn['userid'] = $login->userid;
             $loginn['admin'] = $login->admin;
-        } else {
-            $loginn['username'] = '';
-            $loginn['userid'] = '';
-            $loginn['admin'] = '';
         }
 
         // build menu
@@ -365,7 +368,7 @@ class OcSmarty extends Smarty
             $this->assign('opt', $optn);
             $this->assign('login', $loginn);
 
-            $this->caching = false;
+            $this->caching = 0;
 
             // unset sqldebugger to allow proper translation of sqldebugger template
             $opt['debug'] = $opt['debug'] & ~DEBUG_SQLDEBUGGER;
@@ -388,7 +391,7 @@ class OcSmarty extends Smarty
     public function error($id)
     {
         $this->clear_all_assign();
-        $this->caching = false;
+        $this->caching = 0;
 
         $this->assign('page', $this->name);
         $this->assign('id', $id);

@@ -164,7 +164,7 @@ $opt['logic']['cracklib'] = false;
  * (table news and newstopic.php)
  *
  * you have to correct entries in table sys_menu and
- * lang/de/stdtyle/lib/menu.php respectivly
+ * lang/de/stdtyle/lib/menu.php respectively
  */
 $opt['news']['include'] = 'http://blog.opencaching.de/feed/';
 $opt['news']['count'] = 8;

@@ -35,7 +35,7 @@ $t4 = "\t\t\t\t";
 $t5 = "\t\t\t\t\t";
 $t6 = "\t\t\t\t\t\t";
 
-$sDateshort = 'Y-m-d';
+$sDateShort = 'Y-m-d';
 $sDateformat = 'Y-m-d H:i:s';
 
 /* end with some constants */
@@ -65,7 +65,7 @@ if ((($bOcXmlTag != '0') && ($bOcXmlTag != '1')) ||
     exit;
 }
 
-if (($sCharset != 'iso-8859-1') && ($sCharset != 'utf-8')) {
+if (($sCharset !== 'iso-8859-1') && ($sCharset !== 'utf-8')) {
     echo 'Invalid charset';
     exit;
 }
@@ -287,22 +287,18 @@ if (isset($_REQUEST['sessionid'])) {
         $recordcount = sql_fetch_array($rs);
         mysql_free_result($rs);
 
-        if ($sCharset == 'iso-8859-1') {
+        if ($sCharset === 'iso-8859-1') {
             header('Content-Type: application/xml; charset=ISO-8859-1');
-        } else {
-            if ($sCharset == 'utf-8') {
-                header('Content-Type: application/xml; charset=UTF-8');
-            }
+        } elseif ($sCharset === 'utf-8') {
+            header('Content-Type: application/xml; charset=UTF-8');
         }
 
         $xmloutput = '';
         if ($bXmlDecl == '1') {
-            if ($sCharset == 'iso-8859-1') {
+            if ($sCharset === 'iso-8859-1') {
                 $xmloutput .= '<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>' . "\n";
-            } else {
-                if ($sCharset == 'utf-8') {
-                    $xmloutput .= '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . "\n";
-                }
+            } elseif ($sCharset === 'utf-8') {
+                $xmloutput .= '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . "\n";
             }
         }
         if ($bOcXmlTag == '1') {
@@ -319,10 +315,10 @@ if (isset($_REQUEST['sessionid'])) {
             $xmloutput .= '</ocxmlsession>';
         }
 
-        if ($sCharset == 'iso-8859-1') {
+        if ($sCharset === 'iso-8859-1') {
             echo utf8ToIso88591($xmloutput);
         } else {
-            if ($sCharset == 'utf-8') {
+            if ($sCharset === 'utf-8') {
                 echo $xmloutput;
             }
         }
@@ -375,7 +371,7 @@ exit;
  */
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
-    global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateshort, $t1, $t2, $t3;
+    global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateShort, $t1, $t2, $t3;
     global $opt, $bLicense, $sLanguage, $safemode_zip, $sCharset, $bAttrlist;
     global $ocXmlVersion;
     // alle records aus tmpxml_* übertragen
@@ -456,27 +452,29 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     // temporäre Datei erstellen
     if (!is_dir($zip_basedir . 'ocxml11/' . $sessionid)) {
-        mkdir($zip_basedir . 'ocxml11/' . $sessionid);
+        if (!mkdir($zip_basedir . 'ocxml11/' . $sessionid) && !is_dir($zip_basedir . 'ocxml11/' . $sessionid)) {
+            throw new \RuntimeException(
+                sprintf('Directory "%s" was not created', $zip_basedir . 'ocxml11/' . $sessionid)
+            );
+        }
     }
 
-    $fileid = 1;
+    $fileId = 1;
     while (file_exists(
-        $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml'
+        $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileId . '.xml'
     )) {
-        $fileid++;
+        $fileId++;
     }
 
-    $xmlfilename = $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml';
+    $xmlfilename = $zip_basedir . 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileId . '.xml';
 
-    $f = fopen($xmlfilename, 'w');
+    $f = fopen($xmlfilename, 'wb');
 
     if ($bXmlDecl == '1') {
-        if ($sCharset == 'iso-8859-1') {
+        if ($sCharset === 'iso-8859-1') {
             fwrite($f, '<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>' . "\n");
-        } else {
-            if ($sCharset == 'utf-8') {
-                fwrite($f, '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' . "\n");
-            }
+        } elseif ($sCharset === 'utf-8') {
+            fwrite($f, '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' . "\n");            
         }
     }
 
@@ -882,7 +880,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         fwrite(
             $f,
             $t2 . '<date>' . date(
-                $ocXmlVersion >= 13 ? $sDateformat : $sDateshort,
+                $ocXmlVersion >= 13 ? $sDateformat : $sDateShort,
                 strtotime($r['date'])
             ) . '</date>' . "\n"
         );
@@ -1041,8 +1039,8 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     fclose($f);
 
-    $rel_xmlfile = 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid . '.xml';
-    $rel_zipfile = 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileid;
+    $rel_xmlfile = 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileId . '.xml';
+    $rel_zipfile = 'ocxml11/' . $sessionid . '/' . $sessionid . '-' . $filenr . '-' . $fileId;
 
     // zippen und url-redirect
     if ($ziptype == '0') {
@@ -1214,9 +1212,6 @@ function startXmlSession(
             $recordcount['removedobjects'] = mysql_affected_rows();
         }
     } else {
-        $sqlWhere = '';
-        $sqlHaving = '';
-
         if ($selection['type'] == 1) {
             sql(
                 "CREATE TEMPORARY TABLE `tmpxmlSesssionCaches` (`cache_id` INT(11),
@@ -1324,7 +1319,7 @@ function startXmlSession(
         }
 
         if ($bPicture == 1) {
-            // cachebilder
+            // cache images
             sql(
                 "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
                  SELECT DISTINCT &1, 6, `pictures`.`id`
@@ -1337,7 +1332,7 @@ function startXmlSession(
             );
             $recordcount['pictures'] = mysql_affected_rows();
 
-            // bilder von logs
+            // log images
             if ($bPictureFromCachelog == 1) {
                 sql(
                     "INSERT INTO `xmlsession_data` (`session_id`, `object_type`, `object_id`)
@@ -1524,9 +1519,9 @@ function xmlcdata($str)
         $str = mb_ereg_replace(']]>', ']] >', $str);
 
         return '<![CDATA[' . filterevilchars($str) . ']]>';
-    } else {
-        return xmlentities($str);
     }
+
+    return xmlentities($str);
 }
 
 function xmlentities($str)
@@ -1570,12 +1565,16 @@ function filterevilchars($str)
  */
 function object_id2uuid($objectid, $objecttype)
 {
-    if ($objecttype == '1') {
-        return log_id2uuid($objectid);
-    } elseif ($objecttype == '2') {
-        return cache_id2uuid($objectid);
-    } elseif ($objecttype == '4') {
-        return user_id2uuid($objectid);
+    switch ($objecttype) {
+        case'1':
+            return log_id2uuid($objectid);
+            break;
+        case'2':
+            return cache_id2uuid($objectid);
+            break;
+        case'4':
+            return user_id2uuid($objectid);
+            break;
     }
 }
 
@@ -1628,31 +1627,32 @@ function unlinkrecursiv($path)
     // requests, which both try to delete entries, files and directories.
     // Therefore errors must be gracefully ignored.
 
-    if (mb_substr($path, -1) != '/') {
+    if (mb_substr($path, -1) !== '/') {
         $path .= '/';
     }
 
-    $notunlinked = 0;
+    $notUnlinked = 0;
 
     $hDir = opendir($path);
     if ($hDir === false) {
-        ++$notunlinked;
+        ++$notUnlinked;
     } else {
         while (false !== ($file = readdir($hDir))) {
-            if (($file != '.') && ($file != '..')) {
+            if (($file !== '.') && ($file !== '..')) {
                 if (is_dir($path . $file)) {
-                    if (unlinkrecursiv($path . $file . '/') == false) {
-                        $notunlinked++;
+                    if (unlinkrecursiv($path . $file . '/') === false) {
+                        $notUnlinked++;
                     }
                 } else {
-                    if ((mb_substr($file, -4) == '.zip') ||
-                        (mb_substr($file, -3) == '.gz') ||
-                        (mb_substr($file, -4) == '.bz2') ||
-                        (mb_substr($file, -4) == '.xml')
+                    $extension = mb_substr($file, -4);
+                    if ($extension === '.zip' ||
+                        $extension === '.bz2' ||
+                        $extension === '.xml' ||
+                        mb_substr($file, -3) === '.gz'
                     ) {
                         @unlink($path . $file);
                     } else {
-                        $notunlinked++;
+                        $notUnlinked++;
                     }
                 }
             }
@@ -1660,13 +1660,13 @@ function unlinkrecursiv($path)
         closedir($hDir);
     }
 
-    if ($notunlinked == 0) {
+    if ($notUnlinked === 0) {
         @rmdir($path);
 
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
@@ -1677,15 +1677,15 @@ function output_convert($str)
 {
     global $sCharset;
 
-    if ($sCharset == 'iso-8859-1') {
+    if ($sCharset === 'iso-8859-1') {
         if ($str != null) {
             return utf8ToIso88591($str);
-        } else {
-            return $str;
         }
-    } else {
-        if ($sCharset == 'utf-8') {
-            return $str;
-        }
+
+        return $str;
+    }
+
+    if ($sCharset === 'utf-8') {
+        return $str;
     }
 }

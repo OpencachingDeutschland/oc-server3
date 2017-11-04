@@ -3,6 +3,8 @@
  *    For license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 header('Content-type: text/html; charset=utf-8');
 
 $opt['rootpath'] = '../../';
@@ -21,22 +23,24 @@ function showstats($header, $condition, $limit)
     echo "<h3>$header</h3>\n";
     echo "<table>\n";
 
-    $rs = sql(
-        'SELECT COUNT(*) as `count`, `username` as `name`
+    /** @var Connection $connection */
+    $connection = AppKernel::Container()->get(Connection::class);
+
+    $results = $connection->fetchAll(
+        'SELECT @curRow := @curRow + 1 AS rank, COUNT(*) as `count`, `username` as `name`
         FROM `caches`
         LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`
         LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
+        INNER JOIN (SELECT @curRow := 0) r
         WHERE status = 1 AND ' . $condition . "
         GROUP BY `caches`.`user_id`
         HAVING COUNT(*) >= $limit
         ORDER BY COUNT(*) DESC"
     );
 
-    $n = 1;
-    while ($r = sql_fetch_assoc($rs)) {
-        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($n++) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . "</td><td>&nbsp;&nbsp;" . $r['name'] . "</td></tr>\n";
+    foreach ($results as $r) {
+        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($r['rank']) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . "</td><td>&nbsp;&nbsp;" . $r['name'] . "</td></tr>\n";
     }
-    sql_free_result($rs);
 
     echo "</table>\n";
 }

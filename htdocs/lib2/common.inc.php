@@ -31,21 +31,21 @@ function __autoload($class_name)
 }
 
 if (!function_exists('bindtextdomain')) {
-    function bindtextdomain($domain, $directory)
+    function bindtextdomain()
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('textdomain')) {
-    function textdomain($domain)
+    function textdomain()
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('gettext')) {
-    function gettext($message)
+    function gettext()
     {
         // dummy function for travis
     }

@@ -114,10 +114,9 @@ function escape_javascript($text)
 
 // called if mysql_query failed, sends email to sysadmin
 /**
- * @param $sql
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_failed($sql)
+function sql_failed()
 {
     sql_error();
 }
@@ -254,10 +253,9 @@ function sql_slave($sql)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $_dblink
  * @param $sql
- * @param $bSlave
  * @return resource
  */
-function sql_internal($_dblink, $sql, $bSlave)
+function sql_internal($_dblink, $sql)
 {
     global $sql_warntime;
     global $sql_replacements;
@@ -414,7 +412,6 @@ function sql_internal($_dblink, $sql, $bSlave)
         $ua = isset($_SERVER['HTTP_USER_AGENT']) ? "\r\n" . $_SERVER['HTTP_USER_AGENT'] : '';
         sql_warn('execution took ' . $cSqlExecution->diff() . ' seconds' . $ua);
     }
-
 
     return $result;
 }

@@ -122,13 +122,12 @@ function helppagelink($ocpage, $title = 'Instructions')
 {
     global $translate;
 
-    $helpurl = helppageurl($ocpage);
-    if ($helpurl == '') {
+    $helpUrl = helppageurl($ocpage);
+    if ($helpUrl == '') {
         return '';
-    } else {
-        $imgtitle = $translate->t($title, '', basename(__FILE__), __LINE__);
-        $imgtitle = "alt='" . $imgtitle . "' title='" . $imgtitle . "'";
-
-        return "<a class='nooutline' href='" . $helpurl . "' " . $imgtitle . " target='_blank'>";
     }
+    $imgTitle = $translate->t($title, '', basename(__FILE__), __LINE__);
+    $imgTitle = "alt='" . $imgTitle . "' title='" . $imgTitle . "'";
+
+    return "<a class='nooutline' href='" . $helpUrl . "' " . $imgTitle . " target='_blank'>";
 }

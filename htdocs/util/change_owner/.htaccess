@@ -1,4 +1,0 @@
-AuthUserFile /path/to/passwdfile/.htpasswd
-AuthName "OC-Admin"
-AuthType Basic
-require valid-user

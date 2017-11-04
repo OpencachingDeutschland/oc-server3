@@ -7,10 +7,9 @@
  ***
  * Smarty {season winter='...' spring='...' summer='...' autumn='...'} function plugin
  * @param $params
- * @param $smarty
  * @return mixed
  */
-function smarty_function_season($params, &$smarty)
+function smarty_function_season($params)
 {
     $season = date('z');
     if (isset($params['season'])) {

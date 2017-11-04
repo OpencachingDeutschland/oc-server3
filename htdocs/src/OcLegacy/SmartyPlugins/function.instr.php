@@ -6,7 +6,11 @@
  * @subpackage plugins
  * Smarty {instr haystack=$string needle=$string} function plugin
  */
-function smarty_function_instr($params, &$smarty)
+/**
+ * @param $params
+ * @return bool
+ */
+function smarty_function_instr($params)
 {
     return (strpos($params['haystack'], $params['needle']) !== false);
 }

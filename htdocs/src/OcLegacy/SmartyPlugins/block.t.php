@@ -17,6 +17,10 @@
  *
  * @returns    string    Modified string
  */
+/**
+ * @param $str
+ * @return string
+ */
 function smarty_gettext_strarg($str)
 {
     $tr = [];

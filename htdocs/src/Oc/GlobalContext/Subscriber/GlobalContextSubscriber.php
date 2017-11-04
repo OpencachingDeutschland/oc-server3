@@ -43,6 +43,8 @@ class GlobalContextSubscriber implements EventSubscriberInterface
 
     /**
      * @param GetResponseEvent $event
+     *
+     * @return void
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

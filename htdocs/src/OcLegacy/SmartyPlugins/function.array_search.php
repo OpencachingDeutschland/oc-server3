@@ -6,6 +6,11 @@
  * @subpackage plugins
  * Smarty {array_search var=varname needle=value haystack=array} function plugin
  */
+/**
+ * @param $params
+ * @param $smarty
+ * @return string
+ */
 function smarty_function_array_search($params, &$smarty)
 {
     if (!is_array($params['haystack'])) {

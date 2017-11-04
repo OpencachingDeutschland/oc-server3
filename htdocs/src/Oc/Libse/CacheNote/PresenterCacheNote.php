@@ -31,8 +31,7 @@ class PresenterCacheNote
     public function __construct($request = false, $translator = false)
     {
         $this->request = $request;
-        $this->translator = $translator;
-        $this->coordinate = new PresenterCoordinate($this->request, $this->translator);
+        $this->coordinate = new PresenterCoordinate($this->request, $translator);
     }
 
     public function init($cacheNoteHandler, $userId, $cacheId)
@@ -49,6 +48,8 @@ class PresenterCacheNote
 
     /**
      * @param \OcSmarty $template
+     *
+     * @return void
      */
     public function prepare($template)
     {

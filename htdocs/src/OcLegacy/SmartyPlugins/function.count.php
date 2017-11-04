@@ -7,7 +7,11 @@
  ***
  * Smarty {count array=$array} function plugin
  */
-function smarty_function_count($params, &$smarty)
+/**
+ * @param $params
+ * @return int
+ */
+function smarty_function_count($params)
 {
     return count($params['array']);
 }

@@ -110,7 +110,7 @@
             <td><img src="{$opt.page.teampic_url}hanekju.png"/></td>
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>
-                Datenpflege
+                Datenpflege, Support
             </td>
         </tr>
         <tr>
@@ -125,6 +125,13 @@
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                 Softwareentwicklung
+            </td>
+        </tr>
+        <tr>
+            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+            <td>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
+                Support
             </td>
         </tr>
         <tr>

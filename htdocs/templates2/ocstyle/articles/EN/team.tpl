@@ -82,7 +82,7 @@
             <tr>
                 <td><img src="{$opt.page.teampic_url}hanekju.png"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>
-                    data maintenance
+                    data maintenance, user support
                 </td>
             </tr>
             <tr>
@@ -97,6 +97,13 @@
                 <td>
                     <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                     software development
+                </td>
+            </tr>
+            <tr>
+                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+                <td>
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
+                    user support
                 </td>
             </tr>
             <tr>

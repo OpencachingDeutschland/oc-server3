@@ -5,6 +5,8 @@ namespace Oc\GeoCache\Controller;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\LabelAlignment;
 use Endroid\QrCode\QrCode;
+use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
+use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,19 +15,29 @@ use Symfony\Component\HttpFoundation\Response;
 class QrCodeController extends Controller
 {
     /**
+     * @var GeoCacheService
+     */
+    private $geoCacheService;
+
+    public function __construct(GeoCacheService $geoCacheService)
+    {
+        $this->geoCacheService = $geoCacheService;
+    }
+
+    /**
      * @param Request $request
      * @return Response
      * @Route("/api/geocache/qrCodes")
      */
     public function getReportsAction(Request $request)
     {
-        $wp = $request->get('wp');
+        $geoCache = $this->geoCacheService->fetchByWaypoint($request->get('wp'));
 
-        if (preg_match('/(OC|GC)[A-Za-z0-9]{1,5}/', $wp) !== 1) {
+        if (!$geoCache instanceof GeoCacheEntity) {
             throw new \InvalidArgumentException('the waypoint is not valid!');
         }
 
-        $qrCode = new QrCode('https://www.opencaching.de/' . $wp);
+        $qrCode = new QrCode('https://www.opencaching.de/' . $geoCache->wpOc);
         $qrCode->setSize(300);
 
         $qrCode

@@ -29,7 +29,7 @@ class QrCodeController extends Controller
      * @return Response
      * @Route("/api/geocache/qrCodes")
      */
-    public function getReportsAction(Request $request)
+    public function generateQrCode(Request $request)
     {
         $geoCache = $this->geoCacheService->fetchByWaypoint($request->get('wp'));
 

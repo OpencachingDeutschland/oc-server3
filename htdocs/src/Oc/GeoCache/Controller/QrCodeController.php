@@ -22,7 +22,7 @@ class QrCodeController extends Controller
         $wp = $request->get('wp');
 
         if (preg_match('/(OC|GC)[A-Za-z0-9]{1,5}/', $wp) !== 1) {
-            die('the waypoint is not valid!');
+            throw new \InvalidArgumentException('the waypoint is not valid!');
         }
 
         $qrCode = new QrCode('https://www.opencaching.de/' . $wp);

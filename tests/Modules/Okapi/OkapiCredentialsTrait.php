@@ -19,6 +19,6 @@ trait OkapiCredentialsTrait
      */
     public function createOkapiClient()
     {
-        return new OkapiClient($this->getOkapiUrl(), $this->getConsumerKey());
+        return new OkapiClient($this->getOkapiUrl());
     }
 }

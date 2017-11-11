@@ -66,7 +66,8 @@ class OkapiClient
 
     protected function prepareResponse($result, $httpCode)
     {
-        if (null === $decodedResult = json_decode($result, true)) {
+        $decodedResult = json_decode($result, true);
+        if ($decodedResult === null) {
             echo "\n\n";
             var_dump($result);
             echo "\n\n";

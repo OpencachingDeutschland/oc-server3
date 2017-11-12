@@ -8,6 +8,15 @@
     AllowOverride All
     Order deny,allow
     Allow from all
+
+    RewriteEngine On
+    RewriteRule ^((OC|GC)[A-Za-z0-9]{1,5})$ /searchplugin.php?userinput=$1 [NC,L]
+
+    # symfony redirects
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteRule ^(.*)$ /symfony_app.php [QSA,L]
   </Directory>
 
   <Directory "%TRAVIS_BUILD_DIR%/htdocs/">

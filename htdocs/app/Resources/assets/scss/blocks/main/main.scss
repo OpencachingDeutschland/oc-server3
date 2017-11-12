@@ -1,0 +1,47 @@
+@import 'global';
+
+.main {
+    @include make-container();
+
+    &__inner {
+        @include make-row;
+
+        margin-top: $header-height;
+        min-height: 500px;
+
+        &-navigation {
+            @include make-col(12);
+
+            @include media-breakpoint-up(sm) {
+                @include make-col(4);
+            }
+
+            @include media-breakpoint-up(md) {
+                @include make-col(3);
+            }
+
+            @include media-breakpoint-up(lg) {
+                @include make-col(2);
+            }
+        }
+
+        &-content {
+            @include make-col(12);
+
+            margin-top: 0.5rem;
+
+            @include media-breakpoint-up(sm) {
+                @include make-col(8);
+            }
+
+            @include media-breakpoint-up(md) {
+                @include make-col(9);
+            }
+
+
+            @include media-breakpoint-up(lg) {
+                @include make-col(10);
+            }
+        }
+    }
+}

@@ -1,10 +1,15 @@
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/legacy.min.css') }}" />
+{% endblock %}
 
 {% include 'index/legacy/page-title.html.twig' %}
 
-{% include 'partials/flash-messages.html.twig' %}
+{% include '_components/flash-messages/flash-messages.html.twig' with { 'legacy': true } %}
 
 {% block body %}{% endblock %}
 
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('assets/js/legacy.js') }}"></script>
+{% endblock %}
 </body>
+

@@ -1248,15 +1248,6 @@ div.gm-stars { display:none; }
 div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
 .gm-iw, .gm-iw-table { font-size:11px; }
 
-/*
- * flash messages
- */
-.flash-messages { width:98%; }
-.flash-messages .alert { border: 1px solid; margin: 10px 0; padding:15px 10px; }
-.flash-messages .alert-success { color: #4F8A10; background-color: #DFF2BF; }
-.flash-messages .alert-info { color: #00529B; background-color: #BDE5F8; }
-.flash-messages .alert-danger { color: #D8000C; background-color: #FFBABA; }
-
 .field-notes-table { width: 98%; }
 .field-notes-table th, .field-notes-table td { padding: 5px; }
 .btn { padding: 5px; cursor: pointer; }

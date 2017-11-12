@@ -12,8 +12,6 @@
  *  to the root.
  ***************************************************************************/
 
-use Symfony\Component\Debug\Debug;
-
 // setup rootpath
 
 if (!isset($opt['rootpath'])) {
@@ -38,7 +36,6 @@ $debug = true;
 
 if (isset($opt['debug']) && $opt['debug']) {
     $env = 'dev';
-    Debug::enable();
 }
 
 $kernel = new AppKernel($env, $debug);

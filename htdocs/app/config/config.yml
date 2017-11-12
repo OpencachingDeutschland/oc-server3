@@ -30,7 +30,8 @@ framework:
         handler_id: ~
     fragments:       ~
     http_method_override: true
-    assets: ~
+    assets:
+        base_path: 'web'
 
 # Twig Configuration
 twig:
@@ -87,3 +88,7 @@ jms_translation:
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]
             excluded_dirs: [cache, data, logs]
+
+best_it_kitchensink:
+    template: 'kitchensink/index.html.twig'
+    data_provider: 'OcDev\KitchenSink\DataProvider\KitchenSinkDataProvider'

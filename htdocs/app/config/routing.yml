@@ -5,3 +5,6 @@ oc:
 oc_dev:
     resource: "../../src/OcDev/"
     type:     annotation
+
+best_it_kitchensink:
+    resource: "@BestItKitchensinkBundle/resources/config/routing.yml"

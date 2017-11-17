@@ -3,6 +3,7 @@
 namespace Oc\GeoCache\Persistence\GeoCache;
 
 use Oc\GeoCache\Enum\WaypointType;
+use Oc\GeoCache\Exception\UnknownWaypointTypeException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
@@ -46,11 +47,11 @@ class GeoCacheService
      */
     public function fetchByWaypoint($waypoint)
     {
-        $waypointType = WaypointType::guess($waypoint);
-
         $waypointEntity = null;
 
         try {
+            $waypointType = WaypointType::guess($waypoint);
+
             if ($waypointType === WaypointType::OC) {
                 $waypointEntity = $this->geoCacheRepository->fetchOneBy([
                     'wp_oc' => $waypoint,
@@ -59,6 +60,8 @@ class GeoCacheService
                 $waypointEntity = $this->geoCacheRepository->fetchGCWaypoint($waypoint);
             }
         } catch (RecordNotFoundException $e) {
+            $waypointEntity = null;
+        } catch (UnknownWaypointTypeException $e) {
             $waypointEntity = null;
         }
 

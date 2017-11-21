@@ -6,18 +6,18 @@ Opencaching.de Code Repository
 [Opencaching.de](https://www.opencaching.de) is a major Geocaching website in Germany.
 This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major
-[Opencaching code forks](http://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
+[Opencaching code forks](https://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
 the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/). Feel free to use it under the provided
 [license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/development/doc/license.txt)
 for setting up your own open and free Geocaching listing service! The code can easily be
 translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
-[Opencaching.de forum](http://forum.opencaching.de/) if you like to
+[Opencaching.de forum](https://forum.opencaching.de/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly
 on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team Member in
-[Opencaching.de forum](http://forum.opencaching.de/) or you start with our new minimal dump.
+[Opencaching.de forum](https://forum.opencaching.de/) or you start with our new minimal dump.
 
 In the Vagrant System our example login for the opencaching platform ist root with the password developer.
  
@@ -79,11 +79,11 @@ on development:
 
 Related Websites
 ----------------
-* [Opencaching.de Issue Tracker](http://redmine.opencaching.de/projects/oc-dev)
-* [Opencaching.de Git tutorial](http://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
-* [Opencaching.de Wiki](http://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](http://wiki.opencaching.de/index.php/Entwicklung)
-* [Opencaching.de Team Blog](http://blog.opencaching.de/) (German)
-* [Opencaching.de Forum](http://forum.opencaching.de/) (German and English) -> [Development](http://forum.opencaching-network.org/index.php?board=43.0)
+* [Opencaching.de Issue Tracker](https://redmine.opencaching.de/projects/oc-dev)
+* [Opencaching.de Git tutorial](https://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
+* [Opencaching.de Wiki](https://wiki.opencaching.de/index.php/Hauptseite) (German) -> [Development](https://wiki.opencaching.de/index.php/Entwicklung)
+* [Opencaching.de Team Blog](https://blog.opencaching.de/) (German)
+* [Opencaching.de Forum](https://forum.opencaching.de/) (German and English) -> [Development](https://forum.opencaching-network.org/index.php?board=43.0)
 * [Opencaching API project](https://github.com/opencaching/okapi)
 * [Opencaching.pl project](https://github.com/opencaching/opencaching-pl)
 * [Git explained](http://gitref.org/index.html)

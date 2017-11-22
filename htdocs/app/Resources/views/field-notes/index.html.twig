@@ -8,7 +8,7 @@
 {% block body %}
     {% if fieldNotes %}
         <font size="2">
-            <form method="post" action="{{ path('field-notes.delete-multiple') }}">
+            <form method="post" action="{{ path('field_notes.delete_multiple') }}">
                 <table class="searchtable field-notes-table" border="0" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
@@ -29,7 +29,7 @@
                                 <td class="{{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/viewcache.php?cacheid={{ fieldNote.geoCache.cacheId }}">{{ fieldNote.geoCache.name }}</a><br />{{ fieldNote.text | raw}}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ fieldNote.date | date('field_notes.date_format' | trans | desc('Y-m-d H:i')) }}</td>
                                 <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}">{{ ('field_notes.log_type.' ~ fieldNote.type) | trans({}, 'constants') }}</td>
-                                <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/log.php?fieldnoteid={{ fieldNote.id }}">{{ 'field_notes.btn.log_it' | trans }}</a>&nbsp;|&nbsp;<a href="{{ path('field-notes.delete', {id: fieldNote.id}) }}">{{ 'field_notes.btn.delete' | trans }}</a></td>
+                                <td class="nowrap {{ cycle(['search_listcolor1', 'search_listcolor2'], loop.index) }}"><a href="/log.php?fieldnoteid={{ fieldNote.id }}">{{ 'field_notes.btn.log_it' | trans }}</a>&nbsp;|&nbsp;<a href="{{ path('field_notes.delete', {id: fieldNote.id}) }}">{{ 'field_notes.btn.delete' | trans }}</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -12,28 +12,32 @@
         {% endblock %}
     </head>
     <body>
-        {% include '_components/header/header.html.twig' %}
+        <div class="site">
+            <div class="site__inner">
+                <nav class="site__inner-sidebar">
+                    {% include '_components/sidebar/sidebar.html.twig' %}
+                </nav>
+                <main class="site__inner-main main">
+                    <header class="main__header">
+                        {% include '_components/header/header.html.twig' %}
+                    </header>
+                    <div class="main__content main-content">
+                        {% block flash_messages %}
+                            <div class="main-content__flash-messages">
+                                {% include '_components/flash-messages/flash-messages.html.twig' %}
+                            </div>
+                        {% endblock %}
 
-        <main class="main">
-            <div class="main__inner">
-
-                <div class="main__inner-navigation">
-                    {% include '_components/navigation/navigation.html.twig' %}
-                </div>
-
-                <div class="main__inner-content main-inner-content">
-                    {% block flash_messages %}
-                        <div class="main-inner-content__flash-messages">
-                            {% include '_components/flash-messages/flash-messages.html.twig' %}
-                        </div>
-                    {% endblock %}
-
-                    {% block body %}{% endblock %}
-                </div>
+                        {% block body %}{% endblock %}
+                    </div>
+                    <footer class="main__footer">
+                        <h1>Footer</h1>
+                    </footer>
+                </main>
             </div>
-        </main>
+        </div>
 
-        {% include '_components/footer/footer.html.twig' %}
+        {#{% include '_components/footer/footer.html.twig' %}#}
 
         {% block javascripts %}
             <script src="{{ asset('assets/js/main.js') }}"></script>

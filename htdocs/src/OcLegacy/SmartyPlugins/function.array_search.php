@@ -2,9 +2,8 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- * Smarty {array_search var=varname needle=value haystack=array} function plugin
+ * @param mixed $params
+ * @param & $smarty
  */
 /**
  * @param $params

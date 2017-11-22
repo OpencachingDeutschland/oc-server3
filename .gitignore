@@ -65,6 +65,7 @@ htdocs/translation.zip
 /htdocs/translations.zip
 
 .psh.yaml
+.php_cs.cache
 /phpunit
 /htdocs/node_modules
 /htdocs/scss-lint-report.xml

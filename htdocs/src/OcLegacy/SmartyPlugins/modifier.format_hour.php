@@ -2,17 +2,10 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- *
- * Smarty plugin
- *
- * Type:     modifier<br>
- * Name:     format_hour<br>
- * Example:  {$value|format_hour}
  * @version  1.0
  *
  * @param string
+ * @param mixed $value
  *
  * @return string
  */

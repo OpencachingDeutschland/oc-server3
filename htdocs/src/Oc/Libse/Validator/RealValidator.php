@@ -37,6 +37,6 @@ class RealValidator extends NumericValidator
     {
         $value = str_replace(',', '.', $value);
 
-        return (float)$value;
+        return (float) $value;
     }
 }

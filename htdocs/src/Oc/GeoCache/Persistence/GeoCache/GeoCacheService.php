@@ -53,9 +53,9 @@ class GeoCacheService
         try {
             if ($waypointType === WaypointType::OC) {
                 $waypointEntity = $this->geoCacheRepository->fetchOneBy([
-                    'wp_oc' => $waypoint
+                    'wp_oc' => $waypoint,
                 ]);
-            } else if ($waypointType === WaypointType::GC) {
+            } elseif ($waypointType === WaypointType::GC) {
                 $waypointEntity = $this->geoCacheRepository->fetchGCWaypoint($waypoint);
             }
         } catch (RecordNotFoundException $e) {

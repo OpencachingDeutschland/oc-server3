@@ -3,7 +3,6 @@
 namespace Oc\FieldNotes\Form;
 
 use DateTime;
-use Oc\Util\DateUtil;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\AlreadySubmittedException;
 use Symfony\Component\Form\Exception\LogicException;
@@ -34,7 +33,6 @@ class UploadType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
-     * @return void
      * @throws UnexpectedTypeException
      * @throws LogicException
      * @throws AlreadySubmittedException
@@ -46,7 +44,7 @@ class UploadType extends AbstractType
                 'file',
                 FileType::class,
                 [
-                    'label' => 'field_notes.upload.file'
+                    'label' => 'field_notes.upload.file',
                 ]
             );
 
@@ -57,13 +55,11 @@ class UploadType extends AbstractType
      * Event listener for pre set data.
      *
      * @param FormEvent $event
-     *
-     * @return void
      */
     public function onPreSetFormData(FormEvent $event)
     {
         /**
-         * @var UploadFormData $data
+         * @var UploadFormData
          */
         $data = $event->getData();
 
@@ -81,9 +77,9 @@ class UploadType extends AbstractType
                 [
                     'required' => false,
                     'attr' => [
-                        'checked' => 'checked'
+                        'checked' => 'checked',
                     ],
-                    'label' => $ignoreFieldNotesBeforeLabel
+                    'label' => $ignoreFieldNotesBeforeLabel,
                 ]
             );
         }
@@ -105,13 +101,11 @@ class UploadType extends AbstractType
      * Configure form.
      *
      * @param OptionsResolver $resolver
-     *
-     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UploadFormData::class
+            'data_class' => UploadFormData::class,
         ]);
     }
 }

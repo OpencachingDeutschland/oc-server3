@@ -9,8 +9,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class CountryRepository
- *
- * @package Oc\Country
  */
 class CountryRepository
 {
@@ -39,9 +37,8 @@ class CountryRepository
     /**
      * Fetches all countries.
      *
-     * @return CountryEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return CountryEntity[]
      */
     public function fetchAll()
     {
@@ -70,9 +67,8 @@ class CountryRepository
      *
      * @param CountryEntity $entity
      *
-     * @return CountryEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return CountryEntity
      */
     public function create(CountryEntity $entity)
     {
@@ -97,9 +93,8 @@ class CountryRepository
      *
      * @param CountryEntity $entity
      *
-     * @return CountryEntity
-     *
      * @throws RecordNotPersistedException
+     * @return CountryEntity
      */
     public function update(CountryEntity $entity)
     {
@@ -125,9 +120,8 @@ class CountryRepository
      *
      * @param CountryEntity $entity
      *
-     * @return CountryEntity
-     *
      * @throws RecordNotPersistedException
+     * @return CountryEntity
      */
     public function remove(CountryEntity $entity)
     {
@@ -163,7 +157,7 @@ class CountryRepository
             'list_default_de' => $entity->listDefaultDe,
             'list_default_en' => $entity->listDefaultEn,
             'sort_de' => $entity->sortDe,
-            'sort_en' => $entity->sortEn
+            'sort_en' => $entity->sortEn,
         ];
     }
 

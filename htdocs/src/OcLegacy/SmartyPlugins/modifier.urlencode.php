@@ -9,6 +9,7 @@
  * @version  1.0
  *
  * @param string
+ * @param mixed $string
  *
  * @return string
  */

@@ -27,7 +27,7 @@ class CrowdinExport
         $select = '';
         $joins = '';
         foreach (['de', 'fr', 'nl', 'es', 'pl', 'it', 'ru'] as $languageKey) {
-            $joins .= "\n".' LEFT JOIN sys_trans_text ' . $languageKey . ' ON ' . $languageKey . '.trans_id = source.trans_id AND ' . $languageKey . '.lang = "' . $languageKey . '" ';
+            $joins .= "\n" . ' LEFT JOIN sys_trans_text ' . $languageKey . ' ON ' . $languageKey . '.trans_id = source.trans_id AND ' . $languageKey . '.lang = "' . $languageKey . '" ';
             $select .= ', ' . $languageKey . '.text as ' . $languageKey . ' ';
         }
 

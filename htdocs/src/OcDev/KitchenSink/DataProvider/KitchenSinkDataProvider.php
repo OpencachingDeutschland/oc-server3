@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class KitchenSinkDataProvider
- *
- * @package OcDev\KitchenSink\DataProvider
  */
 class KitchenSinkDataProvider implements DataProviderInterface
 {
@@ -40,7 +38,7 @@ class KitchenSinkDataProvider implements DataProviderInterface
         $this->session->getFlashBag()->add('error', 'Fehlerhafte Meldung!');
 
         return [
-            'navigation' => 'getNavigationDummies'
+            'navigation' => 'getNavigationDummies',
         ];
     }
 

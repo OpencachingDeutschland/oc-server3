@@ -13,8 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class CodeCoverageCommand
- *
- * @package Oc\Command
  */
 class CodeCoverageCommand extends AbstractCommand
 {
@@ -23,7 +21,6 @@ class CodeCoverageCommand extends AbstractCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws ConsoleInvalidArgumentException
      */
@@ -42,9 +39,8 @@ class CodeCoverageCommand extends AbstractCommand
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|null
-     *
      * @throws InvalidArgumentException
+     * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -60,8 +56,8 @@ class CodeCoverageCommand extends AbstractCommand
         $checkedElements = 0;
 
         foreach ($metrics as $metric) {
-            $totalElements += (int)$metric['elements'];
-            $checkedElements += (int)$metric['coveredelements'];
+            $totalElements += (int) $metric['elements'];
+            $checkedElements += (int) $metric['coveredelements'];
         }
 
         $coverage = ($checkedElements / $totalElements) * 100;

@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GlobalContextFactory
- *
- * @package Oc\GlobalContext
  */
 class GlobalContextFactory
 {

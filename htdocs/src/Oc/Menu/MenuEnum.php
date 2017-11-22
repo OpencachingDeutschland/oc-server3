@@ -4,8 +4,6 @@ namespace Oc\Menu;
 
 /**
  * Class MenuEnum
- *
- * @package Oc\Menu
  */
 class MenuEnum
 {

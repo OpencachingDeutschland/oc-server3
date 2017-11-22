@@ -76,8 +76,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      * @param Request $request
      * @param TokenInterface $token
      * @param string $providerKey
-     *
-     * @return null
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -90,8 +88,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      *
      * @param Request $request
      * @param AuthenticationException $exception
-     *
-     * @return null
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {

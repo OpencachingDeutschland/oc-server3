@@ -51,7 +51,7 @@ class SiteMaps
         $page = $opt['page'];
         $url = ($page['https']['mode'] == HTTPS_ENFORCED ? $page['absolute_https_url'] : $page['absolute_http_url']);
 
-        $url = urlencode($url. 'sitemap.xml');
+        $url = urlencode($url . 'sitemap.xml');
 
         $this->pingSearchEngine('http://www.google.com/webmasters/ping?sitemap=' . $url);
         $this->pingSearchEngine(

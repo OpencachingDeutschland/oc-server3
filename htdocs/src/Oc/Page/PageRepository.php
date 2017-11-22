@@ -10,8 +10,6 @@ use Oc\Repository\Exception\RecordNotPersistedException;
 
 /**
  * Class PageRepository
- *
- * @package Oc\Page
  */
 class PageRepository
 {
@@ -42,9 +40,8 @@ class PageRepository
      *
      * @param array $where
      *
-     * @return null|PageEntity
-     *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @return null|PageEntity
      */
     public function fetchOneBy(array $where = [])
     {
@@ -56,7 +53,7 @@ class PageRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -76,9 +73,8 @@ class PageRepository
      *
      * @param PageEntity $entity
      *
-     * @return PageEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return PageEntity
      */
     public function create(PageEntity $entity)
     {
@@ -103,9 +99,8 @@ class PageRepository
      *
      * @param PageEntity $entity
      *
-     * @return PageEntity
-     *
      * @throws RecordNotPersistedException
+     * @return PageEntity
      */
     public function update(PageEntity $entity)
     {
@@ -131,9 +126,8 @@ class PageRepository
      *
      * @param PageEntity $entity
      *
-     * @return PageEntity
-     *
      * @throws RecordNotPersistedException
+     * @return PageEntity
      */
     public function remove(PageEntity $entity)
     {
@@ -167,7 +161,7 @@ class PageRepository
             'meta_description' => $entity->metaDescription,
             'meta_social' => $entity->metaSocial,
             'updated_at' => $entity->updatedAt->format(DateTime::ATOM),
-            'active' => $entity->active
+            'active' => $entity->active,
         ];
     }
 

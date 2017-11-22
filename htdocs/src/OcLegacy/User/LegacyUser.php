@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class LegacyUser implements UserInterface
 {
     /**
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -101,7 +101,6 @@ class LegacyUser implements UserInterface
      *
      * This is important if, at any given point, sensitive information like
      * the plain-text password is stored on this object.
-     * @return void
      */
     public function eraseCredentials()
     {

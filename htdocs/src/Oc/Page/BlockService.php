@@ -6,8 +6,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class BlockService
- *
- * @package Oc\Page
  */
 class BlockService
 {

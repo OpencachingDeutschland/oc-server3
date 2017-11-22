@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class LanguageProvider
- *
- * @package Oc\GlobalContext\Provider
  */
 class LanguageProvider
 {

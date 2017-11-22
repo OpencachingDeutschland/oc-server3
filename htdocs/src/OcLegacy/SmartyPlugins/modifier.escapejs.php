@@ -2,11 +2,6 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins**
- * Smarty escape modifier plugin; see also block.t.php
- * Type:     modifier<br>
- * Name:     escapejs<br>
  * @param $string
  * @return string
  */

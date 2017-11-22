@@ -31,7 +31,7 @@ class ValidationException extends Exception
         $output = '';
 
         /**
-         * @var ConstraintViolationInterface $violation
+         * @var ConstraintViolationInterface
          */
         foreach ($this->violations as $violation) {
             $output .= $violation->getPropertyPath() . ': ' . $violation->getMessage() . PHP_EOL;

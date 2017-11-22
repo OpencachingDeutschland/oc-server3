@@ -15,8 +15,6 @@ use Symfony\Component\Process\Process;
 
 /**
  * Class CodeSnifferCommand
- *
- * @package Oc\Command
  */
 class CodeSnifferCommand extends AbstractCommand
 {
@@ -30,7 +28,6 @@ class CodeSnifferCommand extends AbstractCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */
@@ -54,11 +51,10 @@ class CodeSnifferCommand extends AbstractCommand
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|null
-     *
      * @throws RuntimeException
      * @throws LogicException
      * @throws InvalidArgumentException
+     * @return int|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -2,10 +2,7 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- *
- * Smarty {rand} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

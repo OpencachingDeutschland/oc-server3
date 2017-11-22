@@ -58,7 +58,7 @@ class GeoCacheType
      * @var int[]
      */
     const EVENT_TYPES = [
-        self::EVENT
+        self::EVENT,
     ];
 
     /**

@@ -30,7 +30,6 @@ class ImportLegacyTranslationCommand extends SymfonyCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */

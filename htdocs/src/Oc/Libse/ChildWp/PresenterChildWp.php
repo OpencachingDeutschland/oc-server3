@@ -54,6 +54,7 @@ abstract class PresenterChildWp
 
     /**
      * @param \Oc\Libse\Coordinate\CoordinateCoordinate $coordinate
+     * @param mixed $description
      */
     abstract protected function onDoSubmit($coordinate, $description);
 

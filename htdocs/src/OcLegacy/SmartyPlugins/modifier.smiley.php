@@ -1,12 +1,8 @@
 <?php
 /**
  * Smarty plugin
- *
- * @package Smarty
- * @subpackage plugins
  */
-
-require_once __DIR__.'/../../../lib2/smiley.inc.php';
+require_once __DIR__ . '/../../../lib2/smiley.inc.php';
 
 /**
  * @param $string

@@ -48,8 +48,6 @@ class PresenterCacheNote
 
     /**
      * @param \OcSmarty $template
-     *
-     * @return void
      */
     public function prepare($template)
     {

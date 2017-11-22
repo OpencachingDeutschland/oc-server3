@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class MenuSubscriber
- *
- * @package Oc\FieldNotes
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
@@ -21,7 +19,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MenuEnum::MENU_MAIN => 'onConfigureMainMenu'
+            MenuEnum::MENU_MAIN => 'onConfigureMainMenu',
         ];
     }
 
@@ -34,7 +32,7 @@ class MenuSubscriber implements EventSubscriberInterface
             'field_notes',
             [
                 'label' => 'Field-Notes',
-                'route' => 'field_notes.index'
+                'route' => 'field_notes.index',
             ]
         );
     }

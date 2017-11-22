@@ -6,8 +6,6 @@ trait LegacyTemplateTrait
 {
     /**
      * @param int $menu
-     *
-     * @return void
      */
     protected function setMenu($menu)
     {
@@ -16,8 +14,6 @@ trait LegacyTemplateTrait
 
     /**
      * @param string $title
-     *
-     * @return void
      */
     protected function setTitle($title)
     {
@@ -26,8 +22,6 @@ trait LegacyTemplateTrait
 
     /**
      * @param string $url
-     *
-     * @return void
      */
     protected function setTarget($url)
     {

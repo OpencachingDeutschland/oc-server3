@@ -7,8 +7,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class UserService
- *
- * @package Oc\User
  */
 class UserService
 {

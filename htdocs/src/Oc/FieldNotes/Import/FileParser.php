@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Class FileParser
- *
- * @package Oc\FieldNotes\Import
  */
 class FileParser
 {
@@ -32,9 +30,8 @@ class FileParser
      *
      * @param File $file
      *
-     * @return array
-     *
      * @throws FileFormatException
+     * @return array
      */
     public function parseFile(File $file)
     {
@@ -67,9 +64,8 @@ class FileParser
      *
      * @param string $content
      *
-     * @return array
-     *
      * @throws FileFormatException
+     * @return array
      */
     private function getRowsFromCsv($content)
     {

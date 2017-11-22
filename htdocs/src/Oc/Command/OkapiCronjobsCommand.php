@@ -13,8 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class OkapiCronjobsCommand
- *
- * @package Oc\Command
  */
 class OkapiCronjobsCommand extends ContainerAwareCommand
 {
@@ -23,7 +21,6 @@ class OkapiCronjobsCommand extends ContainerAwareCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */
@@ -46,7 +43,7 @@ class OkapiCronjobsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        require_once __DIR__.'/../../../okapi/autoload.php';
+        require_once __DIR__ . '/../../../okapi/autoload.php';
         Okapi::execute_prerequest_cronjobs();
         Okapi::execute_cron5_cronjobs();
     }

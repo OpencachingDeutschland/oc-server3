@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class MenuSubscriber
- *
- * @package Oc\Account\Subscriber
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
@@ -22,7 +20,7 @@ class MenuSubscriber implements EventSubscriberInterface
     {
         return [
             MenuEnum::MENU_MAIN => ['onConfigureMenuMain', 1],
-            MenuEnum::MENU_MAIN_ACCOUNT => ['onConfigureMenuMainAccount', 0]
+            MenuEnum::MENU_MAIN_ACCOUNT => ['onConfigureMenuMainAccount', 0],
         ];
     }
 

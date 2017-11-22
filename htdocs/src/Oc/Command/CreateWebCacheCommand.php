@@ -8,7 +8,6 @@ namespace Oc\Command;
 use Leafo\ScssPhp\Compiler;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use RegexIterator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,8 +16,6 @@ use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class CreateWebCacheCommand
- *
- * @package Oc\Command
  */
 class CreateWebCacheCommand extends ContainerAwareCommand
 {
@@ -32,7 +29,6 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */
@@ -64,7 +60,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $paths = [
             $projectDir . '/web/assets',
             $projectDir . '/web/assets/css',
-            $projectDir . '/web/assets/js'
+            $projectDir . '/web/assets/js',
         ];
 
         foreach ($paths as $path) {
@@ -83,8 +79,6 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      * Compiles js to one file.
      *
      * @param string $projectDir
-     *
-     * @return void
      */
     private function compileJs($projectDir)
     {
@@ -94,6 +88,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
 
         if (!file_exists($applicationJsPath)) {
             $this->output->writeln('- Javascript directory not found!');
+
             return;
         }
 
@@ -102,11 +97,10 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $js = '';
 
         /**
-         * @var SplFileInfo $file
+         * @var SplFileInfo
          */
         foreach ($rii as $file) {
-
-            if ($file->isDir() || $file->getExtension() !== 'js'){
+            if ($file->isDir() || $file->getExtension() !== 'js') {
                 continue;
             }
 
@@ -122,8 +116,6 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      * Compiles scss to one file.
      *
      * @param string $projectDir
-     *
-     * @return void
      */
     private function compileCss($projectDir)
     {

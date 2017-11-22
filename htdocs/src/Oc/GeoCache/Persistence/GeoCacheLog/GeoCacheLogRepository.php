@@ -36,9 +36,8 @@ class GeoCacheLogRepository
     /**
      * Fetches all GeoCacheLogs.
      *
-     * @return GeoCacheLogEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return GeoCacheLogEntity[]
      */
     public function fetchAll()
     {
@@ -67,9 +66,8 @@ class GeoCacheLogRepository
      *
      * @param array $where
      *
-     * @return null|GeoCacheLogEntity
-     *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @return null|GeoCacheLogEntity
      */
     public function fetchOneBy(array $where = [])
     {
@@ -80,7 +78,7 @@ class GeoCacheLogRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -100,9 +98,8 @@ class GeoCacheLogRepository
      *
      * @param array $where
      *
-     * @return GeoCacheLogEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return GeoCacheLogEntity[]
      */
     public function fetchBy(array $where = [])
     {
@@ -112,7 +109,7 @@ class GeoCacheLogRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -138,9 +135,8 @@ class GeoCacheLogRepository
      *
      * @param int $userId
      *
-     * @return GeoCacheLogEntity
-     *
      * @throws RecordNotFoundException
+     * @return GeoCacheLogEntity
      */
     public function getLatestUserLog($userId)
     {
@@ -168,9 +164,8 @@ class GeoCacheLogRepository
      *
      * @param GeoCacheLogEntity $entity
      *
-     * @return GeoCacheLogEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return GeoCacheLogEntity
      */
     public function create(GeoCacheLogEntity $entity)
     {
@@ -195,9 +190,8 @@ class GeoCacheLogRepository
      *
      * @param GeoCacheLogEntity $entity
      *
-     * @return GeoCacheLogEntity
-     *
      * @throws RecordNotPersistedException
+     * @return GeoCacheLogEntity
      */
     public function update(GeoCacheLogEntity $entity)
     {
@@ -223,9 +217,8 @@ class GeoCacheLogRepository
      *
      * @param GeoCacheLogEntity $entity
      *
-     * @return GeoCacheLogEntity
-     *
      * @throws RecordNotPersistedException
+     * @return GeoCacheLogEntity
      */
     public function remove(GeoCacheLogEntity $entity)
     {
@@ -273,7 +266,7 @@ class GeoCacheLogRepository
             'text_html' => $entity->textHtml,
             'text_htmledit' => $entity->textHtmledit,
             'owner_notified' => $entity->ownerNotified,
-            'picture' => $entity->picture
+            'picture' => $entity->picture,
         ];
     }
 

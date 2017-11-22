@@ -25,9 +25,8 @@ class WaypointType
      *
      * @param string $waypoint
      *
-     * @return string
-     *
      * @throws UnknownWaypointTypeException Thrown when the waypoint type could not be guessed
+     * @return string
      */
     public static function guess($waypoint)
     {

@@ -6,8 +6,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class CountryService
- *
- * @package Oc\Country
  */
 class CountryService
 {

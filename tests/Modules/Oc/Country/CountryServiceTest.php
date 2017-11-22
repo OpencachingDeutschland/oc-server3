@@ -10,21 +10,17 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class CountryServiceTest
- *
- * @package OcTest\Modules\Oc\Country
  */
 class CountryServiceTest extends TestCase
 {
     /**
      * Tests fetching all records with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingAllReturnsArrayWithCountryEntities()
     {
         $entityArray = [
             new CountryEntity(),
-            new CountryEntity()
+            new CountryEntity(),
         ];
 
         $repository = $this->createMock(CountryRepository::class);
@@ -40,8 +36,6 @@ class CountryServiceTest extends TestCase
 
     /**
      * Tests fetching all records - exception is thrown because there are no records.
-     *
-     * @return void
      */
     public function testFetchingAllThrowsException()
     {
@@ -60,8 +54,6 @@ class CountryServiceTest extends TestCase
 
     /**
      * Tests that create returns the entity.
-     *
-     * @return void
      */
     public function testCreateReturnsEntity()
     {
@@ -81,8 +73,6 @@ class CountryServiceTest extends TestCase
 
     /**
      * Tests that update returns the entity.
-     *
-     * @return void
      */
     public function testUpdateReturnsEntity()
     {
@@ -102,8 +92,6 @@ class CountryServiceTest extends TestCase
 
     /**
      * Tests that remove returns the entity.
-     *
-     * @return void
      */
     public function testRemoveReturnsEntity()
     {

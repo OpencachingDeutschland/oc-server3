@@ -13,13 +13,13 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
 {
     protected $dir;
 
-    /** @var  GoutteDriver $driver */
+    /** @var GoutteDriver $driver */
     protected $driver;
 
-    /** @var  Session $session */
+    /** @var Session $session */
     protected $session;
 
-    /** @var  string $baseUrl */
+    /** @var string $baseUrl */
     protected $baseUrl;
 
     public function __construct()
@@ -42,8 +42,6 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
      * helper method for pages which needs an active login
      *
      * @throws ElementNotFoundException
-     *
-     * @return void
      */
     protected function login()
     {

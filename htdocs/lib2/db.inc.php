@@ -203,11 +203,15 @@ function sql_internal($dblink, $sql)
                         $filtered_sql .= $args[$arg];
                     } else {
                         if ((substr($sql, $sqlpos - $arglength - 1, 1) == '\'') && (substr(
-                                    $sql, $sqlpos + 1, 1
+                                    $sql,
+                            $sqlpos + 1,
+                            1
                                 ) == '\'')) {
                             $filtered_sql .= sql_escape($args[$arg]);
                         } elseif ((substr($sql, $sqlpos - $arglength - 1, 1) == '`') && (substr(
-                                    $sql, $sqlpos + 1, 1
+                                    $sql,
+                            $sqlpos + 1,
+                            1
                                 ) == '`')) {
                             $filtered_sql .= sql_escape_backtick($args[$arg]);
                         } else {
@@ -393,7 +397,7 @@ function sqll($sql)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
- * @param integer $default
+ * @param int $default
  * @return mixed
  */
 function sqlf_value($sql, $default)
@@ -412,7 +416,7 @@ function sqlf_value($sql, $default)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
- * @param integer $default
+ * @param int $default
  * @return mixed
  */
 function sqll_value($sql, $default)
@@ -514,7 +518,7 @@ function sql_value_slave($sql, $default)
 
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- * @param boolean $bQuerySlave
+ * @param bool $bQuerySlave
  * @param $sql
  * @param $default
  * @return mixed
@@ -549,12 +553,12 @@ function sql_value_internal($bQuerySlave, $sql, $default)
     if ($r) {
         if ($r[0] == null) {
             return $default;
-        } else {
-            return $r[0];
         }
-    } else {
-        return $default;
+
+        return $r[0];
     }
+
+    return $default;
 }
 
 /*
@@ -742,7 +746,7 @@ function sql_temp_table($table)
                 mysql_thread_id($db['dblink'])
             );
             while ($r = sql_fetch_assoc($rs)) {
-                sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $r['name']);
+                sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
             }
             sql_free_result($rs);
             sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
@@ -752,7 +756,8 @@ function sql_temp_table($table)
 
         sqlf(
             "INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')",
-            mysql_thread_id($db['dblink']), $table
+            mysql_thread_id($db['dblink']),
+            $table
         );
     }
 
@@ -791,7 +796,7 @@ function sql_drop_temp_table($table)
 {
     global $db, $opt;
 
-    sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+    sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
 
     if ($opt['db']['pconnect'] === true) {
         sqlf(
@@ -836,7 +841,7 @@ function sql_drop_temp_table_slave($table)
 {
     global $db, $opt;
 
-    sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+    sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
 
     if ($opt['db']['pconnect'] === true) {
         sqlf_slave(
@@ -901,7 +906,8 @@ function sql_connect($username = null, $password = null, $raiseError = true)
 
     if ($db['dblink'] !== false) {
         mysql_query(
-            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'", $db['dblink']
+            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'",
+            $db['dblink']
         );
 
         //database connection established ... set the used database
@@ -1050,7 +1056,7 @@ function sql_connect_slave($id)
             mysql_thread_id($db['dblink_slave'])
         );
         while ($r = sql_fetch_assoc($rs)) {
-            sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $r['name']);
+            sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
         }
         sql_free_result($rs);
         sqlf_slave("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink_slave']));
@@ -1093,7 +1099,7 @@ function sql_disconnect()
     if ($db['dblink'] !== false && $opt['db']['pconnect'] === true) {
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $table) {
-                sqlf("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+                sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
             }
 
             sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
@@ -1130,7 +1136,7 @@ function sql_disconnect_slave()
         if (count($db['temptables']) > 0) {
             foreach ($db['temptables'] as $k => $table) {
                 if (isset($db['temptables_slave'][$table])) {
-                    sqlf_slave("DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`", $table);
+                    sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
                     unset($db['temptables_slave'][$table], $db['temptables'][$k]);
                 }
             }
@@ -1229,20 +1235,18 @@ function sql_error($sqlstatement = '')
             if ($opt['db']['error']['display'] == true) {
                 die(
                     '<html><body>' . htmlspecialchars(
-                        'MySQL error (' . $errno . '): ' . str_replace("\n,", "<br />", $error)
+                        'MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error)
                     ) . '</body></html>'
                 );
-            } else {
-                die('<html><body>A database command could not be performed</body></html>');
             }
+            die('<html><body>A database command could not be performed</body></html>');
         }
     } else {
         // CLI script, simple text output
         if ($opt['db']['error']['display'] === true) {
             die('MySQL error (' . $errno . '): ' . $error . "\n");
-        } else {
-            die("A database command could not be performed.\n");
         }
+        die("A database command could not be performed.\n");
     }
 }
 
@@ -1322,7 +1326,7 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
 function sql_export_table($f, $table)
 {
     $primary = [];
-    $rsIndex = sql("SHOW INDEX FROM `&1`", $table);
+    $rsIndex = sql('SHOW INDEX FROM `&1`', $table);
     while ($r = sql_fetch_assoc($rsIndex)) {
         if ($r['Key_name'] == 'PRIMARY') {
             $primary[] = '`' . sql_escape($r['Column_name']) . '` ASC';
@@ -1384,12 +1388,12 @@ function sql_export_table_to_file($filename, $table)
  */
 function sql_export_structure($f, $table)
 {
-    $rs = sql("SHOW CREATE TABLE `&1`", $table);
+    $rs = sql('SHOW CREATE TABLE `&1`', $table);
     $r = sql_fetch_array($rs);
     sql_free_result($rs);
 
     $sTableSql = $r[1];
-    $sTableSql = preg_replace("/ AUTO_INCREMENT=[0-9]{1,} /", ' ', $sTableSql);
+    $sTableSql = preg_replace('/ AUTO_INCREMENT=[0-9]{1,} /', ' ', $sTableSql);
     $sTableSql = preg_replace("/,\n +?(KEY )?`okapi_syncbase`.+?(,)?\n/", "\\2\n", $sTableSql);
 
     fwrite($f, "SET NAMES 'utf8';\n");

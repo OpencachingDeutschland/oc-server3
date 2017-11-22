@@ -74,12 +74,11 @@ class EmailRecovery
         }
     }
 
-
     # helper functions
 
     private static function verifyDateTime($datetime)
     {
-        return preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/", $datetime);
+        return preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/', $datetime);
     }
 
     private static function message($level, $text)
@@ -105,7 +104,6 @@ class EmailRecovery
         );
         self::message(1, $objectCount . ' ' . $description);
     }
-
 
     # display summary of information that was not sent to the users
 
@@ -203,7 +201,6 @@ class EmailRecovery
         sql_free_result($rs);
     }
 
-
     # resend emails
 
     public function resendLogNotifications()
@@ -219,29 +216,29 @@ class EmailRecovery
 
         # re-notify owners
         sql(
-            "UPDATE `cache_logs`
+            'UPDATE `cache_logs`
              SET `owner_notified` = 0
-             WHERE " . $this->getDateCondition('cache_logs', 'date_created')
+             WHERE ' . $this->getDateCondition('cache_logs', 'date_created')
         );
         $owner_notifications = sql_affected_rows();
 
         # Re-notify direct watchers. See also trigger cacheLogsAfterInsert.
         sql(
-            "INSERT IGNORE INTO `watches_logqueue` (`log_id`, `user_id`)
+            'INSERT IGNORE INTO `watches_logqueue` (`log_id`, `user_id`)
                 SELECT `cache_logs`.`id` `log_id`, `cache_watches`.`user_id`
                 FROM `cache_logs`
                 JOIN `caches` ON `caches`.`cache_id` = `cache_logs`.`cache_id`
                 JOIN `cache_status` ON `cache_status`.`id` = `caches`.`status`
                 JOIN `cache_watches` ON `cache_watches`.`cache_id` = `caches`.`cache_id`
                 WHERE
-                    " . $this->getDateCondition('cache_logs', 'date_created') . "
-                    AND `cache_status`.`allow_user_view` = 1"
+                    ' . $this->getDateCondition('cache_logs', 'date_created') . '
+                    AND `cache_status`.`allow_user_view` = 1'
         );
         $watcher_notifications = sql_affected_rows();
 
         # Re-notify list watchers. See also trigger cacheLogsAfterInsert.
         sql(
-            "INSERT IGNORE INTO `watches_logqueue` (`log_id`, `user_id`)
+            'INSERT IGNORE INTO `watches_logqueue` (`log_id`, `user_id`)
                 SELECT `cache_logs`.`id` `log_id`, `cache_list_watches`.`user_id`
                 FROM `cache_logs`
                 JOIN `caches` ON `caches`.`cache_id` = `cache_logs`.`cache_id`
@@ -249,8 +246,8 @@ class EmailRecovery
                 JOIN `cache_list_items` ON `cache_list_items`.`cache_id` = `cache_logs`.`cache_id`
                 JOIN `cache_list_watches` ON `cache_list_watches`.`cache_list_id` = `cache_list_items`.`cache_list_id`
                 WHERE
-                    " . $this->getDateCondition('cache_logs', 'date_created') . "
-                    AND `cache_status`.`allow_user_view` = 1"
+                    ' . $this->getDateCondition('cache_logs', 'date_created') . '
+                    AND `cache_status`.`allow_user_view` = 1'
         );
         $watcher_notifications += sql_affected_rows();
 
@@ -260,15 +257,15 @@ class EmailRecovery
 
     public function resendCacheNotifications()
     {
-        $notifies_wating = sql_value("SELECT COUNT(*) FROM `notify_waiting`", 0);
+        $notifies_wating = sql_value('SELECT COUNT(*) FROM `notify_waiting`', 0);
 
         $rs = sql(
-            "SELECT `cache_id`, `latitude`, `longitude`
+            'SELECT `cache_id`, `latitude`, `longitude`
              FROM `caches`
              JOIN `cache_status` ON `cache_status`.`id` = `caches`.`status`
              WHERE
-                " . $this->getDateCondition('caches', 'date_created') . "
-                AND `cache_status`.`allow_user_view` = 1"
+                ' . $this->getDateCondition('caches', 'date_created') . '
+                AND `cache_status`.`allow_user_view` = 1'
         );
         while ($r = sql_fetch_assoc($rs)) {
             sql(
@@ -281,17 +278,17 @@ class EmailRecovery
         sql_free_result($rs);
 
         $new_notifications =
-            sql_value("SELECT COUNT(*) FROM `notify_waiting`", 0) - $notifies_wating;
+            sql_value('SELECT COUNT(*) FROM `notify_waiting`', 0) - $notifies_wating;
         self::message(0, $new_notifications . ' new cache notifications will be sent');
     }
     
     public function resendActivationCodes()
     {
         $rs = sql(
-            "SELECT `user_id`
+            'SELECT `user_id`
              FROM `user`
              WHERE
-                " . $this->getDateCondition('user', 'date_created') . "
+                ' . $this->getDateCondition('user', 'date_created') . "
                 AND last_login IS NULL
                 AND `activation_code` <> ''"
         );

@@ -194,7 +194,7 @@ class getNew
     /**
      * ratingDays returns the number of days used for top rating calculation
      *
-     * @return integer
+     * @return int
      */
     public function ratingDays()
     {
@@ -206,9 +206,9 @@ class getNew
 
         if ($this->get_userCountry() === 'DE') {
             return $opt['logic']['rating']['topdays_mainCountry'];
-        } else {
-            return $opt['logic']['rating']['topdays_otherCountry'];
         }
+
+        return $opt['logic']['rating']['topdays_otherCountry'];
     }
 
     /**
@@ -269,14 +269,13 @@ class getNew
         );
     }
 
-
     /**
      * blogFeed executes the RSSParser for type "blog"
      *
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param boolean $includeText ???following??? add table-tag?
+     * @param bool $includeText ???following??? add table-tag?
      * @return string HTML string used for smarty assign method
      */
     private function blogFeed($items = null, $url = null, $timeout = null, $includeText = null)
@@ -308,7 +307,7 @@ class getNew
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param boolean $includeText ???following??? add table-tag?
+     * @param bool $includeText ???following??? add table-tag?
      * @return string HTML string used for smarty assign method
      */
     private function forumFeed($items = null, $url = null, $timeout = null, $includeText = null)
@@ -338,7 +337,7 @@ class getNew
      *
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
-     * @param boolean $includeText ???following??? add table-tag?
+     * @param bool $includeText ???following??? add table-tag?
      * @param int $timeout maximum seconds to wait for the requested page
      * @return string HTML string used for smarty assign method
      */

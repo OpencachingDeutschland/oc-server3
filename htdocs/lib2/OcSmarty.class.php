@@ -54,7 +54,7 @@ class OcSmarty extends Smarty
         $this->cache_dir = __DIR__ . '/../var/cache2/smarty/cache/';
         $this->plugins_dir = [
             'plugins',
-            __DIR__ . '/../src/OcLegacy/SmartyPlugins'
+            __DIR__ . '/../src/OcLegacy/SmartyPlugins',
         ];
 
         // disable caching ... if caching is enabled, 1 hour is default
@@ -85,7 +85,7 @@ class OcSmarty extends Smarty
          */
         if (isset($_REQUEST['target'])) {
             $this->target = trim($_REQUEST['target']);
-            if (preg_match("/^https?:/i", $this->target)) {
+            if (preg_match('/^https?:/i', $this->target)) {
                 $this->target = '';
             }
         } else {
@@ -109,8 +109,6 @@ class OcSmarty extends Smarty
     }
 
     /* ATTENTION: copied from internal implementation!
-     */
-    /**
      * @param string $resource_name
      * @param string $compile_id
      */
@@ -386,7 +384,7 @@ class OcSmarty extends Smarty
     /**
      * show an error dialog
      *
-     * @param integer $id
+     * @param int $id
      */
     public function error($id)
     {
@@ -410,8 +408,9 @@ class OcSmarty extends Smarty
         $this->display();
     }
 
-    // check if this template is valid
     /**
+     * check if this template is valid
+     *
      * @param null $dummy1
      * @param null $dummy2
      * @param null $dummy3
@@ -471,7 +470,7 @@ class OcSmarty extends Smarty
         }
 
         // redirect
-        if (!preg_match("/^https?:/i", $page)) {
+        if (!preg_match('/^https?:/i', $page)) {
             if (substr($page, 0, 1) == '/') {
                 $page = substr($page, 1);
             }
@@ -508,7 +507,7 @@ class OcSmarty extends Smarty
 
         // ok ... redirect the get-data
         $target = ($opt['page']['https']['force_login'] ? 'https' : $opt['page']['protocol'])
-            . '://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
+            . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $this->redirect('login.php?target=' . urlencode($target));
     }
 
@@ -601,8 +600,8 @@ class OcSmarty extends Smarty
         return $sTarget;
     }
 
-     public function acceptsAndPurifiesHtmlInput()
-     {
+    public function acceptsAndPurifiesHtmlInput()
+    {
         // Prevent false XSS detection of harmless HTML code
         // see https://redmine.opencaching.de/issues/1137
         // see https://stackoverflow.com/questions/43249998/chrome-err-blocked-by-xss-auditor-details
@@ -612,5 +611,5 @@ class OcSmarty extends Smarty
         // This is ensured by HTMLpurifier in OC code.
 
         header('X-XSS-Protection: 0');
-     }
+    }
 }

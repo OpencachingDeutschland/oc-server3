@@ -21,7 +21,7 @@ class coordinate
     {
         return [
             'lat' => $this->nLat,
-            'lon' => $this->nLon
+            'lon' => $this->nLon,
         ];
     }
 
@@ -42,7 +42,7 @@ class coordinate
 
         return [
             'lat' => $sLat,
-            'lon' => $sLon
+            'lon' => $sLon,
         ];
     }
 
@@ -60,9 +60,9 @@ class coordinate
         $nLatDeg = floor($nLat);
         $nLatMin = ($nLat - $nLatDeg) * 60;
         if ($bLatN) {
-            $sLat = 'N ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
+            $sLat = 'N ' . sprintf('%02d', $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
         } else {
-            $sLat = 'S ' . sprintf("%02d", $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
+            $sLat = 'S ' . sprintf('%02d', $nLatDeg) . '° ' . sprintf($minute_format, $nLatMin) . '\'';
         }
 
         // Ocprop: ([E|W].*?)&#039;
@@ -74,14 +74,14 @@ class coordinate
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
         if ($bLonE) {
-            $sLon = 'E ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
+            $sLon = 'E ' . sprintf('%03d', $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
         } else {
-            $sLon = 'W ' . sprintf("%03d", $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
+            $sLon = 'W ' . sprintf('%03d', $nLonDeg) . '° ' . sprintf($minute_format, $nLonMin) . '\'';
         }
 
         return [
             'lat' => $sLat,
-            'lon' => $sLon
+            'lon' => $sLon,
         ];
     }
 
@@ -116,7 +116,7 @@ class coordinate
 
         return [
             'lat' => $sLat,
-            'lon' => $sLon
+            'lon' => $sLon,
         ];
     }
 
@@ -143,7 +143,7 @@ class coordinate
                 'zone' => '',
                 'letter' => '',
                 'north' => 'N ' . 0,
-                'east' => 'E ' . 0
+                'east' => 'E ' . 0,
             ];
         }
         if ($this->nLon <= - 180 || $this->nLon > 180 || $this->nLat <= - 80 || $this->nLat >= 84) {
@@ -152,11 +152,11 @@ class coordinate
                 '',
                 '',
                 0,
-                0
+                0,
             ];
         }
-        $lw = (float)$this->nLon;
-        $bw = (float)$this->nLat;
+        $lw = (float) $this->nLon;
+        $bw = (float) $this->nLat;
 
         //WGS84 Datum
         //Große Halbachse a und Abplattung f
@@ -201,9 +201,9 @@ class coordinate
 
         $lz = "$lzn";
         if ($lzn < 10) {
-            $lz = "0" . $lzn;
+            $lz = '0' . $lzn;
         }
-        $bd = (int)(1 + ($bw + 80) / 8);
+        $bd = (int) (1 + ($bw + 80) / 8);
         $bz = substr($b_sel, $bd - 1, 1);
 
         //Geographische Breite in Radianten br
@@ -248,20 +248,20 @@ class coordinate
         $ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
                 $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
 
-        $nk = $nw - (int)$nw;
+        $nk = $nw - (int) $nw;
         if ($nk < 0.5) {
-            $nw = '' . (int)$nw;
+            $nw = '' . (int) $nw;
         } else {
-            $nw = '' . ((int)$nw + 1);
+            $nw = '' . ((int) $nw + 1);
         }
 
         while (strlen($nw) < 7) {
             $nw = '0' . $nw;
         }
 
-        $nk = $ew - (int)$ew;
+        $nk = $ew - (int) $ew;
         if ($nk < 0.5) {
-            $ew = '0' . (int)$ew;
+            $ew = '0' . (int) $ew;
         } else {
             $ew = '0' . intval($ew + 1);
         }
@@ -270,7 +270,7 @@ class coordinate
             'zone' => $lz,
             'letter' => $bz,
             'north' => 'N ' . floor($nw),
-            'east' => 'E ' . floor($ew)
+            'east' => 'E ' . floor($ew),
         ];
     }
 
@@ -284,8 +284,8 @@ class coordinate
     }
 
     /**
-     * @param integer $bw
-     * @param integer $lw
+     * @param int $bw
+     * @param int $lw
      * @return array
      */
     public function wgs2pot($bw, $lw)
@@ -313,11 +313,11 @@ class coordinate
         if ($lw == '' || $bw == '') {
             return [
                 0,
-                0
+                0,
             ];
         }
-        $lw = (float)$lw;
-        $bw = (float)$bw;
+        $lw = (float) $lw;
+        $bw = (float) $bw;
 
         // Quellsystem WGS 84 Datum
         // Große Halbachse a und Abplattung fq
@@ -368,7 +368,7 @@ class coordinate
 
         return [
             $l2,
-            $b2
+            $b2,
         ];
     }
 
@@ -392,11 +392,11 @@ class coordinate
         if ($lp == '' || $bp == '') {
             return [
                 0,
-                0
+                0,
             ];
         }
-        $lp = (float)$lp;
-        $bp = (float)$bp;
+        $lp = (float) $lp;
+        $bp = (float) $bp;
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
@@ -454,23 +454,23 @@ class coordinate
         $rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
             $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
 
-        $nk = $hw - (int)$hw;
+        $nk = $hw - (int) $hw;
         if ($nk < 0.5) {
-            $hw = (int)$hw;
+            $hw = (int) $hw;
         } else {
-            $hw = ((int)$hw) + 1;
+            $hw = ((int) $hw) + 1;
         }
 
-        $nk = $rw - (int)$rw;
+        $nk = $rw - (int) $rw;
         if ($nk < 0.5) {
-            $rw = (int)$rw;
+            $rw = (int) $rw;
         } else {
-            $rw = (int)($rw + 1);
+            $rw = (int) ($rw + 1);
         }
 
         return [
             $rw,
-            $hw
+            $hw,
         ];
     }
 
@@ -552,7 +552,7 @@ class coordinate
         $lat -= $l[3];
         $l[5] = floor($lat * 120 / 5);
 
-        return sprintf("%c%c%c%c%c%c", $l[0] + 65, $l[1] + 65, $l[2] + 48, $l[3] + 48, $l[4] + 65, $l[5] + 65);
+        return sprintf('%c%c%c%c%c%c', $l[0] + 65, $l[1] + 65, $l[2] + 48, $l[3] + 48, $l[4] + 65, $l[5] + 65);
     }
 
     // return string
@@ -583,7 +583,7 @@ class coordinate
         return [
             'coord' => $swissgrid,
             $mapplus,
-            $mapsearch
+            $mapsearch,
         ];
     }
 

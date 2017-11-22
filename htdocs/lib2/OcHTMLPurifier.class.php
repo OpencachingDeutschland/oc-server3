@@ -47,7 +47,7 @@ class OcHTMLPurifier extends HTMLPurifier
             'Attr.AllowedFrameTargets',
             [
                 '_blank',
-                'blank'
+                'blank',
             ]
         );
 
@@ -90,7 +90,7 @@ class OcHTMLPurifier extends HTMLPurifier
                 'coords' => 'CDATA',
                 'href' => 'URI',
                 'shape' => 'Enum#default,rect,circle,poly',
-                'target' => 'Enum#_blank,blank'
+                'target' => 'Enum#_blank,blank',
             ]
         );
         $def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', ['name' => 'ID']);
@@ -103,7 +103,6 @@ class OcHTMLPurifier extends HTMLPurifier
         // create parent object with config
         parent::__construct($config);
     }
-
 
     /**
      * @param string $text

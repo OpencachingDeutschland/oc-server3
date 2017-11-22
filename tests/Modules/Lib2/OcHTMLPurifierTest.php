@@ -264,7 +264,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         $purified = '';
 
         foreach ($allowed as $style) {
-            $html = '<div style="'.$style.';">*</div>';
+            $html = '<div style="' . $style . ';">*</div>';
             $purifiedHtml = $this->htmlPurifier->purify($html);
             if ($purifiedHtml != $html) {
                 $original .= "$html\n";

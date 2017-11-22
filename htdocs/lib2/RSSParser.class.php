@@ -14,7 +14,7 @@ class RSSParser
      * @param int $items number of feeditems to parse from feed
      * @param string $url url of the feed to parse
      * @param $timeout
-     * @param boolean $includetext
+     * @param bool $includetext
      * @return string $item feeditems as HTML-string
      */
     public static function parse($items, $url, $timeout, $includetext)
@@ -56,31 +56,30 @@ class RSSParser
                         // check length
                         if ($items != 0 && $i >= $items) {
                             break;
-                        } else {
-                            // add html
-                            if ($includetext) {
-                                // fill array
-                                $rss[] = [
+                        }
+                        // add html
+                        if ($includetext) {
+                            // fill array
+                            $rss[] = [
                                     'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
                                     'title' => $item->title,
                                     'link' => $item->link,
-                                    'description' => $item->description
+                                    'description' => $item->description,
                                 ];
-                                $i++;
-                                // htmlspecialchars_decode() works around inconsistent HTML encoding
+                            $i++;
+                            // htmlspecialchars_decode() works around inconsistent HTML encoding
                                 // e.g. in SMF Forum Threads
-                            } elseif (strpos($item->title, 'VERSCHOBEN') === false &&
+                        } elseif (strpos($item->title, 'VERSCHOBEN') === false &&
                                 !in_array(htmlspecialchars_decode($item->title), $headlines)
                             ) { // hack to exclude forum thread-move messages
-                                // fill array
-                                $rss[] = [
+                            // fill array
+                            $rss[] = [
                                     'pubDate' => date('Y-m-d', strtotime($item->pubDate)),
                                     'title' => $item->title,
-                                    'link' => $item->link
+                                    'link' => $item->link,
                                 ];
-                                $headlines[] = '' . htmlspecialchars_decode($item->title);
-                                $i++;
-                            }
+                            $headlines[] = '' . htmlspecialchars_decode($item->title);
+                            $i++;
                         }
                     }
                 } catch (Exception $e) {

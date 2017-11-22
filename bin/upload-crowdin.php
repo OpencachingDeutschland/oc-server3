@@ -4,9 +4,9 @@ $projectIdentifier = 'opencaching';
 $projectKey = getenv('crowdinApiKey');
 $requestUrl = 'https://api.crowdin.com/api/project/' . $projectIdentifier . '/update-file?key=' . $projectKey;
 
-$postParams['files[constants.en.yml]'] = curl_file_create(__DIR__.'/../htdocs/app/Resources/translations/constants.en.yml');
-$postParams['files[messages.en.yml]'] = curl_file_create(__DIR__.'/../htdocs/app/Resources/translations/messages.en.yml');
-$postParams['files[validators.en.yml]'] = curl_file_create(__DIR__.'/../htdocs/app/Resources/translations/validators.en.yml');
+$postParams['files[constants.en.yml]'] = curl_file_create(__DIR__ . '/../htdocs/app/Resources/translations/constants.en.yml');
+$postParams['files[messages.en.yml]'] = curl_file_create(__DIR__ . '/../htdocs/app/Resources/translations/messages.en.yml');
+$postParams['files[validators.en.yml]'] = curl_file_create(__DIR__ . '/../htdocs/app/Resources/translations/validators.en.yml');
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $requestUrl);

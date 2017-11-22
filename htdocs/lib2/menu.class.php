@@ -75,7 +75,7 @@ class Menu
                         'href' => 'map2.php?mode=normalscreen&lat=' . $rTown['coord_lat'] . '&lon=' . $rTown['coord_long'] . '&zoom=' . $zoom,
                         'visible' => 1,
                         'sublevel' => 1,
-                        'parent' => MNU_MAP
+                        'parent' => MNU_MAP,
                     ];
                     $menuitem[MNU_MAP]['subitems'][] = $menu_map;
                     ++ $menu_map;
@@ -93,7 +93,7 @@ class Menu
         fwrite($f, 'global $menuitem;' . "\n");
         fwrite($f, "\n");
 
-        $rsDefines = sqlf("SELECT `id`, `id_string` FROM `sys_menu`");
+        $rsDefines = sqlf('SELECT `id`, `id_string` FROM `sys_menu`');
         while ($rDefine = sql_fetch_assoc($rsDefines)) {
             fwrite($f, 'if (!defined(\'' . addslashes($rDefine['id_string']) . '\')) define(\'' . addslashes($rDefine['id_string']) . '\', ' . $rDefine['id'] . ");\n");
         }
@@ -102,7 +102,7 @@ class Menu
 
         $aMenu = array();
         $nPos = 0;
-        $rsSubmenu = sqlf("SELECT `id` FROM `sys_menu` WHERE `parent`=0 ORDER BY `parent` ASC, `position` ASC");
+        $rsSubmenu = sqlf('SELECT `id` FROM `sys_menu` WHERE `parent`=0 ORDER BY `parent` ASC, `position` ASC');
         while ($rSubmenu = sql_fetch_assoc($rsSubmenu)) {
             $aMenu[MNU_ROOT]['subitems'][$nPos] = $rSubmenu['id'];
             $nPos ++;
@@ -276,7 +276,7 @@ class Menu
     }
 
     /**
-     * @param integer|null $menuid
+     * @param int|null $menuid
      * @param $ids
      * @param $items
      */
@@ -298,7 +298,7 @@ class Menu
     }
 
     /**
-     * @return integer[]
+     * @return int[]
      */
     public function GetSelectedMenuIds()
     {
@@ -339,9 +339,9 @@ class Menu
         }
         if (isset($menuitem[$nCurItem]['color'])) {
             return $menuitem[$nCurItem]['color'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     /**
@@ -353,8 +353,8 @@ class Menu
 
         if (isset($menuitem[$this->nSelectedItem])) {
             return isset($menuitem[$this->nSelectedItem]['title']) ? $menuitem[$this->nSelectedItem]['title'] : '';
-        } else {
-            return '';
         }
+
+        return '';
     }
 }

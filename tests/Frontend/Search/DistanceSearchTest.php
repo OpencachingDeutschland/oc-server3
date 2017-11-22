@@ -18,8 +18,6 @@ class DistanceSearchTest extends AbstractFrontendTest
      * @group frontend-search
      *
      * @throws ElementNotFoundException if the searched element is not found
-     *
-     * @return void
      */
     public function testDistanceSearch()
     {
@@ -33,8 +31,7 @@ class DistanceSearchTest extends AbstractFrontendTest
         $searchTitle = $page->find('css', 'p.content-title-noshade-size15');
         if ($searchTitle !== null) {
             self::assertContains('9 caches matched', $searchTitle->getText(), 'pups');
-        } else {
-//            self::fail(__METHOD__ . ' failed');
         }
+//            self::fail(__METHOD__ . ' failed');
     }
 }

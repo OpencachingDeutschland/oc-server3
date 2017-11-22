@@ -8,12 +8,9 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 /**
  * Class RandTest
- *
- * @package OcTest\Modules\OcLegacy\SmartyPlugins
  */
 class RandTest extends AbstractModuleTest
 {
-
     public function testEmptyParameters()
     {
         $smarty = null;
@@ -27,7 +24,6 @@ class RandTest extends AbstractModuleTest
      * @param $min
      * @param $max
      *
-     * @return void
      *
      * @dataProvider differentMinMaxProvider
      */
@@ -37,7 +33,7 @@ class RandTest extends AbstractModuleTest
 
         $params = [
             'min' => $min,
-            'max' => $max
+            'max' => $max,
         ];
 
         $rand = \smarty_function_rand($params, $smarty);
@@ -57,7 +53,7 @@ class RandTest extends AbstractModuleTest
             [1, 10],
             [50, 100],
             [20, 30],
-            [1, 1]
+            [1, 1],
         ];
     }
 }

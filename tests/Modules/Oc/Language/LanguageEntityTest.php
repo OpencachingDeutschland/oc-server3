@@ -7,15 +7,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class LanguageEntityTest
- *
- * @package OcTest\Modules\Oc\Country
  */
 class LanguageEntityTest extends TestCase
 {
     /**
      * Tests that isNew returns true when the identifier id is null.
-     *
-     * @return void
      */
     public function testIsNewReturnsTrueOnIdentifierEqualsNull()
     {
@@ -26,8 +22,6 @@ class LanguageEntityTest extends TestCase
 
     /**
      * Tests that isNew returns false when the identifier id is not null.
-     *
-     * @return void
      */
     public function testIsNewReturnsFalseWhenIdentifierIsPresent()
     {
@@ -39,8 +33,6 @@ class LanguageEntityTest extends TestCase
 
     /**
      * Tests toArray returns correct array.
-     *
-     * @return void
      */
     public function testToArray()
     {
@@ -68,8 +60,6 @@ class LanguageEntityTest extends TestCase
 
     /**
      * Tests fromArray applies correct values.
-     *
-     * @return void
      */
     public function testFromArray()
     {
@@ -81,7 +71,7 @@ class LanguageEntityTest extends TestCase
             'en' => 'Andorra',
             'listDefaultDe' => 0,
             'listDefaultEn' => 'andorra',
-            'isTranslated' => true
+            'isTranslated' => true,
         ];
 
         $entity = new LanguageEntity();

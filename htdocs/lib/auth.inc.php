@@ -38,6 +38,4 @@ function auth_user()
     } else {
         $usr = false;
     }
-
-    return;
 }

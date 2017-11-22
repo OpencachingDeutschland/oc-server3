@@ -33,7 +33,7 @@ class rowEditor
     /**
      * @param string $sField
      * @param $nDefault
-     * @param boolean $bNullable
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -43,7 +43,7 @@ class rowEditor
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
 
         if (($nInsertFunction & RE_INSERT_AUTOINCREMENT) == RE_INSERT_AUTOINCREMENT) {
@@ -64,7 +64,7 @@ class rowEditor
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
@@ -81,7 +81,7 @@ class rowEditor
             'default' => $nDefault,
             'nullable' => $bNullable,
             'value' => $nDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
@@ -102,7 +102,7 @@ class rowEditor
             'default' => $sDefault,
             'nullable' => $bNullable,
             'value' => $sDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
@@ -119,7 +119,7 @@ class rowEditor
             'default' => $bDefault,
             'nullable' => $bNullable,
             'value' => $bDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
@@ -136,14 +136,14 @@ class rowEditor
             'default' => $dDefault,
             'nullable' => $bNullable,
             'value' => $dDefault,
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
      * @param $nDefault
-     * @param boolean $bNullable
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -154,14 +154,14 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
-     * @param integer $nDefault
-     * @param boolean $bNullable
+     * @param int $nDefault
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -172,14 +172,14 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
-     * @param integer $nDefault
-     * @param boolean $bNullable
+     * @param int $nDefault
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -190,14 +190,14 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $nDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
      * @param $sDefault
-     * @param boolean $bNullable
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -208,14 +208,14 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $sDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
      * @param $bDefault
-     * @param boolean $bNullable
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -226,14 +226,14 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $bDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
     /**
      * @param string $sField
      * @param $dDefault
-     * @param boolean $bNullable
+     * @param bool $bNullable
      * @param int $nInsertFunction
      */
     public function addDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
@@ -244,7 +244,7 @@ class rowEditor
             'nullable' => $bNullable,
             'value' => $dDefault,
             'changed => false',
-            'insertfunction' => $nInsertFunction
+            'insertfunction' => $nInsertFunction,
         ];
     }
 
@@ -264,9 +264,9 @@ class rowEditor
         unset($this->fields[$sField]);
     }
 
-    /* PKValues may be an string, indized or ordered array
-     */
-    /**
+    /*
+     * PKValues may be an string, indized or ordered array
+     *
      * @param $PKValues
      *
      * @return bool
@@ -383,7 +383,7 @@ class rowEditor
         }
 
         if ($type == RE_TYPE_INT) {
-            $value = (int)$value + 0;
+            $value = (int) $value + 0;
         } elseif ($type == RE_TYPE_FLOAT) {
             $value = $value + 0;
         } elseif ($type == RE_TYPE_DOUBLE) {
@@ -408,7 +408,7 @@ class rowEditor
     public function pFormatValueSql($type, $value)
     {
         if ($type == RE_TYPE_INT) {
-            $value = (int)$value + 0;
+            $value = (int) $value + 0;
         } elseif ($type == RE_TYPE_FLOAT) {
             $value = $value + 0;
         } elseif ($type == RE_TYPE_DOUBLE) {
@@ -496,7 +496,7 @@ class rowEditor
     }
 
     /**
-     * @return boolean|null
+     * @return bool|null
      */
     public function getAnyChanged()
     {
@@ -577,26 +577,25 @@ class rowEditor
             $this->load($pkv);
 
             return true;
+        }
+        // UPDATE
+        $sql = $this->pBuildUpdate();
+
+        if ($sql != '') {
+            $rs = sql($sql);
+            // @bug wrong method signature
+            if (sql_affected_rows($rs) == 0) {
+                return false;
+            }
         } else {
-            // UPDATE
-            $sql = $this->pBuildUpdate();
-
-            if ($sql != '') {
-                $rs = sql($sql);
-                // @bug wrong method signature
-                if (sql_affected_rows($rs) == 0) {
-                    return false;
-                }
-            } else {
-                return true;
-            }
-
-            foreach ($this->fields as $k => $field) {
-                $this->fields[$k]['changed'] = false;
-            }
-
             return true;
         }
+
+        foreach ($this->fields as $k => $field) {
+            $this->fields[$k]['changed'] = false;
+        }
+
+        return true;
     }
 
     public function reload()

@@ -10,22 +10,18 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class PageServiceTest
- *
- * @package OcTest\Modules\Oc\Page
  */
 class PageServiceTest extends TestCase
 {
     /**
      * Tests fetching one record by id with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingOneByIdReturnsEntity()
     {
         $entity = new PageEntity();
 
         $whereClause = [
-            'slug' => 'impressum'
+            'slug' => 'impressum',
         ];
 
         $repository = $this->createMock(PageRepository::class);
@@ -42,15 +38,13 @@ class PageServiceTest extends TestCase
 
     /**
      * Tests fetching one record by id - exception is thrown because there is no record.
-     *
-     * @return void
      */
     public function testFetchingOneByIdThrowsException()
     {
         $exception = new RecordNotFoundException('Record with id #1 not found');
 
         $whereClause = [
-            'slug' => 'impressum'
+            'slug' => 'impressum',
         ];
 
         $repository = $this->createMock(PageRepository::class);
@@ -67,8 +61,6 @@ class PageServiceTest extends TestCase
 
     /**
      * Tests that create returns the entity.
-     *
-     * @return void
      */
     public function testCreateReturnsEntity()
     {
@@ -88,8 +80,6 @@ class PageServiceTest extends TestCase
 
     /**
      * Tests that update returns the entity.
-     *
-     * @return void
      */
     public function testUpdateReturnsEntity()
     {
@@ -109,8 +99,6 @@ class PageServiceTest extends TestCase
 
     /**
      * Tests that remove returns the entity.
-     *
-     * @return void
      */
     public function testRemoveReturnsEntity()
     {

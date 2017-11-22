@@ -155,7 +155,7 @@ class labels
         sql_free_result($rs);
         fwrite($f, 'labels::addLabels("usercountrieslist", "' . str_replace('"', '\\"', serialize($a)) . '");' . "\n");
 
-        fwrite($f, "?>");
+        fwrite($f, '?>');
         fclose($f);
     }
 

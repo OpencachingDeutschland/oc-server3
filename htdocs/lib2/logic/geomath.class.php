@@ -17,41 +17,40 @@ class geomath
         // geholt wird, sonst = false gesetzt wird...
         if ($lat1 == $lat2 && $lon1 == $lon2) {
             return false;
-        } else {
-            $pi = 3.141592653589793238462643383279502884197;
+        }
+        $pi = 3.141592653589793238462643383279502884197;
 
-            if ($lat1 == $lat2) {
-                $lat1 += 0.0000166;
-            }
-            if ($lon1 == $lon2) {
-                $lon1 += 0.0000166;
-            }
+        if ($lat1 == $lat2) {
+            $lat1 += 0.0000166;
+        }
+        if ($lon1 == $lon2) {
+            $lon1 += 0.0000166;
+        }
 
-            $rad_lat1 = $lat1 / 180.0 * $pi;
-            $rad_lon1 = $lon1 / 180.0 * $pi;
-            $rad_lat2 = $lat2 / 180.0 * $pi;
-            $rad_lon2 = $lon2 / 180.0 * $pi;
+        $rad_lat1 = $lat1 / 180.0 * $pi;
+        $rad_lon1 = $lon1 / 180.0 * $pi;
+        $rad_lat2 = $lat2 / 180.0 * $pi;
+        $rad_lon2 = $lon2 / 180.0 * $pi;
 
-            $delta_lon = $rad_lon2 - $rad_lon1;
-            $bearing = atan2(
+        $delta_lon = $rad_lon2 - $rad_lon1;
+        $bearing = atan2(
                 sin($delta_lon) * cos($rad_lat2),
                 cos($rad_lat1) * sin($rad_lat2) - sin($rad_lat1) * cos($rad_lat2) * cos($delta_lon)
             );
-            $bearing = 180.0 * $bearing / $pi;
+        $bearing = 180.0 * $bearing / $pi;
 
-            // Output Richtung von lat/lon1 nach lat/lon2 in Altgrad von -180 bis +180
-            // wenn man Output von 0 bis 360 haben moechte, kann man dies machen:
-            if ($bearing < 0.0) {
-                $bearing = $bearing + 360.0;
-            }
-
-            return $bearing;
+        // Output Richtung von lat/lon1 nach lat/lon2 in Altgrad von -180 bis +180
+        // wenn man Output von 0 bis 360 haben moechte, kann man dies machen:
+        if ($bearing < 0.0) {
+            $bearing = $bearing + 360.0;
         }
+
+        return $bearing;
     }
 
     /**
      * @param $parBearing
-     * @param integer $parShortText
+     * @param int $parShortText
      * @param $language
      * @return string
      */
@@ -99,53 +98,52 @@ class geomath
             }
 
             return $translate->t($bearing, '', '', 0, '', 1, $language);
-        } else {
-            if ($parBearing === false) {
-                return 'N/A';
-            } elseif (($parBearing < 11.25) || ($parBearing > 348.75)) {
-                $bearing = 'N';
-            } elseif ($parBearing < 33.75) {
-                $bearing = 'NNE';
-            } elseif ($parBearing < 56.25) {
-                $bearing = 'NE';
-            } elseif ($parBearing < 78.75) {
-                $bearing = 'ENE';
-            } elseif ($parBearing < 101.25) {
-                $bearing = 'E';
-            } elseif ($parBearing < 123.75) {
-                $bearing = 'ESE';
-            } elseif ($parBearing < 146.25) {
-                $bearing = 'SE';
-            } elseif ($parBearing < 168.75) {
-                $bearing = 'SSE';
-            } elseif ($parBearing < 191.25) {
-                $bearing = 'S';
-            } elseif ($parBearing < 213.75) {
-                $bearing = 'SSW';
-            } elseif ($parBearing < 236.25) {
-                $bearing = 'SW';
-            } elseif ($parBearing < 258.75) {
-                $bearing = 'WSW';
-            } elseif ($parBearing < 281.25) {
-                $bearing = 'W';
-            } elseif ($parBearing < 303.75) {
-                $bearing = 'WNW';
-            } elseif ($parBearing < 326.25) {
-                $bearing = 'NW';
-            } elseif ($parBearing <= 348.75) {
-                $bearing = 'NNW';
-            } else {
-                return 'N/A';
-            }
-            $tb = '';
-            $max = strlen($bearing);
-            for ($i = 0; $i < $max; ++ $i) {
-                $tb .= $translate->t($bearing[$i], '', '', 0, '', 1, $language);
-            }
-            // Translation of N S W E does not work, for whatever reason.
-            // But this is currently not in use.
-            return $tb;
         }
+        if ($parBearing === false) {
+            return 'N/A';
+        } elseif (($parBearing < 11.25) || ($parBearing > 348.75)) {
+            $bearing = 'N';
+        } elseif ($parBearing < 33.75) {
+            $bearing = 'NNE';
+        } elseif ($parBearing < 56.25) {
+            $bearing = 'NE';
+        } elseif ($parBearing < 78.75) {
+            $bearing = 'ENE';
+        } elseif ($parBearing < 101.25) {
+            $bearing = 'E';
+        } elseif ($parBearing < 123.75) {
+            $bearing = 'ESE';
+        } elseif ($parBearing < 146.25) {
+            $bearing = 'SE';
+        } elseif ($parBearing < 168.75) {
+            $bearing = 'SSE';
+        } elseif ($parBearing < 191.25) {
+            $bearing = 'S';
+        } elseif ($parBearing < 213.75) {
+            $bearing = 'SSW';
+        } elseif ($parBearing < 236.25) {
+            $bearing = 'SW';
+        } elseif ($parBearing < 258.75) {
+            $bearing = 'WSW';
+        } elseif ($parBearing < 281.25) {
+            $bearing = 'W';
+        } elseif ($parBearing < 303.75) {
+            $bearing = 'WNW';
+        } elseif ($parBearing < 326.25) {
+            $bearing = 'NW';
+        } elseif ($parBearing <= 348.75) {
+            $bearing = 'NNW';
+        } else {
+            return 'N/A';
+        }
+        $tb = '';
+        $max = strlen($bearing);
+        for ($i = 0; $i < $max; ++ $i) {
+            $tb .= $translate->t($bearing[$i], '', '', 0, '', 1, $language);
+        }
+        // Translation of N S W E does not work, for whatever reason.
+        // But this is currently not in use.
+        return $tb;
     }
 
     public static function calcDistance($latFrom, $lonFrom, $latTo, $lonTo, $distanceMultiplier = 1)

@@ -53,10 +53,10 @@ class mailcheck
         for ($i = 0; $i < $countMxRecords; $i++) {
             $mxs[$i] = [
                 'mx' => $mx_records[$i],
-                'prio' => $mx_weight[$i]
+                'prio' => $mx_weight[$i],
             ];
         }
-        usort($mxs, "mailcheck_cmp");
+        usort($mxs, 'mailcheck_cmp');
         reset($mxs);
 
         // check address with each MX until one mailserver can be connected
@@ -70,7 +70,6 @@ class mailcheck
 
         return CA_ERROR_CONNECT;
     }
-
 
     /* check if the specified mailserver
      * explicit says that the $sAddress does not exist
@@ -93,7 +92,7 @@ class mailcheck
             return CA_ERROR_CONNECT;
         }
 
-        $sResp = $this->send_command($fp, "HELO " . $this->sHostname);
+        $sResp = $this->send_command($fp, 'HELO ' . $this->sHostname);
         $sCode = $this->extract_return_code($sResp);
         if ($sCode != '220') {
             $this->close($fp);
@@ -101,7 +100,7 @@ class mailcheck
             return CA_ERROR_UNKOWN;
         }
 
-        $sResp = $this->send_command($fp, "MAIL FROM: <" . $this->sFrom . ">");
+        $sResp = $this->send_command($fp, 'MAIL FROM: <' . $this->sFrom . '>');
         $sCode = $this->extract_return_code($sResp);
         if ($sCode != '250') {
             $this->close($fp);
@@ -109,7 +108,7 @@ class mailcheck
             return CA_ERROR_UNKOWN;
         }
 
-        $sResp = $this->send_command($fp, "RCPT TO: <" . $sAddress . ">");
+        $sResp = $this->send_command($fp, 'RCPT TO: <' . $sAddress . '>');
         $sCode = $this->extract_return_code($sResp);
         if (strlen($sCode) == 3 && substr($sCode, 0, 1) == '4') {
             $this->close($fp);

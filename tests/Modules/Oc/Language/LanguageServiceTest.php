@@ -10,21 +10,17 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class LanguageServiceTest
- *
- * @package OcTest\Modules\Oc\Language
  */
 class LanguageServiceTest extends TestCase
 {
     /**
      * Tests fetching all records with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingAllReturnsArrayWithLanguageEntities()
     {
         $entityArray = [
             new LanguageEntity(),
-            new LanguageEntity()
+            new LanguageEntity(),
         ];
 
         $repository = $this->createMock(LanguageRepository::class);
@@ -40,8 +36,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests fetching all records - exception is thrown because there are no records.
-     *
-     * @return void
      */
     public function testFetchingAllThrowsException()
     {
@@ -60,14 +54,12 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests fetching all translated records with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingAllTranslatedReturnsArrayWithLanguageEntities()
     {
         $entityArray = [
             new LanguageEntity(),
-            new LanguageEntity()
+            new LanguageEntity(),
         ];
 
         $repository = $this->createMock(LanguageRepository::class);
@@ -83,8 +75,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests fetching all records - exception is thrown because there are no records.
-     *
-     * @return void
      */
     public function testFetchingAllTranslatedThrowsException()
     {
@@ -103,8 +93,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests that create returns the entity.
-     *
-     * @return void
      */
     public function testCreateReturnsEntity()
     {
@@ -124,8 +112,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests that update returns the entity.
-     *
-     * @return void
      */
     public function testUpdateReturnsEntity()
     {
@@ -145,8 +131,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests that remove returns the entity.
-     *
-     * @return void
      */
     public function testRemoveReturnsEntity()
     {
@@ -166,8 +150,6 @@ class LanguageServiceTest extends TestCase
 
     /**
      * Tests getting all available translations.
-     *
-     * @return void
      */
     public function testGetAvailableTranslations()
     {
@@ -179,7 +161,7 @@ class LanguageServiceTest extends TestCase
 
         $languageEntities = [
             $language1,
-            $language2
+            $language2,
         ];
 
         $service = $this->getMock(

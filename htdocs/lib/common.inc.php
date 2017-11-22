@@ -211,10 +211,9 @@ function db_LanguageFromShort($langCode)
 
         //return the language
         return $record['text'];
-    } else {
-        //language not found
-        return false;
     }
+    //language not found
+    return false;
 }
 
 //get the stored settings and authentification data from the cookie
@@ -255,9 +254,9 @@ function get_cookie_setting($name)
 
     if ($cookie->is_set($name)) {
         return $cookie->get($name);
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 //sets the cookie value
@@ -273,6 +272,8 @@ function set_cookie_setting($name, $value)
 //in HTML code and could contain \<\? php-Code \?\>
 /**
  * @param string $name
+ * @param mixed $value
+ * @param mixed $no_eval
  */
 function tpl_set_var($name, $value, $no_eval = true)
 {
@@ -288,9 +289,9 @@ function tpl_get_var($name)
 
     if (isset($vars[$name])) {
         return $vars[$name];
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 //clear all template vars
@@ -793,14 +794,14 @@ function helppagelink($ocPage)
     $imgTitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
     $imgTitle = "alt='" . $imgTitle . "' title='" . $imgTitle . "'";
 
-    if (substr($helpPage, 0, 1) == "!") {
+    if (substr($helpPage, 0, 1) == '!') {
         return "<a class='nooutline' href='" . substr($helpPage, 1) . "' " . $imgTitle . " target='_blank'>";
-    } else {
-        if ($helpPage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
-            return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
-            str_replace(' ', '_', $helpPage) . "' " . $imgTitle . " target='_blank'>";
-        }
     }
+    if ($helpPage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
+        return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
+            str_replace(' ', '_', $helpPage) . "' " . $imgTitle . " target='_blank'>";
+    }
+    
 
     return '';
 }

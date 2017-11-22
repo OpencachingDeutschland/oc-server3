@@ -31,8 +31,8 @@ if ($rMapCache = sql_fetch_assoc($rsMapCache)) {
 } else {
     // ensure that query is performed without errors before reserving the result_id
     sql_temp_table_slave('tmpmapresult');
-    sql_slave("CREATE TEMPORARY TABLE &tmpmapresult (`cache_id` INT UNSIGNED NOT NULL, PRIMARY KEY (`cache_id`)) ENGINE=MEMORY");
-    sql_slave("INSERT INTO &tmpmapresult (`cache_id`) " . $sqlFilter);
+    sql_slave('CREATE TEMPORARY TABLE &tmpmapresult (`cache_id` INT UNSIGNED NOT NULL, PRIMARY KEY (`cache_id`)) ENGINE=MEMORY');
+    sql_slave('INSERT INTO &tmpmapresult (`cache_id`) ' . $sqlFilter);
 
     sql(
         "
@@ -73,7 +73,7 @@ if ($map2_bounds) {
             $rBounds['lon_min'] -= $halfwin;
             $rBounds['lon_max'] += $halfwin;
         }
-        $bounds_param = "&lat_min=" . round($rBounds['lat_min'], 5) . "&lat_max=" . round($rBounds['lat_max'], 5) . '&lon_min=' . round($rBounds['lon_min'], 5) . '&lon_max=' . round($rBounds['lon_max'], 5);
+        $bounds_param = '&lat_min=' . round($rBounds['lat_min'], 5) . '&lat_max=' . round($rBounds['lat_max'], 5) . '&lon_min=' . round($rBounds['lon_min'], 5) . '&lon_max=' . round($rBounds['lon_max'], 5);
     }
     sql_free_result($rs);
 

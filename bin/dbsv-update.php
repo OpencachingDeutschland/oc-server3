@@ -226,7 +226,7 @@ function dbv_101()  // add fields for fixing OKAPI issue #232
             $after = 'last_modified';
         }
         sql(
-            "ALTER TABLE `cache_logs` ADD COLUMN `log_last_modified` DATETIME NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)' AFTER `" . $after . "`"
+            "ALTER TABLE `cache_logs` ADD COLUMN `log_last_modified` DATETIME NOT NULL COMMENT 'via Trigger (stat_caches, gk_item_waypoint)' AFTER `" . $after . '`'
         );
         sql(
             "UPDATE `cache_logs`
@@ -243,7 +243,7 @@ function dbv_101()  // add fields for fixing OKAPI issue #232
             $after = 'last_modified';
         }
         sql(
-            'ALTER TABLE `cache_logs_archived` ADD COLUMN `log_last_modified` DATETIME NOT NULL AFTER `' . $after . "`"
+            'ALTER TABLE `cache_logs_archived` ADD COLUMN `log_last_modified` DATETIME NOT NULL AFTER `' . $after . '`'
         );
         sql('UPDATE `cache_logs_archived` SET `log_last_modified` = `last_modified`');
     }
@@ -688,7 +688,7 @@ function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
     $rs = sql("SELECT `uni`, `full_name_nd` FROM `gns_locations` WHERE `dsg` LIKE 'PPL%'");
     while ($r = sql_fetch_array($rs)) {
         $text = search_text2sort($r['full_name_nd'], true);
-        if (preg_match("/[a-z]+/", $text)) {
+        if (preg_match('/[a-z]+/', $text)) {
             $simpletext = search_text2simple($text);
             sql(
                 "INSERT INTO `gns_search`
@@ -697,7 +697,7 @@ function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
                 $r['uni'],
                 $text,
                 $simpletext,
-                sprintf("%u", crc32($simpletext))
+                sprintf('%u', crc32($simpletext))
             );
         }
     }
@@ -1152,7 +1152,7 @@ function dbv_158()
     sql(
         "ALTER TABLE `cache_logs`
             COMMENT = 'Attention: modifications to this table may need to be " .
-                      "applied also to cache_logs_archived, cache_logs_modified " .
+                      'applied also to cache_logs_archived, cache_logs_modified ' .
                       "and trigger cacheLogsBeforeUpdate!'"
     );
 }
@@ -1178,7 +1178,7 @@ function dbv_161()
 
     // add nuts codes for Bulgaria, Kroatia, Romania and Turkey
     system(
-        'cat ' . __DIR__. '/../sql/static-data/nuts_codes.sql |' .
+        'cat ' . __DIR__ . '/../sql/static-data/nuts_codes.sql |' .
         ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] .
         ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
     );
@@ -1199,7 +1199,7 @@ function dbv_161()
 
 function dbv_162()
 {
-   // dummy function for obsolete mutation, replaced by 163
+    // dummy function for obsolete mutation, replaced by 163
 }
 
 function dbv_163()
@@ -1218,7 +1218,7 @@ function dbv_164()
     // add missing NUTS 1 and 3 codes for Norway;
     // change UK NUTS codes from UK to GB, which is the "OC country code" for UK
     system(
-        'cat ' . __DIR__. '/../sql/static-data/nuts_codes.sql |' .
+        'cat ' . __DIR__ . '/../sql/static-data/nuts_codes.sql |' .
         ' mysql -h' . $opt['db']['servername'] . ' -u' . $opt['db']['username'] .
         ' --password=' . $opt['db']['password'] . ' ' . $opt['db']['placeholder']['db']
     );
@@ -1270,7 +1270,7 @@ function dbv_164()
         'SE072' => 'SE322',
         'SE08'  => 'SE33',
         'SE081' => 'SE331',
-        'SE082' => 'SE332'
+        'SE082' => 'SE332',
     ];
     foreach ($sweden_nuts as $old => $new) {
         sql("UPDATE `nuts_layer` SET `code`='&2' WHERE `code`='&1'", $old, $new);
@@ -1362,13 +1362,12 @@ function dbv_165()
     ];
     foreach ($npa_names as $npa_name) {
         $wrong_name = str_replace(['Ä', 'ä', 'Ö', 'ö', 'Ü', 'ü', "'"], '?', $npa_name);
-        $wrong_name = str_replace('ß', 'á',  $wrong_name);
+        $wrong_name = str_replace('ß', 'á', $wrong_name);
         sql("UPDATE `npa_areas` SET `name`='&2' WHERE `name`=BINARY '&1'", $wrong_name, $npa_name);
     }
     $npa_names = [
         'LSG-Am Vinnenberger Busch - Gro?er Dyk' => 'LSG-Dingdener und Brüner Höhen',
-        'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstra?e'
-            => 'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstraße',
+        'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstra?e' => 'LSG-Boxteler Bahn zwischen Gemeindegrenze Uedem und Xanten - Trajanstraße',
         'LSG-Dingdener und Br?ner H÷hen' => 'LSG-Am Vinnenberger Busch - Großer Dyk',
         'LSG-Hufscher Berg - L÷wenberg' => 'LSG-Hufscher Berg - Löwenberg',
         'LSG-Landwehren s?dlich der Weseler Stra?e' => 'LSG-Landwehren südlich der Weseler Straße',
@@ -1386,8 +1385,8 @@ function dbv_166()
     // initiate complete rebuild of fulltext search index;
     // see https://redmine.opencaching.de/issues/1043
 
-    sql("TRUNCATE TABLE `search_index`");
-    sql("TRUNCATE TABLE `search_index_times`");
+    sql('TRUNCATE TABLE `search_index`');
+    sql('TRUNCATE TABLE `search_index_times`');
 
     // Adjust the search_index_times definition to the changed implementation.
     // Field types are all ok.
@@ -1398,12 +1397,12 @@ function dbv_166()
     );
 
     sql(
-        "INSERT INTO `search_index_times`
+        'INSERT INTO `search_index_times`
          (`object_type`, `object_id`, `last_refresh`)
          SELECT 2, `cache_id`, NOW() FROM `caches` UNION   -- cache names
          SELECT 1, `cache_id`, NOW() FROM `caches` UNION   -- log entries
          SELECT 3, `cache_id`, NOW() FROM `caches` UNION   -- cache descriptions
-         SELECT 6, `cache_id`, NOW() FROM `caches`         -- picture titles"
+         SELECT 6, `cache_id`, NOW() FROM `caches`         -- picture titles'
     );
 }
 

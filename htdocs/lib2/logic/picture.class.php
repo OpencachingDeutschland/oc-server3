@@ -25,12 +25,12 @@ class picture
 
     public static function fromUUID($uuid)
     {
-        $pictureId = picture::pictureIdFromUUID($uuid);
+        $pictureId = self::pictureIdFromUUID($uuid);
         if ($pictureId == 0) {
             return null;
         }
 
-        return new picture($pictureId);
+        return new self($pictureId);
     }
 
     public function __construct($nNewPictureId = ID_NEW)
@@ -62,7 +62,7 @@ class picture
         if ($nNewPictureId == ID_NEW) {
             $this->rePicture->addNew(null);
 
-            $sUUID = mb_strtoupper(sql_value("SELECT UUID()", ''));
+            $sUUID = mb_strtoupper(sql_value('SELECT UUID()', ''));
             $this->rePicture->setValue('uuid', $sUUID);
             $this->rePicture->setValue('node', $opt['logic']['node']['id']);
             $this->originalPosition = false;
@@ -104,9 +104,9 @@ class picture
 
         if (strpos(';' . $opt['logic']['pictures']['extensions'] . ';', ';' . $sExtension . ';') !== false) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -142,7 +142,7 @@ class picture
     }
 
     /**
-     * @param boolean $bRestoring
+     * @param bool $bRestoring
      * @param int $original_id
      */
     private function setArchiveFlag($bRestoring, $original_id = 0)
@@ -170,8 +170,8 @@ class picture
             $archive = true;
         }
 
-        sql("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
-        sql_slave("SET @archive_picop=" . ($archive ? "TRUE" : "FALSE"));
+        sql('SET @archive_picop=' . ($archive ? 'TRUE' : 'FALSE'));
+        sql_slave('SET @archive_picop=' . ($archive ? 'TRUE' : 'FALSE'));
 
         sql("SET @original_picid='&1'", $original_id);
         sql_slave("SET @original_picid='&1'", $original_id);
@@ -181,10 +181,10 @@ class picture
 
     private function resetArchiveFlag()
     {
-        sql("SET @archive_picop=FALSE");
-        sql("SET @original_picid=0");
-        sql_slave("SET @archive_picop=FALSE");
-        sql_slave("SET @original_picid=0");
+        sql('SET @archive_picop=FALSE');
+        sql('SET @original_picid=0');
+        sql_slave('SET @archive_picop=FALSE');
+        sql_slave('SET @original_picid=0');
     }
 
     /**
@@ -237,9 +237,9 @@ class picture
     {
         if ($value != '') {
             return $this->rePicture->setValue('title', $value);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -268,7 +268,7 @@ class picture
     }
 
     /**
-     * @param integer $value
+     * @param int $value
      * @return bool
      */
     public function setLocal($value)
@@ -373,9 +373,9 @@ class picture
     {
         if ($this->getObjectType() == OBJECT_CACHELOG) {
             return $this->getObjectId();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -385,8 +385,8 @@ class picture
     {
         if ($this->getObjectType() != OBJECT_CACHELOG) {
             return null;
-        } else {
-            $rs = sql(
+        }
+        $rs = sql(
                 "SELECT `id`
                  FROM `cache_logs`
                  WHERE `cache_id`='&1'
@@ -395,7 +395,7 @@ class picture
                 $this->getCacheId(),
                 MAX_LOGENTRIES_ON_CACHEPAGE
             );
-        }
+        
         $firstlogs = false;
         while ($r = sql_fetch_assoc($rs)) {
             if ($r['id'] == $this->getLogId()) {
@@ -417,9 +417,9 @@ class picture
             return sql_value("SELECT `cache_id` FROM `cache_logs` WHERE `id`='&1'", false, $this->getObjectId());
         } elseif ($this->getObjectType() == OBJECT_CACHE) {
             return $this->getObjectId();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -473,9 +473,9 @@ class picture
                 false,
                 $this->getObjectId()
             );
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -535,9 +535,8 @@ class picture
         if ($this->originalPosition === false) {
             // position numbers are always >= 1
             $this->rePicture->setValue('seq', max(1, $position));
-        } else {
-            // repositioning existing pictures is not implemented yet
         }
+        // repositioning existing pictures is not implemented yet
     }
 
     /**
@@ -579,15 +578,15 @@ class picture
      * @param string $original_url
      * @return bool
      */
-    public function save($restore = false, $original_id = 0, $original_url = "")
+    public function save($restore = false, $original_id = 0, $original_url = '')
     {
         $undelete = ($original_id != 0);
 
         if ($undelete) {
             if ($this->bFilenamesSet == true) {
                 return false;
-            } else {
-                // restore picture file
+            }
+            // restore picture file
                 $this->setUrl($original_url);     // set the url, so that we can
                 $filename = $this->getFilename(); // .. retrieve the file path+name
                 $this->setFilenames($filename);   // now set url(s) from the new uuid
@@ -596,7 +595,6 @@ class picture
                 } catch (Exception $e) {
                     // @todo implement logging
                 }
-            }
         }
 
         if ($this->bFilenamesSet == false) {
@@ -725,9 +723,9 @@ class picture
         if ($this->getObjectType() == OBJECT_CACHELOG) {
             $pl = 'viewcache.php?cacheid=' . urlencode($this->getCacheId());
             if (!$this->isVisibleOnCachePage()) {
-                $pl .= "&log=A";
+                $pl .= '&log=A';
             }
-            $pl .= "#log" . urlencode($this->getLogId());
+            $pl .= '#log' . urlencode($this->getLogId());
         } elseif ($this->getObjectType() == OBJECT_CACHE) {
             $pl = 'editcache.php?cacheid=' . urlencode($this->getCacheId()) . '#pictures';
         } else {
@@ -746,8 +744,7 @@ class picture
         $tmpfile: full name of uploaded file
         $longSideSize:  if longer side of picture > $longSideSize, then it will be prop. shrinked to
         returns: true if no error occur, otherwise false
-    */
-    /**
+
      * @param $tmpFile
      * @param $longSideSize
      * @return bool
@@ -790,17 +787,17 @@ class picture
                 $w = imagesx($image);
                 $h = imagesy($image);
                 if (max($w, $h) > 5000) {
-                    throw new Exception("Image too large >5000px");
+                    throw new Exception('Image too large >5000px');
                 }
                 if (max($w, $h) <= $longSideSize) {
                     $result = imagejpeg($image, $this->getFilename(), PICTURE_QUALITY);
                 } else {
                     $newSize = $w < $h ? [
                         $w * $longSideSize / $h,
-                        $longSideSize
+                        $longSideSize,
                     ] : [
                         $longSideSize,
-                        $h * $longSideSize / $w
+                        $h * $longSideSize / $w,
                     ];
                     $imageNew = imagecreatetruecolor($newSize[0], $newSize[1]);
                     imagecopyresampled($imageNew, $image, 0, 0, 0, 0, $newSize[0], $newSize[1], $w, $h);
@@ -822,9 +819,9 @@ class picture
             }
 
             return $result;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -845,13 +842,13 @@ class picture
                     $image->clear();
 
                     return true;
-                } else {
-                    $image->clear();
                 }
+                $image->clear();
             } catch (Exception $e) {
                 if ($image) {
                     $image->clear();
                 }
+
                 return false;
             }
         }

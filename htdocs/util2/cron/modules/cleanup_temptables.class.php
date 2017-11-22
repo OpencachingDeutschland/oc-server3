@@ -19,7 +19,7 @@ class CleanupTempTables
     public function run()
     {
         $nIds = [];
-        $rs = sqlf("SHOW PROCESSLIST");
+        $rs = sqlf('SHOW PROCESSLIST');
         while ($r = sql_fetch_assoc($rs)) {
             $nIds[$r['Id']] = $r['Id'];
         }

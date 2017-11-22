@@ -25,26 +25,26 @@ function search_output()
 
     $encoding = 'UTF-8';
 
-    $xmlLine = "    <cache>
+    $xmlLine = '    <cache>
         <name><![CDATA[{cachename}]]></name>
-        <owner id=\"{ownerid}\"><![CDATA[{owner}]]></owner>
+        <owner id="{ownerid}"><![CDATA[{owner}]]></owner>
         <id>{cacheid}</id>
         <waypoint>{waypoint}</waypoint>
         <hidden>{time}</hidden>
-        <status id=\"{statusid}\">{status}</status>
-        <lon value=\"{lonvalue}\">{lon}</lon>
-        <lat value=\"{latvalue}\">{lat}</lat>
-        <distance unit=\"" . $distance_unit . "\">{distance}</distance>
-        <type id=\"{typeid}\">{type}</type>
+        <status id="{statusid}">{status}</status>
+        <lon value="{lonvalue}">{lon}</lon>
+        <lat value="{latvalue}">{lat}</lat>
+        <distance unit="' . $distance_unit . '">{distance}</distance>
+        <type id="{typeid}">{type}</type>
         <difficulty>{difficulty}</difficulty>
         <terrain>{terrain}</terrain>
-        <size id=\"{sizeid}\">{container}</size>
-        <country id=\"{countryid}\">{country}</country>
-        <link><![CDATA[" . $opt['page']['default_absolute_url'] . "viewcache.php?wp={waypoint}]]></link>
+        <size id="{sizeid}">{container}</size>
+        <country id="{countryid}">{country}</country>
+        <link><![CDATA[' . $opt['page']['default_absolute_url'] . 'viewcache.php?wp={waypoint}]]></link>
         <desc><![CDATA[{shortdesc}]]></desc>
         <hints><![CDATA[{hints}]]></hints>
     </cache>
-";
+';
 
     // create temporary table
     sql_temp_table_slave('searchtmp');
@@ -58,17 +58,17 @@ function search_output()
 
     // start output
     if (!$db['debug']) {
-        header("Content-type: application/xml; charset=" . $encoding);
+        header('Content-type: application/xml; charset=' . $encoding);
         //header("Content-Disposition: attachment; filename=" . $sFilebasename . ".txt");
 
-        echo "<?xml version=\"1.0\" encoding=\"" . $encoding . "\"?>\n";
+        echo '<?xml version="1.0" encoding="' . $encoding . "\"?>\n";
         echo "<result>\n";
 
         echo "    <docinfo>\n";
-        echo "        <results>" . $rCount['count'] . "</results>\n";
-        echo "        <startat>" . $startat . "</startat>\n";
-        echo "        <perpage>" . $count . "</perpage>\n";
-        echo "        <total>" . $resultcount . "</total>\n";
+        echo '        <results>' . $rCount['count'] . "</results>\n";
+        echo '        <startat>' . $startat . "</startat>\n";
+        echo '        <perpage>' . $count . "</perpage>\n";
+        echo '        <total>' . $resultcount . "</total>\n";
         echo "    </docinfo>\n";
     }
 
@@ -170,7 +170,7 @@ function search_output()
 
         $thisline = str_replace('{owner}', filterevilchars($r['username']), $thisline);
         $thisline = str_replace('{ownerid}', filterevilchars($r['user_id']), $thisline);
-        $thisline = str_replace('{distance}', text_xmlentities(sprintf("%01.1f", $r['distance'])), $thisline);
+        $thisline = str_replace('{distance}', text_xmlentities(sprintf('%01.1f', $r['distance'])), $thisline);
 
         $thisline = lf2crlf($thisline);
 
@@ -189,7 +189,7 @@ function search_output()
 
 function decodeEntities($str)
 {
-    return html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
 }
 
 function html2txt($html)
@@ -243,7 +243,7 @@ function filterevilchars($str)
         3 => 3,
         2 => 2,
         1 => 1,
-        0 => 0
+        0 => 0,
     );
 
     foreach ($evilchars as $ascii) {

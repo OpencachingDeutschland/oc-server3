@@ -7,8 +7,6 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class GlobalContextTest
- *
- * @package OcTest\Modules\Oc\GlobalContext
  */
 class GlobalContextTest extends TestCase
 {

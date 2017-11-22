@@ -183,7 +183,7 @@ function post_config()
         'menustring' => t('Geokrety'),
         'siteid' => 'geokrety',
         'visible' => true,
-        'filename' => 'https://geokrety.org/index.php?lang=' . (isset($locale) ? strtolower($locale) : 'de')
+        'filename' => 'https://geokrety.org/index.php?lang=' . (isset($locale) ? strtolower($locale) : 'de'),
     ];
 
     $menu[] = [
@@ -191,6 +191,6 @@ function post_config()
         'menustring' => 'API',
         'siteid' => 'API',
         'visible' => true,
-        'filename' => 'okapi'
+        'filename' => 'okapi',
     ];
 }

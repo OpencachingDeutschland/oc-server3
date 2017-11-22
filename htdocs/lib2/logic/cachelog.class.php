@@ -40,7 +40,7 @@ class cachelog
             return null;
         }
 
-        return new cachelog($logid);
+        return new self($logid);
     }
 
     public static function createNew($nCacheId, $nUserId)
@@ -56,7 +56,7 @@ class cachelog
             return false;
         }
 
-        $oCacheLog = new cachelog(ID_NEW);
+        $oCacheLog = new self(ID_NEW);
         $oCacheLog->setUserId($nUserId);
         $oCacheLog->setCacheId($nCacheId);
         $oCacheLog->setNode($opt['logic']['node']['id']);
@@ -76,7 +76,7 @@ class cachelog
             return false;
         }
 
-        $oCacheLog = new cachelog(ID_NEW);
+        $oCacheLog = new self(ID_NEW);
         $oCacheLog->setUserId($nUserId);
         $oCacheLog->setCacheId($oCache->getCacheId());
         $oCacheLog->setNode($opt['logic']['node']['id']);
@@ -262,7 +262,7 @@ class cachelog
     }
 
     /**
-     * @param integer $value
+     * @param int $value
      * @return bool
      */
     public function setOwnerNotified($value)

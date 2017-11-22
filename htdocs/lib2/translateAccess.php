@@ -21,9 +21,9 @@ class translateAccess
 
         if (isset($login)) {
             return $login->hasAdminPriv(ADMIN_TRANSLATE);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -37,9 +37,9 @@ class translateAccess
 
         if (isset($login)) {
             return $login->hasAdminPriv(ADMIN_ROOT) || in_array($language, $this->getLanguages());
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

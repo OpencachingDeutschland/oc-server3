@@ -39,7 +39,7 @@ function showstats($header, $condition, $limit)
     );
 
     foreach ($results as $r) {
-        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($r['rank']) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . "</td><td>&nbsp;&nbsp;" . $r['name'] . "</td></tr>\n";
+        echo "  <tr><td style='text-align:right'>&nbsp;&nbsp;" . ($r['rank']) . ".&nbsp;&nbsp;&nbsp;</td><td style='text-align:right'>" . $r['count'] . '</td><td>&nbsp;&nbsp;' . $r['name'] . "</td></tr>\n";
     }
 
     echo "</table>\n";

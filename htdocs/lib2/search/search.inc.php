@@ -10,135 +10,135 @@
 
 $search_simplerules[] = [
     'qu',
-    'k'
+    'k',
 ];
 $search_simplerules[] = [
     'ts',
-    'z'
+    'z',
 ];
 $search_simplerules[] = [
     'tz',
-    'z'
+    'z',
 ];
 $search_simplerules[] = [
     'alp',
-    'alb'
+    'alb',
 ];
 $search_simplerules[] = [
     'y',
-    'i'
+    'i',
 ];
 $search_simplerules[] = [
     'ai',
-    'ei'
+    'ei',
 ];
 $search_simplerules[] = [
     'ou',
-    'u'
+    'u',
 ];
 $search_simplerules[] = [
     'th',
-    't'
+    't',
 ];
 $search_simplerules[] = [
     'ph',
-    'f'
+    'f',
 ];
 $search_simplerules[] = [
     'oh',
-    'o'
+    'o',
 ];
 $search_simplerules[] = [
     'ah',
-    'a'
+    'a',
 ];
 $search_simplerules[] = [
     'eh',
-    'e'
+    'e',
 ];
 $search_simplerules[] = [
     'aux',
-    'o'
+    'o',
 ];
 $search_simplerules[] = [
     'eau',
-    'o'
+    'o',
 ];
 $search_simplerules[] = [
     'eux',
-    'oe'
+    'oe',
 ];
 $search_simplerules[] = [
     '^ch',
-    'sch'
+    'sch',
 ];
 $search_simplerules[] = [
     'ck',
-    'k'
+    'k',
 ];
 $search_simplerules[] = [
     'ie',
-    'i'
+    'i',
 ];
 $search_simplerules[] = [
     'ih',
-    'i'
+    'i',
 ];
 $search_simplerules[] = [
     'ent',
-    'end'
+    'end',
 ];
 $search_simplerules[] = [
     'uh',
-    'u'
+    'u',
 ];
 $search_simplerules[] = [
     'sh',
-    'sch'
+    'sch',
 ];
 $search_simplerules[] = [
     'ver',
-    'wer'
+    'wer',
 ];
 $search_simplerules[] = [
     'dt',
-    't'
+    't',
 ];
 $search_simplerules[] = [
     'hard',
-    'hart'
+    'hart',
 ];
 $search_simplerules[] = [
     'egg',
-    'ek'
+    'ek',
 ];
 $search_simplerules[] = [
     'eg',
-    'ek'
+    'ek',
 ];
 $search_simplerules[] = [
     'cr',
-    'kr'
+    'kr',
 ];
 $search_simplerules[] = [
     'ca',
-    'ka'
+    'ka',
 ];
 $search_simplerules[] = [
     'ce',
-    'ze'
+    'ze',
 ];
 $search_simplerules[] = [
     'x',
-    'ks'
+    'ks',
 ];
 $search_simplerules[] = [
     've',
-    'we'
+    'we',
 ];
 $search_simplerules[] = [
     'va',
-    'wa'
+    'wa',
 ];
 
 /* end conversion rules */

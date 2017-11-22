@@ -10,15 +10,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class UserProviderTest
- *
- * @package OcTest\Modules\Oc\User
  */
 class UserProviderTest extends TestCase
 {
     /**
      * Tests fetching the user by session.
-     *
-     * @return void
      */
     public function testFetchingUserBySessionSuccess()
     {
@@ -43,8 +39,6 @@ class UserProviderTest extends TestCase
 
     /**
      * Tests fetching the user by session when no userId is in session.
-     *
-     * @return void
      */
     public function testFetchingUserBySessionNoUserId()
     {
@@ -62,8 +56,6 @@ class UserProviderTest extends TestCase
 
     /**
      * Tests fetching the user by session.
-     *
-     * @return void
      */
     public function testFetchingUserBySessionNoUserFound()
     {

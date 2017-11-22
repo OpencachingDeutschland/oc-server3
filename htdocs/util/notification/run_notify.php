@@ -35,6 +35,8 @@ if ($dblink === false) {
 // statements (the ON clause cannot access user.language).
 
 /**
+ * @param mixed $cacheType
+ * @param mixed $language
  * @return string
  */
 function getCacheTypeName($cacheType, $language)
@@ -49,6 +51,8 @@ function getCacheTypeName($cacheType, $language)
 }
 
 /**
+ * @param mixed $cacheSize
+ * @param mixed $language
  * @return string
  */
 function getCacheSizeName($cacheSize, $language)
@@ -219,7 +223,7 @@ function process_new_cache($notify)
             mb_send_mail($mailadr, $mailsubject, $mailBody, $email_headers);
         }
     } else {
-        echo "Unknown notification type: " . $notify['type'] . "<br />";
+        echo 'Unknown notification type: ' . $notify['type'] . '<br />';
     }
 
     // logentry($module, $eventid, $userid, $objectid1, $objectid2, $logtext, $details)

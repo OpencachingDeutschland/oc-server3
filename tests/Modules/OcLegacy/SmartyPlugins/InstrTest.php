@@ -8,15 +8,11 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 /**
  * Class RandTest
- *
- * @package OcTest\Modules\OcLegacy\SmartyPlugins
  */
 class InstrTest extends AbstractModuleTest
 {
     /**
      * Tests if $needle is found in $haystack.
-     *
-     * @return void
      */
     public function testInString()
     {
@@ -25,8 +21,6 @@ class InstrTest extends AbstractModuleTest
 
     /**
      * Tests if $needle is found in $haystack.
-     *
-     * @return void
      */
     public function testNotInString()
     {
@@ -47,7 +41,7 @@ class InstrTest extends AbstractModuleTest
 
         $params = [
             'haystack' => $haystack,
-            'needle' => $needle
+            'needle' => $needle,
         ];
 
         return \smarty_function_instr($params, $smarty);

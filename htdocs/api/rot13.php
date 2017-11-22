@@ -13,7 +13,7 @@ if (isset($_REQUEST['text'])) {
         [
             '<br>',
             '<br/>',
-            '<br />'
+            '<br />',
         ],
         "\n",
         $text

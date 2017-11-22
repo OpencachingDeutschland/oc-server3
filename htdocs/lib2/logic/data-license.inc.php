@@ -40,7 +40,7 @@ function getLicenseDisclaimer(
 ) {
     global $opt, $translate;
 
-    $ltext = "";
+    $ltext = '';
     $language = strtoupper($language);
     $server_address = $opt['page']['default_absolute_url'];
 
@@ -64,7 +64,7 @@ function getLicenseDisclaimer(
 
             $ltext = '&copy; ';
             if ($html) {
-                $ltext .= "<a href='" . $server_address . "viewprofile.php?userid=" . $userid . "' target='_blank'>";
+                $ltext .= "<a href='" . $server_address . 'viewprofile.php?userid=' . $userid . "' target='_blank'>";
             }
             $ltext .= $username;
             if ($html) {
@@ -72,7 +72,7 @@ function getLicenseDisclaimer(
             }
             $ltext .= ', ';
             if ($html) {
-                $ltext .= "<a href='" . $server_address . "viewcache.php?cacheid=" . $cacheid . "' target='_blank'>";
+                $ltext .= "<a href='" . $server_address . 'viewcache.php?cacheid=' . $cacheid . "' target='_blank'>";
             }
             $ltext .= $opt['page']['sitename'];
             if ($html) {
@@ -92,7 +92,7 @@ function getLicenseDisclaimer(
         }
 
         if ($for_cachedesc) {
-            if ($ltext != "") {
+            if ($ltext != '') {
                 if ($twolines) {
                     $ltext .= ";\r\n";
                 } else {
@@ -105,7 +105,7 @@ function getLicenseDisclaimer(
 
     if ($html) {
         return $ltext;
-    } else {
-        return mb_ereg_replace('&copy;', '©', $ltext);
     }
+
+    return mb_ereg_replace('&copy;', '©', $ltext);
 }

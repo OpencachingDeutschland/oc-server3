@@ -13,15 +13,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class GlobalContextSubscriberTest
- *
- * @package OcTest\Modules\Oc\GlobalContext\Subscriber
  */
 class GlobalContextSubscriberTest extends TestCase
 {
     /**
      * Tests that subscribed events returns the expected events.
-     *
-     * @return void
      */
     public function testSubscribedEvents()
     {
@@ -33,8 +29,6 @@ class GlobalContextSubscriberTest extends TestCase
 
     /**
      * Tests that the onKernelRequest listener initializes and sets the global context to the master request.
-     *
-     * @return void
      */
     public function testThatOnKernelRequestListenerSetsGlobalContextToMasterRequest()
     {

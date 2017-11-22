@@ -18,10 +18,7 @@ class LoggerErrorSearchTest extends AbstractFrontendTest
      * @group frontend-search
      *
      * @throws ElementNotFoundException if the searched element is not found
-     *
-     * @return void
      */
-
     public function testLoggerThatNotExists()
     {
         $this->login();

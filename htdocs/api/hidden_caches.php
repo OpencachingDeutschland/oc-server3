@@ -22,7 +22,8 @@ $wpOcs = $connection
      JOIN `cache_status` ON `cache_status`.`id`=`caches`.`status`
      WHERE `cache_status`.`allow_user_view`= 0
      AND `caches`.`status` != 5
-     ORDER BY `cache_id`')
+     ORDER BY `cache_id`'
+    )
     ->fetchAll(PDO::FETCH_COLUMN);
 
 foreach ($wpOcs as $wp) {

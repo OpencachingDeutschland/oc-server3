@@ -8,8 +8,6 @@ use OcTest\Modules\AbstractModuleTest;
 
 /**
  * Class ContainerTest
- *
- * @package OcTest\Modules\OcLegacy
  */
 class ContainerTest extends AbstractModuleTest
 {

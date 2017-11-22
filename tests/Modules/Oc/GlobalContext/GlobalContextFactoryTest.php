@@ -10,15 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GlobalContextFactoryTest
- *
- * @package OcTest\Modules\Oc\GlobalContext
  */
 class GlobalContextFactoryTest extends TestCase
 {
     /**
      * Tests that createFromRequest returns the expected result.
-     *
-     * @return void
      */
     public function testThatCreateFromRequestReturnsExpectedResult()
     {

@@ -30,7 +30,7 @@ class PurgeLogs
 
         if ($opt['logic']['logs']['purge_userdata'] > 0) {
             sql(
-                "DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)",
+                'DELETE FROM `logentries` WHERE date_created < NOW() - INTERVAL &1 DAY AND eventid IN (6,7)',
                 $opt['logic']['logs']['purge_userdata']
             );
         }

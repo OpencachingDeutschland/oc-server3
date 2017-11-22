@@ -8,7 +8,6 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class SeasonTest extends AbstractModuleTest
 {
-
     public function testSeason()
     {
         $smarty = null;

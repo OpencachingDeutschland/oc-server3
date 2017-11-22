@@ -25,18 +25,18 @@ class countriesList
 
     public function isDefault($id)
     {
-        $isDefault = sql_value(
+        $isDefault = (int) sql_value(
             "SELECT COUNT(*) FROM `countries_list_default` WHERE `lang`='&1' AND `show`='&2'",
             0,
             $this->locale,
             $id
         );
 
-        if ($isDefault == 0) {
+        if ($isDefault === 0) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     public function getDefaultRS()

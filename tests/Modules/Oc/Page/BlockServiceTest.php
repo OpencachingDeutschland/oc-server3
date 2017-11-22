@@ -10,15 +10,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class BlockServiceTest
- *
- * @package OcTest\Modules\Oc\Block
  */
 class BlockServiceTest extends TestCase
 {
     /**
      * Tests fetching one record by id with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingOneByIdReturnsEntity()
     {
@@ -27,7 +23,7 @@ class BlockServiceTest extends TestCase
         $whereClause = [
             'page_id' => 1,
             'locale' => 'de',
-            'active' => 1
+            'active' => 1,
         ];
 
         $repository = $this->createMock(BlockRepository::class);
@@ -44,8 +40,6 @@ class BlockServiceTest extends TestCase
 
     /**
      * Tests fetching one record by id - exception is thrown because there is no record.
-     *
-     * @return void
      */
     public function testFetchingOneByIdThrowsException()
     {
@@ -54,7 +48,7 @@ class BlockServiceTest extends TestCase
         $whereClause = [
             'page_id' => 1,
             'locale' => 'de',
-            'active' => 1
+            'active' => 1,
         ];
 
         $repository = $this->createMock(BlockRepository::class);
@@ -71,8 +65,6 @@ class BlockServiceTest extends TestCase
 
     /**
      * Tests that create returns the entity.
-     *
-     * @return void
      */
     public function testCreateReturnsEntity()
     {
@@ -92,8 +84,6 @@ class BlockServiceTest extends TestCase
 
     /**
      * Tests that update returns the entity.
-     *
-     * @return void
      */
     public function testUpdateReturnsEntity()
     {
@@ -113,8 +103,6 @@ class BlockServiceTest extends TestCase
 
     /**
      * Tests that remove returns the entity.
-     *
-     * @return void
      */
     public function testRemoveReturnsEntity()
     {

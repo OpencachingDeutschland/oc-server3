@@ -17,7 +17,7 @@ $ftSearchSimpleRules = [
     ['ai', 'ei'],
     ['ou', 'u'],
     ['th', 't'],
-    ['ph','f'],
+    ['ph', 'f'],
     ['oh', 'o'],
     ['ah', 'a'],
     ['eh', 'e'],
@@ -56,7 +56,7 @@ function ftsearch_hash(&$str)
     $astr = ftsearch_split($str, true);
     foreach ($astr as $k => $s) {
         if (strlen($s) > 2) {
-            $astr[$k] = sprintf("%u", crc32($s));
+            $astr[$k] = sprintf('%u', crc32($s));
         } else {
             unset($astr[$k]);
         }
@@ -252,7 +252,8 @@ function ftsearch_refresh($maxentries = PHP_INT_MAX)
          FROM `search_index_times`
          WHERE `last_refresh` = '&1'
          ORDER BY cache_id",
-        $snapshot_time);
+        $snapshot_time
+    );
 
     while ($r = sql_fetch_assoc($rs)) {
         // discard old search index entries for this cache & object type

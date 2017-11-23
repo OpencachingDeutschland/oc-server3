@@ -92,7 +92,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     {
         $this->output->writeln('Generating javascript');
 
-        $applicationJsPath = $projectDir . '/app/Resources/assets/js/';
+        $applicationJsPath = $projectDir . '/theme/frontend/js/';
 
         if (!file_exists($applicationJsPath)) {
             $this->output->writeln('<comment>- Javascript directory not found!</comment>');
@@ -129,7 +129,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     {
         $this->output->writeln('Generating stylesheets');
 
-        $applicationScssPath = $projectDir . '/app/Resources/assets/scss/';
+        $applicationScssPath = $projectDir . '/theme/frontend/scss/';
 
         $scss = new Compiler();
         $scss->setIgnoreErrors(true);
@@ -186,7 +186,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     {
         $this->output->writeln('Copying images');
 
-        $source = $projectDir . '/app/Resources/assets/images';
+        $source = $projectDir . '/theme/frontend/images';
         $destination = $projectDir . '/web/assets/images';
 
         $iterator = new RecursiveIteratorIterator(

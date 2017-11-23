@@ -39,7 +39,8 @@ class ChangelogController extends Controller
      */
     public function indexAction()
     {
-        $changelog = $this->markConverter->convertToHtml(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'));
+        $changelog = $this->markConverter
+            ->convertToHtml(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'));
 
         $response = new Response();
         $response->setContent(

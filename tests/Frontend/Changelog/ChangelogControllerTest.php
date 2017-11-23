@@ -2,15 +2,20 @@
 
 namespace OcTest\Frontend\Changelog;
 
-use OcTest\Frontend\AbstractFrontendTest;
+use League\CommonMark\CommonMarkConverter;
+use Oc\Changelog\Controller\ChangelogController;
+use OcTest\Modules\TestCase;
+use OcTest\Utils\TwigDummy;
 
-class ChangelogControllerTest extends AbstractFrontendTest
+class ChangelogControllerTest extends TestCase
 {
     public function testIndexAction()
     {
-        $this->session->visit($this->baseUrl . '/changelog');
-        $page = $this->session->getPage();
+        $markConverter = new CommonMarkConverter();
+        $twigDummy = new TwigDummy();
 
-        self::assertContains('Changes in oc-server 3.1', $page->getContent());
+        $changelogController = new ChangelogController($markConverter, $twigDummy);
+
+        self::assertContains('Changes in oc-server 3.1', $changelogController->indexAction()->getContent());
     }
 }

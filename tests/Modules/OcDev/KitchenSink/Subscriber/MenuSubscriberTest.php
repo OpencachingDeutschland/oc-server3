@@ -6,9 +6,6 @@ use AppKernel;
 use OcDev\KitchenSink\Subscriber\MenuSubscriber;
 use OcTest\Modules\TestCase;
 
-/**
- * Class CountryEntityTest
- */
 class MenuSubscriberTest extends TestCase
 {
     public function test_get_subscribed_events_returns_array()

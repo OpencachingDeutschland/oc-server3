@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Frontend\Changelog;
+namespace OcTest\Modules\Oc\Changelog\Controller;
 
 use League\CommonMark\CommonMarkConverter;
 use Oc\Changelog\Controller\ChangelogController;

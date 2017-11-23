@@ -110,6 +110,17 @@ PHP libraries
         Path    : htdocs/lib2/Net/
         URI     : https://pear.php.net/package/Net_IDNA2
         Licens  : LGPL 2.1
+        
+   12.  PSH
+        Path    : psh.phar
+        URI     : https://github.com/shopwareLabs/psh
+        Licens  : MIT
+
+   13.  php-cs-fixer
+        Path    : php-cs-fixer
+        URI     : https://github.com/FriendsOfPHP/PHP-CS-Fixer
+        Licens  : MIT
+
 
 
 JavaScript libraries

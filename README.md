@@ -8,7 +8,7 @@ This repository contains the website's code, including all third-party libraries
 needed to run it. It is one of two major
 [Opencaching code forks](https://wiki.opencaching.de/index.php/Datei:Codegenerationen.png); 
 the other one is [Opencaching.pl](http://code.google.com/p/opencaching-pl/). Feel free to use it under the provided
-[license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/development/doc/license.txt)
+[license terms](https://github.com/OpencachingDeutschland/oc-server3/blob/development/LICENSE.md)
 for setting up your own open and free Geocaching listing service! The code can easily be
 translated to other languages.
 

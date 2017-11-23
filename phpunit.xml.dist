@@ -18,24 +18,17 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory>htdocs/</directory>
-            <exclude>
-                <directory>htdocs/app/</directory>
-                <directory>htdocs/bin/</directory>
-                <directory>htdocs/cache2/</directory>
-                <directory>htdocs/config2/</directory>
-                <directory>htdocs/doc/</directory>
-                <directory>htdocs/download/</directory>
-                <directory>htdocs/html/</directory>
-                <directory>htdocs/images/</directory>
-                <directory>htdocs/lang/</directory>
-                <directory>htdocs/okapi/</directory>
-                <directory>htdocs/resource2/</directory>
-                <directory>htdocs/templates2/</directory>
-                <directory>htdocs/var/</directory>
-                <directory>htdocs/vendor/</directory>
-                <directory>htdocs/xml/</directory>
-            </exclude>
+            <directory>htdocs/api</directory>
+            <directory>htdocs/app</directory>
+            <directory>htdocs/bin</directory>
+            <directory>htdocs/src</directory>
+            <directory>htdocs/lib</directory>
+            <directory>htdocs/lib2</directory>
+            <directory>htdocs/okapi</directory>
+            <directory>htdocs/util</directory>
+            <directory>htdocs/util2</directory>
+            <directory>htdocs/xml</directory>
+            <directory>htdocs/*.php</directory>
         </whitelist>
     </filter>
     <php>

@@ -27,7 +27,6 @@
             <directory>htdocs/okapi</directory>
             <directory>htdocs/util</directory>
             <directory>htdocs/util2</directory>
-            <directory>htdocs/xml</directory>
         </whitelist>
     </filter>
     <php>

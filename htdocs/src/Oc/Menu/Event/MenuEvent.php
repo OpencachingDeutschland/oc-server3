@@ -23,6 +23,7 @@ class MenuEvent extends Event
      * @var ItemInterface
      */
     private $currentItem;
+
     /**
      * @var EventDispatcherInterface
      */
@@ -84,7 +85,6 @@ class MenuEvent extends Event
      * Creates an event object of it self but with given currentItem.
      *
      * @param ItemInterface $currentItem
-     *
      * @return self
      */
     public function createSubEvent(ItemInterface $currentItem)

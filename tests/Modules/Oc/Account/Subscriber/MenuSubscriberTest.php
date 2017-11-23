@@ -1,9 +1,9 @@
 <?php
 
-namespace OcTest\Modules\OcDev\KitchenSink\Subscriber;
+namespace OcTest\Modules\Oc\Account\Subscriber;
 
 use AppKernel;
-use OcDev\KitchenSink\Subscriber\MenuSubscriber;
+use Oc\Account\Subscriber\MenuSubscriber;
 use OcTest\Modules\TestCase;
 
 class MenuSubscriberTest extends TestCase

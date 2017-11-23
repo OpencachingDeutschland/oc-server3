@@ -12,7 +12,7 @@ namespace Oc\Util;
 class ProcessSync
 {
     /**
-     * @var string $pidFilePath
+     * @var string
      */
     private $pidFilePath;
 
@@ -60,7 +60,7 @@ class ProcessSync
             $pidDaemon = fgets($pidFile, 20);
             fclose($pidFile);
 
-            $pidDaemon = (int)$pidDaemon;
+            $pidDaemon = (int) $pidDaemon;
 
             // bad PID file, e.g. due to system malfunction while creating the file?
             if ($pidDaemon <= 0) {
@@ -73,13 +73,12 @@ class ProcessSync
                 echo 'Error: process for ' . $this->pidFilePath . " is already running with pid=$pidDaemon\n";
 
                 return false;
-            } else {
-                // no, remove pid_file
-                echo 'process not running, removing old PidFile (' . $this->pidFilePath . ")\n";
-                unlink($this->pidFilePath);
-
-                return true;
             }
+            // no, remove pid_file
+            echo 'process not running, removing old PidFile (' . $this->pidFilePath . ")\n";
+            unlink($this->pidFilePath);
+
+            return true;
         }
 
         return true;

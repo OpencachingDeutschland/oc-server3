@@ -6,8 +6,6 @@ use Oc\Repository\AbstractEntity;
 
 /**
  * Class UserEntity
- *
- * @package Oc\User
  */
 class UserEntity extends AbstractEntity
 {
@@ -32,12 +30,12 @@ class UserEntity extends AbstractEntity
     public $email;
 
     /**
-     * @var double
+     * @var float
      */
     public $latitude;
 
     /**
-     * @var double
+     * @var float
      */
     public $longitude;
 

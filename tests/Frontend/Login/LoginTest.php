@@ -15,7 +15,6 @@ class LoginTest extends AbstractFrontendTest
      * @group frontend-login
      *
      * @throws ElementNotFoundException if the searched element is not found
-     * @return void
      */
     public function testLoginFormOnStartPage()
     {

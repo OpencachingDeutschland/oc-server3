@@ -29,10 +29,9 @@ class Cronjobs
         } elseif (@file_get_contents($opt['page']['absolute_http_url'] . 'api/ping.php') !== false) {
             // website is up and running
             return true;
-        } else {
-            // === null: website is down, or DNS configuration error
-            // !== null: website is access protected or page is redirected or whatever
-            return $http_response_header !== null;
         }
+        // === null: website is down, or DNS configuration error
+        // !== null: website is access protected or page is redirected or whatever
+        return $http_response_header !== null;
     }
 }

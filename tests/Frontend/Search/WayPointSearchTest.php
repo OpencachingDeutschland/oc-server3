@@ -18,8 +18,6 @@ class WayPointSearchTest extends AbstractFrontendTest
      * @group frontend-search
      *
      * @throws ElementNotFoundException if element userinput is not found
-     *
-     * @return void
      */
     public function testOcWayPointSearch()
     {
@@ -31,9 +29,8 @@ class WayPointSearchTest extends AbstractFrontendTest
         $cacheTitle = $page->find('css', '#cache_name_block');
         if ($cacheTitle !== null) {
             self::assertContains('Heiden: Nordick', $cacheTitle->getText());
-        } else {
-//            self::fail(__METHOD__ . ' failed');
         }
+//            self::fail(__METHOD__ . ' failed');
     }
 
     /**
@@ -41,8 +38,6 @@ class WayPointSearchTest extends AbstractFrontendTest
      * @group frontend-search
      *
      * @throws ElementNotFoundException if element userinput is not found
-     *
-     * @return void
      */
     public function testInvalidOcWayPointSearch()
     {
@@ -54,8 +49,7 @@ class WayPointSearchTest extends AbstractFrontendTest
         $pageTitle = $page->find('css', '.content2-pagetitle');
         if ($pageTitle !== null) {
             self::assertContains('An error occurred while processing the page', $pageTitle->getText());
-        } else {
-//            self::fail(__METHOD__ . ' failed');
         }
+//            self::fail(__METHOD__ . ' failed');
     }
 }

@@ -6,8 +6,6 @@ use Oc\Repository\Exception\RecordNotFoundException;
 
 /**
  * Class PageService
- *
- * @package Oc\Page
  */
 class PageService
 {

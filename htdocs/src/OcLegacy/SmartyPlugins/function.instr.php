@@ -2,9 +2,7 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- * Smarty {instr haystack=$string needle=$string} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

@@ -31,7 +31,6 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
         $opt['lib']['w3w']['apikey'] = 'X27PDW41';
     }
 
-
     public function utmProvider()
     {
         return [
@@ -48,7 +47,12 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getUTM()
      * @dataProvider utmProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $zone
+     * @param mixed $letter
+     * @param mixed $north
+     * @param mixed $east
      */
     public function testUTM($lat, $lon, $zone, $letter, $north, $east)
     {
@@ -76,9 +80,10 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getGK()
      * @dataProvider gkProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $expectedGK
      */
-
     public function testGK($lat, $lon, $expectedGK)
     {
         $coord = new \coordinate($lat, $lon);
@@ -102,7 +107,9 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getSwissGrid()
      * @dataProvider swissGridProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $expectedSG
      */
     public function testSwissGrid($lat, $lon, $expectedSG)
     {
@@ -125,7 +132,9 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getRD()
      * @dataProvider dutchGridProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $expectedDG
      */
     public function testDutchGrid($lat, $lon, $expectedDG)
     {
@@ -151,7 +160,9 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getQTH()
      * @dataProvider qthProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $expectedQTH
      */
     public function testQTHLocator($lat, $lon, $expectedQTH)
     {
@@ -198,25 +209,25 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
                 51.52775,
                 -120.89720,
                 ['lat' => "N 51° 31.665'", 'lon' => "W 120° 53.832'"],
-                ['lat' => "N 51° 31' 39''", 'lon' => "W 120° 53' 49''"]
+                ['lat' => "N 51° 31' 39''", 'lon' => "W 120° 53' 49''"],
             ],
             [
                 -8.81687,
                 13.24057,
                 ['lat' => "S 08° 49.012'", 'lon' => "E 013° 14.434'"],
-                ['lat' => "S 08° 49' 00''", 'lon' => "E 013° 14' 26''"]
+                ['lat' => "S 08° 49' 00''", 'lon' => "E 013° 14' 26''"],
             ],
             [
                 52.67578,
                 6.77300,
                 ['lat' => "N 52° 40.547'", 'lon' => "E 006° 46.380'"],
-                ['lat' => "N 52° 40' 32''", 'lon' => "E 006° 46' 22''"]
+                ['lat' => "N 52° 40' 32''", 'lon' => "E 006° 46' 22''"],
             ],
             [
                 60.63367,
                 4.81313,
                 ['lat' => "N 60° 38.020'", 'lon' => "E 004° 48.788'"],
-                ['lat' => "N 60° 38' 01''", 'lon' => "E 004° 48' 47''"]
+                ['lat' => "N 60° 38' 01''", 'lon' => "E 004° 48' 47''"],
             ],
         ];
     }
@@ -226,7 +237,10 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @covers       \coordinate::getDecimalMinutes
      * @dataProvider formatProvider
      *
-     * @return void
+     * @param mixed $lat
+     * @param mixed $lon
+     * @param mixed $expectedMin
+     * @param mixed $expectedMinSec
      */
     public function testFormatConversions($lat, $lon, $expectedMin, $expectedMinSec)
     {

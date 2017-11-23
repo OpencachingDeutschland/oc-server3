@@ -7,15 +7,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class UserEntityTest
- *
- * @package OcTest\Modules\Oc\User
  */
 class UserEntityTest extends TestCase
 {
     /**
      * Tests that isNew returns true when the identifier id is null.
-     *
-     * @return void
      */
     public function testIsNewReturnsTrueOnIdentifierEqualsNull()
     {
@@ -26,8 +22,6 @@ class UserEntityTest extends TestCase
 
     /**
      * Tests that isNew returns false when the identifier id is not null.
-     *
-     * @return void
      */
     public function testIsNewReturnsFalseWhenIdentifierIsPresent()
     {
@@ -39,8 +33,6 @@ class UserEntityTest extends TestCase
 
     /**
      * Tests toArray returns correct array.
-     *
-     * @return void
      */
     public function testToArray()
     {
@@ -72,8 +64,6 @@ class UserEntityTest extends TestCase
 
     /**
      * Tests fromArray applies correct values.
-     *
-     * @return void
      */
     public function testFromArray()
     {
@@ -90,7 +80,7 @@ class UserEntityTest extends TestCase
             'isActive' => true,
 
             //Property that does not exist in the user entity to test the AbstractEntity
-            'no_property' => null
+            'no_property' => null,
         ];
 
         $user = new UserEntity();

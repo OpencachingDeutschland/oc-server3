@@ -64,7 +64,7 @@ class ReplicationMonitor
                         mysql_free_result($rs);
 
                         // read current master db time
-                        $nMasterTime = sql_value("SELECT NOW()", null);
+                        $nMasterTime = sql_value('SELECT NOW()', null);
 
                         $nTimeDiff = strtotime($nMasterTime) - strtotime($rTime['data']);
                         if ($nTimeDiff < $opt['db']['slave']['max_behind']) {
@@ -73,7 +73,7 @@ class ReplicationMonitor
                     }
 
                     // update logpos
-                    $rs = mysql_query("SHOW SLAVE STATUS");
+                    $rs = mysql_query('SHOW SLAVE STATUS');
                     $r = mysql_fetch_assoc($rs);
                     mysql_free_result($rs);
                     $sLogName = $r['Master_Log_File'];
@@ -87,7 +87,7 @@ class ReplicationMonitor
         if ($nOnline != sql_value("SELECT `online` FROM `sys_repl_slaves` WHERE `id`='&1'", 0, $id)) {
             mail(
                 $opt['db']['error']['mail'],
-                "MySQL Slave Server Id " . $id . " (" . $slave['server'] . ") is now " . (($nOnline != 0) ? 'Online' : 'Offline'),
+                'MySQL Slave Server Id ' . $id . ' (' . $slave['server'] . ') is now ' . (($nOnline != 0) ? 'Online' : 'Offline'),
                 ''
             );
         }

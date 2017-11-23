@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class MenuSubscriber
- *
- * @package Oc\Changelog\Subscriber
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
@@ -21,7 +19,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MenuEnum::MENU_MAIN => 'onConfigureMenu'
+            MenuEnum::MENU_MAIN => 'onConfigureMenu',
         ];
     }
 
@@ -33,7 +31,7 @@ class MenuSubscriber implements EventSubscriberInterface
         $event->getCurrentItem()->addChild(
             'Changelog',
             [
-                'route' => 'changelog.index'
+                'route' => 'changelog.index',
             ]
         );
     }

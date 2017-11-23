@@ -27,7 +27,7 @@ class CoordinateCoordinate
         $latitude = self::hemDegMinToFloat($latHem, $latDeg, $latMin);
         $longitude = self::hemDegMinToFloat($lonHem, $lonDeg, $lonMin);
 
-        return new CoordinateCoordinate($latitude, $longitude);
+        return new self($latitude, $longitude);
     }
 
     private static function hemDegMinToFloat($hem, $deg, $min)
@@ -43,11 +43,11 @@ class CoordinateCoordinate
 
     public static function getFromCache($cacheid)
     {
-        $rs = sql("SELECT latitude, longitude FROM caches WHERE cache_id = &1", $cacheid);
+        $rs = sql('SELECT latitude, longitude FROM caches WHERE cache_id = &1', $cacheid);
         $r = sql_fetch_array($rs);
         mysql_free_result($rs);
 
-        return new CoordinateCoordinate($r['latitude'], $r['longitude']);
+        return new self($r['latitude'], $r['longitude']);
     }
 
     public function latitude()

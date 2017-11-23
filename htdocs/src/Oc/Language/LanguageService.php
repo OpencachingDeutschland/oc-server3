@@ -6,8 +6,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class LanguageService
- *
- * @package Oc\Language
  */
 class LanguageService
 {

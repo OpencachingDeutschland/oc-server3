@@ -13,7 +13,7 @@ class ManagerCache
             return false;
         }
 
-        return sql_value("SELECT count(*) FROM `caches` WHERE `cache_id`=&1", 0, $cacheId) == 1;
+        return sql_value('SELECT count(*) FROM `caches` WHERE `cache_id`=&1', 0, $cacheId) == 1;
     }
 
     public function userMayModify($cacheId)
@@ -22,7 +22,7 @@ class ManagerCache
 
         $login->verify();
 
-        $cacheOwner = sql_value("SELECT `user_id` FROM `caches` WHERE `cache_id`=&1", - 1, $cacheId);
+        $cacheOwner = sql_value('SELECT `user_id` FROM `caches` WHERE `cache_id`=&1', - 1, $cacheId);
 
         return $cacheOwner == $login->userid;
     }

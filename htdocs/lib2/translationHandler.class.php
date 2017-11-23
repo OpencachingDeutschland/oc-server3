@@ -116,7 +116,7 @@ class TranslationHandler
     {
         $text = mb_ereg_replace('\\\\', '\\\\', $text);
         $text = mb_ereg_replace('"', '\"', $text);
-        $text = mb_ereg_replace("\r", "", $text);
+        $text = mb_ereg_replace("\r", '', $text);
         while (mb_substr($text, - 1, 1) == "\n") {
             $text = mb_substr($text, 0, mb_strlen($text) - 1);
         }
@@ -176,7 +176,7 @@ class TranslationHandler
      */
     public function clearReferences()
     {
-        sqlf("DELETE FROM `sys_trans_ref`");
+        sqlf('DELETE FROM `sys_trans_ref`');
     }
 
     /**
@@ -189,11 +189,11 @@ class TranslationHandler
     public function importFromTable($table, $fname = 'name', $fid = 'trans_id')
     {
         $rs = sqlf(
-            "SELECT `&1`.`&2`
+            'SELECT `&1`.`&2`
             FROM `&1`
             LEFT JOIN `sys_trans`
                 ON `&1`.`&3`=`sys_trans`.`id`
-                AND `&1`.`&2`=`sys_trans`.`text`",
+                AND `&1`.`&2`=`sys_trans`.`text`',
             $table,
             $fname,
             $fid
@@ -216,11 +216,11 @@ class TranslationHandler
             );
         }
         sql_free_result($rs);
-        sqlf("UPDATE `&1` SET `&2`=0", $table, $fid);
+        sqlf('UPDATE `&1` SET `&2`=0', $table, $fid);
         sqlf(
-            "UPDATE `&1`, `sys_trans`
+            'UPDATE `&1`, `sys_trans`
             SET `&1`.`&3`=`sys_trans`.`id`
-            WHERE `&1`.`&2`=`sys_trans`.`text`",
+            WHERE `&1`.`&2`=`sys_trans`.`text`',
             $table,
             $fname,
             $fid
@@ -272,7 +272,7 @@ class TranslationHandler
 
         // replace variables in string
         if (mb_ereg_search_init($langStr)) {
-            while (false != $vars = mb_ereg_search_regs("%[^%]*%")) {
+            while (false != $vars = mb_ereg_search_regs('%[^%]*%')) {
                 foreach ($vars as $curly_pattern) {
                     // $curly_pattern contatins %pattern% in replacement string
                     $pattern = mb_substr($curly_pattern, 1, mb_strlen($curly_pattern) - 2);

@@ -39,8 +39,6 @@ class Importer
      * Import by given context.
      *
      * @param ImportContext $context
-     *
-     * @return void
      */
     public function import(ImportContext $context)
     {
@@ -48,7 +46,7 @@ class Importer
         $fieldNotes = $context->getFieldNotes();
 
         /**
-         * @var FieldNote $fieldNote
+         * @var FieldNote
          */
         foreach ($fieldNotes as $fieldNote) {
             $date = new DateTime($fieldNote->noticedAt, new DateTimeZone('UTC'));

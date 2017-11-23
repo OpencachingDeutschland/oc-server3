@@ -324,41 +324,40 @@ if (isset($_REQUEST['sessionid'])) {
         }
 
         exit;
-    } else {
-        // return all records
-        sql(
+    }
+    // return all records
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_users` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=4',
             $sessionid
         );
-        sql(
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_caches` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=2',
             $sessionid
         );
-        sql(
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_cachedescs` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=3',
             $sessionid
         );
-        sql(
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_cachelogs` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=1',
             $sessionid
         );
-        sql(
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_pictures` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=6',
             $sessionid
         );
-        sql(
+    sql(
             'CREATE TEMPORARY TABLE `tmpxml_removedobjects` (`id` INT(11), PRIMARY KEY (`id`))
              SELECT `object_id` `id` FROM `xmlsession_data` WHERE `session_id`=&1 AND `object_type`=7',
             $sessionid
         );
 
-        outputXmlFile($sessionid, 0, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype);
-    }
+    outputXmlFile($sessionid, 0, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype);
 }
 
 exit;
@@ -367,7 +366,12 @@ exit;
 
 
 /**
- * @param integer $sessionid
+ * @param int $sessionid
+ * @param mixed $filenr
+ * @param mixed $bXmlDecl
+ * @param mixed $bOcXmlTag
+ * @param mixed $bDocType
+ * @param mixed $ziptype
  */
 function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
 {
@@ -474,7 +478,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         if ($sCharset === 'iso-8859-1') {
             fwrite($f, '<?xml version="1.0" encoding="iso-8859-1" standalone="no" ?>' . "\n");
         } elseif ($sCharset === 'utf-8') {
-            fwrite($f, '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' . "\n");            
+            fwrite($f, '<?xml version="1.0" encoding="UTF-8" standalone="no" ?>' . "\n");
         }
     }
 
@@ -626,7 +630,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         if ($ocXmlVersion >= 12) {
             $pd = ' ispublishdate="' . $r['is_publishdate'] . '"';
         } else {
-            $pd = "";
+            $pd = '';
         }
         fwrite(
             $f,
@@ -752,7 +756,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
             $desc = html_entity_decode($desc, ENT_COMPAT, 'UTF-8');
         }
 
-        $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+        $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
         $disclaimer = getLicenseDisclaimer(
             $r['user_id'],
             $r['username'],
@@ -906,7 +910,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         }
 
         if ($bLicense) {
-            $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+            $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
             $disclaimer = getLicenseDisclaimer(
                 $r['user_id'],
                 $r['username'],
@@ -991,7 +995,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         fwrite($f, $t2 . '<position>' . $r['seq'] . '</position>' . "\n");
 
         if ($bLicense) {
-            $lang = ($sLanguage != "" ? $sLanguage : $r['language']);
+            $lang = ($sLanguage != '' ? $sLanguage : $r['language']);
             $disclaimer = getLicenseDisclaimer(
                 $r['user_id'],
                 $r['username'],
@@ -1046,21 +1050,21 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
     if ($ziptype == '0') {
         tpl_redirect($zip_wwwdir . $rel_xmlfile);
         exit;
+    }
+    if ($ziptype == 'zip') {
+        $rel_zipfile .= '.zip';
     } else {
-        if ($ziptype == 'zip') {
-            $rel_zipfile .= '.zip';
+        if ($ziptype == 'bzip2') {
+            $rel_zipfile .= '.bz2';
         } else {
-            if ($ziptype == 'bzip2') {
-                $rel_zipfile .= '.bz2';
+            if ($ziptype == 'gzip') {
+                $rel_zipfile .= '.gz';
             } else {
-                if ($ziptype == 'gzip') {
-                    $rel_zipfile .= '.gz';
-                } else {
-                    die('unknown zip type');
-                }
+                die('unknown zip type');
             }
         }
     }
+    
 
     $call =
         $safemode_zip
@@ -1125,8 +1129,8 @@ function startXmlSession(
                 }
             }
             sql(
-                "INSERT INTO xmlsession_data (`session_id`, `object_type`, `object_id`)
-                 SELECT &1, 2, `cache_id` FROM `caches` WHERE " . $wherefield . " >= '&2' AND `status` != 5",
+                'INSERT INTO xmlsession_data (`session_id`, `object_type`, `object_id`)
+                 SELECT &1, 2, `cache_id` FROM `caches` WHERE ' . $wherefield . " >= '&2' AND `status` != 5",
                 $sessionid,
                 $sModifiedSince
             );

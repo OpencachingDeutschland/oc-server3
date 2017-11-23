@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AbstractController
- *
- * @package Oc
  */
 abstract class AbstractController extends FrameworkController
 {
@@ -34,7 +32,7 @@ abstract class AbstractController extends FrameworkController
         }
 
         /**
-         * @var GlobalContext $globalContext
+         * @var GlobalContext
          */
         $globalContext = $masterRequest->get('global_context');
 
@@ -51,8 +49,6 @@ abstract class AbstractController extends FrameworkController
      * There is no container available in the constructor of a controller, so we override setContainer() and use this
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null.
-     *
-     * @return void
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -64,7 +60,7 @@ abstract class AbstractController extends FrameworkController
 
         $requestStack = $container->get('request_stack');
         /**
-         * @var Request $masterRequest
+         * @var Request
          */
         $masterRequest = $requestStack->getMasterRequest();
         if ($masterRequest) {
@@ -74,8 +70,6 @@ abstract class AbstractController extends FrameworkController
 
     /**
      * @param string $message
-     *
-     * @return void
      */
     protected function addErrorMessage($message)
     {
@@ -84,8 +78,6 @@ abstract class AbstractController extends FrameworkController
 
     /**
      * @param string $message
-     *
-     * @return void
      */
     protected function addSuccessMessage($message)
     {
@@ -94,8 +86,6 @@ abstract class AbstractController extends FrameworkController
 
     /**
      * @param string $message
-     *
-     * @return void
      */
     protected function addInfoMessage($message)
     {

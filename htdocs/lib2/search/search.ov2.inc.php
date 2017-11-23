@@ -66,7 +66,7 @@ function search_output()
         $cacheid = convert_string($r['wp_oc']);
 
         $line = "$name by $username, $type, $size, $cacheid";
-        $record = pack("CLllA*x", 2, 1 + 4 + 4 + 4 + strlen($line) + 1, (int)$lon, (int)$lat, $line);
+        $record = pack('CLllA*x', 2, 1 + 4 + 4 + 4 + strlen($line) + 1, (int) $lon, (int) $lat, $line);
 
         append_output($record);
     }

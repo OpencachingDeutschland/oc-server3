@@ -11,8 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class GeoCacheController
- *
- * @package Oc\GeoCache\Controller
  */
 class GeoCacheController extends Controller
 {

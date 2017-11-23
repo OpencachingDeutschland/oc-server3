@@ -12,8 +12,6 @@ class Version20170526212910 extends AbstractMigration
 {
     /**
      * @param Schema $schema
-     *
-     * @return void
      */
     public function up(Schema $schema)
     {
@@ -33,8 +31,6 @@ class Version20170526212910 extends AbstractMigration
 
     /**
      * @param Schema $schema
-     *
-     * @return void
      */
     public function down(Schema $schema)
     {

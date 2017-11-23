@@ -10,8 +10,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class BlockRepository
- *
- * @package Oc\Page
  */
 class BlockRepository
 {
@@ -42,9 +40,8 @@ class BlockRepository
      *
      * @param array $where
      *
-     * @return BlockEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return BlockEntity[]
      */
     public function fetchBy(array $where = [])
     {
@@ -54,7 +51,7 @@ class BlockRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -80,9 +77,8 @@ class BlockRepository
      *
      * @param BlockEntity $entity
      *
-     * @return BlockEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return BlockEntity
      */
     public function create(BlockEntity $entity)
     {
@@ -107,9 +103,8 @@ class BlockRepository
      *
      * @param BlockEntity $entity
      *
-     * @return BlockEntity
-     *
      * @throws RecordNotPersistedException
+     * @return BlockEntity
      */
     public function update(BlockEntity $entity)
     {
@@ -135,9 +130,8 @@ class BlockRepository
      *
      * @param BlockEntity $entity
      *
-     * @return BlockEntity
-     *
      * @throws RecordNotPersistedException
+     * @return BlockEntity
      */
     public function remove(BlockEntity $entity)
     {
@@ -171,7 +165,7 @@ class BlockRepository
             'html' => $entity->html,
             'position' => (int) $entity->position,
             'updated_at' => $entity->updatedAt->format(DateTime::ATOM),
-            'active' => $entity->active
+            'active' => $entity->active,
         ];
     }
 

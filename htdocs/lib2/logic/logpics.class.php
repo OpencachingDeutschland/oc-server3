@@ -24,7 +24,6 @@ class LogPics
 
     const MAX_PICTURES_PER_GALLERY_PAGE = 48; // must be multiple of 6
 
-
     public static function get($purpose, $userId = 0, $cacheId = 0)
     {
         global $login;
@@ -235,7 +234,6 @@ class LogPics
 
         return $result;
     }
-
 
     // Set all template variables needed to display a browsed log pictures page;
     // all displaying is done in res_logpictures.tpl

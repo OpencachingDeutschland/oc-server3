@@ -206,8 +206,8 @@ class login
         );
         if ($loginCount > $opt['page']['max_logins_per_hour']) {
             return false;
-        } else {
-            return true;
         }
+
+        return true;
     }
 }

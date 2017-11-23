@@ -119,10 +119,10 @@ class FieldNoteService
     public function getUserListing($userId)
     {
         $fieldNotes = $this->fetchBy([
-            'user_id' => $userId
+            'user_id' => $userId,
         ], [
             'date' => 'ASC',
-            'id' => 'ASC'
+            'id' => 'ASC',
         ]);
 
         return $fieldNotes ?: [];

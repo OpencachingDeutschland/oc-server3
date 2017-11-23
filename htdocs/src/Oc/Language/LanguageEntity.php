@@ -6,8 +6,6 @@ use Oc\Repository\AbstractEntity;
 
 /**
  * Class LanguageEntity
- *
- * @package Oc\Language
  */
 class LanguageEntity extends AbstractEntity
 {

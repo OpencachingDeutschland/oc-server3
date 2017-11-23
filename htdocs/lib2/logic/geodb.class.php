@@ -8,22 +8,22 @@ class GeoDb
     public static function setAllCacheLocations()
     {
         $rs = sqll(
-            "SELECT `caches`.`cache_id`
+            'SELECT `caches`.`cache_id`
              FROM `caches`
              LEFT JOIN `cache_location`
                 ON `caches`.`cache_id`=`cache_location`.`cache_id`
              WHERE
                 ISNULL (`cache_location`.`cache_id`)
-                OR `cache_location`.`last_modified`!=`caches`.`last_modified`"
+                OR `cache_location`.`last_modified`!=`caches`.`last_modified`'
         );
         while ($r = sql_fetch_assoc($rs)) {
             self::setCacheLocation($r['cache_id']);
         }
         sql_free_result($rs);
 
-        sqll("
-            DELETE FROM `cache_location`
-            WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)"
+        sqll(
+            'DELETE FROM `cache_location`
+            WHERE `cache_id` NOT IN (SELECT `cache_id` FROM `caches`)'
         );
     }
 
@@ -90,26 +90,26 @@ class GeoDb
         $lat += 0;
 
         $rs = sqll(
-            "SELECT
+            'SELECT
                 `geodb_coordinates`.`loc_id` `loc_id`,
-                (( " . $lon . " - `geodb_coordinates`.`lon` ) * ( " . $lon . " - `geodb_coordinates`.`lon` ) +
-                 ( " . $lat . " - `geodb_coordinates`.`lat` ) * ( " . $lat . " - `geodb_coordinates`.`lat` )) `dist`
+                (( ' . $lon . ' - `geodb_coordinates`.`lon` ) * ( ' . $lon . ' - `geodb_coordinates`.`lon` ) +
+                 ( ' . $lat . ' - `geodb_coordinates`.`lat` ) * ( ' . $lat . ' - `geodb_coordinates`.`lat` )) `dist`
              FROM `geodb_coordinates`
              INNER JOIN `geodb_locations` ON `geodb_coordinates`.`loc_id`=`geodb_locations`.`loc_id`
              WHERE
                 `geodb_locations`.`loc_type`=100700000
-                AND `geodb_coordinates`.`lon` > " . ($lon - 0.15) . "
-                AND `geodb_coordinates`.`lon` < " . ($lon + 0.15) . "
-                AND `geodb_coordinates`.`lat` > " . ($lat - 0.15) . "
-                AND `geodb_coordinates`.`lat` < " . ($lat + 0.15) . "
+                AND `geodb_coordinates`.`lon` > ' . ($lon - 0.15) . '
+                AND `geodb_coordinates`.`lon` < ' . ($lon + 0.15) . '
+                AND `geodb_coordinates`.`lat` > ' . ($lat - 0.15) . '
+                AND `geodb_coordinates`.`lat` < ' . ($lat + 0.15) . '
              ORDER BY `dist` ASC
-             LIMIT 1"
+             LIMIT 1'
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['loc_id'];
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 
     public static function landFromLocid($locid)
@@ -134,9 +134,9 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['land'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public static function regierungsbezirkFromLocid($locid)
@@ -160,9 +160,9 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['regierungsbezirk'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 
     public static function landkreisFromLocid($locid)
@@ -186,8 +186,8 @@ class GeoDb
         );
         if ($r = sql_fetch_array($rs)) {
             return $r['regierungsbezirk'];
-        } else {
-            return '';
         }
+
+        return '';
     }
 }

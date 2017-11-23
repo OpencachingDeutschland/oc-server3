@@ -97,8 +97,8 @@ class cachelist
         $name = trim($name);
         if ($name == '') {
             return ERROR_BAD_LISTNAME;
-        } else {
-            if (sql_value(
+        }
+        if (sql_value(
                 "SELECT `id`
                  FROM `cache_lists`
                  WHERE `user_id`='&1' AND `id`<>'&2' AND `name`='&3'",
@@ -107,11 +107,10 @@ class cachelist
                 $this->getId(),
                 $name
             )) {
-                // $this->getId() is 0 when creating a new list -> condition has no effect
-                return ERROR_DUPLICATE_LISTNAME;
-            } elseif ($visibility >= 2 && strlen($name) < 10) {
-                return ERROR_BAD_LISTNAME;
-            }
+            // $this->getId() is 0 when creating a new list -> condition has no effect
+            return ERROR_DUPLICATE_LISTNAME;
+        } elseif ($visibility >= 2 && strlen($name) < 10) {
+            return ERROR_BAD_LISTNAME;
         }
 
         $error = !$this->reCachelist->setValue('name', trim($name));
@@ -335,7 +334,7 @@ class cachelist
 
         if ($login->userid != 0 &&
             !$this->isMyList() &&
-            ($this->getVisibility() >= 2 || ($this->getPassword() != "" && $pw == $this->getPassword()))
+            ($this->getVisibility() >= 2 || ($this->getPassword() != '' && $pw == $this->getPassword()))
         ) {
             sql(
                 "INSERT IGNORE INTO `cache_list_bookmarks` (`cache_list_id`, `user_id`, `password`)
@@ -389,14 +388,14 @@ class cachelist
     {
         global $login;
 
-        return cachelist::getLists("`cache_lists`.`user_id`='" . sql_escape($login->userid) . "'");
+        return self::getLists("`cache_lists`.`user_id`='" . sql_escape($login->userid) . "'");
     }
 
     public static function getListsWatchedByMe()
     {
         global $login;
 
-        return cachelist::getLists(
+        return self::getLists(
             "`id` IN (SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='" . sql_escape(
                 $login->userid
             ) . "')"
@@ -407,7 +406,7 @@ class cachelist
     {
         global $login;
 
-        return cachelist::getLists(
+        return self::getLists(
             "`id` IN (SELECT `cache_list_id` FROM `cache_list_bookmarks` WHERE `user_id`='" . sql_escape(
                 $login->userid
             ) . "')"
@@ -431,7 +430,7 @@ class cachelist
 
     public static function getPublicLists($startat = 0, $maxitems = PHP_INT_MAX, $namelike = '', $userlike = '')
     {
-        return cachelist::getLists(
+        return self::getLists(
             '`is_public`>=2 AND `entries`>0'
             . ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) . "%'" : '')
             . ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
@@ -444,7 +443,7 @@ class cachelist
 
     public static function getPublicListsOf($userid)
     {
-        return cachelist::getLists(
+        return self::getLists(
             "`is_public`>=2 AND `entries`>0 AND `cache_lists`.`user_id`='" . sql_escape($userid) . "'"
         );
     }
@@ -465,7 +464,7 @@ class cachelist
             sql("SELECT `cache_list_id` FROM `cache_list_watches` WHERE `user_id`='&1'", $login->userid)
         );
 
-        return cachelist::getLists(
+        return self::getLists(
             "
             `id` IN
                 (SELECT `cache_list_id`
@@ -474,7 +473,7 @@ class cachelist
             AND
             (
                 `cache_lists`.`user_id`='" . sql_escape($login->userid) . "' " .
-            ($all ? "OR `is_public`= 3 " : "") .
+            ($all ? 'OR `is_public`= 3 ' : '') .
             "OR (`is_public`> 0 AND
                    `cache_lists`.`id` IN ('" . implode("','", array_map('sql_escape', $my_watches)) . "'))
             )",
@@ -487,7 +486,7 @@ class cachelist
 
     public static function getListById($listid)
     {
-        $lists = cachelist::getLists("`id`='" . sql_escape($listid) . "'");
+        $lists = self::getLists("`id`='" . sql_escape($listid) . "'");
         if (count($lists)) {
             $lists[0]['description_for_display'] = use_current_protocol_in_html($lists[0]['description']);
 

@@ -95,7 +95,7 @@ if (!isset($smiley)) {
             'text' => $smiley['text'][$n],
             'file' => $smiley['file'][$n],
             'image' => $smiley['image'][$n],
-            'show' => $smiley['show'][$n]
+            'show' => $smiley['show'][$n],
         ];
     }
 }

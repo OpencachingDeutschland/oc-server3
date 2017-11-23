@@ -6,8 +6,6 @@ use Oc\GeoCache\Enum\LogType as GeoCacheLogType;
 
 /**
  * Class LogType
- *
- * @package Oc\FieldNotes\Enum
  */
 class LogType
 {
@@ -36,7 +34,7 @@ class LogType
         'Found it' => self::FOUND,
         "Didn't find it" => self::NOT_FOUND,
         'Write note' => self::NOTE,
-        'Needs Maintenance' => self::NEEDS_MAINTENANCE
+        'Needs Maintenance' => self::NEEDS_MAINTENANCE,
     ];
 
     /**

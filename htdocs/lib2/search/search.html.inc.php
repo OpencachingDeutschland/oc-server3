@@ -90,7 +90,7 @@ function search_output()
 
         // get last logs
         if ($options['sort'] != 'bymylastlog' || !$login->logged_in()) {
-            $ownlogs = "";
+            $ownlogs = '';
         } else {
             $ownlogs = " AND `cache_logs`.`user_id`='" . sql_escape($login->userid) . "'";
         }
@@ -137,10 +137,10 @@ function search_output()
 
     $page = 'search.php?queryid=' . $options['queryid'] . '&startat={offset}&sortby=' . $options['sort'];
     if (isset($options['sortorder']) && $options['sortorder']) {
-        $page .= "&sortorder=" . $options['sortorder'];
+        $page .= '&sortorder=' . $options['sortorder'];
     }
     if (isset($options['creationdate']) && $options['creationdate']) {
-        $page .= "&creationdate=" . $options['creationdate'];
+        $page .= '&creationdate=' . $options['creationdate'];
     }
     $pager = new pager($page, 2, 9);
     $pager->make_from_offset($startat, $resultcount, $caches_per_page);
@@ -248,7 +248,7 @@ function dateDiff($interval, $dateTimeBegin, $dateTimeEnd)
         case 'ww'://Week
             return floor($dif / 604800); //604800s=1week=1semana
 
-        case "m": //similar result "m" dateDiff Microsoft
+        case 'm': //similar result "m" dateDiff Microsoft
             $monthBegin = (date('Y', $dateTimeBegin) * 12) + date('n', $dateTimeBegin);
             $monthEnd = (date('Y', $dateTimeEnd) * 12) + date('n', $dateTimeEnd);
 

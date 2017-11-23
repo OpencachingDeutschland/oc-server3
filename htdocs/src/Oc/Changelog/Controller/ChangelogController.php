@@ -11,7 +11,6 @@ use Twig_Environment;
 /**
  * Class ChangelogController
  *
- * @package Oc\Changelog\Controller
  *
  * @Route(service="Oc\Changelog\Controller\ChangelogController")
  */

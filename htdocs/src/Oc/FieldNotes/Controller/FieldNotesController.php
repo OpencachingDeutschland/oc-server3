@@ -15,8 +15,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class FieldNotesController
- *
- * @package Oc\FieldNotes\Controller
  */
 class FieldNotesController extends AbstractController
 {
@@ -105,7 +103,7 @@ class FieldNotesController extends AbstractController
         return $this->render('field-notes/index.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
-            'fieldNotes' => $fieldNotes
+            'fieldNotes' => $fieldNotes,
         ]);
     }
 
@@ -125,7 +123,7 @@ class FieldNotesController extends AbstractController
 
         $fieldNote = $this->fieldNoteService->fetchOneBy([
             'id' => $id,
-            'user_id' => $user->getId()
+            'user_id' => $user->getId(),
         ]);
 
         if ($fieldNote === null) {
@@ -163,7 +161,7 @@ class FieldNotesController extends AbstractController
         foreach ($selectedFieldNotes as $fieldNoteId) {
             $fieldNote = $this->fieldNoteService->fetchOneBy([
                 'id' => $fieldNoteId,
-                'user_id' => $user->getId()
+                'user_id' => $user->getId(),
             ]);
 
             if ($fieldNote === null) {

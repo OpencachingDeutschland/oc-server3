@@ -9,8 +9,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class LanguageRepository
- *
- * @package Oc\Language
  */
 class LanguageRepository
 {
@@ -39,9 +37,8 @@ class LanguageRepository
     /**
      * Fetches all languages.
      *
-     * @return LanguageEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return LanguageEntity[]
      */
     public function fetchAll()
     {
@@ -62,9 +59,8 @@ class LanguageRepository
     /**
      * Fetches all translated languages.
      *
-     * @return LanguageEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return LanguageEntity[]
      */
     public function fetchAllTranslated()
     {
@@ -88,9 +84,8 @@ class LanguageRepository
      *
      * @param LanguageEntity $entity
      *
-     * @return LanguageEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return LanguageEntity
      */
     public function create(LanguageEntity $entity)
     {
@@ -115,9 +110,8 @@ class LanguageRepository
      *
      * @param LanguageEntity $entity
      *
-     * @return LanguageEntity
-     *
      * @throws RecordNotPersistedException
+     * @return LanguageEntity
      */
     public function update(LanguageEntity $entity)
     {
@@ -143,9 +137,8 @@ class LanguageRepository
      *
      * @param LanguageEntity $entity
      *
-     * @return LanguageEntity
-     *
      * @throws RecordNotPersistedException
+     * @return LanguageEntity
      */
     public function remove(LanguageEntity $entity)
     {
@@ -199,7 +192,7 @@ class LanguageRepository
             'trans_id' => $entity->translationId,
             'list_default_de' => $entity->listDefaultDe,
             'list_default_en' => $entity->listDefaultEn,
-            'is_translated' => $entity->isTranslated
+            'is_translated' => $entity->isTranslated,
         ];
     }
 

@@ -12,11 +12,11 @@ class HandlerCacheNote
     public function getCacheNote($userId, $cacheId)
     {
         $rs = sql(
-            "SELECT id, latitude, longitude, description
+            'SELECT id, latitude, longitude, description
              FROM coordinates
              WHERE user_id = &1
              AND cache_id = &2
-             AND type = &3",
+             AND type = &3',
             $userId,
             $cacheId,
             TypeCoordinate::UserNote
@@ -43,10 +43,10 @@ class HandlerCacheNote
     {
         if (!$note && !$latitude && !$longitude) {
             sql(
-                "DELETE FROM coordinates
+                'DELETE FROM coordinates
                  WHERE user_id = &1
                  AND cache_id = &2
-                 AND type = &3",
+                 AND type = &3',
                 $userId,
                 $cacheId,
                 TypeCoordinate::UserNote

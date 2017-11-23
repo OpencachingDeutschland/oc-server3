@@ -27,7 +27,6 @@ class ExportLegacyTranslationCommand extends SymfonyCommand
     /**
      * Configures the command.
      *
-     * @return void
      * @throws InvalidArgumentException
      */
     protected function configure()

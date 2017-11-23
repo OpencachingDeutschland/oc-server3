@@ -11,21 +11,17 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class UserServiceTest
- *
- * @package OcTest\Modules\Oc\User
  */
 class UserServiceTest extends TestCase
 {
     /**
      * Tests fetching all records with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingAllReturnsArrayWithUserEntities()
     {
         $userEntityArray = [
             new UserEntity(),
-            new UserEntity()
+            new UserEntity(),
         ];
 
         $userRepository = $this->createMock(UserRepository::class);
@@ -41,8 +37,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests fetching all records - exception is thrown because there are no records.
-     *
-     * @return void
      */
     public function testFetchingAllThrowsException()
     {
@@ -61,8 +55,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests fetching one record by id with success - no exception is thrown.
-     *
-     * @return void
      */
     public function testFetchingOneByIdReturnsEntity()
     {
@@ -82,8 +74,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests fetching one record by id - exception is thrown because there is no record.
-     *
-     * @return void
      */
     public function testFetchingOneByIdThrowsException()
     {
@@ -103,8 +93,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests that create returns the entity.
-     *
-     * @return void
      */
     public function testCreateReturnsEntity()
     {
@@ -124,8 +112,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests that update returns the entity.
-     *
-     * @return void
      */
     public function testUpdateReturnsEntity()
     {
@@ -145,8 +131,6 @@ class UserServiceTest extends TestCase
 
     /**
      * Tests that remove returns the entity.
-     *
-     * @return void
      */
     public function testRemoveReturnsEntity()
     {

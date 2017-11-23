@@ -13,7 +13,6 @@ class AutoArchive
     public $name = 'autoarchive';
     public $interval = 43200; // twice per day
 
-
     public function run()
     {
         global $opt, $login;
@@ -62,9 +61,12 @@ class AutoArchive
         $archived = 0;
         while ($rCache = sql_fetch_assoc($rs)) {
             if ($rCache['listing_age'] > 366 ||
-                ($rCache['listing_age'] > 184 &&
-                    (sql_value("SELECT DATEDIFF(NOW(),'&1')", 0, $rCache['disable_date']) > 366 ||
-                        (!$rCache['seasonal_cache'] &&
+                (
+                    $rCache['listing_age'] > 184 &&
+                    (
+                        sql_value("SELECT DATEDIFF(NOW(),'&1')", 0, $rCache['disable_date']) > 366 ||
+                        (
+                            !$rCache['seasonal_cache'] &&
                             (($rCache['disabled_by'] != 0 && $rCache['disabled_by'] != $rCache['user_id'] && $rCache['login_lag'] > 45)
                                 ||
                                 ($rCache['disabled_by'] == $rCache['user_id'] && $rCache['login_lag'] >= $rCache['listing_age']))

@@ -93,7 +93,7 @@ function smarty_prefilter_t($source, &$smarty)
  * @param string $block
  * @param string $message
  * @param $smarty
- * @param integer $line
+ * @param int $line
  *
  * @return string
  */
@@ -153,6 +153,7 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
  *   we need the same source, expect _parse_vars_props at the end
  *
  * @param string $tag_args
+ * @param & $smarty
  *
  * @return array
  */
@@ -297,7 +298,7 @@ function smarty_prefilter_t_strpos_multi($haystack, $needles)
  * @param $message
  * @param $attrs
  * @param $smarty
- * @param integer $line
+ * @param int $line
  *
  * @return string
  */

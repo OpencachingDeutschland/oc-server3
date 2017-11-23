@@ -37,9 +37,8 @@ class GeoCacheRepository
     /**
      * Fetches all GeoCaches.
      *
-     * @return GeoCacheEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return GeoCacheEntity[]
      */
     public function fetchAll()
     {
@@ -68,9 +67,8 @@ class GeoCacheRepository
      *
      * @param array $where
      *
-     * @return null|GeoCacheEntity
-     *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @return null|GeoCacheEntity
      */
     public function fetchOneBy(array $where = [])
     {
@@ -81,7 +79,7 @@ class GeoCacheRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -101,9 +99,8 @@ class GeoCacheRepository
      *
      * @param array $where
      *
-     * @return GeoCacheEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return GeoCacheEntity[]
      */
     public function fetchBy(array $where = [])
     {
@@ -113,7 +110,7 @@ class GeoCacheRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -139,9 +136,8 @@ class GeoCacheRepository
      *
      * @param string $waypoint
      *
-     * @return null|GeoCacheEntity
-     *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @return null|GeoCacheEntity
      */
     public function fetchGCWaypoint($waypoint)
     {
@@ -172,9 +168,8 @@ class GeoCacheRepository
      *
      * @param GeoCacheEntity $entity
      *
-     * @return GeoCacheEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return GeoCacheEntity
      */
     public function create(GeoCacheEntity $entity)
     {
@@ -199,9 +194,8 @@ class GeoCacheRepository
      *
      * @param GeoCacheEntity $entity
      *
-     * @return GeoCacheEntity
-     *
      * @throws RecordNotPersistedException
+     * @return GeoCacheEntity
      */
     public function update(GeoCacheEntity $entity)
     {
@@ -227,9 +221,8 @@ class GeoCacheRepository
      *
      * @param GeoCacheEntity $entity
      *
-     * @return GeoCacheEntity
-     *
      * @throws RecordNotPersistedException
+     * @return GeoCacheEntity
      */
     public function remove(GeoCacheEntity $entity)
     {
@@ -291,7 +284,7 @@ class GeoCacheRepository
             'protect_old_coords' => $entity->protectOldCoords,
             'needs_maintenance' => $entity->needsMaintenance,
             'listing_outdated' => $entity->listingOutdated,
-            'flags_last_modified' => $entity->flagsLastModified->format(DateTime::ATOM)
+            'flags_last_modified' => $entity->flagsLastModified->format(DateTime::ATOM),
         ];
     }
 

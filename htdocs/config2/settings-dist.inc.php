@@ -7,8 +7,8 @@
  *  Do not modify this file - use settings.inc.php!
  ***************************************************************************/
 
-require_once __DIR__. '/locale.inc.php';
-require_once __DIR__. '/settings-dist-common.inc.php';
+require_once __DIR__ . '/locale.inc.php';
+require_once __DIR__ . '/settings-dist-common.inc.php';
 
 /* PHP settings
  *
@@ -326,7 +326,7 @@ $opt['logic']['targetvars'] = [
     'id',
     'action',
     'rid',
-    'ownerid'
+    'ownerid',
 ];
 
 /* cracklib-check for users passwords enabled?
@@ -478,8 +478,8 @@ $opt['map']['maxcachereducedsize'] = 10 * 1048576; // = 10MB
 
 // max number of caches displayed in google maps
 if (isset($_SERVER['HTTP_USER_AGENT'])) {
-    $user_agent = " " . $_SERVER['HTTP_USER_AGENT'];
-    if (strpos($user_agent, "MSIE") && !strpos($user_agent, "Opera")) {
+    $user_agent = ' ' . $_SERVER['HTTP_USER_AGENT'];
+    if (strpos($user_agent, 'MSIE') && !strpos($user_agent, 'Opera')) {
         $opt['map']['maxrecords'] = 200;
     } else {
         $opt['map']['maxrecords'] = 2500;

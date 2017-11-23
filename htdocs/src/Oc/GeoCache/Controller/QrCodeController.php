@@ -53,7 +53,9 @@ class QrCodeController extends Controller
             ->setValidateResult(false);
 
         return new Response(
-            $qrCode->writeString(), Response::HTTP_OK, ['Content-Type' => $qrCode->getContentType()]
+            $qrCode->writeString(),
+            Response::HTTP_OK,
+            ['Content-Type' => $qrCode->getContentType()]
         );
     }
 }

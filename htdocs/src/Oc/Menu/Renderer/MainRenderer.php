@@ -9,8 +9,6 @@ use Knp\Menu\Renderer\RendererInterface;
 
 /**
  * Class MainRenderer
- *
- * @package Oc\Menu\Renderer
  */
 class MainRenderer extends Renderer implements RendererInterface
 {
@@ -86,7 +84,7 @@ class MainRenderer extends Renderer implements RendererInterface
             return '';
         }
 
-        $html = $this->format('<ul'.$this->renderHtmlAttributes($attributes).'>', 'ul', $item->getLevel(), $options);
+        $html = $this->format('<ul' . $this->renderHtmlAttributes($attributes) . '>', 'ul', $item->getLevel(), $options);
         $html .= $this->renderChildren($item, $options);
         $html .= $this->format('</ul>', 'ul', $item->getLevel(), $options);
 
@@ -178,7 +176,7 @@ class MainRenderer extends Renderer implements RendererInterface
         }
 
         // opening li tag
-        $html = $this->format('<li'.$this->renderHtmlAttributes($attributes).'>', 'li', $item->getLevel(), $options);
+        $html = $this->format('<li' . $this->renderHtmlAttributes($attributes) . '>', 'li', $item->getLevel(), $options);
 
         // render the text/link inside the li tag
         //$html .= $this->format($item->getUri() ? $item->renderLink() : $item->renderLabel(), 'link', $item->getLevel());
@@ -273,7 +271,7 @@ class MainRenderer extends Renderer implements RendererInterface
      *
      * @param string  $html    The html to render in an (un)formatted way
      * @param string  $type    The type [ul,link,li] of thing being rendered
-     * @param integer $level
+     * @param int $level
      * @param array   $options
      *
      * @return string
@@ -295,6 +293,6 @@ class MainRenderer extends Renderer implements RendererInterface
                 break;
         }
 
-        return str_repeat(' ', $spacing).$html."\n";
+        return str_repeat(' ', $spacing) . $html . "\n";
     }
 }

@@ -10,8 +10,6 @@ use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
  * Class UserRepository
- *
- * @package Oc\User
  */
 class UserRepository
 {
@@ -40,9 +38,8 @@ class UserRepository
     /**
      * Fetches all users.
      *
-     * @return UserEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return UserEntity[]
      */
     public function fetchAll()
     {
@@ -65,9 +62,8 @@ class UserRepository
      *
      * @param int $id
      *
-     * @return UserEntity
-     *
      * @throws RecordNotFoundException Thrown when the request record is not found
+     * @return UserEntity
      */
     public function fetchOneById($id)
     {
@@ -95,9 +91,8 @@ class UserRepository
      *
      * @param UserEntity $entity
      *
-     * @return UserEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return UserEntity
      */
     public function create(UserEntity $entity)
     {
@@ -122,9 +117,8 @@ class UserRepository
      *
      * @param UserEntity $entity
      *
-     * @return UserEntity
-     *
      * @throws RecordNotPersistedException
+     * @return UserEntity
      */
     public function update(UserEntity $entity)
     {
@@ -150,9 +144,8 @@ class UserRepository
      *
      * @param UserEntity $entity
      *
-     * @return UserEntity
-     *
      * @throws RecordNotPersistedException
+     * @return UserEntity
      */
     public function remove(UserEntity $entity)
     {

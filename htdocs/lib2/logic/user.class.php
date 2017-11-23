@@ -31,7 +31,7 @@ class user
             return null;
         }
 
-        return new user($userId);
+        return new self($userId);
     }
 
     /**
@@ -46,7 +46,7 @@ class user
             return null;
         }
 
-        return new user($userId);
+        return new self($userId);
     }
 
     public function __construct($nNewUserId = ID_NEW)
@@ -199,7 +199,7 @@ class user
                 'cache',
                 $this->getUsername(),
                 $this->getFirstName(),
-                $this->getLastName()
+                $this->getLastName(),
             ]
         ) === false) {
             return false;
@@ -289,7 +289,7 @@ class user
     }
 
     /**
-     * @param double $value
+     * @param float $value
      * @return bool
      */
     public function setLatitude($value)
@@ -307,7 +307,7 @@ class user
     }
 
     /**
-     * @param double $value
+     * @param float $value
      * @return bool
      */
     public function setLongitude($value)
@@ -325,7 +325,7 @@ class user
     }
 
     /**
-     * @param integer $value
+     * @param int $value
      * @return bool
      */
     public function setNotifyRadius($value)
@@ -343,7 +343,7 @@ class user
     }
 
     /**
-     * @param boolean $value
+     * @param bool $value
      * @return bool
      */
     public function setNotifyOconly($value)
@@ -441,7 +441,7 @@ class user
     }
 
     /**
-     * @param integer|null $value
+     * @param int|null $value
      * @return bool
      */
     public function setNewPWDate($value)
@@ -469,7 +469,7 @@ class user
     }
 
     /**
-     * @param integer|null $value
+     * @param int|null $value
      * @return bool
      */
     public function setNewEMailDate($value)
@@ -489,7 +489,7 @@ class user
                 return false;
             }
 
-            if (user::existEMail($value)) {
+            if (self::existEMail($value)) {
                 return false;
             }
         }
@@ -855,7 +855,7 @@ class user
         }
         $sSubject = mb_trim($sSubject);
 
-        $fromUser = new user($nFromUserId);
+        $fromUser = new self($nFromUserId);
         if ($fromUser->exist() == false) {
             return false;
         }
@@ -903,7 +903,7 @@ class user
             sql(
                 "INSERT INTO `email_user` (`ipaddress`, `from_user_id`, `from_email`, `to_user_id`, `to_email`)
                  VALUES ('&1', '&2', '&3', '&4', '&5')",
-                $_SERVER["REMOTE_ADDR"],
+                $_SERVER['REMOTE_ADDR'],
                 $fromUser->getUserId(),
                 $fromUser->getEMail(),
                 $this->getUserId(),
@@ -1016,7 +1016,6 @@ class user
         return !$error;
     }
 
-
     public function canDisableDueLicense()
     {
         global $login;
@@ -1076,9 +1075,9 @@ class user
         if ($num_caches > 0) {
             $cache_descs = array();
             $rs = sql(
-                "SELECT `id`, `language`, `desc`, `hint` " .
-                "FROM `cache_desc`,`caches` " .
-                "WHERE `caches`.`cache_id`=`cache_desc`.`cache_id` " .
+                'SELECT `id`, `language`, `desc`, `hint` ' .
+                'FROM `cache_desc`,`caches` ' .
+                'WHERE `caches`.`cache_id`=`cache_desc`.`cache_id` ' .
                 "AND `caches`.`user_id`='&1'",
                 $this->getUserId()
             );
@@ -1091,7 +1090,7 @@ class user
             foreach ($cache_descs as $desc) {
                 // save text - added 2013/03/18 to be enable restoring data on reactivation
                 // of accounts that were disabled before license transition
-                if ($desc['desc'] != "") {
+                if ($desc['desc'] != '') {
                     sql(
                         "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
                          VALUES ('&1', '&2', '&3', '&4')",
@@ -1101,7 +1100,7 @@ class user
                         $desc['desc']
                     );
                 }
-                if ($desc['hint'] != "") {
+                if ($desc['hint'] != '') {
                     sql(
                         "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
                          VALUES ('&1', '&2', '&3', '&4')",
@@ -1112,21 +1111,21 @@ class user
                     );
                 }
 
-                if ($desc['desc'] != "") {
+                if ($desc['desc'] != '') {
                     if ($old_disabled) {
                         $descmsg = $translate->t("cache description was removed because the owner's account was inactive when the <a href='articles.php?page=impressum#datalicense'>new content license</a> was launched", '', basename(__FILE__), __LINE__, '', 1, $desc['language']);
                     } else {
                         $descmsg = $translate->t('cache description was removed because owner declined content license', '', basename(__FILE__), __LINE__, '', 1, $desc['language']);
                     }
                 } else {
-                    $descmsg = "";
+                    $descmsg = '';
                 }
 
                 sql(
-                    "UPDATE `cache_desc` " .
+                    'UPDATE `cache_desc` ' .
                     "SET `desc`='&1',`hint`='&2' " .
                     "WHERE `id`='&3'",
-                    "<em>" . $descmsg . "</em>",
+                    '<em>' . $descmsg . '</em>',
                     '',
                     $desc['id']
                 );
@@ -1148,7 +1147,7 @@ class user
             $this->getUserId()
         );
         while ($wp = sql_fetch_assoc($rs)) {
-            if ($wp['description'] != "") {
+            if ($wp['description'] != '') {
                 sql(
                     "INSERT IGNORE INTO `saved_texts` (`object_type`, `object_id`, `subtype`, `text`)
                      VALUES ('&1', '&2', '&3', '&4')",
@@ -1242,7 +1241,7 @@ class user
             $dummybg = [
                 255,
                 255,
-                255
+                255,
             ];
         }
 
@@ -1258,7 +1257,7 @@ class user
             $dummytextcolor = array(
                 0,
                 0,
-                0
+                0,
             );
         }
 
@@ -1271,9 +1270,9 @@ class user
         if ($object_type == OBJECT_CACHE) {
             // get filenames of the pictures of $this' caches
             $rs = sql(
-                "SELECT `pictures`.`url` " .
-                "FROM `pictures`,`caches` " .
-                "WHERE `caches`.`cache_id`=`pictures`.`object_id`" .
+                'SELECT `pictures`.`url` ' .
+                'FROM `pictures`,`caches` ' .
+                'WHERE `caches`.`cache_id`=`pictures`.`object_id`' .
                 " AND `pictures`.`object_type`='&1' AND `caches`.`user_id`='&2'",
                 OBJECT_CACHE,
                 $this->getUserId()
@@ -1281,9 +1280,9 @@ class user
         } elseif ($object_type == OBJECT_CACHELOG) {
             // get filenames of the pictures of $this' logs
             $rs = sql(
-                "SELECT `pictures`.`url` " .
-                "FROM `pictures`,`cache_logs` " .
-                "WHERE `cache_logs`.`id`=`pictures`.`object_id`" .
+                'SELECT `pictures`.`url` ' .
+                'FROM `pictures`,`cache_logs` ' .
+                'WHERE `cache_logs`.`id`=`pictures`.`object_id`' .
                 " AND `pictures`.`object_type`='&1' AND `cache_logs`.`user_id`='&2'",
                 OBJECT_CACHELOG,
                 $this->getUserId()
@@ -1377,7 +1376,7 @@ class user
                     }
 
                     // copy image
-                    if (!is_null($rim)) {
+                    if (null !== $rim) {
                         imagecopyresampled($im, $rim, $dx, $dy, 0, 0, $rsize, $rsize, $rw, $rh);
                     }
                 } else {
@@ -1604,6 +1603,7 @@ class user
     public function allowRatings()
     {
         $ratingParams = $this->getRatingParameters();
+
         return $ratingParams['givenRatings'] < $ratingParams['maxRatings'];
     }
 

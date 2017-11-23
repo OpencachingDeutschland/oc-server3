@@ -3,7 +3,6 @@
 namespace Oc\Page\Controller;
 
 use Oc\AbstractController;
-use Oc\GeoCache\Entity\PageGroup;
 use Oc\Page\BlockService;
 use Oc\Page\PageService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,8 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PageController
- *
- * @package Oc\Page\Controller
  */
 class PageController extends AbstractController
 {
@@ -53,7 +50,7 @@ class PageController extends AbstractController
 
         $page = $this->pageService->fetchOneBy([
             'slug' => $slug,
-            'active' => 1
+            'active' => 1,
         ]);
 
         if (!$page) {
@@ -63,7 +60,7 @@ class PageController extends AbstractController
         $pageBlocks = $this->blockService->fetchBy([
             'page_id' => $page->id,
             'locale' => $this->getGlobalContext()->getLocale(),
-            'active' => 1
+            'active' => 1,
         ]);
 
         if (count($pageBlocks) === 0) {
@@ -72,7 +69,7 @@ class PageController extends AbstractController
 
         return $this->render('page/index.html.twig', [
             'page' => $page,
-            'pageBlocks' => $pageBlocks
+            'pageBlocks' => $pageBlocks,
         ]);
     }
 }

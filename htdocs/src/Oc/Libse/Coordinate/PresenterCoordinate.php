@@ -34,7 +34,7 @@ class PresenterCoordinate
     }
 
     /**
-     * @param boolean $request
+     * @param bool $request
      * @return bool|RequestHttp
      */
     private function initRequest($request)
@@ -47,7 +47,7 @@ class PresenterCoordinate
     }
 
     /**
-     * @param boolean $translator
+     * @param bool $translator
      * @return bool|TranslatorLanguage
      */
     private function initTranslator($translator)
@@ -157,7 +157,7 @@ class PresenterCoordinate
             self::lat_min => new RealValidator(0, 59.999, '{1,2}', '{1,3}'),
             self::lon_hem => new RegexValidator('[EW]$'),
             self::lon_deg => new IntegerValidator(0, 180),
-            self::lon_min => new RealValidator(0, 59.999, '{1,2}', '{1,3}')
+            self::lon_min => new RealValidator(0, 59.999, '{1,2}', '{1,3}'),
         ];
     }
 }

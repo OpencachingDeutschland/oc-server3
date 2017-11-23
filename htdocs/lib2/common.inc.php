@@ -11,7 +11,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$opt['rootpath'] = __DIR__ .'/../';
+$opt['rootpath'] = __DIR__ . '/../';
 
 function __autoload($class_name)
 {
@@ -53,8 +53,8 @@ if (!function_exists('gettext')) {
 
 
 // check for broken browsers
-$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
-$useragent_msie = preg_match('/MSIE ([1-9]+).[0-9]+/', $useragent, $ua_matches) && !strpos($useragent, "Opera");
+$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
+$useragent_msie = preg_match('/MSIE ([1-9]+).[0-9]+/', $useragent, $ua_matches) && !strpos($useragent, 'Opera');
 $useragent_msie_version = null;
 if (count($ua_matches) > 1) {
     $useragent_msie_version = $ua_matches[1];
@@ -79,7 +79,6 @@ foreach ($opt['page']['banned_user_agents'] as $ua) {
 if ($opt['forum']['url'] == '' &&
     isset($opt['cron']['phpbbtopics']['url']) && $opt['cron']['phpbbtopics']['url'] != '' &&
     isset($opt['cron']['phpbbtopics']['name']) && $opt['cron']['phpbbtopics']['name'] != '') {
-
     $opt['forum']['url'] = $opt['cron']['phpbbtopics']['url'];
     $opt['forum']['name'] = $opt['cron']['phpbbtopics']['name'];
 }
@@ -159,7 +158,7 @@ if (!isset($disable_verifyemail) &&
     $login->userid > 0 &&
     sql_value("SELECT `email_problems` FROM `user` WHERE `user_id`='&1'", 0, $login->userid) != 0
 ) {
-    header("Location: verifyemail.php?page=" . basename($_SERVER['REQUEST_URI']));
+    header('Location: verifyemail.php?page=' . basename($_SERVER['REQUEST_URI']));
     exit;
 }
 
@@ -296,7 +295,7 @@ function check_useragent()
     global $ocpropping;
 
     // are we Ocprop?
-    $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], "Ocprop/") !== false;
+    $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'Ocprop/') !== false;
 }
 
 // Exchange the protocol (http or https) in an URL to *this* website to the
@@ -317,9 +316,9 @@ function use_current_protocol($url)
               && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');
-    } else {
-        return $url;
     }
+
+    return $url;
 }
 
 
@@ -329,7 +328,7 @@ function use_current_protocol_in_html($url)
 
     if ($opt['page']['https']['active']) {
         return str_replace($opt['page']['absolute_http_url'], $opt['page']['absolute_https_url'], $url);
-    } else {
-        return $url;
     }
+
+    return $url;
 }

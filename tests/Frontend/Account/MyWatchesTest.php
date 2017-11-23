@@ -12,8 +12,6 @@ class MyWatchesTest extends AbstractFrontendTest
     /**
      * @group frontend
      * @group frontend-account
-     *
-     * @return void
      */
     public function testMyWatchesPage()
     {

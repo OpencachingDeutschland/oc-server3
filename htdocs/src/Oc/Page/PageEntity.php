@@ -7,8 +7,6 @@ use Oc\Repository\AbstractEntity;
 
 /**
  * Class PageEntity
- *
- * @package Oc\Page
  */
 class PageEntity extends AbstractEntity
 {

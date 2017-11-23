@@ -48,7 +48,7 @@ class cache
             return null;
         }
 
-        return new cache($cacheId);
+        return new self($cacheId);
     }
 
     /**
@@ -73,7 +73,7 @@ class cache
             return null;
         }
 
-        return new cache($cacheId);
+        return new self($cacheId);
     }
 
     public function __construct($nNewCacheId = ID_NEW)
@@ -225,9 +225,9 @@ class cache
             sql("SET @STATUS_CHANGE_USER_ID='&1'", $login->userid);
 
             return $this->reCache->setValue('status', $value);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function getDescLanguages()
@@ -340,8 +340,8 @@ class cache
             [
                 'needs_maintenance' => $nm,
                 'listing_outdated' => $lo,
-                'date' => '0000-00-00 00:00:00'
-            ]
+                'date' => '0000-00-00 00:00:00',
+            ],
         ];
         while ($r = sql_fetch_assoc($rs)) {
             if ($r['needs_maintenance'] != $nm || $r['listing_outdated'] != $lo) {
@@ -350,7 +350,7 @@ class cache
                 $cond[] = [
                     'needs_maintenance' => $nm,
                     'listing_outdated' => $lo,
-                    'date' => $r['date']
+                    'date' => $r['date'],
                 ];
             }
         }
@@ -358,7 +358,7 @@ class cache
         $cond[] = [
             'needs_maintenance' => $nm,
             'listing_outdated' => $lo,
-            'date' => '9999-12-31 23:59:59'
+            'date' => '9999-12-31 23:59:59',
         ];
 
         return $cond;
@@ -394,9 +394,9 @@ class cache
             sql_slave_exclude();
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function requireLogPW()
@@ -422,7 +422,6 @@ class cache
      * @param $nVisitUserId
      * @param $sRemoteAddr
      * @param $nCacheId
-     * @return void
      */
     public static function visitCounter($nVisitUserId, $sRemoteAddr, $nCacheId)
     {
@@ -439,7 +438,7 @@ class cache
 
         if ($nVisitUserId == 0) {
             $se = explode(';', $opt['logic']['search_engines']);
-            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+            $ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
             foreach ($se as $s) {
                 if (strpos($ua, $s) !== false) {
                     return;
@@ -489,8 +488,8 @@ class cache
     }
 
     /**
-     * @param integer $start
-     * @param integer $count
+     * @param int $start
+     * @param int $count
      * @param bool $deleted
      * @param bool $protect_old_coords
      * @return array
@@ -679,7 +678,7 @@ class cache
             $logs[] = [
                 'newcoord' => $coord->getDecimalMinutes($protect_old_coords),
                 'cache_moved' => false,
-                'type' => false
+                'type' => false,
             ];
         }
 
@@ -713,20 +712,20 @@ class cache
     public function addAdoption($userId)
     {
         if ($this->allowEdit() == false) {
-            return "noaccess";
+            return 'noaccess';
         }
 
         if (sql_value("SELECT COUNT(*) FROM `user` WHERE `user_id`='&1'", 0, $userId) == 0) {
-            return "userunknown";
+            return 'userunknown';
         }
 
         if (sql_value("SELECT COUNT(*) FROM `user` WHERE `user_id`='&1' AND `is_active_flag`=1", 0, $userId) == 0) {
-            return "userdisabled";
+            return 'userdisabled';
         }
 
         // same user?
         if ($this->getUserId() == $userId) {
-            return "self";
+            return 'self';
         }
 
         sql(
@@ -946,7 +945,7 @@ class cache
         sql_free_result($rs);
         $tpl->assign(
             'ownername',
-            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", "", $rCache['user_id'])
+            sql_value("SELECT `username` FROM `user` WHERE `user_id`='&1'", '', $rCache['user_id'])
         );
 
         $tpl->assign('deleted_logs', $this->getLogsArray(0, 1000, true));
@@ -1001,7 +1000,7 @@ class cache
                 'date' => $rCoord['date_created'],
                 'coord' => $coord->getDecimalMinutes(),
                 'user_id' => $rCoord['user_id'],
-                'username' => $rCoord['username']
+                'username' => $rCoord['username'],
             ];
         }
         sql_free_result($rs);

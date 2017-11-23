@@ -28,7 +28,7 @@ class CBench
     {
         list($uSec, $sec) = explode(' ', microtime());
 
-        return ((float)$uSec + (float)$sec);
+        return ((float) $uSec + (float) $sec);
     }
 
     /**

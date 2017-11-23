@@ -32,7 +32,7 @@ class gis
             $poly1x = $poly1XY[0];
             $poly1y = $poly1XY[1];
             $poly2 = $polygon[$i % $n];
-            $poly2XY = explode(" ", $poly2);
+            $poly2XY = explode(' ', $poly2);
             $poly2x = $poly2XY[0];
             $poly2y = $poly2XY[1];
 
@@ -53,8 +53,8 @@ class gis
 
         if ($counter % 2 == 0) {
             return false; // outside
-        } else {
-            return true; // inside
         }
+
+        return true; // inside
     }
 }

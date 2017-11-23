@@ -23,8 +23,8 @@ class attribute
 
     /**
      * @param $cacheId
-     * @param boolean $bOnlySelectable
-     * @param boolean $firstLetterUppercase
+     * @param bool $bOnlySelectable
+     * @param bool $firstLetterUppercase
      * @return array
      */
     public static function getAttributesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
@@ -135,7 +135,7 @@ class attribute
                     'color' => $rAttrGroup['color'],
                     'category' => $rAttrGroup['category'],
                     'search_default' => $bSearchGroupDefault,
-                    'attr' => $attr
+                    'attr' => $attr,
                 );
             }
         }
@@ -162,7 +162,7 @@ class attribute
             [38, 39],   // 24/7 - only at specified times
             [38, 40],   // 24/7 - only by day
             [42, 43],   // all seasons - breeding season
-            [42, 60]    // all seassons - only during specified seasons
+            [42, 60],    // all seassons - only during specified seasons
         ];
 
         static $conflictsByAttr = [];

@@ -111,11 +111,10 @@
  */
 class html2text
 {
-
     /**
      *  Contains the HTML content to convert.
      *
-     * @var string $html
+     * @var string
      * @access public
      */
     public $html;
@@ -217,7 +216,7 @@ class html2text
                 '/&(euro|#8364);/i',                     // Euro sign
                 '/&[^&;]+;/i',                           // Unknown/unhandled entities
         */
-        '/[ ]{2,}/'
+        '/[ ]{2,}/',
         // Runs of spaces, post-handling
     );
 
@@ -295,7 +294,7 @@ class html2text
                 'EUR',                                  // Euro sign. � ?
                 '',                                     // Unknown/unhandled entities
         */
-        ' '
+        ' ',
         // Runs of spaces, post-handling
     );
 
@@ -351,7 +350,7 @@ class html2text
      *  to be done it to call get_text().
      *
      * @param string $source HTML content
-     * @param boolean $from_file Indicates $source is a file to pull content from
+     * @param bool $from_file Indicates $source is a file to pull content from
      * @access public
      */
     public function __construct($source = '', $from_file = false)
@@ -366,10 +365,9 @@ class html2text
      *  Loads source HTML into memory, either from $source string or a file.
      *
      * @param string  $source    HTML content
-     * @param boolean $from_file Indicates $source is a file to pull content from
+     * @param bool $from_file Indicates $source is a file to pull content from
      *
      * @access public
-     * @return void
      */
     public function set_html($source, $from_file = false)
     {
@@ -403,7 +401,6 @@ class html2text
      *  Prints the text, converted from HTML.
      *
      * @access public
-     * @return void
      */
     public function print_text()
     {
@@ -414,7 +411,6 @@ class html2text
      *  Alias to print_text(), operates identically.
      *
      * @access public
-     * @return void
      * @see    print_text()
      */
     public function p()
@@ -473,7 +469,6 @@ class html2text
      *  $width characters.
      *
      * @access private
-     * @return void
      */
     public function _convert()
     {
@@ -531,7 +526,7 @@ class html2text
             substr($link, 0, 7) == 'mailto:'
         ) {
             $this->_link_count++;
-            $this->_link_list .= "[" . $this->_link_count . "] $link\n";
+            $this->_link_list .= '[' . $this->_link_count . "] $link\n";
             $additional = ' [' . $this->_link_count . ']';
         } elseif (substr($link, 0, 11) == 'javascript:') {
             // Don't count the link; ignore it
@@ -539,7 +534,7 @@ class html2text
             // what about href="#anchor" ?
         } else {
             $this->_link_count++;
-            $this->_link_list .= "[" . $this->_link_count . "] " . $this->url;
+            $this->_link_list .= '[' . $this->_link_count . '] ' . $this->url;
             if (substr($link, 0, 1) != '/') {
                 $this->_link_list .= '/';
             }

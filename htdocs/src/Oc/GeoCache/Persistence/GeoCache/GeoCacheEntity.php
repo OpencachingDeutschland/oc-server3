@@ -63,12 +63,12 @@ class GeoCacheEntity extends AbstractEntity
     public $name;
 
     /**
-     * @var double
+     * @var float
      */
     public $longitude;
 
     /**
-     * @var double
+     * @var float
      */
     public $latitude;
 

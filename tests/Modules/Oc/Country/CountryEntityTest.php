@@ -7,15 +7,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class CountryEntityTest
- *
- * @package OcTest\Modules\Oc\Country
  */
 class CountryEntityTest extends TestCase
 {
     /**
      * Tests that isNew returns true when the identifier id is null.
-     *
-     * @return void
      */
     public function testIsNewReturnsTrueOnIdentifierEqualsNull()
     {
@@ -26,8 +22,6 @@ class CountryEntityTest extends TestCase
 
     /**
      * Tests that isNew returns false when the identifier id is not null.
-     *
-     * @return void
      */
     public function testIsNewReturnsFalseWhenIdentifierIsPresent()
     {
@@ -39,8 +33,6 @@ class CountryEntityTest extends TestCase
 
     /**
      * Tests toArray returns correct array.
-     *
-     * @return void
      */
     public function testToArray()
     {
@@ -70,8 +62,6 @@ class CountryEntityTest extends TestCase
 
     /**
      * Tests fromArray applies correct values.
-     *
-     * @return void
      */
     public function testFromArray()
     {
@@ -84,7 +74,7 @@ class CountryEntityTest extends TestCase
             'listDefaultDe' => 0,
             'listDefaultEn' => 'andorra',
             'sortDe' => 0,
-            'sortEn' => 'andorra'
+            'sortEn' => 'andorra',
         ];
 
         $entity = new CountryEntity();

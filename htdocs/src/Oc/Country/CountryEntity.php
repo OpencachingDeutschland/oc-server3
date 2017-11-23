@@ -6,8 +6,6 @@ use Oc\Repository\AbstractEntity;
 
 /**
  * Class CountryEntity
- *
- * @package Oc\Country
  */
 class CountryEntity extends AbstractEntity
 {

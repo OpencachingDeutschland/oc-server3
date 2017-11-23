@@ -12,8 +12,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class ClearWebCacheCommand
- *
- * @package Oc\Command
  */
 class ClearWebCacheCommand extends AbstractCommand
 {
@@ -22,7 +20,6 @@ class ClearWebCacheCommand extends AbstractCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */

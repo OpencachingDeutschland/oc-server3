@@ -24,11 +24,11 @@ if (isset($_REQUEST['report']) && $_REQUEST['report']) {
             $gcWp = trim($_REQUEST['gcwp']);
             $source = trim($_REQUEST['source']);
 
-            if (!preg_match("/^OC[0-9A-F]{4,6}$/", $ocwp)) {
+            if (!preg_match('/^OC[0-9A-F]{4,6}$/', $ocwp)) {
                 echo "error: invalid ocwp\n";
             } elseif (!sql_value("SELECT 1 FROM `caches` WHERE `wp_oc` = '&1'", 0, $ocWp)) {
                 echo "error: unknown ocwp\n";
-            } elseif (!preg_match("/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/", $gcWp)) {
+            } elseif (!preg_match('/^GC[0-9A-HJ-NPQRTVWXYZ]{3,7}$/', $gcWp)) {
                 echo "error: invalid gcwp\n";
             } else {
                 sql(

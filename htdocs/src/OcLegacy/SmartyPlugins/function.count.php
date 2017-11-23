@@ -2,10 +2,7 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- ***
- * Smarty {count array=$array} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

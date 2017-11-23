@@ -8,15 +8,11 @@ use OcTest\Modules\TestCase;
 
 /**
  * Class BlockEntityTest
- *
- * @package OcTest\Modules\Oc\Country
  */
 class BlockEntityTest extends TestCase
 {
     /**
      * Tests that isNew returns true when the identifier id is null.
-     *
-     * @return void
      */
     public function testIsNewReturnsTrueOnIdentifierEqualsNull()
     {
@@ -27,8 +23,6 @@ class BlockEntityTest extends TestCase
 
     /**
      * Tests that isNew returns false when the identifier id is not null.
-     *
-     * @return void
      */
     public function testIsNewReturnsFalseWhenIdentifierIsPresent()
     {
@@ -40,8 +34,6 @@ class BlockEntityTest extends TestCase
 
     /**
      * Tests toArray returns correct array.
-     *
-     * @return void
      */
     public function testToArray()
     {
@@ -67,8 +59,6 @@ class BlockEntityTest extends TestCase
 
     /**
      * Tests fromArray applies correct values.
-     *
-     * @return void
      */
     public function testFromArray()
     {
@@ -79,7 +69,7 @@ class BlockEntityTest extends TestCase
             'html' => 'my html',
             'position' => 1,
             'updatedAt' => new DateTime(),
-            'active' => true
+            'active' => true,
         ];
 
         $entity = new BlockEntity();

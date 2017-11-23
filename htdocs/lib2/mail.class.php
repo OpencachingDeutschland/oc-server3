@@ -33,7 +33,7 @@ class mail extends Smarty
         $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
         $this->plugins_dir = [
             'plugins',
-            __DIR__ . '/../src/OcLegacy/SmartyPlugins'
+            __DIR__ . '/../src/OcLegacy/SmartyPlugins',
         ];
 
         // disable caching ...
@@ -121,8 +121,8 @@ class mail extends Smarty
 
         // check if the target domain exists if the domain does not
         // exist, the mail is sent to the own domain (?!)
-        $domain = mail::getToMailDomain($this->to);
-        if (mail::is_existent_maildomain($domain) == false) {
+        $domain = self::getToMailDomain($this->to);
+        if (self::is_existent_maildomain($domain) == false) {
             return false;
         }
 

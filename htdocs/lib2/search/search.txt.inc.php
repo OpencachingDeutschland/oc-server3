@@ -22,11 +22,11 @@ function search_output()
 
     $txtLine = $txt_record;
 
-    $txtLogs = "<===================>
+    $txtLogs = '<===================>
 {username} / {date} / {type}
 
 {text}
-";
+';
 
     $rs = sql_slave(
         "SELECT SQL_BUFFER_RESULT
@@ -110,7 +110,7 @@ function search_output()
             false,
             true
         );
-        if ($license != "") {
+        if ($license != '') {
             $license = "\r\n\r\n$license";
         }
 
@@ -179,9 +179,9 @@ function search_output()
             $thislog = $txtLogs;
 
             $thislog = mb_ereg_replace('{id}', $rLog['id'], $thislog);
-            $dateformat = "d.m.Y H:i";
-            if (substr($rLog['date'], 11) == "00:00:00") {
-                $dateformat = "d.m.Y";
+            $dateformat = 'd.m.Y H:i';
+            if (substr($rLog['date'], 11) == '00:00:00') {
+                $dateformat = 'd.m.Y';
             }
             $thislog = mb_ereg_replace('{date}', date($dateformat, strtotime($rLog['date'])), $thislog);
             $thislog = mb_ereg_replace('{username}', $rLog['username'], $thislog);
@@ -212,7 +212,7 @@ function search_output()
 
 function decodeEntities($str)
 {
-    return html_entity_decode($str, ENT_COMPAT, "UTF-8");
+    return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
 }
 
 function html2txt($html)

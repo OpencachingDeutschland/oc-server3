@@ -4,8 +4,6 @@ namespace Oc\GlobalContext;
 
 /**
  * Class GlobalContext
- *
- * @package Oc\GlobalContext
  */
 class GlobalContext
 {

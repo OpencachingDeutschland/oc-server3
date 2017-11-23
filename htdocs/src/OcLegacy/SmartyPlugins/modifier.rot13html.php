@@ -2,17 +2,10 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- *
- * Smarty plugin
- *
- * Type:     modifier<br>
- * Name:     rot13html<br>
- * Example:  {$text|rot13html}
  * @version  1.0
  *
  * @param string
+ * @param mixed $str
  *
  * @return string
  */

@@ -362,9 +362,9 @@ function process_owner_log($user_id, $log_id)
     $domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     $urls = get_site_urls($domain);
     if ($urls['shortlink_url']) {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $watchtext);
     } else {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $watchtext);
     }
 
     sql(
@@ -489,9 +489,9 @@ function process_log_watch($user_id, $log_id)
     $domain = sqlValue("SELECT `domain` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     $urls = get_site_urls($domain);
     if ($urls['shortlink_url']) {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['shortlink_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['shortlink_url'], $watchtext);
     } else {
-        $watchtext = mb_ereg_replace("{shortlink_url}", $urls['site_url'], $watchtext);
+        $watchtext = mb_ereg_replace('{shortlink_url}', $urls['site_url'], $watchtext);
     }
 
     sql(
@@ -512,11 +512,14 @@ function insert_recommendation($rLog, $language, $watchtext)
         $rLog['recommendation']
         ? ', ' . $translate->t('Recommendation', '', basename(__FILE__), __LINE__, '', 1, $language)
         : '';
+
     return mb_ereg_replace('{recommendation}', $rtext, $watchtext);
 }
 
 /**
  * @param string $watchtext
+ * @param mixed $rLog
+ * @param mixed $language
  */
 function insert_maintenance_flags($rLog, $language, $watchtext)
 {
@@ -594,21 +597,19 @@ function CreatePidFile($PidFile)
     }
 
     if (file_exists($PidFile)) {
-        echo "Error: Pidfile (" . $PidFile . ") already present at " . __FILE__ . ":" . __LINE__ . "!\n";
+        echo 'Error: Pidfile (' . $PidFile . ') already present at ' . __FILE__ . ':' . __LINE__ . "!\n";
 
         return false;
-    } else {
-        if ($pidfile = @fopen($PidFile, "w")) {
-            fputs($pidfile, posix_getpid());
-            fclose($pidfile);
-
-            return true;
-        } else {
-            echo "can't create Pidfile $PidFile at " . __FILE__ . ":" . __LINE__ . "!\n";
-
-            return false;
-        }
     }
+    if ($pidfile = @fopen($PidFile, 'wb')) {
+        fputs($pidfile, posix_getpid());
+        fclose($pidfile);
+
+        return true;
+    }
+    echo "can't create Pidfile $PidFile at " . __FILE__ . ':' . __LINE__ . "!\n";
+
+    return false;
 }
 
 //
@@ -651,7 +652,7 @@ function CleanupAndExit($PidFile, $message = false)
             unlink($PidFile);
         }
     } else {
-        echo "Error: can't delete own pidfile (" . $PidFile . ") at " . __FILE__ . ":" . __LINE__ . "!\n";
+        echo "Error: can't delete own pidfile (" . $PidFile . ') at ' . __FILE__ . ':' . __LINE__ . "!\n";
     }
 
     if ($message) {

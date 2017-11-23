@@ -27,7 +27,6 @@ class Validator
      *
      * @param mixed $item Item to validate
      *
-     * @return void
      *
      * @throws ValidationException
      */

@@ -8,8 +8,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Class MenuSubscriber
- *
- * @package OcDev\KitchenSink\Subscriber
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
@@ -22,7 +20,7 @@ class MenuSubscriber implements EventSubscriberInterface
     {
         return [
             MenuEnum::MENU_MAIN => 'onConfigureMenu',
-            MenuEnum::MENU_MAIN . '.kitchensink' => 'onConfigureKitchensinkMenu'
+            MenuEnum::MENU_MAIN . '.kitchensink' => 'onConfigureKitchensinkMenu',
         ];
     }
 
@@ -44,7 +42,7 @@ class MenuSubscriber implements EventSubscriberInterface
             'kitchensink',
             [
                 'label' => 'Kitchensink',
-                'route' => 'kitchensink.index'
+                'route' => 'kitchensink.index',
             ]
         );
 

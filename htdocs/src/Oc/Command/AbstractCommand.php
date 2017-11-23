@@ -10,8 +10,6 @@ use Symfony\Component\Console\Exception\LogicException;
 
 /**
  * Class AbstractCommand
- *
- * @package Oc\Command
  */
 abstract class AbstractCommand extends Command
 {

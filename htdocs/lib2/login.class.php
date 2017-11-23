@@ -108,7 +108,6 @@ class login
     }
 
     /**
-     * @return void
      */
     public function verify()
     {

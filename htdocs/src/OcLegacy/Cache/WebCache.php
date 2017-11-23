@@ -8,7 +8,7 @@ namespace OcLegacy\Cache;
 class WebCache
 {
     /**
-     * @var array $opt
+     * @var array
      */
     private $opt;
 
@@ -79,7 +79,7 @@ class WebCache
                 \set_php_locale();
 
                 if ($this->translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '') !== $sLanguage) {
-                    echo 'setlocale() failed to set language to ' . $sLanguage ."\n";
+                    echo 'setlocale() failed to set language to ' . $sLanguage . "\n";
                     die("Is the translation of INTERNAL_LANG correct?\n");
                 }
 

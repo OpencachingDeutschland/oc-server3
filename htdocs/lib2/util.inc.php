@@ -205,7 +205,7 @@ function help_latToDegreeStr($lat)
 function escape_javascript($text)
 {
     return str_replace(
-        ['\'', '"',],
+        ['\'', '"', ],
         ['\\\'', '&quot;'],
         $text
     );

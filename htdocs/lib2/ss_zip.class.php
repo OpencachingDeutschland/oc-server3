@@ -4,7 +4,6 @@
  *
  * @author Yuriy Horobey, smiledsoft.com
  * @email info@smiledsoft.com
- *
  */
 class ss_zip
 {
@@ -78,7 +77,6 @@ class ss_zip
     {
     }
 
-
     /**saves to the disc or sends zipFile to the browser.
 
      *
@@ -149,7 +147,7 @@ class ss_zip
         $fh .= "\x00\x00\x00\x00"; // last mod time and date
         $fh .=
             pack(
-                "V3v2",
+                'V3v2',
                 $crc, //crc
                 $gzsize, //c size
                 $datasize, //unc size
@@ -163,13 +161,13 @@ class ss_zip
         $lfh .= $fh . $filename;
         $zipdata = $lfh;
         $zipdata .= $gzdata;
-        $zipdata .= pack("V3", $crc, $gzsize, $datasize);
+        $zipdata .= pack('V3', $crc, $gzsize, $datasize);
         $this->zipdata[] = $zipdata;
         //Central Directory Record
         $cdir = "PK\x01\x02";
         $cdir .=
             pack(
-                "va*v3V2",
+                'va*v3V2',
                 0,
                 $fh,
                 0,        // file comment length
@@ -192,7 +190,6 @@ class ss_zip
      * If empty, the file will be stored under path given by filename parameter
      *
      * @see ss_zip::add_data()
-     * @return void
      */
     public function add_file($filename, $storedasname = '')
     {
@@ -281,18 +278,16 @@ class ss_zip
     {
     }
 
-
     /** Removes entry from the archive.
      * please be very carefull with this function, there is no undo after you save the archive
      *
-     * @return boolean|null true on success or false on failure
      *
      * @param int $idx
+     * @return bool|null true on success or false on failure
      */
     public function remove($idx)
     {
     }
-
 
     /** extracts data from the archive and return it as a string.
      * <center><hr nashade>*** This functionality is available in PRO version only. ***<br><a
@@ -315,7 +310,6 @@ class ss_zip
     {
     }
 
-
     /** extracts the entry and creates it in the file system.
      * <center><hr nashade>*** This functionality is available in PRO version only. ***<br><a
      * href='http://smiledsoft.com/demos/phpzip/' target='_blank'>please upgrade </a><hr nashade></center>
@@ -326,10 +320,9 @@ class ss_zip
      *               store it under /my/server/path/arhived/file/path/file.txt You are responsible to ensure that you
      *               have write permissions for this operation under your operation system.
      */
-    public function extract_file($idx, $path = ".")
+    public function extract_file($idx, $path = '.')
     {
     }
-
 
     public function _check_idx($idx)
     {

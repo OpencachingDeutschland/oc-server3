@@ -2,14 +2,8 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- *
- * Smarty plugin
- *
- * Type:     modifier<br>
- * Name:     round<br>
- * Example:  {$number|sprintf:"%0.3f"}
+ * @param mixed $text
+ * @param mixed $format
  */
 function smarty_modifier_sprintf($text, $format)
 {

@@ -289,9 +289,8 @@ class Geokrety
         }
     }
 
-
     /**
-     * @param integer $id
+     * @param int $id
      * @param $name
      */
     public function checkGeoKretType($id, $name)
@@ -303,9 +302,8 @@ class Geokrety
         );
     }
 
-
     /**
-     * @param integer $id
+     * @param int $id
      * @param $name
      */
     public function checkUser($id, $name)
@@ -317,9 +315,8 @@ class Geokrety
         sql("INSERT INTO `gk_user` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'", $id, $name);
     }
 
-
     /**
-     * @param integer $id
+     * @param int $id
      * @param $name
      */
     public function checkMoveType($id, $name)
@@ -331,7 +328,6 @@ class Geokrety
         );
     }
 
-
     /**
      * @param $domNode
      * @param string $element
@@ -342,15 +338,15 @@ class Geokrety
         $subNode = $domNode->getElementsByTagName($element);
         if ($subNode->length < 1) {
             return '';
-        } else {
-            return $subNode->item(0)->nodeValue;
         }
-    }
 
+        return $subNode->item(0)->nodeValue;
+    }
 
     /**
      * @param string $element
      * @param string $attr
+     * @param & $domNode
      * @return string
      */
     public function getNodeAttribute(&$domNode, $element, $attr)
@@ -358,8 +354,8 @@ class Geokrety
         $subNode = $domNode->getElementsByTagName($element);
         if ($subNode->length < 1) {
             return '';
-        } else {
-            return $subNode->item(0)->getAttribute($attr);
         }
+
+        return $subNode->item(0)->getAttribute($attr);
     }
 }

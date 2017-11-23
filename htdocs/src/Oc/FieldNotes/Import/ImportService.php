@@ -86,7 +86,7 @@ class ImportService
             $errors[] = $this->translator->trans('field_notes.error.wrong_file_format');
         } catch (ValidationException $e) {
             /**
-             * @var ConstraintViolationInterface $violation
+             * @var ConstraintViolationInterface
              */
             foreach ($e->getViolations() as $violation) {
                 $linePrefix = $this->getTranslatedLinePrefix($violation);
@@ -114,14 +114,14 @@ class ImportService
     private function getTranslatedLinePrefix(ConstraintViolationInterface $violation)
     {
         /**
-         * @var Node $expressionAst
+         * @var Node
          */
         $expressionAst = (new ExpressionLanguage())->parse($violation->getPropertyPath(), [])->getNodes();
 
-        $line = ((int)$expressionAst->nodes['node']->nodes[1]->attributes['value']) + 1;
+        $line = ((int) $expressionAst->nodes['node']->nodes[1]->attributes['value']) + 1;
 
         $linePrefix = $this->translator->trans('field_notes.error.line_prefix', [
-            '%line%' => $line
+            '%line%' => $line,
         ]);
 
         return $linePrefix;

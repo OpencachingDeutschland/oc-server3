@@ -57,7 +57,7 @@ function shutdownhandler()
     global $error_handled;
 
     if (!$error_handled &&
-        function_exists("error_get_last") && /* PHP >= 5.2.0 */
+        function_exists('error_get_last') && /* PHP >= 5.2.0 */
         ($error = error_get_last()) &&
         in_array(
             $error['type'],
@@ -65,7 +65,7 @@ function shutdownhandler()
             E_ERROR,
             E_CORE_ERROR,
             E_COMPILE_ERROR,
-            E_USER_ERROR
+            E_USER_ERROR,
             ]
         )
     ) {
@@ -160,15 +160,15 @@ function admin_errormail($to, $errortype, $message, $headers)
     if ($old_logsize < $error_mail_limit && $new_logsize >= $error_mail_limit) {
         mb_send_mail(
             $to,
-            "too many " . $errortype,
-            "Errors/Warnings are recorded in " . $errorlog_path . ".\n" .
+            'too many ' . $errortype,
+            'Errors/Warnings are recorded in ' . $errorlog_path . ".\n" .
             "Email Reporting is DISABLED for today now. Please check the logfile\n" .
-            "and RENAME or delete it when done, so that logging is re-enabled.",
+            'and RENAME or delete it when done, so that logging is re-enabled.',
             $headers
         );
 
         return false;
-    } else {
-        return ($old_logsize < $error_mail_limit);
     }
+
+    return ($old_logsize < $error_mail_limit);
 }

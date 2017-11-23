@@ -9,8 +9,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class GlobalContextSubscriber
- *
- * @package Oc\GlobalContext\Subscriber
  */
 class GlobalContextSubscriber implements EventSubscriberInterface
 {
@@ -37,14 +35,12 @@ class GlobalContextSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => 'onKernelRequest'
+            KernelEvents::REQUEST => 'onKernelRequest',
         ];
     }
 
     /**
      * @param GetResponseEvent $event
-     *
-     * @return void
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

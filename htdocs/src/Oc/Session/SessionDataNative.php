@@ -114,8 +114,6 @@ class SessionDataNative implements SessionDataInterface
     /**
      * @param $name
      * @param null $default
-     *
-     * @return null
      */
     public function get($name, $default = null)
     {

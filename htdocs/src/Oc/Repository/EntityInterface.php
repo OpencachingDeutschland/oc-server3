@@ -4,8 +4,6 @@ namespace Oc\Repository;
 
 /**
  * Class EntityInterface
- *
- * @package Oc\Repository
  */
 interface EntityInterface
 {
@@ -20,8 +18,6 @@ interface EntityInterface
      * Sets all properties from array.
      *
      * @param array $data
-     *
-     * @return void
      */
     public function fromArray(array $data);
 

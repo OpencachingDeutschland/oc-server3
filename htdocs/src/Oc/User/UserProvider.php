@@ -6,8 +6,6 @@ use Oc\Session\SessionDataInterface;
 
 /**
  * Class UserProvider
- *
- * @package Oc\User
  */
 class UserProvider
 {

@@ -1,6 +1,7 @@
 <?php
 /**
  * Smarty {repeat string="&nbsp;" count=2} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

@@ -41,8 +41,8 @@ class translate_filescan
 
     public function scanTranslateFunctionCalls()
     {
-        $nNextPos = strpos($this->msContent, "t" . "('");
-        $nNext_ = strpos($this->msContent, "_" . "('");
+        $nNextPos = strpos($this->msContent, 't' . "('");
+        $nNext_ = strpos($this->msContent, '_' . "('");
         if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos)) {
             $nNextPos = $nNext_;
         }
@@ -71,12 +71,12 @@ class translate_filescan
 
                 $this->textlist[] = array(
                     'text' => $sText,
-                    'line' => $nLine
+                    'line' => $nLine,
                 );
             }
 
-            $nNext_ = strpos($this->msContent, "_" . "('", $nNextPos + 1);
-            $nNextPos = strpos($this->msContent, "t" . "('", $nNextPos + 1);
+            $nNext_ = strpos($this->msContent, '_' . "('", $nNextPos + 1);
+            $nNextPos = strpos($this->msContent, 't' . "('", $nNextPos + 1);
             if ($nNext_ !== false && ($nNextPos === false || $nNext_ < $nNextPos)) {
                 $nNextPos = $nNext_;
             }
@@ -85,7 +85,7 @@ class translate_filescan
 
     /**
      * @param string $sCode
-     * @param integer $nStartSearch
+     * @param int $nStartSearch
      *
      * @return bool|int
      */
@@ -120,7 +120,7 @@ class translate_filescan
                 // TODO:plural
                 $this->textlist[] = array(
                     'text' => $sText,
-                    'line' => $nLine
+                    'line' => $nLine,
                 );
             }
 
@@ -129,8 +129,9 @@ class translate_filescan
     }
 
     // TODO: performance ... scan once at __construct and store line positions
+
     /**
-     * @param integer $nPos
+     * @param int $nPos
      *
      * @return int
      */

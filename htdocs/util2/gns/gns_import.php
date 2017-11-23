@@ -27,7 +27,7 @@ require_once __DIR__ . '/../../lib2/cli.inc.php';
 $importFiles = [
     'gm.txt',
     'au.txt',
-    'sz.txt'
+    'sz.txt',
 ];
 
 sql('TRUNCATE TABLE gns_locations');

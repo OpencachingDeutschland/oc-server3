@@ -51,6 +51,10 @@ function smarty_gettext_strarg($str)
  *   - escape - Valid is "js" to escape a string for usage inside JS string
  *   - plural - The plural version of the text (2nd parameter of ngettext())
  *   - count - The item count for plural mode (3rd parameter of ngettext())
+ * @param mixed $params
+ * @param mixed $text
+ * @param & $smarty
+ * @param & $repeat
  */
 function smarty_block_t($params, $text, &$smarty, &$repeat)
 {

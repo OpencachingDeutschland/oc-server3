@@ -41,9 +41,8 @@ class FieldNoteRepository
     /**
      * Fetches all countries.
      *
-     * @return FieldNoteEntity[]
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return FieldNoteEntity[]
      */
     public function fetchAll()
     {
@@ -71,10 +70,10 @@ class FieldNoteRepository
      * Fetches all GeoCaches by given where clause.
      *
      * @param array $where
-     *
-     * @return FieldNoteEntity[]
+     * @param array $order
      *
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @return FieldNoteEntity[]
      */
     public function fetchBy(array $where = [], array $order = [])
     {
@@ -83,7 +82,7 @@ class FieldNoteRepository
             ->from(self::TABLE);
 
         foreach ($where as $column => $value) {
-            $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+            $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
         }
 
         foreach ($order as $field => $direction) {
@@ -112,9 +111,8 @@ class FieldNoteRepository
      *
      * @param array $where
      *
-     * @return null|FieldNoteEntity
-     *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @return null|FieldNoteEntity
      */
     public function fetchOneBy(array $where = [])
     {
@@ -125,7 +123,7 @@ class FieldNoteRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' .  $queryBuilder->createNamedParameter($value));
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
@@ -145,9 +143,8 @@ class FieldNoteRepository
      *
      * @param int $userId
      *
-     * @return FieldNoteEntity
-     *
      * @throws RecordNotFoundException
+     * @return FieldNoteEntity
      */
     public function getLatestUserFieldNote($userId)
     {
@@ -175,9 +172,8 @@ class FieldNoteRepository
      *
      * @param FieldNoteEntity $entity
      *
-     * @return FieldNoteEntity
-     *
      * @throws RecordAlreadyExistsException
+     * @return FieldNoteEntity
      */
     public function create(FieldNoteEntity $entity)
     {
@@ -202,9 +198,8 @@ class FieldNoteRepository
      *
      * @param FieldNoteEntity $entity
      *
-     * @return FieldNoteEntity
-     *
      * @throws RecordNotPersistedException
+     * @return FieldNoteEntity
      */
     public function update(FieldNoteEntity $entity)
     {
@@ -230,9 +225,8 @@ class FieldNoteRepository
      *
      * @param FieldNoteEntity $entity
      *
-     * @return FieldNoteEntity
-     *
      * @throws RecordNotPersistedException
+     * @return FieldNoteEntity
      */
     public function remove(FieldNoteEntity $entity)
     {
@@ -265,7 +259,7 @@ class FieldNoteRepository
             'geocache_id' => $entity->geocacheId,
             'type' => $entity->type,
             'date' => $entity->date->format(DateTime::ATOM),
-            'text' => $entity->text
+            'text' => $entity->text,
         ];
     }
 
@@ -286,7 +280,7 @@ class FieldNoteRepository
         $entity->date = new DateTime($data['date']);
         $entity->text = $data['text'];
         $entity->geoCache = $this->geoCacheRepository->fetchOneBy([
-            'cache_id' => $entity->geocacheId
+            'cache_id' => $entity->geocacheId,
         ]);
 
         return $entity;

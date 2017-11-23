@@ -7,8 +7,6 @@ use PHPUnit_Framework_MockObject_MockObject as MockObject;
 
 /**
  * Class TestCase
- *
- * @package OcTest\Modules\Oc
  */
 class TestCase extends PHPUnitTestCase
 {

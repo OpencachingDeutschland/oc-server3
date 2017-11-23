@@ -13,8 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Class JournaldPostfixLogsCommand
- *
- * @package Oc\Command
  */
 class JournaldPostfixLogsCommand extends SymfonyCommand
 {
@@ -32,7 +30,6 @@ class JournaldPostfixLogsCommand extends SymfonyCommand
     /**
      * Configures the command.
      *
-     * @return void
      *
      * @throws InvalidArgumentException
      */

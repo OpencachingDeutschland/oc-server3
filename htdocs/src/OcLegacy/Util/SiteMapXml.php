@@ -49,7 +49,7 @@ class SiteMapXml
 
     /**
      * @param string $sFile
-     * @param integer $dLastMod
+     * @param int $dLastMod
      * @param string $sChangeFreq
      * @param float $nPriority
      */
@@ -64,7 +64,7 @@ class SiteMapXml
         $sXML .= '<lastmod>' . xmlentities(date('c', $dLastMod)) . '</lastmod>';
         $sXML .= '<changefreq>' . xmlentities($sChangeFreq) . '</changefreq>';
         $sXML .= '<priority>' . xmlentities($nPriority) . '</priority>';
-        $sXML .= '</url>'."\n";
+        $sXML .= '</url>' . "\n";
 
         $this->writeInternal($sXML);
     }

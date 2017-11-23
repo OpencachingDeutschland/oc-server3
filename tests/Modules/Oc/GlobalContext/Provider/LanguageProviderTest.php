@@ -12,15 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class LanguageProviderTest
- *
- * @package OcTest\Modules\Oc\GlobalContext\Provider
  */
 class LanguageProviderTest extends TestCase
 {
     /**
      * Tests fetching the preferred language by session.
-     *
-     * @return void
      */
     public function testGetPreferredLanguageBySession()
     {
@@ -40,8 +36,6 @@ class LanguageProviderTest extends TestCase
 
     /**
      * Tests fetching the preferred language by user.
-     *
-     * @return void
      */
     public function testGetPreferredLanguageByUser()
     {
@@ -61,8 +55,6 @@ class LanguageProviderTest extends TestCase
 
     /**
      * Tests fetching the preferred language by user.
-     *
-     * @return void
      */
     public function testGetPreferredLanguageByUserThatNotExists()
     {
@@ -80,8 +72,6 @@ class LanguageProviderTest extends TestCase
 
     /**
      * Tests fetching the preferred language by user.
-     *
-     * @return void
      */
     public function testGetPreferredLanguageByAvailableTranslations()
     {
@@ -101,8 +91,6 @@ class LanguageProviderTest extends TestCase
 
     /**
      * Tests fetching the preferred language by user.
-     *
-     * @return void
      */
     public function testGetPreferredLanguageWithFallback()
     {

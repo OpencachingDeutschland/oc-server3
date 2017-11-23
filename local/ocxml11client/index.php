@@ -234,7 +234,7 @@ function getxmlfiles()
         }
 
         for ($i = 1; $i <= $filescount; $i ++) {
-            echo "Download Paket: " . $i . ' von ' . $filescount . "\n";
+            echo 'Download Paket: ' . $i . ' von ' . $filescount . "\n";
 
             $fileurl = $opt['url_getsession'];
             $fileurl = mb_ereg_replace('{sessionid}', $sessionid, $fileurl);
@@ -693,9 +693,8 @@ function ImportCacheArray($r)
                     importError('cache', $r['ID']['__DATA'], $r, 'Waypoint does not match');
 
                     return;
-                } else {
-                    importWarn('cache', $r['ID']['__DATA'], $r, 'Waypoint does not match, i will set it');
                 }
+                importWarn('cache', $r['ID']['__DATA'], $r, 'Waypoint does not match, i will set it');
             }
             mysql_free_result($rsWaypoint);
 
@@ -843,7 +842,7 @@ function ImportCacheDescArray($r)
     if ($rDesc = sql_fetch_array($rsDesc)) {
         if (strtotime($rDesc['last_modified']) < strtotime($r['LASTMODIFIED']['__DATA'])) {
             // cacheid noch die selbe?
-            $rsCache = sql("SELECT `uuid` FROM `caches` WHERE cache_id=&1", $rDesc['cache_id']);
+            $rsCache = sql('SELECT `uuid` FROM `caches` WHERE cache_id=&1', $rDesc['cache_id']);
             if (!($rCache = sql_fetch_array($rsCache))) {
                 importError(
                     'cachedesc',
@@ -1217,7 +1216,7 @@ function ImportRemovedObjectArray($r)
                 switch ($rPicture['object_type']) {
                     case 1:
                         $rsCounter = sql(
-                            "SELECT COUNT(*) `count` FROM `pictures` WHERE `object_type`=1 AND `object_id`=&1",
+                            'SELECT COUNT(*) `count` FROM `pictures` WHERE `object_type`=1 AND `object_id`=&1',
                             $rPicture['object_id']
                         );
                         $rCounter = sql_fetch_array($rsCounter);
@@ -1226,7 +1225,7 @@ function ImportRemovedObjectArray($r)
                         break;
                     case 2:
                         $rsCounter = sql(
-                            "SELECT COUNT(*) `count` FROM `pictures` WHERE `object_type`=2 AND `object_id`=&1",
+                            'SELECT COUNT(*) `count` FROM `pictures` WHERE `object_type`=2 AND `object_id`=&1',
                             $rPicture['object_id']
                         );
                         $rCounter = sql_fetch_array($rsCounter);
@@ -1270,14 +1269,16 @@ function removedObject($uuid)
     $rs = sql("SELECT `id` FROM `removed_objects` WHERE `uuid`='&1'", $uuid);
     if ($r = sql_fetch_array($rs)) {
         return true;
-    } else {
-        return false;
     }
+
+    return false;
 }
 
 /**
  * @param string $recordtype
  * @param string $info
+ * @param mixed $uuid
+ * @param mixed $r
  */
 function importError($recordtype, $uuid, $r, $info)
 {
@@ -1287,6 +1288,8 @@ function importError($recordtype, $uuid, $r, $info)
 /**
  * @param string $recordtype
  * @param string $info
+ * @param mixed $uuid
+ * @param mixed $r
  */
 function importWarn($recordtype, $uuid, $r, $info)
 {

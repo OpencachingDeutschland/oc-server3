@@ -2,9 +2,7 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- * Smarty {nccacheid wp=$wpnc} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

@@ -6,8 +6,6 @@ use Exception;
 
 /**
  * Class NotPersistedException
- *
- * @package Oc\Repository\Exception
  */
 class RecordNotPersistedException extends Exception
 {

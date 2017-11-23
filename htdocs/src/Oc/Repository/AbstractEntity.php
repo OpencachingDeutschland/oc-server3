@@ -4,8 +4,6 @@ namespace Oc\Repository;
 
 /**
  * Class AbstractEntity
- *
- * @package Oc\Repository
  */
 abstract class AbstractEntity
 {
@@ -20,8 +18,6 @@ abstract class AbstractEntity
      * Sets all properties from array.
      *
      * @param array $data
-     *
-     * @return void
      */
     public function fromArray(array $data)
     {

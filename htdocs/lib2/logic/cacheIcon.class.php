@@ -14,32 +14,32 @@ class CacheIcon
         // add status
         switch ($cache_status) {
             case 1:
-                $iconname .= "-s";
+                $iconname .= '-s';
                 break;
             case 2:
-                $iconname .= "-n";
+                $iconname .= '-n';
                 break;
             case 3:
-                $iconname .= "-a";
+                $iconname .= '-a';
                 break;
             case 4:
-                $iconname .= "-a";
+                $iconname .= '-a';
                 break;
             case 5:
-                $iconname .= "-s";
+                $iconname .= '-s';
                 break; // fix for RT ticket #3403
             case 6:
-                $iconname .= "-a";
+                $iconname .= '-a';
                 break;
             case 7:
-                $iconname .= "-a";
+                $iconname .= '-a';
                 break;
         }
 
         // mark if (not) found
         if ($user_id) {
             if ($cache_userid == $user_id) {
-                $iconname .= "-owner";
+                $iconname .= '-owner';
             } else {
                 $logtype = sql_value_slave(
                     "SELECT `type`

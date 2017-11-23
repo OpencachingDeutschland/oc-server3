@@ -28,18 +28,18 @@ class xml2Array
      */
     public function parse($strInputXML)
     {
-        $this->resParser = xml_parser_create("UTF-8");
+        $this->resParser = xml_parser_create('UTF-8');
         xml_set_object($this->resParser, $this);
-        xml_set_element_handler($this->resParser, "tagOpen", "tagClosed");
+        xml_set_element_handler($this->resParser, 'tagOpen', 'tagClosed');
 
-        xml_set_character_data_handler($this->resParser, "tagData");
+        xml_set_character_data_handler($this->resParser, 'tagData');
 
         $this->push_pos($this->arrOutput);
 
         $this->strXmlData = xml_parse($this->resParser, $strInputXML);
         if (!$this->strXmlData) {
             die(sprintf(
-                "XML error: %s at line %d",
+                'XML error: %s at line %d',
                 xml_error_string(xml_get_error_code($this->resParser)),
                 xml_get_current_line_number($this->resParser)
             ));

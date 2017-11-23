@@ -179,8 +179,8 @@ function imagebmp($img, $file = '', $RLE = 0)
 
         for ($y = $Height - 1; $y >= 0; $y--) {
             for ($x = 0; $x < $Width; $x++) {
-                $color = imagecolorsforindex($img, ImageColorAt($img, $x, $y));
-                $ret .= chr($color["blue"]) . chr($color["green"]) . chr($color["red"]);
+                $color = imagecolorsforindex($img, imagecolorat($img, $x, $y));
+                $ret .= chr($color['blue']) . chr($color['green']) . chr($color['red']);
             }
             $ret .= $Dopl;
         }
@@ -192,9 +192,8 @@ function imagebmp($img, $file = '', $RLE = 0)
         $r = $r and fclose($f);
 
         return $r;
-    } else {
-        echo $ret;
     }
+    echo $ret;
 }
 
 /*
@@ -485,9 +484,9 @@ function freaddword($f)
 }
 
 /**
- * @param integer $byte
+ * @param int $byte
  * @param $start
- * @param integer $len
+ * @param int $len
  *
  * @return number
  */
@@ -502,7 +501,7 @@ function RetBits($byte, $start, $len)
 $CurrentBit = 0;
 /**
  * @param resource $f
- * @param integer $count
+ * @param int $count
  *
  * @return number
  */
@@ -557,7 +556,7 @@ function int_to_dword($n)
 }
 
 /**
- * @param integer $n
+ * @param int $n
  *
  * @return string
  */
@@ -567,7 +566,7 @@ function int_to_word($n)
 }
 
 /**
- * @param integer $d
+ * @param int $d
  *
  * @return string
  */
@@ -578,7 +577,7 @@ function decbin8($d)
 
 /**
  * @param $d
- * @param integer $n
+ * @param int $n
  *
  * @return string
  */

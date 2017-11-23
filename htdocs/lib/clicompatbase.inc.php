@@ -43,7 +43,7 @@ require_once __DIR__ . '/settings.inc.php';
 require_once __DIR__ . '/../lib2/errorhandler.inc.php';
 
 // check for banned UAs
-$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "";
+$useragent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
 foreach ($opt['page']['banned_user_agents'] as $ua) {
     if (strpos($useragent, $ua) !== false) {
         die();
@@ -70,10 +70,10 @@ $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
 
 /**
  * @param string $module
- * @param integer $eventId
+ * @param int $eventId
  * @param $userId
  * @param $objectid1
- * @param integer $objectid2
+ * @param int $objectid2
  * @param string $logtext
  * @param $details
  */
@@ -124,6 +124,7 @@ function sql_failed()
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
+ * @param mixed $default
  */
 function sqlValue($sql, $default)
 {
@@ -134,7 +135,6 @@ function sqlValue($sql, $default)
         }
 
         return $r[0];
-
     }
 
     return $default;
@@ -563,9 +563,8 @@ function sql_fetch_column($rs)
     while ($r = sql_fetch_row($rs)) {
         if (count($r) != 1) {
             return null;
-        } else {
-            $col[] = $r[0];
         }
+        $col[] = $r[0];
     }
     sql_free_result($rs);
 
@@ -791,6 +790,8 @@ function get_site_urls($domain)
 
 /**
  * @param string $filename
+ * @param mixed $language
+ * @param mixed $domain
  * @return bool|string
  */
 function fetch_email_template($filename, $language, $domain)

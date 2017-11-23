@@ -2,10 +2,6 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- ***
- * Smarty {season winter='...' spring='...' summer='...' autumn='...'} function plugin
  * @param $params
  * @return mixed
  */

@@ -2,9 +2,7 @@
 /**
  * Smarty plugin
  *
- * @package Smarty
- * @subpackage plugins
- * Smarty {coordinput prefix="coord" lat=48.12345 lon=9.12345} function plugin
+ * @param mixed $params
  */
 /**
  * @param $params

@@ -19,6 +19,10 @@ require_once __DIR__ . '/smiley.inc.php';
  *
  * descMode    is == descMode if the user hit the editor's "save" button,
  * or the new mode if the user hit another mode button
+ * @param mixed $oldDescMode
+ * @param mixed $descMode
+ * @param mixed $text
+ * @param & $representText
  */
 
 /**
@@ -92,7 +96,7 @@ function html2plaintext($text, $texthtml0, $wrap)
             [
                 '<p>',
                 "\n",
-                "\r"
+                "\r",
             ],
             '',
             $text
@@ -100,7 +104,7 @@ function html2plaintext($text, $texthtml0, $wrap)
         $text = str_replace(
             [
                 '<br />',
-                '</p>'
+                '</p>',
             ],
             "\n",
             $text
@@ -111,8 +115,8 @@ function html2plaintext($text, $texthtml0, $wrap)
         $countSmileyImage = count($smiley['image']);
         for ($n = 0; $n < $countSmileyImage; $n++) {
             $text = mb_ereg_replace(
-                "<img [^>]*?src=[^>]+?" . str_replace('.', '\.', $smiley['file'][$n]) . "[^>]+?>",
-                "[s![" . $smiley['text'][$n] . "]!s]",
+                '<img [^>]*?src=[^>]+?' . str_replace('.', '\.', $smiley['file'][$n]) . '[^>]+?>',
+                '[s![' . $smiley['text'][$n] . ']!s]',
                 $text
             );
             // the [s[ ]s] is needed to protect the spaces around the smileys
@@ -126,7 +130,7 @@ function html2plaintext($text, $texthtml0, $wrap)
         $text = str_replace(
             [
                 '[s![',
-                ']!s]'
+                ']!s]',
             ],
             '',
             $text

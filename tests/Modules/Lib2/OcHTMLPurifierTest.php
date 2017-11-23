@@ -20,7 +20,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
 
     public function testAllowedHtmlTags()
     {
-        // For backward compatibilty of editing existing cache listings, it can be
+        // For backward compatibility of editing existing cache listings, it can be
         // CRITICAL if this test fails.
 
         $allowed = [
@@ -37,13 +37,13 @@ class OcHTMLPurifierTest extends AbstractModuleTest
             '<cite>test</cite>',
             '<code>test</code>',
             '<dl><dt>test</dt><dd>test</dd></dl>',
-                // includes <dt> and <dd>
+            // includes <dt> and <dd>
             '<del cite="test">test</del>',
             '<dfn>test</dfn>',
             '<div>test</div>',
             '<em>test</em>',
             '<fieldset><legend>test</legend>test</fieldset>',
-                // includes <legend>
+            // includes <legend>
             '<h1>test</h1>',
             '<h2>test</h2>',
             '<h3>test</h3>',
@@ -56,7 +56,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
             '<ins cite="test">test</ins>',
             '<kbd>test</kbd>',
             '<map name="custom_test"><area alt="test" coords="0,0,1,1" href="test.html" shape="rect" target="_blank" /></map>',
-                // includes <area>
+            // includes <area>
             '<ol type="1" compact="compact"><li>test</li></ol>',
             '<p>test</p>',
             '<pre>test</pre>',
@@ -64,30 +64,22 @@ class OcHTMLPurifierTest extends AbstractModuleTest
             '<samp>test</samp>',
             '<small>test</small>',
             '<span class="test" dir="ltr" id="custom_test" lang="de" style="display:inline;" title="test" xml:lang="de">test</span>',
-                // includes global attributes
+            // includes global attributes
             '<strong>test</strong>',
             'sub', '<sub>test</sub>',
             'sup', '<sup>test</sup>',
             '<table><caption align="left">test</caption><colgroup span="1"><col align="left" span="1" width="50" /></colgroup><thead><tr><th abbr="test" align="left" bgcolor="#FFFFFF" colspan="1" height="10" nowrap="nowrap" rowspan="1" scope="col" valign="top" width="10">test</th></tr></thead><tfoot><tr><td>test</td></tr></tfoot><tbody><tr align="left" bgcolor="#FFFFFF" valign="top"><td abbr="test" align="left" bgcolor="#FFFFFF" colspan="1" height="10" nowrap="nowrap" rowspan="1" scope="col" valign="top" width="10">test</td></tr></tbody></table>',
-                // includes all table child tags
+            // includes all table child tags
             '<tt>test</tt>',
             '<u>test</u>',
             '<ul compact="compact"><li>test</li></ul>',
             '<var>test</var>',
         ];
 
-        $original = '';
-        $purified = '';
-
         foreach ($allowed as $html) {
             $purifiedHtml = $this->htmlPurifier->purify($html);
-            if ($purifiedHtml != $html) {
-                $original .= "$html\n";
-                $purified .= "$purifiedHtml\n";
-            }
+            self::assertEquals($html, $purifiedHtml);
         }
-
-        self::assertEquals($original, $purified);
     }
 
     public function testHtmlTagAIsAllowedAndProtectedWithNoOpener()
@@ -109,10 +101,10 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         $removed = [
             '<applet code="test.class">*</applet>',
             '<article><header>*</header></article>',
-                // includes <header>
+            // includes <header>
             '<aside>*</aside>',
             '<audio controls="controls"><source src="test.mp3" type="audio/mpeg" />*</audio>',
-                // includes <source>
+            // includes <source>
             '<base href="test.html" />',
             '<basefont color="#FFFFFF" />',
             '<bdi>*</bdi>',
@@ -125,43 +117,43 @@ class OcHTMLPurifierTest extends AbstractModuleTest
             '<figure><figcaption>*</figcaption></figure>',
             '<footer>*</footer>',
             '<form><input id="custom_s" type="submit" value="submit" /><label for="custum_s">*</label><output name="custom_o" for="custom_s"></output><textarea rows="5" cols="10"></textarea></form>',
-                // includes <input> <textarea> <label> <output>
+            // includes <input> <textarea> <label> <output>
             '<frameset cols="100%"><frame src="test.html"></frame></frameset>',
-                // includes <frame>
+            // includes <frame>
             '<html><head><body>*</body></html>',
-                // includes <head> <title> <meta> <link> <body>
+            // includes <head> <title> <meta> <link> <body>
             '<head><title>*</title></head>',
             '<iframe src="test.html"></iframe>',
             '<link rel="stylesheet" type="text/css" href="theme.css" />',
             '<main>*</main>',
             '<mark>*</mark>',
             '<menu type="context"><menuitem label="test" onclick="test"></menuitem></menu>',
-                // includes <menuitem>
+            // includes <menuitem>
             '<meta charset="UTF-8" /><link rel="stylesheet" type="text/css" href="theme.css" />',
             '<meter value="1" min="0" max="2">*</meter>',
             '<nav><a href="test.html"></a></nav>|<a href="test.html"></a>',
-                // <a> only included for completeness
+            // <a> only included for completeness
             '<noframes>*</noframes>',
             '<noscript>*</noscript>',
             '<object width="400" height="400" data="test.swf"><param name="custom_p" value="1" /></object>',
-                // includes <param>
+            // includes <param>
             '<picture><source media="(min-width: 650px)" srcset="test.jpg" /><img src="test.jpg" alt="" /></picture>|<img src="test.jpg" alt="" />',
-                // includes <source>; <img> only included for completeness
+            // includes <source>; <img> only included for completeness
             '<progress value="10" max="100"></progress>',
             '<ruby>*<rt><rp>*</rp>*<rp>*</rp></rt></ruby>',
-                // includes <rt> <rp>
+            // includes <rt> <rp>
             '<script>*</script>',
             '<section>*</section>',
             '<select><optgroup label="test"><option value="test">*</option></optgroup></select>',
-                // includes <optgroup> <option>
+            // includes <optgroup> <option>
             '<style>*</style>',
             '<summary>*</summary>',
             '<time>*</time>',
             '<title>*</title>',
             '<ul><li><datalist id="test"><option value="test"></option></datalist></li></ul>|<ul><li></li></ul>',
-                // <ul> <li> only included for completeness
+            // <ul> <li> only included for completeness
             '<video width="320" height="240"><track src="test.vtt" kind="subtitles" /></video>',
-                // includes <track>
+            // includes <track>
             '<wbr>*</wbr>',
         ];
 
@@ -174,12 +166,9 @@ class OcHTMLPurifierTest extends AbstractModuleTest
 
             $purifiedHtml = $this->htmlPurifier->purify($original);
             $purifiedHtml = str_replace('*', '', $purifiedHtml);
-            if ($purifiedHtml != $expected) {
-                $purified .= "$purifiedHtml\n";
-            }
-        }
 
-        self::assertEquals('', $purified);
+            self::assertEquals($purifiedHtml, $expected);
+        }
     }
 
     public function testAllowedCss()
@@ -260,18 +249,10 @@ class OcHTMLPurifierTest extends AbstractModuleTest
             'word-spacing:3px',
         ];
 
-        $original = '';
-        $purified = '';
-
         foreach ($allowed as $style) {
             $html = '<div style="' . $style . ';">*</div>';
             $purifiedHtml = $this->htmlPurifier->purify($html);
-            if ($purifiedHtml != $html) {
-                $original .= "$html\n";
-                $purified .= "$purifiedHtml\n";
-            }
+            self::assertEquals($purifiedHtml, $html);
         }
-
-        self::assertEquals($original, $purified);
     }
 }

@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         dirs: {
-            source: 'app/Resources/assets',
+            source: 'theme/frontend',
             destination: 'web/assets'
         },
 

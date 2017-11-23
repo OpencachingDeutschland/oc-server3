@@ -138,7 +138,8 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:all',
         'uglify',
-        'sass:development'
+        'sass:development',
+        'copyto:images'
     ]);
 
     grunt.registerTask('development:css', [
@@ -154,7 +155,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('development', [
         'development:js',
-        'development:css'
+        'development:css',
+        'copyto:images'
     ]);
 
     //Builds css&js once for production
@@ -162,7 +164,8 @@ module.exports = function (grunt) {
         'clean:all',
         'uglify:production',
         'sass:production',
-        'cssmin'
+        'cssmin',
+        'copyto:images'
     ]);
 
     grunt.task.renameTask('chokidar', 'watch');

@@ -9,4 +9,3 @@ $debug = true;
 
 $kernel = new AppKernel($env, $debug);
 $kernel->boot();
-

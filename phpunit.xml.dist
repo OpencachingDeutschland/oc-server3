@@ -28,7 +28,6 @@
             <directory>htdocs/util</directory>
             <directory>htdocs/util2</directory>
             <directory>htdocs/xml</directory>
-            <directory>htdocs/*.php</directory>
         </whitelist>
     </filter>
     <php>

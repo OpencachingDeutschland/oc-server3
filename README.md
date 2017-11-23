@@ -66,16 +66,22 @@ Your code will be reviewed, eventually merged to development and put online with
 Small changes may be directly released via stable branch.
 
 To update your working copy, add this repo as upstream ...
-* git remote add upstream https://github.com/OpencachingDeutschland/oc-server3.git
+```bash
+git remote add upstream https://github.com/OpencachingDeutschland/oc-server3.git
+```
 
 ... and regularly update your clone:
-* git checkout development
-* git pull upstream
+```bash
+git checkout development
+git pull upstream
+```
 
 NEVER use pull on a feature branch, but pull to development and then rebase the feature branch
 on development:
-* git checkout feature-branch
-* git pull --rebase upstream/development
+```bash
+git checkout feature-branch
+git pull --rebase upstream/development
+```
 
 Related Websites
 ----------------

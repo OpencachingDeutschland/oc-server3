@@ -116,6 +116,12 @@ PHP libraries
         URI     : https://github.com/shopwareLabs/psh
         Licens  : MIT
 
+   13.  php-cs-fixer
+        Path    : php-cs-fixer
+        URI     : https://github.com/FriendsOfPHP/PHP-CS-Fixer
+        Licens  : MIT
+
+
 
 JavaScript libraries
 --------------------

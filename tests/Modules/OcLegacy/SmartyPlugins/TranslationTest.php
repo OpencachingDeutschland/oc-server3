@@ -8,11 +8,6 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class TranslationTest extends AbstractModuleTest
 {
-    public function setUp()
-    {
-        $this->bootSymfonyKernel();
-    }
-
     public function testTranslation()
     {
         global $opt;

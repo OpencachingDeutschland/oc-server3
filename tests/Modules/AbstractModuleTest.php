@@ -17,12 +17,4 @@ abstract class AbstractModuleTest extends PHPUnitTestCase
 
         $this->dir = __DIR__;
     }
-
-    public function bootSymfonyKernel()
-    {
-        $debug = true;
-
-        $kernel = new \AppKernel('test', $debug);
-        $kernel->boot();
-    }
 }

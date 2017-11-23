@@ -75,8 +75,6 @@ class AttrsTest extends AbstractModuleTest
         self::assertArrayHasKey('A1', $response);
         self::assertArrayHasKey('A2', $response);
 
-
-
         self::assertEquals('Listed at Opencaching only', $response['A1']['name']);
     }
 }

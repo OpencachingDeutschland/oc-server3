@@ -5,6 +5,7 @@
 
 namespace Oc\Command;
 
+use Exception;
 use Leafo\ScssPhp\Compiler;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -61,16 +62,23 @@ class CreateWebCacheCommand extends ContainerAwareCommand
             $projectDir . '/web/assets',
             $projectDir . '/web/assets/css',
             $projectDir . '/web/assets/js',
+            $projectDir . '/web/assets/images',
         ];
 
         foreach ($paths as $path) {
             if (!file_exists($path)) {
-                mkdir($path, 0777, true);
+                mkdir($path, 0755, true);
             }
         }
 
-        $this->compileCss($projectDir);
-        $this->compileJs($projectDir);
+        try {
+            $this->compileCss($projectDir);
+            $this->compileJs($projectDir);
+            $this->copyImages($projectDir);
+        } catch (Exception $e) {
+            $this->output->writeln('<error>An exception occurred!</error>');
+            $this->output->writeln('<error>' . $e->getMessage() . '</error>');
+        }
 
         $output->writeln('WebCache generated');
     }
@@ -87,7 +95,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $applicationJsPath = $projectDir . '/app/Resources/assets/js/';
 
         if (!file_exists($applicationJsPath)) {
-            $this->output->writeln('- Javascript directory not found!');
+            $this->output->writeln('<comment>- Javascript directory not found!</comment>');
 
             return;
         }
@@ -109,7 +117,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
 
         file_put_contents($projectDir . '/web/assets/js/main.js', $js);
 
-        $this->output->writeln('- Javascript generated');
+        $this->output->writeln('<info>- Javascript generated</info>');
     }
 
     /**
@@ -168,6 +176,32 @@ class CreateWebCacheCommand extends ContainerAwareCommand
             $scss->compile(file_get_contents($applicationScssPath . '/legacy.scss'))
         );
 
-        $this->output->writeln('- Stylesheets generated');
+        $this->output->writeln('<info>- Stylesheets generated</info>');
+    }
+
+    /**
+     * @param string $projectDir
+     */
+    private function copyImages($projectDir)
+    {
+        $this->output->writeln('Copying images');
+
+        $source = $projectDir . '/app/Resources/assets/images';
+        $destination = $projectDir . '/web/assets/images';
+
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        foreach ($iterator as $item) {
+            if ($item->isDir()) {
+                mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+            } else {
+                copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+            }
+        }
+
+        $this->output->writeln('<info>- Images copied</info>');
     }
 }

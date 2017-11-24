@@ -29,11 +29,10 @@
             <directory>htdocs/util2</directory>
             <exclude>
                 <directory>htdocs/app/Migrations</directory>
+                <directory>htdocs/app/autoload.php</directory>
+                <directory>htdocs/okapi/index.php</directory>
             </exclude>
         </whitelist>
-        <blacklist>
-            <directory>htdocs/app/Migrations</directory>
-        </blacklist>
     </filter>
     <php>
         <env name="URL" value="http://local.team-opencaching.de"/>

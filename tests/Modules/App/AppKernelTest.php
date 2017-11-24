@@ -18,43 +18,44 @@ class AppKernelTest extends TestCase
      */
     private $kernel;
 
-    public function __construct($name = null, array $data = [], $dataName = '')
+    private function getKernel()
     {
-        parent::__construct($name, $data, $dataName);
-
+        if ($this->kernel) {
+            return $this->kernel;
+        }
         $kernel = new AppKernel($this->env, true);
         $kernel->boot();
 
-        $this->kernel = $kernel;
+        return $this->kernel = $kernel;
     }
 
     public function test_if_kernel_boots()
     {
-        $kernel = $this->kernel;
+        $kernel = $this->getKernel();
         self::assertInstanceOf(AppKernel::class, $kernel::getInstance());
     }
 
     public function test_registerBundles_returns_array()
     {
-        self::assertInternalType('array', $this->kernel->registerBundles());
+        self::assertInternalType('array', $this->getKernel()->registerBundles());
 
-        self::assertCount(16, $this->kernel->registerBundles());
+        self::assertCount(16, $this->getKernel()->registerBundles());
     }
 
     public function test_getCacheDir_returns_environment_suffixed_directory()
     {
-        self::assertContains($this->env, $this->kernel->getCacheDir());
+        self::assertContains($this->env, $this->getKernel()->getCacheDir());
     }
 
     public function test_getLogDir_returns_environment_suffixed_directory()
     {
-        self::assertContains($this->env, $this->kernel->getLogDir());
+        self::assertContains($this->env, $this->getKernel()->getLogDir());
     }
 
     public function test_registerContainerFonciguration_loads_environment_suffixed_config_file()
     {
         $loaderDummy = new ConfigLoaderDummy();
-        $this->kernel->registerContainerConfiguration($loaderDummy);
+        $this->getKernel()->registerContainerConfiguration($loaderDummy);
 
         self::assertContains($this->env, $loaderDummy->getLoadedResource());
     }

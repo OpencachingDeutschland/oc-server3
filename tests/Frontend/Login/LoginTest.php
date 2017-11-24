@@ -5,7 +5,6 @@
 
 namespace OcTest\Frontend\Login;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use OcTest\Frontend\AbstractFrontendTest;
 
 class LoginTest extends AbstractFrontendTest

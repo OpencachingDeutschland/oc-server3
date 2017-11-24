@@ -27,7 +27,13 @@
             <directory>htdocs/okapi</directory>
             <directory>htdocs/util</directory>
             <directory>htdocs/util2</directory>
+            <exclude>
+                <directory>htdocs/app/Migrations</directory>
+            </exclude>
         </whitelist>
+        <blacklist>
+            <directory>htdocs/app/Migrations</directory>
+        </blacklist>
     </filter>
     <php>
         <env name="URL" value="http://local.team-opencaching.de"/>

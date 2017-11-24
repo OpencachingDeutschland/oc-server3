@@ -35,9 +35,6 @@ class SiteMapXml
         $this->sDomain = $sDomain;
 
         $this->oIndexFile = fopen($sPath . 'sitemap.xml', 'wb');
-        if ($this->oIndexFile === false) {
-            return false;
-        }
 
         fwrite($this->oIndexFile, '<?xml version="1.0" encoding="UTF-8"?>' . "\n");
         fwrite($this->oIndexFile, '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">');
@@ -53,17 +50,17 @@ class SiteMapXml
      * @param string $sChangeFreq
      * @param float $nPriority
      */
-    public function write($sFile, $dLastMod, $sChangeFreq, $nPriority = 0.5)
+    public function write($sFile, $dLastMod, $sChangeFreq = null, $nPriority = 0.5)
     {
         if (!$sChangeFreq) {
             $sChangeFreq = $this->sDefaultChangeFreq;
         }
 
         $sXML = '<url>';
-        $sXML .= '<loc>' . xmlentities($this->sDomain . $sFile) . '</loc>';
-        $sXML .= '<lastmod>' . xmlentities(date('c', $dLastMod)) . '</lastmod>';
-        $sXML .= '<changefreq>' . xmlentities($sChangeFreq) . '</changefreq>';
-        $sXML .= '<priority>' . xmlentities($nPriority) . '</priority>';
+        $sXML .= '<loc>' . \xmlentities($this->sDomain . $sFile) . '</loc>';
+        $sXML .= '<lastmod>' . \xmlentities(date('c', $dLastMod)) . '</lastmod>';
+        $sXML .= '<changefreq>' . \xmlentities($sChangeFreq) . '</changefreq>';
+        $sXML .= '<priority>' . \xmlentities($nPriority) . '</priority>';
         $sXML .= '</url>' . "\n";
 
         $this->writeInternal($sXML);
@@ -89,8 +86,8 @@ class SiteMapXml
 
             fwrite(
                 $this->oIndexFile,
-                '<sitemap><loc>' . xmlentities($this->sDomain . $sFilename) . '</loc>' .
-                '<lastmod>' . xmlentities(date('c')) . '</lastmod></sitemap>'
+                '<sitemap><loc>' . \xmlentities($this->sDomain . $sFilename) . '</loc>' .
+                '<lastmod>' . \xmlentities(date('c')) . '</lastmod></sitemap>'
             );
 
             gzwrite($this->oSiteMapFile, '<?xml version="1.0" encoding="UTF-8"?>' . "\n");

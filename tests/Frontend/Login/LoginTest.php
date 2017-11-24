@@ -5,17 +5,10 @@
 
 namespace OcTest\Frontend\Login;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use OcTest\Frontend\AbstractFrontendTest;
 
 class LoginTest extends AbstractFrontendTest
 {
-    /**
-     * @group frontend
-     * @group frontend-login
-     *
-     * @throws ElementNotFoundException if the searched element is not found
-     */
     public function testLoginFormOnStartPage()
     {
         $page = $this->session->getPage();

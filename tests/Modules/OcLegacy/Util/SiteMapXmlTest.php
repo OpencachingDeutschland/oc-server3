@@ -27,7 +27,6 @@ class SiteMapXmlTest extends AbstractModuleTest
 
     private function deleteSiteMap()
     {
-        return;
         if (file_exists($this->siteMapFile)) {
             unlink($this->siteMapFile);
         }

@@ -50,7 +50,7 @@ class QrCodeController extends Controller
             ->setLabel('www.opencaching.de', 16, null, LabelAlignment::CENTER)
             ->setValidateResult(false);
 
-        $logo = imagecreatefrompng(__DIR__ . '/../../../../theme/frontend/images/logo/oc-logo.png');
+        $logo = imagecreatefrompng(__DIR__ . '/../../../../theme/frontend/images/logo/qr-code-oc-logo.png');
         $qrCodeGenerated = imagecreatefromstring($qrCode->writeString());
 
         imagecopy(

@@ -38,7 +38,7 @@ class QrCodeController extends Controller
         }
 
         $qrCode = new QrCode('https://www.opencaching.de/' . $geoCache->wpOc);
-        $qrCode->setSize(300);
+        $qrCode->setSize(400);
 
         $qrCode
             ->setWriterByName('png')
@@ -48,14 +48,24 @@ class QrCodeController extends Controller
             ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
             ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255])
             ->setLabel('www.opencaching.de', 16, null, LabelAlignment::CENTER)
-            ->setLogoPath(__DIR__ . '/../../../../theme/frontend/images/logo/oc-logo.png')
-            ->setLogoWidth(250)
             ->setValidateResult(false);
 
-        return new Response(
-            $qrCode->writeString(),
-            Response::HTTP_OK,
-            ['Content-Type' => $qrCode->getContentType()]
+        $logo = imagecreatefrompng(__DIR__ . '/../../../../theme/frontend/images/logo/oc-logo.png');
+        $qrCodeGenerated = imagecreatefromstring($qrCode->writeString());
+
+        imagecopy(
+            $qrCodeGenerated,
+            $logo,
+            150,
+            150,
+            0,
+            0,
+            imagesx($logo),
+            imagesy($logo)
         );
+
+        header('Content-Type: image/png');
+        imagepng($qrCodeGenerated);
+        imagedestroy($qrCodeGenerated);
     }
 }

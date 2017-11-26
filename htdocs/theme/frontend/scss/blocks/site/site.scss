@@ -1,19 +1,13 @@
 @import 'global';
 
 .site {
-    @include make-container();
-
     &__inner {
-        @include make-row();
-
         &-sidebar {
             @extend %fixed-left;
             width: $sidebar---width;
         }
 
         &-main {
-            @include make-col(9);
-
             margin-left: $sidebar---width;
         }
     }

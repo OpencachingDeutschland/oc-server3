@@ -13,6 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
@@ -100,19 +102,36 @@ class CreateWebCacheCommand extends ContainerAwareCommand
             return;
         }
 
-        $rii = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($applicationJsPath));
+        $vendorFiles = [
+            $projectDir . '/vendor/components/jquery/jquery.min.js'
+        ];
+
+        $filesJson = json_decode(file_get_contents($projectDir . '/theme/frontend/js/files.json'), true);
+        $ownFiles = $filesJson['files'];
+
+        $ownFiles = array_map(function($file) use ($applicationJsPath) {
+            if (strpos($file, '**') !== false) {
+                return null;
+            }
+
+            return $applicationJsPath . $file;
+        }, $ownFiles);
+
+        $ownFiles = array_filter($ownFiles, 'is_string');
+
+        $finder = new Finder();
+        $finder->in($applicationJsPath . '/plugins/')->name('*.js');
+
+        $jsPlugins = array_map(function($file) {
+            return $file->getRealPath();
+        }, iterator_to_array($finder->files()));
+
+        $jsFiles = array_merge($vendorFiles, $ownFiles, array_values($jsPlugins));
 
         $js = '';
 
-        /**
-         * @var SplFileInfo
-         */
-        foreach ($rii as $file) {
-            if ($file->isDir() || $file->getExtension() !== 'js') {
-                continue;
-            }
-
-            $js .= file_get_contents($file->getRealPath()) . PHP_EOL;
+        foreach ($jsFiles as $file) {
+            $js .= file_get_contents($file) . PHP_EOL;
         }
 
         file_put_contents($projectDir . '/web/assets/js/main.js', $js);
@@ -189,18 +208,8 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $source = $projectDir . '/theme/frontend/images';
         $destination = $projectDir . '/web/assets/images';
 
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::SELF_FIRST
-        );
-
-        foreach ($iterator as $item) {
-            if ($item->isDir()) {
-                mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-            } else {
-                copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-            }
-        }
+        $fs = new Filesystem();
+        $fs->mirror($source, $destination);
 
         $this->output->writeln('<info>- Images copied</info>');
     }

@@ -25,7 +25,7 @@
     "grunt-sass": "^2.0.0",
     "grunt-sass-tilde-importer": "^1.0.2",
     "grunt-scss-lint": "^0.3.8",
-    "jquery": "^2",
+    "jquery": "^3.2",
     "jscs": "^3.0.7",
     "load-grunt-tasks": "^3.5.2",
     "node-sass": "^3.13.0",

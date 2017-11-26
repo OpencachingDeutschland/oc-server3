@@ -48,7 +48,7 @@ class QrCodeController extends Controller
             ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
             ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255])
             ->setLabel('www.opencaching.de', 16, null, LabelAlignment::CENTER)
-            ->setLogoPath(__DIR__ . '/../../../../theme/img/logo/oc-logo.png')
+            ->setLogoPath(__DIR__ . '/../../../../theme/frontend/images/logo/oc-logo.png')
             ->setLogoWidth(250)
             ->setValidateResult(false);
 

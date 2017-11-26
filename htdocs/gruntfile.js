@@ -2,9 +2,23 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
+    var sourcePath = 'theme/frontend';
+
+    var vendorJsFiles = [
+        '<%= dirs.composer %>/components/jquery/jquery.min.js'
+    ];
+    var ownJsFiles = grunt.file.readJSON('theme/frontend/js/files.json').files;
+
+    ownJsFiles = ownJsFiles.map(function(file) {
+        return sourcePath + '/js/' + file;
+    });
+
+    var jsFiles = vendorJsFiles.concat(ownJsFiles);
+
     grunt.initConfig({
         dirs: {
-            source: 'theme/frontend',
+            composer: 'vendor',
+            source: sourcePath,
             destination: 'web/assets'
         },
 
@@ -27,8 +41,13 @@ module.exports = function (grunt) {
         copyto: {
             images: {
                 files: [
-                    {cwd: '<%= dirs.source %>/images/', src: ['**/*'], dest: '<%= dirs.destination %>/images/', expand: true}
-                ],
+                    {
+                        cwd: '<%= dirs.source %>/images/',
+                        src: ['**/*'],
+                        dest: '<%= dirs.destination %>/images/',
+                        expand: true
+                    }
+                ]
             }
         },
         sass: {
@@ -81,9 +100,7 @@ module.exports = function (grunt) {
                     reserveDOMProperties: true
                 },
                 files: {
-                    '<%= dirs.destination %>/js/main.js': [
-                        '<%= dirs.source %>/js/**/*.js'
-                    ]
+                    '<%= dirs.destination %>/js/main.js': jsFiles
                 }
             },
             development: {
@@ -93,6 +110,9 @@ module.exports = function (grunt) {
                     mangle: false,
                     compress: false
                 },
+                files: {
+                    '<%= dirs.destination %>/js/main.js': jsFiles
+                }
             },
         },
         watch: {

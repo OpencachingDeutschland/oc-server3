@@ -1,8 +1,6 @@
 @import 'global';
 
 .flash-messages {
-    @include make-container();
-
     &__alert {
         @include make-row();
         @include make-col(12);

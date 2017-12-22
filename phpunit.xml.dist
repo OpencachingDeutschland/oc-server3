@@ -5,6 +5,7 @@
     bootstrap="tests/bootstrap.php"
     colors="true"
     verbose="true"
+    printerClass="Codedungeon\PHPUnitPrettyResultPrinter\Printer"
 >
     <php>
         <server name="KERNEL_DIR" value="htdocs/app" />

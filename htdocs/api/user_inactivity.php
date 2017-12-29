@@ -22,7 +22,7 @@ if (isset($_REQUEST['key'], $opt['logic']['api']['user_inactivity']['key'], $_RE
         [':userId' => $_REQUEST['userid']]
     );
 
-    if ($loginLag) {
+    if ($loginLag !== null) {
         echo floor($loginLag / 30.5);
     } else {
         echo 'unknown';

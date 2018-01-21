@@ -25,7 +25,7 @@
     "opencaching/okapi": "dev-master",
     "opencaching/kitchensink-bundle": "1.0.6",
     "endroid/qrcode": "^2.4",
-    "twbs/bootstrap": "v4.0.0-beta.2",
+    "twbs/bootstrap": "^v4.0.0",
     "symfony-cmf/menu-bundle": "^2.1",
     "components/jquery": "^3.2"
   },

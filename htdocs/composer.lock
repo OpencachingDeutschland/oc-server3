@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8edf60c2072751bc1672788e2c35803",
+    "content-hash": "7b7c78fe58fd649a91318c7f15016141",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1125,12 +1125,12 @@
             "version": "2.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/endroid/QrCode.git",
+                "url": "https://github.com/endroid/qr-code.git",
                 "reference": "a9a57ab57ac75928fcdcfb2a71179963ff6fe573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/QrCode/zipball/a9a57ab57ac75928fcdcfb2a71179963ff6fe573",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/a9a57ab57ac75928fcdcfb2a71179963ff6fe573",
                 "reference": "a9a57ab57ac75928fcdcfb2a71179963ff6fe573",
                 "shasum": ""
             },
@@ -1187,6 +1187,7 @@
                 "qrcode",
                 "symfony"
             ],
+            "abandoned": "endroid/qr-code",
             "time": "2017-10-22T18:56:00+00:00"
         },
         {
@@ -3312,16 +3313,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v4.0.0-beta.2",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "fc94de5b8b5b329a298eeeb76174b146ff17af2d"
+                "reference": "8a628b943cf31ca0a002c08af661a95772480225"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/fc94de5b8b5b329a298eeeb76174b146ff17af2d",
-                "reference": "fc94de5b8b5b329a298eeeb76174b146ff17af2d",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/8a628b943cf31ca0a002c08af661a95772480225",
+                "reference": "8a628b943cf31ca0a002c08af661a95772480225",
                 "shasum": ""
             },
             "replace": {
@@ -3359,7 +3360,7 @@
                 "sass",
                 "web"
             ],
-            "time": "2017-10-19T19:23:29+00:00"
+            "time": "2018-01-18T18:29:48+00:00"
         },
         {
             "name": "twig/extensions",
@@ -5731,8 +5732,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "opencaching/okapi": 20,
-        "twbs/bootstrap": 10
+        "opencaching/okapi": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

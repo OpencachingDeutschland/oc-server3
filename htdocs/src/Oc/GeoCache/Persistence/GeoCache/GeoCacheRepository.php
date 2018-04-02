@@ -148,7 +148,7 @@ class GeoCacheRepository
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->where("IFELSE(wp_gc_maintained = '', wp_gc, g.wp_gc_maintained) = :waypoint")
+            ->where("IF(wp_gc_maintained = '', wp_gc, wp_gc_maintained) = :waypoint")
             ->setParameter(':waypoint', $waypoint)
             ->setMaxResults(1);
 

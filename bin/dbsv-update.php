@@ -63,7 +63,7 @@ do {
 
 // Ensure that all tables have the right charset, including added tables:
 check_tables_charset($opt['db']['placeholder']['db']);
-//check_tables_storage_engine($opt['db']['placeholder']['db']);
+check_tables_storage_engine($opt['db']['placeholder']['db']);
 
 return;
 
@@ -133,8 +133,6 @@ function check_tables_charset($database)
 
 function check_tables_storage_engine($database)
 {
-    // DO NOT USE at the moment!!!
-    return;
     # migrate tables
     $rs = sql(
         "SELECT TABLE_NAME

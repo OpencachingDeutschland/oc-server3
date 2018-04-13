@@ -48,10 +48,10 @@
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+            <td><img src="{$opt.page.teampic_url}schatzforscher.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
-                Kassenwart & Leiter Technik/Systemadministration
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
+                Kassenwart & unterstützt auch im Support
             </td>
         </tr>
         <tr>
@@ -59,10 +59,10 @@
             </th>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
+            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
-                Pressesprecher; Support-Team, Datenpflege, Forenmoderation
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
+                Leiter Technik/Systemadministration
             </td>
         </tr>
         <tr>
@@ -72,6 +72,21 @@
                 Leitung Support-Team, Datenpflege
             </td>
         </tr>
+        <tr>
+            <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
+            <td>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
+                Community-Manager, Support-Team, Forenmoderation
+            </td>
+        </tr>
+        <tr>
+            <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
+            <td>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                Presseschef, Öffentlichkeitsarbeit & Softwareentwicklung
+            </td>
+        </tr>
+
         <tr>
             <td></td>
             <td></td>
@@ -125,20 +140,6 @@
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                 Softwareentwicklung
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
-                Support
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
-                Softwareentwicklung & Öffentlichkeitsarbeit
             </td>
         </tr>
         <tr>

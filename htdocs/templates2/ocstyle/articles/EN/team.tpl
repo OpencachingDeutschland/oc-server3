@@ -30,9 +30,10 @@
                 </td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
-                    treasurer & head of system administration
+                <td><img src="{$opt.page.teampic_url}schatzforscher.jpg"/></td>
+                <td>
+                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
+                    treasurer & helping support additionaly
                 </td>
             </tr>
             <tr>
@@ -41,9 +42,9 @@
                 </th>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
-                    press spokesman; user support, data maintenance, message board moderation
+                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
+                    head of system administration
                 </td>
             </tr>
             <tr>
@@ -51,6 +52,18 @@
                 <td>
                     <a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a>
                     <br/>head of user support and data maintenance, wiki
+                </td>
+            </tr>
+            <tr>
+                <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
+                    community manager; user support, message board moderation
+                </td>
+            </tr>
+            <tr>
+                <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                    press spokesman & public relation & software development
                 </td>
             </tr>
             <tr>
@@ -97,19 +110,6 @@
                 <td>
                     <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                     software development
-                </td>
-            </tr>
-            <tr>
-                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-                <td>
-                    <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
-                    user support
-                </td>
-            </tr>
-            <tr>
-                <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
-                    software development & public relation
                 </td>
             </tr>
             <tr>

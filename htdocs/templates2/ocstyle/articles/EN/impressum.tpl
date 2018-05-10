@@ -65,7 +65,7 @@
         <ul class="indent narrowlist">
             <li>Mirco Baumann, chairman</li>
             <li>Thomas Eiling, vice chairman</li>
-            <li>Christoph Convent, treasurer</li>
+            <li>John Marco, treasurer</li>
         </ul>
     </p>
 

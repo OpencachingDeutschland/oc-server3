@@ -78,13 +78,13 @@
         Mit Eintragung der geänderten Satzung vom 28.05.2017 ist jeder geschäftsführende Vorstand einzeln vertretungsberechtigt.
     </p>
     <p>
-        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 28.05.2017):
+        Der gesch&auml;ftsf&uuml;hrende Vorstand besteht aus (Stand 21.01.2018):
     </p>
     <p>
         <ul class="indent narrowlist">
             <li>Mirco Baumann, 1. Vorsitzender</li>
             <li>Thomas Eiling, 2. Vorsitzender</li>
-            <li>John Marco, Kassenwart</li>
+            <li>John Marco Ens, Kassenwart</li>
         </ul>
     </p>
 

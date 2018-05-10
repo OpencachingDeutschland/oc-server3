@@ -59,13 +59,13 @@
     </p>
 
     <p>
-        The managing comittee are (as of November 26th, 2014):
+        The managing comittee are (as of January 21th, 2018):
     </p>
     <p>
         <ul class="indent narrowlist">
             <li>Mirco Baumann, chairman</li>
             <li>Thomas Eiling, vice chairman</li>
-            <li>John Marco, treasurer</li>
+            <li>John Marco Ens, treasurer</li>
         </ul>
     </p>
 

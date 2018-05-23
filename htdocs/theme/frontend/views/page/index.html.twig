@@ -5,11 +5,14 @@
 
 {% block body %}
     {% for pageBlock in pageBlocks %}
-        <div class="ctl-impressum">
-            <div class="content2-pagetitle">
-                {{ pageBlock.title}}
+        <div id="block-{{ pageBlock.id}}" class="ctl__page">
+            <a class="anchorjs-link " href="#block-{{ pageBlock.id}}" aria-label="Anchor" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a>
+            <div class="page__block-title">
+                {{ pageBlock.title|raw}}
             </div>
-            {{ pageBlock.html|raw }}
+            <div class="page__block-html">
+                {{ pageBlock.html|raw }}
+            </div>
         </div>
     {% endfor %}
 {% endblock %}

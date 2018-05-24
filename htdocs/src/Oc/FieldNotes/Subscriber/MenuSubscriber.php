@@ -19,7 +19,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MenuEnum::MENU_MAIN => 'onConfigureMainMenu',
+            MenuEnum::MENU_MAIN => ['onConfigureMainMenu', 80],
         ];
     }
 

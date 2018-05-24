@@ -1,6 +1,6 @@
 <?php
 
-namespace Oc\Changelog\Subscriber;
+namespace Oc\Index\Subscriber;
 
 use Oc\Menu\Event\MenuEvent;
 use Oc\Menu\MenuEnum;
@@ -19,7 +19,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MenuEnum::MENU_MAIN => ['onConfigureMenu', 70],
+            MenuEnum::MENU_MAIN => ['onConfigureMenu', 100],
         ];
     }
 
@@ -29,9 +29,16 @@ class MenuSubscriber implements EventSubscriberInterface
     public function onConfigureMenu(MenuEvent $event)
     {
         $event->getCurrentItem()->addChild(
-            'Changelog',
+            'Startseite',
             [
-                'route' => 'changelog.index',
+                'uri' => '/',
+            ]
+        );
+
+        $event->getCurrentItem()->addChild(
+            'Karte',
+            [
+                'uri' => '/map2.php',
             ]
         );
     }

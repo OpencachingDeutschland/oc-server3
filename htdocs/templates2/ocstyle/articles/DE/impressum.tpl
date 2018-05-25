@@ -335,19 +335,3 @@
     </p>
     <br />
 </div>
-
-<div class="content2-container bg-blue02">
-    <p class="content-title-noshade-size3">
-        &nbsp;<span class="txt-black">§</span> &nbsp;
-        Hinweise zum Datenschutz
-    </p>
-</div>
-<div class="content-txtbox-noshade" style="padding-right: 25px;">
-    <p>
-        Die Datenschutzbelehrung kann auf folgender Seite abgerufen werden:
-    </p>
-    <p>
-        <a href="articles.php?page=dsb">https://www.opencaching.de/articles.php?page=dsb</a>
-    </p>
-    <br />
-</div>

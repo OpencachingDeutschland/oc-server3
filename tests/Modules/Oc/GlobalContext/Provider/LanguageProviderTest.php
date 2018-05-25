@@ -86,7 +86,7 @@ class LanguageProviderTest extends TestCase
             $this->getRequestMock()
         );
 
-        self::assertSame('first', $preferredLanguage);
+        self::assertSame('de', $preferredLanguage);
     }
 
     /**
@@ -153,7 +153,7 @@ class LanguageProviderTest extends TestCase
      */
     private function getAvailableTranslations()
     {
-        return ['first', 'second', 'third', 'fourth'];
+        return ['de', 'en', 'es', 'fr'];
     }
 
     /**

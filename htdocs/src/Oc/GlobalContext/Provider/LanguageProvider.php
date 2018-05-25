@@ -79,7 +79,9 @@ class LanguageProvider
         // Determine preferred language by Accepted-Language header and the available translations.
         $preferredLanguage = $request->getPreferredLanguage($availableTranslations);
 
-        return $preferredLanguage ?: $this->defaultLanguage;
+        $locale = substr($preferredLanguage, 0, 2);
+
+        return $locale ?: $this->defaultLanguage;
     }
 
     /**

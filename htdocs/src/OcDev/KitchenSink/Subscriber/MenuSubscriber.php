@@ -19,18 +19,8 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            MenuEnum::MENU_MAIN => 'onConfigureMenu',
-            MenuEnum::MENU_MAIN . '.kitchensink' => 'onConfigureKitchensinkMenu',
+            MenuEnum::MENU_MAIN => ['onConfigureMenu', 60],
         ];
-    }
-
-    /**
-     * @param MenuEvent $event
-     */
-    public function onConfigureKitchensinkMenu(MenuEvent $event)
-    {
-        $event->getCurrentItem()->addChild('Test1');
-        $event->getCurrentItem()->addChild('Test2');
     }
 
     /**

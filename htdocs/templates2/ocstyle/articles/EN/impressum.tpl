@@ -290,19 +290,3 @@
 
     <br />
 </div>
-
-<div class="content2-container bg-blue02">
-    <p class="content-title-noshade-size3">
-        <img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
-        Data privacy
-    </p>
-</div>
-
-<div class="content-txtbox-noshade" style="padding-right: 25px;">
-    <p>
-        Our data privacy disclaimer and policy is available at
-        <a href="articles.php?page=dsb">https://www.opencaching.de/articles.php?page=dsb</a>.
-    </p>
-
-    <br />
-</div>

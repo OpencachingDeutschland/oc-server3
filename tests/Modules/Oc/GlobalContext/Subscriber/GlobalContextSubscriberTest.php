@@ -83,7 +83,7 @@ class GlobalContextSubscriberTest extends TestCase
      */
     private function getGlobalContextSubscriber($called = true)
     {
-        $globalContext = new GlobalContext('de');
+        $globalContext = new GlobalContext('de', 'de');
 
         $factory = $this->createMock(GlobalContextFactory::class);
         $factory->expects($called ? self::once() : self::never())

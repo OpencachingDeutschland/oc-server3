@@ -2,6 +2,10 @@ general:
     error:
         unknown_error: 'An unknown error occurred!'
 
+language:
+    de: 'German'
+    en: 'English'
+
 field_notes:
     btn:
         delete: Delete
@@ -53,6 +57,7 @@ geocache:
 
 page:
     fallback:
+        wrong_locale: 'This page is not available in your language. As an alternative we display the %language% version for you.'
         not_translated: 'This page currently has no translation.'
 
 array_util:

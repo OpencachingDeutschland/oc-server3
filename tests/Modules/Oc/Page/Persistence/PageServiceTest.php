@@ -1,10 +1,10 @@
 <?php
 
-namespace OcTest\Modules\Oc\User;
+namespace OcTest\Modules\Oc\Page\Persistence;
 
-use Oc\Page\PageEntity;
-use Oc\Page\PageRepository;
-use Oc\Page\PageService;
+use Oc\Page\Persistence\PageEntity;
+use Oc\Page\Persistence\PageRepository;
+use Oc\Page\Persistence\PageService;
 use Oc\Repository\Exception\RecordNotFoundException;
 use OcTest\Modules\TestCase;
 

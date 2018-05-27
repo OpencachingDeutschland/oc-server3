@@ -16,9 +16,11 @@ class GlobalContextTest extends TestCase
     public function testGlobalContextGetter()
     {
         $language = 'de';
+        $defaultLocale = 'en';
 
-        $globalContext = new GlobalContext($language);
+        $globalContext = new GlobalContext($defaultLocale, $language);
 
+        self::assertSame($defaultLocale, $globalContext->getDefaultLocale());
         self::assertSame($language, $globalContext->getLocale());
     }
 }

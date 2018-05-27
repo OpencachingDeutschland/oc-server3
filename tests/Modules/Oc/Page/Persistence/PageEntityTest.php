@@ -1,9 +1,9 @@
 <?php
 
-namespace OcTest\Modules\Oc\User;
+namespace OcTest\Modules\Oc\Page\Persistence;
 
 use DateTime;
-use Oc\Page\PageEntity;
+use Oc\Page\Persistence\PageEntity;
 use OcTest\Modules\TestCase;
 
 /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Oc\Page;
+namespace Oc\Page\Persistence;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;

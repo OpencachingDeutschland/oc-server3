@@ -2,11 +2,15 @@
 
 namespace Oc\Page\Controller;
 
+use Exception;
 use Oc\AbstractController;
-use Oc\Page\BlockService;
-use Oc\Page\PageService;
+use Oc\GlobalContext\GlobalContext;
+use Oc\Page\Exception\PageNotFoundException;
+use Oc\Page\Exception\PageTranslationNotFoundException;
+use Oc\Page\PageProvider;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Class PageController
@@ -14,24 +18,25 @@ use Symfony\Component\HttpFoundation\Response;
 class PageController extends AbstractController
 {
     /**
-     * @var PageService
+     * @var PageProvider
      */
-    private $pageService;
+    private $pageProvider;
+
     /**
-     * @var BlockService
+     * @var TranslatorInterface
      */
-    private $blockService;
+    private $translator;
 
     /**
      * PageController constructor.
      *
-     * @param PageService $pageService
-     * @param BlockService $blockService
+     * @param PageProvider $pageProvider
+     * @param TranslatorInterface $translator
      */
-    public function __construct(PageService $pageService, BlockService $blockService)
+    public function __construct(PageProvider $pageProvider, TranslatorInterface $translator)
     {
-        $this->pageService = $pageService;
-        $this->blockService = $blockService;
+        $this->translator = $translator;
+        $this->pageProvider = $pageProvider;
     }
 
     /**
@@ -45,31 +50,28 @@ class PageController extends AbstractController
      */
     public function indexAction($slug)
     {
-        $slug = strtolower($slug);
         $this->setMenu(MNU_START);
 
-        $page = $this->pageService->fetchOneBy([
-            'slug' => $slug,
-            'active' => 1,
-        ]);
-
-        if (!$page) {
+        try {
+            $pageStruct = $this->pageProvider->getPageBySlug($slug);
+        } catch (PageNotFoundException $e) {
+            throw $this->createNotFoundException();
+        } catch (PageTranslationNotFoundException $e) {
+            return $this->render('page/fallback.html.twig');
+        } catch (Exception $e) {
             throw $this->createNotFoundException();
         }
 
-        $pageBlocks = $this->blockService->fetchBy([
-            'page_id' => $page->id,
-            'locale' => $this->getGlobalContext()->getLocale(),
-            'active' => 1,
-        ]);
-
-        if (count($pageBlocks) === 0) {
-            return $this->render('page/fallback.html.twig');
+        if ($pageStruct->isFallback()) {
+            $this->addInfoMessage(
+                $this->translator->trans('page.fallback.wrong_locale', [
+                    '%language%' => $this->translator->trans('language.' . $pageStruct->getFallbackLocale())
+                ])
+            );
         }
 
         return $this->render('page/index.html.twig', [
-            'page' => $page,
-            'pageBlocks' => $pageBlocks,
+            'pageStruct' => $pageStruct
         ]);
     }
 }

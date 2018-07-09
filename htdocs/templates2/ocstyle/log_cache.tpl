@@ -73,7 +73,7 @@ function logtype_changed()
         datecomment.innerHTML = "";
 
     {if $use_log_pw}
-        if (logtype == 1)
+        if (logtype == 1 || logtype == 7)
             document.getElementById("cachelisting-logpw").style.display = "block";
         else
             document.getElementById("cachelisting-logpw").style.display = "none";

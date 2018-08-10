@@ -21,7 +21,6 @@ framework:
         engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
         storage_id: session.storage.native
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id

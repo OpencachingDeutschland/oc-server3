@@ -211,8 +211,6 @@ class GeoCacheRepository
             ['cache_id' => $entity->cacheId]
         );
 
-        $entity->cacheId = (int) $this->connection->lastInsertId();
-
         return $entity;
     }
 

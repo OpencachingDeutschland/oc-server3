@@ -202,23 +202,23 @@ class PicturesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new PicturesEntity();
-        $entity->id = $data['id'];
-        $entity->uuid = $data['uuid'];
-        $entity->node = $data['node'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->url = $data['url'];
-        $entity->title = $data['title'];
-        $entity->lastUrlCheck = $data['last_url_check'];
-        $entity->objectId = $data['object_id'];
-        $entity->objectType = $data['object_type'];
-        $entity->thumbUrl = $data['thumb_url'];
-        $entity->thumbLastGenerated = $data['thumb_last_generated'];
-        $entity->spoiler = $data['spoiler'];
-        $entity->local = $data['local'];
-        $entity->unknownFormat = $data['unknown_format'];
-        $entity->display = $data['display'];
-        $entity->mappreview = $data['mappreview'];
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->url = (string) $data['url'];
+        $entity->title = (string) $data['title'];
+        $entity->lastUrlCheck =  new DateTime($data['last_url_check']);
+        $entity->objectId = (int) $data['object_id'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->thumbUrl = (string) $data['thumb_url'];
+        $entity->thumbLastGenerated =  new DateTime($data['thumb_last_generated']);
+        $entity->spoiler = (int) $data['spoiler'];
+        $entity->local = (int) $data['local'];
+        $entity->unknownFormat = (int) $data['unknown_format'];
+        $entity->display = (int) $data['display'];
+        $entity->mappreview = (int) $data['mappreview'];
         $entity->seq = $data['seq'];
 
         return $entity;

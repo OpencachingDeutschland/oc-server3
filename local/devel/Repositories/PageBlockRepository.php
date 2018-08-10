@@ -192,14 +192,14 @@ class PageBlockRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new PageBlockEntity();
-        $entity->id = $data['id'];
-        $entity->pageId = $data['page_id'];
-        $entity->locale = $data['locale'];
-        $entity->title = $data['title'];
-        $entity->html = $data['html'];
-        $entity->position = $data['position'];
-        $entity->updatedAt = $data['updated_at'];
-        $entity->active = $data['active'];
+        $entity->id = (int) $data['id'];
+        $entity->pageId = (int) $data['page_id'];
+        $entity->locale = (string) $data['locale'];
+        $entity->title = (string) $data['title'];
+        $entity->html = (string) $data['html'];
+        $entity->position = (int) $data['position'];
+        $entity->updatedAt =  new DateTime($data['updated_at']);
+        $entity->active = (int) $data['active'];
 
         return $entity;
     }

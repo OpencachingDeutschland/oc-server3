@@ -188,10 +188,10 @@ class NpaTypesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NpaTypesEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->ordinal = $data['ordinal'];
-        $entity->noWarning = $data['no_warning'];
+        $entity->id = (string) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->ordinal = (int) $data['ordinal'];
+        $entity->noWarning = (int) $data['no_warning'];
 
         return $entity;
     }

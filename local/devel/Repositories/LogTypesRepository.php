@@ -195,17 +195,17 @@ class LogTypesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LogTypesEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->permission = $data['permission'];
-        $entity->cacheStatus = $data['cache_status'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
-        $entity->iconSmall = $data['icon_small'];
-        $entity->allowRating = $data['allow_rating'];
-        $entity->requirePassword = $data['require_password'];
-        $entity->maintenanceLogs = $data['maintenance_logs'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->permission = (string) $data['permission'];
+        $entity->cacheStatus = (int) $data['cache_status'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->iconSmall = (string) $data['icon_small'];
+        $entity->allowRating = (int) $data['allow_rating'];
+        $entity->requirePassword = (int) $data['require_password'];
+        $entity->maintenanceLogs = (int) $data['maintenance_logs'];
 
         return $entity;
     }

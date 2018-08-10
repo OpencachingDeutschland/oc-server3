@@ -186,8 +186,8 @@ class CacheMapsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheMapsEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->lastRefresh = $data['last_refresh'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->lastRefresh =  new DateTime($data['last_refresh']);
 
         return $entity;
     }

@@ -187,9 +187,9 @@ class LogentriesTypesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LogentriesTypesEntity();
-        $entity->id = $data['id'];
-        $entity->module = $data['module'];
-        $entity->eventname = $data['eventname'];
+        $entity->id = (int) $data['id'];
+        $entity->module = (string) $data['module'];
+        $entity->eventname = (string) $data['eventname'];
 
         return $entity;
     }

@@ -193,15 +193,15 @@ class LanguagesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LanguagesEntity();
-        $entity->short = $data['short'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->nativeName = $data['native_name'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
-        $entity->listDefaultDe = $data['list_default_de'];
-        $entity->listDefaultEn = $data['list_default_en'];
-        $entity->isTranslated = $data['is_translated'];
+        $entity->short = (string) $data['short'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->nativeName = (string) $data['native_name'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->listDefaultDe = (int) $data['list_default_de'];
+        $entity->listDefaultEn = (int) $data['list_default_en'];
+        $entity->isTranslated = (int) $data['is_translated'];
 
         return $entity;
     }

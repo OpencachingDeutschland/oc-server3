@@ -187,9 +187,9 @@ class GeodbTypeNamesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbTypeNamesEntity();
-        $entity->typeId = $data['type_id'];
-        $entity->typeLocale = $data['type_locale'];
-        $entity->name = $data['name'];
+        $entity->typeId = (int) $data['type_id'];
+        $entity->typeLocale = (string) $data['type_locale'];
+        $entity->name = (string) $data['name'];
 
         return $entity;
     }

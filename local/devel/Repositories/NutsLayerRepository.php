@@ -188,9 +188,9 @@ class NutsLayerRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NutsLayerEntity();
-        $entity->id = $data['id'];
-        $entity->level = $data['level'];
-        $entity->code = $data['code'];
+        $entity->id = (int) $data['id'];
+        $entity->level = (int) $data['level'];
+        $entity->code = (string) $data['code'];
         $entity->shape = $data['shape'];
 
         return $entity;

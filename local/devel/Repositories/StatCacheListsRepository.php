@@ -187,9 +187,9 @@ class StatCacheListsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new StatCacheListsEntity();
-        $entity->cacheListId = $data['cache_list_id'];
-        $entity->entries = $data['entries'];
-        $entity->watchers = $data['watchers'];
+        $entity->cacheListId = (int) $data['cache_list_id'];
+        $entity->entries = (int) $data['entries'];
+        $entity->watchers = (int) $data['watchers'];
 
         return $entity;
     }

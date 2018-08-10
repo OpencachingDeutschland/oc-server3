@@ -189,11 +189,11 @@ class GeodbSearchRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbSearchEntity();
-        $entity->id = $data['id'];
-        $entity->locId = $data['loc_id'];
-        $entity->sort = $data['sort'];
-        $entity->simple = $data['simple'];
-        $entity->simplehash = $data['simplehash'];
+        $entity->id = (int) $data['id'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->sort = (string) $data['sort'];
+        $entity->simple = (string) $data['simple'];
+        $entity->simplehash = (int) $data['simplehash'];
 
         return $entity;
     }

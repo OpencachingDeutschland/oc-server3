@@ -190,12 +190,12 @@ class CacheSizeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheSizeEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->ordinal = $data['ordinal'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->ordinal = (int) $data['ordinal'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
 
         return $entity;
     }

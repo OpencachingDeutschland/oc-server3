@@ -196,18 +196,18 @@ class XmlsessionRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new XmlsessionEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastUse = $data['last_use'];
-        $entity->users = $data['users'];
-        $entity->caches = $data['caches'];
-        $entity->cachedescs = $data['cachedescs'];
-        $entity->cachelogs = $data['cachelogs'];
-        $entity->pictures = $data['pictures'];
-        $entity->removedobjects = $data['removedobjects'];
-        $entity->modifiedSince = $data['modified_since'];
-        $entity->cleaned = $data['cleaned'];
-        $entity->agent = $data['agent'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastUse =  new DateTime($data['last_use']);
+        $entity->users = (int) $data['users'];
+        $entity->caches = (int) $data['caches'];
+        $entity->cachedescs = (int) $data['cachedescs'];
+        $entity->cachelogs = (int) $data['cachelogs'];
+        $entity->pictures = (int) $data['pictures'];
+        $entity->removedobjects = (int) $data['removedobjects'];
+        $entity->modifiedSince =  new DateTime($data['modified_since']);
+        $entity->cleaned = (int) $data['cleaned'];
+        $entity->agent = (string) $data['agent'];
 
         return $entity;
     }

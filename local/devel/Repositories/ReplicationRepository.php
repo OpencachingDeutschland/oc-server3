@@ -189,11 +189,11 @@ class ReplicationRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new ReplicationEntity();
-        $entity->id = $data['id'];
-        $entity->module = $data['module'];
-        $entity->lastRun = $data['last_run'];
-        $entity->use = $data['use'];
-        $entity->prio = $data['prio'];
+        $entity->id = (int) $data['id'];
+        $entity->module = (string) $data['module'];
+        $entity->lastRun =  new DateTime($data['last_run']);
+        $entity->use = (int) $data['use'];
+        $entity->prio = (int) $data['prio'];
 
         return $entity;
     }

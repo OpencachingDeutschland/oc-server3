@@ -199,21 +199,21 @@ class GeodbHierarchiesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbHierarchiesEntity();
-        $entity->locId = $data['loc_id'];
-        $entity->level = $data['level'];
-        $entity->idLvl1 = $data['id_lvl1'];
-        $entity->idLvl2 = $data['id_lvl2'];
-        $entity->idLvl3 = $data['id_lvl3'];
-        $entity->idLvl4 = $data['id_lvl4'];
-        $entity->idLvl5 = $data['id_lvl5'];
-        $entity->idLvl6 = $data['id_lvl6'];
-        $entity->idLvl7 = $data['id_lvl7'];
-        $entity->idLvl8 = $data['id_lvl8'];
-        $entity->idLvl9 = $data['id_lvl9'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->level = (int) $data['level'];
+        $entity->idLvl1 = (int) $data['id_lvl1'];
+        $entity->idLvl2 = (int) $data['id_lvl2'];
+        $entity->idLvl3 = (int) $data['id_lvl3'];
+        $entity->idLvl4 = (int) $data['id_lvl4'];
+        $entity->idLvl5 = (int) $data['id_lvl5'];
+        $entity->idLvl6 = (int) $data['id_lvl6'];
+        $entity->idLvl7 = (int) $data['id_lvl7'];
+        $entity->idLvl8 = (int) $data['id_lvl8'];
+        $entity->idLvl9 = (int) $data['id_lvl9'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

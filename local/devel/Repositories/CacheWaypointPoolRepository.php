@@ -186,8 +186,8 @@ class CacheWaypointPoolRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheWaypointPoolEntity();
-        $entity->wpOc = $data['wp_oc'];
-        $entity->uuid = $data['uuid'];
+        $entity->wpOc = (string) $data['wp_oc'];
+        $entity->uuid = (string) $data['uuid'];
 
         return $entity;
     }

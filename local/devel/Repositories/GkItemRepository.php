@@ -194,16 +194,16 @@ class GkItemRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GkItemEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->description = $data['description'];
-        $entity->userid = $data['userid'];
-        $entity->datecreated = $data['datecreated'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->description = (string) $data['description'];
+        $entity->userid = (int) $data['userid'];
+        $entity->datecreated =  new DateTime($data['datecreated']);
         $entity->distancetravelled = $data['distancetravelled'];
         $entity->latitude = $data['latitude'];
         $entity->longitude = $data['longitude'];
-        $entity->typeid = $data['typeid'];
-        $entity->stateid = $data['stateid'];
+        $entity->typeid = (int) $data['typeid'];
+        $entity->stateid = (int) $data['stateid'];
 
         return $entity;
     }

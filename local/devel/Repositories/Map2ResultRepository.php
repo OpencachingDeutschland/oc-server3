@@ -192,14 +192,14 @@ class Map2ResultRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new Map2ResultEntity();
-        $entity->resultId = $data['result_id'];
-        $entity->slaveId = $data['slave_id'];
-        $entity->sqlchecksum = $data['sqlchecksum'];
-        $entity->sqlquery = $data['sqlquery'];
-        $entity->sharedCounter = $data['shared_counter'];
-        $entity->requestCounter = $data['request_counter'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->dateLastqueried = $data['date_lastqueried'];
+        $entity->resultId = (int) $data['result_id'];
+        $entity->slaveId = (int) $data['slave_id'];
+        $entity->sqlchecksum = (int) $data['sqlchecksum'];
+        $entity->sqlquery = (string) $data['sqlquery'];
+        $entity->sharedCounter = (int) $data['shared_counter'];
+        $entity->requestCounter = (int) $data['request_counter'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateLastqueried =  new DateTime($data['date_lastqueried']);
 
         return $entity;
     }

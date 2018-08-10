@@ -186,8 +186,8 @@ class WsTanRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WsTanEntity();
-        $entity->session = $data['session'];
-        $entity->tan = $data['tan'];
+        $entity->session = (string) $data['session'];
+        $entity->tan = (string) $data['tan'];
 
         return $entity;
     }

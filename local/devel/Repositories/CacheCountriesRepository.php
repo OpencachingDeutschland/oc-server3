@@ -189,11 +189,11 @@ class CacheCountriesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheCountriesEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->country = $data['country'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->country = (string) $data['country'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

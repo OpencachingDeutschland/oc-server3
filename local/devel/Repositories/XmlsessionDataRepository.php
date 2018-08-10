@@ -187,9 +187,9 @@ class XmlsessionDataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new XmlsessionDataEntity();
-        $entity->sessionId = $data['session_id'];
-        $entity->objectType = $data['object_type'];
-        $entity->objectId = $data['object_id'];
+        $entity->sessionId = (int) $data['session_id'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->objectId = (int) $data['object_id'];
 
         return $entity;
     }

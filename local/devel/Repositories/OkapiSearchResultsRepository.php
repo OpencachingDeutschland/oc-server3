@@ -186,8 +186,8 @@ class OkapiSearchResultsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiSearchResultsEntity();
-        $entity->setId = $data['set_id'];
-        $entity->cacheId = $data['cache_id'];
+        $entity->setId = (int) $data['set_id'];
+        $entity->cacheId = (int) $data['cache_id'];
 
         return $entity;
     }

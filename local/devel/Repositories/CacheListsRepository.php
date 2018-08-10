@@ -197,19 +197,19 @@ class CacheListsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheListsEntity();
-        $entity->id = $data['id'];
-        $entity->uuid = $data['uuid'];
-        $entity->node = $data['node'];
-        $entity->userId = $data['user_id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->lastAdded = $data['last_added'];
-        $entity->lastStateChange = $data['last_state_change'];
-        $entity->name = $data['name'];
-        $entity->isPublic = $data['is_public'];
-        $entity->description = $data['description'];
-        $entity->descHtmledit = $data['desc_htmledit'];
-        $entity->password = $data['password'];
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->lastAdded =  new DateTime($data['last_added']);
+        $entity->lastStateChange =  new DateTime($data['last_state_change']);
+        $entity->name = (string) $data['name'];
+        $entity->isPublic = (int) $data['is_public'];
+        $entity->description = (string) $data['description'];
+        $entity->descHtmledit = (int) $data['desc_htmledit'];
+        $entity->password = (string) $data['password'];
 
         return $entity;
     }

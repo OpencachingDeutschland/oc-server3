@@ -191,8 +191,8 @@ class StatCacheLogsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new StatCacheLogsEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
         $entity->found = $data['found'];
         $entity->notfound = $data['notfound'];
         $entity->note = $data['note'];

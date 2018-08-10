@@ -187,9 +187,9 @@ class CacheReportStatusRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheReportStatusEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
 
         return $entity;
     }

@@ -186,8 +186,8 @@ class CacheListItemsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheListItemsEntity();
-        $entity->cacheListId = $data['cache_list_id'];
-        $entity->cacheId = $data['cache_id'];
+        $entity->cacheListId = (int) $data['cache_list_id'];
+        $entity->cacheId = (int) $data['cache_id'];
 
         return $entity;
     }

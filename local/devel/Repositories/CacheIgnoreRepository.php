@@ -186,8 +186,8 @@ class CacheIgnoreRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheIgnoreEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
 
         return $entity;
     }

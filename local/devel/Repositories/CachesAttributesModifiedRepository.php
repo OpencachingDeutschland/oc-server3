@@ -189,11 +189,11 @@ class CachesAttributesModifiedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCachesAttributesModifiedEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->attribId = $data['attrib_id'];
-        $entity->dateModified = $data['date_modified'];
-        $entity->wasSet = $data['was_set'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->attribId = (int) $data['attrib_id'];
+        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->wasSet = (int) $data['was_set'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

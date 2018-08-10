@@ -187,9 +187,9 @@ class CacheRatingRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheRatingEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
-        $entity->ratingDate = $data['rating_date'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->ratingDate =  new DateTime($data['rating_date']);
 
         return $entity;
     }

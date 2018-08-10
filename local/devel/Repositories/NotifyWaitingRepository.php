@@ -188,10 +188,10 @@ class NotifyWaitingRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NotifyWaitingEntity();
-        $entity->id = $data['id'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
-        $entity->type = $data['type'];
+        $entity->id = (int) $data['id'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->type = (int) $data['type'];
 
         return $entity;
     }

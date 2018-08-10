@@ -186,8 +186,8 @@ class SysReplExcludeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysReplExcludeEntity();
-        $entity->userId = $data['user_id'];
-        $entity->datExclude = $data['datExclude'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->datExclude =  new DateTime($data['datExclude']);
 
         return $entity;
     }

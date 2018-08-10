@@ -196,18 +196,18 @@ class CacheDescRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheDescEntity();
-        $entity->id = $data['id'];
-        $entity->uuid = $data['uuid'];
-        $entity->node = $data['node'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->language = $data['language'];
-        $entity->desc = $data['desc'];
-        $entity->descHtml = $data['desc_html'];
-        $entity->descHtmledit = $data['desc_htmledit'];
-        $entity->hint = $data['hint'];
-        $entity->shortDesc = $data['short_desc'];
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->language = (string) $data['language'];
+        $entity->desc = (string) $data['desc'];
+        $entity->descHtml = (int) $data['desc_html'];
+        $entity->descHtmledit = (int) $data['desc_htmledit'];
+        $entity->hint = (string) $data['hint'];
+        $entity->shortDesc = (string) $data['short_desc'];
 
         return $entity;
     }

@@ -188,10 +188,10 @@ class AttributeCategoriesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new AttributeCategoriesEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->color = $data['color'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->color = (string) $data['color'];
 
         return $entity;
     }

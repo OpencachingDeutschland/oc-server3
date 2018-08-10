@@ -195,17 +195,17 @@ class CountriesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CountriesEntity();
-        $entity->short = $data['short'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
-        $entity->listDefaultDe = $data['list_default_de'];
-        $entity->sortDe = $data['sort_de'];
-        $entity->listDefaultEn = $data['list_default_en'];
-        $entity->sortEn = $data['sort_en'];
-        $entity->admDisplay2 = $data['adm_display2'];
-        $entity->admDisplay3 = $data['adm_display3'];
+        $entity->short = (string) $data['short'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->listDefaultDe = (int) $data['list_default_de'];
+        $entity->sortDe = (string) $data['sort_de'];
+        $entity->listDefaultEn = (int) $data['list_default_en'];
+        $entity->sortEn = (string) $data['sort_en'];
+        $entity->admDisplay2 = (int) $data['adm_display2'];
+        $entity->admDisplay3 = (int) $data['adm_display3'];
 
         return $entity;
     }

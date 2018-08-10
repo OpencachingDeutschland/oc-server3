@@ -194,16 +194,16 @@ class CacheLocationRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheLocationEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->adm1 = $data['adm1'];
-        $entity->adm2 = $data['adm2'];
-        $entity->adm3 = $data['adm3'];
-        $entity->adm4 = $data['adm4'];
-        $entity->code1 = $data['code1'];
-        $entity->code2 = $data['code2'];
-        $entity->code3 = $data['code3'];
-        $entity->code4 = $data['code4'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->adm1 = (string) $data['adm1'];
+        $entity->adm2 = (string) $data['adm2'];
+        $entity->adm3 = (string) $data['adm3'];
+        $entity->adm4 = (string) $data['adm4'];
+        $entity->code1 = (string) $data['code1'];
+        $entity->code2 = (string) $data['code2'];
+        $entity->code3 = (string) $data['code3'];
+        $entity->code4 = (string) $data['code4'];
 
         return $entity;
     }

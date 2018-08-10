@@ -185,7 +185,7 @@ class OkapiCacheReadsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiCacheReadsEntity();
-        $entity->cacheKey = $data['cache_key'];
+        $entity->cacheKey = (string) $data['cache_key'];
 
         return $entity;
     }

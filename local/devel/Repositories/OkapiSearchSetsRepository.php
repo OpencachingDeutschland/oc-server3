@@ -188,10 +188,10 @@ class OkapiSearchSetsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiSearchSetsEntity();
-        $entity->id = $data['id'];
-        $entity->paramsHash = $data['params_hash'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->expires = $data['expires'];
+        $entity->id = (int) $data['id'];
+        $entity->paramsHash = (string) $data['params_hash'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->expires =  new DateTime($data['expires']);
 
         return $entity;
     }

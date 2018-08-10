@@ -187,9 +187,9 @@ class OkapiAuthorizationsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiAuthorizationsEntity();
-        $entity->consumerKey = $data['consumer_key'];
-        $entity->userId = $data['user_id'];
-        $entity->lastAccessToken = $data['last_access_token'];
+        $entity->consumerKey = (string) $data['consumer_key'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->lastAccessToken =  new DateTime($data['last_access_token']);
 
         return $entity;
     }

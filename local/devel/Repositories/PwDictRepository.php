@@ -185,7 +185,7 @@ class PwDictRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new PwDictEntity();
-        $entity->pw = $data['pw'];
+        $entity->pw = (string) $data['pw'];
 
         return $entity;
     }

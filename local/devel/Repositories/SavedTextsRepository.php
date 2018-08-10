@@ -190,12 +190,12 @@ class SavedTextsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SavedTextsEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->objectType = $data['object_type'];
-        $entity->objectId = $data['object_id'];
-        $entity->subtype = $data['subtype'];
-        $entity->text = $data['text'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->objectType = (int) $data['object_type'];
+        $entity->objectId = (int) $data['object_id'];
+        $entity->subtype = (int) $data['subtype'];
+        $entity->text = (string) $data['text'];
 
         return $entity;
     }

@@ -188,10 +188,10 @@ class GnsSearchRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GnsSearchEntity();
-        $entity->uniId = $data['uni_id'];
-        $entity->sort = $data['sort'];
-        $entity->simple = $data['simple'];
-        $entity->simplehash = $data['simplehash'];
+        $entity->uniId = (int) $data['uni_id'];
+        $entity->sort = (string) $data['sort'];
+        $entity->simple = (string) $data['simple'];
+        $entity->simplehash = (int) $data['simplehash'];
 
         return $entity;
     }

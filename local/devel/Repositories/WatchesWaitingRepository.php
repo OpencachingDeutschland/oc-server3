@@ -191,13 +191,13 @@ class WatchesWaitingRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WatchesWaitingEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->objectId = $data['object_id'];
-        $entity->objectType = $data['object_type'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->watchtext = $data['watchtext'];
-        $entity->watchtype = $data['watchtype'];
+        $entity->id = (int) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->objectId = (int) $data['object_id'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->watchtext = (string) $data['watchtext'];
+        $entity->watchtype = (int) $data['watchtype'];
 
         return $entity;
     }

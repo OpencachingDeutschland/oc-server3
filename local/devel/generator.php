@@ -19,6 +19,15 @@ function lowerCamelCase($string)
 
 function mapDataBaseTypesForPhpDoc($type)
 {
+    if (mapDataBaseTypesForPhP($type)) {
+        return mapDataBaseTypesForPhP($type);
+    }
+
+    return $type;
+}
+
+function mapDataBaseTypesForPhP($type)
+{
     switch ($type) {
         case 'tinyint':
         case 'mediumint':
@@ -40,8 +49,6 @@ function mapDataBaseTypesForPhpDoc($type)
         case 'datetime':
             return 'DateTime';
     }
-
-    return $type;
 }
 
 /** @var Connection $connection */
@@ -299,12 +306,17 @@ foreach ($tables as $table) {
 
     $getEntityFromDatabaseArrayBody = '$entity = new ' . $classNameEntity . '();' . "\n";
 
-    /**
-     * TODO adding type casting based on table columns
-     */
     foreach ($tableColumns as $column) {
+        $dataType = mapDataBaseTypesForPhP($column['DATA_TYPE']);
+        if ($dataType === 'DateTime') {
+            $dataType = ' new DateTime($data[\'' . $column['COLUMN_NAME'] . '\'])';
+        } elseif ($dataType) {
+            $dataType = '(' . $dataType . ') $data[\'' . $column['COLUMN_NAME'] . '\']';
+        } else {
+            $dataType = '$data[\'' . $column['COLUMN_NAME'] . '\']';
+        }
         $getEntityFromDatabaseArrayBody .= '$entity->' .
-            lowerCamelCase($column['COLUMN_NAME']) . ' = $data[\'' . $column['COLUMN_NAME'] . '\'];' . "\n";
+            lowerCamelCase($column['COLUMN_NAME']) . ' = ' . $dataType . ';' . "\n";
     }
 
     $getEntityFromDatabaseArrayBody .= 'return $entity;' . "\n";

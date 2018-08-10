@@ -190,12 +190,12 @@ class RemovedObjectsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new RemovedObjectsEntity();
-        $entity->id = $data['id'];
-        $entity->localID = $data['localID'];
-        $entity->uuid = $data['uuid'];
-        $entity->type = $data['type'];
-        $entity->removedDate = $data['removed_date'];
-        $entity->node = $data['node'];
+        $entity->id = (int) $data['id'];
+        $entity->localID = (int) $data['localID'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->type = (int) $data['type'];
+        $entity->removedDate =  new DateTime($data['removed_date']);
+        $entity->node = (int) $data['node'];
 
         return $entity;
     }

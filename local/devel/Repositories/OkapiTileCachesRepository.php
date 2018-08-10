@@ -195,17 +195,17 @@ class OkapiTileCachesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiTileCachesEntity();
-        $entity->z = $data['z'];
-        $entity->x = $data['x'];
-        $entity->y = $data['y'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->z21x = $data['z21x'];
-        $entity->z21y = $data['z21y'];
-        $entity->status = $data['status'];
-        $entity->type = $data['type'];
-        $entity->rating = $data['rating'];
-        $entity->flags = $data['flags'];
-        $entity->nameCrc = $data['name_crc'];
+        $entity->z = (int) $data['z'];
+        $entity->x = (int) $data['x'];
+        $entity->y = (int) $data['y'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->z21x = (int) $data['z21x'];
+        $entity->z21y = (int) $data['z21y'];
+        $entity->status = (int) $data['status'];
+        $entity->type = (int) $data['type'];
+        $entity->rating = (int) $data['rating'];
+        $entity->flags = (int) $data['flags'];
+        $entity->nameCrc = (int) $data['name_crc'];
 
         return $entity;
     }

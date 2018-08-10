@@ -186,8 +186,8 @@ class CachesAttributesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCachesAttributesEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->attribId = $data['attrib_id'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->attribId = (int) $data['attrib_id'];
 
         return $entity;
     }

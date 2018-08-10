@@ -187,9 +187,9 @@ class SysTransRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysTransEntity();
-        $entity->id = $data['id'];
-        $entity->text = $data['text'];
-        $entity->lastModified = $data['last_modified'];
+        $entity->id = (int) $data['id'];
+        $entity->text = (string) $data['text'];
+        $entity->lastModified =  new DateTime($data['last_modified']);
 
         return $entity;
     }

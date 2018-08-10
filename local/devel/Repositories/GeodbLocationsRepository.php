@@ -186,8 +186,8 @@ class GeodbLocationsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbLocationsEntity();
-        $entity->locId = $data['loc_id'];
-        $entity->locType = $data['loc_type'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->locType = (int) $data['loc_type'];
 
         return $entity;
     }

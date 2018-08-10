@@ -186,8 +186,8 @@ class Map2DataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new Map2DataEntity();
-        $entity->resultId = $data['result_id'];
-        $entity->cacheId = $data['cache_id'];
+        $entity->resultId = (int) $data['result_id'];
+        $entity->cacheId = (int) $data['cache_id'];
 
         return $entity;
     }

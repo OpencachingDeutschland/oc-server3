@@ -186,8 +186,8 @@ class SysReplTimestampRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysReplTimestampEntity();
-        $entity->id = $data['id'];
-        $entity->data = $data['data'];
+        $entity->id = (int) $data['id'];
+        $entity->data =  new DateTime($data['data']);
 
         return $entity;
     }

@@ -190,12 +190,12 @@ class WaypointReportsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WaypointReportsEntity();
-        $entity->reportId = $data['report_id'];
-        $entity->dateReported = $data['date_reported'];
-        $entity->wpOc = $data['wp_oc'];
-        $entity->wpExternal = $data['wp_external'];
-        $entity->source = $data['source'];
-        $entity->gcwpProcessed = $data['gcwp_processed'];
+        $entity->reportId = (int) $data['report_id'];
+        $entity->dateReported =  new DateTime($data['date_reported']);
+        $entity->wpOc = (string) $data['wp_oc'];
+        $entity->wpExternal = (string) $data['wp_external'];
+        $entity->source = (string) $data['source'];
+        $entity->gcwpProcessed = (int) $data['gcwp_processed'];
 
         return $entity;
     }

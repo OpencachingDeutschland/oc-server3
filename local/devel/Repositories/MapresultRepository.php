@@ -186,8 +186,8 @@ class MapresultRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new MapresultEntity();
-        $entity->queryId = $data['query_id'];
-        $entity->dateCreated = $data['date_created'];
+        $entity->queryId = (int) $data['query_id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
 
         return $entity;
     }

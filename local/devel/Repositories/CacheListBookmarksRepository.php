@@ -187,9 +187,9 @@ class CacheListBookmarksRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheListBookmarksEntity();
-        $entity->cacheListId = $data['cache_list_id'];
-        $entity->userId = $data['user_id'];
-        $entity->password = $data['password'];
+        $entity->cacheListId = (int) $data['cache_list_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->password = (string) $data['password'];
 
         return $entity;
     }

@@ -195,17 +195,17 @@ class CoordinatesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CoordinatesEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->type = $data['type'];
-        $entity->subtype = $data['subtype'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->type = (int) $data['type'];
+        $entity->subtype = (int) $data['subtype'];
         $entity->latitude = $data['latitude'];
         $entity->longitude = $data['longitude'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
-        $entity->logId = $data['log_id'];
-        $entity->description = $data['description'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->logId = (int) $data['log_id'];
+        $entity->description = (string) $data['description'];
 
         return $entity;
     }

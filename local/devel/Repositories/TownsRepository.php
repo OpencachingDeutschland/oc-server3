@@ -190,12 +190,12 @@ class TownsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new TownsEntity();
-        $entity->country = $data['country'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
+        $entity->country = (string) $data['country'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
         $entity->coordLat = $data['coord_lat'];
         $entity->coordLong = $data['coord_long'];
-        $entity->maplist = $data['maplist'];
+        $entity->maplist = (int) $data['maplist'];
 
         return $entity;
     }

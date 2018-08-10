@@ -187,9 +187,9 @@ class SysTransRefRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysTransRefEntity();
-        $entity->transId = $data['trans_id'];
-        $entity->resourceName = $data['resource_name'];
-        $entity->line = $data['line'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->resourceName = (string) $data['resource_name'];
+        $entity->line = (int) $data['line'];
 
         return $entity;
     }

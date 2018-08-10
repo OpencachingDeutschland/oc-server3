@@ -186,8 +186,8 @@ class MapresultDataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new MapresultDataEntity();
-        $entity->queryId = $data['query_id'];
-        $entity->cacheId = $data['cache_id'];
+        $entity->queryId = (int) $data['query_id'];
+        $entity->cacheId = (int) $data['cache_id'];
 
         return $entity;
     }

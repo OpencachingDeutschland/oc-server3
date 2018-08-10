@@ -189,11 +189,11 @@ class CacheLogsRestoredRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheLogsRestoredEntity();
-        $entity->id = $data['id'];
-        $entity->dateModified = $data['date_modified'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->originalId = $data['original_id'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->id = (int) $data['id'];
+        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->originalId = (int) $data['original_id'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

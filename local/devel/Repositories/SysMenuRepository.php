@@ -199,19 +199,19 @@ class SysMenuRepository
     {
         $entity = new SysMenuEntity();
         $entity->id = $data['id'];
-        $entity->idString = $data['id_string'];
-        $entity->title = $data['title'];
-        $entity->titleTransId = $data['title_trans_id'];
-        $entity->menustring = $data['menustring'];
-        $entity->menustringTransId = $data['menustring_trans_id'];
-        $entity->access = $data['access'];
-        $entity->href = $data['href'];
-        $entity->visible = $data['visible'];
+        $entity->idString = (string) $data['id_string'];
+        $entity->title = (string) $data['title'];
+        $entity->titleTransId = (int) $data['title_trans_id'];
+        $entity->menustring = (string) $data['menustring'];
+        $entity->menustringTransId = (int) $data['menustring_trans_id'];
+        $entity->access = (int) $data['access'];
+        $entity->href = (string) $data['href'];
+        $entity->visible = (int) $data['visible'];
         $entity->parent = $data['parent'];
-        $entity->position = $data['position'];
-        $entity->color = $data['color'];
-        $entity->sitemap = $data['sitemap'];
-        $entity->onlyIfParent = $data['only_if_parent'];
+        $entity->position = (int) $data['position'];
+        $entity->color = (string) $data['color'];
+        $entity->sitemap = (int) $data['sitemap'];
+        $entity->onlyIfParent = (int) $data['only_if_parent'];
 
         return $entity;
     }

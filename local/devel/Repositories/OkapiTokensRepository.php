@@ -192,14 +192,14 @@ class OkapiTokensRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiTokensEntity();
-        $entity->key = $data['key'];
-        $entity->secret = $data['secret'];
+        $entity->key = (string) $data['key'];
+        $entity->secret = (string) $data['secret'];
         $entity->tokenType = $data['token_type'];
-        $entity->timestamp = $data['timestamp'];
-        $entity->userId = $data['user_id'];
-        $entity->consumerKey = $data['consumer_key'];
-        $entity->verifier = $data['verifier'];
-        $entity->callback = $data['callback'];
+        $entity->timestamp = (int) $data['timestamp'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->consumerKey = (string) $data['consumer_key'];
+        $entity->verifier = (string) $data['verifier'];
+        $entity->callback = (string) $data['callback'];
 
         return $entity;
     }

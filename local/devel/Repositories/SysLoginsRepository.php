@@ -188,10 +188,10 @@ class SysLoginsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysLoginsEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->remoteAddr = $data['remote_addr'];
-        $entity->success = $data['success'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->remoteAddr = (string) $data['remote_addr'];
+        $entity->success = (int) $data['success'];
 
         return $entity;
     }

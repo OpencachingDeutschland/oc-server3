@@ -190,12 +190,12 @@ class StatpicsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new StatpicsEntity();
-        $entity->id = $data['id'];
-        $entity->tplpath = $data['tplpath'];
-        $entity->previewpath = $data['previewpath'];
-        $entity->description = $data['description'];
-        $entity->transId = $data['trans_id'];
-        $entity->maxtextwidth = $data['maxtextwidth'];
+        $entity->id = (int) $data['id'];
+        $entity->tplpath = (string) $data['tplpath'];
+        $entity->previewpath = (string) $data['previewpath'];
+        $entity->description = (string) $data['description'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->maxtextwidth = (int) $data['maxtextwidth'];
 
         return $entity;
     }

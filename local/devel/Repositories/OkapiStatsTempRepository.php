@@ -190,10 +190,10 @@ class OkapiStatsTempRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiStatsTempEntity();
-        $entity->datetime = $data['datetime'];
-        $entity->consumerKey = $data['consumer_key'];
-        $entity->userId = $data['user_id'];
-        $entity->serviceName = $data['service_name'];
+        $entity->datetime =  new DateTime($data['datetime']);
+        $entity->consumerKey = (string) $data['consumer_key'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->serviceName = (string) $data['service_name'];
         $entity->calltype = $data['calltype'];
         $entity->runtime = $data['runtime'];
 

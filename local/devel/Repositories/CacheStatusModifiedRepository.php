@@ -189,11 +189,11 @@ class CacheStatusModifiedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheStatusModifiedEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->dateModified = $data['date_modified'];
-        $entity->oldState = $data['old_state'];
-        $entity->newState = $data['new_state'];
-        $entity->userId = $data['user_id'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->oldState = (int) $data['old_state'];
+        $entity->newState = (int) $data['new_state'];
+        $entity->userId = (int) $data['user_id'];
 
         return $entity;
     }

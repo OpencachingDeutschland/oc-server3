@@ -189,11 +189,11 @@ class QueriesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new QueriesEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->name = $data['name'];
-        $entity->options = $data['options'];
-        $entity->lastQueried = $data['last_queried'];
+        $entity->id = (int) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->name = (string) $data['name'];
+        $entity->options = (string) $data['options'];
+        $entity->lastQueried =  new DateTime($data['last_queried']);
 
         return $entity;
     }

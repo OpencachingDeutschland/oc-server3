@@ -195,13 +195,13 @@ class StatCachesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new StatCachesEntity();
-        $entity->cacheId = $data['cache_id'];
+        $entity->cacheId = (int) $data['cache_id'];
         $entity->found = $data['found'];
         $entity->notfound = $data['notfound'];
         $entity->note = $data['note'];
         $entity->willAttend = $data['will_attend'];
         $entity->maintenance = $data['maintenance'];
-        $entity->lastFound = $data['last_found'];
+        $entity->lastFound =  new DateTime($data['last_found']);
         $entity->watch = $data['watch'];
         $entity->ignore = $data['ignore'];
         $entity->toprating = $data['toprating'];

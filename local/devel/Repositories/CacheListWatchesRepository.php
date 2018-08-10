@@ -186,8 +186,8 @@ class CacheListWatchesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheListWatchesEntity();
-        $entity->cacheListId = $data['cache_list_id'];
-        $entity->userId = $data['user_id'];
+        $entity->cacheListId = (int) $data['cache_list_id'];
+        $entity->userId = (int) $data['user_id'];
 
         return $entity;
     }

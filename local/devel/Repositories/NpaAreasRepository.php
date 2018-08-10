@@ -189,10 +189,10 @@ class NpaAreasRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NpaAreasEntity();
-        $entity->id = $data['id'];
-        $entity->typeId = $data['type_id'];
-        $entity->exclude = $data['exclude'];
-        $entity->name = $data['name'];
+        $entity->id = (int) $data['id'];
+        $entity->typeId = (string) $data['type_id'];
+        $entity->exclude = (int) $data['exclude'];
+        $entity->name = (string) $data['name'];
         $entity->shape = $data['shape'];
 
         return $entity;

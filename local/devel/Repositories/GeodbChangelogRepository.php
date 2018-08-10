@@ -189,11 +189,11 @@ class GeodbChangelogRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbChangelogEntity();
-        $entity->id = $data['id'];
-        $entity->datum = $data['datum'];
-        $entity->beschreibung = $data['beschreibung'];
-        $entity->autor = $data['autor'];
-        $entity->version = $data['version'];
+        $entity->id = (int) $data['id'];
+        $entity->datum =  new DateTime($data['datum']);
+        $entity->beschreibung = (string) $data['beschreibung'];
+        $entity->autor = (string) $data['autor'];
+        $entity->version = (string) $data['version'];
 
         return $entity;
     }

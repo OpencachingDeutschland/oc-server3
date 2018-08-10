@@ -185,7 +185,7 @@ class MigrationVersionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new MigrationVersionsEntity();
-        $entity->version = $data['version'];
+        $entity->version = (string) $data['version'];
 
         return $entity;
     }

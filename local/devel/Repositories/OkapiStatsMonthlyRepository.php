@@ -192,12 +192,12 @@ class OkapiStatsMonthlyRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiStatsMonthlyEntity();
-        $entity->consumerKey = $data['consumer_key'];
-        $entity->userId = $data['user_id'];
-        $entity->periodStart = $data['period_start'];
-        $entity->serviceName = $data['service_name'];
-        $entity->totalCalls = $data['total_calls'];
-        $entity->httpCalls = $data['http_calls'];
+        $entity->consumerKey = (string) $data['consumer_key'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->periodStart =  new DateTime($data['period_start']);
+        $entity->serviceName = (string) $data['service_name'];
+        $entity->totalCalls = (int) $data['total_calls'];
+        $entity->httpCalls = (int) $data['http_calls'];
         $entity->totalRuntime = $data['total_runtime'];
         $entity->httpRuntime = $data['http_runtime'];
 

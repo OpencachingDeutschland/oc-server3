@@ -186,8 +186,8 @@ class SysTemptablesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysTemptablesEntity();
-        $entity->threadid = $data['threadid'];
-        $entity->name = $data['name'];
+        $entity->threadid = (int) $data['threadid'];
+        $entity->name = (string) $data['name'];
 
         return $entity;
     }

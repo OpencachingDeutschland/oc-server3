@@ -187,9 +187,9 @@ class OkapiSubmittedObjectsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiSubmittedObjectsEntity();
-        $entity->objectType = $data['object_type'];
-        $entity->objectId = $data['object_id'];
-        $entity->consumerKey = $data['consumer_key'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->objectId = (int) $data['object_id'];
+        $entity->consumerKey = (string) $data['consumer_key'];
 
         return $entity;
     }

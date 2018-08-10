@@ -188,10 +188,10 @@ class SearchIndexRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SearchIndexEntity();
-        $entity->objectType = $data['object_type'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->hash = $data['hash'];
-        $entity->count = $data['count'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->hash = (int) $data['hash'];
+        $entity->count = (int) $data['count'];
 
         return $entity;
     }

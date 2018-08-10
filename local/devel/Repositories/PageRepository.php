@@ -191,13 +191,13 @@ class PageRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new PageEntity();
-        $entity->id = $data['id'];
-        $entity->slug = $data['slug'];
-        $entity->metaKeywords = $data['meta_keywords'];
-        $entity->metaDescription = $data['meta_description'];
-        $entity->metaSocial = $data['meta_social'];
-        $entity->updatedAt = $data['updated_at'];
-        $entity->active = $data['active'];
+        $entity->id = (int) $data['id'];
+        $entity->slug = (string) $data['slug'];
+        $entity->metaKeywords = (string) $data['meta_keywords'];
+        $entity->metaDescription = (string) $data['meta_description'];
+        $entity->metaSocial = (string) $data['meta_social'];
+        $entity->updatedAt =  new DateTime($data['updated_at']);
+        $entity->active = (int) $data['active'];
 
         return $entity;
     }

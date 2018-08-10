@@ -189,11 +189,11 @@ class WatchesNotifiedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WatchesNotifiedEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->objectId = $data['object_id'];
-        $entity->objectType = $data['object_type'];
-        $entity->dateCreated = $data['date_created'];
+        $entity->id = (int) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->objectId = (int) $data['object_id'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
 
         return $entity;
     }

@@ -202,24 +202,24 @@ class CacheAttribRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheAttribEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->icon = $data['icon'];
-        $entity->transId = $data['trans_id'];
-        $entity->groupId = $data['group_id'];
-        $entity->selectable = $data['selectable'];
-        $entity->category = $data['category'];
-        $entity->searchDefault = $data['search_default'];
-        $entity->default = $data['default'];
-        $entity->iconLarge = $data['icon_large'];
-        $entity->iconNo = $data['icon_no'];
-        $entity->iconUndef = $data['icon_undef'];
-        $entity->htmlDesc = $data['html_desc'];
-        $entity->htmlDescTransId = $data['html_desc_trans_id'];
-        $entity->hidden = $data['hidden'];
-        $entity->gcId = $data['gc_id'];
-        $entity->gcInc = $data['gc_inc'];
-        $entity->gcName = $data['gc_name'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->icon = (string) $data['icon'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->groupId = (int) $data['group_id'];
+        $entity->selectable = (int) $data['selectable'];
+        $entity->category = (int) $data['category'];
+        $entity->searchDefault = (int) $data['search_default'];
+        $entity->default = (int) $data['default'];
+        $entity->iconLarge = (string) $data['icon_large'];
+        $entity->iconNo = (string) $data['icon_no'];
+        $entity->iconUndef = (string) $data['icon_undef'];
+        $entity->htmlDesc = (string) $data['html_desc'];
+        $entity->htmlDescTransId = (int) $data['html_desc_trans_id'];
+        $entity->hidden = (int) $data['hidden'];
+        $entity->gcId = (int) $data['gc_id'];
+        $entity->gcInc = (int) $data['gc_inc'];
+        $entity->gcName = (string) $data['gc_name'];
 
         return $entity;
     }

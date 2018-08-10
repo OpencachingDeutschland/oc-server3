@@ -187,9 +187,9 @@ class ReplicationNotimportedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new ReplicationNotimportedEntity();
-        $entity->id = $data['id'];
-        $entity->objectUuid = $data['object_uuid'];
-        $entity->objectType = $data['object_type'];
+        $entity->id = (int) $data['id'];
+        $entity->objectUuid = (string) $data['object_uuid'];
+        $entity->objectType = (int) $data['object_type'];
 
         return $entity;
     }

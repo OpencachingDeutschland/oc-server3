@@ -187,9 +187,9 @@ class CacheNpaAreasRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheNpaAreasEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->npaId = $data['npa_id'];
-        $entity->calculated = $data['calculated'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->npaId = (int) $data['npa_id'];
+        $entity->calculated = (int) $data['calculated'];
 
         return $entity;
     }

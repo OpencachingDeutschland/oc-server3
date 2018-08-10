@@ -186,8 +186,8 @@ class NutsCodesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NutsCodesEntity();
-        $entity->code = $data['code'];
-        $entity->name = $data['name'];
+        $entity->code = (string) $data['code'];
+        $entity->name = (string) $data['name'];
 
         return $entity;
     }

@@ -188,10 +188,10 @@ class OkapiTileStatusRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiTileStatusEntity();
-        $entity->z = $data['z'];
-        $entity->x = $data['x'];
-        $entity->y = $data['y'];
-        $entity->status = $data['status'];
+        $entity->z = (int) $data['z'];
+        $entity->x = (int) $data['x'];
+        $entity->y = (int) $data['y'];
+        $entity->status = (int) $data['status'];
 
         return $entity;
     }

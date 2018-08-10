@@ -188,8 +188,8 @@ class GeodbPolygonsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbPolygonsEntity();
-        $entity->polygonId = $data['polygon_id'];
-        $entity->seqNo = $data['seq_no'];
+        $entity->polygonId = (int) $data['polygon_id'];
+        $entity->seqNo = (int) $data['seq_no'];
         $entity->lon = $data['lon'];
         $entity->lat = $data['lat'];
 

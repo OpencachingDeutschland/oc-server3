@@ -190,12 +190,12 @@ class FieldNoteRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new FieldNoteEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->geocacheId = $data['geocache_id'];
+        $entity->id = (int) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->geocacheId = (int) $data['geocache_id'];
         $entity->type = $data['type'];
-        $entity->date = $data['date'];
-        $entity->text = $data['text'];
+        $entity->date =  new DateTime($data['date']);
+        $entity->text = (string) $data['text'];
 
         return $entity;
     }

@@ -190,12 +190,12 @@ class WsSessionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WsSessionsEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastUsage = $data['last_usage'];
-        $entity->valid = $data['valid'];
-        $entity->closed = $data['closed'];
+        $entity->id = (string) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastUsage =  new DateTime($data['last_usage']);
+        $entity->valid = (int) $data['valid'];
+        $entity->closed = (int) $data['closed'];
 
         return $entity;
     }

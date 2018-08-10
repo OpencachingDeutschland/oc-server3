@@ -186,8 +186,8 @@ class OkapiClogRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiClogEntity();
-        $entity->id = $data['id'];
-        $entity->data = $data['data'];
+        $entity->id = (int) $data['id'];
+        $entity->data = (string) $data['data'];
 
         return $entity;
     }

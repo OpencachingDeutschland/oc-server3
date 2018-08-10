@@ -188,10 +188,10 @@ class NodesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new NodesEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->url = $data['url'];
-        $entity->waypointPrefix = $data['waypoint_prefix'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->url = (string) $data['url'];
+        $entity->waypointPrefix = (string) $data['waypoint_prefix'];
 
         return $entity;
     }

@@ -189,11 +189,11 @@ class LogTypesTextRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LogTypesTextEntity();
-        $entity->id = $data['id'];
-        $entity->logTypesId = $data['log_types_id'];
-        $entity->lang = $data['lang'];
-        $entity->textCombo = $data['text_combo'];
-        $entity->textListing = $data['text_listing'];
+        $entity->id = (int) $data['id'];
+        $entity->logTypesId = (int) $data['log_types_id'];
+        $entity->lang = (string) $data['lang'];
+        $entity->textCombo = (string) $data['text_combo'];
+        $entity->textListing = (string) $data['text_listing'];
 
         return $entity;
     }

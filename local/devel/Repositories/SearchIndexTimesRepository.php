@@ -187,9 +187,9 @@ class SearchIndexTimesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SearchIndexTimesEntity();
-        $entity->objectType = $data['object_type'];
-        $entity->objectId = $data['object_id'];
-        $entity->lastRefresh = $data['last_refresh'];
+        $entity->objectType = (int) $data['object_type'];
+        $entity->objectId = (int) $data['object_id'];
+        $entity->lastRefresh =  new DateTime($data['last_refresh']);
 
         return $entity;
     }

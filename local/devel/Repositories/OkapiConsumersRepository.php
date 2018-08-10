@@ -191,13 +191,13 @@ class OkapiConsumersRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiConsumersEntity();
-        $entity->key = $data['key'];
-        $entity->name = $data['name'];
-        $entity->secret = $data['secret'];
-        $entity->url = $data['url'];
-        $entity->email = $data['email'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->bflags = $data['bflags'];
+        $entity->key = (string) $data['key'];
+        $entity->name = (string) $data['name'];
+        $entity->secret = (string) $data['secret'];
+        $entity->url = (string) $data['url'];
+        $entity->email = (string) $data['email'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->bflags = (int) $data['bflags'];
 
         return $entity;
     }

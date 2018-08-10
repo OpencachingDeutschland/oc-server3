@@ -192,14 +192,14 @@ class CacheStatusRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheStatusEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
-        $entity->allowUserView = $data['allow_user_view'];
-        $entity->allowOwnerEditStatus = $data['allow_owner_edit_status'];
-        $entity->allowUserLog = $data['allow_user_log'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->allowUserView = (int) $data['allow_user_view'];
+        $entity->allowOwnerEditStatus = (int) $data['allow_owner_edit_status'];
+        $entity->allowUserLog = (int) $data['allow_user_log'];
 
         return $entity;
     }

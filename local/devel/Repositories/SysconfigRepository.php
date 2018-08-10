@@ -186,8 +186,8 @@ class SysconfigRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysconfigEntity();
-        $entity->name = $data['name'];
-        $entity->value = $data['value'];
+        $entity->name = (string) $data['name'];
+        $entity->value = (string) $data['value'];
 
         return $entity;
     }

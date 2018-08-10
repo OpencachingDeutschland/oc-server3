@@ -186,8 +186,8 @@ class SysCronRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysCronEntity();
-        $entity->name = $data['name'];
-        $entity->lastRun = $data['last_run'];
+        $entity->name = (string) $data['name'];
+        $entity->lastRun =  new DateTime($data['last_run']);
 
         return $entity;
     }

@@ -188,10 +188,10 @@ class CacheVisitsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheVisitsEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->userIdIp = $data['user_id_ip'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userIdIp = (string) $data['user_id_ip'];
         $entity->count = $data['count'];
-        $entity->lastModified = $data['last_modified'];
+        $entity->lastModified =  new DateTime($data['last_modified']);
 
         return $entity;
     }

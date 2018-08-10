@@ -198,20 +198,20 @@ class GeodbAreasRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbAreasEntity();
-        $entity->locId = $data['loc_id'];
-        $entity->areaId = $data['area_id'];
-        $entity->polygonId = $data['polygon_id'];
-        $entity->polSeqNo = $data['pol_seq_no'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->areaId = (int) $data['area_id'];
+        $entity->polygonId = (int) $data['polygon_id'];
+        $entity->polSeqNo = (int) $data['pol_seq_no'];
         $entity->excludeArea = $data['exclude_area'];
-        $entity->areaType = $data['area_type'];
-        $entity->areaSubtype = $data['area_subtype'];
-        $entity->coordType = $data['coord_type'];
-        $entity->coordSubtype = $data['coord_subtype'];
-        $entity->resolution = $data['resolution'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->areaType = (int) $data['area_type'];
+        $entity->areaSubtype = (int) $data['area_subtype'];
+        $entity->coordType = (int) $data['coord_type'];
+        $entity->coordSubtype = (int) $data['coord_subtype'];
+        $entity->resolution = (int) $data['resolution'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

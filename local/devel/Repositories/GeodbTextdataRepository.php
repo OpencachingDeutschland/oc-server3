@@ -194,16 +194,16 @@ class GeodbTextdataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbTextdataEntity();
-        $entity->locId = $data['loc_id'];
-        $entity->textVal = $data['text_val'];
-        $entity->textType = $data['text_type'];
-        $entity->textLocale = $data['text_locale'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->textVal = (string) $data['text_val'];
+        $entity->textType = (int) $data['text_type'];
+        $entity->textLocale = (string) $data['text_locale'];
         $entity->isNativeLang = $data['is_native_lang'];
         $entity->isDefaultName = $data['is_default_name'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

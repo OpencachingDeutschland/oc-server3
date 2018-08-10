@@ -192,14 +192,14 @@ class GeodbFloatdataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbFloatdataEntity();
-        $entity->locId = $data['loc_id'];
+        $entity->locId = (int) $data['loc_id'];
         $entity->floatVal = $data['float_val'];
-        $entity->floatType = $data['float_type'];
-        $entity->floatSubtype = $data['float_subtype'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->floatType = (int) $data['float_type'];
+        $entity->floatSubtype = (int) $data['float_subtype'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

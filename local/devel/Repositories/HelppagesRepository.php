@@ -187,9 +187,9 @@ class HelppagesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new HelppagesEntity();
-        $entity->ocpage = $data['ocpage'];
-        $entity->language = $data['language'];
-        $entity->helppage = $data['helppage'];
+        $entity->ocpage = (string) $data['ocpage'];
+        $entity->language = (string) $data['language'];
+        $entity->helppage = (string) $data['helppage'];
 
         return $entity;
     }

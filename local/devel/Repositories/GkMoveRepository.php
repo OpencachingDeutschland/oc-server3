@@ -193,15 +193,15 @@ class GkMoveRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GkMoveEntity();
-        $entity->id = $data['id'];
-        $entity->itemid = $data['itemid'];
+        $entity->id = (int) $data['id'];
+        $entity->itemid = (int) $data['itemid'];
         $entity->latitude = $data['latitude'];
         $entity->longitude = $data['longitude'];
-        $entity->datemoved = $data['datemoved'];
-        $entity->datelogged = $data['datelogged'];
-        $entity->userid = $data['userid'];
-        $entity->comment = $data['comment'];
-        $entity->logtypeid = $data['logtypeid'];
+        $entity->datemoved =  new DateTime($data['datemoved']);
+        $entity->datelogged =  new DateTime($data['datelogged']);
+        $entity->userid = (int) $data['userid'];
+        $entity->comment = (string) $data['comment'];
+        $entity->logtypeid = (int) $data['logtypeid'];
 
         return $entity;
     }

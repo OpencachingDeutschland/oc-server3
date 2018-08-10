@@ -188,10 +188,10 @@ class UserOptionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new UserOptionsEntity();
-        $entity->userId = $data['user_id'];
-        $entity->optionId = $data['option_id'];
-        $entity->optionVisible = $data['option_visible'];
-        $entity->optionValue = $data['option_value'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->optionId = (int) $data['option_id'];
+        $entity->optionVisible = (int) $data['option_visible'];
+        $entity->optionValue = (string) $data['option_value'];
 
         return $entity;
     }

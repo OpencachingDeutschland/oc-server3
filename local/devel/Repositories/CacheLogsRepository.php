@@ -205,26 +205,26 @@ class CacheLogsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheLogsEntity();
-        $entity->id = $data['id'];
-        $entity->uuid = $data['uuid'];
-        $entity->node = $data['node'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->entryLastModified = $data['entry_last_modified'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->okapiSyncbase = $data['okapi_syncbase'];
-        $entity->logLastModified = $data['log_last_modified'];
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
-        $entity->type = $data['type'];
-        $entity->ocTeamComment = $data['oc_team_comment'];
-        $entity->date = $data['date'];
-        $entity->orderDate = $data['order_date'];
-        $entity->needsMaintenance = $data['needs_maintenance'];
-        $entity->listingOutdated = $data['listing_outdated'];
-        $entity->text = $data['text'];
-        $entity->textHtml = $data['text_html'];
-        $entity->textHtmledit = $data['text_htmledit'];
-        $entity->ownerNotified = $data['owner_notified'];
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->entryLastModified =  new DateTime($data['entry_last_modified']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->okapiSyncbase = (string) $data['okapi_syncbase'];
+        $entity->logLastModified =  new DateTime($data['log_last_modified']);
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->type = (int) $data['type'];
+        $entity->ocTeamComment = (int) $data['oc_team_comment'];
+        $entity->date =  new DateTime($data['date']);
+        $entity->orderDate =  new DateTime($data['order_date']);
+        $entity->needsMaintenance = (int) $data['needs_maintenance'];
+        $entity->listingOutdated = (int) $data['listing_outdated'];
+        $entity->text = (string) $data['text'];
+        $entity->textHtml = (int) $data['text_html'];
+        $entity->textHtmledit = (int) $data['text_htmledit'];
+        $entity->ownerNotified = (int) $data['owner_notified'];
         $entity->picture = $data['picture'];
 
         return $entity;

@@ -189,11 +189,11 @@ class LoginsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LoginsEntity();
-        $entity->id = $data['id'];
-        $entity->userId = $data['user_id'];
-        $entity->remoteAddr = $data['remote_addr'];
-        $entity->success = $data['success'];
-        $entity->timestamp = $data['timestamp'];
+        $entity->id = (int) $data['id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->remoteAddr = (string) $data['remote_addr'];
+        $entity->success = (int) $data['success'];
+        $entity->timestamp =  new DateTime($data['timestamp']);
 
         return $entity;
     }

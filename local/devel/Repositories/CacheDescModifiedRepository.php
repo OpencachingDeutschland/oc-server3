@@ -194,16 +194,16 @@ class CacheDescModifiedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheDescModifiedEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->language = $data['language'];
-        $entity->dateModified = $data['date_modified'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->desc = $data['desc'];
-        $entity->descHtml = $data['desc_html'];
-        $entity->descHtmledit = $data['desc_htmledit'];
-        $entity->hint = $data['hint'];
-        $entity->shortDesc = $data['short_desc'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->language = (string) $data['language'];
+        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->desc = (string) $data['desc'];
+        $entity->descHtml = (int) $data['desc_html'];
+        $entity->descHtmledit = (int) $data['desc_htmledit'];
+        $entity->hint = (string) $data['hint'];
+        $entity->shortDesc = (string) $data['short_desc'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

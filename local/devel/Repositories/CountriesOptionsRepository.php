@@ -190,12 +190,12 @@ class CountriesOptionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CountriesOptionsEntity();
-        $entity->country = $data['country'];
-        $entity->display = $data['display'];
+        $entity->country = (string) $data['country'];
+        $entity->display = (int) $data['display'];
         $entity->gmLat = $data['gmLat'];
         $entity->gmLon = $data['gmLon'];
-        $entity->gmZoom = $data['gmZoom'];
-        $entity->nodeId = $data['nodeId'];
+        $entity->gmZoom = (int) $data['gmZoom'];
+        $entity->nodeId = (int) $data['nodeId'];
 
         return $entity;
     }

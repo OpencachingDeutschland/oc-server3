@@ -188,10 +188,10 @@ class CacheReportReasonsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheReportReasonsEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->order = $data['order'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->order = (int) $data['order'];
 
         return $entity;
     }

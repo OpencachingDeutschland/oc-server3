@@ -187,9 +187,9 @@ class OkapiNoncesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiNoncesEntity();
-        $entity->consumerKey = $data['consumer_key'];
-        $entity->nonceHash = $data['nonce_hash'];
-        $entity->timestamp = $data['timestamp'];
+        $entity->consumerKey = (string) $data['consumer_key'];
+        $entity->nonceHash = (string) $data['nonce_hash'];
+        $entity->timestamp = (int) $data['timestamp'];
 
         return $entity;
     }

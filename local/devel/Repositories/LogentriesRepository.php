@@ -193,15 +193,15 @@ class LogentriesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new LogentriesEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->module = $data['module'];
-        $entity->eventid = $data['eventid'];
-        $entity->userid = $data['userid'];
-        $entity->objectid1 = $data['objectid1'];
-        $entity->objectid2 = $data['objectid2'];
-        $entity->logtext = $data['logtext'];
-        $entity->details = $data['details'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->module = (string) $data['module'];
+        $entity->eventid = (int) $data['eventid'];
+        $entity->userid = (int) $data['userid'];
+        $entity->objectid1 = (int) $data['objectid1'];
+        $entity->objectid2 = (int) $data['objectid2'];
+        $entity->logtext = (string) $data['logtext'];
+        $entity->details = (string) $data['details'];
 
         return $entity;
     }

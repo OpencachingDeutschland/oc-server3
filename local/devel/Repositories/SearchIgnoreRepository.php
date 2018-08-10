@@ -185,7 +185,7 @@ class SearchIgnoreRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SearchIgnoreEntity();
-        $entity->word = $data['word'];
+        $entity->word = (string) $data['word'];
 
         return $entity;
     }

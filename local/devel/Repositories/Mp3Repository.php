@@ -195,17 +195,17 @@ class Mp3Repository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new Mp3Entity();
-        $entity->id = $data['id'];
-        $entity->uuid = $data['uuid'];
-        $entity->node = $data['node'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->lastModified = $data['last_modified'];
-        $entity->url = $data['url'];
-        $entity->title = $data['title'];
-        $entity->lastUrlCheck = $data['last_url_check'];
-        $entity->objectId = $data['object_id'];
-        $entity->local = $data['local'];
-        $entity->unknownFormat = $data['unknown_format'];
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->url = (string) $data['url'];
+        $entity->title = (string) $data['title'];
+        $entity->lastUrlCheck =  new DateTime($data['last_url_check']);
+        $entity->objectId = (int) $data['object_id'];
+        $entity->local = (int) $data['local'];
+        $entity->unknownFormat = (int) $data['unknown_format'];
 
         return $entity;
     }

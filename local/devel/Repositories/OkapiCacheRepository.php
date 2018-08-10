@@ -188,10 +188,10 @@ class OkapiCacheRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiCacheEntity();
-        $entity->key = $data['key'];
+        $entity->key = (string) $data['key'];
         $entity->score = $data['score'];
-        $entity->expires = $data['expires'];
-        $entity->value = $data['value'];
+        $entity->expires =  new DateTime($data['expires']);
+        $entity->value = (string) $data['value'];
 
         return $entity;
     }

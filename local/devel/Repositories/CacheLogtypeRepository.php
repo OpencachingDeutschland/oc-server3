@@ -186,8 +186,8 @@ class CacheLogtypeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheLogtypeEntity();
-        $entity->cacheTypeId = $data['cache_type_id'];
-        $entity->logTypeId = $data['log_type_id'];
+        $entity->cacheTypeId = (int) $data['cache_type_id'];
+        $entity->logTypeId = (int) $data['log_type_id'];
 
         return $entity;
     }

@@ -186,8 +186,8 @@ class WatchesLogqueueRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WatchesLogqueueEntity();
-        $entity->logId = $data['log_id'];
-        $entity->userId = $data['user_id'];
+        $entity->logId = (int) $data['log_id'];
+        $entity->userId = (int) $data['user_id'];
 
         return $entity;
     }

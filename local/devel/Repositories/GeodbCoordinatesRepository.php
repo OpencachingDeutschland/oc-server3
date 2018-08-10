@@ -193,15 +193,15 @@ class GeodbCoordinatesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbCoordinatesEntity();
-        $entity->locId = $data['loc_id'];
+        $entity->locId = (int) $data['loc_id'];
         $entity->lon = $data['lon'];
         $entity->lat = $data['lat'];
-        $entity->coordType = $data['coord_type'];
-        $entity->coordSubtype = $data['coord_subtype'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->coordType = (int) $data['coord_type'];
+        $entity->coordSubtype = (int) $data['coord_subtype'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

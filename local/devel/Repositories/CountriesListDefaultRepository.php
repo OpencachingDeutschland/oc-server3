@@ -186,8 +186,8 @@ class CountriesListDefaultRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CountriesListDefaultEntity();
-        $entity->lang = $data['lang'];
-        $entity->show = $data['show'];
+        $entity->lang = (string) $data['lang'];
+        $entity->show = (string) $data['show'];
 
         return $entity;
     }

@@ -188,10 +188,10 @@ class AttributeGroupsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new AttributeGroupsEntity();
-        $entity->id = $data['id'];
-        $entity->categoryId = $data['category_id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
+        $entity->id = (int) $data['id'];
+        $entity->categoryId = (int) $data['category_id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
 
         return $entity;
     }

@@ -186,8 +186,8 @@ class RatingTopsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new RatingTopsEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->rating = $data['rating'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->rating = (int) $data['rating'];
 
         return $entity;
     }

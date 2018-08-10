@@ -192,14 +192,14 @@ class GeodbIntdataRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeodbIntdataEntity();
-        $entity->locId = $data['loc_id'];
-        $entity->intVal = $data['int_val'];
-        $entity->intType = $data['int_type'];
-        $entity->intSubtype = $data['int_subtype'];
-        $entity->validSince = $data['valid_since'];
-        $entity->dateTypeSince = $data['date_type_since'];
-        $entity->validUntil = $data['valid_until'];
-        $entity->dateTypeUntil = $data['date_type_until'];
+        $entity->locId = (int) $data['loc_id'];
+        $entity->intVal = (int) $data['int_val'];
+        $entity->intType = (int) $data['int_type'];
+        $entity->intSubtype = (int) $data['int_subtype'];
+        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->dateTypeSince = (int) $data['date_type_since'];
+        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;
     }

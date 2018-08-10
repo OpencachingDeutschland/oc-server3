@@ -186,8 +186,8 @@ class GkMoveTypeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GkMoveTypeEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
 
         return $entity;
     }

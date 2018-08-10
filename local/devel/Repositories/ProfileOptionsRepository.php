@@ -193,15 +193,15 @@ class ProfileOptionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new ProfileOptionsEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->internalUse = $data['internal_use'];
-        $entity->defaultValue = $data['default_value'];
-        $entity->checkRegex = $data['check_regex'];
-        $entity->optionOrder = $data['option_order'];
-        $entity->optionInput = $data['option_input'];
-        $entity->optionset = $data['optionset'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->internalUse = (int) $data['internal_use'];
+        $entity->defaultValue = (string) $data['default_value'];
+        $entity->checkRegex = (string) $data['check_regex'];
+        $entity->optionOrder = (int) $data['option_order'];
+        $entity->optionInput = (string) $data['option_input'];
+        $entity->optionset = (int) $data['optionset'];
 
         return $entity;
     }

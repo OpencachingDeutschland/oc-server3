@@ -194,14 +194,14 @@ class SysReplSlavesRepository
     {
         $entity = new SysReplSlavesEntity();
         $entity->id = $data['id'];
-        $entity->server = $data['server'];
-        $entity->active = $data['active'];
-        $entity->weight = $data['weight'];
-        $entity->online = $data['online'];
-        $entity->lastCheck = $data['last_check'];
-        $entity->timeDiff = $data['time_diff'];
-        $entity->currentLogName = $data['current_log_name'];
-        $entity->currentLogPos = $data['current_log_pos'];
+        $entity->server = (string) $data['server'];
+        $entity->active = (int) $data['active'];
+        $entity->weight = (int) $data['weight'];
+        $entity->online = (int) $data['online'];
+        $entity->lastCheck =  new DateTime($data['last_check']);
+        $entity->timeDiff = (int) $data['time_diff'];
+        $entity->currentLogName = (string) $data['current_log_name'];
+        $entity->currentLogPos = (int) $data['current_log_pos'];
 
         return $entity;
     }

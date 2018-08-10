@@ -187,9 +187,9 @@ class UserStatpicRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new UserStatpicEntity();
-        $entity->userId = $data['user_id'];
-        $entity->lang = $data['lang'];
-        $entity->dateCreated = $data['date_created'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->lang = (string) $data['lang'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
 
         return $entity;
     }

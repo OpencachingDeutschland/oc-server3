@@ -187,9 +187,9 @@ class CacheAdoptionRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheAdoptionEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->userId = $data['user_id'];
-        $entity->dateCreated = $data['date_created'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
 
         return $entity;
     }

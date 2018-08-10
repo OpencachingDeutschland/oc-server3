@@ -190,12 +190,12 @@ class CoordinatesTypeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new CoordinatesTypeEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->image = $data['image'];
-        $entity->preposition = $data['preposition'];
-        $entity->ppTransId = $data['pp_trans_id'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->image = (string) $data['image'];
+        $entity->preposition = (string) $data['preposition'];
+        $entity->ppTransId = (int) $data['pp_trans_id'];
 
         return $entity;
     }

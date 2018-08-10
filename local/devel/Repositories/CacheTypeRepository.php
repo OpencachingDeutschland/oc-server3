@@ -195,17 +195,17 @@ class CacheTypeRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheTypeEntity();
-        $entity->id = $data['id'];
-        $entity->name = $data['name'];
-        $entity->transId = $data['trans_id'];
-        $entity->ordinal = $data['ordinal'];
-        $entity->short = $data['short'];
-        $entity->de = $data['de'];
-        $entity->en = $data['en'];
-        $entity->iconLarge = $data['icon_large'];
-        $entity->short2 = $data['short2'];
-        $entity->short2TransId = $data['short2_trans_id'];
-        $entity->kmlName = $data['kml_name'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->ordinal = (int) $data['ordinal'];
+        $entity->short = (string) $data['short'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->iconLarge = (string) $data['icon_large'];
+        $entity->short2 = (string) $data['short2'];
+        $entity->short2TransId = (int) $data['short2_trans_id'];
+        $entity->kmlName = (string) $data['kml_name'];
 
         return $entity;
     }

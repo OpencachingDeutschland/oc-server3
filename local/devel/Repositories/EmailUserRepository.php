@@ -191,13 +191,13 @@ class EmailUserRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new EmailUserEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->ipaddress = $data['ipaddress'];
-        $entity->fromUserId = $data['from_user_id'];
-        $entity->fromEmail = $data['from_email'];
-        $entity->toUserId = $data['to_user_id'];
-        $entity->toEmail = $data['to_email'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->ipaddress = (string) $data['ipaddress'];
+        $entity->fromUserId = (int) $data['from_user_id'];
+        $entity->fromEmail = (string) $data['from_email'];
+        $entity->toUserId = (int) $data['to_user_id'];
+        $entity->toEmail = (string) $data['to_email'];
 
         return $entity;
     }

@@ -194,16 +194,16 @@ class CacheReportsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheReportsEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->cacheid = $data['cacheid'];
-        $entity->userid = $data['userid'];
-        $entity->reason = $data['reason'];
-        $entity->note = $data['note'];
-        $entity->status = $data['status'];
-        $entity->adminid = $data['adminid'];
-        $entity->lastmodified = $data['lastmodified'];
-        $entity->comment = $data['comment'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->cacheid = (int) $data['cacheid'];
+        $entity->userid = (int) $data['userid'];
+        $entity->reason = (int) $data['reason'];
+        $entity->note = (string) $data['note'];
+        $entity->status = (int) $data['status'];
+        $entity->adminid = (int) $data['adminid'];
+        $entity->lastmodified = (string) $data['lastmodified'];
+        $entity->comment = (string) $data['comment'];
 
         return $entity;
     }

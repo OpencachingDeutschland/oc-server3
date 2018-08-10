@@ -189,11 +189,11 @@ class ReplicationOverwritetypesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new ReplicationOverwritetypesEntity();
-        $entity->id = $data['id'];
-        $entity->table = $data['table'];
-        $entity->field = $data['field'];
-        $entity->uuidFieldname = $data['uuid_fieldname'];
-        $entity->backupfirst = $data['backupfirst'];
+        $entity->id = (int) $data['id'];
+        $entity->table = (string) $data['table'];
+        $entity->field = (string) $data['field'];
+        $entity->uuidFieldname = (string) $data['uuid_fieldname'];
+        $entity->backupfirst = (int) $data['backupfirst'];
 
         return $entity;
     }

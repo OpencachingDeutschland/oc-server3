@@ -187,9 +187,9 @@ class SearchDoublesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SearchDoublesEntity();
-        $entity->hash = $data['hash'];
-        $entity->word = $data['word'];
-        $entity->simple = $data['simple'];
+        $entity->hash = (int) $data['hash'];
+        $entity->word = (string) $data['word'];
+        $entity->simple = (string) $data['simple'];
 
         return $entity;
     }

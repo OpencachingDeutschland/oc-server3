@@ -186,8 +186,8 @@ class GkMoveWaypointRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GkMoveWaypointEntity();
-        $entity->id = $data['id'];
-        $entity->wp = $data['wp'];
+        $entity->id = (int) $data['id'];
+        $entity->wp = (string) $data['wp'];
 
         return $entity;
     }

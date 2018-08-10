@@ -188,10 +188,10 @@ class SysTransTextRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysTransTextEntity();
-        $entity->transId = $data['trans_id'];
-        $entity->lang = $data['lang'];
-        $entity->text = $data['text'];
-        $entity->lastModified = $data['last_modified'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->lang = (string) $data['lang'];
+        $entity->text = (string) $data['text'];
+        $entity->lastModified =  new DateTime($data['last_modified']);
 
         return $entity;
     }

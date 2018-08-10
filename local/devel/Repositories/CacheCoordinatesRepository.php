@@ -190,12 +190,12 @@ class CacheCoordinatesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheCoordinatesEntity();
-        $entity->id = $data['id'];
-        $entity->dateCreated = $data['date_created'];
-        $entity->cacheId = $data['cache_id'];
+        $entity->id = (int) $data['id'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->cacheId = (int) $data['cache_id'];
         $entity->longitude = $data['longitude'];
         $entity->latitude = $data['latitude'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

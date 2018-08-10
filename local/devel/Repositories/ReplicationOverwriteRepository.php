@@ -188,10 +188,10 @@ class ReplicationOverwriteRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new ReplicationOverwriteEntity();
-        $entity->id = $data['id'];
-        $entity->type = $data['type'];
-        $entity->value = $data['value'];
-        $entity->uuid = $data['uuid'];
+        $entity->id = (int) $data['id'];
+        $entity->type = (int) $data['type'];
+        $entity->value = (string) $data['value'];
+        $entity->uuid = (string) $data['uuid'];
 
         return $entity;
     }

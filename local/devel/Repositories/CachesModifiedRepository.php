@@ -197,19 +197,19 @@ class CachesModifiedRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCachesModifiedEntity();
-        $entity->cacheId = $data['cache_id'];
-        $entity->dateModified = $data['date_modified'];
-        $entity->name = $data['name'];
-        $entity->type = $data['type'];
-        $entity->dateHidden = $data['date_hidden'];
-        $entity->size = $data['size'];
-        $entity->difficulty = $data['difficulty'];
-        $entity->terrain = $data['terrain'];
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->name = (string) $data['name'];
+        $entity->type = (int) $data['type'];
+        $entity->dateHidden =  new DateTime($data['date_hidden']);
+        $entity->size = (int) $data['size'];
+        $entity->difficulty = (int) $data['difficulty'];
+        $entity->terrain = (int) $data['terrain'];
         $entity->searchTime = $data['search_time'];
         $entity->wayLength = $data['way_length'];
-        $entity->wpGc = $data['wp_gc'];
-        $entity->wpNc = $data['wp_nc'];
-        $entity->restoredBy = $data['restored_by'];
+        $entity->wpGc = (string) $data['wp_gc'];
+        $entity->wpNc = (string) $data['wp_nc'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

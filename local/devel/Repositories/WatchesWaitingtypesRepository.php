@@ -186,8 +186,8 @@ class WatchesWaitingtypesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new WatchesWaitingtypesEntity();
-        $entity->id = $data['id'];
-        $entity->watchtype = $data['watchtype'];
+        $entity->id = (int) $data['id'];
+        $entity->watchtype = (string) $data['watchtype'];
 
         return $entity;
     }

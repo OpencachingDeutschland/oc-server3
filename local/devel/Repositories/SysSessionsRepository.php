@@ -188,10 +188,10 @@ class SysSessionsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new SysSessionsEntity();
-        $entity->uuid = $data['uuid'];
-        $entity->userId = $data['user_id'];
-        $entity->permanent = $data['permanent'];
-        $entity->lastLogin = $data['last_login'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->permanent = (int) $data['permanent'];
+        $entity->lastLogin =  new DateTime($data['last_login']);
 
         return $entity;
     }

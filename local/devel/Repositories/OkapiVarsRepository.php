@@ -186,8 +186,8 @@ class OkapiVarsRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiVarsEntity();
-        $entity->var = $data['var'];
-        $entity->value = $data['value'];
+        $entity->var = (string) $data['var'];
+        $entity->value = (string) $data['value'];
 
         return $entity;
     }

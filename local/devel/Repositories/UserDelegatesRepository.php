@@ -187,9 +187,9 @@ class UserDelegatesRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new UserDelegatesEntity();
-        $entity->userId = $data['user_id'];
-        $entity->node = $data['node'];
-        $entity->dateCreated = $data['date_created'];
+        $entity->userId = (int) $data['user_id'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated =  new DateTime($data['date_created']);
 
         return $entity;
     }

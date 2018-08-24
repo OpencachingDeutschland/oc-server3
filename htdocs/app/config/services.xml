@@ -37,6 +37,10 @@
             <tag name="knp_menu.renderer" alias="main"/>
         </service>
 
+        <service id="Oc\GlobalContext\GlobalContext" autowire="false">
+            <factory service="Oc\GlobalContext\GlobalContextFactory" method="createFromRequestStack" />
 
+            <argument type="service" id="request_stack" />
+        </service>
     </services>
 </container>

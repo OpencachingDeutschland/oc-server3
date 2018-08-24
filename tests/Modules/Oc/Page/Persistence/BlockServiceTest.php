@@ -1,10 +1,10 @@
 <?php
 
-namespace OcTest\Modules\Oc\User;
+namespace OcTest\Modules\Oc\Page\Persistence;
 
-use Oc\Page\BlockEntity;
-use Oc\Page\BlockRepository;
-use Oc\Page\BlockService;
+use Oc\Page\Persistence\BlockEntity;
+use Oc\Page\Persistence\BlockRepository;
+use Oc\Page\Persistence\BlockService;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use OcTest\Modules\TestCase;
 

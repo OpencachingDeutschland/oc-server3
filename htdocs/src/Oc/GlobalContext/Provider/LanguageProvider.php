@@ -53,6 +53,16 @@ class LanguageProvider
     }
 
     /**
+     * Returns default language configured in config.yml
+     *
+     * @return string
+     */
+    public function getDefaultLanguage()
+    {
+        return $this->defaultLanguage;
+    }
+
+    /**
      * Determines the language of the user.
      *
      * @param Request $request

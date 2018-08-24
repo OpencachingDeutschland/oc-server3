@@ -4,14 +4,14 @@
 {% set page_title_image = "" %}
 
 {% block body %}
-    {% for pageBlock in pageBlocks %}
-        <div id="block-{{ pageBlock.id}}" class="ctl__page">
-            <a class="anchorjs-link " href="#block-{{ pageBlock.id}}" aria-label="Anchor" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a>
+    {% for block in pageStruct.blockEntities %}
+        <div id="block-{{ block.id}}" class="ctl__page">
+            <a class="anchorjs-link " href="#block-{{ block.id}}" aria-label="Anchor" data-anchorjs-icon="#" style="padding-left: 0.375em;"></a>
             <div class="page__block-title">
-                {{ pageBlock.title|raw}}
+                {{ block.title|raw}}
             </div>
             <div class="page__block-html">
-                {{ pageBlock.html|raw }}
+                {{ block.html|raw }}
             </div>
         </div>
     {% endfor %}

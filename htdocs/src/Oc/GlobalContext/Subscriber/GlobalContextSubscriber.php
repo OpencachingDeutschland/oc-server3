@@ -52,7 +52,7 @@ class GlobalContextSubscriber implements EventSubscriberInterface
 
         $globalContext = $this->contextFactory->createFromRequest($request);
 
-        $request->setLocale($globalContext->getLocale());
+        $request->setDefaultLocale($globalContext->getLocale());
 
         $request->attributes->set('global_context', $globalContext);
     }

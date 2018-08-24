@@ -81,7 +81,9 @@ foreach ($tables as $table) {
     $isNewColumnName = $tableColumns[0]['COLUMN_NAME'];
 
     $classNameRepository = str_replace('_', '', ucwords($tableName, '_') . 'Repository');
+    $classNameRepositoryTest = str_replace('_', '', ucwords($tableName, '_') . 'RepositoryTest');
     $classNameEntity = str_replace('_', '', ucwords($tableName, '_') . 'Entity');
+    $classNameEntityTest = str_replace('_', '', ucwords($tableName, '_') . 'EntityTest');
 
     if (strpos($classNameEntity, 'Cache') === 0) {
         $classNameEntity = str_replace('Cache', 'GeoCache', $classNameEntity);
@@ -90,15 +92,41 @@ foreach ($tables as $table) {
     $classEntity = new Nette\PhpGenerator\ClassType($classNameEntity);
     $classEntity->setExtends(Oc\Repository\AbstractEntity::class);
 
+    $classEntityTest = new Nette\PhpGenerator\ClassType($classNameEntity . 'Test');
+    $classEntityTest->setExtends('AbstractModuleTest');
+    $classEntityTestBody = '
+        $entity = new ' . $classNameEntity . '();
+        self::assertTrue($entity->isNew());
+    ';
+
     foreach ($tableColumns as $column) {
         if ($isNewMethod === false && $column['COLUMN_KEY'] === 'PRI') {
             $isNewMethod = lowerCamelCase($column['COLUMN_NAME']);
             $isNewColumnName = $column['COLUMN_NAME'];
         }
+
         $classEntity->addProperty(lowerCamelCase($column['COLUMN_NAME']))
             ->setVisibility('public')
             ->addComment('@var ' . mapDataBaseTypesForPhpDoc($column['DATA_TYPE']));
+
+        if (mapDataBaseTypesForPhpDoc($column['DATA_TYPE']) === 'int') {
+            $classEntityTestBody .= '$entity->' . lowerCamelCase($column['COLUMN_NAME']) . ' = mt_rand(0, 100);';
+        } elseif (mapDataBaseTypesForPhpDoc($column['DATA_TYPE']) === 'string') {
+            $classEntityTestBody .= '$entity->' . lowerCamelCase($column['COLUMN_NAME']) . ' = md5(time());';
+        }
     }
+
+    $classEntityTestBody .= '
+        $newEntity = new ' . $classNameEntity . '();
+        $newEntity->fromArray($entity->toArray());
+
+        self::assertEquals($entity, $newEntity);
+        self::assertFalse($entity->isNew());
+    ';
+
+    $classEntityTest->addMethod('testEntity')
+        ->setVisibility('public')
+        ->setBody($classEntityTestBody);
 
     if ($isNewMethod) {
         $classEntity->addMethod('isNew')
@@ -334,6 +362,13 @@ foreach ($tables as $table) {
         "<?php \n\n" . $classEntity->__toString(),
         LOCK_EX
     );
+
+    file_put_contents(
+        __DIR__ . '/Entities/' . $classNameEntity . 'Test.php',
+        "<?php \n\n use OcTest\Modules\AbstractModuleTest; \n\n" . $classEntityTest->__toString(),
+        LOCK_EX
+    );
+
 
     file_put_contents(
         __DIR__ . '/Repositories/' . $classNameRepository . '.php',

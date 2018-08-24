@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class AttributeCategoriesEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class RemovedObjectsEntity extends Oc\Repository\AbstractEntity
 {

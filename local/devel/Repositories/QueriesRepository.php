@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class QueriesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class QueriesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class QueriesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class QueriesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class QueriesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class QueriesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,11 +174,11 @@ class QueriesRepository
     public function getDatabaseArrayFromEntity(QueriesEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'user_id' => $entity->userId,
-        'name' => $entity->name,
-        'options' => $entity->options,
-        'last_queried' => $entity->lastQueried,
+            'id' => $entity->id,
+            'user_id' => $entity->userId,
+            'name' => $entity->name,
+            'options' => $entity->options,
+            'last_queried' => $entity->lastQueried,
         ];
     }
 
@@ -193,7 +193,7 @@ class QueriesRepository
         $entity->userId = (int) $data['user_id'];
         $entity->name = (string) $data['name'];
         $entity->options = (string) $data['options'];
-        $entity->lastQueried =  new DateTime($data['last_queried']);
+        $entity->lastQueried = new DateTime($data['last_queried']);
 
         return $entity;
     }

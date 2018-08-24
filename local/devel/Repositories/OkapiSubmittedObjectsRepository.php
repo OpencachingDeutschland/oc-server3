@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiSubmittedObjectsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiSubmittedObjectsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiSubmittedObjectsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiSubmittedObjectsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->objectType = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiSubmittedObjectsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['object_type' => $entity->objectType]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['object_type' => $entity->objectType]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiSubmittedObjectsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['object_type' => $entity->objectType]
-                );
+            self::TABLE,
+            ['object_type' => $entity->objectType]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class OkapiSubmittedObjectsRepository
     public function getDatabaseArrayFromEntity(OkapiSubmittedObjectsEntity $entity)
     {
         return [
-        'object_type' => $entity->objectType,
-        'object_id' => $entity->objectId,
-        'consumer_key' => $entity->consumerKey,
+            'object_type' => $entity->objectType,
+            'object_id' => $entity->objectId,
+            'consumer_key' => $entity->consumerKey,
         ];
     }
 

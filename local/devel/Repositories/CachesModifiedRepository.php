@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CachesModifiedRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CachesModifiedRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CachesModifiedRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CachesModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->cacheId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CachesModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['cache_id' => $entity->cacheId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CachesModifiedRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            ['cache_id' => $entity->cacheId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,19 +174,19 @@ class CachesModifiedRepository
     public function getDatabaseArrayFromEntity(GeoCachesModifiedEntity $entity)
     {
         return [
-        'cache_id' => $entity->cacheId,
-        'date_modified' => $entity->dateModified,
-        'name' => $entity->name,
-        'type' => $entity->type,
-        'date_hidden' => $entity->dateHidden,
-        'size' => $entity->size,
-        'difficulty' => $entity->difficulty,
-        'terrain' => $entity->terrain,
-        'search_time' => $entity->searchTime,
-        'way_length' => $entity->wayLength,
-        'wp_gc' => $entity->wpGc,
-        'wp_nc' => $entity->wpNc,
-        'restored_by' => $entity->restoredBy,
+            'cache_id' => $entity->cacheId,
+            'date_modified' => $entity->dateModified,
+            'name' => $entity->name,
+            'type' => $entity->type,
+            'date_hidden' => $entity->dateHidden,
+            'size' => $entity->size,
+            'difficulty' => $entity->difficulty,
+            'terrain' => $entity->terrain,
+            'search_time' => $entity->searchTime,
+            'way_length' => $entity->wayLength,
+            'wp_gc' => $entity->wpGc,
+            'wp_nc' => $entity->wpNc,
+            'restored_by' => $entity->restoredBy,
         ];
     }
 
@@ -198,10 +198,10 @@ class CachesModifiedRepository
     {
         $entity = new GeoCachesModifiedEntity();
         $entity->cacheId = (int) $data['cache_id'];
-        $entity->dateModified =  new DateTime($data['date_modified']);
+        $entity->dateModified = new DateTime($data['date_modified']);
         $entity->name = (string) $data['name'];
         $entity->type = (int) $data['type'];
-        $entity->dateHidden =  new DateTime($data['date_hidden']);
+        $entity->dateHidden = new DateTime($data['date_hidden']);
         $entity->size = (int) $data['size'];
         $entity->difficulty = (int) $data['difficulty'];
         $entity->terrain = (int) $data['terrain'];

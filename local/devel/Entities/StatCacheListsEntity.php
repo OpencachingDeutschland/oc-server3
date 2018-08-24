@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class StatCacheListsEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheListsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheListsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheListsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheListsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheListsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheListsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,19 +174,19 @@ class CacheListsRepository
     public function getDatabaseArrayFromEntity(GeoCacheListsEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'uuid' => $entity->uuid,
-        'node' => $entity->node,
-        'user_id' => $entity->userId,
-        'date_created' => $entity->dateCreated,
-        'last_modified' => $entity->lastModified,
-        'last_added' => $entity->lastAdded,
-        'last_state_change' => $entity->lastStateChange,
-        'name' => $entity->name,
-        'is_public' => $entity->isPublic,
-        'description' => $entity->description,
-        'desc_htmledit' => $entity->descHtmledit,
-        'password' => $entity->password,
+            'id' => $entity->id,
+            'uuid' => $entity->uuid,
+            'node' => $entity->node,
+            'user_id' => $entity->userId,
+            'date_created' => $entity->dateCreated,
+            'last_modified' => $entity->lastModified,
+            'last_added' => $entity->lastAdded,
+            'last_state_change' => $entity->lastStateChange,
+            'name' => $entity->name,
+            'is_public' => $entity->isPublic,
+            'description' => $entity->description,
+            'desc_htmledit' => $entity->descHtmledit,
+            'password' => $entity->password,
         ];
     }
 
@@ -201,10 +201,10 @@ class CacheListsRepository
         $entity->uuid = (string) $data['uuid'];
         $entity->node = (int) $data['node'];
         $entity->userId = (int) $data['user_id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->lastModified =  new DateTime($data['last_modified']);
-        $entity->lastAdded =  new DateTime($data['last_added']);
-        $entity->lastStateChange =  new DateTime($data['last_state_change']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastAdded = new DateTime($data['last_added']);
+        $entity->lastStateChange = new DateTime($data['last_state_change']);
         $entity->name = (string) $data['name'];
         $entity->isPublic = (int) $data['is_public'];
         $entity->description = (string) $data['description'];

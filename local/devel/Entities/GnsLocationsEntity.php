@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GnsLocationsEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiStatsHourlyRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiStatsHourlyRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiStatsHourlyRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiStatsHourlyRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->consumerKey = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiStatsHourlyRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['consumer_key' => $entity->consumerKey]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['consumer_key' => $entity->consumerKey]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiStatsHourlyRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['consumer_key' => $entity->consumerKey]
-                );
+            self::TABLE,
+            ['consumer_key' => $entity->consumerKey]
+        );
 
         $entity->cacheId = null;
 
@@ -174,14 +174,14 @@ class OkapiStatsHourlyRepository
     public function getDatabaseArrayFromEntity(OkapiStatsHourlyEntity $entity)
     {
         return [
-        'consumer_key' => $entity->consumerKey,
-        'user_id' => $entity->userId,
-        'period_start' => $entity->periodStart,
-        'service_name' => $entity->serviceName,
-        'total_calls' => $entity->totalCalls,
-        'http_calls' => $entity->httpCalls,
-        'total_runtime' => $entity->totalRuntime,
-        'http_runtime' => $entity->httpRuntime,
+            'consumer_key' => $entity->consumerKey,
+            'user_id' => $entity->userId,
+            'period_start' => $entity->periodStart,
+            'service_name' => $entity->serviceName,
+            'total_calls' => $entity->totalCalls,
+            'http_calls' => $entity->httpCalls,
+            'total_runtime' => $entity->totalRuntime,
+            'http_runtime' => $entity->httpRuntime,
         ];
     }
 
@@ -194,7 +194,7 @@ class OkapiStatsHourlyRepository
         $entity = new OkapiStatsHourlyEntity();
         $entity->consumerKey = (string) $data['consumer_key'];
         $entity->userId = (int) $data['user_id'];
-        $entity->periodStart =  new DateTime($data['period_start']);
+        $entity->periodStart = new DateTime($data['period_start']);
         $entity->serviceName = (string) $data['service_name'];
         $entity->totalCalls = (int) $data['total_calls'];
         $entity->httpCalls = (int) $data['http_calls'];

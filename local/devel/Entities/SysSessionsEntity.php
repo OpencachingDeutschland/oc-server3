@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysSessionsEntity extends Oc\Repository\AbstractEntity
 {

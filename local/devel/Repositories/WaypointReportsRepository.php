@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class WaypointReportsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class WaypointReportsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class WaypointReportsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class WaypointReportsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->reportId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class WaypointReportsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['report_id' => $entity->reportId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['report_id' => $entity->reportId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class WaypointReportsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['report_id' => $entity->reportId]
-                );
+            self::TABLE,
+            ['report_id' => $entity->reportId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class WaypointReportsRepository
     public function getDatabaseArrayFromEntity(WaypointReportsEntity $entity)
     {
         return [
-        'report_id' => $entity->reportId,
-        'date_reported' => $entity->dateReported,
-        'wp_oc' => $entity->wpOc,
-        'wp_external' => $entity->wpExternal,
-        'source' => $entity->source,
-        'gcwp_processed' => $entity->gcwpProcessed,
+            'report_id' => $entity->reportId,
+            'date_reported' => $entity->dateReported,
+            'wp_oc' => $entity->wpOc,
+            'wp_external' => $entity->wpExternal,
+            'source' => $entity->source,
+            'gcwp_processed' => $entity->gcwpProcessed,
         ];
     }
 
@@ -191,7 +191,7 @@ class WaypointReportsRepository
     {
         $entity = new WaypointReportsEntity();
         $entity->reportId = (int) $data['report_id'];
-        $entity->dateReported =  new DateTime($data['date_reported']);
+        $entity->dateReported = new DateTime($data['date_reported']);
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->wpExternal = (string) $data['wp_external'];
         $entity->source = (string) $data['source'];

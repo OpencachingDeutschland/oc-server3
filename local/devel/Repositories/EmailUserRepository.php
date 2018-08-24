@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class EmailUserRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class EmailUserRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class EmailUserRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class EmailUserRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class EmailUserRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class EmailUserRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,13 +174,13 @@ class EmailUserRepository
     public function getDatabaseArrayFromEntity(EmailUserEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'date_created' => $entity->dateCreated,
-        'ipaddress' => $entity->ipaddress,
-        'from_user_id' => $entity->fromUserId,
-        'from_email' => $entity->fromEmail,
-        'to_user_id' => $entity->toUserId,
-        'to_email' => $entity->toEmail,
+            'id' => $entity->id,
+            'date_created' => $entity->dateCreated,
+            'ipaddress' => $entity->ipaddress,
+            'from_user_id' => $entity->fromUserId,
+            'from_email' => $entity->fromEmail,
+            'to_user_id' => $entity->toUserId,
+            'to_email' => $entity->toEmail,
         ];
     }
 
@@ -192,7 +192,7 @@ class EmailUserRepository
     {
         $entity = new EmailUserEntity();
         $entity->id = (int) $data['id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateCreated = new DateTime($data['date_created']);
         $entity->ipaddress = (string) $data['ipaddress'];
         $entity->fromUserId = (int) $data['from_user_id'];
         $entity->fromEmail = (string) $data['from_email'];

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiConsumersEntity extends Oc\Repository\AbstractEntity
 {

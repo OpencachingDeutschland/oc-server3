@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GeodbFloatdataRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GeodbFloatdataRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GeodbFloatdataRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GeodbFloatdataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->locId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GeodbFloatdataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['loc_id' => $entity->locId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GeodbFloatdataRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            ['loc_id' => $entity->locId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,14 +174,14 @@ class GeodbFloatdataRepository
     public function getDatabaseArrayFromEntity(GeodbFloatdataEntity $entity)
     {
         return [
-        'loc_id' => $entity->locId,
-        'float_val' => $entity->floatVal,
-        'float_type' => $entity->floatType,
-        'float_subtype' => $entity->floatSubtype,
-        'valid_since' => $entity->validSince,
-        'date_type_since' => $entity->dateTypeSince,
-        'valid_until' => $entity->validUntil,
-        'date_type_until' => $entity->dateTypeUntil,
+            'loc_id' => $entity->locId,
+            'float_val' => $entity->floatVal,
+            'float_type' => $entity->floatType,
+            'float_subtype' => $entity->floatSubtype,
+            'valid_since' => $entity->validSince,
+            'date_type_since' => $entity->dateTypeSince,
+            'valid_until' => $entity->validUntil,
+            'date_type_until' => $entity->dateTypeUntil,
         ];
     }
 
@@ -196,9 +196,9 @@ class GeodbFloatdataRepository
         $entity->floatVal = $data['float_val'];
         $entity->floatType = (int) $data['float_type'];
         $entity->floatSubtype = (int) $data['float_subtype'];
-        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->validSince = new DateTime($data['valid_since']);
         $entity->dateTypeSince = (int) $data['date_type_since'];
-        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->validUntil = new DateTime($data['valid_until']);
         $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;

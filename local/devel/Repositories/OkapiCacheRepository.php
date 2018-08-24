@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiCacheRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiCacheRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiCacheRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiCacheRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->key = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiCacheRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['key' => $entity->key]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['key' => $entity->key]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiCacheRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['key' => $entity->key]
-                );
+            self::TABLE,
+            ['key' => $entity->key]
+        );
 
         $entity->cacheId = null;
 
@@ -174,10 +174,10 @@ class OkapiCacheRepository
     public function getDatabaseArrayFromEntity(OkapiCacheEntity $entity)
     {
         return [
-        'key' => $entity->key,
-        'score' => $entity->score,
-        'expires' => $entity->expires,
-        'value' => $entity->value,
+            'key' => $entity->key,
+            'score' => $entity->score,
+            'expires' => $entity->expires,
+            'value' => $entity->value,
         ];
     }
 
@@ -190,7 +190,7 @@ class OkapiCacheRepository
         $entity = new OkapiCacheEntity();
         $entity->key = (string) $data['key'];
         $entity->score = $data['score'];
-        $entity->expires =  new DateTime($data['expires']);
+        $entity->expires = new DateTime($data['expires']);
         $entity->value = (string) $data['value'];
 
         return $entity;

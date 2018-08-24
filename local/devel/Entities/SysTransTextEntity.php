@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysTransTextEntity extends Oc\Repository\AbstractEntity
 {

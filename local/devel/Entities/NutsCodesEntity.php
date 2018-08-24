@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class NutsCodesEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheCoordinatesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheCoordinatesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheCoordinatesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheCoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheCoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheCoordinatesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class CacheCoordinatesRepository
     public function getDatabaseArrayFromEntity(GeoCacheCoordinatesEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'date_created' => $entity->dateCreated,
-        'cache_id' => $entity->cacheId,
-        'longitude' => $entity->longitude,
-        'latitude' => $entity->latitude,
-        'restored_by' => $entity->restoredBy,
+            'id' => $entity->id,
+            'date_created' => $entity->dateCreated,
+            'cache_id' => $entity->cacheId,
+            'longitude' => $entity->longitude,
+            'latitude' => $entity->latitude,
+            'restored_by' => $entity->restoredBy,
         ];
     }
 
@@ -191,7 +191,7 @@ class CacheCoordinatesRepository
     {
         $entity = new GeoCacheCoordinatesEntity();
         $entity->id = (int) $data['id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateCreated = new DateTime($data['date_created']);
         $entity->cacheId = (int) $data['cache_id'];
         $entity->longitude = $data['longitude'];
         $entity->latitude = $data['latitude'];

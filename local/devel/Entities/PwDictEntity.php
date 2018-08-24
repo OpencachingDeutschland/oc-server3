@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class PwDictEntity extends Oc\Repository\AbstractEntity
 {

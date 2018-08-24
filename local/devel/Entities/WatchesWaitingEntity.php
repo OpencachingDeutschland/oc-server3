@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WatchesWaitingEntity extends Oc\Repository\AbstractEntity
 {

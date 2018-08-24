@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class UserOptionsEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class CoordinatesEntity extends Oc\Repository\AbstractEntity
 {

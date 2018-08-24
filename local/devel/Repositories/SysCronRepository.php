@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysCronRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysCronRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysCronRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysCronRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->name = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysCronRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['name' => $entity->name]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['name' => $entity->name]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysCronRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['name' => $entity->name]
-                );
+            self::TABLE,
+            ['name' => $entity->name]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class SysCronRepository
     public function getDatabaseArrayFromEntity(SysCronEntity $entity)
     {
         return [
-        'name' => $entity->name,
-        'last_run' => $entity->lastRun,
+            'name' => $entity->name,
+            'last_run' => $entity->lastRun,
         ];
     }
 
@@ -187,7 +187,7 @@ class SysCronRepository
     {
         $entity = new SysCronEntity();
         $entity->name = (string) $data['name'];
-        $entity->lastRun =  new DateTime($data['last_run']);
+        $entity->lastRun = new DateTime($data['last_run']);
 
         return $entity;
     }

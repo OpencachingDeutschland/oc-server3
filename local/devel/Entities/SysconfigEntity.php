@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysconfigEntity extends Oc\Repository\AbstractEntity
 {

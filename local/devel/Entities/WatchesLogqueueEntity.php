@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WatchesLogqueueEntity extends Oc\Repository\AbstractEntity
 {

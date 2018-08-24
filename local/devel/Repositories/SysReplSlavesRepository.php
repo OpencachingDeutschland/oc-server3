@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysReplSlavesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysReplSlavesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysReplSlavesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysReplSlavesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysReplSlavesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysReplSlavesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,15 +174,15 @@ class SysReplSlavesRepository
     public function getDatabaseArrayFromEntity(SysReplSlavesEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'server' => $entity->server,
-        'active' => $entity->active,
-        'weight' => $entity->weight,
-        'online' => $entity->online,
-        'last_check' => $entity->lastCheck,
-        'time_diff' => $entity->timeDiff,
-        'current_log_name' => $entity->currentLogName,
-        'current_log_pos' => $entity->currentLogPos,
+            'id' => $entity->id,
+            'server' => $entity->server,
+            'active' => $entity->active,
+            'weight' => $entity->weight,
+            'online' => $entity->online,
+            'last_check' => $entity->lastCheck,
+            'time_diff' => $entity->timeDiff,
+            'current_log_name' => $entity->currentLogName,
+            'current_log_pos' => $entity->currentLogPos,
         ];
     }
 
@@ -198,7 +198,7 @@ class SysReplSlavesRepository
         $entity->active = (int) $data['active'];
         $entity->weight = (int) $data['weight'];
         $entity->online = (int) $data['online'];
-        $entity->lastCheck =  new DateTime($data['last_check']);
+        $entity->lastCheck = new DateTime($data['last_check']);
         $entity->timeDiff = (int) $data['time_diff'];
         $entity->currentLogName = (string) $data['current_log_name'];
         $entity->currentLogPos = (int) $data['current_log_pos'];

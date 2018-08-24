@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeoCacheSizeEntity extends Oc\Repository\AbstractEntity
 {

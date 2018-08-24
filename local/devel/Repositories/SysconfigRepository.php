@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysconfigRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysconfigRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysconfigRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysconfigRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->name = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysconfigRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['name' => $entity->name]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['name' => $entity->name]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysconfigRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['name' => $entity->name]
-                );
+            self::TABLE,
+            ['name' => $entity->name]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class SysconfigRepository
     public function getDatabaseArrayFromEntity(SysconfigEntity $entity)
     {
         return [
-        'name' => $entity->name,
-        'value' => $entity->value,
+            'name' => $entity->name,
+            'value' => $entity->value,
         ];
     }
 

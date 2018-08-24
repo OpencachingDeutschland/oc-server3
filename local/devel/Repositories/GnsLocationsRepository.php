@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GnsLocationsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GnsLocationsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GnsLocationsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GnsLocationsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->rc = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GnsLocationsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['rc' => $entity->rc]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['rc' => $entity->rc]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GnsLocationsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['rc' => $entity->rc]
-                );
+            self::TABLE,
+            ['rc' => $entity->rc]
+        );
 
         $entity->cacheId = null;
 
@@ -174,35 +174,35 @@ class GnsLocationsRepository
     public function getDatabaseArrayFromEntity(GnsLocationsEntity $entity)
     {
         return [
-        'rc' => $entity->rc,
-        'ufi' => $entity->ufi,
-        'uni' => $entity->uni,
-        'lat' => $entity->lat,
-        'lon' => $entity->lon,
-        'dms_lat' => $entity->dmsLat,
-        'dms_lon' => $entity->dmsLon,
-        'utm' => $entity->utm,
-        'jog' => $entity->jog,
-        'fc' => $entity->fc,
-        'dsg' => $entity->dsg,
-        'pc' => $entity->pc,
-        'cc1' => $entity->cc1,
-        'adm1' => $entity->adm1,
-        'adm2' => $entity->adm2,
-        'dim' => $entity->dim,
-        'cc2' => $entity->cc2,
-        'nt' => $entity->nt,
-        'lc' => $entity->lc,
-        'SHORT_FORM' => $entity->sHORTFORM,
-        'GENERIC' => $entity->gENERIC,
-        'SORT_NAME' => $entity->sORTNAME,
-        'FULL_NAME' => $entity->fULLNAME,
-        'FULL_NAME_ND' => $entity->fULLNAMEND,
-        'MOD_DATE' => $entity->mODDATE,
-        'admtxt1' => $entity->admtxt1,
-        'admtxt3' => $entity->admtxt3,
-        'admtxt4' => $entity->admtxt4,
-        'admtxt2' => $entity->admtxt2,
+            'rc' => $entity->rc,
+            'ufi' => $entity->ufi,
+            'uni' => $entity->uni,
+            'lat' => $entity->lat,
+            'lon' => $entity->lon,
+            'dms_lat' => $entity->dmsLat,
+            'dms_lon' => $entity->dmsLon,
+            'utm' => $entity->utm,
+            'jog' => $entity->jog,
+            'fc' => $entity->fc,
+            'dsg' => $entity->dsg,
+            'pc' => $entity->pc,
+            'cc1' => $entity->cc1,
+            'adm1' => $entity->adm1,
+            'adm2' => $entity->adm2,
+            'dim' => $entity->dim,
+            'cc2' => $entity->cc2,
+            'nt' => $entity->nt,
+            'lc' => $entity->lc,
+            'SHORT_FORM' => $entity->sHORTFORM,
+            'GENERIC' => $entity->gENERIC,
+            'SORT_NAME' => $entity->sORTNAME,
+            'FULL_NAME' => $entity->fULLNAME,
+            'FULL_NAME_ND' => $entity->fULLNAMEND,
+            'MOD_DATE' => $entity->mODDATE,
+            'admtxt1' => $entity->admtxt1,
+            'admtxt3' => $entity->admtxt3,
+            'admtxt4' => $entity->admtxt4,
+            'admtxt2' => $entity->admtxt2,
         ];
     }
 
@@ -237,7 +237,7 @@ class GnsLocationsRepository
         $entity->sORTNAME = (string) $data['SORT_NAME'];
         $entity->fULLNAME = (string) $data['FULL_NAME'];
         $entity->fULLNAMEND = (string) $data['FULL_NAME_ND'];
-        $entity->mODDATE =  new DateTime($data['MOD_DATE']);
+        $entity->mODDATE = new DateTime($data['MOD_DATE']);
         $entity->admtxt1 = (string) $data['admtxt1'];
         $entity->admtxt3 = (string) $data['admtxt3'];
         $entity->admtxt4 = (string) $data['admtxt4'];

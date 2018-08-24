@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class MapresultEntity extends Oc\Repository\AbstractEntity
 {

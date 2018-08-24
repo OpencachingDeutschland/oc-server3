@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class PageEntity extends Oc\Repository\AbstractEntity
 {

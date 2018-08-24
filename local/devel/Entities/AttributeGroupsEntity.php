@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class AttributeGroupsEntity extends Oc\Repository\AbstractEntity
 {

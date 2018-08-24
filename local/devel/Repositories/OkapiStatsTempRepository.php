@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiStatsTempRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiStatsTempRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiStatsTempRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiStatsTempRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->datetime = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiStatsTempRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['datetime' => $entity->datetime]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['datetime' => $entity->datetime]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiStatsTempRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['datetime' => $entity->datetime]
-                );
+            self::TABLE,
+            ['datetime' => $entity->datetime]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class OkapiStatsTempRepository
     public function getDatabaseArrayFromEntity(OkapiStatsTempEntity $entity)
     {
         return [
-        'datetime' => $entity->datetime,
-        'consumer_key' => $entity->consumerKey,
-        'user_id' => $entity->userId,
-        'service_name' => $entity->serviceName,
-        'calltype' => $entity->calltype,
-        'runtime' => $entity->runtime,
+            'datetime' => $entity->datetime,
+            'consumer_key' => $entity->consumerKey,
+            'user_id' => $entity->userId,
+            'service_name' => $entity->serviceName,
+            'calltype' => $entity->calltype,
+            'runtime' => $entity->runtime,
         ];
     }
 
@@ -190,7 +190,7 @@ class OkapiStatsTempRepository
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new OkapiStatsTempEntity();
-        $entity->datetime =  new DateTime($data['datetime']);
+        $entity->datetime = new DateTime($data['datetime']);
         $entity->consumerKey = (string) $data['consumer_key'];
         $entity->userId = (int) $data['user_id'];
         $entity->serviceName = (string) $data['service_name'];

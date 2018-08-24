@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class NutsCodesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class NutsCodesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class NutsCodesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class NutsCodesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->code = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class NutsCodesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['code' => $entity->code]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['code' => $entity->code]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class NutsCodesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['code' => $entity->code]
-                );
+            self::TABLE,
+            ['code' => $entity->code]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class NutsCodesRepository
     public function getDatabaseArrayFromEntity(NutsCodesEntity $entity)
     {
         return [
-        'code' => $entity->code,
-        'name' => $entity->name,
+            'code' => $entity->code,
+            'name' => $entity->name,
         ];
     }
 

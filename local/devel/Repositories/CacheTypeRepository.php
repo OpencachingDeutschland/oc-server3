@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheTypeRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheTypeRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheTypeRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheTypeRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheTypeRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheTypeRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,17 +174,17 @@ class CacheTypeRepository
     public function getDatabaseArrayFromEntity(GeoCacheTypeEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'name' => $entity->name,
-        'trans_id' => $entity->transId,
-        'ordinal' => $entity->ordinal,
-        'short' => $entity->short,
-        'de' => $entity->de,
-        'en' => $entity->en,
-        'icon_large' => $entity->iconLarge,
-        'short2' => $entity->short2,
-        'short2_trans_id' => $entity->short2TransId,
-        'kml_name' => $entity->kmlName,
+            'id' => $entity->id,
+            'name' => $entity->name,
+            'trans_id' => $entity->transId,
+            'ordinal' => $entity->ordinal,
+            'short' => $entity->short,
+            'de' => $entity->de,
+            'en' => $entity->en,
+            'icon_large' => $entity->iconLarge,
+            'short2' => $entity->short2,
+            'short2_trans_id' => $entity->short2TransId,
+            'kml_name' => $entity->kmlName,
         ];
     }
 

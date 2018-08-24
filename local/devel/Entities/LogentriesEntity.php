@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class LogentriesEntity extends Oc\Repository\AbstractEntity
 {

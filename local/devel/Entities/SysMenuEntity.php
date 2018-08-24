@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysMenuEntity extends Oc\Repository\AbstractEntity
 {

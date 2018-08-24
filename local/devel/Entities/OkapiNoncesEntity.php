@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiNoncesEntity extends Oc\Repository\AbstractEntity
 {

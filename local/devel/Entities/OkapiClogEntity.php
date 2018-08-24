@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiClogEntity extends Oc\Repository\AbstractEntity
 {

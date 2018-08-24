@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class NodesEntity extends Oc\Repository\AbstractEntity
 {

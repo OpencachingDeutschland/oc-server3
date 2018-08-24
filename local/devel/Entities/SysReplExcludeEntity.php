@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysReplExcludeEntity extends Oc\Repository\AbstractEntity
 {

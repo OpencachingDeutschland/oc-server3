@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GeodbTextdataRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GeodbTextdataRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GeodbTextdataRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GeodbTextdataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->locId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GeodbTextdataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['loc_id' => $entity->locId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GeodbTextdataRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            ['loc_id' => $entity->locId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,16 +174,16 @@ class GeodbTextdataRepository
     public function getDatabaseArrayFromEntity(GeodbTextdataEntity $entity)
     {
         return [
-        'loc_id' => $entity->locId,
-        'text_val' => $entity->textVal,
-        'text_type' => $entity->textType,
-        'text_locale' => $entity->textLocale,
-        'is_native_lang' => $entity->isNativeLang,
-        'is_default_name' => $entity->isDefaultName,
-        'valid_since' => $entity->validSince,
-        'date_type_since' => $entity->dateTypeSince,
-        'valid_until' => $entity->validUntil,
-        'date_type_until' => $entity->dateTypeUntil,
+            'loc_id' => $entity->locId,
+            'text_val' => $entity->textVal,
+            'text_type' => $entity->textType,
+            'text_locale' => $entity->textLocale,
+            'is_native_lang' => $entity->isNativeLang,
+            'is_default_name' => $entity->isDefaultName,
+            'valid_since' => $entity->validSince,
+            'date_type_since' => $entity->dateTypeSince,
+            'valid_until' => $entity->validUntil,
+            'date_type_until' => $entity->dateTypeUntil,
         ];
     }
 
@@ -200,9 +200,9 @@ class GeodbTextdataRepository
         $entity->textLocale = (string) $data['text_locale'];
         $entity->isNativeLang = $data['is_native_lang'];
         $entity->isDefaultName = $data['is_default_name'];
-        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->validSince = new DateTime($data['valid_since']);
         $entity->dateTypeSince = (int) $data['date_type_since'];
-        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->validUntil = new DateTime($data['valid_until']);
         $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;

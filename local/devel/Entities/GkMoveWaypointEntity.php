@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GkMoveWaypointEntity extends Oc\Repository\AbstractEntity
 {

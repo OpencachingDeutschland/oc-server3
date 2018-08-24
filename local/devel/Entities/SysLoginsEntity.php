@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysLoginsEntity extends Oc\Repository\AbstractEntity
 {

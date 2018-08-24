@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheListWatchesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheListWatchesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheListWatchesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheListWatchesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->cacheListId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheListWatchesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['cache_list_id' => $entity->cacheListId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['cache_list_id' => $entity->cacheListId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheListWatchesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['cache_list_id' => $entity->cacheListId]
-                );
+            self::TABLE,
+            ['cache_list_id' => $entity->cacheListId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class CacheListWatchesRepository
     public function getDatabaseArrayFromEntity(GeoCacheListWatchesEntity $entity)
     {
         return [
-        'cache_list_id' => $entity->cacheListId,
-        'user_id' => $entity->userId,
+            'cache_list_id' => $entity->cacheListId,
+            'user_id' => $entity->userId,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class WatchesLogqueueRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class WatchesLogqueueRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class WatchesLogqueueRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class WatchesLogqueueRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->logId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class WatchesLogqueueRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['log_id' => $entity->logId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['log_id' => $entity->logId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class WatchesLogqueueRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['log_id' => $entity->logId]
-                );
+            self::TABLE,
+            ['log_id' => $entity->logId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class WatchesLogqueueRepository
     public function getDatabaseArrayFromEntity(WatchesLogqueueEntity $entity)
     {
         return [
-        'log_id' => $entity->logId,
-        'user_id' => $entity->userId,
+            'log_id' => $entity->logId,
+            'user_id' => $entity->userId,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiStatsHourlyEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CoordinatesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CoordinatesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CoordinatesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CoordinatesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,17 +174,17 @@ class CoordinatesRepository
     public function getDatabaseArrayFromEntity(CoordinatesEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'date_created' => $entity->dateCreated,
-        'last_modified' => $entity->lastModified,
-        'type' => $entity->type,
-        'subtype' => $entity->subtype,
-        'latitude' => $entity->latitude,
-        'longitude' => $entity->longitude,
-        'cache_id' => $entity->cacheId,
-        'user_id' => $entity->userId,
-        'log_id' => $entity->logId,
-        'description' => $entity->description,
+            'id' => $entity->id,
+            'date_created' => $entity->dateCreated,
+            'last_modified' => $entity->lastModified,
+            'type' => $entity->type,
+            'subtype' => $entity->subtype,
+            'latitude' => $entity->latitude,
+            'longitude' => $entity->longitude,
+            'cache_id' => $entity->cacheId,
+            'user_id' => $entity->userId,
+            'log_id' => $entity->logId,
+            'description' => $entity->description,
         ];
     }
 
@@ -196,8 +196,8 @@ class CoordinatesRepository
     {
         $entity = new CoordinatesEntity();
         $entity->id = (int) $data['id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->lastModified = new DateTime($data['last_modified']);
         $entity->type = (int) $data['type'];
         $entity->subtype = (int) $data['subtype'];
         $entity->latitude = $data['latitude'];

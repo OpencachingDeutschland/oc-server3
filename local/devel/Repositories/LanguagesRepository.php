@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class LanguagesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class LanguagesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class LanguagesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class LanguagesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->short = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class LanguagesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['short' => $entity->short]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['short' => $entity->short]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class LanguagesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['short' => $entity->short]
-                );
+            self::TABLE,
+            ['short' => $entity->short]
+        );
 
         $entity->cacheId = null;
 
@@ -174,15 +174,15 @@ class LanguagesRepository
     public function getDatabaseArrayFromEntity(LanguagesEntity $entity)
     {
         return [
-        'short' => $entity->short,
-        'name' => $entity->name,
-        'trans_id' => $entity->transId,
-        'native_name' => $entity->nativeName,
-        'de' => $entity->de,
-        'en' => $entity->en,
-        'list_default_de' => $entity->listDefaultDe,
-        'list_default_en' => $entity->listDefaultEn,
-        'is_translated' => $entity->isTranslated,
+            'short' => $entity->short,
+            'name' => $entity->name,
+            'trans_id' => $entity->transId,
+            'native_name' => $entity->nativeName,
+            'de' => $entity->de,
+            'en' => $entity->en,
+            'list_default_de' => $entity->listDefaultDe,
+            'list_default_en' => $entity->listDefaultEn,
+            'is_translated' => $entity->isTranslated,
         ];
     }
 

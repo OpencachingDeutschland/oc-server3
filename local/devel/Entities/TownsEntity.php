@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class TownsEntity extends Oc\Repository\AbstractEntity
 {

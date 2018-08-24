@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GnsSearchRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GnsSearchRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GnsSearchRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GnsSearchRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->uniId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GnsSearchRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['uni_id' => $entity->uniId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['uni_id' => $entity->uniId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GnsSearchRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['uni_id' => $entity->uniId]
-                );
+            self::TABLE,
+            ['uni_id' => $entity->uniId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,10 +174,10 @@ class GnsSearchRepository
     public function getDatabaseArrayFromEntity(GnsSearchEntity $entity)
     {
         return [
-        'uni_id' => $entity->uniId,
-        'sort' => $entity->sort,
-        'simple' => $entity->simple,
-        'simplehash' => $entity->simplehash,
+            'uni_id' => $entity->uniId,
+            'sort' => $entity->sort,
+            'simple' => $entity->simple,
+            'simplehash' => $entity->simplehash,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class Map2ResultRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class Map2ResultRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class Map2ResultRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class Map2ResultRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->resultId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class Map2ResultRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['result_id' => $entity->resultId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['result_id' => $entity->resultId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class Map2ResultRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['result_id' => $entity->resultId]
-                );
+            self::TABLE,
+            ['result_id' => $entity->resultId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,14 +174,14 @@ class Map2ResultRepository
     public function getDatabaseArrayFromEntity(Map2ResultEntity $entity)
     {
         return [
-        'result_id' => $entity->resultId,
-        'slave_id' => $entity->slaveId,
-        'sqlchecksum' => $entity->sqlchecksum,
-        'sqlquery' => $entity->sqlquery,
-        'shared_counter' => $entity->sharedCounter,
-        'request_counter' => $entity->requestCounter,
-        'date_created' => $entity->dateCreated,
-        'date_lastqueried' => $entity->dateLastqueried,
+            'result_id' => $entity->resultId,
+            'slave_id' => $entity->slaveId,
+            'sqlchecksum' => $entity->sqlchecksum,
+            'sqlquery' => $entity->sqlquery,
+            'shared_counter' => $entity->sharedCounter,
+            'request_counter' => $entity->requestCounter,
+            'date_created' => $entity->dateCreated,
+            'date_lastqueried' => $entity->dateLastqueried,
         ];
     }
 
@@ -198,8 +198,8 @@ class Map2ResultRepository
         $entity->sqlquery = (string) $data['sqlquery'];
         $entity->sharedCounter = (int) $data['shared_counter'];
         $entity->requestCounter = (int) $data['request_counter'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->dateLastqueried =  new DateTime($data['date_lastqueried']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->dateLastqueried = new DateTime($data['date_lastqueried']);
 
         return $entity;
     }

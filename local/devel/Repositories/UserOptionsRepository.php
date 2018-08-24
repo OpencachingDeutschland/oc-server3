@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class UserOptionsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class UserOptionsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class UserOptionsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class UserOptionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->userId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class UserOptionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['user_id' => $entity->userId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['user_id' => $entity->userId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class UserOptionsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['user_id' => $entity->userId]
-                );
+            self::TABLE,
+            ['user_id' => $entity->userId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,10 +174,10 @@ class UserOptionsRepository
     public function getDatabaseArrayFromEntity(UserOptionsEntity $entity)
     {
         return [
-        'user_id' => $entity->userId,
-        'option_id' => $entity->optionId,
-        'option_visible' => $entity->optionVisible,
-        'option_value' => $entity->optionValue,
+            'user_id' => $entity->userId,
+            'option_id' => $entity->optionId,
+            'option_visible' => $entity->optionVisible,
+            'option_value' => $entity->optionValue,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GeodbHierarchiesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GeodbHierarchiesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GeodbHierarchiesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GeodbHierarchiesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->locId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GeodbHierarchiesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['loc_id' => $entity->locId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GeodbHierarchiesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['loc_id' => $entity->locId]
-                );
+            self::TABLE,
+            ['loc_id' => $entity->locId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,21 +174,21 @@ class GeodbHierarchiesRepository
     public function getDatabaseArrayFromEntity(GeodbHierarchiesEntity $entity)
     {
         return [
-        'loc_id' => $entity->locId,
-        'level' => $entity->level,
-        'id_lvl1' => $entity->idLvl1,
-        'id_lvl2' => $entity->idLvl2,
-        'id_lvl3' => $entity->idLvl3,
-        'id_lvl4' => $entity->idLvl4,
-        'id_lvl5' => $entity->idLvl5,
-        'id_lvl6' => $entity->idLvl6,
-        'id_lvl7' => $entity->idLvl7,
-        'id_lvl8' => $entity->idLvl8,
-        'id_lvl9' => $entity->idLvl9,
-        'valid_since' => $entity->validSince,
-        'date_type_since' => $entity->dateTypeSince,
-        'valid_until' => $entity->validUntil,
-        'date_type_until' => $entity->dateTypeUntil,
+            'loc_id' => $entity->locId,
+            'level' => $entity->level,
+            'id_lvl1' => $entity->idLvl1,
+            'id_lvl2' => $entity->idLvl2,
+            'id_lvl3' => $entity->idLvl3,
+            'id_lvl4' => $entity->idLvl4,
+            'id_lvl5' => $entity->idLvl5,
+            'id_lvl6' => $entity->idLvl6,
+            'id_lvl7' => $entity->idLvl7,
+            'id_lvl8' => $entity->idLvl8,
+            'id_lvl9' => $entity->idLvl9,
+            'valid_since' => $entity->validSince,
+            'date_type_since' => $entity->dateTypeSince,
+            'valid_until' => $entity->validUntil,
+            'date_type_until' => $entity->dateTypeUntil,
         ];
     }
 
@@ -210,9 +210,9 @@ class GeodbHierarchiesRepository
         $entity->idLvl7 = (int) $data['id_lvl7'];
         $entity->idLvl8 = (int) $data['id_lvl8'];
         $entity->idLvl9 = (int) $data['id_lvl9'];
-        $entity->validSince =  new DateTime($data['valid_since']);
+        $entity->validSince = new DateTime($data['valid_since']);
         $entity->dateTypeSince = (int) $data['date_type_since'];
-        $entity->validUntil =  new DateTime($data['valid_until']);
+        $entity->validUntil = new DateTime($data['valid_until']);
         $entity->dateTypeUntil = (int) $data['date_type_until'];
 
         return $entity;

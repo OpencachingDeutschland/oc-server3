@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class EmailUserEntity extends Oc\Repository\AbstractEntity
 {

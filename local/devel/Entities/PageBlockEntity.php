@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class PageBlockEntity extends Oc\Repository\AbstractEntity
 {

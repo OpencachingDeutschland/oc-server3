@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysMenuRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysMenuRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysMenuRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysMenuRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysMenuRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysMenuRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,20 +174,20 @@ class SysMenuRepository
     public function getDatabaseArrayFromEntity(SysMenuEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'id_string' => $entity->idString,
-        'title' => $entity->title,
-        'title_trans_id' => $entity->titleTransId,
-        'menustring' => $entity->menustring,
-        'menustring_trans_id' => $entity->menustringTransId,
-        'access' => $entity->access,
-        'href' => $entity->href,
-        'visible' => $entity->visible,
-        'parent' => $entity->parent,
-        'position' => $entity->position,
-        'color' => $entity->color,
-        'sitemap' => $entity->sitemap,
-        'only_if_parent' => $entity->onlyIfParent,
+            'id' => $entity->id,
+            'id_string' => $entity->idString,
+            'title' => $entity->title,
+            'title_trans_id' => $entity->titleTransId,
+            'menustring' => $entity->menustring,
+            'menustring_trans_id' => $entity->menustringTransId,
+            'access' => $entity->access,
+            'href' => $entity->href,
+            'visible' => $entity->visible,
+            'parent' => $entity->parent,
+            'position' => $entity->position,
+            'color' => $entity->color,
+            'sitemap' => $entity->sitemap,
+            'only_if_parent' => $entity->onlyIfParent,
         ];
     }
 

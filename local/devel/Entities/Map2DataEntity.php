@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Map2DataEntity extends Oc\Repository\AbstractEntity
 {

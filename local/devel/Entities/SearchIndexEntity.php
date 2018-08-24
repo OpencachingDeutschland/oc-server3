@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SearchIndexEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiCacheReadsEntity extends Oc\Repository\AbstractEntity
 {

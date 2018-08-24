@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GkItemEntity extends Oc\Repository\AbstractEntity
 {

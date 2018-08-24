@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiAuthorizationsEntity extends Oc\Repository\AbstractEntity
 {

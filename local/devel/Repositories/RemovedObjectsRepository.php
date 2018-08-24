@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class RemovedObjectsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class RemovedObjectsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class RemovedObjectsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class RemovedObjectsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class RemovedObjectsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class RemovedObjectsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class RemovedObjectsRepository
     public function getDatabaseArrayFromEntity(RemovedObjectsEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'localID' => $entity->localID,
-        'uuid' => $entity->uuid,
-        'type' => $entity->type,
-        'removed_date' => $entity->removedDate,
-        'node' => $entity->node,
+            'id' => $entity->id,
+            'localID' => $entity->localID,
+            'uuid' => $entity->uuid,
+            'type' => $entity->type,
+            'removed_date' => $entity->removedDate,
+            'node' => $entity->node,
         ];
     }
 
@@ -194,7 +194,7 @@ class RemovedObjectsRepository
         $entity->localID = (int) $data['localID'];
         $entity->uuid = (string) $data['uuid'];
         $entity->type = (int) $data['type'];
-        $entity->removedDate =  new DateTime($data['removed_date']);
+        $entity->removedDate = new DateTime($data['removed_date']);
         $entity->node = (int) $data['node'];
 
         return $entity;

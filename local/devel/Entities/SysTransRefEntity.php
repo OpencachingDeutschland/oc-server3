@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysTransRefEntity extends Oc\Repository\AbstractEntity
 {

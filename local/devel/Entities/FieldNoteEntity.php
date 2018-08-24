@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class FieldNoteEntity extends Oc\Repository\AbstractEntity
 {

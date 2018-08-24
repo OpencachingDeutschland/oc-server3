@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiTokensRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiTokensRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiTokensRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiTokensRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->key = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiTokensRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['key' => $entity->key]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['key' => $entity->key]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiTokensRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['key' => $entity->key]
-                );
+            self::TABLE,
+            ['key' => $entity->key]
+        );
 
         $entity->cacheId = null;
 
@@ -174,14 +174,14 @@ class OkapiTokensRepository
     public function getDatabaseArrayFromEntity(OkapiTokensEntity $entity)
     {
         return [
-        'key' => $entity->key,
-        'secret' => $entity->secret,
-        'token_type' => $entity->tokenType,
-        'timestamp' => $entity->timestamp,
-        'user_id' => $entity->userId,
-        'consumer_key' => $entity->consumerKey,
-        'verifier' => $entity->verifier,
-        'callback' => $entity->callback,
+            'key' => $entity->key,
+            'secret' => $entity->secret,
+            'token_type' => $entity->tokenType,
+            'timestamp' => $entity->timestamp,
+            'user_id' => $entity->userId,
+            'consumer_key' => $entity->consumerKey,
+            'verifier' => $entity->verifier,
+            'callback' => $entity->callback,
         ];
     }
 

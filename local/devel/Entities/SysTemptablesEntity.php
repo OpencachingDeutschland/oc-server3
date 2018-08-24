@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysTemptablesEntity extends Oc\Repository\AbstractEntity
 {

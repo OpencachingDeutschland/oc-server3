@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class StatUserRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class StatUserRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class StatUserRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class StatUserRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->userId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class StatUserRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['user_id' => $entity->userId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['user_id' => $entity->userId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class StatUserRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['user_id' => $entity->userId]
-                );
+            self::TABLE,
+            ['user_id' => $entity->userId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,13 +174,13 @@ class StatUserRepository
     public function getDatabaseArrayFromEntity(StatUserEntity $entity)
     {
         return [
-        'user_id' => $entity->userId,
-        'found' => $entity->found,
-        'notfound' => $entity->notfound,
-        'note' => $entity->note,
-        'hidden' => $entity->hidden,
-        'will_attend' => $entity->willAttend,
-        'maintenance' => $entity->maintenance,
+            'user_id' => $entity->userId,
+            'found' => $entity->found,
+            'notfound' => $entity->notfound,
+            'note' => $entity->note,
+            'hidden' => $entity->hidden,
+            'will_attend' => $entity->willAttend,
+            'maintenance' => $entity->maintenance,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiTokensEntity extends Oc\Repository\AbstractEntity
 {

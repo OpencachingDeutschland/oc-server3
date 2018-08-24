@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiStatsTempEntity extends Oc\Repository\AbstractEntity
 {

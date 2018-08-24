@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class LanguagesListDefaultEntity extends Oc\Repository\AbstractEntity
 {

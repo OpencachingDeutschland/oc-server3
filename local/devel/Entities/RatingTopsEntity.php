@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class RatingTopsEntity extends Oc\Repository\AbstractEntity
 {

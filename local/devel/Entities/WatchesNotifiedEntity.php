@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WatchesNotifiedEntity extends Oc\Repository\AbstractEntity
 {

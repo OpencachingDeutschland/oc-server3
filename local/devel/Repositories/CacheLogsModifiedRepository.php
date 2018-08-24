@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheLogsModifiedRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheLogsModifiedRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheLogsModifiedRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheLogsModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheLogsModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheLogsModifiedRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,23 +174,23 @@ class CacheLogsModifiedRepository
     public function getDatabaseArrayFromEntity(GeoCacheLogsModifiedEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'uuid' => $entity->uuid,
-        'node' => $entity->node,
-        'date_created' => $entity->dateCreated,
-        'entry_last_modified' => $entity->entryLastModified,
-        'last_modified' => $entity->lastModified,
-        'log_last_modified' => $entity->logLastModified,
-        'cache_id' => $entity->cacheId,
-        'user_id' => $entity->userId,
-        'type' => $entity->type,
-        'oc_team_comment' => $entity->ocTeamComment,
-        'date' => $entity->date,
-        'needs_maintenance' => $entity->needsMaintenance,
-        'listing_outdated' => $entity->listingOutdated,
-        'text' => $entity->text,
-        'text_html' => $entity->textHtml,
-        'modify_date' => $entity->modifyDate,
+            'id' => $entity->id,
+            'uuid' => $entity->uuid,
+            'node' => $entity->node,
+            'date_created' => $entity->dateCreated,
+            'entry_last_modified' => $entity->entryLastModified,
+            'last_modified' => $entity->lastModified,
+            'log_last_modified' => $entity->logLastModified,
+            'cache_id' => $entity->cacheId,
+            'user_id' => $entity->userId,
+            'type' => $entity->type,
+            'oc_team_comment' => $entity->ocTeamComment,
+            'date' => $entity->date,
+            'needs_maintenance' => $entity->needsMaintenance,
+            'listing_outdated' => $entity->listingOutdated,
+            'text' => $entity->text,
+            'text_html' => $entity->textHtml,
+            'modify_date' => $entity->modifyDate,
         ];
     }
 
@@ -204,20 +204,20 @@ class CacheLogsModifiedRepository
         $entity->id = (int) $data['id'];
         $entity->uuid = (string) $data['uuid'];
         $entity->node = (int) $data['node'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->entryLastModified =  new DateTime($data['entry_last_modified']);
-        $entity->lastModified =  new DateTime($data['last_modified']);
-        $entity->logLastModified =  new DateTime($data['log_last_modified']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->entryLastModified = new DateTime($data['entry_last_modified']);
+        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->logLastModified = new DateTime($data['log_last_modified']);
         $entity->cacheId = (int) $data['cache_id'];
         $entity->userId = (int) $data['user_id'];
         $entity->type = (int) $data['type'];
         $entity->ocTeamComment = (int) $data['oc_team_comment'];
-        $entity->date =  new DateTime($data['date']);
+        $entity->date = new DateTime($data['date']);
         $entity->needsMaintenance = (int) $data['needs_maintenance'];
         $entity->listingOutdated = (int) $data['listing_outdated'];
         $entity->text = (string) $data['text'];
         $entity->textHtml = (int) $data['text_html'];
-        $entity->modifyDate =  new DateTime($data['modify_date']);
+        $entity->modifyDate = new DateTime($data['modify_date']);
 
         return $entity;
     }

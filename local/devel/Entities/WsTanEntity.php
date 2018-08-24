@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WsTanEntity extends Oc\Repository\AbstractEntity
 {

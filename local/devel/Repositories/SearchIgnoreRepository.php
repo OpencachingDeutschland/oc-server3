@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SearchIgnoreRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SearchIgnoreRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SearchIgnoreRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SearchIgnoreRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->word = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SearchIgnoreRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['word' => $entity->word]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['word' => $entity->word]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SearchIgnoreRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['word' => $entity->word]
-                );
+            self::TABLE,
+            ['word' => $entity->word]
+        );
 
         $entity->cacheId = null;
 
@@ -174,7 +174,7 @@ class SearchIgnoreRepository
     public function getDatabaseArrayFromEntity(SearchIgnoreEntity $entity)
     {
         return [
-        'word' => $entity->word,
+            'word' => $entity->word,
         ];
     }
 

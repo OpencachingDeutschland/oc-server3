@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ObjectTypesEntity extends Oc\Repository\AbstractEntity
 {

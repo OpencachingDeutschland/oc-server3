@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheReportsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheReportsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheReportsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheReportsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheReportsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheReportsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,16 +174,16 @@ class CacheReportsRepository
     public function getDatabaseArrayFromEntity(GeoCacheReportsEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'date_created' => $entity->dateCreated,
-        'cacheid' => $entity->cacheid,
-        'userid' => $entity->userid,
-        'reason' => $entity->reason,
-        'note' => $entity->note,
-        'status' => $entity->status,
-        'adminid' => $entity->adminid,
-        'lastmodified' => $entity->lastmodified,
-        'comment' => $entity->comment,
+            'id' => $entity->id,
+            'date_created' => $entity->dateCreated,
+            'cacheid' => $entity->cacheid,
+            'userid' => $entity->userid,
+            'reason' => $entity->reason,
+            'note' => $entity->note,
+            'status' => $entity->status,
+            'adminid' => $entity->adminid,
+            'lastmodified' => $entity->lastmodified,
+            'comment' => $entity->comment,
         ];
     }
 
@@ -195,7 +195,7 @@ class CacheReportsRepository
     {
         $entity = new GeoCacheReportsEntity();
         $entity->id = (int) $data['id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateCreated = new DateTime($data['date_created']);
         $entity->cacheid = (int) $data['cacheid'];
         $entity->userid = (int) $data['userid'];
         $entity->reason = (int) $data['reason'];

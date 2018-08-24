@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Mp3Entity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysReplSlavesEntity extends Oc\Repository\AbstractEntity
 {

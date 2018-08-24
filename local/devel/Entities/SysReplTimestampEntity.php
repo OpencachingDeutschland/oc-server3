@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysReplTimestampEntity extends Oc\Repository\AbstractEntity
 {

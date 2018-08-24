@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GkMoveRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GkMoveRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GkMoveRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GkMoveRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GkMoveRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GkMoveRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,15 +174,15 @@ class GkMoveRepository
     public function getDatabaseArrayFromEntity(GkMoveEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'itemid' => $entity->itemid,
-        'latitude' => $entity->latitude,
-        'longitude' => $entity->longitude,
-        'datemoved' => $entity->datemoved,
-        'datelogged' => $entity->datelogged,
-        'userid' => $entity->userid,
-        'comment' => $entity->comment,
-        'logtypeid' => $entity->logtypeid,
+            'id' => $entity->id,
+            'itemid' => $entity->itemid,
+            'latitude' => $entity->latitude,
+            'longitude' => $entity->longitude,
+            'datemoved' => $entity->datemoved,
+            'datelogged' => $entity->datelogged,
+            'userid' => $entity->userid,
+            'comment' => $entity->comment,
+            'logtypeid' => $entity->logtypeid,
         ];
     }
 
@@ -197,8 +197,8 @@ class GkMoveRepository
         $entity->itemid = (int) $data['itemid'];
         $entity->latitude = $data['latitude'];
         $entity->longitude = $data['longitude'];
-        $entity->datemoved =  new DateTime($data['datemoved']);
-        $entity->datelogged =  new DateTime($data['datelogged']);
+        $entity->datemoved = new DateTime($data['datemoved']);
+        $entity->datelogged = new DateTime($data['datelogged']);
         $entity->userid = (int) $data['userid'];
         $entity->comment = (string) $data['comment'];
         $entity->logtypeid = (int) $data['logtypeid'];

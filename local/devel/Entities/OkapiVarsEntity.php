@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiVarsEntity extends Oc\Repository\AbstractEntity
 {

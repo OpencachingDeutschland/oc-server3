@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GkItemWaypointEntity extends Oc\Repository\AbstractEntity
 {

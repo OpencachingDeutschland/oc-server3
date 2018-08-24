@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SysCronEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheDescModifiedRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheDescModifiedRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheDescModifiedRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheDescModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->cacheId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheDescModifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['cache_id' => $entity->cacheId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheDescModifiedRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            ['cache_id' => $entity->cacheId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,16 +174,16 @@ class CacheDescModifiedRepository
     public function getDatabaseArrayFromEntity(GeoCacheDescModifiedEntity $entity)
     {
         return [
-        'cache_id' => $entity->cacheId,
-        'language' => $entity->language,
-        'date_modified' => $entity->dateModified,
-        'date_created' => $entity->dateCreated,
-        'desc' => $entity->desc,
-        'desc_html' => $entity->descHtml,
-        'desc_htmledit' => $entity->descHtmledit,
-        'hint' => $entity->hint,
-        'short_desc' => $entity->shortDesc,
-        'restored_by' => $entity->restoredBy,
+            'cache_id' => $entity->cacheId,
+            'language' => $entity->language,
+            'date_modified' => $entity->dateModified,
+            'date_created' => $entity->dateCreated,
+            'desc' => $entity->desc,
+            'desc_html' => $entity->descHtml,
+            'desc_htmledit' => $entity->descHtmledit,
+            'hint' => $entity->hint,
+            'short_desc' => $entity->shortDesc,
+            'restored_by' => $entity->restoredBy,
         ];
     }
 
@@ -196,8 +196,8 @@ class CacheDescModifiedRepository
         $entity = new GeoCacheDescModifiedEntity();
         $entity->cacheId = (int) $data['cache_id'];
         $entity->language = (string) $data['language'];
-        $entity->dateModified =  new DateTime($data['date_modified']);
-        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateModified = new DateTime($data['date_modified']);
+        $entity->dateCreated = new DateTime($data['date_created']);
         $entity->desc = (string) $data['desc'];
         $entity->descHtml = (int) $data['desc_html'];
         $entity->descHtmledit = (int) $data['desc_htmledit'];

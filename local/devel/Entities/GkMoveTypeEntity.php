@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GkMoveTypeEntity extends Oc\Repository\AbstractEntity
 {

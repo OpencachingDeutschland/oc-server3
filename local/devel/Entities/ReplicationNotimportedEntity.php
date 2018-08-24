@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ReplicationNotimportedEntity extends Oc\Repository\AbstractEntity
 {

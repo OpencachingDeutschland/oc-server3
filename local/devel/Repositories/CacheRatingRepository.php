@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class CacheRatingRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class CacheRatingRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class CacheRatingRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class CacheRatingRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->cacheId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class CacheRatingRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['cache_id' => $entity->cacheId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class CacheRatingRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            ['cache_id' => $entity->cacheId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class CacheRatingRepository
     public function getDatabaseArrayFromEntity(GeoCacheRatingEntity $entity)
     {
         return [
-        'cache_id' => $entity->cacheId,
-        'user_id' => $entity->userId,
-        'rating_date' => $entity->ratingDate,
+            'cache_id' => $entity->cacheId,
+            'user_id' => $entity->userId,
+            'rating_date' => $entity->ratingDate,
         ];
     }
 
@@ -189,7 +189,7 @@ class CacheRatingRepository
         $entity = new GeoCacheRatingEntity();
         $entity->cacheId = (int) $data['cache_id'];
         $entity->userId = (int) $data['user_id'];
-        $entity->ratingDate =  new DateTime($data['rating_date']);
+        $entity->ratingDate = new DateTime($data['rating_date']);
 
         return $entity;
     }

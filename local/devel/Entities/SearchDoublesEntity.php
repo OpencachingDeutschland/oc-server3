@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SearchDoublesEntity extends Oc\Repository\AbstractEntity
 {

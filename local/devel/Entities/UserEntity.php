@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class UserEntity extends Oc\Repository\AbstractEntity
 {

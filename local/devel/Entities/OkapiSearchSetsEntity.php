@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiSearchSetsEntity extends Oc\Repository\AbstractEntity
 {

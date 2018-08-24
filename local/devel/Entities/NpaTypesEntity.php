@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class NpaTypesEntity extends Oc\Repository\AbstractEntity
 {

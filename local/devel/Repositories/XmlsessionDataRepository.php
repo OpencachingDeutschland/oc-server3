@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class XmlsessionDataRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class XmlsessionDataRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class XmlsessionDataRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class XmlsessionDataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->sessionId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class XmlsessionDataRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['session_id' => $entity->sessionId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['session_id' => $entity->sessionId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class XmlsessionDataRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['session_id' => $entity->sessionId]
-                );
+            self::TABLE,
+            ['session_id' => $entity->sessionId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class XmlsessionDataRepository
     public function getDatabaseArrayFromEntity(XmlsessionDataEntity $entity)
     {
         return [
-        'session_id' => $entity->sessionId,
-        'object_type' => $entity->objectType,
-        'object_id' => $entity->objectId,
+            'session_id' => $entity->sessionId,
+            'object_type' => $entity->objectType,
+            'object_id' => $entity->objectId,
         ];
     }
 

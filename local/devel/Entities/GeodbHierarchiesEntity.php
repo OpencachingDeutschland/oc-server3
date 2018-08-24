@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeodbHierarchiesEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class PicturesEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysTransRefRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysTransRefRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysTransRefRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysTransRefRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->transId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysTransRefRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['trans_id' => $entity->transId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['trans_id' => $entity->transId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysTransRefRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['trans_id' => $entity->transId]
-                );
+            self::TABLE,
+            ['trans_id' => $entity->transId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class SysTransRefRepository
     public function getDatabaseArrayFromEntity(SysTransRefEntity $entity)
     {
         return [
-        'trans_id' => $entity->transId,
-        'resource_name' => $entity->resourceName,
-        'line' => $entity->line,
+            'trans_id' => $entity->transId,
+            'resource_name' => $entity->resourceName,
+            'line' => $entity->line,
         ];
     }
 

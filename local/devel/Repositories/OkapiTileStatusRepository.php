@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiTileStatusRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiTileStatusRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiTileStatusRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiTileStatusRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->z = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiTileStatusRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['z' => $entity->z]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['z' => $entity->z]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiTileStatusRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['z' => $entity->z]
-                );
+            self::TABLE,
+            ['z' => $entity->z]
+        );
 
         $entity->cacheId = null;
 
@@ -174,10 +174,10 @@ class OkapiTileStatusRepository
     public function getDatabaseArrayFromEntity(OkapiTileStatusEntity $entity)
     {
         return [
-        'z' => $entity->z,
-        'x' => $entity->x,
-        'y' => $entity->y,
-        'status' => $entity->status,
+            'z' => $entity->z,
+            'x' => $entity->x,
+            'y' => $entity->y,
+            'status' => $entity->status,
         ];
     }
 

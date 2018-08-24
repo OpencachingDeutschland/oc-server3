@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WsSessionsEntity extends Oc\Repository\AbstractEntity
 {

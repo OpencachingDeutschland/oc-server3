@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class NotifyWaitingEntity extends Oc\Repository\AbstractEntity
 {

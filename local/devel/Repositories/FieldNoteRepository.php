@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class FieldNoteRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class FieldNoteRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class FieldNoteRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class FieldNoteRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class FieldNoteRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class FieldNoteRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class FieldNoteRepository
     public function getDatabaseArrayFromEntity(FieldNoteEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'user_id' => $entity->userId,
-        'geocache_id' => $entity->geocacheId,
-        'type' => $entity->type,
-        'date' => $entity->date,
-        'text' => $entity->text,
+            'id' => $entity->id,
+            'user_id' => $entity->userId,
+            'geocache_id' => $entity->geocacheId,
+            'type' => $entity->type,
+            'date' => $entity->date,
+            'text' => $entity->text,
         ];
     }
 
@@ -194,7 +194,7 @@ class FieldNoteRepository
         $entity->userId = (int) $data['user_id'];
         $entity->geocacheId = (int) $data['geocache_id'];
         $entity->type = $data['type'];
-        $entity->date =  new DateTime($data['date']);
+        $entity->date = new DateTime($data['date']);
         $entity->text = (string) $data['text'];
 
         return $entity;

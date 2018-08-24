@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiAuthorizationsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiAuthorizationsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiAuthorizationsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiAuthorizationsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->consumerKey = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiAuthorizationsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['consumer_key' => $entity->consumerKey]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['consumer_key' => $entity->consumerKey]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiAuthorizationsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['consumer_key' => $entity->consumerKey]
-                );
+            self::TABLE,
+            ['consumer_key' => $entity->consumerKey]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class OkapiAuthorizationsRepository
     public function getDatabaseArrayFromEntity(OkapiAuthorizationsEntity $entity)
     {
         return [
-        'consumer_key' => $entity->consumerKey,
-        'user_id' => $entity->userId,
-        'last_access_token' => $entity->lastAccessToken,
+            'consumer_key' => $entity->consumerKey,
+            'user_id' => $entity->userId,
+            'last_access_token' => $entity->lastAccessToken,
         ];
     }
 
@@ -189,7 +189,7 @@ class OkapiAuthorizationsRepository
         $entity = new OkapiAuthorizationsEntity();
         $entity->consumerKey = (string) $data['consumer_key'];
         $entity->userId = (int) $data['user_id'];
-        $entity->lastAccessToken =  new DateTime($data['last_access_token']);
+        $entity->lastAccessToken = new DateTime($data['last_access_token']);
 
         return $entity;
     }

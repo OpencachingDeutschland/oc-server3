@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class XmlsessionDataEntity extends Oc\Repository\AbstractEntity
 {

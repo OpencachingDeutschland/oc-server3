@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeodbChangelogEntity extends Oc\Repository\AbstractEntity
 {

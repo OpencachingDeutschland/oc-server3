@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GnsSearchEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class GeodbTypeNamesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class GeodbTypeNamesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class GeodbTypeNamesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class GeodbTypeNamesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->typeId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class GeodbTypeNamesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['type_id' => $entity->typeId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['type_id' => $entity->typeId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class GeodbTypeNamesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['type_id' => $entity->typeId]
-                );
+            self::TABLE,
+            ['type_id' => $entity->typeId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,9 +174,9 @@ class GeodbTypeNamesRepository
     public function getDatabaseArrayFromEntity(GeodbTypeNamesEntity $entity)
     {
         return [
-        'type_id' => $entity->typeId,
-        'type_locale' => $entity->typeLocale,
-        'name' => $entity->name,
+            'type_id' => $entity->typeId,
+            'type_locale' => $entity->typeLocale,
+            'name' => $entity->name,
         ];
     }
 

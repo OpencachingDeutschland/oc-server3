@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class MigrationVersionsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class MigrationVersionsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class MigrationVersionsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class MigrationVersionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->version = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class MigrationVersionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['version' => $entity->version]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['version' => $entity->version]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class MigrationVersionsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['version' => $entity->version]
-                );
+            self::TABLE,
+            ['version' => $entity->version]
+        );
 
         $entity->cacheId = null;
 
@@ -174,7 +174,7 @@ class MigrationVersionsRepository
     public function getDatabaseArrayFromEntity(MigrationVersionsEntity $entity)
     {
         return [
-        'version' => $entity->version,
+            'version' => $entity->version,
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class HelppagesEntity extends Oc\Repository\AbstractEntity
 {

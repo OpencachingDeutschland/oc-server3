@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class CountriesOptionsEntity extends Oc\Repository\AbstractEntity
 {

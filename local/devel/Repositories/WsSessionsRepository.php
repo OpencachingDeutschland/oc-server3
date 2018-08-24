@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class WsSessionsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class WsSessionsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class WsSessionsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class WsSessionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class WsSessionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class WsSessionsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class WsSessionsRepository
     public function getDatabaseArrayFromEntity(WsSessionsEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'user_id' => $entity->userId,
-        'date_created' => $entity->dateCreated,
-        'last_usage' => $entity->lastUsage,
-        'valid' => $entity->valid,
-        'closed' => $entity->closed,
+            'id' => $entity->id,
+            'user_id' => $entity->userId,
+            'date_created' => $entity->dateCreated,
+            'last_usage' => $entity->lastUsage,
+            'valid' => $entity->valid,
+            'closed' => $entity->closed,
         ];
     }
 
@@ -192,8 +192,8 @@ class WsSessionsRepository
         $entity = new WsSessionsEntity();
         $entity->id = (string) $data['id'];
         $entity->userId = (int) $data['user_id'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->lastUsage =  new DateTime($data['last_usage']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->lastUsage = new DateTime($data['last_usage']);
         $entity->valid = (int) $data['valid'];
         $entity->closed = (int) $data['closed'];
 

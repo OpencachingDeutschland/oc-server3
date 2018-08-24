@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class PicturesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class PicturesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class PicturesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class PicturesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class PicturesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class PicturesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,24 +174,24 @@ class PicturesRepository
     public function getDatabaseArrayFromEntity(PicturesEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'uuid' => $entity->uuid,
-        'node' => $entity->node,
-        'date_created' => $entity->dateCreated,
-        'last_modified' => $entity->lastModified,
-        'url' => $entity->url,
-        'title' => $entity->title,
-        'last_url_check' => $entity->lastUrlCheck,
-        'object_id' => $entity->objectId,
-        'object_type' => $entity->objectType,
-        'thumb_url' => $entity->thumbUrl,
-        'thumb_last_generated' => $entity->thumbLastGenerated,
-        'spoiler' => $entity->spoiler,
-        'local' => $entity->local,
-        'unknown_format' => $entity->unknownFormat,
-        'display' => $entity->display,
-        'mappreview' => $entity->mappreview,
-        'seq' => $entity->seq,
+            'id' => $entity->id,
+            'uuid' => $entity->uuid,
+            'node' => $entity->node,
+            'date_created' => $entity->dateCreated,
+            'last_modified' => $entity->lastModified,
+            'url' => $entity->url,
+            'title' => $entity->title,
+            'last_url_check' => $entity->lastUrlCheck,
+            'object_id' => $entity->objectId,
+            'object_type' => $entity->objectType,
+            'thumb_url' => $entity->thumbUrl,
+            'thumb_last_generated' => $entity->thumbLastGenerated,
+            'spoiler' => $entity->spoiler,
+            'local' => $entity->local,
+            'unknown_format' => $entity->unknownFormat,
+            'display' => $entity->display,
+            'mappreview' => $entity->mappreview,
+            'seq' => $entity->seq,
         ];
     }
 
@@ -205,15 +205,15 @@ class PicturesRepository
         $entity->id = (int) $data['id'];
         $entity->uuid = (string) $data['uuid'];
         $entity->node = (int) $data['node'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
-        $entity->lastModified =  new DateTime($data['last_modified']);
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->lastModified = new DateTime($data['last_modified']);
         $entity->url = (string) $data['url'];
         $entity->title = (string) $data['title'];
-        $entity->lastUrlCheck =  new DateTime($data['last_url_check']);
+        $entity->lastUrlCheck = new DateTime($data['last_url_check']);
         $entity->objectId = (int) $data['object_id'];
         $entity->objectType = (int) $data['object_type'];
         $entity->thumbUrl = (string) $data['thumb_url'];
-        $entity->thumbLastGenerated =  new DateTime($data['thumb_last_generated']);
+        $entity->thumbLastGenerated = new DateTime($data['thumb_last_generated']);
         $entity->spoiler = (int) $data['spoiler'];
         $entity->local = (int) $data['local'];
         $entity->unknownFormat = (int) $data['unknown_format'];

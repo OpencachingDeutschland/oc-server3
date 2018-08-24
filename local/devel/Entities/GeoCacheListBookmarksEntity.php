@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeoCacheListBookmarksEntity extends Oc\Repository\AbstractEntity
 {

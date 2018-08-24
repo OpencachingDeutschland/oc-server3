@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeodbPolygonsEntity extends Oc\Repository\AbstractEntity
 {

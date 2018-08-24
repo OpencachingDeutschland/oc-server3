@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeoCacheLogsArchivedEntity extends Oc\Repository\AbstractEntity
 {

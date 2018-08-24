@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class NutsLayerEntity extends Oc\Repository\AbstractEntity
 {

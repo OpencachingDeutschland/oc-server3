@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class SysSessionsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class SysSessionsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class SysSessionsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class SysSessionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->uuid = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class SysSessionsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['uuid' => $entity->uuid]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['uuid' => $entity->uuid]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class SysSessionsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['uuid' => $entity->uuid]
-                );
+            self::TABLE,
+            ['uuid' => $entity->uuid]
+        );
 
         $entity->cacheId = null;
 
@@ -174,10 +174,10 @@ class SysSessionsRepository
     public function getDatabaseArrayFromEntity(SysSessionsEntity $entity)
     {
         return [
-        'uuid' => $entity->uuid,
-        'user_id' => $entity->userId,
-        'permanent' => $entity->permanent,
-        'last_login' => $entity->lastLogin,
+            'uuid' => $entity->uuid,
+            'user_id' => $entity->userId,
+            'permanent' => $entity->permanent,
+            'last_login' => $entity->lastLogin,
         ];
     }
 
@@ -191,7 +191,7 @@ class SysSessionsRepository
         $entity->uuid = (string) $data['uuid'];
         $entity->userId = (int) $data['user_id'];
         $entity->permanent = (int) $data['permanent'];
-        $entity->lastLogin =  new DateTime($data['last_login']);
+        $entity->lastLogin = new DateTime($data['last_login']);
 
         return $entity;
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class WatchesNotifiedRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class WatchesNotifiedRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class WatchesNotifiedRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class WatchesNotifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->id = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class WatchesNotifiedRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['id' => $entity->id]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class WatchesNotifiedRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['id' => $entity->id]
-                );
+            self::TABLE,
+            ['id' => $entity->id]
+        );
 
         $entity->cacheId = null;
 
@@ -174,11 +174,11 @@ class WatchesNotifiedRepository
     public function getDatabaseArrayFromEntity(WatchesNotifiedEntity $entity)
     {
         return [
-        'id' => $entity->id,
-        'user_id' => $entity->userId,
-        'object_id' => $entity->objectId,
-        'object_type' => $entity->objectType,
-        'date_created' => $entity->dateCreated,
+            'id' => $entity->id,
+            'user_id' => $entity->userId,
+            'object_id' => $entity->objectId,
+            'object_type' => $entity->objectType,
+            'date_created' => $entity->dateCreated,
         ];
     }
 
@@ -193,7 +193,7 @@ class WatchesNotifiedRepository
         $entity->userId = (int) $data['user_id'];
         $entity->objectId = (int) $data['object_id'];
         $entity->objectType = (int) $data['object_type'];
-        $entity->dateCreated =  new DateTime($data['date_created']);
+        $entity->dateCreated = new DateTime($data['date_created']);
 
         return $entity;
     }

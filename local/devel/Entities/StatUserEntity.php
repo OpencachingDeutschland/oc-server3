@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class StatUserEntity extends Oc\Repository\AbstractEntity
 {

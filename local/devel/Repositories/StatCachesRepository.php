@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class StatCachesRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class StatCachesRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class StatCachesRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class StatCachesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->cacheId = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class StatCachesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['cache_id' => $entity->cacheId]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class StatCachesRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['cache_id' => $entity->cacheId]
-                );
+            self::TABLE,
+            ['cache_id' => $entity->cacheId]
+        );
 
         $entity->cacheId = null;
 
@@ -174,17 +174,17 @@ class StatCachesRepository
     public function getDatabaseArrayFromEntity(StatCachesEntity $entity)
     {
         return [
-        'cache_id' => $entity->cacheId,
-        'found' => $entity->found,
-        'notfound' => $entity->notfound,
-        'note' => $entity->note,
-        'will_attend' => $entity->willAttend,
-        'maintenance' => $entity->maintenance,
-        'last_found' => $entity->lastFound,
-        'watch' => $entity->watch,
-        'ignore' => $entity->ignore,
-        'toprating' => $entity->toprating,
-        'picture' => $entity->picture,
+            'cache_id' => $entity->cacheId,
+            'found' => $entity->found,
+            'notfound' => $entity->notfound,
+            'note' => $entity->note,
+            'will_attend' => $entity->willAttend,
+            'maintenance' => $entity->maintenance,
+            'last_found' => $entity->lastFound,
+            'watch' => $entity->watch,
+            'ignore' => $entity->ignore,
+            'toprating' => $entity->toprating,
+            'picture' => $entity->picture,
         ];
     }
 
@@ -201,7 +201,7 @@ class StatCachesRepository
         $entity->note = $data['note'];
         $entity->willAttend = $data['will_attend'];
         $entity->maintenance = $data['maintenance'];
-        $entity->lastFound =  new DateTime($data['last_found']);
+        $entity->lastFound = new DateTime($data['last_found']);
         $entity->watch = $data['watch'];
         $entity->ignore = $data['ignore'];
         $entity->toprating = $data['toprating'];

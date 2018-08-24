@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeoCacheWaypointPoolEntity extends Oc\Repository\AbstractEntity
 {

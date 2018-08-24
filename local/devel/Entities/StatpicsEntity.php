@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class StatpicsEntity extends Oc\Repository\AbstractEntity
 {

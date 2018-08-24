@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SavedTextsEntity extends Oc\Repository\AbstractEntity
 {

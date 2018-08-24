@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class UserStatpicEntity extends Oc\Repository\AbstractEntity
 {

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiSubmittedObjectsEntity extends Oc\Repository\AbstractEntity
 {

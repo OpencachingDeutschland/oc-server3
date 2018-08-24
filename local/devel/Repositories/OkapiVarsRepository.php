@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class OkapiVarsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class OkapiVarsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class OkapiVarsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class OkapiVarsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->var = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class OkapiVarsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['var' => $entity->var]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['var' => $entity->var]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class OkapiVarsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['var' => $entity->var]
-                );
+            self::TABLE,
+            ['var' => $entity->var]
+        );
 
         $entity->cacheId = null;
 
@@ -174,8 +174,8 @@ class OkapiVarsRepository
     public function getDatabaseArrayFromEntity(OkapiVarsEntity $entity)
     {
         return [
-        'var' => $entity->var,
-        'value' => $entity->value,
+            'var' => $entity->var,
+            'value' => $entity->value,
         ];
     }
 

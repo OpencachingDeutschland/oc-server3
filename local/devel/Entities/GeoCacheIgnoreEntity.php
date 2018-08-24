@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class GeoCacheIgnoreEntity extends Oc\Repository\AbstractEntity
 {

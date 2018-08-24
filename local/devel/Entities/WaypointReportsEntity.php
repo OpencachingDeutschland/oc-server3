@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class WaypointReportsEntity extends Oc\Repository\AbstractEntity
 {

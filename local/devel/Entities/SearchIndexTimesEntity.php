@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class SearchIndexTimesEntity extends Oc\Repository\AbstractEntity
 {

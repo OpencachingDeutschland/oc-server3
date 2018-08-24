@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class ReplicationEntity extends Oc\Repository\AbstractEntity
 {

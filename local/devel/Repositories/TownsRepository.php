@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -24,9 +24,9 @@ class TownsRepository
     public function fetchAll()
     {
         $statement = $this->connection->createQueryBuilder()
-                    ->select('*')
-                    ->from(self::TABLE)
-                    ->execute();
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
 
         $result = $statement->fetchAll();
 
@@ -50,9 +50,9 @@ class TownsRepository
     public function fetchOneBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE)
-                     ->setMaxResults(1);
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -78,8 +78,8 @@ class TownsRepository
     public function fetchBy(array $where = [])
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-                     ->select('*')
-                     ->from(self::TABLE);
+            ->select('*')
+            ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -117,9 +117,9 @@ class TownsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-                    self::TABLE,
-                    $databaseArray
-                );
+            self::TABLE,
+            $databaseArray
+        );
 
         $entity->country = (int) $this->connection->lastInsertId();
 
@@ -139,10 +139,10 @@ class TownsRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-                    self::TABLE,
-                    $databaseArray,
-                    ['country' => $entity->country]
-                );
+            self::TABLE,
+            $databaseArray,
+            ['country' => $entity->country]
+        );
 
         return $entity;
     }
@@ -158,9 +158,9 @@ class TownsRepository
         }
 
         $this->connection->delete(
-                    self::TABLE,
-                    ['country' => $entity->country]
-                );
+            self::TABLE,
+            ['country' => $entity->country]
+        );
 
         $entity->cacheId = null;
 
@@ -174,12 +174,12 @@ class TownsRepository
     public function getDatabaseArrayFromEntity(TownsEntity $entity)
     {
         return [
-        'country' => $entity->country,
-        'name' => $entity->name,
-        'trans_id' => $entity->transId,
-        'coord_lat' => $entity->coordLat,
-        'coord_long' => $entity->coordLong,
-        'maplist' => $entity->maplist,
+            'country' => $entity->country,
+            'name' => $entity->name,
+            'trans_id' => $entity->transId,
+            'coord_lat' => $entity->coordLat,
+            'coord_long' => $entity->coordLong,
+            'maplist' => $entity->maplist,
         ];
     }
 

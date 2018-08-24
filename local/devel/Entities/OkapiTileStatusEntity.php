@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class OkapiTileStatusEntity extends Oc\Repository\AbstractEntity
 {

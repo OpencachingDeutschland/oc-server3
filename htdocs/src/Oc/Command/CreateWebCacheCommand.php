@@ -41,7 +41,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
 
         $this
             ->setName(self::COMMAND_NAME)
-            ->setDescription('create legacy web caches');
+            ->setDescription('create css web caches');
     }
 
     /**

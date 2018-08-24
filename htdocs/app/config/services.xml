@@ -12,6 +12,7 @@
         <service id="League\CommonMark\CommonMarkConverter" />
 
         <service id="Oc\Session\SessionDataInterface" alias="Oc\Session\SessionDataCookie" />
+        <service id="Oc\FieldNotes\FieldNoteServiceInterface" alias="Oc\FieldNotes\FieldNoteService" />
 
         <service id="Oc\GeoCache\Controller\GeoCacheController">
             <argument key="$apiSecret">%api_secret%</argument>

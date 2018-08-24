@@ -215,6 +215,7 @@ sudo chmod 755 psh.phar
 
 label "Adjust php.ini"
 cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' > /etc/php.ini.tmp
+cat /etc/php.ini | sed -e 's/memory_limit = 128M/memory_limit = 512M/' > /etc/php.ini.tmp
 mv /etc/php.ini.tmp /etc/php.ini
 
 label "Setup database"

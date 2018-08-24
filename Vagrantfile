@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 VM_IP        = "10.10.0.101"
-VM_MEMORY    = 1024
+VM_MEMORY    = 2096
 VM_CPUS      = 2
 VM_NAME      = "OpenCaching DEV VM"
 VM_HOST      = "local.team-opencaching.de"

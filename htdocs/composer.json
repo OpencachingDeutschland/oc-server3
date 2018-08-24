@@ -39,7 +39,9 @@
     "squizlabs/php_codesniffer": "^2.6",
     "fig-r/psr2r-sniffer": "^0.3.0",
     "sensio/generator-bundle": "^3.0",
-    "codedungeon/phpunit-result-printer": "^0.4.4"
+    "codedungeon/phpunit-result-printer": "^0.4.4",
+    "fzaninotto/faker": "^1.7",
+    "nette/php-generator": "^2.6"
   },
   "repositories": [
     {

@@ -2,9 +2,6 @@
 
 namespace Oc\Repository;
 
-/**
- * Class AbstractEntity
- */
 abstract class AbstractEntity
 {
     /**

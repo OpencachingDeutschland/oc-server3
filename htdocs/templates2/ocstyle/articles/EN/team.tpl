@@ -83,7 +83,7 @@
             <tr>
                 <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br/>
-                    data maintenance, software development
+                    data maintenance
                 </td>
             </tr>
             <tr>

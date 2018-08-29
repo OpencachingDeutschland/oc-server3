@@ -71,7 +71,7 @@ var mnInitLon = {/literal}{$nGMInitLon}{literal};
 var mnInitZoom = {/literal}({$nGMInitZoom} < 0 ? nDefaultZoom : {$nGMInitZoom}){literal};
 var mbInitCookiePos = {/literal}{$bGMInitCookiePos}{literal};
 var msInitWaypoint = "{/literal}{$sGMInitWaypoint}{literal}";
-var msInitType = 'roadmap';
+var msInitType = 'OSM';
 var msInitSiderbarDisplay = 'none';
 var msInitAttribSelection = false;
 var miQueryID = {/literal}{$queryid}{literal};
@@ -360,7 +360,7 @@ function mapLoad()
         gestureHandling: 'greedy',
 
         mapTypeControl: true,
-        mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_RIGHT },
+        mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_CENTER },
 
         panControl: false,
         zoomControl: true,

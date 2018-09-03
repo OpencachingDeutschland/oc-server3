@@ -344,13 +344,8 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM',
-                    google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
-                    google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
-  var initType = google.maps.MapTypeId.ROADMAP;
-  for (var i=0; i<maptypes.length; i++)
-    if (msInitType == maptypes[i])
-            initType = msInitType;
+    var maptypes = ['OSM'];
+    var initType = 'OSM';
 
     var myOptions = {
         zoom: mnInitZoom,

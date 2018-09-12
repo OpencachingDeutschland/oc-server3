@@ -26,6 +26,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         $allowed = [
             '<!-- * -->',
             '<a href="test.html" name="custom_test" rel="noopener noreferrer nofollow" target="_blank">test</a>',
+            '<audio src="url.mp3" controls=""></audio>',
             '<abbr>test</abbr>',
             '<acronym>test</acronym>',
             '<address>test</address>',

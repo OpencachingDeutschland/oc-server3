@@ -93,6 +93,17 @@ class OcHTMLPurifier extends HTMLPurifier
                 'target' => 'Enum#_blank,blank',
             ]
         );
+        $def->addElement(
+            'audio',
+            'Block',
+            'Optional: (source, Flow) | (Flow, source) | Flow',
+            'Common',
+            [
+                'src' => 'URI',
+                'controls' => 'Bool',
+            ]
+        );
+
         $def->addElement('map', 'Block', new HTMLPurifier_ChildDef_Optional('area'), 'Common', ['name' => 'ID']);
 
         // add attributes
@@ -107,7 +118,6 @@ class OcHTMLPurifier extends HTMLPurifier
     /**
      * @param string $text
      * @param null $config
-     *
      * @return mixed
      */
     public function purify($text, $config = null)

@@ -96,7 +96,7 @@ class OcHTMLPurifier extends HTMLPurifier
         $def->addElement(
             'audio',
             'Block',
-            'Optional: (source, Flow) | (Flow, source) | Flow',
+            'Flow',
             'Common',
             [
                 'src' => 'URI',

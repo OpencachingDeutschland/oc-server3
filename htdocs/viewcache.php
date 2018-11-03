@@ -430,6 +430,11 @@ sql_free_result($rs);
 /* attributes and cache lists
  */
 $tpl->assign('attributes', attribute::getAttributesListArrayByCacheId($cacheid));
+foreach ($tpl->get_template_vars('attributes')[0]['attr'] as $attribute) {
+    if ($attribute['id'] === '61') {
+        $tpl->assign('safariCache', true);
+    }
+}
 $tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));
 $tpl->assign(
     'watchclinfo',

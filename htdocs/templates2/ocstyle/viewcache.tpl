@@ -268,17 +268,21 @@
             </td>
 
             <td style="text-align:right">
-                <a href="map2.php?wp={$cache.wpoc}" target="_blank">
-                {if $cachemap.iframe}
-                    <div class="img-shadow">
-                        <iframe src="{$cachemap.url}" width="185px" height="185px" frameborder="0">
-                        </iframe>
-                    </div>
+                {if $safariCache}
+                    <img src="/theme/frontend/images/logo/globi.png" height="185px" width="185px" />
                 {else}
-                    <img src="{$cachemap.url}" height="185px" width="185px" />
+                    <a href="map2.php?wp={$cache.wpoc}" target="_blank">
+                        {if $cachemap.iframe}
+                        <div class="img-shadow">
+                            <iframe src="{$cachemap.url}" width="185px" height="185px" frameborder="0">
+                            </iframe>
+                        </div>
+                    {else}
+                        <img src="{$cachemap.url}" height="185px" width="185px" />
+                    {/if}
+                    </a>
+                    <p style="margin-right:0"><a href="map2.php?wp={$cache.wpoc}" target="_blank"><span style="line-height:1.5em">{t}Large map{/t}</span></a></p>
                 {/if}
-                </a>
-                <p style="margin-right:0"><a href="map2.php?wp={$cache.wpoc}" target="_blank"><span style="line-height:1.5em">{t}Large map{/t}</span></a></p>
             </td>
         </tr>
 

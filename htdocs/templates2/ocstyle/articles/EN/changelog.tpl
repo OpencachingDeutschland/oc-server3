@@ -16,10 +16,10 @@
 
     <div class="changelog-changes">
 
-        <p id="current"><strong>Laufende Änderungen</strong></p>
+        <p id="current"><strong>Current Changes</strong></p>
         <ul>
-            <li>Minikarte bei Safaries durch Globi ersetzt</li>
-            <li>Einführung Symfony inkl. Doctrine</li>
+            <li>replace minimap with globi on safari cache listings</li>
+            <li>integration of symfony</li>
         </ul>
         <br/>
 

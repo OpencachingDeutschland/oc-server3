@@ -28,7 +28,8 @@
     "twbs/bootstrap": "^v4.1.0",
     "symfony-cmf/menu-bundle": "^2.1",
     "components/jquery": "^3.2",
-    "ext-gd": "*"
+    "ext-gd": "*",
+    "ext-json": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",

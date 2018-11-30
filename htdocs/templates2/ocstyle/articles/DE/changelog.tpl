@@ -69,7 +69,7 @@
 
         <p id="current"><strong>Laufende Änderungen</strong></p>
         <ul>
-            <li>Minikarte bei Safaries durch Globi ersetzt</li>
+            <li>30.11.2018 - Minikarte bei Safaries durch Globi ersetzt</li>
             <li>Einführung Symfony</li>
         </ul>
         <br/>

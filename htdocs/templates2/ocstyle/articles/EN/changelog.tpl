@@ -18,7 +18,7 @@
 
         <p id="current"><strong>Current Changes</strong></p>
         <ul>
-            <li>replace minimap with globi on safari cache listings</li>
+            <li>30.11.2018 - replace minimap with globi on safari cache listings</li>
             <li>integration of symfony</li>
         </ul>
         <br/>

@@ -435,8 +435,8 @@ class cachelist
             . ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) . "%'" : '')
             . ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
             0,
-            $startat,
-            $maxitems,
+            (int) $startat,
+            (int) $maxitems,
             true
         );
     }
@@ -526,8 +526,8 @@ class cachelist
              ORDER BY `prio`, $nameField
              LIMIT &2,&3",
             $login->userid,
-            $startat,
-            $maxitems
+            (int) $startat,
+            (int) $maxitems
         );
 
         $lists = sql_fetch_assoc_table($rs);

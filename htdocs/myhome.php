@@ -3,7 +3,12 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 require __DIR__ . '/lib2/web.inc.php';
+
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
 
 $tpl->name = 'myhome';
 $tpl->menuitem = MNU_MYPROFILE_OVERVIEW;
@@ -32,11 +37,8 @@ $rUser['hidden'] += sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1
 $tpl->assign('hidden', $rUser['hidden']);
 
 //get last logs
-sql_enable_foundrows();
-$tpl->assign_rs(
-    'logs',
-    sql(
-        "SELECT SQL_CALC_FOUND_ROWS
+$logs = $connection->fetchAll(
+    'SELECT SQL_CALC_FOUND_ROWS
              `cache_logs`.`cache_id` `cacheid`,
              `cache_logs`.`type` `type`,
              `cache_logs`.`date` `date`,
@@ -60,20 +62,19 @@ $tpl->assign_rs(
          LEFT JOIN `cache_rating`
            ON `cache_rating`.`cache_id`=`caches`.`cache_id`
            AND `cache_rating`.`user_id`=`cache_logs`.`user_id` AND `cache_rating`.`rating_date`=`cache_logs`.`date`
-         WHERE `cache_logs`.`user_id`='&1'
+         WHERE `cache_logs`.`user_id`= :userId
          ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
-         LIMIT 10",
-        $login->userid
-    )
+         LIMIT 10',
+    [':userId' => $login->userid]
 );
-$tpl->assign('morelogs', sql_value("SELECT FOUND_ROWS()", 0) > 10);
-sql_foundrows_done();
+
+$tpl->assign('logs', $logs);
+$tpl->assign('morelogs', $connection->fetchColumn("SELECT FOUND_ROWS()") > 10);
 
 //get last hidden caches
-$tpl->assign_rs(
-    'caches',
-    sql(
-        "SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
+$caches = $connection
+    ->fetchAll(
+        'SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
                     `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
                     IF(`caches`.`needs_maintenance`, 2, 0) AS `needs_maintenance`,
                     IF(`caches`.`listing_outdated`, 2, 0) AS `listing_outdated`,
@@ -87,13 +88,14 @@ $tpl->assign_rs(
         LEFT JOIN `stat_caches` ON `stat_caches`.`cache_id`=`caches`.`cache_id`
         LEFT JOIN `cache_logs` ON `cache_logs`.`cache_id`=`caches`.`cache_id`
         LEFT JOIN `caches_attributes` `ca` ON `ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`=6
-            WHERE `caches`.`user_id`='&1'
+            WHERE `caches`.`user_id`= :userId
               AND `caches`.`status` != 5
          GROUP BY `caches`.`cache_id`
-         ORDER BY `caches`.`date_hidden` DESC, `caches`.`date_created` DESC",
-        $login->userid
-    )
-);
+         ORDER BY `lastlog` DESC,`caches`.`date_hidden` DESC, `caches`.`date_created` DESC',
+        [':userId' => $login->userid]
+    );
+$tpl->assign('caches', $caches);
+
 if ($useragent_msie && $useragent_msie_version < 9) {
     $tpl->assign('dotfill', '');
 } else {
@@ -105,10 +107,8 @@ if ($useragent_msie && $useragent_msie_version < 9) {
 $tpl->add_body_load('myHomeLoad()');
 
 //get not published caches
-$tpl->assign_rs(
-    'notpublished',
-    sql(
-        "SELECT `caches`.`cache_id`,
+$notPublished = $connection->fetchAll(
+    'SELECT `caches`.`cache_id`,
                 `caches`.`name`,
                 `caches`.`date_hidden`,
                 `caches`.`date_activate`,
@@ -120,12 +120,12 @@ $tpl->assign_rs(
          LEFT JOIN `caches_attributes` `ca`
            ON `ca`.`cache_id`=`caches`.`cache_id`
            AND `ca`.`attrib_id`=6
-         WHERE `user_id`='&1'
+         WHERE `user_id`= :userId
            AND `caches`.`status` = 5
-         ORDER BY `date_activate` DESC, `caches`.`date_created` DESC",
-        $login->userid
-    )
+         ORDER BY `date_activate` DESC, `caches`.`date_created` DESC',
+    [':userId' => $login->userid]
 );
+$tpl->assign('notpublished', $notPublished);
 
 // get number of sent emails
 // useless information when email protocol is cleaned-up (cronjob 'purge_logs')

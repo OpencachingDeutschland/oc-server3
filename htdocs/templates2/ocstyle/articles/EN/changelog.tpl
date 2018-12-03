@@ -18,6 +18,7 @@
 
         <p id="current"><strong>Current Changes</strong></p>
         <ul>
+            <li>03.12.2018 - caches on profil page are sorted by last found date</li>
             <li>30.11.2018 - replace minimap with globi on safari cache listings</li>
             <li>integration of symfony</li>
         </ul>

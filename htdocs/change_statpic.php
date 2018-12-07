@@ -47,10 +47,9 @@ $tpl->assign('statpic_style', isset($_REQUEST['statpic_style']) ? $_REQUEST['sta
 /** @var Doctrine\DBAL\Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 $rs = $connection->fetchAll(
-    'SELECT
-         `statpics`.`id`,
-         `statpics`.`previewpath`,
-         IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`
+    'SELECT `statpics`.`id`,
+            `statpics`.`previewpath`,
+            IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`
      FROM `statpics`
      LEFT JOIN `sys_trans_text`
          ON `statpics`.`trans_id`=`sys_trans_text`.`trans_id`

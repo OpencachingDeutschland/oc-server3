@@ -19,21 +19,23 @@ if ($login->userid == 0) {
 }
 
 //get user record
-$rsUser = sql(
-    "SELECT IFNULL(`stat_user`.`found`, 0) AS `found`,
+$rUser = $connection->fetchAssoc(
+    'SELECT IFNULL(`stat_user`.`found`, 0) AS `found`,
             IFNULL(`stat_user`.`hidden`, 0) AS `hidden`
      FROM `user`
      LEFT JOIN `stat_user`
        ON `user`.`user_id`=`stat_user`.`user_id`
-     WHERE `user`.`user_id`='&1' LIMIT 1",
-    $login->userid
+     WHERE `user`.`user_id`= :userId LIMIT 1',
+    [':userId' => $login->userid]
 );
-$rUser = sql_fetch_array($rsUser);
-sql_free_result($rsUser);
+
 $tpl->assign('found', $rUser['found']);
 
 // locked/hidden caches are visible for the user and must be added to public stats
-$rUser['hidden'] += sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1' AND `status`=7", 0, $login->userid);
+$rUser['hidden'] += $connection->fetchColumn(
+    'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status` = 7',
+    [':userId' => $login->userid]
+);
 $tpl->assign('hidden', $rUser['hidden']);
 
 //get last logs
@@ -138,7 +140,7 @@ if ($allpics === '1') {
     $allpics = 'ownlogs';
 }
 if ($allpics == 'ownlogs' || $allpics == 'owncaches') {
-    $gallery =  ($allpics == 'ownlogs' ? LogPics::FOR_OWNLOGS_GALLERY : LogPics::FOR_OWNCACHES_GALLERY);
+    $gallery = ($allpics == 'ownlogs' ? LogPics::FOR_OWNLOGS_GALLERY : LogPics::FOR_OWNCACHES_GALLERY);
     $all_pictures = LogPics::get($gallery);
     LogPics::setPaging($gallery, 0, 0, "myhome.php?allpics=" . $allpics);
 } else {

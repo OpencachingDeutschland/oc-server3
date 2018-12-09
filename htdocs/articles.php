@@ -63,7 +63,7 @@ $tpl->cache_lifetime = 43200;
 $connection = AppKernel::Container()->get(Connection::class);
 
 $tpl->menuitem = $connection->fetchColumn(
-    "SELECT `id` FROM `sys_menu` WHERE `href`= :href LIMIT 1",
+    'SELECT `id` FROM `sys_menu` WHERE `href`= :href LIMIT 1',
     [':href' => 'articles.php?page=' . urlencode($article)]
 );
 if ($tpl->menuitem == 0) {

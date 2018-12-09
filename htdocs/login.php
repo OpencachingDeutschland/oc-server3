@@ -3,17 +3,22 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 $disable_verifyemail = true;
 require __DIR__ . '/lib2/web.inc.php';
+
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
 
 $tpl->name = 'login';
 $tpl->menuitem = MNU_LOGIN;
 
 if (isset($_REQUEST['source']) && $opt['session']['login_statistics']) {
-    sql(
-        "INSERT INTO `sys_login_stat` (`day`,`type`,`count`) VALUES (NOW(),'&1',1)
-         ON DUPLICATE KEY UPDATE `count`=`count`+1",
-        $_REQUEST['source']
+    $connection->executeQuery(
+        'INSERT INTO `sys_login_stat` (`day`,`type`,`count`) VALUES (NOW(),:source,1)
+         ON DUPLICATE KEY UPDATE `count`=`count`+1',
+        [':source' => $_REQUEST['source']]
     );
 }
 

@@ -33,7 +33,7 @@ class StaticMap
 
     private $useTileCache = true;
 
-    private $tileCacheBaseDir =  __DIR__ . '/var/cache2/staticmap';
+    private $tileCacheBaseDir =  __DIR__ . '/../../../var/cache2/staticmap';
 
     private $zoom = 0;
 

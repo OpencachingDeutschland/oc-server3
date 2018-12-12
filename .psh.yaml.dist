@@ -32,6 +32,12 @@ const:
   SESSION_DOMAIN: ".team-opencaching.de"
 
 environments:
+  docker:
+    paths:
+      - "dev-ops/docker/actions"
+    const:
+      DB_HOST: 'mariadb'
+      FRONTEND_URL: "http://localhost"
   travis-ci:
     paths:
       - "dev-ops/travis-ci/actions"

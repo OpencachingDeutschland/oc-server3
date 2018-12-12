@@ -13,7 +13,7 @@ for setting up your own open and free Geocaching listing service! The code can e
 translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
-[Opencaching.de forum](https://forum.opencaching.de/) if you like to
+[Slack Channel](https://goo.gl/AEYik9) or [Opencaching.de forum](https://forum.opencaching.de/) if you like to
 join us. Development is usually done on a VirtualBox Linux system that you can run on your
 Linux, Windows or Mac workstation, but you may also try to set up the code directly
 on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team Member in

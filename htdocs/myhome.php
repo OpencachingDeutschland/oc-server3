@@ -74,6 +74,10 @@ $tpl->assign('logs', $logs);
 $tpl->assign('morelogs', $connection->fetchColumn("SELECT FOUND_ROWS()") > 10);
 
 //get last hidden caches
+$orderBy = '';
+if (isset($_GET['sort']) && $_GET['sort'] === 'lastLog') {
+    $orderBy = '`lastlog` DESC,';
+}
 $caches = $connection
     ->fetchAll(
         'SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
@@ -93,7 +97,7 @@ $caches = $connection
             WHERE `caches`.`user_id`= :userId
               AND `caches`.`status` != 5
          GROUP BY `caches`.`cache_id`
-         ORDER BY `lastlog` DESC,`caches`.`date_hidden` DESC, `caches`.`date_created` DESC',
+         ORDER BY ' . $orderBy . ' `caches`.`date_hidden` DESC, `caches`.`date_created` DESC',
         [':userId' => $login->userid]
     );
 $tpl->assign('caches', $caches);
@@ -110,28 +114,28 @@ $tpl->add_body_load('myHomeLoad()');
 
 //get not published caches
 $notPublished = $connection->fetchAll(
-    'SELECT `caches`.`cache_id`,
-                `caches`.`name`,
-                `caches`.`date_hidden`,
-                `caches`.`date_activate`,
-                `caches`.`status`,
-                `caches`.`wp_oc`,
-                `caches`.`type`,
-                `ca`.`attrib_id` IS NOT NULL AS `oconly`
+    'SELECT `caches` . `cache_id`,
+                `caches` . `name`,
+                `caches` . `date_hidden`,
+                `caches` . `date_activate`,
+                `caches` . `status`,
+                `caches` . `wp_oc`,
+                `caches` . `type`,
+                `ca` . `attrib_id` IS NOT null AS `oconly`
          FROM `caches`
          LEFT JOIN `caches_attributes` `ca`
-           ON `ca`.`cache_id`=`caches`.`cache_id`
-           AND `ca`.`attrib_id`=6
-         WHERE `user_id`= :userId
-           AND `caches`.`status` = 5
-         ORDER BY `date_activate` DESC, `caches`.`date_created` DESC',
+           ON `ca` . `cache_id` = `caches` . `cache_id`
+    AND `ca` . `attrib_id` = 6
+         WHERE `user_id` = :userId
+    AND `caches` . `status` = 5
+         ORDER BY `date_activate` DESC, `caches` . `date_created` DESC',
     [':userId' => $login->userid]
 );
 $tpl->assign('notpublished', $notPublished);
 
 // get number of sent emails
 // useless information when email protocol is cleaned-up (cronjob 'purge_logs')
-// $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`='&1'", 0, $login->userid));
+// $tpl->assign('emails', sql_value("SELECT COUNT(*) FROM `email_user` WHERE `from_user_id`=' & 1'", 0, $login->userid));
 
 // get log pictures
 $allpics = isset($_REQUEST['allpics']) ? $_REQUEST['allpics'] : false;

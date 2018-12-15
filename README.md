@@ -57,7 +57,6 @@ Starting the docker development environment
 
 1. Start a terminal and run `docker-compose up` in the project root
 2. Start a new terminal
-   - Run `docker-compose exec mariadb bash -c 'mysql -uroot -p$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /application/sql/dump_v158.sql'`
    - Run `docker-compose exec php-fpm bash -c './psh.phar docker:init'`
 3. Open your browser and visit the following URL: http://localhost
 

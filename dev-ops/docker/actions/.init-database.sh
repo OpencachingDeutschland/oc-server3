@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mysql -u__DB_USER__ -p__DB_PASSWORD__ -h__DB_HOST__ __DB_NAME__ < sql/dump_v158.sql
+
 # run database and cache updates
 php bin/dbupdate.php
 

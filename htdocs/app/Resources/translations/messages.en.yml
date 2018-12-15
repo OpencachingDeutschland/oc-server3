@@ -1,65 +1,35 @@
-general:
-    error:
-        unknown_error: 'An unknown error occurred!'
-
-language:
-    de: 'German'
-    en: 'English'
-
-field_notes:
-    btn:
-        delete: Delete
-        delete_selected: 'Delete selected'
-        log_it: 'Log it'
-        upload: Upload
-
-    # Desc: Y-m-d H:i
-    date_format: 'Y-m-d H:i'
-
-    error:
-        line_prefix: 'Line %line%:'
-        wrong_file_format: 'This file seems not to be a field notes file.'
-
-    field_notes: 'Field Notes'
-
-    header:
-        actions: Actions
-        date: Date
-        geocache: Cache
-        log_type: 'Log type'
-
-    msg:
-        no_field_notes: 'You don''t have any Field Notes.'
-        upload_new_field_notes: 'Upload new Field Notes'
-
-    success:
-        deleted: 'Field Note successfully deleted.'
-        deleted_multiple: 'Field Notes successfully deleted.'
-
-    upload:
-        label:
-            ignore: 'Ignore Field Notes before %date%'
-        file: 'Field Notes file (geocache_visits.txt)'
-        success: 'Field Notes successfully uploaded.'
-
-geocache:
-    type:
-        drivein: 'Drive in Cache'
-        event: 'Event Cache'
-        math: 'Math/Physics Cache'
-        moving: 'Moving Cache'
-        multi: 'Multi Cache'
-        quiz: 'Quiz Cache'
-        traditional: 'Traditional Cache'
-        unknown: 'Unknown Cache'
-        virtual: 'Virtual Cache'
-        webcam: 'Webcam Cache'
-
-page:
-    fallback:
-        wrong_locale: 'This page is not available in your language. As an alternative we display the %language% version for you.'
-        not_translated: 'This page currently has no translation.'
-
-array_util:
-  human_lang_implode:
-    and: 'and'
+general.error.unknown_error: 'An unknown error occurred!'
+language.de: German
+language.en: English
+field_notes.btn.delete: Delete
+field_notes.btn.delete_selected: 'Delete selected'
+field_notes.btn.log_it: 'Log it'
+field_notes.btn.upload: Upload
+field_notes.date_format: 'Y-m-d H:i'
+field_notes.error.line_prefix: 'Line %line%:'
+field_notes.error.wrong_file_format: 'This file seems not to be a field notes file.'
+field_notes.field_notes: 'Field Notes'
+field_notes.header.actions: Actions
+field_notes.header.date: Date
+field_notes.header.geocache: Cache
+field_notes.header.log_type: 'Log type'
+field_notes.msg.no_field_notes: 'You don''t have any Field Notes.'
+field_notes.msg.upload_new_field_notes: 'Upload new Field Notes'
+field_notes.success.deleted: 'Field Note successfully deleted.'
+field_notes.success.deleted_multiple: 'Field Notes successfully deleted.'
+field_notes.upload.label.ignore: 'Ignore Field Notes before %date%'
+field_notes.upload.file: 'Field Notes file (geocache_visits.txt)'
+field_notes.upload.success: 'Field Notes successfully uploaded.'
+geocache.type.drivein: 'Drive in Cache'
+geocache.type.event: 'Event Cache'
+geocache.type.math: 'Math/Physics Cache'
+geocache.type.moving: 'Moving Cache'
+geocache.type.multi: 'Multi Cache'
+geocache.type.quiz: 'Quiz Cache'
+geocache.type.traditional: 'Traditional Cache'
+geocache.type.unknown: 'Unknown Cache'
+geocache.type.virtual: 'Virtual Cache'
+geocache.type.webcam: 'Webcam Cache'
+page.fallback.wrong_locale: 'This page is not available in your language. As an alternative we display the %language% version for you.'
+page.fallback.not_translated: 'This page currently has no translation.'
+array_util.human_lang_implode.and: and

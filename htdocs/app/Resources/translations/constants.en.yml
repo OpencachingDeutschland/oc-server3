@@ -1,6 +1,4 @@
-field_notes:
-    log_type:
-        1: 'Found'
-        2: 'Not found'
-        3: 'Write note'
-        1000: 'Needs maintainance'
+field_notes.log_type.1: Found
+field_notes.log_type.2: 'Not found'
+field_notes.log_type.3: 'Write note'
+field_notes.log_type.1000: 'Needs maintainance'

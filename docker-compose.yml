@@ -4,7 +4,10 @@ services:
         image: mailhog/mailhog:latest
         container_name: opencaching-mailhog
         ports:
+            - "1025:1025"
             - "8025:8025"
+        networks:
+            - opencaching
 
     mariadb:
         image: mariadb:10.1

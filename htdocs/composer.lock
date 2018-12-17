@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "222d7596f20330f576e3634b9b7dbc76",
+    "content-hash": "322be0be70d1ac5e5ce665e39f5ca65b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1979,12 +1979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "a05155c882cf934252360abe3c09cbe5ea4857f0"
+                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/a05155c882cf934252360abe3c09cbe5ea4857f0",
-                "reference": "a05155c882cf934252360abe3c09cbe5ea4857f0",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
+                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
                 "shasum": ""
             },
             "require": {
@@ -2000,7 +2000,7 @@
                 "source": "https://github.com/opencaching/okapi/tree/master",
                 "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2018-09-26T08:31:20+00:00"
+            "time": "2018-12-17T19:12:05+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5977,7 +5977,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.0"
+        "php": ">=5.6.0",
+        "ext-gd": "*",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

@@ -1,19 +1,6 @@
-oc:
-    validator:
-        constraints:
-            waypoint:
-                invalid: 'The waypoint "%waypoint%" is not valid.'
-            persisted_waypoint:
-                not_found: 'The waypoint "%waypoint%" could not be found.'
-
-    field_notes:
-        struct:
-            field_note:
-                waypoint:
-                    not_blank: 'The first value should not be blank.'
-                log_type:
-                    not_blank: 'The third value should not be blank.'
-        validator:
-            constraints:
-                date_time: 'The date "%datetime%" is invalid! Accepted format is "%expectedFormatLong%" or "%expectedFormatShort%".'
-                log_type: 'The logType "%logType%" is not valid!'
+oc.validator.constraints.waypoint.invalid: 'The waypoint "%waypoint%" is not valid.'
+oc.validator.constraints.persisted_waypoint.not_found: 'The waypoint "%waypoint%" could not be found.'
+oc.field_notes.struct.field_note.waypoint.not_blank: 'The first value should not be blank.'
+oc.field_notes.struct.field_note.log_type.not_blank: 'The third value should not be blank.'
+oc.field_notes.validator.constraints.date_time: 'The date "%datetime%" is invalid! Accepted format is "%expectedFormatLong%" or "%expectedFormatShort%".'
+oc.field_notes.validator.constraints.log_type: 'The logType "%logType%" is not valid!'

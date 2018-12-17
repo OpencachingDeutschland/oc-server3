@@ -1,0 +1,55 @@
+version: "3.1"
+services:
+    mailhog:
+        image: mailhog/mailhog:latest
+        container_name: opencaching-mailhog
+        ports:
+            - "8025:8025"
+
+    mariadb:
+        image: mariadb:10.1
+        container_name: opencaching-mariadb
+        working_dir: /application
+        volumes:
+            - .:/application
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=opencaching
+            - MYSQL_USER=opencaching
+            - MYSQL_PASSWORD=opencaching
+        ports:
+            - "3306:3306"
+        networks:
+            - opencaching
+
+    webserver:
+        image: httpd:2.4.37-alpine
+        container_name: opencaching-webserver
+        restart: on-failure
+        working_dir: /application
+        links:
+            - php-fpm
+        volumes:
+            - .:/application
+            - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
+            - ./docker/httpd/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+        ports:
+            - "80:80"
+        networks:
+            opencaching:
+                aliases:
+                    - docker.team-opencaching.de
+
+    php-fpm:
+        build: docker/php-fpm
+        container_name: opencaching-php-fpm
+        working_dir: /application
+        volumes:
+            - .:/application
+            - ./docker/php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+        networks:
+            - opencaching
+
+networks:
+    opencaching:
+        driver: bridge

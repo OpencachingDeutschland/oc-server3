@@ -19,6 +19,8 @@ services:
             - MYSQL_PASSWORD=opencaching
         ports:
             - "3306:3306"
+        networks:
+            - opencaching
 
     webserver:
         image: httpd:2.4.37-alpine
@@ -33,6 +35,10 @@ services:
             - ./docker/httpd/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
         ports:
             - "80:80"
+        networks:
+            opencaching:
+                aliases:
+                    - docker.team-opencaching.de
 
     php-fpm:
         build: docker/php-fpm
@@ -41,3 +47,9 @@ services:
         volumes:
             - .:/application
             - ./docker/php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+        networks:
+            - opencaching
+
+networks:
+    opencaching:
+        driver: bridge

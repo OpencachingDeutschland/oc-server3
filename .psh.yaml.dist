@@ -38,12 +38,18 @@ environments:
     const:
       DB_HOST: "mariadb"
       FRONTEND_URL: "http://docker.team-opencaching.de"
-      SESSION_DOMAIN: "docker.team-opencaching.de"
+      SESSION_DOMAIN: ".docker.team-opencaching.de"
     templates:
+      - source: "dev-ops/local.team-opencaching.de/templates/config2-settings.inc.tpl.php"
+        destination: "htdocs/config2/settings.inc.php"
+      - source: "dev-ops/local.team-opencaching.de/templates/lib-settings.inc.tpl.php"
+        destination: "htdocs/lib/settings.inc.php"
       - source: "dev-ops/docker/templates/parameters.yml.tpl"
         destination: "htdocs/app/config/parameters.yml"
       - source: "dev-ops/docker/templates/parameters.yml.tpl"
         destination: "backend/app/config/parameters.yml"
+      - source: "htdocs/statpics/htaccess-dist"
+        destination: "htdocs/statpics/.htaccess"
   travis-ci:
     paths:
       - "dev-ops/travis-ci/actions"

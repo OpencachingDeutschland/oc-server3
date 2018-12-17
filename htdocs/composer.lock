@@ -1979,12 +1979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "a05155c882cf934252360abe3c09cbe5ea4857f0"
+                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/a05155c882cf934252360abe3c09cbe5ea4857f0",
-                "reference": "a05155c882cf934252360abe3c09cbe5ea4857f0",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
+                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
                 "shasum": ""
             },
             "require": {
@@ -2000,7 +2000,7 @@
                 "source": "https://github.com/opencaching/okapi/tree/master",
                 "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2018-09-26T08:31:20+00:00"
+            "time": "2018-12-17T19:12:05+00:00"
         },
         {
             "name": "paragonie/random_compat",

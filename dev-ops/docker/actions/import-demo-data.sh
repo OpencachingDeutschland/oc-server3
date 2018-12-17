@@ -10,6 +10,6 @@ mysql -u__DB_USER__ -p__DB_PASSWORD__ -h__DB_HOST__ __DB_NAME__ -e "UPDATE cache
 mysql -u__DB_USER__ -p__DB_PASSWORD__ -h__DB_HOST__ __DB_NAME__ -e "UPDATE cache_logs SET node = 4;"
 
 INCLUDE: sf-migrations.sh
-INCLUDE: db-update.sh
-INCLUDE: import-sql-static.sh
+INCLUDE: ../../local.team-opencaching.de/actions/db-update.sh
+INCLUDE: ../../local.team-opencaching.de/actions/import-sql-static.sh
 

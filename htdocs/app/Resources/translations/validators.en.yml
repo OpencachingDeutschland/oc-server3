@@ -1,6 +1,65 @@
-oc.validator.constraints.waypoint.invalid: 'The waypoint "%waypoint%" is not valid.'
-oc.validator.constraints.persisted_waypoint.not_found: 'The waypoint "%waypoint%" could not be found.'
-oc.field_notes.struct.field_note.waypoint.not_blank: 'The first value should not be blank.'
-oc.field_notes.struct.field_note.log_type.not_blank: 'The third value should not be blank.'
-oc.field_notes.validator.constraints.date_time: 'The date "%datetime%" is invalid! Accepted format is "%expectedFormatLong%" or "%expectedFormatShort%".'
-oc.field_notes.validator.constraints.log_type: 'The logType "%logType%" is not valid!'
+general:
+  error:
+    unknown_error: 'An unknown error occurred!'
+
+language:
+  de: 'German'
+  en: 'English'
+
+field_notes:
+  btn:
+    delete: Delete
+    delete_selected: 'Delete selected'
+    log_it: 'Log it'
+    upload: Upload
+
+  # Desc: Y-m-d H:i
+  date_format: 'Y-m-d H:i'
+
+  error:
+    line_prefix: 'Line %line%:'
+    wrong_file_format: 'This file seems not to be a field notes file.'
+
+  field_notes: 'Field Notes'
+
+  header:
+    actions: Actions
+    date: Date
+    geocache: Cache
+    log_type: 'Log type'
+
+  msg:
+    no_field_notes: 'You don''t have any Field Notes.'
+    upload_new_field_notes: 'Upload new Field Notes'
+
+  success:
+    deleted: 'Field Note successfully deleted.'
+    deleted_multiple: 'Field Notes successfully deleted.'
+
+  upload:
+    label:
+      ignore: 'Ignore Field Notes before %date%'
+    file: 'Field Notes file (geocache_visits.txt)'
+    success: 'Field Notes successfully uploaded.'
+
+geocache:
+  type:
+    drivein: 'Drive in Cache'
+    event: 'Event Cache'
+    math: 'Math/Physics Cache'
+    moving: 'Moving Cache'
+    multi: 'Multi Cache'
+    quiz: 'Quiz Cache'
+    traditional: 'Traditional Cache'
+    unknown: 'Unknown Cache'
+    virtual: 'Virtual Cache'
+    webcam: 'Webcam Cache'
+
+page:
+  fallback:
+    wrong_locale: 'This page is not available in your language. As an alternative we display the %language% version for you.'
+    not_translated: 'This page currently has no translation.'
+
+array_util:
+  human_lang_implode:
+    and: 'and'

@@ -30,8 +30,6 @@ services:
         container_name: opencaching-webserver
         restart: on-failure
         working_dir: /application
-        links:
-            - php-fpm
         volumes:
             - .:/application
             - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf

@@ -75,6 +75,12 @@
                 <td></td>
             </tr>
             <tr>
+                <td><img src="{$opt.page.teampic_url}crease29.png"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=353113">Crease29</a><br/>
+                    software development
+                </td>
+            </tr>
+            <tr>
                 <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
                 <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
                     cache maps, system surveillance

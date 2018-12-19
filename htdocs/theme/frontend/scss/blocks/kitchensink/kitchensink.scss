@@ -1,0 +1,47 @@
+@import '../../global';
+
+.kitchensink {
+
+    &__swatch {
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+
+        @each $current_color in $theme-colors {
+
+            &--#{nth($current_color, 1)} {
+                background-color: #{nth($current_color, 2)};
+                color: $white;
+                margin: 0.5em;
+                padding: 0.5em;
+                width: 12em;
+                text-align: center;
+                transition: background-color 1s;
+            }
+
+            &--#{nth($current_color, 1)}:hover {
+                background-color: lighten(nth($current_color, 2), 20%);
+            }
+
+        }
+
+        @each $current_color in $colors {
+
+            &--#{nth($current_color, 1)} {
+                background-color: #{nth($current_color, 2)};
+                color: $white;
+                margin: 0.5em;
+                padding: 0.5em;
+                width: 12em;
+                text-align: center;
+
+            }
+
+            &--#{nth($current_color, 1)}:hover {
+                background-color: lighten(nth($current_color, 2), 20%);
+            }
+        }
+
+    }
+}

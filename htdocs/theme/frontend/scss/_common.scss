@@ -2,4 +2,9 @@
 
 html {
     font-size: $font-size-base; //For state manager
+    font-family: $font-family-base;
+}
+
+blockquote {
+    border-left: 0.5em solid $primary;
 }

@@ -23,4 +23,4 @@ $rs = sql(
 while ($pic = sql_fetch_assoc($rs)) {
     echo $pic['url'] . "\n";
 }
-mysql_free_result($rs);
+mysqli_free_result($rs);

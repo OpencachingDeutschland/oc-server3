@@ -128,7 +128,7 @@ if ($dblink === false) {
     $error = true;
 
     //set up error report
-    tpl_set_var('error_msg', htmlspecialchars(mysql_error(), ENT_COMPAT, 'UTF-8'));
+    tpl_set_var('error_msg', htmlspecialchars(mysqli_connect_error(), ENT_COMPAT, 'UTF-8'));
     tpl_set_var('tplname', $tplname);
     $tplname = 'error';
 } else {
@@ -206,7 +206,7 @@ function db_LanguageFromShort($langCode)
         $locale,
         $langCode
     );
-    if (mysql_num_rows($rs) > 0) {
+    if (mysqli_num_rows($rs) > 0) {
         $record = sql_fetch_array($rs);
 
         //return the language
@@ -764,32 +764,32 @@ function helppagelink($ocPage)
         $ocPage,
         $help_locale
     );
-    if (mysql_num_rows($rs) == 0) {
-        mysql_free_result($rs);
+    if (mysqli_num_rows($rs) == 0) {
+        mysqli_free_result($rs);
         $rs = sql(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='*'",
             $ocPage
         );
     }
-    if (mysql_num_rows($rs) == 0) {
-        mysql_free_result($rs);
+    if (mysqli_num_rows($rs) == 0) {
+        mysqli_free_result($rs);
         $rs = sql(
             "SELECT `helppage` FROM `helppages` WHERE `ocpage`='&1' AND `language`='&2'",
             $ocPage,
             $opt['template']['default']['fallback_locale']
         );
-        if (mysql_num_rows($rs) > 0) {
+        if (mysqli_num_rows($rs) > 0) {
             $help_locale = $opt['template']['default']['fallback_locale'];
         }
     }
 
-    if (mysql_num_rows($rs) > 0) {
+    if (mysqli_num_rows($rs) > 0) {
         $record = sql_fetch_array($rs);
         $helpPage = $record['helppage'];
     } else {
         $helpPage = '';
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $imgTitle = $translate->t('Instructions', '', basename(__FILE__), __LINE__);
     $imgTitle = "alt='" . $imgTitle . "' title='" . $imgTitle . "'";

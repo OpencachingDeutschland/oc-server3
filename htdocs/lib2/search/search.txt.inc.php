@@ -206,7 +206,7 @@ function search_output()
             $phpzip->add_data($r['waypoint'] . '.txt', $thisline);
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 

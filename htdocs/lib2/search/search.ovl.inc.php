@@ -61,7 +61,7 @@ function search_output()
         append_output($thisline);
         $nr += 2;
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $ovlFoot = mb_ereg_replace('{symbolscount}', $nr - 1, $ovlFoot);
     append_output($ovlFoot);

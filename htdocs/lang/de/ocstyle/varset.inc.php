@@ -46,8 +46,8 @@ $target = basename($_SERVER['PHP_SELF']) . '?';
 
 // REQUEST-Variablen durchlaufen und an target anhaengen
 $allowed = ['cacheid', 'userid', 'logid', 'desclang', 'descid'];
-reset($_REQUEST);
-while (list($varname, $varvalue) = each($_REQUEST)) {
+
+foreach($_REQUEST as $varname => $varvalue) {
     if (in_array($varname, $allowed)) {
         $target .= $varname . '=' . $varvalue . '&';
     }

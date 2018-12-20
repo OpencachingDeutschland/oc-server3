@@ -285,7 +285,7 @@ if (isset($_REQUEST['sessionid'])) {
             $sessionid
         );
         $recordcount = sql_fetch_array($rs);
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
 
         if ($sCharset === 'iso-8859-1') {
             header('Content-Type: application/xml; charset=ISO-8859-1');
@@ -392,58 +392,58 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
     $logtypes = [];
     $rs = sql('SELECT `id`, `de` FROM log_types');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $logtypes[$r['id']] = $r['de'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $cachetypes = [];
     $rs = sql('SELECT `id`, `short`, `de` FROM cache_type');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $cachetypes[$r['id']]['de'] = $r['de'];
         $cachetypes[$r['id']]['short'] = $r['short'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $cachestatus = [];
     $rs = sql('SELECT `id`, `de` FROM cache_status');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $cachestatus[$r['id']]['de'] = $r['de'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $counties = [];
     $rs = sql('SELECT `short`, `de` FROM countries');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $counties[$r['short']]['de'] = $r['de'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $cachesizes = [];
     $rs = sql('SELECT `id`, `de` FROM cache_size');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $cachesizes[$r['id']]['de'] = $r['de'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $languages = [];
     $rs = sql('SELECT `short`, `de` FROM languages');
-    $rsCount = mysql_num_rows($rs);
+    $rsCount = mysqli_num_rows($rs);
     for ($i = 0; $i < $rsCount; $i++) {
         $r = sql_fetch_array($rs);
         $languages[$r['short']]['de'] = $r['de'];
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $objecttypes['4'] = 'user';
     $objecttypes['2'] = 'cache';
@@ -498,7 +498,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
                 strtotime($r['date_created'])
             ) . '" since="' . date($sDateformat, strtotime($r['modified_since'])) . '">' . "\n"
         );
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
     }
 
     if ($bAttrlist == '1') {
@@ -546,7 +546,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
         fwrite($f, $t1 . '</user>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `caches`.`cache_id` `id`, `caches`.`uuid` `uuid`, `caches`.`user_id` `user_id`,
@@ -706,7 +706,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
         fwrite($f, $t1 . '</cache>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `cache_desc`.`id` `id`,
@@ -794,7 +794,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
         fwrite($f, $t1 . '</cachedesc>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $rating_condition = '';
     if ($ocXmlVersion >= 14) {
@@ -925,7 +925,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
         fwrite($f, $t1 . '</cachelog>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT `pictures`.`id` `id`,
@@ -1010,7 +1010,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
 
         fwrite($f, $t1 . '</picture>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $rs = sql(
         'SELECT SQL_BUFFER_RESULT
@@ -1035,7 +1035,7 @@ function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $z
         fwrite($f, $t2 . '<removeddate>' . date($sDateformat, strtotime($r['removed_date'])) . '</removeddate>' . "\n");
         fwrite($f, $t1 . '</removedobject>' . "\n");
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     if ($bOcXmlTag == '1') {
         fwrite($f, '</oc11xml>' . "\n");
@@ -1095,7 +1095,7 @@ function startXmlSession(
     $selection,
     $sAgent
 ) {
-    global $ocXmlVersion;
+    global $ocXmlVersion, $db;
 
     sql(
         "INSERT INTO `xmlsession` (`last_use`, `modified_since`, `date_created`, `agent`)
@@ -1103,7 +1103,7 @@ function startXmlSession(
         date('Y-m-d H:i:s', strtotime($sModifiedSince)),
         $sAgent
     );
-    $sessionid = mysql_insert_id();
+    $sessionid = mysqli_insert_id($db);
 
     $recordcount['caches'] = 0;
     $recordcount['cachedescs'] = 0;
@@ -1134,7 +1134,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysql_affected_rows();
+            $recordcount['caches'] = mysqli_affected_rows($db);
         }
 
         if ($bCachedesc == 1) {
@@ -1149,7 +1149,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysql_affected_rows();
+            $recordcount['cachedescs'] = mysqli_affected_rows($db);
         }
 
         if ($bCachelog == 1) {
@@ -1164,7 +1164,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysql_affected_rows();
+            $recordcount['cachelogs'] = mysqli_affected_rows($db);
         }
 
         if ($bUser == 1) {
@@ -1174,7 +1174,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['users'] = mysql_affected_rows();
+            $recordcount['users'] = mysqli_affected_rows($db);
         }
 
         if ($bPicture == 1) {
@@ -1200,7 +1200,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysql_affected_rows();
+            $recordcount['pictures'] = mysqli_affected_rows($db);
         }
 
         if ($bRemovedObject == 1) {
@@ -1213,7 +1213,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysql_affected_rows();
+            $recordcount['removedobjects'] = mysqli_affected_rows($db);
         }
     } else {
         if ($selection['type'] == 1) {
@@ -1294,7 +1294,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysql_affected_rows();
+            $recordcount['caches'] = mysqli_affected_rows($db);
         }
 
         if ($bCachedesc == 1) {
@@ -1306,7 +1306,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysql_affected_rows();
+            $recordcount['cachedescs'] = mysqli_affected_rows($db);
         }
 
         if ($bCachelog == 1) {
@@ -1319,7 +1319,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysql_affected_rows();
+            $recordcount['cachelogs'] = mysqli_affected_rows($db);
         }
 
         if ($bPicture == 1) {
@@ -1334,7 +1334,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysql_affected_rows();
+            $recordcount['pictures'] = mysqli_affected_rows($db);
 
             // log images
             if ($bPictureFromCachelog == 1) {
@@ -1348,7 +1348,7 @@ function startXmlSession(
                     $sModifiedSince
                 );
 
-                $recordcount['pictures'] += mysql_affected_rows();
+                $recordcount['pictures'] += mysqli_affected_rows($db);
             }
         }
 
@@ -1359,7 +1359,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysql_affected_rows();
+            $recordcount['removedobjects'] = mysqli_affected_rows($db);
         }
     }
 
@@ -1392,12 +1392,12 @@ function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlD
          AND `cleaned`=0',
         $sessionid + 0
     );
-    if (mysql_num_rows($rs) == 0) {
+    if (mysqli_num_rows($rs) == 0) {
         die('invalid sessionid');
     }
 
     $rRecordsCount = sql_fetch_assoc($rs);
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $startat = ($filenr - 1) * 500;
     if (($startat < 0) || ($startat > $rRecordsCount['users'] + $rRecordsCount['caches'] + $rRecordsCount['cachedescs'] + $rRecordsCount['cachelogs'] + $rRecordsCount['pictures'] + $rRecordsCount['removedobjects'] - 1)) {
@@ -1590,7 +1590,7 @@ function cache_id2uuid($id)
 {
     $rs = sql("SELECT `uuid` FROM `caches` WHERE `cache_id`='&1'", $id);
     $r = sql_fetch_array($rs);
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     return $r['uuid'];
 }
@@ -1603,7 +1603,7 @@ function log_id2uuid($id)
 {
     $rs = sql("SELECT `uuid` FROM `cache_logs` WHERE `id`='&1'", $id);
     $r = sql_fetch_array($rs);
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     return $r['uuid'];
 }
@@ -1616,7 +1616,7 @@ function user_id2uuid($id)
 {
     $rs = sql("SELECT `uuid` FROM `user` WHERE `user_id`='&1'", $id);
     $r = sql_fetch_array($rs);
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     return $r['uuid'];
 }

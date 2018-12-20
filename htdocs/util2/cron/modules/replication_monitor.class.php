@@ -54,32 +54,36 @@ class ReplicationMonitor
             $nActive = 1;
 
             // connect
-            $dblink = @mysql_connect($slave['server'], $slave['username'], $slave['password']);
+            $dblink = @mysqli_connect(
+                $slave['server'],
+                $slave['username'],
+                $slave['password'],
+                $opt['db']['placeholder']['db']
+            );
             if ($dblink !== false) {
-                if (mysql_select_db($opt['db']['placeholder']['db'], $dblink)) {
-                    // read slave time
-                    $rs = mysql_query('SELECT `data` FROM `sys_repl_timestamp`', $dblink);
-                    if ($rs !== false) {
-                        $rTime = mysql_fetch_assoc($rs);
-                        mysql_free_result($rs);
 
-                        // read current master db time
-                        $nMasterTime = sql_value('SELECT NOW()', null);
+                $rs = mysqli_query($dblink, 'SELECT `data` FROM `sys_repl_timestamp`');
+                if ($rs !== false) {
+                    $rTime = mysqli_fetch_assoc($rs);
+                    mysqli_free_result($rs);
 
-                        $nTimeDiff = strtotime($nMasterTime) - strtotime($rTime['data']);
-                        if ($nTimeDiff < $opt['db']['slave']['max_behind']) {
-                            $nOnline = 1;
-                        }
+                    // read current master db time
+                    $nMasterTime = sql_value('SELECT NOW()', null);
+
+                    $nTimeDiff = strtotime($nMasterTime) - strtotime($rTime['data']);
+                    if ($nTimeDiff < $opt['db']['slave']['max_behind']) {
+                        $nOnline = 1;
                     }
-
-                    // update logpos
-                    $rs = mysql_query('SHOW SLAVE STATUS');
-                    $r = mysql_fetch_assoc($rs);
-                    mysql_free_result($rs);
-                    $sLogName = $r['Master_Log_File'];
-                    $sLogPos = $r['Read_Master_Log_Pos'];
                 }
-                mysql_close($dblink);
+
+                // update logpos
+                $rs = mysqli_query($dblink, 'SHOW SLAVE STATUS');
+                $r = mysqli_fetch_assoc($rs);
+                mysqli_free_result($rs);
+                $sLogName = $r['Master_Log_File'];
+                $sLogPos = $r['Read_Master_Log_Pos'];
+
+                mysqli_close($dblink);
             }
         }
 

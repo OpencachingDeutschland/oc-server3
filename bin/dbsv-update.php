@@ -699,7 +699,7 @@ function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
             );
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 /***** OC release 3.0.14 *****/

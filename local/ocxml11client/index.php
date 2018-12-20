@@ -59,7 +59,7 @@ function downloadpictures()
 
     $rs = sql('SELECT COUNT(*) `c` FROM `pictures` WHERE `local`=0');
     $rCount = sql_fetch_array($rs);
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $nFileNr = 0;
     $rs = sql('SELECT `id`, `url` FROM `pictures` WHERE `local`=0');
@@ -86,7 +86,7 @@ function downloadpictures()
             );
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 function resetdb()
@@ -127,7 +127,7 @@ function analyzedb()
     while ($r = sql_fetch_array($rs)) {
         sql('ANALYZE TABLE `&1`', $r[0]);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 function optimizedb()
@@ -137,7 +137,7 @@ function optimizedb()
     while ($r = sql_fetch_array($rs)) {
         sql('OPTIMIZE TABLE `&1`', $r[0]);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 function getxmlfiles()
@@ -507,11 +507,15 @@ function switchdb()
                     die('invalid alternative DB' . "\n");
                 }
 
-                mysql_close($dblink);
-                $dblink = mysql_connect($opt['db'][1]['server'], $opt['db'][1]['username'], $opt['db'][1]['passwd']);
+                mysqli_close($dblink);
+                $dblink = mysqli_connect(
+                    $opt['db'][1]['server'],
+                    $opt['db'][1]['username'],
+                    $opt['db'][1]['passwd'],
+                    $opt['db'][1]['name']
+                );
                 if ($dblink !== false) {
                     sql("SET NAMES 'utf8'");
-                    sql('USE `&1`', $opt['db'][1]['name']);
                 } else {
                     die('Connect to alternative DB failed' . "\n");
                 }
@@ -522,10 +526,9 @@ function switchdb()
     }
 
     if ($opt['curdb'] == 0) {
-        $dblink = mysql_connect($dbserver, $dbusername, $dbpasswd);
+        $dblink = mysqli_connect($dbserver, $dbusername, $dbpasswd, $dbname);
         if ($dblink !== false) {
             sql("SET NAMES 'utf8'");
-            sql('USE `&1`', $dbname);
         } else {
             die('Connect to alternative DB failed' . "\n");
         }
@@ -571,7 +574,7 @@ function ImportUserArray($r)
                     return;
                 }
             }
-            mysql_free_result($rsUser);
+            mysqli_free_result($rsUser);
 
             sql(
                 "UPDATE `user` SET `last_modified`='&1', `username`='&2', `pmr_flag`=&3 WHERE `user_id`=&4",
@@ -585,7 +588,7 @@ function ImportUserArray($r)
         // existiert username schon?
         $rsUser = sql("SELECT COUNT(*) `c` FROM `user` WHERE `username`='&1'", $r['USERNAME']['__DATA']);
         $rUser = sql_fetch_array($rsUser);
-        mysql_free_result($rsUser);
+        mysqli_free_result($rsUser);
 
         if ($rUser['c'] > 0) {
             importError('user', $r['ID']['__DATA'], $r, 'username already exists, skipping');
@@ -609,7 +612,7 @@ function ImportUserArray($r)
             ($r['PMR']['__DATA'] == '0' ? '0' : '1')
         );
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 function ImportCacheArray($r)
@@ -683,7 +686,7 @@ function ImportCacheArray($r)
 
                 return;
             }
-            mysql_free_result($rsUser);
+            mysqli_free_result($rsUser);
 
             // waypoint unterschiedlich?
             $rsWaypoint = sql("SELECT `wp_oc` FROM `caches` WHERE `uuid`='&1'", $r['ID']['__DATA']);
@@ -696,7 +699,7 @@ function ImportCacheArray($r)
                 }
                 importWarn('cache', $r['ID']['__DATA'], $r, 'Waypoint does not match, i will set it');
             }
-            mysql_free_result($rsWaypoint);
+            mysqli_free_result($rsWaypoint);
 
             // update record
             sql(
@@ -733,11 +736,11 @@ function ImportCacheArray($r)
 
             return;
         }
-        mysql_free_result($rsUser);
+        mysqli_free_result($rsUser);
 
         // waypoint prüfen
         $rsWp = sql("SELECT `wp_oc` FROM `caches` WHERE `wp_oc`='&1'", $r['WAYPOINTS']['__ATTR']['OC']);
-        if (mysql_num_rows($rsWp) > 0) {
+        if (mysqli_num_rows($rsWp) > 0) {
             importError('cache', $r['ID']['__DATA'], $r, 'Waypoint already exists, skipping');
 
             return;
@@ -782,7 +785,7 @@ function ImportCacheArray($r)
             $r['WAYPOINTS']['__ATTR']['OC']
         );
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 function ImportCacheDescArray($r)
@@ -853,7 +856,7 @@ function ImportCacheDescArray($r)
 
                 return;
             }
-            mysql_free_result($rsCache);
+            mysqli_free_result($rsCache);
 
             if ($rCache['uuid'] != $r['CACHEID']['__DATA']) {
                 importError('cachedesc', $r['ID']['__DATA'], $r, 'Cache changed, not supported');
@@ -868,12 +871,12 @@ function ImportCacheDescArray($r)
                     $rDesc['cache_id'],
                     $r['LANGUAGE']['__ATTR']['ID']
                 );
-                if (mysql_num_rows($rsLang) > 0) {
+                if (mysqli_num_rows($rsLang) > 0) {
                     importError('cachedesc', $r['ID']['__DATA'], $r, 'new language already exists!');
 
                     return;
                 }
-                mysql_free_result($rsLang);
+                mysqli_free_result($rsLang);
             }
 
             // update
@@ -898,7 +901,7 @@ function ImportCacheDescArray($r)
 
             return;
         }
-        mysql_free_result($rsCache);
+        mysqli_free_result($rsCache);
 
         // existiert bereits eine beschreibung in der sprache für diesen cache?
         $rsCount = sql(
@@ -917,7 +920,7 @@ function ImportCacheDescArray($r)
 
             return;
         }
-        mysql_free_result($rsCount);
+        mysqli_free_result($rsCount);
 
         sql(
             "INSERT INTO `cache_desc` (`cache_id`, `language`, `desc`,
@@ -936,7 +939,7 @@ function ImportCacheDescArray($r)
             $r['ID']['__DATA']
         );
     }
-    mysql_free_result($rsDesc);
+    mysqli_free_result($rsDesc);
 }
 
 function ImportCachelogArray($r)
@@ -1096,7 +1099,7 @@ function ImportPictureArray($r)
             return;
     }
     $rObject = sql_fetch_array($rsObject);
-    mysql_free_result($rsObject);
+    mysqli_free_result($rsObject);
 
     if ($rObject == false) {
         importError('picture', $r['ID']['__DATA'], $r, 'object not found, skipping');
@@ -1220,7 +1223,7 @@ function ImportRemovedObjectArray($r)
                             $rPicture['object_id']
                         );
                         $rCounter = sql_fetch_array($rsCounter);
-                        mysql_free_result($rsCounter);
+                        mysqli_free_result($rsCounter);
 
                         break;
                     case 2:
@@ -1229,7 +1232,7 @@ function ImportRemovedObjectArray($r)
                             $rPicture['object_id']
                         );
                         $rCounter = sql_fetch_array($rsCounter);
-                        mysql_free_result($rsCounter);
+                        mysqli_free_result($rsCounter);
 
                         break;
                     default:
@@ -1252,7 +1255,7 @@ function ImportRemovedObjectArray($r)
 
     // in removed_object einfügen ...
     $rs = sql("SELECT * FROM `removed_objects` WHERE `uuid`='&1'", $r['OBJECT']['__DATA']);
-    if (mysql_num_rows($rs) == 0) {
+    if (mysqli_num_rows($rs) == 0) {
         sql(
             "INSERT INTO `removed_objects` (`uuid`, `localid`, `type`, `removed_date`)
                                 VALUES ('&1', &2, &3, '&4')",
@@ -1311,5 +1314,5 @@ function restorevalues()
             $r['uuid']
         );
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }

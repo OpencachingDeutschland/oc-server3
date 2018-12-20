@@ -49,7 +49,7 @@ class sqldebugger
         if (count($this->commands) >= 1000) {
             $this->cancel = true;
 
-            return mysql_query($sql, $dblink);
+            return mysqlI_query($dblink, $sql);
         }
 
         $command = array();
@@ -83,7 +83,7 @@ class sqldebugger
         if (strtoupper(substr($sqlexplain, 0, 7)) == 'SELECT ') {
             // we can use EXPLAIN
             $c = 0;
-            $rs = mysql_query($sqlexplain, $dblink);
+            $rs = mysqli_query($dblink, $sqlexplain);
             $command['count'] = sql_num_rows($rs);
             while ($r = sql_fetch_assoc($rs)) {
                 if ($c == 25) {
@@ -94,7 +94,7 @@ class sqldebugger
             }
             sql_free_result($rs);
 
-            $rs = mysql_query('EXPLAIN EXTENDED ' . $sqlexplain, $dblink);
+            $rs = mysqli_query($dblink, 'EXPLAIN EXTENDED ' . $sqlexplain);
             while ($r = sql_fetch_assoc($rs)) {
                 $command['explain'][] = $r;
             }
@@ -106,12 +106,12 @@ class sqldebugger
 
         $bSqlExecution = new CBench;
         $bSqlExecution->start();
-        $rsResult = mysql_query($sql, $dblink);
+        $rsResult = mysqli_query($dblink, $sql);
         $bSqlExecution->stop();
         $bError = ($rsResult == false);
-        $command['affected'] = mysql_affected_rows($dblink);
+        $command['affected'] = mysqli_affected_rows($dblink);
 
-        $rs = mysql_query('SHOW WARNINGS', $dblink);
+        $rs = mysqli_query( $dblink, 'SHOW WARNINGS');
         while ($r = sql_fetch_assoc($rs)) {
             $command['warnings'][] = $r['Message'];
         }

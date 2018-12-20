@@ -92,13 +92,11 @@ class OcSmarty extends Smarty
             $target = basename($_SERVER['PHP_SELF']) . '?';
 
             // REQUEST-Variablen durchlaufen und an target anhaengen
-            reset($_REQUEST);
-            while (list($varname, $varvalue) = each($_REQUEST)) {
+            foreach ($_REQUEST as $varname => $varvalue) {
                 if (in_array($varname, $opt['logic']['targetvars'])) {
                     $target .= urlencode($varname) . '=' . urlencode($varvalue) . '&';
                 }
             }
-            reset($_REQUEST);
 
             if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
                 $target = mb_substr($target, 0, -1);

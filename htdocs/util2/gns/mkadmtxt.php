@@ -42,9 +42,9 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
          LIMIT 1";
     $rs = sql($sql);
 
-    if (mysql_num_rows($rs) == 1) {
+    if (mysqli_num_rows($rs) == 1) {
         $r = sql_fetch_array($rs);
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
 
         $locId = $r['loc_id'];
 
@@ -68,7 +68,7 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
             $rLocations['cc1'],
             $rLocations['adm1']
         );
-        if (mysql_num_rows($rsAdm2) == 1) {
+        if (mysqli_num_rows($rsAdm2) == 1) {
             $rAdm2 = sql_fetch_array($rsAdm2);
             $admTxt2 = $rAdm2['short_form'];
 
@@ -100,4 +100,4 @@ while ($rLocations = sql_fetch_array($rsLocations)) {
     }
 }
 
-mysql_free_result($rsLocations);
+mysqli_free_result($rsLocations);

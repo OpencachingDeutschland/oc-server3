@@ -107,7 +107,7 @@ while ($r = sql_fetch_assoc($rs)) {
     sql("DELETE FROM `caches` WHERE `cache_id`='&1'", $r['cache_id']);
 }
 echo "\n";
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 echo "clearing nonpublic cache data\n";
 sql(
@@ -136,7 +136,7 @@ while ($r = sql_fetch_assoc($rs)) {
     sql("DELETE FROM `user` WHERE `user_id`='&1'", $r['user_id']);
 }
 echo "\n";
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 echo "clearing OKAPI data\n";
 if (sql_table_exists('okapi_vars')) {

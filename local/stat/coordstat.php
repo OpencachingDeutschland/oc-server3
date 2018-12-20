@@ -27,7 +27,7 @@ while ($cache = sql_fetch_assoc($rs)) {
         $liste[$lat][$long]['caches'][$year] ++;
     }
 }
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 // logs per logdate by year
 get_logs('cache_logs');
@@ -51,7 +51,7 @@ function get_logs($table)
             $liste[$lat][$long]['logs'][$year] ++;
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 ksort($years);
@@ -68,7 +68,7 @@ while ($cache = sql_fetch_assoc($rs)) {
     $liste[$lat][$long]['caches']['all'] ++;
     $liste[$lat][$long]['logs']['all'] += $cache['logs'];
 }
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 ksort($liste);
 $lats = array_keys($liste);

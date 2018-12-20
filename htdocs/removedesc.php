@@ -52,9 +52,9 @@ if ($error == false) {
                     $cache_id,
                     $desclang
                 );
-                if (mysql_num_rows($desc_rs) == 1) {
+                if (mysqli_num_rows($desc_rs) == 1) {
                     $desc_record = sql_fetch_array($desc_rs);
-                    mysql_free_result($desc_rs);
+                    mysqli_free_result($desc_rs);
                     require $stylepath . '/removedesc.inc.php';
 
                     if ($desc_record['node'] != $oc_nodeid) {
@@ -65,9 +65,6 @@ if ($error == false) {
                     if ($remove_commit == 1) {
                         //remove it from cache_desc
                         sql("DELETE FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $desclang);
-
-                        // do not use slave server for the next time ...
-                        db_slave_exclude();
 
                         tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
                         exit;

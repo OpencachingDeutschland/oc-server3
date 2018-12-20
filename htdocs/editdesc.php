@@ -26,7 +26,7 @@ if ($error == false) {
         $desc_lang = $_REQUEST['desclang'];  // Ocprop
 
         $rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $desc_lang);
-        if (mysql_num_rows($rs) == 1) {
+        if (mysqli_num_rows($rs) == 1) {
             $r = sql_fetch_array($rs);
             $descid = $r['id'];
         } else {
@@ -163,7 +163,7 @@ if ($error == false) {
                         if ($r['count'] > 0) {
                             tpl_errorMsg('editdesc', $error_desc_exists);
                         }
-                        mysql_free_result($rs);
+                        mysqli_free_result($rs);
 
                         sql(
                             "UPDATE `cache_desc` SET
@@ -201,9 +201,6 @@ if ($error == false) {
                                 ''
                             );
                         }
-
-                        // do not use slave server for the next time ...
-                        db_slave_exclude();
 
                         // redirect to cachepage
                         tpl_redirect('editcache.php?cacheid=' . urlencode($desc_record['cache_id']));
@@ -245,7 +242,7 @@ if ($error == false) {
                         $desc_lang,
                         $locale
                     );
-                    if (mysql_num_rows($rs) == 0) {
+                    if (mysqli_num_rows($rs) == 0) {
                         $show_all_langs = true;
                     }
                     sql_free_result($rs);

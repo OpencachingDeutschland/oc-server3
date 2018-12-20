@@ -209,7 +209,7 @@ function search_output()
             break;
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     $gpxHead = mb_ereg_replace('{wpchildren}', $children, $gpxHead);
     $gpxHead = mb_ereg_replace('{time}', date($gpxTimeFormat, time()), $gpxHead);
@@ -518,7 +518,7 @@ function search_output()
                 $oc_logentries .= $thislog . "\n";
             }
         }
-        mysql_free_result($rsLogs);
+        mysqli_free_result($rsLogs);
 
         $thisline = mb_ereg_replace('{logs}', $gc_logentries, $thisline);
         $thisline = mb_ereg_replace('{oc_logs}', $oc_logentries, $thisline);
@@ -555,7 +555,7 @@ function search_output()
                 $gc_ids[$rAttrib['gc_id']] = true;
             }
         }
-        mysql_free_result($rsAttributes);
+        mysqli_free_result($rsAttributes);
 
         if ($r['needs_maintenance'] > 0) {
             $thisattribute = mb_ereg_replace('{attrib_id}', '42', $gpxAttributes);
@@ -591,7 +591,7 @@ function search_output()
 
             $gkentries .= $thiskrety . "\n";
         }
-        mysql_free_result($rsGeokrety);
+        mysqli_free_result($rsGeokrety);
         $thisline = mb_ereg_replace('{geokrety}', $gkentries, $thisline);
 
         // additional waypoints, including personal cache note
@@ -655,7 +655,7 @@ function search_output()
         // There is no line feed at the end of Groundspeak GPX files, so we omit the LF, too.
         append_output($thisline);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     append_output($gpxFoot);
 }
@@ -734,7 +734,7 @@ function getPictures($cacheid, $server_address)
         }
         $retval .= '</div>';
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     return $retval;
 }

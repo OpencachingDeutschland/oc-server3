@@ -54,7 +54,7 @@ function search_output()
 
     $rsCount = sql_slave('SELECT COUNT(*) `count` FROM &searchtmp');
     $rCount = sql_fetch_array($rsCount);
-    mysql_free_result($rsCount);
+    mysqli_free_result($rsCount);
 
     // start output
     if (!$db['debug']) {
@@ -178,7 +178,7 @@ function search_output()
             echo $thisline;
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
     sql_drop_temp_table_slave('searchtmp');
 
     if (!$db['debug']) {

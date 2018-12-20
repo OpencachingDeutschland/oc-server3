@@ -91,7 +91,7 @@ function search_output()
 
         append_output($thisline);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     append_output($locFoot);
 }

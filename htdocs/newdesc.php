@@ -32,9 +32,9 @@ if ($error == false) {
         //user must be the owner of the cache
         $cache_rs = sql("SELECT `user_id`, `name` FROM `caches` WHERE `cache_id`='&1'", $cache_id);
 
-        if (mysql_num_rows($cache_rs) > 0) {
+        if (mysqli_num_rows($cache_rs) > 0) {
             $cache_record = sql_fetch_array($cache_rs);
-            mysql_free_result($cache_rs);
+            mysqli_free_result($cache_rs);
 
             if ($cache_record['user_id'] == $usr['userid']) {
                 $tplname = 'newdesc';
@@ -98,8 +98,8 @@ if ($error == false) {
                         $cache_id,
                         $sel_lang
                     );
-                    $desc_lang_exists = (mysql_num_rows($desc_rs) > 0);
-                    mysql_free_result($desc_rs);
+                    $desc_lang_exists = (mysqli_num_rows($desc_rs) > 0);
+                    mysqli_free_result($desc_rs);
 
                     if ($desc_lang_exists == false) {
                         //add to DB
@@ -136,9 +136,6 @@ if ($error == false) {
                             $short_desc,
                             $oc_nodeid
                         );
-
-                        // do not use slave server for the next time ...
-                        db_slave_exclude();
 
                         tpl_redirect('editcache.php?cacheid=' . urlencode($cache_id));
                         exit;
@@ -240,7 +237,7 @@ if ($error == false) {
                 tpl_set_var('submit', $submit);
             }
         } else {
-            mysql_free_result($cache_rs);
+            mysqli_free_result($cache_rs);
         }
     }
 }

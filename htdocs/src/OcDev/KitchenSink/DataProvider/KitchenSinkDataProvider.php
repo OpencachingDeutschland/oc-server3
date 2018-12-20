@@ -30,7 +30,7 @@ class KitchenSinkDataProvider implements DataProviderInterface
      *
      * @return array
      */
-    public function getTemplateVars()
+    public function getTemplateVars(): array
     {
         $this->session->getFlashBag()->add('success', 'Erfolgreiche Meldung 1!');
         $this->session->getFlashBag()->add('success', 'Erfolgreiche Meldung 2!');

@@ -445,7 +445,7 @@ if ($error == false) {
                 } else {
                     // get attribs for this cache from db
                     $rs = sql("SELECT `attrib_id` FROM `caches_attributes` WHERE `cache_id`='&1'", $cache_id);
-                    if (mysql_num_rows($rs) > 0) {
+                    if (mysqli_num_rows($rs) > 0) {
                         unset($cache_attribs);
                         while ($record = sql_fetch_array($rs)) {
                             $cache_attribs[] = $record['attrib_id'];
@@ -614,9 +614,6 @@ if ($error == false) {
                             }
                         }
 
-                        // do not use slave server for the next time ...
-                        db_slave_exclude();
-
                         // update cache attributes
                         $attriblist = '999';
                         $countCacheAttrIbs = count($cache_attribs);
@@ -665,7 +662,7 @@ if ($error == false) {
                         $cache_country,
                         $locale
                     );
-                    if (mysql_num_rows($rs) == 0) {
+                    if (mysqli_num_rows($rs) == 0) {
                         $show_all_countries = 1;
                     }
                     sql_free_result($rs);
@@ -1059,7 +1056,7 @@ if ($error == false) {
                         $cache_id
                     );
 
-                    $countRsPictures = mysql_num_rows($rspictures);
+                    $countRsPictures = mysqli_num_rows($rspictures);
                     for ($i = 0; $i < $countRsPictures; $i++) {
                         $tmpline = ($i == 0 ? $pictureline0 : $pictureline);
                         $pic_record = sql_fetch_array($rspictures);
@@ -1084,7 +1081,7 @@ if ($error == false) {
                     }
 
                     $pictures = mb_ereg_replace('{lines}', $pictures, $picturelines);
-                    mysql_free_result($rspictures);
+                    mysqli_free_result($rspictures);
                     tpl_set_var('pictures', $pictures);
                 } else {
                     tpl_set_var('pictures', $nopictures);

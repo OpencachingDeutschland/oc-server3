@@ -30,7 +30,8 @@
     "components/jquery": "^3.2",
     "ext-gd": "*",
     "ext-json": "*",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "ext-mysqli": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",

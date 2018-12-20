@@ -131,7 +131,7 @@ function search_output()
 
         $caches[] = $rCache;
     }
-    mysql_free_result($rs_caches);
+    mysqli_free_result($rs_caches);
 
     $tpl->assign('caches', $caches);
 

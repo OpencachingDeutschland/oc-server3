@@ -31,9 +31,6 @@ class SlaveCleanup
 
     public function cleanupSlave($slaveId)
     {
-        // ensure old slave is disconnected
-        sql_disconnect_slave();
-
         // connect the slave
         if ($slaveId == - 1) {
             sql_connect_master_as_slave();
@@ -42,9 +39,6 @@ class SlaveCleanup
         }
 
         $this->cleanupMapResult2($slaveId);
-
-        // disconnect slave
-        sql_disconnect_slave();
     }
 
     public function cleanupMapResult2($slaveId)

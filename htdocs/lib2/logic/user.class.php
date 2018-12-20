@@ -1081,7 +1081,7 @@ class user
                 "AND `caches`.`user_id`='&1'",
                 $this->getUserId()
             );
-            while ($cache_desc = sql_fetch_array($rs, MYSQL_ASSOC)) {
+            while ($cache_desc = sql_fetch_array($rs, MYSQLI_ASSOC)) {
                 $cache_descs[] = $cache_desc;
             }
             sql_free_result($rs);
@@ -1166,7 +1166,7 @@ class user
          * set all cache_logs '', save old texts and delete pictures
          */
         $rs = sql("SELECT `id`, `text` FROM `cache_logs` WHERE `user_id`='&1'", $this->getUserId());
-        while ($log = sql_fetch_array($rs, MYSQL_ASSOC)) {
+        while ($log = sql_fetch_array($rs, MYSQLI_ASSOC)) {
             // save text - added 2013/03/18 to be enable restoring data on reactivation
             // of accounts that were disabled before license transition
             sql(
@@ -1294,7 +1294,7 @@ class user
         $tmw = $opt['logic']['pictures']['thumb_max_width'];
 
         $filenames = array();
-        while ($url = sql_fetch_array($rs, MYSQL_NUM)) {
+        while ($url = sql_fetch_array($rs, MYSQLI_NUM)) {
             $filenames[] = substr($url['url'], - 40);
         }
 

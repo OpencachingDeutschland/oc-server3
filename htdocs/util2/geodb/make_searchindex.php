@@ -45,7 +45,7 @@ while ($r = sql_fetch_array($rs)) {
         }
     }
 }
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 function nonAlpha($str)
 {

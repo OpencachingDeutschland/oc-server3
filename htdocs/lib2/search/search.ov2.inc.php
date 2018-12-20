@@ -70,7 +70,7 @@ function search_output()
 
         append_output($record);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 

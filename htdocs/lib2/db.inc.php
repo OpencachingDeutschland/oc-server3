@@ -14,19 +14,19 @@ use Oc\Util\CBench;
  * sql_escape($value)              ... Escape parameter for SQL-use
  * sql_escape_backtick($value)     ... escape $value for use within backticks
  * sql_value($sql, $default)       ... Query SQL and return first row of first line
- * sql_fetch_array($rs)            ... mysql_fetch_array with charset conversion
- * sql_fetch_assoc($rs)            ... mysql_fetch_assoc with charset conversion
- * sql_fetch_row($rs)              ... mysql_fetch_row with charset conversion
+ * sql_fetch_array($rs)            ... mysqli_fetch_array with charset conversion
+ * sql_fetch_assoc($rs)            ... mysqli_fetch_assoc with charset conversion
+ * sql_fetch_row($rs)              ... mysqli_fetch_row with charset conversion
  * sql_fetch_column($rs)           ... fetch column with charset conversion
  * sql_fetch_assoc_table($rs)      ... fetch_assoc for all rows
  * sql_temp_table($table)          ... registers an placeholder for use as temporary
  * table and drop's temporary tables if
- * mysql_pconnect is used
+ * mysqli_pconnect is used
  * sql_drop_temp_table($table)     ... unregisters and drops an tmp-table placeholder
- * sql_free_result($rs)            ... mysql_free_result
- * sql_affected_rows()             ... mysql_affected_rows
- * sql_insert_id()                 ... mysql_insert_id
- * sql_num_rows($rs)               ... mysql_num_rows
+ * sql_free_result($rs)            ... mysqli_free_result
+ * sql_affected_rows()             ... mysqli_affected_rows
+ * sql_insert_id()                 ... mysqli_insert_id
+ * sql_num_rows($rs)               ... mysqli_num_rows
  * sql_export_recordset($f, $rs)   ... export recordset to file
  * sql_export_table($f, $table)    ... export table to file
  * sql_export_table_to_file($filename, $table)
@@ -55,7 +55,6 @@ use Oc\Util\CBench;
  * // only for internal use      ... invoked automatically
  * sql_connect()                 ... connect to the database
  * sql_disconnect()              ... disconnect database
- * sql_disconnect_slave()        ... disconnect slave database
  * sql_error()                   ... report an error and stop processing
  * sql_warn($warnmessage)        ... report a warning and resume processing
  * // for maintenance functions
@@ -322,7 +321,7 @@ function sql_internal($dblink, $sql)
             $cSqlExecution->start();
         }
 
-        $result = @mysql_query($filtered_sql, $dblink);
+        $result = @mysqli_query($dblink, $filtered_sql);
         if ($result === false) {
             sql_error($filtered_sql);
         }
@@ -451,7 +450,7 @@ function sql_escape($value)
         sql_connect();
     }
 
-    $value = mysql_real_escape_string($value, $db['dblink']);
+    $value = mysqli_real_escape_string($db['dblink'], $value);
     $value = str_replace('&', '\&', $value);
 
     return $value;
@@ -573,7 +572,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
 function sql_fetch_array($rs)
 {
     global $opt;
-    $retval = mysql_fetch_array($rs);
+    $retval = mysqli_fetch_array($rs);
     if (is_array($retval)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             foreach ($retval as $k => $v) {
@@ -593,7 +592,7 @@ function sql_fetch_array($rs)
 function sql_fetch_assoc($rs)
 {
     global $opt;
-    $retval = mysql_fetch_assoc($rs);
+    $retval = mysqli_fetch_assoc($rs);
     if (is_array($retval)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             foreach ($retval as $k => $v) {
@@ -630,7 +629,7 @@ function sql_fetch_assoc_table($rs)
 function sql_fetch_row($rs)
 {
     global $opt;
-    $retval = mysql_fetch_row($rs);
+    $retval = mysqli_fetch_row($rs);
     if (is_array($retval)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             foreach ($retval as $k => $v) {
@@ -651,7 +650,7 @@ function sql_fetch_column($rs)
 {
     global $opt;
     $result = [];
-    while ($r = mysql_fetch_row($rs)) {
+    while ($r = mysqli_fetch_row($rs)) {
         if ($opt['charset']['iconv'] != 'UTF-8') {
             $result[] = iconv($opt['charset']['iconv'], 'UTF-8', $r[0]);
         } else {
@@ -671,7 +670,7 @@ function sql_affected_rows()
 {
     global $db;
 
-    return mysql_affected_rows($db['dblink']);
+    return mysqli_affected_rows($db['dblink']);
 }
 
 /**
@@ -682,17 +681,17 @@ function sql_affected_rows_slave()
 {
     global $db;
 
-    return mysql_affected_rows($db['dblink_slave']);
+    return mysqli_affected_rows($db['dblink_slave']);
 }
 
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- * @return bool
+ * @return void
  */
 function sql_free_result($rs)
 {
-    return mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 /**
@@ -703,7 +702,7 @@ function sql_insert_id()
 {
     global $db;
 
-    return mysql_insert_id($db['dblink']);
+    return mysqli_insert_id($db['dblink']);
 }
 
 /**
@@ -714,7 +713,7 @@ function sql_insert_id_slave()
 {
     global $db;
 
-    return mysql_insert_id($db['dblink_slave']);
+    return mysqli_insert_id($db['dblink_slave']);
 }
 
 /**
@@ -724,7 +723,7 @@ function sql_insert_id_slave()
  */
 function sql_num_rows($rs)
 {
-    return mysql_num_rows($rs);
+    return mysqli_num_rows($rs);
 }
 
 /**
@@ -743,20 +742,20 @@ function sql_temp_table($table)
         if ($db['temptable_initialized'] == false) {
             $rs = sqlf(
                 "SELECT `threadid`, `name` FROM &db.`sys_temptables` WHERE `threadid`='&1'",
-                mysql_thread_id($db['dblink'])
+                mysqli_thread_id($db['dblink'])
             );
             while ($r = sql_fetch_assoc($rs)) {
                 sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
             }
             sql_free_result($rs);
-            sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
+            sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysqli_thread_id($db['dblink']));
 
             $db['temptable_initialized'] = true;
         }
 
         sqlf(
             "INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')",
-            mysql_thread_id($db['dblink']),
+            mysqli_thread_id($db['dblink']),
             $table
         );
     }
@@ -779,7 +778,7 @@ function sql_temp_table_slave($table)
     if ($opt['db']['pconnect'] === true) {
         sqlf_slave(
             "INSERT IGNORE INTO &db.`sys_temptables` (`threadid`, `name`) VALUES ('&1', '&2')",
-            mysql_thread_id($db['dblink_slave']),
+            mysqli_thread_id($db['dblink_slave']),
             $table
         );
     }
@@ -801,7 +800,7 @@ function sql_drop_temp_table($table)
     if ($opt['db']['pconnect'] === true) {
         sqlf(
             "DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1' AND `name`='&2'",
-            mysql_thread_id($db['dblink']),
+            mysqli_thread_id($db['dblink']),
             $table
         );
     }
@@ -821,7 +820,7 @@ function sql_rename_temp_table($table, $newname)
     if ($opt['db']['pconnect'] === true) {
         sqlf(
             "UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'",
-            mysql_thread_id($db['dblink']),
+            mysqli_thread_id($db['dblink']),
             $table,
             $newname
         );
@@ -846,7 +845,7 @@ function sql_drop_temp_table_slave($table)
     if ($opt['db']['pconnect'] === true) {
         sqlf_slave(
             "DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1' AND `name`='&2'",
-            mysql_thread_id($db['dblink']),
+            mysqli_thread_id($db['dblink']),
             $table
         );
     }
@@ -866,7 +865,7 @@ function sql_rename_temp_table_slave($table, $newname)
     if ($opt['db']['pconnect'] === true) {
         sqlf(
             "UPDATE &db.`sys_temptables` SET `name`='&3' WHERE `threadid`='&1' AND `name`='&2'",
-            mysql_thread_id($db['dblink']),
+            mysqli_thread_id($db['dblink']),
             $table,
             $newname
         );
@@ -898,24 +897,14 @@ function sql_connect($username = null, $password = null, $raiseError = true)
     }
 
     //connect to the database by the given method - no php error reporting!
-    if ($opt['db']['pconnect'] === true) {
-        $db['dblink'] = @mysql_pconnect($opt['db']['servername'], $username, $password);
-    } else {
-        $db['dblink'] = @mysql_connect($opt['db']['servername'], $username, $password);
-    }
+    $db['dblink'] = @mysqli_connect($opt['db']['servername'], $username, $password, $opt['db']['placeholder']['db']);
+
 
     if ($db['dblink'] !== false) {
-        mysql_query(
-            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink']) . "'",
-            $db['dblink']
+        mysqli_query(
+            $db['dblink'],
+            "SET NAMES '" . mysqli_real_escape_string($db['dblink'], $opt['charset']['mysql']) . "'"
         );
-
-        //database connection established ... set the used database
-        if (@mysql_select_db($opt['db']['placeholder']['db'], $db['dblink']) === false) {
-            //error while setting the database ... disconnect
-            sql_disconnect();
-            $db['dblink'] = false;
-        }
     }
 
     // output the error form if there was an error
@@ -1034,32 +1023,31 @@ function sql_connect_slave($id)
     // for display in SQL debugger
     $db['slave_server'] = $slave['server'];
 
-    if ($opt['db']['pconnect'] === true) {
-        $db['dblink_slave'] = @mysql_pconnect($slave['server'], $slave['username'], $slave['password']);
-    } else {
-        $db['dblink_slave'] = @mysql_connect($slave['server'], $slave['username'], $slave['password']);
-    }
+
+    $db['dblink_slave'] = @mysqli_connect(
+        $slave['server'],
+        $slave['username'],
+        $slave['password'],
+        $opt['db']['placeholder']['db']
+    );
 
     if ($db['dblink_slave'] !== false) {
-        if (mysql_select_db($opt['db']['placeholder']['db'], $db['dblink_slave']) === false) {
-            sql_error();
-        }
+        mysqli_query(
+            $db['dblink_slave'].
+            "SET NAMES '" . mysqli_real_escape_string($db['dblink_slave'], $opt['charset']['mysql']) . "'"
 
-        mysql_query(
-            "SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $db['dblink_slave']) . "'",
-            $db['dblink_slave']
         );
 
         // initialize temp tables on slave server
         $rs = sqlf_slave(
             "SELECT `threadid`, `name` FROM `sys_temptables` WHERE `threadid`='&1'",
-            mysql_thread_id($db['dblink_slave'])
+            mysqli_thread_id($db['dblink_slave'])
         );
         while ($r = sql_fetch_assoc($rs)) {
             sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $r['name']);
         }
         sql_free_result($rs);
-        sqlf_slave("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink_slave']));
+        sqlf_slave("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysqli_thread_id($db['dblink_slave']));
     } else {
         sql_error();
     }
@@ -1094,7 +1082,6 @@ function sql_connect_maintenance()
 function sql_disconnect()
 {
     global $opt, $db;
-    sql_disconnect_slave();
 
     if ($db['dblink'] !== false && $opt['db']['pconnect'] === true) {
         if (count($db['temptables']) > 0) {
@@ -1102,7 +1089,7 @@ function sql_disconnect()
                 sqlf('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
             }
 
-            sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysql_thread_id($db['dblink']));
+            sqlf("DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'", mysqli_thread_id($db['dblink']));
             $db['temptables'] = [];
             $db['temptables_slave'] = [];
         }
@@ -1114,54 +1101,10 @@ function sql_disconnect()
 
     //is connected and no persistent connect used?
     if ($db['dblink'] !== false && $opt['db']['pconnect'] === false) {
-        mysql_close($db['dblink']);
+        mysqli_close($db['dblink']);
         $db['dblink'] = false;
         $db['connected'] = false;
     }
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- * disconnect the database
- */
-function sql_disconnect_slave()
-{
-    global $opt, $db;
-
-    if ($db['dblink_slave'] === false) {
-        return;
-    }
-
-    if ($db['dblink'] !== false && $opt['db']['pconnect'] === true) {
-        if (count($db['temptables']) > 0) {
-            foreach ($db['temptables'] as $k => $table) {
-                if (isset($db['temptables_slave'][$table])) {
-                    sqlf_slave('DROP TEMPORARY TABLE IF EXISTS &tmpdb.`&1`', $table);
-                    unset($db['temptables_slave'][$table], $db['temptables'][$k]);
-                }
-            }
-
-            if (count($db['temptables_slave']) > 0) {
-                sqlf_slave(
-                    "DELETE FROM &db.`sys_temptables` WHERE `threadid`='&1'",
-                    mysql_thread_id($db['dblink_slave'])
-                );
-            }
-            $db['temptables_slave'] = [];
-        }
-    }
-
-    if ($db['dblink'] === $db['dblink_slave']) {
-        $db['dblink_slave'] = false;
-
-        return;
-    }
-
-    //is connected and no persistent connect used?
-    if ($db['dblink_slave'] !== false && $opt['db']['pconnect'] === false) {
-        mysql_close($db['dblink_slave']);
-    }
-    $db['dblink_slave'] = false;
 }
 
 /**
@@ -1173,8 +1116,8 @@ function sql_error($sqlstatement = '')
     global $tpl, $opt, $db;
     global $bSmartyNoTranslate;
 
-    $errno = mysql_errno();
-    $error = mysql_error();
+    $errno = mysqli_errno($db);
+    $error = mysqli_error($db);
     if ($sqlstatement !== '') {
         $error .= "\n\nSQL statement: " . $sqlstatement;
     }
@@ -1234,9 +1177,11 @@ function sql_error($sqlstatement = '')
         } else {
             if ($opt['db']['error']['display'] == true) {
                 die(
-                    '<html><body>' . htmlspecialchars(
-                        'MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error)
-                    ) . '</body></html>'
+                    '<html><body>' .
+                    htmlspecialchars(
+                        'MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error), ENT_QUOTES | ENT_HTML5
+                    )
+                    . '</body></html>'
                 );
             }
             die('<html><body>A database command could not be performed</body></html>');

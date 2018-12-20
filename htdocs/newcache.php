@@ -367,7 +367,7 @@ if ($error == false) {
                 $sel_lang,
                 $locale
             );
-            if (mysql_num_rows($rs) == 0) {
+            if (mysqli_num_rows($rs) == 0) {
                 $show_all_langs = 1;
             }
             sql_free_result($rs);
@@ -440,7 +440,7 @@ if ($error == false) {
                 $sel_country,
                 $locale
             );
-            if (mysql_num_rows($rs) == 0) {
+            if (mysqli_num_rows($rs) == 0) {
                 $show_all_countries = 1;
             }
             sql_free_result($rs);
@@ -998,10 +998,7 @@ if ($error == false) {
                     $wp_gc,
                     $oc_nodeid
                 );
-                $cache_id = mysql_insert_id($dblink);
-
-                // do not use slave server for the next time ...
-                db_slave_exclude();
+                $cache_id = mysqli_insert_id($dblink);
 
                 //add record to cache_desc table
                 sql(

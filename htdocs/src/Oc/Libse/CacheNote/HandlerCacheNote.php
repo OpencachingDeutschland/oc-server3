@@ -22,7 +22,7 @@ class HandlerCacheNote
             TypeCoordinate::UserNote
         );
         $ret = $this->recordToArray(sql_fetch_array($rs));
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
 
         return $ret;
     }

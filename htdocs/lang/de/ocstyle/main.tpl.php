@@ -112,9 +112,9 @@ $smarty_dummy = 0;
                         var sCurrentOption = "<?php echo $sUserCountry; ?>";
                         var oUserCountryCombo = document.getElementById('usercountry');
 
-                        if (sCurrentOption!=oUserCountryCombo.value)
+                        if (sCurrentOption!=oUserCountryCombo)
                         {
-                            window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
+                            window.location = 'index.php?usercountry=' + oUserCountryCombo;
                         }
                     }
 

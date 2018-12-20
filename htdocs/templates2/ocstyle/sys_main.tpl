@@ -52,10 +52,10 @@
                     var sCurrentOption = "{/literal}{$opt.template.country|escapejs}{literal}";
                     var oUserCountryCombo = document.getElementById('usercountry');
 
-                    if (sCurrentOption!=oUserCountryCombo.value)
+                    if (sCurrentOption!=oUserCountryCombo)
                     {
                         {/literal}
-                        window.location = '{if $change_country_inpage}{$base_pageadr}{else}index.php?{/if}usercountry=' + oUserCountryCombo.value;
+                        window.location = '{if $change_country_inpage}{$base_pageadr}{else}index.php?{/if}usercountry=' + oUserCountryCombo;
                         {literal}
                     }
                 }

@@ -150,7 +150,7 @@ class TwigDummy extends \Twig_Environment
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setLexer(Twig_LexerInterface $lexer)
+    public function setLexer(\Twig_Lexer $lexer)
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
@@ -165,7 +165,7 @@ class TwigDummy extends \Twig_Environment
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setParser(Twig_ParserInterface $parser)
+    public function setParser(\Twig_Parser $parser)
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
@@ -180,12 +180,12 @@ class TwigDummy extends \Twig_Environment
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setCompiler(Twig_CompilerInterface $compiler)
+    public function setCompiler(\Twig_Compiler $compiler)
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function compile(Twig_NodeInterface $node)
+    public function compile(\Twig_Node $node)
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }

@@ -16,7 +16,7 @@ class QrCodeControllerTest extends TestCase
 
         $request = new Request(['wp' => 'OC0002']);
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $controller->generateQrCode($request);
     }

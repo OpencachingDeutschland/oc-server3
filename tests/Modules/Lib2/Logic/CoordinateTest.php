@@ -23,7 +23,9 @@ OC85A9 Europa (Norwegen)
 N 60.63367° E 004.81313°
 */
 
-class CoordinateTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class CoordinateTest extends TestCase
 {
     public function setUp()
     {

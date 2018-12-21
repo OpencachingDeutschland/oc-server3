@@ -1103,7 +1103,7 @@ function startXmlSession(
         date('Y-m-d H:i:s', strtotime($sModifiedSince)),
         $sAgent
     );
-    $sessionid = mysqli_insert_id($db);
+    $sessionid = mysqli_insert_id($db['dblink']);;
 
     $recordcount['caches'] = 0;
     $recordcount['cachedescs'] = 0;
@@ -1134,7 +1134,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysqli_affected_rows($db);
+            $recordcount['caches'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bCachedesc == 1) {
@@ -1149,7 +1149,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysqli_affected_rows($db);
+            $recordcount['cachedescs'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bCachelog == 1) {
@@ -1164,7 +1164,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysqli_affected_rows($db);
+            $recordcount['cachelogs'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bUser == 1) {
@@ -1174,7 +1174,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['users'] = mysqli_affected_rows($db);
+            $recordcount['users'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bPicture == 1) {
@@ -1200,7 +1200,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysqli_affected_rows($db);
+            $recordcount['pictures'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bRemovedObject == 1) {
@@ -1213,7 +1213,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysqli_affected_rows($db);
+            $recordcount['removedobjects'] = mysqli_affected_rows($db['dblink']);;
         }
     } else {
         if ($selection['type'] == 1) {
@@ -1294,7 +1294,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysqli_affected_rows($db);
+            $recordcount['caches'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bCachedesc == 1) {
@@ -1306,7 +1306,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysqli_affected_rows($db);
+            $recordcount['cachedescs'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bCachelog == 1) {
@@ -1319,7 +1319,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysqli_affected_rows($db);
+            $recordcount['cachelogs'] = mysqli_affected_rows($db['dblink']);;
         }
 
         if ($bPicture == 1) {
@@ -1334,7 +1334,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysqli_affected_rows($db);
+            $recordcount['pictures'] = mysqli_affected_rows($db['dblink']);;
 
             // log images
             if ($bPictureFromCachelog == 1) {
@@ -1348,7 +1348,7 @@ function startXmlSession(
                     $sModifiedSince
                 );
 
-                $recordcount['pictures'] += mysqli_affected_rows($db);
+                $recordcount['pictures'] += mysqli_affected_rows($db['dblink']);;
             }
         }
 
@@ -1359,7 +1359,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysqli_affected_rows($db);
+            $recordcount['removedobjects'] = mysqli_affected_rows($db['dblink']);;
         }
     }
 

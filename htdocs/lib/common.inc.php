@@ -111,7 +111,7 @@ if (!isset($stylepath)) {
 //load gettext translation
 load_gettext();
 
-//open a databse connection
+//open a database connection
 db_connect();
 
 require_once __DIR__ . '/auth.inc.php';

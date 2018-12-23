@@ -611,29 +611,12 @@ function db_disconnect()
 function db_connect()
 {
     global $dblink, $dbusername, $dbname, $dbserver, $dbpasswd;
-    global $opt;
 
     //connect to the database by the given method - no php error reporting!
-    $dblink = @mysqli_connect($dbserver, $dbusername, $dbpasswd, $dbname);
+    $dblink = mysqli_connect($dbserver, $dbusername, $dbpasswd, $dbname);
 
-
-    if ($dblink !== false) {
-        mysqli_query($dblink, "SET NAMES '" . $opt['charset']['mysql'] . "'");
-    }
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
-function db_connect_primary_slave()
-{
-    global $opt, $dblink, $dblink_slave, $dbslaveid;
-
-    if ($opt['db']['slave']['primary'] == -1) {
-        $dblink_slave = $dblink;
-        $dbslaveid = -1;
-    } else {
-        db_connect_slave($opt['db']['slave']['primary']);
+    if (!$dblink instanceof mysqli) {
+        throw new InvalidArgumentException('cannot connect to database');
     }
 }
 

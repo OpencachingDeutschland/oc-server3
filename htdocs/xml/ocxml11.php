@@ -1095,7 +1095,7 @@ function startXmlSession(
     $selection,
     $sAgent
 ) {
-    global $ocXmlVersion, $db;
+    global $ocXmlVersion, $db, $dblink;
 
     sql(
         "INSERT INTO `xmlsession` (`last_use`, `modified_since`, `date_created`, `agent`)
@@ -1103,7 +1103,7 @@ function startXmlSession(
         date('Y-m-d H:i:s', strtotime($sModifiedSince)),
         $sAgent
     );
-    $sessionid = mysqli_insert_id($db['dblink']);;
+    $sessionid = mysqli_insert_id($dblink);
 
     $recordcount['caches'] = 0;
     $recordcount['cachedescs'] = 0;
@@ -1134,7 +1134,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['caches'] = mysqli_affected_rows($dblink);
         }
 
         if ($bCachedesc == 1) {
@@ -1149,7 +1149,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['cachedescs'] = mysqli_affected_rows($dblink);
         }
 
         if ($bCachelog == 1) {
@@ -1164,7 +1164,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['cachelogs'] = mysqli_affected_rows($dblink);
         }
 
         if ($bUser == 1) {
@@ -1174,7 +1174,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['users'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['users'] = mysqli_affected_rows($dblink);
         }
 
         if ($bPicture == 1) {
@@ -1200,7 +1200,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['pictures'] = mysqli_affected_rows($dblink);
         }
 
         if ($bRemovedObject == 1) {
@@ -1213,7 +1213,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['removedobjects'] = mysqli_affected_rows($dblink);
         }
     } else {
         if ($selection['type'] == 1) {
@@ -1294,7 +1294,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['caches'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['caches'] = mysqli_affected_rows($dblink);
         }
 
         if ($bCachedesc == 1) {
@@ -1306,7 +1306,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachedescs'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['cachedescs'] = mysqli_affected_rows($dblink);
         }
 
         if ($bCachelog == 1) {
@@ -1319,7 +1319,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['cachelogs'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['cachelogs'] = mysqli_affected_rows($dblink);
         }
 
         if ($bPicture == 1) {
@@ -1334,7 +1334,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['pictures'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['pictures'] = mysqli_affected_rows($dblink);
 
             // log images
             if ($bPictureFromCachelog == 1) {
@@ -1348,7 +1348,7 @@ function startXmlSession(
                     $sModifiedSince
                 );
 
-                $recordcount['pictures'] += mysqli_affected_rows($db['dblink']);;
+                $recordcount['pictures'] += mysqli_affected_rows($dblink);
             }
         }
 
@@ -1359,7 +1359,7 @@ function startXmlSession(
                 $sessionid,
                 $sModifiedSince
             );
-            $recordcount['removedobjects'] = mysqli_affected_rows($db['dblink']);;
+            $recordcount['removedobjects'] = mysqli_affected_rows($dblink);
         }
     }
 

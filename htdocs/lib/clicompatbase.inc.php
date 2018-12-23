@@ -614,6 +614,10 @@ function db_connect()
 
     //connect to the database by the given method - no php error reporting!
     $dblink = mysqli_connect($dbserver, $dbusername, $dbpasswd, $dbname);
+
+    if (!$dblink instanceof mysqli) {
+        throw new InvalidArgumentException('cannot connect to database');
+    }
 }
 
 function get_site_urls($domain)

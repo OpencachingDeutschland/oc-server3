@@ -112,9 +112,9 @@ $smarty_dummy = 0;
                         var sCurrentOption = "<?php echo $sUserCountry; ?>";
                         var oUserCountryCombo = document.getElementById('usercountry');
 
-                        if (sCurrentOption!=oUserCountryCombo)
+                        if (sCurrentOption!=oUserCountryCombo.value)
                         {
-                            window.location = 'index.php?usercountry=' + oUserCountryCombo;
+                            document.getElementById('language_switcher').submit();
                         }
                     }
 
@@ -162,8 +162,9 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                             ?>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
-                        <td>
-                                <select id="usercountry" onclick="usercountry_change()">
+                        <td style="padding-top:5px; height:11px;">
+                            <form action="language_switcher.php" method="post" id="language_switcher">
+                                <select id="usercountry" name="usercountry" onclick="usercountry_change()">
 <?php
                                     global $tpl_usercountries;
                                     $nLastGroup = 0;
@@ -187,7 +188,8 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                         echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
                                     }
 ?>
-                                </select>&nbsp;
+                                </select>
+                            </form>&nbsp;
             </td>
                     </tr>
                 </table>

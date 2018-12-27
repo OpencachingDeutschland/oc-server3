@@ -163,7 +163,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td style="padding-top:5px; height:11px;">
-                            <form action="language_switcher.php" method="post" id="language_switcher">
+                            <form action="index.php" method="get" id="language_switcher">
                                 <select id="usercountry" name="usercountry" onchange="usercountry_change();">
 <?php
                                     global $tpl_usercountries;

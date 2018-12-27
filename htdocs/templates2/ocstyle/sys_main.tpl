@@ -54,9 +54,7 @@
 
                     if (sCurrentOption!=oUserCountryCombo.value)
                     {
-                        {/literal}
-                        window.location = '{if $change_country_inpage}{$base_pageadr}{else}index.php?{/if}usercountry=' + oUserCountryCombo.value;
-                        {literal}
+                        document.getElementById('language_switcher').submit();
                     }
                 }
 
@@ -147,24 +145,26 @@
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
-                            <select id="usercountry" onclick="usercountry_change()">
-                                {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
-                                    {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
-                                        <option disabled="disabled">
-                                            {if $countryItem.group==1}
-                                                - {t}This OC node{/t} -
-                                            {elseif $countryItem.group==2}
-                                                - {t}Other OC nodes{/t} -
-                                            {elseif $countryItem.group==3}
-                                                - {t}Others{/t} -
-                                            {else}
-                                                -
-                                            {/if}
-                                        </option>
-                                    {/if}
-                                    <option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
-                                {/foreach}
-                            </select>&nbsp;
+                            <form action="index.php" method="get" id="language_switcher">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
+                                    {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
+                                        {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
+                                            <option disabled="disabled">
+                                                {if $countryItem.group==1}
+                                                    - {t}This OC node{/t} -
+                                                {elseif $countryItem.group==2}
+                                                    - {t}Other OC nodes{/t} -
+                                                {elseif $countryItem.group==3}
+                                                    - {t}Others{/t} -
+                                                {else}
+                                                    -
+                                                {/if}
+                                            </option>
+                                        {/if}
+                                        <option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
+                                    {/foreach}
+                                </select>&nbsp;
+                            </form>
                         </td>
                     </tr>
                 </table>

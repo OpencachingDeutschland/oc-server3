@@ -114,7 +114,7 @@ $smarty_dummy = 0;
 
                         if (sCurrentOption!=oUserCountryCombo.value)
                         {
-                            window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
+                            document.getElementById('language_switcher').submit();
                         }
                     }
 
@@ -162,8 +162,9 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                             ?>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
-                        <td>
-                                <select id="usercountry" onclick="usercountry_change()">
+                        <td style="padding-top:5px; height:11px;">
+                            <form action="index.php" method="get" id="language_switcher">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
 <?php
                                     global $tpl_usercountries;
                                     $nLastGroup = 0;
@@ -187,7 +188,8 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                         echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
                                     }
 ?>
-                                </select>&nbsp;
+                                </select>
+                            </form>&nbsp;
             </td>
                     </tr>
                 </table>
@@ -381,7 +383,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
 
                 <!-- FOOTER -->
                 <div class="footer">
-                    <p><a href="articles.php?page=dsb">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
+                    <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                     <p><strong>{sponsorbottom}</strong></p>
                 </div>
 

@@ -164,7 +164,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td style="padding-top:5px; height:11px;">
                             <form action="language_switcher.php" method="post" id="language_switcher">
-                                <select id="usercountry" name="usercountry" onclick="usercountry_change()">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
 <?php
                                     global $tpl_usercountries;
                                     $nLastGroup = 0;

@@ -146,7 +146,7 @@
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
                             <form action="language_switcher.php" method="post" id="language_switcher">
-                                <select id="usercountry" name="usercountry" onclick="usercountry_change()">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
                                     {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
                                         {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
                                             <option disabled="disabled">

@@ -115,13 +115,6 @@
             </td>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br/>
-                Datenpflege
-            </td>
-        </tr>
-        <tr>
             <td><img src="{$opt.page.teampic_url}friedrichfroebel.png"/></td>
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br/>

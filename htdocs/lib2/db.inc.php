@@ -1116,8 +1116,8 @@ function sql_error($sqlstatement = '')
     global $tpl, $opt, $db;
     global $bSmartyNoTranslate;
 
-    $errno = mysqli_errno($db);
-    $error = mysqli_error($db);
+    $errno = mysqli_errno($db['dblink']);
+    $error = mysqli_error($db['dblink']);
     if ($sqlstatement !== '') {
         $error .= "\n\nSQL statement: " . $sqlstatement;
     }

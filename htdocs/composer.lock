@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "322be0be70d1ac5e5ce665e39f5ca65b",
+    "content-hash": "c9b3433d8b23f256dd4e647d200c06ee",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1041,12 +1041,12 @@
             "version": "v2.5.14",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "810a7baf81462a5ddf10e8baa8cb94b6eec02754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/810a7baf81462a5ddf10e8baa8cb94b6eec02754",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/810a7baf81462a5ddf10e8baa8cb94b6eec02754",
                 "reference": "810a7baf81462a5ddf10e8baa8cb94b6eec02754",
                 "shasum": ""
             },
@@ -1979,12 +1979,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5"
+                "reference": "2d611228f872e31c5ccc6a814b3f24b82014ae41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
-                "reference": "57d4c7a2803a0d7784ae2dc994d0708eb5145bd5",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/2d611228f872e31c5ccc6a814b3f24b82014ae41",
+                "reference": "2d611228f872e31c5ccc6a814b3f24b82014ae41",
                 "shasum": ""
             },
             "require": {
@@ -2000,7 +2000,7 @@
                 "source": "https://github.com/opencaching/okapi/tree/master",
                 "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2018-12-17T19:12:05+00:00"
+            "time": "2019-01-20T19:56:39+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5979,7 +5979,9 @@
     "platform": {
         "php": ">=5.6.0",
         "ext-gd": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-mysqli": "*"
     },
     "platform-dev": []
 }

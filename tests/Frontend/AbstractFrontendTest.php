@@ -8,8 +8,9 @@ namespace OcTest\Frontend;
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use PHPUnit\Framework\TestCase;
 
-abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFrontendTest extends TestCase
 {
     protected $dir;
 

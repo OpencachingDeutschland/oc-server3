@@ -147,35 +147,4 @@ class LanguageServiceTest extends TestCase
 
         self::assertSame($entity, $result);
     }
-
-    /**
-     * Tests getting all available translations.
-     */
-    public function testGetAvailableTranslations()
-    {
-        $language1 = new LanguageEntity();
-        $language1->short = 'DE';
-
-        $language2 = new LanguageEntity();
-        $language2->short = 'EN';
-
-        $languageEntities = [
-            $language1,
-            $language2,
-        ];
-
-        $service = $this->getMock(
-            LanguageService::class,
-            ['fetchAllTranslated'],
-            [$this->createMock(LanguageRepository::class)]
-        );
-        $service->method('fetchAllTranslated')
-            ->willReturn($languageEntities);
-
-        $result = $service->getAvailableTranslations();
-
-        self::assertCount(2, $result);
-        self::assertSame('de', $result[0]);
-        self::assertSame('en', $result[1]);
-    }
 }

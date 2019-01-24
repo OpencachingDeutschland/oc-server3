@@ -133,8 +133,8 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-                        $hint = iconv("ISO-8859-1", "UTF-8", $hint);
+                        $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+                        $hint = iconv('ISO-8859-1', 'UTF-8', $hint);
                     }
 
                     // Text from textarea
@@ -142,7 +142,7 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $desc = iconv("ISO-8859-1", "UTF-8", $desc);
+                        $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
                     }
 
                     $desc = processEditorInput($oldDescMode, $descMode, $desc, $representDesc);
@@ -222,8 +222,8 @@ if ($error == false) {
                         $desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc'], $representDesc);
                     } else {
                         $desc = $desc_record['desc'];
-                        $representDesc = $desc;
                     }
+                    $representDesc = $desc;
                 }
 
                 //here we only set up the template variables

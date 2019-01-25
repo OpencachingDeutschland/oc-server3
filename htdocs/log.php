@@ -78,7 +78,7 @@ if ($cacheId != 0) {
 
     // assing ratings to template
     $ratingParams = $user->getRatingParameters();
-    $tpl->assign('ratingallowed', $ratingParams['givenRatings'] < $ratingParams['maxRatings']); 
+    $tpl->assign('ratingallowed', $ratingParams['givenRatings'] < $ratingParams['maxRatings']);
     $tpl->assign('givenratings', $ratingParams['givenRatings']);
     $tpl->assign('maxratings', $ratingParams['maxRatings']);
     $tpl->assign('israted', $cache->isRecommendedByUser($user->getUserId()) || isset($_REQUEST['rating']));
@@ -96,7 +96,7 @@ if ($cacheId != 0) {
     // check if masslog warning is accepted (in cookie)
     $masslogCookieSet = isset($_COOKIE['ocsuppressmasslogwarn']);
     if ($masslogCookieSet) {
-        $masslogCookieContent = $_COOKIE['ocsuppressmasslogwarn'] + 0;
+        $masslogCookieContent = (int) $_COOKIE['ocsuppressmasslogwarn'];
     } else {
         // save masslog acception in cookie that expires on midnight if clicked
         if (isset($_REQUEST['suppressMasslogWarning']) && $_REQUEST['suppressMasslogWarning'] == 1) {
@@ -108,19 +108,17 @@ if ($cacheId != 0) {
     //   logtext, logtype, logday, logmonth, logyear
 
     $logText = isset($_POST['logtext']) ? trim($_POST['logtext']) : '';
-    $logType = isset($_REQUEST['logtype']) ? ($_REQUEST['logtype'] + 0) : null;
+    $logType = isset($_REQUEST['logtype']) ? (int) $_REQUEST['logtype'] : null;
     $logDateDay = isset($_POST['logday']) ? trim($_POST['logday']) : ($datesaved ? $defaultLogDay : date('d'));
-    $logDateMonth = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date(
-        'm'
-    ));
+    $logDateMonth = isset($_POST['logmonth']) ? trim($_POST['logmonth']) : ($datesaved ? $defaultLogMonth : date('m'));
     $logDateYear = isset($_POST['logyear']) ? trim($_POST['logyear']) : ($datesaved ? $defaultLogYear : date('Y'));
     $logTimeHour = isset($_POST['loghour']) ? trim($_POST['loghour']) : '';
     $logTimeMinute = isset($_POST['logminute']) ? trim($_POST['logminute']) : '';
-    $needsMaintenance = isset($_POST['needs_maintenance2']) ? $_POST['needs_maintenance2'] + 0 : (isset($_POST['needs_maintenance']) ? $_POST['needs_maintenance'] + 0 : 0);
-    $listingOutdated = isset($_POST['listing_outdated2']) ? $_POST['listing_outdated2'] + 0 : (isset($_POST['listing_outdated']) ? $_POST['listing_outdated'] + 0 : 0);
-    $confirmListingOk = isset($_POST['confirm_listing_ok']) ? $_POST['confirm_listing_ok'] + 0 : 0;
-    $rateOption = isset($_POST['ratingoption']) ? $_POST['ratingoption'] + 0 : 0;
-    $rateCache = isset($_POST['rating']) ? $_POST['rating'] + 0 : 0;
+    $needsMaintenance = isset($_POST['needs_maintenance2']) ? (int) $_POST['needs_maintenance2'] : (isset($_POST['needs_maintenance']) ? (int) $_POST['needs_maintenance'] : 0);
+    $listingOutdated = isset($_POST['listing_outdated2']) ? (int) $_POST['listing_outdated2'] : (isset($_POST['listing_outdated']) ? (int) $_POST['listing_outdated'] : 0);
+    $confirmListingOk = isset($_POST['confirm_listing_ok']) ? (int) $_POST['confirm_listing_ok'] : 0;
+    $rateOption = isset($_POST['ratingoption']) ? (int) $_POST['ratingoption'] : 0;
+    $rateCache = isset($_POST['rating']) ? (int) $_POST['rating'] : 0;
     $ocTeamComment = isset($_REQUEST['teamcomment']) ? $_REQUEST['teamcomment'] != 0 : 0;
     $suppressMasslogWarning = isset($_REQUEST['suppressMasslogWarning']) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
 
@@ -166,12 +164,12 @@ if ($cacheId != 0) {
     }
 
     // if not a found log, ignore the rating
-    $rateOption = ($logType == 1 || $logType == 7) + 0;
+    $rateOption = (int) ($logType == 1 || $logType == 7);
 
     // get log text editor mode (from form or from userprofile)
     // 1 = text; 2 = HTML; 3 = tinyMCE
     if (isset($_POST['descMode'])) {
-        $descMode = $_POST['descMode'] + 0;  // Ocprop: 2
+        $descMode = (int) $_POST['descMode'];  // Ocprop: 2
         if (($descMode < 1) || ($descMode > 3)) {
             $descMode = 3;
         }
@@ -253,16 +251,16 @@ if ($cacheId != 0) {
          * set seconds 00:00:01, means "00:00 was logged"
          * set seconds 00:00:00, means "no time was logged"
          */
-        $logTimeSecond = ($logTimeHour . $logTimeMinute != ''
+        $logTimeSecond = (int) ($logTimeHour . $logTimeMinute != ''
                 && $logTimeHour == 0
-                && $logTimeMinute == 0) + 0;
+                && $logTimeMinute == 0);
 
         // make time values database ready
         $logDate = date(
             $opt['db']['dateformat'],
             mktime(
-                $logTimeHour + 0,
-                $logTimeMinute + 0,
+                (int) $logTimeHour,
+                (int) $logTimeMinute,
                 $logTimeSecond,
                 $logDateMonth,
                 $logDateDay,
@@ -400,8 +398,8 @@ if ($cacheId != 0) {
 
 // prepare template and display
 $tpl->assign('logtype_allows_nm', implode(',', $logtype_allows_nm));
-$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
-$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
+$tpl->assign('scrollposx', isset($_REQUEST['scrollposx']) ? (int) $_REQUEST['scrollposx']: 0);
+$tpl->assign('scrollposy', isset($_REQUEST['scrollposy']) ? (int) $_REQUEST['scrollposy']: 0);
 $tpl->assign('validate', $validate);
 $tpl->assign('editlog', false);
 

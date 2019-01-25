@@ -427,15 +427,12 @@ class cachelog
         return ($masslogs > $opt['logic']['masslog']['count']);
     }
 
-    public static function validateDate($year, $month, $day, $hour, $minute, $submit)
+    public static function validateDate(int $year, int $month, int $day, $hour, $minute, $submit)
     {
         $dateOk = false;
 
-        if (is_numeric($month)
-            && is_numeric($day)
-            && is_numeric($year)
-            && ($hour . $minute == '' || is_numeric($hour))
-            && ($minute == '' || is_numeric($minute))
+        if (($hour . $minute === '' || is_numeric($hour))
+            && ($minute === '' || is_numeric($minute))
         ) {
             $dateOk = checkdate($month, $day, $year)
                 && ($year >= 2000)
@@ -446,8 +443,8 @@ class cachelog
             if ($dateOk && $submit) {
                 $dateOk = (
                     mktime(
-                        $hour + 0,
-                        $minute + 0,
+                        (int) $hour,
+                        (int) $minute,
                         0,
                         $month,
                         $day,

@@ -293,7 +293,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                 <td class="mediumsmalltext">{t}Follow us:{/t}</td>
                                 <td><a href="http://blog.opencaching.de/feed"><img src="resource2/{style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
                                 <td><a href="https://twitter.com/opencaching"><img src="resource2/{style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
-                                <td><a href="https://plus.google.com/+opencaching"><img src="resource2/{style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
                                 <td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
                             </tr>
                             <tr>
@@ -310,18 +309,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                 <td style="text-align: left">
                                     <a href="http://forum.opencaching.de/">
                                         {t}Opencaching Forum{/t}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://plus.google.com/communities/115824614741379300945">
-                                        <img src="resource2/{style}/images/media/16x16-google+.png"/>
-                                    </a>
-                                </td>
-                                <td style="text-align: left">
-                                    <a href="https://plus.google.com/communities/115824614741379300945">
-                                        {t}Google+ Community{/t}
                                     </a>
                                 </td>
                             </tr>

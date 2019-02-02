@@ -70,7 +70,7 @@ class GeoCacheRepository
      * @throws RecordNotFoundException Thrown when no record is found
      * @return null|GeoCacheEntity
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?GeoCacheEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
              ->select('*')

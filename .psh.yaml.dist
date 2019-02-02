@@ -31,6 +31,10 @@ const:
   DIR: "__DIR__"
   SESSION_DOMAIN: ".team-opencaching.de"
 
+dynamic:
+  USERKEY: echo "$(id -u):$(id -g)"
+  PHP_FPM_ID: docker-compose ps -q php-fpm
+
 environments:
   docker:
     paths:

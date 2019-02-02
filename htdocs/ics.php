@@ -4,9 +4,6 @@ use Eluceo\iCal\Component\Calendar;
 use Eluceo\iCal\Component\Event;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheRepository;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
-
 $cacheId = (int) $_GET['cacheId'];
 
 require __DIR__ . '/lib2/web.inc.php';

@@ -306,7 +306,7 @@
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
                     {if $cache.type==6}
-                        <option value="ics.php?cacheid={$cache.cacheid}">ICS</option>
+                        <option value="ics.php?cacheId={$cache.cacheid}">ICS</option>
                     {/if}
                 </select>&nbsp;
             </p></td>

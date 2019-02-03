@@ -11,7 +11,11 @@ require __DIR__ . '/lib2/web.inc.php';
 /** @var GeoCacheRepository $geoCacheRepository */
 $geoCacheRepository = AppKernel::Container()->get(GeoCacheRepository::class);
 
-$geoCache = $geoCacheRepository->fetchOneBy(['cache_id' => $cacheId]);
+try {
+    $geoCache = $geoCacheRepository->fetchOneBy(['cache_id' => $cacheId]);
+} catch (\Oc\Repository\Exception\RecordNotFoundException $e) {
+    die();
+}
 
 // no event cache
 if ($geoCache->type !== 6) {

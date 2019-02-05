@@ -40,15 +40,14 @@ class QrCodeController extends Controller
         $qrCode = new QrCode('https://www.opencaching.de/' . $geoCache->wpOc);
         $qrCode->setSize(400);
 
-        $qrCode
-            ->setWriterByName('png')
-            ->setMargin(10)
-            ->setEncoding('UTF-8')
-            ->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH)
-            ->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0])
-            ->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255])
-            ->setLabel('www.opencaching.de', 16, null, LabelAlignment::CENTER)
-            ->setValidateResult(false);
+        $qrCode->setWriterByName('png');
+        $qrCode->setMargin(10);
+        $qrCode->setEncoding('UTF-8');
+        $qrCode->setErrorCorrectionLevel(new ErrorCorrectionLevel(ErrorCorrectionLevel::HIGH));
+        $qrCode->setForegroundColor(['r' => 0, 'g' => 0, 'b' => 0]);
+        $qrCode->setBackgroundColor(['r' => 255, 'g' => 255, 'b' => 255]);
+        $qrCode->setLabel('www.opencaching.de', 16, null, LabelAlignment::CENTER);
+        $qrCode->setValidateResult(false);
 
         $logo = imagecreatefrompng(__DIR__ . '/../../../../theme/frontend/images/logo/qr-code-oc-logo.png');
         $qrCodeGenerated = imagecreatefromstring($qrCode->writeString());

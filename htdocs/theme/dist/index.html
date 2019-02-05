@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale|slice(0, 2) }}">
+<html lang="de">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/mdb.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
-    {% block stylesheets %}
-    {% endblock %}
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.min.css" rel="stylesheet">
+    <style type="text/css">
+
+
+    </style>
 </head>
 
 <body>
@@ -137,57 +143,9 @@
     <!--/.Controls-->
 
 </div>
+<!--/.Carousel Wrapper-->
 
-
-{#
-<!DOCTYPE html>
-<html lang="{{ app.request.locale|slice(0, 2) }}">
-    <head>
-        <meta charset="UTF-8" />
-        <meta content="initial-scale=1, shrink-to-fit=no, width=device-width" name="viewport">
-
-        <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}" />
-        {% endblock %}
-    </head>
-    <body>
-        <div class="site">
-            <div class="site__inner">
-                <nav class="site__inner-sidebar">
-                    {% include '_components/sidebar/sidebar.html.twig' %}
-                </nav>
-                <main class="site__inner-main main">
-                    <header class="main__header">
-                        {% include '_components/header/header.html.twig' %}
-                    </header>
-                    <div class="main__content main-content">
-                        {% block flash_messages %}
-                            <div class="main-content__flash-messages">
-                                {% include '_components/flash-messages/flash-messages.html.twig' %}
-                            </div>
-                        {% endblock %}
-
-                        {% block body %}{% endblock %}
-                    </div>
-                    {% block main__footer %}
-                    <footer class="main__footer">
-                        <blockquote class="blockquote">
-                            <p class="mb-0">A community driven open source software.</p>
-                            <footer class="blockquote-footer"> by Opencaching Deutschland e.V.</footer>
-                        </blockquote>
-                    </footer>
-                    {% endblock %}
-                </main>
-            </div>
-        </div>
-
-
-    </body>
-</html>
-#}
+<!--Main layout-->
 <main>
     <div class="container">
 
@@ -615,10 +573,12 @@
 
     </div>
 </main>
+<!--Main layout-->
 
-{% block main__footer %}
+<!--Footer-->
 <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
+    <!--Call to action-->
     <div class="pt-4">
         <a class="btn btn-outline-white" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">Download MDB
             <i class="fas fa-download ml-2"></i>
@@ -627,9 +587,11 @@
             <i class="fas fa-graduation-cap ml-2"></i>
         </a>
     </div>
+    <!--/.Call to action-->
 
     <hr class="my-4">
 
+    <!-- Social icons -->
     <div class="pb-4">
         <a href="https://www.facebook.com/mdbootstrap" target="_blank">
             <i class="fab fa-facebook-f mr-3"></i>
@@ -663,55 +625,32 @@
             <i class="fab fa-codepen mr-3"></i>
         </a>
     </div>
+    <!-- Social icons -->
 
+    <!--Copyright-->
     <div class="footer-copyright py-3">
-        <p class="mb-0">A community driven open source software.</p>
-        <footer class="blockquote-footer"> by Opencaching Deutschland e.V.</footer>
+        © 2018 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/" target="_blank"> MDBootstrap.com </a>
     </div>
+    <!--/.Copyright-->
 
 </footer>
-{% endblock %}
+<!--/.Footer-->
 
 <!-- SCRIPTS -->
 <!-- JQuery -->
-{% block javascripts %}
-    <script type="text/javascript" src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/mdb.min.js') }}"></script>
-    <script type="text/javascript">
-        new WOW().init();
-        // Set to the same value as the web property used on the site
-        var gaProperty = 'UA-59334952-4';
-
-        // Disable tracking if the opt-out cookie exists.
-        var disableStr = 'ga-disable-' + gaProperty;
-        if (document.cookie.indexOf(disableStr + '=true') > -1) {
-            window[disableStr] = true;
-        }
-
-        // Opt-out function
-        function gaOptout() {
-            document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
-            window[disableStr] = true;
-            if (document.cookie.indexOf(disableStr + '=true') > -1) {
-                alert('Google Analytics is now deactivated!');
-            }
-        }
-    </script>
-    {% if app.request.server.get('HTTP_DNT') != 1 %}
-        <script type="text/javascript">
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-            ga('create', gaProperty, 'auto');
-            ga('set', 'anonymizeIp', true);
-            ga('send', 'pageview');
-        </script>
-    {% endif %}
-{% endblock %}
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+<!-- Initializations -->
+<script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+</script>
 </body>
 
 </html>

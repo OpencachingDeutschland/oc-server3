@@ -26,12 +26,12 @@ class QrCodeController extends Controller
 
     /**
      * @param Request $request
-     * @return Response
      * @Route("/api/geocache/qrCodes")
      */
-    public function generateQrCode(Request $request)
+    public function generateQrCode(Request $request): void
     {
-        $geoCache = $this->geoCacheService->fetchByWaypoint($request->get('wp'));
+        $waypoint = $request->get('wp');
+        $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
 
         if (!$geoCache instanceof GeoCacheEntity) {
             throw new \InvalidArgumentException('the waypoint is not valid!');
@@ -64,6 +64,11 @@ class QrCodeController extends Controller
         );
 
         header('Content-Type: image/png');
+
+        if ($request->get('download')) {
+            header('Content-Disposition: attachment; filename="' . $waypoint . '.png"');
+        }
+
         imagepng($qrCodeGenerated);
         imagedestroy($qrCodeGenerated);
     }

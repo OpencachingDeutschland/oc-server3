@@ -308,6 +308,7 @@
                     {if $cache.type==6}
                         <option value="ics.php?cacheId={$cache.cacheid}">ICS</option>
                     {/if}
+                    <option value="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</option>
                 </select>&nbsp;
             </p></td>
         </tr>

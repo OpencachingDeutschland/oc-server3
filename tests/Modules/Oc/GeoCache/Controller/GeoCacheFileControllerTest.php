@@ -3,16 +3,16 @@
 namespace OcTest\Modules\Oc\GeoCache\Controller;
 
 use AppKernel;
-use Oc\GeoCache\Controller\QrCodeController;
+use Oc\GeoCache\Controller\GeoCacheFileController;
 use OcTest\Modules\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class QrCodeControllerTest extends TestCase
+class GeoCacheFileControllerTest extends TestCase
 {
     public function test_generate_qr_code_throws_unkown_waypoint_exception()
     {
-        /** @var QrCodeController $controller */
-        $controller = AppKernel::Container()->get(QrCodeController::class);
+        /** @var GeoCacheFileController $controller */
+        $controller = AppKernel::Container()->get(GeoCacheFileController::class);
 
         $request = new Request(['wp' => 'OC0002']);
 

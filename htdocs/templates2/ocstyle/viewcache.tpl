@@ -306,7 +306,8 @@
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
                     {if $cache.type==6}
-                        <option value="ics.php?cacheId={$cache.cacheid}">ICS</option>
+                        <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true">ICS</option>
+                        <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}">QrCode-ICS</option>
                     {/if}
                     <option value="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</option>
                 </select>&nbsp;
@@ -543,7 +544,12 @@ function showalllists()
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2" rel="nofollow" title="{t}TomTom POI .ov2{/t}">OV2</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl" rel="nofollow" title="{t}TOP50-Overlay .ovl{/t}">OVL</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a>
-            <br />
+            {if $cache.type==6}
+                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true" rel="nofollow" title="ICS">ICS</a>
+                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="QrCode-ICS">QrCode-ICS</a>
+            {/if}
+            <a href="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</a>
+            </br>
 
             <small>
                 <img src="resource2/{$opt.template.style}/images/viewcache/16x16-info.png" class="icon16" alt="" />

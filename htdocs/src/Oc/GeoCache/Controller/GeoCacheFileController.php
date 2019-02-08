@@ -2,6 +2,7 @@
 
 namespace Oc\GeoCache\Controller;
 
+use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 use Oc\GeoCache\Util;
@@ -58,7 +59,7 @@ class GeoCacheFileController extends Controller
         $waypoint = $request->get('wp');
         $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
 
-        if (!$geoCache instanceof GeoCacheEntity && $geoCache->type !== 6) {
+        if (!$geoCache instanceof GeoCacheEntity && $geoCache->type !== GeoCacheType::EVENT) {
             throw new \InvalidArgumentException('the waypoint is not valid or not an event!');
         }
 

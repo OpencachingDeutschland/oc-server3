@@ -4,6 +4,7 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
+use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\Util\CBench;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -104,6 +105,8 @@ class OcSmarty extends Smarty
 
             $this->target = $target;
         }
+
+        $this->assign('GeoCacheTypes', new GeoCacheType());
     }
 
     /* ATTENTION: copied from internal implementation!

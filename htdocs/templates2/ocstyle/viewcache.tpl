@@ -88,7 +88,7 @@
 
 <!-- Already found this cache? -->
 {if $cache.userhasfound || $cache.needs_maintenance || $cache.listing_outdated ||
-    $cache.status==2 || $cache.status==3 || $cache.status==6 || $cache.status==7 }
+    $cache.status==2 || $cache.status==3 || $cache.status==$GeoCacheTypes->EVENT || $cache.status==7 }
     <div id="havefound">
         {strip}
         <p>
@@ -96,12 +96,12 @@
                 <img src="resource2/{$opt.template.style}/images/cachestatus/32x32-disabled.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Temporarily not available{/t}" title="{t}Temporarily not available{/t}" />
             {elseif $cache.status==3}
                 <img src="resource2/{$opt.template.style}/images/cachestatus/32x32-archived.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Archived{/t}" title="{t}Archived{/t}" />
-            {elseif $cache.status==6}
+            {elseif $cache.status==$GeoCacheTypes->EVENT}
                 <img src="resource2/{$opt.template.style}/images/cachestatus/32x32-locked.png" width="32" height="32" style="padding-right: 6px;" alt="{t}Locked{/t}" title="{t}Locked{/t}" />
             {/if}
             {if $cache.needs_maintenance}<img src="resource2/{$opt.template.style}/images/cachestatus/needs-maintenance.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache needs maintenance.{/t}" title="{t}The geocache needs maintenance.{/t}" />{/if}
             {if $cache.listing_outdated}<img src="resource2/{$opt.template.style}/images/cachestatus/listing-outdated.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache description is outdated.{/t}" title="{t}The geocache description is outdated.{/t}" />{/if}
-            {if $cache.userhasfound}&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" style="padding-right: 5px;" alt="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==6}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" />{/if}
+            {if $cache.userhasfound}&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" style="padding-right: 5px;" alt="{if $cache.type==$GeoCacheTypes->EVENT}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==$GeoCacheTypes->EVENT}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" />{/if}
         </p>
         {/strip}
     </div>
@@ -176,7 +176,7 @@
                     {/if}
                 </span>
             </p>
-            {if $cache.type==6}
+            {if $cache.type==$GeoCacheTypes->EVENT}
                 <span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="javascript:;" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
             {/if}
         </div>
@@ -231,7 +231,7 @@
                 <span style="white-space:nowrap"><img src="resource2/{$opt.template.style}/images/viewcache/arrow_roundtrip.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Waylength:{/t} {$cache.waylength} km</span>
             {/if}
             {if $cache.searchtime>0 || $cache.waylength>0}<br />{/if}
-            <img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==6}{t}Event date:{/t}{else}{t}Hidden on:{/t}{/if} {$cache.datehidden|date_format:$opt.format.datelong}<br />
+            <img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.type==$GeoCacheTypes->EVENT}{t}Event date:{/t}{else}{t}Hidden on:{/t}{/if} {$cache.datehidden|date_format:$opt.format.datelong}<br />
             <img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{if $cache.is_publishdate==0}{t}Listed since:{/t}{else}{t}Published on:{/t}{/if} {$cache.datecreated|date_format:$opt.format.datelong}<br />
             {if $cache.show_last_modified}
                 <img src="resource2/{$opt.template.style}/images/viewcache/date.png" class="icon16" alt="" title="" align="middle" />&nbsp;{t}Last update:{/t} {$cache.lastmodified|date_format:$opt.format.datelong}<br />
@@ -249,8 +249,8 @@
                     </td>
                     <td style="vertical-align:top">
                         <p style="line-height: 1.4em;">
-                            <img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}attended{else}found{/if}.png" class="icon16" alt="" /> {$cache.found} {if $cache.type==6} {t}Attended{/t}{else}{t}Found{/t}{/if}<br />
-                            <img src="resource2/{$opt.template.style}/images/{if $cache.type==6}log{else}viewcache{/if}/16x16-{if $cache.type==6}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==6} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}<br />
+                            <img src="resource2/{$opt.template.style}/images/{if $cache.type==$GeoCacheTypes->EVENT}log{else}viewcache{/if}/16x16-{if $cache.type==$GeoCacheTypes->EVENT}attended{else}found{/if}.png" class="icon16" alt="" /> {$cache.found} {if $cache.type==$GeoCacheTypes->EVENT} {t}Attended{/t}{else}{t}Found{/t}{/if}<br />
+                            <img src="resource2/{$opt.template.style}/images/{if $cache.type==$GeoCacheTypes->EVENT}log{else}viewcache{/if}/16x16-{if $cache.type==$GeoCacheTypes->EVENT}will_attend{else}dnf{/if}.png" class="icon16" alt="" /> {if $cache.type==$GeoCacheTypes->EVENT} {$cache.willattend} {t}Will attend{/t}{else} {$cache.notfound} {t}Not found{/t}{/if}<br />
                             <img src="resource2/{$opt.template.style}/images/viewcache/16x16-note.png" class="icon16" alt="" /> {$cache.note} {if $cache.note==1}{t}Note{/t}{else}{t}Notes{/t}{/if}<br />
                             {if $cache.maintenance}<img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" class="icon16" alt="" /> {$cache.maintenance} {if $cache.maintenance==1}{t}Maintenance log{/t}{else}{t}Maintenance logs{/t}{/if}<br />{/if}
                             <img src="resource2/{$opt.template.style}/images/viewcache/16x16-watch.png" class="icon16" alt="" /> {$cache.watcher} {if $cache.watcher==1}{t}Watcher{/t}{else}{t}Watchers{/t}{/if}<br />
@@ -305,7 +305,7 @@
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2">OV2</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl">OVL</option>
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
-                    {if $cache.type==6}
+                    {if $cache.type==$GeoCacheTypes->EVENT}
                         <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true">ICS</option>
                         <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}">QrCode-ICS</option>
                     {/if}
@@ -544,7 +544,7 @@ function showalllists()
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2" rel="nofollow" title="{t}TomTom POI .ov2{/t}">OV2</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl" rel="nofollow" title="{t}TOP50-Overlay .ovl{/t}">OVL</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a> -
-            {if $cache.type==6}
+            {if $cache.type == $GeoCacheTypes->EVENT}
                 <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true" rel="nofollow" title="ICS">ICS</a> -
                 <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="QrCode-ICS">QrCode-ICS</a> -
             {/if}

@@ -32,8 +32,9 @@ class GeoCacheFileController extends Controller
     /**
      * @param Request $request
      * @Route("/api/geocache/qrCodes")
+     * @return Response
      */
-    public function generateQrCode(Request $request): void
+    public function generateQrCode(Request $request): Response
     {
         $waypoint = $request->get('wp');
         $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
@@ -42,13 +43,19 @@ class GeoCacheFileController extends Controller
             throw new \InvalidArgumentException('the waypoint is not valid!');
         }
 
-        header('Content-Type: image/png');
+        $response = new Response(
+            $this->geoCacheUtil->generateQrCodeFromString('https://www.opencaching.de/' . $geoCache->wpOc),
+            Response::HTTP_OK,
+            [
+                'content-type' => 'image/png',
+            ]
+        );
 
         if ($request->get('download')) {
-            header('Content-Disposition: attachment; filename="' . $waypoint . '.png"');
+            $response->headers->set('content-disposition', 'attachment; filename="' . $waypoint . '.png"');
         }
 
-        $this->geoCacheUtil->generateQrCodeFromString('https://www.opencaching.de/' . $geoCache->wpOc);
+        return $response;
     }
 
     /**
@@ -73,7 +80,7 @@ class GeoCacheFileController extends Controller
                 Response::HTTP_OK,
                 [
                     'content-type' => 'text/calendar; charset=utf-8',
-                    'content-disposition' => 'attachment; filename="' . $geoCache->wpOc . '.ics"'
+                    'content-disposition' => 'attachment; filename="' . $geoCache->wpOc . '.ics"',
                 ]
             );
         }
@@ -82,7 +89,7 @@ class GeoCacheFileController extends Controller
             $this->geoCacheUtil->generateQrCodeFromString($icsString),
             Response::HTTP_OK,
             [
-                'content-type' => 'image/png'
+                'content-type' => 'image/png',
             ]
         );
     }

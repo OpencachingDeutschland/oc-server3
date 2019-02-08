@@ -307,7 +307,7 @@
                     <option value="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=txt">TXT</option>
                     {if $cache.type==$GeoCacheTypeEvent}
                         <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true">ICS</option>
-                        <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}">QrCode-ICS</option>
+                        <option value="/api/geocache/qrCodes/ics?wp={$cache.wpoc}">ICS QR-Code</option>
                     {/if}
                     <option value="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</option>
                 </select>&nbsp;
@@ -546,7 +546,7 @@ function showalllists()
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a> -
             {if $cache.type == $GeoCacheTypeEvent}
                 <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true" rel="nofollow" title="ICS">ICS</a> -
-                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="QrCode-ICS">QrCode-ICS</a> -
+                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="ICS QR-Code">ICS QR-Code</a> -
             {/if}
             <a href="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</a>
             </br>

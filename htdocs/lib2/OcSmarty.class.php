@@ -4,6 +4,7 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
+use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\Util\CBench;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -161,6 +162,7 @@ class OcSmarty extends Smarty
 
         //Give Smarty access to the whole options array.
         $this->assign('siteSettings', $opt);
+        $this->assign('GeoCacheTypeEvent', GeoCacheType::EVENT);
 
         //Should we remove this whole block since we now have
         //access using the siteSettings above?

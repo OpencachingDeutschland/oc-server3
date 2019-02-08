@@ -105,8 +105,6 @@ class OcSmarty extends Smarty
 
             $this->target = $target;
         }
-
-        $this->assign('GeoCacheTypes', new GeoCacheType());
     }
 
     /* ATTENTION: copied from internal implementation!
@@ -164,6 +162,7 @@ class OcSmarty extends Smarty
 
         //Give Smarty access to the whole options array.
         $this->assign('siteSettings', $opt);
+        $this->assign('GeoCacheTypeEvent', GeoCacheType::EVENT);
 
         //Should we remove this whole block since we now have
         //access using the siteSettings above?

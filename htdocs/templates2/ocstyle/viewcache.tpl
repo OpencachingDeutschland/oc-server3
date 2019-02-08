@@ -543,10 +543,10 @@ function showalllists()
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=kml" rel="nofollow" title="{t}Google Earth .kml{/t}">KML</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ov2" rel="nofollow" title="{t}TomTom POI .ov2{/t}">OV2</a> -
             <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0&cacheid={$cache.cacheid}&output=ovl" rel="nofollow" title="{t}TOP50-Overlay .ovl{/t}">OVL</a> -
-            <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a>
+            <a href="search.php?searchto=searchbycacheid&showresult=1&f_inactive=0&f_ignored=0&startat=0s&cacheid={$cache.cacheid}&output=txt" rel="nofollow" title="{t}Textfile .txt{/t}">TXT</a> -
             {if $cache.type==6}
-                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true" rel="nofollow" title="ICS">ICS</a>
-                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="QrCode-ICS">QrCode-ICS</a>
+                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}&download=true" rel="nofollow" title="ICS">ICS</a> -
+                <a href="/api/geocache/qrCodes/ics?wp={$cache.wpoc}" rel="nofollow" title="QrCode-ICS">QrCode-ICS</a> -
             {/if}
             <a href="/api/geocache/qrCodes?wp={$cache.wpoc}&download=true">QR-Code</a>
             </br>

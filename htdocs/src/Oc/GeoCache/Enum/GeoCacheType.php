@@ -68,7 +68,7 @@ class GeoCacheType
      *
      * @return bool Returns true if this type is an event type
      */
-    public static function isEventType($geoCacheType)
+    public static function isEventType(int $geoCacheType): bool
     {
         return in_array($geoCacheType, self::EVENT_TYPES, true);
     }

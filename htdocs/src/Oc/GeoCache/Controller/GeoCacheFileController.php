@@ -9,6 +9,7 @@ use Oc\GeoCache\Util;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class GeoCacheFileController extends Controller
 {
@@ -53,8 +54,9 @@ class GeoCacheFileController extends Controller
     /**
      * @param Request $request
      * @Route("/api/geocache/qrCodes/ics")
+     * @return Response
      */
-    public function generateQrCodeIcs(Request $request): void
+    public function generateQrCodeIcs(Request $request): Response
     {
         $waypoint = $request->get('wp');
         $geoCache = $this->geoCacheService->fetchByWaypoint($waypoint);
@@ -66,14 +68,22 @@ class GeoCacheFileController extends Controller
         $icsString = $this->geoCacheUtil->generateIcsStringFromGeoCache($geoCache);
 
         if ($request->get('download')) {
-            header('Content-Type: text/calendar; charset=utf-8');
-            header('Content-Disposition: attachment; filename="' . $geoCache->wpOc . '.ics"');
-
-            echo $icsString;
-            die();
+            return new Response(
+                $icsString,
+                Response::HTTP_OK,
+                [
+                    'content-type' => 'text/calendar; charset=utf-8',
+                    'content-disposition' => 'attachment; filename="' . $geoCache->wpOc . '.ics"'
+                ]
+            );
         }
 
-        header('Content-Type: image/png');
-        $this->geoCacheUtil->generateQrCodeFromString($icsString);
+        return new Response(
+            $this->geoCacheUtil->generateQrCodeFromString($icsString),
+            Response::HTTP_OK,
+            [
+                'content-type' => 'image/png'
+            ]
+        );
     }
 }

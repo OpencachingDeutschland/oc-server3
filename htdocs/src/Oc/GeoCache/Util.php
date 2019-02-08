@@ -37,8 +37,9 @@ class Util
         return $vCalendar->render();
     }
 
-    public function generateQrCodeFromString(string $qrCodeValue): void
+    public function generateQrCodeFromString(string $qrCodeValue)
     {
+        $image = null;
         $qrCode = new QrCode($qrCodeValue);
         $qrCode->setSize(400);
 
@@ -65,7 +66,13 @@ class Util
             imagesy($logo)
         );
 
+        ob_start();
         imagepng($qrCodeGenerated);
+        $image = ob_get_contents();
+        ob_end_clean();
+
         imagedestroy($qrCodeGenerated);
+
+        return $image;
     }
 }

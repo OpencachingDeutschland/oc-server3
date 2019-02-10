@@ -67,7 +67,7 @@ class RSSParser
                                     'description' => $item->description,
                                 ];
                             $i++;
-                            // htmlspecialchars_decode() works around inconsistent HTML encoding
+                        // htmlspecialchars_decode() works around inconsistent HTML encoding
                                 // e.g. in SMF Forum Threads
                         } elseif (strpos($item->title, 'VERSCHOBEN') === false &&
                                 !in_array(htmlspecialchars_decode($item->title), $headlines)

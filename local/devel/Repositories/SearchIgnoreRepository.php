@@ -44,7 +44,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param array $where
      * @return SearchIgnoreEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param array $where
      * @return SearchIgnoreEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param SearchIgnoreEntity $entity
      * @return SearchIgnoreEntity
      */
     public function create(SearchIgnoreEntity $entity)
@@ -127,7 +124,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param SearchIgnoreEntity $entity
      * @return SearchIgnoreEntity
      */
     public function update(SearchIgnoreEntity $entity)
@@ -148,7 +144,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param SearchIgnoreEntity $entity
      * @return SearchIgnoreEntity
      */
     public function remove(SearchIgnoreEntity $entity)
@@ -168,7 +163,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param SearchIgnoreEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SearchIgnoreEntity $entity)
@@ -179,7 +173,6 @@ class SearchIgnoreRepository
     }
 
     /**
-     * @param array $data
      * @return SearchIgnoreEntity
      */
     public function getEntityFromDatabaseArray(array $data)

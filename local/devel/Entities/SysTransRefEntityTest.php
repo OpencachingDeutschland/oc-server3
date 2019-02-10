@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SysTransRefEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SysTransRefEntity();
         self::assertTrue($entity->isNew());

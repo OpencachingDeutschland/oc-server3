@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class NpaAreasEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new NpaAreasEntity();
         self::assertTrue($entity->isNew());

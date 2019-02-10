@@ -18,10 +18,6 @@ class UploadFormDataFactory
      */
     private $geoCacheLogService;
 
-    /**
-     * @param FieldNoteService $fieldNoteService
-     * @param GeoCacheLogService $geoCacheLogService
-     */
     public function __construct(FieldNoteService $fieldNoteService, GeoCacheLogService $geoCacheLogService)
     {
         $this->fieldNoteService = $fieldNoteService;
@@ -30,12 +26,8 @@ class UploadFormDataFactory
 
     /**
      * Creates a UploadFormData by given user id.
-     *
-     * @param int $userId
-     *
-     * @return UploadFormData
      */
-    public function create($userId)
+    public function create(int $userId): UploadFormData
     {
         $uploadFormData = new UploadFormData();
 
@@ -47,12 +39,8 @@ class UploadFormDataFactory
 
     /**
      * Fetches the latest log or field note date.
-     *
-     * @param int $userId
-     *
-     * @return string
      */
-    private function getLatestLogOrFieldNoteDate($userId)
+    private function getLatestLogOrFieldNoteDate(int $userId): ?DateTime
     {
         $fieldNoteDate = $this->getLatestFieldNoteDate($userId);
 
@@ -62,11 +50,9 @@ class UploadFormDataFactory
     }
 
     /**
-     * @param int $userId
-     *
-     * @return DateTime|null
+     * Returns the latest log date.
      */
-    private function getLatestLogDate($userId)
+    private function getLatestLogDate(int $userId): ?DateTime
     {
         $geoCacheLogDate = null;
         $geoCacheLog = $this->geoCacheLogService->getLatestUserLog($userId);
@@ -80,12 +66,8 @@ class UploadFormDataFactory
 
     /**
      * Fetches the latest field note date.
-     *
-     * @param int $userId
-     *
-     * @return DateTime|null
      */
-    private function getLatestFieldNoteDate($userId)
+    private function getLatestFieldNoteDate(int $userId): ?DateTime
     {
         $fieldNoteDate = null;
         $fieldNote = $this->fieldNoteService->getLatestUserFieldNote($userId);

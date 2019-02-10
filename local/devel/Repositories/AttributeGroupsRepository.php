@@ -44,7 +44,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param array $where
      * @return AttributeGroupsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param array $where
      * @return AttributeGroupsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param AttributeGroupsEntity $entity
      * @return AttributeGroupsEntity
      */
     public function create(AttributeGroupsEntity $entity)
@@ -127,7 +124,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param AttributeGroupsEntity $entity
      * @return AttributeGroupsEntity
      */
     public function update(AttributeGroupsEntity $entity)
@@ -148,7 +144,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param AttributeGroupsEntity $entity
      * @return AttributeGroupsEntity
      */
     public function remove(AttributeGroupsEntity $entity)
@@ -168,7 +163,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param AttributeGroupsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(AttributeGroupsEntity $entity)
@@ -182,7 +176,6 @@ class AttributeGroupsRepository
     }
 
     /**
-     * @param array $data
      * @return AttributeGroupsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -8,7 +8,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class ContainerTest extends AbstractModuleTest
 {
-    public function testIfContainerReturnServiceId()
+    public function testIfContainerReturnServiceId(): void
     {
         self::assertInstanceOf(Connection::class, AppKernel::Container()->get(Connection::class));
         // cached container

@@ -7,9 +7,6 @@ use Oc\Session\SessionDataInterface;
 use Oc\User\UserProvider;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class LanguageProvider
- */
 class LanguageProvider
 {
     /**
@@ -32,19 +29,11 @@ class LanguageProvider
      */
     private $userProvider;
 
-    /**
-     * LanguageProvider constructor.
-     *
-     * @param LanguageService $languageService
-     * @param SessionDataInterface $sessionData
-     * @param UserProvider $userProvider
-     * @param string $defaultLanguage
-     */
     public function __construct(
         LanguageService $languageService,
         SessionDataInterface $sessionData,
         UserProvider $userProvider,
-        $defaultLanguage
+        string $defaultLanguage
     ) {
         $this->languageService = $languageService;
         $this->sessionData = $sessionData;
@@ -54,22 +43,16 @@ class LanguageProvider
 
     /**
      * Returns default language configured in config.yml
-     *
-     * @return string
      */
-    public function getDefaultLanguage()
+    public function getDefaultLanguage(): string
     {
         return $this->defaultLanguage;
     }
 
     /**
      * Determines the language of the user.
-     *
-     * @param Request $request
-     *
-     * @return string
      */
-    public function getPreferredLanguage(Request $request)
+    public function getPreferredLanguage(Request $request): string
     {
         // Determine session locale
         $sessionLocale = $this->sessionData->get('locale');
@@ -96,10 +79,8 @@ class LanguageProvider
 
     /**
      * Fetches the user locale.
-     *
-     * @return string|null
      */
-    private function getUserLocale()
+    private function getUserLocale(): ?string
     {
         if ($user = $this->userProvider->bySession()) {
             return $user->language;

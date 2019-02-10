@@ -44,7 +44,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param array $where
      * @return SysTemptablesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param array $where
      * @return SysTemptablesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param SysTemptablesEntity $entity
      * @return SysTemptablesEntity
      */
     public function create(SysTemptablesEntity $entity)
@@ -127,7 +124,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param SysTemptablesEntity $entity
      * @return SysTemptablesEntity
      */
     public function update(SysTemptablesEntity $entity)
@@ -148,7 +144,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param SysTemptablesEntity $entity
      * @return SysTemptablesEntity
      */
     public function remove(SysTemptablesEntity $entity)
@@ -168,7 +163,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param SysTemptablesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysTemptablesEntity $entity)
@@ -180,7 +174,6 @@ class SysTemptablesRepository
     }
 
     /**
-     * @param array $data
      * @return SysTemptablesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

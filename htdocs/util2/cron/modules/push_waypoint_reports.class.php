@@ -10,7 +10,7 @@ class PushWayPointReports
     public $name = 'push_waypoint_reports';
     public $interval = 120;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 

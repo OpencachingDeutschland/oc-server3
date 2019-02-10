@@ -17,7 +17,7 @@ $search_output_file_download = true;
 $content_type_plain = 'application/gpx';
 
 
-function search_output()
+function search_output(): void
 {
     global $opt, $login, $translate;
     global $cache_note_text;

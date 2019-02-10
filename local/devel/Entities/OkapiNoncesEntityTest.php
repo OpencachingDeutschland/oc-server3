@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class OkapiNoncesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new OkapiNoncesEntity();
         self::assertTrue($entity->isNew());

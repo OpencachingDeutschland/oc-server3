@@ -4,9 +4,6 @@ namespace Oc\Language;
 
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class LanguageService
- */
 class LanguageService
 {
     /**
@@ -14,11 +11,6 @@ class LanguageService
      */
     private $languageRepository;
 
-    /**
-     * LanguageService constructor.
-     *
-     * @param LanguageRepository $languageRepository
-     */
     public function __construct(LanguageRepository $languageRepository)
     {
         $this->languageRepository = $languageRepository;
@@ -29,7 +21,7 @@ class LanguageService
      *
      * @return LanguageEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->languageRepository->fetchAll();
@@ -45,7 +37,7 @@ class LanguageService
      *
      * @return LanguageEntity[]
      */
-    public function fetchAllTranslated()
+    public function fetchAllTranslated(): array
     {
         try {
             $result = $this->languageRepository->fetchAllTranslated();
@@ -58,36 +50,24 @@ class LanguageService
 
     /**
      * Creates a language in the database.
-     *
-     * @param LanguageEntity $entity
-     *
-     * @return LanguageEntity
      */
-    public function create(LanguageEntity $entity)
+    public function create(LanguageEntity $entity): LanguageEntity
     {
         return $this->languageRepository->create($entity);
     }
 
     /**
      * Update a language in the database.
-     *
-     * @param LanguageEntity $entity
-     *
-     * @return LanguageEntity
      */
-    public function update(LanguageEntity $entity)
+    public function update(LanguageEntity $entity): LanguageEntity
     {
         return $this->languageRepository->update($entity);
     }
 
     /**
      * Removes a language from the database.
-     *
-     * @param LanguageEntity $entity
-     *
-     * @return LanguageEntity
      */
-    public function remove(LanguageEntity $entity)
+    public function remove(LanguageEntity $entity): LanguageEntity
     {
         return $this->languageRepository->remove($entity);
     }
@@ -97,7 +77,7 @@ class LanguageService
      *
      * @return string[]
      */
-    public function getAvailableTranslations()
+    public function getAvailableTranslations(): array
     {
         $translatedLanguages = $this->fetchAllTranslated();
 

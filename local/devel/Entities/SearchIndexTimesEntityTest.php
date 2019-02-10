@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SearchIndexTimesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SearchIndexTimesEntity();
         self::assertTrue($entity->isNew());

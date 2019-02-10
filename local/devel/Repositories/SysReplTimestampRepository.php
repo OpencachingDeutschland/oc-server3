@@ -44,7 +44,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param array $where
      * @return SysReplTimestampEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param array $where
      * @return SysReplTimestampEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param SysReplTimestampEntity $entity
      * @return SysReplTimestampEntity
      */
     public function create(SysReplTimestampEntity $entity)
@@ -127,7 +124,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param SysReplTimestampEntity $entity
      * @return SysReplTimestampEntity
      */
     public function update(SysReplTimestampEntity $entity)
@@ -148,7 +144,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param SysReplTimestampEntity $entity
      * @return SysReplTimestampEntity
      */
     public function remove(SysReplTimestampEntity $entity)
@@ -168,7 +163,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param SysReplTimestampEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysReplTimestampEntity $entity)
@@ -180,7 +174,6 @@ class SysReplTimestampRepository
     }
 
     /**
-     * @param array $data
      * @return SysReplTimestampEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Class GeoCacheController
- */
 class GeoCacheController extends Controller
 {
     /**
@@ -24,24 +21,16 @@ class GeoCacheController extends Controller
      */
     private $apiSecret;
 
-    /**
-     * GeoCacheController constructor.
-     *
-     * @param Reports $reports
-     * @param string $apiSecret
-     */
-    public function __construct(Reports $reports, $apiSecret)
+    public function __construct(Reports $reports, string $apiSecret)
     {
         $this->reports = $reports;
         $this->apiSecret = $apiSecret;
     }
 
     /**
-     * @param Request $request
-     * @return Response
      * @Route("/api/geocache/getReports")
      */
-    public function getReportsAction(Request $request)
+    public function getReportsAction(Request $request): Response
     {
         if ($this->apiSecret === 'ThisTokenIsNotSoSecretChangeIt') {
             return new JsonResponse(['please change your api_secret to a secure one!']);

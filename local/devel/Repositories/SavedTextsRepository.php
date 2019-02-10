@@ -44,7 +44,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param array $where
      * @return SavedTextsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param array $where
      * @return SavedTextsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param SavedTextsEntity $entity
      * @return SavedTextsEntity
      */
     public function create(SavedTextsEntity $entity)
@@ -127,7 +124,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param SavedTextsEntity $entity
      * @return SavedTextsEntity
      */
     public function update(SavedTextsEntity $entity)
@@ -148,7 +144,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param SavedTextsEntity $entity
      * @return SavedTextsEntity
      */
     public function remove(SavedTextsEntity $entity)
@@ -168,7 +163,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param SavedTextsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SavedTextsEntity $entity)
@@ -184,7 +178,6 @@ class SavedTextsRepository
     }
 
     /**
-     * @param array $data
      * @return SavedTextsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

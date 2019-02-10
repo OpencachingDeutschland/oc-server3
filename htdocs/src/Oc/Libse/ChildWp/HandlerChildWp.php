@@ -45,7 +45,7 @@ class HandlerChildWp
         sql_free_result($rs);
     }
 
-    public function add($cacheId, $type, $lat, $lon, $desc)
+    public function add($cacheId, $type, $lat, $lon, $desc): void
     {
         sql(
             "INSERT INTO coordinates(type, subtype, latitude, longitude, cache_id, description)
@@ -59,7 +59,7 @@ class HandlerChildWp
         );
     }
 
-    public function update($childId, $type, $lat, $lon, $desc)
+    public function update($childId, $type, $lat, $lon, $desc): void
     {
         sql(
             "UPDATE coordinates
@@ -171,7 +171,7 @@ class HandlerChildWp
         return $ret;
     }
 
-    public function delete($childId)
+    public function delete($childId): void
     {
         sql('DELETE FROM coordinates WHERE id = &1', $childId);
     }

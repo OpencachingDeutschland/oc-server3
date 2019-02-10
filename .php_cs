@@ -19,6 +19,8 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__ . '/htdocs/xml')
     ->in(__DIR__ . '/local')
     ->in(__DIR__ . '/tests')
+    ->in(__DIR__ . '/dev-ops/local.team-opencaching.de/templates')
+    ->notPath(__DIR__ . 'htdocs/config2//settings.inc.php')
 ;
 
 
@@ -71,8 +73,14 @@ return PhpCsFixer\Config::create()
        'phpdoc_scalar' => true,
        'phpdoc_no_package' => true,
        'phpdoc_single_line_var_spacing' => true,
-       'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
-
+       'phpdoc_add_missing_param_annotation' => [
+           'only_untyped' => true,
+       ],
+       'no_superfluous_phpdoc_tags' => [
+           'allow_mixed' => true,
+       ],
+       'void_return' => true,
+       'no_empty_phpdoc' => true
    ])
     ->setRiskyAllowed(true)
     ->setFinder($finder);

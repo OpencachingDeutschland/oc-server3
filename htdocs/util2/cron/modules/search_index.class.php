@@ -14,7 +14,7 @@ class SearchIndex
     public $name = 'search_index';
     public $interval = 0;
 
-    public function run()
+    public function run(): void
     {
         // ftsearch_refresh() will roughly process 5-50 search_index_times entries
         // per second. In normal Opencaching.de operation, we expect just 1 changed

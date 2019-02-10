@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class LogentriesTypesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new LogentriesTypesEntity();
         self::assertTrue($entity->isNew());

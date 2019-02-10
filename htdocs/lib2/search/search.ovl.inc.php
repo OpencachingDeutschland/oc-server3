@@ -12,7 +12,7 @@ $search_output_file_download = true;
 $content_type_plain = 'application/ovl';
 
 
-function search_output()
+function search_output(): void
 {
     $ovlLine = "[Symbol {symbolnr1}]\r\nTyp=6\r\nGroup=1\r\nWidth=20\r\nHeight=20\r\nDir=100\r\nArt=1\r\nCol=3\r\nZoom=1\r\nSize=103\r\nArea=2\r\nXKoord={lon}\r\nYKoord={lat}\r\n[Symbol {symbolnr2}]\r\nTyp=2\r\nGroup=1\r\nCol=3\r\nArea=1\r\nZoom=1\r\nSize=130\r\nFont=1\r\nDir=100\r\nXKoord={lonname}\r\nYKoord={latname}\r\nText={cachename}\r\n";
     $ovlFoot = "[Overlay]\r\nSymbols={symbolscount}\r\n";

@@ -16,17 +16,14 @@ class MenuSubscriber implements EventSubscriberInterface
      *
      * @return array The event names to listen to
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             MenuEnum::MENU_MAIN => ['onConfigureMenu', 100],
         ];
     }
-
-    /**
-     * @param MenuEvent $event
-     */
-    public function onConfigureMenu(MenuEvent $event)
+    
+    public function onConfigureMenu(MenuEvent $event): void
     {
         $event->getCurrentItem()->addChild(
             'Startseite',

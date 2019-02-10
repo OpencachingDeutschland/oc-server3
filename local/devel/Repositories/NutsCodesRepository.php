@@ -44,7 +44,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param array $where
      * @return NutsCodesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param array $where
      * @return NutsCodesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param NutsCodesEntity $entity
      * @return NutsCodesEntity
      */
     public function create(NutsCodesEntity $entity)
@@ -127,7 +124,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param NutsCodesEntity $entity
      * @return NutsCodesEntity
      */
     public function update(NutsCodesEntity $entity)
@@ -148,7 +144,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param NutsCodesEntity $entity
      * @return NutsCodesEntity
      */
     public function remove(NutsCodesEntity $entity)
@@ -168,7 +163,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param NutsCodesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(NutsCodesEntity $entity)
@@ -180,7 +174,6 @@ class NutsCodesRepository
     }
 
     /**
-     * @param array $data
      * @return NutsCodesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

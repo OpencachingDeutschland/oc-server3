@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../htdocs/api/rot13.php';
 class Rot13Test extends AbstractModuleTest
 {
     // this function didn't support nested braces
-    public function test_hint_rot13_excludes_braces()
+    public function test_hint_rot13_excludes_braces(): void
     {
         $string = 'a[123123]b';
 
@@ -26,7 +26,7 @@ class Rot13Test extends AbstractModuleTest
         self::assertEquals('NOPQRSTUVWXYZABCDEFGHIJKLM', \hint_rot13($string));
     }
 
-    public function test_hint_rot13_encrypts()
+    public function test_hint_rot13_encrypts(): void
     {
         $string = 'abcd123efgh';
 

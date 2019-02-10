@@ -53,11 +53,8 @@ class translateAccess
 
         return $this->languages;
     }
-
-    /**
-     *
-     */
-    private function loadLanguages()
+    
+    private function loadLanguages(): void
     {
         global $login;
 

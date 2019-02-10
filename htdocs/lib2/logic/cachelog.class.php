@@ -298,7 +298,7 @@ class cachelog
         return $saved;
     }
 
-    public function updatePictureStat()
+    public function updatePictureStat(): void
     {
         sql(
             "UPDATE `cache_logs` SET `picture` =

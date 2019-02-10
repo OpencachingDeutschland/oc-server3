@@ -9,19 +9,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller as FrameworkController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * Class AbstractController
- */
 abstract class AbstractController extends FrameworkController
 {
     use LegacyTemplateTrait;
 
     /**
      * Fetches the global context from the master request.
-     *
-     * @return GlobalContext
      */
-    public function getGlobalContext()
+    public function getGlobalContext(): GlobalContext
     {
         $requestStack = $this->get('request_stack');
 
@@ -50,7 +45,7 @@ abstract class AbstractController extends FrameworkController
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null.
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(?ContainerInterface $container = null): void
     {
         parent::setContainer($container);
 
@@ -68,26 +63,17 @@ abstract class AbstractController extends FrameworkController
         }
     }
 
-    /**
-     * @param string $message
-     */
-    protected function addErrorMessage($message)
+    protected function addErrorMessage(string $message): void
     {
         $this->addFlash('error', $message);
     }
 
-    /**
-     * @param string $message
-     */
-    protected function addSuccessMessage($message)
+    protected function addSuccessMessage(string $message): void
     {
         $this->addFlash('success', $message);
     }
 
-    /**
-     * @param string $message
-     */
-    protected function addInfoMessage($message)
+    protected function addInfoMessage(string $message): void
     {
         $this->addFlash('info', $message);
     }

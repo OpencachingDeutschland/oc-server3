@@ -44,7 +44,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param array $where
      * @return AttributeCategoriesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param array $where
      * @return AttributeCategoriesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param AttributeCategoriesEntity $entity
      * @return AttributeCategoriesEntity
      */
     public function create(AttributeCategoriesEntity $entity)
@@ -127,7 +124,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param AttributeCategoriesEntity $entity
      * @return AttributeCategoriesEntity
      */
     public function update(AttributeCategoriesEntity $entity)
@@ -148,7 +144,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param AttributeCategoriesEntity $entity
      * @return AttributeCategoriesEntity
      */
     public function remove(AttributeCategoriesEntity $entity)
@@ -168,7 +163,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param AttributeCategoriesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(AttributeCategoriesEntity $entity)
@@ -182,7 +176,6 @@ class AttributeCategoriesRepository
     }
 
     /**
-     * @param array $data
      * @return AttributeCategoriesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

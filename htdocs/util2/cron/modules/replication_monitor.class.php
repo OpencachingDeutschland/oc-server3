@@ -17,7 +17,7 @@ class ReplicationMonitor
 
     //var $interval = 60;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
         $known_ids = [];
@@ -40,7 +40,7 @@ class ReplicationMonitor
         );
     }
 
-    public function checkSlave($id)
+    public function checkSlave($id): void
     {
         global $opt;
         $nActive = 0;
@@ -61,7 +61,6 @@ class ReplicationMonitor
                 $opt['db']['placeholder']['db']
             );
             if ($dblink !== false) {
-
                 $rs = mysqli_query($dblink, 'SELECT `data` FROM `sys_repl_timestamp`');
                 if ($rs !== false) {
                     $rTime = mysqli_fetch_assoc($rs);

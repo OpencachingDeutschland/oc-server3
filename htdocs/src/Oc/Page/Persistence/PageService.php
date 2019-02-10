@@ -4,9 +4,6 @@ namespace Oc\Page\Persistence;
 
 use Oc\Repository\Exception\RecordNotFoundException;
 
-/**
- * Class PageService
- */
 class PageService
 {
     /**
@@ -14,11 +11,6 @@ class PageService
      */
     private $pageRepository;
 
-    /**
-     * PageService constructor.
-     *
-     * @param PageRepository $pageRepository
-     */
     public function __construct(PageRepository $pageRepository)
     {
         $this->pageRepository = $pageRepository;
@@ -26,12 +18,8 @@ class PageService
 
     /**
      * Fetches a page by slug.
-     *
-     * @param array $where
-     *
-     * @return null|PageEntity
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?PageEntity
     {
         try {
             $result = $this->pageRepository->fetchOneBy($where);
@@ -44,36 +32,24 @@ class PageService
 
     /**
      * Creates a page in the database.
-     *
-     * @param PageEntity $entity
-     *
-     * @return PageEntity
      */
-    public function create(PageEntity $entity)
+    public function create(PageEntity $entity): PageEntity
     {
         return $this->pageRepository->create($entity);
     }
 
     /**
      * Update a page in the database.
-     *
-     * @param PageEntity $entity
-     *
-     * @return PageEntity
      */
-    public function update(PageEntity $entity)
+    public function update(PageEntity $entity): PageEntity
     {
         return $this->pageRepository->update($entity);
     }
 
     /**
      * Removes a page from the database.
-     *
-     * @param PageEntity $entity
-     *
-     * @return PageEntity
      */
-    public function remove(PageEntity $entity)
+    public function remove(PageEntity $entity): PageEntity
     {
         return $this->pageRepository->remove($entity);
     }

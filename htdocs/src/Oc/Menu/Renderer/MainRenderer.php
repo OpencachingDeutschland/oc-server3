@@ -12,13 +12,18 @@ use Knp\Menu\Renderer\RendererInterface;
  */
 class MainRenderer extends Renderer implements RendererInterface
 {
+    /**
+     * @var MatcherInterface
+     */
     protected $matcher;
+
+    /**
+     * @var array
+     */
     protected $defaultOptions;
 
     /**
-     * @param MatcherInterface $matcher
-     * @param array            $defaultOptions
-     * @param string           $charset
+     * @param string $charset
      */
     public function __construct(MatcherInterface $matcher, array $defaultOptions = array(), $charset = null)
     {
@@ -46,7 +51,7 @@ class MainRenderer extends Renderer implements RendererInterface
         parent::__construct($charset);
     }
 
-    public function render(ItemInterface $item, array $options = array())
+    public function render(ItemInterface $item, array $options = array()): string
     {
         $options = array_merge($this->defaultOptions, $options);
 
@@ -72,7 +77,7 @@ class MainRenderer extends Renderer implements RendererInterface
         return $html;
     }
 
-    protected function renderList(ItemInterface $item, array $attributes, array $options)
+    protected function renderList(ItemInterface $item, array $attributes, array $options): string
     {
         /**
          * Return an empty string if any of the following are true:
@@ -98,13 +103,8 @@ class MainRenderer extends Renderer implements RendererInterface
      * menu item to render themselves as an <li> tag (with nested ul if it
      * has children).
      * This method updates the depth for the children.
-     *
-     * @param ItemInterface $item
-     * @param array         $options The options to render the item.
-     *
-     * @return string
      */
-    protected function renderChildren(ItemInterface $item, array $options)
+    protected function renderChildren(ItemInterface $item, array $options): string
     {
         // render children with a depth - 1
         if (null !== $options['depth']) {
@@ -128,13 +128,8 @@ class MainRenderer extends Renderer implements RendererInterface
      *
      * This renders the li tag to fit into the parent ul as well as its
      * own nested ul tag if this menu item has children
-     *
-     * @param ItemInterface $item
-     * @param array         $options The options to render the item
-     *
-     * @return string
      */
-    protected function renderItem(ItemInterface $item, array $options)
+    protected function renderItem(ItemInterface $item, array $options): string
     {
         // if we don't have access or this item is marked to not be shown
         if (!$item->isDisplayed()) {
@@ -210,13 +205,8 @@ class MainRenderer extends Renderer implements RendererInterface
      * Tests if item has a an uri and if not tests if it's
      * the current item and if the text has to be rendered
      * as a link or not.
-     *
-     * @param ItemInterface $item    The item to render the link or label for
-     * @param array         $options The options to render the item
-     *
-     * @return string
      */
-    protected function renderLink(ItemInterface $item, array $options = array())
+    protected function renderLink(ItemInterface $item, array $options = array()): string
     {
         if ($item->getUri() && (!$item->isCurrent() || $options['currentAsLink'])) {
             $text = $this->renderLinkElement($item, $options);
@@ -227,7 +217,7 @@ class MainRenderer extends Renderer implements RendererInterface
         return $this->format($text, 'link', $item->getLevel(), $options);
     }
 
-    protected function renderLinkElement(ItemInterface $item, array $options)
+    protected function renderLinkElement(ItemInterface $item, array $options): string
     {
         $childrenClass = (array) $item->getChildrenAttribute('class');
 
@@ -241,7 +231,7 @@ class MainRenderer extends Renderer implements RendererInterface
         return sprintf('<a href="%s"%s>%s</a>', $this->escape($item->getUri()), $this->renderHtmlAttributes($childrenAttributes), $this->renderLabel($item, $options));
     }
 
-    protected function renderSpanElement(ItemInterface $item, array $options)
+    protected function renderSpanElement(ItemInterface $item, array $options): string
     {
         $childrenClass = (array) $item->getChildrenAttribute('class');
 
@@ -255,7 +245,7 @@ class MainRenderer extends Renderer implements RendererInterface
         return sprintf('<span%s>%s</span>', $this->renderHtmlAttributes($childrenAttributes), $this->renderLabel($item, $options));
     }
 
-    protected function renderLabel(ItemInterface $item, array $options)
+    protected function renderLabel(ItemInterface $item, array $options): string
     {
         if ($options['allow_safe_labels'] && $item->getExtra('safe_label', false)) {
             return $item->getLabel();
@@ -272,11 +262,8 @@ class MainRenderer extends Renderer implements RendererInterface
      * @param string  $html    The html to render in an (un)formatted way
      * @param string  $type    The type [ul,link,li] of thing being rendered
      * @param int $level
-     * @param array   $options
-     *
-     * @return string
      */
-    protected function format($html, $type, $level, array $options)
+    protected function format($html, $type, $level, array $options): string
     {
         if ($options['compressed']) {
             return $html;

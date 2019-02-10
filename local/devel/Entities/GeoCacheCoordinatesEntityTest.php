@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GeoCacheCoordinatesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GeoCacheCoordinatesEntity();
         self::assertTrue($entity->isNew());

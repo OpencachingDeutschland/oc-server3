@@ -44,7 +44,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param array $where
      * @return SearchDoublesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param array $where
      * @return SearchDoublesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param SearchDoublesEntity $entity
      * @return SearchDoublesEntity
      */
     public function create(SearchDoublesEntity $entity)
@@ -127,7 +124,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param SearchDoublesEntity $entity
      * @return SearchDoublesEntity
      */
     public function update(SearchDoublesEntity $entity)
@@ -148,7 +144,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param SearchDoublesEntity $entity
      * @return SearchDoublesEntity
      */
     public function remove(SearchDoublesEntity $entity)
@@ -168,7 +163,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param SearchDoublesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SearchDoublesEntity $entity)
@@ -181,7 +175,6 @@ class SearchDoublesRepository
     }
 
     /**
-     * @param array $data
      * @return SearchDoublesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

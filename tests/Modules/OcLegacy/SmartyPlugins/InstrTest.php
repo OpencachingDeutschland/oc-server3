@@ -14,7 +14,7 @@ class InstrTest extends AbstractModuleTest
     /**
      * Tests if $needle is found in $haystack.
      */
-    public function testInString()
+    public function testInString(): void
     {
         self::assertEquals(true, $this->executeSmartyFunction('abcdefghij', 'defg'));
     }
@@ -22,7 +22,7 @@ class InstrTest extends AbstractModuleTest
     /**
      * Tests if $needle is found in $haystack.
      */
-    public function testNotInString()
+    public function testNotInString(): void
     {
         self::assertEquals(false, $this->executeSmartyFunction('abcdefghij', 'foo'));
     }

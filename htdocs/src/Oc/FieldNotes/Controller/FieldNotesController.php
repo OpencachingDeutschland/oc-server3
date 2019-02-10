@@ -32,19 +32,12 @@ class FieldNotesController extends AbstractController
      * @var TranslatorInterface
      */
     private $translator;
+
     /**
      * @var UploadFormDataFactory
      */
     private $formDataFactory;
 
-    /**
-     * FieldNotesController constructor.
-     *
-     * @param ImportService $importService
-     * @param FieldNoteService $fieldNoteService
-     * @param UploadFormDataFactory $formDataFactory
-     * @param TranslatorInterface $translator
-     */
     public function __construct(
         ImportService $importService,
         FieldNoteService $fieldNoteService,
@@ -59,14 +52,9 @@ class FieldNotesController extends AbstractController
 
     /**
      * Index action for field-notes.
-     *
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @Route("/field-notes/", name="field_notes.index")
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -100,31 +88,32 @@ class FieldNotesController extends AbstractController
             return $this->redirectToRoute('field_notes.index');
         }
 
-        return $this->render('field-notes/index.html.twig', [
+        return $this->render(
+            'field-notes/index.html.twig',
+            [
             'user' => $user,
             'form' => $form->createView(),
             'fieldNotes' => $fieldNotes,
-        ]);
+        ]
+        );
     }
 
     /**
      * Action to delete one field-note.
      *
-     * @param int $id
-     *
-     * @return RedirectResponse
-     *
      * @Route("/field-notes/delete/{id}", name="field_notes.delete")
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
 
-        $fieldNote = $this->fieldNoteService->fetchOneBy([
-            'id' => $id,
-            'user_id' => $user->getId(),
-        ]);
+        $fieldNote = $this->fieldNoteService->fetchOneBy(
+            [
+                'id' => $id,
+                'user_id' => $user->getId(),
+            ]
+        );
 
         if ($fieldNote === null) {
             return $this->redirectToRoute('field_notes.index');
@@ -142,13 +131,9 @@ class FieldNotesController extends AbstractController
     /**
      * Action to delete multiple field-notes.
      *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     *
      * @Route("/field-notes/delete-multiple/", name="field_notes.delete_multiple")
      */
-    public function deleteMultipleAction(Request $request)
+    public function deleteMultipleAction(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
         $user = $this->getUser();
@@ -159,10 +144,12 @@ class FieldNotesController extends AbstractController
         }
 
         foreach ($selectedFieldNotes as $fieldNoteId) {
-            $fieldNote = $this->fieldNoteService->fetchOneBy([
-                'id' => $fieldNoteId,
-                'user_id' => $user->getId(),
-            ]);
+            $fieldNote = $this->fieldNoteService->fetchOneBy(
+                [
+                    'id' => $fieldNoteId,
+                    'user_id' => $user->getId(),
+                ]
+            );
 
             if ($fieldNote === null) {
                 continue;

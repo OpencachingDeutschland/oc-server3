@@ -44,7 +44,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheWaypointPoolEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheWaypointPoolEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param GeoCacheWaypointPoolEntity $entity
      * @return GeoCacheWaypointPoolEntity
      */
     public function create(GeoCacheWaypointPoolEntity $entity)
@@ -127,7 +124,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param GeoCacheWaypointPoolEntity $entity
      * @return GeoCacheWaypointPoolEntity
      */
     public function update(GeoCacheWaypointPoolEntity $entity)
@@ -148,7 +144,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param GeoCacheWaypointPoolEntity $entity
      * @return GeoCacheWaypointPoolEntity
      */
     public function remove(GeoCacheWaypointPoolEntity $entity)
@@ -168,7 +163,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param GeoCacheWaypointPoolEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheWaypointPoolEntity $entity)
@@ -180,7 +174,6 @@ class CacheWaypointPoolRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheWaypointPoolEntity
      */
     public function getEntityFromDatabaseArray(array $data)

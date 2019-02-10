@@ -44,7 +44,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param array $where
      * @return NutsLayerEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param array $where
      * @return NutsLayerEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param NutsLayerEntity $entity
      * @return NutsLayerEntity
      */
     public function create(NutsLayerEntity $entity)
@@ -127,7 +124,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param NutsLayerEntity $entity
      * @return NutsLayerEntity
      */
     public function update(NutsLayerEntity $entity)
@@ -148,7 +144,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param NutsLayerEntity $entity
      * @return NutsLayerEntity
      */
     public function remove(NutsLayerEntity $entity)
@@ -168,7 +163,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param NutsLayerEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(NutsLayerEntity $entity)
@@ -182,7 +176,6 @@ class NutsLayerRepository
     }
 
     /**
-     * @param array $data
      * @return NutsLayerEntity
      */
     public function getEntityFromDatabaseArray(array $data)

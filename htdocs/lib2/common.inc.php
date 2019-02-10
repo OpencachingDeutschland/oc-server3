@@ -13,7 +13,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $opt['rootpath'] = __DIR__ . '/../';
 
-function __autoload($class_name)
+function __autoload($class_name): void
 {
     global $opt;
 
@@ -31,21 +31,21 @@ function __autoload($class_name)
 }
 
 if (!function_exists('bindtextdomain')) {
-    function bindtextdomain()
+    function bindtextdomain(): void
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('textdomain')) {
-    function textdomain()
+    function textdomain(): void
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('gettext')) {
-    function gettext()
+    function gettext(): void
     {
         // dummy function for travis
     }
@@ -163,7 +163,7 @@ if (!isset($disable_verifyemail) &&
 }
 
 // normalize paths and urls
-function normalize_settings()
+function normalize_settings(): void
 {
     global $opt;
 
@@ -188,7 +188,7 @@ function normalize_settings()
     }
 }
 
-function configure_php()
+function configure_php(): void
 {
     global $opt;
 
@@ -207,12 +207,12 @@ function configure_php()
     }
 }
 
-function sql_enable_foundrows()
+function sql_enable_foundrows(): void
 {
     ini_set('mysql.trace_mode', false);
 }
 
-function sql_foundrows_done()
+function sql_foundrows_done(): void
 {
     global $opt;
 
@@ -221,7 +221,7 @@ function sql_foundrows_done()
     }
 }
 
-function set_domain_config()
+function set_domain_config(): void
 {
     global $opt;
 
@@ -237,7 +237,7 @@ function set_domain_config()
     set_common_domain_config($opt);
 }
 
-function set_language()
+function set_language(): void
 {
     global $opt, $cookie;
 
@@ -274,7 +274,7 @@ function set_language()
     textdomain('messages');
 }
 
-function set_usercountry()
+function set_usercountry(): void
 {
     global $cookie;
 
@@ -283,14 +283,14 @@ function set_usercountry()
     }
 }
 
-function set_timezone()
+function set_timezone(): void
 {
     global $opt;
 
     date_default_timezone_set($opt['php']['timezone']);
 }
 
-function check_useragent()
+function check_useragent(): void
 {
     global $ocpropping;
 

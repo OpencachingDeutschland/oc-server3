@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class CoordinatesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new CoordinatesEntity();
         self::assertTrue($entity->isNew());

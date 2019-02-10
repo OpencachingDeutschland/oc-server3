@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SysReplTimestampEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SysReplTimestampEntity();
         self::assertTrue($entity->isNew());

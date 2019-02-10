@@ -5,9 +5,6 @@ namespace Oc\FieldNotes\Import;
 use Oc\FieldNotes\Exception\FileFormatException;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * Class FileParser
- */
 class FileParser
 {
     /**
@@ -15,25 +12,15 @@ class FileParser
      */
     private $structMapper;
 
-    /**
-     * FileParser constructor.
-     *
-     * @param StructMapper $structMapper
-     */
     public function __construct(StructMapper $structMapper)
     {
         $this->structMapper = $structMapper;
     }
 
     /**
-     * Parses the given file
-     *
-     * @param File $file
-     *
-     * @throws FileFormatException
-     * @return array
+     * Parses the given file.
      */
-    public function parseFile(File $file)
+    public function parseFile(File $file): array
     {
         $content = $this->getSanitizedFileContent($file);
 
@@ -44,12 +31,8 @@ class FileParser
 
     /**
      * Fetches the content of the file and returns it.
-     *
-     * @param File $file
-     *
-     * @return string
      */
-    private function getSanitizedFileContent(File $file)
+    private function getSanitizedFileContent(File $file): string
     {
         $content = file_get_contents($file->getRealPath());
         $content = str_replace("\xFF\xFE", '', $content);
@@ -61,13 +44,8 @@ class FileParser
 
     /**
      * Fetches rows from csv content.
-     *
-     * @param string $content
-     *
-     * @throws FileFormatException
-     * @return array
      */
-    private function getRowsFromCsv($content)
+    private function getRowsFromCsv(string $content): array
     {
         $lines = explode("\n", $content);
         $lines = array_filter($lines);

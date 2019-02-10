@@ -44,7 +44,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiStatsHourlyEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiStatsHourlyEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param OkapiStatsHourlyEntity $entity
      * @return OkapiStatsHourlyEntity
      */
     public function create(OkapiStatsHourlyEntity $entity)
@@ -127,7 +124,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param OkapiStatsHourlyEntity $entity
      * @return OkapiStatsHourlyEntity
      */
     public function update(OkapiStatsHourlyEntity $entity)
@@ -148,7 +144,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param OkapiStatsHourlyEntity $entity
      * @return OkapiStatsHourlyEntity
      */
     public function remove(OkapiStatsHourlyEntity $entity)
@@ -168,7 +163,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param OkapiStatsHourlyEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiStatsHourlyEntity $entity)
@@ -186,7 +180,6 @@ class OkapiStatsHourlyRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiStatsHourlyEntity
      */
     public function getEntityFromDatabaseArray(array $data)

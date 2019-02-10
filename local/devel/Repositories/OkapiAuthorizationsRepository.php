@@ -44,7 +44,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiAuthorizationsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiAuthorizationsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param OkapiAuthorizationsEntity $entity
      * @return OkapiAuthorizationsEntity
      */
     public function create(OkapiAuthorizationsEntity $entity)
@@ -127,7 +124,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param OkapiAuthorizationsEntity $entity
      * @return OkapiAuthorizationsEntity
      */
     public function update(OkapiAuthorizationsEntity $entity)
@@ -148,7 +144,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param OkapiAuthorizationsEntity $entity
      * @return OkapiAuthorizationsEntity
      */
     public function remove(OkapiAuthorizationsEntity $entity)
@@ -168,7 +163,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param OkapiAuthorizationsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiAuthorizationsEntity $entity)
@@ -181,7 +175,6 @@ class OkapiAuthorizationsRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiAuthorizationsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

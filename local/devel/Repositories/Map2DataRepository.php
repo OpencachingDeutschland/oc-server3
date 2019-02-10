@@ -44,7 +44,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param array $where
      * @return Map2DataEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param array $where
      * @return Map2DataEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param Map2DataEntity $entity
      * @return Map2DataEntity
      */
     public function create(Map2DataEntity $entity)
@@ -127,7 +124,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param Map2DataEntity $entity
      * @return Map2DataEntity
      */
     public function update(Map2DataEntity $entity)
@@ -148,7 +144,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param Map2DataEntity $entity
      * @return Map2DataEntity
      */
     public function remove(Map2DataEntity $entity)
@@ -168,7 +163,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param Map2DataEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(Map2DataEntity $entity)
@@ -180,7 +174,6 @@ class Map2DataRepository
     }
 
     /**
-     * @param array $data
      * @return Map2DataEntity
      */
     public function getEntityFromDatabaseArray(array $data)

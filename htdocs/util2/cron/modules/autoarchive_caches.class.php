@@ -13,7 +13,7 @@ class AutoArchive
     public $name = 'autoarchive';
     public $interval = 43200; // twice per day
 
-    public function run()
+    public function run(): void
     {
         global $opt, $login;
 
@@ -29,7 +29,7 @@ class AutoArchive
         }
     }
 
-    public function archiveDisabledCaches()
+    public function archiveDisabledCaches(): void
     {
         // Logging of status changes in cache_status_modified has started on June 1, 2013.
         // For archiving caches that were disabled earlier, we also check the listing
@@ -109,7 +109,7 @@ class AutoArchive
         sql_free_result($rs);
     }
 
-    public function archiveEvents()
+    public function archiveEvents(): void
     {
         // To prevent archiving events that were accidentally published with a wrong
         // event date - before the owner notices it - we also apply a limit of one month
@@ -133,7 +133,7 @@ class AutoArchive
         sql_free_result($rs);
     }
 
-    public function archiveCache($cache_id, $comment, $months = 0)
+    public function archiveCache($cache_id, $comment, $months = 0): void
     {
         global $login, $translate;
 

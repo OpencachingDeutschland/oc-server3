@@ -33,7 +33,7 @@ mysqli_free_result($rs);
 get_logs('cache_logs');
 // get_logs("cache_logs_archived");
 
-function get_logs($table)
+function get_logs($table): void
 {
     global $grid, $liste, $years;
 

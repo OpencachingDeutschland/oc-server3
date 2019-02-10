@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class PageBlockEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new PageBlockEntity();
         self::assertTrue($entity->isNew());

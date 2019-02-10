@@ -44,7 +44,6 @@ class SysCronRepository
     }
 
     /**
-     * @param array $where
      * @return SysCronEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysCronRepository
     }
 
     /**
-     * @param array $where
      * @return SysCronEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysCronRepository
     }
 
     /**
-     * @param SysCronEntity $entity
      * @return SysCronEntity
      */
     public function create(SysCronEntity $entity)
@@ -127,7 +124,6 @@ class SysCronRepository
     }
 
     /**
-     * @param SysCronEntity $entity
      * @return SysCronEntity
      */
     public function update(SysCronEntity $entity)
@@ -148,7 +144,6 @@ class SysCronRepository
     }
 
     /**
-     * @param SysCronEntity $entity
      * @return SysCronEntity
      */
     public function remove(SysCronEntity $entity)
@@ -168,7 +163,6 @@ class SysCronRepository
     }
 
     /**
-     * @param SysCronEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysCronEntity $entity)
@@ -180,7 +174,6 @@ class SysCronRepository
     }
 
     /**
-     * @param array $data
      * @return SysCronEntity
      */
     public function getEntityFromDatabaseArray(array $data)

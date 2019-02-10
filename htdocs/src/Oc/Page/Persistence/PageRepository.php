@@ -8,9 +8,6 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 
-/**
- * Class PageRepository
- */
 class PageRepository
 {
     /**
@@ -18,18 +15,13 @@ class PageRepository
      *
      * @var string
      */
-    const TABLE = 'page';
+    public const TABLE = 'page';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * PageRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -38,12 +30,9 @@ class PageRepository
     /**
      * Fetches a page by slug.
      *
-     * @param array $where
-     *
      * @throws RecordNotFoundException Thrown when no record is found
-     * @return null|PageEntity
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?PageEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -71,12 +60,9 @@ class PageRepository
     /**
      * Creates a page in the database.
      *
-     * @param PageEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return PageEntity
      */
-    public function create(PageEntity $entity)
+    public function create(PageEntity $entity): PageEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -97,12 +83,9 @@ class PageRepository
     /**
      * Update a page in the database.
      *
-     * @param PageEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return PageEntity
      */
-    public function update(PageEntity $entity)
+    public function update(PageEntity $entity): PageEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -124,12 +107,9 @@ class PageRepository
     /**
      * Removes a page from the database.
      *
-     * @param PageEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return PageEntity
      */
-    public function remove(PageEntity $entity)
+    public function remove(PageEntity $entity): PageEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -147,12 +127,8 @@ class PageRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param PageEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(PageEntity $entity)
+    public function getDatabaseArrayFromEntity(PageEntity $entity): array
     {
         return [
             'id' => $entity->id,
@@ -167,12 +143,8 @@ class PageRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return PageEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): PageEntity
     {
         $entity = new PageEntity();
         $entity->id = (int) $data['id'];

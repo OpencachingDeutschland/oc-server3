@@ -3,6 +3,7 @@
 namespace Oc\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 use Oc\Menu\Event\MenuEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -17,18 +18,14 @@ class MenuBuilder
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
-
-    /**
-     * @param FactoryInterface $factory
-     * @param EventDispatcherInterface $eventDispatcher
-     */
+    
     public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
     {
         $this->factory = $factory;
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function createMainMenu(array $options)
+    public function createMainMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem(MenuEnum::MENU_MAIN);
 

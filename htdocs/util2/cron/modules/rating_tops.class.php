@@ -13,7 +13,7 @@ class RatingTops
     public $name = 'rating_tops';
     public $interval = 86400;
 
-    public function run()
+    public function run(): void
     {
         sql('DELETE FROM `rating_tops`');
 

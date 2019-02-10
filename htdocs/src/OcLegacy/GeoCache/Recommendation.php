@@ -8,9 +8,9 @@ namespace OcLegacy\GeoCache;
 class Recommendation
 {
     /**
-     * @param $logId
+     * @param int|string $logId
      */
-    public static function discardRecommendation($logId)
+    public static function discardRecommendation($logId): void
     {
         $rsLog = sql(
             "SELECT `cache_logs`.`cache_id`,
@@ -53,7 +53,7 @@ class Recommendation
                     $rLog['user_id'],
                     $rFirstOtherFound['date']
                 );
-                // This will trigger an cache_logs.last_modified update of the corresponding
+            // This will trigger an cache_logs.last_modified update of the corresponding
                 // log, so that XML interface will resend it with the updated
                 // "recommendation" flag.
             } elseif (!$rFirstOtherFound) {

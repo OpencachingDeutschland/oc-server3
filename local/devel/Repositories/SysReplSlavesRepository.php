@@ -44,7 +44,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param array $where
      * @return SysReplSlavesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param array $where
      * @return SysReplSlavesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param SysReplSlavesEntity $entity
      * @return SysReplSlavesEntity
      */
     public function create(SysReplSlavesEntity $entity)
@@ -127,7 +124,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param SysReplSlavesEntity $entity
      * @return SysReplSlavesEntity
      */
     public function update(SysReplSlavesEntity $entity)
@@ -148,7 +144,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param SysReplSlavesEntity $entity
      * @return SysReplSlavesEntity
      */
     public function remove(SysReplSlavesEntity $entity)
@@ -168,7 +163,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param SysReplSlavesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysReplSlavesEntity $entity)
@@ -187,7 +181,6 @@ class SysReplSlavesRepository
     }
 
     /**
-     * @param array $data
      * @return SysReplSlavesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

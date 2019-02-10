@@ -39,7 +39,7 @@ class HandlerCacheNote
         return $ret;
     }
 
-    public function save($noteId, $userId, $cacheId, $note, $latitude, $longitude)
+    public function save($noteId, $userId, $cacheId, $note, $latitude, $longitude): void
     {
         if (!$note && !$latitude && !$longitude) {
             sql(

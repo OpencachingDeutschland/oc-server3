@@ -44,7 +44,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param array $where
      * @return SearchIndexEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param array $where
      * @return SearchIndexEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param SearchIndexEntity $entity
      * @return SearchIndexEntity
      */
     public function create(SearchIndexEntity $entity)
@@ -127,7 +124,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param SearchIndexEntity $entity
      * @return SearchIndexEntity
      */
     public function update(SearchIndexEntity $entity)
@@ -148,7 +144,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param SearchIndexEntity $entity
      * @return SearchIndexEntity
      */
     public function remove(SearchIndexEntity $entity)
@@ -168,7 +163,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param SearchIndexEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SearchIndexEntity $entity)
@@ -182,7 +176,6 @@ class SearchIndexRepository
     }
 
     /**
-     * @param array $data
      * @return SearchIndexEntity
      */
     public function getEntityFromDatabaseArray(array $data)

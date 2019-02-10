@@ -373,7 +373,7 @@ exit;
  * @param mixed $bDocType
  * @param mixed $ziptype
  */
-function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype)
+function outputXmlFile($sessionid, $filenr, $bXmlDecl, $bOcXmlTag, $bDocType, $ziptype): void
 {
     global $zip_basedir, $zip_wwwdir, $sDateformat, $sDateShort, $t1, $t2, $t3;
     global $opt, $bLicense, $sLanguage, $safemode_zip, $sCharset, $bAttrlist;
@@ -1379,7 +1379,7 @@ function startXmlSession(
     return $sessionid;
 }
 
-function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlDecl, $ziptype)
+function outputXmlSessionFile($sessionid, $filenr, $bOcXmlTag, $bDocType, $bXmlDecl, $ziptype): void
 {
     sql('UPDATE xmlsession SET last_use=NOW() WHERE id=&1', $sessionid);
 

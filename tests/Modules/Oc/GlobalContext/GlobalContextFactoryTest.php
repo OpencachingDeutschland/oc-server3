@@ -16,7 +16,7 @@ class GlobalContextFactoryTest extends TestCase
     /**
      * Tests that createFromRequest returns the expected result.
      */
-    public function testThatCreateFromRequestReturnsExpectedResult()
+    public function testThatCreateFromRequestReturnsExpectedResult(): void
     {
         $preferredLanguage = 'de';
 

@@ -11,13 +11,13 @@ class xml2Array
     public $resParser;
     public $strXmlData;
 
-    public function push_pos(&$pos)
+    public function push_pos(&$pos): void
     {
         $this->stack[count($this->stack)] =& $pos;
         $this->stack_ref =& $pos;
     }
 
-    public function pop_pos()
+    public function pop_pos(): void
     {
         unset($this->stack[count($this->stack) - 1]);
         $this->stack_ref =& $this->stack[count($this->stack) - 1];
@@ -50,7 +50,7 @@ class xml2Array
         return $this->arrOutput;
     }
 
-    public function tagOpen($parser, $name, $attrs)
+    public function tagOpen($parser, $name, $attrs): void
     {
         if (isset($this->stack_ref[$name])) {
             if (!isset($this->stack_ref[$name][0])) {
@@ -73,7 +73,7 @@ class xml2Array
         }
     }
 
-    public function tagData($parser, $tagData)
+    public function tagData($parser, $tagData): void
     {
         if (mb_trim($tagData)) {
             if (isset($this->stack_ref['DATA'])) {
@@ -84,7 +84,7 @@ class xml2Array
         }
     }
 
-    public function tagClosed($parser, $name)
+    public function tagClosed($parser, $name): void
     {
         $this->pop_pos();
     }

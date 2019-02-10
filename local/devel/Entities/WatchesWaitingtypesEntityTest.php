@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class WatchesWaitingtypesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new WatchesWaitingtypesEntity();
         self::assertTrue($entity->isNew());

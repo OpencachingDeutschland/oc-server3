@@ -44,7 +44,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param array $where
      * @return GkMoveWaypointEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param array $where
      * @return GkMoveWaypointEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param GkMoveWaypointEntity $entity
      * @return GkMoveWaypointEntity
      */
     public function create(GkMoveWaypointEntity $entity)
@@ -127,7 +124,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param GkMoveWaypointEntity $entity
      * @return GkMoveWaypointEntity
      */
     public function update(GkMoveWaypointEntity $entity)
@@ -148,7 +144,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param GkMoveWaypointEntity $entity
      * @return GkMoveWaypointEntity
      */
     public function remove(GkMoveWaypointEntity $entity)
@@ -168,7 +163,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param GkMoveWaypointEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GkMoveWaypointEntity $entity)
@@ -180,7 +174,6 @@ class GkMoveWaypointRepository
     }
 
     /**
-     * @param array $data
      * @return GkMoveWaypointEntity
      */
     public function getEntityFromDatabaseArray(array $data)

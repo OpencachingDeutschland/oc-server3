@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class PicturesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new PicturesEntity();
         self::assertTrue($entity->isNew());

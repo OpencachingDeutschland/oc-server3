@@ -44,7 +44,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheAdoptionEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheAdoptionEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param GeoCacheAdoptionEntity $entity
      * @return GeoCacheAdoptionEntity
      */
     public function create(GeoCacheAdoptionEntity $entity)
@@ -127,7 +124,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param GeoCacheAdoptionEntity $entity
      * @return GeoCacheAdoptionEntity
      */
     public function update(GeoCacheAdoptionEntity $entity)
@@ -148,7 +144,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param GeoCacheAdoptionEntity $entity
      * @return GeoCacheAdoptionEntity
      */
     public function remove(GeoCacheAdoptionEntity $entity)
@@ -168,7 +163,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param GeoCacheAdoptionEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheAdoptionEntity $entity)
@@ -181,7 +175,6 @@ class CacheAdoptionRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheAdoptionEntity
      */
     public function getEntityFromDatabaseArray(array $data)

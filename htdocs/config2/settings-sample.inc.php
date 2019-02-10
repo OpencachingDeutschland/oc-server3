@@ -216,7 +216,7 @@ $opt['page']['showsocialmedia'] = true;
 // $opt['forum']['name'] = 'forum.opencaching.de';
 
 
-function post_config()
+function post_config(): void
 {
     global $opt, $menuitem, $tpl;
 

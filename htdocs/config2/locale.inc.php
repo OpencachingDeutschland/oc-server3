@@ -338,7 +338,7 @@ $opt['locale']['JA']['page']['subtitle2'] = '';
 $opt['locale']['JA']['mostly_translated'] = false;
 $opt['locale']['JA']['what3words'] = false;
 
-function set_php_locale()
+function set_php_locale(): void
 {
     global $opt;
 

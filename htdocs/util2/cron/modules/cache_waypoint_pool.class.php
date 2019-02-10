@@ -15,7 +15,7 @@ class CacheWayPointPool
     public $name = 'cache_waypoint_pool';
     public $interval = 604800; // once a week
 
-    public function run()
+    public function run(): void
     {
         global $opt;
         $nLastInsertsCount = 1;

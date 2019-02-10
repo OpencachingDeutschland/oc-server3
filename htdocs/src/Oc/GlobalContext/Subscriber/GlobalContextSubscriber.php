@@ -7,9 +7,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-/**
- * Class GlobalContextSubscriber
- */
 class GlobalContextSubscriber implements EventSubscriberInterface
 {
     /**
@@ -17,11 +14,6 @@ class GlobalContextSubscriber implements EventSubscriberInterface
      */
     private $contextFactory;
 
-    /**
-     * GlobalContextSubscriber constructor.
-     *
-     * @param GlobalContextFactory $contextFactory
-     */
     public function __construct(GlobalContextFactory $contextFactory)
     {
         $this->contextFactory = $contextFactory;
@@ -32,17 +24,14 @@ class GlobalContextSubscriber implements EventSubscriberInterface
      *
      * @return array The event names to listen to
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => 'onKernelRequest',
         ];
     }
 
-    /**
-     * @param GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(GetResponseEvent $event): void
     {
         if (!$event->isMasterRequest()) {
             return;

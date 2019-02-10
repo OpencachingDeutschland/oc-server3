@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GkItemTypeEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GkItemTypeEntity();
         self::assertTrue($entity->isNew());

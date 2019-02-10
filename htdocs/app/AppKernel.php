@@ -16,7 +16,7 @@ class AppKernel extends Kernel
     /**
      * Boots the current kernel.
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
         self::$instance = $this;
@@ -77,10 +77,9 @@ class AppKernel extends Kernel
     }
 
     /**
-     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
      * @throws \Exception
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }

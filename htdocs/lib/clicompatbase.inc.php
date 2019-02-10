@@ -77,7 +77,7 @@ $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
  * @param string $logtext
  * @param $details
  */
-function logentry($module, $eventId, $userId, $objectid1, $objectid2, $logtext, $details)
+function logentry($module, $eventId, $userId, $objectid1, $objectid2, $logtext, $details): void
 {
     sql(
         "INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
@@ -116,7 +116,7 @@ function escape_javascript($text)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_failed()
+function sql_failed(): void
 {
     sql_error();
 }
@@ -176,7 +176,7 @@ function getSysConfig($name, $default)
  * @param string $name
  * @param string $value
  */
-function setSysConfig($name, $value)
+function setSysConfig($name, $value): void
 {
     if (sqlValue('SELECT COUNT(*) FROM sysconfig WHERE name=\'' . sql_escape($name) . '\'', 0) == 1) {
         sql(
@@ -426,7 +426,7 @@ function sql_escape_backtick($value)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_error()
+function sql_error(): void
 {
     global $debug_page;
     global $sql_errormail;
@@ -485,7 +485,7 @@ function sql_error()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $warnmessage
  */
-function sql_warn($warnmessage)
+function sql_warn($warnmessage): void
 {
     global $sql_errormail;
     global $emailheaders;
@@ -593,7 +593,7 @@ function mb_trim($str)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
-function db_disconnect()
+function db_disconnect(): void
 {
     global $dbpconnect, $dblink;
 
@@ -608,7 +608,7 @@ function db_disconnect()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * database handling
  */
-function db_connect()
+function db_connect(): void
 {
     global $dblink, $dbusername, $dbname, $dbserver, $dbpasswd;
 

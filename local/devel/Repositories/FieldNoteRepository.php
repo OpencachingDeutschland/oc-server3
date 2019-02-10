@@ -44,7 +44,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param array $where
      * @return FieldNoteEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param array $where
      * @return FieldNoteEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param FieldNoteEntity $entity
      * @return FieldNoteEntity
      */
     public function create(FieldNoteEntity $entity)
@@ -127,7 +124,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param FieldNoteEntity $entity
      * @return FieldNoteEntity
      */
     public function update(FieldNoteEntity $entity)
@@ -148,7 +144,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param FieldNoteEntity $entity
      * @return FieldNoteEntity
      */
     public function remove(FieldNoteEntity $entity)
@@ -168,7 +163,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param FieldNoteEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(FieldNoteEntity $entity)
@@ -184,7 +178,6 @@ class FieldNoteRepository
     }
 
     /**
-     * @param array $data
      * @return FieldNoteEntity
      */
     public function getEntityFromDatabaseArray(array $data)

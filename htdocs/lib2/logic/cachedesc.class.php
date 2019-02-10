@@ -120,7 +120,7 @@ class cachedesc
         return $this->reCacheDesc->save();
     }
 
-    public function reload()
+    public function reload(): void
     {
         $this->reCacheDesc->reload();
     }

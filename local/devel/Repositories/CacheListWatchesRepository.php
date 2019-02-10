@@ -44,7 +44,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheListWatchesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheListWatchesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param GeoCacheListWatchesEntity $entity
      * @return GeoCacheListWatchesEntity
      */
     public function create(GeoCacheListWatchesEntity $entity)
@@ -127,7 +124,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param GeoCacheListWatchesEntity $entity
      * @return GeoCacheListWatchesEntity
      */
     public function update(GeoCacheListWatchesEntity $entity)
@@ -148,7 +144,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param GeoCacheListWatchesEntity $entity
      * @return GeoCacheListWatchesEntity
      */
     public function remove(GeoCacheListWatchesEntity $entity)
@@ -168,7 +163,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param GeoCacheListWatchesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheListWatchesEntity $entity)
@@ -180,7 +174,6 @@ class CacheListWatchesRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheListWatchesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

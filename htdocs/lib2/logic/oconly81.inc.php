@@ -7,7 +7,7 @@
 /**
  * @param $userid
 */
-function set_oconly81_tpldata($userid)
+function set_oconly81_tpldata($userid): void
 {
     global $tpl;
 

@@ -48,7 +48,7 @@ analyzedb();
 restorevalues();
 downloadpictures();
 
-function downloadpictures()
+function downloadpictures(): void
 {
     global $opt;
 
@@ -89,7 +89,7 @@ function downloadpictures()
     mysqli_free_result($rs);
 }
 
-function resetdb()
+function resetdb(): void
 {
     // alle datentabellen leeren
     $datatables[] = 'cache_desc';
@@ -120,7 +120,7 @@ function resetdb()
     }
 }
 
-function analyzedb()
+function analyzedb(): void
 {
     // alle tabellen analysieren
     $rs = sql('SHOW TABLES');
@@ -130,7 +130,7 @@ function analyzedb()
     mysqli_free_result($rs);
 }
 
-function optimizedb()
+function optimizedb(): void
 {
     // alle tabellen optimieren
     $rs = sql('SHOW TABLES');
@@ -140,7 +140,7 @@ function optimizedb()
     mysqli_free_result($rs);
 }
 
-function getxmlfiles()
+function getxmlfiles(): void
 {
     global $opt;
 
@@ -251,7 +251,7 @@ function getxmlfiles()
     }
 }
 
-function unzipxmlfiles()
+function unzipxmlfiles(): void
 {
     global $opt;
 
@@ -303,7 +303,7 @@ function unzipxmlfiles()
     closedir($hDir);
 }
 
-function importxmlfiles()
+function importxmlfiles(): void
 {
     global $opt;
 
@@ -471,7 +471,7 @@ function importxmlfile($file)
     }
 }
 
-function cleartmpdir()
+function cleartmpdir(): void
 {
     global $opt;
 
@@ -486,7 +486,7 @@ function cleartmpdir()
     closedir($hDir);
 }
 
-function switchdb()
+function switchdb(): void
 {
     global $argv, $opt, $dblink;
     global $dbname, $dbserver, $dbusername, $dbpasswd;
@@ -536,7 +536,7 @@ function switchdb()
 }
 
 
-function ImportUserArray($r)
+function ImportUserArray($r): void
 {
     // prüfen ob alle elemente vorhanden sind
     if (!isset($r['ID']['__DATA']) ||
@@ -615,7 +615,7 @@ function ImportUserArray($r)
     mysqli_free_result($rs);
 }
 
-function ImportCacheArray($r)
+function ImportCacheArray($r): void
 {
     // prüfen ob alle elemente vorhanden sind
     if (!isset($r['ID']['__DATA']) ||
@@ -788,7 +788,7 @@ function ImportCacheArray($r)
     mysqli_free_result($rs);
 }
 
-function ImportCacheDescArray($r)
+function ImportCacheDescArray($r): void
 {
     /*
         [ID][__DATA] => 7A894AEA-59EE-673B-C56B-6BC36E12701B
@@ -942,7 +942,7 @@ function ImportCacheDescArray($r)
     mysqli_free_result($rsDesc);
 }
 
-function ImportCachelogArray($r)
+function ImportCachelogArray($r): void
 {
     /*
         [ID][__DATA] => A2D85008-3F10-1B6F-C97F-01B47AA380F3
@@ -1046,7 +1046,7 @@ function ImportCachelogArray($r)
     }
 }
 
-function ImportPictureArray($r)
+function ImportPictureArray($r): void
 {
     /*
         [ID][__DATA] => DCFDE050-B42F-A76A-E9C7-BCCCC8812A23
@@ -1156,7 +1156,7 @@ function ImportPictureArray($r)
     }
 }
 
-function ImportRemovedObjectArray($r)
+function ImportRemovedObjectArray($r): void
 {
     /*
         [OBJECT][__ATTR][TYPE] => 1
@@ -1283,7 +1283,7 @@ function removedObject($uuid)
  * @param mixed $uuid
  * @param mixed $r
  */
-function importError($recordtype, $uuid, $r, $info)
+function importError($recordtype, $uuid, $r, $info): void
 {
     echo 'error: ' . $recordtype . ' (' . $uuid . '): ' . $info . "\n";
 }
@@ -1294,12 +1294,12 @@ function importError($recordtype, $uuid, $r, $info)
  * @param mixed $uuid
  * @param mixed $r
  */
-function importWarn($recordtype, $uuid, $r, $info)
+function importWarn($recordtype, $uuid, $r, $info): void
 {
     echo 'warn: ' . $recordtype . ' (' . $uuid . '): ' . $info . "\n";
 }
 
-function restorevalues()
+function restorevalues(): void
 {
     $rs = sql(
         'SELECT `replication_overwritetypes`.`table` `table`, `replication_overwritetypes`.`field` `field`, `replication_overwritetypes`.`uuid_fieldname` `uuid_fieldname`, `replication_overwrite`.`value` `value`, `replication_overwrite`.`uuid` `uuid` FROM `replication_overwrite`, `replication_overwritetypes` WHERE `replication_overwrite`.`type` = `replication_overwritetypes`.`id`'

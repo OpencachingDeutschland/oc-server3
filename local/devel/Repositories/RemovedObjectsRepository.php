@@ -44,7 +44,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param array $where
      * @return RemovedObjectsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param array $where
      * @return RemovedObjectsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param RemovedObjectsEntity $entity
      * @return RemovedObjectsEntity
      */
     public function create(RemovedObjectsEntity $entity)
@@ -127,7 +124,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param RemovedObjectsEntity $entity
      * @return RemovedObjectsEntity
      */
     public function update(RemovedObjectsEntity $entity)
@@ -148,7 +144,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param RemovedObjectsEntity $entity
      * @return RemovedObjectsEntity
      */
     public function remove(RemovedObjectsEntity $entity)
@@ -168,7 +163,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param RemovedObjectsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(RemovedObjectsEntity $entity)
@@ -184,7 +178,6 @@ class RemovedObjectsRepository
     }
 
     /**
-     * @param array $data
      * @return RemovedObjectsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

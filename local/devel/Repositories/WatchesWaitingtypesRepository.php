@@ -44,7 +44,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param array $where
      * @return WatchesWaitingtypesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param array $where
      * @return WatchesWaitingtypesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param WatchesWaitingtypesEntity $entity
      * @return WatchesWaitingtypesEntity
      */
     public function create(WatchesWaitingtypesEntity $entity)
@@ -127,7 +124,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param WatchesWaitingtypesEntity $entity
      * @return WatchesWaitingtypesEntity
      */
     public function update(WatchesWaitingtypesEntity $entity)
@@ -148,7 +144,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param WatchesWaitingtypesEntity $entity
      * @return WatchesWaitingtypesEntity
      */
     public function remove(WatchesWaitingtypesEntity $entity)
@@ -168,7 +163,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param WatchesWaitingtypesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(WatchesWaitingtypesEntity $entity)
@@ -180,7 +174,6 @@ class WatchesWaitingtypesRepository
     }
 
     /**
-     * @param array $data
      * @return WatchesWaitingtypesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

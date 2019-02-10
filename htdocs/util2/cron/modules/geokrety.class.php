@@ -13,7 +13,7 @@ class Geokrety
     public $name = 'geokrety';
     public $interval = 900;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 
@@ -58,7 +58,7 @@ class Geokrety
     /**
      * @param string $file
      */
-    public function removeXML($file)
+    public function removeXML($file): void
     {
         @unlink($file);
     }
@@ -66,7 +66,7 @@ class Geokrety
     /**
      * @param string $file
      */
-    public function importXML($file)
+    public function importXML($file): void
     {
         global $opt;
 
@@ -123,7 +123,7 @@ class Geokrety
     /**
      * @param DOMNode $element
      */
-    public function importGeoKret($element)
+    public function importGeoKret($element): void
     {
         global $opt;
 
@@ -204,7 +204,7 @@ class Geokrety
     /**
      * @param DOMNode $element
      */
-    public function importMove($element)
+    public function importMove($element): void
     {
         global $opt;
 
@@ -293,7 +293,7 @@ class Geokrety
      * @param int $id
      * @param $name
      */
-    public function checkGeoKretType($id, $name)
+    public function checkGeoKretType($id, $name): void
     {
         sql(
             "INSERT INTO `gk_item_type` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'",
@@ -306,7 +306,7 @@ class Geokrety
      * @param int $id
      * @param $name
      */
-    public function checkUser($id, $name)
+    public function checkUser($id, $name): void
     {
         if ($id === 0) {
             return;
@@ -319,7 +319,7 @@ class Geokrety
      * @param int $id
      * @param $name
      */
-    public function checkMoveType($id, $name)
+    public function checkMoveType($id, $name): void
     {
         sql(
             "INSERT INTO `gk_move_type` (`id`, `name`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `name`='&2'",

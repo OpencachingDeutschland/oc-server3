@@ -44,7 +44,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheCountriesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheCountriesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param GeoCacheCountriesEntity $entity
      * @return GeoCacheCountriesEntity
      */
     public function create(GeoCacheCountriesEntity $entity)
@@ -127,7 +124,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param GeoCacheCountriesEntity $entity
      * @return GeoCacheCountriesEntity
      */
     public function update(GeoCacheCountriesEntity $entity)
@@ -148,7 +144,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param GeoCacheCountriesEntity $entity
      * @return GeoCacheCountriesEntity
      */
     public function remove(GeoCacheCountriesEntity $entity)
@@ -168,7 +163,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param GeoCacheCountriesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheCountriesEntity $entity)
@@ -183,7 +177,6 @@ class CacheCountriesRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheCountriesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

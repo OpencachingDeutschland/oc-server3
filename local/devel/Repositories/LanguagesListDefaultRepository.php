@@ -44,7 +44,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param array $where
      * @return LanguagesListDefaultEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param array $where
      * @return LanguagesListDefaultEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param LanguagesListDefaultEntity $entity
      * @return LanguagesListDefaultEntity
      */
     public function create(LanguagesListDefaultEntity $entity)
@@ -127,7 +124,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param LanguagesListDefaultEntity $entity
      * @return LanguagesListDefaultEntity
      */
     public function update(LanguagesListDefaultEntity $entity)
@@ -148,7 +144,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param LanguagesListDefaultEntity $entity
      * @return LanguagesListDefaultEntity
      */
     public function remove(LanguagesListDefaultEntity $entity)
@@ -168,7 +163,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param LanguagesListDefaultEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(LanguagesListDefaultEntity $entity)
@@ -180,7 +174,6 @@ class LanguagesListDefaultRepository
     }
 
     /**
-     * @param array $data
      * @return LanguagesListDefaultEntity
      */
     public function getEntityFromDatabaseArray(array $data)

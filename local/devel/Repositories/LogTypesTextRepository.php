@@ -44,7 +44,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param array $where
      * @return LogTypesTextEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param array $where
      * @return LogTypesTextEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param LogTypesTextEntity $entity
      * @return LogTypesTextEntity
      */
     public function create(LogTypesTextEntity $entity)
@@ -127,7 +124,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param LogTypesTextEntity $entity
      * @return LogTypesTextEntity
      */
     public function update(LogTypesTextEntity $entity)
@@ -148,7 +144,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param LogTypesTextEntity $entity
      * @return LogTypesTextEntity
      */
     public function remove(LogTypesTextEntity $entity)
@@ -168,7 +163,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param LogTypesTextEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(LogTypesTextEntity $entity)
@@ -183,7 +177,6 @@ class LogTypesTextRepository
     }
 
     /**
-     * @param array $data
      * @return LogTypesTextEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -13,7 +13,7 @@ class PurgeLogs
     public $name = 'purge_logs';
     public $interval = 86400; // daily
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 

@@ -5,33 +5,39 @@
 
 namespace Oc\Command;
 
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Process\Exception\LogicException;
-use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\Process;
 
-/**
- * Class CodeSnifferCommand
- */
 class CodeSnifferCommand extends AbstractCommand
 {
-    const COMMAND_NAME = 'code:sniff';
-
-    const OPTION_DRY_RUN = 'dry';
-    const OPTION_FIX = 'fix';
-    const OPTION_XML = 'xml';
-    const OPTION_DIR = 'dir';
+    /**
+     * @var string
+     */
+    public const COMMAND_NAME = 'code:sniff';
 
     /**
-     * Configures the command.
-     *
-     *
-     * @throws InvalidArgumentException
+     * @var string
      */
-    protected function configure()
+    public const OPTION_DRY_RUN = 'dry';
+
+    /**
+     * @var string
+     */
+    public const OPTION_FIX = 'fix';
+
+    /**
+     * @var string
+     */
+    public const OPTION_XML = 'xml';
+
+    /**
+     * @var string
+     */
+    public const OPTION_DIR = 'dir';
+
+    protected function configure(): void
     {
         parent::configure();
 
@@ -45,18 +51,7 @@ class CodeSnifferCommand extends AbstractCommand
         $this->addOption(self::OPTION_DIR, 'd', InputOption::VALUE_REQUIRED, 'Specify directory or file to check');
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @throws RuntimeException
-     * @throws LogicException
-     * @throws InvalidArgumentException
-     * @return int|null
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $command = $input->getOption(self::OPTION_FIX) ? 'phpcbf' : 'phpcs';
         $cmd = 'vendor/bin/' . ($command) . ' -n -p --colors -s --standard=../tests/ruleset.xml';
@@ -74,7 +69,7 @@ class CodeSnifferCommand extends AbstractCommand
         }
 
         $process = new Process($cmd, $this->rootPath, null, null, 9600);
-        $process->run(function ($type, $buffer) {
+        $process->run(function ($type, $buffer): void {
             echo $buffer;
         });
 

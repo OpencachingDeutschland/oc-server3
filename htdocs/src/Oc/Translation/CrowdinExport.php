@@ -11,15 +11,12 @@ class CrowdinExport
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function exportTranslations()
+    public function exportTranslations(): void
     {
         $savePath = __DIR__ . '/../../../var/crowdin/';
         // Identifier;SourceString;Comment;langKey

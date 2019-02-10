@@ -30,6 +30,7 @@ install:
     - ./psh.phar travis-ci:init
 
 script:
+    - ./psh.phar travis-ci:code-style
     - ./psh.phar travis-ci:unit
 
 after_success:

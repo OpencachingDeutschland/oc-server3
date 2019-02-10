@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierFormatHourTest extends AbstractModuleTest
 {
-    public function testFormatHour()
+    public function testFormatHour(): void
     {
         self::assertEquals(
             '1:30',

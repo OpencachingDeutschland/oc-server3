@@ -7,7 +7,7 @@ use okapi\core\Okapi;
 
 class PackageTest extends AbstractModuleTest
 {
-    public function testIfOkapiPackageIsUsed()
+    public function testIfOkapiPackageIsUsed(): void
     {
         $message = 'please use for okapi update ./psh.phar update-okapi-package';
 

@@ -44,7 +44,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbIntdataEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbIntdataEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param GeodbIntdataEntity $entity
      * @return GeodbIntdataEntity
      */
     public function create(GeodbIntdataEntity $entity)
@@ -127,7 +124,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param GeodbIntdataEntity $entity
      * @return GeodbIntdataEntity
      */
     public function update(GeodbIntdataEntity $entity)
@@ -148,7 +144,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param GeodbIntdataEntity $entity
      * @return GeodbIntdataEntity
      */
     public function remove(GeodbIntdataEntity $entity)
@@ -168,7 +163,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param GeodbIntdataEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeodbIntdataEntity $entity)
@@ -186,7 +180,6 @@ class GeodbIntdataRepository
     }
 
     /**
-     * @param array $data
      * @return GeodbIntdataEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -12,9 +12,6 @@ class FieldNoteService
      */
     private $fieldNoteRepository;
 
-    /**
-     * @param FieldNoteRepository $fieldNoteRepository
-     */
     public function __construct(FieldNoteRepository $fieldNoteRepository)
     {
         $this->fieldNoteRepository = $fieldNoteRepository;
@@ -25,7 +22,7 @@ class FieldNoteService
      *
      * @return FieldNoteEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->fieldNoteRepository->fetchAll();
@@ -39,12 +36,9 @@ class FieldNoteService
     /**
      * Fetch by given where clause.
      *
-     * @param array $where
-     * @param array $order
-     *
      * @return FieldNoteEntity[]
      */
-    public function fetchBy(array $where = [], array $order = [])
+    public function fetchBy(array $where = [], array $order = []): array
     {
         try {
             $result = $this->fieldNoteRepository->fetchBy($where, $order);
@@ -56,13 +50,9 @@ class FieldNoteService
     }
 
     /**
-     * Fetches a page by slug.
-     *
-     * @param array $where
-     *
-     * @return null|FieldNoteEntity
+     * Fetches a page by given where clause.
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?FieldNoteEntity
     {
         try {
             $result = $this->fieldNoteRepository->fetchOneBy($where);
@@ -75,36 +65,24 @@ class FieldNoteService
 
     /**
      * Creates a field note in the database.
-     *
-     * @param FieldNoteEntity $entity
-     *
-     * @return FieldNoteEntity
      */
-    public function create(FieldNoteEntity $entity)
+    public function create(FieldNoteEntity $entity): FieldNoteEntity
     {
         return $this->fieldNoteRepository->create($entity);
     }
 
     /**
      * Update a field note in the database.
-     *
-     * @param FieldNoteEntity $entity
-     *
-     * @return FieldNoteEntity
      */
-    public function update(FieldNoteEntity $entity)
+    public function update(FieldNoteEntity $entity): FieldNoteEntity
     {
         return $this->fieldNoteRepository->update($entity);
     }
 
     /**
      * Removes a field note from the database.
-     *
-     * @param FieldNoteEntity $entity
-     *
-     * @return FieldNoteEntity
      */
-    public function remove(FieldNoteEntity $entity)
+    public function remove(FieldNoteEntity $entity): FieldNoteEntity
     {
         return $this->fieldNoteRepository->remove($entity);
     }
@@ -112,11 +90,9 @@ class FieldNoteService
     /**
      * Fetch all field notes for field note listing in profile.
      *
-     * @param int $userId
-     *
      * @return FieldNoteEntity[]
      */
-    public function getUserListing($userId)
+    public function getUserListing(int $userId): array
     {
         $fieldNotes = $this->fetchBy([
             'user_id' => $userId,
@@ -130,12 +106,8 @@ class FieldNoteService
 
     /**
      * Fetches the latest field note for given user id.
-     *
-     * @param int $userId
-     *
-     * @return FieldNoteEntity|null
      */
-    public function getLatestUserFieldNote($userId)
+    public function getLatestUserFieldNote(int $userId): ?FieldNoteEntity
     {
         try {
             $result = $this->fieldNoteRepository->getLatestUserFieldNote($userId);

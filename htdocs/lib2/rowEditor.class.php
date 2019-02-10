@@ -36,7 +36,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->pk[$sField] = [
             'type' => RE_TYPE_INT,
@@ -57,7 +57,7 @@ class rowEditor
      * @param $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->pk[$sField] = [
             'type' => RE_TYPE_FLOAT,
@@ -74,7 +74,7 @@ class rowEditor
      * @param $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->pk[$sField] = [
             'type' => RE_TYPE_DOUBLE,
@@ -91,7 +91,7 @@ class rowEditor
      * @param $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         if (($nInsertFunction & RE_INSERT_AUTOUUID) == RE_INSERT_AUTOUUID) {
             die('rowEditor: RE_INSERT_AUTOUUID not supported for primary key fields');
@@ -112,7 +112,7 @@ class rowEditor
      * @param $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->pk[$sField] = [
             'type' => RE_TYPE_BOOLEAN,
@@ -129,7 +129,7 @@ class rowEditor
      * @param $bNullable
      * @param int $nInsertFunction
      */
-    public function addPKDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addPKDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->pk[$sField] = [
             'type' => RE_TYPE_DATE,
@@ -146,7 +146,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addInt($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_INT,
@@ -164,7 +164,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addFloat($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_FLOAT,
@@ -182,7 +182,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addDouble($sField, $nDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_DOUBLE,
@@ -200,7 +200,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addString($sField, $sDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_STRING,
@@ -218,7 +218,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addBoolean($sField, $bDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_BOOLEAN,
@@ -236,7 +236,7 @@ class rowEditor
      * @param bool $bNullable
      * @param int $nInsertFunction
      */
-    public function addDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING)
+    public function addDate($sField, $dDefault, $bNullable, $nInsertFunction = RE_INSERT_NOTHING): void
     {
         $this->fields[$sField] = [
             'type' => RE_TYPE_DATE,
@@ -251,7 +251,7 @@ class rowEditor
     /**
      * @param $sField
      */
-    public function removePK($sField)
+    public function removePK($sField): void
     {
         unset($this->pk[$sField]);
     }
@@ -259,7 +259,7 @@ class rowEditor
     /**
      * @param $sField
      */
-    public function removeField($sField)
+    public function removeField($sField): void
     {
         unset($this->fields[$sField]);
     }
@@ -300,7 +300,7 @@ class rowEditor
     /**
      * @param $PKValues
      */
-    public function addNew($PKValues)
+    public function addNew($PKValues): void
     {
         $this->pSetPK($PKValues);
 
@@ -320,7 +320,7 @@ class rowEditor
     /**
      * @param mixed $PKValues
      */
-    public function pSetPK($PKValues)
+    public function pSetPK($PKValues): void
     {
         $this->pResetValues();
 
@@ -358,11 +358,8 @@ class rowEditor
             $i++;
         }
     }
-
-    /**
-     *
-     */
-    public function pResetValues()
+    
+    public function pResetValues(): void
     {
         foreach ($this->fields as $k => $field) {
             $this->fields[$k]['value'] = $field['default'];
@@ -598,7 +595,7 @@ class rowEditor
         return true;
     }
 
-    public function reload()
+    public function reload(): void
     {
         $pkv = [];
         foreach ($this->pk as $k => $v) {

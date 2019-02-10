@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class LanguagesListDefaultEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new LanguagesListDefaultEntity();
         self::assertTrue($entity->isNew());

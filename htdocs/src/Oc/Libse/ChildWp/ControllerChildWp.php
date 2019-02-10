@@ -93,14 +93,14 @@ class ControllerChildWp
         return $presenter;
     }
 
-    private function verifyCacheId($template, $cacheId, $cacheManager)
+    private function verifyCacheId($template, $cacheId, $cacheManager): void
     {
         if (!$cacheManager->exists($cacheId) || !$cacheManager->userMayModify($cacheId)) {
             $template->error(ERROR_CACHE_NOT_EXISTS);
         }
     }
 
-    private function verifyChildWp($template, $childWp, $cacheId)
+    private function verifyChildWp($template, $childWp, $cacheId): void
     {
         if (empty($childWp) || $cacheId != $childWp['cacheid']) {
             $template->error(ERROR_CACHE_NOT_EXISTS);

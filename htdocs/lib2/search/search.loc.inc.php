@@ -10,7 +10,7 @@ $search_output_file_download = true;
 $content_type_plain = 'application/loc';
 
 
-function search_output()
+function search_output(): void
 {
     global $opt;
     global $state_temporarily_na, $state_archived, $state_locked;

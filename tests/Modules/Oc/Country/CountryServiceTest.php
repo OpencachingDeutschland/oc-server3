@@ -16,7 +16,7 @@ class CountryServiceTest extends TestCase
     /**
      * Tests fetching all records with success - no exception is thrown.
      */
-    public function testFetchingAllReturnsArrayWithCountryEntities()
+    public function testFetchingAllReturnsArrayWithCountryEntities(): void
     {
         $entityArray = [
             new CountryEntity(),
@@ -37,7 +37,7 @@ class CountryServiceTest extends TestCase
     /**
      * Tests fetching all records - exception is thrown because there are no records.
      */
-    public function testFetchingAllThrowsException()
+    public function testFetchingAllThrowsException(): void
     {
         $exception = new RecordsNotFoundException('No records found');
 
@@ -55,7 +55,7 @@ class CountryServiceTest extends TestCase
     /**
      * Tests that create returns the entity.
      */
-    public function testCreateReturnsEntity()
+    public function testCreateReturnsEntity(): void
     {
         $entity = new CountryEntity();
 
@@ -74,7 +74,7 @@ class CountryServiceTest extends TestCase
     /**
      * Tests that update returns the entity.
      */
-    public function testUpdateReturnsEntity()
+    public function testUpdateReturnsEntity(): void
     {
         $entity = new CountryEntity();
 
@@ -93,7 +93,7 @@ class CountryServiceTest extends TestCase
     /**
      * Tests that remove returns the entity.
      */
-    public function testRemoveReturnsEntity()
+    public function testRemoveReturnsEntity(): void
     {
         $entity = new CountryEntity();
 

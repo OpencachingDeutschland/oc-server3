@@ -5,11 +5,6 @@ namespace Oc\Page;
 use Oc\Page\Persistence\BlockEntity;
 use Oc\Page\Persistence\PageEntity;
 
-/**
- * Class PageStruct
- *
- * @package Oc\Page
- */
 class PageStruct
 {
     /**
@@ -38,15 +33,9 @@ class PageStruct
     private $fallbackLocale;
 
     /**
-     * PageStruct constructor.
-     *
-     * @param PageEntity $pageEntity
      * @param BlockEntity[] $blockEntities
-     * @param string $locale
-     * @param string $fallbackLocale
-     * @param bool $isFallback
      */
-    public function __construct(PageEntity $pageEntity, array $blockEntities, $locale, $fallbackLocale, $isFallback)
+    public function __construct(PageEntity $pageEntity, array $blockEntities, string $locale, string $fallbackLocale, bool $isFallback)
     {
         $this->pageEntity = $pageEntity;
         $this->blockEntities = $blockEntities;
@@ -55,10 +44,7 @@ class PageStruct
         $this->fallbackLocale = $fallbackLocale;
     }
 
-    /**
-     * @return PageEntity
-     */
-    public function getPageEntity()
+    public function getPageEntity(): PageEntity
     {
         return $this->pageEntity;
     }
@@ -66,31 +52,22 @@ class PageStruct
     /**
      * @return BlockEntity[]
      */
-    public function getBlockEntities()
+    public function getBlockEntities(): array
     {
         return $this->blockEntities;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }
 
-    /**
-     * @return string
-     */
-    public function getFallbackLocale()
+    public function getFallbackLocale(): string
     {
         return $this->fallbackLocale;
     }
 
-    /**
-     * @return bool
-     */
-    public function isFallback()
+    public function isFallback(): bool
     {
         return $this->isFallback;
     }

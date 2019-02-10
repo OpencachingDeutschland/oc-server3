@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierRot13Test extends AbstractModuleTest
 {
-    public function testRot13()
+    public function testRot13(): void
     {
         self::assertEquals(
             'Yberz vcfhz qbybe fvg nzrg,',

@@ -44,7 +44,6 @@ class GkItemRepository
     }
 
     /**
-     * @param array $where
      * @return GkItemEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GkItemRepository
     }
 
     /**
-     * @param array $where
      * @return GkItemEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GkItemRepository
     }
 
     /**
-     * @param GkItemEntity $entity
      * @return GkItemEntity
      */
     public function create(GkItemEntity $entity)
@@ -127,7 +124,6 @@ class GkItemRepository
     }
 
     /**
-     * @param GkItemEntity $entity
      * @return GkItemEntity
      */
     public function update(GkItemEntity $entity)
@@ -148,7 +144,6 @@ class GkItemRepository
     }
 
     /**
-     * @param GkItemEntity $entity
      * @return GkItemEntity
      */
     public function remove(GkItemEntity $entity)
@@ -168,7 +163,6 @@ class GkItemRepository
     }
 
     /**
-     * @param GkItemEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GkItemEntity $entity)
@@ -188,7 +182,6 @@ class GkItemRepository
     }
 
     /**
-     * @param array $data
      * @return GkItemEntity
      */
     public function getEntityFromDatabaseArray(array $data)

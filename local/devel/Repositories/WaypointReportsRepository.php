@@ -44,7 +44,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param array $where
      * @return WaypointReportsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param array $where
      * @return WaypointReportsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param WaypointReportsEntity $entity
      * @return WaypointReportsEntity
      */
     public function create(WaypointReportsEntity $entity)
@@ -127,7 +124,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param WaypointReportsEntity $entity
      * @return WaypointReportsEntity
      */
     public function update(WaypointReportsEntity $entity)
@@ -148,7 +144,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param WaypointReportsEntity $entity
      * @return WaypointReportsEntity
      */
     public function remove(WaypointReportsEntity $entity)
@@ -168,7 +163,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param WaypointReportsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(WaypointReportsEntity $entity)
@@ -184,7 +178,6 @@ class WaypointReportsRepository
     }
 
     /**
-     * @param array $data
      * @return WaypointReportsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

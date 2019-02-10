@@ -37,7 +37,7 @@ foreach ($importFiles as $filename) {
 }
 
 
-function importGns($filename)
+function importGns($filename): void
 {
     echo "Importing '$filename'...\n";
     $file = fopen($filename, 'r');

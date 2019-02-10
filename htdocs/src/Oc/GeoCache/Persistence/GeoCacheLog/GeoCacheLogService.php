@@ -12,9 +12,6 @@ class GeoCacheLogService
      */
     private $geoCacheRepository;
 
-    /**
-     * @param GeoCacheLogRepository $geoCacheRepository
-     */
     public function __construct(GeoCacheLogRepository $geoCacheRepository)
     {
         $this->geoCacheRepository = $geoCacheRepository;
@@ -25,7 +22,7 @@ class GeoCacheLogService
      *
      * @return GeoCacheLogEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->geoCacheRepository->fetchAll();
@@ -38,12 +35,8 @@ class GeoCacheLogService
 
     /**
      * Fetches the latest geo cache log for given user id.
-     *
-     * @param int $userId
-     *
-     * @return GeoCacheLogEntity|null
      */
-    public function getLatestUserLog($userId)
+    public function getLatestUserLog(int $userId): ?GeoCacheLogEntity
     {
         try {
             $result = $this->geoCacheRepository->getLatestUserLog($userId);
@@ -56,36 +49,24 @@ class GeoCacheLogService
 
     /**
      * Creates a GeoCacheLog in the database.
-     *
-     * @param GeoCacheLogEntity $entity
-     *
-     * @return GeoCacheLogEntity
      */
-    public function create(GeoCacheLogEntity $entity)
+    public function create(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         return $this->geoCacheRepository->create($entity);
     }
 
     /**
      * Update a GeoCacheLog in the database.
-     *
-     * @param GeoCacheLogEntity $entity
-     *
-     * @return GeoCacheLogEntity
      */
-    public function update(GeoCacheLogEntity $entity)
+    public function update(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         return $this->geoCacheRepository->update($entity);
     }
 
     /**
      * Removes a GeoCacheLog from the database.
-     *
-     * @param GeoCacheLogEntity $entity
-     *
-     * @return GeoCacheLogEntity
      */
-    public function remove(GeoCacheLogEntity $entity)
+    public function remove(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         return $this->geoCacheRepository->remove($entity);
     }

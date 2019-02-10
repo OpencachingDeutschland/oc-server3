@@ -15,7 +15,7 @@
 okapi_update();
 
 
-function okapi_update()
+function okapi_update(): void
 {
     require_once __DIR__ . '/../htdocs/vendor/autoload.php';
 

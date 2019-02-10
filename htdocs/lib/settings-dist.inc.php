@@ -174,7 +174,7 @@ $opt['db']['slave']['primary'] = - 1;
 
 /* post_config() is invoked directly before the first HTML line of the main.tpl.php is sent to the client.
  */
-function post_config()
+function post_config(): void
 {
     global $menu, $locale;
 

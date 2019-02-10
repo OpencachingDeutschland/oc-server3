@@ -13,7 +13,7 @@ class Replicate
     public $name = 'replicate';
     public $interval = 3600;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 

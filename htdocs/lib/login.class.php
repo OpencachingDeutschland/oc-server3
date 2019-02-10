@@ -53,7 +53,7 @@ class login
         }
     }
 
-    public function pClear()
+    public function pClear(): void
     {
         // set to no valid login
         $this->userid = 0;
@@ -67,7 +67,7 @@ class login
         $this->pStoreCookie();
     }
 
-    public function pStoreCookie()
+    public function pStoreCookie(): void
     {
         global $cookie;
         $cookie->set('userid', $this->userid);
@@ -77,7 +77,7 @@ class login
         $cookie->set('sessionid', $this->sessionid);
     }
 
-    public function verify()
+    public function verify(): void
     {
         global $locale, $opt;
 

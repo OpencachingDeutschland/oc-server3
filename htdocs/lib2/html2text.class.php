@@ -369,7 +369,7 @@ class html2text
      *
      * @access public
      */
-    public function set_html($source, $from_file = false)
+    public function set_html($source, $from_file = false): void
     {
         $this->html = $source;
 
@@ -402,7 +402,7 @@ class html2text
      *
      * @access public
      */
-    public function print_text()
+    public function print_text(): void
     {
         print $this->get_text();
     }
@@ -413,7 +413,7 @@ class html2text
      * @access public
      * @see    print_text()
      */
-    public function p()
+    public function p(): void
     {
         print $this->get_text();
     }
@@ -425,7 +425,7 @@ class html2text
      * @access public
      * @param string $allowed_tags
      */
-    public function set_allowed_tags($allowed_tags = '')
+    public function set_allowed_tags($allowed_tags = ''): void
     {
         if (!empty($allowed_tags)) {
             $this->allowed_tags = $allowed_tags;
@@ -438,7 +438,7 @@ class html2text
      * @access public
      * @param string $url
      */
-    public function set_base_url($url = '')
+    public function set_base_url($url = ''): void
     {
         if (empty($url)) {
             if (!empty($_SERVER['HTTP_HOST'])) {
@@ -470,7 +470,7 @@ class html2text
      *
      * @access private
      */
-    public function _convert()
+    public function _convert(): void
     {
         // Variables used for building the link list
         $this->_link_count = 0;
@@ -531,7 +531,7 @@ class html2text
         } elseif (substr($link, 0, 11) == 'javascript:') {
             // Don't count the link; ignore it
             $additional = '';
-            // what about href="#anchor" ?
+        // what about href="#anchor" ?
         } else {
             $this->_link_count++;
             $this->_link_list .= '[' . $this->_link_count . '] ' . $this->url;

@@ -10,7 +10,7 @@ class SlaveCleanup
     public $name = 'slave_cleanup';
     public $interval = 300;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
         $rs = sql(
@@ -29,7 +29,7 @@ class SlaveCleanup
         $this->cleanupSlave(-1);
     }
 
-    public function cleanupSlave($slaveId)
+    public function cleanupSlave($slaveId): void
     {
         // connect the slave
         if ($slaveId == - 1) {
@@ -41,7 +41,7 @@ class SlaveCleanup
         $this->cleanupMapResult2($slaveId);
     }
 
-    public function cleanupMapResult2($slaveId)
+    public function cleanupMapResult2($slaveId): void
     {
         global $opt;
 

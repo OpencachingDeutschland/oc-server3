@@ -295,7 +295,7 @@ sql('DELETE FROM `watches_waiting` WHERE DATEDIFF(NOW(),`date_created`) > 35');
 CleanupAndExit($watchpid);
 
 
-function process_owner_log($user_id, $log_id)
+function process_owner_log($user_id, $log_id): void
 {
     global $opt, $dblink, $translate;
 
@@ -380,7 +380,7 @@ function process_owner_log($user_id, $log_id)
     logentry('watchlist', 1, $user_id, $log_id, 0, $watchtext, []);
 }
 
-function process_log_watch($user_id, $log_id)
+function process_log_watch($user_id, $log_id): void
 {
     global $opt, $dblink, $logwatch_text, $translate;
 
@@ -643,7 +643,7 @@ function CheckDaemon($PidFile)
 //
 // deletes pid-file
 //
-function CleanupAndExit($PidFile, $message = false)
+function CleanupAndExit($PidFile, $message = false): void
 {
     if ($pidfile = @fopen($PidFile, 'rb')) {
         $pid = fgets($pidfile, 20);

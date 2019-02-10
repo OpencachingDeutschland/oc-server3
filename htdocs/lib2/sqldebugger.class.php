@@ -49,7 +49,7 @@ class sqldebugger
         if (count($this->commands) >= 1000) {
             $this->cancel = true;
 
-            return mysqlI_query($dblink, $sql);
+            return mysqli_query($dblink, $sql);
         }
 
         $command = array();
@@ -111,7 +111,7 @@ class sqldebugger
         $bError = ($rsResult == false);
         $command['affected'] = mysqli_affected_rows($dblink);
 
-        $rs = mysqli_query( $dblink, 'SHOW WARNINGS');
+        $rs = mysqli_query($dblink, 'SHOW WARNINGS');
         while ($r = sql_fetch_assoc($rs)) {
             $command['warnings'][] = $r['Message'];
         }

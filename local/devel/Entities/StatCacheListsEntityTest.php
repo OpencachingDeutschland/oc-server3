@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class StatCacheListsEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new StatCacheListsEntity();
         self::assertTrue($entity->isNew());

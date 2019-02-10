@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class FunctionArraySearchTest extends AbstractModuleTest
 {
-    public function test_array_search_returns_empty_string()
+    public function test_array_search_returns_empty_string(): void
     {
         $smarty = new SmartyDummy();
         self::assertEquals(
@@ -20,7 +20,7 @@ class FunctionArraySearchTest extends AbstractModuleTest
         self::assertEquals(
             '',
             \smarty_function_array_search(
-                ['haystack' => ['test123','searching'], 'needle' => 'searching', 'var' => 'test'],
+                ['haystack' => ['test123', 'searching'], 'needle' => 'searching', 'var' => 'test'],
                 $smarty
             )
         );

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../htdocs/lib2/util.inc.php';
 
 class UtilIncTest extends AbstractModuleTest
 {
-    public function testNumber1000()
+    public function testNumber1000(): void
     {
         global $opt;
         $opt['template']['locale'] = 'de';
@@ -21,7 +21,7 @@ class UtilIncTest extends AbstractModuleTest
         self::assertEquals('1.000', \number1000(1000));
     }
 
-    public function testStrRot13Gc()
+    public function testStrRot13Gc(): void
     {
         $string = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr,[sed]  diam';
         $result = 'Yberz vcfhz qbybe fvg nzrg, pbafrgrghe fnqvcfpvat ryvge,[sed]  qvnz';
@@ -32,7 +32,7 @@ class UtilIncTest extends AbstractModuleTest
         self::assertEquals($result, \str_rot13_gc($string));
     }
 
-    public function testEscapeJavascript()
+    public function testEscapeJavascript(): void
     {
         self::assertEquals(
             '&quot;',
@@ -50,7 +50,7 @@ class UtilIncTest extends AbstractModuleTest
         );
     }
 
-    public function testIsValidEmailAddress()
+    public function testIsValidEmailAddress(): void
     {
         self::assertTrue((bool) \is_valid_email_address('example@test.com'));
 

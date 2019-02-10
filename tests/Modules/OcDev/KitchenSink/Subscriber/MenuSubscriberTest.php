@@ -8,7 +8,7 @@ use OcTest\Modules\TestCase;
 
 class MenuSubscriberTest extends TestCase
 {
-    public function test_get_subscribed_events_returns_array()
+    public function test_get_subscribed_events_returns_array(): void
     {
         $menuSubscriber = AppKernel::Container()->get(MenuSubscriber::class);
 

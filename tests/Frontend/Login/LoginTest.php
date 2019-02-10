@@ -9,7 +9,7 @@ use OcTest\Frontend\AbstractFrontendTest;
 
 class LoginTest extends AbstractFrontendTest
 {
-    public function testLoginFormOnStartPage()
+    public function testLoginFormOnStartPage(): void
     {
         $page = $this->session->getPage();
         $page->fillField('email', 'root');

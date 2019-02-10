@@ -111,7 +111,7 @@ class OcSmarty extends Smarty
      * @param string $resource_name
      * @param string $compile_id
      */
-    public function compile($resource_name, $compile_id = null)
+    public function compile($resource_name, $compile_id = null): void
     {
         if (!isset($compile_id)) {
             $compile_id = $this->compile_id;
@@ -144,11 +144,11 @@ class OcSmarty extends Smarty
     }
 
     /**
-     * @param null $dummy1
-     * @param null $dummy2
-     * @param null $dummy3
+     * @param null|mixed $dummy1
+     * @param null|mixed $dummy2
+     * @param null|mixed $dummy3
      */
-    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null)
+    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null): void
     {
         global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate, $useragent_msie;
         $cookie->close();
@@ -386,7 +386,7 @@ class OcSmarty extends Smarty
      *
      * @param int $id
      */
-    public function error($id)
+    public function error($id): void
     {
         $this->clear_all_assign();
         $this->caching = 0;
@@ -411,9 +411,9 @@ class OcSmarty extends Smarty
     /**
      * check if this template is valid
      *
-     * @param null $dummy1
-     * @param null $dummy2
-     * @param null $dummy3
+     * @param null|mixed $dummy1
+     * @param null|mixed $dummy2
+     * @param null|mixed $dummy3
      * @return bool|false|string
      */
     public function is_cached($dummy1 = null, $dummy2 = null, $dummy3 = null)
@@ -455,7 +455,7 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect($page)
+    public function redirect($page): void
     {
         global $cookie, $opt;
         $cookie->close();
@@ -496,7 +496,7 @@ class OcSmarty extends Smarty
     /**
      * redirect login function
      */
-    public function redirect_login()
+    public function redirect_login(): void
     {
         global $opt;
 
@@ -515,7 +515,7 @@ class OcSmarty extends Smarty
      * @param $name
      * @param $rs
      */
-    public function assign_rs($name, $rs)
+    public function assign_rs($name, $rs): void
     {
         $items = [];
         while ($r = sql_fetch_assoc($rs)) {
@@ -527,7 +527,7 @@ class OcSmarty extends Smarty
     /**
      * @param $src
      */
-    public function add_header_javascript($src)
+    public function add_header_javascript($src): void
     {
         $this->header_javascript[] = $src;
     }
@@ -535,7 +535,7 @@ class OcSmarty extends Smarty
     /**
      * @param $script
      */
-    public function add_body_load($script)
+    public function add_body_load($script): void
     {
         $this->body_load[] = $script;
     }
@@ -543,7 +543,7 @@ class OcSmarty extends Smarty
     /**
      * @param $script
      */
-    public function add_body_unload($script)
+    public function add_body_unload($script): void
     {
         $this->body_unload[] = $script;
     }
@@ -551,7 +551,7 @@ class OcSmarty extends Smarty
     /**
      * setting http header
      */
-    public function header()
+    public function header(): void
     {
         global $opt;
         global $cookie;
@@ -580,7 +580,7 @@ class OcSmarty extends Smarty
      * - use sDefault if sTarget is absolute and sDefault!=null
      *
      * @param $sTarget
-     * @param null $sDefault
+     * @param null|mixed $sDefault
      * @return null|string
      */
     public function checkTarget($sTarget, $sDefault = null)
@@ -600,7 +600,7 @@ class OcSmarty extends Smarty
         return $sTarget;
     }
 
-    public function acceptsAndPurifiesHtmlInput()
+    public function acceptsAndPurifiesHtmlInput(): void
     {
         // Prevent false XSS detection of harmless HTML code
         // see https://redmine.opencaching.de/issues/1137

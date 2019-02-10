@@ -8,9 +8,6 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class BlockRepository
- */
 class BlockRepository
 {
     /**
@@ -18,7 +15,7 @@ class BlockRepository
      *
      * @var string
      */
-    const TABLE = 'page_block';
+    public const TABLE = 'page_block';
 
     /**
      * @var Connection
@@ -27,8 +24,6 @@ class BlockRepository
 
     /**
      * BlockRepository constructor.
-     *
-     * @param Connection $connection
      */
     public function __construct(Connection $connection)
     {
@@ -38,12 +33,10 @@ class BlockRepository
     /**
      * Fetches all blocks of a page.
      *
-     * @param array $where
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return BlockEntity[]
      */
-    public function fetchBy(array $where = [])
+    public function fetchBy(array $where = []): array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -75,12 +68,9 @@ class BlockRepository
     /**
      * Creates a block in the database.
      *
-     * @param BlockEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return BlockEntity
      */
-    public function create(BlockEntity $entity)
+    public function create(BlockEntity $entity): BlockEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -101,12 +91,9 @@ class BlockRepository
     /**
      * Update a page in the database.
      *
-     * @param BlockEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return BlockEntity
      */
-    public function update(BlockEntity $entity)
+    public function update(BlockEntity $entity): BlockEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -128,12 +115,9 @@ class BlockRepository
     /**
      * Removes a page from the database.
      *
-     * @param BlockEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return BlockEntity
      */
-    public function remove(BlockEntity $entity)
+    public function remove(BlockEntity $entity): BlockEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -151,12 +135,8 @@ class BlockRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param BlockEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(BlockEntity $entity)
+    public function getDatabaseArrayFromEntity(BlockEntity $entity): array
     {
         return [
             'id' => $entity->id,
@@ -171,12 +151,8 @@ class BlockRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return BlockEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): BlockEntity
     {
         $entity = new BlockEntity();
         $entity->id = (int) $data['id'];

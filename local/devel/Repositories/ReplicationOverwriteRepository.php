@@ -44,7 +44,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param array $where
      * @return ReplicationOverwriteEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param array $where
      * @return ReplicationOverwriteEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param ReplicationOverwriteEntity $entity
      * @return ReplicationOverwriteEntity
      */
     public function create(ReplicationOverwriteEntity $entity)
@@ -127,7 +124,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param ReplicationOverwriteEntity $entity
      * @return ReplicationOverwriteEntity
      */
     public function update(ReplicationOverwriteEntity $entity)
@@ -148,7 +144,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param ReplicationOverwriteEntity $entity
      * @return ReplicationOverwriteEntity
      */
     public function remove(ReplicationOverwriteEntity $entity)
@@ -168,7 +163,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param ReplicationOverwriteEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(ReplicationOverwriteEntity $entity)
@@ -182,7 +176,6 @@ class ReplicationOverwriteRepository
     }
 
     /**
-     * @param array $data
      * @return ReplicationOverwriteEntity
      */
     public function getEntityFromDatabaseArray(array $data)

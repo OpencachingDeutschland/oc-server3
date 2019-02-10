@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class NutsCodesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new NutsCodesEntity();
         self::assertTrue($entity->isNew());

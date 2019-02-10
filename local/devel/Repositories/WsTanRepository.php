@@ -44,7 +44,6 @@ class WsTanRepository
     }
 
     /**
-     * @param array $where
      * @return WsTanEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class WsTanRepository
     }
 
     /**
-     * @param array $where
      * @return WsTanEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class WsTanRepository
     }
 
     /**
-     * @param WsTanEntity $entity
      * @return WsTanEntity
      */
     public function create(WsTanEntity $entity)
@@ -127,7 +124,6 @@ class WsTanRepository
     }
 
     /**
-     * @param WsTanEntity $entity
      * @return WsTanEntity
      */
     public function update(WsTanEntity $entity)
@@ -148,7 +144,6 @@ class WsTanRepository
     }
 
     /**
-     * @param WsTanEntity $entity
      * @return WsTanEntity
      */
     public function remove(WsTanEntity $entity)
@@ -168,7 +163,6 @@ class WsTanRepository
     }
 
     /**
-     * @param WsTanEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(WsTanEntity $entity)
@@ -180,7 +174,6 @@ class WsTanRepository
     }
 
     /**
-     * @param array $data
      * @return WsTanEntity
      */
     public function getEntityFromDatabaseArray(array $data)

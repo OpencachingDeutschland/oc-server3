@@ -44,7 +44,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param array $where
      * @return CountriesListDefaultEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param array $where
      * @return CountriesListDefaultEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param CountriesListDefaultEntity $entity
      * @return CountriesListDefaultEntity
      */
     public function create(CountriesListDefaultEntity $entity)
@@ -127,7 +124,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param CountriesListDefaultEntity $entity
      * @return CountriesListDefaultEntity
      */
     public function update(CountriesListDefaultEntity $entity)
@@ -148,7 +144,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param CountriesListDefaultEntity $entity
      * @return CountriesListDefaultEntity
      */
     public function remove(CountriesListDefaultEntity $entity)
@@ -168,7 +163,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param CountriesListDefaultEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(CountriesListDefaultEntity $entity)
@@ -180,7 +174,6 @@ class CountriesListDefaultRepository
     }
 
     /**
-     * @param array $data
      * @return CountriesListDefaultEntity
      */
     public function getEntityFromDatabaseArray(array $data)

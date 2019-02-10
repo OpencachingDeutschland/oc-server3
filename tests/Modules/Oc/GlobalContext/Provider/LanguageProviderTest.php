@@ -18,7 +18,7 @@ class LanguageProviderTest extends TestCase
     /**
      * Tests fetching the preferred language by session.
      */
-    public function testGetPreferredLanguageBySession()
+    public function testGetPreferredLanguageBySession(): void
     {
         $provider = new LanguageProvider(
             $this->getLanguageServiceMock(false),
@@ -37,7 +37,7 @@ class LanguageProviderTest extends TestCase
     /**
      * Tests fetching the preferred language by user.
      */
-    public function testGetPreferredLanguageByUser()
+    public function testGetPreferredLanguageByUser(): void
     {
         $provider = new LanguageProvider(
             $this->getLanguageServiceMock(false),
@@ -56,7 +56,7 @@ class LanguageProviderTest extends TestCase
     /**
      * Tests fetching the preferred language by user.
      */
-    public function testGetPreferredLanguageByUserThatNotExists()
+    public function testGetPreferredLanguageByUserThatNotExists(): void
     {
         $provider = new LanguageProvider(
             $this->getLanguageServiceMock(),
@@ -73,7 +73,7 @@ class LanguageProviderTest extends TestCase
     /**
      * Tests fetching the preferred language by user.
      */
-    public function testGetPreferredLanguageByAvailableTranslations()
+    public function testGetPreferredLanguageByAvailableTranslations(): void
     {
         $provider = new LanguageProvider(
             $this->getLanguageServiceMock(),
@@ -92,7 +92,7 @@ class LanguageProviderTest extends TestCase
     /**
      * Tests fetching the preferred language by user.
      */
-    public function testGetPreferredLanguageWithFallback()
+    public function testGetPreferredLanguageWithFallback(): void
     {
         $provider = new LanguageProvider(
             $this->getLanguageServiceMock(),

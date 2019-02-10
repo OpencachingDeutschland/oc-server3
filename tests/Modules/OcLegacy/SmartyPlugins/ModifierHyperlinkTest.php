@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierHyperlinkTest extends AbstractModuleTest
 {
-    public function testHyperlink()
+    public function testHyperlink(): void
     {
         self::assertEquals(
             '<a href="https://www.opencaching.de" alt="" target="_blank">https://www.opencaching.de</a>',

@@ -13,7 +13,7 @@ class UserEntityTest extends TestCase
     /**
      * Tests that isNew returns true when the identifier id is null.
      */
-    public function testIsNewReturnsTrueOnIdentifierEqualsNull()
+    public function testIsNewReturnsTrueOnIdentifierEqualsNull(): void
     {
         $user = new UserEntity();
 
@@ -23,7 +23,7 @@ class UserEntityTest extends TestCase
     /**
      * Tests that isNew returns false when the identifier id is not null.
      */
-    public function testIsNewReturnsFalseWhenIdentifierIsPresent()
+    public function testIsNewReturnsFalseWhenIdentifierIsPresent(): void
     {
         $user = new UserEntity();
         $user->id = 1;
@@ -34,7 +34,7 @@ class UserEntityTest extends TestCase
     /**
      * Tests toArray returns correct array.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $user = new UserEntity();
         $user->id = 1;
@@ -65,7 +65,7 @@ class UserEntityTest extends TestCase
     /**
      * Tests fromArray applies correct values.
      */
-    public function testFromArray()
+    public function testFromArray(): void
     {
         $userArray = [
             'id' => 1,

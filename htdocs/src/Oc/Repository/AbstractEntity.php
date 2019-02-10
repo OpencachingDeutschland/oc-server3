@@ -6,17 +6,13 @@ abstract class AbstractEntity
 {
     /**
      * Checks if the entity is new.
-     *
-     * @return bool
      */
-    abstract public function isNew();
+    abstract public function isNew(): bool;
 
     /**
      * Sets all properties from array.
-     *
-     * @param array $data
      */
-    public function fromArray(array $data)
+    public function fromArray(array $data): void
     {
         foreach ($data as $key => $value) {
             if (!property_exists($this, $key)) {
@@ -29,10 +25,8 @@ abstract class AbstractEntity
 
     /**
      * Returns all properties as array.
-     *
-     * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return get_object_vars($this);
     }

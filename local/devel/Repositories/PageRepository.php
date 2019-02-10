@@ -44,7 +44,6 @@ class PageRepository
     }
 
     /**
-     * @param array $where
      * @return PageEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class PageRepository
     }
 
     /**
-     * @param array $where
      * @return PageEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class PageRepository
     }
 
     /**
-     * @param PageEntity $entity
      * @return PageEntity
      */
     public function create(PageEntity $entity)
@@ -127,7 +124,6 @@ class PageRepository
     }
 
     /**
-     * @param PageEntity $entity
      * @return PageEntity
      */
     public function update(PageEntity $entity)
@@ -148,7 +144,6 @@ class PageRepository
     }
 
     /**
-     * @param PageEntity $entity
      * @return PageEntity
      */
     public function remove(PageEntity $entity)
@@ -168,7 +163,6 @@ class PageRepository
     }
 
     /**
-     * @param PageEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(PageEntity $entity)
@@ -185,7 +179,6 @@ class PageRepository
     }
 
     /**
-     * @param array $data
      * @return PageEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SysCronEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SysCronEntity();
         self::assertTrue($entity->isNew());

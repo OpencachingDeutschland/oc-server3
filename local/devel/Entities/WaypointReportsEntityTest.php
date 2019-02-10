@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class WaypointReportsEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new WaypointReportsEntity();
         self::assertTrue($entity->isNew());

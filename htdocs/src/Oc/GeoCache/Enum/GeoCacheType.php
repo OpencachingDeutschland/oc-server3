@@ -63,10 +63,6 @@ class GeoCacheType
 
     /**
      * Checks if the given geocache type is an event type.
-     *
-     * @param int $geoCacheType
-     *
-     * @return bool Returns true if this type is an event type
      */
     public static function isEventType(int $geoCacheType): bool
     {

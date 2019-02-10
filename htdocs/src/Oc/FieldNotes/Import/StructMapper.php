@@ -9,11 +9,9 @@ class StructMapper
     /**
      * Maps given array to field note struct.
      *
-     * @param array $rows
-     *
      * @return FieldNote[]
      */
-    public function map(array $rows)
+    public function map(array $rows): array
     {
         $fieldNotes = [];
 

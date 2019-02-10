@@ -7,19 +7,13 @@ namespace Oc\Command;
 
 use Exception;
 use Leafo\ScssPhp\Compiler;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Finder\SplFileInfo;
 
-/**
- * Class CreateWebCacheCommand
- */
 class CreateWebCacheCommand extends ContainerAwareCommand
 {
     const COMMAND_NAME = 'cache:web:create';
@@ -35,7 +29,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      *
      * @throws InvalidArgumentException
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -47,8 +41,6 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     /**
      * Executes the command.
      *
-     * @param InputInterface $input
-     * @param OutputInterface $output
      *
      * @return int|null
      */
@@ -83,6 +75,8 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         }
 
         $output->writeln('WebCache generated');
+
+        return null;
     }
 
     /**
@@ -90,7 +84,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      *
      * @param string $projectDir
      */
-    private function compileJs($projectDir)
+    private function compileJs($projectDir): void
     {
         $this->output->writeln('Generating javascript');
 
@@ -103,13 +97,13 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         }
 
         $vendorFiles = [
-            $projectDir . '/vendor/components/jquery/jquery.min.js'
+            $projectDir . '/vendor/components/jquery/jquery.min.js',
         ];
 
         $filesJson = json_decode(file_get_contents($projectDir . '/theme/frontend/js/files.json'), true);
         $ownFiles = $filesJson['files'];
 
-        $ownFiles = array_map(function($file) use ($applicationJsPath) {
+        $ownFiles = array_map(function ($file) use ($applicationJsPath) {
             if (strpos($file, '**') !== false) {
                 return null;
             }
@@ -122,7 +116,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $finder = new Finder();
         $finder->in($applicationJsPath . '/plugins/')->name('*.js');
 
-        $jsPlugins = array_map(function($file) {
+        $jsPlugins = array_map(function ($file) {
             return $file->getRealPath();
         }, iterator_to_array($finder->files()));
 
@@ -144,7 +138,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      *
      * @param string $projectDir
      */
-    private function compileCss($projectDir)
+    private function compileCss($projectDir): void
     {
         $this->output->writeln('Generating stylesheets');
 
@@ -201,7 +195,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     /**
      * @param string $projectDir
      */
-    private function copyImages($projectDir)
+    private function copyImages($projectDir): void
     {
         $this->output->writeln('Copying images');
 

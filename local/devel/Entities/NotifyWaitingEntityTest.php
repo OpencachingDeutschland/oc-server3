@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class NotifyWaitingEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new NotifyWaitingEntity();
         self::assertTrue($entity->isNew());

@@ -44,7 +44,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param array $where
      * @return SysconfigEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param array $where
      * @return SysconfigEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param SysconfigEntity $entity
      * @return SysconfigEntity
      */
     public function create(SysconfigEntity $entity)
@@ -127,7 +124,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param SysconfigEntity $entity
      * @return SysconfigEntity
      */
     public function update(SysconfigEntity $entity)
@@ -148,7 +144,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param SysconfigEntity $entity
      * @return SysconfigEntity
      */
     public function remove(SysconfigEntity $entity)
@@ -168,7 +163,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param SysconfigEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysconfigEntity $entity)
@@ -180,7 +174,6 @@ class SysconfigRepository
     }
 
     /**
-     * @param array $data
      * @return SysconfigEntity
      */
     public function getEntityFromDatabaseArray(array $data)

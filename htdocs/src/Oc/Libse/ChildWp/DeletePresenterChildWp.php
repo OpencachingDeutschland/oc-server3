@@ -26,12 +26,12 @@ class DeletePresenterChildWp extends PresenterChildWp
         return $translate->t('Delete', '', '', 0);
     }
 
-    protected function onDoSubmit($coordinate, $description)
+    protected function onDoSubmit($coordinate, $description): void
     {
         $this->childWpHandler->delete($this->childId);
     }
 
-    protected function onPrepare($template)
+    protected function onPrepare($template): void
     {
         $template->assign(parent::tpl_disabled, true);
         $template->assign(parent::tpl_delete_id, $this->childId);

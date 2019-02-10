@@ -44,7 +44,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiTokensEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiTokensEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param OkapiTokensEntity $entity
      * @return OkapiTokensEntity
      */
     public function create(OkapiTokensEntity $entity)
@@ -127,7 +124,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param OkapiTokensEntity $entity
      * @return OkapiTokensEntity
      */
     public function update(OkapiTokensEntity $entity)
@@ -148,7 +144,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param OkapiTokensEntity $entity
      * @return OkapiTokensEntity
      */
     public function remove(OkapiTokensEntity $entity)
@@ -168,7 +163,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param OkapiTokensEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiTokensEntity $entity)
@@ -186,7 +180,6 @@ class OkapiTokensRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiTokensEntity
      */
     public function getEntityFromDatabaseArray(array $data)

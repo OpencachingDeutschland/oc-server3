@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierNbspTest extends AbstractModuleTest
 {
-    public function testNbsp()
+    public function testNbsp(): void
     {
         self::assertEquals(
             '&nbsp;',

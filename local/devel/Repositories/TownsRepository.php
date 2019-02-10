@@ -44,7 +44,6 @@ class TownsRepository
     }
 
     /**
-     * @param array $where
      * @return TownsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class TownsRepository
     }
 
     /**
-     * @param array $where
      * @return TownsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class TownsRepository
     }
 
     /**
-     * @param TownsEntity $entity
      * @return TownsEntity
      */
     public function create(TownsEntity $entity)
@@ -127,7 +124,6 @@ class TownsRepository
     }
 
     /**
-     * @param TownsEntity $entity
      * @return TownsEntity
      */
     public function update(TownsEntity $entity)
@@ -148,7 +144,6 @@ class TownsRepository
     }
 
     /**
-     * @param TownsEntity $entity
      * @return TownsEntity
      */
     public function remove(TownsEntity $entity)
@@ -168,7 +163,6 @@ class TownsRepository
     }
 
     /**
-     * @param TownsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(TownsEntity $entity)
@@ -184,7 +178,6 @@ class TownsRepository
     }
 
     /**
-     * @param array $data
      * @return TownsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

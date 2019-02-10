@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class UserOptionsEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new UserOptionsEntity();
         self::assertTrue($entity->isNew());

@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GeodbTypeNamesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GeodbTypeNamesEntity();
         self::assertTrue($entity->isNew());

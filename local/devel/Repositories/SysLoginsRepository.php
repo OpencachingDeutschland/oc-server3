@@ -44,7 +44,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param array $where
      * @return SysLoginsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param array $where
      * @return SysLoginsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param SysLoginsEntity $entity
      * @return SysLoginsEntity
      */
     public function create(SysLoginsEntity $entity)
@@ -127,7 +124,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param SysLoginsEntity $entity
      * @return SysLoginsEntity
      */
     public function update(SysLoginsEntity $entity)
@@ -148,7 +144,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param SysLoginsEntity $entity
      * @return SysLoginsEntity
      */
     public function remove(SysLoginsEntity $entity)
@@ -168,7 +163,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param SysLoginsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysLoginsEntity $entity)
@@ -182,7 +176,6 @@ class SysLoginsRepository
     }
 
     /**
-     * @param array $data
      * @return SysLoginsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

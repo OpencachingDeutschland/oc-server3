@@ -4,9 +4,6 @@ namespace Oc\Page\Persistence;
 
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class BlockService
- */
 class BlockService
 {
     /**
@@ -14,24 +11,15 @@ class BlockService
      */
     private $blockRepository;
 
-    /**
-     * BlockService constructor.
-     *
-     * @param BlockRepository $blockRepository
-     */
     public function __construct(BlockRepository $blockRepository)
     {
         $this->blockRepository = $blockRepository;
     }
 
     /**
-     * Fetch by.
-     *
-     * @param array $where
-     *
      * @return BlockEntity[]
      */
-    public function fetchBy(array $where = [])
+    public function fetchBy(array $where = []): array
     {
         try {
             $result = $this->blockRepository->fetchBy($where);
@@ -43,11 +31,7 @@ class BlockService
     }
 
     /**
-     * Creates a page in the database.
-     *
-     * @param BlockEntity $entity
-     *
-     * @return BlockEntity
+     * Creates a block in the database.
      */
     public function create(BlockEntity $entity)
     {
@@ -55,25 +39,17 @@ class BlockService
     }
 
     /**
-     * Update a page in the database.
-     *
-     * @param BlockEntity $entity
-     *
-     * @return BlockEntity
+     * Update a block in the database.
      */
-    public function update(BlockEntity $entity)
+    public function update(BlockEntity $entity): BlockEntity
     {
         return $this->blockRepository->update($entity);
     }
 
     /**
-     * Removes a page from the database.
-     *
-     * @param BlockEntity $entity
-     *
-     * @return BlockEntity
+     * Removes a block from the database.
      */
-    public function remove(BlockEntity $entity)
+    public function remove(BlockEntity $entity): BlockEntity
     {
         return $this->blockRepository->remove($entity);
     }

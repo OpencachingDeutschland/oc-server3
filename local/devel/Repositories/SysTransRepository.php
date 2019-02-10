@@ -44,7 +44,6 @@ class SysTransRepository
     }
 
     /**
-     * @param array $where
      * @return SysTransEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysTransRepository
     }
 
     /**
-     * @param array $where
      * @return SysTransEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysTransRepository
     }
 
     /**
-     * @param SysTransEntity $entity
      * @return SysTransEntity
      */
     public function create(SysTransEntity $entity)
@@ -127,7 +124,6 @@ class SysTransRepository
     }
 
     /**
-     * @param SysTransEntity $entity
      * @return SysTransEntity
      */
     public function update(SysTransEntity $entity)
@@ -148,7 +144,6 @@ class SysTransRepository
     }
 
     /**
-     * @param SysTransEntity $entity
      * @return SysTransEntity
      */
     public function remove(SysTransEntity $entity)
@@ -168,7 +163,6 @@ class SysTransRepository
     }
 
     /**
-     * @param SysTransEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysTransEntity $entity)
@@ -181,7 +175,6 @@ class SysTransRepository
     }
 
     /**
-     * @param array $data
      * @return SysTransEntity
      */
     public function getEntityFromDatabaseArray(array $data)

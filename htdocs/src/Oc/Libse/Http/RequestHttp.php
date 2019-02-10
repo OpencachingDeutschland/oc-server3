@@ -51,12 +51,12 @@ class RequestHttp
         return false;
     }
 
-    public function set($key, $value)
+    public function set($key, $value): void
     {
         $this->valid_values[$key] = $value;
     }
 
-    public function setForValidation($key, $value)
+    public function setForValidation($key, $value): void
     {
         $this->raw_values[$key] = $value;
     }

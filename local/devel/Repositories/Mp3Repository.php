@@ -44,7 +44,6 @@ class Mp3Repository
     }
 
     /**
-     * @param array $where
      * @return Mp3Entity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class Mp3Repository
     }
 
     /**
-     * @param array $where
      * @return Mp3Entity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class Mp3Repository
     }
 
     /**
-     * @param Mp3Entity $entity
      * @return Mp3Entity
      */
     public function create(Mp3Entity $entity)
@@ -127,7 +124,6 @@ class Mp3Repository
     }
 
     /**
-     * @param Mp3Entity $entity
      * @return Mp3Entity
      */
     public function update(Mp3Entity $entity)
@@ -148,7 +144,6 @@ class Mp3Repository
     }
 
     /**
-     * @param Mp3Entity $entity
      * @return Mp3Entity
      */
     public function remove(Mp3Entity $entity)
@@ -168,7 +163,6 @@ class Mp3Repository
     }
 
     /**
-     * @param Mp3Entity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(Mp3Entity $entity)
@@ -189,7 +183,6 @@ class Mp3Repository
     }
 
     /**
-     * @param array $data
      * @return Mp3Entity
      */
     public function getEntityFromDatabaseArray(array $data)

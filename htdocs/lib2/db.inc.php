@@ -687,9 +687,8 @@ function sql_affected_rows_slave()
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- * @return void
  */
-function sql_free_result($rs)
+function sql_free_result($rs): void
 {
     mysqli_free_result($rs);
 }
@@ -730,7 +729,7 @@ function sql_num_rows($rs)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
-function sql_temp_table($table)
+function sql_temp_table($table): void
 {
     global $db, $opt;
 
@@ -767,7 +766,7 @@ function sql_temp_table($table)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
-function sql_temp_table_slave($table)
+function sql_temp_table_slave($table): void
 {
     global $db, $opt;
 
@@ -791,7 +790,7 @@ function sql_temp_table_slave($table)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
-function sql_drop_temp_table($table)
+function sql_drop_temp_table($table): void
 {
     global $db, $opt;
 
@@ -813,7 +812,7 @@ function sql_drop_temp_table($table)
  * @param $table
  * @param $newname
  */
-function sql_rename_temp_table($table, $newname)
+function sql_rename_temp_table($table, $newname): void
 {
     global $db, $opt;
 
@@ -836,7 +835,7 @@ function sql_rename_temp_table($table, $newname)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $table
  */
-function sql_drop_temp_table_slave($table)
+function sql_drop_temp_table_slave($table): void
 {
     global $db, $opt;
 
@@ -858,7 +857,7 @@ function sql_drop_temp_table_slave($table)
  * @param $table
  * @param $newname
  */
-function sql_rename_temp_table_slave($table, $newname)
+function sql_rename_temp_table_slave($table, $newname): void
 {
     global $db, $opt;
 
@@ -881,11 +880,11 @@ function sql_rename_temp_table_slave($table, $newname)
 //database handling
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- * @param null $username
- * @param null $password
  * @param bool $raiseError
+ * @param null|mixed $username
+ * @param null|mixed $password
  */
-function sql_connect($username = null, $password = null, $raiseError = true)
+function sql_connect($username = null, $password = null, $raiseError = true): void
 {
     global $opt, $db;
 
@@ -920,7 +919,7 @@ function sql_connect($username = null, $password = null, $raiseError = true)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_slave_exclude()
+function sql_slave_exclude(): void
 {
     global $login;
     if ($login->userid == 0) {
@@ -937,7 +936,7 @@ function sql_slave_exclude()
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_connect_anyslave()
+function sql_connect_anyslave(): void
 {
     global $db, $opt, $login;
 
@@ -976,7 +975,7 @@ function sql_connect_anyslave()
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_connect_master_as_slave()
+function sql_connect_master_as_slave(): void
 {
     global $db;
 
@@ -997,7 +996,7 @@ function sql_connect_master_as_slave()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $id
  */
-function sql_connect_slave($id)
+function sql_connect_slave($id): void
 {
     global $opt, $db;
 
@@ -1033,7 +1032,7 @@ function sql_connect_slave($id)
 
     if ($db['dblink_slave'] !== false) {
         mysqli_query(
-            $db['dblink_slave'].
+            $db['dblink_slave'] .
             "SET NAMES '" . mysqli_real_escape_string($db['dblink_slave'], $opt['charset']['mysql']) . "'"
 
         );
@@ -1079,7 +1078,7 @@ function sql_connect_maintenance()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
-function sql_disconnect()
+function sql_disconnect(): void
 {
     global $opt, $db;
 
@@ -1111,7 +1110,7 @@ function sql_disconnect()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sqlstatement
  */
-function sql_error($sqlstatement = '')
+function sql_error($sqlstatement = ''): void
 {
     global $tpl, $opt, $db;
     global $bSmartyNoTranslate;
@@ -1179,7 +1178,8 @@ function sql_error($sqlstatement = '')
                 die(
                     '<html><body>' .
                     htmlspecialchars(
-                        'MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error), ENT_QUOTES | ENT_HTML5
+                        'MySQL error (' . $errno . '): ' . str_replace("\n,", '<br />', $error),
+                        ENT_QUOTES | ENT_HTML5
                     )
                     . '</body></html>'
                 );
@@ -1199,7 +1199,7 @@ function sql_error($sqlstatement = '')
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $warnmessage
  */
-function sql_warn($warnmessage)
+function sql_warn($warnmessage): void
 {
     global $opt;
 
@@ -1233,7 +1233,7 @@ function sql_warn($warnmessage)
  * @param $table
  * @param bool $truncate
  */
-function sql_export_recordset($f, $rs, $table, $truncate = true)
+function sql_export_recordset($f, $rs, $table, $truncate = true): void
 {
     fwrite($f, "SET NAMES 'utf8';\n");
 
@@ -1268,7 +1268,7 @@ function sql_export_recordset($f, $rs, $table, $truncate = true)
  * @param resource $f
  * @param $table
  */
-function sql_export_table($f, $table)
+function sql_export_table($f, $table): void
 {
     $primary = [];
     $rsIndex = sql('SHOW INDEX FROM `&1`', $table);
@@ -1294,7 +1294,7 @@ function sql_export_table($f, $table)
  * @param string $filename
  * @param string[] $tables
  */
-function sql_export_tables_to_file($filename, $tables)
+function sql_export_tables_to_file($filename, $tables): void
 {
     $f = fopen($filename, 'w');
 
@@ -1319,7 +1319,7 @@ function sql_export_tables_to_file($filename, $tables)
  * @param $filename
  * @param $table
  */
-function sql_export_table_to_file($filename, $table)
+function sql_export_table_to_file($filename, $table): void
 {
     $f = fopen($filename, 'w');
     sql_export_table($f, $table);
@@ -1331,7 +1331,7 @@ function sql_export_table_to_file($filename, $table)
  * @param resource $f
  * @param $table
  */
-function sql_export_structure($f, $table)
+function sql_export_structure($f, $table): void
 {
     $rs = sql('SHOW CREATE TABLE `&1`', $table);
     $r = sql_fetch_array($rs);
@@ -1351,7 +1351,7 @@ function sql_export_structure($f, $table)
  * @param string $filename
  * @param $table
  */
-function sql_export_structure_to_file($filename, $table)
+function sql_export_structure_to_file($filename, $table): void
 {
     $f = fopen($filename, 'w');
     sql_export_structure($f, $table);
@@ -1483,7 +1483,7 @@ function sql_function_exists($name)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
-function sql_dropFunction($name)
+function sql_dropFunction($name): void
 {
     sql('DROP FUNCTION IF EXISTS `&1`', $name);
 }
@@ -1504,7 +1504,7 @@ function sql_procedure_exists($name)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $name
  */
-function sql_dropProcedure($name)
+function sql_dropProcedure($name): void
 {
     sql('DROP PROCEDURE IF EXISTS `&1`', $name);
 }
@@ -1513,7 +1513,7 @@ function sql_dropProcedure($name)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $triggername
  */
-function sql_dropTrigger($triggername)
+function sql_dropTrigger($triggername): void
 {
     $rs = sql('SHOW TRIGGERS');
     while ($r = sql_fetch_assoc($rs)) {

@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SearchIgnoreEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SearchIgnoreEntity();
         self::assertTrue($entity->isNew());

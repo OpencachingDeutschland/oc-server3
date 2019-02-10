@@ -9,7 +9,7 @@ use OcTest\Utils\TwigDummy;
 
 class ChangelogControllerTest extends TestCase
 {
-    public function testIndexAction()
+    public function testIndexAction(): void
     {
         $markConverter = new CommonMarkConverter();
         $twigDummy = new TwigDummy();

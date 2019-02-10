@@ -33,13 +33,13 @@ class translate_filescan
         $this->msContent = $sContent;
     }
 
-    public function parse()
+    public function parse(): void
     {
         $this->scanTranslationPlaceholders();
         $this->scanTranslateFunctionCalls();
     }
 
-    public function scanTranslateFunctionCalls()
+    public function scanTranslateFunctionCalls(): void
     {
         $nNextPos = strpos($this->msContent, 't' . "('");
         $nNext_ = strpos($this->msContent, '_' . "('");
@@ -103,7 +103,7 @@ class translate_filescan
         return $nEnd;
     }
 
-    public function scanTranslationPlaceholders()
+    public function scanTranslationPlaceholders(): void
     {
         $nNextPos = strpos($this->msContent, '{' . 't');
         while ($nNextPos !== false) {

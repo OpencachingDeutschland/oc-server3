@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class CountriesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new CountriesEntity();
         self::assertTrue($entity->isNew());

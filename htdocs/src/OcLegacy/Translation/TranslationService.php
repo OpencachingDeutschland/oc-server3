@@ -9,6 +9,9 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslationService implements TranslatorInterface
 {
+    /**
+     * @var Translator
+     */
     private $translator;
 
     public function __construct()

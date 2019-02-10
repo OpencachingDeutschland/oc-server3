@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class Mp3EntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new Mp3Entity();
         self::assertTrue($entity->isNew());

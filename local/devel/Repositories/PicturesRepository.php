@@ -44,7 +44,6 @@ class PicturesRepository
     }
 
     /**
-     * @param array $where
      * @return PicturesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class PicturesRepository
     }
 
     /**
-     * @param array $where
      * @return PicturesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class PicturesRepository
     }
 
     /**
-     * @param PicturesEntity $entity
      * @return PicturesEntity
      */
     public function create(PicturesEntity $entity)
@@ -127,7 +124,6 @@ class PicturesRepository
     }
 
     /**
-     * @param PicturesEntity $entity
      * @return PicturesEntity
      */
     public function update(PicturesEntity $entity)
@@ -148,7 +144,6 @@ class PicturesRepository
     }
 
     /**
-     * @param PicturesEntity $entity
      * @return PicturesEntity
      */
     public function remove(PicturesEntity $entity)
@@ -168,7 +163,6 @@ class PicturesRepository
     }
 
     /**
-     * @param PicturesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(PicturesEntity $entity)
@@ -196,7 +190,6 @@ class PicturesRepository
     }
 
     /**
-     * @param array $data
      * @return PicturesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

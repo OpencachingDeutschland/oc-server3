@@ -17,8 +17,6 @@ class KitchenSinkDataProvider implements DataProviderInterface
 
     /**
      * KitchenSinkDataProvider constructor.
-     *
-     * @param Session $session
      */
     public function __construct(Session $session)
     {
@@ -27,8 +25,6 @@ class KitchenSinkDataProvider implements DataProviderInterface
 
     /**
      * Returns an array with template vars (and optional their getters) to fill the kitchensink template.
-     *
-     * @return array
      */
     public function getTemplateVars(): array
     {

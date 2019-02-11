@@ -27,12 +27,12 @@ class TranslationServiceTest extends AbstractModuleTest
         return $this->translationService;
     }
 
-    public function test_transChoise()
+    public function test_transChoise(): void
     {
         self::assertEquals('Gefunden', $this->getTranslationService()->transChoice('field_notes.log_type.1', 0));
     }
 
-    public function test_getLocale()
+    public function test_getLocale(): void
     {
         self::assertEquals('de', $this->getTranslationService()->getLocale());
     }

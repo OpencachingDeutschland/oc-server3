@@ -7,9 +7,6 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class CountryRepository
- */
 class CountryRepository
 {
     /**
@@ -17,18 +14,13 @@ class CountryRepository
      *
      * @var string
      */
-    const TABLE = 'countries';
+    public const TABLE = 'countries';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * CountryRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -40,7 +32,7 @@ class CountryRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return CountryEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -65,12 +57,9 @@ class CountryRepository
     /**
      * Creates a country in the database.
      *
-     * @param CountryEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return CountryEntity
      */
-    public function create(CountryEntity $entity)
+    public function create(CountryEntity $entity): CountryEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -91,12 +80,9 @@ class CountryRepository
     /**
      * Update a country in the database.
      *
-     * @param CountryEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return CountryEntity
      */
-    public function update(CountryEntity $entity)
+    public function update(CountryEntity $entity): CountryEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -118,12 +104,9 @@ class CountryRepository
     /**
      * Removes a country from the database.
      *
-     * @param CountryEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return CountryEntity
      */
-    public function remove(CountryEntity $entity)
+    public function remove(CountryEntity $entity): CountryEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -141,12 +124,8 @@ class CountryRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param CountryEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(CountryEntity $entity)
+    public function getDatabaseArrayFromEntity(CountryEntity $entity): array
     {
         return [
             'short' => $entity->short,
@@ -163,12 +142,8 @@ class CountryRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return CountryEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): CountryEntity
     {
         $entity = new CountryEntity();
         $entity->short = $data['short'];

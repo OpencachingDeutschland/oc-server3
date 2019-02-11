@@ -12,7 +12,7 @@ class CBenchTest extends AbstractModuleTest
      */
     private $cBench;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cBench = new CBench();
     }
@@ -20,7 +20,7 @@ class CBenchTest extends AbstractModuleTest
     /**
      * @group unit-tests
      */
-    public function testStartMethod()
+    public function testStartMethod(): void
     {
         self::assertEquals(0, $this->cBench->start);
 
@@ -32,7 +32,7 @@ class CBenchTest extends AbstractModuleTest
     /**
      * @group unit-tests
      */
-    public function testStopMethod()
+    public function testStopMethod(): void
     {
         self::assertEquals(0, $this->cBench->stop);
 

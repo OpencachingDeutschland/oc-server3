@@ -14,7 +14,7 @@ class labels
 {
     public static $aLabels = [];
 
-    public static function CreateCacheFile()
+    public static function CreateCacheFile(): void
     {
         global $opt;
 
@@ -159,7 +159,7 @@ class labels
         fclose($f);
     }
 
-    public static function addLabels($name, $serialized)
+    public static function addLabels($name, $serialized): void
     {
         self::$aLabels[$name] = unserialize($serialized);
     }

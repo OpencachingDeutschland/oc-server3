@@ -8,9 +8,6 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class UserRepository
- */
 class UserRepository
 {
     /**
@@ -18,18 +15,13 @@ class UserRepository
      *
      * @var string
      */
-    const TABLE = 'user';
+    public const TABLE = 'user';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * UserRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -41,7 +33,7 @@ class UserRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return UserEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -60,12 +52,9 @@ class UserRepository
     /**
      * Fetches a user by its id.
      *
-     * @param int $id
-     *
      * @throws RecordNotFoundException Thrown when the request record is not found
-     * @return UserEntity
      */
-    public function fetchOneById($id)
+    public function fetchOneById(int $id): UserEntity
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -89,12 +78,9 @@ class UserRepository
     /**
      * Creates a user in the database.
      *
-     * @param UserEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return UserEntity
      */
-    public function create(UserEntity $entity)
+    public function create(UserEntity $entity): UserEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The user entity already exists');
@@ -115,12 +101,9 @@ class UserRepository
     /**
      * Update a user in the database.
      *
-     * @param UserEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return UserEntity
      */
-    public function update(UserEntity $entity)
+    public function update(UserEntity $entity): UserEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -142,12 +125,9 @@ class UserRepository
     /**
      * Removes a user from the database.
      *
-     * @param UserEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return UserEntity
      */
-    public function remove(UserEntity $entity)
+    public function remove(UserEntity $entity): UserEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -166,11 +146,9 @@ class UserRepository
     /**
      * Converts database array to entity array.
      *
-     * @param array $result
-     *
      * @return UserEntity[]
      */
-    private function getEntityArrayFromDatabaseArray(array $result)
+    private function getEntityArrayFromDatabaseArray(array $result): array
     {
         $languages = [];
 
@@ -183,12 +161,8 @@ class UserRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param UserEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(UserEntity $entity)
+    public function getDatabaseArrayFromEntity(UserEntity $entity): array
     {
         return [
             'user_id' => $entity->id,
@@ -207,12 +181,8 @@ class UserRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return UserEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): UserEntity
     {
         $entity = new UserEntity();
         $entity->id = (int) $data['user_id'];

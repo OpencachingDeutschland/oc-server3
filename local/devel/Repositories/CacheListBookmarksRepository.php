@@ -44,7 +44,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheListBookmarksEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheListBookmarksEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param GeoCacheListBookmarksEntity $entity
      * @return GeoCacheListBookmarksEntity
      */
     public function create(GeoCacheListBookmarksEntity $entity)
@@ -127,7 +124,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param GeoCacheListBookmarksEntity $entity
      * @return GeoCacheListBookmarksEntity
      */
     public function update(GeoCacheListBookmarksEntity $entity)
@@ -148,7 +144,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param GeoCacheListBookmarksEntity $entity
      * @return GeoCacheListBookmarksEntity
      */
     public function remove(GeoCacheListBookmarksEntity $entity)
@@ -168,7 +163,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param GeoCacheListBookmarksEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheListBookmarksEntity $entity)
@@ -181,7 +175,6 @@ class CacheListBookmarksRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheListBookmarksEntity
      */
     public function getEntityFromDatabaseArray(array $data)

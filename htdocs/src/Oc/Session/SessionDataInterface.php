@@ -12,13 +12,13 @@ interface SessionDataInterface
 {
     public function __construct();
 
-    public function set($name, $value, $default = null);
+    public function set(string $name, $value, $default = null);
 
-    public function get($name, $default = null);
+    public function get(string $name, $default = null);
 
-    public function is_set($name);
+    public function is_set(string $name);
 
-    public function un_set($name);
+    public function un_set(string $name);
 
     public function header();
 

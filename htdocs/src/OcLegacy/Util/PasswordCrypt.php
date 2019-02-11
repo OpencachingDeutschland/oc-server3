@@ -9,11 +9,7 @@ namespace OcLegacy\Util;
 
 class PasswordCrypt
 {
-    /**
-     * @param $password
-     * @return string
-     */
-    public static function encryptPassword($password)
+    public static function encryptPassword(string $password): string
     {
         // Calls the password encryption chained
         $md5 = self::firstStagePasswordEncryption($password);
@@ -21,20 +17,12 @@ class PasswordCrypt
         return self::secondStagePasswordEncryption($md5);
     }
 
-    /**
-     * @param $password
-     * @return string
-     */
-    public static function firstStagePasswordEncryption($password)
+    public static function firstStagePasswordEncryption(string $password): string
     {
         return md5($password);
     }
 
-    /**
-     * @param $password
-     * @return string
-     */
-    public static function secondStagePasswordEncryption($password)
+    public static function secondStagePasswordEncryption(string $password): string
     {
         global $opt;
         if ($opt['logic']['password_hash']) {

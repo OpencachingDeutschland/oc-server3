@@ -166,7 +166,7 @@ $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_A
 $bScriptExecution = new CBench;
 $bScriptExecution->start();
 
-function load_domain_settings()
+function load_domain_settings(): void
 {
     global $opt, $style;
 
@@ -217,7 +217,7 @@ function db_LanguageFromShort($langCode)
 }
 
 //get the stored settings and authentification data from the cookie
-function load_cookie_settings()
+function load_cookie_settings(): void
 {
     global $cookie, $lang, $style;
 
@@ -233,7 +233,7 @@ function load_cookie_settings()
 }
 
 //store the cookie vars
-function write_cookie_settings()
+function write_cookie_settings(): void
 {
     global $cookie, $lang, $style;
 
@@ -260,7 +260,7 @@ function get_cookie_setting($name)
 }
 
 //sets the cookie value
-function set_cookie_setting($name, $value)
+function set_cookie_setting($name, $value): void
 {
     global $cookie;
     $cookie->set($name, $value);
@@ -275,7 +275,7 @@ function set_cookie_setting($name, $value)
  * @param mixed $value
  * @param mixed $no_eval
  */
-function tpl_set_var($name, $value, $no_eval = true)
+function tpl_set_var($name, $value, $no_eval = true): void
 {
     global $vars, $no_eval_vars;
     $vars[$name] = $value;
@@ -295,7 +295,7 @@ function tpl_get_var($name)
 }
 
 //clear all template vars
-function tpl_clear_vars()
+function tpl_clear_vars(): void
 {
     unset($GLOBALS['vars']);
     unset($GLOBALS['no_eval_vars']);
@@ -307,21 +307,21 @@ function tpl_clear_vars()
  * @param $id
  * @param $html_code
  */
-function tpl_set_page_function($id, $html_code)
+function tpl_set_page_function($id, $html_code): void
 {
     global $page_functions;
 
     $page_functions[$id] = $html_code;
 }
 
-function tpl_unset_page_function($id)
+function tpl_unset_page_function($id): void
 {
     global $page_functions;
 
     unset($page_functions[$id]);
 }
 
-function tpl_clear_page_functions()
+function tpl_clear_page_functions(): void
 {
     unset($GLOBALS['page_functions']);
 }
@@ -329,7 +329,7 @@ function tpl_clear_page_functions()
 /**
  * see OcSmarty::acceptsAndPurifiesHtmlInput
  */
-function tpl_acceptsAndPurifiesHtmlInput()
+function tpl_acceptsAndPurifiesHtmlInput(): void
 {
     header('X-XSS-Protection: 0');
 }
@@ -339,7 +339,7 @@ function tpl_acceptsAndPurifiesHtmlInput()
  *
  * @param bool $dbDisconnect
  */
-function tpl_BuildTemplate($dbDisconnect = true)
+function tpl_BuildTemplate($dbDisconnect = true): void
 {
     global $sql_debug, $sqldbg_cmdNo;
 
@@ -507,7 +507,7 @@ function tpl_BuildTemplate($dbDisconnect = true)
     }
 }
 
-function http_write_no_cache()
+function http_write_no_cache(): void
 {
     // HTTP/1.1
     header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -524,7 +524,7 @@ function http_write_no_cache()
 /**
  * @param string $page
  */
-function tpl_redirect($page)
+function tpl_redirect($page): void
 {
     global $absolute_server_URI;
 
@@ -578,7 +578,7 @@ function tpl_do_replace($str)
  * @param string $tplnameError
  * @param string $msg
  */
-function tpl_errorMsg($tplnameError, $msg)
+function tpl_errorMsg($tplnameError, $msg): void
 {
     global $tplname;
 
@@ -591,7 +591,7 @@ function tpl_errorMsg($tplnameError, $msg)
 }
 
 
-function load_gettext()
+function load_gettext(): void
 {
     global $cookie, $opt, $locale;
 

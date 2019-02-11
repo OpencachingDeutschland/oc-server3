@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GeodbHierarchiesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GeodbHierarchiesEntity();
         self::assertTrue($entity->isNew());

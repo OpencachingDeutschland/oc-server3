@@ -16,7 +16,7 @@ class CacheLocation
     public $name = 'cache_location';
     public $interval = 0;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 

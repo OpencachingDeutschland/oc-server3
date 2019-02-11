@@ -44,7 +44,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbPolygonsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbPolygonsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param GeodbPolygonsEntity $entity
      * @return GeodbPolygonsEntity
      */
     public function create(GeodbPolygonsEntity $entity)
@@ -127,7 +124,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param GeodbPolygonsEntity $entity
      * @return GeodbPolygonsEntity
      */
     public function update(GeodbPolygonsEntity $entity)
@@ -148,7 +144,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param GeodbPolygonsEntity $entity
      * @return GeodbPolygonsEntity
      */
     public function remove(GeodbPolygonsEntity $entity)
@@ -168,7 +163,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param GeodbPolygonsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeodbPolygonsEntity $entity)
@@ -182,7 +176,6 @@ class GeodbPolygonsRepository
     }
 
     /**
-     * @param array $data
      * @return GeodbPolygonsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

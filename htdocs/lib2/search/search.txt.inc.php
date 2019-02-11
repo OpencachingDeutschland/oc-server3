@@ -14,7 +14,7 @@ $zip_threshold = 1;
 $add_to_zipfile = false;
 
 
-function search_output()
+function search_output(): void
 {
     global $opt, $translate, $txt_record;
     global $converted_from_html;

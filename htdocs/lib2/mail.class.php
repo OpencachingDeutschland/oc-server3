@@ -64,7 +64,7 @@ class mail extends Smarty
      * @param $name
      * @param $rs
      */
-    public function assign_rs($name, $rs)
+    public function assign_rs($name, $rs): void
     {
         $items = array();
         while ($r = sql_fetch_assoc($rs)) {

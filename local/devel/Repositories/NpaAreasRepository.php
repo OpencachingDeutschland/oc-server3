@@ -44,7 +44,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param array $where
      * @return NpaAreasEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param array $where
      * @return NpaAreasEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param NpaAreasEntity $entity
      * @return NpaAreasEntity
      */
     public function create(NpaAreasEntity $entity)
@@ -127,7 +124,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param NpaAreasEntity $entity
      * @return NpaAreasEntity
      */
     public function update(NpaAreasEntity $entity)
@@ -148,7 +144,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param NpaAreasEntity $entity
      * @return NpaAreasEntity
      */
     public function remove(NpaAreasEntity $entity)
@@ -168,7 +163,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param NpaAreasEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(NpaAreasEntity $entity)
@@ -183,7 +177,6 @@ class NpaAreasRepository
     }
 
     /**
-     * @param array $data
      * @return NpaAreasEntity
      */
     public function getEntityFromDatabaseArray(array $data)

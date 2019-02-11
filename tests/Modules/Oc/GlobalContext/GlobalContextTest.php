@@ -13,7 +13,7 @@ class GlobalContextTest extends TestCase
     /**
      * Test all getters of global context.
      */
-    public function testGlobalContextGetter()
+    public function testGlobalContextGetter(): void
     {
         $language = 'de';
         $defaultLocale = 'en';

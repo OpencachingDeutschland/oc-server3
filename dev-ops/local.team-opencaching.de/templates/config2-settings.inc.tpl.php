@@ -230,7 +230,7 @@ define('MNU_CHAT', 1018);
 define('MNU_GEOKRETY', 1019);
 define('MNU_API', 1020);
 
-function post_config()
+function post_config(): void
 {
     global $opt, $menuitem, $tpl, $translate;
 
@@ -262,7 +262,7 @@ function post_config()
     $menuitem[0]['subitems'][] = MNU_CHAT;
     */
 
-// geokrety menu contains the language
+    // geokrety menu contains the language
     $menuitem[MNU_GEOKRETY] = [
         'title' => 'Geokrety',
         'menustring' => 'Geokrety',
@@ -289,7 +289,7 @@ function post_config()
     $menuitem[0]['subitems'][] = MNU_API;
 }
 
-function config_domain_test_opencaching_de()
+function config_domain_test_opencaching_de(): void
 {
     global $opt, $menuitem, $login, $translate;
 

@@ -44,7 +44,6 @@ class PwDictRepository
     }
 
     /**
-     * @param array $where
      * @return PwDictEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class PwDictRepository
     }
 
     /**
-     * @param array $where
      * @return PwDictEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class PwDictRepository
     }
 
     /**
-     * @param PwDictEntity $entity
      * @return PwDictEntity
      */
     public function create(PwDictEntity $entity)
@@ -127,7 +124,6 @@ class PwDictRepository
     }
 
     /**
-     * @param PwDictEntity $entity
      * @return PwDictEntity
      */
     public function update(PwDictEntity $entity)
@@ -148,7 +144,6 @@ class PwDictRepository
     }
 
     /**
-     * @param PwDictEntity $entity
      * @return PwDictEntity
      */
     public function remove(PwDictEntity $entity)
@@ -168,7 +163,6 @@ class PwDictRepository
     }
 
     /**
-     * @param PwDictEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(PwDictEntity $entity)
@@ -179,7 +173,6 @@ class PwDictRepository
     }
 
     /**
-     * @param array $data
      * @return PwDictEntity
      */
     public function getEntityFromDatabaseArray(array $data)

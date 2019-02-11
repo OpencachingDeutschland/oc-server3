@@ -26,7 +26,7 @@ class AddPresenterChildWp extends PresenterChildWp
         return $translate->t('Add new', '', '', 0);
     }
 
-    protected function onDoSubmit($coordinate, $description)
+    protected function onDoSubmit($coordinate, $description): void
     {
         $this->childWpHandler->add(
             $this->cacheId,

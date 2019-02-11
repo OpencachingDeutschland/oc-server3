@@ -24,10 +24,7 @@ class LogEntity
      */
     public $email;
 
-    /**
-     * @return array
-     */
-    public function toDatabaseArray()
+    public function toDatabaseArray(): array
     {
         return [
             'id' => (int) $this->id,
@@ -37,11 +34,7 @@ class LogEntity
         ];
     }
 
-    /**
-     * @param array $data
-     * @return $this
-     */
-    public function fromDatabaseArray(array $data)
+    public function fromDatabaseArray(array $data): self
     {
         $this->id = (int) $data['id'];
         $this->email = $data['email'];
@@ -51,10 +44,7 @@ class LogEntity
         return $this;
     }
 
-    /**
-     * @param array $data
-     */
-    public function setData(array $data)
+    public function setData(array $data): void
     {
         foreach ($data as $key => $value) {
             if (!property_exists($this, $key)) {
@@ -65,10 +55,7 @@ class LogEntity
         }
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return get_object_vars($this);
     }

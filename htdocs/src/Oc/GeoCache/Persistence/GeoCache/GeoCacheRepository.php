@@ -17,18 +17,13 @@ class GeoCacheRepository
      *
      * @var string
      */
-    const TABLE = 'caches';
+    public const TABLE = 'caches';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * GeoCacheRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -40,7 +35,7 @@ class GeoCacheRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return GeoCacheEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -65,10 +60,7 @@ class GeoCacheRepository
     /**
      * Fetches a GeoCache by given where clause.
      *
-     * @param array $where
-     *
      * @throws RecordNotFoundException Thrown when no record is found
-     * @return null|GeoCacheEntity
      */
     public function fetchOneBy(array $where = []): ?GeoCacheEntity
     {
@@ -97,12 +89,10 @@ class GeoCacheRepository
     /**
      * Fetches all GeoCaches by given where clause.
      *
-     * @param array $where
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return GeoCacheEntity[]
      */
-    public function fetchBy(array $where = [])
+    public function fetchBy(array $where = []): array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
              ->select('*')
@@ -134,12 +124,9 @@ class GeoCacheRepository
     /**
      * Fetches a GeoCache by given where clause.
      *
-     * @param string $waypoint
-     *
      * @throws RecordNotFoundException Thrown when no record is found
-     * @return null|GeoCacheEntity
      */
-    public function fetchGCWaypoint($waypoint)
+    public function fetchGCWaypoint(string $waypoint): ?GeoCacheEntity
     {
         if (WaypointType::guess($waypoint) !== WaypointType::GC) {
             throw new RecordNotFoundException('Record by given gc waypoint not found');
@@ -166,12 +153,9 @@ class GeoCacheRepository
     /**
      * Creates a GeoCache in the database.
      *
-     * @param GeoCacheEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return GeoCacheEntity
      */
-    public function create(GeoCacheEntity $entity)
+    public function create(GeoCacheEntity $entity): GeoCacheEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -192,12 +176,9 @@ class GeoCacheRepository
     /**
      * Update a GeoCache in the database.
      *
-     * @param GeoCacheEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return GeoCacheEntity
      */
-    public function update(GeoCacheEntity $entity)
+    public function update(GeoCacheEntity $entity): GeoCacheEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -217,12 +198,9 @@ class GeoCacheRepository
     /**
      * Removes a GeoCache from the database.
      *
-     * @param GeoCacheEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return GeoCacheEntity
      */
-    public function remove(GeoCacheEntity $entity)
+    public function remove(GeoCacheEntity $entity): GeoCacheEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -240,12 +218,8 @@ class GeoCacheRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param GeoCacheEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(GeoCacheEntity $entity)
+    public function getDatabaseArrayFromEntity(GeoCacheEntity $entity): array
     {
         return [
             'cache_id' => $entity->cacheId,
@@ -288,12 +262,8 @@ class GeoCacheRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return GeoCacheEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): GeoCacheEntity
     {
         $entity = new GeoCacheEntity();
         $entity->cacheId = $data['cache_id'];

@@ -4,9 +4,6 @@ namespace Oc\User;
 
 use Oc\Session\SessionDataInterface;
 
-/**
- * Class UserProvider
- */
 class UserProvider
 {
     /**
@@ -19,12 +16,6 @@ class UserProvider
      */
     private $userService;
 
-    /**
-     * UserProvider constructor.
-     *
-     * @param SessionDataInterface $sessionData
-     * @param UserService $userService
-     */
     public function __construct(SessionDataInterface $sessionData, UserService $userService)
     {
         $this->sessionData = $sessionData;
@@ -36,7 +27,7 @@ class UserProvider
      *
      * @return UserEntity|null User entity or null if there is no userId in session or the user is not found
      */
-    public function bySession()
+    public function bySession(): ?UserEntity
     {
         if ($userId = $this->sessionData->get('userid')) {
             return $this->userService->fetchOneById($userId);

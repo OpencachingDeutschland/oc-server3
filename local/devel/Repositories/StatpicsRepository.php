@@ -44,7 +44,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param array $where
      * @return StatpicsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param array $where
      * @return StatpicsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param StatpicsEntity $entity
      * @return StatpicsEntity
      */
     public function create(StatpicsEntity $entity)
@@ -127,7 +124,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param StatpicsEntity $entity
      * @return StatpicsEntity
      */
     public function update(StatpicsEntity $entity)
@@ -148,7 +144,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param StatpicsEntity $entity
      * @return StatpicsEntity
      */
     public function remove(StatpicsEntity $entity)
@@ -168,7 +163,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param StatpicsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(StatpicsEntity $entity)
@@ -184,7 +178,6 @@ class StatpicsRepository
     }
 
     /**
-     * @param array $data
      * @return StatpicsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

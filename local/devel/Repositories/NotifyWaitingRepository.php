@@ -44,7 +44,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param array $where
      * @return NotifyWaitingEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param array $where
      * @return NotifyWaitingEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param NotifyWaitingEntity $entity
      * @return NotifyWaitingEntity
      */
     public function create(NotifyWaitingEntity $entity)
@@ -127,7 +124,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param NotifyWaitingEntity $entity
      * @return NotifyWaitingEntity
      */
     public function update(NotifyWaitingEntity $entity)
@@ -148,7 +144,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param NotifyWaitingEntity $entity
      * @return NotifyWaitingEntity
      */
     public function remove(NotifyWaitingEntity $entity)
@@ -168,7 +163,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param NotifyWaitingEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(NotifyWaitingEntity $entity)
@@ -182,7 +176,6 @@ class NotifyWaitingRepository
     }
 
     /**
-     * @param array $data
      * @return NotifyWaitingEntity
      */
     public function getEntityFromDatabaseArray(array $data)

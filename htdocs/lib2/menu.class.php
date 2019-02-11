@@ -84,7 +84,7 @@ class Menu
         }
     }
 
-    public function CreateCacheFile()
+    public function CreateCacheFile(): void
     {
         global $opt, $translate;
 
@@ -157,7 +157,7 @@ class Menu
     /**
      * clears menu cache
      */
-    public function clearCache()
+    public function clearCache(): void
     {
         $dir = __DIR__ . '/../var/cache2/';
         if ($dh = opendir($dir)) {
@@ -190,7 +190,7 @@ class Menu
     /**
      * @param $item
      */
-    public function SetSelectItem($item)
+    public function SetSelectItem($item): void
     {
         $this->nSelectedItem = $item;
     }
@@ -280,7 +280,7 @@ class Menu
      * @param $ids
      * @param $items
      */
-    public function pAppendSubMenu($menuid, $ids, &$items)
+    public function pAppendSubMenu($menuid, $ids, &$items): void
     {
         global $menuitem, $login;
 

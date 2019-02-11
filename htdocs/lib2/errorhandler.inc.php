@@ -8,7 +8,7 @@
 
 $error_handled = false;
 
-function register_errorhandlers()
+function register_errorhandlers(): void
 {
     global $opt;
 
@@ -24,7 +24,7 @@ function register_errorhandlers()
  * @param $errfile
  * @param $errline
  */
-function errorhandler($errno, $errstr, $errfile, $errline)
+function errorhandler($errno, $errstr, $errfile, $errline): void
 {
     // will catch a few runtime errors
 
@@ -48,7 +48,7 @@ function errorhandler($errno, $errstr, $errfile, $errline)
     }
 }
 
-function shutdownhandler()
+function shutdownhandler(): void
 {
     // see http://stackoverflow.com/questions/1900208/php-custom-error-handler-handling-parse-fatal-errors
     //
@@ -99,7 +99,7 @@ function display_error()
 /**
  * @param $errmsg
  */
-function php_errormail($errmsg)
+function php_errormail($errmsg): void
 {
     global $opt, $sql_errormail, $absolute_server_URI;
 

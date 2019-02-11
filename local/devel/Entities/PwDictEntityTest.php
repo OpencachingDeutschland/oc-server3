@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class PwDictEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new PwDictEntity();
         self::assertTrue($entity->isNew());

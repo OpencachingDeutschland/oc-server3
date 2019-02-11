@@ -44,7 +44,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param array $where
      * @return HelppagesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param array $where
      * @return HelppagesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param HelppagesEntity $entity
      * @return HelppagesEntity
      */
     public function create(HelppagesEntity $entity)
@@ -127,7 +124,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param HelppagesEntity $entity
      * @return HelppagesEntity
      */
     public function update(HelppagesEntity $entity)
@@ -148,7 +144,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param HelppagesEntity $entity
      * @return HelppagesEntity
      */
     public function remove(HelppagesEntity $entity)
@@ -168,7 +163,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param HelppagesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(HelppagesEntity $entity)
@@ -181,7 +175,6 @@ class HelppagesRepository
     }
 
     /**
-     * @param array $data
      * @return HelppagesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

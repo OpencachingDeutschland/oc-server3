@@ -423,7 +423,7 @@ class cache
      * @param $sRemoteAddr
      * @param $nCacheId
      */
-    public static function visitCounter($nVisitUserId, $sRemoteAddr, $nCacheId)
+    public static function visitCounter($nVisitUserId, $sRemoteAddr, $nCacheId): void
     {
         global $opt, $_SERVER;
 
@@ -880,7 +880,7 @@ class cache
         ) > 0;
     }
 
-    public function addRecommendation($nUserId, $logdate)
+    public function addRecommendation($nUserId, $logdate): void
     {
         // rating_date will be set to NOW() by Insert-trigger
         sql(
@@ -891,14 +891,14 @@ class cache
         );
     }
 
-    public function removeRecommendation($nUserId)
+    public function removeRecommendation($nUserId): void
     {
         sql("DELETE FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'", $this->nCacheId, $nUserId);
     }
 
     // retrieves admin cache history data and stores it to template variables
     // for display by adminhistory.tpl and adminreports.tpl
-    public function setTplHistoryData($exclude_report_id)
+    public function setTplHistoryData($exclude_report_id): void
     {
         global $opt, $tpl;
 
@@ -1035,7 +1035,7 @@ class cache
      * @param int $oldLogType
      * @param int $newLogType
      */
-    public function updateCacheStatusFromLatestLog($logId, $oldLogType, $newLogType)
+    public function updateCacheStatusFromLatestLog($logId, $oldLogType, $newLogType): void
     {
         if ($newLogType != $oldLogType) {
             // get new cache-status property of the new log type

@@ -12,7 +12,7 @@ class PictureCleanup
     public $name = 'picture_cleanup';
     public $interval = 86400;
 
-    public function run()
+    public function run(): void
     {
         $rsDuplicatePic = sql(
             'SELECT `object_id`, `title`

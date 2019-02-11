@@ -32,6 +32,10 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-mysqli": "*",
+    "ext-simplexml": "*",
+    "ext-posix": "*",
+    "ext-curl": "*",
+    "ext-zlib": "*",
     "eluceo/ical": "^0.15.0"
   },
   "require-dev": {

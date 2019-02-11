@@ -16,7 +16,7 @@ class CleanupTempTables
     public $name = 'cleanup_temptables';
     public $interval = 86400;
 
-    public function run()
+    public function run(): void
     {
         $nIds = [];
         $rs = sqlf('SHOW PROCESSLIST');

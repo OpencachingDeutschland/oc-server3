@@ -1567,7 +1567,7 @@ class user
         return $this->reUser->setValue('email_problems', 0) && $this->save();
     }
 
-    public function reload()
+    public function reload(): void
     {
         $this->reUser->reload();
         $this->reUserStat->reload();

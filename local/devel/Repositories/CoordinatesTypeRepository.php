@@ -44,7 +44,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param array $where
      * @return CoordinatesTypeEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param array $where
      * @return CoordinatesTypeEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param CoordinatesTypeEntity $entity
      * @return CoordinatesTypeEntity
      */
     public function create(CoordinatesTypeEntity $entity)
@@ -127,7 +124,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param CoordinatesTypeEntity $entity
      * @return CoordinatesTypeEntity
      */
     public function update(CoordinatesTypeEntity $entity)
@@ -148,7 +144,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param CoordinatesTypeEntity $entity
      * @return CoordinatesTypeEntity
      */
     public function remove(CoordinatesTypeEntity $entity)
@@ -168,7 +163,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param CoordinatesTypeEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(CoordinatesTypeEntity $entity)
@@ -184,7 +178,6 @@ class CoordinatesTypeRepository
     }
 
     /**
-     * @param array $data
      * @return CoordinatesTypeEntity
      */
     public function getEntityFromDatabaseArray(array $data)

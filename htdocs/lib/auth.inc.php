@@ -24,7 +24,7 @@ define('AUTHERR_USERNOTACTIVE', 4);
 /* auth_user - fills usr[]
  * no return value
  */
-function auth_user()
+function auth_user(): void
 {
     global $usr, $login;
     $login->verify();

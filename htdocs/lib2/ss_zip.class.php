@@ -54,7 +54,7 @@ class ss_zip
 
     /**Resets the object, clears all the structures
      */
-    public function clear()
+    public function clear(): void
     {
         $this->zipfile = '';
         $this->complevel = 6;
@@ -73,7 +73,7 @@ class ss_zip
      * @param string $zipfile path to the file
      * @param boolean $append if true the newlly opened archive will be appended to existing object structure
      */
-    public function open($zipfile, $append = false)
+    public function open($zipfile, $append = false): void
     {
     }
 
@@ -94,7 +94,7 @@ class ss_zip
      *        function. The only exception is that other headers may be sent. See <a
      *        href='http://php.net/header' target='_blank'>http://php.net/header</a>
      */
-    public function save($zipFile, $where = 'f')
+    public function save($zipFile, $where = 'f'): void
     {
         if (!$this->zipfile) {
             $this->archive();
@@ -121,7 +121,7 @@ class ss_zip
      *
      * @see ss_zip::add_file()
      */
-    public function add_data($filename, $data = null)
+    public function add_data($filename, $data = null): void
     {
         $filename = trim($filename);
         $filename = str_replace('\\', '/', $filename);
@@ -191,7 +191,7 @@ class ss_zip
      *
      * @see ss_zip::add_data()
      */
-    public function add_file($filename, $storedasname = '')
+    public function add_file($filename, $storedasname = ''): void
     {
         $fh = fopen($filename, 'r');
         $data = fread($fh, filesize($filename));
@@ -320,7 +320,7 @@ class ss_zip
      *               store it under /my/server/path/arhived/file/path/file.txt You are responsible to ensure that you
      *               have write permissions for this operation under your operation system.
      */
-    public function extract_file($idx, $path = '.')
+    public function extract_file($idx, $path = '.'): void
     {
     }
 
@@ -333,7 +333,7 @@ class ss_zip
      * @param string $name
      * @param string $data
      */
-    public function _write($name, $data)
+    public function _write($name, $data): void
     {
         $fp = fopen($name, 'w');
         fwrite($fp, $data);
@@ -348,7 +348,7 @@ class ss_zip
  * @param $v
  * @param string $l
  */
-function dbg($v, $l = 'var')
+function dbg($v, $l = 'var'): void
 {
     echo "<xmp>$l=";
     print_r($v);

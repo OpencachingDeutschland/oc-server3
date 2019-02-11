@@ -10,10 +10,7 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20170526212910 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->abortIf(
             $this->connection->getDatabasePlatform()->getName() != 'mysql',
@@ -28,11 +25,8 @@ class Version20170526212910 extends AbstractMigration
                 VALUE ('tos','','','',NOW(),1);
         ");
     }
-
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
+    
+    public function down(Schema $schema): void
     {
     }
 }

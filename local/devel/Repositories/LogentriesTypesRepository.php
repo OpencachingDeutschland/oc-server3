@@ -44,7 +44,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param array $where
      * @return LogentriesTypesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param array $where
      * @return LogentriesTypesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param LogentriesTypesEntity $entity
      * @return LogentriesTypesEntity
      */
     public function create(LogentriesTypesEntity $entity)
@@ -127,7 +124,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param LogentriesTypesEntity $entity
      * @return LogentriesTypesEntity
      */
     public function update(LogentriesTypesEntity $entity)
@@ -148,7 +144,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param LogentriesTypesEntity $entity
      * @return LogentriesTypesEntity
      */
     public function remove(LogentriesTypesEntity $entity)
@@ -168,7 +163,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param LogentriesTypesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(LogentriesTypesEntity $entity)
@@ -181,7 +175,6 @@ class LogentriesTypesRepository
     }
 
     /**
-     * @param array $data
      * @return LogentriesTypesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

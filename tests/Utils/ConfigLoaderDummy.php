@@ -10,7 +10,7 @@ class ConfigLoaderDummy implements LoaderInterface
 {
     private $resource;
 
-    public function load($resource, $type = null)
+    public function load($resource, $type = null): void
     {
         $this->resource = $resource;
     }
@@ -20,17 +20,17 @@ class ConfigLoaderDummy implements LoaderInterface
         return $this->resource;
     }
 
-    public function supports($resource, $type = null)
+    public function supports($resource, $type = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getResolver()
+    public function getResolver(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setResolver(LoaderResolverInterface $resolver)
+    public function setResolver(LoaderResolverInterface $resolver): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }

@@ -30,9 +30,7 @@ class GeoCacheFileController extends Controller
     }
 
     /**
-     * @param Request $request
      * @Route("/api/geocache/qrCodes")
-     * @return Response
      */
     public function generateQrCode(Request $request): Response
     {
@@ -59,9 +57,7 @@ class GeoCacheFileController extends Controller
     }
 
     /**
-     * @param Request $request
      * @Route("/api/geocache/qrCodes/ics")
-     * @return Response
      */
     public function generateQrCodeIcs(Request $request): Response
     {

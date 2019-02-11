@@ -11,19 +11,15 @@ class Reports
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
     /**
-     * @param array $wpCodes
-     * @return array
+     * @param string[] $wpCodes
      */
-    public function getReportStatus(array $wpCodes)
+    public function getReportStatus(array $wpCodes): array
     {
         $query = $this->connection->createQueryBuilder()
             ->select('DISTINCT(wp_oc)')

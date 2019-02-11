@@ -44,7 +44,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param array $where
      * @return GnsSearchEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param array $where
      * @return GnsSearchEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param GnsSearchEntity $entity
      * @return GnsSearchEntity
      */
     public function create(GnsSearchEntity $entity)
@@ -127,7 +124,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param GnsSearchEntity $entity
      * @return GnsSearchEntity
      */
     public function update(GnsSearchEntity $entity)
@@ -148,7 +144,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param GnsSearchEntity $entity
      * @return GnsSearchEntity
      */
     public function remove(GnsSearchEntity $entity)
@@ -168,7 +163,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param GnsSearchEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GnsSearchEntity $entity)
@@ -182,7 +176,6 @@ class GnsSearchRepository
     }
 
     /**
-     * @param array $data
      * @return GnsSearchEntity
      */
     public function getEntityFromDatabaseArray(array $data)

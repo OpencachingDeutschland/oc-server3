@@ -64,7 +64,7 @@ if ($processSync->enter()) {
 }
 
 
-function checkJob(&$job)
+function checkJob(&$job): void
 {
     global $ignore_interval;
 

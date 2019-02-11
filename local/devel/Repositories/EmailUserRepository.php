@@ -44,7 +44,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param array $where
      * @return EmailUserEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param array $where
      * @return EmailUserEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param EmailUserEntity $entity
      * @return EmailUserEntity
      */
     public function create(EmailUserEntity $entity)
@@ -127,7 +124,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param EmailUserEntity $entity
      * @return EmailUserEntity
      */
     public function update(EmailUserEntity $entity)
@@ -148,7 +144,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param EmailUserEntity $entity
      * @return EmailUserEntity
      */
     public function remove(EmailUserEntity $entity)
@@ -168,7 +163,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param EmailUserEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(EmailUserEntity $entity)
@@ -185,7 +179,6 @@ class EmailUserRepository
     }
 
     /**
-     * @param array $data
      * @return EmailUserEntity
      */
     public function getEntityFromDatabaseArray(array $data)

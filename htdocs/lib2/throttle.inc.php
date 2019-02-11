@@ -8,7 +8,7 @@
 
 // CheckThrottle();
 
-function CheckThrottle()
+function CheckThrottle(): void
 {
     global $opt, $tpl;
 

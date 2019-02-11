@@ -34,7 +34,7 @@ class PresenterCacheNote
         $this->coordinate = new PresenterCoordinate($this->request, $translator);
     }
 
-    public function init($cacheNoteHandler, $userId, $cacheId)
+    public function init($cacheNoteHandler, $userId, $cacheId): void
     {
         $this->cacheNoteHandler = $cacheNoteHandler;
         $this->userId = $userId;
@@ -49,7 +49,7 @@ class PresenterCacheNote
     /**
      * @param \OcSmarty $template
      */
-    public function prepare($template)
+    public function prepare($template): void
     {
         $template->assign(self::tpl_note_id, $this->noteId);
         $template->assign(self::tpl_cache_id, $this->cacheId);
@@ -65,7 +65,7 @@ class PresenterCacheNote
 
         if ($this->includeCoordinate()) {
             $this->coordinate->validate();
-            // Removed false-return for invalid coordinate, so that at least the note will be saved.
+        // Removed false-return for invalid coordinate, so that at least the note will be saved.
             // validate() produces some formal valid coordinate.
             // -- following 25 May 2015
         } else {
@@ -75,7 +75,7 @@ class PresenterCacheNote
         return true;
     }
 
-    public function doSubmit()
+    public function doSubmit(): void
     {
         $coordinate = $this->getCoordinate();
 

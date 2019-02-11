@@ -7,7 +7,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class PasswordCryptTest extends AbstractModuleTest
 {
-    public function test_encryptPassword()
+    public function test_encryptPassword(): void
     {
         global $opt;
         $opt['logic']['password_hash'] = true;
@@ -19,7 +19,7 @@ class PasswordCryptTest extends AbstractModuleTest
         );
     }
 
-    public function test_encryptPassword_without_salt()
+    public function test_encryptPassword_without_salt(): void
     {
         global $opt;
         $opt['logic']['password_hash'] = false;

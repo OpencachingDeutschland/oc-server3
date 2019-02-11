@@ -44,7 +44,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiClogEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiClogEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param OkapiClogEntity $entity
      * @return OkapiClogEntity
      */
     public function create(OkapiClogEntity $entity)
@@ -127,7 +124,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param OkapiClogEntity $entity
      * @return OkapiClogEntity
      */
     public function update(OkapiClogEntity $entity)
@@ -148,7 +144,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param OkapiClogEntity $entity
      * @return OkapiClogEntity
      */
     public function remove(OkapiClogEntity $entity)
@@ -168,7 +163,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param OkapiClogEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiClogEntity $entity)
@@ -180,7 +174,6 @@ class OkapiClogRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiClogEntity
      */
     public function getEntityFromDatabaseArray(array $data)

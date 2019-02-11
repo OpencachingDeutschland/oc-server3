@@ -14,7 +14,7 @@ class OrphanCleanup
     public $name = 'orphan_cleanup';
     public $interval = 86400; // once per day
 
-    public function run()
+    public function run(): void
     {
         // cleanup XML session data
         sql_temp_table('tmpsessiondata');

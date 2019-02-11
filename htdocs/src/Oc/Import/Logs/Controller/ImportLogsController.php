@@ -25,7 +25,7 @@ class ImportLogsController extends Controller
     /**
      * @Route(path="/import/logs")
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 'on');
@@ -37,7 +37,6 @@ class ImportLogsController extends Controller
             $xmlContent
         );
         $xml = new \SimpleXMLElement($xmlContent);
-        $xmlArray = json_decode(json_encode($xml), true);
 
         $response = new Response();
         $response->setContent(

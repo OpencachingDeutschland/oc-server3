@@ -19,7 +19,7 @@ class GlobalContextSubscriberTest extends TestCase
     /**
      * Tests that subscribed events returns the expected events.
      */
-    public function testSubscribedEvents()
+    public function testSubscribedEvents(): void
     {
         $subscribedEvents = GlobalContextSubscriber::getSubscribedEvents();
 
@@ -30,7 +30,7 @@ class GlobalContextSubscriberTest extends TestCase
     /**
      * Tests that the onKernelRequest listener initializes and sets the global context to the master request.
      */
-    public function testThatOnKernelRequestListenerSetsGlobalContextToMasterRequest()
+    public function testThatOnKernelRequestListenerSetsGlobalContextToMasterRequest(): void
     {
         $subscriber = $this->getGlobalContextSubscriber();
 
@@ -54,7 +54,7 @@ class GlobalContextSubscriberTest extends TestCase
     /**
      * Tests that the onKernelRequest listener does nothing when the incoming request is not the master request.
      */
-    public function testThatOnKernelRequestListenerDoesNothing()
+    public function testThatOnKernelRequestListenerDoesNothing(): void
     {
         $subscriber = $this->getGlobalContextSubscriber(false);
 

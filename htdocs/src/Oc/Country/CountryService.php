@@ -4,9 +4,6 @@ namespace Oc\Country;
 
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class CountryService
- */
 class CountryService
 {
     /**
@@ -14,11 +11,6 @@ class CountryService
      */
     private $countryRepository;
 
-    /**
-     * CountryService constructor.
-     *
-     * @param CountryRepository $countryRepository
-     */
     public function __construct(CountryRepository $countryRepository)
     {
         $this->countryRepository = $countryRepository;
@@ -29,7 +21,7 @@ class CountryService
      *
      * @return CountryEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->countryRepository->fetchAll();
@@ -42,36 +34,24 @@ class CountryService
 
     /**
      * Creates a country in the database.
-     *
-     * @param CountryEntity $entity
-     *
-     * @return CountryEntity
      */
-    public function create(CountryEntity $entity)
+    public function create(CountryEntity $entity): CountryEntity
     {
         return $this->countryRepository->create($entity);
     }
 
     /**
      * Update a country in the database.
-     *
-     * @param CountryEntity $entity
-     *
-     * @return CountryEntity
      */
-    public function update(CountryEntity $entity)
+    public function update(CountryEntity $entity): CountryEntity
     {
         return $this->countryRepository->update($entity);
     }
 
     /**
      * Removes a country from the database.
-     *
-     * @param CountryEntity $entity
-     *
-     * @return CountryEntity
      */
-    public function remove(CountryEntity $entity)
+    public function remove(CountryEntity $entity): CountryEntity
     {
         return $this->countryRepository->remove($entity);
     }

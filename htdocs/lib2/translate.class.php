@@ -43,7 +43,7 @@ class translate
      * @param string $line
      * @param string $plural
      * @param int $count
-     * @param null $lang
+     * @param null|mixed $lang
      *
      * @return string
      */
@@ -167,7 +167,7 @@ class translateEdit extends translate
      * @param string $line
      * @param string $plural
      * @param int $count
-     * @param null $lang
+     * @param null|mixed $lang
      *
      * @return string
      */

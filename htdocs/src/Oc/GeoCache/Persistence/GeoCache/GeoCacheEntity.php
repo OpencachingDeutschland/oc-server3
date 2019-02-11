@@ -184,10 +184,8 @@ class GeoCacheEntity extends AbstractEntity
 
     /**
      * Checks if the entity is new.
-     *
-     * @return bool
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->cacheId === null;
     }

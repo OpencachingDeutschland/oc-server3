@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GnsSearchEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GnsSearchEntity();
         self::assertTrue($entity->isNew());

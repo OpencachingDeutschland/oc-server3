@@ -3,13 +3,9 @@
 namespace OcTest\Utils;
 
 use Symfony\Component\Intl\Exception\NotImplementedException;
-use Twig_CompilerInterface;
 use Twig_ExtensionInterface;
-use Twig_LexerInterface;
 use Twig_LoaderInterface;
-use Twig_NodeInterface;
 use Twig_NodeVisitorInterface;
-use Twig_ParserInterface;
 use Twig_RuntimeLoaderInterface;
 use Twig_TokenParserInterface;
 use Twig_TokenStream;
@@ -20,82 +16,82 @@ class TwigDummy extends \Twig_Environment
     {
     }
 
-    public function getBaseTemplateClass()
+    public function getBaseTemplateClass(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setBaseTemplateClass($class)
+    public function setBaseTemplateClass($class): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function enableDebug()
+    public function enableDebug(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function disableDebug()
+    public function disableDebug(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function isDebug()
+    public function isDebug(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function enableAutoReload()
+    public function enableAutoReload(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function disableAutoReload()
+    public function disableAutoReload(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function isAutoReload()
+    public function isAutoReload(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function enableStrictVariables()
+    public function enableStrictVariables(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function disableStrictVariables()
+    public function disableStrictVariables(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function isStrictVariables()
+    public function isStrictVariables(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getCache($original = true)
+    public function getCache($original = true): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setCache($cache)
+    public function setCache($cache): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getCacheFilename($name)
+    public function getCacheFilename($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTemplateClass($name, $index = null)
+    public function getTemplateClass($name, $index = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTemplateClassPrefix()
+    public function getTemplateClassPrefix(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
@@ -105,287 +101,287 @@ class TwigDummy extends \Twig_Environment
         return implode('', $context);
     }
 
-    public function display($name, array $context = [])
+    public function display($name, array $context = []): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function load($name)
+    public function load($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function loadTemplate($name, $index = null)
+    public function loadTemplate($name, $index = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function createTemplate($template)
+    public function createTemplate($template): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function isTemplateFresh($name, $time)
+    public function isTemplateFresh($name, $time): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function resolveTemplate($names)
+    public function resolveTemplate($names): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function clearTemplateCache()
+    public function clearTemplateCache(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function clearCacheFiles()
+    public function clearCacheFiles(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getLexer()
+    public function getLexer(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setLexer(\Twig_Lexer $lexer)
+    public function setLexer(\Twig_Lexer $lexer): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function tokenize($source, $name = null)
+    public function tokenize($source, $name = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getParser()
+    public function getParser(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setParser(\Twig_Parser $parser)
+    public function setParser(\Twig_Parser $parser): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function parse(Twig_TokenStream $stream)
+    public function parse(Twig_TokenStream $stream): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getCompiler()
+    public function getCompiler(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setCompiler(\Twig_Compiler $compiler)
+    public function setCompiler(\Twig_Compiler $compiler): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function compile(\Twig_Node $node)
+    public function compile(\Twig_Node $node): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function compileSource($source, $name = null)
+    public function compileSource($source, $name = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setLoader(Twig_LoaderInterface $loader)
+    public function setLoader(Twig_LoaderInterface $loader): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getLoader()
+    public function getLoader(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setCharset($charset)
+    public function setCharset($charset): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getCharset()
+    public function getCharset(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function initRuntime()
+    public function initRuntime(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function hasExtension($class)
+    public function hasExtension($class): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addRuntimeLoader(Twig_RuntimeLoaderInterface $loader)
+    public function addRuntimeLoader(Twig_RuntimeLoaderInterface $loader): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getExtension($class)
+    public function getExtension($class): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getRuntime($class)
+    public function getRuntime($class): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addExtension(Twig_ExtensionInterface $extension)
+    public function addExtension(Twig_ExtensionInterface $extension): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function removeExtension($name)
+    public function removeExtension($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function setExtensions(array $extensions)
+    public function setExtensions(array $extensions): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getExtensions()
+    public function getExtensions(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addTokenParser(Twig_TokenParserInterface $parser)
+    public function addTokenParser(Twig_TokenParserInterface $parser): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTokenParsers()
+    public function getTokenParsers(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTags()
+    public function getTags(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addNodeVisitor(Twig_NodeVisitorInterface $visitor)
+    public function addNodeVisitor(Twig_NodeVisitorInterface $visitor): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getNodeVisitors()
+    public function getNodeVisitors(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addFilter($name, $filter = null)
+    public function addFilter($name, $filter = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getFilter($name)
+    public function getFilter($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function registerUndefinedFilterCallback($callable)
+    public function registerUndefinedFilterCallback($callable): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getFilters()
+    public function getFilters(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addTest($name, $test = null)
+    public function addTest($name, $test = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTests()
+    public function getTests(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getTest($name)
+    public function getTest($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addFunction($name, $function = null)
+    public function addFunction($name, $function = null): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getFunction($name)
+    public function getFunction($name): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function registerUndefinedFunctionCallback($callable)
+    public function registerUndefinedFunctionCallback($callable): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getFunctions()
+    public function getFunctions(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function addGlobal($name, $value)
+    public function addGlobal($name, $value): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getGlobals()
+    public function getGlobals(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function mergeGlobals(array $context)
+    public function mergeGlobals(array $context): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getUnaryOperators()
+    public function getUnaryOperators(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function getBinaryOperators()
+    public function getBinaryOperators(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    public function computeAlternatives($name, $items)
+    public function computeAlternatives($name, $items): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    protected function initGlobals()
+    protected function initGlobals(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    protected function initExtensions()
+    protected function initExtensions(): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    protected function initExtension(Twig_ExtensionInterface $extension)
+    protected function initExtension(Twig_ExtensionInterface $extension): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }
 
-    protected function writeCacheFile($file, $content)
+    protected function writeCacheFile($file, $content): void
     {
         throw new NotImplementedException('this mehtod is not implemented in ' . __CLASS__ . ' class');
     }

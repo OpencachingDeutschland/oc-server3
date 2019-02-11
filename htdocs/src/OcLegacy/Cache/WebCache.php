@@ -29,11 +29,8 @@ class WebCache
             $this->opt['rootpath'] = dirname(dirname(dirname(__DIR__))) . '/';
         }
     }
-
-    /**
-     *
-     */
-    public function clearCache()
+    
+    public function clearCache(): void
     {
         $this->unlinkFiles('var/cache2', 'php');
 
@@ -42,11 +39,7 @@ class WebCache
         $this->unlinkFiles('var/cache2/smarty/compiled', 'php');
     }
 
-    /**
-     * @param string $relBaseDir
-     * @param string $ext
-     */
-    private function unlinkFiles($relBaseDir, $ext)
+    private function unlinkFiles(string $relBaseDir, string $ext): void
     {
         if (substr($relBaseDir, -1, 1) !== '/') {
             $relBaseDir .= '/';
@@ -66,10 +59,7 @@ class WebCache
         }
     }
 
-    /**
-     *
-     */
-    public function createMenuCache()
+    public function createMenuCache(): void
     {
         global $opt;
         foreach ($this->opt['locale'] as $sLanguage => $v) {
@@ -93,10 +83,7 @@ class WebCache
         }
     }
 
-    /**
-     *
-     */
-    public function createLabelCache()
+    public function createLabelCache(): void
     {
         global $opt;
 
@@ -115,10 +102,7 @@ class WebCache
         }
     }
 
-    /**
-     *
-     */
-    public function preCompileAllTemplates()
+    public function preCompileAllTemplates(): void
     {
         if ($hDir = opendir($this->opt['stylepath'])) {
             while (($sFilename = readdir($hDir)) !== false) {
@@ -142,10 +126,7 @@ class WebCache
         }
     }
 
-    /**
-     * @param string $sTemplate
-     */
-    private function preCompileTemplate($sTemplate)
+    private function preCompileTemplate(string $sTemplate): void
     {
         foreach ($this->opt['locale'] as $sLanguage => $v) {
             if ($this->opt['template']['locales'][$sLanguage]['status'] !== OC_LOCALE_DISABLED) {
@@ -154,11 +135,7 @@ class WebCache
         }
     }
 
-    /**
-     * @param $sTemplate
-     * @param $sLanguage
-     */
-    private function preCompileTemplateWithLanguage($sTemplate, $sLanguage)
+    private function preCompileTemplateWithLanguage(string $sTemplate, string $sLanguage): void
     {
         global $opt;
 

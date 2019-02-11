@@ -10,19 +10,57 @@ namespace OcLegacy\Util;
 
 class SiteMapXml
 {
+    /**
+     * @var string
+     */
     public $sDefaultChangeFreq = 'monthly';
+
+    /**
+     * @var int
+     */
     public $nMaxFileSize = 9961472; // max file size, 10MB by specification
+
+    /**
+     * @var int
+     */
     public $nMaxUrlCount = 50000; // max number of URLs per file, 50000 by specification
 
+    /**
+     * @var string
+     */
     public $sPath = '';
+
+    /**
+     * @var string
+     */
     public $sDomain = '';
+
+    /**
+     * @var
+     */
     public $oIndexFile;
+
+    /**
+     * @var int
+     */
     public $nSiteMapIndex = 0;
+
+    /**
+     * @var
+     */
     public $oSiteMapFile;
+
+    /**
+     * @var int
+     */
     public $nWrittenSize = 0;
+
+    /**
+     * @var int
+     */
     public $nWrittenCount = 0;
 
-    public function open($sPath, $sDomain)
+    public function open($sPath, $sDomain): void
     {
         if (substr($sPath, - 1, 1) != '/') {
             $sPath .= '/';
@@ -45,12 +83,9 @@ class SiteMapXml
      */
 
     /**
-     * @param string $sFile
-     * @param int $dLastMod
      * @param string $sChangeFreq
-     * @param float $nPriority
      */
-    public function write($sFile, $dLastMod, $sChangeFreq = null, $nPriority = 0.5)
+    public function write(string $sFile, int $dLastMod, ?string $sChangeFreq = null, float $nPriority = 0.5): void
     {
         if (!$sChangeFreq) {
             $sChangeFreq = $this->sDefaultChangeFreq;
@@ -69,10 +104,10 @@ class SiteMapXml
     /**
      * @param string $str
      */
-    public function writeInternal($str)
+    public function writeInternal($str): void
     {
         // close the last file?
-        if (($this->oSiteMapFile) && (($this->nWrittenSize + strlen($str) > $this->nMaxFileSize) || ($this->nWrittenCount >= $this->nMaxUrlCount))) {
+        if ($this->oSiteMapFile && (($this->nWrittenSize + strlen($str) > $this->nMaxFileSize) || ($this->nWrittenCount >= $this->nMaxUrlCount))) {
             gzwrite($this->oSiteMapFile, '</urlset>');
             gzclose($this->oSiteMapFile);
             $this->oSiteMapFile = null;
@@ -103,7 +138,7 @@ class SiteMapXml
         $this->nWrittenCount++;
     }
 
-    public function close()
+    public function close(): void
     {
         if ($this->oSiteMapFile) {
             gzwrite($this->oSiteMapFile, '</urlset>');

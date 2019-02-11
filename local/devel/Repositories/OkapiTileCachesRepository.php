@@ -44,7 +44,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiTileCachesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiTileCachesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param OkapiTileCachesEntity $entity
      * @return OkapiTileCachesEntity
      */
     public function create(OkapiTileCachesEntity $entity)
@@ -127,7 +124,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param OkapiTileCachesEntity $entity
      * @return OkapiTileCachesEntity
      */
     public function update(OkapiTileCachesEntity $entity)
@@ -148,7 +144,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param OkapiTileCachesEntity $entity
      * @return OkapiTileCachesEntity
      */
     public function remove(OkapiTileCachesEntity $entity)
@@ -168,7 +163,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param OkapiTileCachesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiTileCachesEntity $entity)
@@ -189,7 +183,6 @@ class OkapiTileCachesRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiTileCachesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

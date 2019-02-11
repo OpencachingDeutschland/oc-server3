@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class XmlsessionEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new XmlsessionEntity();
         self::assertTrue($entity->isNew());

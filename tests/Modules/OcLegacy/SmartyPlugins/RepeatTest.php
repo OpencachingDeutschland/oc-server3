@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class RepeatTest extends AbstractModuleTest
 {
-    public function testRepeat()
+    public function testRepeat(): void
     {
         $smarty = null;
         self::assertEquals(

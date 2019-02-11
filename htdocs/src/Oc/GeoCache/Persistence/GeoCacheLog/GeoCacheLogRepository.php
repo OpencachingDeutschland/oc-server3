@@ -16,18 +16,13 @@ class GeoCacheLogRepository
      *
      * @var string
      */
-    const TABLE = 'cache_logs';
+    public const TABLE = 'cache_logs';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * GeoCacheLogRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -39,7 +34,7 @@ class GeoCacheLogRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return GeoCacheLogEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -64,12 +59,9 @@ class GeoCacheLogRepository
     /**
      * Fetches a GeoCacheLog by given where clause.
      *
-     * @param array $where
-     *
      * @throws RecordNotFoundException Thrown when no record is found
-     * @return null|GeoCacheLogEntity
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?GeoCacheLogEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
              ->select('*')
@@ -96,12 +88,10 @@ class GeoCacheLogRepository
     /**
      * Fetches all GeoCacheLogs by given where clause.
      *
-     * @param array $where
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return GeoCacheLogEntity[]
      */
-    public function fetchBy(array $where = [])
+    public function fetchBy(array $where = []): array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
              ->select('*')
@@ -133,12 +123,9 @@ class GeoCacheLogRepository
     /**
      * Fetch latest user geo cache log.
      *
-     * @param int $userId
-     *
      * @throws RecordNotFoundException
-     * @return GeoCacheLogEntity
      */
-    public function getLatestUserLog($userId)
+    public function getLatestUserLog(int $userId): GeoCacheLogEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -162,12 +149,9 @@ class GeoCacheLogRepository
     /**
      * Creates a GeoCacheLog in the database.
      *
-     * @param GeoCacheLogEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return GeoCacheLogEntity
      */
-    public function create(GeoCacheLogEntity $entity)
+    public function create(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -188,12 +172,9 @@ class GeoCacheLogRepository
     /**
      * Update a GeoCacheLog in the database.
      *
-     * @param GeoCacheLogEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return GeoCacheLogEntity
      */
-    public function update(GeoCacheLogEntity $entity)
+    public function update(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -215,12 +196,9 @@ class GeoCacheLogRepository
     /**
      * Removes a GeoCacheLog from the database.
      *
-     * @param GeoCacheLogEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return GeoCacheLogEntity
      */
-    public function remove(GeoCacheLogEntity $entity)
+    public function remove(GeoCacheLogEntity $entity): GeoCacheLogEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -238,12 +216,8 @@ class GeoCacheLogRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param GeoCacheLogEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(GeoCacheLogEntity $entity)
+    public function getDatabaseArrayFromEntity(GeoCacheLogEntity $entity): array
     {
         return [
             'id' => $entity->id,
@@ -272,12 +246,8 @@ class GeoCacheLogRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return GeoCacheLogEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): GeoCacheLogEntity
     {
         $entity = new GeoCacheLogEntity();
         $entity->id = (int) $data['id'];

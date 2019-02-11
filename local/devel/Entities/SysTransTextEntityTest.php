@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SysTransTextEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SysTransTextEntity();
         self::assertTrue($entity->isNew());

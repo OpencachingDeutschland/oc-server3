@@ -18,7 +18,7 @@
 $search_output_file_download = false;
 
 
-function search_output()
+function search_output(): void
 {
     global $db, $opt;
     global $distance_unit, $startat, $count, $sql, $sqlLimit;

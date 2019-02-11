@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GeoCacheFileControllerTest extends TestCase
 {
-    public function test_generate_qr_code_throws_unkown_waypoint_exception()
+    public function test_generate_qr_code_throws_unkown_waypoint_exception(): void
     {
         /** @var GeoCacheFileController $controller */
         $controller = AppKernel::Container()->get(GeoCacheFileController::class);

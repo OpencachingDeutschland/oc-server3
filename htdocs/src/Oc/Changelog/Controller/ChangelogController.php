@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Twig_Environment;
 
 /**
- * Class ChangelogController
- *
- *
  * @Route(service="Oc\Changelog\Controller\ChangelogController")
  */
 class ChangelogController extends Controller
@@ -34,10 +31,8 @@ class ChangelogController extends Controller
 
     /**
      * @Route(path="/changelog", name="changelog.index")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $changelog = $this->markConverter
             ->convertToHtml(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'));

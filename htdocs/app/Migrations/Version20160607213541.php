@@ -10,10 +10,7 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20160607213541 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
@@ -21,11 +18,8 @@ class Version20160607213541 extends AbstractMigration
         $this->addSql('ALTER TABLE field_note ADD CONSTRAINT FK_DC7193AEA76ED395 FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE field_note ADD CONSTRAINT FK_DC7193AE67030974 FOREIGN KEY (geocache_id) REFERENCES caches (cache_id) ON DELETE CASCADE');
     }
-
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
+    
+    public function down(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 

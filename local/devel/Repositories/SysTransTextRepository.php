@@ -44,7 +44,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param array $where
      * @return SysTransTextEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param array $where
      * @return SysTransTextEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param SysTransTextEntity $entity
      * @return SysTransTextEntity
      */
     public function create(SysTransTextEntity $entity)
@@ -127,7 +124,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param SysTransTextEntity $entity
      * @return SysTransTextEntity
      */
     public function update(SysTransTextEntity $entity)
@@ -148,7 +144,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param SysTransTextEntity $entity
      * @return SysTransTextEntity
      */
     public function remove(SysTransTextEntity $entity)
@@ -168,7 +163,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param SysTransTextEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysTransTextEntity $entity)
@@ -182,7 +176,6 @@ class SysTransTextRepository
     }
 
     /**
-     * @param array $data
      * @return SysTransTextEntity
      */
     public function getEntityFromDatabaseArray(array $data)

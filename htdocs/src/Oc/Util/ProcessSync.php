@@ -6,9 +6,6 @@
 
 namespace Oc\Util;
 
-/**
- * Class ProcessSync
- */
 class ProcessSync
 {
     /**
@@ -16,22 +13,15 @@ class ProcessSync
      */
     private $pidFilePath;
 
-    /**
-     * ProcessSync constructor.
-     *
-     * @param $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->pidFilePath = __DIR__ . '/../../../var/cache2/' . $name . '.pid';
     }
 
     /**
      * Enter code section which must not run concurrently
-     *
-     * @return bool
      */
-    public function enter()
+    public function enter(): bool
     {
         if (!$this->checkDaemon()) {
             return false;
@@ -51,10 +41,8 @@ class ProcessSync
 
     /**
      * checks if other instance of process is running
-     *
-     * @return bool
      */
-    private function checkDaemon()
+    private function checkDaemon(): bool
     {
         if (file_exists($this->pidFilePath) && $pidFile = @fopen($this->pidFilePath, 'r')) {
             $pidDaemon = fgets($pidFile, 20);
@@ -68,7 +56,9 @@ class ProcessSync
                 unlink($this->pidFilePath);
 
                 return false;
-            } elseif (posix_kill($pidDaemon, 0)) { // process running?
+            }
+
+            if (posix_kill($pidDaemon, 0)) { // process running?
                 // yes, good bye
                 echo 'Error: process for ' . $this->pidFilePath . " is already running with pid=$pidDaemon\n";
 
@@ -86,11 +76,8 @@ class ProcessSync
 
     /**
      * Leave code section which must not run concurrently
-     *
-     * @param bool $message
-     * @return bool
      */
-    public function leave($message = false)
+    public function leave(bool $message = false): bool
     {
         if ($message) {
             echo $message . "\n";

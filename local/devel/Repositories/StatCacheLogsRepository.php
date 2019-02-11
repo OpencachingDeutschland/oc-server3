@@ -44,7 +44,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param array $where
      * @return StatCacheLogsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param array $where
      * @return StatCacheLogsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param StatCacheLogsEntity $entity
      * @return StatCacheLogsEntity
      */
     public function create(StatCacheLogsEntity $entity)
@@ -127,7 +124,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param StatCacheLogsEntity $entity
      * @return StatCacheLogsEntity
      */
     public function update(StatCacheLogsEntity $entity)
@@ -148,7 +144,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param StatCacheLogsEntity $entity
      * @return StatCacheLogsEntity
      */
     public function remove(StatCacheLogsEntity $entity)
@@ -168,7 +163,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param StatCacheLogsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(StatCacheLogsEntity $entity)
@@ -185,7 +179,6 @@ class StatCacheLogsRepository
     }
 
     /**
-     * @param array $data
      * @return StatCacheLogsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

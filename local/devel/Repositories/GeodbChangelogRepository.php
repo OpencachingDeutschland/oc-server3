@@ -44,7 +44,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbChangelogEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbChangelogEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param GeodbChangelogEntity $entity
      * @return GeodbChangelogEntity
      */
     public function create(GeodbChangelogEntity $entity)
@@ -127,7 +124,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param GeodbChangelogEntity $entity
      * @return GeodbChangelogEntity
      */
     public function update(GeodbChangelogEntity $entity)
@@ -148,7 +144,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param GeodbChangelogEntity $entity
      * @return GeodbChangelogEntity
      */
     public function remove(GeodbChangelogEntity $entity)
@@ -168,7 +163,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param GeodbChangelogEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeodbChangelogEntity $entity)
@@ -183,7 +177,6 @@ class GeodbChangelogRepository
     }
 
     /**
-     * @param array $data
      * @return GeodbChangelogEntity
      */
     public function getEntityFromDatabaseArray(array $data)

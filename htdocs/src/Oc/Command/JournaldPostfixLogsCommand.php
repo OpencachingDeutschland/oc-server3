@@ -7,13 +7,9 @@ namespace Oc\Command;
 
 use Oc\Postfix\JournalLogs;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class JournaldPostfixLogsCommand
- */
 class JournaldPostfixLogsCommand extends SymfonyCommand
 {
     /**
@@ -24,16 +20,11 @@ class JournaldPostfixLogsCommand extends SymfonyCommand
     public function __construct(JournalLogs $journalLogs)
     {
         parent::__construct();
+
         $this->journalLogs = $journalLogs;
     }
 
-    /**
-     * Configures the command.
-     *
-     *
-     * @throws InvalidArgumentException
-     */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -42,16 +33,10 @@ class JournaldPostfixLogsCommand extends SymfonyCommand
             ->setDescription('process postfix logs for support');
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int|null
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->journalLogs->processJournalLogs();
+
+        return null;
     }
 }

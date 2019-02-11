@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SysReplExcludeEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SysReplExcludeEntity();
         self::assertTrue($entity->isNew());

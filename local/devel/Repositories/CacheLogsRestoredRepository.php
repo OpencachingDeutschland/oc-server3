@@ -44,7 +44,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheLogsRestoredEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheLogsRestoredEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param GeoCacheLogsRestoredEntity $entity
      * @return GeoCacheLogsRestoredEntity
      */
     public function create(GeoCacheLogsRestoredEntity $entity)
@@ -127,7 +124,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param GeoCacheLogsRestoredEntity $entity
      * @return GeoCacheLogsRestoredEntity
      */
     public function update(GeoCacheLogsRestoredEntity $entity)
@@ -148,7 +144,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param GeoCacheLogsRestoredEntity $entity
      * @return GeoCacheLogsRestoredEntity
      */
     public function remove(GeoCacheLogsRestoredEntity $entity)
@@ -168,7 +163,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param GeoCacheLogsRestoredEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheLogsRestoredEntity $entity)
@@ -183,7 +177,6 @@ class CacheLogsRestoredRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheLogsRestoredEntity
      */
     public function getEntityFromDatabaseArray(array $data)

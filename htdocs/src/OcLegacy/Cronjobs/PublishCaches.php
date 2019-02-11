@@ -7,10 +7,17 @@ namespace OcLegacy\Cronjobs;
 
 class PublishCaches
 {
+    /**
+     * @var string
+     */
     public $name = 'publish_caches';
+
+    /**
+     * @var int
+     */
     public $interval = 60;
 
-    public function run()
+    public function run(): void
     {
         $rsPublish = sql(
             'SELECT `cache_id`, `user_id`

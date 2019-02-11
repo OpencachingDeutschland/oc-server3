@@ -18,7 +18,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         $this->htmlPurifier = new \OcHTMLPurifier($opt);
     }
 
-    public function testAllowedHtmlTags()
+    public function testAllowedHtmlTags(): void
     {
         // For backward compatibility of editing existing cache listings, it can be
         // CRITICAL if this test fails.
@@ -83,7 +83,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         }
     }
 
-    public function testHtmlTagAIsAllowedAndProtectedWithNoOpener()
+    public function testHtmlTagAIsAllowedAndProtectedWithNoOpener(): void
     {
         $string = '<a href="http://www.google.de" target="_blank">lorem ipsum</a>';
         $stringProtected = '<a href="http://www.google.de" target="_blank" rel="noreferrer noopener">lorem ipsum</a>';
@@ -91,7 +91,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         self::assertEquals($stringProtected, $newString);
     }
 
-    public function testRemovedHtmlTags()
+    public function testRemovedHtmlTags(): void
     {
         // Tags removed by HTMLPurifier.
         // TinyMCE removed also these tags: <center> <dir> <s>
@@ -171,7 +171,7 @@ class OcHTMLPurifierTest extends AbstractModuleTest
         }
     }
 
-    public function testAllowedCss()
+    public function testAllowedCss(): void
     {
         // This list is complete as of HTMLPurifier 4.9.3;
         // see vendor/ezyang/htmlpurifier/library/HTMLPurifier/CSSDefinition.php.

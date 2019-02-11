@@ -4,9 +4,6 @@ namespace Oc\FieldNotes\Form;
 
 use DateTime;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Exception\AlreadySubmittedException;
-use Symfony\Component\Form\Exception\LogicException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,23 +18,13 @@ class UploadType extends AbstractType
      * @var TranslatorInterface
      */
     protected $translator;
-
-    /**
-     * @param TranslatorInterface $translator
-     */
+    
     public function __construct(TranslatorInterface $translator)
     {
         $this->translator = $translator;
     }
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     * @throws UnexpectedTypeException
-     * @throws LogicException
-     * @throws AlreadySubmittedException
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -53,10 +40,8 @@ class UploadType extends AbstractType
 
     /**
      * Event listener for pre set data.
-     *
-     * @param FormEvent $event
      */
-    public function onPreSetFormData(FormEvent $event)
+    public function onPreSetFormData(FormEvent $event): void
     {
         /**
          * @var UploadFormData
@@ -85,12 +70,7 @@ class UploadType extends AbstractType
         }
     }
 
-    /**
-     * @param DateTime $date
-     *
-     * @return string
-     */
-    private function getFormattedDate(DateTime $date)
+    private function getFormattedDate(DateTime $date): string
     {
         return $date->format(
             $this->translator->trans('field_notes.date_format')
@@ -99,10 +79,8 @@ class UploadType extends AbstractType
 
     /**
      * Configure form.
-     *
-     * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UploadFormData::class,

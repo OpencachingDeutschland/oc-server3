@@ -44,7 +44,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param array $where
      * @return XmlsessionEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param array $where
      * @return XmlsessionEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param XmlsessionEntity $entity
      * @return XmlsessionEntity
      */
     public function create(XmlsessionEntity $entity)
@@ -127,7 +124,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param XmlsessionEntity $entity
      * @return XmlsessionEntity
      */
     public function update(XmlsessionEntity $entity)
@@ -148,7 +144,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param XmlsessionEntity $entity
      * @return XmlsessionEntity
      */
     public function remove(XmlsessionEntity $entity)
@@ -168,7 +163,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param XmlsessionEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(XmlsessionEntity $entity)
@@ -190,7 +184,6 @@ class XmlsessionRepository
     }
 
     /**
-     * @param array $data
      * @return XmlsessionEntity
      */
     public function getEntityFromDatabaseArray(array $data)

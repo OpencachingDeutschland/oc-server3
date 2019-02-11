@@ -44,7 +44,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbSearchEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param array $where
      * @return GeodbSearchEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param GeodbSearchEntity $entity
      * @return GeodbSearchEntity
      */
     public function create(GeodbSearchEntity $entity)
@@ -127,7 +124,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param GeodbSearchEntity $entity
      * @return GeodbSearchEntity
      */
     public function update(GeodbSearchEntity $entity)
@@ -148,7 +144,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param GeodbSearchEntity $entity
      * @return GeodbSearchEntity
      */
     public function remove(GeodbSearchEntity $entity)
@@ -168,7 +163,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param GeodbSearchEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeodbSearchEntity $entity)
@@ -183,7 +177,6 @@ class GeodbSearchRepository
     }
 
     /**
-     * @param array $data
      * @return GeodbSearchEntity
      */
     public function getEntityFromDatabaseArray(array $data)

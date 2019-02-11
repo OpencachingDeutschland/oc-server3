@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class CoordInputTest extends AbstractModuleTest
 {
-    public function test_coordinput()
+    public function test_coordinput(): void
     {
         $params = [
             'prefix' => 'coord',
@@ -33,7 +33,7 @@ class CoordInputTest extends AbstractModuleTest
         );
     }
 
-    public function test_coordinput_with_laterror()
+    public function test_coordinput_with_laterror(): void
     {
         $params = [
             'prefix' => 'coord',
@@ -48,7 +48,7 @@ class CoordInputTest extends AbstractModuleTest
         );
     }
 
-    public function test_coordinput_with_lonerror()
+    public function test_coordinput_with_lonerror(): void
     {
         $params = [
             'prefix' => 'coord',

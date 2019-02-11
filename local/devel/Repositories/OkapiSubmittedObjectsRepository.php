@@ -44,7 +44,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiSubmittedObjectsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param array $where
      * @return OkapiSubmittedObjectsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param OkapiSubmittedObjectsEntity $entity
      * @return OkapiSubmittedObjectsEntity
      */
     public function create(OkapiSubmittedObjectsEntity $entity)
@@ -127,7 +124,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param OkapiSubmittedObjectsEntity $entity
      * @return OkapiSubmittedObjectsEntity
      */
     public function update(OkapiSubmittedObjectsEntity $entity)
@@ -148,7 +144,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param OkapiSubmittedObjectsEntity $entity
      * @return OkapiSubmittedObjectsEntity
      */
     public function remove(OkapiSubmittedObjectsEntity $entity)
@@ -168,7 +163,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param OkapiSubmittedObjectsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(OkapiSubmittedObjectsEntity $entity)
@@ -181,7 +175,6 @@ class OkapiSubmittedObjectsRepository
     }
 
     /**
-     * @param array $data
      * @return OkapiSubmittedObjectsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

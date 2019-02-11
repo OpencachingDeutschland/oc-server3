@@ -145,7 +145,7 @@ class cachelist
         return $this->reCachelist->setValue('description', $desc);
     }
 
-    public function setPassword($pw)
+    public function setPassword($pw): void
     {
         $this->reCachelist->setValue('password', $pw);
     }
@@ -277,7 +277,7 @@ class cachelist
         return true;
     }
 
-    public function removeCacheById($cache_id)
+    public function removeCacheById($cache_id): void
     {
         sql(
             "DELETE FROM `cache_list_items` WHERE `cache_list_id`='&1' AND `cache_id`='&2'",
@@ -287,7 +287,7 @@ class cachelist
     }
 
     // watching, bookmarking and access tests
-    public function watch($watch)
+    public function watch($watch): void
     {
         global $login;
         $login->verify();
@@ -328,7 +328,7 @@ class cachelist
         ) != 0;
     }
 
-    public function bookmark($pw)
+    public function bookmark($pw): void
     {
         global $login;
 
@@ -347,7 +347,7 @@ class cachelist
         }
     }
 
-    public function unbookmark()
+    public function unbookmark(): void
     {
         global $login;
 

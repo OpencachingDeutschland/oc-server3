@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class Map2DataEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new Map2DataEntity();
         self::assertTrue($entity->isNew());

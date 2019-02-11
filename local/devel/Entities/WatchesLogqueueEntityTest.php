@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class WatchesLogqueueEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new WatchesLogqueueEntity();
         self::assertTrue($entity->isNew());

@@ -9,9 +9,6 @@ namespace Oc\Postfix;
 
 use Doctrine\DBAL\Connection;
 
-/**
- * Class JournalLogs
- */
 class JournalLogs
 {
     /**
@@ -27,7 +24,6 @@ class JournalLogs
     /**
      * constructor
      *
-     * @param Connection $connection
      * @param array|bool $config
      * $config = [
      *     'hostname' => 'host.domain.tld',
@@ -50,10 +46,9 @@ class JournalLogs
     /**
      * getLogs(\DateTimeInterface $start)
      *
-     * @param \DateTimeInterface $start
      * @return LogEntity[]
      */
-    public function getLogs(\DateTimeInterface $start)
+    public function getLogs(\DateTimeInterface $start): array
     {
         $journals = $this->eGrepStatus($this->config['status'], $start);
 
@@ -93,12 +88,7 @@ class JournalLogs
         return $logEntries;
     }
 
-    /**
-     * @param array $status
-     * @param \DateTimeInterface $start
-     * @return array
-     */
-    private function eGrepStatus(array $status, \DateTimeInterface $start)
+    private function eGrepStatus(array $status, \DateTimeInterface $start): array
     {
         $grepStatus = '';
         foreach ($status as $entry) {
@@ -116,7 +106,7 @@ class JournalLogs
         return explode(PHP_EOL, trim($journalRaw));
     }
 
-    public function processJournalLogs()
+    public function processJournalLogs(): void
     {
         $start = $this->connection
             ->fetchColumn(
@@ -155,11 +145,7 @@ class JournalLogs
             );
     }
 
-    /**
-     * @param $email
-     * @param $dateTime
-     */
-    private function updateEmailStatusToBounced($email, $dateTime)
+    private function updateEmailStatusToBounced(string $email, string $dateTime): void
     {
         $this->connection
             ->executeQuery(
@@ -175,10 +161,7 @@ class JournalLogs
             );
     }
 
-    /**
-     * @param $email
-     */
-    private function updateEmailStatusToSent($email)
+    private function updateEmailStatusToSent(string $email): void
     {
         $this->connection
             ->executeQuery(

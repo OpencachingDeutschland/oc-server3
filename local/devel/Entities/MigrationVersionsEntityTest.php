@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class MigrationVersionsEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new MigrationVersionsEntity();
         self::assertTrue($entity->isNew());

@@ -47,7 +47,7 @@ abstract class PresenterChildWp
         $this->coordinate = new PresenterCoordinate($this->request, $this->translator);
     }
 
-    public function doSubmit()
+    public function doSubmit(): void
     {
         $this->onDoSubmit($this->coordinate->getCoordinate(), $this->getDesc());
     }
@@ -68,7 +68,7 @@ abstract class PresenterChildWp
         return $this->request->get(self::req_wp_desc, $this->description);
     }
 
-    public function init($childWpHandler, $cacheId)
+    public function init($childWpHandler, $cacheId): void
     {
         $this->childWpHandler = $childWpHandler;
         $this->cacheId = $cacheId;
@@ -79,12 +79,12 @@ abstract class PresenterChildWp
     /**
      * @param \Oc\Libse\Coordinate\CoordinateCoordinate $coords
      */
-    public function initCoordinate($coords)
+    public function initCoordinate($coords): void
     {
         $this->coordinate->init($coords->latitude(), $coords->longitude());
     }
 
-    public function initChildWp($childId, $childWp)
+    public function initChildWp($childId, $childWp): void
     {
         $this->childId = $childId;
         $this->type = $childWp['type'];
@@ -92,7 +92,7 @@ abstract class PresenterChildWp
         $this->coordinate->init($childWp['latitude'], $childWp['longitude']);
     }
 
-    public function prepare($template)
+    public function prepare($template): void
     {
         $template->assign(self::tpl_page_title, $this->translator->Translate($this->getTitle()));
         $template->assign(self::tpl_submit_button, $this->translator->Translate($this->getSubmitButton()));
@@ -110,11 +110,11 @@ abstract class PresenterChildWp
         $this->onPrepare($template);
     }
 
-    protected function onPrepare($template)
+    protected function onPrepare($template): void
     {
     }
 
-    private function prepareTypes($template)
+    private function prepareTypes($template): void
     {
         $template->assign(self::tpl_wp_type_ids, $this->getWaypointTypeIds());
         $template->assign(self::tpl_wp_type_names, $this->waypointTypes);

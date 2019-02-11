@@ -13,9 +13,6 @@ class ValidationException extends Exception
      */
     protected $violations;
 
-    /**
-     * @param ConstraintViolationListInterface $violations
-     */
     public function __construct(ConstraintViolationListInterface $violations)
     {
         $this->setViolations($violations);
@@ -23,10 +20,7 @@ class ValidationException extends Exception
         parent::__construct((string) $this);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         $output = '';
 
@@ -40,20 +34,15 @@ class ValidationException extends Exception
         return $output;
     }
 
-    /**
-     * @param ConstraintViolationListInterface $violations
-     */
-    public function setViolations(ConstraintViolationListInterface $violations)
+    public function setViolations(ConstraintViolationListInterface $violations): void
     {
         $this->violations = $violations;
     }
 
     /**
      * Returns all violations.
-     *
-     * @return ConstraintViolationListInterface
      */
-    public function getViolations()
+    public function getViolations(): ConstraintViolationListInterface
     {
         return $this->violations;
     }

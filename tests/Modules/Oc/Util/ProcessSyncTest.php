@@ -22,7 +22,7 @@ class ProcessSyncTest extends AbstractModuleTest
      */
     private $processSync;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->processSync = new ProcessSync($this->name);
         if (file_exists($this->pidFilePath . $this->name . '.pid')) {
@@ -33,7 +33,7 @@ class ProcessSyncTest extends AbstractModuleTest
     /**
      * @group unit-tests
      */
-    public function testEnterMethod()
+    public function testEnterMethod(): void
     {
         self::assertTrue($this->processSync->enter());
         self::assertFalse($this->processSync->enter());
@@ -43,7 +43,7 @@ class ProcessSyncTest extends AbstractModuleTest
     /**
      * @group unit-tests
      */
-    public function testCheckDaemonMethod()
+    public function testCheckDaemonMethod(): void
     {
         $file = fopen($this->pidFilePath . $this->name . '.pid', 'w');
         fwrite($file, 'pid file', 100);

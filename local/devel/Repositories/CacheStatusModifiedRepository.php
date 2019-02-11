@@ -44,7 +44,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheStatusModifiedEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param array $where
      * @return GeoCacheStatusModifiedEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
      * @return GeoCacheStatusModifiedEntity
      */
     public function create(GeoCacheStatusModifiedEntity $entity)
@@ -127,7 +124,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
      * @return GeoCacheStatusModifiedEntity
      */
     public function update(GeoCacheStatusModifiedEntity $entity)
@@ -148,7 +144,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
      * @return GeoCacheStatusModifiedEntity
      */
     public function remove(GeoCacheStatusModifiedEntity $entity)
@@ -168,7 +163,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GeoCacheStatusModifiedEntity $entity)
@@ -183,7 +177,6 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param array $data
      * @return GeoCacheStatusModifiedEntity
      */
     public function getEntityFromDatabaseArray(array $data)

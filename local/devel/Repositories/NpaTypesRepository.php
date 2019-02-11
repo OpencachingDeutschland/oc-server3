@@ -44,7 +44,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param array $where
      * @return NpaTypesEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param array $where
      * @return NpaTypesEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param NpaTypesEntity $entity
      * @return NpaTypesEntity
      */
     public function create(NpaTypesEntity $entity)
@@ -127,7 +124,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param NpaTypesEntity $entity
      * @return NpaTypesEntity
      */
     public function update(NpaTypesEntity $entity)
@@ -148,7 +144,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param NpaTypesEntity $entity
      * @return NpaTypesEntity
      */
     public function remove(NpaTypesEntity $entity)
@@ -168,7 +163,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param NpaTypesEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(NpaTypesEntity $entity)
@@ -182,7 +176,6 @@ class NpaTypesRepository
     }
 
     /**
-     * @param array $data
      * @return NpaTypesEntity
      */
     public function getEntityFromDatabaseArray(array $data)

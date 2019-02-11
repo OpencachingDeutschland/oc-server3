@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class ReplicationOverwriteEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new ReplicationOverwriteEntity();
         self::assertTrue($entity->isNew());

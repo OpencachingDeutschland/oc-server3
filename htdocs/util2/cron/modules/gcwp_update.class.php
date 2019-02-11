@@ -14,7 +14,7 @@ class GcwpUpdate
     public $name = 'gcwp_update';
     public $interval = 3600; // every hour
 
-    public function run()
+    public function run(): void
     {
         global $opt;
 

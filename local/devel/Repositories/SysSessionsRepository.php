@@ -44,7 +44,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param array $where
      * @return SysSessionsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param array $where
      * @return SysSessionsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param SysSessionsEntity $entity
      * @return SysSessionsEntity
      */
     public function create(SysSessionsEntity $entity)
@@ -127,7 +124,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param SysSessionsEntity $entity
      * @return SysSessionsEntity
      */
     public function update(SysSessionsEntity $entity)
@@ -148,7 +144,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param SysSessionsEntity $entity
      * @return SysSessionsEntity
      */
     public function remove(SysSessionsEntity $entity)
@@ -168,7 +163,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param SysSessionsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysSessionsEntity $entity)
@@ -182,7 +176,6 @@ class SysSessionsRepository
     }
 
     /**
-     * @param array $data
      * @return SysSessionsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

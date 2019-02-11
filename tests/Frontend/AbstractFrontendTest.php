@@ -30,7 +30,7 @@ abstract class AbstractFrontendTest extends TestCase
         $this->baseUrl = getenv('URL');
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->driver = new GoutteDriver();
@@ -44,7 +44,7 @@ abstract class AbstractFrontendTest extends TestCase
      *
      * @throws ElementNotFoundException
      */
-    protected function login()
+    protected function login(): void
     {
         $page = $this->session->getPage();
 

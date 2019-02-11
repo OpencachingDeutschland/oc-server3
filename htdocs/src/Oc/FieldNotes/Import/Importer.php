@@ -22,11 +22,7 @@ class Importer
      * @var FieldNoteService
      */
     private $fieldNoteService;
-
-    /**
-     * @param GeoCacheService $geoCacheService
-     * @param FieldNoteService $fieldNoteService
-     */
+    
     public function __construct(
         GeoCacheService $geoCacheService,
         FieldNoteService $fieldNoteService
@@ -37,10 +33,8 @@ class Importer
 
     /**
      * Import by given context.
-     *
-     * @param ImportContext $context
      */
-    public function import(ImportContext $context)
+    public function import(ImportContext $context): void
     {
         $uploadFormData = $context->getFormData();
         $fieldNotes = $context->getFieldNotes();

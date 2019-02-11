@@ -23,7 +23,7 @@ $sAddJoin .= ' INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
                     LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
                           AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
 
-function search_output()
+function search_output(): void
 {
     global $opt, $tpl, $login;
     global $enable_mapdisplay;

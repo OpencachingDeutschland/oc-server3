@@ -44,7 +44,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param array $where
      * @return RatingTopsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param array $where
      * @return RatingTopsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param RatingTopsEntity $entity
      * @return RatingTopsEntity
      */
     public function create(RatingTopsEntity $entity)
@@ -127,7 +124,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param RatingTopsEntity $entity
      * @return RatingTopsEntity
      */
     public function update(RatingTopsEntity $entity)
@@ -148,7 +144,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param RatingTopsEntity $entity
      * @return RatingTopsEntity
      */
     public function remove(RatingTopsEntity $entity)
@@ -168,7 +163,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param RatingTopsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(RatingTopsEntity $entity)
@@ -180,7 +174,6 @@ class RatingTopsRepository
     }
 
     /**
-     * @param array $data
      * @return RatingTopsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

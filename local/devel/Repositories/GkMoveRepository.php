@@ -44,7 +44,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param array $where
      * @return GkMoveEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param array $where
      * @return GkMoveEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param GkMoveEntity $entity
      * @return GkMoveEntity
      */
     public function create(GkMoveEntity $entity)
@@ -127,7 +124,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param GkMoveEntity $entity
      * @return GkMoveEntity
      */
     public function update(GkMoveEntity $entity)
@@ -148,7 +144,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param GkMoveEntity $entity
      * @return GkMoveEntity
      */
     public function remove(GkMoveEntity $entity)
@@ -168,7 +163,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param GkMoveEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(GkMoveEntity $entity)
@@ -187,7 +181,6 @@ class GkMoveRepository
     }
 
     /**
-     * @param array $data
      * @return GkMoveEntity
      */
     public function getEntityFromDatabaseArray(array $data)

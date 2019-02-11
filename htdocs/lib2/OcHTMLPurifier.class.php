@@ -117,7 +117,7 @@ class OcHTMLPurifier extends HTMLPurifier
 
     /**
      * @param string $text
-     * @param null $config
+     * @param null|mixed $config
      * @return mixed
      */
     public function purify($text, $config = null)

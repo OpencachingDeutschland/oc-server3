@@ -44,7 +44,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param array $where
      * @return ReplicationNotimportedEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param array $where
      * @return ReplicationNotimportedEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param ReplicationNotimportedEntity $entity
      * @return ReplicationNotimportedEntity
      */
     public function create(ReplicationNotimportedEntity $entity)
@@ -127,7 +124,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param ReplicationNotimportedEntity $entity
      * @return ReplicationNotimportedEntity
      */
     public function update(ReplicationNotimportedEntity $entity)
@@ -148,7 +144,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param ReplicationNotimportedEntity $entity
      * @return ReplicationNotimportedEntity
      */
     public function remove(ReplicationNotimportedEntity $entity)
@@ -168,7 +163,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param ReplicationNotimportedEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(ReplicationNotimportedEntity $entity)
@@ -181,7 +175,6 @@ class ReplicationNotimportedRepository
     }
 
     /**
-     * @param array $data
      * @return ReplicationNotimportedEntity
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class MapresultEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new MapresultEntity();
         self::assertTrue($entity->isNew());

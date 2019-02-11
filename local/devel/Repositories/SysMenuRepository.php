@@ -44,7 +44,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param array $where
      * @return SysMenuEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param array $where
      * @return SysMenuEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param SysMenuEntity $entity
      * @return SysMenuEntity
      */
     public function create(SysMenuEntity $entity)
@@ -127,7 +124,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param SysMenuEntity $entity
      * @return SysMenuEntity
      */
     public function update(SysMenuEntity $entity)
@@ -148,7 +144,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param SysMenuEntity $entity
      * @return SysMenuEntity
      */
     public function remove(SysMenuEntity $entity)
@@ -168,7 +163,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param SysMenuEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(SysMenuEntity $entity)
@@ -192,7 +186,6 @@ class SysMenuRepository
     }
 
     /**
-     * @param array $data
      * @return SysMenuEntity
      */
     public function getEntityFromDatabaseArray(array $data)

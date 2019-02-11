@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class GkItemWaypointEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new GkItemWaypointEntity();
         self::assertTrue($entity->isNew());

@@ -19,45 +19,102 @@ namespace OcLegacy\Map;
 
 class StaticMap
 {
+    /**
+     * @var int
+     */
     private $maxWidth = 1024;
 
+    /**
+     * @var int
+     */
     private $maxHeight = 1024;
 
+    /**
+     * @var int
+     */
     private $tileSize = 256;
 
+    /**
+     * @var string
+     */
     private $tileSrcUrl = 'http://tile.openstreetmap.org/{Z}/{X}/{Y}.png';
 
+    /**
+     * @var string
+     */
     private $markerBaseDir = './theme/frontend/images/markers';
 
+    /**
+     * @var string
+     */
     private $attribution = '(c) OpenStreetMap contributors';
 
+    /**
+     * @var bool
+     */
     private $useTileCache = true;
 
+    /**
+     * @var string
+     */
     private $tileCacheBaseDir =  __DIR__ . '/../../../var/cache2/staticmap';
 
+    /**
+     * @var int
+     */
     private $zoom = 0;
 
+    /**
+     * @var int
+     */
     private $lat = 0;
 
+    /**
+     * @var int
+     */
     private $lon = 0;
 
+    /**
+     * @var int
+     */
     private $width = 100;
 
+    /**
+     * @var int
+     */
     private $height = 100;
 
+    /**
+     * @var array
+     */
     private $markers = [];
 
+    /**
+     * @var
+     */
     private $image;
 
+    /**
+     * @var
+     */
     private $centerX;
 
+    /**
+     * @var
+     */
     private $centerY;
 
+    /**
+     * @var
+     */
     private $offsetX;
 
+    /**
+     * @var
+     */
     private $offsetY;
 
-    private function parseParams()
+    private function parseParams(): void
     {
         $this->zoom = isset($_GET['zoom']) ? intval($_GET['zoom']) : 0;
         if ($this->zoom > 18) {
@@ -100,7 +157,7 @@ class StaticMap
         return (1 - log(tan($lat * M_PI / 180) + 1 / cos($lat * M_PI / 180)) / M_PI) / 2 * (2 ** $zoom);
     }
 
-    private function initCoordinates()
+    private function initCoordinates(): void
     {
         $this->centerX = $this->lonToTile($this->lon, $this->zoom);
         $this->centerY = $this->latToTile($this->lat, $this->zoom);
@@ -108,7 +165,7 @@ class StaticMap
         $this->offsetY = floor((floor($this->centerY) - $this->centerY) * $this->tileSize);
     }
 
-    private function createBaseMap()
+    private function createBaseMap(): void
     {
         $this->image = imagecreatetruecolor($this->width, $this->height);
         $startX = floor($this->centerX - ($this->width / $this->tileSize) / 2);
@@ -144,7 +201,7 @@ class StaticMap
         }
     }
 
-    private function placeMarkers()
+    private function placeMarkers(): void
     {
         foreach ($this->markers as $marker) {
             // set some local variables
@@ -174,11 +231,10 @@ class StaticMap
                 imagesx($markerImg),
                 imagesy($markerImg)
             );
-
         };
     }
 
-    private function tileUrlToFilename($url)
+    private function tileUrlToFilename($url): string
     {
         return $this->tileCacheBaseDir . '/' . str_replace(['http://'], '', $url);
     }
@@ -191,14 +247,14 @@ class StaticMap
         }
     }
 
-    private function mkdirRecursive($pathname, $mode)
+    private function mkdirRecursive($pathname, $mode): bool
     {
         is_dir(dirname($pathname)) || $this->mkdirRecursive(dirname($pathname), $mode);
 
         return is_dir($pathname) || mkdir($pathname, $mode) || is_dir($pathname);
     }
 
-    private function writeTileToCache($url, $data)
+    private function writeTileToCache($url, $data): void
     {
         $filename = $this->tileUrlToFilename($url);
         $this->mkdirRecursive(dirname($filename), 0777);
@@ -229,7 +285,7 @@ class StaticMap
         return $tile;
     }
 
-    private function copyrightNotice()
+    private function copyrightNotice(): void
     {
         $string = $this->attribution;
         $fontSize = 1;
@@ -266,7 +322,7 @@ class StaticMap
         );
     }
 
-    private function sendHeader()
+    private function sendHeader(): void
     {
         header('Content-Type: image/png');
         $expires = strtotime('+14 days', 0);
@@ -274,7 +330,7 @@ class StaticMap
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT');
     }
 
-    private function makeMap()
+    private function makeMap(): void
     {
         $this->initCoordinates();
 
@@ -285,7 +341,7 @@ class StaticMap
         $this->copyrightNotice();
     }
 
-    public function showMap()
+    public function showMap(): bool
     {
         $this->parseParams();
 

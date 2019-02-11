@@ -54,7 +54,7 @@ class TranslationStruct
      */
     public $ru;
 
-    public function fromCsvArray(array $data)
+    public function fromCsvArray(array $data): self
     {
         $this->identifier = (int) $data['Identifier'];
         $this->sourceString = $data['SourceString'];
@@ -70,7 +70,7 @@ class TranslationStruct
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return get_object_vars($this);
     }

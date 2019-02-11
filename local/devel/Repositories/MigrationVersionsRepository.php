@@ -44,7 +44,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param array $where
      * @return MigrationVersionsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param array $where
      * @return MigrationVersionsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param MigrationVersionsEntity $entity
      * @return MigrationVersionsEntity
      */
     public function create(MigrationVersionsEntity $entity)
@@ -127,7 +124,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param MigrationVersionsEntity $entity
      * @return MigrationVersionsEntity
      */
     public function update(MigrationVersionsEntity $entity)
@@ -148,7 +144,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param MigrationVersionsEntity $entity
      * @return MigrationVersionsEntity
      */
     public function remove(MigrationVersionsEntity $entity)
@@ -168,7 +163,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param MigrationVersionsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(MigrationVersionsEntity $entity)
@@ -179,7 +173,6 @@ class MigrationVersionsRepository
     }
 
     /**
-     * @param array $data
      * @return MigrationVersionsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

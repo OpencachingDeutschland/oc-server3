@@ -17,7 +17,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      * Called on every request. Return whatever credentials you want,
      * or null to stop authentication.
      *
-     * @param Request $request
      *
      * @return mixed|null
      */
@@ -40,11 +39,8 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      * Returns a UserInterface object based on the credentials.
      *
      * @param mixed $credentials
-     * @param UserProviderInterface $userProvider
-     *
-     * @return \OcLegacy\User\LegacyUser|null
      */
-    public function getUser($credentials, UserProviderInterface $userProvider)
+    public function getUser($credentials, UserProviderInterface $userProvider): ?LegacyUser
     {
         if (!$credentials['id'] || !$credentials['username']) {
             return null;
@@ -57,7 +53,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
      * Returns true if the credentials are valid.
      *
      * @param mixed $credentials
-     * @param UserInterface $user
      *
      * @return bool
      */
@@ -73,8 +68,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
     /**
      * Called when the authentication is successful.
      *
-     * @param Request $request
-     * @param TokenInterface $token
      * @param string $providerKey
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
@@ -85,9 +78,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
 
     /**
      * Called when the authentication fails.
-     *
-     * @param Request $request
-     * @param AuthenticationException $exception
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
@@ -97,8 +87,6 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
     /**
      * Called when authentication is needed, but it's not sent
      *
-     * @param Request $request
-     * @param AuthenticationException|null $authException
      *
      * @return RedirectResponse
      */

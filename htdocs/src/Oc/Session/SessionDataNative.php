@@ -9,18 +9,25 @@
 namespace Oc\Session;
 
 /**
- * Class SessionDataNative
  * Not for productive usage!! Implementation not finished yet
  */
 class SessionDataNative implements SessionDataInterface
 {
+    /**
+     * @var bool
+     */
     public $changed = false;
-    public $values = array();
-    public $session_initialized = false;
 
     /**
-     * SessionDataNative constructor.
+     * @var array
      */
+    public $values = array();
+
+    /**
+     * @var bool
+     */
+    public $session_initialized = false;
+
     public function __construct()
     {
         if (isset($_REQUEST['SESSION']) && $_REQUEST['SESSION'] !== '') {
@@ -28,10 +35,7 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
-    /**
-     *
-     */
-    private function initSession()
+    private function initSession(): void
     {
         global $opt;
 
@@ -47,13 +51,7 @@ class SessionDataNative implements SessionDataInterface
             if ($opt['session']['check_referer']) {
                 if (isset($_SERVER['REFERER'])) {
                     // TODO fix the following if statement, seems corrupted
-                    if (strtolower(
-                            substr(
-                                'http' + strstr($_SERVER['REFERER'], '://'),
-                                0,
-                                strlen($opt['page']['absolute_http_url'])
-                            )
-                        ) != strtolower($opt['page']['absolute_http_url'])
+                    if (stripos('http' + strstr($_SERVER['REFERER'], '://'), strtolower($opt['page']['absolute_http_url'])) !== 0
                     ) {
                         $this->createNewSession();
                     }
@@ -74,14 +72,11 @@ class SessionDataNative implements SessionDataInterface
             $this->session_initialized = true;
         }
     }
-
-    /**
-     *
-     */
-    private function createNewSession()
+    
+    private function createNewSession(): void
     {
         session_regenerate_id();
-        $locale = isset($_SESSION['locale']) ? $_SESSION['locale'] : '';
+        $locale = $_SESSION['locale'] ?? '';
         foreach ($_SESSION as $k => $v) {
             unset($_SESSION[$k]);
         }
@@ -90,12 +85,7 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
-    /**
-     * @param $name
-     * @param $value
-     * @param null $default
-     */
-    public function set($name, $value, $default = null)
+    public function set(string $name, $value, $default = null): void
     {
         if (!isset($_SESSION[$name]) || $_SESSION[$name] != $value) {
             if ($value == $default) {
@@ -111,29 +101,17 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
-    /**
-     * @param $name
-     * @param null $default
-     */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
-        return isset($_SESSION[$name]) ? $_SESSION[$name] : $default;
+        return $_SESSION[$name] ?? $default;
     }
 
-    /**
-     * @param $name
-     *
-     * @return bool
-     */
-    public function is_set($name)
+    public function is_set(string $name): bool
     {
         return isset($_SESSION[$name]);
     }
 
-    /**
-     * @param $name
-     */
-    public function un_set($name)
+    public function un_set(string $name): void
     {
         if (isset($_SESSION[$name])) {
             unset($_SESSION[$name]);
@@ -141,12 +119,12 @@ class SessionDataNative implements SessionDataInterface
         }
     }
 
-    public function header()
+    public function header(): void
     {
         // is automatically sent
     }
 
-    public function close()
+    public function close(): void
     {
         if ($this->session_initialized === true) {
             if (count($_SESSION) === 0) {

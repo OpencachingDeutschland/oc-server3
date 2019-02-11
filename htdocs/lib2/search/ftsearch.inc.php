@@ -119,7 +119,7 @@ function ftsearch_split(&$str, $simple)
     return $astr;
 }
 
-function ftsearch_load_ignores()
+function ftsearch_load_ignores(): void
 {
     global $ftsearch_ignores;
     global $ftsearch_ignores_loaded;
@@ -228,7 +228,7 @@ function ftsearch_text2sort($str)
 /**
  * @param int $maxentries
  */
-function ftsearch_refresh($maxentries = PHP_INT_MAX)
+function ftsearch_refresh($maxentries = PHP_INT_MAX): void
 {
     // The search index needs to calculated for all objects-types-by-cache which
     // are in `search_index_times` table. While we are doing that, new entries may

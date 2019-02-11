@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierBase64EncodeTest extends AbstractModuleTest
 {
-    public function testUrlEncode()
+    public function testUrlEncode(): void
     {
         self::assertEquals(
             'öäüäöä123$%&&$!"§!$!§%!&&/!I)?=()?',

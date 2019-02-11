@@ -58,12 +58,12 @@ class statpic
     }
 
     // force regeneration of image on next call of ocstats.php
-    public function invalidate()
+    public function invalidate(): void
     {
         sql("DELETE FROM `user_statpic` WHERE `user_id`='&1'", $this->nUserId);
     }
 
-    public function deleteFile()
+    public function deleteFile(): void
     {
         // if data changed - delete statpic of user, if exists - will be recreated on next request
         if (file_exists(__DIR__ . '/../../images/statpics/statpic' . $this->nUserId . '.jpg')) {

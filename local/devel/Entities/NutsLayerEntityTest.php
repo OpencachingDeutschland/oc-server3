@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class NutsLayerEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new NutsLayerEntity();
         self::assertTrue($entity->isNew());

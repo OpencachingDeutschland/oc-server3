@@ -44,7 +44,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param array $where
      * @return WsSessionsEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param array $where
      * @return WsSessionsEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param WsSessionsEntity $entity
      * @return WsSessionsEntity
      */
     public function create(WsSessionsEntity $entity)
@@ -127,7 +124,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param WsSessionsEntity $entity
      * @return WsSessionsEntity
      */
     public function update(WsSessionsEntity $entity)
@@ -148,7 +144,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param WsSessionsEntity $entity
      * @return WsSessionsEntity
      */
     public function remove(WsSessionsEntity $entity)
@@ -168,7 +163,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param WsSessionsEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(WsSessionsEntity $entity)
@@ -184,7 +178,6 @@ class WsSessionsRepository
     }
 
     /**
-     * @param array $data
      * @return WsSessionsEntity
      */
     public function getEntityFromDatabaseArray(array $data)

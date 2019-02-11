@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class AttributeCategoriesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new AttributeCategoriesEntity();
         self::assertTrue($entity->isNew());

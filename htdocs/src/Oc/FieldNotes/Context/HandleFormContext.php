@@ -14,20 +14,13 @@ class HandleFormContext
      */
     private $errors;
 
-    /**
-     * @param bool $success
-     * @param array $errors
-     */
     public function __construct($success, array $errors)
     {
         $this->success = $success;
         $this->errors = $errors;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->success;
     }
@@ -37,7 +30,7 @@ class HandleFormContext
      *
      * @return string[]
      */
-    public function getErrors()
+    public function getErrors(): array
     {
         return $this->errors;
     }

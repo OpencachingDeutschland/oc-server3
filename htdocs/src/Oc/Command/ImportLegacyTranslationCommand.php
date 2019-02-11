@@ -7,7 +7,6 @@ namespace Oc\Command;
 
 use Oc\Translation\CrowdinImport;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -24,16 +23,11 @@ class ImportLegacyTranslationCommand extends SymfonyCommand
     public function __construct(CrowdinImport $crowdinImport)
     {
         parent::__construct();
+
         $this->crowdinImport = $crowdinImport;
     }
 
-    /**
-     * Configures the command.
-     *
-     *
-     * @throws InvalidArgumentException
-     */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -42,16 +36,10 @@ class ImportLegacyTranslationCommand extends SymfonyCommand
             ->setDescription('import translation from crowdin into legacy translation system');
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int|null
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->crowdinImport->importTranslations();
+
+        return null;
     }
 }

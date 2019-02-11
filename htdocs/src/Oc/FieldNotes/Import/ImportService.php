@@ -42,12 +42,6 @@ class ImportService
      */
     private $importer;
 
-    /**
-     * @param Importer $importer
-     * @param FileParser $fileParser
-     * @param Validator $validator
-     * @param TranslatorInterface $translator
-     */
     public function __construct(
         Importer $importer,
         FileParser $fileParser,
@@ -62,12 +56,8 @@ class ImportService
 
     /**
      * Handles submitted form data.
-     *
-     * @param UploadFormData $formData
-     *
-     * @return HandleFormContext
      */
-    public function handleFormData(UploadFormData $formData)
+    public function handleFormData(UploadFormData $formData): HandleFormContext
     {
         $success = false;
         $errors = [];
@@ -106,12 +96,8 @@ class ImportService
 
     /**
      * Fetches the line of the constraint violation and returns the line prefix with line number.
-     *
-     * @param ConstraintViolationInterface $violation
-     *
-     * @return string
      */
-    private function getTranslatedLinePrefix(ConstraintViolationInterface $violation)
+    private function getTranslatedLinePrefix(ConstraintViolationInterface $violation): string
     {
         /**
          * @var Node

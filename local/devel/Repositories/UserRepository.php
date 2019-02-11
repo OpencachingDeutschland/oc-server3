@@ -44,7 +44,6 @@ class UserRepository
     }
 
     /**
-     * @param array $where
      * @return UserEntity
      */
     public function fetchOneBy(array $where = [])
@@ -72,7 +71,6 @@ class UserRepository
     }
 
     /**
-     * @param array $where
      * @return UserEntity[]
      */
     public function fetchBy(array $where = [])
@@ -105,7 +103,6 @@ class UserRepository
     }
 
     /**
-     * @param UserEntity $entity
      * @return UserEntity
      */
     public function create(UserEntity $entity)
@@ -127,7 +124,6 @@ class UserRepository
     }
 
     /**
-     * @param UserEntity $entity
      * @return UserEntity
      */
     public function update(UserEntity $entity)
@@ -148,7 +144,6 @@ class UserRepository
     }
 
     /**
-     * @param UserEntity $entity
      * @return UserEntity
      */
     public function remove(UserEntity $entity)
@@ -168,7 +163,6 @@ class UserRepository
     }
 
     /**
-     * @param UserEntity $entity
      * @return []
      */
     public function getDatabaseArrayFromEntity(UserEntity $entity)
@@ -225,7 +219,6 @@ class UserRepository
     }
 
     /**
-     * @param array $data
      * @return UserEntity
      */
     public function getEntityFromDatabaseArray(array $data)

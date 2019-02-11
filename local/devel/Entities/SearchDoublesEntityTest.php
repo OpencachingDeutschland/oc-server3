@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class SearchDoublesEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new SearchDoublesEntity();
         self::assertTrue($entity->isNew());

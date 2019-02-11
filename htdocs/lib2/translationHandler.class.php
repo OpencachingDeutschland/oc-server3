@@ -13,7 +13,7 @@ class TranslationHandler
     /**
      * create all files in cache2/translate
      */
-    public function createMessageFiles()
+    public function createMessageFiles(): void
     {
         $rs = sqlf('SELECT DISTINCT `lang` FROM `sys_trans_text`');
         while ($r = sql_fetch_assoc($rs)) {
@@ -27,7 +27,7 @@ class TranslationHandler
      *
      * @param $language
      */
-    private function createMessageFile($language)
+    private function createMessageFile($language): void
     {
         global $opt;
 
@@ -149,7 +149,7 @@ class TranslationHandler
      * @param $resource_name
      * @param $line
      */
-    public function addText($text, $resource_name, $line)
+    public function addText($text, $resource_name, $line): void
     {
         if ($text == '') {
             return;
@@ -174,7 +174,7 @@ class TranslationHandler
     /**
      * clear sys_trans_ref to begin new translation of resource
      */
-    public function clearReferences()
+    public function clearReferences(): void
     {
         sqlf('DELETE FROM `sys_trans_ref`');
     }
@@ -186,7 +186,7 @@ class TranslationHandler
      * @param string $fname
      * @param string $fid
      */
-    public function importFromTable($table, $fname = 'name', $fid = 'trans_id')
+    public function importFromTable($table, $fname = 'name', $fid = 'trans_id'): void
     {
         $rs = sqlf(
             'SELECT `&1`.`&2`

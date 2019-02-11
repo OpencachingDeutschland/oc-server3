@@ -16,7 +16,7 @@ class UserProviderTest extends TestCase
     /**
      * Tests fetching the user by session.
      */
-    public function testFetchingUserBySessionSuccess()
+    public function testFetchingUserBySessionSuccess(): void
     {
         $user = new UserEntity();
 
@@ -40,7 +40,7 @@ class UserProviderTest extends TestCase
     /**
      * Tests fetching the user by session when no userId is in session.
      */
-    public function testFetchingUserBySessionNoUserId()
+    public function testFetchingUserBySessionNoUserId(): void
     {
         $sessionMock = $this->createMock(SessionDataInterface::class);
         $sessionMock->method('get')
@@ -57,7 +57,7 @@ class UserProviderTest extends TestCase
     /**
      * Tests fetching the user by session.
      */
-    public function testFetchingUserBySessionNoUserFound()
+    public function testFetchingUserBySessionNoUserFound(): void
     {
         $sessionMock = $this->createMock(SessionDataInterface::class);
         $sessionMock->method('get')

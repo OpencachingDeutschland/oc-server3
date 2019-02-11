@@ -9,13 +9,16 @@ namespace Oc\Session;
 
 class SessionDataCookie implements SessionDataInterface
 {
+    /**
+     * @var bool
+     */
     public $changed = false;
 
+    /**
+     * @var array
+     */
     public $values = [];
 
-    /**
-     * SessionDataCookie constructor.
-     */
     public function __construct()
     {
         global $opt;
@@ -36,11 +39,10 @@ class SessionDataCookie implements SessionDataInterface
     }
 
     /**
-     * @param $name
-     * @param $value
-     * @param null $default
+     * @param mixed|null $value
+     * @param mixed|null  $default
      */
-    public function set($name, $value, $default = null)
+    public function set(string $name, $value, $default = null): void
     {
         // Store cookie value in internal array. OcSmarty will call this->header()
         // to actually set the cookie.
@@ -58,28 +60,20 @@ class SessionDataCookie implements SessionDataInterface
     }
 
     /**
-     * @param string $name
-     * @param null $default
+     * @param mixed|null $default
      * @return mixed|null
      */
-    public function get($name, $default = null)
+    public function get(string $name, $default = null)
     {
-        return isset($this->values[$name]) ? $this->values[$name] : $default;
+        return $this->values[$name] ?? $default;
     }
 
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function is_set($name)
+    public function is_set(string $name): bool
     {
         return isset($this->values[$name]);
     }
 
-    /**
-     * @param $name
-     */
-    public function un_set($name)
+    public function un_set(string $name): void
     {
         if (isset($this->values[$name])) {
             unset($this->values[$name]);
@@ -87,7 +81,7 @@ class SessionDataCookie implements SessionDataInterface
         }
     }
 
-    public function header()
+    public function header(): void
     {
         global $opt;
 
@@ -124,7 +118,7 @@ class SessionDataCookie implements SessionDataInterface
         }
     }
 
-    public function close()
+    public function close(): void
     {
         global $opt;
 

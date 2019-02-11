@@ -83,7 +83,7 @@ class login
         }
     }
 
-    public function pClear()
+    public function pClear(): void
     {
         // set to no valid login
         $this->userid = 0;
@@ -97,7 +97,7 @@ class login
         $this->pStoreCookie();
     }
 
-    public function pStoreCookie()
+    public function pStoreCookie(): void
     {
         global $cookie;
         $cookie->set('userid', (int) $this->userid);
@@ -106,10 +106,8 @@ class login
         $cookie->set('lastlogin', $this->lastlogin);
         $cookie->set('sessionid', $this->sessionid);
     }
-
-    /**
-     */
-    public function verify()
+    
+    public function verify(): void
     {
         global $opt;
 
@@ -407,7 +405,7 @@ class login
         return $opt['template']['default']['country'];
     }
 
-    public function logout()
+    public function logout(): void
     {
         if ($this->userid != 0) {
             sqlf("DELETE FROM `sys_sessions` WHERE `uuid`='&1' AND `user_id`='&2'", $this->sessionid, $this->userid);

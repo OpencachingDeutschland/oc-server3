@@ -12,11 +12,6 @@ class Validator
      */
     private $validator;
 
-    /**
-     * Validator constructor.
-     *
-     * @param ValidatorInterface $validator
-     */
     public function __construct(ValidatorInterface $validator)
     {
         $this->validator = $validator;
@@ -26,11 +21,10 @@ class Validator
      * Validates a single item.
      *
      * @param mixed $item Item to validate
-     *
-     *
+
      * @throws ValidationException
      */
-    public function validate($item)
+    public function validate($item): void
     {
         $violations = $this->validator->validate($item);
 

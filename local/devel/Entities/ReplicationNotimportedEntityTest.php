@@ -4,7 +4,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class ReplicationNotimportedEntityTest extends AbstractModuleTest
 {
-    public function testEntity()
+    public function testEntity(): void
     {
         $entity = new ReplicationNotimportedEntity();
         self::assertTrue($entity->isNew());

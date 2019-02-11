@@ -6,9 +6,6 @@ use Oc\GlobalContext\Provider\LanguageProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Class GlobalContextFactory
- */
 class GlobalContextFactory
 {
     /**
@@ -16,11 +13,6 @@ class GlobalContextFactory
      */
     private $languageProvider;
 
-    /**
-     * GlobalContextFactory constructor.
-     *
-     * @param LanguageProvider $languageProvider
-     */
     public function __construct(LanguageProvider $languageProvider)
     {
         $this->languageProvider = $languageProvider;
@@ -28,12 +20,8 @@ class GlobalContextFactory
 
     /**
      * Creates a global context from given request.
-     *
-     * @param Request $request
-     *
-     * @return GlobalContext
      */
-    public function createFromRequest(Request $request)
+    public function createFromRequest(Request $request): GlobalContext
     {
         return new GlobalContext(
             $this->languageProvider->getDefaultLanguage(),
@@ -42,13 +30,9 @@ class GlobalContextFactory
     }
 
     /**
-     * Creates a global context from request stack.
-     *
-     * @param RequestStack $requestStack
-     *
-     * @return GlobalContext
+     * Creates a global context from request stack.t
      */
-    public function createFromRequestStack(RequestStack $requestStack)
+    public function createFromRequestStack(RequestStack $requestStack): GlobalContext
     {
         return $this->createFromRequest(
             $requestStack->getMasterRequest()

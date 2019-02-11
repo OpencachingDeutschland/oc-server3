@@ -3305,7 +3305,7 @@ class Net_IDNA2
      * @static
      * @access private
      */
-    private static function _showHex($input, $include_bit = false)
+    private static function _showHex($input, $include_bit = false): void
     {
         foreach ($input as $k => $v) {
             echo '[', $k, '] => ', sprintf('%X', $v);

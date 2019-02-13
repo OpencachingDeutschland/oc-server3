@@ -16,7 +16,7 @@ $tpl->name = 'start';
 $tpl->menuitem = MNU_START;
 
 $tpl->caching = true;
-$tpl->cache_lifetime = 300;
+$tpl->cache_lifetime = 60;
 $tpl->cache_id = $sUserCountry . '|' . $opt['page']['protocol'];
 
 if (!$tpl->is_cached()) {
@@ -29,6 +29,15 @@ if (!$tpl->is_cached()) {
     } else {
         $tpl->assign('message', $translate->t('You can find everything you need to go Geocaching ...', '', '', 0));
     }
+
+    // get HQ Message from DB
+    $aGetHqMessage = $connection->fetchAssoc(
+        'SELECT type, message
+         FROM `core_hq_message` AS hqm
+         WHERE current_timestamp() BETWEEN hqm.start AND hqm.end LIMIT 1'
+    );
+
+    $tpl->assign('core_hq_message', $aGetHqMessage);
 
     // pictures
     $tpl->assign('pictures', LogPics::get(LogPics::FOR_STARTPAGE_GALLERY));

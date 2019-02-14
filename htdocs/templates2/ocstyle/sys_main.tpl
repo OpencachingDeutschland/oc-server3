@@ -18,23 +18,33 @@
         <meta name="description" content="{$opt.page.meta.description|escape}" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta http-equiv="Content-Style-Type" content="text/css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <meta http-equiv="Content-Language" content="{$opt.template.locale}" />
         <meta http-equiv="gallerimg" content="no" />
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <base href="/" />
+
         <link rel="SHORTCUT ICON" href="favicon.ico" />
         <link rel="apple-touch-icon" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
+
+        <!-- Bootstrap core CSS -->
+        <link href="../../resource2/mdb-free/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="../../resource2/mdb-free/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="../../resource2/mdb-free/css/style.css" rel="stylesheet">
+
         <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}" />
         <!--[if lt IE 9]>
-            <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen_msie.css?ft={$screen_msie_css_time}" />
+        <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen_msie.css?ft={$screen_msie_css_time}" />
         <![endif]-->
         <link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}" />
+
         {literal}
             <script type="text/javascript">
             <!--
@@ -393,5 +403,15 @@
             {/literal}
         {/if}
     {/if}
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/mdb.min.js"></script>
 </body>
 </html>

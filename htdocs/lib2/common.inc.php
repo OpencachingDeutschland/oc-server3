@@ -1,11 +1,8 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- *
  *  This module contains the main initialisation routine and often used
  *  functions. It is included by web.inc.php and cli.inc.php.
- *
  *  TODO: accept-language des Browser auswerten
  ***************************************************************************/
 
@@ -13,22 +10,21 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $opt['rootpath'] = __DIR__ . '/../';
 
-function __autoload($class_name): void
-{
-    global $opt;
+spl_autoload_register(
+    function ($className): void {
+        if (!preg_match('/^[\w]{1,}$/', $className)) {
+            return;
+        }
 
-    if (!preg_match('/^[\w]{1,}$/', $class_name)) {
-        return;
+        $file1 = __DIR__ . '/' . $className . '.class.php';
+        $file2 = __DIR__ . '/logic/' . $className . '.class.php';
+        if (file_exists($file1)) {
+            require_once $file1;
+        } elseif (file_exists($file2)) {
+            require_once $file2;
+        }
     }
-
-    $file1 = __DIR__ . '/' . $class_name . '.class.php';
-    $file2 = __DIR__ . '/logic/' . $class_name . '.class.php';
-    if (file_exists($file1)) {
-        require_once $file1;
-    } elseif (file_exists($file2)) {
-        require_once $file2;
-    }
-}
+);
 
 if (!function_exists('bindtextdomain')) {
     function bindtextdomain(): void
@@ -169,16 +165,16 @@ function normalize_settings(): void
 
     $opt['charset']['iconv'] = strtoupper($opt['charset']['iconv']);
 
-    if (substr($opt['logic']['pictures']['url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['url'], -1, 1) != '/') {
         $opt['logic']['pictures']['url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['dir'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_url'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_dir'] .= '/';
     }
 
@@ -312,8 +308,8 @@ function use_current_protocol($url)
     ) {
         return 'https' . strstr($url, '://');
     } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
-                    == $opt['page']['absolute_https_url']
-              && !$opt['page']['https']['active']
+        == $opt['page']['absolute_https_url']
+        && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');
     }

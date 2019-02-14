@@ -33,7 +33,7 @@ final class Version20190211224434 extends AbstractMigration
             "2019-03-30 00:00:00.0",
             "primary",
             "<p class=\"lead\">Hinweis:</p>
-            <p style=\"text-justify: auto\">Am <b>15.02.2019</b> haben wir unsere <a href=\"/article.php?page=terms\">Nutzungsbedingungen</a> aktualisiert.
+            <p style=\"text-justify: auto\">Am <b>15.02.2019</b> haben wir unsere <a href=\"/articles.php?page=terms\">Nutzungsbedingungen</a> aktualisiert.
             Als Nutzer hat man das Recht, die neuen Nutzungsbedingungen abzulehnen. Dies hat dann zur Folge, das unsere
             Dienste nicht mehr genutzt werden können und ggfls. der Account gesperrt oder gelöscht werden kann.<br>
             Die Änderungen gelten als akzeptiert, wenn der Nutzer diese nicht innerhalb von 14 Tagen ablehnt und darüber

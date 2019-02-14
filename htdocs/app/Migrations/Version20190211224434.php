@@ -12,7 +12,7 @@ final class Version20190211224434 extends AbstractMigration
 {
     public function up(Schema $schema)
     : void {
-        $this->addSql('UPDATE `sys_menu` SET `href` = `articles.php?page=terms` WHERE id_string = `MNU_START_TOS`;');
+        $this->addSql('UPDATE "sys_menu" SET "href" = "articles.php?page=terms" WHERE id_string = "MNU_START_TOS";');
 
         $this->addSql(
             'CREATE TABLE core_hq_message (
@@ -26,12 +26,12 @@ final class Version20190211224434 extends AbstractMigration
 
         $this->addSql(
             '
-            INSERT INTO `core_hq_message`
-            (`start`, `end`, `type`, `message`)
+            INSERT INTO "core_hq_message"
+            ("start", "end", "type", "message")
         VALUES (
-            `2019-02-15 00:00:00.0`,
-            `2019-03-30 00:00:00.0`,
-            `primary`,
+            "2019-02-15 00:00:00.0",
+            "2019-03-30 00:00:00.0",
+            "primary",
             `<p class="lead">Hinweis:</p>
             <p style="text-justify: auto">Am <b>15.02.2019</b> haben wir unsere <a href="/article.php?page=terms">Nutzungsbedingungen</a> aktualisiert.
             Als Nutzer hat man das Recht, die neuen Nutzungsbedingungen abzulehnen. Dies hat dann zur Folge, das unsere

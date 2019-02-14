@@ -11,7 +11,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $opt['rootpath'] = __DIR__ . '/../';
 
 spl_autoload_register(
-    function ($className) {
+    function ($className): void {
         if (!preg_match('/^[\w]{1,}$/', $className)) {
             return;
         }

@@ -6,21 +6,10 @@ $finder = PhpCsFixer\Finder::create()
     ->filter(function(SplFileInfo $file) use ($blacklistedFiles) {
         return !in_array($file->getFilename(), $blacklistedFiles, true);
     })
-    ->in(__DIR__ . '/bin')
-    ->in(__DIR__ . '/htdocs/api')
     ->in(__DIR__ . '/htdocs/app')
-    ->in(__DIR__ . '/htdocs/bin')
-    ->in(__DIR__ . '/htdocs/config2')
-    ->in(__DIR__ . '/htdocs/lib')
-    ->in(__DIR__ . '/htdocs/lib2')
     ->in(__DIR__ . '/htdocs/src')
-    ->in(__DIR__ . '/htdocs/util')
-    ->in(__DIR__ . '/htdocs/util2')
-    ->in(__DIR__ . '/htdocs/xml')
-    ->in(__DIR__ . '/local')
     ->in(__DIR__ . '/tests')
     ->in(__DIR__ . '/dev-ops/local.team-opencaching.de/templates')
-    ->notPath(__DIR__ . 'htdocs/config2//settings.inc.php')
 ;
 
 

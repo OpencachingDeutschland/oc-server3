@@ -40,10 +40,10 @@ $oc_nodeid = 4;
 $opt['logic']['node']['id'] = $oc_nodeid;
 
 //name of the cookie
-$opt['cookie']['name'] = 'ocvagrant';
+$opt['cookie']['name'] = 'ocdocker';
 $opt['cookie']['path'] = '/';
 $opt['cookie']['domain'] = '.team-opencaching.de';
-$opt['session']['cookiename'] = 'ocvagrant';
+$opt['session']['cookiename'] = 'ocdocker';
 
 //name of the cookie
 if (!isset($cookiename)) {

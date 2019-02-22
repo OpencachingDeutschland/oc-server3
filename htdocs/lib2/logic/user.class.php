@@ -550,7 +550,18 @@ class user
     public function getStatFound()
     {
         if ($this->reUserStat->exist()) {
-            return $this->reUserStat->getValue('found');
+            return sql_value(
+                'SELECT COUNT(*)
+                 FROM (SELECT cache_id
+                       FROM cache_logs
+                       WHERE user_id = "&1"
+                       AND type = 1
+                       GROUP BY cache_id
+                ) as tmp
+                ',
+                0,
+                $this->getUserId()
+            );
         }
 
         return 0;
@@ -1585,7 +1596,7 @@ class user
         );
     }
 
-    public function getRatingParameters()
+    public function getRatingParameters(): array
     {
         global $opt;
 

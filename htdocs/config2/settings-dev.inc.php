@@ -124,3 +124,7 @@ if (isset($debug_startpage_news) && $debug_startpage_news) {
     $opt['forum']['url'] = 'http://forum.opencaching.de/index.php?action=.xml;type=rss;limit=25';
     $opt['forum']['name'] = 'forum.opencaching.de';
 }
+
+
+$opt['logic']['cachemaps']['url'] = 'http://docker.team-opencaching.de/static_map.php?center={latitude},{longitude}&markers={latitude},{longitude}&size=185x185&zoom={userzoom}';
+$opt['logic']['cachemaps']['iframe'] = false;

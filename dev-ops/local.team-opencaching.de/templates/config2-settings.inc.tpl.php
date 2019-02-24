@@ -63,7 +63,7 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
  * other parameters may be customized
  */
 $opt['session']['mode'] = SAVE_COOKIE;
-$opt['session']['cookiename'] = 'ocvagrant'; // only with SAVE_COOKIE
+$opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '__SESSION_DOMAIN__';    // may be overwritten by $opt['domain'][...]['cookiedomain']
 

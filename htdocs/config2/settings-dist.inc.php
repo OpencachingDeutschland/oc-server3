@@ -151,7 +151,7 @@ $opt['system']['maillog']['inactivity_warning'] = 30;   // warn after N days wit
  * other parameters may be customized
  */
 $opt['session']['mode'] = SAVE_COOKIE;     // don't change - other option "SAVE_SESSION" is not implemented properly
-$opt['session']['cookiename'] = 'ocvagrant'; // only with SAVE_COOKIE
+$opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '';    // may be overwritten by $opt['domain'][...]['cookiedomain']
 

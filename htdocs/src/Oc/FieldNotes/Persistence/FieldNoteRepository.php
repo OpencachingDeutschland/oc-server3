@@ -166,7 +166,7 @@ class FieldNoteRepository
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
 
-        $databaseArray = $this->getDdatabaseArrayFromEntity($entity);
+        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
             self::TABLE,

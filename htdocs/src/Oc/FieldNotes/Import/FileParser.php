@@ -18,8 +18,6 @@ class FileParser
     }
 
     /**
-     * @param File $file
-     * @return array
      * @throws FileFormatException
      */
     public function parseFile(File $file): array

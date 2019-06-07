@@ -25,7 +25,7 @@ templates:
 const:
   DB_USER: "root"
   DB_PASSWORD: "root"
-  DB_NAME: "opencaching"
+  DB_NAME: "oc_ocde"
   DB_HOST: "localhost"
   FRONTEND_URL: "http://local.team-opencaching.de"
   DIR: "__DIR__"

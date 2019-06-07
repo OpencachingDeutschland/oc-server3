@@ -595,7 +595,7 @@ class cache
              LIMIT &2, &3",
             $this->nCacheId,
             $start + 0,
-            $count + 0
+            round($count + 0)
         );
 
         $logs = [];

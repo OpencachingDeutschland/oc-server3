@@ -18,7 +18,9 @@ class FileParser
     }
 
     /**
-     * Parses the given file.
+     * @param File $file
+     * @return array
+     * @throws FileFormatException
      */
     public function parseFile(File $file): array
     {
@@ -29,9 +31,6 @@ class FileParser
         return $this->structMapper->map($rows);
     }
 
-    /**
-     * Fetches the content of the file and returns it.
-     */
     private function getSanitizedFileContent(File $file): string
     {
         $content = file_get_contents($file->getRealPath());
@@ -42,13 +41,9 @@ class FileParser
         return $content;
     }
 
-    /**
-     * Fetches rows from csv content.
-     */
     private function getRowsFromCsv(string $content): array
     {
-        $lines = explode("\n", $content);
-        $lines = array_filter($lines);
+        $lines = array_filter(explode("\n", $content));
 
         $rows = [];
 

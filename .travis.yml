@@ -3,7 +3,7 @@ php:
   - 7.2
   - 7.3
 sudo: required
-dist: bionic
+dist: xenial
 
 before_script:
   #- if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi

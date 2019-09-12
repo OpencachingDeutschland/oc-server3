@@ -3,31 +3,40 @@ php:
   - 7.2
   - 7.3
 sudo: required
-dist: precise
+dist: bionic
+
+before_script:
+  #- if [[ "$(php --version | grep -cim1 xdebug)" -ge 1 ]]; then phpenv config-rm xdebug.ini; fi
 
 services:
-  - docker
+  - mysql
 
 before_install:
-  - sudo rm -f /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker-compose build
-  - docker-compose up -d
-  - docker ps
+  - chmod +x build/travis-ci.sh
+  - sudo apt-get update
+  - sudo apt-get install apache2 libapache2-mod-fastcgi
+  # enable php-fpm
+  - sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+  - sudo a2enmod rewrite actions fastcgi alias
+  - echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+  # configure apache virtual hosts
+  - sudo cp -f build/travis-ci-apache /etc/apache2/sites-available/default
+  - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+  - sudo service apache2 restart
 
 install:
-  - docker exec -i -u __USERKEY__ -t __PHP_FPM_ID__ ./psh.phar docker:init
+    - build/travis-ci.sh
+    - ./psh.phar travis-ci:init
 
 script:
-  - docker exec -i -u __USERKEY__ -t __PHP_FPM_ID__ ./psh.phar travis-ci:code-style
-  - docker exec -i -u __USERKEY__ -t __PHP_FPM_ID__ ./psh.phar travis-ci:unit
+    - ./psh.phar travis-ci:code-style
+    - ./psh.phar travis-ci:unit
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - git reset --hard
-  - git clean -fd
+    - bash <(curl -s https://codecov.io/bash)
+    - git reset --hard
+    - git clean -fd
 
 matrix:
   allow_failures:

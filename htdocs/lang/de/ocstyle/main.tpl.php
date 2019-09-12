@@ -256,7 +256,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     <div style="text-align: center;" class="nodeflags">
                         <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.de" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-de.png" width="100" height="22" /></a><br />
-                        <a href="https://www.opencachingspain.es" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-es.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.fr" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-fr.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.it" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-it.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />

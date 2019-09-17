@@ -21,7 +21,7 @@ install:
   - docker-compose up -d --build
   - sudo chmod +x build/travis-ci.sh psh.phar
   - build/travis-ci.sh
-  - ./psh.phar travis-ci:init-docker
+  - ./psh.phar travis-ci:init
 
 script:
   - ./psh.phar travis-ci:code-style

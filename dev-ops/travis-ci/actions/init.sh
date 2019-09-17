@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-INCLUDE: ./../../docker/actions/init.sh
+docker exec opencaching-php-fpm ./psh.phar docker:init

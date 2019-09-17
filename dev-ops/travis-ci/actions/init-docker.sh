@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker exec php-fpm ./psh.phar docker:init
+docker exec opencaching-php-fpm ./psh.phar docker:init
 

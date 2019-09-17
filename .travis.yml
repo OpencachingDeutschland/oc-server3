@@ -5,10 +5,6 @@ php:
 sudo: required
 dist: xenial
 
-before_script:
-  - docker-compose up -d --build
-  - sudo chmod +x build/travis-ci.sh psh.phar
-
 services:
   - docker
 
@@ -22,20 +18,22 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-    - build/travis-ci.sh
-    - ./psh.phar travis-ci:init-docker
+  - docker-compose up -d --build
+  - sudo chmod +x build/travis-ci.sh psh.phar
+  - build/travis-ci.sh
+  - ./psh.phar travis-ci:init-docker
 
 script:
-    - ./psh.phar travis-ci:code-style
-    - ./psh.phar travis-ci:unit
+  - ./psh.phar travis-ci:code-style
+  - ./psh.phar travis-ci:unit
 
 after_script:
   - docker-compose down
 
 after_success:
-    - bash <(curl -s https://codecov.io/bash)
-    - git reset --hard
-    - git clean -fd
+  - bash <(curl -s https://codecov.io/bash)
+  - git reset --hard
+  - git clean -fd
 
 matrix:
   allow_failures:

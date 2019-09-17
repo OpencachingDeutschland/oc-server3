@@ -7,6 +7,7 @@ dist: xenial
 
 before_script:
   - docker-compose up -d --build
+  - sudo chmod +x build/travis-ci.sh psh.phar
 
 services:
   - docker

@@ -22,7 +22,7 @@ before_install:
 
 install:
     - build/travis-ci.sh
-    - ./psh.phar travis-ci:init
+    - ./psh.phar travis-ci:init-docker
 
 script:
     - ./psh.phar travis-ci:code-style

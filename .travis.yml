@@ -24,8 +24,7 @@ install:
   - ./psh.phar travis-ci:init
 
 script:
-  - ./psh.phar travis-ci:code-style
-  - ./psh.phar travis-ci:unit
+  - ./psh.phar travis-ci:ci
 
 after_script:
   - docker-compose down

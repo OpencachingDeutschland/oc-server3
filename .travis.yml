@@ -16,12 +16,12 @@ before_install:
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - curl http://docker.team-opencaching.de
 
 install:
   - docker-compose up -d --build
   - sudo chmod +x psh.phar
   - ./psh.phar travis-ci:init
+  - curl http://docker.team-opencaching.de
 
 script:
   - ./psh.phar travis-ci:ci

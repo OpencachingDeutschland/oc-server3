@@ -20,7 +20,7 @@
     "jms/translation-bundle": "^1.2",
     "beberlei/doctrineextensions": "^1.0",
     "leafo/scssphp": "^v0.7",
-    "league/commonmark": "^0.15.6",
+    "league/commonmark": "^0.18.3",
     "sentry/sentry": "^1.7",
     "opencaching/okapi": "dev-master",
     "bestit/kitchensink-bundle": "^1.0",

@@ -56,7 +56,7 @@
             "time": "2018-04-25T17:53:56+00:00"
         },
         {
-            "name": "beberlei/doctrineextensions",
+            "name": "beberlei/DoctrineExtensions",
             "version": "v1.2.0",
             "source": {
                 "type": "git",
@@ -2429,12 +2429,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "6be38dcd869651db7dd2fddf94a09e3f64519320"
+                "reference": "1fbdf3a94805aeac88ea289c42ce4086649e8abf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/6be38dcd869651db7dd2fddf94a09e3f64519320",
-                "reference": "6be38dcd869651db7dd2fddf94a09e3f64519320",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/1fbdf3a94805aeac88ea289c42ce4086649e8abf",
+                "reference": "1fbdf3a94805aeac88ea289c42ce4086649e8abf",
                 "shasum": ""
             },
             "require": {
@@ -3298,7 +3298,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -5066,7 +5066,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -5138,7 +5138,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "description": "🛠 Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
             "homepage": "https://nette.org",
             "keywords": [
                 "array",

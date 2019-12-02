@@ -10,6 +10,7 @@
   },
   "main": "gruntfile.js",
   "dependencies": {
+    "node": ">=8.0.0",
     "autoprefixer": "^6.4.1",
     "bootstrap": "v4.0.0-beta.2",
     "grunt": "^1.0.1",

@@ -86,10 +86,8 @@ class AppKernel extends Kernel
 
     /**
      * Get instance of AppKernel.
-     *
-     * @return AppKernel
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         return self::$instance;
     }
@@ -99,10 +97,8 @@ class AppKernel extends Kernel
      *
      * Is not named as getContainer because this is a function of the Kernel.
      * It acts as a shortcut for the legacy application to get the container.
-     *
-     * @return ContainerInterface
      */
-    public static function Container()
+    public static function Container(): ContainerInterface
     {
         return self::getInstance()->getContainer();
     }

@@ -11,6 +11,7 @@ class LoginTest extends AbstractFrontendTest
 {
     public function testLoginFormOnStartPage(): void
     {
+        $this->session->visit('/');
         $page = $this->session->getPage();
         $page->fillField('email', 'root');
         $page->fillField('password', 'developer');

@@ -162,16 +162,6 @@ AddDefaultCharset UTF-8
 
     # Other directives here
 </VirtualHost>
-<VirtualHost *:80>
-    DocumentRoot "/var/www/html/backend/web"
-    ServerName backend.local.team-opencaching.de
-
-    SetEnv APPLICATION_ENV dev
-
-    <Directory "/var/www/html/backend/web">
-        AllowOverride All
-    </Directory>
-</VirtualHost>
 
 IncludeOptional conf.d/*.conf
 EOF

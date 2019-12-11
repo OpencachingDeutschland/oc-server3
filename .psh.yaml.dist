@@ -17,8 +17,6 @@ templates:
     destination: "htdocs/lib/settings.inc.php"
   - source: "dev-ops/local.team-opencaching.de/templates/parameters.yml.tpl"
     destination: "htdocs/app/config/parameters.yml"
-  - source: "dev-ops/local.team-opencaching.de/templates/parameters.yml.tpl"
-    destination: "backend/app/config/parameters.yml"
   - source: "htdocs/statpics/htaccess-dist"
     destination: "htdocs/statpics/.htaccess"
 
@@ -52,8 +50,6 @@ environments:
         destination: "htdocs/app/config/swiftmailer.yaml.tpl"
       - source: "dev-ops/docker/templates/parameters.yml.tpl"
         destination: "htdocs/app/config/parameters.yml"
-      - source: "dev-ops/docker/templates/parameters.yml.tpl"
-        destination: "backend/app/config/parameters.yml"
       - source: "htdocs/statpics/htaccess-dist"
         destination: "htdocs/statpics/.htaccess"
   travis-ci:

@@ -43,5 +43,9 @@
 
             <argument type="service" id="request_stack" />
         </service>
+
+        <service id="OcLegacy\Admin\Gdpr\GdprHandler" public="true">
+            <argument key="$projectDir">%kernel.project_dir%</argument>
+        </service>
     </services>
 </container>

@@ -22,6 +22,10 @@
 
 </form>
 
+{if $showGdprDeletion}
+    {include file="adminuser/gdpr_deletion.tpl"}
+{/if}
+
 {if $showdetails==true}
     <form method="post" action="adminuser.php">
         <input type="hidden" name="action" value="formaction" />
@@ -126,6 +130,10 @@
                 <tr>
                     <td>&nbsp;</td>
                     <td><input type="checkbox" name="chkdelete" value="1" /> {t}Delete{/t}</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="checkbox" name="chkdeletegdpr" value="1" /> {t}GDPR-Deletion{/t}</td>
                 </tr>
             {/if}
             {if $cansetemail==true}

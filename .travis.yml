@@ -21,6 +21,7 @@ install:
   - docker-compose up -d --build
   - sudo chmod +x psh.phar
   - ./psh.phar travis-ci:init
+  - sudo chmod -R 777 htdocs/var/logs/
   - curl http://docker.team-opencaching.de
 
 script:

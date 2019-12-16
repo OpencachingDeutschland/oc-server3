@@ -105,4 +105,9 @@ class LegacyAuthenticator extends AbstractGuardAuthenticator
     {
         return false;
     }
+
+    public function supports(Request $request): bool
+    {
+        return true;
+    }
 }

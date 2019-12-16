@@ -39,7 +39,7 @@ class AppKernelTest extends TestCase
     {
         self::assertInternalType('array', $this->getKernel()->registerBundles());
 
-        self::assertCount(16, $this->getKernel()->registerBundles());
+        self::assertCount(13, $this->getKernel()->registerBundles());
     }
 
     public function test_getCacheDir_returns_environment_suffixed_directory(): void

@@ -5,7 +5,6 @@
         <defaults autowire="true" autoconfigure="true" public="false" />
 
         <prototype namespace="Oc\" resource="../../src/Oc/*" />
-        <prototype namespace="OcDev\" resource="../../src/OcDev/*" />
         <prototype namespace="OcLegacy\" resource="../../src/OcLegacy/*" />
 
         <service id="Doctrine\DBAL\Connection" alias="database_connection" public="true" />
@@ -47,5 +46,7 @@
         <service id="OcLegacy\Admin\Gdpr\GdprHandler" public="true">
             <argument key="$projectDir">%kernel.project_dir%</argument>
         </service>
+
+        <service id="Oc\Changelog\Subscriber\MenuSubscriber" public="true" />
     </services>
 </container>

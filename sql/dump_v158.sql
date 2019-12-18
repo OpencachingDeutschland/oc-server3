@@ -6742,30 +6742,6 @@ LOCK TABLES `waypoint_reports` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ws_tan`
---
-
-DROP TABLE IF EXISTS `ws_tan`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ws_tan` (
-  `session` varchar(36) NOT NULL,
-  `tan` varchar(36) NOT NULL,
-  PRIMARY KEY (`session`,`tan`),
-  UNIQUE KEY `tan` (`tan`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ws_tan`
---
-
-LOCK TABLES `ws_tan` WRITE;
-/*!40000 ALTER TABLE `ws_tan` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ws_tan` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `xmlsession`
 --
 

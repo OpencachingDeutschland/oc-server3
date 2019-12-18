@@ -1478,6 +1478,14 @@ class user
         return true;
     }
 
+    public function canGdprDelete(): bool
+    {
+        global $login;
+        $login->verify();
+
+        return !($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER);
+    }
+
     public function canDelete()
     {
         global $login;

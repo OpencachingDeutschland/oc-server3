@@ -131,6 +131,8 @@
                     <td>&nbsp;</td>
                     <td><input type="checkbox" name="chkdelete" value="1" /> {t}Delete{/t}</td>
                 </tr>
+            {/if}
+            {if $cangdprdelete}
                 <tr>
                     <td>&nbsp;</td>
                     <td><input type="checkbox" name="chkdeletegdpr" value="1" /> {t}GDPR-Deletion{/t}</td>

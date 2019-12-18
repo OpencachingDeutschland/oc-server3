@@ -61,7 +61,6 @@ class GdprHandler
                 $this->deleteLogins($userId);
                 $this->deleteOkapiAuthorizations($userId);
                 $this->deleteWatches($userId);
-                $this->deleteWsSessions($userId);
 
                 $this->connection->commit();
 
@@ -396,13 +395,6 @@ SQL
         ]);
 
         $this->connection->executeQuery('DELETE FROM watches_waiting WHERE user_id = :userId', [
-            'userId' => $userId,
-        ]);
-    }
-
-    private function deleteWsSessions(int $userId): void
-    {
-        $this->connection->executeQuery('DELETE FROM ws_sessions WHERE user_id = :userId', [
             'userId' => $userId,
         ]);
     }

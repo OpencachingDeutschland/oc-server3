@@ -1487,12 +1487,7 @@ class user
             return false;
         }
 
-        return
-            sql_value("SELECT COUNT(*) FROM `caches` WHERE `user_id`='&1'", 0, $this->nUserId)
-            + sql_value("SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`='&1'", 0, $this->nUserId)
-            + sql_value("SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`='&1'", 0, $this->nUserId)
-            + sql_value("SELECT COUNT(*) FROM `cache_reports` WHERE `userid`='&1'", 0, $this->nUserId)
-            == 0;
+        return true;
     }
 
     public function delete()

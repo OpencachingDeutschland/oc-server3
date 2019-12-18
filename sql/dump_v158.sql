@@ -6742,33 +6742,6 @@ LOCK TABLES `waypoint_reports` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ws_sessions`
---
-
-DROP TABLE IF EXISTS `ws_sessions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ws_sessions` (
-  `id` varchar(36) NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `date_created` datetime NOT NULL COMMENT 'via cronjob',
-  `last_usage` datetime NOT NULL,
-  `valid` tinyint(1) NOT NULL DEFAULT '0',
-  `closed` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ws_sessions`
---
-
-LOCK TABLES `ws_sessions` WRITE;
-/*!40000 ALTER TABLE `ws_sessions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ws_sessions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `ws_tan`
 --
 

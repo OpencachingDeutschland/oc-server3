@@ -25,7 +25,7 @@ class AttrsTest extends AbstractModuleTest
 
         $response = $client->get('services/attrs/attribute_index', ['consumer_key' => $this->getConsumerKey()]);
 
-        self::assertCount(77, $response);
+        self::assertCount(88, $response);
     }
 
     public function testAttrsAttributeMethodNeedsConsumerKey(): void

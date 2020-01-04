@@ -1954,5 +1954,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'DE', 'Empfehlung', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2660', 'DE', 'Der Cache muss vor Veröffentlichung versteckt werden.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2661', 'DE', 'Das Event muss nach der Cacheveröffentlichung stattfinden.', '2017-08-20 19:30:00');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2662', 'DE', 'Handicap: Wheelchair', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2662', 'DE', 'Handicap: Rollstuhl', '2020-01-04 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2663', 'DE', 'Der Cache ist mit Rollstuhl/Rollator/Kinderwagen erreichbar.', '2020-01-04 19:30:00');

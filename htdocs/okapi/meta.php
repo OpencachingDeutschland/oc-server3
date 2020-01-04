@@ -1,4 +1,4 @@
 <?php return array (
-  'version_number' => 1921,
-  'git_revision' => '1fbdf3a94805aeac88ea289c42ce4086649e8abf',
+  'version_number' => 1926,
+  'git_revision' => 'dbed1d0d908dcc00a4aa7387de2e08b727dccee8',
 );

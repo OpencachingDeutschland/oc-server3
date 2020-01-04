@@ -2339,12 +2339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/opencaching/okapi.git",
-                "reference": "1fbdf3a94805aeac88ea289c42ce4086649e8abf"
+                "reference": "dbed1d0d908dcc00a4aa7387de2e08b727dccee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/1fbdf3a94805aeac88ea289c42ce4086649e8abf",
-                "reference": "1fbdf3a94805aeac88ea289c42ce4086649e8abf",
+                "url": "https://api.github.com/repos/opencaching/okapi/zipball/dbed1d0d908dcc00a4aa7387de2e08b727dccee8",
+                "reference": "dbed1d0d908dcc00a4aa7387de2e08b727dccee8",
                 "shasum": ""
             },
             "require": {
@@ -2360,7 +2360,7 @@
                 "source": "https://github.com/opencaching/okapi/tree/master",
                 "issues": "https://github.com/opencaching/okapi/issues"
             },
-            "time": "2019-05-01T21:25:35+00:00"
+            "time": "2019-12-18T20:39:19+00:00"
         },
         {
             "name": "psr/cache",
@@ -3945,6 +3945,7 @@
                 "code",
                 "zf"
             ],
+            "abandoned": "laminas/laminas-code",
             "time": "2019-12-10T19:21:15+00:00"
         },
         {
@@ -3999,6 +4000,7 @@
                 "events",
                 "zf2"
             ],
+            "abandoned": "laminas/laminas-eventmanager",
             "time": "2018-04-25T15:33:34+00:00"
         }
     ],

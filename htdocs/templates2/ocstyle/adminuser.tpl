@@ -145,7 +145,7 @@
                 </tr>
             {/if}
 
-            {if $licensefunctions==true || $candelete==true || $candisable==true || $cansetemail==true}
+            {if $licensefunctions==true || $candelete==true || $candisable==true || $cansetemail==true || $cangdprdelete == true}
                 <tr>
                     <td>&nbsp;</td>
                     <td><input type="checkbox" name="chkcommit" value="1" /> {t}Sure?{/t}</td>

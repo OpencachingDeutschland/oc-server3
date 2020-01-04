@@ -427,7 +427,7 @@ class cachelog
         return ($masslogs > $opt['logic']['masslog']['count']);
     }
 
-    public static function validateDate(int $year, int $month, int $day, $hour, $minute, $submit)
+    public static function validateDate($year, $month, $day, $hour, $minute, $submit)
     {
         $dateOk = false;
 

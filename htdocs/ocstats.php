@@ -89,13 +89,13 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
     $clrBlue = imagecolorallocate($im, 0, 0, 255);
     $drawRectangle = true;
 
+    $fontSize = 10;
+    $text = $username;
     switch ($logo) {
         case 4:
         case 5:
         case 10:
             // write text
-            $fontSize = 10;
-            $text = $username;
             $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
             imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
             $fontSize = 7.5;
@@ -105,8 +105,6 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
             break;
         case 2:
             // write text
-            $fontSize = 10;
-            $text = $username;
             $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
             imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
             $fontSize = 7;
@@ -121,8 +119,6 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
         case 7:
         case 11:
             // write text
-            $fontSize = 10;
-            $text = $username;
             $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
             imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
             $fontSize = 7.5;
@@ -131,8 +127,6 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
             break;
         case 8:
             // write text
-            $fontSize = 10;
-            $text = $username;
             $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
             imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 8 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 8 : $maxTextWidth, 20, $clrBlack, $fontFile, $text);
             $fontSize = 8;
@@ -147,8 +141,6 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
         case 9:
         default:
             // write text
-            $fontSize = 10;
-            $text = $username;
             $textSize = imagettfbbox($fontSize, 0, $fontFile, $text);
             imagettftext($im, $fontSize, 0, (imagesx($im) - ($textSize[2] - $textSize[0]) - 5 > $maxTextWidth) ? imagesx($im) - ($textSize[2] - $textSize[0]) - 5 : $maxTextWidth, 15, $clrBlack, $fontFile, $text);
             $fontSize = 7;

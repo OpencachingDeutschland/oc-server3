@@ -415,9 +415,6 @@ $opt['cron']['sitemaps']['submit'] = false;
 $opt['cron']['geokrety']['run'] = true;
 $opt['cron']['geokrety']['xml_archive'] = false;
 $opt['cron']['autoarchive']['run'] = false;
-$opt['cron']['gcwp']['sources'] = [];
-$opt['cron']['gcwp']['fulllist'] = '';
-$opt['cron']['gcwp']['report'] = '';
 $opt['cron']['replicate']['delete_hidden_caches']['url'] = '';
 
 /* E-Mail settings

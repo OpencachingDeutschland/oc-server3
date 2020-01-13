@@ -359,13 +359,13 @@ foreach ($tables as $table) {
 
     file_put_contents(
         __DIR__ . '/Entities/' . $classNameEntity . '.php',
-        "<?php \n\n" . $classEntity->__toString(),
+        "<?php \n\n" . (string) $classEntity,
         LOCK_EX
     );
 
     file_put_contents(
         __DIR__ . '/Entities/' . $classNameEntity . 'Test.php',
-        "<?php \n\n use OcTest\Modules\AbstractModuleTest; \n\n" . $classEntityTest->__toString(),
+        "<?php \n\n use OcTest\Modules\AbstractModuleTest; \n\n" . (string) $classEntityTest,
         LOCK_EX
     );
 
@@ -378,7 +378,7 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException; \n\n" .
-        $classRepository->__toString(),
+        (string) $classRepository,
         LOCK_EX
     );
 }

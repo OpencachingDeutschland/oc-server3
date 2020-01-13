@@ -44,7 +44,7 @@ if ($userStatisticPicture === 0 || !file_exists($fileName)) {
            ON `user`.`user_id`=`stat_user`.`user_id`
          WHERE `user`.`user_id`= :userId',
         ['userId' => $userId]
-        );
+    );
 
     if (is_array($userData)) {
         $username = $userData['username'];

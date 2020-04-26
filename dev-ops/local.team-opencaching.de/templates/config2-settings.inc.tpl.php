@@ -240,10 +240,10 @@ function post_config(): void
     }
 
     $menuitem[MNU_INFO] = [
-        'title' => $translate->t('Help', '', '', ''),
-        'menustring' => $translate->t('Help', '', '', ''),
+        'title' => 'Wiki',
+        'menustring' => 'Wiki',
         'authlevel' => 0,
-        'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
+        'href' => 'https://' . $domain . '/articles.php?page=helpindex&wiki',
         'visible' => 1,
         'sublevel' => 1,
     ];

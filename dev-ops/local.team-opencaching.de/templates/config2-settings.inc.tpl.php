@@ -251,26 +251,13 @@ function post_config(): void
 
     config_domain_test_opencaching_de();
 
-    /*
-    $menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
-    'menustring' => 'Chat/IRC',
-    'authlevel' => 0,
-    'href' => 'webchat.php',
-    'visible' => 1,
-    'sublevel' => 1
-    );
-    $menuitem[0]['subitems'][] = MNU_CHAT;
-    */
 
-    // geokrety menu contains the language
+    // Link to Geokrety
     $menuitem[MNU_GEOKRETY] = [
         'title' => 'Geokrety',
         'menustring' => 'Geokrety',
         'authlevel' => 0,
-        'href' => 'http://www.geokrety.org/index.php?lang=' .
-            urlencode(
-                $opt['geokrety']['locales'][$opt['template']['locale']]
-            ),
+        'href' => 'https://www.geokrety.org/',
         'target' => 'target="_blank"',
         'visible' => 1,
         'sublevel' => 1,

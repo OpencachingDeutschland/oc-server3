@@ -31,5 +31,9 @@
             background-color: $color__error-background;
             border-color: $color__error-border;
         }
+
+        &--hq {
+            border-style: dashed;
+        }
     }
 }

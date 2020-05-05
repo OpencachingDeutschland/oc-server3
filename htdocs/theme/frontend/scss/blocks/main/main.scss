@@ -2,7 +2,105 @@
 
 .main {
     &__content {
-        margin: 15px;
-        max-width: 75%;
+        font-family: Play, Verdana, serif;
+
+        h2 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.5rem;
+        }
     }
+
+    &__content-title {
+
+        font-family: 'Montserrat', serif;
+        font-weight: bold;
+
+        @include media-breakpoint-up(xs) {
+            font-size: 1rem;
+        }
+
+        @include media-breakpoint-up(sm) {
+            font-size: 1.5rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            font-size: 2rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+            font-size: 3rem;
+        }
+    }
+
+    &__content-tagline {
+
+        font-family: 'Montserrat', serif;
+        font-weight: 300;
+
+        @include media-breakpoint-up(xs) {
+            font-size: 0.7rem;
+        }
+
+        @include media-breakpoint-up(sm) {
+            font-size: 1rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            font-size: 1.2rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__content-box {
+        background-color: rgba($white, .4);
+        border-radius: 1.5em;
+        position: relative;
+
+        @include media-breakpoint-down(md) {
+            top: 10rem;
+            left: 1rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            top: 10rem;
+            left: 5rem;
+        }
+    }
+
+    &__topstage {
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $gray-light;
+        height: 40vh;
+        border-bottom: $oc-primary solid 0.25em;
+
+        @include media-breakpoint-up(sm) {
+            height: 50vh;
+        }
+
+        @include media-breakpoint-up(md) {
+            height: 60vh;
+        }
+
+        @include media-breakpoint-up(lg) {
+            height: 70vh;
+        }
+
+        @include media-breakpoint-up(xl) {
+            height: 85vh;
+        }
+    }
+
+}
+
+.main__home {
+    background-image: url('../images/header/oc_titelbild_norwegen.jpg');
 }

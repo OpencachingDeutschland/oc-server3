@@ -1,0 +1,10 @@
+@import '../../global';
+@import '~bootstrap/scss/modal';
+
+.modal {
+    color: $oc-primary__dark;
+
+    &__footer {
+        color: $gray;
+    }
+}

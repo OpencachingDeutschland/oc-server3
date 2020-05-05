@@ -1,27 +1,21 @@
 {***************************************************************************
 * You can find the license in the docs directory
 ***************************************************************************}
-<div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
-    <div class="newsblock">
-{if !$includetext}
-        <table class='narrowtable' style='margin-top:0'>
-{/if}
+
 
 {foreach name=rss from=$rss item=rss}
-{if $includetext}
-        <p class="content-title-noshade-size15" style="display: inline;">{$rss.pubDate} - {$rss.title}</p>
-        <p style="line-height: 1.6em;display: inline;">&emsp;[<b><a class="link" href="{$rss.link}">mehr...</a></b>]</p>
-        <div class="rsstext">{$rss.description}</div>
-{else}
-            <tr>
-                <td style="text-align:right; white-space:nowrap;">{$rss.pubDate|date_format:$opt.format.datelong}</td>
-                <td><a class="links" href="{$rss.link}">{$rss.title}</a></td>
-            </tr>
-{/if}
+    <div class="rss__content d-flex">
 
-{/foreach}
+        <div class="rss__date">
+            <div class="rss__day">{$rss.pubDate|date_format:"%d."}</div>
+            <div class="rss__month">{$rss.pubDate|date_format:"%b"}</div>
+        </div>
 
-{if !$includetext}
-        </table>
-{/if}
+
+        <a href="{$rss.link}" rel="nofollow" class="rss__text" target="_blank">
+            {$rss.title}
+        </a>
+
+
     </div>
+{/foreach}

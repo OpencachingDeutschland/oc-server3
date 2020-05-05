@@ -34,7 +34,8 @@
     "ext-posix": "*",
     "ext-curl": "*",
     "ext-zlib": "*",
-    "eluceo/ical": "^0.15.0"
+    "eluceo/ical": "^0.15.0",
+    "mervick/material-design-icons": "^2.2"
   },
   "require-dev": {
     "phpunit/phpunit": "6.*",

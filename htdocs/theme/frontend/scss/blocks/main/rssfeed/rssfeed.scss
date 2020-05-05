@@ -1,0 +1,45 @@
+.rss__content {
+    width: 100%;
+    margin-bottom: .25em;
+    margin-top: .25em;
+}
+
+.rss__date {
+    background: $gray-darker;
+    width: 4em;
+    height: 4em;
+    float: left;
+}
+
+.rss__day {
+    color: $white;
+    margin-left: 0;
+    margin-top: .25em;
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.rss__month {
+    color: $oc-primary;
+    margin-left: 0;
+    margin-top: 0;
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+
+.rss__text {
+    background-color: $gray-300;
+    vertical-align: center;
+    width: 100%;
+    font-family: Montserrat;
+    font-weight: 600;
+    padding: .5em;
+    color: $oc-primary__dark;
+
+    &:hover {
+        background-color: $gray-400;
+    }
+}

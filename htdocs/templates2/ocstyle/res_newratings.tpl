@@ -34,4 +34,3 @@
         </li>
     {/foreach}
 </ul>
-<p class="systemlink" style="line-height: 1.6em;">{t}You can find more recommendations &gt;<a href="tops.php">here</a>&lt;.{/t}</p>

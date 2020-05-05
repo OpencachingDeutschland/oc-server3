@@ -1,0 +1,35 @@
+@import '../../global';
+
+.footer__container {
+    border-top: $red solid 0.25em;
+    background: $gray-darker;
+    color: $white;
+    padding: 1rem;
+    min-height: 10rem;
+
+    a {
+        color: $oc-primary;
+    }
+
+    a:hover {
+        color: $oc-secondary;
+    }
+}
+
+.footer__small {
+    font-family: 'Montserrat';
+    font-size: 0.7rem;
+    font-weight: 300;
+}
+
+.footer__datalicence--title {
+    font-family: 'Montserrat';
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.footer__datalicence--text {
+    font-family: 'Montserrat';
+    font-size: .8rem;
+    font-weight: 400;
+}

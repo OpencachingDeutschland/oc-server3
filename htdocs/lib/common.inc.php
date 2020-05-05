@@ -166,7 +166,8 @@ $ocpropping = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_A
 $bScriptExecution = new CBench;
 $bScriptExecution->start();
 
-function load_domain_settings(): void
+function load_domain_settings()
+: void
 {
     global $opt, $style;
 
@@ -212,12 +213,14 @@ function db_LanguageFromShort($langCode)
         //return the language
         return $record['text'];
     }
+
     //language not found
     return false;
 }
 
 //get the stored settings and authentification data from the cookie
-function load_cookie_settings(): void
+function load_cookie_settings()
+: void
 {
     global $cookie, $lang, $style;
 
@@ -233,7 +236,8 @@ function load_cookie_settings(): void
 }
 
 //store the cookie vars
-function write_cookie_settings(): void
+function write_cookie_settings()
+: void
 {
     global $cookie, $lang, $style;
 
@@ -260,8 +264,8 @@ function get_cookie_setting($name)
 }
 
 //sets the cookie value
-function set_cookie_setting($name, $value): void
-{
+function set_cookie_setting($name, $value)
+: void {
     global $cookie;
     $cookie->set($name, $value);
 }
@@ -275,8 +279,8 @@ function set_cookie_setting($name, $value): void
  * @param mixed $value
  * @param mixed $no_eval
  */
-function tpl_set_var($name, $value, $no_eval = true): void
-{
+function tpl_set_var($name, $value, $no_eval = true)
+: void {
     global $vars, $no_eval_vars;
     $vars[$name] = $value;
     $no_eval_vars[$name] = $no_eval;
@@ -295,7 +299,8 @@ function tpl_get_var($name)
 }
 
 //clear all template vars
-function tpl_clear_vars(): void
+function tpl_clear_vars()
+: void
 {
     unset($GLOBALS['vars']);
     unset($GLOBALS['no_eval_vars']);
@@ -307,21 +312,22 @@ function tpl_clear_vars(): void
  * @param $id
  * @param $html_code
  */
-function tpl_set_page_function($id, $html_code): void
-{
+function tpl_set_page_function($id, $html_code)
+: void {
     global $page_functions;
 
     $page_functions[$id] = $html_code;
 }
 
-function tpl_unset_page_function($id): void
-{
+function tpl_unset_page_function($id)
+: void {
     global $page_functions;
 
     unset($page_functions[$id]);
 }
 
-function tpl_clear_page_functions(): void
+function tpl_clear_page_functions()
+: void
 {
     unset($GLOBALS['page_functions']);
 }
@@ -329,7 +335,8 @@ function tpl_clear_page_functions(): void
 /**
  * see OcSmarty::acceptsAndPurifiesHtmlInput
  */
-function tpl_acceptsAndPurifiesHtmlInput(): void
+function tpl_acceptsAndPurifiesHtmlInput()
+: void
 {
     header('X-XSS-Protection: 0');
 }
@@ -339,8 +346,8 @@ function tpl_acceptsAndPurifiesHtmlInput(): void
  *
  * @param bool $dbDisconnect
  */
-function tpl_BuildTemplate($dbDisconnect = true): void
-{
+function tpl_BuildTemplate($dbDisconnect = true)
+: void {
     global $sql_debug, $sqldbg_cmdNo;
 
     if (isset($sql_debug) && $sql_debug) {
@@ -401,8 +408,8 @@ function tpl_BuildTemplate($dbDisconnect = true): void
         $ltext = mb_ereg_replace('%1', $lurl, $ltext);
         $ltext = mb_ereg_replace('{site}', $opt['page']['sitename'], $ltext);
 
-        $ld = '<p class="sidebar-maintitle">' . $translate->t('Datalicense', '', '', 0) . '</p>' .
-            '<div style="margin:20px 0 16px 0; width:100%; text-align:center;">' . $ltext . '</div>';
+        $ld = '<div class="footer__datalicence--title">' . $translate->t('Datalicense', '', '', 0) . '</div>'
+              . '<div class="footer__datalicence--text">' . $ltext . '</div>';
         tpl_set_var('license_disclaimer', $ld);
     } else {
         tpl_set_var('license_disclaimer', '');
@@ -507,7 +514,8 @@ function tpl_BuildTemplate($dbDisconnect = true): void
     }
 }
 
-function http_write_no_cache(): void
+function http_write_no_cache()
+: void
 {
     // HTTP/1.1
     header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -524,8 +532,8 @@ function http_write_no_cache(): void
 /**
  * @param string $page
  */
-function tpl_redirect($page): void
-{
+function tpl_redirect($page)
+: void {
     global $absolute_server_URI;
 
     write_cookie_settings();
@@ -545,6 +553,7 @@ function tpl_redirect($page): void
 //                  marked as "no_eval"
 /**
  * @param string $str
+ *
  * @return string
  */
 function tpl_do_replace($str)
@@ -578,8 +587,8 @@ function tpl_do_replace($str)
  * @param string $tplnameError
  * @param string $msg
  */
-function tpl_errorMsg($tplnameError, $msg): void
-{
+function tpl_errorMsg($tplnameError, $msg)
+: void {
     global $tplname;
 
     $tplname = 'error';
@@ -590,8 +599,8 @@ function tpl_errorMsg($tplnameError, $msg): void
     exit;
 }
 
-
-function load_gettext(): void
+function load_gettext()
+: void
 {
     global $cookie, $opt, $locale;
 
@@ -610,6 +619,7 @@ function load_gettext(): void
 
 /**
  * @param string $sCode
+ *
  * @return string
  */
 function tpl_do_translation($sCode)
@@ -642,6 +652,7 @@ function tpl_do_translation($sCode)
 
 /**
  * @param string $sCode
+ *
  * @return string
  */
 function gettext_do_html($sCode)
@@ -675,6 +686,7 @@ function gettext_do_html($sCode)
 
 /**
  * @param $str
+ *
  * @return string
  */
 function t($str)
@@ -683,7 +695,7 @@ function t($str)
 
     $str = $translate->t($str, '', basename(__FILE__), __LINE__);
     $args = func_get_args();
-    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex--) {
+    for ($nIndex = count($args) - 1; $nIndex > 0; $nIndex --) {
         $str = str_replace('%' . $nIndex, $args[$nIndex], $str);
     }
 
@@ -692,6 +704,7 @@ function t($str)
 
 /**
  * @param $text
+ *
  * @return string
  */
 function t_prepare_text($text)
@@ -751,7 +764,9 @@ function getUserCountry()
  * pay attention to use only ' quotes in $text (escape other ')
  *
  * see corresponding function in lib2/common.inc.php
+ *
  * @param $ocPage
+ *
  * @return string
  */
 function helppagelink($ocPage)
@@ -799,9 +814,8 @@ function helppagelink($ocPage)
     }
     if ($helpPage != '' && isset($opt['locale'][$help_locale]['helpwiki'])) {
         return "<a class='nooutline' href='" . $opt['locale'][$help_locale]['helpwiki'] .
-            str_replace(' ', '_', $helpPage) . "' " . $imgTitle . " target='_blank'>";
+               str_replace(' ', '_', $helpPage) . "' " . $imgTitle . " target='_blank'>";
     }
-    
 
     return '';
 }
@@ -811,8 +825,12 @@ function get_logtype_name($logtype, $language)
     return sqlValue(
         "SELECT IFNULL(`stt`.`text`, `log_types`.`en`)
          FROM `log_types`
-         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='" . sql_escape($language) . "'
-         WHERE `log_types`.`id`='" . sql_escape($logtype) . "'",
+         LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`log_types`.`trans_id` AND `stt`.`lang`='"
+        . sql_escape($language)
+        . "'
+         WHERE `log_types`.`id`='"
+        . sql_escape($logtype)
+        . "'",
         ''
     );
 }

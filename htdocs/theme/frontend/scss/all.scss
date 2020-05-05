@@ -1,18 +1,25 @@
 @import 'global';
 
+//=========LIBARIES=========//
+@import 'lib/fonts/montserrat';
+@import 'lib/svg/icons';
+@import 'lib/js/cookiealert';
+@import 'lib/bootstrap/modal';
+
+//==========BOOTSTRAP==========//
+@import '~bootstrap/scss/bootstrap';
+
+
 //==========BLOCKS==========//
 @import 'blocks/flash-messages/flash-messages';
 
 @import 'blocks/main/main';
+@import 'blocks/main/hq-message/hq-message';
+@import 'blocks/main/rssfeed/rssfeed';
+@import 'blocks/header/header';
+@import 'blocks/footer/footer';
+@import 'blocks/event/event';
+@import 'blocks/title/title';
 
-@import 'blocks/navigation/navigation';
-@import 'blocks/navigation/navigation-item';
-
-@import 'blocks/sidebar/sidebar';
-@import 'blocks/site/site';
-
-@import 'blocks/kitchensink/kitchensink';
-
-//==========BOOTSTRAP==========//
-@import '~bootstrap/scss/reboot';
 @import 'common';
+

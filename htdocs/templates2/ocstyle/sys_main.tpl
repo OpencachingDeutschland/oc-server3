@@ -100,8 +100,14 @@
         {/literal}
         <script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js"></script>
         <script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js"></script>
+
+        {* Cookie Consent Tool 06.2020 *}
+        <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">
+        <script type="application/javascript" src="resource2/ocstyle/js/klaro_config.js"></script>
+        <script type="application/javascript" src="resource2/ocstyle/js/klaro.js"></script>
+
         {if $opt.session.url==true}
-            <script type="text/javascript">
+            <script type="text/javascript" data-name="ocSessionTimeout">
                 {literal}
                 <!--
                     var sSessionId = '{/literal}{$opt.session.id|escape:'js'}{literal}';
@@ -120,7 +126,7 @@
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
  class="{if $opt.template.popup!=false}popup{/if}">
-    {include file="header/cookie_notice.tpl"}
+
     {if $opt.template.popup!=true}
         <div id="overall">
             <div id="langstripe">
@@ -360,6 +366,7 @@
 
             {* <!-- FOOTER --> *}
             <div class="footer">
+                <p><a onClick="klaro.show();return false;">COOKIE SETUP</a></p>
                 <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                 <p><strong>{$opt.page.sponsor.bottom}</strong></p>
             </div>
@@ -368,7 +375,7 @@
 {/if}{*popup*}
     {if $opt.tracking.googleAnalytics}
         {literal}
-            <script type="text/javascript">
+            <script type="text/javascript" data-name="googleAnalytics">
                 // Set to the same value as the web property used on the site
                 var gaProperty = '{/literal}{$opt.tracking.googleAnalytics}{literal}';
 
@@ -390,7 +397,7 @@
         {/literal}
         {if !$smarty.server.HTTP_DNT}
             {literal}
-            <script type="text/javascript">
+            <script type="text/javascript" data-name="googleAnalytics">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

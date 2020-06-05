@@ -643,7 +643,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('696', 'DE', 'Entschuldigung, der Geocache ist noch nicht veröffentlicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('697', 'DE', 'Alle Logeinträge anzeigen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('698', 'DE', 'Geocache anzeigen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'DE', 'Du bist bereits eingeloggt.<br />\r\nDu musst duch erst <a href=\"login.php?action=logout\">abmelden</a>, um dich erneut anzumelden.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'DE', 'Du bist bereits eingeloggt.<br />\r\nDu musst dich erst <a href=\"login.php?action=logout\">abmelden</a>, um dich erneut anzumelden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('701', 'DE', 'Schwierigkeit:\&nbsp;%1\&nbsp;von\&nbsp;5', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('702', 'DE', 'Gelände:\&nbsp;%1\&nbsp;von\&nbsp;5', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('703', 'DE', 'Teilnehmerliste', '2010-08-28 11:48:06');

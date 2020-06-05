@@ -48,7 +48,7 @@ var klaroConfig = {
     // use the value given in the global "lang" variable. If that does
     // not exist, it will use the value given in the "lang" attribute of your
     // HTML tag. If that also doesn't exist, it will use 'en'.
-    lang: 'de',
+    //lang: 'de',
 
     // You can overwrite existing translations and add translations for your
     // app descriptions and purposes. See `src/translations/` for a full
@@ -66,7 +66,7 @@ var klaroConfig = {
                     'Hier haben wir unsere eingesetzten Cookies zusammengefasst und erklärt.',
             },
             acceptSelected: {
-                description: 'Auswahl Speichern',
+                description: 'Speichern',
             },
             googleFonts: {
                 description: 'Web-Schriftarten die von Google gehostet werden, für ein schöneres Schriftbild.',
@@ -80,12 +80,16 @@ var klaroConfig = {
             ocSessionTimeout: {
                 description: 'Wenn man die Option des automatischen Logouts aktiviert hat, brauchen wir dieses Session Cookie.',
             },
+            ocgmconfig: {
+                description: 'Speichert die Einstellungen der Karte.',
+            },
             purposes: {
                 analytics: 'Besucher-Statistiken',
+                comfort: 'Komfort',
                 security: 'Sicherheit',
                 styling: 'Styling',
                 statistics: 'Statistics',
-                required: 'Technisch notwendiges Cookie',
+                required: 'Technisch notwendig',
             },
         },
         en: {
@@ -94,7 +98,7 @@ var klaroConfig = {
                     'Here we have summarized and explained the cookies we use.',
             },
             acceptSelected: {
-                description: 'Save selected',
+                description: 'Save',
             },
             googleFonts: {
                 description: 'Web fonts hosted by Google for a smarter design and view.',
@@ -108,12 +112,16 @@ var klaroConfig = {
             ocSessionTimeout: {
                 description: 'If you checked a automatic logout after time, we need this session cookie.',
             },
+            ocgmconfig: {
+                description: 'Saves setting on OC map.',
+            },
             purposes: {
                 analytics: 'Analytics',
+                comfort: 'Comfort',
                 security: 'Security',
                 styling: 'Styling',
                 statistics: 'Statistics',
-                required: 'Technical required cookie',
+                required: 'Technical required',
             },
         },
     },
@@ -125,18 +133,21 @@ var klaroConfig = {
             name : 'googleAnalytics',
             title : 'Google Analytics',
             purposes : ['statistics'],
-            cookies : [/^ga/i],
+            cookies : ['_ga','_gid','_gat'],
+            optOut: false,
         },
         {
-            name: 'googleFonts',
-            title: 'Google Fonts',
-            purposes: ['styling'],
+            name: 'ocgmconfig',
+            title: 'OC Map Konfiguration',
+            purposes: ['comfort'],
+            cookies: ['ocgmconfig','ocgmlastpos','ocgmfilter'],
         },
         {
             name: 'ocSessionTimeout',
             title: 'OC Session Timeout',
             required: true,
             purposes: ['required'],
+            cookies: ['ocdeuhttps_session','ocSessionTimeout'],
         },
         {
             name: 'klaroConsent',

@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{$opt.template.locale|lower}">
     <head>
         <title>
             {if ($opt.template.title=="")}
@@ -366,7 +366,7 @@
 
             {* <!-- FOOTER --> *}
             <div class="footer">
-                <p><a onClick="klaro.show();return false;">COOKIE SETUP</a></p>
+                <p><a onClick="klaro.show();return false;" style="cursor: pointer;">COOKIE SETUP</a></p>
                 <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                 <p><strong>{$opt.page.sponsor.bottom}</strong></p>
             </div>

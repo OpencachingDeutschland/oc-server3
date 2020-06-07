@@ -272,7 +272,7 @@
         </ul>
     </li>
     <li>
-        <a href="http://www.geocaching.de/" target="_blank" rel="nofollow">Geocaching.de</a>
+        <a href="http://www.geocaching-info.de/" target="_blank" rel="nofollow">Geocaching-info.de</a>
         <ul>
             <li>Die deutsche Info-Plattform unterstützt alle Geocacher und vermittelt auch gerne bei Fragen den
                 passenden Ansprechpartner.

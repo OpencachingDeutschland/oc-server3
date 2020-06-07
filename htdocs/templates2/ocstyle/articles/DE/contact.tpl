@@ -14,7 +14,7 @@
     <tr><td class="spacer"></td></tr>
     <tr>
         <td>
-            <p>Für Fragen rund um Opencaching und zum Thema Geocaching ist das <a href="http://wiki.opencaching.de">Opencaching-Wiki</a> eine gute Anlaufstelle. Weitere Informationen zum Geocaching gibt es auf <a href="http://www.geocaching.de">www.geocaching.de</a>.</p>
+            <p>Für Fragen rund um Opencaching und zum Thema Geocaching ist das <a href="http://wiki.opencaching.de">Opencaching-Wiki</a> eine gute Anlaufstelle. Weitere Informationen zum Geocaching gibt es auf <a href="http://www.geocaching-info.de">www.geocaching-info.de</a>.</p>
             <p>Wenn du ein spezielles Problem hast und darauf keine Antwort findest,
             kannst du dir unter <a href="http://forum.opencaching.de/">forum.opencaching.de</a>
             ein passendes Forum raussuchen und dich dort erkundigen.</p>

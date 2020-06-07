@@ -120,14 +120,6 @@
                         {/if}
                     </td>
 
-                                   <!-- Begin changes Uwe Neumann 20100614 - Take out the google map.                                                                                                                                              -->
-                                   <!--     <td valign="top">                                                                                                                                                                                      -->
-                   <!--        <div style="position:relative;height:200px;width:200px;">                                                                                                                                          -->
-                                   <!--                 <iframe src="http://maps.geocaching.de/gm/oc-mini-mitcaches.php?lat={$cache.latitude}&lon={$cache.longitude}&zoom={$userzoom}" width="200px" height="200px" frameborder="0"></iframe>      -->
-                   <!--        </div>                                                                                                                                                                                             -->
-                       <!--        </td>                                                                                                                                                                                                  -->
-                                   <!-- End changes Uwe Neumann 20100614 - Take out the google map.                                                                                                                                                -->
-
                 </tr>
             </table>
         </td>

@@ -19,5 +19,5 @@
 <p>Die Faszination Geocaching ist schwer auf den Punkt zu bringen, denn so unterschiedlich wie die Cachetypen, so abwechlungsreich wie die Landschaften, in denen Caches versteckt sind, so verschieden sind auch die Geocacher-Typen: W&auml;hrend die einen Geocaching als Zusatzanreiz beim sportlichen Wandern betreiben, nutzen andere den Reiz der Schatzsuche einfach, um ihre Kinder (oder sich selbst ;-)) zu Ausfl&uuml;gen zu bewegen. Die einen reizt besonders die Knobelei und das Suchen, andere hassen genau dies, denn f&uuml;r sie liegt der Spa&szlig; eher darin, sich durch unwegsames Gel&auml;nde zu k&auml;mpfen oder einfach nur sch&ouml;ne Touren zu machen und die reine Schatzsuche dabei nur als kleine Nebenfreude 'mitzunehmen'.</p>
 <p>Das klingt alles v&ouml;llig &uuml;bertrieben und viel zu schw&auml;rmerisch? Na, probiert es einfach aus - dann sprechen wir uns wieder...</p>
 
-<p><br /><i>Dieser Text stammt von <a href="http://www.geocaching.de" target="_blank">www.geocaching.de</a> - Vielen Dank !</i></p>
+<p><br /><i>Dieser Text stammt von <a href="http://www.geocaching-info.de" target="_blank">www.geocaching-info.de</a> - Vielen Dank !</i></p>
 </div>

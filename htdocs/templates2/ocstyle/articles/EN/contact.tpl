@@ -14,7 +14,7 @@
     <tr><td class="spacer"></td></tr>
     <tr>
         <td>
-          <p>For general questions, you will find lots of information at the German websites <a href="http://wiki.opencaching.de">wiki.opencaching.de</a> and <a href="http://www.geocaching.de">www.geocaching.de</a>.</p>
+          <p>For general questions, you will find lots of information at the German websites <a href="http://wiki.opencaching.de">wiki.opencaching.de</a> and <a href="http://www.geocaching-info.de">www.geocaching-info.de</a>.</p>
             <p>If you encounter a special problem, you may ask your questions in one of the German or international discussion boards at <a href="http://forum.opencaching.de/">forum.opencaching.de</a>.</p>
         </td>
     </tr>

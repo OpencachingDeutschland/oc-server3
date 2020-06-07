@@ -19,5 +19,5 @@
 <p>Il fascino del Geocaching sta anche nella difficoltà nel raggiungere il punto esatto. Così come esistono diversi tipi di cache, e come diversi sono i luoghi fisici in cui si nascondono le cache, così sono diversi i tipi di geocacher: mentre alcuni sentono il geocaching come un ulteriore incentivo per gli sport e per l'escursionismo, altri utilizzano la caccia al tesoro come scusa per viaggiare solo per i loro figli (o per loro stessi ;-). Alcuni amano particolarmente risolvere i puzzle di logica e di ricerca, altri lo odiano proprio perché per loro il divertimento si trova più nel fatto di combattere attraverso terreni accidentati o semplicemente nel fare viaggi in luoghi nuovi, o ancora la pura caccia al tesoro è solo una piccola aggiunta alla gioia di 'trovare'.</p>
 <p>Tutto questo vi sembra esagerato e troppo sentimentale? Beh, basta provarlo - allora stiamo parlando ancora a noi...</p>
 
-<p><br /><i>Questo testo è tratto da <a href="http://www.geocaching.de" target="_blank">http://www.geocaching.de</a> - Molte grazie!</i></p>
+<p><br /><i>Questo testo è tratto da <a href="http://www.geocaching-info.de" target="_blank">http://www.geocaching-info.de</a> - Molte grazie!</i></p>
 </div>

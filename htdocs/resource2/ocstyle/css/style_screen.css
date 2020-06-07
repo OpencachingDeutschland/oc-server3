@@ -427,7 +427,7 @@ textarea.default { font-size:12px; }
 /*--------------------*/
 /* 3.3 - Footer Area  */
 /*--------------------*/
-.footer {overflow: hidden; clear: both; width: 970px; height: 3.0em; margin: 0; padding: 0.5em 0 0.5em 0; border-top: solid 1px rgb(125,125,125); background-color: rgb(128,161,202); color: rgb(255,255,255); font-size: 1.0em;}
+.footer {overflow: hidden; clear: both; width: 970px; height: 4.0em; margin: 0; padding: 0.5em 0 0.5em 0; border-top: solid 1px rgb(125,125,125); background-color: rgb(128,161,202); color: rgb(255,255,255); font-size: 1.0em;}
 .footer p {margin: 0; padding: 0; text-align: center; line-height: 1.3em; font-size: 110%;}
 
 

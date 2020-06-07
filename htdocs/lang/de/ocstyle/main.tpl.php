@@ -369,6 +369,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
 
                 <!-- FOOTER -->
                 <div class="footer">
+                    <p><a onClick="klaro.show();return false;" style="cursor: pointer;">COOKIE SETUP</a></p>
                     <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                     <p><strong>{sponsorbottom}</strong></p>
                 </div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{$opt.template.locale}">
 <head>
+
     <title>
         {if ($opt.template.title=="")}
             {$opt.page.subtitle1|escape} {$opt.page.subtitle2|escape}
@@ -8,6 +9,7 @@
             {$opt.template.title|escape} - {$opt.page.subtitle1|escape} {$opt.page.subtitle2|escape}
         {/if}
     </title>
+
     <meta name="keywords" content="{$opt.page.meta.keywords|escape}"/>
     <meta name="description" content="{$opt.page.meta.description|escape}"/>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -31,6 +33,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="web/assets/css/style.min.css">
     <link rel="stylesheet" href="vendor/mervick/material-design-icons/css/material-icons.min.css">
 
+    {* Cookie Consent Tool 06.2020 *}
+    <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">
+    <script type="application/javascript" src="resource2/ocstyle/js/klaro_config.js"></script>
+    <script type="application/javascript" src="resource2/ocstyle/js/klaro.js"></script>
 
     {foreach from=$opt.page.header_javascript item=scriptItem}
         <script type="text/javascript" src="{$scriptItem}"></script>
@@ -67,8 +73,6 @@
     </nav>
 
 </header>
-
-{include file="header/cookie_notice.tpl"}
 
 <section class="main__topstage main__home">
     <div class="container-fluid">

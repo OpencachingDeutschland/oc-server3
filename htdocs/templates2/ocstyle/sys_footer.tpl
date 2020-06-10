@@ -84,10 +84,13 @@
         </div>
 
         <div class="row mt-4 mb-4">
-            <div class="d-flex mr-4 footer__datalicence--title">{t}Datalicense{/t}</div>
-            <div class="d-flex footer__datalicence--text">{$license_disclaimer}</div>
+            <div class="col-2 footer__datalicence--title">{t}Datalicense{/t}</div>
+            <div class="col-6 footer__datalicence--text">{$license_disclaimer}</div>
+            <div class="col-4 footer__cookiesetup">
+                <a href="#" onClick="klaro.show();return false;" style="cursor: pointer;"> <i class="mdi mdi-settings-applications"></i> COOKIE SETUP</a>
+            </div>
         </div>
-        <div class="row mt-4 mb-4">
+        <div class="row justify-content-center mt-4 mb-4">
             <div class="footer__small">
                 {nocache}
                     {t}Page timing:{/t} {$sys_runtime|sprintf:"%1.3f"} {t}sec{/t}

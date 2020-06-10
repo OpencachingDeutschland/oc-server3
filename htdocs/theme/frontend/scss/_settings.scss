@@ -4,7 +4,7 @@ $font-size-base: 16px;
 $font-family-base: Play, Verdana;
 
 //========== OC COLORS =====//
-$oc-primary: $red;
+$oc-primary: #f0d000;
 $oc-primary__light: lighten($oc-primary, 50%);
 $oc-primary__dark: darken($oc-primary, 50%);
 
@@ -23,8 +23,8 @@ $gray-dark: $gray-800;
 $gray-darker: $gray-900;
 
 $color__error-text: $white;
-$color__error-background: lighten($red, 10%);
-$color__error-border: $red;
+$color__error-background: lighten($oc-primary, 10%);
+$color__error-border: $oc-primary;
 
 $color__info-text: $white;
 $color__info-background: lighten($blue, 10%);

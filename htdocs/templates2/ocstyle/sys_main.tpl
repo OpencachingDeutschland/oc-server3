@@ -88,13 +88,7 @@
 
 <main>
     {if $core_hq_message.message !=""}
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="hq-messgage--container">
-                    {$core_hq_message.message}
-                </div>
-            </div>
-        </div>
+        {include file="res_hqmessage.tpl"}
     {/if}
 
     <div class="container-fluid">

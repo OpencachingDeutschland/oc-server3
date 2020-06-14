@@ -8,9 +8,9 @@ $oc-primary: #f0d000;
 $oc-primary__light: lighten($oc-primary, 50%);
 $oc-primary__dark: darken($oc-primary, 50%);
 
-$oc-secondary: $green;
-$oc-secondary__light: lighten($green, 50%);
-$oc-secondary__dark: darken($green, 50%);
+$oc-secondary: $gray-900;
+$oc-secondary__light: lighten($oc-secondary, 50%);
+$oc-secondary__dark: darken($oc-secondary, 50%);
 
 $oc-main: $gray-500;
 
@@ -33,3 +33,7 @@ $color__info-border: $blue;
 $color__success-text: $white;
 $color__success-background: lighten($green, 10%);
 $color__success-border: $green;
+
+
+//=========SPECIALS=========//
+$white-transparent: rgba(255, 255, 255, 0.6);

@@ -18,11 +18,26 @@ $user = new user($login->userid);
 $list_name = isset($_REQUEST['list_name']) ? trim($_REQUEST['list_name']) : '';
 $list_visibility = isset($_REQUEST['list_visibility']) ? $_REQUEST['list_visibility'] + 0 : 0;
 $list_password = isset($_REQUEST['list_password']) ? $_REQUEST['list_password'] : '';
-$list_caches = isset($_REQUEST['list_caches']) ? strtoupper(trim($_REQUEST['list_caches'])) : '';
 $watch = isset($_REQUEST['watch']);
 $desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
 $switchDescMode = isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1;
 $fromsearch = isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1;
+
+if (isset($_REQUEST['list_caches'])) {
+    $list_caches = strtoupper(trim($_REQUEST['list_caches']));
+} elseif (isset($_REQUEST['addCache']) &&  $_REQUEST['addCache'] >= 1) {
+    $list_caches = $_REQUEST['addCache'];
+} else {
+    $list_caches = '';
+}
+
+if (isset($_REQUEST['addCache'])){
+    foreach ($list_caches as $nCacheId) {
+        $cache = new cache($nCacheId);
+        $oc_codes[] = $cache->getWPOC();
+    }
+    $list_caches = implode(" ", $oc_codes);
+}
 
 if (isset($_REQUEST['descMode'])) {
     $descMode = min(3, max(2, $_REQUEST['descMode'] + 0));
@@ -44,7 +59,7 @@ if (isset($_REQUEST['new'])) {
     $watch = false;
     $desctext = '';
     // keep descMode of previous operation
-    $list_caches = '';
+    //$list_caches = '';
 }
 
 // save the data entered in the 'create new list' form
@@ -82,7 +97,7 @@ if (isset($_REQUEST['edit'])) {
         $watch = $list->isWatchedByMe();
         $desctext = $list->getDescription();
         $descMode = $list->getDescHtmledit() ? 3 : 2;
-        $list_caches = '';
+        //$list_caches = '';
     }
 }
 

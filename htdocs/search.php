@@ -88,6 +88,9 @@ $called_by_profile_query = false;
 $load_query = false;
 $show_lastsearchbutton = true;
 
+$list_caches = isset($_REQUEST['addCache']) &&  $_REQUEST['addCache'] >= 1 ? $_REQUEST['addCache'] : '';
+$added_waypoints = 0;
+
 if (isset($_REQUEST['queryid']) || isset($_REQUEST['showresult'])) {  // Ocprop: showresult, queryid
     $bCookieQueryid = false;
     $load_query = true;
@@ -1290,6 +1293,16 @@ if ($options['showresult'] == 1) {
                 . ' OR (`caches`.`status`<>5 AND ' . ($login->hasAdminPriv(ADMIN_USER) ? '1' : '0') . '))';
         } else {
             $sql_where[] = '`cache_status`.`allow_user_view`=1';
+        }
+
+        //add selected caches to selected cachelist
+        if (isset($_REQUEST['addToList']) && isset($_REQUEST['addCache']) && isset($_REQUEST['selectCachelist'])) {
+            $list_caches_= $_REQUEST['addToList'];
+            $added_waypoints = addToList($list_caches);
+            $addCachelist= cachelist::getListById($_REQUEST['selectCachelist'] + 0); // null for invalid ID
+        } elseif (isset($_REQUEST['addToList'])) {
+            $addCachelist= cachelist::getListById($_REQUEST['selectCachelist'] + 0); // null for invalid ID
+            $error_addCaches = true;
         }
 
         // do the search
@@ -2557,4 +2570,18 @@ function outputLocidSelectionForm($locSql, $options)
 
     $tpl->display();
     exit;
+}
+
+//add cache to cachelist
+function addToList($list_caches)
+{
+    global $login;
+    $added_waypoints = 0;
+    $list = new cachelist($_REQUEST['selectCachelist'] + 0);
+    if ($list->exist() && $list->getUserId() == $login->userid) {
+        if ($list_caches != '') {
+            $added_waypoints = $list->addCachesByIDs($list_caches);
+        }
+    }
+    return $added_waypoints;
 }

@@ -1958,3 +1958,6 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2663', 'DE', 'Der Cache ist mit Rollstuhl/Rollator/Kinderwagen erreichbar.', '2020-01-04 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2664', 'DE', 'Cookie-Einstellungen', '2020-06-16 18:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2665', 'DE', 'Der aktuelle Filter kann nicht gespeichert werden, da der Cookie-Konsens für die Karten Konfiguration nicht vorliegt.', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2666', 'DE', 'Wähle mindestens einen Cache aus, um diesen zu dieser Cacheliste hinzuzufügen.', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2667', 'DE', 'Ausgewählte Caches hinzufügen zu:', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2668', 'DE', 'Zur Liste hinzufügen', '2020-06-13 12:30:00');

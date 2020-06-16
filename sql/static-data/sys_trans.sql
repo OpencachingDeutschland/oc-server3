@@ -1959,3 +1959,6 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2662', 'Handica
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2663', 'This cache is findable for persons with a wheelchair!', '2020-01-04 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2664', 'Cookie settings', '2020-06-16 18:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2665', 'The current filter could not be saved as the cookie consent for map configuration is not given!', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2666', 'Please choose at least one cache to add it to this cacheliste.', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2667', 'Add selected caches to:', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2668', 'Add to List', '2020-06-13 12:30:00');

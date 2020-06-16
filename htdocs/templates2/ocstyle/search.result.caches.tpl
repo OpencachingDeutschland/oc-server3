@@ -6,6 +6,28 @@
 ***************************************************************************}
 
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/wz_tooltip.js"></script>
+<script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js"></script>
+
+<script type="text/javascript">
+    {literal}
+    function countChecks(elementName) {
+        var count = 0;
+        var checkboxes = document.getElementsByName(elementName);
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            if(checkboxes[i].checked) {
+                count++;
+            }
+        }
+        if (count === 0) {
+            alert("{/literal}{t}Please choose at least one cache to add it to this cacheliste.{/t}{literal}");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    {/literal}
+</script>
 
 {if $cachelist || $query_name}
     <div class="content2-container cachelistinfo" style="margin-top:10px" >
@@ -86,7 +108,7 @@
                     <tr>
                         <td rowspan="1" style="width:300px; padding:0; margin:0">{include file="res_pager.tpl" smallnumbers=true}</td>
                         <td style="text-align:right; padding:0; margin:0">{t}Download{/t}{t}#colonspace#{/t}:&nbsp;</td>
-                        <td><nobr>
+                        <td>
                             <select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
                                 <option value="#">{t}Results on this page{/t}</option>
                                 <option value="search.php?queryid={$queryid}&output=gpx&startat={$startat}">GPX</option>
@@ -96,6 +118,8 @@
                                 <option value="search.php?queryid={$queryid}&output=ovl&startat={$startat}">OVL</option>
                                 <option value="search.php?queryid={$queryid}&output=txt&startat={$startat}">TXT</option>
                             </select>
+                        </td>
+                        <td>
                             <select class="exportlist" onChange="location.href=this.options[this.selectedIndex].value">
                                 <option value="#">{t 1=$startatp1 2=$endat}Result %1 to %2 (as zip){/t}</option>
                                 <option value="search.php?queryid={$queryid}&output=gpx&startat={$startat}&count=max&zip=1">GPX</option>
@@ -104,19 +128,73 @@
                                 <option value="search.php?queryid={$queryid}&output=ov2&startat={$startat}&count=max&zip=1">OV2</option>
                                 <option value="search.php?queryid={$queryid}&output=ovl&startat={$startat}&count=max&zip=1">OVL</option>
                                 <option value="search.php?queryid={$queryid}&output=txt&startat={$startat}&count=max&zip=1">TXT</option>
-                            </select></nobr>
+                            </select>
                         </td>
                     </tr>
+                    {if $login.userid}
+                    <tr>
+                        <td> </td>
+                        <td rowspan="2">{t}Add selected caches to:{/t}</td>
+                        <td>
+                            <form method="post" name="addToList_form" id="addToList_form" onsubmit="return countChecks('addCache[]')">
+                            {if ($cachelists|@count >= 1 && !$cachelist) || ($cachelists|@count >= 2 && $cachelist) }
+                                <label>
+                                    <select name="selectCachelist" class="input80 widebutton" style="float: right">
+                                        {foreach from=$cachelists item=cachelist_item}
+                                            {if isset($cachelist) && $cachelist.id != $cachelist_item.id}
+                                                <option value="{$cachelist_item.id|escape}" {if $cachelist_item.id == $default_cachelist}selected{/if}>{$cachelist_item.name|escape}</option>
+                                            {elseif !isset($cachelist)}
+                                                <option value="{$cachelist_item.id|escape}" {if $cachelist_item.id == $default_cachelist}selected{/if}>{$cachelist_item.name|escape}</option>
+                                            {/if}
+                                        {/foreach}
+                                    </select>
+                                </label>
+                                <td>
+                                    <input type="submit" name="addToList" value="{t}Add to List{/t}" formaction="search.php?queryid={$queryid}&showresult=1" class="formbutton widebutton" />
+                                 </td>
+                            {/if}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="new" value="{t}Create new list{/t}" formaction="mylists.php" class="formbutton widebutton" />
+                        </td>
+                    </tr>
+                    {/if}
                 </table>
             </td>
         </tr>
-
+        {if $added_waypoints && $login.userid}
+        <tr>
+            <td class="spacer" colspan="2">
+            {if $added_waypoints <= 1}
+                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 cache to your list <a href="http://docker.team-opencaching.de/cachelist.php?id=%2">%3</a>.{/t}</p>
+            {elseif $added_waypoints >= 2}
+                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 caches to your list <a href="http://docker.team-opencaching.de/cachelist.php?id=%2">%3</a>.{/t}</p>
+            {/if}
+            </td>
+        </tr>
+        {elseif $error_addCaches && $login.userid}
+        <tr>
+            <td class="spacer" colspan="2">
+                <p class="errormsg">{t 1=$list_name}Please choose at least one cache to add it to %1.{/t}</p>
+            </td>
+        </tr>
+        {/if}
         <tr><td class="spacer" colspan="2">&nbsp;</td></tr>
         <tr>
             <td colspan="2" style="padding-left: 0px; padding-right: 0px;">
                 <table class="searchtable" border="0" cellspacing="0" cellpadding="0" width="98.5%">
                     <tr>
-                    <th width="10">&nbsp;</th>
+                        {if $login.userid}
+                    <th width="5">&nbsp;</th>
+                    <th width="10"><input type="checkbox" onClick="toggleChecks(this, 'addCache[]')"/></th>
+                    <th width="5">&nbsp;</th>
+                        {else}
+                    <th width="20">&nbsp;</th>
+                        {/if}
                     <th width="40">
                         {strip}
                         <a href="search.php?queryid={$queryid}&showresult=1&sortby=bydistance&sortorder={if $sortby!='bydistance' || $sortorder=='desc'}asc{else}desc{/if}{if $startat}&startat={$startat}{/if}{if $creationdate}&creationdate=1{/if}">
@@ -206,6 +284,7 @@
             <tr><td style="height:0.6em"></td></tr>
         {/if}
     </table>
+    </form>
 
     {if $caches|@count}
     <table width="100%">

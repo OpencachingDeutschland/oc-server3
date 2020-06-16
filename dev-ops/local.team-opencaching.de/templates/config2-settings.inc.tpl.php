@@ -62,19 +62,9 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
  *
  * other parameters may be customized
  */
-$opt['session']['mode'] = SAVE_COOKIE;
 $opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '__SESSION_DOMAIN__';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* If the Referer was sent by the client and the substring was not found,
- * the embedded session id will be marked as invalid.
- * Only used with session.mode = SAVE_SESSION
- */
-$opt['session']['check_referer'] = true;
-
-// see http://forum.opencaching.de/index.php?topic=3031.msg38795#msg38795
-$opt['session']['login_statistics'] = false;
 
 /* Default locale and style
          *

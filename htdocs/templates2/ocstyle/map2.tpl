@@ -87,7 +87,7 @@ var msInitCookieLastPosName = 'ocgmlastpos';
 var msInitCookieConfigName = 'ocgmconfig';
 var msInitCookieFilterName = 'ocgmfilter';
 var msInitCookiePermFilterName = 'ocgmfilter_saved';
-if (!navigator.cookieEnabled)
+if (!navigator.cookieEnabled || !klaro.getManager().getConsent('ocgmconfig'))
 {
     // see doc/cookies.txt for information on cookies
     msInitCookieLastPosName = '';
@@ -2031,6 +2031,12 @@ function reset_filter()
 
 function save_filter()
 {
+    if (!klaro.getManager().getConsent('ocgmconfig')) {
+        {/literal}
+        alert("{t}The current filter could not be saved as the cookie consent for map configuration is not given!{/t}");
+        return;
+        {literal}
+    }
     cookieSave(true);
     {/literal}
     alert("{t}The current filter settings have been permamently saved.{/t}");

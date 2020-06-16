@@ -67,10 +67,6 @@ class OcSmarty extends Smarty
         $this->register_block('nocache', 'smarty_block_nocache', false);
         $this->load_filter('pre', 't');
 
-        if ($opt['session']['mode'] == SAVE_SESSION) {
-            $this->load_filter('output', 'session');
-        }
-
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
             $this->force_compile = true;
@@ -213,16 +209,6 @@ class OcSmarty extends Smarty
         $optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
         $optn['help']['oconly'] = helppagelink('oconly', 'OConly');
         $optn['msie'] = $useragent_msie;
-
-        // url-sessions? (for session timout display)
-        $optn['session']['url'] = false;
-        if ($opt['session']['mode'] == SAVE_SESSION && $login->userid != 0) {
-            if (isset($_GET['SESSION']) || isset($_POST['SESSION'])) {
-                $optn['session']['url'] = true;
-            }
-
-            $optn['session']['id'] = session_id();
-        }
 
         $loginn = [
             'username' => '',
@@ -477,19 +463,8 @@ class OcSmarty extends Smarty
             $page = $opt['page']['absolute_url'] . $page;
         }
 
-        if ($opt['session']['mode'] == SAVE_SESSION) {
-            if (defined('SID') && SID != '' && session_id() != '') {
-                if (strpos($page, '?') === false) {
-                    header('Location: ' . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
-                } else {
-                    header('Location: ' . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
-                }
-            } else {
-                header('Location: ' . $page);
-            }
-        } else {
-            header('Location: ' . $page);
-        }
+
+        header('Location: ' . $page);
         exit;
     }
 

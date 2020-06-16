@@ -106,23 +106,13 @@
         <script type="application/javascript" src="resource2/ocstyle/js/klaro_config.js"></script>
         <script type="application/javascript" src="resource2/ocstyle/js/klaro.js"></script>
 
-        {if $opt.session.url==true}
-            <script type="text/javascript" data-name="ocSessionTimeout">
-                {literal}
-                <!--
-                    var sSessionId = '{/literal}{$opt.session.id|escape:'js'}{literal}';
-                //-->
-                {/literal}
-            </script>
-            <script src="resource2/{$opt.template.style}/js/session.js" type="text/javascript"></script>
-        {/if}
         {foreach from=$opt.page.header_javascript item=scriptItem}
             <script type="text/javascript" src="{$scriptItem}"></script>
         {/foreach}
     </head>
 
 {* JS onload() onunload() *}
-<body{if $opt.session.url==true} onload="initSessionTimeout()"{/if}
+<body
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
  class="{if $opt.template.popup!=false}popup{/if}">
@@ -134,18 +124,11 @@
                 {* <!-- Navigation Level 1 --> *}
                 <table class="nav1" cellspacing="0">
                     <tr>
-                        {if $opt.session.url==true}
-                            <div id="sessionWarn">
-                                {* message is not properly formated and displays always 0
-                               don't enable this feature until this is fixed and tested *}
-                                Automatische Abmeldung in <div id="sessionTimout">0</div>&nbsp;Minuten - <a href="#" onclick="cancelSessionTimeout()">Abbrechen</a>
-                            </div>
-                        {/if}
                         <td width="100%">
                             {nocache}
                                 &nbsp;
                                 {if $login.userid==0}
-                                    <b><form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>
+                                    <b><form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>
                                 {else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
                                                    <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
                                     <b>{t}Logged in as{/t} <a href="myhome.php" class="testing-top-left-corner-username">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
@@ -366,7 +349,7 @@
 
             {* <!-- FOOTER --> *}
             <div class="footer">
-                <p><a onClick="klaro.show();return false;" style="cursor: pointer;">COOKIE SETUP</a></p>
+                <p><a onClick="klaro.show();return false;" style="cursor: pointer;">{t}Cookie settings{/t}</a></p>
                 <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                 <p><strong>{$opt.page.sponsor.bottom}</strong></p>
             </div>
@@ -397,7 +380,7 @@
         {/literal}
         {if !$smarty.server.HTTP_DNT}
             {literal}
-            <script type="text/javascript" data-name="googleAnalytics">
+            <script type="text/plain" data-type="text/javascript" data-name="googleAnalytics">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

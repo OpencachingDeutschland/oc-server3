@@ -1957,3 +1957,5 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2660', 'The cac
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2661', 'The event must happen after publish.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2662', 'Handicap: Wheelchair', '2020-01-04 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2663', 'This cache is findable for persons with a wheelchair!', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2664', 'Cookie settings', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2665', 'The current filter could not be saved as the cookie consent for map configuration is not given!', '2020-06-16 18:30:00');

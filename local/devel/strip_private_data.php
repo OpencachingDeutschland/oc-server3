@@ -41,7 +41,6 @@ sql('TRUNCATE `email_user`');
 sql('TRUNCATE `logentries`');
 sql('TRUNCATE `pictures_modified`');
 sql('TRUNCATE `saved_texts`');
-sql('TRUNCATE `sys_login_stat`');
 sql('TRUNCATE `user_statpic`');
 sql('TRUNCATE `waypoint_reports`');
 

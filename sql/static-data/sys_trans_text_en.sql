@@ -1839,3 +1839,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2636', 'EN', 'This website uses cookies. If you stay on this site you accept the usage of cookies.', '2017-05-14 21:00:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2662', 'EN', 'Handicap: Wheelchair', '2020-01-04 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2663', 'EN', 'This cache is findable for persons with a wheelchair.', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2664', 'EN', 'Cookie settings', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2665', 'EN', 'The current filter could not be saved as the cookie consent for map configuration is not given!', '2020-06-16 18:30:00');

@@ -64,15 +64,8 @@ $opt['db']['placeholder']['tmpdb'] = 'ocdetmp';
  *
  * other parameters may be customized
  */
-$opt['session']['mode'] = SAVE_COOKIE;
 $opt['session']['cookiename'] = '<cookiename>'; // e.g. 'ocde'
 $opt['session']['domain'] = '<.do.main>'; // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* If the Referer was sent by the client and the substring was not found,
- * the embedded session id will be marked as invalid.
- * Only used with session.mode = SAVE_SESSION
- */
-$opt['session']['check_referer'] = true;
 
 /* Debug level (combine with OR | )
  *  DEBUG_NO              = productive use

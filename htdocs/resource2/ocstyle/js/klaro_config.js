@@ -65,30 +65,23 @@ var klaroConfig = {
                 description:
                     'Hier haben wir unsere eingesetzten Cookies zusammengefasst und erklärt.',
             },
-            acceptSelected: {
-                description: 'Speichern',
-            },
-            googleFonts: {
-                description: 'Web-Schriftarten die von Google gehostet werden, für ein schöneres Schriftbild.',
-            },
-            googleAnalytics: {
-                description: 'Wir erfassen Besucherzahlen um daraus Rückschlüsse für die Weiterentwicklung der OC Seite zu generieren.',
+            acceptSelected: "Speichern",
+            ocSession: {
+                description: 'Speichert aktuelle Sitzungsdaten wie die ausgewählte Sprache und den Login-Status.',
             },
             klaroConsent: {
                 description: 'Das Klaro Consent Tool speichert die gegenwärtige Cookie Auswahl in einem Cookie.',
             },
-            ocSessionTimeout: {
-                description: 'Wenn man die Option des automatischen Logouts aktiviert hat, brauchen wir dieses Session Cookie.',
-            },
+
             ocgmconfig: {
                 description: 'Speichert die Einstellungen der Karte.',
+            },
+            googleAnalytics: {
+                description: 'Wir erfassen Besucherzahlen um daraus Rückschlüsse für die Weiterentwicklung der Plattform zu generieren.',
             },
             purposes: {
                 analytics: 'Besucher-Statistiken',
                 comfort: 'Komfort',
-                security: 'Sicherheit',
-                styling: 'Styling',
-                statistics: 'Statistics',
                 required: 'Technisch notwendig',
             },
         },
@@ -97,30 +90,22 @@ var klaroConfig = {
                 description:
                     'Here we have summarized and explained the cookies we use.',
             },
-            acceptSelected: {
-                description: 'Save',
-            },
-            googleFonts: {
-                description: 'Web fonts hosted by Google for a smarter design and view.',
-            },
-            googleAnalytics: {
-                description: 'We record visitor statistics to generate conclusions for the further development of the OC site.',
+            acceptSelected: 'Save',
+            ocSession: {
+                description: 'Saves current session data like the selected language or your login status.',
             },
             klaroConsent: {
                 description: 'The Klaro Consent Tool stores the current cookie selection in a cookie.',
             },
-            ocSessionTimeout: {
-                description: 'If you checked a automatic logout after time, we need this session cookie.',
-            },
             ocgmconfig: {
-                description: 'Saves setting on OC map.',
+                description: 'Saves oc map settings.',
+            },
+            googleAnalytics: {
+                description: 'We record visitor statistics to generate conclusions for the further development of the OC site.',
             },
             purposes: {
                 analytics: 'Analytics',
                 comfort: 'Comfort',
-                security: 'Security',
-                styling: 'Styling',
-                statistics: 'Statistics',
                 required: 'Technical required',
             },
         },
@@ -128,32 +113,31 @@ var klaroConfig = {
 
     // This is a list of third-party apps that Klaro will manage for you.
     apps: [
-
         {
-            name : 'googleAnalytics',
-            title : 'Google Analytics',
-            purposes : ['statistics'],
-            cookies : ['_ga','_gid','_gat'],
-            optOut: false,
-        },
-        {
-            name: 'ocgmconfig',
-            title: 'OC Map Konfiguration',
-            purposes: ['comfort'],
-            cookies: ['ocgmconfig','ocgmlastpos','ocgmfilter'],
-        },
-        {
-            name: 'ocSessionTimeout',
-            title: 'OC Session Timeout',
+            name: 'ocSession',
+            title: 'Session data',
             required: true,
             purposes: ['required'],
-            cookies: ['ocdeuhttps_session','ocSessionTimeout'],
+            cookies: ['ocdeudata', 'ocdeuhttps_session'],
         },
         {
             name: 'klaroConsent',
-            title: 'Klaro Content Tool',
+            title: 'Klaro Consent Tool',
             required: true,
             purposes: ['required'],
         },
+        {
+            name: 'ocgmconfig',
+            title: 'Map configuration',
+            purposes: ['comfort'],
+            cookies: ['ocgmconfig','ocgmlastpos','ocgmfilter', 'ocgmfilter_saved'],
+        },
+        {
+            name : 'googleAnalytics',
+            title : 'Google Analytics',
+            purposes : ['analytics'],
+            cookies : ['_ga','_gid','_gat'],
+            optOut: false,
+        }
     ],
 };

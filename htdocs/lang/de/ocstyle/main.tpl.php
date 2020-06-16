@@ -369,7 +369,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
 
                 <!-- FOOTER -->
                 <div class="footer">
-                    <p><a onClick="klaro.show();return false;" style="cursor: pointer;">COOKIE SETUP</a></p>
+                    <p><a onClick="klaro.show();return false;" style="cursor: pointer;">{t}Cookie settings{/t}</a></p>
                     <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                     <p><strong>{sponsorbottom}</strong></p>
                 </div>
@@ -397,8 +397,9 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     }
                 }
             </script>
+
             <?php if (!isset($_SERVER['HTTP_DNT']) || !$_SERVER['HTTP_DNT']) { ?>
-            <script type="text/javascript">
+            <script type="text/plain" data-type="text/javascript" data-name="googleAnalytics">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

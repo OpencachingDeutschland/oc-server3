@@ -59,7 +59,6 @@ if (isset($_REQUEST['new'])) {
     $watch = false;
     $desctext = '';
     // keep descMode of previous operation
-    //$list_caches = '';
 }
 
 // save the data entered in the 'create new list' form
@@ -97,7 +96,6 @@ if (isset($_REQUEST['edit'])) {
         $watch = $list->isWatchedByMe();
         $desctext = $list->getDescription();
         $descMode = $list->getDescHtmledit() ? 3 : 2;
-        //$list_caches = '';
     }
 }
 

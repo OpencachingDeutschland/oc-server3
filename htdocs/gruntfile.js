@@ -26,7 +26,8 @@ module.exports = function (grunt) {
             all: '<%= dirs.destination %>',
             css: '<%= dirs.destination %>/css/',
             js: '<%= dirs.destination %>/js/',
-            images: '<%= dirs.destination %>/images/'
+            images: '<%= dirs.destination %>/images/',
+            fonts: '<%= dirs.destination %>/fonts/'
         },
         scsslint: {
             development: [
@@ -45,6 +46,16 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.source %>/images/',
                         src: ['**/*'],
                         dest: '<%= dirs.destination %>/images/',
+                        expand: true
+                    }
+                ]
+            },
+            fonts: {
+                files: [
+                    {
+                        cwd: '<%= dirs.source %>/fonts/',
+                        src: ['**/*'],
+                        dest: '<%= dirs.destination %>/fonts/',
                         expand: true
                     }
                 ]
@@ -124,6 +135,14 @@ module.exports = function (grunt) {
                     'copyto:images'
                 ]
             },
+            fonts: {
+                files: [
+                    '<%= dirs.source %>/fonts/**/*'
+                ],
+                tasks: [
+                    'copyto:fonts'
+                ]
+            },
             css: {
                 files: [
                     '<%= dirs.source %>/scss/**/*.scss'
@@ -159,7 +178,8 @@ module.exports = function (grunt) {
         'clean:all',
         'uglify',
         'sass:development',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     grunt.registerTask('development:css', [
@@ -176,7 +196,8 @@ module.exports = function (grunt) {
     grunt.registerTask('development', [
         'development:js',
         'development:css',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     //Builds css&js once for production
@@ -185,7 +206,8 @@ module.exports = function (grunt) {
         'uglify:production',
         'sass:production',
         'cssmin',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     grunt.task.renameTask('chokidar', 'watch');

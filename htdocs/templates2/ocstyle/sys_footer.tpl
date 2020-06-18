@@ -6,23 +6,112 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-4 col-xs-12 mt-4 mb-4">
-                <h4>{t}Country sites{/t}</h4>
-                <a href="http://www.opencaching.cz" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-cz.png"></a>
-                <a href="http://www.opencaching.nl" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-nl.png"></a>
-                <a href="https://opencaching.pl" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-pl.png"></a>
-                <a href="http://www.opencaching.ro" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-ro.png"></a>
-                <a href="https://opencache.uk" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-org-uk.png"></a>
-                <a href="http://www.opencaching.us" target="_blank" rel="nofollow">
-                    <img src="resource2/{$opt.template.style}/images/nodes/oc-us.png"></a>
+            <div class="col-md-4 col-sm-12 col-xs-12 mt-4 mb-4">
+
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div class="col-12">
+                            <h4>{t}Other OC nodes:{/t}</h4>
+                        </div>
+
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.cz"
+                               name="OCCZ"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            CZ
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.nl"
+                               name="OCNL"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            NL
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.pl"
+                               name="OCPL"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            PL
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.ro"
+                               name="OCRO"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            RO
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.pl"
+                               name="OCPL"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            PL
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencache.uk"
+                               name="OCUK"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            UK
+                            </a>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-4 col-md-12 col-xs-6 mb-1">
+                            <a href="http://www.opencaching.us"
+                               name="OCUS"
+                               class="btn btn-xs btn-outline-secondary btn-block"
+                               type="button"
+                               rel="nofollow"
+                               target="_blank"
+                            />
+                            US
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="#" onClick="klaro.show();return false;" style="cursor: pointer;"><i
+                                        class="mdi mdi-settings-applications"></i> COOKIE SETUP
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-4 col-xs-12 mt-4 mb-4">
+            <div class="col-md-4 col-sm-6 col-xs-12 mt-4 mb-4">
                 <div class="container-fluid">
                     <div class="row">
                         <h4>{t}Follow us:{/t}</h4>
@@ -62,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-xs-12 mt-4 mb-4">
+            <div class="col-md-4 col-sm-6 col-xs-12 mt-4 mb-4">
                 <div class="container-fluid">
                     <div class="row">
                         <h4>{t}Join discussions:{/t}</h4>
@@ -103,13 +192,8 @@
         </div>
 
         <div class="row mt-4 mb-4">
-            <div class="col-2 footer__datalicence--title">{t}Datalicense{/t}</div>
-            <div class="col-6 footer__datalicence--text">{$license_disclaimer}</div>
-            <div class="col-4 footer__cookiesetup">
-                <a href="#" onClick="klaro.show();return false;" style="cursor: pointer;"><i
-                            class="mdi mdi-settings-applications"></i> COOKIE SETUP
-                </a>
-            </div>
+            <div class="col-12 footer__datalicence--title">{t}Datalicense{/t}</div>
+            <div class="col-12 footer__datalicence--text">{$license_disclaimer}</div>
         </div>
         <div class="row justify-content-center mt-4 mb-4">
             <div class="footer__small">

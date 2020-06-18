@@ -2,3 +2,7 @@ oc:
     resource: "../../src/Oc/"
     type:     annotation
 
+oc_legacy:
+    resource: "../../src/OcLegacy/"
+    type:     annotation
+

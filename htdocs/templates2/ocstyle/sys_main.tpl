@@ -31,7 +31,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="web/assets/css/style.min.css">
-    <link rel="stylesheet" href="vendor/mervick/material-design-icons/css/material-icons.min.css">
 
     {* Cookie Consent Tool 06.2020 *}
     <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">

@@ -24,10 +24,53 @@
     }
 }
 
+//=== Source: MaterialDesignIcons.com ===//
+//=== Insert svg file in theme/images/svg-icons/ to compile with grunt ===//
+
+.svg {
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 1.5em;
+    padding-left: 2em;
+}
+
+.svg--translate {
+    background-image: url('../images/svg-icons/translate.svg');
+}
+
+.svg--settings {
+    background-image: url('../images/svg-icons/cog.svg');
+}
+
+.svg--twitter {
+    background-image: url('../images/svg-icons/twitter.svg');
+}
+
+.svg--rss {
+    background-image: url('../images/svg-icons/rss.svg');
+}
+
+.svg--facebook {
+    background-image: url('../images/svg-icons/facebook.svg');
+}
+
+.svg--facebook-group {
+    background-image: url('../images/svg-icons/facebook-group.svg');
+}
+
+.svg--community {
+    background-image: url('../images/svg-icons/community.svg');
+}
+
+.svg--github {
+    background-image: url('../images/svg-icons/github.svg');
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {
-        height: 1em * $i;
+        height: 1.5em * $i;
+        padding-left: 2em * $i;
     }
 }
 

@@ -108,9 +108,9 @@
     </div>
 </main>
 
-<footer>
+<section role="footer">
     {include file="sys_footer.tpl"}
-</footer>
+</section>
 
 {literal}
 <script type="text/javascript">

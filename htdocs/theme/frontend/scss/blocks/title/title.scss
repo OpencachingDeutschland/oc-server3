@@ -1,15 +1,17 @@
 @import '../../global';
 
 .oc-title {
-    background: $oc-main;
     font-size: 1.2rem;
     color: $white;
+    background: $oc-secondary;
+    border-bottom: $oc-primary solid 0.25em;
 
     > a {
         color: $white;
     }
 
     &__title {
+
         text-transform: uppercase;
     }
 
@@ -20,11 +22,17 @@
 
 //** Headline page section **//
 .oc-section {
-    font-family: Montserrat;
-    font-weight: 700;
-    font-size: 1.2rem;
     background-color: $gray-darker;
     border-bottom: $oc-primary solid 0.25em;
     color: $white;
     margin-bottom: 0.5em;
+    height: 2.5em;
+
+    h2 {
+        font-family: Montserrat;
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 2.25rem;
+        padding-left: .25em;
+    }
 }

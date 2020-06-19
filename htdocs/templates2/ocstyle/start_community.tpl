@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row oc-title">
         <div class="col-11 oc-title__title">
-            {t}Community news{/t}
+            <i class="svg svg--community"></i>{t}Community news{/t}
         </div>
     </div>
 

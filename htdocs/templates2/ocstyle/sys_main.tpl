@@ -73,6 +73,7 @@
 
 </header>
 
+{if ($opt.template.title=="")}
 <section class="main__topstage main__home">
     <div class="container-fluid">
         <div class="main__content-box p-3 d-inline-flex">
@@ -84,6 +85,7 @@
         </div>
     </div>
 </section>
+{/if}
 
 <main>
     {if $core_hq_message.message !=""}

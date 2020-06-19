@@ -66,6 +66,14 @@
     background-image: url('../images/svg-icons/github.svg');
 }
 
+.svg--shield-star-ouline {
+    background-image: url('../images/svg-icons/shield-star-outline.svg');
+}
+
+.svg--party-propper {
+    background-image: url('../images/svg-icons/party-propper.svg');
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {

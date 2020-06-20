@@ -1299,9 +1299,9 @@ if ($options['showresult'] == 1) {
         if (isset($_REQUEST['addToList']) && isset($_REQUEST['addCache']) && isset($_REQUEST['selectCachelist'])) {
             $list_caches_= $_REQUEST['addToList'];
             $added_waypoints = addToList($list_caches);
-            $addCachelist= cachelist::getListById($_REQUEST['selectCachelist'] + 0); // null for invalid ID
+            $addCachelist= cachelist::getListById((int) $_REQUEST['selectCachelist']); // null for invalid ID
         } elseif (isset($_REQUEST['addToList'])) {
-            $addCachelist= cachelist::getListById($_REQUEST['selectCachelist'] + 0); // null for invalid ID
+            $addCachelist= cachelist::getListById((int) $_REQUEST['selectCachelist']); // null for invalid ID
             $error_addCaches = true;
         }
 

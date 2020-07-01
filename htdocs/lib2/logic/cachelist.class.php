@@ -256,6 +256,18 @@ class cachelist
         return true;
     }
 
+    public function addCachesByIDs($cache_ids)
+    {
+        $number_wps = 0;
+        foreach ($cache_ids as $cache_id) {
+            $result = $this->addCacheByID($cache_id);
+            if ($result == true) {
+                $number_wps++;
+            }
+        }
+        return $number_wps;
+    }
+
     public function addCacheByID($cache_id)
     {
         return $this->addCache(new cache($cache_id));

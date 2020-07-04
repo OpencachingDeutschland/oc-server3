@@ -1962,3 +1962,5 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2665', 'The cur
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2666', 'Please choose at least one cache to add it to this cacheliste.', '2020-06-13 12:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2667', 'Add selected caches to:', '2020-06-13 12:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2668', 'Add to List', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2669', 'You added %1 cache to your list', '2020-07-04 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2670', 'You added %1 caches to your list', '2020-07-04 12:30:00');

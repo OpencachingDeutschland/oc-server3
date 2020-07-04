@@ -1961,3 +1961,5 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2666', 'DE', 'Wähle mindestens einen Cache aus, um diesen zu dieser Cacheliste hinzuzufügen.', '2020-06-13 12:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2667', 'DE', 'Ausgewählte Caches hinzufügen zu:', '2020-06-13 12:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2668', 'DE', 'Zur Liste hinzufügen', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2669', 'DE', 'Du hast %1 Cache zu deiner Cacheliste hinzugefügt:', '2020-07-04 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2670', 'DE', 'Du hast %1 Caches zu deiner Cacheliste hinzugefügt:', '2020-07-04 12:30:00');

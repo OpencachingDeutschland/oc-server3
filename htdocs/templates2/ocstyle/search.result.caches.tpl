@@ -170,9 +170,9 @@
         <tr>
             <td class="spacer" colspan="2">
             {if $added_waypoints <= 1}
-                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 cache to your list <a href="http://docker.team-opencaching.de/cachelist.php?id=%2">%3</a>.{/t}</p>
+                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 cache to your list{/t} <a href="cachelist.php?id=%2">%3</a>.</p>
             {elseif $added_waypoints >= 2}
-                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 caches to your list <a href="http://docker.team-opencaching.de/cachelist.php?id=%2">%3</a>.{/t}</p>
+                <p class="okmsg">{t 1=$added_waypoints 2=$addCachelist.id 3=$addCachelist.name}You added %1 caches to your list{/t} <a href="cachelist.php?id=%2">%3</a>.</p>
             {/if}
             </td>
         </tr>

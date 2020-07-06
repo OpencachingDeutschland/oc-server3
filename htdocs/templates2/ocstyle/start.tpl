@@ -18,12 +18,7 @@
 <section class="mt-2 mb-2">
     <div class="container-fluid">
         <div class="row no-gutters">
-            <div class="oc-section col-12">
-                <h2><i class="svg svg--party-propper"></i>{t 1=$usercountry|escape}The next events in %1{/t}</h2>
-            </div>
-            <div class="col-12 mt-2">
-                {include file="start_events.tpl"}
-            </div>
+            {include file="start_events.tpl"}
         </div>
     </div>
 </section>

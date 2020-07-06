@@ -74,6 +74,22 @@
     background-image: url('../images/svg-icons/party-propper.svg');
 }
 
+.svg--owner {
+    background-image: url('../images/svg-icons/account-hard-hat.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/account-hard-hat-dark.svg');
+    }
+}
+
+.svg--map-marker {
+    background-image: url('../images/svg-icons/map-marker.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/map-marker-dark.svg');
+    }
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {

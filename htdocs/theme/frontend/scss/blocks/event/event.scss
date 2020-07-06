@@ -1,27 +1,79 @@
 @import '../../global';
 
 .event {
-    min-width: 100px;
 
-    &--date {
-        background: $gray-dark;
+
+    &__block {
+        width: 100%;
+        margin-bottom: .25em;
+        margin-top: .25em;
+        font-family: $font-family-oc;
+    }
+
+    &__date {
         color: $white;
+        background: $gray-darker;
+        width: 4em;
+        min-height: 4em;
+        float: left;
 
         &--day {
-            font-size: 1.3rem;
+            color: $white;
+            margin-left: 0;
+            margin-top: .25em;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1.2rem;
         }
 
         &--month {
-            font-size: 1rem;
+            color: $oc-primary;
+            margin-left: 0;
+            margin-top: 0;
+            text-align: center;
+            font-weight: 300;
         }
 
         &--year {
-            font-size: 0.75rem;
+            color: $oc-primary;
+            margin-left: 0;
+            margin-top: 0;
+            text-align: center;
+            font-weight: 500;
         }
 
-        &--name {
-            font-size: 1.2rem;
-            font-weight: bold;
+    }
+
+    &__content {
+        background-color: $gray-300;
+        vertical-align: center;
+        width: 100%;
+        font-weight: 600;
+        padding: .5em;
+        color: $oc-primary__dark;
+
+        &:hover {
+            background-color: $gray-400;
         }
+    }
+
+    &__name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: .5em;
+        color: $oc-primary__dark;
+    }
+
+    &__owner {
+        font-size: .9rem;
+        vertical-align: center;
+        font-weight: 300;
+        color: $oc-primary__dark;
+    }
+
+    &__location {
+        font-size: .9rem;
+        vertical-align: center;
+        color: $oc-primary__dark;
     }
 }

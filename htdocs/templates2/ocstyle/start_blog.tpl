@@ -1,5 +1,6 @@
 {* Blognews *}
 <div class="container-fluid">
+
     <div class="row oc-title">
         <div class="col-12 oc-title__title">
             <i class="svg svg--rss"></i>{t}Blog-News{/t}

@@ -17,6 +17,10 @@
 
     &__link {
         text-transform: uppercase;
+
+        > a {
+            color: $white;
+        }
     }
 }
 

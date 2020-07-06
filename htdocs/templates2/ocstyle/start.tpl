@@ -5,23 +5,27 @@
 <section class="mt-2 mb-2">
     <div class="container-fluid">
         <div class="row no-gutters">
-            <div class="oc-section col-12">
-                <h2><i class="svg svg--shield-star-ouline"></i>{t 1=$usercountry|escape}Newest caches in %1{/t}</h2>
+            <div class="col-md-6 col-12 pr-0 pr-md-2 pr-lg-4 mt-2">
+                {include file="start_events.tpl"}
             </div>
-            <div class="col-12 mt-2">
+            <div class="col-md-6 col-12 mt-2">
                 {include file="start_newcaches.tpl"}
             </div>
         </div>
     </div>
 </section>
 
+
 <section class="mt-2 mb-2">
     <div class="container-fluid">
         <div class="row no-gutters">
-            {include file="start_events.tpl"}
+            <div class="col-md-12 col-12 pr-0 pr-md-2 pr-lg-4 mt-2">
+                {include file="start_logpictures.tpl"}
+            </div>
         </div>
     </div>
 </section>
+
 
 <section class="mt-2 mb-2">
     <div class="container-fluid">

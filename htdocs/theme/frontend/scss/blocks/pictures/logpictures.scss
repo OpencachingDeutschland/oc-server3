@@ -1,0 +1,17 @@
+.logpicture--box {
+    padding: .5rem;
+    margin: .5rem;
+    background-color: $gray-darker;
+}
+
+.logpicture--thumbnail-text {
+    font-size: .7rem;
+    font-family: $font-family-oc;
+    color: $oc-primary;
+}
+
+.logpicture--thumbnail-image {
+    object-fit: cover;
+    width: 8.5rem;
+    height: 8.5rem;
+}

@@ -86,6 +86,14 @@
     }
 }
 
+.svg--news {
+    background-image: url('../images/svg-icons/book-information.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/book-information-dark.svg');
+    }
+}
+
 .svg--map-marker {
     background-image: url('../images/svg-icons/map-marker.svg');
 

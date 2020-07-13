@@ -185,16 +185,16 @@
     <p>
         The underlying software of the Opencaching.de platform is licensed under GNU GPL
         with additional restrictions. You can obtain the complete license text from
-        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">here</a>
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/LICENSE.md">here</a>
         .
         Please note that some components of the software originate from third parties. These
         components may be subject to other licenses.
     </p>
     <p>
         For a compilation of third party software components which are currently in use at
-        www.opencaching.de, including license conditions and other information, see
-        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/doc/license.txt">this document</a>
-        .
+        www.opencaching.de, including license conditions and other information, see 
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/LICENSE.md">here</a>
+        as well.
     </p>
     <p>
         The source code can be obtained from

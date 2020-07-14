@@ -205,16 +205,16 @@
         Die Software, mit der die Plattform Opencaching.de betrieben wird, ist unter der
         GNU GPL mit zus&auml;tzlichen Einschr&auml;nkungen lizenziert. Der vollst&auml;ndige
         Wortlaut dieser Lizenz befindet sich
-        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/master/doc/license.txt">hier</a>
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/LICENSE.md">hier</a>
         .
         Dabei ist zu beachten, dass einige Bestandteile der Software von Drittanbietern
         stammen. Diese Bestandteile können anderen Lizenzen unterliegen.
     </p>
     <p>
         Eine Aufstellung der Softwarebestandteile von Drittanbietern, die derzeit auf www.opencaching.de
-        verwendet werden, inklusive Lizenzbedingungen und weiterer Angaben gibt es
-        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/doc/license.txt">hier</a>
-        .
+        verwendet werden, inklusive Lizenzbedingungen und weiterer Angaben sind ebenfalls
+        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/stable/LICENSE.md">hier</a>
+        zu finden.
     </p>
     <p>
         Der Quellcode kann via

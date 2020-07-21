@@ -186,10 +186,10 @@
             {* <!-- Header banner --> *}
             <div class="header">
                 <div class="headerimage">
-                    <img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
+                    <a href="/index.php"><img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" /></a>
                 </div>
                 <div class="headerlogo">
-                    <img src="resource2/{$opt.template.style}/images/oclogo/{$opt.page.headoverlay}.png" class="headerimagecontent" />
+                    <a href="/index.php"><img src="resource2/{$opt.template.style}/images/oclogo/{$opt.page.headoverlay}.png" class="headerimagecontent" /></a>
                 </div>
             </div> <!-- header -->
 

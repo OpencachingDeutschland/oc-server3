@@ -9,3 +9,10 @@ $l-color__info--background: #bde5f8;
 
 $l-color__success-text: #4f8a10;
 $l-color__success-background: #dff2bf;
+
+// Adding OC colors to BS Stack
+$theme-colors: map-merge((
+        "oc-main": $oc-main,
+        "oc-primary": $oc-primary,
+        "oc-secondary": $oc-secondary
+), $theme-colors);

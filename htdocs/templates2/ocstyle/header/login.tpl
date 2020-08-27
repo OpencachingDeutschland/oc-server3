@@ -1,16 +1,17 @@
 {nocache}
     {if $login.userid==0}
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalOcLogin">
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalOcLogin">
             Login
         </button>
+
         <!-- Modal -->
-        <div class="modal  fade" id="modalOcLogin" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        <div class="modal modal--dark fade" id="modalOcLogin" data-backdrop="static" data-keyboard="false" tabindex="-1"
              role="dialog" aria-labelledby="modalOcLoginLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalOcLoginLabel">Welcome to OC</h5>
+                        <h5 class="modal-title" id="modalOcLoginLabel">Welcome to Opencaching</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -65,15 +66,15 @@
                                                 type="submit"
                                                 data-dismiss="modal"
                                                 onclick="window.location.href ='register.php'"/>
-                                        <i class="mdi mdi-edit"></i> Register
+                                        <i class="svg svg--register"></i> Register
                                         </button>
                                     </div>
                                     <div class="col-sm-6 col-xs-12 mb-3">
                                         <button name="LogMeIn"
-                                                class="btn btn-xs btn-outline-primary btn-block"
+                                                class="btn btn-xs btn-outline-oc-primary btn-block"
                                                 type="submit"
-                                                onclick="submitbutton('LogMeIn')"/>
-                                        <i class="mdi mdi-exit-to-app"></i> Login
+                                                onclick="submitbutton('LogMeIn')">
+                                        <i class="svg svg--login"></i> Login
                                         </button>
                                     </div>
                                     <div class="col-sm-6 col-xs-12 d-sm-block d-md-none d-lg-none mb-3">
@@ -82,7 +83,7 @@
                                                 type="submit"
                                                 data-dismiss="modal"
                                                 onclick="window.location.href ='register.php'"/>
-                                        <i class="mdi mdi-edit"></i> Register
+                                        <i class="svg svg--register"></i> Register
                                         </button>
                                     </div>
                                 </div>

@@ -102,6 +102,30 @@
     }
 }
 
+.svg--logout {
+    background-image: url('../images/svg-icons/book-information.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/book-information-dark.svg');
+    }
+}
+
+.svg--login {
+    background-image: url('../images/svg-icons/book-information.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/book-information-dark.svg');
+    }
+}
+
+.svg--register {
+    background-image: url('../images/svg-icons/account-plus-outline.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/account-plus-outline-dark.svg');
+    }
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {

@@ -7,4 +7,24 @@
     &__footer {
         color: $gray;
     }
+
+    &--dark {
+        background-color: $gray-transparent;
+
+        .modal-content {
+            background-color: $gray-darker;
+        }
+
+        .modal-header {
+            border-color: $oc-primary;
+        }
+
+        .modal-title {
+            color: $oc-primary;
+        }
+
+        .close {
+            color: $oc-primary;
+        }
+    }
 }

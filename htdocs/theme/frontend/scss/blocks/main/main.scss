@@ -74,6 +74,12 @@
         }
     }
 
+    &__login-box {
+        background-color: rgba($black, .8);
+        border-radius: 1.5em;
+        max-width: 40vw;
+    }
+
     &__topstage {
         background-size: cover;
         background-position: center center;
@@ -103,4 +109,13 @@
 
 .main__home {
     background-image: url('../images/header/oc_titelbild_norwegen.jpg');
+}
+
+.main__lostplace {
+    background-image: url('../images/header/oc_titelbild_lostplace.jpg');
+}
+
+.hr--primary {
+    background-color: $oc-primary;
+    height: .1rem;
 }

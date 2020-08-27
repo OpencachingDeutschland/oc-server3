@@ -4,7 +4,6 @@
         <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalOcLogin">
             Login
         </button>
-
         <!-- Modal -->
         <div class="modal modal--dark fade" id="modalOcLogin" data-backdrop="static" data-keyboard="false" tabindex="-1"
              role="dialog" aria-labelledby="modalOcLoginLabel" aria-hidden="true">
@@ -66,7 +65,7 @@
                                                 type="submit"
                                                 data-dismiss="modal"
                                                 onclick="window.location.href ='register.php'"/>
-                                        <i class="svg svg--register"></i> Register
+                                        <i class="svg svg--register"></i> {t}Register{/t}
                                         </button>
                                     </div>
                                     <div class="col-sm-6 col-xs-12 mb-3">
@@ -74,7 +73,7 @@
                                                 class="btn btn-xs btn-outline-oc-primary btn-block"
                                                 type="submit"
                                                 onclick="submitbutton('LogMeIn')">
-                                        <i class="svg svg--login"></i> Login
+                                            <i class="svg svg--login"></i> Login
                                         </button>
                                     </div>
                                     <div class="col-sm-6 col-xs-12 d-sm-block d-md-none d-lg-none mb-3">
@@ -83,14 +82,14 @@
                                                 type="submit"
                                                 data-dismiss="modal"
                                                 onclick="window.location.href ='register.php'"/>
-                                        <i class="svg svg--register"></i> Register
+                                        <i class="svg svg--register"></i> {t}Register{/t}
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
+                            </form>
                         </div>
-                        </form>
+
                     </div>
                 </div>
             </div>

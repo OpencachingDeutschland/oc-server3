@@ -73,41 +73,8 @@
 
 </header>
 
-{if ($opt.template.title=="")}
-<section class="main__topstage main__home">
-    <div class="container-fluid">
-        <div class="main__content-box p-3 d-inline-flex">
-            <div class="svg-oc--brand"></div>
-            <div class="main__content ">
-                <div class="main__content-title">Opencaching.de</div>
-                <div class="main__content-tagline">Der Weg ist das Ziel</div>
-            </div>
-        </div>
-    </div>
-</section>
-{/if}
-
 <main>
-    {if $core_hq_message.message !=""}
-        {include file="res_hqmessage.tpl"}
-    {/if}
-
-    <div class="container-fluid">
-        <div class="row">
-
-            {* <!-- CONTENT --> *}
-            <div class="col-12">
-                {if $opt.template.popup!=false && $opt.template.popupmargin!=false}
-                    <div class="row">
-                        {include file="$template.tpl"}
-                    </div>
-                {else}
-                    {include file="$template.tpl"}
-                {/if}
-            </div>
-
-        </div>
-    </div>
+    {include file="$template.tpl"}
 </main>
 
 <section role="footer">

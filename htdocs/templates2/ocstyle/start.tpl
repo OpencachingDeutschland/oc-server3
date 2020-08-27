@@ -2,6 +2,18 @@
 * You can find the license in the docs directory
 ***************************************************************************}
 
+<section class="main__topstage main__home">
+    <div class="container-fluid">
+        <div class="main__content-box p-3 d-inline-flex">
+            <div class="svg-oc--brand"></div>
+            <div class="main__content ">
+                <div class="main__content-title">Opencaching.de</div>
+                <div class="main__content-tagline">Der Weg ist das Ziel</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="mt-2 mb-2">
     <div class="container-fluid">
         <div class="row no-gutters">

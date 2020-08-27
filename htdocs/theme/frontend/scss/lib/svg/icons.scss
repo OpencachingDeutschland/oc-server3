@@ -78,6 +78,22 @@
     background-image: url('../images/svg-icons/pictures.svg');
 }
 
+.svg--security-shield {
+    background-image: url('../images/svg-icons/security-shield.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/security-shield-dark.svg');
+    }
+}
+
+.svg--account-request {
+    background-image: url('../images/svg-icons/account-question-outline.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/account-question-outline-dark.svg');
+    }
+}
+
 .svg--owner {
     background-image: url('../images/svg-icons/account-hard-hat.svg');
 
@@ -103,18 +119,18 @@
 }
 
 .svg--logout {
-    background-image: url('../images/svg-icons/book-information.svg');
+    background-image: url('../images/svg-icons/logout.svg');
 
     &--dark {
-        background-image: url('../images/svg-icons/book-information-dark.svg');
+        background-image: url('../images/svg-icons/logout-dark.svg');
     }
 }
 
 .svg--login {
-    background-image: url('../images/svg-icons/book-information.svg');
+    background-image: url('../images/svg-icons/login.svg');
 
     &--dark {
-        background-image: url('../images/svg-icons/book-information-dark.svg');
+        background-image: url('../images/svg-icons/login-dark.svg');
     }
 }
 

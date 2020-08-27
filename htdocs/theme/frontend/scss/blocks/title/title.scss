@@ -26,6 +26,10 @@
     }
 }
 
+.oc-title__primary {
+    color: $oc-primary;
+}
+
 //** Headline page section **//
 .oc-section {
     background-color: $gray-darker;
@@ -41,4 +45,5 @@
         line-height: 2.25rem;
         padding-left: .25em;
     }
+
 }

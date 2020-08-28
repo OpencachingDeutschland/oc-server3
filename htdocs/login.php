@@ -11,12 +11,16 @@ require __DIR__ . '/lib2/web.inc.php';
 /** @var Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 
-$tpl->name = 'login';
-$tpl->menuitem = MNU_LOGIN;
+if (!empty($tpl)) {
+    $tpl->name = 'login';
+    $tpl->menuitem = MNU_LOGIN;
+    $tpl->assign('error', LOGIN_OK);
+}
 
-$login->verify();
+if (isset($login)) {
+    $login->verify();
+}
 
-$tpl->assign('error', LOGIN_OK);
 
 $target = isset($_REQUEST['target']) ? $_REQUEST['target'] : 'myhome.php';
 

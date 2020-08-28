@@ -77,7 +77,23 @@
     &__login-box {
         background-color: rgba($black, .8);
         border-radius: 1.5em;
-        max-width: 40vw;
+        max-width: 90vw;
+
+        @include media-breakpoint-up(sm) {
+            max-width: 90vw;
+        }
+
+        @include media-breakpoint-up(md) {
+            max-width: 80vw;
+        }
+
+        @include media-breakpoint-up(lg) {
+            max-width: 60vw;
+        }
+
+        @include media-breakpoint-up(xl) {
+            max-width: 40vw;
+        }
     }
 
     &__topstage {
@@ -113,6 +129,8 @@
 
 .main__lostplace {
     background-image: url('../images/header/oc_titelbild_lostplace.jpg');
+    height: 75vh;
+
 }
 
 .hr--primary {

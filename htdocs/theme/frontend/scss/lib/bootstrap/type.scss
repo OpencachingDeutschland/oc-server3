@@ -1,2 +1,7 @@
 @import '../../global';
 @import '~bootstrap/scss/type';
+
+h2,
+.h2 {
+    font-size: $h2-font-size;
+}

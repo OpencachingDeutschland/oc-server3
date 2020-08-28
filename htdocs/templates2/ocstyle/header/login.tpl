@@ -1,8 +1,8 @@
 {nocache}
     {if $login.userid==0}
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalOcLogin">
-            Login
+        <button type="button" class="btn btn-outline-oc-primary" data-toggle="modal" data-target="#modalOcLogin">
+            <i class="svg svg--login"></i> Login
         </button>
         <!-- Modal -->
         <div class="modal modal--dark fade" id="modalOcLogin" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -24,69 +24,71 @@
                                     enctype="application/x-www-form-urlencoded"
                                     name="login"
                                     dir="ltr"
-                                    class="form-inline"
-                            />
-                            <input type="hidden" name="action" value="login"/>
-                            <input type="hidden" name="target" value="{$opt.page.target|escape}"/>
-                            <input type="hidden" name="source" value="titlebar"/>
+                                    class="form"
+                            >
+                                <input type="hidden" name="action" value="login"/>
+                                <input type="hidden" name="target" value="{$opt.page.target|escape}"/>
+                                <input type="hidden" name="source" value="titlebar"/>
 
-                            <div class="container-fluid">
-                                <div class="row mb-3">
-                                    <div class="col-sm-6 col-xs-12 mb-1">
+                                <div class="container-fluid">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-xs-12 mb-1">
 
-                                        <input
-                                                name="email"
-                                                placeholder="{t}User{/t}"
-                                                type="text"
-                                                class="form-control"
-                                                id="LoginInput"
-                                        />
+                                            <label for="LoginInput"></label>
+                                            <input
+                                                    name="email"
+                                                    placeholder="{t}User{/t}"
+                                                    type="text"
+                                                    class="form-control"
+                                                    id="LoginInput"
+                                            />
 
-                                    </div>
+                                        </div>
 
-                                    <div class="col-sm-6 col-xs-12 mb-1">
+                                        <div class="col-sm-6 col-xs-12 mb-1">
 
-                                        <input name="password"
-                                               placeholder="{t}Password{/t}"
-                                               type="password"
-                                               class="form-control"
-                                               id="PasswordInput"
-                                               value=""/>
+                                            <label for="PasswordInput"></label>
+                                            <input name="password"
+                                                   placeholder="{t}Password{/t}"
+                                                   type="password"
+                                                   class="form-control"
+                                                   id="PasswordInput"
+                                                   value=""/>
 
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container-fluid">
-                                <div class="row mb-3">
-                                    <div class="col-sm-6 col-xs-12 d-none d-sm-none d-md-block d-lg-block">
-                                        <button name="LogMeIn"
-                                                class="btn btn-xs btn-outline-success btn-block"
-                                                type="submit"
-                                                data-dismiss="modal"
-                                                onclick="window.location.href ='register.php'"/>
-                                        <i class="svg svg--register"></i> {t}Register{/t}
-                                        </button>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-12 mb-3">
-                                        <button name="LogMeIn"
-                                                class="btn btn-xs btn-outline-oc-primary btn-block"
-                                                type="submit"
-                                                onclick="submitbutton('LogMeIn')">
-                                            <i class="svg svg--login"></i> Login
-                                        </button>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-12 d-sm-block d-md-none d-lg-none mb-3">
-                                        <button name="LogMeIn"
-                                                class="btn btn-xs btn-outline-success btn-block"
-                                                type="submit"
-                                                data-dismiss="modal"
-                                                onclick="window.location.href ='register.php'"/>
-                                        <i class="svg svg--register"></i> {t}Register{/t}
-                                        </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div class="container-fluid">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-xs-12 d-none d-sm-none d-md-block d-lg-block">
+                                            <button name="LogMeIn"
+                                                    class="btn btn-xs btn-outline-success btn-block"
+                                                    type="submit"
+                                                    data-dismiss="modal"
+                                                    onclick="window.location.href ='register.php'">
+                                                <i class="svg svg--register"></i> {t}Register{/t}
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12 mb-3">
+                                            <button name="LogMeIn"
+                                                    class="btn btn-xs btn-outline-oc-primary btn-block"
+                                                    type="submit"
+                                                    onclick="submitbutton('LogMeIn')">
+                                                <i class="svg svg--login"></i> Login
+                                            </button>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-12 d-sm-block d-md-none d-lg-none mb-3">
+                                            <button name="LogMeIn"
+                                                    class="btn btn-xs btn-outline-success btn-block"
+                                                    type="submit"
+                                                    data-dismiss="modal"
+                                                    onclick="window.location.href ='register.php'">
+                                                <i class="svg svg--register"></i> {t}Register{/t}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
 

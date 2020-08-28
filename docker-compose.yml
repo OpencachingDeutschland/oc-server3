@@ -34,6 +34,8 @@ services:
             - .:/application
             - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
             - ./docker/httpd/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+        environment:
+          XDEBUG_CONFIG: remote_host=host.docker.internal
         ports:
             - "80:80"
         networks:

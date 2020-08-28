@@ -6,7 +6,7 @@
             </div>
             <div class="ml-2">
                 <a href="login.php?action=logout">
-                    <i class="mdi mdi-2x mdi-exit-to-app"></i>
+                    <i class="svg svg--logout"></i>
                 </a>
             </div>
         </div>

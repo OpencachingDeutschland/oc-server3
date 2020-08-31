@@ -10,9 +10,16 @@ require __DIR__ . '/lib2/web.inc.php';
 /** @var Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 
-$tpl->name = 'myhome';
-$tpl->menuitem = MNU_MYPROFILE_OVERVIEW;
-$login->verify();
+
+
+if (!empty($tpl)) {
+    $tpl->name = 'myhome';
+    $tpl->menuitem = MNU_MYPROFILE_OVERVIEW;
+}
+
+if (isset($login)) {
+    $login->verify();
+}
 
 if ($login->userid == 0) {
     $tpl->redirect('login.php?target=myhome.php');

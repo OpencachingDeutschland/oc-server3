@@ -142,6 +142,22 @@
     }
 }
 
+.svg--logbook-entry {
+    background-image: url('../images/svg-icons/logbook_open-page.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/logbook_open-page-dark.svg');
+    }
+}
+
+.svg--logbook-edit {
+    background-image: url('../images/svg-icons/logbook-edit-outline.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/logbook-edit-outline-dark.svg');
+    }
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {

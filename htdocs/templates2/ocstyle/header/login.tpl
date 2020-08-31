@@ -1,9 +1,10 @@
 {nocache}
     {if $login.userid==0}
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-outline-oc-primary" data-toggle="modal" data-target="#modalOcLogin">
+        <button type="button" class="btn btn-xs btn-outline-oc-primary" data-toggle="modal" data-target="#modalOcLogin">
             <i class="svg svg--login"></i> Login
         </button>
+
         <!-- Modal -->
         <div class="modal modal--dark fade" id="modalOcLogin" data-backdrop="static" data-keyboard="false" tabindex="-1"
              role="dialog" aria-labelledby="modalOcLoginLabel" aria-hidden="true">

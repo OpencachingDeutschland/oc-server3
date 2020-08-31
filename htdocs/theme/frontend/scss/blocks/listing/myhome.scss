@@ -1,0 +1,14 @@
+@import '../../global';
+
+.unpublished-container {
+    background-color: $oc-main;
+    margin: .5rem;
+
+    .oc-waypoint-code {
+        text-align: center;
+        color: $oc-primary;
+        padding: .2em;
+        border-bottom: .25em solid $oc-primary;
+        background-color: $oc-secondary;
+    }
+}

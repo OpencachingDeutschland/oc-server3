@@ -1,5 +1,5 @@
 {
   "files": [
-    "plugins/**/*.js"
+    "lightbox.js"
   ]
 }

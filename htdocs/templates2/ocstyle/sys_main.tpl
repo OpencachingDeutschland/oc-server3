@@ -48,30 +48,8 @@
         {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
 >
 
-
-<header class="main__header">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerOcTopmenu"
-                aria-controls="navbarTogglerOcTopmenu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerOcTopmenu">
-            <li class="navbar-brand">
-                <a class="nav-link" href="/"><i class="mdi mdi-2x mdi-home"></i></a>
-            </li>
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    {nocache}
-                        {include file="sys_topmenu.tpl" items="$topmenu"}
-                    {/nocache}
-                </li>
-            </ul>
-            {include file="header/login.tpl"}
-            {include file="header/user.tpl"}
-        </div>
-    </nav>
-
-</header>
+{include file="header/old_tompenu.tpl"}
+{*{include file="header/topmenu.tpl"}*}
 
 <main>
     {include file="$template.tpl"}
@@ -125,10 +103,17 @@
 {/literal}
 {/if}
 
+{*Rendered by GRUNT in DEV*}
 <script src="web/assets/js/main.js"></script>
+
+{*Import by composer*}
 <script src="vendor/components/jquery/jquery.min.js"></script>
 <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 
+{*External ressources while composer update is blocking implementation *}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" async></script>
+
+{*Legacy OC custom script*}
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js" async></script>
 <script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js" async></script>
 

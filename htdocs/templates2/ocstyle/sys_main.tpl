@@ -40,13 +40,11 @@
     {foreach from=$opt.page.header_javascript item=scriptItem}
         <script type="text/javascript" src="{$scriptItem}"></script>
     {/foreach}
+
 </head>
 
-{* JS onload() onunload() *}
-<body{if $opt.session.url==true} onload="initSessionTimeout()"{/if}
-        {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
-        {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
->
+
+<body>
 
 {include file="header/old_tompenu.tpl"}
 {*{include file="header/topmenu.tpl"}*}
@@ -110,7 +108,7 @@
 <script src="vendor/components/jquery/jquery.min.js"></script>
 <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 
-{*External ressources while composer update is blocking implementation *}
+{*External ressources while composer update is blocking implementation » htdocs/theme/frontend/js/files.json *}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" async></script>
 
 {*Legacy OC custom script*}

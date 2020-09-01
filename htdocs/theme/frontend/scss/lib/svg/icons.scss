@@ -158,6 +158,22 @@
     }
 }
 
+.svg--listing-hidden {
+    background-image: url('../images/svg-icons/file-hidden.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/file-hidden-dark.svg');
+    }
+}
+
+.svg--photo {
+    background-image: url('../images/svg-icons/photo.svg');
+
+    &--dark {
+        background-image: url('../images/svg-icons/photo-dark.svg');
+    }
+}
+
 //=== Helper: Automatic high calculator===//
 @for $i from 1 to 31 {
     .svg__#{$i}x {

@@ -6,12 +6,12 @@ $font-family-oc: Montserrat, Verdana;
 
 //========== OC COLORS =====//
 $oc-primary: #f0d000;
-$oc-primary__light: lighten($oc-primary, 50%);
-$oc-primary__dark: darken($oc-primary, 50%);
+$oc-primary-light: lighten($oc-primary, 50%);
+$oc-primary-dark: darken($oc-primary, 50%);
 
 $oc-secondary: $gray-900;
-$oc-secondary__light: lighten($oc-secondary, 50%);
-$oc-secondary__dark: darken($oc-secondary, 50%);
+$oc-secondary-light: lighten($oc-secondary, 50%);
+$oc-secondary-dark: darken($oc-secondary, 50%);
 
 $oc-main: $gray-500;
 

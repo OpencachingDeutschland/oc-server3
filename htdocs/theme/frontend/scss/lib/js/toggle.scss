@@ -1,0 +1,55 @@
+@import '../../global';
+
+.wrapper {
+    width: 50px;
+    margin: 0 auto;
+}
+
+.switch {
+    width: 46px;
+    height: 28px;
+    background: $oc-primary;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    border-radius: 14px;
+}
+
+.switch::before {
+    content: ' ';
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 42px;
+    height: 24px;
+    background: $oc-secondary;
+    z-index: 1;
+    border-radius: 18px;
+    transition-duration: 500ms;
+}
+
+.switch::after {
+    content: ' ';
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    z-index: 2;
+    background: $white;
+    position: absolute;
+    transition-duration: 500ms;
+    top: 2px;
+    left: 1px;
+}
+
+.switch--on,
+.switch--on::before {
+    background: $oc-main;
+}
+
+.switch--on::after {
+    left: 20px;
+}

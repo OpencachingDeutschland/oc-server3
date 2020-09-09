@@ -41,5 +41,4 @@
             {if $piccount<2}<td width="{$itemwidth}px"></td>{/if}
         </tr>
     </table>
-    <div style="height:8px"></div>
 </div>

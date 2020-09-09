@@ -1,4 +1,4 @@
-<div class="card" style="width: 15rem;">
+<div class="card">
 
     <a href="{$picture.pic_url}"
        data-toggle="lightbox"

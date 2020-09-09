@@ -1,0 +1,25 @@
+@import '../../global';
+
+.oc-counter {
+
+    &-container {
+        display: table-cell;
+        margin: .5rem;
+        padding: 1rem;
+        width: 3rem;
+    }
+
+    &-title {
+        text-align: center;
+        color: $oc-primary;
+        padding: .2em;
+        border-bottom: .25em solid $oc-primary;
+        background-color: $oc-secondary;
+    }
+
+    &-count {
+        font-size: 2rem;
+        text-align: center;
+        background-color: $oc-main;
+    }
+}

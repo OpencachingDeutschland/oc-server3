@@ -13,12 +13,43 @@
     }
 
     &__title {
-
         text-transform: uppercase;
+
+        @include media-breakpoint-down(md) {
+            font-size: .8rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            font-size: 1rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+            font-size: 1.2rem;
+        }
+
+        @include media-breakpoint-up(xl) {
+            font-size: 1.2rem;
+        }
     }
 
     &__link {
         text-transform: uppercase;
+
+        @include media-breakpoint-down(md) {
+            font-size: .8rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            font-size: 1rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+            font-size: 1.2rem;
+        }
+
+        @include media-breakpoint-up(xl) {
+            font-size: 1.2rem;
+        }
 
         > a {
             color: $white;

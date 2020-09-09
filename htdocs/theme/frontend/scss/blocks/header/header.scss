@@ -4,7 +4,7 @@
     border-bottom: $oc-primary solid 0.25em;
     background: rgba($gray-darker, .75);
     color: $white;
-    height: 3.5rem;
+    z-index: 3;
 
     a {
         color: $white;
@@ -13,4 +13,13 @@
     a:hover {
         color: $oc-primary-dark;
     }
+}
+
+.navbar {
+    z-index: 5;
+}
+
+.nav-link.active {
+    background-color: $oc-primary;
+    color: $oc-secondary;
 }

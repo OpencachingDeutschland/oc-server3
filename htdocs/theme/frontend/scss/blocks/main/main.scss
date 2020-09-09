@@ -64,8 +64,8 @@
         position: relative;
 
         @include media-breakpoint-down(md) {
-            top: 10rem;
-            left: 1rem;
+            top: 2rem;
+            left: .5rem;
         }
 
         @include media-breakpoint-up(md) {

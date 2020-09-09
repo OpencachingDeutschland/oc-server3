@@ -2,13 +2,6 @@
 
 .oc-counter {
 
-    &-container {
-        display: table-cell;
-        margin: .5rem;
-        padding: 1rem;
-        width: 3rem;
-    }
-
     &-title {
         text-align: center;
         color: $oc-primary;

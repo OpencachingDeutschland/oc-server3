@@ -5,69 +5,59 @@
 {if $allpics === false}
     <section>
         <div class="container-fluid">
-
             <div class="row oc-title">
                 <div class="col-12 oc-title__title">
                     <i class="svg svg--register"></i>{t 1=$login.username}Hello %1{/t}
                 </div>
             </div>
-        </div>
 
-        <div class="container-fluid">
             <div class="row">
 
-                <div class="">
-
-                    <div class="col-12 col-md-4 col-lg-6 oc-counter-container">
-                        <div class="oc-counter-title">{t}Finds:{/t}</div>
-                        <div class="p-2 oc-counter-count">
-                            <div class="counter" data-count="{$found}">0</div>
-                        </div>
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-3 oc-counter-container">
+                    <div class="oc-counter-title">{t}Finds:{/t}</div>
+                    <div class="p-2 oc-counter-count">
+                        <div class="counter" data-count="{$found}">0</div>
                     </div>
+                </div>
 
-                    <div class="col-12 col-md-4 col-lg-6 oc-counter-container">
-                        <div class="oc-counter-title">{t}Hidden:{/t}</div>
-                        <div class="p-2 oc-counter-count">
-                            <div class="counter" data-count="{$hidden}">0</div>
-                        </div>
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 p-3 oc-counter-container">
+                    <div class="oc-counter-title">{t}Hidden:{/t}</div>
+                    <div class="p-2 oc-counter-count">
+                        <div class="counter" data-count="{$hidden}">0</div>
                     </div>
+                </div>
 
 
-                    <div class="col-12 col-md-4 col-lg-12">
+                <div class="col-12 col-md-4 col-lg-6 col-xl-8 p-3">
 
-                        {if $logs|@count > 0}
-                            <a name="ShowFound"
-                               class="btn btn-xs btn-outline-oc-main btn-block"
-                               href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7&amp;calledbysearch=0">
-                                <i class="svg svg--logbook"></i> {t}Geocaches found{/t}
-                            </a>
-                            <a name="ShowLogged"
-                               class="btn btn-xs btn-outline-oc-main btn-block"
-                               href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=0&amp;calledbysearch=0">
-                                <i class="svg svg--logbook"></i> {t}Geocaches logged{/t}
-                            </a>
-                        {/if}
+                    {if $logs|@count > 0}
+                        <a class="col-xl-3 btn btn-xs btn-outline-dark btn-block"
+                           href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=1,7&amp;calledbysearch=0">
+                            <i class="svg svg--logbook-entry--dark"></i> {t}Geocaches found{/t}
+                        </a>
+                        <a class="col-xl-3 btn btn-xs btn-outline-dark btn-block"
+                           href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bymylastlog&amp;finderid={$login.userid}&amp;searchbyfinder=&amp;f_inactive=0&amp;logtype=0&amp;calledbysearch=0">
+                            <i class="svg svg--logbook-entry--dark"></i> {t}Geocaches logged{/t}
+                        </a>
+                    {/if}
 
-                        {if $caches|@count > 0}
-                            <a name="ShowDetails"
-                               class="btn btn-xs btn-outline-oc-main btn-block"
-                               href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">
-                                <i class="svg svg--logbook"></i> {t}Show details{/t}
-                            </a>
-                            <a name="ShowLogged"
-                               class="btn btn-xs btn-outline-oc-main btn-block"
-                               href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">
-                                <i class="svg svg--logbook"></i> {t}only active caches{/t}
-                            </a>
-                        {/if}
-
-                    </div>
+                    {if $caches|@count > 0}
+                        <a class="col-xl-3 btn btn-xs btn-outline-dark btn-block"
+                           href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">
+                            <i class="svg svg--logbook-entry--dark"></i> {t}Show details{/t}
+                        </a>
+                        <a class="col-xl-3 btn btn-xs btn-outline-dark btn-block"
+                           href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">
+                            <i class="svg svg--logbook-entry--dark"></i> {t}only active caches{/t}
+                        </a>
+                    {/if}
 
                 </div>
 
             </div>
         </div>
     </section>
+
     <section>
         <div class="container-fluid">
             <div class="row oc-title">
@@ -180,7 +170,7 @@
                 <i class="svg svg--listing-hidden">{t}Your geocaches hidden{/t}</i>
             </div>
 
-            <div class="d-flex d-inline-block">
+            <div class="d-flex d-inline-block oc-title__link">
                 <div class="mr-1">{t}Archivert{/t}</div>
                 <div class="switch"></div>
 

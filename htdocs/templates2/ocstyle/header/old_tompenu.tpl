@@ -1,9 +1,11 @@
 <header class="main__header">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerOcTopmenu"
                 aria-controls="navbarTogglerOcTopmenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarTogglerOcTopmenu">
             <li class="navbar-brand">
                 <a class="nav-link" href="/"><i class="svg svg-oc--brand" style="width: 1rem;"></i> Opencaching</a>

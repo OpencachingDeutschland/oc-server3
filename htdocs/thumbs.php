@@ -189,6 +189,9 @@ if ($r) {
             // It is large enough to have the pics look nice ...
             $thumb_max_height = 105;
             $thumb_max_width = 105;
+        } elseif ($r['object_type'] == 3) {
+            $thumb_max_height = 200;
+            $thumb_max_width = 200;
         } else {
             $thumb_max_height = $opt['logic']['pictures']['thumb_max_height'];
             $thumb_max_width = $opt['logic']['pictures']['thumb_max_width'];

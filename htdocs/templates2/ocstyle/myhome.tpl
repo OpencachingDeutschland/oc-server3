@@ -140,7 +140,7 @@
                         {assign var=subtitle value="{t}Log pictures for your caches:{/t}"}
                         {assign var=maxlines value=0}
                     {else}
-                        <b>{t}Your latest log pictures:{/t}</b>
+                        <h5>{t}Your latest log pictures:{/t}</h5>
                         {assign var=maxlines value=1}
                     {/if}
 

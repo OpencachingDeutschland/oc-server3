@@ -30,7 +30,9 @@
           href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png"/>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="web/assets/css/style.min.css">
+    <link rel="stylesheet" href="web/assets/css/style.min.css">
+    <link rel="stylesheet" href="web/assets/vendor/featherlight.css">
+    <link rel="stylesheet" href="web/assets/vendor/featherlight.gallery.css">
 
     {* Cookie Consent Tool 06.2020 *}
     <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">
@@ -106,14 +108,16 @@
 
 {*Import by composer*}
 <script src="vendor/components/jquery/jquery.min.js"></script>
+<script src="web/assets/vendor/jquery_detect_swipe.js"></script>
 <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 
 {*External ressources while composer update is blocking implementation » htdocs/theme/frontend/js/files.json *}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" async></script>
+<script src="web/assets/vendor/featherlight.js" ></script>
+<script src="web/assets/vendor/featherlight.gallery.js" ></script>
 
 {*Legacy OC custom script*}
-<script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js" async></script>
-<script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js" async></script>
+{*<script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js" async></script>*}
+{*<script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js" async></script>*}
 
 </body>
 </html>

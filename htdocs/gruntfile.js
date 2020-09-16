@@ -27,7 +27,8 @@ module.exports = function (grunt) {
             css: '<%= dirs.destination %>/css/',
             js: '<%= dirs.destination %>/js/',
             images: '<%= dirs.destination %>/images/',
-            fonts: '<%= dirs.destination %>/fonts/'
+            fonts: '<%= dirs.destination %>/fonts/',
+            vendor: '<%= dirs.destination %>/vendor/'
         },
         scsslint: {
             development: [
@@ -56,6 +57,16 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.source %>/fonts/',
                         src: ['**/*'],
                         dest: '<%= dirs.destination %>/fonts/',
+                        expand: true
+                    }
+                ]
+            },
+            vendor: {
+                files: [
+                    {
+                        cwd: '<%= dirs.source %>/vendor/',
+                        src: ['**/*'],
+                        dest: '<%= dirs.destination %>/vendor/',
                         expand: true
                     }
                 ]
@@ -141,6 +152,14 @@ module.exports = function (grunt) {
                 ],
                 tasks: [
                     'copyto:fonts'
+                ]
+            },
+            fonts: {
+                files: [
+                    '<%= dirs.source %>/vendor/**/*'
+                ],
+                tasks: [
+                    'copyto:vendor'
                 ]
             },
             css: {

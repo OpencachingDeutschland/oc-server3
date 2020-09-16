@@ -15,18 +15,20 @@
 
 
 <div class="row">
-    {assign var=piccount value=0}
-    {assign var=lines value=0}
-    {foreach from=$pictures item=picture}
-        {if $piccount == 6}
-            {assign var=piccount value=0}
-            {assign var=lines value=$lines+1}
-        {/if}
-        {if !$maxlines || $lines < $maxlines}
 
-            {include file="res_logpicture.tpl" picture=$picture}
+        {assign var=piccount value=0}
+        {assign var=lines value=0}
+        {foreach from=$pictures item=picture}
+            {if $piccount == 6}
+                {assign var=piccount value=0}
+                {assign var=lines value=$lines+1}
+            {/if}
+            {if !$maxlines || $lines < $maxlines}
 
-            {assign var=piccount value=$piccount+1}
-        {/if}
-    {/foreach}
+                {include file="res_logpicture.tpl" picture=$picture}
+
+                {assign var=piccount value=$piccount+1}
+            {/if}
+        {/foreach}
+
 </div>

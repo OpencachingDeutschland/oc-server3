@@ -1,12 +1,11 @@
-<div class="col-6 col-md-4 col-lg-2 p-0 unpublished-container">
+<div class="col-11 col-md-4 col-lg-2 p-0 unpublished-container">
     <div class="oc-waypoint-code">
         {$picture.picdate|date_format:'%d.%m.%y'}
     </div>
-    <div class="">
-        <a href="{$picture.pic_url}"
-           data-toggle="lightbox"
-           data-title="{$picture.title|replace:"'":"´"|replace:'"':'´´'}"
-           data-footer="&copy; by {$picture.username|escape}"
+    <div>
+        <a class="gallery"
+           href="{$picture.pic_url}"
+           data-featherlight="image"
         >
             <img src="{$picture.pic_url}"
                  class="mx-auto img-fluid"

@@ -5,7 +5,6 @@ $(document).ready(function(){
         // grab element reference archived toggle
         const archivedListing = document.querySelector('.is--archived');
         archivedListing.classList.toggle('d-none');
-        console.log(archivedListing)
     });
 });
 

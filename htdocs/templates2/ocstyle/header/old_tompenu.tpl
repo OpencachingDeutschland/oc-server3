@@ -1,3 +1,4 @@
+{nocache}
 <header class="main__header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
@@ -6,15 +7,17 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <div class="site-title"><i class="svg svg-oc--brand" style="width: 1rem;"></i> Opencaching</a></div>
+
         <div class="collapse navbar-collapse" id="navbarTogglerOcTopmenu">
-            <li class="navbar-brand">
+            <li class="navbar-brand d-sm-none">
                 <a class="nav-link" href="/"><i class="svg svg-oc--brand" style="width: 1rem;"></i> Opencaching</a>
             </li>
             <ul class="navbar-nav nav-pills mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    {nocache}
+
                         {include file="sys_topmenu.tpl" items="$topmenu"}
-                    {/nocache}
+
                 </li>
             </ul>
             {include file="header/login.tpl"}
@@ -22,3 +25,4 @@
         </div>
     </nav>
 </header>
+{/nocache}

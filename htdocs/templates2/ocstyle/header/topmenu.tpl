@@ -1,30 +1,28 @@
 {nocache}
-    <header class="container-fluid d-flex justify-content-between align-items-center main__header">
+    <header class="main__header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-        <div class="oc-topmenu-brand">Opencaching</div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerOcTopmenu"
+                    aria-controls="navbarTogglerOcTopmenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <nav role="navigation">
-            <div class="oc--topmenu-toggle">
+            <div class="site-title"><i class="svg svg-oc--brand" style="width: 1rem;"></i> Opencaching</a></div>
 
-                <input type="checkbox" />
-                <!-- spans need for hamburger menu -->
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="collapse navbar-collapse" id="navbarTogglerOcTopmenu">
+                <li class="navbar-brand d-sm-none">
+                    <a class="nav-link" href="/"><i class="svg svg-oc--brand" style="width: 1rem;"></i> Opencaching</a>
+                </li>
+                <ul class="navbar-nav nav-pills mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
 
-                <ul class="oc--topmenu-items">
-                    <a href="/"><li>Start</li></a>
-                    <a href="/myhome.php"><li>Mein Profil</li></a>
-                    <a href="/search.php"><li>Suche</li></a>
-                    <a href="/map2.php"><li>Karte</li></a>
+                        {include file="sys_topmenu.tpl" items="$topmenu"}
+
+                    </li>
                 </ul>
+                {include file="header/login.tpl"}
+                {include file="header/user.tpl"}
             </div>
         </nav>
-
-
-        <div>
-            {include file="header/login.tpl"}
-            {include file="header/user.tpl"}
-        </div>
     </header>
 {/nocache}

@@ -1,7 +1,7 @@
 {
   "files": [
-    "lightbox.js",
     "toggle.js",
-    "count.js"
+    "count.js",
+    "fixed_nav.js"
   ]
 }

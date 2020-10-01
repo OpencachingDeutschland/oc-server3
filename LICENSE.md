@@ -85,38 +85,33 @@ PHP libraries
         URI     : http://dev.mysql.com/doc/refman/4.1/en/functions-that-test-spatial-relationships-between-geometries.html
         License : ??
 
-    7.  PHP Class: HTML to Plain Text Conversion
-        Path    : htdocs/lib2/html2text.class.php
-        URI     : http://www.chuggnutt.com/html2text.php
-        License : GPL
-
-    8.  Automatic Image Rotator
+    7.  Automatic Image Rotator
         Path    : resource2/ocstyle/images/head/rotator.php
         URI     : http://d.alistapart.com/randomizer/rotate.txt
         License : "freely available to all" (http://alistapart.com/about)
 
-    9.  ss_zip class
+    8.  ss_zip class
         Path    : htdocs/lib2/ss_zip.php
         URI     : http://smiledsoft.com/demos/phpzip/  (no longer works?)
         License : ??
 
-   10.  OKAPI: Opencaching API
+    9.  OKAPI: Opencaching API
         Path    : htdocs/okapi/
         URI     : http://code.google.com/p/opencaching-api/
         License : MIT, with exception of okapi/res/attribute icons which
                   are under Opencaching-GPL license
 
-   11.  Net_IDNA2
+   10.  Net_IDNA2
         Path    : htdocs/lib2/Net/
         URI     : https://pear.php.net/package/Net_IDNA2
         Licens  : LGPL 2.1
         
-   12.  PSH
+   11.  PSH
         Path    : psh.phar
         URI     : https://github.com/shopwareLabs/psh
         Licens  : MIT
 
-   13.  php-cs-fixer
+   12.  php-cs-fixer
         Path    : php-cs-fixer
         URI     : https://github.com/FriendsOfPHP/PHP-CS-Fixer
         Licens  : MIT

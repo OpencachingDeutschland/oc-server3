@@ -44,12 +44,6 @@ class LogType
      */
     public static function guess(string $fileLogType): ?int
     {
-        $logType = null;
-
-        if (array_key_exists($fileLogType, self::FILE_LOG_TYPE_MAPPING)) {
-            $logType = self::FILE_LOG_TYPE_MAPPING[$fileLogType];
-        }
-
-        return $logType;
+        return self::FILE_LOG_TYPE_MAPPING[$fileLogType] ?? null;
     }
 }

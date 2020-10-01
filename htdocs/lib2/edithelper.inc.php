@@ -67,7 +67,7 @@ function processEditorInput($oldDescMode, $descMode, $text, &$representText)
             $text = str_replace('  ', '&nbsp; ', $text);
         } else {
             // mode switch from HTML editor to plain text, or decode HTML-encoded plain text
-            $representText = html2plaintext($text, $oldDescMode = 0, 0);
+            $representText = html2plaintext($text, $oldDescMode = 0);
         }
     }
 
@@ -83,13 +83,12 @@ function processEditorInput($oldDescMode, $descMode, $text, &$representText)
 /**
  * @param $text
  * @param $texthtml0
- * @param $wrap
  *
  * @return mixed|string
  */
-function html2plaintext($text, $texthtml0, $wrap)
+function html2plaintext($text, $texthtml0)
 {
-    global $opt, $smiley;
+    global $smiley;
 
     if ($texthtml0) {
         $text = str_replace(
@@ -122,10 +121,10 @@ function html2plaintext($text, $texthtml0, $wrap)
             // the [s[ ]s] is needed to protect the spaces around the smileys
         }
 
-        $h2t = new html2text($text);
-        $h2t->set_base_url($opt['page']['default_absolute_url']);
-        $h2t->width = $wrap;
-        $text = $h2t->get_text();
+        // REDMINE-1249: Missing log text in mail notification
+        // simpler solution that converts html to text as the previous class html2text emptied the text completely
+        // implementation for line wrap, url's and probably more is missing
+        $text = preg_replace( "/\n\s+/", "\n", rtrim(html_entity_decode(strip_tags($text))));
 
         $text = str_replace(
             [
@@ -135,11 +134,6 @@ function html2plaintext($text, $texthtml0, $wrap)
             '',
             $text
         );
-
-        // remove e.g. trailing \n created from </p> by html2text
-        while (substr($text, - 2) == "\n\n") {
-            $text = substr($text, 0, strlen($text) - 1);
-        }
     }
 
     return $text;

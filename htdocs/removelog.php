@@ -113,8 +113,7 @@ if ($error == false) {
 
                         $logtext = html2plaintext(
                             $log_record['log_text'],
-                            $log_record['text_html'] == 0,
-                            EMAIL_LINEWRAP
+                            $log_record['text_html'] == 0
                         );
 
                         //get cache owner name

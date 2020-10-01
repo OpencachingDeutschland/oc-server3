@@ -327,7 +327,7 @@ function process_owner_log($user_id, $log_id): void
     $rLog = sql_fetch_array($rsLog);
     mysqli_free_result($rsLog);
 
-    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0, EMAIL_LINEWRAP);
+    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 
     $language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     if (!$language) {
@@ -415,7 +415,7 @@ function process_log_watch($user_id, $log_id): void
     $rLog = sql_fetch_array($rsLog);
     mysqli_free_result($rsLog);
 
-    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0, EMAIL_LINEWRAP);
+    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 
     $language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     if (!$language) {

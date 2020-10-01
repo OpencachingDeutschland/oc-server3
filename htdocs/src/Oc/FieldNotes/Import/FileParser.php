@@ -32,7 +32,8 @@ class FileParser
     private function getSanitizedFileContent(File $file): string
     {
         $content = file_get_contents($file->getRealPath());
-        $content = str_replace("\xFF\xFE", '', $content);
+        // -------- remove the utf-8 BOM ----
+        $content = str_replace(["\xFF\xFE", "\xEF\xBB\xBF"], '', $content);
         $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16LE');
         $content = str_replace("\r\n", "\n", $content);
 

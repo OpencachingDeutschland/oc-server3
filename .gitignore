@@ -71,3 +71,5 @@ node_modules
 /htdocs/scss-lint-report.xml
 htdocs/app/config/swiftmailer.yaml.tpl
 yarn.lock
+
+/htdocs/app/.preload.php

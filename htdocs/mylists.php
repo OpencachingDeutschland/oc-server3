@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
+
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
@@ -40,9 +42,9 @@ if (isset($_REQUEST['addCache'])){
 }
 
 if (isset($_REQUEST['descMode'])) {
-    $descMode = min(3, max(2, $_REQUEST['descMode'] + 0));
+    $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, $_REQUEST['descMode'] + 0));
 } else {
-    $descMode = $user->getNoHTMLEditor() ? 2 : 3;
+    $descMode = EditorConstants::EDITOR_MODE;
 }
 
 $edit_list = false;
@@ -71,7 +73,7 @@ if (isset($_REQUEST['create'])) {
         $list->setNode($opt['logic']['node']['id']);
         $list->setPassword($list_password);
         $purifier = new OcHTMLPurifier($opt);
-        $list->setDescription($purifier->purify($desctext), $descMode == 3);
+        $list->setDescription($purifier->purify($desctext), $descMode == EditorConstants::EDITOR_MODE);
         if ($list->save()) {
             if ($list_caches != '') {
                 $result = $list->addCachesByWPs($list_caches);
@@ -95,7 +97,7 @@ if (isset($_REQUEST['edit'])) {
         $list_password = $list->getPassword();
         $watch = $list->isWatchedByMe();
         $desctext = $list->getDescription();
-        $descMode = $list->getDescHtmledit() ? 3 : 2;
+        $descMode = $list->getDescHtmledit() ? EditorConstants::EDITOR_MODE : EditorConstants::HTML_MODE;
     }
 }
 
@@ -125,7 +127,7 @@ if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
         }
         $list->setPassword($list_password);
         $purifier = new OcHTMLPurifier($opt);
-        $list->setDescription($purifier->purify($desctext), $descMode == 3);
+        $list->setDescription($purifier->purify($desctext), $descMode == EditorConstants::EDITOR_MODE);
         $list->save();
 
         $list->watch($watch);
@@ -168,7 +170,7 @@ if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid']
 }
 
 // prepare editor and editing
-if ($descMode == 3) {
+if ($descMode == EditorConstants::EDITOR_MODE) {
     $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
     $tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang=' . strtolower($opt['template']['locale']));
 }

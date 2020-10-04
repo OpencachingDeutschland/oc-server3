@@ -31,7 +31,7 @@ var adminAction = {$adminAction} + 0;
 function insertSmiley(smileySymbol, smileyPath)
 {
   var myText = document.editform.logtext;
-  var insertText = (descMode == 1 ? smileySymbol : '<img src="' + smileyPath + '" alt="" border="0" width="18px" height="18px" />');
+  var insertText = '<img src="' + smileyPath + '" alt="" border="0" width="18px" height="18px" />';
   myText.focus();
 
   /* for IE and Webkit */
@@ -232,8 +232,8 @@ function show_tip(text)
     <input type="hidden" name="cacheid" value="{$cacheid}"/>
     <input type="hidden" name="fieldnoteid" id="fieldnoteid" value="{$fieldnoteid}" />
 {/if}
-<input id="descMode" type="hidden" name="descMode" value="1" />
-<input id="oldDescMode" type="hidden" name="oldDescMode" value="1" />
+<input id="descMode" type="hidden" name="descMode" value="3" />
+<input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />
 <input type="hidden" name="scrollposx" value="{$scrollposx}" />
 <input type="hidden" name="scrollposy" value="{$scrollposy}" />
 <input type="hidden" id="needs_maintenance2" name="needs_maintenance2" value="0" />
@@ -323,8 +323,6 @@ function show_tip(text)
                 <span id="descHtmlEdit" class="buttonNormal" onclick="btnSelect(3)" onmouseover="btnMouseOver(3)" onmouseout="btnMouseOut(3)">{t}Editor{/t}</span>
                 <span class="buttonSplitter">|</span>
                 <span id="descHtml" class="buttonNormal" onclick="btnSelect(2)" onmouseover="btnMouseOver(2)" onmouseout="btnMouseOut(2)">{t}&lt;html&gt;{/t}</span>
-                <span class="buttonSplitter">|</span>
-                <span id="descText" class="buttonNormal" onclick="btnSelect(1)" onmouseover="btnMouseOver(1)" onmouseout="btnMouseOut(1)">{t}Text{/t}</span>
             </div>
         </td>
     </tr>

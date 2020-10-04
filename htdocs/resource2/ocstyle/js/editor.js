@@ -82,29 +82,17 @@
 
     function mnuSetElementsNormal()
     {
-        var descText = document.getElementById("descText");
-        // descText is not present in user profile and cache list desc editors
-        if (descText) descText = descText.style;
-
         var descHtml = document.getElementById("descHtml").style;
         var descHtmlEdit = document.getElementById("descHtmlEdit").style;
 
         switch (descMode)
         {
-            case 1:
-                if (descText) mnuSelectElement(descText);
-                mnuNormalElement(descHtml);
-                mnuNormalElement(descHtmlEdit);
-                break;
-
             case 2:
-                if (descText) mnuNormalElement(descText);
                 mnuSelectElement(descHtml);
                 mnuNormalElement(descHtmlEdit);
                 break;
 
             case 3:
-                if (descText) mnuNormalElement(descText);
                 mnuNormalElement(descHtml);
                 mnuSelectElement(descHtmlEdit);
                 break;
@@ -147,9 +135,6 @@
     {
         switch (id)
         {
-            case 1:
-                mnuHoverElement(document.getElementById("descText").style);
-                break;
             case 2:
                 mnuHoverElement(document.getElementById("descHtml").style);
                 break;
@@ -163,9 +148,6 @@
     {
         switch (id)
         {
-            case 1:
-                mnuUnhoverElement(document.getElementById("descText").style);
-                break;
             case 2:
                 mnuUnhoverElement(document.getElementById("descHtml").style);
                 break;

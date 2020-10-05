@@ -1,4 +1,4 @@
-version: "3.1"
+version: "3.3"
 services:
     mailhog:
         image: mailhog/mailhog:latest
@@ -26,30 +26,25 @@ services:
             - opencaching
 
     webserver:
-        image: httpd:2.4.37-alpine
+        build: ./docker/httpd/
         container_name: opencaching-webserver
         restart: on-failure
-        working_dir: /application
+        working_dir: /app
         volumes:
-            - .:/application
-            - ./docker/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf
-            - ./docker/httpd/httpd-vhosts.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+            - .:/app
+            - ./docker/httpd/httpd-vhosts.conf:/opt/docker/etc/httpd/vhost.common.d/httpd-vhosts.conf
+        environment:
+            - WEB_DOCUMENT_ROOT=/app/htdocs
+            - XDEBUG_REMOTE_CONNECT_BACK=0
+            # the ip of your machine
+            # if using WSL2 on Windows it's the IP of your WSL Ethernet Adapter
+            - XDEBUG_REMOTE_HOST=172.23.64.1
         ports:
             - "80:80"
         networks:
             opencaching:
                 aliases:
                     - docker.team-opencaching.de
-
-    php-fpm:
-        build: docker/php-fpm
-        container_name: opencaching-php-fpm
-        working_dir: /application
-        volumes:
-            - .:/application
-            - ./docker/php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
-        networks:
-            - opencaching
 
 networks:
     opencaching:

@@ -31,7 +31,7 @@ const:
 
 dynamic:
   USERKEY: echo "$(id -u):$(id -g)"
-  PHP_FPM_ID: docker-compose ps -q php-fpm
+  PHP_FPM_ID: docker-compose ps -q webserver
 
 environments:
   docker:

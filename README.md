@@ -57,7 +57,7 @@ Starting the docker development environment
 
 1. Start a terminal and run `docker-compose up` in the project root
 2. Start a new terminal
-   - Run `docker-compose exec php-fpm bash -c './psh.phar docker:init'`
+   - Run `docker-compose exec webserver bash -c './psh.phar docker:init'`
 3. Open your browser and visit the following URL: [http://docker.team-opencaching.de](http://docker.team-opencaching.de)
 
 Contributions

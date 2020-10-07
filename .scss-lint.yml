@@ -1,25 +1,9 @@
 severity: warning
 
 linters:
-
-  BangFormat:
-    enabled: true
-    space_before_bang: true
-    space_after_bang: false
-
-  BemDepth:
-    enabled: true
-    max_elements: 1
-
   BorderZero:
     enabled: true
     convention: zero # or `none`
-
-  ChainedClasses:
-    enabled: false
-
-  ColorKeyword:
-    enabled: true
 
   ColorVariable:
     enabled: true

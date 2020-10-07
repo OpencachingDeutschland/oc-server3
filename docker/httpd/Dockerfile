@@ -5,7 +5,7 @@ RUN apt-get update -y \
     && apt-get install -y \
     default-mysql-client \
     nano \
-    curl \
+    curl
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs npm
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
 RUN npm install -g grunt-cli grunt

@@ -2,12 +2,12 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
     require('time-grunt')(grunt);
 
-    var sourcePath = 'theme/frontend';
+    var sourcePath = 'htdocs/theme/frontend';
 
     var vendorJsFiles = [
         '<%= dirs.composer %>/components/jquery/jquery.min.js'
     ];
-    var ownJsFiles = grunt.file.readJSON('theme/frontend/js/files.json').files;
+    var ownJsFiles = grunt.file.readJSON('htdocs/theme/frontend/js/files.json').files;
 
     ownJsFiles = ownJsFiles.map(function(file) {
         return sourcePath + '/js/' + file;
@@ -17,25 +17,25 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         dirs: {
-            composer: 'vendor',
+            composer: 'htdocs/vendor',
             source: sourcePath,
-            destination: 'web/assets'
+            destination: 'htdocs/web/assets'
         },
-
         clean: {
             all: '<%= dirs.destination %>',
             css: '<%= dirs.destination %>/css/',
             js: '<%= dirs.destination %>/js/',
-            images: '<%= dirs.destination %>/images/'
+            images: '<%= dirs.destination %>/images/',
+            fonts: '<%= dirs.destination %>/fonts/',
+            vendor: '<%= dirs.destination %>/vendor/'
         },
-        scsslint: {
-            development: [
+        stylelint: {
+            src: [
                 '<%= dirs.source %>/scss/**/*'
             ],
             options: {
-                config: '.scss-lint.yml',
-                reporterOutput: 'scss-lint-report.xml',
-                colorizeOutput: true
+                configFile: '.stylelintrc.json',
+                syntax: 'scss'
             }
         },
         copyto: {
@@ -45,6 +45,26 @@ module.exports = function (grunt) {
                         cwd: '<%= dirs.source %>/images/',
                         src: ['**/*'],
                         dest: '<%= dirs.destination %>/images/',
+                        expand: true
+                    }
+                ]
+            },
+            fonts: {
+                files: [
+                    {
+                        cwd: '<%= dirs.source %>/fonts/',
+                        src: ['**/*'],
+                        dest: '<%= dirs.destination %>/fonts/',
+                        expand: true
+                    }
+                ]
+            },
+            vendor: {
+                files: [
+                    {
+                        cwd: '<%= dirs.source %>/vendor/',
+                        src: ['**/*'],
+                        dest: '<%= dirs.destination %>/vendor/',
                         expand: true
                     }
                 ]
@@ -124,6 +144,22 @@ module.exports = function (grunt) {
                     'copyto:images'
                 ]
             },
+            fonts: {
+                files: [
+                    '<%= dirs.source %>/fonts/**/*'
+                ],
+                tasks: [
+                    'copyto:fonts'
+                ]
+            },
+            vendor: {
+                files: [
+                    '<%= dirs.source %>/vendor/**/*'
+                ],
+                tasks: [
+                    'copyto:vendor'
+                ]
+            },
             css: {
                 files: [
                     '<%= dirs.source %>/scss/**/*.scss'
@@ -149,7 +185,6 @@ module.exports = function (grunt) {
         }
     });
 
-
     grunt.registerTask('default', [
         'build'
     ]);
@@ -159,11 +194,12 @@ module.exports = function (grunt) {
         'clean:all',
         'uglify',
         'sass:development',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     grunt.registerTask('development:css', [
-        'scsslint:development',
+        'stylelint',
         'clean:css',
         'sass:development'
     ]);
@@ -176,7 +212,8 @@ module.exports = function (grunt) {
     grunt.registerTask('development', [
         'development:js',
         'development:css',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     //Builds css&js once for production
@@ -185,7 +222,8 @@ module.exports = function (grunt) {
         'uglify:production',
         'sass:production',
         'cssmin',
-        'copyto:images'
+        'copyto:images',
+        'copyto:fonts'
     ]);
 
     grunt.task.renameTask('chokidar', 'watch');

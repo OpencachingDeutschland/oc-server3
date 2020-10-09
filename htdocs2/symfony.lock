@@ -84,8 +84,26 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
+    "migrify/config-transformer": {
+        "version": "0.3.48"
+    },
+    "migrify/migrify-kernel": {
+        "version": "0.3.48"
+    },
+    "migrify/php-config-printer": {
+        "version": "0.3.48"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
+    },
+    "nette/finder": {
+        "version": "v2.5.2"
+    },
+    "nette/neon": {
+        "version": "v3.2.1"
+    },
+    "nette/utils": {
+        "version": "v3.1.3"
     },
     "nikic/php-parser": {
         "version": "v4.10.2"
@@ -517,6 +535,18 @@
     },
     "symfony/yaml": {
         "version": "v5.1.7"
+    },
+    "symplify/autowire-array-parameter": {
+        "version": "8.3.32"
+    },
+    "symplify/package-builder": {
+        "version": "8.3.32"
+    },
+    "symplify/smart-file-system": {
+        "version": "8.3.32"
+    },
+    "symplify/symplify-kernel": {
+        "version": "8.3.32"
     },
     "twig/extra-bundle": {
         "version": "v3.0.5"

@@ -2,13 +2,24 @@
 
 declare(strict_types=1);
 
+use Oc\Security\LoginFormAuthenticator;
+use Oc\Security\UserProvider;
+use Oc\User\UserEntity;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('security', [
+        'enable_authenticator_manager' => true,
         'providers' => [
-            'users_in_memory' => [
-                'memory' => null
+            'users' => [
+                'id' => UserProvider::class,
+            ],
+        ],
+        'encoders' => [
+            UserEntity::class => [
+                'algorithm' => 'md5',
+                'encode_as_base64' => false,
+                'iterations' => 0,
             ]
         ],
         'firewalls' => [
@@ -17,9 +28,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'security' => false
             ],
             'main' => [
-                'anonymous' => true,
                 'lazy' => true,
-                'provider' => 'users_in_memory'
+                'provider' => 'users',
+                'logout' => [
+                    'path' => 'app_logout',
+                    // where to redirect after logout
+                    'target' => 'oc_index_index'
+                ],
+                'guard' => [
+                    'authenticators' => [
+                        LoginFormAuthenticator::class,
+                    ]
+                ],
             ]
         ],
         'access_control' => null,

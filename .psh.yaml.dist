@@ -52,6 +52,8 @@ environments:
         destination: "htdocs/app/config/parameters.yml"
       - source: "htdocs/statpics/htaccess-dist"
         destination: "htdocs/statpics/.htaccess"
+      - source: "dev-ops/docker/templates/.env.local"
+        destination: "htdocs2/.env.local"
   travis-ci:
     paths:
       - "dev-ops/travis-ci/actions"

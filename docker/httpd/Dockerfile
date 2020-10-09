@@ -7,5 +7,9 @@ RUN apt-get update -y \
     nano \
     curl
 
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
-RUN npm install -g grunt-cli grunt
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
+
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+
+COPY vhost.conf /opt/docker/etc/httpd/vhost.conf

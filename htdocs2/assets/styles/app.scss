@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #d3d3d3;
+
+}
+
+.example {
+  background: linear-gradient(to bottom, #fff, #000);
+  display: grid;
+  transition: all 0.5s;
+  user-select: none;
+}

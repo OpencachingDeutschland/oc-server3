@@ -8,6 +8,8 @@
  *
  ***************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
+
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
@@ -53,28 +55,25 @@ if ($error == false) {
                 // read descMode; if not set, initialize from user profile
                 if (isset($_POST['descMode'])) {  // Ocprop
                     $descMode = $_POST['descMode'] + 0;
-                    if (($descMode < 1) || ($descMode > 3)) {
-                        $descMode = 3;
+                    if (($descMode < EditorConstants::HTML_MODE) || ($descMode > EditorConstants::EDITOR_MODE)) {
+                        $descMode = EditorConstants::EDITOR_MODE;
                     }
                     if (isset($_POST['oldDescMode'])) {
                         $oldDescMode = $_POST['oldDescMode'];
-                        if (($oldDescMode < 1) || ($oldDescMode > 3)) {
+                        if (($oldDescMode < EditorConstants::HTML_MODE) || ($oldDescMode > EditorConstants::EDITOR_MODE)) {
                             $oldDescMode = $descMode;
                         }
                     } else {
                         $oldDescMode = $descMode;
                     }
                 } else {
-                    $descMode = 3;
-                    if (sqlValue("SELECT `no_htmledit_flag` FROM `user` WHERE `user_id`='" . sql_escape($usr['userid']) . "'", 1) == 1) {
-                        $descMode = 1;
-                    }
+                    $descMode = EditorConstants::EDITOR_MODE;
                     $oldDescMode = $descMode;
                 }
 
                 // fuer alte Versionen von OCProp
                 if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                    $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;
+                    $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? EditorConstants::HTML_MODE : EditorConstants::EDITOR_MODE;
                     $_POST['submitform'] = $_POST['submit'];
 
                     $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
@@ -130,8 +129,8 @@ if ($error == false) {
                             $cache_id,
                             $sel_lang,
                             $desc,
-                            ($descMode != 1) ? '1' : '0',
-                            ($descMode == 3) ? '1' : '0',
+                            1,
+                            ($descMode == EditorConstants::EDITOR_MODE) ? '1' : '0',
                             nl2br(htmlspecialchars($hints, ENT_COMPAT, 'UTF-8')),
                             $short_desc,
                             $oc_nodeid
@@ -220,12 +219,12 @@ if ($error == false) {
                 tpl_set_var('hints', htmlspecialchars($hints, ENT_COMPAT, 'UTF-8'));
 
                 // Text / normal HTML / HTML editor
-                tpl_set_var('use_tinymce', ($descMode == 3) ? 1 : 0);
+                tpl_set_var('use_tinymce', ($descMode == EditorConstants::EDITOR_MODE) ? 1 : 0);
                 tpl_set_var('descMode', $descMode);
-                tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
+                tpl_set_var('htmlnotice', $descMode == EditorConstants::HTML_MODE ? $htmlnotice : '');
 
                 $headers = tpl_get_var('htmlheaders') . "\n";
-                if ($descMode == 3) {
+                if ($descMode == EditorConstants::EDITOR_MODE) {
                     // TinyMCE
                     $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/tiny_mce_gzip.js"></script>' . "\n";
                     $headers .= '<script language="javascript" type="text/javascript" src="resource2/tinymce/config/desc.js.php?cacheid=' . ($cache_id + 0) . '&lang=' . strtolower($locale) . '"></script>' . "\n";

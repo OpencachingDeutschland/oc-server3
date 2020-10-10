@@ -11,6 +11,7 @@ use Oc\GeoCache\Entity\GeocacheLog;
 use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\GeoCache\Enum\LogType as GeoCacheLogType;
 use Oc\GeoCache\Enum\NeedMaintenance;
+use OcLegacy\Editor\EditorConstants;
 
 // include libraries
 require __DIR__ . '/lib2/web.inc.php';
@@ -123,7 +124,7 @@ if ($cacheId != 0) {
     $suppressMasslogWarning = isset($_REQUEST['suppressMasslogWarning']) ? $_REQUEST['suppressMasslogWarning'] : ($masslogCookieSet ? $masslogCookieContent : 0);
 
     if (isset($_GET['fieldnoteid']) && !isset($_POST['submitform']) && $fieldNote !== null) {
-        $_POST['descMode'] = 3;
+        $_POST['descMode'] = EditorConstants::EDITOR_MODE;
         $fieldNoteDate = $fieldNote->date;
         $logDateDay = $fieldNoteDate->format('d');
         $logDateMonth = $fieldNoteDate->format('m');
@@ -170,28 +171,24 @@ if ($cacheId != 0) {
     // 1 = text; 2 = HTML; 3 = tinyMCE
     if (isset($_POST['descMode'])) {
         $descMode = (int) $_POST['descMode'];  // Ocprop: 2
-        if (($descMode < 1) || ($descMode > 3)) {
-            $descMode = 3;
+        if (($descMode < EditorConstants::HTML_MODE) || ($descMode > EditorConstants::EDITOR_MODE)) {
+            $descMode = EditorConstants::EDITOR_MODE;
         }
         if (isset($_POST['oldDescMode'])) {
             $oldDescMode = $_POST['oldDescMode'];
-            if (($oldDescMode < 1) || ($oldDescMode > 3)) {
+            if (($oldDescMode < EditorConstants::HTML_MODE) || ($oldDescMode > EditorConstants::EDITOR_MODE)) {
                 $oldDescMode = $descMode;
             }
         } else {
             $oldDescMode = $descMode;
         }
     } else {
-        if ($user->getNoHTMLEditor() == 1) {
-            $descMode = 1;
-        } else {
-            $descMode = 3;
-        }
+        $descMode = EditorConstants::EDITOR_MODE;
         $oldDescMode = $descMode;
     }
 
     // add javascript-header if editor
-    if ($descMode == 3) {
+    if ($descMode == EditorConstants::EDITOR_MODE) {
         $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
         $tpl->add_header_javascript(
             'resource2/tinymce/config/log.js.php?lang=' . strtolower($opt['template']['locale'])
@@ -279,8 +276,8 @@ if ($cacheId != 0) {
             $cacheLog->setText($logText);
             $cacheLog->setNeedsMaintenance($needsMaintenance);
             $cacheLog->setListingOutdated($listingOutdated);
-            $cacheLog->setTextHtml(($descMode != 1) ? 1 : 0);
-            $cacheLog->setTextHtmlEdit(($descMode == 3) ? 1 : 0);
+            $cacheLog->setTextHtml(1);
+            $cacheLog->setTextHtmlEdit(($descMode == EditorConstants::EDITOR_MODE) ? 1 : 0);
             $cacheLog->setOcTeamComment($ocTeamComment);
 
             // save log values

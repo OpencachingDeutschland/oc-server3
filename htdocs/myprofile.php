@@ -124,10 +124,6 @@ function change()
     $tpl->assign('permanentLogin', $bPermanentLogin);
     $user->setPermanentLogin($bPermanentLogin);
 
-    $bNoHTMLEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
-    $tpl->assign('noHTMLEditor', $bNoHTMLEditor);
-    $user->setNoHTMLEditor($bNoHTMLEditor);
-
     $bUsermailSendAddress = isset($_REQUEST['save']) ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
     $tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
     $user->setUsermailSendAddress($bUsermailSendAddress);
@@ -211,6 +207,5 @@ function assignFromUser($user)
 
     $tpl->assign('usePMR', $user->getUsePMR());
     $tpl->assign('permanentLogin', $user->getPermanentLogin());
-    $tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
     $tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
 }

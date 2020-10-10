@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
+
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
@@ -97,7 +99,7 @@ function changetext()
     if (isset($_REQUEST['save'])) {
         $purifier = new OcHTMLPurifier($opt);
         $desctext = isset($_REQUEST['desctext']) ? $purifier->purify($_REQUEST['desctext']) : "";
-        $desc_htmledit = isset($_REQUEST['descMode']) && $_REQUEST['descMode'] == '2' ? '0' : '1';
+        $desc_htmledit = isset($_REQUEST['descMode']) && ((int) $_REQUEST['descMode']) == EditorConstants::HTML_MODE ? '0' : '1';
         sql(
             "
             UPDATE `user`
@@ -179,14 +181,14 @@ function assignFromDB($userid, $include_editor)
     // Use the same descMode values here like in log and cacheDesc editor:
     if ($include_editor) {
         if (isset($_REQUEST['descMode'])) {
-            $descMode = min(3, max(2, $_REQUEST['descMode'] + 0));
+            $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, $_REQUEST['descMode'] + 0));
         } else {
-            $descMode = 2;
+            $descMode = EditorConstants::HTML_MODE;
             if (sql_value("SELECT `desc_htmledit` FROM `user` WHERE `user_id`='&1'", 0, $userid + 0)) {
-                $descMode = 3;
+                $descMode = EditorConstants::EDITOR_MODE;
             }
         }
-        if ($descMode == 3) {
+        if ($descMode == EditorConstants::EDITOR_MODE) {
             $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
             $tpl->add_header_javascript(
                 'resource2/tinymce/config/user.js.php?lang=' . strtolower($opt['template']['locale'])

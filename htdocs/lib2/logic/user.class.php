@@ -381,16 +381,6 @@ class user
         return $this->reUser->setValue('usermail_send_addr', $value);
     }
 
-    public function getNoHTMLEditor()
-    {
-        return $this->reUser->getValue('no_htmledit_flag');
-    }
-
-    public function setNoHTMLEditor($value)
-    {
-        return $this->reUser->setValue('no_htmledit_flag', $value);
-    }
-
     public function getUsePMR()
     {
         return $this->reUser->getValue('pmr_flag');

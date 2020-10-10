@@ -12,6 +12,7 @@
  *
  *****************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
 use OcLegacy\GeoCache\Recommendation;
 use Oc\GeoCache\StatisticPicture;
 
@@ -142,13 +143,13 @@ $use_log_pw = $log_record['logpw'] != '' && $log_record['logtype'] != 1;
 
 // editor mode switching
 if (isset($_POST['descMode'])) {
-    $descMode = $_POST['descMode'] + 0; // Ocprop: 2
-    if (($descMode < 1) || ($descMode > 3)) {
-        $descMode = 3;
+    $descMode = (int) $_POST['descMode']; // Ocprop: 2
+    if (($descMode < EditorConstants::HTML_MODE) || ($descMode > EditorConstants::EDITOR_MODE)) {
+        $descMode = EditorConstants::EDITOR_MODE;
     }
     if (isset($_POST['oldDescMode'])) {
         $oldDescMode = $_POST['oldDescMode'];
-        if (($oldDescMode < 1) || ($oldDescMode > 3)) {
+        if (($oldDescMode < EditorConstants::HTML_MODE) || ($oldDescMode > EditorConstants::EDITOR_MODE)) {
             $oldDescMode = $descMode;
         }
     } else {
@@ -157,12 +158,12 @@ if (isset($_POST['descMode'])) {
 } else {
     if ($log_record['text_html'] == 1) {
         if ($log_record['text_htmledit'] == 1) {
-            $descMode = 3;
+            $descMode = EditorConstants::EDITOR_MODE;
         } else {
-            $descMode = 2;
+            $descMode = EditorConstants::HTML_MODE;
         }
     } else {
-        $descMode = 1;
+        $descMode = EditorConstants::EDITOR_MODE;
     }
 
     $oldDescMode = $descMode;
@@ -173,9 +174,6 @@ if (isset($_POST['logtext'])) {
     $log_text = trim($_POST['logtext']);
 } else {
     $log_text = $log_record['text'];
-    if ($descMode == 1) {
-        $oldDescMode = 0;
-    }   // plain text with encoded HTML entities
 }
 
 $log_text = processEditorInput($oldDescMode, $descMode, $log_text, $represent_text);
@@ -263,8 +261,8 @@ if ($loggable && isset($_POST['submitform'])) { // Ocprop
         $needsMaintenance,
         $listingOutdated,
         $log_text,
-        (($descMode != 1) ? 1 : 0),
-        (($descMode == 3) ? 1 : 0),
+        1,
+        (($descMode == EditorConstants::EDITOR_MODE) ? 1 : 0),
         $log_id
     );
 
@@ -392,21 +390,17 @@ $dnf_by_logger = sql_value(
 $tpl->assign('dnf_by_logger', $dnf_by_logger);
 
 // Text / normal HTML / HTML editor
-$tpl->assign('use_tinymce', (($descMode == 3) ? 1 : 0));
+$tpl->assign('use_tinymce', (($descMode == EditorConstants::EDITOR_MODE) ? 1 : 0));
 
-if ($descMode == 1) {
-    $tpl->assign('descMode', 1);
+if ($descMode == EditorConstants::HTML_MODE) {
+    $tpl->assign('descMode', EditorConstants::HTML_MODE);
 } else {
-    if ($descMode == 2) {
-        $tpl->assign('descMode', 2);
-    } else {
-        // TinyMCE
-        $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
-        $tpl->add_header_javascript(
-            'resource2/tinymce/config/log.js.php?lang=' . strtolower($opt['template']['locale'])
-        );
-        $tpl->assign('descMode', 3);
-    }
+    // TinyMCE
+    $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
+    $tpl->add_header_javascript(
+        'resource2/tinymce/config/log.js.php?lang=' . strtolower($opt['template']['locale'])
+    );
+    $tpl->assign('descMode', EditorConstants::EDITOR_MODE);
 }
 $tpl->add_header_javascript(editorJsPath());
 

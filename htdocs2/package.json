@@ -21,7 +21,6 @@
     "dependencies": {
         "autoprefixer": "^9.8.6",
         "bootstrap": "^4.5.2",
-        "bootstrap-material-design-icons": "^2.2.0",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
         "postcss-loader": "^3.0.0"

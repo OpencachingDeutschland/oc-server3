@@ -32,7 +32,6 @@ services:
         working_dir: /app
         volumes:
             - .:/app
-            - ./docker/httpd/httpd-vhosts.conf:/opt/docker/etc/httpd/vhost.common.d/httpd-vhosts.conf
         environment:
             - WEB_DOCUMENT_ROOT=/app/htdocs
             - XDEBUG_REMOTE_CONNECT_BACK=0

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Oc\Security\LoginFormAuthenticator;
 use Oc\Security\UserProvider;
-use Oc\User\UserEntity;
+use Oc\Entity\UserEntity;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {

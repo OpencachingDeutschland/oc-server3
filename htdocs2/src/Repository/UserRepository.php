@@ -1,8 +1,9 @@
 <?php
 
-namespace Oc\User;
+namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;

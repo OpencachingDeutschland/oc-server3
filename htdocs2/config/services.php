@@ -9,7 +9,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->defaults()
         ->autowire()
-        ->autoconfigure();
+        ->autoconfigure()
+        ->private();
 
     $services->load('Oc\\', __DIR__ . '/../src/')
         ->exclude([

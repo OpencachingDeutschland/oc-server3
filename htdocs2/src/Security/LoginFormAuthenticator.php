@@ -3,9 +3,7 @@
 
 namespace Oc\Security;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Oc\User\UserEntity;
-use Oc\User\UserRepository;
+use Oc\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

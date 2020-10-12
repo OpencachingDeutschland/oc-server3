@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Oc\Security;
 
+use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordNotFoundException;
-use Oc\User\UserEntity;
-use Oc\User\UserRepository;
+use Oc\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;

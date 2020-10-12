@@ -2,8 +2,10 @@
 
 namespace Oc\User;
 
+use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
+use Oc\Repository\UserRepository;
 
 class UserService
 {

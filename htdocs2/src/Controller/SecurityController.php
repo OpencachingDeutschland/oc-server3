@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oc\Security;
+namespace Oc\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

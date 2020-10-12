@@ -1,6 +1,6 @@
 <?php
 
-namespace Oc\User;
+namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\UserInterface;

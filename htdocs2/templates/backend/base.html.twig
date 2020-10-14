@@ -4,19 +4,16 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('backend') }}
         {% endblock %}
     </head>
     <body>
         {% block body %}
-
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('backend_index_index') }}">BACKEND</a>
-            {% endif %}
-
+            <h2>BACKEND</h2>
+            <a href="{{ path('app_index_index') }}">APP</a>
         {% endblock %}
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('backend') }}
         {% endblock %}
     </body>
 </html>

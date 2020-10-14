@@ -11,7 +11,9 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
 
-    .addEntry('app', './assets/app.js')
+    .addEntry('shared', './assets/shared.js')
+    .addEntry('app', './assets/app/app.js')
+    .addEntry('backend', './assets/backend/app.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -31,7 +33,16 @@ Encore
 
     // https://symfony.com/doc/current/frontend/encore/copy-files.html#referencing-image-files-from-a-template
     .copyFiles({
-        from: './assets/images',
+        from: './assets/app/images',
+
+        // optional target path, relative to the output dir
+        to: 'images/[path][name].[ext]',
+
+        // only copy files matching this pattern
+        pattern: /\.(png|jpg|jpeg)$/
+    })
+    .copyFiles({
+        from: './assets/backend/images',
 
         // optional target path, relative to the output dir
         to: 'images/[path][name].[ext]',

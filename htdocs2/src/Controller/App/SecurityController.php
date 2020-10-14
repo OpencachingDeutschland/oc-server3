@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Oc\Controller;
+namespace Oc\Controller\App;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/login", name="security_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="security_logout")
      */
     public function logout()
     {

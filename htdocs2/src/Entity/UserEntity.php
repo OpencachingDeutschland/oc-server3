@@ -73,7 +73,8 @@ class UserEntity extends AbstractEntity implements UserInterface
     public function getRoles(): array
     {
         return [
-            'ROLE_USER'
+            'ROLE_USER',
+            'ROLE_ADMIN',
         ];
     }
 

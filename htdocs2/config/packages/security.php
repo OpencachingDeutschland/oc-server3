@@ -31,9 +31,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'lazy' => true,
                 'provider' => 'users',
                 'logout' => [
-                    'path' => 'app_logout',
+                    'path' => 'app_security_logout',
                     // where to redirect after logout
-                    'target' => 'oc_index_index'
+                    'target' => 'app_index_index'
                 ],
                 'guard' => [
                     'authenticators' => [
@@ -42,6 +42,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 ],
             ]
         ],
-        'access_control' => null,
+        'access_control' => [
+            ['path' => '^/backend', 'roles' => 'ROLE_ADMIN']
+        ],
     ]);
 };

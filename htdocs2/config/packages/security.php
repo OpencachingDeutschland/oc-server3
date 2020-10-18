@@ -43,7 +43,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ]
         ],
         'access_control' => [
-            ['path' => '^/backend', 'roles' => 'ROLE_ADMIN']
+            [
+                'path' => '^/backend',
+                'roles' => [
+                    'ROLE_TEAM',
+                    'ROLE_SUPER_ADMIN',
+                ]
+            ]
         ],
     ]);
 };

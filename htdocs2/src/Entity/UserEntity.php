@@ -63,6 +63,11 @@ class UserEntity extends AbstractEntity implements UserInterface
     public $language;
 
     /**
+     * @var array
+     */
+    public $roles;
+
+    /**
      * Checks if the entity is new.
      */
     public function isNew(): bool
@@ -72,10 +77,7 @@ class UserEntity extends AbstractEntity implements UserInterface
 
     public function getRoles(): array
     {
-        return [
-            'ROLE_USER',
-            'ROLE_ADMIN',
-        ];
+        return $this->roles;
     }
 
     public function getPassword(): ?string

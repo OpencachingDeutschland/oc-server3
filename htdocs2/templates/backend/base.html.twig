@@ -11,6 +11,11 @@
         {% block body %}
             <h2>BACKEND</h2>
             <a href="{{ path('app_index_index') }}">APP</a>
+            <ul>
+                {% for role in app.user.roles %}
+                    <li>{{ role }}</li>
+                {% endfor %}
+            </ul>
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('backend') }}

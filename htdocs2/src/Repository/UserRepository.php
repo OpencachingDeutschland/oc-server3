@@ -22,10 +22,15 @@ class UserRepository
      * @var Connection
      */
     private $connection;
+    /**
+     * @var SecurityRolesRepository
+     */
+    private $securityRolesRepository;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, SecurityRolesRepository  $securityRolesRepository)
     {
         $this->connection = $connection;
+        $this->securityRolesRepository = $securityRolesRepository;
     }
 
     /**
@@ -99,7 +104,11 @@ class UserRepository
             ));
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        $user = $this->getEntityFromDatabaseArray($result);
+
+        $user->roles = $this->securityRolesRepository->fetchUserRoles($user);
+
+        return $user;
     }
 
     /**

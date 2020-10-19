@@ -15,6 +15,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'id' => UserProvider::class,
             ],
         ],
+        // Hack for our database role hierarchy
+        'role_hierarchy' => ['ROLE_USER' => 'ROLE_USER'],
         'encoders' => [
             UserEntity::class => [
                 'algorithm' => 'md5',
@@ -47,7 +49,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'path' => '^/backend',
                 'roles' => [
                     'ROLE_TEAM',
-                    'ROLE_SUPER_ADMIN',
                 ]
             ]
         ],

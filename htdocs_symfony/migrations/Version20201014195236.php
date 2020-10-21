@@ -89,10 +89,6 @@ final class Version20201014195236 extends AbstractMigration
                 role_id int(11) not null,
                 constraint user_roles_pk
                     primary key (id),
-                constraint user_roles_pk_2
-                    unique (user_id),
-                constraint user_roles_pk_3
-                    unique (role_id),
                 constraint user_roles_security_roles_id_fk
                     foreign key (role_id) references security_roles (id),
                 constraint user_roles_user_user_id_fk

@@ -84,6 +84,18 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
+    "kevinpapst/adminlte-bundle": {
+        "version": "0.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.9",
+            "ref": "dca6a91efc23d844326d2e90b47bdf48a5038fcf"
+        },
+        "files": [
+            "config/packages/admin_lte.yaml"
+        ]
+    },
     "migrify/config-transformer": {
         "version": "0.3.48"
     },

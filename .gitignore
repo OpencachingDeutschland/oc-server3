@@ -71,3 +71,5 @@ htdocs/translation.zip
 htdocs/app/config/swiftmailer.yaml.tpl
 
 /htdocs/app/.preload.php
+
+/docker-compose.override.yml

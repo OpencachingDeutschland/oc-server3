@@ -53,7 +53,7 @@ environments:
       - source: "htdocs/statpics/htaccess-dist"
         destination: "htdocs/statpics/.htaccess"
       - source: "dev-ops/docker/templates/.env.local"
-        destination: "htdocs2/.env.local"
+        destination: "htdocs_symfony/.env.local"
   travis-ci:
     paths:
       - "dev-ops/travis-ci/actions"

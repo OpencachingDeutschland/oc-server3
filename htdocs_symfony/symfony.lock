@@ -96,6 +96,12 @@
             "config/packages/admin_lte.yaml"
         ]
     },
+    "knplabs/knp-menu": {
+        "version": "v3.1.2"
+    },
+    "knplabs/knp-menu-bundle": {
+        "version": "v3.0.0"
+    },
     "migrify/config-transformer": {
         "version": "0.3.48"
     },

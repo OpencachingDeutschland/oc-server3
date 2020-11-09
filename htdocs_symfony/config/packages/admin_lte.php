@@ -10,12 +10,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'skin' => 'skin-yellow',
             'fixed_layout' => true,
             'boxed_layout' => true,
-            'collapsed_sidebar' => true,
+            'collapsed_sidebar' => false,
             'mini_sidebar' => true,
         ],
         'knp_menu' => [
-            'enable' => false,
-            'breadcrumb_menu' => false,
+            'enable' => true,
+//            'main_menu' => 'backend_main',
+            'breadcrumb_menu' => true,
         ],
         'routes' => [
             'adminlte_welcome' => 'backend_index_index',

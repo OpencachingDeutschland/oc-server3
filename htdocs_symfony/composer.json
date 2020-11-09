@@ -13,6 +13,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "kevinpapst/adminlte-bundle": "^3.0",
+        "knplabs/knp-menu-bundle": "^3.0",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.1.*",

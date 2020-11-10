@@ -67,9 +67,9 @@ htdocs/translation.zip
 .psh.yaml
 .php_cs.cache
 /phpunit
-node_modules
-/htdocs/scss-lint-report.xml
+/node_modules
 htdocs/app/config/swiftmailer.yaml.tpl
-yarn.lock
 
 /htdocs/app/.preload.php
+
+/docker-compose.override.yml

@@ -1,6 +1,7 @@
 filter:
     paths:
         - 'htdocs/*'
+        - 'htdocs_symfony/*'
         - 'local/*'
     excluded_paths:
         - 'bin/*'
@@ -12,6 +13,7 @@ filter:
         - 'htdocs/templates2/*'
     dependency_paths:
         - 'htdocs/vendor/*'
+        - 'htdocs_symfony/vendor/*'
 
 checks:
     php: true

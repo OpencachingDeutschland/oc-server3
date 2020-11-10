@@ -7,6 +7,7 @@ $finder = PhpCsFixer\Finder::create()
         return !in_array($file->getFilename(), $blacklistedFiles, true);
     })
     ->in(__DIR__ . '/htdocs/app')
+    ->in(__DIR__ . '/htdocs_symfony/src')
     ->in(__DIR__ . '/htdocs/src')
     ->in(__DIR__ . '/tests')
     ->in(__DIR__ . '/dev-ops/local.team-opencaching.de/templates')

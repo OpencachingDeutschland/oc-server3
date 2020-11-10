@@ -17,3 +17,5 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 COPY vhost.conf /opt/docker/etc/httpd/vhost.conf
+
+RUN composer self-update --1

@@ -19,7 +19,7 @@ class getNew
     /**
      * @param $userCountry
      */
-    public function set_userCountry($userCountry)
+    public function set_userCountry($userCountry): void
     {
         $this->userCountry = $userCountry;
     }
@@ -66,7 +66,7 @@ class getNew
      * @param int $items number of feeditems to parse from feed (RSSParser)
      * @param string $url url of the feed to parse (RSSParser)
      * @param int $timeout maximum seconds to wait for the requested page
-     * @param null $includeText
+     * @param null|mixed $includeText
      * @return string HTML string used for smarty assign method
      * @internal param bool $includetext ???following??? add table-tag?
      */

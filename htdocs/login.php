@@ -3,19 +3,16 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\DBAL\Connection;
+
 $disable_verifyemail = true;
 require __DIR__ . '/lib2/web.inc.php';
 
+/** @var Connection $connection */
+$connection = AppKernel::Container()->get(Connection::class);
+
 $tpl->name = 'login';
 $tpl->menuitem = MNU_LOGIN;
-
-if (isset($_REQUEST['source']) && $opt['session']['login_statistics']) {
-    sql(
-        "INSERT INTO `sys_login_stat` (`day`,`type`,`count`) VALUES (NOW(),'&1',1)
-         ON DUPLICATE KEY UPDATE `count`=`count`+1",
-        $_REQUEST['source']
-    );
-}
 
 $login->verify();
 
@@ -37,18 +34,10 @@ $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : ''; // Ocprop
 
 if ($action == 'cookieverify') {
     // we should be logged in ... check if cookie is set ...
-    if ($opt['session']['mode'] == SAVE_SESSION) {
-        if (!isset($_REQUEST['SESSION'])) {
-            $tpl->error(ERROR_NO_COOKIES);
-        } else {
-            $tpl->redirect($target);
-        }
+    if (!isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
+        $tpl->error(ERROR_NO_COOKIES);
     } else {
-        if (!isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
-            $tpl->error(ERROR_NO_COOKIES);
-        } else {
-            $tpl->redirect($target);
-        }
+        $tpl->redirect($target);
     }
 } elseif ($action == 'logout') {
     $login->logout();

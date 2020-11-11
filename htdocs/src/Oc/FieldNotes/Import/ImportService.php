@@ -42,12 +42,6 @@ class ImportService
      */
     private $importer;
 
-    /**
-     * @param Importer $importer
-     * @param FileParser $fileParser
-     * @param Validator $validator
-     * @param TranslatorInterface $translator
-     */
     public function __construct(
         Importer $importer,
         FileParser $fileParser,
@@ -62,28 +56,21 @@ class ImportService
 
     /**
      * Handles submitted form data.
-     *
-     * @param UploadFormData $formData
-     *
-     * @return HandleFormContext
      */
-    public function handleFormData(UploadFormData $formData)
+    public function handleFormData(UploadFormData $formData): HandleFormContext
     {
-        $success = false;
+        $success = true;
         $errors = [];
 
         try {
             $fieldNotes = $this->fileParser->parseFile($formData->file);
-
-            $this->validator->validate($fieldNotes);
-
-            $context = new ImportContext($fieldNotes, $formData);
-
-            $this->importer->import($context);
-
-            $success = true;
         } catch (FileFormatException $e) {
             $errors[] = $this->translator->trans('field_notes.error.wrong_file_format');
+            $success = false;
+        }
+
+        try {
+            $this->validator->validate($fieldNotes);
         } catch (ValidationException $e) {
             /**
              * @var ConstraintViolationInterface
@@ -91,14 +78,24 @@ class ImportService
             foreach ($e->getViolations() as $violation) {
                 $linePrefix = $this->getTranslatedLinePrefix($violation);
 
+                unset($fieldNotes[$this->getLineNumber($violation)]);
+
                 $errors[] = sprintf(
                     '%s %s',
                     $linePrefix,
                     $violation->getMessage()
                 );
             }
+            $success = false;
         } catch (Exception $e) {
             $errors[] = $this->translator->trans('general.error.unknown_error');
+            $success = false;
+        }
+
+        if (is_array($fieldNotes)) {
+            $context = new ImportContext($fieldNotes, $formData);
+
+            $this->importer->import($context);
         }
 
         return new HandleFormContext($success, $errors);
@@ -106,24 +103,28 @@ class ImportService
 
     /**
      * Fetches the line of the constraint violation and returns the line prefix with line number.
-     *
-     * @param ConstraintViolationInterface $violation
-     *
-     * @return string
      */
-    private function getTranslatedLinePrefix(ConstraintViolationInterface $violation)
+    private function getTranslatedLinePrefix(ConstraintViolationInterface $violation): string
+    {
+        $line = $this->getLineNumber($violation) + 1;
+
+        $linePrefix = $this->translator->trans(
+            'field_notes.error.line_prefix',
+            [
+                '%line%' => $line,
+            ]
+        );
+
+        return $linePrefix;
+    }
+
+    private function getLineNumber(ConstraintViolationInterface $violation): int
     {
         /**
          * @var Node
          */
         $expressionAst = (new ExpressionLanguage())->parse($violation->getPropertyPath(), [])->getNodes();
 
-        $line = ((int) $expressionAst->nodes['node']->nodes[1]->attributes['value']) + 1;
-
-        $linePrefix = $this->translator->trans('field_notes.error.line_prefix', [
-            '%line%' => $line,
-        ]);
-
-        return $linePrefix;
+        return (int) $expressionAst->nodes['node']->nodes[1]->attributes['value'];
     }
 }

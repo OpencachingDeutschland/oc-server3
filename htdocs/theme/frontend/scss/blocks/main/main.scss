@@ -1,7 +1,8 @@
-@import 'global';
+@import '../../global';
 
 .main {
     &__content {
         margin: 15px;
+        max-width: 75%;
     }
 }

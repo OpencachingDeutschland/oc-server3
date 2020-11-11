@@ -13,7 +13,7 @@ class UserDelete
     public $name = 'user_delete';
     public $interval = 86400;
 
-    public function run()
+    public function run(): void
     {
         sql('SET @allowdelete=1');
         sql(

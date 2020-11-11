@@ -34,7 +34,7 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
      * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
     {
         $tokens = $phpcsFile->getTokens();
 
@@ -151,7 +151,7 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
      * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
     {
         /*
             We don't care about normal variables.
@@ -166,7 +166,7 @@ class OcCodeStyle_Sniffs_WhiteSpace_MemberVarSpacingSniff extends PHP_CodeSniffe
      * @param PHP_CodeSniffer_File $phpcsFile The file where this token was found.
      * @param int                  $stackPtr  The position where the token was found.
      */
-    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr): void
     {
         /*
             We don't care about normal variables.

@@ -381,16 +381,6 @@ class user
         return $this->reUser->setValue('usermail_send_addr', $value);
     }
 
-    public function getNoHTMLEditor()
-    {
-        return $this->reUser->getValue('no_htmledit_flag');
-    }
-
-    public function setNoHTMLEditor($value)
-    {
-        return $this->reUser->setValue('no_htmledit_flag', $value);
-    }
-
     public function getUsePMR()
     {
         return $this->reUser->getValue('pmr_flag');
@@ -550,7 +540,18 @@ class user
     public function getStatFound()
     {
         if ($this->reUserStat->exist()) {
-            return $this->reUserStat->getValue('found');
+            return sql_value(
+                'SELECT COUNT(*)
+                 FROM (SELECT cache_id
+                       FROM cache_logs
+                       WHERE user_id = "&1"
+                       AND type = 1
+                       GROUP BY cache_id
+                ) as tmp
+                ',
+                0,
+                $this->getUserId()
+            );
         }
 
         return 0;
@@ -1081,7 +1082,7 @@ class user
                 "AND `caches`.`user_id`='&1'",
                 $this->getUserId()
             );
-            while ($cache_desc = sql_fetch_array($rs, MYSQL_ASSOC)) {
+            while ($cache_desc = sql_fetch_array($rs, MYSQLI_ASSOC)) {
                 $cache_descs[] = $cache_desc;
             }
             sql_free_result($rs);
@@ -1166,7 +1167,7 @@ class user
          * set all cache_logs '', save old texts and delete pictures
          */
         $rs = sql("SELECT `id`, `text` FROM `cache_logs` WHERE `user_id`='&1'", $this->getUserId());
-        while ($log = sql_fetch_array($rs, MYSQL_ASSOC)) {
+        while ($log = sql_fetch_array($rs, MYSQLI_ASSOC)) {
             // save text - added 2013/03/18 to be enable restoring data on reactivation
             // of accounts that were disabled before license transition
             sql(
@@ -1294,7 +1295,7 @@ class user
         $tmw = $opt['logic']['pictures']['thumb_max_width'];
 
         $filenames = array();
-        while ($url = sql_fetch_array($rs, MYSQL_NUM)) {
+        while ($url = sql_fetch_array($rs, MYSQLI_NUM)) {
             $filenames[] = substr($url['url'], - 40);
         }
 
@@ -1467,6 +1468,14 @@ class user
         return true;
     }
 
+    public function canGdprDelete(): bool
+    {
+        global $login;
+        $login->verify();
+
+        return !($login->userid != $this->nUserId && ($login->admin & ADMIN_USER) != ADMIN_USER);
+    }
+
     public function canDelete()
     {
         global $login;
@@ -1567,7 +1576,7 @@ class user
         return $this->reUser->setValue('email_problems', 0) && $this->save();
     }
 
-    public function reload()
+    public function reload(): void
     {
         $this->reUser->reload();
         $this->reUserStat->reload();
@@ -1585,7 +1594,7 @@ class user
         );
     }
 
-    public function getRatingParameters()
+    public function getRatingParameters(): array
     {
         global $opt;
 

@@ -8,7 +8,7 @@ use Oc\FieldNotes\Struct\FieldNote;
 class ImportContext
 {
     /**
-     * @var array
+     * @var FieldNote[]
      */
     private $fieldNotes;
 
@@ -19,7 +19,6 @@ class ImportContext
 
     /**
      * @param FieldNote[] $fieldNotes
-     * @param UploadFormData $formData
      */
     public function __construct(array $fieldNotes, UploadFormData $formData)
     {
@@ -30,19 +29,14 @@ class ImportContext
     /**
      * Returns field notes to be imported.
      *
-     * @return array
+     * @return FieldNote[]
      */
-    public function getFieldNotes()
+    public function getFieldNotes(): array
     {
         return $this->fieldNotes;
     }
 
-    /**
-     * Returns the UploadFormData.
-     *
-     * @return UploadFormData
-     */
-    public function getFormData()
+    public function getFormData(): UploadFormData
     {
         return $this->formData;
     }

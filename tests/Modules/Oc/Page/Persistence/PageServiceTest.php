@@ -16,7 +16,7 @@ class PageServiceTest extends TestCase
     /**
      * Tests fetching one record by id with success - no exception is thrown.
      */
-    public function testFetchingOneByIdReturnsEntity()
+    public function testFetchingOneByIdReturnsEntity(): void
     {
         $entity = new PageEntity();
 
@@ -39,7 +39,7 @@ class PageServiceTest extends TestCase
     /**
      * Tests fetching one record by id - exception is thrown because there is no record.
      */
-    public function testFetchingOneByIdThrowsException()
+    public function testFetchingOneByIdThrowsException(): void
     {
         $exception = new RecordNotFoundException('Record with id #1 not found');
 
@@ -62,7 +62,7 @@ class PageServiceTest extends TestCase
     /**
      * Tests that create returns the entity.
      */
-    public function testCreateReturnsEntity()
+    public function testCreateReturnsEntity(): void
     {
         $entity = new PageEntity();
 
@@ -81,7 +81,7 @@ class PageServiceTest extends TestCase
     /**
      * Tests that update returns the entity.
      */
-    public function testUpdateReturnsEntity()
+    public function testUpdateReturnsEntity(): void
     {
         $entity = new PageEntity();
 
@@ -100,7 +100,7 @@ class PageServiceTest extends TestCase
     /**
      * Tests that remove returns the entity.
      */
-    public function testRemoveReturnsEntity()
+    public function testRemoveReturnsEntity(): void
     {
         $entity = new PageEntity();
 

@@ -10,7 +10,7 @@ $search_output_file_download = true;
 $content_type_plain = 'vnd.google-earth.kml';
 $content_type_zipped = 'vnd.google-earth.kmz';
 
-function search_output()
+function search_output(): void
 {
     global $opt;
     global $state_temporarily_na, $state_archived, $state_locked;
@@ -53,7 +53,7 @@ function search_output()
         FROM
             &searchtmp');
     $rMinMax = sql_fetch_array($rsMinMax);
-    mysql_free_result($rsMinMax);
+    mysqli_free_result($rsMinMax);
 
     $kmlDetailHead = mb_ereg_replace('{minlat}', $rMinMax['minlat'], $kmlDetailHead);
     $kmlDetailHead = mb_ereg_replace('{minlon}', $rMinMax['minlon'], $kmlDetailHead);
@@ -139,7 +139,7 @@ function search_output()
 
         append_output($thisline);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     append_output($kmlFoot);
 }

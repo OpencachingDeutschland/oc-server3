@@ -12,12 +12,12 @@
             <p>Mit Eurer freundlichen Spende sorgt Ihr vor allem daf&uuml;r, dass wir das Webhosting der Opencaching-Angebote finanzieren k&ouml;nnen. Details zur Verwendung finden Ihr weiter unten.</p>
 
             <h1>Per &Uuml;berweisung spenden:</h1>
-            <p>Bank: Deutsche Skatbank<br />
+            <p>Bank: Volksbank Heiden<br />
             Kontoinhaber: Opencaching Deutschland e.V.<br />
-            Kontonummer: 475 26 78<br />
-            BLZ: 830 654 08<br /><br />
-            IBAN: DE42 8306 5408 0004 7526 78<br />
-            BIC (SWIFT): GENODEF1SLR</p>
+            Kontonummer: 944 853 00<br />
+            BLZ: 428 616 08<br /><br />
+            IBAN: DE07 4286 1608 0094 4853 00<br />
+            BIC (SWIFT): GENODEM1HEI</p>
 
             <h1>Per PayPal spenden:</h1>
 

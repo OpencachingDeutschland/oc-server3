@@ -87,7 +87,7 @@ function getSysConfig($name, $default)
  * @param string $name
  * @param string $value
  */
-function setSysConfig($name, $value)
+function setSysConfig($name, $value): void
 {
     sql(
         "INSERT INTO `sysconfig` (`name`, `value`) VALUES ('&1', '&2') ON DUPLICATE KEY UPDATE `value`='&2'",

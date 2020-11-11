@@ -62,19 +62,9 @@ $opt['lib']['w3w']['apikey'] = 'X27PDW41';
  *
  * other parameters may be customized
  */
-$opt['session']['mode'] = SAVE_COOKIE;
-$opt['session']['cookiename'] = 'ocvagrant'; // only with SAVE_COOKIE
+$opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '__SESSION_DOMAIN__';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* If the Referer was sent by the client and the substring was not found,
- * the embedded session id will be marked as invalid.
- * Only used with session.mode = SAVE_SESSION
- */
-$opt['session']['check_referer'] = true;
-
-// see http://forum.opencaching.de/index.php?topic=3031.msg38795#msg38795
-$opt['session']['login_statistics'] = false;
 
 /* Default locale and style
          *
@@ -230,7 +220,7 @@ define('MNU_CHAT', 1018);
 define('MNU_GEOKRETY', 1019);
 define('MNU_API', 1020);
 
-function post_config()
+function post_config(): void
 {
     global $opt, $menuitem, $tpl, $translate;
 
@@ -240,10 +230,10 @@ function post_config()
     }
 
     $menuitem[MNU_INFO] = [
-        'title' => $translate->t('Help', '', '', ''),
-        'menustring' => $translate->t('Help', '', '', ''),
+        'title' => 'Wiki',
+        'menustring' => 'Wiki',
         'authlevel' => 0,
-        'href' => 'http://' . $domain . '/articles.php?page=helpindex&wiki',
+        'href' => 'https://' . $domain . '/articles.php?page=helpindex&wiki',
         'visible' => 1,
         'sublevel' => 1,
     ];
@@ -251,26 +241,13 @@ function post_config()
 
     config_domain_test_opencaching_de();
 
-    /*
-    $menuitem[MNU_CHAT] = array('title' => 'Chat/IRC',
-    'menustring' => 'Chat/IRC',
-    'authlevel' => 0,
-    'href' => 'webchat.php',
-    'visible' => 1,
-    'sublevel' => 1
-    );
-    $menuitem[0]['subitems'][] = MNU_CHAT;
-    */
 
-// geokrety menu contains the language
+    // Link to Geokrety
     $menuitem[MNU_GEOKRETY] = [
         'title' => 'Geokrety',
         'menustring' => 'Geokrety',
         'authlevel' => 0,
-        'href' => 'http://www.geokrety.org/index.php?lang=' .
-            urlencode(
-                $opt['geokrety']['locales'][$opt['template']['locale']]
-            ),
+        'href' => 'https://www.geokrety.org/',
         'target' => 'target="_blank"',
         'visible' => 1,
         'sublevel' => 1,
@@ -289,7 +266,7 @@ function post_config()
     $menuitem[0]['subitems'][] = MNU_API;
 }
 
-function config_domain_test_opencaching_de()
+function config_domain_test_opencaching_de(): void
 {
     global $opt, $menuitem, $login, $translate;
 

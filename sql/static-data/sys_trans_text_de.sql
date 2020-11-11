@@ -643,7 +643,7 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('696', 'DE', 'Entschuldigung, der Geocache ist noch nicht veröffentlicht.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('697', 'DE', 'Alle Logeinträge anzeigen', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('698', 'DE', 'Geocache anzeigen', '2010-08-28 11:48:06');
-INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'DE', 'Du bist bereits eingeloggt.<br />\r\nDu musst duch erst <a href=\"login.php?action=logout\">abmelden</a>, um dich erneut anzumelden.', '2010-08-28 11:48:06');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('699', 'DE', 'Du bist bereits eingeloggt.<br />\r\nDu musst dich erst <a href=\"login.php?action=logout\">abmelden</a>, um dich erneut anzumelden.', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('701', 'DE', 'Schwierigkeit:\&nbsp;%1\&nbsp;von\&nbsp;5', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('702', 'DE', 'Gelände:\&nbsp;%1\&nbsp;von\&nbsp;5', '2010-08-28 11:48:06');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('703', 'DE', 'Teilnehmerliste', '2010-08-28 11:48:06');
@@ -1954,3 +1954,12 @@ INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUE
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2659', 'DE', 'Empfehlung', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2660', 'DE', 'Der Cache muss vor Veröffentlichung versteckt werden.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2661', 'DE', 'Das Event muss nach der Cacheveröffentlichung stattfinden.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2662', 'DE', 'Handicap: Rollstuhl', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2663', 'DE', 'Der Cache ist mit Rollstuhl/Rollator/Kinderwagen erreichbar.', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2664', 'DE', 'Cookie-Einstellungen', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2665', 'DE', 'Der aktuelle Filter kann nicht gespeichert werden, da der Cookie-Konsens für die Karten Konfiguration nicht vorliegt.', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2666', 'DE', 'Wähle mindestens einen Cache aus, um diesen zu dieser Cacheliste hinzuzufügen.', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2667', 'DE', 'Ausgewählte Caches hinzufügen zu:', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2668', 'DE', 'Zur Liste hinzufügen', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2669', 'DE', 'Du hast %1 Cache zu deiner Cacheliste hinzugefügt:', '2020-07-04 12:30:00');
+INSERT INTO `sys_trans_text` (`trans_id`, `lang`, `text`, `last_modified`) VALUES ('2670', 'DE', 'Du hast %1 Caches zu deiner Cacheliste hinzugefügt:', '2020-07-04 12:30:00');

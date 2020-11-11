@@ -162,28 +162,17 @@ AddDefaultCharset UTF-8
 
     # Other directives here
 </VirtualHost>
-<VirtualHost *:80>
-    DocumentRoot "/var/www/html/backend/web"
-    ServerName backend.local.team-opencaching.de
-
-    SetEnv APPLICATION_ENV dev
-
-    <Directory "/var/www/html/backend/web">
-        AllowOverride All
-    </Directory>
-</VirtualHost>
 
 IncludeOptional conf.d/*.conf
 EOF
 
-label "upgrade to php 5.6"
+label "upgrade to php 7.2"
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
 yum -y install yum-plugin-replace
-yum -y replace php-common --replace-with=php56w-common
+yum -y replace php-common --replace-with=php72w-common
 yum -y install phpmyadmin
-yum -y install php56w-pecl-xdebug.x86_64
 
 cat <<EOF > /etc/httpd/conf.d/phpMyAdmin.conf
 Alias /phpMyAdmin /usr/share/phpMyAdmin
@@ -215,6 +204,7 @@ sudo chmod 755 psh.phar
 
 label "Adjust php.ini"
 cat /etc/php.ini | sed -e 's/upload_max_filesize = 2M/upload_max_filesize = 10M/' > /etc/php.ini.tmp
+cat /etc/php.ini | sed -e 's/memory_limit = 128M/memory_limit = 512M/' > /etc/php.ini.tmp
 mv /etc/php.ini.tmp /etc/php.ini
 
 label "Setup database"

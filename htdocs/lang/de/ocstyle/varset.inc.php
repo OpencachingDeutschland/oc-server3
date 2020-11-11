@@ -31,7 +31,7 @@ $sLoggedOut =
     . t('User:')
     . '</b>&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;<b>'
     . t('Password:')
-    . '</b>&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input type="submit" name="LogMeIn" value="'
+    . '</b>&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{target}" />&nbsp;<input type="submit" name="LogMeIn" value="'
     . t('Login')
     . '" class="formbutton" style="width: 74px;" onclick="submitbutton(\'LogMeIn\')" /></form>';
 $sLoggedIn =
@@ -46,8 +46,8 @@ $target = basename($_SERVER['PHP_SELF']) . '?';
 
 // REQUEST-Variablen durchlaufen und an target anhaengen
 $allowed = ['cacheid', 'userid', 'logid', 'desclang', 'descid'];
-reset($_REQUEST);
-while (list($varname, $varvalue) = each($_REQUEST)) {
+
+foreach($_REQUEST as $varname => $varvalue) {
     if (in_array($varname, $allowed)) {
         $target .= $varname . '=' . $varvalue . '&';
     }

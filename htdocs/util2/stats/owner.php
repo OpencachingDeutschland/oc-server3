@@ -18,7 +18,7 @@ showstats('min. 10 aktive OConlies', '`ca`.`attrib_id` IS NOT NULL', 10);
 showstats('min. 10 aktive OConly-Dosen', '`caches`.`size`<>7 AND `ca`.`attrib_id` IS NOT NULL', 10);
 
 
-function showstats($header, $condition, $limit)
+function showstats($header, $condition, $limit): void
 {
     echo "<h3>$header</h3>\n";
     echo "<table>\n";

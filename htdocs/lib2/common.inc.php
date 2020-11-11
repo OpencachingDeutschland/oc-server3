@@ -1,11 +1,8 @@
 <?php
 /***************************************************************************
  * for license information see LICENSE.md
- *
- *
  *  This module contains the main initialisation routine and often used
  *  functions. It is included by web.inc.php and cli.inc.php.
- *
  *  TODO: accept-language des Browser auswerten
  ***************************************************************************/
 
@@ -13,39 +10,38 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $opt['rootpath'] = __DIR__ . '/../';
 
-function __autoload($class_name)
-{
-    global $opt;
+spl_autoload_register(
+    function ($className): void {
+        if (!preg_match('/^[\w]{1,}$/', $className)) {
+            return;
+        }
 
-    if (!preg_match('/^[\w]{1,}$/', $class_name)) {
-        return;
+        $file1 = __DIR__ . '/' . $className . '.class.php';
+        $file2 = __DIR__ . '/logic/' . $className . '.class.php';
+        if (file_exists($file1)) {
+            require_once $file1;
+        } elseif (file_exists($file2)) {
+            require_once $file2;
+        }
     }
-
-    $file1 = __DIR__ . '/' . $class_name . '.class.php';
-    $file2 = __DIR__ . '/logic/' . $class_name . '.class.php';
-    if (file_exists($file1)) {
-        require_once $file1;
-    } elseif (file_exists($file2)) {
-        require_once $file2;
-    }
-}
+);
 
 if (!function_exists('bindtextdomain')) {
-    function bindtextdomain()
+    function bindtextdomain(): void
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('textdomain')) {
-    function textdomain()
+    function textdomain(): void
     {
         // dummy function for travis
     }
 }
 
 if (!function_exists('gettext')) {
-    function gettext()
+    function gettext(): void
     {
         // dummy function for travis
     }
@@ -102,12 +98,8 @@ if (($opt['debug'] & DEBUG_FORCE_TRANSLATE) != DEBUG_FORCE_TRANSLATE) {
 require_once __DIR__ . '/errorhandler.inc.php';
 configure_php();
 
-if ($opt['session']['mode'] == SAVE_SESSION) {
-    // Do not use, not completely implemented yet
-    $cookie = new Oc\Session\SessionDataNative();
-} else {
-    $cookie = new Oc\Session\SessionDataCookie();
-}
+
+$cookie = new Oc\Session\SessionDataCookie();
 
 normalize_settings();
 set_language();
@@ -163,22 +155,22 @@ if (!isset($disable_verifyemail) &&
 }
 
 // normalize paths and urls
-function normalize_settings()
+function normalize_settings(): void
 {
     global $opt;
 
     $opt['charset']['iconv'] = strtoupper($opt['charset']['iconv']);
 
-    if (substr($opt['logic']['pictures']['url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['url'], -1, 1) != '/') {
         $opt['logic']['pictures']['url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['dir'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_url'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_url'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_url'] .= '/';
     }
-    if (substr($opt['logic']['pictures']['thumb_dir'], - 1, 1) != '/') {
+    if (substr($opt['logic']['pictures']['thumb_dir'], -1, 1) != '/') {
         $opt['logic']['pictures']['thumb_dir'] .= '/';
     }
 
@@ -188,7 +180,7 @@ function normalize_settings()
     }
 }
 
-function configure_php()
+function configure_php(): void
 {
     global $opt;
 
@@ -207,12 +199,12 @@ function configure_php()
     }
 }
 
-function sql_enable_foundrows()
+function sql_enable_foundrows(): void
 {
     ini_set('mysql.trace_mode', false);
 }
 
-function sql_foundrows_done()
+function sql_foundrows_done(): void
 {
     global $opt;
 
@@ -221,7 +213,7 @@ function sql_foundrows_done()
     }
 }
 
-function set_domain_config()
+function set_domain_config(): void
 {
     global $opt;
 
@@ -237,7 +229,7 @@ function set_domain_config()
     set_common_domain_config($opt);
 }
 
-function set_language()
+function set_language(): void
 {
     global $opt, $cookie;
 
@@ -274,7 +266,7 @@ function set_language()
     textdomain('messages');
 }
 
-function set_usercountry()
+function set_usercountry(): void
 {
     global $cookie;
 
@@ -283,14 +275,14 @@ function set_usercountry()
     }
 }
 
-function set_timezone()
+function set_timezone(): void
 {
     global $opt;
 
     date_default_timezone_set($opt['php']['timezone']);
 }
 
-function check_useragent()
+function check_useragent(): void
 {
     global $ocpropping;
 
@@ -312,8 +304,8 @@ function use_current_protocol($url)
     ) {
         return 'https' . strstr($url, '://');
     } elseif (strtolower(substr($url, 0, strlen($opt['page']['absolute_https_url'])))
-                    == $opt['page']['absolute_https_url']
-              && !$opt['page']['https']['active']
+        == $opt['page']['absolute_https_url']
+        && !$opt['page']['https']['active']
     ) {
         return 'http' . strstr($url, '://');
     }

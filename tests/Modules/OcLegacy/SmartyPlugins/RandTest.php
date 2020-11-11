@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
  */
 class RandTest extends AbstractModuleTest
 {
-    public function testEmptyParameters()
+    public function testEmptyParameters(): void
     {
         $smarty = null;
 
@@ -27,7 +27,7 @@ class RandTest extends AbstractModuleTest
      *
      * @dataProvider differentMinMaxProvider
      */
-    public function testDifferentMinMaxParams($min, $max)
+    public function testDifferentMinMaxParams($min, $max): void
     {
         $smarty = null;
 

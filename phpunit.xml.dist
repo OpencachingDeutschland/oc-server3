@@ -18,8 +18,8 @@
 
     </testsuites>
     <filter>
-        <whitelist>
-            <directory>htdocs/api</directory>
+            <whitelist>
+                <directory>htdocs/api</directory>
             <directory>htdocs/app</directory>
             <directory>htdocs/bin</directory>
             <directory>htdocs/src</directory>

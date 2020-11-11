@@ -2,18 +2,21 @@
 
 namespace OcLegacy\Translation;
 
+use Symfony\Component\Translation\Formatter\MessageFormatter;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class TranslationService implements TranslatorInterface
 {
+    /**
+     * @var Translator
+     */
     private $translator;
 
     public function __construct()
     {
-        $translator = new Translator('de', new MessageSelector());
+        $translator = new Translator('de', new MessageFormatter());
         $translator->setFallbackLocales(['en']);
 
         $yamlLoader = new YamlFileLoader();

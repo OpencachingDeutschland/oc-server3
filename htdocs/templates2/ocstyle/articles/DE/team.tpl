@@ -36,7 +36,7 @@
         <tr>
             <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
             <td>
-                <a href="{$opt.page.teammember_url}/viewprofile.php?userid=244244">ClanFamily</a><br/>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br/>
                 1. Vorsitzender & Softwareentwicklung
             </td>
         </tr>
@@ -101,17 +101,17 @@
             <td></td>
         </tr>
         <tr>
+            <td><img src="{$opt.page.teampic_url}crease29.png"/></td>
+            <td>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=353113">Crease29</a><br/>
+                Softwareentwicklung
+            </td>
+        </tr>
+        <tr>
             <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
             <td>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
                 Cachekarten, Systemüberwachung
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br/>
-                Datenpflege, Softwareentwicklung
             </td>
         </tr>
         <tr>

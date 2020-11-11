@@ -1,0 +1,6 @@
+version: "3.3"
+services:
+    webserver:
+        environment:
+            - XDEBUG_REMOTE_HOST=172.30.64.1
+

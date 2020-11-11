@@ -89,7 +89,7 @@ class PresenterCoordinate
         return $this->request->get(self::lon_min, $this->coordinate->lonMin());
     }
 
-    public function init($latitude, $longitude)
+    public function init($latitude, $longitude): void
     {
         $this->coordinate = new CoordinateCoordinate($latitude, $longitude);
     }
@@ -97,7 +97,7 @@ class PresenterCoordinate
     /**
      * @param $template
      */
-    public function prepare($template)
+    public function prepare($template): void
     {
         $formatter = new FormatterCoordinate();
         $coordinate = $this->getCoordinate();

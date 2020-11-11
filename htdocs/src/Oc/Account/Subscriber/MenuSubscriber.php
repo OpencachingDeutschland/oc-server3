@@ -6,9 +6,6 @@ use Oc\Menu\Event\MenuEvent;
 use Oc\Menu\MenuEnum;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
- * Class MenuSubscriber
- */
 class MenuSubscriber implements EventSubscriberInterface
 {
     /**
@@ -23,11 +20,8 @@ class MenuSubscriber implements EventSubscriberInterface
 //            MenuEnum::MENU_MAIN_ACCOUNT => ['onConfigureMenuMainAccount', 0],
         ];
     }
-
-    /**
-     * @param MenuEvent $event
-     */
-    public function onConfigureMenuMain(MenuEvent $event)
+    
+    public function onConfigureMenuMain(MenuEvent $event): void
     {
         $accountItem = $event->getCurrentItem()->addChild('account', ['label' => 'Benutzerkonto']);
 
@@ -38,11 +32,8 @@ class MenuSubscriber implements EventSubscriberInterface
             $accountEvent
         );
     }
-
-    /**
-     * @param MenuEvent $event
-     */
-    public function onConfigureMenuMainAccount(MenuEvent $event)
+    
+    public function onConfigureMenuMainAccount(MenuEvent $event): void
     {
         $currentItem = $event->getCurrentItem();
 

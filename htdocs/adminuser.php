@@ -4,6 +4,7 @@
  ***************************************************************************/
 
 use Doctrine\DBAL\Connection;
+use OcLegacy\Admin\Gdpr\GdprHandler;
 
 require __DIR__ . '/lib2/web.inc.php';
 
@@ -27,6 +28,8 @@ $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : 'display';
 
 if ($action === 'searchuser') {
     searchUser();
+} elseif ($action === 'gdpr-deletion') {
+    gdprDeletion();
 } elseif ($action === 'sendcode') {
     sendCode();
 } elseif ($action === 'formaction') {
@@ -36,6 +39,24 @@ if ($action === 'searchuser') {
 }
 
 $tpl->error(ERROR_UNKNOWN);
+
+function gdprDeletion() {
+    global $tpl;
+
+    $userId = isset($_REQUEST['userid']) ? $_REQUEST['userid'] + 0 : 0;
+    $execute = isset($_POST['execute']);
+
+    $user = new user($userId);
+    if ($user->exist() === false) {
+        $tpl->error(ERROR_UNKNOWN);
+    }
+
+    $gdprHandler = AppKernel::Container()->get(GdprHandler::class);
+    $tpl->assign($gdprHandler->handle($user, $execute));
+
+    $tpl->assign('showGdprDeletion', true);
+    $tpl->display();
+}
 
 function sendCode()
 {
@@ -60,6 +81,7 @@ function formAction()
 
     $commit = isset($_REQUEST['chkcommit']) ? $_REQUEST['chkcommit'] + 0 : 0;
     $delete = isset($_REQUEST['chkdelete']) ? $_REQUEST['chkdelete'] + 0 : 0;
+    $deleteGdpr = isset($_REQUEST['chkdeletegdpr']) ? $_REQUEST['chkdeletegdpr'] + 0 : 0;
     $disable = isset($_REQUEST['chkdisable']) ? $_REQUEST['chkdisable'] + 0 : 0;
     $emailProblem = isset($_REQUEST['chkemail']) ? $_REQUEST['chkemail'] + 0 : 0;
     $dataLicense = isset($_REQUEST['chkdl']) ? true : false;
@@ -72,7 +94,7 @@ function formAction()
     }
     $username = $user->getUsername();
 
-    if ($delete + $disable + $disduelicense > 1) {
+    if ($delete + $disable + $disduelicense + $deleteGdpr > 1) {
         $tpl->error($translate->t('Please select only one of the delete/disable options!', '', '', 0));
     }
 
@@ -93,6 +115,8 @@ function formAction()
         if ($user->delete() == false) {
             $tpl->error(ERROR_UNKNOWN);
         }
+    } elseif ($deleteGdpr == 1) {
+        $tpl->redirect('adminuser.php?action=gdpr-deletion&userid=' . $userId);
     } elseif ($emailProblem == 1) {
         $user->addEmailProblem($dataLicense);
     }
@@ -170,6 +194,7 @@ function searchUser()
     }
     $tpl->assign('candisable', $user->canDisable());
     $tpl->assign('candelete', $user->canDelete());
+    $tpl->assign('cangdprdelete', $user->canGdprDelete());
     $tpl->assign('cansetemail', !$user->missedDataLicenseMail() && $r['email'] != "");
     $tpl->assign('licensefunctions', $opt['logic']['license']['admin']);
 

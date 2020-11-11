@@ -74,7 +74,7 @@ return;
 //
 // OKAPI tables upgrade is done by a similar function in OKAPI's update module.
 
-function check_tables_charset($database)
+function check_tables_charset($database): void
 {
     global $opt;
 
@@ -131,7 +131,7 @@ function check_tables_charset($database)
     sql_free_result($rs);
 }
 
-function check_tables_storage_engine($database)
+function check_tables_storage_engine($database): void
 {
     # migrate tables
     $rs = sql(
@@ -165,7 +165,7 @@ function check_tables_storage_engine($database)
 // mutation which needs it. (But take care that maintain.php at that point does
 // not depend on database changes which will be done by that mutation ...)
 
-function update_triggers()
+function update_triggers(): void
 {
     global $opt, $db_version;
 
@@ -199,7 +199,7 @@ function update_triggers()
 
 /***** OC release 3.0.8 *****/
 
-function dbv_100()  // expands log date to datetime, to enable time logging
+function dbv_100(): void  // expands log date to datetime, to enable time logging
 {
     if (sql_field_type('cache_logs', 'date') != 'DATETIME') {
         sql('ALTER TABLE `cache_logs` CHANGE COLUMN `date` `date` DATETIME NOT NULL');
@@ -209,7 +209,7 @@ function dbv_100()  // expands log date to datetime, to enable time logging
     }
 }
 
-function dbv_101()  // add fields for fixing OKAPI issue #232
+function dbv_101(): void  // add fields for fixing OKAPI issue #232
 {
     if (!sql_field_exists('caches', 'meta_last_modified')) {
         // initialize with '0000-00-00 00:00:00' for existing data, that's ok
@@ -247,7 +247,7 @@ function dbv_101()  // add fields for fixing OKAPI issue #232
     }
 }
 
-function dbv_102()  // remove invisible caches from users' hidden stats
+function dbv_102(): void  // remove invisible caches from users' hidden stats
 {
     sql(
         'INSERT IGNORE INTO `stat_user` (`user_id`)
@@ -267,7 +267,7 @@ function dbv_102()  // remove invisible caches from users' hidden stats
     sql('CALL sp_refreshall_statpic()');
 }
 
-function dbv_103()  // update comments on static tables
+function dbv_103(): void  // update comments on static tables
 {
     if (sql_table_exists('geodb_areas')) {
         sql("ALTER TABLE `geodb_areas`       COMMENT = 'not in use'");
@@ -311,7 +311,7 @@ function dbv_103()  // update comments on static tables
     sql("ALTER TABLE `nuts_layer` COMMENT = 'static content'");
 }
 
-function dbv_104()  // added maintenance logs and OC team comments
+function dbv_104(): void  // added maintenance logs and OC team comments
 {
     sql("ALTER TABLE `log_types_text` COMMENT = 'obsolete'");
     sql("ALTER TABLE `cache_logtype` COMMENT = 'obsolete'");
@@ -340,7 +340,7 @@ function dbv_104()  // added maintenance logs and OC team comments
     // values are initially zero.
 }
 
-function dbv_105()  // HTML user profile texts
+function dbv_105(): void  // HTML user profile texts
 {
     if (!sql_field_exists('user', 'desc_htmledit')) {
         sql(
@@ -365,7 +365,7 @@ function dbv_105()  // HTML user profile texts
     }
 }
 
-function dbv_106()  // Cache status logging
+function dbv_106(): void  // Cache status logging
 {
     if (!sql_table_exists('cache_status_modified')) {
         sql(
@@ -381,7 +381,7 @@ function dbv_106()  // Cache status logging
     }
 }
 
-function dbv_107()  // sync of table definitions, developer and production system
+function dbv_107(): void  // sync of table definitions, developer and production system
 {
     sql(
         "ALTER TABLE `caches`
@@ -395,7 +395,7 @@ function dbv_107()  // sync of table definitions, developer and production syste
 
 /***** OC release 3.0.9 *****/
 
-function dbv_108()  // automatic email-bounce processing
+function dbv_108(): void  // automatic email-bounce processing
 {
     if (!sql_field_exists('user', 'last_email_problem')) {
         sql('ALTER TABLE `user` ADD COLUMN `last_email_problem` DATETIME DEFAULT NULL AFTER `email_problems`');
@@ -409,14 +409,14 @@ function dbv_108()  // automatic email-bounce processing
     }
 }
 
-function dbv_109()  // improved email-bounce processing
+function dbv_109(): void  // improved email-bounce processing
 {
     if (!sql_field_exists('user', 'first_email_problem')) {
         sql('ALTER TABLE `user` ADD COLUMN `first_email_problem` DATE DEFAULT NULL AFTER `email_problems`');
     }
 }
 
-function dbv_110()  // move adoption history to separate table
+function dbv_110(): void  // move adoption history to separate table
 {
     if (!sql_table_exists('cache_adoptions')) {
         sql(
@@ -466,7 +466,7 @@ function dbv_110()  // move adoption history to separate table
     }
 }
 
-function dbv_111()  // fix event ID of old publishing notifications
+function dbv_111(): void  // fix event ID of old publishing notifications
 {
     sql(
         "UPDATE `logentries` SET `eventid`=8
@@ -474,7 +474,7 @@ function dbv_111()  // fix event ID of old publishing notifications
     );
 }
 
-function dbv_112()  // added maintained GC waypoints
+function dbv_112(): void  // added maintained GC waypoints
 {
     if (!sql_field_exists('caches', 'wp_gc_maintained')) {
         sql('ALTER TABLE `caches` ADD COLUMN `wp_gc_maintained` VARCHAR(7) NOT NULL AFTER `wp_gc`');
@@ -485,7 +485,7 @@ function dbv_112()  // added maintained GC waypoints
     }
 }
 
-function dbv_113()  // preventive, initial trigger update
+function dbv_113(): void  // preventive, initial trigger update
 {
     // The if-condition ensures that we will not downgrade to an old trigger
     // version for the case this function is re-run by some accident.
@@ -497,7 +497,7 @@ function dbv_113()  // preventive, initial trigger update
     }
 }
 
-function dbv_114()  // add dbsvTriggerVersion
+function dbv_114(): void  // add dbsvTriggerVersion
 {
     // dbsvTriggerVersion was introduced AFTER defining mutation #113 (it was
     // inserted there later). So we need to additionally install it on installations
@@ -506,12 +506,12 @@ function dbv_114()  // add dbsvTriggerVersion
     update_triggers();
 }
 
-function dbv_115()  // remove obsolete functions
+function dbv_115(): void  // remove obsolete functions
 {
     update_triggers();
 }
 
-function dbv_116()    // optimize index for sorting logs
+function dbv_116(): void    // optimize index for sorting logs
 {
     sql(
         'ALTER TABLE `cache_logs`
@@ -520,7 +520,7 @@ function dbv_116()    // optimize index for sorting logs
     );
 }
 
-function dbv_117()    // add user profile flag for OConly notifications
+function dbv_117(): void    // add user profile flag for OConly notifications
 {
     if (!sql_field_exists('user', 'notify_oconly')) {
         sql("ALTER TABLE `user` ADD COLUMN `notify_oconly` TINYINT(1) NOT NULL DEFAULT '1' AFTER `notify_radius`");
@@ -531,17 +531,17 @@ function dbv_117()    // add user profile flag for OConly notifications
 
 /***** OC release 3.0.10 *****/
 
-function dbv_118()    // resize field password to fit to the new hashed passwords
+function dbv_118(): void    // resize field password to fit to the new hashed passwords
 {
     sql('ALTER TABLE `user` MODIFY COLUMN `password` VARCHAR(128) DEFAULT NULL');
 }
 
-function dbv_119()    // resize admin status field to enable more detailed rights
+function dbv_119(): void    // resize admin status field to enable more detailed rights
 {
     sql("ALTER TABLE `user` MODIFY COLUMN `admin` SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0'");
 }
 
-function dbv_120()    // remove obsolete tables of very old, discarded map code
+function dbv_120(): void    // remove obsolete tables of very old, discarded map code
 {
     sql('DROP TABLE IF EXISTS `mapresult`');
     sql('DROP TABLE IF EXISTS `mapresult_data`');
@@ -549,7 +549,7 @@ function dbv_120()    // remove obsolete tables of very old, discarded map code
 
 /***** OC release 3.0.11 *****/
 
-function dbv_121()    // add user profile flag for receiving newsletter
+function dbv_121(): void    // add user profile flag for receiving newsletter
 {
     if (!sql_field_exists('user', 'accept_mailing')) {
         sql("ALTER TABLE `user` ADD COLUMN `accept_mailing` TINYINT(1) NOT NULL DEFAULT '1' AFTER `mailing_problems`");
@@ -558,7 +558,7 @@ function dbv_121()    // add user profile flag for receiving newsletter
 
 /***** OC release 3.0.12 *****/
 
-function dbv_122()    // add user profile flag for default setting of send-my-email option
+function dbv_122(): void    // add user profile flag for default setting of send-my-email option
 {
     if (!sql_field_exists('user', 'usermail_send_addr')) {
         sql(
@@ -569,7 +569,7 @@ function dbv_122()    // add user profile flag for default setting of send-my-em
 
 /***** OC release 3.0.13 *****/
 
-function dbv_123()  // add tables, fields and procs for cache lists and list watches
+function dbv_123(): void  // add tables, fields and procs for cache lists and list watches
 {
     if (!sql_table_exists('cache_lists')) {
         sql(
@@ -620,7 +620,7 @@ function dbv_123()  // add tables, fields and procs for cache lists and list wat
     }
 }
 
-function dbv_124()  // update cache lists implementation
+function dbv_124(): void  // update cache lists implementation
 {
     if (!sql_table_exists('stat_cache_lists')) {
         sql(
@@ -647,7 +647,7 @@ function dbv_124()  // update cache lists implementation
     }
 }
 
-function dbv_125()  // update cache lists implementation; preparation of XML interface export
+function dbv_125(): void  // update cache lists implementation; preparation of XML interface export
 {
     global $opt;
 
@@ -660,7 +660,7 @@ function dbv_125()  // update cache lists implementation; preparation of XML int
     }
 }
 
-function dbv_126()  // clean up data of disabled accounts
+function dbv_126(): void  // clean up data of disabled accounts
 {
     sql('DELETE FROM `cache_adoption` WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)');
     sql('DELETE FROM `cache_ignore`   WHERE `user_id` IN (SELECT `user_id` FROM `user` WHERE `is_active_flag`=0)');
@@ -669,13 +669,13 @@ function dbv_126()  // clean up data of disabled accounts
 
 /***** Hotfixes *****/
 
-function dbv_127()  // fix name of Dessau-Köthen
+function dbv_127(): void  // fix name of Dessau-Köthen
 {
     sql("UPDATE `nuts_codes` SET `name`='Köthen' WHERE `code`='DEE15'");
     sql("UPDATE `cache_location` SET `adm4`='Köthen' WHERE `code4`='DEE15'");
 }
 
-function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
+function dbv_128(): void  // see util2/gns/mksearchindex.php; fix for #175/3
 {
     sql('DELETE FROM `gns_search`');
     if (sql_field_exists('gns_search', 'id')) {
@@ -699,12 +699,12 @@ function dbv_128()  // see util2/gns/mksearchindex.php; fix for #175/3
             );
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 /***** OC release 3.0.14 *****/
 
-function dbv_129()  // cache list passwords & bookmarking
+function dbv_129(): void  // cache list passwords & bookmarking
 {
     if (!sql_field_exists('cache_lists', 'password')) {
         sql('ALTER TABLE `cache_lists` ADD COLUMN `password` VARCHAR(80) NOT NULL');
@@ -722,7 +722,7 @@ function dbv_129()  // cache list passwords & bookmarking
     }
 }
 
-function dbv_130()  // discarded text editor mode (#236)
+function dbv_130(): void  // discarded text editor mode (#236)
 {
     sql(
         "ALTER TABLE `cache_desc`
@@ -741,27 +741,27 @@ function dbv_130()  // discarded text editor mode (#236)
     );
 }
 
-function dbv_131()  // add native language names (#109)
+function dbv_131(): void  // add native language names (#109)
 {
     if (!sql_field_exists('languages', 'native_name')) {
         sql('ALTER TABLE `languages` ADD COLUMN `native_name` VARCHAR(60) NOT NULL AFTER `trans_id`');
     }
 }
 
-function dbv_132()  // fix cache list node IDs
+function dbv_132(): void  // fix cache list node IDs
 {
     global $opt;
     sql("UPDATE `cache_lists` SET `node`='&1' WHERE `node`=0", $opt['logic']['node']['id']);
 }
 
-function dbv_133()  // add user language for notification emails (#141)
+function dbv_133(): void  // add user language for notification emails (#141)
 {
     if (!sql_field_exists('user', 'language')) {
         sql('ALTER TABLE `user` ADD COLUMN `language` CHAR(2) DEFAULT NULL AFTER `notify_oconly`');
     }
 }
 
-function dbv_134()  // fix removed cache list node IDs
+function dbv_134(): void  // fix removed cache list node IDs
 {
     global $opt;
     sql(
@@ -770,14 +770,14 @@ function dbv_134()  // fix removed cache list node IDs
     );
 }
 
-function dbv_135()  // move KML cache type names from search.kml.inc.php to database
+function dbv_135(): void  // move KML cache type names from search.kml.inc.php to database
 {
     if (!sql_field_exists('cache_type', 'kml_name')) {
         sql('ALTER TABLE `cache_type` ADD COLUMN `kml_name` VARCHAR(10) NOT NULL');
     }
 }
 
-function dbv_136()  // move main town table from settings into database
+function dbv_136(): void  // move main town table from settings into database
 {
     if (!sql_table_exists('towns')) {
         sql(
@@ -794,7 +794,7 @@ function dbv_136()  // move main town table from settings into database
     }
 }
 
-function dbv_137()  // partial revert of mutation 130
+function dbv_137(): void  // partial revert of mutation 130
 {
     sql("ALTER TABLE `cache_desc` CHANGE COLUMN `desc_html` `desc_html` TINYINT(1) NOT NULL DEFAULT '1' COMMENT ''");
     sql("ALTER TABLE `cache_logs` CHANGE COLUMN `text_html` `text_html` TINYINT(1) NOT NULL DEFAULT '1' COMMENT ''");
@@ -804,7 +804,7 @@ function dbv_137()  // partial revert of mutation 130
     );
 }
 
-function dbv_138()  // add some reasonable indices, e.g. to optimize special-purpose deletion functions
+function dbv_138(): void  // add some reasonable indices, e.g. to optimize special-purpose deletion functions
 {
     if (!sql_index_exists('cache_reports', 'cacheid')) {
         sql('ALTER TABLE `cache_reports` ADD INDEX `cacheid` (`cacheid`)');
@@ -835,27 +835,27 @@ function dbv_138()  // add some reasonable indices, e.g. to optimize special-pur
     }
 }
 
-function dbv_139()
+function dbv_139(): void
 {
     if (!sql_field_exists('user', 'language_guessed')) {
         sql("ALTER TABLE `user` ADD COLUMN `language_guessed` TINYINT(1) NOT NULL DEFAULT '0' AFTER `language`");
     }
 }
 
-function dbv_140()   // last-used user domain, for email contents
+function dbv_140(): void   // last-used user domain, for email contents
 {
     if (!sql_field_exists('user', 'domain')) {
         sql('ALTER TABLE `user` ADD COLUMN `domain` VARCHAR(40) DEFAULT NULL AFTER `language_guessed`');
     }
 }
 
-function dbv_141()   // adjust some comments
+function dbv_141(): void   // adjust some comments
 {
     sql("ALTER TABLE `cache_logs` MODIFY `log_last_modified` DATETIME NOT NULL COMMENT 'via Triggers'");
     sql("ALTER TABLE `log_types` MODIFY `icon_small` VARCHAR(255) NOT NULL COMMENT ''");
 }
 
-function dbv_142()   // drop obsolete table
+function dbv_142(): void   // drop obsolete table
 {
     // This table has/had an index over a 255 chars column, which would produce
     // the error "index too long (maximum is 1000 chars)" when trying to convert
@@ -870,12 +870,12 @@ function dbv_142()   // drop obsolete table
 
 /***** OC release 3.0.16 *****/
 
-function dbv_143()   // navicache WP is obsolete
+function dbv_143(): void   // navicache WP is obsolete
 {
     sql("ALTER TABLE `caches` MODIFY `wp_nc` VARCHAR(6) NOT NULL COMMENT 'obsolete'");
 }
 
-function dbv_144()   // add log versioning to allow log vandalism restore
+function dbv_144(): void   // add log versioning to allow log vandalism restore
 {
     if (!sql_table_exists('cache_logs_modified')) {
         sql(
@@ -900,7 +900,7 @@ function dbv_144()   // add log versioning to allow log vandalism restore
     }
 }
 
-function dbv_145()   // optimize log change recording
+function dbv_145(): void   // optimize log change recording
 {
     sql(
         'ALTER TABLE `cache_logs_modified`
@@ -915,7 +915,7 @@ function dbv_145()   // optimize log change recording
 
 /***** OC release 3.0.17 *****/
 
-function dbv_146()   // NM flags
+function dbv_146(): void   // NM flags
 {
     if (!sql_field_exists('cache_logs', 'needs_maintenance')) {
         sql("ALTER TABLE `cache_logs`
@@ -971,14 +971,14 @@ function dbv_146()   // NM flags
     }
 }
 
-function dbv_147()
+function dbv_147(): void
 {
     if (!sql_field_exists('log_types', 'maintenance_logs')) {
         sql('ALTER TABLE `log_types` ADD COLUMN `maintenance_logs` TINYINT(1) NOT NULL');
     }
 }
 
-function dbv_148()   // add log contents modification date
+function dbv_148(): void   // add log contents modification date
 {
     if (!sql_field_exists('cache_logs', 'entry_last_modified')) {
         sql(
@@ -1003,7 +1003,7 @@ function dbv_148()   // add log contents modification date
     }
 }
 
-function dbv_149()   // add editcache flag to protect old coordinates
+function dbv_149(): void   // add editcache flag to protect old coordinates
 {
     if (!sql_field_exists('caches', 'protect_old_coords')) {
         sql(
@@ -1016,7 +1016,7 @@ function dbv_149()   // add editcache flag to protect old coordinates
 
 /***** OC release 3.0.18 *****/
 
-function dbv_150()   // add history of reported waypoints
+function dbv_150(): void   // add history of reported waypoints
 {
     if (!sql_table_exists('waypoint_reports')) {
         sql(
@@ -1034,7 +1034,7 @@ function dbv_150()   // add history of reported waypoints
     }
 }
 
-function dbv_151()   // new date field for ordering logs
+function dbv_151(): void   // new date field for ordering logs
 {
     if (!sql_field_exists('cache_logs', 'order_date')) {
         sql('ALTER TABLE `cache_logs` ADD COLUMN `order_date` DATETIME NOT NULL AFTER `date`');
@@ -1065,19 +1065,19 @@ function dbv_151()   // new date field for ordering logs
     }
 }
 
-function dbv_152()
+function dbv_152(): void
 {
     if (!sql_field_exists('cache_reports', 'comment')) {
         sql('ALTER TABLE `cache_reports` ADD COLUMN `comment` MEDIUMTEXT NOT NULL');
     }
 }
 
-function dbv_153()  // generic trigger update, see notes on "maintain.php update"
+function dbv_153(): void  // generic trigger update, see notes on "maintain.php update"
 {
     update_triggers();
 }
 
-function dbv_154()  // add pictures order option
+function dbv_154(): void  // add pictures order option
 {
     if (!sql_field_exists('pictures', 'seq')) {
         sql("ALTER TABLE `pictures` ADD COLUMN `seq` SMALLINT(5) NOT NULL DEFAULT '0'");
@@ -1118,21 +1118,21 @@ function dbv_154()  // add pictures order option
     );
 }
 
-function dbv_155()
+function dbv_155(): void
 {
     if (!sql_field_exists('cache_report_reasons', 'order')) {
         sql('ALTER TABLE `cache_report_reasons` ADD COLUMN `order` TINYINT(2) UNSIGNED NOT NULL');
     }
 }
 
-function dbv_156()  // clean up data created by bad cacheLogsBeforeUpdate trigger
+function dbv_156(): void  // clean up data created by bad cacheLogsBeforeUpdate trigger
 {
     sql("DELETE FROM `cache_logs_modified` WHERE `date` = '0000-00-00 00:00:00'");
 }
 
 /***** OC release 3.0.19 *****/
 
-function dbv_157()   // discard news entry system
+function dbv_157(): void   // discard news entry system
 {
     // The feature of displaying news via `news` table stays for now,
     // but the feature of entering news via the OC website is discarded.
@@ -1145,7 +1145,7 @@ function dbv_157()   // discard news entry system
     );
 }
 
-function dbv_158()
+function dbv_158(): void
 {
     sql(
         "ALTER TABLE `cache_logs`
@@ -1157,7 +1157,7 @@ function dbv_158()
 
 /***** OC release 3.1.4 *****/
 
-function dbv_159()
+function dbv_159(): void
 {
     // optimization for OKAPI-search 'date_hidden' sorting option
     if (!sql_index_exists('caches', 'date_hidden')) {
@@ -1165,12 +1165,12 @@ function dbv_159()
     }
 }
 
-function dbv_160()
+function dbv_160(): void
 {
     // dummy function for obsolete mutation, replaced by 165
 }
 
-function dbv_161()
+function dbv_161(): void
 {
     global $opt;
 
@@ -1195,12 +1195,12 @@ function dbv_161()
     // Cache locations will be updated by the next cronjob run.
 }
 
-function dbv_162()
+function dbv_162(): void
 {
     // dummy function for obsolete mutation, replaced by 163
 }
 
-function dbv_163()
+function dbv_163(): void
 {
     // fix cache_location triggers
     update_triggers();
@@ -1208,7 +1208,7 @@ function dbv_163()
 
 /***** OC release 3.1.5 *****/
 
-function dbv_164()
+function dbv_164(): void
 {
     global $opt;
 
@@ -1282,7 +1282,7 @@ function dbv_164()
     // Next cache_location cronjob run will fill in the CL data.
 }
 
-function dbv_165()
+function dbv_165(): void
 {
     // remove trailing "\r" and double-spaces from ~ 7600 NPA names
     sql("UPDATE `npa_areas` SET `name` = REPLACE(REPLACE(`name`, '  ', ' '), '\r', '')");
@@ -1378,7 +1378,7 @@ function dbv_165()
     }
 }
 
-function dbv_166()
+function dbv_166(): void
 {
     // initiate complete rebuild of fulltext search index;
     // see https://redmine.opencaching.de/issues/1043
@@ -1404,12 +1404,12 @@ function dbv_166()
     );
 }
 
-function dbv_167()
+function dbv_167(): void
 {
     sql("DELETE FROM `sys_cron` WHERE `name` = 'okapi_cleanup'");
 }
 
-function dbv_168()
+function dbv_168(): void
 {
     // add nuts entity display selection to countries
     if (!sql_field_exists('countries', 'adm_display2')) {

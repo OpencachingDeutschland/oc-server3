@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 VM_IP        = "10.10.0.101"
-VM_MEMORY    = 1024
+VM_MEMORY    = 2096
 VM_CPUS      = 2
 VM_NAME      = "OpenCaching DEV VM"
 VM_HOST      = "local.team-opencaching.de"
@@ -18,6 +18,7 @@ Vagrant.configure(2) do |config|
     config.vm.network "forwarded_port", guest: 443,        host: 443,  auto_correct: true # https
     config.vm.network "forwarded_port", guest: 3306,    host: 3306,    auto_correct: true # mysql
 
+    # for linux users
     config.vm.synced_folder "./", "/var/www/html",
     id: "v-root",
     mount_options: ["rw", "tcp", "nolock", "noacl", "async"],
@@ -25,7 +26,9 @@ Vagrant.configure(2) do |config|
     nfs_udp: false,
     linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
 
-    #config.vm.synced_folder "./", "/var/www/html", create: true, type: "smb"
+    # for windows users please comment line 22 - 27 out if you run it under windows
+    # config.vm.synced_folder "./", "/var/www/html", create: true, type: "smb"
+
     config.vm.provider :virtualbox do |v|
         v.name = VM_NAME
         v.customize([

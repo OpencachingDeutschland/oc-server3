@@ -150,23 +150,9 @@ $opt['system']['maillog']['inactivity_warning'] = 30;   // warn after N days wit
  *
  * other parameters may be customized
  */
-$opt['session']['mode'] = SAVE_COOKIE;     // don't change - other option "SAVE_SESSION" is not implemented properly
-$opt['session']['cookiename'] = 'ocvagrant'; // only with SAVE_COOKIE
+$opt['session']['cookiename'] = 'ocdevelopment'; // only with SAVE_COOKIE
 $opt['session']['path'] = '/';
 $opt['session']['domain'] = '';    // may be overwritten by $opt['domain'][...]['cookiedomain']
-
-/* maximum session lifetime
- */
-$opt['session']['expire']['cookie'] = 31536000; // when cookies used (default 1 year)
-$opt['session']['expire']['url'] = 1800;        // when no cookies used (default 30 min since last call), attention to session.js
-
-/* If the Referer was sent by the client and the substring was not found,
- * the embedded session id will be marked as invalid.
- * Only used with session.mode = SAVE_SESSION
- */
-$opt['session']['check_referer'] = true;
-
-$opt['session']['login_statistics'] = false;
 
 /* Debug level (combine with OR | )
  *  DEBUG_NO              = productive use
@@ -310,7 +296,7 @@ $opt['logic']['cachemaps']['iframe'] = false;
  *
  * Coordinates of new caches are appended to the url.
  */
-$opt['logic']['minimapurl'] = 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';
+$opt['logic']['minimapurl'] = 'https://www.opencaching.de/theme/frontend/images/logo/globi_cache.png?active=false'; // 'http://maps.googleapis.com/maps/api/staticmap?sensor=false&key={gmkey}&size=220x220&maptype=roadmap&markers=color:blue|size:small';
 
 /* target vars
  * all _REQUEST-vars that identifiy the current page for target redirection after login
@@ -415,9 +401,6 @@ $opt['cron']['sitemaps']['submit'] = false;
 $opt['cron']['geokrety']['run'] = true;
 $opt['cron']['geokrety']['xml_archive'] = false;
 $opt['cron']['autoarchive']['run'] = false;
-$opt['cron']['gcwp']['sources'] = [];
-$opt['cron']['gcwp']['fulllist'] = '';
-$opt['cron']['gcwp']['report'] = '';
 $opt['cron']['replicate']['delete_hidden_caches']['url'] = '';
 
 /* E-Mail settings
@@ -462,7 +445,7 @@ $opt['lib']['w3w']['apikey'] = 'YOURAPIKEY';
 // Google Maps API key
 // https://developers.google.com/maps/documentation/static-maps/?hl=de
 $opt['lib']['google']['mapkey'] = [];
-//$opt['lib']['google']['mapkey']['www.opencaching.xy'] = 'EEFFGGHH...';
+$opt['lib']['google']['mapkey']['docker.team-opencaching.de'] = 'AIzaSyDNltPz6LygW02F74zqGpwMloy8ZicsX1E';
 
 /* config of map.php
  */

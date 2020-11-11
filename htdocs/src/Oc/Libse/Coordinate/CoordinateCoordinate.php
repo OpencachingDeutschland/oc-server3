@@ -45,7 +45,7 @@ class CoordinateCoordinate
     {
         $rs = sql('SELECT latitude, longitude FROM caches WHERE cache_id = &1', $cacheid);
         $r = sql_fetch_array($rs);
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
 
         return new self($r['latitude'], $r['longitude']);
     }

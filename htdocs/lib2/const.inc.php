@@ -22,9 +22,6 @@ define('PHP_DEBUG_OFF', 0);
 define('PHP_DEBUG_ON', 1);
 define('PHP_DEBUG_SKIP', - 1);
 
-define('SAVE_COOKIE', 0);
-define('SAVE_SESSION', 1);
-
 define('DB_MODE_FRAMEWORK', 0);
 define('DB_MODE_BUSINESSLAYER', 1);
 define('DB_MODE_USER', 2);

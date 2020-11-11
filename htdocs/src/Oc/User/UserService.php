@@ -5,9 +5,6 @@ namespace Oc\User;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class UserService
- */
 class UserService
 {
     /**
@@ -15,11 +12,6 @@ class UserService
      */
     private $userRepository;
 
-    /**
-     * UserService constructor.
-     *
-     * @param UserRepository $userRepository
-     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -30,7 +22,7 @@ class UserService
      *
      * @return UserEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->userRepository->fetchAll();
@@ -43,12 +35,8 @@ class UserService
 
     /**
      * Fetches a user by its id.
-     *
-     * @param int $id
-     *
-     * @return null|UserEntity
      */
-    public function fetchOneById($id)
+    public function fetchOneById(int $id): ?UserEntity
     {
         try {
             $result = $this->userRepository->fetchOneById($id);
@@ -61,36 +49,24 @@ class UserService
 
     /**
      * Creates a user in the database.
-     *
-     * @param UserEntity $entity
-     *
-     * @return UserEntity
      */
-    public function create(UserEntity $entity)
+    public function create(UserEntity $entity): UserEntity
     {
         return $this->userRepository->create($entity);
     }
 
     /**
      * Update a user in the database.
-     *
-     * @param UserEntity $entity
-     *
-     * @return UserEntity
      */
-    public function update(UserEntity $entity)
+    public function update(UserEntity $entity): UserEntity
     {
         return $this->userRepository->update($entity);
     }
 
     /**
      * Removes a user from the database.
-     *
-     * @param UserEntity $entity
-     *
-     * @return UserEntity
      */
-    public function remove(UserEntity $entity)
+    public function remove(UserEntity $entity): UserEntity
     {
         return $this->userRepository->remove($entity);
     }

@@ -298,7 +298,7 @@ class cachelog
         return $saved;
     }
 
-    public function updatePictureStat()
+    public function updatePictureStat(): void
     {
         sql(
             "UPDATE `cache_logs` SET `picture` =
@@ -431,11 +431,8 @@ class cachelog
     {
         $dateOk = false;
 
-        if (is_numeric($month)
-            && is_numeric($day)
-            && is_numeric($year)
-            && ($hour . $minute == '' || is_numeric($hour))
-            && ($minute == '' || is_numeric($minute))
+        if (($hour . $minute === '' || is_numeric($hour))
+            && ($minute === '' || is_numeric($minute))
         ) {
             $dateOk = checkdate($month, $day, $year)
                 && ($year >= 2000)
@@ -446,8 +443,8 @@ class cachelog
             if ($dateOk && $submit) {
                 $dateOk = (
                     mktime(
-                        $hour + 0,
-                        $minute + 0,
+                        (int) $hour,
+                        (int) $minute,
                         0,
                         $month,
                         $day,

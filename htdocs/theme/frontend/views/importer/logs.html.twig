@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('oc_import_logs_importlogs_index') }}" method="post" enctype="multipart/form-data">
+        Select gpx file to upload:
+        <input type="file" name="gpxFile" id="gpxFile">
+        <input type="submit" value="Upload Logs" name="submit">
+    </form>
+    {{ dump(imports) }}
+{% endblock %}

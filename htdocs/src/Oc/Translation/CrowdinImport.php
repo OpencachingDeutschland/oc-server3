@@ -14,15 +14,12 @@ class CrowdinImport
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-    public function importTranslations()
+    public function importTranslations(): void
     {
         $translationArray = $this
             ->readCrowdinCsv(__DIR__ . '/../../../app/Resources/translations/legacycode/oc_legacy.de.csv');
@@ -44,10 +41,9 @@ class CrowdinImport
     }
 
     /**
-     * @param $path
      * @return TranslationStruct[]
      */
-    private function readCrowdinCsv($path)
+    private function readCrowdinCsv(string $path): array
     {
         $csvHeadline = [];
         $translationStructs = [];

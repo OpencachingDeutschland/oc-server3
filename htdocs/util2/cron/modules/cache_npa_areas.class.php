@@ -16,7 +16,7 @@ class CacheNpaAreas
     public $name = 'cache_npa_areas';
     public $interval = 600;
 
-    public function run()
+    public function run(): void
     {
         $rsCache = sql('SELECT `cache_id`, `latitude`, `longitude` FROM `caches` WHERE `need_npa_recalc`=1');
         while ($rCache = sql_fetch_assoc($rsCache)) {

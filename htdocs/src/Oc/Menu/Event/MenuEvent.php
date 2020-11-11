@@ -29,14 +29,6 @@ class MenuEvent extends Event
      */
     private $eventDispatcher;
 
-    /**
-     * ConfigureMenuEvent constructor.
-     *
-     * @param EventDispatcherInterface $eventDispatcher
-     * @param FactoryInterface $factory
-     * @param ItemInterface $menu
-     * @param ItemInterface $currentItem
-     */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
         FactoryInterface $factory,
@@ -49,45 +41,30 @@ class MenuEvent extends Event
         $this->currentItem = $currentItem;
     }
 
-    /**
-     * @return EventDispatcherInterface
-     */
-    public function getEventDispatcher()
+    public function getEventDispatcher(): EventDispatcherInterface
     {
         return $this->eventDispatcher;
     }
 
-    /**
-     * @return FactoryInterface
-     */
-    public function getFactory()
+    public function getFactory(): FactoryInterface
     {
         return $this->factory;
     }
 
-    /**
-     * @return ItemInterface
-     */
-    public function getMenu()
+    public function getMenu(): ItemInterface
     {
         return $this->menu;
     }
 
-    /**
-     * @return ItemInterface
-     */
-    public function getCurrentItem()
+    public function getCurrentItem(): ItemInterface
     {
         return $this->currentItem;
     }
 
     /**
      * Creates an event object of it self but with given currentItem.
-     *
-     * @param ItemInterface $currentItem
-     * @return self
      */
-    public function createSubEvent(ItemInterface $currentItem)
+    public function createSubEvent(ItemInterface $currentItem): self
     {
         return new self(
             $this->eventDispatcher,

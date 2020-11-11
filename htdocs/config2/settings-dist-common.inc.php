@@ -155,7 +155,7 @@ if (!isset($opt['page']['https']['force_login'])) {
  * All generated URls end on '/'.
  */
 
-function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, $lib)
+function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, $lib): void
 {
     // $opt is passed as parameter because it is *local* in okapi_settings.php.
 
@@ -271,7 +271,7 @@ function set_absolute_urls(&$opt, $primary_site_url, $primary_shortlink_domain, 
 }
 
 
-function set_common_domain_config(&$opt)
+function set_common_domain_config(&$opt): void
 {
     // $opt is passed as parameter because it is *local* in okapi_settings.php.
 

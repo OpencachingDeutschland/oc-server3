@@ -12,7 +12,7 @@ class SessionDataCookieTest extends AbstractModuleTest
      */
     private $sessionDataCookie;
 
-    public function setUp()
+    public function setUp(): void
     {
         global $opt;
         $opt['session']['cookiename'] = 'unit-test';
@@ -22,7 +22,7 @@ class SessionDataCookieTest extends AbstractModuleTest
     /**
      * @group unit-tests
      */
-    public function testSessionDataCookieConstructor()
+    public function testSessionDataCookieConstructor(): void
     {
         $this->sessionDataCookie->set('testKey', 'testValue');
         self::assertEquals('testValue', $this->sessionDataCookie->get('testKey'));

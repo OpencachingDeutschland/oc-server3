@@ -11,21 +11,21 @@ $tpl->menuitem = MNU_MYPROFILE_DATA;
 $login->verify();
 
 $action = isset($_REQUEST['action']) ? mb_strtolower($_REQUEST['action']) : 'view';
-if ($action != 'change' && $action != 'changeemail' && $action != 'view') {
+if ($action !== 'change' && $action !== 'changeemail' && $action !== 'view') {
     $action = 'view';
 }
 
 if ($login->userid == 0) {
-    if ($action == 'change' || $action == 'changeemail') {
+    if ($action === 'change' || $action === 'changeemail') {
         $tpl->redirect('login.php?target=' . urlencode('myprofile.php?action=change'));
     } else {
         $tpl->redirect('login.php?target=myprofile.php');
     }
 }
 
-if ($action == 'changeemail') {
+if ($action === 'changeemail') {
     $tpl->redirect('newemail.php');
-} elseif ($action == 'change') {
+} elseif ($action === 'change') {
     change();
 } else {
     display();
@@ -73,7 +73,7 @@ function change()
 
     if (isset($_REQUEST['country'])) {
         $tpl->assign('countryCode', $_REQUEST['country']);
-        if (!$user->setCountryCode(($_REQUEST['country'] == 'XX') ? null : $_REQUEST['country'])) {
+        if (!$user->setCountryCode(($_REQUEST['country'] === 'XX') ? null : $_REQUEST['country'])) {
             $tpl->assign('countryError', true);
             $bError = true;
         }
@@ -123,10 +123,6 @@ function change()
     $bPermanentLogin = isset($_REQUEST['save']) ? isset($_REQUEST['permanentLogin']) : $user->getPermanentLogin();
     $tpl->assign('permanentLogin', $bPermanentLogin);
     $user->setPermanentLogin($bPermanentLogin);
-
-    $bNoHTMLEditor = isset($_REQUEST['save']) ? isset($_REQUEST['noHTMLEditor']) : $user->getNoHTMLEditor();
-    $tpl->assign('noHTMLEditor', $bNoHTMLEditor);
-    $user->setNoHTMLEditor($bNoHTMLEditor);
 
     $bUsermailSendAddress = isset($_REQUEST['save']) ? isset($_REQUEST['sendUsermailAddress']) : $user->getUsermailSendAddress();
     $tpl->assign('sendUsermailAddress', $bUsermailSendAddress);
@@ -211,6 +207,5 @@ function assignFromUser($user)
 
     $tpl->assign('usePMR', $user->getUsePMR());
     $tpl->assign('permanentLogin', $user->getPermanentLogin());
-    $tpl->assign('noHTMLEditor', $user->getNoHTMLEditor());
     $tpl->assign('sendUsermailAddress', $user->getUsermailSendAddress());
 }

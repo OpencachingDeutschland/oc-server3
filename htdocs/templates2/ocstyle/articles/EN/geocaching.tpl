@@ -20,5 +20,5 @@
 
 <p>You think this sounds to good to be true? Just try it!</p>
 
-<p><br /><i>This translation ist based on a text from <a href="http://www.geocaching.de" target="_blank">http://www.geocaching.de</a> &ndash; thanks!</i></p>
+<p><br /><i>This translation ist based on a text from <a href="http://www.geocaching-info.de" target="_blank">http://www.geocaching-info.de</a> &ndash; thanks!</i></p>
 </div>

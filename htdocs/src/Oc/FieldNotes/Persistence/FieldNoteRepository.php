@@ -17,21 +17,18 @@ class FieldNoteRepository
      *
      * @var string
      */
-    const TABLE = 'field_note';
+    public const TABLE = 'field_note';
 
     /**
      * @var Connection
      */
     private $connection;
+
     /**
      * @var GeoCacheRepository
      */
     private $geoCacheRepository;
 
-    /**
-     * @param Connection $connection
-     * @param GeoCacheRepository $geoCacheRepository
-     */
     public function __construct(Connection $connection, GeoCacheRepository $geoCacheRepository)
     {
         $this->connection = $connection;
@@ -44,7 +41,7 @@ class FieldNoteRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return FieldNoteEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -69,13 +66,10 @@ class FieldNoteRepository
     /**
      * Fetches all GeoCaches by given where clause.
      *
-     * @param array $where
-     * @param array $order
-     *
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return FieldNoteEntity[]
      */
-    public function fetchBy(array $where = [], array $order = [])
+    public function fetchBy(array $where = [], array $order = []): array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -109,12 +103,9 @@ class FieldNoteRepository
     /**
      * Fetches a field note by given where clause.
      *
-     * @param array $where
-     *
      * @throws RecordNotFoundException Thrown when no record is found
-     * @return null|FieldNoteEntity
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []): ?FieldNoteEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -141,12 +132,9 @@ class FieldNoteRepository
     /**
      * Fetch latest user field note.
      *
-     * @param int $userId
-     *
      * @throws RecordNotFoundException
-     * @return FieldNoteEntity
      */
-    public function getLatestUserFieldNote($userId)
+    public function getLatestUserFieldNote(int $userId): FieldNoteEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -170,12 +158,9 @@ class FieldNoteRepository
     /**
      * Creates a field note in the database.
      *
-     * @param FieldNoteEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return FieldNoteEntity
      */
-    public function create(FieldNoteEntity $entity)
+    public function create(FieldNoteEntity $entity): FieldNoteEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -196,12 +181,9 @@ class FieldNoteRepository
     /**
      * Update a field note in the database.
      *
-     * @param FieldNoteEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return FieldNoteEntity
      */
-    public function update(FieldNoteEntity $entity)
+    public function update(FieldNoteEntity $entity): FieldNoteEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -223,12 +205,9 @@ class FieldNoteRepository
     /**
      * Removes a field note from the database.
      *
-     * @param FieldNoteEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return FieldNoteEntity
      */
-    public function remove(FieldNoteEntity $entity)
+    public function remove(FieldNoteEntity $entity): FieldNoteEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -246,12 +225,8 @@ class FieldNoteRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param FieldNoteEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(FieldNoteEntity $entity)
+    public function getDatabaseArrayFromEntity(FieldNoteEntity $entity): array
     {
         return [
             'id' => $entity->id,
@@ -265,12 +240,8 @@ class FieldNoteRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return FieldNoteEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): FieldNoteEntity
     {
         $entity = new FieldNoteEntity();
         $entity->id = $data['id'];

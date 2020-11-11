@@ -7,9 +7,6 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class LanguageRepository
- */
 class LanguageRepository
 {
     /**
@@ -17,18 +14,13 @@ class LanguageRepository
      *
      * @var string
      */
-    const TABLE = 'languages';
+    public const TABLE = 'languages';
 
     /**
      * @var Connection
      */
     private $connection;
 
-    /**
-     * LanguageRepository constructor.
-     *
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -40,7 +32,7 @@ class LanguageRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return LanguageEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -62,7 +54,7 @@ class LanguageRepository
      * @throws RecordsNotFoundException Thrown when no records are found
      * @return LanguageEntity[]
      */
-    public function fetchAllTranslated()
+    public function fetchAllTranslated(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -82,12 +74,9 @@ class LanguageRepository
     /**
      * Creates a language in the database.
      *
-     * @param LanguageEntity $entity
-     *
      * @throws RecordAlreadyExistsException
-     * @return LanguageEntity
      */
-    public function create(LanguageEntity $entity)
+    public function create(LanguageEntity $entity): LanguageEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -108,12 +97,9 @@ class LanguageRepository
     /**
      * Update a language in the database.
      *
-     * @param LanguageEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return LanguageEntity
      */
-    public function update(LanguageEntity $entity)
+    public function update(LanguageEntity $entity): LanguageEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -135,12 +121,9 @@ class LanguageRepository
     /**
      * Removes a language from the database.
      *
-     * @param LanguageEntity $entity
-     *
      * @throws RecordNotPersistedException
-     * @return LanguageEntity
      */
-    public function remove(LanguageEntity $entity)
+    public function remove(LanguageEntity $entity): LanguageEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -159,11 +142,9 @@ class LanguageRepository
     /**
      * Converts database array to entity array.
      *
-     * @param array $result
-     *
      * @return LanguageEntity[]
      */
-    private function getEntityArrayFromDatabaseArray(array $result)
+    private function getEntityArrayFromDatabaseArray(array $result): array
     {
         $languages = [];
 
@@ -176,12 +157,8 @@ class LanguageRepository
 
     /**
      * Maps the given entity to the database array.
-     *
-     * @param LanguageEntity $entity
-     *
-     * @return array
      */
-    public function getDatabaseArrayFromEntity(LanguageEntity $entity)
+    public function getDatabaseArrayFromEntity(LanguageEntity $entity): array
     {
         return [
             'short' => $entity->short,
@@ -198,12 +175,8 @@ class LanguageRepository
 
     /**
      * Prepares database array from properties.
-     *
-     * @param array $data
-     *
-     * @return LanguageEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data): LanguageEntity
     {
         $entity = new LanguageEntity();
         $entity->short = strtolower($data['short']);

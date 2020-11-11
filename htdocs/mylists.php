@@ -3,6 +3,8 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
+
 require __DIR__ . '/lib2/web.inc.php';
 require_once __DIR__ . '/lib2/edithelper.inc.php';
 
@@ -18,16 +20,31 @@ $user = new user($login->userid);
 $list_name = isset($_REQUEST['list_name']) ? trim($_REQUEST['list_name']) : '';
 $list_visibility = isset($_REQUEST['list_visibility']) ? $_REQUEST['list_visibility'] + 0 : 0;
 $list_password = isset($_REQUEST['list_password']) ? $_REQUEST['list_password'] : '';
-$list_caches = isset($_REQUEST['list_caches']) ? strtoupper(trim($_REQUEST['list_caches'])) : '';
 $watch = isset($_REQUEST['watch']);
 $desctext = isset($_REQUEST['desctext']) ? $_REQUEST['desctext'] : '';
 $switchDescMode = isset($_REQUEST['switchDescMode']) && $_REQUEST['switchDescMode'] == 1;
 $fromsearch = isset($_REQUEST['fromsearch']) && $_REQUEST['fromsearch'] == 1;
 
-if (isset($_REQUEST['descMode'])) {
-    $descMode = min(3, max(2, $_REQUEST['descMode'] + 0));
+if (isset($_REQUEST['list_caches'])) {
+    $list_caches = strtoupper(trim($_REQUEST['list_caches']));
+} elseif (isset($_REQUEST['addCache']) &&  $_REQUEST['addCache'] >= 1) {
+    $list_caches = $_REQUEST['addCache'];
 } else {
-    $descMode = $user->getNoHTMLEditor() ? 2 : 3;
+    $list_caches = '';
+}
+
+if (isset($_REQUEST['addCache'])){
+    foreach ($list_caches as $nCacheId) {
+        $cache = new cache($nCacheId);
+        $oc_codes[] = $cache->getWPOC();
+    }
+    $list_caches = implode(" ", $oc_codes);
+}
+
+if (isset($_REQUEST['descMode'])) {
+    $descMode = min(EditorConstants::EDITOR_MODE, max(EditorConstants::HTML_MODE, $_REQUEST['descMode'] + 0));
+} else {
+    $descMode = EditorConstants::EDITOR_MODE;
 }
 
 $edit_list = false;
@@ -44,7 +61,6 @@ if (isset($_REQUEST['new'])) {
     $watch = false;
     $desctext = '';
     // keep descMode of previous operation
-    $list_caches = '';
 }
 
 // save the data entered in the 'create new list' form
@@ -57,7 +73,7 @@ if (isset($_REQUEST['create'])) {
         $list->setNode($opt['logic']['node']['id']);
         $list->setPassword($list_password);
         $purifier = new OcHTMLPurifier($opt);
-        $list->setDescription($purifier->purify($desctext), $descMode == 3);
+        $list->setDescription($purifier->purify($desctext), $descMode == EditorConstants::EDITOR_MODE);
         if ($list->save()) {
             if ($list_caches != '') {
                 $result = $list->addCachesByWPs($list_caches);
@@ -81,8 +97,7 @@ if (isset($_REQUEST['edit'])) {
         $list_password = $list->getPassword();
         $watch = $list->isWatchedByMe();
         $desctext = $list->getDescription();
-        $descMode = $list->getDescHtmledit() ? 3 : 2;
-        $list_caches = '';
+        $descMode = $list->getDescHtmledit() ? EditorConstants::EDITOR_MODE : EditorConstants::HTML_MODE;
     }
 }
 
@@ -112,7 +127,7 @@ if (isset($_REQUEST['save']) && isset($_REQUEST['listid'])) {
         }
         $list->setPassword($list_password);
         $purifier = new OcHTMLPurifier($opt);
-        $list->setDescription($purifier->purify($desctext), $descMode == 3);
+        $list->setDescription($purifier->purify($desctext), $descMode == EditorConstants::EDITOR_MODE);
         $list->save();
 
         $list->watch($watch);
@@ -155,7 +170,7 @@ if ($fromsearch && !$switchDescMode && !$name_error && isset($_REQUEST['listid']
 }
 
 // prepare editor and editing
-if ($descMode == 3) {
+if ($descMode == EditorConstants::EDITOR_MODE) {
     $tpl->add_header_javascript('resource2/tinymce/tiny_mce_gzip.js');
     $tpl->add_header_javascript('resource2/tinymce/config/list.js.php?lang=' . strtolower($opt['template']['locale']));
 }

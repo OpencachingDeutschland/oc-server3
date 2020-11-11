@@ -15,17 +15,17 @@ class SiteMapXmlTest extends AbstractModuleTest
 
     private $domain = 'local.team-opencaching.de';
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->deleteSiteMap();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->deleteSiteMap();
     }
 
-    private function deleteSiteMap()
+    private function deleteSiteMap(): void
     {
         if (file_exists($this->siteMapFile)) {
             unlink($this->siteMapFile);
@@ -35,7 +35,7 @@ class SiteMapXmlTest extends AbstractModuleTest
         }
     }
 
-    public function test_open_creates_sitemapxml_file()
+    public function test_open_creates_sitemapxml_file(): void
     {
         $siteMap = new SiteMapXml();
         $siteMap->nMaxUrlCount = 8;

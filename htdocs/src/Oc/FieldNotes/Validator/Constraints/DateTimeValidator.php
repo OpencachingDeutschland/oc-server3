@@ -8,13 +8,25 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class DateTimeValidator extends ConstraintValidator
 {
-    const FORMAT_LONG = 'Y-m-d\TH:i:s\Z';
+    /**
+     * @var string
+     */
+    public const FORMAT_LONG = 'Y-m-d\TH:i:s\Z';
 
-    const FORMAT_LONG_EXPANDED = 'YYYY-MM-DDThh:mm:ssZ';
+    /**
+     * @var string
+     */
+    public const FORMAT_LONG_EXPANDED = 'YYYY-MM-DDThh:mm:ssZ';
 
-    const FORMAT_SHORT = 'Y-m-d\TH:i\Z';
+    /**
+     * @var string
+     */
+    public const FORMAT_SHORT = 'Y-m-d\TH:i\Z';
 
-    const FORMAT_SHORT_EXPANDED = 'YYYY-MM-DDThh:mmZ';
+    /**
+     * @var string
+     */
+    public const FORMAT_SHORT_EXPANDED = 'YYYY-MM-DDThh:mmZ';
 
     /**
      * Checks if the passed value is valid.
@@ -22,7 +34,7 @@ class DateTimeValidator extends ConstraintValidator
      * @param mixed $value The value that should be validated.
      * @param Constraint $constraint The constraint for the validation.
      */
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         $dateFormatLong = PHPDateTime::createFromFormat(self::FORMAT_LONG, $value);
         $dateFormatShort = PHPDateTime::createFromFormat(self::FORMAT_SHORT, $value);

@@ -4,9 +4,6 @@ namespace Oc\Country;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class CountryEntity
- */
 class CountryEntity extends AbstractEntity
 {
     /**
@@ -56,10 +53,8 @@ class CountryEntity extends AbstractEntity
 
     /**
      * Checks if the entity is new.
-     *
-     * @return bool
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->short === null;
     }

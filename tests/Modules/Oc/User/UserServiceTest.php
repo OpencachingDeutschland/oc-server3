@@ -17,7 +17,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests fetching all records with success - no exception is thrown.
      */
-    public function testFetchingAllReturnsArrayWithUserEntities()
+    public function testFetchingAllReturnsArrayWithUserEntities(): void
     {
         $userEntityArray = [
             new UserEntity(),
@@ -38,7 +38,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests fetching all records - exception is thrown because there are no records.
      */
-    public function testFetchingAllThrowsException()
+    public function testFetchingAllThrowsException(): void
     {
         $exception = new RecordsNotFoundException('No records found');
 
@@ -56,7 +56,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests fetching one record by id with success - no exception is thrown.
      */
-    public function testFetchingOneByIdReturnsEntity()
+    public function testFetchingOneByIdReturnsEntity(): void
     {
         $userEntity = new UserEntity();
 
@@ -75,7 +75,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests fetching one record by id - exception is thrown because there is no record.
      */
-    public function testFetchingOneByIdThrowsException()
+    public function testFetchingOneByIdThrowsException(): void
     {
         $exception = new RecordNotFoundException('Record with id #1 not found');
 
@@ -94,7 +94,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests that create returns the entity.
      */
-    public function testCreateReturnsEntity()
+    public function testCreateReturnsEntity(): void
     {
         $user = new UserEntity();
 
@@ -113,7 +113,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests that update returns the entity.
      */
-    public function testUpdateReturnsEntity()
+    public function testUpdateReturnsEntity(): void
     {
         $user = new UserEntity();
 
@@ -132,7 +132,7 @@ class UserServiceTest extends TestCase
     /**
      * Tests that remove returns the entity.
      */
-    public function testRemoveReturnsEntity()
+    public function testRemoveReturnsEntity(): void
     {
         $user = new UserEntity();
 

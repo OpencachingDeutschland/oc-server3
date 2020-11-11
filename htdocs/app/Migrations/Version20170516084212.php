@@ -10,10 +10,7 @@ use Doctrine\DBAL\Schema\Schema;
  */
 class Version20170516084212 extends AbstractMigration
 {
-    /**
-     * @param Schema $schema
-     */
-    public function up(Schema $schema)
+    public function up(Schema $schema): void
     {
         $this->abortIf(
             $this->connection->getDatabasePlatform()->getName() != 'mysql',
@@ -47,11 +44,8 @@ class Version20170516084212 extends AbstractMigration
 
         $this->addSql('ALTER TABLE page_block ADD FOREIGN KEY (page_id) REFERENCES page(id);');
     }
-
-    /**
-     * @param Schema $schema
-     */
-    public function down(Schema $schema)
+    
+    public function down(Schema $schema): void
     {
     }
 }

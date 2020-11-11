@@ -6,7 +6,13 @@
 ***************************************************************************}
 <!--m-->
 <tr>
+    {if $login.userid}
     <td class="{$listcolor}">&nbsp;</td>
+    <td class="{$listcolor}" rowspan="2"><input type="checkbox" name="addCache[]" value="{$cache.cache_id}"></td>
+    <td class="{$listcolor}" rowspan="2">&nbsp;</td>
+    {else}
+        <td class="{$listcolor}">&nbsp;</td>
+    {/if}
       <td class="{$listcolor}">{if $cache.distance !== null}{$cache.distance|sprintf:"%1.1f"|escape}&nbsp;{/if}</td>
       <td class="{$listcolor}" rowspan="2"><img src="resource2/{$opt.template.style}/images/cacheicon/{$cache.icon}" title="{$cache.cacheTypeName}" /></td>
       <td class="{$listcolor}" rowspan="2"><nobr>{include file="res_difficon.tpl" difficulty=$cache.difficulty}</nobr></td>

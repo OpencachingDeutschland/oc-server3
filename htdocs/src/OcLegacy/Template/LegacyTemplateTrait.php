@@ -4,26 +4,17 @@ namespace OcLegacy\Template;
 
 trait LegacyTemplateTrait
 {
-    /**
-     * @param int $menu
-     */
-    protected function setMenu($menu)
+    protected function setMenu(int $menu): void
     {
         $GLOBALS['tpl']->menuitem = $menu;
     }
 
-    /**
-     * @param string $title
-     */
-    protected function setTitle($title)
+    protected function setTitle(string $title): void
     {
         $GLOBALS['tpl']->title = $title;
     }
 
-    /**
-     * @param string $url
-     */
-    protected function setTarget($url)
+    protected function setTarget(string $url): void
     {
         $GLOBALS['tpl']->target = $url;
     }

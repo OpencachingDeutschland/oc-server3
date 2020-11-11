@@ -1,0 +1,50 @@
+version: "3.3"
+services:
+    mailhog:
+        image: mailhog/mailhog:latest
+        container_name: opencaching-mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+        networks:
+            - opencaching
+
+    mariadb:
+        image: mariadb:10.1
+        container_name: opencaching-mariadb
+        working_dir: /application
+        volumes:
+            - .:/application
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_DATABASE=opencaching
+            - MYSQL_USER=opencaching
+            - MYSQL_PASSWORD=opencaching
+        ports:
+            - "3306:3306"
+        networks:
+            - opencaching
+
+    webserver:
+        build: ./docker/httpd/
+        container_name: opencaching-webserver
+        restart: on-failure
+        working_dir: /app
+        volumes:
+            - .:/app
+        environment:
+            - WEB_DOCUMENT_ROOT=/app/htdocs
+            - XDEBUG_REMOTE_CONNECT_BACK=0
+            # the ip of your machine
+            # if using WSL2 on Windows it's the IP of your WSL Ethernet Adapter
+            - XDEBUG_REMOTE_HOST=172.23.64.1
+        ports:
+            - "80:80"
+        networks:
+            opencaching:
+                aliases:
+                    - docker.team-opencaching.de
+
+networks:
+    opencaching:
+        driver: bridge

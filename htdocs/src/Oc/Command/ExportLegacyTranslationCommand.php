@@ -29,7 +29,7 @@ class ExportLegacyTranslationCommand extends SymfonyCommand
      *
      * @throws InvalidArgumentException
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -38,14 +38,7 @@ class ExportLegacyTranslationCommand extends SymfonyCommand
             ->setDescription('export translation legacy translation system to crowdin');
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int|null
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $this->crowdinExport->exportTranslations();
     }

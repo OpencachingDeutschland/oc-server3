@@ -13,7 +13,7 @@ class CountryEntityTest extends TestCase
     /**
      * Tests that isNew returns true when the identifier id is null.
      */
-    public function testIsNewReturnsTrueOnIdentifierEqualsNull()
+    public function testIsNewReturnsTrueOnIdentifierEqualsNull(): void
     {
         $entity = new CountryEntity();
 
@@ -23,7 +23,7 @@ class CountryEntityTest extends TestCase
     /**
      * Tests that isNew returns false when the identifier id is not null.
      */
-    public function testIsNewReturnsFalseWhenIdentifierIsPresent()
+    public function testIsNewReturnsFalseWhenIdentifierIsPresent(): void
     {
         $entity = new CountryEntity();
         $entity->short = 'de';
@@ -34,7 +34,7 @@ class CountryEntityTest extends TestCase
     /**
      * Tests toArray returns correct array.
      */
-    public function testToArray()
+    public function testToArray(): void
     {
         $entity = new CountryEntity();
         $entity->short = 'AD';
@@ -63,7 +63,7 @@ class CountryEntityTest extends TestCase
     /**
      * Tests fromArray applies correct values.
      */
-    public function testFromArray()
+    public function testFromArray(): void
     {
         $entityArray = [
             'short' => 'AD',

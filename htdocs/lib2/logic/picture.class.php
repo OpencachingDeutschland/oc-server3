@@ -112,7 +112,7 @@ class picture
     /**
      * @param string $sFilename
      */
-    public function setFilenames($sFilename)
+    public function setFilenames($sFilename): void
     {
         global $opt;
 
@@ -145,7 +145,7 @@ class picture
      * @param bool $bRestoring
      * @param int $original_id
      */
-    private function setArchiveFlag($bRestoring, $original_id = 0)
+    private function setArchiveFlag($bRestoring, $original_id = 0): void
     {
         global $login;
 
@@ -179,7 +179,7 @@ class picture
         // @archive_picop and @original_picid are evaluated by trigger functions
     }
 
-    private function resetArchiveFlag()
+    private function resetArchiveFlag(): void
     {
         sql('SET @archive_picop=FALSE');
         sql('SET @original_picid=0');
@@ -530,7 +530,7 @@ class picture
     /**
      * @param int $position
      */
-    public function setPosition($position)
+    public function setPosition($position): void
     {
         if ($this->originalPosition === false) {
             // position numbers are always >= 1

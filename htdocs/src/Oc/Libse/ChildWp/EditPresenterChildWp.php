@@ -26,7 +26,7 @@ class EditPresenterChildWp extends PresenterChildWp
         return $translate->t('Save', '', '', 0);
     }
 
-    protected function onDoSubmit($coordinate, $description)
+    protected function onDoSubmit($coordinate, $description): void
     {
         $this->childWpHandler->update(
             $this->childId,
@@ -37,7 +37,7 @@ class EditPresenterChildWp extends PresenterChildWp
         );
     }
 
-    protected function onPrepare($template)
+    protected function onPrepare($template): void
     {
         $template->assign(self::tpl_child_id, $this->childId);
     }

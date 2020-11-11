@@ -14,9 +14,6 @@ class GeoCacheService
      */
     private $geoCacheRepository;
 
-    /**
-     * @param GeoCacheRepository $geoCacheRepository
-     */
     public function __construct(GeoCacheRepository $geoCacheRepository)
     {
         $this->geoCacheRepository = $geoCacheRepository;
@@ -27,7 +24,7 @@ class GeoCacheService
      *
      * @return GeoCacheEntity[]
      */
-    public function fetchAll()
+    public function fetchAll(): array
     {
         try {
             $result = $this->geoCacheRepository->fetchAll();
@@ -40,12 +37,8 @@ class GeoCacheService
 
     /**
      * Fetch a waypoint by given type.
-     *
-     * @param string $waypoint
-     *
-     * @return GeoCacheEntity|null
      */
-    public function fetchByWaypoint($waypoint)
+    public function fetchByWaypoint(string $waypoint): ?GeoCacheEntity
     {
         $waypointEntity = null;
 
@@ -70,36 +63,24 @@ class GeoCacheService
 
     /**
      * Creates a GeoCache in the database.
-     *
-     * @param GeoCacheEntity $entity
-     *
-     * @return GeoCacheEntity
      */
-    public function create(GeoCacheEntity $entity)
+    public function create(GeoCacheEntity $entity): GeoCacheEntity
     {
         return $this->geoCacheRepository->create($entity);
     }
 
     /**
      * Update a GeoCache in the database.
-     *
-     * @param GeoCacheEntity $entity
-     *
-     * @return GeoCacheEntity
      */
-    public function update(GeoCacheEntity $entity)
+    public function update(GeoCacheEntity $entity): GeoCacheEntity
     {
         return $this->geoCacheRepository->update($entity);
     }
 
     /**
      * Removes a GeoCache from the database.
-     *
-     * @param GeoCacheEntity $entity
-     *
-     * @return GeoCacheEntity
      */
-    public function remove(GeoCacheEntity $entity)
+    public function remove(GeoCacheEntity $entity): GeoCacheEntity
     {
         return $this->geoCacheRepository->remove($entity);
     }

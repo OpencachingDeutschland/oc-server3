@@ -77,7 +77,7 @@ $emailheaders = 'From: "' . $emailaddr . '" <' . $emailaddr . '>';
  * @param string $logtext
  * @param $details
  */
-function logentry($module, $eventId, $userId, $objectid1, $objectid2, $logtext, $details)
+function logentry($module, $eventId, $userId, $objectid1, $objectid2, $logtext, $details): void
 {
     sql(
         "INSERT INTO logentries (`module`, `eventid`, `userid`, `objectid1`, `objectid2`, `logtext`, `details`)
@@ -112,11 +112,11 @@ function escape_javascript($text)
     return str_replace('\'', '\\\'', str_replace('"', '&quot;', $text));
 }
 
-// called if mysql_query failed, sends email to sysadmin
+// called if mysqli_query failed, sends email to sysadmin
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_failed()
+function sql_failed(): void
 {
     sql_error();
 }
@@ -176,7 +176,7 @@ function getSysConfig($name, $default)
  * @param string $name
  * @param string $value
  */
-function setSysConfig($name, $value)
+function setSysConfig($name, $value): void
 {
     if (sqlValue('SELECT COUNT(*) FROM sysconfig WHERE name=\'' . sql_escape($name) . '\'', 0) == 1) {
         sql(
@@ -196,7 +196,7 @@ function setSysConfig($name, $value)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
- * @return resource
+ * @return mysqli_result
  */
 function sql($sql)
 {
@@ -222,38 +222,18 @@ function sql($sql)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
- * @return resource
+ * @return mysqli_result
  */
 function sql_slave($sql)
 {
-    global $dblink_slave;
-
-    // prepare args
-    $args = func_get_args();
-    unset($args[0]);
-
-    if (isset($args[1]) && is_array($args[1])) {
-        $tmp_args = $args[1];
-        unset($args);
-
-        // correct indices
-        $args = array_merge([0], $tmp_args);
-        unset($tmp_args);
-        unset($args[0]);
-    }
-
-    if ($dblink_slave === false) {
-        db_connect_anyslave();
-    }
-
-    return sql_internal($dblink_slave, $sql, true, $args);
+    throw new InvalidArgumentException('sql slave support was removed!');
 }
 
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $_dblink
  * @param $sql
- * @return resource
+ * @return mysqli_result
  */
 function sql_internal($_dblink, $sql)
 {
@@ -401,7 +381,7 @@ function sql_internal($_dblink, $sql)
     $cSqlExecution = new CBench;
     $cSqlExecution->start();
 
-    $result = mysql_query($filtered_sql, $_dblink);
+    $result = mysqli_query($_dblink, $filtered_sql);
     if ($result === false) {
         sql_error();
     }
@@ -424,7 +404,7 @@ function sql_internal($_dblink, $sql)
 function sql_escape($value)
 {
     global $dblink;
-    $value = mysql_real_escape_string($value, $dblink);
+    $value = mysqli_real_escape_string($dblink, $value);
     $value = mb_ereg_replace('&', '\&', $value);
 
     return $value;
@@ -446,7 +426,7 @@ function sql_escape_backtick($value)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  */
-function sql_error()
+function sql_error(): void
 {
     global $debug_page;
     global $sql_errormail;
@@ -455,9 +435,10 @@ function sql_error()
     global $interface_output;
     global $dberrormsg;
     global $db_error;
+    global $dblink;
 
     $db_error += 1;
-    $msql_error = mysql_errno() . ': ' . mysql_error();
+    $msql_error = mysqli_connect_error() . ': ' . mysqli_error($dblink);
     if ($db_error > 1) {
         $msql_error .= "\n(** error recursion **)";
     }
@@ -504,7 +485,7 @@ function sql_error()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $warnmessage
  */
-function sql_warn($warnmessage)
+function sql_warn($warnmessage): void
 {
     global $sql_errormail;
     global $emailheaders;
@@ -529,7 +510,7 @@ function sql_warn($warnmessage)
  */
 function sql_fetch_array($rs)
 {
-    return mysql_fetch_array($rs);
+    return mysqli_fetch_array($rs);
 }
 
 /**
@@ -539,7 +520,7 @@ function sql_fetch_array($rs)
  */
 function sql_fetch_assoc($rs)
 {
-    return mysql_fetch_assoc($rs);
+    return mysqli_fetch_assoc($rs);
 }
 
 /**
@@ -549,7 +530,7 @@ function sql_fetch_assoc($rs)
  */
 function sql_fetch_row($rs)
 {
-    return mysql_fetch_row($rs);
+    return mysqli_fetch_row($rs);
 }
 
 /**
@@ -578,7 +559,7 @@ function sql_fetch_column($rs)
  */
 function sql_free_result($rs)
 {
-    return mysql_free_result($rs);
+    return mysqli_free_result($rs);
 }
 
 function mb_trim($str)
@@ -612,19 +593,14 @@ function mb_trim($str)
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
-function db_disconnect()
+function db_disconnect(): void
 {
-    global $dbpconnect, $dblink, $dblink_slave, $dbslaveid;
+    global $dbpconnect, $dblink;
 
     //is connected and no persistent connect used?
     if (($dbpconnect == false) && ($dblink !== false)) {
-        @mysql_close($dblink);
+        @mysqli_close($dblink);
         $dblink = false;
-    }
-    if (($dbpconnect == false) && ($dblink_slave !== false)) {
-        @mysql_close($dblink_slave);
-        $dblink_slave = false;
-        $dbslaveid = -1;
     }
 }
 
@@ -632,127 +608,15 @@ function db_disconnect()
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * database handling
  */
-function db_connect()
+function db_connect(): void
 {
-    global $dblink, $dbpconnect, $dbusername, $dbname, $dbserver, $dbpasswd, $dbpconnect;
-    global $opt;
+    global $dblink, $dbusername, $dbname, $dbserver, $dbpasswd;
 
     //connect to the database by the given method - no php error reporting!
-    if ($dbpconnect == true) {
-        $dblink = @mysql_pconnect($dbserver, $dbusername, $dbpasswd);
-    } else {
-        $dblink = @mysql_connect($dbserver, $dbusername, $dbpasswd);
-    }
+    $dblink = mysqli_connect($dbserver, $dbusername, $dbpasswd, $dbname);
 
-    if ($dblink != false) {
-        mysql_query("SET NAMES '" . mysql_real_escape_string($opt['charset']['mysql'], $dblink) . "'", $dblink);
-
-        //database connection established ... set the used database
-        if (@mysql_select_db($dbname, $dblink) == false) {
-            //error while setting the database ... disconnect
-            db_disconnect();
-            $dblink = false;
-        }
-    }
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
-function db_slave_exclude()
-{
-    global $usr;
-    if ($usr === false) {
-        return;
-    }
-
-    sql(
-        "INSERT INTO `sys_repl_exclude` (`user_id`, `datExclude`) VALUES ('&1', NOW())
-         ON DUPLICATE KEY UPDATE `datExclude`=NOW()",
-        $usr['userid']
-    );
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
-function db_connect_anyslave()
-{
-    global $dblink, $dblink_slave, $opt, $usr, $dbslaveid;
-
-    if ($dblink_slave !== false) {
-        return;
-    }
-
-    $nMaxTimeDiff = $opt['db']['slave']['max_behind'];
-    if ($usr !== false) {
-        $nMaxTimeDiff = sqlValue(
-            "SELECT TIMESTAMP(NOW())-TIMESTAMP(`datExclude`) FROM `sys_repl_exclude` WHERE `user_id`='" . ($usr['userid'] + 0) . "'",
-            $opt['db']['slave']['max_behind']
-        );
-        if ($nMaxTimeDiff > $opt['db']['slave']['max_behind']) {
-            $nMaxTimeDiff = $opt['db']['slave']['max_behind'];
-        }
-    }
-
-    $id = sqlValue(
-        "SELECT `id`, `weight`*RAND() AS `w` FROM `sys_repl_slaves` WHERE `active`=1 AND `online`=1 AND (TIMESTAMP(NOW())-TIMESTAMP(`last_check`)+`time_diff`<'" . ($nMaxTimeDiff + 0) . "') ORDER BY `w` DESC LIMIT 1",
-        -1
-    );
-
-    if ($id == -1) {
-        $dblink_slave = $dblink;
-        $dbslaveid = -1;
-    } else {
-        db_connect_slave($id);
-    }
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
-function db_connect_primary_slave()
-{
-    global $opt, $dblink, $dblink_slave, $dbslaveid;
-
-    if ($opt['db']['slave']['primary'] == -1) {
-        $dblink_slave = $dblink;
-        $dbslaveid = -1;
-    } else {
-        db_connect_slave($opt['db']['slave']['primary']);
-    }
-}
-
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- * @param $id
- */
-function db_connect_slave($id)
-{
-    global $opt, $dblink_slave, $dbpconnect, $dbname, $dbslaveid;
-
-    // the right slave is connected
-    if ($dblink_slave !== false) {
-        // TODO: disconnect if other slave is connected
-        return;
-    }
-
-    $slave = $opt['db']['slaves'][$id];
-
-    if ($dbpconnect == true) {
-        $dblink_slave = @mysql_pconnect($slave['server'], $slave['username'], $slave['password']);
-    } else {
-        $dblink_slave = @mysql_connect($slave['server'], $slave['username'], $slave['password']);
-    }
-
-    if ($dblink_slave !== false) {
-        $dbslaveid = $id;
-        if (mysql_select_db($dbname, $dblink_slave) == false) {
-            sql_error();
-        }
-        mysql_query("SET NAMES 'utf8'", $dblink_slave);
-    } else {
-        sql_error();
+    if (!$dblink instanceof mysqli) {
+        throw new InvalidArgumentException('cannot connect to database');
     }
 }
 

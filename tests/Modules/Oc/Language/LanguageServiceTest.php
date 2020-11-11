@@ -16,7 +16,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests fetching all records with success - no exception is thrown.
      */
-    public function testFetchingAllReturnsArrayWithLanguageEntities()
+    public function testFetchingAllReturnsArrayWithLanguageEntities(): void
     {
         $entityArray = [
             new LanguageEntity(),
@@ -37,7 +37,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests fetching all records - exception is thrown because there are no records.
      */
-    public function testFetchingAllThrowsException()
+    public function testFetchingAllThrowsException(): void
     {
         $exception = new RecordsNotFoundException('No records found');
 
@@ -55,7 +55,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests fetching all translated records with success - no exception is thrown.
      */
-    public function testFetchingAllTranslatedReturnsArrayWithLanguageEntities()
+    public function testFetchingAllTranslatedReturnsArrayWithLanguageEntities(): void
     {
         $entityArray = [
             new LanguageEntity(),
@@ -76,7 +76,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests fetching all records - exception is thrown because there are no records.
      */
-    public function testFetchingAllTranslatedThrowsException()
+    public function testFetchingAllTranslatedThrowsException(): void
     {
         $exception = new RecordsNotFoundException('No records found');
 
@@ -94,7 +94,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests that create returns the entity.
      */
-    public function testCreateReturnsEntity()
+    public function testCreateReturnsEntity(): void
     {
         $entity = new LanguageEntity();
 
@@ -113,7 +113,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests that update returns the entity.
      */
-    public function testUpdateReturnsEntity()
+    public function testUpdateReturnsEntity(): void
     {
         $entity = new LanguageEntity();
 
@@ -132,7 +132,7 @@ class LanguageServiceTest extends TestCase
     /**
      * Tests that remove returns the entity.
      */
-    public function testRemoveReturnsEntity()
+    public function testRemoveReturnsEntity(): void
     {
         $entity = new LanguageEntity();
 
@@ -146,36 +146,5 @@ class LanguageServiceTest extends TestCase
         $result = $userService->remove($entity);
 
         self::assertSame($entity, $result);
-    }
-
-    /**
-     * Tests getting all available translations.
-     */
-    public function testGetAvailableTranslations()
-    {
-        $language1 = new LanguageEntity();
-        $language1->short = 'DE';
-
-        $language2 = new LanguageEntity();
-        $language2->short = 'EN';
-
-        $languageEntities = [
-            $language1,
-            $language2,
-        ];
-
-        $service = $this->getMock(
-            LanguageService::class,
-            ['fetchAllTranslated'],
-            [$this->createMock(LanguageRepository::class)]
-        );
-        $service->method('fetchAllTranslated')
-            ->willReturn($languageEntities);
-
-        $result = $service->getAvailableTranslations();
-
-        self::assertCount(2, $result);
-        self::assertSame('de', $result[0]);
-        self::assertSame('en', $result[1]);
     }
 }

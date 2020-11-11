@@ -65,9 +65,9 @@ if ($error == false) {
         );
 
         //log exists?
-        if (mysql_num_rows($log_rs) == 1) {
+        if (mysqli_num_rows($log_rs) == 1) {
             $log_record = sql_fetch_array($log_rs);
-            mysql_free_result($log_rs);
+            mysqli_free_result($log_rs);
 
             require $stylepath . '/removelog.inc.php';
 
@@ -113,8 +113,7 @@ if ($error == false) {
 
                         $logtext = html2plaintext(
                             $log_record['log_text'],
-                            $log_record['text_html'] == 0,
-                            EMAIL_LINEWRAP
+                            $log_record['text_html'] == 0
                         );
 
                         //get cache owner name
@@ -123,7 +122,7 @@ if ($error == false) {
                             $log_record['cache_owner_id']
                         );
                         $cache_owner_record = sql_fetch_array($cache_owner_rs);
-                        mysql_free_result($cache_owner_rs);
+                        mysqli_free_result($cache_owner_rs);
 
                         //get email address of logowner
                         $log_user_rs = sql(
@@ -131,7 +130,7 @@ if ($error == false) {
                             $log_record['log_user_id']
                         );
                         $log_user_record = sql_fetch_array($log_user_rs);
-                        mysql_free_result($log_user_rs);
+                        mysqli_free_result($log_user_rs);
 
                         // insert log data
                         $email_content = mb_ereg_replace('%log_owner%', $log_user_record['username'], $email_content);
@@ -243,9 +242,6 @@ if ($error == false) {
                     // now tell OKAPI about the deletion;
                     // this will trigger an okapi_syncbase update, if OKAPI is installed:
                     sql("UPDATE `cache_logs_archived` SET `deletion_date`=NOW() WHERE `id`='&1'", $log_id);
-
-                    // do not use slave server for the next time ...
-                    db_slave_exclude();
 
                     StatisticPicture::deleteStatisticPicture($log_record['log_user_id']);
 

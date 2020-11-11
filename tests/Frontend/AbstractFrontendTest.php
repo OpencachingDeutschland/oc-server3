@@ -8,8 +8,9 @@ namespace OcTest\Frontend;
 use Behat\Mink\Driver\GoutteDriver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use PHPUnit\Framework\TestCase;
 
-abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractFrontendTest extends TestCase
 {
     protected $dir;
 
@@ -29,7 +30,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
         $this->baseUrl = getenv('URL');
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->driver = new GoutteDriver();
@@ -43,7 +44,7 @@ abstract class AbstractFrontendTest extends \PHPUnit_Framework_TestCase
      *
      * @throws ElementNotFoundException
      */
-    protected function login()
+    protected function login(): void
     {
         $page = $this->session->getPage();
 

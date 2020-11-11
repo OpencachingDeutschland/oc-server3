@@ -5,7 +5,7 @@
 ***************************************************************************}
 {* OCSTYLE *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{$opt.template.locale|lower}">
     <head>
         <title>
             {if ($opt.template.title=="")}
@@ -18,23 +18,34 @@
         <meta name="description" content="{$opt.page.meta.description|escape}" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta http-equiv="Content-Style-Type" content="text/css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <meta http-equiv="Content-Language" content="{$opt.template.locale}" />
         <meta http-equiv="gallerimg" content="no" />
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
         <base href="/" />
+
         <link rel="SHORTCUT ICON" href="favicon.ico" />
         <link rel="apple-touch-icon" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png" />
         <link rel="apple-touch-icon" sizes="72x72" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png" />
         <link rel="apple-touch-icon" sizes="114x114" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone-retina.png" />
         <link rel="apple-touch-icon" sizes="144x144" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png" />
+
+        {if $core_hq_message}
+        <!-- Bootstrap core CSS -->
+        <link href="../../resource2/mdb-free/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="../../resource2/mdb-free/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="../../resource2/mdb-free/css/style.css" rel="stylesheet">
+        {/if}
         <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}" />
         <!--[if lt IE 9]>
-            <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen_msie.css?ft={$screen_msie_css_time}" />
+        <link rel="stylesheet" type="text/css" media="screen,projection" href="resource2/{$opt.template.style}/css/style_screen_msie.css?ft={$screen_msie_css_time}" />
         <![endif]-->
         <link rel="stylesheet" type="text/css" media="print" href="resource2/{$opt.template.style}/css/style_print.css?ft={$print_css_time}" />
+
         {literal}
             <script type="text/javascript">
             <!--
@@ -54,9 +65,7 @@
 
                     if (sCurrentOption!=oUserCountryCombo.value)
                     {
-                        {/literal}
-                        window.location = '{if $change_country_inpage}{$base_pageadr}{else}index.php?{/if}usercountry=' + oUserCountryCombo.value;
-                        {literal}
+                        document.getElementById('language_switcher').submit();
                     }
                 }
 
@@ -91,27 +100,23 @@
         {/literal}
         <script type="text/javascript" src="resource2/{$opt.template.style}/js/enlargeit/enlargeit.js"></script>
         <script type="text/javascript" src="resource2/{$opt.template.style}/js/tools.js"></script>
-        {if $opt.session.url==true}
-            <script type="text/javascript">
-                {literal}
-                <!--
-                    var sSessionId = '{/literal}{$opt.session.id|escape:'js'}{literal}';
-                //-->
-                {/literal}
-            </script>
-            <script src="resource2/{$opt.template.style}/js/session.js" type="text/javascript"></script>
-        {/if}
+
+        {* Cookie Consent Tool 06.2020 *}
+        <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">
+        <script type="application/javascript" src="resource2/ocstyle/js/klaro_config.js"></script>
+        <script type="application/javascript" src="resource2/ocstyle/js/klaro.js"></script>
+
         {foreach from=$opt.page.header_javascript item=scriptItem}
             <script type="text/javascript" src="{$scriptItem}"></script>
         {/foreach}
     </head>
 
 {* JS onload() onunload() *}
-<body{if $opt.session.url==true} onload="initSessionTimeout()"{/if}
+<body
 {foreach from=$opt.page.body_load item=loadItem name=bodyload}{if $smarty.foreach.bodyload.first} onload="{/if}{$loadItem};{if $smarty.foreach.bodyload.last}"{/if}{/foreach}
 {foreach from=$opt.page.body_unload item=unloadItem name=bodyunload}{if $smarty.foreach.bodyunload.first} onunload="{/if}{$unloadItem};{if $smarty.foreach.bodyunload.last}"{/if}{/foreach}
  class="{if $opt.template.popup!=false}popup{/if}">
-    {include file="header/cookie_notice.tpl"}
+
     {if $opt.template.popup!=true}
         <div id="overall">
             <div id="langstripe">
@@ -119,18 +124,11 @@
                 {* <!-- Navigation Level 1 --> *}
                 <table class="nav1" cellspacing="0">
                     <tr>
-                        {if $opt.session.url==true}
-                            <div id="sessionWarn">
-                                {* message is not properly formated and displays always 0
-                               don't enable this feature until this is fixed and tested *}
-                                Automatische Abmeldung in <div id="sessionTimout">0</div>&nbsp;Minuten - <a href="#" onclick="cancelSessionTimeout()">Abbrechen</a>
-                            </div>
-                        {/if}
                         <td width="100%">
                             {nocache}
                                 &nbsp;
                                 {if $login.userid==0}
-                                    <b><form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" /><input type="hidden" name="source" value="titlebar" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>
+                                    <b><form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login" dir="ltr" style="display: inline;">{t}User:{/t}&nbsp;&nbsp;<input name="email" size="10" type="text" class="textboxes" value="" />&nbsp;&nbsp;&nbsp;{t}Password:{/t}&nbsp;&nbsp;<input name="password" size="10" type="password" class="textboxes" value="" />&nbsp;<input type="hidden" name="action" value="login" /><input type="hidden" name="target" value="{$opt.page.target|escape}" />&nbsp;<input name="LogMeIn" value="{t}Login{/t}" class="formbutton" style="width: 74px;" type="submit" onclick="submitbutton('LogMeIn')" /></form></b>
                                 {else}  {* Ocprop: <a href="myhome.php">(.*?)<\/a>.*?<a href="login.php
                                                    <a href="myhome.php">.*?<a href="login.php\?action=logout"> *}
                                     <b>{t}Logged in as{/t} <a href="myhome.php" class="testing-top-left-corner-username">{$login.username|escape}</a></b> - <a href="login.php?action=logout">{t}Logout{/t}</a>
@@ -147,24 +145,26 @@
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
                         <td>
-                            <select id="usercountry" onclick="usercountry_change()">
-                                {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
-                                    {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
-                                        <option disabled="disabled">
-                                            {if $countryItem.group==1}
-                                                - {t}This OC node{/t} -
-                                            {elseif $countryItem.group==2}
-                                                - {t}Other OC nodes{/t} -
-                                            {elseif $countryItem.group==3}
-                                                - {t}Others{/t} -
-                                            {else}
-                                                -
-                                            {/if}
-                                        </option>
-                                    {/if}
-                                    <option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
-                                {/foreach}
-                            </select>&nbsp;
+                            <form action="index.php" method="get" id="language_switcher">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
+                                    {foreach from=$opt.template.usercountrieslist item=countryItem name=userCountryList}
+                                        {if $countryItem.begin_group==1 || $smarty.foreach.userCountryList.first}
+                                            <option disabled="disabled">
+                                                {if $countryItem.group==1}
+                                                    - {t}This OC node{/t} -
+                                                {elseif $countryItem.group==2}
+                                                    - {t}Other OC nodes{/t} -
+                                                {elseif $countryItem.group==3}
+                                                    - {t}Others{/t} -
+                                                {else}
+                                                    -
+                                                {/if}
+                                            </option>
+                                        {/if}
+                                        <option value="{$countryItem.country|escape}"{if $opt.template.country==$countryItem.country} selected="selected"{/if}>{$countryItem.name|escape}</option>
+                                    {/foreach}
+                                </select>&nbsp;
+                            </form>
                         </td>
                     </tr>
                 </table>
@@ -186,10 +186,10 @@
             {* <!-- Header banner --> *}
             <div class="header">
                 <div class="headerimage">
-                    <img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
+                    <a href="/index.php"><img src="resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" /></a>
                 </div>
                 <div class="headerlogo">
-                    <img src="resource2/{$opt.template.style}/images/oclogo/{$opt.page.headoverlay}.png" class="headerimagecontent" />
+                    <a href="/index.php"><img src="resource2/{$opt.template.style}/images/oclogo/{$opt.page.headoverlay}.png" class="headerimagecontent" /></a>
                 </div>
             </div> <!-- header -->
 
@@ -233,7 +233,6 @@
                 <div style="text-align: center;" class="nodeflags">
                     <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                     <a href="https://www.opencaching.de" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100" height="22" /></a><br />
-                    <a href="https://www.opencachingspain.es" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-es.png" width="100" height="22" /></a><br />
                     <a href="https://www.opencaching.fr" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-fr.png" width="100" height="22" /></a><br />
                     <a href="https://www.opencaching.it" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-it.png" width="100" height="22" /></a><br />
                     <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/{$opt.template.style}/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
@@ -263,7 +262,6 @@
                                 <td class="mediumsmalltext">{t}Follow us:{/t}</td>
                                 <td><a href="http://blog.opencaching.de/feed"><img src="resource2/{$opt.template.style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
                                 <td><a href="https://twitter.com/opencaching"><img src="resource2/{$opt.template.style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
-                                <td><a href="https://plus.google.com/+opencaching"><img src="resource2/{$opt.template.style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
                                 <td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
                             </tr>
                             <tr>
@@ -279,16 +277,6 @@
                                 </td>
                                 <td style="text-align: left">
                                     <a href="http://forum.opencaching.de/">{t}Opencaching Forum{/t}</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://plus.google.com/communities/115824614741379300945">
-                                        <img src="resource2/{$opt.template.style}/images/media/16x16-google+.png"/>
-                                    </a>
-                                </td>
-                                <td style="text-align: left">
-                                    <a href="https://plus.google.com/communities/115824614741379300945">{t}Google+ Community{/t}</a>
                                 </td>
                             </tr>
                             <tr>
@@ -361,6 +349,7 @@
 
             {* <!-- FOOTER --> *}
             <div class="footer">
+                <p><a onClick="klaro.show();return false;" style="cursor: pointer;">{t}Cookie settings{/t}</a></p>
                 <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                 <p><strong>{$opt.page.sponsor.bottom}</strong></p>
             </div>
@@ -369,7 +358,7 @@
 {/if}{*popup*}
     {if $opt.tracking.googleAnalytics}
         {literal}
-            <script type="text/javascript">
+            <script type="text/javascript" data-name="googleAnalytics">
                 // Set to the same value as the web property used on the site
                 var gaProperty = '{/literal}{$opt.tracking.googleAnalytics}{literal}';
 
@@ -391,7 +380,7 @@
         {/literal}
         {if !$smarty.server.HTTP_DNT}
             {literal}
-            <script type="text/javascript">
+            <script type="text/plain" data-type="text/javascript" data-name="googleAnalytics">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -404,5 +393,15 @@
             {/literal}
         {/if}
     {/if}
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../../resource2/mdb-free/js/mdb.min.js"></script>
 </body>
 </html>

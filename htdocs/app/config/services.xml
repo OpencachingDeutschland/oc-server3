@@ -5,13 +5,13 @@
         <defaults autowire="true" autoconfigure="true" public="false" />
 
         <prototype namespace="Oc\" resource="../../src/Oc/*" />
-        <prototype namespace="OcDev\" resource="../../src/OcDev/*" />
         <prototype namespace="OcLegacy\" resource="../../src/OcLegacy/*" />
 
         <service id="Doctrine\DBAL\Connection" alias="database_connection" public="true" />
         <service id="League\CommonMark\CommonMarkConverter" />
 
         <service id="Oc\Session\SessionDataInterface" alias="Oc\Session\SessionDataCookie" />
+        <service id="Oc\FieldNotes\FieldNoteServiceInterface" alias="Oc\FieldNotes\FieldNoteService" />
 
         <service id="Oc\GeoCache\Controller\GeoCacheController">
             <argument key="$apiSecret">%api_secret%</argument>
@@ -42,5 +42,11 @@
 
             <argument type="service" id="request_stack" />
         </service>
+
+        <service id="OcLegacy\Admin\Gdpr\GdprHandler" public="true">
+            <argument key="$projectDir">%kernel.project_dir%</argument>
+        </service>
+
+        <service id="Oc\Changelog\Subscriber\MenuSubscriber" public="true" />
     </services>
 </container>

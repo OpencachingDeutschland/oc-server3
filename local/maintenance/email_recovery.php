@@ -81,7 +81,7 @@ class EmailRecovery
         return preg_match('/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/', $datetime);
     }
 
-    private static function message($level, $text)
+    private static function message($level, $text): void
     {
         echo str_repeat(' ', 2 * $level) . $text . "\n";
     }
@@ -93,7 +93,7 @@ class EmailRecovery
             ' AND `' . $table . '`.`' . $field . "` <= '" . sql_escape($this->toDateTime) . "'";
     }
 
-    private function showObjectCount($table, $dateField, $description, $andWhere = '')
+    private function showObjectCount($table, $dateField, $description, $andWhere = ''): void
     {
         $objectCount = sql_value(
             'SELECT COUNT(*)
@@ -106,11 +106,8 @@ class EmailRecovery
     }
 
     # display summary of information that was not sent to the users
-
-    /**
-     *
-     */
-    public function showLosses()
+    
+    public function showLosses(): void
     {
         self::message(0, 'In the given time interval');
 
@@ -203,7 +200,7 @@ class EmailRecovery
 
     # resend emails
 
-    public function resendLogNotifications()
+    public function resendLogNotifications(): void
     {
         # delete notification protocol
         sql(
@@ -255,7 +252,7 @@ class EmailRecovery
         self::message(0, $watcher_notifications . ' watchers will be notified');
     }
 
-    public function resendCacheNotifications()
+    public function resendCacheNotifications(): void
     {
         $notifies_wating = sql_value('SELECT COUNT(*) FROM `notify_waiting`', 0);
 
@@ -282,7 +279,7 @@ class EmailRecovery
         self::message(0, $new_notifications . ' new cache notifications will be sent');
     }
     
-    public function resendActivationCodes()
+    public function resendActivationCodes(): void
     {
         $rs = sql(
             'SELECT `user_id`

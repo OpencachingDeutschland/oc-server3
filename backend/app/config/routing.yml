@@ -1,7 +1,0 @@
-mirsch_admin:
-    resource: "@MirschAdminBundle/Resources/config/routing.yml"
-    prefix: /
-
-#app:
-#    resource: "@AppBundle/Controller/"
-#    type:     annotation

@@ -129,7 +129,7 @@ class mailcheck
         return CA_ERROR_UNKOWN;
     }
 
-    public function close($fp)
+    public function close($fp): void
     {
         fwrite($fp, "QUIT\r\n");
         fclose($fp);

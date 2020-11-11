@@ -10,7 +10,7 @@ $search_output_file_download = true;
 $content_type_plain = 'application/loc';
 
 
-function search_output()
+function search_output(): void
 {
     global $opt;
     global $state_temporarily_na, $state_archived, $state_locked;
@@ -91,7 +91,7 @@ function search_output()
 
         append_output($thisline);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 
     append_output($locFoot);
 }

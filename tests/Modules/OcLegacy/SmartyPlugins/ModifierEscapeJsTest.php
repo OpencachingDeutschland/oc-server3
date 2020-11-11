@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierEscapeJsTest extends AbstractModuleTest
 {
-    public function testEscapeJs()
+    public function testEscapeJs(): void
     {
         self::assertEquals(
             '&quot;',

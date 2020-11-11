@@ -9,7 +9,7 @@ class AttrsTest extends AbstractModuleTest
 {
     use OkapiCredentialsTrait;
 
-    public function testAttrsAttributeIndexMethodNeedsConsumerKey()
+    public function testAttrsAttributeIndexMethodNeedsConsumerKey(): void
     {
         $client = $this->createOkapiClient();
 
@@ -19,16 +19,16 @@ class AttrsTest extends AbstractModuleTest
         self::assertContains('(Level 1 Authentication)', $response['error']['developer_message']);
     }
 
-    public function testAttrsAttributeIndexMethodReturnsAttributes()
+    public function testAttrsAttributeIndexMethodReturnsAttributes(): void
     {
         $client = $this->createOkapiClient();
 
         $response = $client->get('services/attrs/attribute_index', ['consumer_key' => $this->getConsumerKey()]);
 
-        self::assertCount(77, $response);
+        self::assertCount(88, $response);
     }
 
-    public function testAttrsAttributeMethodNeedsConsumerKey()
+    public function testAttrsAttributeMethodNeedsConsumerKey(): void
     {
         $client = $this->createOkapiClient();
 
@@ -38,7 +38,7 @@ class AttrsTest extends AbstractModuleTest
         self::assertContains('(Level 1 Authentication)', $response['error']['developer_message']);
     }
 
-    public function testAttrsAttributeMethodReturnsAttribute()
+    public function testAttrsAttributeMethodReturnsAttribute(): void
     {
         $client = $this->createOkapiClient();
 
@@ -51,7 +51,7 @@ class AttrsTest extends AbstractModuleTest
         self::assertEquals('Listed at Opencaching only', $response['name']);
     }
 
-    public function testAttrsAttributesMethodNeedsConsumerKey()
+    public function testAttrsAttributesMethodNeedsConsumerKey(): void
     {
         $client = $this->createOkapiClient();
 
@@ -61,7 +61,7 @@ class AttrsTest extends AbstractModuleTest
         self::assertContains('(Level 1 Authentication)', $response['error']['developer_message']);
     }
 
-    public function testAttrsAttributesMethodReturnsAttribute()
+    public function testAttrsAttributesMethodReturnsAttribute(): void
     {
         $client = $this->createOkapiClient();
 

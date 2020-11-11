@@ -6,7 +6,7 @@
     </div>
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-<p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you, the users of opencaching.de, opencaching.it, opencachingspain.es and opencaching.fr.</p>
+<p>We would like to introduce our team of volunteers, which is restlessly working behind the scenery for you, the users of opencaching.de, opencaching.it and opencaching.fr.</p>
 
 <p>We appreciate your suggetions and comments. On the <a href="https://www.opencaching.de/articles.php?page=contact">contact page</a>, you will find information on how to contact us. Of course, you may also send Emails directly to the team members by their Opencaching.de user profiles.</p>
 
@@ -75,15 +75,15 @@
                 <td></td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
-                    cache maps, system surveillance
+                <td><img src="{$opt.page.teampic_url}crease29.png"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=353113">Crease29</a><br/>
+                    software development
                 </td>
             </tr>
             <tr>
-                <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=150360">following</a><br/>
-                    data maintenance, software development
+                <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
+                <td><a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
+                    cache maps, system surveillance
                 </td>
             </tr>
             <tr>

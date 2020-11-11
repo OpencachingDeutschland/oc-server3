@@ -16,7 +16,7 @@ class AppKernel extends Kernel
     /**
      * Boots the current kernel.
      */
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
         self::$instance = $this;
@@ -37,7 +37,6 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
-            new BestIt\KitchensinkBundle\BestItKitchensinkBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
         ];
@@ -45,8 +44,6 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
-            $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
         }
 
         return $bundles;
@@ -77,20 +74,17 @@ class AppKernel extends Kernel
     }
 
     /**
-     * @param \Symfony\Component\Config\Loader\LoaderInterface $loader
      * @throws \Exception
      */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 
     /**
      * Get instance of AppKernel.
-     *
-     * @return AppKernel
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         return self::$instance;
     }
@@ -100,10 +94,8 @@ class AppKernel extends Kernel
      *
      * Is not named as getContainer because this is a function of the Kernel.
      * It acts as a shortcut for the legacy application to get the container.
-     *
-     * @return ContainerInterface
      */
-    public static function Container()
+    public static function Container(): ContainerInterface
     {
         return self::getInstance()->getContainer();
     }

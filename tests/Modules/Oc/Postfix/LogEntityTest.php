@@ -7,7 +7,7 @@ use OcTest\Modules\AbstractModuleTest;
 
 class LogEntityTest extends AbstractModuleTest
 {
-    public function testLogEntity()
+    public function testLogEntity(): void
     {
         $entityArray = [
             'id' => 123,

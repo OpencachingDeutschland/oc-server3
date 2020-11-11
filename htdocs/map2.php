@@ -406,7 +406,7 @@ function output_cachexml($sWaypoint)
     echo 'owner="' . xmlentities($rCache['owner']) . '" ';
     echo 'username="' . xmlentities($rCache['username']) . '" ';
     echo 'userid="' . xmlentities($rCache['user_id']) . '" ';
-    echo 'picurl="' . xmlentities($rCache['picurl']) . '" ';
+    echo 'picurl="' . xmlentities(str_replace('http://', 'https://', $rCache['picurl'])) . '" ';
     echo 'pictitle="' . xmlentities(trim($rCache['pictitle'])) . '" >\n';
 
     foreach ($waypoints as $waypoint) {

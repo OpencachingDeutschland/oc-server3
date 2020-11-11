@@ -42,7 +42,7 @@ class pager
      * @param $total_pages
      * @param bool $page_size
      */
-    public function make_from_pagenr($current_page, $total_pages, $page_size = false)
+    public function make_from_pagenr($current_page, $total_pages, $page_size = false): void
     {
         global $tpl;
 
@@ -99,7 +99,7 @@ class pager
      * @param $total_items
      * @param $page_size
      */
-    public function make_from_offset($current_offset, $total_items, $page_size)
+    public function make_from_offset($current_offset, $total_items, $page_size): void
     {
         $this->make_from_pagenr(
             floor($current_offset / $page_size) + 1,

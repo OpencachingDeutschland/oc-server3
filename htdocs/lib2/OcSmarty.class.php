@@ -4,6 +4,7 @@
  *  Inherit Smarty-Class and extend it
  ***************************************************************************/
 
+use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\Util\CBench;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -66,10 +67,6 @@ class OcSmarty extends Smarty
         $this->register_block('nocache', 'smarty_block_nocache', false);
         $this->load_filter('pre', 't');
 
-        if ($opt['session']['mode'] == SAVE_SESSION) {
-            $this->load_filter('output', 'session');
-        }
-
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
             $this->force_compile = true;
@@ -92,13 +89,11 @@ class OcSmarty extends Smarty
             $target = basename($_SERVER['PHP_SELF']) . '?';
 
             // REQUEST-Variablen durchlaufen und an target anhaengen
-            reset($_REQUEST);
-            while (list($varname, $varvalue) = each($_REQUEST)) {
+            foreach ($_REQUEST as $varname => $varvalue) {
                 if (in_array($varname, $opt['logic']['targetvars'])) {
                     $target .= urlencode($varname) . '=' . urlencode($varvalue) . '&';
                 }
             }
-            reset($_REQUEST);
 
             if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
                 $target = mb_substr($target, 0, -1);
@@ -112,7 +107,7 @@ class OcSmarty extends Smarty
      * @param string $resource_name
      * @param string $compile_id
      */
-    public function compile($resource_name, $compile_id = null)
+    public function compile($resource_name, $compile_id = null): void
     {
         if (!isset($compile_id)) {
             $compile_id = $this->compile_id;
@@ -145,11 +140,11 @@ class OcSmarty extends Smarty
     }
 
     /**
-     * @param null $dummy1
-     * @param null $dummy2
-     * @param null $dummy3
+     * @param null|mixed $dummy1
+     * @param null|mixed $dummy2
+     * @param null|mixed $dummy3
      */
-    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null)
+    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null): void
     {
         global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate, $useragent_msie;
         $cookie->close();
@@ -163,6 +158,7 @@ class OcSmarty extends Smarty
 
         //Give Smarty access to the whole options array.
         $this->assign('siteSettings', $opt);
+        $this->assign('GeoCacheTypeEvent', GeoCacheType::EVENT);
 
         //Should we remove this whole block since we now have
         //access using the siteSettings above?
@@ -213,16 +209,6 @@ class OcSmarty extends Smarty
         $optn['template']['usercountrieslist'] = labels::getLabels('usercountrieslist');
         $optn['help']['oconly'] = helppagelink('oconly', 'OConly');
         $optn['msie'] = $useragent_msie;
-
-        // url-sessions? (for session timout display)
-        $optn['session']['url'] = false;
-        if ($opt['session']['mode'] == SAVE_SESSION && $login->userid != 0) {
-            if (isset($_GET['SESSION']) || isset($_POST['SESSION'])) {
-                $optn['session']['url'] = true;
-            }
-
-            $optn['session']['id'] = session_id();
-        }
 
         $loginn = [
             'username' => '',
@@ -386,7 +372,7 @@ class OcSmarty extends Smarty
      *
      * @param int $id
      */
-    public function error($id)
+    public function error($id): void
     {
         $this->clear_all_assign();
         $this->caching = 0;
@@ -411,9 +397,9 @@ class OcSmarty extends Smarty
     /**
      * check if this template is valid
      *
-     * @param null $dummy1
-     * @param null $dummy2
-     * @param null $dummy3
+     * @param null|mixed $dummy1
+     * @param null|mixed $dummy2
+     * @param null|mixed $dummy3
      * @return bool|false|string
      */
     public function is_cached($dummy1 = null, $dummy2 = null, $dummy3 = null)
@@ -455,7 +441,7 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect($page)
+    public function redirect($page): void
     {
         global $cookie, $opt;
         $cookie->close();
@@ -477,26 +463,15 @@ class OcSmarty extends Smarty
             $page = $opt['page']['absolute_url'] . $page;
         }
 
-        if ($opt['session']['mode'] == SAVE_SESSION) {
-            if (defined('SID') && SID != '' && session_id() != '') {
-                if (strpos($page, '?') === false) {
-                    header('Location: ' . $page . '?' . urlencode(session_name()) . '=' . urlencode(session_id()));
-                } else {
-                    header('Location: ' . $page . '&' . urlencode(session_name()) . '=' . urlencode(session_id()));
-                }
-            } else {
-                header('Location: ' . $page);
-            }
-        } else {
-            header('Location: ' . $page);
-        }
+
+        header('Location: ' . $page);
         exit;
     }
 
     /**
      * redirect login function
      */
-    public function redirect_login()
+    public function redirect_login(): void
     {
         global $opt;
 
@@ -515,7 +490,7 @@ class OcSmarty extends Smarty
      * @param $name
      * @param $rs
      */
-    public function assign_rs($name, $rs)
+    public function assign_rs($name, $rs): void
     {
         $items = [];
         while ($r = sql_fetch_assoc($rs)) {
@@ -527,7 +502,7 @@ class OcSmarty extends Smarty
     /**
      * @param $src
      */
-    public function add_header_javascript($src)
+    public function add_header_javascript($src): void
     {
         $this->header_javascript[] = $src;
     }
@@ -535,7 +510,7 @@ class OcSmarty extends Smarty
     /**
      * @param $script
      */
-    public function add_body_load($script)
+    public function add_body_load($script): void
     {
         $this->body_load[] = $script;
     }
@@ -543,7 +518,7 @@ class OcSmarty extends Smarty
     /**
      * @param $script
      */
-    public function add_body_unload($script)
+    public function add_body_unload($script): void
     {
         $this->body_unload[] = $script;
     }
@@ -551,7 +526,7 @@ class OcSmarty extends Smarty
     /**
      * setting http header
      */
-    public function header()
+    public function header(): void
     {
         global $opt;
         global $cookie;
@@ -580,7 +555,7 @@ class OcSmarty extends Smarty
      * - use sDefault if sTarget is absolute and sDefault!=null
      *
      * @param $sTarget
-     * @param null $sDefault
+     * @param null|mixed $sDefault
      * @return null|string
      */
     public function checkTarget($sTarget, $sDefault = null)
@@ -600,7 +575,7 @@ class OcSmarty extends Smarty
         return $sTarget;
     }
 
-    public function acceptsAndPurifiesHtmlInput()
+    public function acceptsAndPurifiesHtmlInput(): void
     {
         // Prevent false XSS detection of harmless HTML code
         // see https://redmine.opencaching.de/issues/1137

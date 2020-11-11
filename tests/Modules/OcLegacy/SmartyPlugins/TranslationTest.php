@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/function.
 
 class TranslationTest extends AbstractModuleTest
 {
-    public function testTranslation()
+    public function testTranslation(): void
     {
         global $opt;
         $opt['template']['locale'] = 'de';

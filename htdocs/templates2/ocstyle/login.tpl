@@ -11,7 +11,6 @@
 <form action="{$opt.page.login_url}" method="post" enctype="application/x-www-form-urlencoded" style="display: inline;">
     <input type="hidden" name="target" value="{$target|escape}" />
     <input type="hidden" name="action" value="login" />
-    <input type="hidden" name="source" value="loginpage" />
     <div class="content-txtbox-noshade">
         <p style="line-height: 1.6em;" {if $error!=LOGIN_OK && $error!=LOGIN_LOGOUT_OK}class="errormsg"{/if}>
             {if $error!=LOGIN_OK}

@@ -153,7 +153,7 @@
             </tr>
             <tr><td class="spacer" colspan="2"></td></tr>
 
-            {if $edit || $usePMR || $permanentLogin || $noHTMLEditor || $sendUsermailAddress }
+            {if $edit || $usePMR || $permanentLogin || $sendUsermailAddress }
             <tr>
                 <td valign="top">{t}Others:{/t}</td>
                 <td valign="top">
@@ -177,15 +177,6 @@
                     {else}
                         {if $permanentLogin==true}
                             {t}Don't log me out after 60 minutes inactivity.{/t}<br />
-                        {/if}
-                    {/if}
-                    {if $edit==true}
-                        <input type="checkbox" name="noHTMLEditor" value="1" {if $noHTMLEditor==true}checked="checked"{/if} id="l_no_htmledit" class="checkbox" />
-                        <label for="l_no_htmledit">{t}Don't use an HTML editor by default.{/t}</label>
-                        <br />
-                    {else}
-                        {if $noHTMLEditor}
-                            {t}Don't use an HTML editor by default.{/t}
                         {/if}
                     {/if}
                     {if $edit==true}

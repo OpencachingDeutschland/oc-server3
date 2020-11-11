@@ -36,10 +36,10 @@
         <div id="frame">
             <div class="header">
                 <div class="headerimage">
-                    <img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" />
+                    <a href="/index.php"><img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/head/rotator.php?path={$opt.page.headimagepath}" class="headerimagecontent" /></a>
                 </div>
                 <div class="headerlogo">
-                    <img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" />
+                    <a href="/index.php"><img src="{$opt.page.absolute_urlpath}resource2/{$opt.template.style}/images/oclogo/oc_head_alpha3.png" class="headerimagecontent" /></a>
                 </div>
             </div>
             <div id="head">

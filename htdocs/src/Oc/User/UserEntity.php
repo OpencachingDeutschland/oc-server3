@@ -4,9 +4,6 @@ namespace Oc\User;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class UserEntity
- */
 class UserEntity extends AbstractEntity
 {
     /**
@@ -66,10 +63,8 @@ class UserEntity extends AbstractEntity
 
     /**
      * Checks if the entity is new.
-     *
-     * @return bool
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->id === null;
     }

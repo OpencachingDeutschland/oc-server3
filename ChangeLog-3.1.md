@@ -21,6 +21,7 @@ All notable changes of the oc-server 3.1 release series are documented in this f
 
 ### Removed
 - removed changed dates which was caused during db update [#1109](https://redmine.opencaching.de/issues/1109)
+- removed opencachingspain.es entries
 
 ### Fixed
 - fix okapi replication urls [#1089](https://redmine.opencaching.de/issues/1089)

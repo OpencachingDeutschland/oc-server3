@@ -2,11 +2,17 @@
 
 namespace Oc\FieldNotes\Import;
 
+use League\Csv\Reader;
 use Oc\FieldNotes\Exception\FileFormatException;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
- * Class FileParser
+ * Dear brave soul
+ * Once you are done trying to "optimize" this class,
+ * and break everything but didn't recognize in first place,
+ * please increment the following counter as a warning
+ * for the next brave soul
+ * total_hours_wasted = 42
  */
 class FileParser
 {
@@ -15,70 +21,49 @@ class FileParser
      */
     private $structMapper;
 
-    /**
-     * FileParser constructor.
-     *
-     * @param StructMapper $structMapper
-     */
     public function __construct(StructMapper $structMapper)
     {
         $this->structMapper = $structMapper;
     }
 
     /**
-     * Parses the given file
-     *
-     * @param File $file
-     *
      * @throws FileFormatException
-     * @return array
      */
-    public function parseFile(File $file)
+    public function parseFile(File $file): array
     {
-        $content = $this->getSanitizedFileContent($file);
+        $csv = Reader::createFromPath($file->getRealPath());
+        $csv->setDelimiter(',');
+        $csv->setEnclosure('"');
 
-        $rows = $this->getRowsFromCsv($content);
+        $rows = $this->getRowsFromCsv($csv);
 
         return $this->structMapper->map($rows);
     }
 
-    /**
-     * Fetches the content of the file and returns it.
-     *
-     * @param File $file
-     *
-     * @return string
-     */
-    private function getSanitizedFileContent(File $file)
+    private function getRowsFromCsv(Reader $csv): array
     {
-        $content = file_get_contents($file->getRealPath());
-        $content = str_replace("\xFF\xFE", '', $content);
-        $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16LE');
-        $content = str_replace("\r\n", "\n", $content);
-
-        return $content;
-    }
-
-    /**
-     * Fetches rows from csv content.
-     *
-     * @param string $content
-     *
-     * @throws FileFormatException
-     * @return array
-     */
-    private function getRowsFromCsv($content)
-    {
-        $lines = explode("\n", $content);
-        $lines = array_filter($lines);
-
+        $lines = [];
         $rows = [];
+        $content = $csv->getContent();
+        $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16LE');
+
+        $rawLines = array_filter(explode("\n", $content));
+        $tmpString = '';
+        // is used to support line breaks in the comment section
+        foreach ($rawLines as $key => $rawLine) {
+            $columnCheck = count(str_getcsv($rawLines[$key + 1]));
+            $tmpString .= $rawLine;
+            if ($columnCheck === 4 || $rawLines[$key + 1] === null) {
+                $lines[] = $tmpString;
+                $tmpString = '';
+            }
+        }
 
         foreach ($lines as $line) {
-            $row = str_getcsv($line);
+            $row = str_getcsv($line, ',', '"');
             $row = array_map('trim', $row);
 
-            if (count($row) !== 4) {
+            if (count($row) < 4) {
                 throw new FileFormatException('A row contains more or less than 4 columns');
             }
 

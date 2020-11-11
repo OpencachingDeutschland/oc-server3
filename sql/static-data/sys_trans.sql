@@ -1955,3 +1955,12 @@ INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2658', 'as last
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2659', 'Recommendation', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2660', 'The cache must be hidden before publish.', '2017-08-20 19:30:00');
 INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2661', 'The event must happen after publish.', '2017-08-20 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2662', 'Handicap: Wheelchair', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2663', 'This cache is findable for persons with a wheelchair!', '2020-01-04 19:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2664', 'Cookie settings', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2665', 'The current filter could not be saved as the cookie consent for map configuration is not given!', '2020-06-16 18:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2666', 'Please choose at least one cache to add it to this cacheliste.', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2667', 'Add selected caches to:', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2668', 'Add to List', '2020-06-13 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2669', 'You added %1 cache to your list', '2020-07-04 12:30:00');
+INSERT INTO `sys_trans` (`id`, `text`, `last_modified`) VALUES ('2670', 'You added %1 caches to your list', '2020-07-04 12:30:00');

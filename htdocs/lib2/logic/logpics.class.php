@@ -238,7 +238,7 @@ class LogPics
     // Set all template variables needed to display a browsed log pictures page;
     // all displaying is done in res_logpictures.tpl
 
-    public static function setPaging($purpose, $userId, $cacheId, $url)
+    public static function setPaging($purpose, $userId, $cacheId, $url): void
     {
         global $tpl;
 

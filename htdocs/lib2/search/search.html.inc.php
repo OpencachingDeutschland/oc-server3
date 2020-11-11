@@ -23,12 +23,12 @@ $sAddJoin .= ' INNER JOIN `user` ON `caches`.`user_id`=`user`.`user_id`
                     LEFT JOIN `sys_trans_text` `stt` ON `stt`.`trans_id`=`cache_type`.`trans_id`
                           AND `stt`.`lang`=\'' . sql_escape($opt['template']['locale']) . '\'';
 
-function search_output()
+function search_output(): void
 {
     global $opt, $tpl, $login;
     global $enable_mapdisplay;
     global $called_by_search, $options, $lat_rad, $lon_rad, $distance_unit;
-    global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints, $user;
+    global $startat, $caches_per_page, $sql, $query_userid, $query_name, $invalid_waypoints, $user, $added_waypoints, $addCachelist, $error_addCaches;
 
     $tpl->name = 'search.result.caches';
     $tpl->menuitem = MNU_CACHES_SEARCH_RESULT;
@@ -131,7 +131,7 @@ function search_output()
 
         $caches[] = $rCache;
     }
-    mysql_free_result($rs_caches);
+    mysqli_free_result($rs_caches);
 
     $tpl->assign('caches', $caches);
 
@@ -157,6 +157,13 @@ function search_output()
     } else {
         $tpl->assign('endat', $startat + 500);
     }
+
+    //add to cachelist
+    $tpl->assign('error_addCaches', $error_addCaches);
+    $tpl->assign('addCachelist', $addCachelist);
+    $tpl->assign('added_waypoints', $added_waypoints);
+    $tpl->assign('cachelists', cachelist::getMyLists());
+    $tpl->assign('default_cachelist', cachelist::getMyLastAddedToListId());
 
     // kompatibilität!
     if ($distance_unit == 'sm') {

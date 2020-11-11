@@ -114,7 +114,7 @@ $smarty_dummy = 0;
 
                         if (sCurrentOption!=oUserCountryCombo.value)
                         {
-                            window.location = 'index.php?usercountry=' + oUserCountryCombo.value;
+                            document.getElementById('language_switcher').submit();
                         }
                     }
 
@@ -162,8 +162,9 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                             ?>
                         </td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;<strong>{t}Country:{/t}&nbsp;</strong></td>
-                        <td>
-                                <select id="usercountry" onclick="usercountry_change()">
+                        <td style="padding-top:5px; height:11px;">
+                            <form action="index.php" method="get" id="language_switcher">
+                                <select id="usercountry" name="usercountry" onchange="usercountry_change();">
 <?php
                                     global $tpl_usercountries;
                                     $nLastGroup = 0;
@@ -187,7 +188,8 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                         echo '<option value="' . htmlspecialchars($tpl_usercountries[$i]['country'], ENT_COMPAT, 'UTF-8') . '"' . (($sUserCountry==$tpl_usercountries[$i]['country']) ? ' selected="selected"' : '') . '>' . htmlspecialchars($tpl_usercountries[$i]['name'], ENT_COMPAT, 'UTF-8') . '</option>';
                                     }
 ?>
-                                </select>&nbsp;
+                                </select>
+                            </form>&nbsp;
             </td>
                     </tr>
                 </table>
@@ -254,7 +256,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     <div style="text-align: center;" class="nodeflags">
                         <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.de" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-de.png" width="100" height="22" /></a><br />
-                        <a href="https://www.opencachingspain.es" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-es.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.fr" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-fr.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.it" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-it.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
@@ -291,7 +292,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                 <td class="mediumsmalltext">{t}Follow us:{/t}</td>
                                 <td><a href="http://blog.opencaching.de/feed"><img src="resource2/{style}/images/media/16x16-feed.png" width="16" height="16" /></a></td>
                                 <td><a href="https://twitter.com/opencaching"><img src="resource2/{style}/images/media/16x16-twitter.png" width="16" height="16"  /></a></td>
-                                <td><a href="https://plus.google.com/+opencaching"><img src="resource2/{style}/images/media/16x16-google+.png" width="16" height="16"  /></a></td>
                                 <td><a href="https://www.facebook.com/opencaching.de"><img src="resource2/{style}/images/media/16x16-facebook.png" width="16" height="16"  /></a></td>
                             </tr>
                             <tr>
@@ -308,18 +308,6 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                                 <td style="text-align: left">
                                     <a href="http://forum.opencaching.de/">
                                         {t}Opencaching Forum{/t}
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://plus.google.com/communities/115824614741379300945">
-                                        <img src="resource2/{style}/images/media/16x16-google+.png"/>
-                                    </a>
-                                </td>
-                                <td style="text-align: left">
-                                    <a href="https://plus.google.com/communities/115824614741379300945">
-                                        {t}Google+ Community{/t}
                                     </a>
                                 </td>
                             </tr>
@@ -381,7 +369,8 @@ foreach ($opt['template']['locales'] as $k => $lang) {
 
                 <!-- FOOTER -->
                 <div class="footer">
-                    <p><a href="articles.php?page=dsb">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
+                    <p><a onClick="klaro.show();return false;" style="cursor: pointer;">{t}Cookie settings{/t}</a></p>
+                    <p><a href="/page/datenschutzerklaerung">{t}Privacy statement{/t}</a> | <a href="articles.php?page=impressum">{t}Terms of use and legal information{/t}</a> | <a href="articles.php?page=contact">{t}Contact{/t}</a> | <a href="articles.php?page=changelog">{t}Changelog{/t}</a> | <a href="sitemap.php">{t}Sitemap{/t}</a></p>
                     <p><strong>{sponsorbottom}</strong></p>
                 </div>
 
@@ -408,8 +397,9 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     }
                 }
             </script>
+
             <?php if (!isset($_SERVER['HTTP_DNT']) || !$_SERVER['HTTP_DNT']) { ?>
-            <script type="text/javascript">
+            <script type="text/plain" data-type="text/javascript" data-name="googleAnalytics">
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
                     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

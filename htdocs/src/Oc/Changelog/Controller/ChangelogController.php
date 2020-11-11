@@ -6,12 +6,9 @@ use League\CommonMark\CommonMarkConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment;
 
 /**
- * Class ChangelogController
- *
- *
  * @Route(service="Oc\Changelog\Controller\ChangelogController")
  */
 class ChangelogController extends Controller
@@ -22,11 +19,11 @@ class ChangelogController extends Controller
     private $markConverter;
 
     /**
-     * @var Twig_Environment
+     * @var Environment
      */
     private $twig;
 
-    public function __construct(CommonMarkConverter $markConverter, Twig_Environment $twig)
+    public function __construct(CommonMarkConverter $markConverter, Environment $twig)
     {
         $this->markConverter = $markConverter;
         $this->twig = $twig;
@@ -34,10 +31,8 @@ class ChangelogController extends Controller
 
     /**
      * @Route(path="/changelog", name="changelog.index")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $changelog = $this->markConverter
             ->convertToHtml(file_get_contents(__DIR__ . '/../../../../../ChangeLog-3.1.md'));

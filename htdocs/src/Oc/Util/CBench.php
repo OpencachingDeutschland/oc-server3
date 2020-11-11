@@ -21,12 +21,9 @@ class CBench
         $this->stop = 0.00;
     }
 
-    /**
-     * @return float
-     */
-    private function getMicroTime()
+    private function getMicroTime(): float
     {
-        list($uSec, $sec) = explode(' ', microtime());
+        [$uSec, $sec] = explode(' ', microtime());
 
         return ((float) $uSec + (float) $sec);
     }
@@ -34,7 +31,7 @@ class CBench
     /**
      * start Benchmark
      */
-    public function start()
+    public function start(): void
     {
         $this->start = $this->getMicroTime();
     }
@@ -42,25 +39,20 @@ class CBench
     /**
      * stop Benchmark
      */
-    public function stop()
+    public function stop(): void
     {
         $this->stop = $this->getMicroTime();
     }
 
     /**
      * diff between stop and start value
-     *
-     * @return float
      */
-    public function diff()
+    public function diff(): float
     {
         return $this->stop - $this->start;
     }
 
-    /**
-     * @return float
-     */
-    public function runTime()
+    public function runTime(): float
     {
         return $this->getMicroTime() - $this->start;
     }

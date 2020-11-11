@@ -9,7 +9,14 @@ use OcLegacy\Util\SiteMapXml;
 
 class SiteMaps
 {
+    /**
+     * @var string
+     */
     public $name = 'sitemaps';
+
+    /**
+     * @var int
+     */
     public $interval = 604800; // once a week
 
     /**
@@ -17,7 +24,7 @@ class SiteMaps
      */
     public $oSiteMapXml;
 
-    public function run()
+    public function run(): void
     {
         global $opt;
         if ($opt['cron']['sitemaps']['generate'] === true) {
@@ -44,7 +51,7 @@ class SiteMaps
         }
     }
 
-    public function pingSearchEngines()
+    public function pingSearchEngines(): void
     {
         global $opt;
 
@@ -61,17 +68,13 @@ class SiteMaps
         $this->pingSearchEngine('http://www.bing.com/webmaster/ping.aspx?siteMap=' . $url);
     }
 
-    /**
-     * @param string $url
-     * @return bool
-     */
-    public function pingSearchEngine($url)
+    public function pingSearchEngine(string $url): bool
     {
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_exec($curl);
 
-        if (curl_errno($curl) != 0) {
+        if (curl_errno($curl) !== 0) {
             curl_close($curl);
 
             return false;
@@ -89,7 +92,7 @@ class SiteMaps
         return true;
     }
 
-    public function writeNewGeocacheUrls()
+    public function writeNewGeocacheUrls(): void
     {
         $nCount = sql_value('SELECT COUNT(*) FROM `caches` WHERE `caches`.`status`=1', 0);
         $nIndex = 0;
@@ -99,7 +102,7 @@ class SiteMaps
         }
     }
 
-    public function writeArticleUrls()
+    public function writeArticleUrls(): void
     {
         $rs = sql("SELECT `href` FROM `sys_menu` WHERE `href` LIKE 'articles.php?page=%'");
         while ($r = sql_fetch_assoc($rs)) {
@@ -108,7 +111,7 @@ class SiteMaps
         sql_free_result($rs);
     }
 
-    public function writeViewGeocacheUrls()
+    public function writeViewGeocacheUrls(): void
     {
         $rs = sql(
             'SELECT SQL_BUFFER_RESULT `caches`.`wp_oc`, `caches`.`cache_id`, `cache_desc`.`language`

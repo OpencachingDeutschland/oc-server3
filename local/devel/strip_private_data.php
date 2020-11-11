@@ -41,7 +41,6 @@ sql('TRUNCATE `email_user`');
 sql('TRUNCATE `logentries`');
 sql('TRUNCATE `pictures_modified`');
 sql('TRUNCATE `saved_texts`');
-sql('TRUNCATE `sys_login_stat`');
 sql('TRUNCATE `user_statpic`');
 sql('TRUNCATE `waypoint_reports`');
 
@@ -107,7 +106,7 @@ while ($r = sql_fetch_assoc($rs)) {
     sql("DELETE FROM `caches` WHERE `cache_id`='&1'", $r['cache_id']);
 }
 echo "\n";
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 echo "clearing nonpublic cache data\n";
 sql(
@@ -136,7 +135,7 @@ while ($r = sql_fetch_assoc($rs)) {
     sql("DELETE FROM `user` WHERE `user_id`='&1'", $r['user_id']);
 }
 echo "\n";
-mysql_free_result($rs);
+mysqli_free_result($rs);
 
 echo "clearing OKAPI data\n";
 if (sql_table_exists('okapi_vars')) {

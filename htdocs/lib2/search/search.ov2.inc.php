@@ -11,7 +11,7 @@ require_once __DIR__ . '/../charset.inc.php';
 $search_output_file_download = true;
 $content_type_plain = 'application/ov2';
 
-function search_output()
+function search_output(): void
 {
     global $sqldebug;
 
@@ -70,7 +70,7 @@ function search_output()
 
         append_output($record);
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 

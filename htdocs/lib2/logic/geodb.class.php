@@ -5,7 +5,7 @@
 
 class GeoDb
 {
-    public static function setAllCacheLocations()
+    public static function setAllCacheLocations(): void
     {
         $rs = sqll(
             'SELECT `caches`.`cache_id`
@@ -27,7 +27,7 @@ class GeoDb
         );
     }
 
-    private static function setCacheLocation($cache_id)
+    private static function setCacheLocation($cache_id): void
     {
         echo $cache_id . "\n";
         $rs = sqll(

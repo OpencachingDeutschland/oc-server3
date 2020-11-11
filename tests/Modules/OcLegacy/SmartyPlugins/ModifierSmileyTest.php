@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../../htdocs/src/OcLegacy/SmartyPlugins/modifier.
 
 class ModifierSmileyTest extends AbstractModuleTest
 {
-    public function testSmiley()
+    public function testSmiley(): void
     {
         self::assertEquals(
             ' <img src="smiley-smile.gif" alt=" :) " border="0" width="18px" height="18px" /> ',

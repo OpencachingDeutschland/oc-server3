@@ -8,6 +8,8 @@
  *
  *****************************************************************************/
 
+use OcLegacy\Editor\EditorConstants;
+
 require_once __DIR__ . '/lib/consts.inc.php';
 $opt['gui'] = GUI_HTML;
 require_once __DIR__ . '/lib/common.inc.php';
@@ -26,7 +28,7 @@ if ($error == false) {
         $desc_lang = $_REQUEST['desclang'];  // Ocprop
 
         $rs = sql("SELECT `id` FROM `cache_desc` WHERE `cache_id`='&1' AND `language`='&2'", $cache_id, $desc_lang);
-        if (mysql_num_rows($rs) == 1) {
+        if (mysqli_num_rows($rs) == 1) {
             $r = sql_fetch_array($rs);
             $descid = $r['id'];
         } else {
@@ -90,25 +92,15 @@ if ($error == false) {
                 //save to DB?
                 if (isset($_POST['post'])) {  // Ocprop
                     //here we read all used information from the form if submitted
-                    $descMode = isset($_POST['descMode']) ? $_POST['descMode'] + 0 : 1;  // Ocprop
-
-                    // fuer alte Versionen von OCProp
-                    if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $descMode = (isset($_POST['desc_html']) && ($_POST['desc_html'] == 1)) ? 2 : 1;
-                        $_POST['submitform'] = $_POST['submit'];
-                    }
+                    $descMode = (int) $_POST['descMode'] ?? EditorConstants::EDITOR_MODE;  // Ocprop
 
                     switch ($descMode) {
-                        case 1:
-                            $desc_htmledit = 0;
-                            $desc_html = 0;
-                            break;
-                        case 2:
+                        case EditorConstants::HTML_MODE:
                             $desc_htmledit = 0;
                             $desc_html = 1;
                             break;
                         default:
-                            $descMode = 3;
+                            $descMode = EditorConstants::EDITOR_MODE;
                             $desc_htmledit = 1;
                             $desc_html = 1;
                             break;
@@ -116,7 +108,7 @@ if ($error == false) {
 
                     if (isset($_POST['oldDescMode'])) {
                         $oldDescMode = $_POST['oldDescMode'];
-                        if (($oldDescMode < 1) || ($oldDescMode > 3)) {
+                        if (($oldDescMode < EditorConstants::HTML_MODE) || ($oldDescMode > EditorConstants::EDITOR_MODE)) {
                             $oldDescMode = $descMode;
                         }
                     } else {
@@ -133,8 +125,8 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $short_desc = iconv("ISO-8859-1", "UTF-8", $short_desc);
-                        $hint = iconv("ISO-8859-1", "UTF-8", $hint);
+                        $short_desc = iconv('ISO-8859-1', 'UTF-8', $short_desc);
+                        $hint = iconv('ISO-8859-1', 'UTF-8', $hint);
                     }
 
                     // Text from textarea
@@ -142,7 +134,7 @@ if ($error == false) {
 
                     // fuer alte Versionen von OCProp
                     if (isset($_POST['submit']) && !isset($_POST['version2'])) {
-                        $desc = iconv("ISO-8859-1", "UTF-8", $desc);
+                        $desc = iconv('ISO-8859-1', 'UTF-8', $desc);
                     }
 
                     $desc = processEditorInput($oldDescMode, $descMode, $desc, $representDesc);
@@ -163,7 +155,7 @@ if ($error == false) {
                         if ($r['count'] > 0) {
                             tpl_errorMsg('editdesc', $error_desc_exists);
                         }
-                        mysql_free_result($rs);
+                        mysqli_free_result($rs);
 
                         sql(
                             "UPDATE `cache_desc` SET
@@ -202,9 +194,6 @@ if ($error == false) {
                             );
                         }
 
-                        // do not use slave server for the next time ...
-                        db_slave_exclude();
-
                         // redirect to cachepage
                         tpl_redirect('editcache.php?cacheid=' . urlencode($desc_record['cache_id']));
                         exit;
@@ -218,22 +207,22 @@ if ($error == false) {
                     $desc_htmledit = $desc_record['desc_htmledit'];
                     $desc_html = $desc_record['desc_html'];
                     $desc_lang = $desc_record['language'];
-                    $descMode = ($desc_html == 0 ? 1 : ($desc_htmledit ? 3 : 2));
-                    $oldDescMode = ($desc_html == 0 ? 0 : ($desc_htmledit ? 3 : 2));
+                    $descMode = ($desc_html == 0 ? EditorConstants::EDITOR_MODE : ($desc_htmledit ? EditorConstants::EDITOR_MODE : EditorConstants::HTML_MODE));
+                    $oldDescMode = ($desc_html == 0 ? 0 : ($desc_htmledit ? EditorConstants::EDITOR_MODE : EditorConstants::HTML_MODE));
 
                     if ($oldDescMode == 0) {
                         $desc = processEditorInput($oldDescMode, $descMode, $desc_record['desc'], $representDesc);
                     } else {
                         $desc = $desc_record['desc'];
-                        $representDesc = $desc;
                     }
+                    $representDesc = $desc;
                 }
 
                 //here we only set up the template variables
 
                 tpl_set_var('desc', htmlspecialchars($representDesc, ENT_COMPAT, 'UTF-8'), true);
                 tpl_set_var('descMode', $descMode);
-                tpl_set_var('htmlnotice', $descMode == 2 ? $htmlnotice : '');
+                tpl_set_var('htmlnotice', $descMode == EditorConstants::HTML_MODE ? $htmlnotice : '');
 
                 // ok ... die desclang zusammenbauen
                 if ($show_all_langs == false) {
@@ -245,7 +234,7 @@ if ($error == false) {
                         $desc_lang,
                         $locale
                     );
-                    if (mysql_num_rows($rs) == 0) {
+                    if (mysqli_num_rows($rs) == 0) {
                         $show_all_langs = true;
                     }
                     sql_free_result($rs);

@@ -23,10 +23,6 @@ class Importer
      */
     private $fieldNoteService;
 
-    /**
-     * @param GeoCacheService $geoCacheService
-     * @param FieldNoteService $fieldNoteService
-     */
     public function __construct(
         GeoCacheService $geoCacheService,
         FieldNoteService $fieldNoteService
@@ -37,18 +33,15 @@ class Importer
 
     /**
      * Import by given context.
-     *
-     * @param ImportContext $context
      */
-    public function import(ImportContext $context)
+    public function import(ImportContext $context): void
     {
         $uploadFormData = $context->getFormData();
-        $fieldNotes = $context->getFieldNotes();
 
         /**
          * @var FieldNote
          */
-        foreach ($fieldNotes as $fieldNote) {
+        foreach ($context->getFieldNotes() as $fieldNote) {
             $date = new DateTime($fieldNote->noticedAt, new DateTimeZone('UTC'));
             $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
 

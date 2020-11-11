@@ -7,10 +7,10 @@ class NeedMaintenance
     /**
      * @var int
      */
-    const ACTIVATE = 2;
+    public const ACTIVATE = 2;
 
     /**
      * @var int
      */
-    const DEACTIVATE = 1;
+    public const DEACTIVATE = 1;
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #DESCRIPTION: import translation file from opencaching.de
 
-cd htdocs && wget -O translations.zip "https://www.opencaching.de/translations.zip"
+cd htdocs && curl -o translations.zip "https://www.opencaching.de/translations.zip"
 cd htdocs && unzip -o translations.zip
 cd htdocs && rm translations.zip
 

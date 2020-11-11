@@ -11,6 +11,7 @@ use Symfony\Component\Debug\Debug;
 
 set_time_limit(0);
 date_default_timezone_set('Europe/Berlin');
+
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */

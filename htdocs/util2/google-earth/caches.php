@@ -272,7 +272,7 @@ if ((abs($lonFrom - $lonTo) > 2) || (abs($latFrom - $latTo) > 2)) {
 echo $kmlFoot;
 exit;
 
-function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to)
+function echoZoomIn($lon_from, $lon_to, $lat_from, $lat_to): void
 {
     $nColumnsCount = 60;
     $sZoomIn =

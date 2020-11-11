@@ -29,30 +29,30 @@ class AppKernelTest extends TestCase
         return $this->kernel = $kernel;
     }
 
-    public function test_if_kernel_boots()
+    public function test_if_kernel_boots(): void
     {
         $kernel = $this->getKernel();
         self::assertInstanceOf(AppKernel::class, $kernel::getInstance());
     }
 
-    public function test_registerBundles_returns_array()
+    public function test_registerBundles_returns_array(): void
     {
         self::assertInternalType('array', $this->getKernel()->registerBundles());
 
-        self::assertCount(16, $this->getKernel()->registerBundles());
+        self::assertCount(13, $this->getKernel()->registerBundles());
     }
 
-    public function test_getCacheDir_returns_environment_suffixed_directory()
+    public function test_getCacheDir_returns_environment_suffixed_directory(): void
     {
         self::assertContains($this->env, $this->getKernel()->getCacheDir());
     }
 
-    public function test_getLogDir_returns_environment_suffixed_directory()
+    public function test_getLogDir_returns_environment_suffixed_directory(): void
     {
         self::assertContains($this->env, $this->getKernel()->getLogDir());
     }
 
-    public function test_registerContainerFonciguration_loads_environment_suffixed_config_file()
+    public function test_registerContainerFonciguration_loads_environment_suffixed_config_file(): void
     {
         $loaderDummy = new ConfigLoaderDummy();
         $this->getKernel()->registerContainerConfiguration($loaderDummy);

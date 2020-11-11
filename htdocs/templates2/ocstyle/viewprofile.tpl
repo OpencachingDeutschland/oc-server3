@@ -119,7 +119,7 @@
              notes=$note
              maintainence=$maintenance
              recommended=$recommended
-             maxrecommended=$maxrecommended
+             maxrecommended=$maxRecommended
              logpics=$logpics
              regionstat=$regionstat}
 
@@ -139,15 +139,15 @@
 
     {include file="res_userstats.tpl"
              oconly=true
-             hidden=$oconly_hidden
-             hidden_active=$oconly_hidden_active
+             hidden=$ocOnlyHidden
+             hidden_active=$ocOnlyHiddenActive
              hidden_by_cachetype=$oconly_userstatshidden
              found=$oconly_found
              found_by_cachetype=$oconly_userstatsfound
              dnf=$oconly_dnf
              notes=$oconly_note
              maintainence=$oconly_maint
-             recommended=$oconly_recommended
+             recommended=$ocOnlyRecommended
              maxrecommended=null
              logpics=$oconly_logpics
              regionstat=$oconly_regionstat}

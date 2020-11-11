@@ -6,7 +6,7 @@
     </div>
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
-<p>The Opencaching Deutschland e.V. (e.V. = registered association) was founded on June&nbsp;9, 2012 as new operator of the Opencaching.de (OC) websites - including opencaching.it, opencachingspain.es and opencaching.fr -, and to ensure future development of OC. The association may also support other upcoming Opencaching projects.</p>
+<p>The Opencaching Deutschland e.V. (e.V. = registered association) was founded on June&nbsp;9, 2012 as new operator of the Opencaching.de (OC) websites - including opencaching.it and opencaching.fr -, and to ensure future development of OC. The association may also support other upcoming Opencaching projects.</p>
 
 <h5>Where is the association located?</h5>
 <p>The association's registered address is at Bad Homburg vor der Höhe near Frankfurt/Main. We chose this place because it is a central location in Germany. Eventually, the location is not important as the association nearly solely acts online. General meetings, board sessions and conferences on further development of Opencaching.de take place via TeamSpeak. We use E-Mail and &ndash; of course &ndash; our <a href="http://forum.opencaching.de" target="_blank">Forum</a>.</p>

@@ -9,5 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class LogType extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'oc.field_notes.validator.constraints.log_type';
 }

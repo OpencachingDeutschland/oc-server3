@@ -6,19 +6,11 @@ $finder = PhpCsFixer\Finder::create()
     ->filter(function(SplFileInfo $file) use ($blacklistedFiles) {
         return !in_array($file->getFilename(), $blacklistedFiles, true);
     })
-    ->in(__DIR__ . '/bin')
-    ->in(__DIR__ . '/htdocs/api')
     ->in(__DIR__ . '/htdocs/app')
-    ->in(__DIR__ . '/htdocs/bin')
-    ->in(__DIR__ . '/htdocs/config2')
-    ->in(__DIR__ . '/htdocs/lib')
-    ->in(__DIR__ . '/htdocs/lib2')
+    ->in(__DIR__ . '/htdocs_symfony/src')
     ->in(__DIR__ . '/htdocs/src')
-    ->in(__DIR__ . '/htdocs/util')
-    ->in(__DIR__ . '/htdocs/util2')
-    ->in(__DIR__ . '/htdocs/xml')
-    ->in(__DIR__ . '/local')
     ->in(__DIR__ . '/tests')
+    ->in(__DIR__ . '/dev-ops/local.team-opencaching.de/templates')
 ;
 
 
@@ -71,8 +63,14 @@ return PhpCsFixer\Config::create()
        'phpdoc_scalar' => true,
        'phpdoc_no_package' => true,
        'phpdoc_single_line_var_spacing' => true,
-       'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
-
+       'phpdoc_add_missing_param_annotation' => [
+           'only_untyped' => true,
+       ],
+       'no_superfluous_phpdoc_tags' => [
+           'allow_mixed' => true,
+       ],
+       'void_return' => true,
+       'no_empty_phpdoc' => true
    ])
     ->setRiskyAllowed(true)
     ->setFinder($finder);

@@ -145,7 +145,7 @@ class cachelist
         return $this->reCachelist->setValue('description', $desc);
     }
 
-    public function setPassword($pw)
+    public function setPassword($pw): void
     {
         $this->reCachelist->setValue('password', $pw);
     }
@@ -256,6 +256,18 @@ class cachelist
         return true;
     }
 
+    public function addCachesByIDs($cache_ids)
+    {
+        $number_wps = 0;
+        foreach ($cache_ids as $cache_id) {
+            $result = $this->addCacheByID($cache_id);
+            if ($result == true) {
+                $number_wps++;
+            }
+        }
+        return $number_wps;
+    }
+
     public function addCacheByID($cache_id)
     {
         return $this->addCache(new cache($cache_id));
@@ -277,7 +289,7 @@ class cachelist
         return true;
     }
 
-    public function removeCacheById($cache_id)
+    public function removeCacheById($cache_id): void
     {
         sql(
             "DELETE FROM `cache_list_items` WHERE `cache_list_id`='&1' AND `cache_id`='&2'",
@@ -287,7 +299,7 @@ class cachelist
     }
 
     // watching, bookmarking and access tests
-    public function watch($watch)
+    public function watch($watch): void
     {
         global $login;
         $login->verify();
@@ -328,7 +340,7 @@ class cachelist
         ) != 0;
     }
 
-    public function bookmark($pw)
+    public function bookmark($pw): void
     {
         global $login;
 
@@ -347,7 +359,7 @@ class cachelist
         }
     }
 
-    public function unbookmark()
+    public function unbookmark(): void
     {
         global $login;
 
@@ -435,8 +447,8 @@ class cachelist
             . ($namelike ? " AND `name` LIKE '%" . sql_escape($namelike) . "%'" : '')
             . ($userlike ? " AND `username` LIKE '%" . sql_escape($userlike) . "%'" : ''),
             0,
-            $startat,
-            $maxitems,
+            (int) $startat,
+            (int) $maxitems,
             true
         );
     }
@@ -526,8 +538,8 @@ class cachelist
              ORDER BY `prio`, $nameField
              LIMIT &2,&3",
             $login->userid,
-            $startat,
-            $maxitems
+            (int) $startat,
+            (int) $maxitems
         );
 
         $lists = sql_fetch_assoc_table($rs);

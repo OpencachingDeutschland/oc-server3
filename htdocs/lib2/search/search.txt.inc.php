@@ -14,7 +14,7 @@ $zip_threshold = 1;
 $add_to_zipfile = false;
 
 
-function search_output()
+function search_output(): void
 {
     global $opt, $translate, $txt_record;
     global $converted_from_html;
@@ -206,7 +206,7 @@ function search_output()
             $phpzip->add_data($r['waypoint'] . '.txt', $thisline);
         }
     }
-    mysql_free_result($rs);
+    mysqli_free_result($rs);
 }
 
 

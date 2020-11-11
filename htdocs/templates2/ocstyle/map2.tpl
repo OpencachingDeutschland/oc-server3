@@ -71,7 +71,7 @@ var mnInitLon = {/literal}{$nGMInitLon}{literal};
 var mnInitZoom = {/literal}({$nGMInitZoom} < 0 ? nDefaultZoom : {$nGMInitZoom}){literal};
 var mbInitCookiePos = {/literal}{$bGMInitCookiePos}{literal};
 var msInitWaypoint = "{/literal}{$sGMInitWaypoint}{literal}";
-var msInitType = 'roadmap';
+var msInitType = 'OSM';
 var msInitSiderbarDisplay = 'none';
 var msInitAttribSelection = false;
 var miQueryID = {/literal}{$queryid}{literal};
@@ -87,7 +87,7 @@ var msInitCookieLastPosName = 'ocgmlastpos';
 var msInitCookieConfigName = 'ocgmconfig';
 var msInitCookieFilterName = 'ocgmfilter';
 var msInitCookiePermFilterName = 'ocgmfilter_saved';
-if (!navigator.cookieEnabled)
+if (!navigator.cookieEnabled || !klaro.getManager().getConsent('ocgmconfig'))
 {
     // see doc/cookies.txt for information on cookies
     msInitCookieLastPosName = '';
@@ -344,13 +344,8 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM',
-                    google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE,
-                    google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN ];
-  var initType = google.maps.MapTypeId.ROADMAP;
-  for (var i=0; i<maptypes.length; i++)
-    if (msInitType == maptypes[i])
-            initType = msInitType;
+    var maptypes = ['OSM'];
+    var initType = 'OSM';
 
     var myOptions = {
         zoom: mnInitZoom,
@@ -360,7 +355,7 @@ function mapLoad()
         gestureHandling: 'greedy',
 
         mapTypeControl: true,
-        mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_RIGHT },
+        mapTypeControlOptions: { mapTypeIds: maptypes, position: google.maps.ControlPosition.TOP_CENTER },
 
         panControl: false,
         zoomControl: true,
@@ -2036,6 +2031,12 @@ function reset_filter()
 
 function save_filter()
 {
+    if (!klaro.getManager().getConsent('ocgmconfig')) {
+        {/literal}
+        alert("{t}The current filter could not be saved as the cookie consent for map configuration is not given!{/t}");
+        return;
+        {literal}
+    }
     cookieSave(true);
     {/literal}
     alert("{t}The current filter settings have been permamently saved.{/t}");

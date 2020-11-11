@@ -54,7 +54,7 @@ $rsNewLogs = sql(
     WHERE cache_logs.cache_id=caches.cache_id
     AND cache_logs.owner_notified=0'
 );
-$mysqlNumRows = mysql_num_rows($rsNewLogs);
+$mysqlNumRows = mysqli_num_rows($rsNewLogs);
 for ($i = 0; $i < $mysqlNumRows; $i++) {
     $rNewLog = sql_fetch_array($rsNewLogs);
 
@@ -67,7 +67,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
         $rNewLog['user_id'],
         $rNewLog['log_id']
     );
-    if (mysql_num_rows($rsNotified) === 0) {
+    if (mysqli_num_rows($rsNotified) === 0) {
         // Benachrichtigung speichern
         sql(
             "INSERT IGNORE INTO `watches_notified` (`user_id`, `object_id`, `object_type`, `date_created`)
@@ -79,11 +79,11 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
         // Owner notifications are always sent, independent of user.email_problems counter.
         process_owner_log($rNewLog['user_id'], $rNewLog['log_id']);
     }
-    mysql_free_result($rsNotified);
+    mysqli_free_result($rsNotified);
 
     sql("UPDATE cache_logs SET owner_notified=1 WHERE id='&1'", $rNewLog['log_id']);
 }
-mysql_free_result($rsNewLogs);
+mysqli_free_result($rsNewLogs);
 /* end owner notifies */
 
 /* begin cache_watches */
@@ -92,7 +92,7 @@ $rscw = sql(
      FROM `watches_logqueue`
      INNER JOIN `cache_logs` ON `watches_logqueue`.`log_id`=`cache_logs`.`id`'
 );
-while ($rcw = mysql_fetch_assoc($rscw)) {
+while ($rcw = mysqli_fetch_assoc($rscw)) {
     // Benachrichtigung speichern
     sql(
         "INSERT IGNORE INTO `watches_notified` (`user_id`, `object_id`, `object_type`, `date_created`)
@@ -115,7 +115,7 @@ while ($rcw = mysql_fetch_assoc($rscw)) {
 
     sql("DELETE FROM `watches_logqueue` WHERE `log_id`='&1' AND `user_id`='&2'", $rcw['log_id'], $rcw['user_id']);
 }
-mysql_free_result($rscw);
+mysqli_free_result($rscw);
 /* end cache_watches */
 
 /* begin send out everything that has to be sent */
@@ -139,7 +139,7 @@ $rsUsers = sql(
     WHERE `user`.`watchmail_nextmail`<NOW()",
     $opt['template']['default']['locale']
 );
-$mysqlNumRows = mysql_num_rows($rsUsers);
+$mysqlNumRows = mysqli_num_rows($rsUsers);
 for ($i = 0; $i < $mysqlNumRows; $i++) {
     $rUser = sql_fetch_array($rsUsers);
 
@@ -147,7 +147,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
         $nologs = $translate->t('No new log entries.', '', basename(__FILE__), __LINE__, '', 1, $rUser['language']);
 
         $rsWatches = sql("SELECT COUNT(*) count FROM watches_waiting WHERE user_id='&1'", $rUser['user_id']);
-        if (mysql_num_rows($rsWatches) > 0) {
+        if (mysqli_num_rows($rsWatches) > 0) {
             $r = sql_fetch_array($rsWatches);
             if ($r['count'] > 0) {
                 // ok, eine mail ist fäig
@@ -162,9 +162,9 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                     ORDER BY id DESC",
                     $rUser['user_id']
                 );
-                if (mysql_num_rows($rsWatchesOwner) > 0) {
+                if (mysqli_num_rows($rsWatchesOwner) > 0) {
                     $logtexts = '';
-                    $mysqlNumRowsWatchesOwner = mysql_num_rows($rsWatchesOwner);
+                    $mysqlNumRowsWatchesOwner = mysqli_num_rows($rsWatchesOwner);
                     for ($j = 0; $j < $mysqlNumRowsWatchesOwner; $j++) {
                         $rWatch = sql_fetch_array($rsWatchesOwner);
                         $logtexts .= $rWatch['watchtext'];
@@ -178,7 +178,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                 } else {
                     $mailbody = mb_ereg_replace('{ownerlogs}', $nologs, $mailbody);
                 }
-                mysql_free_result($rsWatchesOwner);
+                mysqli_free_result($rsWatchesOwner);
 
                 $rsWatchesLog = sql(
                     "SELECT id, watchtext
@@ -188,9 +188,9 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                     ORDER BY id DESC",
                     $rUser['user_id']
                 );
-                if (mysql_num_rows($rsWatchesLog) > 0) {
+                if (mysqli_num_rows($rsWatchesLog) > 0) {
                     $logtexts = '';
-                    $mysqlNumRowsWatchesLog = mysql_num_rows($rsWatchesLog);
+                    $mysqlNumRowsWatchesLog = mysqli_num_rows($rsWatchesLog);
                     for ($j = 0; $j < $mysqlNumRowsWatchesLog; $j++) {
                         $rWatch = sql_fetch_array($rsWatchesLog);
                         $logtexts .= $rWatch['watchtext'];
@@ -204,7 +204,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
                 } else {
                     $mailbody = mb_ereg_replace('{watchlogs}', $nologs, $mailbody);
                 }
-                mysql_free_result($rsWatchesLog);
+                mysqli_free_result($rsWatchesLog);
 
                 // mail versenden
                 if ($debug == true) {
@@ -281,7 +281,7 @@ for ($i = 0; $i < $mysqlNumRows; $i++) {
 
     sql("UPDATE user SET watchmail_nextmail='&1' WHERE user_id='&2'", $nextmail, $rUser['user_id']);
 }
-mysql_free_result($rsUsers);
+mysqli_free_result($rsUsers);
 
 /* cleanup */
 
@@ -295,7 +295,7 @@ sql('DELETE FROM `watches_waiting` WHERE DATEDIFF(NOW(),`date_created`) > 35');
 CleanupAndExit($watchpid);
 
 
-function process_owner_log($user_id, $log_id)
+function process_owner_log($user_id, $log_id): void
 {
     global $opt, $dblink, $translate;
 
@@ -325,9 +325,9 @@ function process_owner_log($user_id, $log_id)
         $log_id
     );
     $rLog = sql_fetch_array($rsLog);
-    mysql_free_result($rsLog);
+    mysqli_free_result($rsLog);
 
-    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0, EMAIL_LINEWRAP);
+    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 
     $language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     if (!$language) {
@@ -380,7 +380,7 @@ function process_owner_log($user_id, $log_id)
     logentry('watchlist', 1, $user_id, $log_id, 0, $watchtext, []);
 }
 
-function process_log_watch($user_id, $log_id)
+function process_log_watch($user_id, $log_id): void
 {
     global $opt, $dblink, $logwatch_text, $translate;
 
@@ -413,9 +413,9 @@ function process_log_watch($user_id, $log_id)
         $log_id
     );
     $rLog = sql_fetch_array($rsLog);
-    mysql_free_result($rsLog);
+    mysqli_free_result($rsLog);
 
-    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0, EMAIL_LINEWRAP);
+    $logtext = html2plaintext($rLog['text'], $rLog['text_html'] == 0);
 
     $language = sqlValue("SELECT `language` FROM `user` WHERE `user_id`='" . sql_escape($user_id) . "'", null);
     if (!$language) {
@@ -643,7 +643,7 @@ function CheckDaemon($PidFile)
 //
 // deletes pid-file
 //
-function CleanupAndExit($PidFile, $message = false)
+function CleanupAndExit($PidFile, $message = false): void
 {
     if ($pidfile = @fopen($PidFile, 'rb')) {
         $pid = fgets($pidfile, 20);

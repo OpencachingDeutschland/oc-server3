@@ -27,7 +27,6 @@
 <form action="{login_url}" method="post" enctype="application/x-www-form-urlencoded" name="login_form" dir="ltr" style="display: inline;">
 <input type="hidden" name="target" value="{target}" />
 <input type="hidden" name="action" value="login" />
-<input type="hidden" name="source" value="loginpage" />
 
 <table class="table">
     <tr><td class="spacer" colspan="2"></td></tr>

@@ -10,20 +10,19 @@ use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class ClearWebCacheCommand
- */
 class ClearWebCacheCommand extends AbstractCommand
 {
+    /**
+     * @var string
+     */
     const COMMAND_NAME = 'cache:clear-web-cache';
 
     /**
      * Configures the command.
      *
-     *
      * @throws InvalidArgumentException
      */
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -32,15 +31,7 @@ class ClearWebCacheCommand extends AbstractCommand
             ->setDescription('clear legacy web caches');
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int|null
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $output->writeln('Delete cached files');
 

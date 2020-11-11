@@ -2,11 +2,3 @@ oc:
     resource: "../../src/Oc/"
     type:     annotation
 
-oc_dev:
-    resource: "../../src/OcDev/"
-    type:     annotation
-
-kitchensink.index:
-    path:      /kitchensink
-    defaults:  { _controller: BestItKitchensinkBundle:Kitchensink:index }
-

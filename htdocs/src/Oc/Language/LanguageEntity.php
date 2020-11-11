@@ -4,9 +4,6 @@ namespace Oc\Language;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class LanguageEntity
- */
 class LanguageEntity extends AbstractEntity
 {
     /**
@@ -56,10 +53,8 @@ class LanguageEntity extends AbstractEntity
 
     /**
      * Checks if the entity is new.
-     *
-     * @return bool
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->short === null;
     }

@@ -12,11 +12,6 @@ class PersistedWaypointValidator extends WaypointValidator
      */
     private $geoCacheService;
 
-    /**
-     * PersistedWaypointValidator constructor.
-     *
-     * @param GeoCacheService $geoCacheService
-     */
     public function __construct(GeoCacheService $geoCacheService)
     {
         $this->geoCacheService = $geoCacheService;
@@ -27,10 +22,8 @@ class PersistedWaypointValidator extends WaypointValidator
      *
      * @param mixed $waypoint The value that should be validated
      * @param Constraint $constraint The constraint for the validation
-     *
-     * @return bool
      */
-    public function validate($waypoint, Constraint $constraint)
+    public function validate($waypoint, Constraint $constraint): bool
     {
         $valid = parent::validate($waypoint, $constraint);
 

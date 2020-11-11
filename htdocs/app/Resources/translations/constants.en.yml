@@ -1,6 +1,6 @@
 field_notes:
-    log_type:
-        1: 'Found'
-        2: 'Not found'
-        3: 'Write note'
-        1000: 'Needs maintainance'
+  log_type:
+    1: 'Found'
+    2: 'Not found'
+    3: 'Write note'
+    1000: 'Needs maintainance'

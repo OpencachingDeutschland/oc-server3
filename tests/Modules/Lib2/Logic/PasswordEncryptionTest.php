@@ -14,7 +14,7 @@ class PasswordEncryptionTest extends AbstractModuleTest
      * @group unit-tests
      * @covers \OcLegacy\Util\PasswordCrypt::encryptPassword
      */
-    public function testPasswordEncryption()
+    public function testPasswordEncryption(): void
     {
         global $opt;
         $opt['logic']['password_hash'] = false;

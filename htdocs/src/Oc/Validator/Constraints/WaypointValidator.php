@@ -14,10 +14,8 @@ class WaypointValidator extends ConstraintValidator
      *
      * @param mixed $waypoint The value that should be validated
      * @param Constraint $constraint The constraint for the validation
-     *
-     * @return bool
      */
-    public function validate($waypoint, Constraint $constraint)
+    public function validate($waypoint, Constraint $constraint): bool
     {
         $valid = true;
 
@@ -36,24 +34,16 @@ class WaypointValidator extends ConstraintValidator
 
     /**
      * Check if the given waypoint is an oc waypoint.
-     *
-     * @param string $waypoint
-     *
-     * @return bool True if it is an oc waypoint
      */
-    protected function isOCWaypoint($waypoint)
+    protected function isOCWaypoint(string $waypoint): bool
     {
         return stripos($waypoint, 'oc') === 0;
     }
 
     /**
      * Check if the given waypoint is an gc waypoint.
-     *
-     * @param string $waypoint
-     *
-     * @return bool True if it is an gc waypoint
      */
-    protected function isGCWaypoint($waypoint)
+    protected function isGCWaypoint(string $waypoint): bool
     {
         return stripos($waypoint, 'gc') === 0;
     }

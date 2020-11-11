@@ -9,30 +9,24 @@ class ApiSrvTest extends AbstractModuleTest
 {
     use OkapiCredentialsTrait;
 
-    public function testApisrvStatsMethod()
+    public function testApisrvStatsMethod(): void
     {
-        $client = $this->createOkapiClient();
-
-        $response = $client->get('services/apisrv/stats');
+        $response = $this->createOkapiClient()->get('services/apisrv/stats');
 
         self::assertCount(4, $response);
         self::assertEquals(1, $response['apps_count']);
     }
 
-    public function testApiSrvInstallationMethod()
+    public function testApiSrvInstallationMethod(): void
     {
-        $client = $this->createOkapiClient();
+        $response = $this->createOkapiClient()->get('services/apisrv/installation');
 
-        $response = $client->get('services/apisrv/installation');
-
-        self::assertCount(12, $response);
+        self::assertCount(14, $response);
     }
 
-    public function testApiSrvInstallationsMethod()
+    public function testApiSrvInstallationsMethod(): void
     {
-        $client = $this->createOkapiClient();
-
-        $response = $client->get('services/apisrv/installations');
+        $response = $this->createOkapiClient()->get('services/apisrv/installations');
 
         self::assertCount(7, $response);
     }

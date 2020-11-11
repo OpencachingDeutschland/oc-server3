@@ -7,14 +7,14 @@
     <div class="content-txtbox-noshade" style="padding-right: 25px;">
 
 <p>Thanks for viewing our donations page! Besides of engaged volunteers in the Opencaching.de team, we also depend on your financial support to operate and extend this completely free website. By your donation you will mainly help us to pay for webhosting.</p>
- 
+
             <h1>Donate by bank transfer:</h1>
-            <p>Bank: Deutsche Skatbank<br />
+            <p>Bank: Volksbank Heiden<br />
             Account owner: Opencaching Deutschland e.V.<br />
-            Account number: 475 26 78<br />
-            BLZ: 830 654 08<br /><br />
-            IBAN: DE42 8306 5408 0004 7526 78<br />
-            BIC (SWIFT): GENODEF1SLR</p>
+            Account number: 944 853 00<br />
+            BLZ: 428 616 08<br /><br />
+            IBAN: DE07 4286 1608 0094 4853 00<br />
+            BIC (SWIFT): GENODEM1HEI</p>
 
             <h1>Donate by PayPal:</h1>
 
@@ -41,9 +41,9 @@
       <p>as you probably know, the Opencaching.de platform has been existing for several years now and was kept up all the time solely by volunteer work and donations. The number of page views (currently about 300.000 in monthly average) and listed caches and logs proof the high user demand for this site. Opencaching.de ist the second largest geocache listing service worldwide!</p>
 
       <p>Many things have been and are being improved "under the hood", and our support team is permanently working for you. We have received many suggestions from you and will do our best do extend and improve this website. All this is done be a few unpayed volunteers within their leisure time, and it will go on in this manner. We have no intentions to offer premium memberships or similar things for financing.</p>
-      
+
       <p>schwarzwald.de gave great support to us for year as webhosting sponsor. After the sponsoring agreement has expired, we have to finance the site completely on our own. You have emphasized many times that you are willing to help us with small donations. Therefore we offer this opportunity to support Opencaching.de with your donation. The decisions about use of donations will be done by the Opencaching Deutschland association, and the money will be solely spent for technical operation and improvement of this website. We will gladly inform you about improvements which have been enabled by your donations.</p>
-      
+
             <p>Kind regards<br />
             Your Opencaching Deutschland team</p>
             <br />

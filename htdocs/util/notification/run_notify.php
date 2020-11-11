@@ -103,7 +103,7 @@ if ($processSync->enter()) {
         }
         sql("DELETE FROM `notify_waiting` WHERE `id` ='&1'", $rNotify['id']);
     }
-    mysql_free_result($rsNotify);
+    mysqli_free_result($rsNotify);
 
     $processSync->leave();
 }

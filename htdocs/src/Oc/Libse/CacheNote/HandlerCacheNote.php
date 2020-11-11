@@ -22,7 +22,7 @@ class HandlerCacheNote
             TypeCoordinate::UserNote
         );
         $ret = $this->recordToArray(sql_fetch_array($rs));
-        mysql_free_result($rs);
+        mysqli_free_result($rs);
 
         return $ret;
     }
@@ -39,7 +39,7 @@ class HandlerCacheNote
         return $ret;
     }
 
-    public function save($noteId, $userId, $cacheId, $note, $latitude, $longitude)
+    public function save($noteId, $userId, $cacheId, $note, $latitude, $longitude): void
     {
         if (!$note && !$latitude && !$longitude) {
             sql(

@@ -2,9 +2,6 @@
 
 namespace Oc\GlobalContext;
 
-/**
- * Class GlobalContext
- */
 class GlobalContext
 {
     /**
@@ -17,34 +14,18 @@ class GlobalContext
      */
     private $defaultLocale;
 
-    /**
-     * GlobalContext constructor.
-     *
-     * @param string $defaultLocale
-     * @param string $locale
-     */
-    public function __construct($defaultLocale, $locale)
+    public function __construct(string $defaultLocale, string $locale)
     {
         $this->defaultLocale = $defaultLocale;
         $this->locale = $locale;
     }
 
-    /**
-     * Returns the default locale of the application.
-     *
-     * @return string
-     */
-    public function getDefaultLocale()
+    public function getDefaultLocale(): string
     {
         return $this->defaultLocale;
     }
 
-    /**
-     * Returns the global locale of the application.
-     *
-     * @return string
-     */
-    public function getLocale()
+    public function getLocale(): string
     {
         return $this->locale;
     }

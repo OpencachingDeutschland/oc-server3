@@ -23,9 +23,11 @@ OC85A9 Europa (Norwegen)
 N 60.63367° E 004.81313°
 */
 
-class CoordinateTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class CoordinateTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         global $opt;
         $opt['lib']['w3w']['apikey'] = 'X27PDW41';
@@ -54,7 +56,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $north
      * @param mixed $east
      */
-    public function testUTM($lat, $lon, $zone, $letter, $north, $east)
+    public function testUTM($lat, $lon, $zone, $letter, $north, $east): void
     {
         $coord = new \coordinate($lat, $lon);
         $utm = $coord->getUTM();
@@ -84,7 +86,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $lon
      * @param mixed $expectedGK
      */
-    public function testGK($lat, $lon, $expectedGK)
+    public function testGK($lat, $lon, $expectedGK): void
     {
         $coord = new \coordinate($lat, $lon);
         $gk = $coord->getGK();
@@ -111,7 +113,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $lon
      * @param mixed $expectedSG
      */
-    public function testSwissGrid($lat, $lon, $expectedSG)
+    public function testSwissGrid($lat, $lon, $expectedSG): void
     {
         $coord = new \coordinate($lat, $lon);
         $swissGrid = $coord->getSwissGrid();
@@ -136,7 +138,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $lon
      * @param mixed $expectedDG
      */
-    public function testDutchGrid($lat, $lon, $expectedDG)
+    public function testDutchGrid($lat, $lon, $expectedDG): void
     {
         // DutchGrid Berechnungen funktionieren nur auf dem Nord-Ost-Quadranten
         $coord = new \coordinate($lat, $lon);
@@ -164,7 +166,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $lon
      * @param mixed $expectedQTH
      */
-    public function testQTHLocator($lat, $lon, $expectedQTH)
+    public function testQTHLocator($lat, $lon, $expectedQTH): void
     {
         $coord = new \coordinate($lat, $lon);
         $qthLocator = $coord->getQTH();
@@ -194,7 +196,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param $language
      * @param $expectedW3W
      */
-    public function testWhat3Words($lat, $lon, $language, $expectedW3W)
+    public function testWhat3Words($lat, $lon, $language, $expectedW3W): void
     {
         $coord = new \coordinate($lat, $lon);
         $w3w = $coord->getW3W($language);
@@ -242,7 +244,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      * @param mixed $expectedMin
      * @param mixed $expectedMinSec
      */
-    public function testFormatConversions($lat, $lon, $expectedMin, $expectedMinSec)
+    public function testFormatConversions($lat, $lon, $expectedMin, $expectedMinSec): void
     {
         $coord = new \coordinate($lat, $lon);
 

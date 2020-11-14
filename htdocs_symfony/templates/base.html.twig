@@ -10,6 +10,10 @@
     <body>
         {% block body %}
 
+            <div>
+               <a href="http://try.docker.team-opencaching.de/login">Login</a>
+            </div>
+
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>
             {% endif %}

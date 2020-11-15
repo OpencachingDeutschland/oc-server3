@@ -32,7 +32,7 @@ class CachesEntity extends AbstractEntity implements CachesInterface
     /**
      * @var string
      */
-    public name;
+    public $name;
 
     /**
      * @var float (DB:double?)

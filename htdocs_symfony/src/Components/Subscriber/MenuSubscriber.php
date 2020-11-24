@@ -58,9 +58,9 @@ class MenuSubscriber implements EventSubscriberInterface
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $userMenu = $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',
-                'route' => 'backend_kitchensink_index',
+                'route' => 'app_kitchensink_index',
                 'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fa fa-css3');
+            ])->setLabelAttribute('icon', 'fab fa-css3');
         }
     }
 }

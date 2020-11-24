@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    {% block kitchen_title %}
+        <title>Kitchensink - Opencaching Design Küche</title>
+    {% endblock %}
+
+    {% block kitchen_head %}
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+              crossorigin="anonymous">
+    {% endblock %}
+
+</head>
+
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-2">
+            <nav class="navbar navbar-dark bg-dark">
+
+                <a class="navbar-brand" href="#">
+                    <img class="img-fluid"
+                         src="https://wiki.opencaching.de/images/thumb/OC_Logo_white_mit_Domain.png/800px-OC_Logo_white_mit_Domain.png">
+                </a>
+
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/kitchensink/">Info</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/kitchensink/oc4">OC 4</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/kitchensink/bs4">BS 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+
+        <div class="col-10">
+            {% block kitchen_content %}
+                <div class="jumbotron">
+                    <h1 class="display-4">Opencaching - Kitchensink</h1>
+                    <p class="lead">
+                        Eine Kitchensink ist die "Grafik-Küche" des Webdesign. Hier werden Elemente definiert, die das
+                        Design von Opencaching beschreiben. Dummy-Blöcke zeigen nicht nur das Aussehen, sondern geben
+                        auch Namen und Struktur wieder.
+                    </p>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">OC 4 Style</h5>
+                                <p class="card-text">Mit OC 4 kommt nicht nur das Responsive Design zum Tragen,
+                                                     auch der "
+                                    <a href="https://blog.opencaching.de/2020/09/spoiler-timeline-zum-darkmode/"
+                                       target="_blank">Dark Mode
+                                    </a>
+                                                     " hält Einzug.
+                                </p>
+                                <a href="/kitchensink/oc4" class="btn btn-primary btn-block">OC 4 Style</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Bootstrap 4</h5>
+                                <p class="card-text">Bootstrap ist eines der erfolgreichsten Grafik-Framework für
+                                                     Webseiten.
+                                                     Bei OC haben wir mit BS4 die Basis unseres Designs und passen die
+                                                     Elemente an und erweitern Module die wir benötigen.</p>
+                                <a href="/kitchensink/oc4" class="btn btn-primary btn-block">BS 4 Style</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>Weiterführende Informationen</h3>
+                    <p>
+                        Die Dokumentation aus technischer Sicht führen wir in unserer
+                        <a href="https://opencaching.atlassian.net/wiki/spaces/FE/overview"
+                           target="_blank">Confluence Dokumentation
+                        </a>
+                        .
+                    </p>
+                </div>
+                <div class="row">
+                    <h3>Copyright Hinweise:</h3>
+                    <p>Das Design von OC 4 ist Teil des Opencaching Open-Source Repository und natürlich unter der
+                       selben
+                        <a href="https://github.com/OpencachingDeutschland/oc-server3/blob/development/LICENSE.md"
+                           target="_blank">
+                            Lizenz
+                        </a>
+                       wie das Opencaching Projekt selbst veröffentlicht worden.
+                    </p>
+                    <p>
+                        Bootstrap wurde unter
+                        <a href="https://github.com/twbs/bootstrap/blob/main/LICENSE"
+                           target="_blank">MIT Lizenz
+                        </a>
+                        veröffentlicht.
+                    </p>
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% block kitchen_footer %}
+{% endblock %}
+
+</body>
+</html>

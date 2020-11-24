@@ -9,6 +9,7 @@
     </head>
     <body>
         {% block body %}
+            Herzlich Willkommen auf dem Testgelände von OC4
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>

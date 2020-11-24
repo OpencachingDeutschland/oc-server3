@@ -90,19 +90,19 @@ class CachesEntity extends AbstractEntity implements CachesInterface
             return $this->false;
     }
 
-    public function getName(): string
+    public function getID(): int
     {
         return $this->cache_id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getGCid(): string
     {
         return $this->wp_gc;
-    }
-
-    public function getOCid(): string
-    {
-        return $this->wp_oc;
     }
 
     public function getOCid(): string

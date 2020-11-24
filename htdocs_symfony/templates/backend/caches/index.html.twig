@@ -31,4 +31,36 @@
             <span style="color:grey;">type="text, Suche in name"</span>
         </label>
     </form>
+
+    <hr>
+
+    <div>
+        <h3>Automatische Datenbankabfrage und Auflistung der Elemente:</h3>
+        
+        <div>
+            DB-Connection
+            Abfrage cache_id, name, wp_oc
+            Auflistung in Tabelle
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <span class="h1">{{ cachesx }}</span>
+                <tbody>
+            </table>
+        </div>
+    </div>
+
 {% endblock %}
+
+
+
+
+
+
+

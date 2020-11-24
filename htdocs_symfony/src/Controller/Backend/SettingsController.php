@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SettingsController extends AbstractController
 {
     /**
-     * @Route("/caches", name="settings_index")
+     * @Route("/settings", name="settings_index")
      */
     public function index(): Response
     {

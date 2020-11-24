@@ -48,6 +48,14 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+            $cacheMenu = $menu->addChild('cache2', [
+                'label' => 'Caches3',
+                'route' => 'backend_caches_list',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
+        }
+
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $userMenu = $menu->addChild('user', [
                 'label' => 'Users',
                 'route' => 'backend_user_index',

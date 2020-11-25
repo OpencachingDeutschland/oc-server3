@@ -47,9 +47,9 @@ class MenuSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
         }
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) { // siehe CachesController.php 'function list(..)'
             $cacheMenu = $menu->addChild('cache2', [
-                'label' => 'Caches3',
+                'label' => 'CachesList',
                 'route' => 'backend_caches_list',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
@@ -69,6 +69,7 @@ class MenuSubscriber implements EventSubscriberInterface
                 'route' => 'backend_settings_index',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-cogs');
+        }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $userMenu = $menu->addChild('kitchensink', [

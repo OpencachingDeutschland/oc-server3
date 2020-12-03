@@ -2,6 +2,7 @@
 
 namespace Oc\Cache;
 
+use Doctrine\DBAL\Connection;
 use Oc\Entity\CacheEntity;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
@@ -14,9 +15,13 @@ class CacheService
      */
     private $cacheRepository;
 
-    public function __construct(CacheRepository $cacheRepository)
+//    public function __construct(CacheRepository $cacheRepository)
+    public function __construct(Connection $connection, SecurityRolesRepository  $securityRolesRepository) //test
     {
-        $this->cacheRepository = $cacheRepository;
+//        $this->cacheRepository = $cacheRepository;
+
+//        $this->connection = $connection;
+//        $this->securityRolesRepository = $securityRolesRepository;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
+
 #use Symfony\Component\Security\Core\User\UserInterface; ??
 
 #class CachesEntity extends AbstractEntity implements UserInterface
@@ -115,30 +116,30 @@ class CachesEntity extends AbstractEntity implements CachesInterface
         return $this->status;
     }
 
-/*
-    public function getRoles(): array
-    {
-        return $this->roles;
-    }
+    /*
+        public function getRoles(): array
+        {
+            return $this->roles;
+        }
 
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
+        public function getPassword(): ?string
+        {
+            return $this->password;
+        }
 
-    public function getSalt(): string
-    {
-        return '';
-    }
+        public function getSalt(): string
+        {
+            return '';
+        }
 
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
+        public function getUsername(): string
+        {
+            return $this->username;
+        }
 
-    public function eraseCredentials(): void
-    {
-    }
-*/
+        public function eraseCredentials(): void
+        {
+        }
+    */
 
 }

@@ -27,7 +27,7 @@ class CachesRepository
      */
     private $securityRolesRepository; //??
 
-    public function __construct(Connection $connection, SecurityRolesRepository  $securityRolesRepository) //??
+    public function __construct(Connection $connection, SecurityRolesRepository $securityRolesRepository) //??
     {
         $this->connection = $connection;
         $this->securityRolesRepository = $securityRolesRepository;
@@ -36,15 +36,31 @@ class CachesRepository
     /**
      * Fetches all caches.
      *
+     * @return CachesEntity[]
      * @throws RecordsNotFoundException Thrown when no records are found
-     * @return UserEntity[]
      */
+    public function fetchAll(): array
+    {
+        $statement = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->execute();
+
+        $result = $statement->fetchAll();
+
+        if ($statement->rowCount() === 0) {
+            throw new RecordsNotFoundException('No records found');
+        }
+
+        return $this->getEntityArrayFromDatabaseArray($result);
+    }
+
     /**
      * Fetches a cache by its id.
      *
      * @throws RecordNotFoundException Thrown when the request record is not found
      */
-    public function fetchOneById(int $id): UserEntity
+    public function fetchOneById(int $id): CachesEntity
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -71,12 +87,12 @@ class CachesRepository
     public function getEntityFromDatabaseArray(array $data): CachesEntity
     {
         $entity = new CachesEntity();
-        $entity->id = (int) $data['cache_id'];
+        $entity->id = (int)$data['cache_id'];
         $entity->name = $data['name'];
         $entity->wp_gc = $data['wp_gc'];
         $entity->wp_oc = $data['wp_oc'];
-        $entity->latitude = (double) $data['latitude'];
-        $entity->longitude = (double) $data['longitude'];
+        $entity->latitude = (double)$data['latitude'];
+        $entity->longitude = (double)$data['longitude'];
 
         return $entity;
     }

@@ -37,20 +37,10 @@ class MenuSubscriber implements EventSubscriberInterface
             'childOptions' => $event->getChildOptions()
         ])->setAttribute('class', 'header');
 
-
-
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $cacheMenu = $menu->addChild('cache', [
                 'label' => 'Caches',
                 'route' => 'backend_caches_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
-        }
-
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) { // siehe CachesController.php 'function list(..)'
-            $cacheMenu = $menu->addChild('cache2', [
-                'label' => 'CachesList',
-                'route' => 'backend_caches_list',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
         }

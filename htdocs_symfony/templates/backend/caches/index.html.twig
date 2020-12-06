@@ -2,30 +2,65 @@
 
 {% block page_content %}
     <div>
-        <h3><span class="badge badge-pill badge-warning">under construction</span><br/>Suche in Caches</h3>
+        <h3><span class="badge badge-pill badge-warning">UNDER CONSTRUCTION</span><br/>Suche in Caches</h3>
 
-        {# action="{{ path('caches_by_searchfield', { 'searchtext' : 'OC1001' }) }}" #}
-        <form class="ui form" action="{{ path('caches_by_searchfield') }}" method="POST">
-            <label>
-                <input type="text" placeholder="OC1001 oder GC0815 oder .." autofocus>
-                <input type="submit" value="Senden">
-                <span style="color:grey;">type="text, Suche in wp_oc, wp_gc, wp_nc, wp_.."</span>
-            </label>
-        </form>
+        {{ form_start(cachesForm) }}
+        {{ form_widget(cachesForm) }}
+        <button type="submit" class="btn btn-primary">Los!</button>
+        {{ form_end(cachesForm) }}
+
+        {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
+            <div style="background-color: lightgrey;">
+                <br/>
+                Diese Abfrage wurde durchgeführt mittels Eingabefeld und Formular. Hier ist das Ergebnis:<br/>
+                {% if caches_by_searchfield %}
+                    {% for cache in caches_by_searchfield %}
+                        <ul>
+                            <li>Cache ID: {{ cache.cache_id }}</li>
+                            <li>Cachetitel: {{ cache.name }}</li>
+                            <li>Erstellungsdatum: {{ cache.date_created }}</li>
+                            <li>Publishdatum: {{ cache.is_publishdate }}</li>
+                            <li>Cachetitel: {{ cache.name }}</li>
+
+                            <li>Nutzer ID: {{ cache.user_id }}</li>
+                            <li>Koordinaten: N{{ cache.latitude }} E{{ cache.longitude }}</li>
+                            <li>Cachetyp: {{ cache.type }}</li>
+                            <li>Cachestatus: {{ cache.status }}</li>
+                            <li>Versteckdatum: {{ cache.date_hidden }}</li>
+                            <li>D/T-Wertung: D{{ cache.difficulty }}/T{{ cache.terrain }}</li>
+
+                            <li>Wegpunkt OC: {{ cache.wp_oc }}</li>
+                            <li>Wegpunkt GC: {{ cache.wp_gc }}</li>
+                            <li>Wegpunkt NC: {{ cache.wp_nc }}</li>
+                        </ul>
+                    {% endfor %}
+                {% else %}
+                    <br/><br/>
+                    <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+
     </div>
 
     <hr>
 
     <div>
-        <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Datenbankabfrage mittels WP_OC in der URL:
+        <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Datenbankabfrage mittels Wegpunkt-ID in der
+            URL:
         </h3>
-        Aufruf: http://try.docker.team-opencaching.de/backend/cache/$WP_OC
+        Aufruf:<br/>
+        http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
+        <small><small>oder</small></small><br/>
+        http://try.docker.team-opencaching.de/backend/cache/$WP_GC<br/>
+        <small><small>oder</small></small><br/>
+        http://try.docker.team-opencaching.de/backend/cache/$WP_NC<br/>
 
         {% if cache_by_id is defined %}
-
-            <div>
+            <div style="background-color: lightgrey;">
                 <br/>
-                Diese Abfrage wurde durchgeführt mittels WP_OC ID in der URL. Hier ist das Ergebnis:<br/>
+                Diese Abfrage wurde durchgeführt mittels WP_OC/WP_GC/WP_NC ID in der URL. Hier ist das Ergebnis:<br/>
                 {% if cache_by_id %}
                     {% for cache in cache_by_id %}
                         <ul>
@@ -76,7 +111,7 @@
     {# </thead> #}
     {# </table> #}
 
-
+    {# // just for testing.. #}
     {# #}{# {% for cache in caches %} #}
     {# #}{# <li>{{ cache.cache_id }} {{ cache.name }}</li> #}
     {# #}{# {% endfor %} #}

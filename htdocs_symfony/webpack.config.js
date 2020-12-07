@@ -1,4 +1,13 @@
+/**
+ *
+ * @type {Encore}
+ */
 const Encore = require('@symfony/webpack-encore');
+
+/**
+ *
+ * @type {{Compiler: Compiler} | StylelintWebpackPlugin}
+ */
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
@@ -12,12 +21,13 @@ Encore
     .setPublicPath('/build')
 
     .addEntry('shared', './assets/shared.js')
-    .addEntry('app', './assets/app/app.js')
+    .addEntry('oc-style', './assets/app/oc-style.js')
+    .addEntry('bs4', './assets/bs4/bs4.js')
     .addEntry('backend', './assets/backend/app.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
-    .enableSingleRuntimeChunk()
+    .enableSingleRuntimeChunk() // @ToDo temporary disabled!
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())

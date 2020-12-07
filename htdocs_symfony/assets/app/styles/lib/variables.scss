@@ -1,0 +1,15 @@
+/*
+ * Opencaching Variables loaded - may overwrite Bootstrap4 elements
+ * Find our Kitchensink at /kitchensink/oc4 for our elements
+ * Original Bootstrap4 element are located at /kichensink/bs4
+ */
+
+//Opencaching Variablen
+$oc-primary: #f0d000;
+$oc-secondary: #343a40;
+
+// Überschreiben von Bootstrap Variablen
+$primary: $oc-primary;
+$secondary: $oc-secondary;
+
+$font-family-base: Montserrat;

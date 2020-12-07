@@ -4,12 +4,15 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('backend') }}
         {% endblock %}
     </head>
     <body>
+    <div class="container">
+        {% include '/index/navigation.html.twig' %}
+    </div>
+
         {% block body %}
-            Herzlich Willkommen auf dem Testgelände von OC4
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>
@@ -17,7 +20,7 @@
 
         {% endblock %}
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('backend') }}
         {% endblock %}
     </body>
 </html>

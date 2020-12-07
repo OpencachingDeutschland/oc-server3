@@ -23,7 +23,7 @@ Encore
     .addEntry('shared', './assets/shared.js')
     .addEntry('oc-style', './assets/app/oc-style.js')
     .addEntry('bs4', './assets/bs4/bs4.js')
-    .addEntry('backend', './assets/backend/app.js')
+    .addEntry('backend', './assets/backend/backend.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

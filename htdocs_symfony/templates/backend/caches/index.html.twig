@@ -4,10 +4,12 @@
     <div>
         <h3><span class="badge badge-pill badge-warning">WORKING</span><br/>Suche in Caches</h3>
 
-        {{ form_start(cachesForm) }}
-        {{ form_widget(cachesForm) }}
-        <button type="submit" class="btn btn-primary">Los!</button>
-        {{ form_end(cachesForm) }}
+        {% if cachesForm is defined %}
+            {{ form_start(cachesForm) }}
+            {{ form_widget(cachesForm) }}
+                <button type="submit" class="btn btn-primary">Los!</button>
+            {{ form_end(cachesForm) }}
+        {% endif %}
 
         {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
             <div style="background-color: lightgrey;">

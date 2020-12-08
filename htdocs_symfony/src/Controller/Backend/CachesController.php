@@ -69,11 +69,11 @@ class CachesController extends AbstractController
         $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_oc = "' . $wp_oc . '"');
 
         // if search for wp_oc gave no result, search for wp_gc
-        if (!$fetched_cache) {
+        if (empty($fetched_cache) == true) {
             $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_gc = "' . $wp_oc . '"');
 
             // if search for wp_gc also gave no result, search for wp_nc
-            if (!$fetched_cache)
+            if (empty($fetched_cache) == true)
                 $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_nc = "' . $wp_oc . '"');
         }
 

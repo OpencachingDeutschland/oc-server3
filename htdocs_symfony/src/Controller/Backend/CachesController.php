@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
+use ContainerDz0yoSZ\getConsole_ErrorListenerService;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Form\CachesFormType;
@@ -17,8 +18,8 @@ class CachesController extends AbstractController
     /**
      * @Route("/caches", name="caches_index")
      */
-    public function index(Connection $connection, Request $request): Response
-    {
+    public function index(Connection $connection, Request $request)
+    : Response {
         // declare variable to avoid render-error when $request is empty // there is surely a better method..
         $fetched_caches = '0';
 
@@ -34,83 +35,104 @@ class CachesController extends AbstractController
             $input_data = $form->getData();
 
             // send request to DB
-            $fetched_caches = $this->search_by_searchfield($connection, $input_data["content_caches_searchfield"]);
-
-//            dd($input_data["content_caches_searchfield"]);
-//            dd($fetched_caches);
-//            die();
+            $fetched_caches = $this->get_caches_base_data($connection, $input_data["content_caches_searchfield"]);
         }
 
         // load all caches from database and hand over to twig page
         // just for initial test to learn how it works.. leave it here for later check up
         // $caches = $connection->fetchAll('SELECT * FROM caches');
 
-        return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView(), 'caches_by_searchfield' => $fetched_caches]);
+        return $this->render(
+            'backend/caches/index.html.twig', [
+                                                'cachesForm' => $form->createView(),
+                                                'caches_by_searchfield' => $fetched_caches
+                                            ]
+        );
     }
 
-    /**
-     * @Route("/caches/caches_by_searchfield", name="create_form_caches_by_searchfield")
-     */
-    public function create_form_caches_by_searchfield(EntityManagerInterface $em)
-    {
-        $form = $this->createForm(CachesFormType::class);
-
-        return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView()]);
-    }
+    //    /**
+    //     * @Route("/caches/caches_by_searchfield", name="create_form_caches_by_searchfield")
+    //     */
+    //    public function create_form_caches_by_searchfield(EntityManagerInterface $em)
+    //    {
+    //        $form = $this->createForm(CachesFormType::class);
+    //
+    //        return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView()]);
+    //    }
 
     /**
      * @Route("/cache/{wp_oc}", name="cache_by_wp_oc")
      */
-    public function search_by_cache_id(Connection $connection, string $wp_oc): Response
-    {
-        $wp_oc = strtoupper($wp_oc);
+    public function search_by_cache_wp(Connection $connection, string $wp_oc)
+    : Response {
+        $fetched_caches = $this->get_caches_details_data($connection, $wp_oc);
 
-        // search in database for wp_oc with the given {wp_oc}
-        $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_oc = "' . $wp_oc . '"');
-
-        // if search for wp_oc gave no result, search for wp_gc
-        if (empty($fetched_cache) == true) {
-            $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_gc = "' . $wp_oc . '"');
-
-            // if search for wp_gc also gave no result, search for wp_nc
-            if (empty($fetched_cache) == true)
-                $fetched_cache = $connection->fetchAll('SELECT * FROM caches WHERE wp_nc = "' . $wp_oc . '"');
-        }
-
-//        if (!$fetched_cache)
-//            print_r("nope, nix da");
-//        else
-//            print_r($fetched_cache);
-//        die();
-
-        return $this->render('backend/caches/index.html.twig', ['cache_by_id' => $fetched_cache]);
+        return $this->render('backend/caches/index.html.twig', ['cache_by_id' => $fetched_caches]);
     }
 
-//    /**
-//     * @Route("/caches/list", name="caches_by_searchfield", methods="POST")
-//     */
-    function search_by_searchfield(Connection $connection, string $searchtext)
+    /**
+     *
+     */
+    function get_caches_base_data(Connection $connection, string $searchtext)
+    : array {
+        // search in database for the given $searchtext in wp_oc, wp_gc, wp_nc and name
+        $fetched_caches = $connection->fetchAll(
+            'SELECT cache_id, name, wp_oc, wp_gc, wp_nc FROM caches
+                 WHERE wp_oc         =       "' . $searchtext . '"
+                 OR caches.wp_gc     =       "' . $searchtext . '"
+                 OR caches.wp_nc     =       "' . $searchtext . '"
+                 OR caches.name     LIKE    "%' . $searchtext . '%"'
+        );
+
+        return $fetched_caches;
+    }
+
+    /**
+     *
+     */
+    function get_caches_details_data(Connection $connection, string $searchtext)
     {
+        $fetched_caches = '0';
 
         if ($searchtext != "") {
             $sql_string = '
-            SELECT * FROM caches
-            WHERE wp_oc = "' . $searchtext . '"
-            OR wp_gc = "' . $searchtext . '"
-            OR wp_nc = "' . $searchtext . '"
-            OR name LIKE "%' . $searchtext . '%"
+            SELECT caches.cache_id, caches.wp_oc, caches.wp_gc, caches.wp_nc, caches.name, 
+                   caches.date_hidden, caches.date_created, caches.is_publishdate, caches.latitude, caches.longitude,
+                   caches.difficulty, caches.terrain, caches.size, caches.logpw,
+                   cache_status.name as cache_status_name, cache_type.icon_large as cache_type_picture, 
+                   cache_size.name as cache_size_name, user.username
+            FROM caches
+            INNER JOIN user ON caches.user_id = user.user_id
+            INNER JOIN cache_status ON caches.status = cache_status.id
+            INNER JOIN cache_type ON caches.type = cache_type.id
+            INNER JOIN cache_size ON caches.size = cache_size.id
+            WHERE caches.wp_oc       = "' . $searchtext . '"
+                  or caches.wp_gc    = "' . $searchtext . '"
+                  or caches.wp_nc    = "' . $searchtext . '"
+                  or caches.name LIKE "%' . $searchtext . '%"
             ';
 
             $fetched_caches = $connection->fetchAll($sql_string);
+
+            for ($i = 0; $i < count($fetched_caches); $i ++) {
+                // replace existing log passwords with something different
+                // nur der Teil mit den Bilderzuweisungen müsste nochmal überdacht werden..
+                if ($fetched_caches[$i]["logpw"] != "") {
+                    $fetched_caches[$i]["logpw"] =
+                        "https://www.opencaching.de/resource2/ocstyle/images/viewcache/decrypt.png";
+                } else {
+                    $fetched_caches[$i]["logpw"] =
+                        "https://www.opencaching.de/resource2/ocstyle/images/attributes/cross-35x35-round.png";
+                }
+
+                // replace size information with picture links
+                // auch hier müsste die Bildzuweisung nochmal überarbeitet werden..
+                $fetched_caches[$i]["cache_type_picture"] =
+                    "https://www.opencaching.de/resource2/ocstyle/images/cacheicon/"
+                    . $fetched_caches[$i]["cache_type_picture"];
+            }
         }
 
-//        print_r("searchtext: " . $searchtext . " /// ");
-//        print_r("sql_string: " . $sql_string . " /// ");
-//        print_r("fetched_caches: ");
-//        dd($fetched_caches);
-//        die();
-
         return $fetched_caches;
-
     }
 }

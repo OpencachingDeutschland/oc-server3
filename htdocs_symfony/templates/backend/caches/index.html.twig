@@ -1,13 +1,14 @@
 {% extends 'backend/base.html.twig' %}
 
 {% block page_content %}
+
     <div>
         <h3><span class="badge badge-pill badge-warning">WORKING</span><br/>Suche in Caches</h3>
 
         {% if cachesForm is defined %}
             {{ form_start(cachesForm) }}
             {{ form_widget(cachesForm) }}
-                <button type="submit" class="btn btn-primary">Los!</button>
+            <button type="submit" class="btn btn-primary">Los!</button>
             {{ form_end(cachesForm) }}
         {% endif %}
 
@@ -16,26 +17,41 @@
                 <br/>
                 Diese Abfrage wurde durchgeführt mittels Eingabefeld und Formular. Hier ist das Ergebnis:<br/>
                 {% if caches_by_searchfield %}
-                    {% for cache in caches_by_searchfield %}
-                        <ul>
-                            <li>Cache ID: {{ cache.cache_id }}</li>
-                            <li>Cachetitel: {{ cache.name }}</li>
-                            <li>Erstellungsdatum: {{ cache.date_created }}</li>
-                            <li>Publishdatum: {{ cache.is_publishdate }}</li>
-                            <li>Cachetitel: {{ cache.name }}</li>
-
-                            <li>Nutzer ID: {{ cache.user_id }}</li>
-                            <li>Koordinaten: N{{ cache.latitude }} E{{ cache.longitude }}</li>
-                            <li>Cachetyp: {{ cache.type }}</li>
-                            <li>Cachestatus: {{ cache.status }}</li>
-                            <li>Versteckdatum: {{ cache.date_hidden }}</li>
-                            <li>D/T-Wertung: D{{ cache.difficulty }}/T{{ cache.terrain }}</li>
-
-                            <li>Wegpunkt OC: {{ cache.wp_oc }}</li>
-                            <li>Wegpunkt GC: {{ cache.wp_gc }}</li>
-                            <li>Wegpunkt NC: {{ cache.wp_nc }}</li>
-                        </ul>
-                    {% endfor %}
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titel</th>
+                            <th scope="col">OC</th>
+                            <th scope="col">GC</th>
+                            <th scope="col">NC</th>
+                            <th scope="col">Link</th>
+                            <th scope="col"><span class="badge badge-pill badge-danger">NOT WORKING</span><br/>Button
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cache in caches_by_searchfield %}
+                            <tr>
+                                <th scope="row">{{ loop.index }}</th>
+                                <td>{{ cache.name }}</td>
+                                <td>{{ cache.wp_oc }}</td>
+                                <td>{{ cache.wp_gc }}</td>
+                                <td>{{ cache.wp_nc }}</td>
+                                <td>
+                                    <a href="/backend/cache/{{ cache.wp_oc }}">Details</a>
+                                </td>
+                                <td>
+                                    <form name="row_N">
+                                        <input type="hidden" name="cacheid" value="{{ cache.cache_id }}"
+                                               action="/backend/cache/OC1001" method="post">
+                                        <button class="btn btn-dark" type="submit">Details</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 {% else %}
                     <br/><br/>
                     <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
@@ -50,40 +66,71 @@
 
     <div>
         <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Datenbankabfrage mittels Wegpunkt-ID in der
-            URL:
+                                                                            URL:
         </h3>
         Aufruf:<br/>
         http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
-        <small><small>oder</small></small><br/>
+        <small>
+            <small>oder</small>
+        </small>
+        <br/>
         http://try.docker.team-opencaching.de/backend/cache/$WP_GC<br/>
-        <small><small>oder</small></small><br/>
+        <small>
+            <small>oder</small>
+        </small>
+        <br/>
         http://try.docker.team-opencaching.de/backend/cache/$WP_NC<br/>
+        <br/>
 
         {% if cache_by_id is defined %}
             <div style="background-color: lightgrey;">
                 <br/>
                 Diese Abfrage wurde durchgeführt mittels WP_OC/WP_GC/WP_NC ID in der URL. Hier ist das Ergebnis:<br/>
                 {% if cache_by_id %}
-                    {% for cache in cache_by_id %}
-                        <ul>
-                            <li>Cache ID: {{ cache.cache_id }}</li>
-                            <li>Cachetitel: {{ cache.name }}</li>
-                            <li>Erstellungsdatum: {{ cache.date_created }}</li>
-                            <li>Publishdatum: {{ cache.is_publishdate }}</li>
-                            <li>Cachetitel: {{ cache.name }}</li>
-
-                            <li>Nutzer ID: {{ cache.user_id }}</li>
-                            <li>Koordinaten: N{{ cache.latitude }} E{{ cache.longitude }}</li>
-                            <li>Cachetyp: {{ cache.type }}</li>
-                            <li>Cachestatus: {{ cache.status }}</li>
-                            <li>Versteckdatum: {{ cache.date_hidden }}</li>
-                            <li>D/T-Wertung: D{{ cache.difficulty }}/T{{ cache.terrain }}</li>
-
-                            <li>Wegpunkt OC: {{ cache.wp_oc }}</li>
-                            <li>Wegpunkt GC: {{ cache.wp_gc }}</li>
-                            <li>Wegpunkt NC: {{ cache.wp_nc }}</li>
-                        </ul>
-                    {% endfor %}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            {# <th scope="col">Cache ID</th> #}
+                            <th scope="col">OC</th>
+                            <th scope="col">Titel</th>
+                            <th scope="col">Cachegröße</th>
+                            <th scope="col">D/T</th>
+                            <th scope="col">Owner</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">GC</th>
+                            <th scope="col">NC</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">mit Logpasswort?</th>
+                            <th scope="col">veröffentlicht</th>
+                            <th scope="col">Versteckdatum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cache in cache_by_id %}
+                            <tr>
+                                <th scope="row"><img src="{{ cache.cache_type_picture }}"/></th>
+                                {# <td>{{ cache.cache_id }}</td> #}
+                                <td>{{ cache.wp_oc }}</td>
+                                <td>{{ cache.name }}</td>
+                                <td>{{ cache.cache_size_name }}</td>
+                                <td>D{{ cache.difficulty }}/T{{ cache.terrain }}</td>
+                                <td>{{ cache.username }}</td>
+                                <td>N{{ cache.latitude }} E{{ cache.longitude }}</td>
+                                <td>{{ cache.wp_gc }}</td>
+                                <td>{{ cache.wp_nc }}</td>
+                                <td>{{ cache.cache_status_name }}</td>
+                                <td><img src="{{ cache.logpw }}"/></td>
+                                <td>{% if cache.is_publishdate == 1 %}
+                                        <img src="https://www.opencaching.de/resource2/ocstyle/images/viewcache/have-found.png"/>
+                                    {% else %}
+                                        <img src="https://www.opencaching.de/resource2/ocstyle/images/viewcache/ignore-18.png"/>
+                                    {% endif %}</td>
+                                <td>{{ cache.date_hidden }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 {% else %}
                     <br/><br/>
                     <span>Leider keinen Cache mit dem angegebenen WP_OC gefunden.. :-(</span>

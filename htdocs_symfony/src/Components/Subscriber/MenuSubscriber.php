@@ -38,7 +38,7 @@ class MenuSubscriber implements EventSubscriberInterface
         ])->setAttribute('class', 'header');
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $cacheMenu = $menu->addChild('cache', [
+            $userMenu = $menu->addChild('cache', [
                 'label' => 'Caches',
                 'route' => 'backend_caches_index',
                 'childOptions' => $event->getChildOptions(),

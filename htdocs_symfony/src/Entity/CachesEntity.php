@@ -5,7 +5,7 @@ namespace Oc\Entity;
 use Oc\Repository\AbstractEntity;
 #use Symfony\Component\Security\Core\User\UserInterface; ??
 
-#class CachesEntity extends AbstractEntity implements UserInterface
+#class CachesEntity extends AbstractEntity implements UserInterface // original kopierter Text von UserEntity..
 class CachesEntity extends AbstractEntity implements CachesInterface
 {
 
@@ -72,12 +72,23 @@ class CachesEntity extends AbstractEntity implements CachesInterface
     /**
      * @var string (DB:varchar)
      */
+    public $wp_oc;
+
+    /**
+     * @var string (DB:varchar)
+     */
     public $wp_gc;
 
     /**
      * @var string (DB:varchar)
      */
-    public $wp_oc;
+    public $wp_nc;
+
+    public function isNew(): bool
+    {
+        #Hinweis vom Scrutinizer: "There is one abstract method isNew in this class; you could implement it, or declare this class as abstract."
+        // TODO: Implement isNew() method.
+    }
 
     /**
      *

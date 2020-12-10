@@ -10,6 +10,8 @@ const Encore = require('@symfony/webpack-encore');
  */
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
+const GoogleFontsPlugin = require("google-fonts-webpack-plugin")
+
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -17,57 +19,76 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore
-    .setOutputPath('public/build/')
-    .setPublicPath('/build')
+.setOutputPath('public/build/')
+.setPublicPath('/build')
 
-    .addEntry('shared', './assets/shared.js')
-    .addEntry('oc-style', './assets/app/oc-style.js')
-    .addEntry('bs4', './assets/bs4/bs4.js')
-    .addEntry('backend', './assets/backend/backend.js')
+.addEntry('shared', './assets/shared.js')
+.addEntry('oc-style', './assets/app/oc-style.js')
+.addEntry('bs4', './assets/bs4/bs4.js')
+.addEntry('backend', './assets/backend/backend.js')
 
-    // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
-    .splitEntryChunks()
-    .enableSingleRuntimeChunk() // @ToDo temporary disabled!
-    .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
+// When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
+.splitEntryChunks()
+.enableSingleRuntimeChunk()
+.cleanupOutputBeforeBuild()
+.enableBuildNotifications()
+.enableSourceMaps(!Encore.isProduction())
+.enableVersioning(Encore.isProduction())
 
-    // enables @babel/preset-env polyfills
-    .configureBabelPresetEnv((config) => {
-        config.useBuiltIns = 'usage';
-        config.corejs = 3;
-    })
-    .enableSassLoader()
-    .enablePostCssLoader()
+// enables @babel/preset-env polyfills
+.configureBabelPresetEnv((config) => {
+    config.useBuiltIns = 'usage';
+    config.corejs = 3;
+})
 
-    // https://symfony.com/doc/current/frontend/encore/copy-files.html#referencing-image-files-from-a-template
-    .copyFiles({
-        from: './assets/app/images',
+// enables Loaders
+.enableSassLoader()
+.enablePostCssLoader()
 
-        // optional target path, relative to the output dir
-        to: 'images/[path][name].[ext]',
+// https://symfony.com/doc/current/frontend/encore/copy-files.html#referencing-image-files-from-a-template
+.copyFiles({
+    from: './assets/app/images',
 
-        // only copy files matching this pattern
-        pattern: /\.(png|jpg|jpeg)$/
-    })
-    .copyFiles({
-        from: './assets/backend/images',
+    // optional target path, relative to the output dir
+    to: 'images/[path][name].[hash:8].[ext]',
 
-        // optional target path, relative to the output dir
-        to: 'images/[path][name].[ext]',
+    // only copy files matching this pattern
+    pattern: /\.(png|jpg|jpeg)$/
+})
 
-        // only copy files matching this pattern
-        pattern: /\.(png|jpg|jpeg)$/
-    })
+.copyFiles({
+    from: './assets/backend/images',
 
-    .enableIntegrityHashes(Encore.isProduction())
+    // optional target path, relative to the output dir
+    to: 'images/[path][name].[hash:8].[ext]',
 
-    .autoProvidejQuery()
+    // only copy files matching this pattern
+    pattern: /\.(png|jpg|jpeg)$/
+})
 
-    .addPlugin(new StylelintPlugin({
+.enableIntegrityHashes(Encore.isProduction())
+
+.autoProvidejQuery()
+
+.addPlugin(
+    new StylelintPlugin({
         fix: true
     }))
 ;
+
+//https://openbase.io/js/google-fonts-webpack-plugin/documentation
+module.exports = {
+    "entry":"index.js",
+    plugins: [
+        new GoogleFontsPlugin({
+            fonts: [
+                { family: "Montserrat" },
+                { family: "Play", variants: [ "400", "700italic" ] }
+            ],
+            path: "public/build/fonts/",
+            formats: [ "woff", "woff2", "ttf"]
+        })
+    ]
+}
 
 module.exports = Encore.getWebpackConfig();

@@ -58,7 +58,7 @@ class CachesController extends AbstractController
      */
     function get_caches_basic_data(Connection $connection, string $searchtext)
     : array {
-        $fetched_caches = array();
+        $fetched_caches = [];
 
         if ($searchtext != "") {
             // search in database for the given $searchtext in wp_oc, wp_gc, wp_nc and name
@@ -78,8 +78,8 @@ class CachesController extends AbstractController
      *
      */
     function get_caches_details_data(Connection $connection, string $searchtext)
-    {
-        $fetched_caches = array();
+    : array {
+        $fetched_caches = [];
 
         if ($searchtext != "") {
             $sql_string = '
@@ -107,14 +107,12 @@ class CachesController extends AbstractController
                 // replace existing log passwords with something different
                 // nur der Teil mit den Bilderzuweisungen müsste nochmal überdacht werden..
                 if ($fetched_caches[$i]["logpw"] != "") {
-                    $fetched_caches[$i]["logpw"] =
-                        "https://www.opencaching.de/resource2/ocstyle/images/viewcache/decrypt.png";
+                    $fetched_caches[$i]["logpw"] = 1;
                 } else {
-                    $fetched_caches[$i]["logpw"] =
-                        "https://www.opencaching.de/resource2/ocstyle/images/attributes/cross-35x35-round.png";
+                    $fetched_caches[$i]["logpw"] = 0;
                 }
 
-                // replace size information with picture links
+                // replace cache type information with picture links
                 // auch hier müsste die Bildzuweisung nochmal überarbeitet werden..
                 $fetched_caches[$i]["cache_type_picture"] =
                     "https://www.opencaching.de/resource2/ocstyle/images/cacheicon/"

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
-use ContainerDz0yoSZ\getConsole_ErrorListenerService;
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\EntityManagerInterface;
 use Form\CachesFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +18,6 @@ class CachesController extends AbstractController
      */
     public function index(Connection $connection, Request $request)
     : Response {
-        // declare variable to avoid render-error when $request is empty // there is surely a better method..
         $fetched_caches = '0';
 
         // create input field for caches_by_searchfield
@@ -35,12 +32,8 @@ class CachesController extends AbstractController
             $input_data = $form->getData();
 
             // send request to DB
-            $fetched_caches = $this->get_caches_base_data($connection, $input_data["content_caches_searchfield"]);
+            $fetched_caches = $this->get_caches_basic_data($connection, $input_data["content_caches_searchfield"]);
         }
-
-        // load all caches from database and hand over to twig page
-        // just for initial test to learn how it works.. leave it here for later check up
-        // $caches = $connection->fetchAll('SELECT * FROM caches');
 
         return $this->render(
             'backend/caches/index.html.twig', [
@@ -49,16 +42,6 @@ class CachesController extends AbstractController
                                             ]
         );
     }
-
-    //    /**
-    //     * @Route("/caches/caches_by_searchfield", name="create_form_caches_by_searchfield")
-    //     */
-    //    public function create_form_caches_by_searchfield(EntityManagerInterface $em)
-    //    {
-    //        $form = $this->createForm(CachesFormType::class);
-    //
-    //        return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView()]);
-    //    }
 
     /**
      * @Route("/cache/{wp_oc}", name="cache_by_wp_oc")
@@ -73,16 +56,20 @@ class CachesController extends AbstractController
     /**
      *
      */
-    function get_caches_base_data(Connection $connection, string $searchtext)
+    function get_caches_basic_data(Connection $connection, string $searchtext)
     : array {
-        // search in database for the given $searchtext in wp_oc, wp_gc, wp_nc and name
-        $fetched_caches = $connection->fetchAll(
-            'SELECT cache_id, name, wp_oc, wp_gc, wp_nc FROM caches
+        $fetched_caches = array();
+
+        if ($searchtext != "") {
+            // search in database for the given $searchtext in wp_oc, wp_gc, wp_nc and name
+            $fetched_caches = $connection->fetchAll(
+                'SELECT cache_id, name, wp_oc, wp_gc, wp_nc FROM caches
                  WHERE wp_oc         =       "' . $searchtext . '"
                  OR caches.wp_gc     =       "' . $searchtext . '"
                  OR caches.wp_nc     =       "' . $searchtext . '"
                  OR caches.name     LIKE    "%' . $searchtext . '%"'
-        );
+            );
+        }
 
         return $fetched_caches;
     }
@@ -92,7 +79,7 @@ class CachesController extends AbstractController
      */
     function get_caches_details_data(Connection $connection, string $searchtext)
     {
-        $fetched_caches = '0';
+        $fetched_caches = array();
 
         if ($searchtext != "") {
             $sql_string = '
@@ -114,7 +101,9 @@ class CachesController extends AbstractController
 
             $fetched_caches = $connection->fetchAll($sql_string);
 
-            for ($i = 0; $i < count($fetched_caches); $i ++) {
+            $array_size = count($fetched_caches);
+
+            for ($i = 0; $i < $array_size; $i ++) {
                 // replace existing log passwords with something different
                 // nur der Teil mit den Bilderzuweisungen müsste nochmal überdacht werden..
                 if ($fetched_caches[$i]["logpw"] != "") {

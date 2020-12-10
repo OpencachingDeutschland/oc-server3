@@ -17,6 +17,6 @@ class CachesFormType extends AbstractType
                                             'trim' => true,
                                             'help' => 'TIPP: Nur Wegpunkte oder Teile des Cachetitels werden nachgeschlagen. Um alle Caches aufzulisten: %'
                                         ]
-        );
+        );;
     }
 }

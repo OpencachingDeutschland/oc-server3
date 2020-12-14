@@ -109,7 +109,7 @@
                         <tbody>
                         {% for cache in cache_by_id %}
                             <tr>
-                                <th scope="row"><img src="{{ cache.cache_type_picture }}"/></th>
+                                <th scope="row"><img src="{{ cache.cache_type_picture }}" alt="Cachetyp"/></th>
                                 {# <td>{{ cache.cache_id }}</td> #}
                                 <td>{{ cache.wp_oc }}</td>
                                 <td>{{ cache.name }}</td>
@@ -143,7 +143,48 @@
         {% endif %}
 
     </div>
+
     <hr>
+
+    <div>
+
+        <script>
+            function switchImage() {
+                if (document.getElementById("safariDisclaimer").hidden) {
+                    document.getElementById("safariSwitch").src = "https://www.opencaching.de/resource2/ocstyle/images/attributes/safari.png";
+                    document.getElementById("safariDisclaimer").hidden = false;
+                } else {
+                    document.getElementById("safariSwitch").src = "https://www.opencaching.de/resource2/ocstyle/images/attributes/safari-disabled.png";
+                    document.getElementById("safariDisclaimer").hidden = true;
+                }
+            }
+
+        </script>
+        <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Safari Ein- und Ausklappdingsbums:
+        </h3>
+        Klick mich:
+        <img src="https://www.opencaching.de/resource2/ocstyle/images/attributes/safari-disabled.png" id="safariSwitch"
+             onclick="switchImage()" alt="aus"> <br/>
+
+
+        <br/>
+        <div style="border:solid 2px #5f90bb;background:#dbe6f1;color:#000000;padding:5px;text-align:justify;"
+             id="safariDisclaimer" hidden>
+            Bitte die in der Logbedingung geforderten Koordinaten im Format "N/S DD° MM.MMM E/W DDD° MM.MMM" (z.B.
+            "N48° 00.000 E008° 00.000") ins Log eintragen, damit die Positionen von der
+            <a href="http://www.flopp.net/safari/">Safari-Cache-Karte</a>
+            korrekt erkannt und angezeigt werden können!<br/>
+            Der Cache und seine Logs werden
+            <a href="http://www.flopp.net/safari/OC1001" target="_blank">hier</a>
+            angezeigt.
+        </div>
+        <br/>
+    </div>
+
+    <hr>
+
+    <div>
+    </div>
 
 {% endblock %}
 

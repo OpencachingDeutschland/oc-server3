@@ -59,16 +59,21 @@ class CachesController extends AbstractController
     function get_caches_basic_data(Connection $connection, string $searchtext)
     : array {
         $fetched_caches = [];
+        $query = 'SELECT caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username
+                 FROM caches
+                 INNER JOIN user ON caches.user_id = user.user_id
+                 WHERE caches.wp_oc  =       "' . $searchtext . '"
+                 OR caches.wp_gc     =       "' . $searchtext . '"
+                 OR caches.name     LIKE    "%' . $searchtext . '%"
+                 OR user.username   LIKE    "%' . $searchtext . '%"
+                 ORDER BY caches.cache_id
+                 ';
+
+//        $pagination = $paginator->paginate($query, $request->query->getInt('page', 1), 10);
 
         if ($searchtext != "") {
             // search in database for the given $searchtext in wp_oc, wp_gc, wp_nc and name
-            $fetched_caches = $connection->fetchAll(
-                'SELECT cache_id, name, wp_oc, wp_gc, wp_nc FROM caches
-                 WHERE wp_oc         =       "' . $searchtext . '"
-                 OR caches.wp_gc     =       "' . $searchtext . '"
-                 OR caches.wp_nc     =       "' . $searchtext . '"
-                 OR caches.name     LIKE    "%' . $searchtext . '%"'
-            );
+            $fetched_caches = $connection->fetchAll($query);
         }
 
         return $fetched_caches;
@@ -93,10 +98,7 @@ class CachesController extends AbstractController
             INNER JOIN cache_status ON caches.status = cache_status.id
             INNER JOIN cache_type ON caches.type = cache_type.id
             INNER JOIN cache_size ON caches.size = cache_size.id
-            WHERE caches.wp_oc       = "' . $searchtext . '"
-                  or caches.wp_gc    = "' . $searchtext . '"
-                  or caches.wp_nc    = "' . $searchtext . '"
-                  or caches.name LIKE "%' . $searchtext . '%"
+            WHERE caches.wp_oc         = "' . $searchtext . '"
             ';
 
             $fetched_caches = $connection->fetchAll($sql_string);

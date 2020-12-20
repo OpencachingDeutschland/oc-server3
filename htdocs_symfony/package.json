@@ -1,12 +1,15 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.30.0",
+        "autocomplete.js": "^0.38.0",
         "core-js": "^3.0.0",
+        "file-loader": "^6.2.0",
         "node-sass": "^4.14.1",
         "regenerator-runtime": "^0.13.2",
         "sass-loader": "^8.0.2",
-        "stylelint": "^13.7.2",
+        "stylelint": "^13.8.0",
         "stylelint-config-sass-guidelines": "^7.1.0",
+        "stylelint-config-standard": "^20.0.0",
         "stylelint-webpack-plugin": "^2.1.0",
         "webpack-notifier": "^1.6.0"
     },
@@ -21,6 +24,7 @@
     "dependencies": {
         "autoprefixer": "^9.8.6",
         "bootstrap": "^4.5.2",
+        "google-fonts-webpack-plugin": "^0.4.4",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
         "postcss-loader": "^3.0.0"

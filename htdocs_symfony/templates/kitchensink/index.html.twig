@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+
+    {% block meta_data %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% endblock %}
 
     {% block kitchen_title %}
         <title>Kitchensink - Opencaching Design Küche</title>
     {% endblock %}
 
-    {% block kitchen_head %}
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-              integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-              crossorigin="anonymous">
+    {% block stylesheets %}
+        <!-- Import original BS4-->
+        {{ encore_entry_link_tags('bs4') }}
     {% endblock %}
 
 </head>
@@ -23,7 +25,7 @@
         <div class="col-2">
             <nav class="navbar navbar-dark bg-dark">
 
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img class="img-fluid"
                          src="https://wiki.opencaching.de/images/thumb/OC_Logo_white_mit_Domain.png/800px-OC_Logo_white_mit_Domain.png">
                 </a>
@@ -122,6 +124,11 @@
 </div>
 
 {% block kitchen_footer %}
+{% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('bs4') }}
+<!-- END import by TWIG -->
 {% endblock %}
 
 </body>

@@ -1,0 +1,14 @@
+scss_files: 'htdocs_symfony/assets/app/**/*.scss'
+
+exclude: 'htdocs_symfony/vendor/**'
+
+linters:
+    BorderZero:
+        enabled: false
+
+    Indentation:
+        severity: warning
+        width: 2
+
+    SelectorFormat:
+        convention: hyphenated_BEM

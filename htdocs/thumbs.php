@@ -248,7 +248,7 @@ if ($r) {
                 break;
 
             case 'bmp':
-                imagebmp($thumbimage, $savedir . '/' . $filename);
+                imagebmpCustom($thumbimage, $savedir . '/' . $filename);
                 break;
         }
 

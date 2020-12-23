@@ -31,7 +31,7 @@
  *
  * @return resource
  */
-function imagebmp($img, $file = '', $RLE = 0)
+function imagebmpCustom($img, $file = '', $RLE = 0)
 {
     $ColorCount = imagecolorstotal($img);
 

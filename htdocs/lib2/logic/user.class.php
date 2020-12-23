@@ -1404,7 +1404,7 @@ class user
                         return "save dummy failed [$ext]";
                     }
                 } elseif ($ext == 'bmp') {
-                    if (!imagebmp($im, "$picpath/$fn")) {
+                    if (!imagebmpCustom($im, "$picpath/$fn")) {
                         return "save dummy failed [$ext]";
                     }
                 } else {
@@ -1455,7 +1455,7 @@ class user
                         return "save thumb failed [$ext]";
                     }
                 } elseif ($ext == 'bmp') {
-                    if (!imagebmp($tim, "$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
+                    if (!imagebmpCustom($tim, "$thumbpath/$thumb_dir1/$thumb_dir2/$fn")) {
                         return "save thumb failed [$ext]";
                     }
                 } else {

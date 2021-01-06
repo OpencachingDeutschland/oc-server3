@@ -53,14 +53,6 @@ class MenuSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'fas fa-users');
         }
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) { // ??
-            $userMenu = $menu->addChild('settings', [
-                'label' => 'Settings',
-                'route' => 'backend_settings_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-cogs');
-        }
-
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $userMenu = $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',

@@ -1,73 +1,57 @@
+
 {% extends 'backend/base.html.twig' %}
 
 {% block page_content %}
 
     <div>
-        <h3><span class="badge badge-pill badge-warning">WORKING</span><br/>Suche in Caches</h3>
-
+        <h3>Cachedatenbank</h3>
         {% if cachesForm is defined %}
             {{ form_start(cachesForm) }}
             {{ form_widget(cachesForm) }}
-            <button type="submit" class="btn btn-primary">Los!</button>
             {{ form_end(cachesForm) }}
         {% endif %}
 
         {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
-            <div style="background-color: lightgrey;">
-                <br/>
-                Diese Abfrage wurde durchgeführt mittels Eingabefeld und Formular. Hier ist das Ergebnis:<br/>
-                {% if caches_by_searchfield %}
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
+            <br/>
+            <div> Gefunden: {{ caches_by_searchfield|length }} Cache(s)</div>
+            <br/>
+            {% if caches_by_searchfield %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">Cache-ID</th>
+                        <th scope="col" class="asc">Name</th>
+                        <th scope="col" class="asc">Owner</th>
+                        <th scope="col">Infos</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cache in caches_by_searchfield %}
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Titel</th>
-                            <th scope="col">OC</th>
-                            <th scope="col">GC</th>
-                            <th scope="col">NC</th>
-                            <th scope="col">Link</th>
-                            <th scope="col"><span class="badge badge-pill badge-danger">NOT WORKING</span><br/>Button
-                            </th>
+                            <td>{{ cache.wp_oc }}</td>
+                            <td>{{ cache.name }}</td>
+                            <td>{{ cache.username }}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <a class="btn btn-primary" href="/backend/cache/{{ cache.wp_oc }}">Details</a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        {% for cache in caches_by_searchfield %}
-                            <tr>
-                                <th scope="row">{{ loop.index }}</th>
-                                <td>{{ cache.name }}</td>
-                                <td>{{ cache.wp_oc }}</td>
-                                <td>{{ cache.wp_gc }}</td>
-                                <td>{{ cache.wp_nc }}</td>
-                                <td>
-                                    <a href="/backend/cache/{{ cache.wp_oc }}">Details</a>
-                                </td>
-                                <td>
-                                    <form name="row_N">
-                                        <input type="hidden" name="cacheid" value="{{ cache.cache_id }}"
-                                               action="/backend/cache/OC1001" method="post">
-                                        <button class="btn btn-dark" type="submit">Details</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                {% else %}
-                    <br/><br/>
-                    <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
-                {% endif %}
-            </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
+            {% endif %}
         {% endif %}
-
 
     </div>
 
     <hr>
 
     <div>
-        <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Datenbankabfrage mittels Wegpunkt-ID in der
-                                                                            URL:
-        </h3>
+        <h3><br/>Datenbankabfrage mittels Wegpunkt-ID in der URL:</h3>
         Aufruf:<br/>
         http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
         <small>
@@ -143,44 +127,6 @@
         {% endif %}
 
     </div>
-
-    <hr>
-
-    <div>
-
-        <script>
-            function switchImage() {
-                if (document.getElementById("safariDisclaimer").hidden) {
-                    document.getElementById("safariSwitch").src = "https://www.opencaching.de/resource2/ocstyle/images/attributes/safari.png";
-                    document.getElementById("safariDisclaimer").hidden = false;
-                } else {
-                    document.getElementById("safariSwitch").src = "https://www.opencaching.de/resource2/ocstyle/images/attributes/safari-disabled.png";
-                    document.getElementById("safariDisclaimer").hidden = true;
-                }
-            }
-
-        </script>
-        <h3><span class="badge badge-pill badge-success">WORKING</span><br/>Safari Ein- und Ausklappdingsbums:
-        </h3>
-        Klick mich:
-        <img src="https://www.opencaching.de/resource2/ocstyle/images/attributes/safari-disabled.png" id="safariSwitch"
-             onclick="switchImage()" alt="aus"> <br/>
-
-
-        <br/>
-        <div style="border:solid 2px #5f90bb;background:#dbe6f1;color:#000000;padding:5px;text-align:justify;"
-             id="safariDisclaimer" hidden>
-            Bitte die in der Logbedingung geforderten Koordinaten im Format "N/S DD° MM.MMM E/W DDD° MM.MMM" (z.B.
-            "N48° 00.000 E008° 00.000") ins Log eintragen, damit die Positionen von der
-            <a href="http://www.flopp.net/safari/">Safari-Cache-Karte</a>
-            korrekt erkannt und angezeigt werden können!<br/>
-            Der Cache und seine Logs werden
-            <a href="http://www.flopp.net/safari/OC1001" target="_blank">hier</a>
-            angezeigt.
-        </div>
-        <br/>
-    </div>
-
     <hr>
 
     <div>

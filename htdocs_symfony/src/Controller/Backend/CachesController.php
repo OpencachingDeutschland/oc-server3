@@ -40,18 +40,11 @@ class CachesController extends AbstractController
             $fetchedCaches = $this->getCachesBasicData($connection, $inputData["content_caches_searchfield"]);
         }
 
-        $products = $this->getDoctrine()
-            ->getRepository(CachesEntity::class)
-            ->findAllOrderedByName();
-        dd($products);
-        die();
-
-        return $this->render(
-            'backend/caches/index.html.twig', [
-                                                'cachesForm' => $form->createView(),
-                                                'caches_by_searchfield' => $fetchedCaches
-                                            ]
-        );
+        if ($fetchedCaches != 0) {
+            return $this->render('backend/caches/basicsearch.html.twig', ['caches_by_searchfield' => $fetchedCaches]);
+        } else {
+            return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView()]);
+        }
     }
 
     /**
@@ -61,23 +54,23 @@ class CachesController extends AbstractController
     : Response {
         $fetchedCaches = $this->getCachesDetailsData($connection, $wp_oc);
 
-        return $this->render('backend/caches/index.html.twig', ['cache_by_id' => $fetchedCaches]);
+        return $this->render('backend/caches/detailsearch.html.twig', ['cache_by_id' => $fetchedCaches]);
     }
 
     /**
      *
      */
-    function getCachesBasicData(Connection $connection, string $searchtext) : array {
-
+    function getCachesBasicData(Connection $connection, string $searchtext)
+    : array {
         $statement = $connection->createQueryBuilder()
-//            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username')
+            //            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username')
             ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, caches.user_id AS username')
             ->from('caches')
-//          ->innerJoin() // INNER JOIN user ON caches.user_id = user.user_id
-            ->where('caches.wp_oc     = "' . $searchtext .'"')
-            ->orWhere('caches.wp_gc      = "' . $searchtext .'"')
-            ->orWhere('caches.name   LIKE "%' . $searchtext .'%"')
-//            ->orWhere('user.username LIKE "%' . $searchtext .'%"')
+            //          ->innerJoin() // INNER JOIN user ON caches.user_id = user.user_id
+            ->where('caches.wp_oc     = "' . $searchtext . '"')
+            ->orWhere('caches.wp_gc      = "' . $searchtext . '"')
+            ->orWhere('caches.name   LIKE "%' . $searchtext . '%"')
+            //            ->orWhere('user.username LIKE "%' . $searchtext .'%"')
             ->orderBy('caches.cache_id', 'ASC')
             ->execute();
 
@@ -86,9 +79,9 @@ class CachesController extends AbstractController
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
         }
+
         return $result;
     }
-
 
     /**
      *

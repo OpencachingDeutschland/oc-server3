@@ -27,6 +27,6 @@ class CachesFormType extends AbstractType
                                                 'trim' => true
                                             ]
             )
-            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
+            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);;
     }
 }

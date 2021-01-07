@@ -3,118 +3,103 @@
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @ORM\Entity(repositoryClass="Oc\Repository\CachesRepository")
  */
-class CachesEntity extends AbstractEntity //implements UserInterface
+class CachesEntity extends AbstractEntity
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     public $cache_id;
 
-//    /**
-//     * @var int
-//     */
-//    public $id;
-//
-//    /**
-//     * @var string
-//     */
-//    public $username;
-//
-//    /**
-//     * @var string
-//     */
-//    public $password;
-//
-//    /**
-//     * @var string
-//     */
-//    public $email;
-//
-//    /**
-//     * @var float
-//     */
-//    public $latitude;
-//
-//    /**
-//     * @var float
-//     */
-//    public $longitude;
-//
-//    /**
-//     * @var bool
-//     */
-//    public $isActive;
-//
-//    /**
-//     * @var string
-//     */
-//    public $firstname;
-//
-//    /**
-//     * @var string
-//     */
-//    public $lastname;
-//
-//    /**
-//     * @var string
-//     */
-//    public $country;
-//
-//    /**
-//     * @var string
-//     */
-//    public $language;
-//
-//    /**
-//     * @var array
-//     */
-//    public $roles;
+    /** @var datetime */
+    public $date_created;
 
-    /**
-     * Checks if the entity is new.
-     */
-    public function isNew(): bool
+    /** @var datetime */
+    public $last_modified;
+
+    /** @var int */
+    public $user_id;
+
+    /** @var string */
+    public $name;
+
+    /** @var float */
+    public $longitude;
+
+    /** @var float */
+    public $latitude;
+
+    /** @var int */
+    public $status;
+
+    /** @var string */
+    public $country;
+
+    /** @var float */
+    public $difficulty;
+
+    /** @var float */
+    public $terrain;
+
+    /** @var int */
+    public $size;
+
+    /** @var string */
+    public $wp_gc;
+
+    /** @var string */
+    public $wp_oc;
+
+    public function isNew()
+    : bool
     {
-        return $this->id === null;
+        return $this->$cacheId === null;
     }
 
-//    /**
-//     * Checks if the entity is new.
-//     */
-//    public function isNew(): bool
-//    {
-//        return $this->id === null;
-//    }
-//
-//    public function getRoles(): array
-//    {
-//        return $this->roles;
-//    }
-//
-//    public function getPassword(): ?string
-//    {
-//        return $this->password;
-//    }
-//
-//    public function getSalt(): string
-//    {
-//        return '';
-//    }
-//
-//    public function getUsername(): string
-//    {
-//        return $this->username;
-//    }
-//
-//    public function eraseCredentials(): void
-//    {
-//    }
+    public function isActiveAndFindable()
+    : bool
+    {
+        if ($this->status == 1) {
+            return $this->true;
+        } else {
+            return $this->false;
+        }
+    }
+
+    public function getCacheId()
+    : int
+    {
+        return $this->cache_id;
+    }
+
+    public function getName()
+    : string
+    {
+        return $this->name;
+    }
+
+    public function getGCid()
+    : string
+    {
+        return $this->wp_gc;
+    }
+
+    public function getOCid()
+    : string
+    {
+        return $this->wp_oc;
+    }
+
+    public function getDifficulty()
+    : string
+    {
+        return $this->difficulty;
+    }
+
+    public function getTerrain()
+    : string
+    {
+        return $this->difficulty;
+    }
 }

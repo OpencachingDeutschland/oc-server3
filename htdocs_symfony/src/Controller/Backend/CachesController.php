@@ -14,6 +14,7 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
+use Oc\Entity\CachesEntity;
 
 class CachesController extends AbstractController
 {
@@ -38,6 +39,12 @@ class CachesController extends AbstractController
             // send request to DB
             $fetchedCaches = $this->getCachesBasicData($connection, $inputData["content_caches_searchfield"]);
         }
+
+        $products = $this->getDoctrine()
+            ->getRepository(CachesEntity::class)
+            ->findAllOrderedByName();
+        dd($products);
+        die();
 
         return $this->render(
             'backend/caches/index.html.twig', [

@@ -1,0 +1,92 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    <div>
+        {% if cache_by_id is defined %}
+            <h3><br/>Cachedetails..</h3>
+
+            <div style="background-color: lightgrey;">
+                {% if cache_by_id %}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">&nbsp;</th>
+                            {# <th scope="col">Cache ID</th> #}
+                            <th scope="col">OC</th>
+                            <th scope="col">Titel</th>
+                            <th scope="col">Cachegröße</th>
+                            <th scope="col">D/T</th>
+                            <th scope="col">Owner</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">GC</th>
+                            <th scope="col">NC</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">mit Logpasswort?</th>
+                            <th scope="col">veröffentlicht</th>
+                            <th scope="col">Versteckdatum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for cache in cache_by_id %}
+                            <tr>
+                                <th scope="row"><img src="{{ cache.cache_type_picture }}" alt="Cachetyp"/></th>
+                                {# <td>{{ cache.cache_id }}</td> #}
+                                <td>{{ cache.wp_oc }}</td>
+                                <td>{{ cache.name }}</td>
+                                <td>{{ cache.cache_size_name }}</td>
+                                <td>D{{ cache.difficulty / 2 }}/T{{ cache.terrain / 2 }}</td>
+                                <td>{{ cache.username }}</td>
+                                <td>N{{ cache.latitude }} E{{ cache.longitude }}</td>
+                                <td>{{ cache.wp_gc }}</td>
+                                <td>{{ cache.wp_nc }}</td>
+                                <td>{{ cache.cache_status_name }}</td>
+                                <td>{% if cache.logpw == 1 %}
+                                        <i class="fas fa-key"><i class="fas fa-check"></i></i>
+                                    {% else %}
+                                        <i class="fas fa-times"></i>
+                                    {% endif %}</td>
+                                <td>{% if cache.is_publishdate == 1 %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                        <i class="fas fa-times"></i>
+                                    {% endif %}</td>
+                                <td>{{ cache.date_hidden }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <br/><br/>
+                    <span>Leider keinen Cache mit dem angegebenen WP_OC gefunden.. :-(</span>
+                {% endif %}
+            </div>
+        {% else %}
+            <br/><br/>
+            <span>Irgendwas ist kaputt.. :-(</span>
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+    <div class="alert alert-primary" role="alert">
+        <h3><br/>Diese Seite kann auch direkt aufgerufen werden mittels Wegpunkt-ID in der URL..</h3>
+        Aufruf:<br/>
+        http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
+        <small>
+            <small>oder</small>
+        </small>
+        <br/>
+        http://try.docker.team-opencaching.de/backend/cache/$WP_GC<br/>
+        <br/>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+

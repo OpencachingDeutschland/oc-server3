@@ -3,6 +3,17 @@
 {% block page_content %}
 
     <div>
+        <h3>Cachedatenbank abrufen..</h3>
+        {% if cachesForm is defined %}
+            {{ form_start(cachesForm) }}
+            {{ form_widget(cachesForm) }}
+            {{ form_end(cachesForm) }}
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div>
         {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
             <br/>
             <div> Gefunden: {{ caches_by_searchfield|length }} Cache(s)</div>

@@ -3,6 +3,7 @@
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Oc\Repository\CachesRepository")
@@ -10,46 +11,46 @@ use Oc\Repository\AbstractEntity;
 class CachesEntity extends AbstractEntity
 {
     /** @var int */
-    public $cache_id;
+    protected $cacheId;
 
     /** @var datetime */
-    public $date_created;
+    protected $dateCreated;
 
     /** @var datetime */
-    public $last_modified;
+    protected $lastModified;
 
     /** @var int */
-    public $user_id;
+    protected $userId;
 
     /** @var string */
-    public $name;
+    protected $name;
 
     /** @var float */
-    public $longitude;
+    protected $longitude;
 
     /** @var float */
-    public $latitude;
+    protected $latitude;
 
     /** @var int */
-    public $status;
+    protected $status;
 
     /** @var string */
-    public $country;
+    protected $country;
 
     /** @var float */
-    public $difficulty;
+    protected $difficulty;
 
     /** @var float */
-    public $terrain;
+    protected $terrain;
 
     /** @var int */
-    public $size;
+    protected $size;
 
     /** @var string */
-    public $wp_gc;
+    protected $wpGC;
 
     /** @var string */
-    public $wp_oc;
+    protected $wpOC;
 
     public function isNew()
     : bool
@@ -70,7 +71,12 @@ class CachesEntity extends AbstractEntity
     public function getCacheId()
     : int
     {
-        return $this->cache_id;
+        return $this->cacheId;
+    }
+
+    public function setCacheId($arg)
+    {
+        $this->cacheId = $arg;
     }
 
     public function getName()
@@ -79,16 +85,39 @@ class CachesEntity extends AbstractEntity
         return $this->name;
     }
 
+    public function setName($arg)
+    {
+        $this->name = $arg;
+    }
+
     public function getGCid()
     : string
     {
-        return $this->wp_gc;
+        return $this->wpGC;
+    }
+
+    /**
+     * Set wpGC
+     * @param string $arg
+     */
+    public function setGCid($arg)
+    {
+        $this->wpGC = $arg;
     }
 
     public function getOCid()
     : string
     {
-        return $this->wp_oc;
+        return $this->wpOC;
+    }
+
+    /**
+     * Set wpOC
+     * @param string $arg
+     */
+    public function setOCid($arg)
+    {
+        $this->wpOC = $arg;
     }
 
     public function getDifficulty()

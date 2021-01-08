@@ -84,12 +84,11 @@ class CachesRepository
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
-                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
+                $queryBuilder->orWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
             }
         }
 
         $statement = $queryBuilder->execute();
-
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
@@ -107,11 +106,21 @@ class CachesRepository
 
     public function getEntityFromDatabaseArray(array $data)
     {
-        $entity = new CachesEntity();
-        $entity->cache_id = (int) $data['cache_id'];
-        $entity->name = (string) $data['name'];
-        $entity->wp_oc = (string) $data['wp_oc'];
-        $entity->wp_gc = (string) $data['wp_gc'];
+        //        $entity = new CachesEntity();
+
+        //        $entity->setCacheId((int) $data['cache_id']);
+        //        $entity->setOCid((string) $data['wp_oc']);
+        //        $entity->setGCid((string) $data['wp_gc']);
+        //        $entity->setName((string) $data['name']);
+
+        $entity =
+            [
+                'cache_id' => (int) $data['cache_id'],
+                'wp_oc' => (string) $data['wp_oc'],
+                'wp_gc' => (string) $data['wp_gc'],
+                'name' => (string) $data['name'],
+                'username' => (string) 'nixx'
+            ];
 
         return $entity;
     }

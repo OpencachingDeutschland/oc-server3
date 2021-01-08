@@ -15,6 +15,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Entity\CachesEntity;
+use Oc\Repository\CachesRepository;
 
 class CachesController extends AbstractController
 {
@@ -40,10 +41,15 @@ class CachesController extends AbstractController
             $fetchedCaches = $this->getCachesBasicData($connection, $inputData["content_caches_searchfield"]);
         }
 
-        if ($fetchedCaches != 0) {
-            return $this->render('backend/caches/basicsearch.html.twig', ['caches_by_searchfield' => $fetchedCaches]);
-        } else {
+        if ($fetchedCaches === '0') {
             return $this->render('backend/caches/index.html.twig', ['cachesForm' => $form->createView()]);
+        } else {
+            return $this->render(
+                'backend/caches/basicsearch.html.twig', [
+                'cachesForm' => $form->createView(),
+                'caches_by_searchfield' => $fetchedCaches
+            ]
+            );
         }
     }
 
@@ -62,24 +68,55 @@ class CachesController extends AbstractController
      */
     function getCachesBasicData(Connection $connection, string $searchtext)
     : array {
-        $statement = $connection->createQueryBuilder()
-            //            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username')
-            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, caches.user_id AS username')
+
+
+//        $Liste = new CachesRepository($connection);
+////        $result = $Liste->fetchAll();
+//        $result = $Liste->fetchBy(array('wp_oc' => $searchtext, 'wp_gc' => $searchtext, 'name' => $searchtext));
+
+//        $statement = $connection->createQueryBuilder()
+//            //            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username')
+//            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, caches.user_id AS username')
+//            ->from('caches')
+//            //          ->innerJoin() // INNER JOIN user ON caches.user_id = user.user_id
+//            ->where('caches.wp_oc     = "' . $searchtext . '"')
+//            ->orWhere('caches.wp_gc      = "' . $searchtext . '"')
+//            ->orWhere('caches.name   LIKE "%' . $searchtext . '%"')
+//            //            ->orWhere('user.username LIKE "%' . $searchtext .'%"')
+//            ->orderBy('caches.cache_id', 'ASC')
+//            ->execute();
+
+
+//      so sieht's im SQL aus..
+//        SELECT name, wp_oc, user.username
+//        FROM caches
+//        INNER JOIN user ON caches.user_id = user.user_id
+//        WHERE wp_oc         =       "' . $searchtext . '"
+//        OR wp_gc            =       "' . $searchtext . '"
+//        OR caches.name     LIKE    "%' . $searchtext . '%"'
+        $statement = $connection->createQueryBuilder();
+        $statement = $statement
+            ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc')
             ->from('caches')
-            //          ->innerJoin() // INNER JOIN user ON caches.user_id = user.user_id
-            ->where('caches.wp_oc     = "' . $searchtext . '"')
-            ->orWhere('caches.wp_gc      = "' . $searchtext . '"')
-            ->orWhere('caches.name   LIKE "%' . $searchtext . '%"')
-            //            ->orWhere('user.username LIKE "%' . $searchtext .'%"')
-            ->orderBy('caches.cache_id', 'ASC')
+            ->where('caches.wp_oc = ' . $statement->createNamedParameter("OC1001"))
+            ->where('caches.wp_oc = "OC1001"')
+            ->orWhere('caches.wp_gc = '  . $statement->createNamedParameter("OC1001"))
+            ->orWhere('caches.name LIKE ' . $statement->createNamedParameter("OC1001"))
             ->execute();
+dd($statement);
+die();
 
         $result = $statement->fetchAll();
+
+        dd($result);
+        die();
+
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
         }
-
+//dd($result);
+//die();
         return $result;
     }
 

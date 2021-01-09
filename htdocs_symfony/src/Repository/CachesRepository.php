@@ -106,21 +106,12 @@ class CachesRepository
 
     public function getEntityFromDatabaseArray(array $data)
     {
-        //        $entity = new CachesEntity();
+        $entity = new CachesEntity();
 
-        //        $entity->setCacheId((int) $data['cache_id']);
-        //        $entity->setOCid((string) $data['wp_oc']);
-        //        $entity->setGCid((string) $data['wp_gc']);
-        //        $entity->setName((string) $data['name']);
-
-        $entity =
-            [
-                'cache_id' => (int) $data['cache_id'],
-                'wp_oc' => (string) $data['wp_oc'],
-                'wp_gc' => (string) $data['wp_gc'],
-                'name' => (string) $data['name'],
-                'username' => (string) 'nixx'
-            ];
+        $entity->setCacheId((int) $data['cache_id']);
+        $entity->setOCid((string) $data['wp_oc']);
+        $entity->setGCid((string) $data['wp_gc']);
+        $entity->setName((string) $data['name']);
 
         return $entity;
     }

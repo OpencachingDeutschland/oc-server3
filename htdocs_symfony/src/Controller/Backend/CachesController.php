@@ -14,8 +14,8 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
-use Oc\Entity\CachesEntity;
 use Oc\Repository\CachesRepository;
+use Oc\Entity\CachesEntity;
 
 class CachesController extends AbstractController
 {
@@ -46,9 +46,9 @@ class CachesController extends AbstractController
         } else {
             return $this->render(
                 'backend/caches/basicsearch.html.twig', [
-                'cachesForm' => $form->createView(),
-                'caches_by_searchfield' => $fetchedCaches
-            ]
+                                                          'cachesForm' => $form->createView(),
+                                                          'caches_by_searchfield' => $fetchedCaches
+                                                      ]
             );
         }
     }
@@ -68,55 +68,32 @@ class CachesController extends AbstractController
      */
     function getCachesBasicData(Connection $connection, string $searchtext)
     : array {
-
-
-//        $Liste = new CachesRepository($connection);
-////        $result = $Liste->fetchAll();
-//        $result = $Liste->fetchBy(array('wp_oc' => $searchtext, 'wp_gc' => $searchtext, 'name' => $searchtext));
-
-//        $statement = $connection->createQueryBuilder()
-//            //            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, user.username')
-//            ->select('caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc, caches.user_id AS username')
-//            ->from('caches')
-//            //          ->innerJoin() // INNER JOIN user ON caches.user_id = user.user_id
-//            ->where('caches.wp_oc     = "' . $searchtext . '"')
-//            ->orWhere('caches.wp_gc      = "' . $searchtext . '"')
-//            ->orWhere('caches.name   LIKE "%' . $searchtext . '%"')
-//            //            ->orWhere('user.username LIKE "%' . $searchtext .'%"')
-//            ->orderBy('caches.cache_id', 'ASC')
-//            ->execute();
-
-
-//      so sieht's im SQL aus..
-//        SELECT name, wp_oc, user.username
-//        FROM caches
-//        INNER JOIN user ON caches.user_id = user.user_id
-//        WHERE wp_oc         =       "' . $searchtext . '"
-//        OR wp_gc            =       "' . $searchtext . '"
-//        OR caches.name     LIKE    "%' . $searchtext . '%"'
-        $statement = $connection->createQueryBuilder();
-        $statement = $statement
-            ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc')
+        //      so sieht die SQL-Vorlage aus..
+        //        SELECT cache_id, name, wp_oc, user.username
+        //        FROM caches
+        //        INNER JOIN user ON caches.user_id = user.user_id
+        //        WHERE wp_oc         =       "' . $searchtext . '"
+        //        OR wp_gc            =       "' . $searchtext . '"
+        //        OR caches.name     LIKE    "%' . $searchtext . '%"'
+        $qb = $connection->createQueryBuilder();
+        $qb
+            ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
             ->from('caches')
-            ->where('caches.wp_oc = ' . $statement->createNamedParameter("OC1001"))
-            ->where('caches.wp_oc = "OC1001"')
-            ->orWhere('caches.wp_gc = '  . $statement->createNamedParameter("OC1001"))
-            ->orWhere('caches.name LIKE ' . $statement->createNamedParameter("OC1001"))
-            ->execute();
-dd($statement);
-die();
+            ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->where('caches.wp_oc = :searchTerm')
+            ->orWhere('caches.wp_gc = :searchTerm')
+            ->orWhere('caches.name LIKE "%' . $searchtext . '%"') // LIKE funktioniert
+//            ->orWhere('caches.name LIKE "%:searchTerm%"') // LIKE funktioniert nicht
+            ->setParameters(['searchTerm' => $searchtext])
+            ->orderBy('caches.wp_oc', 'DESC');
+//dd($qb);
+//die();
 
-        $result = $statement->fetchAll();
+        $result = $qb->execute()->fetchAll();
 
-        dd($result);
-        die();
-
-
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records found');
-        }
 //dd($result);
 //die();
+
         return $result;
     }
 
@@ -128,24 +105,42 @@ die();
         $fetchedCaches = [];
 
         if ($searchtext != "") {
-            $query = '
-            SELECT caches.cache_id, caches.wp_oc, caches.wp_gc, caches.wp_nc, caches.name, 
-                   caches.date_hidden, caches.date_created, caches.is_publishdate, caches.latitude, caches.longitude,
-                   caches.difficulty, caches.terrain, caches.size, caches.logpw,
-                   cache_status.name as cache_status_name, cache_type.icon_large as cache_type_picture, 
-                   cache_size.name as cache_size_name, user.username
-            FROM caches
-            INNER JOIN user ON caches.user_id = user.user_id
-            INNER JOIN cache_status ON caches.status = cache_status.id
-            INNER JOIN cache_type ON caches.type = cache_type.id
-            INNER JOIN cache_size ON caches.size = cache_size.id
-            WHERE caches.wp_oc         = "' . $searchtext . '"
-            ';
+            //      so sieht die SQL-Vorlage aus..
+            //            SELECT caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc,
+            //                   caches.date_hidden, caches.date_created, caches.is_publishdate, caches.latitude, caches.longitude,
+            //                   caches.difficulty, caches.terrain, caches.size, caches.logpw,
+            //                   cache_status.name as cache_status_name, cache_type.icon_large as cache_type_picture,
+            //                   cache_size.name as cache_size_name, user.username
+            //            FROM caches
+            //            INNER JOIN user ON caches.user_id = user.user_id
+            //            INNER JOIN cache_status ON caches.status = cache_status.id
+            //            INNER JOIN cache_type ON caches.type = cache_type.id
+            //            INNER JOIN cache_size ON caches.size = cache_size.id
+            //            WHERE caches.wp_oc         = "' . $searchtext . '"
+            $qb = $connection->createQueryBuilder();
+            $qb
+                ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc')
+                ->addSelect('caches.date_hidden', 'caches.date_created', 'caches.is_publishdate', 'caches.latitude', 'caches.longitude')
+                ->addSelect('caches.difficulty', 'caches.terrain', 'caches.size', 'caches.logpw')
+                ->addSelect('cache_status.name as cache_status_name', 'cache_type.icon_large as cache_type_picture')
+                ->addSelect('cache_size.name as cache_size_name', 'user.username')
+                ->from('caches')
+                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+                ->innerJoin('caches', 'cache_status', 'cache_status', 'caches.status = cache_status.id')
+                ->innerJoin('caches', 'cache_type', 'cache_type', 'caches.type = cache_type.id')
+                ->innerJoin('caches', 'cache_size', 'cache_size', 'caches.size = cache_size.id')
+                ->where('caches.wp_oc = :searchTerm')
+                ->setParameters(['searchTerm' => $searchtext])
+                ->orderBy('caches.wp_oc', 'DESC');
+//dd($qb);
+//die();
 
-            $fetchedCaches = $connection->fetchAll($query);
+            $fetchedCaches = $qb->execute()->fetchAll();
+
+//dd($fetchedCaches);
+//die();
 
             $array_size = count($fetchedCaches);
-
             for ($i = 0; $i < $array_size; $i ++) {
                 // replace existing log passwords with something different
                 // nur der Teil mit den Bilderzuweisungen müsste nochmal überdacht werden..

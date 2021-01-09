@@ -10,8 +10,6 @@ const Encore = require('@symfony/webpack-encore');
  */
 const StylelintPlugin = require('stylelint-webpack-plugin');
 
-const GoogleFontsPlugin = require("google-fonts-webpack-plugin")
-
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -75,20 +73,5 @@ Encore
         fix: true
     }))
 ;
-
-//https://openbase.io/js/google-fonts-webpack-plugin/documentation
-module.exports = {
-    "entry":"index.js",
-    plugins: [
-        new GoogleFontsPlugin({
-            fonts: [
-                { family: "Montserrat" },
-                { family: "Play", variants: [ "400", "700italic" ] }
-            ],
-            path: "public/build/fonts/",
-            formats: [ "woff", "woff2", "ttf"]
-        })
-    ]
-}
 
 module.exports = Encore.getWebpackConfig();

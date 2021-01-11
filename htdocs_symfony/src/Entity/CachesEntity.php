@@ -11,16 +11,16 @@ use Doctrine\ORM\Mapping as ORM;
 class CachesEntity extends AbstractEntity
 {
     /** @var int */
-    protected $cacheId;
+    protected $cache_id;
 
     /** @var datetime */
-    protected $dateCreated;
+    protected $date_Created;
 
     /** @var datetime */
-    protected $lastModified;
+    protected $last_Modified;
 
     /** @var int */
-    protected $userId;
+    protected $user_Id;
 
     /** @var string */
     protected $name;
@@ -47,15 +47,15 @@ class CachesEntity extends AbstractEntity
     protected $size;
 
     /** @var string */
-    protected $wpGC;
+    protected $wp_gc;
 
     /** @var string */
-    protected $wpOC;
+    protected $wp_oc;
 
     public function isNew()
     : bool
     {
-        return $this->$cacheId === null;
+        return $this->cache_id === null;
     }
 
     public function isActiveAndFindable()
@@ -71,12 +71,12 @@ class CachesEntity extends AbstractEntity
     public function getCacheId()
     : int
     {
-        return $this->cacheId;
+        return $this->cache_id;
     }
 
     public function setCacheId($arg)
     {
-        $this->cacheId = $arg;
+        $this->cache_id = $arg;
     }
 
     public function getName()
@@ -90,10 +90,21 @@ class CachesEntity extends AbstractEntity
         $this->name = $arg;
     }
 
+    public function getUserId()
+    : string
+    {
+        return $this->user_Id;
+    }
+
+    public function setUserId($arg)
+    {
+        $this->user_Id = $arg;
+    }
+
     public function getGCid()
     : string
     {
-        return $this->wpGC;
+        return $this->wp_gc;
     }
 
     /**
@@ -102,13 +113,13 @@ class CachesEntity extends AbstractEntity
      */
     public function setGCid($arg)
     {
-        $this->wpGC = $arg;
+        $this->wp_gc = $arg;
     }
 
     public function getOCid()
     : string
     {
-        return $this->wpOC;
+        return $this->wp_oc;
     }
 
     /**
@@ -117,7 +128,7 @@ class CachesEntity extends AbstractEntity
      */
     public function setOCid($arg)
     {
-        $this->wpOC = $arg;
+        $this->wp_oc = $arg;
     }
 
     public function getDifficulty()
@@ -130,5 +141,18 @@ class CachesEntity extends AbstractEntity
     : string
     {
         return $this->difficulty;
+    }
+
+    public function convertEntityToArray() : array
+    {
+        $entityArray = [];
+
+        foreach ($this as $key => $value) {
+            $entityArray = array_merge($entityArray, [$key => $value]);
+        }
+
+        $entityArrayX[0] = $entityArray;
+
+        return $entityArrayX;
     }
 }

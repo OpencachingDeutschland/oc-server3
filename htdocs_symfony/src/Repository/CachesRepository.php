@@ -67,10 +67,10 @@ class CachesRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException('Record with given where clause not found');
+            //            throw new RecordNotFoundException('Record with given where clause not found');
+        } else {
+            return $this->getEntityFromDatabaseArray($result);
         }
-
-        return $this->getEntityFromDatabaseArray($result);
     }
 
     /**
@@ -92,16 +92,42 @@ class CachesRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
-        }
+            //            throw new RecordsNotFoundException('No records with given where clause found');
+        } else {
+            $entities = [];
 
-        $entities = [];
-
-        foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            foreach ($result as $item) {
+                $entities[] = $this->getEntityFromDatabaseArray($item);
+            }
         }
 
         return $entities;
+    }
+
+    /**
+     * @return CachesEntity
+     */
+    public function getIdByWP(string $wp = '')
+    {
+        $queryBuilder = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
+
+        if ($wp != '') {
+            $queryBuilder->where('wp_oc = ' . $queryBuilder->createNamedParameter($wp));
+            $queryBuilder->orWhere('wp_gc = ' . $queryBuilder->createNamedParameter($wp));
+        }
+
+        $statement = $queryBuilder->execute();
+
+        $result = $statement->fetch();
+
+        if ($statement->rowCount() === 0) {
+            //            throw new RecordNotFoundException('Record with given where clause not found');
+        } else {
+            return $result['cache_id'];
+        }
     }
 
     public function getEntityFromDatabaseArray(array $data)
@@ -112,6 +138,8 @@ class CachesRepository
         $entity->setOCid((string) $data['wp_oc']);
         $entity->setGCid((string) $data['wp_gc']);
         $entity->setName((string) $data['name']);
+        $entity->setUserId((int) $data['user_id']);
+        // ..
 
         return $entity;
     }

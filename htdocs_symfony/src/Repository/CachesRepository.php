@@ -78,6 +78,8 @@ class CachesRepository
      */
     public function fetchBy(array $where = [])
     {
+        $entities = [];
+
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -94,8 +96,6 @@ class CachesRepository
         if ($statement->rowCount() === 0) {
             //            throw new RecordsNotFoundException('No records with given where clause found');
         } else {
-            $entities = [];
-
             foreach ($result as $item) {
                 $entities[] = $this->getEntityFromDatabaseArray($item);
             }
@@ -139,6 +139,7 @@ class CachesRepository
         $entity->setGCid((string) $data['wp_gc']);
         $entity->setName((string) $data['name']);
         $entity->setUserId((int) $data['user_id']);
+
         // ..
 
         return $entity;

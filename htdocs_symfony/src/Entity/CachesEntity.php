@@ -62,9 +62,9 @@ class CachesEntity extends AbstractEntity
     : bool
     {
         if ($this->status == 1) {
-            return $this->true;
+            return true;
         } else {
-            return $this->false;
+            return false;
         }
     }
 
@@ -145,14 +145,15 @@ class CachesEntity extends AbstractEntity
 
     public function convertEntityToArray() : array
     {
+        $entityOrigin = [];
         $entityArray = [];
 
         foreach ($this as $key => $value) {
-            $entityArray = array_merge($entityArray, [$key => $value]);
+            $entityOrigin = array_merge($entityOrigin, [$key => $value]);
         }
 
-        $entityArrayX[0] = $entityArray;
+        $entityArray[0] = $entityOrigin;
 
-        return $entityArrayX;
+        return $entityArray;
     }
 }

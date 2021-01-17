@@ -134,21 +134,21 @@ class CachesController extends AbstractController
      * getCacheDetails_Nr2: Suche mittels der cache_id
      * Alternative zu getCacheDetails() ??
      */
-    function getCacheDetails_Nr2(Connection $connection, int $cacheId)
+    function getCacheDetails_Nr2(Connection $connection, int $id)
     : array {
         $fetchedCache = [];
         $securityRolesRepository = new SecurityRolesRepository($connection);
 
-        if ($cacheId != 0) {
+        if ($id != 0) {
             $requestCache = new CachesRepository($connection);
-            $fetchedCache = $requestCache->fetchOneBy(['cache_id' => $cacheId]);
+            $fetchedCache = $requestCache->fetchOneBy(['cache_id' => $id]);
 
             if ($fetchedCache) {
                 // ersetze caches.user_id mit user.username
                 $requestUser = new UserRepository($connection, $securityRolesRepository);
-                $fetchedUser = $requestUser->fetchOneById(intval($fetchedCache->getUserId()));
+                $fetchedUser = $requestUser->fetchOneById(intval($fetchedCache->cacheId));
 
-                $fetchedCache->setUserId($fetchedUser->getUsername());
+                $fetchedCache->userId = $fetchedUser->getUsername();
 
                 // ersetze caches.status mit cache_status.name
                 // ..
@@ -173,17 +173,17 @@ class CachesController extends AbstractController
      * getCacheDetails: Suche mittels Suchtext (Wegpunkte, Cachename) oder cache_id
      * Grundidee: diese Funktion baut sich die SQL-Anweisung selbst zusammen und holt die Daten aus der DB.
      */
-    function getCacheDetails(Connection $connection, string $searchText = "", int $cacheId = 0)
+    function getCacheDetails(Connection $connection, string $searchText = "", int $id = 0)
     : array {
         $fetchedCaches = [];
 
-        if ($cacheId != 0) {
+        if ($id != 0) {
             $request = new CachesRepository($connection);
 
-            $fetchedCache = $request->fetchOneBy(['cache_id' => $cacheId]);
+            $fetchedCache = $request->fetchOneBy(['cache_id' => $id]);
 
             if ($fetchedCache) {
-                $searchText = $fetchedCache->getOCid();
+                $searchText = $fetchedCache->wpOc;
             }
         }
 

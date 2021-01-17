@@ -3,59 +3,128 @@
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="Oc\Repository\CachesRepository")
- */
+///**
+// * @ORM\Entity(repositoryClass="Oc\Repository\CachesRepository")
+// */
 class CachesEntity extends AbstractEntity
 {
     /** @var int */
-    protected $cache_id;
+    public $cacheId;
 
-    /** @var datetime */
-    protected $date_Created;
-
-    /** @var datetime */
-    protected $last_Modified;
+    /** @var string */
+    public $uuid;
 
     /** @var int */
-    protected $user_Id;
+    public $node;
 
-    /** @var string */
-    protected $name;
-
-    /** @var float */
-    protected $longitude;
-
-    /** @var float */
-    protected $latitude;
+    /** @var DateTime */
+    public $dateCreated;
 
     /** @var int */
-    protected $status;
+    public $isPublishdate;
+
+    /** @var DateTime */
+    public $lastModified;
 
     /** @var string */
-    protected $country;
+    public $okapiSyncbase;
 
-    /** @var float */
-    protected $difficulty;
+    /** @var DateTime */
+    public $listingLastModified;
 
-    /** @var float */
-    protected $terrain;
+    /** @var DateTime */
+    public $metaLastModified;
 
     /** @var int */
-    protected $size;
+    public $userId;
 
     /** @var string */
-    protected $wp_gc;
+    public $name;
+
+    /** @var float */
+    public $longitude;
+
+    /** @var float */
+    public $latitude;
+
+    /** @var int */
+    public $type;
+
+    /** @var int */
+    public $status;
 
     /** @var string */
-    protected $wp_oc;
+    public $country;
 
+    /** @var DateTime */
+    public $dateHidden;
+
+    /** @var int */
+    public $size;
+
+    /** @var int */
+    public $difficulty;
+
+    /** @var int */
+    public $terrain;
+
+    /** @var string */
+    public $logpw;
+
+    /** @var float */
+    public $searchTime;
+
+    /** @var float */
+    public $wayLength;
+
+    /** @var string */
+    public $wpGc;
+
+    /** @var string */
+    public $wpGcMaintained;
+
+    /** @var string */
+    public $wpNc;
+
+    /** @var string */
+    public $wpOc;
+
+    /** @var string */
+    public $descLanguages;
+
+    /** @var string */
+    public $defaultDesclang;
+
+    /** @var DateTime */
+    public $dateActivate;
+
+    /** @var int */
+    public $needNpaRecalc;
+
+    /** @var int */
+    public $showCachelists;
+
+    /** @var int */
+    public $protectOldCoords;
+
+    /** @var int */
+    public $needsMaintenance;
+
+    /** @var int */
+    public $listingOutdated;
+
+    /** @var DateTime */
+    public $flagsLastModified;
+
+    /**
+     * @return bool
+     */
     public function isNew()
     : bool
     {
-        return $this->cache_id === null;
+        return $this->cacheId === null;
     }
 
     public function isActiveAndFindable()
@@ -66,94 +135,5 @@ class CachesEntity extends AbstractEntity
         } else {
             return false;
         }
-    }
-
-    public function getCacheId()
-    : int
-    {
-        return $this->cache_id;
-    }
-
-    public function setCacheId($arg)
-    {
-        $this->cache_id = $arg;
-    }
-
-    public function getName()
-    : string
-    {
-        return $this->name;
-    }
-
-    public function setName($arg)
-    {
-        $this->name = $arg;
-    }
-
-    public function getUserId()
-    : string
-    {
-        return $this->user_Id;
-    }
-
-    public function setUserId($arg)
-    {
-        $this->user_Id = $arg;
-    }
-
-    public function getGCid()
-    : string
-    {
-        return $this->wp_gc;
-    }
-
-    /**
-     * Set wpGC
-     * @param string $arg
-     */
-    public function setGCid($arg)
-    {
-        $this->wp_gc = $arg;
-    }
-
-    public function getOCid()
-    : string
-    {
-        return $this->wp_oc;
-    }
-
-    /**
-     * Set wpOC
-     * @param string $arg
-     */
-    public function setOCid($arg)
-    {
-        $this->wp_oc = $arg;
-    }
-
-    public function getDifficulty()
-    : string
-    {
-        return $this->difficulty;
-    }
-
-    public function getTerrain()
-    : string
-    {
-        return $this->difficulty;
-    }
-
-    public function convertEntityToArray() : array
-    {
-        $entityOrigin = [];
-        $entityArray = [];
-
-        foreach ($this as $key => $value) {
-            $entityOrigin = array_merge($entityOrigin, [$key => $value]);
-        }
-
-        $entityArray[0] = $entityOrigin;
-
-        return $entityArray;
     }
 }

@@ -5,6 +5,7 @@ namespace Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CachesFormType extends AbstractType
 {
@@ -16,7 +17,7 @@ class CachesFormType extends AbstractType
                 'content_caches_searchfield', null, [
                                                 'attr' => [
                                                     'placeholder' => 'OC / GC / Name / Owner. Platzhalter: %%%',
-                                                    'autofocus' => 'autofocux',
+                                                    'autofocus' => 'autofocus',
                                                     'size' => '10%',
                                                     'minlength' => '3',
                                                     'maxlength' => '100',
@@ -27,6 +28,6 @@ class CachesFormType extends AbstractType
                                                 'trim' => true
                                             ]
             )
-            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);;
+            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
     }
 }

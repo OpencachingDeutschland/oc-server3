@@ -3,11 +3,7 @@
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
-//use Doctrine\ORM\Mapping as ORM;
 
-///**
-// * @ORM\Entity(repositoryClass="Oc\Repository\CachesRepository")
-// */
 class CachesEntity extends AbstractEntity
 {
     /** @var int */

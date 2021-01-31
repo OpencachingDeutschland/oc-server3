@@ -94,7 +94,7 @@ if (isset($ownerid)) {
 if (isset($_GET['for_maintenance'])) {
     $add_where = "AND ({fromtable}.`type` IN (2,3) OR {fromtable}.`needs_maintenance`=2 OR {fromtable}.`listing_outdated`=2) AND DATEDIFF({fromtable}.`date_created`, {fromtable}.`date`) < 7 ";
     $tpl->cache_id .= "|fm";
-    $logcount *= 2;
+    $logcount *= 10;
 }
 if ($logselection == 1) {
     $add_where .= "AND DATEDIFF(NOW(), {fromtable}.`date`) < 30 ";

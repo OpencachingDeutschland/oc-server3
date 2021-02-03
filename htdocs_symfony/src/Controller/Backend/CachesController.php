@@ -15,16 +15,63 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\CachesRepository;
+use Oc\Repository\CacheSizeRepository;
+use Oc\Repository\CacheStatusRepository;
+use Oc\Repository\CacheTypeRepository;
 use Oc\Repository\UserRepository;
-use Oc\Repository\SecurityRolesRepository;
-use Oc\Entity\CachesEntity;
 
+/**
+ * Class CachesController
+ *
+ * @package Oc\Controller\Backend
+ */
 class CachesController extends AbstractController
 {
+    private $connection;
+
+    private $cachesRepository;
+
+    private $cacheSizeRepository;
+
+    private $cacheStatusRepository;
+
+    private $cacheTypeRepository;
+
+    private $userRepository;
+
     /**
-     * @Route("/caches", name="caches_index")
+     * CachesController constructor.
+     *
+     * @param Connection $connection
+     * @param CachesRepository $cachesRepository
+     * @param CacheSizeRepository $cacheSizeRepository
+     * @param CacheStatusRepository $cacheStatusRepository
+     * @param CacheTypeRepository $cacheTypeRepository
+     * @param UserRepository $userRepository
      */
-    public function index(Connection $connection, Request $request)
+    public function __construct(
+        Connection $connection,
+        CachesRepository $cachesRepository,
+        CacheSizeRepository $cacheSizeRepository,
+        CacheStatusRepository $cacheStatusRepository,
+        CacheTypeRepository $cacheTypeRepository,
+        UserRepository $userRepository
+    ) {
+        $this->connection = $connection;
+        $this->cachesRepository = $cachesRepository;
+        $this->cacheSizeRepository = $cacheSizeRepository;
+        $this->cacheStatusRepository = $cacheStatusRepository;
+        $this->cacheTypeRepository = $cacheTypeRepository;
+        $this->userRepository = $userRepository;
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/caches", name="caches_index")
+     *
+     * @return Response
+     */
+    public function index(Request $request)
     : Response {
         $fetchedCaches = '';
 
@@ -40,7 +87,7 @@ class CachesController extends AbstractController
             $inputData = $form->getData();
 
             // send request to DB
-            $fetchedCaches = $this->getCachesForSearchField($connection, $inputData["content_caches_searchfield"]);
+            $fetchedCaches = $this->getCachesForSearchField($inputData["content_caches_searchfield"]);
         }
 
         if ($fetchedCaches === '') {
@@ -52,27 +99,37 @@ class CachesController extends AbstractController
         } else {
             return $this->render(
                 'backend/caches/basicview.html.twig', [
-                                                          'cachesForm' => $form->createView(),
-                                                          'caches_by_searchfield' => $fetchedCaches
-                                                      ]
+                                                        'cachesForm' => $form->createView(),
+                                                        'caches_by_searchfield' => $fetchedCaches
+                                                    ]
             );
         }
     }
 
     /**
+     * @param string $wpID
+     *
+     * @return Response
      * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
      */
-    public function search_by_cache_wp(Connection $connection, string $wpID)
-    : Response {
-        $fetchedCaches = $this->getCacheDetails($connection, $wpID);
+    public function search_by_cache_wp(string $wpID) : Response {
+        $fetchedCaches = [];
 
-        return $this->render('backend/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]);
+        try {
+            $fetchedCaches = $this->getCacheDetails($wpID);
+        } catch (\Exception $e) {
+            //  tue was.. (status_not_found = true);
+        }
+
+        return $this->render('backend/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]); //+ status_not_found + abfragen in twig, Z.B.
     }
 
     /**
+     * @param string $searchtext
      *
+     * @return array
      */
-    function getCachesForSearchField(Connection $connection, string $searchtext)
+    public function getCachesForSearchField(string $searchtext)
     : array {
         //      so sieht die SQL-Vorlage aus..
         //        SELECT cache_id, name, wp_oc, user.username
@@ -82,7 +139,7 @@ class CachesController extends AbstractController
         //        OR wp_gc            =       "' . $searchtext . '"
         //        OR caches.name     LIKE    "%' . $searchtext . '%"'
         //        OR user.username   LIKE    "%' . $searchtext . '%"'
-        $qb = $connection->createQueryBuilder();
+        $qb = $this->connection->createQueryBuilder();
         $qb
             ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
             ->from('caches')
@@ -100,141 +157,50 @@ class CachesController extends AbstractController
     }
 
     /**
-     * getCacheDetails_Nr3: Suche mittels Suchtext (Wegpunkte, Cachename) oder cache_id
-     * Grundidee: diese Funktion holt sich die Daten über die fetch-Funktionen im Repository und
-     *            ergänzt weitere Angaben aus anderen Tabellen, indem in den Entitys Beziehungen zwischen den Tabellen
-     *            geknüpft werden (ManyToOne, OneToMany, ..)
-     * Das konnte ich aber nicht wie gewollt implementieren.
+     * @param string $wpID
+     * @param int $id
+     *
+     * @return array
+     *
+     * getCacheDetails: Suche mittels wp_oc oder cache_id
      */
-    function getCacheDetails_Nr3(Connection $connection, string $wpID = "", int $cacheId = 0)
-    : array {
-        $fetchedCaches = [];
-        //        $fetchedCache = [];
-        //
-        //        if ($cacheId != 0) {
-        //            $request = new CachesRepository($connection);
-        //
-        //            $fetchedCache = $request->fetchOneBy(['cache_id' => $cacheId]);
-        //
-        //            if ($fetchedCache) {
-        //                $wpID = $fetchedCache->getOCid();
-        //            }
-        //        }
-        //
-        //        if (!empty($wpID)) {
-        //            $request = new CachesRepository($connection);
-        //            $fetchedCache = $request->fetchOneBy(['wp_OC' => $wpID]);
-        //
-        //            if ($fetchedCache) {
-        //                $fetchedCaches = $fetchedCache->convertEntityToArray();
-        //            }
-        //        }
-
-        //        dd($fetchedCaches);
-        //        die();
-
-        return $fetchedCaches;
-    }
-
-    /**
-     * getCacheDetails_Nr2: Suche mittels der cache_id
-     * Alternative zu getCacheDetails() ??
-     */
-    function getCacheDetails_Nr2(Connection $connection, $searchText = '', int $id = 0)
+    public function getCacheDetails(string $wpID = '', int $id = 0)
     : array {
         $fetchedCache = [];
-        $securityRolesRepository = new SecurityRolesRepository($connection);
 
-        if ($id != 0) {
-            $requestCache = new CachesRepository($connection);
-            $fetchedCache = $requestCache->fetchOneBy(['cache_id' => $id]);
+        if (!empty($wpID)) {
+            $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wpID]);
+        } elseif ($id != 0) {
+            $fetchedCache = $this->cachesRepository->fetchOneBy(['cache_id' => $id]);
+        }
 
-            if ($fetchedCache) {
-                // ersetze caches.user_id mit user.username
-                $requestUser = new UserRepository($connection, $securityRolesRepository);
-                $fetchedUser = $requestUser->fetchOneById(intval($fetchedCache->cacheId));
+        if ($fetchedCache) {
+            // Ergaenze user
+            $fetchedUser = $this->userRepository->fetchOneById($fetchedCache->userId);
+            $fetchedCache->user = $fetchedUser;
 
-                $fetchedCache->userId = $fetchedUser->getUsername();
+            // Ergaenze cache_type
+            $fetchedCacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $fetchedCache->type]);
+            $fetchedCache->cacheType = $fetchedCacheType;
 
-                // ersetze caches.status mit cache_status.name
-                // ..
+            // Ergaenze caches_size
+            $fetchedCacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $fetchedCache->size]);
+            $fetchedCache->cacheSize = $fetchedCacheSize;
 
-                // ersetze caches.type mit cache_type.name
-                // ..
+            // Ergaenze caches_status
+            $fetchedCacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $fetchedCache->status]);
+            $fetchedCache->cacheStatus = $fetchedCacheStatus;
 
-                // ersetze caches.size mit cache_size.name
-                // ..
+            // terrain und difficulty / 2
+            $fetchedCache->terrain = $fetchedCache->terrain / 2;
+            $fetchedCache->difficulty = $fetchedCache->difficulty / 2;
 
-                // ?? ..
+            // Loesche Logpasswort
+            if ($fetchedCache->logpw != '') {
+                $fetchedCache->logpw = 1;
             }
         }
 
-        dd($fetchedCache);
-        die();
-
-        return $fetchedCache;
-    }
-
-    /**
-     * getCacheDetails: Suche mittels Suchtext (Wegpunkte, Cachename) oder cache_id
-     * Grundidee: diese Funktion baut sich die SQL-Anweisung selbst zusammen und holt die Daten aus der DB.
-     */
-    function getCacheDetails(Connection $connection, string $searchText = '', int $id = 0)
-    : array {
-        $fetchedCaches = [];
-
-        if ($id != 0) {
-            $request = new CachesRepository($connection);
-
-            $fetchedCache = $request->fetchOneBy(['cache_id' => $id]);
-
-            if ($fetchedCache) {
-                $searchText = $fetchedCache->wpOc;
-            }
-        }
-
-        if (!empty($searchText)) {
-            //      so sieht die SQL-Vorlage aus..
-            //            SELECT caches.cache_id, caches.name, caches.wp_oc, caches.wp_gc,
-            //                   caches.date_hidden, caches.date_created, caches.is_publishdate, caches.latitude, caches.longitude,
-            //                   caches.difficulty, caches.terrain, caches.size, caches.logpw,
-            //                   cache_status.name as cache_status_name, cache_type.icon_large as cache_type_picture,
-            //                   cache_size.name as cache_size_name, user.username
-            //            FROM caches
-            //            INNER JOIN user ON caches.user_id = user.user_id
-            //            INNER JOIN cache_status ON caches.status = cache_status.id
-            //            INNER JOIN cache_type ON caches.type = cache_type.id
-            //            INNER JOIN cache_size ON caches.size = cache_size.id
-            //            WHERE caches.wp_oc         = "' . $searchtext . '"
-            $qb = $connection->createQueryBuilder();
-            $qb
-                ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc')
-                ->addSelect('caches.date_hidden', 'caches.date_created', 'caches.is_publishdate', 'caches.latitude', 'caches.longitude')
-                ->addSelect('caches.difficulty', 'caches.terrain', 'caches.size', 'caches.logpw')
-                ->addSelect('cache_status.name as cache_status_name', 'cache_type.icon_large as cache_type_picture')
-                ->addSelect('cache_size.name as cache_size_name', 'user.username')
-                ->from('caches')
-                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
-                ->innerJoin('caches', 'cache_status', 'cache_status', 'caches.status = cache_status.id')
-                ->innerJoin('caches', 'cache_type', 'cache_type', 'caches.type = cache_type.id')
-                ->innerJoin('caches', 'cache_size', 'cache_size', 'caches.size = cache_size.id')
-                ->where('caches.wp_oc = :searchTerm')
-                ->setParameters(['searchTerm' => $searchText])
-                ->orderBy('caches.wp_oc', 'DESC');
-
-            $fetchedCaches = $qb->execute()->fetchAll();
-
-            $array_size = count($fetchedCaches);
-            for ($i = 0; $i < $array_size; $i ++) {
-                // replace existing log passwords with something different
-                if ($fetchedCaches[$i]["logpw"] != '') {
-                    $fetchedCaches[$i]["logpw"] = 1;
-                } else {
-                    $fetchedCaches[$i]["logpw"] = 0;
-                }
-            }
-        }
-
-        return $fetchedCaches;
+        return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];
     }
 }

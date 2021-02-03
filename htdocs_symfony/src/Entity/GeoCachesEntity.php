@@ -2,9 +2,15 @@
 
 namespace Oc\Entity;
 
+use DateTime;
 use Oc\Repository\AbstractEntity;
 
-class CachesEntity extends AbstractEntity
+/**
+ * Class GeoCachesEntity
+ *
+ * @package Oc\Entity
+ */
+class GeoCachesEntity extends AbstractEntity
 {
     /** @var int */
     public $cacheId;
@@ -114,6 +120,18 @@ class CachesEntity extends AbstractEntity
     /** @var DateTime */
     public $flagsLastModified;
 
+    /** @var UserEntity */
+    public $user;
+
+    /** @var GeoCacheSizeEntity */
+    public $cacheSize;
+
+    /** @var GeoCacheStatusEntity */
+    public $cacheStatus;
+
+    /** @var GeoCacheTypeEntity */
+    public $cacheType;
+
     /**
      * @return bool
      */
@@ -123,6 +141,9 @@ class CachesEntity extends AbstractEntity
         return $this->cacheId === null;
     }
 
+    /**
+     * @return bool
+     */
     public function isActiveAndFindable()
     : bool
     {

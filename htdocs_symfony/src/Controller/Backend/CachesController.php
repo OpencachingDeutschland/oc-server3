@@ -10,15 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
-use Oc\Repository\Exception\RecordNotPersistedException;
-use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\CachesRepository;
-use Oc\Repository\CacheSizeRepository;
-use Oc\Repository\CacheStatusRepository;
-use Oc\Repository\CacheTypeRepository;
-use Oc\Repository\UserRepository;
 
 /**
  * Class CachesController
@@ -31,38 +24,16 @@ class CachesController extends AbstractController
 
     private $cachesRepository;
 
-    private $cacheSizeRepository;
-
-    private $cacheStatusRepository;
-
-    private $cacheTypeRepository;
-
-    private $userRepository;
-
     /**
      * CachesController constructor.
      *
      * @param Connection $connection
      * @param CachesRepository $cachesRepository
-     * @param CacheSizeRepository $cacheSizeRepository
-     * @param CacheStatusRepository $cacheStatusRepository
-     * @param CacheTypeRepository $cacheTypeRepository
-     * @param UserRepository $userRepository
      */
-    public function __construct(
-        Connection $connection,
-        CachesRepository $cachesRepository,
-        CacheSizeRepository $cacheSizeRepository,
-        CacheStatusRepository $cacheStatusRepository,
-        CacheTypeRepository $cacheTypeRepository,
-        UserRepository $userRepository
-    ) {
+    public function __construct(Connection $connection, CachesRepository $cachesRepository)
+    {
         $this->connection = $connection;
         $this->cachesRepository = $cachesRepository;
-        $this->cacheSizeRepository = $cacheSizeRepository;
-        $this->cacheStatusRepository = $cacheStatusRepository;
-        $this->cacheTypeRepository = $cacheTypeRepository;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -112,7 +83,8 @@ class CachesController extends AbstractController
      * @return Response
      * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
      */
-    public function search_by_cache_wp(string $wpID) : Response {
+    public function search_by_cache_wp(string $wpID)
+    : Response {
         $fetchedCaches = [];
 
         try {
@@ -140,8 +112,7 @@ class CachesController extends AbstractController
         //        OR caches.name     LIKE    "%' . $searchtext . '%"'
         //        OR user.username   LIKE    "%' . $searchtext . '%"'
         $qb = $this->connection->createQueryBuilder();
-        $qb
-            ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
+        $qb->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
             ->from('caches')
             ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
             ->where('caches.wp_oc = :searchTerm')
@@ -151,9 +122,7 @@ class CachesController extends AbstractController
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('caches.wp_oc', 'ASC');
 
-        $result = $qb->execute()->fetchAll();
-
-        return $result;
+        return $qb->execute()->fetchAll();
     }
 
     /**
@@ -161,8 +130,7 @@ class CachesController extends AbstractController
      * @param int $id
      *
      * @return array
-     *
-     * getCacheDetails: Suche mittels wp_oc oder cache_id
+     * @throws RecordNotFoundException
      */
     public function getCacheDetails(string $wpID = '', int $id = 0)
     : array {
@@ -172,33 +140,6 @@ class CachesController extends AbstractController
             $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wpID]);
         } elseif ($id != 0) {
             $fetchedCache = $this->cachesRepository->fetchOneBy(['cache_id' => $id]);
-        }
-
-        if ($fetchedCache) {
-            // Ergaenze user
-            $fetchedUser = $this->userRepository->fetchOneById($fetchedCache->userId);
-            $fetchedCache->user = $fetchedUser;
-
-            // Ergaenze cache_type
-            $fetchedCacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $fetchedCache->type]);
-            $fetchedCache->cacheType = $fetchedCacheType;
-
-            // Ergaenze caches_size
-            $fetchedCacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $fetchedCache->size]);
-            $fetchedCache->cacheSize = $fetchedCacheSize;
-
-            // Ergaenze caches_status
-            $fetchedCacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $fetchedCache->status]);
-            $fetchedCache->cacheStatus = $fetchedCacheStatus;
-
-            // terrain und difficulty / 2
-            $fetchedCache->terrain = $fetchedCache->terrain / 2;
-            $fetchedCache->difficulty = $fetchedCache->difficulty / 2;
-
-            // Loesche Logpasswort
-            if ($fetchedCache->logpw != '') {
-                $fetchedCache->logpw = 1;
-            }
         }
 
         return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];

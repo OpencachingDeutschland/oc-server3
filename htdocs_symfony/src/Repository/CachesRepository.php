@@ -5,8 +5,6 @@ namespace Oc\Repository;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Oc\Entity\GeoCachesEntity;
-//use Oc\Entity\GeoCacheTypeEntity;
-//use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -25,19 +23,54 @@ class CachesRepository
     private $connection;
 
     /**
+     * @var CacheSizeRepository
+     */
+    private $cacheSizeRepository;
+
+    /**
+     * @var CacheStatusRepository
+     */
+    private $cacheStatusRepository;
+
+    /**
+     * @var CacheTypeRepository
+     */
+    private $cacheTypeRepository;
+
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+
+    /**
      * CachesRepository constructor.
      *
      * @param Connection $connection
+     * @param UserRepository $userRepository
+     * @param CacheSizeRepository $cacheSizeRepository
+     * @param CacheStatusRepository $cacheStatusRepository
+     * @param CacheTypeRepository $cacheTypeRepository
      */
-    public function __construct(Connection $connection)
-    {
+    public function __construct(
+        Connection $connection,
+        UserRepository $userRepository,
+        CacheSizeRepository $cacheSizeRepository,
+        CacheStatusRepository $cacheStatusRepository,
+        CacheTypeRepository $cacheTypeRepository
+    ) {
         $this->connection = $connection;
+        $this->userRepository = $userRepository;
+        $this->cacheSizeRepository = $cacheSizeRepository;
+        $this->cacheStatusRepository = $cacheStatusRepository;
+        $this->cacheTypeRepository = $cacheTypeRepository;
     }
 
     /**
      * @return array
+     * @throws RecordsNotFoundException
      */
-    public function fetchAll() : array
+    public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -63,9 +96,10 @@ class CachesRepository
      * @param array $where
      *
      * @return GeoCachesEntity
+     * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = []) : GeoCachesEntity
-    {
+    public function fetchOneBy(array $where = [])
+    : GeoCachesEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -92,9 +126,10 @@ class CachesRepository
      * @param array $where
      *
      * @return array
+     * @throws RecordsNotFoundException
      */
-    public function fetchBy(array $where = []) : array
-    {
+    public function fetchBy(array $where = [])
+    : array {
         $entities = [];
 
         $queryBuilder = $this->connection->createQueryBuilder()
@@ -112,7 +147,7 @@ class CachesRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            //            throw new RecordsNotFoundException('No records with given where clause found');
+            throw new RecordsNotFoundException('No records with given where clause found');
         } else {
             foreach ($result as $item) {
                 $entities[] = $this->getEntityFromDatabaseArray($item);
@@ -126,10 +161,11 @@ class CachesRepository
      * @param GeoCachesEntity $entity
      *
      * @return GeoCachesEntity
+     * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(GeoCachesEntity $entity) : GeoCachesEntity
-    {
+    public function create(GeoCachesEntity $entity)
+    : GeoCachesEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -152,19 +188,15 @@ class CachesRepository
      * @return GeoCachesEntity
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(GeoCachesEntity $entity) : GeoCachesEntity
-    {
+    public function update(GeoCachesEntity $entity)
+    : GeoCachesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
-        $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['cache_id' => $entity->cacheId]
-        );
+        $this->connection->update(self::TABLE, $databaseArray, ['cache_id' => $entity->cacheId]);
 
         return $entity;
     }
@@ -176,16 +208,13 @@ class CachesRepository
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(GeoCachesEntity $entity) : GeoCachesEntity
-    {
+    public function remove(GeoCachesEntity $entity)
+    : GeoCachesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
-        $this->connection->delete(
-            self::TABLE,
-            ['cache_id' => $entity->cacheId]
-        );
+        $this->connection->delete(self::TABLE, ['cache_id' => $entity->cacheId]);
 
         $entity->cacheId = null;
 
@@ -195,10 +224,11 @@ class CachesRepository
     /**
      * @param string $wp
      *
-     * @return mixed
+     * @return int
+     * @throws RecordNotFoundException
      */
     public function getIdByWP(string $wp = '')
-    {
+    : int {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -214,7 +244,7 @@ class CachesRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-            //            throw new RecordNotFoundException('Record with given where clause not found');
+            throw new RecordNotFoundException('Record with given where clause not found');
         } else {
             return $result['cache_id'];
         }
@@ -225,8 +255,8 @@ class CachesRepository
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(GeoCachesEntity $entity) : array
-    {
+    public function getDatabaseArrayFromEntity(GeoCachesEntity $entity)
+    : array {
         return [
             'cache_id' => $entity->cacheId,
             'uuid' => $entity->uuid,
@@ -299,9 +329,10 @@ class CachesRepository
         $entity->country = (string) $data['country'];
         $entity->dateHidden = new DateTime($data['date_hidden']);
         $entity->size = (int) $data['size'];
-        $entity->difficulty = (int) $data['difficulty'];
-        $entity->terrain = (int) $data['terrain'];
-        $entity->logpw = (string) $data['logpw'];
+        $entity->difficulty = (float) $data['difficulty'] / 2;
+        $entity->terrain = (float) $data['terrain'] / 2;
+        //        $entity->logpw = (string) $data['logpw'];
+        $entity->logpw = ($data['logpw'] == '') ? '' : '1';
         $entity->searchTime = $data['search_time'];
         $entity->wayLength = $data['way_length'];
         $entity->wpGc = (string) $data['wp_gc'];
@@ -317,10 +348,10 @@ class CachesRepository
         $entity->needsMaintenance = (int) $data['needs_maintenance'];
         $entity->listingOutdated = (int) $data['listing_outdated'];
         $entity->flagsLastModified = new DateTime($data['flags_last_modified']);
-//        $entity->cacheSize = ??;
-//        $entity->cacheStatus = ??;
-//        $entity->cacheType = ??;
-//        $entity->user = ??;
+        $entity->cacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $entity->size]);
+        $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
+        $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);
+        $entity->user = $this->userRepository->fetchOneById($entity->userId);
 
         return $entity;
     }

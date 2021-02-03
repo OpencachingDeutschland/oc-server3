@@ -24,12 +24,15 @@
                             <th scope="col">mit Logpasswort?</th>
                             <th scope="col">veröffentlicht</th>
                             <th scope="col">Versteckdatum</th>
+                            <th scope="col">Land</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for cache in cache_by_id %}
                             <tr>
-                                <th scope="row"><img src="https://www.opencaching.de/resource2/ocstyle/images/cacheicon/{{ cache.cache_type.iconLarge }}" alt="Cachetyp"/></th>
+                                <th scope="row"><img
+                                            src="https://www.opencaching.de/resource2/ocstyle/images/cacheicon/{{ cache.cache_type.iconLarge }}"
+                                            alt="Cachetyp"/></th>
                                 <td>{{ cache.wp_oc }}</td>
                                 <td>{{ cache.name }}</td>
                                 <td>{{ cache.cache_size.name }}</td>
@@ -49,6 +52,7 @@
                                         <i class="fas fa-times"></i>
                                     {% endif %}</td>
                                 <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
+                                <td>{{ cache.country|default('?') }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

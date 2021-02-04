@@ -22,7 +22,8 @@ class CacheStatusRepository
     }
 
     /**
-     * @return GeoCacheStatusEntity[]
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchAll()
     {
@@ -47,7 +48,10 @@ class CacheStatusRepository
     }
 
     /**
+     * @param array $where
+     *
      * @return GeoCacheStatusEntity
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
     {
@@ -74,7 +78,10 @@ class CacheStatusRepository
     }
 
     /**
-     * @return GeoCacheStatusEntity[]
+     * @param array $where
+     *
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
     {
@@ -106,7 +113,11 @@ class CacheStatusRepository
     }
 
     /**
+     * @param GeoCacheStatusEntity $entity
+     *
      * @return GeoCacheStatusEntity
+     * @throws RecordAlreadyExistsException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function create(GeoCacheStatusEntity $entity)
     {
@@ -121,13 +132,17 @@ class CacheStatusRepository
             $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
+     * @param GeoCacheStatusEntity $entity
+     *
      * @return GeoCacheStatusEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function update(GeoCacheStatusEntity $entity)
     {
@@ -147,7 +162,12 @@ class CacheStatusRepository
     }
 
     /**
+     * @param GeoCacheStatusEntity $entity
+     *
      * @return GeoCacheStatusEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function remove(GeoCacheStatusEntity $entity)
     {
@@ -160,13 +180,15 @@ class CacheStatusRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->id = null;
 
         return $entity;
     }
 
     /**
-     * @return []
+     * @param GeoCacheStatusEntity $entity
+     *
+     * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheStatusEntity $entity)
     {
@@ -183,19 +205,21 @@ class CacheStatusRepository
     }
 
     /**
+     * @param array $data
+     *
      * @return GeoCacheStatusEntity
      */
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheStatusEntity();
-        $entity->id = (int) $data['id'];
-        $entity->name = (string) $data['name'];
-        $entity->transId = (int) $data['trans_id'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
-        $entity->allowUserView = (int) $data['allow_user_view'];
-        $entity->allowOwnerEditStatus = (int) $data['allow_owner_edit_status'];
-        $entity->allowUserLog = (int) $data['allow_user_log'];
+        $entity->id = (int)$data['id'];
+        $entity->name = (string)$data['name'];
+        $entity->transId = (int)$data['trans_id'];
+        $entity->de = (string)$data['de'];
+        $entity->en = (string)$data['en'];
+        $entity->allowUserView = (int)$data['allow_user_view'];
+        $entity->allowOwnerEditStatus = (int)$data['allow_owner_edit_status'];
+        $entity->allowUserLog = (int)$data['allow_user_log'];
 
         return $entity;
     }

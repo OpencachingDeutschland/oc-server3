@@ -22,7 +22,8 @@ class CacheSizeRepository
     }
 
     /**
-     * @return GeoCacheSizeEntity[]
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchAll()
     {
@@ -47,7 +48,10 @@ class CacheSizeRepository
     }
 
     /**
+     * @param array $where
+     *
      * @return GeoCacheSizeEntity
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
     {
@@ -74,7 +78,10 @@ class CacheSizeRepository
     }
 
     /**
-     * @return GeoCacheSizeEntity[]
+     * @param array $where
+     *
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
     {
@@ -106,7 +113,11 @@ class CacheSizeRepository
     }
 
     /**
+     * @param GeoCacheSizeEntity $entity
+     *
      * @return GeoCacheSizeEntity
+     * @throws RecordAlreadyExistsException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function create(GeoCacheSizeEntity $entity)
     {
@@ -121,13 +132,17 @@ class CacheSizeRepository
             $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
+     * @param GeoCacheSizeEntity $entity
+     *
      * @return GeoCacheSizeEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function update(GeoCacheSizeEntity $entity)
     {
@@ -147,7 +162,12 @@ class CacheSizeRepository
     }
 
     /**
+     * @param GeoCacheSizeEntity $entity
+     *
      * @return GeoCacheSizeEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function remove(GeoCacheSizeEntity $entity)
     {
@@ -160,13 +180,15 @@ class CacheSizeRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->id = null;
 
         return $entity;
     }
 
     /**
-     * @return []
+     * @param GeoCacheSizeEntity $entity
+     *
+     * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheSizeEntity $entity)
     {
@@ -181,17 +203,19 @@ class CacheSizeRepository
     }
 
     /**
+     * @param array $data
+     *
      * @return GeoCacheSizeEntity
      */
     public function getEntityFromDatabaseArray(array $data)
     {
         $entity = new GeoCacheSizeEntity();
-        $entity->id = (int) $data['id'];
-        $entity->name = (string) $data['name'];
-        $entity->transId = (int) $data['trans_id'];
-        $entity->ordinal = (int) $data['ordinal'];
-        $entity->de = (string) $data['de'];
-        $entity->en = (string) $data['en'];
+        $entity->id = (int)$data['id'];
+        $entity->name = (string)$data['name'];
+        $entity->transId = (int)$data['trans_id'];
+        $entity->ordinal = (int)$data['ordinal'];
+        $entity->de = (string)$data['de'];
+        $entity->en = (string)$data['en'];
 
         return $entity;
     }

@@ -177,7 +177,7 @@ class CachesRepository
             $databaseArray
         );
 
-        $entity->cacheId = (int) $this->connection->lastInsertId();
+        $entity->cacheId = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
@@ -311,42 +311,42 @@ class CachesRepository
     : GeoCachesEntity {
         $entity = new GeoCachesEntity();
 
-        $entity->cacheId = (int) $data['cache_id'];
-        $entity->uuid = (string) $data['uuid'];
-        $entity->node = (int) $data['node'];
+        $entity->cacheId = (int)$data['cache_id'];
+        $entity->uuid = (string)$data['uuid'];
+        $entity->node = (int)$data['node'];
         $entity->dateCreated = new DateTime($data['date_created']);
-        $entity->isPublishdate = (int) $data['is_publishdate'];
+        $entity->isPublishdate = (int)$data['is_publishdate'];
         $entity->lastModified = new DateTime($data['last_modified']);
-        $entity->okapiSyncbase = (string) $data['okapi_syncbase'];
+        $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
         $entity->listingLastModified = new DateTime($data['listing_last_modified']);
         $entity->metaLastModified = new DateTime($data['meta_last_modified']);
-        $entity->userId = (int) $data['user_id'];
-        $entity->name = (string) $data['name'];
+        $entity->userId = (int)$data['user_id'];
+        $entity->name = (string)$data['name'];
         $entity->longitude = $data['longitude'];
         $entity->latitude = $data['latitude'];
-        $entity->type = (int) $data['type'];
-        $entity->status = (int) $data['status'];
-        $entity->country = (string) $data['country'];
+        $entity->type = (int)$data['type'];
+        $entity->status = (int)$data['status'];
+        $entity->country = (string)$data['country'];
         $entity->dateHidden = new DateTime($data['date_hidden']);
-        $entity->size = (int) $data['size'];
-        $entity->difficulty = (float) $data['difficulty'] / 2;
-        $entity->terrain = (float) $data['terrain'] / 2;
+        $entity->size = (int)$data['size'];
+        $entity->difficulty = (float)$data['difficulty'] / 2;
+        $entity->terrain = (float)$data['terrain'] / 2;
         //        $entity->logpw = (string) $data['logpw'];
         $entity->logpw = ($data['logpw'] == '') ? '' : '1';
         $entity->searchTime = $data['search_time'];
         $entity->wayLength = $data['way_length'];
-        $entity->wpGc = (string) $data['wp_gc'];
-        $entity->wpGcMaintained = (string) $data['wp_gc_maintained'];
-        $entity->wpNc = (string) $data['wp_nc'];
-        $entity->wpOc = (string) $data['wp_oc'];
-        $entity->descLanguages = (string) $data['desc_languages'];
-        $entity->defaultDesclang = (string) $data['default_desclang'];
+        $entity->wpGc = (string)$data['wp_gc'];
+        $entity->wpGcMaintained = (string)$data['wp_gc_maintained'];
+        $entity->wpNc = (string)$data['wp_nc'];
+        $entity->wpOc = (string)$data['wp_oc'];
+        $entity->descLanguages = (string)$data['desc_languages'];
+        $entity->defaultDesclang = (string)$data['default_desclang'];
         $entity->dateActivate = new DateTime($data['date_activate']);
-        $entity->needNpaRecalc = (int) $data['need_npa_recalc'];
-        $entity->showCachelists = (int) $data['show_cachelists'];
-        $entity->protectOldCoords = (int) $data['protect_old_coords'];
-        $entity->needsMaintenance = (int) $data['needs_maintenance'];
-        $entity->listingOutdated = (int) $data['listing_outdated'];
+        $entity->needNpaRecalc = (int)$data['need_npa_recalc'];
+        $entity->showCachelists = (int)$data['show_cachelists'];
+        $entity->protectOldCoords = (int)$data['protect_old_coords'];
+        $entity->needsMaintenance = (int)$data['needs_maintenance'];
+        $entity->listingOutdated = (int)$data['listing_outdated'];
         $entity->flagsLastModified = new DateTime($data['flags_last_modified']);
         $entity->cacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $entity->size]);
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);

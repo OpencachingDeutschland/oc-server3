@@ -134,7 +134,7 @@ class CachesController extends AbstractController
      */
     public function getCacheDetails(string $wpID = '', int $id = 0)
     : array {
-        $fetchedCache = [];
+        $fetchedCache = array();
 
         if (!empty($wpID)) {
             $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wpID]);

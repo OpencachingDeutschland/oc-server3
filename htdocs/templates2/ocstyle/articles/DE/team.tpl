@@ -29,121 +29,99 @@
             </th>
         </tr>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}clanfamily.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}clanfamily.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=244244">ClanFamily</a><br/>
-                1. Vorsitzender & Softwareentwicklung
+                1. Vorsitzender<br>
+                & Softwareentwicklung
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}teiling88.png"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}teiling88.png"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=325701">teiling88</a><br/>
-                2. Vorsitzender & Entwicklungsleiter
+                2. Vorsitzender<br>
+                & Entwicklungsleiter
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}schatzforscher.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}schatzforscher.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=174258">Schatzforscher</a><br/>
-                Kassenwart & unterstützt auch im Support
+                Kassenwart<br>
+                & Support
             </td>
         </tr>
+    </table>
+
+    <table class="table teamlist">
         <tr>
-            <th colspan="3"><br/><span class="content-title-noshade-size1">weitere Vorstandsmitglieder</span>
+            <th colspan="4"><br/><span class="content-title-noshade-size1">Erweiterter Vorstand</span>
             </th>
         </tr>
         <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}dummy.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=137473">bohrsty</a><br/>
-                Leiter Technik/Systemadministration
+                Leiter Technik<br>
+                Systemadministration
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}dogesu.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}dogesu.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=167651">dogesu</a><br/>
-                Leitung Support-Team, Datenpflege
+                Leitung Support-Team<br>
+                Datenpflege
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}mic@.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}mic@.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=103599">mic@</a><br/>
-                Community-Manager, Support-Team, Forenmoderation
+                Community-Manager<br>
+                Support-Team<br>
+                Forenmoderation
+            </td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}slini11.png"/><br>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
+                Pressesprecher,<br>
+                Öffentlichkeitsarbeit<br>
+                & Softwareentwicklung
             </td>
         </tr>
+    </table>
+    <table class="table teamlist">
         <tr>
-            <td><img src="{$opt.page.teampic_url}slini11.png"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a><br/>
-                Presseschef, Öffentlichkeitsarbeit & Softwareentwicklung
-            </td>
+            <th colspan="4"><br/><span class="content-title-noshade-size1">Weitere Teammitglieder</span></th>
         </tr>
 
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <th colspan="3"><br/><span class="content-title-noshade-size1">Weitere Teammitglieder</span></th>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}crease29.png"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=353113">Crease29</a><br/>
-                Softwareentwicklung
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}flopp.png"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=126329">Flopp</a><br/>
-                Cachekarten, Systemüberwachung
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}friedrichfroebel.png"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}friedrichfroebel.png"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=234947">FriedrichFröbel</a><br/>
-                Wiki, Forenmoderation
+                Wiki Pflege,<br>
+                Forenmoderation
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}hanekju.png"/></td>
-            <td>
+            <td style="text-align: center;" colspan="2">
+                <img src="{$opt.page.teampic_url}hanekju.png"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=205779">Hanekju</a><br/>
-                Datenpflege, Support
+                Datenpflege,<br>
+                Support
             </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}dummy.jpg"/></td>
-            <td>
-                <a href="{$opt.page.teammember_url}viewprofile.php?userid=194653">mirsch</a><br/>
-                Softwareentwicklung
-            </td>
-        </tr>
-        <tr>
-            <td><img src="{$opt.page.teampic_url}nlubisch.jpg"/></td>
-            <td>
+            <td style="text-align: center;">
+                <img src="{$opt.page.teampic_url}nlubisch.jpg"/><br>
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=339864">nlubisch</a><br/>
                 Softwareentwicklung
             </td>
         </tr>
+
         <tr>
-            <td>&nbsp;</td>
+            <td style="text-align: center;" colspan="2">
+                <img src="{$opt.page.teampic_url}dummy.jpg"/><br>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=307616">fraggle</a><br/>
+                Softwareentwicklung
+            </td>
+            <td style="text-align: center;" colspan="2">
+                <img src="{$opt.page.teampic_url}dummy.jpg"/><br>
+                <a href="{$opt.page.teammember_url}viewprofile.php?userid=327315">Der Windling</a><br/>
+                Blog Team,<br>
+                Öffentlichkeitsarbeit
+            </td>
+
         </tr>
     </table>
 

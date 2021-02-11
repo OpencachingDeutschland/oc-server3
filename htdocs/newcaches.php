@@ -80,10 +80,11 @@ if (!$tpl->is_cached()) {
         $newCachesQuery->setParameter('country', $country);
     }
 
-    if ($cacheType && !$bEvents) {
+    if ($cacheType) {
         $newCachesQuery->andWhere('`caches`.`type` = :cacheType');
         $newCachesQuery->setParameter(':cacheType', $cacheType);
-    } elseif ($bEvents) {
+    }
+    if ($bEvents) {
         $newCachesQuery->andWhere('`date_hidden` >= curdate()');
     }
 
@@ -101,10 +102,11 @@ if (!$tpl->is_cached()) {
         ->setParameter(':statusId', 1);
 
     if ($country === '') {
-        if ($cacheType && !$bEvents) {
+        if ($cacheType) {
             $countQuery->andWhere('`caches`.`type` = :cacheType');
             $countQuery->setParameter(':cacheType', $cacheType);
-        } elseif ($bEvents) {
+        }
+        if ($bEvents) {
             $countQuery->andWhere('`date_hidden` >= curdate()');
         }
 

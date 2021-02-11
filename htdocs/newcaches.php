@@ -93,7 +93,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('newCaches', $newCaches);
 
     $startAt = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
-    $cacheype_par = ($cacheType ? " & cachetype = $cacheType" : '');
+    $cacheype_par = ($cacheType ? "&cachetype=$cacheType" : '');
 
     $countQuery = $connection->createQueryBuilder()
         ->select('COUNT(*)')

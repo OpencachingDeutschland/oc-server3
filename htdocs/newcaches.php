@@ -121,7 +121,7 @@ if (!$tpl->is_cached()) {
 
         $pager = new pager('newcaches.php?country=' . $country . '&startat={offset}' . $cacheype_par);
     }
-    $pager->make_from_offset($startAt, $count, 100);
+    $pager->make_from_offset($startAt, $count, $perpage);
 
     $tpl->assign('defaultcountry', $opt['template']['default']['country']);
     $tpl->assign('countryCode', $country);

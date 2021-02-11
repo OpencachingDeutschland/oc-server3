@@ -80,10 +80,11 @@ if (!$tpl->is_cached()) {
         $newCachesQuery->setParameter('country', $country);
     }
 
-    if ($cacheType && !$bEvents) {
+    if ($cacheType) {
         $newCachesQuery->andWhere('`caches`.`type` = :cacheType');
         $newCachesQuery->setParameter(':cacheType', $cacheType);
-    } elseif ($bEvents) {
+    }
+    if ($bEvents) {
         $newCachesQuery->andWhere('`date_hidden` >= curdate()');
     }
 
@@ -92,7 +93,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('newCaches', $newCaches);
 
     $startAt = isset($_REQUEST['startat']) ? $_REQUEST['startat'] + 0 : 0;
-    $cacheype_par = ($cacheType ? " & cachetype = $cacheType" : '');
+    $cacheype_par = ($cacheType ? "&cachetype=$cacheType" : '');
 
     $countQuery = $connection->createQueryBuilder()
         ->select('COUNT(*)')
@@ -101,10 +102,11 @@ if (!$tpl->is_cached()) {
         ->setParameter(':statusId', 1);
 
     if ($country === '') {
-        if ($cacheType && !$bEvents) {
+        if ($cacheType) {
             $countQuery->andWhere('`caches`.`type` = :cacheType');
             $countQuery->setParameter(':cacheType', $cacheType);
-        } elseif ($bEvents) {
+        }
+        if ($bEvents) {
             $countQuery->andWhere('`date_hidden` >= curdate()');
         }
 
@@ -119,7 +121,7 @@ if (!$tpl->is_cached()) {
 
         $pager = new pager('newcaches.php?country=' . $country . '&startat={offset}' . $cacheype_par);
     }
-    $pager->make_from_offset($startAt, $count, 100);
+    $pager->make_from_offset($startAt, $count, $perpage);
 
     $tpl->assign('defaultcountry', $opt['template']['default']['country']);
     $tpl->assign('countryCode', $country);

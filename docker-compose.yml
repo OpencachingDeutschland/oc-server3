@@ -10,7 +10,7 @@ services:
             - opencaching
 
     mariadb:
-        image: mariadb:10.1
+        build: ./docker/mariadb
         container_name: opencaching-mariadb
         working_dir: /application
         volumes:

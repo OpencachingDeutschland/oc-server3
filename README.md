@@ -65,8 +65,8 @@ Starting the docker development environment
 3. Open your browser and visit the following URL: [http://docker.team-opencaching.de](http://docker.team-opencaching.de)
 
 NOTE: New Version of Opencaching will be called "OC4". We decide to setup a new temporary
-URL: [http://try.docker.opencaching.de](http://try.docker.opencaching.de) and we generate a new administration section
-at [http://try.docker.opencaching.de/backend](http://try.docker.opencaching.de/backend). Use root:developer to login.
+URL: [http://try.docker.team-opencaching.de](http://try.docker.team-opencaching.de) and we generate a new administration section
+at [http://try.docker.team-opencaching.de/backend](http://try.docker.team-opencaching.de/backend). Use root:developer to login.
 
 Contributions
 -------------

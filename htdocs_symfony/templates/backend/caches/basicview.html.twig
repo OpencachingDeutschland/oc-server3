@@ -1,0 +1,56 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    <div>
+        <h3>Cachedatenbank abrufen..</h3>
+        {% if cachesForm is defined %}
+            {{ form_start(cachesForm) }}
+            {{ form_widget(cachesForm) }}
+            {{ form_end(cachesForm) }}
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div>
+        {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
+            <br/>
+            <div> Gefunden: {{ caches_by_searchfield|length }} Cache(s)</div>
+            <br/>
+            {% if caches_by_searchfield %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">Cache-ID</th>
+                        <th scope="col" class="asc">Name</th>
+                        <th scope="col" class="asc">Owner</th>
+                        <th scope="col">Infos</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cache in caches_by_searchfield %}
+                        <tr>
+                            <td>{{ cache.wp_oc }}</td>
+                            <td>{{ cache.name }}</td>
+                            <td>{{ cache.username }}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <a class="btn btn-primary" href="/backend/cache/{{ cache.wp_oc }}">Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

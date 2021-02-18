@@ -5,6 +5,11 @@ namespace Oc\Entity;
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * Class UserEntity
+ *
+ * @package Oc\Entity
+ */
 class UserEntity extends AbstractEntity implements UserInterface
 {
     /**

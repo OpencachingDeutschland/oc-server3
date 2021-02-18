@@ -58,7 +58,7 @@ class CachesController extends AbstractController
             $inputData = $form->getData();
 
             // send request to DB
-            $fetchedCaches = $this->getCachesForSearchField($inputData["content_caches_searchfield"]);
+            $fetchedCaches = $this->getCachesForSearchField($inputData['content_caches_searchfield']);
         }
 
         if ($fetchedCaches === '') {
@@ -88,7 +88,7 @@ class CachesController extends AbstractController
         $fetchedCaches = [];
 
         try {
-            $fetchedCaches = $this->getCacheDetails($wpID);
+            $fetchedCaches = $this->getCacheDetailsByWayPoint($wpID);
         } catch (\Exception $e) {
             //  tue was.. (status_not_found = true);
         }
@@ -126,21 +126,25 @@ class CachesController extends AbstractController
     }
 
     /**
-     * @param string $wpID
      * @param int $id
      *
      * @return array
      * @throws RecordNotFoundException
      */
-    public function getCacheDetails(string $wpID = '', int $id = 0)
-    : array {
-        $fetchedCache = array();
+    public function getCacheDetailsById(int $id) : array {
+        $fetchedCache = $this->cachesRepository->fetchOneBy(['cache_id' => $id]);
 
-        if (!empty($wpID)) {
-            $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wpID]);
-        } elseif ($id != 0) {
-            $fetchedCache = $this->cachesRepository->fetchOneBy(['cache_id' => $id]);
-        }
+        return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];
+    }
+
+    /**
+     * @param string $wayPoint
+     *
+     * @return array
+     * @throws RecordNotFoundException
+     */
+    public function getCacheDetailsByWayPoint(string $wayPoint) : array {
+        $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wayPoint]);
 
         return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];
     }

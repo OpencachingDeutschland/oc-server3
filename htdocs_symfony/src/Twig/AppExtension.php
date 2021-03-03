@@ -23,6 +23,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('ocFilterD', [$this, 'oc_Filter_D']),
             new TwigFilter('ocFilterT', [$this, 'oc_Filter_T']),
             new TwigFilter('rot13', [$this, 'oc_Filter_rot13']),
+            new TwigFilter('rot13gc', [$this, 'oc_Filter_rot13_gc']),
         ];
     }
 

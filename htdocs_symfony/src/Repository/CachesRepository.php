@@ -329,8 +329,8 @@ class CachesRepository
         $entity->country = (string)$data['country'];
         $entity->dateHidden = new DateTime($data['date_hidden']);
         $entity->size = (int)$data['size'];
-        $entity->difficulty = (float)$data['difficulty'] / 2;
-        $entity->terrain = (float)$data['terrain'] / 2;
+        $entity->difficulty = (int)$data['difficulty'];
+        $entity->terrain = (int)$data['terrain'];
         //        $entity->logpw = (string) $data['logpw'];
         $entity->logpw = ($data['logpw'] == '') ? '' : '1';
         $entity->searchTime = $data['search_time'];

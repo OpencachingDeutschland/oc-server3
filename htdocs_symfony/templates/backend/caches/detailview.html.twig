@@ -36,7 +36,7 @@
                                 <td>{{ cache.wp_oc }}</td>
                                 <td>{{ cache.name }}</td>
                                 <td>{{ cache.cache_size.name }}</td>
-                                <td>D{{ cache.difficulty }}/T{{ cache.terrain }}</td>
+                                <td>{{ cache.difficulty | ocFilterD }}/{{ cache.terrain | ocFilterT }}</td>
                                 <td>{{ cache.user.username }}</td>
                                 <td>N{{ cache.latitude }} E{{ cache.longitude }}</td>
                                 <td>{{ cache.wp_gc }}</td>

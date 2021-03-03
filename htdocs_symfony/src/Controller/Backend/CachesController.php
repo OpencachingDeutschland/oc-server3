@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
-use Form\CachesFormType;
+use Oc\Form\CachesFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

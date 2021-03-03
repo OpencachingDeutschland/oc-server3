@@ -20,10 +20,10 @@ class AppExtension extends AbstractExtension
     : array
     {
         return [
-            new TwigFilter('ocFilterD', [$this, 'oc_Filter_D']),
-            new TwigFilter('ocFilterT', [$this, 'oc_Filter_T']),
-            new TwigFilter('rot13', [$this, 'oc_Filter_rot13']),
-            new TwigFilter('rot13gc', [$this, 'oc_Filter_rot13_gc']),
+            new TwigFilter('ocFilterDifficulty', [$this, 'ocFilterDifficulty']),
+            new TwigFilter('ocFilterTerrain', [$this, 'ocFilterTerrain']),
+            new TwigFilter('rot13', [$this, 'ocFilterROT13']),
+            new TwigFilter('rot13gc', [$this, 'ocFilterROT13gc']),
         ];
     }
 
@@ -38,21 +38,29 @@ class AppExtension extends AbstractExtension
     }
 
     /**
+     * @param $number
+     *
+     * @return string
+     */
+    private function convertDifficultyTerrainRating($number)
+    : string {
+        if ($number % 2 === 0) {
+            return number_format($number / 2, 0);
+        } else {
+            return number_format($number / 2, 1);
+        }
+    }
+
+    /**
      * calculate and format difficulty value
      *
      * @param $number
      *
      * @return string
      */
-    public function oc_Filter_D($number)
+    public function ocFilterDifficulty($number)
     : string {
-        if ($number % 2 === 0) {
-            $value = 'D' . number_format($number / 2, 0);
-        } else {
-            $value = 'D' . number_format($number / 2, 1);
-        }
-
-        return $value;
+        return 'D' . $this->convertDifficultyTerrainRating($number);
     }
 
     /**
@@ -62,15 +70,9 @@ class AppExtension extends AbstractExtension
      *
      * @return string
      */
-    public function oc_Filter_T($number)
+    public function ocFilterTerrain($number)
     : string {
-        if ($number % 2 === 0) {
-            $value = 'T' . number_format($number / 2, 0);
-        } else {
-            $value = 'T' . number_format($number / 2, 1);
-        }
-
-        return $value;
+        return 'T' . $this->convertDifficultyTerrainRating($number);
     }
 
     /**
@@ -80,7 +82,7 @@ class AppExtension extends AbstractExtension
      *
      * @return string
      */
-    public function oc_Filter_rot13($string)
+    public function ocFilterROT13($string)
     : string {
         return str_rot13($string);
     }
@@ -92,7 +94,7 @@ class AppExtension extends AbstractExtension
      *
      * @return string
      */
-    public function oc_Filter_rot13_gc($string)
+    public function ocFilterROT13gc($string)
     : string {
         return str_rot13_gc($string);
     }

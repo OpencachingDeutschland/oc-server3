@@ -2,6 +2,7 @@
 
 namespace Oc\Twig;
 
+use Oc\Repository\Coordinate;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -33,8 +34,24 @@ class AppExtension extends AbstractExtension
     public function getFunctions()
     : array
     {
-        return [];
-        //        return [new TwigFunction('area', [$this, 'calculateArea']),];
+        return [
+            new TwigFunction('ocFilterCoordinatesDecMin', [$this, 'ocFilterCoordinatesDecMin']),
+        ];
+    }
+
+    /**
+     * @param $lat
+     * @param $lon
+     *
+     * @return string
+     */
+    public function ocFilterCoordinatesDecMin($lat, $lon)
+    : string {
+        $coord = new Coordinate($lat, $lon);
+
+        $result = $coord->getDecimalMinutes();
+
+        return $result['lat'] . ' ' . $result['lon'];
     }
 
     /**

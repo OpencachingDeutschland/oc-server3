@@ -39,7 +39,7 @@
                                 <td>{{ cache.difficulty | ocFilterDifficulty }}/{{ cache.terrain | ocFilterTerrain }}</td>
                                 <td>{{ cache.user.username }}</td>
                                 <td>
-                                    <a href="/backend/coordinate/{{ cache.latitude }}+{{ cache.longitude }}">{{ ocFilterCoordinatesDecMin(cache.latitude, cache.longitude) }}</a>
+                                    <a href="/backend/coordinate/{{ cache.latitude }}+{{ cache.longitude }}">{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
                                 <td>{{ cache.wp_gc }}</td>
                                 <td>{{ cache.cache_status.name }}</td>
                                 <td>{% if cache.logpw == 1 %}

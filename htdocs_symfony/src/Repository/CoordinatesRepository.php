@@ -7,17 +7,17 @@ namespace Oc\Repository;
  *
  * @package Oc\Repository
  */
-class Coordinate
+class CoordinatesRepository
 {
     /**
      * @var float
      */
-    public $nLat = 0;
+    private $nLat = 0;
 
     /**
      * @var float
      */
-    public $nLon = 0;
+    private $nLon = 0;
 
     /**
      * Coordinate constructor.
@@ -25,7 +25,7 @@ class Coordinate
      * @param $nNewLat
      * @param $nNewLon
      */
-    public function __construct(float $nNewLat, float $nNewLon)
+    public function __construct(float $nNewLat = 0, float $nNewLon = 0)
     {
         $this->nLat = $nNewLat;
         $this->nLon = $nNewLon;
@@ -33,6 +33,16 @@ class Coordinate
 
     /* get-Functions return array([lat] => string, [lon] => string)
      */
+
+    /**
+     * @param float $nNewLat
+     * @param float $nNewLon
+     */
+    public function setLatLon(float $nNewLat, float $nNewLon)
+    {
+        $this->nLat = $nNewLat;
+        $this->nLon = $nNewLon;
+    }
 
     /**
      * float
@@ -81,7 +91,7 @@ class Coordinate
      *
      * @return string[]
      */
-    public function getDecimalMinutes($hideMinutFractions = false)
+    public function getDegreeMinutes($hideMinutFractions = false)
     : array {
         $minute_format = ($hideMinutFractions ? '%02.0f.***' : '%06.3f');
 
@@ -124,7 +134,7 @@ class Coordinate
      *
      * @return string[]
      */
-    public function getDecimalMinutesSeconds()
+    public function getDegreeMinutesSeconds()
     : array
     {
         $nLat = $this->nLat;
@@ -662,6 +672,7 @@ class Coordinate
      *
      * @return false|float|int|mixed
      */
+    // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
     public static function parseRequestLat($name)
     {
         if (!isset($_REQUEST[$name . 'NS']) || !isset($_REQUEST[$name . 'Lat']) || !isset($_REQUEST[$name . 'LatMin'])) {
@@ -685,6 +696,7 @@ class Coordinate
      *
      * @return false|float|int|mixed
      */
+    // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
     public static function parseRequestLon($name)
     {
         if (!isset($_REQUEST[$name . 'EW']) || !isset($_REQUEST[$name . 'Lon']) || !isset($_REQUEST[$name . 'LonMin'])) {
@@ -734,5 +746,25 @@ class Coordinate
         }
 
         return $json['words'];
+    }
+
+    public function getAllCoordinatesFormatsAsArray(float $newLat = null, float $newLon = null)
+    : array
+    {
+        if (($newLat != null) && ($newLon != null))
+            $this->setLatLon($newLat, $newLon);
+
+        return [
+            'coord_Decimal' => $this->getDecimal(),
+            'coord_DM' => $this->getDegreeMinutes(),
+            'coord_DMS' => $this->getDegreeMinutesSeconds(),
+            'coord_GK' => $this->getGK(),
+            'coord_QTH' => $this->getQTH(),
+            'coord_RD' => $this->getRD(),
+            'coord_CH1903' => $this->getSwissGrid(),
+            'coord_UTM' => $this->getUTM(),
+            'coord_W3Wde' => $this->getW3W('de'),
+            'coord_W3Wen' => $this->getW3W(),
+        ];
     }
 }

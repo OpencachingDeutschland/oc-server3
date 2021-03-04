@@ -2,20 +2,81 @@
 
 {% block page_content %}
 
-    <div xmlns="http://www.w3.org/1999/html">
-        <h3>Eingabe der Koordinaten im Dezimalformat..</h3>
-        {% if cachesForm is defined %}
-            {{ form_start(cachesForm) }}
-            {{ form_widget(cachesForm) }}
-            {{ form_end(cachesForm) }}
-        {% endif %}
+    {% if coordinatesForm is defined %}
+        <div>
+            <h3>Eingabe der Koordinaten im Dezimalformat..</h3>
 
-    </div>
+            {{ form_start(coordinatesForm) }}
+            {{ form_widget(coordinatesForm) }}
+            {{ form_end(coordinatesForm) }}
 
-    <hr>
+            <hr>
+        </div>
+    {% endif %}
 
-    <div>
-        {% if converted_coordinates is defined %}
+    {% if coordinates_by_searchfield is defined %}
+        <div>
+            <h3>Umgewandelte Koordinaten..</h3>
+            <div>
+                {% if coordinates_by_searchfield %}
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td>Dezimalgrad:</td>
+                            <td>{{ coordinates_by_searchfield.coord_Decimal.lat }} {{ coordinates_by_searchfield.coord_Decimal.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>Grad Minuten:</td>
+                            <td>{{ coordinates_by_searchfield.coord_DM.lat }} {{ coordinates_by_searchfield.coord_DM.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>Grad Minuten Sekunden:</td>
+                            <td>{{ coordinates_by_searchfield.coord_DMS.lat }} {{ coordinates_by_searchfield.coord_DMS.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gauß Krüger:</td>
+                            <td>{{ coordinates_by_searchfield.coord_GK }}</td>
+                        </tr>
+                        <tr>
+                            <td>QTH Locator:</td>
+                            <td>{{ coordinates_by_searchfield.coord_QTH }}</td>
+                        </tr>
+                        <tr>
+                            <td>RD (Dutch Grid):</td>
+                            <td>{{ coordinates_by_searchfield.coord_RD }}</td>
+                        </tr>
+                        <tr>
+                            <td>Swiss Grid (CH1903):</td>
+                            <td>{{ coordinates_by_searchfield.coord_CH1903.coord }}</td>
+                        </tr>
+                        <tr>
+                            <td>UTM:</td>
+                            <td>{{ coordinates_by_searchfield.coord_UTM.zone }} {{ coordinates_by_searchfield.coord_UTM.letter }} {{ coordinates_by_searchfield.coord_UTM.north }} {{ coordinates_by_searchfield.coord_UTM.east }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (DE):</td>
+                            <td>{{ coordinates_by_searchfield.coord_W3Wde }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (EN):</td>
+                            <td>{{ coordinates_by_searchfield.coord_W3Wen }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <br/><br/>
+                    <span>Leider konnten keine Koordinaten umgewandelt werden.. :-(</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
+
+    {% endif %}
+
+    {% if converted_coordinates is defined %}
+        <div>
             <h3>Koordinatenformate..</h3>
 
             <div>
@@ -23,16 +84,16 @@
                     <table class="table table-striped table-hover">
                         <tbody>
                         <tr>
-                            <td>Dezimal:</td>
+                            <td>Dezimalgrad:</td>
                             <td>{{ converted_coordinates.decimal }}</td>
                         </tr>
                         <tr>
-                            <td>Dezimal Minuten:</td>
-                            <td>{{ converted_coordinates.decimalMinute }}</td>
+                            <td>Grad Minuten:</td>
+                            <td>{{ converted_coordinates.degreeMinute }}</td>
                         </tr>
                         <tr>
-                            <td>Dezimal Minuten Sekunden:</td>
-                            <td>{{ converted_coordinates.decimalMinuteSecond }}</td>
+                            <td>Grad Minuten Sekunden:</td>
+                            <td>{{ converted_coordinates.degreeMinuteSecond }}</td>
                         </tr>
                         <tr>
                             <td>Gauß Krüger:</td>
@@ -70,19 +131,16 @@
                     <span>Leider konnten keine Koordinaten umgewandelt werden.. :-(</span>
                 {% endif %}
             </div>
-        {% else %}
-            <br/><br/>
-            <span>Irgendwas ist kaputt.. :-(</span>
-        {% endif %}
+        </div>
 
-    </div>
-
-    <hr>
+        <hr>
+    {% endif %}
 
     <div class="alert alert-primary" role="alert">
         <h3><br/>Diese Koordinatenseite kann auch direkt abgerufen werden mittels Breiten- und Längenangabe in der URL (im Dezimalformat):</h3>
         Aufruf:<br/>
         http://try.docker.team-opencaching.de/backend/coordinate/$Latitude+$Longitude<br/>
+        http://try.docker.team-opencaching.de/backend/coordinate/10.98765+5.12345 (für N10° 59.259' E005° 07.407')<br/>
         http://try.docker.team-opencaching.de/backend/coordinate/-10.98765+-5.12345 (für S10° 59.259' W005° 07.407')<br/>
         <br/>
     </div>

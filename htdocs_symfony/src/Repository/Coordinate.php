@@ -39,7 +39,8 @@ class Coordinate
      *
      * @return array
      */
-    public function getFloat() : array
+    public function getFloat()
+    : array
     {
         return [
             'lat' => $this->nLat,
@@ -52,7 +53,8 @@ class Coordinate
      *
      * @return string[]
      */
-    public function getDecimal() : array
+    public function getDecimal()
+    : array
     {
         if ($this->nLat < 0) {
             $sLat = 'S' . sprintf('%08.5f', - $this->nLat) . '°';
@@ -79,8 +81,8 @@ class Coordinate
      *
      * @return string[]
      */
-    public function getDecimalMinutes($hideMinutFractions = false) : array
-    {
+    public function getDecimalMinutes($hideMinutFractions = false)
+    : array {
         $minute_format = ($hideMinutFractions ? '%02.0f.***' : '%06.3f');
 
         // Ocprop: ([N|S].*?)&#039;
@@ -122,7 +124,8 @@ class Coordinate
      *
      * @return string[]
      */
-    public function getDecimalMinutesSeconds() : array
+    public function getDecimalMinutesSeconds()
+    : array
     {
         $nLat = $this->nLat;
         $bLatN = ($nLat < 0) ? false : true;
@@ -161,7 +164,8 @@ class Coordinate
      *
      * @return array|string[]
      */
-    public function getUTM() : array
+    public function getUTM()
+    : array
     {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
@@ -319,7 +323,8 @@ class Coordinate
      *
      * @return string
      */
-    public function getGK() : string
+    public function getGK()
+    : string
     {
         $pdResult = $this->wgs2pot($this->nLat, $this->nLon);
         $result = $this->geo2gk($pdResult[1], $pdResult[0]);
@@ -333,8 +338,8 @@ class Coordinate
      *
      * @return float[]
      */
-    public function wgs2pot($bw, $lw) : array
-    {
+    public function wgs2pot($bw, $lw)
+    : array {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
            copy of this software and associated documentation files (the "Software"),
@@ -530,7 +535,8 @@ class Coordinate
      *
      * @return string
      */
-    public function getRD() : string
+    public function getRD()
+    : string
     {
         // X0,Y0             Base RD coordinates Amersfoort
         $rdx_base = 155000;
@@ -592,7 +598,8 @@ class Coordinate
      *
      * @return string
      */
-    public function getQTH() : string
+    public function getQTH()
+    : string
     {
         $lon = $this->nLon;
         $lat = $this->nLat;
@@ -703,23 +710,20 @@ class Coordinate
      *
      * @return false|mixed
      */
-    public function getW3W($language)
+    public function getW3W($language = 'en')
     {
-        global $opt;
-        $opt['lib']['w3w']['apikey'] = 'X27PDW41';
-
-        if (!$opt['lib']['w3w']['apikey']) {
+        if (!$_ENV['W3W_API']) {
             return false;
         }
 
         $params = [
-            'key' => $opt['lib']['w3w']['apikey'],
-            'coords' => sprintf('%f,%f', $this->nLat, $this->nLon),
-            'lang' => strtolower($language),
+            'key' => $_ENV['W3W_API'],
+            'coordinates' => sprintf('%f,%f', $this->nLat, $this->nLon),
+            'language' => strtolower($language),
         ];
         $params_str = http_build_query($params);
 
-        $result = @file_get_contents('https://api.what3words.com/v2/reverse?' . $params_str);
+        $result = @file_get_contents('https://api.what3words.com/v3/convert-to-3wa?' . $params_str);
         if ($result === false) {
             return false;
         }

@@ -12,12 +12,12 @@ class CoordinatesRepository
     /**
      * @var float
      */
-    private float $nLat;
+    private $nLat;
 
     /**
      * @var float
      */
-    private float $nLon;
+    private $nLon;
 
     /**
      * Coordinate constructor.

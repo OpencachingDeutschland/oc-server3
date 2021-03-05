@@ -12,12 +12,12 @@ class CoordinatesRepository
     /**
      * @var float
      */
-    private $nLat = 0;
+    private float $nLat;
 
     /**
      * @var float
      */
-    private $nLon = 0;
+    private float $nLon;
 
     /**
      * Coordinate constructor.
@@ -25,7 +25,7 @@ class CoordinatesRepository
      * @param $nNewLat
      * @param $nNewLon
      */
-    public function __construct(float $nNewLat = 0, float $nNewLon = 0)
+    public function __construct(float $nNewLat = 0.0, float $nNewLon = 0.0)
     {
         $this->nLat = $nNewLat;
         $this->nLon = $nNewLon;
@@ -343,10 +343,10 @@ class CoordinatesRepository
     }
 
     /**
-     * @param $bw
-     * @param $lw
+     * @param float $bw
+     * @param float $lw
      *
-     * @return float[]
+     * @return float[]|int[]
      */
     public function wgs2pot($bw, $lw)
     : array {
@@ -433,8 +433,8 @@ class CoordinatesRepository
     }
 
     /**
-     * @param $bp
-     * @param $lp
+     * @param float $bp
+     * @param float $lp
      *
      * @return int[]
      */
@@ -548,6 +548,8 @@ class CoordinatesRepository
     public function getRD()
     : string
     {
+        $rpq = array();
+
         // X0,Y0             Base RD coordinates Amersfoort
         $rdx_base = 155000;
         $rdy_base = 463000;
@@ -611,6 +613,7 @@ class CoordinatesRepository
     public function getQTH()
     : string
     {
+        $l = array();
         $lon = $this->nLon;
         $lat = $this->nLat;
 
@@ -749,10 +752,10 @@ class CoordinatesRepository
     }
 
     public function getAllCoordinatesFormatsAsArray(float $newLat = null, float $newLon = null)
-    : array
-    {
-        if (($newLat != null) && ($newLon != null))
+    : array {
+        if (($newLat != null) && ($newLon != null)) {
             $this->setLatLon($newLat, $newLon);
+        }
 
         return [
             'coord_Decimal' => $this->getDecimal(),

@@ -42,7 +42,7 @@ class CachesController extends AbstractController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function cachesController_index(Request $request)
     : Response {
         $fetchedCaches = '';
 

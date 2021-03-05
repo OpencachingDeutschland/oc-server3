@@ -38,7 +38,7 @@ class MenuSubscriber implements EventSubscriberInterface
         ])->setAttribute('class', 'header');
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('cache', [
+            $menu->addChild('cache', [
                 'label' => 'Caches',
                 'route' => 'backend_caches_index',
                 'childOptions' => $event->getChildOptions(),
@@ -46,7 +46,7 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('coordinate', [
+            $menu->addChild('coordinate', [
                 'label' => 'Coordinates',
                 'route' => 'backend_coordinates_index',
                 'childOptions' => $event->getChildOptions(),
@@ -54,7 +54,7 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('user', [
+            $menu->addChild('user', [
                 'label' => 'Users',
                 'route' => 'backend_user_index',
                 'childOptions' => $event->getChildOptions(),
@@ -62,7 +62,7 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('kitchensink', [
+            $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',
                 'route' => 'app_kitchensink_index',
                 'childOptions' => $event->getChildOptions(),

@@ -18,6 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CoordinatesController extends AbstractController
 {
+    /**
+     * @var CoordinatesRepository
+     */
     private $coordinatesRepository;
 
     /**
@@ -36,7 +39,7 @@ class CoordinatesController extends AbstractController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function coordinatesController_index(Request $request)
     : Response {
         $fetchedCoordinates = '';
         $form = $this->createForm(CoordinatesFormType::class);
@@ -66,6 +69,7 @@ class CoordinatesController extends AbstractController
      * @return Response
      * @Route("/coordinate/{lat}+{lon}", name="coordinate_by_lat-lon")
      */
+    // TODO: aktuell nur von Dec in andere Formate. Konvertierung von allen Formaten in alle anderen Formate sollte aber auch irgendwann gehen..
     public function convertCoordinates(string $lat, string $lon)
     : Response {
         $convertedCoordinates = [];
@@ -99,7 +103,6 @@ class CoordinatesController extends AbstractController
      */
     public function getCoordinatesForSearchField(string $searchtext)
     : array {
-        $searchtext = trim($searchtext);
         $searchtext = preg_replace("/[^0-9.,+\- ]/", "", $searchtext);
 
         $arr = preg_split('/\s+/', $searchtext);

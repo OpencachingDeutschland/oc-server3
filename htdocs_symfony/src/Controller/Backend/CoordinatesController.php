@@ -51,15 +51,9 @@ class CoordinatesController extends AbstractController
             $fetchedCoordinates = $this->getCoordinatesForSearchField($inputData['content_coordinates_searchfield']);
         }
 
-        if ($fetchedCoordinates === '') {
-            return $this->render(
-                'backend/coordinates/index.html.twig', ['coordinatesForm' => $form->createView()]
-            );
-        } else {
-            return $this->render(
-                'backend/coordinates/index.html.twig', ['coordinatesForm' => $form->createView(), 'coordinates_by_searchfield' => $fetchedCoordinates]
-            );
-        }
+        return $this->render(
+            'backend/coordinates/index.html.twig', ['coordinatesForm' => $form->createView(), 'coordinates_by_searchfield' => $fetchedCoordinates]
+        );
     }
 
     /**

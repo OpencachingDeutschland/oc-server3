@@ -6,12 +6,12 @@ namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
 use Oc\Form\CachesFormType;
+use Oc\Repository\CachesRepository;
+use Oc\Repository\Exception\RecordNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Oc\Repository\Exception\RecordNotFoundException;
-use Oc\Repository\CachesRepository;
 
 /**
  * Class CachesController
@@ -42,7 +42,7 @@ class CachesController extends AbstractController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function cachesController_index(Request $request)
     : Response {
         $fetchedCaches = '';
 
@@ -61,20 +61,12 @@ class CachesController extends AbstractController
             $fetchedCaches = $this->getCachesForSearchField($inputData['content_caches_searchfield']);
         }
 
-        if ($fetchedCaches === '') {
-            return $this->render(
-                'backend/caches/index.html.twig', [
+        return $this->render(
+            'backend/caches/basicview.html.twig', [
                                                     'cachesForm' => $form->createView(),
+                                                    'caches_by_searchfield' => $fetchedCaches
                                                 ]
-            );
-        } else {
-            return $this->render(
-                'backend/caches/basicview.html.twig', [
-                                                        'cachesForm' => $form->createView(),
-                                                        'caches_by_searchfield' => $fetchedCaches
-                                                    ]
-            );
-        }
+        );
     }
 
     /**
@@ -131,7 +123,8 @@ class CachesController extends AbstractController
      * @return array
      * @throws RecordNotFoundException
      */
-    public function getCacheDetailsById(int $id) : array {
+    public function getCacheDetailsById(int $id)
+    : array {
         $fetchedCache = $this->cachesRepository->fetchOneBy(['cache_id' => $id]);
 
         return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];
@@ -143,7 +136,8 @@ class CachesController extends AbstractController
      * @return array
      * @throws RecordNotFoundException
      */
-    public function getCacheDetailsByWayPoint(string $wayPoint) : array {
+    public function getCacheDetailsByWayPoint(string $wayPoint)
+    : array {
         $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $wayPoint]);
 
         return [$this->cachesRepository->getDatabaseArrayFromEntity($fetchedCache)];

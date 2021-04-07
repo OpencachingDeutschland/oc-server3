@@ -50,6 +50,7 @@ Thumbs.db
 /bin/phpzip.php
 parameters.yml
 .crowdin.yaml
+crowdin.yml
 htdocs/app/Resources/translations/*
 !/htdocs/app/Resources/translations/*.en.yml
 htdocs/translation.zip

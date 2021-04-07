@@ -2,6 +2,7 @@
 
 namespace Oc\Twig;
 
+use Oc\Repository\CoordinatesRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -13,6 +14,18 @@ use Twig\TwigFunction;
  */
 class AppExtension extends AbstractExtension
 {
+    private $coordinatesRepository;
+
+    /**
+     * AppExtension constructor.
+     *
+     * @param CoordinatesRepository $coordinatesRepository
+     */
+    public function __construct(CoordinatesRepository $coordinatesRepository)
+    {
+        $this->coordinatesRepository = $coordinatesRepository;
+    }
+
     /**
      * @return TwigFilter[]
      */
@@ -33,8 +46,10 @@ class AppExtension extends AbstractExtension
     public function getFunctions()
     : array
     {
-        return [];
-        //        return [new TwigFunction('area', [$this, 'calculateArea']),];
+        return [
+            new TwigFunction('ocFilterCoordinatesDegMin', [$this, 'ocFilterCoordinatesDegMin']),
+            new TwigFunction('ocFilterCoordinatesDegMinSec', [$this, 'ocFilterCoordinatesDegMinSec']),
+        ];
     }
 
     /**
@@ -97,5 +112,35 @@ class AppExtension extends AbstractExtension
     public function ocFilterROT13gc($string)
     : string {
         return str_rot13_gc($string);
+    }
+
+    /**
+     * @param $lat
+     * @param $lon
+     *
+     * @return string
+     */
+    public function ocFilterCoordinatesDegMin($lat, $lon)
+    : string {
+        $this->coordinatesRepository->setLatLon($lat, $lon);
+
+        $result = $this->coordinatesRepository->getDegreeMinutes();
+
+        return $result['lat'] . ' ' . $result['lon'];
+    }
+
+    /**
+     * @param $lat
+     * @param $lon
+     *
+     * @return string
+     */
+    public function ocFilterCoordinatesDegMinSec($lat, $lon)
+    : string {
+        $this->coordinatesRepository->setLatLon($lat, $lon);
+
+        $result = $this->coordinatesRepository->getDegreeMinutesSeconds();
+
+        return $result['lat'] . ' ' . $result['lon'];
     }
 }

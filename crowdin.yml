@@ -29,8 +29,8 @@ files: [
   #
   "translation" : "/htdocs_symfony/translations/%original_file_name%.%two_letters_code%.yml",
   "translation_replace": {
-    "messages+intl-icu.en.yml.": "messages+intl-icu."
-    "security.en.yml.": "security."
+    "messages+intl-icu.en.yml.": "messages+intl-icu.",
+    "security.en.yml.": "security.",
     "validators.en.yml.": "validators."
   }
 

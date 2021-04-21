@@ -1,0 +1,47 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <div>
+        {% if reportedCaches_by_id is defined %}
+            <br/>
+            <div> Gefunden: {{ reportedCaches_by_id|length }} Report(s)</div>
+            <br/>
+            {% if reportedCaches_by_id %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">Cache-ID</th>
+                        <th scope="col" class="asc">Name</th>
+                        <th scope="col" class="asc">Owner</th>
+                        <th scope="col">Infos</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reportedCaches_by_id %}
+                        <tr>
+                            <td>{{ report.id }}</td>
+                            <td>{{ report.note }}</td>
+                            <td>{{ report.comment }}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <a class="btn btn-primary" href="/backend/support/{{ report.id }}">Details</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>Keine gemeldeten Caches.. :-)</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

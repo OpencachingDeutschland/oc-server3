@@ -37,7 +37,7 @@
                             <td>{{ cache.username }}</td>
                             <td>&nbsp;</td>
                             <td>
-                                <a class="btn btn-primary" href="/backend/cache/{{ cache.wp_oc }}">Details</a>
+                                <a class="btn btn-primary" href="{{ path('backend_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">Details</a>
                             </td>
                         </tr>
                     {% endfor %}

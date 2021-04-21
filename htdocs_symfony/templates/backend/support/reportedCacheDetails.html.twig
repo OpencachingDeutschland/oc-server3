@@ -1,0 +1,87 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Reported caches' | trans }} </h3>
+
+    <div>
+        {% if reported_cache_by_id is defined %}
+            {% if reported_cache_by_id %}
+                <br/>
+                <p>
+                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} by {{ reported_cache_by_id.user.username }}
+                                                                                                        (
+                    <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1">{{ 'Nearby search at geocaching.com' | trans }}
+                    </a>
+                                                                                                        )
+                </p>
+                <p><b>{{ 'Report created' | trans }}:</b> {{ reported_cache_by_id.dateCreated | date('d.m.Y') }}</p>
+                <p><b>{{ 'Report last modified' | trans }}:</b> {{ reported_cache_by_id.lastmodified | date('d.m.Y') }}</p>
+                <p><b>{{ 'Reason' | trans }}:</b> {{ reported_cache_by_id.reportReason.name | trans }}</p>
+                <p><b>{{ 'State' | trans }}:</b> {{ reported_cache_by_id.reportStatus.name | trans }}
+                    {% if reported_cache_by_id.admin is defined %} <b>by:</b> {{ reported_cache_by_id.admin.username | trans }} {% endif %}</p>
+                <p><b>{{ 'Reporter comment' | trans }}:</b> {{ reported_cache_by_id.note }}</p>
+
+                <hr>
+                <p><b>{{ 'Admin comment' | trans }}:</b> {{ reported_cache_by_id.comment }}</p>
+                <div class="md-form">
+                    <textarea id="admin_Comment_Textarea" class="md-textarea form-control" rows="5">{{ reported_cache_by_id.comment }}</textarea>
+                    <a class="btn btn-primary" href="#">{{ 'Save admin comment to database' | trans }}</a>
+                </div>
+
+                <hr>
+                <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
+                <p><b>{{ 'Action' | trans }}</b></p>
+                <a class="btn btn-primary" href="#">{{ 'Assign to me' | trans }}</a>
+                <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
+                <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
+                <a class="btn btn-primary" href="#">{{ 'Mark as finished' | trans }}</a>
+
+                <hr>
+                <span class="badge badge-danger">Umsetzung muss noch warten, bis Logfunktionen vorhanden sind</span>
+                <p><b>{{ 'Set state' | trans }}</b></p>
+                {% if cache_status is defined %}
+                    <a class="btn btn-secondary" href="#">{{ cache_status[0].name | trans }}</a>
+                    <a class="btn btn-secondary" href="#">{{ cache_status[1].name | trans }}</a>
+                    <a class="btn btn-secondary" href="#">{{ cache_status[2].name | trans }}</a>
+                    <a class="btn btn-secondary" href="#">{{ cache_status[5].name | trans }}</a>
+                    <a class="btn btn-secondary" href="#">{{ cache_status[6].name | trans }}</a>
+                {% endif %}
+
+                <hr>
+                <p><b>{{ 'Status changes' | trans }}</b></p>
+                {% if report_status_modified is defined %}
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="asc">{{ 'Date' | trans }}</th>
+                            <th scope="col" class="asc">{{ 'Status' | trans }}</th>
+                            <th scope="col" class="asc">{{ 'Changed by' | trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for statusChange in report_status_modified %}
+                            <tr>
+                                <td>{{ statusChange.dateModified | date('d.m.Y') }}</td>
+                                <td>{{ statusChange.statusOld.name | trans }} -> {{ statusChange.statusNew.name | trans }}</td>
+                                <td>{{ statusChange.user.username }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                {% endif %}
+
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No reported caches found' | trans }}.. :-)</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

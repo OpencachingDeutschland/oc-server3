@@ -1,0 +1,148 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% if coordinatesForm is defined %}
+        <div>
+            <h3>{{ 'Input coordinates in Decimal degree' | trans }}..</h3>
+
+            {{ form_start(coordinatesForm) }}
+            {{ form_widget(coordinatesForm) }}
+            {{ form_end(coordinatesForm) }}
+
+            <hr>
+        </div>
+    {% endif %}
+
+    {% if coordinates_by_searchfield is defined %}
+        <div>
+            <h3>{{ 'Converted coordinates' | trans }}..</h3>
+            <div>
+                {% if coordinates_by_searchfield %}
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{ 'Decimal degree' | trans }}:</td>
+                            <td>{{ coordinates_by_searchfield.coord_Decimal.lat }} {{ coordinates_by_searchfield.coord_Decimal.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Degrees Minutes' | trans }}:</td>
+                            <td>{{ coordinates_by_searchfield.coord_DM.lat }} {{ coordinates_by_searchfield.coord_DM.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Degrees Minutes Seconds' | trans }}:</td>
+                            <td>{{ coordinates_by_searchfield.coord_DMS.lat }} {{ coordinates_by_searchfield.coord_DMS.lon }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Gauss Kruger' | trans }}:</td>
+                            <td>{{ coordinates_by_searchfield.coord_GK }}</td>
+                        </tr>
+                        <tr>
+                            <td>QTH Locator:</td>
+                            <td>{{ coordinates_by_searchfield.coord_QTH }}</td>
+                        </tr>
+                        <tr>
+                            <td>RD (Dutch Grid):</td>
+                            <td>{{ coordinates_by_searchfield.coord_RD }}</td>
+                        </tr>
+                        <tr>
+                            <td>Swiss Grid (CH1903):</td>
+                            <td>{{ coordinates_by_searchfield.coord_CH1903.coord }}</td>
+                        </tr>
+                        <tr>
+                            <td>UTM:</td>
+                            <td>{{ coordinates_by_searchfield.coord_UTM.zone }} {{ coordinates_by_searchfield.coord_UTM.letter }} {{ coordinates_by_searchfield.coord_UTM.north }} {{ coordinates_by_searchfield.coord_UTM.east }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (DE):</td>
+                            <td>{{ coordinates_by_searchfield.coord_W3Wde }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (EN):</td>
+                            <td>{{ coordinates_by_searchfield.coord_W3Wen }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <br/><br/>
+                    <span>{{ 'Coordinates conversion was not possible' | trans }}.. :-(</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
+
+    {% endif %}
+
+    {% if converted_coordinates is defined %}
+        <div>
+            <h3>{{ 'Converted coordinates' | trans }}..</h3>
+
+            <div>
+                {% if converted_coordinates %}
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{ 'Decimal degree' | trans }}:</td>
+                            <td>{{ converted_coordinates.decimal }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Degrees Minutes' | trans }}:</td>
+                            <td>{{ converted_coordinates.degreeMinute }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Degrees Minutes Seconds' | trans }}:</td>
+                            <td>{{ converted_coordinates.degreeMinuteSecond }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ 'Gauss Kruger' | trans }}:</td>
+                            <td>{{ converted_coordinates.GK }}</td>
+                        </tr>
+                        <tr>
+                            <td>QTH Locator:</td>
+                            <td>{{ converted_coordinates.QTH }}</td>
+                        </tr>
+                        <tr>
+                            <td>RD (Dutch Grid):</td>
+                            <td>{{ converted_coordinates.RD }}</td>
+                        </tr>
+                        <tr>
+                            <td>Swiss Grid (CH1903):</td>
+                            <td>{{ converted_coordinates.CH1903 }}</td>
+                        </tr>
+                        <tr>
+                            <td>UTM:</td>
+                            <td>{{ converted_coordinates.UTM }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (DE):</td>
+                            <td>{{ converted_coordinates.W3W_de }}</td>
+                        </tr>
+                        <tr>
+                            <td>What3Words (EN):</td>
+                            <td>{{ converted_coordinates.W3W_en }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                {% else %}
+                    <br/><br/>
+                    <span>{{ 'Coordinates conversion was not possible' | trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <hr>
+    {% endif %}
+
+    <div class="alert alert-primary" role="alert">
+        <h3><br/>{{ 'You can access this page directly by adding latitude and longitude to the URL (in Decimal degree)' | trans }}:</h3>
+        {{ 'Command' | trans }}:<br/>
+        http://try.docker.team-opencaching.de/backend/coordinate/$Latitude+$Longitude<br/>
+        http://try.docker.team-opencaching.de/backend/coordinate/10.98765+5.12345 (für N10° 59.259' E005° 07.407')<br/>
+        http://try.docker.team-opencaching.de/backend/coordinate/-10.98765+-5.12345 (für S10° 59.259' W005° 07.407')<br/>
+        <br/>
+    </div>
+
+{% endblock %}

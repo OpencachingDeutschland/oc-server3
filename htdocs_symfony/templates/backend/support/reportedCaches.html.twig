@@ -1,0 +1,49 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Reported caches' | trans }}..</h3>
+
+    <div>
+        {% if reportedCaches_by_id is defined %}
+            {% if reportedCaches_by_id %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+{#                        <th scope="col" class="asc">Report ID</th>#}
+                        <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Reported by' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Date' | trans }}</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in reportedCaches_by_id %}
+                        <tr>
+{#                            <td>{{ report.id }}</td>#}
+                            <td>{{ report.cache.name }}</td>
+                            <td>{{ report.cache.user.username }}</td>
+                            <td>{{ report.user.username }}</td>
+                            <td>{{ report.dateCreated | date('d.m.Y') }}</td>
+                            <td>&nbsp;</td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('backend_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No reported caches found' | trans }}.. :-)</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

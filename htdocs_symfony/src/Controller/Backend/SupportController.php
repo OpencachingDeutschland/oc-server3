@@ -4,17 +4,12 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
-//use Doctrine\DBAL\Connection;
-//use Oc\Repository\CachesRepository;
 use Oc\Repository\CacheReportsRepository;
 use Oc\Repository\CacheStatusModifiedRepository;
 use Oc\Repository\CacheStatusRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-//use Oc\Repository\UserRepository;
 
 /**
  * Class SupportController
@@ -23,10 +18,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SupportController extends AbstractController
 {
+    /** @var CacheReportsRepository */
     private $cacheReportsRepository;
 
+    /** @var CacheStatusModifiedRepository */
     private $cacheStatusModifiedRepository;
 
+    /** @var CacheStatusRepository */
     private $cacheStatusRepository;
 
     /**
@@ -47,14 +45,13 @@ class SupportController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     * @Route("/support", name="support_index")
-     *
      * @return Response
+     * @Route("/support", name="support_index")
      */
-    public function index(Request $request)
-    : Response {
-        return $this->render('backend/support/index.html.twig', []);
+    public function index()
+    : Response
+    {
+        return $this->render('backend/support/index.html.twig');
     }
 
     /**
@@ -73,10 +70,12 @@ class SupportController extends AbstractController
     /**
      * @param string $repID
      *
-     * @return array
+     * @return Response
+     * @throws \Oc\Repository\Exception\RecordNotFoundException
+     * @throws \Oc\Repository\Exception\RecordsNotFoundException
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      */
-    public function search_by_report_id(string $repID)
+    public function list_reported_cache_details(string $repID)
     : Response {
         $fetchedReport = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
 
@@ -100,8 +99,6 @@ class SupportController extends AbstractController
     public function getReportedCaches()
     : array
     {
-        $fetchedReports = $this->cacheReportsRepository->fetchAll();
-
-        return $fetchedReports;
+        return $this->cacheReportsRepository->fetchAll();
     }
 }

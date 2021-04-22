@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
@@ -187,8 +189,6 @@ class CacheReportReasonsRepository
             self::TABLE,
             ['id' => $entity->id]
         );
-
-        $entity->cacheId = null;
 
         return $entity;
     }

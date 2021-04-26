@@ -49,7 +49,7 @@ class SupportSQLFlexForm extends AbstractType
             )
             ->add(
                 'content_TABLE', ChoiceType::class, [
-                                   'choices' => ['caches' => 'caches', 'user' => 'user',],
+                                   'choices' => ['caches' => 'caches', 'user' => 'user'],
                                    'attr' => [
                                        'style' => 'width: 300px;'
                                    ],

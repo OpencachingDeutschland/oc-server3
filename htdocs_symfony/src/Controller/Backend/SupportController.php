@@ -105,7 +105,8 @@ class SupportController extends AbstractController
 
             $fetchedInformation = $this->executeSQL_flexible($inputData['content_WHAT'], $inputData['content_TABLE']);
 
-            for ($i = 0; $i < count($fetchedInformation); $i ++) {
+            $countFetched = count($fetchedInformation);
+            for ($i = 0; $i < $countFetched; $i++) {
                 if (array_key_exists('password', $fetchedInformation[$i])) {
                     $fetchedInformation[$i]['password'] = '-';
                 }
@@ -113,8 +114,6 @@ class SupportController extends AbstractController
                     $fetchedInformation[$i]['admin_password'] = '-';
                 }
             }
-            //            dd($fetchedInformation);
-            //            die();
         }
 
         return $this->render(

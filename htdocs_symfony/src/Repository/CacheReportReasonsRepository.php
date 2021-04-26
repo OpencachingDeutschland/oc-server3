@@ -190,6 +190,8 @@ class CacheReportReasonsRepository
             ['id' => $entity->id]
         );
 
+        $entity->cacheId = null;
+
         return $entity;
     }
 

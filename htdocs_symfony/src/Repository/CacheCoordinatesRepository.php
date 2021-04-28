@@ -6,68 +6,32 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-Use Oc\Entity\GeoCacheReportsEntity;
+use Oc\Entity\GeoCacheCoordinatesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class CacheReportsRepository
- *
- * @package Oc\Repository
- */
-class CacheReportsRepository
+class CacheCoordinatesRepository
 {
-    const TABLE = 'cache_reports';
+    const TABLE = 'cache_coordinates';
 
-    /**
-     * @var Connection
-     */
+    /** @var Connection */
     private $connection;
 
-    /**
-     * @var CachesRepository
-     */
-    private $cachesRepository;
-
-    /**
-     * @var UserRepository
-     */
+    /** @var UserRepository */
     private $userRepository;
 
     /**
-     * @var CacheReportReasonsRepository
-     */
-    private $cacheReportReasonsRepository;
-
-    /**
-     * @var CacheReportStatusRepository
-     */
-    private $cacheReportStatusRepository;
-
-    /**
-     * CacheReportsRepository constructor.
+     * CacheCoordinatesRepository constructor.
      *
      * @param Connection $connection
-     * @param CachesRepository $cachesRepository
      * @param UserRepository $userRepository
-     * @param CacheReportReasonsRepository $cacheReportReasonsRepository
-     * @param CacheReportStatusRepository $cacheReportStatusRepository
      */
-    public function __construct(
-        Connection $connection,
-        CachesRepository $cachesRepository,
-        UserRepository $userRepository,
-        CacheReportReasonsRepository $cacheReportReasonsRepository,
-        CacheReportStatusRepository $cacheReportStatusRepository
-    )
+    public function __construct(Connection $connection, UserRepository $userRepository)
     {
         $this->connection = $connection;
-        $this->cachesRepository = $cachesRepository;
         $this->userRepository = $userRepository;
-        $this->cacheReportReasonsRepository = $cacheReportReasonsRepository;
-        $this->cacheReportStatusRepository = $cacheReportStatusRepository;
     }
 
     /**
@@ -99,7 +63,7 @@ class CacheReportsRepository
     /**
      * @param array $where
      *
-     * @return GeoCacheReportsEntity
+     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
@@ -120,7 +84,7 @@ class CacheReportsRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-//            throw new RecordNotFoundException('Record with given where clause not found');
+            throw new RecordNotFoundException('Record with given where clause not found');
         }
 
         return $this->getEntityFromDatabaseArray($result);
@@ -149,7 +113,7 @@ class CacheReportsRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-//            throw new RecordsNotFoundException('No records with given where clause found');
+            throw new RecordsNotFoundException('No records with given where clause found');
         }
 
         $entities = [];
@@ -162,13 +126,13 @@ class CacheReportsRepository
     }
 
     /**
-     * @param GeoCacheReportsEntity $entity
+     * @param GeoCacheCoordinatesEntity $entity
      *
-     * @return GeoCacheReportsEntity
+     * @return GeoCacheCoordinatesEntity
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(GeoCacheReportsEntity $entity)
+    public function create(GeoCacheCoordinatesEntity $entity)
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -187,13 +151,13 @@ class CacheReportsRepository
     }
 
     /**
-     * @param GeoCacheReportsEntity $entity
+     * @param GeoCacheCoordinatesEntity $entity
      *
-     * @return GeoCacheReportsEntity
+     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(GeoCacheReportsEntity $entity)
+    public function update(GeoCacheCoordinatesEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -211,14 +175,14 @@ class CacheReportsRepository
     }
 
     /**
-     * @param GeoCacheReportsEntity $entity
+     * @param GeoCacheCoordinatesEntity $entity
      *
-     * @return GeoCacheReportsEntity
+     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(GeoCacheReportsEntity $entity)
+    public function remove(GeoCacheCoordinatesEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -229,61 +193,44 @@ class CacheReportsRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheid = null;
+        $entity->cacheId = null;
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheReportsEntity $entity
+     * @param GeoCacheCoordinatesEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(GeoCacheReportsEntity $entity)
+    public function getDatabaseArrayFromEntity(GeoCacheCoordinatesEntity $entity)
     {
         return [
             'id' => $entity->id,
             'date_created' => $entity->dateCreated,
-            'cacheid' => $entity->cacheid,
-            'userid' => $entity->userid,
-            'reason' => $entity->reason,
-            'note' => $entity->note,
-            'status' => $entity->status,
-            'adminid' => $entity->adminid,
-            'lastmodified' => $entity->lastmodified,
-            'comment' => $entity->comment,
+            'cache_id' => $entity->cacheId,
+            'longitude' => $entity->longitude,
+            'latitude' => $entity->latitude,
+            'restored_by' => $entity->restoredBy,
             'user' => $entity->user,
-            'admin' => $entity->admin,
-            'cache' => $entity->cache,
-            'reportReason' => $entity->reportReason,
-            'reportStatus' => $entity->reportStatus,
         ];
     }
 
     /**
      * @param array $data
      *
-     * @return GeoCacheReportsEntity
-     * @throws RecordNotFoundException
+     * @return GeoCacheCoordinatesEntity
      */
     public function getEntityFromDatabaseArray(array $data)
     {
-        $entity = new GeoCacheReportsEntity();
+        $entity = new GeoCacheCoordinatesEntity();
         $entity->id = (int) $data['id'];
         $entity->dateCreated = new DateTime($data['date_created']);
-        $entity->cacheid = (int) $data['cacheid'];
-        $entity->userid = (int) $data['userid'];
-        $entity->reason = (int) $data['reason'];
-        $entity->note = (string) $data['note'];
-        $entity->status = (int) $data['status'];
-        $entity->adminid = (int) $data['adminid'];
-        $entity->lastmodified = (string) $data['lastmodified'];
-        $entity->comment = (string) $data['comment'];
-        $entity->cache = $this->cachesRepository->fetchOneBy(['cache_id' => $entity->cacheid]);
-        $entity->user = $this->userRepository->fetchOneById($entity->userid);
-        if ($entity->adminid) $entity->admin = $this->userRepository->fetchOneById($entity->adminid);
-        $entity->reportReason = $this->cacheReportReasonsRepository->fetchOneBy(['id' => $entity->reason]);
-        $entity->reportStatus = $this->cacheReportStatusRepository->fetchOneBy(['id' => $entity->status]);
+        $entity->cacheId = (int) $data['cache_id'];
+        $entity->longitude = $data['longitude'];
+        $entity->latitude = $data['latitude'];
+        $entity->restoredBy = (int) $data['restored_by'];
+        if ($entity->restoredBy != 0) $entity->user = $this->userRepository->fetchOneById($entity->restoredBy);
 
         return $entity;
     }

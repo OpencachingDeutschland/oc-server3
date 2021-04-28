@@ -7,6 +7,11 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+/**
+ * Class SupportSQLFlexForm
+ *
+ * @package Oc\Form
+ */
 class SupportSQLFlexForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -17,7 +22,7 @@ class SupportSQLFlexForm extends AbstractType
                 'content_SELECT', ChoiceType::class, [
                                     'choices' => ['SELECT' => 'SELECT'],
                                     'attr' => [
-                                        'style' => 'width: 300px;'
+                                        'style' => 'width: 180px;'
                                     ],
                                     'disabled' => true,
                                     'label' => false,
@@ -29,7 +34,7 @@ class SupportSQLFlexForm extends AbstractType
                                   'required' => true,
                                   'data' => '*',
                                   'attr' => [
-                                      'style' => 'width: 300px;'
+                                      'style' => 'width: 180px;'
                                   ],
                                   'disabled' => false,
                                   'label' => false,
@@ -40,7 +45,7 @@ class SupportSQLFlexForm extends AbstractType
                 'content_FROM', ChoiceType::class, [
                                   'choices' => ['FROM' => 'FROM'],
                                   'attr' => [
-                                      'style' => 'width: 300px;'
+                                      'style' => 'width: 180px;'
                                   ],
                                   'disabled' => true,
                                   'label' => false,
@@ -51,13 +56,18 @@ class SupportSQLFlexForm extends AbstractType
                 'content_TABLE', ChoiceType::class, [
                                    'choices' => ['caches' => 'caches', 'user' => 'user'],
                                    'attr' => [
-                                       'style' => 'width: 300px;'
+                                       'style' => 'width: 180px;'
                                    ],
                                    'disabled' => false,
                                    'label' => false,
                                    'trim' => true
                                ]
             )
-            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
+            ->add(
+                'Suchen', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-primary'],
+                'label' => '🔍'
+            ]
+            );
     }
 }

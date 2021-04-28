@@ -1,0 +1,167 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Cache history' | trans }}..</h3>
+
+    <div>
+        <h4><br/>{{ 'Cache reports' | trans }}..</h4>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="asc">Report ID</th>
+                <th scope="col" class="asc">{{ 'Report date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Reported by' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Reason' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Admin' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Last modified' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Status' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if cache_reports is defined %}
+                {% if cache_reports %}
+                    {% for report in cache_reports | reverse %}
+                        <tr>
+                            <td>{{ report.id }}</td>
+                            <td>{{ report.dateCreated | date('d.m.Y') }}</td>
+                            <td>{{ report.user.username }}</td>
+                            <td>{{ report.reportReason.name | trans }}</td>
+                            <td>{% if report.admin %} <b>by:</b> {{ report.admin.username }} {% endif %}</td>
+                            <td>{{ report.lastmodified | date('d.m.Y') }}</td>
+                            <td>{{ report.reportStatus.name | trans }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="8"><span>{{ 'No caches reports found' | trans }}..</span></td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4><br/>{{ 'Deleted logs' | trans }}..</h4> <span class="badge badge-danger">Aktuell in Kurzform. Später soll anstelle dieser Tabelle der Logeintrag selbst gezeigt werden (Logs Repository)</span>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="asc">{{ 'Log date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Logged by' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Deletion date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Deleted by' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if deleted_logs is defined %}
+                {% if deleted_logs %}
+                    {% for deletedLog in deleted_logs | reverse %}
+                        <tr>
+                            <td>{{ deletedLog.dateCreated | date('d.m.Y') }}</td>
+                            <td>{{ deletedLog.userId }}</td>
+                            <td>{{ deletedLog.deletionDate | date('d.m.Y') }}</td>
+                            <td>{{ deletedLog.deletedBy }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4"><span>{{ 'No log deletions found' | trans }}..</span></td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4><br/>{{ 'Status changes' | trans }}..
+            <small>{{ 'since June 2013' | trans }}</small>
+        </h4>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="asc">{{ 'Date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Status' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Changed by' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if report_status_modified is defined %}
+                {% if report_status_modified %}
+                    {% for statusChange in report_status_modified | reverse %}
+                        <tr>
+                            <td>{{ statusChange.dateModified | date('d.m.Y') }}</td>
+                            <td>{{ statusChange.statusOld.name | trans }} -> {{ statusChange.statusNew.name | trans }}</td>
+                            <td>{{ statusChange.user.username }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3"><span>{{ 'No status changes found' | trans }}..</span></td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4><br/>{{ 'Coordinate changes' | trans }}..</h4>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="asc">{{ 'Date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Coordinates' | trans }}</th>
+                <th scope="col" class="asc">{{ 'Changed by' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if changed_coordinates is defined %}
+                {% if changed_coordinates %}
+                    {% for change in changed_coordinates | reverse %}
+                        <tr>
+                            <td>{{ change.dateCreated | date('d.m.Y') }}</td>
+                            <td>{{ ocFilterCoordinatesDegMin(change.latitude, change.longitude) }}</td>
+                            <td>{% if change.user %}{{ change.user.username }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3"><span>{{ 'No coordinates changes found' | trans }}..</span></td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h4><br/>{{ 'Adoptions' | trans }}..
+            <small>{{ 'since September 2012' | trans }}</small>
+        </h4>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" class="asc">{{ 'Date' | trans }}</th>
+                <th scope="col" class="asc">{{ 'From owner' | trans }}</th>
+                <th scope="col" class="asc">{{ 'To owner' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if cache_adoptions is defined %}
+                {% if cache_adoptions %}
+                    {% for adoption in cache_adoptions | reverse %}
+                        <tr>
+                            <td>{{ adoption.date | date('d.m.Y') }}</td>
+                            <td>{% if adoption.fromUser %}{{ adoption.fromUser.username }}{% endif %}</td>
+                            <td>{% if adoption.toUser %}{{ adoption.toUser.username }}{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3"><span>{{ 'No adoptions found' | trans }}..</span></td>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+{% endblock %}

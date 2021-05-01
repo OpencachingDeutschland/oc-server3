@@ -1,0 +1,60 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Searched caches' | trans }}..</h3>
+
+    <div>
+        {% if foundCaches is defined %}
+            <div> Found: {{ foundCaches|length }} Cache(s)</div>
+            {% if foundCaches %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'GC code' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'GC code maint.' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Email' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Cache history' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'OCC' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'User account details' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Vandalism' | trans }}</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for report in foundCaches %}
+                        <tr>
+                            <td>{{ report.wp_oc }}</td>
+                            <td>{{ report.wp_gc }}</td>
+                            <td>{{ report.wp_gc_maintained }}</td>
+                            <td>{{ report.name }}</td>
+                            <td>{{ report.username }}</td>
+                            <td>{{ report.email }}</td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+                            <td><i class="fas fa-times"></i></td>
+{#                            <td><i class="fas fa-check"></td>#}
+                            <td>
+{#                                <a class="btn btn-primary" href="{{ path('backend_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>#}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No caches found' | trans }}..</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

@@ -21,7 +21,7 @@
                 <p><b>{{ 'Report last modified' | trans }}:</b> {{ reported_cache_by_id.lastmodified | date('d.m.Y') }}</p>
                 <p><b>{{ 'Reason' | trans }}:</b> {{ reported_cache_by_id.reportReason.name | trans }}</p>
                 <p><b>{{ 'State' | trans }}:</b> {{ reported_cache_by_id.reportStatus.name | trans }}
-                    {% if reported_cache_by_id.admin is defined %} <b>by:</b> {{ reported_cache_by_id.admin.username | trans }} {% endif %}</p>
+                    {% if reported_cache_by_id.admin %} <b>by:</b> {{ reported_cache_by_id.admin.username | trans }} {% endif %}</p>
                 <p><b>{{ 'Reporter comment' | trans }}:</b> {{ reported_cache_by_id.note }}</p>
 
                 <hr>

@@ -16,11 +16,19 @@ class MenuSubscriber implements EventSubscriberInterface
      */
     private $security;
 
+    /**
+     * MenuSubscriber constructor.
+     *
+     * @param Security $security
+     */
     public function __construct(Security $security)
     {
         $this->security = $security;
     }
 
+    /**
+     * @return array[]
+     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -28,6 +36,9 @@ class MenuSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param KnpMenuEvent $event
+     */
     public function onSetupMenu(KnpMenuEvent $event)
     {
         $menu = $event->getMenu();
@@ -62,15 +73,15 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('support', [
+            $menu->addChild('support', [
                 'label' => 'Support Center',
-                'route' => 'backend_support_index',
+                'route' => 'backend_support_reported_caches',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-gem');
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $userMenu = $menu->addChild('kitchensink', [
+            $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',
                 'route' => 'app_kitchensink_index',
                 'childOptions' => $event->getChildOptions(),

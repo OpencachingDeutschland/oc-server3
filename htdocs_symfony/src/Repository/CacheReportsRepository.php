@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use DateTime;
@@ -222,7 +224,7 @@ class CacheReportsRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheid = null;
 
         return $entity;
     }
@@ -246,6 +248,10 @@ class CacheReportsRepository
             'lastmodified' => $entity->lastmodified,
             'comment' => $entity->comment,
             'user' => $entity->user,
+            'admin' => $entity->admin,
+            'cache' => $entity->cache,
+            'reportReason' => $entity->reportReason,
+            'reportStatus' => $entity->reportStatus,
         ];
     }
 
@@ -253,7 +259,7 @@ class CacheReportsRepository
      * @param array $data
      *
      * @return GeoCacheReportsEntity
-     * @throws Exception
+     * @throws RecordNotFoundException
      */
     public function getEntityFromDatabaseArray(array $data)
     {

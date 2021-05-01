@@ -41,7 +41,7 @@ class GeoCacheReportsEntity extends AbstractEntity
     public $user;
 
     /** @var UserEntity */
-    public $adminName;
+    public $admin;
 
     /** @var GeoCachesEntity */
     public $cache;

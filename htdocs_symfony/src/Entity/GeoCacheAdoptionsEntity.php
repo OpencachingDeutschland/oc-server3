@@ -27,10 +27,10 @@ class GeoCacheAdoptionsEntity extends AbstractEntity
     /** @var int */
     public $toUserId;
 
-    /** @var \UserEntity */
+    /** @var UserEntity */
     public $fromUser;
 
-    /** @var \UserEntity */
+    /** @var UserEntity */
     public $toUser;
 
     /**

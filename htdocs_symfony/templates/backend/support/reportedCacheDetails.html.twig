@@ -2,6 +2,8 @@
 
 {% block page_content %}
 
+    {% include '/backend/support/reportedCacheDetails.js' %}
+
     {% include '/backend/support/support.header.html.twig' %}
 
     <h3><br/>{{ 'Reported caches' | trans }} </h3>
@@ -13,7 +15,8 @@
                 <p>
                     <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} by {{ reported_cache_by_id.user.username }}
                                                                                                         (
-                    <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1">{{ 'Nearby search at geocaching.com' | trans }}
+                    <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
+                       target="_blank">{{ 'Nearby search at geocaching.com' | trans }}
                     </a>
                                                                                                         )
                 </p>
@@ -23,24 +26,31 @@
                 <p><b>{{ 'State' | trans }}:</b> {{ reported_cache_by_id.reportStatus.name | trans }}
                     {% if reported_cache_by_id.admin %} <b>by:</b> {{ reported_cache_by_id.admin.username }} {% endif %}</p>
                 <p><b>{{ 'Reporter comment' | trans }}:</b> {{ reported_cache_by_id.note }}</p>
+                <br/>
 
                 <hr>
-                <p><b>{{ 'Admin comment' | trans }}:</b> {{ reported_cache_by_id.comment }}</p>
-                <div class="md-form">
-                    <textarea id="admin_Comment_Textarea" class="md-textarea form-control" rows="5">{{ reported_cache_by_id.comment }}</textarea>
-                    <a class="btn btn-primary" href="#">{{ 'Save admin comment to database' | trans }}</a>
-                    <span class="badge badge-danger">Speichern funktioniert noch nicht</span>
-                </div>
+                <p><b>{{ 'Admin comment' | trans }}:</b></p>
+                {{ form_start(supportAdminCommentForm, {'action': path('backend_support_reported_cache_save_text'), 'method': 'POST' }) }}
+                {{ form_row(supportAdminCommentForm.support_admin_comment, {'value': reported_cache_by_id.comment }) }}
+                {{ form_row(supportAdminCommentForm.save_admin_comment, {'label': 'Save admin comment' | trans }) }}
+                {{ form_row(supportAdminCommentForm.hidden_repID, {'value': reported_cache_by_id.id }) }}
+                <a class="btn btn-primary"
+                   onClick="addDateAndNameToTextField('support_admin_comment_support_admin_comment',
+                   {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
+                   style="display: block; width: 180px;">{{ 'Add date & user name' | trans }}</a>
+                {{ form_end(supportAdminCommentForm) }}
+                <br/>
 
                 <hr>
+                <p><b>{{ 'Action' | trans }}</b></p>
                 <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <br/>
-                <span class="badge badge-danger">'Assign to me' und 'Mark as finished' funktionieren noch nicht</span>
-                <p><b>{{ 'Action' | trans }}</b></p>
+                <span class="badge badge-danger">'Assign to me' und 'Mark as finished' funktionieren noch nicht</span><br/>
                 <a class="btn btn-primary" href="#">{{ 'Assign to me' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
                 <a class="btn btn-primary" href="#">{{ 'Mark as finished' | trans }}</a>
+                <br/>
 
                 <hr>
                 <span class="badge badge-danger">Umsetzung muss noch warten, bis Logfunktionen vorhanden sind</span>

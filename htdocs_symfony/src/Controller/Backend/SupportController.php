@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Oc\Form\SupportAdminComment;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
 use Oc\Repository\CacheAdoptionsRepository;
@@ -27,28 +28,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class SupportController extends AbstractController
 {
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var CacheAdoptionsRepository */
-    private $cacheAdoptionsRepository;
+    private CacheAdoptionsRepository $cacheAdoptionsRepository;
 
     /** @var CacheCoordinatesRepository */
-    private $cacheCoordinatesRepository;
+    private CacheCoordinatesRepository $cacheCoordinatesRepository;
 
     /** @var CacheLogsArchivedRepository */
-    private $cacheLogsArchivedRepository;
+    private CacheLogsArchivedRepository $cacheLogsArchivedRepository;
 
     /** @var CachesRepository */
-    private $cachesRepository;
+    private CachesRepository $cachesRepository;
 
     /** @var CacheReportsRepository */
-    private $cacheReportsRepository;
+    private CacheReportsRepository $cacheReportsRepository;
 
     /** @var CacheStatusModifiedRepository */
-    private $cacheStatusModifiedRepository;
+    private CacheStatusModifiedRepository $cacheStatusModifiedRepository;
 
     /** @var CacheStatusRepository */
-    private $cacheStatusRepository;
+    private CacheStatusRepository $cacheStatusRepository;
 
     /**
      * SupportController constructor.
@@ -189,16 +190,17 @@ class SupportController extends AbstractController
     }
 
     /**
-     * @param string $repID
+     * @param int $repID
      *
      * @return Response
      * @throws \Oc\Repository\Exception\RecordNotFoundException
      * @throws \Oc\Repository\Exception\RecordsNotFoundException
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      */
-    public function list_reported_cache_details(string $repID)
+    public function list_reported_cache_details(int $repID)
     : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formComment = $this->createForm(SupportAdminComment::class);
 
         $fetchedReport = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
 
@@ -209,6 +211,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/reportedCacheDetails.html.twig', [
                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                'supportAdminCommentForm' => $formComment->createView(),
                                                                 'reported_cache_by_id' => $fetchedReport,
                                                                 'cache_status' => $fetchedStatus,
                                                                 'report_status_modified' => $fetchedStatusModfied
@@ -217,11 +220,39 @@ class SupportController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Oc\Repository\Exception\RecordNotFoundException
+     * @throws \Oc\Repository\Exception\RecordNotPersistedException
+     * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
+     */
+    public function repCaches_saveTextArea(Request $request)
+    : Response {
+        $form = $this->createForm(SupportAdminComment::class)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $inputData = $form->getData();
+
+            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_repID']]);
+            $entity->comment = $inputData['support_admin_comment'];
+
+            $this->cacheReportsRepository->update($entity);
+
+            return $this->redirectToRoute('backend_support_reported_cache', ['repID' => $entity->id]);
+        }
+
+        return $this->redirectToRoute('backend_support_reported_caches');
+    }
+
+    /**
      * @param string $wpID
      *
      * @return Response
      * @throws \Oc\Repository\Exception\RecordNotFoundException
      * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws \Exception
      * @Route("/cacheHistory/{wpID}", name="support_cache_history")
      */
     public function list_cache_history(string $wpID)

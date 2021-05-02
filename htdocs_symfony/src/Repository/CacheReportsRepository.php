@@ -243,7 +243,7 @@ class CacheReportsRepository
     {
         return [
             'id' => $entity->id,
-            'date_created' => $entity->dateCreated,
+            'date_created' => $entity->dateCreated->format('Y-m-d H:i:s'),
             'cacheid' => $entity->cacheid,
             'userid' => $entity->userid,
             'reason' => $entity->reason,
@@ -252,11 +252,6 @@ class CacheReportsRepository
             'adminid' => $entity->adminid,
             'lastmodified' => $entity->lastmodified,
             'comment' => $entity->comment,
-            'user' => $entity->user,
-            'admin' => $entity->admin,
-            'cache' => $entity->cache,
-            'reportReason' => $entity->reportReason,
-            'reportStatus' => $entity->reportStatus,
         ];
     }
 

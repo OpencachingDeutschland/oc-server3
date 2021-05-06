@@ -6,7 +6,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-Use Oc\Entity\GeoCacheReportsEntity;
+use Oc\Entity\GeoCacheReportsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -61,8 +61,7 @@ class CacheReportsRepository
         UserRepository $userRepository,
         CacheReportReasonsRepository $cacheReportReasonsRepository,
         CacheReportStatusRepository $cacheReportStatusRepository
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->cachesRepository = $cachesRepository;
         $this->userRepository = $userRepository;
@@ -72,9 +71,11 @@ class CacheReportsRepository
 
     /**
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -120,7 +121,7 @@ class CacheReportsRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-//            throw new RecordNotFoundException('Record with given where clause not found');
+            //            throw new RecordNotFoundException('Record with given where clause not found');
         }
 
         return $this->getEntityFromDatabaseArray($result);
@@ -130,10 +131,10 @@ class CacheReportsRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordsNotFoundException
+     * @throws RecordNotFoundException
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -149,7 +150,7 @@ class CacheReportsRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-//            throw new RecordsNotFoundException('No records with given where clause found');
+            //            throw new RecordsNotFoundException('No records with given where clause found');
         }
 
         $entities = [];
@@ -240,7 +241,7 @@ class CacheReportsRepository
      * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheReportsEntity $entity)
-    {
+    : array {
         return [
             'id' => $entity->id,
             'date_created' => $entity->dateCreated->format('Y-m-d H:i:s'),
@@ -263,6 +264,7 @@ class CacheReportsRepository
      */
     public function getEntityFromDatabaseArray(array $data)
     {
+
         $entity = new GeoCacheReportsEntity();
         $entity->id = (int) $data['id'];
         $entity->dateCreated = new DateTime($data['date_created']);

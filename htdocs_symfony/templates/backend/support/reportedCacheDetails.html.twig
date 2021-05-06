@@ -45,8 +45,12 @@
                 <p><b>{{ 'Action' | trans }}</b></p>
                 <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <br/>
-                <span class="badge badge-danger">'Assign to me' und 'Mark as finished' funktionieren noch nicht</span><br/>
-                <a class="btn btn-primary" href="#">{{ 'Assign to me' | trans }}</a>
+                <span class="badge badge-danger">'Mark as finished' funktioniert noch nicht</span><br/>
+                {% if not reported_cache_by_id.admin %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
+                {% endif %}
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
                 <a class="btn btn-primary" href="#">{{ 'Mark as finished' | trans }}</a>

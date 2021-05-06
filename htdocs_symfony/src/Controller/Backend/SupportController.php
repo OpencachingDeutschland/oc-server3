@@ -28,28 +28,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class SupportController extends AbstractController
 {
     /** @var Connection */
-    private Connection $connection;
+    private $connection;
 
     /** @var CacheAdoptionsRepository */
-    private CacheAdoptionsRepository $cacheAdoptionsRepository;
+    private $cacheAdoptionsRepository;
 
     /** @var CacheCoordinatesRepository */
-    private CacheCoordinatesRepository $cacheCoordinatesRepository;
+    private $cacheCoordinatesRepository;
 
     /** @var CacheLogsArchivedRepository */
-    private CacheLogsArchivedRepository $cacheLogsArchivedRepository;
+    private $cacheLogsArchivedRepository;
 
     /** @var CachesRepository */
-    private CachesRepository $cachesRepository;
+    private $cachesRepository;
 
     /** @var CacheReportsRepository */
-    private CacheReportsRepository $cacheReportsRepository;
+    private $cacheReportsRepository;
 
     /** @var CacheStatusModifiedRepository */
-    private CacheStatusModifiedRepository $cacheStatusModifiedRepository;
+    private $cacheStatusModifiedRepository;
 
     /** @var CacheStatusRepository */
-    private CacheStatusRepository $cacheStatusRepository;
+    private $cacheStatusRepository;
 
     /**
      * SupportController constructor.
@@ -127,6 +127,7 @@ class SupportController extends AbstractController
 
     /**
      * @return Response
+     * @throws \Oc\Repository\Exception\RecordNotFoundException
      * @throws \Oc\Repository\Exception\RecordsNotFoundException
      * @Route("/reportedCaches", name="support_reported_caches")
      */
@@ -247,6 +248,27 @@ class SupportController extends AbstractController
     }
 
     /**
+     * @param int $repID
+     * @param int $adminId
+     * @param string $route
+     *
+     * @return Response
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Oc\Repository\Exception\RecordNotFoundException
+     * @throws \Oc\Repository\Exception\RecordNotPersistedException
+     * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
+     */
+    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route) : Response
+    {
+        $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
+        $entity->adminid = $adminId;
+
+        $this->cacheReportsRepository->update($entity);
+
+        return $this->redirectToRoute($route, ['repID' => $repID]);
+    }
+
+    /**
      * @param string $wpID
      *
      * @return Response
@@ -324,6 +346,7 @@ class SupportController extends AbstractController
 
     /**
      * @return array
+     * @throws \Oc\Repository\Exception\RecordNotFoundException
      * @throws \Oc\Repository\Exception\RecordsNotFoundException
      */
     public function getReportedCaches()

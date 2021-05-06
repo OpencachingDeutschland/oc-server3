@@ -13,7 +13,7 @@
             {% if reported_cache_by_id %}
                 <br/>
                 <p>
-                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} by {{ reported_cache_by_id.user.username }}
+                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} <b>by:</b> {{ reported_cache_by_id.user.username }}
                                                                                                         (
                     <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
                        target="_blank">{{ 'Nearby search at geocaching.com' | trans }}
@@ -45,7 +45,6 @@
                 <p><b>{{ 'Action' | trans }}</b></p>
                 <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <br/>
-                <span class="badge badge-danger">'Mark as finished' funktioniert noch nicht</span><br/>
                 {% if not reported_cache_by_id.admin %}
                     <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
                 {% else %}
@@ -53,7 +52,9 @@
                 {% endif %}
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
-                <a class="btn btn-primary" href="#">{{ 'Mark as finished' | trans }}</a>
+                {% if reported_cache_by_id.status < 3 %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
+                {% endif %}
                 <br/>
 
                 <hr>
@@ -82,7 +83,7 @@
                         {% for statusChange in report_status_modified %}
                             <tr>
                                 <td>{{ statusChange.dateModified | date('d.m.Y') }}</td>
-                                <td>{{ statusChange.statusOld.name | trans }} -> {{ statusChange.statusNew.name | trans }}</td>
+                                <td>{{ statusChange.cacheStatusOld.name | trans }} -> {{ statusChange.cacheStatusNew.name | trans }}</td>
                                 <td>{{ statusChange.user.username }}</td>
                             </tr>
                         {% endfor %}

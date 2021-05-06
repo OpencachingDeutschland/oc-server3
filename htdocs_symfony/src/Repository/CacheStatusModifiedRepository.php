@@ -4,15 +4,19 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Oc\Entity\GeoCacheReportStatusEntity;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 Use Oc\Entity\GeoCacheStatusModifiedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
-use Oc\Repository\CacheReportStatusRepository;
-use Oc\User\UserEntity;
 
+/**
+ * Class CacheStatusModifiedRepository
+ *
+ * @package Oc\Repository
+ */
 class CacheStatusModifiedRepository
 {
     const TABLE = 'cache_status_modified';
@@ -23,27 +27,30 @@ class CacheStatusModifiedRepository
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var CacheReportStatusRepository */
-    private $cacheReportStatusRepository;
+    /** @var CacheStatusRepository */
+    private $cacheStatusRepository;
 
     /**
      * CacheStatusModifiedRepository constructor.
      *
      * @param Connection $connection
+     * @param UserRepository $userRepository
+     * @param CacheStatusRepository $cacheStatusRepository
      */
     public function __construct(
         Connection $connection,
         UserRepository $userRepository,
-        CacheReportStatusRepository $cacheReportStatusRepository
+        CacheStatusRepository $cacheStatusRepository
     )
     {
         $this->connection = $connection;
         $this->userRepository = $userRepository;
-        $this->cacheReportStatusRepository = $cacheReportStatusRepository;
+        $this->cacheStatusRepository = $cacheStatusRepository;
     }
 
     /**
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
@@ -102,7 +109,7 @@ class CacheStatusModifiedRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordsNotFoundException
+     * @throws RecordNotFoundException
      */
     public function fetchBy(array $where = [])
     {
@@ -138,7 +145,7 @@ class CacheStatusModifiedRepository
      *
      * @return GeoCacheStatusModifiedEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function create(GeoCacheStatusModifiedEntity $entity)
     {
@@ -163,7 +170,7 @@ class CacheStatusModifiedRepository
      *
      * @return GeoCacheStatusModifiedEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function update(GeoCacheStatusModifiedEntity $entity)
     {
@@ -186,9 +193,9 @@ class CacheStatusModifiedRepository
      * @param GeoCacheStatusModifiedEntity $entity
      *
      * @return GeoCacheStatusModifiedEntity
+     * @throws DBALException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function remove(GeoCacheStatusModifiedEntity $entity)
     {
@@ -226,6 +233,7 @@ class CacheStatusModifiedRepository
      * @param array $data
      *
      * @return GeoCacheStatusModifiedEntity
+     * @throws RecordNotFoundException
      */
     public function getEntityFromDatabaseArray(array $data)
     {
@@ -236,8 +244,8 @@ class CacheStatusModifiedRepository
         $entity->newState = (int) $data['new_state'];
         $entity->userId = (int) $data['user_id'];
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
-        $entity->statusOld = $this->cacheReportStatusRepository->fetchOneBy(['id' => $entity->oldState]);
-        $entity->statusNew = $this->cacheReportStatusRepository->fetchOneBy(['id' => $entity->newState]);
+        $entity->cacheStatusOld = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->oldState]);
+        $entity->cacheStatusNew = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->newState]);
 
         return $entity;
     }

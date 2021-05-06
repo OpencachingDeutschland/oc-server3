@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
 use Oc\Form\SupportAdminComment;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
@@ -15,6 +16,9 @@ use Oc\Repository\CacheReportsRepository;
 use Oc\Repository\CachesRepository;
 use Oc\Repository\CacheStatusModifiedRepository;
 use Oc\Repository\CacheStatusRepository;
+use Oc\Repository\Exception\RecordNotFoundException;
+use Oc\Repository\Exception\RecordNotPersistedException;
+use Oc\Repository\Exception\RecordsNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,8 +131,8 @@ class SupportController extends AbstractController
 
     /**
      * @return Response
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/reportedCaches", name="support_reported_caches")
      */
     public function listReportedCaches()
@@ -194,8 +198,8 @@ class SupportController extends AbstractController
      * @param int $repID
      *
      * @return Response
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      */
     public function list_reported_cache_details(int $repID)
@@ -224,9 +228,9 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordNotPersistedException
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
      * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
      */
     public function repCaches_saveTextArea(Request $request)
@@ -253,15 +257,35 @@ class SupportController extends AbstractController
      * @param string $route
      *
      * @return Response
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordNotPersistedException
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
      * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
      */
-    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route) : Response
-    {
+    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route)
+    : Response {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
         $entity->adminid = $adminId;
+
+        $this->cacheReportsRepository->update($entity);
+
+        return $this->redirectToRoute($route, ['repID' => $repID]);
+    }
+
+    /**
+     * @param int $repID
+     * @param string $route
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @route("/repCachesAssignSupportuser/{repID}&{route}", name="support_reported_cache_set_status")
+     */
+    public function repCaches_setReportStatus(int $repID, string $route)
+    : Response {
+        $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
+        $entity->status = 3; // ToDo: die '3' hart vorgeben? Oder irgendwie
 
         $this->cacheReportsRepository->update($entity);
 
@@ -272,9 +296,8 @@ class SupportController extends AbstractController
      * @param string $wpID
      *
      * @return Response
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
-     * @throws \Exception
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/cacheHistory/{wpID}", name="support_cache_history")
      */
     public function list_cache_history(string $wpID)
@@ -346,12 +369,11 @@ class SupportController extends AbstractController
 
     /**
      * @return array
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      */
     public function getReportedCaches()
-    : array
-    {
+    : array {
         return $this->cacheReportsRepository->fetchAll();
     }
 

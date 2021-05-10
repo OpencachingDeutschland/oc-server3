@@ -22,7 +22,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for report in reportedCaches_by_id %}
+                    {% for report in reportedCaches_by_id | reverse %}
                         <tr>
                             <td>{{ report.id }}</td>
                             <td>{{ report.reportStatus.name }}</td>

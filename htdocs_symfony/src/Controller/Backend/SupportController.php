@@ -5,11 +5,20 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Oc\Form\SupportAdminComment;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
+use Oc\Repository\CacheAdoptionsRepository;
+use Oc\Repository\CacheCoordinatesRepository;
+use Oc\Repository\CacheLogsArchivedRepository;
 use Oc\Repository\CacheReportsRepository;
+use Oc\Repository\CachesRepository;
 use Oc\Repository\CacheStatusModifiedRepository;
 use Oc\Repository\CacheStatusRepository;
+use Oc\Repository\Exception\RecordNotFoundException;
+use Oc\Repository\Exception\RecordNotPersistedException;
+use Oc\Repository\Exception\RecordsNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +34,18 @@ class SupportController extends AbstractController
     /** @var Connection */
     private $connection;
 
+    /** @var CacheAdoptionsRepository */
+    private $cacheAdoptionsRepository;
+
+    /** @var CacheCoordinatesRepository */
+    private $cacheCoordinatesRepository;
+
+    /** @var CacheLogsArchivedRepository */
+    private $cacheLogsArchivedRepository;
+
+    /** @var CachesRepository */
+    private $cachesRepository;
+
     /** @var CacheReportsRepository */
     private $cacheReportsRepository;
 
@@ -38,17 +59,29 @@ class SupportController extends AbstractController
      * SupportController constructor.
      *
      * @param Connection $connection
+     * @param CacheAdoptionsRepository $cacheAdoptionsRepository
+     * @param CacheCoordinatesRepository $cacheCoordinatesRepository
+     * @param CacheLogsArchivedRepository $cacheLogsArchivedRepository
+     * @param CachesRepository $cachesRepository
      * @param CacheReportsRepository $cacheReportsRepository
      * @param CacheStatusModifiedRepository $cacheStatusModifiedRepository
      * @param CacheStatusRepository $cacheStatusRepository
      */
     public function __construct(
         Connection $connection,
+        CacheAdoptionsRepository $cacheAdoptionsRepository,
+        CacheCoordinatesRepository $cacheCoordinatesRepository,
+        CacheLogsArchivedRepository $cacheLogsArchivedRepository,
+        CachesRepository $cachesRepository,
         CacheReportsRepository $cacheReportsRepository,
         CacheStatusModifiedRepository $cacheStatusModifiedRepository,
         CacheStatusRepository $cacheStatusRepository
     ) {
         $this->connection = $connection;
+        $this->cacheAdoptionsRepository = $cacheAdoptionsRepository;
+        $this->cacheCoordinatesRepository = $cacheCoordinatesRepository;
+        $this->cacheLogsArchivedRepository = $cacheLogsArchivedRepository;
+        $this->cachesRepository = $cachesRepository;
         $this->cacheReportsRepository = $cacheReportsRepository;
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
@@ -98,7 +131,8 @@ class SupportController extends AbstractController
 
     /**
      * @return Response
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/reportedCaches", name="support_reported_caches")
      */
     public function listReportedCaches()
@@ -142,6 +176,9 @@ class SupportController extends AbstractController
                 if (array_key_exists('password', $fetchedInformation[$i])) {
                     $fetchedInformation[$i]['password'] = '-';
                 }
+                if (array_key_exists('logpw', $fetchedInformation[$i])) {
+                    $fetchedInformation[$i]['logpw'] = '-';
+                }
                 if (array_key_exists('admin_password', $fetchedInformation[$i])) {
                     $fetchedInformation[$i]['admin_password'] = '-';
                 }
@@ -158,16 +195,17 @@ class SupportController extends AbstractController
     }
 
     /**
-     * @param string $repID
+     * @param int $repID
      *
      * @return Response
-     * @throws \Oc\Repository\Exception\RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      */
-    public function list_reported_cache_details(string $repID)
+    public function list_reported_cache_details(int $repID)
     : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formComment = $this->createForm(SupportAdminComment::class);
 
         $fetchedReport = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
 
@@ -178,10 +216,115 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/reportedCacheDetails.html.twig', [
                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                'supportAdminCommentForm' => $formComment->createView(),
                                                                 'reported_cache_by_id' => $fetchedReport,
                                                                 'cache_status' => $fetchedStatus,
                                                                 'report_status_modified' => $fetchedStatusModfied
                                                             ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
+     */
+    public function repCaches_saveTextArea(Request $request)
+    : Response {
+        $form = $this->createForm(SupportAdminComment::class)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $inputData = $form->getData();
+
+            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_repID']]);
+            $entity->comment = $inputData['support_admin_comment'];
+
+            $this->cacheReportsRepository->update($entity);
+
+            return $this->redirectToRoute('backend_support_reported_cache', ['repID' => $entity->id]);
+        }
+
+        return $this->redirectToRoute('backend_support_reported_caches');
+    }
+
+    /**
+     * @param int $repID
+     * @param int $adminId
+     * @param string $route
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
+     */
+    public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route)
+    : Response {
+        $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
+        $entity->adminid = $adminId;
+
+        $this->cacheReportsRepository->update($entity);
+
+        return $this->redirectToRoute($route, ['repID' => $repID]);
+    }
+
+    /**
+     * @param int $repID
+     * @param string $route
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @route("/repCachesAssignSupportuser/{repID}&{route}", name="support_reported_cache_set_status")
+     */
+    public function repCaches_setReportStatus(int $repID, string $route)
+    : Response {
+        $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
+        $entity->status = 3; // ToDo: die '3' hart vorgeben? Oder irgendwie
+
+        $this->cacheReportsRepository->update($entity);
+
+        return $this->redirectToRoute($route, ['repID' => $repID]);
+    }
+
+    /**
+     * @param string $wpID
+     *
+     * @return Response
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
+     * @Route("/cacheHistory/{wpID}", name="support_cache_history")
+     */
+    public function list_cache_history(string $wpID)
+    : Response {
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        $fetchedId = $this->cachesRepository->getIdByWP($wpID);
+
+        $fetchedReports = $this->cacheReportsRepository->fetchBy(['cacheid' => $fetchedId]);
+
+        $fetchedLogDeletes = $this->cacheLogsArchivedRepository->fetchBy(['cache_id' => $fetchedId]);
+
+        $fetchedStatusModfied = $this->cacheStatusModifiedRepository->fetchBy(['cache_id' => $fetchedId]);
+
+        $fetchedCoordinates = $this->cacheCoordinatesRepository->fetchBy(['cache_id' => $fetchedId]);
+
+        $fetchedAdoptions = $this->cacheAdoptionsRepository->fetchBy(['cache_id' => $fetchedId]);
+
+        return $this->render(
+            'backend/support/cacheHistory.html.twig', [
+                                                        'supportCachesForm' => $formSearch->createView(),
+                                                        'cache_reports' => $fetchedReports,
+                                                        'deleted_logs' => $fetchedLogDeletes,
+                                                        'report_status_modified' => $fetchedStatusModfied,
+                                                        'changed_coordinates' => $fetchedCoordinates,
+                                                        'cache_adoptions' => $fetchedAdoptions,
+                                                    ]
         );
     }
 
@@ -226,11 +369,11 @@ class SupportController extends AbstractController
 
     /**
      * @return array
-     * @throws \Oc\Repository\Exception\RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      */
     public function getReportedCaches()
-    : array
-    {
+    : array {
         return $this->cacheReportsRepository->fetchAll();
     }
 

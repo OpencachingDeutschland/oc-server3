@@ -35,11 +35,10 @@
                             <td>{{ report.name }}</td>
                             <td>{{ report.username }}</td>
                             <td>{{ report.email }}</td>
+                            <td><a href="{{ path('backend_support_cache_history', { 'wpID': report.wp_oc }) }}"><i class="fas fa-check"></i></a></td>
                             <td><i class="fas fa-times"></i></td>
                             <td><i class="fas fa-times"></i></td>
                             <td><i class="fas fa-times"></i></td>
-                            <td><i class="fas fa-times"></i></td>
-{#                            <td><i class="fas fa-check"></td>#}
                             <td>
 {#                                <a class="btn btn-primary" href="{{ path('backend_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>#}
                             </td>

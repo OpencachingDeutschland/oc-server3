@@ -4,53 +4,36 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
-Use Oc\Entity\GeoCacheStatusModifiedEntity;
+use Oc\Entity\GeoCacheLogsArchivedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
- * Class CacheStatusModifiedRepository
+ * Class CacheLogsArchivedRepository
  *
  * @package Oc\Repository
  */
-class CacheStatusModifiedRepository
+class CacheLogsArchivedRepository
 {
-    const TABLE = 'cache_status_modified';
+    const TABLE = 'cache_logs_archived';
 
     /** @var Connection */
     private $connection;
 
-    /** @var UserRepository */
-    private $userRepository;
-
-    /** @var CacheStatusRepository */
-    private $cacheStatusRepository;
-
     /**
-     * CacheStatusModifiedRepository constructor.
+     * CacheLogsArchivedRepository constructor.
      *
      * @param Connection $connection
-     * @param UserRepository $userRepository
-     * @param CacheStatusRepository $cacheStatusRepository
      */
-    public function __construct(
-        Connection $connection,
-        UserRepository $userRepository,
-        CacheStatusRepository $cacheStatusRepository
-    )
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->userRepository = $userRepository;
-        $this->cacheStatusRepository = $cacheStatusRepository;
     }
 
     /**
      * @return array
-     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
@@ -78,7 +61,7 @@ class CacheStatusModifiedRepository
     /**
      * @param array $where
      *
-     * @return GeoCacheStatusModifiedEntity
+     * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
@@ -109,7 +92,7 @@ class CacheStatusModifiedRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
     {
@@ -141,13 +124,13 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
+     * @param GeoCacheLogsArchivedEntity $entity
      *
-     * @return GeoCacheStatusModifiedEntity
+     * @return GeoCacheLogsArchivedEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(GeoCacheStatusModifiedEntity $entity)
+    public function create(GeoCacheLogsArchivedEntity $entity)
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -160,19 +143,19 @@ class CacheStatusModifiedRepository
             $databaseArray
         );
 
-        $entity->cacheId = (int) $this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
+     * @param GeoCacheLogsArchivedEntity $entity
      *
-     * @return GeoCacheStatusModifiedEntity
+     * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(GeoCacheStatusModifiedEntity $entity)
+    public function update(GeoCacheLogsArchivedEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -183,21 +166,21 @@ class CacheStatusModifiedRepository
         $this->connection->update(
             self::TABLE,
             $databaseArray,
-            ['cache_id' => $entity->cacheId]
+            ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
+     * @param GeoCacheLogsArchivedEntity $entity
      *
-     * @return GeoCacheStatusModifiedEntity
-     * @throws DBALException
+     * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotPersistedException
-     * @throws InvalidArgumentException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(GeoCacheStatusModifiedEntity $entity)
+    public function remove(GeoCacheLogsArchivedEntity $entity)
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -205,7 +188,7 @@ class CacheStatusModifiedRepository
 
         $this->connection->delete(
             self::TABLE,
-            ['cache_id' => $entity->cacheId]
+            ['id' => $entity->id]
         );
 
         $entity->cacheId = null;
@@ -214,38 +197,73 @@ class CacheStatusModifiedRepository
     }
 
     /**
-     * @param GeoCacheStatusModifiedEntity $entity
+     * @param GeoCacheLogsArchivedEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(GeoCacheStatusModifiedEntity $entity)
+    public function getDatabaseArrayFromEntity(GeoCacheLogsArchivedEntity $entity)
     {
         return [
+            'id' => $entity->id,
+            'uuid' => $entity->uuid,
+            'node' => $entity->node,
+            'date_created' => $entity->dateCreated,
+            'entry_last_modified' => $entity->entryLastModified,
+            'last_modified' => $entity->lastModified,
+            'okapi_syncbase' => $entity->okapiSyncbase,
+            'log_last_modified' => $entity->logLastModified,
             'cache_id' => $entity->cacheId,
-            'date_modified' => $entity->dateModified,
-            'old_state' => $entity->oldState,
-            'new_state' => $entity->newState,
             'user_id' => $entity->userId,
+            'type' => $entity->type,
+            'oc_team_comment' => $entity->ocTeamComment,
+            'date' => $entity->date,
+            'order_date' => $entity->orderDate,
+            'needs_maintenance' => $entity->needsMaintenance,
+            'listing_outdated' => $entity->listingOutdated,
+            'text' => $entity->text,
+            'text_html' => $entity->textHtml,
+            'text_htmledit' => $entity->textHtmledit,
+            'owner_notified' => $entity->ownerNotified,
+            'picture' => $entity->picture,
+            'deletion_date' => $entity->deletionDate,
+            'deleted_by' => $entity->deletedBy,
+            'restored_by' => $entity->restoredBy,
         ];
     }
 
     /**
      * @param array $data
      *
-     * @return GeoCacheStatusModifiedEntity
-     * @throws RecordNotFoundException
+     * @return GeoCacheLogsArchivedEntity
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     {
-        $entity = new GeoCacheStatusModifiedEntity();
+        $entity = new GeoCacheLogsArchivedEntity();
+        $entity->id = (int) $data['id'];
+        $entity->uuid = (string) $data['uuid'];
+        $entity->node = (int) $data['node'];
+        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->entryLastModified = new DateTime($data['entry_last_modified']);
+        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->okapiSyncbase = (string) $data['okapi_syncbase'];
+        $entity->logLastModified = new DateTime($data['log_last_modified']);
         $entity->cacheId = (int) $data['cache_id'];
-        $entity->dateModified = new DateTime($data['date_modified']);
-        $entity->oldState = (int) $data['old_state'];
-        $entity->newState = (int) $data['new_state'];
         $entity->userId = (int) $data['user_id'];
-        $entity->user = $this->userRepository->fetchOneById($entity->userId);
-        $entity->cacheStatusOld = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->oldState]);
-        $entity->cacheStatusNew = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->newState]);
+        $entity->type = (int) $data['type'];
+        $entity->ocTeamComment = (int) $data['oc_team_comment'];
+        $entity->date = new DateTime($data['date']);
+        $entity->orderDate = new DateTime($data['order_date']);
+        $entity->needsMaintenance = (int) $data['needs_maintenance'];
+        $entity->listingOutdated = (int) $data['listing_outdated'];
+        $entity->text = (string) $data['text'];
+        $entity->textHtml = (int) $data['text_html'];
+        $entity->textHtmledit = (int) $data['text_htmledit'];
+        $entity->ownerNotified = (int) $data['owner_notified'];
+        $entity->picture = $data['picture'];
+        $entity->deletionDate = new DateTime($data['deletion_date']);
+        $entity->deletedBy = (int) $data['deleted_by'];
+        $entity->restoredBy = (int) $data['restored_by'];
 
         return $entity;
     }

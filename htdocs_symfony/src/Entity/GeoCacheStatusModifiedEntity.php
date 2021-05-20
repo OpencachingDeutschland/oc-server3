@@ -5,6 +5,11 @@ namespace Oc\Entity;
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
+/**
+ * Class GeoCacheStatusModifiedEntity
+ *
+ * @package Oc\Entity
+ */
 class GeoCacheStatusModifiedEntity extends AbstractEntity
 {
     /** @var int */
@@ -25,11 +30,11 @@ class GeoCacheStatusModifiedEntity extends AbstractEntity
     /** @var UserEntity */
     public $user;
 
-    /** @var GeoCacheReportStatusEntity */
-    public $statusOld;
+    /** @var GeoCacheStatusEntity */
+    public $cacheStatusOld;
 
-    /** @var GeoCacheReportStatusEntity */
-    public $statusNew;
+    /** @var GeoCacheStatusEntity */
+    public $cacheStatusNew;
 
     /**
      * @return bool

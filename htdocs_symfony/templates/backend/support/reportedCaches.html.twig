@@ -13,6 +13,7 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col" class="asc">Report ID</th>
+                        <th scope="col" class="asc">{{ 'Status' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Reported by' | trans }}</th>
@@ -21,9 +22,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for report in reportedCaches_by_id %}
+                    {% for report in reportedCaches_by_id | reverse %}
                         <tr>
                             <td>{{ report.id }}</td>
+                            <td>{{ report.reportStatus.name }}</td>
                             <td>{{ report.cache.name }}</td>
                             <td>{{ report.cache.user.username }}</td>
                             <td>{{ report.user.username }}</td>

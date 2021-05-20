@@ -2,6 +2,8 @@
 
 {% block page_content %}
 
+    {% include '/backend/support/reportedCacheDetails.js' %}
+
     {% include '/backend/support/support.header.html.twig' %}
 
     <h3><br/>{{ 'Reported caches' | trans }} </h3>
@@ -11,9 +13,10 @@
             {% if reported_cache_by_id %}
                 <br/>
                 <p>
-                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} by {{ reported_cache_by_id.user.username }}
+                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} <b>by:</b> {{ reported_cache_by_id.user.username }}
                                                                                                         (
-                    <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1">{{ 'Nearby search at geocaching.com' | trans }}
+                    <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
+                       target="_blank">{{ 'Nearby search at geocaching.com' | trans }}
                     </a>
                                                                                                         )
                 </p>
@@ -21,23 +24,38 @@
                 <p><b>{{ 'Report last modified' | trans }}:</b> {{ reported_cache_by_id.lastmodified | date('d.m.Y') }}</p>
                 <p><b>{{ 'Reason' | trans }}:</b> {{ reported_cache_by_id.reportReason.name | trans }}</p>
                 <p><b>{{ 'State' | trans }}:</b> {{ reported_cache_by_id.reportStatus.name | trans }}
-                    {% if reported_cache_by_id.admin %} <b>by:</b> {{ reported_cache_by_id.admin.username | trans }} {% endif %}</p>
+                    {% if reported_cache_by_id.admin %} <b>by:</b> {{ reported_cache_by_id.admin.username }} {% endif %}</p>
                 <p><b>{{ 'Reporter comment' | trans }}:</b> {{ reported_cache_by_id.note }}</p>
+                <br/>
 
                 <hr>
-                <p><b>{{ 'Admin comment' | trans }}:</b> {{ reported_cache_by_id.comment }}</p>
-                <div class="md-form">
-                    <textarea id="admin_Comment_Textarea" class="md-textarea form-control" rows="5">{{ reported_cache_by_id.comment }}</textarea>
-                    <a class="btn btn-primary" href="#">{{ 'Save admin comment to database' | trans }}</a>
-                </div>
+                <p><b>{{ 'Admin comment' | trans }}:</b></p>
+                {{ form_start(supportAdminCommentForm, {'action': path('backend_support_reported_cache_save_text'), 'method': 'POST' }) }}
+                {{ form_row(supportAdminCommentForm.support_admin_comment, {'value': reported_cache_by_id.comment }) }}
+                {{ form_row(supportAdminCommentForm.save_admin_comment, {'label': 'Save admin comment' | trans }) }}
+                {{ form_row(supportAdminCommentForm.hidden_repID, {'value': reported_cache_by_id.id }) }}
+                <a class="btn btn-primary"
+                   onClick="addDateAndNameToTextField('support_admin_comment_support_admin_comment',
+                   {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
+                   style="display: block; width: 180px;">{{ 'Add date & user name' | trans }}</a>
+                {{ form_end(supportAdminCommentForm) }}
+                <br/>
 
                 <hr>
-                <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <p><b>{{ 'Action' | trans }}</b></p>
-                <a class="btn btn-primary" href="#">{{ 'Assign to me' | trans }}</a>
+                <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
+                <br/>
+                {% if not reported_cache_by_id.admin %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
+                {% endif %}
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
-                <a class="btn btn-primary" href="#">{{ 'Mark as finished' | trans }}</a>
+                {% if reported_cache_by_id.status < 3 %}
+                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
+                {% endif %}
+                <br/>
 
                 <hr>
                 <span class="badge badge-danger">Umsetzung muss noch warten, bis Logfunktionen vorhanden sind</span>
@@ -65,7 +83,7 @@
                         {% for statusChange in report_status_modified %}
                             <tr>
                                 <td>{{ statusChange.dateModified | date('d.m.Y') }}</td>
-                                <td>{{ statusChange.statusOld.name | trans }} -> {{ statusChange.statusNew.name | trans }}</td>
+                                <td>{{ statusChange.cacheStatusOld.name | trans }} -> {{ statusChange.cacheStatusNew.name | trans }}</td>
                                 <td>{{ statusChange.user.username }}</td>
                             </tr>
                         {% endfor %}

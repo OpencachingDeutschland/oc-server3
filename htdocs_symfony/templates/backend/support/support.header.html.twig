@@ -2,7 +2,6 @@
 
 <div class="container">
     <section class="container col-md-6">
-        {# {{ supportCachesForm.search_All.vars.label }} #}
         {% if supportCachesForm is defined %}
             {{ form_start(supportCachesForm,{action:path('backend_support_search')}) }}
             <div class="form-row">
@@ -17,7 +16,6 @@
                 </div>
             </div>
             {{ form_end(supportCachesForm) }}
-
         {% endif %}
 
     </section>
@@ -29,7 +27,6 @@
     <section class="container col-md-3">
         <a href="{{ path('backend_support_db_queries') }}">{{ 'Database queries' | trans }}</a>
     </section>
-
 </div>
 
 <hr>

@@ -122,7 +122,7 @@ $opt['forum']['name'] = 'forum.opencaching.de';
  * 4 Local Development
  * 5 Opencaching Entwicklung Deutschland (devel.opencaching.de)
  */
-$opt['logic']['node']['id'] = 5;
+$opt['logic']['node']['id'] = 4;
 
 /* pregenerated waypoint list for new caches
  * - Waypoint prefix (OC, OP, OZ ... AA=local development)

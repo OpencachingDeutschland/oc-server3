@@ -326,6 +326,9 @@
                             <td><a href="https://www.facebook.com/opencaching.de"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"
                                             width="16" height="16"/></a></td>
+                            <td><a href="https://www.instagram.com/opencachingde"><img
+                                            src="resource2/{$opt.template.style}/images/media/16x16-Instagram.png"
+                                            width="16" height="16"/></a></td>
                         </tr>
                     </table>
 

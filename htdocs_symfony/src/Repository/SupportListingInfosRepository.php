@@ -19,14 +19,22 @@ use Oc\Repository\Exception\RecordsNotFoundException;
  */
 class SupportListingInfosRepository
 {
-    const TABLE = 'support_listing_comments';
+    const TABLE = 'support_listing_infos';
 
     /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var NodesRepository */
+    private $nodesRepository;
+
+    /**
+     * @param Connection $connection
+     * @param NodesRepository $nodesRepository
+     */
+    public function __construct(Connection $connection, NodesRepository $nodesRepository)
     {
         $this->connection = $connection;
+        $this->nodesRepository = $nodesRepository;
     }
 
     /**
@@ -212,11 +220,11 @@ class SupportListingInfosRepository
             'node_listing_size' => $entity->nodeListingSize,
             'node_listing_difficulty' => $entity->nodeListingDifficulty,
             'node_listing_terrain' => $entity->nodeListingTerrain,
-            'node_listing_lon' => $entity->nodeListingLon,
-            'node_listing_lat' => $entity->nodeListingLat,
+            'node_listing_coordinates_lon' => $entity->nodeListingCoordinatesLon,
+            'node_listing_coordinates_lat' => $entity->nodeListingCoordinatesLat,
             'node_listing_archived' => $entity->nodeListingArchived,
-            'node_listing_lastmodified' => $entity->lastModified,
-            'import_status' => $entity->importStatus,
+            'last_modified' => $entity->lastModified,
+            'importstatus' => $entity->importStatus,
         ];
     }
 
@@ -239,11 +247,12 @@ class SupportListingInfosRepository
         $entity->nodeListingSize = (int) $data['node_listing_size'];
         $entity->nodeListingDifficulty = (int) $data['node_listing_difficulty'];
         $entity->nodeListingTerrain = (int) $data['node_listing_terrain'];
-        $entity->nodeListingLon = (double) $data['node_listing_lon'];
-        $entity->nodeListingLat = (double) $data['node_listing_lat'];
+        $entity->nodeListingCoordinatesLon = (double) $data['node_listing_coordinates_lon'];
+        $entity->nodeListingCoordinatesLat = (double) $data['node_listing_coordinates_lat'];
         $entity->nodeListingArchived = (bool) $data['node_listing_archived'];
-        $entity->lastModified = new DateTime($data['node_listing_lastmodified']);
-        $entity->importStatus = (int) $data['import_status'];
+        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->importStatus = (int) $data['importstatus'];
+        $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
 
         return $entity;
     }

@@ -32,6 +32,9 @@ class SupportUserCommentsEntity extends AbstractEntity
     /** @var DateTime */
     public $commentLastModified;
 
+    /** @var UserEntity */
+    public $user;
+
     /**
      * @return bool
      */

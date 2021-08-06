@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use DateTime;
 use Doctrine\DBAL\Connection;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -18,14 +19,18 @@ use Oc\Repository\Exception\RecordsNotFoundException;
  */
 class SupportUserCommentsRepository
 {
-    const TABLE = 'support_listing_comments';
+    const TABLE = 'support_user_comments';
 
     /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var UserRepository */
+    private $userRepository;
+
+    public function __construct(Connection $connection, UserRepository $userRepository)
     {
         $this->connection = $connection;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -206,7 +211,7 @@ class SupportUserCommentsRepository
             'comment' => $entity->comment,
             'comment_created' => $entity->commentCreated,
             'comment_created_by' => $entity->commentCreatedBy,
-            'lastmodified' => $entity->commentLastModified,
+            'comment_last_modified' => $entity->commentLastModified,
         ];
     }
 
@@ -221,10 +226,11 @@ class SupportUserCommentsRepository
         $entity = new SupportUserCommentsEntity();
         $entity->id = (int) $data['id'];
         $entity->ocUserId = (int) $data['oc_user_id'];
+        $entity->user = $this->userRepository->fetchOneById($entity->ocUserId);
         $entity->comment = (string) $data['comment'];
         $entity->commentCreated = new DateTime($data['comment_created']);
         $entity->commentCreatedBy = (string) $data['comment_created_by'];
-        $entity->commentLastModified = new DateTime($data['lastmodified']);
+        $entity->commentLastModified = new DateTime($data['comment_last_modified']);
 
         return $entity;
     }

@@ -7,32 +7,23 @@ namespace Oc\Entity;
 use Oc\Repository\AbstractEntity;
 
 /**
- * Class SupportUserRelationsEntity
+ * Class NodesEntity
  *
  * @package Oc\Entity
  */
-class SupportUserRelationsEntity extends AbstractEntity
+class NodesEntity extends AbstractEntity
 {
     /** @var int */
     public $id;
 
-    /** @var int */
-    public $ocUserId;
-
-    /** @var int */
-    public $nodeId;
+    /** @var string */
+    public $name;
 
     /** @var string */
-    public $nodeUserId;
+    public $url;
 
     /** @var string */
-    public $nodeUsername;
-
-    /** @var UserEntity */
-    public $user;
-
-    /** @var NodesEntity */
-    public $node;
+    public $waypointPrefix;
 
     /**
      * @return bool

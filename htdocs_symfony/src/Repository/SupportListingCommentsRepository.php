@@ -6,7 +6,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Oc\Entity\SupportListingInfosEntity;
+use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -59,11 +59,11 @@ class SupportListingCommentsRepository
     /**
      * @param array $where
      *
-     * @return SupportListingInfosEntity
+     * @return SupportListingCommentsEntity
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
-    : SupportListingInfosEntity {
+    : SupportListingCommentsEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -122,14 +122,14 @@ class SupportListingCommentsRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param SupportListingCommentsEntity $entity
      *
-     * @return SupportListingInfosEntity
+     * @return SupportListingCommentsEntity
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function create(SupportListingCommentsEntity $entity)
+    : SupportListingCommentsEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -147,14 +147,14 @@ class SupportListingCommentsRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param SupportListingCommentsEntity $entity
      *
-     * @return SupportListingInfosEntity
+     * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function update(SupportListingCommentsEntity $entity)
+    : SupportListingCommentsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -171,15 +171,15 @@ class SupportListingCommentsRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param SupportListingCommentsEntity $entity
      *
-     * @return SupportListingInfosEntity
+     * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(SupportListingInfosEntity $entity)
-    : SupportListingInfosEntity {
+    public function remove(SupportListingCommentsEntity $entity)
+    : SupportListingCommentsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -195,11 +195,11 @@ class SupportListingCommentsRepository
     }
 
     /**
-     * @param SupportListingInfosEntity $entity
+     * @param SupportListingCommentsEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(SupportListingInfosEntity $entity)
+    public function getDatabaseArrayFromEntity(SupportListingCommentsEntity $entity)
     : array {
         return [
             'id' => $entity->id,
@@ -214,12 +214,12 @@ class SupportListingCommentsRepository
     /**
      * @param array $data
      *
-     * @return SupportListingInfosEntity
+     * @return SupportListingCommentsEntity
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)
-    : SupportListingInfosEntity {
-        $entity = new SupportListingInfosEntity();
+    : SupportListingCommentsEntity {
+        $entity = new SupportListingCommentsEntity();
         $entity->id = (int) $data['id'];
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->comment = (string) $data['comment'];

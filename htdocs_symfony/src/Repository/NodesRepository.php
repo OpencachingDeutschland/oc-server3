@@ -5,40 +5,30 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Oc\Entity\SupportUserRelationsEntity;
+use Oc\Entity\NodesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
 /**
- * Class SupportUserRelationsRepository
+ * Class NodesRepository
  *
  * @package Oc\Repository
  */
-class SupportUserRelationsRepository
+class NodesRepository
 {
-    const TABLE = 'support_user_relations';
+    const TABLE = 'nodes';
 
     /** @var Connection */
     private $connection;
 
-    /** @var NodesRepository */
-    private $nodesRepository;
-
-    /** @var UserRepository */
-    private $userRepository;
-
     /**
      * @param Connection $connection
-     * @param NodesRepository $nodesRepository
-     * @param UserRepository $userRepository
      */
-    public function __construct(Connection $connection, NodesRepository $nodesRepository, UserRepository $userRepository)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->nodesRepository = $nodesRepository;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -46,7 +36,6 @@ class SupportUserRelationsRepository
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
-    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -71,11 +60,11 @@ class SupportUserRelationsRepository
     /**
      * @param array $where
      *
-     * @return SupportUserRelationsEntity
+     * @return NodesEntity
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
-    : SupportUserRelationsEntity {
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -105,7 +94,7 @@ class SupportUserRelationsRepository
      * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
-    : array {
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -134,14 +123,14 @@ class SupportUserRelationsRepository
     }
 
     /**
-     * @param SupportUserRelationsEntity $entity
+     * @param NodesEntity $entity
      *
-     * @return SupportUserRelationsEntity
+     * @return NodesEntity
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function create(SupportUserRelationsEntity $entity)
-    : SupportUserRelationsEntity {
+    public function create(NodesEntity $entity)
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -159,14 +148,14 @@ class SupportUserRelationsRepository
     }
 
     /**
-     * @param SupportUserRelationsEntity $entity
+     * @param NodesEntity $entity
      *
-     * @return SupportUserRelationsEntity
+     * @return NodesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(SupportUserRelationsEntity $entity)
-    : SupportUserRelationsEntity {
+    public function update(NodesEntity $entity)
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -183,15 +172,15 @@ class SupportUserRelationsRepository
     }
 
     /**
-     * @param SupportUserRelationsEntity $entity
+     * @param NodesEntity $entity
      *
-     * @return SupportUserRelationsEntity
+     * @return NodesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(SupportUserRelationsEntity $entity)
-    : SupportUserRelationsEntity {
+    public function remove(NodesEntity $entity)
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -201,43 +190,38 @@ class SupportUserRelationsRepository
             ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->cacheId = null;
 
         return $entity;
     }
 
     /**
-     * @param SupportUserRelationsEntity $entity
+     * @param NodesEntity $entity
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(SupportUserRelationsEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(NodesEntity $entity)
+    {
         return [
             'id' => $entity->id,
-            'oc_user_id' => $entity->ocUserId,
-            'node_id' => $entity->nodeId,
-            'node_user_id' => $entity->nodeUserId,
-            'node_username' => $entity->nodeUsername,
+            'name' => $entity->name,
+            'url' => $entity->url,
+            'waypoint_prefix' => $entity->waypointPrefix,
         ];
     }
 
     /**
      * @param array $data
      *
-     * @return SupportUserRelationsEntity
-     * @throws \Exception
+     * @return NodesEntity
      */
     public function getEntityFromDatabaseArray(array $data)
-    : SupportUserRelationsEntity {
-        $entity = new SupportUserRelationsEntity();
+    {
+        $entity = new NodesEntity();
         $entity->id = (int) $data['id'];
-        $entity->ocUserId = (int) $data['oc_user_id'];
-        $entity->nodeId = (int) $data['node_id'];
-        $entity->nodeUserId = (string) $data['node_user_id'];
-        $entity->nodeUsername = (string) $data['node_username'];
-        $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
-        $entity->user = $this->userRepository->fetchOneById($entity->ocUserId);
+        $entity->name = (string) $data['name'];
+        $entity->url = (string) $data['url'];
+        $entity->waypointPrefix = (string) $data['waypoint_prefix'];
 
         return $entity;
     }

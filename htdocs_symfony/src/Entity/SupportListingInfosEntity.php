@@ -45,10 +45,10 @@ class SupportListingInfosEntity extends AbstractEntity
     public $nodeListingTerrain;
 
     /** @var double */
-    public $nodeListingLon;
+    public $nodeListingCoordinatesLon;
 
     /** @var double */
-    public $nodeListingLat;
+    public $nodeListingCoordinatesLat;
 
     /** @var bool */
     public $nodeListingArchived;
@@ -58,6 +58,9 @@ class SupportListingInfosEntity extends AbstractEntity
 
     /** @var int */
     public $importStatus;
+
+    /** @var NodesEntity */
+    public $node;
 
     /**
      * @return bool

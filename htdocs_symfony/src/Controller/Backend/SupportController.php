@@ -19,6 +19,7 @@ use Oc\Repository\CacheStatusRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
+use Oc\Repository\SupportBonuscachesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -55,9 +56,10 @@ class SupportController extends AbstractController
     /** @var CacheStatusRepository */
     private $cacheStatusRepository;
 
+    /** @var SupportBonuscachesRepository */
+    private $supportBonuscachesRepository;
+
     /**
-     * SupportController constructor.
-     *
      * @param Connection $connection
      * @param CacheAdoptionsRepository $cacheAdoptionsRepository
      * @param CacheCoordinatesRepository $cacheCoordinatesRepository
@@ -66,6 +68,7 @@ class SupportController extends AbstractController
      * @param CacheReportsRepository $cacheReportsRepository
      * @param CacheStatusModifiedRepository $cacheStatusModifiedRepository
      * @param CacheStatusRepository $cacheStatusRepository
+     * @param SupportBonuscachesRepository $supportBonuscachesRepository
      */
     public function __construct(
         Connection $connection,
@@ -75,7 +78,8 @@ class SupportController extends AbstractController
         CachesRepository $cachesRepository,
         CacheReportsRepository $cacheReportsRepository,
         CacheStatusModifiedRepository $cacheStatusModifiedRepository,
-        CacheStatusRepository $cacheStatusRepository
+        CacheStatusRepository $cacheStatusRepository,
+        SupportBonuscachesRepository $supportBonuscachesRepository
     ) {
         $this->connection = $connection;
         $this->cacheAdoptionsRepository = $cacheAdoptionsRepository;
@@ -85,6 +89,7 @@ class SupportController extends AbstractController
         $this->cacheReportsRepository = $cacheReportsRepository;
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
+        $this->supportBonuscachesRepository = $supportBonuscachesRepository;
     }
 
     /**
@@ -147,6 +152,27 @@ class SupportController extends AbstractController
                                                           'supportCachesForm' => $formSearch->createView(),
                                                           'reportedCaches_by_id' => $fetchedReports
                                                       ]
+        );
+    }
+
+    /**
+     * @return Response
+     * @throws RecordsNotFoundException
+     *
+     * @Route("/bonusCaches", name="support_bonus_caches")
+     */
+    public function listBonusCaches()
+    : Response
+    {
+        $fetchedBonuscaches = $this->getBonusCaches();
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        return $this->render(
+            'backend/support/bonusCaches.html.twig', [
+                                                       'supportCachesForm' => $formSearch->createView(),
+                                                       'bonusCaches_by_id' => $fetchedBonuscaches
+                                                   ]
         );
     }
 
@@ -369,11 +395,22 @@ class SupportController extends AbstractController
 
     /**
      * @return array
+     * @throws RecordsNotFoundException
+     */
+    public function getBonusCaches()
+    : array
+    {
+        return $this->supportBonuscachesRepository->fetchAll();
+    }
+
+    /**
+     * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function getReportedCaches()
-    : array {
+    : array
+    {
         return $this->cacheReportsRepository->fetchAll();
     }
 

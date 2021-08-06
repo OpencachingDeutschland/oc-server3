@@ -1,0 +1,43 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Bonus caches' | trans }}..</h3>
+
+    <div>
+        {% if bonusCaches_by_id is defined %}
+            <div> Found: {{ bonusCaches_by_id|length }} Cache(s)</div>
+            {% if bonusCaches_by_id %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Is a bonus cache?' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Belongs to bonus cache' | trans }}</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for bonusCache in bonusCaches_by_id %}
+                        <tr>
+                            <td>{{ bonusCache.wpOc }}</td>
+                            <td>{% if (bonusCache.isBonusCache) %}<i class="fas fa-check"></i>{% else %}<i class="fas fa-times"></i>{% endif %}</td>
+                            <td>{% if (bonusCache.belongsToBonusCache) %}{{ bonusCache.belongsToBonusCache }}{% else %}<i
+                                        class="fas fa-times"></i>{% endif %}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No caches found' | trans }}..</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

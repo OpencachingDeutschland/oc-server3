@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use DateTime;
 use Oc\Repository\AbstractEntity;
 
 /**
@@ -23,14 +22,23 @@ class SupportListingCommentsEntity extends AbstractEntity
     /** @var string */
     public $comment;
 
-    /** @var DateTime */
+    /** @var string */
     public $commentCreated;
 
     /** @var string */
-    public $commentCreatedBy;
-
-    /** @var DateTime */
     public $commentLastModified;
+
+    /**
+     * @param string $wpOc
+     * @param string $comment
+     */
+    public function __construct(string $wpOc, string $comment = '')
+    {
+        $this->wpOc = $wpOc;
+        $this->comment = $comment;
+        $this->commentCreated = date('Y-m-d H:i:s');
+        $this->commentLastModified = date('Y-m-d H:i:s');
+    }
 
     /**
      * @return bool

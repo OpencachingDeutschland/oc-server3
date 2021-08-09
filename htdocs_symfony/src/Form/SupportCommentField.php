@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @package Oc\Form
  */
-class SupportAdminComment extends AbstractType
+class SupportCommentField extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -23,9 +23,9 @@ class SupportAdminComment extends AbstractType
     {
         $builder
             ->add(
-                'support_admin_comment', TextareaType::class, [
+                'content_comment_field', TextareaType::class, [
                                            'attr' => [
-                                               'maxlength' => '32000',
+                                               'maxlength' => '100000',
                                                'overflow' => 'auto',
                                                'rows' => '10',
                                            ],
@@ -36,15 +36,25 @@ class SupportAdminComment extends AbstractType
                                        ]
             )
             ->add(
-                'save_admin_comment', SubmitType::class, [
-                                        'attr' => ['class' => 'btn btn-primary', 'style' => 'width: 180px;'],
-                                        'label' => '💾'
-                                    ]
+                'save_comment_button', SubmitType::class, [
+                                         'attr' => ['class' => 'btn btn-primary', 'style' => 'width: 180px;'],
+                                         'label' => '💾'
+                                     ]
             )
             ->add(
-                'hidden_repID', HiddenType::class, [
-                                  'attr' => ['maxlength' => '10'],
-                              ]
-            );
+                'hidden_ID', HiddenType::class, [
+                               'attr' => ['maxlength' => '10'],
+                           ]
+            )
+            ->add(
+                'hidden_ID2', HiddenType::class, [
+                                'attr' => ['maxlength' => '10'],
+                            ]
+            )
+            ->add(
+                'hidden_sender', HiddenType::class, [
+                                'attr' => ['maxlength' => '10'],
+                            ]
+    );
     }
 }

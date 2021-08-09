@@ -1,0 +1,128 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/insertDateAndUsernameButton.js' %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'OCC replacement page' | trans }}..</h3>
+
+    <div>
+        <br/>
+        <p><b>{{ 'User related information' | trans }}:</b>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <td>Node: OC
+                    <ul>
+                        <li>{{ 'User' | trans }}: {{ occ_user_data.username }}</li>
+                        <li>{{ 'Last login' | trans }}: {{ occ_user_data.lastLogin | date('d.m.Y') }}</li>
+                        <li>{{ 'Email validity' | trans }}:
+                            {% if occ_user_data.emailProblems %}<i class="fas fa-times"></i>
+                            {% else %}<i class="fas fa-check"></i>
+                            {% endif %}</li>
+                        <li>{{ 'Send message' | trans }}: <i class="fas fa-envelope"></i> <span class="badge badge-danger">"Send Message" muss noch warten, bis die Funktion eingebaut wurde..</span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            {% if occ_user_relations is defined and occ_user_relations %}
+                {% for item in occ_user_relations %}
+                    <tr>
+                        <td>Node: {{ item.node.waypointPrefix }} / {{ item.node.name }}
+                            <ul>
+                                <li>{{ 'User' | trans }}: {{ item.nodeUsername }}</li>
+                                <li>{{ 'User-ID' | trans }}: {{ item.nodeUserId }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>
+                        <span>{{ 'No user relations found' | trans }}..</span>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+        {% if occ_user_comments is defined and occ_user_comments %}
+            <p><b>{{ 'User related comments' | trans }}:</b>
+                {{ 'Last change' | trans }}: {{ occ_user_comments.commentLastModified | date('d.m.Y H:i:s') }}</p>
+            {{ form_start(supportCommentFormUser, {'action': path('backend_support_occ_save_text'), 'method': 'POST'}) }}
+            {{ form_row(supportCommentFormUser.content_comment_field, {'value': occ_user_comments.comment, 'id': 'comment_field_user' }) }}
+            {{ form_row(supportCommentFormUser.save_comment_button, {'label': 'Save comment' | trans }) }}
+            {{ form_row(supportCommentFormUser.hidden_ID, {'value': occ_user_comments.ocUserId }) }}
+            {% if occ_cache_data is defined and occ_cache_data %}{{ form_row(supportCommentFormUser.hidden_ID2, {'value': occ_cache_data.wpOc }) }}{% endif %}
+            <a class="btn btn-primary"
+               onClick="addDateAndNameToTextField('comment_field_user',
+                   {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
+               style="display: block; width: 180px;">{{ 'Add date & user name' | trans }}</a>
+            {{ form_row(supportCommentFormUser.hidden_sender, {'value': 'textfield_user_comment' }) }}
+            {{ form_end(supportCommentFormUser) }}
+        {% endif %}
+
+        <hr>
+
+        {% if occ_cache_data is defined and occ_cache_data %}
+            <p><b>{{ 'Cache related information' | trans }}:</b>
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td>Node: OC
+                        <ul>
+                            <li>{{ 'Cache' | trans }}: {{ occ_cache_data.wpOc }} / {{ occ_cache_data.name }}</li>
+                            <li>{{ 'Watch Listing' | trans }}: <i class="fas fa-eye"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
+                            <li>{{ 'Assign listing for check' | trans }}: <i class="fas fa-exclamation-triangle"></i> <span
+                                        class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
+                            <li>{{ 'Report listing' | trans }}: <i class="fas fa-exclamation-circle"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion eingebaut wurde..</span>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                {% for item in occ_cache_infos %}
+                    <tr>
+                        <td>Node: {{ item.node.waypointPrefix }} / {{ item.node.name }}
+                            <ul>
+                                <li>{{ 'Cache' | trans }}: {{ item.nodeListingName }}</li>
+                                <li>{{ 'Cache-ID' | trans }}: {{ item.nodeListingWP }}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    {%  else %}
+                        <tr>
+                            <td>
+                                <span>{{ 'No cache data on other nodes found' | trans }}..</span>
+                            </td>
+                        </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+
+    {% if occ_cache_comments is defined and occ_cache_comments %}
+        <p><b>{{ 'Cache related comments' | trans }}:</b>
+            {{ 'Last change' | trans }}: {{ occ_cache_comments.commentLastModified | date('d.m.Y H:i:s') }}</p>
+        {{ form_start(supportCommentFormCache, {'action': path('backend_support_occ_save_text'), 'method': 'POST' }) }}
+        {{ form_row(supportCommentFormCache.content_comment_field, {'value': occ_cache_comments.comment, 'id': 'comment_field_cache' }) }}
+        {{ form_row(supportCommentFormCache.save_comment_button, {'label': 'Save comment' | trans }) }}
+        {{ form_row(supportCommentFormCache.hidden_ID, {'value': occ_user_comments.ocUserId }) }}
+        {% if occ_cache_data is defined and occ_cache_data %}{{ form_row(supportCommentFormCache.hidden_ID2, {'value': occ_cache_data.wpOc }) }}{% endif %}
+        <a class="btn btn-primary"
+           onClick="addDateAndNameToTextField('comment_field_cache',
+                   {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
+           style="display: block; width: 180px;">{{ 'Add date & user name' | trans }}</a>
+        {{ form_row(supportCommentFormCache.hidden_sender, {'value': 'textfield_cache_comment' }) }}
+        {{ form_end(supportCommentFormCache) }}
+    {% endif %}
+
+    <hr>
+
+{% endblock %}

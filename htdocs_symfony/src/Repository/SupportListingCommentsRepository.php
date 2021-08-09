@@ -206,8 +206,7 @@ class SupportListingCommentsRepository
             'wp_oc' => $entity->wpOc,
             'comment' => $entity->comment,
             'comment_created' => $entity->commentCreated,
-            'comment_created_by' => $entity->commentCreatedBy,
-            'comment_last_modified' => $entity->commentLastModified,
+            'comment_last_modified' => date('Y-m-d H:i:s'),
         ];
     }
 
@@ -219,13 +218,12 @@ class SupportListingCommentsRepository
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingCommentsEntity {
-        $entity = new SupportListingCommentsEntity();
+        $entity = new SupportListingCommentsEntity('');
         $entity->id = (int) $data['id'];
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->comment = (string) $data['comment'];
-        $entity->commentCreated = new DateTime($data['comment_created']);
-        $entity->commentCreatedBy = (string) $data['comment_created_by'];
-        $entity->commentLastModified = new DateTime($data['comment_last_modified']);
+        $entity->commentCreated = (string) $data['comment_created'];
+        $entity->commentLastModified = (string) $data['comment_last_modified'];
 
         return $entity;
     }

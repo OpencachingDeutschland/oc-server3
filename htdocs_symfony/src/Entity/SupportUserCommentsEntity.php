@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use DateTime;
 use Oc\Repository\AbstractEntity;
 
 /**
@@ -23,17 +22,26 @@ class SupportUserCommentsEntity extends AbstractEntity
     /** @var string */
     public $comment;
 
-    /** @var DateTime */
+    /** @var string */
     public $commentCreated;
 
     /** @var string */
-    public $commentCreatedBy;
-
-    /** @var DateTime */
     public $commentLastModified;
 
     /** @var UserEntity */
     public $user;
+
+    /**
+     * @param int $ocUserId
+     * @param string $comment
+     */
+    public function __construct(int $ocUserId, string $comment = '')
+    {
+        $this->ocUserId = $ocUserId;
+        $this->comment = $comment;
+        $this->commentCreated = date('Y-m-d H:i:s');
+        $this->commentLastModified = date('Y-m-d H:i:s');
+    }
 
     /**
      * @return bool

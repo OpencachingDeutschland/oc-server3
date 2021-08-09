@@ -223,7 +223,7 @@ class SupportListingInfosRepository
             'node_listing_coordinates_lon' => $entity->nodeListingCoordinatesLon,
             'node_listing_coordinates_lat' => $entity->nodeListingCoordinatesLat,
             'node_listing_archived' => $entity->nodeListingArchived,
-            'last_modified' => $entity->lastModified,
+            'last_modified' => date('Y-m-d H:i:s'),
             'importstatus' => $entity->importStatus,
         ];
     }

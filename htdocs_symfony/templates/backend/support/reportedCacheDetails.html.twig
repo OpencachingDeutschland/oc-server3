@@ -2,7 +2,7 @@
 
 {% block page_content %}
 
-    {% include '/backend/support/reportedCacheDetails.js' %}
+    {% include '/backend/support/insertDateAndUsernameButton.js' %}
 
     {% include '/backend/support/support.header.html.twig' %}
 
@@ -31,11 +31,11 @@
                 <hr>
                 <p><b>{{ 'Admin comment' | trans }}:</b></p>
                 {{ form_start(supportAdminCommentForm, {'action': path('backend_support_reported_cache_save_text'), 'method': 'POST' }) }}
-                {{ form_row(supportAdminCommentForm.support_admin_comment, {'value': reported_cache_by_id.comment }) }}
-                {{ form_row(supportAdminCommentForm.save_admin_comment, {'label': 'Save admin comment' | trans }) }}
-                {{ form_row(supportAdminCommentForm.hidden_repID, {'value': reported_cache_by_id.id }) }}
+                {{ form_row(supportAdminCommentForm.content_comment_field, {'value': reported_cache_by_id.comment }) }}
+                {{ form_row(supportAdminCommentForm.save_comment_button, {'label': 'Save comment' | trans }) }}
+                {{ form_row(supportAdminCommentForm.hidden_ID, {'value': reported_cache_by_id.id }) }}
                 <a class="btn btn-primary"
-                   onClick="addDateAndNameToTextField('support_admin_comment_support_admin_comment',
+                   onClick="addDateAndNameToTextField('support_comment_field_content_comment_field',
                    {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
                    style="display: block; width: 180px;">{{ 'Add date & user name' | trans }}</a>
                 {{ form_end(supportAdminCommentForm) }}

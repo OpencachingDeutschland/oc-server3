@@ -186,6 +186,7 @@ class CachesRepository
      * @param GeoCachesEntity $entity
      *
      * @return GeoCachesEntity
+     * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      */
     public function update(GeoCachesEntity $entity)
@@ -205,6 +206,7 @@ class CachesRepository
      * @param GeoCachesEntity $entity
      *
      * @return GeoCachesEntity
+     * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
@@ -263,7 +265,7 @@ class CachesRepository
             'node' => $entity->node,
             'date_created' => $entity->dateCreated,
             'is_publishdate' => $entity->isPublishdate,
-            'last_modified' => $entity->lastModified,
+            'last_modified' => date('Y-m-d H:i:s'),
             'okapi_syncbase' => $entity->okapiSyncbase,
             'listing_last_modified' => $entity->listingLastModified,
             'meta_last_modified' => $entity->metaLastModified,

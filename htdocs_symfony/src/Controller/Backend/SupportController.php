@@ -303,7 +303,7 @@ class SupportController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
-            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_ID']]);
+            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_ID1']]);
             $entity->comment = $inputData['content_comment_field'];
 
             $this->cacheReportsRepository->update($entity);
@@ -330,20 +330,20 @@ class SupportController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
-//                        dd($inputData);
-//                        die();
-
             if ($inputData['hidden_sender'] == 'textfield_cache_comment') {
                 $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => (string) $inputData['hidden_ID2']]);
                 $entity->comment = $inputData['content_comment_field'];
                 $this->supportListingCommentsRepository->update($entity);
             } elseif ($inputData['hidden_sender'] == 'textfield_user_comment') {
-                $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int) $inputData['hidden_ID']]);
+                $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int) $inputData['hidden_ID1']]);
                 $entity->comment = $inputData['content_comment_field'];
                 $this->supportUserCommentsRepository->update($entity);
             }
 
-            return $this->redirectToRoute('backend_support_occ', ['userID' => (string) $inputData['hidden_ID'], 'wpID' => (string) $inputData['hidden_ID2']]);
+            return $this->redirectToRoute('backend_support_occ', [
+                'userID' => (string) $inputData['hidden_ID1'],
+                'wpID' => (string) $inputData['hidden_ID2']
+            ]);
         }
 
         return $this->redirectToRoute('backend_support_occ');

@@ -13,12 +13,13 @@
             {% if reported_cache_by_id %}
                 <br/>
                 <p>
-                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }} <b>by:</b> {{ reported_cache_by_id.user.username }}
-                                                                                                        (
+                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }}
+                    <b>by:</b> {{ reported_cache_by_id.user.username }}
+                    (
                     <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
                        target="_blank">{{ 'Nearby search at geocaching.com' | trans }}
                     </a>
-                                                                                                        )
+                    )
                 </p>
                 <p><b>{{ 'Report created' | trans }}:</b> {{ reported_cache_by_id.dateCreated | date('d.m.Y') }}</p>
                 <p><b>{{ 'Report last modified' | trans }}:</b> {{ reported_cache_by_id.lastmodified | date('d.m.Y') }}</p>
@@ -33,7 +34,7 @@
                 {{ form_start(supportAdminCommentForm, {'action': path('backend_support_reported_cache_save_text'), 'method': 'POST' }) }}
                 {{ form_row(supportAdminCommentForm.content_comment_field, {'value': reported_cache_by_id.comment }) }}
                 {{ form_row(supportAdminCommentForm.save_comment_button, {'label': 'Save comment' | trans }) }}
-                {{ form_row(supportAdminCommentForm.hidden_ID, {'value': reported_cache_by_id.id }) }}
+                {{ form_row(supportAdminCommentForm.hidden_ID1, {'value': reported_cache_by_id.id }) }}
                 <a class="btn btn-primary"
                    onClick="addDateAndNameToTextField('support_comment_field_content_comment_field',
                    {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"
@@ -46,14 +47,17 @@
                 <span class="badge badge-danger">Contact Owner/Reporter müssen noch warten, bis Nachrichten- und Logfunktionen vorhanden sind</span>
                 <br/>
                 {% if not reported_cache_by_id.admin %}
-                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
                 {% else %}
-                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
                 {% endif %}
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
                 {% if reported_cache_by_id.status < 3 %}
-                    <a class="btn btn-primary" href="{{ path('backend_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('backend_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
                 {% endif %}
                 <br/>
 

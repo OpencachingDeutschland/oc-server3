@@ -55,7 +55,7 @@
             {{ form_start(supportCommentFormUser, {'action': path('backend_support_occ_save_text'), 'method': 'POST'}) }}
             {{ form_row(supportCommentFormUser.content_comment_field, {'value': occ_user_comments.comment, 'id': 'comment_field_user' }) }}
             {{ form_row(supportCommentFormUser.save_comment_button, {'label': 'Save comment' | trans }) }}
-            {{ form_row(supportCommentFormUser.hidden_ID, {'value': occ_user_comments.ocUserId }) }}
+            {{ form_row(supportCommentFormUser.hidden_ID1, {'value': occ_user_comments.ocUserId }) }}
             {% if occ_cache_data is defined and occ_cache_data %}{{ form_row(supportCommentFormUser.hidden_ID2, {'value': occ_cache_data.wpOc }) }}{% endif %}
             <a class="btn btn-primary"
                onClick="addDateAndNameToTextField('comment_field_user',
@@ -93,12 +93,12 @@
                             </ul>
                         </td>
                     </tr>
-                    {%  else %}
-                        <tr>
-                            <td>
-                                <span>{{ 'No cache data on other nodes found' | trans }}..</span>
-                            </td>
-                        </tr>
+                {% else %}
+                    <tr>
+                        <td>
+                            <span>{{ 'No cache data on other nodes found' | trans }}..</span>
+                        </td>
+                    </tr>
                 {% endfor %}
 
                 </tbody>
@@ -113,7 +113,7 @@
         {{ form_start(supportCommentFormCache, {'action': path('backend_support_occ_save_text'), 'method': 'POST' }) }}
         {{ form_row(supportCommentFormCache.content_comment_field, {'value': occ_cache_comments.comment, 'id': 'comment_field_cache' }) }}
         {{ form_row(supportCommentFormCache.save_comment_button, {'label': 'Save comment' | trans }) }}
-        {{ form_row(supportCommentFormCache.hidden_ID, {'value': occ_user_comments.ocUserId }) }}
+        {{ form_row(supportCommentFormCache.hidden_ID1, {'value': occ_user_comments.ocUserId }) }}
         {% if occ_cache_data is defined and occ_cache_data %}{{ form_row(supportCommentFormCache.hidden_ID2, {'value': occ_cache_data.wpOc }) }}{% endif %}
         <a class="btn btn-primary"
            onClick="addDateAndNameToTextField('comment_field_cache',

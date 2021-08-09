@@ -42,9 +42,9 @@ class SupportCommentField extends AbstractType
                                      ]
             )
             ->add(
-                'hidden_ID', HiddenType::class, [
-                               'attr' => ['maxlength' => '10'],
-                           ]
+                'hidden_ID1', HiddenType::class, [
+                                'attr' => ['maxlength' => '10'],
+                            ]
             )
             ->add(
                 'hidden_ID2', HiddenType::class, [
@@ -53,8 +53,8 @@ class SupportCommentField extends AbstractType
             )
             ->add(
                 'hidden_sender', HiddenType::class, [
-                                'attr' => ['maxlength' => '10'],
-                            ]
-    );
+                                   'attr' => ['maxlength' => '10'],
+                               ]
+            );
     }
 }

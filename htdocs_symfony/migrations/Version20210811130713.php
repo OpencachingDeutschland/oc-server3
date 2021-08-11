@@ -15,7 +15,7 @@ final class Version20210811130713 extends AbstractMigration
     public function getDescription()
     : string
     {
-        return 'adjust database to match live DB and test DB';
+        return 'create tables existing in live-DB,but not in test-DB';
     }
 
     public function up(Schema $schema)
@@ -60,11 +60,6 @@ final class Version20210811130713 extends AbstractMigration
                     UNIQUE KEY (id, operation)
                 )
                 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'
-        );
-
-        // change caches/wp_oc to varchar(7)
-        $this->addSql(
-            'ALTER TABLE caches MODIFY wp_oc varchar (7) UNIQUE ;'
         );
     }
 

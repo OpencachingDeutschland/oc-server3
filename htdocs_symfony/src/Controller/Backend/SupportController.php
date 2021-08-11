@@ -6,7 +6,9 @@ namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
-use Oc\Form\SupportAdminComment;
+use Oc\Entity\SupportListingCommentsEntity;
+use Oc\Entity\SupportUserCommentsEntity;
+use Oc\Form\SupportCommentField;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
 use Oc\Repository\CacheAdoptionsRepository;
@@ -20,6 +22,11 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\SupportBonuscachesRepository;
+use Oc\Repository\SupportListingCommentsRepository;
+use Oc\Repository\SupportListingInfosRepository;
+use Oc\Repository\SupportUserCommentsRepository;
+use Oc\Repository\SupportUserRelationsRepository;
+use Oc\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,6 +66,21 @@ class SupportController extends AbstractController
     /** @var SupportBonuscachesRepository */
     private $supportBonuscachesRepository;
 
+    /** @var SupportListingCommentsRepository */
+    private $supportListingCommentsRepository;
+
+    /** @var SupportListingInfosRepository */
+    private $supportListingInfosRepository;
+
+    /** @var SupportUserCommentsRepository */
+    private $supportUserCommentsRepository;
+
+    /** @var SupportUserRelationsRepository */
+    private $supportUserRelationsRepository;
+
+    /** @var UserRepository */
+    private $userRepository;
+
     /**
      * @param Connection $connection
      * @param CacheAdoptionsRepository $cacheAdoptionsRepository
@@ -69,6 +91,11 @@ class SupportController extends AbstractController
      * @param CacheStatusModifiedRepository $cacheStatusModifiedRepository
      * @param CacheStatusRepository $cacheStatusRepository
      * @param SupportBonuscachesRepository $supportBonuscachesRepository
+     * @param SupportListingCommentsRepository $supportListingCommentsRepository
+     * @param SupportListingInfosRepository $supportListingInfosRepository
+     * @param SupportUserCommentsRepository $supportUserCommentsRepository
+     * @param SupportUserRelationsRepository $supportUserRelationsRepository
+     * @param UserRepository $userRepository
      */
     public function __construct(
         Connection $connection,
@@ -79,7 +106,12 @@ class SupportController extends AbstractController
         CacheReportsRepository $cacheReportsRepository,
         CacheStatusModifiedRepository $cacheStatusModifiedRepository,
         CacheStatusRepository $cacheStatusRepository,
-        SupportBonuscachesRepository $supportBonuscachesRepository
+        SupportBonuscachesRepository $supportBonuscachesRepository,
+        SupportListingCommentsRepository $supportListingCommentsRepository,
+        SupportListingInfosRepository $supportListingInfosRepository,
+        SupportUserCommentsRepository $supportUserCommentsRepository,
+        SupportUserRelationsRepository $supportUserRelationsRepository,
+        UserRepository $userRepository
     ) {
         $this->connection = $connection;
         $this->cacheAdoptionsRepository = $cacheAdoptionsRepository;
@@ -90,6 +122,11 @@ class SupportController extends AbstractController
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->supportBonuscachesRepository = $supportBonuscachesRepository;
+        $this->supportListingCommentsRepository = $supportListingCommentsRepository;
+        $this->supportListingInfosRepository = $supportListingInfosRepository;
+        $this->supportUserCommentsRepository = $supportUserCommentsRepository;
+        $this->supportUserRelationsRepository = $supportUserRelationsRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -231,7 +268,7 @@ class SupportController extends AbstractController
     public function list_reported_cache_details(int $repID)
     : Response {
         $formSearch = $this->createForm(SupportSearchCaches::class);
-        $formComment = $this->createForm(SupportAdminComment::class);
+        $formComment = $this->createForm(SupportCommentField::class);
 
         $fetchedReport = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
 
@@ -261,13 +298,13 @@ class SupportController extends AbstractController
      */
     public function repCaches_saveTextArea(Request $request)
     : Response {
-        $form = $this->createForm(SupportAdminComment::class)->handleRequest($request);
+        $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
-            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_repID']]);
-            $entity->comment = $inputData['support_admin_comment'];
+            $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int) $inputData['hidden_ID1']]);
+            $entity->comment = $inputData['content_comment_field'];
 
             $this->cacheReportsRepository->update($entity);
 
@@ -275,6 +312,41 @@ class SupportController extends AbstractController
         }
 
         return $this->redirectToRoute('backend_support_reported_caches');
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @Route("/occSaveText", name="support_occ_save_text")
+     */
+    public function occ_saveTextArea(Request $request)
+    : Response {
+        $form = $this->createForm(SupportCommentField::class)->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $inputData = $form->getData();
+
+            if ($inputData['hidden_sender'] == 'textfield_cache_comment') {
+                $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => (string) $inputData['hidden_ID2']]);
+                $entity->comment = $inputData['content_comment_field'];
+                $this->supportListingCommentsRepository->update($entity);
+            } elseif ($inputData['hidden_sender'] == 'textfield_user_comment') {
+                $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int) $inputData['hidden_ID1']]);
+                $entity->comment = $inputData['content_comment_field'];
+                $this->supportUserCommentsRepository->update($entity);
+            }
+
+            return $this->redirectToRoute('backend_support_occ', [
+                'userID' => (string) $inputData['hidden_ID1'],
+                'wpID' => (string) $inputData['hidden_ID2']
+            ]);
+        }
+
+        return $this->redirectToRoute('backend_support_occ');
     }
 
     /**
@@ -311,7 +383,7 @@ class SupportController extends AbstractController
     public function repCaches_setReportStatus(int $repID, string $route)
     : Response {
         $entity = $this->cacheReportsRepository->fetchOneBy(['id' => $repID]);
-        $entity->status = 3; // ToDo: die '3' hart vorgeben? Oder irgendwie
+        $entity->status = 3; // ToDo: die '3' hart vorgeben? Oder wie?
 
         $this->cacheReportsRepository->update($entity);
 
@@ -355,6 +427,75 @@ class SupportController extends AbstractController
     }
 
     /**
+     * @param string $wpID
+     * @param int $userID
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws \Oc\Repository\Exception\RecordAlreadyExistsException
+     *
+     * @Route("/occ/{wpID}&{userID}", name="support_occ")
+     */
+    public function occPage(string $wpID, int $userID)
+    : Response {
+        $formCommentUser = $this->createForm(SupportCommentField::class);
+        $formCommentCache = $this->createForm(SupportCommentField::class);
+
+        $fetchedCacheInfos = [];
+        $fetchedUserRelations = [];
+
+        // Die OCC-Seite kann auch ohne Angabe einer Cache-ID und nur mit einer User-ID aufgerufen werden.
+        if ($wpID != '0') {
+            // Basisccachedaten abholen
+            $fetchedCacheData = $this->cachesRepository->fetchOneBy(['wp_oc' => $wpID]);
+            // Supportkommentar zum Cache abholen. Ggf. neuen, leeren anlegen.
+            try {
+                $fetchedCacheComments = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpID]);
+            } catch (\Exception $exception) {
+                $entity = new SupportListingCommentsEntity($wpID);
+                $fetchedCacheComments = $this->supportListingCommentsRepository->create($entity);
+            }
+            // Cachedaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
+            try {
+                $fetchedCacheInfos = $this->supportListingInfosRepository->fetchBy(['wp_oc' => $wpID]);
+            } catch (\Exception $exception) {
+            }
+        }
+
+        // Basisnutzerdaten abolen
+        $fetchedUserData = $this->userRepository->fetchOneById($userID);
+        // Supportkommentar zum Nutzer abolen. Ggf. neuen, leeren anlegen.
+        try {
+            $fetchedUserComments = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => $userID]);
+        } catch (\Exception $exception) {
+            $entity = new SupportUserCommentsEntity($userID);
+            $fetchedUserComments = $this->supportUserCommentsRepository->create($entity);
+        }
+        // Nutzerdaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
+        try {
+            $fetchedUserRelations = $this->supportUserRelationsRepository->fetchBy(['oc_user_id' => $userID]);
+        } catch (\Exception $exception) {
+        }
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        return $this->render(
+            'backend/support/occ.html.twig', [
+                                               'supportCachesForm' => $formSearch->createView(),
+                                               'supportCommentFormUser' => $formCommentUser->createView(),
+                                               'supportCommentFormCache' => $formCommentCache->createView(),
+                                               'occ_cache_data' => $fetchedCacheData,
+                                               'occ_cache_comments' => $fetchedCacheComments,
+                                               'occ_cache_infos' => $fetchedCacheInfos,
+                                               'occ_user_data' => $fetchedUserData,
+                                               'occ_user_comments' => $fetchedUserComments,
+                                               'occ_user_relations' => $fetchedUserRelations
+                                           ]
+        );
+    }
+
+    /**
      * @param string $searchtext
      * @param bool $limit
      *
@@ -374,7 +515,7 @@ class SupportController extends AbstractController
         //        OR user.email      LIKE    "%' . $searchtext . '%"'
         //        LIMIT $limit
         $qb = $this->connection->createQueryBuilder();
-        $qb->select('caches.name', 'caches.wp_oc', 'caches.wp_gc', 'caches.wp_gc_maintained', 'user.username', 'user.email')
+        $qb->select('caches.name', 'caches.wp_oc', 'caches.wp_gc', 'caches.wp_gc_maintained', 'user.user_id', 'user.username', 'user.email')
             ->from('caches')
             ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
             ->where('caches.wp_oc = :searchTerm')

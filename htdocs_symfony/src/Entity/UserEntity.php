@@ -2,6 +2,7 @@
 
 namespace Oc\Entity;
 
+use DateTime;
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -18,6 +19,11 @@ class UserEntity extends AbstractEntity implements UserInterface
     public $id;
 
     /**
+     * @var DateTime
+     */
+    public $lastLogin;
+
+    /**
      * @var string
      */
     public $username;
@@ -31,6 +37,11 @@ class UserEntity extends AbstractEntity implements UserInterface
      * @var string
      */
     public $email;
+
+    /**
+     * @var int
+     */
+    public $emailProblems;
 
     /**
      * @var float

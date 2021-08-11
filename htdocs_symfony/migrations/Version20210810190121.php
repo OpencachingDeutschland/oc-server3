@@ -25,7 +25,7 @@ final class Version20210810190121 extends AbstractMigration
                 CREATE TABLE support_bonuscaches
                 (
                     id                     int(10) UNSIGNED AUTO_INCREMENT,
-                    wp_oc                  mediumtext NOT NULL,
+                    wp_oc                  varchar(7) NOT NULL,
                     is_bonus_cache         tinyint(1) DEFAULT 0 NOT NULL COMMENT \'(ja oder nein. Vermerkt, ob dieser Cache vom Support als Bonuscache markiert wurde\',
                     belongs_to_bonus_cache varchar(7) NULL COMMENT \'ist leer oder enthält einen OC - Wegpunkt . Der Wegpunkt wird vom Support eingepflegt.\',
                     CONSTRAINT support_bonuscaches_id_uindex UNIQUE (id)
@@ -61,9 +61,9 @@ final class Version20210810190121 extends AbstractMigration
                         (
                             id                           int(10)     UNSIGNED AUTO_INCREMENT,
                             wp_oc                        varchar(7)  NOT NULL COMMENT \'ID des OC-Listings, auf die sich der Eintrag bezieht\',
-                            node_id                      tinyint(4)  NOT NULL COMMENT \'Zeigt an, von welchem Node diese Infos stammen. Siehe Tabelle nodes\',
+                            node_id                      tinyint(3)  NOT NULL COMMENT \'Zeigt an, von welchem Node diese Infos stammen. Siehe Tabelle nodes\',
                             node_owner_id                varchar(36) NULL COMMENT \'generische User-ID des Nodes\',
-                            node_listing_id              varchar(10) NULL COMMENT \'generische ID des Listings. Wird diese Info benötigt?\',
+                            node_listing_id              varchar(36) NULL COMMENT \'generische ID des Listings. Wird diese Info benötigt?\',
                             node_listing_wp              varchar(10) NULL COMMENT \'Wegpunkt des Listings\',
                             node_listing_name            varchar(255) NULL COMMENT \'Listingtitel\',
                             node_listing_size            tinyint(3)  DEFAULT 0 NULL COMMENT \'Behältergröße. Wird soweit möglich auf die OC-Behältergrößen umgemünzt oder als other deklariert. Siehe Tabelle cache_size\',

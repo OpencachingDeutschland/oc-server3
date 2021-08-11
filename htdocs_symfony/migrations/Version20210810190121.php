@@ -22,7 +22,7 @@ final class Version20210810190121 extends AbstractMigration
     : void {
         $this->addSql(
             '
-                CREATE TABLE support_bonuscaches
+                CREATE TABLE IF NOT EXISTS support_bonuscaches
                 (
                     id                     int(10) UNSIGNED AUTO_INCREMENT,
                     wp_oc                  varchar(7) NOT NULL,
@@ -39,7 +39,7 @@ final class Version20210810190121 extends AbstractMigration
 
         $this->addSql(
             '
-                        CREATE TABLE support_listing_comments
+                        CREATE TABLE IF NOT EXISTS support_listing_comments
                         (
                             id                     int(10) UNSIGNED AUTO_INCREMENT,
                             wp_oc                  varchar(7) NOT NULL COMMENT \'OC Wegpunkt des Listings\',
@@ -57,7 +57,7 @@ final class Version20210810190121 extends AbstractMigration
 
         $this->addSql(
             '
-                        CREATE TABLE support_listing_infos
+                        CREATE TABLE IF NOT EXISTS support_listing_infos
                         (
                             id                           int(10)     UNSIGNED AUTO_INCREMENT,
                             wp_oc                        varchar(7)  NOT NULL COMMENT \'ID des OC-Listings, auf die sich der Eintrag bezieht\',
@@ -85,7 +85,7 @@ final class Version20210810190121 extends AbstractMigration
 
         $this->addSql(
             '
-                        CREATE TABLE support_user_comments
+                        CREATE TABLE IF NOT EXISTS support_user_comments
                         (
                             id                           int(10)      UNSIGNED AUTO_INCREMENT,
                             oc_user_id                   int(10)      UNSIGNED NOT NULL COMMENT \'OC User-ID\',
@@ -103,7 +103,7 @@ final class Version20210810190121 extends AbstractMigration
 
         $this->addSql(
             '
-                        CREATE TABLE support_user_relations
+                        CREATE TABLE IF NOT EXISTS support_user_relations
                         (
                             id                           int(10)      UNSIGNED AUTO_INCREMENT,
                             oc_user_id                   int(10)      UNSIGNED NOT NULL COMMENT \'OC User-ID\',

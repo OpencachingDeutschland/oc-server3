@@ -1,0 +1,43 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'User account details' | trans }} </h3>
+
+    <div>
+        {% if user_account_details is defined %}
+            {% if user_account_details %}
+                <br/>
+                <p><b>{{ 'Details for user' | trans }}:</b> {{ user_account_details.username }}</p>
+                <p><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.id }}</p>
+                <p><b>{{ 'Email' | trans }}:</b> {{ user_account_details.email }}</p>
+                <p><b>{{ 'Account created' | trans }}:</b> {{ user_account_details.dateCreated | date('d.m.Y H:i:s') }}</p>
+                <p><b>{{ 'Last change' | trans }}:</b> {{ user_account_details.lastModified | date('d.m.Y H:i:s') }}</p>
+                <p><b>{{ 'User active' | trans }}:</b> {% if user_account_details.isActive %}<i class="fas fa-check"></i>{% else %}<i class="fas fa-times"></i>{% endif %}</p>
+                <p><b>{{ 'Activation code' | trans }}:</b> {% if user_account_details.activationCode %}{{ user_account_details.activationCode }}{% else %}<i class="fas fa-times"></i>{% endif %}</p>
+                <p><b>{{ 'First name' | trans }}:</b> {% if user_account_details.firstname %}{{ user_account_details.firstname }}{% else %}<i class="fas fa-times"></i>{% endif %}</p>
+                <p><b>{{ 'Last name' | trans }}:</b> {% if user_account_details.lastname %}{{ user_account_details.lastname }}{% else %}<i class="fas fa-times"></i>{% endif %}</p>
+                <p><b>{{ 'Log entries' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Active caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Cache reports' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Last login' | trans }}:</b> {{ user_account_details.lastLogin | date('d.m.Y') }}</p>
+                <br/>
+                <p><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'GDPR conform account deletion)' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Mark email address as invalid' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <p><b>{{ 'Are you sure?' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span></p>
+                <br/>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No user found' | trans }}.. :-)</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

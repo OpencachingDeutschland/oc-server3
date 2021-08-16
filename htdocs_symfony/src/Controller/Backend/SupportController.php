@@ -194,7 +194,6 @@ class SupportController extends AbstractController
 
     /**
      * @return Response
-     * @throws RecordsNotFoundException
      *
      * @Route("/bonusCaches", name="support_bonus_caches")
      */
@@ -442,6 +441,8 @@ class SupportController extends AbstractController
         $formCommentUser = $this->createForm(SupportCommentField::class);
         $formCommentCache = $this->createForm(SupportCommentField::class);
 
+        $fetchedCacheData = [];
+        $fetchedCacheComments = [];
         $fetchedCacheInfos = [];
         $fetchedUserRelations = [];
 
@@ -496,6 +497,28 @@ class SupportController extends AbstractController
     }
 
     /**
+     * @param int $userID
+     *
+     * @return Response
+     * @throws RecordNotFoundException
+     *
+     * @Route("/uac/{userID}", name="support_user_account_details")
+     */
+    public function user_account_details_Page(int $userID)
+    : Response {
+        $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        return $this->render(
+            'backend/support/userDetails.html.twig', [
+                                                       'supportCachesForm' => $formSearch->createView(),
+                                                       'user_account_details' => $fetchedUserDetails
+                                                   ]
+        );
+    }
+
+    /**
      * @param string $searchtext
      * @param bool $limit
      *
@@ -536,12 +559,17 @@ class SupportController extends AbstractController
 
     /**
      * @return array
-     * @throws RecordsNotFoundException
      */
     public function getBonusCaches()
     : array
     {
-        return $this->supportBonuscachesRepository->fetchAll();
+        try {
+            $fetchedBonusCaches = $this->supportBonuscachesRepository->fetchAll();
+
+            return $fetchedBonusCaches;
+        } catch (\Exception $exception) {
+            return [];
+        }
     }
 
     /**
@@ -633,6 +661,24 @@ class SupportController extends AbstractController
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
                                                            'suppSQLquery4' => $qb->execute()->fetchAll()
+                                                       ]
+        );
+    }
+
+    /**
+     * @return Response
+     * @throws RecordsNotFoundException
+     * @Route("/dbQueries5", name="support_db_queries_5")
+     */
+    public function executeSQL_support_commented_user() // List users where a support user left a comment.
+    : Response
+    {
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        return $this->render(
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery5' => $this->supportUserCommentsRepository->fetchAll()
                                                        ]
         );
     }

@@ -9,6 +9,9 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class UserRepository
 {
     /**
@@ -27,6 +30,10 @@ class UserRepository
      */
     private $securityRolesRepository;
 
+    /**
+     * @param Connection $connection
+     * @param SecurityRolesRepository $securityRolesRepository
+     */
     public function __construct(Connection $connection, SecurityRolesRepository  $securityRolesRepository)
     {
         $this->connection = $connection;
@@ -84,7 +91,11 @@ class UserRepository
     /**
      * Fetches a user by its username.
      *
-     * @throws RecordNotFoundException Thrown when the request record is not found
+     * @param string $username
+     *
+     * @return UserEntity
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      */
     public function fetchOneByUsername(string $username): UserEntity
     {
@@ -114,7 +125,11 @@ class UserRepository
     /**
      * Creates a user in the database.
      *
+     * @param UserEntity $entity
+     *
+     * @return UserEntity
      * @throws RecordAlreadyExistsException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function create(UserEntity $entity): UserEntity
     {
@@ -137,7 +152,11 @@ class UserRepository
     /**
      * Update a user in the database.
      *
+     * @param UserEntity $entity
+     *
+     * @return UserEntity
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
      */
     public function update(UserEntity $entity): UserEntity
     {
@@ -161,7 +180,12 @@ class UserRepository
     /**
      * Removes a user from the database.
      *
+     * @param UserEntity $entity
+     *
+     * @return UserEntity
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
     public function remove(UserEntity $entity): UserEntity
     {
@@ -202,6 +226,8 @@ class UserRepository
     {
         return [
             'user_id' => $entity->id,
+            'date_created' => $entity->dateCreated,
+            'last_modified' => $entity->lastModified,
             'username' => $entity->username,
             'password' => $entity->password,
             'email' => $entity->email,
@@ -211,6 +237,7 @@ class UserRepository
             'first_name' => $entity->firstname,
             'last_name' => $entity->lastname,
             'country' => $entity->country,
+            'activation_code' => $entity->activationCode,
             'language' => $entity->language,
         ];
     }
@@ -222,6 +249,8 @@ class UserRepository
     {
         $entity = new UserEntity();
         $entity->id = (int) $data['user_id'];
+        $entity->dateCreated = (string) $data['date_created'];
+        $entity->lastModified = (string) $data['last_modified'];
         $entity->username = $data['username'];
         $entity->password = $data['password'];
         $entity->email = $data['email'];
@@ -231,6 +260,7 @@ class UserRepository
         $entity->firstname = $data['first_name'];
         $entity->lastname = $data['last_name'];
         $entity->country = $data['country'];
+        $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
 
         return $entity;

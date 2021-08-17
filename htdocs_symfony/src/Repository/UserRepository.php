@@ -169,7 +169,7 @@ class UserRepository
         $this->connection->update(
             self::TABLE,
             $databaseArray,
-            ['id' => $entity->id]
+            ['user_id' => $entity->id]
         );
 
         $entity->id = (int) $this->connection->lastInsertId();
@@ -195,7 +195,7 @@ class UserRepository
 
         $this->connection->delete(
             self::TABLE,
-            ['id' => $entity->id]
+            ['user_id' => $entity->id]
         );
 
         $entity->id = null;
@@ -231,6 +231,7 @@ class UserRepository
             'username' => $entity->username,
             'password' => $entity->password,
             'email' => $entity->email,
+            'email_problems' => $entity->emailProblems,
             'latitude' => $entity->latitude,
             'longitude' => $entity->longitude,
             'is_active_flag' => $entity->isActive,
@@ -254,6 +255,7 @@ class UserRepository
         $entity->username = $data['username'];
         $entity->password = $data['password'];
         $entity->email = $data['email'];
+        $entity->emailProblems = (bool) $data['email_problems'];
         $entity->latitude = (double) $data['latitude'];
         $entity->longitude = (double) $data['longitude'];
         $entity->isActive = (bool) $data['is_active_flag'];

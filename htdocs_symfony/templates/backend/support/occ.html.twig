@@ -56,7 +56,11 @@
             {{ form_row(supportCommentFormUser.content_comment_field, {'value': occ_user_comments.comment, 'id': 'comment_field_user' }) }}
             {{ form_row(supportCommentFormUser.save_comment_button, {'label': 'Save comment' | trans }) }}
             {{ form_row(supportCommentFormUser.hidden_ID1, {'value': occ_user_comments.ocUserId }) }}
-            {% if occ_cache_data is defined and occ_cache_data %}{{ form_row(supportCommentFormUser.hidden_ID2, {'value': occ_cache_data.wpOc }) }}{% endif %}
+            {% if occ_cache_data is defined and occ_cache_data %}
+                {{ form_row(supportCommentFormUser.hidden_ID2, {'value': occ_cache_data.wpOc }) }}
+            {% else %}
+                {{ form_row(supportCommentFormUser.hidden_ID2, {'value': 0 }) }}
+            {% endif %}
             <a class="btn btn-primary"
                onClick="addDateAndNameToTextField('comment_field_user',
                    {{ app.user.country | json_encode }}, {{ app.user.language | json_encode }}, {{ app.user.username | json_encode }})"

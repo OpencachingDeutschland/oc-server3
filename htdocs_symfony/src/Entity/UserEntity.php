@@ -21,6 +21,16 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var DateTime
      */
+    public $dateCreated;
+
+    /**
+     * @var DateTime
+     */
+    public $lastModified;
+
+    /**
+     * @var DateTime
+     */
     public $lastLogin;
 
     /**
@@ -72,6 +82,11 @@ class UserEntity extends AbstractEntity implements UserInterface
      * @var string
      */
     public $country;
+
+    /**
+     * @var string
+     */
+    public $activationCode;
 
     /**
      * @var string

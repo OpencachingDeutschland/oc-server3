@@ -104,8 +104,8 @@
 
     {* Cookie Consent Tool 06.2020 *}
     <link href="../../resource2/ocstyle/css/klaro.css" rel="stylesheet">
-    <script type="application/javascript" src="resource2/ocstyle/js/klaro_config.js"></script>
-    <script type="application/javascript" src="resource2/ocstyle/js/klaro.js"></script>
+    <script type="application/javascript" src="resource2/{$opt.template.style}/js/klaro_config.js"></script>
+    <script type="application/javascript" src="resource2/{$opt.template.style}/js/klaro.js"></script>
 
     {foreach from=$opt.page.header_javascript item=scriptItem}
         <script type="text/javascript" src="{$scriptItem}"></script>
@@ -249,7 +249,7 @@
         </div>
 
         {if $helplink != ""}
-            <div class="tplhelp">{$helplink}<img src="resource2/ocstyle/images/misc/32x32-help.png"/></a></div>
+            <div class="tplhelp">{$helplink}<img src="resource2/{$opt.template.style}/images/misc/32x32-help.png"/></a></div>
             <!--[if IE]>
             <div></div><![endif]-->
         {/if}
@@ -317,18 +317,18 @@
                             <td class="mediumsmalltext" colspan="3">{t}Follow us:{/t}</td>
                         </tr>
                         <tr>
-                            <td><a href="https://blog.opencaching.de/feed"><img
-                                            src="resource2/{$opt.template.style}/images/media/16x16-feed.png" width="16"
-                                            height="16"/></a></td>
-                            <td><a href="https://twitter.com/opencaching"><img
+                            <td><a href="https://blog.opencaching.de/feed" target="_blank"><img
+                                            src="resource2/{$opt.template.style}/images/media/16x16-feed.png"
+                                            width="16" height="16" alt="OC Blog"/></a></td>
+                            <td><a href="https://twitter.com/opencaching" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-twitter.png"
-                                            width="16" height="16"/></a></td>
-                            <td><a href="https://www.facebook.com/opencaching.de"><img
+                                            width="16" height="16" alt="Twitter"/></a></td>
+                            <td><a href="https://www.facebook.com/opencaching.de" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"
-                                            width="16" height="16"/></a></td>
-                            <td><a href="https://www.instagram.com/opencachingde"><img
+                                            width="16" height="16" alt="Facebook"/></a></td>
+                            <td><a href="https://www.instagram.com/opencachingde" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/16x16-Instagram.png"
-                                            width="16" height="16"/></a></td>
+                                            width="16" height="16" alt="Instagram"/></a></td>
                         </tr>
                     </table>
 
@@ -337,12 +337,18 @@
                             <td class="mediumsmalltext" colspan="2">{t}Contact us:{/t}</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/OPENCACHINGDE"><img
+                            <td><a href="https://t.me/OPENCACHINGDE" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/telegram.png"
-                                            width="32" height="32"/></a></td>
-                            <td><a href="https://chat.whatsapp.com/9aWnsOBkK89B9wG5da41iz"><img
+                                            width="32" height="32" alt="Telegram"/></a></td>
+                            <td><a href="https://www.opencaching.de/mailto.php?userid=103599" target="_blank"><img
                                             src="resource2/{$opt.template.style}/images/media/whatsapp.png"
-                                            width="32" height="32"/></a></td>
+                                            width="32" height="32" alt="Whatsapp"
+                                            onclick="alert('Werter Cacher,\nda unsere Whatsappgruppe immer wieder von Spammern belästigt wurde, ist die Gruppe nun nur noch mit Einladung zugänglich. ' +
+                                             'Bitte wende dich an unseren Communitymanager mic@ (https://www.opencaching.de/viewprofile.php?userid=103599), um von ihm den Einladungslink zu erhalten. ' +
+                                             'Ein Klick auf OK öffnet die Nachrichtenseite.\n\n' +
+                                             'Dear cacher,\nto avoid spam users in our Whatsapp group this group is now accessible only via invitation. ' +
+                                             'Please write a message to our community manager mic@ (https://www.opencaching.de/viewprofile.php?userid=103599) to get the invitation link. ' +
+                                             'A click on OK will open the message page.')"/></a></td>
                         </tr>
                     </table>
 
@@ -353,32 +359,42 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="http://forum.opencaching.de/">
-                                    <img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png"/>
+                                <a href="http://forum.opencaching.de/" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/oclogo/16x16-oc_logo.png" alt="OC Forum"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="http://forum.opencaching.de/">{t}Opencaching Forum{/t}</a>
+                                <a href="http://forum.opencaching.de/" target="_blank">{t}Opencaching Forum{/t}</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="https://www.facebook.com/groups/198752500146032/">
-                                    <img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png"/>
+                                <a href="https://www.facebook.com/groups/198752500146032/" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/media/16x16-facebook.png" alt="Facebook"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="https://www.facebook.com/groups/198752500146032/">{t}Facebook Group{/t}</a>
+                                <a href="https://www.facebook.com/groups/198752500146032/" target="_blank">{t}Facebook Group{/t}</a>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <a href="https://github.com/OpencachingDeutschland/oc-server3">
-                                    <img src="resource2/{$opt.template.style}/images/media/16x16-github.png"/>
+                                <a href="https://github.com/OpencachingDeutschland/oc-server3" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/media/16x16-github.png" alt="Github"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="https://github.com/OpencachingDeutschland/oc-server3">GitHub</a>
+                                <a href="https://github.com/OpencachingDeutschland/oc-server3" target="_blank">GitHub</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/media/16x16-slack.png" alt="Slack"/>
+                                </a>
+                            </td>
+                            <td style="text-align: left">
+                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">Slack</a>
                             </td>
                         </tr>
                     </table>

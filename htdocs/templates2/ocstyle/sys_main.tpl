@@ -268,31 +268,28 @@
 
             <p class="sidebar-maintitle">{t}Country sites{/t}</p>
             <div style="text-align: center;" class="nodeflags">
-                <a href="http://www.opencaching.cz" target="_blank"><img
+                <a href="https://www.opencaching.cz" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100"
                             height="22"/></a><br/>
                 <a href="https://www.opencaching.de" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-de.png" width="100"
                             height="22"/></a><br/>
-                <a href="https://www.opencaching.fr" target="_blank"><img
-                            src="resource2/{$opt.template.style}/images/nodes/oc-fr.png" width="100"
+                <a href="https://www.opencaching.es" target="_blank"><img
+                            src="resource2/{$opt.template.style}/images/nodes/oc-es.png" width="100"
                             height="22"/></a><br/>
-                <a href="https://www.opencaching.it" target="_blank"><img
-                            src="resource2/{$opt.template.style}/images/nodes/oc-it.png" width="100"
-                            height="22"/></a><br/>
-                <a href="http://www.opencaching.nl" target="_blank"><img
+                <a href="https://www.opencaching.nl" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-nl.png" width="100"
                             height="22"/></a><br/>
                 <a href="https://opencaching.pl" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-pl.png" width="100"
                             height="22"/></a><br/>
-                <a href="http://www.opencaching.ro" target="_blank"><img
+                <a href="https://www.opencaching.ro" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-ro.png" width="100"
                             height="22"/></a><br/>
                 <a href="https://opencache.uk" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-org-uk.png" width="100"
                             height="22"/></a><br/>
-                <a href="http://www.opencaching.us" target="_blank"><img
+                <a href="https://www.opencaching.us" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-us.png" width="100" height="22"/></a>
             </div>
 

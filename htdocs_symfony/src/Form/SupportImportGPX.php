@@ -27,7 +27,7 @@ class SupportImportGPX extends AbstractType
                                 ],
                                 'constraints' => [
                                     new File([
-                                                 'maxSize' => '51200k',
+                                                 'maxSize' => '20480000',
                                                  'mimeTypes' => [
                                                      'application/gpx+xml',
                                                      'application/xml',

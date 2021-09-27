@@ -147,7 +147,7 @@ class CachesRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
+//            throw new RecordsNotFoundException('No records with given where clause found');
         } else {
             foreach ($result as $item) {
                 $entities[] = $this->getEntityFromDatabaseArray($item);

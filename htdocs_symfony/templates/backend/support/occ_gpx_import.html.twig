@@ -6,9 +6,12 @@
 
     <h3><br/>{{ 'Import GPX file' | trans }}</h3>
     <div>
-        {% if amountImportedCaches > 0 %}
-            <div> {{ 'Caches read from file' | trans }}: {{ amountImportedCaches }}</div>
-            <div> {{ 'Caches clearly assigned as OC/GC or OCOnly' | trans }}: {{ amountAssignedCaches }}</div>
+        {% if amountProcessedCaches is defined %}
+            {% if amountProcessedCaches > 0 %}
+                <div> {{ 'Caches read from file' | trans }}: {{ amountProcessedCaches }}</div>
+                <div> {{ '-> found a reference to an OC cache' | trans }}: {{ amountAssignedCaches }}</div>
+                <div> {{ '-> changes to former imports detected' | trans }}: {{ amountUpdatedCaches }}</div>
+            {% endif %}
         {% endif %}
 
         <br/>
@@ -21,16 +24,22 @@
         <br/>
     </div>
 
-    <hr>
-    <h3><br/>{{ 'Assign non-assigned imports' | trans }}</h3>
-    <div>
-    </div>
+{#    <hr>#}
+{#    <h3><br/>{{ 'Assign non-assigned imports' | trans }}</h3>#}
+{#    <div>#}
+{#    </div>#}
 
-    <hr>
-    <h3><br/>{{ 'Check for differences of imports' | trans }}</h3>
-    <div>
-        <a class="btn btn-primary" href="{{ path('backend_support_gpx_check_differences', {  }) }}">{{ 'Start check' | trans }}..</a>
-    </div>
+{#    <hr>#}
+{#    <h3><br/>{{ 'Check for differences of formerly imported GPX data' | trans }}</h3>#}
+{#    <div>#}
+{#        {% if amountCheckedCaches is defined %}#}
+{#            {% if amountCheckedCaches > 0 %}#}
+{#                <div> {{ 'Caches checked in database' | trans }}: {{ amountCheckedCaches }}</div>#}
+{#                <div> {{ 'Caches processed for differences' | trans }}: {{ amountProcessedCaches }}</div>#}
+{#            {% endif %}#}
+{#        {% endif %}#}
 
+{#        <a class="btn btn-primary" href="{{ path('backend_support_gpx_check_differences', {  }) }}">{{ 'Start check' | trans }}..</a>#}
+{#    </div>#}
 
 {% endblock %}

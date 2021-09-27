@@ -1,0 +1,36 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Import GPX file' | trans }}</h3>
+    <div>
+        {% if amountImportedCaches > 0 %}
+            <div> {{ 'Caches read from file' | trans }}: {{ amountImportedCaches }}</div>
+            <div> {{ 'Caches clearly assigned as OC/GC or OCOnly' | trans }}: {{ amountAssignedCaches }}</div>
+        {% endif %}
+
+        <br/>
+        <br/>
+        {% if supportUploadGPXForm is defined %}
+            {{ form_start(supportUploadGPXForm, {'action': path('backend_support_gpx_import'), 'method': 'POST'}) }}
+            {{ form_row(supportUploadGPXForm.gpx_file) }}
+            {{ form_row(supportUploadGPXForm.start_upload, {'label': 'Start upload' | trans }) }}
+        {% endif %}
+        <br/>
+    </div>
+
+    <hr>
+    <h3><br/>{{ 'Assign non-assigned imports' | trans }}</h3>
+    <div>
+    </div>
+
+    <hr>
+    <h3><br/>{{ 'Check for differences of imports' | trans }}</h3>
+    <div>
+        <a class="btn btn-primary" href="{{ path('backend_support_gpx_check_differences', {  }) }}">{{ 'Start check' | trans }}..</a>
+    </div>
+
+
+{% endblock %}

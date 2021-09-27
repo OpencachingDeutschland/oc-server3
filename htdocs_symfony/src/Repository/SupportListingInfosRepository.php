@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Oc\Entity\SupportListingInfosEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -237,7 +236,7 @@ class SupportListingInfosRepository
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingInfosEntity {
         $entity = new SupportListingInfosEntity();
-        $entity->id = (int) $data['id'];
+        $entity->id = (array_key_exists('id', $data)) ? (int) $data['id'] : NULL;
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->nodeId = (int) $data['node_id'];
         $entity->nodeOwnerId = (string) $data['node_owner_id'];
@@ -250,7 +249,7 @@ class SupportListingInfosRepository
         $entity->nodeListingCoordinatesLon = (double) $data['node_listing_coordinates_lon'];
         $entity->nodeListingCoordinatesLat = (double) $data['node_listing_coordinates_lat'];
         $entity->nodeListingArchived = (bool) $data['node_listing_archived'];
-        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastModified = date('Y-m-d H:i:s');
         $entity->importStatus = (int) $data['importstatus'];
         $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
 

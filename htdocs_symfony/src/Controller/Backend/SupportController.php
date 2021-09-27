@@ -9,6 +9,7 @@ use Doctrine\DBAL\DBALException;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Form\SupportCommentField;
+use Oc\Form\SupportImportGPX;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
 use Oc\Form\SupportUserAccountDetails;
@@ -22,6 +23,7 @@ use Oc\Repository\CacheStatusRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
+use Oc\Repository\NodesRepository;
 use Oc\Repository\SupportBonuscachesRepository;
 use Oc\Repository\SupportListingCommentsRepository;
 use Oc\Repository\SupportListingInfosRepository;
@@ -64,6 +66,9 @@ class SupportController extends AbstractController
     /** @var CacheStatusRepository */
     private $cacheStatusRepository;
 
+    /** @var NodesRepository */
+    private $nodesRepository;
+
     /** @var SupportBonuscachesRepository */
     private $supportBonuscachesRepository;
 
@@ -91,6 +96,7 @@ class SupportController extends AbstractController
      * @param CacheReportsRepository $cacheReportsRepository
      * @param CacheStatusModifiedRepository $cacheStatusModifiedRepository
      * @param CacheStatusRepository $cacheStatusRepository
+     * @param NodesRepository $nodesRepository
      * @param SupportBonuscachesRepository $supportBonuscachesRepository
      * @param SupportListingCommentsRepository $supportListingCommentsRepository
      * @param SupportListingInfosRepository $supportListingInfosRepository
@@ -107,6 +113,7 @@ class SupportController extends AbstractController
         CacheReportsRepository $cacheReportsRepository,
         CacheStatusModifiedRepository $cacheStatusModifiedRepository,
         CacheStatusRepository $cacheStatusRepository,
+        NodesRepository $nodesRepository,
         SupportBonuscachesRepository $supportBonuscachesRepository,
         SupportListingCommentsRepository $supportListingCommentsRepository,
         SupportListingInfosRepository $supportListingInfosRepository,
@@ -122,6 +129,7 @@ class SupportController extends AbstractController
         $this->cacheReportsRepository = $cacheReportsRepository;
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
+        $this->nodesRepository = $nodesRepository;
         $this->supportBonuscachesRepository = $supportBonuscachesRepository;
         $this->supportListingCommentsRepository = $supportListingCommentsRepository;
         $this->supportListingInfosRepository = $supportListingInfosRepository;
@@ -732,5 +740,159 @@ class SupportController extends AbstractController
         }
 
         return $this->redirectToRoute('backend_support_user_account_details', ['userID' => $userID]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws \Exception
+     *
+     * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
+     */
+    public function GPX_import(Request $request)
+    : Response {
+        // Button/Dialog zum Einlesen der GPX-Datei
+        // inklusive Rückinfo zu Anzahl eingelesener Caches und Anzahl zuordnbarer OC-Caches
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formUpload = $this->createForm(SupportImportGPX::class);
+        $amountImportedCaches = 0;
+        $amountAssignedCaches = 0;
+
+        $formUpload->handleRequest($request);
+
+        //        if ($formUpload->isSubmitted() && $formUpload->isValid()) {
+        if ($formUpload->isSubmitted()) {
+            $strData = file_get_contents($formUpload['gpx_file']->getData()->getRealPath());
+            $strData = str_replace(['<groundspeak:', '</groundspeak:'], ['<', '</'], $strData);
+
+            if ($strData === false || $strData == '') {
+                // TODO: füllen?
+            } else {
+                // TODO: die ganze(n) GPX+XML Import/Export-Funktionen in ein eigenes Repository auslagern. Sofern es nix Controllerpszifisches ist
+                $objXmlDocument = simplexml_load_string($strData);
+
+                $objJsonDocument = json_encode($objXmlDocument);
+                $arrOutput = json_decode($objJsonDocument, true);
+
+                // Array auseinandernehmen und in ein datenbankfähiges Format umwandeln (für Tabelle support_listing_infos)
+                $waypoints_as_array = [];
+
+                foreach ($arrOutput['wpt'] as $wpt) {
+                    $wpt_array['wp_oc'] = - 1;
+                    $wpt_array['node_id'] = $this->nodesRepository->get_id_by_prefix(substr($wpt['name'], 0, 2));;
+                    $wpt_array['node_owner_id'] =
+                        0; // TODO: node_owner_id ist in GPX nicht enthalten. Aber eventuell in anderen Quellen? Zusätzlich node_owner_name etablieren
+                    $wpt_array['node_owner_name'] = $wpt['cache']['owner']; // TODO: Feld in DB einfügen. #Migrations
+                    $wpt_array['node_listing_id'] = substr($wpt['url'], strlen($wpt['url']) - 36, 36);
+                    $wpt_array['node_listing_wp'] = $wpt['name'];
+                    $wpt_array['node_listing_name'] = $wpt['cache']['name'];
+                    $wpt_array['node_listing_size'] = 0; // $wpt['cache']['container']; // TODO: Tabellenspalte ändern in string statt int
+                    $wpt_array['node_listing_difficulty'] = $wpt['cache']['difficulty'] * 2;
+                    $wpt_array['node_listing_terrain'] = $wpt['cache']['terrain'] * 2;
+                    $wpt_array['node_listing_coordinates_lat'] = $wpt['@attributes']['lat'];
+                    $wpt_array['node_listing_coordinates_lon'] = $wpt['@attributes']['lon'];
+                    $wpt_array['node_listing_available'] = ($wpt['cache']['@attributes']['available'] === "True") ? 1 : 0;
+                    $wpt_array['node_listing_archived'] = ($wpt['cache']['@attributes']['archived'] === "True") ? 1 : 0;
+                    $wpt_array['importstatus'] = 0;
+
+                    array_push($waypoints_as_array, $wpt_array);
+                    $amountImportedCaches ++;
+                }
+
+                // die eingelesenen Daten in die Datenbank übernehmen
+                // TODO: ggf. gleich mit in die obige Schleife einbauen.. ist dann ein Aufwasch..
+                foreach ($waypoints_as_array as $wpt) {
+                    $entity = $this->supportListingInfosRepository->getEntityFromDatabaseArray($wpt);
+                    $this->supportListingInfosRepository->create($entity);
+                }
+
+                // Die importieren Datensätze durchgehen, ob sie einem OC-Cache zugewiesen werden können
+                // Im Fokus stehen alle DB-Einträge, bei denen gilt: support_listing_infos/wp_oc=-1
+                // TODO: ggf. gleich mit in die obige Schleife einbauen? Oder lieber gleich die ganze DB-Tabelle anschauen, damit auch andere Einträge (nochmal) geprüft werden..
+                // Nach Abschluss der Prüfung den import_status entsprechend setzen (5 bzw. 10)
+                //  0 - frisch importiert
+                //  5 - OC-GC-Überprüfung beendet, keine automatische Zuordnung möglich. Eine manuelle Zuweisung muss erfolgen.
+                // 10 - OC-GC-Überprüfung beendet, automatische Zuordnung ist erfolgt.
+                // 15 - Änderungen gegenüber einem früheren Import wurden erkannt und müssen noch verarbeitet werden
+                // 20 - Import abgeschlossen. Änderungen, sofern vorhanden, wurden verarbeitet.
+                //
+                $fetchedCaches = $this->supportListingInfosRepository->fetchBy(['wp_oc' => - 1]);
+
+                foreach ($fetchedCaches as $fetchedCache) {
+                    $fetchedOcCaches = $this->cachesRepository->fetchBy(['wp_gc' => $fetchedCache->nodeListingWP]);
+
+                    if (count($fetchedOcCaches) == 1) {
+                        // wp_oc und import_status setzen
+
+                    } else {
+                        // Entweder gar keiner oder mehr als 1 möglicher OC-Cache in caches/wp_gc gefunden.. automatische Zurodnung nicht nöglich
+                        // import_status setzen
+
+                        // caches/wp_gc_maintained noch prüfen.. gleiches Spiel nochmal..
+                    }
+                }
+            }
+        } else {
+            // TODO: füllen?
+        }
+
+        return $this->render(
+            'backend/support/occ_gpx_import.html.twig', [
+                                                          'supportCachesForm' => $formSearch->createView(),
+                                                          'supportUploadGPXForm' => $formUpload->createView(),
+                                                          'amountImportedCaches' => $amountImportedCaches,
+                                                          'amountAssignedCaches' => $amountAssignedCaches
+                                                      ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @route("/GPXassignImports/", name="support_gpx_assign_imports")
+     */
+    public function GPX_assign_imports(Request $request)
+    : Response {
+        // Die beim Import nicht eindeutig als OC/OCOnly zuordenbaren GC-Caches müssen manuell begutachtet werden.
+        // Optionen:
+        //      als GC-Only markieren
+        //      für den Moment ignorieren
+        //      Eingabefeld für OC-Code anbieten, dessen Inhalt in der DB abgelegt wird
+        //      (Tabellen caches/wp_gc_maintained, support_listing_infos/wp_oc)
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        $rueckinfo = '';
+
+        return $this->render(
+            'backend/support/occ_gpx_import.html.twig', ['supportCachesForm' => $formSearch->createView(), 'suppSQLquery5' => $rueckinfo]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     *
+     * @route("/GPXcheckDifferences/", name="support_gpx_check_differences")
+     */
+    public function GPX_check_for_differences(Request $request)
+    : Response {
+        // Überprüfung der Tabelle support_listing_infos
+        // Erkennung von Veränderungen (Name, Wertung,..) einzelner OC/OCOnly Caches
+        // Vermerken dieser Änderungen in der Tabelle support_listing_comments
+        // Entfernung von Doubletten und Alteinträgen aus der Tabelle support_listing_infos
+
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        $rueckinfo = '';
+
+        return $this->render(
+            'backend/support/occ_gpx_import.html.twig', ['supportCachesForm' => $formSearch->createView(), 'suppSQLquery5' => $rueckinfo]
+        );
     }
 }

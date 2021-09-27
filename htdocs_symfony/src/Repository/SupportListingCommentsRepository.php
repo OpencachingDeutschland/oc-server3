@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;

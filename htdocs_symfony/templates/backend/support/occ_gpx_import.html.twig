@@ -1,0 +1,118 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Import GPX file' | trans }}</h3>
+    <div>
+        {% if amountProcessedCaches is defined %}
+            {% if amountProcessedCaches > 0 %}
+                <div> {{ 'Caches read from file' | trans }}: {{ amountProcessedCaches }}</div>
+                <div> {{ '-> found a reference to an OC cache' | trans }}: {{ amountAssignedCaches }}</div>
+                <div> {{ '-> changes to former imports detected' | trans }}: {{ amountUpdatedCaches }}</div>
+                <div> {{ '-> caches that could not clearly assigned' | trans }}: {{ listOfAmbiguousCaches }}</div>
+            {% endif %}
+        {% endif %}
+
+        <br/>
+        <br/>
+        {% if supportUploadGPXForm is defined %}
+            {{ form_start(supportUploadGPXForm, {'action': path('backend_support_gpx_import'), 'method': 'POST'}) }}
+            {{ form_row(supportUploadGPXForm.gpx_file) }}
+            {{ form_row(supportUploadGPXForm.start_upload, {'label': 'Start upload' | trans }) }}
+        {% endif %}
+        <br/>
+    </div>
+
+    <hr>
+    <h3><br/>{{ 'List of successful imports in the last 30 days' | trans }}</h3>
+    <div>
+        {% if fetchedListingInfos is defined %}
+            {% if fetchedListingInfos %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'OC' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Id' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Waypoint' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Title' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Size' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Difficulty' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Terrain' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Longitude' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Latitude' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Available' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Archived' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Last modified' | trans }}</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for fetchedListingInfo in fetchedListingInfos | reverse %}
+                        {% if fetchedListingInfo.lastModified|date("U") > "-30 days"|date("U") %}
+                            <tr>
+                                <td>{{ fetchedListingInfo.wpOc }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingId }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingWp }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingName }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingSize }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingDifficulty | ocFilterDifficulty }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingTerrain | ocFilterTerrain }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingCoordinatesLon }}</td>
+                                <td>{{ fetchedListingInfo.nodeListingCoordinatesLat }}</td>
+                                <td>{% if fetchedListingInfo.nodeListingAvailable == 1 %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                        <i class="fas fa-times"></i>
+                                    {% endif %}</td>
+                                <td>{% if fetchedListingInfo.nodeListingArchived == 1 %}
+                                        <i class="fas fa-check"></i>
+                                    {% else %}
+                                        <i class="fas fa-times"></i>
+                                    {% endif %}</td>
+                                <td>{{ fetchedListingInfo.lastModified | date('d.m.Y') }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <hr>
+    <h3><br/>{{ 'Differences between imported Caches and their OC pendants' | trans }}</h3>
+    <h5>{{ '(OC cache information first)' | trans }}</h5>
+    <div>
+        {% if differencesDetected is defined %}
+            {% if differencesDetected %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'Waypoints' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Title' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Difficulty' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Terrain' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Longitude' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Latitude' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Available' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Archived' | trans }}</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for difference in differencesDetected %}
+                        <tr>
+                            {% for i in 0..(difference | length - 1) %}
+                                <td>{{ difference[i] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endblock %}

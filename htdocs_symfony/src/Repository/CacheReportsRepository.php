@@ -274,7 +274,7 @@ class CacheReportsRepository
         $entity->note = (string) $data['note'];
         $entity->status = (int) $data['status'];
         $entity->adminid = (int) $data['adminid'];
-        $entity->lastmodified = (string) $data['lastmodified'];
+        $entity->lastmodified = date('Y-m-d H:i:s');
         $entity->comment = (string) $data['comment'];
         $entity->cache = $this->cachesRepository->fetchOneBy(['cache_id' => $entity->cacheid]);
         $entity->user = $this->userRepository->fetchOneById($entity->userid);

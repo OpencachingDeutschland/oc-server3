@@ -225,4 +225,36 @@ class NodesRepository
 
         return $entity;
     }
+
+    /**
+     * @param int $id
+     *
+     * @return string
+     * @throws RecordNotFoundException
+     */
+    public function get_prefix_by_id(int $id)
+    : string {
+        $data = $this->fetchOneBy(['id' => $id]);
+        if (!empty($data)) {
+            return $data->waypointPrefix;
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param string $prefix
+     *
+     * @return int
+     * @throws RecordNotFoundException
+     */
+    public function get_id_by_prefix(string $prefix)
+    : int {
+        $data = $this->fetchOneBy(['waypoint_prefix' => $prefix]);
+        if (!empty($data)) {
+            return $data->id;
+        }
+
+        return 0;
+    }
 }

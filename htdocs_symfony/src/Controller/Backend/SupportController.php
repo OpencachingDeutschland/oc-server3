@@ -45,6 +45,7 @@ class SupportController extends AbstractController
     //  0 - frisch importiert
     // 20 - Import abgeschlossen. Änderungen, sofern vorhanden, wurden verarbeitet.
     const IMPORT_STATUS_NEW = 0;
+
     const IMPORT_STATUS_FINISHED = 20;
 
     /** @var Connection */
@@ -518,7 +519,7 @@ class SupportController extends AbstractController
      *
      * @Route("/uad/{userID}", name="support_user_account_details")
      */
-    public function user_account_details_Page(int $userID)
+    public function list_user_account_details(int $userID)
     : Response {
         $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
 
@@ -732,6 +733,9 @@ class SupportController extends AbstractController
                 // TODO: fill
             } elseif ($form->getClickedButton() === $form->get('button_GDPR_deletion')) {
                 // TODO: fill
+                // Achtung: für die DSGVO-Löschung müssen vorher der Account und die dazugehörigen Cachelistings deaktiviert werden!
+                //          Sonst kommt es zu unerwünschtem Verhalten (Caches noch logbar, obwohl Account deaktiviert ..)
+                //          Da das dem Inhalt des ersten Buttons (button_account_inactive) entspricht, genügt es vermutlich, dessen Funktion aufzurufen
             } elseif ($form->getClickedButton() === $form->get('button_mark_email_invalid')) {
                 $entity = $this->userRepository->fetchOneById($userID);
                 $entity->emailProblems = 1;
@@ -763,142 +767,34 @@ class SupportController extends AbstractController
         $amountProcessedCaches = 0;
         $amountAssignedCaches = 0;
         $amountUpdatedCaches = 0;
+        $listOfAmbiguousCaches = '';
 
         $formUpload->handleRequest($request);
 
         // if ($formUpload->isSubmitted() && $formUpload->isValid()) {
         if ($formUpload->isSubmitted()) {
-            $strData = file_get_contents($formUpload['gpx_file']->getData()->getRealPath());
-            $strData = str_replace(['<groundspeak:', '</groundspeak:'], ['<', '</'], $strData);
+            $waypoints_as_array = $this->read_Xml_file_and_get_array($formUpload['gpx_file']->getData()->getRealPath());
 
-            if ($strData === false || $strData === '') {
-                // TODO: füllen?
-            } else {
-                // TODO: die ganze(n) GPX+XML Import/Export-Funktionen in ein eigenes Repository auslagern. Sofern es nix Controllerpszifisches ist
-                $objXmlDocument = simplexml_load_string($strData);
+            if (!empty($waypoints_as_array)) {
+                $result = $this->check_array_for_Oc_Gc_relations($waypoints_as_array);
 
-                $objJsonDocument = json_encode($objXmlDocument);
-                $arrOutput = json_decode($objJsonDocument, true);
-
-                // Array auseinandernehmen und in ein datenbankfähiges Format umwandeln (für Tabelle support_listing_infos)
-                $waypoints_as_array = [];
-
-                foreach ($arrOutput['wpt'] as $wpt) {
-                    $wpt_array['wp_oc'] = - 1;
-                    $wpt_array['node_id'] = $this->nodesRepository->get_id_by_prefix(substr($wpt['name'], 0, 2));
-                    $wpt_array['node_owner_id'] =
-                        0; // TODO: node_owner_id ist in GPX nicht enthalten. Aber eventuell in anderen Quellen? Zusätzlich node_owner_name etablieren
-                    $wpt_array['node_owner_name'] = $wpt['cache']['owner']; // TODO: Feld in DB einfügen. #Migrations
-                    $wpt_array['node_listing_id'] = substr($wpt['url'], strlen($wpt['url']) - 36, 36);
-                    $wpt_array['node_listing_wp'] = $wpt['name'];
-                    $wpt_array['node_listing_name'] = $wpt['cache']['name'];
-                    $wpt_array['node_listing_size'] = 0; // $wpt['cache']['container']; // TODO: Tabellenspalte ändern in string statt int
-                    $wpt_array['node_listing_difficulty'] = $wpt['cache']['difficulty'] * 2;
-                    $wpt_array['node_listing_terrain'] = $wpt['cache']['terrain'] * 2;
-                    $wpt_array['node_listing_coordinates_lat'] = $wpt['@attributes']['lat'];
-                    $wpt_array['node_listing_coordinates_lon'] = $wpt['@attributes']['lon'];
-                    $wpt_array['node_listing_available'] = ($wpt['cache']['@attributes']['available'] === "True") ? 1 : 0;
-                    $wpt_array['node_listing_archived'] = ($wpt['cache']['@attributes']['archived'] === "True") ? 1 : 0;
-                    $wpt_array['importstatus'] = self::IMPORT_STATUS_NEW;
-
-                    array_push($waypoints_as_array, $wpt_array);
-                    $amountProcessedCaches ++;
-                }
-
-                // Jeden importierten Cache im Array einzeln durchgehen..
-                // in DB caches/* prüfen, ob ein OC-Cache zugeordnet werden kann
-                //   wenn ja:
-                //      Wegpunkt des OC-Caches im aktuell geprüften Cache/Array reinschreiben
-                //      in DB support_listing_info schauen, ob bereits ein gleicher Eintrag wie der aktuelle Cache/Array vorhanden ist
-                //        wenn ja:
-                //          Unterschiede auslesen und in support_listing_comments/comment schreiben
-                //          alten Eintrag löschen
-                //          neuen Eintrag in support_listing_info schreiben
-                //        wenn nein:
-                //          -
-                //   wenn nein:
-                //      Bearbeitung des aktuell geprüften Caches/Array beenden
-                //
-                foreach ($waypoints_as_array as $wpt) {
-                    try {
-                        $fetchedWpGcCaches = $this->cachesRepository->fetchBy(['wp_gc' => $wpt['node_listing_wp']]);
-                        $fetchedWpGcMaintainedCaches = $this->cachesRepository->fetchBy(['wp_gc_maintained' => $wpt['node_listing_wp']]);
-                    } catch (\Exception $exception) {
-                    }
-
-                    if (count($fetchedWpGcCaches) == 1) {
-                        $wpt['wp_oc'] = $fetchedWpGcCaches[0]->wpOc;
-                    } elseif (count($fetchedWpGcMaintainedCaches) == 1) {
-                        $wpt['wp_oc'] = $fetchedWpGcMaintainedCaches[0]->wpOc;
-                    }
-
-                    if ($wpt['wp_oc'] != - 1) {
-                        $fetchedExistingSupportListingInfoArray = [];
-                        $newComment = '';
-
-                        try {
-                            $fetchedExistingSupportListingInfo =
-                                $this->supportListingInfosRepository->fetchOneBy(['node_listing_id' => $wpt['node_listing_id']]);
-                            $fetchedExistingSupportListingInfoArray =
-                                $this->supportListingInfosRepository->getDatabaseArrayFromEntity($fetchedExistingSupportListingInfo);
-                        } catch (\Exception $exception) {
-                        }
-
-                        if ($fetchedExistingSupportListingInfoArray) {
-                            foreach ([
-                                'node_listing_name',
-                                'node_listing_size',
-                                'node_listing_difficulty',
-                                'node_listing_terrain',
-                                'node_listing_coordinates_lon',
-                                'node_listing_coordinates_lat',
-                                'node_listing_archived'
-                            ] as $checkItem) {
-                                if ($wpt[$checkItem] != $fetchedExistingSupportListingInfoArray[$checkItem]) {
-                                    $newComment .= $checkItem
-                                                   . ' changed from '
-                                                   . $fetchedExistingSupportListingInfoArray[$checkItem]
-                                                   . ' to '
-                                                   . $wpt[$checkItem]
-                                                   . PHP_EOL;
-                                }
-                            }
-
-                            if ($newComment != '') {
-                                $newComment =
-                                    date('Y-m-d H:i:s')
-                                    . ' -automatically generated comment-:'
-                                    . PHP_EOL
-                                    . 'Data import from foreign node via GPX for '
-                                    . $fetchedExistingSupportListingInfoArray['node_listing_wp']
-                                    . PHP_EOL
-                                    . $newComment
-                                    . PHP_EOL;
-
-                                $entity = [];
-                                try {
-                                    $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpt['wp_oc']]);
-                                } catch (\Exception $exception) {
-                                    $entity = $this->supportListingCommentsRepository->create(new SupportListingCommentsEntity($wpt['wp_oc']));
-                                }
-
-                                $entity->comment = $newComment . $entity->comment;
-                                $this->supportListingCommentsRepository->update($entity);
-
-                                $amountUpdatedCaches ++;
-                            }
-
-                            $this->supportListingInfosRepository->remove($fetchedExistingSupportListingInfo);
-                        }
-
-                        $wpt['importstatus'] = self::IMPORT_STATUS_FINISHED;
-                        $entity = $this->supportListingInfosRepository->getEntityFromDatabaseArray($wpt);
-                        $this->supportListingInfosRepository->create($entity);
-
-                        $amountAssignedCaches ++;
-                    }
-                }
+                $amountProcessedCaches = count($waypoints_as_array);
+                $amountAssignedCaches  = $result[0];
+                $amountUpdatedCaches   = $result[1];
+                $listOfAmbiguousCaches = $result[2];
             }
+        }
+
+        try {
+            $fetchedListingInfos = $this->list_all_support_listing_infos();
+        } catch (\Exception $exception) {
+            $fetchedListingInfos = [];
+        }
+
+        try {
+            $differencesDetected = $this->list_differences_table_listing_infos();
+        } catch (\Exception $exception) {
+            $differencesDetected = [];
         }
 
         return $this->render(
@@ -907,74 +803,246 @@ class SupportController extends AbstractController
                                                           'supportUploadGPXForm' => $formUpload->createView(),
                                                           'amountProcessedCaches' => $amountProcessedCaches,
                                                           'amountAssignedCaches' => $amountAssignedCaches,
-                                                          'amountUpdatedCaches' => $amountUpdatedCaches
+                                                          'amountUpdatedCaches' => $amountUpdatedCaches,
+                                                          'listOfAmbiguousCaches' => $listOfAmbiguousCaches,
+                                                          'fetchedListingInfos' => $fetchedListingInfos,
+                                                          'differencesDetected' => $differencesDetected
                                                       ]
         );
     }
 
-//    /**
-//     * @param Request $request
-//     *
-//     * @return Response
-//     *
-//     * @route("/GPXassignImports/", name="support_gpx_assign_imports")
-//     *
-//     * Die beim Import nicht eindeutig als OC/OCOnly zuordenbaren GC-Caches müssen manuell begutachtet werden.
-//     * Optionen:
-//     *      als GC-Only markieren
-//     *      für den Moment ignorieren
-//     *      Eingabefeld für OC-Code anbieten, dessen Inhalt in der DB abgelegt wird
-//     *      (Tabellen caches/wp_gc_maintained, support_listing_infos/wp_oc)
-//     */
-//    public function GPX_assign_imports(Request $request)
-//    : Response {
-//        $formSearch = $this->createForm(SupportSearchCaches::class);
-//        $formUpload = $this->createForm(SupportImportGPX::class);
-//
-//        $rueckinfo = '';
-//
-//        return $this->render(
-//            'backend/support/occ_gpx_import.html.twig', [
-//                                                          'supportCachesForm' => $formSearch->createView(),
-//                                                          'supportUploadGPXForm' => $formUpload->createView()
-//                                                      ]
-//        );
-//    }
-//
-//    /**
-//     * @param Request $request
-//     *
-//     * @return Response
-//     * @throws RecordsNotFoundException
-//     *
-//     * @route("/GPXcheckDifferences/", name="support_gpx_check_differences")
-//     *
-//     * Überprüfung der Tabelle support_listing_infos
-//     * Erkennung von Veränderungen (Name, Wertung,..) einzelner OC/OCOnly Caches
-//     * Vermerken dieser Änderungen in der Tabelle support_listing_comments
-//     * Entfernung von Doubletten und Alteinträgen aus der Tabelle support_listing_infos
-//     */
-//    public function GPX_check_for_differences(Request $request)
-//    : Response {
-//        $formSearch = $this->createForm(SupportSearchCaches::class);
-//        $formUpload = $this->createForm(SupportImportGPX::class);
-//        $amountCheckedCaches = 0;
-//        $amountProcessedCaches = 0;
-//
-//        $fetchedCaches = $this->supportListingInfosRepository->fetchBy(['importstatus' => self::importStatusOCGCAsignmentFinished]);
-//
-//        foreach ($fetchedCaches as $fetchedCache) {
-//            dd($fetchedCaches);
-//            die();
-//        }
-//
-//        return $this->render(
-//            'backend/support/occ_gpx_import.html.twig', [
-//                                                          'supportCachesForm' => $formSearch->createView(),
-//                                                          'supportUploadGPXForm' => $formUpload->createView(),
-//                                                          'amountCheckedCaches' => $amountCheckedCaches,
-//                                                          'amountProcessedCaches' => $amountProcessedCaches
-//                                                      ]
-//        );
-//    }
+    /**
+     * @return array
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
+     *
+     * Unterschiede zwischen importierten Caches und deren OC-Pendants herausfinden
+     */
+    public function list_differences_table_listing_infos()
+    : array {
+        $fetchedListingInfos = $this->supportListingInfosRepository->fetchAll();
+        $differencesDetected = [];
+
+        foreach ($fetchedListingInfos as $fetchedListingInfo) {
+            $fetchedOCCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $fetchedListingInfo->wpOc]);
+            $tempArray = [$fetchedListingInfo->wpOc . '/' . $fetchedListingInfo->nodeListingWp];
+
+            if ($fetchedOCCache->name != $fetchedListingInfo->nodeListingName) {
+                array_push($tempArray, $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName);
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if ($fetchedOCCache->difficulty != $fetchedListingInfo->nodeListingDifficulty) {
+                array_push($tempArray, $fetchedOCCache->difficulty / 2 . ' != ' . $fetchedListingInfo->nodeListingDifficulty / 2);
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if ($fetchedOCCache->terrain != $fetchedListingInfo->nodeListingTerrain) {
+                array_push($tempArray, $fetchedOCCache->terrain / 2 . ' != ' . $fetchedListingInfo->nodeListingTerrain / 2);
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if (round ($fetchedOCCache->longitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLon * 10000)) {
+                array_push($tempArray, $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon);
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if (round($fetchedOCCache->latitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLat * 10000)) {
+                array_push($tempArray, $fetchedOCCache->latitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLat);
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if ((($fetchedListingInfo->nodeListingAvailable == true) && ($fetchedOCCache->status != 1)) ||
+                (($fetchedListingInfo->nodeListingAvailable == false) && ($fetchedOCCache->status == 1))) {
+                array_push($tempArray, 'OC status != import status');
+            } else array_push($tempArray, '');
+
+            if ((($fetchedListingInfo->nodeListingArchived == true) && ($fetchedOCCache->status != 3)) ||
+                (($fetchedListingInfo->nodeListingAvailable == false) && ($fetchedOCCache->status == 3))) {
+                array_push($tempArray, 'OC status != import status');
+            } else {
+                array_push($tempArray, '');
+            }
+
+            if (count($tempArray) != 1) {
+                array_push($differencesDetected, $tempArray);
+            }
+        }
+
+        return ($differencesDetected);
+    }
+
+    /**
+     * @return array
+     */
+    public function list_all_support_listing_infos()
+    : array {
+        try {
+            return($this->supportListingInfosRepository->fetchAll());
+        } catch (\Exception $exception) {
+            return ([]);
+        }
+    }
+
+    /**
+     * @param array $waypoints_as_array
+     *
+     * @return array
+     * @throws DBALException
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Oc\Repository\Exception\RecordAlreadyExistsException
+     */
+    public function check_array_for_Oc_Gc_relations(array $waypoints_as_array)
+    : array {
+        // Jeden importierten Cache im Array einzeln durchgehen..
+        // in DB caches/* prüfen, ob ein OC-Cache zugeordnet werden kann
+        //   wenn ja:
+        //      Wegpunkt des OC-Caches im aktuell geprüften Cache/Array reinschreiben
+        //      in DB support_listing_info schauen, ob bereits ein gleicher Eintrag wie der aktuelle Cache/Array vorhanden ist
+        //        wenn ja:
+        //          Unterschiede auslesen und in support_listing_comments/comment schreiben
+        //          alten Eintrag löschen
+        //          neuen Eintrag in support_listing_info schreiben
+        //        wenn nein:
+        //          -
+        //   wenn nein:
+        //      Bearbeitung des aktuell geprüften Caches/Array beenden
+        //
+        $amountAssignedCaches = 0;
+        $amountUpdatedCaches = 0;
+        $listOfAmbiguousCaches = '';
+
+        foreach ($waypoints_as_array as $wpt) {
+            try {
+                $fetchedWpGcCaches = $this->cachesRepository->fetchBy(['wp_gc' => $wpt['node_listing_wp']]);
+                $fetchedWpGcMaintainedCaches = $this->cachesRepository->fetchBy(['wp_gc_maintained' => $wpt['node_listing_wp']]);
+            } catch (\Exception $exception) {
+            }
+
+            if (count($fetchedWpGcCaches) == 1) {
+                $wpt['wp_oc'] = $fetchedWpGcCaches[0]->wpOc;
+            } elseif (count($fetchedWpGcMaintainedCaches) == 1) {
+                $wpt['wp_oc'] = $fetchedWpGcMaintainedCaches[0]->wpOc;
+            } elseif (count($fetchedWpGcCaches) > 1 or count($fetchedWpGcMaintainedCaches) > 1) {
+                $listOfAmbiguousCaches .= $wpt['node_listing_wp'] . ', ';
+            }
+
+            if ($wpt['wp_oc'] != - 1) {
+                $fetchedExistingSupportListingInfoArray = [];
+                $fetchedExistingSupportListingInfo = [];
+                $newComment = '';
+
+                try {
+                    $fetchedExistingSupportListingInfo =
+                        $this->supportListingInfosRepository->fetchOneBy(['node_listing_id' => $wpt['node_listing_id']]);
+                    $fetchedExistingSupportListingInfoArray =
+                        $this->supportListingInfosRepository->getDatabaseArrayFromEntity($fetchedExistingSupportListingInfo);
+                } catch (\Exception $exception) {
+                }
+
+                if (!empty($fetchedExistingSupportListingInfoArray)) {
+                    foreach ([
+                        'node_listing_name',
+                        'node_listing_size',
+                        'node_listing_difficulty',
+                        'node_listing_terrain',
+                        'node_listing_coordinates_lon',
+                        'node_listing_coordinates_lat',
+                        'node_listing_available',
+                        'node_listing_archived'
+                    ] as $checkItem) {
+                        if ($wpt[$checkItem] != $fetchedExistingSupportListingInfoArray[$checkItem]) {
+                            $newComment .= $checkItem
+                                           . ' changed from '
+                                           . $fetchedExistingSupportListingInfoArray[$checkItem]
+                                           . ' to '
+                                           . $wpt[$checkItem]
+                                           . PHP_EOL;
+                        }
+                    }
+
+                    if ($newComment != '') {
+                        $newComment =
+                            date('Y-m-d H:i:s')
+                            . ' -automatically generated comment-:'
+                            . PHP_EOL
+                            . 'Data import from foreign node via GPX for '
+                            . $fetchedExistingSupportListingInfoArray['node_listing_wp']
+                            . PHP_EOL
+                            . $newComment
+                            . PHP_EOL;
+
+                        try {
+                            $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpt['wp_oc']]);
+                        } catch (\Exception $exception) {
+                            $entity = $this->supportListingCommentsRepository->create(new SupportListingCommentsEntity($wpt['wp_oc']));
+                        }
+
+                        $entity->comment = $newComment . $entity->comment;
+                        $this->supportListingCommentsRepository->update($entity);
+                    }
+
+                    $this->supportListingInfosRepository->remove($fetchedExistingSupportListingInfo);
+                }
+
+                $wpt['importstatus'] = self::IMPORT_STATUS_FINISHED;
+                $entity = $this->supportListingInfosRepository->getEntityFromDatabaseArray($wpt);
+                $this->supportListingInfosRepository->create($entity);
+
+                $amountAssignedCaches ++;
+            }
+        }
+        return([$amountAssignedCaches, $amountUpdatedCaches, $listOfAmbiguousCaches]);
+    }
+
+    /**
+     * @param string $filemane
+     *
+     * @return array
+     * @throws RecordNotFoundException
+     */
+    public function read_Xml_file_and_get_array(string $filemane)
+    : array {
+        $strData = file_get_contents($filemane);
+        $strData = str_replace(['<groundspeak:', '</groundspeak:'], ['<', '</'], $strData);
+
+        if ($strData === false || $strData === '') {
+            return ([]);
+        } else {
+            $objXmlDocument = simplexml_load_string($strData);
+
+            $objJsonDocument = json_encode($objXmlDocument);
+            $arrOutput = json_decode($objJsonDocument, true);
+
+            // Array auseinandernehmen und in ein datenbankfähiges Format umwandeln (für Tabelle support_listing_infos)
+            $waypoints_as_array = [];
+
+            foreach ($arrOutput['wpt'] as $wpt) {
+                $wpt_array['wp_oc'] = - 1;
+                $wpt_array['node_id'] = $this->nodesRepository->get_id_by_prefix(substr($wpt['name'], 0, 2));
+                $wpt_array['node_owner_id'] = 0; // TODO: node_owner_id ist in Groundspeak GPX-Dateien nicht enthalten. Aber eventuell in anderen Quellen?
+                $wpt_array['node_owner_name'] = $wpt['cache']['owner'];
+                $wpt_array['node_listing_id'] = substr($wpt['url'], strlen($wpt['url']) - 36, 36);
+                $wpt_array['node_listing_wp'] = $wpt['name'];
+                $wpt_array['node_listing_name'] = $wpt['cache']['name'];
+                $wpt_array['node_listing_size'] = $wpt['cache']['container'];
+                $wpt_array['node_listing_difficulty'] = $wpt['cache']['difficulty'] * 2;
+                $wpt_array['node_listing_terrain'] = $wpt['cache']['terrain'] * 2;
+                $wpt_array['node_listing_coordinates_lat'] = $wpt['@attributes']['lat'];
+                $wpt_array['node_listing_coordinates_lon'] = $wpt['@attributes']['lon'];
+                $wpt_array['node_listing_available'] = ($wpt['cache']['@attributes']['available'] === "True") ? 1 : 0;
+                $wpt_array['node_listing_archived'] = ($wpt['cache']['@attributes']['archived'] === "True") ? 1 : 0;
+                $wpt_array['importstatus'] = self::IMPORT_STATUS_NEW;
+
+                array_push($waypoints_as_array, $wpt_array);
+            }
+            return ($waypoints_as_array);
+        }
+    }
 }

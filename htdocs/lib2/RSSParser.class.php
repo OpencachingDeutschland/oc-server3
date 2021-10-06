@@ -35,11 +35,18 @@ class RSSParser
         )) {
             $tpl->assign('includetext', $includetext);
 
+            $arrContextOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ],
+            ];
+
             // get xml-data;
             // set short timeout to avoid that the start page gets blocked
             $save_timeout = ini_get('default_socket_timeout');
             ini_set('default_socket_timeout', $timeout);
-            $data = @file_get_contents($url, false);
+            $data = @file_get_contents($url, false, stream_context_create($arrContextOptions));
             ini_set('default_socket_timeout', $save_timeout);
 
             // check data

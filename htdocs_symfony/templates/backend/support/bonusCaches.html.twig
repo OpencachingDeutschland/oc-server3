@@ -4,8 +4,31 @@
 
     {% include '/backend/support/support.header.html.twig' %}
 
-    <h3><br/>{{ 'Bonus caches' | trans }}..</h3>
+    <h3><br/>{{ 'Assign a cache to a bonus cache' | trans }}..</h3>
+    <h5>{{ '1st field: waypoint. 2nd field: waypoint that is the bonus cache. (To mark a cache as bonus cache leave the first field empty.)' | trans }}</h5>
 
+    <div>
+        {% if supportAssignBonusCacheForm is defined %}
+            {{ form_start(supportAssignBonusCacheForm,{action:path('backend_support_directly_assign_bonus_cache')}) }}
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    {{ form_row(supportAssignBonusCacheForm.content_wp_to_be_assigned) }}
+                </div>
+                <div class="form-group col-md-2">
+                    {{ form_row(supportAssignBonusCacheForm.content_wp_that_is_bonus_cache) }}
+                </div>
+                <div class="form-group col-md-8">
+                    {{ form_row(supportAssignBonusCacheForm.start_assignment, {'label': 'Execute' | trans, 'repID': '123' }) }}
+                </div>
+            </div>
+            {{ form_end(supportAssignBonusCacheForm) }}
+        {% endif %}
+        <br/><br/><br/>
+    </div>
+
+    <hr>
+
+    <h3><br/>{{ 'Bonus caches' | trans }}..</h3>
     <div>
         {% if bonusCaches_by_id is defined %}
             <div> Found: {{ bonusCaches_by_id|length }} Cache(s)</div>
@@ -16,16 +39,28 @@
                         <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Is a bonus cache?' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Belongs to bonus cache' | trans }}</th>
-                        <th scope="col">&nbsp;</th>
+                        <th scope="col" class="asc">{{ 'Assign other caches to this bonus cache (from the same owner)' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Remove which bonus information?' | trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for bonusCache in bonusCaches_by_id %}
                         <tr>
                             <td>{{ bonusCache.wpOc }}</td>
-                            <td>{% if (bonusCache.isBonusCache) %}<i class="fas fa-check"></i>{% else %}<i class="fas fa-times"></i>{% endif %}</td>
-                            <td>{% if (bonusCache.belongsToBonusCache) %}{{ bonusCache.belongsToBonusCache }}{% else %}<i
+                            <td>{% if bonusCache.isBonusCache %}<i class="fas fa-check"></i>{% else %}<i class="fas fa-times"></i>{% endif %}</td>
+                            <td>{% if bonusCache.belongsToBonusCache %}{{ bonusCache.belongsToBonusCache }}{% else %}<i
                                         class="fas fa-times"></i>{% endif %}</td>
+                            <td>
+                                {% if bonusCache.isBonusCache %}
+                                <a class="btn btn-primary"
+                                   href="{{ path('backend_support_bonus_caches_assignment_choice', { 'wpID': bonusCache.wpOc }) }}">{{ 'Go' | trans }}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ path('backend_support_remove_bonus_caches_assignment', { 'wpID': bonusCache.wpOc, 'removeToBonus': 1, 'removeBonus': 0 }) }}">{{ 'Belongs to bonus' | trans }}</a>
+                                <a class="btn btn-primary" href="{{ path('backend_support_remove_bonus_caches_assignment', { 'wpID': bonusCache.wpOc, 'removeToBonus': 0, 'removeBonus': 1 }) }}">{{ 'Is bonus cache' | trans }}</a>
+                                <a class="btn btn-primary" href="{{ path('backend_support_remove_bonus_caches_assignment', { 'wpID': bonusCache.wpOc, 'removeToBonus': 1, 'removeBonus': 1 }) }}">{{ 'Both' | trans }}</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -35,7 +70,6 @@
                 <span>{{ 'No caches found' | trans }}..</span>
             {% endif %}
         {% endif %}
-
     </div>
 
     <hr>

@@ -1,0 +1,48 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Assign caches to a bonus cache' | trans }}..</h3>
+
+    <div>
+        {% if caches_by_owner is defined %}
+            <div>{{ 'Caches found' | trans }}: {{ caches_by_owner | length - 1 }}</div>
+            {% if caches_by_owner %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Title' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Assign to bonus cache' | trans }} {{ bonus_Cache }}?</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cache in caches_by_owner %}
+                        {% if cache.wpOc != bonus_Cache %}
+                            <tr>
+                                <td>{{ cache.wpOc }}</td>
+                                <td>{{ cache.name }}</td>
+                                <td>{{ cache.user.username }}</td>
+                                <td>
+                                    <a class="btn btn-primary"
+                                       href="{{ path('backend_support_bonus_caches_assignment', { 'wpID': cache.wpOc, 'userID': cache.user.id, 'toBonusCache': bonus_Cache }) }}">{{ 'Go' | trans }}</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No caches found' | trans }}..</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
+    <hr>
+
+{% endblock %}

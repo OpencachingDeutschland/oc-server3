@@ -38,6 +38,7 @@ class SupportListingInfosRepository
 
     /**
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
@@ -97,6 +98,7 @@ class SupportListingInfosRepository
      * @param array $where
      *
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
@@ -232,7 +234,7 @@ class SupportListingInfosRepository
      * @param array $data
      *
      * @return SupportListingInfosEntity
-     * @throws \Exception
+     * @throws RecordNotFoundException
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingInfosEntity {

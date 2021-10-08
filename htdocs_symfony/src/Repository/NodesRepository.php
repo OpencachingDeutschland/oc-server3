@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\NodesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -35,7 +37,7 @@ class NodesRepository
      * @return array
      * @throws RecordsNotFoundException
      */
-    public function fetchAll()
+    public function fetchAll() : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -63,7 +65,7 @@ class NodesRepository
      * @return NodesEntity
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = [])
+    public function fetchOneBy(array $where = []) : NodesEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -93,7 +95,7 @@ class NodesRepository
      * @return array
      * @throws RecordsNotFoundException
      */
-    public function fetchBy(array $where = [])
+    public function fetchBy(array $where = []) : array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
@@ -127,9 +129,9 @@ class NodesRepository
      *
      * @return NodesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
-    public function create(NodesEntity $entity)
+    public function create(NodesEntity $entity) : NodesEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -151,10 +153,10 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
+     * @throws DBALException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
      */
-    public function update(NodesEntity $entity)
+    public function update(NodesEntity $entity) : NodesEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -175,11 +177,11 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
+     * @throws DBALException
+     * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
      */
-    public function remove(NodesEntity $entity)
+    public function remove(NodesEntity $entity) : NodesEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -190,7 +192,7 @@ class NodesRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->id = null;
 
         return $entity;
     }
@@ -200,7 +202,7 @@ class NodesRepository
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(NodesEntity $entity)
+    public function getDatabaseArrayFromEntity(NodesEntity $entity) : array
     {
         return [
             'id' => $entity->id,
@@ -215,7 +217,7 @@ class NodesRepository
      *
      * @return NodesEntity
      */
-    public function getEntityFromDatabaseArray(array $data)
+    public function getEntityFromDatabaseArray(array $data) : NodesEntity
     {
         $entity = new NodesEntity();
         $entity->id = (int) $data['id'];
@@ -239,7 +241,7 @@ class NodesRepository
             return $data->waypointPrefix;
         }
 
-        return 0;
+        return '';
     }
 
     /**

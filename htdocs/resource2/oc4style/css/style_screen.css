@@ -1,0 +1,1258 @@
+/*************************************************************/
+/*   Basic style sheet                                       */
+/*                                                           */
+/*   Based on MultiFlex-2 by  G. Wolfgang                    */
+/*   http://www.openwebdesign.org/design/2876/MultiFlex21/   */
+/*   Date:    June 8, 2006                                   */
+/*   "You can use this stylesheet any way you want!"         */
+/*-----------------------------------------------------------*/
+/*   Additions for OC/OC.de:  Sp2ong                         */
+/*   Additions for OC.de:     Schrottie                      */
+/*   Additions & Cleanup:     following   2012/2013          */
+/*************************************************************/
+
+/* When adding or changing styles, please check out if style_print.css
+ * needs to be updated, too! */
+
+
+/*************************************/
+/* SECTION 1 - BASICS                */
+/*************************************/
+
+/*-----------------------------------*/
+/* 1.1 - Page frame                  */
+/*-----------------------------------*/
+html {height: 100%;}
+
+body {
+    font-size: 64.5%;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0;
+    background-color: #3a663a;
+    font-family: arial, sans-serif, Tahoma, Verdana;
+}
+
+body.popup {background: white;}
+
+.page-container-1 {
+    width: 970px;
+    margin: 29px auto auto auto;
+    padding: 0;
+    background-color: #ffffff;
+    border: solid 1px rgb(100,100,100);
+    position: relative;
+}
+
+#ocmain {
+    height:100%;
+    width:100%;
+}
+
+#ocmain ul li {
+    font-size: 12px;
+}
+
+#ocmain p, #ocmain ul, #ocmain ol {
+    margin-right: 15px;
+}
+
+div#overall {
+    min-width: 970px;
+    width: 100%;
+    overflow: hidden;
+}
+
+div#bg1 {display: none;}
+div#bg2 {display: none;}
+
+/*-----------------------------------*/
+/* 1.2 - Basic elements              */
+/*-----------------------------------*/
+br {clear: none;}
+
+img {
+    behavior: url(resource2/ocstyle/css/iepngfix.htc);
+    vertical-align: middle;
+    border-width: 0;
+    border-style: none;
+}
+
+/*-----------------------------------*/
+/* 1.2 - Generic formatting          */
+/*-----------------------------------*/
+.align-left {text-align: left;}
+.align-right {text-align: right;}
+.align-center {text-align: center;}
+
+.pad5 { padding: 5px; }
+.pad10 { padding: 10px; }
+.pad15 { padding: 15px; }
+.pad20 { padding: 20px; }
+
+.clear {clear: both;}
+.hide {display: none;}
+.nowrap { white-space: nowrap; }
+
+
+/*************************************/
+/* SECTION 2 - HEADER AND NAVIGATION */
+/*************************************/
+
+/*-----------------------------------*/
+/* 2.1 - Page Header                 */
+/*-----------------------------------*/
+div#langstripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 0;
+    height: 31px;
+    background: #abb4bd url(../images/bg-langstripe.png) 0 100% repeat-x;
+    color: black;
+    z-index: 5;
+}
+
+.header {height: 81px;}
+
+.headerimage {
+    height: 80px;
+    width: 970px;
+    overflow: hidden;
+    position: absolute;
+    top: 1px;
+    z-index: 1;
+}
+
+.headerlogo {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+}
+
+.headerimagecontent {border: 0 none;}
+
+#debugoc {
+    position: absolute;
+    left: 305px;
+    top: 4px;
+    border: solid 3px red;
+    padding: 15px;
+    z-index: 2;
+    background-color: white;
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+    -khtml-opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+/*----------------------------*/
+/* 2.3 - Navigation - Level 1 */
+/* Top line                   */
+/*----------------------------*/
+.nav1 {
+    width: 970px;
+    margin: auto;
+    height:29px;
+    }
+
+.nav1 td {
+    font-size: 1.0em;
+    vertical-align: middle;
+    white-space:nowrap;
+    }
+
+/*----------------------------*/
+/* 2.4 - Navigation - Level 2 */
+/* Main menu bar              */
+/*----------------------------*/
+.nav2 {clear: both; margin: 0; padding: 0; font-family: verdana, arial, sans serif; font-size: 1.0em;}
+.nav2 ul {float: left; width: 970px; margin: 0; padding: 0; border-top: solid 1px rgb(54,83,151); border-bottom: solid 1px rgb(54,83,151); font-weight: bold; background-color: #7ba4c8; background-size:contain; }
+.nav2 li {display: inline; list-style: none; margin: 0; padding: 0;}
+.nav2 li a {display: block; float: left; margin: 0 0 0 0; padding: 5px 10px 5px 10px; border-right: solid 1px rgb(54,83,151); color: rgb(255,255,255); text-transform: uppercase; text-decoration: none; font-size: 100%;}
+.nav2 a:hover {color: rgb(50,50,50); text-decoration: none;}
+.nav2 a.selected {color: rgb(50,50,50); text-decoration: none; background-color: #95cb66;  background-size:contain; }
+.buffer {clear: both; width: 1px; height: 15px; margin: 0; padding: 0; background-color: rgb(255,255,255);}
+
+.nav2 .bg-green06 {background-color: rgb(149,203,102);}
+
+/*----------------------------*/
+/* 2.5 - Navigation - Level 3 */
+/* Sidebar menu               */
+/*----------------------------*/
+.nav3 {overflow: hidden; clear: both; float: left; width: 160px; min-height: 500px; margin: 0; padding: 0; color: rgb(75,75,75); font-size: 1.0em; }
+.nav3 ul {width: 160px; margin: 0 0 20px 0; padding: 0; border-bottom: solid 1px white; background-color: rgb(219,230,241);}
+.nav3 li {list-style: none; margin: 0; padding: 0;}
+.nav3 li.title {margin: 2px 0 0 0; padding: 3px 5px 2px 15px; color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background-color: #96b4ce; background-size:contain; }
+.nav3 li.secondtitle { margin-top:0; }
+.nav3 li.group1 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; padding: 0 7px 0 15px; border-top: solid 1px white; border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
+.nav3 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
+.nav3 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; padding: 0 7px 0 15px; border-top: solid 1px white; border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
+.nav3 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
+.nav3 li a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; padding: 0 7px 0 20px; border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); text-decoration: none; font-size: 120%;}
+.nav3 li a:hover, .nav3 li a.selected {border-left: solid 7px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
+.nav3 li.group2 a:hover, .nav3 li a.selected {border-left: solid 14px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
+
+.nodeflags { padding-bottom: 10px; }
+.nodeflags img { padding-top: 2px; }
+
+/*----------------------------*/
+/* 2.5 - Navigation - Level 4 */
+/*----------------------------*/
+#breadcrumb
+{
+    position:relative;
+    top:4px;
+    margin-left:174px;
+    width:520px;
+    color:#505050;
+    font-size:10px; /* x-small has different size in different browsers */
+    font-family:sans-serif;
+/*     border-bottom:1px solid #AAAAAA; */
+    text-align:left;
+    margin-top:0.5ex;
+    margin-bottom:1ex;
+    line-height:3ex;
+    text-indent:1ex;
+}
+
+#breadcrumb_fullsize
+{
+    position:relative;
+    top:4px;
+    margin-left:180px;
+    width:620px;
+    color:#505050;
+    font-size:10px; /* x-small has different size in different browsers */
+    font-family:sans-serif;
+    border-bottom:1px solid #AAAAAA;
+    text-align:left;
+    margin-top:0.5ex;
+    margin-bottom:1ex;
+    line-height:3ex;
+    text-indent:1ex;
+}
+
+#suchbox {
+    position: absolute;
+    top:112px;
+    right: 15px;
+}
+
+div.tplhelp
+{
+    position:absolute;
+    top:136px;
+    right:13px;
+}
+
+/*.nav4 {overflow: hidden; clear: both; margin: 0; padding: 0; color: rgb(75,75,75); font-size: 1.0em;margin: 0;} */
+/*.nav4 ul {width: 160px; margin: 0 0 0 0; padding: 0; border-bottom: solid 1px rgb(216,206,159); background-color: rgb(219,230,241);}*/
+
+.nav4 li.hilite a { background-color:#ffb9b5 !important; }
+
+.nav4 li {float: left; list-style: none; margin: 0; padding: 2px 0 3px 0; }
+.nav4 li.title {display: none; margin: 0 0 0 0; padding: 3px 5px 2px 5px; background-color: rgb(156,186,214); color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%;}
+.nav4 li.group a {background-color: rgb(219,230,241);display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; margin-right: 3px; padding: 0 7px 0 20px;  border-left: solid 7px rgb(219,230,241); color: rgb(75,75,75); font-weight: bold; font-size: 100%;}
+.nav4 li.group_active a {border-left: solid 7px rgb(156,186,214); background-color: rgb(156,186,214);}
+.nav4 li.group2 a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; padding: 0 7px 0 0; border-top: solid 1px rgb(200,200,200); border-left: solid 14px rgb(219,230,241); color: rgb(75,75,75); font-weight: normal; font-size: 120%;}
+.nav4 li.group2_active a {border-left: solid 14px rgb(156,186,214); background-color: rgb(156,186,214);}
+
+.nav4 li.noicon a {padding: 0 10px 0 3px; }
+.nav4 li.selected a {background-color: #cae5af; border-left: solid 7px #cae5af;}
+
+.nav4 li a {display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; border-left: solid 40px rgb(219,230,241); color: rgb(75,75,75); text-decoration: none; font-size: 120%;}
+.nav4 li a:hover, .nav4 li a.selected {border-left: solid 7px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
+.nav4 li.group2 a:hover, .nav4 li a.selected {border-left: solid 14px rgb(156,186,214);  color: rgb(100,100,100); text-decoration: none;}
+
+.nav4 ul { padding: 0; margin: 0;}
+
+.notlogged-cacheview { display: block; min-height: 1.7em; height: auto !important; height: 1.7em; line-height: 1.7em; margin: 0; padding: 0 0 6px 7px; color: rgb(150,75,75); font-size: 120%; }
+
+
+/*********************************/
+/* SECTION 3 - PAGE SECTIONS     */
+/*********************************/
+
+/*--------------------*/
+/* 3.1 - Content Area */
+/*--------------------*/
+
+/* Containers */
+.content2 {float: left; width: 790px; min-height: 500px; margin: 0; padding: 0 0 0 20px; color: rgb(75,75,75); font-size: 1.0em;}
+.content3 {float: left; width: 790px; min-height: 500px; margin: 0; padding: 0 0 0 20px; color: rgb(75,75,75); font-size: 1.0em;}
+.content2-container, .content3-container {clear: both; width: 769px; margin: 0 0 15px 0; padding: 0;}
+.content2-section-no-p { margin-bottom: 21px !important; }
+/* use if a section does not contain a <p>..</p> to obtain equal spacing to other sections */
+.content2-container-1col, .content3-container-1col {overflow: hidden; width: 769px; margin: 0; padding: 0;}
+/* removed "overflow:hidden" from content2-container-2col* to fix bug RT #3886 ... */
+.content2-container-2col {width: 272px; margin: 0; padding: 0;}
+.content2-container-2col-left, .content3-container-2col-left {float: left; width: 272px; margin: 0; padding: 0;}
+.content2-container-2col-right, .content3-container-2col-right {float: right; width: 372px; margin: 0; padding: 0;}
+/* ... up to here */
+
+/* Titles */
+.bg-blue02 {
+    background-size:contain;
+    background-color: #e8eff2;
+    padding: 2px 0 2px 6px;
+    margin: 2px 0 14px 0;  /* see adjustment in style_screen_msie.css */
+}
+.content2-pagetitle, .content3-pagetitle {overflow: hidden; width: 773px; min-height:32px; margin: 0 0 10px 0; padding: 0 0 2px 0; border-bottom: solid 3px rgb(88,144,168); color: rgb(88,144,168); font-weight: bold; font-size: 180%;}
+
+.content-title-noshade {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 100%;}
+.content-title-noshade-size0 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 70%;}
+.content-title-noshade-size05 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 80%;}
+.content-title-noshade-size08 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 110%;}
+.content-title-noshade-size1 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 130%;}
+.content-title-noshade-size15 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 136%;}
+.content-title-noshade-size2 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 150%;}
+.content-title-noshade-size5 {margin: 0; padding: 0; color: rgb(88,144,168); font-weight: bold; font-size: 200%;}
+
+.content-title-noshade-size3 { margin: 0;    padding: 0;    color: rgb(88,144,168);    font-weight: bold;    font-size: 160%;}
+.content-title-noshade-size3 img {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+p.content-title-noshade-size3 { margin:0 !important; }
+
+td.content-title-flag {
+    margin-left:0 !important;
+    padding-left:0 !important;
+    margin-right:3px !important;
+    padding-right:3px !important;
+}
+
+.content-title-link { font-weight:normal; font-size:80%; }
+
+.content-txtbox-noshade {margin: 0; padding: 7px 0 0 0; background-color: rgb(255,255,255);}
+.content-score {margin: 0; margin-top: 3px; padding: 4px 0 0 0; background-color: rgb(255,255,255); border-style:dotted; border-width:1px; width:75px; height:20px;vertical-align:middle;}
+
+.content-subtitle { color: #426d7e; }
+.subtitle { font-weight:bold; }
+.subtitle-header { font-weight:bold; line-height: 1.6em }
+p.subtitle-select { line-height:2.5em; }
+
+/* Headings */
+h1 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 160%;}
+h2 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 150%;}
+h3 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 140%;}
+h4 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 130%;}
+h5 {margin: 1.0em 0 0.5em 0; font-weight: bold; font-size: 120%;}
+
+/* Separators */
+.line-box {width:769px; border-bottom: solid 1px rgb(200,200,200); padding-bottom: 7px; margin: 0 0 15px 0;}
+
+/* Boxes */
+.textblock {
+    border: solid 2px #d6e4f0;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    margin: 3px;
+    padding: 6px 6px 6px 8px;
+    min-width: 640px;
+}
+
+.wide_textblock {width: 740px;}
+
+/* Paragraphs */
+p {margin: 0 0 0.5em 0; padding: 0; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
+p.inheader {margin:4px; font-size:125%;}
+p.spacer_before {margin-top:12px;}
+p.indent {margin-left:2em; margin-bottom:1.3em !important;}
+
+/* Lists */
+ul.noindent {margin: 0 0 7px 15px; padding: 0; list-style-type: disc; list-style-position: outside; font-size: 120%;}
+ul.indent {margin: 0 0 7px 15px; padding: 0 0 0 15px; list-style-type: disc; font-family: arial, serif; font-size: 11px;}
+ul.indent li {margin-bottom:4px}
+ul.linklist-noindent {margin: -0.3em 0 0.5em 0; padding: 0; list-style-type: none; line-height: 1.2em; font-size: 120%; }
+ul.linklist-indent {margin: -0.3em 0 0.5em 0; padding: 0 0 0 10px; list-style-type: none; line-height: 1.2em; font-size: 120%; }
+ul.nodot {font-size: 11px; }
+ul.nodot li { list-style-type: none; }
+ul.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
+ul.default li { line-height: 1.7em; }
+
+ol {list-style-type: decimal; list-style-position: outside; }
+ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-height:1.7em; } /* does not work in MSIE */
+
+/* Tables */
+.table {font-size: 10px; line-height: 1.8em; clear: left; padding: 0; margin: 0.5em 0 0.2em 0; border: solid 0 rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
+.table tr {margin: 0; padding:0; }
+.table td {padding: 2px 7px 4px 7px; border: solid 0 rgb(150,150,150); text-align: left; font-size: 120%;}
+.table th, .searchtable th {margin: 0; color: #404040; padding: 3px 7px 2px 7px; empty-cells: show; text-align: left; font-size: 120%;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
+.table-caption {margin: 0.5em 0 1.0em 30px; padding: 0; clear: both; text-align: left; font-size: 120%;}
+
+.narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0; margin: 0.5em 0 0.2em 0; border: solid 0 rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
+.narrowtable tr {margin: 0; padding: 0;}
+.narrowtable td {padding: 0 7px 0 7px; border: solid 0 rgb(150,150,150); text-align: left; font-size: 120%;}
+.narrowtable th {margin: 0; color: #404040; background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; padding: 0 7px 0 7px; empty-cells: show; text-align: left; font-size: 120%; }
+.narrowtable-caption {margin: 0.5em 0 1.0em 30px; padding: 0; clear: both; text-align: left; font-size: 120%;}
+
+.table-like-font { font-size:120%; }
+
+td.odd { background: #fff; padding-top:2px; }
+td.even { background: #eee; padding-top:2px; }
+td.listcolor1 { background:#fff; }
+td.listcolor2 { background:#f0f0f0; }
+
+td div.mediumspacer { height:6px; }
+
+/* Text styles */
+.txt-white {color: rgb(255,255,255);}
+.txt-black {color: rgb(75,75,75);}
+.boldtext { font-weight:bold; color:#505050; }
+.smalltext { font-size:10px !important; line-height:1.4em; }
+.mediumsmalltext { font-size:11px !important; }
+.truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+div.default { font-size:110%; }
+td.default { font-size:12px; }
+textarea.default { font-size:12px; }
+
+/*--------------------*/
+/* 3.2 - Sidebar Area */
+/*--------------------*/
+.sidebar {overflow: hidden; float: right; width: 160px; min-height: 500px; margin: 0; padding: 0 0 10px 0; text-align: left; color: rgb(75,75,75);}
+.sidebar-maintitle {margin:4px 0 10px 0; padding: 3px 10px 2px 10px; color: rgb(255,255,255); text-transform: uppercase; font-weight: bold; font-size: 120%; background-color: #96b4ce; background-size:contain; }
+.sidebar-title-noshade {margin: 0; padding: 2px 10px 3px 10px; border-top: solid 1px rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
+.sidebar-title-shade {margin: 0; padding: 2px 10px 3px 10px; background-color: rgb(215,215,215); color: rgb(75,75,75); font-weight: bold; font-size: 120%;}
+.sidebar-txtbox-noshade {margin: 0 0 10px 0; padding: 2px 10px 3px 10px;}
+.sidebar-txtbox-shade {margin: 0 0 10px 0; padding: 2px 10px 3px 10px; background-color: rgb(235,235,235);}
+.sidebar-txtbox-noshade p {margin: 0 0 5px 0; padding: 0; line-height: 1.25em; font-size: 110%;}
+.sidebar-txtbox-shade p {margin: 0 0 5px 0; padding: 0; line-height: 1.25em; font-size: 110%;}
+
+/*--------------------*/
+/* 3.3 - Footer Area  */
+/*--------------------*/
+.footer {overflow: hidden; clear: both; width: 970px; height: 4.0em; margin: 0; padding: 0.5em 0 0.5em 0; border-top: solid 1px rgb(125,125,125); background-color: rgb(128,161,202); color: rgb(255,255,255); font-size: 1.0em;}
+.footer p {margin: 0; padding: 0; text-align: center; line-height: 1.3em; font-size: 110%;}
+
+
+/*********************************/
+/* SECTION 4  HYPERLINKS         */
+/* (except for navigation)       */
+/*********************************/
+
+/* standard links */
+.nav3 a, .content1 a, .content2 a, .content3 a, .sidebar-txtbox-noshade a, .sidebar-txtbox-shade a, .popup a, .cachelist-tooltip a {color: rgb(75,75,175); text-decoration: none;}
+#langstripe a, .mapform a { color:rgb(60,60,140); text-decoration: none; }
+  /* the mapform area is also popup -> declare mapform link style after popup */
+#langstripe a:hover, .nav3 a:hover, .content1 a:hover, .content2 a:hover, .content3 a:hover, .sidebar-txtbox-noshade a:hover, .sidebar-txtbox-shade a:hover, .footer a:hover, .popup a:hover {text-decoration: underline;}
+.content1 a:visited, .content2 a:visited, .content3 a:visited {color: rgb(120,0,150);}
+.footer a {color: rgb(255,255,255); text-decoration:none; }
+a.systemlink:visited, .systemlink a:visited, .content-title-link a:visited { color: rgb(75,75,175); }
+a.boldlink:visited, .content1 b a:visited, .content2 b a:visited, .content3 b a:visited {color: rgb(130,0,145) !important;}
+
+/* fat cache and username links */
+a.links:link {
+    font-weight: bold;
+    color: rgb(48,48,48);
+    text-decoration: none;
+}
+
+a.links:visited {
+    font-weight: bold;
+    color: rgb(128,0,128);
+    text-decoration: none;
+}
+
+a.links:hover {
+    text-decoration: underline;
+}
+
+/* other */
+a.nooutline:focus { outline: 0; }
+
+/* ----> What is this? Is it still in use somewhere? */
+a.info{
+    position:relative; /*this is the key*/
+    z-index:24; background-color:#FFFFFF;
+    color:#000;
+    text-decoration:none;
+}
+
+a.info:visited {
+    color: black;
+    text-decoration:none;
+}
+
+a.info:hover{
+    z-index:25;
+    background-color:#FFFFFF;
+}
+
+a.info span{
+    display: none
+}
+
+a.info:hover span{ /*the span will display just on :hover state*/
+    display:block;
+    position:relative;
+    bottom:15em; left:0em; width:15em;
+    border:1px solid #000;
+    background-color:#FFFFCC; color:#000;
+    text-align: left; font-size: 11px;
+    }
+/* <---- */
+
+/* external links in Maindiv, decorated with ext-icon */
+
+#ocmain a[href^="http:"], #ocmain a[href^="https:"]
+{
+    padding-right: 14px;
+    background-image: url('../images/misc/linkicon.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+/* internal links without symbol */
+
+/* This setting is especially important for popup InfoWindows on google maps,
+   as the right-padding is not correctly calculated into the GM InfoWindow
+   content size. */
+
+#googlemap a[href],
+#ocmain a[href^="http://www.opencaching"],
+#ocmain a[href^="https://www.opencaching"],
+#ocmain a[href^="http://blog.opencaching"],
+#ocmain a[href^="https://blog.opencaching"],
+#ocmain a[href^="http://forum.opencaching"],
+#ocmain a[href^="https://forum.opencaching"],
+#ocmain a[href^="http://wiki.opencaching"],
+#ocmain a[href^="https://wiki.opencaching"],
+#ocmain a[href^="http://opencaching"],
+#ocmain a[href^="https://opencaching"],
+#ocmain a[href^="http://test.opencaching"],
+#ocmain a[href^="https://test.opencaching"],
+#ocmain a[href^="http://local.opencaching"],
+#ocmain a[href^="https://local.opencaching"],
+#ocmain a[href^="http://local.team-opencaching.de"],
+#ocmain a[href^="https://local.team-opencaching.de"],
+#ocmain a[href^="http://oc-devel"]
+{
+    padding-right: 0;
+    background-image: none;
+}
+
+/* a / no href / onclick=javascript:... */
+.jslink {cursor:pointer;}
+
+
+/********************************/
+/* SECTION 5 - FORMS / CONTROLS */
+/********************************/
+
+input {    border:1px solid #555;    background-color:white;    padding:1px 2px 1px 2px; font-size:11px;color: black;}
+
+*.input20  {width:20px;}  /* day,month */
+*.input30  {width:30px;}
+*.input40  {width:40px;}  /* year */
+*.input50  {width:50px;}
+*.input70  {width:70px;}
+*.input100 {width:100px;}    /* log-password */
+*.input120 {width:120px;}    /* emailadress */
+*.input170 {width:170px;}    /* cache lists filter */
+*.input200 {width:200px;}
+*.input300 {width:300px;}
+*.input350 {width:350px;}    /* overwrite saved query */
+*.input400 {width:400px;}    /* short cachedescription */
+*.input500 {width:500px;}    /* cache list wp inputs, Email subject */
+
+input.checkbox {width:12px; height:12px; font-size:12px; border:0;}
+
+input.radio {border:0; width:12px; height:12px; background-color: transparent;}
+
+select {border:1px solid #555; background-color:white; padding:1px; font-size:11px; color: black;}
+select.disabled {border:1px solid #a0a0a0; color:grey; }
+
+input.formbutton_header {
+    width:65px;
+    border:1px solid black;
+    background-color:#dbe6f1;
+    color: #000000;
+    padding:0;
+}
+
+input.formbutton {
+    width:120px;
+    border:1px solid #5f90bb; /* see adjustment in style_screen_msie.css */
+    padding:1px 0 1px 0;
+    background-color:#dbe6f1;
+    color: #000000;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+}
+
+input.formbutton:hover {
+    background-color:#e5eef5;
+    box-shadow: 0 0 1px #555;
+    -moz-box-shadow: 0 0 1px #555;
+    -webkit-box-shadow: 0 0 1px #555;
+}
+
+input.formbutton_active {
+    width:120px;
+    border:1px solid #5f90bb;
+    padding:1px 0 1px 0;
+    color: #000000;
+    background-color:#e5eef5;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    box-shadow: 0 0 1px #555;
+    -moz-box-shadow: 0 0 1px #555;
+    -webkit-box-shadow: 0 0 1px #555;
+}
+
+input.widebutton {
+    width:160px !important;
+}
+
+.menuBar {
+    background-color:#F0F0EE;
+    margin:2px 2px 2px 2px;
+    padding:2px 4px 2px 4px;
+    border:solid 1px #CCCCCC;
+    font-size:smaller;
+    cursor:default;
+    float:left;
+}
+
+.buttonNormal
+{
+    padding:3px 4px 3px 4px;
+    cursor:default;
+}
+
+.buttonSplitter
+{
+    color:#CCCCCC;
+}
+
+/* Buttons and Dropdown list for data export */
+.exportbutton, .exportlist {
+    background: rgb(234,239,247);  /* see adjustment in style_screen_msie.css */
+    font-weight: bold;
+    font-size: 8pt;
+    border: 1px solid #5f90bb;
+    padding: 2px;  /* see adjustment in style_screen_msie.css */
+    font-family: verdana, tahoma, sans-serif;
+    color: #202020;
+}
+
+.exportbutton:hover, .exportlist:hover {
+    box-shadow: 0 0 1px #555;
+    -moz-box-shadow: 0 0 1px #555;
+    -webkit-box-shadow: 0 0 1px #555;
+}
+
+/* Chrome/Safari hack */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+.exportbutton { padding: 3px 6px 3px 6px; }
+}
+
+/* Editor fields for Descritpions, Logs etc. */
+textarea { font-family: Arial, sans-serif, Tahoma, Verdana; font-size: 8pt; }
+textarea.cachedesc { width:750px; height:500px; }  /* only cacheeditor */
+textarea.hint {    width:750px; height:100px; }  /* only cacheditor */
+textarea.logs {    width:640px; height:280px; }  /* only logeditor */
+textarea.reports {    width:640px; height:250px; }  /* only logeditor */
+textarea.listdesc2 { width:580px; height:120px; }  /* only list desc editor */
+textarea.listdesc3 { width:580px; height:220px; }  /* only list desc editor */
+textarea.userdesc { width:750px; height:400px; }  /* only user desc editor */
+textarea.removelogs {    width:620px; height:200px; }  /* log removal */
+
+label.disabled { color:grey; }
+.formlabel { color:#555; font-weight:bold; line-height:1.5em !important}
+
+input.waypoint { text-transform: uppercase; }
+
+.radiolist { line-height:1.5em; }
+
+
+/********************************/
+/* SECTION 9 - "BUSINESS LOGIC" */
+/********************************/
+
+/*---------------------------*/
+/* 9.1  Common               */
+/*---------------------------*/
+.notice {overflow: hidden; width: 735px; height: 24px; margin: 0 0 0 0; padding: 0 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/viewcache/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
+.warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0 0 0 0; padding: 8px 0 0 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
+
+.errormsg {color: rgb(240,100,100); font-weight: bold;}
+.okmsg {color: rgb(0,191,0); font-weight: bold;}
+.redtext {color: rgb(198,0,0);}
+.greytext { color: rgb(140,140,140); }
+
+img#viewcache-cacheicon { float: left; }
+
+td.listicon {
+    width:1%;
+    margin-right:0 !important;
+    padding-right:1px !important;
+    vertical-align:middle;
+}
+
+tr.cachelistheader td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid 1px black;
+    border-top: solid 1px black;
+    margin-bottom: 5px;
+}
+
+tr.cachelistitem td {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    line-height: 1.4em;
+}
+
+/*---------------------------*/
+/* 9.2  Miscellaneous        */
+/*---------------------------*/
+
+/* Start page */
+p.startmessage { line-height: 1.4em; }
+
+.img-minimap {
+    border: 1px solid #a9a9a9;
+    padding: 2px;
+    box-shadow: 1px 2px 2px #555;
+    -moz-box-shadow: 1px 2px 2px #555;
+    -webkit-box-shadow: 1px 2px 2px #555;
+}
+
+/* Viewcache */
+#cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
+
+div.cachedesc {font-size: 120%; line-height:1.4; padding-bottom:6px; overflow:hidden; }
+div.cachedesc p, div.cachedesc-print p, div.viewcache_log-content p {font-size: 100%; line-height:1.4; margin-bottom:0.85em; }
+div.cachedesc li, div.cachedesc-print li, div.viewcache_log-content li { line-height:1.55; }
+
+.showcode {font-family: monospace; font-weight: bold; font-size: 13px; color: rgb(255,0,0);}
+
+div.viewcache-pictureblock { float: left; }
+div.viewcache-pictureblock span.title { display: block; max-width: 175px; padding-left: 10px; padding-right: 5px;clear: left; font-size: 125%;}
+
+.waypointtable { width: 96%; margin-bottom:4px; background-color: #c0c0c0; }
+.waypointtable td { font-size: 11px; }
+.waypointtable td.wpt_text { padding: 6px 6px 6px 8px; }
+
+.img-shadow {
+    float:left;
+    background: url(shadowAlpha.png) no-repeat bottom right !important;
+    margin: 10px 0 0 10px !important;
+    margin: 10px 0 0 5px;
+}
+
+.img-shadow img {
+    display: block;
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #a9a9a9;
+    margin: -4px 4px 4px -4px;
+    padding: 2px;
+}
+
+div.isarchived {
+    clear: both;
+    float: left;
+    width: 735px;
+    margin: 0 0 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color:#ffeaea;
+}
+
+div.isannotated {
+    clear: both;
+    float: left;
+    width: 735px;
+    margin: 0 0 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-color:#f0f0f0;
+}
+
+div#havefound {
+    position: absolute;
+    z-index: 25;
+    top: 180px;
+    right: 20px;
+    padding: 5px 5px 5px 0;
+    font-weight: bold;
+    height: 35px;
+}
+
+* html div#havefound {top: 160px;}
+*+html div#havefound {top: 160px;}
+
+/* Viewcache-Print */
+.print td { font-size: 120%; line-height: 1.3; }
+.printwptable td { line-height:1.4em; font-size:125%; }
+.printwptable td.framed { border-bottom:1px solid #aaa; border-top:1px solid #aaa; }
+.print-cachemeta td { font-size:100%; padding:0 0.6em 1px 0; }
+td.header-small-print { font-size: 140%; font-weight:bold; padding-top:0; }
+p.printlogheader { font-size:115%; }
+
+/* Log entries */
+div.viewcache_log-content { font-family: arial, sans serif; line-height: 1.6em; font-size: 12px; margin-left: 20px; margin-top: 5px;}
+
+div.logs {
+    border: 1px solid #ccc;
+    margin: 0 0 10px 0;
+    padding: 3px 5px 5px 5px;
+    background: #fff url(../images/misc/bg-gradient-blue.png) repeat-x top left;
+    /* the gradient image has a height of some 1000 px to work around an MSEI
+       rendering bug, which will create a blue line at the image bottom at
+       certain zoom levels. */
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+p.editlog { font-weight: 400; display:inline; }
+
+/* Logpic galleries */
+.picpaging {
+    text-align: right;
+    font-size: 1.2em;
+    margin: 0 0 6px 0;
+}
+
+.img-shadow-loggallery {
+  border: 1px solid #a9a9a9;
+  padding: 2px;
+  box-shadow: 1px 2px 2px #555;
+  -moz-box-shadow: 1px 2px 2px #555;
+  -webkit-box-shadow: 1px 2px 2px #555;
+}
+
+.img-noshadow-loggallery {
+  border: 1px solid #a9a9a9;
+  padding: 2px;
+}
+
+/* cache lists */
+div.cachelistinfo { border:1px solid #a0a0a0; }
+.cachelist-tooltip { padding: 0 0.2em 0 0.2em; max-width:700px; overflow:hidden; }
+.cachelist-tooltip p { margin:0; padding:0; color:rgb(50,50,50); font-size:11px; }
+
+.cachelist-popup {
+    position: absolute;
+    background-color: white;
+    font-size: 12px;
+    right: 72px;
+    padding: 5px 5px 10px 5px;
+    opacity: 0.9;
+    }
+
+/* Pager */
+.pager { font-size:14px; }
+
+.edit_wptable {
+    background-color:#dddddd;
+    font-size:0.85em;
+}
+
+/* Articles */
+.article p, p.article { line-height: 1.5em; margin-bottom:1em; }
+.article li { padding-bottom:6px; line-height:1.4; }
+.article ul.narrowlist li { padding-bottom:0px; }
+
+#cachedescinfo p { margin-bottom:1em; }
+table.cachedesctable p { margin-bottom: 0.65em !important; }
+
+table.teamlist th { background-color:white !important; background-image:none !important; border:0; padding:0 0 6px 0; text-align:left; }
+table.teamlist td { padding: 4px 0 4px 34px; }
+table.teamlist img { margin-left: 32px; }
+table.teamlist a { font-weight:bold; }
+
+div.changelog ul {margin: 0 0 10px 0; }
+div.changelog ul li {margin: 0 0 0.2em 0; padding-bottom: 0; }
+div.changelog ul li ul {font-size: 83%; margin:0}
+.changelog-changes p { line-height:1em; padding-top:6px;}
+
+/* User profile */
+.public-setting { color: #428d1d; }
+
+/* Statistics */
+.stattable { font-size:10px; line-height:1.4em; padding:0; background-color: white; }
+.stattable th { background-color: #deebcd; background-image:none; color: #404040; border:0; width:3.3em; line-height:1.4em; padding:0; }
+.stattable th.h1 { background-color: #fff; text-align:center; }
+.stattable th.h0 { background-color: #fff; text-align:center; font-weight:normal;}
+.stattable th.nodatacell { width:auto; }
+span.percent { font-size: 11px; }
+
+/* floating box right of text */
+div.floatbox { float:right; margin-left:16px; padding-left:16px;}
+
+/* Admin functions */
+.adminrestore {    color: #819ac1; }
+
+/* RSS feeds */
+#blog div.newsblock { margin-left:20px }
+#forum div.newsblock { margin-left:20px }
+
+#blog div.rsstext {margin: 0 30px 0.5em 0; padding: 0; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
+.quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
+#forum div.rsstext {margin: 0 30px 0.5em 0; padding: 0; line-height: 1.3em; font-family: arial, sans serif; font-size: 12px; }
+.quoteheader, .topslice_quote, .bbc_standard_quote  { display:none; }
+#forum div.rsstext img {max-width:200px; max-height:120px;}
+
+/* HTML code list */
+span.html_replacetags  { display:inline-block; width:4.3em; }
+span.html_attributes   { display:inline-block; width:5.6em; }
+span.html_replaceattrs { display:inline-block; width:4em; }
+p.html_css             { text-indent:-1.4em; margin-left:3.4em; margin-bottom:0.2em; }
+
+
+/*---------------------------*/
+/* 9.3  Attributes           */
+/*---------------------------*/
+div#attribs1 {
+    max-width: 670px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
+}
+
+div#attribs2 {
+    max-width: 670px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
+}
+
+/* attributes on cache page */
+div.attribswide {
+    max-width: 770px;  /* MSIE needs this */
+    padding: 0;
+    margin: 0;
+}
+
+div.attribgroup table {
+    border-spacing: 0;
+    display: inline;
+}
+
+div.attribgroup td {
+    padding: 3px 5px 2px 5px;
+    text-align: left;
+    font-size: 120%;
+}
+
+div.attribgroup {
+    display: inline-block;
+    margin: 0;
+    padding-right: 0.6em;
+    padding-bottom: 0.6em;
+}
+
+
+/*---------------------------*/
+/* 9.4  Search               */
+/*---------------------------*/
+div.searchdiv {
+    width: 94%;
+    margin: 5px;
+    padding: 5px;     border: solid 1px rgb(219,230,241);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+div.searchdiv2 {
+    margin: 12px 22px 12px 4px;
+    padding: 5px;
+    border: solid 1px #cadbea;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+div.searchdiv2 td {
+    line-height:1.8em;
+}
+div.searchdiv2 td.separator {
+    height: 0.5em;
+}
+div.searchdiv2 td.fieldlabel {
+    line-height: 1.4em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    vertical-align: top;
+}
+
+.searchtable th {margin: 0; color: #404040; padding: 4px 0 4px 0; empty-cells: show; text-align: left; font-size: 12px;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
+.searchtable td { padding-top:2px; }
+.searchtable p { max-width: 420px; }
+td.search_listcolor1 { background:#fff; }
+td.search_listcolor2 { background:#f0f0f0; }
+
+
+.newsymbol { background:#ff9d11; color:#fff; font-size:0.9em; }
+
+/*---------------------------*/
+/* 9.5  Map                  */
+/*---------------------------*/
+.maploading {
+    position: absolute;
+    float:left;
+    left: 120px;
+    top: 80px;
+    font-size: 1.6em;
+    z-index:0;
+}
+
+.mapversion {
+    position: absolute;
+    right:5px;
+    bottom:5px;
+    z-index:0;
+}
+
+.maplogin {
+    text-align:left;
+    white-space:nowrap;
+    line-height:1.3em;
+}
+
+#ocmain div.mapform {
+    /*width: 570px;*/
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#ocmain table.mapsearch {
+    border-collapse: collapse;
+    width: 100%;
+    height:100%;
+}
+
+#ocmain table.mapsearch td {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+    height:40px;
+}
+
+td.mapheader_spacer {
+    width:40%;
+}
+
+#fullmap .mapfilter, #smallmap .mapfilter {
+    border: solid 1px rgb(219,230,241);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    margin: 3px;
+}
+
+#fullmap .pad10, #smallmap .pad10 {    padding: 5px; }
+
+.mapfiltertopic {
+    margin: 0 0 10px 0;
+    padding: 3px 14px 2px 12px;
+    background-color: rgb(156,186,214);
+    color: rgb(255,255,255);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 110%;
+    width: 100%;
+    white-space:nowrap;
+}
+
+.mapfiltertopic_add {
+    text-transform: none;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+.mft_withcheckbox {
+    padding-left: 1px;
+}
+
+
+#ocmain input.searchfield {
+    font-size:13px;
+    width: 340px;
+}
+
+#ocmain input.searchfield_fullscreen {
+    font-size:12px;
+    width: 290px;
+}
+
+#ocmain div.mappermalink {
+    font-size:small;
+    position:absolute;
+    z-index:999;
+    background-color:white;
+    padding:10px;
+    right:15px;
+    opacity:0.9;
+}
+
+#ocmain div.mapselectgeocode {
+    position:relative;
+    z-index:998;
+    margin-left:147px;
+    margin-top:0px;
+    width:390px;
+    background-color:white;
+}
+
+#ocmain select.mapselectlist {
+    position:absolute;
+    display:none;
+    width:100%;
+    font-size:13px;
+}
+
+#ocmain select.mapselectlist_fullscreen {
+    position:absolute;
+    display:none;
+    width:100%;
+}
+
+#ocmain option.resultitem {
+    color:red;
+}
+
+#ocmain div#maphidebox {
+    width: 770px;
+    border: solid 2px grey;
+    -moz-border-radius-topright: 6;
+    -moz-border-radius-bottomright: 6;
+    -moz-border-radius-topleft: 6;
+    -moz-border-radius-bottomleft: 6;
+}
+
+#ocmain div#maphidebox p {
+    margin-left: 40px;
+}
+
+#ocmain ul.maphidelist li {
+    list-style-type: none;
+}
+
+#ocmain table.maphideform td {
+    vertical-align: top;
+    width: 380px;
+}
+
+div.mappopup, div.mappopup a {
+    font-family: arial, sans-serif, Tahoma, Verdana !important;
+    font-weight: normal !important;
+    font-size: 11px !important;
+    overflow: hidden;      /* avoids double-scrollbars in MSIE; 'visible' wont work */
+}
+
+div.mappopup { padding: 3px 0 3px 3px; }
+div.mappopup b { font-weight: bold; }
+
+table.mappopup td {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+td.wppopupheader {
+    font-size:1.15em;
+}
+
+.mapboxframe {
+    border:1px solid #777777;
+}
+
+.mapboxshadow  {
+    box-shadow: 1px 2px 3px #555;
+    -moz-box-shadow: 1px 2px 3px #555;
+    -webkit-box-shadow: 1px 2px 3px #555;
+}
+
+div.mapcoord_normalscreen {
+    position: absolute;
+    top: 106px;
+    right: 25px;
+    text-align: right;
+    margin-top: 8px;
+    color: grey;
+}
+
+div.mapcoord_fullscreen {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    padding: 1px 4px 1px 4px;
+}
+
+div.mapstat_fullscreen {
+    position:relative;
+    top:21px;
+    padding-right:5px;
+    text-align:right;
+}
+
+#fullmap div.toomanycaches {
+    position:absolute;
+    left: 140px;
+    top: 80px;
+    border: 1px solid rgb(0,0,60);
+    opacity: 0.7;
+    background: #0035FF;
+    padding:5px 5px 5px 5px;
+}
+
+#smallmap div.toomanycaches {
+    position:absolute;
+    left: 60px;
+    top: 30px;
+    border: 1px solid rgb(0,0,60);
+    opacity: 0.7;
+    background: #0035FF;
+    padding:5px 5px 5px 5px;
+}
+
+div.toomanycaches td {
+    width: 250px;
+    color: white;
+    text-align:center;
+    font-size:13px;
+    line-height:1.3em;
+}
+
+div.mapoptions {
+    position:absolute;
+    right:100px;
+    top: 80px;
+    opacity: 0.9;
+    background: #FFFFFF;
+    padding:10px 10px 10px 10px;
+}
+
+div.mapoptions td {
+    padding:6px;
+}
+
+/* GM POI InfoWindows */
+div.gm-stars { display:none; }
+div.gm-rev:after { content:" (Google)"; line-height:1.3em; }
+.gm-iw, .gm-iw-table { font-size:11px; }
+
+.field-notes-table { width: 98%; }
+.field-notes-table th, .field-notes-table td { padding: 5px; }
+.btn { padding: 5px; cursor: pointer; }
+input[type="file"] { border:0; }
+hr.spacer { width:98%; margin: 20px 0; }
+form[name="upload"] div { margin-bottom:10px; }
+
+#googlemap .gm-style div a div {display:none;}

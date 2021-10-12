@@ -1,0 +1,30 @@
+/*************************************************************/
+/*  Style sheet for printing                                 */
+/*************************************************************/
+
+@import "style_screen.css";
+
+
+/* Set text colors from dark grey to black.
+ * This will produce nicer output on many printers. */
+
+.nav3 { color: black !important; }
+.nav3 li.group1 a { color: black !important; }
+.nav3 li.group2 a { color: black !important; }
+.nav3 li a { color: black !important; }
+
+.nav4 li.group a { color: black !important; }
+.nav4 li.group2 a { color: black !important; }
+.nav4 li a { color: black !important; }
+
+.content2 { color: black !important; }
+.content3 { color: black !important; }
+
+.sidebar { color: black !important; }
+.sidebar-title-noshade { color: black !important; }
+.sidebar-title-shade { color: black !important; }
+
+.txt-black { color: black !important; }
+.warning { color: black !important; }
+
+a.links:link { color: black !important; }

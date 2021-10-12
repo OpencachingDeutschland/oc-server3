@@ -1,0 +1,28 @@
+/*************************************************************/
+/*  Style sheet adjustments for Internet Explorer.           */
+/*  Use this only if it cannot be avoided!                   */
+/*************************************************************/
+
+/* When overriding any styles, leave a comment in style_screen.css! */
+/* Not needed for IE10 and above */
+
+/* remove shadow margin space */
+.bg-blue02 { margin: 0 0 15px 0; }
+
+/* buttons */
+.exportlist { background: white; }
+.exportbutton { padding: 1px; width:180px; }
+input.formbutton {
+        border: none !important;
+        filter: progid:DXImageTransform.Microsoft.glow(color=#5f90bb,strength=1);
+}
+/* IE 7 Hack */
+*div.attribgroup {
+    display: inline;
+    margin: 0px;
+    padding-right: 0.6em;
+    padding-bottom: 0.6em;
+}
+/* MSIE hacks */
+* html .page-container-1 {top: 29px;}
+*+html .page-container-1 {top: 29px;}

@@ -238,15 +238,15 @@ class SupportController extends AbstractController
         $fetchedInformation = [];
 
         $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formSQLFlex = $this->createForm(SupportSQLFlexForm::class);
 
-        $form = $this->createForm(SupportSQLFlexForm::class);
+        $formSQLFlex->handleRequest($request);
 
-        $form->handleRequest($request);
+        if ($formSQLFlex->isSubmitted() && $formSQLFlex->isValid()) {
+            $inputData = $formSQLFlex->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $inputData = $form->getData();
-
-            $fetchedInformation = $this->executeSQL_flexible($inputData['content_WHAT'], $inputData['content_TABLE']);
+            $fetchedInformation =
+                $this->executeSQL_flexible($inputData['content_WHAT'], $inputData['content_TABLE'], (string) $inputData['content_CONDITION']);
 
             $countFetched = count($fetchedInformation);
             for ($i = 0; $i < $countFetched; $i ++) {
@@ -265,7 +265,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'SQLFlexForm' => $form->createView(),
+                                                           'SQLFlexForm' => $formSQLFlex->createView(),
                                                            'suppSQLqueryFlex' => $fetchedInformation
                                                        ]
         );
@@ -701,14 +701,18 @@ class SupportController extends AbstractController
     /**
      * @param string $what
      * @param string $table
+     * @param string $condition
      *
      * @return array
      */
-    public function executeSQL_flexible(string $what, string $table)
+    public function executeSQL_flexible(string $what, string $table, string $condition)
     : array {
         $qb = $this->connection->createQueryBuilder();
         $qb->select($what)
             ->from($table);
+        if ($condition != '') {
+            $qb->where($condition);
+        }
 
         return ($qb->execute()->fetchAll());
     }
@@ -779,8 +783,8 @@ class SupportController extends AbstractController
                 $result = $this->check_array_for_Oc_Gc_relations($waypoints_as_array);
 
                 $amountProcessedCaches = count($waypoints_as_array);
-                $amountAssignedCaches  = $result[0];
-                $amountUpdatedCaches   = $result[1];
+                $amountAssignedCaches = $result[0];
+                $amountUpdatedCaches = $result[1];
                 $listOfAmbiguousCaches = $result[2];
             }
         }
@@ -819,7 +823,8 @@ class SupportController extends AbstractController
      * Unterschiede zwischen importierten Caches und deren OC-Pendants herausfinden
      */
     public function list_differences_table_listing_infos()
-    : array {
+    : array
+    {
         $fetchedListingInfos = $this->supportListingInfosRepository->fetchAll();
         $differencesDetected = [];
 
@@ -845,7 +850,7 @@ class SupportController extends AbstractController
                 array_push($tempArray, '');
             }
 
-            if (round ($fetchedOCCache->longitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLon * 10000)) {
+            if (round($fetchedOCCache->longitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLon * 10000)) {
                 array_push($tempArray, $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon);
             } else {
                 array_push($tempArray, '');
@@ -857,13 +862,21 @@ class SupportController extends AbstractController
                 array_push($tempArray, '');
             }
 
-            if ((($fetchedListingInfo->nodeListingAvailable == true) && ($fetchedOCCache->status != 1)) ||
-                (($fetchedListingInfo->nodeListingAvailable == false) && ($fetchedOCCache->status == 1))) {
+            if ((($fetchedListingInfo->nodeListingAvailable == true) && ($fetchedOCCache->status != 1))
+                || (($fetchedListingInfo->nodeListingAvailable
+                     == false)
+                    && ($fetchedOCCache->status == 1))
+            ) {
                 array_push($tempArray, 'OC status != import status');
-            } else array_push($tempArray, '');
+            } else {
+                array_push($tempArray, '');
+            }
 
-            if ((($fetchedListingInfo->nodeListingArchived == true) && ($fetchedOCCache->status != 3)) ||
-                (($fetchedListingInfo->nodeListingAvailable == false) && ($fetchedOCCache->status == 3))) {
+            if ((($fetchedListingInfo->nodeListingArchived == true) && ($fetchedOCCache->status != 3))
+                || (($fetchedListingInfo->nodeListingAvailable
+                     == false)
+                    && ($fetchedOCCache->status == 3))
+            ) {
                 array_push($tempArray, 'OC status != import status');
             } else {
                 array_push($tempArray, '');
@@ -881,9 +894,10 @@ class SupportController extends AbstractController
      * @return array
      */
     public function list_all_support_listing_infos()
-    : array {
+    : array
+    {
         try {
-            return($this->supportListingInfosRepository->fetchAll());
+            return ($this->supportListingInfosRepository->fetchAll());
         } catch (\Exception $exception) {
             return ([]);
         }
@@ -998,7 +1012,8 @@ class SupportController extends AbstractController
                 $amountAssignedCaches ++;
             }
         }
-        return([$amountAssignedCaches, $amountUpdatedCaches, $listOfAmbiguousCaches]);
+
+        return ([$amountAssignedCaches, $amountUpdatedCaches, $listOfAmbiguousCaches]);
     }
 
     /**
@@ -1026,7 +1041,8 @@ class SupportController extends AbstractController
             foreach ($arrOutput['wpt'] as $wpt) {
                 $wpt_array['wp_oc'] = - 1;
                 $wpt_array['node_id'] = $this->nodesRepository->get_id_by_prefix(substr($wpt['name'], 0, 2));
-                $wpt_array['node_owner_id'] = 0; // TODO: node_owner_id ist in Groundspeak GPX-Dateien nicht enthalten. Aber eventuell in anderen Quellen?
+                $wpt_array['node_owner_id'] =
+                    0; // TODO: node_owner_id ist in Groundspeak GPX-Dateien nicht enthalten. Aber eventuell in anderen Quellen?
                 $wpt_array['node_owner_name'] = $wpt['cache']['owner'];
                 $wpt_array['node_listing_id'] = substr($wpt['url'], strlen($wpt['url']) - 36, 36);
                 $wpt_array['node_listing_wp'] = $wpt['name'];
@@ -1042,6 +1058,7 @@ class SupportController extends AbstractController
 
                 array_push($waypoints_as_array, $wpt_array);
             }
+
             return ($waypoints_as_array);
         }
     }

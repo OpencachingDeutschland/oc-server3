@@ -1032,9 +1032,10 @@ class SupportController extends AbstractController
      *
      * @return array
      * @throws DBALException
-     * @throws RecordNotPersistedException
      * @throws InvalidArgumentException
      * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
      */
     public function check_array_for_Oc_Gc_relations(array $waypoints_as_array)
     : array {

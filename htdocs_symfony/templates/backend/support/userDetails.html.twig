@@ -47,7 +47,7 @@
                     <div class="form-row">
                         <p><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
                             {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}</p>
-                        <p><b>{{ 'GDPR conform account deletion' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
+                        <p><b>{{ 'GDPR conform account deletion' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span><span class="badge badge-danger">Achtung: Vor DSGVO-Löschung muss zusätzlich die obige Funktion 'Set account inactive [..]' ausgeführt werden!..</span>
                             {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}</p>
                         <p><b>{{ 'Mark email address as invalid' | trans }}:</b>
                             {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}</p>

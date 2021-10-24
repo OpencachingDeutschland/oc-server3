@@ -228,7 +228,7 @@ class SupportUserCommentsRepository
         $entity->user = $this->userRepository->fetchOneById($entity->ocUserId);
         $entity->comment = (string) $data['comment'];
         $entity->commentCreated = (string) $data['comment_created'];
-        $entity->commentLastModified = (string) $data['comment_last_modified'];
+        $entity->commentLastModified = date('Y-m-d H:i:s');
 
         return $entity;
     }

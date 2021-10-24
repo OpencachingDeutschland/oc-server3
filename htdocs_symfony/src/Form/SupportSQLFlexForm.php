@@ -16,7 +16,6 @@ class SupportSQLFlexForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // see: https://symfonycasts.com/screencast/symfony-forms/form-type-class
         $builder
             ->add(
                 'content_SELECT', ChoiceType::class, [
@@ -62,6 +61,30 @@ class SupportSQLFlexForm extends AbstractType
                                    'label' => false,
                                    'trim' => true
                                ]
+            )
+            ->add(
+                'content_WHERE', ChoiceType::class, [
+                                  'choices' => ['WHERE' => 'WHERE'],
+                                  'attr' => [
+                                      'style' => 'width: 180px;'
+                                  ],
+                                  'disabled' => true,
+                                  'label' => false,
+                                  'trim' => true
+                              ]
+            )
+            ->add(
+                'content_CONDITION', null, [
+                                  'required' => false,
+                                  'data' => '',
+                                  'attr' => [
+                                      'placeholder' => 'id=\'123\'',
+                                      'style' => 'width: 180px;'
+                                  ],
+                                  'disabled' => false,
+                                  'label' => false,
+                                  'trim' => true
+                              ]
             )
             ->add(
                 'Suchen', SubmitType::class, [

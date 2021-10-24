@@ -90,7 +90,7 @@
                     {% for statusChange in report_status_modified | reverse %}
                         <tr>
                             <td>{{ statusChange.dateModified | date('d.m.Y') }}</td>
-                            <td>{{ statusChange.statusOld.name | trans }} -> {{ statusChange.statusNew.name | trans }}</td>
+                            <td>{{ statusChange.cacheStatusOld.name | trans }} -> {{ statusChange.cacheStatusNew.name | trans }}</td>
                             <td>{{ statusChange.user.username }}</td>
                         </tr>
                     {% endfor %}

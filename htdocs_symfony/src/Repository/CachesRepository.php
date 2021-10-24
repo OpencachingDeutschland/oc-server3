@@ -147,7 +147,7 @@ class CachesRepository
         $result = $statement->fetchAll();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
+//            throw new RecordsNotFoundException('No records with given where clause found');
         } else {
             foreach ($result as $item) {
                 $entities[] = $this->getEntityFromDatabaseArray($item);
@@ -318,7 +318,7 @@ class CachesRepository
         $entity->node = (int)$data['node'];
         $entity->dateCreated = new DateTime($data['date_created']);
         $entity->isPublishdate = (int)$data['is_publishdate'];
-        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastModified = date('Y-m-d H:i:s');
         $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
         $entity->listingLastModified = new DateTime($data['listing_last_modified']);
         $entity->metaLastModified = new DateTime($data['meta_last_modified']);

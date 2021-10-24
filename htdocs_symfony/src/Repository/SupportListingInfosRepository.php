@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Oc\Entity\SupportListingInfosEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -215,13 +214,14 @@ class SupportListingInfosRepository
             'node_id' => $entity->nodeId,
             'node_owner_id' => $entity->nodeOwnerId,
             'node_listing_id' => $entity->nodeListingId,
-            'node_listing_wp' => $entity->nodeListingWP,
+            'node_listing_wp' => $entity->nodeListingWp,
             'node_listing_name' => $entity->nodeListingName,
             'node_listing_size' => $entity->nodeListingSize,
             'node_listing_difficulty' => $entity->nodeListingDifficulty,
             'node_listing_terrain' => $entity->nodeListingTerrain,
             'node_listing_coordinates_lon' => $entity->nodeListingCoordinatesLon,
             'node_listing_coordinates_lat' => $entity->nodeListingCoordinatesLat,
+            'node_listing_available' => $entity->nodeListingAvailable,
             'node_listing_archived' => $entity->nodeListingArchived,
             'last_modified' => date('Y-m-d H:i:s'),
             'importstatus' => $entity->importStatus,
@@ -237,20 +237,21 @@ class SupportListingInfosRepository
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingInfosEntity {
         $entity = new SupportListingInfosEntity();
-        $entity->id = (int) $data['id'];
+        $entity->id = (array_key_exists('id', $data)) ? (int) $data['id'] : NULL;
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->nodeId = (int) $data['node_id'];
         $entity->nodeOwnerId = (string) $data['node_owner_id'];
         $entity->nodeListingId = (string) $data['node_listing_id'];
-        $entity->nodeListingWP = (string) $data['node_listing_wp'];
+        $entity->nodeListingWp = (string) $data['node_listing_wp'];
         $entity->nodeListingName = (string) $data['node_listing_name'];
         $entity->nodeListingSize = (int) $data['node_listing_size'];
         $entity->nodeListingDifficulty = (int) $data['node_listing_difficulty'];
         $entity->nodeListingTerrain = (int) $data['node_listing_terrain'];
         $entity->nodeListingCoordinatesLon = (double) $data['node_listing_coordinates_lon'];
         $entity->nodeListingCoordinatesLat = (double) $data['node_listing_coordinates_lat'];
+        $entity->nodeListingAvailable = (bool) $data['node_listing_available'];
         $entity->nodeListingArchived = (bool) $data['node_listing_archived'];
-        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastModified = date('Y-m-d H:i:s');
         $entity->importStatus = (int) $data['importstatus'];
         $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
 

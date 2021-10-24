@@ -30,7 +30,7 @@ class SupportListingInfosEntity extends AbstractEntity
     public $nodeListingId;
 
     /** @var string */
-    public $nodeListingWP;
+    public $nodeListingWp;
 
     /** @var string */
     public $nodeListingName;
@@ -49,6 +49,9 @@ class SupportListingInfosEntity extends AbstractEntity
 
     /** @var double */
     public $nodeListingCoordinatesLat;
+
+    /** @var bool */
+    public $nodeListingAvailable;
 
     /** @var bool */
     public $nodeListingArchived;

@@ -245,7 +245,7 @@ class CacheLogsArchivedRepository
         $entity->node = (int) $data['node'];
         $entity->dateCreated = new DateTime($data['date_created']);
         $entity->entryLastModified = new DateTime($data['entry_last_modified']);
-        $entity->lastModified = new DateTime($data['last_modified']);
+        $entity->lastModified = date('Y-m-d H:i:s');
         $entity->okapiSyncbase = (string) $data['okapi_syncbase'];
         $entity->logLastModified = new DateTime($data['log_last_modified']);
         $entity->cacheId = (int) $data['cache_id'];

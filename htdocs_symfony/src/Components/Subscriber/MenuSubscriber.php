@@ -9,6 +9,9 @@ use Oc\Entity\UserEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
 
+/**
+ *
+ */
 class MenuSubscriber implements EventSubscriberInterface
 {
     /**
@@ -86,6 +89,14 @@ class MenuSubscriber implements EventSubscriberInterface
                 'route' => 'app_kitchensink_index',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fab fa-css3');
+        }
+
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+            $menu->addChild('oconly81', [
+                'label' => 'OCOnly81',
+                'route' => 'backend_oconly81_index',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-question');
         }
     }
 }

@@ -1,0 +1,86 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    <hr>
+
+    <div>
+        <h3>{{ 'OCOnly81' | trans }} </h3>
+        <h4>{{ 'OConly-81 is a challenge about finding OCOnly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate you can enable the OCOnly81 statistics in your user profile settings.' | trans }}</h4>
+        <br/>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>{{ 'Participants' | trans }} </h3>
+        <h4>{{ 'Users with OCOnly81 statistics enabled' | trans }}: </h4>
+        {% if ocOnly81_user is defined %}
+            {% if ocOnly81_user %}
+                <ul>
+                    {% for user in ocOnly81_user %}
+                        {# TODO: username verlinken auf Benutzerprofil #}
+                        <li>{{ user.username }} ({{ user.count }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {{ 'No OCOnly81 users found' | trans }}.
+            {% endif %}
+        {% endif %}
+        <br/>
+
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>{{ 'Statistics' | trans }} </h3>
+        <h4>{{ 'Distribution of difficulty and terrain values across all OCOnly81 caches' | trans }}: </h4>
+        {# {% if ocOnly81_statistics is defined %} #}
+        {# {% if ocOnly81_statistics %} #}
+        {# TODO: einzelne Matrixzellen mit Suche nach entsprechenden Caches verknuepfen #}
+
+
+        <table>
+            <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>{{ 'Terrain' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;<i class="fas fa-check"></i></td>
+
+                {% for i in 2..10 %}
+                    <th>{{ i | ocFilterTerrain }}</th>
+                {% endfor %}
+                <th><i class="fas fa-sigma"></i></th>
+                <td>&nbsp;</td>
+            </tr>
+
+            <tr>
+                <th>{{ 'Difficulty' | trans }}</th>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+        {# {% else %} #}
+        {# {{ 'No OCOnly81 statistics found' | trans }}. #}
+        {# {% endif %} #}
+        {# {% endif %} #}
+        <br/>
+
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+

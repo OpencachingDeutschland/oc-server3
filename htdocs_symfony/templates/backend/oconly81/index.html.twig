@@ -36,51 +36,60 @@
     <div>
         <h3>{{ 'Statistics' | trans }} </h3>
         <h4>{{ 'Distribution of difficulty and terrain values across all OCOnly81 caches' | trans }}: </h4>
-        {# {% if ocOnly81_statistics is defined %} #}
-        {# {% if ocOnly81_statistics %} #}
-        {# TODO: einzelne Matrixzellen mit Suche nach entsprechenden Caches verknuepfen #}
+        {% if ocOnly81_matrix is defined %}
 
+            {% if ocOnly81_matrix %}
+                {# TODO: einzelne Matrixzellen mit Link auf Suche nach entsprechenden Caches verknuepfen #}
 
-        <table>
-            <thead>
-            <tr>
-                <th>&nbsp;</th>
-                <th>{{ 'Terrain' | trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;<i class="fas fa-check"></i></td>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
 
-                {% for i in 2..10 %}
-                    <th>{{ i | ocFilterTerrain }}</th>
-                {% endfor %}
-                <th><i class="fas fa-sigma"></i></th>
-                <td>&nbsp;</td>
-            </tr>
+                        {% for i in 2..10 %}
+                            <th>{{ i | ocFilterTerrain }}</th>
+                        {% endfor %}
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-            <tr>
-                <th>{{ 'Difficulty' | trans }}</th>
-            </tr>
+                    {% for i in 0..8 %}
+                        <tr>
+                            <th>
+                                {{ (i+2) | ocFilterDifficulty }}
+                            </th>
+                            {% for j in 0..8 %}
+                                <td>
+                                    {{ ocOnly81_matrix[i][j] }}
+                                </td>
+                            {% endfor %}
+                            <td>
+                                {{ ocOnly81_dsum[i] }}
+                            </td>
+                        </tr>
+                    {% endfor %}
 
-            </tbody>
-        </table>
+                    <tr>
+                        <th>&nbsp;</th>
+                        {% for i in 0..8 %}
+                            <td>
+                                {{ ocOnly81_tsum[i] }}
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {{ ocOnly81_overall_sum }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-
-        {# {% else %} #}
-        {# {{ 'No OCOnly81 statistics found' | trans }}. #}
-        {# {% endif %} #}
-        {# {% endif %} #}
+            {% else %}
+                {{ 'No OCOnly81 statistics found' | trans }}.
+            {% endif %}
+        {% endif %}
         <br/>
 
     </div>
 
 {% endblock %}
-
-
-
-
-
-
-

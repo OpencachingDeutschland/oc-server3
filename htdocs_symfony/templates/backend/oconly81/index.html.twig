@@ -1,0 +1,95 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    <hr>
+
+    <div>
+        <h3>{{ 'OCOnly81' | trans }} </h3>
+        <h4>{{ 'OConly-81 is a challenge about finding OCOnly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate you can enable the OCOnly81 statistics in your user profile settings.' | trans }}</h4>
+        <br/>
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>{{ 'Participants' | trans }} </h3>
+        <h4>{{ 'Users with OCOnly81 statistics enabled' | trans }}: </h4>
+        {% if ocOnly81_user is defined %}
+            {% if ocOnly81_user %}
+                <ul>
+                    {% for user in ocOnly81_user %}
+                        {# TODO: username verlinken auf Benutzerprofil #}
+                        <li>{{ user.username }} ({{ user.count }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {{ 'No OCOnly81 users found' | trans }}.
+            {% endif %}
+        {% endif %}
+        <br/>
+
+    </div>
+
+    <hr>
+
+    <div>
+        <h3>{{ 'Statistics' | trans }} </h3>
+        <h4>{{ 'Distribution of difficulty and terrain values across all OCOnly81 caches' | trans }}: </h4>
+        {% if ocOnly81_matrix is defined %}
+
+            {% if ocOnly81_matrix %}
+                {# TODO: einzelne Matrixzellen mit Link auf Suche nach entsprechenden Caches verknuepfen #}
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+
+                        {% for i in 2..10 %}
+                            <th>{{ i | ocFilterTerrain }}</th>
+                        {% endfor %}
+                        <th>&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for i in 0..8 %}
+                        <tr>
+                            <th>
+                                {{ (i+2) | ocFilterDifficulty }}
+                            </th>
+                            {% for j in 0..8 %}
+                                <td>
+                                    {{ ocOnly81_matrix[i][j] }}
+                                </td>
+                            {% endfor %}
+                            <td>
+                                {{ ocOnly81_dsum[i] }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr>
+                        <th>&nbsp;</th>
+                        {% for i in 0..8 %}
+                            <td>
+                                {{ ocOnly81_tsum[i] }}
+                            </td>
+                        {% endfor %}
+                        <td>
+                            {{ ocOnly81_overall_sum }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            {% else %}
+                {{ 'No OCOnly81 statistics found' | trans }}.
+            {% endif %}
+        {% endif %}
+        <br/>
+
+    </div>
+
+{% endblock %}

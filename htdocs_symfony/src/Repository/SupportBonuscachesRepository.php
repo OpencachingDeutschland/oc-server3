@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Exception;
 use Oc\Entity\SupportBonuscachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -125,7 +128,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function create(SupportBonuscachesEntity $entity)
     : SupportBonuscachesEntity {
@@ -150,7 +153,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function update(SupportBonuscachesEntity $entity)
     : SupportBonuscachesEntity {
@@ -174,8 +177,8 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws DBALException
+     * @throws InvalidArgumentException
      */
     public function remove(SupportBonuscachesEntity $entity)
     : SupportBonuscachesEntity {
@@ -222,5 +225,36 @@ class SupportBonuscachesRepository
         $entity->belongsToBonusCache = (string) $data['belongs_to_bonus_cache'];
 
         return $entity;
+    }
+
+    /**
+     * @param string $wpID
+     * @param string $toBonusCache
+     * @param bool $setAsBonusCache
+     *
+     * @throws DBALException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotPersistedException
+     *
+     * Bonusinfo zum Cache abholen und aktualisieren. Ggf. neuen, leeren Eintrag anlegen.
+     */
+    public function update_or_create_bonus_entry(string $wpID, string $toBonusCache, bool $setAsBonusCache = false)
+    : void {
+        try {
+            $entity = $this->fetchOneBy(['wp_oc' => $wpID]);
+        } catch (Exception $exception) {
+            $entity = new SupportBonuscachesEntity($wpID, $setAsBonusCache, $toBonusCache);
+            $this->create($entity);
+        }
+
+        if ($setAsBonusCache === true) {
+            $entity->isBonusCache = true;
+        }
+
+        if (!empty($toBonusCache)) {
+            $entity->belongsToBonusCache = $toBonusCache;
+        }
+
+        $this->update($entity);
     }
 }

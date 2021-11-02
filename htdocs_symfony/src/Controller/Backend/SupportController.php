@@ -6,8 +6,11 @@ namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Exception;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Entity\SupportUserCommentsEntity;
+use Oc\Form\SupportBonusCachesAssignment;
 use Oc\Form\SupportCommentField;
 use Oc\Form\SupportImportGPX;
 use Oc\Form\SupportSearchCaches;
@@ -20,6 +23,7 @@ use Oc\Repository\CacheReportsRepository;
 use Oc\Repository\CachesRepository;
 use Oc\Repository\CacheStatusModifiedRepository;
 use Oc\Repository\CacheStatusRepository;
+use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
@@ -215,16 +219,136 @@ class SupportController extends AbstractController
     public function listBonusCaches()
     : Response
     {
-        $fetchedBonuscaches = $this->getBonusCaches();
-
         $formSearch = $this->createForm(SupportSearchCaches::class);
+        $formAssignBonusCache = $this->createForm(SupportBonusCachesAssignment::class);
+
+        $fetchedBonuscaches = $this->getBonusCaches();
 
         return $this->render(
             'backend/support/bonusCaches.html.twig', [
                                                        'supportCachesForm' => $formSearch->createView(),
+                                                       'supportAssignBonusCacheForm' => $formAssignBonusCache->createView(),
                                                        'bonusCaches_by_id' => $fetchedBonuscaches
                                                    ]
         );
+    }
+
+    /**
+     * @param string $wpID
+     *
+     * @return Response
+     * @throws RecordNotFoundException
+     *
+     * @Route("/bonusCachesAssignmentChoice/{wpID}", name="support_bonus_caches_assignment_choice")
+     */
+    public function bonusCachesAssignmentChoice(string $wpID)
+    : Response {
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]);
+        $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $fetchedCache->userId]);
+
+        return $this->render(
+            'backend/support/bonusCachesAssignment.html.twig', [
+                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                 'bonus_Cache' => $wpID,
+                                                                 'caches_by_owner' => $fetchedOwnerCaches
+                                                             ]
+        );
+    }
+
+    /**
+     * @param string $wpID
+     * @param int $userID
+     * @param string $toBonusCache
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotPersistedException
+     *
+     * @Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name="support_bonus_caches_assignment")
+     */
+    public function bonusCachesAssignment(string $wpID, int $userID, string $toBonusCache)
+    : Response {
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $userID]);
+
+        $this->supportBonuscachesRepository->update_or_create_bonus_entry($wpID, $toBonusCache);
+
+        return $this->render(
+            'backend/support/bonusCachesAssignment.html.twig', [
+                                                                 'supportCachesForm' => $formSearch->createView(),
+                                                                 'bonus_Cache' => $toBonusCache,
+                                                                 'caches_by_owner' => $fetchedOwnerCaches
+                                                             ]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotPersistedException
+     *
+     * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
+     */
+    public function bonusCachesDirectAssignment(Request $request)
+    : Response {
+        $formDirectBonusAssignment = $this->createForm(SupportBonusCachesAssignment::class);
+
+        $formDirectBonusAssignment->handleRequest($request);
+        if ($formDirectBonusAssignment->isSubmitted() && $formDirectBonusAssignment->isValid()) {
+            $inputData = $formDirectBonusAssignment->getData();
+            $cacheBelongToBonus = strtoupper($inputData['content_wp_to_be_assigned'] . '');
+            $cacheIsBonus = strtoupper($inputData['content_wp_that_is_bonus_cache']);
+
+            if (!($this->cachesRepository->isNew($cacheIsBonus)) && ($cacheBelongToBonus === '')) {
+                $this->supportBonuscachesRepository->update_or_create_bonus_entry($cacheIsBonus, '', true);
+            } elseif (!($this->cachesRepository->isNew($cacheBelongToBonus)) && !($this->cachesRepository->isNew($cacheIsBonus))) {
+                $this->supportBonuscachesRepository->update_or_create_bonus_entry($cacheBelongToBonus, $cacheIsBonus);
+            }
+        }
+
+        return $this->redirectToRoute('backend_support_bonus_caches');
+    }
+
+    /**
+     * @param string $wpID
+     * @param bool $removeToBonus
+     * @param bool $removeBonus
+     *
+     * @return Response
+     * @throws DBALException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @throws InvalidArgumentException
+     *
+     * @Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name="support_remove_bonus_caches_assignment")
+     */
+    public function removeBonusCachesAssignment(string $wpID, bool $removeToBonus, bool $removeBonus)
+    : Response {
+        $fetchedBonusCache = $this->supportBonuscachesRepository->fetchOneBy(['wp_oc' => $wpID]);
+
+        if ($fetchedBonusCache) {
+            if ($removeToBonus) {
+                $fetchedBonusCache->belongsToBonusCache = '';
+            }
+            if ($removeBonus) {
+                $fetchedBonusCache->isBonusCache = false;
+            }
+        }
+
+        if (($fetchedBonusCache->belongsToBonusCache == '') && ($fetchedBonusCache->isBonusCache == false)) {
+            $this->supportBonuscachesRepository->remove($fetchedBonusCache);
+        } else {
+            $this->supportBonuscachesRepository->update($fetchedBonusCache);
+        }
+
+        return $this->redirectToRoute('backend_support_bonus_caches');
     }
 
     /**
@@ -344,7 +468,7 @@ class SupportController extends AbstractController
      * @return Response
      * @throws DBALException
      * @throws RecordNotFoundException
-     * @throws \Oc\Repository\Exception\RecordAlreadyExistsException
+     * @throws RecordAlreadyExistsException
      *
      * @Route("/occ/{wpID}&{userID}", name="support_occ")
      */
@@ -365,14 +489,14 @@ class SupportController extends AbstractController
             // Supportkommentar zum Cache abholen. Ggf. neuen, leeren anlegen.
             try {
                 $fetchedCacheComments = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpID]);
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 $entity = new SupportListingCommentsEntity($wpID);
                 $fetchedCacheComments = $this->supportListingCommentsRepository->create($entity);
             }
             // Cachedaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
             try {
                 $fetchedCacheInfos = $this->supportListingInfosRepository->fetchBy(['wp_oc' => $wpID]);
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
             }
         }
 
@@ -381,14 +505,14 @@ class SupportController extends AbstractController
         // Supportkommentar zum Nutzer abolen. Ggf. neuen, leeren anlegen.
         try {
             $fetchedUserComments = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => $userID]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $entity = new SupportUserCommentsEntity($userID);
             $fetchedUserComments = $this->supportUserCommentsRepository->create($entity);
         }
         // Nutzerdaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
         try {
             $fetchedUserRelations = $this->supportUserRelationsRepository->fetchBy(['oc_user_id' => $userID]);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
         }
 
         $formSearch = $this->createForm(SupportSearchCaches::class);
@@ -582,7 +706,7 @@ class SupportController extends AbstractController
     {
         try {
             return $this->supportBonuscachesRepository->fetchAll();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return [];
         }
     }
@@ -757,7 +881,7 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      *
      * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
      *
@@ -791,13 +915,13 @@ class SupportController extends AbstractController
 
         try {
             $fetchedListingInfos = $this->list_all_support_listing_infos();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $fetchedListingInfos = [];
         }
 
         try {
             $differencesDetected = $this->list_differences_table_listing_infos();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $differencesDetected = [];
         }
 
@@ -898,7 +1022,7 @@ class SupportController extends AbstractController
     {
         try {
             return ($this->supportListingInfosRepository->fetchAll());
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return ([]);
         }
     }
@@ -908,9 +1032,10 @@ class SupportController extends AbstractController
      *
      * @return array
      * @throws DBALException
+     * @throws InvalidArgumentException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
-     * @throws \Oc\Repository\Exception\RecordAlreadyExistsException
      */
     public function check_array_for_Oc_Gc_relations(array $waypoints_as_array)
     : array {
@@ -936,7 +1061,7 @@ class SupportController extends AbstractController
             try {
                 $fetchedWpGcCaches = $this->cachesRepository->fetchBy(['wp_gc' => $wpt['node_listing_wp']]);
                 $fetchedWpGcMaintainedCaches = $this->cachesRepository->fetchBy(['wp_gc_maintained' => $wpt['node_listing_wp']]);
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
             }
 
             if (count($fetchedWpGcCaches) == 1) {
@@ -957,7 +1082,7 @@ class SupportController extends AbstractController
                         $this->supportListingInfosRepository->fetchOneBy(['node_listing_id' => $wpt['node_listing_id']]);
                     $fetchedExistingSupportListingInfoArray =
                         $this->supportListingInfosRepository->getDatabaseArrayFromEntity($fetchedExistingSupportListingInfo);
-                } catch (\Exception $exception) {
+                } catch (Exception $exception) {
                 }
 
                 if (!empty($fetchedExistingSupportListingInfoArray)) {
@@ -994,7 +1119,7 @@ class SupportController extends AbstractController
 
                         try {
                             $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpt['wp_oc']]);
-                        } catch (\Exception $exception) {
+                        } catch (Exception $exception) {
                             $entity = $this->supportListingCommentsRepository->create(new SupportListingCommentsEntity($wpt['wp_oc']));
                         }
 

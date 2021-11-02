@@ -26,6 +26,18 @@ class SupportBonuscachesEntity extends AbstractEntity
     public $belongsToBonusCache;
 
     /**
+     * @param string $wpOc
+     * @param bool $isBonusCache
+     * @param string $belongsToBonusCache
+     */
+    public function __construct(string $wpOc = '', bool $isBonusCache = false, string $belongsToBonusCache = '')
+    {
+        $this->wpOc = $wpOc;
+        $this->isBonusCache = $isBonusCache;
+        $this->belongsToBonusCache = $belongsToBonusCache;
+    }
+
+    /**
      * @return bool
      */
     public function isNew()

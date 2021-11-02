@@ -4,6 +4,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Exception;
 use Oc\Entity\GeoCachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -126,7 +127,7 @@ class CachesRepository
      * @param array $where
      *
      * @return array
-     * @throws RecordsNotFoundException
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -307,7 +308,7 @@ class CachesRepository
      * @param array $data
      *
      * @return GeoCachesEntity
-     * @throws \Exception
+     * @throws Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : GeoCachesEntity {
@@ -356,5 +357,22 @@ class CachesRepository
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
 
         return $entity;
+    }
+
+    /**
+     * @param string $wp
+     *
+     * @return bool
+     */
+    public function isNew(string $wp)
+    : bool {
+        try {
+            if ($this->fetchOneBy(['wp_oc' => $wp])) {
+                return false;
+            }
+        } catch (Exception $exception) {
+            return true;
+        }
+        return true;
     }
 }

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportListingInfosEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -38,6 +40,7 @@ class SupportListingInfosRepository
 
     /**
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchAll()
@@ -97,6 +100,7 @@ class SupportListingInfosRepository
      * @param array $where
      *
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
@@ -133,7 +137,7 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function create(SupportListingInfosEntity $entity)
     : SupportListingInfosEntity {
@@ -158,7 +162,7 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function update(SupportListingInfosEntity $entity)
     : SupportListingInfosEntity {
@@ -182,8 +186,8 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws DBALException
+     * @throws InvalidArgumentException
      */
     public function remove(SupportListingInfosEntity $entity)
     : SupportListingInfosEntity {
@@ -232,12 +236,12 @@ class SupportListingInfosRepository
      * @param array $data
      *
      * @return SupportListingInfosEntity
-     * @throws \Exception
+     * @throws RecordNotFoundException
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingInfosEntity {
         $entity = new SupportListingInfosEntity();
-        $entity->id = (array_key_exists('id', $data)) ? (int) $data['id'] : NULL;
+        $entity->id = ((int) $data['id']) ?? NULL;
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->nodeId = (int) $data['node_id'];
         $entity->nodeOwnerId = (string) $data['node_owner_id'];

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -8,17 +8,17 @@
         {% endblock %}
     </head>
     <body>
-    <div class="container">
-        {% include '/index/navigation.html.twig' %}
-    </div>
+        <div class="container">
+            {% include '/index/navigation.html.twig' %}
+        </div>
 
         {% block body %}
 
             <div>
-               <a href="http://try.docker.team-opencaching.de/login">Login</a>
+                <a href="{{ path('app_security_login') }}">Login</a>
             </div>
 
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_TEAM') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>
             {% endif %}
 

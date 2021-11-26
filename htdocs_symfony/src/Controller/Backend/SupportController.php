@@ -34,6 +34,7 @@ use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
 use Oc\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,6 +44,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class SupportController
  *
  * @package Oc\Controller\Backend
+ * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_SUPPORT_MAINTAIN and above!
  */
 class SupportController extends AbstractController
 {

@@ -71,12 +71,17 @@ final class Version20211124201800 extends AbstractMigration
                     (14, 13);'
         );
 
+        // root should become super admin, again
+        $this->addSql(
+            'UPDATE user_roles SET role_id = 14 WHERE user_id = 107469;'
+        );
         // re-add constraints which prevented deleting rows
         $this->addSql(
             'ALTER TABLE security_role_hierarchy ADD CONSTRAINT security_role_hierarchy_security_roles_id_fk FOREIGN KEY (role_id) REFERENCES security_roles (id);
                  ALTER TABLE security_role_hierarchy ADD CONSTRAINT security_role_hierarchy_security_roles_id_fk_2 FOREIGN KEY (sub_role_id) REFERENCES security_roles (id);
                  ALTER TABLE user_roles ADD CONSTRAINT user_roles_security_roles_id_fk FOREIGN KEY (role_id) REFERENCES security_roles (id);'
         );
+
     }
 
     public function down(Schema $schema)

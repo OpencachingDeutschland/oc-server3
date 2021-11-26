@@ -98,5 +98,17 @@ class MenuSubscriber implements EventSubscriberInterface
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-question');
         }
+
+        $menu->addChild('roles', [
+            'label' => 'Roles',
+            'route' => 'backend_roles_index',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-user-shield');
+
+        $menu->addChild('logout', [
+            'label' => 'Logout',
+            'route' => 'app_security_logout',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-door-open');
     }
 }

@@ -84,6 +84,14 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+            $menu->addChild('maps', [
+                'label' => 'Maps',
+                'route' => 'backend_map_single',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-map');
+        }
+
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',
                 'route' => 'app_kitchensink_index',

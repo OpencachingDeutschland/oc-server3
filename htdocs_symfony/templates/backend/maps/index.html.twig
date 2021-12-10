@@ -1,0 +1,95 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/maps/maps.leaflet.js' %}
+
+    <div>
+        <h3>{{ 'Map examples' | trans }}..</h3>
+    </div>
+
+    <!-- Leaflet -->
+    <hr>
+
+    <div id="mapForOC" class="map map-home" style="height: 300px; margin-top: 50px;"></div>
+
+    <script>
+        var OSMDEUrl = 'https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png';
+        var OSMDEAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+        var mapboxUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        var mapboxAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+        var openTopoMapUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png';
+        var openTopoMapAttribution = 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)';
+
+
+        var openStreetMapDE = L.tileLayer(OSMDEUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: OSMDEAttribution}),
+                openTopoMap = L.tileLayer(openTopoMapUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: openTopoMapAttribution});
+
+        var baseMaps = {
+            "OSM de": openStreetMapDE,
+            "OpenTopoMap": openTopoMap,
+        };
+
+        {% if mapWP is defined %}
+        {% if mapWP %}
+        let jsCachesArray = {{ mapWP[0] | json_encode | raw }};
+        let ja = 1;
+        {% endif %}
+        {% endif %}
+
+        if (ja === 1) {
+            var Cache1 = L.marker([{{ mapWP[0].latitude }}, {{ mapWP[0].longitude }}]).bindPopup('{{ mapWP[0].wpOc }}<br/>{{ mapWP[0].name }}');
+            var Cache2 = L.marker([{{ mapWP[0].latitude }} +0.005, {{ mapWP[0].longitude }}]).bindPopup('XX1234<br/>Lalalaaaa');
+            var overlayCaches = L.layerGroup()
+            .addLayer(Cache1)
+            .addLayer(Cache2);
+            var overlayMaps = {
+                "Caches": overlayCaches
+            }
+        }
+        var mapOC = L.map('mapForOC', {
+            center: [{{ mapCenterViewLat }}, {{ mapCenterViewLon }}],
+            zoom: {{ mapZoom }},
+            layers: [openStreetMapDE, overlayCaches]
+        });
+
+        L.control.layers(baseMaps, overlayMaps).addTo(mapOC);
+
+    </script>
+
+    <!-- was anderes.. -->
+    <hr>
+    <div id="mapLL" class="map map-home" style="height: 300px; margin-top: 50px;"></div>
+
+    <script>
+        var grayscaleLL = L.tileLayer(mapboxUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: mapboxAttribution}),
+                openTopoMapLL = L.tileLayer(openTopoMapUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: openTopoMapAttribution});
+
+        var baseMapsLL = {
+            "<span style='color: green'>Grayscale</span>": grayscaleLL,
+            "OpenTopoMap": openTopoMapLL,
+        };
+
+        var littleton = L.marker([39.61, -105.020]).bindPopup('This is Littleton, CO.'),
+                denver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.'),
+                aurora = L.marker([39.73, -104.80]).bindPopup('This is Aurora, CO.'),
+                golden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.');
+
+        var citiesLL = L.layerGroup([littleton, denver, aurora, golden]);
+
+        var mapLL = L.map('mapLL', {
+            center: [39.73, -104.99],
+            zoom: 10,
+            layers: [grayscaleLL, citiesLL]
+        });
+
+        var overlayMapsLL = {
+            "Cities": citiesLL
+        };
+
+        L.control.layers(baseMapsLL, overlayMapsLL).addTo(mapLL);
+    </script>
+
+{% endblock %}

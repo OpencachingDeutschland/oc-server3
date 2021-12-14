@@ -4,27 +4,27 @@
 
 {% block body %}
     <style>
-        article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
-            display: block
+        article,aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+            display: block;
         }
 
         audio, canvas, video {
-            display: inline-block
+            display: inline-block;
         }
 
         audio:not([controls]) {
             display: none;
-            height: 0
+            height: 0;
         }
 
         [hidden] {
-            display: none
+            display: none;
         }
 
         html {
             font-family: sans-serif;
             -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
@@ -32,147 +32,147 @@
         }
 
         a:focus {
-            outline: thin dotted
+            outline: thin dotted;
         }
 
         a:active, a:hover {
-            outline: 0
+            outline: 0;
         }
 
         h1 {
             font-size: 2em;
-            margin: .67em 0
+            margin: 0.67em 0;
         }
 
         abbr[title] {
-            border-bottom: 1px dotted
+            border-bottom: 1px dotted;
         }
 
         b, strong {
-            font-weight: 700
+            font-weight: 700;
         }
 
         dfn {
-            font-style: italic
+            font-style: italic;
         }
 
         hr {
             -moz-box-sizing: content-box;
             box-sizing: content-box;
-            height: 0
+            height: 0;
         }
 
         mark {
             background: #ff0;
-            color: #000
+            color: #000;
         }
 
         code, kbd, pre, samp {
-            font: 1em monospace, serif
+            font: 1em monospace, serif;
         }
 
         pre {
-            white-space: pre-wrap
+            white-space: pre-wrap;
         }
 
         q {
-            quotes: "\201C" "\201D" "\2018" "\2019"
+            quotes: '\201C' '\201D' '\2018' '\2019';
         }
 
         small {
-            font-size: 80%
+            font-size: 80%;
         }
 
         sub, sup {
             font-size: 75%;
             line-height: 0;
             position: relative;
-            vertical-align: baseline
+            vertical-align: baseline;
         }
 
         sup {
-            top: -.5em
+            top: -.5em;
         }
 
         sub {
-            bottom: -.25em
+            bottom: -0.25em;
         }
 
         img {
-            border: 0
+            border: 0;
         }
 
         svg:not(:root) {
-            overflow: hidden
+            overflow: hidden;
         }
 
         figure {
-            margin: 0
+            margin: 0;
         }
 
         fieldset {
             border: 1px solid silver;
             margin: 0 2px;
-            padding: .35em .625em .75em
+            padding: 0.35em 0.625em 0.75em;
         }
 
         legend {
             border: 0;
-            padding: 0
+            padding: 0;
         }
 
         button, input, select, textarea {
             font-family: inherit;
             font-size: 100%;
-            margin: 0
+            margin: 0;
         }
 
         button, input {
-            line-height: normal
+            line-height: normal;
         }
 
         button, select {
-            text-transform: none
+            text-transform: none;
         }
 
-        button, html input[type="button"], input[type="reset"], input[type="submit"] {
+        button, html input[type='button'], input[type='reset'], input[type='submit'] {
             -webkit-appearance: button;
-            cursor: pointer
+            cursor: pointer;
         }
 
         button[disabled], html input[disabled] {
-            cursor: default
+            cursor: default;
         }
 
-        input[type="checkbox"], input[type="radio"] {
+        input[type='checkbox'], input[type='radio'] {
             box-sizing: border-box;
-            padding: 0
+            padding: 0;
         }
 
-        input[type="search"] {
+        input[type='search'] {
             -webkit-appearance: textfield;
             -moz-box-sizing: content-box;
             -webkit-box-sizing: content-box;
-            box-sizing: content-box
+            box-sizing: content-box;
         }
 
-        input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
-            -webkit-appearance: none
+        input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-decoration {
+            -webkit-appearance: none;
         }
 
         button::-moz-focus-inner, input::-moz-focus-inner {
             border: 0;
-            padding: 0
+            padding: 0;
         }
 
         textarea {
             overflow: auto;
-            vertical-align: top
+            vertical-align: top;
         }
 
         table {
             border-collapse: collapse;
-            border-spacing: 0
+            border-spacing: 0;
         }
 
         body, html {
@@ -181,43 +181,43 @@
         }
 
         .maintenance-container {
-            position: relative;
             background: #fff;
             -webkit-border-radius: 3px;
             -moz-border-radius: 3px;
             border-radius: 3px;
             margin: 50px auto;
-            width: 475px;
             padding: 30px;
+            position: relative;
             text-align: center;
+            width: 475px;
 
-            -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, .5);
-            -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, .5);
-            -ms-box-shadow: 0px 1px 3px rgba(0, 0, 0, .5);
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, .5);
+            -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+            -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+            -ms-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .maintenance-headline {
-            font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
             font-weight: 300;
-            margin: 0 0 .8em;
+            margin: 0 0 0.8em;
         }
 
         .maintenance-text {
-            font-size: 13px
+            font-size: 13px;
         }
 
     </style>
     <div class="maintenance-container">
-        <img src="http://wiki.opencaching.de/images/OC_Logo_col_mit_Domain.svg" width="425"
-             style="margin-bottom:20px;"/>
+        <img src="https://wiki.opencaching.de/images/OC_Logo_col_mit_Domain.svg" width="425"
+             style="margin-bottom: 20px;" alt="OC Logo"/>
 
         <form method="post">
 
             {% if app.user %}
                 <div class="mb-3">
                     You are logged in as {{ app.user.username }},
-                    <a href="{{ path('app_logout') }}">Logout</a>
+                    <a href="{{ path('app_security_logout') }}">Logout</a>
                 </div>
             {% endif %}
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html" lang="de">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -7,6 +7,7 @@
             {{ encore_entry_link_tags('backend') }}
         {% endblock %}
     </head>
+
     <body>
     <div class="container">
         {% include '/index/navigation.html.twig' %}
@@ -14,15 +15,27 @@
 
         {% block body %}
 
-            <div>
-               <a href="http://try.docker.team-opencaching.de/login">Login</a>
-            </div>
+            {% if app.user %}
+                <div>
+                    <a href="{{ path('app_security_login') }}">Login</a> (already logged in as {{ app.user.username }})
+                </div>
+                <div>
+                    <a href="{{ path('app_security_logout') }}">Logout</a>
+                </div>
+            {% else %}
+                <div>
+                    <a href="{{ path('app_security_login') }}">Login</a>
+                </div>
+            {% endif %}
+
+            <br />
 
             {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>
             {% endif %}
 
         {% endblock %}
+
         {% block javascripts %}
             {{ encore_entry_script_tags('backend') }}
         {% endblock %}

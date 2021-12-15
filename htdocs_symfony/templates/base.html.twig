@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" lang="de">
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -9,12 +10,11 @@
     </head>
 
     <body>
-    <div class="container">
-        {% include '/index/navigation.html.twig' %}
-    </div>
+        <div class="container">
+            {% include '/index/navigation.html.twig' %}
+        </div>
 
         {% block body %}
-
             {% if app.user %}
                 <div>
                     <a href="{{ path('app_security_login') }}">Login</a> (already logged in as {{ app.user.username }})
@@ -30,7 +30,7 @@
 
             <br />
 
-            {% if is_granted('ROLE_ADMIN') %}
+            {% if is_granted('ROLE_TEAM') %}
                 <a href="{{ path('backend_index_index') }}">BACKEND</a>
             {% endif %}
 

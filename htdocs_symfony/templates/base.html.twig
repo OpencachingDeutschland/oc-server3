@@ -15,7 +15,6 @@
         </div>
 
         {% block body %}
-
             {% if app.user %}
                 <div>
                     <a href="{{ path('app_security_login') }}">Login</a> (already logged in as {{ app.user.username }})

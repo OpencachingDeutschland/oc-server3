@@ -55,9 +55,7 @@
                                     {% endif %}</td>
                                 <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
                                 <td>{{ cache.country|default('?') }}</td>
-
-{#                                <td><a href="{{ path('backend_map_coords', {''}) }}">Map</a></td>#}
-                                <td><a href="{{ path('backend_map_single', { 'wp_oc': cache.wp_oc, 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a></td>
+                                <td><a href="{{ path('backend_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

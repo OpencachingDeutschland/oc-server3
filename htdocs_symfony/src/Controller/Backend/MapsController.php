@@ -78,7 +78,7 @@ class MapsController extends AbstractController
             'backend/maps/index.html.twig', [
                                               'mapCenterViewLat' => $mapCenterViewLat,
                                               'mapCenterViewLon' => $mapCenterViewLon,
-                                              'mapZoom' => '8',
+                                              'mapZoom' => '6',
                                               'mapWP' => $mapWP
                                           ]
         );

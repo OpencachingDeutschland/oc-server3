@@ -72,6 +72,12 @@
         <!-- Basiskarten und Layer der Karte hinzufügen -->
         L.control.layers(baseMaps, overlayMaps).addTo(mapLL);
 
+        var locateOptions = {
+            flyTo: true,
+            showCompass: true,
+        };
+        L.control.locate(locateOptions).addTo(mapLL);
+
     </script>
     Leaflet
 

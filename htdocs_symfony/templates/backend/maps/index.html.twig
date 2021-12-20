@@ -17,9 +17,9 @@
     <script>
 
         <!-- Basiskarten -->
-        var openStreetMapDE = L.tileLayer(OSMDEUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: OSMDEAttribution}),
-                openTopoMap = L.tileLayer(openTopoMapUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: openTopoMapAttribution});
-        cyclOSMMap = L.tileLayer(CyclOSMEUrl, {id: 'MapID', tileSize: 512, zoomOffset: -1, attribution: CyclOSMAttribution});
+        var openStreetMapDE = L.tileLayer(OSMDEUrl, {id: 'MapID', attribution: OSMDEAttribution});
+        var openTopoMap = L.tileLayer(openTopoMapUrl, {id: 'MapID', attribution: openTopoMapAttribution});
+        var cyclOSMMap = L.tileLayer(CyclOSMEUrl, {id: 'MapID', attribution: CyclOSMAttribution});
 
         var baseMaps = {
             "OSM de": openStreetMapDE,

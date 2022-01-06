@@ -14,6 +14,15 @@
         </ul>
     </div>
 
+    {% if is_granted('ROLE_TEAM') %}
+        <hr>
+        <div>
+            <h3>
+                <a href="{{ path('backend_roles_teamlist') }}">{{ 'Show team overview' | trans }}..</a>
+            </h3>
+        </div>
+    {% endif %}
+
     <hr>
     {% if allRoles is defined %}
         {% if allRoles %}
@@ -31,7 +40,7 @@
                 {% for role in allRoles | sort %}
                     <tr>
                         <td>{{ role.id }}</td>
-                        <td> &nbsp; </td>
+                        <td> &nbsp;</td>
                         <td>{{ role.role }}</td>
                         <td>{% if is_granted(role.role) %}
                                 {{ '✔️ You have access to this ROLE' | trans }}

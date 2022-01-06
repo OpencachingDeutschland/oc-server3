@@ -1,0 +1,30 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    <h3>{{ 'The team' | trans }}:</h3>
+
+    <div>
+        {% if teamAndRoles is defined %}
+            {% if teamAndRoles %}
+                {% for roleName in roleNames | sort((a, b) => a.role) | column('role') %}
+                    <ul>
+                        <li><h4>{{ roleName }}</h4></li>
+                        <ul>
+                            {% for teamMember in teamAndRoles | filter(teamMember => teamMember.role == roleName) %}
+                                <li>{{ teamMember.username }}</li>
+                            {% else %}
+                                <li>-</li>
+                            {% endfor %}
+                        </ul>
+                    </ul>
+                {% endfor %}
+            {% endif %}
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No team members found' | trans }}..</span>
+        {% endif %}
+    </div>
+    <hr>
+
+{% endblock %}

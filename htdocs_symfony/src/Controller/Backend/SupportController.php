@@ -44,7 +44,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * Class SupportController
  *
  * @package Oc\Controller\Backend
- * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_SUPPORT_MAINTAIN and above!
+ * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
  */
 class SupportController extends AbstractController
 {

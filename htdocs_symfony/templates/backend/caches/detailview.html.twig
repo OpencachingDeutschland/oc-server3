@@ -4,7 +4,7 @@
 
     <div>
         {% if cache_by_id is defined %}
-            <h3><br/>Cachedetails..</h3>
+            <h3><br/>{{ 'Cachedetails' | trans }}..</h3>
 
             <div>
                 {% if cache_by_id %}
@@ -13,18 +13,19 @@
                         <tr>
                             <th scope="col">&nbsp;</th>
                             {# <th scope="col">Cache ID</th> #}
-                            <th scope="col">OC</th>
-                            <th scope="col">Titel</th>
-                            <th scope="col">Cachegröße</th>
-                            <th scope="col">D/T</th>
-                            <th scope="col">Owner</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">GC</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">mit Logpasswort?</th>
-                            <th scope="col">veröffentlicht</th>
-                            <th scope="col">Versteckdatum</th>
-                            <th scope="col">Land</th>
+                            <th scope="col">{{ 'OC' | trans }}</th>
+                            <th scope="col">{{ 'Title' | trans }}</th>
+                            <th scope="col">{{ 'Cache size' | trans }}</th>
+                            <th scope="col">{{ 'D/T' | trans }}</th>
+                            <th scope="col">{{ 'Owner' | trans }}</th>
+                            <th scope="col">{{ 'Position' | trans }}</th>
+                            <th scope="col">{{ 'GC-Code' | trans }}</th>
+                            <th scope="col">{{ 'Status' | trans }}</th>
+                            <th scope="col">{{ 'Has logpassword' | trans }}?</th>
+                            <th scope="col">{{ 'Published' | trans }}?</th>
+                            <th scope="col">{{ 'Date hidden' | trans }}</th>
+                            <th scope="col">{{ 'Country' | trans }}</th>
+                            <th scope="col">{{ 'Show on map' | trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -43,7 +44,7 @@
                                 <td>{{ cache.wp_gc }}</td>
                                 <td>{{ cache.cache_status.name }}</td>
                                 <td>{% if cache.logpw == 1 %}
-                                        <i class="fas fa-key"><i class="fas fa-check"></i></i>
+                                        <i class="fas fa-check"></i>
                                     {% else %}
                                         <i class="fas fa-times"></i>
                                     {% endif %}</td>
@@ -54,6 +55,7 @@
                                     {% endif %}</td>
                                 <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
                                 <td>{{ cache.country|default('?') }}</td>
+                                <td><a href="{{ path('backend_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

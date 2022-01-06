@@ -1,0 +1,121 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/maps/maps.leaflet.js' %}
+    {% include '/backend/maps/maps.const.js' %}
+
+    <div>
+        <h3>{{ 'Map examples as feasibility studies' | trans }}..</h3>
+    </div>
+
+    <!-- Leaflet -->
+    <hr>
+
+    <div id="mapForOC" class="map map-home" style="height: 400px; margin-top: 50px;"></div>
+
+    <script>
+
+        <!-- Basiskarten -->
+        var openStreetMapDE = L.tileLayer(OSMDEUrl, {id: 'MapID', attribution: OSMDEAttribution});
+        var openTopoMap = L.tileLayer(openTopoMapUrl, {id: 'MapID', attribution: openTopoMapAttribution});
+        var cyclOSMMap = L.tileLayer(CyclOSMEUrl, {id: 'MapID', attribution: CyclOSMAttribution});
+
+        var baseMaps = {
+            "OSM de": openStreetMapDE,
+            "OpenTopoMap": openTopoMap,
+            "CyclOSM": cyclOSMMap,
+        };
+
+        <!-- Layer, z.B. für Caches, oder Wegpunkte, oder Umschaltung zw. Original- und korrigierten Koordinaten -->
+        var overlayCaches = L.layerGroup();
+        var CacheMarker;
+
+        {% for WP in mapWP %}
+        CacheMarker = L.marker([{{ WP.latitude }}, {{ WP.longitude }}], {
+            opacity: 1.0,
+            riseOnHover: true,
+            title: '{{ WP.wpOc }} {{ WP.name }}',
+            icon: CacheIcon_{{ WP.cacheType.kmlName }}
+        }).bindPopup('{{ WP.wpOc }}<br/>{{ WP.name }}<br/>{{ WP.user.username }}');
+
+        overlayCaches.addLayer(CacheMarker);
+        {% endfor %}
+
+        <!-- Layer, z.B. für Spuren von Moving Caches -->
+        var overlayMovingTracks = L.layerGroup();
+        var CacheTrackCoordinates = [
+            [54.0, 13.77777],
+            [52.9876, 10.1251],
+            [51.1234, 9.01111],
+            [48.3865, 10.865333333333]
+        ];
+        var CacheTrack = L.polyline(CacheTrackCoordinates, {color: 'red', weight: 2, opacity: 0.8});
+        overlayMovingTracks.addLayer(CacheTrack);
+
+        <!-- An- und abwählbare Layer definieren -->
+        var overlayMaps = {
+            "Caches": overlayCaches,
+            "Moving Caches Tracks": overlayMovingTracks
+        }
+
+        <!-- Karte erstellen mit Startkoordinate und Zoom -->
+        var mapLL = L.map('mapForOC', {
+            center: [{{ mapCenterViewLat }}, {{ mapCenterViewLon }}],
+            layers: [openStreetMapDE, overlayCaches, overlayMovingTracks],
+            zoom: {{ mapZoom }},
+            zoomControl: 'bottomright'
+        });
+
+        // var polyline = L.polyline(CacheTrack, {color: 'red', weight: 2, opacity: 0.8}).addTo(mapLL);
+
+        <!-- Basiskarten und Layer der Karte hinzufügen -->
+        L.control.layers(baseMaps, overlayMaps).addTo(mapLL);
+
+        var locateOptions = {
+            flyTo: true,
+            showCompass: true,
+        };
+        L.control.locate(locateOptions).addTo(mapLL);
+
+    </script>
+    Leaflet
+
+
+    <!-- OpenLayers -->
+    <hr>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.9.0/build/ol.js"></script>
+    <!-- https://openlayers.org/en/latest/doc/quickstart.html -->
+
+    <div id="mapOL" class="map" style="height: 400px; margin-top: 50px;"></div>
+
+    <script>
+        var mapOL = new ol.Map({
+            target: 'mapOL',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([{{ mapCenterViewLon }}, {{ mapCenterViewLat }}]),
+                zoom: {{ mapZoom }}
+            })
+        });
+
+        // einzelner Marker
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([{{ mapCenterViewLon }}, {{ mapCenterViewLat }}]))
+                    })
+                ]
+            })
+        });
+        mapOL.addLayer(layer);
+
+    </script>
+    OpenLayers
+
+{% endblock %}

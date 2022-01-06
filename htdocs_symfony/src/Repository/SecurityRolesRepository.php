@@ -3,6 +3,8 @@
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SecurityRolesEntity;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -10,6 +12,9 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ * Class SecurityRolesRepository
+ */
 class SecurityRolesRepository
 {
     const TABLE = 'security_roles';
@@ -17,17 +22,17 @@ class SecurityRolesRepository
     /** @var Connection */
     private $connection;
 
-
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-
     /**
-     * @return SecurityRolesEntity[]
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -50,10 +55,13 @@ class SecurityRolesRepository
     }
 
     /**
+     * @param array $where
+     *
      * @return SecurityRolesEntity
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
-    {
+    : SecurityRolesEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -76,12 +84,14 @@ class SecurityRolesRepository
         return $this->getEntityFromDatabaseArray($result);
     }
 
-
     /**
-     * @return SecurityRolesEntity[]
+     * @param array $where
+     *
+     * @return array
+     * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -109,9 +119,14 @@ class SecurityRolesRepository
         return $entities;
     }
 
-
+    /**
+     * @param UserEntity $user
+     *
+     * @return array
+     * @throws RecordsNotFoundException
+     */
     public function fetchUserRoles(UserEntity $user)
-    {
+    : array {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE, 'sr')
@@ -122,9 +137,9 @@ class SecurityRolesRepository
 
         $result = $statement->fetchAll();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordsNotFoundException('No records found');
+//        }
 
         $records = [];
 
@@ -132,15 +147,20 @@ class SecurityRolesRepository
             $records[] = $this->getEntityFromDatabaseArray($item);
         }
 
-        return array_map(static function ($role) {return $role->role;}, $records);
+        return array_map(static function($role) {
+            return $role->role;
+        }, $records);
     }
 
-
     /**
+     * @param SecurityRolesEntity $entity
+     *
      * @return SecurityRolesEntity
+     * @throws DBALException
+     * @throws RecordAlreadyExistsException
      */
     public function create(SecurityRolesEntity $entity)
-    {
+    : SecurityRolesEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -152,17 +172,20 @@ class SecurityRolesRepository
             $databaseArray
         );
 
-        $entity->id = (int)$this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
 
-
     /**
+     * @param SecurityRolesEntity $entity
+     *
      * @return SecurityRolesEntity
+     * @throws DBALException
+     * @throws RecordNotPersistedException
      */
     public function update(SecurityRolesEntity $entity)
-    {
+    : SecurityRolesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -178,12 +201,16 @@ class SecurityRolesRepository
         return $entity;
     }
 
-
     /**
+     * @param SecurityRolesEntity $entity
+     *
      * @return SecurityRolesEntity
+     * @throws RecordNotPersistedException
+     * @throws DBALException
+     * @throws InvalidArgumentException
      */
     public function remove(SecurityRolesEntity $entity)
-    {
+    : SecurityRolesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -198,12 +225,35 @@ class SecurityRolesRepository
         return $entity;
     }
 
+    /**
+     * @param string $roleName
+     *
+     * @return int
+     * @throws RecordNotFoundException
+     */
+    public function getIdByRoleName(string $roleName)
+    : int {
+        return ($this->fetchOneBy(['role' => $roleName])->id);
+    }
 
     /**
-     * @return []
+     * @param int $roleId
+     *
+     * @return string
+     * @throws RecordNotFoundException
+     */
+    public function getRoleNameById(int $roleId)
+    : string {
+        return ($this->fetchOneBy(['id' => $roleId])->role);
+    }
+
+    /**
+     * @param SecurityRolesEntity $entity
+     *
+     * @return array
      */
     public function getDatabaseArrayFromEntity(SecurityRolesEntity $entity)
-    {
+    : array {
         return [
             'id' => $entity->id,
             'role' => $entity->role,
@@ -211,13 +261,16 @@ class SecurityRolesRepository
     }
 
     /**
+     * @param array $data
+     *
      * @return SecurityRolesEntity
      */
     public function getEntityFromDatabaseArray(array $data)
-    {
+    : SecurityRolesEntity {
         $entity = new SecurityRolesEntity();
-        $entity->id = (int)$data['id'];
-        $entity->role = (string)$data['role'];
+        $entity->id = (int) $data['id'];
+        $entity->role = (string) $data['role'];
+
         return $entity;
     }
 }

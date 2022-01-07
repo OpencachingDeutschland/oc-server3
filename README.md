@@ -105,7 +105,7 @@ git pull --rebase upstream/development
 Related Websites
 ----------------
 
-* [Opencaching.de Issue Tracker](https://redmine.opencaching.de/projects/oc-dev)
+* [Opencaching.de Issue Tracker](https://opencaching.atlassian.net/jira/core/projects/RED/issues)
 * [Opencaching.de Git tutorial](https://wiki.opencaching.de/index.php/Entwicklung/Git) (German)
 * [Opencaching.de Wiki](https://wiki.opencaching.de/index.php/Hauptseite) (German)
   -> [Development](https://wiki.opencaching.de/index.php/Entwicklung)

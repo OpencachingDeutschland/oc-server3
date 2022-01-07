@@ -23,7 +23,7 @@
         </div>
     {% endif %}
 
-    {% if is_granted('ROLE_TEAM') %}
+    {% if is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD') %}
         <hr>
         <div>
             <h3>

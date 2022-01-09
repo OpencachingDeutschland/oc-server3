@@ -39,21 +39,25 @@
                     <li><b>{{ 'Last login' | trans }}:</b> {{ user_account_details.lastLogin | date('d.m.Y') }}</li>
                 </ul>
 
-                <hr>
-                <br/>
 
-                {% if supportUserAccountActions is defined %}
-                    {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.id } ) } ) }}
-                    <div class="form-row">
-                        <p><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
-                            {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}</p>
-                        <p><b>{{ 'GDPR conform account deletion' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span><span class="badge badge-danger">Achtung: Vor DSGVO-Löschung muss zusätzlich die obige Funktion 'Set account inactive [..]' ausgeführt werden!..</span>
-                            {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}</p>
-                        <p><b>{{ 'Mark email address as invalid' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}</p>
-                        <p><b>{{ 'Are you sure?' | trans }}:</b> {{ form_row(supportUserAccountActions.check_Sure) }}</p>
-                    </div>
-                    {{ form_end(supportUserAccountActions) }}
+                {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
+                    <hr>
+                    <br/>
+
+                    {% if supportUserAccountActions is defined %}
+                        {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.id } ) } ) }}
+                        <div class="form-row">
+                            <p><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
+                                {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}</p>
+                            <p><b>{{ 'GDPR conform account deletion' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span><span
+                                        class="badge badge-danger">Achtung: Vor DSGVO-Löschung muss zusätzlich die obige Funktion 'Set account inactive [..]' ausgeführt werden!..</span>
+                                {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}</p>
+                            <p><b>{{ 'Mark email address as invalid' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}</p>
+                            <p><b>{{ 'Are you sure?' | trans }}:</b> {{ form_row(supportUserAccountActions.check_Sure) }}</p>
+                        </div>
+                        {{ form_end(supportUserAccountActions) }}
+                    {% endif %}
                 {% endif %}
 
                 <br/>

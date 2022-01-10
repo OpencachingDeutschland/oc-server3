@@ -16,86 +16,94 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>{{ 'List caches from users whose registration date is not older than 31 days.' | trans }}</td>
-                <td>SELECT caches.name, user.username, user.date_created, user.last_login FROM caches, user <br/>WHERE caches.user_id = user.user_id
-                    AND user.date_created > now() - interval 31 DAY;
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_1', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>{{ 'List user whose registration date is not older than 31 days.' | trans }}</td>
-                <td>SELECT username, date_created, last_login FROM user <br/>WHERE date_created > now() - interval 31 DAY;</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_2', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>{{ 'List user with foreign IPs whose registration date is not older than 31 days.' | trans }}</td>
-                <td>SELECT * FROM .. <span class="badge badge-danger">muss noch warten, ob IPs auf die Art abgefragt werden können..</span> <br/>WHERE
-                    ..
-                </td>
-                <td>go</td>
-            </tr>
-            <tr>
-                <td>{{ 'List (non-archived, non-locked) caches from users whose last login date is older than one year.' | trans }}</td>
-                <td>SELECT caches.name, caches.cache_id, user.username, user.last_login, caches.status FROM caches, user <br/>WHERE caches.user_id =
-                    user.user_id AND caches.status <= 2 AND user.last_login < now() - interval 1 YEAR;
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_4') }}">{{ 'Go' | trans }}</a>
-                </td>
-            </tr>
-            <tr>
-                <td>{{ 'List user where a support user left a comment.' | trans }}</td>
-                <td>SELECT * FROM support_user_comments</span>
-                </td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('backend_support_db_queries_5') }}">{{ 'Go' | trans }}</a>
-                </td>
-            </tr>
+            {% if is_granted('ROLE_SUPPORT_TRAINEE') %}
+                <tr>
+                    <td>{{ 'List caches from users whose registration date is not older than 31 days.' | trans }}</td>
+                    <td>SELECT caches.name, user.username, user.date_created, user.last_login FROM caches, user <br/>WHERE caches.user_id =
+                        user.user_id
+                        AND user.date_created > now() - interval 31 DAY;
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_1', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'List user whose registration date is not older than 31 days.' | trans }}</td>
+                    <td>SELECT username, date_created, last_login FROM user <br/>WHERE date_created > now() - interval 31 DAY;</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_2', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'List user with foreign IPs whose registration date is not older than 31 days.' | trans }}</td>
+                    <td>SELECT * FROM .. <span class="badge badge-danger">muss noch warten, ob IPs auf die Art abgefragt werden können..</span> <br/>WHERE
+                        ..
+                    </td>
+                    <td>go</td>
+                </tr>
+                <tr>
+                    <td>{{ 'List (non-archived, non-locked) caches from users whose last login date is older than one year.' | trans }}</td>
+                    <td>SELECT caches.name, caches.cache_id, user.username, user.last_login, caches.status FROM caches, user <br/>WHERE caches.user_id
+                        =
+                        user.user_id AND caches.status <= 2 AND user.last_login < now() - interval 1 YEAR;
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_4') }}">{{ 'Go' | trans }}</a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
+                <tr>
+                    <td>{{ 'List user where a support user left a comment (OCC).' | trans }}</td>
+                    <td>SELECT * FROM support_user_comments</span>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_5') }}">{{ 'Go' | trans }}</a>
+                    </td>
+                </tr>
+            {% endif %}
             </tbody>
         </table>
 
     </div>
 
-    <hr>
+    {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
+        <hr>
 
-    <b>{{ 'Flexible SQL queries' | trans }}</b>
+        <b>{{ 'Flexible SQL queries' | trans }}</b>
 
-    <div class="container">
-        <section class="container col-md-12">
-            {% if SQLFlexForm is defined %}
-                {{ form_start(SQLFlexForm) }}
-                <div class="form-row">
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_SELECT) }}
+        <div class="container">
+            <section class="container col-md-12">
+                {% if SQLFlexForm is defined %}
+                    {{ form_start(SQLFlexForm) }}
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_SELECT) }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_WHAT) }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_FROM) }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_TABLE) }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_WHERE) }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ form_row(SQLFlexForm.content_CONDITION) }}
+                        </div>
+                        <div class="form-group col-md-1">
+                            {{ form_row(SQLFlexForm.Suchen) }}
+                        </div>
                     </div>
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_WHAT) }}
-                    </div>
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_FROM) }}
-                    </div>
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_TABLE) }}
-                    </div>
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_WHERE) }}
-                    </div>
-                    <div class="form-group col-md-2">
-                        {{ form_row(SQLFlexForm.content_CONDITION) }}
-                    </div>
-                    <div class="form-group col-md-1">
-                        {{ form_row(SQLFlexForm.Suchen) }}
-                    </div>
-                </div>
-                {{ form_end(SQLFlexForm) }}
-            {% endif %}
-        </section>
-    </div>
+                    {{ form_end(SQLFlexForm) }}
+                {% endif %}
+            </section>
+        </div>
+    {% endif %}
 
     <hr>
 
@@ -202,7 +210,9 @@
                         <td>{{ item.comment |slice(0, 50) }} [..]</td>
                         <td>{{ item.commentCreated | date('d.m.Y H:i:s') }}</td>
                         <td>{{ item.commentLastModified | date('d.m.Y H:i:s') }}</td>
-                        <td><a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}"><i class="fas fa-check"></i></a></td>
+                        <td>
+                            <a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}"><i class="fas fa-check"></i></a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

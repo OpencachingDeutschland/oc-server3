@@ -25,12 +25,17 @@ class UserRolesRepository
     /** @var Connection */
     private $connection;
 
+    /** @var SecurityRolesRepository */
+    private $securityRolesRepository;
+
     /**
      * @param Connection $connection
+     * @param SecurityRolesRepository $securityRolesRepository
      */
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, SecurityRolesRepository $securityRolesRepository)
     {
         $this->connection = $connection;
+        $this->securityRolesRepository = $securityRolesRepository;
     }
 
     /**
@@ -195,6 +200,45 @@ class UserRolesRepository
         $entity->id = null;
 
         return $entity;
+    }
+
+    /**
+     * @param int $userId
+     * @param string $role
+     *
+     * @return bool
+     * @throws DBALException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
+     */
+    public function grantRole(int $userId, string $role) : bool
+    {
+        try {
+            $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
+        } catch (\Exception $exception) {
+            $entity = new UserRolesEntity($userId, $this->securityRolesRepository->getIdByRoleName($role));
+            $this->create($entity);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param int $userId
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function removeRole(int $userId, string $role) : bool
+    {
+        try {
+            $entity = $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
+
+            $this->remove($entity);
+        } catch (\Exception $exception) {
+        }
+
+        return true;
     }
 
     /**

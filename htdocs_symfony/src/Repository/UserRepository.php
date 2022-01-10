@@ -240,6 +240,7 @@ class UserRepository
             'country' => $entity->country,
             'activation_code' => $entity->activationCode,
             'language' => $entity->language,
+            'roles' => $entity->roles
         ];
     }
 
@@ -264,6 +265,7 @@ class UserRepository
         $entity->country = $data['country'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
+        $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 
         return $entity;
     }

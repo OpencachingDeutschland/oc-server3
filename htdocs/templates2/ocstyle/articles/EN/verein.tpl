@@ -24,6 +24,6 @@
 <p>We depend on your donations to finance the technical operation of the website. We will be glad to recieve your support via our <a href="./articles.php?page=donations" target="_blank">donations page</a>; a few Euros will already help us.</p>
 
 <h5>Where can I ask further questions on the association?</h5>
-<p>You are welcome to contact the chairman at <a href="mailto:verein@opencaching.de">verein@opencaching.de</a>./p>
+<p>You are welcome to contact the chairman at <a href="mailto:verein@opencaching.de">verein@opencaching.de</a>.</p>
 
 </div>

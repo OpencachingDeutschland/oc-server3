@@ -222,9 +222,6 @@ function post_config(): void
         case 'www.opencaching.de':
             config_domain_www_opencaching_de();
             break;
-        case 'www.opencaching.it':
-            config_domain_www_opencaching_it();
-            break;
         default:
             $tpl->redirect('https://www.opencaching.de/index.php');
     }

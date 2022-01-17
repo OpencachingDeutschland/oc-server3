@@ -20,9 +20,7 @@
 
 <h2 class="h2-responsive">Geltungsbereich</h2>
 <p class="note note-primary">
-    opencaching.de /.fr /.it<br>
-    opencaching-network.com /.org<br>
-    geocaching-network.com /.org<br>
+    opencaching.de<br>
 </p>
 <p>
     Diese Nutzungsbedingungen gelten für alle auf der Opencaching-Plattform registrierten Nutzer sowie für nicht

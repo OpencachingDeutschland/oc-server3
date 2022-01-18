@@ -68,22 +68,6 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('user', [
-                'label' => 'Users',
-                'route' => 'backend_user_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-users');
-        }
-
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('support', [
-                'label' => 'Support Center',
-                'route' => 'backend_support_reported_caches',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-gem');
-        }
-
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
             $menu->addChild('maps', [
                 'label' => 'Maps',
                 'route' => 'backend_map_show',
@@ -112,6 +96,22 @@ class MenuSubscriber implements EventSubscriberInterface
             'route' => 'backend_roles_index',
             'childOptions' => $event->getChildOptions(),
         ])->setLabelAttribute('icon', 'fas fa-user-shield');
+
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+            $menu->addChild('support', [
+                'label' => 'Support Center',
+                'route' => 'backend_support_reported_caches',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-gem');
+        }
+
+        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+            $menu->addChild('user', [
+                'label' => 'Users',
+                'route' => 'backend_user_index',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-users');
+        }
 
         $menu->addChild('logout', [
             'label' => 'Logout',

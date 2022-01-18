@@ -29,6 +29,7 @@ class UserRepository
      * @var Connection
      */
     private $connection;
+
     /**
      * @var SecurityRolesRepository
      */
@@ -47,10 +48,11 @@ class UserRepository
     /**
      * Fetches all users.
      *
-     * @throws RecordsNotFoundException Thrown when no records are found
      * @return UserEntity[]
+     * @throws RecordsNotFoundException Thrown when no records are found
      */
-    public function fetchAll(): array
+    public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
@@ -71,8 +73,8 @@ class UserRepository
      *
      * @throws RecordNotFoundException Thrown when the request record is not found
      */
-    public function fetchOneById(int $id): UserEntity
-    {
+    public function fetchOneById(int $id)
+    : UserEntity {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -83,10 +85,12 @@ class UserRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException(sprintf(
-                'Record with id #%s not found',
-                $id
-            ));
+            throw new RecordNotFoundException(
+                sprintf(
+                    'Record with id #%s not found',
+                    $id
+                )
+            );
         }
 
         return $this->getEntityFromDatabaseArray($result);
@@ -99,10 +103,9 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordNotFoundException
-     * @throws RecordsNotFoundException
      */
-    public function fetchOneByUsername(string $username): UserEntity
-    {
+    public function fetchOneByUsername(string $username)
+    : UserEntity {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -113,10 +116,12 @@ class UserRepository
         $result = $statement->fetch();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException(sprintf(
-                'Record with username "%s" not found',
-                $username
-            ));
+            throw new RecordNotFoundException(
+                sprintf(
+                    'Record with username "%s" not found',
+                    $username
+                )
+            );
         }
 
         $user = $this->getEntityFromDatabaseArray($result);
@@ -135,8 +140,8 @@ class UserRepository
      * @throws RecordAlreadyExistsException
      * @throws DBALException
      */
-    public function create(UserEntity $entity): UserEntity
-    {
+    public function create(UserEntity $entity)
+    : UserEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The user entity already exists');
         }
@@ -148,7 +153,7 @@ class UserRepository
             $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->userId = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
@@ -162,8 +167,8 @@ class UserRepository
      * @throws RecordNotPersistedException
      * @throws DBALException
      */
-    public function update(UserEntity $entity): UserEntity
-    {
+    public function update(UserEntity $entity)
+    : UserEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -173,10 +178,10 @@ class UserRepository
         $this->connection->update(
             self::TABLE,
             $databaseArray,
-            ['user_id' => $entity->id]
+            ['user_id' => $entity->userId]
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->userId = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
@@ -191,18 +196,18 @@ class UserRepository
      * @throws DBALException
      * @throws InvalidArgumentException
      */
-    public function remove(UserEntity $entity): UserEntity
-    {
+    public function remove(UserEntity $entity)
+    : UserEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
             self::TABLE,
-            ['user_id' => $entity->id]
+            ['user_id' => $entity->userId]
         );
 
-        $entity->id = null;
+        $entity->userId = null;
 
         return $entity;
     }
@@ -212,8 +217,8 @@ class UserRepository
      *
      * @return UserEntity[]
      */
-    private function getEntityArrayFromDatabaseArray(array $result): array
-    {
+    private function getEntityArrayFromDatabaseArray(array $result)
+    : array {
         $languages = [];
 
         foreach ($result as $item) {
@@ -226,8 +231,8 @@ class UserRepository
     /**
      * Maps the given entity to the database array.
      */
-    public function getDatabaseArrayFromEntity(UserEntity $entity): array
-    {
+    public function getDatabaseArrayFromEntity(UserEntity $entity)
+    : array {
         return [
             'user_id' => $entity->userId,
             'date_created' => $entity->dateCreated,
@@ -244,6 +249,7 @@ class UserRepository
             'country' => $entity->country,
             'activation_code' => $entity->activationCode,
             'language' => $entity->language,
+            'description' => $entity->description,
             'gdpr_deletion' => $entity->gdprDeletion,
             'roles' => $entity->roles
         ];
@@ -252,8 +258,8 @@ class UserRepository
     /**
      * Prepares database array from properties.
      */
-    public function getEntityFromDatabaseArray(array $data): UserEntity
-    {
+    public function getEntityFromDatabaseArray(array $data)
+    : UserEntity {
         $entity = new UserEntity();
         $entity->userId = (int) $data['user_id'];
         $entity->dateCreated = (string) $data['date_created'];
@@ -270,6 +276,7 @@ class UserRepository
         $entity->country = $data['country'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
+        $entity->description = $data['description'];
         $entity->gdprDeletion = $data['gdpr_deletion'];
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 

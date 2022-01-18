@@ -43,8 +43,7 @@ class UserController extends AbstractController
      * @Security("is_granted('ROLE_TEAM')")
      */
     public function index(Request $request)
-    : Response
-    {
+    : Response {
         $fetchedUsers = '';
         $searchForm = $this->createForm(CachesFormType::class);
 
@@ -54,7 +53,6 @@ class UserController extends AbstractController
 
             $fetchedUsers = $this->getUsersForSearchField($inputData['content_searchfield']);
         }
-
 
         return $this->render('backend/user/index.html.twig', [
                                                                'userSearchForm' => $searchForm->createView(),
@@ -73,11 +71,13 @@ class UserController extends AbstractController
         //        SELECT user_id, username
         //        FROM user
         //        WHERE user_id      =       "' . $searchtext . '"
+        //        OR user.email      =       "' . $searchtext . '"
         //        OR user.username   LIKE    "%' . $searchtext . '%"'
         $qb = $this->connection->createQueryBuilder();
         $qb->select('user.user_id', 'user.username')
             ->from('user')
             ->where('user.user_id = :searchTerm')
+            ->orWhere('user.email = :searchTerm')
             ->orWhere('user.username LIKE :searchTermLIKE')
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('user.username', 'ASC');
@@ -98,7 +98,7 @@ class UserController extends AbstractController
         try {
             $fetchedUser = $this->userRepository->fetchOneById($userID);
         } catch (Exception $e) {
-            //  tue was.. (status_not_found = true);
+            //  tue was..
         }
 
         return $this->render('backend/user/detailview.html.twig', ['user_by_id' => $fetchedUser]);

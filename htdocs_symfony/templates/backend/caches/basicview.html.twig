@@ -15,17 +15,16 @@
 
     <div>
         {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
-            <br/>
-            <div> Gefunden: {{ caches_by_searchfield|length }} Cache(s)</div>
-            <br/>
             {% if caches_by_searchfield %}
+                <br/>
+                <div> {{ 'Found' }}: {{ caches_by_searchfield | length }} {{ 'cache(s)' | trans }}</div>
+                <br/>
                 <table class="table table-striped table-hover">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="asc">Cache-ID</th>
-                        <th scope="col" class="asc">Name</th>
-                        <th scope="col" class="asc">Owner</th>
-                        <th scope="col">Infos</th>
+                        <th scope="col" class="asc">{{ 'Cache Id' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Cache title' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Owner name' | trans }}</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
@@ -35,9 +34,9 @@
                             <td>{{ cache.wp_oc }}</td>
                             <td>{{ cache.name }}</td>
                             <td>{{ cache.username }}</td>
-                            <td>&nbsp;</td>
                             <td>
-                                <a class="btn btn-primary" href="{{ path('backend_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">Details</a>
+                                <a class="btn btn-primary"
+                                   href="{{ path('backend_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">{{ 'Details' | trans }}</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -45,7 +44,7 @@
                 </table>
             {% else %}
                 <br/><br/>
-                <span>Leider keinen Cache mit dem eingegebenen Text gefunden.. :-(</span>
+                <span>{{ 'No cache found' | trans }}.. :-(</span>
             {% endif %}
         {% endif %}
 

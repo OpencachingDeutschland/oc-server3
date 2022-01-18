@@ -9,13 +9,19 @@
             <div>
                 {% if user_by_id %}
                     <br/>
+                    {{ 'Public information' | trans }}:<br/>
                     <ul>
                         <li><b>{{ 'Details for user' | trans }}:</b> {{ user_by_id.username }}</li>
                         <li><b>{{ 'Country' | trans }}:</b> {{ user_by_id.country }}</li>
                         <li><b>{{ 'Last login' | trans }}:</b> {{ user_by_id.lastLogin | date('d.m.Y') }}</li>
+                        <li><b>{{ 'Description' | trans }}:</b></li>
+                        <div style="border: 2px solid #000000;">{{ user_by_id.description | raw }}</div>
+                    </ul>
 
-                        {% if is_granted('ROLE_TEAM') %}
-                            <br/>
+                    {% if is_granted('ROLE_TEAM') %}
+                        <br/>
+                        {{ 'Hidden information' | trans }}:<br/>
+                        <ul>
                             <li><b>{{ 'User ID' | trans }}:</b> {{ user_by_id.userId }}</li>
                             <li><b>{{ 'Email' | trans }}:</b> {{ user_by_id.email }}</li>
                             <li><b>{{ 'Email validity' | trans }}:</b> {% if user_by_id.emailProblems %}<i class="fas fa-times"></i>
@@ -34,16 +40,16 @@
                                         class="fas fa-times"></i>{% endif %}</li>
                             <li><b>{{ 'GDPR deleted' | trans }}:</b> {% if user_by_id.gdprDeletion %}<i class="fas fa-check"></i>{% else %}<i
                                         class="fas fa-times"></i>{% endif %}</li>
-                        {% endif %}
-                    </ul>
+                        </ul>
+                    {% endif %}
                 {% else %}
                     <br/><br/>
-                    <span>{{ 'No user found' | trans }}.. :-)</span>
+                    <span>{{ 'No user found' | trans }}.. :-(</span>
                 {% endif %}
             </div>
         {% else %}
             <br/><br/>
-            <span>{{ 'Something went wrong' | trans }}.. :-)</span>
+            <span>{{ 'Something went wrong' | trans }}.. :-(</span>
         {% endif %}
 
     </div>

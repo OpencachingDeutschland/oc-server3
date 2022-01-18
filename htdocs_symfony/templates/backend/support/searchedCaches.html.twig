@@ -31,7 +31,7 @@
                             <td>{{ report.wp_gc }}</td>
                             <td>{{ report.wp_gc_maintained }}</td>
                             <td>{{ report.name }}</td>
-                            <td>{{ report.username }}</td>
+                            <td><a href="{{ path('backend_user_by_id', { 'userID': report.user_id}) }}">{{ report.username }}</a></td>
                             <td>{{ report.email }}</td>
                             <td><a href="{{ path('backend_support_cache_history', { 'wpID': report.wp_oc }) }}"><i class="fas fa-check"></i></a></td>
                             <td><a href="{{ path('backend_support_occ', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}"><i class="fas fa-check"></i></a></td>

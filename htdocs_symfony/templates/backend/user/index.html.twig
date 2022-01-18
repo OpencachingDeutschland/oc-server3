@@ -1,5 +1,14 @@
 {% extends 'backend/base.html.twig' %}
 
 {% block page_content %}
-    <h1>User</h1>
+    <div>
+        <h3>{{ 'User details' | trans }}..</h3>
+
+        {% if userSearchForm is defined %}
+            {{ form_start(userSearchForm) }}
+            {{ form_widget(userSearchForm) }}
+            {{ form_end(userSearchForm) }}
+        {% endif %}
+    </div>
+
 {% endblock %}

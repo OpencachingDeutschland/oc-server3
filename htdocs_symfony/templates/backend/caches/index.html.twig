@@ -2,35 +2,4 @@
 
 {% block page_content %}
 
-    <div>
-        <h3>Cachedatenbank abrufen..</h3>
-        {% if cachesForm is defined %}
-            {{ form_start(cachesForm) }}
-            {{ form_widget(cachesForm) }}
-            {{ form_end(cachesForm) }}
-        {% endif %}
-
-    </div>
-
-    <hr>
-
-    <div>
-        <h3><br/>Cachedetails direkt abrufen mittels Wegpunkt-ID in der URL:</h3>
-        Aufruf:<br/>
-        http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
-        <small>
-            <small>oder</small>
-        </small>
-        <br/>
-        http://try.docker.team-opencaching.de/backend/cache/$WP_GC<br/>
-        <br/>
-    </div>
-
 {% endblock %}
-
-
-
-
-
-
-

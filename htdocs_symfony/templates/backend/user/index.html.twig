@@ -11,4 +11,39 @@
         {% endif %}
     </div>
 
+    <div>
+        {% if all_users_by_searchfield is defined and all_users_by_searchfield != 0 %}
+            <br/>
+            <div> Gefunden: {{ all_users_by_searchfield | length }} Cache(s)</div>
+            <br/>
+            {% if all_users_by_searchfield %}
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'User Id' | trans }}:</th>
+                        <th scope="col" class="asc">{{ 'Username' | trans }}:</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in all_users_by_searchfield %}
+                        <tr>
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('backend_user_by_id', { 'userID': user.user_id }) }}">{{ 'Details' | trans }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>Leider keinen Nutzer mit dem eingegebenen Text gefunden.. :-(</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
 {% endblock %}

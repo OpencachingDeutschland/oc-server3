@@ -22,13 +22,13 @@
             {% if user_account_details %}
                 <ul>
                     <li>{{ 'Username' | trans }}: {{ user_account_details.username }}</li>
-                    <li>{{ 'User Id' | trans }}: {{ user_account_details.id }}</li>
+                    <li>{{ 'User Id' | trans }}: {{ user_account_details.userId }}</li>
                     <li>{{ 'Role(s)' | trans }}:
                         <ul>
                             {% for role in user_account_details.roles %}
                                 <li>{{ role }}
                                     <a class="btn btn-primary"
-                                       href="{{ path('backend_roles_remove_role', { 'userId': user_account_details.id, 'role': role }) }}">{{ 'Remove role' | trans }}</a>
+                                       href="{{ path('backend_roles_remove_role', { 'userId': user_account_details.userId, 'role': role }) }}">{{ 'Remove role' | trans }}</a>
                                 </li>
                             {% else %}
                                 -
@@ -40,11 +40,11 @@
                 {% if user_account_details.roles %}
                     {% for roleName in roleNames | sort((a, b) => a.role) | column('role') %}
                         <a class="btn btn-primary"
-                           href="{{ path('backend_roles_promote_role', { 'userId': user_account_details.id, 'role': roleName }) }}">{{ 'Grant'  | trans }} {{ roleName }}</a>
+                           href="{{ path('backend_roles_promote_role', { 'userId': user_account_details.userId, 'role': roleName }) }}">{{ 'Grant'  | trans }} {{ roleName }}</a>
                     {% endfor %}
                 {% else %}
                     <a class="btn btn-primary"
-                       href="{{ path('backend_roles_promote_role', { 'userId': user_account_details.id, 'role': 'ROLE_TEAM' }) }}">{{ 'Grant ROLE_TEAM'  | trans }}</a>
+                       href="{{ path('backend_roles_promote_role', { 'userId': user_account_details.userId, 'role': 'ROLE_TEAM' }) }}">{{ 'Grant ROLE_TEAM'  | trans }}</a>
                 {% endif %}
             {% else %}
                 <br/><br/>

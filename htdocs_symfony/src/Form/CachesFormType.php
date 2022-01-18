@@ -13,7 +13,7 @@ class CachesFormType extends AbstractType
         // see: https://symfonycasts.com/screencast/symfony-forms/form-type-class
         $builder
             ->add(
-                'content_caches_searchfield', null, [
+                'content_searchfield', null, [
                                                 'attr' => [
                                                     'placeholder' => 'OC / GC / Name / Owner. Platzhalter: %%%',
                                                     'autofocus' => 'autofocus',

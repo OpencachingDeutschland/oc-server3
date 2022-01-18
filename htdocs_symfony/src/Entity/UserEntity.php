@@ -16,7 +16,7 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var int
      */
-    public $id;
+    public $userId;
 
     /**
      * @var DateTime
@@ -92,6 +92,11 @@ class UserEntity extends AbstractEntity implements UserInterface
      * @var string
      */
     public $language;
+
+    /**
+     * @var bool
+     */
+    public $gdprDeletion;
 
     /**
      * @var array

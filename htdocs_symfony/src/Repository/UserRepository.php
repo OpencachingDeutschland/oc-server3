@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -34,7 +38,7 @@ class UserRepository
      * @param Connection $connection
      * @param SecurityRolesRepository $securityRolesRepository
      */
-    public function __construct(Connection $connection, SecurityRolesRepository  $securityRolesRepository)
+    public function __construct(Connection $connection, SecurityRolesRepository $securityRolesRepository)
     {
         $this->connection = $connection;
         $this->securityRolesRepository = $securityRolesRepository;
@@ -129,7 +133,7 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function create(UserEntity $entity): UserEntity
     {
@@ -156,7 +160,7 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws DBALException
      */
     public function update(UserEntity $entity): UserEntity
     {
@@ -184,8 +188,8 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws DBALException
+     * @throws InvalidArgumentException
      */
     public function remove(UserEntity $entity): UserEntity
     {
@@ -225,7 +229,7 @@ class UserRepository
     public function getDatabaseArrayFromEntity(UserEntity $entity): array
     {
         return [
-            'user_id' => $entity->id,
+            'user_id' => $entity->userId,
             'date_created' => $entity->dateCreated,
             'last_modified' => $entity->lastModified,
             'username' => $entity->username,
@@ -240,6 +244,7 @@ class UserRepository
             'country' => $entity->country,
             'activation_code' => $entity->activationCode,
             'language' => $entity->language,
+            'gdpr_deletion' => $entity->gdprDeletion,
             'roles' => $entity->roles
         ];
     }
@@ -250,7 +255,7 @@ class UserRepository
     public function getEntityFromDatabaseArray(array $data): UserEntity
     {
         $entity = new UserEntity();
-        $entity->id = (int) $data['user_id'];
+        $entity->userId = (int) $data['user_id'];
         $entity->dateCreated = (string) $data['date_created'];
         $entity->lastModified = (string) $data['last_modified'];
         $entity->username = $data['username'];
@@ -265,6 +270,7 @@ class UserRepository
         $entity->country = $data['country'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
+        $entity->gdprDeletion = $data['gdpr_deletion'];
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 
         return $entity;

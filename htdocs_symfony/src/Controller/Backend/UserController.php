@@ -7,6 +7,9 @@ namespace Oc\Controller\Backend;
 use Doctrine\DBAL\Connection;
 use Exception;
 use Oc\Form\CachesFormType;
+use Oc\Form\UserRegistrationForm;
+use Oc\Repository\CountriesRepository;
+use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,16 +25,21 @@ class UserController extends AbstractController
     /** @var Connection */
     private $connection;
 
+    /** @var CountriesRepository */
+    private $countriesRepository;
+
     /** @var UserRepository */
     private $userRepository;
 
     /**
      * @param Connection $connection
+     * @param CountriesRepository $countriesRepository
      * @param UserRepository $userRepository
      */
-    public function __construct(Connection $connection, UserRepository $userRepository)
+    public function __construct(Connection $connection, CountriesRepository $countriesRepository, UserRepository $userRepository)
     {
         $this->connection = $connection;
+        $this->countriesRepository = $countriesRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -89,7 +97,7 @@ class UserController extends AbstractController
      * @param int $userID
      *
      * @return Response
-     * @Route("/user/{userID}", name="user_by_id")
+     * @Route("/user/profile/{userID}", name="user_by_id")
      */
     public function search_by_user_id(int $userID)
     : Response {
@@ -102,5 +110,33 @@ class UserController extends AbstractController
         }
 
         return $this->render('backend/user/detailview.html.twig', ['user_by_id' => $fetchedUser]);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     * @throws RecordsNotFoundException
+     * @Route("/user/registration", name="user_registration")
+     */
+    public function showRegistrationPage(Request $request)
+    : Response {
+        $fetchedCountries = $this->countriesRepository->fetchAll();
+        $locale = $request->getLocale();
+        $countryList = [];
+
+        foreach ($fetchedCountries as $country) {
+            if ($locale == 'de') {
+                $countryList[$country->de] = $country->de;
+            } else {
+                $countryList[$country->en] = $country->en;
+            }
+        }
+
+        asort($countryList);
+
+        $userRegistrationForm = $this->createForm(UserRegistrationForm::class, null, ['countryList' => $countryList]);
+
+        return $this->render('backend/user/user_registration.html.twig', ['userRegistrationForm' => $userRegistrationForm->createView()]);
     }
 }

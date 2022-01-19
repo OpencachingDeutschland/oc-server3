@@ -48,7 +48,7 @@
                 <br/>
                 {% if not reported_cache_by_id.admin %}
                     <a class="btn btn-primary"
-                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
+                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.userId, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
                 {% else %}
                     <a class="btn btn-primary"
                        href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>

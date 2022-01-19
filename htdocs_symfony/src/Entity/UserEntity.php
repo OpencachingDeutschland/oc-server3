@@ -16,7 +16,7 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var int
      */
-    public $id;
+    public $userId;
 
     /**
      * @var DateTime
@@ -94,6 +94,16 @@ class UserEntity extends AbstractEntity implements UserInterface
     public $language;
 
     /**
+     * @var string
+     */
+    public $description;
+
+    /**
+     * @var bool
+     */
+    public $gdprDeletion;
+
+    /**
      * @var array
      */
     public $roles;
@@ -103,7 +113,7 @@ class UserEntity extends AbstractEntity implements UserInterface
      */
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->userId === null;
     }
 
     public function getRoles(): array

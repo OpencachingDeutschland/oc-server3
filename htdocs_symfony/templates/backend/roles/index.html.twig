@@ -6,7 +6,7 @@
         <h3>{{ 'Security roles' | trans }}..</h3>
         <ul>
             <li>{{ 'You are' | trans }}: {{ app.user.username }}</li>
-            <li>{{ 'id' | trans }}: {{ app.user.id }}</li>
+            <li>{{ 'id' | trans }}: {{ app.user.userId }}</li>
             <li>{{ 'Your role(s)' | trans }}:
                 {% for role in app.user.roles %}
                     {{ role }},

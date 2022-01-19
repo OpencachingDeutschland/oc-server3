@@ -38,7 +38,7 @@
                                 <td>{{ cache.name }}</td>
                                 <td>{{ cache.cache_size.name }}</td>
                                 <td>{{ cache.difficulty | ocFilterDifficulty }}/{{ cache.terrain | ocFilterTerrain }}</td>
-                                <td>{{ cache.user.username }}</td>
+                                <td><a href="{{ path('backend_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></td>
                                 <td>
                                     <a href="/backend/coordinate/{{ cache.latitude }}+{{ cache.longitude }}">{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
                                 <td>{{ cache.wp_gc }}</td>
@@ -62,12 +62,12 @@
                     </table>
                 {% else %}
                     <br/><br/>
-                    <span>Leider keinen Cache mit dem angegebenen OC-Wegpunkt gefunden.. :-(</span>
+                    <span>{{ 'No cache found' | trans }}.. :-(</span>
                 {% endif %}
             </div>
         {% else %}
             <br/><br/>
-            <span>Irgendwas ist kaputt.. :-(</span>
+            <span>{{ 'Something went wrong' | trans }}.. :-(</span>
         {% endif %}
 
     </div>

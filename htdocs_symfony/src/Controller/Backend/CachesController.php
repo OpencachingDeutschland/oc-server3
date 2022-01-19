@@ -58,7 +58,7 @@ class CachesController extends AbstractController
             $inputData = $form->getData();
 
             // send request to DB
-            $fetchedCaches = $this->getCachesForSearchField($inputData['content_caches_searchfield']);
+            $fetchedCaches = $this->getCachesForSearchField($inputData['content_searchfield']);
         }
 
         return $this->render(

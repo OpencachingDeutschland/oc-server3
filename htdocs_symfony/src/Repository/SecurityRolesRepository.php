@@ -123,7 +123,6 @@ class SecurityRolesRepository
      * @param UserEntity $user
      *
      * @return array
-     * @throws RecordsNotFoundException
      */
     public function fetchUserRoles(UserEntity $user)
     : array {
@@ -132,7 +131,7 @@ class SecurityRolesRepository
             ->from(self::TABLE, 'sr')
             ->join('sr', 'user_roles', 'ur', 'sr.id = ur.role_id')
             ->where('ur.user_id = :userId')
-            ->setParameter(':userId', $user->id)
+            ->setParameter(':userId', $user->userId)
             ->execute();
 
         $result = $statement->fetchAll();
@@ -220,7 +219,7 @@ class SecurityRolesRepository
             ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->id = null;
 
         return $entity;
     }

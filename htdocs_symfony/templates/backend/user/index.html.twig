@@ -1,5 +1,49 @@
 {% extends 'backend/base.html.twig' %}
 
 {% block page_content %}
-    <h1>User</h1>
+    <div>
+        <h3>{{ 'User details' | trans }}..</h3>
+
+        {% if userSearchForm is defined %}
+            {{ form_start(userSearchForm) }}
+            {{ form_widget(userSearchForm) }}
+            {{ form_end(userSearchForm) }}
+        {% endif %}
+    </div>
+
+    <div>
+        {% if all_users_by_searchfield is defined and all_users_by_searchfield != 0 %}
+            {% if all_users_by_searchfield %}
+                <br/>
+                <div> {{ 'Found' }}: {{ all_users_by_searchfield | length }} {{ 'user(s)' | trans }}</div>
+                <br/>
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'User Id' | trans }}:</th>
+                        <th scope="col" class="asc">{{ 'Username' | trans }}:</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in all_users_by_searchfield %}
+                        <tr>
+                            <td>{{ user.user_id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   href="{{ path('backend_user_by_id', { 'userID': user.user_id }) }}">{{ 'Details' | trans }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No user found' | trans }}.. :-(</span>
+            {% endif %}
+        {% endif %}
+
+    </div>
+
 {% endblock %}

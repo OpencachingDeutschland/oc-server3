@@ -69,6 +69,36 @@ class UserRepository
     }
 
     /**
+     * @param array $where
+     *
+     * @return UserEntity
+     * @throws RecordNotFoundException
+     */
+    public function fetchOneBy(array $where = [])
+    : UserEntity {
+        $queryBuilder = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
+
+        if (count($where) > 0) {
+            foreach ($where as $column => $value) {
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
+            }
+        }
+
+        $statement = $queryBuilder->execute();
+
+        $result = $statement->fetch();
+
+        if ($statement->rowCount() === 0) {
+            throw new RecordNotFoundException('Record with given where clause not found');
+        }
+
+        return $this->getEntityFromDatabaseArray($result);
+    }
+
+    /**
      * Fetches a user by its id.
      *
      * @throws RecordNotFoundException Thrown when the request record is not found
@@ -210,6 +240,15 @@ class UserRepository
         $entity->userId = null;
 
         return $entity;
+    }
+
+    /**
+     * generate an activation code (e.g. for user registration)
+     *
+     * @return string
+     */
+    public function generateActivationCode() : string {
+        return mb_strtoupper(mb_substr(md5(uniqid('', true)), 0, 13));
     }
 
     /**

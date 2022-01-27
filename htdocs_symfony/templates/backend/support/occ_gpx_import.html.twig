@@ -21,6 +21,7 @@
             {{ form_start(supportUploadGPXForm, {'action': path('backend_support_gpx_import'), 'method': 'POST'}) }}
             {{ form_row(supportUploadGPXForm.gpx_file) }}
             {{ form_row(supportUploadGPXForm.start_upload, {'label': 'Start upload' | trans }) }}
+            {{ form_end(supportUploadGPXForm) }}
         {% endif %}
         <br/>
     </div>

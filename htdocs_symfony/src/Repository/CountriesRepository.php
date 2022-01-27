@@ -194,6 +194,32 @@ class CountriesRepository
     }
 
     /**
+     * fetch all countries from DB, sort them ascending
+     *
+     * @param string $locale
+     *
+     * @return array
+     * @throws RecordsNotFoundException
+     */
+    public function fetchCountryList(string $locale)
+    : array {
+        $fetchedCountries = $this->fetchAll();
+        $countryList = [];
+
+        foreach ($fetchedCountries as $country) {
+            if ($locale == 'de') {
+                $countryList[$country->de] = $country->short;
+            } else {
+                $countryList[$country->en] = $country->short;
+            }
+        }
+
+        ksort($countryList);
+
+        return ($countryList);
+    }
+
+    /**
      * @param CountriesEntity $entity
      *
      * @return array

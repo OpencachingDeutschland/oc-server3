@@ -111,32 +111,4 @@ class UserController extends AbstractController
 
         return $this->render('backend/user/detailview.html.twig', ['user_by_id' => $fetchedUser]);
     }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     * @throws RecordsNotFoundException
-     * @Route("/user/registration", name="user_registration")
-     */
-    public function showRegistrationPage(Request $request)
-    : Response {
-        $fetchedCountries = $this->countriesRepository->fetchAll();
-        $locale = $request->getLocale();
-        $countryList = [];
-
-        foreach ($fetchedCountries as $country) {
-            if ($locale == 'de') {
-                $countryList[$country->de] = $country->de;
-            } else {
-                $countryList[$country->en] = $country->en;
-            }
-        }
-
-        asort($countryList);
-
-        $userRegistrationForm = $this->createForm(UserRegistrationForm::class, null, ['countryList' => $countryList]);
-
-        return $this->render('backend/user/user_registration.html.twig', ['userRegistrationForm' => $userRegistrationForm->createView()]);
-    }
 }

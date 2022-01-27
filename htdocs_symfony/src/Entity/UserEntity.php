@@ -51,22 +51,22 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var int
      */
-    public $emailProblems;
+    public $emailProblems = 0;
 
     /**
      * @var float
      */
-    public $latitude;
+    public $latitude = 0;
 
     /**
      * @var float
      */
-    public $longitude;
+    public $longitude = 0;
 
     /**
      * @var bool
      */
-    public $isActive;
+    public $isActive = 1;
 
     /**
      * @var string
@@ -91,17 +91,17 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var string
      */
-    public $language;
+    public $language = 'DE';
 
     /**
      * @var string
      */
-    public $description;
+    public $description = '';
 
     /**
      * @var bool
      */
-    public $gdprDeletion;
+    public $gdprDeletion = 0;
 
     /**
      * @var array

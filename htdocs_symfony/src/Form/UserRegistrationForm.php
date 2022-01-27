@@ -2,6 +2,7 @@
 
 namespace Oc\Form;
 
+use Oc\Entity\UserEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -11,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  *
@@ -25,99 +28,113 @@ class UserRegistrationForm extends AbstractType
     {
         $builder
             ->add(
-                'content_username', null, [
-                                      'attr' => [
-                                          'autofocus' => 'autofocus',
-                                          'size' => '10%',
-                                          'pattern' => '[a-zA-Z0-9_-]{3,60}',
-                                          'style' => 'width: 250px;'
-                                      ],
-                                      'required' => true,
-                                      'disabled' => false,
-                                      'label' => false,
-                                      'trim' => true
+                'username', null, [
+                             'attr' => [
+                                 'autofocus' => 'autofocus',
+                                 'size' => '10%',
+                                 'pattern' => '[a-zA-Z0-9_-]{3,60}',
+                                 'style' => 'width: 250px;'
+                             ],
+                             'required' => true,
+                             'disabled' => false,
+                             'label' => false,
+                             'trim' => true
+                         ]
+            )
+            ->add(
+                'firstname', null, [
+                               'attr' => [
+                                   'size' => '10%',
+                                   'minlength' => '3',
+                                   'maxlength' => '100',
+                                   'style' => 'width: 250px;'
+                               ],
+                               'required' => false,
+                               'disabled' => false,
+                               'label' => false,
+                               'trim' => true
+                           ]
+            )
+            ->add(
+                'lastname', null, [
+                              'attr' => [
+                                  'size' => '10%',
+                                  'minlength' => '3',
+                                  'maxlength' => '100',
+                                  'style' => 'width: 250px;'
+                              ],
+                              'required' => false,
+                              'disabled' => false,
+                              'label' => false,
+                              'trim' => true
+                          ]
+            )
+            ->add(
+                'country', ChoiceType::Class, [
+                             'attr' => [
+                                 'expanded' => false,
+                                 'multiple' => false,
+                                 'style' => 'width: 250px;'
+                             ],
+                             'choices' => $options['countryList'],
+                             'required' => false,
+                             'disabled' => false,
+                             'label' => false,
+                         ]
+            )
+            ->add(
+                'email', EmailType::Class, [
+                           'attr' => [
+                               'size' => '10%',
+                               'minlength' => '3',
+                               'maxlength' => '100',
+                               'style' => 'width: 250px;'
+                           ],
+                           'required' => true,
+                           'disabled' => false,
+                           'label' => false,
+                           'trim' => true
+                       ]
+            )
+            ->add(
+                'plainPassword', RepeatedType::Class, [
+                              'options' => [
+                                  'attr' => [
+                                      'size' => '10%',
+                                      'minlength' => '8',
+                                      'maxlength' => '60',
+                                      // TODO: pattern anpassen.Aktuell: Minimum eight characters, at least one letter, one number and one special character.
+//                                      'pattern' => '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
+                                      'style' => 'width: 250px;'
                                   ]
-            )
-            ->add(
-                'content_first_name', null, [
-                                        'attr' => [
-                                            'size' => '10%',
-                                            'minlength' => '3',
-                                            'maxlength' => '100',
-                                            'style' => 'width: 250px;'
-                                        ],
-                                        'required' => false,
-                                        'disabled' => false,
-                                        'label' => false,
-                                        'trim' => true
-                                    ]
-            )
-            ->add(
-                'content_last_name', null, [
-                                       'attr' => [
-                                           'size' => '10%',
-                                           'minlength' => '3',
-                                           'maxlength' => '100',
-                                           'style' => 'width: 250px;'
-                                       ],
-                                       'required' => false,
-                                       'disabled' => false,
-                                       'label' => false,
-                                       'trim' => true
-                                   ]
-            )
-            ->add(
-                'content_country', ChoiceType::Class, [
-                                     'attr' => [
-                                         'expanded' => false,
-                                         'multiple' => false,
-                                         'style' => 'width: 250px;'
-                                     ],
-                                     'choices' => $options['countryList'],
-                                     'required' => false,
-                                     'disabled' => false,
-                                     'label' => false,
-                                 ]
-            )
-            ->add(
-                'content_email', EmailType::Class, [
-                                   'attr' => [
-                                       'size' => '10%',
-                                       'minlength' => '3',
-                                       'maxlength' => '100',
-                                       'style' => 'width: 250px;'
-                                   ],
-                                   'required' => true,
-                                   'disabled' => false,
-                                   'label' => false,
-                                   'trim' => true
-                               ]
-            )
-            ->add(
-                'content_password', RepeatedType::Class, [
-                                      'options' => [
-                                          'attr' => [
-                                              'size' => '10%',
-                                              'minlength' => '8',
-                                              'maxlength' => '60',
-                                              // TODO: pattern anpassen.Aktuell: Minimum eight characters, at least one letter, one number and one special character.
-                                              'pattern' => '^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
-                                              'style' => 'width: 250px;'
-                                          ]
-                                      ],
-                                      'first_options' => ['label' => false, 'error_bubbling' => true],
-                                      'second_options' => ['label' => false],
-                                      'required' => true,
-                                      'disabled' => false,
-                                      'trim' => true,
-                                      'type' => PasswordType::class,
-                                      'invalid_message' => 'Your password does not match the confirmation.'
-                                  ]
+                              ],
+                              //                                      'error_bubbling' => true,
+                              'first_options' => ['label' => false, 'error_bubbling' => true],
+                              'second_options' => ['label' => false],
+                              'required' => true,
+                              'disabled' => false,
+                              'trim' => true,
+                              'type' => PasswordType::class,
+                              'invalid_message' => 'Your passwords do not match.',
+                              'mapped' => false,
+//                              'constraints' => [
+//                                  new NotBlank([
+//                                                   'message' => 'Please enter a password',
+//                                               ]),
+//                                  new Length([
+//                                                 'min' => 8,
+//                                                 'minMessage' => 'Your password should be at least {{ limit }} characters',
+//                                                 // max length allowed by Symfony for security reasons
+//                                                 'max' => 60,
+//                                             ]),
+//                              ],
+                          ]
             )
             ->add(
                 'tos', CheckboxType::class, [
                          'attr' => [],
                          'label' => false,
+                         'mapped' => false,
                          'required' => true,
                      ]
             )
@@ -138,6 +155,7 @@ class UserRegistrationForm extends AbstractType
     : void {
         $resolver->setDefaults([
                                    'countryList' => [],
+                                   'data_class' => UserEntity::class,
                                ]);
     }
 }

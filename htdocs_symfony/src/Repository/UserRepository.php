@@ -202,8 +202,9 @@ class UserRepository
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
-
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
+        //        dd($databaseArray);
+        //        die();
 
         $this->connection->update(
             self::TABLE,
@@ -247,7 +248,9 @@ class UserRepository
      *
      * @return string
      */
-    public function generateActivationCode() : string {
+    public function generateActivationCode()
+    : string
+    {
         return mb_strtoupper(mb_substr(md5(uniqid('', true)), 0, 13));
     }
 
@@ -286,11 +289,11 @@ class UserRepository
             'first_name' => $entity->firstname,
             'last_name' => $entity->lastname,
             'country' => $entity->country,
+            'permanent_login_flag' => $entity->permanentLoginFlag,
             'activation_code' => $entity->activationCode,
             'language' => $entity->language,
             'description' => $entity->description,
             'gdpr_deletion' => $entity->gdprDeletion,
-            'roles' => $entity->roles
         ];
     }
 
@@ -313,6 +316,7 @@ class UserRepository
         $entity->firstname = $data['first_name'];
         $entity->lastname = $data['last_name'];
         $entity->country = $data['country'];
+        $entity->permanentLoginFlag = $data['permanent_login_flag'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
         $entity->description = $data['description'];

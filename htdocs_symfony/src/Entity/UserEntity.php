@@ -66,7 +66,7 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var bool
      */
-    public $isActive = 1;
+    public $isActive = false;
 
     /**
      * @var string
@@ -82,6 +82,11 @@ class UserEntity extends AbstractEntity implements UserInterface
      * @var string
      */
     public $country;
+
+    /**
+     * @var bool
+     */
+    public $permanentLoginFlag = true;
 
     /**
      * @var string
@@ -101,7 +106,7 @@ class UserEntity extends AbstractEntity implements UserInterface
     /**
      * @var bool
      */
-    public $gdprDeletion = 0;
+    public $gdprDeletion = false;
 
     /**
      * @var array

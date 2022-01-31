@@ -320,7 +320,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" style="background-color:#FEFEFE;border:solid 1px black;">
                         <tr>
                             <td width="70px" style="vertical-align:top">
-                                <img src="./images/npa.gif" alt="" />
+                                <img src="resource2/{$opt.template.style}/images/viewcache/npa.png" alt="" />
                             </td>
                             <td style="text-align:left; vertical-align:top">
                                 {t 1=$opt.cms.npa}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />

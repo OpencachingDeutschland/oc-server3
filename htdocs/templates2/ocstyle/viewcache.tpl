@@ -501,7 +501,7 @@ function showalllists()
     {if count($npaareasWarning) > 0}
         <div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
             <p style="line-height: 1.6em;">
-                <img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
+                <img src="resource2/{$opt.template.style}/images/viewcache/npa.png" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
                 {t 1=$npahelplink}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
                 {foreach from=$npaareasWarning item=npaItem name=npaareas}
                     {$npaItem.npaTypeName|escape}

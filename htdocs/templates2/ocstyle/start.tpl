@@ -59,7 +59,7 @@
     {elseif $section == 'events'}
         <div class="content2-container bg-blue02 content2-section-no-p">
             <p class="content-title-noshade-size3">
-                <img src="resource2/{$opt.template.style}/images/cacheicon/event.gif" style="margin-right: 10px;"
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-event.png" style="margin-right: 10px;"
                      width="24" height="24" alt=""/>
                 {t 1=$usercountry|escape}The next events in %1{/t}
                 {if $total_events > $events|@count}
@@ -75,7 +75,7 @@
     {elseif $section == 'logpics'}
         <div class="content2-container bg-blue02" style="margin-bottom:6px">
             <p class="content-title-noshade-size3">
-                <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" style="margin-right: 10px;"
+                <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.png" style="margin-right: 10px;"
                      width="24" height="24"/>
                 <a href="newlogpics.php"
                    style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
@@ -124,7 +124,7 @@
     {elseif $section == 'newcaches'}
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size3">
-                <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;"
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" style="margin-right: 10px;"
                      width="24" height="24" alt=""/>
                 <a href="newcaches.php?country={$usercountryCode}"
                    style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>

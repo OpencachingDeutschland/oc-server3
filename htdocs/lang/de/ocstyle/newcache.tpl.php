@@ -120,7 +120,7 @@ function toggleAttr(id)
 </script>
 
 <div class="content2-pagetitle">
-    <img src="resource2/ocstyle/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
+    <img src="resource2/ocstyle/images/misc/32x32-traditional.png" style="margin-right: 10px;" width="32" height="32" alt="" />
     {t}Submit a new cache{/t}
 </div>
 
@@ -138,7 +138,7 @@ function toggleAttr(id)
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td class="help" colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {firstcache_note}
         </td>
     </tr>
@@ -218,7 +218,7 @@ function toggleAttr(id)
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+        <td class="help"><img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}The effort is of course only be estimated and can vary depending on environmental influences.
                  If you can not make sufficiently detailed information, write 0 (zero) in both fields.
                  (See also: <a href="articles.php?page=cacheinfo#time" target="_blank">description</a>){/t}
@@ -234,7 +234,7 @@ function toggleAttr(id)
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td class="help"><img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+        <td class="help"><img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}If the cache was published at another geocaching website, enter the corresponding waypoint here.{/t} <u>{t}Important:{/t}</u> {t}The geocache description at Opencaching must be kept up to date! Description changes on other websites must be applied to the Opencaching listing timely.{/t}<br />
         </td>
     </tr>
@@ -243,7 +243,7 @@ function toggleAttr(id)
         <td class="header-small" colspan="2">
             <div class="content2-container bg-blue02">
                 <p class="content-title-noshade-size2">
-                    <img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
+                    <img src="resource2/ocstyle/images/description/22x22-tools.png" width="22" height="22" align="middle" border="0" />
                     {t}Cache attributes{/t}&nbsp;&nbsp;
                 </p>
             </div>
@@ -257,7 +257,7 @@ function toggleAttr(id)
         <td class="header-small" colspan="2">
             <div class="content2-container bg-blue02">
                 <p class="content-title-noshade-size2">
-                    <img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
+                    <img src="resource2/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
                     {t}Description{/t}
                 </p>
             </div>
@@ -275,7 +275,7 @@ function toggleAttr(id)
     </tr>
     <tr>
       <td class="help" colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
           {t}You can add more descriptions in other languages publishing the cache.{/t}
         </td>
     </tr>
@@ -324,7 +324,7 @@ function toggleAttr(id)
         <td class="header-small" colspan="2">
             <div class="content2-container bg-blue02">
                 <p class="content-title-noshade-size2">
-                    <img src="lang/de/ocstyle/images/description/22x22-description.png" width="22" height="22" align="middle" border="0" />
+                    <img src="resource2/ocstyle/images/description/22x22-misc.png" width="22" height="22" align="middle" border="0" />
                     {t}Others{/t}
                 </p>
             </div>
@@ -332,7 +332,7 @@ function toggleAttr(id)
     </tr>
     <tr>
         <td class="help" colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}You can add additional pictures after creating the cache.{/t}
         </td>
     </tr>
@@ -348,7 +348,7 @@ function toggleAttr(id)
     </tr>
     <tr>
         <td colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}For Events: The date of event!{/t}
         </td>
     </tr>
@@ -376,7 +376,7 @@ function toggleAttr(id)
     </tr>
     <tr>
         <td class="help" colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+            <img src="resource2/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
         </td>
     </tr>

@@ -100,7 +100,7 @@
 {* all-caches statistics *}
 <div class="content2-container bg-blue02">
     <p class="content-title-noshade-size2">
-        <img src="resource2/{$opt.template.style}/images/cacheicon/20x20-3.png" style="margin-right: 10px;" />
+        <img src="resource2/{$opt.template.style}/images/misc/22x22-statistic.png" style="margin-right: 10px;" />
         {t}User statistics{/t}
     </p>
 </div>

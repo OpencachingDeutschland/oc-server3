@@ -23,7 +23,7 @@
                     <th width="50px">{t}Type{/t}</th>
                     <th width="50px">{t}State{/t}</th>
                     <th width="450px">{t}Name{/t}</th>
-                    <th width="50px" style="text-align:center"><img src="images/rating-star-shadow.png" title="{t}total recommendations{/t}" width="14" height="13" style="margin-top: -3px; "/></th>
+                    <th width="50px" style="text-align:center"><img src="/resource2/ocstyle/images/viewcache/cache-rate.png" title="{t}total recommendations{/t}" width="14" height="13" style="margin-top: -3px; "/></th>
                     <th width="100px"><nobr>{t}Recommended on{/t}</nobr></th>
                     <th></th>
                 </tr>

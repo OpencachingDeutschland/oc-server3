@@ -14,7 +14,7 @@
                 <tr class="cachelistheader">
                     <th width="30px">{t}Type{/t}</th>
                     <th width="570px">{t}Name{/t}</th>
-                    <th width="50px" style="text-align:center"><img src="images/rating-star-shadow.png" title="{t}total recommendations{/t}" width="14" height="13" style="margin-top: -3px; "/></th>
+                    <th width="50px" style="text-align:center"><img src="/resource2/ocstyle/images/viewcache/cache-rate.png" title="{t}total recommendations{/t}" width="14" height="13" style="margin-top: -3px; "/></th>
                     <th width="50px">{t}State{/t}</th>
                 </tr>
                 {foreach from=$ratings item=ratingItem}

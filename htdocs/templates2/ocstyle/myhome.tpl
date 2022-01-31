@@ -97,7 +97,7 @@ function myHomeLoad()
 {* Log pictures *}
 <div class="content2-container bg-blue02" style="margin-top:20px;">
     <p class="content-title-noshade-size3">
-        <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.gif" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
+        <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.png" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
         {t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
         {if $pictures|@count > 0 && $allpics === false}<span class="content-title-link">[<a href="myhome.php?allpics=ownlogs">{t}Show all{/t}</a>]</span>{/if}
     </p>
@@ -138,7 +138,7 @@ function myHomeLoad()
     {* Geocaches hidden *}
     <div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px">
         <p class="content-title-noshade-size3">
-            <img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
+            <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
             {t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
             {* Ocprop: (find|us|own)erid=([0-9]+) *}
             {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}

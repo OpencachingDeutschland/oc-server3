@@ -2,6 +2,7 @@
 * You can find the license in the docs directory
 ***************************************************************************}
 <div class="content2-pagetitle">
+    <img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px;" width="32" height="32" alt="" />
     Versionsgeschichte
 </div>
 <div class="content-txtbox-noshade changelog" style="padding-right: 25px;">

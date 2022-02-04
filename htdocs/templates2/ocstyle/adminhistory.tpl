@@ -30,7 +30,7 @@
     {if !$reportdisplay || $reports|@count}
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size2">
-                <img src="resource2/{$opt.template.style}/images/misc/32x32-tools.png" style="margin-right: 10px;" width="22" height="22" alt="" />
+                <img src="resource2/{$opt.template.style}/images/description/22x22-tools.png" style="margin-right: 10px;" width="22" height="22" alt="" />
                 {if $reportdisplay}    {t}Other reports for this cache{/t}{else}{t}Cache reports{/t}{/if}
             </p>
         </div>
@@ -81,7 +81,7 @@
     {if !$reportdisplay || $status_changes|@count}
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size2">
-                <img src="resource2/{$opt.template.style}/images/viewcache/16x16-maintenance.png" style="margin-right: 10px;" width="16" height="16" alt="" />
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-maintenance.png" style="margin-right: 10px;" width="22" height="22" alt="" />
                 {t}Status changes{/t} <small>{t}since June 2013{/t}</small>
             </p>
         </div>
@@ -110,7 +110,7 @@
     {if !$reportdisplay || $coordinates|@count > 1}
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size2">
-                <img src="resource2/{$opt.template.style}/images/description/20x20-compass.png" style="margin-right: 10px;" width="20" height="20" alt="" />
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-compass.png" style="margin-right: 10px;" width="22" height="22" alt="" />
                 {t}Coordinate changes{/t}
             </p>
         </div>

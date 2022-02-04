@@ -100,7 +100,7 @@
 {* all-caches statistics *}
 <div class="content2-container bg-blue02">
     <p class="content-title-noshade-size2">
-        <img src="resource2/{$opt.template.style}/images/misc/22x22-statistic.png" style="margin-right: 10px;" />
+        <img src="resource2/{$opt.template.style}/images/misc/22x22-statistic.png" style="margin-right: 10px;" width="22" height="22" />
         {t}User statistics{/t}
     </p>
 </div>
@@ -129,7 +129,7 @@
 {* OConly statistics *}
 <div class="content2-container bg-blue02">
     <p class="content-title-noshade-size2">
-        <img src="resource2/{$opt.template.style}/images/misc/40x22-oconly.png" style="margin-right: 10px;" />
+        <img src="resource2/{$opt.template.style}/images/misc/40x22-oconly.png" style="margin-right: 10px;" width="40" height="22" />
         {t}OConly statistics{/t}
     </p>
 </div>
@@ -163,7 +163,7 @@
     {else}
         <tr>
             <td valign="middle" class="header-small" style="white-space:nowrap" width="1%">
-                <img src="resource2/ocstyle/images/log/16x16-found.png" style="padding-right:2px"  />
+                <img src="resource2/ocstyle/images/log/16x16-found.png" style="padding-right:2px" width="16" height="16" />
                 &nbsp;<b>{t}OConly-81 statistics:{/t}</b>
             </td>
             <td valign="middle">
@@ -183,7 +183,7 @@
 {if $cachelists|@count}
     <div class="content2-container bg-blue02" id="cachelists">
         <p class="content-title-noshade-size2">
-            <img src="resource2/{$opt.template.style}/images/misc/32x32-list.png" style="margin-right: 10px; height:22px" />
+            <img src="resource2/{$opt.template.style}/images/misc/22x22-list.png" style="margin-right: 10px" width="22" height="22" />
         {t}Cache lists{/t}
         </p>
     </div>

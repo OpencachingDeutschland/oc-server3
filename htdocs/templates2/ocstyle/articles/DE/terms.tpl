@@ -1,9 +1,10 @@
 {***************************************************************************
 * You can find the license in the docs directory
 ***************************************************************************}
-<h1 class="h1-responsive">
-    Nutzungsbedingungen
-</h1>
+<div class="content2-pagetitle">
+    <img src="resource2/{$opt.template.style}/images/misc/32x32-impressum.png" style="margin-right: 10px;" width="32"
+         height="32" alt=""/> Nutzungsbedingungen
+</div>
 
 <h2 class="h2-responsive">Präambel / Vorbemerkungen</h2>
 <p>Geocaching ist eine “Sportart” (ähnlich wie Wandern), welche auf neue und innovative Technologien angewiesen ist und

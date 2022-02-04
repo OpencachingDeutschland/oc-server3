@@ -78,7 +78,7 @@ function myHomeLoad()
             <tr>
                 <td><nobr>
                     {include file="res_logtype.tpl" type=$logItem.type}
-                    {if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" />{/if}
+                    {if $logItem.oc_team_comment}<img src="resource2/{$opt.template.style}/images/oclogo/oc-team-comment.png" alt="OC-Team" title="{t}OC team comment{/t}" width="13" height="16" />{/if}
                 </nobr></td>
                 <td style="white-space:nowrap; text-align:center">{$logItem.date|date_format:$opt.format.datelong}</td>
                 <td>
@@ -97,7 +97,7 @@ function myHomeLoad()
 {* Log pictures *}
 <div class="content2-container bg-blue02" style="margin-top:20px;">
     <p class="content-title-noshade-size3">
-        <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.png" width="24" height="24"  style="margin-right: 10px;" />&nbsp;
+        <img src="resource2/{$opt.template.style}/images/misc/22x22-pictures.png" width="22" height="22"  style="margin-right: 10px;" />&nbsp;
         {t 1=$total_pictures}Log pictures: %1{/t} &nbsp;
         {if $pictures|@count > 0 && $allpics === false}<span class="content-title-link">[<a href="myhome.php?allpics=ownlogs">{t}Show all{/t}</a>]</span>{/if}
     </p>
@@ -138,7 +138,7 @@ function myHomeLoad()
     {* Geocaches hidden *}
     <div class="content2-container bg-blue02" id="mycaches" style="margin-top:5px">
         <p class="content-title-noshade-size3">
-            <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" width="22" height="20"  style="margin-right: 10px;" />&nbsp;
+            <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" width="22" height="22"  style="margin-right: 10px;" />&nbsp;
             {t 1=$hidden}Geocaches hidden: %1{/t} &nbsp;
             {* Ocprop: (find|us|own)erid=([0-9]+) *}
             {if $caches|@count > 0}<span class="content-title-link">[<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=0&calledbysearch=0">{t}Show details{/t}</a>{if $active < $hidden}]&nbsp; [<a href="search.php?showresult=1&amp;expert=0&amp;output=HTML&amp;sort=bycreated&amp;ownerid={$login.userid}&amp;searchbyowner=&amp;f_inactive=1&f_unpublished=1&calledbysearch=0">... {t}only active caches{/t}</a>]{/if}</span>{/if}
@@ -160,10 +160,10 @@ function myHomeLoad()
                     <span style="line-height:2em"><b>{t}Your geocaches hidden{/t}</b><span id="toggle_archived_option" style="display:none">{if $archived>0} (<a href="javascript:toggle_archived()" style="outline:none"><span id="hide_archived">{t}hide archived{/t}</span><span id="show_archived" style="display:none">{t}show archived{/t}</span></a>){/if}</span>{t}#colonspace#{/t}:</span>
                 </td>
                 <td style="text-align:right">
-                    <span style="line-height:2em"><img src="images/rating-star.gif" width="17" height="16" title="{t}with recommendation{/t}" /></span>
+                    <span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/viewcache/cache-rate.png" width="16" height="16" title="{t}with recommendation{/t}" /></span>
                 </td>
                 <td style="text-align:right">
-                    <span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}Found{/t}" title="{t}Found{/t}"  /></span>
+                    <span style="line-height:2em"><img src="resource2/{$opt.template.style}/images/log/16x16-found.png" width="16" height="16" alt="{t}Found{/t}" title="{t}Found{/t}"  /></span>
                 </td>
                 <td style="text-align:left"><span style="line-height:2em; text-decoration: underline;"><b><a href="myhome.php?sort=lastLog">{t}Last log{/t}</a></b></span></td>
             </tr>

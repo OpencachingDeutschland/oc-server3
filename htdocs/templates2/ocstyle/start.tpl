@@ -26,8 +26,8 @@
                     <tr>
                         <td>
                             <p class="content-title-noshade-size3">
-                                <img src="resource2/{$opt.template.style}/images/misc/32x32-news.png"
-                                     style="margin-right: 10px;" width="24" height="24" alt=""/>
+                                <img src="resource2/{$opt.template.style}/images/misc/22x22-news.png"
+                                     style="margin-right: 10px;" width="22" height="22" alt=""/>
                                 <a href="https://blog.opencaching.de/"
                                    style="color:rgb(88,144,168); text-decoration: none;">{t}News{/t}</a>
                                 &nbsp; <span class="content-title-link">[<a
@@ -36,7 +36,8 @@
                         </td>
                         {if "$newsfeed" != ""}
                             <td style="text-align:right">
-                                <a href="{$newsfeed}"><img src="resource2/ocstyle/images/media/22x22-feed.png"/></a>
+                                <a href="{$newsfeed}"><img src="resource2/ocstyle/images/media/22x22-feed.png"
+                                    width="22" height="22"/></a>
                             </td>
                             <td width="4px"></td>
                         {/if}
@@ -60,7 +61,7 @@
         <div class="content2-container bg-blue02 content2-section-no-p">
             <p class="content-title-noshade-size3">
                 <img src="resource2/{$opt.template.style}/images/misc/22x22-event.png" style="margin-right: 10px;"
-                     width="24" height="24" alt=""/>
+                     width="22" height="22" alt=""/>
                 {t 1=$usercountry|escape}The next events in %1{/t}
                 {if $total_events > $events|@count}
                     &nbsp;
@@ -75,8 +76,8 @@
     {elseif $section == 'logpics'}
         <div class="content2-container bg-blue02" style="margin-bottom:6px">
             <p class="content-title-noshade-size3">
-                <img src="resource2/{$opt.template.style}/images/misc/32x32-pictures.png" style="margin-right: 10px;"
-                     width="24" height="24"/>
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-pictures.png" style="margin-right: 10px;"
+                     width="22" height="22"/>
                 <a href="newlogpics.php"
                    style="color:rgb(88,144,168); text-decoration: none;">{t}New log pictures{/t}</a>
                 &nbsp; <span class="content-title-link">[<a href="newlogpics.php">{t}more{/t}...</a>]</span>
@@ -89,8 +90,8 @@
     {elseif $section == 'recommendations'}
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size3">
-                <img src="resource2/{$opt.template.style}/images/misc/32x32-winner.png" style="margin-right: 10px;"
-                     width="24" height="24" alt=""/>
+                <img src="resource2/{$opt.template.style}/images/misc/22x22-winner.png" style="margin-right: 10px;"
+                     width="22" height="22" alt=""/>
                 <a href="tops.php" style="color:rgb(88,144,168); text-decoration: none;">{t}Current top ratings{/t}</a>
             </p>
         </div>
@@ -104,8 +105,8 @@
             <div class="buffer" style="width: 500px;height: 2px;">&nbsp;</div>
             <div class="content2-container bg-blue02">
                 <p class="content-title-noshade-size3">
-                    <img src="resource2/ocstyle/images/misc/32x32-news.png" style="margin-right: 10px;" alt=""
-                         width="24" height="24"/>
+                    <img src="resource2/ocstyle/images/misc/22x22-news.png" style="margin-right: 10px;" alt=""
+                         width="22" height="22"/>
                     <a href="{$forum_link|escape}"
                        style="color: rgb(88, 144, 168); text-decoration: none;">{t 1=$forum_name|escape}New forum topcis (%1){/t}</a>
                 </p>
@@ -125,7 +126,7 @@
         <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size3">
                 <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" style="margin-right: 10px;"
-                     width="24" height="24" alt=""/>
+                     width="22" height="22" alt=""/>
                 <a href="newcaches.php?country={$usercountryCode}"
                    style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
                 &nbsp; <span class="content-title-link">[<a href="newcaches.php">{t}more{/t}...</a>]</span>

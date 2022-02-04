@@ -682,7 +682,7 @@ input.waypoint { text-transform: uppercase; }
 /* 9.1  Common               */
 /*---------------------------*/
 .notice {overflow: hidden; width: 735px; height: 24px; margin: 0 0 0 0; padding: 0 16px 12px 20px; color: rgb(88,144,168); font-style: italic; font-size: 11px; background-image: url(../images/viewcache/16x16-info.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
-.warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0 0 0 0; padding: 8px 0 0 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-impressum.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
+.warning {overflow: hidden;  width: 735px; height: 24px; border: 1px solid black; background-color: rgb(240,100,100); margin: 0 0 0 0; padding: 8px 0 0 32px; color: rgb(50,50,50); font-weight: bold; font-size: 12px; background-image: url(../images/misc/32x32-warning.png); background-position: top left; background-repeat:no-repeat;behavior: url(resource2/ocstyle/css/iepngfix.htc);}
 
 .errormsg {color: rgb(240,100,100); font-weight: bold;}
 .okmsg {color: rgb(0,191,0); font-weight: bold;}

@@ -18,6 +18,10 @@
     <div class="changelog-changes">
 
         <p id="current"><strong>Current Changes</strong></p>
+        <p>Newer updates can be found in the <a href="https://blog.opencaching.de/roadmap/" target="_blank">Opencaching-
+            Blog</a>.</p>
+
+        <p id="additional"><strong>Additional Changes</strong></p>
         <ul>
             <li>03.12.2018 - caches on profil page are sorted by last found date</li>
             <li>30.11.2018 - replace minimap with globi on safari cache listings</li>

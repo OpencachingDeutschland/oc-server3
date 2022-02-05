@@ -12,63 +12,70 @@
         der neue Verein Opencaching Deutschland sie Mitte 2012 unter der Versionsnummer&nbsp;3.0 wieder aufnahm.</p>
 
     <p>Im Folgenden sind alle Veränderungen ab OC Version&nbsp;3.0 aufgelistet. Manche Kleinigkeiten wurden zur besseren
-        Übersicht weggelassen; sie sind im <a href="http://redmine.opencaching.de/projects/oc-dev/roadmap">Issue-Tracker</a>,
+        Übersicht weggelassen; sie sind im <a href="https://opencaching.atlassian.net/jira/core/projects/RED/board">Issue-Tracker</a>,
         in der <a href="https://github.com/OpencachingDeutschland/oc-server3/commits/stable">Codehistorie</a> und im
-        <a href="http://forum.opencaching.de/index.php?board=43.0">Entwicklerforum</a> nachlesbar. Neue Funktionen
+        <a href="https://forum.opencaching.de/viewforum.php?f=43&sid=5c2bc53c2a4be44e62c44d58330f8c8f">Entwicklerforum</a> nachlesbar. Neue Funktionen
         werden manchmal schon vorab freigegeben.
     </p>
 
-    <p>Eine redaktionell aufbereitete Erläuterung neuer OC-Versionen gibt es auch im Opencaching- und im
+    <p><strong>Neuere Updates werden im
+        <a href="https://blog.opencaching.de/roadmap/" target="_blank">Opencaching-Blog</a> aufgeführt.</strong></p>
+
+
+    <p>Links zu älteren, redaktionell aufbereitete Erläuterung zu OC-Versionen im <em>Opencaching-</em> und im
         <em>Altmetall</em>-Blog:</p>
     <ul>
-        <li>
-            <a href="https://blog.dafb-o.de/oc-3-0v18-marker-bei-koordinatensuche-fotos-sortieren-koordinatenumrechnung/">Version
-                18</a>: Marker bei Koordinatensuche, Fotos sortieren, Koordinatenumrechnung
+        <li><a href="https://web.archive.org/web/20160415144056/https://blog.dafb-o.de/oc-3-0v18-marker-bei-koordinatensuche-fotos-sortieren-koordinatenumrechnung/">
+            Version 18</a>: Marker bei Koordinatensuche, Fotos sortieren, Koordinatenumrechnung
         </li>
-        <li><a href="http://blog.opencaching.de/2016/03/oc-3-0v17-wartungszustand-loggen-koordinatenhistorien/">Version
-                17</a>: Wartungszustand loggen, Koordinatenhistorien
+        <li><a href="https://web.archive.org/web/20170704102709/https://blog.opencaching.de/2016/03/oc-3-0v17-wartungszustand-loggen-koordinatenhistorien/">
+            Version 17</a>: Wartungszustand loggen, Koordinatenhistorien
         </li>
-        <li><a href="http://blog.opencaching.de/2016/02/oc-30v16/">Version 16</a>: Sortierbare Suche, Unicode-Zeichen
-            uvm.
+        <li><a href="http://blog.opencaching.de/2016/02/oc-30v16/">
+            Version 16</a>: Sortierbare Suche, Unicode-Zeichen uvm.
         </li>
-        <li><a href="http://blog.opencaching.de/2015/09/oc-30v14/">Version 15</a>: Weitergabe privater Cachelisten,
-            Lesezeichen für Cachelisten, Anzeige der Empfehlungen
+        <li><a href="http://blog.opencaching.de/2015/09/oc-30v14/">
+            Version 15</a>: Weitergabe privater Cachelisten, Lesezeichen für Cachelisten, Anzeige der Empfehlungen
         </li>
-        <li><a href="https://blog.dafb-o.de/opencaching-3v14/">Version 14</a>: Ausbau der Cachelistenfunktionen, Zähmung
-            des HTML-Purifiers, Sprachsuche ...
+        <li><a href="https://web.archive.org/web/20160503034601/https://blog.dafb-o.de/opencaching-3v14/">
+            Version 14</a>: Ausbau der Cachelistenfunktionen, Zähmung des HTML-Purifiers, Sprachsuche ...
         </li>
-        <li><a href="https://blog.dafb-o.de/oc-3-0v13-listen-neue-suchoption-und-mehr/">Version 13</a>: Listen, neue
-            Suchoption und mehr ...
+        <li><em data-href="https://blog.dafb-o.de/oc-3-0v13-listen-neue-suchoption-und-mehr/">
+            Version 13</em>: Listen, neue Suchoption und mehr ...
         </li>
-        <li><a href="https://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">Version 11</a>: Automatische
-            Verkleinerung von Bildern, Links zu Logeinträgen ...
+        <li><a href="https://web.archive.org/web/20160526114758/https://blog.dafb-o.de/opencaching-3-0-version-11-veroeffentlicht/">
+            Version 11</a>: Automatische Verkleinerung von Bildern, Links zu Logeinträgen ...
         </li>
-        <li><a href="https://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">Version 10</a>: Nachladen von
-            Logeinträgen, ausführliche Statistik im Benutzerprofil ...
+        <li><a href="https://web.archive.org/web/20160514223220/https://blog.dafb-o.de/opencaching-de-version-10-freigegeben/">
+            Version 10</a>: Nachladen von Logeinträgen, ausführliche Statistik im Benutzerprofil ...
         </li>
-        <li><a href="https://blog.dafb-o.de/alle-neune-oder-ein-update-fuer-opencachingde/">Version 9</a>: Suchfunktion,
-            OConly-Features, Liste der eigenen Caches + Loghistorie, Schutzgebiete ...
+        <li><a href="https://web.archive.org/web/20160511022101/https://blog.dafb-o.de/alle-neune-oder-ein-update-fuer-opencachingde/">
+            Version 9</a>: Suchfunktion, OConly-Features, Liste der eigenen Caches + Loghistorie, Schutzgebiete ...
         </li>
-        <li><a href="https://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">Version 8</a>: Statuslogs,
-            Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches, Kartenfilteroptionen speichern,
-            automatische Archivierung
+        <li><a href="https://blog.dafb-o.de/opencaching-3-0-version-8-veroeffentlicht/">
+            Version 8</a>: Statuslogs, Listinglayout, Koordinaten für zusätzliche Wegpunkte, Safari-Caches,
+            Kartenfilteroptionen speichern, automatische Archivierung
         </li>
-        <li><a href="https://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">Version 7</a>: OKAPI</li>
-        <li><a href="https://blog.dafb-o.de/oc-3-0-6-loggen-mit-uhrzeit/">Version 6</a>: Loggen mit Uhrzeit, Schutz vor
-            Listingvandalismus
+        <li><a href="https://web.archive.org/web/20160514141406/https://blog.dafb-o.de/okapi-jetzt-auch-fuer-opencaching-de/">
+            Version 7</a>: OKAPI
         </li>
-        <li><a href="https://blog.dafb-o.de/opencaching-3-0-5-veroeffentlicht/">Version 5</a>: neue Karte,
-            Vorschaubilder, Bildgalerien, Online-Hilfe ...; vorab: <a
-                href="http://blog.dafb-o.de/neue-icons-auf-der-cachekarte/">neue Kartensymbole</a></li>
-        <li><a href="https://blog.dafb-o.de/neues-aus-dem-hause-opencaching-de/">Version 4</a>: GPX-Wegpunkte und
-            -Bildeinbettung, Nano-Caches, neue Datenlizenz
+        <li><a href="https://web.archive.org/web/20160522184843/https://blog.dafb-o.de/oc-3-0-6-loggen-mit-uhrzeit/">
+            Version 6</a>: Loggen mit Uhrzeit, Schutz vor Listingvandalismus
+        </li>
+        <li><a href="https://web.archive.org/web/20160527023328/https://blog.dafb-o.de/opencaching-3-0-5-veroeffentlicht/">
+            Version 5</a>: neue Karte, Vorschaubilder, Bildgalerien, Online-Hilfe ...; vorab: <a
+            href="https://web.archive.org/web/20160514153553/https://blog.dafb-o.de/neue-icons-auf-der-cachekarte/">
+            neue Kartensymbole</a>
+        </li>
+        <li><a href="https://web.archive.org/web/20130805024214/http://blog.dafb-o.de/neues-aus-dem-hause-opencaching-de/">
+            Version 4</a>: GPX-Wegpunkte und -Bildeinbettung, Nano-Caches, neue Datenlizenz
         </li>
     </ul>
     <br/>
 
     <div class="changelog-changes">
 
-        <p id="current"><strong>Laufende Änderungen</strong></p>
+        <p id="additional"><strong>Zusätzliche Änderungen</strong></p>
         <ul>
             <li>03.12.2018 - Caches im Profil werden nach letztem Fund sortiert</li>
             <li>30.11.2018 - Minikarte bei Safaries durch Globi ersetzt</li>

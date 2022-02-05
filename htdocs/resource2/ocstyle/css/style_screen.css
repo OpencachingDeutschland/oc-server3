@@ -728,7 +728,9 @@ p.startmessage { line-height: 1.4em; }
 }
 
 /* Viewcache */
-#cache_name_block { width: 670px; padding-left: 5px; padding-top: 5px;}
+#cache_name_block { width: 670px; padding-left: 5px;}
+#cache_name_block h1 {margin-bottom: 4px;}
+#cache_name_block h1:first-line {line-height: 0.8;}
 
 div.cachedesc {font-size: 120%; line-height:1.4; padding-bottom:6px; overflow:hidden; }
 div.cachedesc p, div.cachedesc-print p, div.viewcache_log-content p {font-size: 100%; line-height:1.4; margin-bottom:0.85em; }

@@ -153,15 +153,15 @@
 
         <div class="content2-container-2col-left" style="width:60px; clear: left;">
             <div><a href="articles.php?page=cacheinfo#cachetype">{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</a></div>
-            <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
-            <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
+            <div style="padding-left: 35px;"><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
+            <div style="padding-left: 35px;"><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
             <div></div>
         </div>
 
         <div class="content2-container-2col-left" id="cache_name_block">
-            <span class="content-title-noshade-size5">{$cache.name|escape}</span>
+            <h1 class="content-title-noshade-size5" style="">{$cache.name|escape}</h1>
             {if $cache.shortdesc!=''}
-                <!-- <br /> --><p class="content-title-noshade-size1">&nbsp;{$cache.shortdesc|escape}</p>
+                <p class="content-title-noshade-size1">{$cache.shortdesc|escape}</p>
             {/if}
 
             <p>{t}by{/t}&nbsp;<b><a href="viewprofile.php?userid={$cache.userid}">{$cache.username|escape}</a></b>&nbsp;&nbsp;

@@ -803,20 +803,25 @@ class SupportController extends AbstractController
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     public function executeSQL_caches_old_login_date(
-    ) // List (non-archived, non-locked) caches from users whose last login date is older than one year.
+    ) // List (non-archived, non-locked) caches from users whose last login date is older than one year, and the caches have DNFs or notes.
     : Response
     {
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $qb = $this->connection->createQueryBuilder();
-        $qb->select('caches.name', 'caches.cache_id', 'caches.status', 'user.username', 'user.last_login')
+        $qb->select('caches.name', 'caches.cache_id', 'caches.status', 'user.user_id', 'user.username', 'user.last_login', 'count(cache_logs.type) as logCount')
+            ->distinct()
             ->from('caches')
             ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->innerJoin('caches', 'cache_logs', 'cache_logs', 'caches.cache_id = cache_logs.cache_id')
             ->where('user.last_login < now() - interval :searchTerm YEAR')
             ->andWhere('caches.status <= 2')
             ->andWhere(('caches.user_id = user.user_id'))
+            ->andWhere(('caches.cache_id = cache_logs.cache_id'))
+            ->andWhere(('cache_logs.type = 2 or cache_logs.type = 3'))
             ->setParameters(['searchTerm' => 1])
-            ->orderBy('user.last_login', 'ASC');
+            ->orderBy('user.last_login', 'ASC')
+            ->groupBy('caches.name');
 
         return $this->render(
             'backend/support/databaseQueries.html.twig', [

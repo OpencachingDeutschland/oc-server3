@@ -12,7 +12,7 @@
                 <br/>
                 <ul>
                     <li><b>{{ 'Details for user' | trans }}:</b> {{ user_account_details.username }}</li>
-                    <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.id }}</li>
+                    <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.userId }}</li>
                     <li><b>{{ 'Email' | trans }}:</b> {{ user_account_details.email }}</li>
                     <li><b>{{ 'Email validity' | trans }}:</b> {% if user_account_details.emailProblems %}<i class="fas fa-times"></i>
                         {% else %}<i class="fas fa-check"></i>
@@ -45,7 +45,7 @@
                     <br/>
 
                     {% if supportUserAccountActions is defined %}
-                        {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.id } ) } ) }}
+                        {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
                         <div class="form-row">
                             <p><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b> <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
                                 {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}</p>

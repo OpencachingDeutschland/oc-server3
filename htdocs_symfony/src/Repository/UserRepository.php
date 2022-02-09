@@ -69,6 +69,36 @@ class UserRepository
     }
 
     /**
+     * @param array $where
+     *
+     * @return UserEntity
+     * @throws RecordNotFoundException
+     */
+    public function fetchOneBy(array $where = [])
+    : UserEntity {
+        $queryBuilder = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->setMaxResults(1);
+
+        if (count($where) > 0) {
+            foreach ($where as $column => $value) {
+                $queryBuilder->andWhere($column . ' = ' . $queryBuilder->createNamedParameter($value));
+            }
+        }
+
+        $statement = $queryBuilder->execute();
+
+        $result = $statement->fetch();
+
+        if ($statement->rowCount() === 0) {
+            throw new RecordNotFoundException('Record with given where clause not found');
+        }
+
+        return $this->getEntityFromDatabaseArray($result);
+    }
+
+    /**
      * Fetches a user by its id.
      *
      * @throws RecordNotFoundException Thrown when the request record is not found
@@ -172,8 +202,9 @@ class UserRepository
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
-
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
+        //        dd($databaseArray);
+        //        die();
 
         $this->connection->update(
             self::TABLE,
@@ -213,6 +244,17 @@ class UserRepository
     }
 
     /**
+     * generate an activation code (e.g. for user registration)
+     *
+     * @return string
+     */
+    public function generateActivationCode()
+    : string
+    {
+        return mb_strtoupper(mb_substr(md5(uniqid('', true)), 0, 13));
+    }
+
+    /**
      * Converts database array to entity array.
      *
      * @return UserEntity[]
@@ -247,11 +289,11 @@ class UserRepository
             'first_name' => $entity->firstname,
             'last_name' => $entity->lastname,
             'country' => $entity->country,
+            'permanent_login_flag' => $entity->permanentLoginFlag,
             'activation_code' => $entity->activationCode,
             'language' => $entity->language,
             'description' => $entity->description,
             'gdpr_deletion' => $entity->gdprDeletion,
-            'roles' => $entity->roles
         ];
     }
 
@@ -274,6 +316,7 @@ class UserRepository
         $entity->firstname = $data['first_name'];
         $entity->lastname = $data['last_name'];
         $entity->country = $data['country'];
+        $entity->permanentLoginFlag = $data['permanent_login_flag'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
         $entity->description = $data['description'];

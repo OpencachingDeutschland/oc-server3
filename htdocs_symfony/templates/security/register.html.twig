@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Register a new user' | trans }}..{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <div class="mb-3">
+            {{ 'You are already logged in as' | trans }}: {{ app.user.username }},
+            <a href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a>
+        </div>
+    {% else %}
+        <div>
+            <h3>{{ 'Register a new user' | trans }}..</h3>
+            <p>{{ 'To create an account at Opencaching.de, you have to enter a vaild e-mail address and a user name.
+                   An activation code will be sent to the e-mail address you supplied.' | trans }}</p>
+
+            <p>{{ 'Only one account can be created per E-Mail address. First name, last name and country are optional.' | trans }}</p>
+
+
+            {% if userRegistrationForm is defined %}
+                {% set formErrors = userRegistrationForm.vars.errors.form.getErrors(true) %}
+                {% if formErrors | length %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for error in formErrors %}
+                                <li>{{ error.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                {{ form_start(userRegistrationForm, {'action': path('app_security_register'), 'method': 'POST'}) }}
+                {{ 'Username' | trans }}: * {{ form_widget(userRegistrationForm.username) }}
+                {{ 'First name' | trans }}: {{ form_row(userRegistrationForm.firstname) }}
+                {{ 'Last name' | trans }}: {{ form_row(userRegistrationForm.lastname) }}
+                {{ 'Country' | trans }}: {{ form_row(userRegistrationForm.country) }}
+                {{ 'E-mail' | trans }}: * {{ form_row(userRegistrationForm.email) }}
+                {{ 'Your Password' | trans }}: * {{ form_row(userRegistrationForm.plainPassword.first) }}
+                {# TODO: Password Confirmation not working?!!? #}
+                {{ 'Confirm password' | trans }}: * {{ form_row(userRegistrationForm.plainPassword.second) }}
+                {# TODO: diverse Links in den Texten noch einfügen.. #}
+                <p>{{ ' We respect your privacy. Your personal data will be stored in our database but not disclosed to third parties. Please note our detailed privacy statement. If you have further questions, please contact us before you create an account. ' }}</p>
+                <br/>
+                {{ form_row(userRegistrationForm.tos) }} {{ 'I\'ve read and understand the privacy statement, the terms of service and the Data license and accept them.' | trans }}
+                {{ form_row(userRegistrationForm.submit, {'label': 'Submit' | trans }) }}
+                {{ form_end(userRegistrationForm) }}
+                {% if registrationError %}
+                    Text:
+                    <div class="alert alert-danger mb-3">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

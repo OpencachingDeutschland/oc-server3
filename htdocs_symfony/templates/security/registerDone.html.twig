@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Registration done' | trans }}..{% endblock %}
+
+{% block body %}
+    {% if mailSent is defined %}
+
+        <h3>{{ 'New user registered' | trans }}.. </h3>
+
+        <div>
+            <p>
+                {{ 'The activation code was sent with an E-Mail to you.' | trans }}<br/>
+                {{ 'Please follow the instructions in the E-Mail.' | trans }}<br/>
+                {{ 'If you do not see any E-Mail, please check the spam folder of your mailbox.' | trans }}
+            </p>
+
+            <table class="table">
+                <tr>
+                    <td>{{ 'Username' | trans }}:</td>
+                    <td>{{ user.username }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ 'E-Mail' | trans }}:</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ 'First name' | trans }}:</td>
+                    <td>{{ user.firstname }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ 'Last name' | trans }}:</td>
+                    <td>{{ user.lastname }}</td>
+                </tr>
+
+                <tr>
+                    <td>{{ 'Country' | trans }}:</td>
+                    <td>{{ user.country }}</td>
+                </tr>
+                <tr>
+                    <td class="spacer" colspan="2"></td>
+                </tr>
+            </table>
+        </div>
+    {% endif %}
+
+    <div>
+        <a href="{{ path('app_security_account_activation') }}">{{ 'Continue to account activation' | trans }}..</a>
+    </div>
+{% endblock %}

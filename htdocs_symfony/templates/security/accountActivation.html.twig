@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Account activation' | trans }}..{% endblock %}
+
+{% block body %}
+
+    {% if emailActivationStatus is defined %}
+        {% if emailActivationStatus == 'success' %}
+            <hr>
+            <h3>{{ 'Account was successfully activated' | trans }}.. </h3>
+
+            <div>
+                <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a>
+            </div>
+        {% elseif emailActivationStatus == 'fail' %}
+            <hr>
+            <h3>{{ 'Account activation was not successfull. Please try again.' | trans }} </h3>
+
+            <div>
+                <a href="{{ path('app_security_account_activation') }}">{{ 'Activate account' | trans }}</a>
+            </div>
+        {% elseif emailActivationStatus == 'new' %}
+            <hr>
+            <h3>{{ 'Activate user account' | trans }}.. </h3>
+
+            <div>
+                {{ 'To complete the registration, you have to enter your e-mail address and activation code.' | trans }}<br/><br/>
+
+                {{ form_start(userActivationForm) }}
+                {{ 'E-Mail' | trans }}: {{ form_row(userActivationForm.email) }}
+                {{ 'Activation code' | trans }}: {{ form_row(userActivationForm.activationCode) }}
+                {{ form_row(userActivationForm.submit, {'label': 'Submit' | trans }) }}
+                {{ form_end(userActivationForm) }}
+            </div>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

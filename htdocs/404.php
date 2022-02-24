@@ -5,6 +5,8 @@
 
 require_once __DIR__ . '/lib2/web.inc.php';
 
+http_response_code(404);
+
 $sUserCountry = $login->getUserCountry();
 
 // create object for "newest" information

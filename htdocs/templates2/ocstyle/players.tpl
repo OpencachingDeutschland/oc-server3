@@ -559,7 +559,7 @@ function switchAttributeCat2()
 
     <tr class="search_byowner"><td class="separator"></td></tr>
 
-    <form action="search.php" onsubmit="return(_sbo_click('submit_owner'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
+    <form action="players.php" onsubmit="return(_sbo_click('submit_owner'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyowner" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />

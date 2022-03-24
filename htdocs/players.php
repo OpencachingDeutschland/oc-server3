@@ -27,9 +27,7 @@
  *    searchbywaypoint
  *    searchbydistance (obsolete => mapped to searchbycoords)
  *    searchbycoords
- *    searchbyname
  *    searchbyowner
- *    searchbyfinder
  *    searchbyfulltext
  *    searchbynofilter
  *    searchbycacheid
@@ -241,10 +239,7 @@ if ($queryid != 0) {
             $_REQUEST['searchbyortplz'],
             $_REQUEST['searchbycoords'],
             $_REQUEST['searchbydistance'],
-            $_REQUEST['searchbyname'],
             $_REQUEST['searchbyowner'],
-            $_REQUEST['searchbyfinder'],
-            $_REQUEST['searchbywaypoint'],
             $_REQUEST['searchbyfulltext'],
             $_REQUEST['searchbynofilter'],
             $_REQUEST['searchall']
@@ -310,14 +305,7 @@ if ($queryid != 0) {
         $options['unit'] = DEFAULT_DISTANCE_UNIT;
     }
 
-    if (isset($_REQUEST['searchbyname'])) {
-        $options['searchtype'] = 'byname';
-        $options['cachename'] = isset($_REQUEST['cachename']) ? stripslashes($_REQUEST['cachename']) : '';
-
-        if (!isset($_REQUEST['utf8'])) {
-            $options['cachename'] = iconv("ISO-8859-1", "UTF-8", $options['cachename']);
-        }
-    } elseif (isset($_REQUEST['searchbyowner'])) { // Ocprop
+    if (isset($_REQUEST['searchbyowner'])) { // Ocprop
         $options['searchtype'] = 'byowner';
 
         $options['ownerid'] = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
@@ -332,23 +320,9 @@ if ($queryid != 0) {
             }
             unset($record_id);
             sql_free_result($rs_name);
-        }
-    } elseif (isset($_REQUEST['searchbyfinder'])) { // Ocprop
-        $options['searchtype'] = 'byfinder';
 
-        $options['finderid'] = isset($_REQUEST['finderid']) ? $_REQUEST['finderid'] : 0;
-        $options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
-        $options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7'; // Ocprop
-
-        if (isset($options['finder'])) {
-            $rs_name = sql("SELECT `user_id` FROM `user` WHERE `username`='&1'", $options['finder']);
-            if (sql_num_rows($rs_name) == 1) {
-                $record_id = sql_fetch_array($rs_name);
-                $options['finderid'] = $record_id['user_id'];
-                $user = new user($options['finderid']);
-            }
-            unset($record_id);
-            sql_free_result($rs_name);
+            header("Location: http://docker.team-opencaching.de/viewprofile.php?userid=" . $options['ownerid']);
+            die();
         }
     } elseif ((isset($_REQUEST['searchbyortplz']) && is_numeric($_REQUEST['ortplz']))
               || isset($_REQUEST['searchbyplz'])) {
@@ -368,11 +342,6 @@ if ($queryid != 0) {
             $options['ortplz'] = $_REQUEST['ort'];
         }
         $options['locid'] = isset($_REQUEST['locid']) ? $_REQUEST['locid'] + 0 : 0;
-        $options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] + 0 : DEFAULT_SEARCH_DISTANCE;
-    } elseif (isset($_REQUEST['searchbywaypoint'])) {
-        $options['searchtype'] = 'bywaypoint';
-
-        $options['waypoint'] = isset($_REQUEST['waypoint']) ? stripslashes($_REQUEST['waypoint']) : '';
         $options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] + 0 : DEFAULT_SEARCH_DISTANCE;
     } elseif (isset($_REQUEST['searchbycoords']) || isset($_REQUEST['searchbydistance'])) {
         $options['searchtype'] = 'bycoords';
@@ -872,41 +841,6 @@ if ($options['showresult'] == 1) {
                     }
                 }
             }
-        } elseif ($options['searchtype'] == 'bywaypoint') {
-            if (preg_match('/gc[0-9a-z]{2,}/i', $options['waypoint'])) {
-                $rs = sql_slave(
-                    "SELECT `longitude`, `latitude`
-                     FROM `caches`
-                     WHERE `wp_gc_maintained`='&1' ",
-                    $options['waypoint']
-                );
-            } else {
-                $rs = sql_slave(
-                    "SELECT `longitude`, `latitude`
-                     FROM `caches`
-                     WHERE `wp_oc`='&1' ",
-                    $options['waypoint']
-                );
-            }
-            $r = sql_fetch_array($rs);
-            
-            if ($r) {
-                $lat = $r['latitude'];
-                $lon = $r['longitude'];
-                sql_free_result($rs);
-
-                $distance = $options['distance'];
-                $distance_unit = $options['unit'];
-
-                $lon_rad = $lon * 3.14159 / 180;
-                $lat_rad = $lat * 3.14159 / 180;
-
-                sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
-            } else {
-                $options['error_nowaypointfound'] = true;
-                outputSearchForm($options);
-                exit;
-            }
         } elseif ($options['searchtype'] == 'bycoords') {  // Ocprop
             //check the entered data
             if (isset($options['lat']) && isset($options['lon'])) {
@@ -961,40 +895,6 @@ if ($options['showresult'] == 1) {
             $lat_rad = $lat * 3.14159 / 180;
 
             sqlStringbySearchradius($distance, $lat, $lon, $multiplier, $distance_unit);
-        } elseif ($options['searchtype'] == 'byfinder') {
-            if ($options['finderid'] != 0) {
-                $finder_id = $options['finderid'];
-            } else {
-                $rs = sql_slave(
-                    "SELECT `user_id` FROM `user` WHERE `username`='&1'",
-                    $options['finder']
-                );
-                $finder_record = sql_fetch_array($rs);
-                $finder_id = $finder_record['user_id'];
-                sql_free_result($rs);
-            }
-
-            if (!isset($options['logtype'])) {
-                $options['logtype'] = '1,7';
-            }
-
-            $sql_select[] = 'distinct `caches`.`cache_id` `cache_id`';
-            // needs distinct because there can be multiple matching logs per cache
-            $sql_from = '`caches`';
-            $sql_innerjoin[] = '`cache_logs` ON `caches`.`cache_id`=`cache_logs`.`cache_id`';
-            $sql_where[] = '`cache_logs`.`user_id`=\'' . sql_escape($finder_id) . '\'';
-
-            if ($options['logtype'] != '0') { // 0 = all types
-                $ids = explode(',', $options['logtype']);
-                $idNumbers = '0';
-                foreach ($ids as $id) {
-                    if ($idNumbers != '') {
-                        $idNumbers .= ',';
-                    }
-                    $idNumbers .= ($id + 0);
-                }
-                $sql_where[] = '`cache_logs`.`type` IN (' . $idNumbers . ')';
-            }
         } elseif ($options['searchtype'] == 'bycacheid') {
             $sql_select[] = '`caches`.`cache_id` `cache_id`';
             $sql_from = '`caches`';

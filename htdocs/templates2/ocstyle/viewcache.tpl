@@ -177,6 +177,7 @@
                 </span>
             </p>
             {if $cache.type==$GeoCacheTypeEvent}
+                <span class="content-title-noshade-size1">&nbsp;am {$cache.datehidden|date_format:$opt.format.datelong}</span>&nbsp;&nbsp;&nbsp;
                 <span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="javascript:;" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
             {/if}
         </div>

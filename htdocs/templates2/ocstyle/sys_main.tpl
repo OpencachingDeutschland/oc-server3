@@ -266,8 +266,8 @@
                 {/nocache}
             </ul>
 
-            <p class="sidebar-maintitle">{t}Country sites{/t}</p>
-            <div style="text-align: center;" class="nodeflags">
+            <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('countriesdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Country sites{/t} &gt;</p>
+            <div style="text-align: center; display: none;" class="nodeflags" id="countriesdiv">
                 <a href="https://www.opencaching.cz" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100"
                             height="22"/></a><br/>
@@ -295,8 +295,8 @@
 
             {* <!-- Paypalbutton --> *}
             {if $opt.page.showdonations}
-                <p class="sidebar-maintitle">{t}Donations{/t}</p>
-                <div style="margin-top:16px; width:100%; text-align:center;">
+                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('donodiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Donations{/t} &gt;</p>
+                <div style="margin-top:16px; width:100%; text-align:center; display: none;" id="donodiv">
                     <a href="articles.php?page=donations">
                         <img src="resource2/{$opt.template.style}/images/misc/donate.gif" alt="{t}Donations{/t}"
                              style="border:0px;"/>
@@ -307,8 +307,8 @@
 
             {* <!-- Social Media --> *}
             {if $opt.page.showsocialmedia}
-                <p class="sidebar-maintitle">{t}Social media{/t}</p>
-                <div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center">
+                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('socialdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Social media{/t} &gt;</p>
+                <div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center; display: none;" id="socialdiv">
                     <table style="margin-left: auto; margin-right: auto;">
                         <tr>
                             <td class="mediumsmalltext" colspan="3">{t}Follow us:{/t}</td>
@@ -401,13 +401,13 @@
 
             {if $license_disclaimer != ""}
                 <!-- Datalicense -->
-                <p class="sidebar-maintitle">{t}Datalicense{/t}</p>
-                <div style="margin:20px 0 16px 0; width:100%; text-align:center;">
+                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('licensediv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Datalicense{/t} &gt;</p>
+                <div style="margin:20px 0 16px 0; width:100%; text-align:center; display: none;" id="licensediv">
                     {$license_disclaimer}
                 </div>
             {/if}
 
-            <div class="sidebar-txtbox-noshade">
+            <div class="sidebar-txtbox-noshade" style="position: absolute; bottom: 50px;">
                 <p class="content-txtbox-noshade-size5">
                     <small>
                         {nocache}

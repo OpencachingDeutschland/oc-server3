@@ -89,7 +89,7 @@
 <!-- Already found this cache? -->
 {if $cache.userhasfound || $cache.needs_maintenance || $cache.listing_outdated ||
     $cache.status==2 || $cache.status==3 || $cache.status==$GeoCacheTypeEvent || $cache.status==7 }
-    <div id="havefound">
+    <div id="havefound" style="top: 175px;">
         {strip}
         <p>
             {if $cache.status==2}
@@ -102,7 +102,9 @@
             {if $cache.needs_maintenance}<img src="resource2/{$opt.template.style}/images/cachestatus/needs-maintenance.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache needs maintenance.{/t}" title="{t}The geocache needs maintenance.{/t}" />{/if}
             {if $cache.listing_outdated}<img src="resource2/{$opt.template.style}/images/cachestatus/listing-outdated.png" width="32" height="32" style="padding-right: 5px;" alt="{t}The geocache description is outdated.{/t}" title="{t}The geocache description is outdated.{/t}" />{/if}
             {if $cache.userhasfound}&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/have-found.png" width="35" height="35" style="padding-right: 5px;" alt="{if $cache.type==$GeoCacheTypeEvent}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" title="{if $cache.type==$GeoCacheTypeEvent}{t}You have attended this event!{/t}{else}{t}You have already found this cache!{/t}{/if}" />{/if}
+            {if $cache.userhasrecommended}&nbsp;<img src="resource2/{$opt.template.style}/images/viewcache/rating-star.gif" width="20" height="20" style="margin-top: 10px; margin-left: -20px;" alt="{t}You have recommended this cache!{/t}" title="{t}You have recommended this cache!{/t}" />{/if}
         </p>
+        <a href="/editlog.php?logid={$cache.userlogid}">Log bearbeiten</a>
         {/strip}
     </div>
     <!--[if IE]><div></div><![endif]-->
@@ -152,34 +154,44 @@
         <div class="buffer" style="width: 500px;">&nbsp;</div>
 
         <div class="content2-container-2col-left" style="width:60px; clear: left;">
+            <div class="content-title-noshade-size1" style="padding-top: 7px; padding-bottom: 5px;">{$cache.wpoc}</div>
             <div><a href="articles.php?page=cacheinfo#cachetype">{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</a></div>
             <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
             <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
-            <div></div>
         </div>
 
         <div class="content2-container-2col-left" id="cache_name_block">
-            <span class="content-title-noshade-size5">{$cache.name|escape}</span>
-            {if $cache.shortdesc!=''}
-                <!-- <br /> --><p class="content-title-noshade-size1">&nbsp;{$cache.shortdesc|escape}</p>
-            {/if}
+            <div style="border: 1px solid gray;
+                     background: #eee;
+                     border-radius: 5px;
+                     padding: 5px;
+                     margin-right: 50px;">
+                <span class="content-title-noshade-size5">{$cache.name|escape}</span>
+                {if $cache.shortdesc!=''}
+                    <!-- <br /> --><p class="content-title-noshade-size1">&nbsp;{$cache.shortdesc|escape}</p>
+                {/if}
+            </div>
 
-            <p>{t}by{/t}&nbsp;<b><a href="viewprofile.php?userid={$cache.userid}">{$cache.username|escape}</a></b>&nbsp;&nbsp;
-                <span style="color: rgb(88, 144, 168); font-weight: bold;">
-                    {if $cache.code1=="" or $cache.code1 != $cache.countryCode}
-                        <img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; {$cache.country|escape}
-                    {else}
-                        <img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
-                        {$cache.adm1|escape} {if $cache.adm1!=null & $cache.adm2!=null} &gt; {/if}
-                        {$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm3!=null) | ($cache.adm1!=null & $cache.adm3!=null)} &gt; {/if}
-                        {$cache.adm3|escape}
-                    {/if}
-                </span>
-            </p>
-            {if $cache.type==$GeoCacheTypeEvent}
-                <span class="content-title-noshade-size1">&nbsp;am {$cache.datehidden|date_format:$opt.format.datelong}</span>&nbsp;&nbsp;&nbsp;
-                <span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="javascript:;" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
-            {/if}
+            <div style="margin-left: 50px;">
+                <p>{t}by{/t}&nbsp;<b><a href="viewprofile.php?userid={$cache.userid}">{$cache.username|escape}</a></b>&nbsp;&nbsp;
+                    <span style="color: rgb(88, 144, 168); font-weight: bold;">
+                        {if $cache.code1=="" or $cache.code1 != $cache.countryCode}
+                            <img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; {$cache.country|escape}
+                        {else}
+                            <img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
+                            {$cache.adm1|escape} {if $cache.adm1!=null & $cache.adm2!=null} &gt; {/if}
+                            {$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm3!=null) | ($cache.adm1!=null & $cache.adm3!=null)} &gt; {/if}
+                            {$cache.adm3|escape}
+                        {/if}
+                    </span>
+                </p>
+                {if $cache.type==$GeoCacheTypeEvent}
+                <p>
+                    am&nbsp;<span class="content-title-noshade-size1">{$cache.datehidden|date_format:$opt.format.datelong}</span>&nbsp;&nbsp;&nbsp;
+                    <span class="participants"><img src="resource2/{$opt.template.style}/images/cacheicon/16x16-event.gif" width="16" height="16" alt="" />&nbsp;<a href="javascript:;" onclick="window.open('event_attendance.php?id={$cache.cacheid}&popup=y','{t escape=js}List{/t}','width=320,height=440,resizable=no,scrollbars=1')">{t}List of participants{/t}</a></span>
+                </p>
+                {/if}
+            </div>
         </div>
     </div>
 </div>

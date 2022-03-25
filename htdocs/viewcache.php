@@ -297,6 +297,28 @@ if ($login->userid != 0) {
         ) > 0);
 }
 
+$rCache['userhasrecommended'] = false;
+if ($login->userid != 0) {
+    $rCache['userhasrecommended'] = (
+        sql_value(
+            "SELECT COUNT(*) FROM `cache_rating` WHERE `cache_id`='&1' AND `user_id`='&2'",
+            0,
+            $cacheid,
+            $login->userid
+        ) > 0);
+}
+
+$rCache['userlogid'] = -1;
+if ($login->userid != 0) {
+    $rCache['userlogid'] = (
+        sql_value(
+            "SELECT id FROM `cache_logs` WHERE `cache_id`='&1' AND `user_id`='&2'",
+            0,
+            $cacheid,
+            $login->userid
+        ));
+}
+
 $tpl->assign('cache', $rCache);
 $tpl->title = $rCache['wpoc'] . ' ' . $rCache['name'];
 

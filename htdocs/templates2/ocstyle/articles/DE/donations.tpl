@@ -35,7 +35,7 @@
             <br />
             <div class="content2-container bg-blue02">
             <p class="content-title-noshade-size3">
-            <img src="resource2/{$opt.template.style}/images/misc/32x32-news.png" style="margin-right: 10px;" width="32" height="32" alt="" />
+            <img src="resource2/{$opt.template.style}/images/misc/22x22-news.png" style="margin-right: 10px;" width="22" height="22" alt="" />
             Bekanntmachung vom 09.06.2012 (aktualisiert am 09.02.2013)
             </p>
             </div>

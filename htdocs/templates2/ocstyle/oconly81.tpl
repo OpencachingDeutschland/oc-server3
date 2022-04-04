@@ -42,7 +42,7 @@
 
     <div class="content2-container bg-blue02">
         <p class="content-title-noshade-size2">
-            <img src="resource2/{$opt.template.style}/images/cacheicon/22x20-traditional.png" style="margin-right: 10px;" width="22" height="20"  />
+            <img src="resource2/{$opt.template.style}/images/misc/22x22-statistic.png" style="margin-right: 10px;" width="22" height="22"  />
             {t}Statistics{/t}
         </p>
     </div>

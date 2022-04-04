@@ -134,7 +134,7 @@
                 <li class="group"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/list-18.png);background-repeat:no-repeat;background-position:left center;" href="addtolist.php?cacheid={$cache.cacheid|urlencode}">{t}Add to list{/t}</a></li>
                 {if $login.userid!=0}
                     {if $login.userid==$cache.userid || $listing_admin }
-                        <li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/page.png);background-repeat:no-repeat;background-position:left center;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
+                        <li class="group {if $login.userid!=$cache.userid}hilite{/if}"><a style="background-image: url(resource2/{$opt.template.style}/images/viewcache/16x16-edit_cache.png);background-repeat:no-repeat;background-position:left center;" href="editcache.php?cacheid={$cache.cacheid|urlencode}">{t}Edit{/t}</a></li>
                     {/if}
                 {/if}
 
@@ -153,15 +153,15 @@
 
         <div class="content2-container-2col-left" style="width:60px; clear: left;">
             <div><a href="articles.php?page=cacheinfo#cachetype">{include file="res_cacheicon.tpl" cachetype=$cache.type status=$cache.status}</a></div>
-            <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
-            <div><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
+            <div style="padding-left: 35px;"><a href="articles.php?page=cacheinfo#difficulty">{include file="res_difficon.tpl" difficulty=$cache.difficulty}</a></div>
+            <div style="padding-left: 35px;"><a href="articles.php?page=cacheinfo#difficulty">{include file="res_terricon.tpl" terrain=$cache.terrain}</a></div>
             <div></div>
         </div>
 
         <div class="content2-container-2col-left" id="cache_name_block">
-            <span class="content-title-noshade-size5">{$cache.name|escape}</span>
+            <h1 class="content-title-noshade-size5" style="">{$cache.name|escape}</h1>
             {if $cache.shortdesc!=''}
-                <!-- <br /> --><p class="content-title-noshade-size1">&nbsp;{$cache.shortdesc|escape}</p>
+                <p class="content-title-noshade-size1">{$cache.shortdesc|escape}</p>
             {/if}
 
             <p>{t}by{/t}&nbsp;<b><a href="viewprofile.php?userid={$cache.userid}">{$cache.username|escape}</a></b>&nbsp;&nbsp;
@@ -501,7 +501,7 @@ function showalllists()
     {if count($npaareasWarning) > 0}
         <div style="border: solid 1px red; padding:10px 10px 0px 10px; margin: 3px 0 8px 0">
             <p style="line-height: 1.6em;">
-                <img src="resource2/{$opt.template.style}/images/viewcache/npa.gif" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
+                <img src="resource2/{$opt.template.style}/images/viewcache/npa.png" align="left" style="margin-right: 25px;" width="32" height="32" alt="" />
                 {t 1=$npahelplink}This geocache is probably placed within a nature protection area! See %1here</a> for further informations, please.{/t}<br />
                 {foreach from=$npaareasWarning item=npaItem name=npaareas}
                     {$npaItem.npaTypeName|escape}

@@ -795,6 +795,9 @@ function NewCacheMarker(nLat, nLon, sWaypoint, nType, nFlags, sName, nZindex)
     {if $opt_cacheicons == 1}
         image = 'resource2/ocstyle/images/map/caches1/24x24-';
         anchor = new google.maps.Point(12,12);
+    {elseif $opt_cacheicons == 3}
+        image = 'resource2/ocstyle/images/map/caches3/24x24-';
+        anchor = new google.maps.Point(12,12);
     {else}
         image = 'resource2/ocstyle/images/map/caches2/';
         anchor = new google.maps.Point(13,24);
@@ -1077,7 +1080,7 @@ function init_waypoint_markers(aWaypoints)
 function get_wp_imgparams(wp)
 {
     {/literal}
-    {if $opt_cacheicons == 1}
+    {if $opt_cacheicons == 1 or $opt_cacheicons == 3}
         return [wp.getAttribute('image'), wp.getAttribute('imagewidth'), wp.getAttribute('imageheight'),
                 wp.getAttribute('imagewidth')/2, wp.getAttribute('imageheight')/2];
     {else}
@@ -1565,6 +1568,7 @@ function toggle_settings()
         document.getElementById('opt_maxcaches').value      = "{$opt_maxcaches}";
         document.getElementById('opt_cacheicons1').selected = "{if $opt_cacheicons == 1}selected{/if}";
         document.getElementById('opt_cacheicons2').selected = "{if $opt_cacheicons == 2}selected{/if}";
+        document.getElementById('opt_cacheicons3').selected = "{if $opt_cacheicons == 3}selected{/if}";
         document.getElementById('opt_pictures').value       = "{$opt_pictures}";
 
         so.style.display = 'block';
@@ -2350,7 +2354,7 @@ function toggle_attribselection(bSaveCookies)
                                 <small>{t 1=$maxrecords}Max. %1 caches can be displayed with Microsoft Internet Explorer.{/t}
                             </td></tr>
                         {/if}
-                        <tr><td>{t}Cache icons:{/t}</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}classic OC{/t}<option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option></select></td></tr>
+                        <tr><td>{t}Cache icons:{/t}</td><td><select name="opt_cacheicons"><option id="opt_cacheicons1" value="1">{t}Modern{/t}</option><option id="opt_cacheicons2" value="2">{t}OKAPI style{/t}</option><option id="opt_cacheicons3" value="3">{t}classic OC{/t}</option></select></td></tr>
                         <tr><td>{t 1=$help_previewpics}Show %1preview pictures</a><br />(% of map area, 0=off):{/t}</td><td><input type="text" id="opt_pictures" name="opt_pictures" size="2" maxlength="2" /></td></tr>
                         <tr><td colspan="2">{if $login.userid>0}<input type="button" class="formbutton" value="{t}Cancel{/t}" onclick="toggle_settings()"/>&nbsp; <input type="submit" name="submitsettings" class="formbutton" value="{t}OK{/t}" onclick="submitbutton('submitsettings')" />{else}<em>{t}You must be logged in to change map settings.{/t}</em>{/if}</td></tr>
                     </table>

@@ -851,6 +851,51 @@ class SupportController extends AbstractController
     }
 
     /**
+     * @return Response
+     * @Route("/dbQueries6", name="support_db_queries_6")
+     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
+     */
+    public function executeSQL_Dornroeschen_caches() // List caches that currently meet Dornröschen requirements.
+    : Response
+    {
+        $formSearch = $this->createForm(SupportSearchCaches::class);
+
+        // Liste mit Caches erstellen, deren Listingeigenschaften auf Dornröschen zutreffen
+        $qb_caches = $this->connection->createQueryBuilder();
+        $qb_caches->select('caches.cache_id', 'caches.name', 'caches.wp_oc')
+            ->from('caches')
+            ->where('caches.size != 7')
+            ->andWhere('caches.status <= 2')
+            ->andWhere('caches.wp_gc = \'\'')
+            ->andWhere('caches.wp_gc_maintained = \'\'')
+            ->andWhere('caches.type IN (1, 2, 3, 7, 8, 9, 10)');
+        $qb_caches_list = $qb_caches->execute()->fetchAll();
+
+        // Liste mit Fundlogs erstellen, die innerhalb der letzten zwei Jahre liegen
+        $qb_logs = $this->connection->createQueryBuilder();
+        $qb_logs->select('cache_logs.cache_id')
+            ->from('cache_logs')
+            ->where('cache_logs.type = 1', 'cache_logs.date > now() - INTERVAL 2 YEAR');
+        $qb_logs_list = $qb_logs->execute()->fetchAll();
+
+        // Cacheliste reduzieren um die Caches, die innerhalb der letzten zwei Jahre einen Fund hatten
+        foreach ($qb_logs_list as $qbll) {
+            $found_key = array_search($qbll['cache_id'], array_column($qb_caches_list, 'cache_id'));
+
+            if ($found_key != false) {
+                unset($qb_caches_list[$found_key]);
+            }
+        }
+
+        return $this->render(
+            'backend/support/databaseQueries.html.twig', [
+                                                           'supportCachesForm' => $formSearch->createView(),
+                                                           'suppSQLquery6' => $qb_caches_list
+                                                       ]
+        );
+    }
+
+    /**
      * @param string $what
      * @param string $table
      * @param string $condition

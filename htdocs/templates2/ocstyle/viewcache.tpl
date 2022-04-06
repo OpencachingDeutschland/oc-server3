@@ -347,7 +347,7 @@
             <td style="text-align:right; vertical-align: top;">
                 <span style="color: rgb(88, 144, 168); font-weight: bold;">
                     {if $cache.code1=="" or $cache.code1 != $cache.countryCode}
-                        <img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />
+                        <img src="images/flags/{$cache.countryCode|lower}.gif" style="vertical-align:middle" />&nbsp; {$cache.country|escape}
                     {else}
                         <img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
                         {$cache.adm1|escape} {if $cache.adm1!=null & $cache.adm2!=null} &gt; {/if}

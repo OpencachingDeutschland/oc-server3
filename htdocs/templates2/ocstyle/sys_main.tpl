@@ -266,7 +266,7 @@
                 {/nocache}
             </ul>
 
-            <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('countriesdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Country sites{/t} &gt;</p>
+            <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('countriesdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Country sites{/t} &gt;</p>
             <div style="text-align: center; display: none;" class="nodeflags" id="countriesdiv">
                 <a href="https://www.opencaching.cz" target="_blank"><img
                             src="resource2/{$opt.template.style}/images/nodes/oc-cz.png" width="100"
@@ -295,7 +295,7 @@
 
             {* <!-- Paypalbutton --> *}
             {if $opt.page.showdonations}
-                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('donodiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Donations{/t} &gt;</p>
+                <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('donodiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Donations{/t} &gt;</p>
                 <div style="margin-top:16px; width:100%; text-align:center; display: none;" id="donodiv">
                     <a href="articles.php?page=donations">
                         <img src="resource2/{$opt.template.style}/images/misc/donate.gif" alt="{t}Donations{/t}"
@@ -307,7 +307,7 @@
 
             {* <!-- Social Media --> *}
             {if $opt.page.showsocialmedia}
-                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('socialdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Social media{/t} &gt;</p>
+                <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('socialdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Social media{/t} &gt;</p>
                 <div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center; display: none;" id="socialdiv">
                     <table style="margin-left: auto; margin-right: auto;">
                         <tr>
@@ -401,7 +401,7 @@
 
             {if $license_disclaimer != ""}
                 <!-- Datalicense -->
-                <p class="sidebar-maintitle" onclick="javascript:var divnode=document.getElementById('licensediv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Datalicense{/t} &gt;</p>
+                <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('licensediv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Datalicense{/t} &gt;</p>
                 <div style="margin:20px 0 16px 0; width:100%; text-align:center; display: none;" id="licensediv">
                     {$license_disclaimer}
                 </div>

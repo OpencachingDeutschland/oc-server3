@@ -487,104 +487,12 @@ function switchAttributeCat2()
 
     {$ortserror}
 
-    <form action="search.php" onsubmit="return(_sbd_click('submit_dist'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbydistance" dir="ltr" style="display:inline;">
-        <input type="hidden" name="showresult" value="1" />
-        <input type="hidden" name="expert" value="0" />
-        <input type="hidden" name="output" value="HTML" />
-        <input type="hidden" name="utf8" value="1" />
-
-        <input type="hidden" name="sort" value="{$hidopt_sort}" />
-        <input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
-        <input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
-        <input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
-        <input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
-        <input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
-        <input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
-        <input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
-        <input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
-        <input type="hidden" name="country" value="{$country}" />
-        <input type="hidden" name="language" value="{$language}" />
-        <input type="hidden" name="cachetype" value="{$cachetype}" />
-        <input type="hidden" name="cachesize" value="{$cachesize}" />
-        <input type="hidden" name="difficultymin" value="{$difficultymin}" />
-        <input type="hidden" name="difficultymax" value="{$difficultymax}" />
-        <input type="hidden" name="terrainmin" value="{$terrainmin}" />
-        <input type="hidden" name="terrainmax" value="{$terrainmax}" />
-        <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
-        <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
-
-        <tr class="search_bydistance">
-            <td class="formlabel">{t}Perimeter:{/t}</td>
-            <td>
-                <input type="text" tabindex="1" name="distance" value="{$distance}" maxlength="4" class="input50" />&nbsp;
-                <select tabindex="2" name="unit" class="input100">
-                    <option value="km" {if $sel_km}selected="selected"{/if}>{t}Kilometer{/t}</option>
-                    <option value="sm" {if $sel_sm}selected="selected"{/if}>{t}Miles{/t}</option>
-                    <option value="nm" {if $sel_nm}selected="selected"{/if}>{t}Seamiles{/t}</option>
-                </select>
-            </td>
-        </tr>
-        <tr class="search_bydistance">
-            {* exchanged tab order for radio button and input; see http://redmine.opencaching.de/issues/239 *}
-            <td class=""><input type="radio" tabindex="4" id="sbortplz" name="searchto" value="searchbyortplz" {if $dfromortplz_checked}checked="checked"{/if}><label for="sbortplz">... {t}from city or postal code:{/t}</label></td>
-            <td><input type="text" tabindex="3" name="ortplz" value="{$ortplz}" class="input200" onfocus="bydistance_set_radiobutton(0)"/> &nbsp;</td>
-            <td></td>  {* creates empty fourth column which is used by text search options *}
-        </tr>
-        <tr class="search_bydistance">
-            {* exchanged tab order for radio button and input; see http://redmine.opencaching.de/issues/239 *}
-            <td class=""><input type="radio" tabindex="5" id="sbwaypoint" name="searchto" value="searchbywaypoint" {if $dfromwaypoint_checked}checked="checked"{/if}><label for="sbwaypoint">... {t}from geocache:{/t}</label></td>
-            <td><input type="text" tabindex="4" name="waypoint" value="{$waypoint}" maxlength="7" class="input70" onfocus="bydistance_set_radiobutton(1)"/>
-            &nbsp;({t}waypoint{/t})</td>
-        </tr>
-        <tr class="search_bydistance">
-            <td valign="top"><input type="radio" tabindex="6" id="sbcoords" name="searchto" value="searchbycoords" {if $dfromcoords_checked}checked="checked"{/if}><label for="sbcoords">... {t}from coordinates:{/t}</label></td>
-            <td valign="top">
-                <select tabindex="7" name="latNS" onfocus="bydistance_set_radiobutton(2)">
-                    <option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>
-                    <option value="S" {if $latS_sel}selected="selected"{/if}>{t}S{/t}</option>
-                </select>&nbsp;
-                <input type="text" tabindex="8" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;°&nbsp;
-                <input type="text" tabindex="9" name="lat_min" maxlength="6" value="{$lat_min}" class="input50" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;'&nbsp;
-                <br />
-                <select tabindex="10" name="lonEW" onfocus="bydistance_set_radiobutton(2)">
-                    <option value="E" {if $lonE_sel}selected="selected"{/if}>{t}E{/t}</option>
-                    <option value="W" {if $lonW_sel}selected="selected"{/if}>{t}W{/t}</option>
-                </select>&nbsp;
-                <input type="text" tabindex="11" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;°&nbsp;
-                <input type="text" tabindex="12" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;'&nbsp;
-            </td>
-            <td><input type="submit" tabindex="13" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
-        </tr>
-    </form>
-
-    <tr class="search_byowner"><td class="separator"></td></tr>
-
     <form action="players.php" onsubmit="return(_sbo_click('submit_owner'));" method="{$formmethod}" enctype="application/x-www-form-urlencoded" name="searchbyowner" dir="ltr" style="display:inline;">
         <input type="hidden" name="searchto" value="searchbyowner" />
         <input type="hidden" name="showresult" value="1" />
         <input type="hidden" name="expert" value="0" />
         <input type="hidden" name="output" value="HTML" />
         <input type="hidden" name="utf8" value="1" />
-
-        <input type="hidden" name="sort" value="{$hidopt_sort}" />
-        <input type="hidden" name="orderRatingFirst" value="{$hidopt_orderRatingFirst}" />
-        <input type="hidden" name="f_userowner" value="{$hidopt_userowner}" />
-        <input type="hidden" name="f_userfound" value="{$hidopt_userfound}" />
-        <input type="hidden" name="f_inactive" value="{$hidopt_inactive}" />
-        <input type="hidden" name="f_disabled" value="{$hidopt_disabled}" />
-        <input type="hidden" name="f_ignored" value="{$hidopt_ignored}" />
-        <input type="hidden" name="f_otherPlatforms" value="{$hidopt_otherPlatforms}" />
-        <input type="hidden" name="f_geokrets" value="{$hidopt_geokrets}" />
-        <input type="hidden" name="country" value="{$country}" />
-        <input type="hidden" name="language" value="{$language}" />
-        <input type="hidden" name="difficultymin" value="{$difficultymin}" />
-        <input type="hidden" name="difficultymax" value="{$difficultymax}" />
-        <input type="hidden" name="terrainmin" value="{$terrainmin}" />
-        <input type="hidden" name="terrainmax" value="{$terrainmax}" />
-        <input type="hidden" name="cachetype" value="{$cachetype}" />
-        <input type="hidden" name="cachesize" value="{$cachesize}" />
-        <input type="hidden" name="cache_attribs" value="{$hidopt_attribs}" />
-        <input type="hidden" name="cache_attribs_not" value="{$hidopt_attribs_not}" />
 
         <tr class="search_byowner">
             <td class="formlabel">Spieler-Name:</td>

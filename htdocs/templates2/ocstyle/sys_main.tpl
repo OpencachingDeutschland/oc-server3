@@ -36,14 +36,6 @@
     <link rel="apple-touch-icon" sizes="144x144"
           href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad-retina.png"/>
 
-    {if $core_hq_message}
-        <!-- Bootstrap core CSS -->
-        <link href="../../resource2/mdb-free/css/bootstrap.min.css" rel="stylesheet">
-        <!-- Material Design Bootstrap -->
-        <link href="../../resource2/mdb-free/css/mdb.min.css" rel="stylesheet">
-        <!-- Your custom styles (optional) -->
-        <link href="../../resource2/mdb-free/css/style.css" rel="stylesheet">
-    {/if}
     <link rel="stylesheet" type="text/css" media="screen,projection"
           href="resource2/{$opt.template.style}/css/style_screen.css?ft={$screen_css_time}"/>
     <!--[if lt IE 9]>
@@ -497,14 +489,5 @@
 {/if}
 {/if}
 
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="../../resource2/mdb-free/js/jquery-3.3.1.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="../../resource2/mdb-free/js/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="../../resource2/mdb-free/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="../../resource2/mdb-free/js/mdb.min.js"></script>
 </body>
 </html>

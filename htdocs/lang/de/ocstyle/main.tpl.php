@@ -133,6 +133,18 @@ $smarty_dummy = 0;
                     document.getElementsByName(bname)[0].className = "formbutton_active";
                     window.setTimeout('resetbutton(\'' + bname + '\')', 350);
                 }
+
+                function toggleMenu(divid) {
+                    var divnode = document.getElementById(divid);
+                    divnode.style.display = divnode.style.display == 'none' ? 'block' : 'none';
+                    localStorage.setItem('opencaching.menu.' + divid, divnode.style.display);
+                }
+
+                function initMenu(divid) {
+                    var display = localStorage.getItem('opencaching.menu.' + divid);
+                    var divnode = document.getElementById(divid);
+                    divnode.style.display = display ? display : 'none';
+                }
                 //-->
       </script>
         <link rel="stylesheet" type="text/css" media="print" href="resource2/{style}/css/style_print.css?ft={print_css_time}" />
@@ -252,8 +264,8 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                     }
 ?>
                     <!-- Länderknoten -->
-                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('countrydiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Country sites{/t} &gt;</p>
-                    <div style="text-align: center; display: none;" class="nodeflags" id="countrydiv">
+                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:toggleMenu('countriesdiv');">{t}Country sites{/t} &gt;</p>
+                    <div style="text-align: center; display: none;" class="nodeflags" id="countriesdiv">
                         <a href="http://www.opencaching.cz" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-cz.png" width="100" height="22" /></a><br />
                         <a href="https://www.opencaching.de" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-de.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.nl" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-nl.png" width="100" height="22" /></a><br />
@@ -262,18 +274,20 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                         <a href="https://opencache.uk" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-org-uk.png" width="100" height="22" /></a><br />
                         <a href="http://www.opencaching.us" target="_blank"><img src="resource2/ocstyle/images/nodes/oc-us.png" width="100" height="22" /></a>
                     </div>
+                    <script>initMenu('countriesdiv')</script>
 
                     <!-- Paypalbutton -->
 <?php
                     if (isset($opt['page']['showdonations']) && $opt['page']['showdonations']) {
                         ?>
-                        <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('donodiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Donations{/t} &gt;</p>
+                        <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:toggleMenu('donodiv');">{t}Donations{/t} &gt;</p>
                         <div style="margin-top:16px;width:100%;text-align:center; display: none;" id="donodiv">
                             <a href="articles.php?page=donations">
                             <img src="resource2/ocstyle/images/misc/donate.gif" alt="{t}Donations{/t}" style="border:0px;" />
                             </a><br />
                             &nbsp;
                         </div>
+                        <script>initMenu('donodiv')</script>
 <?php
 
                     }
@@ -283,7 +297,7 @@ foreach ($opt['template']['locales'] as $k => $lang) {
 <?php
                     if (isset($opt['page']['showsocialmedia']) && $opt['page']['showsocialmedia']) {
                         ?>
-                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('socialdiv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Social media{/t} &gt;</p>
+                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:toggleMenu('socialdiv');">{t}Social media{/t} &gt;</p>
                     <div style="margin-top: 10px; margin-bottom: 14px; margin-left: auto; margin-right: auto; text-align: center; display: none;" id="socialdiv">
                         <table style="margin-left: auto; margin-right: auto;">
                             <tr>
@@ -333,16 +347,18 @@ foreach ($opt['template']['locales'] as $k => $lang) {
                             </tr>
                         </table>
                     </div>
+                    <script>initMenu('socialdiv')</script>
 <?php
 
                     }
 ?>
 
                     <!-- Datalicense -->
-                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:var divnode=document.getElementById('licensediv');divnode.style.display=divnode.style.display=='none'?'block':'none';">{t}Datalicense{/t} &gt;</p>
+                    <p class="sidebar-maintitle" style="cursor: pointer;" onclick="javascript:toggleMenu('licensediv');">{t}Datalicense{/t} &gt;</p>
                     <div style="margin:20px 0 16px 0; width:100%; text-align:center; display: none;" id="licensediv">
                         {license_disclaimer}
                     </div>
+                    <script>initMenu('licensediv')</script>
 
                     <!-- page statistics -->
                     <div class="sidebar-txtbox-noshade" style="position: absolute; bottom: 50px;">

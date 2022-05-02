@@ -52,15 +52,19 @@ class MenuSubscriber implements EventSubscriberInterface
         ])->setAttribute('class', 'header');
 
         if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('cache', [
+            $menu->addChild('cacheZeug', [
+                'label' => 'Cachezeugs',
+                'route' => 'backend_caches_index',
+                'childOptions' => $event->getChildOptions(),
+            ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
+
+            $menu['cacheZeug']->addChild('cache', [
                 'label' => 'Caches',
                 'route' => 'backend_caches_index',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
-        }
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('coordinate', [
+            $menu['cacheZeug']->addChild('coordinate', [
                 'label' => 'Coordinates',
                 'route' => 'backend_coordinates_index',
                 'childOptions' => $event->getChildOptions(),

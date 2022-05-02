@@ -19,7 +19,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'breadcrumb_menu' => true,
         ],
         'routes' => [
-            'adminlte_welcome' => 'backend_index_index',
+            'adminlte_welcome' => 'app_index_index',
         ],
     ]);
 };

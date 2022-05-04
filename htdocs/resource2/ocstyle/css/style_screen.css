@@ -384,6 +384,9 @@ ol.col4 { column-count:4; -moz-column-count:4; -webkit-column-count:4; line-heig
 .table td {padding: 2px 7px 4px 7px; border: solid 0 rgb(150,150,150); text-align: left; font-size: 120%;}
 .table th, .searchtable th {margin: 0; color: #404040; padding: 3px 7px 2px 7px; empty-cells: show; text-align: left; font-size: 120%;  background: #d8e5c6 url(../images/page/listheader-bg.png) repeat-x; background-size:contain; }
 .table-caption {margin: 0.5em 0 1.0em 30px; padding: 0; clear: both; text-align: left; font-size: 120%;}
+.table td.strong {font-weight:bold; vertical-align:top;}
+.table .help {padding-bottom:1em;}
+.table .space {padding-bottom:1em;}
 
 .narrowtable {font-size: 10px; line-height: 2.0em; clear: left; padding: 0; margin: 0.5em 0 0.2em 0; border: solid 0 rgb(150,150,150); empty-cells: show; border-collapse: collapse; background-color: rgb(255,255,255);}
 .narrowtable tr {margin: 0; padding: 0;}
@@ -545,7 +548,8 @@ a.info:hover span{ /*the span will display just on :hover state*/
 /* SECTION 5 - FORMS / CONTROLS */
 /********************************/
 
-input {    border:1px solid #555;    background-color:white;    padding:1px 2px 1px 2px; font-size:11px;color: black;}
+input {border:1px solid #555; background-color:white; padding:1px 2px 1px 2px; font-size:11px; color:black;}
+.aligned input {margin-left:0;}
 
 *.input20  {width:20px;}  /* day,month */
 *.input30  {width:30px;}

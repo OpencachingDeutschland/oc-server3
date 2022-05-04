@@ -63,8 +63,8 @@ $default_lang = t('EN');
 $activation_form = '
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
-        <td>' . t('Publication:') . '</td>
-        <td>
+        <td class="strong">' . t('Publication:') . '</td>
+        <td class="aligned space">
             <input type="radio" class="radio" name="publish" id="publish_now" value="now" {publish_now_checked} />&nbsp;<label for="publish_now">' . t('Publish now') . '</label><br />
             <input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked} />&nbsp;<label for="publish_later">' . t('Publish on') . '</label>
             <input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.

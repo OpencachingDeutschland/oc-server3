@@ -342,14 +342,18 @@ function toggleAttr(id)
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
-        <td>{t}Hidden since:{/t}</td><!-- << Ocprop -->
+        <td class="strong">{t}Hidden since:{/t}</td><!-- << Ocprop -->
         <td>
             <input class="input20" type="text" name="hidden_day" maxlength="2" value="{date_day}" onchange="setListingModified()" />.
             <input class="input20" type="text" name="hidden_month" maxlength="2" value="{date_month}" onchange="setListingModified()" />.
             <input class="input40" type="text" name="hidden_year" maxlength="4" value="{date_year}" onchange="setListingModified()" />&nbsp;
             {date_message}
-            &nbsp;
-            <img src="lang/de/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td class="help">
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}For Events: The date of event!{/t}
         </td>
     </tr>
@@ -362,19 +366,20 @@ function toggleAttr(id)
         <td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20" onchange="setListingModified()" /> &nbsp; {t}(leave blank for no password){/t}</td>
     </tr>
     <tr>
-        <td class="help" colspan="2">
-            <img src="lang/de/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+        <td>&nbsp;</td>
+        <td class="help">
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
         <td><nobr><label for="showlists">{t}Show all cache lists{/t}</label></nobr></td>
-        <td><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} onchange="setListingModified()" /></td>
+        <td class="aligned"><input type="checkbox" id="showlists" name="showlists" value="1" {showlists_checked} onchange="setListingModified()" /></td>
     </tr>
     <tr>
         <td><nobr><label for="protect_old_coords">{t}Protect old coordinates{/t}</label></nobr></td>
-        <td><input type="checkbox" id="protect_old_coords" name="protect_old_coords" value="1" {protectcoords_checked} onchange="setListingModified()" /></td>
+        <td class="aligned"><input type="checkbox" id="protect_old_coords" name="protect_old_coords" value="1" {protectcoords_checked} onchange="setListingModified()" /></td>
     </tr>
 
     <tr><td class="spacer" colspan="2"></td></tr>

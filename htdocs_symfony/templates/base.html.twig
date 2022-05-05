@@ -1,16 +1,20 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" lang="de">
 
-{% block logo_mini %}<b>OC</b>de{% endblock %}
-{% block logo_large %} <b>Opencaching.de</b>{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('backend') }}
+    {% endblock %}
+</head>
 
-{% block page_title %}{% endblock %}
-{% block page_subtitle %}{% endblock %}
+<body>
+<div class="container">
+    {% include '/index/navigation.html.twig' %}
+</div>
 
-{% block page_content %}
-{#    <div class="container">#}
-{#        {% include '/index/navigation.html.twig' %}#}
-{#    </div>#}
-
+{% block body %}
     {% if app.user %}
         <div>
             <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a> {{ '(already logged in as' | trans }} {{ app.user.username }})
@@ -30,22 +34,16 @@
         </div>
     {% endif %}
 
+    <br />
+
     {% if is_granted('ROLE_TEAM') %}
-        <br/>
         <a href="{{ path('backend_index_index') }}">BACKEND</a>
     {% endif %}
 
 {% endblock %}
 
-{% block footer %}
-    <footer class="main-footer ">
-        {#        TODO: Links anpassen sobald verfügbar.. #}
-        <a href="#">{{ 'Privacy policy' | trans }}</a>
-        ,
-        <a href="#">{{ 'Terms of Service' | trans }}</a>
-        ,
-        <a href="#">{{ 'Impressum' | trans }}</a>
-        ,
-        <a href="#">{{ 'Contact' | trans }}</a>
-    </footer>
+{% block javascripts %}
+    {{ encore_entry_script_tags('backend') }}
 {% endblock %}
+</body>
+</html>

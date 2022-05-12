@@ -338,7 +338,7 @@ function toggleAttr(id)
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
-        <td>{t}Hidden since:{/t}</td>
+        <td class="strong">{t}Hidden since:{/t}</td>
         <td>
             <input class="input20" type="text" name="hidden_day" maxlength="2" value="{hidden_day}"/>.
             <input class="input20" type="text" name="hidden_month" maxlength="2" value="{hidden_month}"/>.
@@ -347,16 +347,18 @@ function toggleAttr(id)
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td>&nbsp;</td>
+        <td class="help">
             <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}For Events: The date of event!{/t}
         </td>
     </tr>
-                
+
     <tr><td class="spacer" colspan="2"></td></tr>
+
     <tr>
-        <td>{t}Publication:{/t}</td>
-        <td>
+        <td class="strong">{t}Publication:{/t}</td>
+        <td class="aligned space">
             <input type="radio" class="radio" name="publish" id="publish_now" value="now2" {publish_now_checked} />&nbsp;<label for="publish_now">{t}Publish now{/t}</label><br />
             <input type="radio" class="radio" name="publish" id="publish_later" value="later" {publish_later_checked} />&nbsp;<label for="publish_later">{t}Publish on{/t}</label>&nbsp;
             <input class="input20" type="text" name="activate_day" maxlength="2" value="{activate_day}"/>.
@@ -375,15 +377,16 @@ function toggleAttr(id)
         <td><input class="input100" type="text" name="log_pw" value="{log_pw}" maxlength="20"/> &nbsp; {t}(leave blank for no password){/t}</td>
     </tr>
     <tr>
-        <td class="help" colspan="2">
-            <img src="resource2/ocstyle/images/misc/hint-link.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
+        <td>&nbsp;</td>
+        <td class="help">
+            <img src="resource2/ocstyle/images/misc/hint.gif" border="0" width="15" height="11" alt="{t}Notice{/t}" title="{t}Notice{/t}" />
             {t}Please note the <a href="articles.php?page=cacheinfo#logpw" target="_blank">description</a>{/t}
         </td>
     </tr>
 
     <tr><td class="spacer" colspan="2"></td></tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" class="aligned">
             <input class="checkbox" type="checkbox" name="TOS" value="1"{toschecked}/>
             {t}I have read and agree to the <a href="articles.php?page=impressum#tos" target="_blank">Opencaching.de Terms of Service</a> and the <a href="articles.php?page=impressum#datalicense" target="_blank">Opencaching.de Datalicense</a>{/t}
             {tos_message}

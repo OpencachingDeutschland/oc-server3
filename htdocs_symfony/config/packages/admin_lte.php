@@ -15,11 +15,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ],
         'knp_menu' => [
             'enable' => true,
-//            'main_menu' => 'backend_main',
+            //            'main_menu' => 'backend_main',
             'breadcrumb_menu' => true,
         ],
         'routes' => [
-            'adminlte_welcome' => 'backend_index_index',
+            'adminlte_welcome' => 'app_index_index',
         ],
     ]);
 };

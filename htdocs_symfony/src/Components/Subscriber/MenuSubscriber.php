@@ -8,6 +8,7 @@ use KevinPapst\AdminLTEBundle\Event\KnpMenuEvent;
 use Oc\Entity\UserEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  *
@@ -20,23 +21,37 @@ class MenuSubscriber implements EventSubscriberInterface
     private $security;
 
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
      * MenuSubscriber constructor.
      *
      * @param Security $security
+     * @param TranslatorInterface $translator
      */
-    public function __construct(Security $security)
+    public function __construct(Security $security, TranslatorInterface $translator)
     {
         $this->security = $security;
+        $this->translator = $translator;
     }
 
     /**
      * @return array[]
      */
-    public static function getSubscribedEvents(): array
+    public static function getSubscribedEvents()
+    : array
     {
         return [
             KnpMenuEvent::class => ['onSetupMenu', 100],
         ];
+    }
+
+    /**
+     */
+    private function addMenuItem()
+    {
     }
 
     /**
@@ -46,36 +61,31 @@ class MenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
-        $menu->addChild('MainNavigationMenuItem', [
-            'label' => 'MAIN NAVIGATION',
-            'childOptions' => $event->getChildOptions()
-        ])->setAttribute('class', 'header');
+        $menu->addChild('cacheZeug', [
+            'label' => 'Cachezeugs',
+            'route' => 'backend_caches_index',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('cache', [
-                'label' => 'Caches',
-                'route' => 'backend_caches_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
-        }
+        $menu['cacheZeug']->addChild('cache', [
+            'label' => 'Caches',
+            'route' => 'backend_caches_index',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('coordinate', [
-                'label' => 'Coordinates',
-                'route' => 'backend_coordinates_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-map-pin');
-        }
+        $menu['cacheZeug']->addChild('coordinate', [
+            'label' => 'Coordinates',
+            'route' => 'backend_coordinates_index',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-map-pin');
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('maps', [
-                'label' => 'Maps',
-                'route' => 'backend_map_show',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-map');
-        }
+        $menu->addChild('maps', [
+            'label' => 'Maps',
+            'route' => 'backend_map_show',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-map');
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+        if ($this->security->isGranted('ROLE_TEAM')) {
             $menu->addChild('kitchensink', [
                 'label' => 'Kitchensink',
                 'route' => 'app_kitchensink_index',
@@ -83,13 +93,11 @@ class MenuSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'fab fa-css3');
         }
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
-            $menu->addChild('oconly81', [
-                'label' => 'OCOnly81',
-                'route' => 'backend_oconly81_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-question');
-        }
+        $menu->addChild('oconly81', [
+            'label' => 'OCOnly81',
+            'route' => 'backend_oconly81_index',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-question');
 
         $menu->addChild('roles', [
             'label' => 'Roles',
@@ -97,7 +105,7 @@ class MenuSubscriber implements EventSubscriberInterface
             'childOptions' => $event->getChildOptions(),
         ])->setLabelAttribute('icon', 'fas fa-user-shield');
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+        if ($this->security->isGranted('ROLE_TEAM')) {
             $menu->addChild('support', [
                 'label' => 'Support Center',
                 'route' => 'backend_support_reported_caches',
@@ -105,13 +113,19 @@ class MenuSubscriber implements EventSubscriberInterface
             ])->setLabelAttribute('icon', 'fas fa-gem');
         }
 
-        if ($this->security->isGranted("CAN_VIEW", UserEntity::class)) {
+        if ($this->security->isGranted('ROLE_TEAM')) {
             $menu->addChild('user', [
                 'label' => 'Users',
                 'route' => 'backend_user_index',
                 'childOptions' => $event->getChildOptions(),
             ])->setLabelAttribute('icon', 'fas fa-users');
         }
+
+        $menu->addChild('settings', [
+            'label' => $this->translator->trans('Settings'),
+            'route' => '',
+            'childOptions' => $event->getChildOptions(),
+        ])->setLabelAttribute('icon', 'fas fa-cogs');
 
         $menu->addChild('logout', [
             'label' => 'Logout',

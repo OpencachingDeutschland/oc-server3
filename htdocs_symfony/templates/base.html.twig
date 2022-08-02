@@ -1,49 +1,49 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html" lang="de">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('backend') }}
-        {% endblock %}
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('backend') }}
+    {% endblock %}
+</head>
 
-    <body>
-        <div class="container">
-            {% include '/index/navigation.html.twig' %}
+<body>
+<div class="container">
+    {% include '/index/navigation.html.twig' %}
+</div>
+
+{% block body %}
+    {% if app.user %}
+        <div>
+            <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a> {{ '(already logged in as' | trans }} {{ app.user.username }})
         </div>
+        <div>
+            <a href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a>
+        </div>
+    {% else %}
+        <div>
+            <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a>
+        </div>
+        <div>
+            <a href="{{ path('app_security_register') }}">{{ 'Register new user' | trans }}</a>
+        </div>
+        <div>
+            <a href="{{ path('app_security_account_activation') }}">{{ 'Activate account' | trans }}</a>
+        </div>
+    {% endif %}
 
-        {% block body %}
-            {% if app.user %}
-                <div>
-                    <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a> {{ '(already logged in as' | trans }} {{ app.user.username }})
-                </div>
-                <div>
-                    <a href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a>
-                </div>
-            {% else %}
-                <div>
-                    <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a>
-                </div>
-                <div>
-                    <a href="{{ path('app_security_register') }}">{{ 'Register new user' | trans }}</a>
-                </div>
-                <div>
-                    <a href="{{ path('app_security_account_activation') }}">{{ 'Activate account' | trans }}</a>
-                </div>
-            {% endif %}
+    <br />
 
-            <br />
+    {% if is_granted('ROLE_TEAM') %}
+        <a href="{{ path('backend_index_index') }}">BACKEND</a>
+    {% endif %}
 
-            {% if is_granted('ROLE_TEAM') %}
-                <a href="{{ path('backend_index_index') }}">BACKEND</a>
-            {% endif %}
+{% endblock %}
 
-        {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('backend') }}
-        {% endblock %}
-    </body>
+{% block javascripts %}
+    {{ encore_entry_script_tags('backend') }}
+{% endblock %}
+</body>
 </html>

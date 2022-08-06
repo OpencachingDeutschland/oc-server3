@@ -199,7 +199,7 @@ if ($queryid != 0) {
         }
 
         // overwrite variable options; see 'set common variable options' for more
-        if (isset($_REQUEST['sortby'])) {
+        if (isset($_REQUEST['sortby']) && ctype_alpha($_REQUEST['sortby'])) {
             $options['sort'] = $_REQUEST['sortby'];
         }
 

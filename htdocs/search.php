@@ -449,7 +449,7 @@ if ($queryid != 0) {
         }
     }
 
-    $options['sort'] = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : ($homecoords ? 'bydistance' : 'byname');
+    $options['sort'] = (isset($_REQUEST['sort']) && ctype_alpha($_REQUEST['sort'])) ? $_REQUEST['sort'] : ($homecoords ? 'bydistance' : 'byname');
     if (isset($_REQUEST['orderRatingFirst']) && $_REQUEST['orderRatingFirst'] == 1) {
         $options['orderRatingFirst'] = true;
     }

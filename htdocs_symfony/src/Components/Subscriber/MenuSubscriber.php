@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Components\Subscriber;
 
 use KevinPapst\AdminLTEBundle\Event\KnpMenuEvent;
-use Oc\Entity\UserEntity;
+use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -50,8 +50,19 @@ class MenuSubscriber implements EventSubscriberInterface
 
     /**
      */
-    private function addMenuItem()
-    {
+    private function addMenuItem(
+        ItemInterface $menu,
+        string $child,
+        string $label,
+        string $route,
+        string $labelName,
+        string $labelValue
+    ) {
+        $menu->addChild($child, [
+            'label' => $label,
+            'route' => $route,
+            // 'childOptions' => $event->getChildOptions(), // wozu braucht's das?
+        ])->setLabelAttribute($labelName, $labelValue);
     }
 
     /**
@@ -61,76 +72,68 @@ class MenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
-        $menu->addChild('cacheZeug', [
-            'label' => 'Cachezeugs',
-            'route' => 'backend_caches_index',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
+        // TODO: Routen und Icons bei den meisten Menüeinträgen noch anpassen.
+        // https://symfony.com/bundles/KnpMenuBundle/current/index.html
 
-        $menu['cacheZeug']->addChild('cache', [
-            'label' => 'Caches',
-            'route' => 'backend_caches_index',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu, 'menuSearch', $this->translator->trans('Search'), 'backend_caches_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuSearchCaches', $this->translator->trans('Search caches'), 'backend_caches_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuSearchUsers', $this->translator->trans('Search users'), 'backend_user_index', 'icon', 'fas fa-search-location');
 
-        $menu['cacheZeug']->addChild('coordinate', [
-            'label' => 'Coordinates',
-            'route' => 'backend_coordinates_index',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-map-pin');
+        $this->addMenuItem($menu, 'menuHide', $this->translator->trans('Hide'), '', 'icon', 'fas fa-hiking');
 
-        $menu->addChild('maps', [
-            'label' => 'Maps',
-            'route' => 'backend_map_show',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-map');
+        $this->addMenuItem($menu, 'menuMap', $this->translator->trans('Map'), 'backend_map_show', 'icon', 'fas fa-map');
+
+        $this->addMenuItem($menu, 'menuNews', $this->translator->trans('News'), '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsBlog'), 'Blog & OC-Talk', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsEvents'), 'Events', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsLogpictures'), 'Log pictures', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsRecommendations'), 'Recommendations', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsHidesGermany'), 'Hides in Germany', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsHidesWorld'), 'Hides worldwide', '', 'icon', 'fas fa-newspaper');
+        $this->addMenuItem($menu['menuNews'], $this->translator->trans('menuNewsLogs'), 'Logs', '', 'icon', 'fas fa-newspaper');
+
+        $this->addMenuItem($menu, 'menuBookmarks', $this->translator->trans('Bookmark lists'), '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksWatch'), 'Watched caches', '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksOwnLists'), 'Bookmark lists', '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksPublicLists'), 'Public bookmark lists', '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksRecommendations'), 'Recommendations', '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksSearches'), 'Saved searches', '', 'icon', 'fas fa-bookmark');
+        $this->addMenuItem($menu['menuBookmarks'], $this->translator->trans('menuBookmarksIgnore'), 'Ignore list', '', 'icon', 'fas fa-bookmark');
+
+        $this->addMenuItem($menu, 'menuFieldNotes', $this->translator->trans('Field Notes'), '', 'icon', 'fas fa-clipboard');
+
+        $this->addMenuItem($menu, 'menuProfile', $this->translator->trans('Profile'), '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnFounds'), 'Own founds', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnLogspictures'), 'Own log pictures', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnHides'), 'Own hides', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileAdoptions'), 'Adoptions', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnCaches'), 'Own caches', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfilePublic'), 'Public profile', '', 'icon', 'fas fa-address-card');
+        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileBanner'), 'Banner', '', 'icon', 'fas fa-user');
+
+        $this->addMenuItem($menu, 'menuSettings', $this->translator->trans('Settings'), '', 'icon', 'fas fa-cogs');
+        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsProfile'), 'Profile', '', 'icon', 'fas fa-cogs');
+        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsAPI'), 'API', '', 'icon', 'fas fa-cogs');
+        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsCookies'), 'Cookies', '', 'icon', 'fas fa-cogs');
+
+        $this->addMenuItem($menu, 'menuContact', $this->translator->trans('Contact'), '', 'icon', 'fas fa-envelope-open-text');
+
+        $this->addMenuItem($menu, 'menuOC', $this->translator->trans('OC.de & legal'), '', 'icon', 'fas fa-chart-line');
+        $this->addMenuItem($menu['menuOC'], 'menuOCAbout', $this->translator->trans('About'), '', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCLegal', $this->translator->trans('Data license'), '', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCPrivacy', $this->translator->trans('Privacy policy'), '', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCImprint', $this->translator->trans('Imprint'), '', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCTOU', $this->translator->trans('Terms of use'), '', 'icon', 'fas fa-map-marker-alt');
+        $this->addMenuItem($menu['menuOC'], 'menuOCOCOnly81', $this->translator->trans('OCOnly-81'), 'backend_oconly81_index', 'icon', 'fas fa-map-marker-alt');
 
         if ($this->security->isGranted('ROLE_TEAM')) {
-            $menu->addChild('kitchensink', [
-                'label' => 'Kitchensink',
-                'route' => 'app_kitchensink_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fab fa-css3');
+            $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), 'backend_support_reported_caches', 'icon', 'fas fa-user-shield');
+
+            $this->addMenuItem($menu, 'menuKitchensink', $this->translator->trans('DEV Kitchensink'), 'app_kitchensink_index', 'icon', 'fab fa-css3');
+
+            $this->addMenuItem($menu, 'menuRoles', $this->translator->trans('DEV Roles'), 'backend_roles_index', 'icon', 'fas fa-user-shield');
         }
 
-        $menu->addChild('oconly81', [
-            'label' => 'OCOnly81',
-            'route' => 'backend_oconly81_index',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-question');
-
-        $menu->addChild('roles', [
-            'label' => 'Roles',
-            'route' => 'backend_roles_index',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-user-shield');
-
-        if ($this->security->isGranted('ROLE_TEAM')) {
-            $menu->addChild('support', [
-                'label' => 'Support Center',
-                'route' => 'backend_support_reported_caches',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-gem');
-        }
-
-        if ($this->security->isGranted('ROLE_TEAM')) {
-            $menu->addChild('user', [
-                'label' => 'Users',
-                'route' => 'backend_user_index',
-                'childOptions' => $event->getChildOptions(),
-            ])->setLabelAttribute('icon', 'fas fa-users');
-        }
-
-        $menu->addChild('settings', [
-            'label' => $this->translator->trans('Settings'),
-            'route' => '',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-cogs');
-
-        $menu->addChild('logout', [
-            'label' => 'Logout',
-            'route' => 'app_security_logout',
-            'childOptions' => $event->getChildOptions(),
-        ])->setLabelAttribute('icon', 'fas fa-door-open');
+        $this->addMenuItem($menu, 'menuLogout', $this->translator->trans('Logout'), 'app_security_logout', 'icon', 'fas fa-door-open');
     }
 }

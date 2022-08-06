@@ -236,7 +236,7 @@ if ($queryid != 0) {
     // build search options from GET/POST parameters or default values
 
     // hack
-    if (isset($_REQUEST['searchto']) && ($_REQUEST['searchto'] != '')) {
+    if (isset($_REQUEST['searchto']) && ctype_alpha($_REQUEST['searchto'])) {
         unset(
             $_REQUEST['searchbyplz'],
             $_REQUEST['searchbyort'],
@@ -255,20 +255,20 @@ if ($queryid != 0) {
     }
 
     // get the search options parameters and store them in the queries table (to view "the next page")
-    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? $_REQUEST['f_userowner'] : 0; // Ocprop
-    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? $_REQUEST['f_userfound'] : 0; // Ocprop
-    $options['f_unpublished'] = isset($_REQUEST['f_unpublished']) ? $_REQUEST['f_unpublished'] : 0;
-    $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? $_REQUEST['f_disabled'] : 0;
-    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? $_REQUEST['f_inactive'] : 1; // Ocprop
+    $options['f_userowner'] = isset($_REQUEST['f_userowner']) ? (int) $_REQUEST['f_userowner'] : 0; // Ocprop
+    $options['f_userfound'] = isset($_REQUEST['f_userfound']) ? (int) $_REQUEST['f_userfound'] : 0; // Ocprop
+    $options['f_unpublished'] = isset($_REQUEST['f_unpublished']) ? (int) $_REQUEST['f_unpublished'] : 0;
+    $options['f_disabled'] = isset($_REQUEST['f_disabled']) ? (int) $_REQUEST['f_disabled'] : 0;
+    $options['f_inactive'] = isset($_REQUEST['f_inactive']) ? (int) $_REQUEST['f_inactive'] : 1; // Ocprop
     // f_inactive formerly was used for both, archived and disabled caches.
     // After adding the separate f_disabled option, it is used only for archived
     // caches, but keeps its name for compatibility with existing stored or
     // external searches.
-    $options['f_ignored'] = isset($_REQUEST['f_ignored']) ? $_REQUEST['f_ignored'] : 1;
-    $options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? $_REQUEST['f_otherPlatforms'] : 0;
-    $options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? $_REQUEST['f_geokrets'] : 0;
-    $options['expert'] = isset($_REQUEST['expert']) ? $_REQUEST['expert'] : 0; // Ocprop: 0
-    $options['showresult'] = isset($_REQUEST['showresult']) ? $_REQUEST['showresult'] : 0;
+    $options['f_ignored'] = isset($_REQUEST['f_ignored']) ? (int) $_REQUEST['f_ignored'] : 1;
+    $options['f_otherPlatforms'] = isset($_REQUEST['f_otherPlatforms']) ? (int) $_REQUEST['f_otherPlatforms'] : 0;
+    $options['f_geokrets'] = isset($_REQUEST['f_geokrets']) ? (int) $_REQUEST['f_geokrets'] : 0;
+    $options['expert'] = isset($_REQUEST['expert']) ? (int) $_REQUEST['expert'] : 0; // Ocprop: 0
+    $options['showresult'] = isset($_REQUEST['showresult']) ? (int) $_REQUEST['showresult'] : 0;
     $options['output'] = isset($_REQUEST['output']) ? $_REQUEST['output'] : 'HTML'; // Ocprop: HTML
     $options['bbox'] = isset($_REQUEST['bbox']) ? $_REQUEST['bbox'] : false;
 
@@ -322,7 +322,7 @@ if ($queryid != 0) {
     } elseif (isset($_REQUEST['searchbyowner'])) { // Ocprop
         $options['searchtype'] = 'byowner';
 
-        $options['ownerid'] = isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
+        $options['ownerid'] = isset($_REQUEST['ownerid']) ? (int) $_REQUEST['ownerid'] : 0;
         $options['owner'] = isset($_REQUEST['owner']) ? stripslashes($_REQUEST['owner']) : '';
 
         if (isset($options['owner'])) {
@@ -338,7 +338,7 @@ if ($queryid != 0) {
     } elseif (isset($_REQUEST['searchbyfinder'])) { // Ocprop
         $options['searchtype'] = 'byfinder';
 
-        $options['finderid'] = isset($_REQUEST['finderid']) ? $_REQUEST['finderid'] : 0;
+        $options['finderid'] = isset($_REQUEST['finderid']) ? (int) $_REQUEST['finderid'] : 0;
         $options['finder'] = isset($_REQUEST['finder']) ? stripslashes($_REQUEST['finder']) : '';
         $options['logtype'] = isset($_REQUEST['logtype']) ? $_REQUEST['logtype'] : '1,7'; // Ocprop
 
@@ -393,7 +393,7 @@ if ($queryid != 0) {
             $options['lon_min'] = isset($_REQUEST['lon_min']) ? $_REQUEST['lon_min'] : 0;
         }
 
-        $options['distance'] = isset($_REQUEST['distance']) ? $_REQUEST['distance'] : 0;
+        $options['distance'] = isset($_REQUEST['distance']) ? (int) $_REQUEST['distance'] : 0;
     } elseif (isset($_REQUEST['searchbyfulltext'])) {
         $options['searchtype'] = 'byfulltext';
 
@@ -1773,7 +1773,7 @@ function outputSearchForm($options)
     $tpl->assign('searchtype_byname', $options['searchtype'] == 'byname');
 
     // distance
-    $tpl->assign('distance', isset($options['distance']) ? $options['distance'] : DEFAULT_SEARCH_DISTANCE);
+    $tpl->assign('distance', isset($options['distance']) ? (int) $options['distance'] : DEFAULT_SEARCH_DISTANCE);
 
     if (!isset($options['unit'])) {
         $options['unit'] = DEFAULT_DISTANCE_UNIT;
@@ -1855,10 +1855,10 @@ function outputSearchForm($options)
             $tpl->assign('lon_min', '00.000');
         }
     } else {
-        $tpl->assign('lat_h', isset($options['lat_h']) ? $options['lat_h'] : '00');
-        $tpl->assign('lon_h', isset($options['lon_h']) ? $options['lon_h'] : '000');
-        $tpl->assign('lat_min', isset($options['lat_min']) ? $options['lat_min'] : '00.000');
-        $tpl->assign('lon_min', isset($options['lon_min']) ? $options['lon_min'] : '00.000');
+        $tpl->assign('lat_h', isset($options['lat_h']) ? htmlspecialchars($options['lat_h']) : '00');
+        $tpl->assign('lon_h', isset($options['lon_h']) ? htmlspecialchars($options['lon_h']) : '000');
+        $tpl->assign('lat_min', isset($options['lat_min']) ? htmlspecialchars($options['lat_min']) : '00.000');
+        $tpl->assign('lon_min', isset($options['lon_min']) ? htmlspecialchars($options['lon_min']) : '00.000');
 
         if ($options['lonEW'] == 'W') {
             $tpl->assign('lonE_sel', '');

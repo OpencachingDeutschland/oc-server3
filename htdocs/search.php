@@ -486,10 +486,10 @@ if ($queryid != 0) {
 
 // set common variable options
 if (isset($_REQUEST['sortorder'])) {
-    $options['sortorder'] = $_REQUEST['sortorder'];
+    $options['sortorder'] = htmlspecialchars($_REQUEST['sortorder']);
 }
 if (isset($_REQUEST['creationdate'])) {
-    $options['creationdate'] = $_REQUEST['creationdate'];
+    $options['creationdate'] = htmlspecialchars($_REQUEST['creationdate']);
 }
 
 //=========================================================
@@ -1951,7 +1951,7 @@ function outputSearchForm($options)
         $rCachetype['unchecked'] = !$rCachetype['checked'];
     }
     $tpl->assign('cachetypes', $rCachetypes);
-    $tpl->assign('cachetype', $options['cachetype']);
+    $tpl->assign('cachetype', htmlspecialchars($options['cachetype']));
 
     $cachesizes = [];
     $rs = sql("SELECT `id` FROM `cache_size`");
@@ -1965,7 +1965,7 @@ function outputSearchForm($options)
     }
     sql_free_result($rs);
     $tpl->assign('cachesizes', $cachesizes);
-    $tpl->assign('cachesize', $options['cachesize']);
+    $tpl->assign('cachesize', htmlspecialchars($options['cachesize']));
 
     // difficulty + terrain
     $tpl->assign('difficultymin', $options['difficultymin']);

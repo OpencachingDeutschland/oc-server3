@@ -460,11 +460,11 @@ if ($queryid != 0) {
     $options['cachetype'] = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] : '';
 
     $options['cachesize'] = isset($_REQUEST['cachesize']) ? $_REQUEST['cachesize'] : '';
-    $options['difficultymin'] = isset($_REQUEST['difficultymin']) ? $_REQUEST['difficultymin'] + 0 : 0;
-    $options['difficultymax'] = isset($_REQUEST['difficultymax']) ? $_REQUEST['difficultymax'] + 0 : 0;
-    $options['terrainmin'] = isset($_REQUEST['terrainmin']) ? $_REQUEST['terrainmin'] + 0 : 0;
-    $options['terrainmax'] = isset($_REQUEST['terrainmax']) ? $_REQUEST['terrainmax'] + 0 : 0;
-    $options['recommendationmin'] = isset($_REQUEST['recommendationmin']) ? $_REQUEST['recommendationmin'] + 0 : 0;
+    $options['difficultymin'] = isset($_REQUEST['difficultymin']) ? (int) $_REQUEST['difficultymin'] : 0;
+    $options['difficultymax'] = isset($_REQUEST['difficultymax']) ? (int) $_REQUEST['difficultymax'] : 0;
+    $options['terrainmin'] = isset($_REQUEST['terrainmin']) ? (int) $_REQUEST['terrainmin'] : 0;
+    $options['terrainmax'] = isset($_REQUEST['terrainmax']) ? (int) $_REQUEST['terrainmax'] : 0;
+    $options['recommendationmin'] = isset($_REQUEST['recommendationmin']) ? (int) $_REQUEST['recommendationmin'] : 0;
 
     if (in_array($options['searchtype'], ['byort', 'byplz', 'bydistance', 'bywaypoint'])) {
         // For distance-based searches, sort by distance instead of name.
@@ -482,14 +482,14 @@ if ($queryid != 0) {
     }
 
     $options['queryid'] = 0;
-}  // $queryid == 0
+}
 
 // set common variable options
 if (isset($_REQUEST['sortorder'])) {
-    $options['sortorder'] = $_REQUEST['sortorder'];
+    $options['sortorder'] = htmlspecialchars($_REQUEST['sortorder']);
 }
 if (isset($_REQUEST['creationdate'])) {
-    $options['creationdate'] = $_REQUEST['creationdate'];
+    $options['creationdate'] = htmlspecialchars($_REQUEST['creationdate']);
 }
 
 //=========================================================
@@ -1951,7 +1951,7 @@ function outputSearchForm($options)
         $rCachetype['unchecked'] = !$rCachetype['checked'];
     }
     $tpl->assign('cachetypes', $rCachetypes);
-    $tpl->assign('cachetype', $options['cachetype']);
+    $tpl->assign('cachetype', htmlspecialchars($options['cachetype']));
 
     $cachesizes = [];
     $rs = sql("SELECT `id` FROM `cache_size`");
@@ -1965,7 +1965,7 @@ function outputSearchForm($options)
     }
     sql_free_result($rs);
     $tpl->assign('cachesizes', $cachesizes);
-    $tpl->assign('cachesize', $options['cachesize']);
+    $tpl->assign('cachesize', htmlspecialchars($options['cachesize']));
 
     // difficulty + terrain
     $tpl->assign('difficultymin', $options['difficultymin']);

@@ -1,137 +1,261 @@
-{% extends '@AdminLTE/layout/default-layout.html.twig' %}
+{# original source code for this file: see '@AdminLTE/layout/default-layout.html.twig' #}
 
-{# <div class="container"> #}
-{#    {% include '/index/navigation.html.twig' %} #}
-{# </div> #}
+<!DOCTYPE html{% block html_start %}{% endblock %}>
+<html lang="{{ app.request.locale }}">
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    {% endblock %}
 
-{% block logo_mini %}<b>OC</b>de{% endblock %}
-{% block logo_large %} <b>Opencaching.de</b>{% endblock %}
+    <title>{% block title %}{{ block('page_title') }}{% endblock %}</title>
 
-{% block page_title %}{% endblock %}
-{% block page_subtitle %}{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/adminlte/adminlte.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/oc-style.css') }}">
+    {% endblock %}
+</head>
 
-{% block navbar_search_form %}
-    <!-- SEARCH FORM -->
-    {# TODO: Suchformular noch funktionsfähig machen.. #}
-    {# TODO: nur anzeigen, wenn Bildschirm breit genug ist.. #}
+{# Apply one of the following classes for the skin: skin-blue, skin-black, skin-purple, skin-yellow, skin-red, skin-green #}
+{# Apply one or more of the following classes for the layout options: fixed, layout-boxed, layout-top-nav, sidebar-collapse, sidebar-mini #}
+<body{% block body_start %}{% endblock %} class="hold-transition sidebar-collapse {{ admin_lte_context.skin | default("") | body_class }}">
+{% block after_body_start %}{% endblock %}
+<div class="wrapper">
+    <header class="main-header">
+        <a href="{% block logo_path %}{{ path('adminlte_welcome' | route_alias) }}{% endblock %}" class="logo">
+            <span class="logo-mini">
+                {% block logo_mini %}<b>OC</b>de{% endblock %}
+            </span>
+            <span class="logo-lg">
+               {% block logo_large %} <b>Opencaching.de</b>{% endblock %}
+            </span>
+        </a>
 
-    {#    <form class="form-inline ml-6">#}
-        <div class="input-group mb-3">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search"
-                   aria-describedby="button-magnifier">
-            <div class="input-group-append">
-                <span class="input-group-text" id="button-magnifier"><i class="fas fa-search"></i></span>
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" role="navigation">
+            {% block navbar_toggle %}
+                <a href="#" class="sidebar-toggle col-md-1" data-toggle="push-menu" role="button">
+                    <span class="sr-only">{{ 'Toggle navigation' | trans }}</span>
+                </a>
+            {% endblock %}
+
+            {# TODO: CSS anpassen #}
+            <div class="container container-fluid col-md-10">
+                <div class="row col-md">
+                    <div class="col-md-5">
+                    </div>
+                    <div class="col-md-5 text-md-right align-self-center">
+                        {% block navbar_search_form %}
+                            <!-- SEARCH FORM -->
+                            {# TODO: Suchformular noch funktionsfähig machen.. #}
+                            {# TODO: nur anzeigen, wenn Bildschirm breit genug ist.. #}
+
+                            {#    <form class="form-inline ml-6"> #}
+                            <div class="input-group mb-3">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search"
+                                       aria-describedby="button-magnifier">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="button-magnifier"><i class="fas fa-search"></i></span>
+                                </div>
+                            </div>
+                            {#    </form> #}
+                        {% endblock %}
+
+                    </div>
+                    <div class="col-md-2 text-md-right">
+                        {% block navbar_right %}
+                            {% if app.user %}
+                                <!-- Right navbar links -->
+                                <ul class="navbar-nav ml-auto">
+                                    <!-- Logout icon -->
+                                    <li class="nav-item dropdown">
+                                        <a href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a>
+                                    </li>
+
+                                    <!-- Messages Dropdown Menu -->
+                                    <li class="nav-item dropdown">
+                                        {# TODO: statt der Mustertexte und -nutzer was Richtiges einbauen.. #}
+                                        <a class="nav-link" data-toggle="dropdown" href="#">
+                                            <i class="far fa-comments"></i>
+                                            <span class="badge badge-danger navbar-badge">2</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                            <a href="#" class="dropdown-item">
+                                                <!-- Message Start -->
+                                                <div class="media">
+                                                    <img src="../user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                                                    <div class="media-body">
+                                                        <h3 class="dropdown-item-title">
+                                                            Max Mustermann
+                                                            <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                                        </h3>
+                                                        <p class="text-sm">Ruf mich an...</p>
+                                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Message End -->
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item">
+                                                <!-- Message Start -->
+                                                <div class="media">
+                                                    <img src="../user2-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                                                    <div class="media-body">
+                                                        <h3 class="dropdown-item-title">
+                                                            Klara
+                                                            <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                                        </h3>
+                                                        <p class="text-sm">I got your message bro</p>
+                                                        <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                                    </div>
+                                                </div>
+                                                <!-- Message End -->
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                                        </div>
+                                    </li>
+
+                                    <!-- Notifications Dropdown Menu -->
+                                    <li class="nav-item dropdown">
+                                        {# TODO: statt der Musternachrichten was Richtiges einbauen.. #}
+                                        <a class="nav-link" data-toggle="dropdown" href="#">
+                                            <i class="far fa-bell"></i>
+                                            <span class="badge badge-warning navbar-badge">15</span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                            <span class="dropdown-header">15 Notifications</span>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-envelope mr-2"></i> 4 new messages
+                                                <span class="float-right text-muted text-sm">3 mins</span>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-users mr-2"></i> 8 friend requests
+                                                <span class="float-right text-muted text-sm">12 hours</span>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item">
+                                                <i class="fas fa-file mr-2"></i> 3 new reports
+                                                <span class="float-right text-muted text-sm">2 days</span>
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            {% else %}
+                                <!-- Login/Register/Activation icon -->
+                                <div>
+                                    <a href="{{ path('app_security_login') }}">{{ 'Login' | trans }}</a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('app_security_register') }}">{{ 'Register' | trans }}</a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('app_security_account_activation') }}">{{ 'Activate account' | trans }}</a>
+                                </div>
+                            {% endif %}
+                        {% endblock %}
+                    </div>
+                </div>
             </div>
-        </div>
-{#    </form>#}
-{% endblock %}
 
-{% block navbar_right %}
-    {% if app.user %}
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Logout icon -->
-            <li class="nav-item dropdown">
-                <a href="{{ path('app_security_logout') }}"><i class="fas fa-sign-out-alt"></i> {{ 'Logout' | trans }}</a>
-            </li>
-            </br>
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    {% block navbar_start %}{% endblock %}
+                    {% block navbar_messages %}
+                        {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\NavbarController::messagesAction')) }}
+                    {% endblock %}
+                    {% block navbar_notifications %}
+                        {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\NavbarController::notificationsAction')) }}
+                    {% endblock %}
+                    {% block navbar_tasks %}
+                        {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\NavbarController::tasksAction')) }}
+                    {% endblock %}
+                    {% block navbar_user %}
+                        {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\NavbarController::userAction')) }}
+                    {% endblock %}
+                    {% block navbar_end %}{% endblock %}
+                    {% block navbar_control_sidebar_toggle %}
+                        {% if admin_lte_context.control_sidebar is defined and admin_lte_context.control_sidebar is not empty %}
+                            <li>
+                                <a href="#" data-toggle="control-sidebar"><i class="fas fa-cogs"></i></a>
+                            </li>
+                        {% endif %}
+                    {% endblock %}
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                {# TODO: statt der Mustertexte und -nutzer was Richtiges einbauen.. #}
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments"></i>
-                    <span class="badge badge-danger navbar-badge">2</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="../user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Max Mustermann
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Ruf mich an...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="../user2-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Klara
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                </div>
-            </li>
-            </br>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            {% block sidebar_user %}
+                {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\SidebarController::userPanelAction')) }}
+                {% endif %}
+            {% endblock %}
 
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                {# TODO: statt der Musternachrichten was Richtiges einbauen.. #}
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                </div>
-            </li>
-        </ul>
-    {% else %}
-        <!-- Login/Register/Activation icon -->
-        <a href="{{ path('app_security_login') }}"><i class="fas fa-sign-in-alt"></i> {{ 'Login' | trans }}</a></br>
-        <a href="{{ path('app_security_register') }}"><i class="fas fa-sign-in-alt"></i> {{ 'Register new user' | trans }}</a></br>
-        <a href="{{ path('app_security_account_activation') }}"><i class="fas fa-sign-in-alt"></i> {{ 'Activate account' | trans }}</a></br>
-    {% endif %}
-{% endblock %}
+            {% block sidebar_search %}
+                {# {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\SidebarController::searchFormAction')) }} #}
+            {% endblock %}
 
-{% block footer %}
-    <footer class="main-footer ">
-        {# TODO: Links anpassen sobald verfügbar.. #}
-        <a href="#">{{ 'Privacy policy' | trans }}</a>
-        ,
-        <a href="#">{{ 'Imprint' | trans }}</a>
-        ,
-        <a href="#">{{ 'Contact' | trans }}</a>
-        ,
-        <i class="fas fa-copyright"></i> opencaching.de {{ "now" | date("Y") }}
-    </footer>
-{% endblock %}
+            {% block sidebar_nav %}
+                {% if admin_lte_context.knp_menu.enable %}
+                    {% include '@AdminLTE/Sidebar/knp-menu.html.twig' %}
+                {% else %}
+                    {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\SidebarController::menuAction', {'request':app.request})) }}
+                {% endif %}
+            {% endblock %}
+        </section>
+    </aside>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                {% block page_title %}{% endblock %}
+                <small>{% block page_subtitle %}{% endblock %}</small>
+            </h1>
+
+            {% block breadcrumb %}
+                {% if admin_lte_context.knp_menu.enable %}
+                    {% include '@AdminLTE/Breadcrumb/knp-breadcrumb.html.twig' %}
+                {% else %}
+                    {{ render(controller('KevinPapst\\AdminLTEBundle\\Controller\\BreadcrumbController::breadcrumbAction', {'request':app.request})) }}
+                {% endif %}
+            {% endblock %}
+        </section>
+
+        {% block page_content_before %}{% endblock %}
+
+        <section class="{% block page_content_class %}content{% endblock %}">
+            {% block page_content_start %}{{ include('@AdminLTE/Partials/_flash_messages.html.twig') }}{% endblock %}
+            {% block page_content %}{% endblock %}
+            {% block page_content_end %}{% endblock %}
+        </section>
+
+        {% block page_content_after %}{% endblock %}
+    </div>
+
+    {% block footer %}
+        <footer class="main-footer ">
+            {# TODO: Links anpassen sobald verfügbar.. #}
+            <a href="#">{{ 'Privacy policy' | trans }}</a>
+            ,
+            <a href="#">{{ 'Imprint' | trans }}</a>
+            ,
+            <a href="#">{{ 'Contact' | trans }}</a>
+            ,
+            <i class="fas fa-copyright"></i> opencaching.de {{ "now" | date("Y") }}
+        </footer>
+    {% endblock %}
+</div>
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('backend') }}
+    <script src="{{ asset('bundles/adminlte/adminlte.js') }}"></script>
 {% endblock %}
 
+</body>
+</html>

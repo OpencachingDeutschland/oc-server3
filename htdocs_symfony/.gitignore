@@ -17,7 +17,8 @@
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
-/public/build/
+/public/build/*
+!/public/build/oc-style.css
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###

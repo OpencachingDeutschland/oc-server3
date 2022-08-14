@@ -3,7 +3,7 @@
 {% block page_content %}
 
     <div>
-        <h3>Cachedatenbank abrufen..</h3>
+        <h3>{{ 'Search for caches and users' | trans }}..</h3>
         {% if cachesForm is defined %}
             {{ form_start(cachesForm) }}
             {{ form_widget(cachesForm) }}
@@ -17,7 +17,7 @@
         {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
             {% if caches_by_searchfield %}
                 <br/>
-                <div> {{ 'Found' }}: {{ caches_by_searchfield | length }} {{ 'cache(s)' | trans }}</div>
+                <div> {{ 'Found' | trans }}: {{ caches_by_searchfield | length }} {{ 'cache(s)' | trans }}</div>
                 <br/>
                 <table class="table table-striped table-hover">
                     <thead class="thead-dark">

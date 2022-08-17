@@ -4,7 +4,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 Use Oc\Entity\GeoCacheStatusModifiedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -52,6 +52,7 @@ class CacheStatusModifiedRepository
      * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws Exception
      */
     public function fetchAll()
     {
@@ -79,6 +80,7 @@ class CacheStatusModifiedRepository
      * @param array $where
      *
      * @return GeoCacheStatusModifiedEntity
+     * @throws Exception
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
@@ -109,6 +111,7 @@ class CacheStatusModifiedRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordNotFoundException
      */
     public function fetchBy(array $where = [])
@@ -144,8 +147,8 @@ class CacheStatusModifiedRepository
      * @param GeoCacheStatusModifiedEntity $entity
      *
      * @return GeoCacheStatusModifiedEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
      */
     public function create(GeoCacheStatusModifiedEntity $entity)
     {
@@ -169,8 +172,8 @@ class CacheStatusModifiedRepository
      * @param GeoCacheStatusModifiedEntity $entity
      *
      * @return GeoCacheStatusModifiedEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
-     * @throws DBALException
      */
     public function update(GeoCacheStatusModifiedEntity $entity)
     {
@@ -193,9 +196,9 @@ class CacheStatusModifiedRepository
      * @param GeoCacheStatusModifiedEntity $entity
      *
      * @return GeoCacheStatusModifiedEntity
-     * @throws DBALException
-     * @throws RecordNotPersistedException
+     * @throws Exception
      * @throws InvalidArgumentException
+     * @throws RecordNotPersistedException
      */
     public function remove(GeoCacheStatusModifiedEntity $entity)
     {

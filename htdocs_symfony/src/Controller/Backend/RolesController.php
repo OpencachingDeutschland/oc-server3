@@ -3,7 +3,7 @@
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Oc\Form\RolesSearchUser;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -74,12 +74,13 @@ class RolesController extends AbstractController
 
     /**
      * @return Response
+     * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @Route("/roles/teamlist", name="roles_teamlist")
      * @Security("is_granted('ROLE_TEAM')")
      *
-     * Get all users (and their roles) who are at least the given ROLE_*
+     * Get all users (and their roles) who are at least the given ROLE_
      */
     public function getTeamOverview()
     : Response
@@ -104,6 +105,7 @@ class RolesController extends AbstractController
      *
      * @return array
      * @throws RecordNotFoundException
+     * @throws Exception
      */
     private function getTeamMembersAndRoles(string $minimumRoleName)
     : array {
@@ -189,9 +191,9 @@ class RolesController extends AbstractController
      * @param string $role
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordAlreadyExistsException
-     * @throws RecordNotFoundException|RecordsNotFoundException
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @Route("/roles/promoteRole/{userId}&{role}", name="roles_promote_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */

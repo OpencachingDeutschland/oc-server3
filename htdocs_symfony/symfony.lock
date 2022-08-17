@@ -263,9 +263,9 @@
         "version": "5.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "5.1",
-            "ref": "6ee1194b036378b21884e7f57b6a2ac721167f16"
+            "ref": "0cc6d287da757e1167e287d84487662825119e91"
         },
         "files": [
             "config/packages/cache.yaml",

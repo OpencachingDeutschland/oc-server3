@@ -12,7 +12,7 @@
                         <li><h4>{{ roleName }}</h4></li>
                         <ul>
                             {% for teamMember in teamAndRoles | filter(teamMember => teamMember.role == roleName) %}
-                                <li>{{ teamMember.username }}</li>
+                                <li>{{ teamMember.user_id }} / {{ teamMember.username }}</li>
                             {% else %}
                                 <li>-</li>
                             {% endfor %}

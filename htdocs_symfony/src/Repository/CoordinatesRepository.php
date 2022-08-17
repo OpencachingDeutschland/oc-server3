@@ -22,8 +22,8 @@ class CoordinatesRepository
     /**
      * Coordinate constructor.
      *
-     * @param $nNewLat
-     * @param $nNewLon
+     * @param float $nNewLat
+     * @param float $nNewLon
      */
     public function __construct(float $nNewLat = 0.0, float $nNewLon = 0.0)
     {
@@ -39,7 +39,7 @@ class CoordinatesRepository
      * @param float $nNewLon
      */
     public function setLatLon(float $nNewLat, float $nNewLon)
-    {
+    : void {
         $this->nLat = $nNewLat;
         $this->nLon = $nNewLon;
     }
@@ -87,11 +87,11 @@ class CoordinatesRepository
     /**
      * Degree Minute: d° mm.mmm
      *
-     * @param false $hideMinutFractions
+     * @param bool $hideMinutFractions
      *
-     * @return string[]
+     * @return array
      */
-    public function getDegreeMinutes($hideMinutFractions = false)
+    public function getDegreeMinutes(bool $hideMinutFractions = false)
     : array {
         $minute_format = ($hideMinutFractions ? '%02.0f.***' : '%06.3f');
 
@@ -348,7 +348,7 @@ class CoordinatesRepository
      *
      * @return float[]|int[]
      */
-    public function wgs2pot($bw, $lw)
+    public function wgs2pot(float $bw, float $lw)
     : array {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
@@ -438,8 +438,8 @@ class CoordinatesRepository
      *
      * @return int[]
      */
-    public function geo2gk($bp, $lp)
-    {
+    public function geo2gk(float $bp, float $lp)
+    : array {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
            copy of this software and associated documentation files (the "Software"),
@@ -548,7 +548,7 @@ class CoordinatesRepository
     public function getRD()
     : string
     {
-        $rpq = array();
+        $rpq = [];
 
         // X0,Y0             Base RD coordinates Amersfoort
         $rdx_base = 155000;
@@ -613,7 +613,7 @@ class CoordinatesRepository
     public function getQTH()
     : string
     {
-        $l = array();
+        $l = [];
         $lon = $this->nLon;
         $lat = $this->nLat;
 
@@ -640,6 +640,7 @@ class CoordinatesRepository
      * @return string[]
      */
     public function getSwissGrid()
+    : array
     {
         $nLat = $this->nLat * 3600;
         $nLon = $this->nLon * 3600;
@@ -660,8 +661,8 @@ class CoordinatesRepository
         // Namen: "CH1903", "Schweizer Landeskoordinaten" oder "Swiss Grid"
         $swissgrid = "$y / $x";
         // Karten Links
-        $mapplus = "<a href=\"http://www.mapplus.ch/frame.php?map=&x=$y&y=$x&zl=13\" target=\"_blank\">MapPlus</a>";
-        $mapsearch = "<a href=\"http://map.search.ch/$y,$x\" target=\"_blank\">map.search.ch</a>";
+        $mapplus = "<a href=\"https://www.mapplus.ch/frame.php?map=&x=$y&y=$x&zl=13\" target=\"_blank\">MapPlus</a>";
+        $mapsearch = "<a href=\"https://map.search.ch/$y,$x\" target=\"_blank\">map.search.ch</a>";
 
         return [
             'coord' => $swissgrid,
@@ -721,11 +722,11 @@ class CoordinatesRepository
     /**
      * What3Words
      *
-     * @param $language
+     * @param string $language
      *
      * @return false|mixed
      */
-    public function getW3W($language = 'en')
+    public function getW3W(string $language = 'en')
     {
         if (!$_ENV['W3W_API']) {
             return false;

@@ -322,12 +322,12 @@
         "version": "v5.1.7"
     },
     "symfony/monolog-bundle": {
-        "version": "3.3",
+        "version": "3.8",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "3.3",
-            "ref": "d7249f7d560f6736115eee1851d02a65826f0a56"
+            "ref": "2120e71a370db3a494b8afcc42d7cfb2cff6f910"
         },
         "files": [
             "config/packages/dev/monolog.yaml",

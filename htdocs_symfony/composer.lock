@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1eea1809d2ef248dc2c3e4cafc2cd2fb",
+    "content-hash": "75d9f0bc095ba6dcd76cf501f7aea26f",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -7599,134 +7599,6 @@
     ],
     "packages-dev": [
         {
-            "name": "migrify/config-transformer",
-            "version": "0.3.59",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/migrify/config-transformer.git",
-                "reference": "4e75f62d6328ea5226837ea8cb3581aa5700fb1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/migrify/config-transformer/zipball/4e75f62d6328ea5226837ea8cb3581aa5700fb1b",
-                "reference": "4e75f62d6328ea5226837ea8cb3581aa5700fb1b",
-                "shasum": ""
-            },
-            "require": {
-                "migrify/migrify-kernel": "^0.4",
-                "migrify/php-config-printer": "^0.4",
-                "nette/neon": "^3.0",
-                "nette/utils": "^3.1",
-                "nikic/php-parser": "^4.9",
-                "php": ">=7.2",
-                "symfony/console": "^4.4|^5.1",
-                "symfony/dependency-injection": "^4.4|^5.1",
-                "symfony/expression-language": "^4.4|^5.1",
-                "symfony/http-kernel": "^4.4|^5.1",
-                "symfony/yaml": "^4.4|^5.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5|^9.0",
-                "symfony/framework-bundle": "^4.4|^5.1",
-                "symplify/easy-testing": "^8.3.46"
-            },
-            "bin": [
-                "bin/config-transformer"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Migrify\\ConfigTransformer\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Convert Symfony YAML/XML format to PHP/YAML",
-            "abandoned": "symplify/config-transformer",
-            "time": "2020-11-14T11:39:11+00:00"
-        },
-        {
-            "name": "migrify/migrify-kernel",
-            "version": "0.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/migrify/migrify-kernel.git",
-                "reference": "679ef17540401c30b28257786ee94fda464a5a8b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/migrify/migrify-kernel/zipball/679ef17540401c30b28257786ee94fda464a5a8b",
-                "reference": "679ef17540401c30b28257786ee94fda464a5a8b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2",
-                "symfony/console": "^4.4|^5.1",
-                "symfony/dependency-injection": "^4.4|^5.1",
-                "symfony/http-kernel": "^4.4|^5.1",
-                "symplify/autowire-array-parameter": "^8.3.46|^9.0",
-                "symplify/package-builder": "^8.3.46|^9.0",
-                "symplify/smart-file-system": "^8.3.46|^9.0"
-            },
-            "require-dev": {
-                "tracy/tracy": "^2.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Migrify\\MigrifyKernel\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Kernel for small CLI applications",
-            "abandoned": "symplify/symplify-kernel",
-            "time": "2020-11-14T20:12:17+00:00"
-        },
-        {
-            "name": "migrify/php-config-printer",
-            "version": "0.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/migrify/php-config-printer.git",
-                "reference": "a7d9d21cb34050aa808ccd35d2bedcd484fe1220"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/migrify/php-config-printer/zipball/a7d9d21cb34050aa808ccd35d2bedcd484fe1220",
-                "reference": "a7d9d21cb34050aa808ccd35d2bedcd484fe1220",
-                "shasum": ""
-            },
-            "require": {
-                "migrify/migrify-kernel": "^0.4.2",
-                "nette/utils": "^3.1",
-                "nikic/php-parser": "^4.9",
-                "php": ">=7.2",
-                "symfony/http-kernel": "^4.4|^5.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.5|^9.0",
-                "symplify/easy-testing": "^8.3.46|^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Migrify\\PhpConfigPrinter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Print Symfony services array with configuration to to plain PHP file format thanks to this simple php-parser wrapper",
-            "abandoned": "symplify/php-config-printer",
-            "time": "2020-11-17T12:04:46+00:00"
-        },
-        {
             "name": "nette/finder",
             "version": "v2.5.3",
             "source": {
@@ -7788,70 +7660,6 @@
                 "nette"
             ],
             "time": "2021-12-12T17:43:24+00:00"
-        },
-        {
-            "name": "nette/neon",
-            "version": "v3.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nette/neon.git",
-                "reference": "22e384da162fab42961d48eb06c06d3ad0c11b95"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nette/neon/zipball/22e384da162fab42961d48eb06c06d3ad0c11b95",
-                "reference": "22e384da162fab42961d48eb06c06d3ad0c11b95",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "nette/tester": "^2.0",
-                "phpstan/phpstan": "^0.12",
-                "tracy/tracy": "^2.7"
-            },
-            "bin": [
-                "bin/neon-lint"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0-only",
-                "GPL-3.0-only"
-            ],
-            "authors": [
-                {
-                    "name": "David Grudl",
-                    "homepage": "https://davidgrudl.com"
-                },
-                {
-                    "name": "Nette Community",
-                    "homepage": "https://nette.org/contributors"
-                }
-            ],
-            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
-            "homepage": "https://ne-on.org",
-            "keywords": [
-                "export",
-                "import",
-                "neon",
-                "nette",
-                "yaml"
-            ],
-            "time": "2022-03-10T02:04:26+00:00"
         },
         {
             "name": "nette/utils",
@@ -8556,6 +8364,44 @@
                 }
             ],
             "time": "2020-10-26T10:38:48+00:00"
+        },
+        {
+            "name": "symplify/config-transformer",
+            "version": "11.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symplify/config-transformer.git",
+                "reference": "fd414f9a66da605f083701fe5d771edf5e15bfbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symplify/config-transformer/zipball/fd414f9a66da605f083701fe5d771edf5e15bfbd",
+                "reference": "fd414f9a66da605f083701fe5d771edf5e15bfbd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "bin": [
+                "bin/config-transformer"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Prefixed version of Symfony YAML/XML to PHP/YAML config converter",
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/rectorphp",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/tomasvotruba",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-08-16T08:52:39+00:00"
         },
         {
             "name": "symplify/package-builder",

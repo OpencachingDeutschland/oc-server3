@@ -1,14 +1,16 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Migration to add impressum and tos to the page table.
  */
-class Version20170526212910 extends AbstractMigration
+final class Version20170526212910 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {

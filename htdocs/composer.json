@@ -4,9 +4,9 @@
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
   "require": {
-    "php": ">=7.2.5",
+    "php": "^8.0",
     "ezyang/htmlpurifier": "^v4.8",
-    "smarty/smarty": "~2.6",
+    "smarty/smarty": "~2.6|^3.0|^4.0",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
     "doctrine/doctrine-bundle": "^1.6|2.6.4",
@@ -45,8 +45,9 @@
     "behat/mink-goutte-driver": "^1.2|^2.0",
     "squizlabs/php_codesniffer": "^2.6|^3.0",
     "fig-r/psr2r-sniffer": "^0.3.0|^1.0",
-    "codedungeon/phpunit-result-printer": "^0.4.4",
-    "nette/php-generator": "^2.6|^3.0"
+    "hassankhan/config": "0.11.2|^1.0|^2.0",
+    "codedungeon/phpunit-result-printer": "^0.4|^0.30",
+    "nette/php-generator": "^2.6|^3.0|^4.0"
   },
   "repositories": [
     {

@@ -40,11 +40,17 @@ class OcSmarty extends Smarty
     public $body_load = [];
     public $body_unload = [];
 
+    public $objMap = null;
+
     /**
      * OcSmarty constructor.
+     *
+     * @throws SmartyException
      */
     public function __construct()
     {
+        parent::__construct();
+
         global $opt;
         $this->bench = new CBench();
         $this->bench->start();
@@ -64,8 +70,8 @@ class OcSmarty extends Smarty
 
         // register additional functions
         require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
-        $this->register_block('nocache', 'smarty_block_nocache', false);
-        $this->load_filter('pre', 't');
+        $this->registerPlugin('nocache', 'smarty_block_nocache', 'smarty_block_nocache');
+        $this->loadFilter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -119,12 +125,13 @@ class OcSmarty extends Smarty
         if (count($this->autoload_filters)) {
             foreach ($this->autoload_filters as $_filter_type => $_filters) {
                 foreach ($_filters as $_filter) {
-                    $this->load_filter($_filter_type, $_filter);
+                    $this->loadFilter($_filter_type, $_filter);
                 }
             }
         }
 
-        $_smarty_compile_path = $this->_get_compile_path($resource_name);
+//        $_smarty_compile_path = $this->_get_compile_path($resource_name);
+        $_smarty_compile_path = $this->getCompileDir($resource_name);
 
         // if we just need to display the results, don't perform output
         // buffering - for speed
@@ -143,8 +150,11 @@ class OcSmarty extends Smarty
      * @param null|mixed $dummy1
      * @param null|mixed $dummy2
      * @param null|mixed $dummy3
+     * @param null|mixed $dummy4
+     *
+     * @throws SmartyException
      */
-    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null): void
+    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null, $dummy4 = null): void
     {
         global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate, $useragent_msie;
         $cookie->close();
@@ -172,8 +182,8 @@ class OcSmarty extends Smarty
         $optn['template']['locale'] = $opt['template']['locale'];
         $optn['template']['style'] = $opt['template']['style'];
         $optn['template']['country'] = $login->getUserCountry();
-        $optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
-        $optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
+        $optn['page']['subtitle1'] = $opt['locale'][$locale]['page']['subtitle1'] ?? $opt['page']['subtitle1'];
+        $optn['page']['subtitle2'] = $opt['locale'][$locale]['page']['subtitle2'] ?? $opt['page']['subtitle2'];
         $optn['page']['sitename'] = $opt['page']['sitename'];
         $optn['page']['headimagepath'] = $opt['page']['headimagepath'];
         $optn['page']['headoverlay'] = $opt['page']['headoverlay'];
@@ -302,7 +312,7 @@ class OcSmarty extends Smarty
         }
         $this->assign('sys_dbslave', ($db['slave_id'] != -1));
 
-        if ($this->template_exists($this->name . '.tpl')) {
+        if ($this->templateExists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
         } elseif ($this->name != 'sys_error') {
             $this->error(ERROR_TEMPLATE_NOT_FOUND);
@@ -326,7 +336,7 @@ class OcSmarty extends Smarty
 
         // check if the template is compiled
         // if not, check if translation works correct
-        $_smarty_compile_path = $this->_get_compile_path($this->name);
+        $_smarty_compile_path = $this->getCompileDir($this->name);
         if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
             $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
             if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
@@ -371,6 +381,8 @@ class OcSmarty extends Smarty
      * show an error dialog
      *
      * @param int $id
+     *
+     * @throws SmartyException
      */
     public function error($id): void
     {
@@ -400,10 +412,12 @@ class OcSmarty extends Smarty
      * @param null|mixed $dummy1
      * @param null|mixed $dummy2
      * @param null|mixed $dummy3
+     *
      * @return bool|false|string
+     * @throws SmartyException
      */
-    public function is_cached($dummy1 = null, $dummy2 = null, $dummy3 = null)
-    {
+    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null)
+    : bool|string {
         global $login;
 
         // if the user is an admin, dont cache the content
@@ -413,7 +427,7 @@ class OcSmarty extends Smarty
             }
         }
 
-        return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
+        return parent::isCached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
     /**

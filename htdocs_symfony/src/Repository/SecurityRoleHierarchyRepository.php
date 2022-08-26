@@ -1,39 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
 use Oc\Entity\SecurityRoleHierarchyEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class SecurityRoleHierarchyRepository
 {
     const TABLE = 'security_role_hierarchy';
 
     /** @var Connection */
-    private $connection;
-
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
-
     /**
-     * @return SecurityRoleHierarchyEntity[]
+     * @return array
+     * @throws Exception
+     * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -48,12 +56,16 @@ class SecurityRoleHierarchyRepository
         return $records;
     }
 
-
     /**
+     * @param array $where
+     *
      * @return SecurityRoleHierarchyEntity
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
-    {
+    : SecurityRoleHierarchyEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -67,7 +79,7 @@ class SecurityRoleHierarchyRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -76,12 +88,16 @@ class SecurityRoleHierarchyRepository
         return $this->getEntityFromDatabaseArray($result);
     }
 
-
     /**
-     * @return SecurityRoleHierarchyEntity[]
+     * @param array $where
+     *
+     * @return array
+     * @throws Exception
+     * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -94,7 +110,7 @@ class SecurityRoleHierarchyRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -109,12 +125,15 @@ class SecurityRoleHierarchyRepository
         return $entities;
     }
 
-
     /**
+     * @param SecurityRoleHierarchyEntity $entity
+     *
      * @return SecurityRoleHierarchyEntity
+     * @throws RecordAlreadyExistsException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SecurityRoleHierarchyEntity $entity)
-    {
+    : SecurityRoleHierarchyEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -126,17 +145,20 @@ class SecurityRoleHierarchyRepository
             $databaseArray
         );
 
-        $entity->roleId = (int)$this->connection->lastInsertId();
+        $entity->roleId = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
 
-
     /**
+     * @param SecurityRoleHierarchyEntity $entity
+     *
      * @return SecurityRoleHierarchyEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SecurityRoleHierarchyEntity $entity)
-    {
+    : SecurityRoleHierarchyEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -152,12 +174,15 @@ class SecurityRoleHierarchyRepository
         return $entity;
     }
 
-
     /**
+     * @param SecurityRoleHierarchyEntity $entity
+     *
      * @return SecurityRoleHierarchyEntity
+     * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function remove(SecurityRoleHierarchyEntity $entity)
-    {
+    : SecurityRoleHierarchyEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -167,32 +192,35 @@ class SecurityRoleHierarchyRepository
             ['role_id' => $entity->roleId]
         );
 
-        $entity->cacheId = null;
+        $entity->roleId = null;
 
         return $entity;
     }
 
-
     /**
-     * @return []
+     * @param SecurityRoleHierarchyEntity $entity
+     *
+     * @return array
      */
     public function getDatabaseArrayFromEntity(SecurityRoleHierarchyEntity $entity)
-    {
+    : array {
         return [
             'role_id' => $entity->roleId,
             'sub_role_id' => $entity->subRoleId,
         ];
     }
 
-
     /**
+     * @param array $data
+     *
      * @return SecurityRoleHierarchyEntity
      */
     public function getEntityFromDatabaseArray(array $data)
-    {
+    : SecurityRoleHierarchyEntity {
         $entity = new SecurityRoleHierarchyEntity();
-        $entity->roleId = (int)$data['role_id'];
-        $entity->subRoleId = (int)$data['sub_role_id'];
+        $entity->roleId = (int) $data['role_id'];
+        $entity->subRoleId = (int) $data['sub_role_id'];
+
         return $entity;
     }
 }

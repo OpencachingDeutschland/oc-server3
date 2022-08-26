@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Exception;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Form\SupportBonusCachesAssignment;
@@ -55,49 +54,49 @@ class SupportController extends AbstractController
     const IMPORT_STATUS_FINISHED = 20;
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var CacheAdoptionsRepository */
-    private $cacheAdoptionsRepository;
+    private CacheAdoptionsRepository $cacheAdoptionsRepository;
 
     /** @var CacheCoordinatesRepository */
-    private $cacheCoordinatesRepository;
+    private CacheCoordinatesRepository $cacheCoordinatesRepository;
 
     /** @var CacheLogsArchivedRepository */
-    private $cacheLogsArchivedRepository;
+    private CacheLogsArchivedRepository $cacheLogsArchivedRepository;
 
     /** @var CachesRepository */
-    private $cachesRepository;
+    private CachesRepository $cachesRepository;
 
     /** @var CacheReportsRepository */
-    private $cacheReportsRepository;
+    private CacheReportsRepository $cacheReportsRepository;
 
     /** @var CacheStatusModifiedRepository */
-    private $cacheStatusModifiedRepository;
+    private CacheStatusModifiedRepository $cacheStatusModifiedRepository;
 
     /** @var CacheStatusRepository */
-    private $cacheStatusRepository;
+    private CacheStatusRepository $cacheStatusRepository;
 
     /** @var NodesRepository */
-    private $nodesRepository;
+    private NodesRepository $nodesRepository;
 
     /** @var SupportBonuscachesRepository */
-    private $supportBonuscachesRepository;
+    private SupportBonuscachesRepository $supportBonuscachesRepository;
 
     /** @var SupportListingCommentsRepository */
-    private $supportListingCommentsRepository;
+    private SupportListingCommentsRepository $supportListingCommentsRepository;
 
     /** @var SupportListingInfosRepository */
-    private $supportListingInfosRepository;
+    private SupportListingInfosRepository $supportListingInfosRepository;
 
     /** @var SupportUserCommentsRepository */
-    private $supportUserCommentsRepository;
+    private SupportUserCommentsRepository $supportUserCommentsRepository;
 
     /** @var SupportUserRelationsRepository */
-    private $supportUserRelationsRepository;
+    private SupportUserRelationsRepository $supportUserRelationsRepository;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * @param Connection $connection
@@ -164,6 +163,8 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/supportSearch", name="support_search")
      */
     public function searchCachesAndUser(Request $request)
@@ -196,9 +197,10 @@ class SupportController extends AbstractController
      * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/reportedCaches", name="support_reported_caches")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
-     *
      */
     public function listReportedCaches()
     : Response
@@ -218,6 +220,7 @@ class SupportController extends AbstractController
     /**
      * @return Response
      *
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCaches", name="support_bonus_caches")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -243,7 +246,8 @@ class SupportController extends AbstractController
      *
      * @return Response
      * @throws RecordNotFoundException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/bonusCachesAssignmentChoice/{wpID}", name="support_bonus_caches_assignment_choice")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -269,10 +273,10 @@ class SupportController extends AbstractController
      * @param string $toBonusCache
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name="support_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -297,10 +301,9 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordAlreadyExistsException
      * @throws RecordNotPersistedException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -330,11 +333,11 @@ class SupportController extends AbstractController
      * @param bool $removeBonus
      *
      * @return Response
-     * @throws DBALException
+     * @throws InvalidArgumentException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @throws InvalidArgumentException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name="support_remove_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -351,7 +354,7 @@ class SupportController extends AbstractController
             }
         }
 
-        if (($fetchedBonusCache->belongsToBonusCache == '') && ($fetchedBonusCache->isBonusCache == false)) {
+        if (($fetchedBonusCache->belongsToBonusCache == '') && !$fetchedBonusCache->isBonusCache) {
             $this->supportBonuscachesRepository->remove($fetchedBonusCache);
         } else {
             $this->supportBonuscachesRepository->update($fetchedBonusCache);
@@ -364,6 +367,8 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/dbQueries", name="support_db_queries")
      */
     public function listDbQueries(Request $request)
@@ -410,6 +415,9 @@ class SupportController extends AbstractController
      * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
+     * @throws Exception
      * @Route("/cacheHistory/{wpID}", name="support_cache_history")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -447,6 +455,8 @@ class SupportController extends AbstractController
      * @return Response
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/repCaches/{repID}", name="support_reported_cache")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -477,10 +487,10 @@ class SupportController extends AbstractController
      * @param int $userID
      *
      * @return Response
-     * @throws DBALException
-     * @throws RecordNotFoundException
      * @throws RecordAlreadyExistsException
-     *
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/occ/{wpID}&{userID}", name="support_occ")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -548,9 +558,10 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/occSaveText", name="support_occ_save_text")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -584,9 +595,10 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/repCachesSaveText", name="support_reported_cache_save_text")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -614,9 +626,10 @@ class SupportController extends AbstractController
      * @param string $route
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name="support_reported_cache_supportuser_assignment")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -635,9 +648,10 @@ class SupportController extends AbstractController
      * @param string $route
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @route("/repCachesAssignSupportuser/{repID}&{route}", name="support_reported_cache_set_status")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -656,7 +670,8 @@ class SupportController extends AbstractController
      *
      * @return Response
      * @throws RecordNotFoundException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/uad/{userID}", name="support_user_account_details")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -681,6 +696,8 @@ class SupportController extends AbstractController
      * @param bool $limit
      *
      * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      */
     private function getCachesForSearchField(string $searchtext, bool $limit = false)
     : array {
@@ -712,11 +729,12 @@ class SupportController extends AbstractController
             $qb->setMaxResults(1);
         }
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**
      * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function getBonusCaches()
@@ -733,6 +751,8 @@ class SupportController extends AbstractController
      * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     public function getReportedCaches()
@@ -745,6 +765,8 @@ class SupportController extends AbstractController
      * @param int $days
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/dbQueries1/{days}", name="support_db_queries_1")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -765,7 +787,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery1' => $qb->execute()->fetchAll()
+                                                           'suppSQLquery1' => $qb->execute()->fetchAllAssociative()
                                                        ]
         );
     }
@@ -774,6 +796,8 @@ class SupportController extends AbstractController
      * @param int $days
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/dbQueries2/{days}", name="support_db_queries_2")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -792,13 +816,15 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery2' => $qb->execute()->fetchAll()
+                                                           'suppSQLquery2' => $qb->execute()->fetchAllAssociative()
                                                        ]
         );
     }
 
     /**
      * @return Response
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries4", name="support_db_queries_4")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -826,7 +852,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery4' => $qb->execute()->fetchAll()
+                                                           'suppSQLquery4' => $qb->execute()->fetchAllAssociative()
                                                        ]
         );
     }
@@ -834,6 +860,8 @@ class SupportController extends AbstractController
     /**
      * @return Response
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @Route("/dbQueries5", name="support_db_queries_5")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -852,6 +880,8 @@ class SupportController extends AbstractController
 
     /**
      * @return Response
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries6", name="support_db_queries_6")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -869,20 +899,20 @@ class SupportController extends AbstractController
             ->andWhere('caches.wp_gc = \'\'')
             ->andWhere('caches.wp_gc_maintained = \'\'')
             ->andWhere('caches.type IN (1, 2, 3, 7, 8, 9, 10)');
-        $qb_caches_list = $qb_caches->execute()->fetchAll();
+        $qb_caches_list = $qb_caches->execute()->fetchAllAssociative();
 
         // Liste mit Fundlogs erstellen, die innerhalb der letzten zwei Jahre liegen
         $qb_logs = $this->connection->createQueryBuilder();
         $qb_logs->select('cache_logs.cache_id')
             ->from('cache_logs')
             ->where('cache_logs.type = 1', 'cache_logs.date > now() - INTERVAL 2 YEAR');
-        $qb_logs_list = $qb_logs->execute()->fetchAll();
+        $qb_logs_list = $qb_logs->execute()->fetchAllAssociative();
 
         // Cacheliste reduzieren um die Caches, die innerhalb der letzten zwei Jahre einen Fund hatten
         foreach ($qb_logs_list as $qbll) {
             $found_key = array_search($qbll['cache_id'], array_column($qb_caches_list, 'cache_id'));
 
-            if ($found_key != false) {
+            if ($found_key) {
                 unset($qb_caches_list[$found_key]);
             }
         }
@@ -902,6 +932,8 @@ class SupportController extends AbstractController
      *
      * @return array
      *
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function executeSQL_flexible(string $what, string $table, string $condition)
@@ -913,7 +945,7 @@ class SupportController extends AbstractController
             $qb->where($condition);
         }
 
-        return ($qb->execute()->fetchAll());
+        return ($qb->execute()->fetchAllAssociative());
     }
 
     /**
@@ -921,10 +953,10 @@ class SupportController extends AbstractController
      * @param int $userID
      *
      * @return Response
-     * @throws DBALException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     *
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      * @route("/supportUADactions/{userID}", name="support_executeUAD_actions")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -958,6 +990,7 @@ class SupportController extends AbstractController
      *
      * @return Response
      * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      *
      * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
@@ -1020,6 +1053,8 @@ class SupportController extends AbstractController
      * @return array
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      *
      * Unterschiede zwischen importierten Caches und deren OC-Pendants herausfinden
      */
@@ -1063,9 +1098,8 @@ class SupportController extends AbstractController
                 array_push($tempArray, '');
             }
 
-            if ((($fetchedListingInfo->nodeListingAvailable == true) && ($fetchedOCCache->status != 1))
-                || (($fetchedListingInfo->nodeListingAvailable
-                     == false)
+            if (($fetchedListingInfo->nodeListingAvailable && ($fetchedOCCache->status != 1))
+                || (!$fetchedListingInfo->nodeListingAvailable
                     && ($fetchedOCCache->status == 1))
             ) {
                 array_push($tempArray, 'OC status != import status');
@@ -1073,9 +1107,8 @@ class SupportController extends AbstractController
                 array_push($tempArray, '');
             }
 
-            if ((($fetchedListingInfo->nodeListingArchived == true) && ($fetchedOCCache->status != 3))
-                || (($fetchedListingInfo->nodeListingAvailable
-                     == false)
+            if (($fetchedListingInfo->nodeListingArchived && ($fetchedOCCache->status != 3))
+                || (!$fetchedListingInfo->nodeListingAvailable
                     && ($fetchedOCCache->status == 3))
             ) {
                 array_push($tempArray, 'OC status != import status');
@@ -1093,6 +1126,7 @@ class SupportController extends AbstractController
 
     /**
      * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function list_all_support_listing_infos()
     : array
@@ -1108,11 +1142,11 @@ class SupportController extends AbstractController
      * @param array $waypoints_as_array
      *
      * @return array
-     * @throws DBALException
      * @throws InvalidArgumentException
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function check_array_for_Oc_Gc_relations(array $waypoints_as_array)
     : array {
@@ -1223,6 +1257,8 @@ class SupportController extends AbstractController
      *
      * @return array
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws Exception
      */
     public function read_Xml_file_and_get_array(string $filemane)
     : array {

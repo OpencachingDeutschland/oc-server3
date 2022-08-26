@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class OCOnly81Controller extends AbstractController
 {
-    private $connection;
+    private Connection $connection;
 
     /**
      * CachesController constructor.
@@ -32,9 +33,12 @@ class OCOnly81Controller extends AbstractController
      * @Route("/oconly81", name="oconly81_index")
      *
      * @return Response
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function ocOnly81Controller_index()
-    : Response {
+    : Response
+    {
         $userData = $this->ocOnly81_get_user_counts();
         $matrixData = $this->ocOnly81_get_matrixData();
 
@@ -53,6 +57,8 @@ class OCOnly81Controller extends AbstractController
      * @return array
      *
      * OCOnly81 Datenbankabfrage: Verteilung der OCOnly-Caches in der 81er Matrix, sowie Summen der einzelnen Zeilen/Spalten erstellen
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     private function ocOnly81_get_matrixData()
     : array
@@ -72,7 +78,7 @@ class OCOnly81Controller extends AbstractController
             ->where('caches.status = 1')
             ->groupBy('difficulty', 'terrain');
 
-        $data = $qb->execute()->fetchAll();
+        $data = $qb->execute()->fetchAllAssociative();
 
         foreach ($data as $item) {
             $matrix[$item['difficulty'] - 2][$item['terrain'] - 2] ++;
@@ -92,6 +98,8 @@ class OCOnly81Controller extends AbstractController
      * @return array
      *
      * OCOnly81 Datenbankabfrage: Anzahl der OCOnly-Funde je Nutzer
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     private function ocOnly81_get_user_counts(int $limit = 0)
     : array {
@@ -108,7 +116,7 @@ class OCOnly81Controller extends AbstractController
             ->where('user_options.option_id = 13')
             ->andWhere('user_options.option_value = 1');
 
-        $data = $qb->execute()->fetchAll();
+        $data = $qb->execute()->fetchAllAssociative();
 
         foreach ($data as $item) {
             if (!array_key_exists($item['user_id'], $result)) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 /**
@@ -12,12 +14,12 @@ class CoordinatesRepository
     /**
      * @var float
      */
-    private $nLat;
+    private float $nLat;
 
     /**
      * @var float
      */
-    private $nLon;
+    private float $nLon;
 
     /**
      * Coordinate constructor.
@@ -97,7 +99,7 @@ class CoordinatesRepository
 
         // Ocprop: ([N|S].*?)&#039;
         $nLat = $this->nLat;
-        $bLatN = ($nLat < 0) ? false : true;
+        $bLatN = !($nLat < 0);
         if (!$bLatN) {
             $nLat = - $nLat;
         }
@@ -111,7 +113,7 @@ class CoordinatesRepository
 
         // Ocprop: ([E|W].*?)&#039;
         $nLon = $this->nLon;
-        $bLonE = ($nLon < 0) ? false : true;
+        $bLonE = !($nLon < 0);
         if (!$bLonE) {
             $nLon = - $nLon;
         }
@@ -138,7 +140,7 @@ class CoordinatesRepository
     : array
     {
         $nLat = $this->nLat;
-        $bLatN = ($nLat < 0) ? false : true;
+        $bLatN = !($nLat < 0);
         if (!$bLatN) {
             $nLat = - $nLat;
         }
@@ -151,7 +153,7 @@ class CoordinatesRepository
         $sLat .= sprintf("%02d° %02d' %02d''", $nLatDeg, $nLatMin, $nLatSec);
 
         $nLon = $this->nLon;
-        $bLonE = ($nLon < 0) ? false : true;
+        $bLonE = !($nLon < 0);
         if (!$bLonE) {
             $nLon = - $nLon;
         }
@@ -323,8 +325,8 @@ class CoordinatesRepository
         return [
             'zone' => $lz,
             'letter' => $bz,
-            'north' => 'N' . floor($nw),
-            'east' => 'E' . floor($ew),
+            'north' => 'N' . floor((float) $nw),
+            'east' => 'E' . floor((float) $ew),
         ];
     }
 
@@ -678,7 +680,7 @@ class CoordinatesRepository
      */
     // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
     public static function parseRequestLat($name)
-    {
+    : mixed {
         if (!isset($_REQUEST[$name . 'NS']) || !isset($_REQUEST[$name . 'Lat']) || !isset($_REQUEST[$name . 'LatMin'])) {
             return false;
         }
@@ -702,7 +704,7 @@ class CoordinatesRepository
      */
     // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
     public static function parseRequestLon($name)
-    {
+    : mixed {
         if (!isset($_REQUEST[$name . 'EW']) || !isset($_REQUEST[$name . 'Lon']) || !isset($_REQUEST[$name . 'LonMin'])) {
             return false;
         }
@@ -727,7 +729,7 @@ class CoordinatesRepository
      * @return false|mixed
      */
     public function getW3W(string $language = 'en')
-    {
+    : mixed {
         if (!$_ENV['W3W_API']) {
             return false;
         }

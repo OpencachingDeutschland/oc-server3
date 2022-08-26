@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\CountriesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -21,7 +21,7 @@ class CountriesRepository
     const TABLE = 'countries';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -31,6 +31,8 @@ class CountriesRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +42,7 @@ class CountriesRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -59,7 +61,9 @@ class CountriesRepository
      * @param array $where
      *
      * @return CountriesEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
     : CountriesEntity {
@@ -76,7 +80,7 @@ class CountriesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -89,7 +93,9 @@ class CountriesRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -105,7 +111,7 @@ class CountriesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -125,7 +131,7 @@ class CountriesRepository
      *
      * @return CountriesEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(CountriesEntity $entity)
     : CountriesEntity {
@@ -149,7 +155,7 @@ class CountriesRepository
      * @param CountriesEntity $entity
      *
      * @return CountriesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws RecordNotPersistedException
      */
     public function update(CountriesEntity $entity)
@@ -173,7 +179,7 @@ class CountriesRepository
      * @param CountriesEntity $entity
      *
      * @return CountriesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws RecordNotPersistedException
      * @throws InvalidArgumentException
      */
@@ -188,7 +194,7 @@ class CountriesRepository
             ['short' => $entity->short]
         );
 
-        $entity->cacheId = null;
+        $entity->short = null;
 
         return $entity;
     }
@@ -199,7 +205,9 @@ class CountriesRepository
      * @param string $locale
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchCountryList(string $locale)
     : array {

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -21,7 +23,7 @@ class SupportListingCommentsRepository
     const TABLE = 'support_listing_comments';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -30,7 +32,10 @@ class SupportListingCommentsRepository
 
     /**
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +45,7 @@ class SupportListingCommentsRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -60,6 +65,9 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
     : SupportListingCommentsEntity {
@@ -76,7 +84,7 @@ class SupportListingCommentsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -89,7 +97,10 @@ class SupportListingCommentsRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -105,7 +116,7 @@ class SupportListingCommentsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -125,7 +136,7 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SupportListingCommentsEntity $entity)
     : SupportListingCommentsEntity {
@@ -150,7 +161,7 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SupportListingCommentsEntity $entity)
     : SupportListingCommentsEntity {
@@ -174,8 +185,8 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      */
     public function remove(SupportListingCommentsEntity $entity)
     : SupportListingCommentsEntity {

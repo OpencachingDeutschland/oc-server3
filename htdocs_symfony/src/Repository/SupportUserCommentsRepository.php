@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -22,10 +23,10 @@ class SupportUserCommentsRepository
     const TABLE = 'support_user_comments';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(Connection $connection, UserRepository $userRepository)
     {
@@ -35,7 +36,10 @@ class SupportUserCommentsRepository
 
     /**
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchAll()
     : array
@@ -45,7 +49,7 @@ class SupportUserCommentsRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -64,7 +68,10 @@ class SupportUserCommentsRepository
      * @param array $where
      *
      * @return SupportUserCommentsEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
     : SupportUserCommentsEntity {
@@ -81,7 +88,7 @@ class SupportUserCommentsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -95,6 +102,9 @@ class SupportUserCommentsRepository
      *
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -110,7 +120,7 @@ class SupportUserCommentsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -130,7 +140,7 @@ class SupportUserCommentsRepository
      *
      * @return SupportUserCommentsEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -155,7 +165,7 @@ class SupportUserCommentsRepository
      *
      * @return SupportUserCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -179,8 +189,8 @@ class SupportUserCommentsRepository
      *
      * @return SupportUserCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      */
     public function remove(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -218,7 +228,9 @@ class SupportUserCommentsRepository
      * @param array $data
      *
      * @return SupportUserCommentsEntity
-     * @throws \Exception
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportUserCommentsEntity {

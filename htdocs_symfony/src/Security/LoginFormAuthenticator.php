@@ -1,106 +1,109 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Oc\Security;
 
 use Oc\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
-use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
-use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
+use Symfony\Component\Security\Http\Authenticator\AbstractLoginFormAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+/**
+ *
+ */
+class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_security_login';
 
-    private $urlGenerator;
-    private $csrfTokenManager;
-    private $passwordEncoder;
-    private $userRepository;
+    private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(UserRepository $userRepository, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
-    {
+    private CsrfTokenManagerInterface $csrfTokenManager;
+
+    private UserPasswordHasherInterface $passwordEncoder;
+
+    private UserRepository $userRepository;
+
+    public function __construct(
+        UserRepository $userRepository,
+        UrlGeneratorInterface $urlGenerator,
+        CsrfTokenManagerInterface $csrfTokenManager,
+        UserPasswordHasherInterface $passwordEncoder
+    ) {
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->userRepository = $userRepository;
     }
 
-    public function supports(Request $request)
-    {
-        return self::LOGIN_ROUTE === $request->attributes->get('_route')
-            && $request->isMethod('POST');
-    }
+    /**
+     * @param Request $request
+     *
+     * @return Passport
+     */
+    public function authenticate(Request $request)
+    : Passport {
+        $userName = $request->request->get('username');
+        $password = $request->request->get('password');
 
-    public function getCredentials(Request $request)
-    {
-        $credentials = [
-            'username' => $request->request->get('username'),
-            'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('_csrf_token'),
-        ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['username']
+        // https://symfonycasts.com/screencast/symfony6-upgrade/custom-authenticator
+        return new Passport(
+            new UserBadge($userName, function($userIdentifier) {
+                // optionally pass a callback to load the User manually
+                $user = $this->userRepository->fetchOneBy(['username' => $userIdentifier]);
+                if (!$user) {
+                    throw new UserNotFoundException();
+                }
+
+                return $user;
+            }),
+            new PasswordCredentials($password),
+            [
+                new CsrfTokenBadge(
+                    'authenticate',
+                    $request->request->get('_csrf_token')
+                ),
+                (new RememberMeBadge())->enable(),
+            ]
         );
-
-        return $credentials;
-    }
-
-    public function getUser($credentials, UserProviderInterface $userProvider)
-    {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
-        if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
-        }
-
-        $user = $this->userRepository->fetchOneByUsername($credentials['username']);
-
-        if (!$user) {
-            // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Email could not be found.');
-        }
-
-        return $user;
-    }
-
-    public function checkCredentials($credentials, UserInterface $user)
-    {
-        return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param $firewallName
+     *
+     * @return RedirectResponse
      */
-    public function getPassword($credentials): ?string
-    {
-        return $credentials['password'];
-    }
-
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $firewallName)
+    : RedirectResponse {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
         return new RedirectResponse($this->urlGenerator->generate('app_index_index'));
     }
 
-    protected function getLoginUrl()
-    {
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    protected function getLoginUrl(Request $request)
+    : string {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }

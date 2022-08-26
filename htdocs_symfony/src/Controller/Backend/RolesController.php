@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
@@ -26,16 +28,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class RolesController extends AbstractController
 {
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var SecurityRolesRepository */
-    private $securityRolesRepository;
+    private SecurityRolesRepository $securityRolesRepository;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /** @var UserRolesRepository */
-    private $userRolesRepository;
+    private UserRolesRepository $userRolesRepository;
 
     /**
      * @param Connection $connection
@@ -59,7 +61,9 @@ class RolesController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles", name="roles_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
@@ -77,6 +81,7 @@ class RolesController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/teamlist", name="roles_teamlist")
      * @Security("is_granted('ROLE_TEAM')")
      *
@@ -104,8 +109,9 @@ class RolesController extends AbstractController
      * @param string $minimumRoleName
      *
      * @return array
-     * @throws RecordNotFoundException
      * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     private function getTeamMembersAndRoles(string $minimumRoleName)
     : array {
@@ -120,15 +126,17 @@ class RolesController extends AbstractController
             ->setParameters(['searchTerm' => $minimumRoleId])
             ->orderBy('security_roles.role', 'ASC');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**
      * @param Request $request
      *
      * @return Response
-     * @throws RecordNotFoundException|RecordsNotFoundException
-     *
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/search", name="roles_search")
      * @Security("is_granted('ROLE_TEAM')")
      */
@@ -143,7 +151,7 @@ class RolesController extends AbstractController
             $inputData = $form->getData();
             $userId = $inputData['content_user_searchfield'];
 
-            $fetchedUser = $this->userRepository->fetchOneById($userId);
+            $fetchedUser = $this->userRepository->fetchOneById((int) $userId);
         }
 
         return $this->render(
@@ -160,8 +168,10 @@ class RolesController extends AbstractController
      * @param string $role
      *
      * @return Response
+     * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/removeRole/{userId}&{role}", name="roles_remove_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
@@ -191,9 +201,11 @@ class RolesController extends AbstractController
      * @param string $role
      *
      * @return Response
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/promoteRole/{userId}&{role}", name="roles_promote_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */

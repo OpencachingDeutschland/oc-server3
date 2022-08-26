@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -28,12 +28,12 @@ class UserRepository
     /**
      * @var Connection
      */
-    private $connection;
+    private Connection $connection;
 
     /**
      * @var SecurityRolesRepository
      */
-    private $securityRolesRepository;
+    private SecurityRolesRepository $securityRolesRepository;
 
     /**
      * @param Connection $connection
@@ -48,8 +48,10 @@ class UserRepository
     /**
      * Fetches all users.
      *
-     * @return UserEntity[]
+     * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException Thrown when no records are found
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchAll()
     : array
@@ -59,7 +61,7 @@ class UserRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -72,7 +74,9 @@ class UserRepository
      * @param array $where
      *
      * @return UserEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneBy(array $where = [])
     : UserEntity {
@@ -89,7 +93,7 @@ class UserRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -101,7 +105,12 @@ class UserRepository
     /**
      * Fetches a user by its id.
      *
+     * @param int $id
+     *
+     * @return UserEntity
+     * @throws Exception
      * @throws RecordNotFoundException Thrown when the request record is not found
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneById(int $id)
     : UserEntity {
@@ -112,7 +121,7 @@ class UserRepository
             ->setParameter(':id', $id)
             ->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException(
@@ -132,7 +141,9 @@ class UserRepository
      * @param string $username
      *
      * @return UserEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneByUsername(string $username)
     : UserEntity {
@@ -143,7 +154,7 @@ class UserRepository
             ->setParameter(':username', $username)
             ->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException(
@@ -168,7 +179,7 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws Exception
      */
     public function create(UserEntity $entity)
     : UserEntity {
@@ -195,7 +206,7 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws Exception
      */
     public function update(UserEntity $entity)
     : UserEntity {
@@ -224,7 +235,7 @@ class UserRepository
      *
      * @return UserEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws Exception
      * @throws InvalidArgumentException
      */
     public function remove(UserEntity $entity)
@@ -257,7 +268,11 @@ class UserRepository
     /**
      * Converts database array to entity array.
      *
-     * @return UserEntity[]
+     * @param array $result
+     *
+     * @return array
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     private function getEntityArrayFromDatabaseArray(array $result)
     : array {
@@ -299,6 +314,12 @@ class UserRepository
 
     /**
      * Prepares database array from properties.
+     *
+     * @param array $data
+     *
+     * @return UserEntity
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : UserEntity {

@@ -1,14 +1,16 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Migration to create field_note table and add foreign keys.
  */
-class Version20160607213541 extends AbstractMigration
+final class Version20160607213541 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {

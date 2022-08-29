@@ -1,11 +1,13 @@
 <?php
 
-namespace Application\Migrations;
+declare(strict_types=1);
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+namespace DoctrineMigrations;
+
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
 
-class Version202006011578325 extends AbstractMigration
+final class Version202006011578325 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {

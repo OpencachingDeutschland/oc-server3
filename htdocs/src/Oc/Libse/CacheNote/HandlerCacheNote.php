@@ -30,12 +30,12 @@ class HandlerCacheNote
     private function recordToArray($r)
     {
         $ret = [];
-
-        $ret['id'] = $r['id'];
-        $ret['note'] = $r['description'];
-        $ret['latitude'] = $r['latitude'];
-        $ret['longitude'] = $r['longitude'];
-
+        if ($r) {
+            $ret['id'] = $r['id'];
+            $ret['note'] = $r['description'];
+            $ret['latitude'] = $r['latitude'];
+            $ret['longitude'] = $r['longitude'];
+        }
         return $ret;
     }
 

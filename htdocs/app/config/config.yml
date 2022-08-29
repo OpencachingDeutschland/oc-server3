@@ -66,10 +66,15 @@ doctrine:
                 ifelse: DoctrineExtensions\Query\Mysql\IfElse
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/Migrations"
-    namespace: Application\Migrations
-    table_name: migration_versions
-    name: Application Migrations
+    migrations_paths:
+        'DoctrineMigrations': '%kernel.root_dir%/Migrations'
+    storage:
+        table_storage:
+            table_name: 'migration_versions'
+            version_column_name: 'version'
+            version_column_length: 191
+            executed_at_column_name: 'executed_at'
+            execution_time_column_name: 'execution_time'
 
 # Swiftmailer Configuration
 swiftmailer:

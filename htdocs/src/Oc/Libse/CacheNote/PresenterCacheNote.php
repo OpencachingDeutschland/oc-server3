@@ -41,9 +41,11 @@ class PresenterCacheNote
         $this->cacheId = $cacheId;
 
         $cacheNote = $cacheNoteHandler->getCacheNote($userId, $cacheId);
-        $this->noteId = $cacheNote['id'];
-        $this->note = $cacheNote['note'];
-        $this->coordinate->init($cacheNote['latitude'], $cacheNote['longitude']);
+        if ($cacheNote) {
+            $this->noteId = $cacheNote['id'];
+            $this->note = $cacheNote['note'];
+            $this->coordinate->init($cacheNote['latitude'], $cacheNote['longitude']);
+        }
     }
 
     /**

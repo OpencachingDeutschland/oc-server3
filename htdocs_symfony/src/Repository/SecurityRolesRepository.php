@@ -3,7 +3,7 @@
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SecurityRolesEntity;
 use Oc\Entity\UserEntity;
@@ -30,6 +30,7 @@ class SecurityRolesRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
      */
     public function fetchAll()
     : array
@@ -58,6 +59,7 @@ class SecurityRolesRepository
      * @param array $where
      *
      * @return SecurityRolesEntity
+     * @throws Exception
      * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
@@ -88,6 +90,7 @@ class SecurityRolesRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
      */
     public function fetchBy(array $where = [])
@@ -123,6 +126,7 @@ class SecurityRolesRepository
      * @param UserEntity $user
      *
      * @return array
+     * @throws Exception
      */
     public function fetchUserRoles(UserEntity $user)
     : array {
@@ -155,7 +159,7 @@ class SecurityRolesRepository
      * @param SecurityRolesEntity $entity
      *
      * @return SecurityRolesEntity
-     * @throws DBALException
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(SecurityRolesEntity $entity)
@@ -180,7 +184,6 @@ class SecurityRolesRepository
      * @param SecurityRolesEntity $entity
      *
      * @return SecurityRolesEntity
-     * @throws DBALException
      * @throws RecordNotPersistedException
      */
     public function update(SecurityRolesEntity $entity)
@@ -205,7 +208,6 @@ class SecurityRolesRepository
      *
      * @return SecurityRolesEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
      * @throws InvalidArgumentException
      */
     public function remove(SecurityRolesEntity $entity)
@@ -228,6 +230,7 @@ class SecurityRolesRepository
      * @param string $roleName
      *
      * @return int
+     * @throws Exception
      * @throws RecordNotFoundException
      */
     public function getIdByRoleName(string $roleName)
@@ -239,6 +242,7 @@ class SecurityRolesRepository
      * @param int $roleId
      *
      * @return string
+     * @throws Exception
      * @throws RecordNotFoundException
      */
     public function getRoleNameById(int $roleId)

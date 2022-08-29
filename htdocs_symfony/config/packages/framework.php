@@ -10,7 +10,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'session' => [
             'handler_id' => null,
             'cookie_secure' => 'auto',
-            'cookie_samesite' => 'lax'
+            'cookie_samesite' => 'lax',
+            'storage_factory_id' => 'session.storage.factory.native'
         ],
         'php_errors' => [
             'log' => true

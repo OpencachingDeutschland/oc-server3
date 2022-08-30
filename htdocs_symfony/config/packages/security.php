@@ -7,7 +7,8 @@ use Oc\Security\UserProvider;
 use Oc\Entity\UserEntity;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
+return static function(ContainerConfigurator $containerConfigurator)
+: void {
     $containerConfigurator->extension('security', [
         'enable_authenticator_manager' => true,
         'providers' => [
@@ -37,11 +38,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     // where to redirect after logout
                     'target' => 'app_index_index'
                 ],
-                'guard' => [
-                    'authenticators' => [
-                        LoginFormAuthenticator::class,
-                    ]
-                ],
+                'custom_authenticator' => 'Oc\Security\LoginFormAuthenticator',
             ]
         ],
         'access_control' => [

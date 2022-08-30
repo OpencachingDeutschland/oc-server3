@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SecurityRolesEntity;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -20,7 +21,7 @@ class SecurityRolesRepository
     const TABLE = 'security_roles';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -29,8 +30,9 @@ class SecurityRolesRepository
 
     /**
      * @return array
-     * @throws RecordsNotFoundException
      * @throws Exception
+     * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +42,7 @@ class SecurityRolesRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -61,6 +63,7 @@ class SecurityRolesRepository
      * @return SecurityRolesEntity
      * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneBy(array $where = [])
     : SecurityRolesEntity {
@@ -77,7 +80,7 @@ class SecurityRolesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -92,6 +95,7 @@ class SecurityRolesRepository
      * @return array
      * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -107,7 +111,7 @@ class SecurityRolesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -127,6 +131,7 @@ class SecurityRolesRepository
      *
      * @return array
      * @throws Exception
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchUserRoles(UserEntity $user)
     : array {
@@ -138,11 +143,11 @@ class SecurityRolesRepository
             ->setParameter(':userId', $user->userId)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
-//        if ($statement->rowCount() === 0) {
-//            throw new RecordsNotFoundException('No records found');
-//        }
+        //        if ($statement->rowCount() === 0) {
+        //            throw new RecordsNotFoundException('No records found');
+        //        }
 
         $records = [];
 
@@ -184,6 +189,7 @@ class SecurityRolesRepository
      * @param SecurityRolesEntity $entity
      *
      * @return SecurityRolesEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function update(SecurityRolesEntity $entity)
@@ -207,8 +213,8 @@ class SecurityRolesRepository
      * @param SecurityRolesEntity $entity
      *
      * @return SecurityRolesEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
-     * @throws InvalidArgumentException
      */
     public function remove(SecurityRolesEntity $entity)
     : SecurityRolesEntity {
@@ -232,6 +238,7 @@ class SecurityRolesRepository
      * @return int
      * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getIdByRoleName(string $roleName)
     : int {
@@ -244,6 +251,7 @@ class SecurityRolesRepository
      * @return string
      * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getRoleNameById(int $roleId)
     : string {

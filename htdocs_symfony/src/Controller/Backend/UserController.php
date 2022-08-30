@@ -7,9 +7,6 @@ namespace Oc\Controller\Backend;
 use Doctrine\DBAL\Connection;
 use Exception;
 use Oc\Form\CachesFormType;
-use Oc\Form\UserRegistrationForm;
-use Oc\Repository\CountriesRepository;
-use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,23 +20,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /** @var Connection */
-    private $connection;
-
-    /** @var CountriesRepository */
-    private $countriesRepository;
+    private Connection $connection;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * @param Connection $connection
-     * @param CountriesRepository $countriesRepository
      * @param UserRepository $userRepository
      */
-    public function __construct(Connection $connection, CountriesRepository $countriesRepository, UserRepository $userRepository)
+    public function __construct(Connection $connection, UserRepository $userRepository)
     {
         $this->connection = $connection;
-        $this->countriesRepository = $countriesRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -47,6 +39,8 @@ class UserController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      * @Route("/user", name="user_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
@@ -73,6 +67,8 @@ class UserController extends AbstractController
      * @param string $searchtext
      *
      * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function getUsersForSearchField(string $searchtext)
     : array {
@@ -90,7 +86,7 @@ class UserController extends AbstractController
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('user.username', 'ASC');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**

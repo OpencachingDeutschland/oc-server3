@@ -1,20 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCacheStatusEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class CacheStatusRepository
 {
     const TABLE = 'cache_status';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -24,15 +31,18 @@ class CacheStatusRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -51,10 +61,12 @@ class CacheStatusRepository
      * @param array $where
      *
      * @return GeoCacheStatusEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
-    {
+    : GeoCacheStatusEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -68,7 +80,7 @@ class CacheStatusRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -81,10 +93,12 @@ class CacheStatusRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -97,7 +111,7 @@ class CacheStatusRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -117,10 +131,10 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(GeoCacheStatusEntity $entity)
-    {
+    : GeoCacheStatusEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -132,7 +146,7 @@ class CacheStatusRepository
             $databaseArray
         );
 
-        $entity->id = (int)$this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
@@ -142,10 +156,10 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(GeoCacheStatusEntity $entity)
-    {
+    : GeoCacheStatusEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -166,11 +180,11 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      */
     public function remove(GeoCacheStatusEntity $entity)
-    {
+    : GeoCacheStatusEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -191,7 +205,7 @@ class CacheStatusRepository
      * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheStatusEntity $entity)
-    {
+    : array {
         return [
             'id' => $entity->id,
             'name' => $entity->name,
@@ -210,16 +224,16 @@ class CacheStatusRepository
      * @return GeoCacheStatusEntity
      */
     public function getEntityFromDatabaseArray(array $data)
-    {
+    : GeoCacheStatusEntity {
         $entity = new GeoCacheStatusEntity();
-        $entity->id = (int)$data['id'];
-        $entity->name = (string)$data['name'];
-        $entity->transId = (int)$data['trans_id'];
-        $entity->de = (string)$data['de'];
-        $entity->en = (string)$data['en'];
-        $entity->allowUserView = (int)$data['allow_user_view'];
-        $entity->allowOwnerEditStatus = (int)$data['allow_owner_edit_status'];
-        $entity->allowUserLog = (int)$data['allow_user_log'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->allowUserView = (int) $data['allow_user_view'];
+        $entity->allowOwnerEditStatus = (int) $data['allow_owner_edit_status'];
+        $entity->allowUserLog = (int) $data['allow_user_log'];
 
         return $entity;
     }

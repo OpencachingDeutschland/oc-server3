@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
 use Oc\Entity\SupportBonuscachesEntity;
@@ -24,7 +23,7 @@ class SupportBonuscachesRepository
     const TABLE = 'support_bonuscaches';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -33,7 +32,8 @@ class SupportBonuscachesRepository
 
     /**
      * @return array
-     * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -43,11 +43,7 @@ class SupportBonuscachesRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
-
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records found');
-        }
+        $result = $statement->fetchAllAssociative();
 
         $records = [];
 
@@ -63,6 +59,8 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
     : SupportBonuscachesEntity {
@@ -79,10 +77,10 @@ class SupportBonuscachesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException('Record with given where clause not found');
+            #throw new RecordNotFoundException('Record with given where clause not found');
         }
 
         return $this->getEntityFromDatabaseArray($result);
@@ -93,6 +91,8 @@ class SupportBonuscachesRepository
      *
      * @return array
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -108,7 +108,7 @@ class SupportBonuscachesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -128,7 +128,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SupportBonuscachesEntity $entity)
     : SupportBonuscachesEntity {
@@ -153,7 +153,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SupportBonuscachesEntity $entity)
     : SupportBonuscachesEntity {
@@ -177,7 +177,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      */
     public function remove(SupportBonuscachesEntity $entity)
@@ -232,9 +232,10 @@ class SupportBonuscachesRepository
      * @param string $toBonusCache
      * @param bool $setAsBonusCache
      *
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotPersistedException
+     * @throws \Doctrine\DBAL\Driver\Exception
      *
      * Bonusinfo zum Cache abholen und aktualisieren. Ggf. neuen, leeren Eintrag anlegen.
      */

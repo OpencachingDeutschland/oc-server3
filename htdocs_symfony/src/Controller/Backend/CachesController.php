@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
 use Oc\Form\CachesFormType;
 use Oc\Repository\CachesRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -20,9 +21,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CachesController extends AbstractController
 {
-    private $connection;
+    private Connection $connection;
 
-    private $cachesRepository;
+    private CachesRepository $cachesRepository;
 
     /**
      * CachesController constructor.
@@ -38,9 +39,12 @@ class CachesController extends AbstractController
 
     /**
      * @param Request $request
-     * @Route("/caches", name="caches_index")
      *
      * @return Response
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @Route("/caches", name="caches_index")
+     *
      */
     public function cachesController_index(Request $request)
     : Response {
@@ -92,6 +96,8 @@ class CachesController extends AbstractController
      * @param string $searchtext
      *
      * @return array
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function getCachesForSearchField(string $searchtext)
     : array {
@@ -114,7 +120,7 @@ class CachesController extends AbstractController
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('caches.wp_oc', 'ASC');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**

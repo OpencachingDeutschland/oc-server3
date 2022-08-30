@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\NodesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -23,7 +23,7 @@ class NodesRepository
     const TABLE = 'nodes';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /**
      * @param Connection $connection
@@ -36,15 +36,18 @@ class NodesRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchAll() : array
+    public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -63,10 +66,12 @@ class NodesRepository
      * @param array $where
      *
      * @return NodesEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchOneBy(array $where = []) : NodesEntity
-    {
+    public function fetchOneBy(array $where = [])
+    : NodesEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -80,7 +85,7 @@ class NodesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -93,10 +98,12 @@ class NodesRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchBy(array $where = []) : array
-    {
+    public function fetchBy(array $where = [])
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -109,7 +116,7 @@ class NodesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -129,10 +136,10 @@ class NodesRepository
      *
      * @return NodesEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function create(NodesEntity $entity) : NodesEntity
-    {
+    public function create(NodesEntity $entity)
+    : NodesEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -153,11 +160,11 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws RecordNotPersistedException
      */
-    public function update(NodesEntity $entity) : NodesEntity
-    {
+    public function update(NodesEntity $entity)
+    : NodesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -177,12 +184,12 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
-    public function remove(NodesEntity $entity) : NodesEntity
-    {
+    public function remove(NodesEntity $entity)
+    : NodesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -202,8 +209,8 @@ class NodesRepository
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(NodesEntity $entity) : array
-    {
+    public function getDatabaseArrayFromEntity(NodesEntity $entity)
+    : array {
         return [
             'id' => $entity->id,
             'name' => $entity->name,
@@ -217,8 +224,8 @@ class NodesRepository
      *
      * @return NodesEntity
      */
-    public function getEntityFromDatabaseArray(array $data) : NodesEntity
-    {
+    public function getEntityFromDatabaseArray(array $data)
+    : NodesEntity {
         $entity = new NodesEntity();
         $entity->id = (int) $data['id'];
         $entity->name = (string) $data['name'];
@@ -232,7 +239,9 @@ class NodesRepository
      * @param int $id
      *
      * @return string
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function get_prefix_by_id(int $id)
     : string {
@@ -248,7 +257,9 @@ class NodesRepository
      * @param string $prefix
      *
      * @return int
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function get_id_by_prefix(string $prefix)
     : int {

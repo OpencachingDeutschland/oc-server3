@@ -1,20 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCacheTypeEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class CacheTypeRepository
 {
     const TABLE = 'cache_type';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -23,16 +30,19 @@ class CacheTypeRepository
 
     /**
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -52,9 +62,11 @@ class CacheTypeRepository
      *
      * @return GeoCacheTypeEntity
      * @throws RecordNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
-    {
+    : GeoCacheTypeEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -68,7 +80,7 @@ class CacheTypeRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -81,10 +93,12 @@ class CacheTypeRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -97,7 +111,7 @@ class CacheTypeRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -117,10 +131,10 @@ class CacheTypeRepository
      *
      * @return GeoCacheTypeEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(GeoCacheTypeEntity $entity)
-    {
+    : GeoCacheTypeEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -132,7 +146,7 @@ class CacheTypeRepository
             $databaseArray
         );
 
-        $entity->id = (int)$this->connection->lastInsertId();
+        $entity->id = (int) $this->connection->lastInsertId();
 
         return $entity;
     }
@@ -142,10 +156,10 @@ class CacheTypeRepository
      *
      * @return GeoCacheTypeEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(GeoCacheTypeEntity $entity)
-    {
+    : GeoCacheTypeEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -166,11 +180,11 @@ class CacheTypeRepository
      *
      * @return GeoCacheTypeEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
+     * @throws InvalidArgumentException
      */
     public function remove(GeoCacheTypeEntity $entity)
-    {
+    : GeoCacheTypeEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -191,7 +205,7 @@ class CacheTypeRepository
      * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheTypeEntity $entity)
-    {
+    : array {
         return [
             'id' => $entity->id,
             'name' => $entity->name,
@@ -213,19 +227,19 @@ class CacheTypeRepository
      * @return GeoCacheTypeEntity
      */
     public function getEntityFromDatabaseArray(array $data)
-    {
+    : GeoCacheTypeEntity {
         $entity = new GeoCacheTypeEntity();
-        $entity->id = (int)$data['id'];
-        $entity->name = (string)$data['name'];
-        $entity->transId = (int)$data['trans_id'];
-        $entity->ordinal = (int)$data['ordinal'];
-        $entity->short = (string)$data['short'];
-        $entity->de = (string)$data['de'];
-        $entity->en = (string)$data['en'];
-        $entity->iconLarge = (string)$data['icon_large'];
-        $entity->short2 = (string)$data['short2'];
-        $entity->short2TransId = (int)$data['short2_trans_id'];
-        $entity->kmlName = (string)$data['kml_name'];
+        $entity->id = (int) $data['id'];
+        $entity->name = (string) $data['name'];
+        $entity->transId = (int) $data['trans_id'];
+        $entity->ordinal = (int) $data['ordinal'];
+        $entity->short = (string) $data['short'];
+        $entity->de = (string) $data['de'];
+        $entity->en = (string) $data['en'];
+        $entity->iconLarge = (string) $data['icon_large'];
+        $entity->short2 = (string) $data['short2'];
+        $entity->short2TransId = (int) $data['short2_trans_id'];
+        $entity->kmlName = (string) $data['kml_name'];
 
         return $entity;
     }

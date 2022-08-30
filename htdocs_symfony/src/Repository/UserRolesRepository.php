@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\UserRolesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -23,10 +23,10 @@ class UserRolesRepository
     const TABLE = 'user_roles';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var SecurityRolesRepository */
-    private $securityRolesRepository;
+    private SecurityRolesRepository $securityRolesRepository;
 
     /**
      * @param Connection $connection
@@ -41,15 +41,18 @@ class UserRolesRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchAll() : array
+    public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -68,10 +71,12 @@ class UserRolesRepository
      * @param array $where
      *
      * @return UserRolesEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchOneBy(array $where = []) : UserRolesEntity
-    {
+    public function fetchOneBy(array $where = [])
+    : UserRolesEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -85,7 +90,7 @@ class UserRolesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -98,10 +103,12 @@ class UserRolesRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchBy(array $where = []) : array
-    {
+    public function fetchBy(array $where = [])
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -114,7 +121,7 @@ class UserRolesRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -134,10 +141,10 @@ class UserRolesRepository
      *
      * @return UserRolesEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function create(UserRolesEntity $entity) : UserRolesEntity
-    {
+    public function create(UserRolesEntity $entity)
+    : UserRolesEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -158,11 +165,11 @@ class UserRolesRepository
      * @param UserRolesEntity $entity
      *
      * @return UserRolesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws RecordNotPersistedException
      */
-    public function update(UserRolesEntity $entity) : UserRolesEntity
-    {
+    public function update(UserRolesEntity $entity)
+    : UserRolesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -182,12 +189,12 @@ class UserRolesRepository
      * @param UserRolesEntity $entity
      *
      * @return UserRolesEntity
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
-    public function remove(UserRolesEntity $entity) : UserRolesEntity
-    {
+    public function remove(UserRolesEntity $entity)
+    : UserRolesEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -207,12 +214,13 @@ class UserRolesRepository
      * @param string $role
      *
      * @return bool
-     * @throws DBALException
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function grantRole(int $userId, string $role) : bool
-    {
+    public function grantRole(int $userId, string $role)
+    : bool {
         try {
             $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
         } catch (\Exception $exception) {
@@ -228,9 +236,10 @@ class UserRolesRepository
      * @param string $role
      *
      * @return bool
+     * @throws Exception
      */
-    public function removeRole(int $userId, string $role) : bool
-    {
+    public function removeRole(int $userId, string $role)
+    : bool {
         try {
             $entity = $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
 
@@ -246,8 +255,8 @@ class UserRolesRepository
      *
      * @return array
      */
-    public function getDatabaseArrayFromEntity(UserRolesEntity $entity) : array
-    {
+    public function getDatabaseArrayFromEntity(UserRolesEntity $entity)
+    : array {
         return [
             'id' => $entity->id,
             'user_id' => $entity->userId,
@@ -260,8 +269,8 @@ class UserRolesRepository
      *
      * @return UserRolesEntity
      */
-    public function getEntityFromDatabaseArray(array $data) : UserRolesEntity
-    {
+    public function getEntityFromDatabaseArray(array $data)
+    : UserRolesEntity {
         $entity = new UserRolesEntity();
         $entity->id = (int) $data['id'];
         $entity->userId = (string) $data['user_id'];

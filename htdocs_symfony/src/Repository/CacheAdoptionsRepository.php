@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Exception;
 use Oc\Entity\GeoCacheAdoptionsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -20,10 +23,10 @@ class CacheAdoptionsRepository
     const TABLE = 'cache_adoptions';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * CacheAdoptionsRepository constructor.
@@ -40,15 +43,19 @@ class CacheAdoptionsRepository
     /**
      * @return array
      * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchAll()
+    : array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -68,9 +75,12 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
-    {
+    : GeoCacheAdoptionsEntity {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
@@ -84,7 +94,7 @@ class CacheAdoptionsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -98,9 +108,10 @@ class CacheAdoptionsRepository
      *
      * @return array
      * @throws \Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
-    {
+    : array {
         $queryBuilder = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE);
@@ -113,7 +124,7 @@ class CacheAdoptionsRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             //            throw new RecordsNotFoundException('No records with given where clause found');
@@ -133,10 +144,10 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(GeoCacheAdoptionsEntity $entity)
-    {
+    : GeoCacheAdoptionsEntity {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -158,10 +169,10 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(GeoCacheAdoptionsEntity $entity)
-    {
+    : GeoCacheAdoptionsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -182,11 +193,10 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\DBAL\Exception\InvalidArgumentException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function remove(GeoCacheAdoptionsEntity $entity)
-    {
+    : GeoCacheAdoptionsEntity {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -207,7 +217,7 @@ class CacheAdoptionsRepository
      * @return array
      */
     public function getDatabaseArrayFromEntity(GeoCacheAdoptionsEntity $entity)
-    {
+    : array {
         return [
             'id' => $entity->id,
             'cache_id' => $entity->cacheId,
@@ -223,10 +233,13 @@ class CacheAdoptionsRepository
      * @param array $data
      *
      * @return GeoCacheAdoptionsEntity
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)
-    {
+    : GeoCacheAdoptionsEntity {
         $entity = new GeoCacheAdoptionsEntity();
         $entity->id = (int) $data['id'];
         $entity->cacheId = (int) $data['cache_id'];

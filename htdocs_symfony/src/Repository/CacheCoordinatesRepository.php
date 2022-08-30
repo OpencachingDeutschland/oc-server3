@@ -6,7 +6,6 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCacheCoordinatesEntity;
@@ -23,10 +22,10 @@ class CacheCoordinatesRepository
     const TABLE = 'cache_coordinates';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var UserRepository */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     /**
      * CacheCoordinatesRepository constructor.
@@ -145,7 +144,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(GeoCacheCoordinatesEntity $entity)
     : GeoCacheCoordinatesEntity {
@@ -170,7 +169,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(GeoCacheCoordinatesEntity $entity)
     : GeoCacheCoordinatesEntity {
@@ -194,7 +193,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      */
     public function remove(GeoCacheCoordinatesEntity $entity)
@@ -235,7 +234,9 @@ class CacheCoordinatesRepository
      * @param array $data
      *
      * @return GeoCacheCoordinatesEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)

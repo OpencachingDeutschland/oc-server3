@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportListingInfosEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -23,10 +23,10 @@ class SupportListingInfosRepository
     const TABLE = 'support_listing_infos';
 
     /** @var Connection */
-    private $connection;
+    private Connection $connection;
 
     /** @var NodesRepository */
-    private $nodesRepository;
+    private NodesRepository $nodesRepository;
 
     /**
      * @param Connection $connection
@@ -40,8 +40,10 @@ class SupportListingInfosRepository
 
     /**
      * @return array
+     * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -51,7 +53,7 @@ class SupportListingInfosRepository
             ->from(self::TABLE)
             ->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -71,6 +73,8 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordNotFoundException
+     * @throws Exception
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
     : SupportListingInfosEntity {
@@ -87,7 +91,7 @@ class SupportListingInfosRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -100,8 +104,10 @@ class SupportListingInfosRepository
      * @param array $where
      *
      * @return array
+     * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -117,7 +123,7 @@ class SupportListingInfosRepository
 
         $statement = $queryBuilder->execute();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -137,7 +143,7 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordAlreadyExistsException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SupportListingInfosEntity $entity)
     : SupportListingInfosEntity {
@@ -162,7 +168,7 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SupportListingInfosEntity $entity)
     : SupportListingInfosEntity {
@@ -186,7 +192,7 @@ class SupportListingInfosRepository
      *
      * @return SupportListingInfosEntity
      * @throws RecordNotPersistedException
-     * @throws DBALException
+     * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      */
     public function remove(SupportListingInfosEntity $entity)
@@ -236,12 +242,14 @@ class SupportListingInfosRepository
      * @param array $data
      *
      * @return SupportListingInfosEntity
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportListingInfosEntity {
         $entity = new SupportListingInfosEntity();
-        $entity->id = ((int) $data['id']) ?? NULL;
+        $entity->id = ((int) $data['id']) ?? null;
         $entity->wpOc = (string) $data['wp_oc'];
         $entity->nodeId = (int) $data['node_id'];
         $entity->nodeOwnerId = (string) $data['node_owner_id'];

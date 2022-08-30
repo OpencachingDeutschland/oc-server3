@@ -40,7 +40,7 @@ class mail extends Smarty
         $this->caching = 0;
 
         // register additional functions
-        $this->load_filter('pre', 't');
+        $this->loadFilter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {

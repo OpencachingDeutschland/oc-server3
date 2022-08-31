@@ -251,7 +251,9 @@
         <div class="nav3">
             <ul>
                 <li class="title">
-                    {if $submenu.0.parent==1}{* start page hack *}{t}News{/t}{else}{t}Main menu{/t}{/if}
+                    {if isset($submenu) }
+                        {if $submenu.0.parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
+                    {/if}
                 </li>
                 {nocache}
                     {include file="sys_submenu.tpl" items="$submenu"}

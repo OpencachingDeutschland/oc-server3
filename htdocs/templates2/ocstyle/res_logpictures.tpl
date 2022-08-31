@@ -1,6 +1,6 @@
 {* see lib2/logic/logpics.class.php for data retreival *}
 
-{if $pages_list}
+{if isset($pages_list)}
     <div class="content2-container">
         <table width="100%" cellspacing="0" cellpadding="0">
             <tr>
@@ -9,7 +9,7 @@
             </tr>
         </table>
     </div>
-{elseif "$subtitle" != ""}
+{elseif isset("$subtitle")}
     <p>{$subtitle}</p>
 {/if}
 

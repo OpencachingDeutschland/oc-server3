@@ -13,7 +13,7 @@ require __DIR__ . '/../../lib2/web.inc.php';
 /** @var Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 
-$users = $connection->fetchAll(
+$users = $connection->fetchAllAssociative(
     'SELECT @curRow := @curRow + 1 AS rank, `user`.`username`, `stat_user`.`found`
      FROM `stat_user`
      INNER JOIN `user` ON `stat_user`.`user_id`=`user`.`user_id`

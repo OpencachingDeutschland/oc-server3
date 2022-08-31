@@ -15,8 +15,8 @@ RUN apt-get update -y \
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 
 RUN wget https://get.symfony.com/cli/installer -O - | bash
-#RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 COPY vhost.conf /opt/docker/etc/httpd/vhost.conf
 
-RUN composer self-update --1
+RUN composer self-update --2

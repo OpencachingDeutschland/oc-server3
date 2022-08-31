@@ -10,7 +10,7 @@
             <li class="title secondtitle">{$menuitem.menustring|escape}</li>
         {else}
             {* selectable menu option *}
-            <li class="group{$menuitem.sublevel}{if $menuitem.selected} group_active{/if}"><a href="{$menuitem.href}" {$menuitem.target}>{$menuitem.menustring|escape}</a></li>
+            <li class="group{$menuitem.sublevel}{if $menuitem.selected} group_active{/if}"><a href="{$menuitem.href}" {if !isset($menuitem.target) } target="_blank" {/if}>{$menuitem.menustring|escape}</a></li>
         {/if}
     {/foreach}
 {/strip}

@@ -18,7 +18,7 @@ return static function(ContainerConfigurator $containerConfigurator)
         ],
         // Hack for our database role hierarchy
         'role_hierarchy' => ['ROLE_USER' => 'ROLE_USER'],
-        'encoders' => [
+        'password_hashers' => [
             UserEntity::class => [
                 'algorithm' => 'md5',
                 'encode_as_base64' => false,

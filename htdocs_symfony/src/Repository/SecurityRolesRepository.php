@@ -6,6 +6,7 @@ namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\ParameterType;
 use Oc\Entity\SecurityRolesEntity;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -32,7 +33,6 @@ class SecurityRolesRepository
      * @return array
      * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +40,7 @@ class SecurityRolesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -63,7 +63,6 @@ class SecurityRolesRepository
      * @return SecurityRolesEntity
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneBy(array $where = [])
     : SecurityRolesEntity {
@@ -78,7 +77,7 @@ class SecurityRolesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -95,7 +94,6 @@ class SecurityRolesRepository
      * @return array
      * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -109,7 +107,7 @@ class SecurityRolesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -131,7 +129,6 @@ class SecurityRolesRepository
      *
      * @return array
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchUserRoles(UserEntity $user)
     : array {
@@ -140,8 +137,8 @@ class SecurityRolesRepository
             ->from(self::TABLE, 'sr')
             ->join('sr', 'user_roles', 'ur', 'sr.id = ur.role_id')
             ->where('ur.user_id = :userId')
-            ->setParameter(':userId', $user->userId)
-            ->execute();
+            ->setParameter('userId', $user->userId, ParameterType::INTEGER)
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -238,7 +235,6 @@ class SecurityRolesRepository
      * @return int
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getIdByRoleName(string $roleName)
     : int {
@@ -251,7 +247,6 @@ class SecurityRolesRepository
      * @return string
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getRoleNameById(int $roleId)
     : string {

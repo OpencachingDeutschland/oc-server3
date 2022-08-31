@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,7 +34,6 @@ class OCOnly81Controller extends AbstractController
      *
      * @return Response
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function ocOnly81Controller_index()
     : Response
@@ -58,7 +57,6 @@ class OCOnly81Controller extends AbstractController
      *
      * OCOnly81 Datenbankabfrage: Verteilung der OCOnly-Caches in der 81er Matrix, sowie Summen der einzelnen Zeilen/Spalten erstellen
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     private function ocOnly81_get_matrixData()
     : array
@@ -78,7 +76,7 @@ class OCOnly81Controller extends AbstractController
             ->where('caches.status = 1')
             ->groupBy('difficulty', 'terrain');
 
-        $data = $qb->execute()->fetchAllAssociative();
+        $data = $qb->executeQuery()->fetchAllAssociative();
 
         foreach ($data as $item) {
             $matrix[$item['difficulty'] - 2][$item['terrain'] - 2] ++;
@@ -99,7 +97,6 @@ class OCOnly81Controller extends AbstractController
      *
      * OCOnly81 Datenbankabfrage: Anzahl der OCOnly-Funde je Nutzer
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     private function ocOnly81_get_user_counts(int $limit = 0)
     : array {
@@ -116,7 +113,7 @@ class OCOnly81Controller extends AbstractController
             ->where('user_options.option_id = 13')
             ->andWhere('user_options.option_value = 1');
 
-        $data = $qb->execute()->fetchAllAssociative();
+        $data = $qb->executeQuery()->fetchAllAssociative();
 
         foreach ($data as $item) {
             if (!array_key_exists($item['user_id'], $result)) {

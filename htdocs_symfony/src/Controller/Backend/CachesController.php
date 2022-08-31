@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Oc\Form\CachesFormType;
 use Oc\Repository\CachesRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -42,9 +42,7 @@ class CachesController extends AbstractController
      *
      * @return Response
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      * @Route("/caches", name="caches_index")
-     *
      */
     public function cachesController_index(Request $request)
     : Response {
@@ -77,6 +75,7 @@ class CachesController extends AbstractController
      * @param string $wpID
      *
      * @return Response
+     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
      */
     public function search_by_cache_wp(string $wpID)
@@ -97,7 +96,6 @@ class CachesController extends AbstractController
      *
      * @return array
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function getCachesForSearchField(string $searchtext)
     : array {
@@ -120,14 +118,16 @@ class CachesController extends AbstractController
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('caches.wp_oc', 'ASC');
 
-        return $qb->execute()->fetchAllAssociative();
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /**
      * @param int $id
      *
      * @return array
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getCacheDetailsById(int $id)
     : array {
@@ -140,7 +140,9 @@ class CachesController extends AbstractController
      * @param string $wayPoint
      *
      * @return array
+     * @throws Exception
      * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getCacheDetailsByWayPoint(string $wayPoint)
     : array {

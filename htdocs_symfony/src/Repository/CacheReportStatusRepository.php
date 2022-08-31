@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheReportStatusEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -39,7 +38,6 @@ class CacheReportStatusRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -47,7 +45,7 @@ class CacheReportStatusRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -68,9 +66,8 @@ class CacheReportStatusRepository
      * @param array $where
      *
      * @return GeoCacheReportStatusEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheReportStatusEntity {
@@ -85,7 +82,7 @@ class CacheReportStatusRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -100,9 +97,8 @@ class CacheReportStatusRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -116,7 +112,7 @@ class CacheReportStatusRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -138,7 +134,7 @@ class CacheReportStatusRepository
      *
      * @return GeoCacheReportStatusEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheReportStatusEntity $entity)
     : GeoCacheReportStatusEntity {
@@ -163,7 +159,7 @@ class CacheReportStatusRepository
      *
      * @return GeoCacheReportStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheReportStatusEntity $entity)
     : GeoCacheReportStatusEntity {
@@ -187,8 +183,7 @@ class CacheReportStatusRepository
      *
      * @return GeoCacheReportStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function remove(GeoCacheReportStatusEntity $entity)
     : GeoCacheReportStatusEntity {

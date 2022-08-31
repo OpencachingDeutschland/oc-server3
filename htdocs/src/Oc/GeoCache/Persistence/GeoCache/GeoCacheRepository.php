@@ -4,7 +4,9 @@ namespace Oc\GeoCache\Persistence\GeoCache;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\GeoCache\Enum\WaypointType;
+use Oc\GeoCache\Exception\UnknownWaypointTypeException;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -32,17 +34,18 @@ class GeoCacheRepository
     /**
      * Fetches all GeoCaches.
      *
+     * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException Thrown when no records are found
-     * @return GeoCacheEntity[]
      */
     public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -75,9 +78,9 @@ class GeoCacheRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -89,8 +92,11 @@ class GeoCacheRepository
     /**
      * Fetches all GeoCaches by given where clause.
      *
+     * @param array $where
+     *
+     * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException Thrown when no records are found
-     * @return GeoCacheEntity[]
      */
     public function fetchBy(array $where = []): array
     {
@@ -104,9 +110,9 @@ class GeoCacheRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -124,7 +130,12 @@ class GeoCacheRepository
     /**
      * Fetches a GeoCache by given where clause.
      *
+     * @param string $waypoint
+     *
+     * @return GeoCacheEntity|null
+     * @throws Exception
      * @throws RecordNotFoundException Thrown when no record is found
+     * @throws UnknownWaypointTypeException
      */
     public function fetchGCWaypoint(string $waypoint): ?GeoCacheEntity
     {
@@ -136,12 +147,12 @@ class GeoCacheRepository
             ->select('*')
             ->from(self::TABLE)
             ->where("IF(wp_gc_maintained = '', wp_gc, wp_gc_maintained) = :waypoint")
-            ->setParameter(':waypoint', $waypoint)
+            ->setParameter('waypoint', $waypoint)
             ->setMaxResults(1);
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record by given gc waypoint not found');
@@ -153,6 +164,10 @@ class GeoCacheRepository
     /**
      * Creates a GeoCache in the database.
      *
+     * @param GeoCacheEntity $entity
+     *
+     * @return GeoCacheEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(GeoCacheEntity $entity): GeoCacheEntity

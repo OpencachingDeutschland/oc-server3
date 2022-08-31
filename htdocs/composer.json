@@ -6,7 +6,7 @@
   "require": {
     "php": "^8.0",
     "ezyang/htmlpurifier": "^v4.8",
-    "smarty/smarty": "~2.6|^3.0|^4.0",
+    "smarty/smarty": "~2.6",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
     "doctrine/doctrine-bundle": "^1.6|2.6.4",
@@ -72,6 +72,11 @@
     "symfony": {
       "allow-contrib": false,
       "require": "4.4.*"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
 }

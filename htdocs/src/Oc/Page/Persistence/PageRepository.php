@@ -4,6 +4,7 @@ namespace Oc\Page\Persistence;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -31,6 +32,7 @@ class PageRepository
      * Fetches a page by slug.
      *
      * @throws RecordNotFoundException Thrown when no record is found
+     * @throws Exception
      */
     public function fetchOneBy(array $where = []): ?PageEntity
     {
@@ -46,9 +48,9 @@ class PageRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -60,6 +62,10 @@ class PageRepository
     /**
      * Creates a page in the database.
      *
+     * @param PageEntity $entity
+     *
+     * @return PageEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(PageEntity $entity): PageEntity

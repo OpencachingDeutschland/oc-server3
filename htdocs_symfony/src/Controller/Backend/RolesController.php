@@ -63,7 +63,6 @@ class RolesController extends AbstractController
      * @return Response
      * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles", name="roles_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
@@ -81,7 +80,6 @@ class RolesController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/teamlist", name="roles_teamlist")
      * @Security("is_granted('ROLE_TEAM')")
      *
@@ -111,7 +109,6 @@ class RolesController extends AbstractController
      * @return array
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     private function getTeamMembersAndRoles(string $minimumRoleName)
     : array {
@@ -126,7 +123,7 @@ class RolesController extends AbstractController
             ->setParameters(['searchTerm' => $minimumRoleId])
             ->orderBy('security_roles.role', 'ASC');
 
-        return $qb->execute()->fetchAllAssociative();
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /**
@@ -136,7 +133,6 @@ class RolesController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/search", name="roles_search")
      * @Security("is_granted('ROLE_TEAM')")
      */
@@ -171,7 +167,6 @@ class RolesController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/removeRole/{userId}&{role}", name="roles_remove_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
@@ -205,7 +200,6 @@ class RolesController extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/roles/promoteRole/{userId}&{role}", name="roles_promote_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */

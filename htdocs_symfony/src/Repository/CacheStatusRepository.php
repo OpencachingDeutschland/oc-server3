@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCacheStatusEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -32,7 +32,6 @@ class CacheStatusRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +39,7 @@ class CacheStatusRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -61,9 +60,8 @@ class CacheStatusRepository
      * @param array $where
      *
      * @return GeoCacheStatusEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheStatusEntity {
@@ -78,7 +76,7 @@ class CacheStatusRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -93,9 +91,8 @@ class CacheStatusRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -109,7 +106,7 @@ class CacheStatusRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -131,7 +128,7 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheStatusEntity $entity)
     : GeoCacheStatusEntity {
@@ -156,7 +153,7 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheStatusEntity $entity)
     : GeoCacheStatusEntity {
@@ -180,7 +177,7 @@ class CacheStatusRepository
      *
      * @return GeoCacheStatusEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws InvalidArgumentException
      */
     public function remove(GeoCacheStatusEntity $entity)

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\UserRolesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -42,7 +42,6 @@ class UserRolesRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -50,7 +49,7 @@ class UserRolesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -71,9 +70,8 @@ class UserRolesRepository
      * @param array $where
      *
      * @return UserRolesEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : UserRolesEntity {
@@ -88,7 +86,7 @@ class UserRolesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -103,9 +101,8 @@ class UserRolesRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -119,7 +116,7 @@ class UserRolesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -141,7 +138,7 @@ class UserRolesRepository
      *
      * @return UserRolesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(UserRolesEntity $entity)
     : UserRolesEntity {
@@ -165,7 +162,7 @@ class UserRolesRepository
      * @param UserRolesEntity $entity
      *
      * @return UserRolesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function update(UserRolesEntity $entity)
@@ -189,7 +186,7 @@ class UserRolesRepository
      * @param UserRolesEntity $entity
      *
      * @return UserRolesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
@@ -214,10 +211,9 @@ class UserRolesRepository
      * @param string $role
      *
      * @return bool
-     * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function grantRole(int $userId, string $role)
     : bool {
@@ -236,7 +232,6 @@ class UserRolesRepository
      * @param string $role
      *
      * @return bool
-     * @throws Exception
      */
     public function removeRole(int $userId, string $role)
     : bool {

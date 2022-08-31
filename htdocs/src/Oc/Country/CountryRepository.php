@@ -3,10 +3,14 @@
 namespace Oc\Country;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class CountryRepository
 {
     /**
@@ -19,7 +23,7 @@ class CountryRepository
     /**
      * @var Connection
      */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
@@ -29,17 +33,18 @@ class CountryRepository
     /**
      * Fetches all countries.
      *
-     * @throws RecordsNotFoundException Thrown when no records are found
      * @return CountryEntity[]
+     * @throws Exception
+     * @throws RecordsNotFoundException Thrown when no records are found
      */
     public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -57,6 +62,10 @@ class CountryRepository
     /**
      * Creates a country in the database.
      *
+     * @param CountryEntity $entity
+     *
+     * @return CountryEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(CountryEntity $entity): CountryEntity
@@ -80,6 +89,10 @@ class CountryRepository
     /**
      * Update a country in the database.
      *
+     * @param CountryEntity $entity
+     *
+     * @return CountryEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function update(CountryEntity $entity): CountryEntity
@@ -104,6 +117,10 @@ class CountryRepository
     /**
      * Removes a country from the database.
      *
+     * @param CountryEntity $entity
+     *
+     * @return CountryEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function remove(CountryEntity $entity): CountryEntity

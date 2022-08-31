@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\NodesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -37,7 +37,6 @@ class NodesRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -45,7 +44,7 @@ class NodesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -66,9 +65,8 @@ class NodesRepository
      * @param array $where
      *
      * @return NodesEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : NodesEntity {
@@ -83,7 +81,7 @@ class NodesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -98,9 +96,8 @@ class NodesRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -114,7 +111,7 @@ class NodesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -136,7 +133,7 @@ class NodesRepository
      *
      * @return NodesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(NodesEntity $entity)
     : NodesEntity {
@@ -160,7 +157,7 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function update(NodesEntity $entity)
@@ -184,7 +181,7 @@ class NodesRepository
      * @param NodesEntity $entity
      *
      * @return NodesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
@@ -239,9 +236,8 @@ class NodesRepository
      * @param int $id
      *
      * @return string
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function get_prefix_by_id(int $id)
     : string {
@@ -257,9 +253,8 @@ class NodesRepository
      * @param string $prefix
      *
      * @return int
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function get_id_by_prefix(string $prefix)
     : int {

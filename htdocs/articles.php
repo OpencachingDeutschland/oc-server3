@@ -62,9 +62,9 @@ $tpl->cache_lifetime = 43200;
 /** @var Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 
-$tpl->menuitem = $connection->fetchColumn(
+$tpl->menuitem = $connection->fetchOne(
     'SELECT `id` FROM `sys_menu` WHERE `href`= :href LIMIT 1',
-    [':href' => 'articles.php?page=' . urlencode($article)]
+    ['href' => 'articles.php?page=' . urlencode($article)]
 );
 if ($tpl->menuitem == 0) {
     $tpl->redirect('index.php');

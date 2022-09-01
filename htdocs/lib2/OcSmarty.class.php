@@ -413,14 +413,15 @@ class OcSmarty extends Smarty
     /**
      * check if this template is valid
      *
-     * @param null|mixed $dummy1
-     * @param null|mixed $dummy2
-     * @param null|mixed $dummy3
+     * @param null $tpl_file
+     * @param null $cache_id
+     * @param null $compile_id
      *
-     * @return bool|false|string
+     * @return string|false
      */
-    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null)
-    : bool|string {
+    public function is_cached($tpl_file = null, $cache_id = null, $compile_id = null)
+//    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null) // original
+    {
         global $login;
 
         // if the user is an admin, dont cache the content

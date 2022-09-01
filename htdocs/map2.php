@@ -224,8 +224,7 @@ $rsCacheSize = sql(
 );
 $tpl->assign_rs('aCacheSize', $rsCacheSize);
 sql_free_result($rsCacheSize);
-dd(attribute::getSelectableAttributesListArray());
-die();
+
 /* assign attributes */
 $tpl->assign('aAttributes', attribute::getSelectableAttributesListArray());
 

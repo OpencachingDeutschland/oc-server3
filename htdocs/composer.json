@@ -1,5 +1,5 @@
 {
-  "_comment": "Kommentar/Merkzettel von fraggle: doctrine/doctrine-bundle wurde auf 2.6.4 festgeschrieben, da Version 2.7.0 nicht mit doctrine/orm 2.10.* zusammenpasst.",
+  "_comment": "Kommentar/Merkzettel von fraggle: smarty/smarty bleibt vorerst bei ^2.6. ^3.0 oder ^4.0 verursachen zu viel Änderungsaufwand in OcSmarty.class.php",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
@@ -9,7 +9,7 @@
     "smarty/smarty": "~2.6",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
-    "doctrine/doctrine-bundle": "^1.6|2.6.4",
+    "doctrine/doctrine-bundle": "^1.6|^2.6",
     "symfony/swiftmailer-bundle": "^3.4",
     "symfony/monolog-bundle": "^3.5",
     "symfony/polyfill-apcu": "^1.0",
@@ -46,7 +46,7 @@
     "squizlabs/php_codesniffer": "^2.6|^3.0",
     "fig-r/psr2r-sniffer": "^0.3.0|^1.0",
     "hassankhan/config": "0.11.2|^1.0|^2.0",
-    "codedungeon/phpunit-result-printer": "^0.4|^0.30",
+    "codedungeon/phpunit-result-printer": "~0.4",
     "nette/php-generator": "^2.6|^3.0|^4.0"
   },
   "repositories": [

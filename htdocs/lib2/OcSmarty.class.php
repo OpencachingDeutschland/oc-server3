@@ -50,10 +50,6 @@ class OcSmarty extends Smarty
 
     public array $body_unload = [];
 
-//    public $objMap = null;
-
-//    private bool $_cache_including = false;
-
     /**
      * OcSmarty constructor.
      *
@@ -61,8 +57,6 @@ class OcSmarty extends Smarty
     public function __construct()
     {
         parent::__construct();
-//        xdebug_info();
-//        exit;
         global $opt;
         $this->bench = new CBench();
         $this->bench->start();
@@ -82,9 +76,8 @@ class OcSmarty extends Smarty
 
         // register additional functions
         require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
-//        $this->registerPlugin('nocache', 'smarty_block_nocache', 'smarty_block_nocache'); // xxx
-        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache'); // xxx
-        $this->load_Filter('pre', 't'); // xxx
+        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache');
+        $this->load_Filter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -135,18 +128,19 @@ class OcSmarty extends Smarty
             $compile_id = $this->compile_id;
         }
 
+        // TODO: was ist jetzt richtig? _compile_id war zuerst da, wurde aber mal angemeckert..
+        $this->_compile_id = $compile_id;
         $this->compile_id = $compile_id;
 
         // load filters that are marked as autoload
         if (count($this->autoload_filters)) {
             foreach ($this->autoload_filters as $_filter_type => $_filters) {
                 foreach ($_filters as $_filter) {
-                    $this->load_Filter($_filter_type, $_filter); // xxx
+                    $this->load_Filter($_filter_type, $_filter);
                 }
             }
         }
 
-//        $_smarty_compile_path = $this->getCompileDir(); // xxx
         $_smarty_compile_path = $this->_get_compile_path($resource_name);
 
         // if we just need to display the results, don't perform output
@@ -157,7 +151,6 @@ class OcSmarty extends Smarty
         // compile the resource
         if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
             $this->_compile_resource($resource_name, $_smarty_compile_path);
-//            $this->compile($resource_name, $_smarty_compile_path);
         }
 
         $this->_cache_including = $_cache_including;
@@ -317,14 +310,13 @@ class OcSmarty extends Smarty
         $this->assign('opt', $optn);
         $this->assign('login', $loginn);
 
-        if ($db['connected'] == true) {
+        if ($db['connected']) {
             $this->assign('sys_dbconnected', true);
         } else {
             $this->assign('sys_dbconnected', false);
         }
         $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
 
-//        if ($this->templateExists($this->name . '.tpl')) { // xxx
         if ($this->template_exists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
         } elseif ($this->name != 'sys_error') {
@@ -349,7 +341,6 @@ class OcSmarty extends Smarty
 
         // check if the template is compiled
         // if not, check if translation works correct
-//        $_smarty_compile_path = $this->getCompileDir(); // xxx
         $_smarty_compile_path = $this->_get_compile_path($this->name);
         if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
             $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
@@ -367,7 +358,6 @@ class OcSmarty extends Smarty
         if ($db['debug'] === true) {
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 
-//            $this->clearAllAssign(); // xxx
             $this->clear_all_assign();
             $this->main_template = 'sys_sqldebugger';
             $this->assign('commands', $sqldebugger->getCommands());
@@ -400,7 +390,6 @@ class OcSmarty extends Smarty
      */
     public function error(int $id)
     : void {
-//        $this->clearAllAssign(); // xxx
         $this->clear_all_assign();
         $this->caching = 0;
 
@@ -441,7 +430,6 @@ class OcSmarty extends Smarty
             }
         }
 
-//        return parent::isCached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id()); // xxx
         return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
@@ -472,7 +460,7 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect(string $page)
+    public function redirect($page)
     : void {
         global $cookie, $opt;
         $cookie->close();
@@ -500,7 +488,6 @@ class OcSmarty extends Smarty
 
     /**
      * redirect login function
-     *
      */
     public function redirect_login()
     : void
@@ -589,7 +576,6 @@ class OcSmarty extends Smarty
      *
      * @param $sTarget
      * @param null|mixed $sDefault
-     *
      * @return null|string
      */
     public function checkTarget($sTarget, $sDefault = null)

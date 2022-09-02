@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28e2bc049c3470ab98ec7bb99a4b3fc6",
+    "content-hash": "d22e773b33f29996a12ddb7b8c1cf522",
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -8707,16 +8707,16 @@
         },
         {
             "name": "symplify/config-transformer",
-            "version": "11.1.6",
+            "version": "11.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symplify/config-transformer.git",
-                "reference": "573ea21949c984999f612639acda3a69ce98cc88"
+                "reference": "f244ed4454d30f4264bdfbf34b0388632ad05f69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/config-transformer/zipball/573ea21949c984999f612639acda3a69ce98cc88",
-                "reference": "573ea21949c984999f612639acda3a69ce98cc88",
+                "url": "https://api.github.com/repos/symplify/config-transformer/zipball/f244ed4454d30f4264bdfbf34b0388632ad05f69",
+                "reference": "f244ed4454d30f4264bdfbf34b0388632ad05f69",
                 "shasum": ""
             },
             "require": {
@@ -8732,7 +8732,7 @@
             ],
             "description": "Prefixed version of Symfony YAML/XML to PHP/YAML config converter",
             "support": {
-                "source": "https://github.com/symplify/config-transformer/tree/11.1.6"
+                "source": "https://github.com/symplify/config-transformer/tree/11.1.7"
             },
             "funding": [
                 {
@@ -8744,7 +8744,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-31T08:15:39+00:00"
+            "time": "2022-09-01T19:27:15+00:00"
         },
         {
             "name": "symplify/console-package-builder",
@@ -9026,7 +9026,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },

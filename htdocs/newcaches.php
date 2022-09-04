@@ -16,6 +16,9 @@ $tpl->change_country_inpage = true;
 
 $startAt = isset($_REQUEST['startat']) ? floor($_REQUEST['startat'] + 0) : 0;
 $country = isset($_REQUEST['usercountry']) ? $_REQUEST['usercountry'] : (isset($_REQUEST['country']) ? $_REQUEST['country'] : '');
+if (!preg_match('/^[a-z]{2}$/i', $country)) {
+    $country = '';
+}
 $cacheType = isset($_REQUEST['cachetype']) ? $_REQUEST['cachetype'] + 0 : 0;
 $bEvents = ($cacheType == 6);
 

@@ -127,7 +127,7 @@
             <p class="content-title-noshade-size3">
                 <img src="resource2/{$opt.template.style}/images/misc/22x22-traditional.png" style="margin-right: 10px;"
                      width="22" height="22" alt=""/>
-                <a href="newcaches.php?country={$usercountryCode}"
+                <a href="newcaches.php?country={$usercountryCode|escape}"
                    style="color:rgb(88,144,168); text-decoration: none;">{t 1=$usercountry|escape}Newest caches in %1{/t}</a>
                 &nbsp; <span class="content-title-link">[<a href="newcaches.php">{t}more{/t}...</a>]</span>
             </p>

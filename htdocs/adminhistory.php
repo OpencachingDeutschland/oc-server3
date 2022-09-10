@@ -23,9 +23,9 @@ if (($login->admin & ADMIN_USER) != ADMIN_USER) {
 $connection = AppKernel::Container()->get(Connection::class);
 
 if (isset($_REQUEST['wp'])) {
-    $cacheId = $connection->fetchColumn(
+    $cacheId = $connection->fetchOne(
         'SELECT `cache_id` FROM `caches` WHERE `wp_oc`=:wp',
-        [':wp' => $_REQUEST['wp']]
+        ['wp' => $_REQUEST['wp']]
     );
 } else {
     $cacheId = isset($_REQUEST['cacheid']) ? (int) $_REQUEST['cacheid'] : -1;
@@ -35,7 +35,7 @@ $showHistory = false;
 $error = '';
 
 if ($cacheId >= 0 &&
-    $connection->fetchColumn('SELECT COUNT(*) FROM `caches` WHERE `cache_id`=:id',[':id' => $cacheId]) <> 1)
+    $connection->fetchOne('SELECT COUNT(*) FROM `caches` WHERE `cache_id`=:id',['id' => $cacheId]) <> 1)
 {
     $error = $translate->t('Cache not found', '', '', 0);
 } elseif ($cacheId > 0) {

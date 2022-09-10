@@ -4,12 +4,16 @@ namespace Oc\FieldNotes\Persistence;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheRepository;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class FieldNoteRepository
 {
     /**
@@ -22,12 +26,12 @@ class FieldNoteRepository
     /**
      * @var Connection
      */
-    private $connection;
+    private Connection $connection;
 
     /**
      * @var GeoCacheRepository
      */
-    private $geoCacheRepository;
+    private GeoCacheRepository $geoCacheRepository;
 
     public function __construct(Connection $connection, GeoCacheRepository $geoCacheRepository)
     {
@@ -38,17 +42,19 @@ class FieldNoteRepository
     /**
      * Fetches all countries.
      *
+     * @return array
+     * @throws Exception
      * @throws RecordsNotFoundException Thrown when no records are found
-     * @return FieldNoteEntity[]
+     * @throws RecordNotFoundException
      */
     public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -66,8 +72,10 @@ class FieldNoteRepository
     /**
      * Fetches all GeoCaches by given where clause.
      *
-     * @throws RecordsNotFoundException Thrown when no records are found
      * @return FieldNoteEntity[]
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException Thrown when no records are found
+     * @throws Exception
      */
     public function fetchBy(array $where = [], array $order = []): array
     {
@@ -83,9 +91,9 @@ class FieldNoteRepository
             $queryBuilder->addOrderBy($field, $direction);
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -103,6 +111,10 @@ class FieldNoteRepository
     /**
      * Fetches a field note by given where clause.
      *
+     * @param array $where
+     *
+     * @return FieldNoteEntity|null
+     * @throws Exception
      * @throws RecordNotFoundException Thrown when no record is found
      */
     public function fetchOneBy(array $where = []): ?FieldNoteEntity
@@ -118,9 +130,9 @@ class FieldNoteRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -133,6 +145,7 @@ class FieldNoteRepository
      * Fetch latest user field note.
      *
      * @throws RecordNotFoundException
+     * @throws Exception
      */
     public function getLatestUserFieldNote(int $userId): FieldNoteEntity
     {
@@ -144,9 +157,9 @@ class FieldNoteRepository
             ->setParameter('userId', $userId)
             ->setMaxResults(1);
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -158,6 +171,10 @@ class FieldNoteRepository
     /**
      * Creates a field note in the database.
      *
+     * @param FieldNoteEntity $entity
+     *
+     * @return FieldNoteEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(FieldNoteEntity $entity): FieldNoteEntity
@@ -182,6 +199,7 @@ class FieldNoteRepository
      * Update a field note in the database.
      *
      * @throws RecordNotPersistedException
+     * @throws Exception
      */
     public function update(FieldNoteEntity $entity): FieldNoteEntity
     {
@@ -205,6 +223,10 @@ class FieldNoteRepository
     /**
      * Removes a field note from the database.
      *
+     * @param FieldNoteEntity $entity
+     *
+     * @return FieldNoteEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function remove(FieldNoteEntity $entity): FieldNoteEntity
@@ -240,6 +262,9 @@ class FieldNoteRepository
 
     /**
      * Prepares database array from properties.
+     *
+     * @throws RecordNotFoundException
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): FieldNoteEntity
     {

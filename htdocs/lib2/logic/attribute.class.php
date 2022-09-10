@@ -6,18 +6,34 @@
 class attribute
 {
     /* array with all attributes grouped by attribute group */
+    /**
+     * @param $firstLetterUppercase
+     *
+     * @return array
+     */
     public static function getAttributesListArray($firstLetterUppercase = false)
-    {
+    : array {
         return self::getAttributesListArrayInternal(0, false, $firstLetterUppercase);
     }
 
-    public static function getSelectableAttributesListArray($firstLetterUppercase = false)
-    {
+    /**
+     * @param bool $firstLetterUppercase
+     *
+     * @return array
+     */
+    public static function getSelectableAttributesListArray(bool $firstLetterUppercase = false)
+    : array {
         return self::getAttributesListArrayInternal(0, true, $firstLetterUppercase);
     }
 
+    /**
+     * @param $cacheId
+     * @param $firstLetterUppercase
+     *
+     * @return array
+     */
     public static function getAttributesListArrayByCacheId($cacheId, $firstLetterUppercase = false)
-    {
+    : array {
         return self::getAttributesListArrayInternal($cacheId, false, $firstLetterUppercase);
     }
 
@@ -28,7 +44,7 @@ class attribute
      * @return array
      */
     public static function getAttributesListArrayInternal($cacheId, $bOnlySelectable, $firstLetterUppercase)
-    {
+    : array {
         global $opt;
 
         $attributes = array();

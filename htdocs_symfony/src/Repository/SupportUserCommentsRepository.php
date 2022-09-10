@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\SupportUserCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -36,9 +35,7 @@ class SupportUserCommentsRepository
 
     /**
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchAll()
@@ -47,7 +44,7 @@ class SupportUserCommentsRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -68,9 +65,7 @@ class SupportUserCommentsRepository
      * @param array $where
      *
      * @return SupportUserCommentsEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
@@ -86,7 +81,7 @@ class SupportUserCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -102,8 +97,6 @@ class SupportUserCommentsRepository
      *
      * @return array
      * @throws RecordsNotFoundException
-     * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchBy(array $where = [])
@@ -118,7 +111,7 @@ class SupportUserCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -139,8 +132,8 @@ class SupportUserCommentsRepository
      * @param SupportUserCommentsEntity $entity
      *
      * @return SupportUserCommentsEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function create(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -164,8 +157,8 @@ class SupportUserCommentsRepository
      * @param SupportUserCommentsEntity $entity
      *
      * @return SupportUserCommentsEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function update(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -188,9 +181,8 @@ class SupportUserCommentsRepository
      * @param SupportUserCommentsEntity $entity
      *
      * @return SupportUserCommentsEntity
+     * @throws Exception
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws InvalidArgumentException
      */
     public function remove(SupportUserCommentsEntity $entity)
     : SupportUserCommentsEntity {
@@ -230,7 +222,6 @@ class SupportUserCommentsRepository
      * @return SupportUserCommentsEntity
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : SupportUserCommentsEntity {

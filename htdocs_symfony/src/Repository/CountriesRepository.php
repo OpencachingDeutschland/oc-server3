@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\CountriesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -32,7 +32,6 @@ class CountriesRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -40,7 +39,7 @@ class CountriesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -61,9 +60,8 @@ class CountriesRepository
      * @param array $where
      *
      * @return CountriesEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : CountriesEntity {
@@ -78,7 +76,7 @@ class CountriesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -93,9 +91,8 @@ class CountriesRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -109,7 +106,7 @@ class CountriesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -131,7 +128,7 @@ class CountriesRepository
      *
      * @return CountriesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(CountriesEntity $entity)
     : CountriesEntity {
@@ -155,7 +152,7 @@ class CountriesRepository
      * @param CountriesEntity $entity
      *
      * @return CountriesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      */
     public function update(CountriesEntity $entity)
@@ -179,7 +176,7 @@ class CountriesRepository
      * @param CountriesEntity $entity
      *
      * @return CountriesEntity
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws RecordNotPersistedException
      * @throws InvalidArgumentException
      */
@@ -205,9 +202,8 @@ class CountriesRepository
      * @param string $locale
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchCountryList(string $locale)
     : array {

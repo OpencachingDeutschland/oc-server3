@@ -9,7 +9,6 @@ use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
 use Oc\Entity\SupportBonuscachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
-use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
@@ -32,7 +31,6 @@ class SupportBonuscachesRepository
 
     /**
      * @return array
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
@@ -41,7 +39,7 @@ class SupportBonuscachesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -58,8 +56,6 @@ class SupportBonuscachesRepository
      * @param array $where
      *
      * @return SupportBonuscachesEntity
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
@@ -75,7 +71,7 @@ class SupportBonuscachesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -91,7 +87,6 @@ class SupportBonuscachesRepository
      *
      * @return array
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
@@ -106,7 +101,7 @@ class SupportBonuscachesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -232,12 +227,9 @@ class SupportBonuscachesRepository
      * @param string $toBonusCache
      * @param bool $setAsBonusCache
      *
-     * @throws \Doctrine\DBAL\Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Driver\Exception
-     *
-     * Bonusinfo zum Cache abholen und aktualisieren. Ggf. neuen, leeren Eintrag anlegen.
+     * @throws \Doctrine\DBAL\Exception
      */
     public function update_or_create_bonus_entry(string $wpID, string $toBonusCache, bool $setAsBonusCache = false)
     : void {

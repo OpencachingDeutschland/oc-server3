@@ -1,16 +1,15 @@
 {
-    "_comment": "Kommentar/Merkzettel von fraggle: doctrine/doctrine-bundle war ^2.1, wurde aber auf 2.6.4 festgeschrieben, da Version 2.7.0 einen Fehler beim Cacheleeren bringt.",
     "type": "project",
     "name": "opencaching/oc-server",
     "license": "GNU General Public License",
     "description": "opencaching.de source code",
     "require": {
-        "php": "^8.0",
+        "php": "^7.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
-        "doctrine/doctrine-bundle": "2.6.4",
+        "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
         "kevinpapst/adminlte-bundle": "^3.0",
@@ -37,7 +36,7 @@
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
         "symfony/translation": "5.4.*",
-        "symfony/twig-bundle": "^5.4",
+        "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/web-link": "5.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
@@ -55,14 +54,17 @@
         "symfony/var-dumper": "^5.4",
         "symfony/web-profiler-bundle": "^5.4",
         "symplify/config-transformer": "^11.1",
-        "symplify/symplify-kernel": "^8.3"
+        "symplify/symplify-kernel": "^8.3|^9.3"
     },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true
+        }
     },
     "autoload": {
         "psr-4": {

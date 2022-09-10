@@ -16,41 +16,47 @@ require_once __DIR__ . '/logic/labels.inc.php';
  */
 class OcSmarty extends Smarty
 {
-    public $name = 'sys_nothing';
-    public $main_template = 'sys_main';
+    public string $name = 'sys_nothing';
+
+    public string $main_template = 'sys_main';
+
     public $bench = null;
+
     public $compile_id = null;
+
     public $cache_id = null;    // This is a smarty caching ID, not a caches.cache_id.
-    public $title = '';
+
+    public string $title = '';
+
     public $menuitem = null;
-    public $nowpsearch = false;
-    public $change_country_inpage = false;
+
+    public bool $nowpsearch = false;
+
+    public bool $change_country_inpage = false;
 
     // no header, menu or footer
-    public $popup = false;
+    public bool $popup = false;
 
     // show a thin border when using popup
     // disable popupmargin to appear fullscreen
-    public $popupmargin = true;
+    public bool $popupmargin = true;
 
     // url to call if login is required
-    public $target = '';
+    public string $target = '';
 
-    public $header_javascript = [];
-    public $body_load = [];
-    public $body_unload = [];
+    public array $header_javascript = [];
 
-    public $objMap = null;
+    public array $body_load = [];
+
+    public array $body_unload = [];
 
     /**
      * OcSmarty constructor.
      *
-     * @throws SmartyException
      */
     public function __construct()
     {
         parent::__construct();
-
         global $opt;
         $this->bench = new CBench();
         $this->bench->start();
@@ -70,8 +76,8 @@ class OcSmarty extends Smarty
 
         // register additional functions
         require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
-        $this->registerPlugin('nocache', 'smarty_block_nocache', 'smarty_block_nocache');
-        $this->loadFilter('pre', 't');
+        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache');
+        $this->load_Filter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -101,8 +107,8 @@ class OcSmarty extends Smarty
                 }
             }
 
-            if (mb_substr($target, -1) == '?' || mb_substr($target, -1) == '&') {
-                $target = mb_substr($target, 0, -1);
+            if (mb_substr($target, - 1) == '?' || mb_substr($target, - 1) == '&') {
+                $target = mb_substr($target, 0, - 1);
             }
 
             $this->target = $target;
@@ -113,25 +119,29 @@ class OcSmarty extends Smarty
      * @param string $resource_name
      * @param string $compile_id
      */
-    public function compile($resource_name, $compile_id = null): void
-    {
+    /**
+     *
+     */
+    public function compile($resource_name, $compile_id = null)
+    : void {
         if (!isset($compile_id)) {
             $compile_id = $this->compile_id;
         }
 
+        // TODO: was ist jetzt richtig? _compile_id war zuerst da, wurde aber mal angemeckert..
         $this->_compile_id = $compile_id;
+        $this->compile_id = $compile_id;
 
         // load filters that are marked as autoload
         if (count($this->autoload_filters)) {
             foreach ($this->autoload_filters as $_filter_type => $_filters) {
                 foreach ($_filters as $_filter) {
-                    $this->loadFilter($_filter_type, $_filter);
+                    $this->load_Filter($_filter_type, $_filter);
                 }
             }
         }
 
-//        $_smarty_compile_path = $this->_get_compile_path($resource_name);
-        $_smarty_compile_path = $this->getCompileDir($resource_name);
+        $_smarty_compile_path = $this->_get_compile_path($resource_name);
 
         // if we just need to display the results, don't perform output
         // buffering - for speed
@@ -152,10 +162,9 @@ class OcSmarty extends Smarty
      * @param null|mixed $dummy3
      * @param null|mixed $dummy4
      *
-     * @throws SmartyException
      */
-    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null, $dummy4 = null): void
-    {
+    public function display($dummy1 = null, $dummy2 = null, $dummy3 = null, $dummy4 = null)
+    : void {
         global $opt, $db, $cookie, $login, $menu, $sqldebugger, $translate, $useragent_msie;
         $cookie->close();
 
@@ -281,11 +290,7 @@ class OcSmarty extends Smarty
         $this->assign('base_pageadr', $base_pageadr);
 
         if ($opt['logic']['license']['disclaimer']) {
-            if (isset($opt['locale'][$locale]['page']['license_url'])) {
-                $lurl = $opt['locale'][$locale]['page']['license_url'];
-            } else {
-                $lurl = $opt['locale']['EN']['page']['license_url'];
-            }
+            $lurl = $opt['locale'][$locale]['page']['license_url'] ?? $opt['locale']['EN']['page']['license_url'];
 
             if (isset($opt['locale'][$locale]['page']['license'])) {
                 $ltext = mb_ereg_replace(
@@ -305,14 +310,14 @@ class OcSmarty extends Smarty
         $this->assign('opt', $optn);
         $this->assign('login', $loginn);
 
-        if ($db['connected'] == true) {
+        if ($db['connected']) {
             $this->assign('sys_dbconnected', true);
         } else {
             $this->assign('sys_dbconnected', false);
         }
-        $this->assign('sys_dbslave', ($db['slave_id'] != -1));
+        $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
 
-        if ($this->templateExists($this->name . '.tpl')) {
+        if ($this->template_exists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
         } elseif ($this->name != 'sys_error') {
             $this->error(ERROR_TEMPLATE_NOT_FOUND);
@@ -336,7 +341,7 @@ class OcSmarty extends Smarty
 
         // check if the template is compiled
         // if not, check if translation works correct
-        $_smarty_compile_path = $this->getCompileDir($this->name);
+        $_smarty_compile_path = $this->_get_compile_path($this->name);
         if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
             $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
             if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
@@ -344,7 +349,7 @@ class OcSmarty extends Smarty
             }
         }
 
-        if ($this->is_cached() == true) {
+        if ($this->is_cached()) {
             $this->assign('sys_cached', true);
         } else {
             $this->assign('sys_cached', false);
@@ -382,10 +387,9 @@ class OcSmarty extends Smarty
      *
      * @param int $id
      *
-     * @throws SmartyException
      */
-    public function error($id): void
-    {
+    public function error(int $id)
+    : void {
         $this->clear_all_assign();
         $this->caching = 0;
 
@@ -398,7 +402,7 @@ class OcSmarty extends Smarty
 
         $args = func_get_args();
         unset($args[0]);
-        for ($i = 1; isset($args[$i]); $i++) {
+        for ($i = 1; isset($args[$i]); $i ++) {
             $this->assign('p' . $i, $args[$i]);
         }
 
@@ -409,15 +413,15 @@ class OcSmarty extends Smarty
     /**
      * check if this template is valid
      *
-     * @param null|mixed $dummy1
-     * @param null|mixed $dummy2
-     * @param null|mixed $dummy3
+     * @param null $tpl_file
+     * @param null $cache_id
+     * @param null $compile_id
      *
-     * @return bool|false|string
-     * @throws SmartyException
+     * @return string|false
      */
-    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null)
-    : bool|string {
+    public function is_cached($tpl_file = null, $cache_id = null, $compile_id = null)
+//    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null) // original
+    {
         global $login;
 
         // if the user is an admin, dont cache the content
@@ -427,13 +431,14 @@ class OcSmarty extends Smarty
             }
         }
 
-        return parent::isCached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
+        return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
     /**
      * @return string
      */
     public function get_cache_id()
+    : string
     {
         // $cache_id can be directly supplied from unverified user input (URL params).
         // Probably this is no safety or stability issue, but to be sure we restrict
@@ -446,6 +451,7 @@ class OcSmarty extends Smarty
      * @return string
      */
     public function get_compile_id()
+    : string
     {
         global $opt;
 
@@ -455,8 +461,8 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect($page): void
-    {
+    public function redirect($page)
+    : void {
         global $cookie, $opt;
         $cookie->close();
 
@@ -477,7 +483,6 @@ class OcSmarty extends Smarty
             $page = $opt['page']['absolute_url'] . $page;
         }
 
-
         header('Location: ' . $page);
         exit;
     }
@@ -485,7 +490,8 @@ class OcSmarty extends Smarty
     /**
      * redirect login function
      */
-    public function redirect_login(): void
+    public function redirect_login()
+    : void
     {
         global $opt;
 
@@ -496,7 +502,7 @@ class OcSmarty extends Smarty
 
         // ok ... redirect the get-data
         $target = ($opt['page']['https']['force_login'] ? 'https' : $opt['page']['protocol'])
-            . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                  . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $this->redirect('login.php?target=' . urlencode($target));
     }
 
@@ -504,8 +510,8 @@ class OcSmarty extends Smarty
      * @param $name
      * @param $rs
      */
-    public function assign_rs($name, $rs): void
-    {
+    public function assign_rs($name, $rs)
+    : void {
         $items = [];
         while ($r = sql_fetch_assoc($rs)) {
             $items[] = $r;
@@ -516,31 +522,32 @@ class OcSmarty extends Smarty
     /**
      * @param $src
      */
-    public function add_header_javascript($src): void
-    {
+    public function add_header_javascript($src)
+    : void {
         $this->header_javascript[] = $src;
     }
 
     /**
      * @param $script
      */
-    public function add_body_load($script): void
-    {
+    public function add_body_load($script)
+    : void {
         $this->body_load[] = $script;
     }
 
     /**
      * @param $script
      */
-    public function add_body_unload($script): void
-    {
+    public function add_body_unload($script)
+    : void {
         $this->body_unload[] = $script;
     }
 
     /**
      * setting http header
      */
-    public function header(): void
+    public function header()
+    : void
     {
         global $opt;
         global $cookie;
@@ -589,7 +596,8 @@ class OcSmarty extends Smarty
         return $sTarget;
     }
 
-    public function acceptsAndPurifiesHtmlInput(): void
+    public function acceptsAndPurifiesHtmlInput()
+    : void
     {
         // Prevent false XSS detection of harmless HTML code
         // see https://redmine.opencaching.de/issues/1137

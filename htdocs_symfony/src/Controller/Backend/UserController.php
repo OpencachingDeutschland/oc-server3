@@ -39,7 +39,6 @@ class UserController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      * @Route("/user", name="user_index")
      * @Security("is_granted('ROLE_TEAM')")
@@ -67,7 +66,6 @@ class UserController extends AbstractController
      * @param string $searchtext
      *
      * @return array
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws \Doctrine\DBAL\Exception
      */
     public function getUsersForSearchField(string $searchtext)
@@ -86,7 +84,7 @@ class UserController extends AbstractController
             ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
             ->orderBy('user.username', 'ASC');
 
-        return $qb->execute()->fetchAllAssociative();
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /**

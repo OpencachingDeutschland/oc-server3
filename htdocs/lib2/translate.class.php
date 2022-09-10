@@ -65,12 +65,14 @@ class translate
             $trans = gettext($search);
         } else {
             // do not use sql_value(), as this is also used from lib1
-            $rs = sql("SELECT IFNULL(`sys_trans_text`.`text`, '&3')
+            $rs = sql(
+                "SELECT IFNULL(`sys_trans_text`.`text`, '&3')
                        FROM `sys_trans`
                        LEFT JOIN `sys_trans_text`
                          ON `sys_trans`.`id`=`sys_trans_text`.`trans_id`
                          AND `sys_trans_text`.`lang`='&1'
-                       WHERE `sys_trans`.`text`='&2' LIMIT 1", $lang, $search, $message);
+                       WHERE `sys_trans`.`text`='&2' LIMIT 1", $lang, $search, $message
+            );
 
             if ($r = sql_fetch_array($rs)) {
                 $trans = $r[0];
@@ -111,6 +113,7 @@ class translate
 
     /**
      * @param $message
+     *
      * @return string
      */
     public function v($message)
@@ -118,14 +121,17 @@ class translate
         if ($message) {
             global $translationHandler;
             global $opt;
+            global $translationHandler;
+            global $opt;
+            global $locale;
 
-            if (!isset($language)) {
-                global $locale;
-
+            if (!isset($language) && isset($locale)) {
                 $language = $locale;
+            } else {
+                $language = $opt['template']['locale'];
             }
 
-            $variables = array();
+            $variables = [];
             $language_lower = mb_strtolower($language);
             $translationHandler->loadNodeTextFile($variables, $opt['logic']['node']['id'] . '.txt', $language_lower);
             $translationHandler->loadNodeTextFile(
@@ -146,6 +152,7 @@ class translate
 class translateEdit extends translate
 {
     private $editAll;
+
     private $backtrace_level;
 
     /**

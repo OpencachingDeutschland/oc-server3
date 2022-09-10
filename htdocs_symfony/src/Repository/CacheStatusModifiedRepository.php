@@ -54,7 +54,6 @@ class CacheStatusModifiedRepository
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchAll()
     : array
@@ -62,7 +61,7 @@ class CacheStatusModifiedRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -84,7 +83,7 @@ class CacheStatusModifiedRepository
      *
      * @return GeoCacheStatusModifiedEntity
      * @throws Exception
-     * @throws RecordNotFoundException|\Doctrine\DBAL\Driver\Exception
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheStatusModifiedEntity {
@@ -99,7 +98,7 @@ class CacheStatusModifiedRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -116,7 +115,6 @@ class CacheStatusModifiedRepository
      * @return array
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -130,7 +128,7 @@ class CacheStatusModifiedRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 

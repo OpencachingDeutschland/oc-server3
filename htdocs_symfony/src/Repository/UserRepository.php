@@ -51,7 +51,6 @@ class UserRepository
      * @return array
      * @throws Exception
      * @throws RecordsNotFoundException Thrown when no records are found
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchAll()
     : array
@@ -59,7 +58,7 @@ class UserRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -76,7 +75,6 @@ class UserRepository
      * @return UserEntity
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneBy(array $where = [])
     : UserEntity {
@@ -91,7 +89,7 @@ class UserRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -110,7 +108,6 @@ class UserRepository
      * @return UserEntity
      * @throws Exception
      * @throws RecordNotFoundException Thrown when the request record is not found
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneById(int $id)
     : UserEntity {
@@ -118,8 +115,8 @@ class UserRepository
             ->select('*')
             ->from(self::TABLE)
             ->where('user_id = :id')
-            ->setParameter(':id', $id)
-            ->execute();
+            ->setParameter('id', $id)
+            ->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -143,7 +140,6 @@ class UserRepository
      * @return UserEntity
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function fetchOneByUsername(string $username)
     : UserEntity {
@@ -151,8 +147,8 @@ class UserRepository
             ->select('*')
             ->from(self::TABLE)
             ->where('username = :username')
-            ->setParameter(':username', $username)
-            ->execute();
+            ->setParameter('username', $username)
+            ->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -272,7 +268,6 @@ class UserRepository
      *
      * @return array
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     private function getEntityArrayFromDatabaseArray(array $result)
     : array {
@@ -319,7 +314,6 @@ class UserRepository
      *
      * @return UserEntity
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getEntityFromDatabaseArray(array $data)
     : UserEntity {
@@ -339,7 +333,7 @@ class UserRepository
         $entity->country = $data['country'];
         $entity->permanentLoginFlag = $data['permanent_login_flag'];
         $entity->activationCode = $data['activation_code'];
-        $entity->language = strtolower($data['language']);
+        $entity->language = strtolower($data['language'] ?? 'en');
         $entity->description = $data['description'];
         $entity->gdprDeletion = $data['gdpr_deletion'];
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);

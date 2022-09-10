@@ -66,9 +66,9 @@ if (!$tpl->is_cached()) {
         ->where('`caches`.`status` = :cacheStatus')
         ->setParameters(
             [
-                ':language' => $opt['template']['locale'],
-                ':cacheStatus' => 1,
-                ':cacheAttributeId' => 6,
+                'language' => $opt['template']['locale'],
+                'cacheStatus' => 1,
+                'cacheAttributeId' => 6,
             ]
         )
         ->orderBy('caches.' . $dateField, $sortOrder)
@@ -82,13 +82,13 @@ if (!$tpl->is_cached()) {
 
     if ($cacheType) {
         $newCachesQuery->andWhere('`caches`.`type` = :cacheType');
-        $newCachesQuery->setParameter(':cacheType', $cacheType);
+        $newCachesQuery->setParameter('cacheType', $cacheType);
     }
     if ($bEvents) {
         $newCachesQuery->andWhere('`date_hidden` >= curdate()');
     }
 
-    $newCaches = $newCachesQuery->execute()->fetchAll();
+    $newCaches = $newCachesQuery->executeQuery()->fetchAllAssociative();
 
     $tpl->assign('newCaches', $newCaches);
 
@@ -99,25 +99,25 @@ if (!$tpl->is_cached()) {
         ->select('COUNT(*)')
         ->from('caches')
         ->where('caches.status = :statusId')
-        ->setParameter(':statusId', 1);
+        ->setParameter('statusId', 1);
 
     if ($country === '') {
         if ($cacheType) {
             $countQuery->andWhere('`caches`.`type` = :cacheType');
-            $countQuery->setParameter(':cacheType', $cacheType);
+            $countQuery->setParameter('cacheType', $cacheType);
         }
         if ($bEvents) {
             $countQuery->andWhere('`date_hidden` >= curdate()');
         }
 
-        $count = $countQuery->execute()->fetchColumn();
+        $count = $countQuery->executeQuery()->fetchOne();
 
         $pager = new pager('newcaches.php?startat={offset}' . $cacheype_par);
     } else {
         $countQuery->andWhere('`caches`.`country`= :country');
         $countQuery->setParameter('country', $country);
 
-        $count = $countQuery->execute()->fetchColumn();
+        $count = $countQuery->executeQuery()->fetchOne();
 
         $pager = new pager('newcaches.php?country=' . $country . '&startat={offset}' . $cacheype_par);
     }
@@ -127,7 +127,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('countryCode', $country);
     $tpl->assign(
         'countryName',
-        $connection->fetchColumn(
+        $connection->fetchOne(
             'SELECT IFNULL(`sys_trans_text` . `text`, `countries` . `name`)
              FROM `countries`
              LEFT JOIN `sys_trans`
@@ -137,14 +137,14 @@ if (!$tpl->is_cached()) {
                AND `sys_trans_text` . `lang` = :language
              WHERE `countries` . `short` = :countryCode',
             [
-                ':language' => $opt['template']['locale'],
-                ':countryCode' => $country ? $country : $login->getUserCountry(),
+                'language' => $opt['template']['locale'],
+                'countryCode' => $country ? $country : $login->getUserCountry(),
             ]
         )
     );
     $tpl->assign(
         'mainCountryName',
-        $connection->fetchColumn(
+        $connection->fetchOne(
             'SELECT IFNULL(`sys_trans_text` . `text`, `countries` . `name`)
              FROM `countries`
              LEFT JOIN `sys_trans`
@@ -154,8 +154,8 @@ if (!$tpl->is_cached()) {
                AND `sys_trans_text` . `lang` = :language
              WHERE `countries` . `short` = :country',
             [
-                ':country' => $opt['page']['main_country'],
-                ':language' => $opt['template']['locale'],
+                'country' => $opt['page']['main_country'],
+                'language' => $opt['template']['locale'],
             ]
         )
     );

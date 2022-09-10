@@ -26,7 +26,7 @@ function showstats($header, $condition, $limit): void
     /** @var Connection $connection */
     $connection = AppKernel::Container()->get(Connection::class);
 
-    $results = $connection->fetchAll(
+    $results = $connection->fetchAllAssociative(
         'SELECT @curRow := @curRow + 1 AS rank, COUNT(*) as `count`, `username` as `name`
         FROM `caches`
         LEFT JOIN `user` ON `user`.`user_id`=`caches`.`user_id`

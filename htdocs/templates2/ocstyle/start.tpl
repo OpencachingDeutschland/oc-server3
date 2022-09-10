@@ -9,7 +9,7 @@
     </div>
 </div>
 
-{if $core_hq_message.message !=""}
+{if isset($core_hq_message.message)}
     <div class="note note-{$core_hq_message.type}">
         {$core_hq_message.message}
     </div>

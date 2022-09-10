@@ -20,7 +20,7 @@ if (($opt['debug'] & DEBUG_DEVELOPER) != DEBUG_DEVELOPER) {
 
 /** @var Doctrine\DBAL\Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
-$r = $connection->fetchAssoc(
+$r = $connection->fetchAssociative(
     'SELECT `local`,
             `spoiler`,
             `url`,
@@ -38,7 +38,7 @@ $r = $connection->fetchAssoc(
 if ($r) {
     if ($r['object_type'] == 1) {
         $check = (int) $connection
-            ->fetchColumn(
+            ->fetchOne(
                 'SELECT COUNT(*)
                  FROM `cache_logs`
                  INNER JOIN `caches`
@@ -63,7 +63,7 @@ if ($r) {
         }
     } elseif ($r['object_type'] == 2) {
         $check = (int) $connection
-            ->fetchColumn(
+            ->fetchOne(
                 'SELECT COUNT(*)
                            FROM `caches`
                            INNER JOIN `cache_status`

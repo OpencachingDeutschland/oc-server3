@@ -6,7 +6,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheAdoptionsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -42,10 +42,9 @@ class CacheAdoptionsRepository
 
     /**
      * @return array
+     * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
-     * @throws \Exception
      */
     public function fetchAll()
     : array
@@ -53,7 +52,7 @@ class CacheAdoptionsRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -76,8 +75,6 @@ class CacheAdoptionsRepository
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
-     * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheAdoptionsEntity {
@@ -92,7 +89,7 @@ class CacheAdoptionsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -107,7 +104,7 @@ class CacheAdoptionsRepository
      * @param array $where
      *
      * @return array
-     * @throws \Exception
+     * @throws RecordNotFoundException
      * @throws Exception
      */
     public function fetchBy(array $where = [])
@@ -122,7 +119,7 @@ class CacheAdoptionsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -144,7 +141,7 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheAdoptionsEntity $entity)
     : GeoCacheAdoptionsEntity {
@@ -169,7 +166,7 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheAdoptionsEntity $entity)
     : GeoCacheAdoptionsEntity {
@@ -193,7 +190,7 @@ class CacheAdoptionsRepository
      *
      * @return GeoCacheAdoptionsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function remove(GeoCacheAdoptionsEntity $entity)
     : GeoCacheAdoptionsEntity {
@@ -233,9 +230,7 @@ class CacheAdoptionsRepository
      * @param array $data
      *
      * @return GeoCacheAdoptionsEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)

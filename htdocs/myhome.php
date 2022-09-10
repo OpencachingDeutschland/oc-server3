@@ -19,27 +19,27 @@ if ($login->userid == 0) {
 }
 
 //get user record
-$rUser = $connection->fetchAssoc(
+$rUser = $connection->fetchAssociative(
     'SELECT IFNULL(`stat_user`.`found`, 0) AS `found`,
             IFNULL(`stat_user`.`hidden`, 0) AS `hidden`
      FROM `user`
      LEFT JOIN `stat_user`
        ON `user`.`user_id`=`stat_user`.`user_id`
      WHERE `user`.`user_id`= :userId LIMIT 1',
-    [':userId' => $login->userid]
+    ['userId' => $login->userid]
 );
 
 $tpl->assign('found', $rUser['found']);
 
 // locked/hidden caches are visible for the user and must be added to public stats
-$rUser['hidden'] += $connection->fetchColumn(
+$rUser['hidden'] += $connection->fetchOne(
     'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status` = 7',
-    [':userId' => $login->userid]
+    ['userId' => $login->userid]
 );
 $tpl->assign('hidden', $rUser['hidden']);
 
 //get last logs
-$logs = $connection->fetchAll(
+$logs = $connection->fetchAllAssociative(
     'SELECT SQL_CALC_FOUND_ROWS
              `cache_logs`.`cache_id` `cacheid`,
              `cache_logs`.`type` `type`,
@@ -67,11 +67,11 @@ $logs = $connection->fetchAll(
          WHERE `cache_logs`.`user_id`= :userId
          ORDER BY `cache_logs`.`order_date` DESC, `cache_logs`.`date_created` DESC, `cache_logs`.`id` DESC
          LIMIT 10',
-    [':userId' => $login->userid]
+    ['userId' => $login->userid]
 );
 
 $tpl->assign('logs', $logs);
-$tpl->assign('morelogs', $connection->fetchColumn("SELECT FOUND_ROWS()") > 10);
+$tpl->assign('morelogs', $connection->fetchOne("SELECT FOUND_ROWS()") > 10);
 
 //get last hidden caches
 $orderBy = '';
@@ -79,7 +79,7 @@ if (isset($_GET['sort']) && $_GET['sort'] === 'lastLog') {
     $orderBy = '`lastlog` DESC,';
 }
 $caches = $connection
-    ->fetchAll(
+    ->fetchAllAssociative(
         'SELECT `caches`.`cache_id`, `caches`.`name`, `caches`.`type`,
                     `caches`.`date_hidden`, `caches`.`status`, `caches`.`wp_oc`,
                     IF(`caches`.`needs_maintenance`, 2, 0) AS `needs_maintenance`,
@@ -98,7 +98,7 @@ $caches = $connection
               AND `caches`.`status` != 5
          GROUP BY `caches`.`cache_id`
          ORDER BY ' . $orderBy . ' `caches`.`date_hidden` DESC, `caches`.`date_created` DESC',
-        [':userId' => $login->userid]
+        ['userId' => $login->userid]
     );
 $tpl->assign('caches', $caches);
 
@@ -113,7 +113,7 @@ if ($useragent_msie && $useragent_msie_version < 9) {
 $tpl->add_body_load('myHomeLoad()');
 
 //get not published caches
-$notPublished = $connection->fetchAll(
+$notPublished = $connection->fetchAllAssociative(
     'SELECT `caches` . `cache_id`,
                 `caches` . `name`,
                 `caches` . `date_hidden`,
@@ -129,7 +129,7 @@ $notPublished = $connection->fetchAll(
          WHERE `user_id` = :userId
     AND `caches` . `status` = 5
          ORDER BY `date_activate` DESC, `caches` . `date_created` DESC',
-    [':userId' => $login->userid]
+    ['userId' => $login->userid]
 );
 $tpl->assign('notpublished', $notPublished);
 

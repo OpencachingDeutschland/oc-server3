@@ -16,7 +16,7 @@ $tpl->cache_lifetime = 600;
 if (!$tpl->is_cached()) {
     /** @var Doctrine\DBAL\Connection $connection */
     $connection = AppKernel::Container()->get(Connection::class);
-    $rs = $connection->fetchAll(
+    $rs = $connection->fetchAllAssociative(
         'SELECT IFNULL(`sys_trans_text`.`text`,`countries`.`en`) AS `adm1`,
                 IF(`cache_location`.`code1`=`caches`.`country`,`cache_location`.`adm3`,NULL) AS `adm3`,
                 `caches`.`country` AS `code1`,

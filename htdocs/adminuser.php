@@ -137,7 +137,7 @@ function searchUser()
 
     /** @var Connection $connection */
     $connection = AppKernel::Container()->get(Connection::class);
-    $r = $connection->fetchAssoc(
+    $r = $connection->fetchAssociative(
         'SELECT `user_id`,
                 `username`,
                 `email`,
@@ -166,24 +166,24 @@ function searchUser()
 
     $tpl->assign('showdetails', true);
 
-    $r['hidden'] = (int) $connection->fetchColumn(
-        'SELECT COUNT(*) FROM `caches` WHERE `user_id`=:userId', [':userId' => $r['user_id']]
+    $r['hidden'] = (int) $connection->fetchOne(
+        'SELECT COUNT(*) FROM `caches` WHERE `user_id`=:userId', ['userId' => $r['user_id']]
     );
-    $r['hidden_active'] = (int) $connection->fetchColumn(
+    $r['hidden_active'] = (int) $connection->fetchOne(
         'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status`=1',
-        [':userId' => $r['user_id']]
+        ['userId' => $r['user_id']]
     );
-    $r['logentries'] = (int) $connection->fetchColumn(
+    $r['logentries'] = (int) $connection->fetchOne(
         'SELECT COUNT(*) FROM `cache_logs` WHERE `user_id`= :userId',
-        [':userId' => $r['user_id']]
+        ['userId' => $r['user_id']]
     );
-    $r['deleted_logentries'] = (int) $connection->fetchColumn(
+    $r['deleted_logentries'] = (int) $connection->fetchOne(
         'SELECT COUNT(*) FROM `cache_logs_archived` WHERE `user_id`= :userId',
-        [':userId' => $r['user_id']]
+        ['userId' => $r['user_id']]
     );
-    $r['reports'] = (int) $connection->fetchColumn(
+    $r['reports'] = (int) $connection->fetchOne(
         'SELECT COUNT(*) FROM `cache_reports` WHERE `userid`= :userId',
-        [':userId' => $r['user_id']]
+        ['userId' => $r['user_id']]
     );
 
     $tpl->assign('user', $r);

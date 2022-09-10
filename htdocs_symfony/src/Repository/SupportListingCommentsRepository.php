@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -32,9 +32,7 @@ class SupportListingCommentsRepository
 
     /**
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchAll()
@@ -43,7 +41,7 @@ class SupportListingCommentsRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -65,8 +63,6 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotFoundException
-     * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
@@ -82,7 +78,7 @@ class SupportListingCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -97,9 +93,7 @@ class SupportListingCommentsRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchBy(array $where = [])
@@ -114,7 +108,7 @@ class SupportListingCommentsRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -136,7 +130,7 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(SupportListingCommentsEntity $entity)
     : SupportListingCommentsEntity {
@@ -161,7 +155,7 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(SupportListingCommentsEntity $entity)
     : SupportListingCommentsEntity {
@@ -185,7 +179,7 @@ class SupportListingCommentsRepository
      *
      * @return SupportListingCommentsEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      * @throws InvalidArgumentException
      */
     public function remove(SupportListingCommentsEntity $entity)

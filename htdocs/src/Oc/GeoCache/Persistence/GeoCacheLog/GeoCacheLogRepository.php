@@ -4,6 +4,7 @@ namespace Oc\GeoCache\Persistence\GeoCacheLog;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -39,9 +40,9 @@ class GeoCacheLogRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records found');
@@ -74,9 +75,9 @@ class GeoCacheLogRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -103,9 +104,9 @@ class GeoCacheLogRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');
@@ -124,6 +125,7 @@ class GeoCacheLogRepository
      * Fetch latest user geo cache log.
      *
      * @throws RecordNotFoundException
+     * @throws Exception
      */
     public function getLatestUserLog(int $userId): GeoCacheLogEntity
     {
@@ -135,9 +137,9 @@ class GeoCacheLogRepository
             ->setParameter('userId', $userId)
             ->setMaxResults(1);
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetch();
+        $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
@@ -149,6 +151,10 @@ class GeoCacheLogRepository
     /**
      * Creates a GeoCacheLog in the database.
      *
+     * @param GeoCacheLogEntity $entity
+     *
+     * @return GeoCacheLogEntity
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      */
     public function create(GeoCacheLogEntity $entity): GeoCacheLogEntity

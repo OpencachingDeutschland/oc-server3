@@ -24,7 +24,7 @@ class CountryService
     public function fetchAll(): array
     {
         try {
-            $result = $this->countryRepository->fetchAll();
+            $result = $this->countryRepository->fetchAllAssociative();
         } catch (RecordsNotFoundException $e) {
             $result = [];
         }

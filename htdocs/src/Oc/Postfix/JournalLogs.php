@@ -109,9 +109,9 @@ class JournalLogs
     public function processJournalLogs(): void
     {
         $start = $this->connection
-            ->fetchColumn(
+            ->fetchOne(
                 'SELECT `value` FROM `sysconfig` WHERE `name` = :name',
-                [':name' => 'syslog_maillog_lastdate']
+                ['name' => 'syslog_maillog_lastdate']
             );
 
         $start = \DateTimeImmutable::createFromFormat(
@@ -139,8 +139,8 @@ class JournalLogs
             ->executeUpdate(
                 'UPDATE `sysconfig` SET `value` = :value WHERE `name` = :name',
                 [
-                    ':name' => 'syslog_maillog_lastdate',
-                    ':value' => $end->format('Y-m-d H:i:s'),
+                    'name' => 'syslog_maillog_lastdate',
+                    'value' => $end->format('Y-m-d H:i:s'),
                 ]
             );
     }
@@ -155,8 +155,8 @@ class JournalLogs
                  WHERE email = :email
                  AND DATE(IFNULL(`last_email_problem`, "")) < DATE(:dateTime)',
                 [
-                    ':email' => $email,
-                    ':dateTime' => $dateTime,
+                    'email' => $email,
+                    'dateTime' => $dateTime,
                 ]
             );
     }
@@ -169,7 +169,7 @@ class JournalLogs
                  SET `email_problems`=0
                  WHERE email = :email',
                 [
-                    ':email' => $email,
+                    'email' => $email,
                 ]
             );
     }

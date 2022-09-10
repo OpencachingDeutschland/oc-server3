@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Oc\Entity\GeoCachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -82,7 +81,7 @@ class CachesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -120,7 +119,7 @@ class CachesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -153,7 +152,7 @@ class CachesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -219,7 +218,6 @@ class CachesRepository
      * @return GeoCachesEntity
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function remove(GeoCachesEntity $entity)
     : GeoCachesEntity {
@@ -238,9 +236,8 @@ class CachesRepository
      * @param string $wp
      *
      * @return int
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      */
     public function getIdByWP(string $wp = '')
     : int {
@@ -254,7 +251,7 @@ class CachesRepository
             $queryBuilder->orWhere('wp_gc = ' . $queryBuilder->createNamedParameter($wp));
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 

@@ -29,9 +29,9 @@ if (isset($_REQUEST['submit']) || ($code !== '' && $email !== '')) {
         /** @var Connection $connection */
         $connection = AppKernel::Container()->get(Connection::class);
         $activation = $connection
-            ->fetchAssoc(
+            ->fetchAssociative(
                 'SELECT `user_id` `id`, `activation_code` `code` FROM `user` WHERE `email`=:email',
-                [':email' => $email]
+                ['email' => $email]
             );
 
         if ($activation) {

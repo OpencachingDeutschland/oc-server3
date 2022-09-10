@@ -6,8 +6,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheLogsArchivedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -40,7 +39,6 @@ class CacheLogsArchivedRepository
      * @return array
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function fetchAll()
@@ -49,7 +47,7 @@ class CacheLogsArchivedRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -71,8 +69,8 @@ class CacheLogsArchivedRepository
      *
      * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotFoundException
-     * @throws \Exception
      * @throws Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheLogsArchivedEntity {
@@ -87,7 +85,7 @@ class CacheLogsArchivedRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -102,9 +100,8 @@ class CacheLogsArchivedRepository
      * @param array $where
      *
      * @return array
-     * @throws \Doctrine\DBAL\Exception
-     * @throws \Exception
      * @throws Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -118,7 +115,7 @@ class CacheLogsArchivedRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -140,7 +137,7 @@ class CacheLogsArchivedRepository
      *
      * @return GeoCacheLogsArchivedEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheLogsArchivedEntity $entity)
     : GeoCacheLogsArchivedEntity {
@@ -165,7 +162,7 @@ class CacheLogsArchivedRepository
      *
      * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheLogsArchivedEntity $entity)
     : GeoCacheLogsArchivedEntity {
@@ -189,8 +186,7 @@ class CacheLogsArchivedRepository
      *
      * @return GeoCacheLogsArchivedEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function remove(GeoCacheLogsArchivedEntity $entity)
     : GeoCacheLogsArchivedEntity {

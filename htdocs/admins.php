@@ -24,7 +24,7 @@ if ($login->admin == 0) {
 /** @var Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
 
-$admins = $connection->fetchAll(
+$admins = $connection->fetchAllAssociative(
     'SELECT `user_id` as id, `username` as name, `admin`
      FROM `user`
      WHERE `admin`

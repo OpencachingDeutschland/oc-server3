@@ -220,7 +220,6 @@ class SupportController extends AbstractController
     /**
      * @return Response
      *
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCaches", name="support_bonus_caches")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -273,6 +272,7 @@ class SupportController extends AbstractController
      * @param string $toBonusCache
      *
      * @return Response
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
@@ -301,7 +301,9 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
+     * @throws Exception
      * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
@@ -333,11 +335,9 @@ class SupportController extends AbstractController
      * @param bool $removeBonus
      *
      * @return Response
-     * @throws InvalidArgumentException
-     * @throws RecordNotFoundException
-     * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws RecordNotPersistedException
      * @Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name="support_remove_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -367,7 +367,6 @@ class SupportController extends AbstractController
      * @param Request $request
      *
      * @return Response
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries", name="support_db_queries")
      */
@@ -487,10 +486,11 @@ class SupportController extends AbstractController
      * @param int $userID
      *
      * @return Response
+     * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws Exception
      * @Route("/occ/{wpID}&{userID}", name="support_occ")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -560,7 +560,6 @@ class SupportController extends AbstractController
      * @return Response
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/occSaveText", name="support_occ_save_text")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
@@ -669,9 +668,8 @@ class SupportController extends AbstractController
      * @param int $userID
      *
      * @return Response
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      * @Route("/uad/{userID}", name="support_user_account_details")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -696,7 +694,6 @@ class SupportController extends AbstractController
      * @param bool $limit
      *
      * @return array
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      */
     private function getCachesForSearchField(string $searchtext, bool $limit = false)
@@ -729,12 +726,11 @@ class SupportController extends AbstractController
             $qb->setMaxResults(1);
         }
 
-        return $qb->execute()->fetchAllAssociative();
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /**
      * @return array
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function getBonusCaches()
@@ -765,7 +761,6 @@ class SupportController extends AbstractController
      * @param int $days
      *
      * @return Response
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries1/{days}", name="support_db_queries_1")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
@@ -787,7 +782,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery1' => $qb->execute()->fetchAllAssociative()
+                                                           'suppSQLquery1' => $qb->executeQuery()->fetchAllAssociative()
                                                        ]
         );
     }
@@ -796,7 +791,6 @@ class SupportController extends AbstractController
      * @param int $days
      *
      * @return Response
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @Route("/dbQueries2/{days}", name="support_db_queries_2")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
@@ -816,7 +810,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery2' => $qb->execute()->fetchAllAssociative()
+                                                           'suppSQLquery2' => $qb->executeQuery()->fetchAllAssociative()
                                                        ]
         );
     }
@@ -824,7 +818,6 @@ class SupportController extends AbstractController
     /**
      * @return Response
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries4", name="support_db_queries_4")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -852,7 +845,7 @@ class SupportController extends AbstractController
         return $this->render(
             'backend/support/databaseQueries.html.twig', [
                                                            'supportCachesForm' => $formSearch->createView(),
-                                                           'suppSQLquery4' => $qb->execute()->fetchAllAssociative()
+                                                           'suppSQLquery4' => $qb->executeQuery()->fetchAllAssociative()
                                                        ]
         );
     }
@@ -860,8 +853,6 @@ class SupportController extends AbstractController
     /**
      * @return Response
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
-     * @throws Exception
      * @Route("/dbQueries5", name="support_db_queries_5")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -881,7 +872,6 @@ class SupportController extends AbstractController
     /**
      * @return Response
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/dbQueries6", name="support_db_queries_6")
      * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
@@ -899,14 +889,14 @@ class SupportController extends AbstractController
             ->andWhere('caches.wp_gc = \'\'')
             ->andWhere('caches.wp_gc_maintained = \'\'')
             ->andWhere('caches.type IN (1, 2, 3, 7, 8, 9, 10)');
-        $qb_caches_list = $qb_caches->execute()->fetchAllAssociative();
+        $qb_caches_list = $qb_caches->executeQuery()->fetchAllAssociative();
 
         // Liste mit Fundlogs erstellen, die innerhalb der letzten zwei Jahre liegen
         $qb_logs = $this->connection->createQueryBuilder();
         $qb_logs->select('cache_logs.cache_id')
             ->from('cache_logs')
             ->where('cache_logs.type = 1', 'cache_logs.date > now() - INTERVAL 2 YEAR');
-        $qb_logs_list = $qb_logs->execute()->fetchAllAssociative();
+        $qb_logs_list = $qb_logs->executeQuery()->fetchAllAssociative();
 
         // Cacheliste reduzieren um die Caches, die innerhalb der letzten zwei Jahre einen Fund hatten
         foreach ($qb_logs_list as $qbll) {
@@ -933,7 +923,6 @@ class SupportController extends AbstractController
      * @return array
      *
      * @throws Exception
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function executeSQL_flexible(string $what, string $table, string $condition)
@@ -945,7 +934,7 @@ class SupportController extends AbstractController
             $qb->where($condition);
         }
 
-        return ($qb->execute()->fetchAllAssociative());
+        return ($qb->executeQuery()->fetchAllAssociative());
     }
 
     /**
@@ -990,8 +979,12 @@ class SupportController extends AbstractController
      *
      * @return Response
      * @throws Exception
+     * @throws InvalidArgumentException
+     * @throws RecordAlreadyExistsException
+     * @throws RecordNotFoundException
+     * @throws RecordNotPersistedException
+     * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
-     *
      * @route("/GPXimport/", name="support_gpx_import"), methods={"POST"}
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
@@ -1126,6 +1119,8 @@ class SupportController extends AbstractController
 
     /**
      * @return array
+     * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function list_all_support_listing_infos()
@@ -1142,6 +1137,7 @@ class SupportController extends AbstractController
      * @param array $waypoints_as_array
      *
      * @return array
+     * @throws Exception
      * @throws InvalidArgumentException
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
@@ -1256,9 +1252,8 @@ class SupportController extends AbstractController
      * @param string $filemane
      *
      * @return array
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      */
     public function read_Xml_file_and_get_array(string $filemane)
     : array {

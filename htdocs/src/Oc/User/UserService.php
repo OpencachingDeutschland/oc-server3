@@ -2,15 +2,20 @@
 
 namespace Oc\User;
 
+use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
+use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
+/**
+ *
+ */
 class UserService
 {
     /**
      * @var UserRepository
      */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -49,7 +54,9 @@ class UserService
 
     /**
      * Creates a user in the database.
-     */
+     *
+     * @throws RecordAlreadyExistsException
+*/
     public function create(UserEntity $entity): UserEntity
     {
         return $this->userRepository->create($entity);
@@ -57,7 +64,9 @@ class UserService
 
     /**
      * Update a user in the database.
-     */
+     *
+     * @throws RecordNotPersistedException
+*/
     public function update(UserEntity $entity): UserEntity
     {
         return $this->userRepository->update($entity);
@@ -65,6 +74,8 @@ class UserService
 
     /**
      * Removes a user from the database.
+     *
+     * @throws RecordNotPersistedException
      */
     public function remove(UserEntity $entity): UserEntity
     {

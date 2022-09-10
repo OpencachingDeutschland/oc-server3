@@ -3,19 +3,26 @@
 namespace Oc\Translation;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 
+/**
+ *
+ */
 class CrowdinExport
 {
     /**
      * @var Connection
      */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
 
+    /**
+     * @throws Exception
+     */
     public function exportTranslations(): void
     {
         $savePath = __DIR__ . '/../../../var/crowdin/';
@@ -28,7 +35,7 @@ class CrowdinExport
             $select .= ', ' . $languageKey . '.text as ' . $languageKey . ' ';
         }
 
-        $languageData = $this->connection->fetchAll(
+        $languageData = $this->connection->fetchAllAssociative(
             'SELECT source.trans_id AS identifer,
                     source.text AS source,
                     CONCAT(ref.line,\':\',ref.resource_name) AS comment

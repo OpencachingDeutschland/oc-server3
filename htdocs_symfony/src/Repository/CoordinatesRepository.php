@@ -726,10 +726,10 @@ class CoordinatesRepository
      *
      * @param string $language
      *
-     * @return false|mixed
+     * @return false|string
      */
     public function getW3W(string $language = 'en')
-    : mixed {
+    {
         if (!$_ENV['W3W_API']) {
             return false;
         }

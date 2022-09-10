@@ -6,8 +6,7 @@ namespace Oc\Repository;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
-use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheCoordinatesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -44,7 +43,6 @@ class CacheCoordinatesRepository
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchAll()
     : array
@@ -52,7 +50,7 @@ class CacheCoordinatesRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -75,7 +73,6 @@ class CacheCoordinatesRepository
      * @return GeoCacheCoordinatesEntity
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchOneBy(array $where = [])
     : GeoCacheCoordinatesEntity {
@@ -90,7 +87,7 @@ class CacheCoordinatesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -108,7 +105,6 @@ class CacheCoordinatesRepository
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -122,7 +118,7 @@ class CacheCoordinatesRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -144,7 +140,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheCoordinatesEntity $entity)
     : GeoCacheCoordinatesEntity {
@@ -169,7 +165,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheCoordinatesEntity $entity)
     : GeoCacheCoordinatesEntity {
@@ -193,8 +189,7 @@ class CacheCoordinatesRepository
      *
      * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws InvalidArgumentException
+     * @throws Exception
      */
     public function remove(GeoCacheCoordinatesEntity $entity)
     : GeoCacheCoordinatesEntity {
@@ -234,9 +229,7 @@ class CacheCoordinatesRepository
      * @param array $data
      *
      * @return GeoCacheCoordinatesEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)

@@ -1,16 +1,16 @@
 {* see lib2/logic/logpics.class.php for data retreival *}
 
-{if $pages_list}
+{if isset($pages_list)}
     <div class="content2-container">
         <table width="100%" cellspacing="0" cellpadding="0">
             <tr>
-                <td><font size="2">{$subtitle}</font></td>
+                <td><font size="2">{$subtitle|default}</font></td>
                 <td class="picpaging">{include file="res_pager.tpl"}</td>
             </tr>
         </table>
     </div>
-{elseif "$subtitle" != ""}
-    <p>{$subtitle}</p>
+{elseif isset($subtitle)}
+    <p>{$subtitle|default}</p>
 {/if}
 
 {assign var=itemwidth value=120}

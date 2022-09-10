@@ -16,7 +16,7 @@ $tpl->menuitem = MNU_CACHES_USERTOPS;
 $userId = (int) isset($_REQUEST['userid']) ? $_REQUEST['userid']: 0;
 $ocOnly = isset($_REQUEST['oconly']) && $_REQUEST['oconly'];
 
-$sUsername = $connection->fetchColumn('SELECT `username` FROM `user` WHERE `user_id` = :userId',['userId' => $userId]);
+$sUsername = $connection->fetchOne('SELECT `username` FROM `user` WHERE `user_id` = :userId',['userId' => $userId]);
 if ($sUsername == null) {
     $tpl->error(ERROR_USER_NOT_EXISTS);
 }
@@ -25,7 +25,7 @@ $tpl->assign('userid', $userId);
 $tpl->assign('username', $sUsername);
 $tpl->assign('oconly', $ocOnly);
 
-$rs = $connection->fetchAll(
+$rs = $connection->fetchAllAssociative(
     'SELECT `cache_rating`.`cache_id` AS `cacheid`,
             `caches`.`name` AS `cachename`,
             `user`.`username` AS `ownername`,

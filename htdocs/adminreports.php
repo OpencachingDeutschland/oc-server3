@@ -30,7 +30,7 @@ $cacheId = (int) isset($_REQUEST['cacheid']) ? $_REQUEST['cacheid'] : 0;
 $ownerId = (int) isset($_REQUEST['ownerid']) ? $_REQUEST['ownerid'] : 0;
 
 $reportData = $connection
-    ->fetchAssoc(
+    ->fetchAssociative(
         'SELECT `userid`, `adminid`, DATEDIFF(NOW(),`lastmodified`) AS age 
          FROM `cache_reports`
          WHERE `id`= :id',
@@ -64,7 +64,7 @@ if (isset($_REQUEST['savecomment'])) {
     );
     $tpl->redirect('adminreports.php?id=' . $rId);
 } elseif (isset($_REQUEST['contact']) && $ownerId > 0) {
-    $wp_oc = $connection->fetchColumn(
+    $wp_oc = $connection->fetchOne(
         'SELECT `wp_oc` FROM `caches` WHERE `cache_id`= :cacheId',
         ['cacheId' => $cacheId]
     );
@@ -101,7 +101,7 @@ if (isset($_REQUEST['savecomment'])) {
 
 if ($id === 0) {
     // no details, show list of reported caches
-    $rs = $connection->fetchAll(
+    $rs = $connection->fetchAllAssociative(
         'SELECT `cr`.`id`,
                 IF(`cr`.`status`=1,\'(*) \', \'\') AS `new`,
                 `c`.`name`,
@@ -122,7 +122,7 @@ if ($id === 0) {
         ['userId' => $login->userid]
     );
 
-    $lastClosedReportedCaches = $connection->fetchAll(
+    $lastClosedReportedCaches = $connection->fetchAllAssociative(
         'SELECT `cr`.`id`,
                 IF(`cr`.`status`=1,\'(*) \', \'\') AS `new`,
                 `c`.`name`,
@@ -147,7 +147,7 @@ if ($id === 0) {
     $tpl->assign('list', true);
 } else {
     // show details of a report
-    $record = $connection->fetchAssoc(
+    $record = $connection->fetchAssociative(
         'SELECT `cr`.`id`, `cr`.`cacheid`, `cr`.`userid`,
                 `u1`.`username` AS `usernick`,
                 IFNULL(`cr`.`adminid`, 0) AS `adminid`,
@@ -246,7 +246,7 @@ if ($id === 0) {
     $tpl->assign('otheradmin', $record['adminid'] > 0 && $record['adminid'] != $login->userid);
     $tpl->assign('ownreport', $record['adminid'] == $login->userid);
     $tpl->assign('inprogress', $record['inprogress']);
-    $otherReportInProgress = $connection->fetchColumn(
+    $otherReportInProgress = $connection->fetchOne(
         'SELECT `id`
            FROM `cache_reports`
            WHERE `cacheid`= :cacheId AND `id`<> :id AND `status`= :reportInProgress

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\Exception;
+use Doctrine\DBAL\Exception;
 use Oc\Entity\SecurityRoleHierarchyEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -29,9 +29,8 @@ class SecurityRoleHierarchyRepository
 
     /**
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchAll()
     : array
@@ -39,7 +38,7 @@ class SecurityRoleHierarchyRepository
         $statement = $this->connection->createQueryBuilder()
             ->select('*')
             ->from(self::TABLE)
-            ->execute();
+            ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -60,9 +59,8 @@ class SecurityRoleHierarchyRepository
      * @param array $where
      *
      * @return SecurityRoleHierarchyEntity
-     * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchOneBy(array $where = [])
     : SecurityRoleHierarchyEntity {
@@ -77,7 +75,7 @@ class SecurityRoleHierarchyRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAssociative();
 
@@ -92,9 +90,8 @@ class SecurityRoleHierarchyRepository
      * @param array $where
      *
      * @return array
-     * @throws Exception
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function fetchBy(array $where = [])
     : array {
@@ -108,7 +105,7 @@ class SecurityRoleHierarchyRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -130,7 +127,7 @@ class SecurityRoleHierarchyRepository
      *
      * @return SecurityRoleHierarchyEntity
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(SecurityRoleHierarchyEntity $entity)
     : SecurityRoleHierarchyEntity {
@@ -155,7 +152,7 @@ class SecurityRoleHierarchyRepository
      *
      * @return SecurityRoleHierarchyEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(SecurityRoleHierarchyEntity $entity)
     : SecurityRoleHierarchyEntity {
@@ -179,7 +176,7 @@ class SecurityRoleHierarchyRepository
      *
      * @return SecurityRoleHierarchyEntity
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function remove(SecurityRoleHierarchyEntity $entity)
     : SecurityRoleHierarchyEntity {

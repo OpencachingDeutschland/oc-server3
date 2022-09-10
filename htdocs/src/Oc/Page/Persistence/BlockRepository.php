@@ -4,6 +4,7 @@ namespace Oc\Page\Persistence;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
@@ -33,8 +34,9 @@ class BlockRepository
     /**
      * Fetches all blocks of a page.
      *
-     * @throws RecordsNotFoundException Thrown when no records are found
      * @return BlockEntity[]
+     * @throws Exception
+     * @throws RecordsNotFoundException Thrown when no records are found
      */
     public function fetchBy(array $where = []): array
     {
@@ -48,9 +50,9 @@ class BlockRepository
             }
         }
 
-        $statement = $queryBuilder->execute();
+        $statement = $queryBuilder->executeQuery();
 
-        $result = $statement->fetchAll();
+        $result = $statement->fetchAllAssociative();
 
         if ($statement->rowCount() === 0) {
             throw new RecordsNotFoundException('No records with given where clause found');

@@ -46,7 +46,7 @@ $tpl->assign('statpic_style', isset($_REQUEST['statpic_style']) ? $_REQUEST['sta
 
 /** @var Doctrine\DBAL\Connection $connection */
 $connection = AppKernel::Container()->get(Connection::class);
-$rs = $connection->fetchAll(
+$rs = $connection->fetchAllAssociative(
     'SELECT `statpics`.`id`,
             `statpics`.`previewpath`,
             IFNULL(`sys_trans_text`.`text`, `statpics`.`description`) AS `description`

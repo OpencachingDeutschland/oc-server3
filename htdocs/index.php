@@ -31,7 +31,7 @@ if (!$tpl->is_cached()) {
     }
 
     // get HQ Message from DB
-    $aGetHqMessage = $connection->fetchAssoc(
+    $aGetHqMessage = $connection->fetchAssociative(
         'SELECT type, message
          FROM `core_hq_message` AS hqm
          WHERE current_timestamp() BETWEEN hqm.start AND hqm.end LIMIT 1'
@@ -75,16 +75,16 @@ if (!$tpl->is_cached()) {
     // current cache and log-counters
     $tpl->assign(
         'count_hiddens',
-        number1000((int) $connection->fetchColumn('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status` = 1'))
+        number1000((int) $connection->fetchOne('SELECT COUNT(*) AS `hiddens` FROM `caches` WHERE `status` = 1'))
     );
     $tpl->assign(
         'count_founds',
-        number1000((int) $connection->fetchColumn('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type` = 1'))
+        number1000((int) $connection->fetchOne('SELECT COUNT(*) AS `founds` FROM `cache_logs` WHERE `type` = 1'))
     );
     $tpl->assign(
         'count_users',
         number1000(
-            (int) $connection->fetchColumn(
+            (int) $connection->fetchOne(
                 'SELECT COUNT(*) AS `users`
                  FROM (
                        SELECT DISTINCT `user_id`
@@ -102,7 +102,7 @@ if (!$tpl->is_cached()) {
     // get total event count for all countries
     $tpl->assign(
         'total_events',
-        (int) $connection->fetchColumn(
+        (int) $connection->fetchOne(
             'SELECT COUNT(*)
              FROM `caches`
              WHERE `type` = 6
@@ -138,7 +138,7 @@ if (!$tpl->is_cached()) {
     $tpl->assign('toprating_days', $getNew->ratingDays());
 
     // country and language parameters
-    $sUserCountryName = $connection->fetchColumn(
+    $sUserCountryName = $connection->fetchOne(
         'SELECT IFNULL(`sys_trans_text`.`text`, `countries`.`name`)
          FROM `countries`
          LEFT JOIN `sys_trans`
@@ -148,8 +148,8 @@ if (!$tpl->is_cached()) {
            AND `sys_trans_text`.`lang`= :lang
          WHERE `countries`.`short`= :short',
         [
-            ':lang' => $opt['template']['locale'],
-            ':short' => $sUserCountry,
+            'lang' => $opt['template']['locale'],
+            'short' => $sUserCountry,
         ]
     );
     $tpl->assign('usercountry', $sUserCountryName);

@@ -48,6 +48,7 @@
 /.vagrant/
 Thumbs.db
 /bin/phpzip.php
+/bin/core
 parameters.yml
 .crowdin.yaml
 htdocs/app/Resources/translations/*

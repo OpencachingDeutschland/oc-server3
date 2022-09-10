@@ -270,7 +270,7 @@ function set_usercountry(): void
 {
     global $cookie;
 
-    if (isset($_REQUEST['usercountry'])) {
+    if (preg_match('/^[a-z]{2}$/i', $_REQUEST['usercountry'] ?? '')) {
         $cookie->set('usercountry', $_REQUEST['usercountry']);
     }
 }

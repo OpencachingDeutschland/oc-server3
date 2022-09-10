@@ -278,7 +278,7 @@ class login
         sql_free_result($rsUser);
 
         if ($permanent == null) {
-            $permanent = ($rUser['permanent_login_flag'] == 1);
+            $permanent = ($rUser['permanent_login_flag'] ?? null == 1);
         }
 
         if ($rUser) {

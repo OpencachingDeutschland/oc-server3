@@ -32,14 +32,14 @@ if (mb_strtolower(mb_substr($target, 0, 9)) === 'login.php') {
 
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : ''; // Ocprop
 
-if ($action == 'cookieverify') {
+if ($action === 'cookieverify') {
     // we should be logged in ... check if cookie is set ...
     if (!isset($_COOKIE[$opt['session']['cookiename'] . 'data'])) {
         $tpl->error(ERROR_NO_COOKIES);
     } else {
         $tpl->redirect($target);
     }
-} elseif ($action == 'logout') {
+} elseif ($action === 'logout') {
     $login->logout();
     $tpl->assign('error', LOGIN_LOGOUT_OK);
 

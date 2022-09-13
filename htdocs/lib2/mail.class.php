@@ -5,7 +5,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class mail extends Smarty
+class mail extends SmartyBC
 {
     public $name = 'sys_nothing';
     public $main_template = 'sys_main';

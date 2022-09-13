@@ -171,7 +171,7 @@
                     {else}
                         <img src="images/flags/{$cache.code1|lower}.gif" style="vertical-align:middle" />&nbsp;
                         {$cache.adm1|escape} {if $cache.adm1!=null & $cache.adm2!=null} &gt; {/if}
-                        {$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm3!=null) | ($cache.adm1!=null & $cache.adm3!=null)} &gt; {/if}
+                        {$cache.adm2|escape} {if ($cache.adm2!=null & $cache.adm3!=null) || ($cache.adm1!=null & $cache.adm3!=null)} &gt; {/if}
                         {$cache.adm3|escape}
                     {/if}
                 </span>

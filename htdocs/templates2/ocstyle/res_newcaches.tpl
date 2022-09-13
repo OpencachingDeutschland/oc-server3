@@ -19,7 +19,7 @@
             <strong>
                 <p class="content-title-noshade">
                     {$cacheitem.adm1|escape} {if $cacheitem.adm1!=null & $cacheitem.adm2!=null} &gt; {/if}
-                    {$cacheitem.adm2|escape} {if ($cacheitem.adm2!=null & $cacheitem.adm4!=null) | ($cacheitem.adm1!=null & $cacheitem.adm4!=null)} &gt; {/if}
+                    {$cacheitem.adm2|escape} {if ($cacheitem.adm2!=null & $cacheitem.adm4!=null) || ($cacheitem.adm1!=null & $cacheitem.adm4!=null)} &gt; {/if}
                     {$cacheitem.adm4|escape}
                 </p>
             </strong>

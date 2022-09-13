@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cae53c5a463bf629e59afe44b2dd9d47",
+    "content-hash": "16a590dec24cf5e50ba2dd7396b89552",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -4266,27 +4266,34 @@
         },
         {
             "name": "smarty/smarty",
-            "version": "v2.6.33",
+            "version": "v3.1.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/smarty-php/smarty.git",
-                "reference": "533fa2abe308dcc009c7bdab977d530b32408346"
+                "reference": "b3ade90dece67812410954528e0039fb5b73bcf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/533fa2abe308dcc009c7bdab977d530b32408346",
-                "reference": "533fa2abe308dcc009c7bdab977d530b32408346",
+                "url": "https://api.github.com/repos/smarty-php/smarty/zipball/b3ade90dece67812410954528e0039fb5b73bcf7",
+                "reference": "b3ade90dece67812410954528e0039fb5b73bcf7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.2"
             },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5 || ^6.5 || ^5.7 || ^4.8",
+                "smarty/smarty-lexer": "^3.1"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
-                    "libs/Smarty.class.php",
-                    "libs/Smarty_Compiler.class.php",
-                    "libs/Config_File.class.php"
+                    "libs/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -4301,6 +4308,10 @@
                 {
                     "name": "Uwe Tews",
                     "email": "uwe.tews@googlemail.com"
+                },
+                {
+                    "name": "Rodney Rehm",
+                    "email": "rodney.rehm@medialize.de"
                 }
             ],
             "description": "Smarty - the compiling PHP template engine",
@@ -4311,10 +4322,10 @@
             "support": {
                 "forum": "http://www.smarty.net/forums/",
                 "irc": "irc://irc.freenode.org/smarty",
-                "issues": "http://code.google.com/p/smarty-php/issues/list",
-                "source": "https://github.com/smarty-php/smarty/tree/v2.6.33"
+                "issues": "https://github.com/smarty-php/smarty/issues",
+                "source": "https://github.com/smarty-php/smarty/tree/v3.1.46"
             },
-            "time": "2021-10-23T12:46:52+00:00"
+            "time": "2022-08-01T21:58:13+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8853,7 +8864,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4",
         "ext-gd": "*",
         "ext-json": "*",
         "ext-mbstring": "*",

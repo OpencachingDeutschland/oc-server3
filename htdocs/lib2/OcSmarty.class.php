@@ -14,8 +14,36 @@ require_once __DIR__ . '/logic/labels.inc.php';
 /**
  * Class OcSmarty
  */
-class OcSmarty extends Smarty
+class OcSmarty extends SmartyBC
 {
+    public string $_var_bracket_regexp = '';
+    public string $_num_const_regexp = '';
+    public string $_db_qstr_regexp = '';
+    public string $_dvar_math_regexp = '';
+    public string $_dvar_math_var_regexp = '';
+    public string $_dvar_guts_regexp = '';
+    public string $_dvar_regexp = '';
+    public string $_obj_restricted_param_regexp = '';
+    public string $_obj_single_param_regexp = '';
+    public string $_mod_regexp = '';
+    public string $_func_regexp = '';
+    public string $_cvar_regexp = '';
+    public string $_svar_regexp = '';
+    public string $_avar_regexp = '';
+    public string $_si_qstr_regexp = '';
+    public string $_var_regexp = '';
+    public string $_obj_ext_regexp = '';
+    public string $_obj_start_regexp = '';
+    public string $_obj_params_regexp = '';
+    public string $_obj_call_regexp = '';
+    public string $_reg_obj_regexp = '';
+    public string $_param_regexp = '';
+    public string $_parenth_param_regexp = '';
+    public string $_func_call_regexp = '';
+    public string $_qstr_regexp = '';
+    public bool $FRAGGLE_TEST = true;
+
+
     public string $name = 'sys_nothing';
 
     public string $main_template = 'sys_main';
@@ -61,6 +89,9 @@ class OcSmarty extends Smarty
         $this->bench = new CBench();
         $this->bench->start();
 
+        // xxx014 fehlende Variablen einbauen..
+        $this->setMissingSmartyVariables();
+
         // configuration
         $this->template_dir = $opt['stylepath'];
         $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
@@ -69,6 +100,19 @@ class OcSmarty extends Smarty
             'plugins',
             __DIR__ . '/../src/OcLegacy/SmartyPlugins',
         ];
+
+        // xxx006 "$this->testInstall();" zeigte diverse falsche/fehlende Pfade. Hier die vermuteten Korrekturen:
+        if ($this->FRAGGLE_TEST) {
+            $this->config_dir = __DIR__ . '/../config2/';
+//            $this->plugins_dir = __DIR__ . '/../src/OcLegacy/SmartyPlugins';
+//            $this->plugins_dir = __DIR__ . '/../vendor/smarty/smarty/libs/plugins';
+            $this->plugins_dir = [__DIR__ . '/../src/OcLegacy/SmartyPlugins', __DIR__ . '/../vendor/smarty/smarty/libs/plugins', __DIR__ . '/../vendor/smarty/smarty/libs/sysplugins'];
+        }
+
+        // xxx007 Teste Pfade..
+        if ($this->FRAGGLE_TEST) {
+//            $this->testInstall();
+        }
 
         // disable caching ... if caching is enabled, 1 hour is default
         $this->caching = 0;
@@ -129,8 +173,9 @@ class OcSmarty extends Smarty
         }
 
         // TODO: was ist jetzt richtig? _compile_id war zuerst da, wurde aber mal angemeckert..
-        $this->_compile_id = $compile_id;
+//        $this->_compile_id = $compile_id;
         $this->compile_id = $compile_id;
+        $this->setCompileId($compile_id);
 
         // load filters that are marked as autoload
         if (count($this->autoload_filters)) {
@@ -141,19 +186,47 @@ class OcSmarty extends Smarty
             }
         }
 
-        $_smarty_compile_path = $this->_get_compile_path($resource_name);
-
-        // if we just need to display the results, don't perform output
-        // buffering - for speed
-        $_cache_including = $this->_cache_including;
-        $this->_cache_including = false;
-
-        // compile the resource
-        if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
-            $this->_compile_resource($resource_name, $_smarty_compile_path);
+        // xxx001 _get_compile_path() gibt es nicht mehr.. wurde ersetzt durch getCompileDir()
+        if ($this->FRAGGLE_TEST) {
+            $_smarty_compile_path = $this->getCompileDir();
+        } else {
+            $_smarty_compile_path = $this->_get_compile_path($resource_name);
         }
 
-        $this->_cache_including = $_cache_including;
+        // xxx003 was macht das '_cache_including'? Das wird nirgends so richtig gesetzt.. // mal alle drei Zeilen mit _cache_including auskommentieren..
+        if ($this->FRAGGLE_TEST) {
+            // if we just need to display the results, don't perform output
+            // buffering - for speed
+            //        $_cache_including = $this->_cache_including;
+            //        $this->_cache_including = false;
+        } else {
+            // if we just need to display the results, don't perform output
+            // buffering - for speed
+                    $_cache_including = $this->_cache_including;
+                    $this->_cache_including = false;
+        }
+        // xxx010 // vielleicht muss mal irgendwas compiliert werden??
+//        if ($this->FRAGGLE_TEST) {
+//            $this->compileAllTemplates();
+//            $this->compileAllConfig();
+//        }
+
+        // xxx004 _is_compile und _compile_resource sind unbekannt in Smarty3. Aber was ist Ersatz???
+        if ($this->FRAGGLE_TEST) {
+            // compile the resource
+            //        if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
+            //            $this->_compile_resource($resource_name, $_smarty_compile_path);
+            //        }
+
+            //        $this->_cache_including = $_cache_including;
+        } else {
+            // compile the resource
+            if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
+                $this->_compile_resource($resource_name, $_smarty_compile_path);
+            }
+
+            $this->_cache_including = $_cache_including;
+        }
     }
 
     /**
@@ -162,6 +235,7 @@ class OcSmarty extends Smarty
      * @param null|mixed $dummy3
      * @param null|mixed $dummy4
      *
+     * @throws SmartyException
      */
     public function display($dummy1 = null, $dummy2 = null, $dummy3 = null, $dummy4 = null)
     : void {
@@ -341,11 +415,27 @@ class OcSmarty extends Smarty
 
         // check if the template is compiled
         // if not, check if translation works correct
-        $_smarty_compile_path = $this->_get_compile_path($this->name);
-        if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
-            $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
-            if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
-                $this->error(ERROR_COMPILATION_FAILED);
+        // xxx002 _get_compile_path() existiert nicht mehr, wurde ersetzt durch getCompileDir()
+        if ($this->FRAGGLE_TEST) {
+            $_smarty_compile_path = $this->getCompileDir();
+        } else {
+            $_smarty_compile_path = $this->_get_compile_path($this->name); // xxx002
+        }
+
+        // xxx005 _is_compiled loswerden.. // Gibt es dafür einen Ersatz???
+        if ($this->FRAGGLE_TEST) {
+            if ($this->name != 'error') {
+                $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
+                if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
+                    $this->error(ERROR_COMPILATION_FAILED);
+                }
+            }
+        } else {
+            if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
+                $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
+                if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
+                    $this->error(ERROR_COMPILATION_FAILED);
+                }
             }
         }
 
@@ -608,5 +698,140 @@ class OcSmarty extends Smarty
         // This is ensured by HTMLpurifier in OC code.
 
         header('X-XSS-Protection: 0');
+    }
+
+    // Setze verlustig gegangene Smartyvariablen..
+    private function setMissingSmartyVariables() {
+        // matches double quoted strings:
+        // "foobar"
+        // "foo\"bar"
+        $this->_db_qstr_regexp = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"';
+
+        // matches single quoted strings:
+        // 'foobar'
+        // 'foo\'bar'
+        $this->_si_qstr_regexp = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'';
+
+        // matches single or double quoted strings
+        $this->_qstr_regexp = '(?:' . $this->_db_qstr_regexp . '|' . $this->_si_qstr_regexp . ')';
+
+        // matches bracket portion of vars
+        // [0]
+        // [foo]
+        // [$bar]
+        $this->_var_bracket_regexp = '\[\$?[\w\.]+\]';
+
+        // matches numerical constants
+        // 30
+        // -12
+        // 13.22
+        $this->_num_const_regexp = '(?:\-?\d+(?:\.\d+)?)';
+
+        // matches $ vars (not objects):
+        // $foo
+        // $foo.bar
+        // $foo.bar.foobar
+        // $foo[0]
+        // $foo[$bar]
+        // $foo[5][blah]
+        // $foo[5].bar[$foobar][4]
+        $this->_dvar_math_regexp = '(?:[\+\*\/\%]|(?:-(?!>)))';
+        $this->_dvar_math_var_regexp = '[\$\w\.\+\-\*\/\%\d\>\[\]]';
+        $this->_dvar_guts_regexp = '\w+(?:' . $this->_var_bracket_regexp
+                                   . ')*(?:\.\$?\w+(?:' . $this->_var_bracket_regexp . ')*)*(?:' . $this->_dvar_math_regexp . '(?:' . $this->_num_const_regexp . '|' . $this->_dvar_math_var_regexp . ')*)?';
+        $this->_dvar_regexp = '\$' . $this->_dvar_guts_regexp;
+
+        // matches config vars:
+        // #foo#
+        // #foobar123_foo#
+        $this->_cvar_regexp = '\#\w+\#';
+
+        // matches section vars:
+        // %foo.bar%
+        $this->_svar_regexp = '\%\w+\.\w+\%';
+
+        // matches all valid variables (no quotes, no modifiers)
+        $this->_avar_regexp = '(?:' . $this->_dvar_regexp . '|'
+                              . $this->_cvar_regexp . '|' . $this->_svar_regexp . ')';
+
+        // matches valid variable syntax:
+        // $foo
+        // $foo
+        // #foo#
+        // #foo#
+        // "text"
+        // "text"
+        $this->_var_regexp = '(?:' . $this->_avar_regexp . '|' . $this->_qstr_regexp . ')';
+
+        // matches valid object call (one level of object nesting allowed in parameters):
+        // $foo->bar
+        // $foo->bar()
+        // $foo->bar("text")
+        // $foo->bar($foo, $bar, "text")
+        // $foo->bar($foo, "foo")
+        // $foo->bar->foo()
+        // $foo->bar->foo->bar()
+        // $foo->bar($foo->bar)
+        // $foo->bar($foo->bar())
+        // $foo->bar($foo->bar($blah,$foo,44,"foo",$foo[0].bar))
+        $this->_obj_ext_regexp = '\->(?:\$?' . $this->_dvar_guts_regexp . ')';
+        $this->_obj_restricted_param_regexp = '(?:'
+                                              . '(?:' . $this->_var_regexp . '|' . $this->_num_const_regexp . ')(?:' . $this->_obj_ext_regexp . '(?:\((?:(?:' . $this->_var_regexp . '|' . $this->_num_const_regexp . ')'
+                                              . '(?:\s*,\s*(?:' . $this->_var_regexp . '|' . $this->_num_const_regexp . '))*)?\))?)*)';
+        $this->_obj_single_param_regexp = '(?:\w+|' . $this->_obj_restricted_param_regexp . '(?:\s*,\s*(?:(?:\w+|'
+                                          . $this->_var_regexp . $this->_obj_restricted_param_regexp . ')))*)';
+        $this->_obj_params_regexp = '\((?:' . $this->_obj_single_param_regexp
+                                    . '(?:\s*,\s*' . $this->_obj_single_param_regexp . ')*)?\)';
+        $this->_obj_start_regexp = '(?:' . $this->_dvar_regexp . '(?:' . $this->_obj_ext_regexp . ')+)';
+        $this->_obj_call_regexp = '(?:' . $this->_obj_start_regexp . '(?:' . $this->_obj_params_regexp . ')?(?:' . $this->_dvar_math_regexp . '(?:' . $this->_num_const_regexp . '|' . $this->_dvar_math_var_regexp . ')*)?)';
+
+        // matches valid modifier syntax:
+        // |foo
+        // |@foo
+        // |foo:"bar"
+        // |foo:$bar
+        // |foo:"bar":$foobar
+        // |foo|bar
+        // |foo:$foo->bar
+        $this->_mod_regexp = '(?:\|@?\w+(?::(?:\w+|' . $this->_num_const_regexp . '|'
+                             . $this->_obj_call_regexp . '|' . $this->_avar_regexp . '|' . $this->_qstr_regexp .'))*)';
+
+        // matches valid function name:
+        // foo123
+        // _foo_bar
+        $this->_func_regexp = '[a-zA-Z_]\w*';
+
+        // matches valid registered object:
+        // foo->bar
+        $this->_reg_obj_regexp = '[a-zA-Z_]\w*->[a-zA-Z_]\w*';
+
+        // matches valid parameter values:
+        // true
+        // $foo
+        // $foo|bar
+        // #foo#
+        // #foo#|bar
+        // "text"
+        // "text"|bar
+        // $foo->bar
+        $this->_param_regexp = '(?:\s*(?:' . $this->_obj_call_regexp . '|'
+                               . $this->_var_regexp . '|' . $this->_num_const_regexp  . '|\w+)(?>' . $this->_mod_regexp . '*)\s*)';
+
+        // matches valid parenthesised function parameters:
+        //
+        // "text"
+        //    $foo, $bar, "text"
+        // $foo|bar, "foo"|bar, $foo->bar($foo)|bar
+        $this->_parenth_param_regexp = '(?:\((?:\w+|'
+                                       . $this->_param_regexp . '(?:\s*,\s*(?:(?:\w+|'
+                                       . $this->_param_regexp . ')))*)?\))';
+
+        // matches valid function call:
+        // foo()
+        // foo_bar($foo)
+        // _foo_bar($foo,"bar")
+        // foo123($foo,$foo->bar(),"foo")
+        $this->_func_call_regexp = '(?:' . $this->_func_regexp . '\s*(?:' . $this->_parenth_param_regexp . '))';
+        $FRAGGLE_TEST = true;
     }
 }

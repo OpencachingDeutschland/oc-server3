@@ -13,9 +13,10 @@
             </tr>
             <tr><td colspan="2">
             <strong>
+                // xxx016 - "Syntax error in template "file:/app/htdocs/templates2/ocstyle/res_newevents.tpl" on line 18 ..  - Unexpected "|""
                 <p class="content-title-noshade">
                     {$eventitem.adm1|escape} {if $eventitem.adm1!=null & $eventitem.adm2!=null} &gt; {/if}
-                    {$eventitem.adm2|escape} {if ($eventitem.adm2!=null & $eventitem.adm4!=null) | ($eventitem.adm1!=null & $eventitem.adm4!=null)} &gt; {/if}
+                    {$eventitem.adm2|escape} {if ($eventitem.adm2!=null & $eventitem.adm4!=null) || ($eventitem.adm1!=null & $eventitem.adm4!=null)} &gt; {/if}
                     {$eventitem.adm4|escape}
                 </p>
             </strong>

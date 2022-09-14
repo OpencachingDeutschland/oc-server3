@@ -217,7 +217,15 @@
         <div class="nav2">
             <ul>
                 {nocache}
-                    {include file="sys_topmenu.tpl" items="$topmenu"}
+                    {*xxx018 das "include" erzeugt seitens Smarty einen "Array to string conversion"-Fehler. Daher das Include mal direkt einbauen..*}
+{*                    {include file="sys_topmenu.tpl" items="$topmenu"}*}
+                    {strip}
+                        {foreach name=topmenu from=$topmenu item=menuitem}
+                            <li><a href="{$menuitem.href}" {$menuitem.target|default} {if $menuitem.selected} class="selected bg-green06"{/if}>{$menuitem.menustring|escape}</a></li>
+                            {*        <li><a href="{$menuitem.href}" {if !isset($menuitem.target) } target="_blank" {/if} {if $menuitem.selected} class="selected bg-green06"{/if}>{$menuitem.menustring|escape}</a></li>*}
+                        {/foreach}
+                    {/strip}
+
                 {/nocache}
             </ul>
         </div> <!-- nav 2 -->
@@ -252,11 +260,26 @@
             <ul>
                 <li class="title">
                     {if isset($submenu) }
-                        {if $submenu.0.parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
+                        {if $submenu[0].parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
                     {/if}
                 </li>
                 {nocache}
-                    {include file="sys_submenu.tpl" items="$submenu"}
+{*xxx018 das "include" erzeugt seitens Smarty einen "Array to string conversion"-Fehler. Daher das Include mal direkt einbauen..*}
+{*                    {include file="sys_submenu.tpl" items="$submenu"}*}
+                    {strip}
+                        {foreach name=submenu from=$submenu item=menuitem}
+                            {if $menuitem.href == ''}
+                                {* separator headline *}
+                                <li style="background-color:white; line-height:1.1em">&nbsp;</li>
+                                <li class="title secondtitle">{$menuitem.menustring|escape}</li>
+                            {else}
+                                {* selectable menu option *}
+                                {*            <li class="group{$menuitem.sublevel}{if $menuitem.selected} group_active{/if}"><a href="{$menuitem.href}" {if !isset($menuitem.target) } target="_blank" {/if}>{$menuitem.menustring|escape}</a></li>*}
+                                <li class="group{$menuitem.sublevel}{if $menuitem.selected} group_active{/if}"><a href="{$menuitem.href}" {$menuitem.target|default}>{$menuitem.menustring|escape}</a></li>
+                            {/if}
+                        {/foreach}
+                    {/strip}
+
                 {/nocache}
             </ul>
 

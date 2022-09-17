@@ -54,9 +54,10 @@
  *
  * @return string
  */
-// xxx009 "PHP Warning: Parameter 2 to smarty_prefilter_t() expected to be a reference, value given in .."
-//function smarty_prefilter_t($source, &$smarty)
-function smarty_prefilter_t($source, $smarty)
+//Warning: Parameter 2 to smarty_prefilter_t() expected to be a reference, value given in /app/htdocs/vendor/smarty/..
+//function smarty_prefilter_t($source, &$smarty) // original
+function smarty_prefilter_t($source, $smarty) // angepasst
+: string
 {
     $output = '';
     $output_start = 0;
@@ -99,8 +100,8 @@ function smarty_prefilter_t($source, $smarty)
  *
  * @return string
  */
-function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
-{
+function smarty_prefilter_t_process_block(string $block, string $message, &$smarty, int $line)
+: string {
     if ($message != '') {
         $start_attr = mb_strpos($block, ' ');
         if ($start_attr !== false) {
@@ -161,11 +162,8 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
  */
 function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
 {
-
     /* Tokenize tag attributes. */
     preg_match_all(
-        // TODO:
-        // xxx008 _obj_call_regexp und _qstr_regexp sind in Smarty 3 nicht mehr bekannt?
             '~(?:' . $smarty->_obj_call_regexp . '|' . $smarty->_qstr_regexp . ' | (?>[^"\'=\s]+)
                       )+ |
                       [=]
@@ -191,8 +189,7 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                     $attr_name = $token;
                     $state = 1;
                 } else {
-                    // xxx012
-//                    $smarty->_syntax_error("invalid attribute name: '$token'", E_USER_ERROR, __FILE__, __LINE__);
+                    $smarty->_syntax_error("invalid attribute name: '$token'", E_USER_ERROR, __FILE__, __LINE__);
                 }
                 break;
 
@@ -201,13 +198,12 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                 if ($token == '=') {
                     $state = 2;
                 } else {
-                    // xxx013
-//                    $smarty->_syntax_error(
-//                        "expecting '=' after attribute name '$last_token'",
-//                        E_USER_ERROR,
-//                        __FILE__,
-//                        __LINE__
-//                    );
+                    $smarty->_syntax_error(
+                        "expecting '=' after attribute name '$last_token'",
+                        E_USER_ERROR,
+                        __FILE__,
+                        __LINE__
+                    );
                 }
                 break;
 
@@ -245,8 +241,7 @@ function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
                     $attrs[$attr_name] = $token;
                     $state = 0;
                 } else {
-                    // xxx014
-//                    $smarty->_syntax_error("'=' cannot be an attribute value", E_USER_ERROR, __FILE__, __LINE__);
+                    $smarty->_syntax_error("'=' cannot be an attribute value", E_USER_ERROR, __FILE__, __LINE__);
                 }
                 break;
         }

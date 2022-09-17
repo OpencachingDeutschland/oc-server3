@@ -37,17 +37,13 @@ function smarty_block_nocache($param, $content, &$smarty, &$repeat)
         }
         $counter[$name]++;
 
-        // TODO:
-        // xxx - _cache_including gibt es nicht mehr?? Was dann?
         if ($smarty->_cache_including) {
-            $param = isset($smarty->_cache_info['cached_vars'][$name][$counter[$name]]) ? $smarty->_cache_info['cached_vars'][$name][$counter[$name]] : [];
+            $param = $smarty->_cache_info['cached_vars'][$name][$counter[$name]] ?? [];
         } else {
             $smarty->_cache_info['cached_vars'][$name][$counter[$name]] = $param;
         }
 
         foreach ($param as $k => $v) {
-            // TODO:
-            // xxx - statt _tpl_vars nun getTemplateVars() verwenden?
             $smarty->_tpl_vars[$k] = $v;
         }
     }

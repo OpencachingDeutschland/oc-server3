@@ -26,8 +26,6 @@
                 <td bgcolor="#F8F8F8" style="margin:0 0 0 0;border-left:1px solid gray;border-right:1px solid gray;border-bottom:1px solid gray;">
                     {foreach from=$attribGroupItem.attr item=attribItem}
                         {array_search var=thisDisabled needle=$attribItem.id haystack=$stateDisable}
-                        {* TODO: anschauen*}
-                        // xxx - "$this" ist in .tpl seit Smarty 3 wohl nicht mehr zulässig??
                         {if $thisDisabled!==false}
                             {assign var=attrState value=3} {* ATTRIB_UNDEF *}
                         {else}

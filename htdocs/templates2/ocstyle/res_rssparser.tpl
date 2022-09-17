@@ -7,7 +7,7 @@
         <table class='narrowtable' style='margin-top:0'>
 {/if}
 
-{*xxx015 - "'item' and 'from' may not have same variable name 'rss'"*}
+{*xxx - "'item' and 'from' may not have same variable name 'rss'"*}
 {foreach name=rssLoop from=$rss item=rss_item}
 {if $includetext}
         <p class="content-title-noshade-size15" style="display: inline;">{$rss_item.pubDate} - {$rss_item.title}</p>

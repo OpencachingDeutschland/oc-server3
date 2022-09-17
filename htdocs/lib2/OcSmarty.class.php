@@ -41,8 +41,6 @@ class OcSmarty extends SmartyBC
     public string $_parenth_param_regexp = '';
     public string $_func_call_regexp = '';
     public string $_qstr_regexp = '';
-    public bool $FRAGGLE_TEST = true;
-
 
     public string $name = 'sys_nothing';
 
@@ -89,30 +87,15 @@ class OcSmarty extends SmartyBC
         $this->bench = new CBench();
         $this->bench->start();
 
-        // xxx014 fehlende Variablen einbauen..
+        // in Smarty 3 fehlende Variablen einbauen..
         $this->setMissingSmartyVariables();
 
         // configuration
         $this->template_dir = $opt['stylepath'];
         $this->compile_dir = __DIR__ . '/../var/cache2/smarty/compiled/';
         $this->cache_dir = __DIR__ . '/../var/cache2/smarty/cache/';
-        $this->plugins_dir = [
-            'plugins',
-            __DIR__ . '/../src/OcLegacy/SmartyPlugins',
-        ];
-
-        // xxx006 "$this->testInstall();" zeigte diverse falsche/fehlende Pfade. Hier die vermuteten Korrekturen:
-        if ($this->FRAGGLE_TEST) {
-            $this->config_dir = __DIR__ . '/../config2/';
-//            $this->plugins_dir = __DIR__ . '/../src/OcLegacy/SmartyPlugins';
-//            $this->plugins_dir = __DIR__ . '/../vendor/smarty/smarty/libs/plugins';
-            $this->plugins_dir = [__DIR__ . '/../src/OcLegacy/SmartyPlugins', __DIR__ . '/../vendor/smarty/smarty/libs/plugins', __DIR__ . '/../vendor/smarty/smarty/libs/sysplugins'];
-        }
-
-        // xxx007 Teste Pfade..
-        if ($this->FRAGGLE_TEST) {
-//            $this->testInstall();
-        }
+        $this->config_dir = __DIR__ . '/../config2/';
+        $this->plugins_dir = [__DIR__ . '/../src/OcLegacy/SmartyPlugins', __DIR__ . '/../vendor/smarty/smarty/libs/plugins', __DIR__ . '/../vendor/smarty/smarty/libs/sysplugins'];
 
         // disable caching ... if caching is enabled, 1 hour is default
         $this->caching = 0;
@@ -186,47 +169,7 @@ class OcSmarty extends SmartyBC
             }
         }
 
-        // xxx001 _get_compile_path() gibt es nicht mehr.. wurde ersetzt durch getCompileDir()
-        if ($this->FRAGGLE_TEST) {
-            $_smarty_compile_path = $this->getCompileDir();
-        } else {
-            $_smarty_compile_path = $this->_get_compile_path($resource_name);
-        }
-
-        // xxx003 was macht das '_cache_including'? Das wird nirgends so richtig gesetzt.. // mal alle drei Zeilen mit _cache_including auskommentieren..
-        if ($this->FRAGGLE_TEST) {
-            // if we just need to display the results, don't perform output
-            // buffering - for speed
-            //        $_cache_including = $this->_cache_including;
-            //        $this->_cache_including = false;
-        } else {
-            // if we just need to display the results, don't perform output
-            // buffering - for speed
-                    $_cache_including = $this->_cache_including;
-                    $this->_cache_including = false;
-        }
-        // xxx010 // vielleicht muss mal irgendwas compiliert werden??
-//        if ($this->FRAGGLE_TEST) {
-//            $this->compileAllTemplates();
-//            $this->compileAllConfig();
-//        }
-
-        // xxx004 _is_compile und _compile_resource sind unbekannt in Smarty3. Aber was ist Ersatz???
-        if ($this->FRAGGLE_TEST) {
-            // compile the resource
-            //        if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
-            //            $this->_compile_resource($resource_name, $_smarty_compile_path);
-            //        }
-
-            //        $this->_cache_including = $_cache_including;
-        } else {
-            // compile the resource
-            if (!$this->_is_compiled($resource_name, $_smarty_compile_path)) {
-                $this->_compile_resource($resource_name, $_smarty_compile_path);
-            }
-
-            $this->_cache_including = $_cache_including;
-        }
+        $_smarty_compile_path = $this->getCompileDir();
     }
 
     /**
@@ -415,27 +358,12 @@ class OcSmarty extends SmartyBC
 
         // check if the template is compiled
         // if not, check if translation works correct
-        // xxx002 _get_compile_path() existiert nicht mehr, wurde ersetzt durch getCompileDir()
-        if ($this->FRAGGLE_TEST) {
-            $_smarty_compile_path = $this->getCompileDir();
-        } else {
-            $_smarty_compile_path = $this->_get_compile_path($this->name); // xxx002
-        }
+        $_smarty_compile_path = $this->getCompileDir();
 
-        // xxx005 _is_compiled loswerden.. // Gibt es dafür einen Ersatz???
-        if ($this->FRAGGLE_TEST) {
-            if ($this->name != 'error') {
-                $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
-                if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
-                    $this->error(ERROR_COMPILATION_FAILED);
-                }
-            }
-        } else {
-            if (!$this->_is_compiled($this->name, $_smarty_compile_path) && $this->name != 'error') {
-                $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
-                if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
-                    $this->error(ERROR_COMPILATION_FAILED);
-                }
+        if ($this->name != 'error') {
+            $internal_lang = $translate->t('INTERNAL_LANG', 'all', 'OcSmarty.class.php', '');
+            if (($internal_lang != $opt['template']['locale']) && ($internal_lang != 'INTERNAL_LANG')) {
+                $this->error(ERROR_COMPILATION_FAILED);
             }
         }
 
@@ -832,6 +760,5 @@ class OcSmarty extends SmartyBC
         // _foo_bar($foo,"bar")
         // foo123($foo,$foo->bar(),"foo")
         $this->_func_call_regexp = '(?:' . $this->_func_regexp . '\s*(?:' . $this->_parenth_param_regexp . '))';
-        $FRAGGLE_TEST = true;
     }
 }

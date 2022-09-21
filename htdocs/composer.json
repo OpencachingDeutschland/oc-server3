@@ -1,5 +1,4 @@
 {
-  "_comment": "Kommentar/Merkzettel von fraggle: smarty/smarty bleibt vorerst bei ^2.6. ^3.0 oder ^4.0 verursachen zu viel Änderungsaufwand in OcSmarty.class.php",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",

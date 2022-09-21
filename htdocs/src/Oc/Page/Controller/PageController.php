@@ -9,19 +9,22 @@ use Oc\Page\Exception\PageTranslationNotFoundException;
 use Oc\Page\PageProvider;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ *
+ */
 class PageController extends AbstractController
 {
     /**
      * @var PageProvider
      */
-    private $pageProvider;
+    private PageProvider $pageProvider;
 
     /**
      * @var TranslatorInterface
      */
-    private $translator;
+    private TranslatorInterface $translator;
 
     public function __construct(PageProvider $pageProvider, TranslatorInterface $translator)
     {

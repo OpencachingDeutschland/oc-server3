@@ -4,30 +4,33 @@ namespace Oc\Menu\Event;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+/**
+ *
+ */
 class MenuEvent extends Event
 {
     /**
      * @var FactoryInterface
      */
-    private $factory;
+    private FactoryInterface $factory;
 
     /**
      * @var ItemInterface
      */
-    private $menu;
+    private ItemInterface $menu;
 
     /**
      * @var ItemInterface
      */
-    private $currentItem;
+    private ItemInterface $currentItem;
 
     /**
      * @var EventDispatcherInterface
      */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,

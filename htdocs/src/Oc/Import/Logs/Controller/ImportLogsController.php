@@ -2,28 +2,31 @@
 
 namespace Oc\Import\Logs\Controller;
 
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use SimpleXMLElement;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Twig_Environment;
+use Twig\Environment;
 
 /**
  * @Route(service="Oc\Import\Logs\Controller\ImportLogsController")
  */
-class ImportLogsController extends Controller
+class ImportLogsController extends AbstractController
 {
     /**
-     * @var Twig_Environment
+     * @var Environment
      */
-    private $twig;
+    private Environment $twig;
 
-    public function __construct(Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
 
     /**
      * @Route(path="/import/logs")
+     * @throws Exception
      */
     public function indexAction(): Response
     {
@@ -36,7 +39,7 @@ class ImportLogsController extends Controller
             ['<', '</'],
             $xmlContent
         );
-        $xml = new \SimpleXMLElement($xmlContent);
+        $xml = new SimpleXMLElement($xmlContent);
 
         $response = new Response();
         $response->setContent(

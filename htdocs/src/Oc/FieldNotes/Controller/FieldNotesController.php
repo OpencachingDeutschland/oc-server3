@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * Class FieldNotesController
@@ -21,22 +21,22 @@ class FieldNotesController extends AbstractController
     /**
      * @var ImportService
      */
-    private $importService;
+    private ImportService $importService;
 
     /**
      * @var FieldNoteService
      */
-    private $fieldNoteService;
+    private FieldNoteService $fieldNoteService;
 
     /**
      * @var TranslatorInterface
      */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /**
      * @var UploadFormDataFactory
      */
-    private $formDataFactory;
+    private UploadFormDataFactory $formDataFactory;
 
     public function __construct(
         ImportService $importService,

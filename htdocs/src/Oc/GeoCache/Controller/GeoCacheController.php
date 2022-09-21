@@ -2,24 +2,28 @@
 
 namespace Oc\GeoCache\Controller;
 
+use Doctrine\DBAL\Exception;
 use Oc\GeoCache\Reports;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class GeoCacheController extends Controller
+/**
+ *
+ */
+class GeoCacheController extends AbstractController
 {
     /**
      * @var Reports
      */
-    private $reports;
+    private Reports $reports;
 
     /**
-     * @var
+     * @var string
      */
-    private $apiSecret;
+    private string $apiSecret;
 
     public function __construct(Reports $reports, string $apiSecret)
     {
@@ -29,6 +33,7 @@ class GeoCacheController extends Controller
 
     /**
      * @Route("/api/geocache/getReports")
+     * @throws Exception
      */
     public function getReportsAction(Request $request): Response
     {

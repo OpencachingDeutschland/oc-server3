@@ -54,7 +54,10 @@
  *
  * @return string
  */
-function smarty_prefilter_t($source, &$smarty)
+//Warning: Parameter 2 to smarty_prefilter_t() expected to be a reference, value given in /app/htdocs/vendor/smarty/..
+//function smarty_prefilter_t($source, &$smarty) // original
+function smarty_prefilter_t($source, $smarty) // angepasst
+: string
 {
     $output = '';
     $output_start = 0;
@@ -97,8 +100,8 @@ function smarty_prefilter_t($source, &$smarty)
  *
  * @return string
  */
-function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
-{
+function smarty_prefilter_t_process_block(string $block, string $message, &$smarty, int $line)
+: string {
     if ($message != '') {
         $start_attr = mb_strpos($block, ' ');
         if ($start_attr !== false) {
@@ -159,16 +162,15 @@ function smarty_prefilter_t_process_block($block, $message, &$smarty, $line)
  */
 function smarty_prefilter_t_parse_attrs($tag_args, &$smarty)
 {
-
     /* Tokenize tag attributes. */
     preg_match_all(
-        '~(?:' . $smarty->_obj_call_regexp . '|' . $smarty->_qstr_regexp . ' | (?>[^"\'=\s]+)
+            '~(?:' . $smarty->_obj_call_regexp . '|' . $smarty->_qstr_regexp . ' | (?>[^"\'=\s]+)
                       )+ |
                       [=]
                     ~x',
-        $tag_args,
-        $match
-    );
+            $tag_args,
+            $match
+        );
     $tokens = $match[0];
 
     $attrs = [];

@@ -12,35 +12,38 @@ use Oc\Validator\Exception\ValidationException;
 use Oc\Validator\Validator;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\ExpressionLanguage\Node\Node;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
+/**
+ *
+ */
 class ImportService
 {
     /**
      * @var EntityManagerInterface
      */
-    protected $entityManager;
+    protected EntityManagerInterface $entityManager;
 
     /**
      * @var TranslatorInterface
      */
-    protected $translator;
+    protected TranslatorInterface $translator;
 
     /**
      * @var FileParser
      */
-    private $fileParser;
+    private FileParser $fileParser;
 
     /**
      * @var Validator
      */
-    private $validator;
+    private Validator $validator;
 
     /**
      * @var Importer
      */
-    private $importer;
+    private Importer $importer;
 
     public function __construct(
         Importer $importer,

@@ -15,7 +15,7 @@
             <strong>
                 <p class="content-title-noshade">
                     {$eventitem.adm1|escape} {if $eventitem.adm1!=null & $eventitem.adm2!=null} &gt; {/if}
-                    {$eventitem.adm2|escape} {if ($eventitem.adm2!=null & $eventitem.adm4!=null) | ($eventitem.adm1!=null & $eventitem.adm4!=null)} &gt; {/if}
+                    {$eventitem.adm2|escape} {if ($eventitem.adm2!=null & $eventitem.adm4!=null) || ($eventitem.adm1!=null & $eventitem.adm4!=null)} &gt; {/if}
                     {$eventitem.adm4|escape}
                 </p>
             </strong>

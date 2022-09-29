@@ -4,24 +4,24 @@ namespace Oc\Changelog\Controller;
 
 use League\CommonMark\CommonMarkConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 /**
  * @Route(service="Oc\Changelog\Controller\ChangelogController")
  */
-class ChangelogController extends Controller
+class ChangelogController extends AbstractController
 {
     /**
      * @var CommonMarkConverter
      */
-    private $markConverter;
+    private CommonMarkConverter $markConverter;
 
     /**
      * @var Environment
      */
-    private $twig;
+    private Environment $twig;
 
     public function __construct(CommonMarkConverter $markConverter, Environment $twig)
     {

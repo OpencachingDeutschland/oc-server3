@@ -217,7 +217,7 @@
         <div class="nav2">
             <ul>
                 {nocache}
-                    {include file="sys_topmenu.tpl" items="$topmenu"}
+                    {include file="sys_topmenu.tpl" items=$topmenu}
                 {/nocache}
             </ul>
         </div> <!-- nav 2 -->
@@ -225,9 +225,9 @@
         {* <!-- Breadcrumb Navigation and Search box --> *}
         <div class="buffer" style="height: 30px; width:100%;">
             {if $opt.page.nowpsearch}
-                <div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
+                <div id="breadcrumb_fullsize">{include file="sys_breadcrumb.tpl" items=$breadcrumb}</div>
             {else}
-                <div id="breadcrumb">{include file="sys_breadcrumb.tpl" items="$breadcrumb"}</div>
+                <div id="breadcrumb">{include file="sys_breadcrumb.tpl" items=$breadcrumb}</div>
                 <div id="suchbox">
                     <form action="searchplugin.php" method="post"><b>{t}Waypoint-Search:{/t}</b>&nbsp;<input
                                 type="hidden" name="sourceid" value="waypoint-search"/> <input type="text"
@@ -252,11 +252,11 @@
             <ul>
                 <li class="title">
                     {if isset($submenu) }
-                        {if $submenu.0.parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
+                        {if $submenu[0].parent==1} start page hack {t}News{/t}{else}{t}Main menu{/t}{/if}
                     {/if}
                 </li>
                 {nocache}
-                    {include file="sys_submenu.tpl" items="$submenu"}
+                    {include file="sys_submenu.tpl" items=$submenu}
                 {/nocache}
             </ul>
 

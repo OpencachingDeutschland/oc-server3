@@ -2,17 +2,18 @@
  * You can find the license in the docs directory
  ***************************************************************************}
 {* OCSTYLE *}
-{if $ownerlogs || $ownlogs}
+
+{if isset($ownerlogs) || isset($ownlogs)}
     <div class="content2-pagetitle">
         <img src="resource2/{$opt.template.style}/images/cacheicon/traditional.gif" style="margin-right: 10px;" width="32" height="32" alt="" />
-        {if $ownerlogs}
-            {if $ownlogs}
+        {if isset($ownerlogs)}
+            {if isset($ownlogs)}
                 {t}Log entries for your geocaches{/t}
             {else}
                 {capture name=ownerlink}<a href="viewprofile.php?userid={$ownerid}">{$ownername|escape}</a>{/capture}
                 {t 1=$smarty.capture.ownerlink}Newest log entries for caches of %1{/t}
             {/if}
-        {else $ownlogs}
+        {elseif isset($ownlogs)}
             {t}Your log entries{/t}
         {/if}
     </div>
@@ -40,8 +41,8 @@
             <td class="nav4">
                 <ul>
                     <li class="group noicon {if $countryCode === ''}selected{/if}"><a href="newlogs.php">{t}All new logs{/t}</a></li>
-                    <li class="group noicon {if !$rest && $countryCode}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
-                    <li class="group noicon {if $rest}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
+                    <li class="group noicon {if !isset($rest) && isset($countryCode)}selected{/if}"><a href="newlogs.php?country={$opt.template.country}">{t 1=$countryName}New logs in %1{/t}</a>
+                    <li class="group noicon {if isset($rest)}selected{/if}"><a href="newlogsrest.php">{t 1=$mainCountryName}New logs without %1{/t}</a></li>
                 </ul>
             </td>
             <td class="default" style="text-align:right; vertical-align:top; padding-top:0.2em">
@@ -54,30 +55,31 @@
         </tr>
     </table>
     <p>
-        {if $rest || !$countryCode}
+        {if isset($rest) || !isset($countryCode)}
             <br />
             {include file="res_countrylinks.tpl" newCaches=$newLogs}
         {/if}
     </p>
 {/if}
 
-{if !$rest && $countryCode}
+{if !isset($rest) && isset($countryCode)}
     <div style="height:4px"></div>
 {/if}
+
 {if $total_found + $total_attended + $total_dnf + $total_recommended}
     <div style="float:right">
         <p style="line-height:2em">
             &nbsp;&nbsp;{t}total{/t}&nbsp;
-            {if $total_recommended}
+            {if isset($total_recommended)}
                 {$total_recommended}  <img src="images/rating-star.gif" width="17" height="16" title="{t}recommended{/t}" />&nbsp;
             {/if}
-            {if $total_found}
+            {if isset($total_found)}
                 {$total_found} <img src="resource2/{$opt.template.style}/images/log/16x16-found.png" alt="{t}found{/t}" title="{t}found{/t}"  />&nbsp;
             {/if}
-            {if $total_dnf}
+            {if isset($total_dnf)}
                 {$total_dnf} <img src="resource2/{$opt.template.style}/images/log/16x16-dnf.png" alt="{t}not&nbsp;found{/t}" title="{t}not&nbsp;found{/t}"  />&nbsp;
             {/if}
-            {if $total_attended}
+            {if isset($total_attended)}
                 {$total_attended} <img src="resource2/{$opt.template.style}/images/log/16x16-attended.png" alt="{t}attended{/t}" title="{t}attended{/t}"  />&nbsp;
             {/if}
         </p>
@@ -88,8 +90,8 @@
         {include file="res_pager.tpl"}
         &nbsp; &nbsp;
     {/if}
-    {if $ownerlogs && $ownlogs}
-        {if $show_own_logs}
+    {if isset($ownerlogs) && isset($ownlogs)}
+        {if isset($show_own_logs)}
             <a class="systemlink" href="ownerlogs.php?ownlogs=0">{t}Hide own logs{/t}</a>
         {else}
             <a class="systemlink" href="ownerlogs.php?ownlogs=1">{t}Show own logs{/t}</a>
@@ -102,7 +104,7 @@
     {assign var='lastCountry' value=''}
 
     {foreach name=newLogs from=$newLogs item=newLog}
-        {if $newLogsPerCountry && ($rest || !$countryCode)}
+        {if $newLogsPerCountry && (isset($rest) || !isset($countryCode))}
             {if $newLog.country_name!=$lastCountry}
                 <tr><td class="spacer" id="country_{$newLog.country}"></td></tr>
                 <tr><td colspan="3">
@@ -173,7 +175,7 @@
                 {elseif $newLog.type==13 || $newLog.type==14}
                     {t 1=$smarty.capture.cachename 2=$smarty.capture.username}%2 has locked %1{/t}
                 {/if}
-                {include file="res_logflags.tpl" logItem=$newLog withRecommendation=true}
+                {include file="res_logflags.tpl" logItem=$newLog withRecommendation=true lfSpace=false}
 
                 {if $newLog.pics}
                     <img src="resource2/ocstyle/images/action/16x16-addimage.png" />
@@ -189,7 +191,7 @@
         </tr>
         {assign var='lastCountry' value=$newLog.country_name}
     {foreachelse}
-        {if $ownerlogs}
+        {if isset($ownerlogs)}
             <p>{t}There are no log entries yet for your geocaches.{/t}</p>
         {/if}
     {/foreach}

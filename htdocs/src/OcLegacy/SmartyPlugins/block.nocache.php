@@ -38,7 +38,7 @@ function smarty_block_nocache($param, $content, &$smarty, &$repeat)
         $counter[$name]++;
 
         if ($smarty->_cache_including) {
-            $param = isset($smarty->_cache_info['cached_vars'][$name][$counter[$name]]) ? $smarty->_cache_info['cached_vars'][$name][$counter[$name]] : [];
+            $param = $smarty->_cache_info['cached_vars'][$name][$counter[$name]] ?? [];
         } else {
             $smarty->_cache_info['cached_vars'][$name][$counter[$name]] = $param;
         }

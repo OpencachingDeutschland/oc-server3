@@ -7,21 +7,24 @@ use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheService;
 use Oc\GeoCache\Util;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class GeoCacheFileController extends Controller
+/**
+ *
+ */
+class GeoCacheFileController extends AbstractController
 {
     /**
      * @var GeoCacheService
      */
-    private $geoCacheService;
+    private GeoCacheService $geoCacheService;
 
     /**
      * @var Util
      */
-    private $geoCacheUtil;
+    private Util $geoCacheUtil;
 
     public function __construct(GeoCacheService $geoCacheService, Util $geoCacheUtil)
     {

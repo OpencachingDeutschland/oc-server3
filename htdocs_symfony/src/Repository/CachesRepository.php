@@ -70,10 +70,9 @@ class CachesRepository
 
     /**
      * @return array
-     * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @throws RecordNotFoundException
+     * @throws RecordsNotFoundException
      */
     public function fetchAll()
     : array
@@ -102,9 +101,8 @@ class CachesRepository
      * @param array $where
      *
      * @return GeoCachesEntity
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
     : GeoCachesEntity {
@@ -134,7 +132,6 @@ class CachesRepository
      * @param array $where
      *
      * @return array
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
      * @throws RecordNotFoundException
      */
@@ -317,9 +314,8 @@ class CachesRepository
      * @param array $data
      *
      * @return GeoCachesEntity
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data)
@@ -376,7 +372,6 @@ class CachesRepository
      *
      * @return bool
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function isNew(string $wp)
     : bool {
@@ -427,7 +422,6 @@ class CachesRepository
      * @return array
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getCacheDetailsById(int $id)
     : array {
@@ -442,7 +436,6 @@ class CachesRepository
      * @return array
      * @throws Exception
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      */
     public function getCacheDetailsByWayPoint(string $wayPoint)
     : array {

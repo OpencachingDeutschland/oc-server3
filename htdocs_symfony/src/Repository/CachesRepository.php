@@ -390,4 +390,64 @@ class CachesRepository
 
         return true;
     }
+
+    /**
+     * @param string $searchtext
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function getCachesForSearchField(string $searchtext)
+    : array {
+        //      so sieht die SQL-Vorlage aus..
+        //        SELECT cache_id, name, wp_oc, user.username
+        //        FROM caches
+        //        INNER JOIN user ON caches.user_id = user.user_id
+        //        WHERE wp_oc         =       "' . $searchtext . '"
+        //        OR wp_gc            =       "' . $searchtext . '"
+        //        OR caches.name     LIKE    "%' . $searchtext . '%"'
+        //        OR user.username   LIKE    "%' . $searchtext . '%"'
+        $qb = $this->connection->createQueryBuilder();
+        $qb->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
+            ->from('caches')
+            ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+            ->where('caches.wp_oc = :searchTerm')
+            ->orWhere('caches.wp_gc = :searchTerm')
+            ->orWhere('caches.name LIKE :searchTermLIKE')
+            ->orWhere('user.username LIKE :searchTermLIKE')
+            ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
+            ->orderBy('caches.wp_oc', 'ASC');
+
+        return $qb->executeQuery()->fetchAllAssociative();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return array
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
+    public function getCacheDetailsById(int $id)
+    : array {
+        $fetchedCache = $this->fetchOneBy(['cache_id' => $id]);
+
+        return [$this->getDatabaseArrayFromEntity($fetchedCache)];
+    }
+
+    /**
+     * @param string $wayPoint
+     *
+     * @return array
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
+    public function getCacheDetailsByWayPoint(string $wayPoint)
+    : array {
+        $fetchedCache = $this->fetchOneBy(['wp_oc' => $wayPoint]);
+
+        return [$this->getDatabaseArrayFromEntity($fetchedCache)];
+    }
 }

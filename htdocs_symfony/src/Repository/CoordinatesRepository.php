@@ -47,20 +47,6 @@ class CoordinatesRepository
     }
 
     /**
-     * float
-     *
-     * @return array
-     */
-    public function getFloat()
-    : array
-    {
-        return [
-            'lat' => $this->nLat,
-            'lon' => $this->nLon,
-        ];
-    }
-
-    /**
      * Decimal: d.ddddd°
      *
      * @return string[]
@@ -674,54 +660,6 @@ class CoordinatesRepository
     }
 
     /**
-     * @param $name
-     *
-     * @return false|float|int|mixed
-     */
-    // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
-    public static function parseRequestLat($name)
-    : mixed {
-        if (!isset($_REQUEST[$name . 'NS']) || !isset($_REQUEST[$name . 'Lat']) || !isset($_REQUEST[$name . 'LatMin'])) {
-            return false;
-        }
-
-        $coordNS = $_REQUEST[$name . 'NS'];
-        $coordLat = $_REQUEST[$name . 'Lat'] + 0;
-        $coordLatMin = str_replace(',', '.', $_REQUEST[$name . 'LatMin']) + 0;
-
-        $lat = $coordLat + $coordLatMin / 60;
-        if ($coordNS == 'S') {
-            $lat = - $lat;
-        }
-
-        return $lat;
-    }
-
-    /**
-     * @param $name
-     *
-     * @return false|float|int|mixed
-     */
-    // TODO: aktuell braucht's diese Funktion nicht, aber ev. zuküntig wieder?
-    public static function parseRequestLon($name)
-    : mixed {
-        if (!isset($_REQUEST[$name . 'EW']) || !isset($_REQUEST[$name . 'Lon']) || !isset($_REQUEST[$name . 'LonMin'])) {
-            return false;
-        }
-
-        $coordEW = $_REQUEST[$name . 'EW'];
-        $coordLon = $_REQUEST[$name . 'Lon'] + 0;
-        $coordLonMin = str_replace(',', '.', $_REQUEST[$name . 'LonMin']) + 0;
-
-        $lon = $coordLon + $coordLonMin / 60;
-        if ($coordEW == 'W') {
-            $lon = - $lon;
-        }
-
-        return $lon;
-    }
-
-    /**
      * What3Words
      *
      * @param string $language
@@ -772,5 +710,51 @@ class CoordinatesRepository
             'coord_W3Wde' => $this->getW3W('de'),
             'coord_W3Wen' => $this->getW3W(),
         ];
+    }
+
+    /**
+     * @param string $lat
+     * @param string $lon
+     *
+     * @return array
+     */
+    // TODO: aktuell nur von Dec in andere Formate. Konvertierung von allen Formaten in alle anderen Formate sollte aber auch irgendwann gehen..
+    public function convertCoordinates(string $lat, string $lon)
+    : array {
+        $convertedCoordinates = [];
+
+        $lat_float = floatval($lat);
+        $lon_float = floatval($lon);
+
+        $this->setLatLon($lat_float, $lon_float);
+
+        $convertedCoordinates['decimal'] = $this->getDecimal()['lat'] . ' ' . $this->getDecimal()['lon'];
+        $convertedCoordinates['degreeMinute'] = $this->getDegreeMinutes()['lat'] . ' ' . $this->getDegreeMinutes()['lon'];
+        $convertedCoordinates['degreeMinuteSecond'] = $this->getDegreeMinutesSeconds()['lat'] . ' ' . $this->getDegreeMinutesSeconds()['lon'];
+        $convertedCoordinates['GK'] = $this->getGK();
+        $convertedCoordinates['QTH'] = $this->getQTH();
+        $convertedCoordinates['RD'] = $this->getRD();
+        $convertedCoordinates['CH1903'] = $this->getSwissGrid()['coord'];
+        $convertedCoordinates['UTM'] = $this->getUTM()['zone'] . $this->getUTM()['letter'] . ' ' . $this->getUTM()['east'] . ' ' . $this->getUTM()['north'];
+        $convertedCoordinates['W3W_de'] = $this->getW3W('de');
+        $convertedCoordinates['W3W_en'] = $this->getW3W();
+
+        return $convertedCoordinates;
+    }
+
+    /**
+     * @param string $searchtext
+     *
+     * @return array
+     */
+    public function getCoordinatesForSearchField(string $searchtext)
+    : array {
+        $searchtext = preg_replace("/[^0-9.,+\- ]/", "", $searchtext);
+
+        $arr = preg_split('/\s+/', $searchtext);
+
+        $this->setLatLon((float) $arr[0], (float) $arr[1]);
+
+        return $this->getAllCoordinatesFormatsAsArray();
     }
 }

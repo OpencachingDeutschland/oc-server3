@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Controller\Backend;
 
 use Psr\Log\LoggerInterface;
@@ -11,7 +13,7 @@ use Symfony\Component\Mime\Email;
 /**
  *
  */
-class MailerController extends AbstractController
+class MailerControllerBackend extends AbstractController
 {
     /** @var LoggerInterface */
     public $logger;

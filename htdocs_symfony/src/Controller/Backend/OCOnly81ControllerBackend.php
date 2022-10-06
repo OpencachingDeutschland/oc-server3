@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CachesController
+ * Class OCOnly81ControllerBackend
  *
  * @package Oc\Controller\Backend
  */
-class OCOnly81Controller extends AbstractController
+class OCOnly81ControllerBackend extends AbstractController
 {
     private Connection $connection;
 
     /**
-     * CachesController constructor.
+     * OCOnly81ControllerBackend constructor.
      *
      * @param Connection $connection
      */

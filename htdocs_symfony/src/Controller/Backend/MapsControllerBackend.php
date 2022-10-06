@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Oc\Controller\Backend;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Oc\Repository\CachesRepository;
+use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,11 +15,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class MapsController
+ * Class MapsControllerBackend
  *
  * @package Oc\Controller\Backend
  */
-class MapsController extends AbstractController
+class MapsControllerBackend extends AbstractController
 {
     private $connection;
 
@@ -48,30 +50,33 @@ class MapsController extends AbstractController
      *
      * @return Response
      * @throws RecordsNotFoundException
-     *
+     * @throws Exception
+     * @throws RecordNotFoundException
      * @Route("/mapS/{lat}+{lon}", name="map_show")
      */
     public function showMap(string $lat = '', string $lon = '', bool $centerView = false)
     : Response {
-        $mapWP = [];
-        $centerPoint = ['lat' => 0, 'lon' => 0, 'count' => 0];
-
+        $mapCenterViewLat = '48.3585';
+        $mapCenterViewLon = '10.8613';
         $mapWP = $this->cachesRepository->fetchAll();
 
-//        $centerPoint['lat'] += $mapWP->latitude;
-//        $centerPoint['lon'] += $mapWP->longitude;
-//        $centerPoint['count'] ++;
+        // Mittelpunkt für die Kartenzentrierung bestimmen
+        if ($centerView) {
+            $centerPoint = ['lat' => 0, 'lon' => 0, 'count' => 0];
 
-        if ($centerView && ($centerPoint['count'] > 0)) {
-            $mapCenterViewLat = $centerPoint['lat'] / $centerPoint['count'];
-            $mapCenterViewLon = $centerPoint['lon'] / $centerPoint['count'];
-        }
-        if ($lat != '' && $lon != '') {
+            // Schleife, die alle WP aufsummiert, damit danach der Durchschnitt gebildet werden kann
+            foreach ($mapWP as $WP) {
+                $centerPoint['lat'] += $WP->latitude;
+                $centerPoint['lon'] += $WP->longitude;
+                $centerPoint['count'] ++;
+            }
+            if ($centerPoint['count'] > 0) {
+                $mapCenterViewLat = $centerPoint['lat'] / $centerPoint['count'];
+                $mapCenterViewLon = $centerPoint['lon'] / $centerPoint['count'];
+            }
+        } elseif ($lat != '' && $lon != '') {
             $mapCenterViewLat = $lat;
             $mapCenterViewLon = $lon;
-        } else {
-            $mapCenterViewLat = '48.3585';
-            $mapCenterViewLon = '10.8613';
         }
 
         return $this->render(

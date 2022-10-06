@@ -443,4 +443,22 @@ class CachesRepository
 
         return [$this->getDatabaseArrayFromEntity($fetchedCache)];
     }
+
+    /**
+     * @param string $wpID
+     *
+     * @return array
+     */
+    public function search_by_cache_wp(string $wpID)
+    : array {
+        $fetchedCaches = [];
+
+        try {
+            $fetchedCaches = $this->getCacheDetailsByWayPoint($wpID);
+        } catch (\Exception $e) {
+            //  tue was.. (status_not_found = true);
+        }
+
+        return $fetchedCaches;
+    }
 }

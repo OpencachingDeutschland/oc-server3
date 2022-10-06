@@ -289,6 +289,7 @@ class UserRepository
             'user_id' => $entity->userId,
             'date_created' => $entity->dateCreated,
             'last_modified' => $entity->lastModified,
+            'last_login' => $entity->lastLogin,
             'username' => $entity->username,
             'password' => $entity->password,
             'email' => $entity->email,
@@ -321,6 +322,7 @@ class UserRepository
         $entity->userId = (int) $data['user_id'];
         $entity->dateCreated = (string) $data['date_created'];
         $entity->lastModified = (string) $data['last_modified'];
+        $entity->lastLogin = (string) $data['last_login'];
         $entity->username = $data['username'];
         $entity->password = $data['password'];
         $entity->email = $data['email'];
@@ -339,5 +341,49 @@ class UserRepository
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 
         return $entity;
+    }
+
+    /**
+     * @param string $searchtext
+     *
+     * @return array
+     * @throws Exception
+     */
+    public function getUsersForSearchField(string $searchtext)
+    : array {
+        //        SELECT user_id, username
+        //        FROM user
+        //        WHERE user_id      =       "' . $searchtext . '"
+        //        OR user.email      =       "' . $searchtext . '"
+        //        OR user.username   LIKE    "%' . $searchtext . '%"'
+        $qb = $this->connection->createQueryBuilder();
+        $qb->select('user.user_id', 'user.username')
+            ->from('user')
+            ->where('user.user_id = :searchTerm')
+            ->orWhere('user.email = :searchTerm')
+            ->orWhere('user.username LIKE :searchTermLIKE')
+            ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
+            ->orderBy('user.username', 'ASC');
+
+        return $qb->executeQuery()->fetchAllAssociative();
+    }
+
+    /**
+     * @param int $userID
+     *
+     * @return UserEntity
+     * @throws RecordNotFoundException
+     */
+    public function search_by_user_id(int $userID)
+    : UserEntity {
+        $fetchedUser = [];
+
+        try {
+            $fetchedUser = $this->fetchOneById($userID);
+        } catch (Exception $e) {
+            //  tue was..
+        }
+
+        return $fetchedUser;
     }
 }

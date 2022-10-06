@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Oc\Controller\Backend;
+namespace Oc\Controller\App;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class CachesController
  *
- * @package Oc\Controller\Backend
+ * @package Oc\Controller\App
  */
 class CachesController extends AbstractController
 {
@@ -78,13 +78,7 @@ class CachesController extends AbstractController
      */
     public function search_by_cache_wp(string $wpID)
     : Response {
-        $fetchedCaches = [];
-
-        try {
-            $fetchedCaches = $this->cachesRepository->getCacheDetailsByWayPoint($wpID);
-        } catch (\Exception $e) {
-            //  tue was.. (status_not_found = true);
-        }
+        $fetchedCaches = $this->cachesRepository->search_by_cache_wp($wpID);
 
         return $this->render('backend/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]); //+ status_not_found + abfragen in twig, Z.B.
     }

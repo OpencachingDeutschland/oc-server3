@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Controller\App;
 
 use Exception;
-use Oc\Controller\Backend\MailerController;
+use Oc\Controller\Backend\MailerControllerBackend;
 use Oc\Entity\UserEntity;
 use Oc\Form\UserActivationForm;
 use Oc\Form\UserRegistrationForm;
@@ -24,11 +26,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  */
 class SecurityController extends AbstractController
 {
-    /** @var int */
-    public $authenticationUtils;
+    /** @var AuthenticationUtils */
+    public AuthenticationUtils $authenticationUtils;
 
     /** @var UserRepository */
-    public $userRepository;
+    public UserRepository $userRepository;
 
     /**
      * @param AuthenticationUtils $authenticationUtils
@@ -67,20 +69,21 @@ class SecurityController extends AbstractController
     /**
      * Manage requests to register a new user
      *
-     * @param MailerController $mailerController
+     * @param MailerControllerBackend $mailerController
      * @param Request $request
      * @param CountriesRepository $countriesRepository
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserPasswordHasherInterface $passwordEncoder
      * @param UserRepository $userRepository
      * @param UserRolesRepository $userRolesRepository
      *
      * @return Response
      * @throws RecordsNotFoundException
      * @throws TransportExceptionInterface
+     * @throws \Doctrine\DBAL\Exception
      * @Route("/register", name="security_register")
      */
     public function registerNewUser(
-        MailerController $mailerController,
+        MailerControllerBackend $mailerController,
         Request $request,
         CountriesRepository $countriesRepository,
         UserPasswordHasherInterface $passwordEncoder,

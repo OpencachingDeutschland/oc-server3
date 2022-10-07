@@ -1,4 +1,4 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'app/base.html.twig' %}
 
 {% block page_content %}
 
@@ -38,9 +38,9 @@
                                 <td>{{ cache.name }}</td>
                                 <td>{{ cache.cache_size.name }}</td>
                                 <td>{{ cache.difficulty | ocFilterDifficulty }}/{{ cache.terrain | ocFilterTerrain }}</td>
-                                <td><a href="{{ path('backend_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></td>
+                                <td><a href="{{ path('app_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></td>
                                 <td>
-                                    <a href="/backend/coordinate/{{ cache.latitude }}+{{ cache.longitude }}">{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
+                                    <a href="/coordinate/{{ cache.latitude }}+{{ cache.longitude }}">{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
                                 <td>{{ cache.wp_gc }}</td>
                                 <td>{{ cache.cache_status.name }}</td>
                                 <td>{% if cache.logpw == 1 %}
@@ -55,7 +55,7 @@
                                     {% endif %}</td>
                                 <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
                                 <td>{{ cache.country|default('?') }}</td>
-                                <td><a href="{{ path('backend_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a></td>
+                                <td><a href="{{ path('app_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a></td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -77,12 +77,12 @@
     <div class="alert alert-primary" role="alert">
         <h3><br/>Diese Cachedetails-Seite kann auch direkt aufgerufen werden mittels Wegpunkt-ID in der URL..</h3>
         Aufruf:<br/>
-        http://try.docker.team-opencaching.de/backend/cache/$WP_OC<br/>
+        http://try.docker.team-opencaching.de/cache/$WP_OC<br/>
         <small>
             <small>oder</small>
         </small>
         <br/>
-        http://try.docker.team-opencaching.de/backend/cache/$WP_GC<br/>
+        http://try.docker.team-opencaching.de/app/cache/$WP_GC<br/>
         <br/>
     </div>
 

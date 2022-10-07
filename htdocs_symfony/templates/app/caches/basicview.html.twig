@@ -1,4 +1,4 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'app/base.html.twig' %}
 
 {% block page_content %}
 
@@ -36,7 +36,7 @@
                             <td>{{ cache.username }}</td>
                             <td>
                                 <a class="btn btn-primary"
-                                   href="{{ path('backend_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">{{ 'Details' | trans }}</a>
+                                   href="{{ path('app_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">{{ 'Details' | trans }}</a>
                             </td>
                         </tr>
                     {% endfor %}

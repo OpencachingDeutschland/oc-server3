@@ -1,4 +1,4 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'app/base.html.twig' %}
 
 {% block page_content %}
     <div>
@@ -32,7 +32,7 @@
                             <td>{{ user.username }}</td>
                             <td>
                                 <a class="btn btn-primary"
-                                   href="{{ path('backend_user_by_id', { 'userID': user.user_id }) }}">{{ 'Details' | trans }}</a>
+                                   href="{{ path('app_user_by_id', { 'userID': user.user_id }) }}">{{ 'Details' | trans }}</a>
                             </td>
                         </tr>
                     {% endfor %}

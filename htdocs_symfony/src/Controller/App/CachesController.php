@@ -63,7 +63,7 @@ class CachesController extends AbstractController
         }
 
         return $this->render(
-            'backend/caches/basicview.html.twig', [
+            'app/caches/basicview.html.twig', [
                                                     'cachesForm' => $form->createView(),
                                                     'caches_by_searchfield' => $fetchedCaches
                                                 ]
@@ -80,6 +80,6 @@ class CachesController extends AbstractController
     : Response {
         $fetchedCaches = $this->cachesRepository->search_by_cache_wp($wpID);
 
-        return $this->render('backend/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]); //+ status_not_found + abfragen in twig, Z.B.
+        return $this->render('app/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]); //+ status_not_found + abfragen in twig, Z.B.
     }
 }

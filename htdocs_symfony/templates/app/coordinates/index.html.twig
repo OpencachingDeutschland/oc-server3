@@ -1,4 +1,4 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'app/base.html.twig' %}
 
 {% block page_content %}
 
@@ -139,9 +139,9 @@
     <div class="alert alert-primary" role="alert">
         <h3><br/>{{ 'You can access this page directly by adding latitude and longitude to the URL (in Decimal degree)' | trans }}:</h3>
         {{ 'Command' | trans }}:<br/>
-        http://try.docker.team-opencaching.de/backend/coordinate/$Latitude+$Longitude<br/>
-        http://try.docker.team-opencaching.de/backend/coordinate/10.98765+5.12345 (für N10° 59.259' E005° 07.407')<br/>
-        http://try.docker.team-opencaching.de/backend/coordinate/-10.98765+-5.12345 (für S10° 59.259' W005° 07.407')<br/>
+        http://try.docker.team-opencaching.de/coordinate/$Latitude+$Longitude<br/>
+        http://try.docker.team-opencaching.de/coordinate/10.98765+5.12345 (für N10° 59.259' E005° 07.407')<br/>
+        http://try.docker.team-opencaching.de/coordinate/-10.98765+-5.12345 (für S10° 59.259' W005° 07.407')<br/>
         <br/>
     </div>
 

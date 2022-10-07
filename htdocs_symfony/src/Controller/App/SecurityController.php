@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Oc\Controller\App;
 
 use Exception;
-use Oc\Controller\Backend\MailerControllerBackend;
 use Oc\Entity\UserEntity;
 use Oc\Form\UserActivationForm;
 use Oc\Form\UserRegistrationForm;
@@ -69,7 +68,7 @@ class SecurityController extends AbstractController
     /**
      * Manage requests to register a new user
      *
-     * @param MailerControllerBackend $mailerController
+     * @param MailerController $mailerController
      * @param Request $request
      * @param CountriesRepository $countriesRepository
      * @param UserPasswordHasherInterface $passwordEncoder
@@ -83,7 +82,7 @@ class SecurityController extends AbstractController
      * @Route("/register", name="security_register")
      */
     public function registerNewUser(
-        MailerControllerBackend $mailerController,
+        MailerController $mailerController,
         Request $request,
         CountriesRepository $countriesRepository,
         UserPasswordHasherInterface $passwordEncoder,
@@ -109,7 +108,7 @@ class SecurityController extends AbstractController
 
                 $userRolesRepository->grantRole($user->userId, 'ROLE_USER');
 
-                $mailerController->sendActivationEmail($user->username, $user->email, $user->activationCode);
+                $mailerController->mailerRepository->sendActivationEmail($user->username, $user->email, $user->activationCode);
             } catch (Exception $e) {
                 return $this->render('security/register.html.twig', [
                     'userRegistrationForm' => $userRegistrationForm->createView(),

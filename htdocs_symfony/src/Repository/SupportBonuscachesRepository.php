@@ -9,6 +9,7 @@ use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
 use Oc\Entity\SupportBonuscachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
+use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
@@ -57,6 +58,7 @@ class SupportBonuscachesRepository
      *
      * @return SupportBonuscachesEntity
      * @throws \Doctrine\DBAL\Exception
+     * @throws RecordNotFoundException
      */
     public function fetchOneBy(array $where = [])
     : SupportBonuscachesEntity {
@@ -76,7 +78,7 @@ class SupportBonuscachesRepository
         $result = $statement->fetchAssociative();
 
         if ($statement->rowCount() === 0) {
-            #throw new RecordNotFoundException('Record with given where clause not found');
+            throw new RecordNotFoundException('Record with given where clause not found');
         }
 
         return $this->getEntityFromDatabaseArray($result);

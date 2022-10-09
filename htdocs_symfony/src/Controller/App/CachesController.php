@@ -43,8 +43,8 @@ class CachesController extends AbstractController
      * @throws Exception
      * @Route("/caches", name="caches_index")
      */
-    public function cachesController_index(Request $request)
-    : Response {
+    public function cachesController_index(Request $request): Response
+    {
         $fetchedCaches = '';
 
         // create input field for caches_by_searchfield
@@ -63,10 +63,10 @@ class CachesController extends AbstractController
         }
 
         return $this->render(
-            'app/caches/basicview.html.twig', [
-                                                    'cachesForm' => $form->createView(),
-                                                    'caches_by_searchfield' => $fetchedCaches
-                                                ]
+                'app/caches/basicview.html.twig', [
+                        'cachesForm' => $form->createView(),
+                        'caches_by_searchfield' => $fetchedCaches
+                ]
         );
     }
 
@@ -76,10 +76,11 @@ class CachesController extends AbstractController
      * @return Response
      * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
      */
-    public function search_by_cache_wp(string $wpID)
-    : Response {
+    public function search_by_cache_wp(string $wpID): Response
+    {
         $fetchedCaches = $this->cachesRepository->search_by_cache_wp($wpID);
 
-        return $this->render('app/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]); //+ status_not_found + abfragen in twig, Z.B.
+        return $this->render('app/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]
+        ); //+ status_not_found + abfragen in twig, Z.B.
     }
 }

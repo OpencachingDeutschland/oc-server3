@@ -38,20 +38,19 @@ class OCOnly81Controller extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function ocOnly81Controller_index()
-    : Response
+    public function ocOnly81Controller_index(): Response
     {
         $userData = $this->ocOnly81Repository->ocOnly81_get_user_counts();
         $matrixData = $this->ocOnly81Repository->ocOnly81_get_matrixData();
 
         return $this->render(
-            'app/oconly81/index.html.twig', [
-                                                  'ocOnly81_user' => $userData,
-                                                  'ocOnly81_matrix' => $matrixData[0],
-                                                  'ocOnly81_dsum' => $matrixData[1],
-                                                  'ocOnly81_tsum' => $matrixData[2],
-                                                  'ocOnly81_overall_sum' => $matrixData[3]
-                                              ]
+                'app/oconly81/index.html.twig', [
+                        'ocOnly81_user' => $userData,
+                        'ocOnly81_matrix' => $matrixData[0],
+                        'ocOnly81_dsum' => $matrixData[1],
+                        'ocOnly81_tsum' => $matrixData[2],
+                        'ocOnly81_overall_sum' => $matrixData[3]
+                ]
         );
     }
 }

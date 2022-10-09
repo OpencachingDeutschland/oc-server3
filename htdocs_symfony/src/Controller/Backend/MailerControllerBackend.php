@@ -24,8 +24,8 @@ class MailerControllerBackend extends AbstractController
     public MailerRepository $mailerRepository;
 
     /**
-     * @param LoggerInterface $logger
-     * @param MailerInterface $mailer
+     * @param LoggerInterface  $logger
+     * @param MailerInterface  $mailer
      * @param MailerRepository $mailerRepository
      */
     public function __construct(LoggerInterface $logger, MailerInterface $mailer, MailerRepository $mailerRepository)

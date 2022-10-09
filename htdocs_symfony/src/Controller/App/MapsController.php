@@ -37,15 +37,15 @@ class MapsController extends AbstractController
      *
      * @Route("/maps", name="maps_index")
      */
-    public function mapsController_index(Request $request)
-    : Response {
+    public function mapsController_index(Request $request): Response
+    {
         return $this->redirectToRoute('backend_map_coords');
     }
 
     /**
      * @param string $lat
      * @param string $lon
-     * @param bool $centerView
+     * @param bool   $centerView
      *
      * @return Response
      * @throws RecordsNotFoundException
@@ -53,17 +53,17 @@ class MapsController extends AbstractController
      * @throws RecordNotFoundException
      * @Route("/mapS/{lat}+{lon}", name="map_show")
      */
-    public function showMap(string $lat = '', string $lon = '', bool $centerView = false)
-    : Response {
+    public function showMap(string $lat = '', string $lon = '', bool $centerView = false): Response
+    {
         $centerPoint = $this->mapsRepository->determineMapCenterPoint($lat, $lon, $centerView);
 
         return $this->render(
-            'app/maps/index.html.twig', [
-                                              'mapCenterViewLat' => $centerPoint[0],
-                                              'mapCenterViewLon' => $centerPoint[1],
-                                              'mapZoom' => '6',
-                                              'mapWP' => $centerPoint[2]
-                                          ]
+                'app/maps/index.html.twig', [
+                        'mapCenterViewLat' => $centerPoint[0],
+                        'mapCenterViewLon' => $centerPoint[1],
+                        'mapZoom' => '6',
+                        'mapWP' => $centerPoint[2]
+                ]
         );
     }
 }

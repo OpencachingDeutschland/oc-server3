@@ -16,8 +16,7 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="index_index")
      */
-    public function index()
-    : Response
+    public function index(): Response
     {
         return $this->render('app/index/index.html.twig');
     }

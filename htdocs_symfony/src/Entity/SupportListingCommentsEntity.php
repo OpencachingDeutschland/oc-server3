@@ -6,14 +6,9 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportListingCommentsEntity
- *
- * @package Oc\Entity
- */
 class SupportListingCommentsEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $wpOc;
 
@@ -33,6 +28,6 @@ class SupportListingCommentsEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

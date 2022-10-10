@@ -6,16 +6,8 @@ namespace Oc\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * Class OCOnly81ControllerBackend
- *
- * @package Oc\Controller\Backend
- */
 class OCOnly81ControllerBackend extends AbstractController
 {
-    /**
-     * OCOnly81ControllerBackend constructor.
-     */
     public function __construct()
     {
     }

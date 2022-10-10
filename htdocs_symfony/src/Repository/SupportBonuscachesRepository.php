@@ -165,7 +165,7 @@ class SupportBonuscachesRepository
                 ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->id = 0;
 
         return $entity;
     }

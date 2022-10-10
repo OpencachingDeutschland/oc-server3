@@ -6,14 +6,9 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportUserRelationsEntity
- *
- * @package Oc\Entity
- */
 class SupportUserRelationsEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public int $ocUserId;
 
@@ -29,6 +24,6 @@ class SupportUserRelationsEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Security\Voter;
 
 use Oc\Entity\UserEntity;
@@ -26,7 +28,7 @@ class UserVoter extends Voter
     protected function supports($attribute, $subject): bool
     {
         return in_array($attribute, ['CAN_VIEW'])
-            && ($subject instanceof UserEntity || $subject === UserEntity::class);
+                && ($subject instanceof UserEntity || $subject === UserEntity::class);
     }
 
     /**
@@ -36,7 +38,7 @@ class UserVoter extends Voter
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token) : bool
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
@@ -45,18 +47,18 @@ class UserVoter extends Voter
         }
 
         $grantingRoles = [
-            'ROLE_SUPER_ADMIN',
-            'ROLE_ADMIN',
-            'ROLE_SUPPORT_TRAINEE',
-            'ROLE_SUPPORT',
-            'ROLE_SUPPORT_MAINTAIN',
-            'ROLE_SUPPORT_HEAD',
-            'ROLE_SOCIAL_TRAINEE',
-            'ROLE_SOCIAL',
-            'ROLE_SOCIAL_HEAD',
-            'ROLE_DEVELOPER_CONTRIBUTOR',
-            'ROLE_DEVELOPER_CORE',
-            'ROLE_DEVELOPER_HEAD',
+                'ROLE_SUPER_ADMIN',
+                'ROLE_ADMIN',
+                'ROLE_SUPPORT_TRAINEE',
+                'ROLE_SUPPORT',
+                'ROLE_SUPPORT_MAINTAIN',
+                'ROLE_SUPPORT_HEAD',
+                'ROLE_SOCIAL_TRAINEE',
+                'ROLE_SOCIAL',
+                'ROLE_SOCIAL_HEAD',
+                'ROLE_DEVELOPER_CONTRIBUTOR',
+                'ROLE_DEVELOPER_CORE',
+                'ROLE_DEVELOPER_HEAD',
         ];
 
         foreach ($grantingRoles as $grantingRole) {

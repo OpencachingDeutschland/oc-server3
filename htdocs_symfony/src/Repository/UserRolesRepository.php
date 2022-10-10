@@ -173,7 +173,7 @@ class UserRolesRepository
                 ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->id = 0;
 
         return $entity;
     }
@@ -220,8 +220,8 @@ class UserRolesRepository
     {
         $entity = new UserRolesEntity();
         $entity->id = (int)$data['id'];
-        $entity->userId = (string)$data['user_id'];
-        $entity->roleId = (string)$data['role_id'];
+        $entity->userId = (int)$data['user_id'];
+        $entity->roleId = (int)$data['role_id'];
 
         return $entity;
     }

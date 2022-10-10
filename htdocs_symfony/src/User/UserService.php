@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\User;
 
 use Doctrine\DBAL\Exception;

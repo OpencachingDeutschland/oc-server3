@@ -1,18 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCacheStatusModifiedEntity
- *
- * @package Oc\Entity
- */
 class GeoCacheStatusModifiedEntity extends AbstractEntity
 {
-    public int $cacheId;
+    public int $cacheId = 0;
 
     public DateTime $dateModified;
 
@@ -30,6 +27,6 @@ class GeoCacheStatusModifiedEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->cacheId === null;
+        return $this->cacheId === 0;
     }
 }

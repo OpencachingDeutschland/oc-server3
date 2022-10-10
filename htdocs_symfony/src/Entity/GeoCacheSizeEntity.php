@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
 class GeoCacheSizeEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $name;
 
@@ -20,6 +22,6 @@ class GeoCacheSizeEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

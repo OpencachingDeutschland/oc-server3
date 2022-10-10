@@ -173,7 +173,7 @@ class CacheAdoptionsRepository
                 ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }

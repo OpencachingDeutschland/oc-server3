@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
@@ -175,7 +176,7 @@ class SupportListingInfosRepository
                 ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->id = 0;
 
         return $entity;
     }
@@ -204,7 +205,7 @@ class SupportListingInfosRepository
 
     /**
      * @throws RecordNotFoundException
-     * @throws Exception
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): SupportListingInfosEntity
     {
@@ -223,7 +224,7 @@ class SupportListingInfosRepository
         $entity->nodeListingCoordinatesLat = (double)$data['node_listing_coordinates_lat'];
         $entity->nodeListingAvailable = (bool)$data['node_listing_available'];
         $entity->nodeListingArchived = (bool)$data['node_listing_archived'];
-        $entity->lastModified = date('Y-m-d H:i:s');
+        $entity->lastModified = new DateTime(date('Y-m-d H:i:s'));
         $entity->importStatus = (int)$data['importstatus'];
         $entity->node = $this->nodesRepository->fetchOneBy(['id' => $entity->nodeId]);
 

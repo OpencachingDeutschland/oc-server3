@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Form\RolesSearchUser;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
@@ -20,63 +19,42 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RolesControllerBackend
- *
- * @package Oc\Controller\Backend
  * @Security("is_granted('ROLE_TEAM')")
  */
 class RolesControllerBackend extends AbstractController
 {
-    /** @var Connection */
-    private Connection $connection;
-
-    /** @var SecurityRolesRepository */
     private SecurityRolesRepository $securityRolesRepository;
 
-    /** @var UserRepository */
     private UserRepository $userRepository;
 
-    /** @var UserRolesRepository */
     private UserRolesRepository $userRolesRepository;
 
-    /**
-     * @param Connection $connection
-     * @param SecurityRolesRepository $securityRolesRepository
-     * @param UserRepository $userRepository
-     * @param UserRolesRepository $userRolesRepository
-     */
     public function __construct(
-        Connection $connection,
-        SecurityRolesRepository $securityRolesRepository,
-        UserRepository $userRepository,
-        UserRolesRepository $userRolesRepository
+            SecurityRolesRepository $securityRolesRepository,
+            UserRepository $userRepository,
+            UserRolesRepository $userRolesRepository
     ) {
-        $this->connection = $connection;
         $this->securityRolesRepository = $securityRolesRepository;
         $this->userRepository = $userRepository;
         $this->userRolesRepository = $userRolesRepository;
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
      * @throws Exception
      * @throws RecordsNotFoundException
      * @Route("/roles", name="roles_index")
      * @Security("is_granted('ROLE_TEAM')")
      */
-    public function rolesController_index(Request $request)
-    : Response {
+    public function rolesController_index(Request $request): Response
+    {
         $allRoles = $this->securityRolesRepository->fetchAll();
 
         return $this->render(
-            'backend/roles/index.html.twig', ['allRoles' => $allRoles]
+                'backend/roles/index.html.twig', ['allRoles' => $allRoles]
         );
     }
 
     /**
-     * @return Response
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
@@ -85,8 +63,7 @@ class RolesControllerBackend extends AbstractController
      *
      * Get all users (and their roles) who are at least the given ROLE_
      */
-    public function getTeamOverview()
-    : Response
+    public function getTeamOverview(): Response
     {
         $teamMembersAndRoles = $this->userRolesRepository->getTeamMembersAndRoles('ROLE_TEAM');
         $roleNames = $this->securityRolesRepository->fetchAll();
@@ -99,22 +76,19 @@ class RolesControllerBackend extends AbstractController
         }
 
         return $this->render(
-            'backend/roles/team.roles.html.twig', ['teamAndRoles' => $teamMembersAndRoles, 'roleNames' => $roleNames]
+                'backend/roles/team.roles.html.twig', ['teamAndRoles' => $teamMembersAndRoles, 'roleNames' => $roleNames]
         );
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @Route("/roles/search", name="roles_search")
      * @Security("is_granted('ROLE_TEAM')")
      */
-    public function teamRolesAssignmentUserSearch(Request $request)
-    : Response {
+    public function teamRolesAssignmentUserSearch(Request $request): Response
+    {
         $form = $this->createForm(RolesSearchUser::class);
         $roleNames = $this->securityRolesRepository->fetchAll();
         $fetchedUser = [];
@@ -124,31 +98,27 @@ class RolesControllerBackend extends AbstractController
             $inputData = $form->getData();
             $userId = $inputData['content_user_searchfield'];
 
-            $fetchedUser = $this->userRepository->fetchOneById((int) $userId);
+            $fetchedUser = $this->userRepository->fetchOneById((int)$userId);
         }
 
         return $this->render(
-            'backend/roles/team.assignment.html.twig', [
-                                                         'rolesUserSearchForm' => $form->createView(),
-                                                         'user_account_details' => $fetchedUser,
-                                                         'roleNames' => $roleNames
-                                                     ]
+                'backend/roles/team.assignment.html.twig', [
+                        'rolesUserSearchForm' => $form->createView(),
+                        'user_account_details' => $fetchedUser,
+                        'roleNames' => $roleNames
+                ]
         );
     }
 
     /**
-     * @param int $userId
-     * @param string $role
-     *
-     * @return Response
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @Route("/roles/removeRole/{userId}&{role}", name="roles_remove_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
-    public function teamRolesRemoveRole(int $userId, string $role)
-    : Response {
+    public function teamRolesRemoveRole(int $userId, string $role): Response
+    {
         $form = $this->createForm(RolesSearchUser::class);
         $roleNames = $this->securityRolesRepository->fetchAll();
         $neededRole = $this->userRolesRepository->getNeededRole($role);
@@ -160,19 +130,15 @@ class RolesControllerBackend extends AbstractController
         $fetchedUser = $this->userRepository->fetchOneById($userId);
 
         return $this->render(
-            'backend/roles/team.assignment.html.twig', [
-                                                         'rolesUserSearchForm' => $form->createView(),
-                                                         'user_account_details' => $fetchedUser,
-                                                         'roleNames' => $roleNames
-                                                     ]
+                'backend/roles/team.assignment.html.twig', [
+                        'rolesUserSearchForm' => $form->createView(),
+                        'user_account_details' => $fetchedUser,
+                        'roleNames' => $roleNames
+                ]
         );
     }
 
     /**
-     * @param int $userId
-     * @param string $role
-     *
-     * @return Response
      * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
@@ -180,8 +146,8 @@ class RolesControllerBackend extends AbstractController
      * @Route("/roles/promoteRole/{userId}&{role}", name="roles_promote_role")
      * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
-    public function teamRolesPromoteRole(int $userId, string $role)
-    : Response {
+    public function teamRolesPromoteRole(int $userId, string $role): Response
+    {
         $form = $this->createForm(RolesSearchUser::class);
         $roleNames = $this->securityRolesRepository->fetchAll();
         $neededRole = $this->userRolesRepository->getNeededRole($role);
@@ -193,11 +159,11 @@ class RolesControllerBackend extends AbstractController
         $fetchedUser = $this->userRepository->fetchOneById($userId);
 
         return $this->render(
-            'backend/roles/team.assignment.html.twig', [
-                                                         'rolesUserSearchForm' => $form->createView(),
-                                                         'user_account_details' => $fetchedUser,
-                                                         'roleNames' => $roleNames
-                                                     ]
+                'backend/roles/team.assignment.html.twig', [
+                        'rolesUserSearchForm' => $form->createView(),
+                        'user_account_details' => $fetchedUser,
+                        'roleNames' => $roleNames
+                ]
         );
     }
 }

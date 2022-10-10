@@ -1,18 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCacheAdoptionsEntity
- *
- * @package Oc\Entity
- */
 class GeoCacheAdoptionsEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public int $cacheId;
 
@@ -28,6 +25,6 @@ class GeoCacheAdoptionsEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

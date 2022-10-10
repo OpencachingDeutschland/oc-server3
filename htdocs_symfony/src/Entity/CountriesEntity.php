@@ -8,7 +8,7 @@ use Oc\Repository\AbstractEntity;
 
 class CountriesEntity extends AbstractEntity
 {
-    public string $short;
+    public string $short = '';
 
     public string $name;
 
@@ -32,6 +32,6 @@ class CountriesEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->short === null;
+        return $this->short === '';
     }
 }

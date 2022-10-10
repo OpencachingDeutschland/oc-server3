@@ -10,23 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class OCOnly81Controller
- *
- * @package Oc\Controller\App
- */
 class OCOnly81Controller extends AbstractController
 {
-    /**
-     * @var OCOnly81Repository
-     */
     private OCOnly81Repository $ocOnly81Repository;
 
-    /**
-     * OCOnly81Controller constructor.
-     *
-     * @param OCOnly81Repository $ocOnly81Repository
-     */
     public function __construct(OCOnly81Repository $ocOnly81Repository)
     {
         $this->ocOnly81Repository = $ocOnly81Repository;
@@ -35,7 +22,6 @@ class OCOnly81Controller extends AbstractController
     /**
      * @Route("/oconly81", name="oconly81_index")
      *
-     * @return Response
      * @throws Exception
      */
     public function ocOnly81Controller_index(): Response

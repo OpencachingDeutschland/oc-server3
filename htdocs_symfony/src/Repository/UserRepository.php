@@ -175,8 +175,6 @@ class UserRepository
             throw new RecordNotPersistedException('The entity does not exist.');
         }
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-        //        dd($databaseArray);
-        //        die();
 
         $this->connection->update(
                 self::TABLE,
@@ -207,7 +205,7 @@ class UserRepository
                 ['user_id' => $entity->userId]
         );
 
-        $entity->userId = null;
+        $entity->userId = 0;
 
         return $entity;
     }
@@ -268,29 +266,30 @@ class UserRepository
      * Prepares database array from properties.
      *
      * @throws Exception
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): UserEntity
     {
         $entity = new UserEntity();
         $entity->userId = (int)$data['user_id'];
-        $entity->dateCreated = (string)$data['date_created'];
-        $entity->lastModified = (string)$data['last_modified'];
-        $entity->lastLogin = (string)$data['last_login'];
+        $entity->dateCreated = $data['date_created'];
+        $entity->lastModified = $data['last_modified'];
+        $entity->lastLogin = $data['last_login'];
         $entity->username = $data['username'];
-        $entity->password = $data['password'];
-        $entity->email = $data['email'];
+        $entity->password = (string)$data['password'];
+        $entity->email = (string)$data['email'];
         $entity->emailProblems = (bool)$data['email_problems'];
         $entity->latitude = (double)$data['latitude'];
         $entity->longitude = (double)$data['longitude'];
         $entity->isActive = (bool)$data['is_active_flag'];
         $entity->firstname = $data['first_name'];
         $entity->lastname = $data['last_name'];
-        $entity->country = $data['country'];
-        $entity->permanentLoginFlag = $data['permanent_login_flag'];
+        $entity->country = (string)$data['country'];
+        $entity->permanentLoginFlag = (bool)$data['permanent_login_flag'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language'] ?? 'en');
         $entity->description = $data['description'];
-        $entity->gdprDeletion = $data['gdpr_deletion'];
+        $entity->gdprDeletion = (bool)$data['gdpr_deletion'];
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 
         return $entity;

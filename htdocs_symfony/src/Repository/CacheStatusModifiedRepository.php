@@ -181,7 +181,7 @@ class CacheStatusModifiedRepository
                 ['cache_id' => $entity->cacheId]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }

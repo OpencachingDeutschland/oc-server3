@@ -13,23 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class CachesController
- *
- * @package Oc\Controller\App
- */
 class CachesController extends AbstractController
 {
     private Connection $connection;
 
     private CachesRepository $cachesRepository;
 
-    /**
-     * CachesController constructor.
-     *
-     * @param Connection $connection
-     * @param CachesRepository $cachesRepository
-     */
     public function __construct(Connection $connection, CachesRepository $cachesRepository)
     {
         $this->connection = $connection;
@@ -37,9 +26,6 @@ class CachesController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
      * @throws Exception
      * @Route("/caches", name="caches_index")
      */
@@ -71,9 +57,6 @@ class CachesController extends AbstractController
     }
 
     /**
-     * @param string $wpID
-     *
-     * @return Response
      * @Route("/cache/{wpID}", name="cache_by_wp_oc_gc")
      */
     public function search_by_cache_wp(string $wpID): Response

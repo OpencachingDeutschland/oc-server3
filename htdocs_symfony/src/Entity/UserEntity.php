@@ -1,25 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
-use DateTime;
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class UserEntity
- *
- * @package Oc\Entity
- */
 class UserEntity extends AbstractEntity implements UserInterface
 {
-    public int $userId;
+    public int $userId = 0;
 
-    public DateTime $dateCreated;
+    public string $dateCreated;
 
-    public DateTime $lastModified;
+    public string $lastModified;
 
-    public DateTime $lastLogin;
+    public string $lastLogin;
 
     public string $username;
 
@@ -27,7 +23,7 @@ class UserEntity extends AbstractEntity implements UserInterface
 
     public string $email;
 
-    public int $emailProblems = 0;
+    public bool $emailProblems = false;
 
     public float $latitude = 0;
 
@@ -55,7 +51,7 @@ class UserEntity extends AbstractEntity implements UserInterface
 
     public function isNew(): bool
     {
-        return $this->userId === null;
+        return $this->userId === 0;
     }
 
     public function getRoles(): array

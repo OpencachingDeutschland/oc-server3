@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheLogsArchivedEntity;
@@ -171,7 +170,7 @@ class CacheLogsArchivedRepository
                 ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -215,17 +214,17 @@ class CacheLogsArchivedRepository
         $entity->id = (int)$data['id'];
         $entity->uuid = (string)$data['uuid'];
         $entity->node = (int)$data['node'];
-        $entity->dateCreated = new DateTime($data['date_created']);
-        $entity->entryLastModified = new DateTime($data['entry_last_modified']);
+        $entity->dateCreated = $data['date_created'];
+        $entity->entryLastModified = $data['entry_last_modified'];
         $entity->lastModified = date('Y-m-d H:i:s');
         $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
-        $entity->logLastModified = new DateTime($data['log_last_modified']);
+        $entity->logLastModified = $data['log_last_modified'];
         $entity->cacheId = (int)$data['cache_id'];
         $entity->userId = (int)$data['user_id'];
         $entity->type = (int)$data['type'];
         $entity->ocTeamComment = (int)$data['oc_team_comment'];
-        $entity->date = new DateTime($data['date']);
-        $entity->orderDate = new DateTime($data['order_date']);
+        $entity->date = $data['date'];
+        $entity->orderDate = $data['order_date'];
         $entity->needsMaintenance = (int)$data['needs_maintenance'];
         $entity->listingOutdated = (int)$data['listing_outdated'];
         $entity->text = (string)$data['text'];
@@ -233,7 +232,7 @@ class CacheLogsArchivedRepository
         $entity->textHtmledit = (int)$data['text_htmledit'];
         $entity->ownerNotified = (int)$data['owner_notified'];
         $entity->picture = $data['picture'];
-        $entity->deletionDate = new DateTime($data['deletion_date']);
+        $entity->deletionDate = $data['deletion_date'];
         $entity->deletedBy = (int)$data['deleted_by'];
         $entity->restoredBy = (int)$data['restored_by'];
 

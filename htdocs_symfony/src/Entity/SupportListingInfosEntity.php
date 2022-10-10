@@ -7,14 +7,9 @@ namespace Oc\Entity;
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportListingInfosEntity
- *
- * @package Oc\Entity
- */
 class SupportListingInfosEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $wpOc;
 
@@ -50,6 +45,6 @@ class SupportListingInfosEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

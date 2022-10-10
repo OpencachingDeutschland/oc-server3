@@ -187,7 +187,7 @@ class CacheReportsRepository
                 ['id' => $entity->id]
         );
 
-        $entity->cacheid = null;
+        $entity->cacheid = 0;
 
         return $entity;
     }

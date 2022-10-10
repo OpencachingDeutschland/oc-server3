@@ -119,7 +119,7 @@
                         <tr>
                             <td>{{ change.dateCreated | date('d.m.Y') }}</td>
                             <td>{{ ocFilterCoordinatesDegMin(change.latitude, change.longitude) }}</td>
-                            <td>{% if change.user %}{{ change.user.username }}{% endif %}</td>
+                            <td>{% if change.user is defined %}{{ change.user.username }}{% endif %}</td>
                         </tr>
                     {% endfor %}
                 {% else %}

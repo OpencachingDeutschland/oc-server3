@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
@@ -7,21 +9,21 @@ use Oc\Repository\AbstractEntity;
 
 class GeoCacheLogsArchivedEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $uuid;
 
     public int $node;
 
-    public DateTime $dateCreated;
+    public string $dateCreated;
 
-    public DateTime $entryLastModified;
+    public string $entryLastModified;
 
-    public DateTime $lastModified;
+    public string $lastModified;
 
     public string $okapiSyncbase;
 
-    public DateTime $logLastModified;
+    public string $logLastModified;
 
     public int $cacheId;
 
@@ -31,9 +33,9 @@ class GeoCacheLogsArchivedEntity extends AbstractEntity
 
     public int $ocTeamComment;
 
-    public DateTime $date;
+    public string $date;
 
-    public DateTime $orderDate;
+    public string $orderDate;
 
     public int $needsMaintenance;
 
@@ -49,7 +51,7 @@ class GeoCacheLogsArchivedEntity extends AbstractEntity
 
     public int $picture;
 
-    public DateTime $deletionDate;
+    public string $deletionDate;
 
     public int $deletedBy;
 
@@ -57,6 +59,6 @@ class GeoCacheLogsArchivedEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

@@ -1,34 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCachesEntity
- *
- * @package Oc\Entity
- */
 class GeoCachesEntity extends AbstractEntity
 {
-    public int $cacheId;
+    public int $cacheId = 0;
 
     public string $uuid;
 
     public int $node;
 
-    public DateTime $dateCreated;
+    public string $dateCreated;
 
     public int $isPublishdate;
 
-    public DateTime $lastModified;
+    public string $lastModified;
 
     public string $okapiSyncbase;
 
-    public DateTime $listingLastModified;
+    public string $listingLastModified;
 
-    public DateTime $metaLastModified;
+    public string $metaLastModified;
 
     public int $userId;
 
@@ -44,7 +41,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public string $country;
 
-    public DateTime $dateHidden;
+    public string $dateHidden;
 
     public int $size;
 
@@ -70,7 +67,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public string $defaultDesclang;
 
-    public DateTime $dateActivate;
+    public string $dateActivate;
 
     public int $needNpaRecalc;
 
@@ -82,7 +79,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public int $listingOutdated;
 
-    public DateTime $flagsLastModified;
+    public string $flagsLastModified;
 
     public UserEntity $user;
 
@@ -94,7 +91,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->cacheId === null;
+        return $this->cacheId === 0;
     }
 
     public function isActiveAndFindable(): bool

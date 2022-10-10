@@ -174,7 +174,7 @@ class CacheCoordinatesRepository
                 ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -202,8 +202,8 @@ class CacheCoordinatesRepository
         $entity->id = (int)$data['id'];
         $entity->dateCreated = new DateTime($data['date_created']);
         $entity->cacheId = (int)$data['cache_id'];
-        $entity->longitude = $data['longitude'];
-        $entity->latitude = $data['latitude'];
+        $entity->longitude = (float)$data['longitude'];
+        $entity->latitude = (float)$data['latitude'];
         $entity->restoredBy = (int)$data['restored_by'];
         if ($entity->restoredBy != 0) {
             $entity->user = $this->userRepository->fetchOneById($entity->restoredBy);

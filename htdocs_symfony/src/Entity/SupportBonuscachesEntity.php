@@ -6,14 +6,9 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportBonuscachesEntity
- *
- * @package Oc\Entity
- */
 class SupportBonuscachesEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $wpOc;
 
@@ -30,6 +25,6 @@ class SupportBonuscachesEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

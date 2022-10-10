@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCachesEntity;
@@ -180,7 +179,7 @@ class CachesRepository
 
         $this->connection->delete(self::TABLE, ['cache_id' => $entity->cacheId]);
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -208,7 +207,7 @@ class CachesRepository
         if ($statement->rowCount() === 0) {
             throw new RecordNotFoundException('Record with given where clause not found');
         } else {
-            return $result['cache_id'];
+            return (int)$result['cache_id'];
         }
     }
 
@@ -270,40 +269,40 @@ class CachesRepository
         $entity->cacheId = (int)$data['cache_id'];
         $entity->uuid = (string)$data['uuid'];
         $entity->node = (int)$data['node'];
-        $entity->dateCreated = new DateTime($data['date_created']);
+        $entity->dateCreated = $data['date_created'];
         $entity->isPublishdate = (int)$data['is_publishdate'];
         $entity->lastModified = date('Y-m-d H:i:s');
         $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
-        $entity->listingLastModified = new DateTime($data['listing_last_modified']);
-        $entity->metaLastModified = new DateTime($data['meta_last_modified']);
+        $entity->listingLastModified = $data['listing_last_modified'];
+        $entity->metaLastModified = $data['meta_last_modified'];
         $entity->userId = (int)$data['user_id'];
         $entity->name = (string)$data['name'];
-        $entity->longitude = $data['longitude'];
-        $entity->latitude = $data['latitude'];
+        $entity->longitude = (float)$data['longitude'];
+        $entity->latitude = (float)$data['latitude'];
         $entity->type = (int)$data['type'];
         $entity->status = (int)$data['status'];
         $entity->country = (string)$data['country'];
-        $entity->dateHidden = new DateTime($data['date_hidden']);
+        $entity->dateHidden = $data['date_hidden'];
         $entity->size = (int)$data['size'];
         $entity->difficulty = (int)$data['difficulty'];
         $entity->terrain = (int)$data['terrain'];
         //        $entity->logpw = (string) $data['logpw'];
         $entity->logpw = ($data['logpw'] == '') ? '' : '1';
-        $entity->searchTime = $data['search_time'];
-        $entity->wayLength = $data['way_length'];
+        $entity->searchTime = (float)$data['search_time'];
+        $entity->wayLength = (float)$data['way_length'];
         $entity->wpGc = (string)$data['wp_gc'];
         $entity->wpGcMaintained = (string)$data['wp_gc_maintained'];
         $entity->wpNc = (string)$data['wp_nc'];
         $entity->wpOc = (string)$data['wp_oc'];
         $entity->descLanguages = (string)$data['desc_languages'];
         $entity->defaultDesclang = (string)$data['default_desclang'];
-        $entity->dateActivate = new DateTime($data['date_activate'] ?? '');
+        $entity->dateActivate = $data['date_activate'] ?? '';
         $entity->needNpaRecalc = (int)$data['need_npa_recalc'];
         $entity->showCachelists = (int)$data['show_cachelists'];
         $entity->protectOldCoords = (int)$data['protect_old_coords'];
         $entity->needsMaintenance = (int)$data['needs_maintenance'];
         $entity->listingOutdated = (int)$data['listing_outdated'];
-        $entity->flagsLastModified = new DateTime($data['flags_last_modified']);
+        $entity->flagsLastModified = $data['flags_last_modified'];
         $entity->cacheSize = $this->cacheSizeRepository->fetchOneBy(['id' => $entity->size]);
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
         $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);

@@ -6,14 +6,9 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class NodesEntity
- *
- * @package Oc\Entity
- */
 class NodesEntity extends AbstractEntity
 {
-    public int $id;
+    public int $id = 0;
 
     public string $name;
 
@@ -23,6 +18,6 @@ class NodesEntity extends AbstractEntity
 
     public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

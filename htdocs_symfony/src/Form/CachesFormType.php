@@ -12,21 +12,21 @@ class CachesFormType extends AbstractType
     {
         // see: https://symfonycasts.com/screencast/symfony-forms/form-type-class
         $builder
-            ->add(
-                'content_searchfield', null, [
-                                                'attr' => [
-                                                    'placeholder' => 'OC / GC / Name / Owner. Platzhalter: %%%',
-                                                    'autofocus' => 'autofocus',
-                                                    'size' => '10%',
-                                                    'minlength' => '3',
-                                                    'maxlength' => '100',
-                                                    'style' => 'width: 300px;'
-                                                ],
-                                                'disabled' => false,
-                                                'label' => false,
-                                                'trim' => true
-                                            ]
-            )
-            ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
+                ->add(
+                        'content_searchfield', null, [
+                                'attr' => [
+                                        'placeholder' => 'OC / GC / Name / Owner. Platzhalter: %%%',
+                                        'autofocus' => 'autofocus',
+                                        'size' => '10%',
+                                        'minlength' => '3',
+                                        'maxlength' => '100',
+                                        'style' => 'width: 300px;'
+                                ],
+                                'disabled' => false,
+                                'label' => false,
+                                'trim' => true
+                        ]
+                )
+                ->add('Suchen', SubmitType::class, ['attr' => ['class' => 'btn btn-primary']]);
     }
 }

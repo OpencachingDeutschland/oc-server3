@@ -6,34 +6,23 @@ use Oc\Repository\AbstractEntity;
 
 class GeoCacheStatusEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var int */
-    public $transId;
+    public int $transId;
 
-    /** @var string */
-    public $de;
+    public string $de;
 
-    /** @var string */
-    public $en;
+    public string $en;
 
-    /** @var int */
-    public $allowUserView;
+    public int $allowUserView;
 
-    /** @var int */
-    public $allowOwnerEditStatus;
+    public int $allowOwnerEditStatus;
 
-    /** @var int */
-    public $allowUserLog;
+    public int $allowUserLog;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

@@ -13,30 +13,19 @@ use Oc\Repository\AbstractEntity;
  */
 class UserRolesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var int */
-    public $roleId;
+    public int $roleId;
 
-    /**
-     * @param int $userId
-     * @param int $roleId
-     */
     public function __construct(int $userId = 0, int $roleId = 0)
     {
         $this->userId = $userId;
         $this->roleId = $roleId;
     }
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

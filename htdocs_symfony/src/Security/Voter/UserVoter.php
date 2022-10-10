@@ -8,15 +8,9 @@ use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- *
- */
 class UserVoter extends Voter
 {
-    /**
-     * @var AccessDecisionManagerInterface
-     */
-    private $accessDecisionManager;
+    private AccessDecisionManagerInterface $accessDecisionManager;
 
     public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
     {
@@ -36,8 +30,8 @@ class UserVoter extends Voter
     }
 
     /**
-     * @param $attribute
-     * @param $subject
+     * @param                $attribute
+     * @param                $subject
      * @param TokenInterface $token
      *
      * @return bool

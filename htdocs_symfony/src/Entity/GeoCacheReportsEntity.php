@@ -7,55 +7,37 @@ use Oc\Repository\AbstractEntity;
 
 class GeoCacheReportsEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var DateTime */
-    public $dateCreated;
+    public DateTime $dateCreated;
 
-    /** @var int */
-    public $cacheid;
+    public int $cacheid;
 
-    /** @var int */
-    public $userid;
+    public int $userid;
 
-    /** @var int */
-    public $reason;
+    public int $reason;
 
-    /** @var string */
-    public $note;
+    public string $note;
 
-    /** @var int */
-    public $status;
+    public int $status;
 
-    /** @var int */
-    public $adminid;
+    public int $adminid;
 
-    /** @var string */
-    public $lastmodified;
+    public string $lastmodified;
 
-    /** @var string */
-    public $comment;
+    public string $comment;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /** @var UserEntity */
-    public $admin;
+    public UserEntity $admin;
 
-    /** @var GeoCachesEntity */
-    public $cache;
+    public GeoCachesEntity $cache;
 
-    /** @var GeoCacheReportReasonsEntity */
-    public $reportReason;
+    public GeoCacheReportReasonsEntity $reportReason;
 
-    /** @var GeoCacheReportStatusEntity */
-    public $reportStatus;
+    public GeoCacheReportStatusEntity $reportStatus;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

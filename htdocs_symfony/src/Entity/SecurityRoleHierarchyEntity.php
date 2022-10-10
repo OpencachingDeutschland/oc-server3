@@ -6,15 +6,10 @@ use Oc\Repository\AbstractEntity;
 
 class SecurityRoleHierarchyEntity extends AbstractEntity
 {
-    /** @var int */
-    public $roleId;
+    public int $roleId;
 
-    /** @var int */
-    public $subRoleId;
+    public int $subRoleId;
 
-    /**
-     * @return bool
-     */
     public function isNew(): bool
     {
         return $this->roleId === null;

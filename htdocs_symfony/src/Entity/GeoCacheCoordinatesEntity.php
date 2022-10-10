@@ -12,31 +12,21 @@ use Oc\Repository\AbstractEntity;
  */
 class GeoCacheCoordinatesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var DateTime */
-    public $dateCreated;
+    public DateTime $dateCreated;
 
-    /** @var int */
-    public $cacheId;
+    public int $cacheId;
 
-    /** @var float */
-    public $longitude;
+    public float $longitude;
 
-    /** @var float */
-    public $latitude;
+    public float $latitude;
 
-    /** @var int */
-    public $restoredBy;
+    public int $restoredBy;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

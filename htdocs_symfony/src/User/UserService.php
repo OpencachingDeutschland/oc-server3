@@ -2,6 +2,7 @@
 
 namespace Oc\User;
 
+use Doctrine\DBAL\Exception;
 use Oc\Entity\UserEntity;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
@@ -9,10 +10,7 @@ use Oc\Repository\UserRepository;
 
 class UserService
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -22,7 +20,7 @@ class UserService
     /**
      * Fetches all users.
      *
-     * @return UserEntity[]
+     * @throws Exception
      */
     public function fetchAll(): array
     {
@@ -37,6 +35,8 @@ class UserService
 
     /**
      * Fetches a user by its id.
+     *
+     * @throws Exception
      */
     public function fetchOneById(int $id): ?UserEntity
     {

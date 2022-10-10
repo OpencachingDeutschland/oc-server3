@@ -13,25 +13,16 @@ use Oc\Repository\AbstractEntity;
  */
 class SupportListingCommentsEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var string */
-    public $wpOc;
+    public string $wpOc;
 
-    /** @var string */
-    public $comment;
+    public string $comment;
 
-    /** @var string */
-    public $commentCreated;
+    public string $commentCreated;
 
-    /** @var string */
-    public $commentLastModified;
+    public string $commentLastModified;
 
-    /**
-     * @param string $wpOc
-     * @param string $comment
-     */
     public function __construct(string $wpOc, string $comment = '')
     {
         $this->wpOc = $wpOc;
@@ -40,11 +31,7 @@ class SupportListingCommentsEntity extends AbstractEntity
         $this->commentLastModified = date('Y-m-d H:i:s');
     }
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

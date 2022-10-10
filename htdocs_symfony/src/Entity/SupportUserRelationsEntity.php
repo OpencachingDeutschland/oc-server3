@@ -13,32 +13,21 @@ use Oc\Repository\AbstractEntity;
  */
 class SupportUserRelationsEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var int */
-    public $ocUserId;
+    public int $ocUserId;
 
-    /** @var int */
-    public $nodeId;
+    public int $nodeId;
 
-    /** @var string */
-    public $nodeUserId;
+    public string $nodeUserId;
 
-    /** @var string */
-    public $nodeUsername;
+    public string $nodeUsername;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /** @var NodesEntity */
-    public $node;
+    public NodesEntity $node;
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

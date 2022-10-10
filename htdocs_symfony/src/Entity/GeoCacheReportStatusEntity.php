@@ -6,19 +6,13 @@ use Oc\Repository\AbstractEntity;
 
 class GeoCacheReportStatusEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var int */
-    public $transId;
+    public int $transId;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

@@ -13,23 +13,15 @@ use Oc\Repository\AbstractEntity;
  */
 class NodesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var string */
-    public $url;
+    public string $url;
 
-    /** @var string */
-    public $waypointPrefix;
+    public string $waypointPrefix;
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

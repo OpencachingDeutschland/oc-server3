@@ -12,34 +12,23 @@ use Oc\Repository\AbstractEntity;
  */
 class GeoCacheStatusModifiedEntity extends AbstractEntity
 {
-    /** @var int */
-    public $cacheId;
+    public int $cacheId;
 
-    /** @var DateTime */
-    public $dateModified;
+    public DateTime $dateModified;
 
-    /** @var int */
-    public $oldState;
+    public int $oldState;
 
-    /** @var int */
-    public $newState;
+    public int $newState;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /** @var GeoCacheStatusEntity */
-    public $cacheStatusOld;
+    public GeoCacheStatusEntity $cacheStatusOld;
 
-    /** @var GeoCacheStatusEntity */
-    public $cacheStatusNew;
+    public GeoCacheStatusEntity $cacheStatusNew;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->cacheId === null;
     }

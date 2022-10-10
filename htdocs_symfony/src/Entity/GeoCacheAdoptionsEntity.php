@@ -12,31 +12,21 @@ use Oc\Repository\AbstractEntity;
  */
 class GeoCacheAdoptionsEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id;
 
-    /** @var int */
-    public $cacheId;
+    public int $cacheId;
 
-    /** @var DateTime */
-    public $date;
+    public DateTime $date;
 
-    /** @var int */
-    public $fromUserId;
+    public int $fromUserId;
 
-    /** @var int */
-    public $toUserId;
+    public int $toUserId;
 
-    /** @var UserEntity */
-    public $fromUser;
+    public UserEntity $fromUser;
 
-    /** @var UserEntity */
-    public $toUser;
+    public UserEntity $toUser;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->id === null;
     }

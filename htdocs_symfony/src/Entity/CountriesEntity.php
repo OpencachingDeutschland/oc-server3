@@ -6,48 +6,31 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- *
- */
 class CountriesEntity extends AbstractEntity
 {
-    /** @var string */
-    public $short;
+    public string $short;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var int */
-    public $transId;
+    public int $transId;
 
-    /** @var string */
-    public $de;
+    public string $de;
 
-    /** @var string */
-    public $en;
+    public string $en;
 
-    /** @var int */
-    public $listDefaultDe;
+    public int $listDefaultDe;
 
-    /** @var string */
-    public $sortDe;
+    public string $sortDe;
 
-    /** @var int */
-    public $listDefaultEn;
+    public int $listDefaultEn;
 
-    /** @var string */
-    public $sortEn;
+    public string $sortEn;
 
-    /** @var int */
-    public $admDisplay2;
+    public int $admDisplay2;
 
-    /** @var int */
-    public $admDisplay3;
+    public int $admDisplay3;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
         return $this->short === null;
     }

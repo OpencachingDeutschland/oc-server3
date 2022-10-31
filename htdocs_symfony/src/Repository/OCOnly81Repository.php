@@ -2,25 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Oc\Controller\Backend;
+namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class CachesController
+ * Class OCOnly81Repository
  *
- * @package Oc\Controller\Backend
+ * @package Oc\Repository
  */
-class OCOnly81Controller extends AbstractController
+class OCOnly81Repository
 {
     private Connection $connection;
 
     /**
-     * CachesController constructor.
+     * CachesRepository constructor.
      *
      * @param Connection $connection
      */
@@ -30,35 +27,12 @@ class OCOnly81Controller extends AbstractController
     }
 
     /**
-     * @Route("/oconly81", name="oconly81_index")
-     *
-     * @return Response
-     * @throws Exception
-     */
-    public function ocOnly81Controller_index()
-    : Response
-    {
-        $userData = $this->ocOnly81_get_user_counts();
-        $matrixData = $this->ocOnly81_get_matrixData();
-
-        return $this->render(
-            'backend/oconly81/index.html.twig', [
-                                                  'ocOnly81_user' => $userData,
-                                                  'ocOnly81_matrix' => $matrixData[0],
-                                                  'ocOnly81_dsum' => $matrixData[1],
-                                                  'ocOnly81_tsum' => $matrixData[2],
-                                                  'ocOnly81_overall_sum' => $matrixData[3]
-                                              ]
-        );
-    }
-
-    /**
      * @return array
      *
      * OCOnly81 Datenbankabfrage: Verteilung der OCOnly-Caches in der 81er Matrix, sowie Summen der einzelnen Zeilen/Spalten erstellen
      * @throws Exception
      */
-    private function ocOnly81_get_matrixData()
+    public function ocOnly81_get_matrixData()
     : array
     {
         for ($i = 0; $i <= 8; $i ++) {
@@ -98,7 +72,7 @@ class OCOnly81Controller extends AbstractController
      * OCOnly81 Datenbankabfrage: Anzahl der OCOnly-Funde je Nutzer
      * @throws Exception
      */
-    private function ocOnly81_get_user_counts(int $limit = 0)
+    public function ocOnly81_get_user_counts(int $limit = 0)
     : array {
         $result = [];
 

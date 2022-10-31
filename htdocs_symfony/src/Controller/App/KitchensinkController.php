@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Controller\App;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ *
+ */
 class KitchensinkController extends AbstractController
 {
     /**
@@ -13,7 +18,7 @@ class KitchensinkController extends AbstractController
      */
     public function index(): Response
     {
-       return $this->render('kitchensink/index.html.twig');
+        return $this->render('kitchensink/index.html.twig');
     }
 
     /**

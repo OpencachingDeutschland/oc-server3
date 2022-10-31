@@ -190,7 +190,7 @@
                     <tr>
                         <td>{{ item.cache_id }}</td>
                         <td>{{ item.name }}</td>
-                        <td><a href="{{ path('backend_user_by_id', { 'userID': item.user_id }) }}">{{ item.username }}</a></td>
+                        <td><a href="{{ path('app_user_by_id', { 'userID': item.user_id }) }}">{{ item.username }}</a></td>
                         <td>{{ item.last_login }}</td>
                         <td>{{ item.logCount }}</td>
                     </tr>

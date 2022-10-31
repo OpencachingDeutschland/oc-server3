@@ -1,30 +1,39 @@
 <?php
 
-namespace Oc\Controller\Backend;
+declare(strict_types=1);
 
+namespace Oc\Repository;
+
+use Doctrine\DBAL\Connection;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
 /**
+ * Class MailerRepository
  *
+ * @package Oc\Repository
  */
-class MailerController extends AbstractController
+class MailerRepository
 {
+    /** @var Connection */
+    private Connection $connection;
+
     /** @var LoggerInterface */
-    public $logger;
+    public LoggerInterface $logger;
 
     /** @var MailerInterface */
-    public $mailer;
+    public MailerInterface $mailer;
 
     /**
+     * @param Connection $connection
      * @param LoggerInterface $logger
      * @param MailerInterface $mailer
      */
-    public function __construct(LoggerInterface $logger, MailerInterface $mailer)
+    public function __construct(Connection $connection, LoggerInterface $logger, MailerInterface $mailer)
     {
+        $this->connection = $connection;
         $this->logger = $logger;
         $this->mailer = $mailer;
     }

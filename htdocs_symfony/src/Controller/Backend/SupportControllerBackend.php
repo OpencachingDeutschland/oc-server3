@@ -40,12 +40,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class SupportController
+ * Class SupportControllerBackend
  *
  * @package Oc\Controller\Backend
  * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
  */
-class SupportController extends AbstractController
+class SupportControllerBackend extends AbstractController
 {
     //  0 - frisch importiert
     // 20 - Import abgeschlossen. Änderungen, sofern vorhanden, wurden verarbeitet.
@@ -244,9 +244,8 @@ class SupportController extends AbstractController
      * @param string $wpID
      *
      * @return Response
-     * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
+     * @throws RecordNotFoundException
      * @Route("/bonusCachesAssignmentChoice/{wpID}", name="support_bonus_caches_assignment_choice")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -276,7 +275,6 @@ class SupportController extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name="support_bonus_caches_assignment")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -305,7 +303,6 @@ class SupportController extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Driver\Exception
      * @Route("/bonusCachesDirectAssignment", name="support_directly_assign_bonus_cache")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -1162,6 +1159,8 @@ class SupportController extends AbstractController
         //
         $amountAssignedCaches = 0;
         $amountUpdatedCaches = 0;
+        $fetchedWpGcCaches = [];
+        $fetchedWpGcMaintainedCaches = [];
         $listOfAmbiguousCaches = '';
 
         foreach ($waypoints_as_array as $wpt) {

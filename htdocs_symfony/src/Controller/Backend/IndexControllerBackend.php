@@ -1,12 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class IndexController extends AbstractController
+/**
+ *
+ */
+class IndexControllerBackend extends AbstractController
 {
     /**
      * @Route("/", name="index_index")

@@ -20,12 +20,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RolesController
+ * Class RolesControllerBackend
  *
  * @package Oc\Controller\Backend
  * @Security("is_granted('ROLE_TEAM')")
  */
-class RolesController extends AbstractController
+class RolesControllerBackend extends AbstractController
 {
     /** @var Connection */
     private Connection $connection;
@@ -88,7 +88,7 @@ class RolesController extends AbstractController
     public function getTeamOverview()
     : Response
     {
-        $teamMembersAndRoles = $this->getTeamMembersAndRoles('ROLE_TEAM');
+        $teamMembersAndRoles = $this->userRolesRepository->getTeamMembersAndRoles('ROLE_TEAM');
         $roleNames = $this->securityRolesRepository->fetchAll();
 
         // no need for ROLE_USER
@@ -101,29 +101,6 @@ class RolesController extends AbstractController
         return $this->render(
             'backend/roles/team.roles.html.twig', ['teamAndRoles' => $teamMembersAndRoles, 'roleNames' => $roleNames]
         );
-    }
-
-    /**
-     * @param string $minimumRoleName
-     *
-     * @return array
-     * @throws Exception
-     * @throws RecordNotFoundException
-     */
-    private function getTeamMembersAndRoles(string $minimumRoleName)
-    : array {
-        $minimumRoleId = $this->securityRolesRepository->getIdByRoleName($minimumRoleName);
-
-        $qb = $this->connection->createQueryBuilder();
-        $qb->select('user_roles.user_id', 'security_roles.role', 'user.username')
-            ->from('user_roles')
-            ->innerJoin('user_roles', 'security_roles', 'security_roles', 'user_roles.role_id = security_roles.id')
-            ->innerJoin('user_roles', 'user', 'user', 'user_roles.user_id = user.user_id')
-            ->where('user_roles.role_id >= :searchTerm')
-            ->setParameters(['searchTerm' => $minimumRoleId])
-            ->orderBy('security_roles.role', 'ASC');
-
-        return $qb->executeQuery()->fetchAllAssociative();
     }
 
     /**
@@ -174,7 +151,7 @@ class RolesController extends AbstractController
     : Response {
         $form = $this->createForm(RolesSearchUser::class);
         $roleNames = $this->securityRolesRepository->fetchAll();
-        $neededRole = $this->getNeededRole($role);
+        $neededRole = $this->userRolesRepository->getNeededRole($role);
 
         if ($this->isGranted($neededRole)) {
             $this->userRolesRepository->removeRole($userId, $role);
@@ -207,7 +184,7 @@ class RolesController extends AbstractController
     : Response {
         $form = $this->createForm(RolesSearchUser::class);
         $roleNames = $this->securityRolesRepository->fetchAll();
-        $neededRole = $this->getNeededRole($role);
+        $neededRole = $this->userRolesRepository->getNeededRole($role);
 
         if ($this->isGranted($neededRole)) {
             $this->userRolesRepository->grantRole($userId, $role);
@@ -222,35 +199,5 @@ class RolesController extends AbstractController
                                                          'roleNames' => $roleNames
                                                      ]
         );
-    }
-
-    /**
-     * @param string $role
-     *
-     * @return string
-     *
-     * Determine which ROLE of the current user is needed to perform role changes on a user
-     */
-    private function getNeededRole(string $role)
-    : string {
-        $neededRole = '';
-
-        if ($role === 'ROLE_TEAM') {
-            $neededRole = 'ROLE_SUPER_ADMIN';
-        } elseif ($role === 'ROLE_SUPER_ADMIN') {
-            $neededRole = 'ROLE_SUPER_DUPER_ADMIN';
-        } elseif (str_starts_with($role, 'ROLE_ADMIN')) {
-            $neededRole = 'ROLE_SUPER_ADMIN';
-        } elseif (str_starts_with($role, 'ROLE_SUPPORT') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_SUPPORT_HEAD';
-        } elseif (str_starts_with($role, 'ROLE_SOCIAL') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_SOCIAL_HEAD';
-        } elseif (str_starts_with($role, 'ROLE_DEVELOPER') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_DEVELOPER_HEAD';
-        } else {
-            $neededRole = 'ROLE_ADMIN';
-        }
-
-        return $neededRole;
     }
 }

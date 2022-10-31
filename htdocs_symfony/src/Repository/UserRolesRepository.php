@@ -273,4 +273,57 @@ class UserRolesRepository
 
         return $entity;
     }
+
+    /**
+     * @param string $role
+     *
+     * @return string
+     *
+     * Determine which ROLE of the current user is needed to perform role changes on a user
+     */
+    public function getNeededRole(string $role)
+    : string {
+        $neededRole = '';
+
+        if ($role === 'ROLE_TEAM') {
+            $neededRole = 'ROLE_SUPER_ADMIN';
+        } elseif ($role === 'ROLE_SUPER_ADMIN') {
+            $neededRole = 'ROLE_SUPER_DUPER_ADMIN';
+        } elseif (str_starts_with($role, 'ROLE_ADMIN')) {
+            $neededRole = 'ROLE_SUPER_ADMIN';
+        } elseif (str_starts_with($role, 'ROLE_SUPPORT') && (!str_ends_with($role, '_HEAD'))) {
+            $neededRole = 'ROLE_SUPPORT_HEAD';
+        } elseif (str_starts_with($role, 'ROLE_SOCIAL') && (!str_ends_with($role, '_HEAD'))) {
+            $neededRole = 'ROLE_SOCIAL_HEAD';
+        } elseif (str_starts_with($role, 'ROLE_DEVELOPER') && (!str_ends_with($role, '_HEAD'))) {
+            $neededRole = 'ROLE_DEVELOPER_HEAD';
+        } else {
+            $neededRole = 'ROLE_ADMIN';
+        }
+
+        return $neededRole;
+    }
+
+    /**
+     * @param string $minimumRoleName
+     *
+     * @return array
+     * @throws Exception
+     * @throws RecordNotFoundException
+     */
+    public function getTeamMembersAndRoles(string $minimumRoleName)
+    : array {
+        $minimumRoleId = $this->securityRolesRepository->getIdByRoleName($minimumRoleName);
+
+        $qb = $this->connection->createQueryBuilder();
+        $qb->select('user_roles.user_id', 'security_roles.role', 'user.username')
+            ->from('user_roles')
+            ->innerJoin('user_roles', 'security_roles', 'security_roles', 'user_roles.role_id = security_roles.id')
+            ->innerJoin('user_roles', 'user', 'user', 'user_roles.user_id = user.user_id')
+            ->where('user_roles.role_id >= :searchTerm')
+            ->setParameters(['searchTerm' => $minimumRoleId])
+            ->orderBy('security_roles.role', 'ASC');
+
+        return $qb->executeQuery()->fetchAllAssociative();
+    }
 }

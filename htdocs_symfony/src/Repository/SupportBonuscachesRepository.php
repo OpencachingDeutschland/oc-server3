@@ -13,16 +13,10 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- * Class SupportBonuscachesRepository
- *
- * @package Oc\Repository
- */
 class SupportBonuscachesRepository
 {
-    const TABLE = 'support_bonuscaches';
+    private const TABLE = 'support_bonuscaches';
 
-    /** @var Connection */
     private Connection $connection;
 
     public function __construct(Connection $connection)
@@ -31,16 +25,14 @@ class SupportBonuscachesRepository
     }
 
     /**
-     * @return array
      * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchAll()
-    : array
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->executeQuery();
+                ->select('*')
+                ->from(self::TABLE)
+                ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -54,18 +46,15 @@ class SupportBonuscachesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return SupportBonuscachesEntity
      * @throws \Doctrine\DBAL\Exception
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = [])
-    : SupportBonuscachesEntity {
+    public function fetchOneBy(array $where = []): SupportBonuscachesEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->setMaxResults(1);
+                ->select('*')
+                ->from(self::TABLE)
+                ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -85,17 +74,14 @@ class SupportBonuscachesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return array
      * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []): array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE);
+                ->select('*')
+                ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -121,14 +107,11 @@ class SupportBonuscachesRepository
     }
 
     /**
-     * @param SupportBonuscachesEntity $entity
-     *
-     * @return SupportBonuscachesEntity
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function create(SupportBonuscachesEntity $entity)
-    : SupportBonuscachesEntity {
+    public function create(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -136,24 +119,21 @@ class SupportBonuscachesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-            self::TABLE,
-            $databaseArray
+                self::TABLE,
+                $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param SupportBonuscachesEntity $entity
-     *
-     * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function update(SupportBonuscachesEntity $entity)
-    : SupportBonuscachesEntity {
+    public function update(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -161,80 +141,63 @@ class SupportBonuscachesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['id' => $entity->id]
+                self::TABLE,
+                $databaseArray,
+                ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @param SupportBonuscachesEntity $entity
-     *
-     * @return SupportBonuscachesEntity
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      */
-    public function remove(SupportBonuscachesEntity $entity)
-    : SupportBonuscachesEntity {
+    public function remove(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
-            self::TABLE,
-            ['id' => $entity->id]
+                self::TABLE,
+                ['id' => $entity->id]
         );
 
-        $entity->id = null;
+        $entity->id = 0;
 
         return $entity;
     }
 
-    /**
-     * @param SupportBonuscachesEntity $entity
-     *
-     * @return array
-     */
-    public function getDatabaseArrayFromEntity(SupportBonuscachesEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(SupportBonuscachesEntity $entity): array
+    {
         return [
-            'id' => $entity->id,
-            'wp_oc' => $entity->wpOc,
-            'is_bonus_cache' => $entity->isBonusCache,
-            'belongs_to_bonus_cache' => $entity->belongsToBonusCache,
+                'id' => $entity->id,
+                'wp_oc' => $entity->wpOc,
+                'is_bonus_cache' => $entity->isBonusCache,
+                'belongs_to_bonus_cache' => $entity->belongsToBonusCache,
         ];
     }
 
-    /**
-     * @param array $data
-     *
-     * @return SupportBonuscachesEntity
-     */
-    public function getEntityFromDatabaseArray(array $data)
-    : SupportBonuscachesEntity {
+    public function getEntityFromDatabaseArray(array $data): SupportBonuscachesEntity
+    {
         $entity = new SupportBonuscachesEntity();
-        $entity->id = (int) $data['id'];
-        $entity->wpOc = (string) $data['wp_oc'];
-        $entity->isBonusCache = (bool) $data['is_bonus_cache'];
-        $entity->belongsToBonusCache = (string) $data['belongs_to_bonus_cache'];
+        $entity->id = (int)$data['id'];
+        $entity->wpOc = (string)$data['wp_oc'];
+        $entity->isBonusCache = (bool)$data['is_bonus_cache'];
+        $entity->belongsToBonusCache = (string)$data['belongs_to_bonus_cache'];
 
         return $entity;
     }
 
     /**
-     * @param string $wpID
-     * @param string $toBonusCache
-     * @param bool $setAsBonusCache
-     *
      * @throws RecordAlreadyExistsException
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function update_or_create_bonus_entry(string $wpID, string $toBonusCache, bool $setAsBonusCache = false)
-    : void {
+    public function update_or_create_bonus_entry(string $wpID, string $toBonusCache, bool $setAsBonusCache = false): void
+    {
         try {
             $entity = $this->fetchOneBy(['wp_oc' => $wpID]);
         } catch (Exception $exception) {

@@ -1,124 +1,57 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
-use DateTime;
 use Oc\Repository\AbstractEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * Class UserEntity
- *
- * @package Oc\Entity
- */
 class UserEntity extends AbstractEntity implements UserInterface
 {
-    /**
-     * @var int
-     */
-    public $userId;
+    public int $userId = 0;
 
-    /**
-     * @var DateTime
-     */
-    public $dateCreated;
+    public string $dateCreated;
 
-    /**
-     * @var DateTime
-     */
-    public $lastModified;
+    public string $lastModified;
 
-    /**
-     * @var DateTime
-     */
-    public $lastLogin;
+    public string $lastLogin;
 
-    /**
-     * @var string
-     */
-    public $username;
+    public string $username;
 
-    /**
-     * @var string
-     */
-    public $password;
+    public string $password;
 
-    /**
-     * @var string
-     */
-    public $email;
+    public string $email;
 
-    /**
-     * @var int
-     */
-    public $emailProblems = 0;
+    public bool $emailProblems = false;
 
-    /**
-     * @var float
-     */
-    public $latitude = 0;
+    public float $latitude = 0;
 
-    /**
-     * @var float
-     */
-    public $longitude = 0;
+    public float $longitude = 0;
 
-    /**
-     * @var bool
-     */
-    public $isActive = false;
+    public bool $isActive = false;
 
-    /**
-     * @var string
-     */
-    public $firstname;
+    public string $firstname;
 
-    /**
-     * @var string
-     */
-    public $lastname;
+    public string $lastname;
 
-    /**
-     * @var string
-     */
-    public $country;
+    public string $country;
 
-    /**
-     * @var bool
-     */
-    public $permanentLoginFlag = true;
+    public bool $permanentLoginFlag = true;
 
-    /**
-     * @var string
-     */
-    public $activationCode;
+    public string $activationCode;
 
-    /**
-     * @var string
-     */
-    public $language = 'DE';
+    public string $language = 'DE';
 
-    /**
-     * @var string
-     */
-    public $description = '';
+    public string $description = '';
 
-    /**
-     * @var bool
-     */
-    public $gdprDeletion = false;
+    public bool $gdprDeletion = false;
 
-    /**
-     * @var array
-     */
-    public $roles;
+    public array $roles;
 
-    /**
-     * Checks if the entity is new.
-     */
     public function isNew(): bool
     {
-        return $this->userId === null;
+        return $this->userId === 0;
     }
 
     public function getRoles(): array

@@ -6,38 +6,22 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class UserRolesEntity
- *
- * @package Oc\Entity
- */
 class UserRolesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var int */
-    public $roleId;
+    public int $roleId;
 
-    /**
-     * @param int $userId
-     * @param int $roleId
-     */
     public function __construct(int $userId = 0, int $roleId = 0)
     {
         $this->userId = $userId;
         $this->roleId = $roleId;
     }
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

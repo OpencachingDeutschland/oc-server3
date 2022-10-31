@@ -6,31 +6,18 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class NodesEntity
- *
- * @package Oc\Entity
- */
 class NodesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var string */
-    public $url;
+    public string $url;
 
-    /** @var string */
-    public $waypointPrefix;
+    public string $waypointPrefix;
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

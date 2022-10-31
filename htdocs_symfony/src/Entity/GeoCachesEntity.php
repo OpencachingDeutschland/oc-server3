@@ -1,151 +1,100 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCachesEntity
- *
- * @package Oc\Entity
- */
 class GeoCachesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $cacheId;
+    public int $cacheId = 0;
 
-    /** @var string */
-    public $uuid;
+    public string $uuid;
 
-    /** @var int */
-    public $node;
+    public int $node;
 
-    /** @var DateTime */
-    public $dateCreated;
+    public string $dateCreated;
 
-    /** @var int */
-    public $isPublishdate;
+    public int $isPublishdate;
 
-    /** @var DateTime */
-    public $lastModified;
+    public string $lastModified;
 
-    /** @var string */
-    public $okapiSyncbase;
+    public string $okapiSyncbase;
 
-    /** @var DateTime */
-    public $listingLastModified;
+    public string $listingLastModified;
 
-    /** @var DateTime */
-    public $metaLastModified;
+    public string $metaLastModified;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var float */
-    public $longitude;
+    public float $longitude;
 
-    /** @var float */
-    public $latitude;
+    public float $latitude;
 
-    /** @var int */
-    public $type;
+    public int $type;
 
-    /** @var int */
-    public $status;
+    public int $status;
 
-    /** @var string */
-    public $country;
+    public string $country;
 
-    /** @var DateTime */
-    public $dateHidden;
+    public string $dateHidden;
 
-    /** @var int */
-    public $size;
+    public int $size;
 
-    /** @var int */
-    public $difficulty;
+    public int $difficulty;
 
-    /** @var int */
-    public $terrain;
+    public int $terrain;
 
-    /** @var string */
-    public $logpw;
+    public string $logpw;
 
-    /** @var float */
-    public $searchTime;
+    public float $searchTime;
 
-    /** @var float */
-    public $wayLength;
+    public float $wayLength;
 
-    /** @var string */
-    public $wpGc;
+    public string $wpGc;
 
-    /** @var string */
-    public $wpGcMaintained;
+    public string $wpGcMaintained;
 
-    /** @var string */
-    public $wpNc;
+    public string $wpNc;
 
-    /** @var string */
-    public $wpOc;
+    public string $wpOc;
 
-    /** @var string */
-    public $descLanguages;
+    public string $descLanguages;
 
-    /** @var string */
-    public $defaultDesclang;
+    public string $defaultDesclang;
 
-    /** @var DateTime */
-    public $dateActivate;
+    public string $dateActivate;
 
-    /** @var int */
-    public $needNpaRecalc;
+    public int $needNpaRecalc;
 
-    /** @var int */
-    public $showCachelists;
+    public int $showCachelists;
 
-    /** @var int */
-    public $protectOldCoords;
+    public int $protectOldCoords;
 
-    /** @var int */
-    public $needsMaintenance;
+    public int $needsMaintenance;
 
-    /** @var int */
-    public $listingOutdated;
+    public int $listingOutdated;
 
-    /** @var DateTime */
-    public $flagsLastModified;
+    public string $flagsLastModified;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /** @var GeoCacheSizeEntity */
-    public $cacheSize;
+    public GeoCacheSizeEntity $cacheSize;
 
-    /** @var GeoCacheStatusEntity */
-    public $cacheStatus;
+    public GeoCacheStatusEntity $cacheStatus;
 
-    /** @var GeoCacheTypeEntity */
-    public $cacheType;
+    public GeoCacheTypeEntity $cacheType;
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->cacheId === null;
+        return $this->cacheId === 0;
     }
 
-    /**
-     * @return bool
-     */
-    public function isActiveAndFindable()
-    : bool
+    public function isActiveAndFindable(): bool
     {
         if ($this->status == 1) {
             return true;

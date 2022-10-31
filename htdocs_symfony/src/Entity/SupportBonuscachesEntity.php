@@ -6,30 +6,16 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportBonuscachesEntity
- *
- * @package Oc\Entity
- */
 class SupportBonuscachesEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $wpOc;
+    public string $wpOc;
 
-    /** @var bool */
-    public $isBonusCache;
+    public bool $isBonusCache;
 
-    /** @var string */
-    public $belongsToBonusCache;
+    public string $belongsToBonusCache;
 
-    /**
-     * @param string $wpOc
-     * @param bool $isBonusCache
-     * @param string $belongsToBonusCache
-     */
     public function __construct(string $wpOc = '', bool $isBonusCache = false, string $belongsToBonusCache = '')
     {
         $this->wpOc = $wpOc;
@@ -37,12 +23,8 @@ class SupportBonuscachesEntity extends AbstractEntity
         $this->belongsToBonusCache = $belongsToBonusCache;
     }
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

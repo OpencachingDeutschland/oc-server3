@@ -1,25 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
 class GeoCacheReportStatusEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var int */
-    public $transId;
+    public int $transId;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

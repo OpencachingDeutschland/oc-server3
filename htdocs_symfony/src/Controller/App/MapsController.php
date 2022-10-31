@@ -13,16 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * Class MapsController
- *
- * @package Oc\Controller\App
- */
 class MapsController extends AbstractController
 {
-    /**
-     * @var MapsRepository
-     */
     private MapsRepository $mapsRepository;
 
     public function __construct(MapsRepository $mapsRepository)
@@ -31,10 +23,6 @@ class MapsController extends AbstractController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     *
      * @Route("/maps", name="maps_index")
      */
     public function mapsController_index(Request $request): Response
@@ -43,11 +31,6 @@ class MapsController extends AbstractController
     }
 
     /**
-     * @param string $lat
-     * @param string $lon
-     * @param bool   $centerView
-     *
-     * @return Response
      * @throws RecordsNotFoundException
      * @throws Exception
      * @throws RecordNotFoundException

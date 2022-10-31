@@ -9,19 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * Class RolesController
- *
- * @package Oc\Controller\App
  * @Security("is_granted('ROLE_TEAM')")
  */
 class RolesController extends AbstractController
 {
-    /** @var SecurityRolesRepository */
     private SecurityRolesRepository $securityRolesRepository;
 
-    /**
-     * @param SecurityRolesRepository $securityRolesRepository
-     */
     public function __construct(SecurityRolesRepository $securityRolesRepository)
     {
         $this->securityRolesRepository = $securityRolesRepository;

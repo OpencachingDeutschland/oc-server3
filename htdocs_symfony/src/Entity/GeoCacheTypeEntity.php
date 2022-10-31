@@ -1,49 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
 class GeoCacheTypeEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $name;
+    public string $name;
 
-    /** @var int */
-    public $transId;
+    public int $transId;
 
-    /** @var int */
-    public $ordinal;
+    public int $ordinal;
 
-    /** @var string */
-    public $short;
+    public string $short;
 
-    /** @var string */
-    public $de;
+    public string $de;
 
-    /** @var string */
-    public $en;
+    public string $en;
 
-    /** @var string */
-    public $iconLarge;
+    public string $iconLarge;
 
-    /** @var string */
-    public $short2;
+    public string $short2;
 
-    /** @var int */
-    public $short2TransId;
+    public int $short2TransId;
 
-    /** @var string */
-    public $kmlName;
+    public string $kmlName;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

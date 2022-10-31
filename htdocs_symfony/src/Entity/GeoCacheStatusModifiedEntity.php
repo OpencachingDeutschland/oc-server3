@@ -1,46 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class GeoCacheStatusModifiedEntity
- *
- * @package Oc\Entity
- */
 class GeoCacheStatusModifiedEntity extends AbstractEntity
 {
-    /** @var int */
-    public $cacheId;
+    public int $cacheId = 0;
 
-    /** @var DateTime */
-    public $dateModified;
+    public DateTime $dateModified;
 
-    /** @var int */
-    public $oldState;
+    public int $oldState;
 
-    /** @var int */
-    public $newState;
+    public int $newState;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /** @var GeoCacheStatusEntity */
-    public $cacheStatusOld;
+    public GeoCacheStatusEntity $cacheStatusOld;
 
-    /** @var GeoCacheStatusEntity */
-    public $cacheStatusNew;
+    public GeoCacheStatusEntity $cacheStatusNew;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
-        return $this->cacheId === null;
+        return $this->cacheId === 0;
     }
 }

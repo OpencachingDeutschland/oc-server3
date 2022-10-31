@@ -13,25 +13,14 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-/**
- *
- */
 class CacheCoordinatesRepository
 {
-    const TABLE = 'cache_coordinates';
+    private const TABLE = 'cache_coordinates';
 
-    /** @var Connection */
     private Connection $connection;
 
-    /** @var UserRepository */
     private UserRepository $userRepository;
 
-    /**
-     * CacheCoordinatesRepository constructor.
-     *
-     * @param Connection $connection
-     * @param UserRepository $userRepository
-     */
     public function __construct(Connection $connection, UserRepository $userRepository)
     {
         $this->connection = $connection;
@@ -39,18 +28,16 @@ class CacheCoordinatesRepository
     }
 
     /**
-     * @return array
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
-    public function fetchAll()
-    : array
+    public function fetchAll(): array
     {
         $statement = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->executeQuery();
+                ->select('*')
+                ->from(self::TABLE)
+                ->executeQuery();
 
         $result = $statement->fetchAllAssociative();
 
@@ -68,18 +55,15 @@ class CacheCoordinatesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return GeoCacheCoordinatesEntity
      * @throws Exception
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = [])
-    : GeoCacheCoordinatesEntity {
+    public function fetchOneBy(array $where = []): GeoCacheCoordinatesEntity
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE)
-            ->setMaxResults(1);
+                ->select('*')
+                ->from(self::TABLE)
+                ->setMaxResults(1);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -99,18 +83,15 @@ class CacheCoordinatesRepository
     }
 
     /**
-     * @param array $where
-     *
-     * @return array
      * @throws Exception
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      */
-    public function fetchBy(array $where = [])
-    : array {
+    public function fetchBy(array $where = []): array
+    {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->select('*')
-            ->from(self::TABLE);
+                ->select('*')
+                ->from(self::TABLE);
 
         if (count($where) > 0) {
             foreach ($where as $column => $value) {
@@ -136,14 +117,11 @@ class CacheCoordinatesRepository
     }
 
     /**
-     * @param GeoCacheCoordinatesEntity $entity
-     *
-     * @return GeoCacheCoordinatesEntity
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCacheCoordinatesEntity $entity)
-    : GeoCacheCoordinatesEntity {
+    public function create(GeoCacheCoordinatesEntity $entity): GeoCacheCoordinatesEntity
+    {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
         }
@@ -151,24 +129,21 @@ class CacheCoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->insert(
-            self::TABLE,
-            $databaseArray
+                self::TABLE,
+                $databaseArray
         );
 
-        $entity->id = (int) $this->connection->lastInsertId();
+        $entity->id = (int)$this->connection->lastInsertId();
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheCoordinatesEntity $entity
-     *
-     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCacheCoordinatesEntity $entity)
-    : GeoCacheCoordinatesEntity {
+    public function update(GeoCacheCoordinatesEntity $entity): GeoCacheCoordinatesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
@@ -176,71 +151,60 @@ class CacheCoordinatesRepository
         $databaseArray = $this->getDatabaseArrayFromEntity($entity);
 
         $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['id' => $entity->id]
+                self::TABLE,
+                $databaseArray,
+                ['id' => $entity->id]
         );
 
         return $entity;
     }
 
     /**
-     * @param GeoCacheCoordinatesEntity $entity
-     *
-     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function remove(GeoCacheCoordinatesEntity $entity)
-    : GeoCacheCoordinatesEntity {
+    public function remove(GeoCacheCoordinatesEntity $entity): GeoCacheCoordinatesEntity
+    {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
         }
 
         $this->connection->delete(
-            self::TABLE,
-            ['id' => $entity->id]
+                self::TABLE,
+                ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
 
-    /**
-     * @param GeoCacheCoordinatesEntity $entity
-     *
-     * @return array
-     */
-    public function getDatabaseArrayFromEntity(GeoCacheCoordinatesEntity $entity)
-    : array {
+    public function getDatabaseArrayFromEntity(GeoCacheCoordinatesEntity $entity): array
+    {
         return [
-            'id' => $entity->id,
-            'date_created' => $entity->dateCreated,
-            'cache_id' => $entity->cacheId,
-            'longitude' => $entity->longitude,
-            'latitude' => $entity->latitude,
-            'restored_by' => $entity->restoredBy,
-            'user' => $entity->user,
+                'id' => $entity->id,
+                'date_created' => $entity->dateCreated,
+                'cache_id' => $entity->cacheId,
+                'longitude' => $entity->longitude,
+                'latitude' => $entity->latitude,
+                'restored_by' => $entity->restoredBy,
+                'user' => $entity->user,
         ];
     }
 
     /**
-     * @param array $data
-     *
-     * @return GeoCacheCoordinatesEntity
      * @throws RecordNotFoundException
      * @throws \Exception
      */
-    public function getEntityFromDatabaseArray(array $data)
-    : GeoCacheCoordinatesEntity {
+    public function getEntityFromDatabaseArray(array $data): GeoCacheCoordinatesEntity
+    {
         $entity = new GeoCacheCoordinatesEntity();
-        $entity->id = (int) $data['id'];
+        $entity->id = (int)$data['id'];
         $entity->dateCreated = new DateTime($data['date_created']);
-        $entity->cacheId = (int) $data['cache_id'];
-        $entity->longitude = $data['longitude'];
-        $entity->latitude = $data['latitude'];
-        $entity->restoredBy = (int) $data['restored_by'];
+        $entity->cacheId = (int)$data['cache_id'];
+        $entity->longitude = (float)$data['longitude'];
+        $entity->latitude = (float)$data['latitude'];
+        $entity->restoredBy = (int)$data['restored_by'];
         if ($entity->restoredBy != 0) {
             $entity->user = $this->userRepository->fetchOneById($entity->restoredBy);
         }

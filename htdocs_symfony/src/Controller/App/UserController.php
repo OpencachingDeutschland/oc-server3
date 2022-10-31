@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Form\CachesFormType;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -15,31 +14,16 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- *
- */
 class UserController extends AbstractController
 {
-    /** @var Connection */
-    private Connection $connection;
-
-    /** @var UserRepository */
     private UserRepository $userRepository;
 
-    /**
-     * @param Connection     $connection
-     * @param UserRepository $userRepository
-     */
-    public function __construct(Connection $connection, UserRepository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
-        $this->connection = $connection;
         $this->userRepository = $userRepository;
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
      * @throws Exception
      * @Route("/user", name="user_index")
      * @Security("is_granted('ROLE_TEAM')")
@@ -64,9 +48,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * @param int $userID
-     *
-     * @return Response
      * @Route("/user/profile/{userID}", name="user_by_id")
      * @throws RecordNotFoundException
      */

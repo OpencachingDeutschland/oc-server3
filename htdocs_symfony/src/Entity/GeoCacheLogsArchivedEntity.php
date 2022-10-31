@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use DateTime;
@@ -7,83 +9,56 @@ use Oc\Repository\AbstractEntity;
 
 class GeoCacheLogsArchivedEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $uuid;
+    public string $uuid;
 
-    /** @var int */
-    public $node;
+    public int $node;
 
-    /** @var DateTime */
-    public $dateCreated;
+    public string $dateCreated;
 
-    /** @var DateTime */
-    public $entryLastModified;
+    public string $entryLastModified;
 
-    /** @var DateTime */
-    public $lastModified;
+    public string $lastModified;
 
-    /** @var string */
-    public $okapiSyncbase;
+    public string $okapiSyncbase;
 
-    /** @var DateTime */
-    public $logLastModified;
+    public string $logLastModified;
 
-    /** @var int */
-    public $cacheId;
+    public int $cacheId;
 
-    /** @var int */
-    public $userId;
+    public int $userId;
 
-    /** @var int */
-    public $type;
+    public int $type;
 
-    /** @var int */
-    public $ocTeamComment;
+    public int $ocTeamComment;
 
-    /** @var DateTime */
-    public $date;
+    public string $date;
 
-    /** @var DateTime */
-    public $orderDate;
+    public string $orderDate;
 
-    /** @var int */
-    public $needsMaintenance;
+    public int $needsMaintenance;
 
-    /** @var int */
-    public $listingOutdated;
+    public int $listingOutdated;
 
-    /** @var string */
-    public $text;
+    public string $text;
 
-    /** @var int */
-    public $textHtml;
+    public int $textHtml;
 
-    /** @var int */
-    public $textHtmledit;
+    public int $textHtmledit;
 
-    /** @var int */
-    public $ownerNotified;
+    public int $ownerNotified;
 
-    /** @var int */
-    public $picture;
+    public int $picture;
 
-    /** @var DateTime */
-    public $deletionDate;
+    public string $deletionDate;
 
-    /** @var int */
-    public $deletedBy;
+    public int $deletedBy;
 
-    /** @var int */
-    public $restoredBy;
+    public int $restoredBy;
 
-    /**
-     * @return bool
-     */
-    public function isNew() : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

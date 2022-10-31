@@ -7,70 +7,44 @@ namespace Oc\Entity;
 use DateTime;
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportListingInfosEntity
- *
- * @package Oc\Entity
- */
 class SupportListingInfosEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var string */
-    public $wpOc;
+    public string $wpOc;
 
-    /** @var int */
-    public $nodeId;
+    public int $nodeId;
 
-    /** @var string */
-    public $nodeOwnerId;
+    public string $nodeOwnerId;
 
-    /** @var string */
-    public $nodeListingId;
+    public string $nodeListingId;
 
-    /** @var string */
-    public $nodeListingWp;
+    public string $nodeListingWp;
 
-    /** @var string */
-    public $nodeListingName;
+    public string $nodeListingName;
 
-    /** @var int */
-    public $nodeListingSize;
+    public int $nodeListingSize;
 
-    /** @var int */
-    public $nodeListingDifficulty;
+    public int $nodeListingDifficulty;
 
-    /** @var int */
-    public $nodeListingTerrain;
+    public int $nodeListingTerrain;
 
-    /** @var double */
-    public $nodeListingCoordinatesLon;
+    public float $nodeListingCoordinatesLon;
 
-    /** @var double */
-    public $nodeListingCoordinatesLat;
+    public float $nodeListingCoordinatesLat;
 
-    /** @var bool */
-    public $nodeListingAvailable;
+    public bool $nodeListingAvailable;
 
-    /** @var bool */
-    public $nodeListingArchived;
+    public bool $nodeListingArchived;
 
-    /** @var DateTime */
-    public $lastModified;
+    public DateTime $lastModified;
 
-    /** @var int */
-    public $importStatus;
+    public int $importStatus;
 
-    /** @var NodesEntity */
-    public $node;
+    public NodesEntity $node;
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

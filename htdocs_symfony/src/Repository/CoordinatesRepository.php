@@ -4,29 +4,12 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-/**
- * Class Coordinate
- *
- * @package Oc\Repository
- */
 class CoordinatesRepository
 {
-    /**
-     * @var float
-     */
     private float $nLat;
 
-    /**
-     * @var float
-     */
     private float $nLon;
 
-    /**
-     * Coordinate constructor.
-     *
-     * @param float $nNewLat
-     * @param float $nNewLon
-     */
     public function __construct(float $nNewLat = 0.0, float $nNewLon = 0.0)
     {
         $this->nLat = $nNewLat;
@@ -36,58 +19,47 @@ class CoordinatesRepository
     /* get-Functions return array([lat] => string, [lon] => string)
      */
 
-    /**
-     * @param float $nNewLat
-     * @param float $nNewLon
-     */
-    public function setLatLon(float $nNewLat, float $nNewLon)
-    : void {
+    public function setLatLon(float $nNewLat, float $nNewLon): void
+    {
         $this->nLat = $nNewLat;
         $this->nLon = $nNewLon;
     }
 
     /**
      * Decimal: d.ddddd°
-     *
-     * @return string[]
      */
-    public function getDecimal()
-    : array
+    public function getDecimal(): array
     {
         if ($this->nLat < 0) {
-            $sLat = 'S' . sprintf('%08.5f', - $this->nLat) . '°';
+            $sLat = 'S' . sprintf('%08.5f', -$this->nLat) . '°';
         } else {
             $sLat = 'N' . sprintf('%08.5f', $this->nLat) . '°';
         }
 
         if ($this->nLon < 0) {
-            $sLon = 'W' . sprintf('%09.5f', - $this->nLon) . '°';
+            $sLon = 'W' . sprintf('%09.5f', -$this->nLon) . '°';
         } else {
             $sLon = 'E' . sprintf('%09.5f', $this->nLon) . '°';
         }
 
         return [
-            'lat' => $sLat,
-            'lon' => $sLon,
+                'lat' => $sLat,
+                'lon' => $sLon,
         ];
     }
 
     /**
      * Degree Minute: d° mm.mmm
-     *
-     * @param bool $hideMinutFractions
-     *
-     * @return array
      */
-    public function getDegreeMinutes(bool $hideMinutFractions = false)
-    : array {
+    public function getDegreeMinutes(bool $hideMinutFractions = false): array
+    {
         $minute_format = ($hideMinutFractions ? '%02.0f.***' : '%06.3f');
 
         // Ocprop: ([N|S].*?)&#039;
         $nLat = $this->nLat;
         $bLatN = !($nLat < 0);
         if (!$bLatN) {
-            $nLat = - $nLat;
+            $nLat = -$nLat;
         }
         $nLatDeg = floor($nLat);
         $nLatMin = ($nLat - $nLatDeg) * 60;
@@ -101,7 +73,7 @@ class CoordinatesRepository
         $nLon = $this->nLon;
         $bLonE = !($nLon < 0);
         if (!$bLonE) {
-            $nLon = - $nLon;
+            $nLon = -$nLon;
         }
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
@@ -112,23 +84,20 @@ class CoordinatesRepository
         }
 
         return [
-            'lat' => $sLat,
-            'lon' => $sLon,
+                'lat' => $sLat,
+                'lon' => $sLon,
         ];
     }
 
     /**
      * Degree Minute Second: dd° mm' ss''
-     *
-     * @return string[]
      */
-    public function getDegreeMinutesSeconds()
-    : array
+    public function getDegreeMinutesSeconds(): array
     {
         $nLat = $this->nLat;
         $bLatN = !($nLat < 0);
         if (!$bLatN) {
-            $nLat = - $nLat;
+            $nLat = -$nLat;
         }
         $nLatDeg = floor($nLat);
         $nLatMin = ($nLat - $nLatDeg) * 60;
@@ -141,7 +110,7 @@ class CoordinatesRepository
         $nLon = $this->nLon;
         $bLonE = !($nLon < 0);
         if (!$bLonE) {
-            $nLon = - $nLon;
+            $nLon = -$nLon;
         }
         $nLonDeg = floor($nLon);
         $nLonMin = ($nLon - $nLonDeg) * 60;
@@ -152,18 +121,15 @@ class CoordinatesRepository
         $sLon .= sprintf("%03d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
 
         return [
-            'lat' => $sLat,
-            'lon' => $sLon,
+                'lat' => $sLat,
+                'lon' => $sLon,
         ];
     }
 
     /**
      * UTM, returns array(zone, letter, north, east)
-     *
-     * @return array|string[]
      */
-    public function getUTM()
-    : array
+    public function getUTM(): array
     {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
@@ -182,23 +148,23 @@ class CoordinatesRepository
         //Geographische Länge lw und Breite bw im WGS84 Datum
         if ($this->nLon == 0 || $this->nLat == 0) {
             return [
-                'zone' => '',
-                'letter' => '',
-                'north' => 'N ' . 0,
-                'east' => 'E ' . 0,
+                    'zone' => '',
+                    'letter' => '',
+                    'north' => 'N ' . 0,
+                    'east' => 'E ' . 0,
             ];
         }
-        if ($this->nLon <= - 180 || $this->nLon > 180 || $this->nLat <= - 80 || $this->nLat >= 84) {
+        if ($this->nLon <= -180 || $this->nLon > 180 || $this->nLat <= -80 || $this->nLat >= 84) {
             // Werte nicht im Bereich des UTM Systems -180° <= nLon < +180°, -80° < nLat < 84° N
             return [
-                '',
-                '',
-                0,
-                0,
+                    '',
+                    '',
+                    0,
+                    0,
             ];
         }
-        $lw = (float) $this->nLon;
-        $bw = (float) $this->nLat;
+        $lw = (float)$this->nLon;
+        $bw = (float)$this->nLat;
 
         //WGS84 Datum
         //Große Halbachse a und Abplattung f
@@ -217,9 +183,9 @@ class CoordinatesRepository
 
         //Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         //Längenzone lz und Breitenzone (Band) bz
         $lzn = intval(($lw + 180) / 6) + 1;
@@ -245,7 +211,7 @@ class CoordinatesRepository
         if ($lzn < 10) {
             $lz = '0' . $lzn;
         }
-        $bd = (int) (1 + ($bw + 80) / 8);
+        $bd = (int)(1 + ($bw + 80) / 8);
         $bz = substr($b_sel, $bd - 1, 1);
 
         //Geographische Breite in Radianten br
@@ -282,7 +248,7 @@ class CoordinatesRepository
 
         if ($bw < 0) {
             $nw = 10e6 + 0.9996 * ($g + $nd * $cos2 * $tan1 * $dl2 / 2 +
-                                   $nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq) * $dl4 / 24);
+                            $nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq) * $dl4 / 24);
         } else {
             $nw = 0.9996 * ($g + $nd * $cos2 * $tan1 * $dl2 / 2 +
                             $nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq) * $dl4 / 24);
@@ -290,39 +256,36 @@ class CoordinatesRepository
         $ew = 0.9996 * ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
                         $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120) + 500000;
 
-        $nk = $nw - (int) $nw;
+        $nk = $nw - (int)$nw;
         if ($nk < 0.5) {
-            $nw = '' . (int) $nw;
+            $nw = '' . (int)$nw;
         } else {
-            $nw = '' . ((int) $nw + 1);
+            $nw = '' . ((int)$nw + 1);
         }
 
         while (strlen($nw) < 7) {
             $nw = '0' . $nw;
         }
 
-        $nk = $ew - (int) $ew;
+        $nk = $ew - (int)$ew;
         if ($nk < 0.5) {
-            $ew = '0' . (int) $ew;
+            $ew = '0' . (int)$ew;
         } else {
             $ew = '0' . intval($ew + 1);
         }
 
         return [
-            'zone' => $lz,
-            'letter' => $bz,
-            'north' => 'N' . floor((float) $nw),
-            'east' => 'E' . floor((float) $ew),
+                'zone' => $lz,
+                'letter' => $bz,
+                'north' => 'N' . floor((float)$nw),
+                'east' => 'E' . floor((float)$ew),
         ];
     }
 
     /**
      * Gauß Krüger
-     *
-     * @return string
      */
-    public function getGK()
-    : string
+    public function getGK(): string
     {
         $pdResult = $this->wgs2pot($this->nLat, $this->nLon);
         $result = $this->geo2gk($pdResult[1], $pdResult[0]);
@@ -330,14 +293,8 @@ class CoordinatesRepository
         return 'R ' . floor($result[0]) . ' H ' . floor($result[1]);
     }
 
-    /**
-     * @param float $bw
-     * @param float $lw
-     *
-     * @return float[]|int[]
-     */
-    public function wgs2pot(float $bw, float $lw)
-    : array {
+    public function wgs2pot(float $bw, float $lw): array
+    {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
            copy of this software and associated documentation files (the "Software"),
@@ -360,12 +317,12 @@ class CoordinatesRepository
         // Geographische Länge lw und Breite bw im WGS84 Datum
         if ($lw == '' || $bw == '') {
             return [
-                0,
-                0,
+                    0,
+                    0,
             ];
         }
-        $lw = (float) $lw;
-        $bw = (float) $bw;
+        $lw = (float)$lw;
+        $bw = (float)$bw;
 
         // Quellsystem WGS 84 Datum
         // Große Halbachse a und Abplattung fq
@@ -377,9 +334,9 @@ class CoordinatesRepository
         $f = $fq - 1.003748e-5;
 
         // Parameter für datum shift
-        $dx = - 606;
-        $dy = - 23;
-        $dz = - 413;
+        $dx = -606;
+        $dy = -23;
+        $dz = -413;
 
         // Quadrat der ersten numerischen Exzentrizität in Quell- und Zielsystem
         $e2q = (2 * $fq - $fq * $fq);
@@ -415,19 +372,13 @@ class CoordinatesRepository
         }
 
         return [
-            $l2,
-            $b2,
+                $l2,
+                $b2,
         ];
     }
 
-    /**
-     * @param float $bp
-     * @param float $lp
-     *
-     * @return int[]
-     */
-    public function geo2gk(float $bp, float $lp)
-    : array {
+    public function geo2gk(float $bp, float $lp): array
+    {
         /* Copyright (c) 2006, HELMUT H. HEIMEIER
            Permission is hereby granted, free of charge, to any person obtaining a
            copy of this software and associated documentation files (the "Software"),
@@ -445,12 +396,12 @@ class CoordinatesRepository
         //Geographische Länge lp und Breite bp im Potsdam Datum
         if ($lp == '' || $bp == '') {
             return [
-                0,
-                0,
+                    0,
+                    0,
             ];
         }
-        $lp = (float) $lp;
-        $bp = (float) $bp;
+        $lp = (float)$lp;
+        $bp = (float)$bp;
 
         // Potsdam Datum
         // Große Halbachse a und Abplattung f
@@ -468,9 +419,9 @@ class CoordinatesRepository
 
         // Koeffizienten zur Berechnung der Meridianbogenlänge
         $e0 = $c * (pi() / 180) * (1 - 3 * $ex2 / 4 + 45 * $ex4 / 64 - 175 * $ex6 / 256 + 11025 * $ex8 / 16384);
-        $e2 = $c * (- 3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
+        $e2 = $c * (-3 * $ex2 / 8 + 15 * $ex4 / 32 - 525 * $ex6 / 1024 + 2205 * $ex8 / 4096);
         $e4 = $c * (15 * $ex4 / 256 - 105 * $ex6 / 1024 + 2205 * $ex8 / 16384);
-        $e6 = $c * (- 35 * $ex6 / 3072 + 315 * $ex8 / 12288);
+        $e6 = $c * (-35 * $ex6 / 3072 + 315 * $ex8 / 12288);
 
         // Breite in Radianten
         $br = $bp * pi() / 180;
@@ -504,37 +455,34 @@ class CoordinatesRepository
 
         // Hochwert hw und Rechtswert rw als Funktion von geographischer Breite und Länge
         $hw = ($g + $nd * $cos2 * $tan1 * $dl2 / 2 + $nd * $cos4 * $tan1 * (5 - $tan2 + 9 * $etasq)
-                                                     * $dl4 / 24);
+                * $dl4 / 24);
         $rw = ($nd * $cos1 * $dl + $nd * $cos3 * (1 - $tan2 + $etasq) * $dl3 / 6 +
-               $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
+                $nd * $cos5 * (5 - 18 * $tan2 + $tan4) * $dl5 / 120 + $kz * 1e6 + 500000);
 
-        $nk = $hw - (int) $hw;
+        $nk = $hw - (int)$hw;
         if ($nk < 0.5) {
-            $hw = (int) $hw;
+            $hw = (int)$hw;
         } else {
-            $hw = ((int) $hw) + 1;
+            $hw = ((int)$hw) + 1;
         }
 
-        $nk = $rw - (int) $rw;
+        $nk = $rw - (int)$rw;
         if ($nk < 0.5) {
-            $rw = (int) $rw;
+            $rw = (int)$rw;
         } else {
-            $rw = (int) ($rw + 1);
+            $rw = (int)($rw + 1);
         }
 
         return [
-            $rw,
-            $hw,
+                $rw,
+                $hw,
         ];
     }
 
     /**
      * RD Dutch Grid
-     *
-     * @return string
      */
-    public function getRD()
-    : string
+    public function getRD(): string
     {
         $rpq = [];
 
@@ -545,33 +493,33 @@ class CoordinatesRepository
         $lat_base = 52.15517440;
         $lon_base = 5.38720621;
 
-        for ($i = 0; $i <= 6; $i ++) {
-            for ($j = 0; $j <= 5; $j ++) {
+        for ($i = 0; $i <= 6; $i++) {
+            for ($j = 0; $j <= 5; $j++) {
                 $rpq[$i][$j] = 0;
                 $spq[$i][$j] = 0;
             }
         }
         //#coefficients
         $rpq[0][1] = 190094.945;
-        $rpq[1][1] = - 11832.228;
-        $rpq[2][1] = - 114.221;
-        $rpq[0][3] = - 32.391;
-        $rpq[1][0] = - 0.705;
-        $rpq[3][1] = - 2.340;
-        $rpq[1][3] = - 0.608;
-        $rpq[0][2] = - 0.008;
+        $rpq[1][1] = -11832.228;
+        $rpq[2][1] = -114.221;
+        $rpq[0][3] = -32.391;
+        $rpq[1][0] = -0.705;
+        $rpq[3][1] = -2.340;
+        $rpq[1][3] = -0.608;
+        $rpq[0][2] = -0.008;
         $rpq[2][3] = 0.148;
 
         $spq[1][0] = 309056.544;
         $spq[0][2] = 3638.893;
         $spq[2][0] = 73.077;
-        $spq[1][2] = - 157.984;
+        $spq[1][2] = -157.984;
         $spq[3][0] = 59.788;
         $spq[0][1] = 0.433;
-        $spq[2][2] = - 6.439;
-        $spq[1][1] = - 0.032;
+        $spq[2][2] = -6.439;
+        $spq[1][1] = -0.032;
         $spq[0][4] = 0.092;
-        $spq[1][4] = - 0.054;
+        $spq[1][4] = -0.054;
 
         // Calculate X, Y of origin
         $latDiff = $this->nLat - $lat_base;
@@ -581,8 +529,8 @@ class CoordinatesRepository
         $xOrigin = 0;
         $yOrigin = 0;
 
-        for ($q = 0; $q <= 5; $q ++) {
-            for ($p = 0; $p <= 6; $p ++) {
+        for ($q = 0; $q <= 5; $q++) {
+            for ($p = 0; $p <= 6; $p++) {
                 $xOrigin = $xOrigin + ($rpq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
                 $yOrigin = $yOrigin + ($spq[$p][$q] * ((pow($dlat, $p)) * (pow($dlon, $q))));
             }
@@ -595,11 +543,8 @@ class CoordinatesRepository
 
     /**
      * QTH Locator
-     *
-     * @return string
      */
-    public function getQTH()
-    : string
+    public function getQTH(): string
     {
         $l = [];
         $lon = $this->nLon;
@@ -624,11 +569,8 @@ class CoordinatesRepository
 
     /**
      * SwissGrid CH1903
-     *
-     * @return string[]
      */
-    public function getSwissGrid()
-    : array
+    public function getSwissGrid(): array
     {
         $nLat = $this->nLat * 3600;
         $nLon = $this->nLon * 3600;
@@ -653,18 +595,14 @@ class CoordinatesRepository
         $mapsearch = "<a href=\"https://map.search.ch/$y,$x\" target=\"_blank\">map.search.ch</a>";
 
         return [
-            'coord' => $swissgrid,
-            $mapplus,
-            $mapsearch,
+                'coord' => $swissgrid,
+                $mapplus,
+                $mapsearch,
         ];
     }
 
     /**
      * What3Words
-     *
-     * @param string $language
-     *
-     * @return false|string
      */
     public function getW3W(string $language = 'en')
     {
@@ -673,9 +611,9 @@ class CoordinatesRepository
         }
 
         $params = [
-            'key' => $_ENV['W3W_API'],
-            'coordinates' => sprintf('%f,%f', $this->nLat, $this->nLon),
-            'language' => strtolower($language),
+                'key' => $_ENV['W3W_API'],
+                'coordinates' => sprintf('%f,%f', $this->nLat, $this->nLon),
+                'language' => strtolower($language),
         ];
         $params_str = http_build_query($params);
 
@@ -692,35 +630,29 @@ class CoordinatesRepository
         return $json['words'];
     }
 
-    public function getAllCoordinatesFormatsAsArray(float $newLat = null, float $newLon = null)
-    : array {
+    public function getAllCoordinatesFormatsAsArray(float $newLat = null, float $newLon = null): array
+    {
         if (($newLat != null) && ($newLon != null)) {
             $this->setLatLon($newLat, $newLon);
         }
 
         return [
-            'coord_Decimal' => $this->getDecimal(),
-            'coord_DM' => $this->getDegreeMinutes(),
-            'coord_DMS' => $this->getDegreeMinutesSeconds(),
-            'coord_GK' => $this->getGK(),
-            'coord_QTH' => $this->getQTH(),
-            'coord_RD' => $this->getRD(),
-            'coord_CH1903' => $this->getSwissGrid(),
-            'coord_UTM' => $this->getUTM(),
-            'coord_W3Wde' => $this->getW3W('de'),
-            'coord_W3Wen' => $this->getW3W(),
+                'coord_Decimal' => $this->getDecimal(),
+                'coord_DM' => $this->getDegreeMinutes(),
+                'coord_DMS' => $this->getDegreeMinutesSeconds(),
+                'coord_GK' => $this->getGK(),
+                'coord_QTH' => $this->getQTH(),
+                'coord_RD' => $this->getRD(),
+                'coord_CH1903' => $this->getSwissGrid(),
+                'coord_UTM' => $this->getUTM(),
+                'coord_W3Wde' => $this->getW3W('de'),
+                'coord_W3Wen' => $this->getW3W(),
         ];
     }
 
-    /**
-     * @param string $lat
-     * @param string $lon
-     *
-     * @return array
-     */
     // TODO: aktuell nur von Dec in andere Formate. Konvertierung von allen Formaten in alle anderen Formate sollte aber auch irgendwann gehen..
-    public function convertCoordinates(string $lat, string $lon)
-    : array {
+    public function convertCoordinates(string $lat, string $lon): array
+    {
         $convertedCoordinates = [];
 
         $lat_float = floatval($lat);
@@ -735,25 +667,21 @@ class CoordinatesRepository
         $convertedCoordinates['QTH'] = $this->getQTH();
         $convertedCoordinates['RD'] = $this->getRD();
         $convertedCoordinates['CH1903'] = $this->getSwissGrid()['coord'];
-        $convertedCoordinates['UTM'] = $this->getUTM()['zone'] . $this->getUTM()['letter'] . ' ' . $this->getUTM()['east'] . ' ' . $this->getUTM()['north'];
+        $convertedCoordinates['UTM'] = $this->getUTM()['zone'] . $this->getUTM()['letter'] . ' ' . $this->getUTM()['east'] . ' ' . $this->getUTM(
+                )['north'];
         $convertedCoordinates['W3W_de'] = $this->getW3W('de');
         $convertedCoordinates['W3W_en'] = $this->getW3W();
 
         return $convertedCoordinates;
     }
 
-    /**
-     * @param string $searchtext
-     *
-     * @return array
-     */
-    public function getCoordinatesForSearchField(string $searchtext)
-    : array {
+    public function getCoordinatesForSearchField(string $searchtext): array
+    {
         $searchtext = preg_replace("/[^0-9.,+\- ]/", "", $searchtext);
 
         $arr = preg_split('/\s+/', $searchtext);
 
-        $this->setLatLon((float) $arr[0], (float) $arr[1]);
+        $this->setLatLon((float)$arr[0], (float)$arr[1]);
 
         return $this->getAllCoordinatesFormatsAsArray();
     }

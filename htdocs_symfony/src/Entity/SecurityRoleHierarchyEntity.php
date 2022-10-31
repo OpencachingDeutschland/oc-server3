@@ -1,22 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
 class SecurityRoleHierarchyEntity extends AbstractEntity
 {
-    /** @var int */
-    public $roleId;
+    public int $roleId = 0;
 
-    /** @var int */
-    public $subRoleId;
+    public int $subRoleId;
 
-    /**
-     * @return bool
-     */
     public function isNew(): bool
     {
-        return $this->roleId === null;
+        return $this->roleId === 0;
     }
 }

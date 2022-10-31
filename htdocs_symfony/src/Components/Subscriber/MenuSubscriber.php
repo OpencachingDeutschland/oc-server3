@@ -11,63 +11,42 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- *
+ * Navigation menu for frontend and backend
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var Security
-     */
     private $security;
 
-    /**
-     * @var TranslatorInterface
-     */
     private $translator;
 
-    /**
-     * MenuSubscriber constructor.
-     *
-     * @param Security $security
-     * @param TranslatorInterface $translator
-     */
     public function __construct(Security $security, TranslatorInterface $translator)
     {
         $this->security = $security;
         $this->translator = $translator;
     }
 
-    /**
-     * @return array[]
-     */
-    public static function getSubscribedEvents()
-    : array
+    public static function getSubscribedEvents(): array
     {
         return [
-            KnpMenuEvent::class => ['onSetupMenu', 100],
+                KnpMenuEvent::class => ['onSetupMenu', 100],
         ];
     }
 
-    /**
-     */
     private function addMenuItem(
-        ItemInterface $menu,
-        string $child,
-        string $label,
-        string $route,
-        string $labelName,
-        string $labelValue
+            ItemInterface $menu,
+            string $child,
+            string $label,
+            string $route,
+            string $labelName,
+            string $labelValue
     ) {
         $menu->addChild($child, [
-            'label' => $label,
-            'route' => $route,
+                'label' => $label,
+                'route' => $route,
             // 'childOptions' => $event->getChildOptions(), // wozu braucht's das?
         ])->setLabelAttribute($labelName, $labelValue);
     }
 
-    /**
-     * @param KnpMenuEvent $event
-     */
     public function onSetupMenu(KnpMenuEvent $event)
     {
         $menu = $event->getMenu();

@@ -6,35 +6,20 @@ namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
 
-/**
- * Class SupportUserCommentsEntity
- *
- * @package Oc\Entity
- */
 class SupportUserCommentsEntity extends AbstractEntity
 {
-    /** @var int */
-    public $id;
+    public int $id = 0;
 
-    /** @var int */
-    public $ocUserId;
+    public int $ocUserId;
 
-    /** @var string */
-    public $comment;
+    public string $comment;
 
-    /** @var string */
-    public $commentCreated;
+    public string $commentCreated;
 
-    /** @var string */
-    public $commentLastModified;
+    public string $commentLastModified;
 
-    /** @var UserEntity */
-    public $user;
+    public UserEntity $user;
 
-    /**
-     * @param int $ocUserId
-     * @param string $comment
-     */
     public function __construct(int $ocUserId, string $comment = '')
     {
         $this->ocUserId = $ocUserId;
@@ -43,12 +28,8 @@ class SupportUserCommentsEntity extends AbstractEntity
         $this->commentLastModified = date('Y-m-d H:i:s');
     }
 
-    /**
-     * @return bool
-     */
-    public function isNew()
-    : bool
+    public function isNew(): bool
     {
-        return $this->id === null;
+        return $this->id === 0;
     }
 }

@@ -20,9 +20,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-/**
- *
- */
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -38,10 +35,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     private UserRepository $userRepository;
 
     public function __construct(
-        UserRepository $userRepository,
-        UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordHasherInterface $passwordEncoder
+            UserRepository $userRepository,
+            UrlGeneratorInterface $urlGenerator,
+            CsrfTokenManagerInterface $csrfTokenManager,
+            UserPasswordHasherInterface $passwordEncoder
     ) {
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -49,47 +46,42 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $this->userRepository = $userRepository;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Passport
-     */
-    public function authenticate(Request $request)
-    : Passport {
+    public function authenticate(Request $request): Passport
+    {
         $userName = $request->request->get('username');
         $password = $request->request->get('password');
 
         // https://symfonycasts.com/screencast/symfony6-upgrade/custom-authenticator
         return new Passport(
-            new UserBadge($userName, function($userIdentifier) {
-                // optionally pass a callback to load the User manually
-                $user = $this->userRepository->fetchOneBy(['username' => $userIdentifier]);
-                if (!$user) {
-                    throw new UserNotFoundException();
-                }
+                new UserBadge($userName, function ($userIdentifier) {
+                    // optionally pass a callback to load the User manually
+                    $user = $this->userRepository->fetchOneBy(['username' => $userIdentifier]);
+                    if (!$user) {
+                        throw new UserNotFoundException();
+                    }
 
-                return $user;
-            }),
-            new PasswordCredentials($password),
-            [
-                new CsrfTokenBadge(
-                    'authenticate',
-                    $request->request->get('_csrf_token')
-                ),
-                (new RememberMeBadge())->enable(),
-            ]
+                    return $user;
+                }),
+                new PasswordCredentials($password),
+                [
+                        new CsrfTokenBadge(
+                                'authenticate',
+                                $request->request->get('_csrf_token')
+                        ),
+                        (new RememberMeBadge())->enable(),
+                ]
         );
     }
 
     /**
-     * @param Request $request
+     * @param Request        $request
      * @param TokenInterface $token
-     * @param $firewallName
+     * @param                $firewallName
      *
      * @return RedirectResponse
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $firewallName)
-    : RedirectResponse {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $firewallName): RedirectResponse
+    {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
@@ -97,13 +89,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('app_index_index'));
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return string
-     */
-    protected function getLoginUrl(Request $request)
-    : string {
+    protected function getLoginUrl(Request $request): string
+    {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }

@@ -4,22 +4,18 @@ declare(strict_types=1);
 
 namespace Oc\Security;
 
+use Doctrine\DBAL\Exception;
 use Oc\Entity\SecurityRoleHierarchyEntity;
 use Oc\Entity\SecurityRolesEntity;
+use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\SecurityRoleHierarchyRepository;
 use Oc\Repository\SecurityRolesRepository;
 
 class RoleHierarchyBuilder
 {
-    /**
-     * @var SecurityRoleHierarchyRepository
-     */
-    private $securityRoleHierarchyRepository;
+    private SecurityRoleHierarchyRepository $securityRoleHierarchyRepository;
 
-    /**
-     * @var SecurityRolesRepository
-     */
-    private $securityRolesRepository;
+    private SecurityRolesRepository $securityRolesRepository;
 
     public function __construct(SecurityRolesRepository $securityRolesRepository, SecurityRoleHierarchyRepository $securityRoleHierarchyRepository)
     {
@@ -27,6 +23,10 @@ class RoleHierarchyBuilder
         $this->securityRolesRepository = $securityRolesRepository;
     }
 
+    /**
+     * @throws RecordsNotFoundException
+     * @throws Exception
+     */
     public function build(): array
     {
         $roles = $this->securityRolesRepository->fetchAll();

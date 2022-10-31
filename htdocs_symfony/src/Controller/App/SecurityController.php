@@ -20,21 +20,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-/**
- *
- */
 class SecurityController extends AbstractController
 {
-    /** @var AuthenticationUtils */
     public AuthenticationUtils $authenticationUtils;
 
-    /** @var UserRepository */
     public UserRepository $userRepository;
 
-    /**
-     * @param AuthenticationUtils $authenticationUtils
-     * @param UserRepository      $userRepository
-     */
     public function __construct(AuthenticationUtils $authenticationUtils, UserRepository $userRepository)
     {
         $this->authenticationUtils = $authenticationUtils;
@@ -67,14 +58,6 @@ class SecurityController extends AbstractController
     /**
      * Manage requests to register a new user
      *
-     * @param MailerController            $mailerController
-     * @param Request                     $request
-     * @param CountriesRepository         $countriesRepository
-     * @param UserPasswordHasherInterface $passwordEncoder
-     * @param UserRepository              $userRepository
-     * @param UserRolesRepository         $userRolesRepository
-     *
-     * @return Response
      * @throws RecordsNotFoundException
      * @throws TransportExceptionInterface
      * @throws \Doctrine\DBAL\Exception
@@ -139,11 +122,6 @@ class SecurityController extends AbstractController
     /**
      * Activation of a new user account via URL (e.g. provided by activation email)
      *
-     * @param string $activationCode
-     * @param string $email
-     *
-     * @return Response
-     *
      * @Route("/automaticAccountActivation/{activationCode}&{email}", name="security_automatic_account_activation")
      */
     public function automaticActivateAccount(string $activationCode, string $email): Response
@@ -160,10 +138,6 @@ class SecurityController extends AbstractController
 
     /**
      * Activation of a new user account via website (activation code and email have to be entered manually)
-     *
-     * @param Request $request
-     *
-     * @return Response
      *
      * @Route("/accountActivation/", name="security_account_activation")
      */
@@ -186,11 +160,6 @@ class SecurityController extends AbstractController
 
     /**
      * Update of activation information in database
-     *
-     * @param string $activationCode
-     * @param string $email
-     *
-     * @return string
      */
     private function accountActivationUpdateDB(string $activationCode, string $email): string
     {

@@ -545,20 +545,7 @@ class user
                  FROM (SELECT cache_id
                        FROM cache_logs
                        WHERE user_id = "&1"
-                       AND type = 1
-                       GROUP BY cache_id
-                ) as tmp
-                ',
-                0,
-                $this->getUserId()
-            )
-            +
-            sql_value(
-                'SELECT COUNT(*)
-                 FROM (SELECT cache_id
-                       FROM cache_logs
-                       WHERE user_id = "&1"
-                       AND type = 7
+                       AND type IN (1, 7)
                        GROUP BY cache_id
                 ) as tmp
                 ',

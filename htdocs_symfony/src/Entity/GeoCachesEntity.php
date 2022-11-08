@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use DateTime;
 use Oc\Repository\AbstractEntity;
 
 class GeoCachesEntity extends AbstractEntity
@@ -88,6 +87,33 @@ class GeoCachesEntity extends AbstractEntity
     public GeoCacheStatusEntity $cacheStatus;
 
     public GeoCacheTypeEntity $cacheType;
+
+    // TODO: slini, neu
+    public GeoCacheRatingEntity $cacheRating;
+
+    public GeoCacheIgnoreEntity $cacheIgnore;
+
+    public GeoCacheWatchesEntity $cacheWatches;
+
+    public GeoCacheVisitsEntity $cacheVisits;
+
+    public LogTypesEntity $logTypes;
+
+    public int $ratingCount;
+
+    public int $ignoreCount;
+
+    public int $watchesCount;
+
+    public int $visitsCount;
+
+    public array $cacheLogs;
+
+    public array $logsCount;
+
+    public int $pictureCount;
+
+    // TODO Ende
 
     public function isNew(): bool
     {

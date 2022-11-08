@@ -27,7 +27,7 @@ class MapsController extends AbstractController
      */
     public function mapsController_index(Request $request): Response
     {
-        return $this->redirectToRoute('backend_map_coords');
+        return $this->redirectToRoute('app_map_coords');
     }
 
     /**

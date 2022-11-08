@@ -1,0 +1,211 @@
+{% extends 'app/base.html.twig' %}
+
+{% block page_content %}
+    <div>
+        {% if cache is defined %}
+            <div>
+                {% if cache %}
+                    <!-- Start Cachemeta -->
+                    <div>
+                        {#  TODO: link icons to Wiki article, instead of former "articles.php?page=cacheinfo#difficulty"
+                            TODO: add css classes instead of width, etc.
+                            TODO: change hardcoded D/T ratings as soon as new icons are available
+                        #}
+                        <div><a href="#"><img
+                                        src="https://www.opencaching.de/resource2/ocstyle/images/cacheicon/{{ cache.cache_type.iconLarge }}"
+                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32"></a>
+                        </div>
+                        <div><a href="#"><img src="http://docker.team-opencaching.de/resource2/ocstyle/images/difficulty/diff-50.gif"
+                                              alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
+                                              height="16"></a></div>
+                        <div><a href="#"><img src="http://docker.team-opencaching.de/resource2/ocstyle/images/difficulty/terr-20.gif"
+                                              alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
+                                              height="16"></a></div>
+                    </div>
+
+                    {# TODO: replace "Country / state / city" by something dynamic #}
+                    <div>
+                        <span>{{ cache.name }}</span>
+
+                        <p>{{ 'by' | trans }}&nbsp;<b><a
+                                        href="{{ path('app_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></b>
+                            <span style="color: rgb(88, 144, 168); font-weight: bold;"><img
+                                        src="http://docker.team-opencaching.de/images/flags/{{ cache.country | lower }}.gif"
+                                        alt={{ cache.country }} style="vertical-align:middle">
+                                        Deutschland &gt; Baden-Württemberg &gt; Ravensburg
+                                    </span>
+                        </p>
+                    </div>
+                    <!-- End Cachemeta -->
+
+                    <!-- Start Warning, if temporary not available, archived or locked -->
+                    {# TODO: to do #}
+                    <!-- End Warning -->
+
+                    <!-- Start Cachedetails -->
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>{{ 'OC' | trans }}</th>
+                            <td>{{ cache.wp_oc }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Title' | trans }}</th>
+                            <td>{{ cache.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Cache size' | trans }}</th>
+                            <td>{{ cache.cache_size.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'D/T' | trans }}</th>
+                            <td>{{ cache.difficulty | ocFilterDifficulty }}/{{ cache.terrain | ocFilterTerrain }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Owner' | trans }}</th>
+                            <td>{{ cache.user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Position' | trans }}</th>
+                            <td>
+                                <a href={{ path('app_coordinate_by_lat-lon', { 'lat': cache.latitude, 'lon': cache.longitude}) }}>{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
+                            </td>
+                        </tr>
+                        {% if cache.wp_gc %}
+                            <tr>
+                                <th>{{ 'GC-Code' | trans }}</th>
+                                <td><a href="https://coord.info/{{ cache.wp_gc }}">{{ cache.wp_gc }}</a></td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>{{ 'Status' | trans }}</th>
+                            <td>{{ cache.cache_status.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Has logpassword' | trans }}?</th>
+                            <td>{% if cache.logpw == 1 %}
+                                    <i class="fas fa-key"><i class="fas fa-check"></i></i>
+                                {% else %}
+                                    <i class="fas fa-times"></i>
+                                {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Published' | trans }}?</th>
+                            <td>{% if cache.is_publishdate == 1 %}
+                                    <i class="fas fa-check"></i>
+                                {% else %}
+                                    <i class="fas fa-times"></i>
+                                {% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Publishe date' | trans }}</th>
+                            <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Last change' | trans }}</th>
+                            <td>{{ cache.last_modified|date('d.m.Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Listing url' | trans }}</th>
+                            <td>https://opencaching.de/{{ cache.wp_oc }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Country' | trans }}</th>
+                            <td>{{ cache.country | default('?') }}</td>
+                        </tr>
+
+                        <tr>
+                            <th></th>
+                            <td>&nbsp;</td>
+                        </tr>
+
+                        {% if cache.cache_type.id == 6 %} {# 6 = Events #}
+                            <tr>
+                                <th>{{ 'Will attend' | trans }}</th>
+                                <td>{{ cache.logs_count.8 }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'Attended' | trans }}</th>
+                                <td>{{ cache.logs_count.7 }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <th>{{ 'Found' | trans }}</th>
+                                <td>{{ cache.logs_count.1 }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'Not found' | trans }}</th>
+                                <td>{{ cache.logs_count.2 }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>{{ 'Note' | trans }}</th>
+                            <td>{{ cache.logs_count.3 }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Watchers' | trans }}</th>
+                            <td>{{ cache.watches_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Ignorers' | trans }}</th>
+                            <td>{{ cache.ignore_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Page visits' | trans }}</th>
+                            <td>{{ cache.visits_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Log pictures' | trans }}</th>
+                            <td>{{ cache.picture_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Recommendations' | trans }}</th>
+                            <td>{{ cache.rating_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Geokrety history' | trans }}</th>
+                            <td><a href="https://geokrety.org/szukaj.php?lang=en_EN&wpt={{ cache.wp_oc }}">{{ 'Geokrety' | trans }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'Show on map' | trans }}</th>
+                            <td><a href="{{ path('app_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}"><i class="fas fa-map"></i></a>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table>
+                    <!-- End Cachedetails -->
+
+                    <!-- Start Attributes -->
+                    <!-- End Attributes -->
+
+                    <!-- Start Listing -->
+                    <!-- End Listing -->
+
+                    <!-- Start Hint -->
+                    <!-- End Hint -->
+
+                    <!-- Start Pictures -->
+                    <!-- End Pictures -->
+
+                    <!-- Start Logs -->
+                    {% if cache.cache_logs %}
+                        Log entries for {{ cache.name }} // {{ cache.logs_count.1 }}x {{ cache.logs_count.2 }}x {{ cache.logs_count.3 }}x
+                    {% else %}
+                        {{ 'No log entries found' | trans }}..
+                    {% endif %}
+                    <!-- End Logs -->
+
+                {% else %}
+                    <br/><br/>
+                    <span>{{ 'No cache found' | trans }}.. :-(</span>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <br/><br/>
+            <span>{{ 'Something went wrong' | trans }}.. :-(</span>
+        {% endif %}
+    </div>
+    {{ dump(cache) }}
+
+{% endblock %}

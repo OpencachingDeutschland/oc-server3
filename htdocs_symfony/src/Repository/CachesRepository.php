@@ -18,26 +18,50 @@ class CachesRepository
 
     private Connection $connection;
 
+    private CacheIgnoreRepository $cacheIgnoreRepository;
+
+    private CacheLogsRepository $cacheLogsRepository;
+
+    private CacheRatingRepository $cacheRatingRepository;
+
     private CacheSizeRepository $cacheSizeRepository;
 
     private CacheStatusRepository $cacheStatusRepository;
 
     private CacheTypeRepository $cacheTypeRepository;
 
+    private CacheVisitsRepository $cacheVisitsRepository;
+
+    private CacheWatchesRepository $cacheWatchesRepository;
+
+//    private PicturesRepository $picturesRepository;
+
     private UserRepository $userRepository;
 
     public function __construct(
             Connection $connection,
-            UserRepository $userRepository,
+            CacheIgnoreRepository $cacheIgnoreRepository,
+            CacheLogsRepository $cacheLogsRepository,
+            CacheRatingRepository $cacheRatingRepository,
             CacheSizeRepository $cacheSizeRepository,
             CacheStatusRepository $cacheStatusRepository,
-            CacheTypeRepository $cacheTypeRepository
+            CacheTypeRepository $cacheTypeRepository,
+            CacheVisitsRepository $cacheVisitsRepository,
+            CacheWatchesRepository $cacheWatchesRepository,
+//            PicturesRepository $picturesRepository,
+            UserRepository $userRepository
     ) {
         $this->connection = $connection;
-        $this->userRepository = $userRepository;
+        $this->cacheIgnoreRepository = $cacheIgnoreRepository;
+        $this->cacheLogsRepository = $cacheLogsRepository;
+        $this->cacheRatingRepository = $cacheRatingRepository;
         $this->cacheSizeRepository = $cacheSizeRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->cacheTypeRepository = $cacheTypeRepository;
+        $this->cacheVisitsRepository = $cacheVisitsRepository;
+        $this->cacheWatchesRepository = $cacheWatchesRepository;
+//        $this->picturesRepository = $picturesRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -254,6 +278,13 @@ class CachesRepository
                 'cache_status' => $entity->cacheStatus,
                 'cache_type' => $entity->cacheType,
                 'user' => $entity->user,
+                'rating_count' => $entity->ratingCount,
+                'ignore_count' => $entity->ignoreCount,
+                'watches_count' => $entity->watchesCount,
+                'visits_count' => $entity->visitsCount,
+                'cache_logs' => $entity->cacheLogs,
+                'logs_count' => $entity->logsCount,
+                'picture_count' => $entity->pictureCount,
         ];
     }
 
@@ -307,6 +338,13 @@ class CachesRepository
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
         $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
+        $entity->ratingCount = $this->cacheRatingRepository->countRating(['cache_id' => $entity->cacheId]);
+        $entity->ignoreCount = $this->cacheIgnoreRepository->fetchOneByCount(['cache_id' => $entity->cacheId]);
+        $entity->watchesCount = $this->cacheWatchesRepository->fetchOneByCount(['cache_id' => $entity->cacheId]);
+        $entity->visitsCount = $this->cacheVisitsRepository->getCountVisits(['cache_id' => $entity->cacheId]);
+        $entity->cacheLogs = $this->cacheLogsRepository->fetchBy(['cache_id' => $entity->cacheId]);
+        $entity->logsCount = $this->cacheLogsRepository->countLogs($entity->cacheId);
+        $entity->pictureCount = $this->cacheLogsRepository->getCountPictures(['cache_id' => $entity->cacheId]);
 
         return $entity;
     }
@@ -371,21 +409,35 @@ class CachesRepository
      */
     public function getCacheDetailsByWayPoint(string $wayPoint): array
     {
+
         $fetchedCache = $this->fetchOneBy(['wp_oc' => $wayPoint]);
 
-        return [$this->getDatabaseArrayFromEntity($fetchedCache)];
+        return $this->getDatabaseArrayFromEntity($fetchedCache);
     }
 
     public function search_by_cache_wp(string $wpID): array
     {
-        $fetchedCaches = [];
+        $fetchedCache = [];
 
         try {
-            $fetchedCaches = $this->getCacheDetailsByWayPoint($wpID);
+            $fetchedCache = $this->getCacheDetailsByWayPoint($wpID);
         } catch (\Exception $e) {
             //  tue was.. (status_not_found = true);
         }
 
-        return $fetchedCaches;
+        return $fetchedCache;
+    }
+
+    // TODO: slini, Verwendung?
+
+    /**
+     * @throws RecordNotFoundException
+     * @throws Exception
+     */
+    public function getCacheLogsByWayPoint(string $wayPoint): array
+    {
+        $fetchedCache = $this->cacheLogsRepository->fetchOneBy(['wp_oc' => $wayPoint]);
+
+        return [$this->cacheLogsRepository->getDatabaseArrayFromEntity($fetchedCache)];
     }
 }

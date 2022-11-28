@@ -21,6 +21,7 @@ class AppExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
+                new TwigFilter('ocFilterDuration', [$this, 'ocFilterDuration']),
                 new TwigFilter('ocFilterDifficulty', [$this, 'ocFilterDifficulty']),
                 new TwigFilter('ocFilterTerrain', [$this, 'ocFilterTerrain']),
                 new TwigFilter('rot13', [$this, 'ocFilterROT13']),
@@ -37,9 +38,17 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * @param $number
      *
-     * @return string
+     * convert a float value into a time string, like hh:mm
+     *
+     */
+    public function ocFilterDuration(float $number): string
+    {
+        return floor($number) . ':' . sprintf("%'.02d", round(60 * ($number - floor($number)), PHP_ROUND_HALF_UP));
+    }
+
+    /**
+     * convert database Difficulty and Terrain ratings into values used on website
      */
     private function convertDifficultyTerrainRating($number): string
     {
@@ -52,18 +61,28 @@ class AppExtension extends AbstractExtension
 
     /**
      * calculate and format difficulty value
+     * with_prefix=true: return value is like "D1", otherwise "1"
      */
-    public function ocFilterDifficulty($number): string
+    public function ocFilterDifficulty($number, $with_prefix = true): string
     {
-        return 'D' . $this->convertDifficultyTerrainRating($number);
+        if ($with_prefix) {
+            return 'D' . $this->convertDifficultyTerrainRating($number);
+        } else {
+            return $this->convertDifficultyTerrainRating($number);
+        }
     }
 
     /**
      * calculate and format terrain value
+     * with_prefix=true: return value is like "T1", otherwise "1"
      */
-    public function ocFilterTerrain($number): string
+    public function ocFilterTerrain($number, $with_prefix = true): string
     {
-        return 'T' . $this->convertDifficultyTerrainRating($number);
+        if ($with_prefix) {
+            return 'T' . $this->convertDifficultyTerrainRating($number);
+        } else {
+            return $this->convertDifficultyTerrainRating($number);
+        }
     }
 
     /**
@@ -83,10 +102,7 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * @param $lat
-     * @param $lon
-     *
-     * @return string
+     * convert decimal coordinates into DM format
      */
     public function ocFilterCoordinatesDegMin($lat, $lon): string
     {
@@ -98,10 +114,7 @@ class AppExtension extends AbstractExtension
     }
 
     /**
-     * @param $lat
-     * @param $lon
-     *
-     * @return string
+     * convert decimal coordinates into DMS format
      */
     public function ocFilterCoordinatesDegMinSec($lat, $lon): string
     {

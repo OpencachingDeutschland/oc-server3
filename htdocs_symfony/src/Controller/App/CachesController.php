@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Form\CachesFormType;
 use Oc\Repository\CachesRepository;
@@ -15,13 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CachesController extends AbstractController
 {
-    private Connection $connection;
-
     private CachesRepository $cachesRepository;
 
-    public function __construct(Connection $connection, CachesRepository $cachesRepository)
+    public function __construct(CachesRepository $cachesRepository)
     {
-        $this->connection = $connection;
         $this->cachesRepository = $cachesRepository;
     }
 
@@ -49,7 +45,7 @@ class CachesController extends AbstractController
         }
 
         return $this->render(
-                'app/caches/basicview.html.twig', [
+                'app/caches/search.html.twig', [
                         'cachesForm' => $form->createView(),
                         'caches_by_searchfield' => $fetchedCaches
                 ]
@@ -61,9 +57,9 @@ class CachesController extends AbstractController
      */
     public function search_by_cache_wp(string $wpID): Response
     {
-        $fetchedCaches = $this->cachesRepository->search_by_cache_wp($wpID);
+        $fetchedCache = $this->cachesRepository->search_by_cache_wp($wpID);
 
-        return $this->render('app/caches/detailview.html.twig', ['cache_by_id' => $fetchedCaches]
-        ); //+ status_not_found + abfragen in twig, Z.B.
+        return $this->render('app/caches/view_listing.html.twig', ['cache' => $fetchedCache]
+        );
     }
 }

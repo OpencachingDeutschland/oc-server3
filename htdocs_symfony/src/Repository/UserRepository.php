@@ -274,7 +274,7 @@ class UserRepository
         $entity->userId = (int)$data['user_id'];
         $entity->dateCreated = $data['date_created'];
         $entity->lastModified = $data['last_modified'];
-        $entity->lastLogin = $data['last_login'];
+        $entity->lastLogin = (string)$data['last_login'];
         $entity->username = $data['username'];
         $entity->password = (string)$data['password'];
         $entity->email = (string)$data['email'];

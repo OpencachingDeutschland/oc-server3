@@ -429,14 +429,14 @@ class CachesRepository
     }
 
     // TODO: slini, Verwendung?
-//    /**
-//     * @throws RecordNotFoundException
-//     * @throws Exception
-//     */
-//    public function getCacheLogsByWayPoint(string $wayPoint): array
-//    {
-//        $fetchedCache = $this->cacheLogsRepository->fetchOneBy(['wp_oc' => $wayPoint]);
-//
-//        return [$this->cacheLogsRepository->getDatabaseArrayFromEntity($fetchedCache)];
-//    }
+    /**
+     * @throws RecordNotFoundException
+     * @throws Exception
+     */
+    public function getCacheLogsByWayPoint(string $wayPoint): array
+    {
+        $fetchedCache = $this->cacheLogsRepository->fetchOneBy(['wp_oc' => $wayPoint]);
+
+        return [$this->cacheLogsRepository->getDatabaseArrayFromEntity($fetchedCache)];
+    }
 }

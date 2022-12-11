@@ -123,7 +123,7 @@ if ($error == false) {
         $cache_record = sql_fetch_array($cache_rs);
         sql_free_result($cache_rs);
 
-        if ($cache_record !== false) {
+        if (is_array($cache_record)) {
             if ($cache_record['user_id'] == $usr['userid'] || $login->listingAdmin()) {
                 $tplname = 'editcache';
                 tpl_acceptsAndPurifiesHtmlInput();

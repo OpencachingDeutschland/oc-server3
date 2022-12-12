@@ -567,7 +567,7 @@ function sql_value_internal($bQuerySlave, $sql, $default)
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
- * @return array
+ * @return array|false|null
  */
 function sql_fetch_array($rs)
 {

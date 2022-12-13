@@ -49,7 +49,7 @@ $allowed = ['cacheid', 'userid', 'logid', 'desclang', 'descid'];
 
 foreach($_REQUEST as $varname => $varvalue) {
     if (in_array($varname, $allowed)) {
-        $target .= $varname . '=' . $varvalue . '&';
+        $target .= $varname . '=' . htmlspecialchars($varvalue) . '&';
     }
 }
 if (mb_substr($target, - 1) == '?' || mb_substr($target, - 1) == '&') {

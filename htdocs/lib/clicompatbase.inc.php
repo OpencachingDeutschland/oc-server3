@@ -506,7 +506,7 @@ function sql_warn($warnmessage): void
 /**
  * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
- * @return array
+ * @return array|false|null
  */
 function sql_fetch_array($rs)
 {

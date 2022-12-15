@@ -189,6 +189,7 @@ class CacheTypeRepository
                 'short2' => $entity->short2,
                 'short2_trans_id' => $entity->short2TransId,
                 'kml_name' => $entity->kmlName,
+                'svg_name' => $entity->svgName,
         ];
     }
 
@@ -206,6 +207,7 @@ class CacheTypeRepository
         $entity->short2 = (string)$data['short2'];
         $entity->short2TransId = (int)$data['short2_trans_id'];
         $entity->kmlName = (string)$data['kml_name'];
+        $entity->svgName = (string)$data['svg_name'];
 
         return $entity;
     }

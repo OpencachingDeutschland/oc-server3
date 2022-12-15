@@ -259,6 +259,28 @@ class CacheLogsRepository
         return $entity;
     }
 
+    /**
+     * @throws Exception
+     */
+    public function checkLogStatus(int $userId, int $cacheId, string $logType): bool
+    {
+        if (!empty($userId) && !empty($cacheId)) {
+            $queryBuilder = $this->connection->createQueryBuilder()
+                    ->select('cache_id')
+                    ->from(self::TABLE)
+                    ->where('cache_id = :cacheId')
+                    ->andWhere('user_id = :userId')
+                    ->andWhere('type IN (:logType)')
+                    ->setParameters(['userId' => $userId, 'cacheId' => $cacheId, 'logType' => $logType])
+                    ->setMaxResults(1)
+                    ->executeQuery();
+
+            return !($queryBuilder->rowcount() === 0);
+        } else {
+            return false;
+        }
+    }
+
     public function getDatabaseArrayFromEntity(GeoCacheLogsEntity $entity): array
     {
         return [

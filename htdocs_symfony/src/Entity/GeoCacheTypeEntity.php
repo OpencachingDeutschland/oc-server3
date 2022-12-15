@@ -30,6 +30,8 @@ class GeoCacheTypeEntity extends AbstractEntity
 
     public string $kmlName;
 
+    public string $svgName;
+
     public function isNew(): bool
     {
         return $this->id === 0;

@@ -11,12 +11,17 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
+use Symfony\Component\Security\Core\Security;
 
 class CachesRepository
 {
     private const TABLE = 'caches';
 
     private Connection $connection;
+
+    private Security $security;
+
+    private CachesAttributesRepository $cachesAttributesRepository;
 
     private CacheIgnoreRepository $cacheIgnoreRepository;
 
@@ -40,6 +45,8 @@ class CachesRepository
 
     public function __construct(
             Connection $connection,
+            Security $security,
+            CachesAttributesRepository $cachesAttributesRepository,
             CacheIgnoreRepository $cacheIgnoreRepository,
             CacheLogsRepository $cacheLogsRepository,
             CacheRatingRepository $cacheRatingRepository,
@@ -52,6 +59,8 @@ class CachesRepository
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
+        $this->security = $security;
+        $this->cachesAttributesRepository = $cachesAttributesRepository;
         $this->cacheIgnoreRepository = $cacheIgnoreRepository;
         $this->cacheLogsRepository = $cacheLogsRepository;
         $this->cacheRatingRepository = $cacheRatingRepository;
@@ -285,6 +294,7 @@ class CachesRepository
                 'cache_logs' => $entity->cacheLogs,
                 'logs_count' => $entity->logsCount,
                 'picture_count' => $entity->pictureCount,
+                'image_Name' => $entity->imageName,
         ];
     }
 
@@ -345,6 +355,7 @@ class CachesRepository
         $entity->cacheLogs = $this->cacheLogsRepository->fetchBy(['cache_id' => $entity->cacheId]);
         $entity->logsCount = $this->cacheLogsRepository->countLogs($entity->cacheId);
         $entity->pictureCount = $this->cacheLogsRepository->getCountPictures(['cache_id' => $entity->cacheId]);
+        $entity->imageName = $this->getCacheiconImagename($entity);
 
         return $entity;
     }
@@ -409,7 +420,6 @@ class CachesRepository
      */
     public function getCacheDetailsByWayPoint(string $wayPoint): array
     {
-
         $fetchedCache = $this->fetchOneBy(['wp_oc' => $wayPoint]);
 
         return $this->getDatabaseArrayFromEntity($fetchedCache);
@@ -439,5 +449,60 @@ class CachesRepository
         $fetchedCache = $this->cacheLogsRepository->fetchOneBy(['wp_oc' => $wayPoint]);
 
         return [$this->cacheLogsRepository->getDatabaseArrayFromEntity($fetchedCache)];
+    }
+
+
+    /**
+     * evaluate cache status and provide several information for determining correct icon image name
+     *
+     * @throws Exception
+     */
+    public function getCacheiconImagename(GeoCachesEntity $entity): array
+    {
+        if ($this->security->getUser() != null) {
+            $loggedInUserId = $this->security->getUser()->userId;
+        } else {
+            $loggedInUserId = 0;
+        }
+        $result = array();
+
+        $result['type'] = $entity->cacheType->svgName;
+
+        if ($entity->cacheStatus->name === 'Available') {
+            $result['status'] = '-active';
+        } elseif ($entity->cacheStatus->name === 'Archived') {
+            $result['status'] = '-archived';
+        } else {
+            $result['status'] = '-inactive';
+        }
+
+        if ($this->cacheLogsRepository->checkLogStatus($loggedInUserId, $entity->cacheId, '1, 7')) {
+            $result['found'] = '-found';
+        } elseif ($this->cacheLogsRepository->checkLogStatus($loggedInUserId, $entity->cacheId, '2')) {
+            $result['found'] = '-notfound';
+        } else {
+            $result['found'] = '-untried';
+        }
+
+        // set oconly-marker only if cache is active and untried
+        if (($result['status'] === '-active') && ($result['found'] === '-untried')) {
+            $result['oconly'] = ($this->cachesAttributesRepository->isOCOnly($entity->cacheId) ? '-oconly-border' : '');
+        } else {
+            $result['oconly'] = '';
+        }
+
+        $result['owned'] = ($loggedInUserId === $entity->userId) ? '-owned' : '';
+
+        // iconStandardName = simple icon of cache type without any additional information
+        $result['iconStandardName'] = $entity->cacheType->svgName . '-active-untried.svg';
+
+        // iconCurrentName = icon of cache type including additional information like owner, found status, deactivation status of this cache, etc.
+        if (!empty($result['owned'])) {
+            $result['iconCurrentName'] = $result['type'] . $result['status'] . $result['owned'] . '.svg';
+        } else {
+            $result['iconCurrentName'] = $result['type'] . $result['status'] . $result['found'] . $result['oconly'] . '.svg';
+        }
+
+        return $result;
     }
 }

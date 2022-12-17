@@ -113,6 +113,8 @@ class GeoCachesEntity extends AbstractEntity
 
     public int $pictureCount;
 
+    public array $imageName;
+
     // TODO Ende
 
     public function isNew(): bool

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\App;
 
 use Doctrine\DBAL\Exception;
+use Oc\Repository\CachesRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\MapsRepository;
@@ -27,7 +28,7 @@ class MapsController extends AbstractController
      */
     public function mapsController_index(Request $request): Response
     {
-        return $this->redirectToRoute('app_map_coords');
+        return $this->redirectToRoute('app_map_show');
     }
 
     /**

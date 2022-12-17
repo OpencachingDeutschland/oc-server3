@@ -7,18 +7,21 @@
                 {% if cache %}
                     <!-- Start Cachemeta -->
                     <div>
+                        {{ dump(cache.image_Name) }}
                         {#  TODO: link icons to Wiki article, instead of former "articles.php?page=cacheinfo#difficulty"
                             TODO: add css classes instead of width, etc.
-                            TODO: change hardcoded D/T ratings as soon as new icons are available
                         #}
-                        <div><a href="#"><img
-                                        src="https://www.opencaching.de/resource2/ocstyle/images/cacheicon/{{ cache.cache_type.iconLarge }}"
-                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32"></a>
+                        <div><br href="#"><img
+                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconStandardName) }}"
+                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Std.Icon)</br>
+                                <img
+                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconCurrentName) }}"
+                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Map-Icon)</a>
                         </div>
-                        <div><a href="#"><img src="http://docker.team-opencaching.de/resource2/ocstyle/images/difficulty/diff-50.gif"
+                        <div><a href="#"><img src="{{ asset('images/ratings/difficulty-' ~ cache.difficulty * 5 ~ '.svg') }}"
                                               alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
                                               height="16"></a></div>
-                        <div><a href="#"><img src="http://docker.team-opencaching.de/resource2/ocstyle/images/difficulty/terr-20.gif"
+                        <div><a href="#"><img src="{{ asset('images/ratings/terrain-' ~ cache.terrain * 5 ~ '.svg') }}"
                                               alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
                                               height="16"></a></div>
                     </div>
@@ -30,8 +33,8 @@
                         <p>{{ 'by' | trans }}&nbsp;<b><a
                                         href="{{ path('app_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></b>
                             <span style="color: rgb(88, 144, 168); font-weight: bold;"><img
-                                        src="http://docker.team-opencaching.de/images/flags/{{ cache.country | lower }}.gif"
-                                        alt={{ cache.country }} style="vertical-align:middle">
+                                        src="{{ asset('images/flags/' ~ cache.country | lower) }}.svg"
+                                        alt={{ cache.country }} width="16" style="vertical-align:middle">
                                         Deutschland &gt; Baden-Württemberg &gt; Ravensburg
                                     </span>
                         </p>

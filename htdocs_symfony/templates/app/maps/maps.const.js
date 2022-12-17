@@ -22,7 +22,7 @@ const popupAnchorOffsetY = - map_icon_anchor;
 
 
 const CacheIcon_drivein = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/drivein.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/drivein-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size], // size of the icon
     iconAnchor:   [map_icon_anchor, map_icon_anchor], // point of the icon which will correspond to marker's location
@@ -30,7 +30,7 @@ const CacheIcon_drivein = L.icon({
 });
 
 const CacheIcon_event = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/event.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/event-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -38,7 +38,7 @@ const CacheIcon_event = L.icon({
 });
 
 const CacheIcon_mathe = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/mathe.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/mathe-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -46,7 +46,7 @@ const CacheIcon_mathe = L.icon({
 });
 
 const CacheIcon_moving = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/moving.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/moving-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -54,7 +54,7 @@ const CacheIcon_moving = L.icon({
 });
 
 const CacheIcon_multi = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/multi.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/multi-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -62,7 +62,7 @@ const CacheIcon_multi = L.icon({
 });
 
 const CacheIcon_mystery = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/mystery.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/mystery-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -70,7 +70,7 @@ const CacheIcon_mystery = L.icon({
 });
 
 const CacheIcon_tradi = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/traditional.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/traditional-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -78,7 +78,7 @@ const CacheIcon_tradi = L.icon({
 });
 
 const CacheIcon_unknown = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/unknown.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/unknown-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -86,7 +86,7 @@ const CacheIcon_unknown = L.icon({
 });
 
 const CacheIcon_virtual = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/virtual.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/virtual-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],
@@ -94,7 +94,7 @@ const CacheIcon_virtual = L.icon({
 });
 
 const CacheIcon_webcam = L.icon({
-    iconUrl: '{{ asset('bundles/adminlte/images/cacheicons/webcam.svg') }}',
+    iconUrl: '{{ asset('images/cacheTypes/webcam-active-untried.svg') }}',
 
     iconSize:     [map_icon_size, map_icon_size],
     iconAnchor:   [map_icon_anchor, map_icon_anchor],

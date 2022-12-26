@@ -66,7 +66,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Owner' | trans }}</th>
-                            <td>{{ cache.user.username }}</td>
+                            <td><a href="{{ path('app_user_by_id', { 'userID': cache.user_id}) }}">{{ cache.user.username }}</a>
                         </tr>
                         <tr>
                             <th>{{ 'Position' | trans }}</th>
@@ -191,12 +191,157 @@
                     <!-- End Pictures -->
 
                     <!-- Start Logs -->
+                    <nav class="navbar navbar-light bg-light">
+                        <span class="navbar-text">
+                        Log entries for {{ cache.name }} //
+                            {% if cache.type == 6 %}
+                                {{ cache.logs_count.8 }} x <img    src="{{ asset('images/logTypes/will_attend.svg') }}"
+                                                                   alt="{{ 'Will Attend' | trans }}" title="{{ 'Will Attend' | trans }}" width="16" height="16">
+                                {{ cache.logs_count.7 }} x <img    src="{{ asset('images/logTypes/attended.svg') }}"
+                                                                   alt="{{ 'Attendend' | trans }}" title="{{ 'Attended' | trans }}" width="16" height="16">
+                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                                                   alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
+                            {% else %}
+                                {{ cache.logs_count.1 }} x <img    src="{{ asset('images/logTypes/found.svg') }}"
+                                                                   alt="{{ 'Found' | trans }}" title="{{ 'Found' | trans }}" width="16" height="16">
+                                {{ cache.logs_count.2 }} x <img    src="{{ asset('images/logTypes/dnf.svg') }}"
+                                                                   alt="{{ 'Did not found' | trans }}" title="{{ 'Did not found' | trans }}" width="16" height="16">
+                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                                                   alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
+                            {% endif %}
+                            {# TODO: to do Andere Logtypen optional anzeigen, falls vorhanden, Koordinatenänderungen anzeigen#}
+
+                        </span>
+                    </nav>
+                    <div class="">
                     {% if cache.cache_logs %}
-                        Log entries for {{ cache.name }} // {{ cache.logs_count.1 }}x {{ cache.logs_count.2 }}x {{ cache.logs_count.3 }}x
+                        {% for cachelogs in cache.cache_logs %}
+                            <div href="#log{{ cachelogs.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between" id="log{{ cachelogs.id }}">
+                                    <h5 class="mb-1">
+                                        <img        src="{{ asset('images/logTypes/' ~ cachelogs.logType.en ~ '.svg') }}"
+                                                    alt={{ cachelogs.logType.en}} title={{ cachelogs.logType.en }} width="16" height="16">
+                                        {% if cachelogs.ocTeamComment %} OC {% endif %}
+                                        {% if cachelogs.ratingCacheLog == true %}
+                                            Stern {# TODO: to do Empfehlungsicon einfügen#}
+                                        {% endif %}
+                                        {% if cachelogs.needsMaintenance == 1 %}
+                                            <img        src="{{ asset('images/logTypes/needs_maintenance-no.svg') }}"
+                                                        alt={{ 'The geocache is in good or acceptable condition.' | trans}} title={{ 'The geocache is in good or acceptable condition.' | trans }} width="16" height="16">
+                                        {% elseif cachelogs.needsMaintenance == 2 %}
+                                            <img        src="{{ asset('images/logTypes/needs_maintenance-yes.svg') }}"
+                                                        alt={{ 'The geocache needs maintenance.' | trans }} title={{ 'The geocache needs maintenance.' | trans }} width="16" height="16">
+                                        {% endif %}
+                                        {% if cachelogs.listingOutdated == 1 %}
+                                            <img        src="{{ asset('images/logTypes/listing_outdated_yes.svg') }}"
+                                                        alt={{ 'The geocache description is ok.' | trans }} title={{ 'The geocache description is ok.' | trans }} width="16" height="16">
+                                        {% elseif cachelogs.listingOutdated == 2 %}
+                                            <img        src="{{ asset('images/logTypes/listing_outdated_no.svg') }}"
+                                                        alt={{ 'The geocache description is outdated.' | trans }} title={{ 'The geocache description is outdated.' | trans }} width="16" height="16"
+                                        {% endif %}
+                                        <a href="{{ path('app_user_by_id', { 'userID': cachelogs.user.userId}) }}">{{ cachelogs.user.username }}</a>
+                                        
+                                        {% if cachelogs.type==1 %}
+                                            {{ 'found the geocache' | trans }}
+                                        {% elseif cachelogs.type==2 %}
+                                            {{ "didn't find the geoacache" | trans }}
+                                        {% elseif cachelogs.type==3 %}
+                                            {{ 'wrote a note' | trans }}
+                                        {% elseif cachelogs.type==7 %}
+                                            {{ 'has visited the event' | trans }}
+                                        {% elseif cachelogs.type==8 %}
+                                            {{ 'wants to visit the event' | trans }}
+                                        {% elseif cachelogs.type==9 %}
+                                            {{ 'has archived the geocache' | trans }}
+                                        {% elseif cachelogs.type==10 %}
+                                            {%  if cachelogs.oc_team_comment %}
+                                                {{ 'has activated the geocache' | trans }}
+                                            {% else %}
+                                                {{ 'has maintained the geocache' | trans }}
+                                            {% endif %}
+                                        {% elseif cachelogs.type==11 %}
+                                            {{ 'has disabled the geocache' | trans }}
+                                        {% elseif cachelogs.type==13 %}
+                                            {{ 'has locked the geocache' | trans }}
+                                        {% elseif cachelogs.type==14 %}
+                                            {{ 'has locked and hidden the geocache' | trans }}
+                                        {% endif %}
+                                    </h5>
+                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i') }}</small>
+                                </div>
+                                {#  Todo: Button für Delete, Edit und Upload Picture #}
+                                <p class="mb-1">
+                                    {% if cachelogs.textHtml == 1 %}
+                                        {{ cachelogs.text | raw }}
+                                    {% else %}
+                                        {{ cachelogs.text }}
+                                    {% endif %}
+                                </p>
+                                {%  if cachelogs.entryLastModified != cachelogs.dateCreated %}
+                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i') }}</small>
+                                {% endif %}
+                                {# Todo Anzeigen wenn Log gelöscht wurde#}
+                                {# {%if cachelogs.deleted_by_name != "" %}
+                                    <p><span style="color:red">{{ 'Deleted by' | trans }}{{ cachelogs.deleted_by_name}},
+                                        {{ cachelogs.deletion_date | date('d.m.Y H:i') }}</span></p>
+                                {% endif %} #}
+
+                                {% if cachelogs.pictures is not empty %}<p>{{ cachelogs.pictures|length }}{{ " Pictures for this log entry:" | trans }}</p>
+                                    {# Todo: Bidermodal funktioniert noch nicht & Spoilerbilder müssen noch brücksichtigt werden #}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                        Launch demo modal
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                                                        <div class="carousel-inner">
+                                                            {% for pictures in cachelogs.pictures %}
+                                                                <div class="carousel-item{% if loop.index0 == 0 %} active{% endif %}">
+                                                                    <img class="d-block w-100" src="{{ pictures.url }}" alt="{{ pictures.title }}">
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                        {% if cachelogs.pictures|length >= 2 %}
+                                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                        </div>
                     {% else %}
                         {{ 'No log entries found' | trans }}..
                     {% endif %}
                     <!-- End Logs -->
+
+                    {{ dump(cache) }}
 
                 {% else %}
                     <br/><br/>

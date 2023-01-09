@@ -436,7 +436,7 @@ sql_free_result($rs);
  */
 $tpl->assign('attributes', attribute::getAttributesListArrayByCacheId($cacheid));
 
-if (strpos(json_encode($tpl->get_template_vars('attributes')), '"id":"61"') !== false) {
+if (strpos(json_encode($tpl->getTemplateVars('attributes')), '"id":"61"') !== false) {
     $tpl->assign('safariCache', true);
 }
 $tpl->assign('cachelists', cachelist::getListsByCacheId($cacheid, $rCache['show_cachelists']));

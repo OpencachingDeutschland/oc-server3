@@ -14,7 +14,7 @@ require_once __DIR__ . '/logic/labels.inc.php';
 /**
  * Class OcSmarty
  */
-class OcSmarty extends SmartyBC
+class OcSmarty extends Smarty
 {
     public string $_var_bracket_regexp = '';
     public string $_num_const_regexp = '';
@@ -79,6 +79,7 @@ class OcSmarty extends SmartyBC
     /**
      * OcSmarty constructor.
      *
+     * @throws SmartyException
      */
     public function __construct()
     {
@@ -103,8 +104,8 @@ class OcSmarty extends SmartyBC
 
         // register additional functions
         require_once __DIR__ . '/../src/OcLegacy/SmartyPlugins/block.nocache.php';
-        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache');
-        $this->load_Filter('pre', 't');
+//        $this->register_block('nocache', 'smarty_block_nocache', 'smarty_block_nocache'); // TODO: Smarty? Was ist der Ersatz dafür?
+        $this->loadFilter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -148,6 +149,7 @@ class OcSmarty extends SmartyBC
      */
     /**
      *
+     * @throws SmartyException
      */
     public function compile($resource_name, $compile_id = null)
     : void {
@@ -164,7 +166,7 @@ class OcSmarty extends SmartyBC
         if (count($this->autoload_filters)) {
             foreach ($this->autoload_filters as $_filter_type => $_filters) {
                 foreach ($_filters as $_filter) {
-                    $this->load_Filter($_filter_type, $_filter);
+                    $this->loadFilter($_filter_type, $_filter);
                 }
             }
         }
@@ -334,7 +336,7 @@ class OcSmarty extends SmartyBC
         }
         $this->assign('sys_dbslave', ($db['slave_id'] != - 1));
 
-        if ($this->template_exists($this->name . '.tpl')) {
+        if ($this->templateExists($this->name . '.tpl')) {
             $this->assign('template', $this->name);
         } elseif ($this->name != 'sys_error') {
             $this->error(ERROR_TEMPLATE_NOT_FOUND);
@@ -376,7 +378,7 @@ class OcSmarty extends SmartyBC
         if ($db['debug'] === true) {
             parent::fetch($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
 
-            $this->clear_all_assign();
+            $this->clearAllAssign();
             $this->main_template = 'sys_sqldebugger';
             $this->assign('commands', $sqldebugger->getCommands());
             $this->assign('cancel', $sqldebugger->getCancel());
@@ -405,10 +407,11 @@ class OcSmarty extends SmartyBC
      *
      * @param int $id
      *
+     * @throws SmartyException
      */
     public function error(int $id)
     : void {
-        $this->clear_all_assign();
+        $this->clearAllAssign();
         $this->caching = 0;
 
         $this->assign('page', $this->name);
@@ -435,10 +438,10 @@ class OcSmarty extends SmartyBC
      * @param null $cache_id
      * @param null $compile_id
      *
-     * @return string|false
+     * @return bool
+     * @throws SmartyException
      */
-    public function is_cached($tpl_file = null, $cache_id = null, $compile_id = null)
-//    public function is_cached(mixed $dummy1 = null, mixed $dummy2 = null, mixed $dummy3 = null) // original
+    public function is_cached($tpl_file = null, $cache_id = null, $compile_id = null): bool
     {
         global $login;
 
@@ -449,7 +452,7 @@ class OcSmarty extends SmartyBC
             }
         }
 
-        return parent::is_cached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
+        return parent::isCached($this->main_template . '.tpl', $this->get_cache_id(), $this->get_compile_id());
     }
 
     /**

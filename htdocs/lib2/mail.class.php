@@ -5,7 +5,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-class mail extends SmartyBC
+class mail extends Smarty
 {
     public $name = 'sys_nothing';
     public $main_template = 'sys_main';
@@ -22,6 +22,8 @@ class mail extends SmartyBC
 
     /**
      * mail constructor.
+     *
+     * @throws SmartyException
      */
     public function __construct()
     {
@@ -40,7 +42,7 @@ class mail extends SmartyBC
         $this->caching = 0;
 
         // register additional functions
-        $this->load_Filter('pre', 't');
+        $this->loadFilter('pre', 't');
 
         // cache control
         if (($opt['debug'] & DEBUG_TEMPLATES) == DEBUG_TEMPLATES) {
@@ -77,12 +79,13 @@ class mail extends SmartyBC
      * @param bool $page_url
      *
      * @return bool
+     * @throws SmartyException
      */
     public function send($page_url = false)
     {
         global $tpl, $opt;
 
-        if (!$this->template_exists($this->name . '.tpl')) {
+        if (!$this->templateExists($this->name . '.tpl')) {
             $tpl->error(ERROR_MAIL_TEMPLATE_NOT_FOUND);
         }
         $this->assign('template', $this->name);

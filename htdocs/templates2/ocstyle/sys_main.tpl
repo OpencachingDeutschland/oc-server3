@@ -380,12 +380,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">
-                                    <img src="resource2/{$opt.template.style}/images/media/16x16-slack.png" alt="Slack"/>
+                                <a href="https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=su" target="_blank">
+                                    <img src="resource2/{$opt.template.style}/images/media/16x16-mattermost.png" alt="Mattermost"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="https://opencaching-de.slack.com/join/shared_invite/zt-6blnetpu-UqrvSQr~8r0o3SNmhkmnGQ#/" target="_blank">Slack</a>
+                                <a href="https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=su" target="_blank">Mattermost</a>
                             </td>
                         </tr>
                     </table>

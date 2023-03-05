@@ -633,7 +633,7 @@ if ($error == false) {
 
             // check coordinates
             if ($lat_h != '' || $lat_min != '') {
-                if (!mb_ereg_match('^[0-9]{1,2}$', $lat_h)) {
+                if (!mb_ereg_match('^[0-9]{1,3}$', $lat_h)) {
                     tpl_set_var('lat_message', $error_lat_not_ok);
                     $error = true;
                     $lat_h_not_ok = true;

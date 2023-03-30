@@ -472,7 +472,7 @@ class OcSmarty extends Smarty
         // Probably this is no safety or stability issue, but to be sure we restrict
         // the ID to a reasonable set of characters:
 
-        return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id);
+        return $this->name . '|' . mb_ereg_replace('/[^A-Za-z0-9_\|\-\.]/', '', $this->cache_id ?? '');
     }
 
     /**
@@ -489,7 +489,7 @@ class OcSmarty extends Smarty
     /**
      * @param string $page
      */
-    public function redirect($page)
+    public function redirect(string $page)
     : void {
         global $cookie, $opt;
         $cookie->close();

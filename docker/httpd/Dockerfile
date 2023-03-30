@@ -1,4 +1,4 @@
-FROM webdevops/php-apache-dev:7.4
+FROM webdevops/php-apache-dev:8.1
 
 # Prepare yarn to be installed
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -

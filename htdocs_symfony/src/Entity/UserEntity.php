@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use Oc\Repository\AbstractEntity;
+use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class UserEntity extends AbstractEntity implements UserInterface
+class UserEntity extends AbstractEntity implements UserInterface, LegacyPasswordAuthenticatedUserInterface
 {
     public int $userId = 0;
 
@@ -72,6 +73,11 @@ class UserEntity extends AbstractEntity implements UserInterface
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getUsername();
     }
 
     public function eraseCredentials(): void

@@ -66,11 +66,11 @@ if (isset($_REQUEST['cacheid'])) {
 
 $cache = new cache($cacheid);
 
-if ($cache->exist() == false) {
+if (!$cache->exist()) {
     $tpl->error(ERROR_CACHE_NOT_EXISTS);
 }
 
-if ($cache->allowView() == false) {
+if (!$cache->allowView()) {
     $tpl->error(ERROR_NO_ACCESS);
 }
 
@@ -434,7 +434,7 @@ sql_free_result($rs);
 
 /* attributes and cache lists
  */
-$tpl->assign('attributes', attribute::getAttributesListArrayByCacheId($cacheid));
+$tpl->assign('attributes', OcLib2\attribute::getAttributesListArrayByCacheId($cacheid));
 
 if (strpos(json_encode($tpl->getTemplateVars('attributes')), '"id":"61"') !== false) {
     $tpl->assign('safariCache', true);

@@ -35,6 +35,13 @@ class UserProvider implements UserProviderInterface
     }
 
     /**
+     * @throws Exception
+     */
+    public function loadUserByIdentifier(string $identifier): UserInterface {
+        return $this->loadUserByUsername($identifier);
+    }
+
+    /**
      * @throws RecordNotFoundException
      * @throws Exception
      */

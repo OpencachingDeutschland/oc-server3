@@ -3,7 +3,7 @@
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
   "require": {
-    "php": "^8.0",
+    "php": "^7.4",
     "ezyang/htmlpurifier": "^v4.8",
     "smarty/smarty": "~4.0",
     "symfony/symfony": "4.4.*",

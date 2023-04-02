@@ -72,6 +72,11 @@
                                     <li class="nav-item dropdown">
                                         <a href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a>
                                     </li>
+                                    {% if is_granted('ROLE_DEVELOPER_CORE') %}
+                                        <li class="nav-item dropdown">
+                                            <a href="{{ path('app_status_index') }}">{{ 'Status' | trans }}</a>
+                                        </li>
+                                    {% endif %}
 
                                     <!-- Messages Dropdown Menu -->
                                     <li class="nav-item dropdown">
@@ -200,7 +205,7 @@
             {% endblock %}
 
             {% block sidebar_search %}
-{# {% include '@AdminLTE/Sidebar/search-form.html.twig' with {'adminlte_direct_include': true} %} #}
+                {# {% include '@AdminLTE/Sidebar/search-form.html.twig' with {'adminlte_direct_include': true} %} #}
             {% endblock %}
 
             {% block sidebar_nav %}

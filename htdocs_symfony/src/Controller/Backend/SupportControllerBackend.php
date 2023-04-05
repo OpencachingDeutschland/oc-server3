@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Oc\Controller\Backend;
 
+use DateTime;
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
+use Exception;
 use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Entity\SupportUserCommentsEntity;
+use Oc\Entity\UserLoginBlockEntity;
 use Oc\Form\SupportBonusCachesAssignment;
 use Oc\Form\SupportCommentField;
 use Oc\Form\SupportImportGPX;
@@ -27,11 +29,13 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\NodesRepository;
+use Oc\Repository\SecurityRolesRepository;
 use Oc\Repository\SupportBonuscachesRepository;
 use Oc\Repository\SupportListingCommentsRepository;
 use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
+use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -68,6 +72,8 @@ class SupportControllerBackend extends AbstractController
 
     private NodesRepository $nodesRepository;
 
+    private SecurityRolesRepository $securityRolesRepository;
+
     private SupportBonuscachesRepository $supportBonuscachesRepository;
 
     private SupportListingCommentsRepository $supportListingCommentsRepository;
@@ -77,6 +83,8 @@ class SupportControllerBackend extends AbstractController
     private SupportUserCommentsRepository $supportUserCommentsRepository;
 
     private SupportUserRelationsRepository $supportUserRelationsRepository;
+
+    private UserLoginBlockRepository $userLoginBlockRepository;
 
     private UserRepository $userRepository;
 
@@ -90,11 +98,13 @@ class SupportControllerBackend extends AbstractController
             CacheStatusModifiedRepository $cacheStatusModifiedRepository,
             CacheStatusRepository $cacheStatusRepository,
             NodesRepository $nodesRepository,
+            SecurityRolesRepository $securityRolesRepository,
             SupportBonuscachesRepository $supportBonuscachesRepository,
             SupportListingCommentsRepository $supportListingCommentsRepository,
             SupportListingInfosRepository $supportListingInfosRepository,
             SupportUserCommentsRepository $supportUserCommentsRepository,
             SupportUserRelationsRepository $supportUserRelationsRepository,
+            UserLoginBlockRepository $userLoginBlockRepository,
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
@@ -106,11 +116,13 @@ class SupportControllerBackend extends AbstractController
         $this->cacheStatusModifiedRepository = $cacheStatusModifiedRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->nodesRepository = $nodesRepository;
+        $this->securityRolesRepository = $securityRolesRepository;
         $this->supportBonuscachesRepository = $supportBonuscachesRepository;
         $this->supportListingCommentsRepository = $supportListingCommentsRepository;
         $this->supportListingInfosRepository = $supportListingInfosRepository;
         $this->supportUserCommentsRepository = $supportUserCommentsRepository;
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
+        $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -410,7 +422,6 @@ class SupportControllerBackend extends AbstractController
      * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
-     * @throws RecordsNotFoundException
      * @Route("/occ/{wpID}&{userID}", name="support_occ")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
@@ -575,6 +586,11 @@ class SupportControllerBackend extends AbstractController
     public function list_user_account_details(int $userID): Response
     {
         $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
+        $fetchedUserLoginBlock = null;
+        try {
+            $fetchedUserLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
+        } catch (RecordNotFoundException $e) {
+        }
 
         $formSearch = $this->createForm(SupportSearchCaches::class);
         $formActions = $this->createForm(SupportUserAccountDetails::class);
@@ -583,7 +599,8 @@ class SupportControllerBackend extends AbstractController
                 'backend/support/userDetails.html.twig', [
                         'supportCachesForm' => $formSearch->createView(),
                         'supportUserAccountActions' => $formActions->createView(),
-                        'user_account_details' => $fetchedUserDetails
+                        'user_account_details' => $fetchedUserDetails,
+                        'user_login_block' => $fetchedUserLoginBlock
                 ]
         );
     }
@@ -835,6 +852,30 @@ class SupportControllerBackend extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->getClickedButton() === $form->get('button_account_inactive')) {
                 // TODO: fill
+            } elseif ($form->getClickedButton() === $form->get('button_login_block')) {
+                if ($this->isGranted('ROLE_SUPPORT_HEAD')) {
+                    $timeToBlock = $form->get('dropDown_login_block')->getData();
+                    $message = $form->get('message_login_block')->getData();
+
+                    try {
+                        $entity = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
+
+                        if ($timeToBlock === -1) {
+                            // -1 = entferne die Blockierung des Logins // alle anderen Zahlen = setze die blockierung auf $JETZT plus x Tage
+                            $this->userLoginBlockRepository->remove($entity);
+                        } else {
+                            // setze Zeitstemepel + x Tage
+                            $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
+                            $entity->loginBlockUntil = $untilWhenToBlock->format('Y-m-d H:i:s');
+                            $entity->message = $message;
+                            $this->userLoginBlockRepository->update($entity);
+                        }
+                    } catch (RecordNotFoundException $e) {
+                        $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
+                        $entity = new UserLoginBlockEntity($userID, $untilWhenToBlock->format('Y-m-d H:i:s'), $message);
+                        $entity = $this->userLoginBlockRepository->create($entity);
+                    }
+                }
             } elseif ($form->getClickedButton() === $form->get('button_GDPR_deletion')) {
                 // TODO: fill
                 // Achtung: für die DSGVO-Löschung müssen vorher der Account und die dazugehörigen Cachelistings deaktiviert werden!
@@ -935,55 +976,55 @@ class SupportControllerBackend extends AbstractController
             $tempArray = [$fetchedListingInfo->wpOc . '/' . $fetchedListingInfo->nodeListingWp];
 
             if ($fetchedOCCache->name != $fetchedListingInfo->nodeListingName) {
-                array_push($tempArray, $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName);
+                $tempArray[] = $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName;
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if ($fetchedOCCache->difficulty != $fetchedListingInfo->nodeListingDifficulty) {
-                array_push($tempArray, $fetchedOCCache->difficulty / 2 . ' != ' . $fetchedListingInfo->nodeListingDifficulty / 2);
+                $tempArray[] = $fetchedOCCache->difficulty / 2 . ' != ' . $fetchedListingInfo->nodeListingDifficulty / 2;
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if ($fetchedOCCache->terrain != $fetchedListingInfo->nodeListingTerrain) {
-                array_push($tempArray, $fetchedOCCache->terrain / 2 . ' != ' . $fetchedListingInfo->nodeListingTerrain / 2);
+                $tempArray[] = $fetchedOCCache->terrain / 2 . ' != ' . $fetchedListingInfo->nodeListingTerrain / 2;
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if (round($fetchedOCCache->longitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLon * 10000)) {
-                array_push($tempArray, $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon);
+                $tempArray[] = $fetchedOCCache->longitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLon;
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if (round($fetchedOCCache->latitude * 10000) != round($fetchedListingInfo->nodeListingCoordinatesLat * 10000)) {
-                array_push($tempArray, $fetchedOCCache->latitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLat);
+                $tempArray[] = $fetchedOCCache->latitude . ' != ' . $fetchedListingInfo->nodeListingCoordinatesLat;
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if (($fetchedListingInfo->nodeListingAvailable && ($fetchedOCCache->status != 1))
                     || (!$fetchedListingInfo->nodeListingAvailable
                             && ($fetchedOCCache->status == 1))
             ) {
-                array_push($tempArray, 'OC status != import status');
+                $tempArray[] = 'OC status != import status';
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if (($fetchedListingInfo->nodeListingArchived && ($fetchedOCCache->status != 3))
                     || (!$fetchedListingInfo->nodeListingAvailable
                             && ($fetchedOCCache->status == 3))
             ) {
-                array_push($tempArray, 'OC status != import status');
+                $tempArray[] = 'OC status != import status';
             } else {
-                array_push($tempArray, '');
+                $tempArray[] = '';
             }
 
             if (count($tempArray) != 1) {
-                array_push($differencesDetected, $tempArray);
+                $differencesDetected[] = $tempArray;
             }
         }
 
@@ -1156,7 +1197,7 @@ class SupportControllerBackend extends AbstractController
                 $wpt_array['node_listing_archived'] = ($wpt['cache']['@attributes']['archived'] === "True") ? 1 : 0;
                 $wpt_array['importstatus'] = self::IMPORT_STATUS_NEW;
 
-                array_push($waypoints_as_array, $wpt_array);
+                $waypoints_as_array[] = $wpt_array;
             }
 
             return ($waypoints_as_array);

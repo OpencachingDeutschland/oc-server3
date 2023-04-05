@@ -1251,4 +1251,5 @@ class SupportControllerBackend extends AbstractController
             return ($waypoints_as_array);
         }
     }
+
 }

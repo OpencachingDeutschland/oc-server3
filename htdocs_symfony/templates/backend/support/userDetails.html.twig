@@ -4,86 +4,86 @@
 
     {% include '/backend/support/support.header.html.twig' %}
 
-<h3><br/>{{ 'User account details' | trans }} </h3>
+    <h3><br/>{{ 'User account details' | trans }} </h3>
 
-<div>
-    {% if user_account_details is defined %}
-        {% if user_account_details %}
-            <br/>
-            <ul>
-                <li><b>{{ 'Details for user' | trans }}:</b> {{ user_account_details.username }}</li>
-                <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.userId }}</li>
-                <li><b>{{ 'Email' | trans }}:</b> {{ user_account_details.email }}</li>
-                <li><b>{{ 'Email validity' | trans }}:</b> {% if user_account_details.emailProblems %}<i class="fas fa-times"></i>
-                    {% else %}<i class="fas fa-check"></i>
-                    {% endif %}</li>
-                <li><b>{{ 'Account created' | trans }}:</b> {{ user_account_details.dateCreated | date('d.m.Y H:i:s') }}</li>
-                <li><b>{{ 'Last change' | trans }}:</b> {{ user_account_details.lastModified | date('d.m.Y H:i:s') }}</li>
-                <li><b>{{ 'User active' | trans }}:</b> {% if user_account_details.isActive %}<i class="fas fa-check"></i>{% else %}<i
-                            class="fas fa-times"></i>{% endif %}</li>
-                <li><b>{{ 'Activation code' | trans }}
-                        :</b> {% if user_account_details.activationCode %}{{ user_account_details.activationCode }}{% else %}
-                        <i class="fas fa-times"></i>{% endif %}</li>
-                <li><b>{{ 'First name' | trans }}:</b> {% if user_account_details.firstname %}{{ user_account_details.firstname }}{% else %}<i
-                            class="fas fa-times"></i>{% endif %}</li>
-                <li><b>{{ 'Last name' | trans }}:</b> {% if user_account_details.lastname %}{{ user_account_details.lastname }}{% else %}<i
-                            class="fas fa-times"></i>{% endif %}</li>
-                <li><b>{{ 'Log entries' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
-                </li>
-                <li><b>{{ 'Caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
-                </li>
-                <li><b>{{ 'Active caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
-                </li>
-                <li><b>{{ 'Cache reports' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
-                </li>
-                <li><b>{{ 'Last login' | trans }}:</b> {{ user_account_details.lastLogin | date('d.m.Y') }}</li>
-                <li><b>{{ 'User login is blocked until' | trans }}:</b>
-                    {% if user_login_block %} {{ user_login_block.loginBlockUntil | date('d.m.Y H:i:s') }} {% else %} - {% endif %}
-                </li>
-            </ul>
-
-
-            {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
-                <hr>
+    <div>
+        {% if user_account_details is defined %}
+            {% if user_account_details %}
                 <br/>
+                <ul>
+                    <li><b>{{ 'Details for user' | trans }}:</b> {{ user_account_details.username }}</li>
+                    <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.userId }}</li>
+                    <li><b>{{ 'Email' | trans }}:</b> {{ user_account_details.email }}</li>
+                    <li><b>{{ 'Email validity' | trans }}:</b> {% if user_account_details.emailProblems %}<i class="fas fa-times"></i>
+                        {% else %}<i class="fas fa-check"></i>
+                        {% endif %}</li>
+                    <li><b>{{ 'Account created' | trans }}:</b> {{ user_account_details.dateCreated | date('d.m.Y H:i:s') }}</li>
+                    <li><b>{{ 'Last change' | trans }}:</b> {{ user_account_details.lastModified | date('d.m.Y H:i:s') }}</li>
+                    <li><b>{{ 'User active' | trans }}:</b> {% if user_account_details.isActive %}<i class="fas fa-check"></i>{% else %}<i
+                                class="fas fa-times"></i>{% endif %}</li>
+                    <li><b>{{ 'Activation code' | trans }}
+                            :</b> {% if user_account_details.activationCode %}{{ user_account_details.activationCode }}{% else %}
+                            <i class="fas fa-times"></i>{% endif %}</li>
+                    <li><b>{{ 'First name' | trans }}:</b> {% if user_account_details.firstname %}{{ user_account_details.firstname }}{% else %}<i
+                                class="fas fa-times"></i>{% endif %}</li>
+                    <li><b>{{ 'Last name' | trans }}:</b> {% if user_account_details.lastname %}{{ user_account_details.lastname }}{% else %}<i
+                                class="fas fa-times"></i>{% endif %}</li>
+                    <li><b>{{ 'Log entries' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
+                    </li>
+                    <li><b>{{ 'Caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
+                    </li>
+                    <li><b>{{ 'Active caches hidden' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
+                    </li>
+                    <li><b>{{ 'Cache reports' | trans }}:</b> <i class="fas fa-times"></i> <span class="badge badge-danger">muss noch warten, bis die Funktion implementiert werden kann..</span>
+                    </li>
+                    <li><b>{{ 'Last login' | trans }}:</b> {{ user_account_details.lastLogin | date('d.m.Y') }}</li>
+                    <li><b>{{ 'User login is blocked until' | trans }}:</b>
+                        {% if user_login_block %} {{ user_login_block.loginBlockUntil | date('d.m.Y H:i:s') }} {% else %} - {% endif %}
+                    </li>
+                </ul>
 
-                {% if supportUserAccountActions is defined %}
-                    {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
-                    <ul>
-                        <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}
-                            <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
-                        </li>
-                        <li><b>{{ 'Set login block for x days (caches will not be locked)' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.dropDown_login_block) }}
-                            {{ 'Extra message to the user (optional)' | trans }}:
-                            {{ form_row(supportUserAccountActions.message_login_block, {'value': user_login_block.message | default(''), 'id': 'comment_field_login_block' }) }}
-                            {{ form_row(supportUserAccountActions.button_login_block, {'label': 'Execute' | trans}) }}
-                        </li>
-                        <li><b>{{ 'GDPR conform account deletion' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}
-                            <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
-                        </li>
-                        <li><b>{{ 'Mark email address as invalid' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}
-                        </li>
-                        <li><b>{{ 'Are you sure?' | trans }}:</b>
-                            {{ form_row(supportUserAccountActions.check_Sure) }}
-                        </li>
-                    </ul>
-                    {{ form_end(supportUserAccountActions) }}
+
+                {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
+                    <hr>
+                    <br/>
+
+                    {% if supportUserAccountActions is defined %}
+                        {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
+                        <ul>
+                            <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}
+                                <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
+                            </li>
+                            <li><b>{{ 'Set login block for x days (caches will not be locked)' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.dropDown_login_block) }}
+                                {{ 'Extra message to the user (optional)' | trans }}:
+                                {{ form_row(supportUserAccountActions.message_login_block, {'value': user_login_block.message | default(''), 'id': 'comment_field_login_block' }) }}
+                                {{ form_row(supportUserAccountActions.button_login_block, {'label': 'Execute' | trans}) }}
+                            </li>
+                            <li><b>{{ 'GDPR conform account deletion' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}
+                                <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
+                            </li>
+                            <li><b>{{ 'Mark email address as invalid' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}
+                            </li>
+                            <li><b>{{ 'Are you sure?' | trans }}:</b>
+                                {{ form_row(supportUserAccountActions.check_Sure) }}
+                            </li>
+                        </ul>
+                        {{ form_end(supportUserAccountActions) }}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
 
-            <br/>
-        {% else %}
-            <br/><br/>
-            <span>{{ 'No user found' | trans }}.. :-)</span>
+                <br/>
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No user found' | trans }}.. :-)</span>
+            {% endif %}
         {% endif %}
-    {% endif %}
 
     </div>
 
     <hr>
 
-    {% endblock %}
+{% endblock %}

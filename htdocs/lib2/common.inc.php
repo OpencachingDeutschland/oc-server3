@@ -193,7 +193,7 @@ function configure_php(): void
         register_errorhandlers();
     } else {
         ini_set('display_errors', false);
-        ini_set('error_reporting', E_ALL & ~E_WARNING & ~E_NOTICE);
+        ini_set('error_reporting', E_ALL & ~E_NOTICE);
         ini_set('mysql.trace_mode', false);
         register_errorhandlers();
     }

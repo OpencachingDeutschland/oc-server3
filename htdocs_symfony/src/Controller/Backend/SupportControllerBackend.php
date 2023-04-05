@@ -591,6 +591,7 @@ class SupportControllerBackend extends AbstractController
             $fetchedUserLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
         } catch (RecordNotFoundException $e) {
         }
+
         $formSearch = $this->createForm(SupportSearchCaches::class);
         $formActions = $this->createForm(SupportUserAccountDetails::class);
 

@@ -1,0 +1,35 @@
+{% extends 'app/base.html.twig' %}
+
+{% block page_content %}
+    <div>
+        {{ 'Dear user, you are facing a login block you received because of .. your behavior..' | trans }} {# TODO: Text bissel anpassen.. #}
+        {{ 'Here you can find some useful information how to behave correctly' | trans }}:
+        xxx {# TODO: Link auf Netiquette oder andere gewünschte Infoseite. Oder Link rausschmeißen.. #}
+    </div>
+
+    <div>
+        {% if user_login_block.message %}
+            {{ 'Additionally our Support team left an individual message for you' | trans }}:
+            {{ user_login_block.message }}
+        {% else %}
+            -
+        {% endif %}
+    </div>
+
+    <div>
+        {% if login_block_expired %}
+            {{ 'The time your login was blocked has expired. You can login as usual if you acknowledge that you have read above messages.' | trans }}
+            {{ 'Press this button' | trans }}:
+            {% if confirmButton is defined %}
+                {{ form_start(confirmButton, {action:path('app_confirm_read_block_message')}) }}
+                {{ form_row(confirmButton.confirm_button, {'label': 'Confirm' | trans }) }}
+                {{ form_row(confirmButton.hidden_user_id, {'value': user_id }) }}
+                {{ form_end(confirmButton) }}
+            {% endif %}
+
+        {% else %}
+            {{ 'The time your login was blocked has not yet expired.' | trans }}
+            {{ 'You have to wait until ' ~ user_login_block.loginBlockUntil | date('d.m.Y H:m') ~ ' before you can login as usual.' }}
+        {% endif %}
+    </div>
+{% endblock %}

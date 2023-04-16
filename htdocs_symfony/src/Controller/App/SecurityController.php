@@ -22,9 +22,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    public AuthenticationUtils $authenticationUtils;
+    private AuthenticationUtils $authenticationUtils;
 
-    public UserRepository $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(AuthenticationUtils $authenticationUtils, UserRepository $userRepository)
     {
@@ -49,7 +49,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="security_logout")
+     * @Route("/logout", name="security_logout", methods={"GET"})
      */
     public function logout()
     {

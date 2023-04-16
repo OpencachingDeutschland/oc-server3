@@ -56,7 +56,8 @@
                         </li>
                         <li><b>{{ 'Set login block for x days (caches will not be locked)' | trans }}:</b>
                             {{ form_row(supportUserAccountActions.dropDown_login_block) }}
-                            {{ form_row(supportUserAccountActions.message_login_block) }}
+                            {{ 'Extra message to the user (optional)' | trans }}:
+                            {{ form_row(supportUserAccountActions.message_login_block, {'value': user_login_block.message | default(''), 'id': 'comment_field_login_block' }) }}
                             {{ form_row(supportUserAccountActions.button_login_block, {'label': 'Execute' | trans}) }}
                         </li>
                         <li><b>{{ 'GDPR conform account deletion' | trans }}:</b>

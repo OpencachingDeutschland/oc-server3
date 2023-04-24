@@ -852,7 +852,19 @@ class SupportControllerBackend extends AbstractController
             if ($form->getClickedButton() === $form->get('button_account_inactive')) {
                 // TODO: fill
             } elseif ($form->getClickedButton() === $form->get('button_login_block')) {
-                if ($this->isGranted('ROLE_SUPPORT_HEAD')) {
+                $user = $this->userRepository->fetchOneById($userID);
+                $userToBlockIsHigher = false;
+                $userToBlockRoles = $user->getRoles();
+
+                if ($userToBlockRoles) {
+                    foreach ($userToBlockRoles as $role) {
+                        if (!$this->isGranted($role)) {
+                            $userToBlockIsHigher = true;
+                        }
+                    }
+                }
+
+                if ($this->isGranted('ROLE_SUPPORT_HEAD') && !$userToBlockIsHigher) {
                     $timeToBlock = $form->get('dropDown_login_block')->getData();
                     $message = $form->get('message_login_block')->getData();
 
@@ -1030,10 +1042,6 @@ class SupportControllerBackend extends AbstractController
         return ($differencesDetected);
     }
 
-    /**
-     * @throws RecordNotFoundException
-     * @throws RecordsNotFoundException
-     */
     public function list_all_support_listing_infos(): array
     {
         try {

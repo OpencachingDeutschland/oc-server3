@@ -234,7 +234,7 @@ class UserRolesRepository
         $neededRole = '';
 
         if ($role === 'ROLE_TEAM') {
-            $neededRole = 'ROLE_SUPER_ADMIN';
+            $neededRole = 'ROLE_ADMIN';
         } elseif ($role === 'ROLE_SUPER_ADMIN') {
             $neededRole = 'ROLE_SUPER_DUPER_ADMIN';
         } elseif (str_starts_with($role, 'ROLE_ADMIN')) {

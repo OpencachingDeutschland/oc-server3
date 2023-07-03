@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Mattermost](https://img.shields.io/badge/chat-on%20mattermost-brightgreen)](https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=sa)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/badges/quality-score.png?b=development)](https://scrutinizer-ci.com/g/OpencachingDeutschland/oc-server3/?branch=development)  [![Crowdin](https://d322cqt584bo4o.cloudfront.net/opencaching/localized.svg)](https://crowdin.com/project/opencaching) [![Travis CI Build](https://api.travis-ci.org/OpencachingDeutschland/oc-server3.svg?branch=development)](https://travis-ci.org/OpencachingDeutschland/oc-server3) [![codecov](https://codecov.io/gh/OpencachingDeutschland/oc-server3/branch/development/graph/badge.svg)](https://codecov.io/gh/OpencachingDeutschland/oc-server3) [![Mattermost](https://img.shields.io/badge/chat-on%20mattermost-brightgreen)](https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su)
 
 Opencaching.de Code Repository
 ==============================
@@ -11,7 +11,7 @@ is [Opencaching.pl](https://github.com/opencaching/opencaching-pl). Feel free to
 for setting up your own open and free Geocaching listing service! The code can easily be translated to other languages.
 
 Your contributions to this project are welcome - you may contact the team in the
-[Mattermost Channel](https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=sa)
+[Mattermost Channel](https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su)
 or [Opencaching.de forum](https://forum.opencaching.de/) if you like to join us. Development is usually done on a
 VirtualBox Linux system that you can run on your Linux, Windows or Mac workstation, but you may also try to set up the
 code directly on your Linux machine. Otherwise you can use our new vagrant box. You get the needed link from a Team

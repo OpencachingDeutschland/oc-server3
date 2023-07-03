@@ -380,12 +380,12 @@
                         </tr>
                         <tr>
                             <td>
-                                <a href="https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=su" target="_blank">
+                                <a href="https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su" target="_blank">
                                     <img src="resource2/{$opt.template.style}/images/media/16x16-mattermost.png" alt="Mattermost"/>
                                 </a>
                             </td>
                             <td style="text-align: left">
-                                <a href="https://opencaching.cloud.mattermost.com/signup_user_complete/?id=ei5xmqwk5if7jpsakfwfbutmro&sbr=su" target="_blank">Mattermost</a>
+                                <a href="https://devchat.opencaching.earth/signup_user_complete/?id=6mcehwp7ctd7tnzkct4515g5ty&md=link&sbr=su" target="_blank">Mattermost</a>
                             </td>
                         </tr>
                     </table>

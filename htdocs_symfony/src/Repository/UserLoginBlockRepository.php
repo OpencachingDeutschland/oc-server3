@@ -5,26 +5,23 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\UserRolesEntity;
+use Exception;
+use Oc\Entity\UserLoginBlockEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class UserRolesRepository
+class UserLoginBlockRepository
 {
-    private const TABLE = 'user_roles';
+    private const TABLE = 'user_login_block';
 
     private Connection $connection;
 
-    private SecurityRolesRepository $securityRolesRepository;
-
-    public function __construct(Connection $connection, SecurityRolesRepository $securityRolesRepository)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->securityRolesRepository = $securityRolesRepository;
     }
 
     /**
@@ -57,7 +54,7 @@ class UserRolesRepository
      * @throws RecordNotFoundException
      * @throws Exception
      */
-    public function fetchOneBy(array $where = []): UserRolesEntity
+    public function fetchOneBy(array $where = []): UserLoginBlockEntity
     {
         $queryBuilder = $this->connection->createQueryBuilder()
                 ->select('*')
@@ -118,7 +115,7 @@ class UserRolesRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(UserRolesEntity $entity): UserRolesEntity
+    public function create(UserLoginBlockEntity $entity): UserLoginBlockEntity
     {
         if (!$entity->isNew()) {
             throw new RecordAlreadyExistsException('The entity does already exist.');
@@ -137,10 +134,10 @@ class UserRolesRepository
     }
 
     /**
-     * @throws Exception
      * @throws RecordNotPersistedException
+     * @throws Exception
      */
-    public function update(UserRolesEntity $entity): UserRolesEntity
+    public function update(UserLoginBlockEntity $entity): UserLoginBlockEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -158,11 +155,11 @@ class UserRolesRepository
     }
 
     /**
+     * @throws RecordNotPersistedException
      * @throws Exception
      * @throws InvalidArgumentException
-     * @throws RecordNotPersistedException
      */
-    public function remove(UserRolesEntity $entity): UserRolesEntity
+    public function remove(UserLoginBlockEntity $entity): UserLoginBlockEntity
     {
         if ($entity->isNew()) {
             throw new RecordNotPersistedException('The entity does not exist.');
@@ -178,97 +175,24 @@ class UserRolesRepository
         return $entity;
     }
 
-    /**
-     * @throws RecordAlreadyExistsException
-     * @throws RecordNotFoundException
-     * @throws Exception
-     */
-    public function grantRole(int $userId, string $role): bool
-    {
-        try {
-            $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
-        } catch (\Exception $exception) {
-            $entity = new UserRolesEntity($userId, $this->securityRolesRepository->getIdByRoleName($role));
-            $this->create($entity);
-        }
-
-        return true;
-    }
-
-    public function removeRole(int $userId, string $role): bool
-    {
-        try {
-            $entity = $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
-
-            $this->remove($entity);
-        } catch (\Exception $exception) {
-        }
-
-        return true;
-    }
-
-    public function getDatabaseArrayFromEntity(UserRolesEntity $entity): array
+    public function getDatabaseArrayFromEntity(UserLoginBlockEntity $entity): array
     {
         return [
                 'id' => $entity->id,
                 'user_id' => $entity->userId,
-                'role_id' => $entity->roleId,
+                'login_block_until' => $entity->loginBlockUntil,
+                'message' => $entity->message,
         ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): UserRolesEntity
-    {
-        $entity = new UserRolesEntity();
-        $entity->id = (int)$data['id'];
-        $entity->userId = (int)$data['user_id'];
-        $entity->roleId = (int)$data['role_id'];
-
-        return $entity;
-    }
-
-    /**
-     * Determine which ROLE of the current user is needed to perform role changes on a user
-     */
-    public function getNeededRole(string $role): string
-    {
-        $neededRole = '';
-
-        if ($role === 'ROLE_TEAM') {
-            $neededRole = 'ROLE_ADMIN';
-        } elseif ($role === 'ROLE_SUPER_ADMIN') {
-            $neededRole = 'ROLE_SUPER_DUPER_ADMIN';
-        } elseif (str_starts_with($role, 'ROLE_ADMIN')) {
-            $neededRole = 'ROLE_SUPER_ADMIN';
-        } elseif (str_starts_with($role, 'ROLE_SUPPORT') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_SUPPORT_HEAD';
-        } elseif (str_starts_with($role, 'ROLE_SOCIAL') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_SOCIAL_HEAD';
-        } elseif (str_starts_with($role, 'ROLE_DEVELOPER') && (!str_ends_with($role, '_HEAD'))) {
-            $neededRole = 'ROLE_DEVELOPER_HEAD';
-        } else {
-            $neededRole = 'ROLE_ADMIN';
-        }
-
-        return $neededRole;
     }
 
     /**
      * @throws Exception
-     * @throws RecordNotFoundException
      */
-    public function getTeamMembersAndRoles(string $minimumRoleName): array
+    public function getEntityFromDatabaseArray(array $data): UserLoginBlockEntity
     {
-        $minimumRoleId = $this->securityRolesRepository->getIdByRoleName($minimumRoleName);
+        $entity = new UserLoginBlockEntity((int)$data['user_id'], (string)$data['login_block_until'], (string)$data['message']);
+        $entity->id = (int)$data['id'];
 
-        $qb = $this->connection->createQueryBuilder();
-        $qb->select('user_roles.user_id', 'security_roles.role', 'user.username')
-                ->from('user_roles')
-                ->innerJoin('user_roles', 'security_roles', 'security_roles', 'user_roles.role_id = security_roles.id')
-                ->innerJoin('user_roles', 'user', 'user', 'user_roles.user_id = user.user_id')
-                ->where('user_roles.role_id >= :searchTerm')
-                ->setParameters(['searchTerm' => $minimumRoleId])
-                ->orderBy('security_roles.role', 'ASC');
-
-        return $qb->executeQuery()->fetchAllAssociative();
+        return $entity;
     }
 }

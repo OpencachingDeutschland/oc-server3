@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * and break everything but didn't recognize in first place,
  * please increment the following counter as a warning
  * for the next brave soul
- * total_hours_wasted = 42
+ * total_hours_wasted = 43
  */
 class FileParser
 {
@@ -44,8 +44,7 @@ class FileParser
     {
         $lines = [];
         $rows = [];
-        $content = $csv->getContent();
-        $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16LE');
+        $content = $this->decodeToUtf8($csv->getContent());
 
         $rawLines = array_filter(explode("\n", $content));
         $tmpString = '';
@@ -71,5 +70,21 @@ class FileParser
         }
 
         return $rows;
+    }
+
+    private function decodeToUtf8(string $input): string
+    {
+        foreach (array('UTF-16LE', 'UTF-16BE', 'ASCII') as $encoding) {
+            if (mb_check_encoding($input, $encoding)) {
+                $input = mb_convert_encoding($input, 'UTF-8', $encoding);
+                break;
+            }
+        }
+
+        if (!mb_check_encoding($input, 'UTF-8')) {
+            throw new FileFormatException('Unknown encoding');
+        }
+
+        return $input;
     }
 }

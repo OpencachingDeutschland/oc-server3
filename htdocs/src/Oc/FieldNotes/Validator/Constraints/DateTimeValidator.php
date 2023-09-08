@@ -28,6 +28,13 @@ class DateTimeValidator extends ConstraintValidator
      */
     public const FORMAT_SHORT_EXPANDED = 'YYYY-MM-DDThh:mmZ';
 
+    private const VAlID_FORMATS = [
+        self::FORMAT_LONG,
+        self::FORMAT_SHORT,
+        'Y-m-d\TH:i:s.v\Z',
+        'c',
+    ];
+
     /**
      * Checks if the passed value is valid.
      *
@@ -36,10 +43,16 @@ class DateTimeValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint): void
     {
-        $dateFormatLong = PHPDateTime::createFromFormat(self::FORMAT_LONG, $value);
-        $dateFormatShort = PHPDateTime::createFromFormat(self::FORMAT_SHORT, $value);
+        $valid = false;
 
-        if ($dateFormatLong === false && $dateFormatShort === false) {
+        foreach (self::VAlID_FORMATS as $format) {
+            if (false !== PHPDateTime::createFromFormat($format, $value)) {
+                $valid = true;
+                break;
+            }
+        }
+
+        if (!$valid) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('%datetime%', $value)
                 ->setParameter('%expectedFormatLong%', self::FORMAT_LONG_EXPANDED)

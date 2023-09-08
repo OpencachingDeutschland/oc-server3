@@ -32,11 +32,12 @@ class LogType
     /**
      * @var array
      */
-    public const FILE_LOG_TYPE_MAPPING = [
-        'Found it' => self::FOUND,
-        "Didn't find it" => self::NOT_FOUND,
-        'Write note' => self::NOTE,
-        'Needs Maintenance' => self::NEEDS_MAINTENANCE,
+    private const FILE_LOG_TYPE_MAPPING = [
+        'found it' => self::FOUND,
+        "didn't find it" => self::NOT_FOUND,
+        'write note' => self::NOTE,
+        'needs maintenance' => self::NEEDS_MAINTENANCE,
+        'owner maintenance' => self::NOTE,
     ];
 
     /**
@@ -44,6 +45,6 @@ class LogType
      */
     public static function guess(string $fileLogType): ?int
     {
-        return self::FILE_LOG_TYPE_MAPPING[$fileLogType] ?? null;
+        return self::FILE_LOG_TYPE_MAPPING[strtolower($fileLogType)] ?? null;
     }
 }

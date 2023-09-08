@@ -44,7 +44,8 @@ class FileParser
     {
         $lines = [];
         $rows = [];
-        $content = $this->decodeToUtf8($csv->getContent());
+        $content = $csv->getContent();
+        $content = $this->decodeToUtf8($content);
 
         $rawLines = array_filter(explode("\n", $content));
         $tmpString = '';
@@ -74,17 +75,30 @@ class FileParser
 
     private function decodeToUtf8(string $input): string
     {
-        foreach (array('UTF-16LE', 'UTF-16BE', 'ASCII') as $encoding) {
-            if (mb_check_encoding($input, $encoding)) {
-                $input = mb_convert_encoding($input, 'UTF-8', $encoding);
-                break;
-            }
+        if (!isset($input[2])) {
+            throw new FileFormatException('Input to short');
         }
 
-        if (!mb_check_encoding($input, 'UTF-8')) {
+        switch (true) {
+            case $input[0] === "\xEF" && $input[1] === "\xBB" && $input[2] === "\xBF": // UTF-8 BOM
+                $output = substr($input, 3);
+                break;
+            case $input[0] === "\xFE" && $input[1] === "\xFF": // UTF-16BE BOM
+            case $input[0] === "\x00" && $input[2] === "\x00":
+                $output = mb_convert_encoding($input, 'UTF-8', 'UTF-16BE');
+                break;
+            case $input[0] === "\xFF" && $input[1] === "\xFE": // UTF-16LE BOM
+            case $input[1] === "\x00":
+                $output = mb_convert_encoding($input, 'UTF-8', 'UTF-16LE');
+                break;
+            default:
+                $output = $input;
+        }
+
+        if (!mb_check_encoding($output, 'UTF-8')) {
             throw new FileFormatException('Unknown encoding');
         }
 
-        return $input;
+        return $output;
     }
 }

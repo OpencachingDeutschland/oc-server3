@@ -42,34 +42,9 @@ class FileParser
 
     private function getRowsFromCsv(Reader $csv): array
     {
-        $lines = [];
-        $rows = [];
         $content = $csv->getContent();
         $content = $this->decodeToUtf8($content);
-
-        $rawLines = array_filter(explode("\n", $content));
-        $tmpString = '';
-        // is used to support line breaks in the comment section
-        foreach ($rawLines as $key => $rawLine) {
-            $columnCheck = count(str_getcsv($rawLines[$key + 1]));
-            $tmpString .= $rawLine;
-            if ($columnCheck === 4 || $rawLines[$key + 1] === null) {
-                $lines[] = $tmpString;
-                $tmpString = '';
-            }
-        }
-
-        foreach ($lines as $line) {
-            $row = str_getcsv($line, ',', '"');
-            $row = array_map('trim', $row);
-
-            if (count($row) < 4) {
-                throw new FileFormatException('A row contains more or less than 4 columns');
-            }
-
-            $rows[] = $row;
-        }
-
+        $rows = $this->parseCSV($content);
         return $rows;
     }
 
@@ -100,5 +75,25 @@ class FileParser
         }
 
         return $output;
+    }
+
+    private function parseCsv(
+        string $input,
+        string $delimiter = ",",
+        string $enclosure = '"',
+        string $escape = "\\"
+    ) : array
+    {
+        $tempFile = fopen("php://temp/", 'r+');
+        fputs($tempFile, $input);
+        rewind($tempFile);
+
+        $parsed = array();
+        while ($data = fgetcsv($tempFile, 0, $delimiter, $enclosure, $escape)) {
+            $parsed[] = $data;
+        }
+
+        fclose($tempFile);
+        return $parsed;
     }
 }

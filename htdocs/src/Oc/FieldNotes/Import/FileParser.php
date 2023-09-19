@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * and break everything but didn't recognize in first place,
  * please increment the following counter as a warning
  * for the next brave soul
- * total_hours_wasted = 42
+ * total_hours_wasted = 43
  */
 class FileParser
 {
@@ -42,34 +42,58 @@ class FileParser
 
     private function getRowsFromCsv(Reader $csv): array
     {
-        $lines = [];
-        $rows = [];
         $content = $csv->getContent();
-        $content = mb_convert_encoding($content, 'UTF-8', 'UTF-16LE');
-
-        $rawLines = array_filter(explode("\n", $content));
-        $tmpString = '';
-        // is used to support line breaks in the comment section
-        foreach ($rawLines as $key => $rawLine) {
-            $columnCheck = count(str_getcsv($rawLines[$key + 1]));
-            $tmpString .= $rawLine;
-            if ($columnCheck === 4 || $rawLines[$key + 1] === null) {
-                $lines[] = $tmpString;
-                $tmpString = '';
-            }
-        }
-
-        foreach ($lines as $line) {
-            $row = str_getcsv($line, ',', '"');
-            $row = array_map('trim', $row);
-
-            if (count($row) < 4) {
-                throw new FileFormatException('A row contains more or less than 4 columns');
-            }
-
-            $rows[] = $row;
-        }
-
+        $content = $this->decodeToUtf8($content);
+        $rows = $this->parseCSV($content);
         return $rows;
+    }
+
+    private function decodeToUtf8(string $input): string
+    {
+        if (!isset($input[2])) {
+            throw new FileFormatException('Input to short');
+        }
+
+        switch (true) {
+            case $input[0] === "\xEF" && $input[1] === "\xBB" && $input[2] === "\xBF": // UTF-8 BOM
+                $output = substr($input, 3);
+                break;
+            case $input[0] === "\xFE" && $input[1] === "\xFF": // UTF-16BE BOM
+            case $input[0] === "\x00" && $input[2] === "\x00":
+                $output = mb_convert_encoding($input, 'UTF-8', 'UTF-16BE');
+                break;
+            case $input[0] === "\xFF" && $input[1] === "\xFE": // UTF-16LE BOM
+            case $input[1] === "\x00":
+                $output = mb_convert_encoding($input, 'UTF-8', 'UTF-16LE');
+                break;
+            default:
+                $output = $input;
+        }
+
+        if (!mb_check_encoding($output, 'UTF-8')) {
+            throw new FileFormatException('Unknown encoding');
+        }
+
+        return $output;
+    }
+
+    private function parseCsv(
+        string $input,
+        string $delimiter = ",",
+        string $enclosure = '"',
+        string $escape = "\\"
+    ) : array
+    {
+        $tempFile = fopen("php://temp/", 'r+');
+        fputs($tempFile, $input);
+        rewind($tempFile);
+
+        $parsed = array();
+        while ($data = fgetcsv($tempFile, 0, $delimiter, $enclosure, $escape)) {
+            $parsed[] = $data;
+        }
+
+        fclose($tempFile);
+        return $parsed;
     }
 }

@@ -635,12 +635,17 @@ function search_output(): void
             ++$n;
         }
 
+        // if user has entered solved coordinates, handle them with a separate waypoint
+        // original cache coordinates are stored in this waypoint as ORIGINAL
+        // original cache coordinates will be overwritten with solved coordinates
         if ($cacheNote && !empty($cacheNote['latitude']) && !empty($cacheNote['longitude'])) {
             $thiswp = $gpxWaypoints;
-            $thiswp = mb_ereg_replace('{wp_lat}', sprintf('%01.5f', $cacheNote['latitude']), $thiswp);
-            $thiswp = mb_ereg_replace('{wp_lon}', sprintf('%01.5f', $cacheNote['longitude']), $thiswp);
+            $thiswp = mb_ereg_replace('{wp_lat}', sprintf('%01.5f', $lat), $thiswp); // take $lat as original coordinates
+            $thiswp = mb_ereg_replace('{wp_lon}', sprintf('%01.5f', $lon), $thiswp); // $lon the same..
+            $thisline = mb_ereg_replace(sprintf('%01.5f', $lat), $cacheNote['latitude'], $thisline); // replace already replaced original coordinates with solved coordinates
+            $thisline = mb_ereg_replace(sprintf('%01.5f', $lon), $cacheNote['longitude'], $thisline); // ..
             $thiswp = mb_ereg_replace('{time}', $time, $thiswp);
-            $thiswp = mb_ereg_replace('{name}', $r['waypoint'] . 'NOTE', $thiswp);
+            $thiswp = mb_ereg_replace('{name}', $r['waypoint'] . 'ORIGINAL', $thiswp);
             $thiswp = mb_ereg_replace('{cachename}', text_xmlentities($r['name']), $thiswp);
             $thiswp = mb_ereg_replace('{comment}', text_xmlentities($cacheNote['note']), $thiswp);
             $thiswp = mb_ereg_replace('{desc}', text_xmlentities($cache_note_text), $thiswp);

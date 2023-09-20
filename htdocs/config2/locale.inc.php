@@ -91,10 +91,10 @@ $opt['locale']['JA']['locales'] = ['ja_JP.utf8', 'ja_JP', 'jp'];
 
 $opt['locale']['EN']['format']['dm'] = '%d/%m';
 $opt['locale']['EN']['format']['dateshort'] = '%d/%m/%y';
-$opt['locale']['EN']['format']['date'] = '%Y-%d-%m';
+$opt['locale']['EN']['format']['date'] = '%Y-%m-%d';
 $opt['locale']['EN']['format']['datelong'] = '%d %B %Y';
-$opt['locale']['EN']['format']['datetime'] = '%Y-%d-%m %I:%M %p';
-$opt['locale']['EN']['format']['datetimesec'] = '%Y-%d-%m %X';
+$opt['locale']['EN']['format']['datetime'] = '%Y-%m-%d %I:%M %p';
+$opt['locale']['EN']['format']['datetimesec'] = '%Y-%m-%d %X';
 $opt['locale']['EN']['format']['time'] = '%I:%M %p';
 $opt['locale']['EN']['format']['timesec'] = '%X';
 $opt['locale']['EN']['format']['phpdate'] = 'Y-m-d';

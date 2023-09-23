@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Oc\Controller\App;
 
 use Doctrine\DBAL\Exception;
-use Oc\Repository\CachesRepository;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Oc\Repository\MapsRepository;
@@ -46,7 +45,8 @@ class MapsController extends AbstractController
                         'mapCenterViewLat' => $centerPoint[0],
                         'mapCenterViewLon' => $centerPoint[1],
                         'mapZoom' => '6',
-                        'mapWP' => $centerPoint[2]
+                        'mapWP' => $centerPoint[2],
+                        'movingCachesTracks' => $this->mapsRepository->getMovingCachesTracks()
                 ]
         );
     }

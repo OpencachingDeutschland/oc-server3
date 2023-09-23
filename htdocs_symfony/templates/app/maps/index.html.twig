@@ -16,7 +16,7 @@
 
     <script>
 
-        <!-- Basiskarten -->
+        // Basiskarten definieren
         var openStreetMapDE = L.tileLayer(OSMDEUrl, {id: 'MapID', attribution: OSMDEAttribution});
         var openTopoMap = L.tileLayer(openTopoMapUrl, {id: 'MapID', attribution: openTopoMapAttribution});
         var cyclOSMMap = L.tileLayer(CyclOSMEUrl, {id: 'MapID', attribution: CyclOSMAttribution});
@@ -37,23 +37,26 @@
             riseOnHover: true,
             title: '{{ WP.wpOc }} {{ WP.name }}',
             icon: CacheIcon_{{ WP.cacheType.kmlName }}
-        }).bindPopup('{{ WP.wpOc }}<br/>{{ WP.name }}<br/>{{ WP.user.username }}');
+        }).bindPopup("{{ WP.wpOc }}<br/><a href='{{ path('app_cache_by_wp_oc_gc', {'wpID': WP.wpOc }) }}'>{{ WP.name }}</a><br/><a href='{{ path('app_user_by_id', {'userID': WP.user.userId }) }}'>{{ WP.user.username }}</a>");
 
         overlayCaches.addLayer(CacheMarker);
         {% endfor %}
 
-        <!-- Layer, z.B. für Spuren von Moving Caches -->
+        <!-- Layer für Spuren von Moving Caches -->
         var overlayMovingTracks = L.layerGroup();
-        var CacheTrackCoordinates = [
-            [54.0, 13.77777],
-            [52.9876, 10.1251],
-            [51.1234, 9.01111],
-            [48.3865, 10.865333333333]
-        ];
-        var CacheTrack = L.polyline(CacheTrackCoordinates, {color: 'red', weight: 2, opacity: 0.8});
+        var CacheTrackCoordinatesPackage = JSON.parse('{{ movingCachesTracks | json_encode | raw }}');
+        var CacheTrackCoordinates = new Array();
+
+        for (i in CacheTrackCoordinatesPackage) {
+            for (k in CacheTrackCoordinatesPackage[i]) {
+                CacheTrackCoordinates.push(CacheTrackCoordinatesPackage[i][k])
+            }
+        }
+
+        var CacheTrack = L.polyline(CacheTrackCoordinates, {color: 'blue', weight: 2, opacity: 0.8});
         overlayMovingTracks.addLayer(CacheTrack);
 
-        <!-- An- und abwählbare Layer definieren -->
+        <!-- An- und abwählbare Layer definieren, die beim ersten Kartenladen vorhanden sein sollen -->
         var overlayMaps = {
             "Caches": overlayCaches,
             "Moving Caches Tracks": overlayMovingTracks
@@ -67,7 +70,8 @@
             zoomControl: 'bottomright'
         });
 
-        // var polyline = L.polyline(CacheTrack, {color: 'red', weight: 2, opacity: 0.8}).addTo(mapLL);
+        <!-- hier Layer einfügen, die beim ersten Kartenladen zwar vorhanden, aber deaktiviert sein sollen -->
+        mapLL.removeLayer(overlayMovingTracks);
 
         <!-- Basiskarten und Layer der Karte hinzufügen -->
         L.control.layers(baseMaps, overlayMaps).addTo(mapLL);

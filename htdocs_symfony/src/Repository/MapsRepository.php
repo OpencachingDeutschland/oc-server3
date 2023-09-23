@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordsNotFoundException;
@@ -12,9 +13,12 @@ class MapsRepository
 {
     private CachesRepository $cachesRepository;
 
-    public function __construct(CachesRepository $cachesRepository)
+    private Connection $connection;
+
+    public function __construct(CachesRepository $cachesRepository, Connection $connection)
     {
         $this->cachesRepository = $cachesRepository;
+        $this->connection = $connection;
     }
 
     /**
@@ -48,5 +52,37 @@ class MapsRepository
         }
 
         return [$mapCenterViewLat, $mapCenterViewLon, $mapWP];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getMovingCachesTracks(): array
+    {
+        $qb = $this->connection->createQueryBuilder();
+        $qb->select('cache_coordinates.cache_id', 'cache_coordinates.longitude', 'cache_coordinates.latitude')
+                ->from('cache_coordinates')
+                ->innerJoin('cache_coordinates', 'caches', 'caches', 'caches.cache_id = cache_coordinates.cache_id')
+                ->where('caches.type = 9'); // 9 = moving caches
+
+        $movingTracks = $qb->executeQuery()->fetchAllAssociative();
+
+        // transform query array to one to be usable for twig template...
+        $movingTracksTransformed = [];
+        foreach ($movingTracks as $track) {
+            if (array_key_exists($track['cache_id'], $movingTracksTransformed)) {
+                $movingTracksTransformed [$track['cache_id']][] = [(float)$track['latitude'], (float)$track['longitude']];
+            } else {
+                $movingTracksTransformed [$track['cache_id']] = [[(float)$track['latitude'], (float)$track['longitude']]];
+            }
+        }
+        // ... and keep only track infos with multiple entries per cache_id (otherwise it's no track..)
+        foreach ($movingTracksTransformed as $value => $track) {
+            if (count($track) == 1) {
+                unset($movingTracksTransformed[$value]);
+            }
+        }
+
+        return $movingTracksTransformed;
     }
 }

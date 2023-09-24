@@ -40,6 +40,9 @@ class FileParser
         return $this->structMapper->map($rows);
     }
 
+     /**
+      * @throws FileFormatException
+      */
     private function getRowsFromCsv(Reader $csv): array
     {
         $content = $csv->getContent();
@@ -48,6 +51,9 @@ class FileParser
         return $rows;
     }
 
+    /**
+     * @throws FileFormatException
+     */
     private function decodeToUtf8(string $input): string
     {
         if (!isset($input[2])) {
@@ -77,6 +83,9 @@ class FileParser
         return $output;
     }
 
+    /**
+     * @throws FileFormatException
+     */
     private function parseCsv(
         string $input,
         string $delimiter = ",",
@@ -90,6 +99,9 @@ class FileParser
 
         $parsed = array();
         while ($data = fgetcsv($tempFile, 0, $delimiter, $enclosure, $escape)) {
+            if (count($data) !== 4) {
+                throw new FileFormatException('Invalid field note: Row without 4 columns.');
+            }
             $parsed[] = $data;
         }
 

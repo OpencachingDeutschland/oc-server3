@@ -64,6 +64,7 @@ class ImportService
     {
         $success = true;
         $errors = [];
+        $fieldNotes = null;
 
         try {
             $fieldNotes = $this->fileParser->parseFile($formData->file);

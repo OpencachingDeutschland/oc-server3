@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Oc\User;
+namespace OcTest\Modules\Oc\Country;
 
 use Oc\Country\CountryEntity;
 use OcTest\Modules\TestCase;

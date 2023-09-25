@@ -98,6 +98,13 @@ class OcSmarty extends Smarty
         $this->config_dir = __DIR__ . '/../config2/';
         $this->plugins_dir = [__DIR__ . '/../src/OcLegacy/SmartyPlugins', __DIR__ . '/../vendor/smarty/smarty/libs/plugins', __DIR__ . '/../vendor/smarty/smarty/libs/sysplugins'];
 
+        if (!is_dir(__DIR__ . '/../var/cache2/smarty/cache/')) {
+            mkdir(__DIR__ . '/../var/cache2/smarty/cache/');
+        }
+        if (!is_dir(__DIR__ . '/../var/cache2/smarty/compiled/')) {
+            mkdir(__DIR__ . '/../var/cache2/smarty/compiled/');
+        }
+
         // disable caching ... if caching is enabled, 1 hour is default
         $this->caching = 0;
         $this->cache_lifetime = 3600; // default

@@ -186,14 +186,14 @@ function configure_php(): void
 
     if ($opt['php']['debug'] == PHP_DEBUG_ON) {
         ini_set('display_errors', true);
-        ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_WARNING);
+        ini_set('error_reporting', E_ALL);
         ini_set('mysql.trace_mode', true);
         // SQL_CALC_FOUND_ROWS will not work with trace_mode on!
         // Use the next two functions below as workaround.
         register_errorhandlers();
     } else {
         ini_set('display_errors', false);
-        ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_WARNING);
+        ini_set('error_reporting', E_ALL & ~E_NOTICE);
         ini_set('mysql.trace_mode', false);
         register_errorhandlers();
     }

@@ -12,7 +12,7 @@ RUN apt-get update -y \
     yarn \
     gettext
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 RUN wget https://get.symfony.com/cli/installer -O - | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony

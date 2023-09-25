@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\OcLegacy;
+namespace OcTest\Modules\OcLegacy\Translation;
 
 use AppKernel;
 use OcLegacy\Translation\TranslationService;

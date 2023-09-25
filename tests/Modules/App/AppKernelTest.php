@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Oc\Account\Subscriber;
+namespace OcTest\Modules\App;
 
 use AppKernel;
 use OcTest\Modules\TestCase;

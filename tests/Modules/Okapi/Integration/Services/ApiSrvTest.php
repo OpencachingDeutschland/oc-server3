@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Okapi\Integration\Services\Apisrv;
+namespace OcTest\Modules\Okapi\Integration\Services;
 
 use OcTest\Modules\AbstractModuleTest;
 use OcTest\Modules\Okapi\OkapiCredentialsTrait;

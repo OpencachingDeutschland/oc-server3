@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Oc\User;
+namespace OcTest\Modules\Oc\Language;
 
 use Oc\Language\LanguageEntity;
 use Oc\Language\LanguageRepository;

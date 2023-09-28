@@ -1,6 +1,6 @@
 <?php
 
-namespace OcTest\Modules\Okapi;
+namespace OcTest\Modules\Okapi\Integration;
 
 use OcTest\Modules\AbstractModuleTest;
 use okapi\core\Okapi;

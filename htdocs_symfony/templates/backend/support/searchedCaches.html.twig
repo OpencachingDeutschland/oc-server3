@@ -14,8 +14,8 @@
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'GC code' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'GC code maint.' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'GC code (user)' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'GC code (maint.)' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Email' | trans }}</th>
@@ -25,6 +25,7 @@
                         <th scope="col" class="asc">{{ 'Vandalism' | trans }}</th>
                     </tr>
                     </thead>
+                    <tbody>
                     {% for report in foundCaches %}
                         <tr>
                             <td>{{ report.wp_oc }}</td>
@@ -36,7 +37,7 @@
                             <td><a href="{{ path('backend_support_cache_history', { 'wpID': report.wp_oc }) }}"><i class="fas fa-check"></i></a></td>
                             <td><a href="{{ path('backend_support_occ', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}"><i class="fas fa-check"></i></a></td>
                             <td><a href="{{ path('backend_support_user_account_details', { 'userID': report.user_id }) }}"><i class="fas fa-check"></i></a></td>
-                            <td><i class="fas fa-times"></i></td>
+{#                            <td><a href="{{ path('backend_support_cache_history', { 'wpID': report.wp_oc }) }}"><i class="fas fa-check"></i></a></td>#}
                         </tr>
                     {% endfor %}
                     </tbody>

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use Oc\Repository\AbstractEntity;
+
 class GeoCachesAttributesEntity extends AbstractEntity
 {
     public int $cacheId = 0;

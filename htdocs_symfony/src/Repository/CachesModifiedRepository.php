@@ -1,6 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Oc\Repository;
+
+use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
+use Oc\Entity\GeoCachesModifiedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -19,8 +26,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchAll(): array
     {
@@ -46,8 +52,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = []): GeoCachesModifiedEntity
     {
@@ -75,8 +80,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = []): array
     {
@@ -109,7 +113,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCachesModifiedEntity $entity): GeoCachesModifiedEntity
     {
@@ -131,7 +135,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCachesModifiedEntity $entity): GeoCachesModifiedEntity
     {
@@ -152,7 +156,7 @@ class CachesModifiedRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function remove(GeoCachesModifiedEntity $entity): GeoCachesModifiedEntity
     {
@@ -165,7 +169,7 @@ class CachesModifiedRepository
                 ['cache_id' => $entity->cacheId]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -190,7 +194,7 @@ class CachesModifiedRepository
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): GeoCachesModifiedEntity
     {

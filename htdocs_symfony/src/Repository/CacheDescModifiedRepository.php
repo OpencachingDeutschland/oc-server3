@@ -1,6 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Oc\Repository;
+
+use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
+use Oc\Entity\GeoCacheDescModifiedEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -19,8 +26,7 @@ class CacheDescModifiedRepository
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchAll(): array
     {
@@ -31,9 +37,9 @@ class CacheDescModifiedRepository
 
         $result = $statement->fetchAllAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordsNotFoundException('No records found');
+//        }
 
         $records = [];
 
@@ -46,8 +52,7 @@ class CacheDescModifiedRepository
 
     /**
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = []): GeoCacheDescModifiedEntity
     {
@@ -66,17 +71,16 @@ class CacheDescModifiedRepository
 
         $result = $statement->fetchAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException('Record with given where clause not found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordNotFoundException('Record with given where clause not found');
+//        }
 
         return $this->getEntityFromDatabaseArray($result);
     }
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = []): array
     {
@@ -94,9 +98,9 @@ class CacheDescModifiedRepository
 
         $result = $statement->fetchAllAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordsNotFoundException('No records with given where clause found');
+//        }
 
         $entities = [];
 
@@ -109,7 +113,7 @@ class CacheDescModifiedRepository
 
     /**
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheDescModifiedEntity $entity): GeoCacheDescModifiedEntity
     {
@@ -131,7 +135,7 @@ class CacheDescModifiedRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheDescModifiedEntity $entity): GeoCacheDescModifiedEntity
     {
@@ -152,7 +156,7 @@ class CacheDescModifiedRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function remove(GeoCacheDescModifiedEntity $entity): GeoCacheDescModifiedEntity
     {
@@ -165,7 +169,7 @@ class CacheDescModifiedRepository
                 ['cache_id' => $entity->cacheId]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -187,7 +191,7 @@ class CacheDescModifiedRepository
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): GeoCacheDescModifiedEntity
     {

@@ -1,6 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Oc\Repository;
+
+use DateTime;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
+use Oc\Entity\GeoCacheDescEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -19,8 +26,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchAll(): array
     {
@@ -46,8 +52,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchOneBy(array $where = []): GeoCacheDescEntity
     {
@@ -75,8 +80,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordsNotFoundException
-     * @throws \Doctrine\DBAL\Exception
-     * @throws Exception
+     * @throws \Exception
      */
     public function fetchBy(array $where = []): array
     {
@@ -109,7 +113,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordAlreadyExistsException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function create(GeoCacheDescEntity $entity): GeoCacheDescEntity
     {
@@ -131,7 +135,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function update(GeoCacheDescEntity $entity): GeoCacheDescEntity
     {
@@ -152,7 +156,7 @@ class CacheDescRepository
 
     /**
      * @throws RecordNotPersistedException
-     * @throws \Doctrine\DBAL\Exception
+     * @throws Exception
      */
     public function remove(GeoCacheDescEntity $entity): GeoCacheDescEntity
     {
@@ -165,7 +169,7 @@ class CacheDescRepository
                 ['id' => $entity->id]
         );
 
-        $entity->cacheId = null;
+        $entity->cacheId = 0;
 
         return $entity;
     }
@@ -189,7 +193,7 @@ class CacheDescRepository
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function getEntityFromDatabaseArray(array $data): GeoCacheDescEntity
     {

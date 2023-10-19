@@ -1,0 +1,72 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block page_content %}
+
+    {% include '/backend/support/support.header.html.twig' %}
+
+    <h3><br/>{{ 'Anti vandalism page' | trans }}..</h3>
+
+    <div>
+
+        {% if modified_information is defined and modified_information %}
+            {% if user_account_details is defined and user_account_details %}
+                {% if user_account_details.isActive %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ 'User \'' ~ user_account_details.username ~ '\' is not disabled! To reset one or more caches to a previous version, you need the user\'s permission!' | trans }}
+                    </div>
+                {% endif %}
+            {% endif %}
+            <div class="alert alert-danger" role="alert">
+                {{ 'Warning: If you revert any owner-made listing changes of today, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords & country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore it is strongly recommended to revert vandalism not before the next day!' | trans }}
+            </div>
+
+            <br/>
+            {{ 'Following listing is affected' | trans }}: {{ curremt_cache_details.wpOc }} {{ curremt_cache_details.name }}<br/><br/>
+            {{ 'Please select the date from which all changes are to be reverted.' | trans }}<br/>
+            {{ 'The listing will be reset to the contents it had on that day at 00:00:00' | trans }}<br/><br/>
+
+            <form action="{{ path('backend_support_vandalism_restore') }}" method="POST">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>{{ 'Date' | trans }}</th>
+                        <th>{{ 'Changes' | trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for key,value in modified_information %}
+                        <tr>
+                            <th><input type="radio" name="dateselect" value="{{ key }}" required></th>
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <input type="checkbox" name="restore_coords" value="1"/> {{ 'coordinates and country' | trans }}<br/>
+                <input type="checkbox" name="restore_settings" value="1"/> {{ 'name, settings, attributes and hide-date' | trans }}<br/>
+                <input type="checkbox" name="restore_wpgc" value="1"/> {{ 'GC waypoints' | trans }}<br/>
+                <input type="checkbox" name="restore_desc" value="1"/> {{ 'description(s)' | trans }}<br/>
+                <input type="checkbox" name="restore_desc" value="1" disabled/> {{ 'description(s) incl. pictures' | trans }}<br/>
+                <input type="checkbox" name="restore_logs" value="1" disabled/> {{ 'logs incl. pictures' | trans }}<br/>
+                {% if user_account_details.isActive %}
+                    <input type="checkbox" name="user_permission" value="1"
+                           required/> {{ 'The user has allowed to reset the selected cache to a previous version.' | trans }}<br/>
+                {% endif %}
+                <input type="checkbox" name="sure" value="1" required/> {{ 'Are you sure?' | trans }}<br/>
+                <input type="hidden" name="wpID" value="{{ curremt_cache_details.wpOc }}">
+                <input type="hidden" name="adminUserID" value="{{ app.user.userId }}">
+                <input type="submit">
+            </form>
+            {#            {{ form_start(supportRestoreCacheForm, {action:path('backend_support_vandalism', {'wpID': curremt_cache_details.wpOc, 'userID': user_account_details.userId, 'method': 'POST' } ) } ) }} #}
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No restorable changes found' | trans }}..</span>
+        {% endif %}
+    </div>
+
+    <hr>
+
+{% endblock %}

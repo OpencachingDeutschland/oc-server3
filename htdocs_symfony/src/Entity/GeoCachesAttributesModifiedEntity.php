@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use DateTime;
 use Oc\Repository\AbstractEntity;
 
 class GeoCachesAttributesModifiedEntity extends AbstractEntity
@@ -12,7 +13,7 @@ class GeoCachesAttributesModifiedEntity extends AbstractEntity
 
     public int $attribId;
 
-    public string $dateModified;
+    public DateTime $dateModified;
 
     public int $wasSet;
 

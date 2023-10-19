@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use DateTime;
 use Oc\Repository\AbstractEntity;
 
 class GeoCacheDescModifiedEntity extends AbstractEntity
@@ -12,9 +13,9 @@ class GeoCacheDescModifiedEntity extends AbstractEntity
 
     public string $language;
 
-    public string $dateModified;
+    public DateTime $dateModified;
 
-    public string $dateCreated;
+    public DateTime $dateCreated;
 
     public string $desc;
 

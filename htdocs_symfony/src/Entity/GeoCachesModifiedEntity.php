@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
+use DateTime;
 use Oc\Repository\AbstractEntity;
 
 class GeoCachesModifiedEntity extends AbstractEntity
 {
     public int $cacheId = 0;
 
-    public string $dateModified;
+    public DateTime $dateModified;
 
     public string $name;
 
     public int $type;
 
-    public string $dateHidden;
+    public DateTime $dateHidden;
 
     public int $size;
 

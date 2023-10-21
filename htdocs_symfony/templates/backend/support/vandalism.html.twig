@@ -19,6 +19,9 @@
             <div class="alert alert-danger" role="alert">
                 {{ 'Warning: If you revert any owner-made listing changes of today, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords & country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore it is strongly recommended to revert vandalism not before the next day!' | trans }}
             </div>
+            <div class="alert alert-danger" role="alert">
+                {{ 'Warning: Log and picture vandalism will not be shown in the table below under Changes! (Database query could not be converted yet.) Restoration is also not possible.' | trans }}
+            </div>
 
             <br/>
             {{ 'Following listing is affected' | trans }}: {{ curremt_cache_details.wpOc }} {{ curremt_cache_details.name }}<br/><br/>
@@ -39,7 +42,7 @@
                         <tr>
                             <th><input type="radio" name="dateselect" value="{{ key }}" required></th>
                             <td>{{ key }}</td>
-                            <td>{{ value }}</td>
+                            <td>{{ value[curremt_cache_details.wpOc] | raw }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -56,6 +59,7 @@
                            required/> {{ 'The user has allowed to reset the selected cache to a previous version.' | trans }}<br/>
                 {% endif %}
                 <input type="checkbox" name="sure" value="1" required/> {{ 'Are you sure?' | trans }}<br/>
+                <input type="checkbox" name="simulate" value="1" /> {{ 'Simulate?' | trans }}<br/>
                 <input type="hidden" name="wpID" value="{{ curremt_cache_details.wpOc }}">
                 <input type="hidden" name="adminUserID" value="{{ app.user.userId }}">
                 <input type="submit">

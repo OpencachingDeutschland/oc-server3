@@ -25,7 +25,6 @@ use Oc\Repository\CacheReportsRepository;
 use Oc\Repository\CachesRepository;
 use Oc\Repository\CacheStatusModifiedRepository;
 use Oc\Repository\CacheStatusRepository;
-use Oc\Repository\CoordinatesRepository;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -37,6 +36,7 @@ use Oc\Repository\SupportListingCommentsRepository;
 use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
+use Oc\Repository\SupportVandalismRepository;
 use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -74,6 +74,8 @@ class SupportControllerBackend extends AbstractController
 
     private NodesRepository $nodesRepository;
 
+    private SecurityRolesRepository $securityRolesRepository;
+
     private SupportBonuscachesRepository $supportBonuscachesRepository;
 
     private SupportListingCommentsRepository $supportListingCommentsRepository;
@@ -83,6 +85,8 @@ class SupportControllerBackend extends AbstractController
     private SupportUserCommentsRepository $supportUserCommentsRepository;
 
     private SupportUserRelationsRepository $supportUserRelationsRepository;
+
+    private SupportVandalismRepository $supportVandalismRepository;
 
     private UserLoginBlockRepository $userLoginBlockRepository;
 
@@ -104,6 +108,7 @@ class SupportControllerBackend extends AbstractController
             SupportListingInfosRepository $supportListingInfosRepository,
             SupportUserCommentsRepository $supportUserCommentsRepository,
             SupportUserRelationsRepository $supportUserRelationsRepository,
+            SupportVandalismRepository $supportVandalismRepository,
             UserLoginBlockRepository $userLoginBlockRepository,
             UserRepository $userRepository
     ) {
@@ -122,6 +127,7 @@ class SupportControllerBackend extends AbstractController
         $this->supportListingInfosRepository = $supportListingInfosRepository;
         $this->supportUserCommentsRepository = $supportUserCommentsRepository;
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
+        $this->supportVandalismRepository = $supportVandalismRepository;
         $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
@@ -608,12 +614,12 @@ class SupportControllerBackend extends AbstractController
      *
      * @Route("/vandalism/{wpID}&{userID}", name="support_vandalism")
      * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
+     *
+     * Vandalismusscript 1:1 adaptiert von htdocs/restorecaches.php
      */
     public function vandalism(string $wpID, int $userID): Response
     {
-        $data = $this->get_archive_data($this->cachesRepository->getIdByWP($wpID), $wpID);
-
-        dd($data);
+        $data = $this->supportVandalismRepository->getArchiveData($this->cachesRepository->getIdByWP($wpID), $wpID);
 
         return $this->render(
                 'backend/support/vandalism.html.twig', [
@@ -626,243 +632,6 @@ class SupportControllerBackend extends AbstractController
     }
 
     /**
-     * @throws \Doctrine\DBAL\Exception
-     */
-    function get_archive_data(int $cacheId, string $wpID): array
-    {
-        $data = [];
-        $admins = [];
-
-        // make waypoint index
-        $wp_oc[$cacheId] = $wpID;
-
-        // process cache coordinates
-        $rs = $this->connection->createQueryBuilder()
-                ->select('cache_id', 'LEFT(date_created, 10) AS date_modified', 'longitude', 'latitude', 'restored_by')
-                ->from('cache_coordinates')
-                ->where('cache_id = :paramID')
-                ->setparameters(['paramID' => $cacheId])
-                ->orderby('date_created', 'ASC')
-                ->executeQuery()
-                ->fetchAllAssociative();
-        // order is relevant, because multiple changes per day possible
-        $lastcoord = [];
-        foreach ($rs as $r) {
-            $coord = new CoordinatesRepository((float)$r['latitude'], (float)$r['longitude']);
-            $coord = $coord->getDegreeMinutes();
-            $coord = $coord['lat'] . " " . $coord['lon'];
-            if (isset($lastcoord[$r['cache_id']]) && $coord != $lastcoord[$r['cache_id']]) {
-                $this->append_data($data, $admins, $wp_oc, $r, "coord", $lastcoord[$r['cache_id']], $coord);
-            }
-            $lastcoord[$r['cache_id']] = $coord;
-        }
-
-        // process cache country
-        $rs = $this->connection->createQueryBuilder()
-                ->select('cache_id', 'LEFT(date_created, 10) AS date_modified', 'country', 'restored_by')
-                ->from('cache_countries')
-                ->where('cache_id = :paramID')
-                ->setparameters(['paramID' => $cacheId])
-                ->orderby('date_created', 'ASC')
-                ->executeQuery()
-                ->fetchAllAssociative();
-        // order is relevant, because multiple changes per day possible
-        $lastcountry = [];
-        foreach ($rs as $r) {
-            if (isset($lastcountry[$r['cache_id']]) && $r['country'] != $lastcountry[$r['cache_id']]) {
-                $this->append_data($data, $admins, $wp_oc, $r, "country", $lastcountry[$r['cache_id']], $r['country']);
-            }
-            $lastcountry[$r['cache_id']] = $r['country'];
-        }
-
-        // process all other cache data
-        // first the current data ...
-        $nextcd = [];
-        $rs = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from('caches')
-                ->where('cache_id = :paramID')
-                ->setParameters(['paramID' => $cacheId])
-                ->executeQuery()
-                ->fetchAllAssociative();
-        foreach ($rs as $r) {
-            $nextcd[$r['wp_oc']] = $r;
-            $user_id = $r['user_id']; // is used later for logs
-        }
-
-        // .. then the changes
-        // .. and then the changes
-        $rs = $this->connection->createQueryBuilder()
-                ->select('*')
-                ->from('caches_modified')
-                ->where('cache_id = :paramID')
-                ->setParameters(['paramID' => $cacheId])
-                ->orderBy('date_modified', 'DESC')
-                ->executeQuery()
-                ->fetchAllAssociative();
-        foreach ($rs as $r) {
-            $wp = $wp_oc[$r['cache_id']];
-            if ($r['name'] != $nextcd[$wp]['name']) {
-                append_data($data, $admins, $wp_oc, $r, 'name', $r['name'], $nextcd[$wp]['name']);
-            }
-
-            if ($r['type'] != $nextcd[$wp]['type']) {
-                $this->append_data(
-                        $data,
-                        $admins,
-                        $wp_oc,
-                        $r,
-                        'type',
-                        $this->connection->createQueryBuilder()
-                                ->select('name')
-                                ->from('cache_type')
-                                ->where('id = :paramID')
-                                ->setParameters(['paramID' =>$r['type']])
-                                ->executeQuery()
-                                ->fetchAssociative()['name'],
-                        $this->connection->createQueryBuilder()
-                                ->select('name')
-                                ->from('cache_type')
-                                ->where('id = :paramID')
-                                ->setParameters(['paramID' =>$nextcd[$wp]['type']])
-                                ->executeQuery()
-                                ->fetchAssociative()['name']
-                );
-
-                size..
-            }
-            dd($data);
-
-        }
-
-////////////while ($r = sql_fetch_assoc($rs)) {
-//            if ($r['size'] != $nextcd[$wp]['size']) {
-//                append_data(
-//                        $data,
-//                        $admins,
-//                        $wp_oc,
-//                        $r,
-//                        "size",
-//                        labels::getLabelValue('cache_size', $r['size']),
-//                        labels::getLabelValue('cache_size', $nextcd[$wp]['size'])
-//                );
-//            }
-//            if ($r['difficulty'] != $nextcd[$wp]['difficulty']) {
-//                append_data($data, $admins, $wp_oc, $r, "D", $r['difficulty'] / 2, $nextcd[$wp]['difficulty'] / 2);
-//            }
-//            if ($r['terrain'] != $nextcd[$wp]['terrain']) {
-//                append_data($data, $admins, $wp_oc, $r, "T", $r['terrain'] / 2, $nextcd[$wp]['terrain'] / 2);
-//            }
-//            if ($r['search_time'] != $nextcd[$wp]['search_time']) {
-//                append_data(
-//                        $data,
-//                        $admins,
-//                        $wp_oc,
-//                        $r,
-//                        'time',
-//                        $r['search_time'] . '&nbsp;h',
-//                        $nextcd[$wp]['search_time'] . '&nbsp;h'
-//                );
-//            }
-//            if ($r['way_length'] != $nextcd[$wp]['way_length']) {
-//                append_data(
-//                        $data,
-//                        $admins,
-//                        $wp_oc,
-//                        $r,
-//                        'way',
-//                        $r['way_length'] . '&nbsp;km',
-//                        $nextcd[$wp]['way_length'] . '&nbsp;km'
-//                );
-//            }
-//            if ($r['wp_gc'] != $nextcd[$wp]['wp_gc']) {
-//                append_data(
-//                        $data,
-//                        $admins,
-//                        $wp_oc,
-//                        $r,
-//                        'GC ',
-//                        format_wp($r['wp_gc']),
-//                        format_wp($nextcd[$wp]['wp_gc'])
-//                );
-//            }
-//            if ($r['wp_nc'] != $nextcd[$wp]['wp_nc']) {
-//                append_data(
-//                        $data,
-//                        $admins,
-//                        $wp_oc,
-//                        $r,
-//                        'GC ',
-//                        format_wp($r['wp_nc']),
-//                        format_wp($nextcd[$wp]['wp_nc'])
-//                );
-//            }
-//            if ($r['date_hidden'] != $nextcd[$wp]['date_hidden']) {
-//                append_data($data, $admins, $wp_oc, $r, "hidden", $r['date_hidden'], $nextcd[$wp]['date_hidden']);
-//            }
-//
-//            $nextcd[$wp] = $r;
-//        }
-
-
-        // done
-        ksort($data);
-
-        return array_reverse($data, true);
-    }
-
-    /**
-     * @throws \Doctrine\DBAL\Exception
-     */
-    function append_data(&$data, &$admins, $wp_oc, $r, $field, $oldvalue, $newvalue)
-    {
-        if (!isset($r['date_modified'])) {
-            die('internal error: date_modified not set for: ' . $field);
-        }
-        $mdate = $r['date_modified'];
-        $wp = $wp_oc[$r['cache_id']];
-        $byadmin = ($r['restored_by'] > 0);
-
-        if (!isset($data[$mdate])) {
-            $data[$mdate] = [];
-        }
-
-        // TODO: HTML+CSS anpassen, da das vom Legacycode herauskopiert wurde und nun nicht mehr so recht passt
-        $text = '<strong';
-        if ($byadmin) {
-            $text .= " class='adminrestore'";
-        } else {
-            $text .= " class='userchange'";
-        }
-        $text .= ">$field</strong>: $oldvalue" . ($newvalue != '' ? " &rarr; $newvalue" : '');
-        if (isset($data[$mdate][$wp])) {
-            $data[$mdate][$wp] .= ', ' . $text;
-        } else {
-            $data[$mdate][$wp] = $text;
-        }
-
-        if ($byadmin) {
-            if (!isset($admins[$mdate])) {
-                $admins[$mdate] = [];
-            }
-            if (!isset($admins[$mdate][$wp])) {
-                $admins[$mdate][$wp] = [];
-            }
-            // TODO: Verlinkung anpassen.. das ist die alte Legacy-Verlinkungsvariante
-            $admins[$mdate][$wp][$r['restored_by'] + 0]
-                    = "<a href='viewprofile.php?userid=" . $r['restored_by'] . "' target='_blank'>" .
-                    $this->connection->createQueryBuilder()
-                            ->select('username')
-                            ->from('user')
-                            ->where('user_id = :paramUser')
-                            ->setParameters(['paramUser' => $r['restored_by']])
-                            ->executeQuery()
-                            ->fetchAssociative()['username']
-                    . '</a>';
-        }
-    }
-
-    /**
      * @throws Exception
      *
      * @Route("/vandalismRestore", name="support_vandalism_restore")
@@ -870,60 +639,12 @@ class SupportControllerBackend extends AbstractController
      */
     public function vandalismRestore(Request $request): Response
     {
-        // get current cache data
-        $restoreDate = $request->get('dateselect'); // $rdate
-        $wpID = $request->get('wpID');
-        $cacheID = $this->cachesRepository->getIdByWP($wpID);
-        $adminID = $request->get('adminUserID');
-        $cache = $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]);
-        $userId = $cache->userId;
+        $restoredData = $this->supportVandalismRepository->restoreListings($request->request->all());
 
-        $restored = [];
-        $modified = false;
-
-        // coordinates
-        if ($request->get('restore_coords') &&
-                null !== $this->connection->createQueryBuilder()
-                        ->select('cache_id')
-                        ->from('cache_coordinates')
-                        ->where('cache_id = :paramID')
-                        ->setParameters(['paramID' => $cacheID])
-                        ->executeQuery()
-                        ->fetchAssociative()
-        ) {
-            $rs = $this->connection->createQueryBuilder()
-                    ->select('latitude', 'longitude')
-                    ->from('cache_coordinates')
-                    ->where('cache_id = :paramID')
-                    ->andWhere('date_created < :paramDate')
-                    ->setParameters(['paramID' => $cacheID, 'paramDate' => $restoreDate])
-                    ->orderBy('date_created', 'DESC')
-                    ->executeQuery()
-                    ->fetchAssociative();
-
-            if (null !== $rs) {
-//                 $yyy=$this->connection->createQueryBuilder()->expr()setValue("SET @restoredby='$adminID'")->getSQL(); // is evaluated by trigger functions
-//                dd($yyy);
-//                $rs = $this->connection->createQueryBuilder()->set('@restoredby', $adminID); // ->executeQuery() ?
-                $xxx = $this->connection->createQueryBuilder()
-                        ->update('caches')
-//                        ->set('@restoredby', ':paramLat')
-//                        ->set('longitude', ':paramLon')
-//                        ->set('restored_by', ':paramAdminID')
-                        ->where('cache_id = :paramID')
-                        ->setParameters(
-                                ['paramLat' => $rs['latitude'], 'paramLon' => $rs['longitude'], 'paramID' => $cacheID, 'paramAdminID' => $adminID]
-                        )
-                        ->executeStatement();
-                dd([$xxx, "xx"]);
-                $restored[$wpID]['coords'] = true;
-            }
-        }
-
-        dd($restored);
-
-        $qb->set('@restoredby', 0);
-        return $this->redirectToRoute(); // TODO
+        return $this->render(
+                'backend/support/vandalismFinish.html.twig',
+                ['modified_information' => $restoredData[0], 'simulate' => $restoredData[1]]
+        );
     }
 
     /**

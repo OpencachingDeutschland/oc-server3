@@ -4,33 +4,32 @@
 
     {% include '/backend/support/support.header.html.twig' %}
 
-<h3><br/>{{ 'Anti vandalism page' | trans }}..</h3>
+    <h3><br/>{{ 'Anti vandalism page' | trans }}..</h3>
 
-<div>
+    <div>
 
-    {% if modified_information is defined and modified_information %}
-        <br/><br/>
+        {% if modified_information is defined and modified_information %}
+            <br/><br/>
 
-        {% for key,value in modified_information %}
-            {% if simulate %}
-                {{ 'This was only a simulation. Following options would have been restored for cache ' ~ key | trans }}:<br/>
-            {% else %}
-                {{ 'This was no simulation. Following options were restored for cache ' ~ key | trans }}:<br/>
-            {% endif %}
+            {% for key,value in modified_information %}
+                {% if simulate %}
+                    {{ 'This was only a simulation. Following options would have been restored for cache ' ~ key | trans }}:<br/>
+                {% else %}
+                    {{ 'This was no simulation. Following options were restored for cache ' ~ key | trans }}:<br/>
+                {% endif %}
 
-            <ul>
-                {% for keyOption,valueOption in value %}
-                    <li> {{ keyOption }}</li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
+                <ul>
+                    {% for keyOption,valueOption in value %}
+                        <li> {{ keyOption }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
 
-    {% else %}
-        <br/><br/>
-        <span>{{ 'No data found' | trans }}..</span>
-    {% endif %}
-    </ul>
+        {% else %}
+            <br/><br/>
+            <span>{{ 'No data found' | trans }}..</span>
+        {% endif %}
 
-    <hr>
-
-    {% endblock %}
+        <hr>
+    </div>
+{% endblock %}

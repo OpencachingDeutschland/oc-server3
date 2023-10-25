@@ -19,9 +19,6 @@
             <div class="alert alert-danger" role="alert">
                 {{ 'Warning: If you revert any owner-made listing changes of today, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords & country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore it is strongly recommended to revert vandalism not before the next day!' | trans }}
             </div>
-            <div class="alert alert-danger" role="alert">
-                {{ 'Warning: Log and picture vandalism will not be shown in the table below under Changes! (Database query could not be converted yet.) Restoration is also not possible.' | trans }}
-            </div>
 
             <br/>
             {{ 'Following listing is affected' | trans }}: {{ curremt_cache_details.wpOc }} {{ curremt_cache_details.name }}<br/><br/>
@@ -48,12 +45,11 @@
                     </tbody>
                 </table>
 
-                <input type="checkbox" name="restore_coords" value="1"/> {{ 'coordinates and country' | trans }}<br/>
-                <input type="checkbox" name="restore_settings" value="1"/> {{ 'name, settings, attributes and hide-date' | trans }}<br/>
-                <input type="checkbox" name="restore_wpgc" value="1"/> {{ 'GC waypoints' | trans }}<br/>
-                <input type="checkbox" name="restore_desc" value="1"/> {{ 'description(s)' | trans }}<br/>
-                <input type="checkbox" name="restore_desc" value="1" disabled/> {{ 'description(s) incl. pictures' | trans }}<br/>
-                <input type="checkbox" name="restore_logs" value="1" disabled/> {{ 'logs incl. pictures' | trans }}<br/>
+                <input type="checkbox" name="restore_coords_and_country" value="1"/> {{ 'coordinates and country' | trans }}<br/>
+                <input type="checkbox" name="restore_settings" value="1" disabled checked/> {{ 'name, type, size, d/t, search time, way length, GC waypoint and hide-date (will always be restored)' | trans }}<br/>
+                <input type="checkbox" name="restore_attributes" value="1"/> {{ 'attributes' | trans }}<br/>
+                <input type="checkbox" name="restore_desc_pictures" value="1"/> {{ 'description(s) and pictures' | trans }}<br/>
+                <input type="checkbox" name="restore_logs_pictures" value="1"/> {{ 'logs and pictures' | trans }}<br/>
                 {% if user_account_details.isActive %}
                     <input type="checkbox" name="user_permission" value="1"
                            required/> {{ 'The user has allowed to reset the selected cache to a previous version.' | trans }}<br/>

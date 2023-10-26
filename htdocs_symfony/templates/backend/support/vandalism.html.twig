@@ -65,7 +65,6 @@
                 <input type="hidden" name="adminUserID" value="{{ app.user.userId }}">
                 <input type="submit">
             </form>
-            {#            {{ form_start(supportRestoreCacheForm, {action:path('backend_support_vandalism', {'wpID': curremt_cache_details.wpOc, 'userID': user_account_details.userId, 'method': 'POST' } ) } ) }} #}
         {% else %}
             <br/><br/>
             <span>{{ 'No restorable changes found' | trans }}..</span>

@@ -14,7 +14,6 @@ use Oc\Entity\UserLoginBlockEntity;
 use Oc\Form\SupportBonusCachesAssignment;
 use Oc\Form\SupportCommentField;
 use Oc\Form\SupportImportGPX;
-use Oc\Form\SupportRestoreCache;
 use Oc\Form\SupportSearchCaches;
 use Oc\Form\SupportSQLFlexForm;
 use Oc\Form\SupportUserAccountDetails;
@@ -623,7 +622,6 @@ class SupportControllerBackend extends AbstractController
 
         return $this->render(
                 'backend/support/vandalism.html.twig', [
-                        'supportRestoreCacheForm' => $this->createForm(SupportRestoreCache::class)->createView(),
                         'curremt_cache_details' => $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]),
                         'user_account_details' => $this->userRepository->fetchOneById($userID),
                         'modified_information' => $data

@@ -759,7 +759,7 @@ class SupportVandalismRepository
                 $logs_restored = false;
 
                 // the log's id may have changed by multiple delete -and-restores
-                $revert_logid = $this->get_current_logid((int)$r['id']);
+                $revert_logid = $this->getCurrentLogId((int)$r['id']);
 
                 if (key_exists($revert_logid, $logs_processed)) {
                     if ($r['node'] == -1) {
@@ -863,138 +863,176 @@ class SupportVandalismRepository
             }
         }
 
+        // TODO: pictures-Adaption aus htdocs/restorecaches.php ist unvollständig. Alle unvollständigen Stellen wurden mit einem 'TODO:' markiert. Der Rest des Skripts ist bereits adaptiert
         // pictures
-        if (key_exists('restore_desc_pictures', $roptions) || key_exists('restore_logs_pictures', $roptions)) {
-            // TODO: Adaption von htdocs/restorecaches.php fehlt noch
-//            $rs = sql(
-//                    "SELECT *FROM `pictures_modified`
-//                        WHERE ((`object_type`=2 AND '&2' AND `object_id`='&3') OR
-//                                           (`object_type`=1 AND '&1'
-//                                                  AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != '&5'
-//                                                  /* ^^ ignore changes of own log pics (shouldnt be in pictures_modified, anyway) */
-//                                                  AND IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) = '&3'))
-//                          AND `date_modified`>='&4'
-//                                    ORDER BY `date_modified` ASC",
-//                    in_array("logs", $roptions) ? 1 : 0,
-//                    in_array("desc", $roptions) ? 1 : 0,
-//                    $cacheId,
-//                    $rdate,
-//                    $userId
-//            );
+        // if (key_exists('restore_desc_pictures', $roptions) || key_exists('restore_logs_pictures', $roptions)) { // korrekte Originalzeile
+        if (1 == 0) { // temporäre Änderung der If-Abfrage, um die Ausführung der untergeordnetenm, unvollständigen Befehle zu verhindern.
+            $rs = $this->connection->executeQuery(
+                    'SELECT *FROM `pictures_modified`
+                        WHERE ((`object_type`=2 AND :paramIsDesc AND `object_id`=:paramID) OR
+                                           (`object_type`=1 AND :paramIsLogs
+                                                  AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != :paramUserID
+                                                  /* ^^ ignore changes of own log pics (shouldnt be in pictures_modified, anyway) */
+                                                  AND IFNULL((SELECT `cache_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `cache_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) = :paramID))
+                          AND `date_modified`>=:paramDate
+                                    ORDER BY `date_modified` ASC',
+                    [
+                            'paramIsLogs' => key_exists('restore_logs_pictures', $roptions) ? 1 : 0,
+                            'paramIsDesc' => key_exists('restore_desc_pictures', $roptions) ? 1 : 0,
+                            'paramID' => $cacheId,
+                            'paramDate' => $rdate,
+                            'paramUserID' => $userId
+                    ]
+            )->fetchAllAssociative();
 
             // We start with the oldest entry and will touch each picture ony once:
             // After restoring its state, it is added to $pics_processed (by its last known id),
             // and all further operations on the same pic are ignored. This prevents unnecessary
             // operations and flooding the _modified table on restore-reverts.
             $pics_processed = [];
+            $error = '';
 
-//            while ($r = sql_fetch_assoc($rs)) {
-//                $pics_restored = false;
-//
-//                // the picture id may have changed by multiple delete-and-restores
-//                $revert_picid = get_current_picid($r['id']);
-//                if (!in_array($revert_picid, $pics_processed)) {
-//                    // .. as may have its uuid-based url
-//                    $revert_url = sql_value(
-//                            "SELECT `url` FROM `pictures_modified` WHERE `id`='&1'",
-//                            $r['url'],
-//                            $revert_picid
-//                    );
-//                    $error = "";
-//
-//                    switch ($r['operation']) {
-//                        case 'I':
-//                            if (sql_value("SELECT `id` FROM `pictures` WHERE `id`='&1'", 0, $revert_picid) != 0) {
-//                                // if it was not already deleted by a later restore operation:
-//                                // delete added (cache) picture
-//                                $pic = new picture($revert_picid);
-//                                if ($simulate) {
-//                                    $pics_restored = true;
-//                                } else {
-//                                    if ($pic->delete(true)) {
-//                                        $pics_restored = true;
-//                                    } else {
-//                                        $error = "delete";
-//                                    }
-//                                }
-//                            }
-//                            break;
-//
-//                        case 'U':
-//                            if (sql_value("SELECT `id` FROM `pictures` WHERE `id`='&1'", 0, $revert_picid) != 0) {
-//                                // if it was not deleted by a later restore operation:
-//                                // restore modified (cache) picture properties
-//                                $pic = new picture($revert_picid);
-//                                $pic->setTitle($r['title']);
-//                                $pic->setSpoiler($r['spoiler']);
-//                                $pic->setDisplay($r['display']);
-//                                // mappreview flag is not restored, because it seems unappropriate to
-//                                // advertise for the listing of a vandalizing owner
-//
-//                                if ($simulate) {
-//                                    $pics_restored = true;
-//                                } else {
-//                                    if ($pic->save(true)) {
-//                                        $pics_restored = true;
-//                                    } else {
-//                                        $error = "update";
-//                                    }
-//                                }
-//                            }
-//                            break;
-//
-//                        case 'D':
-//                            if (sql_value("SELECT `id` FROM `pictures` WHERE `id`='&1'", 0, $revert_picid) == 0) {
-//                                // if it was not already restored by a later restore operation:
-//                                // restore deleted picture
-//                                // id, uuid, date_created and last_modified are set automatically
-//
-//                                // the referring log's id  may have changed by [multiple] delete-and-restore
-//                                if ($r['object_type'] == 1) {
-//                                    $r['object_id'] = get_current_logid($r['object_id']);
-//                                }
-//
-//                                // id, uuid, node, date_created, date_modified are automatically set;
-//                                // url will be set on save;
-//                                // last_url_check and thumb_last_generated stay at defaults until checked;
-//                                // thumb_url will be set on thumb creation (old thumb was deleted)
-//                                $pic = new picture();
-//                                $pic->setTitle($r['title']);
-//                                $pic->setObjectId($r['object_id']);
-//                                $pic->setObjectType($r['object_type']);
-//                                $pic->setSpoiler($r['spoiler']);
-//                                $pic->setLocal(1);
-//                                $pic->setUnknownFormat($r['unknown_format']);
-//                                $pic->setDisplay($r['display']);
-//                                // mappreview flag is not restored, because it seems unappropriate to
-//                                // advertise for the listing of a vandalizing owner
-//
-//                                if ($simulate) {
-//                                    $pics_restored = true;
-//                                } else {
-//                                    if ($pic->save(true, $revert_picid, $revert_url)) {
-//                                        $pics_restored = true;
-//                                        $pics_processed[] = $pic->getPictureId();
-//                                    } else {
-//                                        $error = "restore";
-//                                    }
-//                                }
-//                            }
-//                            break;
-//                    }  // switch
-//
-//                    $pics_processed[] = $revert_picid;
-//                }  // not already processed
-//
-//                if ($error != '') {
-//                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] . '/' . $picid] = true;
-//                }
-//                if ($pics_restored) {
-//                    $restored[$wp]['pictures'] = true;
-//                }
-//            }  // foreach (all relevant pic records)
+            foreach ($rs as $r) {
+                $pics_restored = false;
+
+                // the picture id may have changed by multiple delete-and-restores
+                $revert_picid = $this->getCurrentPicId($r['id']);
+
+                if (!key_exists($revert_picid, $pics_processed)) {
+                    // ... as may have its uuid-based url
+                    $revert_url = $this->connection->createQueryBuilder()
+                            ->select('url')
+                            ->from('pictures_modified')
+                            ->where('id = :paramID')
+                            ->setParameters(['paramID' => $revert_picid])
+                            ->executeQuery()
+                            ->fetchAssociative();
+
+                    if (!$revert_url) {
+                        $revert_url = $r['url'];
+                    }
+                    $error = '';
+
+                    switch ($r['operation']) {
+                        case 'I':
+                            $rx = $this->connection->createQueryBuilder()
+                                    ->select('id')
+                                    ->from('pictures')
+                                    ->where('original_id = :paramID')
+                                    ->setParameters(['paramID' => $revert_picid])
+                                    ->executeQuery()
+                                    ->fetchAssociative();
+
+                            if ($rx) {
+                                // if it was not already deleted by a later restore operation:
+                                // delete added (cache) picture
+                                // TODO: Klasse 'pictures' mit allen Unterfunktionen adaptieren
+                                $pic = new picture($revert_picid);
+                                if ($simulate) {
+                                    $pics_restored = true;
+                                } else {
+                                    // TODO: Funktion 'delete' in Klasse 'pictures' adaptieren
+                                    if ($pic->delete(true)) {
+                                        $pics_restored = true;
+                                    } else {
+                                        $error = "delete";
+                                    }
+                                }
+                            }
+                            break;
+
+                        case 'U':
+                            $rx = $this->connection->createQueryBuilder()
+                                    ->select('id')
+                                    ->from('pictures')
+                                    ->where('original_id = :paramID')
+                                    ->setParameters(['paramID' => $revert_picid])
+                                    ->executeQuery()
+                                    ->fetchAssociative();
+                            if ($rx) {
+                                // if it was not deleted by a later restore operation:
+                                // restore modified (cache) picture properties
+                                // TODO: Klasse 'pictures' mit allen Unterfunktionen adaptieren
+                                $pic = new picture($revert_picid);
+                                $pic->setTitle($r['title']);
+                                $pic->setSpoiler($r['spoiler']);
+                                $pic->setDisplay($r['display']);
+                                // mappreview flag is not restored, because it seems unappropriate to
+                                // advertise for the listing of a vandalizing owner
+
+                                if ($simulate) {
+                                    $pics_restored = true;
+                                } else {
+                                    // TODO: Funktion 'save' in Klasse 'pictures' adaptieren
+                                    if ($pic->save(true)) {
+                                        $pics_restored = true;
+                                    } else {
+                                        $error = "update";
+                                    }
+                                }
+                            }
+                            break;
+
+                        case
+                        'D':
+                            $rx = $this->connection->createQueryBuilder()
+                                    ->select('id')
+                                    ->from('pictures')
+                                    ->where('original_id = :paramID')
+                                    ->setParameters(['paramID' => $revert_picid])
+                                    ->executeQuery()
+                                    ->fetchAssociative();
+                            if (!$rx) {
+                                // if it was not already restored by a later restore operation:
+                                // restore deleted picture
+                                // id, uuid, date_created and last_modified are set automatically
+
+                                // the referring log's id  may have changed by [multiple] delete-and-restore
+                                if ($r['object_type'] == 1) {
+                                    $r['object_id'] = $this->getCurrentLogId($r['object_id']);
+                                }
+
+                                // id, uuid, node, date_created, date_modified are automatically set;
+                                // url will be set on save;
+                                // last_url_check and thumb_last_generated stay at defaults until checked;
+                                // thumb_url will be set on thumb creation (old thumb was deleted)
+                                // TODO: Klasse 'pictures' mit allen Unterfunktionen adaptieren
+                                $pic = new picture();
+                                $pic->setTitle($r['title']);
+                                $pic->setObjectId($r['object_id']);
+                                $pic->setObjectType($r['object_type']);
+                                $pic->setSpoiler($r['spoiler']);
+                                $pic->setLocal(1);
+                                $pic->setUnknownFormat($r['unknown_format']);
+                                $pic->setDisplay($r['display']);
+                                // mappreview flag is not restored, because it seems unappropriate to advertise for the listing of a vandalizing owner
+
+                                if ($simulate) {
+                                    $pics_restored = true;
+                                } else {
+                                    // TODO: Funktion 'save' in Klasse 'pictures' adaptieren
+                                    if ($pic->save(true, $revert_picid, $revert_url)) {
+                                        $pics_restored = true;
+                                        $pics_processed[] = $pic->nPictureId;
+                                    } else {
+                                        $error = "restore";
+                                    }
+                                }
+                            }
+                            break;
+                    }  // switch
+
+                    $pics_processed[] = $revert_picid;
+                }  // not already processed
+
+                if ($error != '') {
+                    $restored[$wp]['internal error - could not $error picture ' . $r['id'] . '/' . $picid] = true; // TODO: welche '$picid'? Ist im original restorecaches.php auch fehlerhaft?
+                }
+                if ($pics_restored) {
+                    $restored[$wp]['pictures'] = true;
+                }
+            }  // foreach (all relevant pic records)
         }
-
 
         $this->connection->executeStatement('SET @restoredby = CAST(0 AS UNSIGNED)');
 
@@ -1065,7 +1103,7 @@ class SupportVandalismRepository
      *
      * determine new id of a log if it has been deleted and restored [multiple times]
      */
-    function get_current_logid(int $logid): int
+    function getCurrentLogId(int $logid): int
     {
         do {
             $new_logid = $this->connection->createQueryBuilder()
@@ -1086,5 +1124,29 @@ class SupportVandalismRepository
         } while ($new_logid != 0);
 
         return $logid;
+    }
+
+    /**
+     * @throws Exception
+     *
+     * determine new id of a picture if it has been deleted and restored [multiple times]
+     */
+    function getCurrentPicId($picid)
+    {
+        do {
+            $new_picid = $this->connection->createQueryBuilder()
+                    ->select('id')
+                    ->from('pictures_modified')
+                    ->where('original_id = :paramID')
+                    ->setParameters(['paramID' => $picid])
+                    ->executeQuery()
+                    ->fetchAssociative();
+
+            if ($new_picid != 0) {
+                $picid = $new_picid;
+            }
+        } while ($new_picid != 0);
+
+        return $picid;
     }
 }

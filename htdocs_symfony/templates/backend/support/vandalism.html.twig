@@ -45,17 +45,22 @@
                     </tbody>
                 </table>
 
+                {{ 'Restore' | trans }}:<br/>
                 <input type="checkbox" name="restore_coords_and_country" value="1"/> {{ 'coordinates and country' | trans }}<br/>
-                <input type="checkbox" name="restore_settings" value="1" disabled checked/> {{ 'name, type, size, d/t, search time, way length, GC waypoint and hide-date (will always be restored)' | trans }}<br/>
+                <input type="checkbox" name="restore_settings" value="1" disabled
+                       checked/> {{ 'name, type, size, d/t, search time, way length, GC waypoint and hide-date (will always be restored)' | trans }}
+                <br/>
                 <input type="checkbox" name="restore_attributes" value="1"/> {{ 'attributes' | trans }}<br/>
-                <input type="checkbox" name="restore_desc_pictures" value="1"/> {{ 'description(s) and pictures' | trans }}<br/>
-                <input type="checkbox" name="restore_logs_pictures" value="1"/> {{ 'logs and pictures' | trans }}<br/>
+                <input type="checkbox" name="restore_desc_pictures"
+                       value="1"/> {{ 'description(s),but without pictures (picture restore is not yet possible to handle)' | trans }}<br/>
+                <input type="checkbox" name="restore_logs_pictures"
+                       value="1"/> {{ 'logs, but without pictures (picture restore is not yet possible to handle)' | trans }}<br/>
                 {% if user_account_details.isActive %}
                     <input type="checkbox" name="user_permission" value="1"
                            required/> {{ 'The user has allowed to reset the selected cache to a previous version.' | trans }}<br/>
                 {% endif %}
                 <input type="checkbox" name="sure" value="1" required/> {{ 'Are you sure?' | trans }}<br/>
-                <input type="checkbox" name="simulate" value="1" /> {{ 'Simulate?' | trans }}<br/>
+                <input type="checkbox" name="simulate" value="1"/> {{ 'Simulate?' | trans }}<br/>
                 <input type="hidden" name="wpID" value="{{ curremt_cache_details.wpOc }}">
                 <input type="hidden" name="adminUserID" value="{{ app.user.userId }}">
                 <input type="submit">

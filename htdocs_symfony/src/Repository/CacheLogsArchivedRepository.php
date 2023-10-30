@@ -231,7 +231,7 @@ class CacheLogsArchivedRepository
         $entity->textHtml = (int)$data['text_html'];
         $entity->textHtmledit = (int)$data['text_htmledit'];
         $entity->ownerNotified = (int)$data['owner_notified'];
-        $entity->picture = $data['picture'];
+        $entity->picture = (int)$data['picture'];
         $entity->deletionDate = $data['deletion_date'];
         $entity->deletedBy = (int)$data['deleted_by'];
         $entity->restoredBy = (int)$data['restored_by'];

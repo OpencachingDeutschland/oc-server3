@@ -866,9 +866,9 @@ class SupportVandalismRepository
         // TODO: pictures-Adaption aus htdocs/restorecaches.php ist unvollständig. Alle unvollständigen Stellen wurden mit einem 'TODO:' markiert. Der Rest des Skripts ist bereits adaptiert
         // pictures
         // if (key_exists('restore_desc_pictures', $roptions) || key_exists('restore_logs_pictures', $roptions)) { // korrekte Originalzeile
-        if (1 == 0) { // temporäre Änderung der If-Abfrage, um die Ausführung der untergeordnetenm, unvollständigen Befehle zu verhindern.
+        if (1 == 0) { // temporäre Änderung der If-Abfrage, um die Ausführung der untergeordneten, unvollständigen Befehle zu verhindern.
             $rs = $this->connection->executeQuery(
-                    'SELECT *FROM `pictures_modified`
+                    'SELECT * FROM `pictures_modified`
                         WHERE ((`object_type`=2 AND :paramIsDesc AND `object_id`=:paramID) OR
                                            (`object_type`=1 AND :paramIsLogs
                                                   AND IFNULL((SELECT `user_id` FROM `cache_logs` WHERE `id`=`object_id`),(SELECT `user_id` FROM `cache_logs_archived` WHERE `id`=`object_id`)) != :paramUserID
@@ -891,6 +891,7 @@ class SupportVandalismRepository
             // operations and flooding the _modified table on restore-reverts.
             $pics_processed = [];
             $error = '';
+            $picid = 0;
 
             foreach ($rs as $r) {
                 $pics_restored = false;
@@ -936,6 +937,7 @@ class SupportVandalismRepository
                                         $pics_restored = true;
                                     } else {
                                         $error = "delete";
+                                        $picid = $revert_picid;
                                     }
                                 }
                             }
@@ -968,6 +970,7 @@ class SupportVandalismRepository
                                         $pics_restored = true;
                                     } else {
                                         $error = "update";
+                                        $picid = $revert_picid;
                                     }
                                 }
                             }
@@ -1016,6 +1019,7 @@ class SupportVandalismRepository
                                         $pics_processed[] = $pic->nPictureId;
                                     } else {
                                         $error = "restore";
+                                        $picid = $r['object_id'];
                                     }
                                 }
                             }

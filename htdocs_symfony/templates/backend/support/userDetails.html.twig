@@ -42,36 +42,31 @@
                     </li>
                 </ul>
 
-                {% if is_granted('ROLE_SUPPORT_MAINTAIN') %}
-                    <hr>
-                    <br/>
-
-                    {% if supportUserAccountActions is defined %}
-                        {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
-                        <ul>
-                            <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
-                                {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute' | trans, 'repID': '123' }) }}
-                                <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
-                            </li>
-                            <li><b>{{ 'Set login block for x days (caches will not be locked)' | trans }}:</b>
-                                {{ form_row(supportUserAccountActions.dropDown_login_block) }}
-                                {{ 'Extra message to the user (optional)' | trans }}:
-                                {{ form_row(supportUserAccountActions.message_login_block, {'value': user_login_block.message | default(''), 'id': 'comment_field_login_block' }) }}
-                                {{ form_row(supportUserAccountActions.button_login_block, {'label': 'Execute' | trans}) }}
-                            </li>
-                            <li><b>{{ 'GDPR conform account deletion' | trans }}:</b>
-                                {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute' | trans }) }}
-                                <span class="badge badge-danger">Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..</span>
-                            </li>
-                            <li><b>{{ 'Mark email address as invalid' | trans }}:</b>
-                                {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}
-                            </li>
-                            <li><b>{{ 'Are you sure?' | trans }}:</b>
-                                {{ form_row(supportUserAccountActions.check_Sure) }}
-                            </li>
-                        </ul>
-                        {{ form_end(supportUserAccountActions) }}
-                    {% endif %}
+                {% if supportUserAccountActions is defined %}
+                    {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
+                    <ul>
+                        <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
+                            {# TODO: "Set account inactive"-Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..#}
+                            {{ form_row(supportUserAccountActions.button_account_inactive, {'label': 'Execute (not yet working)' | trans, 'repID': '123' }) }}
+                        </li>
+                        <li><b>{{ 'Set login block for x days (caches will not be locked)' | trans }}:</b>
+                            {{ form_row(supportUserAccountActions.dropDown_login_block) }}
+                            {{ 'Extra message to the user (optional)' | trans }}:
+                            {{ form_row(supportUserAccountActions.message_login_block, {'value': user_login_block.message | default(''), 'id': 'comment_field_login_block' }) }}
+                            {{ form_row(supportUserAccountActions.button_login_block, {'label': 'Execute' | trans}) }}
+                        </li>
+                        <li><b>{{ 'GDPR conform account deletion' | trans }}:</b>
+                            {# TODO: "GDPR conform account deletion"-Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..#}
+                            {{ form_row(supportUserAccountActions.button_GDPR_deletion, {'label': 'Execute (not yet working)' | trans }) }}
+                        </li>
+                        <li><b>{{ 'Mark email address as invalid' | trans }}:</b>
+                            {{ form_row(supportUserAccountActions.button_mark_email_invalid, {'label': 'Execute' | trans }) }}
+                        </li>
+                        <li><b>{{ 'Are you sure?' | trans }}:</b>
+                            {{ form_row(supportUserAccountActions.check_Sure) }}
+                        </li>
+                    </ul>
+                    {{ form_end(supportUserAccountActions) }}
                 {% endif %}
 
                 <br/>

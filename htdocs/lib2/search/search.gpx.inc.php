@@ -634,7 +634,6 @@ function search_output(): void
             $waypoints .= $thiswp . "\n";
             ++$n;
         }
-
         // if user has entered solved coordinates, handle them with a separate waypoint
         // original cache coordinates are stored in this waypoint as ORIGINAL
         // original cache coordinates will be overwritten with solved coordinates
@@ -649,7 +648,7 @@ function search_output(): void
             $thiswp = mb_ereg_replace('{cachename}', text_xmlentities($r['name']), $thiswp);
             $thiswp = mb_ereg_replace('{comment}', text_xmlentities($cacheNote['note']), $thiswp);
             $thiswp = mb_ereg_replace('{desc}', text_xmlentities($cache_note_text), $thiswp);
-            $thiswp = mb_ereg_replace('{type}', 'Reference Point', $thiswp);
+            $thiswp = mb_ereg_replace('{type}', 'Original Coordinates', $thiswp);
             $thiswp = mb_ereg_replace('{parent}', $r['waypoint'], $thiswp);
             $thiswp = mb_ereg_replace('{cacheid}', $r['cacheid'], $thiswp);
             $waypoints .= $thiswp . "\n";

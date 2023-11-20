@@ -77,6 +77,10 @@
 
         <p id="additional"><strong>Zusätzliche Änderungen</strong></p>
         <ul>
+            <li>20.11.2023 - betrifft nur GPX-Export: geänderte Koordinaten werden zu Listingkoordinaten. Originale Ankerkoordinaten werden als separater Wegpunkt in der GPX-Datei vermerkt.</li>
+            <li>01.11.2022 - 'Teilgenommen'-Logs zählen nun für die Berechnung der Empfehlungen</li>
+            <li>01.06.2022 - Neues Design für Attribute-Icons</li>
+            <li>01.05.2022 - Neues Design für Cache-Icons</li>
             <li>03.12.2018 - Caches im Profil werden nach letztem Fund sortiert</li>
             <li>30.11.2018 - Minikarte bei Safaries durch Globi ersetzt</li>
             <li>Einführung Symfony</li>

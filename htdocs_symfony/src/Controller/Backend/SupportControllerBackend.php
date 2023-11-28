@@ -35,6 +35,7 @@ use Oc\Repository\SupportListingCommentsRepository;
 use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
+use Oc\Repository\SupportVandalismRepository;
 use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -62,9 +63,9 @@ class SupportControllerBackend extends AbstractController
 
     private CacheLogsArchivedRepository $cacheLogsArchivedRepository;
 
-    private CachesRepository $cachesRepository;
-
     private CacheReportsRepository $cacheReportsRepository;
+
+    private CachesRepository $cachesRepository;
 
     private CacheStatusModifiedRepository $cacheStatusModifiedRepository;
 
@@ -84,6 +85,8 @@ class SupportControllerBackend extends AbstractController
 
     private SupportUserRelationsRepository $supportUserRelationsRepository;
 
+    private SupportVandalismRepository $supportVandalismRepository;
+
     private UserLoginBlockRepository $userLoginBlockRepository;
 
     private UserRepository $userRepository;
@@ -93,8 +96,8 @@ class SupportControllerBackend extends AbstractController
             CacheAdoptionsRepository $cacheAdoptionsRepository,
             CacheCoordinatesRepository $cacheCoordinatesRepository,
             CacheLogsArchivedRepository $cacheLogsArchivedRepository,
-            CachesRepository $cachesRepository,
             CacheReportsRepository $cacheReportsRepository,
+            CachesRepository $cachesRepository,
             CacheStatusModifiedRepository $cacheStatusModifiedRepository,
             CacheStatusRepository $cacheStatusRepository,
             NodesRepository $nodesRepository,
@@ -104,6 +107,7 @@ class SupportControllerBackend extends AbstractController
             SupportListingInfosRepository $supportListingInfosRepository,
             SupportUserCommentsRepository $supportUserCommentsRepository,
             SupportUserRelationsRepository $supportUserRelationsRepository,
+            SupportVandalismRepository $supportVandalismRepository,
             UserLoginBlockRepository $userLoginBlockRepository,
             UserRepository $userRepository
     ) {
@@ -122,6 +126,7 @@ class SupportControllerBackend extends AbstractController
         $this->supportListingInfosRepository = $supportListingInfosRepository;
         $this->supportUserCommentsRepository = $supportUserCommentsRepository;
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
+        $this->supportVandalismRepository = $supportVandalismRepository;
         $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
@@ -591,16 +596,52 @@ class SupportControllerBackend extends AbstractController
             $fetchedUserLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
         } catch (RecordNotFoundException $e) {
         }
-        $formSearch = $this->createForm(SupportSearchCaches::class);
-        $formActions = $this->createForm(SupportUserAccountDetails::class);
 
         return $this->render(
                 'backend/support/userDetails.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'supportUserAccountActions' => $formActions->createView(),
+                        'supportCachesForm' => $this->createForm(SupportSearchCaches::class)->createView(),
+                        'supportUserAccountActions' => $this->createForm(SupportUserAccountDetails::class)->createView(),
                         'user_account_details' => $fetchedUserDetails,
                         'user_login_block' => $fetchedUserLoginBlock
                 ]
+        );
+    }
+
+    /**
+     * @throws Exception
+     * @throws RecordNotFoundException
+     *
+     * @Route("/vandalism/{wpID}&{userID}", name="support_vandalism")
+     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
+     *
+     * Vandalismusscript 1:1 adaptiert von htdocs/restorecaches.php
+     */
+    public function vandalism(string $wpID, int $userID): Response
+    {
+        $data = $this->supportVandalismRepository->getArchiveData($this->cachesRepository->getIdByWP($wpID), $wpID);
+
+        return $this->render(
+                'backend/support/vandalism.html.twig', [
+                        'curremt_cache_details' => $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]),
+                        'user_account_details' => $this->userRepository->fetchOneById($userID),
+                        'modified_information' => $data
+                ]
+        );
+    }
+
+    /**
+     * @throws Exception
+     *
+     * @Route("/vandalismRestore", name="support_vandalism_restore")
+     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
+     */
+    public function vandalismRestore(Request $request): Response
+    {
+        $restoredData = $this->supportVandalismRepository->restoreListings($request->request->all());
+
+        return $this->render(
+                'backend/support/vandalismFinish.html.twig',
+                ['modified_information' => $restoredData[0], 'simulate' => $restoredData[1]]
         );
     }
 

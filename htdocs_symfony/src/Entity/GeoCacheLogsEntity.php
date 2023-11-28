@@ -61,6 +61,15 @@ class GeoCacheLogsEntity extends AbstractEntity
 
     public bool $ratingCacheLog;
 
+    public function __construct(array $data = [])
+    {
+        if (!empty($data)) {
+            foreach ($data as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+    }
+
     public function isNew(): bool
     {
         return $this->id === 0;

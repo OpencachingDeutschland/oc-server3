@@ -36,9 +36,9 @@ class CachesAttributesRepository
 
         $result = $statement->fetchAllAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordsNotFoundException('No records found');
+//        }
 
         $records = [];
 
@@ -70,9 +70,9 @@ class CachesAttributesRepository
 
         $result = $statement->fetchAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordNotFoundException('Record with given where clause not found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordNotFoundException('Record with given where clause not found');
+//        }
 
         return $this->getEntityFromDatabaseArray($result);
     }
@@ -97,9 +97,9 @@ class CachesAttributesRepository
 
         $result = $statement->fetchAllAssociative();
 
-        if ($statement->rowCount() === 0) {
-            throw new RecordsNotFoundException('No records with given where clause found');
-        }
+//        if ($statement->rowCount() === 0) {
+//            throw new RecordsNotFoundException('No records with given where clause found');
+//        }
 
         $entities = [];
 

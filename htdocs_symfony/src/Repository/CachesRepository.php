@@ -389,8 +389,8 @@ class CachesRepository
         //        OR wp_gc            =       "' . $searchtext . '"
         //        OR caches.name     LIKE    "%' . $searchtext . '%"'
         //        OR user.username   LIKE    "%' . $searchtext . '%"'
-        $qb = $this->connection->createQueryBuilder();
-        $qb->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
+        $qb = $this->connection->createQueryBuilder()
+                ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
                 ->from('caches')
                 ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
                 ->where('caches.wp_oc = :searchTerm')
@@ -398,6 +398,23 @@ class CachesRepository
                 ->orWhere('caches.name LIKE :searchTermLIKE')
                 ->orWhere('user.username LIKE :searchTermLIKE')
                 ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
+                ->orderBy('caches.wp_oc', 'ASC');
+
+        return $qb->executeQuery()->fetchAllAssociative();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getCachesForSearchFieldWPOnly(string $searchtext): array
+    {
+        $qb = $this->connection->createQueryBuilder()
+                ->select('caches.cache_id', 'caches.name', 'caches.wp_oc', 'caches.wp_gc', 'user.username')
+                ->from('caches')
+                ->innerJoin('caches', 'user', 'user', 'caches.user_id = user.user_id')
+                ->where('caches.wp_oc = :searchTermOC')
+                ->orWhere('caches.wp_gc = :searchTermGC')
+                ->setParameters(['searchTermOC' => 'OC' . $searchtext, 'searchTermGC' => 'GC' . $searchtext])
                 ->orderBy('caches.wp_oc', 'ASC');
 
         return $qb->executeQuery()->fetchAllAssociative();
@@ -453,7 +470,7 @@ class CachesRepository
 
 
     /**
-     * evaluate cache status and provide several information for determining correct icon image name
+     * evaluate cache status and provide some information for determining correct icon image name
      *
      * @throws Exception
      */

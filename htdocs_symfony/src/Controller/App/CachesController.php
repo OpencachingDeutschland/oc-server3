@@ -35,13 +35,23 @@ class CachesController extends AbstractController
         // see: https://symfonycasts.com/screencast/symfony-forms/form-submit
         // handles the request (submit-button of the form), but only if there is a POST request
         $form->handleRequest($request);
-        // if is true only if there is a request submitted and it is valid
+        // is true only if there is a request submitted, and it is valid
         if ($form->isSubmitted() && $form->isValid()) {
             // read content of form input field
             $inputData = $form->getData();
 
             // send request to DB
             $fetchedCaches = $this->cachesRepository->getCachesForSearchField($inputData['content_searchfield']);
+
+            // extra search round in case someone is too lazy and just inputs OC/GC waypoint without prefixed 'OC' or 'GC' (example: 100f instead of OC100F)
+            if (empty($fetchedCaches)) {
+                if (preg_match('/[a-zA-Z0-9]{3,5}/', $inputData['content_searchfield'])
+                    && !str_starts_with($inputData['content_searchfield'], 'OC')
+                    && !str_starts_with($inputData['content_searchfield'], 'GC')
+                ) {
+                    $fetchedCaches = $this->cachesRepository->getCachesForSearchFieldWPOnly($inputData['content_searchfield']);
+                }
+            }
         }
 
         return $this->render(

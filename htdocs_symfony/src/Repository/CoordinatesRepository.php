@@ -686,7 +686,7 @@ class CoordinatesRepository
         return $this->getAllCoordinatesFormatsAsArray();
     }
 
-    public function checkMatchingCoordinatesFormat(string $searchtext): array
+    public function identifyCoordinatesFormat(string $searchtext): array
     {
         $knownFormats = [
                 'BritishOS' => [

@@ -53,7 +53,7 @@ class CoordinatesController extends AbstractController
     }
 
     /**
-     * @Route("/coordinatesDetector", name="coordinates_converter")
+     * @Route("/coordinatesFormatIdentify", name="coordinates_format_identify")
      */
     public function coordinatesDetector(Request $request): Response
     {
@@ -64,7 +64,7 @@ class CoordinatesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
 
-            $matchedFormats = $this->coordinatesRepository->checkMatchingCoordinatesFormat($inputData['content_searchfield']);
+            $matchedFormats = $this->coordinatesRepository->identifyCoordinatesFormat($inputData['content_searchfield']);
         }
 
         return $this->render(

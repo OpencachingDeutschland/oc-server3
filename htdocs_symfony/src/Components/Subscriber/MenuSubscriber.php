@@ -57,6 +57,7 @@ class MenuSubscriber implements EventSubscriberInterface
         $this->addMenuItem($menu, 'menuSearch', $this->translator->trans('Search'), 'app_caches_index', 'icon', 'fas fa-search-location');
         $this->addMenuItem($menu['menuSearch'], 'menuSearchCaches', $this->translator->trans('Search caches'), 'app_caches_index', 'icon', 'fas fa-search-location');
         $this->addMenuItem($menu['menuSearch'], 'menuSearchUsers', $this->translator->trans('Search users'), 'app_user_index', 'icon', 'fas fa-search-location');
+        $this->addMenuItem($menu['menuSearch'], 'menuCoordinatesConverter', $this->translator->trans('Identify coordinates format'), 'app_coordinates_format_identify', 'icon', 'fas fa-search-location');
 
         $this->addMenuItem($menu, 'menuHide', $this->translator->trans('Hide'), '', 'icon', 'fas fa-hiking');
 

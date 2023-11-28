@@ -90,7 +90,7 @@ class CoordinatesRepository
     }
 
     /**
-     * Degree Minute Second: dd° mm' ss''
+     * Degree Minute Second: dd° mm' ss"
      */
     public function getDegreeMinutesSeconds(): array
     {
@@ -105,7 +105,7 @@ class CoordinatesRepository
         $nLatMin = ($nLatMin - $nLatSec);
         $nLatSec = $nLatSec * 60;
         $sLat = $bLatN ? 'N' : 'S';
-        $sLat .= sprintf("%02d° %02d' %02d''", $nLatDeg, $nLatMin, $nLatSec);
+        $sLat .= sprintf("%02d° %02d' %02d\"", $nLatDeg, $nLatMin, $nLatSec);
 
         $nLon = $this->nLon;
         $bLonE = !($nLon < 0);
@@ -118,7 +118,7 @@ class CoordinatesRepository
         $nLonMin -= $nLonSec;
         $nLonSec *= 60;
         $sLon = $bLonE ? 'E' : 'W';
-        $sLon .= sprintf("%03d° %02d' %02d''", $nLonDeg, $nLonMin, $nLonSec);
+        $sLon .= sprintf("%03d° %02d' %02d\"", $nLonDeg, $nLonMin, $nLonSec);
 
         return [
                 'lat' => $sLat,
@@ -684,5 +684,67 @@ class CoordinatesRepository
         $this->setLatLon((float)$arr[0], (float)$arr[1]);
 
         return $this->getAllCoordinatesFormatsAsArray();
+    }
+
+    public function identifyCoordinatesFormat(string $searchtext): array
+    {
+        $knownFormats = [
+                'BritishOS' => [
+                        '01¹' => '#^(H(P|T|U|Y|Z)|N(A|B|C|D|F|G|H|J|K|L|M|N|O|R|S|T|U|W|X|Y|Z)|OV|S(C|D|E|G|H|J|K|M|N|O|P|R|S|T|U|W|X|Y|Z)|T(A|F|G|L|M|Q|R|V)){1}\d{4}(NE|NW|SE|SW)?|((H(P|T|U|Y|Z)|N(A|B|C|D|F|G|H|J|K|L|M|N|O|R|S|T|U|W|X|Y|Z)|OV|S(C|D|E|G|H|J|K|M|N|O|P|R|S|T|U|W|X|Y|Z)|T(A|F|G|L|M|Q|R|V)){1}(\d{4}|\d{6}|\d{8}|\d{10}))$#',
+                ],
+                'CH1903+LV95' => [
+                        '01¹' => '#^[eEoO][ ]?((248[4-9][0-9]{3})|(249[0-9]{4})|(2[5-7][0-9]{5})|(28[0-2][0-9]{4})|(283[0-3][0-9]{3})|(2834000))[ ][nN][ ]?((107[4-9][0-9]{3})|(10[8-9][0-9]{4})|(1[1-2][0-9]{5})|(1300000))$#',
+                ],
+                'Decimal' => [
+                        '01¹' => '#^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)[ ][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$#',
+                        '02¹' => '#^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)°[ ][-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)°$#',
+                        '03¹' => '#^([0-9]|[0-8][0-9]|9[0])[.][0-9]{1,}[ ]?[nNsS][ ](0?[0-9]?[0-9]|1[0-7][0-9]|18[0])[.][0-9]{1,}[ ]?[eEoOwW]$#',
+                        '04¹' => '#^([0-9]|[0-8][0-9]|9[0])[.][0-9]{1,}[ ]?[NS][ ](0?[0-9]?[0-9]|1[0-7][0-9]|18[0])[.][0-9]{1,}[ ]?[EOW]$#i ',
+                ],
+                'DM' => [
+                        '01¹' => '#^[nNsS]([ ]?)([0-9]|[0-8][0-9]|9[0])°([ ]?)[0-9]{1,2}[.][0-9]{1,3}[\']?([ ]?)[eEoOwW]([ ]?)(0?[0-9]?[0-9]|1[0-7][0-9]|18[0])°([ ]?)[0-9]{1,2}[.][0-9]{1,3}[\']?$#',
+                ],
+                'DMS' => [
+                        '01¹' => '#^([0-8]?\d(°|[ ]|°[ ])[0-5]?\d(\'|[ ]|\'[ ])[0-5]?\d(\.\d{1,6})?"?|90(°|[ ]|°[ ])0?0(\'|[ ]|\'[ ])0?0"?)[ ]?[NnSs][ ]([0-1]?[0-7]?\d(°|[ ]|°[ ])[0-5]?\d(\'|[ ]|\'[ ])[0-5]?\d(\.\d{1,6})?"?|180(°|[ ]|°[ ])0?0(\'|[ ]|\'[ ])0?0"?)[ ]?[EeOoWw]$#',
+                        '02¹' => '#^[NnSs][ ]?([0-8]?\d(°|[ ]|°[ ])[0-5]?\d(\'|[ ]|\'[ ])[0-5]?\d(\.\d{1,6})?"?|90(°|[ ]|°[ ])0?0(\'|[ ]|\'[ ])0?0"?)[ ][EeOoWw][ ]?([0-1]?[0-7]?\d(°|[ ]|°[ ])[0-5]?\d(\'|[ ]|\'[ ])[0-5]?\d(\.\d{1,6})?"?|180(°|[ ]|°[ ])0?0(\'|[ ]|\'[ ])0?0"?)$#',
+                ],
+                'Geohash' => [
+                        '01¹' => '#^[0-9b-hjkmnp-z]{1,}$#',
+                ],
+                'MGRS' => [
+                        '01¹' => '#^([1-9]/|[1-5]\d|6[0])(\/|\:| |)([c-xC-X]{3})(\/|\:| |)([0-9][0-9])+$#',
+                        '02' => '#^/\d{1,2}[^ABIOYZabioyz][A-Za-z]{2}([0-9][0-9])+$#',
+                ],
+                'NAC' => [
+                        '01¹' => '#^([0-9BCDFGHJ-NP-TV-Z]{2,7})[ ]([0-9BCDFGHJ-NP-TV-Z]{2,7})([ ]H[0-9]{3,})?$#',
+                ],
+                'OLC' => [
+                        '01¹' => '#^([23456789CFGHJMPQRVWX]{2}){1,4}[+](([23456789CFGHJMPQRVWX]{2}[23456789CFGHJMPQRVWX]?)?)$#',
+                ],
+                'QTH' => [
+                        '01¹' => '#^([a-zA-Z]{2}[0-9]{2}?){1,2}([a-zA-Z]{2})?$#',
+                ],
+                'UTM' => [
+                        '01¹' => '#^([1-9]|[1-5]\d|6[0])(\/|\:| |)[a-xA-X](\/|\:| |)[eE]?([\d]{6})(\/|\:| |)[nN]?\d{7}$#',
+                        '02' => '#^\d(\/|\:| |)[^ABOIYZaboiyz\d\[-\` -@](\/|\:| |)\d{2,}$#',
+                ],
+                'W3W' => [
+                        '01¹' => '#^(?:\p{L}\p{M}*){1,}[.](?:\p{L}\p{M}*){1,}[.](?:\p{L}\p{M}*){1,}$#',
+                        '02¹' => '#^(?:\p{L}\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\p{L}\p{M}*){1,}[.｡。･・︒។։။۔።।](?:\p{L}\p{M}*){1,}$#',
+                ],
+        ];
+        $matchedFormats = [];
+
+        foreach ($knownFormats as $formatName => $formatsValue) {
+            foreach ($formatsValue as $formatVariant => $regexText) {
+                if (preg_match($regexText, $searchtext)) {
+                    $matchedFormats[] = ['yes', $formatName, $formatVariant, substr($regexText, 1, -1)];
+                } else {
+                    $matchedFormats[] = ['no', $formatName, $formatVariant, substr($regexText, 1, -1)];
+                }
+            }
+        }
+
+        return $matchedFormats;
     }
 }

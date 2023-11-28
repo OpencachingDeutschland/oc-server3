@@ -14,6 +14,7 @@
                     <tr>
                         <th scope="col" class="asc">Report ID</th>
                         <th scope="col" class="asc">{{ 'Status' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
                         <th scope="col" class="asc">{{ 'Reported by' | trans }}</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{ report.id }}</td>
                             <td>{{ report.reportStatus.name }}</td>
+                            <td>{{ report.cache.wpOc }}</td>
                             <td>{{ report.cache.name }}</td>
                             <td>{{ report.cache.user.username }}</td>
                             <td>{{ report.user.username }}</td>

@@ -13,8 +13,11 @@
             {% if reported_cache_by_id %}
                 <br/>
                 <p>
-                    <b>{{ 'Details for report of' | trans }}:</b> {{ reported_cache_by_id.cache.name }}
-                    <b>by:</b> {{ reported_cache_by_id.user.username }}
+                    <b>{{ 'Details for report of' | trans }}:</b>
+                    <a href="{{ path('app_cache_by_wp_oc_gc', { 'wpID': reported_cache_by_id.cache.wpOc }) }}"
+                       target="_blank">{{ reported_cache_by_id.cache.wpOc }} {{ reported_cache_by_id.cache.name }}</a>
+                    <b>by:</b>
+                    <a href="{{ path('app_user_by_id', { 'userID': reported_cache_by_id.user.userId }) }}">{{ reported_cache_by_id.user.username }}</a>
                     (
                     <a href="https://www.geocaching.com/seek/nearest.aspx?t=k&origin_lat={{ reported_cache_by_id.cache.latitude }}&origin_long={{ reported_cache_by_id.cache.longitude }}&dist=1"
                        target="_blank">{{ 'Nearby search at geocaching.com' | trans }}

@@ -83,7 +83,7 @@
                 <a href="{$opt.page.teammember_url}viewprofile.php?userid=159941">Slini11</a>
                 <br/>
                 press spokesman,<br>
-                public relation,<br>
+                public relations,<br>
                 blog,<br>
                 software development
             </td>

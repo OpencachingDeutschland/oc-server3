@@ -1,0 +1,80 @@
+{% extends 'app/base.html.twig' %}
+
+{% block page_content %}
+
+    <div>
+        <h3>{{ 'Check which formats your coordinates match' | trans }}..</h3>
+        {% if coordinatesForm is defined %}
+            {{ form_start(coordinatesForm) }}
+            {{ form_widget(coordinatesForm) }}
+            {{ form_end(coordinatesForm) }}
+        {% endif %}
+        Here you can convert coordinates from decimal to other formats: <a href="{{ path('app_coordinates_index') }}">Coordinates converter</a>
+    </div>
+
+    <hr>
+
+    <div>
+        {% if matched_coordinates_formats is defined and matched_coordinates_formats != 0 %}
+            {% if matched_coordinates_formats %}
+                <br/>
+                <div> {{ 'Following coordinates formats were checked' | trans }}:</div>
+                <br/>
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="asc">{{ 'Format' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Variant' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Matched?' | trans }}</th>
+                        <th scope="col" class="asc">{{ 'Regex' | trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in matched_coordinates_formats %}
+                        {# item[0] = yes/no, item[1] = CoordFormat, item[2] = CoordFormat Variant, item[3] = regex #}
+                        <tr>
+                            {% if item[0] == 'no' %}
+                                {% set matchColor, matchText = 'red', 'not matched' %}
+                            {% else %}
+                                {% set matchColor, matchText = 'green', 'matched' %}
+                            {% endif %}
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td><span style="color:{{ matchColor }}">{{ matchText }}</span></td>
+                            <td>{{ item[3] }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <br/><br/>
+                ¹ Created or adjusted reg expressions, which are working
+            {% else %}
+                <br/><br/>
+                <span>{{ 'No matching coordinate formats found' | trans }}.. :-(</span>
+            {% endif %}
+        {% endif %}
+
+        <hr/>
+        <br/><br/>
+        <div>
+            {{ 'Examples' | trans }}:<br/>
+            British OS: NA1234SE<br/>
+            CH1903+LV95: e 2534288 N 1300000, E2831161 N1079216, (E:2484000-2834000 , N:1074000-1300000)<br/>
+            Decimal: 7.73233865012910 -180, +90 -8, 52.514487 N 13.350126 E, 52.514487° 13.350126°<br/>
+            DM: N09° 00.0 E015° 59.999, S 09° 40.583 E 015° 35.017, s3°2.40e000° 7.68'<br/>
+            DMS: 52° 12' 43.33" N 12° 44' 33" E, 90° 0'0n 180 00'00w, N51° 57' 56" E006° 54' 13"<br/>
+            Geohash: u0mqsxqn<br/>
+            MGRS: 32 UMD 7403, 32UMD7403<br/>
+            NAC (Natural Area Code): HBV6R RG77T, HBV6R RG77T H0000<br/>
+            Open Location Code (Plus Code): 9F28+, 9F28WXR4+, 9F28WXR4+FW, 9F28WXR4+FW2, 9F28+FW2<br/>
+            QTH (Maidenhead): JO31kx, JO31kx35<br/>
+            UTM: 32U 899999 5481745, 32U8999995481745, 32U E355998 N5759285<br/>
+            W3W: umringt.befreundet.haustür<br/>
+        </div>
+
+    </div>
+
+    <hr>
+
+{% endblock %}

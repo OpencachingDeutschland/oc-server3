@@ -113,16 +113,12 @@ function escape_javascript($text)
 }
 
 // called if mysqli_query failed, sends email to sysadmin
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
 function sql_failed(): void
 {
     sql_error();
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $sql
  * @param mixed $default
  */
@@ -141,7 +137,6 @@ function sqlValue($sql, $default)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @param $default
  * @return mixed
@@ -161,7 +156,6 @@ function sql_value_slave($sql, $default)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $name
  * @param string $default
  * @return string
@@ -172,7 +166,6 @@ function getSysConfig($name, $default)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $name
  * @param string $value
  */
@@ -194,7 +187,6 @@ function setSysConfig($name, $value): void
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @return mysqli_result
  */
@@ -220,7 +212,6 @@ function sql($sql)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $sql
  * @return mysqli_result
  */
@@ -230,7 +221,6 @@ function sql_slave($sql)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $_dblink
  * @param $sql
  * @return mysqli_result
@@ -397,7 +387,6 @@ function sql_internal($_dblink, $sql)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
  * @return false|string
  */
@@ -411,7 +400,6 @@ function sql_escape($value)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $value
  * @return false|mixed|string
  */
@@ -423,9 +411,6 @@ function sql_escape_backtick($value)
     return $value;
 }
 
-/**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
- */
 function sql_error(): void
 {
     global $debug_page;
@@ -482,7 +467,6 @@ function sql_error(): void
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param string $warnmessage
  */
 function sql_warn($warnmessage): void
@@ -504,7 +488,6 @@ function sql_warn($warnmessage): void
     Ersatz für die in Mysql eingebauten Funktionen
 */
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array|false|null
  */
@@ -514,7 +497,6 @@ function sql_fetch_array($rs)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return array
  */
@@ -524,7 +506,6 @@ function sql_fetch_assoc($rs)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return array
  */
@@ -534,7 +515,6 @@ function sql_fetch_row($rs)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param resource $rs
  * @return array|null
  */
@@ -553,7 +533,6 @@ function sql_fetch_column($rs)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * @param $rs
  * @return bool
  */
@@ -590,7 +569,6 @@ function mb_trim($str)
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * disconnect the database
  */
 function db_disconnect(): void
@@ -605,7 +583,6 @@ function db_disconnect(): void
 }
 
 /**
- * @deprecated use DBAL Conenction instead. See adminreports.php for an example implementation
  * database handling
  */
 function db_connect(): void

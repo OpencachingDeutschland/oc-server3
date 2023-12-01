@@ -33,10 +33,16 @@ $tpl->assign('found', $rUser['found']);
 
 // locked/hidden caches are visible for the user and must be added to public stats
 $rUser['hidden'] += $connection->fetchOne(
-    'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status` = 7',
-    ['userId' => $login->userid]
+        'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND `status` = 7',
+        ['userId' => $login->userid]
 );
 $tpl->assign('hidden', $rUser['hidden']);
+
+$rUser['active'] = $connection->fetchOne(
+        'SELECT COUNT(*) FROM `caches` WHERE `user_id`= :userId AND (`status` = 1 OR `status` = 2)',
+        ['userId' => $login->userid]
+);
+$tpl->assign('active', $rUser['active']);
 
 //get last logs
 $logs = $connection->fetchAllAssociative(

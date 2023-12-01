@@ -16,9 +16,4 @@ class GeoCachesAttributesEntity extends AbstractEntity
     {
         return $this->cacheId === 0;
     }
-
-    public function isOCOnly() :bool
-    {
-        return $this->cacheId === 6;
-    }
 }

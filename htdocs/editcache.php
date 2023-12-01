@@ -618,7 +618,7 @@ if ($error == false) {
                         $attriblist = '999';
                         $countCacheAttrIbs = count($cache_attribs);
                         for ($i = 0; $i < $countCacheAttrIbs; $i++) {
-                            if ($cache_attribs[$i] + 0 > 0) {
+                            if ((int)$cache_attribs[$i] + 0 > 0) {
                                 sql(
                                     "INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`)
                                      VALUES('&1', '&2')",

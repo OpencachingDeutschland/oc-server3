@@ -1490,7 +1490,7 @@ if ($options['showresult'] == 1) {
 
     $count = $caches_per_page;
     if (isset($_REQUEST['count'])) { // Ocprop
-        if ($_REQUEST['count'] == 'max') {
+        if ($_REQUEST['count'] === 'max') {
             $count = 'max';
         }
         else
@@ -2127,7 +2127,7 @@ function outputSearchForm($options)
                 $group_img
             );
 
-            if ($bBeginLine2 == true) {
+            if ($bBeginLine2) {
                 $attributes_img2 .= '<div id="attribs2">';
                 $bBeginLine2 = false;
             }
@@ -2235,7 +2235,7 @@ function outputSearchForm($options)
                 $group_img
             );
 
-            if ($bBeginLine1 == true) {
+            if ($bBeginLine1) {
                 $attributes_img1 .= '<div id="attribs1">';
                 $bBeginLine1 = false;
             }

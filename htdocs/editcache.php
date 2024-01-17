@@ -618,7 +618,7 @@ if ($error == false) {
                         $attriblist = '999';
                         $countCacheAttrIbs = count($cache_attribs);
                         for ($i = 0; $i < $countCacheAttrIbs; $i++) {
-                            if ($cache_attribs[$i] + 0 > 0) {
+                            if ((int)$cache_attribs[$i] + 0 > 0) {
                                 sql(
                                     "INSERT IGNORE INTO `caches_attributes` (`cache_id`, `attrib_id`)
                                      VALUES('&1', '&2')",
@@ -795,7 +795,7 @@ if ($error == false) {
                         $line = mb_ereg_replace('{img_large}', $record['icon_large'], $line);
                         $line = mb_ereg_replace(
                             '{conflicting_attribs}',
-                            implode(',', attribute::getConflictingAttribIds($record['id'])),
+                            implode(',', OcLib2\attribute::getConflictingAttribIds($record['id'])),
                             $line
                         );
                         if ($cache_attrib_array != '') {

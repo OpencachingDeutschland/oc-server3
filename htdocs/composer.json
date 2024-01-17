@@ -3,25 +3,25 @@
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
   "require": {
-    "php": "^7.4",
+    "php": "^8.2",
     "ezyang/htmlpurifier": "^v4.8",
     "smarty/smarty": "~4.0",
     "symfony/symfony": "4.4.*",
     "doctrine/orm": "^2.5",
-    "doctrine/doctrine-bundle": "^1.6|^2.6",
+    "doctrine/doctrine-bundle": "^2.7",
     "symfony/swiftmailer-bundle": "^3.4",
     "symfony/monolog-bundle": "^3.5",
     "symfony/polyfill-apcu": "^1.0",
-    "sensio/framework-extra-bundle": "^5.0|^6.0",
-    "doctrine/doctrine-migrations-bundle": "^1.3|^2.0|^3.0",
+    "sensio/framework-extra-bundle": "^6.0",
+    "doctrine/doctrine-migrations-bundle": "^3.0",
     "twig/extensions": "^1.3",
     "jms/translation-bundle": "^1.2",
     "beberlei/doctrineextensions": "^1.0",
-    "league/commonmark": "^0.18.3|^1.0|^2.0",
-    "sentry/sentry": "^1.7|^2.0|^3.0",
+    "league/commonmark": "^2.0",
+    "sentry/sentry": "^3.0",
     "opencaching/okapi": "dev-master",
     "endroid/qr-code": "^3.5.0|^4.0",
-    "twbs/bootstrap": "^v4.1.0|^5.0",
+    "twbs/bootstrap": "^5.0",
     "components/jquery": "^3.2",
     "ext-gd": "*",
     "ext-json": "*",
@@ -31,22 +31,23 @@
     "ext-posix": "*",
     "ext-curl": "*",
     "ext-zlib": "*",
-    "eluceo/ical": "^0.15.0|^1.0|^2.0",
+    "eluceo/ical": "^2.0",
     "league/csv": "^9.6",
     "mervick/material-design-icons": "^2.2",
-    "knplabs/knp-menu-bundle": "^3.2"
+    "knplabs/knp-menu-bundle": "^3.2",
+    "nyholm/psr7": "^1.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "6.*|^7.0|^8.0|^9.0",
+    "phpunit/phpunit": "^10.0",
     "behat/behat": "^3.5",
     "behat/mink": "dev-master",
     "behat/mink-extension": "^2.3",
-    "behat/mink-goutte-driver": "^1.2|^2.0",
-    "squizlabs/php_codesniffer": "^2.6|^3.0",
-    "fig-r/psr2r-sniffer": "^0.3.0|^1.0",
-    "hassankhan/config": "0.11.2|^1.0|^2.0",
+    "behat/mink-goutte-driver": "^2.0",
+    "squizlabs/php_codesniffer": "^3.0",
+    "fig-r/psr2r-sniffer": "^1.0",
+    "hassankhan/config": "^2.0|^3.0",
     "codedungeon/phpunit-result-printer": "~0.4",
-    "nette/php-generator": "^2.6|^3.0|^4.0"
+    "nette/php-generator": "^4.0"
   },
   "repositories": [
     {
@@ -58,6 +59,7 @@
     "psr-4": {
       "OcTest\\": "../tests",
       "Oc\\": "src/Oc",
+      "OcLib2\\": "lib2/logic",
       "": "src/"
     },
     "classmap": [
@@ -75,7 +77,8 @@
   },
   "config": {
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "php-http/discovery": true
     }
   }
 }

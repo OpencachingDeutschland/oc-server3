@@ -4,11 +4,11 @@
     "license": "GNU General Public License",
     "description": "opencaching.de source code",
     "require": {
-        "php": "^7.4",
+        "php": "^8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/package-versions-deprecated": "^1.11",
-        "doctrine/annotations": "^1.0",
+        "doctrine/annotations": "^1.0|^2.0",
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
@@ -54,7 +54,7 @@
         "symfony/var-dumper": "^5.4",
         "symfony/web-profiler-bundle": "^5.4",
         "symplify/config-transformer": "^11.1",
-        "symplify/symplify-kernel": "^8.3|^9.3"
+        "symplify/symplify-kernel": "^8.3|^9.3|^10.0"
     },
     "config": {
         "optimize-autoloader": true,

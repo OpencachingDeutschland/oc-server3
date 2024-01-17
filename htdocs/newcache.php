@@ -16,7 +16,7 @@ require_once __DIR__ . '/lib2/edithelper.inc.php';
 $no_tpl_build = false;
 
 //Preprocessing
-if ($error == false) {
+if (!$error) {
     //must be logged in
     if ($usr === false) {
         $tplname = 'login';
@@ -28,7 +28,7 @@ if ($error == false) {
         tpl_set_var('message', $login_required);
         tpl_set_var('helplink', helppagelink('login'));
     } else {
-        $errors = false; // set if there was any errors
+        $errors = false; // set if there was any error
 
         //set here the template to process
         $tplname = 'newcache';
@@ -575,7 +575,7 @@ if ($error == false) {
                 $line = mb_ereg_replace('{img_large}', $record['icon_large'], $line);
                 $line = mb_ereg_replace(
                     '{conflicting_attribs}',
-                    implode(',', attribute::getConflictingAttribIds($record['id'])),
+                    implode(',', OcLib2\attribute::getConflictingAttribIds($record['id'])),
                     $line
                 );
                 if ($cache_attrib_array != '') {
@@ -606,7 +606,7 @@ if ($error == false) {
                     $group_img
                 );
 
-                if ($bBeginLine == true) {
+                if ($bBeginLine) {
                     $cache_attrib_list .= '<div class="attribswide">';
                     $bBeginLine = false;
                 }
@@ -618,7 +618,7 @@ if ($error == false) {
             }
         }
         sql_free_result($rsAttrGroup);
-        if ($bBeginLine == false) {
+        if (!$bBeginLine) {
             $cache_attrib_list .= '</div>';
         }
 
@@ -804,7 +804,7 @@ if ($error == false) {
                 $activation_date_not_ok = ((checkdate($activate_month, $activate_day, $activate_year) == false)
                     || $activate_hour < 0 || $activate_hour > 23);
             }
-            if ($activation_date_not_ok == false) {
+            if (!$activation_date_not_ok) {
                 if (!($publish == 'now2' || $publish == 'later' || $publish == 'notnow')) {
                     $activation_date_not_ok = true;
                 }
@@ -1054,7 +1054,7 @@ if ($error == false) {
     }
 }
 
-if ($no_tpl_build == false) {
+if (!$no_tpl_build) {
     tpl_set_var('scrollposx', isset($_REQUEST['scrollposx']) ? $_REQUEST['scrollposx'] + 0 : 0);
     tpl_set_var('scrollposy', isset($_REQUEST['scrollposy']) ? $_REQUEST['scrollposy'] + 0 : 0);
 

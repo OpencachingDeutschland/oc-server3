@@ -1,8 +1,0 @@
-{% extends '/base.html.twig' %}
-
-{% block page_content %}
-    {% if is_granted('ROLE_TEAM') %}
-        <br/>
-        <a href="{{ path('backend_index_index') }}">BACKEND</a>
-    {% endif %}
-{% endblock %}

@@ -58,7 +58,7 @@ class Importer
             $entity->geocacheId = $geoCache->cacheId;
             $entity->type = LogType::guess($fieldNote->logType);
             $entity->date = $date;
-            $entity->text = $fieldNote->notice;
+            $entity->text = nl2br($fieldNote->notice);
 
             $this->fieldNoteService->create($entity);
         }

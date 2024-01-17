@@ -891,7 +891,7 @@ if ($options['showresult'] == 1) {
                 );
             }
             $r = sql_fetch_array($rs);
-            
+
             if ($r) {
                 $lat = $r['latitude'];
                 $lon = $r['longitude'];
@@ -1490,7 +1490,13 @@ if ($options['showresult'] == 1) {
 
     $count = $caches_per_page;
     if (isset($_REQUEST['count'])) { // Ocprop
-        $count = floor($_REQUEST['count'] + 0);
+        if ($_REQUEST['count'] === 'max') {
+            $count = 'max';
+        }
+        else
+        {
+            $count = floor($_REQUEST['count'] + 0);
+        }
     }
     if ($count == 'max') {
         $count = 500;
@@ -1890,7 +1896,7 @@ function outputSearchForm($options)
     $tpl->assign('searchtype_byortplz', in_array($options['searchtype'], ['byplz', 'byort']));
     $tpl->assign('searchtype_bywaypoint', $options['searchtype'] == 'bywaypoint');
     $tpl->assign('searchtype_bycoords', $options['searchtype'] == 'bycoords');
-    
+
     // owner
     $tpl->assign('owner', isset($options['owner']) ? htmlspecialchars($options['owner'], ENT_COMPAT, 'UTF-8') : '');
     $tpl->assign('searchtype_byowner', $options['searchtype'] == 'byowner');
@@ -2121,7 +2127,7 @@ function outputSearchForm($options)
                 $group_img
             );
 
-            if ($bBeginLine2 == true) {
+            if ($bBeginLine2) {
                 $attributes_img2 .= '<div id="attribs2">';
                 $bBeginLine2 = false;
             }
@@ -2133,7 +2139,7 @@ function outputSearchForm($options)
         }
     }
     sql_free_result($rsAttrGroup);
-    if ($bBeginLine2 == false) {
+    if (!$bBeginLine2) {
         $attributes_img2 .= '</div>';
     }
 
@@ -2229,7 +2235,7 @@ function outputSearchForm($options)
                 $group_img
             );
 
-            if ($bBeginLine1 == true) {
+            if ($bBeginLine1) {
                 $attributes_img1 .= '<div id="attribs1">';
                 $bBeginLine1 = false;
             }
@@ -2241,7 +2247,7 @@ function outputSearchForm($options)
         }
     }
     sql_free_result($rsAttrGroup);
-    if ($bBeginLine1 == false) {
+    if (!$bBeginLine1) {
         $attributes_img1 .= '</div>';
     }
 
@@ -2287,7 +2293,7 @@ function outputSearchForm($options)
 
     //all
     $tpl->assign('searchtype_byall', $options['searchtype'] == 'all');
-    
+
     // error messages
     $tpl->assign('ortserror', '');
     if (isset($options['error_plz'])) {
@@ -2573,7 +2579,7 @@ function outputLocidSelectionForm($locSql, $options)
 }
 
 //add cache to cachelist
-function addToList($list_caches)
+function addToList($list_caches): int
 {
     global $login;
     $added_waypoints = 0;

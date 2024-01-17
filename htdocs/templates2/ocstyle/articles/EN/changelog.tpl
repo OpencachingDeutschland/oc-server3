@@ -23,6 +23,10 @@
 
         <p id="additional"><strong>Additional Changes</strong></p>
         <ul>
+            <li>20.11.2023 - GPX export of listings: 'changed coordinates' become listing coordinates. Original listing coordinates are saved as separate waypoint.</li>
+            <li>01.11.2022 - 'Attended' logs count for calculation of recommendations</li>
+            <li>01.06.2022 - newly designed attribute icons</li>
+            <li>01.05.2022 - newly designed cache icons</li>
             <li>03.12.2018 - caches on profil page are sorted by last found date</li>
             <li>30.11.2018 - replace minimap with globi on safari cache listings</li>
             <li>integration of symfony</li>

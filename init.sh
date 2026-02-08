@@ -17,7 +17,7 @@ curl https://opencaching.ddev.site/okapi/update?install=true
 
 # "updating database structures ..."
 php bin/dbsv-update.php
-
+php bin/db-import-static.php
 cd sql/stored-proc && php maintain.php
 cd /var/www/html
 

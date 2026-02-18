@@ -64,7 +64,7 @@ require __DIR__ . '/templates2/' . $opt['template']['style'] . '/search.tpl.inc.
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     if (!$login->logged_in()) {
-        $tpl->redirect('login.php?target=myhome.php');
+        $tpl->redirect('login.php?target=search.php');
     }
 }
 

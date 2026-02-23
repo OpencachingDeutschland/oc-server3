@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Form\CachesFormType;
 use Oc\Repository\Exception\RecordNotFoundException;
@@ -16,10 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+    private Connection $connection;
     private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(Connection $connection, UserRepository $userRepository)
     {
+        $this->connection = $connection;
         $this->userRepository = $userRepository;
     }
 
@@ -37,7 +40,7 @@ class UserController extends AbstractController
         if ($searchForm->isSubmitted() && $searchForm->isValid()) {
             $inputData = $searchForm->getData();
 
-            $fetchedUsers = $this->userRepository->getUsersForSearchField($inputData['content_searchfield']);
+            $fetchedUsers = $this->getUsersForSearchField($inputData['content_searchfield']);
         }
 
         return $this->render('app/user/index.html.twig', [
@@ -48,12 +51,46 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/profile/{userID}", name="user_by_id")
-     * @throws RecordNotFoundException
+     * @param string $searchtext
+     *
+     * @return array
+     * @throws \Doctrine\DBAL\Driver\Exception
+     * @throws \Doctrine\DBAL\Exception
      */
-    public function search_by_user_id(int $userID): Response
-    {
-        $fetchedUser = $this->userRepository->search_by_user_id($userID);
+    public function getUsersForSearchField(string $searchtext)
+    : array {
+        //        SELECT user_id, username
+        //        FROM user
+        //        WHERE user_id      =       "' . $searchtext . '"
+        //        OR user.email      =       "' . $searchtext . '"
+        //        OR user.username   LIKE    "%' . $searchtext . '%"'
+        $qb = $this->connection->createQueryBuilder();
+        $qb->select('user.user_id', 'user.username')
+            ->from('user')
+            ->where('user.user_id = :searchTerm')
+            ->orWhere('user.email = :searchTerm')
+            ->orWhere('user.username LIKE :searchTermLIKE')
+            ->setParameters(['searchTerm' => $searchtext, 'searchTermLIKE' => '%' . $searchtext . '%'])
+            ->orderBy('user.username', 'ASC');
+
+        return $qb->execute()->fetchAllAssociative();
+    }
+
+    /**
+     * @param int $userID
+     *
+     * @return Response
+     * @Route("/user/profile/{userID}", name="user_by_id")
+     */
+    public function search_by_user_id(int $userID)
+    : Response {
+        $fetchedUser = [];
+
+        try {
+            $fetchedUser = $this->userRepository->fetchOneById($userID);
+        } catch (Exception $e) {
+            //  tue was..
+        }
 
         return $this->render('app/user/detailview.html.twig', ['user_by_id' => $fetchedUser]);
     }

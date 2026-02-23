@@ -20,9 +20,9 @@ class UserEntity extends AbstractEntity implements UserInterface, LegacyPassword
 
     public string $username;
 
-    public string $password;
+    public ?string $password = null;
 
-    public string $email;
+    public ?string $email = null;
 
     public bool $emailProblems = false;
 
@@ -36,7 +36,7 @@ class UserEntity extends AbstractEntity implements UserInterface, LegacyPassword
 
     public string $lastname;
 
-    public string $country;
+    public ?string $country = null;
 
     public bool $permanentLoginFlag = true;
 

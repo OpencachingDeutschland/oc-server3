@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheLogsEntity;
+use Oc\Entity\GeoCachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -42,6 +43,7 @@ class CacheLogsRepository
             UserRepository $userRepository,
             PicturesRepository $picturesRepository,
             CacheRatingRepository $cacheRatingRepository
+
     ) {
         $this->connection = $connection;
         $this->logTypesRepository = $logTypesRepository;
@@ -135,10 +137,36 @@ class CacheLogsRepository
         return $entities;
     }
 
+    public function fetchCacheLogs(GeoCachesEntity $cache)
+    : array {
+        $statement = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->where('cache_id = :cacheId')
+            ->setParameter('cacheId', $cache->cacheId)
+            ->execute();
+
+        $result = $statement->fetchAllAssociative();
+
+        //        if ($statement->rowCount() === 0) {
+        //            throw new RecordsNotFoundException('No records found');
+        //        }
+
+        $records = [];
+
+        foreach ($result as $item) {
+            $records[] = $this->getEntityFromDatabaseArray($item);
+        }
+
+        return array_map(static function($role) {
+            return $role->role;
+        }, $records);
+    }
+
     /**
      * @throws Exception
      */
-    public function countLogs(int $cacheId): array
+    public function getCacheLogsCount(int $cacheId): array
     {
         $entities = [
                 '1' => 0,
@@ -346,7 +374,6 @@ class CacheLogsRepository
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
         $entity->pictures = $this->picturesRepository->fetchBy(['object_id' => $entity->id, 'object_type' => 1]);
         $entity->ratingCacheLog = $this->cacheRatingRepository->getRatingUserCache(['cache_id' => $entity->cacheId, 'user_id' => $entity->userId,]);
-
         return $entity;
     }
 }

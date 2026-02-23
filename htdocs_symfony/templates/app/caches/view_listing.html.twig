@@ -7,16 +7,14 @@
                 {% if cache %}
                     <!-- Start Cachemeta -->
                     <div>
-                        {{ dump(cache.image_Name) }}
                         {#  TODO: link icons to Wiki article, instead of former "articles.php?page=cacheinfo#difficulty"
                             TODO: add css classes instead of width, etc.
                         #}
-                        <div><br href="#"><img
-                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconStandardName) }}"
-                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Std.Icon)</br>
+                        <div><br href="#">
+                            <img
+                                        src="{{ asset('images/cacheTypes/' ~ cache.cacheType.svgName) }}-active-untried.svg"
+                                        alt={{ cache.cacheType.name }} title={{ cache.cacheType.name }} width="32" height="32"></br>
                                 <img
-                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconCurrentName) }}"
-                                        alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Map-Icon)</a>
                         </div>
                         <div><a href="#"><img src="{{ asset('images/ratings/difficulty-' ~ cache.difficulty * 5 ~ '.svg') }}"
                                               alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
@@ -50,7 +48,7 @@
                         <thead class="thead-dark">
                         <tr>
                             <th>{{ 'OC' | trans }}</th>
-                            <td>{{ cache.wp_oc }}</td>
+                            <td>{{ cache.wpOc }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Title' | trans }}</th>
@@ -58,7 +56,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Cache size' | trans }}</th>
-                            <td>{{ cache.cache_size.name }}</td>
+                            <td>{{ cache.cacheSize.name }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'D/T' | trans }}</th>
@@ -66,7 +64,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Owner' | trans }}</th>
-                            <td><a href="{{ path('app_user_by_id', { 'userID': cache.user_id}) }}">{{ cache.user.username }}</a></td>
+                            <td><a href="{{ path('app_user_by_id', { 'userID': cache.userId}) }}">{{ cache.user.username }}</a></td>
                         </tr>
                         <tr>
                             <th>{{ 'Position' | trans }}</th>
@@ -74,15 +72,15 @@
                                 <a href={{ path('app_coordinate_by_lat-lon', { 'lat': cache.latitude, 'lon': cache.longitude}) }}>{{ ocFilterCoordinatesDegMin(cache.latitude, cache.longitude) }}</a>
                             </td>
                         </tr>
-                        {% if cache.wp_gc %}
+                        {% if cache.wpGc %}
                             <tr>
                                 <th>{{ 'GC-Code' | trans }}</th>
-                                <td><a href="https://coord.info/{{ cache.wp_gc }}">{{ cache.wp_gc }}</a></td>
+                                <td><a href="https://coord.info/{{ cache.wpGc }}">{{ cache.wpGc }}</a></td>
                             </tr>
                         {% endif %}
                         <tr>
                             <th>{{ 'Status' | trans }}</th>
-                            <td>{{ cache.cache_status.name }}</td>
+                            <td>{{ cache.cacheStatus.name }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Has logpassword' | trans }}?</th>
@@ -94,7 +92,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Published' | trans }}?</th>
-                            <td>{% if cache.is_publishdate == 1 %}
+                            <td>{% if cache.isPublishdate == 1 %}
                                     <i class="fas fa-check"></i>
                                 {% else %}
                                     <i class="fas fa-times"></i>
@@ -102,15 +100,15 @@
                         </tr>
                         <tr>
                             <th>{{ 'Publishe date' | trans }}</th>
-                            <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
+                            <td>{{ cache.dateHidden|date('d.m.Y') }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Last change' | trans }}</th>
-                            <td>{{ cache.last_modified|date('d.m.Y') }}</td>
+                            <td>{{ cache.lastModified|date('d.m.Y') }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Listing url' | trans }}</th>
-                            <td>https://opencaching.de/{{ cache.wp_oc }}</td>
+                            <td>https://opencaching.de/{{ cache.wpOc }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Country' | trans }}</th>
@@ -122,52 +120,52 @@
                             <td>&nbsp;</td>
                         </tr>
 
-                        {% if cache.cache_type.id == 6 %} {# 6 = Events #}
+                        {% if cache.cacheType.id == 6 %} {# 6 = Events #}
                             <tr>
                                 <th>{{ 'Will attend' | trans }}</th>
-                                <td>{{ cache.logs_count.8 }}</td>
+                                <td>{{ cache.cacheLogsCount.8 }}</td>
                             </tr>
                             <tr>
                                 <th>{{ 'Attended' | trans }}</th>
-                                <td>{{ cache.logs_count.7 }}</td>
+                                <td>{{ cache.cacheLogsCount.7 }}</td>
                             </tr>
                         {% else %}
                             <tr>
                                 <th>{{ 'Found' | trans }}</th>
-                                <td>{{ cache.logs_count.1 }}</td>
+                                <td>{{ cache.cacheLogsCount.1 }}</td>
                             </tr>
                             <tr>
                                 <th>{{ 'Not found' | trans }}</th>
-                                <td>{{ cache.logs_count.2 }}</td>
+                                <td>{{ cache.cacheLogsCount.2 }}</td>
                             </tr>
                         {% endif %}
                         <tr>
                             <th>{{ 'Note' | trans }}</th>
-                            <td>{{ cache.logs_count.3 }}</td>
+                            <td>{{ cache.cacheLogsCount.3 }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Watchers' | trans }}</th>
-                            <td>{{ cache.watches_count }}</td>
+                            <td>{# {{ cache.watchesCount }} #}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Ignorers' | trans }}</th>
-                            <td>{{ cache.ignore_count }}</td>
+                            <td>{# {{ cache.ignore_count }} #}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Page visits' | trans }}</th>
-                            <td>{{ cache.visits_count }}</td>
+                            <td>{# {{ cache.visits_count }} #}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Log pictures' | trans }}</th>
-                            <td>{{ cache.picture_count }}</td>
+                            <td>{# {{ cache.picture_count }} #}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Recommendations' | trans }}</th>
-                            <td>{{ cache.rating_count }}</td>
+                            <td>{# {{ cache.rating_count }} #}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Geokrety history' | trans }}</th>
-                            <td><a href="https://geokrety.org/szukaj.php?lang=en_EN&wpt={{ cache.wp_oc }}">{{ 'Geokrety' | trans }}</a></td>
+                            <td><a href="https://geokrety.org/szukaj.php?lang=en_EN&wpt={{ cache.wpOc }}">{{ 'Geokrety' | trans }}</a></td>
                         </tr>
                         <tr>
                             <th>{{ 'Show on map' | trans }}</th>
@@ -195,18 +193,18 @@
                         <span class="navbar-text">
                         Log entries for {{ cache.name }} //
                             {% if cache.type == 6 %}
-                                {{ cache.logs_count.8 }} x <img    src="{{ asset('images/logTypes/will_attend.svg') }}"
+                                {{ cache.cacheLogsCount.8 }} x <img    src="{{ asset('images/logTypes/will_attend.svg') }}"
                                                                    alt="{{ 'Will Attend' | trans }}" title="{{ 'Will Attend' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.7 }} x <img    src="{{ asset('images/logTypes/attended.svg') }}"
+                                {{ cache.cacheLogsCount.7 }} x <img    src="{{ asset('images/logTypes/attended.svg') }}"
                                                                    alt="{{ 'Attendend' | trans }}" title="{{ 'Attended' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                {{ cache.cacheLogsCount.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
                                                                    alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
                             {% else %}
-                                {{ cache.logs_count.1 }} x <img    src="{{ asset('images/logTypes/found.svg') }}"
+                                {{ cache.cacheLogsCount.1 }} x <img    src="{{ asset('images/logTypes/found.svg') }}"
                                                                    alt="{{ 'Found' | trans }}" title="{{ 'Found' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.2 }} x <img    src="{{ asset('images/logTypes/dnf.svg') }}"
+                                {{ cache.cacheLogsCount.2 }} x <img    src="{{ asset('images/logTypes/dnf.svg') }}"
                                                                    alt="{{ 'Did not found' | trans }}" title="{{ 'Did not found' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                {{ cache.cacheLogsCount.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
                                                                    alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
                             {% endif %}
                             {# TODO: to do Andere Logtypen optional anzeigen, falls vorhanden, Koordinatenänderungen anzeigen#}
@@ -214,8 +212,8 @@
                         </span>
                     </nav>
                     <div class="">
-                    {% if cache.cache_logs %}
-                        {% for cachelogs in cache.cache_logs %}
+                    {% if cache.cacheLogs %}
+                        {% for cachelogs in cache.cacheLogs %}
                             <div href="#log{{ cachelogs.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between" id="log{{ cachelogs.id }}">
                                     <h5 class="mb-1">

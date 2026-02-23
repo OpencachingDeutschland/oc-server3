@@ -118,7 +118,7 @@ class UserRepository
             ->select('*')
             ->from(self::TABLE)
             ->where('user_id = :id')
-            ->setParameter(':id', $id)
+            ->setParameter('id', $id)
             ->executeQuery();
 
         $result = $statement->fetchAssociative();
@@ -151,7 +151,7 @@ class UserRepository
             ->select('*')
             ->from(self::TABLE)
             ->where('username = :username')
-            ->setParameter(':username', $username)
+            ->setParameter('username', $username)
             ->execute();
 
         $result = $statement->fetchAssociative();
@@ -294,6 +294,7 @@ class UserRepository
             'user_id' => $entity->userId,
             'date_created' => $entity->dateCreated,
             'last_modified' => $entity->lastModified,
+            'last_login' => $entity->lastLogin,
             'username' => $entity->username,
             'password' => $entity->password,
             'email' => $entity->email,
@@ -327,6 +328,7 @@ class UserRepository
         $entity->userId = (int) $data['user_id'];
         $entity->dateCreated = (string) $data['date_created'];
         $entity->lastModified = (string) $data['last_modified'];
+        $entity->lastLogin = (string) $data['last_login'];
         $entity->username = $data['username'];
         $entity->password = $data['password'];
         $entity->email = $data['email'];
@@ -337,11 +339,11 @@ class UserRepository
         $entity->firstname = $data['first_name'];
         $entity->lastname = $data['last_name'];
         $entity->country = $data['country'];
-        $entity->permanentLoginFlag = $data['permanent_login_flag'];
+        $entity->permanentLoginFlag = (bool)$data['permanent_login_flag'];
         $entity->activationCode = $data['activation_code'];
         $entity->language = strtolower($data['language']);
         $entity->description = $data['description'];
-        $entity->gdprDeletion = $data['gdpr_deletion'];
+        $entity->gdprDeletion = (bool)$data['gdpr_deletion'];
         $entity->roles = $this->securityRolesRepository->fetchUserRoles($entity);
 
         return $entity;

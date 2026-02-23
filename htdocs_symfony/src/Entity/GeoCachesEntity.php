@@ -14,7 +14,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public int $node;
 
-    public string $dateCreated;
+    public \DateTime $dateCreated;
 
     public int $isPublishdate;
 
@@ -22,9 +22,9 @@ class GeoCachesEntity extends AbstractEntity
 
     public string $okapiSyncbase;
 
-    public string $listingLastModified;
+    public \DateTime $listingLastModified;
 
-    public string $metaLastModified;
+    public \DateTime $metaLastModified;
 
     public int $userId;
 
@@ -40,7 +40,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public string $country;
 
-    public string $dateHidden;
+    public \DateTime $dateHidden;
 
     public int $size;
 
@@ -66,7 +66,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public string $defaultDesclang;
 
-    public string $dateActivate;
+    public \DateTime $dateActivate;
 
     public int $needNpaRecalc;
 
@@ -78,7 +78,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public int $listingOutdated;
 
-    public string $flagsLastModified;
+    public \DateTime $flagsLastModified;
 
     public UserEntity $user;
 
@@ -99,6 +99,8 @@ class GeoCachesEntity extends AbstractEntity
 
     public LogTypesEntity $logTypes;
 
+    public array $cacheLogs;
+
     public int $ratingCount;
 
     public int $ignoreCount;
@@ -107,9 +109,7 @@ class GeoCachesEntity extends AbstractEntity
 
     public int $visitsCount;
 
-    public array $cacheLogs;
-
-    public array $logsCount;
+    public array $cacheLogsCount;
 
     public int $pictureCount;
 

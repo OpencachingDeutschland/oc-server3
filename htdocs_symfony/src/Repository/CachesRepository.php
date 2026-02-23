@@ -54,19 +54,22 @@ class CachesRepository
      * @param CacheSizeRepository $cacheSizeRepository
      * @param CacheStatusRepository $cacheStatusRepository
      * @param CacheTypeRepository $cacheTypeRepository
+     * @param CacheLogsRepository $cacheLogsRepository
      */
     public function __construct(
         Connection $connection,
         UserRepository $userRepository,
         CacheSizeRepository $cacheSizeRepository,
         CacheStatusRepository $cacheStatusRepository,
-        CacheTypeRepository $cacheTypeRepository
+        CacheTypeRepository $cacheTypeRepository,
+        CacheLogsRepository $cacheLogsRepository,
     ) {
         $this->connection = $connection;
         $this->userRepository = $userRepository;
         $this->cacheSizeRepository = $cacheSizeRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->cacheTypeRepository = $cacheTypeRepository;
+        $this->cacheLogsRepository = $cacheLogsRepository;
     }
 
     /**
@@ -166,6 +169,41 @@ class CachesRepository
         }
 
         return $entities;
+    }
+
+    /**
+     * Fetches a Geocache by its OC-Code.
+     *
+     * @param string $wp_oc
+     *
+     * @return GeoCachesEntity
+     * @throws Exception
+     * @throws RecordNotFoundException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
+    public function fetchOneByOCWaypoint(string $wp_oc)
+    : GeoCachesEntity {
+        $statement = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from(self::TABLE)
+            ->where('wp_oc = :wp_oc')
+            ->setParameter('wp_oc', $wp_oc)
+            ->execute();
+
+        $result = $statement->fetchAssociative();
+
+        if ($statement->rowCount() === 0) {
+            throw new RecordNotFoundException(
+                sprintf(
+                    'Record with username "%s" not found',
+                    $wp_oc
+                )
+            );
+        }
+
+        $wp_oc = $this->getEntityFromDatabaseArray($result);
+
+        return $wp_oc;
     }
 
     /**
@@ -313,6 +351,8 @@ class CachesRepository
             'cache_status' => $entity->cacheStatus,
             'cache_type' => $entity->cacheType,
             'user' => $entity->user,
+            'cacheLogs' => $entity->cacheLogs,
+            'cacheLogsCount' => $entity->cacheLogsCount,
         ];
     }
 
@@ -370,6 +410,8 @@ class CachesRepository
         $entity->cacheStatus = $this->cacheStatusRepository->fetchOneBy(['id' => $entity->status]);
         $entity->cacheType = $this->cacheTypeRepository->fetchOneBy(['id' => $entity->type]);
         $entity->user = $this->userRepository->fetchOneById($entity->userId);
+        $entity->cacheLogs = $this->cacheLogsRepository->fetchCacheLogs($entity);
+        $entity->cacheLogsCount = $this->cacheLogsRepository->getCacheLogsCount($entity->cacheId);
 
         return $entity;
     }

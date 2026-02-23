@@ -140,7 +140,7 @@ class SecurityRolesRepository
             ->from(self::TABLE, 'sr')
             ->join('sr', 'user_roles', 'ur', 'sr.id = ur.role_id')
             ->where('ur.user_id = :userId')
-            ->setParameter(':userId', $user->userId)
+            ->setParameter('userId', $user->userId)
             ->execute();
 
         $result = $statement->fetchAllAssociative();

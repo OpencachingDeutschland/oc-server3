@@ -3,7 +3,7 @@
 //
 // © 2025 hxdimpf Resarch
 //
-// This file is part of GCxM.
+// Part of OCmap for opencaching.de.
 // Licensed under the MIT License.
 //
 // You may use, copy, modify, and distribute this software
@@ -449,7 +449,7 @@ function updateLengthDisplay(length) {
 // Function to download GPX with the route track
 
 function downloadGPX() {
-  const gpxData = generateTrackGPX(trackSegments, 'GCxM Track');
+  const gpxData = generateTrackGPX(trackSegments, 'OC Track');
   if (!gpxData) return;
   downloadFile(gpxData, 'track.gpx', 'application/gpx+xml');
 }

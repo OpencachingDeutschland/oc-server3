@@ -5,7 +5,7 @@ Guidance for Claude Code when working in this repository.
 ## Project Overview
 
 oc-server3 is the PHP backend for opencaching.de. This branch (`feature/map3`) adds a
-Leaflet-based live map at `/map3.php`, porting GCxM's map JS modules (OC-only subset).
+Leaflet-based live map at  (OC-only).
 
 ## Key Paths
 
@@ -62,7 +62,7 @@ Handles two modes via `?mode=` parameter:
 
 ### uniCache Format
 
-The frontend JS expects this shape (same as GCxM's uniCache + transient WP fields):
+The frontend JS expects this shape (uniCache shape with transient WP fields):
 
 ```json
 {
@@ -94,7 +94,7 @@ The frontend JS expects this shape (same as GCxM's uniCache + transient WP field
 
 Entry point: `map3.js` (loaded via `<script type="module">` in map3.tpl)
 
-Ported from GCxM's `js/map*.js`, OC-only subset:
+JS modules in  (OC-only subset):
 
 | File | Purpose |
 |------|---------|
@@ -115,8 +115,8 @@ Do not add Leaflet to the repo.
 
 ## Naming Conventions
 
-- Replace `gcxm` → `ocmap` in CSS classes, IDs, localStorage keys
-- Replace `GCxM` → `OCmap` in comments/strings
+- Replace `ocmap` → `ocmap` in CSS classes, IDs, localStorage keys
+- Replace `OCmap` → `OCmap` in comments/strings
 - Replace `isGC` → always `false` for OC-only data; `isOC` → always `true`
 - Keep author credit `hxdimpf` in file headers; add OC license block from `LICENSE.md`
 

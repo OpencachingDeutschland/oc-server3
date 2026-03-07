@@ -4,7 +4,7 @@
  ***************************************************************************/
 
 // map3.js — OCmap live map
-// OC-only port of GCxM's map.js. All GC/AL/BroadcastChannel code removed.
+// OCmap live map — OC-only. All GC/AL/BroadcastChannel code removed.
 
 import { getIcon, gpsIcon } from './mapIcons.js';
 import { baseLayers, Esri_WorldBoundariesPlaces } from './mapLayers.js';

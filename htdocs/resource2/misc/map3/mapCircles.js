@@ -3,7 +3,7 @@
 //
 // © 2025 hxdimpf Research
 //
-// Part of GCxM. MIT License.
+// Part of OCmap for opencaching.de. MIT License.
 // --------------------------------------------------------------
 
 import { MapButtonControl } from './mapHelpers.js';

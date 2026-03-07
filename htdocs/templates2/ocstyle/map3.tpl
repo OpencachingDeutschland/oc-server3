@@ -36,8 +36,10 @@
 .map-btn.off      { background: white; color: black; }
 .map-btn.disabled { background: #ccc; color: #888; cursor: not-allowed; }
 .zoom-level-display {
+  width: 30px; height: 30px; box-sizing: border-box;
   background: white; border: 2px solid rgba(0,0,0,0.2);
-  border-radius: 4px; padding: 2px 6px; font-size: 12px;
+  border-radius: 4px; font-size: 14px; font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
 }
 .map-info-display,
 .length-display {

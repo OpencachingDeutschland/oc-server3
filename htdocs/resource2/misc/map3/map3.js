@@ -341,6 +341,36 @@ export function refreshLiveMarkers() {
 async function handleMarkerClick(marker) {
   if (state.smSelectionModeEnabled) return;
   marker.openPopup();
+
+  const { referenceCode } = marker.options;
+  if (\!referenceCode) return;
+
+  try {
+    const res = await fetch(`map3.php?mode=cache&wp=${referenceCode}`);
+    if (\!res.ok) return;
+    const data = await res.json();
+    if (\!data.wpts?.length) return;
+
+    stageMarkers.clearLayers();
+    stageMarkerCircles.clearLayers();
+    stageMarkerRegistry.clear();
+
+    const { lat, lng } = marker.getLatLng();
+    data.wpts.forEach(w => {
+      const icon = getIcon({ geocacheType: { id: w.typeId }, isOC: true, isGC: false });
+      const child = L.marker([w.lat, w.lon], { icon });
+      child.bindTooltip(w.name || "?", { direction: "left" });
+      child.bindPopup(`<b>${w.name || "?"}</b><br>${w.description || ""}`);
+      stageMarkers.addLayer(child);
+      stageMarkerRegistry.set(L.latLng(w.lat, w.lon).toString(), child);
+      L.polyline([[lat, lng], [w.lat, w.lon]], { color: "red", weight: 1 }).addTo(stageMarkers);
+      if (state.circlesEnabled) {
+        stageMarkerCircles.addLayer(createCircle(child));
+      }
+    });
+  } catch (err) {
+    console.log("handleMarkerClick fetch error:", err);
+  }
 }
 
 //-------------------------

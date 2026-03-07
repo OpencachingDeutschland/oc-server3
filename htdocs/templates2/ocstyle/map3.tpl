@@ -60,11 +60,6 @@
   white-space: nowrap;
 }
 .map-dropdown-item:hover { background: #f0f0f0; }
-.map-escape-top {
-  position: absolute; bottom: 40px; right: 10px; z-index: 1000;
-  background: rgba(255,255,255,0.8); border: 1px solid #ccc;
-  border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 16px;
-}
 {/literal}
 </style>
 

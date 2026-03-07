@@ -460,21 +460,6 @@ function updateCircleRadii() {
 
 
 //-------------------------
-// Scroll escape button
-
-function addScrollEscape(map) {
-  const btn = document.createElement('button');
-  btn.className = 'map-escape-top';
-  btn.setAttribute('aria-label', 'Scroll to top');
-  btn.textContent = '⬆';
-  btn.title = 'Scroll to top of page';
-  btn.addEventListener('click', e => {
-    e.stopPropagation();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  map.getContainer().appendChild(btn);
-}
-
 //-------------------------
 // Filter defaults (OC only — no platform toggle needed)
 
@@ -519,7 +504,6 @@ let state = {
 // init()
 
 function init() {
-  addScrollEscape(mapRoot);
   initMapCircles(state);
   mapRouting.init(state);
   mapSelect.init(state);

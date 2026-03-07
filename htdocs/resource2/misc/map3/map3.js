@@ -123,7 +123,6 @@ mapRoot.on('overlayadd', (e) => {
   if (e.name === "Live Map") {
     liveEnabled = true;
     layerControl.getContainer().classList.add('live-active');
-    dShow('refreshButton');
     fetchAndShowLiveMarkers();
   }
 });
@@ -132,21 +131,13 @@ mapRoot.on('overlayremove', (e) => {
   if (e.name === "Cities") { citiesShown = false; }
   if (e.name === "Live Map") {
     layerControl.getContainer().classList.remove('live-active');
-    dHide('refreshButton');
     liveEnabled = false;
     stageMarkers.clearLayers();
   }
 });
 
-const resetButtonColor = '#343a40';
-mapRoot.on('zoomend', () => {
-  const btn = getById('refreshButton');
-  if (btn) btn.style.backgroundColor = resetButtonColor;
-});
-mapRoot.on('dragend', () => {
-  const btn = getById('refreshButton');
-  if (btn) btn.style.backgroundColor = resetButtonColor;
-});
+mapRoot.on('zoomend', () => { if (liveEnabled) fetchAndShowLiveMarkers(); });
+mapRoot.on('dragend', () => { if (liveEnabled) fetchAndShowLiveMarkers(); });
 
 //-------------------------
 // fetchOCByBbox() — calls map3.php?mode=live backend
@@ -203,15 +194,8 @@ function fetchAndShowLiveMarkers() {
   const BATCH = 500;
   const MAX   = 500;
 
-  const refreshBtn = getById('refreshButton');
-  if (refreshBtn) refreshBtn.classList.add('blink-gold');
-
   fetchOCByBbox(s, w, n, e, 0, BATCH).then(points => {
     handlePoints(points);
-    if (refreshBtn) {
-      refreshBtn.classList.remove('blink-gold');
-      refreshBtn.style.backgroundColor = points.length >= BATCH ? 'darkgoldenrod' : 'green';
-    }
   });
 }
 
@@ -443,26 +427,7 @@ function updateCircleRadii() {
   for (const c of liveCirclesRegistry.values())          if (c) c.setRadius(r);
 }
 
-//-------------------------
-// RefreshControl — single "Caches" button
 
-const RefreshControl = L.Control.extend({
-  onAdd: function () {
-    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
-    container.style.display       = 'flex';
-    container.style.flexDirection = 'column';
-
-    const refreshButton = L.DomUtil.create('button', 'btn btn-sm btn-dark', container);
-    refreshButton.id        = 'refreshButton';
-    refreshButton.innerHTML = 'Caches';
-    refreshButton.title     = 'Fetch OC caches in the viewport';
-    refreshButton.style.display = 'none';
-    refreshButton.onclick   = () => fetchAndShowLiveMarkers();
-
-    return container;
-  }
-});
-new RefreshControl({ position: 'topright' }).addTo(mapRoot);
 
 //-------------------------
 // Scroll escape button

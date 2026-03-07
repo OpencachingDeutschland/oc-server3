@@ -23,10 +23,13 @@
 .map-button-control  { display: flex; flex-direction: column; gap: 2px; }
 .map-button-row      { display: flex; gap: 2px; }
 .map-btn {
-  min-width: 28px; min-height: 28px;
+  width: 30px; height: 30px;
+  min-width: 30px; min-height: 30px;
+  padding: 0; box-sizing: border-box;
   background: white; border: 2px solid rgba(0,0,0,0.2);
   border-radius: 4px; cursor: pointer; font-size: 14px;
   display: flex; align-items: center; justify-content: center;
+  line-height: 1;
 }
 .map-btn.on       { background: #2f7dc7; color: white; }
 .map-btn.off      { background: white; color: black; }

@@ -32,6 +32,7 @@
   line-height: 1;
 }
 .map-btn.on       { background: #2f7dc7; color: white; }
+.map-btn.wide     { width: auto; min-width: 44px; padding: 0 6px; }
 .map-btn.off      { background: white; color: black; }
 .map-btn.disabled { background: #ccc; color: #888; cursor: not-allowed; }
 .zoom-level-display {

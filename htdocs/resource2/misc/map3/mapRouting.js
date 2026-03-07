@@ -59,7 +59,7 @@ export function init(mapState) {
   // --- Create GPX button (action button - always white) ---
   const gpxBtn = document.createElement('button');
   gpxBtn.type = 'button';
-  gpxBtn.className = 'map-btn off';
+  gpxBtn.className = 'map-btn off wide';
   gpxBtn.innerText = 'GPX';
   gpxBtn.title = 'Download GPX';
   gpxBtn.style.display = 'none';

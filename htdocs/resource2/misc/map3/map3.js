@@ -343,13 +343,13 @@ async function handleMarkerClick(marker) {
   marker.openPopup();
 
   const { referenceCode } = marker.options;
-  if (\!referenceCode) return;
+  if (!referenceCode) return;
 
   try {
     const res = await fetch(`map3.php?mode=cache&wp=${referenceCode}`);
-    if (\!res.ok) return;
+    if (!res.ok) return;
     const data = await res.json();
-    if (\!data.wpts?.length) return;
+    if (!data.wpts?.length) return;
 
     stageMarkers.clearLayers();
     stageMarkerCircles.clearLayers();

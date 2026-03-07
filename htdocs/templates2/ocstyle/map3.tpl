@@ -38,6 +38,20 @@
   background: white; border: 2px solid rgba(0,0,0,0.2);
   border-radius: 4px; padding: 2px 6px; font-size: 12px;
 }
+.map-dropdown { position: relative; display: inline-block; }
+.map-dropdown-menu {
+  display: none; position: absolute; left: 0; top: 100%;
+  background: white; border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px; z-index: 2000; min-width: 80px;
+  flex-direction: column; box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+.map-dropdown-menu.show { display: flex; }
+.map-dropdown-item {
+  background: white; border: none; text-align: left;
+  padding: 5px 10px; cursor: pointer; font-size: 13px;
+  white-space: nowrap;
+}
+.map-dropdown-item:hover { background: #f0f0f0; }
 .map-escape-top {
   position: absolute; bottom: 40px; right: 10px; z-index: 1000;
   background: rgba(255,255,255,0.8); border: 1px solid #ccc;

@@ -41,7 +41,7 @@ const staticUnfoundCirclesRegistry = new Map();
 const liveMap = L.markerClusterGroup({
   zoomToBoundsOnClick     : true,
   spiderfyOnMaxZoom       : false,
-  disableClusteringAtZoom : 12
+  disableClusteringAtZoom : 10
 });
 
 const foundMarkers = L.markerClusterGroup({
@@ -142,33 +142,65 @@ mapRoot.on('dragend', () => { if (liveEnabled) fetchAndShowLiveMarkers(); });
 //-------------------------
 // fetchOCByBbox() — calls map3.php?mode=live backend
 
-async function fetchOCByBbox(s, w, n, e, skip, take) {
+async function fetchOCByBbox(s, w, n, e) {
   const params = new URLSearchParams({
-    mode: 'live', lat1: s, lat2: n, lon1: w, lon2: e, skip, take
+    mode: 'live', lat1: s, lat2: n, lon1: w, lon2: e
   });
   try {
     const res = await fetch('map3.php?' + params);
-    if (!res.ok) return [];
+    if (!res.ok) return { count: 0, items: [] };
     const data = await res.json();
-    return data.items || [];
+    return { count: data.count || 0, items: data.items || [] };
   } catch (err) {
     console.log('fetchOCByBbox error:', err);
-    return [];
+    return { count: 0, items: [] };
   }
+}
+
+//-------------------------
+// Toast for "too many caches"
+
+let toastEl = null;
+
+function showToast(msg) {
+  if (!toastEl) {
+    toastEl = document.createElement('div');
+    toastEl.className = 'map-toast';
+    document.getElementById('mapRoot').appendChild(toastEl);
+  }
+  toastEl.textContent = msg;
+  toastEl.style.display = 'block';
+}
+
+function hideToast() {
+  if (toastEl) toastEl.style.display = 'none';
 }
 
 //-------------------------
 // fetchAndShowLiveMarkers()
 
-function fetchAndShowLiveMarkers() {
-  let mustClear = true;
+const MAX_LIVE = 5000;
 
-  function handlePoints(points) {
-    if (mustClear) {
+function fetchAndShowLiveMarkers() {
+  const bounds = mapRoot.getBounds();
+  const s = bounds.getSouthWest().lat.toFixed(4);
+  const w = bounds.getSouthWest().lng.toFixed(4);
+  const n = bounds.getNorthEast().lat.toFixed(4);
+  const e = bounds.getNorthEast().lng.toFixed(4);
+
+  fetchOCByBbox(s, w, n, e).then(({ count, items }) => {
+    if (count > MAX_LIVE) {
       liveMap.clearLayers();
-      mustClear = false;
+      liveRegistry.clear();
+      liveCirclesRegistry.clear();
+      showToast(`${count} caches in view \u2014 zoom in to display`);
+      return;
     }
-    points.forEach(p => {
+
+    hideToast();
+    liveMap.clearLayers();
+
+    items.forEach(p => {
       const lat = parseFloat(p.lat);
       const lon = parseFloat(p.lon);
       if (isNaN(lat) || isNaN(lon)) return;
@@ -183,19 +215,6 @@ function fetchAndShowLiveMarkers() {
       liveCirclesRegistry.set(ll, createCircle(m));
     });
     refreshLiveMarkers();
-  }
-
-  const bounds = mapRoot.getBounds();
-  const s = bounds.getSouthWest().lat.toFixed(4);
-  const w = bounds.getSouthWest().lng.toFixed(4);
-  const n = bounds.getNorthEast().lat.toFixed(4);
-  const e = bounds.getNorthEast().lng.toFixed(4);
-
-  const BATCH = 500;
-  const MAX   = 500;
-
-  fetchOCByBbox(s, w, n, e, 0, BATCH).then(points => {
-    handlePoints(points);
   });
 }
 
@@ -351,10 +370,6 @@ async function handleMarkerClick(marker) {
     const data = await res.json();
     if (!data.wpts?.length) return;
 
-    stageMarkers.clearLayers();
-    stageMarkerCircles.clearLayers();
-    stageMarkerRegistry.clear();
-
     const { lat, lng } = marker.getLatLng();
     data.wpts.forEach(w => {
       const icon = getIcon({ geocacheType: { id: w.typeId }, isOC: true, isGC: false });
@@ -384,12 +399,13 @@ export function createMarker(p) {
     return null;
   }
 
-  const shortName = p.shortName || (p.name ? p.name.substring(0, 7) : '?');
+  const shortName = p.shortName || (p.name ? (p.name.length > 25 ? p.name.substring(0, 25) + '\u2026' : p.name) : '?');
   const linkHtml  = `<a href="viewcache.php?wp=${p.referenceCode}" title="${p.name}">${p.referenceCode} ${shortName}</a>`;
 
   const ownerHTML = `<span class="owner-alias">${p.ownerAlias || "Unknown"}</span>`;
   const foundRow  = p.isFound ? `<tr><td>Found:</td><td>${p.foundDate || ''}</td></tr>` : "";
   const typeRow   = `${p.geocacheType?.name || "?"} / ${p.geocacheSize?.name || "?"} / ${p.difficulty} / ${p.terrain}`;
+  const pcnLink   = p.hasPCN ? ` &ensp; <a href="#" title="${(p.pcnText || '').replace(/"/g, '&quot;')}" style="color:crimson;font-weight:bold" onclick="return false">PCN</a>` : '';
 
   let statsRow = '';
   if (p.findCount != null) {
@@ -406,7 +422,7 @@ export function createMarker(p) {
       ${statsRow}
       ${foundRow}
     </table>
-    <div style="margin-top:0.3em">${typeRow}</div>
+    <div style="margin-top:0.3em">${typeRow}${pcnLink}</div>
   `;
 
   const icon   = getIcon({ ...p, isOC: true, isGC: false });

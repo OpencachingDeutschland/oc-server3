@@ -1,7 +1,7 @@
 // --------------------------------------------------------------
 // mapRouting.js
 //
-// © 2025 hxdimpf Resarch
+// © 2025 hxdimpf Research
 //
 // Part of OCmap for opencaching.de.
 // Licensed under the MIT License.
@@ -12,7 +12,7 @@
 // https://opensource.org/licenses/MIT
 // --------------------------------------------------------------
 
-import { coords2Dm } from './coords.js';
+import { coords2Dm } from '../shared/coords.js';
 import { showToast, downloadFile } from './helpers.js';
 import { generateTrackGPX } from './gpx.js';
 import { MapButtonControl } from './mapHelpers.js';

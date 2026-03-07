@@ -62,6 +62,23 @@
   white-space: nowrap;
 }
 .map-dropdown-item:hover { background: #f0f0f0; }
+.map-toast {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 8px 16px;
+  background: rgba(47, 125, 199, 0.92);
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
 {/literal}
 </style>
 

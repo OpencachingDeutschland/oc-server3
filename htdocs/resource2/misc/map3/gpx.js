@@ -1,7 +1,7 @@
 // --------------------------------------------------------------
 // gpx.js
 // 
-// © 2025 hxdimpf Resarch
+// © 2025 hxdimpf Research
 //
 // Part of OCmap for opencaching.de.
 // Licensed under the MIT License.

@@ -38,6 +38,13 @@
   background: white; border: 2px solid rgba(0,0,0,0.2);
   border-radius: 4px; padding: 2px 6px; font-size: 12px;
 }
+.map-info-display,
+.length-display {
+  font-size: 0.7rem; padding: 4px 8px;
+  background: rgba(240,248,255,0.95);
+  color: #333; border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1); white-space: nowrap;
+}
 .map-dropdown { position: relative; display: inline-block; }
 .map-dropdown-menu {
   display: none; position: absolute; left: 0; top: 100%;

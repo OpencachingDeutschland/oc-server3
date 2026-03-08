@@ -53,3 +53,4 @@
    data-label-6="{t escape=js}6 fields{/t}"
    data-label-1="{t escape=js}1 field{/t}"
    data-label-parse-error="{t escape=js}Could not parse coordinates{/t}"></a>
+<script type="module" src="resource2/ocstyle/js/coord_input.js"></script>

@@ -199,15 +199,21 @@ function _sbd_click(submitType)
         }
     }
 
-    if (isNaN(document.searchbydistance.lon_h.value) || isNaN(document.searchbydistance.lon_min.value) || document.searchbydistance.lon_h.value == "" || document.searchbydistance.lon_min.value == "") {
-        alert("{/literal}{t}Longitude must be a number!\nFormat: hh° mm.mmm{/t}{literal}");
-        resetbutton('submit_dist');
-        return false;
-    }
-    if (isNaN(document.searchbydistance.lat_h.value) || isNaN(document.searchbydistance.lat_min.value) || document.searchbydistance.lat_h.value == "" || document.searchbydistance.lat_min.value == "") {
-        alert("{/literal}{t}Latitude must be a number!\nFormat: hh° mm.mmm{/t}{literal}");
-        resetbutton('submit_dist');
-        return false;
+    var coordLat = document.getElementById('coord_lat');
+    var coordLon = document.getElementById('coord_lon');
+    if (coordLat && coordLon && coordLat.value !== '' && coordLon.value !== '') {
+        // unified input has valid parsed coordinates — skip 6-field check
+    } else {
+        if (isNaN(document.searchbydistance.lon_deg.value) || isNaN(document.searchbydistance.lon_min.value) || document.searchbydistance.lon_deg.value == "" || document.searchbydistance.lon_min.value == "") {
+            alert("{/literal}{t}Longitude must be a number!\nFormat: hh° mm.mmm{/t}{literal}");
+            resetbutton('submit_dist');
+            return false;
+        }
+        if (isNaN(document.searchbydistance.lat_deg.value) || isNaN(document.searchbydistance.lat_min.value) || document.searchbydistance.lat_deg.value == "" || document.searchbydistance.lat_min.value == "") {
+            alert("{/literal}{t}Latitude must be a number!\nFormat: hh° mm.mmm{/t}{literal}");
+            resetbutton('submit_dist');
+            return false;
+        }
     }
 
     return true;
@@ -721,23 +727,21 @@ function switchAttributeCat2()
         </tr>
         <tr class="search_bydistance">
             <td valign="top"><input type="radio" tabindex="6" id="sbcoords" name="searchto" value="searchbycoords" {if $dfromcoords_checked}checked="checked"{/if}><label for="sbcoords">... {t}from coordinates:{/t}</label></td>
-            <td valign="top">
-                <select tabindex="7" name="latNS" onfocus="bydistance_set_radiobutton(2)">
-                    <option value="N" {if $latN_sel}selected="selected"{/if}>{t}N{/t}</option>
-                    <option value="S" {if $latS_sel}selected="selected"{/if}>{t}S{/t}</option>
-                </select>&nbsp;
-                <input type="text" tabindex="8" name="lat_h" maxlength="2" value="{$lat_h}" class="input30" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;°&nbsp;
-                <input type="text" tabindex="9" name="lat_min" maxlength="6" value="{$lat_min}" class="input50" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;'&nbsp;
-                <br />
-                <select tabindex="10" name="lonEW" onfocus="bydistance_set_radiobutton(2)">
-                    <option value="E" {if $lonE_sel}selected="selected"{/if}>{t}E{/t}</option>
-                    <option value="W" {if $lonW_sel}selected="selected"{/if}>{t}W{/t}</option>
-                </select>&nbsp;
-                <input type="text" tabindex="11" name="lon_h" maxlength="3" value="{$lon_h}" class="input30" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;°&nbsp;
-                <input type="text" tabindex="12" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" onfocus="bydistance_set_radiobutton(2)"/>&nbsp;'&nbsp;
+            <td valign="top" id="search_coord_wrapper">
+                {include file='coordinate_input.tpl'}
             </td>
             <td><input type="submit" tabindex="13" name="submit_dist" value="{t}Search{/t}" class="formbutton" onclick="submitbutton('submit_dist')" /></td>
         </tr>
+        <script>
+        (function() {ldelim}
+            var wrapper = document.getElementById('search_coord_wrapper');
+            if (wrapper) {ldelim}
+                wrapper.addEventListener('focus', function() {ldelim}
+                    bydistance_set_radiobutton(2);
+                {rdelim}, true);
+            {rdelim}
+        {rdelim})();
+        </script>
     </form>
 
     <tr class="search_byname"><td class="separator"></td></tr>

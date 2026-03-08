@@ -387,15 +387,22 @@ if ($queryid != 0) {
         $options['searchtype'] = 'bycoords';
 
         // Ocprop: all of the following options
-        if (isset($_REQUEST['lat']) && isset($_REQUEST['lon'])) {
+        if (isset($_REQUEST['latitude']) && isset($_REQUEST['longitude'])
+            && $_REQUEST['latitude'] !== '' && $_REQUEST['longitude'] !== ''
+        ) {
+            // unified coordinate input (hidden fields from coord_input.js)
+            $options['lat'] = $_REQUEST['latitude'] + 0;
+            $options['lon'] = $_REQUEST['longitude'] + 0;
+        } elseif (isset($_REQUEST['lat']) && isset($_REQUEST['lon'])) {
             $options['lat'] = $_REQUEST['lat'] + 0;
             $options['lon'] = $_REQUEST['lon'] + 0;
         } else {
-            $options['latNS'] = isset($_REQUEST['latNS']) ? $_REQUEST['latNS'] : 'N';
-            $options['lonEW'] = isset($_REQUEST['lonEW']) ? $_REQUEST['lonEW'] : 'E';
+            // 6-field mode: accept both new names (coordinate_input.tpl) and legacy names
+            $options['latNS'] = $_REQUEST['lat_hem'] ?? $_REQUEST['latNS'] ?? 'N';
+            $options['lonEW'] = $_REQUEST['lon_hem'] ?? $_REQUEST['lonEW'] ?? 'E';
 
-            $options['lat_h'] = isset($_REQUEST['lat_h']) ? $_REQUEST['lat_h'] : 0;
-            $options['lon_h'] = isset($_REQUEST['lon_h']) ? $_REQUEST['lon_h'] : 0;
+            $options['lat_h'] = $_REQUEST['lat_deg'] ?? $_REQUEST['lat_h'] ?? 0;
+            $options['lon_h'] = $_REQUEST['lon_deg'] ?? $_REQUEST['lon_h'] ?? 0;
             $options['lat_min'] = isset($_REQUEST['lat_min']) ? $_REQUEST['lat_min'] : 0;
             $options['lon_min'] = isset($_REQUEST['lon_min']) ? $_REQUEST['lon_min'] : 0;
         }
@@ -1813,82 +1820,58 @@ function outputSearchForm($options)
         isset($options['waypoint']) ? htmlspecialchars($options['waypoint'], ENT_COMPAT, 'UTF-8') : ''
     );
 
-    // ... from coords
-    if (!isset($options['lat_h'])) {
-        if ($login->logged_in()) {
-            $rs = sql(
-                "SELECT `latitude`, `longitude`
-                 FROM `user`
-                 WHERE `user_id`='" . sql_escape($login->userid) . "'"
-            );
-            $record = sql_fetch_array($rs);
-            $lon = $record['longitude'];
-            $lat = $record['latitude'];
-            sql_free_result($rs);
-
-            $tpl->assign('lonE_sel', $lon >= 0);
-            $tpl->assign('lonW_sel', $lon < 0);
-            $tpl->assign('latN_sel', $lat >= 0);
-            $tpl->assign('latS_sel', $lat < 0);
-
-            $lon_h = floor($lon);
-            $lat_h = floor($lat);
-
-            $lon_min = ($lon - $lon_h) * 60;
-            $lat_min = ($lat - $lat_h) * 60;
-
-            if ($lat < 0 && $lat_h < 0) {
-                $lat_min = 60 - $lat_min;
-            }
-            if ($lon < 0 && $lon_h < 0) {
-                $lon_min = 60 - $lon_min;
-            }
-
-            $tpl->assign('lat_min', sprintf('%02.3f', $lat_min));
-            $tpl->assign('lon_min', sprintf('%02.3f', $lon_min));
-
-            if ($lat < 0 && $lat_h < 0) {
-                $lat_h = - $lat_h;
-                if ($lat_min != 0) {
-                    $lat_h = $lat_h - 1;
-                }
-            }
-            if ($lon < 0 && $lon_h < 0) {
-                $lon_h = - $lon_h;
-                if ($lon_min != 0) {
-                    $lon_h = $lon_h - 1;
-                }
-            }
-            $tpl->assign('lat_h', $lat_h);
-            $tpl->assign('lon_h', $lon_h);
-        } else {
-            $tpl->assign('lat_h', '00');
-            $tpl->assign('lon_h', '000');
-            $tpl->assign('lat_min', '00.000');
-            $tpl->assign('lon_min', '00.000');
+    // ... from coords — assign variables for coordinate_input.tpl
+    if (isset($options['lat']) && isset($options['lon'])) {
+        // decimal lat/lon available (from unified input or direct params)
+        $lat = $options['lat'] + 0;
+        $lon = $options['lon'] + 0;
+    } elseif (isset($options['lat_h'])) {
+        // 6-field values submitted — reconstruct decimal
+        $lat_h = $options['lat_h'] + 0;
+        $lon_h = $options['lon_h'] + 0;
+        $lat_min_val = $options['lat_min'] + 0;
+        $lon_min_val = $options['lon_min'] + 0;
+        $lat = $lat_h + $lat_min_val / 60;
+        $lon = $lon_h + $lon_min_val / 60;
+        if (isset($options['latNS']) && $options['latNS'] == 'S') {
+            $lat = -$lat;
         }
+        if (isset($options['lonEW']) && $options['lonEW'] == 'W') {
+            $lon = -$lon;
+        }
+    } elseif ($login->logged_in()) {
+        // default: user's home coordinates
+        $rs = sql(
+            "SELECT `latitude`, `longitude`
+             FROM `user`
+             WHERE `user_id`='" . sql_escape($login->userid) . "'"
+        );
+        $record = sql_fetch_array($rs);
+        $lon = $record['longitude'] + 0;
+        $lat = $record['latitude'] + 0;
+        sql_free_result($rs);
     } else {
-        $tpl->assign('lat_h', isset($options['lat_h']) ? htmlspecialchars($options['lat_h']) : '00');
-        $tpl->assign('lon_h', isset($options['lon_h']) ? htmlspecialchars($options['lon_h']) : '000');
-        $tpl->assign('lat_min', isset($options['lat_min']) ? htmlspecialchars($options['lat_min']) : '00.000');
-        $tpl->assign('lon_min', isset($options['lon_min']) ? htmlspecialchars($options['lon_min']) : '00.000');
-
-        if ($options['lonEW'] == 'W') {
-            $tpl->assign('lonE_sel', '');
-            $tpl->assign('lonW_sel', 'selected="selected"');
-        } else {
-            $tpl->assign('lonE_sel', 'selected="selected"');
-            $tpl->assign('lonW_sel', '');
-        }
-
-        if ($options['latNS'] == 'S') {
-            $tpl->assign('latS_sel', 'selected="selected"');
-            $tpl->assign('latN_sel', '');
-        } else {
-            $tpl->assign('latS_sel', '');
-            $tpl->assign('latN_sel', 'selected="selected"');
-        }
+        $lat = 0;
+        $lon = 0;
     }
+
+    // Convert decimal lat/lon to 6-field values for coordinate_input.tpl
+    $tpl->assign('coord_latitude', $lat);
+    $tpl->assign('coord_longitude', $lon);
+    $tpl->assign('lat_hem', $lat >= 0 ? 'N' : 'S');
+    $tpl->assign('lon_hem', $lon >= 0 ? 'E' : 'W');
+
+    $absLat = abs($lat);
+    $absLon = abs($lon);
+    $lat_deg = floor($absLat);
+    $lon_deg = floor($absLon);
+    $lat_min = ($absLat - $lat_deg) * 60;
+    $lon_min = ($absLon - $lon_deg) * 60;
+
+    $tpl->assign('lat_deg', $lat_deg);
+    $tpl->assign('lon_deg', $lon_deg);
+    $tpl->assign('lat_min', sprintf('%02.3f', $lat_min));
+    $tpl->assign('lon_min', sprintf('%02.3f', $lon_min));
 
     $dfromortplz_checked = in_array($options['searchtype'], ['byplz', 'byort']);
     $dfromwaypoint_checked = ($options['searchtype'] == 'bywaypoint');

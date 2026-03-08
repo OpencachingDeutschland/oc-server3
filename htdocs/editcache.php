@@ -261,14 +261,33 @@ if ($error == false) {
                     $name_not_ok = true;
                 }
 
-                if (isset($_POST['latNS'])) {
-                    //get coords from post-form
-                    $coords_latNS = $_POST['latNS'];  // Ocprop
-                    $coords_lonEW = $_POST['lonEW'];  // Ocprop
-                    $coords_lat_h = trim($_POST['lat_h']);  // Ocprop
-                    $coords_lon_h = trim($_POST['lon_h']);  // Ocprop
-                    $coords_lat_min = trim($_POST['lat_min']);  // Ocprop
-                    $coords_lon_min = trim($_POST['lon_min']);  // Ocprop
+                if (isset($_POST['lat_hem']) || isset($_POST['latNS'])) {
+                    //get coords from post-form (new field names from coordinate_input, old from Ocprop)
+                    $coords_latNS = $_POST['lat_hem'] ?? $_POST['latNS'];  // Ocprop
+                    $coords_lonEW = $_POST['lon_hem'] ?? $_POST['lonEW'];  // Ocprop
+                    $coords_lat_h = trim($_POST['lat_deg'] ?? $_POST['lat_h'] ?? '0');  // Ocprop
+                    $coords_lon_h = trim($_POST['lon_deg'] ?? $_POST['lon_h'] ?? '0');  // Ocprop
+                    $coords_lat_min = trim($_POST['lat_min'] ?? '00.000');  // Ocprop
+                    $coords_lon_min = trim($_POST['lon_min'] ?? '00.000');  // Ocprop
+
+                    // If unified input provided valid decimals, sync 6-field values from them
+                    $posted_lat = $_POST['latitude'] ?? '';
+                    $posted_lon = $_POST['longitude'] ?? '';
+                    if ($posted_lat !== '' && $posted_lon !== ''
+                        && is_numeric($posted_lat) && is_numeric($posted_lon)
+                        && ((float)$posted_lat != 0 || (float)$posted_lon != 0)
+                    ) {
+                        $coord_lat = (float)$posted_lat;
+                        $coord_lon = (float)$posted_lon;
+                        $coords_latNS = $coord_lat >= 0 ? 'N' : 'S';
+                        $coords_lonEW = $coord_lon >= 0 ? 'E' : 'W';
+                        $absLat = abs($coord_lat);
+                        $absLon = abs($coord_lon);
+                        $coords_lat_h = (string)floor($absLat);
+                        $coords_lat_min = sprintf('%02.3f', ($absLat - floor($absLat)) * 60);
+                        $coords_lon_h = (string)floor($absLon);
+                        $coords_lon_min = sprintf('%02.3f', ($absLon - floor($absLon)) * 60);
+                    }
                 } else {
                     //get coords from DB
                     $coords_lon = $cache_record['longitude'];
@@ -1108,6 +1127,18 @@ if ($error == false) {
                 tpl_set_var('lat_min', htmlspecialchars($coords_lat_min, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('lon_h', htmlspecialchars($coords_lon_h, ENT_COMPAT, 'UTF-8'));
                 tpl_set_var('lon_min', htmlspecialchars($coords_lon_min, ENT_COMPAT, 'UTF-8'));
+
+                // Compute decimal lat/lon for the unified coordinate input
+                $h_lat = (float)$coords_lat_h;
+                $m_lat = is_numeric($coords_lat_min) ? (float)$coords_lat_min : 0;
+                $h_lon = (float)$coords_lon_h;
+                $m_lon = is_numeric($coords_lon_min) ? (float)$coords_lon_min : 0;
+                $coord_lat = $h_lat + $m_lat / 60;
+                if ($coords_latNS == 'S') $coord_lat = -$coord_lat;
+                $coord_lon = $h_lon + $m_lon / 60;
+                if ($coords_lonEW == 'W') $coord_lon = -$coord_lon;
+                tpl_set_var('coord_latitude', $coord_lat);
+                tpl_set_var('coord_longitude', $coord_lon);
 
                 tpl_set_var('name_message', ($name_not_ok == true) ? $name_message : '');
                 tpl_set_var('lon_message', ($lon_not_ok == true) ? $coords_message : '');

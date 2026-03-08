@@ -108,6 +108,8 @@ class PresenterCoordinate
         $template->assign(self::lon_hem, $formatter->formatLonHem($coordinate));
         $template->assign(self::lon_deg, $formatter->formatLonDeg($coordinate));
         $template->assign(self::lon_min, $formatter->formatLonMin($coordinate));
+        $template->assign('coord_latitude', $coordinate->latitude());
+        $template->assign('coord_longitude', $coordinate->longitude());
 
         if (!$this->valid) {
             $template->assign(self::coord_error, $this->translator->translate('Invalid coordinate'));

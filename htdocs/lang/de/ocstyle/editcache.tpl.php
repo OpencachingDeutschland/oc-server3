@@ -182,21 +182,52 @@ function toggleAttr(id)
     <tr>
         <td valign="top">{t}Coordinates:{/t}</td>
         <td>
-            <select name="latNS" onchange="setListingModified()" >
-                <option value="N"{selLatN}>{t}N{/t}</option>
-                <option value="S"{selLatS}>{t}S{/t}</option>
-            </select>
-            &nbsp;<input type="text" name="lat_h" maxlength="3" value="{lat_h}" class="input30" onchange="setListingModified()" />
-            °&nbsp;<input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" onchange="setListingModified()" />&nbsp;'&nbsp;
-            {lat_message}
-            &nbsp;&nbsp;
-            <select name="lonEW" onchange="setListingModified()" >
-                <option value="E"{selLonE}>{t}E{/t}</option>
-                <option value="W"{selLonW}>{t}W{/t}</option>
-            </select>
-            &nbsp;<input type="text" name="lon_h" maxlength="3" value="{lon_h}" class="input30" onchange="setListingModified()" />
-            °&nbsp;<input type="text" name="lon_min" maxlength="6" value="{lon_min}" class="input50" onchange="setListingModified()" />&nbsp;'&nbsp;
-            {lon_message}
+            <div id="coord_single" style="display:none">
+                <input type="text" id="coord_unified" size="35" placeholder="N00 00.000 E000 00.000"
+                    oninput="if(typeof setListingModified==='function')setListingModified()" />
+                <br />
+                <span id="coord_feedback"></span>
+            </div>
+            <div id="coord_detail">
+            <table>
+              <tr>
+                <td>
+                    <select name="lat_hem" onchange="setListingModified()">
+                        <option value="N"{selLatN}>{t}N{/t}</option>
+                        <option value="S"{selLatS}>{t}S{/t}</option>
+                    </select>
+                </td>
+                <td>
+                    <nobr><input type="text" name="lat_deg" maxlength="2" value="{lat_h}" class="input30" onchange="setListingModified()" /> &deg;</nobr>
+                </td>
+                <td>
+                    <nobr><input type="text" name="lat_min" maxlength="6" value="{lat_min}" class="input50" onchange="setListingModified()" /> '</nobr>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <select name="lon_hem" onchange="setListingModified()">
+                        <option value="E"{selLonE}>{t}E{/t}</option>
+                        <option value="W"{selLonW}>{t}W{/t}</option>
+                    </select>
+                </td>
+                <td>
+                    <nobr><input type="text" name="lon_deg" maxlength="3" value="{lon_h}" class="input30" onchange="setListingModified()" /> &deg;</nobr>
+                </td>
+                <td>
+                    <nobr><input type="text" name="lon_min" maxlength="6" value="{lon_min}" class="input50" onchange="setListingModified()" /> '</nobr>
+                </td>
+              </tr>
+            </table>
+            </div>
+            <input type="hidden" name="latitude" id="coord_lat" value="{coord_latitude}" />
+            <input type="hidden" name="longitude" id="coord_lon" value="{coord_longitude}" />
+            <a href="#" id="coord_toggle" style="display:none; font-size:11px"
+               data-label-6="{t}6 fields{/t}"
+               data-label-1="{t}1 field{/t}"
+               data-label-parse-error="{t}Could not parse coordinates{/t}"></a>
+            <script type="module" src="resource2/ocstyle/js/coord_input.js"></script>
+            {lat_message}{lon_message}
         </td>
     </tr>
     <tr><td class="spacer" colspan="2"></td></tr>

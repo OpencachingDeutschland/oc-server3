@@ -101,7 +101,7 @@ if ($cacheId != 0) {
     } else {
         // save masslog acception in cookie that expires on midnight if clicked
         if (isset($_REQUEST['suppressMasslogWarning']) && $_REQUEST['suppressMasslogWarning'] == 1) {
-            setcookie('ocsuppressmasslogwarn', '1', strtotime('tomorrow'));
+            setcookie('ocsuppressmasslogwarn', '1', ['expires' => strtotime('tomorrow'), 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
         }
     }
 
@@ -216,8 +216,8 @@ if ($cacheId != 0) {
 
     if ($validate['dateOk']) {
         $cookie_logdate = sprintf('%04d%02d%02d', $logDateYear, $logDateMonth, $logDateDay);
-        setcookie('oclogdate1', $cookie_logdate);
-        setcookie('oclogdate2', $cookie_logdate, time() + 4 * 60 * 60);
+        setcookie('oclogdate1', $cookie_logdate, ['expires' => 0, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
+        setcookie('oclogdate2', $cookie_logdate, ['expires' => time() + 4 * 60 * 60, 'path' => '/', 'secure' => true, 'httponly' => true, 'samesite' => 'Lax']);
     }
 
     // check log type

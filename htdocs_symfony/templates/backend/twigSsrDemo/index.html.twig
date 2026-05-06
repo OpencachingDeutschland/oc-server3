@@ -1,0 +1,116 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Twig SSR Demo – Opencaching Backend{% endblock %}
+
+{% block page_title %}<h2 class="mb-3">Twig SSR Demo</h2>{% endblock %}
+
+{% block page_content %}
+    <p class="text-muted mb-3">
+        Server-side rendered table using plain Twig + Bootstrap 5. Sorting, filtering, and
+        pagination are handled entirely by the Symfony controller — every interaction is a new
+        HTTP request. No JavaScript table library required.
+    </p>
+
+    <form method="get" action="{{ path('backend_twig_ssr_demo_index') }}" class="row g-2 mb-3">
+        <div class="col-auto">
+            <input type="text" name="q" value="{{ q }}" class="form-control"
+                   placeholder="Filter by code, name, owner or status">
+        </div>
+        <input type="hidden" name="sort" value="{{ sort }}">
+        <input type="hidden" name="dir"  value="{{ dir }}">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+        {% if q %}
+        <div class="col-auto">
+            <a href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir}) }}"
+               class="btn btn-outline-secondary">Clear</a>
+        </div>
+        {% endif %}
+    </form>
+
+    <p class="text-muted small mb-2">
+        {{ total }} cache{{ total != 1 ? 's' }}{% if q %} matching &ldquo;{{ q|e }}&rdquo;{% endif %}
+        &mdash; page {{ page }} of {{ totalPages }}
+    </p>
+
+    <table class="table table-striped table-hover table-sm">
+        <thead class="table-dark">
+            <tr>
+                {% set cols = {
+                    code:       'OC Code',
+                    name:       'Name',
+                    difficulty: 'D',
+                    terrain:    'T',
+                    owner:      'Owner',
+                    status:     'Status'
+                } %}
+                {% for field, label in cols %}
+                    {% set next_dir = (sort == field and dir == 'asc') ? 'desc' : 'asc' %}
+                    {% set center = field in ['difficulty', 'terrain'] %}
+                    <th{% if center %} class="text-center"{% endif %}>
+                        <a href="{{ path('backend_twig_ssr_demo_index', {sort: field, dir: next_dir, q: q, page: 1}) }}"
+                           class="text-decoration-none text-white">
+                            {{ label }}{% if sort == field %}&nbsp;{{ dir == 'asc' ? '▲' : '▼' }}{% endif %}
+                        </a>
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td><code>{{ row.code }}</code></td>
+                <td>{{ row.name }}</td>
+                <td class="text-center">{{ row.difficulty|number_format(1) }}</td>
+                <td class="text-center">{{ row.terrain|number_format(1) }}</td>
+                <td>{{ row.owner }}</td>
+                <td>{{ row.status }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-muted text-center py-3">No caches found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if totalPages > 1 %}
+    <nav>
+        <ul class="pagination pagination-sm">
+            <li class="page-item {{ page == 1 ? 'disabled' }}">
+                <a class="page-link"
+                   href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir, q: q, page: page - 1}) }}">«</a>
+            </li>
+            {% if page > 3 %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir, q: q, page: 1}) }}">1</a>
+                </li>
+                {% if page > 4 %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+            {% endif %}
+            {% for p in range(max(1, page - 2), min(totalPages, page + 2)) %}
+                <li class="page-item {{ p == page ? 'active' }}">
+                    <a class="page-link"
+                       href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir, q: q, page: p}) }}">{{ p }}</a>
+                </li>
+            {% endfor %}
+            {% if page < totalPages - 2 %}
+                {% if page < totalPages - 3 %}
+                    <li class="page-item disabled"><span class="page-link">…</span></li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir, q: q, page: totalPages}) }}">{{ totalPages }}</a>
+                </li>
+            {% endif %}
+            <li class="page-item {{ page == totalPages ? 'disabled' }}">
+                <a class="page-link"
+                   href="{{ path('backend_twig_ssr_demo_index', {sort: sort, dir: dir, q: q, page: page + 1}) }}">»</a>
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+{% endblock %}

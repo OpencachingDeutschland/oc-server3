@@ -1,4 +1,4 @@
-# Tabulator & AG Grid Demo — Documentation & Speaker Notes
+# Tabulator, AG Grid & Twig SSR Demo — Documentation & Speaker Notes
 
 ## Quick Reference
 
@@ -7,6 +7,7 @@
 | **Start server** | `ddev start` (or `ddev restart` if already running) |
 | **Tabulator demo** | `https://try-opencaching.ddev.site/backend/tabulator-demo` |
 | **AG Grid demo**   | `https://try-opencaching.ddev.site/backend/ag-grid-demo` |
+| **Twig SSR demo**  | `https://try-opencaching.ddev.site/backend/twig-ssr-demo` |
 | **Login** | `root` / `developer` |
 | **In navbar?** | No — navigate directly via URL |
 | **PR** | https://github.com/OpencachingDeutschland/oc-server3/pull/957 |
@@ -26,11 +27,17 @@
 
 ## What Was Built
 
-Two proof-of-concept pages in the new Symfony-based Opencaching backend, showing
-client-side table rendering with two libraries side by side:
-[Tabulator](https://tabulator.info) and [AG Grid Community](https://www.ag-grid.com).
-Both pages show the same data (up to 200 caches) and the same features — sorting, column
-filters, pagination, movable columns — using the identical JSON endpoint pattern.
+Three proof-of-concept pages in the new Symfony-based Opencaching backend, comparing three
+different architectural approaches to table rendering:
+
+| Demo | Approach | JS dependency |
+|---|---|---|
+| [Tabulator](https://tabulator.info) | Client-side, declarative config, built-in Ajax URL | ~500 KB CDN |
+| [AG Grid Community](https://www.ag-grid.com) | Client-side, explicit fetch(), more powerful | ~700 KB CDN |
+| Twig SSR | Server-side, plain HTML, no JS | None |
+
+All three pages show the same data (up to 25 caches per page from the local DB) and the
+same features: sorting, column filters, pagination.
 
 ---
 
@@ -118,6 +125,41 @@ more control over loading state and error handling.
 
 ---
 
+### `htdocs_symfony/src/Controller/Backend/TwigSsrDemoControllerBackend.php` *(new)*
+**A single controller with one route — no separate data endpoint.**
+
+| Route | Purpose |
+|---|---|
+| `GET /backend/twig-ssr-demo` | Renders the complete HTML page with data |
+
+The controller reads `?sort=`, `?dir=`, `?q=`, and `?page=` from the query string,
+builds two SQL queries (COUNT + data) with LIMIT/OFFSET, and passes everything to the
+template. Every interaction — sort, filter, page change — is a new HTTP request to the
+same route.
+
+**Why one route instead of two:** With SSR there is no separation between "page" and
+"data" — the controller delivers both in one step. This is the classic
+request-response model.
+
+---
+
+### `htdocs_symfony/templates/backend/twigSsrDemo/index.html.twig` *(new)*
+**The SSR demo template — pure Twig, no JS.**
+
+- Extends `backend/base.html.twig`
+- No CDN, no external dependency
+- A Bootstrap 5 `<table>` with `table-striped table-hover`
+- Column headers as sort links (`<a href="?sort=...&dir=...">`)
+- Sort indicator (▲/▼) via Twig conditional
+- Search form (GET) with hidden `sort`/`dir` fields so filter and sort stay active simultaneously
+- Bootstrap pagination with first/last page links and `…` separators
+
+**Why no JS:** The point of this demo is to show that sorting, filtering, and pagination
+can be handled entirely server-side. The tradeoff: every interaction triggers a page
+reload and the server must re-run the query.
+
+---
+
 ## What is NOT done (intentionally)
 
 - No navbar entry — the demo is a dev/evaluation page, not a production feature
@@ -156,6 +198,13 @@ environments, with no jQuery dependency. AG Grid is more powerful, but requires 
 explicit code: you fetch the data yourself and hand it to the grid API rather than just
 supplying a URL. In return you get more control.
 
-The core question for us is: which pattern do we want to use long-term? The pattern is
-identical in both — a thin JSON API endpoint, a client-side table. Only the library differs.
-Your feedback on UX, developer experience, and licensing helps us make that call."
+The third page at `/backend/twig-ssr-demo` shows the opposite approach: no JavaScript, no
+library, no CDN. Symfony and Twig render the complete page including data — sorting and
+filtering are plain links with query parameters, pagination is LIMIT/OFFSET in SQL. Every
+interaction is a new HTTP request. This is exactly the pattern the legacy PHP site uses today.
+
+What did you notice? The SSR page feels slower — every click reloads the page. The JS
+libraries respond instantly. But the SSR page has zero CDN dependencies and works without
+JavaScript in the browser. That is the tradeoff we need to discuss deliberately:
+interactivity versus simplicity. Your feedback helps us make the right call for the future
+of the backend."

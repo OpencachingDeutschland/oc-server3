@@ -1,4 +1,4 @@
-# Tabulator & AG Grid Demo — Dokumentation & Sprechernotizen
+# Tabulator, AG Grid & Twig-SSR-Demo — Dokumentation & Sprechernotizen
 
 ## Kurzreferenz
 
@@ -7,6 +7,7 @@
 | **Server starten** | `ddev start` (oder `ddev restart` falls bereits gestartet) |
 | **Tabulator-Demo** | `https://try-opencaching.ddev.site/backend/tabulator-demo` |
 | **AG-Grid-Demo**   | `https://try-opencaching.ddev.site/backend/ag-grid-demo` |
+| **Twig-SSR-Demo**  | `https://try-opencaching.ddev.site/backend/twig-ssr-demo` |
 | **Login** | `root` / `developer` |
 | **In der Navigation?** | Nein — direkt per URL aufrufen |
 
@@ -24,11 +25,17 @@
 
 ## Was wurde gebaut
 
-Zwei Proof-of-Concept-Seiten im neuen Symfony-basierten Opencaching-Backend, die
-clientseitiges Tabellen-Rendering mit zwei Bibliotheken im Direktvergleich demonstrieren:
-[Tabulator](https://tabulator.info) und [AG Grid Community](https://www.ag-grid.com).
-Beide Seiten zeigen dieselben Daten (bis zu 200 Caches) und dieselben Funktionen —
-Sortierung, Spaltenfilter, Paginierung, verschiebbare Spalten — mit identischem JSON-Endpunkt-Muster.
+Drei Proof-of-Concept-Seiten im neuen Symfony-basierten Opencaching-Backend, die drei
+verschiedene Architekturansatze fur Tabellen-Rendering demonstrieren und vergleichen:
+
+| Demo | Ansatz | JS-Abhangigkeit |
+|---|---|---|
+| [Tabulator](https://tabulator.info) | Clientseitig, deklarative Konfig, eingebaute Ajax-URL | ~500 KB CDN |
+| [AG Grid Community](https://www.ag-grid.com) | Clientseitig, explizites fetch(), machtiger | ~700 KB CDN |
+| Twig SSR | Serverseitig, reines HTML, kein JS | Keine |
+
+Alle drei Seiten zeigen dieselben Daten (bis zu 25 Caches pro Seite aus der lokalen DB) und
+dieselben Funktionen: Sortierung, Spaltenfilter, Paginierung.
 
 ---
 
@@ -117,6 +124,42 @@ aber auch mehr Kontrolle uber Ladezustand und Fehlerbehandlung.
 
 ---
 
+### `htdocs_symfony/src/Controller/Backend/TwigSsrDemoControllerBackend.php` *(neu)*
+**Ein einzelner Controller mit einer Route — kein separater Daten-Endpunkt.**
+
+| Route | Zweck |
+|---|---|
+| `GET /backend/twig-ssr-demo` | Rendert die vollstandige HTML-Seite mit Daten |
+
+Der Controller liest `?sort=`, `?dir=`, `?q=` und `?page=` aus dem Query-String,
+baut daraus zwei SQL-Abfragen (COUNT + Daten) mit LIMIT/OFFSET, und ubergibt alles
+an das Template. Jede Interaktion — Sortierung, Filter, Seitenwechsel — ist ein neuer
+HTTP-Request an dieselbe Route.
+
+**Warum eine Route statt zwei:** Bei SSR gibt es keine Trennung zwischen "Seite" und
+"Daten" — der Controller liefert beides in einem Schritt. Das ist das klassische
+Request-Response-Modell.
+
+---
+
+### `htdocs_symfony/templates/backend/twigSsrDemo/index.html.twig` *(neu)*
+**Das SSR-Demo-Template — reines Twig, kein JS.**
+
+- Erweitert `backend/base.html.twig`
+- Kein CDN, keine externe Abhangigkeit
+- Ein Bootstrap-5-`<table>` mit `table-striped table-hover`
+- Spaltenuberschriften als Sort-Links (`<a href="?sort=...&dir=...">`)
+- Sort-Indikator (▲/▼) via Twig-Bedingung
+- Suchformular (GET) mit versteckten `sort`/`dir`-Feldern, damit Filter und Sortierung
+  gleichzeitig aktiv bleiben
+- Bootstrap-Paginierung mit erster/letzter Seite und `…`-Trenner
+
+**Warum kein JS:** Der Punkt dieser Demo ist zu zeigen, dass man Sortierung, Filter und
+Paginierung komplett serverseitig abhandeln kann. Der Tradeoff: Jede Interaktion lost
+einen Seitenneuladen aus und der Server muss die Abfrage wiederholen.
+
+---
+
 ## Was bewusst NICHT gemacht wurde
 
 - Kein Navbar-Eintrag — die Demo ist eine Entwicklungs-/Evaluierungsseite, kein
@@ -160,7 +203,14 @@ weit verbreitet ist und kein jQuery benotigt. AG Grid ist kraftvoller, erfordert
 mehr expliziten Code: Man holt die Daten selbst per fetch() und ubergibt sie der Grid-API,
 anstatt einfach eine URL anzugeben. Dafur hat man mehr Kontrolle.
 
-Die Kernfrage fur uns ist: Welches Muster wollen wir langfristig einsetzen? Das Muster ist
-bei beiden identisch — schlanker JSON-API-Endpunkt, clientseitige Tabelle. Nur die
-Bibliothek unterscheidet sich. Euer Feedback zu UX, Entwicklererfahrung und Lizenz hilft
-uns, diese Entscheidung zu treffen."
+Die dritte Seite unter `/backend/twig-ssr-demo` zeigt den Gegenentwurf: kein JavaScript,
+keine Bibliothek, kein CDN. Symfony und Twig rendern die gesamte Seite inklusive Daten —
+Sortierung und Filter sind einfache Links mit Query-Parametern, Paginierung ist
+LIMIT/OFFSET in SQL. Jede Interaktion ist ein neuer HTTP-Request. Das ist exakt das Muster,
+das die alte PHP-Seite heute verwendet.
+
+Was habt ihr gesehen? Die SSR-Seite fuhlt sich langsamer an — jeder Klick ladt die Seite
+neu. Die JS-Bibliotheken reagieren sofort. Dafur hat die SSR-Seite null CDN-Abhangigkeiten
+und funktioniert ohne JavaScript im Browser. Das ist der Tradeoff, den wir bewusst
+diskutieren mussen: Interaktivitat gegen Einfachheit. Euer Feedback hilft uns, die richtige
+Entscheidung fur die Zukunft des Backends zu treffen."

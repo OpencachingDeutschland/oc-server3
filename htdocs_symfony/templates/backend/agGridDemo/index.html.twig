@@ -1,0 +1,54 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}AG Grid Demo – Opencaching Backend{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.4/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.4/styles/ag-theme-quartz.css">
+{% endblock %}
+
+{% block page_title %}<h2 class="mb-3">AG Grid Demo</h2>{% endblock %}
+
+{% block page_content %}
+    <p class="text-muted mb-3">
+        Client-side rendered table using <a href="https://www.ag-grid.com" target="_blank">AG Grid Community</a>.
+        Data is fetched from <code>{{ path('backend_ag_grid_demo_data') }}</code> (up to 200 caches).
+    </p>
+
+    <div id="caches-table" class="ag-theme-quartz" style="width: 100%;"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.4/dist/ag-grid-community.min.js"></script>
+    <script>
+        const gridApi = agGrid.createGrid(document.getElementById('caches-table'), {
+            domLayout: 'autoHeight',
+            pagination: true,
+            paginationPageSize: 25,
+            defaultColDef: {
+                sortable: true,
+                resizable: true,
+                floatingFilter: true,
+            },
+            initialState: {
+                sort: { sortModel: [{ colId: 'code', sort: 'asc' }] },
+            },
+            columnDefs: [
+                { field: 'code',       headerName: 'OC Code',    filter: 'agTextColumnFilter',   width: 110 },
+                { field: 'name',       headerName: 'Name',        filter: 'agTextColumnFilter',   flex: 1, minWidth: 200 },
+                { field: 'difficulty', headerName: 'Difficulty',  filter: 'agNumberColumnFilter', width: 110,
+                  valueFormatter: p => p.value.toFixed(1) },
+                { field: 'terrain',    headerName: 'Terrain',     filter: 'agNumberColumnFilter', width: 100,
+                  valueFormatter: p => p.value.toFixed(1) },
+                { field: 'owner',      headerName: 'Owner',       filter: 'agTextColumnFilter',   width: 150 },
+                { field: 'status',     headerName: 'Status',      filter: 'agTextColumnFilter',   width: 130 },
+            ],
+        });
+
+        fetch("{{ path('backend_ag_grid_demo_data') }}")
+            .then(r => r.json())
+            .then(data => gridApi.setGridOption('rowData', data));
+    </script>
+{% endblock %}

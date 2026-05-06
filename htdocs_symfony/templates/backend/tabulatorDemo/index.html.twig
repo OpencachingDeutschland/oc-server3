@@ -1,0 +1,44 @@
+{% extends 'backend/base.html.twig' %}
+
+{% block title %}Tabulator Demo – Opencaching Backend{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.3.0/dist/css/tabulator_bootstrap5.min.css">
+{% endblock %}
+
+{% block page_title %}<h2 class="mb-3">Tabulator Demo</h2>{% endblock %}
+
+{% block page_content %}
+    <p class="text-muted mb-3">
+        Client-side rendered table using <a href="https://tabulator.info" target="_blank">Tabulator</a>.
+        Data is fetched from <code>{{ path('backend_tabulator_demo_data') }}</code> (up to 200 caches).
+    </p>
+
+    <div id="caches-table"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://unpkg.com/tabulator-tables@6.3.0/dist/js/tabulator.min.js"></script>
+    <script>
+        new Tabulator("#caches-table", {
+            ajaxURL: "{{ path('backend_tabulator_demo_data') }}",
+            layout: "fitColumns",
+            pagination: true,
+            paginationSize: 25,
+            movableColumns: true,
+            initialSort: [{ column: "code", dir: "asc" }],
+            columns: [
+                { title: "OC Code",    field: "code",       sorter: "string", headerFilter: true, width: 110 },
+                { title: "Name",       field: "name",       sorter: "string", headerFilter: true, minWidth: 200 },
+                { title: "Difficulty", field: "difficulty", sorter: "number", hozAlign: "center", width: 110,
+                  formatter: function(cell) { return cell.getValue().toFixed(1); } },
+                { title: "Terrain",    field: "terrain",    sorter: "number", hozAlign: "center", width: 100,
+                  formatter: function(cell) { return cell.getValue().toFixed(1); } },
+                { title: "Owner",      field: "owner",      sorter: "string", headerFilter: true, width: 150 },
+                { title: "Status",     field: "status",     sorter: "string", headerFilter: true, width: 130 },
+            ],
+        });
+    </script>
+{% endblock %}

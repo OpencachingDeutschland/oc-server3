@@ -5,7 +5,7 @@ namespace Oc;
 use Oc\GlobalContext\GlobalContext;
 use OcLegacy\Template\LegacyTemplateTrait;
 use RuntimeException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller as FrameworkController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as FrameworkController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -45,12 +45,12 @@ abstract class AbstractController extends FrameworkController
      *
      * @param ContainerInterface|null $container A ContainerInterface instance or null.
      */
-    public function setContainer(?ContainerInterface $container = null): void
+    public function setContainer(?\Psr\Container\ContainerInterface $container = null): ?\Psr\Container\ContainerInterface
     {
         parent::setContainer($container);
 
         if ($container === null) {
-            return;
+            return null;
         }
 
         $requestStack = $container->get('request_stack');

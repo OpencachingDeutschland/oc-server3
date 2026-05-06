@@ -7,14 +7,15 @@ namespace Oc\Command;
 
 use Exception;
 use ScssPhp\ScssPhp\Compiler;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class CreateWebCacheCommand extends ContainerAwareCommand
+class CreateWebCacheCommand extends Command
 {
     const COMMAND_NAME = 'cache:web:create';
 
@@ -22,6 +23,20 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      * @var OutputInterface
      */
     private $output;
+
+    private Filesystem $filesystem;
+    private string $projectDir;
+
+    /**
+     * @param Filesystem $filesystem
+     * @param string $projectDir
+     */
+    public function __construct(Filesystem $filesystem, ParameterBagInterface $parameterBag)
+    {
+        $this->filesystem = $filesystem;
+        $this->projectDir = $parameterBag->get('kernel.project_dir');
+        parent::__construct();
+    }
 
     /**
      * Configures the command.
@@ -48,7 +63,8 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     {
         $this->output = $output;
 
-        $projectDir = $this->getContainer()->getParameter('kernel.project_dir');
+//        $projectDir = $this->getContainer()->getParameter('kernel.project_dir');
+        $projectDir = $this->projectDir;
 
         $output->writeln('Generating WebCache');
 
@@ -145,6 +161,8 @@ class CreateWebCacheCommand extends ContainerAwareCommand
         $applicationScssPath = $projectDir . '/theme/frontend/scss/';
 
         $scss = new Compiler();
+        // TODO: Ersatz für setIgnoreErrors() ist setQuietDeps(). Ist aber erst ab scssphp/scssphp Version 2 verfügbar
+        // aktuell ist noch Version 1.13 im Einsatz. Bis zum Versionsupgrade kann die Deprecation Warning nicht gelöst werden.
         $scss->setIgnoreErrors(true);
         $scss->addImportPath($applicationScssPath);
         $scss->addImportPath(function ($path) use ($projectDir) {
@@ -181,12 +199,12 @@ class CreateWebCacheCommand extends ContainerAwareCommand
 
         file_put_contents(
             $projectDir . '/web/assets/css/style.min.css',
-            $scss->compile(file_get_contents($applicationScssPath . '/all.scss'))
+            $scss->compileString(file_get_contents($applicationScssPath . '/all.scss'))->getCss()
         );
 
         file_put_contents(
             $projectDir . '/web/assets/css/legacy.min.css',
-            $scss->compile(file_get_contents($applicationScssPath . '/legacy.scss'))
+            $scss->compileString(file_get_contents($applicationScssPath . '/legacy.scss'))->getCss()
         );
 
         $this->output->writeln('<info>- Stylesheets generated</info>');

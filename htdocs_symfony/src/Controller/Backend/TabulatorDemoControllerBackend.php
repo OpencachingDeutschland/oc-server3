@@ -39,6 +39,11 @@ class TabulatorDemoControllerBackend extends AbstractController
             LIMIT 200'
         );
 
+        foreach ($rows as &$row) {
+            $row['difficulty'] = (float) $row['difficulty'];
+            $row['terrain']    = (float) $row['terrain'];
+        }
+
         return $this->json($rows);
     }
 }

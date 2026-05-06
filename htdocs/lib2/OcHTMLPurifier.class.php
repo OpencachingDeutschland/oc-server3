@@ -118,9 +118,9 @@ class OcHTMLPurifier extends HTMLPurifier
     /**
      * @param string $text
      * @param null|mixed $config
-     * @return mixed
+     * @return string|array
      */
-    public function purify($text, $config = null)
+    public function purify($text, mixed $config = null) : string|array
     {
         // HTMLPurifier deletes spaces between images; apply space protection:
         do {

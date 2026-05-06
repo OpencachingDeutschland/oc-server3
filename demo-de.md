@@ -209,8 +209,26 @@ Sortierung und Filter sind einfache Links mit Query-Parametern, Paginierung ist
 LIMIT/OFFSET in SQL. Jede Interaktion ist ein neuer HTTP-Request. Das ist exakt das Muster,
 das die alte PHP-Seite heute verwendet.
 
-Was habt ihr gesehen? Die SSR-Seite fuhlt sich langsamer an — jeder Klick ladt die Seite
-neu. Die JS-Bibliotheken reagieren sofort. Dafur hat die SSR-Seite null CDN-Abhangigkeiten
-und funktioniert ohne JavaScript im Browser. Das ist der Tradeoff, den wir bewusst
-diskutieren mussen: Interaktivitat gegen Einfachheit. Euer Feedback hilft uns, die richtige
-Entscheidung fur die Zukunft des Backends zu treffen."
+Jetzt schaut euch die Templates nebeneinander an. Das Tabulator-Template hat 44 Zeilen.
+AG Grid hat 54. Das Twig-SSR-Template hat 116 — fast dreimal so viel — und das zahlt nicht
+die zusatzlichen 50 Zeilen PHP im Controller. Und trotz all diesem Code leistet es *weniger*:
+keine verschiebbaren Spalten, keine sofortige Reaktion, jede Sortierung oder Filterung ladt
+die Seite neu.
+
+Was macht der ganze Mehrcode? Er reimplementiert von Hand und schlechter genau das, was die
+Bibliotheken kostenlos liefern: Sort-Link-Generierung, Richtungsumschalten, das Durchschleifen
+des aktuellen Filters durch versteckte Formularfelder damit er beim Klick auf eine
+Spaltenuberschrift nicht verlorengeht, und einen Paginator mit Ellipsis-Logik. Diese Logik
+sitzt im Template und Controller statt in einer gut getesteten Bibliothek — und jedes neue
+Feature (Spaltenbreite anpassen, Zeilenauswahl, CSV-Export) bedeutet mehr PHP und Twig von
+Hand schreiben.
+
+Twig SSR ist absolut das richtige Werkzeug fur statische Inhalte, Formulare und einmalig
+gelesene Detailseiten — dafur ist es gebaut. Fur eine sortierbare, filterbare Datentabelle
+ist es das falsche Werkzeug. Die Komplexitat landet am falschen Ort, die UX ist schlechter,
+und der Code ist schwerer zu warten.
+
+Also: **der Weg, den wir nicht gehen sollten, ist reines Twig SSR fur interaktive Datentabellen.**
+Der JS-Bibliotheks-Ansatz ist nicht modern um seiner selbst willen — er ist schlicht weniger
+Code, mehr Funktionalitat und eine bessere Trennung der Verantwortlichkeiten. Die verbleibende
+Frage ist: welche Bibliothek? Genau dazu wollen wir heute euer Feedback."

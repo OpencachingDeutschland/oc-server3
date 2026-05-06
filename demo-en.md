@@ -203,8 +203,24 @@ library, no CDN. Symfony and Twig render the complete page including data — so
 filtering are plain links with query parameters, pagination is LIMIT/OFFSET in SQL. Every
 interaction is a new HTTP request. This is exactly the pattern the legacy PHP site uses today.
 
-What did you notice? The SSR page feels slower — every click reloads the page. The JS
-libraries respond instantly. But the SSR page has zero CDN dependencies and works without
-JavaScript in the browser. That is the tradeoff we need to discuss deliberately:
-interactivity versus simplicity. Your feedback helps us make the right call for the future
-of the backend."
+Now look at the templates side by side. The Tabulator template is 44 lines. AG Grid is 54.
+The Twig SSR template is 116 — nearly three times as long — and that does not count the
+extra 50 lines of PHP in the controller. And despite all that code it does *less*: no
+movable columns, no instant response, every sort or filter change reloads the page.
+
+What is all that extra code doing? It is reimplementing, by hand and badly, exactly what
+the libraries give you for free: sort link generation, direction toggling, threading the
+current filter through hidden form fields so it does not get lost when you click a column
+header, and a paginator with ellipsis logic. That logic lives in the template and
+controller instead of in a well-tested library — and every new feature you want (column
+resize, row selection, CSV export) means writing more PHP and Twig by hand.
+
+Twig SSR is absolutely the right tool for static content, forms, and read-once detail
+pages — that is what it is designed for. But for a sortable, filterable data table it is
+the wrong tool. The complexity ends up in the wrong place, the UX is worse, and the code
+is harder to maintain.
+
+So: **the path not to go is pure Twig SSR for interactive data tables.** The JS library
+approach is not modern for its own sake — it is genuinely less code, more capability, and
+a better separation of concerns. The remaining question is which library. That is what we
+want your feedback on today."

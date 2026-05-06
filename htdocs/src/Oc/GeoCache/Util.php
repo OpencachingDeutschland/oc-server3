@@ -6,8 +6,12 @@
 
 namespace Oc\GeoCache;
 
-use Eluceo\iCal\Component\Calendar;
-use Eluceo\iCal\Component\Event;
+use DateTimeImmutable;
+use Eluceo\iCal\Domain\Entity\Calendar;
+use Eluceo\iCal\Domain\Entity\Event;
+use Eluceo\iCal\Presentation\Factory\CalendarFactory;
+use Eluceo\iCal\Domain\ValueObject\Date;
+use Eluceo\iCal\Domain\ValueObject\SingleDay;
 use Endroid\QrCode\Color\Color;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
@@ -18,6 +22,7 @@ use Endroid\QrCode\Label\Margin\Margin;
 use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
+use InvalidArgumentException;
 use Oc\GeoCache\Enum\GeoCacheType;
 use Oc\GeoCache\Persistence\GeoCache\GeoCacheEntity;
 
@@ -26,22 +31,21 @@ class Util
     public function generateIcsStringFromGeoCache(GeoCacheEntity $geoCache): string
     {
         if ($geoCache->type !== GeoCacheType::EVENT) {
-            throw new \InvalidArgumentException('the given geoCache is not an event cache!');
+            throw new InvalidArgumentException('the given geoCache is not an event cache!');
         }
 
-        $vCalendar = new Calendar('https://www.opencaching.de/' . $geoCache->wpOc);
-        $vEvent = new Event();
+        // Event-Domain-Objekt erstellen
+        $event = new Event();
+        $event->setSummary($geoCache->name)
+              ->setDescription('https://www.opencaching.de/viewcache.php?cacheid=' . $geoCache->cacheId)
+              ->setOccurrence(new SingleDay(new Date(DateTimeImmutable::createFromMutable($geoCache->dateHidden))));
 
-        $vEvent
-            ->setDtStart($geoCache->dateHidden)
-            ->setDtEnd($geoCache->dateHidden->add(new \DateInterval('PT1H')))
-            ->setNoTime(true)
-            ->setSummary($geoCache->name)
-            ->setDescription('https://www.opencaching.de/viewcache.php?cacheid=' . $geoCache->cacheId);
+        // Calendar-Domain-Objekt erstellen
+        $calendar = new Calendar([$event]);
+        $calendar->setProductIdentifier('https://www.opencaching.de/' . $geoCache->wpOc);
 
-        $vCalendar->addComponent($vEvent);
-
-        return $vCalendar->render();
+        // Domain-Objekt in eine Präsentation transformieren und zurückgebem
+        return new CalendarFactory()->createCalendar($calendar);
     }
 
     public function generateQrCodeFromString(string $qrCodeValue): string

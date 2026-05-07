@@ -562,31 +562,37 @@ function sql_free_result($rs)
     return mysqli_free_result($rs);
 }
 
-function mb_trim($str)
-{
-    $bLoop = true;
-    while ($bLoop == true) {
-        $sPos = mb_substr($str, 0, 1);
+if (!function_exists('mb_trim')) {
+    /**
+     * @param $str
+     * @return string
+     */
+    function mb_trim($str) : string
+    {
+        $bLoop = true;
+        while ($bLoop === true) {
+            $sPos = mb_substr($str, 0, 1);
 
-        if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
-            $str = mb_substr($str, 1, mb_strlen($str) - 1);
-        } else {
-            $bLoop = false;
+            if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
+                $str = mb_substr($str, 1, mb_strlen($str) - 1);
+            } else {
+                $bLoop = false;
+            }
         }
-    }
 
-    $bLoop = true;
-    while ($bLoop == true) {
-        $sPos = mb_substr($str, -1, 1);
+        $bLoop = true;
+        while ($bLoop === true) {
+            $sPos = mb_substr($str, -1, 1);
 
-        if ($sPos == ' ' || $sPos == "\r" || $sPos == "\n" || $sPos == "\t" || $sPos == "\x0B" || $sPos == "\0") {
-            $str = mb_substr($str, 0, mb_strlen($str) - 1);
-        } else {
-            $bLoop = false;
+            if ($sPos === ' ' || $sPos === "\r" || $sPos === "\n" || $sPos === "\t" || $sPos === "\x0B" || $sPos === "\0") {
+                $str = mb_substr($str, 0, mb_strlen($str) - 1);
+            } else {
+                $bLoop = false;
+            }
         }
-    }
 
-    return $str;
+        return $str;
+    }
 }
 
 /**

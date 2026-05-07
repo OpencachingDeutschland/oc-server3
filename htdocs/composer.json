@@ -1,5 +1,5 @@
 {
-  "_comment": "Restriktion auf monolog/monolog 2.* kann erstraus mit Symfony 6.4; symfony/monolog-bundle ab 3.11 unterstützt Symfony 6.4",
+  "_comment": "Restriktion auf monolog/monolog 2.* kann erst raus mit Symfony 6.4; symfony/monolog-bundle ab 3.11 unterstützt Symfony 6.4; doctrine/doctrine-bundle 2.14+ erwartet Symf. 6.4; doctrine/orm geht erst auf 3.* mit Symfony 6 (dann newcaches.php anpassen)",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
@@ -19,13 +19,13 @@
     "php": ">=8.4.0",
     "beberlei/doctrineextensions": "^1.0",
     "components/jquery": "^3.2",
-    "doctrine/doctrine-bundle": "<=2.18.2",
+    "doctrine/doctrine-bundle": "^2.13",
     "doctrine/doctrine-migrations-bundle": "^3.0",
     "doctrine/orm": "^2.20|^3.0",
     "eluceo/ical": "^2.0",
     "endroid/qr-code": "^4.0|^5.0|^6.0",
     "ezyang/htmlpurifier": "^v4.8",
-    "jms/translation-bundle": "^1.2",
+    "jms/translation-bundle": "^1.2|^2.0",
     "knplabs/knp-menu-bundle": "^3.2",
     "league/commonmark": "^2.0",
     "league/csv": "^9.6",
@@ -33,7 +33,7 @@
     "mervick/material-design-icons": "^2.2",
     "nyholm/psr7": "^1.8",
     "opencaching/okapi": "dev-master",
-    "scssphp/scssphp": "^1.0.0|^2.0",
+    "scssphp/scssphp": "^2.0",
     "sensio/framework-extra-bundle": "^6.0",
     "smarty/smarty": "dev-development",
     "symfony/monolog-bundle": "^3.0",
@@ -52,10 +52,10 @@
     "ext-zlib": "*"
   },
   "require-dev": {
-    "fig-r/psr2r-sniffer": "2.0",
+    "fig-r/psr2r-sniffer": "^2.0",
     "nette/php-generator": "^4.0",
     "phpunit/phpunit": "^10.0|^11.0|^12.0|^13.0",
-    "squizlabs/php_codesniffer": "^2.6|^3.0|^4.0",
+    "squizlabs/php_codesniffer": "^3.0|^4.0",
     "symfony/phpunit-bridge": "^8.0"
   },
   "repositories": [

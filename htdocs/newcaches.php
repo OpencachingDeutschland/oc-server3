@@ -3,9 +3,9 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
-use Doctrine\Common\Collections\ArrayCollection;
+//use Doctrine\Common\Collections\ArrayCollection; // TODO: ArrayCollection und Query\Parameter werden erst mit der neuen ->setParameters()-Anweisung benötigt. Siehe unten
 use Doctrine\DBAL\Connection;
-use Doctrine\ORM\Query\Parameter;
+//use Doctrine\ORM\Query\Parameter;
 
 require __DIR__ . '/lib2/web.inc.php';
 
@@ -69,20 +69,21 @@ if (!$tpl->is_cached()) {
             '`ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`= :cacheAttributeId'
         )
         ->where('`caches`.`status` = :cacheStatus')
-//        ->setParameters(
-//            [
-//                'language' => $opt['template']['locale'],
-//                'cacheStatus' => 1,
-//                'cacheAttributeId' => 6,
-//            ]
-//        )
         ->setParameters(
-            new ArrayCollection([
-                new Parameter('language', $opt['template']['locale']),
-                new Parameter('cacheStatus', 1),
-                new Parameter('cacheAttributeId', 6),
-            ])
+            [
+                'language' => $opt['template']['locale'],
+                'cacheStatus' => 1,
+                'cacheAttributeId' => 6,
+            ]
         )
+//        TODO: obiges ->setParameters mit diesen Zeilen hier ersetzen, sobald doctrine/orm-Bundle auf mind. Version 3.1.3 aktualisiert. Bis 3.1.2 muss noch der alte Code bleiben
+//        ->setParameters(
+//            new ArrayCollection([
+//                new Parameter('language', $opt['template']['locale']),
+//                new Parameter('cacheStatus', 1),
+//                new Parameter('cacheAttributeId', 6),
+//            ])
+//        )
         ->orderBy('caches.' . $dateField, $sortOrder)
         ->setFirstResult((int) $startAt)
         ->setMaxResults((int) $perpage);

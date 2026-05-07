@@ -12,15 +12,15 @@ else
     unzip -o translations.zip	
     #rm -f translations.zip
     cd ..
-    ./htdocs/bin/console translation:extract de --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract en --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract fr --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract el --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract es --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract it --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract nl --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract pl --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
-    ./htdocs/bin/console translation:extract ru --dir=%kernel.project_dir%/app/Resources/translations --output-dir=%kernel.project_dir%/app/Resources/translations
+    ./htdocs/bin/console translation:extract de --force
+    ./htdocs/bin/console translation:extract en --force
+    ./htdocs/bin/console translation:extract fr --force
+    ./htdocs/bin/console translation:extract el --force
+    ./htdocs/bin/console translation:extract es --force
+    ./htdocs/bin/console translation:extract it --force
+    ./htdocs/bin/console translation:extract nl --force
+    ./htdocs/bin/console translation:extract pl --force
+    ./htdocs/bin/console translation:extract ru --force
 
     php ./bin/clear-webcache.php
 fi

@@ -5,6 +5,7 @@
 
 namespace Oc\Command;
 
+use Doctrine\DBAL\Exception;
 use Oc\Translation\CrowdinImport;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,7 +19,7 @@ class ImportLegacyTranslationCommand extends SymfonyCommand
     /**
      * @var CrowdinImport
      */
-    private $crowdinImport;
+    private CrowdinImport $crowdinImport;
 
     public function __construct(CrowdinImport $crowdinImport)
     {
@@ -36,10 +37,16 @@ class ImportLegacyTranslationCommand extends SymfonyCommand
             ->setDescription('import translation from crowdin into legacy translation system');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws Exception
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->crowdinImport->importTranslations();
 
-        return null;
+        return 0;
     }
 }

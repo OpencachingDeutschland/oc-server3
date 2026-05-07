@@ -1,5 +1,5 @@
 {
-  "_comment": "",
+  "_comment": "Restriktion auf monolog/monolog 2.* kann erstraus mit Symfony 6.4; symfony/monolog-bundle ab 3.11 unterstützt Symfony 6.4",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
@@ -19,9 +19,9 @@
     "php": ">=8.4.0",
     "beberlei/doctrineextensions": "^1.0",
     "components/jquery": "^3.2",
-    "doctrine/doctrine-bundle": "^2.6.4",
+    "doctrine/doctrine-bundle": "<=2.18.2",
     "doctrine/doctrine-migrations-bundle": "^3.0",
-    "doctrine/orm": "^2.5",
+    "doctrine/orm": "^2.20|^3.0",
     "eluceo/ical": "^2.0",
     "endroid/qr-code": "^4.0|^5.0|^6.0",
     "ezyang/htmlpurifier": "^v4.8",
@@ -29,18 +29,19 @@
     "knplabs/knp-menu-bundle": "^3.2",
     "league/commonmark": "^2.0",
     "league/csv": "^9.6",
+    "monolog/monolog": "^2.0",
     "mervick/material-design-icons": "^2.2",
     "nyholm/psr7": "^1.8",
     "opencaching/okapi": "dev-master",
     "scssphp/scssphp": "^1.0.0|^2.0",
     "sensio/framework-extra-bundle": "^6.0",
     "smarty/smarty": "dev-development",
-    "symfony/monolog-bundle": "^3.5",
+    "symfony/monolog-bundle": "^3.0",
     "symfony/polyfill-apcu": "^1.0",
     "symfony/swiftmailer-bundle": "^3.4",
-    "symfony/symfony": "4.4.*",
+    "symfony/symfony": "^5.0",
+    "symfony/twig-pack": "^1.0",
     "twbs/bootstrap": "^5.0",
-    "twig/extensions": "^1.3",
     "ext-gd": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
@@ -83,7 +84,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "4.4.*"
+      "require": "5.0.*"
     }
   }
 }

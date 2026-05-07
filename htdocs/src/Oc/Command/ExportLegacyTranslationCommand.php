@@ -5,6 +5,7 @@
 
 namespace Oc\Command;
 
+use Doctrine\DBAL\Exception;
 use Oc\Translation\CrowdinExport;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
@@ -38,8 +39,16 @@ class ExportLegacyTranslationCommand extends SymfonyCommand
             ->setDescription('export translation legacy translation system to crowdin');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return null
+     * @throws Exception
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): null
     {
         $this->crowdinExport->exportTranslations();
+
+        return null;
     }
 }

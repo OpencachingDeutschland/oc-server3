@@ -29,7 +29,7 @@ class OkapiCronjobsCommand extends Command
             ->setDescription('executes okapi5 cronjobs');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    protected function execute(InputInterface $input, OutputInterface $output): null
     {
         require_once __DIR__ . '/../../../okapi/autoload.php';
         Okapi::execute_prerequest_cronjobs();

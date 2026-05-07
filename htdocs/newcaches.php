@@ -3,7 +3,9 @@
  * for license information see LICENSE.md
  ***************************************************************************/
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Connection;
+use Doctrine\ORM\Query\Parameter;
 
 require __DIR__ . '/lib2/web.inc.php';
 
@@ -67,12 +69,19 @@ if (!$tpl->is_cached()) {
             '`ca`.`cache_id`=`caches`.`cache_id` AND `ca`.`attrib_id`= :cacheAttributeId'
         )
         ->where('`caches`.`status` = :cacheStatus')
+//        ->setParameters(
+//            [
+//                'language' => $opt['template']['locale'],
+//                'cacheStatus' => 1,
+//                'cacheAttributeId' => 6,
+//            ]
+//        )
         ->setParameters(
-            [
-                'language' => $opt['template']['locale'],
-                'cacheStatus' => 1,
-                'cacheAttributeId' => 6,
-            ]
+            new ArrayCollection([
+                new Parameter('language', $opt['template']['locale']),
+                new Parameter('cacheStatus', 1),
+                new Parameter('cacheAttributeId', 6),
+            ])
         )
         ->orderBy('caches.' . $dateField, $sortOrder)
         ->setFirstResult((int) $startAt)

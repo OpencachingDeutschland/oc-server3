@@ -57,7 +57,7 @@ doctrine:
         # Will be removed with my upcoming refactoring of field-notes.
         mappings:
             Oc:
-                type: annotation
+                type: attribute
                 prefix: Oc\
                 dir: '%kernel.project_dir%/src/Oc/'
                 is_bundle: false

@@ -32,8 +32,8 @@ class PageController extends AbstractController
     /**
      * Index action to show given page by slug.
      *
-     * @Route("/page/{slug}/", name="page")
      */
+    #[Route(path: '/page/{slug}/', name: 'page')]
     public function indexAction(string $slug): Response
     {
         $this->setMenu(MNU_START);

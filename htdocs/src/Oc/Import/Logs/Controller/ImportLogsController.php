@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-/**
- * @Route("Oc\Import\Logs\Controller\ImportLogsController", name="importlogs_index")
- */
+#[Route(path: '/import/logs', name: 'importlogs_index')]
 class ImportLogsController extends AbstractController
 {
     /**
@@ -25,9 +23,9 @@ class ImportLogsController extends AbstractController
     }
 
     /**
-     * @Route(path="/import/logs")
      * @throws Exception
      */
+    #[Route(path: '/import/logs')]
     public function indexAction(): Response
     {
         error_reporting(E_ALL);

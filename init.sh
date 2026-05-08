@@ -16,7 +16,7 @@ printf '\n***\n*** run database and cache updates \n***\n'
 php bin/dbupdate.php
 
 printf '\n***\n*** Install OKAPI \n***\n'
-curl https://opencaching.ddev.site/okapi/update?install=true
+curl -k https://opencaching.ddev.site/okapi/update?install=true
 
 printf '\n***\n*** updating database structures ... \n***\n'
 php bin/dbsv-update.php

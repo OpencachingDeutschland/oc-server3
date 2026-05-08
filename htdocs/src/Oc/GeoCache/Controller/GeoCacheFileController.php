@@ -30,9 +30,7 @@ class GeoCacheFileController extends AbstractController
         $this->geoCacheUtil = $geoCacheUtil;
     }
 
-    /**
-     * @Route("/api/geocache/qrCodes")
-     */
+    #[Route(path: '/api/geocache/qrCodes')]
     public function generateQrCode(Request $request): Response
     {
         $waypoint = $request->get('wp');
@@ -57,9 +55,7 @@ class GeoCacheFileController extends AbstractController
         return $response;
     }
 
-    /**
-     * @Route("/api/geocache/qrCodes/ics")
-     */
+    #[Route(path: '/api/geocache/qrCodes/ics')]
     public function generateQrCodeIcs(Request $request): Response
     {
         $waypoint = $request->get('wp');

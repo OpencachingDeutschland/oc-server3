@@ -1,5 +1,5 @@
 {
-  "_comment": "Restriktion auf monolog/monolog 2.* kann erst raus mit Symfony 6.4; symfony/monolog-bundle ab 3.11 unterstützt Symfony 6.4; doctrine/doctrine-bundle 2.14+ erwartet Symf. 6.4; doctrine/orm geht erst auf 3.* mit Symfony 6 (dann newcaches.php anpassen)",
+  "_comment": "Restriktion auf monolog/monolog 2.* kann erst raus mit Symfony 6.4; symfony/monolog-bundle ab 3.11 unterstützt Symfony 6.4; doctrine/doctrine-bundle 2.14+ erwartet Symf. 6.4; doctrine/orm geht erst auf 3.* mit Symfony 6 (dann newcaches.php anpassen); mit neureren/doctrine-bundle und /orm verschwindet doctrine/cache automatisch",
   "name": "opencaching/oc-server",
   "license": "GNU General Public License",
   "description": "opencaching.de source code",
@@ -34,7 +34,6 @@
     "nyholm/psr7": "^1.8",
     "opencaching/okapi": "dev-master",
     "scssphp/scssphp": "^2.0",
-    "sensio/framework-extra-bundle": "^6.0",
     "smarty/smarty": "dev-development",
     "symfony/monolog-bundle": "^3.0",
     "symfony/polyfill-apcu": "^1.0",

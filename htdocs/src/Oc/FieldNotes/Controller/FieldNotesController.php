@@ -52,8 +52,8 @@ class FieldNotesController extends AbstractController
 
     /**
      * Index action for field-notes.
-     * @Route("/field-notes/", name="field_notes.index")
      */
+    #[Route(path: '/field-notes/', name: 'field_notes.index')]
     public function indexAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -100,9 +100,8 @@ class FieldNotesController extends AbstractController
 
     /**
      * Action to delete one field-note.
-     *
-     * @Route("/field-notes/delete/{id}", name="field_notes.delete")
      */
+    #[Route(path: '/field-notes/delete/{id}', name: 'field_notes.delete')]
     public function deleteAction(int $id): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -130,9 +129,8 @@ class FieldNotesController extends AbstractController
 
     /**
      * Action to delete multiple field-notes.
-     *
-     * @Route("/field-notes/delete-multiple/", name="field_notes.delete_multiple")
      */
+    #[Route(path: '/field-notes/delete-multiple/', name: 'field_notes.delete_multiple')]
     public function deleteMultipleAction(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_USER');

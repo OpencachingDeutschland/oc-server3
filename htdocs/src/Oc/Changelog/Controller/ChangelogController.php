@@ -3,14 +3,16 @@
 namespace Oc\Changelog\Controller;
 
 use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Exception\CommonMarkException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-/**
- * @Route("Oc\Changelog\Controller\ChangelogController", name="changelog_index")
- */
+#[Route(path: '/changelog', name: 'changelog_index')]
 class ChangelogController extends AbstractController
 {
     /**
@@ -30,8 +32,12 @@ class ChangelogController extends AbstractController
     }
 
     /**
-     * @Route(path="/changelog", name="changelog.index")
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     * @throws CommonMarkException
      */
+    #[Route(path: '/changelog', name: 'changelog.index')]
     public function indexAction(): Response
     {
         $changelog = $this->markConverter

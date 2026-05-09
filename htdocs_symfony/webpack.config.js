@@ -80,7 +80,7 @@ Encore
 
 .enableIntegrityHashes(Encore.isProduction())
 
-.autoProvidejQuery()
+// .autoProvidejQuery() - Removed to eliminate jQuery dependency
 
 .addPlugin(new StylelintPlugin({
     // Behebt einfache Fehler (wie Einrückungen) automatisch beim Speichern

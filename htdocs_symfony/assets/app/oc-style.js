@@ -8,7 +8,6 @@
 import './styles/oc-style.scss';
 
 // Import thrid pary packagist
-import $ from 'jquery';
 import 'bootstrap';
 
 console.log('Loaded OC4 entrypoint');

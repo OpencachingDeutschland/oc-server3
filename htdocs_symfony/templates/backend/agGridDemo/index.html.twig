@@ -20,7 +20,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.4/dist/ag-grid-community.min.js"></script>
     <script>
         const gridApi = agGrid.createGrid(document.getElementById('caches-table'), {

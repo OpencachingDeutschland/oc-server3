@@ -55,7 +55,6 @@ class MenuGenerator
 
         $this->addMenuItem($menu, 'menuHide', $this->translator->trans('Hide'), '', 'icon', 'fas fa-hiking');
 
-        $this->addMenuItem($menu, 'menuMap', $this->translator->trans('Map'), 'app_map_show', 'icon', 'fas fa-map');
         $this->addMenuItem($menu, 'menuLiveMap', $this->translator->trans('Live Map'), 'app_livemap', 'icon', 'fas fa-map-marked-alt');
 
 

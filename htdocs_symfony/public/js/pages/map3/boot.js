@@ -28,6 +28,26 @@ if (initLat !== null && initLon !== null && initZoom !== null) {
   mapRoot.setView([51.5, 10.0], 6);
 }
 
+// ScrollTopControl — registered first so it renders above other controls
+const topCenter = L.DomUtil.create('div', 'leaflet-top leaflet-center', mapRoot._controlContainer);
+mapRoot._controlCorners['topcenter'] = topCenter;
+
+const ScrollTopControl = L.Control.extend({
+  onAdd: function() {
+    const btn = L.DomUtil.create('div', 'map-escape-top');
+    btn.innerHTML = '⬆️';
+    btn.title = 'Scroll to top of page';
+    btn.setAttribute('role', 'button');
+    btn.setAttribute('aria-label', 'Scroll to top');
+    L.DomEvent.disableClickPropagation(btn);
+    L.DomEvent.on(btn, 'click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    return btn;
+  }
+});
+new ScrollTopControl({ position: 'topcenter' }).addTo(mapRoot);
+
 window.addEventListener('resize', () => {
   mapRoot.invalidateSize();
 });

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
 <head>
+    <script>
+        (function() {
+            var stored = localStorage.getItem('oc-theme');
+            var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = stored || (systemDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
     {% block head %}
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,105 +17,70 @@
 
     <title>{% block title %}Geocaching mit Opencaching.de{% endblock %}</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/oc-style.css') }}">
+
     {% block stylesheets %}
         <style>
-        /* Grund-Setup für volle Höhe */
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         body {
             display: grid;
-            /* Definiert die Zeilen: oben auto, mitte nimmt Rest, unten auto */
             grid-template-rows: auto 1fr auto;
-            /* Definiert die Spalten: links 100px, rechts nimmt Rest */
-            grid-template-columns: 260px 1fr;
             min-height: 100vh;
             font-family: sans-serif;
         }
 
-        .header {
-            grid-column: 1 / 3;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .sidebar {
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-right: 1px solid #ddd;
-        }
-
         .content {
-            background-color: #fff;
+            background-color: var(--oc-bg-body);
+            color: var(--oc-text-primary);
             padding: 20px;
         }
 
         .footer {
-            grid-column: 1 / 3;
-            background-color: #333;
-            color: white;
+            background-color: var(--oc-bg-navbar);
+            color: var(--oc-text-inverse);
             padding: 20px;
             text-align: center;
         }
 
-        /* Responsive Anpassung für schmale Bildschirme (z.B. Smartphones) */
-        @media (max-width: 600px) {
-            body {
-                grid-template-columns: 1fr; /* Nur noch eine Spalte */
-            }
-
-            .header, .sidebar, .content, .footer {
-                grid-column: 1 / 2; /* Alle Elemente nutzen die volle Breite */
-            }
-
-            .sidebar {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid #ddd;
-            }
+        .footer a {
+            color: var(--oc-link-color);
         }
-
-    </style>
+        </style>
     {% endblock %}
 </head>
 
-<body {% block body_start %}{% endblock %}>
+{# Pages override the `data_page` block to pick the page module under public/js/pages/<data_page>.js #}
+<body data-page="{% block data_page %}{% endblock %}" {% block body_start %}{% endblock %}>
 {% block after_body_start %}{% endblock %}
 
     <header class="header">
-        {% block navbar_search_form %}
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-6">
-                <div class="input-group mb-3">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search"
-                           aria-describedby="button-magnifier">
-                    <div class="input-group-append">
-                        <span class="input-group-text" id="button-magnifier">&#x1F50D;</i></span>
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-dark w-100" style="background-color: var(--oc-bg-navbar);">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Opencaching</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    {% block navbar_nav %}
+                        {{ knp_menu_render('sideMenu', {'template': 'bootstrap_navbar_menu.html.twig'}) }}
+                    {% endblock %}
                 </div>
-            </form>
-        {% endblock %}
+                {% block navbar_search_form %}
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                {% endblock %}
+                <button class="theme-toggle ms-2" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                    <span class="theme-icon-light">&#9788;</span>
+                    <span class="theme-icon-dark">&#9789;</span>
+                </button>
+            </div>
+        </nav>
     </header>
-
-    <aside class="sidebar">
-        {% block sidebar_user %}
-            {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
-                {#                    {% include '@AdminLTE/Sidebar/user-panel.html.twig' with {'adminlte_direct_include': true} %}#}
-            {% endif %}
-        {% endblock %}
-
-        {% block sidebar_search %}
-        {% endblock %}
-
-        {% block sidebar_nav %}
-            {{ knp_menu_render('main') }}
-        {% endblock %}
-    </aside>
 
     {% block page_content_before %}{% endblock %}
     <main class="content">
@@ -133,5 +106,19 @@
         </footer>
     {% endblock %}
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="{{ asset('js/app.js') }}"></script>
+    <script>
+        (function() {
+            var btn = document.getElementById('themeToggle');
+            if (!btn) return;
+            btn.addEventListener('click', function() {
+                var current = document.documentElement.getAttribute('data-theme') || 'light';
+                var next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('oc-theme', next);
+            });
+        })();
+    </script>
 </body>
 </html>

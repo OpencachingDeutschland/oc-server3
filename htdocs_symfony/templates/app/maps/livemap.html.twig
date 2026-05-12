@@ -6,37 +6,27 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/map.css') }}">
     <style>
         body {
             overflow: hidden;
+            height: 100vh;
         }
-        main.container {
-            max-width: 100% !important;
+        main.content {
             padding: 0 !important;
             margin: 0 !important;
-        }
-        main.container > .row, 
-        main.container > .row > .col {
-            padding: 0 !important;
-            margin: 0 !important;
+            overflow: hidden;
+            min-height: 0;
         }
         #mapRoot {
-            width: 100vw;
-            height: calc(100vh - 56px); /* Navbar is usually ~56px */
+            width: 100%;
+            height: calc(100vh - var(--oc-navbar-height));
             margin: 0;
             padding: 0;
             border: none;
         }
         footer {
             display: none !important;
-        }
-        /* Ported legacy styles from map3.tpl */
-...
-        .zoom-level-display {
-            width: 30px; height: 30px; box-sizing: border-box;
-            background: white; border: 2px solid rgba(0,0,0,0.2);
-            border-radius: 4px; font-size: 14px; font-weight: bold;
-            display: flex; align-items: center; justify-content: center;
         }
         .map-toast {
             display: none;
@@ -64,4 +54,3 @@
          data-init-lon="{{ initLon }}"
          data-init-zoom="{{ initZoom }}"></div>
 {% endblock %}
-

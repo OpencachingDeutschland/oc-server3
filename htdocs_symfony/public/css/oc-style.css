@@ -63,6 +63,7 @@
   --oc-link-color:       #044870;
   --oc-link-hover-color: #0b5ed7;
   --oc-footer-link-color: rgba(255,255,255,0.85);
+  --oc-navbar-height: 56px;
 
   /* Popover / tooltip */
   --oc-popover-bg:     var(--oc-gray-200);

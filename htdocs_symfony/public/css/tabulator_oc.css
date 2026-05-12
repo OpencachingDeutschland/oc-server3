@@ -1,0 +1,123 @@
+/* =================================================================
+   tabulator_oc.css — Tabulator theme overrides using --oc-* variables
+   Layered on top of tabulator_bootstrap5.min.css
+   ================================================================= */
+
+/* Tooltip */
+.tabulator-tooltip {
+    max-height: 3em !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    position: absolute !important;
+    z-index: 9999 !important;
+    pointer-events: none !important;
+    background: #fdfdfd !important;
+    border: 1px solid rgba(0,0,0,0.12) !important;
+    padding: 4px 6px !important;
+    border-radius: 3px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+}
+
+/* Clean borderless container */
+.tabulator,
+.tabulator .tabulator-tableholder,
+.tabulator .tabulator-table {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: var(--oc-table-bg) !important;
+}
+
+.tabulator .tabulator-tableholder { overflow-x: auto !important; }
+
+.tabulator .tabulator-header .tabulator-col,
+.tabulator .tabulator-cell,
+.tabulator .tabulator-row {
+    border: 1px solid transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.tabulator .tabulator-header .tabulator-col { position: relative !important; overflow: visible !important; }
+.tabulator .tabulator-resize-handle,
+.tabulator .tabulator-frozen-divider { background: transparent !important; border-color: transparent !important; }
+.tabulator .tabulator-header,
+.tabulator .tabulator-row { border-bottom-color: transparent !important; }
+.tabulator .tabulator-header .tabulator-col:focus,
+.tabulator .tabulator-cell:focus { outline: none !important; }
+
+/* Hide sorter triangles */
+.tabulator .tabulator-col .tabulator-col-sorter {
+    flex: 0 0 0 !important; width: 0 !important;
+    min-width: 0 !important; max-width: 0 !important;
+    padding: 0 !important; margin: 0 !important;
+    overflow: hidden !important;
+}
+
+.tabulator .tabulator-col .tabulator-col-title {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* =================================================================
+   Dark theme overrides
+   ================================================================= */
+[data-theme="dark"] .tabulator-tooltip {
+    background: var(--oc-bg-elevated) !important;
+    border-color: var(--oc-gray-300) !important;
+    color: var(--oc-text-primary) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+}
+
+[data-theme="dark"] .tabulator,
+[data-theme="dark"] .tabulator .tabulator-tableholder,
+[data-theme="dark"] .tabulator .tabulator-table {
+    background-color: var(--oc-bg-surface) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-header,
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col .tabulator-col-content,
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row {
+    background-color: var(--oc-bg-surface) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row:nth-child(even) {
+    background-color: var(--oc-gray-100) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row:hover {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-cell { color: var(--oc-text-primary) !important; }
+[data-theme="dark"] .tabulator .tabulator-cell a { color: var(--oc-link-color) !important; }
+
+[data-theme="dark"] .tabulator .tabulator-footer {
+    background-color: var(--oc-gray-200) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page {
+    background-color: var(--oc-bg-surface) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page:hover {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page.active {
+    background-color: var(--oc-primary) !important;
+    color: #fff !important;
+}

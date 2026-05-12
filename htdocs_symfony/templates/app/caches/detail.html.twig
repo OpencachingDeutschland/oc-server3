@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}cache{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/tabulator_bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tabulator_oc.css') }}">
+    <style>
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 4px;
+        }
+        [data-theme="dark"] .skeleton {
+            background: linear-gradient(90deg, var(--oc-gray-200) 25%, var(--oc-gray-100) 50%, var(--oc-gray-200) 75%);
+            background-size: 200% 100%;
+        }
+        @keyframes skeleton-loading {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .skeleton-text  { height: 1em; margin: 0.5em 0; }
+        .skeleton-block { height: 180px; }
+
+        #cache-error {
+            display: none;
+            padding: 16px;
+            background: var(--oc-danger);
+            color: #fff;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .oc-detail-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .oc-detail-table td { padding: 3px 6px; vertical-align: top; color: var(--oc-text-primary); }
+        .oc-detail-table td:first-child { white-space: nowrap; color: var(--oc-text-secondary); width: 1%; }
+        .oc-detail-table tr:nth-child(even) td { background-color: var(--oc-table-stripe-even); }
+        .oc-detail-table tr:nth-child(odd)  td { background-color: var(--oc-table-stripe-odd); }
+
+        .oc-section-header {
+            padding: 6px 10px;
+            background-color: var(--oc-bg-navbar);
+            color: var(--oc-text-inverse);
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 4px;
+            border-radius: 3px;
+        }
+
+        #cache-description { overflow: hidden; word-wrap: break-word; overflow-wrap: break-word; }
+        #cache-description img { max-width: 100%; height: auto; }
+        #cache-description * { max-width: 100%; box-sizing: border-box; }
+        #cache-description, #cache-description * { position: static !important; float: none !important; }
+
+        .hint-box {
+            background: var(--oc-bg-surface);
+            border: 1px solid var(--oc-table-border);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-family: monospace;
+            font-size: 0.9em;
+            color: var(--oc-text-primary);
+            cursor: pointer;
+            user-select: none;
+        }
+        .hint-box.blurred { filter: blur(4px); }
+        .hint-box.blurred:hover { filter: blur(2px); }
+
+        .attrib-item { display: inline-flex; align-items: center; gap: 4px; margin: 3px 4px; font-size: 0.82em; color: var(--oc-text-secondary); }
+        .attrib-item img { width: 24px; height: 24px; }
+
+        .log-icon { width: 20px; height: 20px; vertical-align: middle; }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+<div id="explore-container" data-wp="{{ wp }}">
+
+    <div id="cache-error"></div>
+
+    <div class="container-fluid px-0">
+        <div class="row g-3">
+
+            <!-- LEFT: meta -->
+            <div class="col-md-4">
+                <div id="cache-skeleton">
+                    <div class="skeleton skeleton-text" style="width:80%"></div>
+                    <div class="skeleton skeleton-text" style="width:55%"></div>
+                    <div class="skeleton skeleton-block mt-2"></div>
+                </div>
+                <table id="cache-table" class="oc-detail-table" style="display:none"></table>
+            </div>
+
+            <!-- RIGHT: description + logs -->
+            <div class="col-md-8">
+                <div id="desc-skeleton" class="skeleton skeleton-block mb-3"></div>
+
+                <div id="cache-description" class="mb-3" style="display:none"></div>
+
+                <div id="hint-section" class="mb-3" style="display:none">
+                    <div class="oc-section-header">Hint <small style="font-weight:normal;font-size:0.8em">(click to reveal)</small></div>
+                    <div id="hint-box" class="hint-box blurred"></div>
+                </div>
+
+                <div id="attrib-section" class="mb-3" style="display:none">
+                    <div class="oc-section-header">Attributes</div>
+                    <div id="attrib-list"></div>
+                </div>
+
+                <div id="wpt-section" class="mb-3" style="display:none">
+                    <div class="oc-section-header">Additional Waypoints</div>
+                    <div id="wptTable"></div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="oc-section-header">Logs</div>
+                    <div id="logsTable"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

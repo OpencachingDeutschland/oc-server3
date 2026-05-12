@@ -16,8 +16,8 @@ class KitchensinkController extends AbstractController
         return $this->render('kitchensink/index.html.twig');
     }
 
-    #[Route("/kitchensink/bs4", name: "kitchensink_bs4")]
-    public function style_bs4(): Response
+    #[Route("/kitchensink/bs", name: "kitchensink_bs")]
+    public function style_bs(): Response
     {
         return $this->render('kitchensink/kitchensink-bootstrap.html.twig');
     }

@@ -47,7 +47,7 @@
         }
 
         .footer a {
-            color: var(--oc-link-color);
+            color: var(--oc-footer-link-color);
         }
         </style>
     {% endblock %}
@@ -60,7 +60,7 @@
     <header class="header">
         <nav class="navbar navbar-expand-lg navbar-dark w-100" style="background-color: var(--oc-bg-navbar);">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Opencaching</a>
+                <a class="navbar-brand p-0" href="/"><img src="{{ asset('images/oclogo.png') }}" alt="Opencaching.de" height="40" style="display:block;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -69,11 +69,7 @@
                         {{ knp_menu_render('sideMenu', {'template': 'bootstrap_navbar_menu.html.twig'}) }}
                     {% endblock %}
                 </div>
-                {% block navbar_search_form %}
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    </form>
-                {% endblock %}
+
                 <button class="theme-toggle ms-2" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
                     <span class="theme-icon-light">&#9788;</span>
                     <span class="theme-icon-dark">&#9789;</span>

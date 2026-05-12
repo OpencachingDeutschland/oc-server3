@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('oc-style') }}
+    {# OC style sheet was previously bundled via webpack encore; not yet ported to ESM. #}
 {% endblock %}
 
 {% block kitchen_content %}
@@ -24,7 +24,5 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ encore_entry_script_tags('oc-style') }}
-    <!-- END import by TWIG -->
 {% endblock %}
 

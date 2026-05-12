@@ -62,6 +62,7 @@
   --oc-text-inverse:   var(--oc-white);
   --oc-link-color:       #044870;
   --oc-link-hover-color: #0b5ed7;
+  --oc-footer-link-color: rgba(255,255,255,0.85);
 
   /* Popover / tooltip */
   --oc-popover-bg:     var(--oc-gray-200);
@@ -91,6 +92,7 @@
 
   --oc-link-color:       #a4ffeb;
   --oc-link-hover-color: #c8fff2;
+  --oc-footer-link-color: #a4ffeb;
 
   --oc-success: #6dd26d;
   --oc-danger:  #ff6461;

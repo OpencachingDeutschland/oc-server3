@@ -39,6 +39,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ])
             ->tag('knp_menu.menu_builder', [
                     'method' => 'createSideMenu',
-                    'alias'  => 'main'
+                    'alias'  => 'sideMenu'
             ]);
 };

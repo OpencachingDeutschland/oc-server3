@@ -177,4 +177,26 @@ class LiveMapController extends AbstractController
 
         return new JsonResponse(['wpts' => $wpts]);
     }
+
+    #[Route('/api/geocode/city', name: 'api_geocode_city')]
+    public function geocodeCity(Request $request): JsonResponse
+    {
+        $q = trim((string)$request->query->get('q', ''));
+        if (!$q) {
+            return new JsonResponse([]);
+        }
+
+        $url = 'https://nominatim.openstreetmap.org/search?format=json&limit=10&q=' . urlencode($q);
+        $ctx = stream_context_create(['http' => [
+            'header'  => "User-Agent: opencaching.de/1.0\r\nAccept: application/json\r\n",
+            'timeout' => 5,
+        ]]);
+
+        $body = @file_get_contents($url, false, $ctx);
+        if ($body === false) {
+            return new JsonResponse([]);
+        }
+
+        return new JsonResponse(json_decode($body, true) ?? []);
+    }
 }

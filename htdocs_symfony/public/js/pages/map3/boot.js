@@ -48,6 +48,89 @@ const ScrollTopControl = L.Control.extend({
 });
 new ScrollTopControl({ position: 'topcenter' }).addTo(mapRoot);
 
+// CitySearchControl — geocode a city/village via Nominatim, pan map to result
+const CitySearchControl = L.Control.extend({
+  onAdd: function() {
+    const container = L.DomUtil.create('div', 'city-search-control');
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.disableScrollPropagation(container);
+
+    const row = L.DomUtil.create('div', 'city-search-row', container);
+
+    const input = L.DomUtil.create('input', 'city-search-input', row);
+    input.type        = 'text';
+    input.placeholder = 'City or village\u2026';
+    input.maxLength   = 60;
+    input.setAttribute('autocomplete', 'off');
+
+    const btnSearch = L.DomUtil.create('button', 'map-btn', row);
+    btnSearch.innerHTML = '\U0001f50d';
+    btnSearch.title     = 'Search';
+    btnSearch.type      = 'button';
+
+    const btnHere = L.DomUtil.create('button', 'map-btn', row);
+    btnHere.innerHTML = '\U0001f4cd';
+    btnHere.title     = 'My location';
+    btnHere.type      = 'button';
+
+    const results = L.DomUtil.create('div', 'city-search-results', container);
+
+    function panToAndFetch(lat, lon) {
+      results.style.display = 'none';
+      input.value = '';
+      mapRoot.setView([parseFloat(lat), parseFloat(lon)], 13);
+      if (!mapRoot.hasLayer(liveMap)) {
+        liveMap.addTo(mapRoot);
+      } else {
+        fetchAndShowLiveMarkers();
+      }
+    }
+
+    async function search() {
+      const q = input.value.trim();
+      if (!q) return;
+      results.innerHTML     = '<div class="city-search-item city-search-status">Searching\u2026</div>';
+      results.style.display = 'block';
+      try {
+        const res  = await fetch(`/api/geocode/city?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        results.innerHTML = '';
+        if (!data.length) {
+          results.innerHTML = '<div class="city-search-item city-search-status">No results</div>';
+          return;
+        }
+        data.slice(0, 8).forEach(item => {
+          const el = L.DomUtil.create('div', 'city-search-item', results);
+          el.textContent = item.display_name;
+          L.DomEvent.on(el, 'click', () => panToAndFetch(item.lat, item.lon));
+        });
+      } catch {
+        results.innerHTML = '<div class="city-search-item city-search-status">Error searching</div>';
+      }
+    }
+
+    L.DomEvent.on(btnSearch, 'click', search);
+    L.DomEvent.on(input, 'keydown', e => {
+      if (e.key === 'Enter')  { e.preventDefault(); search(); }
+      if (e.key === 'Escape') { results.style.display = 'none'; }
+    });
+    L.DomEvent.on(btnHere, 'click', () => {
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(
+        pos => panToAndFetch(pos.coords.latitude, pos.coords.longitude),
+        ()  => {
+          results.innerHTML     = '<div class="city-search-item city-search-status">Location unavailable</div>';
+          results.style.display = 'block';
+        }
+      );
+    });
+
+    return container;
+  }
+});
+new CitySearchControl({ position: 'topleft' }).addTo(mapRoot);
+
+
 window.addEventListener('resize', () => {
   mapRoot.invalidateSize();
 });

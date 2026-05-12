@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}map3{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body {
+            overflow: hidden;
+        }
+        main.container {
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        main.container > .row, 
+        main.container > .row > .col {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        #mapRoot {
+            width: 100vw;
+            height: calc(100vh - 56px); /* Navbar is usually ~56px */
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        footer {
+            display: none !important;
+        }
+        /* Ported legacy styles from map3.tpl */
+...
+        .zoom-level-display {
+            width: 30px; height: 30px; box-sizing: border-box;
+            background: white; border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 4px; font-size: 14px; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .map-toast {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 8px 16px;
+            background: rgba(47, 125, 199, 0.92);
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+    <div id="mapRoot"
+         data-init-lat="{{ initLat }}"
+         data-init-lon="{{ initLon }}"
+         data-init-zoom="{{ initZoom }}"></div>
+{% endblock %}
+

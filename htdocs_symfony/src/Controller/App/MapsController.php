@@ -22,10 +22,25 @@ class MapsController extends AbstractController
         $this->mapsRepository = $mapsRepository;
     }
 
-    #[Route("/maps", name: "maps_index")]
-    public function mapsController_index(Request $request): Response
+    /**
+     * @throws RecordsNotFoundException
+     * @throws Exception
+     * @throws RecordNotFoundException
+     */
+    #[Route("/maps", name: "app_map_show")]
+    public function showMap_default(Request $request): Response
     {
-        return $this->redirectToRoute('app_map_show');
+        $centerPoint = $this->mapsRepository->determineMapCenterPoint('', '', false);
+
+        return $this->render(
+                'app/maps/index.html.twig', [
+                        'mapCenterViewLat' => $centerPoint[0],
+                        'mapCenterViewLon' => $centerPoint[1],
+                        'mapZoom' => '6',
+                        'mapWP' => $centerPoint[2],
+                        'movingCachesTracks' => $this->mapsRepository->getMovingCachesTracks()
+                ]
+        );
     }
 
     /**
@@ -33,7 +48,7 @@ class MapsController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      */
-    #[Route("/mapS/{lat}+{lon}", name: "map_show")]
+    #[Route("/mapS/{lat}+{lon}", name: "map_show_coords")]
     public function showMap(string $lat = '', string $lon = '', bool $centerView = false): Response
     {
         $centerPoint = $this->mapsRepository->determineMapCenterPoint($lat, $lon, $centerView);

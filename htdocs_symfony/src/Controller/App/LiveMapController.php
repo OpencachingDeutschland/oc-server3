@@ -19,7 +19,7 @@ class LiveMapController extends AbstractController
         private Security $security
     ) {}
 
-    #[Route('/livemap', name: 'app_livemap')]
+    #[Route('/livemap', name: 'livemap')]
     public function index(): Response
     {
         return $this->render('app/maps/livemap.html.twig', [

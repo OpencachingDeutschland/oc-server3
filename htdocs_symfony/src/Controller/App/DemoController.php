@@ -41,15 +41,6 @@ class DemoController extends AbstractController
         ]);
     }
 
-    #[Route('/livemap', name: 'app_livemap')]
-    public function livemap(): Response
-    {
-        return $this->render('demo/map3.html.twig', [
-            'initLat' => 52.3759,
-            'initLon' => 9.7320,
-            'initZoom' => 13
-        ]);
-    }
 
     #[Route('/map3-api', name: 'demo_map3_api')]
     public function map3Api(Request $request): JsonResponse

@@ -27,7 +27,7 @@ class MapsController extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      */
-    #[Route("/maps", name: "app_map_show")]
+    #[Route("/maps", name: "map_show")]
     public function showMap_default(Request $request): Response
     {
         $centerPoint = $this->mapsRepository->determineMapCenterPoint('', '', false);

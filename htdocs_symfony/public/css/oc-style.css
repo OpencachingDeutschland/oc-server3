@@ -359,3 +359,9 @@ select:focus {
   width: 100%;
   background-color: var(--oc-bg-surface);
 }
+
+/* Elevate navbar above Leaflet controls (z-index 1000) so dropdowns are never hidden */
+header.header {
+  position: relative;
+  z-index: 1030;
+}

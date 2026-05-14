@@ -29,6 +29,21 @@ const Esri_WorldStreetMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012'
 });
 
+const Landscape = L.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=1e26fcdf18534022b67de471f5bda80f', {
+	maxZoom: 19,
+  zIndex: 2,
+	attribution: 'Maps &copy; <a href="http://www.thunderforest.com">Thunderforest</a> Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+});
+
+const OutDoors = L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=1e26fcdf18534022b67de471f5bda80f', {
+	maxZoom: 19,
+	attribution: 'Maps &copy; <a href="http://www.thunderforest.com">Thunderforest</a> Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+});
+
+const OpenCycleMap = L.tileLayer('https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=1e26fcdf18534022b67de471f5bda80f', {
+	maxZoom: 19,
+	attribution: 'Maps &copy; <a href="http://www.thunderforest.com">Thunderforest</a> Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+});
 
 const Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
 	maxZoom: 19,
@@ -48,6 +63,9 @@ export const baseLayers = {
   "OpenStreetMap German Style" : OpenStreetMap_DE,
   "Opentopo Map"               : openTopoMap,
   "Satellite view"             : Esri_WorldImagery,
+  "Landscape"                  : Landscape,
+  "OutDoors"                   : OutDoors,
+  "OpenCycleMap"               : OpenCycleMap,
 };
 
 // code: language=javascript insertSpaces=true tabSize=2

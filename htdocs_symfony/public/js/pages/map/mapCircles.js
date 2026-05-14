@@ -3,7 +3,7 @@
 //
 // © 2025 hxdimpf Research
 //
-// Part of OCmap for opencaching.de. MIT License.
+// Part of GCxM. MIT License.
 // --------------------------------------------------------------
 
 import { MapButtonControl } from './mapHelpers.js';
@@ -12,7 +12,7 @@ import { refreshRoutingCircles } from './mapRouting.js';
 let state;                      // global map state
 let map;
 let controls;                   // reference to MapButtonControl
-const circleZoomThreshold = 12; // minimum zoom to show circles
+const circleZoomThreshold = 14; // minimum zoom to show circles
 let enabled = false;            // module internal toggle state
 let largeRadius = false;        // false = 160m, true = 3200m
 
@@ -23,6 +23,9 @@ export function init(mapState) {
   state = mapState;
   map = state.mapRoot;
   state.circleRadius = 160;     // default radius
+
+  // Circles are GC-only — skip controls entirely in OC personality
+  if (document.documentElement.dataset.personality === 'ocxm') return;
 
   initControls();
 }
@@ -43,13 +46,17 @@ function initControls() {
             title: 'Toggle 160m circle',
             onClick: (_map, ctrl) => toggleCircles(ctrl)
           },
-          {
-            id: 'circle-radius',
-            icon: '▽',
-            title: 'Toggle radius: 160m / 3200m',
-            onClick: (_map, ctrl) => toggleRadius(ctrl),
-            hidden: true
-          }
+          // To enable the radius toggle button (160m / 3200m for Mystery caches),
+          // uncomment the block below and the toggleRadius() references in
+          // toggleCircles() and forceRefreshCircles().
+          //
+          // {
+          //   id: 'circle-radius',
+          //   icon: '▽',
+          //   title: 'Toggle radius: 160m / 3200m',
+          //   onClick: (_map, ctrl) => toggleRadius(ctrl),
+          //   hidden: true
+          // }
         ]
       }
     ]
@@ -57,8 +64,22 @@ function initControls() {
 
   controls.addTo(map);
 
-  // Update circles on zoom changes
-  map.on('zoomend', () => handleCircles());
+  // Show/hide button and update circles on zoom changes
+  map.on('zoomend', () => {
+    updateButtonVisibility();
+    handleCircles();
+  });
+
+  // Set initial visibility
+  updateButtonVisibility();
+}
+
+// ----------------------------------------------------------------
+// Show circle button only at zoom >= circleZoomThreshold
+// ----------------------------------------------------------------
+function updateButtonVisibility() {
+  if (!controls?._container) return;
+  controls._container.style.display = map.getZoom() >= circleZoomThreshold ? '' : 'none';
 }
 
 // ----------------------------------------------------------------
@@ -74,11 +95,11 @@ export function toggleCircles(ctrl) {
   btn.classList.toggle('on', enabled);
   btn.classList.toggle('off', !enabled);
 
-  // Show/hide radius toggle button
-  const radiusBtn = ctrl._buttons.get('circle-radius');
-  if (radiusBtn) {
-    radiusBtn.style.display = enabled ? 'inline-flex' : 'none';
-  }
+  // Uncomment to show/hide radius toggle button when enabled
+  // const radiusBtn = ctrl._buttons.get('circle-radius');
+  // if (radiusBtn) {
+  //   radiusBtn.style.display = enabled ? 'inline-flex' : 'none';
+  // }
 
   handleCircles();
 }

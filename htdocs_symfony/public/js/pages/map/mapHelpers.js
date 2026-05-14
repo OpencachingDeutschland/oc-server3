@@ -3,7 +3,7 @@
 //
 // © 2025 hxdimpf Research
 //
-// Part of OCmap for opencaching.de.
+// This file is part of GCxM.
 // Licensed under the MIT License.
 //
 // You may use, copy, modify, and distribute this software

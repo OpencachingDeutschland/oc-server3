@@ -893,29 +893,27 @@ async function deleteLog(log) {
 }
 
 // -----------------------------------------------------------------
-// initMap() — dynamic-import the map boot and feed in this cache
+// initMap() — feed this cache into the already-loaded map module and call handleWPs.
+//
+// app.js has imported map.js (side effects: map, controls, registries set up).
+// The verbatim gcxm handleWPs() reads window.uniCacheWP — push the cooked
+// cache in and call it.
 
 async function initMap() {
-  const mapRoot = getById('mapRoot');
-  if (!mapRoot) return;
-
   if (typeof L === 'undefined' || !L.markerClusterGroup) {
-    console.log('initMap: Leaflet or markercluster not loaded');
+    console.log('initMap: Leaflet not loaded');
     return;
   }
 
-  // Seed mapRoot's center so boot.js sets a sensible initial view
-  if (gc.lat && gc.lon) {
-    mapRoot.dataset.initLat  = String(gc.lat);
-    mapRoot.dataset.initLon  = String(gc.lon);
-    mapRoot.dataset.initZoom = '14';
-  }
+  window.uniCacheWP = [gc];
+  window.lat = gc.lat;
+  window.lon = gc.lon;
 
   try {
-    const { boot } = await import('./map/boot.js');
-    await boot([gc]);
+    const { handleWPs } = await import('./map/map.js');
+    await handleWPs();
   } catch (err) {
-    console.log('initMap: failed to load map', err);
+    console.log('initMap: handleWPs failed', err);
   }
 }
 

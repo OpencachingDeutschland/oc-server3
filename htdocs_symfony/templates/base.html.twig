@@ -53,8 +53,9 @@
     {% endblock %}
 </head>
 
-{# Pages override the `data_page` block to pick the page module under public/js/pages/<data_page>.js #}
-<body data-page="{% block data_page %}{% endblock %}" {% block body_start %}{% endblock %}>
+{# Pages override the `data_page` block to pick the page module under public/js/pages/<data_page>.js.
+   Pages that need Leaflet + the map module override `data_map_js` to "true". #}
+<body data-page="{% block data_page %}{% endblock %}" data-map-js="{% block data_map_js %}{% endblock %}" {% block body_start %}{% endblock %}>
 {% block after_body_start %}{% endblock %}
 
     <header class="header">

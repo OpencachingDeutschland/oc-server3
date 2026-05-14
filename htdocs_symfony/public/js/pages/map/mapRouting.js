@@ -3,7 +3,7 @@
 //
 // © 2025 hxdimpf Research
 //
-// Part of OCmap for opencaching.de.
+// This file is part of GCxM.
 // Licensed under the MIT License.
 //
 // You may use, copy, modify, and distribute this software
@@ -12,7 +12,7 @@
 // https://opensource.org/licenses/MIT
 // --------------------------------------------------------------
 
-import { coords2Dm } from '../../lib/coords.js';
+import { coords2Dm } from '../shared/coords.js';
 import { showToast, downloadFile } from './helpers.js';
 import { generateTrackGPX } from './gpx.js';
 import { MapButtonControl } from './mapHelpers.js';
@@ -59,7 +59,7 @@ export function init(mapState) {
   // --- Create GPX button (action button - always white) ---
   const gpxBtn = document.createElement('button');
   gpxBtn.type = 'button';
-  gpxBtn.className = 'map-btn off wide';
+  gpxBtn.className = 'map-btn off';
   gpxBtn.innerText = 'GPX';
   gpxBtn.title = 'Download GPX';
   gpxBtn.style.display = 'none';
@@ -449,7 +449,7 @@ function updateLengthDisplay(length) {
 // Function to download GPX with the route track
 
 function downloadGPX() {
-  const gpxData = generateTrackGPX(trackSegments, 'OC Track');
+  const gpxData = generateTrackGPX(trackSegments, 'GCxM Track');
   if (!gpxData) return;
   downloadFile(gpxData, 'track.gpx', 'application/gpx+xml');
 }

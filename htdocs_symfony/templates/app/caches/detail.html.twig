@@ -1,15 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block data_page %}cache{% endblock %}
+{% block data_map_js %}true{% endblock %}
+
+{% block after_body_start %}
+    {# Globals the verbatim gcxm map modules look up via window/free variables.
+       uniCacheWP starts empty; cache.js cooks the OC object into it after
+       fetching /api/cache/{wp}, then calls handleWPs(). #}
+    <script>
+        window.enabledPlatforms = ['OC'];
+        window.uniCacheWP       = [];
+        window.defaultZoom      = 14;
+    </script>
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/tabulator_bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tabulator_oc.css') }}">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
     <link rel="stylesheet" href="{{ asset('css/map.css') }}">
     <style>
         .loading-indicator { display:flex; align-items:center; gap:10px; padding:20px; color:var(--oc-text-secondary); font-size:0.95em; }
@@ -193,7 +201,4 @@
 
 {% block page_content_after %}
 <div id="mapRoot"></div>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 {% endblock %}

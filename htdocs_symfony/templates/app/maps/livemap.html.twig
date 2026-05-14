@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block data_page %}map3{% endblock %}
+{% block data_page %}livemap{% endblock %}
+{% block data_map_js %}true{% endblock %}
 {% block page_title %}{% endblock %}
 {% block page_subtitle %}{% endblock %}
 
@@ -25,32 +26,22 @@
             padding: 0;
             border: none;
         }
-        footer {
-            display: none !important;
-        }
-        .map-toast {
-            display: none;
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            padding: 8px 16px;
-            background: rgba(47, 125, 199, 0.92);
-            color: #fff;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 6px;
-            white-space: nowrap;
-            pointer-events: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
+        footer { display: none !important; }
     </style>
 {% endblock %}
 
+{% block after_body_start %}
+    {# Globals the verbatim gcxm map modules look up via window/free variables.
+       Must be set BEFORE <script type="module" src="app.js"> runs map.js. #}
+    <script>
+        window.enabledPlatforms = ['OC'];
+        window.uniCacheWP       = [];
+        window.lat              = {{ initLat|default(52.376) }};
+        window.lon              = {{ initLon|default(9.732) }};
+        window.defaultZoom      = {{ initZoom|default(13) }};
+    </script>
+{% endblock %}
+
 {% block page_content %}
-    <div id="mapRoot"
-         data-init-lat="{{ initLat }}"
-         data-init-lon="{{ initLon }}"
-         data-init-zoom="{{ initZoom }}"></div>
+    <div id="mapRoot"></div>
 {% endblock %}

@@ -471,11 +471,17 @@ class CachesController extends AbstractController
         // Normalize date to datetime
         if (strlen($date) === 10) $date .= ' 00:00:00';
 
-        $this->connection->executeStatement(
-            'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit)
-             VALUES (4, ?, ?, ?, ?, ?, 0, 0)',
-            [$cacheId, $userId, $type, $date, $text]
-        );
+        // uuid, date_created, entry_last_modified, last_modified, log_last_modified, order_date
+        // are filled by trigger `cacheLogsBeforeInsert`. picture has no default — set it explicitly.
+        try {
+            $this->connection->executeStatement(
+                'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture)
+                 VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0)',
+                [$cacheId, $userId, $type, $date, $text]
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(['error' => 'DB insert failed: ' . $e->getMessage()], 500);
+        }
         $newId = (int)$this->connection->lastInsertId();
 
         $row = $this->connection->fetchAssociative(

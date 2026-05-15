@@ -19,11 +19,9 @@ import * as mapRouting from './mapRouting.js';
 import * as mapSelect from './mapSelect.js';
 import { cacheTypes, getIcon, gpsIcon } from './mapIcons.js';
 import { baseLayers, Esri_WorldBoundariesPlaces } from './mapLayers.js';
-import { init as initMapCircles } from './mapCircles.js';
 import {
   getCacheWPs,
   getPCN,
-  persistALsById,
   getCachedAlStates,
   getTrackIds,
   getTrackById,
@@ -289,11 +287,11 @@ const overlayLayers = {
 
 let defaultMapLayer = localStorage.getItem("defaultMapLayer");
 
-if (defaultMapLayer === null) defaultMapLayer = "OpenStreetMap Default";
+if (!defaultMapLayer || !baseLayers[defaultMapLayer]) defaultMapLayer = "OpenStreetMap Default";
 
 //-------------------------
 // --- Base Layers
-// 
+//
 baseLayers[defaultMapLayer].addTo(mapRoot);
 export const stageMarkers = L.layerGroup().addTo(mapRoot); // those markers will be cleared upon click on the map anywhere
 const stageMarkerCircles  = L.layerGroup().addTo(mapRoot);
@@ -382,11 +380,6 @@ mapRoot.on('overlayadd', (e) => {
   if (e.name === "Live Map") {
     liveEnabled = true;
     layerControl.getContainer().classList.add('live-active');
-    dShow('refreshButton');
-    dShow('filterButton');
-    dShow('fetchButton');
-    getById('tracksButton').style.marginBottom = '5px';
-    getById('fetchButton').style.marginBottom  = '5px';
     fetchAndShowLiveMarkers();
   }
 });
@@ -398,11 +391,6 @@ mapRoot.on('overlayremove', (e) => {
   if (e.name === "Cities") { citiesShown = false; }
   if (e.name === "Live Map") {
     layerControl.getContainer().classList.remove('live-active');
-    dHide('refreshButton');
-    dHide('filterButton');
-    dHide('fetchButton');
-    getById('tracksButton').style.marginBottom = '0px';
-
     liveEnabled = false;
 
     // Clear stage markers
@@ -411,43 +399,16 @@ mapRoot.on('overlayremove', (e) => {
 });
 
 //-------------------------
-// zoom and drag
-//
-// Upon zoom or drag, we need to reset the colors of the
-// buttons which are used to fetch new objects based on the
-// viewport.
+// zoom and drag — in live mode, auto-fetch viewport caches
+// (replaces the old "Caches" refresh button which is hidden on OC)
 
-const resetButtonColor = '#343a40';
 mapRoot.on('zoomend', () => {
-  getById('fetchButton').style.backgroundColor   = resetButtonColor;
-  getById('refreshButton').style.backgroundColor = resetButtonColor;
-  getById('tracksButton').style.backgroundColor  = resetButtonColor;
+  if (liveEnabled) fetchAndShowLiveMarkers();
 });
 
 mapRoot.on('dragend', () => {
-  getById('fetchButton').style.backgroundColor   = resetButtonColor;
-  getById('refreshButton').style.backgroundColor = resetButtonColor;
-  getById('tracksButton').style.backgroundColor  = resetButtonColor;
+  if (liveEnabled) fetchAndShowLiveMarkers();
 });
-
-//-------------------------
-// showTracks()
-//
-// Bound to a button. When clicked it makes an API request to the server passing
-// a bounding box which the server uses to query the fieldnotes database for GPX
-// tracks that fall into the box.
-//
-// The API request comes back with an array of "_id" values which will subsequently
-// be used to fetch the respective GPX (XML-) Strings. We do this sequentially such
-// that we can render the results track by track which makes an improved UX.
-
-async function showTracks() {
-  const bounds    = mapRoot.getBounds();
-  const northWest = bounds.getNorthWest();
-  const southEast = bounds.getSouthEast();
-  const trackIds  = await getTrackIds(northWest, southEast);
-  renderTrackIds(trackIds);
-}
 
 //-------------------------
 // fetchAndShowLiveMarkers()
@@ -539,23 +500,10 @@ function fetchAndShowLiveMarkers() {
   const ocPromise  = fetchPoints(fetchOCSearchByBbox,  s, w, n, e, 0, OC_BATCH_SIZE,  OC_BATCH_SIZE,  OC_TOTAL_OBJECTS);
   const alPromise  = fetchPoints(fetchAlSearchByBbox, s, w, n, e, 0, AL_BATCH_SIZE,  AL_BATCH_SIZE,  AL_TOTAL_OBJECTS);
 
-  getById('refreshButton').classList.add('blink-gold');
-
   Promise.all([gcPromise, ocPromise, alPromise]).then(([gcPoints, ocPoints, alPoints]) => {
     console.debug("gcPoints length: ", gcPoints.length);
     console.debug("ocPoints length: ", ocPoints.length);
     console.debug("alPoints length: ", alPoints.length);
-
-    const lastGCLength = gcPoints.length;
-    const lastOCLength = ocPoints.length;
-    const lastALLength = alPoints.length;
-
-    getById('refreshButton').classList.remove('blink-gold');
-    if (lastGCLength === GC_BATCH_SIZE || lastALLength === AL_BATCH_SIZE) {
-      getById('refreshButton').style.backgroundColor = 'darkgoldenrod';
-    } else {
-      getById('refreshButton').style.backgroundColor = 'green';
-    }
   });
 };
 
@@ -743,17 +691,10 @@ export function clearMap() {
 // --------------------------------------------
 // refresh control
 //
-// We maintain a set of buttons which trigger actions on the map they all
-// refresh some content, therefore we say "RefreshXxxxx"
-//
-// Tracks:     fetch and render all tracks in the viewport
-//             --> showTracks()
-//
-// Fetch AL:   fetch all ALCs in the viewport, persist then in the backend's db
-//             --> fetchALs()
-//
-// Caches:     fetch geocache object in the viewport and render them.
-//             --> fetchAndShowLiveMarkers()
+// OC build: Tracks/Fetch AL/Caches buttons are hidden — Tracks/Caches backend
+// not yet ported; Fetch AL is GC-platform-only and will never exist here.
+// Viewport caches are auto-fetched on dragend/zoomend instead of via Caches button.
+// Mode/Clear remain (hidden by default, shown by mapServer.js when applicable).
 
 const RefreshControl = L.Control.extend({
   onAdd: function (mapRoot) {
@@ -774,26 +715,6 @@ const RefreshControl = L.Control.extend({
     clearButton.title         = 'Clear all markers and tracks from the map';
     clearButton.style.display = 'none';
     clearButton.style.marginBottom = '5px';
-
-    const tracksButton = L.DomUtil.create('button', 'btn btn-sm btn-dark', container);
-    tracksButton.id        = 'tracksButton';
-    tracksButton.innerHTML = 'Tracks';
-    tracksButton.title     = 'Fetch and render field note tracks in the viewport';
-    tracksButton.onclick = () => { showTracks(); };
-
-    const fetchButton = L.DomUtil.create('button', 'btn btn-sm btn-dark', container);
-    fetchButton.id            = 'fetchButton';
-    fetchButton.innerHTML     = 'Fetch AL';
-    fetchButton.title         = 'Fetch Adventure Labs in the viewport';
-    fetchButton.style.display = 'none'; // don't show until live map is enabled
-    fetchButton.onclick = () => { fetchALs(); };
-
-    const refreshButton = L.DomUtil.create('button', 'btn btn-sm btn-dark', container);
-    refreshButton.id            = 'refreshButton';
-    refreshButton.innerHTML     = 'Caches';
-    refreshButton.title         = 'Fetch geocaches in the viewport';
-    refreshButton.style.display = 'none'; // don't show until live map is enabled
-    refreshButton.onclick = () => { fetchAndShowLiveMarkers(); };
 
     container.style.display         = 'flex';
     container.style.flexDirection   = 'column';
@@ -1038,7 +959,7 @@ export function createMarker(p) {
   if (p.referenceCode?.startsWith("GC")) {
     linkHtml = `<a href="explore?gc=${p.referenceCode}${inlineParam}" title="${p.name}">${p.referenceCode} ${p.shortName}</a>`;
   } else if (p.referenceCode?.startsWith("OC")) {
-    linkHtml = `<a href="explore?oc=${p.referenceCode}${inlineParam}" title="${p.name}">${p.referenceCode} ${p.shortName}</a>`;
+    linkHtml = `<a href="/cache/${p.referenceCode}" title="${p.name}">${p.referenceCode} ${p.shortName}</a>`;
   } else if (p.referenceCode?.startsWith("AL")) {
     const alId = p.referenceCode.slice(2);
     const alShort = 'AL' + alId.substring(0, 6);
@@ -1253,44 +1174,6 @@ async function fetchAlSearchByBbox(s, w, n, e, skip, take) {
   }
 }
 
-// --------------------------------------------
-// fetchALs()
-//
-// Fetch a set of ALs referenced by their ids, store them
-// in the backend. No need to process these here on the map
-// any further.
-//
-
-async function fetchALs() {
-  const fetchButton = document.getElementById('fetchButton');
-  if (!fetchButton) return console.warn('fetchButton not found');
-  const bounds = mapRoot.getBounds();
-
-  const alCodes = [...liveRegistry.values()]
-    .filter(marker => {
-      const latlng = marker.getLatLng();
-      return bounds.contains(latlng) && marker.options.type === 3333 && !marker.options.isCached;
-    })
-    .map(marker => marker.options.referenceCode);
-
-  if (!alCodes.length) {
-    fetchButton.style.backgroundColor = 'green';
-    console.info('fetchALs(): nothing to fetch in the given area');
-    return;
-  }
-
-  fetchButton.classList.add('blink-gold');
-  const success = await persistALsById(alCodes);
-  fetchButton.classList.remove('blink-gold');
-  if (success) {
-    fetchButton.style.backgroundColor = 'green';
-    console.log('Fetched ALs:', alCodes);
-  } else {
-    fetchButton.style.backgroundColor = 'red';
-    console.log('Error fetching ALs:', err);
-  }
-}
-
 //-------------------------
 // global state
 //
@@ -1315,7 +1198,6 @@ let state = {                     // Owner
 //
 function init() {
   mapFilter.init(state);
-  initMapCircles(state);
   mapRouting.init(state);
   mapSelect.init(state);
   initMapTracks(state);

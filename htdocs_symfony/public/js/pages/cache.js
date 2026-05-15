@@ -84,6 +84,10 @@ let editModeInitialized = false;
 let newModeInitialized  = false;
 let mode;   // 'editLog' | 'newLog'
 
+// Map functions cached after initMap() resolves
+let mapHandleWPs         = null;
+let mapUpdateMarkerIcon  = null;
+
 // DOM refs (populated by initEventHandlers)
 let editCoords, editLogPasswd, editPCN, editLog, editLogMsg;
 let editLogHeaderText, deleteLogBtn, editLogText, editLogDate;
@@ -566,7 +570,19 @@ async function handleSaveCoords() {
     editCoords.style.color = 'var(--oc-text-primary)';
     flashSaved(editCoords);
 
-    // Refresh icon overlay
+    // Update map marker position and icon
+    console.log('CC save: mapHandleWPs=', mapHandleWPs, 'mapUpdateMarkerIcon=', mapUpdateMarkerIcon, 'gc.lat=', gc.lat, 'gc.lon=', gc.lon, 'hasCC=', gc.hasCC);
+    if (mapHandleWPs) {
+      window.uniCacheWP = [gc];
+      window.lat = gc.lat;
+      window.lon = gc.lon;
+      try { await mapHandleWPs(); } catch(e) { console.log('mapHandleWPs threw:', e); }
+    }
+    if (mapUpdateMarkerIcon) {
+      try { mapUpdateMarkerIcon(gc.referenceCode, { hasCC: gc.hasCC, hasPCN: gc.hasPCN }); } catch(e) { console.log('mapUpdateMarkerIcon threw:', e); }
+    }
+
+    // Refresh title icon
     refreshCacheIcon();
   } catch (err) {
     console.log('saveCoords:', err.message);
@@ -620,6 +636,7 @@ async function handleSavePCN() {
     oldPCN = newPCN;
     pcnChanged = false;
     flashSaved(editPCN);
+    if (mapUpdateMarkerIcon) mapUpdateMarkerIcon(gc.referenceCode, { hasCC: gc.hasCC, hasPCN: gc.hasPCN });
     refreshCacheIcon();
   } catch (err) {
     console.log('savePCN:', err.message);
@@ -910,8 +927,11 @@ async function initMap() {
   window.lon = gc.lon;
 
   try {
-    const { handleWPs } = await import('./map/map.js');
-    await handleWPs();
+    const mapModule = await import('./map/map.js');
+    mapHandleWPs        = mapModule.handleWPs;
+    mapUpdateMarkerIcon = mapModule.updateStaticMarkerIcon;
+    console.log('initMap: mapHandleWPs=', mapHandleWPs, 'mapUpdateMarkerIcon=', mapUpdateMarkerIcon);
+    await mapHandleWPs();
   } catch (err) {
     console.log('initMap: handleWPs failed', err);
   }

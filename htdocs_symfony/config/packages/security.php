@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Oc\Security\LegacyCookieAuthenticator;
 use Oc\Security\LoginFormAuthenticator;
 use Oc\Security\UserProvider;
 use Oc\Entity\UserEntity;
@@ -26,7 +27,7 @@ return static function(ContainerConfigurator $containerConfigurator)
         ],
         'firewalls' => [
             'dev' => [
-                'pattern' => '^/(_(profiler|wdt)|css|images|js)/',
+                'pattern' => '^/(_(profiler|wdt)|css|images|js|fonts)/',
                 'security' => false
             ],
             'main' => [
@@ -34,19 +35,23 @@ return static function(ContainerConfigurator $containerConfigurator)
                 'provider' => 'users',
                 'logout' => [
                     'path' => 'app_security_logout',
-                    // where to redirect after logout
-                    'target' => 'app_index_index'
+                    'target' => 'app_security_login',
                 ],
-                'custom_authenticator' => 'Oc\Security\LoginFormAuthenticator',
+                'custom_authenticators' => [
+                    LegacyCookieAuthenticator::class,
+                    LoginFormAuthenticator::class,
+                ],
+                'entry_point' => LoginFormAuthenticator::class,
             ]
         ],
+        // Order matters: public routes first, catch-all last.
         'access_control' => [
-            [
-                'path' => '^/backend',
-                'roles' => [
-                    'ROLE_TEAM',
-                ]
-            ]
+            ['path' => '^/security/',  'roles' => 'PUBLIC_ACCESS'],
+            ['path' => '^/login',      'roles' => 'PUBLIC_ACCESS'],
+            ['path' => '^/logout',     'roles' => 'PUBLIC_ACCESS'],
+            ['path' => '^/register',   'roles' => 'PUBLIC_ACCESS'],
+            ['path' => '^/backend',    'roles' => ['ROLE_TEAM']],
+            ['path' => '^/',           'roles' => 'IS_AUTHENTICATED_FULLY'],
         ],
     ]);
 };

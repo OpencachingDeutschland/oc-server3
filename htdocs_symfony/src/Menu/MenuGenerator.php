@@ -77,20 +77,6 @@ class MenuGenerator
 
         $this->addMenuItem($menu, 'menuFieldNotes', $this->translator->trans('Field Notes'), '', 'icon', 'fas fa-clipboard');
 
-        $this->addMenuItem($menu, 'menuProfile', $this->translator->trans('Profile'), '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnFounds'), 'Own founds', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnLogspictures'), 'Own log pictures', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnHides'), 'Own hides', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileAdoptions'), 'Adoptions', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileOwnCaches'), 'Own caches', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfilePublic'), 'Public profile', '', 'icon', 'fas fa-address-card');
-        $this->addMenuItem($menu['menuProfile'], $this->translator->trans('menuProfileBanner'), 'Banner', '', 'icon', 'fas fa-user');
-
-        $this->addMenuItem($menu, 'menuSettings', $this->translator->trans('Settings'), '', 'icon', 'fas fa-cogs');
-        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsProfile'), 'Profile', '', 'icon', 'fas fa-cogs');
-        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsAPI'), 'API', '', 'icon', 'fas fa-cogs');
-        $this->addMenuItem($menu['menuSettings'], $this->translator->trans('menuSettingsCookies'), 'Cookies', '', 'icon', 'fas fa-cogs');
-
         $this->addMenuItem($menu, 'menuContact', $this->translator->trans('Contact'), '', 'icon', 'fas fa-envelope-open-text');
 
         $this->addMenuItem($menu, 'menuOC', $this->translator->trans('OC.de & legal'), '', 'icon', 'fas fa-chart-line');
@@ -109,8 +95,8 @@ class MenuGenerator
             $this->addMenuItem($menu, 'menuRoles', $this->translator->trans('DEV Roles'), 'backend_roles_index', 'icon', 'fas fa-user-shield');
         }
 
-        $this->addMenuItem($menu, 'menuLogin', $this->translator->trans('Login'), 'app_security_login', 'icon', 'fas fa-door-open');
-        $this->addMenuItem($menu, 'menuLogout', $this->translator->trans('Logout'), 'app_security_logout', 'icon', 'fas fa-door-open');
+        // Login/Logout/username are rendered by the navbar template (right-side dropdown)
+        // based on app.user — no static menu items here.
 
         return $menu;
     }

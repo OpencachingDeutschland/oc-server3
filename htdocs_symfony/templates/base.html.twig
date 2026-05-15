@@ -67,14 +67,42 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     {% block navbar_nav %}
-                        {{ knp_menu_render('sideMenu', {'template': 'bootstrap_navbar_menu.html.twig'}) }}
+                        {% if app.user %}
+                            {{ knp_menu_render('sideMenu', {'template': 'bootstrap_navbar_menu.html.twig'}) }}
+                        {% endif %}
                     {% endblock %}
-                </div>
 
-                <button class="theme-toggle ms-2" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
-                    <span class="theme-icon-light">&#9788;</span>
-                    <span class="theme-icon-dark">&#9789;</span>
-                </button>
+                    {# Right-aligned section: theme toggle + user dropdown (or Login link) #}
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
+                                <span class="theme-icon-light">&#9788;</span>
+                                <span class="theme-icon-dark">&#9789;</span>
+                            </button>
+                        </li>
+                        {% if app.user %}
+                            <li class="nav-item dropdown ms-2">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                    {{ app.user.userIdentifier }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#">{{ 'Profile' | trans }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ 'Settings' | trans }}</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item ms-2">
+                                <a class="nav-link" href="{{ path('app_security_login') }}">
+                                    <i class="fas fa-door-open"></i>
+                                    {{ 'Login' | trans }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

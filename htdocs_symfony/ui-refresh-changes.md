@@ -1,0 +1,287 @@
+# `feature/ui-refresh` — change overview
+
+A one-page brief for teammates pulling this branch into their existing
+ddev. Branch is 14 commits ahead of `origin/development` and touches
+mostly `htdocs_symfony/` plus three small portability artifacts under
+`.ddev/`. The legacy `htdocs/` tree is **not** modified.
+
+This branch lays groundwork for what is intended to become the
+**next-generation opencaching.de web application** — the eventual
+replacement for the legacy PHP frontend. Read §6 for an honest
+assessment of how far we are from that goal.
+
+---
+
+## 1. What changes for users
+
+- **Theming**: light/dark theme toggle in the navbar. Choice persists
+  in `localStorage`. An inline `<head>` script applies the theme
+  before paint, so reloads do not flash the wrong palette.
+- **Login wall**: routes are gated behind `IS_AUTHENTICATED_FULLY`
+  except `/login`, `/cache/{wp}` (read-only), and a few static
+  assets. Authentication piggy-backs on the existing legacy session
+  (see §2.5) — no second login.
+- **Live map**: new `/livemap` page with a full-viewport Leaflet map,
+  OSM city/village search (top-center), and a scroll-to-top button.
+- **Cache detail (`/cache/{wp}`)**: client-driven detail view with a
+  Tabulator log grid, log submission, PCN / corrected-coordinate
+  editing, and live map-marker updates when coordinates change.
+- **Navbar**: rebuilt on KnpMenu with a Bootstrap-5 template
+  (`bootstrap_navbar_menu.html.twig`); user dropdown on the right.
+
+---
+
+## 2. Architectural changes (and the reasoning)
+
+### 2.1 Build system: Webpack Encore → source-controlled ESM
+
+Webpack Encore is removed (`webpack.config.js`, `yarn.lock`, the
+`assets/` build pipeline). Frontend modules now live as plain ES
+modules under `htdocs_symfony/public/js/` and are loaded directly by
+the browser.
+
+**Why now:** the build step was the single most common cause of
+"works for me / does not for me" friction. Removing it means zero
+`npm install`, zero rebuild on edit, and the JS shipped to the
+browser is exactly what is in git.
+
+Vendor assets (Leaflet, Tabulator, Bootstrap, leaflet-draw,
+leaflet.markercluster) are self-hosted under `public/vendor/<pkg>/`
+and referenced via `asset('vendor/<pkg>/<file>')`. No third-party
+network dependency at runtime.
+
+### 2.2 Page module loader (`app.js` + `base.html.twig`)
+
+`base.html.twig` carries two attributes:
+
+```twig
+<body data-page="{% block data_page %}{% endblock %}"
+      data-map-js="{% block data_map_js %}{% endblock %}">
+```
+
+`public/js/app.js` reads them on `DOMContentLoaded`:
+
+- `data-page="cache"` → dynamic `import('./cache.js')`, then `init()`
+- `data-map-js="true"` → load Leaflet from `public/vendor/leaflet/`,
+  then side-effect import `./map.js`
+
+**Why:** one central loader, page authors override two Twig blocks
+to wire their module. No per-page `<script>` tags, no global
+registry, no JS-side route table. Adding a new page is: drop a file
+in `public/js/`, set the `data_page` block in its template.
+
+### 2.3 Map module
+
+`public/js/map.js` and its `map*.js` siblings implement the Leaflet
+map: icons, popups, shape selection, routing, GPX export.
+Page-specific glue lives in the page module (`livemap.js`,
+`cache.js`); the map module itself is a generic reusable component.
+
+### 2.4 Theme system
+
+CSS custom properties in `public/css/oc-style.css` keyed off
+`[data-theme="dark"]` on `<html>`. The inline script in the `<head>`
+of `base.html.twig` resolves the theme before render so the body
+never flashes the wrong palette. The navbar toggle writes
+`localStorage.oc-theme` and updates `data-theme`.
+
+**Why CSS variables:** one stylesheet serves both themes. Vendor
+components (Leaflet, Tabulator) need only a small number of targeted
+overrides under `[data-theme="dark"]` selectors. Adding a third
+theme later is a matter of one more selector block.
+
+### 2.5 Auth: legacy-session bridge
+
+`src/Security/LegacyCookieAuthenticator.php` reads the legacy
+`ocdevelopmentdata` cookie, validates it against `sys_sessions`, and
+hands Symfony a `User` keyed on the legacy `user_id`.
+`config/packages/security.yaml` gates everything except `/login` and
+the cache detail page via `access_control`.
+
+**Why a bridge instead of a fresh login:** the legacy PHP frontend
+will keep writing the cookie for the foreseeable future. The Symfony
+site needs to *see* the same login, not duplicate it. Validating
+against `sys_sessions` (rather than just trusting the cookie) keeps
+Symfony honest if the session is invalidated server-side. This also
+makes the cutover incremental: pages can move to Symfony one at a
+time and users notice nothing.
+
+### 2.6 Directory layout under `public/`
+
+```
+public/js/                ← first-party JS, flat
+public/vendor/<pkg>/      ← one directory per third-party package
+                            (bootstrap, leaflet, leaflet-draw,
+                             leaflet.markercluster, tabulator)
+public/css/               ← first-party CSS
+```
+
+Vendor packages keep their own internal structure (e.g.
+`vendor/leaflet/leaflet.css` + `vendor/leaflet/images/*.png`) so
+CSS-relative URLs resolve without rewriting.
+
+### 2.7 Dead code removed
+
+- `MapsController`, `MapsControllerBackend`, `MapsRepository`,
+  `templates/app/maps/index.html.twig`, the old "Map" navbar link —
+  superseded by `LiveMapController` + `templates/app/maps/livemap.html.twig`.
+- `templates/app/maps/maps.leaflet.js` — orphan fragment from the
+  old maps page.
+- `public/js/ag-grid.js` — only used for a demo, no longer needed.
+
+### 2.8 jQuery removed
+
+`feat: eliminate jQuery and replace with vanilla JS compatibility
+layer`. No new code should import jQuery.
+
+---
+
+## 3. Dev environment (`.ddev/`)
+
+Three new artifacts make a fresh `ddev restart` produce a working
+environment without any manual SQL or config edits.
+
+### `.ddev/mysql/no_strict.cnf`
+
+```ini
+[mysqld]
+sql_mode = ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+```
+
+**Why:** the legacy `htdocs/newcache.php` issues
+`INSERT INTO caches (cache_id, ...) VALUES ('', ...)` to get an
+AUTO_INCREMENT id. Under `STRICT_TRANS_TABLES` (ddev's default)
+MariaDB rejects the `''` with `Incorrect integer value`, producing
+HTTP 500 on cache submission. Production MariaDB does not run in
+strict mode, so dev needs to match.
+
+### `.ddev/db-patches/sp_update_logstat.sql`
+
+Idempotent `DROP PROCEDURE IF EXISTS … CREATE PROCEDURE …` rewriting
+the legacy stored procedure with two `IFNULL(..., 0)` wraps around
+the `needs_maintenance` / `listing_outdated` subqueries (the
+unwrapped subqueries returned NULL when a user had no prior log on
+a cache, producing HTTP 500 on the first log). Safe to run on every
+`ddev start`.
+
+**Why not upstream the fix?** This branch is scoped to the Symfony
+work; touching `sql/stored-proc/maintain-current.inc.php` would land
+in any release cut from this branch. The dev-only patch isolates the
+fix until we have signoff to merge it upstream.
+
+### `.ddev/config.yaml` — post-start hook
+
+```yaml
+hooks:
+  post-start:
+    - exec: cp htdocs/app/config/parameters.yml.dist htdocs/app/config/parameters.yml
+    - exec: cp htdocs/config2/settings-sample-dev.inc.php htdocs/config2/settings.inc.php
+    - exec: cp htdocs_symfony/.env.local_dist htdocs_symfony/.env.local
+    - exec: "mysql db < /mnt/ddev_config/db-patches/sp_update_logstat.sql"
+      service: db
+```
+
+The new last entry re-applies the procedure patch every start. The
+`.ddev/` directory is mounted at `/mnt/ddev_config/` inside the db
+container.
+
+---
+
+## 4. How to verify on a fresh checkout
+
+```bash
+git fetch
+git checkout feature/ui-refresh
+ddev restart            # picks up no_strict.cnf and runs the SP patch
+```
+
+Smoke tests:
+
+1. Visit `/` → redirected to `/login` (gated).
+2. Log in via the legacy frontend, return to the Symfony site → you
+   are authenticated, navbar shows your user dropdown.
+3. `/livemap` → map fills the viewport, OSM search top-center,
+   scroll-to-top button visible.
+4. `/cache/<any-OC-waypoint>` → detail page with log grid; submit a
+   new log (this previously 500'd on first log).
+5. Toggle theme via the sun/moon button → no flash on reload.
+
+---
+
+## 5. Known issues / open items on this branch
+
+- **Symfony schema migrations**: none added on this branch. The only
+  schema-shaped change is the stored-procedure patch, which lives
+  under `.ddev/` (dev-only) and is intentionally **not** a Doctrine
+  migration.
+- **Navbar items visible while logged out**: the Login link still
+  shows alongside menu items. Logged-out users hitting a gated page
+  are redirected to `/login` regardless, but the navbar itself is
+  not yet conditional.
+
+---
+
+## 6. Will this become THE next-generation opencaching.de?
+
+A frank self-assessment. This branch is **foundation work plus two
+flagship pages**, not a complete replacement.
+
+### 6.1 Solid foundation — keep building on it
+
+- **Symfony 7.x backbone**: industry-standard, long-term maintainable.
+- **Page module loader pattern**: clean, scalable, zero ceremony to
+  add pages. This is the right shape for the eventual full app.
+- **Legacy session bridge**: enables incremental cutover, page by
+  page, with no user-visible disruption. This is the right migration
+  strategy.
+- **Self-hosted vendor assets**: no third-party network dependency,
+  no GDPR exposure from outbound CDN requests.
+- **CSS-variable theme system**: extends to any component without
+  per-page work.
+- **No build step**: ESM-first posture, modern browsers handle this
+  natively. The page-module loader was designed so a bundler can be
+  introduced later as a pure optimization, without rewriting code.
+- **No jQuery**: forward-looking, reduces dependency surface.
+
+### 6.2 Gaps to close before this can replace production
+
+- **Bundling / minification.** Without it, a cold page load fetches
+  many small modules, blocking each subsequent import on round-trip
+  latency. The architecture supports adding a bundler as a build-time
+  optimization later; it has not been needed yet.
+- **Test pipeline.** No automated tests are added on this branch
+  (frontend or backend). For something that will sit in front of
+  every user, this needs a baseline before the first non-trivial
+  rollout: PHPUnit on controllers, at minimum smoke tests on the
+  page modules.
+- **Page coverage.** Two pages are ported (`/cache/{wp}`, `/livemap`).
+  Replacing the legacy frontend means home, search, profile, lists,
+  log lists, owner views, statistics, admin, registration, password
+  reset, account settings, notifications, and more. The pattern
+  scales, but the work to apply it is sizeable.
+- **Doctrine migrations.** None on this branch. Any real schema work
+  the new app introduces will need them; the precedent we set with
+  the stored-procedure patch (kept under `.ddev/` as dev-only) is
+  the right call for *that specific case* and should not be
+  generalized.
+- **Strict-mode SQL in production-grade code.** The dev-only
+  `no_strict.cnf` papers over a legacy bug in
+  `htdocs/newcache.php`. New Symfony code should be written assuming
+  strict mode and tested under it — that is the standard the
+  next-gen app should hold itself to, even while the legacy tree
+  cannot.
+- **Accessibility / i18n discipline.** Twig and the existing trans
+  filters give us the right tools; we have not yet set a baseline
+  for which locales are first-class, what level of WCAG conformance
+  we target, or who reviews PRs against it.
+- **Observability.** The legacy site has its own logging story; the
+  Symfony side needs structured logging, error reporting, and
+  performance telemetry before it can stand on its own.
+
+### 6.3 Verdict
+
+The foundation is sound and the migration strategy (legacy-session
+bridge + page-by-page cutover) is realistic. The two pages on this
+branch demonstrate the pattern works. But this branch alone is not
+the next-gen product — it is the platform on which that product can
+be built. Treat §6.2 as the agenda for getting there.

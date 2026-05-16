@@ -1,11 +1,11 @@
 /*
- * Front-end entry point — modelled after gcxm.js.
+ * Front-end entry point.
  *
  * Page selection:
- *   - `<body data-page="...">` names a module under public/js/pages/<page>.js
+ *   - `<body data-page="...">` names a module under public/js/<page>.js
  *   - `<body data-map-js="true">` triggers Leaflet asset loading and a
- *     side-effect import of public/js/pages/map/map.js (the verbatim gcxm
- *     map module which initializes the live map on import).
+ *     side-effect import of public/js/map.js, which initializes the live
+ *     map on import.
  *
  * Globals such as `uniCacheWP`, `lat`, `lon`, `defaultZoom`, `enabledPlatforms`
  * must be set by the page template BEFORE this module loads so the map module
@@ -38,20 +38,19 @@ async function loadJs(src) {
 
 async function loadMap() {
     await Promise.all([
-        loadCss('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'),
-        loadCss('https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css'),
-        loadCss('https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css'),
-        loadCss('https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css'),
+        loadCss('/vendor/leaflet/leaflet.css'),
+        loadCss('/vendor/leaflet-draw/leaflet.draw.css'),
+        loadCss('/vendor/leaflet.markercluster/MarkerCluster.css'),
+        loadCss('/vendor/leaflet.markercluster/MarkerCluster.Default.css'),
     ]);
 
-    await loadJs('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
+    await loadJs('/vendor/leaflet/leaflet.js');
     await Promise.all([
-        loadJs('https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js'),
-        loadJs('https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js'),
+        loadJs('/vendor/leaflet-draw/leaflet.draw.js'),
+        loadJs('/vendor/leaflet.markercluster/leaflet.markercluster.js'),
     ]);
 
-    // Side-effect import: the verbatim gcxm map.js initializes the map at top level.
-    await import('./pages/map/map.js');
+    await import('./map.js');
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -67,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!page) return;
 
     try {
-        const mod = await import(`./pages/${page}.js`);
+        const mod = await import(`./${page}.js`);
         if (typeof mod.init === 'function') await mod.init();
     } catch (err) {
         console.log(`[App] Failed to load page module: ${page}`, err);

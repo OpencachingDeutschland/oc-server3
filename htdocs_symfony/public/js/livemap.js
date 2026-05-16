@@ -8,7 +8,7 @@
 // window.lon / window.defaultZoom).
 // ---------------------------------------------------------------
 
-import { handleWPs, getMyMap, enableLiveMode } from './map/map.js';
+import { handleWPs, getMyMap, enableLiveMode } from './map.js';
 
 export async function init() {
     await handleWPs();

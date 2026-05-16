@@ -1,8 +1,8 @@
-import { TabulatorFull as Tabulator } from 'https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator_esm.min.js';
-import { loadCss } from '../lib/loadAsset.js';
+import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.js';
+import { loadCss } from './loadAsset.js';
 
 export async function init() {
-    await loadCss('https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_bootstrap5.min.css');
+    await loadCss('/vendor/tabulator/tabulator_bootstrap5.min.css');
 
     const tableData = [
         {id:1, name:"Oli Bob", age:"12", col:"red", dob:""},

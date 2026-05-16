@@ -177,24 +177,32 @@
 
         body, html {
             min-height: 100%;
-            background: #222222;
         }
 
         .maintenance-container {
-            background: #fff;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
+            background: var(--oc-bg-elevated);
+            color: var(--oc-text-primary);
             border-radius: 3px;
             margin: 50px auto;
             padding: 30px;
             position: relative;
             text-align: center;
             width: 475px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
 
-            -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-            -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-            -ms-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+        .maintenance-container a {
+            color: var(--oc-link-color);
+        }
+
+        .maintenance-container .form-control {
+            background-color: var(--oc-input-bg);
+            color: var(--oc-text-primary);
+            border-color: var(--oc-input-border);
+        }
+
+        .maintenance-container .form-control::placeholder {
+            color: var(--oc-text-secondary);
         }
 
         .maintenance-headline {
@@ -241,7 +249,7 @@
                 >
             </div>
 
-            <button class="btn btn-block btn-outline-dark" type="submit">
+            <button class="btn btn-block btn-primary" type="submit">
                 Sign in
             </button>
 

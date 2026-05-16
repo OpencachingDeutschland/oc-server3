@@ -220,9 +220,10 @@ class CachesController extends AbstractController
             }
         }
 
-        // User's PCN row (note + corrected coords share one row in `coordinates` type=2)
+        // User's PCN row (note + corrected coords + remembered log password share
+        // one row in `coordinates` type=2)
         $noteRow = $userId ? $this->connection->fetchAssociative(
-            'SELECT description, latitude, longitude FROM coordinates
+            'SELECT description, latitude, longitude, logpw FROM coordinates
              WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
             [$cacheId, $userId]
         ) : null;
@@ -360,6 +361,7 @@ class CachesController extends AbstractController
             'descHtml'    => (bool)($desc['desc_html'] ?? true),
             'needsMaintenance' => (bool)$cache['needs_maintenance'],
             'listingOutdated'  => (bool)$cache['listing_outdated'],
+            'myLogpw'          => $noteRow['logpw'] ?? '',
         ];
 
         $context = [
@@ -414,6 +416,51 @@ class CachesController extends AbstractController
         return new JsonResponse(['saved' => true]);
     }
 
+    #[Route("/api/cache/{wp}/logpw", name: "api_cache_logpw_save", methods: ["POST"])]
+    public function saveLogpw(string $wp, Request $request): JsonResponse
+    {
+        $user = $this->security->getUser();
+        if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
+
+        $userId = $user->getUserId();
+        $wp = strtoupper($wp);
+        $body = json_decode($request->getContent(), true);
+        $logpw = substr(trim((string)($body['logpw'] ?? '')), 0, 20);
+
+        $cache = $this->connection->fetchAssociative('SELECT cache_id FROM caches WHERE wp_oc = ?', [$wp]);
+        if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
+        $cacheId = (int)$cache['cache_id'];
+
+        $existing = $this->connection->fetchAssociative(
+            'SELECT id, description, latitude, longitude FROM coordinates
+             WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
+            [$cacheId, $userId]
+        );
+
+        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+        if ($existing) {
+            // If clearing and the row has no other content, delete it.
+            $hasOther = ($existing['description'] !== null && $existing['description'] !== '')
+                || (float)$existing['latitude'] !== 0.0
+                || (float)$existing['longitude'] !== 0.0;
+            if ($logpw === '' && !$hasOther) {
+                $this->connection->executeStatement('DELETE FROM coordinates WHERE id=?', [(int)$existing['id']]);
+                return new JsonResponse(['saved' => true, 'logpw' => '']);
+            }
+            $this->connection->executeStatement(
+                'UPDATE coordinates SET logpw=?, last_modified=? WHERE id=?',
+                [$logpw, $now, (int)$existing['id']]
+            );
+        } elseif ($logpw !== '') {
+            $this->connection->executeStatement(
+                'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, logpw, date_created, last_modified)
+                 VALUES (?,?,2,0,0,0,"",?,?,?)',
+                [$cacheId, $userId, $logpw, $now, $now]
+            );
+        }
+        return new JsonResponse(['saved' => true, 'logpw' => $logpw]);
+    }
+
     #[Route("/api/cache/{wp}/coords", name: "api_cache_coords_save", methods: ["POST"])]
     public function saveCoords(string $wp, Request $request): JsonResponse
     {
@@ -463,10 +510,23 @@ class CachesController extends AbstractController
         $type = (int)($body['type'] ?? 3);
         $date = (string)($body['date'] ?? date('Y-m-d'));
         $text = trim((string)($body['text'] ?? ''));
+        $submittedPw = trim((string)($body['password'] ?? ''));
 
-        $cache = $this->connection->fetchAssociative('SELECT cache_id FROM caches WHERE wp_oc = ?', [$wp]);
+        $cache = $this->connection->fetchAssociative('SELECT cache_id, logpw FROM caches WHERE wp_oc = ?', [$wp]);
         if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
         $cacheId = (int)$cache['cache_id'];
+        $cacheLogpw = (string)$cache['logpw'];
+
+        // Found-type logs (1=Found, 7=Attended) on a cache with a log password
+        // must submit a matching password. OC compares case-insensitively.
+        if ($cacheLogpw !== '' && in_array($type, [1, 7], true)) {
+            if ($submittedPw === '') {
+                return new JsonResponse(['error' => 'Log password required for this cache'], 422);
+            }
+            if (strcasecmp($submittedPw, $cacheLogpw) !== 0) {
+                return new JsonResponse(['error' => 'Incorrect log password'], 422);
+            }
+        }
 
         // Normalize date to datetime
         if (strlen($date) === 10) $date .= ' 00:00:00';
@@ -499,16 +559,34 @@ class CachesController extends AbstractController
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
         $userId = $user->getUserId();
+        $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $type = (int)($body['type'] ?? 3);
         $date = (string)($body['date'] ?? date('Y-m-d'));
         $text = trim((string)($body['text'] ?? ''));
+        $submittedPw = trim((string)($body['password'] ?? ''));
 
         $log = $this->connection->fetchAssociative(
             'SELECT id, user_id FROM cache_logs WHERE id=?', [$logId]
         );
         if (!$log || (int)$log['user_id'] !== $userId) {
             return new JsonResponse(['error' => 'Not authorized'], 403);
+        }
+
+        $cache = $this->connection->fetchAssociative('SELECT logpw FROM caches WHERE wp_oc = ?', [$wp]);
+        if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
+        $cacheLogpw = (string)$cache['logpw'];
+
+        // Same gate as createLog: Found/Attended on a password-protected cache
+        // must supply a matching password — applies to edits too, otherwise a
+        // user could post a Comment then edit it to Found and bypass the check.
+        if ($cacheLogpw !== '' && in_array($type, [1, 7], true)) {
+            if ($submittedPw === '') {
+                return new JsonResponse(['error' => 'Log password required for this cache'], 422);
+            }
+            if (strcasecmp($submittedPw, $cacheLogpw) !== 0) {
+                return new JsonResponse(['error' => 'Incorrect log password'], 422);
+            }
         }
 
         if (strlen($date) === 10) $date .= ' 00:00:00';

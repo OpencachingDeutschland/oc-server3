@@ -809,8 +809,9 @@ function setupEditModeUI(log) {
   if (editLogCheckbox) editLogCheckbox.checked = false;
 
   if (editLogType) {
+    const allowed = allowedLogTypes(log);
     editLogType.innerHTML = '';
-    (gc.logTypes || []).forEach(t => {
+    allowed.forEach(t => {
       const opt = document.createElement('option');
       opt.value = t;
       opt.textContent = OC_LOG_TYPE_NAMES[t] || `Type ${t}`;
@@ -819,6 +820,24 @@ function setupEditModeUI(log) {
     });
   }
   if (editLogText) adjustHeight(editLogText);
+}
+
+// -----------------------------------------------------------------
+// allowedLogTypes() — strip Found (1) / Attended (7) from the dropdown
+// when the user already has one of those on this cache (mirrors the
+// backend gate). `excludeLog` is the log being edited, if any — its
+// type must remain available so the option stays selected.
+
+function allowedLogTypes(excludeLog) {
+  const types = gc.logTypes || [];
+  const mine = logs.filter(l => l.itsMine && (!excludeLog || l.id !== excludeLog.id));
+  const hasFound    = mine.some(l => l.type === 1);
+  const hasAttended = mine.some(l => l.type === 7);
+  return types.filter(t => {
+    if (t === 1 && hasFound)    return false;
+    if (t === 7 && hasAttended) return false;
+    return true;
+  });
 }
 
 // -----------------------------------------------------------------
@@ -838,10 +857,10 @@ function setupNewModeUI(log) {
   if (editLogCheckbox) editLogCheckbox.checked = true;
 
   if (editLogType) {
+    const allowed = allowedLogTypes(null);
     editLogType.innerHTML = '';
-    const types = gc.logTypes || [];
-    const defaultId = types.includes(1) ? 1 : (types.includes(7) ? 7 : (types[0] ?? 3));
-    types.forEach(t => {
+    const defaultId = allowed.includes(1) ? 1 : (allowed.includes(7) ? 7 : (allowed[0] ?? 3));
+    allowed.forEach(t => {
       const opt = document.createElement('option');
       opt.value = t;
       opt.textContent = OC_LOG_TYPE_NAMES[t] || `Type ${t}`;
@@ -857,6 +876,11 @@ function setupNewModeUI(log) {
 
 async function updateLog(log, saveBtn, currentMode) {
   if (saveBtn) saveBtn.disabled = true;
+  // Clear any leftover error from a previous failed attempt.
+  if (editLogMsg) {
+    editLogMsg.textContent = '';
+    editLogMsg.style.display = 'none';
+  }
   const isNew = currentMode === 'newLog';
   const wp = gc.referenceCode;
 
@@ -1017,6 +1041,10 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
 
 async function deleteLog(log) {
   if (!confirm('Delete this log from opencaching.de?')) return;
+  if (editLogMsg) {
+    editLogMsg.textContent = '';
+    editLogMsg.style.display = 'none';
+  }
 
   try {
     const res = await fetch(`/api/cache/${gc.referenceCode}/log/${log.id}`, {

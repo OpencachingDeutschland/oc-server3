@@ -528,6 +528,19 @@ class CachesController extends AbstractController
             }
         }
 
+        // Found (1) / Attended (7) are one-per-user-per-cache. Reject a
+        // second one rather than silently letting the user double-log.
+        if (in_array($type, [1, 7], true)) {
+            $dup = (int)$this->connection->fetchOne(
+                'SELECT COUNT(*) FROM cache_logs WHERE cache_id=? AND user_id=? AND type=?',
+                [$cacheId, $userId, $type]
+            );
+            if ($dup > 0) {
+                $name = $type === 1 ? 'Found it' : 'Attended';
+                return new JsonResponse(['error' => "You already have a $name log on this cache — edit that one instead"], 422);
+            }
+        }
+
         // Normalize date to datetime
         if (strlen($date) === 10) $date .= ' 00:00:00';
 
@@ -567,15 +580,29 @@ class CachesController extends AbstractController
         $submittedPw = trim((string)($body['password'] ?? ''));
 
         $log = $this->connection->fetchAssociative(
-            'SELECT id, user_id FROM cache_logs WHERE id=?', [$logId]
+            'SELECT id, user_id, cache_id FROM cache_logs WHERE id=?', [$logId]
         );
         if (!$log || (int)$log['user_id'] !== $userId) {
             return new JsonResponse(['error' => 'Not authorized'], 403);
         }
+        $cacheId = (int)$log['cache_id'];
 
         $cache = $this->connection->fetchAssociative('SELECT logpw FROM caches WHERE wp_oc = ?', [$wp]);
         if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
         $cacheLogpw = (string)$cache['logpw'];
+
+        // Reject flipping a log's type to Found/Attended when the user
+        // already has another log of that type on this cache.
+        if (in_array($type, [1, 7], true)) {
+            $dup = (int)$this->connection->fetchOne(
+                'SELECT COUNT(*) FROM cache_logs WHERE cache_id=? AND user_id=? AND type=? AND id<>?',
+                [$cacheId, $userId, $type, $logId]
+            );
+            if ($dup > 0) {
+                $name = $type === 1 ? 'Found it' : 'Attended';
+                return new JsonResponse(['error' => "You already have a $name log on this cache — edit that one instead"], 422);
+            }
+        }
 
         // Same gate as createLog: Found/Attended on a password-protected cache
         // must supply a matching password — applies to edits too, otherwise a

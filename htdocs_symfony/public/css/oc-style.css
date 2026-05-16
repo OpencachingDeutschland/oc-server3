@@ -149,6 +149,7 @@ a:hover {
    4. Form Controls
    ----------------------------------------------------------------- */
 .form-control,
+.form-select,
 input[type="text"],
 input[type="number"],
 input[type="password"],
@@ -162,6 +163,7 @@ select {
 }
 
 .form-control:focus,
+.form-select:focus,
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="password"]:focus,
@@ -174,10 +176,12 @@ select:focus {
   color: var(--oc-text-primary);
 }
 
-/* Bootstrap 5 needs color-scheme for native date pickers in dark mode */
+/* Bootstrap 5 needs color-scheme for native pickers + select popups in dark mode */
 [data-theme="dark"] input[type="date"],
 [data-theme="dark"] input[type="datetime-local"],
-[data-theme="dark"] input[type="time"] {
+[data-theme="dark"] input[type="time"],
+[data-theme="dark"] select,
+[data-theme="dark"] .form-select {
   color-scheme: dark;
 }
 

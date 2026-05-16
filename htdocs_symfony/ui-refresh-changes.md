@@ -50,7 +50,7 @@ leaflet.markercluster) are self-hosted under `public/vendor/<pkg>/`
 and referenced via `asset('vendor/<pkg>/<file>')`. No third-party
 network dependency at runtime.
 
-### 2.2 Page module loader (`app.js` + `base.html.twig`)
+### 2.2 Page module loader (`loader.js` + `base.html.twig`)
 
 `base.html.twig` carries two attributes:
 
@@ -59,7 +59,7 @@ network dependency at runtime.
       data-map-js="{% block data_map_js %}{% endblock %}">
 ```
 
-`public/js/app.js` reads them on `DOMContentLoaded`:
+`public/js/loader.js` reads them on `DOMContentLoaded`:
 
 - `data-page="cache"` → dynamic `import('./cache.js')`, then `init()`
 - `data-map-js="true"` → load Leaflet from `public/vendor/leaflet/`,
@@ -187,15 +187,48 @@ container.
 
 ---
 
-## 4. How to verify on a fresh checkout
+## 4. Pulling the branch and verifying it
+
+### 4.1 Where the branch lives
+
+There is no PR yet. The branch lives on the contributor's fork:
+
+```
+git@github.com:hxdimpf/oc-server3.git    feature/ui-refresh
+```
+
+If your checkout already has that fork as a remote, skip ahead to
+**4.2**. Otherwise add it. Pick the name you prefer — `hxdimpf`,
+`ui-refresh`, anything; the examples below use `hxdimpf`.
 
 ```bash
-git fetch
-git checkout feature/ui-refresh
+git remote -v                            # do you already have the fork?
+git remote add hxdimpf git@github.com:hxdimpf/oc-server3.git
+```
+
+### 4.2 Checking the branch out
+
+```bash
+git fetch hxdimpf
+git checkout -b feature/ui-refresh hxdimpf/feature/ui-refresh
 ddev restart            # picks up no_strict.cnf and runs the SP patch
 ```
 
-Smoke tests:
+`ddev restart` is required, not optional: it applies the portable
+`.ddev/` bootstrap from §3 (the `no_strict.cnf` MariaDB config and the
+`sp_update_logstat.sql` patch). Without it the cache-submission and
+first-log flows still 500.
+
+No `composer install` is required for testing — the legacy PHP and
+the Symfony app share the same vendor tree, already populated by your
+existing checkout. If you do run `composer install`, point it at the
+Symfony tree:
+
+```bash
+ddev composer install -d htdocs_symfony
+```
+
+### 4.3 Smoke tests
 
 1. Visit `/` → redirected to `/login` (gated).
 2. Log in via the legacy frontend, return to the Symfony site → you
@@ -203,8 +236,17 @@ Smoke tests:
 3. `/livemap` → map fills the viewport, OSM search top-center,
    scroll-to-top button visible.
 4. `/cache/<any-OC-waypoint>` → detail page with log grid; submit a
-   new log (this previously 500'd on first log).
+   new log (this previously 500'd on first log). Try the duplicate
+   guard: post a Found, then attempt a second — the dropdown should
+   no longer offer "Found it".
 5. Toggle theme via the sun/moon button → no flash on reload.
+
+### 4.4 Returning to your usual branch
+
+The branch only touches `htdocs_symfony/` plus the three `.ddev/`
+artifacts. Switching back is just `git checkout <yourbranch>`; the
+legacy `htdocs/` tree is unchanged either way. Re-run `ddev restart`
+if the other branch needs a different DB state.
 
 ---
 

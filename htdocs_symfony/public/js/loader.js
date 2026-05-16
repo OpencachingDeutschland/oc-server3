@@ -9,8 +9,8 @@
  *
  * Globals such as `uniCacheWP`, `lat`, `lon`, `defaultZoom`, `enabledPlatforms`
  * must be set by the page template BEFORE this module loads so the map module
- * sees them. Each page module then exports `init()` which app.js calls after
- * the map (if any) is ready.
+ * sees them. Each page module then exports `init()` which loader.js calls
+ * after the map (if any) is ready.
  */
 
 async function loadCss(href) {

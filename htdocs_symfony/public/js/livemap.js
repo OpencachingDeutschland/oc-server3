@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------
 // livemap.js — page module for /livemap.
 //
-// app.js has already loaded Leaflet and side-effect-imported the verbatim
+// loader.js has already loaded Leaflet and side-effect-imported the verbatim
 // gcxm map.js (which created the map and registered controls). We only
 // need to call handleWPs() to enable live mode (window.uniCacheWP is
 // empty, so map.js falls through to the live branch using window.lat /

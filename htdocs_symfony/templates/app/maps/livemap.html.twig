@@ -32,7 +32,7 @@
 
 {% block after_body_start %}
     {# Globals the verbatim gcxm map modules look up via window/free variables.
-       Must be set BEFORE <script type="module" src="app.js"> runs map.js. #}
+       Must be set BEFORE <script type="module" src="loader.js"> runs map.js. #}
     <script>
         window.enabledPlatforms = ['OC'];
         window.uniCacheWP       = [];

@@ -5,7 +5,7 @@
  * dropped. Reuses gcxm's cooker via lib/uniCache.js (ocToUniCacheWP).
  *
  * Page lifecycle:
- *   1. app.js sees <body data-page="cache"> → imports this module → calls init().
+ *   1. loader.js sees <body data-page="cache"> → imports this module → calls init().
  *   2. init() reads wp code from #explore-container[data-code], fetches
  *      /api/cache/{wp} which returns { oc, aux, context }.
  *   3. oc is cooked into a uniCacheWP via ocToUniCacheWP(). Render-time
@@ -1082,7 +1082,7 @@ async function deleteLog(log) {
 // -----------------------------------------------------------------
 // initMap() — feed this cache into the already-loaded map module and call handleWPs.
 //
-// app.js has imported map.js (side effects: map, controls, registries set up).
+// loader.js has imported map.js (side effects: map, controls, registries set up).
 // The verbatim gcxm handleWPs() reads window.uniCacheWP — push the cooked
 // cache in and call it.
 

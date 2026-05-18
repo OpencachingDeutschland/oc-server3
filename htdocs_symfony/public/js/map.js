@@ -54,7 +54,7 @@ const ScrollTopControl = L.Control.extend({
     return btn;
   }
 });
-if (document.body.dataset.page !== 'mapServer') {
+if (document.body.dataset.page !== 'mapServer' && document.body.dataset.page !== 'livemap') {
   new ScrollTopControl({ position: 'topcenter' }).addTo(mapRoot);
 }
 

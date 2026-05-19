@@ -154,7 +154,7 @@ is picked at read time.
 4. CSS in `templates/app/caches/detail.html.twig`:
 
    ```css
-   #cache-description.cache-description-light-island {
+   [data-theme="dark"] #cache-description.cache-description-light-island {
        background: #fff;
        color: #222;
        color-scheme: light;
@@ -165,8 +165,13 @@ is picked at read time.
 
    `color-scheme: light` is the key bit — it tells the browser to use
    light-theme defaults for any native widgets (scrollbars, form
-   controls, even SVG `currentColor` defaults) inside the container,
-   regardless of the page-level `data-theme="dark"`.
+   controls, even SVG `currentColor` defaults) inside the container.
+
+   The selector is gated on `[data-theme="dark"]` so the class is a
+   no-op in light mode. JS applies the class unconditionally based on
+   `descDarkUnsafe`; CSS handles "only render the card in dark mode".
+   This means a theme toggle requires no JS re-run — the cascade
+   picks up the new theme automatically.
 
 ### Backout
 

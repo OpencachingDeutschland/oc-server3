@@ -180,6 +180,7 @@ function augmentForRender(uc, oc, aux) {
     parts.push(aux.descHtml ? oc.description : oc.description.replace(/\n/g, '<br>'));
   }
   uc.sanitizedDescription = parts.join('\n');
+  uc.descDarkUnsafe = !!aux.descDarkUnsafe;
 
   // Hint (OC stores plain — never rot13)
   uc.hints = oc.hint2 || '';
@@ -422,7 +423,10 @@ function renderCache() {
 
   // Description
   const descEl = getById('cache-description');
-  if (descEl) descEl.innerHTML = gc.sanitizedDescription || '';
+  if (descEl) {
+    descEl.innerHTML = gc.sanitizedDescription || '';
+    descEl.classList.toggle('cache-description-light-island', !!gc.descDarkUnsafe);
+  }
 
   renderAttributes();
   createWPTable();

@@ -145,7 +145,7 @@ class CachesController extends AbstractController
 
         // Description — prefer cache country language, else EN, else first available
         $desc = $this->connection->fetchAssociative(
-            'SELECT cd.desc, cd.hint, cd.short_desc, cd.desc_html, cd.language
+            'SELECT cd.desc, cd.hint, cd.short_desc, cd.desc_html, cd.desc_dark_unsafe, cd.language
              FROM cache_desc cd
              WHERE cd.cache_id = ?
              ORDER BY cd.language = ? DESC, cd.language = \'EN\' DESC
@@ -359,6 +359,7 @@ class CachesController extends AbstractController
             'wpGc'        => $cache['wp_gc'] ?: '',
             'svgName'     => $cache['svg_name'],
             'descHtml'    => (bool)($desc['desc_html'] ?? true),
+            'descDarkUnsafe'   => (bool)($desc['desc_dark_unsafe'] ?? false),
             'needsMaintenance' => (bool)$cache['needs_maintenance'],
             'listingOutdated'  => (bool)$cache['listing_outdated'],
             'myLogpw'          => $noteRow['logpw'] ?? '',

@@ -61,6 +61,18 @@
         #cache-description table { table-layout:fixed; width:100%; }
         #cache-description pre  { white-space:pre-wrap; overflow-x:auto; }
 
+        /* Light-island for listings with hard-coded colors/backgrounds that
+           would clash with a dark UI. The class is applied by cache.js when
+           cache_desc.desc_dark_unsafe is set. */
+        #cache-description.cache-description-light-island {
+            background: #fff;
+            color: #222;
+            color-scheme: light;
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+        }
+        #cache-description.cache-description-light-island a { color: #06c; }
+
         #logsTable .tabulator, #wptTable .tabulator { border:none !important; background:transparent !important; }
         #logsTable .tabulator-row { background:transparent !important; }
         #logsTable .tabulator-cell, #logsTable .tabulator-row { border:none !important; padding:0 !important; }

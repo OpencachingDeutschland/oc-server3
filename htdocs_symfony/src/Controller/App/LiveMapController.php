@@ -22,6 +22,8 @@ class LiveMapController extends AbstractController
     #[Route('/livemap', name: 'livemap')]
     public function index(): Response
     {
+        // TODO: read per-user homeLat/homeLon/defaultZoom from a user-settings table
+        // once Settings UI exists; fall back to these defaults when unset.
         return $this->render('app/maps/livemap.html.twig', [
             'initLat'  => 52.3759,
             'initLon'  => 9.7320,

@@ -31,7 +31,7 @@ class SearchController extends AbstractController
         }
 
         $maxItems = 5000;
-        $userId = $this->security->getUser() ? (int)$this->security->getUser()->getUserIdentifier() : 0; // Assuming UserIdentifier is ID
+        $userId = $this->security->getUser()?->getUserId() ?? 0;
 
         $count = (int)$this->connection->fetchOne(
             "SELECT COUNT(*)

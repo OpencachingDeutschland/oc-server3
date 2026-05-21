@@ -233,17 +233,13 @@ const addMarker = async (event) => {
   const getPopupContent = () => {
     const { lat, lng } = marker.getLatLng();
     const coordsText = coords2Dm(lat, lng);
-    return `<input type="text" readonly value="${coordsText}"
-            style="
-              min-width:160px;
-              width:auto;
-              border:none;
-              outline:none;
-              background:none;
-              font-size:12px;
-              font-family:monospace;
-              cursor:text;
-            " />`;
+    const escaped = coordsText.replace(/'/g, "\\'");
+    return `<div style="display:flex;align-items:center;gap:6px">
+      <input type="text" readonly value="${coordsText}"
+        style="min-width:160px;width:auto;border:none;outline:none;background:none;font-size:12px;font-family:monospace;cursor:text" />
+      <span title="Copy to clipboard" style="cursor:pointer;font-size:13px;user-select:none"
+        onclick="this.textContent='✓';setTimeout(()=>{this.textContent='⧉'},1500);navigator.clipboard?.writeText('${escaped}')">⧉</span>
+    </div>`;
   };
 
   // Track popup open/close state

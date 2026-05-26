@@ -167,12 +167,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <h5 id="additionalWP" class="p-2 bg-secondary text-white d-none">Additional Waypoints</h5>
+                    <h5 id="additionalWP" class="p-2 bg-secondary text-white d-none">{{ 'Additional Waypoints' | trans }}</h5>
                     <div id="wptTable"></div>
                 </div>
 
                 <div class="mb-3">
-                    <h5 class="p-2 bg-secondary text-white">Personal Cache Notes</h5>
+                    <h5 class="p-2 bg-secondary text-white">{{ 'Personal Cache Notes' | trans }}</h5>
                     <textarea class="pcnTextarea" id="editPCN"></textarea>
                 </div>
 
@@ -183,26 +183,26 @@
                 <div id="editLog" style="display:none" class="mb-3">
                     <h5 id="editLogHeader" class="p-2 bg-secondary text-white d-flex justify-content-between align-items-center">
                         <span id="editLogHeaderText"></span>
-                        <button id="deleteLogBtn" class="btn btn-sm btn-outline-danger" style="display:none">Delete Log</button>
+                        <button id="deleteLogBtn" class="btn btn-sm btn-outline-danger" style="display:none">{{ 'Delete Log' | trans }}</button>
                     </h5>
                     <textarea class="logTextarea" id="editLogText"></textarea>
                     <div id="editLogControls" style="visibility:hidden" class="d-flex gap-2 align-items-center mt-2 flex-wrap">
                         <input id="editLogDate" class="form-control w-auto" type="text" maxlength="24">
                         <select id="editLogType" class="form-select w-auto"></select>
-                        <button id="editLogSave" class="btn btn-sm btn-danger">Save</button>
+                        <button id="editLogSave" class="btn btn-sm btn-danger">{{ 'Save' | trans }}</button>
                         <div id="editLogCheckboxWrapper" style="display:none">
                             <input type="checkbox" id="editLogCheckbox">
-                            <label for="editLogCheckbox">New Log</label>
+                            <label for="editLogCheckbox">{{ 'New Log' | trans }}</label>
                         </div>
                         <span id="editLogMsg" style="color:var(--oc-danger);font-size:0.85em"></span>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <h5 class="p-2 bg-secondary text-white">Latest Logs</h5>
+                    <h5 class="p-2 bg-secondary text-white">{{ 'Latest Logs' | trans }}</h5>
                     <div id="logsLoading" class="loading-indicator">
                         <span class="spinner"></span>
-                        Loading logs...
+                        {{ 'Loading logs...' | trans }}
                     </div>
                     <div id="logsTable"></div>
                 </div>

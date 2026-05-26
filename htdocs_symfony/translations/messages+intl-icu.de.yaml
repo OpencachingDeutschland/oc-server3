@@ -3,7 +3,7 @@ Search: Suche
 'Search users': 'Benutzer suchen'
 'Identify coordinates format': 'Koordinatenformat erkennen'
 Hide: Verstecken
-'Live Map': 'Live-Karte'
+'Live Map': Live-Karte
 News: News
 menuNewsBlog: Blog
 menuNewsEvents: Events
@@ -34,7 +34,7 @@ OCOnly-81: OCOnly-81
 'Search for caches and users': 'Caches und Benutzer suchen'
 Found: Gefunden
 cache(s): Cache(s)
-'OC code': 'OC-Code'
+'OC code': OC-Code
 'Cache title': Cache-Titel
 'Owner name': Owner-Name
 Details: Details
@@ -108,7 +108,7 @@ Description: Beschreibung
 'Hidden information': 'Verborgene Informationen'
 'User ID': Benutzer-ID
 Email: E-Mail
-'Email validity': 'E-Mail-Gültigkeit'
+'Email validity': E-Mail-Gültigkeit
 'Account created': 'Konto erstellt'
 'User active': 'Benutzer aktiv'
 'Activation code': Aktivierungscode
@@ -169,7 +169,7 @@ Access: Zugriff
 "🔴 Sorry. You don't have access to this ROLE": '🔴 Leider hast du keinen Zugriff auf diese ROLE'
 'The team': 'Das Team'
 'No team members found': 'Keine Team-Mitglieder gefunden'
-'OCC replacement page': 'OCC-Ersatzseite'
+'OCC replacement page': OCC-Ersatzseite
 'User related information': 'Benutzerbezogene Informationen'
 User: Benutzer
 'Send message': 'Nachricht senden'
@@ -248,7 +248,7 @@ attributes: Attribute
 'logs, but without pictures (picture restore is not yet possible to handle)': 'Logs, aber ohne Bilder (Bilder-Wiederherstellung ist noch nicht möglich)'
 'The user has allowed to reset the selected cache to a previous version.': 'Der Benutzer hat zugestimmt, den ausgewählten Cache auf eine frühere Version zurückzusetzen.'
 'Are you sure?': 'Bist du sicher?'
-'Simulate?': Simulieren?
+'Simulate?': 'Simulieren?'
 'No restorable changes found': 'Keine wiederherstellbaren Änderungen gefunden'
 'Reported caches': 'Gemeldete Caches'
 'Bonus caches': Bonus-Caches
@@ -341,3 +341,12 @@ E-mail: E-Mail
 'Your Password': 'Dein Passwort'
 'Confirm password': 'Passwort bestätigen'
 "I've read and understand the privacy statement, the terms of service and the Data license and accept them.": 'Ich habe die Datenschutzerklärung, die Nutzungsbedingungen und die Datenlizenz gelesen, verstanden und akzeptiere sie.'
+'Additional Waypoints': 'Zusätzliche Wegpunkte'
+'Personal Cache Notes': 'Persönliche Cache-Notizen'
+'Delete Log': 'Log löschen'
+Save: Speichern
+'New Log': 'Neuer Log'
+'Latest Logs': 'Neueste Logs'
+'Loading logs...': 'Logs werden geladen...'
+'Log in!': 'Anmelden!'
+Password: Passwort

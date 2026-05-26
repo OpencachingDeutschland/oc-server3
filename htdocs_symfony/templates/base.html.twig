@@ -73,8 +73,18 @@
                         {% endif %}
                     {% endblock %}
 
-                    {# Right-aligned section: theme toggle + user dropdown (or Login link) #}
+                    {# Right-aligned section: language switcher + theme toggle + user dropdown (or Login link) #}
                     <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item dropdown me-2">
+                            <a class="nav-link dropdown-toggle" href="#" id="localeDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-globe"></i>
+                                {{ app.request.locale | upper }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="localeDropdown">
+                                <li><a class="dropdown-item{% if app.request.locale == 'de' %} active{% endif %}" href="{{ path('app_locale_set', {locale: 'de'}) }}">Deutsch</a></li>
+                                <li><a class="dropdown-item{% if app.request.locale == 'en' %} active{% endif %}" href="{{ path('app_locale_set', {locale: 'en'}) }}">English</a></li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <button class="theme-toggle" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">
                                 <span class="theme-icon-light">&#9788;</span>

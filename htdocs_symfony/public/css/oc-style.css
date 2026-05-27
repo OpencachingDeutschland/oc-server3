@@ -218,12 +218,14 @@ select:focus {
 
 .navbar-dark .navbar-nav .nav-link {
   color: rgba(255,255,255,0.85);
+  border-radius: 0.25rem;
 }
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #ffffff;
 }
 .navbar-dark .navbar-nav .nav-link.active {
   color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
   font-weight: 600;
 }
 

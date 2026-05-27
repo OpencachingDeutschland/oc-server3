@@ -631,6 +631,12 @@ button.map-btn {
   background: #f0f0f0;
 }
 
+.city-search-item:focus {
+  background-color: #cfe2ff;
+  outline: none;
+  box-shadow: inset 3px 0 0 var(--oc-primary);
+}
+
 .city-search-status {
   cursor: default;
   color: #666;
@@ -666,6 +672,13 @@ button.map-btn {
 
 [data-theme="dark"] .city-search-item:hover {
   background: var(--oc-bg-secondary);
+}
+
+[data-theme="dark"] .city-search-item:focus {
+  background-color: var(--oc-bg-body);
+  color: var(--oc-link-color);
+  outline: none;
+  box-shadow: inset 3px 0 0 var(--oc-link-color);
 }
 
 [data-theme="dark"] .city-search-status {

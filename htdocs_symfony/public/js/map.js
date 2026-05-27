@@ -112,10 +112,20 @@ if (document.body.dataset.page !== 'mapServer') {
             results.innerHTML = '<div class="city-search-item city-search-status">No results</div>';
             return;
           }
-          data.slice(0, 8).forEach(item => {
+          const items = data.slice(0, 8);
+          items.forEach((item, i) => {
             const el = L.DomUtil.create('div', 'city-search-item', results);
             el.textContent = item.display_name;
-            L.DomEvent.on(el, 'click', () => panToAndFetch(item.lat, item.lon));
+            el.tabIndex   = 0;
+            L.DomEvent.on(el, 'click',   () => panToAndFetch(item.lat, item.lon));
+            L.DomEvent.on(el, 'keydown', e => {
+              if (e.key === 'Enter')  { e.preventDefault(); panToAndFetch(item.lat, item.lon); }
+              if (e.key === 'Escape') { results.style.display = 'none'; input.focus(); }
+              if (e.key === 'Tab') {
+                const atEdge = e.shiftKey ? i === 0 : i === items.length - 1;
+                if (atEdge) { e.preventDefault(); results.style.display = 'none'; input.focus(); }
+              }
+            });
           });
         } catch {
           results.innerHTML = '<div class="city-search-item city-search-status">Error searching</div>';
@@ -126,6 +136,10 @@ if (document.body.dataset.page !== 'mapServer') {
       L.DomEvent.on(input, 'keydown', e => {
         if (e.key === 'Enter')  { e.preventDefault(); search(); }
         if (e.key === 'Escape') { results.style.display = 'none'; }
+        if (e.key === 'Tab' && !e.shiftKey && results.style.display === 'block') {
+          const first = results.querySelector('.city-search-item:not(.city-search-status)');
+          if (first) { e.preventDefault(); first.focus(); }
+        }
       });
       L.DomEvent.on(btnHere, 'click', () => {
         if (!navigator.geolocation) return;
@@ -138,7 +152,15 @@ if (document.body.dataset.page !== 'mapServer') {
         );
       });
 
-      mapRoot.on('overlayadd',    (e) => { if (e.name === 'Live Map') container.style.display = ''; });
+      let initialFocusDone = false;
+      mapRoot.on('overlayadd',    (e) => {
+        if (e.name !== 'Live Map') return;
+        container.style.display = '';
+        if (!initialFocusDone && document.body.dataset.page === 'livemap') {
+          initialFocusDone = true;
+          setTimeout(() => input.focus(), 0);
+        }
+      });
       mapRoot.on('overlayremove', (e) => { if (e.name === 'Live Map') { container.style.display = 'none'; results.style.display = 'none'; } });
 
       return container;

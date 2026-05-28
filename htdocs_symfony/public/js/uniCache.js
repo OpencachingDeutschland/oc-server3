@@ -18,23 +18,23 @@ export const ocToGCCacheTypes = {
   2:  'Traditional',
   3:  'Multi',
   4:  'Virtual',
+  5:  'Webcam',
   6:  'Event',
   7:  'Quiz',
   8:  'Math/Physics',
   9:  'Moving',
   10: 'Drive-in',
-  11: 'Webcam',
 
-  'Unknown':      8,
+  'Unknown':      1,
   'Traditional':  2,
   'Multi':        3,
   'Virtual':      4,
-  'Webcam':       11,
+  'Webcam':       5,
   'Event':        6,
   'Quiz':         7,
   'Math/Physics': 8,
-  'Moving':       8,
-  'Drive-in':     8,
+  'Moving':       9,
+  'Drive-in':     10,
 };
 
 export const ocToGCSizeTypes = {

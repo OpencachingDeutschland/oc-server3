@@ -36,9 +36,12 @@
     <script>
         window.enabledPlatforms = ['OC'];
         window.uniCacheWP       = [];
-        window.lat              = {{ initLat|default(52.376) }};
-        window.lon              = {{ initLon|default(9.732) }};
-        window.defaultZoom      = {{ initZoom|default(13) }};
+        (function() {
+            var p = new URLSearchParams(location.search);
+            window.lat         = p.has('lat')  ? parseFloat(p.get('lat'))  : {{ initLat|default(52.376) }};
+            window.lon         = p.has('lon')  ? parseFloat(p.get('lon'))  : {{ initLon|default(9.732) }};
+            window.defaultZoom = p.has('zoom') ? parseInt(p.get('zoom'))   : {{ initZoom|default(13) }};
+        })();
     </script>
 {% endblock %}
 

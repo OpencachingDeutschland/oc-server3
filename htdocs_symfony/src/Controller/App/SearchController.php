@@ -25,6 +25,8 @@ class SearchController extends AbstractController
         $lat2 = (float)$request->query->get('lat2', 0);
         $lon1 = (float)$request->query->get('lon1', 0);
         $lon2 = (float)$request->query->get('lon2', 0);
+        $minDiff = (int)$request->query->get('minDiff', 2);
+        $maxDiff = (int)$request->query->get('maxDiff', 10);
 
         if ($lat1 >= $lat2 || $lon1 >= $lon2) {
             return new JsonResponse(['count' => 0, 'items' => []]);
@@ -38,8 +40,10 @@ class SearchController extends AbstractController
              FROM caches
              WHERE latitude  > :lat1 AND latitude  < :lat2
                AND longitude > :lon1 AND longitude < :lon2
-               AND status IN (1, 2)",
-            ['lat1' => $lat1, 'lat2' => $lat2, 'lon1' => $lon1, 'lon2' => $lon2]
+               AND status IN (1, 2)
+               AND difficulty >= :minDiff AND difficulty <= :maxDiff",
+            ['lat1' => $lat1, 'lat2' => $lat2, 'lon1' => $lon1, 'lon2' => $lon2,
+             'minDiff' => $minDiff, 'maxDiff' => $maxDiff]
         );
 
         if ($count > $maxItems) {
@@ -89,12 +93,14 @@ class SearchController extends AbstractController
             WHERE c.latitude  > :lat1 AND c.latitude  < :lat2
               AND c.longitude > :lon1 AND c.longitude < :lon2
               AND c.status IN (1, 2)
+              AND c.difficulty >= :minDiff AND c.difficulty <= :maxDiff
             GROUP BY c.cache_id
             ORDER BY c.cache_id
             LIMIT " . (int)$maxItems,
             [
                 'lat1' => $lat1, 'lat2' => $lat2,
                 'lon1' => $lon1, 'lon2' => $lon2,
+                'minDiff' => $minDiff, 'maxDiff' => $maxDiff,
                 'userId' => $userId
             ]
         );

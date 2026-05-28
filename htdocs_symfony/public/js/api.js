@@ -35,12 +35,14 @@ function calcShortName(name) {
   return name.length > 25 ? name.substring(0, 25) + '\u2026' : name;
 }
 
-export async function ocSearchByBbox(s, w, n, e, skip, _take, _filter) {
+export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
   if (skip > 0) return [];
 
   const params = new URLSearchParams({
     lat1: s, lat2: n, lon1: w, lon2: e,
   });
+  if (filter?.minDiff) params.set('minDiff', filter.minDiff);
+  if (filter?.maxDiff) params.set('maxDiff', filter.maxDiff);
 
   try {
     const res = await fetch('/api/caches/live?' + params.toString());

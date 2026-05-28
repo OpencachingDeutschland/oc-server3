@@ -22,12 +22,9 @@ import { baseLayers, Esri_WorldBoundariesPlaces } from './mapLayers.js';
 import {
   getCacheWPs,
   getPCN,
-  getCachedAlStates,
   getTrackIds,
   getTrackById,
-  gcSearchByBbox,
   ocSearchByBbox,
-  alSearchByBbox,
   findCity,
 } from './api.js';
 
@@ -93,6 +90,11 @@ if (document.body.dataset.page !== 'mapServer') {
         results.style.display = 'none';
         input.value = '';
         mapRoot.setView([parseFloat(lat), parseFloat(lon)], defaultZoom);
+        // Update URL so a page reload restores this view
+        const url = new URL(location);
+        url.searchParams.set('lat', lat); url.searchParams.set('lon', lon);
+        url.searchParams.set('zoom', mapRoot.getZoom());
+        history.replaceState(null, '', url);
         if (!mapRoot.hasLayer(liveMap)) {
           liveMap.addTo(mapRoot);
         } else {
@@ -402,6 +404,7 @@ mapRoot.on('overlayadd', (e) => {
   if (e.name === "Live Map") {
     liveEnabled = true;
     layerControl.getContainer().classList.add('live-active');
+    dShow('filterButton');
     fetchAndShowLiveMarkers();
   }
 });
@@ -414,6 +417,7 @@ mapRoot.on('overlayremove', (e) => {
   if (e.name === "Live Map") {
     layerControl.getContainer().classList.remove('live-active');
     liveEnabled = false;
+    dHide('filterButton');
 
     // Clear stage markers
     stageMarkers.clearLayers();
@@ -492,14 +496,8 @@ function fetchAndShowLiveMarkers() {
   const n = bounds.getNorthEast().lat.toFixed(3);
   const e = bounds.getNorthEast().lng.toFixed(3);
 
-  const GC_BATCH_SIZE     = 100;
-  const GC_TOTAL_OBJECTS  = 300; // watch quota
-
   const OC_BATCH_SIZE     = 500;
-  const OC_TOTAL_OBJECTS  = 500; // no quota here
-
-  const AL_BATCH_SIZE    = 100;
-  const AL_TOTAL_OBJECTS = 300; // no quota here
+  const OC_TOTAL_OBJECTS  = 500;
 
   const fetchPoints = async (searchFunction, s, w, n, e, skip, take, batchSize, totalObjects) => {
     const points = await searchFunction(s, w, n, e, skip, take);
@@ -508,24 +506,17 @@ function fetchAndShowLiveMarkers() {
     if (points.length === batchSize && skip + batchSize < totalObjects) {
       const nextSkip = skip + batchSize;
       const nextTake = Math.min(batchSize, totalObjects - nextSkip);
-
       const additionalPoints = await fetchPoints(searchFunction, s, w, n, e, nextSkip, nextTake, batchSize, totalObjects);
       handlePoints(additionalPoints);
-
       return additionalPoints;
     }
-
     return points;
   };
 
-  const gcPromise  = fetchPoints(fetchGCCachesByBbox,  s, w, n, e, 0, GC_BATCH_SIZE,  GC_BATCH_SIZE,  GC_TOTAL_OBJECTS);
-  const ocPromise  = fetchPoints(fetchOCSearchByBbox,  s, w, n, e, 0, OC_BATCH_SIZE,  OC_BATCH_SIZE,  OC_TOTAL_OBJECTS);
-  const alPromise  = fetchPoints(fetchAlSearchByBbox, s, w, n, e, 0, AL_BATCH_SIZE,  AL_BATCH_SIZE,  AL_TOTAL_OBJECTS);
+  const ocPromise = fetchPoints(fetchOCSearchByBbox, s, w, n, e, 0, OC_BATCH_SIZE, OC_BATCH_SIZE, OC_TOTAL_OBJECTS);
 
-  Promise.all([gcPromise, ocPromise, alPromise]).then(([gcPoints, ocPoints, alPoints]) => {
-    console.debug("gcPoints length: ", gcPoints.length);
+  ocPromise.then(ocPoints => {
     console.debug("ocPoints length: ", ocPoints.length);
-    console.debug("alPoints length: ", alPoints.length);
   });
 };
 
@@ -824,6 +815,7 @@ async function refreshStaticMarkers() {
 
 export function refreshLiveMarkers() {
   const filter = state.filter;
+  console.debug('refreshLiveMarkers: filter keys', Object.keys(filter), 'liveRegistry size', liveRegistry.size, 'filter sample', { '2': filter['2'], '5': filter['5'], isOwned: filter.isOwned });
 
   // Clear all layers
   liveMap.clearLayers();
@@ -832,10 +824,8 @@ export function refreshLiveMarkers() {
   const processMarker = (marker, isStage = false) => {
 
     const type = marker.options?.type ?? "unknown";
-    const isAL =type === 3333;
-    const isPlatformEnabled = (filter.isGC && marker.options?.isGC) || (filter.isOC && marker.options?.isOC) || (isAL &&filter[3333]);
-    const isTypeEnabled = filter[type] || (filter[6] && [9,453,1304,3653,3673,3673,4738,7005].includes(type));
-    let shouldShow = isPlatformEnabled && isTypeEnabled && flagNames.every(flag => filter[flag] || !marker.options?.[flag]);
+    const isTypeEnabled = !!filter[type];
+    let shouldShow = isTypeEnabled && flagNames.every(flag => filter[flag] || !marker.options?.[flag]);
 
     // Remove previous click handlers only if not in selection mode
     if (!state.smSelectionModeEnabled) {
@@ -1115,83 +1105,18 @@ document.querySelectorAll('.leaflet-control').forEach(control => {
 
 
 //-------------------------
-// fetchGCCachesByBbox()
-//
-// Wraps the pure API call by adding filter
-
-async function fetchGCCachesByBbox(s, w, n, e, skip, take) {
-  const filter = state.filter;
-  if (!filter.isGC) return [];
-
-  const distance = L.latLng(n, w).distanceTo(L.latLng(s, e));
-
-  // The GC Live API function barfs if the diagonal distance is > 100km
-  if (distance > 100_000) {
-    const center = L.latLng(
-      (parseFloat(n) + parseFloat(s)) / 2,
-      (parseFloat(w) + parseFloat(e)) / 2
-    );
-    const degPerMeter = 360 / 40008000; // Approx conversion
-    const newWidth  = 90000 * degPerMeter;
-    const newHeight = 90000 * degPerMeter;
-
-    s = (center.lat - newHeight / 2).toFixed(6);
-    w = (center.lng - newWidth / 2).toFixed(6);
-    n = (center.lat + newHeight / 2).toFixed(6);
-    e = (center.lng + newWidth / 2).toFixed(6);
-  }
-
-  const ul  = `${n},${w}`;
-  const br  = `${s},${e}`;
-
-  try {
-    const markers = await gcSearchByBbox(ul, br, skip, take, filter);
-    return markers;
-  } catch (error) {
-    console.log('gcSearchByBbox(): ', error);
-    return [];
-  }
-}
-
-//-------------------------
 // fetchOCSearchByBbox()
 //
 // Wraps the pure API call by adding filter
 
 async function fetchOCSearchByBbox(s, w, n, e, skip, take) {
   const filter = state.filter;
-  if (!filter.isOC) return [];
   try {
     const markers = await ocSearchByBbox(s, w, n, e, skip, take, filter);
+    console.debug('fetchOCSearchByBbox: got', markers.length, 'markers');
     return markers;
   } catch (error) {
     console.log('ocSearchByBbox(): ', error);
-    return [];
-  }
-}
-
-//-------------------------
-// alSearchByBbox()
-//
-// Wraps the pure API call by adding filter
-
-let alAuthToastShown = false;
-
-async function fetchAlSearchByBbox(s, w, n, e, skip, take) {
-  const filter = state.filter;
-  if (!filter[3333]) return [];
-  try {
-    const result = await alSearchByBbox(s, w, n, e, skip, take, filter);
-    if (result?.authRequired) {
-      if (!alAuthToastShown) {
-        alAuthToastShown = true;
-        showToast('Adventure Labs not connected — <a href="/alauth" style="color:inherit;text-decoration:underline">click to connect</a>', 8000);
-      }
-      return [];
-    }
-    return result;
-  } catch (error) {
-    console.log('alSearchByBbox(): ', error);
     return [];
   }
 }

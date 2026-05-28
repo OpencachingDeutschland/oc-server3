@@ -19,48 +19,35 @@ export const UNKNOWN_TYPE_ID = 0;
 
 export const cacheTypes = {
   [UNKNOWN_TYPE_ID] : { name: "Unknown",             col: "silver"      , text: "??" },
-  2    : { name: "Tradi",               col: "green"       , text: "T"  },
+  // OC type IDs 1-10
+  1    : { name: "Unknown",             col: "silver"      , text: "??" },
+  2    : { name: "Traditional",         col: "green"       , text: "T"  },
   3    : { name: "Multi",               col: "orange"      , text: "M"  },
   4    : { name: "Virtual",             col: "darkBlue"    , text: "V"  },
-  5    : { name: "Letterbox",           col: "blue"        , text: "LB" },
+  5    : { name: "Webcam",              col: "blue"        , text: "W"  },
   6    : { name: "Event",               col: "darkRed"     , text: "EV" },
-  7    : { name: "Quiz",                col: "darkBlue"    , text: "?"  }, // OC
-  8    : { name: "Unknown",             col: "darkBlue"    , text: "?"  },
-  9    : { name: "Project A.P.E.",      col: "black"       , text: "9"  },
-  10   : { name: "",                    col: "black"       , text: "10" },
-  11   : { name: "Webcam",              col: "black"       , text: "W"  },
-  12   : { name: "Locationless",        col: "lightBlue"   , text: "L"  },
-  13   : { name: "CITO",                col: "darkGreen"   , text: "CI" },
-  137  : { name: "Earth Cache",         col: "brown"       , text: "EC" },
-  217  : { name: "Parking",             col: "blue"        , text: "P"  },
-  218  : { name: "Virtual Stage",       col: "deepSkyBlue" , text: "VS" },
-  219  : { name: "Physical Stage",      col: "deepSkyBlue" , text: "PS" },
-  220  : { name: "Final Location",      col: "deepSkyBlue" , text: "FI" },
-  221  : { name: "Trail Head",          col: "deepSkyBlue" , text: "TH" },
-  222  : { name: "Point of Interest",   col: "limeGreen"   , text: "PO" },
-  452  : { name: "Reference Point",     col: "deepSkyBlue" , text: "RP" },
-  453  : { name: "Mega Event",          col: "darkRed"     , text: "ME" },
-  1304 : { name: "GPS Adv. Exhibit",    col: "darkRed"     , text: "AE" },
-  1858 : { name: "Wherigo",             col: "darkBlue"    , text: "WI" },
-  3333 : { name: "Adv. Lab Cache",      col: "#C850C0"     , text: "AL" },
-  3653 : { name: "Community Celeb.",    col: "darkRed"     , text: "CC" },
-  3673 : { name: "HQ",                  col: "darkRed"     , text: "HQ" },
-  3674 : { name: "HQ Celebration",      col: "darkRed"     , text: "HC" },
-  4738 : { name: "HQ Block Party",      col: "darkRed"     , text: "HB" },
-  7005 : { name: "Giga Event",          col: "darkRed"     , text: "GI" },
+  7    : { name: "Quiz",                col: "darkBlue"    , text: "Q"  },
+  8    : { name: "Math/Physics",        col: "darkBlue"    , text: "MP" },
+  9    : { name: "Moving",              col: "green"       , text: "MV" },
+  10   : { name: "Drive-in",            col: "darkGreen"   , text: "DI" },
+  217  : { name: "Parking",             col: "blue"        , text: "P" , wptPng: "wp_parking.png" },
+  218  : { name: "Virtual Stage",       col: "deepSkyBlue" , text: "VS", wptPng: "wp_reference.png" },
+  219  : { name: "Physical Stage",      col: "deepSkyBlue" , text: "PS", wptPng: "wp_prototype.png" },
+  220  : { name: "Final Location",      col: "deepSkyBlue" , text: "FI", wptPng: "wp_final.png" },
+  221  : { name: "Trail Head",          col: "deepSkyBlue" , text: "TH", wptPng: "wp_path.png" },
+  222  : { name: "Point of Interest",   col: "limeGreen"   , text: "PO", wptPng: "wp_poi.png" },
+  452  : { name: "Reference Point",     col: "deepSkyBlue" , text: "RP", wptPng: "wp_reference.png" },
 };
 
-// Merge icon path data into cache types
+// Merge icon path data into cache types.
+// iconPaths keys are GC type IDs. OC-only types (5,7,8,9,10) overlap with
+// different GC types and must not inherit wrong pictograms — except Webcam
+// where GC type 11 has a proper icon we reuse for OC type 5.
+const OC_ONLY_TYPES = new Set([5, 7, 8, 9, 10]);
 for (const [id, icon] of Object.entries(iconPaths)) {
-  if (cacheTypes[id]) cacheTypes[id].icon = icon;
+  if (cacheTypes[id] && !OC_ONLY_TYPES.has(Number(id))) cacheTypes[id].icon = icon;
 }
-
-// Icon style: false = modern (pictograms), true = classic (text labels)
-let classicIcons = (typeof window !== 'undefined' && window.classicIcons) || false;
-
-export function setClassicIcons(value) {
-  classicIcons = !!value;
-}
+if (iconPaths[11]) cacheTypes[5].icon = iconPaths[11]; // OC Webcam ← GC 11
 
 /**
  * Get cache type definition with fallback to unknown type.
@@ -158,7 +145,6 @@ function renderIconPaths(icon, x, y, size) {
  */
 function buildTableIconHash(typeId, state, size) {
   let hash = `tbl_${typeId}_${size}`;
-  if (classicIcons) hash += '_cls';
   if (state.isOC) hash += '_oc';
   if (state.isDisabled) hash += '_dis';
   if (state.isArchived) hash += '_arch';
@@ -210,7 +196,7 @@ function generateTableIconSvg(typeId, state = {}, size = 24) {
 
   // Type label (icon paths or text fallback)
   const { icon } = getCacheType(typeId);
-  if (icon && !classicIcons) {
+  if (icon) {
     const iconSize = 2 * (R - 3);
     svg += renderIconPaths(icon, cx - iconSize / 2, cy - iconSize / 2, iconSize);
   } else {
@@ -330,7 +316,7 @@ export function getIcon(u) {
   // Support both canonical format (geocacheType.id) and marker options format (type)
   const typeId = u.geocacheType?.id ?? u.type;
 
-  let hash = classicIcons ? `c_${typeId}` : `${typeId}`;
+  let hash = `${typeId}`;
 
   for (const property in propertyToSuffix) {
     if (u[property]) {
@@ -341,7 +327,21 @@ export function getIcon(u) {
   let icon = cacheIcons[hash];
   if (typeof icon !== 'undefined') return icon; // on a match there is nothing left to do
 
-  let {col, text} = getCacheType(typeId);
+  // Waypoint types: use file-based PNG directly, no badges
+  const ct = getCacheType(typeId);
+  if (ct.wptPng) {
+    icon = new liveIcon({
+      iconUrl: `/images/waypoints/${ct.wptPng}`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 24],
+      popupAnchor: [0, -24],
+      tooltipAnchor: [-12, -12],
+    });
+    cacheIcons[hash] = icon;
+    return icon;
+  }
+
+  let {col, text} = ct;
 
   // --------------------------------------------------------------------------
   //  create SVG header, define a black outer ring with a smaller white ring
@@ -382,7 +382,7 @@ export function getIcon(u) {
 
   // Type label (icon paths or text fallback)
   const typeIcon = getCacheType(typeId).icon;
-  if (typeIcon && !classicIcons) {
+  if (typeIcon) {
     const iconSize = 1.6 * R;
     svg += renderIconPaths(typeIcon, -iconSize / 2, -iconSize / 2, iconSize) + '\n';
   } else {

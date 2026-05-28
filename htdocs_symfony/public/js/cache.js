@@ -475,14 +475,22 @@ function renderAttributes() {
 function createWPTable() {
   if (!gc.additionalWaypoints?.length) return;
 
+  // OC subtype (1-5) → PNG filename (from legacy OC)
+  const subtypeToPng = {
+    1: 'wp_parking.png', 2: 'wp_reference.png',
+    3: 'wp_path.png', 4: 'wp_final.png', 5: 'wp_poi.png',
+  };
+
   const wps = gc.additionalWaypoints.map(wp => {
     const [lat, lon] = (wp.location || '').split('|');
+    const png = subtypeToPng[wp.typeId] ? `/images/waypoints/${subtypeToPng[wp.typeId]}` : '';
     return {
       myCoords: lat && lon ? coords2Dm(Number(lat), Number(lon)) : '',
       prefix:   wp.type?.substring(0, 2)?.toUpperCase() || '',
       name:     wp.name || wp.type || '',
       typeName: wp.type_name || wp.type || '',
       description: wp.description || '',
+      icon:     png,
     };
   });
 
@@ -501,10 +509,12 @@ function createWPTable() {
     },
     columnDefaults: { resizable: false },
     columns: [
+      { title: '',            field: 'icon',        headerSort: false, width: 28,
+        formatter: cell => cell.getValue() ? `<img src="${cell.getValue()}" width="20" height="20" style="vertical-align:middle">` : '' },
       { title: 'Coordinates', field: 'myCoords',    headerSort: false, width: 170 },
       { title: 'Prefix',      field: 'prefix',      headerSort: true,  width: 60 },
-      { title: 'Name',        field: 'name',        headerSort: false, width: 200 },
-      { title: 'Type',        field: 'typeName',    headerSort: false, width: 160 },
+      { title: 'Name',        field: 'name',        headerSort: false, width: 190 },
+      { title: 'Type',        field: 'typeName',    headerSort: false, width: 140 },
       { title: 'Note',        field: 'description', headerSort: false, tooltip: true,
         formatter: cell => `<div style="white-space:normal">${cell.getValue() || ''}</div>` },
     ],

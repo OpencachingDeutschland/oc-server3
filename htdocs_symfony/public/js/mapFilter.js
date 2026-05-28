@@ -28,6 +28,8 @@ if (!filter) {
       '4'       : true,
       '5'       : true,
       '6'       : true,
+      '7'       : true,
+      '9'       : true,
       '8'       : true,
      '10'       : true,
      '11'       : true,

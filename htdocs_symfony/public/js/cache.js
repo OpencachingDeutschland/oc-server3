@@ -256,6 +256,11 @@ async function loadCache(code) {
   gc = ocToUniCacheWP(response.oc, sessionLike);
   augmentForRender(gc, response.oc, aux);
 
+  // Owner sees the cache's actual log password
+  if (context.isOwner && aux.cacheLogpw) {
+    gc.logpw = aux.cacheLogpw;
+  }
+
   // Preserve originals for revert when user clears CC
   gc._origLat = gc.postedCoordinates?.latitude  ?? gc.lat;
   gc._origLon = gc.postedCoordinates?.longitude ?? gc.lon;
@@ -316,6 +321,14 @@ function renderCache() {
     refLink.href = refUrl;
     refLink.textContent = gc.referenceCode;
     refLink.target = '_blank';
+  }
+
+  // Edit button (owner only)
+  const editBtn = getById('editCacheBtn');
+  const editLink = getById('editCacheLink');
+  if (editBtn && editLink && context.isOwner) {
+    editBtn.style.display = '';
+    editLink.href = `/cache/new?edit=${gc.referenceCode}`;
   }
 
   // Status badge
@@ -861,9 +874,11 @@ function setupNewModeUI(log) {
   if (editLogCheckbox) editLogCheckbox.checked = true;
 
   if (editLogType) {
+    const prevType = parseInt(editLogType.value, 10); // preserve user's current selection
     const allowed = allowedLogTypes(null);
     editLogType.innerHTML = '';
-    const defaultId = allowed.includes(1) ? 1 : (allowed.includes(7) ? 7 : (allowed[0] ?? 3));
+    const defaultId = allowed.includes(prevType) ? prevType
+      : (allowed.includes(1) ? 1 : (allowed.includes(7) ? 7 : (allowed[0] ?? 3)));
     allowed.forEach(t => {
       const opt = document.createElement('option');
       opt.value = t;
@@ -994,6 +1009,31 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
   const isFoundType = (t) => t === 1 || t === 7;
   const isDnfType   = (t) => t === 2;
 
+  // Status-changing log types: update isArchived / isDisabled
+  if (newType === 9)      { gc.isArchived = true;  gc.isDisabled = false; }
+  else if (newType === 10) { gc.isArchived = false; gc.isDisabled = false; }
+  else if (newType === 11) { gc.isArchived = false; gc.isDisabled = true; }
+  // Re-render the status badge
+  const statusEl = getById('cacheStatus');
+  if (statusEl) {
+    if (gc.isArchived) {
+      statusEl.innerHTML = '<span class="badge bg-danger">Archived</span>';
+    } else if (gc.isDisabled) {
+      statusEl.innerHTML = '<span class="badge bg-warning">Disabled</span>';
+    } else {
+      statusEl.innerHTML = '<span class="badge bg-success">Active</span>';
+    }
+  }
+  // Update the gcState hidden element so refreshCacheIcon picks up the new flags
+  const gcStateEl = getById('gcState');
+  if (gcStateEl) {
+    let state = {};
+    try { state = JSON.parse(gcStateEl.textContent); } catch (e) {}
+    state.isArchived = !!gc.isArchived;
+    state.isDisabled = !!gc.isDisabled;
+    gcStateEl.textContent = JSON.stringify(state);
+  }
+
   // Adjust the cache-wide findCount: only Found/Attended counts.
   if (oldType === null) {
     if (isFoundType(newType)) gc.findCount = (gc.findCount || 0) + 1;
@@ -1033,9 +1073,9 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
   // Header icon (uses isFound / isDNF / hasCC / hasPCN).
   refreshCacheIcon();
 
-  // Map marker (already wired the same way for CC edits).
+  // Map marker (also wired for CC edits — pass full state for status-aware coloring).
   if (mapUpdateMarkerIcon) {
-    try { mapUpdateMarkerIcon(gc.referenceCode, { hasCC: gc.hasCC, hasPCN: gc.hasPCN, isFound: gc.isFound, isDNF: gc.isDNF }); }
+    try { mapUpdateMarkerIcon(gc.referenceCode, { hasCC: gc.hasCC, hasPCN: gc.hasPCN, isFound: gc.isFound, isDNF: gc.isDNF, isArchived: gc.isArchived, isDisabled: gc.isDisabled }); }
     catch (e) { console.log('mapUpdateMarkerIcon threw:', e); }
   }
 }

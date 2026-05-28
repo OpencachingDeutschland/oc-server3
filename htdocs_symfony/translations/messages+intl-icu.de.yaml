@@ -350,3 +350,44 @@ Save: Speichern
 'Loading logs...': 'Logs werden geladen...'
 'Log in!': 'Anmelden!'
 Password: Passwort
+'Submit a new cache': 'Einen neuen Cache einreichen'
+'Edit cache': 'Cache bearbeiten'
+'Update cache': 'Cache aktualisieren'
+'Submit cache': 'Cache absenden'
+'Some errors occurred, please check the marked fields.': 'Es sind Fehler aufgetreten, bitte prüfe die markierten Felder.'
+'Basic information': 'Grundlegende Informationen'
+Name: Name
+'Please select': 'Bitte auswählen'
+Type: Typ
+'Difficulty / Terrain': 'Schwierigkeit / Terrain'
+D: D
+T: T
+'Cache attributes': 'Cache-Attribute'
+Language: Sprache
+'Short description': 'Kurzbeschreibung'
+'Hint (encrypted)': 'Hinweis (verschlüsselt)'
+'Personal notes & corrected coordinates': 'Persönliche Notizen & korrigierte Koordinaten'
+'Personal cache note': 'Persönliche Cache-Notiz'
+'Corrected coordinates': 'Korrigierte Koordinaten'
+'Add waypoint': 'Wegpunkt hinzufügen'
+Remove: Entfernen
+Other: Sonstiges
+'Time effort (h)': 'Zeitaufwand (h)'
+'Distance (km)': 'Strecke (km)'
+'GC waypoint': 'GC-Wegpunkt'
+'Hidden since': 'Versteckt seit'
+Publication: Veröffentlichung
+'Publish now': 'Jetzt veröffentlichen'
+'Publish on': 'Veröffentlichen am'
+'Do not publish now': 'Jetzt nicht veröffentlichen'
+'Log password': 'Log-Passwort'
+'leave blank for none': 'frei lassen für keines'
+'I have read and agree to the Opencaching Terms of Service and Data License.': 'Ich habe die Opencaching-Nutzungsbedingungen und Datenlizenz gelesen und stimme ihnen zu.'
+'Pick on map': 'Auf Karte auswählen'
+'Pick coordinates on map': 'Koordinaten auf Karte auswählen'
+Cancel: Abbrechen
+'Use these coordinates': 'Diese Koordinaten übernehmen'
+'e.g. N51 02.345 E009 43.210 or 51.123,9.456': 'z.B. N51 02.345 E009 43.210 oder 51.123,9.456'
+'e.g. N51 02.345 E009 43.210': 'z.B. N51 02.345 E009 43.210'
+'Your personal notes about this cache (only visible to you)': 'Deine persönlichen Notizen zu diesem Cache (nur für dich sichtbar)'
+'Your own coordinates if the posted ones need correction (visible only to you)': 'Deine eigenen Koordinaten, falls die veröffentlichten korrigiert werden müssen (nur für dich sichtbar)'

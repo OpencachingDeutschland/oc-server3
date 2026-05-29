@@ -149,7 +149,7 @@ export function resetTrackColors() {
 
   polylineClicked = false;
   state.mapRoot.eachLayer(function(layer) {
-    if (layer instanceof L.GPX) {
+    if (L.GPX && layer instanceof L.GPX) {
       layer.setStyle({ color : 'blue'});
     }
   });

@@ -16,4 +16,12 @@ export async function init() {
         getMyMap().setView([window.lat, window.lon], window.defaultZoom || 13);
     }
     enableLiveMode();
+
+    getMyMap().on('click', (e) => {
+        if (e.originalEvent.shiftKey || e.originalEvent.ctrlKey) {
+            const lat = e.latlng.lat.toFixed(6);
+            const lon = e.latlng.lng.toFixed(6);
+            window.location = `/cache/new?lat=${lat}&lon=${lon}`;
+        }
+    });
 }

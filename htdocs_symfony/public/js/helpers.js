@@ -135,10 +135,10 @@ export function showFeedback(msg) {
   clearTimeout(feedbackTimer);
   const prev = info.textContent;
   info.textContent = msg;
-  info.classList.add('gcxm-text-success');
+  info.classList.add('oc-text-success');
 
   feedbackTimer = setTimeout(() => {
-    info.classList.remove('gcxm-text-success');
+    info.classList.remove('oc-text-success');
     info.textContent = prev;
   }, 3000);
 }

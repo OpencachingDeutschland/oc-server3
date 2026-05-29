@@ -1,8 +1,8 @@
 /***************************************************************************
  * cache.js — OC cache detail view
  *
- * Ported from gcxm/js/explore.js. OC-only paths only — GC/AL branches
- * dropped. Reuses gcxm's cooker via lib/uniCache.js (ocToUniCacheWP).
+ * OC-only paths. Cooks raw OKAPI-shaped data via uniCache.js
+ * (ocToUniCacheWP) into a uniCacheWP for rendering.
  *
  * Page lifecycle:
  *   1. loader.js sees <body data-page="cache"> → imports this module → calls init().
@@ -154,8 +154,8 @@ function hideSkeletons() {
 // -----------------------------------------------------------------
 // augmentForRender() — add render-time fields onto the uniCacheWP
 //
-// gcxm's backend pre-computes these in proxyapi/cache; we do it
-// here because the OC backend returns OKAPI-shape + aux.
+// The OC backend returns OKAPI-shape + aux; this fills in the fields
+// the renderer expects on the uniCacheWP.
 
 function augmentForRender(uc, oc, aux) {
   // Formatted dates
@@ -195,7 +195,7 @@ function augmentForRender(uc, oc, aux) {
     profileUrl:    aux.owner.profileUrl,
   };
 
-  // Attributes — convert to gcxm's expected shape ({ imageUrl, name })
+  // Attributes — convert to the renderer's expected shape ({ imageUrl, name })
   uc.attributes = (aux.attributes || []).map(a => ({
     imageUrl: a.icon ? `/images/attributes/${a.icon}.png` : '',
     name:     a.name,
@@ -1135,8 +1135,7 @@ async function deleteLog(log) {
 // initMap() — feed this cache into the already-loaded map module and call handleWPs.
 //
 // loader.js has imported map.js (side effects: map, controls, registries set up).
-// The verbatim gcxm handleWPs() reads window.uniCacheWP — push the cooked
-// cache in and call it.
+// handleWPs() reads window.uniCacheWP — push the cooked cache in and call it.
 
 async function initMap() {
   if (typeof L === 'undefined' || !L.markerClusterGroup) {

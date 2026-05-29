@@ -3,7 +3,6 @@
 //
 // © 2025 hxdimpf Research
 //
-// This file is part of GCxM.
 // Licensed under the MIT License.
 //
 // You may use, copy, modify, and distribute this software
@@ -392,7 +391,7 @@ function updateLengthDisplay(length) {
 // Function to download GPX with the route track
 
 function downloadGPX() {
-  const gpxData = generateTrackGPX(trackSegments, 'GCxM Track');
+  const gpxData = generateTrackGPX(trackSegments, 'opencaching.de Track');
   if (!gpxData) return;
   downloadFile(gpxData, 'track.gpx', 'application/gpx+xml');
 }

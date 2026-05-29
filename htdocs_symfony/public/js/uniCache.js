@@ -1,7 +1,7 @@
 /***************************************************************************
  * uniCache.js — OC-only frontend cooker
  *
- * Ported from gcxm utils/uniCache.js. Transforms a raw OKAPI-shaped OC
+ * Transforms a raw OKAPI-shaped OC
  * object (as returned by /api/cache/{wp}) into a uniCacheWP suitable for
  * rendering by cache.js and the map module.
  *

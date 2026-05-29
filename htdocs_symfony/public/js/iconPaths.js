@@ -5,7 +5,7 @@
 // Regenerate with: node scripts/extract-cgeo-icons.js
 //
 // SVG path data extracted from cgeo VectorDrawable files (type_*.xml).
-// Keyed by GCxM cache type ID. Properties:
+// Keyed by cache type ID. Properties:
 //   paths[].d   — SVG path data (from android:pathData)
 //   paths[].f   — true if filled (android:fillColor)
 //   paths[].s   — stroke width (android:strokeWidth)

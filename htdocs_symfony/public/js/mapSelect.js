@@ -3,7 +3,6 @@
 //
 // © 2025 hxdimpf Research
 //
-// This file is part of GCxM.
 // Licensed under the MIT License.
 //
 // You may use, copy, modify, and distribute this software

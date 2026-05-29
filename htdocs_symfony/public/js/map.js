@@ -17,11 +17,10 @@ import { init as initMapTracks, renderTrackIds, resetTrackColors} from './mapTra
 import * as mapFilter from './mapFilter.js';
 import * as mapRouting from './mapRouting.js';
 import * as mapSelect from './mapSelect.js';
-import { cacheTypes, getIcon, gpsIcon } from './mapIcons.js';
+import { cacheTypes, getIcon, getWaypointIcon, gpsIcon } from './mapIcons.js';
 import { baseLayers, Esri_WorldBoundariesPlaces } from './mapLayers.js';
 import {
   getCacheWPs,
-  getPCN,
   getTrackIds,
   getTrackById,
   ocSearchByBbox,
@@ -233,10 +232,7 @@ const cacheSizes = {
 const liveRegistry                 = new Map(); // cache all (live) markers here, only a subset may be put on the map based on filtering
 const staticFoundRegistry          = new Map(); // static markers, loaded with the page
 const staticUnfoundRegistry        = new Map(); // static markers, loaded with the page
-const liveCirclesRegistry          = new Map(); // static unfound markers, loaded with the page
 const stageMarkerRegistry          = new Map();
-const staticFoundCirclesRegistry   = new Map();
-const staticUnfoundCirclesRegistry = new Map();
 
 const liveMap = L.markerClusterGroup({
   zoomToBoundsOnClick     : true,
@@ -285,18 +281,14 @@ export function updateStaticMarkerIcon(referenceCode, updates) {
 export function removeStaticMarkers(referenceCodes) {
   const codes = new Set(referenceCodes);
   const pairs = [
-    [staticFoundRegistry, foundMarkers, staticFoundCirclesRegistry],
-    [staticUnfoundRegistry, notfoundMarkers, staticUnfoundCirclesRegistry],
+    [staticFoundRegistry, foundMarkers],
+    [staticUnfoundRegistry, notfoundMarkers],
   ];
-  for (const [registry, clusterGroup, circleRegistry] of pairs) {
+  for (const [registry, clusterGroup] of pairs) {
     for (const [key, marker] of registry) {
       if (codes.has(marker.options.referenceCode)) {
         clusterGroup.removeLayer(marker);
         registry.delete(key);
-        if (circleRegistry.has(key)) {
-          circleRegistry.get(key).remove();
-          circleRegistry.delete(key);
-        }
       }
     }
   }
@@ -318,7 +310,6 @@ if (!defaultMapLayer || !baseLayers[defaultMapLayer]) defaultMapLayer = "OpenStr
 //
 baseLayers[defaultMapLayer].addTo(mapRoot);
 export const stageMarkers = L.layerGroup().addTo(mapRoot); // those markers will be cleared upon click on the map anywhere
-const stageMarkerCircles  = L.layerGroup().addTo(mapRoot);
 const gpxTrackLayer       = L.layerGroup().addTo(mapRoot); // GPX tracks from field notes
 
 
@@ -360,7 +351,6 @@ mapRoot.on('click', () => {
   if (state.rmRoutingModeEnabled) return;
 
   stageMarkers.clearLayers();          // clear markers
-  stageMarkerCircles.clearLayers();    // clear circles
   stageMarkerRegistry.clear();         // clear registry as well
 
   setTimeout(() => {
@@ -476,15 +466,11 @@ function fetchAndShowLiveMarkers() {
       // end up with two markers for one referenceCode.
       if (code && priorKey !== ll) {
         liveRegistry.delete(priorKey);
-        liveCirclesRegistry.delete(priorKey);
       }
 
       const m = createMarker(p);
       if (!m) return;  // skip invalid point
       liveRegistry.set(ll, m);
-      liveCirclesRegistry.set(ll, null);
-      const c = createCircle(m);
-      liveCirclesRegistry.set(ll, c);
     });
 
     refreshLiveMarkers();
@@ -578,8 +564,6 @@ export async function handleWPs() {
 async function initStaticMarkers() {
   staticFoundRegistry.clear();
   staticUnfoundRegistry.clear();
-  staticFoundCirclesRegistry.clear();
-  staticUnfoundCirclesRegistry.clear();
 
   // Remove cluster groups from map, clear, then re-add after populating.
   // MarkerClusterGroup.clearLayers() alone can leave stale markers when
@@ -599,10 +583,6 @@ async function initStaticMarkers() {
       ? staticFoundRegistry
       : staticUnfoundRegistry;
 
-    const circleRegistry = p.isFound
-      ? staticFoundCirclesRegistry
-      : staticUnfoundCirclesRegistry;
-
     markerRegistry.set(ll, m);
 
     // Remove any live marker for the same cache so static and live don't duplicate.
@@ -613,19 +593,10 @@ async function initStaticMarkers() {
         if (liveMarker.options.referenceCode === code) {
           liveMap.removeLayer(liveMarker);
           liveRegistry.delete(liveKey);
-          const liveCircle = liveCirclesRegistry.get(liveKey);
-          if (liveCircle) {
-            liveMap.removeLayer(liveCircle);
-            liveCirclesRegistry.delete(liveKey);
-          }
           break;
         }
       }
     }
-
-    // create once
-    const circle = createCircle(m);
-    circleRegistry.set(ll, circle);
   }
   // --- handle GPX if present ---
   if (typeof fieldNote !== 'undefined' && fieldNote?.hasGPX) {
@@ -692,8 +663,6 @@ export function clearGPXTrack() {
 export function clearMap() {
   staticFoundRegistry.clear();
   staticUnfoundRegistry.clear();
-  staticFoundCirclesRegistry.clear();
-  staticUnfoundCirclesRegistry.clear();
   mapRoot.removeLayer(foundMarkers);
   mapRoot.removeLayer(notfoundMarkers);
   foundMarkers.clearLayers();
@@ -760,10 +729,8 @@ async function refreshStaticMarkers() {
   foundMarkers.clearLayers();
   notfoundMarkers.clearLayers();
 
-  // --- helper to project a marker + optional circle to a layer group ---
-  const processMarker = (marker, layerGroup, circleRegistry) => {
-    const ll = marker.getLatLng();
-
+  // --- helper to project a marker to a layer group ---
+  const processMarker = (marker, layerGroup) => {
     // click handler - only rebind if not in selection mode
     if (!state.smSelectionModeEnabled) {
       marker.off('click');
@@ -772,23 +739,17 @@ async function refreshStaticMarkers() {
 
     // add marker to layer
     layerGroup.addLayer(marker);
-
-    // add circle if enabled
-    if (state.circlesEnabled) {
-      const circle = circleRegistry.get(ll.toString());
-      if (circle) layerGroup.addLayer(circle);
-    }
   };
 
   // --- project unfound markers ---
   for (const marker of staticUnfoundRegistry.values()) {
-    processMarker(marker, notfoundMarkers, staticUnfoundCirclesRegistry);
+    processMarker(marker, notfoundMarkers);
   }
 
   // --- project found markers ---
   if (!hideFinished) {
     for (const marker of staticFoundRegistry.values()) {
-      processMarker(marker, foundMarkers, staticFoundCirclesRegistry);
+      processMarker(marker, foundMarkers);
     }
   }
 
@@ -819,7 +780,6 @@ export function refreshLiveMarkers() {
 
   // Clear all layers
   liveMap.clearLayers();
-  stageMarkerCircles.clearLayers();
 
   const processMarker = (marker, isStage = false) => {
 
@@ -835,23 +795,7 @@ export function refreshLiveMarkers() {
     if (isStage) shouldShow = true;
     if (!shouldShow) return;
 
-    // Add marker to map if live
-    if (!isStage) {
-      liveMap.addLayer(marker);
-
-      if (state.circlesEnabled) {
-        // Use same key logic as registry
-        const ll = L.latLng(marker.getLatLng()).toString();
-        const circle = liveCirclesRegistry.get(ll);
-        if (circle) liveMap.addLayer(circle);
-      }
-    } else {
-      // Stage marker: always create a new circle if circles enabled
-      if (state.circlesEnabled) {
-        const circle = createCircle(marker);
-        if (circle) stageMarkerCircles.addLayer(circle);
-      }
-    }
+    if (!isStage) liveMap.addLayer(marker);
 
     // Rebind click only if not in selection mode
     if (!state.smSelectionModeEnabled) {
@@ -888,41 +832,20 @@ async function handleMarkerClick(marker, stageMarkers) {
   const gc = await getCacheWPs(referenceCode);
   if (!gc) return;
 
-  // Update owner alias in popup if the detail fetch returned one
-  if (gc.ownerAlias) {
-    const ownerSpan = popupEl.querySelector('.owner-alias');
-    if (ownerSpan && ownerSpan.dataset.owner !== gc.ownerAlias) {
-      ownerSpan.dataset.owner = gc.ownerAlias;
-      ownerSpan.textContent = gc.ownerAlias;
-      marker.options.ownerAlias = gc.ownerAlias;
-    }
-  }
-
   if (hasPCN) {
-    const pcn = gc.note || marker.options.pcn || '';
-    marker.options.pcn = pcn;
     const tooltipContent = popupEl.querySelector('.pcn-tooltip');
-    if (tooltipContent) tooltipContent.title = pcn;
-  }
-
-  // Update found date if returned by detail fetch (AL foundDate not available from search API)
-  if (gc.found) {
-    const foundDateEl = popupEl.querySelector('.found-date');
-    if (foundDateEl && !foundDateEl.textContent) {
-      foundDateEl.textContent = gc.found;
-      marker.options.foundDate = gc.found;
-    }
+    if (tooltipContent) tooltipContent.title = marker.options.pcn || '';
   }
 
   const { lat, lng } = marker.getLatLng();
 
   gc.wpts?.forEach(w => {
-    w.type = w.typeId;
     if (!w.coordinates) return;
 
     const mylat = w.coordinates.latitude;
     const mylon = w.coordinates.longitude;
-    const icon = getIcon(w);
+    const icon = getWaypointIcon(w.subtype);
+    if (!icon) return;
 
     // Create the child marker
     const childMarker = L.marker([mylat, mylon], { icon });
@@ -939,11 +862,6 @@ async function handleMarkerClick(marker, stageMarkers) {
 
     // Polyline from parent to child
     L.polyline([[lat, lng], [mylat, mylon]], { color: 'red', weight: 1 }).addTo(stageMarkers);
-
-    if (state.circlesEnabled) {
-      const circle = createCircle(childMarker);
-      if (circle) stageMarkerCircles.addLayer(circle);
-    }
   });
 }
 
@@ -1012,8 +930,6 @@ export function createMarker(p) {
   const marker = L.marker([lat, lon], {
     icon,
     // --- Map display flags ---
-    isGC        : p.isGC,
-    isOC        : p.isOC,
     referenceCode : p.referenceCode,
     type        : p.geocacheType?.id,
     isOwned     : p.isOwned,
@@ -1047,51 +963,6 @@ export function createMarker(p) {
     .bindTooltip(p.shortName, { direction: 'left' });
 
   return marker;
-}
-
-// --------------------------------------------
-//
-function createCircle(marker) {
-  const opts = marker.options;
-
-  // Circles only for GC caches
-  if (!opts.isGC) return null;
-
-  // 3200m radius only for Mystery caches (type 8)
-  const radius = state.circleRadius || 160;
-  if (radius > 160 && opts.type !== 8) return null;
-
-  return L.circle(marker.getLatLng(), {
-    radius,
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.3,
-    weight: 1
-  });
-}
-
-// --------------------------------------------
-// updateCircleRadii()
-//
-// Rebuild all circle registries when the radius toggle changes.
-// Switching between 160m (all GC) and 3200m (mystery-only) changes
-// which markers qualify for a circle, so we recreate rather than resize.
-//
-function updateCircleRadii() {
-  const rebuild = (markerRegistry, circleRegistry) => {
-    circleRegistry.clear();
-    for (const [key, marker] of markerRegistry) {
-      circleRegistry.set(key, createCircle(marker));
-    }
-  };
-
-  rebuild(staticFoundRegistry,   staticFoundCirclesRegistry);
-  rebuild(staticUnfoundRegistry, staticUnfoundCirclesRegistry);
-  rebuild(liveRegistry,          liveCirclesRegistry);
-
-  // Re-render to reflect changes
-  if (typeof state.refreshStaticMarkers === 'function') state.refreshStaticMarkers();
-  if (typeof state.refreshLiveMarkers   === 'function') state.refreshLiveMarkers();
 }
 
 // ----------------------------------------------------------------------------------
@@ -1128,7 +999,6 @@ let state = {                     // Owner
   mapRoot,                        // map.js
   rmRoutingModeEnabled   : false,
   smSelectionModeEnabled : false,
-  circlesEnabled       : false,   // mapCircles.js
   refreshStaticMarkers,           // map.js
   refreshLiveMarkers,             // map.js
   fetchAndShowLiveMarkers,        // map.js
@@ -1137,7 +1007,6 @@ let state = {                     // Owner
   liveRegistry,                   // map.js
   staticFoundRegistry,            // map.js
   staticUnfoundRegistry,          // map.js
-  updateCircleRadii,              // map.js
 };
 
 // ----------------------------------------------------------------------------------

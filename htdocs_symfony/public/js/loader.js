@@ -7,9 +7,9 @@
  *     side-effect import of public/js/map.js, which initializes the live
  *     map on import.
  *
- * Globals such as `uniCacheWP`, `lat`, `lon`, `defaultZoom`, `enabledPlatforms`
- * must be set by the page template BEFORE this module loads so the map module
- * sees them. Each page module then exports `init()` which loader.js calls
+ * Globals such as `uniCacheWP`, `lat`, `lon`, `defaultZoom` must be set by
+ * the page template BEFORE this module loads so the map module sees them.
+ * Each page module then exports `init()` which loader.js calls
  * after the map (if any) is ready.
  */
 

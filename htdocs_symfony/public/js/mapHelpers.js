@@ -59,7 +59,7 @@
  * });
  * controls.addTo(map);
  *
- * @see mapRouting.init(), mapCircles.init()
+ * @see mapRouting.init()
  */
 
 export class MapButtonControl extends L.Control {

@@ -200,14 +200,12 @@ export function ocToUniCache(oc, session) {
 // -----------------------------------------------------------------
 // ocToUniCacheWP()
 //
-// Add transient fields (shortName, isSelected, isOC, isGC) for frontend use.
+// Add transient fields (shortName, isSelected) for frontend use.
 
 export function ocToUniCacheWP(oc, session, sequenceNumber) {
   const uniCache = ocToUniCache(oc, session);
   return {
     ...uniCache,
-    isGC: false,
-    isOC: true,
     isSelected: oc.isSelected ?? false,
     shortName:  calcShortName(uniCache.name, sequenceNumber),
   };

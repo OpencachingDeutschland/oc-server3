@@ -31,10 +31,9 @@
 {% endblock %}
 
 {% block after_body_start %}
-    {# Globals the verbatim gcxm map modules look up via window/free variables.
+    {# Globals the map modules look up via window/free variables.
        Must be set BEFORE <script type="module" src="loader.js"> runs map.js. #}
     <script>
-        window.enabledPlatforms = ['OC'];
         window.uniCacheWP       = [];
         (function() {
             var p = new URLSearchParams(location.search);

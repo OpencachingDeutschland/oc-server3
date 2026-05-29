@@ -39,15 +39,6 @@ class LiveMapController extends AbstractController
             return new JsonResponse(['wpts' => []]);
         }
 
-        // Map OC coordinates.subtype → icon system type IDs (matches mapIcons.js cacheTypes)
-        $subtypeToIconId = [
-            1 => 217, // Parking           → Parking
-            2 => 219, // Stage/ref point   → Physical Stage
-            3 => 221, // Path              → Trail Head
-            4 => 220, // Final             → Final Location
-            5 => 222, // Point of interest → Point of Interest
-        ];
-
         $rows = $this->connection->fetchAllAssociative(
             'SELECT co.latitude, co.longitude, co.description, co.subtype,
                     ct.name AS type_name
@@ -64,7 +55,7 @@ class LiveMapController extends AbstractController
             'lon'         => (float)$r['longitude'],
             'name'        => $r['type_name'] ?? 'Waypoint',
             'description' => $r['description'] ?? '',
-            'typeId'      => $subtypeToIconId[(int)$r['subtype']] ?? 219,
+            'subtype'     => (int)$r['subtype'],
         ], $rows);
 
         return new JsonResponse(['wpts' => $wpts]);

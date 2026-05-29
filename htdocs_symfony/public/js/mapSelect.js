@@ -16,7 +16,6 @@ import { getIcon } from './mapIcons.js';
 import { showToast, downloadFile } from './helpers.js';
 import { generateWaypointGPX } from './gpx.js';
 import { MapButtonControl } from './mapHelpers.js';
-import { saveToXferList } from './api.js';
 
 let state = {};
 let drawnItems;
@@ -59,8 +58,7 @@ function createActionsDropdown() {
   // Action items - easily extensible
   const actions = [
     { label: 'GPX', title: 'Download selected caches as GPX waypoints', handler: () => downloadGPX() },
-    { label: 'TXT', title: 'Download selected cache codes as text file', handler: () => downloadTXT() },
-    { label: 'Xfer', title: 'Save selected codes to Xfer list', handler: () => doXfer() }
+    { label: 'TXT', title: 'Download selected cache codes as text file', handler: () => downloadTXT() }
   ];
 
   actions.forEach(action => {
@@ -716,32 +714,6 @@ function smGenerateTXT() {
   });
 
   return codes;
-}
-
-// -------------------------------------
-// Xfer - Save to Xfer List
-// -------------------------------------
-
-async function doXfer() {
-  const selectedMarkers = getAllMarkers().filter(m => m.options.isSelected);
-  if (selectedMarkers.length === 0) {
-    return showToast('No caches selected');
-  }
-
-  const codes = selectedMarkers
-    .map(m => m.options.referenceCode)
-    .filter(code => code);
-
-  if (codes.length === 0) {
-    return showToast('No caches in selection');
-  }
-
-  const success = await saveToXferList(codes);
-  if (success) {
-    showToast(`${codes.length} cache(s) saved to Xfer list`);
-  } else {
-    showToast('Failed to save to Xfer list');
-  }
 }
 
 // -------------------------------------

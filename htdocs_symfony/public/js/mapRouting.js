@@ -47,7 +47,6 @@ import { MapButtonControl } from './mapHelpers.js';
 
 let state = {};
 let markers     = [];
-let markerCircles = [];  // circles for routing markers
 let trackSegments = [];
 
 let routingControl;
@@ -150,52 +149,8 @@ function clearRouting() {
     state.mapRoot.removeLayer(marker);
   });
   markers = [];
-  clearMarkerCircles();
   clearRoutesAndLines();
   trackSegments = [];
-}
-
-// ---------------------------------------
-// Clear circles from routing markers
-
-function clearMarkerCircles() {
-  markerCircles.forEach(circle => {
-    state.mapRoot.removeLayer(circle);
-  });
-  markerCircles = [];
-}
-
-// ---------------------------------------
-// Create circle for a routing marker
-
-function createMarkerCircle(latlng) {
-  if (!state.circlesEnabled) return null;
-
-  const circle = L.circle(latlng, {
-    radius: state.circleRadius || 160,
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.3,
-    weight: 1
-  }).addTo(state.mapRoot);
-
-  return circle;
-}
-
-// ---------------------------------------
-// Refresh all routing marker circles (when radius changes)
-
-export function refreshRoutingCircles() {
-  // Remove existing circles
-  clearMarkerCircles();
-
-  // Recreate if circles are enabled
-  if (state.circlesEnabled && state.rmRoutingModeEnabled) {
-    markers.forEach(marker => {
-      const circle = createMarkerCircle(marker.getLatLng());
-      if (circle) markerCircles.push(circle);
-    });
-  }
 }
 
 // ---------------------------------------
@@ -224,10 +179,6 @@ const addMarker = async (event) => {
   markers.push(marker);
   const markerIndex = markers.indexOf(marker);
   const isCtrlPressed = event.originalEvent.ctrlKey || event.originalEvent.metaKey;
-
-  // Create circle for routing marker if circles are enabled
-  const circle = createMarkerCircle(event.latlng);
-  if (circle) markerCircles.push(circle);
 
   // --- Function to generate popup content ---
   const getPopupContent = () => {
@@ -263,10 +214,6 @@ const addMarker = async (event) => {
     await updateRoutes(markerIndex, true, isCtrlPressed);
     if (popupOpen) {
       marker.setPopupContent(getPopupContent());
-    }
-    // Update circle position if it exists
-    if (markerCircles[markerIndex]) {
-      markerCircles[markerIndex].setLatLng(marker.getLatLng());
     }
   });
 

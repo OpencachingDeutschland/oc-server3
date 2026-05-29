@@ -2,11 +2,7 @@
  * for license information see LICENSE.md
  * Author: hxdimpf
  *
- * api.js — backend bindings for the verbatim gcxm map modules.
- *
- * map.js, mapTracks.js, mapSelect.js and gpx.js all import named functions
- * from './api.js'. This file provides OC-specific implementations or no-op
- * stubs so the gcxm sources can run unmodified.
+ * api.js — backend bindings for the map modules.
  ***************************************************************************/
 
 // ---------------------------------------------------------------
@@ -26,8 +22,8 @@ export async function findCity(q) {
 // ---------------------------------------------------------------
 // Live viewport caches → /api/caches/live.
 //
-// gcxm signature: (s, w, n, e, skip, take, filter)
-// OC backend ignores skip/take and is bounded server-side (5000 max).
+// Signature: (s, w, n, e, skip, take, filter)
+// Backend ignores skip/take and is bounded server-side (5000 max).
 // We honor the contract by returning [] for any skip > 0.
 
 function calcShortName(name) {
@@ -51,8 +47,6 @@ export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
     const items = data.items || [];
     return items.map(p => ({
       ...p,
-      isOC: true,
-      isGC: false,
       shortName: calcShortName(p.name),
     }));
   } catch (err) {
@@ -64,9 +58,8 @@ export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
 // ---------------------------------------------------------------
 // Waypoints (additional WPs) for a given cache → /api/caches/waypoints.
 //
-// Backend returns { wpts: [{ lat, lon, name, description, typeId }] }
-// Adapted to match what gcxm's handleMarkerClick expects (coordinates +
-// typeId; map.js sets w.type = w.typeId itself).
+// Backend returns { wpts: [{ lat, lon, name, description, subtype }] }.
+// subtype is the OC `coordinates.subtype` (1-5) used to pick a waypoint icon.
 
 export async function getCacheWPs(referenceCode) {
   if (!referenceCode) return null;
@@ -76,7 +69,6 @@ export async function getCacheWPs(referenceCode) {
     const data = await res.json();
     const wpts = (data.wpts || []).map(w => ({
       ...w,
-      typeId: w.typeId,
       coordinates: { latitude: w.lat, longitude: w.lon },
     }));
     return { wpts };
@@ -87,30 +79,12 @@ export async function getCacheWPs(referenceCode) {
 }
 
 // ---------------------------------------------------------------
-// Platform-specific stubs: GC and AL are not part of the OC port.
-
-export async function gcSearchByBbox() { return []; }
-export async function alSearchByBbox() { return []; }
-export async function persistALsById() { return false; }
-export async function getCachedAlStates() { return {}; }
-
-// ---------------------------------------------------------------
-// Field-note GPX tracks — not supported in OC.
+// Field-note GPX tracks — stubbed pending reactivation.
 
 export async function getTrackIds() { return []; }
 export async function getTrackById() { return null; }
 
 // ---------------------------------------------------------------
-// PCN auxiliary fetch (gcxm legacy; map.js imports but doesn't call it).
-
-export async function getPCN() { return null; }
-
-// ---------------------------------------------------------------
-// Xfer list (mapSelect) — not supported in OC.
-
-export async function saveToXferList(_codes) { return false; }
-
-// ---------------------------------------------------------------
-// Generic backend fetch used by gpx.js. Not used in OC paths.
+// Generic backend fetch used by gpx.js — stubbed pending reactivation.
 
 export async function apiFetch(_endpoint, _options, _flags) { return { status: 501 }; }

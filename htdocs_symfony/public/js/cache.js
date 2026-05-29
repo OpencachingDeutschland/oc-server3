@@ -290,8 +290,6 @@ function renderCache() {
   // Persist a minimal state object so icon regeneration works after edits
   const gcState = {
     typeId:     gc.geocacheType?.id,
-    isGC:       false,
-    isOC:       true,
     isOwned:    !!gc.isOwned,
     isFound:    !!gc.isFound,
     isDNF:      !!gc.isDNF,

@@ -4,11 +4,10 @@
 {% block data_map_js %}true{% endblock %}
 
 {% block after_body_start %}
-    {# Globals the verbatim gcxm map modules look up via window/free variables.
+    {# Globals the map modules look up via window/free variables.
        uniCacheWP starts empty; cache.js cooks the OC object into it after
        fetching /api/cache/{wp}, then calls handleWPs(). #}
     <script>
-        window.enabledPlatforms = ['OC'];
         window.uniCacheWP       = [];
         window.defaultZoom      = 14;
     </script>

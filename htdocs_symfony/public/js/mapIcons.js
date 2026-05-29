@@ -30,13 +30,20 @@ export const cacheTypes = {
   8    : { name: "Math/Physics",        col: "darkBlue"    , text: "MP" },
   9    : { name: "Moving",              col: "green"       , text: "MV" },
   10   : { name: "Drive-in",            col: "darkGreen"   , text: "DI" },
-  217  : { name: "Parking",             col: "blue"        , text: "P" , wptPng: "wp_parking.png" },
-  218  : { name: "Virtual Stage",       col: "deepSkyBlue" , text: "VS", wptPng: "wp_reference.png" },
-  219  : { name: "Physical Stage",      col: "deepSkyBlue" , text: "PS", wptPng: "wp_prototype.png" },
-  220  : { name: "Final Location",      col: "deepSkyBlue" , text: "FI", wptPng: "wp_final.png" },
-  221  : { name: "Trail Head",          col: "deepSkyBlue" , text: "TH", wptPng: "wp_path.png" },
-  222  : { name: "Point of Interest",   col: "limeGreen"   , text: "PO", wptPng: "wp_poi.png" },
-  452  : { name: "Reference Point",     col: "deepSkyBlue" , text: "RP", wptPng: "wp_reference.png" },
+};
+
+// --------------------------------------------------------------------------
+// Waypoint type definitions: OC `coordinates.subtype` (1-5) → legacy PNG.
+// Mirrors the legacy `coordinates_type` table and renders the same icons
+// the opencaching.de platform shows on map2.php (icon set 2 / caches2).
+// --------------------------------------------------------------------------
+
+export const waypointTypes = {
+  1 : { name: "Parking",                  png: "wp_parking.png"   },
+  2 : { name: "Stage or reference point", png: "wp_reference.png" },
+  3 : { name: "Path",                     png: "wp_path.png"      },
+  4 : { name: "Final",                    png: "wp_final.png"     },
+  5 : { name: "Point of interest",        png: "wp_poi.png"       },
 };
 
 // Merge icon path data into cache types.
@@ -54,6 +61,29 @@ if (iconPaths[11]) cacheTypes[5].icon = iconPaths[11]; // OC Webcam ← GC 11
  */
 export function getCacheType(typeId) {
   return cacheTypes[typeId] ?? cacheTypes[UNKNOWN_TYPE_ID];
+}
+
+// Cached Leaflet icons per waypoint subtype.
+const waypointIcons = {};
+
+/**
+ * Leaflet icon for a child waypoint (parking, stage, final, path, POI).
+ * Source PNGs are 32x32 (legacy caches2 icon set); rendered ~1.3x for visibility.
+ * Anchor is scaled from legacy (13, 24).
+ */
+export function getWaypointIcon(subtype) {
+  if (typeof L === 'undefined') return null;
+  const wt = waypointTypes[subtype];
+  if (!wt) return null;
+  if (waypointIcons[subtype]) return waypointIcons[subtype];
+  waypointIcons[subtype] = L.icon({
+    iconUrl:       `/images/waypoints/${wt.png}`,
+    iconSize:      [42, 42],
+    iconAnchor:    [17, 31],
+    popupAnchor:   [0, -31],
+    tooltipAnchor: [-17, -16],
+  });
+  return waypointIcons[subtype];
 }
 
 // --------------------------------------------------------------------------
@@ -145,7 +175,6 @@ function renderIconPaths(icon, x, y, size) {
  */
 function buildTableIconHash(typeId, state, size) {
   let hash = `tbl_${typeId}_${size}`;
-  if (state.isOC) hash += '_oc';
   if (state.isDisabled) hash += '_dis';
   if (state.isArchived) hash += '_arch';
   for (const badge of badgeTypes) {
@@ -157,7 +186,7 @@ function buildTableIconHash(typeId, state, size) {
 /**
  * Generate an SVG icon for tables (no pin pointer).
  * @param {number} typeId - Cache type ID
- * @param {Object} state - State flags: { isOC, isFound, isDNF, isDisabled, isArchived, ... }
+ * @param {Object} state - State flags: { isFound, isDNF, isDisabled, isArchived, ... }
  * @param {number} size - Icon size in pixels (default 24)
  * @returns {string} SVG markup
  */
@@ -180,19 +209,12 @@ function generateTableIconSvg(typeId, state = {}, size = 24) {
 
   let svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}">`;
 
-  // Main icon shape (rounded square for OC, circle for GC)
-  // OC rects scaled by 0.89 for equal perceived size vs GC circles
+  // Rounded-square icon, scaled by 0.89 for equal perceived size vs circle icons.
   const S = Math.floor(0.89 * R);
   const rx = S * 0.2;
-  if (state.isOC) {
-    svg += `<rect x="${cx-S+1}" y="${cy-S+1}" width="${2*(S-1)}" height="${2*(S-1)}" rx="${rx}" fill="black"/>`;
-    svg += `<rect x="${cx-S+2}" y="${cy-S+2}" width="${2*(S-2)}" height="${2*(S-2)}" rx="${rx}" fill="white"/>`;
-    svg += `<rect x="${cx-S+3}" y="${cy-S+3}" width="${2*(S-3)}" height="${2*(S-3)}" rx="${rx}" fill="${col}"/>`;
-  } else {
-    svg += `<circle cx="${cx}" cy="${cy}" r="${R - 1}" fill="black"/>`;
-    svg += `<circle cx="${cx}" cy="${cy}" r="${R - 2}" fill="white"/>`;
-    svg += `<circle cx="${cx}" cy="${cy}" r="${R - 3}" fill="${col}"/>`;
-  }
+  svg += `<rect x="${cx-S+1}" y="${cy-S+1}" width="${2*(S-1)}" height="${2*(S-1)}" rx="${rx}" fill="black"/>`;
+  svg += `<rect x="${cx-S+2}" y="${cy-S+2}" width="${2*(S-2)}" height="${2*(S-2)}" rx="${rx}" fill="white"/>`;
+  svg += `<rect x="${cx-S+3}" y="${cy-S+3}" width="${2*(S-3)}" height="${2*(S-3)}" rx="${rx}" fill="${col}"/>`;
 
   // Type label (icon paths or text fallback)
   const { icon } = getCacheType(typeId);
@@ -298,8 +320,6 @@ export function getIcon(u) {
   //  define a hash to be used to lookup icons which we potentially used before
 
   const propertyToSuffix = {
-    isOC        : '_oc',
-    isGC        : '_gc',
     isDisabled  : '_dis',
     isArchived  : '_arch',
     isOwned     : '_o',
@@ -327,19 +347,7 @@ export function getIcon(u) {
   let icon = cacheIcons[hash];
   if (typeof icon !== 'undefined') return icon; // on a match there is nothing left to do
 
-  // Waypoint types: use file-based PNG directly, no badges
   const ct = getCacheType(typeId);
-  if (ct.wptPng) {
-    icon = new liveIcon({
-      iconUrl: `/images/waypoints/${ct.wptPng}`,
-      iconSize: [24, 24],
-      iconAnchor: [12, 24],
-      popupAnchor: [0, -24],
-      tooltipAnchor: [-12, -12],
-    });
-    cacheIcons[hash] = icon;
-    return icon;
-  }
 
   let {col, text} = ct;
 
@@ -361,10 +369,7 @@ export function getIcon(u) {
         svg += `  <circle fill="none" stroke="red" stroke-width="${0.25*R}" r="${1.35*R}" />\n`;
       }
 
-      if (u.isOC)
-        svg += createHexagonIcon(R);
-      else
-        svg += createCircleIcon(R);
+      svg += createHexagonIcon(R);
 
   // --------------------------------------------------------------------------
   // create base icon. Color may be overriden by states isDisabled / isArchived
@@ -372,12 +377,10 @@ export function getIcon(u) {
   if (u.isDisabled) col = 'darkGrey';
   if (u.isArchived) col = 'lightPink';
 
-  if (u.isOC) {
+  {
     const S = 0.89 * R;
     const rx = S * 0.15;
     svg += `  <rect x="${-0.80*S}" y="${-0.80*S}" width="${2*0.80*S}" height="${2*0.80*S}" rx="${rx}" fill="${col}" />\n`;
-  } else {
-    svg += `  <circle fill="${col}" r="${0.80*R}" />\n`;
   }
 
   // Type label (icon paths or text fallback)
@@ -412,17 +415,6 @@ export function getIcon(u) {
   icon = new liveIcon(iconOptions);
   cacheIcons[hash] = icon;
   return icon;
-}
-
-// -----------------------------------
-// createCircleIcon()
-//
-function createCircleIcon(R) {
-  let svg  = `  <circle fill="black" r="${R}" />\n`;
-      svg += `  <path d="M ${-0.2 * R} ${0.96 * R} L 0 ${1.3 * R} L ${0.2 * R} ${0.96 * R}" fill="black" />\n`;
-      svg += `  <path d="M ${-0.1 * R} ${R} L 0 ${1.2 * R} L ${0.1 * R} ${R}" fill="white" />\n`;
-      svg += `  <circle fill="white" r="${0.95*R}" />\n`;
-  return svg;
 }
 
 // -----------------------------------

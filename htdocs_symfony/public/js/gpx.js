@@ -209,19 +209,11 @@ function generateWaypoint(item, today) {
   const rawCode = item.code || item.referenceCode;
   if (!rawCode) return null;
 
-  // Determine platform from item or code prefix
-  const platform = item.platform || (rawCode.startsWith('GC') ? 'GC' : rawCode.startsWith('OC') ? 'OC' : 'AL');
-  const isAL = platform === 'AL';
-
-  // For AL caches, prefix with "AL" if not already prefixed
-  const code = isAL && !rawCode.toUpperCase().startsWith('AL')
-    ? `AL${rawCode.toUpperCase()}`
-    : rawCode;
+  const code = rawCode;
 
   // Extract optional fields with defaults
   const name = escapeXml(item.name || code);
-  // For AL caches, use a UUID-based ID; for others, convert from reference code
-  const cacheId = isAL ? rawCode : referenceCode2Id(rawCode);
+  const cacheId = referenceCode2Id(rawCode);
   const type = GPX_CACHE_TYPES[item.geocacheType?.id] || 'Unknown Cache';
   const size = GPX_CONTAINER_TYPES[item.geocacheSize?.id] || 'Not chosen';
   const difficulty = item.difficulty || 1;
@@ -248,17 +240,8 @@ function generateWaypoint(item, today) {
   wpt += `    <name>${escapeXml(code)}</name>\n`;
   wpt += `    <desc>${name} by ${owner}, ${type} (${difficulty}/${terrain})</desc>\n`;
 
-  // URL based on platform
-  if (isAL) {
-    wpt += `    <url>https://gcxm.de/alexplore?id=${rawCode}</url>\n`;
-    wpt += `    <urlname>${name}</urlname>\n`;
-  } else if (rawCode.startsWith('GC')) {
-    wpt += `    <url>http://www.geocaching.com/seek/cache_details.aspx?wp=${rawCode}</url>\n`;
-    wpt += `    <urlname>${name}</urlname>\n`;
-  } else if (rawCode.startsWith('OC')) {
-    wpt += `    <url>https://www.opencaching.de/viewcache.php?wp=${rawCode}</url>\n`;
-    wpt += `    <urlname>${name}</urlname>\n`;
-  }
+  wpt += `    <url>https://www.opencaching.de/viewcache.php?wp=${rawCode}</url>\n`;
+  wpt += `    <urlname>${name}</urlname>\n`;
 
   wpt += `    <sym>${symbol}</sym>\n`;
   wpt += `    <type>Geocache|${type}</type>\n`;
@@ -358,24 +341,17 @@ function buildGsakBlock(item, today, hasCC, listingLat, listingLon, foundDate) {
   const favpoints = item.favoritePoints;
   const pmo = item.isPremiumOnly;
   const note = item.pcn;
-  const isAL = item.platform === 'AL';
 
-  // Only include GSAK block if we have any GSAK-relevant data
-  // hasCC now only contributes to this check if we have valid listing coordinates
   const hasListingCoords = hasCC && listingLat !== undefined && listingLon !== undefined;
-  // Always include GSAK block for AL caches (to set FavPoints=-1)
-  const hasGsakData = isAL || favpoints != null || pmo !== undefined || hasListingCoords || foundDate || note;
+  const hasGsakData = favpoints != null || pmo !== undefined || hasListingCoords || foundDate || note;
   if (!hasGsakData) return null;
 
   let gsak = `    <gsak:wptExtension xmlns:gsak="http://www.gsak.net/xmlv1/6">\n`;
   gsak += `      <gsak:Watch>false</gsak:Watch>\n`;
   gsak += `      <gsak:IsPremium>${pmo ? 'true' : 'false'}</gsak:IsPremium>\n`;
 
-  // FavPoints: use -1 for AL caches with null favoritePoints
   if (favpoints != null) {
     gsak += `      <gsak:FavPoints>${favpoints}</gsak:FavPoints>\n`;
-  } else if (isAL) {
-    gsak += `      <gsak:FavPoints>-1</gsak:FavPoints>\n`;
   }
 
   gsak += `      <gsak:GcNote>${escapeXml(note || '')}</gsak:GcNote>\n`;
@@ -389,13 +365,6 @@ function buildGsakBlock(item, today, hasCC, listingLat, listingLon, foundDate) {
   }
 
   gsak += `    </gsak:wptExtension>\n`;
-
-  // Add cgeo extension for AL caches
-  if (isAL) {
-    gsak += `    <cgeo:cacheExtension xmlns:cgeo="http://www.cgeo.org/xmlv1/1">\n`;
-    gsak += `      <cgeo:assignedEmoji>0</cgeo:assignedEmoji>\n`;
-    gsak += `    </cgeo:cacheExtension>\n`;
-  }
 
   return gsak;
 }

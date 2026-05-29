@@ -129,8 +129,6 @@ class SearchController extends AbstractController
                 'isFound'        => (bool)(int)$r['isFound'],
                 'foundDate'      => $r['foundDate'] ? (new \DateTime($r['foundDate']))->format('Y-m-d') : '',
                 'isOwned'        => (bool)(int)$r['isOwned'],
-                'isOC'           => true,
-                'isGC'           => false,
                 'isSelected'     => false,
                 'ownerAlias'     => $r['ownerAlias'],
                 'ownerCode'      => (string)$r['ownerCode'],
@@ -140,7 +138,7 @@ class SearchController extends AbstractController
                 'shortName'      => mb_strlen($r['name']) > 25 ? mb_substr($r['name'], 0, 25) . '…' : $r['name'],
                 'hasPCN'         => (bool)(int)$r['hasPCN'],
                 'hasCC'          => (bool)(int)$r['hasCC'],
-                'pcnText'        => $r['pcnText'] ?? '',
+                'pcn'            => $r['pcnText'] ?? '',
             ];
         }
 

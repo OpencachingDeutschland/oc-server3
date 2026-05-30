@@ -76,7 +76,7 @@ async function runSearch() {
   const items = await searchCaches(params);
 
   foundCount = items.length;
-  const cap  = foundCount === 500 ? ' (limit reached — refine filters)' : '';
+  const cap  = foundCount === 1000 ? ' (limit reached — refine filters)' : '';
   setStatus(foundCount ? `Found ${foundCount} cache(s)${cap}` : 'No caches found.');
 
   renderTable(items);
@@ -95,8 +95,8 @@ function renderTable(data) {
   table = new Tabulator('#searchResults', {
     data,
     layout: 'fitColumns',
-    pagination: true,
-    paginationSize: 50,
+    height: '60vh',
+    renderVertical: 'virtual',
     selectableRows: true,
     columns: [
       {
@@ -138,7 +138,7 @@ function updateActionsPanel(selCount, hasResults) {
   document.getElementById('actionsPanel').style.display = hasResults ? '' : 'none';
 
   const sel = selCount > 0 ? ` · ${selCount} selected` : '';
-  const cap = foundCount === 500 ? ' (limit reached)' : '';
+  const cap = foundCount === 1000 ? ' (limit reached)' : '';
   setStatus(foundCount
     ? `Found ${foundCount} cache(s)${cap}${sel}`
     : 'No caches found.'

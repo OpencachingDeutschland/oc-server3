@@ -75,7 +75,7 @@ class CachesController extends AbstractController
             ->setParameter('minDiff', $minDiff)
             ->setParameter('maxDiff', $maxDiff)
             ->orderBy('c.wp_oc', 'ASC')
-            ->setMaxResults(500);
+            ->setMaxResults(1000);
 
         if ($activeOnly) {
             $qb->andWhere('c.status = 1');
@@ -683,6 +683,7 @@ class CachesController extends AbstractController
                 c.type AS type_id,
                 c.size AS size_id,
                 c.status AS status_id,
+                c.search_time, c.way_length,
                 IF(c.logpw != \'\', 1, 0) AS logpw,
                 c.logpw AS cache_logpw,
                 c.needs_maintenance, c.listing_outdated,
@@ -970,6 +971,8 @@ class CachesController extends AbstractController
                 'joinedDate'    => $cache['owner_joined'] ? substr($cache['owner_joined'], 0, 10) : null,
             ],
             'logTypes'    => $logTypeIds,
+            'searchTime'  => (float)$cache['search_time'],
+            'wayLength'   => (float)$cache['way_length'],
             'wpGc'        => $cache['wp_gc'] ?: '',
             'svgName'     => $cache['svg_name'],
             'descHtml'    => (bool)($desc['desc_html'] ?? true),

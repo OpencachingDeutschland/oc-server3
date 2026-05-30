@@ -223,6 +223,8 @@ function augmentForRender(uc, oc, aux) {
   uc.listingOutdated  = !!aux.listingOutdated;
   uc.wpGc             = aux.wpGc || '';
   uc.logpw            = aux.myLogpw || '';
+  uc.searchTime       = aux.searchTime || 0;
+  uc.wayLength        = aux.wayLength  || 0;
 
   return uc;
 }
@@ -381,7 +383,20 @@ function renderCache() {
     favEl.textContent = (gc.favoritePoints || 0).toLocaleString() + heart;
   }
 
-  setText('cachePlacedDate',    gc.placedDateFmt);
+  setText('cachePlacedDate', gc.placedDateFmt);
+
+  const timeRow = getById('cacheTimeRow');
+  if (timeRow) {
+    if (gc.searchTime > 0) {
+      const h = Math.floor(gc.searchTime);
+      const m = Math.round((gc.searchTime - h) * 60);
+      setText('cacheTime', `${h}:${m.toString().padStart(2, '0')}`);
+      timeRow.style.display = '';
+    } else {
+      timeRow.style.display = 'none';
+    }
+  }
+
   setText('cachePublishedDate', gc.publishedDateFmt);
 
   // Found date row

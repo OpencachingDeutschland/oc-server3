@@ -6,7 +6,6 @@ namespace Oc\Controller\App;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Form\CachesFormType;
 use Oc\Repository\CachesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -24,31 +23,116 @@ class CachesController extends AbstractController
     ) {}
 
     #[Route("/caches", name: "caches_index")]
-    public function cachesController_index(Request $request): Response
+    public function cachesController_index(): Response
     {
-        $fetchedCaches = '';
+        $types = $this->connection->fetchAllAssociative(
+            'SELECT ct.id, IFNULL(stt.text, ct.en) AS name
+             FROM cache_type ct
+             LEFT JOIN sys_trans st ON ct.trans_id = st.id
+             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
+             ORDER BY ct.ordinal',
+            ['EN']
+        );
 
-        $form = $this->createForm(CachesFormType::class);
-        $form->handleRequest($request);
+        return $this->render('app/caches/search.html.twig', ['types' => $types]);
+    }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $inputData = $form->getData();
-            $fetchedCaches = $this->cachesRepository->getCachesForSearchField($inputData['content_searchfield']);
+    #[Route("/api/caches/search", name: "api_caches_search")]
+    public function apiSearchCaches(Request $request): JsonResponse
+    {
+        $q          = trim($request->query->get('q', ''));
+        $type       = (int)$request->query->get('type', 0);
+        $minDiff    = (int)round((float)$request->query->get('minDiff', 1.0) * 2);
+        $maxDiff    = (int)round((float)$request->query->get('maxDiff', 5.0) * 2);
+        $activeOnly = $request->query->get('activeOnly', '1') === '1';
+        $lat        = $request->query->get('lat') !== null ? (float)$request->query->get('lat') : null;
+        $lon        = $request->query->get('lon') !== null ? (float)$request->query->get('lon') : null;
+        $radius     = (float)$request->query->get('radius', 0);
 
-            if (empty($fetchedCaches)) {
-                if (preg_match('/[a-zA-Z0-9]{3,5}/', $inputData['content_searchfield'])
-                    && !str_starts_with($inputData['content_searchfield'], 'OC')
-                    && !str_starts_with($inputData['content_searchfield'], 'GC')
-                ) {
-                    $fetchedCaches = $this->cachesRepository->getCachesForSearchFieldWPOnly($inputData['content_searchfield']);
-                }
-            }
+        $user   = $this->security->getUser();
+        $userId = $user?->getUserId() ?? 0;
+
+        $qb = $this->connection->createQueryBuilder()
+            ->select(
+                'c.wp_oc', 'c.name',
+                'c.type AS type_id',
+                'c.status',
+                'c.user_id AS owner_id',
+                'c.difficulty / 2 AS difficulty',
+                'c.terrain / 2 AS terrain',
+                'c.latitude', 'c.longitude',
+                'ct.name AS type_name',
+                'u.username',
+                'EXISTS (SELECT 1 FROM cache_logs cl WHERE cl.cache_id = c.cache_id AND cl.user_id = :userId AND cl.type = 1) AS is_found',
+                'EXISTS (SELECT 1 FROM cache_logs cl2 WHERE cl2.cache_id = c.cache_id AND cl2.user_id = :userId AND cl2.type = 2) AS is_dnf',
+                'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn'
+            )
+            ->setParameter('userId', $userId)
+            ->from('caches', 'c')
+            ->innerJoin('c', 'user', 'u', 'c.user_id = u.user_id')
+            ->leftJoin('c', 'cache_type', 'ct', 'c.type = ct.id')
+            ->andWhere('c.difficulty >= :minDiff AND c.difficulty <= :maxDiff')
+            ->setParameter('minDiff', $minDiff)
+            ->setParameter('maxDiff', $maxDiff)
+            ->orderBy('c.wp_oc', 'ASC')
+            ->setMaxResults(500);
+
+        if ($activeOnly) {
+            $qb->andWhere('c.status = 1');
+        }
+        if ($type > 0) {
+            $qb->andWhere('c.type = :type')->setParameter('type', $type);
+        }
+        if ($q !== '') {
+            $qb->andWhere($qb->expr()->or(
+                $qb->expr()->eq('c.wp_oc', ':q'),
+                $qb->expr()->eq('c.wp_gc', ':q'),
+                $qb->expr()->like('c.name', ':qLike'),
+                $qb->expr()->like('u.username', ':qLike')
+            ))
+               ->setParameter('q', $q)
+               ->setParameter('qLike', '%' . $q . '%');
+        }
+        if ($lat !== null && $lon !== null && $radius > 0) {
+            $qb->andWhere('(6371 * acos(GREATEST(-1.0, LEAST(1.0, cos(radians(:lat)) * cos(radians(c.latitude)) * cos(radians(c.longitude) - radians(:lon)) + sin(radians(:lat)) * sin(radians(c.latitude)))))) <= :radius')
+               ->setParameter('lat', $lat)
+               ->setParameter('lon', $lon)
+               ->setParameter('radius', $radius);
         }
 
-        return $this->render('app/caches/search.html.twig', [
-            'cachesForm' => $form->createView(),
-            'caches_by_searchfield' => $fetchedCaches,
-        ]);
+        $rows = $qb->executeQuery()->fetchAllAssociative();
+
+        $items = array_map(function (array $r) use ($userId): array {
+            $name   = (string)$r['name'];
+            $status = (int)$r['status'];
+            return [
+                'referenceCode' => $r['wp_oc'],
+                'name'          => $name,
+                'shortName'     => mb_strlen($name) > 25 ? mb_substr($name, 0, 25) . '…' : $name,
+                'lat'           => (float)$r['latitude'],
+                'lon'           => (float)$r['longitude'],
+                'geocacheType'  => ['id' => (int)$r['type_id'], 'name' => (string)($r['type_name'] ?? '')],
+                'difficulty'    => (float)$r['difficulty'],
+                'terrain'       => (float)$r['terrain'],
+                'ownerAlias'    => (string)$r['username'],
+                'platform'      => 'OC',
+                'isFound'       => (bool)(int)$r['is_found'],
+                'isOwned'       => $userId > 0 && (int)$r['owner_id'] === $userId,
+                'isDNF'         => (bool)(int)$r['is_dnf'],
+                'isCached'      => false,
+                'isDisabled'    => $status === 2,
+                'isArchived'    => $status === 3,
+                'hasCC'         => false,
+                'hasPCN'        => (bool)(int)$r['has_pcn'],
+                'isGuessable'   => false,
+                'isPartial'     => false,
+                'isSelected'    => false,
+                'favoritePoints'=> 0,
+                'status'        => $status,
+            ];
+        }, $rows);
+
+        return $this->json(['items' => $items]);
     }
 
     #[Route("/cache/{wpID}", name: "cache_by_wp_oc_gc")]

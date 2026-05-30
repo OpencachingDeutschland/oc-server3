@@ -24,7 +24,7 @@ import {
   getTrackById,
   ocSearchByBbox,
   findCity,
-} from './api.js';
+} from './mapApi.js';
 
 const mapRoot = L.map('mapRoot', { zoomControl: false });
 

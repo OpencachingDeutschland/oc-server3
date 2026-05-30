@@ -176,6 +176,17 @@ select:focus {
   color: var(--oc-text-primary);
 }
 
+.form-control::placeholder,
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+  color: var(--oc-text-secondary);
+  opacity: 1;
+}
+
 /* Bootstrap 5 needs color-scheme for native pickers + select popups in dark mode */
 [data-theme="dark"] input[type="date"],
 [data-theme="dark"] input[type="datetime-local"],

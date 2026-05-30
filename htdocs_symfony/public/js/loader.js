@@ -42,6 +42,7 @@ async function loadMap() {
         loadCss('/vendor/leaflet-draw/leaflet.draw.css'),
         loadCss('/vendor/leaflet.markercluster/MarkerCluster.css'),
         loadCss('/vendor/leaflet.markercluster/MarkerCluster.Default.css'),
+        loadCss('/css/map.css'),
     ]);
 
     await loadJs('/vendor/leaflet/leaflet.js');

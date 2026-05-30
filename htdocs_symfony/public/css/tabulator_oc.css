@@ -61,6 +61,13 @@
     text-overflow: clip !important;
 }
 
+/* Truncation helper — apply via cssClass on columns whose content may overflow */
+.tabulator .tabulator-cell.cell-truncate {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
 /* =================================================================
    Dark theme overrides
    ================================================================= */

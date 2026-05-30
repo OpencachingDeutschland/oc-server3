@@ -2,7 +2,7 @@
  * for license information see LICENSE.md
  * Author: hxdimpf
  *
- * api.js — backend bindings for the map modules.
+ * mapApi.js — backend bindings for the map modules.
  ***************************************************************************/
 
 // ---------------------------------------------------------------
@@ -28,7 +28,7 @@ export async function findCity(q) {
 
 function calcShortName(name) {
   if (!name) return '';
-  return name.length > 25 ? name.substring(0, 25) + '\u2026' : name;
+  return name.length > 25 ? name.substring(0, 25) + '…' : name;
 }
 
 export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
@@ -83,8 +83,3 @@ export async function getCacheWPs(referenceCode) {
 
 export async function getTrackIds() { return []; }
 export async function getTrackById() { return null; }
-
-// ---------------------------------------------------------------
-// Generic backend fetch used by gpx.js — stubbed pending reactivation.
-
-export async function apiFetch(_endpoint, _options, _flags) { return { status: 501 }; }

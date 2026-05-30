@@ -684,3 +684,11 @@ button.map-btn {
 [data-theme="dark"] .city-search-status {
   color: var(--oc-text-secondary);
 }
+
+/* Applied by pageMap.js on any page that shows a map via initPageMap().
+   The !important beats map.js's inline style.height writes, so CSS calc
+   always governs the displayed height regardless of visualViewport drift. */
+#mapRoot.page-map-active {
+  height: 100vh !important;
+  width: 100%;
+}

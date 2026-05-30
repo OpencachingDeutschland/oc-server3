@@ -11,7 +11,6 @@
 // https://opensource.org/licenses/MIT
 // --------------------------------------------------------------
 
-import { apiFetch } from './api.js';
 import { escapeXml } from './helpers.js';
 
 // -------------------------------------
@@ -455,7 +454,7 @@ async function process(file, name, index) {
   };
 
   try {
-    const result = await apiFetch('gpx', options, { raw: true }); // raw true returns full Response
+    const result = await Promise.resolve({ status: 501 }); // TODO: wire up real endpoint on reactivation
 
     if (result.status === 204) {
       addLine(`imported: ${String(index + 1).padStart(4, ".")} ${shortName}`);

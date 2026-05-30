@@ -28,6 +28,7 @@
 import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.js';
 import { coords2Dm, coords2LatLon } from './coords.js';
 import { ocToUniCacheWP } from './uniCache.js';
+import { initPageMap } from './pageMap.js';
 
 // -----------------------------------------------------------------
 // OC log type metadata (matches okapiLogTypeNames in CachesController)
@@ -1138,22 +1139,12 @@ async function deleteLog(log) {
 // handleWPs() reads window.uniCacheWP — push the cooked cache in and call it.
 
 async function initMap() {
-  if (typeof L === 'undefined' || !L.markerClusterGroup) {
-    console.log('initMap: Leaflet not loaded');
-    return;
-  }
-
-  window.uniCacheWP = [gc];
   window.lat = gc.lat;
   window.lon = gc.lon;
-
-  try {
-    const mapModule = await import('./map.js');
-    mapHandleWPs        = mapModule.handleWPs;
-    mapUpdateMarkerIcon = mapModule.updateStaticMarkerIcon;
-    await mapHandleWPs();
-  } catch (err) {
-    console.log('initMap: handleWPs failed', err);
+  const m = await initPageMap([gc]);
+  if (m) {
+    mapHandleWPs        = m.handleWPs;
+    mapUpdateMarkerIcon = m.updateStaticMarkerIcon;
   }
 }
 

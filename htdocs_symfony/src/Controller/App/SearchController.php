@@ -76,12 +76,15 @@ class SearchController extends AbstractController
                 IF(pcn.id IS NOT NULL AND pcn.latitude != 0 AND pcn.longitude != 0, 1, 0) AS hasCC,
                 pcn.latitude    AS ccLat,
                 pcn.longitude   AS ccLon,
-                pcn.description AS pcnText
+                pcn.description AS pcnText,
+                IF(oc_only.cache_id IS NOT NULL, 1, 0) AS isOcOnly
             FROM caches c
             INNER JOIN cache_type ct ON c.type = ct.id
             INNER JOIN cache_size  cs ON c.size = cs.id
             INNER JOIN user         u ON c.user_id = u.user_id
             LEFT  JOIN stat_caches sc ON c.cache_id = sc.cache_id
+            LEFT  JOIN caches_attributes oc_only
+                   ON oc_only.cache_id = c.cache_id AND oc_only.attrib_id = 6
             LEFT  JOIN cache_logs  fl
                    ON fl.cache_id = c.cache_id
                   AND fl.user_id  = :userId
@@ -139,6 +142,7 @@ class SearchController extends AbstractController
                 'hasPCN'         => (bool)(int)$r['hasPCN'],
                 'hasCC'          => (bool)(int)$r['hasCC'],
                 'pcn'            => $r['pcnText'] ?? '',
+                'isOcOnly'       => (bool)(int)$r['isOcOnly'],
             ];
         }
 

@@ -225,6 +225,7 @@ function augmentForRender(uc, oc, aux) {
   uc.logpw            = aux.myLogpw || '';
   uc.searchTime       = aux.searchTime || 0;
   uc.wayLength        = aux.wayLength  || 0;
+  uc.isOcOnly         = (aux.attributes || []).some(a => a.id === 6);
 
   return uc;
 }
@@ -300,6 +301,7 @@ function renderCache() {
     isDisabled: !!gc.isDisabled,
     hasPCN:     !!gc.hasPCN,
     hasCC:      !!gc.hasCC,
+    isOcOnly:   !!gc.isOcOnly,
   };
   const gcStateEl = getById('gcState');
   if (gcStateEl) gcStateEl.textContent = JSON.stringify(gcState);

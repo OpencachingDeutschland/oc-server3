@@ -97,6 +97,7 @@ export const badgeTypes = [
   { key: 'isOwned',     pos: 'ur', col: 'crimson',   text: 'O',  textCol: 'white' },
   { key: 'isDNF',       pos: 'ur', col: 'lightBlue', text: 'D',  textCol: 'black' },
   { key: 'isFound',     pos: 'ur', col: 'gold',      text: 'F',  textCol: 'black' },
+  { key: 'isOcOnly',    pos: 'ul', col: 'royalblue', text: 'OC', textCol: 'white' },
   { key: 'isCached',    pos: 'ul', col: 'white',     text: 'S',  textCol: 'black' },
   { key: 'hasFav',      pos: 'ul', col: 'crimson',   text: '♥',  textCol: 'white' },
   { key: 'hasCC',       pos: 'br', col: 'green',     text: '✓',  textCol: 'white' },
@@ -330,6 +331,7 @@ export function getIcon(u) {
     hasCC       : '_c',
     hasPCN      : '_n',
     isCached    : '_l',
+    isOcOnly    : '_oc',
     isSelected  : '_sel',
   };
 

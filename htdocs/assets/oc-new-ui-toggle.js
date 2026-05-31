@@ -9,7 +9,7 @@
 (function() {
   // Map legacy PHP paths to new Symfony paths
   const LEGACY_TO_SYMFONY = {
-    '/search.php': '/search',
+    '/search.php': '/caches/',
     '/livemap.php': '/livemap',
     '/newcache.php': '/newcache',
     '/viewcache.php': '/cache', // Special: viewcache.php?wp=... → /cache/...

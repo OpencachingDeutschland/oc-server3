@@ -53,6 +53,19 @@ if (document.body.dataset.page !== 'mapServer' && document.body.dataset.page !==
   new ScrollTopControl({ position: 'topcenter' }).addTo(mapRoot);
 }
 
+// Initialise Bootstrap popovers inside Leaflet popups when they open.
+// Bootstrap is loaded as a global script before this module runs.
+mapRoot.on('popupopen', function(e) {
+  e.popup.getElement()?.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
+    bootstrap.Popover.getOrCreateInstance(el, { sanitize: false });
+  });
+});
+mapRoot.on('popupclose', function(e) {
+  e.popup.getElement()?.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => {
+    bootstrap.Popover.getInstance(el)?.dispose();
+  });
+});
+
 //-------------------------
 // CitySearchControl — on all map pages; hidden until Live Map overlay is active
 //
@@ -903,7 +916,13 @@ export function createMarker(p) {
   const ownerHTML = `<span class="owner-alias" data-owner="${p.ownerAlias || ""}">${p.ownerAlias || "Unknown"}</span>`;
   const foundRow  = p.isFound ? `<tr class="found-row"><td>Found:</td><td class="found-date">${p.foundDate || ''}</td></tr>` : "";
   const typeRow   = `${p.geocacheType?.name || "?"} / ${p.geocacheSize?.name || "?"} / ${p.difficulty} / ${p.terrain}`;
-  const pcn       = p.hasPCN ? ` <a href="#" class="pcn-tooltip" title="">PCN</a>` : "";
+  const pcnEsc    = (p.pcn || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const pcnPop    = `<pre style="margin:0;font-size:0.78em;font-family:monospace;white-space:pre-wrap;word-break:break-word;max-width:260px">${pcnEsc}</pre>`;
+  const pcn       = p.hasPCN
+    ? `<span data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="right" ` +
+        `data-bs-html="true" data-bs-content="${pcnPop.replace(/"/g, '&quot;')}" ` +
+        `style="cursor:help;color:var(--oc-link-color);text-decoration:underline dotted;margin-left:6px">PCN</span>`
+    : "";
 
   let statsRow = '';
   if (p.findCount != null) {

@@ -3,6 +3,22 @@
 {% block data_page %}searchcaches{% endblock %}
 {% block data_map_js %}true{% endblock %}
 
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'Searching…':                                  'Searching…'                                  | trans,
+    'Found %count% cache(s)':                      'Found %count% cache(s)'                      | trans,
+    'No caches found.':                            'No caches found.'                            | trans,
+    'limit reached — refine filters':              'limit reached — refine filters'              | trans,
+    'limit reached':                               'limit reached'                               | trans,
+    '%count% selected':                            '%count% selected'                            | trans,
+    'No coordinates available for these results.': 'No coordinates available for these results.' | trans,
+    'OC Code': 'OC Code' | trans,
+    'Name':    'Name'    | trans,
+    'Owner':   'Owner'   | trans,
+    'Type':    'Type'    | trans,
+    'D':       'D'       | trans,
+    'T':       'T'       | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('vendor/tabulator/tabulator_bootstrap5.min.css') }}">

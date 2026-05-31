@@ -391,7 +391,7 @@ Cancel: Abbrechen
 'e.g. N51 02.345 E009 43.210': 'z.B. N51 02.345 E009 43.210'
 'Your personal notes about this cache (only visible to you)': 'Deine persönlichen Notizen zu diesem Cache (nur für dich sichtbar)'
 'Your own coordinates if the posted ones need correction (visible only to you)': 'Deine eigenen Koordinaten, falls die veröffentlichten korrigiert werden müssen (nur für dich sichtbar)'
-# Search caches page
+# Search caches page — template strings
 'Keyword / WP code / owner': 'Stichwort / WP-Code / Owner'
 'e.g. Forest, OC12345, username': 'z.B. Wald, OC12345, Benutzername'
 'Near city': 'In der Nähe von'
@@ -404,3 +404,12 @@ Cancel: Abbrechen
 'Active only': 'Nur aktive'
 'OC only': 'Nur OC'
 Actions: Aktionen
+# Search caches page — JS dynamic strings (window.OCI18n)
+'Searching…': 'Suche läuft…'
+'Found %count% cache(s)': '%count% Cache(s) gefunden'
+'No caches found.': 'Keine Caches gefunden.'
+'limit reached — refine filters': 'Limit erreicht — Filter verfeinern'
+'limit reached': 'Limit erreicht'
+'%count% selected': '%count% ausgewählt'
+'No coordinates available for these results.': 'Keine Koordinaten für diese Ergebnisse verfügbar.'
+'OC Code': 'OC-Code'

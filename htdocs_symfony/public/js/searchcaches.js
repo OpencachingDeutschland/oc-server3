@@ -9,6 +9,7 @@ import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.
 import { searchCaches } from './cacheApi.js';
 import { findCity } from './mapApi.js';
 import { initPageMap } from './pageMap.js';
+import { t } from './i18n.js';
 
 // API returns uniCacheWP-format objects — use those field names throughout.
 
@@ -65,7 +66,7 @@ async function runSearch() {
     await geocodeCity();
   }
 
-  setStatus('Searching…');
+  setStatus(t('Searching…'));
 
   const params = { q, type, minDiff, maxDiff, activeOnly, ocOnly };
   if (geocodedCity && radius > 0) {
@@ -77,8 +78,8 @@ async function runSearch() {
   const items = await searchCaches(params);
 
   foundCount = items.length;
-  const cap  = foundCount === 1000 ? ' (limit reached — refine filters)' : '';
-  setStatus(foundCount ? `Found ${foundCount} cache(s)${cap}` : 'No caches found.');
+  const cap  = foundCount === 1000 ? ` (${t('limit reached — refine filters')})` : '';
+  setStatus(foundCount ? t('Found %count% cache(s)', { count: foundCount }) + cap : t('No caches found.'));
 
   renderTable(items);
   updateActionsPanel(0, foundCount > 0);
@@ -106,20 +107,20 @@ function renderTable(data) {
         hozAlign: 'center', headerHozAlign: 'center', headerSort: false, resizable: false,
       },
       {
-        title: 'OC Code', field: 'referenceCode',
+        title: t('OC Code'), field: 'referenceCode',
         width: 110, widthGrow: 0, widthShrink: 0,
         formatter: (cell) => { const wp = cell.getValue(); return `<a href="/cache/${wp}">${wp}</a>`; },
       },
-      { title: 'Name',  field: 'name',       minWidth: 200, widthGrow: 3, widthShrink: 1, tooltip: true },
-      { title: 'Owner', field: 'ownerAlias', width: 150,    widthGrow: 1, widthShrink: 1, tooltip: true },
+      { title: t('Name'),  field: 'name',       minWidth: 200, widthGrow: 3, widthShrink: 1, tooltip: true },
+      { title: t('Owner'), field: 'ownerAlias', width: 150,    widthGrow: 1, widthShrink: 1, tooltip: true },
       {
-        title: 'Type', field: 'geocacheType', width: 140, widthGrow: 1, widthShrink: 1,
+        title: t('Type'), field: 'geocacheType', width: 140, widthGrow: 1, widthShrink: 1,
         tooltip:   (e, cell) => cell.getValue()?.name || '',
         formatter: (cell)    => cell.getValue()?.name || '',
         sorter:    (a, b)    => (a?.name || '').localeCompare(b?.name || ''),
       },
-      { title: 'D', field: 'difficulty', width: 60, minWidth: 60, widthGrow: 0, widthShrink: 0, resizable: false, hozAlign: 'center', headerSort: false, formatter: (cell) => parseFloat(cell.getValue()).toFixed(1) },
-      { title: 'T', field: 'terrain',    width: 60, minWidth: 60, widthGrow: 0, widthShrink: 0, resizable: false, hozAlign: 'center', headerSort: false, formatter: (cell) => parseFloat(cell.getValue()).toFixed(1) },
+      { title: t('D'), field: 'difficulty', width: 60, minWidth: 60, widthGrow: 0, widthShrink: 0, resizable: false, hozAlign: 'center', headerSort: false, formatter: (cell) => parseFloat(cell.getValue()).toFixed(1) },
+      { title: t('T'), field: 'terrain',    width: 60, minWidth: 60, widthGrow: 0, widthShrink: 0, resizable: false, hozAlign: 'center', headerSort: false, formatter: (cell) => parseFloat(cell.getValue()).toFixed(1) },
     ],
   });
 
@@ -138,11 +139,11 @@ function setStatus(text) {
 function updateActionsPanel(selCount, hasResults) {
   document.getElementById('actionsPanel').style.display = hasResults ? '' : 'none';
 
-  const sel = selCount > 0 ? ` · ${selCount} selected` : '';
-  const cap = foundCount === 1000 ? ' (limit reached)' : '';
+  const sel = selCount > 0 ? ` · ${t('%count% selected', { count: selCount })}` : '';
+  const cap = foundCount === 1000 ? ` (${t('limit reached')})` : '';
   setStatus(foundCount
-    ? `Found ${foundCount} cache(s)${cap}${sel}`
-    : 'No caches found.'
+    ? t('Found %count% cache(s)', { count: foundCount }) + cap + sel
+    : t('No caches found.')
   );
 }
 
@@ -155,7 +156,7 @@ async function showOnMap() {
   const withCoords = items.filter(r => r.lat && r.lon);
 
   if (!withCoords.length) {
-    setStatus('No coordinates available for these results.');
+    setStatus(t('No coordinates available for these results.'));
     return;
   }
 

@@ -1,19 +1,19 @@
 # `feature/ui-refresh` — change overview
 
-A one-page brief for teammates pulling this branch into their existing
+A one-page brief for pulling this branch into their existing
 ddev. Branch is 14 commits ahead of `origin/development` and touches
 mostly `htdocs_symfony/` plus three small portability artifacts under
 `.ddev/`. The legacy `htdocs/` tree is **not** modified.
 
 This branch lays groundwork for what is intended to become the
 **next-generation opencaching.de web application** — the eventual
-replacement for the legacy PHP frontend. Read §6 for an honest
-assessment of how far we are from that goal.
+replacement for the legacy PHP frontend.
 
 ---
 
 ## 1. What changes for users
 
+### Core pages
 - **Theming**: light/dark theme toggle in the navbar. Choice persists
   in `localStorage`. An inline `<head>` script applies the theme
   before paint, so reloads do not flash the wrong palette.
@@ -21,13 +21,31 @@ assessment of how far we are from that goal.
   except `/login`, `/cache/{wp}` (read-only), and a few static
   assets. Authentication piggy-backs on the existing legacy session
   (see §2.5) — no second login.
-- **Live map**: new `/livemap` page with a full-viewport Leaflet map,
-  OSM city/village search (top-center), and a scroll-to-top button.
-- **Cache detail (`/cache/{wp}`)**: client-driven detail view with a
+- **Live map** (`/livemap`): full-viewport Leaflet map with OSM
+  city/village search (top-center), scroll-to-top button, and marker
+  clustering. Map popups display cache metadata with multilingual i18n.
+- **Cache detail** (`/cache/{wp}`): client-driven detail view with
   Tabulator log grid, log submission, PCN / corrected-coordinate
-  editing, and live map-marker updates when coordinates change.
-- **Navbar**: rebuilt on KnpMenu with a Bootstrap-5 template
-  (`bootstrap_navbar_menu.html.twig`); user dropdown on the right.
+  editing, live map-marker updates, Bootstrap popovers for PCN text
+  display. Event caches (type 6) now display event date and duration.
+  OC-only badge visible on cache cards and detail page.
+- **Search caches** (`/search`): full-featured search with D/T sliders,
+  Active/OC-only filters, Tabulator results grid, live map integration,
+  select/export actions. Narrower, more responsive filter inputs.
+  Monospaced OC codes in results. Full German localization.
+- **Search users** (`/user`): Tabulator-based user search with
+  role-aware columns. Support staff see email, joined date, user ID;
+  regular users see username only. Find/hide count badges for each user.
+- **User profile** (`/user/profile/{id}`): redesigned two-column card
+  layout with public info (left) and team-only account info (right).
+  Clean, modern presentation.
+- **Reported caches** (`/backoffice/reported-caches`): Tabulator grid
+  with status filtering (All/New/In Progress/Done), colored status
+  badges, linked columns to cache and owner profiles.
+- **Navbar**: rebuilt on KnpMenu with Bootstrap-5 template
+  (`bootstrap_navbar_menu.html.twig`); user dropdown on right.
+  Support dropdown visible to ROLE_SUPPORT_TRAINEE with nested
+  administrative actions.
 
 ---
 
@@ -250,7 +268,74 @@ if the other branch needs a different DB state.
 
 ---
 
-## 5. Known issues / open items on this branch
+## 5. Recent enhancements (May 2026 — UI refinement & i18n)
+
+### 5.1 Internationalization (i18n) infrastructure
+
+A scalable, decoupled i18n system for dynamic strings:
+
+- **Server-side locale detection**: Symfony injects user's locale into
+  `window.OCI18n` object as one-shot initialization in Twig.
+- **Client-side lookup**: `t(key, {params})` helper resolves strings
+  from `window.OCI18n` at runtime with safe placeholder substitution
+  (`%key%` syntax, avoiding Twig/ICU conflicts).
+- **No language detection in JS**: avoids browser-locale sniffing;
+  server is canonical. Scales to unlimited languages without code changes.
+- **Full German localization**: search pages, user pages, map popups,
+  reported caches grid, navbar dropdown labels, all human-facing strings.
+- **Weblate-ready**: string structure supports external translation
+  management tools; see `translations/messages+intl-icu.de.yaml`.
+
+### 5.2 Event cache support
+
+Event caches (type 6) now render event metadata:
+
+- Event date stored in `caches.date_hidden` (DATE field, not DATETIME).
+- Event duration stored in `caches.search_time` (float, hours).
+- Constraint enforcement: event type locks size=7 (other), D/T=1.0 both.
+- Frontend constraint sync: `newcache.js` prevents form tampering.
+- Backend constraint validation: `CachesController` rejects mismatched
+  event submissions.
+
+### 5.3 Table styling & layout
+
+Tabulator tables now render with professional alignment and typography:
+
+- **CSS theme fix**: base `tabulator.min.css` (not Bootstrap variant)
+  provides proper row height (22px), alignment, and centering.
+- **OC code typography**: columns with OC codes (`referenceCode`,
+  `wpOc`, etc.) render in monospaced font for clarity and distinction
+  from readable text.
+- **Global alignment**: header and data rows align perfectly; no
+  horizontal shift artifacts.
+- **Density tuned to GCxM standards**: compact rows, proper padding,
+  professional appearance.
+
+### 5.4 Map and detail-page improvements
+
+- **OC-only badge**: propagated through APIs and map icons. Visible
+  on cache detail, search results, and live map.
+- **PCN text display**: Bootstrap popovers instead of `<details>`
+  element; renders in monospace with proper line-wrapping for
+  corrected-coordinate notes.
+- **Map popup i18n**: cache metadata labels ("by:", "Published:",
+  "Finds:", "Found:") translated via `window.OCI18n`.
+- **Mobile viewport**: removed `user-scalable=no` and `maximum-scale=1`
+  to enable pinch-zoom and proper touch interaction.
+
+### 5.5 Navigation and role-based UI
+
+- **Support dropdown**: visible only to `ROLE_SUPPORT_TRAINEE`. Nested
+  menu groups administrative functions without cluttering the main
+  navbar.
+- **Role-aware columns**: user search displays different columns based
+  on role (support staff see PII; regular users see public info only).
+- **Route rename**: `/backend` → `/backoffice` for semantic clarity
+  across 17 files (routes, security rules, navbar, templates).
+
+---
+
+## 6. Known issues / open items on this branch
 
 - **Symfony schema migrations**: none added on this branch. The only
   schema-shaped change is the stored-procedure patch, which lives
@@ -263,7 +348,7 @@ if the other branch needs a different DB state.
 
 ---
 
-## 6. Will this become THE next-generation opencaching.de?
+## 7. Will this become THE next-generation opencaching.de?
 
 A frank self-assessment. This branch is **foundation work plus two
 flagship pages**, not a complete replacement.

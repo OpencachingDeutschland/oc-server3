@@ -54,6 +54,7 @@ function renderTable(data) {
         },
         {
             title: t('OC Code'), field: 'wpOc', width: 100, widthGrow: 0,
+            cssClass: 'cell-occode',
             formatter: (cell) => {
                 const row = cell.getRow().getData();
                 return `<a href="${row.cacheUrl}">${cell.getValue()}</a>`;

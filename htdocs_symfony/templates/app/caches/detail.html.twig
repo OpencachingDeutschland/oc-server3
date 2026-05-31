@@ -15,7 +15,7 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('vendor/tabulator/tabulator_bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/tabulator/tabulator.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tabulator_oc.css') }}">
     <link rel="stylesheet" href="{{ asset('css/map.css') }}">
     <style>
@@ -93,6 +93,13 @@
         footer { display: none !important; }
     </style>
 {% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'by:':       'by:'       | trans,
+    'Published:': 'Published:' | trans,
+    'Finds:':    'Finds:'    | trans,
+    'Found:':    'Found:'    | trans,
+} | json_encode | raw }});</script>{% endblock %}
 
 {% block page_content %}
 <div id="explore-container" data-code="{{ wp }}">

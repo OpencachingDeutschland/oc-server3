@@ -109,6 +109,7 @@ function renderTable(data) {
       {
         title: t('OC Code'), field: 'referenceCode',
         width: 110, widthGrow: 0, widthShrink: 0,
+        cssClass: 'cell-occode',
         formatter: (cell) => { const wp = cell.getValue(); return `<a href="/cache/${wp}">${wp}</a>`; },
       },
       { title: t('Name'),  field: 'name',       minWidth: 200, widthGrow: 3, widthShrink: 1, tooltip: true },

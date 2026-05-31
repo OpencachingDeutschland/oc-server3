@@ -51,10 +51,17 @@
     box-shadow: none !important;
 }
 
-/* Headers: allow tooltips overflow */
+/* Headers: allow tooltips overflow, remove all borders */
 .tabulator .tabulator-header .tabulator-col {
     position: relative !important;
     overflow: visible !important;
+    border: none !important;
+}
+
+.tabulator .tabulator-header {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
 }
 
 /* Divider & resize handles — invisible but functional */
@@ -64,16 +71,20 @@
     border-color: transparent !important;
 }
 
-/* Remove bottom borders on headers and rows */
-.tabulator .tabulator-header,
+/* Remove all borders on rows */
 .tabulator .tabulator-row {
-    border-bottom-color: transparent !important;
+    border: none !important;
 }
 
 /* Remove focus outlines */
 .tabulator .tabulator-header .tabulator-col:focus,
 .tabulator .tabulator-cell:focus {
     outline: none !important;
+}
+
+/* OC codes in monospaced font */
+.tabulator .tabulator-cell.cell-occode {
+    font-family: "Monaco", "Courier New", monospace !important;
 }
 
 /* --------------------------------------------------

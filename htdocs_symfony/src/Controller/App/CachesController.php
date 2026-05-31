@@ -69,6 +69,8 @@ class CachesController extends AbstractController
                 'EXISTS (SELECT 1 FROM cache_logs cl2 WHERE cl2.cache_id = c.cache_id AND cl2.user_id = :userId AND cl2.type = 2) AS is_dnf',
                 'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn',
                 '(SELECT co2.description FROM coordinates co2 WHERE co2.cache_id = c.cache_id AND co2.user_id = :userId AND co2.type = 2 ORDER BY co2.id DESC LIMIT 1) AS pcn_text',
+                '(SELECT co3.latitude  FROM coordinates co3 WHERE co3.cache_id = c.cache_id AND co3.user_id = :userId AND co3.type = 2 AND co3.latitude  != 0 ORDER BY co3.id DESC LIMIT 1) AS cc_lat',
+                '(SELECT co4.longitude FROM coordinates co4 WHERE co4.cache_id = c.cache_id AND co4.user_id = :userId AND co4.type = 2 AND co4.longitude != 0 ORDER BY co4.id DESC LIMIT 1) AS cc_lon',
                 'EXISTS (SELECT 1 FROM caches_attributes oca WHERE oca.cache_id = c.cache_id AND oca.attrib_id = 6) AS is_oc_only'
             )
             ->setParameter('userId', $userId)
@@ -112,12 +114,13 @@ class CachesController extends AbstractController
         $items = array_map(function (array $r) use ($userId): array {
             $name   = (string)$r['name'];
             $status = (int)$r['status'];
+            $hasCC  = $r['cc_lat'] !== null && (float)$r['cc_lat'] !== 0.0;
             return [
                 'referenceCode' => $r['wp_oc'],
                 'name'          => $name,
                 'shortName'     => mb_strlen($name) > 25 ? mb_substr($name, 0, 25) . '…' : $name,
-                'lat'           => (float)$r['latitude'],
-                'lon'           => (float)$r['longitude'],
+                'lat'           => $hasCC ? (float)$r['cc_lat'] : (float)$r['latitude'],
+                'lon'           => $hasCC ? (float)$r['cc_lon'] : (float)$r['longitude'],
                 'geocacheType'  => ['id' => (int)$r['type_id'], 'name' => (string)($r['type_name'] ?? '')],
                 'difficulty'    => (float)$r['difficulty'],
                 'terrain'       => (float)$r['terrain'],
@@ -130,7 +133,7 @@ class CachesController extends AbstractController
                 'isCached'      => false,
                 'isDisabled'    => $status === 2,
                 'isArchived'    => $status === 3,
-                'hasCC'         => false,
+                'hasCC'         => $hasCC,
                 'hasPCN'        => (bool)(int)$r['has_pcn'],
                 'pcn'           => (string)($r['pcn_text'] ?? ''),
                 'isOcOnly'      => (bool)(int)$r['is_oc_only'],

@@ -88,6 +88,11 @@
     font-family: "Monaco", "Courier New", monospace !important;
 }
 
+/* No underlines on any links inside tabulator cells */
+.tabulator .tabulator-cell a {
+    text-decoration: none;
+}
+
 /* --------------------------------------------------
    SORTER TRIANGLES — hide visuals but keep functionality
    -------------------------------------------------- */

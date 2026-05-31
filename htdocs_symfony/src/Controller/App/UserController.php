@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class UserController extends AbstractController
 {
@@ -22,14 +21,12 @@ class UserController extends AbstractController
     ) {}
 
     #[Route('/user', name: 'user_index')]
-    #[IsGranted('ROLE_TEAM')]
     public function index(): Response
     {
         return $this->render('app/user/search.html.twig');
     }
 
     #[Route('/api/users/search', name: 'api_users_search')]
-    #[IsGranted('ROLE_TEAM')]
     public function apiSearch(Request $request): JsonResponse
     {
         $q = trim($request->query->get('q', ''));

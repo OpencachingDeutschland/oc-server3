@@ -6,10 +6,10 @@
  ***************************************************************************/
 
 export async function searchCaches({
-  q = '', type = 0, minDiff = 1.0, maxDiff = 5.0, activeOnly = true,
+  q = '', type = 0, minDiff = 1.0, maxDiff = 5.0, activeOnly = true, ocOnly = false,
   lat = null, lon = null, radius = 0,
 } = {}) {
-  const params = new URLSearchParams({ q, type, minDiff, maxDiff, activeOnly: activeOnly ? '1' : '0' });
+  const params = new URLSearchParams({ q, type, minDiff, maxDiff, activeOnly: activeOnly ? '1' : '0', ocOnly: ocOnly ? '1' : '0' });
   if (lat !== null && lon !== null && radius > 0) {
     params.set('lat', lat);
     params.set('lon', lon);

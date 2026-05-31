@@ -58,6 +58,7 @@ async function runSearch() {
   const minDiff    = parseFloat(document.getElementById('fminDiff').value);
   const maxDiff    = parseFloat(document.getElementById('fmaxDiff').value);
   const activeOnly = document.getElementById('factiveOnly').checked;
+  const ocOnly     = document.getElementById('focOnly').checked;
   const radius     = parseFloat(document.getElementById('fradius').value);
 
   if (document.getElementById('fcity').value.trim() && !geocodedCity) {
@@ -66,7 +67,7 @@ async function runSearch() {
 
   setStatus('Searching…');
 
-  const params = { q, type, minDiff, maxDiff, activeOnly };
+  const params = { q, type, minDiff, maxDiff, activeOnly, ocOnly };
   if (geocodedCity && radius > 0) {
     params.lat    = geocodedCity.lat;
     params.lon    = geocodedCity.lon;

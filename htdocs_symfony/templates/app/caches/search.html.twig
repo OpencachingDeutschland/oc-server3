@@ -55,26 +55,30 @@
                 </div>
             </div>
             <div class="row g-2 align-items-end">
-                <div class="col-4 col-md-2">
+                <div class="col-auto">
                     <label class="form-label mb-1">Min D</label>
-                    <select id="fminDiff" class="form-select">
+                    <select id="fminDiff" class="form-select" style="width:72px">
                         {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
                             <option value="{{ v }}">{{ v }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-4 col-md-2">
+                <div class="col-auto">
                     <label class="form-label mb-1">Max D</label>
-                    <select id="fmaxDiff" class="form-select">
+                    <select id="fmaxDiff" class="form-select" style="width:72px">
                         {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
                             <option value="{{ v }}" {% if v == '5.0' %}selected{% endif %}>{{ v }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-4 col-md-2 d-flex align-items-center pt-3">
+                <div class="col d-flex align-items-center gap-3 flex-wrap pt-3">
                     <div class="form-check mb-0">
                         <input class="form-check-input" type="checkbox" id="factiveOnly" checked>
                         <label class="form-check-label" for="factiveOnly">Active only</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="focOnly">
+                        <label class="form-check-label" for="focOnly">OC only</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-2 ms-md-auto">

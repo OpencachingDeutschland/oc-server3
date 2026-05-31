@@ -45,6 +45,7 @@ class CachesController extends AbstractController
         $minDiff    = (int)round((float)$request->query->get('minDiff', 1.0) * 2);
         $maxDiff    = (int)round((float)$request->query->get('maxDiff', 5.0) * 2);
         $activeOnly = $request->query->get('activeOnly', '1') === '1';
+        $ocOnly     = $request->query->get('ocOnly', '0') === '1';
         $lat        = $request->query->get('lat') !== null ? (float)$request->query->get('lat') : null;
         $lon        = $request->query->get('lon') !== null ? (float)$request->query->get('lon') : null;
         $radius     = (float)$request->query->get('radius', 0);
@@ -63,9 +64,12 @@ class CachesController extends AbstractController
                 'c.latitude', 'c.longitude',
                 'ct.name AS type_name',
                 'u.username',
+                'c.date_created',
                 'EXISTS (SELECT 1 FROM cache_logs cl WHERE cl.cache_id = c.cache_id AND cl.user_id = :userId AND cl.type = 1) AS is_found',
                 'EXISTS (SELECT 1 FROM cache_logs cl2 WHERE cl2.cache_id = c.cache_id AND cl2.user_id = :userId AND cl2.type = 2) AS is_dnf',
-                'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn'
+                'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn',
+                '(SELECT co2.description FROM coordinates co2 WHERE co2.cache_id = c.cache_id AND co2.user_id = :userId AND co2.type = 2 ORDER BY co2.id DESC LIMIT 1) AS pcn_text',
+                'EXISTS (SELECT 1 FROM caches_attributes oca WHERE oca.cache_id = c.cache_id AND oca.attrib_id = 6) AS is_oc_only'
             )
             ->setParameter('userId', $userId)
             ->from('caches', 'c')
@@ -82,6 +86,9 @@ class CachesController extends AbstractController
         }
         if ($type > 0) {
             $qb->andWhere('c.type = :type')->setParameter('type', $type);
+        }
+        if ($ocOnly) {
+            $qb->andWhere('EXISTS (SELECT 1 FROM caches_attributes oca2 WHERE oca2.cache_id = c.cache_id AND oca2.attrib_id = 6)');
         }
         if ($q !== '') {
             $qb->andWhere($qb->expr()->or(
@@ -115,6 +122,7 @@ class CachesController extends AbstractController
                 'difficulty'    => (float)$r['difficulty'],
                 'terrain'       => (float)$r['terrain'],
                 'ownerAlias'    => (string)$r['username'],
+                'publishedDate' => substr((string)$r['date_created'], 0, 10),
                 'platform'      => 'OC',
                 'isFound'       => (bool)(int)$r['is_found'],
                 'isOwned'       => $userId > 0 && (int)$r['owner_id'] === $userId,
@@ -124,6 +132,8 @@ class CachesController extends AbstractController
                 'isArchived'    => $status === 3,
                 'hasCC'         => false,
                 'hasPCN'        => (bool)(int)$r['has_pcn'],
+                'pcn'           => (string)($r['pcn_text'] ?? ''),
+                'isOcOnly'      => (bool)(int)$r['is_oc_only'],
                 'isGuessable'   => false,
                 'isPartial'     => false,
                 'isSelected'    => false,
@@ -360,9 +370,9 @@ class CachesController extends AbstractController
                 $errors['type'] = 'Please select a cache type.';
             }
 
-            // Validate size (auto-set for virtual/webcam)
+            // Validate size (auto-set for virtual/webcam/event)
             $sizeId = (int)$form['size'];
-            if ($typeId === 4 || $typeId === 5) {
+            if ($typeId === 4 || $typeId === 5 || $typeId === 6) {
                 $sizeId = 7; // no container
                 $form['size'] = '7';
             } elseif ($sizeId <= 0) {
@@ -390,7 +400,10 @@ class CachesController extends AbstractController
             // Validate difficulty / terrain
             $diff = (int)$form['difficulty'];
             $terr = (int)$form['terrain'];
-            if ($diff < 2 || $diff > 10 || $terr < 2 || $terr > 10) {
+            if ($typeId === 6) {
+                $diff = 2;
+                $terr = 2;
+            } elseif ($diff < 2 || $diff > 10 || $terr < 2 || $terr > 10) {
                 $errors['dt'] = 'Please select both difficulty and terrain ratings.';
             }
 
@@ -631,8 +644,9 @@ class CachesController extends AbstractController
                     }
 
                     // Save personal cache note and/or user coordinates
-                    $userLat = is_numeric($form['user_lat']) ? (float)$form['user_lat'] : 0.0;
-                    $userLon = is_numeric($form['user_lon']) ? (float)$form['user_lon'] : 0.0;
+                    $userCoordsParsed = self::parseCoords($form['user_coords'] ?? '');
+                    $userLat = $userCoordsParsed ? (float)$userCoordsParsed[0] : 0.0;
+                    $userLon = $userCoordsParsed ? (float)$userCoordsParsed[1] : 0.0;
                     if ($form['cache_note'] !== '' || ($userLat !== 0.0 && $userLon !== 0.0)) {
                         $this->connection->executeStatement(
                             'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, date_created, last_modified)

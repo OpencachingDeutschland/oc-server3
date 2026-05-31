@@ -85,12 +85,14 @@ class MenuGenerator
         $this->addMenuItem($menu['menuOC'], 'menuOCTOU', $this->translator->trans('Terms of use'), '', 'icon', 'fas fa-map-marker-alt');
         $this->addMenuItem($menu['menuOC'], 'menuOCOCOnly81', $this->translator->trans('OCOnly-81'), 'app_oconly81_index', 'icon', 'fas fa-map-marker-alt');
 
-        if ($this->security->isGranted('ROLE_TEAM')) {
-            $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), 'backend_support_reported_caches', 'icon', 'fas fa-user-shield');
-
-            $this->addMenuItem($menu, 'menuKitchensink', $this->translator->trans('DEV Kitchensink'), 'app_kitchensink_index', 'icon', 'fab fa-css3');
-
-            $this->addMenuItem($menu, 'menuRoles', $this->translator->trans('DEV Roles'), 'backend_roles_index', 'icon', 'fas fa-user-shield');
+        if ($this->security->isGranted('ROLE_SUPPORT_TRAINEE')) {
+            $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), '', 'icon', 'fas fa-user-shield');
+            $this->addMenuItem($menu['menuSupport'], 'menuSupportReported', $this->translator->trans('Reported caches'), 'backend_support_reported_caches', 'icon', 'fas fa-flag');
+            $this->addMenuItem($menu['menuSupport'], 'menuSupportSearch',   $this->translator->trans('Search users'),    'app_user_index',                  'icon', 'fas fa-search');
+            if ($this->security->isGranted('ROLE_TEAM')) {
+                $this->addMenuItem($menu['menuSupport'], 'menuSupportRoles',     $this->translator->trans('DEV Roles'),       'backend_roles_index',             'icon', 'fas fa-user-tag');
+                $this->addMenuItem($menu['menuSupport'], 'menuKitchensink',      $this->translator->trans('DEV Kitchensink'), 'app_kitchensink_index',           'icon', 'fab fa-css3');
+            }
         }
 
         // Login/Logout/username are rendered by the navbar template (right-side dropdown)

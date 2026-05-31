@@ -430,17 +430,9 @@ Joined: Registriert
 Finds: Funde
 Hides: Verstecke
 # User profile page
-Email: E-Mail
-'Last login': 'Zuletzt angemeldet'
-Country: Land
 'Email valid': 'E-Mail gültig'
-Status: Status
 Active: Aktiv
 'Account info': 'Kontoinformationen'
-Profile: Profil
-Username: Benutzername
-'Account created': 'Konto erstellt'
-'Last modified': 'Zuletzt geändert'
 Modified: Geändert
 Created: Erstellt
 # Map popup (cache markers)

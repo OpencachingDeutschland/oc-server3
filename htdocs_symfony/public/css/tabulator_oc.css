@@ -39,42 +39,27 @@
     box-shadow: none !important;
 }
 
-/* Compact density — smaller font, minimal padding, proper vertical centering */
+/* Compact density — tight padding, smaller font, minimal line-height */
 .tabulator .tabulator-header .tabulator-col {
-    padding: 6px 8px !important;
-    font-size: 0.875rem !important;
-    display: flex !important;
-    align-items: center !important;
-    line-height: 1 !important;
+    padding: 5px 8px !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.2 !important;
 }
 
 .tabulator .tabulator-cell {
-    padding: 3px 8px !important;
-    font-size: 0.875rem !important;
-    line-height: 1 !important;
-    display: flex !important;
-    align-items: center !important;
-}
-
-.tabulator .tabulator-row {
-    min-height: auto !important;
-    height: auto !important;
+    padding: 2px 8px !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.2 !important;
+    vertical-align: middle !important;
 }
 
 .tabulator .tabulator-header .tabulator-col { position: relative !important; overflow: visible !important; }
 .tabulator .tabulator-resize-handle,
 .tabulator .tabulator-frozen-divider { background: transparent !important; border-color: transparent !important; }
-.tabulator .tabulator-header {
-    border-color: transparent !important;
-    border-top: none !important;
-    border-bottom: none !important;
-    min-height: auto !important;
-    height: auto !important;
-}
-
+.tabulator .tabulator-header,
 .tabulator .tabulator-row {
     border-color: transparent !important;
-    border-bottom: none !important;
+    border: none !important;
 }
 .tabulator .tabulator-header .tabulator-col:focus,
 .tabulator .tabulator-cell:focus { outline: none !important; }
@@ -104,12 +89,6 @@
 .tabulator .tabulator-cell input[type="checkbox"] {
     margin: 0 !important;
     vertical-align: middle !important;
-}
-
-.tabulator .tabulator-cell .tabulator-selection-toggle {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
 }
 
 /* =================================================================

@@ -102,6 +102,7 @@
     {foreach from=$opt.page.header_javascript item=scriptItem}
         <script type="text/javascript" src="{$scriptItem}"></script>
     {/foreach}
+    <script type="text/javascript" src="assets/oc-new-ui-toggle.js"></script>
 </head>
 
 {* JS onload() onunload() *}

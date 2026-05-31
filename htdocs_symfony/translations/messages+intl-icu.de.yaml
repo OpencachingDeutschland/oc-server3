@@ -413,3 +413,11 @@ Actions: Aktionen
 '%count% selected': '%count% ausgewählt'
 'No coordinates available for these results.': 'Keine Koordinaten für diese Ergebnisse verfügbar.'
 'OC Code': 'OC-Code'
+# Search users page
+'Username / email / ID': 'Benutzername / E-Mail / ID'
+'e.g. username, user@example.com, 12345': 'z.B. Benutzername, benutzer@beispiel.de, 12345'
+'Found %count% user(s)': '%count% Benutzer gefunden'
+'No users found.': 'Keine Benutzer gefunden.'
+Joined: Registriert
+Finds: Funde
+Hides: Verstecke

@@ -281,7 +281,7 @@ class SupportControllerBackend extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('backend_support_bonus_caches');
+        return $this->redirectToRoute('backoffice_support_bonus_caches');
     }
 
     /**
@@ -311,7 +311,7 @@ class SupportControllerBackend extends AbstractController
             $this->supportBonuscachesRepository->update($fetchedBonusCache);
         }
 
-        return $this->redirectToRoute('backend_support_bonus_caches');
+        return $this->redirectToRoute('backoffice_support_bonus_caches');
     }
 
     /**
@@ -511,13 +511,13 @@ class SupportControllerBackend extends AbstractController
                 $this->supportUserCommentsRepository->update($entity);
             }
 
-            return $this->redirectToRoute('backend_support_occ', [
+            return $this->redirectToRoute('backoffice_support_occ', [
                     'userID' => (string)$inputData['hidden_ID1'],
                     'wpID' => (string)$inputData['hidden_ID2']
             ]);
         }
 
-        return $this->redirectToRoute('backend_support_occ');
+        return $this->redirectToRoute('backoffice_support_occ');
     }
 
     /**
@@ -539,10 +539,10 @@ class SupportControllerBackend extends AbstractController
 
             $this->cacheReportsRepository->update($entity);
 
-            return $this->redirectToRoute('backend_support_reported_cache', ['repID' => $entity->id]);
+            return $this->redirectToRoute('backoffice_support_reported_cache', ['repID' => $entity->id]);
         }
 
-        return $this->redirectToRoute('backend_support_reported_caches');
+        return $this->redirectToRoute('backoffice_support_reported_caches');
     }
 
     /**
@@ -940,7 +940,7 @@ class SupportControllerBackend extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('backend_support_user_account_details', ['userID' => $userID]);
+        return $this->redirectToRoute('backoffice_support_user_account_details', ['userID' => $userID]);
     }
 
     /**

@@ -3,7 +3,7 @@
 <div class="container">
     <section class="container col-md-6">
         {% if supportCachesForm is defined %}
-            {{ form_start(supportCachesForm,{action:path('backend_support_search')}) }}
+            {{ form_start(supportCachesForm,{action:path('backoffice_support_search')}) }}
             <div class="form-row">
                 <div class="form-group col-md-6">
                     {{ form_row(supportCachesForm.content_support_searchfield) }}
@@ -21,19 +21,19 @@
     </section>
 
     <section class="container col-md-2">
-        <a href="{{ path('backend_support_reported_caches') }}">{{ 'Reported caches' | trans }}</a>
+        <a href="{{ path('backoffice_support_reported_caches') }}">{{ 'Reported caches' | trans }}</a>
     </section>
 
     <section class="container col-md-2">
-        <a href="{{ path('backend_support_bonus_caches') }}">{{ 'Bonus caches' | trans }}</a>
+        <a href="{{ path('backoffice_support_bonus_caches') }}">{{ 'Bonus caches' | trans }}</a>
     </section>
 
     <section class="container col-md-2">
-        <a href="{{ path('backend_support_db_queries') }}">{{ 'Database queries' | trans }}</a>
+        <a href="{{ path('backoffice_support_db_queries') }}">{{ 'Database queries' | trans }}</a>
     </section>
 
     <section class="container col-md-2">
-        <a href="{{ path('backend_support_gpx_import') }}">{{ 'GPX import' | trans }}</a>
+        <a href="{{ path('backoffice_support_gpx_import') }}">{{ 'GPX import' | trans }}</a>
     </section>
 </div>
 

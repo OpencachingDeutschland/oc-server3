@@ -51,7 +51,7 @@ return static function(ContainerConfigurator $containerConfigurator)
             ['path' => '^/logout',     'roles' => 'PUBLIC_ACCESS'],
             ['path' => '^/register',   'roles' => 'PUBLIC_ACCESS'],
             ['path' => '^/locale/',    'roles' => 'PUBLIC_ACCESS'],
-            ['path' => '^/backend',    'roles' => ['ROLE_TEAM']],
+            ['path' => '^/backoffice', 'roles' => ['ROLE_TEAM']],
             ['path' => '^/',           'roles' => 'IS_AUTHENTICATED_FULLY'],
         ],
     ]);

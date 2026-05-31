@@ -87,10 +87,10 @@ class MenuGenerator
 
         if ($this->security->isGranted('ROLE_SUPPORT_TRAINEE')) {
             $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), '', 'icon', 'fas fa-user-shield');
-            $this->addMenuItem($menu['menuSupport'], 'menuSupportReported', $this->translator->trans('Reported caches'), 'backend_support_reported_caches', 'icon', 'fas fa-flag');
+            $this->addMenuItem($menu['menuSupport'], 'menuSupportReported', $this->translator->trans('Reported caches'), 'backoffice_support_reported_caches', 'icon', 'fas fa-flag');
             $this->addMenuItem($menu['menuSupport'], 'menuSupportSearch',   $this->translator->trans('Search users'),    'app_user_index',                  'icon', 'fas fa-search');
             if ($this->security->isGranted('ROLE_TEAM')) {
-                $this->addMenuItem($menu['menuSupport'], 'menuSupportRoles',     $this->translator->trans('DEV Roles'),       'backend_roles_index',             'icon', 'fas fa-user-tag');
+                $this->addMenuItem($menu['menuSupport'], 'menuSupportRoles',     $this->translator->trans('DEV Roles'),       'backoffice_roles_index',             'icon', 'fas fa-user-tag');
                 $this->addMenuItem($menu['menuSupport'], 'menuKitchensink',      $this->translator->trans('DEV Kitchensink'), 'app_kitchensink_index',           'icon', 'fab fa-css3');
             }
         }

@@ -34,10 +34,10 @@
                             <td>{{ report.name }}</td>
                             <td><a href="{{ path('app_user_by_id', { 'userID': report.user_id}) }}">{{ report.username }}</a></td>
                             <td>{{ report.email }}</td>
-                            <td><a href="{{ path('backend_support_cache_history', { 'wpID': report.wp_oc }) }}">&#x2705;</a></td>
-                            <td><a href="{{ path('backend_support_occ', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}">&#x2705;</a></td>
-                            <td><a href="{{ path('backend_support_user_account_details', { 'userID': report.user_id }) }}">&#x2705;</a></td>
-                            <td><a href="{{ path('backend_support_vandalism', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}">&#x2705;</a></td>
+                            <td><a href="{{ path('backoffice_support_cache_history', { 'wpID': report.wp_oc }) }}">&#x2705;</a></td>
+                            <td><a href="{{ path('backoffice_support_occ', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}">&#x2705;</a></td>
+                            <td><a href="{{ path('backoffice_support_user_account_details', { 'userID': report.user_id }) }}">&#x2705;</a></td>
+                            <td><a href="{{ path('backoffice_support_vandalism', { 'wpID': report.wp_oc, 'userID': report.user_id }) }}">&#x2705;</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

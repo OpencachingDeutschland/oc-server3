@@ -24,14 +24,14 @@
                         AND user.date_created > now() - interval 31 DAY;
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_1', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                        <a class="btn btn-primary" href="{{ path('backoffice_support_db_queries_1', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
                     </td>
                 </tr>
                 <tr>
                     <td>{{ 'List user whose registration date is not older than 31 days.' | trans }}</td>
                     <td>SELECT username, date_created, last_login FROM user <br/>WHERE date_created > now() - interval 31 DAY;</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_2', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
+                        <a class="btn btn-primary" href="{{ path('backoffice_support_db_queries_2', { 'days': 31 }) }}">{{ 'Go' | trans }}</a>
                     </td>
                 </tr>
                 <tr>
@@ -48,7 +48,7 @@
                         AND caches.cache_id = cache_logs.cache_id AND (cache_logs.type = 2 OR cache_logs.type = 3);
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_4') }}">{{ 'Go' | trans }}</a>
+                        <a class="btn btn-primary" href="{{ path('backoffice_support_db_queries_4') }}">{{ 'Go' | trans }}</a>
                     </td>
                 </tr>
             {% endif %}
@@ -58,7 +58,7 @@
                     <td>SELECT * FROM support_user_comments
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_5') }}">{{ 'Go' | trans }}</a>
+                        <a class="btn btn-primary" href="{{ path('backoffice_support_db_queries_5') }}">{{ 'Go' | trans }}</a>
                     </td>
                 </tr>
             {% endif %}
@@ -70,7 +70,7 @@
                         AND last found log is older than 2 years;
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('backend_support_db_queries_6') }}">{{ 'Go' | trans }}</a>
+                        <a class="btn btn-primary" href="{{ path('backoffice_support_db_queries_6') }}">{{ 'Go' | trans }}</a>
                     </td>
                 </tr>
             {% endif %}
@@ -225,7 +225,7 @@
                         <td>{{ item.commentCreated | date('d.m.Y H:i:s') }}</td>
                         <td>{{ item.commentLastModified | date('d.m.Y H:i:s') }}</td>
                         <td>
-                            <a href="{{ path('backend_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}">&#x2705;</a>
+                            <a href="{{ path('backoffice_support_occ', { 'wpID': '0', 'userID': item.ocUserId }) }}">&#x2705;</a>
                         </td>
                     </tr>
                 {% endfor %}

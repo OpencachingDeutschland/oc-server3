@@ -40,7 +40,7 @@
                 </ul>
 
                 {% if supportUserAccountActions is defined %}
-                    {{ form_start(supportUserAccountActions, {action:path('backend_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
+                    {{ form_start(supportUserAccountActions, {action:path('backoffice_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
                     <ul>
                         <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
                             {# TODO: "Set account inactive"-Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..#}

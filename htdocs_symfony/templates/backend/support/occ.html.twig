@@ -52,7 +52,7 @@
         {% if occ_user_comments is defined and occ_user_comments %}
             <p><b>{{ 'User related comments' | trans }}:</b>
                 {{ 'Last change' | trans }}: {{ occ_user_comments.commentLastModified | date('d.m.Y H:i:s') }}</p>
-            {{ form_start(supportCommentFormUser, {'action': path('backend_support_occ_save_text'), 'method': 'POST'}) }}
+            {{ form_start(supportCommentFormUser, {'action': path('backoffice_support_occ_save_text'), 'method': 'POST'}) }}
             {{ form_row(supportCommentFormUser.content_comment_field, {'value': occ_user_comments.comment, 'id': 'comment_field_user' }) }}
             {{ form_row(supportCommentFormUser.save_comment_button, {'label': 'Save comment' | trans }) }}
             {{ form_row(supportCommentFormUser.hidden_ID1, {'value': occ_user_comments.ocUserId }) }}
@@ -113,7 +113,7 @@
     {% if occ_cache_comments is defined and occ_cache_comments %}
         <p><b>{{ 'Cache related comments' | trans }}:</b>
             {{ 'Last change' | trans }}: {{ occ_cache_comments.commentLastModified | date('d.m.Y H:i:s') }}</p>
-        {{ form_start(supportCommentFormCache, {'action': path('backend_support_occ_save_text'), 'method': 'POST' }) }}
+        {{ form_start(supportCommentFormCache, {'action': path('backoffice_support_occ_save_text'), 'method': 'POST' }) }}
         {{ form_row(supportCommentFormCache.content_comment_field, {'value': occ_cache_comments.comment, 'id': 'comment_field_cache' }) }}
         {{ form_row(supportCommentFormCache.save_comment_button, {'label': 'Save comment' | trans }) }}
         {{ form_row(supportCommentFormCache.hidden_ID1, {'value': occ_user_comments.ocUserId }) }}

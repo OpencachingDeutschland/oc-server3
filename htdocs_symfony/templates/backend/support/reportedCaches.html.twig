@@ -33,7 +33,7 @@
                             <td>{{ report.user.username }}</td>
                             <td>{{ report.dateCreated | date('d.m.Y') }}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{ path('backend_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>
+                                <a class="btn btn-primary" href="{{ path('backoffice_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>
                             </td>
                         </tr>
                     {% endfor %}

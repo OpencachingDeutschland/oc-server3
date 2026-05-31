@@ -34,7 +34,7 @@
 
                 <hr>
                 <p><b>{{ 'Admin comment' | trans }}:</b></p>
-                {{ form_start(supportAdminCommentForm, {'action': path('backend_support_reported_cache_save_text'), 'method': 'POST' }) }}
+                {{ form_start(supportAdminCommentForm, {'action': path('backoffice_support_reported_cache_save_text'), 'method': 'POST' }) }}
                 {{ form_row(supportAdminCommentForm.content_comment_field, {'value': reported_cache_by_id.comment }) }}
                 {{ form_row(supportAdminCommentForm.save_comment_button, {'label': 'Save comment' | trans }) }}
                 {{ form_row(supportAdminCommentForm.hidden_ID1, {'value': reported_cache_by_id.id }) }}
@@ -51,16 +51,16 @@
                 <br/>
                 {% if not reported_cache_by_id.adminid %}
                     <a class="btn btn-primary"
-                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.userId, 'route': 'backend_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
+                       href="{{ path('backoffice_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': app.user.userId, 'route': 'backoffice_support_reported_cache'}) }}">{{ 'Assign to me' | trans }}</a>
                 {% else %}
                     <a class="btn btn-primary"
-                       href="{{ path('backend_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backend_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
+                       href="{{ path('backoffice_support_reported_cache_supportuser_assignment', { 'repID': reported_cache_by_id.id, 'adminId': 0, 'route': 'backoffice_support_reported_cache'}) }}">{{ 'Remove my assignment' | trans }}</a>
                 {% endif %}
                 <a class="btn btn-secondary" href="#">{{ 'Contact Owner' | trans }}</a>
                 <a class="btn btn-secondary" href="#">{{ 'Contact Reporter' | trans }}</a>
                 {% if reported_cache_by_id.status < 3 %}
                     <a class="btn btn-primary"
-                       href="{{ path('backend_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backend_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
+                       href="{{ path('backoffice_support_reported_cache_set_status', { 'repID': reported_cache_by_id.id, 'route': 'backoffice_support_reported_cache'}) }}">{{ 'Mark as finished' | trans }}</a>
                 {% endif %}
                 <br/>
 

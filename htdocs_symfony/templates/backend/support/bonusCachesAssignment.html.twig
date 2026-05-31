@@ -28,7 +28,7 @@
                                 <td>{{ cache.user.username }}</td>
                                 <td>
                                     <a class="btn btn-primary"
-                                       href="{{ path('backend_support_bonus_caches_assignment', { 'wpID': cache.wpOc, 'userID': cache.user.id, 'toBonusCache': bonus_Cache }) }}">{{ 'Go' | trans }}</a>
+                                       href="{{ path('backoffice_support_bonus_caches_assignment', { 'wpID': cache.wpOc, 'userID': cache.user.id, 'toBonusCache': bonus_Cache }) }}">{{ 'Go' | trans }}</a>
                                 </td>
                             </tr>
                         {% endif %}

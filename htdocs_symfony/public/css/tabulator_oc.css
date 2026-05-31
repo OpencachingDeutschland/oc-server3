@@ -83,7 +83,8 @@
 }
 
 /* OC codes in monospaced font */
-.tabulator .tabulator-cell.cell-occode {
+.tabulator .tabulator-cell.cell-occode,
+.tabulator .tabulator-cell.cell-occode a {
     font-family: "Monaco", "Courier New", monospace !important;
 }
 

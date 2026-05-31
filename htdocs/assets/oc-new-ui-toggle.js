@@ -10,6 +10,7 @@
   // Map legacy PHP paths to new Symfony paths
   const LEGACY_TO_SYMFONY = {
     '/map.php': '/livemap',
+    '/map3.php': '/livemap', // Old "New map" → Symfony livemap
     '/search.php': '/caches/',
     '/livemap.php': '/livemap',
     '/newcache.php': '/newcache',

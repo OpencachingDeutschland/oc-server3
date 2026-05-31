@@ -39,6 +39,12 @@
     const useNewUI = localStorage.getItem('oc-use-new-ui') === '1';
     if (!useNewUI) return;
 
+    // Prevent infinite redirect loops — skip if we already attempted a redirect
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('from') === 'legacy') {
+      return;
+    }
+
     // Get current path (e.g., /cache/OC123AB → /cache)
     const path = window.location.pathname;
 
@@ -47,7 +53,6 @@
 
     if (pageExists) {
       // Redirect to Symfony (same path, but Symfony will handle it)
-      // Add ?from=legacy to avoid redirect loops
       const url = new URL(window.location);
       url.searchParams.set('from', 'legacy');
       window.location.href = url.toString();

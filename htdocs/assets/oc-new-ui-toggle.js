@@ -1,14 +1,19 @@
 /**
  * OC New UI Toggle — opt-in early access to Symfony rebuild
  *
- * Checks localStorage preference and redirects to new UI pages when enabled.
+ * Maps legacy PHP paths to new Symfony UI paths and redirects when enabled.
  * Pages available in new UI: /livemap, /cache/{wp}, /search, /newcache
  * All other pages fall back to legacy.
  */
 
 (function() {
-  // Pages that exist in new Symfony UI
-  const NEW_UI_PAGES = ['/livemap', '/cache', '/search', '/newcache'];
+  // Map legacy PHP paths to new Symfony paths
+  const LEGACY_TO_SYMFONY = {
+    '/search.php': '/search',
+    '/livemap.php': '/livemap',
+    '/newcache.php': '/newcache',
+    '/viewcache.php': '/cache', // Special: viewcache.php?wp=... → /cache/...
+  };
 
   // Initialize checkbox state from localStorage
   function initCheckbox() {
@@ -37,25 +42,40 @@
   // Redirect to new UI if enabled and page exists in new UI
   function maybeRedirect() {
     const useNewUI = localStorage.getItem('oc-use-new-ui') === '1';
+    console.log('[oc-new-ui-toggle] useNewUI:', useNewUI);
     if (!useNewUI) return;
 
     // Prevent infinite redirect loops — skip if we already attempted a redirect
     const params = new URLSearchParams(window.location.search);
     if (params.get('from') === 'legacy') {
+      console.log('[oc-new-ui-toggle] Already redirected, skipping');
       return;
     }
 
-    // Get current path (e.g., /cache/OC123AB → /cache)
     const path = window.location.pathname;
+    console.log('[oc-new-ui-toggle] legacy path:', path);
 
-    // Check if this page exists in new UI
-    const pageExists = NEW_UI_PAGES.some(newPage => path.startsWith(newPage));
+    // Check if this legacy page maps to a new UI page
+    const symfonyPath = LEGACY_TO_SYMFONY[path];
+    console.log('[oc-new-ui-toggle] symfony path:', symfonyPath);
 
-    if (pageExists) {
-      // Redirect to Symfony (same path, but Symfony will handle it)
-      const url = new URL(window.location);
-      url.searchParams.set('from', 'legacy');
-      window.location.href = url.toString();
+    if (symfonyPath) {
+      // Build the new URL
+      let newPath = symfonyPath;
+
+      // Special handling for viewcache.php?wp=OC123AB → /cache/OC123AB
+      if (path === '/viewcache.php' && params.has('wp')) {
+        newPath = '/cache/' + params.get('wp');
+      }
+
+      // Redirect to try-opencaching.ddev.site (where Symfony new UI lives)
+      const newDomain = 'https://try-opencaching.ddev.site';
+      const newParams = new URLSearchParams(window.location.search);
+      newParams.set('from', 'legacy');
+
+      const redirectUrl = newDomain + newPath + '?' + newParams.toString();
+      console.log('[oc-new-ui-toggle] Redirecting to:', redirectUrl);
+      window.location.href = redirectUrl;
     }
   }
 

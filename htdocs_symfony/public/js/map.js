@@ -18,6 +18,7 @@ import * as mapRouting from './mapRouting.js';
 import * as mapSelect from './mapSelect.js';
 import { cacheTypes, getIcon, getWaypointIcon, gpsIcon } from './mapIcons.js';
 import { baseLayers, Esri_WorldBoundariesPlaces } from './mapLayers.js';
+import { t } from './i18n.js';
 import {
   getCacheWPs,
   getTrackIds,
@@ -914,7 +915,7 @@ export function createMarker(p) {
 
 
   const ownerHTML = `<span class="owner-alias" data-owner="${p.ownerAlias || ""}">${p.ownerAlias || "Unknown"}</span>`;
-  const foundRow  = p.isFound ? `<tr class="found-row"><td>Found:</td><td class="found-date">${p.foundDate || ''}</td></tr>` : "";
+  const foundRow  = p.isFound ? `<tr class="found-row"><td>${t('Found:')}</td><td class="found-date">${p.foundDate || ''}</td></tr>` : "";
   const typeRow   = `${p.geocacheType?.name || "?"} / ${p.geocacheSize?.name || "?"} / ${p.difficulty} / ${p.terrain}`;
   const pcnEsc    = (p.pcn || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const pcnPop    = `<pre style="margin:0;font-size:0.78em;font-family:monospace;white-space:pre-wrap;word-break:break-word;max-width:260px">${pcnEsc}</pre>`;
@@ -927,14 +928,14 @@ export function createMarker(p) {
   let statsRow = '';
   if (p.findCount != null) {
     const fav = p.favoritePoints != null ? ` &ensp; Fav: ${p.favoritePoints}` : '';
-    statsRow = `<tr><td>Finds:</td><td>${p.findCount}${fav}</td></tr>`;
+    statsRow = `<tr><td>${t('Finds:')}</td><td>${p.findCount}${fav}</td></tr>`;
   }
 
   const meta = document.createElement("div");
   meta.innerHTML = `
-    <div>by: ${ownerHTML}</div>
+    <div>${t('by:')} ${ownerHTML}</div>
     <table style="border-spacing: 0; font-family: inherit">
-      <tr><td>Published:</td><td>${p.publishedDate}</td></tr>
+      <tr><td>${t('Published:')}</td><td>${p.publishedDate}</td></tr>
       ${statsRow}
       ${foundRow}
     </table>

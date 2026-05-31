@@ -429,3 +429,23 @@ Done: Erledigt
 Joined: Registriert
 Finds: Funde
 Hides: Verstecke
+# User profile page
+'User ID': 'Benutzer ID'
+Email: E-Mail
+'Last login': 'Zuletzt angemeldet'
+Country: Land
+'Email valid': 'E-Mail gültig'
+Status: Status
+Active: Aktiv
+'Account info': 'Kontoinformationen'
+Profile: Profil
+Username: Benutzername
+'Account created': 'Konto erstellt'
+'Last modified': 'Zuletzt geändert'
+Modified: Geändert
+Created: Erstellt
+# Map popup (cache markers)
+'by:': 'von:'
+'Published:': 'Veröffentlicht:'
+'Finds:': 'Funde:'
+'Found:': 'Gefunden:'

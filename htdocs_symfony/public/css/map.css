@@ -688,6 +688,10 @@ button.map-btn {
 /* Applied by pageMap.js on any page that shows a map via initPageMap().
    The !important beats map.js's inline style.height writes, so CSS calc
    always governs the displayed height regardless of visualViewport drift. */
+#mapRoot {
+  touch-action: none;
+}
+
 #mapRoot.page-map-active {
   height: 100vh !important;
   width: 100%;

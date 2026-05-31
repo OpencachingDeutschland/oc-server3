@@ -26,7 +26,7 @@ import {
   findCity,
 } from './mapApi.js';
 
-const mapRoot = L.map('mapRoot', { zoomControl: false, center: [51.16, 10.45], zoom: 6 });
+const mapRoot = L.map('mapRoot', { zoomControl: false });
 
 //-------------------------
 // ScrollTopControl — must be registered FIRST, before all other controls

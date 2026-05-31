@@ -346,6 +346,9 @@ textarea::placeholder {
 [data-theme="dark"] .leaflet-popup-tip {
   background-color: var(--oc-bg-elevated);
 }
+.leaflet-popup-content a {
+  text-decoration: none;
+}
 [data-theme="dark"] .leaflet-popup-content a {
   color: var(--oc-link-color);
 }

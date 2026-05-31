@@ -19,24 +19,24 @@
 {% block page_content %}
 <div class="container-fluid py-3">
 
-    <h4 class="mb-3">Search caches</h4>
+    <h4 class="mb-3">{{ 'Search caches' | trans }}</h4>
 
     <div class="oc-filter-bar">
         <form id="searchForm">
             <div class="row g-2 align-items-start mb-2">
                 <div class="col-12 col-md-4">
-                    <label class="form-label mb-1">Keyword / WP code / owner</label>
-                    <input type="text" id="fq" class="form-control" placeholder="e.g. Forest, OC12345, username">
+                    <label class="form-label mb-1">{{ 'Keyword / WP code / owner' | trans }}</label>
+                    <input type="text" id="fq" class="form-control" placeholder="{{ 'e.g. Forest, OC12345, username' | trans }}">
                 </div>
                 <div class="col-12 col-md-3">
-                    <label class="form-label mb-1">Near city</label>
-                    <input type="text" id="fcity" class="form-control" placeholder="e.g. Berlin, Hamburg">
+                    <label class="form-label mb-1">{{ 'Near city' | trans }}</label>
+                    <input type="text" id="fcity" class="form-control" placeholder="{{ 'e.g. Berlin, Hamburg' | trans }}">
                     <div id="cityFeedback" class="form-text"></div>
                 </div>
                 <div class="col-6 col-md-2">
-                    <label class="form-label mb-1">Radius (km)</label>
+                    <label class="form-label mb-1">{{ 'Radius (km)' | trans }}</label>
                     <select id="fradius" class="form-select">
-                        <option value="0">— no limit —</option>
+                        <option value="0">{{ '— no limit —' | trans }}</option>
                         <option value="5">5 km</option>
                         <option value="10">10 km</option>
                         <option value="25">25 km</option>
@@ -45,9 +45,9 @@
                     </select>
                 </div>
                 <div class="col-6 col-md-3">
-                    <label class="form-label mb-1">Type</label>
+                    <label class="form-label mb-1">{{ 'Type' | trans }}</label>
                     <select id="ftype" class="form-select">
-                        <option value="0">All types</option>
+                        <option value="0">{{ 'All types' | trans }}</option>
                         {% for t in types %}
                             <option value="{{ t.id }}">{{ t.name }}</option>
                         {% endfor %}
@@ -56,7 +56,7 @@
             </div>
             <div class="row g-2 align-items-end">
                 <div class="col-auto">
-                    <label class="form-label mb-1">Min D</label>
+                    <label class="form-label mb-1">{{ 'Min D' | trans }}</label>
                     <select id="fminDiff" class="form-select" style="width:72px">
                         {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
                             <option value="{{ v }}">{{ v }}</option>
@@ -64,7 +64,7 @@
                     </select>
                 </div>
                 <div class="col-auto">
-                    <label class="form-label mb-1">Max D</label>
+                    <label class="form-label mb-1">{{ 'Max D' | trans }}</label>
                     <select id="fmaxDiff" class="form-select" style="width:72px">
                         {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
                             <option value="{{ v }}" {% if v == '5.0' %}selected{% endif %}>{{ v }}</option>
@@ -74,15 +74,15 @@
                 <div class="col d-flex align-items-center gap-3 flex-wrap pt-3">
                     <div class="form-check mb-0">
                         <input class="form-check-input" type="checkbox" id="factiveOnly" checked>
-                        <label class="form-check-label" for="factiveOnly">Active only</label>
+                        <label class="form-check-label" for="factiveOnly">{{ 'Active only' | trans }}</label>
                     </div>
                     <div class="form-check mb-0">
                         <input class="form-check-input" type="checkbox" id="focOnly">
-                        <label class="form-check-label" for="focOnly">OC only</label>
+                        <label class="form-check-label" for="focOnly">{{ 'OC only' | trans }}</label>
                     </div>
                 </div>
                 <div class="col-12 col-md-2 ms-md-auto">
-                    <button type="submit" class="btn btn-primary w-100">Search</button>
+                    <button type="submit" class="btn btn-primary w-100">{{ 'Search' | trans }}</button>
                 </div>
             </div>
         </form>
@@ -93,12 +93,12 @@
     <div id="actionsPanel" style="display:none;" class="mb-2">
         <button id="actionsToggle" class="btn btn-sm btn-link text-secondary px-0 text-decoration-none"
                 type="button" data-bs-toggle="collapse" data-bs-target="#actionsList" aria-expanded="false">
-            <span class="actions-chevron me-1">▶</span>Actions
+            <span class="actions-chevron me-1">▶</span>{{ 'Actions' | trans }}
         </button>
         <div class="collapse" id="actionsList">
             <div class="d-flex gap-2 flex-wrap mt-2 ms-3">
                 <button id="btnShowMap" class="btn btn-sm btn-outline-primary" type="button">
-                    ⊕ Show on map
+                    ⊕ {{ 'Show on map' | trans }}
                 </button>
             </div>
         </div>

@@ -26,6 +26,7 @@
         .dt-select { width:90px !important; display:inline-block; }
 
         [data-theme="dark"] ::placeholder { color: var(--oc-text-secondary); opacity: 1; }
+        [data-theme="dark"] .form-select:disabled { background-color: var(--oc-bg-surface); color: var(--oc-text-secondary); border-color: var(--oc-table-border); }
 
         @media (max-width:576px) {
             .oc-field-row { flex-direction:column; gap:0.3rem; }
@@ -331,7 +332,7 @@
                             <input class="form-check-input" type="radio" name="publish" id="pub_later" value="later"{% if form.publish == 'later' %} checked{% endif %}>
                             <label class="form-check-label" for="pub_later">{{ 'Publish on' | trans }}</label>
                             <input type="date" name="activate_date" id="activate_date" class="form-control form-control-sm{% if errors.activate_date is defined %} is-invalid{% endif %}" style="width:170px" value="{{ form.activate_date | e }}">
-                            <select name="activate_hour" class="form-select form-select-sm" style="width:75px">
+                            <select name="activate_hour" class="form-select form-select-sm" style="width:90px">
                                 {% for h in 0..23 %}
                                 <option value="{{ h }}"{% if form.activate_hour == h %} selected{% endif %}>{{ '%02d'|format(h) }}:00</option>
                                 {% endfor %}

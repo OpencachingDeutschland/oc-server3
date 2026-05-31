@@ -27,13 +27,23 @@ export function init() {
         saveAttribs();
     });
 
+    const diffSelect = document.querySelector('select[name="difficulty"]');
+    const terrSelect = document.querySelector('select[name="terrain"]');
+
     function syncSize() {
         const type = parseInt(typeSelect.value, 10);
-        if (type === 4 || type === 5) {
+        if (type === 4 || type === 5 || type === 6) {
             sizeSelect.value    = '7';
             sizeSelect.disabled = true;
         } else {
             sizeSelect.disabled = false;
+        }
+        if (type === 6) {
+            if (diffSelect) { diffSelect.value = '2'; diffSelect.disabled = true; }
+            if (terrSelect) { terrSelect.value = '2'; terrSelect.disabled = true; }
+        } else {
+            if (diffSelect) diffSelect.disabled = false;
+            if (terrSelect) terrSelect.disabled = false;
         }
     }
 

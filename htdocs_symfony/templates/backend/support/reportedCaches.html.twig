@@ -1,52 +1,54 @@
-{% extends 'backend/base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block data_page %}reportedcaches{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'Searching…':                'Searching…'                | trans,
+    'Loaded %count% report(s)':  'Loaded %count% report(s)'  | trans,
+    'No reports found.':         'No reports found.'         | trans,
+    'ID':                        'ID'                        | trans,
+    'Status':                    'Status'                    | trans,
+    'OC Code':                   'OC Code'                   | trans,
+    'Cache':                     'Cache'                     | trans,
+    'Owner':                     'Owner'                     | trans,
+    'Reported by':               'Reported by'               | trans,
+    'Date':                      'Date'                      | trans,
+    'All statuses':              'All statuses'              | trans,
+    'New':                       'New'                       | trans,
+    'In Progress':               'In Progress'               | trans,
+    'Done':                      'Done'                      | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('vendor/tabulator/tabulator_bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tabulator_oc.css') }}">
+    <style>
+        .oc-filter-bar { background: var(--oc-bg-surface); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    </style>
+{% endblock %}
 
 {% block page_content %}
+<div class="container-fluid py-3">
 
-    {% include '/backend/support/support.header.html.twig' %}
+    <h4 class="mb-3">{{ 'Reported caches' | trans }}</h4>
 
-    <h3><br/>{{ 'Reported caches' | trans }}..</h3>
-
-    <div>
-        {% if reportedCaches_by_id is defined %}
-            {% if reportedCaches_by_id %}
-                <table class="table table-striped table-hover">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col" class="asc">Report ID</th>
-                        <th scope="col" class="asc">{{ 'Status' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Cache name' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Owner' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Reported by' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Date' | trans }}</th>
-                        <th scope="col">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for report in reportedCaches_by_id | reverse %}
-                        <tr>
-                            <td>{{ report.id }}</td>
-                            <td>{{ report.reportStatus.name }}</td>
-                            <td>{{ report.cache.wpOc }}</td>
-                            <td>{{ report.cache.name }}</td>
-                            <td>{{ report.cache.user.username }}</td>
-                            <td>{{ report.user.username }}</td>
-                            <td>{{ report.dateCreated | date('d.m.Y') }}</td>
-                            <td>
-                                <a class="btn btn-primary" href="{{ path('backoffice_support_reported_cache', { 'repID': report.id }) }}">{{ 'Details' | trans }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <br/><br/>
-                <span>{{ 'No reported caches found' | trans }}.. :-)</span>
-            {% endif %}
-        {% endif %}
-
+    <div class="oc-filter-bar">
+        <div class="row g-2 align-items-end">
+            <div class="col-auto">
+                <label class="form-label mb-1">{{ 'Status' | trans }}</label>
+                <select id="fstatus" class="form-select" style="width:160px">
+                    <option value="0">{{ 'All statuses' | trans }}</option>
+                    <option value="1">{{ 'New' | trans }}</option>
+                    <option value="2">{{ 'In Progress' | trans }}</option>
+                    <option value="3">{{ 'Done' | trans }}</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <hr>
+    <div id="statusBar" class="text-secondary small mb-1" style="min-height:1.4em;"></div>
+    <div id="searchResults"></div>
 
+</div>
 {% endblock %}

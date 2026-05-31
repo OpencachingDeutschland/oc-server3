@@ -413,6 +413,13 @@ Actions: Aktionen
 '%count% selected': '%count% ausgewählt'
 'No coordinates available for these results.': 'Keine Koordinaten für diese Ergebnisse verfügbar.'
 'OC Code': 'OC-Code'
+# Reported caches page
+'Loaded %count% report(s)': '%count% Meldung(en) geladen'
+'No reports found.': 'Keine Meldungen gefunden.'
+'All statuses': 'Alle Status'
+'New': 'Neu'
+'In Progress': 'In Bearbeitung'
+Done: Erledigt
 # Search users page
 'Username / email / ID': 'Benutzername / E-Mail / ID'
 'e.g. username': 'z.B. Benutzername'

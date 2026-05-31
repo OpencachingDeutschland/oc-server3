@@ -40,6 +40,7 @@ use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -177,16 +178,50 @@ class SupportControllerBackend extends AbstractController
     #[Route("/reportedCaches", name: "support_reported_caches")]
     public function listReportedCaches(): Response
     {
-        $fetchedReports = $this->getReportedCaches();
+        return $this->render('backend/support/reportedCaches.html.twig');
+    }
 
-        $formSearch = $this->createForm(SupportSearchCaches::class);
+    #[Route("/api/reported-caches", name: "support_api_reported_caches", methods: ["GET"])]
+    public function apiReportedCaches(Request $request): JsonResponse
+    {
+        $statusFilter = (int)$request->query->get('status', 0);
 
-        return $this->render(
-                'backend/support/reportedCaches.html.twig', [
-                        'supportCachesForm' => $formSearch->createView(),
-                        'reportedCaches_by_id' => $fetchedReports
-                ]
-        );
+        $qb = $this->connection->createQueryBuilder()
+            ->select(
+                'cr.id', 'cr.status AS status_id', 'rs.name AS status_name',
+                'cr.date_created', 'cr.reason',
+                'c.wp_oc', 'c.name AS cache_name', 'c.cache_id',
+                'o.username AS owner', 'o.user_id AS owner_id',
+                'u.username AS reporter'
+            )
+            ->from('cache_reports', 'cr')
+            ->join('cr', 'caches',             'c',  'cr.cacheid  = c.cache_id')
+            ->join('cr', 'user',               'u',  'cr.userid   = u.user_id')
+            ->join('cr', 'user',               'o',  'c.user_id   = o.user_id')
+            ->join('cr', 'cache_report_status','rs', 'cr.status   = rs.id')
+            ->orderBy('cr.id', 'DESC');
+
+        if ($statusFilter > 0) {
+            $qb->andWhere('cr.status = :status')->setParameter('status', $statusFilter);
+        }
+
+        $rows = $qb->executeQuery()->fetchAllAssociative();
+
+        $items = array_map(fn($r) => [
+            'id'         => (int)$r['id'],
+            'statusId'   => (int)$r['status_id'],
+            'statusName' => $r['status_name'],
+            'wpOc'       => $r['wp_oc'],
+            'cacheName'  => $r['cache_name'],
+            'owner'      => $r['owner'],
+            'reporter'   => $r['reporter'],
+            'date'       => substr($r['date_created'], 0, 10),
+            'cacheUrl'   => '/cache/' . $r['wp_oc'],
+            'ownerUrl'   => '/user/profile/' . $r['owner_id'],
+            'detailUrl'  => $this->generateUrl('backoffice_support_reported_cache', ['repID' => $r['id']]),
+        ], $rows);
+
+        return new JsonResponse(['items' => $items]);
     }
 
     /**

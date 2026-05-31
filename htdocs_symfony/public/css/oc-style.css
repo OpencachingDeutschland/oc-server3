@@ -140,6 +140,7 @@ body {
 
 a {
   color: var(--oc-link-color);
+  text-decoration: none;
 }
 a:hover {
   color: var(--oc-link-hover-color);

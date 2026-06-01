@@ -40,6 +40,7 @@
   --oc-bg-surface:   var(--oc-gray-100);
   --oc-bg-elevated:  var(--oc-white);
   --oc-bg-secondary: var(--oc-gray-50);
+  --oc-popover-bg:   #dce7f0;
   --oc-bg-navbar:    var(--oc-primary);
 
   /* Form inputs */
@@ -85,6 +86,7 @@
   --oc-bg-surface:   #263545;
   --oc-bg-elevated:  #384858;
   --oc-bg-secondary: #344454;
+  --oc-popover-bg:   #506070;
   --oc-bg-navbar:    #1e2e3e;
 
   --oc-text-primary:   #dddddd;
@@ -399,12 +401,12 @@ textarea::placeholder {
   background-color: var(--oc-bg-surface);
 }
 
-/* Bootstrap popovers — always theme-aware */
+/* Bootstrap popovers — theme-aware, deliberately distinct from Leaflet popup bg */
 .popover {
-  --bs-popover-bg:           var(--oc-bg-elevated);
+  --bs-popover-bg:           var(--oc-popover-bg);
   --bs-popover-body-color:   var(--oc-text-primary);
   --bs-popover-border-color: var(--oc-border);
-  --bs-popover-header-bg:    var(--oc-bg-surface);
+  --bs-popover-header-bg:    var(--oc-popover-bg);
   --bs-popover-header-color: var(--oc-text-primary);
 }
 

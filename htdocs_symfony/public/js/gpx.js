@@ -92,7 +92,7 @@ function gpxFooter() {
  * - geocacheType: { id, name } (defaults to Unknown Cache)
  * - geocacheSize: { id, name } (defaults to Not chosen)
  * - difficulty, terrain: (default 1)
- * - ownerAlias, ownerCode: (default "Unknown")
+ * - ownerCode: (default "Unknown")
  * - publishedDate: (omitted if missing)
  * - status: Active/Archived/etc (default assumes Active)
  * - location: { country, state } (omitted if missing)
@@ -142,7 +142,7 @@ function generateWaypoint(item, today) {
   const size = GPX_CONTAINER_TYPES[item.geocacheSize?.id] || 'Not chosen';
   const difficulty = item.difficulty || 1;
   const terrain = item.terrain || 1;
-  const owner = escapeXml(item.ownerAlias || item.owner || 'Unknown');
+  const owner = escapeXml(item.ownerCode || item.owner || 'Unknown');
   const ownerId = '0'; // OC owner usernames have no numeric ID in the waypoint code
   const status = item.status || 'Active';
   const available = status === 'Active';

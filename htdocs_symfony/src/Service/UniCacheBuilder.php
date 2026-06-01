@@ -284,8 +284,7 @@ class UniCacheBuilder
                 ? substr($cache['date_created'], 0, 10) : 'unpublished',
 
             // owner
-            'ownerAlias' => str_replace("'", '`', $ownerUsername),
-            'ownerCode'  => $ownerUsername,
+            'ownerCode' => $ownerUsername,
             'ownerName'  => null,
 
             // status

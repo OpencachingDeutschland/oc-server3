@@ -1,8 +1,8 @@
 {% extends 'backoffice/base.html.twig' %}
 
-{% block page_title %}{{ 'The team' | trans }}{% endblock %}
-
 {% block page_content %}
+
+<h4 class="mb-3">{{ 'The team' | trans }}</h4>
 
 {% if teamAndRoles is defined and teamAndRoles %}
   <div class="d-flex flex-wrap gap-3 mt-2">

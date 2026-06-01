@@ -17,7 +17,7 @@ import { escapeXml } from './helpers.js';
 // GPX Cache Type Mapping
 // -------------------------------------
 
-// IDs match uniCache.js ocToGCCacheTypes (OC type name → integer id)
+// IDs match uniCache.js OC_CACHE_TYPES (OC type name → integer id)
 const GPX_CACHE_TYPES = {
   1: 'Unknown Cache',
   2: 'Traditional Cache',

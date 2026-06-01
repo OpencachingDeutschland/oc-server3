@@ -11,9 +11,9 @@
  ***************************************************************************/
 
 // -----------------------------------------------------------------
-// Lookup tables (subset of shared/lookupTables.js — OC only)
+// Lookup tables — bidirectional (id ↔ name) for OC cache and size types
 
-export const ocToGCCacheTypes = {
+export const OC_CACHE_TYPES = {
   1:  'Unknown',
   2:  'Traditional',
   3:  'Multi',
@@ -37,7 +37,7 @@ export const ocToGCCacheTypes = {
   'Drive-in':     10,
 };
 
-export const ocToGCSizeTypes = {
+export const OC_SIZE_TYPES = {
   1: 'Unknown',
   2: 'Micro',
   3: 'Regular',
@@ -68,16 +68,11 @@ function calcShortName(rawName, sequence) {
     : nameWithSequence;
 }
 
-const statusMap = {
-  'Available':                'Active',
-  'Temporarily unavailable':  'Disabled',
-  'Active':                   'Active',
-  'Disabled':                 'Disabled',
-  'Archived':                 'Archived',
-};
+// Backend sends 'Active' | 'Disabled' | 'Archived' directly — no OKAPI translation needed.
+const VALID_STATUSES = new Set(['Active', 'Disabled', 'Archived']);
 
 function normalizeStatus(status) {
-  return statusMap[status] ?? 'Unknown';
+  return VALID_STATUSES.has(status) ? status : 'Unknown';
 }
 
 // -----------------------------------------------------------------
@@ -130,8 +125,8 @@ export function ocToUniCache(oc, session) {
 
   const rawName = oc.name?.replace(/\u0027/g, '`') || 'Unnamed';
 
-  const typeId = ocToGCCacheTypes[oc.type] ?? 8;
-  const sizeId = ocToGCSizeTypes[oc.size2] ?? 1;
+  const typeId = OC_CACHE_TYPES[oc.type] ?? 8;
+  const sizeId = OC_SIZE_TYPES[oc.size2] ?? 1;
 
   const ownerUsername = session?.platforms?.oc?.username ?? null;
 
@@ -158,11 +153,11 @@ export function ocToUniCache(oc, session) {
     referenceCode: oc.code,
     geocacheType: {
       id:   typeId,
-      name: ocToGCCacheTypes[typeId] ?? oc.type,
+      name: OC_CACHE_TYPES[typeId] ?? oc.type,
     },
     geocacheSize: {
       id:   sizeId,
-      name: ocToGCSizeTypes[sizeId] ?? oc.size2,
+      name: OC_SIZE_TYPES[sizeId] ?? oc.size2,
     },
     foundDate,
     dnfDate,

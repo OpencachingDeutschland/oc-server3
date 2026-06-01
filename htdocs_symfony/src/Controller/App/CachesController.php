@@ -758,17 +758,12 @@ class CachesController extends AbstractController
         ];
         $okapiSize = $okapiSizeMap[strtolower((string)$cache['size_name'])] ?? 'other';
 
-        // OC DB status → OKAPI status string (matches statusMap keys in uniCache.js)
-        $okapiStatusMap = [
-            1 => 'Available',
-            2 => 'Temporarily unavailable',
-            3 => 'Archived',
-            4 => 'Archived',
-            5 => 'Archived',
-            6 => 'Archived',
-            7 => 'Archived',
+        // OC DB status → native status string
+        $statusStringMap = [
+            1 => 'Active',
+            2 => 'Disabled',
         ];
-        $okapiStatus = $okapiStatusMap[$statusId] ?? 'Archived';
+        $statusStr = $statusStringMap[$statusId] ?? 'Archived';
 
         // Description — prefer cache country language, else EN, else first available
         $desc = $this->connection->fetchAssociative(
@@ -923,7 +918,7 @@ class CachesController extends AbstractController
             'code'             => $cache['wp_oc'],
             'name'             => $cache['name'],
             'location'         => sprintf('%s|%s', $cache['latitude'], $cache['longitude']),
-            'status'           => $okapiStatus,
+            'status'           => $statusStr,
             'type'             => $okapiType,
             'size2'            => $okapiSize,
             'difficulty'       => (float)$cache['difficulty'],

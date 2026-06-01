@@ -7,6 +7,7 @@ namespace Oc\Controller\App;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Repository\CachesRepository;
+use Oc\Service\UniCacheBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -20,6 +21,7 @@ class CachesController extends AbstractController
         private CachesRepository $cachesRepository,
         private Connection $connection,
         private Security $security,
+        private UniCacheBuilder $uniCacheBuilder,
     ) {}
 
     #[Route("/caches", name: "caches_index")]
@@ -690,241 +692,42 @@ class CachesController extends AbstractController
     {
         $wp = strtoupper($wp);
 
-        $cache = $this->cachesRepository->fetchDetailByWp($wp);
+        $cacheRow = $this->cachesRepository->fetchDetailByWp($wp);
 
-        if (!$cache) {
+        if (!$cacheRow) {
             return new JsonResponse(['error' => 'Cache not found'], 404);
         }
 
-        $cacheId   = (int)$cache['cache_id'];
-        $typeId    = (int)$cache['type_id'];
-        $statusId  = (int)$cache['status_id'];
-        $user      = $this->security->getUser();
-        $userId    = $user?->getUserId() ?? 0;
-        $userName  = $user?->getUserIdentifier() ?? null;
-        $isOwner   = $userId > 0 && (int)$cache['owner_id'] === $userId;
-        $isEvent   = $typeId === 6;
+        $cacheId  = (int)$cacheRow['cache_id'];
+        $user     = $this->security->getUser();
+        $userId   = $user?->getUserId() ?? 0;
+        $userName = $user?->getUserIdentifier() ?? null;
+        $isOwner  = $userId > 0 && (int)$cacheRow['owner_id'] === $userId;
 
-        // OC DB type ID → OKAPI type name (matches ocToGCCacheTypes keys)
-        $okapiTypes = [
-            1  => 'Unknown', 2  => 'Traditional', 3 => 'Multi',
-            4  => 'Virtual', 5  => 'Webcam',      6 => 'Event',
-            7  => 'Quiz',    8  => 'Math/Physics',9 => 'Moving',
-            10 => 'Drive-in',
-        ];
-        $okapiType = $okapiTypes[$typeId] ?? 'Unknown';
-
-        // OC DB size name → OKAPI size2 token (lowercase keys of ocToGCSizeTypes)
-        $okapiSizeMap = [
-            'no container' => 'none',
-            'nano'         => 'nano',
-            'micro'        => 'micro',
-            'small'        => 'small',
-            'normal'       => 'regular',
-            'large'        => 'large',
-            'very large'   => 'xlarge',
-            'other size'   => 'other',
-        ];
-        $okapiSize = $okapiSizeMap[strtolower((string)$cache['size_name'])] ?? 'other';
-
-        // OC DB status → native status string
-        $statusStringMap = [
-            1 => 'Active',
-            2 => 'Disabled',
-        ];
-        $statusStr = $statusStringMap[$statusId] ?? 'Archived';
-
-        // Description — prefer cache country language, else EN, else first available
-        $desc = $this->cachesRepository->fetchDescription(
-            $cacheId,
-            strtoupper($cache['country'] ?: 'DE')
-        );
-
-        // Listing waypoints (additional waypoints placed by owner)
-        $waypoints = $this->cachesRepository->fetchWaypoints($cacheId);
-
-        // Attributes
-        $attributes = $this->cachesRepository->fetchAttributes($cacheId);
-
-        // Logs (most recent 30)
-        $logs = $this->cachesRepository->fetchLogs($cacheId);
-
-        // Map OC log type IDs → OKAPI log type names (for latest_logs in OKAPI shape)
-        $okapiLogTypeNames = [
-            1  => 'Found it',
-            2  => "Didn't find it",
-            3  => 'Comment',
-            7  => 'Attended',
-            8  => 'Will attend',
-            9  => 'Archived',
-            10 => 'Ready to search',
-            11 => 'Temporarily unavailable',
-        ];
-
-        // OKAPI latest_logs (slim — type/date pairs)
-        $latestLogs = array_map(fn($l) => [
-            'type' => $okapiLogTypeNames[(int)$l['type']] ?? (string)$l['type_name'],
-            'date' => $l['date'],
-            'user' => ['username' => $l['username']],
-        ], $logs);
-
-        // User's own logs on this cache — find latest Found / DNF for foundDate inference
-        $isFound = false;
-        $isNotFound = false;
-        if ($userId) {
-            foreach ($logs as $l) {
-                if ((int)$l['user_id'] !== $userId) continue;
-                $t = (int)$l['type'];
-                if ($t === 1)      $isFound = true;
-                elseif ($t === 2)  $isNotFound = true;
-                if ($isFound && $isNotFound) break;
-            }
-        }
-
-        // User's PCN row (note + corrected coords + remembered log password share
-        // one row in `coordinates` type=2)
-        $noteRow = $userId ? $this->cachesRepository->fetchUserNote($cacheId, $userId) : null;
-        $hasUserCoords = $noteRow
-            && ((float)$noteRow['latitude'] !== 0.0 || (float)$noteRow['longitude'] !== 0.0);
-
-        // Watch / recommendation status
-        $isWatched = false;
-        $isRecommended = false;
-        if ($userId) {
-            $isWatched     = $this->cachesRepository->isWatchedByUser($cacheId, $userId);
-            $isRecommended = $this->cachesRepository->isRecommendedByUser($cacheId, $userId);
-        }
-
-        // Region from cache_location (adm1 = state-equivalent in OC)
-        $region = $this->cachesRepository->fetchRegion($cacheId);
-
-        // Build OKAPI alt_wpts:
-        //   - Owner-placed waypoints (subtype mapping is rough; OKAPI uses string types)
-        //   - Plus user-coords entry if user has corrected coordinates
-        $altWpts = [];
-        foreach ($waypoints as $w) {
-            $altWpts[] = [
-                'type'        => 'reference',
-                'location'    => sprintf('%s|%s', $w['latitude'], $w['longitude']),
-                'name'        => $w['type_name'] ?? 'Waypoint',
-                'description' => $w['description'] ?? '',
-            ];
-        }
-        if ($hasUserCoords) {
-            $altWpts[] = [
-                'type'     => 'user-coords',
-                'location' => sprintf('%s|%s', $noteRow['latitude'], $noteRow['longitude']),
-                'name'     => 'Corrected coordinates',
-                'description' => '',
-            ];
-        }
-
-        // Available log types for current user (OC numeric IDs)
-        $logTypeIds = [];
-        if ($userId) {
-            $logTypeIds = $isEvent ? [7, 8, 3] : [1, 2, 3];
-            if ($isOwner) {
-                if ($statusId === 2) {
-                    $logTypeIds[] = 10; // Ready to search (enable)
-                } else {
-                    $logTypeIds[] = 11; // Temporarily unavailable (disable)
-                }
-                $logTypeIds[] = 9; // Archive
-            }
-        }
-
-        // Owner aux info
-        $ownerStats = $this->cachesRepository->fetchOwnerStats((int)$cache['owner_id']);
-
-        // OKAPI-shaped raw object (consumed by frontend ocToUniCacheWP)
-        $oc = [
-            'code'             => $cache['wp_oc'],
-            'name'             => $cache['name'],
-            'location'         => sprintf('%s|%s', $cache['latitude'], $cache['longitude']),
-            'status'           => $statusStr,
-            'type'             => $okapiType,
-            'size2'            => $okapiSize,
-            'difficulty'       => (float)$cache['difficulty'],
-            'terrain'          => (float)$cache['terrain'],
-            'date_created'     => $cache['date_created'] ?: $cache['date_hidden'],
-            'date_hidden'      => $cache['date_hidden'],
-            'country2'         => $cache['country_name'] ?: $cache['country'],
-            'country_code'     => $cache['country'],
-            'region'           => $region,
-            'recommendations'  => (int)$cache['rating_count'],
-            'founds'           => (int)$cache['find_count'],
-            'req_passwd'       => (bool)$cache['logpw'],
-            'is_found'         => $isFound,
-            'is_not_found'     => $isNotFound,
-            'is_recommended'   => $isRecommended,
-            'is_watched'       => $isWatched,
-            'my_notes'         => $noteRow['description'] ?? null,
-            'owner' => [
-                'username'    => $cache['owner_name'],
-                'uuid'        => $cache['owner_uuid'],
-                'profile_url' => sprintf('/viewprofile.php?userid=%d', (int)$cache['owner_id']),
-            ],
-            'alt_wpts'         => $altWpts,
-            'latest_logs'      => $latestLogs,
-            'description'      => $desc['desc'] ?? '',
-            'short_description'=> $desc['short_desc'] ?? '',
-            'hint2'            => $desc['hint'] ?? '',
-            'attr_acodes'      => array_map(fn($a) => (int)$a['id'], $attributes),
-        ];
-
-        // Aux: data not in OKAPI shape but needed by the cache detail UI
-        $aux = [
-            'logs'        => array_map(fn($l) => [
-                'id'       => (int)$l['id'],
-                'uuid'     => $l['uuid'],
-                'type'     => (int)$l['type'],
-                'typeName' => $okapiLogTypeNames[(int)$l['type']] ?? (string)$l['type_name'],
-                'date'     => $l['date'],
-                'username' => $l['username'],
-                'text'     => $l['text'],
-                'textHtml' => (bool)$l['text_html'],
-                'itsMine'  => $userId > 0 && (int)$l['user_id'] === $userId,
-            ], $logs),
-            'waypoints'   => array_map(fn($w) => [
-                'lat'         => (float)$w['latitude'],
-                'lon'         => (float)$w['longitude'],
-                'typeName'    => $w['type_name'] ?? 'Waypoint',
-                'typeId'      => (int)($w['type_id'] ?? 0),
-                'description' => $w['description'] ?? '',
-            ], $waypoints),
-            'attributes'  => array_map(fn($a) => [
-                'id'   => (int)$a['id'],
-                'name' => $a['name'],
-                'icon' => $a['icon'],
-            ], $attributes),
-            'owner'       => [
-                'username'      => $cache['owner_name'],
-                'userId'        => (int)$cache['owner_id'],
-                'profileUrl'    => sprintf('/viewprofile.php?userid=%d', (int)$cache['owner_id']),
-                'findCount'     => (int)($ownerStats['found'] ?? 0),
-                'hideCount'     => (int)($ownerStats['hidden'] ?? 0),
-                'joinedDate'    => $cache['owner_joined'] ? substr($cache['owner_joined'], 0, 10) : null,
-            ],
-            'logTypes'    => $logTypeIds,
-            'searchTime'  => (float)$cache['search_time'],
-            'wayLength'   => (float)$cache['way_length'],
-            'wpGc'        => $cache['wp_gc'] ?: '',
-            'svgName'     => $cache['svg_name'],
-            'descHtml'    => (bool)($desc['desc_html'] ?? true),
-            'descDarkUnsafe'   => (bool)($desc['desc_dark_unsafe'] ?? false),
-            'needsMaintenance' => (bool)$cache['needs_maintenance'],
-            'listingOutdated'  => (bool)$cache['listing_outdated'],
-            'myLogpw'          => $noteRow['logpw'] ?? '',
-            'cacheLogpw'      => $isOwner ? ($cache['cache_logpw'] ?? '') : '',
+        // Gather all data from repository layer
+        $data = [
+            'cache'      => $cacheRow,
+            'desc'       => $this->cachesRepository->fetchDescription(
+                $cacheId,
+                strtoupper($cacheRow['country'] ?: 'DE')
+            ),
+            'waypoints'  => $this->cachesRepository->fetchWaypoints($cacheId),
+            'attributes' => $this->cachesRepository->fetchAttributes($cacheId),
+            'logs'       => $this->cachesRepository->fetchLogs($cacheId),
+            'noteRow'    => $userId ? $this->cachesRepository->fetchUserNote($cacheId, $userId) : null,
+            'region'     => $this->cachesRepository->fetchRegion($cacheId),
+            'ownerStats' => $this->cachesRepository->fetchOwnerStats((int)$cacheRow['owner_id']),
         ];
 
         $context = [
-            'userId'    => $userId,
-            'userName'  => $userName,
-            'isOwner'   => $isOwner,
+            'userId'        => $userId,
+            'userName'      => $userName,
+            'isOwner'       => $isOwner,
+            'isWatched'     => $userId ? $this->cachesRepository->isWatchedByUser($cacheId, $userId) : false,
+            'isRecommended' => $userId ? $this->cachesRepository->isRecommendedByUser($cacheId, $userId) : false,
         ];
 
-        return new JsonResponse(['oc' => $oc, 'aux' => $aux, 'context' => $context]);
+        return new JsonResponse($this->uniCacheBuilder->build($data, $context));
     }
 
     #[Route("/api/cache/{wp}/note", name: "api_cache_note_save", methods: ["POST"])]

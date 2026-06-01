@@ -7,11 +7,8 @@
  * Page lifecycle:
  *   1. loader.js sees <body data-page="cache"> → imports this module → calls init().
  *   2. init() reads wp code from #explore-container[data-code], fetches
- *      /api/cache/{wp} which returns { oc, aux, context }.
- *   3. oc is cooked into a uniCacheWP via ocToUniCacheWP(). Render-time
- *      augmentation fields (formatted dates, formatted coords, sanitized
- *      description, owner stats, attributes, additionalWaypoints, logTypes,
- *      ianaTimezoneId) are then merged in from aux.
+ *      /api/cache/{wp} which returns a fully cooked uniCacheWP object.
+ *   3. The object is used directly — no client-side cooking needed.
  *   4. renderCache() populates the static HTML table.
  *   5. Logs are fed into a Tabulator; the most-recent own log (if any)
  *      pre-populates the edit textarea.
@@ -27,7 +24,6 @@
 
 import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.js';
 import { coords2Dm, coords2LatLon } from './coords.js';
-import { ocToUniCacheWP } from './uniCache.js';
 import { initPageMap } from './pageMap.js';
 import { apiFetch } from './helpers.js';
 
@@ -61,10 +57,9 @@ const ICON_SIZE = 30;
 // -----------------------------------------------------------------
 // Module state
 
-let gc = null;          // uniCacheWP + render-augmentation fields
-let aux = null;         // raw aux payload from backend
-let context = null;     // { userId, userName, isOwner }
-let logs = [];          // aux.logs
+let gc = null;          // uniCacheWP (fully cooked by backend)
+let context = null;     // { userId, userName, isOwner } (from gc._context)
+let logs = [];          // gc.logs
 
 let oldCoords = '';
 let newCoords = '';
@@ -152,85 +147,6 @@ function hideSkeletons() {
   if (table) table.style.display = '';
   if (desc)  desc.style.display  = '';
 }
-
-// -----------------------------------------------------------------
-// augmentForRender() — add render-time fields onto the uniCacheWP
-//
-// The OC backend returns OKAPI-shape + aux; this fills in the fields
-// the renderer expects on the uniCacheWP.
-
-function augmentForRender(uc, oc, aux) {
-  // Formatted dates
-  uc.placedDateFmt     = oc.date_hidden  ? oc.date_hidden.substring(0, 10)  : '';
-  uc.publishedDateFmt  = oc.date_created ? oc.date_created.substring(0, 10) : '';
-  uc.foundDateFmt      = uc.foundDate || '';
-  uc.dnfDateFmt        = uc.dnfDate   || '';
-
-  // Formatted coords
-  uc.postedCoordsFmt = uc.postedCoordinates
-    ? coords2Dm(uc.postedCoordinates.latitude, uc.postedCoordinates.longitude)
-    : '';
-  uc.correctedCoordsFmt = uc.correctedCoordinates
-    ? coords2Dm(uc.correctedCoordinates.latitude, uc.correctedCoordinates.longitude)
-    : '';
-
-  // Description: short_description as lead, then description.
-  // OC stores either HTML or plain text; aux.descHtml controls escaping.
-  const parts = [];
-  if (oc.short_description) parts.push(`<p><b>${oc.short_description}</b></p>`);
-  if (oc.description) {
-    parts.push(aux.descHtml ? oc.description : oc.description.replace(/\n/g, '<br>'));
-  }
-  uc.sanitizedDescription = parts.join('\n');
-  uc.descDarkUnsafe = !!aux.descDarkUnsafe;
-
-  // Hint (OC stores plain — never rot13)
-  uc.hints = oc.hint2 || '';
-
-  // Owner stats
-  uc.owner = {
-    username:      aux.owner.username,
-    referenceCode: aux.owner.username,
-    findCount:     aux.owner.findCount,
-    hideCount:     aux.owner.hideCount,
-    joinedDateFmt: aux.owner.joinedDate || '',
-    profileUrl:    aux.owner.profileUrl,
-  };
-
-  // Attributes — convert to the renderer's expected shape ({ imageUrl, name })
-  uc.attributes = (aux.attributes || []).map(a => ({
-    imageUrl: a.icon ? `/images/attributes/${a.icon}.png` : '',
-    name:     a.name,
-  }));
-
-  // Additional waypoints — keep OKAPI shape so explore.js's createWPTable
-  // OC branch can split location string and read type/type_name
-  uc.additionalWaypoints = (aux.waypoints || []).map(w => ({
-    location:  `${w.lat}|${w.lon}`,
-    type:      w.typeName || 'Waypoint',
-    type_name: w.typeName || 'Waypoint',
-    name:      w.typeName || 'Waypoint',
-    description: w.description || '',
-  }));
-
-  // Log types (numeric OC IDs)
-  uc.logTypes = aux.logTypes || [];
-
-  // Default timezone for OC
-  uc.ianaTimezoneId = 'Europe/Berlin';
-
-  // Other render hints
-  uc.needsMaintenance = !!aux.needsMaintenance;
-  uc.listingOutdated  = !!aux.listingOutdated;
-  uc.wpGc             = aux.wpGc || '';
-  uc.logpw            = aux.myLogpw || '';
-  uc.searchTime       = aux.searchTime || 0;
-  uc.wayLength        = aux.wayLength  || 0;
-  uc.isOcOnly         = (aux.attributes || []).some(a => a.id === 6);
-
-  return uc;
-}
-
 // -----------------------------------------------------------------
 // loadCache()
 
@@ -251,24 +167,16 @@ async function loadCache(code) {
     return;
   }
 
-  aux     = response.aux     || {};
-  context = response.context || {};
+  // Response is already a cooked uniCacheWP — use it directly.
+  gc      = response;
+  context = gc._context || {};
+  logs    = gc.logs || [];
 
-  // Cook OKAPI → uniCacheWP
-  const sessionLike = { platforms: { oc: { username: context.userName } } };
-  gc = ocToUniCacheWP(response.oc, sessionLike);
-  augmentForRender(gc, response.oc, aux);
-
-  // Owner sees the cache's actual log password
-  if (context.isOwner && aux.cacheLogpw) {
-    gc.logpw = aux.cacheLogpw;
-  }
+  // Owner sees the cache's actual log password (already handled by backend).
 
   // Preserve originals for revert when user clears CC
   gc._origLat = gc.postedCoordinates?.latitude  ?? gc.lat;
   gc._origLon = gc.postedCoordinates?.longitude ?? gc.lon;
-
-  logs = aux.logs || [];
 
   renderCache();
   hideSkeletons();

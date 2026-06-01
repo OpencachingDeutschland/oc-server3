@@ -525,4 +525,195 @@ class CachesRepository extends ServiceEntityRepository
 
         return $result;
     }
+
+    /**
+     * Fetch the main cache row with all JOINs needed for the API detail endpoint.
+     *
+     * @throws Exception
+     */
+    public function fetchDetailByWp(string $wp): ?array
+    {
+        $result = $this->connection->fetchAssociative(
+            'SELECT
+                c.cache_id, c.wp_oc, c.name,
+                c.latitude, c.longitude,
+                c.difficulty / 2 AS difficulty,
+                c.terrain / 2 AS terrain,
+                c.country, c.date_hidden, c.date_created, c.wp_gc,
+                c.type AS type_id,
+                c.size AS size_id,
+                c.status AS status_id,
+                c.search_time, c.way_length,
+                IF(c.logpw != \'\', 1, 0) AS logpw,
+                c.logpw AS cache_logpw,
+                c.needs_maintenance, c.listing_outdated,
+                ct.en AS type_name, ct.svg_name,
+                cs.name AS size_name,
+                cst.en AS status_en,
+                u.user_id AS owner_id, u.username AS owner_name, u.uuid AS owner_uuid,
+                u.date_created AS owner_joined,
+                IFNULL(sc.found, 0) AS find_count,
+                IFNULL(sc.toprating, 0) AS rating_count,
+                co_name.name AS country_name
+             FROM caches c
+             JOIN cache_type ct    ON c.type    = ct.id
+             JOIN cache_size cs    ON c.size    = cs.id
+             JOIN cache_status cst ON c.status  = cst.id
+             JOIN user u           ON c.user_id = u.user_id
+             LEFT JOIN stat_caches sc ON c.cache_id = sc.cache_id
+             LEFT JOIN countries co_name ON c.country = co_name.short
+             WHERE c.wp_oc = ?',
+            [$wp]
+        );
+
+        return $result ?: null;
+    }
+
+    /**
+     * Fetch the cache description, preferring the given language first, then EN.
+     *
+     * @throws Exception
+     */
+    public function fetchDescription(int $cacheId, string $preferredLang): ?array
+    {
+        $result = $this->connection->fetchAssociative(
+            'SELECT cd.desc, cd.hint, cd.short_desc, cd.desc_html, cd.desc_dark_unsafe, cd.language
+             FROM cache_desc cd
+             WHERE cd.cache_id = ?
+             ORDER BY cd.language = ? DESC, cd.language = \'EN\' DESC
+             LIMIT 1',
+            [$cacheId, $preferredLang]
+        );
+
+        return $result ?: null;
+    }
+
+    /**
+     * Fetch listing waypoints (additional waypoints placed by the owner, type=1).
+     *
+     * @throws Exception
+     */
+    public function fetchWaypoints(int $cacheId): array
+    {
+        return $this->connection->fetchAllAssociative(
+            'SELECT co.latitude, co.longitude, co.description, ct.name AS type_name, ct.id AS type_id
+             FROM coordinates co
+             LEFT JOIN coordinates_type ct ON co.subtype = ct.id
+             WHERE co.cache_id = ? AND co.type = 1 AND co.user_id IS NULL
+             ORDER BY co.id',
+            [$cacheId]
+        );
+    }
+
+    /**
+     * Fetch cache attributes with their icons.
+     *
+     * @throws Exception
+     */
+    public function fetchAttributes(int $cacheId): array
+    {
+        return $this->connection->fetchAllAssociative(
+            'SELECT ca.id, ca.name, ca.icon
+             FROM caches_attributes cxa
+             JOIN cache_attrib ca ON cxa.attrib_id = ca.id
+             WHERE cxa.cache_id = ?
+             ORDER BY ca.id',
+            [$cacheId]
+        );
+    }
+
+    /**
+     * Fetch most recent logs for a cache with user and log type info.
+     *
+     * @throws Exception
+     */
+    public function fetchLogs(int $cacheId, int $limit = 30): array
+    {
+        return $this->connection->fetchAllAssociative(
+            'SELECT cl.id, cl.uuid, cl.type, lt.en AS type_name,
+                    DATE_FORMAT(cl.date, \'%Y-%m-%d\') AS date,
+                    cl.text, cl.text_html, cl.user_id,
+                    u.username
+             FROM cache_logs cl
+             JOIN user u       ON cl.user_id = u.user_id
+             LEFT JOIN log_types lt ON cl.type = lt.id
+             WHERE cl.cache_id = ? AND cl.gdpr_deletion = 0
+             ORDER BY cl.date DESC
+             LIMIT ' . (int)$limit,
+            [$cacheId]
+        );
+    }
+
+    /**
+     * Fetch the logged-in user's personal cache note row (coordinates type=2).
+     * Returns the note text, corrected coordinates, and remembered log password.
+     *
+     * @throws Exception
+     */
+    public function fetchUserNote(int $cacheId, int $userId): ?array
+    {
+        $result = $this->connection->fetchAssociative(
+            'SELECT description, latitude, longitude, logpw FROM coordinates
+             WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
+            [$cacheId, $userId]
+        );
+
+        return $result ?: null;
+    }
+
+    /**
+     * Fetch the region (adm1) for a cache from cache_location.
+     *
+     * @throws Exception
+     */
+    public function fetchRegion(int $cacheId): ?string
+    {
+        $result = $this->connection->fetchOne(
+            'SELECT adm1 FROM cache_location WHERE cache_id=?',
+            [$cacheId]
+        );
+
+        return $result ?: null;
+    }
+
+    /**
+     * Fetch owner statistics (found / hidden counts) from stat_user.
+     *
+     * @throws Exception
+     */
+    public function fetchOwnerStats(int $ownerId): array
+    {
+        $result = $this->connection->fetchAssociative(
+            'SELECT IFNULL(found, 0) AS found, IFNULL(hidden, 0) AS hidden FROM stat_user WHERE user_id=?',
+            [$ownerId]
+        );
+
+        return $result ?: ['found' => 0, 'hidden' => 0];
+    }
+
+    /**
+     * Check whether a user is watching a cache.
+     *
+     * @throws Exception
+     */
+    public function isWatchedByUser(int $cacheId, int $userId): bool
+    {
+        return $this->cacheWatchesRepository->fetchOneByCount([
+            'cache_id' => $cacheId,
+            'user_id'  => $userId,
+        ]) > 0;
+    }
+
+    /**
+     * Check whether a user has recommended a cache.
+     *
+     * @throws Exception
+     */
+    public function isRecommendedByUser(int $cacheId, int $userId): bool
+    {
+        return $this->cacheRatingRepository->getRatingUserCache([
+            'cache_id' => $cacheId,
+            'user_id'  => $userId,
+        ]);
+    }
 }

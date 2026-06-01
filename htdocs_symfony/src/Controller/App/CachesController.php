@@ -690,38 +690,7 @@ class CachesController extends AbstractController
     {
         $wp = strtoupper($wp);
 
-        $cache = $this->connection->fetchAssociative(
-            'SELECT
-                c.cache_id, c.wp_oc, c.name,
-                c.latitude, c.longitude,
-                c.difficulty / 2 AS difficulty,
-                c.terrain / 2 AS terrain,
-                c.country, c.date_hidden, c.date_created, c.wp_gc,
-                c.type AS type_id,
-                c.size AS size_id,
-                c.status AS status_id,
-                c.search_time, c.way_length,
-                IF(c.logpw != \'\', 1, 0) AS logpw,
-                c.logpw AS cache_logpw,
-                c.needs_maintenance, c.listing_outdated,
-                ct.en AS type_name, ct.svg_name,
-                cs.name AS size_name,
-                cst.en AS status_en,
-                u.user_id AS owner_id, u.username AS owner_name, u.uuid AS owner_uuid,
-                u.date_created AS owner_joined,
-                IFNULL(sc.found, 0) AS find_count,
-                IFNULL(sc.toprating, 0) AS rating_count,
-                co_name.name AS country_name
-             FROM caches c
-             JOIN cache_type ct    ON c.type    = ct.id
-             JOIN cache_size cs    ON c.size    = cs.id
-             JOIN cache_status cst ON c.status  = cst.id
-             JOIN user u           ON c.user_id = u.user_id
-             LEFT JOIN stat_caches sc ON c.cache_id = sc.cache_id
-             LEFT JOIN countries co_name ON c.country = co_name.short
-             WHERE c.wp_oc = ?',
-            [$wp]
-        );
+        $cache = $this->cachesRepository->fetchDetailByWp($wp);
 
         if (!$cache) {
             return new JsonResponse(['error' => 'Cache not found'], 404);
@@ -766,49 +735,19 @@ class CachesController extends AbstractController
         $statusStr = $statusStringMap[$statusId] ?? 'Archived';
 
         // Description — prefer cache country language, else EN, else first available
-        $desc = $this->connection->fetchAssociative(
-            'SELECT cd.desc, cd.hint, cd.short_desc, cd.desc_html, cd.desc_dark_unsafe, cd.language
-             FROM cache_desc cd
-             WHERE cd.cache_id = ?
-             ORDER BY cd.language = ? DESC, cd.language = \'EN\' DESC
-             LIMIT 1',
-            [$cacheId, strtoupper($cache['country'] ?: 'DE')]
+        $desc = $this->cachesRepository->fetchDescription(
+            $cacheId,
+            strtoupper($cache['country'] ?: 'DE')
         );
 
         // Listing waypoints (additional waypoints placed by owner)
-        $waypoints = $this->connection->fetchAllAssociative(
-            'SELECT co.latitude, co.longitude, co.description, ct.name AS type_name, ct.id AS type_id
-             FROM coordinates co
-             LEFT JOIN coordinates_type ct ON co.subtype = ct.id
-             WHERE co.cache_id = ? AND co.type = 1 AND co.user_id IS NULL
-             ORDER BY co.id',
-            [$cacheId]
-        );
+        $waypoints = $this->cachesRepository->fetchWaypoints($cacheId);
 
         // Attributes
-        $attributes = $this->connection->fetchAllAssociative(
-            'SELECT ca.id, ca.name, ca.icon
-             FROM caches_attributes cxa
-             JOIN cache_attrib ca ON cxa.attrib_id = ca.id
-             WHERE cxa.cache_id = ?
-             ORDER BY ca.id',
-            [$cacheId]
-        );
+        $attributes = $this->cachesRepository->fetchAttributes($cacheId);
 
         // Logs (most recent 30)
-        $logs = $this->connection->fetchAllAssociative(
-            'SELECT cl.id, cl.uuid, cl.type, lt.en AS type_name,
-                    DATE_FORMAT(cl.date, \'%Y-%m-%d\') AS date,
-                    cl.text, cl.text_html, cl.user_id,
-                    u.username
-             FROM cache_logs cl
-             JOIN user u       ON cl.user_id = u.user_id
-             LEFT JOIN log_types lt ON cl.type = lt.id
-             WHERE cl.cache_id = ? AND cl.gdpr_deletion = 0
-             ORDER BY cl.date DESC
-             LIMIT 30',
-            [$cacheId]
-        );
+        $logs = $this->cachesRepository->fetchLogs($cacheId);
 
         // Map OC log type IDs → OKAPI log type names (for latest_logs in OKAPI shape)
         $okapiLogTypeNames = [
@@ -844,11 +783,7 @@ class CachesController extends AbstractController
 
         // User's PCN row (note + corrected coords + remembered log password share
         // one row in `coordinates` type=2)
-        $noteRow = $userId ? $this->connection->fetchAssociative(
-            'SELECT description, latitude, longitude, logpw FROM coordinates
-             WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-            [$cacheId, $userId]
-        ) : null;
+        $noteRow = $userId ? $this->cachesRepository->fetchUserNote($cacheId, $userId) : null;
         $hasUserCoords = $noteRow
             && ((float)$noteRow['latitude'] !== 0.0 || (float)$noteRow['longitude'] !== 0.0);
 
@@ -856,21 +791,12 @@ class CachesController extends AbstractController
         $isWatched = false;
         $isRecommended = false;
         if ($userId) {
-            $isWatched = (bool)$this->connection->fetchOne(
-                'SELECT 1 FROM cache_watches WHERE cache_id=? AND user_id=?',
-                [$cacheId, $userId]
-            );
-            $isRecommended = (bool)$this->connection->fetchOne(
-                'SELECT 1 FROM cache_rating WHERE cache_id=? AND user_id=?',
-                [$cacheId, $userId]
-            );
+            $isWatched     = $this->cachesRepository->isWatchedByUser($cacheId, $userId);
+            $isRecommended = $this->cachesRepository->isRecommendedByUser($cacheId, $userId);
         }
 
         // Region from cache_location (adm1 = state-equivalent in OC)
-        $region = $this->connection->fetchOne(
-            'SELECT adm1 FROM cache_location WHERE cache_id=?',
-            [$cacheId]
-        ) ?: null;
+        $region = $this->cachesRepository->fetchRegion($cacheId);
 
         // Build OKAPI alt_wpts:
         //   - Owner-placed waypoints (subtype mapping is rough; OKAPI uses string types)
@@ -908,10 +834,7 @@ class CachesController extends AbstractController
         }
 
         // Owner aux info
-        $ownerStats = $this->connection->fetchAssociative(
-            'SELECT IFNULL(found, 0) AS found, IFNULL(hidden, 0) AS hidden FROM stat_user WHERE user_id=?',
-            [(int)$cache['owner_id']]
-        ) ?: ['found' => 0, 'hidden' => 0];
+        $ownerStats = $this->cachesRepository->fetchOwnerStats((int)$cache['owner_id']);
 
         // OKAPI-shaped raw object (consumed by frontend ocToUniCacheWP)
         $oc = [

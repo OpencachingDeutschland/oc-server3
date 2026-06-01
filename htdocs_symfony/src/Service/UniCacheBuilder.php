@@ -254,7 +254,6 @@ class UniCacheBuilder
         $uc = [
             // identity
             '_id'           => $cache['wp_oc'],
-            'platform'      => 'OC',
             'referenceCode' => $cache['wp_oc'],
 
             // name
@@ -330,12 +329,6 @@ class UniCacheBuilder
             // password
             'requiresPasswd' => (bool)$cache['logpw'],
             'logPasswd'      => null,
-
-            // GCxM compatibility
-            'ucx' => [
-                'importDate'       => date('c'),
-                'sourceCollection' => 'caches',
-            ],
 
             // ---- Render fields (formerly from augmentForRender + aux) ----
 
@@ -421,25 +414,9 @@ class UniCacheBuilder
                 'userName' => $userName,
                 'isOwner'  => $isOwner,
             ],
+            // map.js reads isSelected from uniCacheWP elements
+            'isSelected' => false,
         ];
-
-        // --- back-compat: OKAPI field aliases (for renderCache references) ---
-        $uc['code']             = $uc['_id'];
-        $uc['date_created']     = $cache['date_created'] ?? null;
-        $uc['date_hidden']      = $cache['date_hidden'] ?? null;
-        $uc['country2']         = $uc['location']['country'];
-        $uc['country_code']     = $uc['location']['countryCode'];
-        $uc['region']           = $uc['location']['state'];
-        $uc['recommendations']  = $uc['favoritePoints'];
-        $uc['founds']           = $uc['findCount'];
-        $uc['req_passwd']       = $uc['requiresPasswd'];
-        $uc['is_found']         = $uc['isFound'];
-        $uc['is_not_found']     = $uc['isDNF'];
-        $uc['is_recommended']   = $uc['isFavorited'];
-        $uc['is_watched']       = $uc['isWatched'];
-        $uc['my_notes']         = $uc['pcn'];
-        $uc['hint2']            = $uc['hints'];
-        $uc['isSelected']       = false;
 
         return $uc;
     }

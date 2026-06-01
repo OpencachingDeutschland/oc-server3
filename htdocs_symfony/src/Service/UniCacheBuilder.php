@@ -158,26 +158,6 @@ class UniCacheBuilder
             $dnfDate = 'DNF';
         }
 
-        // ---- alt waypoints ----
-
-        $altWpts = [];
-        foreach ($waypoints as $w) {
-            $altWpts[] = [
-                'type'        => 'reference',
-                'location'    => sprintf('%s|%s', $w['latitude'], $w['longitude']),
-                'name'        => $w['type_name'] ?? 'Waypoint',
-                'description' => $w['description'] ?? '',
-            ];
-        }
-        if ($hasUserCoords && $noteRow) {
-            $altWpts[] = [
-                'type'        => 'user-coords',
-                'location'    => sprintf('%s|%s', $noteRow['latitude'], $noteRow['longitude']),
-                'name'        => 'Corrected coordinates',
-                'description' => '',
-            ];
-        }
-
         // ---- available log types for current user ----
 
         $logTypeIds = [];
@@ -189,28 +169,17 @@ class UniCacheBuilder
             }
         }
 
-        // ---- latest logs (slim, for OKAPI compatibility) ----
-
-        $latestLogs = array_map(fn($l) => [
-            'type' => self::LOG_TYPE_NAMES[(int)$l['type']] ?? (string)$l['type_name'],
-            'date' => $l['date'],
-            'user' => ['username' => $l['username']],
-        ], $logs);
-
         // ---- description ----
 
-        $sanitizedDesc = '';
-        $shortDesc = $desc['short_desc'] ?? '';
-        $fullDesc  = $desc['desc'] ?? '';
         $descHtml  = (bool)($desc['desc_html'] ?? true);
         $descDark  = (bool)($desc['desc_dark_unsafe'] ?? false);
 
         $parts = [];
-        if ($shortDesc) {
-            $parts[] = '<p><b>' . $shortDesc . '</b></p>';
+        if ($desc['short_desc'] ?? '') {
+            $parts[] = '<p><b>' . $desc['short_desc'] . '</b></p>';
         }
-        if ($fullDesc) {
-            $parts[] = $descHtml ? $fullDesc : str_replace("\n", '<br>', $fullDesc);
+        if ($desc['desc'] ?? '') {
+            $parts[] = $descHtml ? $desc['desc'] : str_replace("\n", '<br>', $desc['desc']);
         }
         $sanitizedDesc = implode("\n", $parts);
 
@@ -252,8 +221,6 @@ class UniCacheBuilder
         // ---- assemble the uniCacheWP ----
 
         $uc = [
-            // identity
-            '_id'           => $cache['wp_oc'],
             'referenceCode' => $cache['wp_oc'],
 
             // name
@@ -285,7 +252,6 @@ class UniCacheBuilder
 
             // owner
             'ownerCode' => $ownerUsername,
-            'ownerName'  => null,
 
             // status
             'status'     => $statusStr,
@@ -303,8 +269,6 @@ class UniCacheBuilder
             'isCached'    => false,
             'isGuessable' => false,
             'isPartial'   => false,
-            'hasDraft'    => false,
-            'isIgnored'   => false,
             'isWatched'   => $isWatched,
             'isFavorited' => $isRecommended,
 
@@ -327,7 +291,6 @@ class UniCacheBuilder
 
             // password
             'requiresPasswd' => (bool)$cache['logpw'],
-            'logPasswd'      => null,
 
             // ---- Render fields (formerly from augmentForRender + aux) ----
 
@@ -340,8 +303,6 @@ class UniCacheBuilder
             'correctedCoordsFmt' => $correctedCoordsFmt,
 
             // description
-            'description'       => $fullDesc,
-            'shortDescription'  => $shortDesc,
             'sanitizedDescription' => $sanitizedDesc,
             'descDarkUnsafe'    => $descDark,
             'hints'             => $hints,
@@ -388,20 +349,13 @@ class UniCacheBuilder
                 'itsMine'  => $userId > 0 && (int)$l['user_id'] === $userId,
             ], $logs),
 
-            // OKAPI latest_logs (slim)
-            'latest_logs' => $latestLogs,
-            'alt_wpts'    => $altWpts,
-            'attr_acodes' => array_map(fn($a) => (int)$a['id'], $attributes),
-
             // log type dropdown
             'logTypes' => $logTypeIds,
 
             // misc
-            'wpGc'              => $cache['wp_gc'] ?? '',
-            'svgName'           => $cache['svg_name'] ?? '',
-            'searchTime'        => (float)$cache['search_time'],
-            'wayLength'         => (float)$cache['way_length'],
-            'needsMaintenance'  => (bool)$cache['needs_maintenance'],
+            'wpGc'             => $cache['wp_gc'] ?? '',
+            'searchTime'       => (float)$cache['search_time'],
+            'needsMaintenance' => (bool)$cache['needs_maintenance'],
             'listingOutdated'   => (bool)$cache['listing_outdated'],
             'logpw' => $logpw,
 

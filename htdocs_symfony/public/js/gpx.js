@@ -17,30 +17,18 @@ import { escapeXml } from './helpers.js';
 // GPX Cache Type Mapping
 // -------------------------------------
 
+// IDs match uniCache.js ocToGCCacheTypes (OC type name → integer id)
 const GPX_CACHE_TYPES = {
-     1 : 'undefined',
-     2 : 'Traditional Cache',
-     3 : 'Multi-cache',
-     4 : 'Virtual Cache',
-     5 : 'Letterbox Hybrid',
-     6 : 'Event Cache',
-     7 : '7: undefined',
-     8 : 'Unknown Cache',
-     9 : 'Project A.P.E',
-    10 : '10: undefined',
-    11 : 'Webcam Cache',
-    12 : 'Locationless (Reverse) Cache',
-    13 : 'Cache In Trash Out Event',
-   137 : 'Earthcache',
-   453 : 'Mega-Event',
-  1304 : 'GPS Adventures Exhibit',
-  1858 : 'Wherigo Cache',
-  3333 : 'Lab Cache',
-  3653 : 'Community Celebration Event',
-  3773 : 'Geocaching HQ',
-  3774 : 'Geocaching HQ Celebration',
-  4738 : 'Geocaching HQ Block Party',
-  7005 : 'Giga-Event'
+  1: 'Unknown Cache',
+  2: 'Traditional Cache',
+  3: 'Multi-cache',
+  4: 'Virtual Cache',
+  5: 'Webcam Cache',
+  6: 'Event Cache',
+  7: 'Quiz Cache',
+  8: 'Math/Physics Cache',
+  9: 'Moving Cache',
+  10: 'Drive-in Cache',
 };
 
 // -------------------------------------
@@ -56,68 +44,6 @@ const GPX_CONTAINER_TYPES = {
   6 : 'Other',
   8 : 'Small',
 };
-
-// -------------------------------------
-// Reference Code Conversion
-// -------------------------------------
-
-function convertGC(src, srcAlphabet, dstAlphabet) {
-  const srcBase = srcAlphabet.length;
-  const dstBase = dstAlphabet.length;
-
-  let wet = src;
-  let val = 0;
-  let mlt = 1;
-
-  while (wet.length > 0) {
-    const digit = wet.slice(-1);
-    const digVal = srcAlphabet.indexOf(digit);
-    if (digVal > -1) {
-      val += mlt * digVal;
-      mlt *= srcBase;
-    }
-    wet = wet.slice(0, -1);
-  }
-
-  wet = val;
-  let ret = "";
-
-  while (wet >= dstBase) {
-    const digitVal = wet % dstBase;
-    const digit = dstAlphabet.charAt(digitVal);
-    ret = digit + ret;
-    wet /= dstBase;
-  }
-
-  const digit = dstAlphabet.charAt(wet);
-  ret = digit + ret;
-
-  return ret;
-}
-
-function referenceCode2Id(referenceCode) {
-  if (!referenceCode) return '0';
-
-  let code = referenceCode;
-  const prefix = code.substring(0, 2);
-  if (prefix === 'GC') {
-    code = code.replace(/S/g, '5');
-    code = code.replace(/O/g, '0');
-  }
-  code = code.slice(2);
-  const firstChar = code[0];
-  let id;
-  if ((code.length >= 5) || (firstChar >= 'G')) {
-    const srcAlphabet = '0123456789ABCDEFGHJKMNPQRTVWXYZ';
-    const dstAlphabet = '0123456789';
-    id = convertGC(code, srcAlphabet, dstAlphabet) - 411120;
-  } else {
-    const srcAlphabet = '0123456789ABCDEF';
-    const dstAlphabet = '0123456789';
-    id = convertGC(code, srcAlphabet, dstAlphabet);
-  }
-  return String(id);
-}
 
 // -------------------------------------
 // Date Formatting
@@ -211,14 +137,13 @@ function generateWaypoint(item, today) {
 
   // Extract optional fields with defaults
   const name = escapeXml(item.name || code);
-  const cacheId = referenceCode2Id(rawCode);
+  const cacheId = rawCode;
   const type = GPX_CACHE_TYPES[item.geocacheType?.id] || 'Unknown Cache';
   const size = GPX_CONTAINER_TYPES[item.geocacheSize?.id] || 'Not chosen';
   const difficulty = item.difficulty || 1;
   const terrain = item.terrain || 1;
   const owner = escapeXml(item.ownerAlias || item.owner || 'Unknown');
-  // Only convert ownerCode to ID if it looks like a GC reference code
-  const ownerId = item.ownerCode?.startsWith?.('PR') ? referenceCode2Id(item.ownerCode) : '0';
+  const ownerId = '0'; // OC owner usernames have no numeric ID in the waypoint code
   const status = item.status || 'Active';
   const available = status === 'Active';
   const archived = status === 'Archived';
@@ -510,7 +435,6 @@ init();
 export {
   GPX_CACHE_TYPES,
   GPX_CONTAINER_TYPES,
-  referenceCode2Id,
 };
 
 // code: language=javascript insertSpaces=true tabSize=2

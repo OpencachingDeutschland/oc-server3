@@ -1,11 +1,11 @@
 # `feature/ui-refresh` — change overview
 
-A one-page brief for pulling this branch into their existing
-ddev. Branch is 14 commits ahead of `origin/development` and touches
+A comprehensive brief for integrating this branch into an existing ddev.
+Branch is **95 commits ahead** of `origin/development` and touches
 mostly `htdocs_symfony/` plus three small portability artifacts under
 `.ddev/`. The legacy `htdocs/` tree is **not** modified.
 
-This branch lays groundwork for what is intended to become the
+This branch lays groundwork for what could become the
 **next-generation opencaching.de web application** — the eventual
 replacement for the legacy PHP frontend.
 
@@ -32,7 +32,7 @@ replacement for the legacy PHP frontend.
 - **Search caches** (`/search`): full-featured search with D/T sliders,
   Active/OC-only filters, Tabulator results grid, live map integration,
   select/export actions. Narrower, more responsive filter inputs.
-  Monospaced OC codes in results. Full German localization.
+  Full German localization.
 - **Search users** (`/user`): Tabulator-based user search with
   role-aware columns. Support staff see email, joined date, user ID;
   regular users see username only. Find/hide count badges for each user.
@@ -209,7 +209,7 @@ container.
 
 ### 4.1 Where the branch lives
 
-There is no PR yet. The branch lives on the contributor's fork:
+The branch lives on hxdimpf's fork:
 
 ```
 git@github.com:hxdimpf/oc-server3.git    feature/ui-refresh
@@ -308,8 +308,6 @@ Tabulator tables now render with professional alignment and typography:
   from readable text.
 - **Global alignment**: header and data rows align perfectly; no
   horizontal shift artifacts.
-- **Density tuned to GCxM standards**: compact rows, proper padding,
-  professional appearance.
 
 ### 5.4 Map and detail-page improvements
 
@@ -333,6 +331,36 @@ Tabulator tables now render with professional alignment and typography:
 - **Route rename**: `/backend` → `/backoffice` for semantic clarity
   across 17 files (routes, security rules, navbar, templates).
 
+#### API response standardization (`apiFetch` wrapper)
+
+Scattered fetch logic across page modules used inconsistent error handling:
+`res.ok` checks followed by `res.json().catch(() => {})` silently swallowed
+server errors (HTML on 500s, timeouts, etc.).
+
+New `helpers.js` exports `apiFetch(url, options)`:
+- Reads response as text first (catches non-JSON errors)
+- Attempts JSON parse; falls back to `{ _raw: text }` on failure
+- Throws Error with `.status` and `.body` on non-2xx
+- Unified across: `cacheApi.js`, `mapApi.js`, `cache.js`, `searchusers.js`,
+  `reportedcaches.js`
+
+**Result:** Server errors now propagate visibly; error handling is consistent
+and testable.
+
+#### Backend → Backoffice rename
+
+The `/backoffice/*` routes were still implemented as `Backend*` classes and
+`templates/backend/` paths. Naming mismatch created confusion.
+
+Systematic rename across:
+- 9 controller classes: `*ControllerBackend` → `*ControllerBackoffice`
+- Namespace: `Oc\Controller\Backend` → `Oc\Controller\Backoffice`
+- Template directory: `templates/backend/` → `templates/backoffice/`
+- Routing config: route scanner paths updated
+- MenuGenerator: removed orphaned kitchensink menu entry
+
+**Result:** Internal naming now matches URL semantics; onboarding is clearer.
+
 ---
 
 ## 6. Known issues / open items on this branch
@@ -348,12 +376,12 @@ Tabulator tables now render with professional alignment and typography:
 
 ---
 
-## 7. Will this become THE next-generation opencaching.de?
+## 7. Could this become THE next-generation opencaching.de?
 
-A frank self-assessment. This branch is **foundation work plus two
-flagship pages**, not a complete replacement.
+This branch could be the **foundation work plus some
+flagship pages**, not a replacement.
 
-### 6.1 Solid foundation — keep building on it
+### 7.1 Solid foundation — keep building on it
 
 - **Symfony 7.x backbone**: industry-standard, long-term maintainable.
 - **Page module loader pattern**: clean, scalable, zero ceremony to
@@ -370,7 +398,7 @@ flagship pages**, not a complete replacement.
   introduced later as a pure optimization, without rewriting code.
 - **No jQuery**: forward-looking, reduces dependency surface.
 
-### 6.2 Gaps to close before this can replace production
+### 7.2 Gaps to close before this can replace production
 
 - **Bundling / minification.** Without it, a cold page load fetches
   many small modules, blocking each subsequent import on round-trip
@@ -381,11 +409,14 @@ flagship pages**, not a complete replacement.
   every user, this needs a baseline before the first non-trivial
   rollout: PHPUnit on controllers, at minimum smoke tests on the
   page modules.
-- **Page coverage.** Two pages are ported (`/cache/{wp}`, `/livemap`).
-  Replacing the legacy frontend means home, search, profile, lists,
-  log lists, owner views, statistics, admin, registration, password
-  reset, account settings, notifications, and more. The pattern
-  scales, but the work to apply it is sizeable.
+- **Page coverage.** Eight core pages are fully implemented: landing page
+  (`/`), live map (`/livemap`), cache detail (`/cache/{wp}`), cache search
+  (`/caches/`), user search (`/user`), user profile (`/user/profile/{id}`),
+  new cache creation (`/cache/new`), and reported caches backoffice
+  (`/backoffice/reported-caches`). Replacing the legacy frontend entirely
+  means additional pages: lists, log lists, owner views, statistics,
+  registration, password reset, account settings, notifications, and more.
+  The pattern scales, but deploying the remaining pages is sizeable work.
 - **Doctrine migrations.** None on this branch. Any real schema work
   the new app introduces will need them; the precedent we set with
   the stored-procedure patch (kept under `.ddev/` as dev-only) is
@@ -405,10 +436,3 @@ flagship pages**, not a complete replacement.
   Symfony side needs structured logging, error reporting, and
   performance telemetry before it can stand on its own.
 
-### 6.3 Verdict
-
-The foundation is sound and the migration strategy (legacy-session
-bridge + page-by-page cutover) is realistic. The two pages on this
-branch demonstrate the pattern works. But this branch alone is not
-the next-gen product — it is the platform on which that product can
-be built. Treat §6.2 as the agenda for getting there.

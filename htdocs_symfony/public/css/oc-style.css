@@ -114,6 +114,10 @@
   --oc-accent:        #4da3e8;
   --oc-accent-active: #6bb5f0;
 
+  /* Sync Bootstrap primary to OC primary in dark mode */
+  --bs-primary:     #1a6eb5;
+  --bs-primary-rgb: 26, 110, 181;
+
   --oc-gray-100: #374757;
   --oc-gray-200: #475767;
   --oc-gray-300: #576777;
@@ -136,6 +140,13 @@
 body {
   color: var(--oc-text-primary);
   background-color: var(--oc-bg-body);
+}
+
+footer.footer {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  color: var(--oc-text-secondary);
+  border-top: 1px solid var(--oc-border);
 }
 
 a {
@@ -381,8 +392,130 @@ textarea::placeholder {
   background-color: var(--oc-bg-surface);
 }
 
+/* Bootstrap button dark mode — sync to OC primary */
+[data-theme="dark"] .btn-primary {
+  --bs-btn-bg:                var(--oc-primary);
+  --bs-btn-border-color:      var(--oc-primary);
+  --bs-btn-hover-bg:          var(--oc-accent);
+  --bs-btn-hover-border-color:var(--oc-accent);
+  --bs-btn-active-bg:         var(--oc-primary);
+  --bs-btn-active-border-color:var(--oc-primary);
+}
+[data-theme="dark"] .btn-outline-primary {
+  --bs-btn-color:              var(--oc-accent);
+  --bs-btn-border-color:       var(--oc-accent);
+  --bs-btn-hover-color:        #fff;
+  --bs-btn-hover-bg:           var(--oc-primary);
+  --bs-btn-hover-border-color: var(--oc-primary);
+  --bs-btn-active-color:       #fff;
+  --bs-btn-active-bg:          var(--oc-primary);
+  --bs-btn-active-border-color:var(--oc-primary);
+}
+
 /* Elevate navbar above Leaflet controls (z-index 1000) so dropdowns are never hidden */
 header.header {
   position: relative;
   z-index: 1030;
 }
+
+/* -----------------------------------------------------------------
+   Home page — 20 / 60 / 20 grid
+   ----------------------------------------------------------------- */
+.oc-home {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px);
+}
+.oc-home-side  { flex: 0 0 20%; min-width: 0; }
+.oc-home-main  { flex: 0 0 calc(60% - 2rem); min-width: 0; align-self: stretch; }
+
+/* Cards */
+.oc-card {
+  background-color: var(--oc-bg-surface);
+  border: 1px solid var(--oc-border);
+  color: var(--oc-text-primary);
+}
+.oc-card .card-header {
+  background-color: var(--oc-bg-elevated);
+  border-bottom: 1px solid var(--oc-border);
+  color: var(--oc-text-primary);
+  font-size: 0.875rem;
+}
+
+/* Center hero */
+.oc-home-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--oc-primary);
+  letter-spacing: -0.5px;
+}
+.oc-home-subtitle {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Stats row */
+.oc-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.oc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.oc-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--oc-primary);
+  line-height: 1;
+}
+.oc-stat-label {
+  font-size: 0.75rem;
+  color: var(--oc-text-secondary);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.oc-stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--oc-border);
+}
+
+/* Steps list (left tall card) */
+.oc-steps li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--oc-border);
+}
+.oc-steps li:last-child { border-bottom: none; }
+.oc-step-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--oc-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  margin-top: 1px;
+}
+
+/* Why list (right tall card) */
+.oc-why-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--oc-border);
+  font-size: 0.875rem;
+}
+.oc-why-list li:last-child { border-bottom: none; }
+.oc-why-list li i { flex-shrink: 0; margin-top: 0.2em; }

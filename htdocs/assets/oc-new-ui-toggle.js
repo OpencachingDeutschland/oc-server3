@@ -13,7 +13,7 @@
     '/map3.php': '/livemap', // Old "New map" → Symfony livemap
     '/search.php': '/caches/',
     '/livemap.php': '/livemap',
-    '/newcache.php': '/newcache',
+    '/newcache.php': '/cache/new',
     '/viewcache.php': '/cache', // Special: viewcache.php?wp=... → /cache/...
   };
 

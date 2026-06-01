@@ -349,7 +349,6 @@ class UniCacheBuilder
             // owner profile
             'owner' => [
                 'username'      => $ownerUsername,
-                'referenceCode' => $ownerUsername,
                 'userId'        => $ownerUserId,
                 'profileUrl'    => sprintf('/viewprofile.php?userid=%d', $ownerUserId),
                 'findCount'     => (int)($ownerStats['found'] ?? 0),
@@ -404,8 +403,7 @@ class UniCacheBuilder
             'wayLength'         => (float)$cache['way_length'],
             'needsMaintenance'  => (bool)$cache['needs_maintenance'],
             'listingOutdated'   => (bool)$cache['listing_outdated'],
-            'myLogpw'           => $noteRow['logpw'] ?? '',
-            'logpw'             => $logpw,
+            'logpw' => $logpw,
 
             // context
             '_context' => [

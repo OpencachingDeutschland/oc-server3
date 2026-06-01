@@ -794,14 +794,6 @@ function handleLogTextarea() {
       }
     });
 
-    editLogCheckbox?.addEventListener('change', () => {
-      if (mode === 'newLog') {
-        setupEditModeUI(log);
-        if (editLogControls) editLogControls.style.visibility = 'hidden';
-      } else {
-        setupNewModeUI(log);
-      }
-    });
   } else {
     setupNewModeUI(log);
     if (editLogCheckboxWrapper) editLogCheckboxWrapper.style.display = 'none';
@@ -825,8 +817,24 @@ function handleLogTextarea() {
     });
   }
 
+  // Always register — re-read current log at event time, never use stale closure.
+  // Bug: when page loads with zero logs, log=null and the checkbox appeared after
+  // the first POST but had no listener, so mode stayed 'editLog' and the next
+  // submit tried PUT on null.id.
+  editLogCheckbox?.addEventListener('change', () => {
+    const activeLog = getMyNewestLog(logs);
+    if (mode === 'newLog') {
+      if (activeLog) setupEditModeUI(activeLog);
+      if (editLogControls) editLogControls.style.visibility = 'hidden';
+    } else {
+      setupNewModeUI(activeLog);
+    }
+  });
+
   editLogSave?.addEventListener('click', async () => {
-    await updateLog(log, editLogSave, mode);
+    // Re-read at click time: stale closure had null when page loaded with no logs.
+    const activeLog = mode === 'newLog' ? null : getMyNewestLog(logs);
+    await updateLog(activeLog, editLogSave, mode);
   });
 }
 

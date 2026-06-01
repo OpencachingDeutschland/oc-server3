@@ -399,6 +399,15 @@ textarea::placeholder {
   background-color: var(--oc-bg-surface);
 }
 
+/* Bootstrap popovers — always theme-aware */
+.popover {
+  --bs-popover-bg:           var(--oc-bg-elevated);
+  --bs-popover-body-color:   var(--oc-text-primary);
+  --bs-popover-border-color: var(--oc-border);
+  --bs-popover-header-bg:    var(--oc-bg-surface);
+  --bs-popover-header-color: var(--oc-text-primary);
+}
+
 /* Bootstrap button dark mode — sync to OC primary */
 [data-theme="dark"] .btn-primary {
   --bs-btn-bg:                var(--oc-primary);

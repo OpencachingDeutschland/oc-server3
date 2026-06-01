@@ -47,14 +47,13 @@ export const waypointTypes = {
 };
 
 // Merge icon path data into cache types.
-// iconPaths keys are GC type IDs. OC-only types (5,7,8,9,10) overlap with
-// different GC types and must not inherit wrong pictograms — except Webcam
-// where GC type 11 has a proper icon we reuse for OC type 5.
-const OC_ONLY_TYPES = new Set([5, 7, 8, 9, 10]);
+// GC-conflicting IDs have been removed from iconPaths so no guard is needed.
+// Type 5 (Webcam) has no direct iconPaths entry — it reuses the camera-lens
+// icon stored under ID 11.
 for (const [id, icon] of Object.entries(iconPaths)) {
-  if (cacheTypes[id] && !OC_ONLY_TYPES.has(Number(id))) cacheTypes[id].icon = icon;
+  if (cacheTypes[id]) cacheTypes[id].icon = icon;
 }
-if (iconPaths[11]) cacheTypes[5].icon = iconPaths[11]; // OC Webcam ← GC 11
+if (iconPaths[11]) cacheTypes[5].icon = iconPaths[11]; // OC Webcam uses camera-lens icon
 
 /**
  * Get cache type definition with fallback to unknown type.

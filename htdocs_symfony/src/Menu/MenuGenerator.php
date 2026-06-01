@@ -91,7 +91,6 @@ class MenuGenerator
             $this->addMenuItem($menu['menuSupport'], 'menuSupportSearch',   $this->translator->trans('Search users'),    'app_user_index',                  'icon', 'fas fa-search');
             if ($this->security->isGranted('ROLE_TEAM')) {
                 $this->addMenuItem($menu['menuSupport'], 'menuSupportRoles',     $this->translator->trans('DEV Roles'),       'backoffice_roles_index',             'icon', 'fas fa-user-tag');
-                $this->addMenuItem($menu['menuSupport'], 'menuKitchensink',      $this->translator->trans('DEV Kitchensink'), 'app_kitchensink_index',           'icon', 'fab fa-css3');
             }
         }
 

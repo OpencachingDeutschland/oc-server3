@@ -5,6 +5,8 @@
  * cacheApi.js — backend bindings for cache-related pages (non-map).
  ***************************************************************************/
 
+import { apiFetch } from './helpers.js';
+
 export async function searchCaches({
   q = '', type = 0, minDiff = 1.0, maxDiff = 5.0, activeOnly = true, ocOnly = false,
   lat = null, lon = null, radius = 0,
@@ -16,9 +18,7 @@ export async function searchCaches({
     params.set('radius', radius);
   }
   try {
-    const res = await fetch('/api/caches/search?' + params);
-    if (!res.ok) return [];
-    const data = await res.json();
+    const data = await apiFetch('/api/caches/search?' + params);
     return data.items || [];
   } catch (err) {
     console.log('searchCaches:', err);

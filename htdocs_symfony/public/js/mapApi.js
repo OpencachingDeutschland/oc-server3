@@ -5,14 +5,14 @@
  * mapApi.js — backend bindings for the map modules.
  ***************************************************************************/
 
+import { apiFetch } from './helpers.js';
+
 // ---------------------------------------------------------------
 // City search → Nominatim via Symfony backend.
 
 export async function findCity(q) {
   try {
-    const res = await fetch('/api/geocode/city?q=' + encodeURIComponent(q));
-    if (!res.ok) return [];
-    return await res.json();
+    return await apiFetch('/api/geocode/city?q=' + encodeURIComponent(q));
   } catch (err) {
     console.log('findCity:', err);
     return [];
@@ -41,9 +41,7 @@ export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
   if (filter?.maxDiff) params.set('maxDiff', filter.maxDiff);
 
   try {
-    const res = await fetch('/api/caches/live?' + params.toString());
-    if (!res.ok) return [];
-    const data = await res.json();
+    const data = await apiFetch('/api/caches/live?' + params.toString());
     const items = data.items || [];
     return items.map(p => ({
       ...p,
@@ -64,9 +62,7 @@ export async function ocSearchByBbox(s, w, n, e, skip, _take, filter) {
 export async function getCacheWPs(referenceCode) {
   if (!referenceCode) return null;
   try {
-    const res = await fetch('/api/caches/waypoints?wp=' + encodeURIComponent(referenceCode));
-    if (!res.ok) return null;
-    const data = await res.json();
+    const data = await apiFetch('/api/caches/waypoints?wp=' + encodeURIComponent(referenceCode));
     const wpts = (data.wpts || []).map(w => ({
       ...w,
       coordinates: { latitude: w.lat, longitude: w.lon },

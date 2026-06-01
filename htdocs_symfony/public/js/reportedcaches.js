@@ -1,5 +1,6 @@
 import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.js';
 import { t } from './i18n.js';
+import { apiFetch } from './helpers.js';
 
 let table = null;
 
@@ -16,9 +17,7 @@ async function load() {
     setStatus(t('Searching…'));
 
     try {
-        const res = await fetch('/backoffice/api/reported-caches?' + new URLSearchParams({ status }));
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
+        const data = await apiFetch('/backoffice/api/reported-caches?' + new URLSearchParams({ status }));
         const items = data.items || [];
 
         setStatus(items.length

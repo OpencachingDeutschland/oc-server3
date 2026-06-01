@@ -1,5 +1,6 @@
 import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.js';
 import { t } from './i18n.js';
+import { apiFetch } from './helpers.js';
 
 const isSupport = document.getElementById('userSearchContainer')?.dataset.isSupport === '1';
 
@@ -19,9 +20,7 @@ async function runSearch() {
     setStatus(t('Searching…'));
 
     try {
-        const res = await fetch('/api/users/search?' + new URLSearchParams({ q }));
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
+        const data = await apiFetch('/api/users/search?' + new URLSearchParams({ q }));
         const items = data.items || [];
 
         setStatus(items.length

@@ -144,6 +144,26 @@ export function showFeedback(msg) {
 }
 
 // -------------------------------------
+// apiFetch — safe fetch wrapper for internal OC API calls
+// -------------------------------------
+
+/**
+ * Fetches a URL, reads the body as text, attempts JSON parse.
+ * Throws on non-2xx with an Error carrying .status and .body.
+ * Returns parsed JSON (or {} for empty bodies) on success.
+ */
+export async function apiFetch(url, options = {}) {
+  const res  = await fetch(url, { credentials: 'same-origin', ...options });
+  const text = await res.text();
+  const data = text.length
+    ? (() => { try { return JSON.parse(text); } catch { return { _raw: text }; } })()
+    : {};
+  if (!res.ok)
+    throw Object.assign(new Error(data?.error || `HTTP ${res.status}`), { status: res.status, body: data });
+  return data;
+}
+
+// -------------------------------------
 // File Download Helper
 // -------------------------------------
 

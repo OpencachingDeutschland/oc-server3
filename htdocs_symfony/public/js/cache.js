@@ -29,6 +29,7 @@ import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.
 import { coords2Dm, coords2LatLon } from './coords.js';
 import { ocToUniCacheWP } from './uniCache.js';
 import { initPageMap } from './pageMap.js';
+import { apiFetch } from './helpers.js';
 
 // -----------------------------------------------------------------
 // OC log type metadata (matches okapiLogTypeNames in CachesController)
@@ -236,9 +237,7 @@ function augmentForRender(uc, oc, aux) {
 async function loadCache(code) {
   let response;
   try {
-    const res = await fetch(`/api/cache/${code}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    response = await res.json();
+    response = await apiFetch(`/api/cache/${code}`);
   } catch (err) {
     showError(`Failed to load cache: ${err.message}`);
     for (const id of ['cache-skeleton', 'description-skeleton', 'logsLoading']) {
@@ -603,12 +602,11 @@ async function handleSaveCoords() {
   const lon    = parseFloat(parsed.longitude);
 
   try {
-    const res = await fetch(`/api/cache/${gc.referenceCode}/coords`, {
+    await apiFetch(`/api/cache/${gc.referenceCode}/coords`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ lat, lon }),
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     gc.hasCC = raw !== '';
     gc.lat = gc.hasCC ? lat : gc._origLat;
@@ -655,12 +653,11 @@ function handleLogPasswdInput() {
 async function handleSaveLogPasswd() {
   if (!logPasswdChanged) return;
   try {
-    const res = await fetch(`/api/cache/${gc.referenceCode}/logpw`, {
+    await apiFetch(`/api/cache/${gc.referenceCode}/logpw`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ logpw: newLogPasswd.trim() }),
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     gc.logpw = newLogPasswd.trim();
     oldLogPasswd = newLogPasswd;
     logPasswdChanged = false;
@@ -685,12 +682,11 @@ async function handleSavePCN() {
   if (!pcnChanged) return;
 
   try {
-    const res = await fetch(`/api/cache/${gc.referenceCode}/note`, {
+    await apiFetch(`/api/cache/${gc.referenceCode}/note`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ text: newPCN.trim() }),
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     gc.hasPCN = newPCN.trim().length > 0;
     oldPCN = newPCN;
@@ -945,25 +941,17 @@ async function updateLog(log, saveBtn, currentMode) {
   };
 
   try {
-    let res;
-    if (isNew) {
-      res = await fetch(`/api/cache/${wp}/log`, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload),
-      });
-    } else {
-      res = await fetch(`/api/cache/${wp}/log/${log.id}`, {
-        method:  'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload),
-      });
-    }
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      throw new Error(body.error || `HTTP ${res.status}`);
-    }
-    const json = await res.json().catch(() => ({}));
+    const json = isNew
+      ? await apiFetch(`/api/cache/${wp}/log`, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        })
+      : await apiFetch(`/api/cache/${wp}/log/${log.id}`, {
+          method:  'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(payload),
+        });
 
     if (saveBtn) {
       saveBtn.textContent = isNew ? 'Posted!' : 'Saved!';
@@ -1125,10 +1113,9 @@ async function deleteLog(log) {
   }
 
   try {
-    const res = await fetch(`/api/cache/${gc.referenceCode}/log/${log.id}`, {
+    await apiFetch(`/api/cache/${gc.referenceCode}/log/${log.id}`, {
       method: 'DELETE',
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const idx = logs.findIndex(l => l.id === log.id);
     const deletedType = idx >= 0 ? logs[idx].type : null;

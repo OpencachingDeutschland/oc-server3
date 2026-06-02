@@ -1,0 +1,47 @@
+---
+# Ansible variables for opencaching.de test system.
+# Only the domain and repo parameters change between test and production.
+
+# ── Domains (the ONLY thing that changes test → prod) ──────────────
+oc3_domain: "oc3.cirasi.de"            # legacy PHP app
+oc4_domain: "oc4.cirasi.de"            # Symfony app
+
+# ── Paths ──────────────────────────────────────────────────────────
+web_root: "/var/www/oc"
+app_root: "/var/www/oc/oc-server3"
+db_dump_file: "files/db_dump_dev.sql.gz"
+
+# ── Git ────────────────────────────────────────────────────────────
+git_repo: "git@github.com:hxdimpf/oc-server3.git"
+git_branch: "feature/ui-refresh"
+# OKAPI: switch to fork with PRs by changing okapi_repo_url.
+# Default is upstream (public, no auth). Fork needs deploy key.
+okapi_repo_url: "https://github.com/opencaching/okapi"
+# okapi_repo_url: "git@github.com:hxdimpf/okapi.git"  # fork with PRs
+
+# ── System ─────────────────────────────────────────────────────────
+web_user: "www-data"
+web_group: "www-data"
+php_version: "8.4"
+
+# ── Database ───────────────────────────────────────────────────────
+# For a test system with a local MariaDB install.
+# If using a remote DB, comment this and set db_local to false.
+db_local: true
+db_name: "oc"
+db_user: "oc"
+db_pass: "oc"
+
+# Remote DB fallback (used when db_local=false)
+# db_host: "ocde.example.com"
+# db_port: 3306
+
+# ── App Settings ───────────────────────────────────────────────────
+oc_node_id: 4
+oc_waypoint_prefix: "OC"
+oc_cookie_name: "ocdevelopment"
+oc_cookie_domain: ".cirasi.de"
+oc_default_locale: "DE"
+oc_page_title: "OPENCACHING.de"
+oc_mail_from: "noreply@test.opencaching.de"
+oc_w3w_apikey: "X27PDW41"

@@ -1,0 +1,359 @@
+---
+# opencaching.de test system — full provisioning playbook
+# Targets: Debian 12 (bookworm), bare-metal Apache + PHP-FPM + MariaDB client
+# After verification, this replaces manual steps 1–9 from testsystem.md.
+
+- name: Provision opencaching.de test system
+  hosts: oc_test
+  become: true
+  vars_files:
+    - vars/main.yml
+  vars:
+    # These two are the only things that change between test and prod:
+    # oc3_domain: "oc3.example.de"
+    # oc4_domain: "oc4.example.de"
+
+  tasks:
+
+    # ── Phase 1: Base System ───────────────────────────────────────────
+
+    - name: Update apt cache
+      apt: update_cache=yes cache_valid_time=3600
+
+    - name: Install base packages
+      apt:
+        name:
+          - apache2
+          - php{{ php_version }}
+          - php{{ php_version }}-cli
+          - php{{ php_version }}-fpm
+          - php{{ php_version }}-gd
+          - php{{ php_version }}-imagick
+          - php{{ php_version }}-intl
+          - php{{ php_version }}-mbstring
+          - php{{ php_version }}-mysql
+          - php{{ php_version }}-curl
+          - php{{ php_version }}-apcu
+          - php{{ php_version }}-redis
+          - php{{ php_version }}-memcached
+          - php{{ php_version }}-soap
+          - php{{ php_version }}-bcmath
+          - php{{ php_version }}-ldap
+          - php{{ php_version }}-igbinary
+          - php{{ php_version }}-msgpack
+          - php{{ php_version }}-xml
+          - php{{ php_version }}-zip
+          - mariadb-client
+          - git
+          - composer
+          - redis-server
+          - memcached
+          - unzip
+          - curl
+          - ca-certificates
+          - sudo
+          - rsync
+        state: present
+
+    - name: Enable Apache modules
+      apache2_module:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - rewrite
+        - proxy
+        - proxy_fcgi
+        - headers
+        - expires
+        - ssl
+        - deflate
+        - mime
+        - env
+        - setenvif
+
+    - name: Disable mod_php (we use PHP-FPM)
+      apache2_module:
+        name: php{{ php_version }}
+        state: absent
+      ignore_errors: true
+
+    - name: Enable PHP-FPM config in Apache
+      command: a2enconf php{{ php_version }}-fpm
+      args:
+        creates: /etc/apache2/conf-enabled/php{{ php_version }}-fpm.conf
+
+    - name: Increase Apache request field size (large cookie headers)
+      lineinfile:
+        path: /etc/apache2/apache2.conf
+        line: "LimitRequestFieldSize 16380"
+        insertafter: EOF
+
+    - name: Copy SSH deploy keys for GitHub repos
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: "0600"
+      loop:
+        - src: "files/oc_testsystem_deploy"
+          dest: /root/.ssh/id_ed25519_oc_deploy
+        - src: "files/oc_testsystem_okapi"
+          dest: /root/.ssh/id_ed25519_okapi_deploy
+
+    - name: Configure SSH for GitHub (multi-key)
+      copy:
+        content: |
+          Host github.com
+            HostName github.com
+            IdentityFile /root/.ssh/id_ed25519_oc_deploy
+            IdentityFile /root/.ssh/id_ed25519_okapi_deploy
+            IdentitiesOnly yes
+            User git
+        dest: /root/.ssh/config
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Start and enable services
+      systemd:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - apache2
+        - php{{ php_version }}-fpm
+        - redis-server
+        - memcached
+
+    # ── Phase 2: Directory Layout ──────────────────────────────────────
+
+    - name: Create web root
+      file:
+        path: "{{ web_root }}"
+        state: directory
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0755"
+
+    - name: Clone repository
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ app_root }}"
+        version: "{{ git_branch }}"
+        accept_hostkey: true
+        key_file: /root/.ssh/id_ed25519_oc_deploy
+      become_user: "{{ web_user }}"
+
+    # ── Phase 3: Database ──────────────────────────────────────────────
+
+    - name: Create database
+      mysql_db:
+        name: "{{ db_name }}"
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+      when: db_local is defined and db_local
+
+    - name: Import database dump
+      mysql_db:
+        name: "{{ db_name }}"
+        state: import
+        target: "{{ db_dump_file }}"
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+      when: db_dump_file is defined and db_dump_file != ""
+
+    - name: Apply sp_update_logstat patch
+      mysql_db:
+        name: "{{ db_name }}"
+        state: import
+        target: files/sp_update_logstat.sql
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+      when: db_local is defined and db_local
+
+    # ── Phase 4: Legacy App (oc3) Config ───────────────────────────────
+
+    - name: Switch smarty repo from SSH to HTTPS (public, no auth needed)
+      composer:
+        command: config
+        arguments: "repositories.smarty vcs https://github.com/OpencachingDeutschland/smarty"
+        working_dir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Composer install — legacy app
+      composer:
+        command: install
+        working_dir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Deploy legacy settings.inc.php
+      template:
+        src: templates/settings.inc.php.j2
+        dest: "{{ app_root }}/htdocs/config2/settings.inc.php"
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0644"
+
+    - name: Deploy legacy parameters.yml
+      template:
+        src: templates/parameters.yml.j2
+        dest: "{{ app_root }}/htdocs/app/config/parameters.yml"
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0644"
+
+    # ── Phase 5: Symfony App (oc4) Config ──────────────────────────────
+
+    - name: Composer install — symfony app
+      composer:
+        command: install
+        working_dir: "{{ app_root }}/htdocs_symfony"
+      become_user: "{{ web_user }}"
+
+    - name: Deploy Symfony .env.local
+      template:
+        src: templates/env.local.j2
+        dest: "{{ app_root }}/htdocs_symfony/.env.local"
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0644"
+
+    # ── Phase 6: Apache Vhosts ─────────────────────────────────────────
+
+    - name: Deploy oc3 vhost
+      template:
+        src: templates/oc3-vhost.conf.j2
+        dest: "/etc/apache2/sites-available/{{ oc3_domain }}.conf"
+      notify: reload apache
+
+    - name: Deploy oc4 vhost
+      template:
+        src: templates/oc4-vhost.conf.j2
+        dest: "/etc/apache2/sites-available/{{ oc4_domain }}.conf"
+      notify: reload apache
+
+    - name: Enable vhosts
+      command: a2ensite "{{ item }}"
+      args:
+        creates: "/etc/apache2/sites-enabled/{{ item }}.conf"
+      loop:
+        - "{{ oc3_domain }}"
+        - "{{ oc4_domain }}"
+      notify: reload apache
+
+    - name: Disable default vhost
+      command: a2dissite 000-default
+      args:
+        removes: /etc/apache2/sites-enabled/000-default.conf
+      ignore_errors: true
+      notify: reload apache
+
+    # ── Phase 7: Post-install Scripts ──────────────────────────────────
+
+    - name: Run legacy dbupdate.php
+      command: php bin/dbupdate.php
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Run OKAPI install
+      uri:
+        url: "https://{{ oc3_domain }}/okapi/update?install=true"
+        validate_certs: false
+      ignore_errors: true
+
+    - name: Run stored procedures maintenance
+      command: php maintain.php
+      args:
+        chdir: "{{ app_root }}/htdocs/sql/stored-proc"
+      become_user: "{{ web_user }}"
+
+    - name: Run dbsv-update.php (schema versioning)
+      command: php bin/dbsv-update.php
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Run db-import-static.php (static reference data)
+      command: php bin/db-import-static.php
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Import static data SQL (idempotent)
+      shell: |
+        for f in sql/static-data/*.sql; do
+          mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }} < "$f" 2>/dev/null || true
+        done
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+      when: db_local is defined and db_local
+
+    - name: Run OKAPI update
+      command: php bin/okapi-update.php
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Run legacy Doctrine migrations
+      command: php bin/console doctrine:migrations:migrate -n
+      args:
+        chdir: "{{ app_root }}/htdocs"
+      become_user: "{{ web_user }}"
+
+    - name: Run Symfony Doctrine migrations
+      command: php bin/console doctrine:migrations:migrate -n
+      args:
+        chdir: "{{ app_root }}/htdocs_symfony"
+      become_user: "{{ web_user }}"
+
+    - name: Set cache/log dirs writable
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0777"
+        recurse: true
+      loop:
+        - "{{ app_root }}/htdocs/var"
+        - "{{ app_root }}/htdocs_symfony/var"
+
+    - name: Warm up Symfony cache
+      command: php bin/console cache:clear
+      args:
+        chdir: "{{ app_root }}/htdocs_symfony"
+      become_user: "{{ web_user }}"
+
+    # ── Phase 8: Cron Jobs ─────────────────────────────────────────────
+
+    - name: Install cron jobs
+      cron:
+        name: "{{ item.name }}"
+        job: "{{ item.job }}"
+        minute: "{{ item.minute | default('*/10') }}"
+        user: "{{ web_user }}"
+        state: present
+      loop:
+        - name: "oc-legacy-dbmaintain"
+          job: "cd {{ app_root }}/htdocs && php bin/dbmaintain.php > /dev/null 2>&1"
+          minute: "*/15"
+
+    - name: Install PHP session cleanup cron
+      copy:
+        content: |
+          # Clean up old PHP sessions every 30 minutes
+          09,39 * * * * {{ web_user }} [ -x /usr/lib/php/sessionclean ] && /usr/lib/php/sessionclean
+        dest: /etc/cron.d/php-sessionclean
+        mode: "0644"
+
+    - name: Reload Apache
+      systemd:
+        name: apache2
+        state: reloaded
+
+  handlers:
+    - name: reload apache
+      systemd:
+        name: apache2
+        state: reloaded

@@ -74,3 +74,6 @@ htdocs/app/config/swiftmailer.yaml.tpl
 /htdocs/app/.preload.php
 
 /docker-compose.override.yml
+
+# Local-only — not part of the project deliverable
+ansible/

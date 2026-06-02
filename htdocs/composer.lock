@@ -3028,12 +3028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hxdimpf/okapi.git",
-                "reference": "6edd7aebfeb21c8220d7c8d311a7469119fd886c"
+                "reference": "b48f9c3e159d48776c1e313f63949caaae12ce99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hxdimpf/okapi/zipball/6edd7aebfeb21c8220d7c8d311a7469119fd886c",
-                "reference": "6edd7aebfeb21c8220d7c8d311a7469119fd886c",
+                "url": "https://api.github.com/repos/hxdimpf/okapi/zipball/b48f9c3e159d48776c1e313f63949caaae12ce99",
+                "reference": "b48f9c3e159d48776c1e313f63949caaae12ce99",
                 "shasum": ""
             },
             "require": {
@@ -3048,7 +3048,7 @@
             "support": {
                 "source": "https://github.com/hxdimpf/okapi/tree/oc4-combined"
             },
-            "time": "2026-06-02T19:17:54+00:00"
+            "time": "2026-06-02T21:46:25+00:00"
         },
         {
             "name": "psr/cache",

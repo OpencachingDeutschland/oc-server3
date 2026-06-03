@@ -70,18 +70,8 @@
         newPath = '/cache/' + params.get('wp');
       }
 
-      // Determine the Symfony (new UI) domain.
-      // 1. <meta name="symfony-domain"> takes precedence (set in template)
-      // 2. oc3.<domain> → oc4.<domain> (convention for test/prod)
-      // 3. Same domain as legacy (fallback)
-      function getSymfonyDomain() {
-        const meta = document.querySelector('meta[name="symfony-domain"]');
-        if (meta && meta.content) return meta.content;
-        const host = window.location.hostname;
-        if (host.startsWith('oc3.')) return host.replace('oc3.', 'oc4.');
-        return host;
-      }
-      const newDomain = window.location.protocol + '//' + getSymfonyDomain();
+      // Redirect to try-opencaching.ddev.site (where Symfony new UI lives)
+      const newDomain = 'https://try-opencaching.ddev.site';
       const newParams = new URLSearchParams(window.location.search);
       newParams.set('from', 'legacy');
 

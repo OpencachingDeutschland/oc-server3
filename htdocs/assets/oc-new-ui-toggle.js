@@ -68,13 +68,6 @@
       // Special handling for viewcache.php?wp=OC123AB → /cache/OC123AB
       if (path === '/viewcache.php' && params.has('wp')) {
         newPath = '/cache/' + params.get('wp');
-      } else if (path === '/viewcache.php' && params.has('cacheid')) {
-        // Only have numeric cacheid — try to find OC code in page
-        var bodyText = document.body ? document.body.innerText : '';
-        var ocMatch = bodyText.match(/\bOC[0-9A-F]{4,6}\b/);
-        if (ocMatch) {
-          newPath = '/cache/' + ocMatch[0];
-        }
       }
 
       // Determine the Symfony (new UI) domain.

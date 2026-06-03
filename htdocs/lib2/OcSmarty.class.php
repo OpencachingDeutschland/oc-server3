@@ -173,6 +173,7 @@ class OcSmarty extends Smarty
         $optn['template']['locale'] = $opt['template']['locale'];
         $optn['template']['style'] = $opt['template']['style'];
         $optn['template']['country'] = $login->getUserCountry();
+        $optn['new_ui']['domain'] = $opt['new_ui']['domain'] ?? '';
         $optn['page']['subtitle1'] = isset($opt['locale'][$locale]['page']['subtitle1']) ? $opt['locale'][$locale]['page']['subtitle1'] : $opt['page']['subtitle1'];
         $optn['page']['subtitle2'] = isset($opt['locale'][$locale]['page']['subtitle2']) ? $opt['locale'][$locale]['page']['subtitle2'] : $opt['page']['subtitle2'];
         $optn['page']['sitename'] = $opt['page']['sitename'];

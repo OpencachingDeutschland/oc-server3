@@ -84,7 +84,7 @@
       // set by the legacy template from server-side configuration.
       // Falls back to same domain if the meta tag is absent.
       var meta = document.querySelector('meta[name="symfony-domain"]');
-      var symfonyHost = meta ? meta.content : window.location.hostname;
+      var symfonyHost = (meta && meta.content) ? meta.content : window.location.hostname;
       const newDomain = window.location.protocol + '//' + symfonyHost;
       const newParams = new URLSearchParams(window.location.search);
       newParams.set('from', 'legacy');

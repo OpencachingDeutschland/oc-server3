@@ -28,6 +28,8 @@
     <base href="/"/>
 
     <link rel="SHORTCUT ICON" href="favicon.ico"/>
+    {* New UI (Symfony) domain for oc-new-ui-toggle.js — config-driven, never hardcoded *}
+    <meta name="symfony-domain" content="{$opt.new_ui.domain|default:''}"/>
     <link rel="apple-touch-icon" href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-iphone.png"/>
     <link rel="apple-touch-icon" sizes="72x72"
           href="resource2/{$opt.template.style}/images/oclogo/apple-touch-icon-ipad.png"/>

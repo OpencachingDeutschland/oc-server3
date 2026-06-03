@@ -65,13 +65,18 @@
       // Build the new URL
       let newPath = symfonyPath;
 
-      // Resolve cache path: prefer wp=OC code, else extract from page DOM
+      // Resolve cache path: prefer wp=OC code, else extract from page DOM.
+      // If neither is available (e.g. non-OC foreign caches), skip redirect.
       if (path === '/viewcache.php' || path === '/viewcache') {
         if (params.has('wp')) {
           newPath = '/cache/' + params.get('wp');
         } else if (params.has('cacheid')) {
           var ocMatch = document.body && document.body.innerText.match(/\bOC[0-9A-F]{4,6}\b/);
-          if (ocMatch) newPath = '/cache/' + ocMatch[0];
+          if (ocMatch) {
+            newPath = '/cache/' + ocMatch[0];
+          } else {
+            return; // can't resolve to an OC code, stay on legacy page
+          }
         }
       }
 

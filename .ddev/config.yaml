@@ -1,7 +1,7 @@
 name: opencaching
 type: symfony
 docroot: ./htdocs/
-php_version: "8.4"
+php_version: "8.2"
 webserver_type: apache-fpm
 xdebug_enabled: false
 additional_hostnames:
@@ -21,7 +21,7 @@ hooks:
     - exec: cp htdocs_symfony/.env.local_dist htdocs_symfony/.env.local
     - exec: "mysql db < /mnt/ddev_config/db-patches/sp_update_logstat.sql"
       service: db
-    - exec: "grep -q 'php_admin_value\\[error_reporting\\]' /etc/php/8.4/fpm/pool.d/www.conf || echo 'php_admin_value[error_reporting] = 22527' >> /etc/php/8.4/fpm/pool.d/www.conf && service php8.4-fpm reload"
+    - exec: "grep -q 'php_admin_value\\[error_reporting\\]' /etc/php/8.2/fpm/pool.d/www.conf || echo 'php_admin_value[error_reporting] = 22527' >> /etc/php/8.2/fpm/pool.d/www.conf && service php8.2-fpm reload"
 
 # Key features of DDEV's config.yaml:
 

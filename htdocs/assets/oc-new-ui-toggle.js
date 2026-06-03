@@ -65,13 +65,22 @@
       // Build the new URL
       let newPath = symfonyPath;
 
-      // Special handling for viewcache.php?wp=OC123AB → /cache/OC123AB
-      if (path === '/viewcache.php' && params.has('wp')) {
-        newPath = '/cache/' + params.get('wp');
+      // Resolve cache path: prefer wp=OC code, else extract from page DOM
+      if (path === '/viewcache.php' || path === '/viewcache') {
+        if (params.has('wp')) {
+          newPath = '/cache/' + params.get('wp');
+        } else if (params.has('cacheid')) {
+          var ocMatch = document.body && document.body.innerText.match(/\bOC[0-9A-F]{4,6}\b/);
+          if (ocMatch) newPath = '/cache/' + ocMatch[0];
+        }
       }
 
-      // Redirect to try-opencaching.ddev.site (where Symfony new UI lives)
-      const newDomain = 'https://try-opencaching.ddev.site';
+      // Determine the Symfony (new UI) domain from a <meta> tag
+      // set by the legacy template from server-side configuration.
+      // Falls back to same domain if the meta tag is absent.
+      var meta = document.querySelector('meta[name="symfony-domain"]');
+      var symfonyHost = meta ? meta.content : window.location.hostname;
+      const newDomain = window.location.protocol + '//' + symfonyHost;
       const newParams = new URLSearchParams(window.location.search);
       newParams.set('from', 'legacy');
 

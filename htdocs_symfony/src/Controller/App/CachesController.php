@@ -912,8 +912,8 @@ class CachesController extends AbstractController
         // are filled by trigger `cacheLogsBeforeInsert`. picture has no default — set it explicitly.
         try {
             $this->connection->executeStatement(
-                'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture)
-                 VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0)',
+                'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
+                 VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
                 [$cacheId, $userId, $type, $date, $text]
             );
         } catch (\Exception $e) {

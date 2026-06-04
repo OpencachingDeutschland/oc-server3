@@ -66,6 +66,7 @@ class SearchController extends AbstractController
                 c.status,
                 u.username      AS ownerAlias,
                 u.username      AS ownerCode,
+                c.user_id       AS userId,
                 c.date_created  AS publishedDate,
                 IFNULL(sc.toprating, 0) AS favoritePoints,
                 IFNULL(sc.found, 0)     AS findCount,

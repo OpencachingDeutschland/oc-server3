@@ -211,4 +211,50 @@ class CachesAttributesRepository extends ServiceEntityRepository
 
         return $entity;
     }
+
+    // ── Extended query methods (CachesRepository refactor) ─────────────
+
+    /** @throws Exception */
+    public function fetchAttributesWithIcons(int $cacheId): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('ca.id', 'ca.name', 'ca.icon')
+            ->from('caches_attributes', 'cxa')
+            ->join('cxa', 'cache_attrib', 'ca', 'cxa.attrib_id = ca.id')
+            ->where('cxa.cache_id = :cacheId')
+            ->orderBy('ca.id')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchAttribIds(int $cacheId): array
+    {
+        return array_column(
+            $this->connection->createQueryBuilder()
+                ->select('attrib_id')
+                ->from('caches_attributes')
+                ->where('cache_id = :cacheId')
+                ->setParameter('cacheId', $cacheId)
+                ->executeQuery()
+                ->fetchAllAssociative(),
+            'attrib_id'
+        );
+    }
+
+    /** @throws Exception */
+    public function replaceCacheAttributes(int $cacheId, array $attribIds): void
+    {
+        $this->connection->executeStatement(
+            'DELETE FROM caches_attributes WHERE cache_id = ?',
+            [$cacheId]
+        );
+        foreach ($attribIds as $attribId) {
+            $this->connection->insert('caches_attributes', [
+                'cache_id'  => $cacheId,
+                'attrib_id' => $attribId,
+            ]);
+        }
+    }
 }

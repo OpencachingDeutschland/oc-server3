@@ -350,4 +350,115 @@ class CacheLogsRepository extends ServiceEntityRepository
 
         return $entity;
     }
+
+    // ── Extended query methods (CachesRepository refactor) ─────────────
+
+    /** @throws Exception */
+    public function fetchLogsByCacheId(int $cacheId, int $limit = 30): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select(
+                'cl.id', 'cl.uuid', 'cl.type', 'lt.en AS type_name',
+                "DATE_FORMAT(cl.date, '%Y-%m-%d') AS date",
+                'cl.text', 'cl.text_html', 'cl.user_id',
+                'u.username'
+            )
+            ->from(self::TABLE, 'cl')
+            ->join('cl', 'user', 'u', 'cl.user_id = u.user_id')
+            ->leftJoin('cl', 'log_types', 'lt', 'cl.type = lt.id')
+            ->where('cl.cache_id = :cacheId')
+            ->andWhere('cl.gdpr_deletion = 0')
+            ->orderBy('cl.date', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchForAuth(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'user_id', 'cache_id')
+            ->from(self::TABLE)
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function countDuplicatesByUserAndType(int $cacheId, int $userId, int $type, ?int $excludeLogId): int
+    {
+        $qb = $this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from(self::TABLE)
+            ->where('cache_id = :cacheId')
+            ->andWhere('user_id = :userId')
+            ->andWhere('type = :type')
+            ->setParameters([
+                'cacheId' => $cacheId,
+                'userId'  => $userId,
+                'type'    => $type,
+            ]);
+
+        if ($excludeLogId !== null) {
+            $qb->andWhere('id <> :excludeId')
+               ->setParameter('excludeId', $excludeLogId);
+        }
+
+        return (int)$qb->executeQuery()->fetchOne();
+    }
+
+    /** @throws Exception */
+    public function insertLogSimple(int $cacheId, int $userId, int $type, string $date, string $text): int
+    {
+        $this->connection->executeStatement(
+            'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
+             VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
+            [$cacheId, $userId, $type, $date, $text]
+        );
+        return (int)$this->connection->lastInsertId();
+    }
+
+    /** @throws Exception */
+    public function updateLogSimple(int $logId, int $type, string $date, string $text): void
+    {
+        $this->connection->executeStatement(
+            'UPDATE cache_logs SET type = ?, date = ?, text = ?, text_html = 0 WHERE id = ?',
+            [$type, $date, $text, $logId]
+        );
+    }
+
+    /** @throws Exception */
+    public function deleteLogById(int $logId): void
+    {
+        $this->connection->delete(self::TABLE, ['id' => $logId]);
+    }
+
+    /** @throws Exception */
+    public function fetchLogForResponse(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'uuid', 'type', "DATE_FORMAT(date, '%Y-%m-%d') AS date", 'text', 'text_html')
+            ->from(self::TABLE)
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function countTotalLogs(): int
+    {
+        return (int)$this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from(self::TABLE)
+            ->executeQuery()
+            ->fetchOne();
+    }
 }

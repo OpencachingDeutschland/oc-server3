@@ -212,4 +212,18 @@ class CacheTypeRepository extends ServiceEntityRepository
 
         return $entity;
     }
+
+    /** @throws Exception */
+    public function fetchLookupTypes(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('ct.id', 'IFNULL(stt.text, ct.en) AS name')
+            ->from('cache_type', 'ct')
+            ->leftJoin('ct', 'sys_trans', 'st', 'ct.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('ct.ordinal')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }

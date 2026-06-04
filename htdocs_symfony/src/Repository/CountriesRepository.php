@@ -234,4 +234,18 @@ class CountriesRepository extends ServiceEntityRepository
 
         return $entity;
     }
+
+    /** @throws Exception */
+    public function fetchLookupCountries(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('c.short', 'IFNULL(stt.text, c.name) AS name')
+            ->from('countries', 'c')
+            ->leftJoin('c', 'sys_trans', 'st', 'c.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('name')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }

@@ -198,4 +198,18 @@ class CacheSizeRepository extends ServiceEntityRepository
 
         return $entity;
     }
+
+    /** @throws Exception */
+    public function fetchLookupSizes(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('cs.id', 'IFNULL(stt.text, cs.name) AS name')
+            ->from('cache_size', 'cs')
+            ->leftJoin('cs', 'sys_trans', 'st', 'cs.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('cs.ordinal')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
 }

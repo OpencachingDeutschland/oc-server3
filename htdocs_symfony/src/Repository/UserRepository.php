@@ -392,4 +392,18 @@ class UserRepository extends ServiceEntityRepository
             ->executeQuery()
             ->fetchOne();
     }
+
+    /** @throws Exception */
+    public function fetchOwnerStats(int $ownerId): array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('IFNULL(found, 0) AS found', 'IFNULL(hidden, 0) AS hidden')
+            ->from('stat_user')
+            ->where('user_id = :ownerId')
+            ->setParameter('ownerId', $ownerId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: ['found' => 0, 'hidden' => 0];
+    }
 }

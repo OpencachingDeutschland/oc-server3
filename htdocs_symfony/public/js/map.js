@@ -914,7 +914,7 @@ export function createMarker(p) {
   div.innerHTML = linkHtml;
 
 
-  const ownerHTML = `<span class="owner-alias" data-owner="${p.ownerCode || ""}">${p.ownerCode || "Unknown"}</span>`;
+  const ownerHTML = `<span class="owner-alias" data-owner="${p.owner?.userId || ""}">${p.ownerCode || "Unknown"}</span>`;
   const foundRow  = p.isFound ? `<tr class="found-row"><td>${t('Found:')}</td><td class="found-date">${p.foundDate || ''}</td></tr>` : "";
   const typeRow   = `${p.geocacheType?.name || "?"} / ${p.geocacheSize?.name || "?"} / ${p.difficulty} / ${p.terrain}`;
   const pcnEsc    = (p.pcn || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -65,7 +65,7 @@ class SearchController extends AbstractController
                 c.terrain    / 2 AS terrain,
                 c.status,
                 u.username      AS ownerAlias,
-                c.user_id       AS ownerCode,
+                u.username      AS ownerCode,
                 c.date_created  AS publishedDate,
                 IFNULL(sc.toprating, 0) AS favoritePoints,
                 IFNULL(sc.found, 0)     AS findCount,

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
+use Oc\Repository\CachesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,15 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class LiveMapController extends AbstractController
 {
     public function __construct(
-        private Connection $connection,
-        private Security $security
+        private CachesRepository $cachesRepository
     ) {}
 
     #[Route('/livemap', name: 'livemap')]
     public function index(): Response
     {
-        // TODO: read per-user homeLat/homeLon/defaultZoom from a user-settings table
-        // once Settings UI exists; fall back to these defaults when unset.
         return $this->render('app/maps/livemap.html.twig', [
             'initLat'  => 52.3759,
             'initLon'  => 9.7320,
@@ -39,16 +35,7 @@ class LiveMapController extends AbstractController
             return new JsonResponse(['wpts' => []]);
         }
 
-        $rows = $this->connection->fetchAllAssociative(
-            'SELECT co.latitude, co.longitude, co.description, co.subtype,
-                    ct.name AS type_name
-             FROM coordinates co
-             JOIN caches c ON co.cache_id = c.cache_id
-             LEFT JOIN coordinates_type ct ON co.subtype = ct.id
-             WHERE c.wp_oc = ? AND co.type = 1 AND co.user_id IS NULL
-             ORDER BY co.id',
-            [$wp]
-        );
+        $rows = $this->cachesRepository->fetchWaypointsByWp($wp);
 
         $wpts = array_map(fn($r) => [
             'lat'         => (float)$r['latitude'],

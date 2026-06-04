@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
+use Oc\Repository\CachesRepository;
+use Oc\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    public function __construct(private readonly Connection $connection) {}
+    public function __construct(
+        private CachesRepository $cachesRepository,
+        private UserRepository $userRepository,
+    ) {}
 
     #[Route("/", name: "index_index")]
     public function index(): Response
     {
-        $cacheCount = (int)$this->connection->fetchOne('SELECT COUNT(*) FROM caches WHERE status = 1');
-        $logCount   = (int)$this->connection->fetchOne('SELECT COUNT(*) FROM cache_logs');
-        $userCount  = (int)$this->connection->fetchOne('SELECT COUNT(*) FROM user WHERE is_active_flag = 1');
+        $cacheCount = $this->cachesRepository->countActiveCaches();
+        $logCount   = $this->cachesRepository->countCacheLogs();
+        $userCount  = $this->userRepository->countActiveUsers();
 
         return $this->render('app/index/index.html.twig', [
             'cacheCount' => $cacheCount,

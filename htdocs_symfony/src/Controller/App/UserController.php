@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +17,6 @@ class UserController extends AbstractController
 {
     public function __construct(
         private UserRepository $userRepository,
-        private Connection $connection,
         private Security $security,
     ) {}
 
@@ -40,33 +38,7 @@ class UserController extends AbstractController
             return new JsonResponse(['items' => []]);
         }
 
-        if ($isSupport) {
-            $rows = $this->connection->fetchAllAssociative(
-                'SELECT u.user_id, u.username, u.email, u.date_created,
-                        IFNULL(s.found, 0)  AS find_count,
-                        IFNULL(s.hidden, 0) AS hide_count
-                 FROM user u
-                 LEFT JOIN stat_user s ON u.user_id = s.user_id
-                 WHERE u.user_id = :exact
-                    OR u.email   = :exact
-                    OR u.username LIKE :like
-                 ORDER BY u.username ASC
-                 LIMIT 200',
-                ['exact' => $q, 'like' => '%' . $q . '%']
-            );
-        } else {
-            $rows = $this->connection->fetchAllAssociative(
-                'SELECT u.user_id, u.username,
-                        IFNULL(s.found, 0)  AS find_count,
-                        IFNULL(s.hidden, 0) AS hide_count
-                 FROM user u
-                 LEFT JOIN stat_user s ON u.user_id = s.user_id
-                 WHERE u.username LIKE :like
-                 ORDER BY u.username ASC
-                 LIMIT 20',
-                ['like' => '%' . $q . '%']
-            );
-        }
+        $rows = $this->userRepository->searchUsers($q, $isSupport);
 
         $items = array_map(fn($r) => array_filter([
             'userId'     => (int)$r['user_id'],
@@ -86,10 +58,7 @@ class UserController extends AbstractController
     {
         $fetchedUser = $this->userRepository->search_by_user_id($userID);
 
-        $stats = $this->connection->fetchAssociative(
-            'SELECT IFNULL(found, 0) AS findCount, IFNULL(hidden, 0) AS hideCount FROM stat_user WHERE user_id = :id',
-            ['id' => $userID]
-        );
+        $stats = $this->userRepository->fetchUserStats($userID);
 
         if ($stats) {
             $fetchedUser->findCount = (int)$stats['findCount'];

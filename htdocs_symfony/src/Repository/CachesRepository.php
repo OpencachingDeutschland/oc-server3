@@ -533,38 +533,40 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchDetailByWp(string $wp): ?array
     {
-        $result = $this->connection->fetchAssociative(
-            'SELECT
-                c.cache_id, c.wp_oc, c.name,
-                c.latitude, c.longitude,
-                c.difficulty / 2 AS difficulty,
-                c.terrain / 2 AS terrain,
-                c.country, c.date_hidden, c.date_created, c.wp_gc,
-                c.type AS type_id,
-                c.size AS size_id,
-                c.status AS status_id,
-                c.search_time, c.way_length,
-                IF(c.logpw != \'\', 1, 0) AS logpw,
-                c.logpw AS cache_logpw,
-                c.needs_maintenance, c.listing_outdated,
-                ct.en AS type_name, ct.svg_name,
-                cs.name AS size_name,
-                cst.en AS status_en,
-                u.user_id AS owner_id, u.username AS owner_name, u.uuid AS owner_uuid,
-                u.date_created AS owner_joined,
-                IFNULL(sc.found, 0) AS find_count,
-                IFNULL(sc.toprating, 0) AS rating_count,
-                co_name.name AS country_name
-             FROM caches c
-             JOIN cache_type ct    ON c.type    = ct.id
-             JOIN cache_size cs    ON c.size    = cs.id
-             JOIN cache_status cst ON c.status  = cst.id
-             JOIN user u           ON c.user_id = u.user_id
-             LEFT JOIN stat_caches sc ON c.cache_id = sc.cache_id
-             LEFT JOIN countries co_name ON c.country = co_name.short
-             WHERE c.wp_oc = ?',
-            [$wp]
-        );
+        $result = $this->connection->createQueryBuilder()
+            ->select(
+                'c.cache_id', 'c.wp_oc', 'c.name',
+                'c.latitude', 'c.longitude',
+                'c.difficulty / 2 AS difficulty',
+                'c.terrain / 2 AS terrain',
+                'c.country', 'c.date_hidden', 'c.date_created', 'c.wp_gc',
+                'c.type AS type_id',
+                'c.size AS size_id',
+                'c.status AS status_id',
+                'c.search_time', 'c.way_length',
+                "IF(c.logpw != '', 1, 0) AS logpw",
+                'c.logpw AS cache_logpw',
+                'c.needs_maintenance', 'c.listing_outdated',
+                'ct.en AS type_name', 'ct.svg_name',
+                'cs.name AS size_name',
+                'cst.en AS status_en',
+                'u.user_id AS owner_id', 'u.username AS owner_name', 'u.uuid AS owner_uuid',
+                'u.date_created AS owner_joined',
+                'IFNULL(sc.found, 0) AS find_count',
+                'IFNULL(sc.toprating, 0) AS rating_count',
+                'co_name.name AS country_name'
+            )
+            ->from('caches', 'c')
+            ->join('c', 'cache_type', 'ct', 'c.type = ct.id')
+            ->join('c', 'cache_size', 'cs', 'c.size = cs.id')
+            ->join('c', 'cache_status', 'cst', 'c.status = cst.id')
+            ->join('c', 'user', 'u', 'c.user_id = u.user_id')
+            ->leftJoin('c', 'stat_caches', 'sc', 'c.cache_id = sc.cache_id')
+            ->leftJoin('c', 'countries', 'co_name', 'c.country = co_name.short')
+            ->where('c.wp_oc = :wp')
+            ->setParameter('wp', $wp)
+            ->executeQuery()
+            ->fetchAssociative();
 
         return $result ?: null;
     }
@@ -576,14 +578,16 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchDescription(int $cacheId, string $preferredLang): ?array
     {
-        $result = $this->connection->fetchAssociative(
-            'SELECT cd.desc, cd.hint, cd.short_desc, cd.desc_html, cd.desc_dark_unsafe, cd.language
-             FROM cache_desc cd
-             WHERE cd.cache_id = ?
-             ORDER BY cd.language = ? DESC, cd.language = \'EN\' DESC
-             LIMIT 1',
-            [$cacheId, $preferredLang]
-        );
+        $result = $this->connection->createQueryBuilder()
+            ->select('cd.desc', 'cd.hint', 'cd.short_desc', 'cd.desc_html', 'cd.desc_dark_unsafe', 'cd.language')
+            ->from('cache_desc', 'cd')
+            ->where('cd.cache_id = :cacheId')
+            ->orderBy('cd.language = :preferredLang', 'DESC')
+            ->addOrderBy("cd.language = 'EN'", 'DESC')
+            ->setMaxResults(1)
+            ->setParameters(['cacheId' => $cacheId, 'preferredLang' => $preferredLang])
+            ->executeQuery()
+            ->fetchAssociative();
 
         return $result ?: null;
     }
@@ -595,14 +599,17 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchWaypoints(int $cacheId): array
     {
-        return $this->connection->fetchAllAssociative(
-            'SELECT co.latitude, co.longitude, co.description, ct.name AS type_name, ct.id AS type_id
-             FROM coordinates co
-             LEFT JOIN coordinates_type ct ON co.subtype = ct.id
-             WHERE co.cache_id = ? AND co.type = 1 AND co.user_id IS NULL
-             ORDER BY co.id',
-            [$cacheId]
-        );
+        return $this->connection->createQueryBuilder()
+            ->select('co.latitude', 'co.longitude', 'co.description', 'ct.name AS type_name', 'ct.id AS type_id')
+            ->from('coordinates', 'co')
+            ->leftJoin('co', 'coordinates_type', 'ct', 'co.subtype = ct.id')
+            ->where('co.cache_id = :cacheId')
+            ->andWhere('co.type = 1')
+            ->andWhere('co.user_id IS NULL')
+            ->orderBy('co.id')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 
     /**
@@ -612,14 +619,15 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchAttributes(int $cacheId): array
     {
-        return $this->connection->fetchAllAssociative(
-            'SELECT ca.id, ca.name, ca.icon
-             FROM caches_attributes cxa
-             JOIN cache_attrib ca ON cxa.attrib_id = ca.id
-             WHERE cxa.cache_id = ?
-             ORDER BY ca.id',
-            [$cacheId]
-        );
+        return $this->connection->createQueryBuilder()
+            ->select('ca.id', 'ca.name', 'ca.icon')
+            ->from('caches_attributes', 'cxa')
+            ->join('cxa', 'cache_attrib', 'ca', 'cxa.attrib_id = ca.id')
+            ->where('cxa.cache_id = :cacheId')
+            ->orderBy('ca.id')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 
     /**
@@ -629,19 +637,23 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchLogs(int $cacheId, int $limit = 30): array
     {
-        return $this->connection->fetchAllAssociative(
-            'SELECT cl.id, cl.uuid, cl.type, lt.en AS type_name,
-                    DATE_FORMAT(cl.date, \'%Y-%m-%d\') AS date,
-                    cl.text, cl.text_html, cl.user_id,
-                    u.username
-             FROM cache_logs cl
-             JOIN user u       ON cl.user_id = u.user_id
-             LEFT JOIN log_types lt ON cl.type = lt.id
-             WHERE cl.cache_id = ? AND cl.gdpr_deletion = 0
-             ORDER BY cl.date DESC
-             LIMIT ' . (int)$limit,
-            [$cacheId]
-        );
+        return $this->connection->createQueryBuilder()
+            ->select(
+                'cl.id', 'cl.uuid', 'cl.type', 'lt.en AS type_name',
+                "DATE_FORMAT(cl.date, '%Y-%m-%d') AS date",
+                'cl.text', 'cl.text_html', 'cl.user_id',
+                'u.username'
+            )
+            ->from('cache_logs', 'cl')
+            ->join('cl', 'user', 'u', 'cl.user_id = u.user_id')
+            ->leftJoin('cl', 'log_types', 'lt', 'cl.type = lt.id')
+            ->where('cl.cache_id = :cacheId')
+            ->andWhere('cl.gdpr_deletion = 0')
+            ->orderBy('cl.date', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 
     /**
@@ -652,11 +664,17 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchUserNote(int $cacheId, int $userId): ?array
     {
-        $result = $this->connection->fetchAssociative(
-            'SELECT description, latitude, longitude, logpw FROM coordinates
-             WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-            [$cacheId, $userId]
-        );
+        $result = $this->connection->createQueryBuilder()
+            ->select('description', 'latitude', 'longitude', 'logpw')
+            ->from('coordinates')
+            ->where('cache_id = :cacheId')
+            ->andWhere('user_id = :userId')
+            ->andWhere('type = 2')
+            ->orderBy('id', 'DESC')
+            ->setMaxResults(1)
+            ->setParameters(['cacheId' => $cacheId, 'userId' => $userId])
+            ->executeQuery()
+            ->fetchAssociative();
 
         return $result ?: null;
     }
@@ -668,10 +686,13 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchRegion(int $cacheId): ?string
     {
-        $result = $this->connection->fetchOne(
-            'SELECT adm1 FROM cache_location WHERE cache_id=?',
-            [$cacheId]
-        );
+        $result = $this->connection->createQueryBuilder()
+            ->select('adm1')
+            ->from('cache_location')
+            ->where('cache_id = :cacheId')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchOne();
 
         return $result ?: null;
     }
@@ -683,10 +704,13 @@ class CachesRepository extends ServiceEntityRepository
      */
     public function fetchOwnerStats(int $ownerId): array
     {
-        $result = $this->connection->fetchAssociative(
-            'SELECT IFNULL(found, 0) AS found, IFNULL(hidden, 0) AS hidden FROM stat_user WHERE user_id=?',
-            [$ownerId]
-        );
+        $result = $this->connection->createQueryBuilder()
+            ->select('IFNULL(found, 0) AS found', 'IFNULL(hidden, 0) AS hidden')
+            ->from('stat_user')
+            ->where('user_id = :ownerId')
+            ->setParameter('ownerId', $ownerId)
+            ->executeQuery()
+            ->fetchAssociative();
 
         return $result ?: ['found' => 0, 'hidden' => 0];
     }
@@ -715,5 +739,666 @@ class CachesRepository extends ServiceEntityRepository
             'cache_id' => $cacheId,
             'user_id'  => $userId,
         ]);
+    }
+
+    // ── Lookup queries (form dropdowns) ───────────────────────────────
+
+    /** @throws Exception */
+    public function fetchLookupTypes(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('ct.id', 'IFNULL(stt.text, ct.en) AS name')
+            ->from('cache_type', 'ct')
+            ->leftJoin('ct', 'sys_trans', 'st', 'ct.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('ct.ordinal')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchLookupSizes(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('cs.id', 'IFNULL(stt.text, cs.name) AS name')
+            ->from('cache_size', 'cs')
+            ->leftJoin('cs', 'sys_trans', 'st', 'cs.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('cs.ordinal')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchLookupCountries(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('c.short', 'IFNULL(stt.text, c.name) AS name')
+            ->from('countries', 'c')
+            ->leftJoin('c', 'sys_trans', 'st', 'c.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('name')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchLookupLanguages(string $lang): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('l.short', 'IFNULL(stt.text, l.name) AS name')
+            ->from('languages', 'l')
+            ->leftJoin('l', 'sys_trans', 'st', 'l.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('name')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchAllAttributes(): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('ca.id', 'ca.name', 'ca.icon_undef', 'ca.icon_large', 'ca.group_id', 'ag.name AS group_name')
+            ->from('cache_attrib', 'ca')
+            ->join('ca', 'attribute_groups', 'ag', 'ca.group_id = ag.id')
+            ->where('NOT IFNULL(ca.hidden, 0)')
+            ->andWhere('ca.selectable != 0')
+            ->orderBy('ag.category_id')
+            ->addOrderBy('ca.group_id')
+            ->addOrderBy('ca.id')
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchWaypointTypes(): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('id', 'name')
+            ->from('coordinates_type')
+            ->orderBy('id')
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    // ── Cache CRUD ────────────────────────────────────────────────────
+
+    /** @throws Exception */
+    public function fetchCacheByWpForEdit(string $wp): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('caches')
+            ->where('wp_oc = :wp')
+            ->setParameter('wp', strtoupper($wp))
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function getCacheIdByWp(string $wp): ?int
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('cache_id')
+            ->from('caches')
+            ->where('wp_oc = :wp')
+            ->setParameter('wp', strtoupper($wp))
+            ->executeQuery()
+            ->fetchOne();
+
+        return $result ? (int)$result : null;
+    }
+
+    /** @throws Exception */
+    public function checkDuplicateCoords(float $lon, float $lat, ?int $excludeCacheId): ?string
+    {
+        $qb = $this->connection->createQueryBuilder()
+            ->select('wp_oc')
+            ->from('caches')
+            ->where('status = 1')
+            ->andWhere('ROUND(longitude, 6) = ROUND(:lon, 6)')
+            ->andWhere('ROUND(latitude, 6) = ROUND(:lat, 6)')
+            ->setParameters(['lon' => $lon, 'lat' => $lat]);
+
+        if ($excludeCacheId !== null) {
+            $qb->andWhere('cache_id != :excludeId')
+               ->setParameter('excludeId', $excludeCacheId);
+        }
+
+        $result = $qb->executeQuery()->fetchOne();
+        return $result ? (string)$result : null;
+    }
+
+    /** @throws Exception */
+    public function insertCache(array $data): int
+    {
+        $this->connection->insert('caches', $data);
+        return (int)$this->connection->lastInsertId();
+    }
+
+    /** @throws Exception */
+    public function updateCache(int $cacheId, array $data): void
+    {
+        $this->connection->update('caches', $data, ['cache_id' => $cacheId]);
+    }
+
+    /** @throws Exception */
+    public function countActiveCaches(): int
+    {
+        return (int)$this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from('caches')
+            ->where('status = 1')
+            ->executeQuery()
+            ->fetchOne();
+    }
+
+    // ── Description ───────────────────────────────────────────────────
+
+    /** @throws Exception */
+    public function fetchDescriptionForEdit(int $cacheId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('*')
+            ->from('cache_desc')
+            ->where('cache_id = :cacheId')
+            ->orderBy('id')
+            ->setMaxResults(1)
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function insertDescription(int $cacheId, array $data): void
+    {
+        $data['cache_id'] = $cacheId;
+        $this->connection->insert('cache_desc', $data);
+    }
+
+    /** @throws Exception */
+    public function updateDescription(int $cacheId, array $data): void
+    {
+        $this->connection->update('cache_desc', $data, ['cache_id' => $cacheId]);
+    }
+
+    // ── Attributes & Waypoints ────────────────────────────────────────
+
+    /** @throws Exception */
+    public function fetchAttribIds(int $cacheId): array
+    {
+        return array_column(
+            $this->connection->createQueryBuilder()
+                ->select('attrib_id')
+                ->from('caches_attributes')
+                ->where('cache_id = :cacheId')
+                ->setParameter('cacheId', $cacheId)
+                ->executeQuery()
+                ->fetchAllAssociative(),
+            'attrib_id'
+        );
+    }
+
+    /** @throws Exception */
+    public function replaceCacheAttributes(int $cacheId, array $attribIds): void
+    {
+        $this->connection->executeStatement(
+            'DELETE FROM caches_attributes WHERE cache_id = ?',
+            [$cacheId]
+        );
+        foreach ($attribIds as $attribId) {
+            $this->connection->insert('caches_attributes', [
+                'cache_id'  => $cacheId,
+                'attrib_id' => $attribId,
+            ]);
+        }
+    }
+
+    /** @throws Exception */
+    public function fetchWaypointsForEdit(int $cacheId): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('id', 'subtype', 'latitude', 'longitude', 'description')
+            ->from('coordinates')
+            ->where('cache_id = :cacheId')
+            ->andWhere('type = 1')
+            ->andWhere('user_id IS NULL')
+            ->orderBy('id')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function replaceOwnerWaypoints(int $cacheId, array $waypoints, string $now): void
+    {
+        $this->connection->executeStatement(
+            'DELETE FROM coordinates WHERE cache_id = ? AND type = 1 AND user_id IS NULL',
+            [$cacheId]
+        );
+        foreach ($waypoints as $wpt) {
+            $this->connection->insert('coordinates', [
+                'cache_id'      => $cacheId,
+                'type'          => 1,
+                'subtype'       => $wpt['type'],
+                'latitude'      => $wpt['lat'],
+                'longitude'     => $wpt['lon'],
+                'description'   => $wpt['desc'],
+                'date_created'  => $now,
+                'last_modified' => $now,
+            ]);
+        }
+    }
+
+    /** @throws Exception */
+    public function fetchWaypointsByWp(string $wp): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select('co.latitude', 'co.longitude', 'co.description', 'co.subtype', 'ct.name AS type_name')
+            ->from('coordinates', 'co')
+            ->join('co', 'caches', 'c', 'co.cache_id = c.cache_id')
+            ->leftJoin('co', 'coordinates_type', 'ct', 'co.subtype = ct.id')
+            ->where('c.wp_oc = :wp')
+            ->andWhere('co.type = 1')
+            ->andWhere('co.user_id IS NULL')
+            ->orderBy('co.id')
+            ->setParameter('wp', $wp)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    // ── User Note (coordinates type=2, partial upserts per endpoint) ──
+
+    /**
+     * Upsert the cache note text for a user. Returns ['saved' => bool].
+     * @throws Exception
+     */
+    public function upsertUserNoteText(int $cacheId, int $userId, string $text): array
+    {
+        $existing = $this->fetchUserNote($cacheId, $userId);
+        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+
+        if ($text === '') {
+            if ($existing) {
+                $this->connection->delete('coordinates', ['id' => (int)$existing['id']]);
+            }
+            return ['saved' => false];
+        }
+
+        if ($existing) {
+            $this->connection->update('coordinates', [
+                'description' => $text,
+                'last_modified' => $now,
+            ], ['id' => (int)$existing['id']]);
+        } else {
+            $this->connection->insert('coordinates', [
+                'cache_id'      => $cacheId,
+                'user_id'       => $userId,
+                'type'          => 2,
+                'subtype'       => 0,
+                'latitude'      => 0,
+                'longitude'     => 0,
+                'description'   => $text,
+                'date_created'  => $now,
+                'last_modified' => $now,
+            ]);
+        }
+        return ['saved' => true];
+    }
+
+    /**
+     * Upsert the log password for a user's cache note. Returns ['saved' => bool, 'logpw' => string].
+     * @throws Exception
+     */
+    public function upsertUserNoteLogpw(int $cacheId, int $userId, string $logpw): array
+    {
+        $existing = $this->fetchUserNote($cacheId, $userId);
+        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+
+        if ($existing) {
+            $hasOther = ($existing['description'] !== null && $existing['description'] !== '')
+                || (float)$existing['latitude'] !== 0.0
+                || (float)$existing['longitude'] !== 0.0;
+
+            if ($logpw === '' && !$hasOther) {
+                $this->connection->delete('coordinates', ['id' => (int)$existing['id']]);
+                return ['saved' => true, 'logpw' => ''];
+            }
+
+            $this->connection->update('coordinates', [
+                'logpw' => $logpw,
+                'last_modified' => $now,
+            ], ['id' => (int)$existing['id']]);
+        } elseif ($logpw !== '') {
+            $this->connection->insert('coordinates', [
+                'cache_id'      => $cacheId,
+                'user_id'       => $userId,
+                'type'          => 2,
+                'subtype'       => 0,
+                'latitude'      => 0,
+                'longitude'     => 0,
+                'description'   => '',
+                'logpw'         => $logpw,
+                'date_created'  => $now,
+                'last_modified' => $now,
+            ]);
+        }
+
+        return ['saved' => true, 'logpw' => $logpw];
+    }
+
+    /**
+     * Upsert corrected coordinates for a user's cache note. Returns ['saved' => bool].
+     * @throws Exception
+     */
+    public function upsertUserNoteCoords(int $cacheId, int $userId, float $lat, float $lon): array
+    {
+        $existing = $this->fetchUserNote($cacheId, $userId);
+        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
+
+        if ($existing) {
+            $this->connection->update('coordinates', [
+                'latitude'      => $lat,
+                'longitude'     => $lon,
+                'last_modified' => $now,
+            ], ['id' => (int)$existing['id']]);
+        } else {
+            $this->connection->insert('coordinates', [
+                'cache_id'      => $cacheId,
+                'user_id'       => $userId,
+                'type'          => 2,
+                'subtype'       => 0,
+                'latitude'      => $lat,
+                'longitude'     => $lon,
+                'description'   => '',
+                'date_created'  => $now,
+                'last_modified' => $now,
+            ]);
+        }
+
+        return ['saved' => true];
+    }
+
+    // ── Cache Logs ────────────────────────────────────────────────────
+
+    /** @throws Exception */
+    public function fetchCacheForLogOp(string $wp): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('cache_id', 'logpw', 'user_id')
+            ->from('caches')
+            ->where('wp_oc = :wp')
+            ->setParameter('wp', strtoupper($wp))
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function fetchLogForAuth(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'user_id', 'cache_id')
+            ->from('cache_logs')
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function countDuplicateLogs(int $cacheId, int $userId, int $type, ?int $excludeLogId): int
+    {
+        $qb = $this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from('cache_logs')
+            ->where('cache_id = :cacheId')
+            ->andWhere('user_id = :userId')
+            ->andWhere('type = :type')
+            ->setParameters([
+                'cacheId' => $cacheId,
+                'userId'  => $userId,
+                'type'    => $type,
+            ]);
+
+        if ($excludeLogId !== null) {
+            $qb->andWhere('id <> :excludeId')
+               ->setParameter('excludeId', $excludeLogId);
+        }
+
+        return (int)$qb->executeQuery()->fetchOne();
+    }
+
+    /** @throws Exception */
+    public function insertLog(int $cacheId, int $userId, int $type, string $date, string $text): int
+    {
+        $this->connection->executeStatement(
+            'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
+             VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
+            [$cacheId, $userId, $type, $date, $text]
+        );
+        return (int)$this->connection->lastInsertId();
+    }
+
+    /** @throws Exception */
+    public function updateLog(int $logId, int $type, string $date, string $text): void
+    {
+        $this->connection->executeStatement(
+            'UPDATE cache_logs SET type = ?, date = ?, text = ?, text_html = 0 WHERE id = ?',
+            [$type, $date, $text, $logId]
+        );
+    }
+
+    /** @throws Exception */
+    public function deleteLogById(int $logId): void
+    {
+        $this->connection->delete('cache_logs', ['id' => $logId]);
+    }
+
+    /** @throws Exception */
+    public function fetchLogForResponse(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'uuid', 'type', "DATE_FORMAT(date, '%Y-%m-%d') AS date", 'text', 'text_html')
+            ->from('cache_logs')
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function updateCacheStatus(int $cacheId, int $status): void
+    {
+        $this->connection->update('caches', ['status' => $status], ['cache_id' => $cacheId]);
+    }
+
+    /** @throws Exception */
+    public function countCacheLogs(): int
+    {
+        return (int)$this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from('cache_logs')
+            ->executeQuery()
+            ->fetchOne();
+    }
+
+    /** @throws Exception */
+    public function countCachesInBounds(float $lat1, float $lat2, float $lon1, float $lon2, int $minDiff, int $maxDiff): int
+    {
+        return (int)$this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from('caches')
+            ->where('latitude > :lat1 AND latitude < :lat2')
+            ->andWhere('longitude > :lon1 AND longitude < :lon2')
+            ->andWhere('status IN (1, 2)')
+            ->andWhere('difficulty >= :minDiff AND difficulty <= :maxDiff')
+            ->setParameters([
+                'lat1' => $lat1, 'lat2' => $lat2,
+                'lon1' => $lon1, 'lon2' => $lon2,
+                'minDiff' => $minDiff, 'maxDiff' => $maxDiff,
+            ])
+            ->executeQuery()
+            ->fetchOne();
+    }
+
+    /** @throws Exception */
+    public function fetchCachesInBounds(float $lat1, float $lat2, float $lon1, float $lon2, int $minDiff, int $maxDiff, int $userId, int $maxItems): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select(
+                'c.cache_id',
+                'c.wp_oc         AS referenceCode',
+                'c.name',
+                'c.latitude      AS listingLat',
+                'c.longitude     AS listingLon',
+                'c.type          AS typeId',
+                'ct.en           AS typeName',
+                'c.size          AS sizeId',
+                'cs.name         AS sizeName',
+                'c.difficulty / 2 AS difficulty',
+                'c.terrain    / 2 AS terrain',
+                'c.status',
+                'u.username      AS ownerAlias',
+                'u.username      AS ownerCode',
+                'c.user_id       AS userId',
+                'c.date_created  AS publishedDate',
+                'IFNULL(sc.toprating, 0) AS favoritePoints',
+                'IFNULL(sc.found, 0)     AS findCount',
+                'IF(c.user_id = :userId, 1, 0) AS isOwned',
+                'IF(fl.id IS NOT NULL, 1, 0)  AS isFound',
+                'MAX(fl.date) AS foundDate',
+                'IF(pcn.id IS NOT NULL, 1, 0) AS hasPCN',
+                'IF(pcn.id IS NOT NULL AND pcn.latitude != 0 AND pcn.longitude != 0, 1, 0) AS hasCC',
+                'pcn.latitude    AS ccLat',
+                'pcn.longitude   AS ccLon',
+                'pcn.description AS pcnText',
+                'IF(oc_only.cache_id IS NOT NULL, 1, 0) AS isOcOnly'
+            )
+            ->from('caches', 'c')
+            ->innerJoin('c', 'cache_type', 'ct', 'c.type = ct.id')
+            ->innerJoin('c', 'cache_size', 'cs', 'c.size = cs.id')
+            ->innerJoin('c', 'user', 'u', 'c.user_id = u.user_id')
+            ->leftJoin('c', 'stat_caches', 'sc', 'c.cache_id = sc.cache_id')
+            ->leftJoin('c', 'caches_attributes', 'oc_only', 'oc_only.cache_id = c.cache_id AND oc_only.attrib_id = 6')
+            ->leftJoin('c', 'cache_logs', 'fl', 'fl.cache_id = c.cache_id AND fl.user_id = :userId AND fl.type IN (1, 7)')
+            ->leftJoin('c', 'coordinates', 'pcn', 'pcn.cache_id = c.cache_id AND pcn.user_id = :userId AND pcn.type = 2')
+            ->where('c.latitude > :lat1 AND c.latitude < :lat2')
+            ->andWhere('c.longitude > :lon1 AND c.longitude < :lon2')
+            ->andWhere('c.status IN (1, 2)')
+            ->andWhere('c.difficulty >= :minDiff AND c.difficulty <= :maxDiff')
+            ->groupBy('c.cache_id')
+            ->orderBy('c.cache_id')
+            ->setMaxResults($maxItems)
+            ->setParameters([
+                'lat1' => $lat1, 'lat2' => $lat2,
+                'lon1' => $lon1, 'lon2' => $lon2,
+                'minDiff' => $minDiff, 'maxDiff' => $maxDiff,
+                'userId' => $userId,
+            ])
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function getWpOcById(int $cacheId): string
+    {
+        return (string)$this->connection->createQueryBuilder()
+            ->select('wp_oc')
+            ->from('caches')
+            ->where('cache_id = :cacheId')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchOne();
+    }
+
+    /**
+     * Dynamic cache search with optional filters. All columns used by apiSearchCaches.
+     * @throws Exception
+     */
+    public function searchCaches(array $criteria): array
+    {
+        $userId  = (int)($criteria['userId'] ?? 0);
+        $q       = trim((string)($criteria['q'] ?? ''));
+        $type    = (int)($criteria['type'] ?? 0);
+        $minDiff = (int)($criteria['minDiff'] ?? 2);
+        $maxDiff = (int)($criteria['maxDiff'] ?? 10);
+        $activeOnly = (bool)($criteria['activeOnly'] ?? true);
+        $ocOnly = (bool)($criteria['ocOnly'] ?? false);
+        $lat    = isset($criteria['lat']) ? (float)$criteria['lat'] : null;
+        $lon    = isset($criteria['lon']) ? (float)$criteria['lon'] : null;
+        $radius = (float)($criteria['radius'] ?? 0);
+
+        $qb = $this->connection->createQueryBuilder()
+            ->select(
+                'c.wp_oc', 'c.name',
+                'c.type AS type_id',
+                'c.status',
+                'c.user_id AS owner_id',
+                'c.difficulty / 2 AS difficulty',
+                'c.terrain / 2 AS terrain',
+                'c.latitude', 'c.longitude',
+                'ct.name AS type_name',
+                'u.username',
+                'c.date_created',
+                'EXISTS (SELECT 1 FROM cache_logs cl WHERE cl.cache_id = c.cache_id AND cl.user_id = :userId AND cl.type = 1) AS is_found',
+                'EXISTS (SELECT 1 FROM cache_logs cl2 WHERE cl2.cache_id = c.cache_id AND cl2.user_id = :userId AND cl2.type = 2) AS is_dnf',
+                'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn',
+                '(SELECT co2.description FROM coordinates co2 WHERE co2.cache_id = c.cache_id AND co2.user_id = :userId AND co2.type = 2 ORDER BY co2.id DESC LIMIT 1) AS pcn_text',
+                '(SELECT co3.latitude  FROM coordinates co3 WHERE co3.cache_id = c.cache_id AND co3.user_id = :userId AND co3.type = 2 AND co3.latitude  != 0 ORDER BY co3.id DESC LIMIT 1) AS cc_lat',
+                '(SELECT co4.longitude FROM coordinates co4 WHERE co4.cache_id = c.cache_id AND co4.user_id = :userId AND co4.type = 2 AND co4.longitude != 0 ORDER BY co4.id DESC LIMIT 1) AS cc_lon',
+                'EXISTS (SELECT 1 FROM caches_attributes oca WHERE oca.cache_id = c.cache_id AND oca.attrib_id = 6) AS is_oc_only'
+            )
+            ->setParameter('userId', $userId)
+            ->from('caches', 'c')
+            ->innerJoin('c', 'user', 'u', 'c.user_id = u.user_id')
+            ->leftJoin('c', 'cache_type', 'ct', 'c.type = ct.id')
+            ->andWhere('c.difficulty >= :minDiff AND c.difficulty <= :maxDiff')
+            ->setParameter('minDiff', $minDiff)
+            ->setParameter('maxDiff', $maxDiff)
+            ->orderBy('c.wp_oc', 'ASC')
+            ->setMaxResults(1000);
+
+        if ($activeOnly) {
+            $qb->andWhere('c.status = 1');
+        }
+        if ($type > 0) {
+            $qb->andWhere('c.type = :type')->setParameter('type', $type);
+        }
+        if ($ocOnly) {
+            $qb->andWhere('EXISTS (SELECT 1 FROM caches_attributes oca2 WHERE oca2.cache_id = c.cache_id AND oca2.attrib_id = 6)');
+        }
+        if ($q !== '') {
+            $qb->andWhere($qb->expr()->or(
+                $qb->expr()->eq('c.wp_oc', ':q'),
+                $qb->expr()->eq('c.wp_gc', ':q'),
+                $qb->expr()->like('c.name', ':qLike'),
+                $qb->expr()->like('u.username', ':qLike')
+            ))
+               ->setParameter('q', $q)
+               ->setParameter('qLike', '%' . $q . '%');
+        }
+        if ($lat !== null && $lon !== null && $radius > 0) {
+            $qb->andWhere('(6371 * acos(GREATEST(-1.0, LEAST(1.0, cos(radians(:lat)) * cos(radians(c.latitude)) * cos(radians(c.longitude) - radians(:lon)) + sin(radians(:lat)) * sin(radians(c.latitude)))))) <= :radius')
+               ->setParameter('lat', $lat)
+               ->setParameter('lon', $lon)
+               ->setParameter('radius', $radius);
+        }
+
+        return $qb->executeQuery()->fetchAllAssociative();
     }
 }

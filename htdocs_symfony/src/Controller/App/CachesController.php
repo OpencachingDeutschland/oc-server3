@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Controller\App;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
 use Oc\Repository\CachesRepository;
 use Oc\Service\UniCacheBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +17,6 @@ class CachesController extends AbstractController
 {
     public function __construct(
         private CachesRepository $cachesRepository,
-        private Connection $connection,
         private Security $security,
         private UniCacheBuilder $uniCacheBuilder,
     ) {}
@@ -27,14 +24,7 @@ class CachesController extends AbstractController
     #[Route("/caches", name: "caches_index")]
     public function cachesController_index(): Response
     {
-        $types = $this->connection->fetchAllAssociative(
-            'SELECT ct.id, IFNULL(stt.text, ct.en) AS name
-             FROM cache_type ct
-             LEFT JOIN sys_trans st ON ct.trans_id = st.id
-             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
-             ORDER BY ct.ordinal',
-            ['EN']
-        );
+        $types = $this->cachesRepository->fetchLookupTypes('EN');
 
         return $this->render('app/caches/search.html.twig', ['types' => $types]);
     }
@@ -55,63 +45,18 @@ class CachesController extends AbstractController
         $user   = $this->security->getUser();
         $userId = $user?->getUserId() ?? 0;
 
-        $qb = $this->connection->createQueryBuilder()
-            ->select(
-                'c.wp_oc', 'c.name',
-                'c.type AS type_id',
-                'c.status',
-                'c.user_id AS owner_id',
-                'c.difficulty / 2 AS difficulty',
-                'c.terrain / 2 AS terrain',
-                'c.latitude', 'c.longitude',
-                'ct.name AS type_name',
-                'u.username',
-                'c.date_created',
-                'EXISTS (SELECT 1 FROM cache_logs cl WHERE cl.cache_id = c.cache_id AND cl.user_id = :userId AND cl.type = 1) AS is_found',
-                'EXISTS (SELECT 1 FROM cache_logs cl2 WHERE cl2.cache_id = c.cache_id AND cl2.user_id = :userId AND cl2.type = 2) AS is_dnf',
-                'EXISTS (SELECT 1 FROM coordinates co WHERE co.cache_id = c.cache_id AND co.user_id = :userId AND co.type = 2) AS has_pcn',
-                '(SELECT co2.description FROM coordinates co2 WHERE co2.cache_id = c.cache_id AND co2.user_id = :userId AND co2.type = 2 ORDER BY co2.id DESC LIMIT 1) AS pcn_text',
-                '(SELECT co3.latitude  FROM coordinates co3 WHERE co3.cache_id = c.cache_id AND co3.user_id = :userId AND co3.type = 2 AND co3.latitude  != 0 ORDER BY co3.id DESC LIMIT 1) AS cc_lat',
-                '(SELECT co4.longitude FROM coordinates co4 WHERE co4.cache_id = c.cache_id AND co4.user_id = :userId AND co4.type = 2 AND co4.longitude != 0 ORDER BY co4.id DESC LIMIT 1) AS cc_lon',
-                'EXISTS (SELECT 1 FROM caches_attributes oca WHERE oca.cache_id = c.cache_id AND oca.attrib_id = 6) AS is_oc_only'
-            )
-            ->setParameter('userId', $userId)
-            ->from('caches', 'c')
-            ->innerJoin('c', 'user', 'u', 'c.user_id = u.user_id')
-            ->leftJoin('c', 'cache_type', 'ct', 'c.type = ct.id')
-            ->andWhere('c.difficulty >= :minDiff AND c.difficulty <= :maxDiff')
-            ->setParameter('minDiff', $minDiff)
-            ->setParameter('maxDiff', $maxDiff)
-            ->orderBy('c.wp_oc', 'ASC')
-            ->setMaxResults(1000);
-
-        if ($activeOnly) {
-            $qb->andWhere('c.status = 1');
-        }
-        if ($type > 0) {
-            $qb->andWhere('c.type = :type')->setParameter('type', $type);
-        }
-        if ($ocOnly) {
-            $qb->andWhere('EXISTS (SELECT 1 FROM caches_attributes oca2 WHERE oca2.cache_id = c.cache_id AND oca2.attrib_id = 6)');
-        }
-        if ($q !== '') {
-            $qb->andWhere($qb->expr()->or(
-                $qb->expr()->eq('c.wp_oc', ':q'),
-                $qb->expr()->eq('c.wp_gc', ':q'),
-                $qb->expr()->like('c.name', ':qLike'),
-                $qb->expr()->like('u.username', ':qLike')
-            ))
-               ->setParameter('q', $q)
-               ->setParameter('qLike', '%' . $q . '%');
-        }
-        if ($lat !== null && $lon !== null && $radius > 0) {
-            $qb->andWhere('(6371 * acos(GREATEST(-1.0, LEAST(1.0, cos(radians(:lat)) * cos(radians(c.latitude)) * cos(radians(c.longitude) - radians(:lon)) + sin(radians(:lat)) * sin(radians(c.latitude)))))) <= :radius')
-               ->setParameter('lat', $lat)
-               ->setParameter('lon', $lon)
-               ->setParameter('radius', $radius);
-        }
-
-        $rows = $qb->executeQuery()->fetchAllAssociative();
+        $rows = $this->cachesRepository->searchCaches([
+            'userId'     => $userId,
+            'q'          => $q,
+            'type'       => $type,
+            'minDiff'    => $minDiff,
+            'maxDiff'    => $maxDiff,
+            'activeOnly' => $activeOnly,
+            'ocOnly'     => $ocOnly,
+            'lat'        => $lat,
+            'lon'        => $lon,
+            'radius'     => $radius,
+        ]);
 
         $items = array_map(function (array $r) use ($userId): array {
             $name   = (string)$r['name'];
@@ -166,49 +111,12 @@ class CachesController extends AbstractController
 
         $locale = 'EN';
 
-        $types = $this->connection->fetchAllAssociative(
-            'SELECT ct.id, IFNULL(stt.text, ct.en) AS name
-             FROM cache_type ct
-             LEFT JOIN sys_trans st ON ct.trans_id = st.id
-             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
-             ORDER BY ct.ordinal',
-            [$locale]
-        );
-        $sizes = $this->connection->fetchAllAssociative(
-            'SELECT cs.id, IFNULL(stt.text, cs.name) AS name
-             FROM cache_size cs
-             LEFT JOIN sys_trans st ON cs.trans_id = st.id
-             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
-             ORDER BY cs.ordinal',
-            [$locale]
-        );
-        $countries = $this->connection->fetchAllAssociative(
-            'SELECT c.short, IFNULL(stt.text, c.name) AS name
-             FROM countries c
-             LEFT JOIN sys_trans st ON c.trans_id = st.id
-             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
-             ORDER BY name',
-            [$locale]
-        );
-        $languages = $this->connection->fetchAllAssociative(
-            'SELECT l.short, IFNULL(stt.text, l.name) AS name
-             FROM languages l
-             LEFT JOIN sys_trans st ON l.trans_id = st.id
-             LEFT JOIN sys_trans_text stt ON st.id = stt.trans_id AND stt.lang = ?
-             ORDER BY name',
-            [$locale]
-        );
-        $attrs = $this->connection->fetchAllAssociative(
-            'SELECT ca.id, ca.name, ca.icon_undef, ca.icon_large, ca.group_id,
-                    ag.name AS group_name
-             FROM cache_attrib ca
-             JOIN attribute_groups ag ON ca.group_id = ag.id
-             WHERE NOT IFNULL(ca.hidden, 0) AND ca.selectable != 0
-             ORDER BY ag.category_id, ca.group_id, ca.id'
-        );
-        $wptTypes = $this->connection->fetchAllAssociative(
-            'SELECT id, name FROM coordinates_type ORDER BY id'
-        );
+        $types     = $this->cachesRepository->fetchLookupTypes($locale);
+        $sizes     = $this->cachesRepository->fetchLookupSizes($locale);
+        $countries = $this->cachesRepository->fetchLookupCountries($locale);
+        $languages = $this->cachesRepository->fetchLookupLanguages($locale);
+        $attrs     = $this->cachesRepository->fetchAllAttributes();
+        $wptTypes  = $this->cachesRepository->fetchWaypointTypes();
 
         $now = new \DateTimeImmutable();
 
@@ -219,30 +127,13 @@ class CachesController extends AbstractController
         $editAttribs = [];
         $editNote = null;
         if ($editWp !== '') {
-            $editCache = $this->connection->fetchAssociative(
-                'SELECT * FROM caches WHERE wp_oc = ?', [strtoupper($editWp)]
-            );
+            $editCache = $this->cachesRepository->fetchCacheByWpForEdit($editWp);
             if ($editCache && (int)$editCache['user_id'] === $user->getUserId()) {
-                $editDesc = $this->connection->fetchAssociative(
-                    'SELECT * FROM cache_desc WHERE cache_id = ? ORDER BY id LIMIT 1',
-                    [(int)$editCache['cache_id']]
-                );
-                $editAttribs = array_column($this->connection->fetchAllAssociative(
-                    'SELECT attrib_id FROM caches_attributes WHERE cache_id = ?',
-                    [(int)$editCache['cache_id']]
-                ), 'attrib_id');
-                $editNote = $this->connection->fetchAssociative(
-                    'SELECT description, latitude, longitude FROM coordinates
-                     WHERE cache_id = ? AND user_id = ? AND type = 2 ORDER BY id DESC LIMIT 1',
-                    [(int)$editCache['cache_id'], $user->getUserId()]
-                );
-                $editWpts = $this->connection->fetchAllAssociative(
-                    'SELECT id, subtype, latitude, longitude, description
-                     FROM coordinates
-                     WHERE cache_id = ? AND type = 1 AND user_id IS NULL
-                     ORDER BY id',
-                    [(int)$editCache['cache_id']]
-                );
+                $cacheId = (int)$editCache['cache_id'];
+                $editDesc    = $this->cachesRepository->fetchDescriptionForEdit($cacheId);
+                $editAttribs = $this->cachesRepository->fetchAttribIds($cacheId);
+                $editNote    = $this->cachesRepository->fetchUserNote($cacheId, $user->getUserId());
+                $editWpts    = $this->cachesRepository->fetchWaypointsForEdit($cacheId);
             } else {
                 $editCache = null; // not owner or not found
             }
@@ -392,10 +283,8 @@ class CachesController extends AbstractController
                 $errors['coords'] = 'Valid coordinates required (e.g. N51 02.345 E009 43.210).';
             } else {
                 [$lat, $lon] = $coordsParsed;
-                $dupWp = $this->connection->fetchOne(
-                    'SELECT wp_oc FROM caches WHERE status=1 AND ROUND(longitude,6)=ROUND(?,6) AND ROUND(latitude,6)=ROUND(?,6)'
-                    . ($isEdit ? ' AND cache_id != ?' : ''),
-                    $isEdit ? [$lon, $lat, $editId] : [$lon, $lat]
+                $dupWp = $this->cachesRepository->checkDuplicateCoords(
+                    $lon, $lat, $isEdit ? $editId : null
                 );
                 if ($dupWp) {
                     $errors['coords'] = "Another cache ($dupWp) already exists at these coordinates.";
@@ -486,89 +375,67 @@ class CachesController extends AbstractController
 
                 if ($isEdit) {
                     // Verify ownership
-                    $existing = $this->connection->fetchAssociative(
-                        'SELECT user_id, wp_oc FROM caches WHERE cache_id = ?', [$editId]
-                    );
+                    $existing = $this->cachesRepository->fetchCacheByWpForEdit($editWp);
                     if (!$existing || (int)$existing['user_id'] !== $user->getUserId()) {
                         $errors['_general'] = 'Not authorized to edit this cache.';
                     } else {
                         $cacheId = $editId;
                         $wpOc = $existing['wp_oc'];
 
-                        $this->connection->executeStatement(
-                            'UPDATE caches SET name=?, longitude=?, latitude=?, type=?,
-                             country=?, date_hidden=?, size=?, difficulty=?, terrain=?,
-                             logpw=?, search_time=?, way_length=?, wp_gc=?
-                             WHERE cache_id=?',
-                            [
-                                $form['name'], $lon, $lat, $typeId,
-                                $form['country'], $hiddenDate->format('Y-m-d'),
-                                $sizeId, $diff, $terr,
-                                $form['log_pw'], $searchTime, $wayLength, $form['wp_gc'],
-                                $cacheId,
-                            ]
+                        $this->cachesRepository->updateCache($cacheId, [
+                            'name'       => $form['name'],
+                            'longitude'  => $lon,
+                            'latitude'   => $lat,
+                            'type'       => $typeId,
+                            'country'    => $form['country'],
+                            'date_hidden' => $hiddenDate->format('Y-m-d'),
+                            'size'       => $sizeId,
+                            'difficulty' => $diff,
+                            'terrain'    => $terr,
+                            'logpw'      => $form['log_pw'],
+                            'search_time' => $searchTime,
+                            'way_length'  => $wayLength,
+                            'wp_gc'      => $form['wp_gc'],
+                        ]);
+
+                        $this->cachesRepository->updateDescription($cacheId, [
+                            'language'    => strtoupper($form['desc_lang']),
+                            'desc'        => $form['desc'],
+                            'hint'        => $form['hints'],
+                            'short_desc'  => $form['short_desc'],
+                            'last_modified' => $nowStr,
+                        ]);
+
+                        $this->cachesRepository->replaceCacheAttributes(
+                            $cacheId, $form['selected_attribs']
                         );
 
-                        $this->connection->executeStatement(
-                            'UPDATE cache_desc SET language=?, `desc`=?, hint=?, short_desc=?,
-                             last_modified=? WHERE cache_id=?',
-                            [
-                                strtoupper($form['desc_lang']), $form['desc'],
-                                $form['hints'], $form['short_desc'],
-                                $nowStr, $cacheId,
-                            ]
+                        $this->cachesRepository->replaceOwnerWaypoints(
+                            $cacheId, $waypoints, $nowStr
                         );
-
-                        // Attributes: delete and re-insert
-                        $this->connection->executeStatement(
-                            'DELETE FROM caches_attributes WHERE cache_id=?', [$cacheId]
-                        );
-                        foreach ($form['selected_attribs'] as $attribId) {
-                            $this->connection->executeStatement(
-                                'INSERT INTO caches_attributes (cache_id, attrib_id) VALUES (?, ?)',
-                                [$cacheId, $attribId]
-                            );
-                        }
-
-                        // Waypoints: replace all
-                        $this->connection->executeStatement(
-                            'DELETE FROM coordinates WHERE cache_id=? AND type=1 AND user_id IS NULL', [$cacheId]
-                        );
-                        foreach ($waypoints as $wpt) {
-                            $this->connection->executeStatement(
-                                'INSERT INTO coordinates (cache_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                                 VALUES (?, 1, ?, ?, ?, ?, ?, ?)',
-                                [$cacheId, $wpt['type'], $wpt['lat'], $wpt['lon'], $wpt['desc'], $nowStr, $nowStr]
-                            );
-                        }
 
                         // Personal note / user coords: upsert
                         $coords = self::parseCoords($form['user_coords']);
                         $userLat = $coords ? $coords[0] : 0.0;
                         $userLon = $coords ? $coords[1] : 0.0;
-                        $noteExisting = $this->connection->fetchAssociative(
-                            'SELECT id FROM coordinates WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-                            [$cacheId, $user->getUserId()]
-                        );
+                        $noteExisting = $this->cachesRepository->fetchUserNote($cacheId, $user->getUserId());
+
                         if ($form['cache_note'] !== '' || ($userLat !== 0.0 && $userLon !== 0.0)) {
                             if ($noteExisting) {
-                                $this->connection->executeStatement(
-                                    'UPDATE coordinates SET latitude=?, longitude=?, description=?, last_modified=? WHERE id=?',
-                                    [$userLat, $userLon, $form['cache_note'], $nowStr, (int)$noteExisting['id']]
-                                );
+                                $this->cachesRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
+                                $this->cachesRepository->upsertUserNoteText($cacheId, $user->getUserId(), $form['cache_note']);
                             } else {
-                                $this->connection->executeStatement(
-                                    'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                                     VALUES (?, ?, 2, 0, ?, ?, ?, ?, ?)',
-                                    [$cacheId, $user->getUserId(), $userLat, $userLon, $form['cache_note'], $nowStr, $nowStr]
-                                );
+                                $this->cachesRepository->upsertUserNoteText($cacheId, $user->getUserId(), $form['cache_note'] ?: ' ');
+                                $this->cachesRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
                             }
                         } elseif ($noteExisting) {
                             // Clear note/coords but preserve logpw in the same row
-                            $this->connection->executeStatement(
-                                'UPDATE coordinates SET latitude=0, longitude=0, description=\'\', last_modified=? WHERE id=?',
-                                [$nowStr, (int)$noteExisting['id']]
-                            );
+                            $this->cachesRepository->upsertUserNoteText($cacheId, $user->getUserId(), '');
+                            // Recreate an empty row so coords can be zeroed
+                            if ($form['cache_note'] === '' && $userLat === 0.0 && $userLon === 0.0) {
+                                $this->cachesRepository->upsertUserNoteText($cacheId, $user->getUserId(), ' ');
+                                $this->cachesRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), 0.0, 0.0);
+                            }
                         }
 
                         return $this->redirectToRoute('app_cache_by_wp_oc_gc', ['wpID' => $wpOc]);
@@ -588,82 +455,58 @@ class CachesController extends AbstractController
                         $activationDateStr = null;
                     }
 
-                    $this->connection->executeStatement(
-                        'INSERT INTO caches
-                            (user_id, name, longitude, latitude, type, status, country,
-                             date_hidden, date_activate, size, difficulty, terrain,
-                             logpw, search_time, way_length, wp_gc, node)
-                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                        [
-                            $user->getUserId(),
-                            $form['name'],
-                            $lon,
-                            $lat,
-                            $typeId,
-                            $status,
-                            $form['country'],
-                            $hiddenDate->format('Y-m-d'),
-                            $activationDateStr,
-                            $sizeId,
-                            $diff,
-                            $terr,
-                            $form['log_pw'],
-                            $searchTime,
-                            $wayLength,
-                            $form['wp_gc'],
-                            4,
-                        ]
-                    );
-                    $cacheId = (int)$this->connection->lastInsertId();
+                    $cacheId = $this->cachesRepository->insertCache([
+                        'user_id'       => $user->getUserId(),
+                        'name'          => $form['name'],
+                        'longitude'     => $lon,
+                        'latitude'      => $lat,
+                        'type'          => $typeId,
+                        'status'        => $status,
+                        'country'       => $form['country'],
+                        'date_hidden'   => $hiddenDate->format('Y-m-d'),
+                        'date_activate' => $activationDateStr,
+                        'size'          => $sizeId,
+                        'difficulty'    => $diff,
+                        'terrain'       => $terr,
+                        'logpw'         => $form['log_pw'],
+                        'search_time'   => $searchTime,
+                        'way_length'    => $wayLength,
+                        'wp_gc'         => $form['wp_gc'],
+                        'node'          => 4,
+                    ]);
 
-                    $this->connection->executeStatement(
-                        'INSERT INTO cache_desc
-                            (cache_id, language, `desc`, desc_html, hint, short_desc,
-                             last_modified, desc_htmledit, node)
-                         VALUES (?, ?, ?, 0, ?, ?, ?, 0, ?)',
-                        [
-                            $cacheId,
-                            strtoupper($form['desc_lang']),
-                            $form['desc'],
-                            $form['hints'],
-                            $form['short_desc'],
-                            $nowStr,
-                            4,
-                        ]
+                    $this->cachesRepository->insertDescription($cacheId, [
+                        'language'      => strtoupper($form['desc_lang']),
+                        'desc'          => $form['desc'],
+                        'desc_html'     => 0,
+                        'hint'          => $form['hints'],
+                        'short_desc'    => $form['short_desc'],
+                        'last_modified' => $nowStr,
+                        'desc_htmledit' => 0,
+                        'node'          => 4,
+                    ]);
+
+                    $this->cachesRepository->replaceCacheAttributes(
+                        $cacheId, $form['selected_attribs']
                     );
 
-                    foreach ($form['selected_attribs'] as $attribId) {
-                        $this->connection->executeStatement(
-                            'INSERT IGNORE INTO caches_attributes (cache_id, attrib_id) VALUES (?, ?)',
-                            [$cacheId, $attribId]
-                        );
-                    }
-
-                    // Additional waypoints
-                    foreach ($waypoints as $wpt) {
-                        $this->connection->executeStatement(
-                            'INSERT INTO coordinates (cache_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                             VALUES (?, 1, ?, ?, ?, ?, ?, ?)',
-                            [$cacheId, $wpt['type'], $wpt['lat'], $wpt['lon'], $wpt['desc'], $nowStr, $nowStr]
-                        );
-                    }
+                    $this->cachesRepository->replaceOwnerWaypoints(
+                        $cacheId, $waypoints, $nowStr
+                    );
 
                     // Save personal cache note and/or user coordinates
                     $userCoordsParsed = self::parseCoords($form['user_coords'] ?? '');
                     $userLat = $userCoordsParsed ? (float)$userCoordsParsed[0] : 0.0;
                     $userLon = $userCoordsParsed ? (float)$userCoordsParsed[1] : 0.0;
                     if ($form['cache_note'] !== '' || ($userLat !== 0.0 && $userLon !== 0.0)) {
-                        $this->connection->executeStatement(
-                            'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                             VALUES (?, ?, 2, 0, ?, ?, ?, ?, ?)',
-                            [$cacheId, $user->getUserId(), $userLat, $userLon, $form['cache_note'], $nowStr, $nowStr]
-                        );
+                        $noteText = $form['cache_note'] !== '' ? $form['cache_note'] : ' ';
+                        $this->cachesRepository->upsertUserNoteText($cacheId, $user->getUserId(), $noteText);
+                        if ($userLat !== 0.0 || $userLon !== 0.0) {
+                            $this->cachesRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
+                        }
                     }
 
-                    $wpOc = (string)$this->connection->fetchOne(
-                        'SELECT wp_oc FROM caches WHERE cache_id = ?',
-                        [$cacheId]
-                    );
+                    $wpOc = $this->cachesRepository->getWpOcById($cacheId);
 
                     return $this->redirectToRoute('app_cache_by_wp_oc_gc', ['wpID' => $wpOc]);
                 }
@@ -741,36 +584,11 @@ class CachesController extends AbstractController
         $body = json_decode($request->getContent(), true);
         $text = trim((string)($body['text'] ?? ''));
 
-        $cache = $this->connection->fetchAssociative('SELECT cache_id FROM caches WHERE wp_oc = ?', [$wp]);
-        if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
-        $cacheId = (int)$cache['cache_id'];
+        $cacheId = $this->cachesRepository->getCacheIdByWp($wp);
+        if (!$cacheId) return new JsonResponse(['error' => 'Cache not found'], 404);
 
-        $existing = $this->connection->fetchAssociative(
-            'SELECT id FROM coordinates WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-            [$cacheId, $userId]
-        );
-
-        if ($text === '') {
-            if ($existing) {
-                $this->connection->executeStatement('DELETE FROM coordinates WHERE id=?', [(int)$existing['id']]);
-            }
-            return new JsonResponse(['saved' => false]);
-        }
-
-        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
-        if ($existing) {
-            $this->connection->executeStatement(
-                'UPDATE coordinates SET description=?, last_modified=? WHERE id=?',
-                [$text, $now, (int)$existing['id']]
-            );
-        } else {
-            $this->connection->executeStatement(
-                'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                 VALUES (?,?,2,0,0,0,?,?,?)',
-                [$cacheId, $userId, $text, $now, $now]
-            );
-        }
-        return new JsonResponse(['saved' => true]);
+        $result = $this->cachesRepository->upsertUserNoteText($cacheId, $userId, $text);
+        return new JsonResponse($result);
     }
 
     #[Route("/api/cache/{wp}/logpw", name: "api_cache_logpw_save", methods: ["POST"])]
@@ -784,38 +602,11 @@ class CachesController extends AbstractController
         $body = json_decode($request->getContent(), true);
         $logpw = substr(trim((string)($body['logpw'] ?? '')), 0, 20);
 
-        $cache = $this->connection->fetchAssociative('SELECT cache_id FROM caches WHERE wp_oc = ?', [$wp]);
-        if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
-        $cacheId = (int)$cache['cache_id'];
+        $cacheId = $this->cachesRepository->getCacheIdByWp($wp);
+        if (!$cacheId) return new JsonResponse(['error' => 'Cache not found'], 404);
 
-        $existing = $this->connection->fetchAssociative(
-            'SELECT id, description, latitude, longitude FROM coordinates
-             WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-            [$cacheId, $userId]
-        );
-
-        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
-        if ($existing) {
-            // If clearing and the row has no other content, delete it.
-            $hasOther = ($existing['description'] !== null && $existing['description'] !== '')
-                || (float)$existing['latitude'] !== 0.0
-                || (float)$existing['longitude'] !== 0.0;
-            if ($logpw === '' && !$hasOther) {
-                $this->connection->executeStatement('DELETE FROM coordinates WHERE id=?', [(int)$existing['id']]);
-                return new JsonResponse(['saved' => true, 'logpw' => '']);
-            }
-            $this->connection->executeStatement(
-                'UPDATE coordinates SET logpw=?, last_modified=? WHERE id=?',
-                [$logpw, $now, (int)$existing['id']]
-            );
-        } elseif ($logpw !== '') {
-            $this->connection->executeStatement(
-                'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, logpw, date_created, last_modified)
-                 VALUES (?,?,2,0,0,0,"",?,?,?)',
-                [$cacheId, $userId, $logpw, $now, $now]
-            );
-        }
-        return new JsonResponse(['saved' => true, 'logpw' => $logpw]);
+        $result = $this->cachesRepository->upsertUserNoteLogpw($cacheId, $userId, $logpw);
+        return new JsonResponse($result);
     }
 
     #[Route("/api/cache/{wp}/coords", name: "api_cache_coords_save", methods: ["POST"])]
@@ -830,29 +621,11 @@ class CachesController extends AbstractController
         $lat = (float)($body['lat'] ?? 0);
         $lon = (float)($body['lon'] ?? 0);
 
-        $cache = $this->connection->fetchAssociative('SELECT cache_id FROM caches WHERE wp_oc = ?', [$wp]);
-        if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
-        $cacheId = (int)$cache['cache_id'];
+        $cacheId = $this->cachesRepository->getCacheIdByWp($wp);
+        if (!$cacheId) return new JsonResponse(['error' => 'Cache not found'], 404);
 
-        $existing = $this->connection->fetchAssociative(
-            'SELECT id FROM coordinates WHERE cache_id=? AND user_id=? AND type=2 ORDER BY id DESC LIMIT 1',
-            [$cacheId, $userId]
-        );
-
-        $now = (new \DateTimeImmutable())->format('Y-m-d H:i:s');
-        if ($existing) {
-            $this->connection->executeStatement(
-                'UPDATE coordinates SET latitude=?, longitude=?, last_modified=? WHERE id=?',
-                [$lat, $lon, $now, (int)$existing['id']]
-            );
-        } else {
-            $this->connection->executeStatement(
-                'INSERT INTO coordinates (cache_id, user_id, type, subtype, latitude, longitude, description, date_created, last_modified)
-                 VALUES (?,?,2,0,?,?,"",?,?)',
-                [$cacheId, $userId, $lat, $lon, $now, $now]
-            );
-        }
-        return new JsonResponse(['saved' => true]);
+        $result = $this->cachesRepository->upsertUserNoteCoords($cacheId, $userId, $lat, $lon);
+        return new JsonResponse($result);
     }
 
     #[Route("/api/cache/{wp}/log", name: "api_cache_log_create", methods: ["POST"])]
@@ -869,20 +642,16 @@ class CachesController extends AbstractController
         $text = trim((string)($body['text'] ?? ''));
         $submittedPw = trim((string)($body['password'] ?? ''));
 
-        $cache = $this->connection->fetchAssociative('SELECT cache_id, logpw, user_id FROM caches WHERE wp_oc = ?', [$wp]);
+        $cache = $this->cachesRepository->fetchCacheForLogOp($wp);
         if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
         $cacheId = (int)$cache['cache_id'];
         $cacheLogpw = (string)$cache['logpw'];
         $isOwner = (int)$cache['user_id'] === $userId;
 
-        // Status-changing log types (9=Archive, 10=Enable, 11=Disable) require
-        // cache ownership.
         if (in_array($type, [9, 10, 11], true) && !$isOwner) {
             return new JsonResponse(['error' => 'Only the cache owner can submit this log type'], 403);
         }
 
-        // Found-type logs (1=Found, 7=Attended) on a cache with a log password
-        // must submit a matching password. OC compares case-insensitively.
         if ($cacheLogpw !== '' && in_array($type, [1, 7], true)) {
             if ($submittedPw === '') {
                 return new JsonResponse(['error' => 'Log password required for this cache'], 422);
@@ -892,48 +661,28 @@ class CachesController extends AbstractController
             }
         }
 
-        // Found (1) / Attended (7) are one-per-user-per-cache. Reject a
-        // second one rather than silently letting the user double-log.
         if (in_array($type, [1, 7], true)) {
-            $dup = (int)$this->connection->fetchOne(
-                'SELECT COUNT(*) FROM cache_logs WHERE cache_id=? AND user_id=? AND type=?',
-                [$cacheId, $userId, $type]
-            );
+            $dup = $this->cachesRepository->countDuplicateLogs($cacheId, $userId, $type, null);
             if ($dup > 0) {
                 $name = $type === 1 ? 'Found it' : 'Attended';
                 return new JsonResponse(['error' => "You already have a $name log on this cache — edit that one instead"], 422);
             }
         }
 
-        // Normalize date to datetime
         if (strlen($date) === 10) $date .= ' 00:00:00';
 
-        // uuid, date_created, entry_last_modified, last_modified, log_last_modified, order_date
-        // are filled by trigger `cacheLogsBeforeInsert`. picture has no default — set it explicitly.
         try {
-            $this->connection->executeStatement(
-                'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
-                 VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
-                [$cacheId, $userId, $type, $date, $text]
-            );
+            $newId = $this->cachesRepository->insertLog($cacheId, $userId, $type, $date, $text);
         } catch (\Exception $e) {
             return new JsonResponse(['error' => 'DB insert failed: ' . $e->getMessage()], 500);
         }
-        $newId = (int)$this->connection->lastInsertId();
 
-        // Status-changing logs update the cache status
         $statusMap = [9 => 3, 10 => 1, 11 => 2];
         if (isset($statusMap[$type])) {
-            $this->connection->executeStatement(
-                'UPDATE caches SET status=? WHERE cache_id=?',
-                [$statusMap[$type], $cacheId]
-            );
+            $this->cachesRepository->updateCacheStatus($cacheId, $statusMap[$type]);
         }
 
-        $row = $this->connection->fetchAssociative(
-            'SELECT id, uuid, type, DATE_FORMAT(date, \'%Y-%m-%d\') AS date, text, text_html FROM cache_logs WHERE id=?',
-            [$newId]
-        );
+        $row = $this->cachesRepository->fetchLogForResponse($newId);
 
         return new JsonResponse(['saved' => true, 'log' => $row]);
     }
@@ -952,40 +701,29 @@ class CachesController extends AbstractController
         $text = trim((string)($body['text'] ?? ''));
         $submittedPw = trim((string)($body['password'] ?? ''));
 
-        $log = $this->connection->fetchAssociative(
-            'SELECT id, user_id, cache_id FROM cache_logs WHERE id=?', [$logId]
-        );
+        $log = $this->cachesRepository->fetchLogForAuth($logId);
         if (!$log || (int)$log['user_id'] !== $userId) {
             return new JsonResponse(['error' => 'Not authorized'], 403);
         }
         $cacheId = (int)$log['cache_id'];
 
-        $cache = $this->connection->fetchAssociative('SELECT logpw, user_id FROM caches WHERE wp_oc = ?', [$wp]);
+        $cache = $this->cachesRepository->fetchCacheForLogOp($wp);
         if (!$cache) return new JsonResponse(['error' => 'Cache not found'], 404);
         $cacheLogpw = (string)$cache['logpw'];
         $isOwner = (int)$cache['user_id'] === $userId;
 
-        // Status-changing log types require cache ownership
         if (in_array($type, [9, 10, 11], true) && !$isOwner) {
             return new JsonResponse(['error' => 'Only the cache owner can submit this log type'], 403);
         }
 
-        // Reject flipping a log's type to Found/Attended when the user
-        // already has another log of that type on this cache.
         if (in_array($type, [1, 7], true)) {
-            $dup = (int)$this->connection->fetchOne(
-                'SELECT COUNT(*) FROM cache_logs WHERE cache_id=? AND user_id=? AND type=? AND id<>?',
-                [$cacheId, $userId, $type, $logId]
-            );
+            $dup = $this->cachesRepository->countDuplicateLogs($cacheId, $userId, $type, $logId);
             if ($dup > 0) {
                 $name = $type === 1 ? 'Found it' : 'Attended';
                 return new JsonResponse(['error' => "You already have a $name log on this cache — edit that one instead"], 422);
             }
         }
 
-        // Same gate as createLog: Found/Attended on a password-protected cache
-        // must supply a matching password — applies to edits too, otherwise a
-        // user could post a Comment then edit it to Found and bypass the check.
         if ($cacheLogpw !== '' && in_array($type, [1, 7], true)) {
             if ($submittedPw === '') {
                 return new JsonResponse(['error' => 'Log password required for this cache'], 422);
@@ -997,18 +735,11 @@ class CachesController extends AbstractController
 
         if (strlen($date) === 10) $date .= ' 00:00:00';
 
-        $this->connection->executeStatement(
-            'UPDATE cache_logs SET type=?, date=?, text=?, text_html=0 WHERE id=?',
-            [$type, $date, $text, $logId]
-        );
+        $this->cachesRepository->updateLog($logId, $type, $date, $text);
 
-        // Status-changing logs update the cache status
         $statusMap = [9 => 3, 10 => 1, 11 => 2];
         if (isset($statusMap[$type])) {
-            $this->connection->executeStatement(
-                'UPDATE caches SET status=? WHERE cache_id=?',
-                [$statusMap[$type], $cacheId]
-            );
+            $this->cachesRepository->updateCacheStatus($cacheId, $statusMap[$type]);
         }
 
         return new JsonResponse(['saved' => true]);
@@ -1021,14 +752,12 @@ class CachesController extends AbstractController
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
         $userId = $user->getUserId();
-        $log = $this->connection->fetchAssociative(
-            'SELECT id, user_id FROM cache_logs WHERE id=?', [$logId]
-        );
+        $log = $this->cachesRepository->fetchLogForAuth($logId);
         if (!$log || (int)$log['user_id'] !== $userId) {
             return new JsonResponse(['error' => 'Not authorized'], 403);
         }
 
-        $this->connection->executeStatement('DELETE FROM cache_logs WHERE id=?', [$logId]);
+        $this->cachesRepository->deleteLogById($logId);
         return new JsonResponse(['deleted' => true]);
     }
 

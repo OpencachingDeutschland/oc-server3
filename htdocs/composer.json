@@ -31,7 +31,7 @@
         "jms/translation-bundle": "^1.2",
         "beberlei/doctrineextensions": "^1.0",
         "league/commonmark": "^0.18.3|^1.0|^2.0",
-        "opencaching/okapi": "dev-oc4-combined",
+        "opencaching/okapi": "dev-oc4-cache-crud",
         "endroid/qr-code": "^3.5.0|^4.0",
         "twbs/bootstrap": "^v4.1.0|^5.0",
         "components/jquery": "^3.2",

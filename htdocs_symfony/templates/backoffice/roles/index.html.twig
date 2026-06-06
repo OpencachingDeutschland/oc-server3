@@ -4,10 +4,14 @@
 
     <div>
         <h3>{{ 'Security roles' | trans }}..</h3>
+        {% if auth.getUser() %}
         <ul>
             <li>{{ 'You are' | trans }}: {{ auth.getUser().username }}</li>
             <li>{{ 'id' | trans }}: {{ auth.getUser().user_id }}</li>
         </ul>
+        {% else %}
+        <p>{{ 'Not logged in' | trans }}</p>
+        {% endif %}
     </div>
 
     {% if auth.isGranted('ROLE_TEAM') %}

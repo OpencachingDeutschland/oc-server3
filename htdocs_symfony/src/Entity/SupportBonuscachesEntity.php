@@ -4,24 +4,15 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\SupportBonuscachesRepository;
 
-#[ORM\Entity(repositoryClass: SupportBonuscachesRepository::class)]
-class SupportBonuscachesEntity extends AbstractEntity
+class SupportBonuscachesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $wpOc;
 
-    #[ORM\Column]
     public bool $isBonusCache;
 
-    #[ORM\Column]
     public string $belongsToBonusCache;
 
     public function __construct(string $wpOc = '', bool $isBonusCache = false, string $belongsToBonusCache = '')

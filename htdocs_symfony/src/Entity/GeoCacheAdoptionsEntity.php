@@ -5,27 +5,17 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheAdoptionsRepository;
 
-#[ORM\Entity(repositoryClass: CacheAdoptionsRepository::class)]
-class GeoCacheAdoptionsEntity extends AbstractEntity
+class GeoCacheAdoptionsEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public int $cacheId;
 
-    #[ORM\Column]
     public DateTime $date;
 
-    #[ORM\Column]
     public int $fromUserId;
 
-    #[ORM\Column]
     public int $toUserId;
 
     public UserEntity $fromUser;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use DateTime;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheVisitsEntity;
@@ -14,7 +13,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CacheVisitsRepository extends ServiceEntityRepository
+class CacheVisitsRepository
 {
     private const TABLE = 'cache_visits';
 

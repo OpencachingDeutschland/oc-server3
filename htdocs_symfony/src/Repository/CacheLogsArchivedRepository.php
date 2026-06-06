@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCacheLogsArchivedEntity;
@@ -13,7 +12,7 @@ use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CacheLogsArchivedRepository extends ServiceEntityRepository
+class CacheLogsArchivedRepository
 {
     private const TABLE = 'cache_logs_archived';
 

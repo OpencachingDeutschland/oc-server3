@@ -4,21 +4,13 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\UserRolesRepository;
 
-#[ORM\Entity(repositoryClass: UserRolesRepository::class)]
-class UserRolesEntity extends AbstractEntity
+class UserRolesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public int $userId;
 
-    #[ORM\Column]
     public int $roleId;
 
     public function __construct(int $userId = 0, int $roleId = 0)

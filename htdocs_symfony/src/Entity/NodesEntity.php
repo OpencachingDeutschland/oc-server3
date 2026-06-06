@@ -4,24 +4,15 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\NodesRepository;
 
-#[ORM\Entity(repositoryClass: NodesRepository::class)]
-class NodesEntity extends AbstractEntity
+class NodesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public string $url;
 
-    #[ORM\Column]
     public string $waypointPrefix;
 
     public function isNew(): bool

@@ -4,27 +4,17 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\SupportListingCommentsRepository;
 
-#[ORM\Entity(repositoryClass: SupportListingCommentsRepository::class)]
-class SupportListingCommentsEntity extends AbstractEntity
+class SupportListingCommentsEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $wpOc;
 
-    #[ORM\Column]
     public string $comment;
 
-    #[ORM\Column]
     public string $commentCreated;
 
-    #[ORM\Column]
     public string $commentLastModified;
 
     public function __construct(string $wpOc, string $comment = '')

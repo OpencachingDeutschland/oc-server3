@@ -5,28 +5,17 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheStatusModifiedRepository;
 
-#[ORM\Entity(repositoryClass: CacheStatusModifiedRepository::class)]
-class GeoCacheStatusModifiedEntity extends AbstractEntity
+class GeoCacheStatusModifiedEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $cacheId = 0;
 
-    #[ORM\Id]
-    #[ORM\Column]
     public DateTime $dateModified;
 
-    #[ORM\Column]
     public int $oldState;
 
-    #[ORM\Column]
     public int $newState;
 
-    #[ORM\Column]
     public int $userId;
 
     public UserEntity $user;

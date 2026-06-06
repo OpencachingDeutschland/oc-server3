@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\SecurityRolesRepository;
 
-#[ORM\Entity(repositoryClass: SecurityRolesRepository::class)]
-class SecurityRolesEntity extends AbstractEntity
+class SecurityRolesEntity
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $role;
 
     public function isNew(): bool

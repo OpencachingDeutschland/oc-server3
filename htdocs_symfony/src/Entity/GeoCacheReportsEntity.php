@@ -5,42 +5,27 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheReportsRepository;
 
-#[ORM\Entity(repositoryClass: CacheReportsRepository::class)]
-class GeoCacheReportsEntity extends AbstractEntity
+class GeoCacheReportsEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public DateTime $dateCreated;
 
-    #[ORM\Column]
     public int $cacheid;
 
-    #[ORM\Column]
     public int $userid;
 
-    #[ORM\Column]
     public int $reason;
 
-    #[ORM\Column]
     public string $note;
 
-    #[ORM\Column]
     public int $status;
 
-    #[ORM\Column]
     public int $adminid;
 
-    #[ORM\Column]
     public string $lastmodified;
 
-    #[ORM\Column]
     public string $comment;
 
     public UserEntity $user;

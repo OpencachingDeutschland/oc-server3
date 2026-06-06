@@ -4,84 +4,55 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheLogsArchivedRepository;
 
-#[ORM\Entity(repositoryClass: CacheLogsArchivedRepository::class)]
-class GeoCacheLogsArchivedEntity extends AbstractEntity
+class GeoCacheLogsArchivedEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $uuid;
 
-    #[ORM\Column]
     public int $node;
 
-    #[ORM\Column]
     public string $dateCreated;
 
-    #[ORM\Column]
     public string $entryLastModified;
 
-    #[ORM\Column]
     public string $lastModified;
 
-    #[ORM\Column]
     public string $okapiSyncbase;
 
-    #[ORM\Column]
     public string $logLastModified;
 
-    #[ORM\Column]
     public int $cacheId;
 
-    #[ORM\Column]
     public int $userId;
 
-    #[ORM\Column]
     public int $type;
 
-    #[ORM\Column]
     public int $ocTeamComment;
 
-    #[ORM\Column]
     public string $date;
 
-    #[ORM\Column]
     public string $orderDate;
 
-    #[ORM\Column]
     public int $needsMaintenance;
 
-    #[ORM\Column]
     public int $listingOutdated;
 
-    #[ORM\Column]
     public string $text;
 
-    #[ORM\Column]
     public int $textHtml;
 
-    #[ORM\Column]
     public int $textHtmledit;
 
-    #[ORM\Column]
     public int $ownerNotified;
 
-    #[ORM\Column]
     public int $picture;
 
-    #[ORM\Column]
     public string $deletionDate;
 
-    #[ORM\Column]
     public int $deletedBy;
 
-    #[ORM\Column]
     public int $restoredBy;
 
     public function isNew(): bool

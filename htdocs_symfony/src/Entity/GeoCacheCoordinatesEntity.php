@@ -5,30 +5,19 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheCoordinatesRepository;
 
-#[ORM\Entity(repositoryClass: CacheCoordinatesRepository::class)]
-class GeoCacheCoordinatesEntity extends AbstractEntity
+class GeoCacheCoordinatesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public DateTime $dateCreated;
 
-    #[ORM\Column]
     public int $cacheId;
 
-    #[ORM\Column]
     public float $longitude;
 
-    #[ORM\Column]
     public float $latitude;
 
-    #[ORM\Column]
     public int $restoredBy;
 
     public UserEntity $user;

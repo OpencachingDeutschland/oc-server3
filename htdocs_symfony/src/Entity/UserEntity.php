@@ -4,74 +4,49 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\LegacyPasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-class UserEntity extends AbstractEntity implements UserInterface, LegacyPasswordAuthenticatedUserInterface
+class UserEntity implements UserInterface, LegacyPasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $userId = 0;
 
-    #[ORM\Column]
     public string $dateCreated;
 
-    #[ORM\Column]
     public string $lastModified;
 
-    #[ORM\Column]
     public string $lastLogin;
 
-    #[ORM\Column]
     public string $username;
 
-    #[ORM\Column]
     public string $password;
 
-    #[ORM\Column]
     public string $email;
 
-    #[ORM\Column]
     public bool $emailProblems = false;
 
-    #[ORM\Column]
     public float $latitude = 0;
 
-    #[ORM\Column]
     public float $longitude = 0;
 
-    #[ORM\Column]
     public bool $isActive = false;
 
-    #[ORM\Column]
     public string $firstname;
 
-    #[ORM\Column]
     public string $lastname;
 
-    #[ORM\Column]
     public string $country;
 
-    #[ORM\Column]
     public bool $permanentLoginFlag = true;
 
-    #[ORM\Column]
     public string $activationCode;
 
-    #[ORM\Column]
     public string $language = 'DE';
 
-    #[ORM\Column]
     public string $description = '';
 
-    #[ORM\Column]
     public bool $gdprDeletion = false;
 
-    #[ORM\Column]
     public array $roles;
 
     public function isNew(): bool

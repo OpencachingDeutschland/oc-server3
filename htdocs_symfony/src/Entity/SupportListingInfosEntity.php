@@ -5,60 +5,39 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\SupportListingInfosRepository;
 
-#[ORM\Entity(repositoryClass: SupportListingInfosRepository::class)]
-class SupportListingInfosEntity extends AbstractEntity
+class SupportListingInfosEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $wpOc;
 
-    #[ORM\Column]
     public int $nodeId;
 
-    #[ORM\Column]
     public string $nodeOwnerId;
 
-    #[ORM\Column]
     public string $nodeListingId;
 
-    #[ORM\Column]
     public string $nodeListingWp;
 
-    #[ORM\Column]
     public string $nodeListingName;
 
-    #[ORM\Column]
     public int $nodeListingSize;
 
-    #[ORM\Column]
     public int $nodeListingDifficulty;
 
-    #[ORM\Column]
     public int $nodeListingTerrain;
 
-    #[ORM\Column]
     public float $nodeListingCoordinatesLon;
 
-    #[ORM\Column]
     public float $nodeListingCoordinatesLat;
 
-    #[ORM\Column]
     public bool $nodeListingAvailable;
 
-    #[ORM\Column]
     public bool $nodeListingArchived;
 
-    #[ORM\Column]
     public DateTime $lastModified;
 
-    #[ORM\Column]
     public int $importStatus;
 
     public NodesEntity $node;

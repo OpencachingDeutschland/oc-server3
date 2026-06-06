@@ -4,45 +4,29 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\LogTypesRepository;
 
-#[ORM\Entity(repositoryClass: LogTypesRepository::class)]
-class LogTypesEntity extends AbstractEntity
+class LogTypesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public int $transId;
 
-    #[ORM\Column]
     public string $permission;
 
-    #[ORM\Column]
     public int $cacheStatus;
 
-    #[ORM\Column]
     public string $de;
 
-    #[ORM\Column]
     public string $en;
 
-    #[ORM\Column]
     public string $iconSmall;
 
-    #[ORM\Column]
     public int $allowRating;
 
-    #[ORM\Column]
     public int $requirePassword;
 
-    #[ORM\Column]
     public int $maintenanceLogs;
 
     public function isNew(): bool

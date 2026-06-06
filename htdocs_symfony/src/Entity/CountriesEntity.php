@@ -4,45 +4,29 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CountriesRepository;
 
-#[ORM\Entity(repositoryClass: CountriesRepository::class)]
-class CountriesEntity extends AbstractEntity
+class CountriesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public string $short = '';
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public int $transId;
 
-    #[ORM\Column]
     public string $de;
 
-    #[ORM\Column]
     public string $en;
 
-    #[ORM\Column]
     public int $listDefaultDe;
 
-    #[ORM\Column]
     public string $sortDe;
 
-    #[ORM\Column]
     public int $listDefaultEn;
 
-    #[ORM\Column]
     public string $sortEn;
 
-    #[ORM\Column]
     public int $admDisplay2;
 
-    #[ORM\Column]
     public int $admDisplay3;
 
     public function isNew(): bool

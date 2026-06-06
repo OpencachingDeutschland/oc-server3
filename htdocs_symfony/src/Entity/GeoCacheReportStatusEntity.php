@@ -4,21 +4,13 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheReportStatusRepository;
 
-#[ORM\Entity(repositoryClass: CacheReportStatusRepository::class)]
-class GeoCacheReportStatusEntity extends AbstractEntity
+class GeoCacheReportStatusEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public int $transId;
 
     public function isNew(): bool

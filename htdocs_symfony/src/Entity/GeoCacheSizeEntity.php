@@ -4,30 +4,19 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheSizeRepository;
 
-#[ORM\Entity(repositoryClass: CacheSizeRepository::class)]
-class GeoCacheSizeEntity extends AbstractEntity
+class GeoCacheSizeEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public int $transId;
 
-    #[ORM\Column]
     public int $ordinal;
 
-    #[ORM\Column]
     public string $de;
 
-    #[ORM\Column]
     public string $en;
 
     public function isNew(): bool

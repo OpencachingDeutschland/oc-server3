@@ -4,48 +4,31 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheTypeRepository;
 
-#[ORM\Entity(repositoryClass: CacheTypeRepository::class)]
-class GeoCacheTypeEntity extends AbstractEntity
+class GeoCacheTypeEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public int $transId;
 
-    #[ORM\Column]
     public int $ordinal;
 
-    #[ORM\Column]
     public string $short;
 
-    #[ORM\Column]
     public string $de;
 
-    #[ORM\Column]
     public string $en;
 
-    #[ORM\Column]
     public string $iconLarge;
 
-    #[ORM\Column]
     public string $short2;
 
-    #[ORM\Column]
     public int $short2TransId;
 
-    #[ORM\Column]
     public string $kmlName;
 
-    #[ORM\Column]
     public string $svgName;
 
     public function isNew(): bool

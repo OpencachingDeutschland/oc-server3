@@ -4,123 +4,81 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CachesRepository;
 
-#[ORM\Entity(repositoryClass: CachesRepository::class)]
-class GeoCachesEntity extends AbstractEntity
+class GeoCachesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $cacheId = 0;
 
-    #[ORM\Column]
     public string $uuid;
 
-    #[ORM\Column]
     public int $node;
 
-    #[ORM\Column]
     public string $dateCreated;
 
-    #[ORM\Column]
     public int $isPublishdate;
 
-    #[ORM\Column]
     public string $lastModified;
 
-    #[ORM\Column]
     public string $okapiSyncbase;
 
-    #[ORM\Column]
     public string $listingLastModified;
 
-    #[ORM\Column]
     public string $metaLastModified;
 
-    #[ORM\Column]
     public int $userId;
 
-    #[ORM\Column]
     public string $name;
 
-    #[ORM\Column]
     public float $longitude;
 
-    #[ORM\Column]
     public float $latitude;
 
-    #[ORM\Column]
     public int $type;
 
-    #[ORM\Column]
     public int $status;
 
-    #[ORM\Column]
     public string $country;
 
-    #[ORM\Column]
     public string $dateHidden;
 
-    #[ORM\Column]
     public int $size;
 
-    #[ORM\Column]
     public int $difficulty;
 
-    #[ORM\Column]
     public int $terrain;
 
-    #[ORM\Column]
     public string $logpw;
 
-    #[ORM\Column]
     public float $searchTime;
 
-    #[ORM\Column]
     public float $wayLength;
 
-    #[ORM\Column]
     public string $wpGc;
 
-    #[ORM\Column]
     public string $wpGcMaintained;
 
-    #[ORM\Column]
     public string $wpNc;
 
-    #[ORM\Column]
     public string $wpOc;
 
-    #[ORM\Column]
     public string $descLanguages;
 
-    #[ORM\Column]
     public string $defaultDesclang;
 
-    #[ORM\Column]
     public string $dateActivate;
 
-    #[ORM\Column]
     public int $needNpaRecalc;
 
-    #[ORM\Column]
     public int $showCachelists;
 
-    #[ORM\Column]
     public int $protectOldCoords;
 
-    #[ORM\Column]
     public int $needsMaintenance;
 
-    #[ORM\Column]
     public int $listingOutdated;
 
-    #[ORM\Column]
     public string $flagsLastModified;
 
-    #[ORM\Column]
     public bool $gdprDeletion = false;
 
     public UserEntity $user;

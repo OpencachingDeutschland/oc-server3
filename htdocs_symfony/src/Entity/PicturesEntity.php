@@ -5,66 +5,43 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\PicturesRepository;
 
-#[ORM\Entity(repositoryClass: PicturesRepository::class)]
-class PicturesEntity extends AbstractEntity
+class PicturesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $uuid;
 
-    #[ORM\Column]
     public int $node;
 
-    #[ORM\Column]
     public DateTime $dateCreated;
 
-    #[ORM\Column]
     public DateTime $lastModified;
 
-    #[ORM\Column]
     public string $url;
 
-    #[ORM\Column]
     public string $title;
 
-    #[ORM\Column]
     public DateTime $lastUrlCheck;
 
-    #[ORM\Column]
     public int $objectId;
 
-    #[ORM\Column]
     public int $objectType;
 
-    #[ORM\Column]
     public string $thumbUrl;
 
-    #[ORM\Column]
     public DateTime $thumbLastGenerated;
 
-    #[ORM\Column]
     public int $spoiler;
 
-    #[ORM\Column]
     public int $local;
 
-    #[ORM\Column]
     public int $unknownFormat;
 
-    #[ORM\Column]
     public int $display;
 
-    #[ORM\Column]
     public int $mappreview;
 
-    #[ORM\Column]
     public int $seq;
 
     public function isNew(): bool

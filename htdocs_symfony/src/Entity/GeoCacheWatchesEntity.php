@@ -4,19 +4,11 @@ declare(strict_types=1);
 
 namespace Oc\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheWatchesRepository;
 
-#[ORM\Entity(repositoryClass: CacheWatchesRepository::class)]
-class GeoCacheWatchesEntity extends AbstractEntity
+class GeoCacheWatchesEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $cacheId = 0;
 
-    #[ORM\Id]
-    #[ORM\Column]
     public int $userId;
 
     public function isNew(): bool

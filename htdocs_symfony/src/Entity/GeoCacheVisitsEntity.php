@@ -5,22 +5,13 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheVisitsRepository;
 
-#[ORM\Entity(repositoryClass: CacheVisitsRepository::class)]
-class GeoCacheVisitsEntity extends AbstractEntity
+class GeoCacheVisitsEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $cacheId = 0;
 
-    #[ORM\Id]
-    #[ORM\Column]
     public int $userIdIP;
 
-    #[ORM\Column]
     public int $count;
 
     /** @var DateTime */

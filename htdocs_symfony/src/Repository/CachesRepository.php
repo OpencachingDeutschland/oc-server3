@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Oc\Entity\GeoCachesEntity;
@@ -14,7 +13,7 @@ use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class CachesRepository extends ServiceEntityRepository
+class CachesRepository
 {
     private const TABLE = 'caches';
 

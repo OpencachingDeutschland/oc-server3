@@ -5,78 +5,51 @@ declare(strict_types=1);
 namespace Oc\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
-use Oc\Repository\AbstractEntity;
-use Oc\Repository\CacheLogsRepository;
 
-#[ORM\Entity(repositoryClass: CacheLogsRepository::class)]
-class GeoCacheLogsEntity extends AbstractEntity
+class GeoCacheLogsEntity
 {
-    #[ORM\Id]
-    #[ORM\Column]
     public int $id = 0;
 
-    #[ORM\Column]
     public string $uuid;
 
-    #[ORM\Column]
     public int $node;
 
-    #[ORM\Column]
     public DateTime $dateCreated;
 
-    #[ORM\Column]
     public DateTime $entryLastModified;
 
-    #[ORM\Column]
     public DateTime $lastModified;
 
-    #[ORM\Column]
     public string $okapiSyncbase;
 
-    #[ORM\Column]
     public DateTime $logLastModified;
 
-    #[ORM\Column]
     public int $cacheId;
 
-    #[ORM\Column]
     public int $userId;
 
-    #[ORM\Column]
     public int $type;
 
-    #[ORM\Column]
     public int $ocTeamComment;
 
-    #[ORM\Column]
     public DateTime $date;
 
-    #[ORM\Column]
     public DateTime $orderDate;
 
-    #[ORM\Column]
     public int $needsMaintenance;
 
-    #[ORM\Column]
     public int $listingOutdated;
 
-    #[ORM\Column]
     public string $text;
 
-    #[ORM\Column]
     public int $textHtml;
 
-    #[ORM\Column]
     public int $textHtmledit;
 
-    #[ORM\Column]
     public int $ownerNotified;
 
-    #[ORM\Column]
     public int $picture;
 
-    #[ORM\Column]
     public bool $gdprDeletion;
 
     public LogTypesEntity $logType;

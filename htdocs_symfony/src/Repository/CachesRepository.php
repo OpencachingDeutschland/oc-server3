@@ -10,7 +10,7 @@ use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
-use Symfony\Bundle\SecurityBundle\Security;
+use Oc\Security\Auth;
 
 class CachesRepository
 {
@@ -18,7 +18,7 @@ class CachesRepository
 
     private Connection $connection;
 
-    private Security $security;
+    private Auth $auth;
 
     private CachesAttributesRepository $cachesAttributesRepository;
 
@@ -44,7 +44,7 @@ class CachesRepository
 
     public function __construct(
             Connection $connection,
-            Security $security,
+            Auth $auth,
             CachesAttributesRepository $cachesAttributesRepository,
             CacheIgnoreRepository $cacheIgnoreRepository,
             CacheLogsRepository $cacheLogsRepository,
@@ -58,7 +58,7 @@ class CachesRepository
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
-        $this->security = $security;
+        $this->auth = $auth;
         $this->cachesAttributesRepository = $cachesAttributesRepository;
         $this->cacheIgnoreRepository = $cacheIgnoreRepository;
         $this->cacheLogsRepository = $cacheLogsRepository;
@@ -103,7 +103,7 @@ class CachesRepository
      * @throws Exception
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = []): GeoCachesEntity
+    public function fetchOneBy(array $where = []): ?array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
                 ->select('*')
@@ -323,13 +323,10 @@ class CachesRepository
      *
      * @throws Exception
      */
-    public function getCacheiconImagename(GeoCachesEntity $entity): array
+    public function getCacheiconImagename(array $entity): array
     {
-        if ($this->security->getUser() != null) {
-            $loggedInUserId = $this->security->getUser()->userId;
-        } else {
-            $loggedInUserId = 0;
-        }
+        $user = $this->auth->getUser();
+        $loggedInUserId = $user ? (int) $user['user_id'] : 0;
         $result = array();
 
         $result['type'] = $entity->cacheType->svgName;

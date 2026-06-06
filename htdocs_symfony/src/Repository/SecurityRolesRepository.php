@@ -113,14 +113,14 @@ class SecurityRolesRepository
     /**
      * @throws Exception
      */
-    public function fetchUserRoles(UserEntity $user): array
+    public function fetchUserRoles(array $user): array
     {
         $statement = $this->connection->createQueryBuilder()
                 ->select('*')
                 ->from(self::TABLE, 'sr')
                 ->join('sr', 'user_roles', 'ur', 'sr.id = ur.role_id')
                 ->where('ur.user_id = :userId')
-                ->setParameter('userId', $user->userId, ParameterType::INTEGER)
+                ->setParameter('userId', (int) $user['user_id'], ParameterType::INTEGER)
                 ->executeQuery();
 
         $result = $statement->fetchAllAssociative();

@@ -29,7 +29,12 @@ class SecurityController extends AbstractController
             if ($username !== '' && $password !== '') {
                 $user = $this->auth->login($username, $password);
                 if ($user) {
-                    return $this->redirectToRoute('app_index_index');
+                    $response = $this->redirectToRoute('app_index_index');
+                    $cookie = $this->auth->getLoginCookie();
+                    if ($cookie) {
+                        $response->headers->setCookie($cookie);
+                    }
+                    return $response;
                 }
                 $error = 'Invalid credentials.';
                 $lastUsername = $username;

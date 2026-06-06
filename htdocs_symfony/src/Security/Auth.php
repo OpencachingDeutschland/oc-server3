@@ -102,7 +102,7 @@ class Auth
             'last_login' => $now,
         ]);
 
-        // Set cookie
+        // Build cookie data
         $cookieData = base64_encode(json_encode([
             'userid'    => $row['user_id'],
             'username'  => $row['username'],
@@ -111,27 +111,31 @@ class Auth
             'lastlogin' => $now,
         ]));
 
-        $response = new Response();
-        $response->headers->setCookie(
-            new \Symfony\Component\HttpFoundation\Cookie(
-                'ocdevelopmentdata',
-                $cookieData,
-                time() + 365 * 86400,
-                '/',
-                null,
-                true,   // secure
-                true,   // httpOnly
-                false,  // raw
-                'lax'
-            )
+        $this->loginCookie = new \Symfony\Component\HttpFoundation\Cookie(
+            'ocdevelopmentdata',
+            $cookieData,
+            time() + 365 * 86400,
+            '/',
+            null,
+            true,   // secure
+            true,   // httpOnly
+            false,  // raw
+            'lax'
         );
-        $response->sendHeaders();
 
         $this->user = $row;
         $this->loaded = true;
 
         return $row;
     }
+
+    /** Get the cookie to set after successful login. */
+    public function getLoginCookie(): ?\Symfony\Component\HttpFoundation\Cookie
+    {
+        return $this->loginCookie ?? null;
+    }
+
+    private ?\Symfony\Component\HttpFoundation\Cookie $loginCookie = null;
 
     /** Logout — clear the cookie. */
     public function logout(): void

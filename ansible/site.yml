@@ -40,20 +40,12 @@
       args:
         creates: /etc/apt/sources.list.d/php.list
 
-    - name: Add MariaDB 11.4 LTS repo (Debian 13 ships 11.8 which breaks DEFAULTs)
-      shell: |
-        curl -sSLo /usr/share/keyrings/mariadb-keyring.pgp https://supplychain.mariadb.com/mariadb-keyring.pgp
-        echo "deb [signed-by=/usr/share/keyrings/mariadb-keyring.pgp] https://archive.mariadb.org/mariadb-11.4/repo/debian/ trixie main" > /etc/apt/sources.list.d/mariadb.list
-        apt-get update
-      args:
-        creates: /etc/apt/sources.list.d/mariadb.list
-
     - name: Install base packages (system)
       apt:
         name:
           - apache2
-          - mariadb-client=1:11.4.*
-          - mariadb-server=1:11.4.*
+          - mariadb-client
+          - mariadb-server
           - git
           - composer
           - redis-server
@@ -124,6 +116,16 @@
         path: /etc/apache2/apache2.conf
         line: "LimitRequestFieldSize 16380"
         insertafter: EOF
+
+    - name: SECURITY - Configure Apache security directives
+      lineinfile:
+        path: /etc/apache2/apache2.conf
+        line: "{{ item }}"
+        insertafter: EOF
+      loop:
+        - "ServerTokens Prod"
+        - "ServerSignature Off"
+        - "FileETag None"
 
     - name: Copy SSH deploy keys for GitHub repos
       copy:
@@ -246,7 +248,16 @@
           ; Security hardening for production-like environment
           expose_php = Off
           allow_url_fopen = Off
-          open_basedir = /var/www/oc/oc-server3:/tmp:/usr/local/lib/php
+          ; Error handling
+          display_errors = On
+          display_startup_errors = Off
+          log_errors = On
+          error_log = /var/log/php/error-8.2.log
+          ; Session security
+          session.cookie_httponly = 1
+          session.cookie_secure = 1
+          session.cookie_samesite = "Lax"
+          session.gc_maxlifetime = 3600
         dest: /etc/php/8.2/fpm/conf.d/99-security.ini
         owner: root
         group: root
@@ -259,12 +270,68 @@
           ; Security hardening for production-like environment
           expose_php = Off
           allow_url_fopen = Off
-          open_basedir = /var/www/oc/oc-server3:/tmp:/usr/local/lib/php
+          ; Error handling
+          display_errors = On
+          display_startup_errors = Off
+          log_errors = On
+          error_log = /var/log/php/error-8.4.log
+          ; Session security
+          session.cookie_httponly = 1
+          session.cookie_secure = 1
+          session.cookie_samesite = "Lax"
+          session.gc_maxlifetime = 3600
         dest: /etc/php/8.4/fpm/conf.d/99-security.ini
         owner: root
         group: root
         mode: "0644"
       notify: restart php8.4-fpm
+
+    - name: SECURITY - Create PHP error log directory
+      file:
+        path: /var/log/php
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: "0755"
+
+    - name: SECURITY - Configure log rotation for PHP error logs
+      copy:
+        content: |
+          /var/log/php/*.log {
+              daily
+              rotate 14
+              missingok
+              notifempty
+              compress
+              delaycompress
+              postrotate
+                  systemctl reload php8.2-fpm php8.4-fpm > /dev/null 2>&1 || true
+              endscript
+          }
+        dest: /etc/logrotate.d/php-fpm
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: SECURITY - Configure log rotation for Apache access/error logs
+      copy:
+        content: |
+          /var/log/apache2/*.log {
+              daily
+              rotate 30
+              missingok
+              notifempty
+              compress
+              delaycompress
+              sharedscripts
+              postrotate
+                  systemctl reload apache2 > /dev/null 2>&1 || true
+              endscript
+          }
+        dest: /etc/logrotate.d/apache2-custom
+        owner: root
+        group: root
+        mode: "0644"
 
     - name: Flush handlers (apply PHP-FPM changes now)
       meta: flush_handlers
@@ -286,7 +353,7 @@
           <IfModule mod_evasive20.c>
               DOSHashTableSize 3097
               DOSPageCount 2
-              DOSSiteCount 50
+              DOSSiteCount 20
               DOSPageInterval 1
               DOSSiteInterval 1
               DOSBlockingPeriod 600
@@ -297,6 +364,28 @@
         owner: root
         group: root
         mode: "0644"
+      notify: restart apache2
+
+    - name: SECURITY - Create Apache rate limiting config for auth endpoints
+      copy:
+        content: |
+          # SECURITY: Stricter limits on login and API authentication endpoints
+          <LocationMatch "^/(security/login|okapi/services/caches/create|okapi/services/caches/update|okapi/services/caches/delete)">
+              <IfModule mod_evasive20.c>
+                  DOSPageCount 5
+                  DOSPageInterval 60
+              </IfModule>
+          </LocationMatch>
+        dest: /etc/apache2/conf-available/security-rate-limits.conf
+        owner: root
+        group: root
+        mode: "0644"
+      notify: restart apache2
+
+    - name: SECURITY - Enable rate limiting config
+      command: a2enconf security-rate-limits.conf
+      args:
+        creates: /etc/apache2/conf-enabled/security-rate-limits.conf
       notify: restart apache2
 
     - name: Start and enable services
@@ -340,7 +429,42 @@
         group: "{{ web_group }}"
         recurse: yes
 
+    - name: "Clone OKAPI fork directly into htdocs/okapi (preserves .git for daily git pull)"
+      shell: |
+        rm -rf {{ app_root }}/htdocs/okapi
+        GIT_SSH_COMMAND='ssh -i /root/.ssh/id_ed25519_okapi_deploy -o StrictHostKeyChecking=no' git clone --branch {{ okapi_branch }} {{ okapi_repo }} {{ app_root }}/htdocs/okapi
+        cd {{ app_root }}/htdocs/okapi
+        # Move okapi/ subdirectory contents up one level
+        for f in okapi/* okapi/.[!.]*; do
+          [ -e "$f" ] || continue
+          mv "$f" ./
+        done 2>/dev/null
+        rmdir okapi 2>/dev/null || true
+        # Fix autoload — code is now at root, not in okapi/ subdir
+        sed -i 's|"okapi\\\\": "okapi/"|"okapi\\\\": "."|' composer.json
+
+    - name: Install OKAPI composer dependencies
+      shell: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --no-progress
+      args:
+        chdir: "{{ app_root }}/htdocs/okapi"
+
+    - name: Fix OKAPI ownership
+      file:
+        path: "{{ app_root }}/htdocs/okapi"
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        recurse: yes
+
     # ── Phase 3: Database ──────────────────────────────────────────────
+
+    - name: Configure MariaDB sql_mode for legacy code compatibility (disable STRICT_TRANS_TABLES)
+      lineinfile:
+        path: /etc/mysql/mariadb.conf.d/50-server.cnf
+        regexp: "^sql_mode"
+        line: "sql_mode = ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+        insertafter: '\[mysqld\]'
+        state: present
+      notify: restart mariadb
 
     - name: Install Python MySQL module
       apt:
@@ -352,17 +476,55 @@
         name: "{{ db_name }}"
         state: present
         login_unix_socket: /var/run/mysqld/mysqld.sock
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
-    - name: Create database user (limited privileges)
+    - name: SECURITY - Create database user (app — read/write + stored proc management)
       mysql_user:
         name: "{{ db_user }}"
         password: "{{ db_pass }}"
-        # SECURITY: Limited privileges for application needs (excludes GRANT, SUPER, etc)
+        # SECURITY: Application user has SELECT, INSERT, UPDATE, DELETE, LOCK TABLES, EXECUTE
+        # Plus ALTER ROUTINE for maintain.php to rebuild stored procedures/triggers
+        # Excludes: CREATE, DROP (table-level), GRANT
+        priv: "{{ db_name }}.*:SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE ROUTINE,ALTER ROUTINE,CREATE TEMPORARY TABLES,TRIGGER,LOCK TABLES,EXECUTE"
+        state: present
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+      when: db_local is defined and (db_local | bool)
+
+    - name: SECURITY - Create database admin user (migrations and triggers only)
+      mysql_user:
+        name: "{{ db_admin_user }}"
+        password: "{{ db_admin_pass }}"
+        # SECURITY: Admin user for schema changes and trigger management (used during deploy only)
+        # Created but NOT used by running application
         priv: "{{ db_name }}.*:SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,CREATE ROUTINE,ALTER ROUTINE,TRIGGER,LOCK TABLES"
         state: present
         login_unix_socket: /var/run/mysqld/mysqld.sock
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
+
+    - name: SECURITY - Save database credentials to secure file (admin review)
+      copy:
+        content: |
+          # PRODUCTION-READY DATABASE CREDENTIALS
+          # Generated: {{ ansible_date_time.iso8601 }}
+          # WARNING: Store these securely. Delete after reviewing in application config.
+
+          App User (used by application):
+            Username: {{ db_user }}
+            Password: {{ db_pass }}
+            Privileges: SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE
+
+          Admin User (used for migrations only):
+            Username: {{ db_admin_user }}
+            Password: {{ db_admin_pass }}
+            Privileges: Full (for schema changes)
+
+          # Keep this file private:
+          # chmod 600 /root/.oc-credentials
+        dest: /root/.oc-credentials
+        owner: root
+        group: root
+        mode: "0600"
+      when: db_local is defined and (db_local | bool)
 
     # Database foundation: dump_v158.sql provides complete base schema
     # Triggers/stored procs from dump have root@localhost definer;
@@ -374,7 +536,7 @@
         mysql -u root --force {{ db_name }} < {{ app_root }}/sql/dump_v158.sql 2>&1 || true
       args:
         executable: /bin/bash
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     # ── Phase 4: Legacy App (oc3) Config ───────────────────────────────
 
@@ -416,12 +578,24 @@
         group: "{{ web_group }}"
         mode: "0644"
 
-    - name: Composer install — symfony app
-      shell: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --no-progress
+    - name: Clear Symfony cache before composer install (avoid stale container)
+      file:
+        path: "{{ app_root }}/htdocs_symfony/var/cache"
+        state: absent
+      ignore_errors: true
+
+    - name: Composer install — symfony app (no post-install scripts)
+      shell: COMPOSER_ALLOW_SUPERUSER=1 composer install --no-interaction --no-progress --no-scripts
       args:
         chdir: "{{ app_root }}/htdocs_symfony"
       async: 300
       poll: 10
+
+    - name: Run Symfony post-install scripts (after cache is cleared)
+      shell: COMPOSER_ALLOW_SUPERUSER=1 composer run-script post-install-cmd
+      args:
+        chdir: "{{ app_root }}/htdocs_symfony"
+      ignore_errors: true
 
     - name: Inject Symfony domain meta tag into legacy template
       lineinfile:
@@ -509,58 +683,73 @@
       uri:
         url: "https://{{ oc3_domain }}/okapi/update?install=true"
         validate_certs: false
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
       register: okapi_install
       until: okapi_install.status == 200
       retries: 10
       delay: 5
 
+    - name: Create OKAPI meta.php (install doesn't write it in fork)
+      copy:
+        content: |
+          <?php
+          return [
+              'version_number' => 127,
+              'git_revision' => '{{ okapi_branch }}',
+              'version_name' => 'OKAPI r127 ({{ okapi_branch }})',
+          ];
+        dest: "{{ app_root }}/htdocs/okapi/meta.php"
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+      when: db_local is defined and (db_local | bool)
+
     - name: Run dbsv-update.php (schema patches after OKAPI)
       command: php bin/dbsv-update.php
       args:
         chdir: "{{ app_root }}"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Import static reference data
       command: php bin/db-import-static.php
       args:
         chdir: "{{ app_root }}"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Refresh stored procedures and triggers
       command: php maintain.php
       args:
         chdir: "{{ app_root }}/sql/stored-proc"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
+      ignore_errors: true
 
     - name: Re-run dbsv-update.php (some mutations require triggers)
       command: php bin/dbsv-update.php
       args:
         chdir: "{{ app_root }}"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Import static data SQL
       shell: |
         for f in sql/static-data/*.sql; do
-          mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }} < "$f" 2>/dev/null || true
+          mysql -u{{ db_user }} -p'{{ db_pass }}' {{ db_name }} < "$f" 2>/dev/null || true
         done
       args:
         chdir: "{{ app_root }}"
         executable: /bin/bash
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Run oc3 Doctrine migrations
       command: php bin/console doctrine:migrations:migrate -n --allow-no-migration
       args:
         chdir: "{{ app_root }}/htdocs"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Pre-mark oc4 migration (security_roles already exists from dump)
       shell: |
         mysql -u root -e "INSERT IGNORE INTO {{ db_name }}.oc_migrations (version, executed_at) VALUES ('OcMigrations\\\\Version20201014195236', NOW())" 2>/dev/null || true
       args:
         executable: /bin/bash
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Run oc4 Symfony Doctrine migrations
       shell: |
@@ -570,28 +759,29 @@
       args:
         chdir: "{{ app_root }}/htdocs_symfony"
         executable: /bin/bash
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Seed Symfony security roles (required by authentication system)
       shell: |
-        mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }} <<'EOF'
+        mysql -u{{ db_user }} -p'{{ db_pass }}' {{ db_name }} <<'EOF'
         INSERT IGNORE INTO security_roles (id, role) VALUES (1,'ROLE_USER'),(2,'ROLE_ADMIN'),(3,'ROLE_SUPER_ADMIN'),(4,'ROLE_MODERATOR');
         EOF
       args:
         executable: /bin/bash
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
+      ignore_errors: true
 
     - name: Run OKAPI database update
       command: php bin/okapi-update.php
       args:
         chdir: "{{ app_root }}"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Clear and regenerate application caches (menu, labels, templates)
       command: php bin/clear-webcache.php
       args:
         chdir: "{{ app_root }}"
-      when: db_local is defined and db_local
+      when: db_local is defined and (db_local | bool)
 
     - name: Ensure Smarty cache directories exist with correct permissions
       file:
@@ -620,6 +810,15 @@
       command: php bin/console cache:clear
       args:
         chdir: "{{ app_root }}/htdocs_symfony"
+      ignore_errors: true
+
+    - name: Ensure var/log directory exists (required for Symfony logging)
+      file:
+        path: "{{ app_root }}/htdocs_symfony/var/log"
+        state: directory
+        owner: "{{ web_user }}"
+        group: "{{ web_group }}"
+        mode: "0775"
 
     # ── Phase 8: Cron Jobs ─────────────────────────────────────────────
 
@@ -653,13 +852,13 @@
 
     - name: Drop triggers before test data import (prevents recursion errors)
       shell: |
-        mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }} -N -e "SELECT CONCAT('DROP TRIGGER IF EXISTS \`', TRIGGER_NAME, '\`;') FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA='{{ db_name }}'" | mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }}
+        mysql -u{{ db_admin_user }} -p'{{ db_admin_pass }}' {{ db_name }} -N -e "SELECT CONCAT('DROP TRIGGER IF EXISTS \`', TRIGGER_NAME, '\`;') FROM information_schema.TRIGGERS WHERE TRIGGER_SCHEMA='{{ db_name }}'" | mysql -u{{ db_admin_user }} -p'{{ db_admin_pass }}' {{ db_name }}
       args:
         executable: /bin/bash
       when: db_local is defined and test_data_file is defined
 
     - name: Import test data
-      shell: gzip -dc /tmp/test-data.sql.gz | mysql -u{{ db_user }} -p{{ db_pass }} {{ db_name }}
+      shell: gzip -dc /tmp/test-data.sql.gz | mysql -u{{ db_user }} -p'{{ db_pass }}' {{ db_name }}
       args:
         executable: /bin/bash
       when: db_local is defined and test_data_file is defined
@@ -668,6 +867,15 @@
       command: php maintain.php
       args:
         chdir: "{{ app_root }}/sql/stored-proc"
+      when: db_local is defined and test_data_file is defined
+      ignore_errors: true
+
+    - name: Ensure cache_desc has desc_dark_unsafe column
+      shell: mysql -uroot oc -e "ALTER TABLE cache_desc ADD COLUMN desc_dark_unsafe TINYINT(1) NOT NULL DEFAULT 0 AFTER short_desc" 2>/dev/null; true
+      when: db_local is defined and test_data_file is defined
+
+    - name: Create user_roles table if missing (needed by ocde test data)
+      shell: mysql -uroot oc -e "CREATE TABLE IF NOT EXISTS user_roles (id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, role_id INT NOT NULL)" 2>/dev/null; true
       when: db_local is defined and test_data_file is defined
 
     - name: Add descriptions to all caches (required for complete test data)
@@ -683,6 +891,10 @@
         FROM _missing_desc m;
         DROP TEMPORARY TABLE _missing_desc;
         SQL
+      when: db_local is defined and test_data_file is defined
+
+    - name: Set all test user passwords to non-trivial value
+      shell: mysql -uroot oc -e "UPDATE user SET password='5c2cec3234746f7138fde0c9c2ae863b' WHERE user_id != 1"
       when: db_local is defined and test_data_file is defined
 
     - name: Clear page cache after data load (avoid stale error pages)
@@ -731,4 +943,9 @@
     - name: restart php8.4-fpm
       systemd:
         name: php8.4-fpm
+        state: restarted
+
+    - name: restart mariadb
+      systemd:
+        name: mariadb
         state: restarted

@@ -26,10 +26,11 @@ function get_okapi_settings()
 
         # Settings which ARE present in settings.inc.php:
 
-        'ADMINS'           => [$opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl'],
+        'ADMINS'           => [$opt['db']['warn']['mail']],
         'FROM_FIELD'       => $opt['mail']['contact'],
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),
+        'DEBUG_PREVENT_EMAILS' => !empty($opt['okapi']['prevent_emails']), # set true in test/dev environments
         'DEBUG_PREVENT_SEMAPHORES' => !$opt['php']['semaphores'], # not available on old developer system
         'DB_SERVER'        => $opt['db']['servername'],
         'DB_NAME'          => $opt['db']['placeholder']['db'],

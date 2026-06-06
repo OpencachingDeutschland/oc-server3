@@ -17,8 +17,8 @@
 
     <title>{% block title %}Geocaching mit Opencaching.de{% endblock %}</title>
 
-    <link rel="stylesheet" href="{{ 'vendor/bootstrap/bootstrap.min.css' }}">
-    <link rel="stylesheet" href="{{ 'css/oc-style.css' }}">
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/oc-style.css">
 
     {% block stylesheets %}
         <style>
@@ -64,7 +64,7 @@
     <header class="header">
         <nav class="navbar navbar-expand-lg navbar-dark w-100" style="background-color: var(--oc-bg-navbar);">
             <div class="container-fluid">
-                <a class="navbar-brand p-0" href="/"><img src="{{ 'images/oclogo.png' }}" alt="Opencaching.de" height="40" style="display:block;"></a>
+                <a class="navbar-brand p-0" href="/"><img src="/images/oclogo.png" alt="Opencaching.de" height="40" style="display:block;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -144,8 +144,8 @@
         </footer>
     {% endblock %}
 
-    <script src="{{ 'vendor/bootstrap/bootstrap.bundle.min.js' }}"></script>
-    <script type="module" src="{{ 'js/loader.js' }}"></script>
+    <script src="/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/js/loader.js"></script>
     <script>
         (function() {
             var btn = document.getElementById('themeToggle');

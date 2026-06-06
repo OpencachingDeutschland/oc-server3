@@ -23,6 +23,7 @@
         "symfony/translation": "7.4.*",
         "symfony/twig-bundle": "7.4.*",
         "symfony/validator": "7.4.*",
+        "symfony/yaml": "7.4.*",
         "twig/twig": "^3.23"
     },
     "require-dev": {

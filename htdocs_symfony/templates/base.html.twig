@@ -103,12 +103,12 @@
                                     <li><a class="dropdown-item" href="#">{{ 'Profile' | trans }}</a></li>
                                     <li><a class="dropdown-item" href="#">{{ 'Settings' | trans }}</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="{{ path('app_security_logout' }}">{{ 'Logout' | trans }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('app_security_logout') }}">{{ 'Logout' | trans }}</a></li>
                                 </ul>
                             </li>
                         {% else %}
                             <li class="nav-item ms-2">
-                                <a class="nav-link" href="{{ path('app_security_login' }}">
+                                <a class="nav-link" href="{{ path('app_security_login') }}">
                                     <i class="fas fa-door-open"></i>
                                     {{ 'Login' | trans }}
                                 </a>

@@ -16,7 +16,7 @@ class SecurityController extends AbstractController
         private Auth $auth,
     ) {}
 
-    #[Route("/login", name: "app_security_login")]
+    #[Route("/login", name: "security_login")]
     public function login(Request $request): Response
     {
         $error = null;
@@ -46,6 +46,6 @@ class SecurityController extends AbstractController
     public function logout(): Response
     {
         $this->auth->logout();
-        return $this->redirectToRoute('app_security_login');
+        return $this->redirectToRoute('security_login');
     }
 }

@@ -6,6 +6,7 @@ namespace Oc\Controller\Backoffice;
 
 use DateTime;
 use Doctrine\DBAL\Connection;
+use Oc\Security\Auth;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
 use Oc\Form\SupportBonusCachesAssignment;
@@ -34,7 +35,6 @@ use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
 use Oc\Repository\SupportVandalismRepository;
 use Oc\Repository\UserRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +42,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * @Security("is_granted('ROLE_SUPPORT_TRAINEE')") // now, the whole Support functions are limited to ROLE_.. and above!
  */
 class SupportControllerBackoffice extends AbstractController
 {
@@ -86,6 +85,8 @@ class SupportControllerBackoffice extends AbstractController
 
     private UserRepository $userRepository;
 
+    private Auth $auth;
+
     public function __construct(
             Connection $connection,
             CacheAdoptionsRepository $cacheAdoptionsRepository,
@@ -103,6 +104,7 @@ class SupportControllerBackoffice extends AbstractController
             SupportUserCommentsRepository $supportUserCommentsRepository,
             SupportUserRelationsRepository $supportUserRelationsRepository,
             SupportVandalismRepository $supportVandalismRepository,
+            Auth $auth,
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
@@ -122,6 +124,7 @@ class SupportControllerBackoffice extends AbstractController
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
         $this->supportVandalismRepository = $supportVandalismRepository;
         $this->userRepository = $userRepository;
+        $this->auth = $auth;
     }
 
     #[Route("/support", name: "support_index")]
@@ -165,7 +168,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/reportedCaches", name: "support_reported_caches")]
     public function listReportedCaches(): Response
@@ -217,7 +219,6 @@ class SupportControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/bonusCaches", name: "support_bonus_caches")]
     public function listBonusCaches(): Response
@@ -239,7 +240,6 @@ class SupportControllerBackoffice extends AbstractController
     /**
      * @throws Exception
      * @throws RecordNotFoundException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/bonusCachesAssignmentChoice/{wpID}", name: "support_bonus_caches_assignment_choice")]
     public function bonusCachesAssignmentChoice(string $wpID): Response
@@ -263,7 +263,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/bonusCachesAssignment/{wpID}&{userID}&{toBonusCache}", name: "support_bonus_caches_assignment")]
     public function bonusCachesAssignment(string $wpID, int $userID, string $toBonusCache): Response
@@ -288,7 +287,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/bonusCachesDirectAssignment", name: "support_directly_assign_bonus_cache")]
     public function bonusCachesDirectAssignment(Request $request): Response
@@ -316,7 +314,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws InvalidArgumentException
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/removeBonusCachesAssignment/{wpID}&{removeToBonus}&{removeBonus}", name: "support_remove_bonus_caches_assignment")]
     public function removeBonusCachesAssignment(string $wpID, bool $removeToBonus, bool $removeBonus): Response
@@ -387,7 +384,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/cacheHistory/{wpID}", name: "support_cache_history")]
     public function list_cache_history(string $wpID): Response
@@ -422,7 +418,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/repCaches/{repID}", name: "support_reported_cache")]
     public function list_reported_cache_details(int $repID): Response
@@ -451,7 +446,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws Exception
      * @throws RecordAlreadyExistsException
      * @throws RecordNotFoundException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/occ/{wpID}&{userID}", name: "support_occ")]
     public function occPage(string $wpID, int $userID): Response
@@ -518,7 +512,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/occSaveText", name: "support_occ_save_text")]
     public function occ_saveTextArea(Request $request): Response
@@ -551,7 +544,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/repCachesSaveText", name: "support_reported_cache_save_text")]
     public function repCaches_saveTextArea(Request $request): Response
@@ -576,7 +568,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/repCachesAssignSupportuser/{repID}&{adminId}&{route}", name: "support_reported_cache_supportuser_assignment")]
     public function repCaches_supportuser_assignment(int $repID, int $adminId, string $route): Response
@@ -593,7 +584,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordNotPersistedException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/repCachesAssignSupportuser/{repID}&{route}", name: "support_reported_cache_set_status")]
     public function repCaches_setReportStatus(int $repID, string $route): Response
@@ -609,7 +599,6 @@ class SupportControllerBackoffice extends AbstractController
     /**
      * @throws Exception
      * @throws RecordNotFoundException
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/uad/{userID}", name: "support_user_account_details")]
     public function list_user_account_details(int $userID): Response
@@ -634,7 +623,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws Exception
      * @throws RecordNotFoundException
      *
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
      * Vandalismusscript 1:1 adaptiert von htdocs/restorecaches.php
      */
@@ -655,7 +643,6 @@ class SupportControllerBackoffice extends AbstractController
     /**
      * @throws Exception
      *
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/vandalismRestore", name: "support_vandalism_restore")]
     public function vandalismRestore(Request $request): Response
@@ -705,7 +692,6 @@ class SupportControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function getBonusCaches(): array
     {
@@ -720,7 +706,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotFoundException
      * @throws RecordsNotFoundException
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     public function getReportedCaches(): array
     {
@@ -729,7 +714,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/dbQueries1/{days}", name: "support_db_queries_1")]
     public function executeSQL_caches_old_reg_date(int $days = 31) // List caches from users whose registration date is not older than x days.
@@ -756,7 +740,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/dbQueries2/{days}", name: "support_db_queries_2")]
     public function executeSQL_old_reg_date(int $days) // List user whose registration date is no older than x days.
@@ -781,7 +764,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/dbQueries4", name: "support_db_queries_4")]
     public function executeSQL_caches_old_login_date(
@@ -823,7 +805,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws RecordsNotFoundException
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/dbQueries5", name: "support_db_queries_5")]
     public function executeSQL_support_commented_user() // List users where a support user left a comment.
@@ -841,7 +822,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_TRAINEE')")
      */
     #[Route("/dbQueries6", name: "support_db_queries_6")]
     public function executeSQL_Dornroeschen_caches() // List caches that currently meet Dornröschen requirements.
@@ -886,7 +866,6 @@ class SupportControllerBackoffice extends AbstractController
 
     /**
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     public function executeSQL_flexible(string $what, string $table, string $condition): array
     {
@@ -905,7 +884,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Driver\Exception
      * @throws Exception
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      */
     #[Route("/supportUADactions/{userID}", name: "support_executeUAD_actions")]
     public function executeUAD_actions(Request $request, int $userID): Response
@@ -922,13 +900,13 @@ class SupportControllerBackoffice extends AbstractController
 
                 if ($userToBlockRoles) {
                     foreach ($userToBlockRoles as $role) {
-                        if (!$this->isGranted($role)) {
+                        if (!$this->auth->isGranted($role)) {
                             $userToBlockIsHigher = true;
                         }
                     }
                 }
 
-                if ($this->isGranted('ROLE_SUPPORT_HEAD') && !$userToBlockIsHigher) {
+                if ($this->auth->isGranted('ROLE_SUPPORT_HEAD') && !$userToBlockIsHigher) {
                     $timeToBlock = $form->get('dropDown_login_block')->getData();
                     $message = $form->get('message_login_block')->getData();
 
@@ -983,7 +961,6 @@ class SupportControllerBackoffice extends AbstractController
      * @throws RecordNotPersistedException
      * @throws RecordsNotFoundException
      * @throws \Doctrine\DBAL\Driver\Exception
-     * @Security("is_granted('ROLE_SUPPORT_MAINTAIN')")
      *
      * Button/Dialog zum Einlesen der GPX-Datei
      * inklusive Rückinfo zu Anzahl eingelesener Caches

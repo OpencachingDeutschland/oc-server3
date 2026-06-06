@@ -18,7 +18,7 @@
                         <div style="border: 2px solid #000000;">{{ user_by_id.description | raw }}</div>
                     </ul>
 
-                    {% if is_granted('ROLE_TEAM') %}
+                    {% if auth.isGranted('ROLE_TEAM') %}
                         <br/>
                         {{ 'Hidden information' | trans }}:<br/>
                         <ul>

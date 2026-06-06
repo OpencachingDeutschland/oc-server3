@@ -5,16 +5,16 @@
     <div>
         <h3>{{ 'Security roles' | trans }}..</h3>
         <ul>
-            <li>{{ 'You are' | trans }}: {{ app.user.username }}</li>
-            <li>{{ 'id' | trans }}: {{ app.user.userId }}</li>
+            <li>{{ 'You are' | trans }}: {{ auth.getUser().username }}</li>
+            <li>{{ 'id' | trans }}: {{ auth.getUser().userId }}</li>
             <li>{{ 'Your role(s)' | trans }}:
-                {% for role in app.user.roles %}
+                {% for role in auth.getUser().roles %}
                     {{ role }},
                 {% endfor %}</li>
         </ul>
     </div>
 
-    {% if is_granted('ROLE_TEAM') %}
+    {% if auth.isGranted('ROLE_TEAM') %}
         <hr>
         <div>
             <h3>
@@ -23,7 +23,7 @@
         </div>
     {% endif %}
 
-    {% if is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD') %}
+    {% if auth.isGranted('ROLE_SUPPORT_HEAD') or auth.isGranted('ROLE_SOCIAL_HEAD') or auth.isGranted('ROLE_DEVELOPER_HEAD') %}
         <hr>
         <div>
             <h3>
@@ -51,7 +51,7 @@
                         <td>{{ role.id }}</td>
                         <td> &nbsp;</td>
                         <td>{{ role.role }}</td>
-                        <td>{% if is_granted(role.role) %}
+                        <td>{% if auth.isGranted(role.role) %}
                                 {{ '✔️ You have access to this ROLE' | trans }}
                             {% else %}
                                 {{ '🔴 Sorry. You don\'t have access to this ROLE' | trans }}

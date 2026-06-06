@@ -70,7 +70,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     {% block navbar_nav %}
-                        {% if app.user %}
+                        {% if auth.getUser() %}
                             {{ knp_menu_render('sideMenu', {'template': 'bootstrap_navbar_menu.html.twig'}) }}
                         {% endif %}
                     {% endblock %}
@@ -93,11 +93,11 @@
                                 <span class="theme-icon-dark">&#9789;</span>
                             </button>
                         </li>
-                        {% if app.user %}
+                        {% if auth.getUser() %}
                             <li class="nav-item dropdown ms-2">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-user"></i>
-                                    {{ app.user.userIdentifier }}
+                                    {{ auth.getUser().username }}
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" href="#">{{ 'Profile' | trans }}</a></li>

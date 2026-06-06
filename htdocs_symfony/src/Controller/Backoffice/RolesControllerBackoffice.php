@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Oc\Controller\Backoffice;
 
 use Doctrine\DBAL\Connection;
+use Oc\Security\Auth;
 use Oc\Form\RolesSearchUser;
 use Oc\Repository\UserRepository;
 use Oc\Repository\UserRolesRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
- * @Security("is_granted('ROLE_TEAM')")
  */
 class RolesControllerBackoffice extends AbstractController
 {
@@ -23,10 +22,10 @@ class RolesControllerBackoffice extends AbstractController
         private Connection $connection,
         private UserRepository $userRepository,
         private UserRolesRepository $userRolesRepository,
+        private Auth $auth,
     ) {}
 
     /**
-     * @Security("is_granted('ROLE_TEAM')")
      */
     #[Route("/roles", name: "roles_index")]
     public function rolesController_index(Request $request): Response
@@ -41,7 +40,6 @@ class RolesControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_TEAM')")
      */
     #[Route("/roles/teamlist", name: "roles_teamlist")]
     public function getTeamOverview(): Response
@@ -63,7 +61,6 @@ class RolesControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_TEAM')")
      */
     #[Route("/roles/search", name: "roles_search")]
     public function teamRolesAssignmentUserSearch(Request $request): Response
@@ -91,7 +88,6 @@ class RolesControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
     #[Route("/roles/removeRole/{userId}&{role}", name: "roles_remove_role")]
     public function teamRolesRemoveRole(int $userId, string $role): Response
@@ -102,7 +98,7 @@ class RolesControllerBackoffice extends AbstractController
             ->executeQuery()->fetchAllAssociative();
         $neededRole = $this->userRolesRepository->getNeededRole($role);
 
-        if ($this->isGranted($neededRole)) {
+        if ($this->auth->isGranted($neededRole)) {
             $this->userRolesRepository->removeRole($userId, $role);
         }
 
@@ -118,7 +114,6 @@ class RolesControllerBackoffice extends AbstractController
     }
 
     /**
-     * @Security("is_granted('ROLE_SUPPORT_HEAD') or is_granted('ROLE_SOCIAL_HEAD') or is_granted('ROLE_DEVELOPER_HEAD')")
      */
     #[Route("/roles/promoteRole/{userId}&{role}", name: "roles_promote_role")]
     public function teamRolesPromoteRole(int $userId, string $role): Response
@@ -129,7 +124,7 @@ class RolesControllerBackoffice extends AbstractController
             ->executeQuery()->fetchAllAssociative();
         $neededRole = $this->userRolesRepository->getNeededRole($role);
 
-        if ($this->isGranted($neededRole)) {
+        if ($this->auth->isGranted($neededRole)) {
             $this->userRolesRepository->grantRole($userId, $role);
         }
 

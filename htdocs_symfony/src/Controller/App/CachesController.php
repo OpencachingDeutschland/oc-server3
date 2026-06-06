@@ -13,9 +13,9 @@ use Oc\Repository\CacheTypeRepository;
 use Oc\Repository\CountriesRepository;
 use Oc\Repository\UserRepository;
 use Oc\Repository\WaypointsRepository;
+use Oc\Security\Auth;
 use Oc\Service\UniCacheBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +31,7 @@ class CachesController extends AbstractController
         private CacheTypeRepository $cacheTypeRepository,
         private CacheSizeRepository $cacheSizeRepository,
         private CountriesRepository $countriesRepository,
-        private Security $security,
+        private Auth $auth,
         private UniCacheBuilder $uniCacheBuilder,
         private UserRepository $userRepository,
         private WaypointsRepository $waypointsRepository,
@@ -58,8 +58,8 @@ class CachesController extends AbstractController
         $lon        = $request->query->get('lon') !== null ? (float)$request->query->get('lon') : null;
         $radius     = (float)$request->query->get('radius', 0);
 
-        $user   = $this->security->getUser();
-        $userId = $user?->getUserId() ?? 0;
+        $user   = $this->auth->getUser();
+        $userId = $user["user_id"] ?? 0;
 
         $rows = $this->cachesRepository->searchCaches([
             'userId'     => $userId,
@@ -120,7 +120,7 @@ class CachesController extends AbstractController
     #[Route("/cache/new", name: "cache_new", priority: 1)]
     public function newCache(Request $request): Response
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) {
             return $this->redirectToRoute('app_security_login');
         }
@@ -144,11 +144,11 @@ class CachesController extends AbstractController
         $editNote = null;
         if ($editWp !== '') {
             $editCache = $this->cachesRepository->fetchCacheByWpForEdit($editWp);
-            if ($editCache && (int)$editCache['user_id'] === $user->getUserId()) {
+            if ($editCache && (int)$editCache['user_id'] === $user["user_id"]) {
                 $cacheId = (int)$editCache['cache_id'];
                 $editDesc    = $this->cacheDescRepository->fetchDescriptionForEdit($cacheId);
                 $editAttribs = $this->cachesAttributesRepository->fetchAttribIds($cacheId);
-                $editNote    = $this->waypointsRepository->fetchUserNote($cacheId, $user->getUserId());
+                $editNote    = $this->waypointsRepository->fetchUserNote($cacheId, $user["user_id"]);
                 $editWpts    = $this->waypointsRepository->fetchWaypointsForEdit($cacheId);
             } else {
                 $editCache = null; // not owner or not found
@@ -161,7 +161,7 @@ class CachesController extends AbstractController
             'type'           => '',
             'size'           => '',
             'coords'         => '',
-            'country'        => $user->country ?? 'DE',
+            'country'        => $user['country'] ?? 'DE',
             'difficulty'     => '',
             'terrain'        => '',
             'search_time'    => '',
@@ -198,7 +198,7 @@ class CachesController extends AbstractController
             $form['coords']     = self::decimalToDm(
                 (float)($editCache['latitude'] ?? 0), (float)($editCache['longitude'] ?? 0)
             );
-            $form['country']    = $editCache['country'] ?? ($user->country ?? 'DE');
+            $form['country']    = $editCache['country'] ?? ($user['country'] ?? 'DE');
             $form['difficulty'] = (string)($editCache['difficulty'] ?? '');
             $form['terrain']    = (string)($editCache['terrain'] ?? '');
             $form['search_time'] = (string)((float)($editCache['search_time'] ?? 0) ?: '');
@@ -392,7 +392,7 @@ class CachesController extends AbstractController
                 if ($isEdit) {
                     // Verify ownership
                     $existing = $this->cachesRepository->fetchCacheByWpForEdit($editWp);
-                    if (!$existing || (int)$existing['user_id'] !== $user->getUserId()) {
+                    if (!$existing || (int)$existing['user_id'] !== $user["user_id"]) {
                         $errors['_general'] = 'Not authorized to edit this cache.';
                     } else {
                         $cacheId = $editId;
@@ -434,23 +434,23 @@ class CachesController extends AbstractController
                         $coords = self::parseCoords($form['user_coords']);
                         $userLat = $coords ? $coords[0] : 0.0;
                         $userLon = $coords ? $coords[1] : 0.0;
-                        $noteExisting = $this->waypointsRepository->fetchUserNote($cacheId, $user->getUserId());
+                        $noteExisting = $this->waypointsRepository->fetchUserNote($cacheId, $user["user_id"]);
 
                         if ($form['cache_note'] !== '' || ($userLat !== 0.0 && $userLon !== 0.0)) {
                             if ($noteExisting) {
-                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
-                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user->getUserId(), $form['cache_note']);
+                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user["user_id"], $userLat, $userLon);
+                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user["user_id"], $form['cache_note']);
                             } else {
-                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user->getUserId(), $form['cache_note'] ?: ' ');
-                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
+                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user["user_id"], $form['cache_note'] ?: ' ');
+                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user["user_id"], $userLat, $userLon);
                             }
                         } elseif ($noteExisting) {
                             // Clear note/coords but preserve logpw in the same row
-                            $this->waypointsRepository->upsertUserNoteText($cacheId, $user->getUserId(), '');
+                            $this->waypointsRepository->upsertUserNoteText($cacheId, $user["user_id"], '');
                             // Recreate an empty row so coords can be zeroed
                             if ($form['cache_note'] === '' && $userLat === 0.0 && $userLon === 0.0) {
-                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user->getUserId(), ' ');
-                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), 0.0, 0.0);
+                                $this->waypointsRepository->upsertUserNoteText($cacheId, $user["user_id"], ' ');
+                                $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user["user_id"], 0.0, 0.0);
                             }
                         }
 
@@ -472,7 +472,7 @@ class CachesController extends AbstractController
                     }
 
                     $cacheId = $this->cachesRepository->insertCache([
-                        'user_id'       => $user->getUserId(),
+                        'user_id'       => $user["user_id"],
                         'name'          => $form['name'],
                         'longitude'     => $lon,
                         'latitude'      => $lat,
@@ -516,9 +516,9 @@ class CachesController extends AbstractController
                     $userLon = $userCoordsParsed ? (float)$userCoordsParsed[1] : 0.0;
                     if ($form['cache_note'] !== '' || ($userLat !== 0.0 && $userLon !== 0.0)) {
                         $noteText = $form['cache_note'] !== '' ? $form['cache_note'] : ' ';
-                        $this->waypointsRepository->upsertUserNoteText($cacheId, $user->getUserId(), $noteText);
+                        $this->waypointsRepository->upsertUserNoteText($cacheId, $user["user_id"], $noteText);
                         if ($userLat !== 0.0 || $userLon !== 0.0) {
-                            $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user->getUserId(), $userLat, $userLon);
+                            $this->waypointsRepository->upsertUserNoteCoords($cacheId, $user["user_id"], $userLat, $userLon);
                         }
                     }
 
@@ -558,9 +558,9 @@ class CachesController extends AbstractController
         }
 
         $cacheId  = (int)$cacheRow['cache_id'];
-        $user     = $this->security->getUser();
-        $userId   = $user?->getUserId() ?? 0;
-        $userName = $user?->getUserIdentifier() ?? null;
+        $user     = $this->auth->getUser();
+        $userId   = $user["user_id"] ?? 0;
+        $userName = $user["username"] ?? null ?? null;
         $isOwner  = $userId > 0 && (int)$cacheRow['owner_id'] === $userId;
 
         // Gather all data from repository layer
@@ -592,10 +592,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/note", name: "api_cache_note_save", methods: ["POST"])]
     public function saveNote(string $wp, Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $text = trim((string)($body['text'] ?? ''));
@@ -610,10 +610,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/logpw", name: "api_cache_logpw_save", methods: ["POST"])]
     public function saveLogpw(string $wp, Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $logpw = substr(trim((string)($body['logpw'] ?? '')), 0, 20);
@@ -628,10 +628,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/coords", name: "api_cache_coords_save", methods: ["POST"])]
     public function saveCoords(string $wp, Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $lat = (float)($body['lat'] ?? 0);
@@ -647,10 +647,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/log", name: "api_cache_log_create", methods: ["POST"])]
     public function createLog(string $wp, Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $type = (int)($body['type'] ?? 3);
@@ -706,10 +706,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/log/{logId}", name: "api_cache_log_update", methods: ["PUT"])]
     public function updateLog(string $wp, int $logId, Request $request): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $wp = strtoupper($wp);
         $body = json_decode($request->getContent(), true);
         $type = (int)($body['type'] ?? 3);
@@ -764,10 +764,10 @@ class CachesController extends AbstractController
     #[Route("/api/cache/{wp}/log/{logId}", name: "api_cache_log_delete", methods: ["DELETE"])]
     public function deleteLog(string $wp, int $logId): JsonResponse
     {
-        $user = $this->security->getUser();
+        $user = $this->auth->getUser();
         if (!$user) return new JsonResponse(['error' => 'Not authenticated'], 401);
 
-        $userId = $user->getUserId();
+        $userId = $user["user_id"];
         $log = $this->cacheLogsRepository->fetchForAuth($logId);
         if (!$log || (int)$log['user_id'] !== $userId) {
             return new JsonResponse(['error' => 'Not authorized'], 403);

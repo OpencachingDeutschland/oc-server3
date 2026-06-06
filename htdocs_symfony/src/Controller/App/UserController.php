@@ -11,20 +11,20 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Bundle\SecurityBundle\Security;
+use Oc\Security\Auth;
 
 class UserController extends AbstractController
 {
     public function __construct(
         private UserRepository $userRepository,
-        private Security $security,
+        private Auth $auth,
     ) {}
 
     #[Route('/user', name: 'user_index')]
     public function index(): Response
     {
         return $this->render('app/user/search.html.twig', [
-            'isSupport' => $this->security->isGranted('ROLE_SUPPORT_TRAINEE'),
+            'isSupport' => $this->auth->isGranted('ROLE_SUPPORT_TRAINEE'),
         ]);
     }
 
@@ -32,7 +32,7 @@ class UserController extends AbstractController
     public function apiSearch(Request $request): JsonResponse
     {
         $q         = trim($request->query->get('q', ''));
-        $isSupport = $this->security->isGranted('ROLE_SUPPORT_TRAINEE');
+        $isSupport = $this->auth->isGranted('ROLE_SUPPORT_TRAINEE');
 
         if ($q === '') {
             return new JsonResponse(['items' => []]);

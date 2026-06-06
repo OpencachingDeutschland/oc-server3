@@ -222,13 +222,6 @@
 
         <form method="post">
 
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.username }},
-                    <a href="{{ path('app_security_logout') }}">Logout</a>
-                </div>
-            {% endif %}
-
             <h2 class="h3 mb-3">OC Backend | {{ 'Login' | trans }}</h2>
 
             <div class="form-group mb-3">
@@ -243,18 +236,12 @@
                        required>
             </div>
 
-            <div class="form-group mb-3">
-                <input type="hidden" name="_csrf_token"
-                       value="{{ csrf_token('authenticate') }}"
-                >
-            </div>
-
             <button class="btn btn-block btn-primary" type="submit">
                 Sign in
             </button>
 
             {% if error %}
-                <div class="alert alert-danger mb-3">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="alert alert-danger mb-3">{{ error }}</div>
             {% endif %}
         </form>
     </div>

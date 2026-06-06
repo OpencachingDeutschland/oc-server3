@@ -28,7 +28,6 @@
         "symfony/process": "7.4.*",
         "symfony/property-access": "7.4.*",
         "symfony/property-info": "7.4.*",
-        "symfony/security-bundle": "7.4.*",
         "symfony/serializer": "7.4.*",
         "symfony/string": "7.4.*",
         "symfony/translation": "7.4.*",

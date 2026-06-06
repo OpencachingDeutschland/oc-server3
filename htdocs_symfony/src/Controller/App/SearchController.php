@@ -6,7 +6,7 @@ namespace Oc\Controller\App;
 
 use Oc\Repository\CachesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
+use Oc\Security\Auth;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -15,7 +15,7 @@ class SearchController extends AbstractController
 {
     public function __construct(
         private CachesRepository $cachesRepository,
-        private Security $security
+        private Auth $auth
     ) {}
 
     #[Route('/api/caches/live', name: 'api_caches_live')]
@@ -33,7 +33,7 @@ class SearchController extends AbstractController
         }
 
         $maxItems = 5000;
-        $userId = $this->security->getUser()?->getUserId() ?? 0;
+        $userId = (int) ($this->auth->getUser()['user_id'] ?? 0);
 
         $count = $this->cachesRepository->countCachesInBounds(
             $lat1, $lat2, $lon1, $lon2, $minDiff, $maxDiff

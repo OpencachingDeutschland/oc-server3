@@ -6,7 +6,6 @@ namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\GeoCacheReportReasonsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -43,7 +42,7 @@ class CacheReportReasonsRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -74,7 +73,7 @@ class CacheReportReasonsRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -104,7 +103,7 @@ class CacheReportReasonsRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -114,83 +113,16 @@ class CacheReportReasonsRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCacheReportReasonsEntity $entity): GeoCacheReportReasonsEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCacheReportReasonsEntity $entity): GeoCacheReportReasonsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function remove(GeoCacheReportReasonsEntity $entity): GeoCacheReportReasonsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
 
-        $entity->id = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(GeoCacheReportReasonsEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'name' => $entity->name,
-                'trans_id' => $entity->transId,
-                'order' => $entity->order,
-        ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): GeoCacheReportReasonsEntity
-    {
-        $entity = new GeoCacheReportReasonsEntity();
-        $entity->id = (int)$data['id'];
-        $entity->name = (string)$data['name'];
-        $entity->transId = (int)$data['trans_id'];
-        $entity->order = (int)$data['order'];
-
-        return $entity;
-    }
 }

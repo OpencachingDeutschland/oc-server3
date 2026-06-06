@@ -6,7 +6,6 @@ namespace Oc\Repository;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\SecurityRoleHierarchyEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -43,7 +42,7 @@ class SecurityRoleHierarchyRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -74,7 +73,7 @@ class SecurityRoleHierarchyRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -104,7 +103,7 @@ class SecurityRoleHierarchyRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -114,79 +113,16 @@ class SecurityRoleHierarchyRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(SecurityRoleHierarchyEntity $entity): SecurityRoleHierarchyEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->roleId = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(SecurityRoleHierarchyEntity $entity): SecurityRoleHierarchyEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['role_id' => $entity->roleId]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function remove(SecurityRoleHierarchyEntity $entity): SecurityRoleHierarchyEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['role_id' => $entity->roleId]
-        );
 
-        $entity->roleId = null;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(SecurityRoleHierarchyEntity $entity): array
-    {
-        return [
-                'role_id' => $entity->roleId,
-                'sub_role_id' => $entity->subRoleId,
-        ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): SecurityRoleHierarchyEntity
-    {
-        $entity = new SecurityRoleHierarchyEntity();
-        $entity->roleId = (int)$data['role_id'];
-        $entity->subRoleId = (int)$data['sub_role_id'];
-
-        return $entity;
-    }
 }

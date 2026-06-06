@@ -4,55 +4,34 @@ declare(strict_types=1);
 
 namespace Oc\Security;
 
-use Doctrine\DBAL\Exception;
-use Oc\Entity\SecurityRoleHierarchyEntity;
-use Oc\Entity\SecurityRolesEntity;
-use Oc\Repository\Exception\RecordsNotFoundException;
-use Oc\Repository\SecurityRoleHierarchyRepository;
-use Oc\Repository\SecurityRolesRepository;
+use Doctrine\DBAL\Connection;
 
 class RoleHierarchyBuilder
 {
-    private SecurityRoleHierarchyRepository $securityRoleHierarchyRepository;
+    public function __construct(
+        private Connection $connection,
+    ) {}
 
-    private SecurityRolesRepository $securityRolesRepository;
-
-    public function __construct(SecurityRolesRepository $securityRolesRepository, SecurityRoleHierarchyRepository $securityRoleHierarchyRepository)
-    {
-        $this->securityRoleHierarchyRepository = $securityRoleHierarchyRepository;
-        $this->securityRolesRepository = $securityRolesRepository;
-    }
-
-    /**
-     * @throws RecordsNotFoundException
-     * @throws Exception
-     */
     public function build(): array
     {
-        $roles = $this->securityRolesRepository->fetchAll();
-        $roleDictionary = $this->createRoleDictionary($roles);
-        $hierarchyEntries = $this->securityRoleHierarchyRepository->fetchAll();
+        $roles = $this->connection->createQueryBuilder()
+            ->select('*')->from('security_roles')
+            ->executeQuery()->fetchAllAssociative();
 
-        $result = [];
-
-        /** @var SecurityRoleHierarchyEntity $hierarchyEntry */
-        foreach ($hierarchyEntries as $hierarchyEntry) {
-            $role = $roleDictionary[$hierarchyEntry->roleId];
-            $subRole = $roleDictionary[$hierarchyEntry->subRoleId];
-
-            $result[$role][] = $subRole;
+        $roleDict = [];
+        foreach ($roles as $role) {
+            $roleDict[$role['id']] = $role['role'];
         }
 
-        return $result;
-    }
+        $hierarchy = $this->connection->createQueryBuilder()
+            ->select('*')->from('security_role_hierarchy')
+            ->executeQuery()->fetchAllAssociative();
 
-    private function createRoleDictionary(array $roles): array
-    {
         $result = [];
-
-        /** @var SecurityRolesEntity $role */
-        foreach ($roles as $role) {
-            $result[$role->id] = $role->role;
+        foreach ($hierarchy as $entry) {
+            $role    = $roleDict[$entry['role_id']];
+            $subRole = $roleDict[$entry['sub_role_id']];
+            $result[$role][] = $subRole;
         }
 
         return $result;

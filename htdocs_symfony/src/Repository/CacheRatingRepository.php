@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\GeoCacheRatingEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -45,7 +44,7 @@ class CacheRatingRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -77,7 +76,7 @@ class CacheRatingRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -156,7 +155,7 @@ class CacheRatingRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -166,84 +165,19 @@ class CacheRatingRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCacheRatingEntity $entity): GeoCacheRatingEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->cacheId = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCacheRatingEntity $entity): GeoCacheRatingEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->cacheId]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function remove(GeoCacheRatingEntity $entity): GeoCacheRatingEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->cacheId]
-        );
-
-        $entity->cacheId = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(GeoCacheRatingEntity $entity): array
-    {
-        return [
-                'cache_id' => $entity->cacheId,
-                'user_id' => $entity->userId,
-                'rating_date' => $entity->ratingDate,
-        ];
-    }
 
     /**
      * @throws \Exception
      */
-    public function getEntityFromDatabaseArray(array $data): GeoCacheRatingEntity
-    {
-        $entity = new GeoCacheRatingEntity();
-        $entity->cacheId = (int)$data['cache_id'];
-        $entity->userId = (int)$data['user_id'];
-        $entity->ratingDate = new DateTime($data['rating_date']);
-
-        return $entity;
-    }
 }

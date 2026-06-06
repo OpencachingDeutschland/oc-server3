@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Oc\Security;
 
 use Exception;
-use Oc\Repository\Exception\RecordNotFoundException;
-use Oc\Repository\UserLoginBlockRepository;
+use Doctrine\DBAL\Connection;
 use Oc\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,15 +35,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     private UrlGeneratorInterface $urlGenerator;
 
-    private UserLoginBlockRepository $userLoginBlockRepository;
-
     private UserPasswordHasherInterface $passwordEncoder;
 
     private UserRepository $userRepository;
 
     public function __construct(
+            private Connection $connection,
             Security $security,
-            UserLoginBlockRepository $userLoginBlockRepository,
             UserRepository $userRepository,
             UrlGeneratorInterface $urlGenerator,
             CsrfTokenManagerInterface $csrfTokenManager,
@@ -54,7 +51,6 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->urlGenerator = $urlGenerator;
-        $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -90,20 +86,22 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): RedirectResponse
     {
-        try {
-            // If there's a login block found in database then route to special landing page
-            $userLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $this->security->getUser()->userId]);
+        $userId = $this->security->getUser()->userId;
+        $blocked = $this->connection->createQueryBuilder()
+            ->select('user_id')->from('user_login_block')
+            ->where('user_id = :uid')->setParameter('uid', $userId)
+            ->executeQuery()->fetchOne();
 
+        if ($blocked) {
             return new RedirectResponse(
-                    $this->urlGenerator->generate('app_user_login_block')
+                $this->urlGenerator->generate('app_user_login_block')
             );
-        } catch (RecordNotFoundException $e) {
-            if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-                return new RedirectResponse($targetPath);
-            } else {
-                return new RedirectResponse($this->urlGenerator->generate('app_index_index'));
-            }
         }
+
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
+        return new RedirectResponse($this->urlGenerator->generate('app_index_index'));
     }
 
     protected function getLoginUrl(Request $request): string

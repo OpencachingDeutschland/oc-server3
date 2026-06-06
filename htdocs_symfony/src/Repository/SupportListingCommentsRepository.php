@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\SupportListingCommentsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -44,7 +43,7 @@ class SupportListingCommentsRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -75,7 +74,7 @@ class SupportListingCommentsRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -105,7 +104,7 @@ class SupportListingCommentsRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -115,89 +114,20 @@ class SupportListingCommentsRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(SupportListingCommentsEntity $entity): SupportListingCommentsEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(SupportListingCommentsEntity $entity): SupportListingCommentsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function remove(SupportListingCommentsEntity $entity): SupportListingCommentsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
-
-        $entity->id = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(SupportListingCommentsEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'wp_oc' => $entity->wpOc,
-                'comment' => $entity->comment,
-                'comment_created' => $entity->commentCreated,
-                'comment_last_modified' => date('Y-m-d H:i:s'),
-        ];
-    }
 
     /**
      * @throws \Exception
      */
-    public function getEntityFromDatabaseArray(array $data): SupportListingCommentsEntity
-    {
-        $entity = new SupportListingCommentsEntity('');
-        $entity->id = (int)$data['id'];
-        $entity->wpOc = (string)$data['wp_oc'];
-        $entity->comment = (string)$data['comment'];
-        $entity->commentCreated = (string)$data['comment_created'];
-        $entity->commentLastModified = (string)$data['comment_last_modified'];
-
-        return $entity;
-    }
 }

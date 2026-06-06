@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
-use Oc\Entity\SupportBonuscachesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -39,7 +38,7 @@ class SupportBonuscachesRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -70,7 +69,7 @@ class SupportBonuscachesRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -100,7 +99,7 @@ class SupportBonuscachesRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -110,86 +109,19 @@ class SupportBonuscachesRepository
      * @throws RecordAlreadyExistsException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function create(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      */
-    public function update(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws \Doctrine\DBAL\Exception
      * @throws InvalidArgumentException
      */
-    public function remove(SupportBonuscachesEntity $entity): SupportBonuscachesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
 
-        $entity->id = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(SupportBonuscachesEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'wp_oc' => $entity->wpOc,
-                'is_bonus_cache' => $entity->isBonusCache,
-                'belongs_to_bonus_cache' => $entity->belongsToBonusCache,
-        ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): SupportBonuscachesEntity
-    {
-        $entity = new SupportBonuscachesEntity();
-        $entity->id = (int)$data['id'];
-        $entity->wpOc = (string)$data['wp_oc'];
-        $entity->isBonusCache = (bool)$data['is_bonus_cache'];
-        $entity->belongsToBonusCache = (string)$data['belongs_to_bonus_cache'];
-
-        return $entity;
-    }
 
     /**
      * @throws RecordAlreadyExistsException
@@ -201,7 +133,7 @@ class SupportBonuscachesRepository
         try {
             $entity = $this->fetchOneBy(['wp_oc' => $wpID]);
         } catch (Exception $exception) {
-            $entity = new SupportBonuscachesEntity($wpID, $setAsBonusCache, $toBonusCache);
+            $entity = ["wp_oc" => $wpID, "set_as_bonus_cache" => $setAsBonusCache, "to_bonus_cache" => $toBonusCache];
             $this->create($entity);
         }
 

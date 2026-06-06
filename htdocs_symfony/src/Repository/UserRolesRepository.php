@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\UserRolesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -47,7 +46,7 @@ class UserRolesRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -78,7 +77,7 @@ class UserRolesRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -108,7 +107,7 @@ class UserRolesRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -118,65 +117,17 @@ class UserRolesRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(UserRolesEntity $entity): UserRolesEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws RecordNotPersistedException
      */
-    public function update(UserRolesEntity $entity): UserRolesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
-    public function remove(UserRolesEntity $entity): UserRolesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
-
-        $entity->id = 0;
-
-        return $entity;
-    }
 
     /**
      * @throws RecordAlreadyExistsException
@@ -188,7 +139,7 @@ class UserRolesRepository
         try {
             $this->fetchOneBy(['user_id' => $userId, 'role_id' => $this->securityRolesRepository->getIdByRoleName($role)]);
         } catch (\Exception $exception) {
-            $entity = new UserRolesEntity($userId, $this->securityRolesRepository->getIdByRoleName($role));
+            $entity = ["user_id" => $userId, "role_id" => $this->securityRolesRepository->getIdByRoleName($role)];
             $this->create($entity);
         }
 
@@ -207,24 +158,7 @@ class UserRolesRepository
         return true;
     }
 
-    public function getDatabaseArrayFromEntity(UserRolesEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'user_id' => $entity->userId,
-                'role_id' => $entity->roleId,
-        ];
-    }
 
-    public function getEntityFromDatabaseArray(array $data): UserRolesEntity
-    {
-        $entity = new UserRolesEntity();
-        $entity->id = (int)$data['id'];
-        $entity->userId = (int)$data['user_id'];
-        $entity->roleId = (int)$data['role_id'];
-
-        return $entity;
-    }
 
     /**
      * Determine which ROLE of the current user is needed to perform role changes on a user

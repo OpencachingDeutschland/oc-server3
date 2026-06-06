@@ -8,9 +8,6 @@ use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use Exception;
-use Oc\Entity\SupportListingCommentsEntity;
-use Oc\Entity\SupportUserCommentsEntity;
-use Oc\Entity\UserLoginBlockEntity;
 use Oc\Form\SupportBonusCachesAssignment;
 use Oc\Form\SupportCommentField;
 use Oc\Form\SupportImportGPX;
@@ -36,7 +33,6 @@ use Oc\Repository\SupportListingInfosRepository;
 use Oc\Repository\SupportUserCommentsRepository;
 use Oc\Repository\SupportUserRelationsRepository;
 use Oc\Repository\SupportVandalismRepository;
-use Oc\Repository\UserLoginBlockRepository;
 use Oc\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -88,8 +84,6 @@ class SupportControllerBackoffice extends AbstractController
 
     private SupportVandalismRepository $supportVandalismRepository;
 
-    private UserLoginBlockRepository $userLoginBlockRepository;
-
     private UserRepository $userRepository;
 
     public function __construct(
@@ -109,7 +103,6 @@ class SupportControllerBackoffice extends AbstractController
             SupportUserCommentsRepository $supportUserCommentsRepository,
             SupportUserRelationsRepository $supportUserRelationsRepository,
             SupportVandalismRepository $supportVandalismRepository,
-            UserLoginBlockRepository $userLoginBlockRepository,
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
@@ -128,7 +121,6 @@ class SupportControllerBackoffice extends AbstractController
         $this->supportUserCommentsRepository = $supportUserCommentsRepository;
         $this->supportUserRelationsRepository = $supportUserRelationsRepository;
         $this->supportVandalismRepository = $supportVandalismRepository;
-        $this->userLoginBlockRepository = $userLoginBlockRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -255,7 +247,7 @@ class SupportControllerBackoffice extends AbstractController
         $formSearch = $this->createForm(SupportSearchCaches::class);
 
         $fetchedCache = $this->cachesRepository->fetchOneBy(['wp_Oc' => $wpID]);
-        $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $fetchedCache->userId]);
+        $fetchedOwnerCaches = $this->cachesRepository->fetchBy(['user_id' => $fetchedCache["user_id"]]);
 
         return $this->render(
                 'backoffice/support/bonusCachesAssignment.html.twig', [
@@ -442,7 +434,7 @@ class SupportControllerBackoffice extends AbstractController
 
         $fetchedStatus = $this->cacheStatusRepository->fetchAll();
 
-        $fetchedStatusModfied = $this->cacheStatusModifiedRepository->fetchBy(['cache_id' => $fetchedReport->cacheid]);
+        $fetchedStatusModfied = $this->cacheStatusModifiedRepository->fetchBy(['cache_id' => $fetchedReport["cacheid"]]);
 
         return $this->render(
                 'backoffice/support/reportedCacheDetails.html.twig', [
@@ -480,7 +472,7 @@ class SupportControllerBackoffice extends AbstractController
             try {
                 $fetchedCacheComments = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpID]);
             } catch (Exception $exception) {
-                $entity = new SupportListingCommentsEntity($wpID);
+                $entity = ["wp_oc" => $wpID];
                 $fetchedCacheComments = $this->supportListingCommentsRepository->create($entity);
             }
             // Cachedaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
@@ -496,7 +488,7 @@ class SupportControllerBackoffice extends AbstractController
         try {
             $fetchedUserComments = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => $userID]);
         } catch (Exception $exception) {
-            $entity = new SupportUserCommentsEntity($userID);
+            $entity = ["oc_user_id" => $userID];
             $fetchedUserComments = $this->supportUserCommentsRepository->create($entity);
         }
         // Nutzerdaten zu Fremnodes abholen (es können mehrere Einträge in der DB existieren)
@@ -538,11 +530,11 @@ class SupportControllerBackoffice extends AbstractController
 
             if ($inputData['hidden_sender'] == 'textfield_cache_comment') {
                 $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => (string)$inputData['hidden_ID2']]);
-                $entity->comment = $inputData['content_comment_field'];
+                $entity["comment"] = $inputData['content_comment_field'];
                 $this->supportListingCommentsRepository->update($entity);
             } elseif ($inputData['hidden_sender'] == 'textfield_user_comment') {
                 $entity = $this->supportUserCommentsRepository->fetchOneBy(['oc_user_id' => (int)$inputData['hidden_ID1']]);
-                $entity->comment = $inputData['content_comment_field'];
+                $entity["comment"] = $inputData['content_comment_field'];
                 $this->supportUserCommentsRepository->update($entity);
             }
 
@@ -570,7 +562,7 @@ class SupportControllerBackoffice extends AbstractController
             $inputData = $form->getData();
 
             $entity = $this->cacheReportsRepository->fetchOneBy(['id' => (int)$inputData['hidden_ID1']]);
-            $entity->comment = $inputData['content_comment_field'];
+            $entity["comment"] = $inputData['content_comment_field'];
 
             $this->cacheReportsRepository->update($entity);
 
@@ -623,11 +615,10 @@ class SupportControllerBackoffice extends AbstractController
     public function list_user_account_details(int $userID): Response
     {
         $fetchedUserDetails = $this->userRepository->fetchOneById($userID);
-        $fetchedUserLoginBlock = null;
-        try {
-            $fetchedUserLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
-        } catch (RecordNotFoundException $e) {
-        }
+        $fetchedUserLoginBlock = $this->connection->createQueryBuilder()
+            ->select('*')->from('user_login_block')
+            ->where('user_id = :uid')->setParameter('uid', $userID)
+            ->executeQuery()->fetchAssociative() ?: null;
 
         return $this->render(
                 'backoffice/support/userDetails.html.twig', [
@@ -941,23 +932,29 @@ class SupportControllerBackoffice extends AbstractController
                     $timeToBlock = $form->get('dropDown_login_block')->getData();
                     $message = $form->get('message_login_block')->getData();
 
-                    try {
-                        $entity = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $userID]);
+                    $existing = $this->connection->createQueryBuilder()
+                        ->select('user_id')->from('user_login_block')
+                        ->where('user_id = :uid')->setParameter('uid', $userID)
+                        ->executeQuery()->fetchOne();
 
+                    if ($existing) {
                         if ($timeToBlock === -1) {
-                            // -1 = entferne die Blockierung des Logins // alle anderen Zahlen = setze die blockierung auf $JETZT plus x Tage
-                            $this->userLoginBlockRepository->remove($entity);
+                            $this->connection->delete('user_login_block', ['user_id' => $userID]);
                         } else {
                             // setze Zeitstemepel + x Tage
                             $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
-                            $entity->loginBlockUntil = $untilWhenToBlock->format('Y-m-d H:i:s');
-                            $entity->message = $message;
-                            $this->userLoginBlockRepository->update($entity);
+                            $this->connection->update('user_login_block', [
+                                'login_block_until' => $untilWhenToBlock->format('Y-m-d H:i:s'),
+                                'message' => $message,
+                            ], ['user_id' => $userID]);
                         }
-                    } catch (RecordNotFoundException $e) {
+                    } else {
                         $untilWhenToBlock = new DateTime(date('Y-m-d H:i:s') . '+ ' . $timeToBlock . ' day');
-                        $entity = new UserLoginBlockEntity($userID, $untilWhenToBlock->format('Y-m-d H:i:s'), $message);
-                        $entity = $this->userLoginBlockRepository->create($entity);
+                        $this->connection->insert('user_login_block', [
+                            'user_id' => $userID,
+                            'login_block_until' => $untilWhenToBlock->format('Y-m-d H:i:s'),
+                            'message' => $message,
+                        ]);
                     }
                 }
             } elseif ($form->getClickedButton() === $form->get('button_GDPR_deletion')) {
@@ -1056,8 +1053,8 @@ class SupportControllerBackoffice extends AbstractController
         $differencesDetected = [];
 
         foreach ($fetchedListingInfos as $fetchedListingInfo) {
-            $fetchedOCCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $fetchedListingInfo->wpOc]);
-            $tempArray = [$fetchedListingInfo->wpOc . '/' . $fetchedListingInfo->nodeListingWp];
+            $fetchedOCCache = $this->cachesRepository->fetchOneBy(['wp_oc' => $fetchedListingInfo["wp_oc"]]);
+            $tempArray = [$fetchedListingInfo["wp_oc"] . '/' . $fetchedListingInfo->nodeListingWp];
 
             if ($fetchedOCCache->name != $fetchedListingInfo->nodeListingName) {
                 $tempArray[] = $fetchedOCCache->name . ' != ' . $fetchedListingInfo->nodeListingName;
@@ -1218,10 +1215,10 @@ class SupportControllerBackoffice extends AbstractController
                         try {
                             $entity = $this->supportListingCommentsRepository->fetchOneBy(['wp_oc' => $wpt['wp_oc']]);
                         } catch (Exception $exception) {
-                            $entity = $this->supportListingCommentsRepository->create(new SupportListingCommentsEntity($wpt['wp_oc']));
+                            $entity = $this->supportListingCommentsRepository->create(["wp_oc" => $wpt["wp_oc"]]);
                         }
 
-                        $entity->comment = $newComment . $entity->comment;
+                        $entity["comment"] = $newComment . $entity["comment"];
                         $this->supportListingCommentsRepository->update($entity);
                     }
 

@@ -10,7 +10,6 @@
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.0",
-        "doctrine/orm": "^3.6.2",
         "knplabs/knp-menu-bundle": "^3.7",
         "phpdocumentor/reflection-docblock": "^6.0.0",
         "symfony/asset": "7.4.*",

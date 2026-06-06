@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\CountriesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
@@ -44,7 +43,7 @@ class CountriesRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -75,7 +74,7 @@ class CountriesRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -105,7 +104,7 @@ class CountriesRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -115,65 +114,17 @@ class CountriesRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(CountriesEntity $entity): CountriesEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->short = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws RecordNotPersistedException
      */
-    public function update(CountriesEntity $entity): CountriesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['short' => $entity->short]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws RecordNotPersistedException
      * @throws InvalidArgumentException
      */
-    public function remove(CountriesEntity $entity): CountriesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $this->connection->delete(
-                self::TABLE,
-                ['short' => $entity->short]
-        );
-
-        $entity->short = null;
-
-        return $entity;
-    }
 
     /**
      * fetch all countries from DB, sort them ascending
@@ -199,40 +150,7 @@ class CountriesRepository
         return ($countryList);
     }
 
-    public function getDatabaseArrayFromEntity(CountriesEntity $entity): array
-    {
-        return [
-                'short' => $entity->short,
-                'name' => $entity->name,
-                'trans_id' => $entity->transId,
-                'de' => $entity->de,
-                'en' => $entity->en,
-                'list_default_de' => $entity->listDefaultDe,
-                'sort_de' => $entity->sortDe,
-                'list_default_en' => $entity->listDefaultEn,
-                'sort_en' => $entity->sortEn,
-                'adm_display2' => $entity->admDisplay2,
-                'adm_display3' => $entity->admDisplay3,
-        ];
-    }
 
-    public function getEntityFromDatabaseArray(array $data): CountriesEntity
-    {
-        $entity = new CountriesEntity();
-        $entity->short = (string)$data['short'];
-        $entity->name = (string)$data['name'];
-        $entity->transId = (int)$data['trans_id'];
-        $entity->de = (string)$data['de'];
-        $entity->en = (string)$data['en'];
-        $entity->listDefaultDe = (int)$data['list_default_de'];
-        $entity->sortDe = (string)$data['sort_de'];
-        $entity->listDefaultEn = (int)$data['list_default_en'];
-        $entity->sortEn = (string)$data['sort_en'];
-        $entity->admDisplay2 = (int)$data['adm_display2'];
-        $entity->admDisplay3 = (int)$data['adm_display3'];
-
-        return $entity;
-    }
 
     /** @throws Exception */
     public function fetchLookupCountries(string $lang): array

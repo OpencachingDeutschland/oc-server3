@@ -25,7 +25,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('controller.service_arguments');
 
     $services->load('Oc\Command\\', __DIR__ . '/../src/Command/')
-        ->tag('console.command');
+        ->tag('console.command')
+        ->public();
 
     $services->set('app.menu_builder', MenuGenerator::class)
             ->args([

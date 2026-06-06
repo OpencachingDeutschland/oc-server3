@@ -7,7 +7,7 @@ namespace Oc\Menu;
 use Knp\Menu\Attribute\AsMenuBuilder;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Bundle\SecurityBundle\Security;
+use Oc\Security\Auth;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 // https://symfony.com/bundles/KnpMenuBundle/current/menu_builder_service.html
@@ -15,17 +15,14 @@ class MenuGenerator
 {
     private FactoryInterface $factory;
 
-    private Security $security;
+    private Auth $auth;
 
     private TranslatorInterface $translator;
 
-    /**
-     * Add any other dependency you need...
-     */
-    public function __construct(FactoryInterface $factory, Security $security, TranslatorInterface $translator)
+    public function __construct(FactoryInterface $factory, Auth $auth, TranslatorInterface $translator)
     {
         $this->factory = $factory;
-        $this->security = $security;
+        $this->auth = $auth;
         $this->translator = $translator;
     }
 
@@ -85,11 +82,11 @@ class MenuGenerator
         $this->addMenuItem($menu['menuOC'], 'menuOCTOU', $this->translator->trans('Terms of use'), '', 'icon', 'fas fa-map-marker-alt');
         $this->addMenuItem($menu['menuOC'], 'menuOCOCOnly81', $this->translator->trans('OCOnly-81'), 'app_oconly81_index', 'icon', 'fas fa-map-marker-alt');
 
-        if ($this->security->isGranted('ROLE_SUPPORT_TRAINEE')) {
+        if ($this->auth->isGranted('ROLE_SUPPORT_TRAINEE')) {
             $this->addMenuItem($menu, 'menuSupport', $this->translator->trans('Support Center'), '', 'icon', 'fas fa-user-shield');
             $this->addMenuItem($menu['menuSupport'], 'menuSupportReported', $this->translator->trans('Reported caches'), 'backoffice_support_reported_caches', 'icon', 'fas fa-flag');
             $this->addMenuItem($menu['menuSupport'], 'menuSupportSearch',   $this->translator->trans('Search users'),    'app_user_index',                  'icon', 'fas fa-search');
-            if ($this->security->isGranted('ROLE_TEAM')) {
+            if ($this->auth->isGranted('ROLE_TEAM')) {
                 $this->addMenuItem($menu['menuSupport'], 'menuSupportRoles',     $this->translator->trans('DEV Roles'),       'backoffice_roles_index',             'icon', 'fas fa-user-tag');
             }
         }

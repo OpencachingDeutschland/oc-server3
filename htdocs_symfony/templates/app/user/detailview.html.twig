@@ -13,7 +13,7 @@
                     <ul>
                         <li><b>{{ 'Details for user' | trans }}:</b> {{ user_by_id.username }}</li>
                         <li><b>{{ 'Country' | trans }}:</b> {{ user_by_id.country }}</li>
-                        <li><b>{{ 'Last login' | trans }}:</b> {{ user_by_id.lastLogin | date('d.m.Y') }}</li>
+                        <li><b>{{ 'Last login' | trans }}:</b> {{ user_by_id.last_login | date('d.m.Y') }}</li>
                         <li><b>{{ 'Description' | trans }}:</b></li>
                         <div style="border: 2px solid #000000;">{{ user_by_id.description | raw }}</div>
                     </ul>
@@ -22,20 +22,20 @@
                         <br/>
                         {{ 'Hidden information' | trans }}:<br/>
                         <ul>
-                            <li><b>{{ 'User ID' | trans }}:</b> {{ user_by_id.userId }}</li>
+                            <li><b>{{ 'User ID' | trans }}:</b> {{ user_by_id.user_id }}</li>
                             <li><b>{{ 'Email' | trans }}:</b> {{ user_by_id.email }}</li>
-                            <li><b>{{ 'Email validity' | trans }}:</b> {% if user_by_id.emailProblems %}&#x274C;
+                            <li><b>{{ 'Email validity' | trans }}:</b> {% if user_by_id.email_problems %}&#x274C;
                                 {% else %}&#x2705;
                                 {% endif %}</li>
-                            <li><b>{{ 'Account created' | trans }}:</b> {{ user_by_id.dateCreated | date('d.m.Y H:i:s') }}</li>
-                            <li><b>{{ 'Last change' | trans }}:</b> {{ user_by_id.lastModified | date('d.m.Y H:i:s') }}</li>
-                            <li><b>{{ 'User active' | trans }}:</b> {% if user_by_id.isActive %}&#x2705;{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'Account created' | trans }}:</b> {{ user_by_id.date_created | date('d.m.Y H:i:s') }}</li>
+                            <li><b>{{ 'Last change' | trans }}:</b> {{ user_by_id.last_modified | date('d.m.Y H:i:s') }}</li>
+                            <li><b>{{ 'User active' | trans }}:</b> {% if user_by_id.is_active_flag %}&#x2705;{% else %}&#x274C;{% endif %}</li>
                             <li><b>{{ 'Activation code' | trans }}
-                                    :</b> {% if user_by_id.activationCode %}{{ user_by_id.activationCode }}{% else %}
+                                    :</b> {% if user_by_id.activation_code %}{{ user_by_id.activation_code }}{% else %}
                                     &#x274C;{% endif %}</li>
-                            <li><b>{{ 'First name' | trans }}:</b> {% if user_by_id.firstname %}{{ user_by_id.firstname }}{% else %}&#x274C;{% endif %}</li>
-                            <li><b>{{ 'Last name' | trans }}:</b> {% if user_by_id.lastname %}{{ user_by_id.lastname }}{% else %}&#x274C;{% endif %}</li>
-                            <li><b>{{ 'GDPR deleted' | trans }}:</b> {% if user_by_id.gdprDeletion %}&#x2705;{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'First name' | trans }}:</b> {% if user_by_id.first_name %}{{ user_by_id.first_name }}{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'Last name' | trans }}:</b> {% if user_by_id.last_name %}{{ user_by_id.last_name }}{% else %}&#x274C;{% endif %}</li>
+                            <li><b>{{ 'GDPR deleted' | trans }}:</b> {% if user_by_id.gdpr_deletion %}&#x2705;{% else %}&#x274C;{% endif %}</li>
                         </ul>
                     {% endif %}
                 {% else %}

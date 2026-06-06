@@ -61,8 +61,8 @@ class UserController extends AbstractController
         $stats = $this->userRepository->fetchUserStats($userID);
 
         if ($stats) {
-            $fetchedUser->findCount = (int)$stats['findCount'];
-            $fetchedUser->hideCount = (int)$stats['hideCount'];
+            $fetchedUser['findCount'] = (int)$stats['findCount'];
+            $fetchedUser['hideCount'] = (int)$stats['hideCount'];
         }
 
         return $this->render('app/user/detailview.html.twig', ['user_by_id' => $fetchedUser]);

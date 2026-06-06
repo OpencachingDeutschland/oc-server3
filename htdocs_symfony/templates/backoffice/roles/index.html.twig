@@ -6,11 +6,7 @@
         <h3>{{ 'Security roles' | trans }}..</h3>
         <ul>
             <li>{{ 'You are' | trans }}: {{ auth.getUser().username }}</li>
-            <li>{{ 'id' | trans }}: {{ auth.getUser().userId }}</li>
-            <li>{{ 'Your role(s)' | trans }}:
-                {% for role in auth.getUser().roles %}
-                    {{ role }},
-                {% endfor %}</li>
+            <li>{{ 'id' | trans }}: {{ auth.getUser().user_id }}</li>
         </ul>
     </div>
 

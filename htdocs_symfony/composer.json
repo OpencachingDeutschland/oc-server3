@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.7.0",
+        "doctrine/orm": "^3.6",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "knplabs/knp-menu-bundle": "^3.7",
         "symfony/console": "7.4.*",

@@ -22,23 +22,11 @@ class CachesRepository
 
     private CachesAttributesRepository $cachesAttributesRepository;
 
-    private CacheIgnoreRepository $cacheIgnoreRepository;
-
-    private CacheLogsRepository $cacheLogsRepository;
-
-    private CacheRatingRepository $cacheRatingRepository;
-
     private CacheSizeRepository $cacheSizeRepository;
 
     private CacheStatusRepository $cacheStatusRepository;
 
     private CacheTypeRepository $cacheTypeRepository;
-
-    private CacheVisitsRepository $cacheVisitsRepository;
-
-    private CacheWatchesRepository $cacheWatchesRepository;
-
-//    private PicturesRepository $picturesRepository;
 
     private UserRepository $userRepository;
 
@@ -46,29 +34,17 @@ class CachesRepository
             Connection $connection,
             Auth $auth,
             CachesAttributesRepository $cachesAttributesRepository,
-            CacheIgnoreRepository $cacheIgnoreRepository,
-            CacheLogsRepository $cacheLogsRepository,
-            CacheRatingRepository $cacheRatingRepository,
             CacheSizeRepository $cacheSizeRepository,
             CacheStatusRepository $cacheStatusRepository,
             CacheTypeRepository $cacheTypeRepository,
-            CacheVisitsRepository $cacheVisitsRepository,
-            CacheWatchesRepository $cacheWatchesRepository,
-//            PicturesRepository $picturesRepository,
             UserRepository $userRepository
     ) {
         $this->connection = $connection;
         $this->auth = $auth;
         $this->cachesAttributesRepository = $cachesAttributesRepository;
-        $this->cacheIgnoreRepository = $cacheIgnoreRepository;
-        $this->cacheLogsRepository = $cacheLogsRepository;
-        $this->cacheRatingRepository = $cacheRatingRepository;
         $this->cacheSizeRepository = $cacheSizeRepository;
         $this->cacheStatusRepository = $cacheStatusRepository;
         $this->cacheTypeRepository = $cacheTypeRepository;
-        $this->cacheVisitsRepository = $cacheVisitsRepository;
-        $this->cacheWatchesRepository = $cacheWatchesRepository;
-//        $this->picturesRepository = $picturesRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -439,23 +415,21 @@ class CachesRepository
      */
     public function isWatchedByUser(int $cacheId, int $userId): bool
     {
-        return $this->cacheWatchesRepository->fetchOneByCount([
-            'cache_id' => $cacheId,
-            'user_id'  => $userId,
-        ]) > 0;
+        return (bool) $this->connection->createQueryBuilder()
+            ->select('cache_id')->from('cache_watches')
+            ->where('cache_id = :cid')->andWhere('user_id = :uid')
+            ->setParameters(['cid' => $cacheId, 'uid' => $userId])
+            ->executeQuery()->fetchOne();
     }
 
-    /**
-     * Check whether a user has recommended a cache.
-     *
-     * @throws Exception
-     */
+    /** @throws Exception */
     public function isRecommendedByUser(int $cacheId, int $userId): bool
     {
-        return $this->cacheRatingRepository->getRatingUserCache([
-            'cache_id' => $cacheId,
-            'user_id'  => $userId,
-        ]);
+        return (bool) $this->connection->createQueryBuilder()
+            ->select('cache_id')->from('cache_rating')
+            ->where('cache_id = :cid')->andWhere('user_id = :uid')
+            ->setParameters(['cid' => $cacheId, 'uid' => $userId])
+            ->executeQuery()->fetchOne();
     }
 
     // ── Lookup queries (kept for tables without dedicated repos) ──────

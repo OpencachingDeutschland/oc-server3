@@ -22,22 +22,14 @@ class CacheReportsRepository
 
     private UserRepository $userRepository;
 
-    private CacheReportReasonsRepository $cacheReportReasonsRepository;
-
-    private CacheReportStatusRepository $cacheReportStatusRepository;
-
     public function __construct(
             Connection $connection,
             CachesRepository $cachesRepository,
             UserRepository $userRepository,
-            CacheReportReasonsRepository $cacheReportReasonsRepository,
-            CacheReportStatusRepository $cacheReportStatusRepository
     ) {
         $this->connection = $connection;
         $this->cachesRepository = $cachesRepository;
         $this->userRepository = $userRepository;
-        $this->cacheReportReasonsRepository = $cacheReportReasonsRepository;
-        $this->cacheReportStatusRepository = $cacheReportStatusRepository;
     }
 
     /**

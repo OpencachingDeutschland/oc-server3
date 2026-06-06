@@ -18,35 +18,10 @@ class CacheLogsRepository
 
     private Connection $connection;
 
-    private LogTypesRepository $logTypesRepository;
-
-    private UserRepository $userRepository;
-
-    private PicturesRepository $picturesRepository;
-
-    private CacheRatingRepository $cacheRatingRepository;
-
-    /**
-     * CachesRepository constructor.
-     *
-     * @param Connection            $connection
-     * @param LogTypesRepository    $logTypesRepository
-     * @param UserRepository        $userRepository
-     * @param PicturesRepository    $picturesRepository
-     * @param CacheRatingRepository $cacheRatingRepository
-     */
     public function __construct(
-            Connection $connection,
-            LogTypesRepository $logTypesRepository,
-            UserRepository $userRepository,
-            PicturesRepository $picturesRepository,
-            CacheRatingRepository $cacheRatingRepository
+        Connection $connection,
     ) {
         $this->connection = $connection;
-        $this->logTypesRepository = $logTypesRepository;
-        $this->userRepository = $userRepository;
-        $this->picturesRepository = $picturesRepository;
-        $this->cacheRatingRepository = $cacheRatingRepository;
     }
 
     /**

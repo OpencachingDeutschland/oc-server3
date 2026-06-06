@@ -98,10 +98,8 @@ class Auth
         $this->connection->insert('sys_sessions', [
             'uuid'       => $uuid,
             'user_id'    => $row['user_id'],
-            'session_id' => session_id(),
             'permanent'  => 0,
             'last_login' => $now,
-            'date_created' => $now,
         ]);
 
         // Set cookie

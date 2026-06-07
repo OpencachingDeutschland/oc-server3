@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Oc\Controller\App;
 
 use Oc\Repository\CachesRepository;
+use Oc\Repository\WaypointsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +15,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class LiveMapController extends AbstractController
 {
     public function __construct(
-        private CachesRepository $cachesRepository
+        private CachesRepository $cachesRepository,
+        private WaypointsRepository $waypointsRepository
     ) {}
 
     #[Route('/livemap', name: 'livemap')]
@@ -35,7 +37,7 @@ class LiveMapController extends AbstractController
             return new JsonResponse(['wpts' => []]);
         }
 
-        $rows = $this->cachesRepository->fetchWaypointsByWp($wp);
+        $rows = $this->waypointsRepository->fetchWaypointsByWp($wp);
 
         $wpts = array_map(fn($r) => [
             'lat'         => (float)$r['latitude'],

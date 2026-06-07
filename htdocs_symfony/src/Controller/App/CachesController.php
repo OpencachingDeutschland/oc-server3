@@ -88,6 +88,7 @@ class CachesController extends AbstractController
                 'difficulty'    => (float)$r['difficulty'],
                 'terrain'       => (float)$r['terrain'],
                 'ownerAlias'    => (string)$r['username'],
+                'ownerCode'     => (string)$r['username'],
                 'publishedDate' => substr((string)$r['date_created'], 0, 10),
                 'platform'      => 'OC',
                 'isFound'       => (bool)(int)$r['is_found'],

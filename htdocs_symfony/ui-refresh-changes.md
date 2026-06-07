@@ -39,7 +39,7 @@ replacement for the legacy PHP frontend.
 - **User profile** (`/user/profile/{id}`): redesigned two-column card
   layout with public info (left) and team-only account info (right).
   Clean, modern presentation.
-- **Reported caches** (`/backoffice/reported-caches`): Tabulator grid
+- **Reported caches** (`/backoffice/reportedCaches`): Tabulator grid
   with status filtering (All/New/In Progress/Done), colored status
   badges, linked columns to cache and owner profiles.
 - **Navbar**: rebuilt on KnpMenu with Bootstrap-5 template
@@ -413,7 +413,7 @@ flagship pages**, not a replacement.
   (`/`), live map (`/livemap`), cache detail (`/cache/{wp}`), cache search
   (`/caches/`), user search (`/user`), user profile (`/user/profile/{id}`),
   new cache creation (`/cache/new`), and reported caches backoffice
-  (`/backoffice/reported-caches`). Replacing the legacy frontend entirely
+  (`/backoffice/reportedCaches`). Replacing the legacy frontend entirely
   means additional pages: lists, log lists, owner views, statistics,
   registration, password reset, account settings, notifications, and more.
   The pattern scales, but deploying the remaining pages is sizeable work.

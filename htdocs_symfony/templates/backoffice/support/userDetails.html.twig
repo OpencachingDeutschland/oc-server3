@@ -12,7 +12,7 @@
                 <br/>
                 <ul>
                     <li><b>{{ 'Details for user' | trans }}:</b> {{ user_account_details.username }}</li>
-                    <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.userId }}</li>
+                    <li><b>{{ 'User ID' | trans }}:</b> {{ user_account_details.user_id }}</li>
                     <li><b>{{ 'Email' | trans }}:</b> {{ user_account_details.email }}</li>
                     <li><b>{{ 'Email validity' | trans }}:</b> {% if user_account_details.emailProblems %}&#x274C;
                         {% else %}&#x2705;
@@ -40,7 +40,7 @@
                 </ul>
 
                 {% if supportUserAccountActions is defined %}
-                    {{ form_start(supportUserAccountActions, {action:path('backoffice_support_executeUAD_actions', {'userID': user_account_details.userId } ) } ) }}
+                    {{ form_start(supportUserAccountActions, {action:path('backoffice_support_executeUAD_actions', {'userID': user_account_details.user_id } ) } ) }}
                     <ul>
                         <li><b>{{ 'Set account inactive (and lock caches)' | trans }}:</b>
                             {# TODO: "Set account inactive"-Button ist zwar aktiv, es ist aber noch keine Funktionalität hinterlegt..#}

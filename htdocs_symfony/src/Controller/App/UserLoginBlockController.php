@@ -8,6 +8,7 @@ use DateTime;
 use Doctrine\DBAL\Connection;
 use Exception;
 use Oc\Form\UserLoginBlockConfirm;
+use Oc\Security\Auth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ class UserLoginBlockController extends AbstractController
     public function __construct(
         private Connection $connection,
         private UrlGeneratorInterface $urlGenerator,
+        private Auth $auth,
     ) {}
 
     /**
@@ -29,12 +31,12 @@ class UserLoginBlockController extends AbstractController
     public function showUserLoginBlockMessageOrRedirect(): Response
     {
         $form = $this->createForm(UserLoginBlockConfirm::class);
-        $user = $this->getUser();
+        $user = $this->auth->getUser();
 
         if ($user) {
             $block = $this->connection->createQueryBuilder()
                 ->select('*')->from('user_login_block')
-                ->where('user_id = :uid')->setParameter('uid', $user->userId)
+                ->where('user_id = :uid')->setParameter('uid', $user['user_id'])
                 ->executeQuery()->fetchAssociative();
 
             if ($block) {
@@ -43,7 +45,7 @@ class UserLoginBlockController extends AbstractController
                 return $this->render('app/user/showuserloginblock.html.twig', [
                     'confirmButton' => $form->createView(),
                     'user_login_block' => $block,
-                    'user_id' => $user->userId,
+                    'user_id' => $user['user_id'],
                     'login_block_expired' => $expirationTime < new DateTime("now")
                 ]);
             }

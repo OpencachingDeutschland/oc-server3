@@ -62,7 +62,7 @@
                 <input type="checkbox" name="sure" value="1" required/> {{ 'Are you sure?' | trans }}<br/>
                 <input type="checkbox" name="simulate" value="1"/> {{ 'Simulate?' | trans }}<br/>
                 <input type="hidden" name="wpID" value="{{ curremt_cache_details.wpOc }}">
-                <input type="hidden" name="adminUserID" value="{{ app.user.userId }}">
+                <input type="hidden" name="adminUserID" value="{{ app.user.user_id }}">
                 <input type="submit">
             </form>
         {% else %}

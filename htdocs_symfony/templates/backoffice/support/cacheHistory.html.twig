@@ -60,7 +60,7 @@
                     {% for deletedLog in deleted_logs | reverse %}
                         <tr>
                             <td>{{ deletedLog.dateCreated | date('d.m.Y') }}</td>
-                            <td>{{ deletedLog.userId }}</td>
+                            <td>{{ deletedLog.user_id }}</td>
                             <td>{{ deletedLog.deletionDate | date('d.m.Y') }}</td>
                             <td>{{ deletedLog.deletedBy }}</td>
                             <td>{{ deletedLog.text | raw }}</td>

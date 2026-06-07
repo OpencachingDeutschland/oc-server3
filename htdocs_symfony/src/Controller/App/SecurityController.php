@@ -51,6 +51,6 @@ class SecurityController extends AbstractController
     public function logout(): Response
     {
         $this->auth->logout();
-        return $this->redirectToRoute('security_login');
+        return $this->redirectToRoute('app_security_login');
     }
 }

@@ -53,7 +53,7 @@ class SecurityRolesRepository
      * @throws Exception
      * @throws RecordNotFoundException
      */
-    public function fetchOneBy(array $where = []): SecurityRolesEntity
+    public function fetchOneBy(array $where = []): array
     {
         $queryBuilder = $this->connection->createQueryBuilder()
                 ->select('*')
@@ -136,7 +136,7 @@ class SecurityRolesRepository
         }
 
         return array_map(static function ($role) {
-            return $role->role;
+            return $role['role'];
         }, $records);
     }
 
@@ -161,7 +161,7 @@ class SecurityRolesRepository
      */
     public function getIdByRoleName(string $roleName): int
     {
-        return ($this->fetchOneBy(['role' => $roleName])->id);
+        return ($this->fetchOneBy(['role' => $roleName])['id']);
     }
 
     /**
@@ -170,7 +170,7 @@ class SecurityRolesRepository
      */
     public function getRoleNameById(int $roleId): string
     {
-        return ($this->fetchOneBy(['id' => $roleId])->role);
+        return ($this->fetchOneBy(['id' => $roleId])['role']);
     }
 
 

@@ -8,15 +8,6 @@ use Oc\Libse\ChildWp\HandlerChildWp;
 $build_map_towns_menu = true;
 
 require __DIR__ . '/lib2/web.inc.php';
-
-// Redirect to Symfony livemap on the new-UI domain.
-// Mirrors ddev behavior where all routes go through the Symfony front controller.
-$newUiDomain = $opt['new_ui']['domain'] ?? null;
-if ($newUiDomain) {
-    header('Location: https://' . $newUiDomain . '/livemap', true, 302);
-    exit;
-}
-
 require_once __DIR__ . '/lib2/logic/attribute.class.php';
 
 /* because the map does access some private info like

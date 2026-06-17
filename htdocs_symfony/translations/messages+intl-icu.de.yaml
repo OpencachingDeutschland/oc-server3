@@ -525,3 +525,9 @@ DNF: DNF
 'Personal note': 'Persönliche Notiz'
 Filter: Filter
 'Open filter settings': 'Filtereinstellungen öffnen'
+# Livemap city search
+'City or village…': 'Stadt oder Dorf …'
+'My location': 'Mein Standort'
+'No results': 'Keine Ergebnisse'
+'Error searching': 'Fehler bei der Suche'
+'Location unavailable': 'Standort nicht verfügbar'

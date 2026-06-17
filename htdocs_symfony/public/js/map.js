@@ -82,18 +82,18 @@ if (document.body.dataset.page !== 'mapServer') {
 
       const input = L.DomUtil.create('input', 'city-search-input', searchRow);
       input.type        = 'text';
-      input.placeholder = 'City or village\u2026';
+      input.placeholder = t('City or village\u2026');
       input.maxLength   = 60;
       input.setAttribute('autocomplete', 'off');
 
       const btnSearch = L.DomUtil.create('button', 'map-btn', searchRow);
       btnSearch.innerHTML = '&#x1F50D;';
-      btnSearch.title     = 'Search';
+      btnSearch.title     = t('Search');
       btnSearch.type      = 'button';
 
       const btnHere = L.DomUtil.create('button', 'map-btn', searchRow);
       btnHere.innerHTML = '&#x1F4CD;';
-      btnHere.title     = 'My location';
+      btnHere.title     = t('My location');
       btnHere.type      = 'button';
 
       const results = L.DomUtil.create('div', 'city-search-results', container);
@@ -117,13 +117,13 @@ if (document.body.dataset.page !== 'mapServer') {
       async function search() {
         const q = input.value.trim();
         if (!q) return;
-        results.innerHTML     = '<div class="city-search-item city-search-status">Searching\u2026</div>';
+        results.innerHTML     = `<div class="city-search-item city-search-status">${t('Searching\u2026')}</div>`;
         results.style.display = 'block';
         try {
           const data = await findCity(q);
           results.innerHTML = '';
           if (!data?.length) {
-            results.innerHTML = '<div class="city-search-item city-search-status">No results</div>';
+            results.innerHTML = `<div class="city-search-item city-search-status">${t('No results')}</div>`;
             return;
           }
           const items = data.slice(0, 8);
@@ -142,7 +142,7 @@ if (document.body.dataset.page !== 'mapServer') {
             });
           });
         } catch {
-          results.innerHTML = '<div class="city-search-item city-search-status">Error searching</div>';
+          results.innerHTML = `<div class="city-search-item city-search-status">${t('Error searching')}</div>`;
         }
       }
 
@@ -160,7 +160,7 @@ if (document.body.dataset.page !== 'mapServer') {
         navigator.geolocation.getCurrentPosition(
           pos => panToAndFetch(pos.coords.latitude, pos.coords.longitude),
           ()  => {
-            results.innerHTML     = '<div class="city-search-item city-search-status">Location unavailable</div>';
+            results.innerHTML     = `<div class="city-search-item city-search-status">${t('Location unavailable')}</div>`;
             results.style.display = 'block';
           }
         );

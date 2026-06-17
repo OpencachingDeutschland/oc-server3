@@ -100,3 +100,9 @@ DNF: DNF
 Filter: Filter
 'Open filter settings': 'Open filter settings'
 'Time required': 'Time required'
+# Livemap city search
+'City or village…': 'City or village…'
+'My location': 'My location'
+'No results': 'No results'
+'Error searching': 'Error searching'
+'Location unavailable': 'Location unavailable'

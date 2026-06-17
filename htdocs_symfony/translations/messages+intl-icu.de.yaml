@@ -497,9 +497,7 @@ Saved: Gespeichert
 'Delete this log from opencaching.de?': 'Diesen Log von opencaching.de löschen?'
 # Cache detail page — JS rendering strings
 'Joined:': 'Registriert'
-'Finds:': Funde
 'Hides:': Verstecke
 'Hint:': 'Hinweis:'
 # Cache detail page — waypoint table columns
-Coordinates: Koordinaten
 Prefix: Präfix

@@ -30,6 +30,13 @@
     </style>
 {% endblock %}
 
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'by:':       'by:'       | trans,
+    'Published:': 'Published:' | trans,
+    'Finds:':    'Finds:'    | trans,
+    'Found:':    'Found:'    | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
 {% block after_body_start %}
     {# Globals the map modules look up via window/free variables.
        Must be set BEFORE <script type="module" src="loader.js"> runs map.js. #}

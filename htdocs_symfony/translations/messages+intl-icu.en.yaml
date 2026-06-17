@@ -41,7 +41,7 @@ menuBookmarksIgnore: 'Ignore list'
 'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.': 'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.'
 # Cache detail page — table labels
 Reference: Reference
-'State/Province': State/Province
+'State/Province': State
 'Listing Coords': 'Listing Coords'
 'Corrected Coords': 'Corrected Coords'
 'Log Password': 'Log Password'

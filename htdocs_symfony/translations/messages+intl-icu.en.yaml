@@ -76,3 +76,26 @@ Saved: Saved
 # Cache detail page — waypoint table columns
 Coordinates: Coordinates
 Prefix: Prefix
+# Livemap filter modal
+'Filter Options': 'Filter Options'
+All: All
+None: None
+Close: Close
+'Cache Types': 'Cache Types'
+Min: Min
+Max: Max
+Traditional: Traditional
+Multi: Multi
+Virtual: Virtual
+Webcam: Webcam
+Event: Event
+Quiz: Quiz
+'Math/Physics': Math/Physics
+Moving: Moving
+'Drive-in': Drive-in
+Owned: Owned
+DNF: DNF
+'Corrected coords': 'Corrected coords'
+'Personal note': 'Personal note'
+Filter: Filter
+'Open filter settings': 'Open filter settings'

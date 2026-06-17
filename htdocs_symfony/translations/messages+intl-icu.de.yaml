@@ -501,3 +501,26 @@ Saved: Gespeichert
 'Hint:': 'Hinweis:'
 # Cache detail page — waypoint table columns
 Prefix: Präfix
+# Livemap filter modal
+'Filter Options': 'Filter-Optionen'
+All: Alle
+None: Keine
+Close: Schließen
+'Cache Types': 'Cache-Typen'
+Min: Min
+Max: Max
+Traditional: Traditional
+Multi: Multi
+Virtual: Virtuell
+Webcam: Webcam
+Event: Event
+Quiz: Quiz
+'Math/Physics': 'Mathe/Physik'
+Moving: Beweglich
+'Drive-in': Drive-in
+Owned: 'Eigene'
+DNF: DNF
+'Corrected coords': 'Korrigierte Koords'
+'Personal note': 'Persönliche Notiz'
+Filter: Filter
+'Open filter settings': 'Filtereinstellungen öffnen'

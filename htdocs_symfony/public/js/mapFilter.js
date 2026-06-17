@@ -5,6 +5,8 @@
 // Licensed under the MIT License.
 // --------------------------------------------------------------
 
+import { t } from './i18n.js';
+
 let state = {};
 let raw = JSON.parse(localStorage.getItem('filter'));
 // Discard old GC-format filters (has isGC/isOC or GC type IDs like 11,12,13,137,1858,3333)
@@ -32,11 +34,11 @@ function generateFormContent() {
   let html = '<form>';
 
   // --- Cache types ---
-  html += '<div class="mb-2 fw-bold">Cache Types</div><div class="row">';
+  html += `<div class="mb-2 fw-bold">${t('Cache Types')}</div><div class="row">`;
   const types = [
-    ['2', 'Traditional'], ['3', 'Multi'], ['4', 'Virtual'], ['5', 'Webcam'],
-    ['6', 'Event'], ['7', 'Quiz'], ['8', 'Math/Physics'], ['9', 'Moving'],
-    ['10', 'Drive-in'],
+    ['2', t('Traditional')], ['3', t('Multi')], ['4', t('Virtual')], ['5', t('Webcam')],
+    ['6', t('Event')], ['7', t('Quiz')], ['8', t('Math/Physics')], ['9', t('Moving')],
+    ['10', t('Drive-in')],
   ];
   types.forEach(([id, label]) => {
     html += `<div class="col-6"><div class="form-check">
@@ -47,10 +49,10 @@ function generateFormContent() {
   html += '</div><hr class="my-2">';
 
   // --- Status flags ---
-  html += '<div class="mb-2 fw-bold">Status</div><div class="row">';
+  html += `<div class="mb-2 fw-bold">${t('Status')}</div><div class="row">`;
   const flags = [
-    ['isOwned', 'Owned'], ['isFound', 'Found'], ['isDNF', 'DNF'],
-    ['isDisabled', 'Disabled'], ['hasCC', 'Corrected coords'], ['hasPCN', 'Personal note'],
+    ['isOwned', t('Owned')], ['isFound', t('Found')], ['isDNF', t('DNF')],
+    ['isDisabled', t('Disabled')], ['hasCC', t('Corrected coords')], ['hasPCN', t('Personal note')],
   ];
   flags.forEach(([id, label]) => {
     html += `<div class="col-6"><div class="form-check">
@@ -61,13 +63,13 @@ function generateFormContent() {
   html += '</div><hr class="my-2">';
 
   // --- Difficulty range ---
-  html += '<div class="mb-2 fw-bold">Difficulty</div>';
+  html += `<div class="mb-2 fw-bold">${t('Difficulty')}</div>`;
   html += '<div class="d-flex align-items-center gap-2 mb-1">';
-  html += '<label for="minDiff" class="form-label mb-0" style="width:40px">Min</label>';
+  html += `<label for="minDiff" class="form-label mb-0" style="width:40px">${t('Min')}</label>`;
   html += '<select id="minDiff" class="form-select form-select-sm" style="width:90px">';
   for (let v = 2; v <= 10; v++) html += `<option value="${v}">${(v/2).toFixed(1)}</option>`;
   html += '</select>';
-  html += '<label for="maxDiff" class="form-label mb-0 ms-2" style="width:40px">Max</label>';
+  html += `<label for="maxDiff" class="form-label mb-0 ms-2" style="width:40px">${t('Max')}</label>`;
   html += '<select id="maxDiff" class="form-select form-select-sm" style="width:90px">';
   for (let v = 2; v <= 10; v++) html += `<option value="${v}">${(v/2).toFixed(1)}</option>`;
   html += '</select></div>';
@@ -86,20 +88,20 @@ modalWrapper.innerHTML = `
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="filterModalLabel">Filter Options</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title" id="filterModalLabel">${t('Filter Options')}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="${t('Close')}"></button>
         </div>
         <div class="modal-body" id="filterModalBody"></div>
         <div class="modal-footer">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6">
-                <button type="button" class="btn btn-sm btn-success" id="allButton">All</button>
-                <button type="button" class="btn btn-sm btn-warning" id="noneButton">None</button>
+                <button type="button" class="btn btn-sm btn-success" id="allButton">${t('All')}</button>
+                <button type="button" class="btn btn-sm btn-warning" id="noneButton">${t('None')}</button>
               </div>
               <div class="col-md-6 text-right">
-                <button type="button" class="btn btn-primary" id="saveButton" data-bs-dismiss="modal">Save</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeButton">Close</button>
+                <button type="button" class="btn btn-primary" id="saveButton" data-bs-dismiss="modal">${t('Save')}</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeButton">${t('Close')}</button>
               </div>
             </div>
           </div>
@@ -154,9 +156,9 @@ export function init(mapState) {
 
       const btn = L.DomUtil.create('button', 'btn btn-sm btn-dark', container);
       btn.id = 'filterButton';
-      btn.innerHTML = 'Filter';
+      btn.innerHTML = t('Filter');
       btn.style.display = 'none';
-      btn.title = 'Open filter settings';
+      btn.title = t('Open filter settings');
 
       btn.addEventListener('click', () => {
         new bootstrap.Modal(filterModal).show();

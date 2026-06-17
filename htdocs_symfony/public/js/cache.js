@@ -26,19 +26,20 @@ import { TabulatorFull as Tabulator } from '/vendor/tabulator/tabulator_esm.min.
 import { coords2Dm, coords2LatLon } from './coords.js';
 import { initPageMap } from './pageMap.js';
 import { apiFetch } from './helpers.js';
+import { t } from './i18n.js';
 
 // -----------------------------------------------------------------
 // OC log type metadata (matches okapiLogTypeNames in CachesController)
 
 const OC_LOG_TYPE_NAMES = {
-  1:  'Found it',
-  2:  "Didn't find it",
-  3:  'Comment',
-  7:  'Attended',
-  8:  'Will attend',
-  9:  'Archived',
-  10: 'Ready to search',
-  11: 'Temporarily unavailable',
+  1:  t('Found it'),
+  2:  t("Didn't find it"),
+  3:  t('Comment'),
+  7:  t('Attended'),
+  8:  t('Will attend'),
+  9:  t('Archived'),
+  10: t('Ready to search'),
+  11: t('Temporarily unavailable'),
 };
 
 const OC_LOG_COLORS = {
@@ -106,7 +107,7 @@ function adjustHeight(el) {
 
 function flashSaved(el) {
   const msg = document.createElement('span');
-  msg.textContent = 'Saved';
+  msg.textContent = t('Saved');
   msg.style.cssText = 'color:var(--oc-success);font-size:0.85em;margin-left:6px;transition:opacity 0.5s;';
   el.parentNode.insertBefore(msg, el.nextSibling);
   setTimeout(() => { msg.style.opacity = '0'; }, 1500);
@@ -245,11 +246,11 @@ function renderCache() {
   const statusEl = getById('cacheStatus');
   if (statusEl) {
     if (gc.isArchived) {
-      statusEl.innerHTML = '<span class="badge bg-danger">Archived</span>';
+      statusEl.innerHTML = `<span class="badge bg-danger">${t('Archived')}</span>`;
     } else if (gc.isDisabled) {
-      statusEl.innerHTML = '<span class="badge bg-warning">Disabled</span>';
+      statusEl.innerHTML = `<span class="badge bg-warning">${t('Disabled')}</span>`;
     } else {
-      statusEl.innerHTML = '<span class="badge bg-success">Active</span>';
+      statusEl.innerHTML = `<span class="badge bg-success">${t('Active')}</span>`;
     }
   }
 
@@ -317,7 +318,7 @@ function renderCache() {
     const foundRow   = getById('foundRow');
     const foundLabel = getById('foundLabel');
     if (foundRow)   foundRow.style.display = '';
-    if (foundLabel) foundLabel.textContent = 'DNF Date';
+    if (foundLabel) foundLabel.textContent = t('DNF Date');
     setText('cacheFoundDate', gc.dnfDateFmt);
   }
 
@@ -346,7 +347,7 @@ function renderCache() {
     const joined = gc.owner.joinedDateFmt || '';
     const finds  = (gc.owner.findCount || 0).toLocaleString();
     const hides  = (gc.owner.hideCount || 0).toLocaleString();
-    ownerStats.innerHTML = `Joined: ${joined}<br>Finds: ${finds} | Hides: ${hides}`;
+    ownerStats.innerHTML = `${t('Joined')}: ${joined}<br>${t('Finds')}: ${finds} | ${t('Hides')}: ${hides}`;
   }
 
   // Hint
@@ -354,7 +355,7 @@ function renderCache() {
     const row = getById('hintRow');
     const cell = getById('cacheHint');
     if (row) row.style.display = '';
-    if (cell) cell.innerHTML = `<b>Hint:</b> ${gc.hints}`;
+    if (cell) cell.innerHTML = `<b>${t('Hint')}:</b> ${gc.hints}`;
   }
 
   // Description
@@ -434,11 +435,11 @@ function createWPTable() {
     columns: [
       { title: '',            field: 'icon',        headerSort: false, width: 28,
         formatter: cell => cell.getValue() ? `<img src="${cell.getValue()}" width="20" height="20" style="vertical-align:middle">` : '' },
-      { title: 'Coordinates', field: 'myCoords',    headerSort: false, width: 170 },
-      { title: 'Prefix',      field: 'prefix',      headerSort: true,  width: 60 },
-      { title: 'Name',        field: 'name',        headerSort: false, width: 190 },
-      { title: 'Type',        field: 'typeName',    headerSort: false, width: 140 },
-      { title: 'Note',        field: 'description', headerSort: false, tooltip: true,
+      { title: t('Coordinates'), field: 'myCoords',    headerSort: false, width: 170 },
+      { title: t('Prefix'),      field: 'prefix',      headerSort: true,  width: 60 },
+      { title: t('Name'),        field: 'name',        headerSort: false, width: 190 },
+      { title: t('Type'),        field: 'typeName',    headerSort: false, width: 140 },
+      { title: t('Note'),        field: 'description', headerSort: false, tooltip: true,
         formatter: cell => `<div style="white-space:normal">${cell.getValue() || ''}</div>` },
     ],
   });
@@ -652,7 +653,7 @@ function createLogsTable() {
       formatter: cell => {
         const d = cell.getData();
         const color    = OC_LOG_COLORS[d.type] || '#e8e8e8';
-        const typeName = OC_LOG_TYPE_NAMES[d.type] || d.typeName || `Type ${d.type}`;
+        const typeName = OC_LOG_TYPE_NAMES[d.type] || d.typeName || `${t('Type')} ${d.type}`;
         const text     = d.textHtml ? (d.text || '') : (d.text || '').replace(/\n/g, '<br>');
 
         return `
@@ -689,7 +690,7 @@ function handleLogTextarea() {
         if (editLogControls) editLogControls.style.visibility = 'visible';
         if (editLogSave) {
           editLogSave.style.backgroundColor = 'red';
-          editLogSave.textContent = 'Submit';
+          editLogSave.textContent = t('Submit');
           editLogSave.disabled = false;
         }
       } else {
@@ -711,7 +712,7 @@ function handleLogTextarea() {
         if (editLogControls) editLogControls.style.visibility = 'visible';
         if (editLogSave) {
           editLogSave.style.backgroundColor = 'red';
-          editLogSave.textContent = 'Post Log';
+          editLogSave.textContent = t('Post Log');
           editLogSave.disabled = false;
         }
       } else {
@@ -766,11 +767,11 @@ function setupEditModeUI(log) {
   if (editLogType) {
     const allowed = allowedLogTypes(log);
     editLogType.innerHTML = '';
-    allowed.forEach(t => {
+    allowed.forEach(typeId => {
       const opt = document.createElement('option');
-      opt.value = t;
-      opt.textContent = OC_LOG_TYPE_NAMES[t] || `Type ${t}`;
-      if (t === log.type) opt.selected = true;
+      opt.value = typeId;
+      opt.textContent = OC_LOG_TYPE_NAMES[typeId] || `${t('Type')} ${typeId}`;
+      if (typeId === log.type) opt.selected = true;
       editLogType.appendChild(opt);
     });
   }
@@ -788,9 +789,9 @@ function allowedLogTypes(excludeLog) {
   const mine = logs.filter(l => l.itsMine && (!excludeLog || l.id !== excludeLog.id));
   const hasFound    = mine.some(l => l.type === 1);
   const hasAttended = mine.some(l => l.type === 7);
-  return types.filter(t => {
-    if (t === 1 && hasFound)    return false;
-    if (t === 7 && hasAttended) return false;
+  return types.filter(typeId => {
+    if (typeId === 1 && hasFound)    return false;
+    if (typeId === 7 && hasAttended) return false;
     return true;
   });
 }
@@ -802,10 +803,10 @@ function setupNewModeUI(log) {
   mode = 'newLog';
   if (!newModeInitialized) newModeInitialized = true;
 
-  if (editLogHeaderText) editLogHeaderText.textContent = 'Compose New Log';
+  if (editLogHeaderText) editLogHeaderText.textContent = t('Compose New Log');
   if (deleteLogBtn) deleteLogBtn.style.display = 'none';
   if (editLogText) {
-    editLogText.placeholder = 'Enter your log here...';
+    editLogText.placeholder = t('Enter your log here...');
     editLogText.value = '';
   }
   if (editLogDate) editLogDate.value = localDatetime(gc.ianaTimezoneId);
@@ -817,11 +818,11 @@ function setupNewModeUI(log) {
     editLogType.innerHTML = '';
     const defaultId = allowed.includes(prevType) ? prevType
       : (allowed.includes(1) ? 1 : (allowed.includes(7) ? 7 : (allowed[0] ?? 3)));
-    allowed.forEach(t => {
+    allowed.forEach(typeId => {
       const opt = document.createElement('option');
-      opt.value = t;
-      opt.textContent = OC_LOG_TYPE_NAMES[t] || `Type ${t}`;
-      if (t === defaultId) opt.selected = true;
+      opt.value = typeId;
+      opt.textContent = OC_LOG_TYPE_NAMES[typeId] || `${t('Type')} ${typeId}`;
+      if (typeId === defaultId) opt.selected = true;
       editLogType.appendChild(opt);
     });
   }
@@ -862,7 +863,7 @@ async function updateLog(log, saveBtn, currentMode) {
         });
 
     if (saveBtn) {
-      saveBtn.textContent = isNew ? 'Posted!' : 'Saved!';
+      saveBtn.textContent = isNew ? t('Posted!') : t('Saved!');
       saveBtn.style.backgroundColor = 'green';
     }
     oldLog = editLogText?.value || '';
@@ -873,7 +874,7 @@ async function updateLog(log, saveBtn, currentMode) {
         id:       json.log?.id,
         uuid:     json.log?.uuid,
         type:     payload.type,
-        typeName: OC_LOG_TYPE_NAMES[payload.type] || `Type ${payload.type}`,
+        typeName: OC_LOG_TYPE_NAMES[payload.type] || `${t('Type')} ${payload.type}`,
         date:     payload.date.slice(0, 10),
         username: context.userName,
         text:     payload.text,
@@ -895,7 +896,7 @@ async function updateLog(log, saveBtn, currentMode) {
       if (saveBtn) {
         saveBtn.disabled = false;
         saveBtn.style.backgroundColor = '';
-        saveBtn.textContent = 'Submit';
+        saveBtn.textContent = t('Submit');
       }
     } else {
       // Edit: update the row in-place.
@@ -947,11 +948,11 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
   const statusEl = getById('cacheStatus');
   if (statusEl) {
     if (gc.isArchived) {
-      statusEl.innerHTML = '<span class="badge bg-danger">Archived</span>';
+      statusEl.innerHTML = `<span class="badge bg-danger">${t('Archived')}</span>`;
     } else if (gc.isDisabled) {
-      statusEl.innerHTML = '<span class="badge bg-warning">Disabled</span>';
+      statusEl.innerHTML = `<span class="badge bg-warning">${t('Disabled')}</span>`;
     } else {
-      statusEl.innerHTML = '<span class="badge bg-success">Active</span>';
+      statusEl.innerHTML = `<span class="badge bg-success">${t('Active')}</span>`;
     }
   }
   // Update the gcState hidden element so refreshCacheIcon picks up the new flags
@@ -990,11 +991,11 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
   const foundLabel = getById('foundLabel');
   if (gc.foundDateFmt) {
     if (foundRow)   foundRow.style.display = '';
-    if (foundLabel) foundLabel.textContent = 'Found Date';
+    if (foundLabel) foundLabel.textContent = t('Found Date');
     setText('cacheFoundDate', gc.foundDateFmt);
   } else if (gc.dnfDateFmt) {
     if (foundRow)   foundRow.style.display = '';
-    if (foundLabel) foundLabel.textContent = 'DNF Date';
+    if (foundLabel) foundLabel.textContent = t('DNF Date');
     setText('cacheFoundDate', gc.dnfDateFmt);
   } else {
     if (foundRow) foundRow.style.display = 'none';
@@ -1014,7 +1015,7 @@ function refreshAfterLogChange(newType, dateStr, oldType = null) {
 // deleteLog()
 
 async function deleteLog(log) {
-  if (!confirm('Delete this log from opencaching.de?')) return;
+  if (!confirm(t('Delete this log from opencaching.de?'))) return;
   if (editLogMsg) {
     editLogMsg.textContent = '';
     editLogMsg.style.display = 'none';

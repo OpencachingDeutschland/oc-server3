@@ -466,3 +466,40 @@ Created: Erstellt
 'Place your own cache and share your favourite spots with the community.': 'Lege selbst einen Cache an und teile deine Lieblingsorte mit der Community.'
 'OpenCaching is open, free and entirely community-driven.': 'OpenCaching ist offen, kostenlos und vollständig in der Hand der Community.'
 'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.': 'OpenCaching setzt keine proprietären Karten-APIs ein. Die Live-Karte läuft auf OpenStreetMap — offen, kostenlos, ohne API-Schlüssel.'
+# Cache detail page — table labels
+Reference: Referenz
+'State/Province': Bundesland
+'Listing Coords': 'Listing-Koordinaten'
+'Corrected Coords': 'Korrigierte Koordinaten'
+'Log Password': 'Log-Passwort'
+'D / T': 'D / T'
+'Find Count': Fundstatistik
+'Placed / Hidden': 'Versteckt am'
+'Found Date': Funddatum
+'DNF Date': 'DNF-Datum'
+'GC Code': 'GC-Code'
+Disabled: Deaktiviert
+'Needs maintenance': 'Benötigt Wartung'
+'Listing outdated': 'Listing veraltet'
+Hint: Hinweis
+# Cache detail page — log type names (JS)
+'Found it': Gefunden
+"Didn't find it": 'Nicht gefunden'
+'Ready to search': 'Bereit zum Suchen'
+'Temporarily unavailable': 'Temporär nicht verfügbar'
+# Cache detail page — JS UI strings
+Saved: Gespeichert
+'Post Log': 'Log posten'
+'Posted!': 'Gepostet!'
+'Saved!': 'Gespeichert!'
+'Compose New Log': 'Neuen Log verfassen'
+'Enter your log here...': 'Log hier eingeben …'
+'Delete this log from opencaching.de?': 'Diesen Log von opencaching.de löschen?'
+# Cache detail page — JS rendering strings
+'Joined:': 'Registriert'
+'Finds:': Funde
+'Hides:': Verstecke
+'Hint:': 'Hinweis:'
+# Cache detail page — waypoint table columns
+Coordinates: Koordinaten
+Prefix: Präfix

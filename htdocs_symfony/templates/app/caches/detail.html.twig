@@ -95,10 +95,41 @@
 {% endblock %}
 
 {% block i18n %}<script>Object.assign(window.OCI18n, {{ {
-    'by:':       'by:'       | trans,
-    'Published:': 'Published:' | trans,
-    'Finds:':    'Finds:'    | trans,
-    'Found:':    'Found:'    | trans,
+    'by:':                      'by:'                      | trans,
+    'Published:':               'Published:'               | trans,
+    'Finds:':                   'Finds:'                   | trans,
+    'Found:':                   'Found:'                   | trans,
+    'Finds':                    'Finds'                    | trans,
+    'Found it':                 'Found it'                 | trans,
+    "Didn't find it":           "Didn't find it"           | trans,
+    'Comment':                  'Comment'                  | trans,
+    'Attended':                 'Attended'                 | trans,
+    'Will attend':              'Will attend'              | trans,
+    'Archived':                 'Archived'                 | trans,
+    'Ready to search':          'Ready to search'          | trans,
+    'Temporarily unavailable':  'Temporarily unavailable'  | trans,
+    'Active':                   'Active'                   | trans,
+    'Disabled':                 'Disabled'                 | trans,
+    'Saved':                    'Saved'                    | trans,
+    'Submit':                   'Submit'                   | trans,
+    'Post Log':                 'Post Log'                 | trans,
+    'Posted!':                  'Posted!'                  | trans,
+    'Saved!':                   'Saved!'                   | trans,
+    'Compose New Log':          'Compose New Log'          | trans,
+    'Enter your log here...':   'Enter your log here...'   | trans,
+    'Delete this log from opencaching.de?': 'Delete this log from opencaching.de?' | trans,
+    'Joined':                   'Joined'                   | trans,
+    'Hides':                    'Hides'                    | trans,
+    'Hint':                     'Hint'                     | trans,
+    'Found Date':               'Found Date'               | trans,
+    'DNF Date':                 'DNF Date'                 | trans,
+    'Coordinates':              'Coordinates'              | trans,
+    'Prefix':                   'Prefix'                   | trans,
+    'Name':                     'Name'                     | trans,
+    'Type':                     'Type'                     | trans,
+    'Note':                     'Note'                     | trans,
+    'Needs maintenance':        'Needs maintenance'        | trans,
+    'Listing outdated':         'Listing outdated'         | trans,
 } | json_encode | raw }});</script>{% endblock %}
 
 {% block page_content %}
@@ -131,35 +162,35 @@
                             <a id="cacheNameLink" href="#" style="color:var(--oc-text-primary)"></a>
                         </th>
                     </tr>
-                    <tr><td>Reference</td><td><a id="cacheRefLink" href="#" target="_blank"></a> <span id="cacheStatus"></span></td></tr>
-                    <tr><td>Country</td><td id="cacheCountry"></td></tr>
-                    <tr><td>State</td><td id="cacheState"></td></tr>
-                    <tr><td>Listing&nbsp;Coords</td><td id="cachePostedCoords"></td></tr>
+                    <tr><td>{{ 'Reference' | trans }}</td><td><a id="cacheRefLink" href="#" target="_blank"></a> <span id="cacheStatus"></span></td></tr>
+                    <tr><td>{{ 'Country' | trans }}</td><td id="cacheCountry"></td></tr>
+                    <tr><td>{{ 'State/Province' | trans }}</td><td id="cacheState"></td></tr>
+                    <tr><td class="oc-nowrap">{{ 'Listing Coords' | trans }}</td><td id="cachePostedCoords"></td></tr>
                     <tr>
-                        <td class="oc-nowrap">Corrected&nbsp;Coords</td>
+                        <td class="oc-nowrap">{{ 'Corrected Coords' | trans }}</td>
                         <td class="oc-nowrap">
                             <input type="text" class="oc-coords-input" id="editCoords" maxlength="22" value="" autocomplete="off" spellcheck="false">
                         </td>
                     </tr>
                     <tr id="logPasswdRow" style="display:none">
-                        <td>Log&nbsp;Password</td>
+                        <td class="oc-nowrap">{{ 'Log Password' | trans }}</td>
                         <td>
                             <input type="text" class="oc-coords-input" id="editLogPasswd" maxlength="50" value="" autocomplete="off">
                         </td>
                     </tr>
-                    <tr><td>Type</td><td id="cacheType"></td></tr>
-                    <tr><td>D / T</td><td id="cacheDT"></td></tr>
-                    <tr><td>Find Count</td><td id="cacheFindCount"></td></tr>
-                    <tr><td>Recommendations</td><td id="cacheFavorites"></td></tr>
-                    <tr><td>Placed / Hidden</td><td id="cachePlacedDate"></td></tr>
-                    <tr><td>Published</td><td id="cachePublishedDate"></td></tr>
+                    <tr><td>{{ 'Type' | trans }}</td><td id="cacheType"></td></tr>
+                    <tr><td>{{ 'D / T' | trans }}</td><td id="cacheDT"></td></tr>
+                    <tr><td>{{ 'Find Count' | trans }}</td><td id="cacheFindCount"></td></tr>
+                    <tr><td>{{ 'Recommendations' | trans }}</td><td id="cacheFavorites"></td></tr>
+                    <tr><td>{{ 'Placed / Hidden' | trans }}</td><td id="cachePlacedDate"></td></tr>
+                    <tr><td>{{ 'Published' | trans }}</td><td id="cachePublishedDate"></td></tr>
                     <tr id="cacheTimeRow" style="display:none"><td>{{ 'Time required' | trans }}</td><td id="cacheTime"></td></tr>
-                    <tr id="foundRow" style="display:none"><td id="foundLabel">Found Date</td><td id="cacheFoundDate"></td></tr>
-                    <tr id="gcCodeRow" style="display:none"><td>GC&nbsp;Code</td><td id="cacheGcCode"></td></tr>
-                    <tr id="maintenanceRow" style="display:none"><td></td><td><span class="text-warning">⚠ Needs maintenance</span></td></tr>
-                    <tr id="outdatedRow"    style="display:none"><td></td><td><span class="text-warning">⚠ Listing outdated</span></td></tr>
+                    <tr id="foundRow" style="display:none"><td id="foundLabel">{{ 'Found Date' | trans }}</td><td id="cacheFoundDate"></td></tr>
+                    <tr id="gcCodeRow" style="display:none"><td>{{ 'GC Code' | trans }}</td><td id="cacheGcCode"></td></tr>
+                    <tr id="maintenanceRow" style="display:none"><td></td><td><span class="text-warning">⚠ {{ 'Needs maintenance' | trans }}</span></td></tr>
+                    <tr id="outdatedRow"    style="display:none"><td></td><td><span class="text-warning">⚠ {{ 'Listing outdated' | trans }}</span></td></tr>
                     <tr>
-                        <td rowspan="2" style="vertical-align:top">Owner</td>
+                        <td rowspan="2" style="vertical-align:top">{{ 'Owner' | trans }}</td>
                         <td id="cacheOwner"></td>
                     </tr>
                     <tr><td id="cacheOwnerStats"></td></tr>

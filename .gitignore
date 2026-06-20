@@ -77,3 +77,4 @@ htdocs/app/config/swiftmailer.yaml.tpl
 
 # Local-only — not part of the project deliverable
 ansible/
+*.md

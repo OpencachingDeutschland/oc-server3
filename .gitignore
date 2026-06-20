@@ -77,4 +77,21 @@ htdocs/app/config/swiftmailer.yaml.tpl
 
 # Local-only — not part of the project deliverable
 ansible/
-*.md
+# Working docs created on feature/ui-refresh — not for the upstream repo
+/htdocs_symfony/CLAUDE.md
+/htdocs_symfony/GEMINI.md
+/htdocs_symfony/architecture-unicache.md
+/htdocs_symfony/desc-dark-unsafe.md
+/htdocs_symfony/frontend-patterns.md
+/htdocs_symfony/nextSteps.md
+/htdocs_symfony/ui-refresh-changes.md
+/feature-ui-refresh-commits.md
+/key-messages.md
+/leadership-briefing-samuel.md
+/logging-strategy.md
+/nextSteps.md
+/php84-compatibility.md
+/PROJECT-RETROSPECTIVE.md
+/team-context.md
+/testsystem-2.md
+/testsystem.md

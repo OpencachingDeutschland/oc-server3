@@ -1,0 +1,697 @@
+/* =================================================
+   General Button States (NEW unified concept)
+   ================================================= */
+.map-btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.map-btn.off {
+  background-color: #fff;
+  color: #000;
+}
+
+.map-btn.on {
+  background-color: #1E90FF;
+  color: #fff;
+}
+
+.map-btn.warn {
+  background-color: #FF6347;
+  color: #fff;
+}
+
+.map-btn.disabled {
+  background-color: #CCCCCC;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.map-btn:not(.disabled):hover {
+  filter: brightness(0.95);
+}
+
+/* Info displays (NOT buttons) - subtle background to stand out */
+.map-info-display,
+.length-display {
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  background: rgba(240, 248, 255, 0.95); /* AliceBlue with slight transparency */
+  color: #333;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =================================================
+   Toast
+   ================================================= */
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* =================================================
+   Marker Clusters (Leaflet)
+   ================================================= */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background-clip: padding-box;
+  border-radius: 20px;
+}
+
+.marker-cluster-small {
+  background-color: rgba(181,226,140,0.6);
+}
+.marker-cluster-small div {
+  background-color: rgba(110,204,57,0.6);
+}
+
+.marker-cluster-medium {
+  background-color: rgba(241,211,87,0.6);
+}
+.marker-cluster-medium div {
+  background-color: rgba(240,194,12,0.6);
+}
+
+.marker-cluster-large {
+  background-color: rgba(253,156,115,0.6);
+}
+.marker-cluster-large div {
+  background-color: rgba(241,128,23,0.6);
+}
+
+.marker-cluster div {
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 5px;
+  text-align: center;
+  border-radius: 15px;
+  font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+.marker-cluster span {
+  line-height: 30px;
+  color: #333;
+}
+
+.marker-cluster.selected {
+  box-shadow: 0 0 0 4px red;
+}
+
+.marker-cluster.partially-selected {
+  box-shadow: 0 0 7px 4px red;
+}
+
+.marker-cluster.partially-selected div {
+  background-color: rgba(255,255,255,0.8);
+  color: #000;
+}
+
+/* =================================================
+   Context Menu
+   ================================================= */
+.context-menu-item {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 5px 10px;
+}
+
+.context-menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* =================================================
+   Loading Spinner
+   ================================================= */
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* =================================================
+   Leaflet Draw Toolbar (KEEP – used by mapSelect)
+   ================================================= */
+.leaflet-draw-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  flex-wrap: nowrap;
+  width: auto;
+  padding: 5px !important;
+  position: relative;
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.leaflet-draw-toolbar a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  scale: 0.85;
+  margin: 0;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+.leaflet-draw-toolbar a:hover {
+  background-color: #f4f4f4;
+}
+
+.leaflet-draw-toolbar a.active {
+  background-color: #1E90FF;
+}
+
+/* Draw toolbar action buttons */
+.leaflet-draw-actions {
+  position: absolute;
+  transform: translateX(100%);
+  right: 0;
+  z-index: 1000;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  display: flex;
+  gap: 8px;
+}
+
+.leaflet-draw-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  margin: 0;
+  background-color: #007BFF;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  min-width: 50px;
+  height: 30px;
+  transition: background-color 0.2s;
+  border: 3px solid rgba(0,0,0,0.2);
+  box-sizing: border-box;
+}
+
+.leaflet-draw-actions a:hover {
+  background-color: #00EFFF;
+}
+
+/* =================================================
+   Blink Animation
+   ================================================= */
+@keyframes blink-bg {
+  0%, 100% { background-color: #ff6666; }
+  50%      { background-color: #ffffff; }
+}
+
+.blink {
+  animation: blink-bg 1s infinite;
+}
+
+/* =================================================
+   Remove Leaflet Bar Chrome
+   ================================================= */
+.leaflet-bar,
+.leaflet-draw-actions,
+.leaflet-control .leaflet-bar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.leaflet-bar a {
+  border: none !important;
+}
+
+.leaflet-bar {
+  border-radius: 0 !important;
+}
+
+.map-button-control {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.map-button-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.map-btn {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  color: #000;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.2);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* =================================================
+   Fix for button hover/click underline and focus
+   ================================================= */
+.map-btn {
+  text-decoration: none; /* remove underline on hover/click */
+  outline: none;         /* remove focus outline */
+  cursor: pointer;       /* ensure pointer cursor on all interactive buttons */
+}
+
+/* Reset button element defaults (when using <button> instead of <a>) */
+button.map-btn {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+/* Custom Leaflet control corner: top center */
+.leaflet-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.leaflet-center > * {
+  pointer-events: auto;
+}
+
+/* Leaflet control: scroll page to top */
+.map-escape-top {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  font-size: 1.0rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid rgba(0,0,0,0.2);
+  background-clip: padding-box;
+}
+
+/* =================================================
+   Zoom Level Display (below zoom control)
+   ================================================= */
+.zoom-level-display {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 2px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* =================================================
+   Actions Dropdown
+   ================================================= */
+.map-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.map-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 80px;
+  margin-top: 2px;
+  padding: 4px 0;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.map-dropdown-menu.show {
+  display: block;
+}
+
+.map-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #333;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.map-dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* =================================================
+   Dark Theme Overrides for Map Controls
+   ================================================= */
+
+/* Leaflet controls (zoom, layers, etc.) */
+[data-theme="dark"] .leaflet-control {
+  background-color: var(--oc-bg-elevated) !important;
+  color: var(--oc-text-primary);
+}
+
+/* Map button controls need transparent background - buttons have their own bg */
+[data-theme="dark"] .leaflet-control.map-button-control,
+[data-theme="dark"] .leaflet-control-custom {
+  background-color: transparent !important;
+}
+
+[data-theme="dark"] .leaflet-control-zoom a {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-bottom-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .leaflet-control-zoom a:hover {
+  background-color: var(--oc-bg-secondary);
+}
+
+/* Leaflet scale control */
+[data-theme="dark"] .leaflet-control-scale-line {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+  text-shadow: none;
+}
+
+/* Leaflet popups */
+[data-theme="dark"] .leaflet-popup-content-wrapper {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .leaflet-popup-tip {
+  background-color: var(--oc-bg-elevated);
+}
+
+.leaflet-popup-content a {
+  text-decoration: none;
+}
+[data-theme="dark"] .leaflet-popup-content a {
+  color: var(--oc-link-color);
+}
+
+/* Leaflet tooltips */
+[data-theme="dark"] .leaflet-tooltip {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .leaflet-tooltip-top:before {
+  border-top-color: var(--oc-bg-elevated);
+}
+
+[data-theme="dark"] .leaflet-tooltip-bottom:before {
+  border-bottom-color: var(--oc-bg-elevated);
+}
+
+[data-theme="dark"] .leaflet-tooltip-left:before {
+  border-left-color: var(--oc-bg-elevated);
+}
+
+[data-theme="dark"] .leaflet-tooltip-right:before {
+  border-right-color: var(--oc-bg-elevated);
+}
+
+/* Leaflet layers control - blue collapsed icon when live mode is active */
+.leaflet-control-layers.live-active:not(.leaflet-control-layers-expanded) {
+  background: #1E90FF !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Leaflet layers control */
+[data-theme="dark"] .leaflet-control-layers {
+  background-color: var(--oc-bg-elevated);
+}
+
+[data-theme="dark"] .leaflet-control-layers-expanded {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .leaflet-control-layers-separator {
+  border-top-color: var(--oc-gray-300);
+}
+
+/* Map buttons */
+[data-theme="dark"] .map-btn {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .map-btn.off {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .map-btn.on {
+  background-color: #1E90FF;
+  color: #fff;
+}
+
+[data-theme="dark"] .map-btn.disabled {
+  background-color: var(--oc-gray-200);
+  color: var(--oc-text-secondary);
+}
+
+/* Shape action buttons - larger bold font for visibility */
+#select-add-shape,
+#select-remove-shape,
+#select-clear-shape {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+[data-theme="dark"] .map-btn:not(.disabled):hover {
+  filter: brightness(1.1);
+}
+
+[data-theme="dark"] .map-btn:focus,
+[data-theme="dark"] .map-btn:focus-visible,
+[data-theme="dark"] .map-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Info displays */
+[data-theme="dark"] .map-info-display,
+[data-theme="dark"] .length-display {
+  background: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+/* Zoom level display */
+[data-theme="dark"] .zoom-level-display {
+  background: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+/* Map dropdown menus */
+[data-theme="dark"] .map-dropdown-menu {
+  background: var(--oc-bg-elevated);
+  border-color: var(--oc-gray-300);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+[data-theme="dark"] .map-dropdown-item {
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .map-dropdown-item:hover {
+  background-color: var(--oc-bg-secondary);
+}
+
+/* Context menu */
+[data-theme="dark"] .context-menu-item {
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .context-menu-item:hover {
+  background-color: var(--oc-bg-secondary);
+}
+
+/* Leaflet draw toolbar */
+[data-theme="dark"] .leaflet-draw-toolbar a:hover {
+  background-color: var(--oc-bg-secondary);
+}
+
+/* Leaflet draw actions */
+[data-theme="dark"] .leaflet-draw-actions {
+  background: var(--oc-bg-elevated);
+}
+
+
+/* =================================================
+   City Search Leaflet Control
+   ================================================= */
+.city-search-control {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 4px;
+}
+
+.city-search-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.city-search-input {
+  width: 170px;
+  height: 30px;
+  padding: 2px 6px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  font-size: 12px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.city-search-input:focus {
+  border-color: rgba(0,120,255,0.5);
+}
+
+.city-search-results {
+  display: none;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 3px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.city-search-item {
+  padding: 5px 6px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #333;
+  line-height: 1.3;
+  border-radius: 3px;
+}
+
+.city-search-item:hover {
+  background: #f0f0f0;
+}
+
+.city-search-item:focus {
+  background-color: #cfe2ff;
+  outline: none;
+  box-shadow: inset 3px 0 0 var(--oc-primary);
+}
+
+.city-search-status {
+  cursor: default;
+  color: #666;
+  font-style: italic;
+}
+.city-search-status:hover {
+  background: none;
+}
+
+/* Dark mode */
+[data-theme="dark"] .city-search-control {
+  background: var(--oc-bg-elevated);
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .city-search-input {
+  background: var(--oc-bg-surface);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .city-search-input:focus {
+  border-color: var(--oc-primary-light);
+}
+
+[data-theme="dark"] .city-search-results {
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .city-search-item {
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .city-search-item:hover {
+  background: var(--oc-bg-secondary);
+}
+
+[data-theme="dark"] .city-search-item:focus {
+  background-color: var(--oc-bg-body);
+  color: var(--oc-link-color);
+  outline: none;
+  box-shadow: inset 3px 0 0 var(--oc-link-color);
+}
+
+[data-theme="dark"] .city-search-status {
+  color: var(--oc-text-secondary);
+}
+
+/* Applied by pageMap.js on any page that shows a map via initPageMap().
+   The !important beats map.js's inline style.height writes, so CSS calc
+   always governs the displayed height regardless of visualViewport drift. */
+#mapRoot.page-map-active {
+  height: 100vh !important;
+  width: 100%;
+}

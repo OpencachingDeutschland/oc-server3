@@ -6,6 +6,9 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->extension('twig', [
-        'default_path' => '%kernel.project_dir%/templates'
+        'default_path' => '%kernel.project_dir%/templates',
+        'globals' => [
+            'auth' => '@Oc\Security\Auth',
+        ],
     ]);
 };

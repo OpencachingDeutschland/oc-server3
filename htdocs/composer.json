@@ -1,88 +1,88 @@
 {
-  "_comment": "Kommentar/Merkzettel von fraggle: doctrine/doctrine-bundle wurde auf 2.6.4 festgeschrieben, da Version 2.7.0 nicht mit doctrine/orm 2.10.* zusammenpasst.",
-  "name": "opencaching/oc-server",
-  "license": "GNU General Public License",
-  "description": "opencaching.de source code",
-  "config": {
-    "platform": {
-      "php": "8.2.20"
+    "_comment": "Kommentar/Merkzettel von fraggle: doctrine/doctrine-bundle wurde auf 2.6.4 festgeschrieben, da Version 2.7.0 nicht mit doctrine/orm 2.10.* zusammenpasst.",
+    "name": "opencaching/oc-server",
+    "license": "GNU General Public License",
+    "description": "opencaching.de source code",
+    "config": {
+        "platform": {
+            "php": "8.2.20"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false
+        }
     },
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "php-http/discovery": true
+    "require": {
+        "php": ">=8.2.0",
+        "ezyang/htmlpurifier": "^v4.8",
+        "smarty/smarty": "dev-development",
+        "symfony/symfony": "4.4.*",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6|2.6.4",
+        "symfony/swiftmailer-bundle": "^3.4",
+        "symfony/monolog-bundle": "^3.5",
+        "symfony/polyfill-apcu": "^1.0",
+        "sensio/framework-extra-bundle": "^5.0|^6.0",
+        "doctrine/doctrine-migrations-bundle": "^1.3|^2.0|^3.0",
+        "twig/extensions": "^1.3",
+        "jms/translation-bundle": "^1.2",
+        "beberlei/doctrineextensions": "^1.0",
+        "league/commonmark": "^0.18.3|^1.0|^2.0",
+        "opencaching/okapi": "dev-oc4-cache-crud",
+        "endroid/qr-code": "^3.5.0|^4.0",
+        "twbs/bootstrap": "^v4.1.0|^5.0",
+        "components/jquery": "^3.2",
+        "ext-gd": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-mysqli": "*",
+        "ext-simplexml": "*",
+        "ext-posix": "*",
+        "ext-curl": "*",
+        "ext-zlib": "*",
+        "eluceo/ical": "^0.15.0|^1.0|^2.0",
+        "league/csv": "^9.6",
+        "mervick/material-design-icons": "^2.2",
+        "knplabs/knp-menu-bundle": "^3.2",
+        "scssphp/scssphp": "^1.0.0",
+        "nyholm/psr7": "^1.8"
     },
-    "audit": {
-      "block-insecure": false
+    "require-dev": {
+        "phpunit/phpunit": "6.*|^7.0|^8.0|^9.0",
+        "squizlabs/php_codesniffer": "^2.6|^3.0",
+        "fig-r/psr2r-sniffer": "^0.3.0|^1.0",
+        "nette/php-generator": "^2.6|^3.0|^4.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hxdimpf/okapi"
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:OpencachingDeutschland/smarty.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OcTest\\": "../tests",
+            "Oc\\": "src/Oc",
+            "": "src/"
+        },
+        "classmap": [
+            "lib2/",
+            "lib2/logic/",
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "4.4.*"
+        }
     }
-  },
-  "require": {
-    "php": ">=8.2.0",
-    "ezyang/htmlpurifier": "^v4.8",
-    "smarty/smarty": "dev-development",
-    "symfony/symfony": "4.4.*",
-    "doctrine/orm": "^2.5",
-    "doctrine/doctrine-bundle": "^1.6|2.6.4",
-    "symfony/swiftmailer-bundle": "^3.4",
-    "symfony/monolog-bundle": "^3.5",
-    "symfony/polyfill-apcu": "^1.0",
-    "sensio/framework-extra-bundle": "^5.0|^6.0",
-    "doctrine/doctrine-migrations-bundle": "^1.3|^2.0|^3.0",
-    "twig/extensions": "^1.3",
-    "jms/translation-bundle": "^1.2",
-    "beberlei/doctrineextensions": "^1.0",
-    "league/commonmark": "^0.18.3|^1.0|^2.0",
-    "opencaching/okapi": "dev-master",
-    "endroid/qr-code": "^3.5.0|^4.0",
-    "twbs/bootstrap": "^v4.1.0|^5.0",
-    "components/jquery": "^3.2",
-    "ext-gd": "*",
-    "ext-json": "*",
-    "ext-mbstring": "*",
-    "ext-mysqli": "*",
-    "ext-simplexml": "*",
-    "ext-posix": "*",
-    "ext-curl": "*",
-    "ext-zlib": "*",
-    "eluceo/ical": "^0.15.0|^1.0|^2.0",
-    "league/csv": "^9.6",
-    "mervick/material-design-icons": "^2.2",
-    "knplabs/knp-menu-bundle": "^3.2",
-    "scssphp/scssphp": "^1.0.0",
-    "nyholm/psr7": "^1.8"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "6.*|^7.0|^8.0|^9.0",
-    "squizlabs/php_codesniffer": "^2.6|^3.0",
-    "fig-r/psr2r-sniffer": "^0.3.0|^1.0",
-    "nette/php-generator": "^2.6|^3.0|^4.0"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/opencaching/okapi"
-    },
-    {
-      "type": "vcs",
-      "url": "git@github.com:OpencachingDeutschland/smarty.git"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "OcTest\\": "../tests",
-      "Oc\\": "src/Oc",
-      "": "src/"
-    },
-    "classmap": [
-      "lib2/",
-      "lib2/logic/",
-      "app/AppKernel.php",
-      "app/AppCache.php"
-    ]
-  },
-  "extra": {
-    "symfony": {
-      "allow-contrib": false,
-      "require": "4.4.*"
-    }
-  }
 }

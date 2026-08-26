@@ -723,53 +723,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         html_to_text_converter?: scalar|Param|null, // A service implementing the "Symfony\Component\Mime\HtmlToTextConverter\HtmlToTextConverterInterface". // Default: null
  *     },
  * }
- * @psalm-type TwigExtraConfig = array{
- *     cache?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     html?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     markdown?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     intl?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     cssinliner?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     inky?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     string?: bool|array{
- *         enabled?: bool|Param, // Default: false
- *     },
- *     commonmark?: array{
- *         renderer?: array{ // Array of options for rendering HTML.
- *             block_separator?: scalar|Param|null,
- *             inner_separator?: scalar|Param|null,
- *             soft_break?: scalar|Param|null,
- *         },
- *         html_input?: "strip"|"allow"|"escape"|Param, // How to handle HTML input.
- *         allow_unsafe_links?: bool|Param, // Remove risky link and image URLs by setting this to false. // Default: true
- *         max_nesting_level?: int|Param, // The maximum nesting level for blocks. // Default: 9223372036854775807
- *         max_delimiters_per_line?: int|Param, // The maximum number of strong/emphasis delimiters per line. // Default: 9223372036854775807
- *         slug_normalizer?: array{ // Array of options for configuring how URL-safe slugs are created.
- *             instance?: mixed,
- *             max_length?: int|Param, // Default: 255
- *             unique?: mixed,
- *         },
- *         commonmark?: array{ // Array of options for configuring the CommonMark core extension.
- *             enable_em?: bool|Param, // Default: true
- *             enable_strong?: bool|Param, // Default: true
- *             use_asterisk?: bool|Param, // Default: true
- *             use_underscore?: bool|Param, // Default: true
- *             unordered_list_markers?: list<scalar|Param|null>,
- *         },
- *         ...<string, mixed>
- *     },
- * }
  * @psalm-type DoctrineConfig = array{
  *     dbal?: array{
  *         default_connection?: scalar|Param|null,
@@ -1023,325 +976,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     enable_profiler?: bool|Param, // Whether or not to enable the profiler collector to calculate and visualize migration status. This adds some queries overhead. // Default: false
  *     transactional?: bool|Param, // Whether or not to wrap migrations in a single transaction. // Default: true
  * }
- * @psalm-type SecurityConfig = array{
- *     access_denied_url?: scalar|Param|null, // Default: null
- *     session_fixation_strategy?: "none"|"migrate"|"invalidate"|Param, // Default: "migrate"
- *     hide_user_not_found?: bool|Param, // Deprecated: The "hide_user_not_found" option is deprecated and will be removed in 8.0. Use the "expose_security_errors" option instead.
- *     expose_security_errors?: \Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::None|\Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::AccountStatus|\Symfony\Component\Security\Http\Authentication\ExposeSecurityLevel::All|Param, // Default: "none"
- *     erase_credentials?: bool|Param, // Default: true
- *     access_decision_manager?: array{
- *         strategy?: "affirmative"|"consensus"|"unanimous"|"priority"|Param,
- *         service?: scalar|Param|null,
- *         strategy_service?: scalar|Param|null,
- *         allow_if_all_abstain?: bool|Param, // Default: false
- *         allow_if_equal_granted_denied?: bool|Param, // Default: true
- *     },
- *     password_hashers?: array<string, string|array{ // Default: []
- *         algorithm?: scalar|Param|null,
- *         migrate_from?: list<scalar|Param|null>,
- *         hash_algorithm?: scalar|Param|null, // Name of hashing algorithm for PBKDF2 (i.e. sha256, sha512, etc..) See hash_algos() for a list of supported algorithms. // Default: "sha512"
- *         key_length?: scalar|Param|null, // Default: 40
- *         ignore_case?: bool|Param, // Default: false
- *         encode_as_base64?: bool|Param, // Default: true
- *         iterations?: scalar|Param|null, // Default: 5000
- *         cost?: int|Param, // Default: null
- *         memory_cost?: scalar|Param|null, // Default: null
- *         time_cost?: scalar|Param|null, // Default: null
- *         id?: scalar|Param|null,
- *     }>,
- *     providers?: array<string, array{ // Default: []
- *         id?: scalar|Param|null,
- *         chain?: array{
- *             providers?: list<scalar|Param|null>,
- *         },
- *         entity?: array{
- *             class?: scalar|Param|null, // The full entity class name of your user class.
- *             property?: scalar|Param|null, // Default: null
- *             manager_name?: scalar|Param|null, // Default: null
- *         },
- *         memory?: array{
- *             users?: array<string, array{ // Default: []
- *                 password?: scalar|Param|null, // Default: null
- *                 roles?: list<scalar|Param|null>,
- *             }>,
- *         },
- *         ldap?: array{
- *             service?: scalar|Param|null,
- *             base_dn?: scalar|Param|null,
- *             search_dn?: scalar|Param|null, // Default: null
- *             search_password?: scalar|Param|null, // Default: null
- *             extra_fields?: list<scalar|Param|null>,
- *             default_roles?: list<scalar|Param|null>,
- *             role_fetcher?: scalar|Param|null, // Default: null
- *             uid_key?: scalar|Param|null, // Default: "sAMAccountName"
- *             filter?: scalar|Param|null, // Default: "({uid_key}={user_identifier})"
- *             password_attribute?: scalar|Param|null, // Default: null
- *         },
- *     }>,
- *     firewalls?: array<string, array{ // Default: []
- *         pattern?: scalar|Param|null,
- *         host?: scalar|Param|null,
- *         methods?: list<scalar|Param|null>,
- *         security?: bool|Param, // Default: true
- *         user_checker?: scalar|Param|null, // The UserChecker to use when authenticating users in this firewall. // Default: "security.user_checker"
- *         request_matcher?: scalar|Param|null,
- *         access_denied_url?: scalar|Param|null,
- *         access_denied_handler?: scalar|Param|null,
- *         entry_point?: scalar|Param|null, // An enabled authenticator name or a service id that implements "Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface".
- *         provider?: scalar|Param|null,
- *         stateless?: bool|Param, // Default: false
- *         lazy?: bool|Param, // Default: false
- *         context?: scalar|Param|null,
- *         logout?: array{
- *             enable_csrf?: bool|Param|null, // Default: null
- *             csrf_token_id?: scalar|Param|null, // Default: "logout"
- *             csrf_parameter?: scalar|Param|null, // Default: "_csrf_token"
- *             csrf_token_manager?: scalar|Param|null,
- *             path?: scalar|Param|null, // Default: "/logout"
- *             target?: scalar|Param|null, // Default: "/"
- *             invalidate_session?: bool|Param, // Default: true
- *             clear_site_data?: list<"*"|"cache"|"cookies"|"storage"|"executionContexts"|Param>,
- *             delete_cookies?: array<string, array{ // Default: []
- *                 path?: scalar|Param|null, // Default: null
- *                 domain?: scalar|Param|null, // Default: null
- *                 secure?: scalar|Param|null, // Default: false
- *                 samesite?: scalar|Param|null, // Default: null
- *                 partitioned?: scalar|Param|null, // Default: false
- *             }>,
- *         },
- *         switch_user?: array{
- *             provider?: scalar|Param|null,
- *             parameter?: scalar|Param|null, // Default: "_switch_user"
- *             role?: scalar|Param|null, // Default: "ROLE_ALLOWED_TO_SWITCH"
- *             target_route?: scalar|Param|null, // Default: null
- *         },
- *         required_badges?: list<scalar|Param|null>,
- *         custom_authenticators?: list<scalar|Param|null>,
- *         login_throttling?: array{
- *             limiter?: scalar|Param|null, // A service id implementing "Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface".
- *             max_attempts?: int|Param, // Default: 5
- *             interval?: scalar|Param|null, // Default: "1 minute"
- *             lock_factory?: scalar|Param|null, // The service ID of the lock factory used by the login rate limiter (or null to disable locking). // Default: null
- *             cache_pool?: string|Param, // The cache pool to use for storing the limiter state // Default: "cache.rate_limiter"
- *             storage_service?: string|Param, // The service ID of a custom storage implementation, this precedes any configured "cache_pool" // Default: null
- *         },
- *         x509?: array{
- *             provider?: scalar|Param|null,
- *             user?: scalar|Param|null, // Default: "SSL_CLIENT_S_DN_Email"
- *             credentials?: scalar|Param|null, // Default: "SSL_CLIENT_S_DN"
- *             user_identifier?: scalar|Param|null, // Default: "emailAddress"
- *         },
- *         remote_user?: array{
- *             provider?: scalar|Param|null,
- *             user?: scalar|Param|null, // Default: "REMOTE_USER"
- *         },
- *         login_link?: array{
- *             check_route?: scalar|Param|null, // Route that will validate the login link - e.g. "app_login_link_verify".
- *             check_post_only?: scalar|Param|null, // If true, only HTTP POST requests to "check_route" will be handled by the authenticator. // Default: false
- *             signature_properties?: list<scalar|Param|null>,
- *             lifetime?: int|Param, // The lifetime of the login link in seconds. // Default: 600
- *             max_uses?: int|Param, // Max number of times a login link can be used - null means unlimited within lifetime. // Default: null
- *             used_link_cache?: scalar|Param|null, // Cache service id used to expired links of max_uses is set.
- *             success_handler?: scalar|Param|null, // A service id that implements Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface.
- *             failure_handler?: scalar|Param|null, // A service id that implements Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface.
- *             provider?: scalar|Param|null, // The user provider to load users from.
- *             secret?: scalar|Param|null, // Default: "%kernel.secret%"
- *             always_use_default_target_path?: bool|Param, // Default: false
- *             default_target_path?: scalar|Param|null, // Default: "/"
- *             login_path?: scalar|Param|null, // Default: "/login"
- *             target_path_parameter?: scalar|Param|null, // Default: "_target_path"
- *             use_referer?: bool|Param, // Default: false
- *             failure_path?: scalar|Param|null, // Default: null
- *             failure_forward?: bool|Param, // Default: false
- *             failure_path_parameter?: scalar|Param|null, // Default: "_failure_path"
- *         },
- *         form_login?: array{
- *             provider?: scalar|Param|null,
- *             remember_me?: bool|Param, // Default: true
- *             success_handler?: scalar|Param|null,
- *             failure_handler?: scalar|Param|null,
- *             check_path?: scalar|Param|null, // Default: "/login_check"
- *             use_forward?: bool|Param, // Default: false
- *             login_path?: scalar|Param|null, // Default: "/login"
- *             username_parameter?: scalar|Param|null, // Default: "_username"
- *             password_parameter?: scalar|Param|null, // Default: "_password"
- *             csrf_parameter?: scalar|Param|null, // Default: "_csrf_token"
- *             csrf_token_id?: scalar|Param|null, // Default: "authenticate"
- *             enable_csrf?: bool|Param, // Default: false
- *             post_only?: bool|Param, // Default: true
- *             form_only?: bool|Param, // Default: false
- *             always_use_default_target_path?: bool|Param, // Default: false
- *             default_target_path?: scalar|Param|null, // Default: "/"
- *             target_path_parameter?: scalar|Param|null, // Default: "_target_path"
- *             use_referer?: bool|Param, // Default: false
- *             failure_path?: scalar|Param|null, // Default: null
- *             failure_forward?: bool|Param, // Default: false
- *             failure_path_parameter?: scalar|Param|null, // Default: "_failure_path"
- *         },
- *         form_login_ldap?: array{
- *             provider?: scalar|Param|null,
- *             remember_me?: bool|Param, // Default: true
- *             success_handler?: scalar|Param|null,
- *             failure_handler?: scalar|Param|null,
- *             check_path?: scalar|Param|null, // Default: "/login_check"
- *             use_forward?: bool|Param, // Default: false
- *             login_path?: scalar|Param|null, // Default: "/login"
- *             username_parameter?: scalar|Param|null, // Default: "_username"
- *             password_parameter?: scalar|Param|null, // Default: "_password"
- *             csrf_parameter?: scalar|Param|null, // Default: "_csrf_token"
- *             csrf_token_id?: scalar|Param|null, // Default: "authenticate"
- *             enable_csrf?: bool|Param, // Default: false
- *             post_only?: bool|Param, // Default: true
- *             form_only?: bool|Param, // Default: false
- *             always_use_default_target_path?: bool|Param, // Default: false
- *             default_target_path?: scalar|Param|null, // Default: "/"
- *             target_path_parameter?: scalar|Param|null, // Default: "_target_path"
- *             use_referer?: bool|Param, // Default: false
- *             failure_path?: scalar|Param|null, // Default: null
- *             failure_forward?: bool|Param, // Default: false
- *             failure_path_parameter?: scalar|Param|null, // Default: "_failure_path"
- *             service?: scalar|Param|null, // Default: "ldap"
- *             dn_string?: scalar|Param|null, // Default: "{user_identifier}"
- *             query_string?: scalar|Param|null,
- *             search_dn?: scalar|Param|null, // Default: ""
- *             search_password?: scalar|Param|null, // Default: ""
- *         },
- *         json_login?: array{
- *             provider?: scalar|Param|null,
- *             remember_me?: bool|Param, // Default: true
- *             success_handler?: scalar|Param|null,
- *             failure_handler?: scalar|Param|null,
- *             check_path?: scalar|Param|null, // Default: "/login_check"
- *             use_forward?: bool|Param, // Default: false
- *             login_path?: scalar|Param|null, // Default: "/login"
- *             username_path?: scalar|Param|null, // Default: "username"
- *             password_path?: scalar|Param|null, // Default: "password"
- *         },
- *         json_login_ldap?: array{
- *             provider?: scalar|Param|null,
- *             remember_me?: bool|Param, // Default: true
- *             success_handler?: scalar|Param|null,
- *             failure_handler?: scalar|Param|null,
- *             check_path?: scalar|Param|null, // Default: "/login_check"
- *             use_forward?: bool|Param, // Default: false
- *             login_path?: scalar|Param|null, // Default: "/login"
- *             username_path?: scalar|Param|null, // Default: "username"
- *             password_path?: scalar|Param|null, // Default: "password"
- *             service?: scalar|Param|null, // Default: "ldap"
- *             dn_string?: scalar|Param|null, // Default: "{user_identifier}"
- *             query_string?: scalar|Param|null,
- *             search_dn?: scalar|Param|null, // Default: ""
- *             search_password?: scalar|Param|null, // Default: ""
- *         },
- *         access_token?: array{
- *             provider?: scalar|Param|null,
- *             remember_me?: bool|Param, // Default: true
- *             success_handler?: scalar|Param|null,
- *             failure_handler?: scalar|Param|null,
- *             realm?: scalar|Param|null, // Default: null
- *             token_extractors?: list<scalar|Param|null>,
- *             token_handler?: string|array{
- *                 id?: scalar|Param|null,
- *                 oidc_user_info?: string|array{
- *                     base_uri?: scalar|Param|null, // Base URI of the userinfo endpoint on the OIDC server, or the OIDC server URI to use the discovery (require "discovery" to be configured).
- *                     discovery?: array{ // Enable the OIDC discovery.
- *                         cache?: array{
- *                             id?: scalar|Param|null, // Cache service id to use to cache the OIDC discovery configuration.
- *                         },
- *                     },
- *                     claim?: scalar|Param|null, // Claim which contains the user identifier (e.g. sub, email, etc.). // Default: "sub"
- *                     client?: scalar|Param|null, // HttpClient service id to use to call the OIDC server.
- *                 },
- *                 oidc?: array{
- *                     discovery?: array{ // Enable the OIDC discovery.
- *                         base_uri?: list<scalar|Param|null>,
- *                         cache?: array{
- *                             id?: scalar|Param|null, // Cache service id to use to cache the OIDC discovery configuration.
- *                         },
- *                     },
- *                     claim?: scalar|Param|null, // Claim which contains the user identifier (e.g.: sub, email..). // Default: "sub"
- *                     audience?: scalar|Param|null, // Audience set in the token, for validation purpose.
- *                     issuers?: list<scalar|Param|null>,
- *                     algorithm?: array<mixed>,
- *                     algorithms?: list<scalar|Param|null>,
- *                     key?: scalar|Param|null, // Deprecated: The "key" option is deprecated and will be removed in 8.0. Use the "keyset" option instead. // JSON-encoded JWK used to sign the token (must contain a "kty" key).
- *                     keyset?: scalar|Param|null, // JSON-encoded JWKSet used to sign the token (must contain a list of valid public keys).
- *                     encryption?: bool|array{
- *                         enabled?: bool|Param, // Default: false
- *                         enforce?: bool|Param, // When enabled, the token shall be encrypted. // Default: false
- *                         algorithms?: list<scalar|Param|null>,
- *                         keyset?: scalar|Param|null, // JSON-encoded JWKSet used to decrypt the token (must contain a list of valid private keys).
- *                     },
- *                 },
- *                 cas?: array{
- *                     validation_url?: scalar|Param|null, // CAS server validation URL
- *                     prefix?: scalar|Param|null, // CAS prefix // Default: "cas"
- *                     http_client?: scalar|Param|null, // HTTP Client service // Default: null
- *                 },
- *                 oauth2?: scalar|Param|null,
- *             },
- *         },
- *         http_basic?: array{
- *             provider?: scalar|Param|null,
- *             realm?: scalar|Param|null, // Default: "Secured Area"
- *         },
- *         http_basic_ldap?: array{
- *             provider?: scalar|Param|null,
- *             realm?: scalar|Param|null, // Default: "Secured Area"
- *             service?: scalar|Param|null, // Default: "ldap"
- *             dn_string?: scalar|Param|null, // Default: "{user_identifier}"
- *             query_string?: scalar|Param|null,
- *             search_dn?: scalar|Param|null, // Default: ""
- *             search_password?: scalar|Param|null, // Default: ""
- *         },
- *         remember_me?: array{
- *             secret?: scalar|Param|null, // Default: "%kernel.secret%"
- *             service?: scalar|Param|null,
- *             user_providers?: list<scalar|Param|null>,
- *             catch_exceptions?: bool|Param, // Default: true
- *             signature_properties?: list<scalar|Param|null>,
- *             token_provider?: string|array{
- *                 service?: scalar|Param|null, // The service ID of a custom remember-me token provider.
- *                 doctrine?: bool|array{
- *                     enabled?: bool|Param, // Default: false
- *                     connection?: scalar|Param|null, // Default: null
- *                 },
- *             },
- *             token_verifier?: scalar|Param|null, // The service ID of a custom rememberme token verifier.
- *             name?: scalar|Param|null, // Default: "REMEMBERME"
- *             lifetime?: int|Param, // Default: 31536000
- *             path?: scalar|Param|null, // Default: "/"
- *             domain?: scalar|Param|null, // Default: null
- *             secure?: true|false|"auto"|Param, // Default: null
- *             httponly?: bool|Param, // Default: true
- *             samesite?: null|"lax"|"strict"|"none"|Param, // Default: "lax"
- *             always_remember_me?: bool|Param, // Default: false
- *             remember_me_parameter?: scalar|Param|null, // Default: "_remember_me"
- *         },
- *     }>,
- *     access_control?: list<array{ // Default: []
- *         request_matcher?: scalar|Param|null, // Default: null
- *         requires_channel?: scalar|Param|null, // Default: null
- *         path?: scalar|Param|null, // Use the urldecoded format. // Default: null
- *         host?: scalar|Param|null, // Default: null
- *         port?: int|Param, // Default: null
- *         ips?: list<scalar|Param|null>,
- *         attributes?: array<string, scalar|Param|null>,
- *         route?: scalar|Param|null, // Default: null
- *         methods?: list<scalar|Param|null>,
- *         allow_if?: scalar|Param|null, // Default: null
- *         roles?: list<scalar|Param|null>,
- *     }>,
- *     role_hierarchy?: array<string, string|list<scalar|Param|null>>,
- * }
- * @psalm-type WebProfilerConfig = array{
- *     toolbar?: bool|array{ // Profiler toolbar configuration
- *         enabled?: bool|Param, // Default: false
- *         ajax_replace?: bool|Param, // Replace toolbar on AJAX requests // Default: false
- *     },
- *     intercept_redirects?: bool|Param, // Default: false
- *     excluded_ajax_paths?: scalar|Param|null, // Default: "^/((index|app(_[\\w]+)?)\\.php/)?_wdt"
- * }
  * @psalm-type MonologConfig = array{
  *     use_microseconds?: scalar|Param|null, // Default: true
  *     channels?: list<scalar|Param|null>,
@@ -1485,28 +1119,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         },
  *     }>,
  * }
- * @psalm-type DebugConfig = array{
- *     max_items?: int|Param, // Max number of displayed items past the first level, -1 means no limit. // Default: 2500
- *     min_depth?: int|Param, // Minimum tree depth to clone all the items, 1 is default. // Default: 1
- *     max_string_length?: int|Param, // Max length of displayed strings, -1 means no limit. // Default: -1
- *     dump_destination?: scalar|Param|null, // A stream URL where dumps should be written to. // Default: null
- *     theme?: "dark"|"light"|Param, // Changes the color of the dump() output when rendered directly on the templating. "dark" (default) or "light". // Default: "dark"
- * }
- * @psalm-type MakerConfig = array{
- *     root_namespace?: scalar|Param|null, // Default: "App"
- *     generate_final_classes?: bool|Param, // Default: true
- *     generate_final_entities?: bool|Param, // Default: false
- * }
- * @psalm-type WebpackEncoreConfig = array{
- *     output_path?: scalar|Param|null, // The path where Encore is building the assets - i.e. Encore.setOutputPath()
- *     crossorigin?: false|"anonymous"|"use-credentials"|Param, // crossorigin value when Encore.enableIntegrityHashes() is used, can be false (default), anonymous or use-credentials // Default: false
- *     preload?: bool|Param, // preload all rendered script and link tags automatically via the http2 Link header. // Default: false
- *     cache?: bool|Param, // Enable caching of the entry point file(s) // Default: false
- *     strict_mode?: bool|Param, // Throw an exception if the entrypoints.json file is missing or an entry is missing from the data // Default: true
- *     builds?: array<string, scalar|Param|null>,
- *     script_attributes?: array<string, scalar|Param|null>,
- *     link_attributes?: array<string, scalar|Param|null>,
- * }
  * @psalm-type KnpMenuConfig = array{
  *     providers?: array{
  *         builder_alias?: bool|Param, // Default: true
@@ -1523,14 +1135,9 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     services?: ServicesConfig,
  *     framework?: FrameworkConfig,
  *     twig?: TwigConfig,
- *     twig_extra?: TwigExtraConfig,
  *     doctrine?: DoctrineConfig,
  *     doctrine_migrations?: DoctrineMigrationsConfig,
- *     security?: SecurityConfig,
- *     web_profiler?: WebProfilerConfig,
  *     monolog?: MonologConfig,
- *     debug?: DebugConfig,
- *     webpack_encore?: WebpackEncoreConfig,
  *     knp_menu?: KnpMenuConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
@@ -1538,15 +1145,20 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         services?: ServicesConfig,
  *         framework?: FrameworkConfig,
  *         twig?: TwigConfig,
- *         twig_extra?: TwigExtraConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
- *         security?: SecurityConfig,
- *         web_profiler?: WebProfilerConfig,
  *         monolog?: MonologConfig,
- *         debug?: DebugConfig,
- *         maker?: MakerConfig,
- *         webpack_encore?: WebpackEncoreConfig,
+ *         knp_menu?: KnpMenuConfig,
+ *     },
+ *     "when@prod"?: array{
+ *         imports?: ImportsConfig,
+ *         parameters?: ParametersConfig,
+ *         services?: ServicesConfig,
+ *         framework?: FrameworkConfig,
+ *         twig?: TwigConfig,
+ *         doctrine?: DoctrineConfig,
+ *         doctrine_migrations?: DoctrineMigrationsConfig,
+ *         monolog?: MonologConfig,
  *         knp_menu?: KnpMenuConfig,
  *     },
  *     "when@test"?: array{
@@ -1555,14 +1167,9 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         services?: ServicesConfig,
  *         framework?: FrameworkConfig,
  *         twig?: TwigConfig,
- *         twig_extra?: TwigExtraConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
- *         security?: SecurityConfig,
- *         web_profiler?: WebProfilerConfig,
  *         monolog?: MonologConfig,
- *         debug?: DebugConfig,
- *         webpack_encore?: WebpackEncoreConfig,
  *         knp_menu?: KnpMenuConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias
@@ -1648,6 +1255,7 @@ namespace Symfony\Component\Routing\Loader\Configurator;
  * }
  * @psalm-type RoutesConfig = array{
  *     "when@dev"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
+ *     "when@prod"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     "when@test"?: array<string, RouteConfig|ImportConfig|AliasConfig>,
  *     ...<string, RouteConfig|ImportConfig|AliasConfig>
  * }

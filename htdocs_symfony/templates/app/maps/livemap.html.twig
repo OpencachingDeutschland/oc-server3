@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}livemap{% endblock %}
+{% block data_map_js %}true{% endblock %}
+{% block page_title %}{% endblock %}
+{% block page_subtitle %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/css/map.css">
+    <style>
+        body {
+            overflow: hidden;
+            height: 100vh;
+        }
+        main.content {
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden;
+            min-height: 0;
+        }
+        #mapRoot {
+            width: 100%;
+            height: calc(100vh - var(--oc-navbar-height));
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        footer { display: none !important; }
+    </style>
+{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'by:':                'by:'                | trans,
+    'Published:':         'Published:'         | trans,
+    'Finds:':             'Finds:'             | trans,
+    'Found:':             'Found:'             | trans,
+    'Filter Options':     'Filter Options'     | trans,
+    'All':                'All'                | trans,
+    'None':               'None'               | trans,
+    'Close':              'Close'              | trans,
+    'Cache Types':        'Cache Types'        | trans,
+    'Status':             'Status'             | trans,
+    'Difficulty':         'Difficulty'         | trans,
+    'Min':                'Min'                | trans,
+    'Max':                'Max'                | trans,
+    'Traditional':        'Traditional'        | trans,
+    'Multi':              'Multi'              | trans,
+    'Virtual':            'Virtual'            | trans,
+    'Webcam':             'Webcam'             | trans,
+    'Event':              'Event'              | trans,
+    'Quiz':               'Quiz'               | trans,
+    'Math/Physics':       'Math/Physics'       | trans,
+    'Moving':             'Moving'             | trans,
+    'Drive-in':           'Drive-in'           | trans,
+    'Owned':              'Owned'              | trans,
+    'Found':              'Found'              | trans,
+    'DNF':                'DNF'                | trans,
+    'Disabled':           'Disabled'           | trans,
+    'Corrected coords':   'Corrected coords'   | trans,
+    'Personal note':      'Personal note'      | trans,
+    'Filter':             'Filter'             | trans,
+    'Open filter settings': 'Open filter settings' | trans,
+    'Save':               'Save'               | trans,
+    'Search':             'Search'             | trans,
+    'City or village…':   'City or village…'   | trans,
+    'My location':         'My location'        | trans,
+    'Searching…':          'Searching…'         | trans,
+    'No results':          'No results'         | trans,
+    'Error searching':     'Error searching'    | trans,
+    'Location unavailable': 'Location unavailable' | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block after_body_start %}
+    {# Globals the map modules look up via window/free variables.
+       Must be set BEFORE <script type="module" src="loader.js"> runs map.js. #}
+    <script>
+        window.uniCacheWP       = [];
+        (function() {
+            var p = new URLSearchParams(location.search);
+            window.lat         = p.has('lat')  ? parseFloat(p.get('lat'))  : {{ initLat|default(52.376) }};
+            window.lon         = p.has('lon')  ? parseFloat(p.get('lon'))  : {{ initLon|default(9.732) }};
+            window.defaultZoom = p.has('zoom') ? parseInt(p.get('zoom'))   : {{ initZoom|default(13) }};
+        })();
+    </script>
+{% endblock %}
+
+{% block page_content %}
+    <div id="mapRoot"></div>
+{% endblock %}

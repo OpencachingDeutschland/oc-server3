@@ -1,0 +1,539 @@
+/* =================================================================
+   oc-style.css — Opencaching Symfony frontend theme
+   Light/dark mode via CSS custom properties + data-theme attribute
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. Custom Properties — Light (default)
+   ----------------------------------------------------------------- */
+:root {
+  /* Brand / accent */
+  --oc-primary:        #044870;
+  --oc-primary-light:  #1a6eb5;
+  --oc-primary-dark:   #033658;
+  --oc-accent:         #2a7ab5;
+
+  /* Status */
+  --oc-success:  #198754;
+  --oc-danger:   #dc3545;
+  --oc-warning:  #ffc107;
+  --oc-info:     #0dcaf0;
+
+  /* Absolute anchors */
+  --oc-white: #ffffff;
+  --oc-black: #000000;
+
+  /* Gray scale */
+  --oc-gray-50:  #f8f9fa;
+  --oc-gray-100: #f0f0f0;
+  --oc-gray-200: #e9ecef;
+  --oc-gray-300: #dee2e6;
+  --oc-gray-400: #ced4da;
+  --oc-gray-500: #adb5bd;
+  --oc-gray-600: #6c757d;
+  --oc-gray-700: #495057;
+  --oc-gray-800: #343a40;
+  --oc-gray-900: #212529;
+
+  /* Backgrounds */
+  --oc-bg-body:      var(--oc-white);
+  --oc-bg-surface:   var(--oc-gray-100);
+  --oc-bg-elevated:  var(--oc-white);
+  --oc-bg-secondary: var(--oc-gray-50);
+  --oc-popover-bg:   #dce7f0;
+  --oc-bg-navbar:    var(--oc-primary);
+
+  /* Form inputs */
+  --oc-input-bg:           var(--oc-white);
+  --oc-input-border:       var(--oc-gray-300);
+  --oc-input-focus-bg:     var(--oc-white);
+  --oc-input-focus-border: var(--oc-primary-light);
+
+  /* Tables */
+  --oc-table-bg:          var(--oc-white);
+  --oc-table-border:      var(--oc-gray-300);
+  --oc-table-header-bg:   var(--oc-gray-200);
+  --oc-table-stripe-odd:  var(--oc-gray-100);
+  --oc-table-stripe-even: var(--oc-white);
+
+  /* Text */
+  --oc-text-primary:   var(--oc-gray-900);
+  --oc-text-secondary: var(--oc-gray-600);
+  --oc-text-muted:     var(--oc-gray-500);
+  --oc-text-inverse:   var(--oc-white);
+  --oc-link-color:       #044870;
+  --oc-link-hover-color: #0b5ed7;
+  --oc-footer-link-color: rgba(255,255,255,0.85);
+  --oc-navbar-height: 56px;
+
+  /* Popover / tooltip */
+  --oc-popover-bg:     var(--oc-gray-200);
+  --oc-popover-border: var(--oc-gray-400);
+  --oc-popover-text:   var(--oc-text-primary);
+
+  /* Shadows */
+  --oc-shadow-sm: 0 1px 2px rgba(0,0,0,0.08);
+  --oc-shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --oc-shadow-lg: 0 10px 15px rgba(0,0,0,0.12);
+}
+
+/* -----------------------------------------------------------------
+   2. Custom Properties — Dark
+   ----------------------------------------------------------------- */
+[data-theme="dark"] {
+  /* Mattermost-inspired dark palette */
+  --oc-bg-body:      #2f3e4e;
+  --oc-bg-surface:   #263545;
+  --oc-bg-elevated:  #384858;
+  --oc-bg-secondary: #344454;
+  --oc-popover-bg:   #506070;
+  --oc-bg-navbar:    #1e2e3e;
+
+  --oc-text-primary:   #dddddd;
+  --oc-text-secondary: #b0b0b0;
+  --oc-text-muted:     #909090;
+
+  --oc-link-color:       #a4ffeb;
+  --oc-link-hover-color: #c8fff2;
+  --oc-footer-link-color: #a4ffeb;
+
+  --oc-success: #6dd26d;
+  --oc-danger:  #ff6461;
+  --oc-info:    #63d9f5;
+
+  --oc-input-bg:           var(--oc-bg-surface);
+  --oc-input-border:       var(--oc-gray-300);
+  --oc-input-focus-bg:     var(--oc-bg-elevated);
+  --oc-input-focus-border: var(--oc-primary-light);
+
+  --oc-table-bg:          var(--oc-bg-body);
+  --oc-table-border:      var(--oc-gray-300);
+  --oc-table-header-bg:   var(--oc-gray-200);
+  --oc-table-stripe-odd:  var(--oc-gray-100);
+  --oc-table-stripe-even: var(--oc-bg-body);
+
+  --oc-primary:       #1a6eb5;
+  --oc-accent:        #4da3e8;
+  --oc-accent-active: #6bb5f0;
+
+  /* Sync Bootstrap primary to OC primary in dark mode */
+  --bs-primary:     #1a6eb5;
+  --bs-primary-rgb: 26, 110, 181;
+
+  --oc-gray-100: #374757;
+  --oc-gray-200: #475767;
+  --oc-gray-300: #576777;
+  --oc-gray-700: #c0c0c0;
+  --oc-gray-800: #d0d0d0;
+  --oc-gray-900: #e0e0e0;
+
+  --oc-popover-bg:     #4a5a6a;
+  --oc-popover-border: var(--oc-gray-300);
+  --oc-popover-text:   var(--oc-text-primary);
+
+  --oc-shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --oc-shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  --oc-shadow-lg: 0 10px 15px rgba(0,0,0,0.4);
+}
+
+/* -----------------------------------------------------------------
+   3. Base Element Styles
+   ----------------------------------------------------------------- */
+body {
+  color: var(--oc-text-primary);
+  background-color: var(--oc-bg-body);
+}
+
+main.content {
+  padding: 1rem 1.25rem;
+}
+body[data-page="livemap"] main.content {
+  padding: 0;
+}
+
+footer.footer {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  color: var(--oc-text-secondary);
+  border-top: 1px solid var(--oc-border);
+}
+
+a {
+  color: var(--oc-link-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--oc-link-hover-color);
+}
+
+/* -----------------------------------------------------------------
+   4. Form Controls
+   ----------------------------------------------------------------- */
+.form-control,
+.form-select,
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+textarea,
+select {
+  background-color: var(--oc-input-bg);
+  border-color: var(--oc-input-border);
+  color: var(--oc-text-primary);
+}
+
+.form-control:focus,
+.form-select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  background-color: var(--oc-input-focus-bg);
+  border-color: var(--oc-input-focus-border);
+  color: var(--oc-text-primary);
+}
+
+.form-control::placeholder,
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+input[type="password"]::placeholder,
+input[type="email"]::placeholder,
+input[type="search"]::placeholder,
+textarea::placeholder {
+  color: var(--oc-text-secondary);
+  opacity: 1;
+}
+
+/* Bootstrap 5 needs color-scheme for native pickers + select popups in dark mode */
+[data-theme="dark"] input[type="date"],
+[data-theme="dark"] input[type="datetime-local"],
+[data-theme="dark"] input[type="time"],
+[data-theme="dark"] select,
+[data-theme="dark"] .form-select {
+  color-scheme: dark;
+}
+
+/* -----------------------------------------------------------------
+   5. Tables
+   ----------------------------------------------------------------- */
+.table {
+  --bs-table-bg:             var(--oc-table-bg);
+  --bs-table-color:          var(--oc-text-primary);
+  --bs-table-striped-bg:     var(--oc-table-stripe-odd);
+  --bs-table-striped-color:  var(--oc-text-primary);
+  --bs-table-hover-bg:       var(--oc-gray-200);
+  --bs-table-hover-color:    var(--oc-text-primary);
+  color: var(--oc-text-primary);
+  background-color: var(--oc-table-bg);
+}
+
+.table th {
+  background-color: var(--oc-table-header-bg);
+  color: var(--oc-text-primary);
+}
+
+.table td,
+.table th {
+  border-color: var(--oc-table-border);
+}
+
+/* -----------------------------------------------------------------
+   6. Navbar
+   ----------------------------------------------------------------- */
+.navbar {
+  background-color: var(--oc-bg-navbar) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,0.85);
+  border-radius: 0.25rem;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #ffffff;
+}
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 600;
+}
+
+/* -----------------------------------------------------------------
+   7. Cards, Modals, Dropdowns
+   ----------------------------------------------------------------- */
+[data-theme="dark"] .card {
+  background-color: var(--oc-bg-surface);
+  border-color: var(--oc-gray-300);
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .modal-content {
+  background-color: var(--oc-bg-surface);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--oc-bg-elevated);
+  border-color: var(--oc-gray-300);
+  color: var(--oc-text-primary);
+}
+[data-theme="dark"] .dropdown-item {
+  color: var(--oc-text-primary);
+}
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--oc-gray-200);
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] hr {
+  border-color: var(--oc-gray-300);
+}
+
+[data-theme="dark"] .text-muted {
+  color: var(--oc-text-muted) !important;
+}
+
+/* -----------------------------------------------------------------
+   8. Utility Classes
+   ----------------------------------------------------------------- */
+.oc-text-danger  { color: var(--oc-danger);  }
+.oc-text-success { color: var(--oc-success); }
+.oc-text-warning { color: var(--oc-warning); }
+.oc-text-info    { color: var(--oc-info);    }
+.oc-text-muted   { color: var(--oc-text-muted); }
+
+/* -----------------------------------------------------------------
+   9. Theme Toggle Button
+   ----------------------------------------------------------------- */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.85);
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+  line-height: 1;
+}
+.theme-toggle:hover {
+  color: #ffffff;
+}
+
+[data-theme="dark"]  .theme-icon-light { display: none;   }
+[data-theme="dark"]  .theme-icon-dark  { display: inline; }
+[data-theme="light"] .theme-icon-light { display: inline; }
+[data-theme="light"] .theme-icon-dark  { display: none;   }
+/* Default (no attribute set yet) — show light icon */
+:root:not([data-theme]) .theme-icon-light { display: none;   }
+:root:not([data-theme]) .theme-icon-dark  { display: inline; }
+
+/* -----------------------------------------------------------------
+   10. Leaflet Map — Dark Mode
+   ----------------------------------------------------------------- */
+[data-theme="dark"] .leaflet-control {
+  background-color: var(--oc-bg-elevated) !important;
+  color: var(--oc-text-primary);
+}
+
+[data-theme="dark"] .leaflet-control-zoom a {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-bottom-color: var(--oc-gray-300);
+}
+[data-theme="dark"] .leaflet-control-zoom a:hover {
+  background-color: var(--oc-bg-secondary);
+}
+
+[data-theme="dark"] .leaflet-control-scale-line {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+  text-shadow: none;
+}
+
+[data-theme="dark"] .leaflet-popup-content-wrapper {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+}
+[data-theme="dark"] .leaflet-popup-tip {
+  background-color: var(--oc-bg-elevated);
+}
+.leaflet-popup-content a {
+  text-decoration: none;
+}
+[data-theme="dark"] .leaflet-popup-content a {
+  color: var(--oc-link-color);
+}
+
+[data-theme="dark"] .leaflet-tooltip {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+  border-color: var(--oc-gray-300);
+}
+[data-theme="dark"] .leaflet-tooltip-top::before    { border-top-color:    var(--oc-bg-elevated); }
+[data-theme="dark"] .leaflet-tooltip-bottom::before { border-bottom-color: var(--oc-bg-elevated); }
+[data-theme="dark"] .leaflet-tooltip-left::before   { border-left-color:   var(--oc-bg-elevated); }
+[data-theme="dark"] .leaflet-tooltip-right::before  { border-right-color:  var(--oc-bg-elevated); }
+
+[data-theme="dark"] .leaflet-control-layers,
+[data-theme="dark"] .leaflet-control-layers-expanded {
+  background-color: var(--oc-bg-elevated);
+  color: var(--oc-text-primary);
+}
+[data-theme="dark"] .leaflet-control-layers-separator {
+  border-top-color: var(--oc-gray-300);
+}
+
+/* -----------------------------------------------------------------
+   11. Map Layout
+   ----------------------------------------------------------------- */
+.map {
+  width: 100%;
+  background-color: var(--oc-bg-surface);
+}
+
+/* Bootstrap popovers — theme-aware, deliberately distinct from Leaflet popup bg */
+.popover {
+  --bs-popover-bg:           var(--oc-popover-bg);
+  --bs-popover-body-color:   var(--oc-text-primary);
+  --bs-popover-border-color: var(--oc-border);
+  --bs-popover-header-bg:    var(--oc-popover-bg);
+  --bs-popover-header-color: var(--oc-text-primary);
+}
+
+/* Bootstrap button dark mode — sync to OC primary */
+[data-theme="dark"] .btn-primary {
+  --bs-btn-bg:                var(--oc-primary);
+  --bs-btn-border-color:      var(--oc-primary);
+  --bs-btn-hover-bg:          var(--oc-accent);
+  --bs-btn-hover-border-color:var(--oc-accent);
+  --bs-btn-active-bg:         var(--oc-primary);
+  --bs-btn-active-border-color:var(--oc-primary);
+}
+[data-theme="dark"] .btn-outline-primary {
+  --bs-btn-color:              var(--oc-accent);
+  --bs-btn-border-color:       var(--oc-accent);
+  --bs-btn-hover-color:        #fff;
+  --bs-btn-hover-bg:           var(--oc-primary);
+  --bs-btn-hover-border-color: var(--oc-primary);
+  --bs-btn-active-color:       #fff;
+  --bs-btn-active-bg:          var(--oc-primary);
+  --bs-btn-active-border-color:var(--oc-primary);
+}
+
+/* Elevate navbar above Leaflet controls (z-index 1000) so dropdowns are never hidden */
+header.header {
+  position: relative;
+  z-index: 1030;
+}
+
+/* -----------------------------------------------------------------
+   Home page — 20 / 60 / 20 grid
+   ----------------------------------------------------------------- */
+.oc-home {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px);
+}
+.oc-home-side  { flex: 0 0 20%; min-width: 0; }
+.oc-home-main  { flex: 0 0 calc(60% - 2rem); min-width: 0; align-self: stretch; }
+
+/* Cards */
+.oc-card {
+  background-color: var(--oc-bg-surface);
+  border: 1px solid var(--oc-border);
+  color: var(--oc-text-primary);
+}
+.oc-card .card-header {
+  background-color: var(--oc-bg-elevated);
+  border-bottom: 1px solid var(--oc-border);
+  color: var(--oc-text-primary);
+  font-size: 0.875rem;
+}
+
+/* Center hero */
+.oc-home-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--oc-primary);
+  letter-spacing: -0.5px;
+}
+.oc-home-subtitle {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Stats row */
+.oc-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.oc-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.oc-stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--oc-primary);
+  line-height: 1;
+}
+.oc-stat-label {
+  font-size: 0.75rem;
+  color: var(--oc-text-secondary);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.oc-stat-divider {
+  width: 1px;
+  height: 40px;
+  background-color: var(--oc-border);
+}
+
+/* Steps list (left tall card) */
+.oc-steps li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--oc-border);
+}
+.oc-steps li:last-child { border-bottom: none; }
+.oc-step-icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--oc-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  margin-top: 1px;
+}
+
+/* Why list (right tall card) */
+.oc-why-list li {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--oc-border);
+  font-size: 0.875rem;
+}
+.oc-why-list li:last-child { border-bottom: none; }
+.oc-why-list li i { flex-shrink: 0; margin-top: 0.2em; }

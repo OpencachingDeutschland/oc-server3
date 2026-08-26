@@ -12,16 +12,16 @@
                             TODO: add css classes instead of width, etc.
                         #}
                         <div><br href="#"><img
-                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconStandardName) }}"
+                                        src="/images/cacheTypes/' ~ cache.image_Name.iconStandardName) }}"
                                         alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Std.Icon)</br>
                                 <img
-                                        src="{{ asset('images/cacheTypes/' ~ cache.image_Name.iconCurrentName) }}"
+                                        src="/images/cacheTypes/' ~ cache.image_Name.iconCurrentName) }}"
                                         alt={{ cache.cache_type.name }} title={{ cache.cache_type.name }} width="32" height="32">(Map-Icon)</a>
                         </div>
-                        <div><a href="#"><img src="{{ asset('images/ratings/difficulty-' ~ cache.difficulty * 5 ~ '.svg') }}"
+                        <div><a href="#"><img src="/images/ratings/difficulty-' ~ cache.difficulty * 5 ~ '.svg"
                                               alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
                                               height="16"></a></div>
-                        <div><a href="#"><img src="{{ asset('images/ratings/terrain-' ~ cache.terrain * 5 ~ '.svg') }}"
+                        <div><a href="#"><img src="/images/ratings/terrain-' ~ cache.terrain * 5 ~ '.svg"
                                               alt={{ 'Difficulty' | trans }} title={{ 'Terrain' | trans }} width="19"
                                               height="16"></a></div>
                     </div>
@@ -33,7 +33,7 @@
                         <p>{{ 'by' | trans }}&nbsp;<b><a
                                         href="{{ path('app_user_by_id', { 'userID': cache.user.userId}) }}">{{ cache.user.username }}</a></b>
                             <span style="color: rgb(88, 144, 168); font-weight: bold;"><img
-                                        src="{{ asset('images/flags/' ~ cache.country | lower) }}.svg"
+                                        src="/images/flags/' ~ cache.country | lower) }}.svg"
                                         alt={{ cache.country }} width="16" style="vertical-align:middle">
                                         Deutschland &gt; Baden-Württemberg &gt; Ravensburg
                                     </span>
@@ -102,11 +102,11 @@
                         </tr>
                         <tr>
                             <th>{{ 'Publishe date' | trans }}</th>
-                            <td>{{ cache.date_hidden|date('d.m.Y') }}</td>
+                            <td>{{ cache.date_hidden|date('d.m.Y' }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Last change' | trans }}</th>
-                            <td>{{ cache.last_modified|date('d.m.Y') }}</td>
+                            <td>{{ cache.last_modified|date('d.m.Y' }}</td>
                         </tr>
                         <tr>
                             <th>{{ 'Listing url' | trans }}</th>
@@ -114,7 +114,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Country' | trans }}</th>
-                            <td>{{ cache.country | default('?') }}</td>
+                            <td>{{ cache.country | default('?' }}</td>
                         </tr>
 
                         <tr>
@@ -171,7 +171,7 @@
                         </tr>
                         <tr>
                             <th>{{ 'Show on map' | trans }}</th>
-                            <td><a href="{{ path('app_map_show', { 'lat': cache.latitude, 'lon': cache.longitude}) }}">&#x1F5FA;</a>
+                            <td><a href="{{ path('app_map_show_coords', { 'lat': cache.latitude, 'lon': cache.longitude}) }}">&#x1F5FA;</a>
                             </td>
                         </tr>
                         </thead>
@@ -195,18 +195,18 @@
                         <span class="navbar-text">
                         Log entries for {{ cache.name }} //
                             {% if cache.type == 6 %}
-                                {{ cache.logs_count.8 }} x <img    src="{{ asset('images/logTypes/will_attend.svg') }}"
+                                {{ cache.logs_count.8 }} x <img    src="/images/logTypes/will_attend.svg"
                                                                    alt="{{ 'Will Attend' | trans }}" title="{{ 'Will Attend' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.7 }} x <img    src="{{ asset('images/logTypes/attended.svg') }}"
+                                {{ cache.logs_count.7 }} x <img    src="/images/logTypes/attended.svg"
                                                                    alt="{{ 'Attendend' | trans }}" title="{{ 'Attended' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                {{ cache.logs_count.3 }} x <img    src="/images/logTypes/note.svg"
                                                                    alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
                             {% else %}
-                                {{ cache.logs_count.1 }} x <img    src="{{ asset('images/logTypes/found.svg') }}"
+                                {{ cache.logs_count.1 }} x <img    src="/images/logTypes/found.svg"
                                                                    alt="{{ 'Found' | trans }}" title="{{ 'Found' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.2 }} x <img    src="{{ asset('images/logTypes/dnf.svg') }}"
+                                {{ cache.logs_count.2 }} x <img    src="/images/logTypes/dnf.svg"
                                                                    alt="{{ 'Did not found' | trans }}" title="{{ 'Did not found' | trans }}" width="16" height="16">
-                                {{ cache.logs_count.3 }} x <img    src="{{ asset('images/logTypes/note.svg') }}"
+                                {{ cache.logs_count.3 }} x <img    src="/images/logTypes/note.svg"
                                                                    alt="{{ 'Note' | trans }}" title="{{ 'Note' | trans }}" width="16" height="16">
                             {% endif %}
                             {# TODO: to do Andere Logtypen optional anzeigen, falls vorhanden, Koordinatenänderungen anzeigen#}
@@ -219,24 +219,24 @@
                             <div href="#log{{ cachelogs.id }}" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between" id="log{{ cachelogs.id }}">
                                     <h5 class="mb-1">
-                                        <img        src="{{ asset('images/logTypes/' ~ cachelogs.logType.en ~ '.svg') }}"
+                                        <img        src="/images/logTypes/' ~ cachelogs.logType.en ~ '.svg"
                                                     alt={{ cachelogs.logType.en}} title={{ cachelogs.logType.en }} width="16" height="16">
                                         {% if cachelogs.ocTeamComment %} OC {% endif %}
                                         {% if cachelogs.ratingCacheLog == true %}
                                             Stern {# TODO: to do Empfehlungsicon einfügen#}
                                         {% endif %}
                                         {% if cachelogs.needsMaintenance == 1 %}
-                                            <img        src="{{ asset('images/logTypes/needs_maintenance-no.svg') }}"
+                                            <img        src="/images/logTypes/needs_maintenance-no.svg"
                                                         alt={{ 'The geocache is in good or acceptable condition.' | trans}} title={{ 'The geocache is in good or acceptable condition.' | trans }} width="16" height="16">
                                         {% elseif cachelogs.needsMaintenance == 2 %}
-                                            <img        src="{{ asset('images/logTypes/needs_maintenance-yes.svg') }}"
+                                            <img        src="/images/logTypes/needs_maintenance-yes.svg"
                                                         alt={{ 'The geocache needs maintenance.' | trans }} title={{ 'The geocache needs maintenance.' | trans }} width="16" height="16">
                                         {% endif %}
                                         {% if cachelogs.listingOutdated == 1 %}
-                                            <img        src="{{ asset('images/logTypes/listing_outdated_yes.svg') }}"
+                                            <img        src="/images/logTypes/listing_outdated_yes.svg"
                                                         alt={{ 'The geocache description is ok.' | trans }} title={{ 'The geocache description is ok.' | trans }} width="16" height="16">
                                         {% elseif cachelogs.listingOutdated == 2 %}
-                                            <img        src="{{ asset('images/logTypes/listing_outdated_no.svg') }}"
+                                            <img        src="/images/logTypes/listing_outdated_no.svg"
                                                         alt={{ 'The geocache description is outdated.' | trans }} title={{ 'The geocache description is outdated.' | trans }} width="16" height="16"
                                         {% endif %}
                                         <a href="{{ path('app_user_by_id', { 'userID': cachelogs.user.userId}) }}">{{ cachelogs.user.username }}</a>
@@ -267,7 +267,7 @@
                                             {{ 'has locked and hidden the geocache' | trans }}
                                         {% endif %}
                                     </h5>
-                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i') }}</small>
+                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i' }}</small>
                                 </div>
                                 {#  Todo: Button für Delete, Edit und Upload Picture #}
                                 <p class="mb-1">
@@ -278,12 +278,12 @@
                                     {% endif %}
                                 </p>
                                 {%  if cachelogs.entryLastModified != cachelogs.dateCreated %}
-                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i') }}</small>
+                                    <small>{{ cachelogs.dateCreated | date('d.m.Y H:i' }}</small>
                                 {% endif %}
                                 {# Todo Anzeigen wenn Log gelöscht wurde#}
                                 {# {%if cachelogs.deleted_by_name != "" %}
                                     <p><span style="color:red">{{ 'Deleted by' | trans }}{{ cachelogs.deleted_by_name}},
-                                        {{ cachelogs.deletion_date | date('d.m.Y H:i') }}</span></p>
+                                        {{ cachelogs.deletion_date | date('d.m.Y H:i' }}</span></p>
                                 {% endif %} #}
 
                                 {% if cachelogs.pictures is not empty %}<p>{{ cachelogs.pictures|length }}{{ " Pictures for this log entry:" | trans }}</p>

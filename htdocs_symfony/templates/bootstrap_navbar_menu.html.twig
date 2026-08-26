@@ -1,0 +1,91 @@
+{# Bootstrap 5 navbar renderer for KnpMenu.
+   Top-level items become .nav-item; items with children become .dropdown
+   with a click-toggled .dropdown-menu (Bootstrap 5 default behavior). #}
+
+{% extends 'knp_menu_base.html.twig' %}
+
+{% macro attributes(attributes) %}
+{% for name, value in attributes %}
+    {%- if value is not none and value is not same as(false) -%}
+        {{- ' %s="%s"'|format(name, value is same as(true) ? name|e : value|e)|raw -}}
+    {%- endif -%}
+{%- endfor -%}
+{% endmacro %}
+
+{% block root %}
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {{ block('children') }}
+    </ul>
+{% endblock %}
+
+{% block children %}
+    {% set currentOptions = options %}
+    {% set currentItem = item %}
+    {% if options.depth is not none %}
+        {% set options = options|merge({depth: currentOptions.depth - 1}) %}
+    {% endif %}
+    {% for item in currentItem.children %}
+        {{ block('item') }}
+    {% endfor %}
+    {% set item = currentItem %}
+    {% set options = currentOptions %}
+{% endblock %}
+
+{% block item %}
+    {% if item.displayed %}
+        {% if item.level == 1 %}
+            {% if item.hasChildren and options.depth is not same as(0) %}
+                {{ block('top_level_dropdown') }}
+            {% else %}
+                {{ block('top_level_link') }}
+            {% endif %}
+        {% else %}
+            {{ block('child_link') }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block top_level_link %}
+    <li class="nav-item">
+        {% if item.uri is not empty %}
+            <a class="nav-link{% if matcher.isCurrent(item) %} active{% endif %}" href="{{ item.uri }}">{{ item.label }}</a>
+        {% else %}
+            <span class="nav-link disabled">{{ item.label }}</span>
+        {% endif %}
+    </li>
+{% endblock %}
+
+{% block top_level_dropdown %}
+    {% set dropdownId = 'navDropdown_' ~ item.name %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle{% if matcher.isAncestor(item) %} active{% endif %}"
+           href="#"
+           id="{{ dropdownId }}"
+           role="button"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">{{ item.label }}</a>
+        <ul class="dropdown-menu" aria-labelledby="{{ dropdownId }}">
+            {% for child in item.children %}
+                {% if child.displayed %}
+                    <li>
+                        {% if child.uri is not empty %}
+                            <a class="dropdown-item{% if matcher.isCurrent(child) %} active{% endif %}" href="{{ child.uri }}">{{ child.label }}</a>
+                        {% else %}
+                            <span class="dropdown-item disabled">{{ child.label }}</span>
+                        {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+{% endblock %}
+
+{% block child_link %}
+    <li>
+        {% if item.uri is not empty %}
+            <a class="dropdown-item" href="{{ item.uri }}">{{ item.label }}</a>
+        {% else %}
+            <span class="dropdown-item disabled">{{ item.label }}</span>
+        {% endif %}
+    </li>
+{% endblock %}

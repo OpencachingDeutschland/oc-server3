@@ -7,7 +7,6 @@ namespace Oc\Repository;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\GeoCacheLogsEntity;
 use Oc\Repository\Exception\RecordNotFoundException;
 
 class SupportVandalismRepository
@@ -813,28 +812,28 @@ class SupportVandalismRepository
                         // id, uuid, date_created and last_modified are set automatically;
                         // picture will be updated automatically on picture-restore
                         // assign node ... cachelog class currently does not initialize node field
-                        $log = new GeoCacheLogsEntity([
+                        $log = [
                                 'id' => (int)$this->connection->lastInsertId('cache_logs_restored') + 1,
                                 'node' => $r['node'],
-                                'cacheId' => $r['cache_id'],
-                                'userId' => $r['user_id'],
+                                'cache_id' => $r['cache_id'],
+                                'user_id' => $r['user_id'],
                                 'type' => $r['type'],
-                                'ocTeamComment' => $r['oc_team_comment'],
+                                'oc_team_comment' => $r['oc_team_comment'],
                                 'date' => $r['date'],
                                 'text' => $r['text'],
-                                'textHtml' => $r['text_html'],
-                                'textHtmledit' => $r['text_htmledit'],
-                                'needsMaintenance' => $r['needs_maintenance'],
-                                'listingOutdated' => $r['listing_outdated'],
-                                'ownerNotified' => 1
-                        ]);
+                                'text_html' => $r['text_html'],
+                                'text_htmledit' => $r['text_htmledit'],
+                                'needs_maintenance' => $r['needs_maintenance'],
+                                'listing_outdated' => $r['listing_outdated'],
+                                'owner_notified' => 1
+                        ];
                         if (!$simulate) {
                             $this->connection->executeStatement(
                                     'INSERT IGNORE INTO `cache_logs_restored`
                                       (`id`, `date_modified`, `cache_id`, `original_id`, `restored_by`)
                                     VALUES (:paramID, :paramNOW, :paramCacheID, :paramOriginalID, :paramRestoredByID)',
                                     [
-                                            'paramID' => $log->id,
+                                            'paramID' => $log["id"],
                                             'paramNOW' => (new DateTime("now"))->format('Y-m-d H:i:s'),
                                             'paramCacheID' => $r['cache_id'],
                                             'paramOriginalID' => $revert_logid,
@@ -846,10 +845,10 @@ class SupportVandalismRepository
                             $this->connection->createQueryBuilder()
                                     ->delete('watches_logqueue')
                                     ->where('log_id = :paramLogID')
-                                    ->setParameters(['paramLogID' => $log->id])
+                                    ->setParameters(['paramLogID' => $log["id"]])
                                     ->executeStatement();
 
-                            $logs_processed[] = $log->id;
+                            $logs_processed[] = $log["id"];
                         }
                         $logs_restored = true;
                     }  // restore deleted

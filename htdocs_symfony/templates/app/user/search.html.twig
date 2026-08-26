@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}searchusers{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'Searching…':              'Searching…'              | trans,
+    'Found %count% user(s)':  'Found %count% user(s)'   | trans,
+    'No users found.':         'No users found.'         | trans,
+    'Username':                'Username'                | trans,
+    'User ID':                 'User ID'                 | trans,
+    'Email':                   'Email'                   | trans,
+    'Joined':                  'Joined'                  | trans,
+    'Finds':                   'Finds'                   | trans,
+    'Hides':                   'Hides'                   | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/vendor/tabulator/tabulator.min.css">
+    <link rel="stylesheet" href="/css/tabulator_oc.css">
+    <style>
+        .oc-filter-bar { background: var(--oc-bg-surface); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container-fluid px-0" id="userSearchContainer" data-is-support="{{ isSupport ? '1' : '0' }}">
+
+    <h4 class="mb-3">{{ 'Search users' | trans }}</h4>
+
+    <div class="oc-filter-bar">
+        <form id="searchForm">
+            <div class="row g-2 align-items-end">
+                <div class="col-12 col-md-6">
+                    {% if isSupport %}
+                        <label class="form-label mb-1">{{ 'Username / email / ID' | trans }}</label>
+                        <input type="text" id="fq" class="form-control"
+                               placeholder="{{ 'e.g. username, user@example.com, 12345' | trans }}"
+                               autocomplete="off">
+                    {% else %}
+                        <label class="form-label mb-1">{{ 'Username' | trans }}</label>
+                        <input type="text" id="fq" class="form-control"
+                               placeholder="{{ 'e.g. username' | trans }}"
+                               autocomplete="off">
+                    {% endif %}
+                </div>
+                <div class="col-auto ms-md-auto">
+                    <button type="submit" class="btn btn-primary">{{ 'Search' | trans }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="statusBar" class="text-secondary small mb-1" style="min-height:1.4em;"></div>
+    <div id="searchResults"></div>
+
+</div>
+{% endblock %}

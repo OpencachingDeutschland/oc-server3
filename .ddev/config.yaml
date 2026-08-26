@@ -19,6 +19,9 @@ hooks:
     - exec: cp htdocs/app/config/parameters.yml.dist htdocs/app/config/parameters.yml
     - exec: cp htdocs/config2/settings-sample-dev.inc.php htdocs/config2/settings.inc.php
     - exec: cp htdocs_symfony/.env.local_dist htdocs_symfony/.env.local
+    - exec: "mysql db < /mnt/ddev_config/db-patches/sp_update_logstat.sql"
+      service: db
+    - exec: "grep -q 'php_admin_value\\[error_reporting\\]' /etc/php/8.2/fpm/pool.d/www.conf || echo 'php_admin_value[error_reporting] = 22527' >> /etc/php/8.2/fpm/pool.d/www.conf && service php8.2-fpm reload"
 
 # Key features of DDEV's config.yaml:
 

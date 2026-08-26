@@ -1,0 +1,262 @@
+/* =================================================================
+   tabulator_oc.css — Tabulator theme overrides using --oc-* variables
+   Ported from GCxM's tabulator_gcxm.css with proven months-long refinement
+   ================================================================= */
+
+/* --------------------------------------------------
+   TOOLTIP — safe, non-intrusive styling
+   -------------------------------------------------- */
+.tabulator-tooltip {
+    max-height: 3em !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+
+    position: absolute !important;
+    z-index: 9999 !important;
+    pointer-events: none !important;
+
+    background: #fdfdfd !important;
+    border: 1px solid rgba(0,0,0,0.12) !important;
+    padding: 4px 6px !important;
+    border-radius: 3px !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+}
+
+/* --------------------------------------------------
+   OUTER CONTAINER — clean, borderless, scrollable
+   -------------------------------------------------- */
+.tabulator,
+.tabulator .tabulator-tableholder,
+.tabulator .tabulator-table {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: var(--oc-table-bg) !important;
+}
+
+/* Enable horizontal scrolling */
+.tabulator .tabulator-tableholder {
+    overflow-x: auto !important;
+}
+
+/* --------------------------------------------------
+   INTERNAL ELEMENTS — rows, cells, headers
+   -------------------------------------------------- */
+.tabulator .tabulator-header .tabulator-col,
+.tabulator .tabulator-cell,
+.tabulator .tabulator-row {
+    border: 1px solid transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Headers: allow tooltips overflow, remove all borders */
+.tabulator .tabulator-header .tabulator-col {
+    position: relative !important;
+    overflow: visible !important;
+    border: none !important;
+}
+
+.tabulator .tabulator-header {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+/* Divider & resize handles — invisible but functional */
+.tabulator .tabulator-resize-handle,
+.tabulator .tabulator-frozen-divider {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* Remove all borders on rows */
+.tabulator .tabulator-row {
+    border: none !important;
+}
+
+/* Remove focus outlines */
+.tabulator .tabulator-header .tabulator-col:focus,
+.tabulator .tabulator-cell:focus {
+    outline: none !important;
+}
+
+/* OC codes in monospaced font */
+.tabulator .tabulator-cell.cell-occode,
+.tabulator .tabulator-cell.cell-occode a {
+    font-family: "Monaco", "Courier New", monospace !important;
+}
+
+/* No underlines on any links inside tabulator cells */
+.tabulator .tabulator-cell a {
+    text-decoration: none;
+}
+
+/* --------------------------------------------------
+   SORTER TRIANGLES — hide visuals but keep functionality
+   -------------------------------------------------- */
+.tabulator .tabulator-col .tabulator-col-sorter {
+    flex: 0 0 0 !important;
+    width: 0 !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* --------------------------------------------------
+   HEADER TEXT — show full title, no ellipsis
+   -------------------------------------------------- */
+.tabulator .tabulator-col .tabulator-col-title {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* ==================================================
+   DARK THEME OVERRIDES
+   ================================================== */
+
+/* Tooltip */
+[data-theme="dark"] .tabulator-tooltip {
+    background: var(--oc-bg-elevated) !important;
+    border-color: var(--oc-gray-300) !important;
+    color: var(--oc-text-primary) !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3) !important;
+}
+
+/* Outer container */
+[data-theme="dark"] .tabulator,
+[data-theme="dark"] .tabulator .tabulator-tableholder,
+[data-theme="dark"] .tabulator .tabulator-table {
+    background-color: var(--oc-bg-surface) !important;
+}
+
+/* Header */
+[data-theme="dark"] .tabulator .tabulator-header {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-header .tabulator-col .tabulator-col-title {
+    color: var(--oc-text-primary) !important;
+}
+
+/* Rows */
+[data-theme="dark"] .tabulator .tabulator-row {
+    background-color: var(--oc-bg-surface) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row:nth-child(even) {
+    background-color: var(--oc-gray-100) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row:hover {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row.tabulator-selected {
+    background-color: var(--oc-bg-elevated) !important;
+}
+
+/* Cells */
+[data-theme="dark"] .tabulator .tabulator-cell {
+    color: var(--oc-text-primary) !important;
+}
+
+/* Links in cells */
+[data-theme="dark"] .tabulator .tabulator-cell a {
+    color: var(--oc-link-color) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-cell a:hover {
+    color: color-mix(in srgb, var(--oc-link-color) 80%, white) !important;
+}
+
+/* Footer/pagination */
+[data-theme="dark"] .tabulator .tabulator-footer {
+    background-color: var(--oc-gray-200) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page {
+    background-color: var(--oc-bg-surface) !important;
+    color: var(--oc-text-primary) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page:hover {
+    background-color: var(--oc-gray-200) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-footer .tabulator-page.active {
+    background-color: var(--oc-primary) !important;
+    color: #fff !important;
+}
+
+/* Frozen columns */
+[data-theme="dark"] .tabulator .tabulator-frozen {
+    background-color: var(--oc-bg-surface) !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row:nth-child(even) .tabulator-frozen {
+    background-color: var(--oc-gray-100) !important;
+}
+
+/* Highlighted row - for refresh/update feedback */
+.tabulator .tabulator-row.row-highlighted {
+    background-color: #ffca28 !important;
+}
+
+[data-theme="dark"] .tabulator .tabulator-row.row-highlighted {
+    background-color: #b8860b !important;
+}
+
+/* ================================================================
+   Dynamic state classes for Tabulator cells/rows
+   ================================================================ */
+
+/* Success - green text */
+.tabulator .tabulator-cell.cell-success {
+    color: green !important;
+}
+[data-theme="dark"] .tabulator .tabulator-cell.cell-success {
+    color: #4ade80 !important;
+}
+
+/* Error - red text */
+.tabulator .tabulator-cell.cell-error {
+    color: red !important;
+}
+[data-theme="dark"] .tabulator .tabulator-cell.cell-error {
+    color: #ff6b6b !important;
+}
+
+/* Neutral - reset to default text color */
+.tabulator .tabulator-cell.cell-neutral {
+    color: var(--oc-text-primary) !important;
+}
+
+/* Row with error background */
+.tabulator .tabulator-row.row-error {
+    background-color: #f8d7da !important;
+}
+[data-theme="dark"] .tabulator .tabulator-row.row-error {
+    background-color: #5c2626 !important;
+}
+
+/* Row transparent (remove zebra striping) */
+.tabulator .tabulator-row.row-transparent,
+[data-theme="dark"] .tabulator .tabulator-row.row-transparent,
+[data-theme="dark"] .tabulator .tabulator-row.row-transparent:nth-child(even) {
+    background-color: transparent !important;
+}

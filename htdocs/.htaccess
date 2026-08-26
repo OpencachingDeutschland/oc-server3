@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-l
+    RewriteCond %{REQUEST_URI} !^(.*)/okapi/(.*)$ [NC]
+    RewriteCond %{REQUEST_URI} !^(.*)/lib/tinymce/plugins/emotions/images/(.*)$ [NC]
+    RewriteCond %{REQUEST_URI} !^(.*)/statpics/(.*)$ [NC]
+    RewriteRule ^(.*)$ /symfony_app.php [QSA,L]
+</IfModule>

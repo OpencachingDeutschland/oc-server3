@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}reportedcaches{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'Searching…':                'Searching…'                | trans,
+    'Loaded %count% report(s)':  'Loaded %count% report(s)'  | trans,
+    'No reports found.':         'No reports found.'         | trans,
+    'ID':                        'ID'                        | trans,
+    'Status':                    'Status'                    | trans,
+    'OC Code':                   'OC Code'                   | trans,
+    'Cache':                     'Cache'                     | trans,
+    'Owner':                     'Owner'                     | trans,
+    'Reported by':               'Reported by'               | trans,
+    'Date':                      'Date'                      | trans,
+    'All statuses':              'All statuses'              | trans,
+    'New':                       'New'                       | trans,
+    'In Progress':               'In Progress'               | trans,
+    'Done':                      'Done'                      | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/vendor/tabulator/tabulator.min.css">
+    <link rel="stylesheet" href="/css/tabulator_oc.css">
+    <style>
+        .oc-filter-bar { background: var(--oc-bg-surface); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+<div class="container-fluid px-0">
+
+    <h4 class="mb-3">{{ 'Reported caches' | trans }}</h4>
+
+    <div class="oc-filter-bar">
+        <div class="row g-2 align-items-end">
+            <div class="col-auto">
+                <label class="form-label mb-1">{{ 'Status' | trans }}</label>
+                <select id="fstatus" class="form-select" style="width:160px">
+                    <option value="0">{{ 'All statuses' | trans }}</option>
+                    <option value="1">{{ 'New' | trans }}</option>
+                    <option value="2">{{ 'In Progress' | trans }}</option>
+                    <option value="3">{{ 'Done' | trans }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="statusBar" class="text-secondary small mb-1" style="min-height:1.4em;"></div>
+    <div id="searchResults"></div>
+
+</div>
+{% endblock %}

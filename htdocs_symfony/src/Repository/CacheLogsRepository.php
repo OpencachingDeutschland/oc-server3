@@ -5,50 +5,23 @@ declare(strict_types=1);
 namespace Oc\Repository;
 
 use DateTime;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\GeoCacheLogsEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CacheLogsRepository extends ServiceEntityRepository
+class CacheLogsRepository
 {
     private const TABLE = 'cache_logs';
 
     private Connection $connection;
 
-    private LogTypesRepository $logTypesRepository;
-
-    private UserRepository $userRepository;
-
-    private PicturesRepository $picturesRepository;
-
-    private CacheRatingRepository $cacheRatingRepository;
-
-    /**
-     * CachesRepository constructor.
-     *
-     * @param Connection            $connection
-     * @param LogTypesRepository    $logTypesRepository
-     * @param UserRepository        $userRepository
-     * @param PicturesRepository    $picturesRepository
-     * @param CacheRatingRepository $cacheRatingRepository
-     */
     public function __construct(
-            Connection $connection,
-            LogTypesRepository $logTypesRepository,
-            UserRepository $userRepository,
-            PicturesRepository $picturesRepository,
-            CacheRatingRepository $cacheRatingRepository
+        Connection $connection,
     ) {
         $this->connection = $connection;
-        $this->logTypesRepository = $logTypesRepository;
-        $this->userRepository = $userRepository;
-        $this->picturesRepository = $picturesRepository;
-        $this->cacheRatingRepository = $cacheRatingRepository;
     }
 
     /**
@@ -72,7 +45,7 @@ class CacheLogsRepository extends ServiceEntityRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -103,7 +76,7 @@ class CacheLogsRepository extends ServiceEntityRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -130,7 +103,7 @@ class CacheLogsRepository extends ServiceEntityRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -201,64 +174,16 @@ class CacheLogsRepository extends ServiceEntityRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCacheLogsEntity $entity): GeoCacheLogsEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCacheLogsEntity $entity): GeoCacheLogsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws RecordNotPersistedException
      */
-    public function remove(GeoCacheLogsEntity $entity): GeoCacheLogsEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
-
-        $entity->cacheId = 0;
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
@@ -282,72 +207,120 @@ class CacheLogsRepository extends ServiceEntityRepository
         }
     }
 
-    public function getDatabaseArrayFromEntity(GeoCacheLogsEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'uuid' => $entity->uuid,
-                'node' => $entity->node,
-                'date_created' => $entity->dateCreated,
-                'entry_last_modified' => $entity->entryLastModified,
-                'last_modified' => $entity->lastModified,
-                'okapi_syncbase' => $entity->okapiSyncbase,
-                'log_last_modified' => $entity->logLastModified,
-                'cache_id' => $entity->cacheId,
-                'user_id' => $entity->userId,
-                'type' => $entity->type,
-                'oc_team_comment' => $entity->ocTeamComment,
-                'date' => $entity->date,
-                'order_date' => $entity->orderDate,
-                'needs_maintenance' => $entity->needsMaintenance,
-                'listing_outdated' => $entity->listingOutdated,
-                'text' => $entity->text,
-                'text_html' => $entity->textHtml,
-                'text_htmledit' => $entity->textHtmledit,
-                'owner_notified' => $entity->ownerNotified,
-                'picture' => $entity->picture,
-                'gdpr_deletion' => $entity->gdprDeletion,
-                'logType' => $entity->logType,
-                'user' => $entity->user,
-                'pictures' => $entity->pictures,
-                'ratingCacheLog' => $entity->ratingCacheLog,
-        ];
-    }
 
     /**
      * @throws RecordNotFoundException
      * @throws \Exception
      */
-    public function getEntityFromDatabaseArray(array $data): GeoCacheLogsEntity
-    {
-        $entity = new GeoCacheLogsEntity();
-        $entity->id = (int)$data['id'];
-        $entity->uuid = (string)$data['uuid'];
-        $entity->node = (int)$data['node'];
-        $entity->dateCreated = new DateTime($data['date_created']);
-        $entity->entryLastModified = new DateTime($data['entry_last_modified']);
-        $entity->lastModified = new DateTime($data['last_modified']);
-        $entity->okapiSyncbase = (string)$data['okapi_syncbase'];
-        $entity->logLastModified = new DateTime($data['log_last_modified']);
-        $entity->cacheId = (int)$data['cache_id'];
-        $entity->userId = (int)$data['user_id'];
-        $entity->type = (int)$data['type'];
-        $entity->ocTeamComment = (int)$data['oc_team_comment'];
-        $entity->date = new DateTime($data['date']);
-        $entity->orderDate = new DateTime($data['order_date']);
-        $entity->needsMaintenance = (int)$data['needs_maintenance'];
-        $entity->listingOutdated = (int)$data['listing_outdated'];
-        $entity->text = (string)$data['text'];
-        $entity->textHtml = (int)$data['text_html'];
-        $entity->textHtmledit = (int)$data['text_htmledit'];
-        $entity->ownerNotified = (int)$data['owner_notified'];
-        $entity->picture = (int)$data['picture'];
-        $entity->gdprDeletion = (bool)$data['gdpr_deletion'];
-        $entity->logType = $this->logTypesRepository->fetchOneBy(['id' => $entity->type]);
-        $entity->user = $this->userRepository->fetchOneById($entity->userId);
-        $entity->pictures = $this->picturesRepository->fetchBy(['object_id' => $entity->id, 'object_type' => 1]);
-        $entity->ratingCacheLog = $this->cacheRatingRepository->getRatingUserCache(['cache_id' => $entity->cacheId, 'user_id' => $entity->userId,]);
 
-        return $entity;
+    // ── Extended query methods (CachesRepository refactor) ─────────────
+
+    /** @throws Exception */
+    public function fetchLogsByCacheId(int $cacheId, int $limit = 30): array
+    {
+        return $this->connection->createQueryBuilder()
+            ->select(
+                'cl.id', 'cl.uuid', 'cl.type', 'lt.en AS type_name',
+                "DATE_FORMAT(cl.date, '%Y-%m-%d') AS date",
+                'cl.text', 'cl.text_html', 'cl.user_id',
+                'u.username'
+            )
+            ->from(self::TABLE, 'cl')
+            ->join('cl', 'user', 'u', 'cl.user_id = u.user_id')
+            ->leftJoin('cl', 'log_types', 'lt', 'cl.type = lt.id')
+            ->where('cl.cache_id = :cacheId')
+            ->andWhere('cl.gdpr_deletion = 0')
+            ->orderBy('cl.date', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
+    }
+
+    /** @throws Exception */
+    public function fetchForAuth(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'user_id', 'cache_id')
+            ->from(self::TABLE)
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function countDuplicatesByUserAndType(int $cacheId, int $userId, int $type, ?int $excludeLogId): int
+    {
+        $qb = $this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from(self::TABLE)
+            ->where('cache_id = :cacheId')
+            ->andWhere('user_id = :userId')
+            ->andWhere('type = :type')
+            ->setParameters([
+                'cacheId' => $cacheId,
+                'userId'  => $userId,
+                'type'    => $type,
+            ]);
+
+        if ($excludeLogId !== null) {
+            $qb->andWhere('id <> :excludeId')
+               ->setParameter('excludeId', $excludeLogId);
+        }
+
+        return (int)$qb->executeQuery()->fetchOne();
+    }
+
+    /** @throws Exception */
+    public function insertLogSimple(int $cacheId, int $userId, int $type, string $date, string $text): int
+    {
+        $this->connection->executeStatement(
+            'INSERT INTO cache_logs (node, cache_id, user_id, type, date, text, text_html, text_htmledit, picture, needs_maintenance, listing_outdated)
+             VALUES (4, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0)',
+            [$cacheId, $userId, $type, $date, $text]
+        );
+        return (int)$this->connection->lastInsertId();
+    }
+
+    /** @throws Exception */
+    public function updateLogSimple(int $logId, int $type, string $date, string $text): void
+    {
+        $this->connection->executeStatement(
+            'UPDATE cache_logs SET type = ?, date = ?, text = ?, text_html = 0 WHERE id = ?',
+            [$type, $date, $text, $logId]
+        );
+    }
+
+    /** @throws Exception */
+    public function deleteLogById(int $logId): void
+    {
+        $this->connection->delete(self::TABLE, ['id' => $logId]);
+    }
+
+    /** @throws Exception */
+    public function fetchLogForResponse(int $logId): ?array
+    {
+        $result = $this->connection->createQueryBuilder()
+            ->select('id', 'uuid', 'type', "DATE_FORMAT(date, '%Y-%m-%d') AS date", 'text', 'text_html')
+            ->from(self::TABLE)
+            ->where('id = :logId')
+            ->setParameter('logId', $logId)
+            ->executeQuery()
+            ->fetchAssociative();
+
+        return $result ?: null;
+    }
+
+    /** @throws Exception */
+    public function countTotalLogs(): int
+    {
+        return (int)$this->connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from(self::TABLE)
+            ->executeQuery()
+            ->fetchOne();
     }
 }

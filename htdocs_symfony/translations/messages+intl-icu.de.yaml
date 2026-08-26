@@ -1,0 +1,533 @@
+Search: Suche
+'Search caches': 'Caches suchen'
+'Search users': 'Benutzer suchen'
+'Identify coordinates format': 'Koordinatenformat erkennen'
+Hide: Verstecken
+'Live Map': Live-Karte
+News: News
+menuNewsBlog: Blog
+menuNewsEvents: Events
+menuNewsLogpictures: Logbilder
+menuNewsRecommendations: Empfehlungen
+menuNewsHidesGermany: 'Verstecke Deutschland'
+menuNewsHidesWorld: 'Verstecke Welt'
+menuNewsLogs: Logs
+'Bookmark lists': Lesezeichen
+menuBookmarksWatch: Beobachtungsliste
+menuBookmarksOwnLists: 'Eigene Listen'
+menuBookmarksPublicLists: 'Öffentliche Listen'
+menuBookmarksRecommendations: Empfehlungen
+menuBookmarksSearches: 'Gespeicherte Suchen'
+menuBookmarksIgnore: Ignorierliste
+'Field Notes': 'Field Notes'
+Contact: Kontakt
+'OC.de & legal': 'OC.de & Rechtliches'
+About: 'Über uns'
+'Data license': Datenlizenz
+'Privacy policy': Datenschutzerklärung
+Imprint: Impressum
+'Terms of use': Nutzungsbedingungen
+OCOnly-81: OCOnly-81
+'Support Center': 'Support Center'
+'DEV Kitchensink': 'DEV Kitchensink'
+'DEV Roles': 'DEV Rollen'
+'Search for caches and users': 'Caches und Benutzer suchen'
+Found: Gefunden
+cache(s): Cache(s)
+'OC code': OC-Code
+'Cache title': Cache-Titel
+'Owner name': Owner-Name
+Details: Details
+'No cache found': 'Kein Cache gefunden'
+Difficulty: Schwierigkeit
+Terrain: Terrain
+by: von
+OC: OC
+Title: Titel
+'Cache size': Cache-Größe
+'Time required': Zeitbedarf
+D/T: D/T
+Owner: Besitzer
+Position: Position
+GC-Code: GC-Code
+Status: Status
+'Has logpassword': Logpasswort
+Published: Veröffentlicht
+'Publishe date': Veröffentlichungsdatum
+'Last change': 'Letzte Änderung'
+'Listing url': Listing-URL
+Country: Land
+'Will attend': 'Werde teilnehmen'
+Attended: Teilgenommen
+'Not found': 'Nicht gefunden'
+Note: Notiz
+Watchers: Beobachter
+Ignorers: Ignorierende
+'Page visits': Seitenaufrufe
+'Log pictures': Logbilder
+Recommendations: Empfehlungen
+'Geokrety history': Geokrety-Historie
+Geokrety: Geokrety
+'Show on map': 'Auf Karte anzeigen'
+'Will Attend': 'Werde teilnehmen'
+Attendend: Teilgenommen
+'Did not found': 'Nicht gefunden'
+'The geocache is in good or acceptable condition.': 'Der Geocache ist in gutem oder akzeptablem Zustand.'
+'The geocache needs maintenance.': 'Der Geocache benötigt Wartung.'
+'The geocache description is ok.': 'Die Cache-Beschreibung ist in Ordnung.'
+'The geocache description is outdated.': 'Die Cache-Beschreibung ist veraltet.'
+'found the geocache': 'hat den Geocache gefunden'
+"didn't find the geoacache": 'hat den Geocache nicht gefunden'
+'wrote a note': 'hat eine Notiz geschrieben'
+'has visited the event': 'hat am Event teilgenommen'
+'wants to visit the event': 'möchte am Event teilnehmen'
+'has archived the geocache': 'hat den Geocache archiviert'
+'has activated the geocache': 'hat den Geocache aktiviert'
+'has maintained the geocache': 'hat den Geocache gewartet'
+'has disabled the geocache': 'hat den Geocache deaktiviert'
+'has locked the geocache': 'hat den Geocache gesperrt'
+'has locked and hidden the geocache': 'hat den Geocache gesperrt und versteckt'
+'Pictures for this log entry:': 'Bilder zu diesem Logeintrag:'
+'No log entries found': 'Keine Logeinträge gefunden'
+'Something went wrong': 'Etwas ist schiefgegangen'
+'Dear user, you are facing a login block you received because of .. your behavior..': 'Hallo, du siehst eine Login-Sperre, die du aufgrund deines Verhaltens erhalten hast.'
+'Here you can find some useful information how to behave correctly': 'Hier findest du nützliche Hinweise zum korrekten Verhalten'
+'Additionally our Support team left an individual message for you': 'Zusätzlich hat unser Support-Team eine persönliche Nachricht für dich hinterlassen'
+'The time your login was blocked has expired. You can login as usual if you acknowledge that you have read above messages.': 'Die Zeitsperre deines Logins ist abgelaufen. Du kannst dich wie gewohnt anmelden, sobald du bestätigst, dass du obige Hinweise gelesen hast.'
+'Press this button': 'Diesen Button drücken'
+Confirm: Bestätigen
+'The time your login was blocked has not yet expired.': 'Die Zeitsperre deines Logins ist noch nicht abgelaufen.'
+'User details': Benutzerdetails
+user(s): Benutzer
+'User Id': Benutzer-ID
+Username: Benutzername
+'No user found': 'Kein Benutzer gefunden'
+'Public information': 'Öffentliche Informationen'
+'Details for user': 'Details zum Benutzer'
+'Last login': 'Letzte Anmeldung'
+Description: Beschreibung
+'Hidden information': 'Verborgene Informationen'
+'User ID': Benutzer-ID
+Email: E-Mail
+'Email validity': E-Mail-Gültigkeit
+'Account created': 'Konto erstellt'
+'User active': 'Benutzer aktiv'
+'Activation code': Aktivierungscode
+'First name': Vorname
+'Last name': Nachname
+'GDPR deleted': 'DSGVO gelöscht'
+'Input coordinates in Decimal degree': 'Koordinaten in Dezimalgrad eingeben'
+'Converted coordinates': 'Umgerechnete Koordinaten'
+'Decimal degree': Dezimalgrad
+'Degrees Minutes': 'Grad Minuten'
+'Degrees Minutes Seconds': 'Grad Minuten Sekunden'
+'Gauss Kruger': Gauß-Krüger
+'Coordinates conversion was not possible': 'Koordinatenumrechnung war nicht möglich'
+'You can access this page directly by adding latitude and longitude to the URL (in Decimal degree)': 'Du kannst diese Seite direkt aufrufen, indem du Breiten- und Längengrad (in Dezimalgrad) an die URL anhängst'
+Command: Befehl
+'Check which formats your coordinates match': 'Prüfen, welche Formate auf deine Koordinaten passen'
+'Following coordinates formats were checked': 'Folgende Koordinatenformate wurden geprüft'
+Format: Format
+Variant: Variante
+'Matched?': 'Treffer?'
+Regex: Regex
+'No matching coordinate formats found': 'Keine passenden Koordinatenformate gefunden'
+Examples: Beispiele
+OCOnly81: OCOnly81
+'OConly-81 is a challenge about finding OCOnly caches under varying conditions, i.e. with different difficulty and terrain ratings. To participate you can enable the OCOnly81 statistics in your user profile settings.': 'OCOnly-81 ist eine Challenge, bei der OCOnly-Caches unter wechselnden Bedingungen gefunden werden, d.h. mit unterschiedlichen Schwierigkeits- und Terrain-Wertungen. Zur Teilnahme kannst du die OCOnly81-Statistik in deinen Profileinstellungen aktivieren.'
+Participants: Teilnehmer
+'Users with OCOnly81 statistics enabled': 'Benutzer mit aktivierter OCOnly81-Statistik'
+'No OCOnly81 users found': 'Keine OCOnly81-Benutzer gefunden'
+Statistics: Statistiken
+'Distribution of difficulty and terrain values across all OCOnly81 caches': 'Verteilung der Schwierigkeits- und Terrain-Werte über alle OCOnly81-Caches'
+'No OCOnly81 statistics found': 'Keine OCOnly81-Statistiken gefunden'
+'Server information': Serverinformationen
+Key: Schlüssel
+Value: Wert
+'No server informnation available': 'Keine Serverinformationen verfügbar'
+'Installed composer packages': 'Installierte Composer-Pakete'
+'No installed composer packages found': 'Keine installierten Composer-Pakete gefunden'
+Profile: Profil
+Settings: Einstellungen
+Logout: Abmelden
+Login: Anmelden
+'Assignment and removal of team roles': 'Zuweisung und Entzug von Team-Rollen'
+Role(s): Rolle(n)
+'Remove role': 'Rolle entziehen'
+Grant: Zuweisen
+'Grant ROLE_TEAM': 'ROLE_TEAM zuweisen'
+'No user data found': 'Keine Benutzerdaten gefunden'
+'Security roles': Sicherheitsrollen
+'You are': 'Du bist'
+id: ID
+'Your role(s)': 'Deine Rolle(n)'
+'Show team overview': 'Team-Übersicht anzeigen'
+'Assign and remove roles': 'Rollen zuweisen und entziehen'
+'List of all roles': 'Liste aller Rollen'
+Role: Rolle
+Access: Zugriff
+'✔️ You have access to this ROLE': '✔️ Du hast Zugriff auf diese ROLE'
+"🔴 Sorry. You don't have access to this ROLE": '🔴 Leider hast du keinen Zugriff auf diese ROLE'
+'The team': 'Das Team'
+'No team members found': 'Keine Team-Mitglieder gefunden'
+'OCC replacement page': OCC-Ersatzseite
+'User related information': 'Benutzerbezogene Informationen'
+User: Benutzer
+'Send message': 'Nachricht senden'
+User-ID: Benutzer-ID
+'No user relations found': 'Keine Benutzerbezüge gefunden'
+'User related comments': 'Benutzerbezogene Kommentare'
+'Save comment': 'Kommentar speichern'
+'Add date & user name': 'Datum & Benutzername hinzufügen'
+'Cache related information': 'Cache-bezogene Informationen'
+Cache: Cache
+'Watch Listing': 'Listing beobachten'
+'Assign listing for check': 'Listing zur Prüfung zuweisen'
+'Report listing': 'Listing melden'
+Cache-ID: Cache-ID
+'No cache data on other nodes found': 'Keine Cache-Daten auf anderen Knoten gefunden'
+'Cache related comments': 'Cache-bezogene Kommentare'
+'Import GPX file': 'GPX-Datei importieren'
+'Caches read from file': 'Aus Datei gelesene Caches'
+'-> found a reference to an OC cache': '-> Verweis auf einen OC-Cache gefunden'
+'-> changes to former imports detected': '-> Änderungen gegenüber früheren Importen erkannt'
+'-> caches that could not clearly assigned': '-> Caches, die nicht eindeutig zugeordnet werden konnten'
+'Start upload': 'Upload starten'
+'List of successful imports in the last 30 days': 'Liste der erfolgreichen Importe der letzten 30 Tage'
+Id: ID
+Waypoint: Wegpunkt
+Size: Größe
+Longitude: Längengrad
+Latitude: Breitengrad
+Available: Verfügbar
+Archived: Archiviert
+'Last modified': 'Zuletzt geändert'
+'Differences between imported Caches and their OC pendants': 'Unterschiede zwischen importierten Caches und ihren OC-Pendants'
+'(OC cache information first)': '(OC-Cache-Informationen zuerst)'
+Waypoints: Wegpunkte
+'Anti vandalism page': Anti-Vandalismus-Seite
+'No data found': 'Keine Daten gefunden'
+'Cache history': Cache-Historie
+'Cache reports': Cache-Meldungen
+'Report date': Meldedatum
+'Reported by': 'Gemeldet von'
+Reason: Grund
+Admin: Admin
+'No caches reports found': 'Keine Cache-Meldungen gefunden'
+'Deleted logs': 'Gelöschte Logs'
+'Log date': Log-Datum
+'Logged by': 'Geloggt von'
+'Deletion date': Löschdatum
+'Deleted by': 'Gelöscht von'
+'Log text': Log-Text
+'No log deletions found': 'Keine gelöschten Logs gefunden'
+'Status changes': Statusänderungen
+'since June 2013': 'seit Juni 2013'
+Date: Datum
+'Changed by': 'Geändert von'
+'No status changes found': 'Keine Statusänderungen gefunden'
+'Coordinate changes': Koordinatenänderungen
+Coordinates: Koordinaten
+'Restored by': 'Wiederhergestellt von'
+'No coordinates changes found': 'Keine Koordinatenänderungen gefunden'
+Adoptions: Adoptionen
+'since September 2012': 'seit September 2012'
+'From owner': 'Vom Owner'
+'To owner': 'An Owner'
+'No adoptions found': 'Keine Adoptionen gefunden'
+"' is not disabled! To reset one or more caches to a previous version, you need the user's permission!": "' ist nicht deaktiviert! Um einen oder mehrere Caches auf eine frühere Version zurückzusetzen, benötigst du die Zustimmung des Benutzers!"
+'Warning: If you revert any owner-made listing changes of today, your revert will be final. It cannot be corrected / undone afterwards. Only reverts of coords & country, logs and pictures will be logged in this case, so all other changes will not be comprehensible. Therefore it is strongly recommended to revert vandalism not before the next day!': 'Warnung: Wenn du heute vom Owner vorgenommene Listing-Änderungen zurücksetzt, ist dies endgültig. Eine spätere Korrektur oder Rücknahme ist nicht möglich. Nur Rücksetzungen von Koordinaten & Land, Logs und Bildern werden in diesem Fall protokolliert; alle anderen Änderungen werden nicht nachvollziehbar sein. Es wird daher dringend empfohlen, Vandalismus frühestens am nächsten Tag zurückzusetzen!'
+'Following listing is affected': 'Folgendes Listing ist betroffen'
+'Please select the date from which all changes are to be reverted.': 'Bitte wähle das Datum, ab dem alle Änderungen zurückgesetzt werden sollen.'
+'The listing will be reset to the contents it had on that day at 00:00:00': 'Das Listing wird auf den Stand zurückgesetzt, den es an diesem Tag um 00:00:00 hatte'
+Changes: Änderungen
+Restore: Wiederherstellen
+'coordinates and country': 'Koordinaten und Land'
+'name, type, size, d/t, search time, way length, GC waypoint and hide-date (will always be restored)': 'Name, Typ, Größe, D/T, Suchzeit, Weglänge, GC-Wegpunkt und Versteckdatum (werden immer wiederhergestellt)'
+attributes: Attribute
+'description(s),but without pictures (picture restore is not yet possible to handle)': 'Beschreibung(en), aber ohne Bilder (Bilder-Wiederherstellung ist noch nicht möglich)'
+'logs, but without pictures (picture restore is not yet possible to handle)': 'Logs, aber ohne Bilder (Bilder-Wiederherstellung ist noch nicht möglich)'
+'The user has allowed to reset the selected cache to a previous version.': 'Der Benutzer hat zugestimmt, den ausgewählten Cache auf eine frühere Version zurückzusetzen.'
+'Are you sure?': 'Bist du sicher?'
+'Simulate?': 'Simulieren?'
+'No restorable changes found': 'Keine wiederherstellbaren Änderungen gefunden'
+'Reported caches': 'Gemeldete Caches'
+'Bonus caches': Bonus-Caches
+'Database queries': Datenbankabfragen
+'GPX import': GPX-Import
+'Assign caches to a bonus cache': 'Caches einem Bonus-Cache zuordnen'
+'Caches found': 'Caches gefunden'
+'Assign to bonus cache': 'Zum Bonus-Cache zuordnen'
+Go: Los
+'No caches found': 'Keine Caches gefunden'
+'Assign a cache to a bonus cache': 'Einen Cache einem Bonus-Cache zuordnen'
+'1st field: waypoint. 2nd field: waypoint that is the bonus cache. (To mark a cache as bonus cache leave the first field empty.)': '1. Feld: Wegpunkt. 2. Feld: Wegpunkt des Bonus-Caches. (Um einen Cache als Bonus-Cache zu markieren, das erste Feld leer lassen.)'
+Execute: Ausführen
+'Is a bonus cache?': 'Ist ein Bonus-Cache?'
+'Belongs to bonus cache': 'Gehört zu Bonus-Cache'
+'Assign other caches to this bonus cache (from the same owner)': 'Weitere Caches diesem Bonus-Cache zuordnen (vom selben Owner)'
+'Remove which bonus information?': 'Welche Bonus-Information entfernen?'
+'Belongs to bonus': 'Gehört zu Bonus'
+'Is bonus cache': 'Ist Bonus-Cache'
+Both: Beide
+'Searched caches': 'Gesuchte Caches'
+'GC code (user)': 'GC-Code (Benutzer)'
+'GC code (maint.)': 'GC-Code (Wartung)'
+'Cache name': Cache-Name
+OCC: OCC
+'User account details': Benutzerkonto-Details
+Vandalism: Vandalismus
+'Log entries': Logeinträge
+'Caches hidden': 'Versteckte Caches'
+'Active caches hidden': 'Aktive versteckte Caches'
+'User login is blocked until': 'Benutzer-Login gesperrt bis'
+'Set account inactive (and lock caches)': 'Konto inaktiv setzen (und Caches sperren)'
+'Execute (not yet working)': 'Ausführen (funktioniert noch nicht)'
+'Set login block for x days (caches will not be locked)': 'Login-Sperre für x Tage setzen (Caches werden nicht gesperrt)'
+'Extra message to the user (optional)': 'Zusätzliche Nachricht an den Benutzer (optional)'
+'GDPR conform account deletion': 'DSGVO-konforme Kontolöschung'
+'Mark email address as invalid': 'E-Mail-Adresse als ungültig markieren'
+Query: Abfrage
+SQL: SQL
+'List caches from users whose registration date is not older than 31 days.': 'Caches von Benutzern auflisten, deren Registrierungsdatum nicht älter als 31 Tage ist.'
+'List user whose registration date is not older than 31 days.': 'Benutzer auflisten, deren Registrierungsdatum nicht älter als 31 Tage ist.'
+'List user with foreign IPs whose registration date is not older than 31 days.': 'Benutzer mit ausländischen IPs auflisten, deren Registrierungsdatum nicht älter als 31 Tage ist.'
+'List (non-archived, non-locked) caches from users whose last login date is older than one year, and the caches have DNF or note logs.': '(Nicht-archivierte, nicht-gesperrte) Caches von Benutzern auflisten, deren letzte Anmeldung länger als ein Jahr zurückliegt und deren Caches DNF- oder Notiz-Logs haben.'
+'List user where a support user left a comment (OCC).': 'Benutzer auflisten, bei denen ein Support-Benutzer einen Kommentar hinterlassen hat (OCC).'
+"Create a current list of 'Dornröschen' caches.": "Eine aktuelle Liste von ''Dornröschen''-Caches erstellen."
+'Flexible SQL queries': 'Flexible SQL-Abfragen'
+'User name': Benutzername
+'User registration date': Registrierungsdatum
+'No entries found': 'Keine Einträge gefunden'
+'Cache Id': Cache-ID
+'# DNFs or notes': '# DNFs oder Notizen'
+'#': '#'
+Comment: Kommentar
+'Comment created': 'Kommentar erstellt'
+'Comment last modified': 'Kommentar zuletzt geändert'
+'Details for report of': 'Details zur Meldung von'
+'Nearby search at geocaching.com': 'Umkreissuche auf geocaching.com'
+'Report created': 'Meldung erstellt'
+'Report last modified': 'Meldung zuletzt geändert'
+State: Status
+'Reporter comment': Melder-Kommentar
+'Admin comment': Admin-Kommentar
+Action: Aktion
+'Assign to me': 'Mir zuweisen'
+'Remove my assignment': 'Meine Zuweisung entfernen'
+'Contact Owner': 'Owner kontaktieren'
+'Contact Reporter': 'Melder kontaktieren'
+'Mark as finished': 'Als erledigt markieren'
+'Set state': 'Status setzen'
+'No reported caches found': 'Keine gemeldeten Caches gefunden'
+'Account activation': Kontoaktivierung
+'Account was successfully activated': 'Konto wurde erfolgreich aktiviert'
+'Account activation was not successfull. Please try again.': 'Kontoaktivierung war nicht erfolgreich. Bitte erneut versuchen.'
+'Activate account': 'Konto aktivieren'
+'Activate user account': 'Benutzerkonto aktivieren'
+'To complete the registration, you have to enter your e-mail address and activation code.': 'Um die Registrierung abzuschließen, musst du deine E-Mail-Adresse und den Aktivierungscode eingeben.'
+E-Mail: E-Mail
+Submit: Absenden
+'Registration done': 'Registrierung abgeschlossen'
+'New user registered': 'Neuer Benutzer registriert'
+'The activation code was sent with an E-Mail to you.': 'Der Aktivierungscode wurde dir per E-Mail zugesandt.'
+'Please follow the instructions in the E-Mail.': 'Bitte folge den Anweisungen in der E-Mail.'
+'If you do not see any E-Mail, please check the spam folder of your mailbox.': 'Falls du keine E-Mail siehst, prüfe bitte den Spam-Ordner deines Postfachs.'
+'Continue to account activation': 'Weiter zur Kontoaktivierung'
+'Register a new user': 'Neuen Benutzer registrieren'
+'You are already logged in as': 'Du bist bereits angemeldet als'
+"To create an account at Opencaching.de, you have to enter a vaild e-mail address and a user name.\n                   An activation code will be sent to the e-mail address you supplied.": "Um ein Konto bei Opencaching.de zu erstellen, musst du eine gültige E-Mail-Adresse und einen Benutzernamen angeben.\n                   Ein Aktivierungscode wird an die angegebene E-Mail-Adresse gesendet."
+'Only one account can be created per E-Mail address. First name, last name and country are optional.': 'Pro E-Mail-Adresse kann nur ein Konto erstellt werden. Vorname, Nachname und Land sind optional.'
+E-mail: E-Mail
+'Your Password': 'Dein Passwort'
+'Confirm password': 'Passwort bestätigen'
+"I've read and understand the privacy statement, the terms of service and the Data license and accept them.": 'Ich habe die Datenschutzerklärung, die Nutzungsbedingungen und die Datenlizenz gelesen, verstanden und akzeptiere sie.'
+'Additional Waypoints': 'Zusätzliche Wegpunkte'
+'Personal Cache Notes': 'Persönliche Cache-Notizen'
+'Delete Log': 'Log löschen'
+Save: Speichern
+'New Log': 'Neuer Log'
+'Latest Logs': 'Neueste Logs'
+'Loading logs...': 'Logs werden geladen...'
+'Log in!': 'Anmelden!'
+Password: Passwort
+'Submit a new cache': 'Einen neuen Cache einreichen'
+'Edit cache': 'Cache bearbeiten'
+'Update cache': 'Cache aktualisieren'
+'Submit cache': 'Cache absenden'
+'Some errors occurred, please check the marked fields.': 'Es sind Fehler aufgetreten, bitte prüfe die markierten Felder.'
+'Basic information': 'Grundlegende Informationen'
+Name: Name
+'Please select': 'Bitte auswählen'
+Type: Typ
+'Difficulty / Terrain': 'Schwierigkeit / Terrain'
+D: D
+T: T
+'Cache attributes': 'Cache-Attribute'
+Language: Sprache
+'Short description': 'Kurzbeschreibung'
+'Hint (encrypted)': 'Hinweis (verschlüsselt)'
+'Personal notes & corrected coordinates': 'Persönliche Notizen & korrigierte Koordinaten'
+'Personal cache note': 'Persönliche Cache-Notiz'
+'Corrected coordinates': 'Korrigierte Koordinaten'
+'Add waypoint': 'Wegpunkt hinzufügen'
+Remove: Entfernen
+Other: Sonstiges
+'Time effort (h)': 'Zeitaufwand (h)'
+'Distance (km)': 'Strecke (km)'
+'GC waypoint': 'GC-Wegpunkt'
+'Hidden since': 'Versteckt seit'
+Publication: Veröffentlichung
+'Publish now': 'Jetzt veröffentlichen'
+'Publish on': 'Veröffentlichen am'
+'Do not publish now': 'Jetzt nicht veröffentlichen'
+'Log password': 'Log-Passwort'
+'leave blank for none': 'frei lassen für keines'
+'I have read and agree to the Opencaching Terms of Service and Data License.': 'Ich habe die Opencaching-Nutzungsbedingungen und Datenlizenz gelesen und stimme ihnen zu.'
+'Pick on map': 'Auf Karte auswählen'
+'Pick coordinates on map': 'Koordinaten auf Karte auswählen'
+Cancel: Abbrechen
+'Use these coordinates': 'Diese Koordinaten übernehmen'
+'e.g. N51 02.345 E009 43.210 or 51.123,9.456': 'z.B. N51 02.345 E009 43.210 oder 51.123,9.456'
+'e.g. N51 02.345 E009 43.210': 'z.B. N51 02.345 E009 43.210'
+'Your personal notes about this cache (only visible to you)': 'Deine persönlichen Notizen zu diesem Cache (nur für dich sichtbar)'
+'Your own coordinates if the posted ones need correction (visible only to you)': 'Deine eigenen Koordinaten, falls die veröffentlichten korrigiert werden müssen (nur für dich sichtbar)'
+# Search caches page — template strings
+'Keyword / WP code / owner': 'Stichwort / WP-Code / Owner'
+'e.g. Forest, OC12345, username': 'z.B. Wald, OC12345, Benutzername'
+'Near city': 'In der Nähe von'
+'e.g. Berlin, Hamburg': 'z.B. Berlin, Hamburg'
+'Radius (km)': 'Radius (km)'
+'— no limit —': '— kein Limit —'
+'All types': 'Alle Typen'
+'Min D': 'Min D'
+'Max D': 'Max D'
+'Active only': 'Nur aktive'
+'OC only': 'Nur OC'
+Actions: Aktionen
+# Search caches page — JS dynamic strings (window.OCI18n)
+'Searching…': 'Suche läuft…'
+'Found %count% cache(s)': '%count% Cache(s) gefunden'
+'No caches found.': 'Keine Caches gefunden.'
+'limit reached — refine filters': 'Limit erreicht — Filter verfeinern'
+'limit reached': 'Limit erreicht'
+'%count% selected': '%count% ausgewählt'
+'No coordinates available for these results.': 'Keine Koordinaten für diese Ergebnisse verfügbar.'
+'OC Code': 'OC-Code'
+# Reported caches page
+'Loaded %count% report(s)': '%count% Meldung(en) geladen'
+'No reports found.': 'Keine Meldungen gefunden.'
+'All statuses': 'Alle Status'
+'New': 'Neu'
+'In Progress': 'In Bearbeitung'
+Done: Erledigt
+# Search users page
+'Username / email / ID': 'Benutzername / E-Mail / ID'
+'e.g. username': 'z.B. Benutzername'
+'e.g. username, user@example.com, 12345': 'z.B. Benutzername, benutzer@beispiel.de, 12345'
+'Found %count% user(s)': '%count% Benutzer gefunden'
+'No users found.': 'Keine Benutzer gefunden.'
+Joined: Registriert
+Finds: Funde
+Hides: Verstecke
+# User profile page
+'Email valid': 'E-Mail gültig'
+Active: Aktiv
+'Account info': 'Kontoinformationen'
+Modified: Geändert
+Created: Erstellt
+# Map popup (cache markers)
+'by:': 'von:'
+'Published:': 'Veröffentlicht:'
+'Finds:': 'Funde:'
+'Found:': 'Gefunden:'
+# Home page
+'Quick access': 'Schnellzugriff'
+'Hide a cache': 'Cache verstecken'
+'What is geocaching?': 'Was ist Geocaching?'
+'Find': 'Finden'
+'Log it': 'Loggen'
+'Hide it': 'Verstecken'
+'Get involved': 'Mitmachen'
+'Why OpenCaching?': 'Warum OpenCaching?'
+'To the map': 'Zur Karte'
+'Active caches': 'Aktive Caches'
+'Members': 'Mitglieder'
+'The open geocaching network — free, open, community-driven.': 'Das offene Geocaching-Netzwerk — kostenlos, frei, von der Community getragen.'
+'No Google dependency': 'Keine Google-Abhängigkeit'
+'Completely free — no premium plans': 'Komplett kostenlos — keine Premium-Tarife'
+'Open data, open code': 'Offene Daten, offener Code'
+'No tracking, no ads': 'Kein Tracking, keine Werbung'
+'GDPR-compliant, servers in Germany': 'DSGVO-konform, Server in Deutschland'
+'API for everyone — openly documented': 'API für alle — offen dokumentiert'
+'Dark mode & mobile support': 'Dark Mode & Mobile-Support'
+'OpenCaching is part of a worldwide network of independent geocaching platforms.': 'OpenCaching ist Teil eines weltweiten Netzwerks unabhängiger Geocaching-Plattformen.'
+'Find a cache near you and navigate by GPS to the coordinates.': 'Suche einen Cache in deiner Nähe und navigiere mit GPS zu den Koordinaten.'
+'Sign the physical logbook and record your find online.': 'Trage dich im physischen Logbuch ein und logge online deinen Fund.'
+'Place your own cache and share your favourite spots with the community.': 'Lege selbst einen Cache an und teile deine Lieblingsorte mit der Community.'
+'OpenCaching is open, free and entirely community-driven.': 'OpenCaching ist offen, kostenlos und vollständig in der Hand der Community.'
+'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.': 'OpenCaching setzt keine proprietären Karten-APIs ein. Die Live-Karte läuft auf OpenStreetMap — offen, kostenlos, ohne API-Schlüssel.'
+# Cache detail page — table labels
+Reference: Referenz
+'State/Province': Bundesland
+'Listing Coords': 'Listing-Koordinaten'
+'Corrected Coords': 'Korrigierte Koordinaten'
+'Log Password': 'Log-Passwort'
+'D / T': 'D / T'
+'Find Count': Fundstatistik
+'Placed / Hidden': 'Versteckt am'
+'Found Date': Funddatum
+'DNF Date': 'DNF-Datum'
+'GC Code': 'GC-Code'
+Disabled: Deaktiviert
+'Needs maintenance': 'Benötigt Wartung'
+'Listing outdated': 'Listing veraltet'
+Hint: Hinweis
+# Cache detail page — log type names (JS)
+'Found it': Gefunden
+"Didn't find it": 'Nicht gefunden'
+'Ready to search': 'Bereit zum Suchen'
+'Temporarily unavailable': 'Temporär nicht verfügbar'
+# Cache detail page — JS UI strings
+Saved: Gespeichert
+'Post Log': 'Log posten'
+'Posted!': 'Gepostet!'
+'Saved!': 'Gespeichert!'
+'Compose New Log': 'Neuen Log verfassen'
+'Enter your log here...': 'Log hier eingeben …'
+'Delete this log from opencaching.de?': 'Diesen Log von opencaching.de löschen?'
+# Cache detail page — JS rendering strings
+'Joined:': 'Registriert'
+'Hides:': Verstecke
+'Hint:': 'Hinweis:'
+# Cache detail page — waypoint table columns
+Prefix: Präfix
+# Livemap filter modal
+'Filter Options': 'Filter-Optionen'
+All: Alle
+None: Keine
+Close: Schließen
+'Cache Types': 'Cache-Typen'
+Min: Min
+Max: Max
+Traditional: Traditional
+Multi: Multi
+Virtual: Virtuell
+Webcam: Webcam
+Event: Event
+Quiz: Quiz
+'Math/Physics': 'Mathe/Physik'
+Moving: Beweglich
+'Drive-in': Drive-in
+Owned: 'Eigene'
+DNF: DNF
+'Corrected coords': 'Korrigierte Koords'
+'Personal note': 'Persönliche Notiz'
+Filter: Filter
+'Open filter settings': 'Filtereinstellungen öffnen'
+# Livemap city search
+'City or village…': 'Stadt oder Dorf …'
+'My location': 'Mein Standort'
+'No results': 'Keine Ergebnisse'
+'Error searching': 'Fehler bei der Suche'
+'Location unavailable': 'Standort nicht verfügbar'

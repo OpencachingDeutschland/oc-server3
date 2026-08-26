@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b14d94518689434b9b06ca3be49f77a",
+    "content-hash": "9e342551e713effb1d9cffac778624c5",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3024,22 +3024,21 @@
         },
         {
             "name": "opencaching/okapi",
-            "version": "dev-master",
+            "version": "dev-oc4-combined",
             "source": {
                 "type": "git",
-                "url": "https://github.com/opencaching/okapi.git",
-                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90"
+                "url": "https://github.com/hxdimpf/okapi.git",
+                "reference": "b48f9c3e159d48776c1e313f63949caaae12ce99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/3aab5717104f94cc9e6e36964d772ac31ef76b90",
-                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90",
+                "url": "https://api.github.com/repos/hxdimpf/okapi/zipball/b48f9c3e159d48776c1e313f63949caaae12ce99",
+                "reference": "b48f9c3e159d48776c1e313f63949caaae12ce99",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -3047,10 +3046,9 @@
                 }
             },
             "support": {
-                "source": "https://github.com/opencaching/okapi/tree/master",
-                "issues": "https://github.com/opencaching/okapi/issues"
+                "source": "https://github.com/hxdimpf/okapi/tree/oc4-combined"
             },
-            "time": "2024-12-10T09:13:30+00:00"
+            "time": "2026-06-02T21:46:25+00:00"
         },
         {
             "name": "psr/cache",

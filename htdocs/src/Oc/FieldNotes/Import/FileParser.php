@@ -2,7 +2,10 @@
 
 namespace Oc\FieldNotes\Import;
 
+use League\Csv\Exception;
+use League\Csv\InvalidArgument;
 use League\Csv\Reader;
+use League\Csv\UnavailableStream;
 use Oc\FieldNotes\Exception\FileFormatException;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -19,7 +22,7 @@ class FileParser
     /**
      * @var StructMapper
      */
-    private $structMapper;
+    private StructMapper $structMapper;
 
     public function __construct(StructMapper $structMapper)
     {
@@ -27,11 +30,16 @@ class FileParser
     }
 
     /**
+     * @param File $file
+     * @return array
+     * @throws Exception
      * @throws FileFormatException
+     * @throws InvalidArgument
+     * @throws UnavailableStream
      */
     public function parseFile(File $file): array
     {
-        $csv = Reader::createFromPath($file->getRealPath());
+        $csv = Reader::from($file->getRealPath());
         $csv->setDelimiter(',');
         $csv->setEnclosure('"');
 
@@ -40,12 +48,15 @@ class FileParser
         return $this->structMapper->map($rows);
     }
 
-     /**
-      * @throws FileFormatException
-      */
+    /**
+     * @param Reader $csv
+     * @return array
+     * @throws FileFormatException
+     * @throws Exception
+     */
     private function getRowsFromCsv(Reader $csv): array
     {
-        $content = $csv->getContent();
+        $content = $csv->toString();
         $content = $this->decodeToUtf8($content);
         $rows = $this->parseCSV($content);
         return $rows;

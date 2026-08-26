@@ -7,21 +7,34 @@ namespace Oc\Command;
 
 use Exception;
 use ScssPhp\ScssPhp\Compiler;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use ScssPhp\ScssPhp\Exception\SassException;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
-class CreateWebCacheCommand extends ContainerAwareCommand
+class CreateWebCacheCommand extends Command
 {
-    const COMMAND_NAME = 'cache:web:create';
+    const string COMMAND_NAME = 'cache:web:create';
 
     /**
      * @var OutputInterface
      */
     private $output;
+
+    private string $projectDir;
+
+    /**
+     * @param ParameterBagInterface $parameterBag
+     */
+    public function __construct(ParameterBagInterface $parameterBag)
+    {
+        $this->projectDir = $parameterBag->get('kernel.project_dir');
+        parent::__construct();
+    }
 
     /**
      * Configures the command.
@@ -42,13 +55,16 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      * Executes the command.
      *
      *
-     * @return int|null
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return null
+     * @throws SassException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): null
     {
         $this->output = $output;
 
-        $projectDir = $this->getContainer()->getParameter('kernel.project_dir');
+        $projectDir = $this->projectDir;
 
         $output->writeln('Generating WebCache');
 
@@ -84,7 +100,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      *
      * @param string $projectDir
      */
-    private function compileJs($projectDir): void
+    private function compileJs(string $projectDir): void
     {
         $this->output->writeln('Generating javascript');
 
@@ -137,15 +153,16 @@ class CreateWebCacheCommand extends ContainerAwareCommand
      * Compiles scss to one file.
      *
      * @param string $projectDir
+     * @throws SassException
      */
-    private function compileCss($projectDir): void
+    private function compileCss(string $projectDir): void
     {
         $this->output->writeln('Generating stylesheets');
 
         $applicationScssPath = $projectDir . '/theme/frontend/scss/';
 
         $scss = new Compiler();
-        $scss->setIgnoreErrors(true);
+        $scss->setQuietDeps(true);
         $scss->addImportPath($applicationScssPath);
         $scss->addImportPath(function ($path) use ($projectDir) {
             //Check for tilde as this refers to the node_modules dir
@@ -181,12 +198,12 @@ class CreateWebCacheCommand extends ContainerAwareCommand
 
         file_put_contents(
             $projectDir . '/web/assets/css/style.min.css',
-            $scss->compile(file_get_contents($applicationScssPath . '/all.scss'))
+            $scss->compileString(file_get_contents($applicationScssPath . '/all.scss'))->getCss()
         );
 
         file_put_contents(
             $projectDir . '/web/assets/css/legacy.min.css',
-            $scss->compile(file_get_contents($applicationScssPath . '/legacy.scss'))
+            $scss->compileString(file_get_contents($applicationScssPath . '/legacy.scss'))->getCss()
         );
 
         $this->output->writeln('<info>- Stylesheets generated</info>');
@@ -195,7 +212,7 @@ class CreateWebCacheCommand extends ContainerAwareCommand
     /**
      * @param string $projectDir
      */
-    private function copyImages($projectDir): void
+    private function copyImages(string $projectDir): void
     {
         $this->output->writeln('Copying images');
 

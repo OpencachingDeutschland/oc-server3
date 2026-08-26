@@ -1,0 +1,5 @@
+framework:
+  translator:
+    default_path: '%kernel.project_dir%/app/Resources/translations'
+    paths:
+      - '%kernel.project_dir%/app/Resources/translations'

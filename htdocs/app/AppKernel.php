@@ -2,6 +2,7 @@
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
@@ -23,9 +24,9 @@ class AppKernel extends Kernel
     }
 
     /**
-     * @return array
+     * @return array|BundleInterface[]
      */
-    public function registerBundles()
+    public function registerBundles(): array
     {
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -34,7 +35,6 @@ class AppKernel extends Kernel
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
@@ -51,7 +51,7 @@ class AppKernel extends Kernel
     /**
      * @return string
      */
-    public function getRootDir()
+    public function getRootDir(): string
     {
         return __DIR__;
     }
@@ -59,7 +59,7 @@ class AppKernel extends Kernel
     /**
      * @return string
      */
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return dirname(__DIR__) . '/var/cache/' . $this->getEnvironment();
     }
@@ -67,13 +67,14 @@ class AppKernel extends Kernel
     /**
      * @return string
      */
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return dirname(__DIR__) . '/var/logs/' . $this->getEnvironment();
     }
 
     /**
-     * @throws \Exception
+     * @param LoaderInterface $loader
+     * @throws Exception
      */
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {

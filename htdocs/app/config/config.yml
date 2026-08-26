@@ -11,21 +11,21 @@ framework:
     translator:      { fallbacks: ["en"] }
     secret:          "%secret%"
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: "%kernel.project_dir%/app/config/routing.yml"
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
-    templating:
-        engines: ['twig']
+#    templating:
+#        engines: ['twig']
     default_locale:  "%locale%"
     trusted_hosts:   ~
     session:
         storage_id: session.storage.native
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         #handler_id:  session.handler.native_file
-        #save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        #save_path:   %kernel.project_dir%/../var/sessions/%kernel.environment%"
         handler_id: ~
     fragments:       ~
     http_method_override: true
@@ -57,7 +57,7 @@ doctrine:
         # Will be removed with my upcoming refactoring of field-notes.
         mappings:
             Oc:
-                type: annotation
+                type: attribute
                 prefix: Oc\
                 dir: '%kernel.project_dir%/src/Oc/'
                 is_bundle: false
@@ -67,7 +67,7 @@ doctrine:
 
 doctrine_migrations:
     migrations_paths:
-        'DoctrineMigrations': '%kernel.root_dir%/Migrations'
+        'DoctrineMigrations': '%kernel.project_dir%/app/Migrations'
     storage:
         table_storage:
             table_name: 'migration_versions'
@@ -89,8 +89,8 @@ jms_translation:
     configs:
         app:
             output_format: yml
-            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
-            output_dir: "%kernel.root_dir%/Resources/translations"
+            dirs: ["%kernel.project_dir%", "%kernel.project_dir%/src"]
+            output_dir: "%kernel.project_dir%/app/Resources/translations"
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]
             excluded_dirs: [cache, data, logs]

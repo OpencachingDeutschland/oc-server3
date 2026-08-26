@@ -35,7 +35,7 @@ class GlobalContextFactory
     public function createFromRequestStack(RequestStack $requestStack): GlobalContext
     {
         return $this->createFromRequest(
-            $requestStack->getMasterRequest()
+            $requestStack->getMainRequest()
         );
     }
 }

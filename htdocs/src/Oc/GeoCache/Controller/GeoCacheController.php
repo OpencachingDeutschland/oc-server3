@@ -29,9 +29,9 @@ class GeoCacheController extends AbstractController
     }
 
     /**
-     * @Route("/api/geocache/getReports")
      * @throws Exception
      */
+    #[Route(path: '/api/geocache/getReports')]
     public function getReportsAction(Request $request): Response
     {
         if ($this->apiSecret === 'ThisTokenIsNotSoSecretChangeIt') {

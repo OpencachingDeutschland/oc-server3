@@ -5,6 +5,7 @@
 
 namespace Oc\Command;
 
+use Doctrine\DBAL\Exception;
 use Oc\Postfix\JournalLogs;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,7 +16,7 @@ class JournaldPostfixLogsCommand extends SymfonyCommand
     /**
      * @var JournalLogs
      */
-    private $journalLogs;
+    private JournalLogs $journalLogs;
 
     public function __construct(JournalLogs $journalLogs)
     {
@@ -33,7 +34,13 @@ class JournaldPostfixLogsCommand extends SymfonyCommand
             ->setDescription('process postfix logs for support');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): ?int
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return null
+     * @throws Exception
+     */
+    protected function execute(InputInterface $input, OutputInterface $output): null
     {
         $this->journalLogs->processJournalLogs();
 

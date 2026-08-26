@@ -71,18 +71,6 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
-    "kevinpapst/adminlte-bundle": {
-        "version": "3.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.9",
-            "ref": "36a77f782cd6f7cd761384c6a301fedf018e37e5"
-        },
-        "files": [
-            "config/packages/admin_lte.yaml"
-        ]
-    },
     "knplabs/knp-menu": {
         "version": "v3.1.2"
     },

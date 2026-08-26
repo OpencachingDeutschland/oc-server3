@@ -16,7 +16,7 @@ printf '\n***\n*** run database and cache updates \n***\n'
 php bin/dbupdate.php
 
 printf '\n***\n*** Install OKAPI \n***\n'
-curl https://opencaching.ddev.site/okapi/update?install=true
+curl -k https://opencaching.ddev.site/okapi/update?install=true
 
 printf '\n***\n*** updating database structures ... \n***\n'
 php bin/dbsv-update.php
@@ -45,15 +45,15 @@ rm translations.zip
 
 printf '\n***\n*** htdocs: process translations \n***\n'
 cd /var/www/html
-./htdocs/bin/console translation:update de --force
-./htdocs/bin/console translation:update el --force
-./htdocs/bin/console translation:update en --force
-./htdocs/bin/console translation:update es --force
-./htdocs/bin/console translation:update fr --force
-./htdocs/bin/console translation:update it --force
-./htdocs/bin/console translation:update nl --force
-./htdocs/bin/console translation:update pl --force
-./htdocs/bin/console translation:update ru --force
+./htdocs/bin/console translation:extract de --force
+./htdocs/bin/console translation:extract el --force
+./htdocs/bin/console translation:extract en --force
+./htdocs/bin/console translation:extract es --force
+./htdocs/bin/console translation:extract fr --force
+./htdocs/bin/console translation:extract it --force
+./htdocs/bin/console translation:extract nl --force
+./htdocs/bin/console translation:extract pl --force
+./htdocs/bin/console translation:extract ru --force
 ./htdocs/bin/console translation:import-legacy-translation
 
 printf '\n***\n*** update root user in database \n***\n'

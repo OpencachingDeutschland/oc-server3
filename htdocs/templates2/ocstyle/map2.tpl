@@ -344,7 +344,7 @@ function mapLoad()
     if (bFullscreen && msInitSiderbarDisplay == "block")
     toggle_sidebar(false);
 
-    var maptypes = ['OSM'];
+    var maptypes = [];
     var initType = 'OSM';
 
     var myOptions = {

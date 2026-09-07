@@ -16,7 +16,7 @@ function register_errorhandlers(): void
     ini_set('error_log', get_errorlog_path());
 
     if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
-        set_error_handler('errorhandler', E_ALL);
+        set_error_handler('errorhandler', E_ERROR);
         set_exception_handler('exceptionhandler');
         register_shutdown_function('shutdownhandler');
     }

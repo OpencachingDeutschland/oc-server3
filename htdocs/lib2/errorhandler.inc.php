@@ -12,10 +12,63 @@ function register_errorhandlers(): void
 {
     global $opt;
 
+    ini_set('log_errors', '1');
+    ini_set('error_log', get_errorlog_path());
+
     if (isset($opt['gui']) && $opt['gui'] == GUI_HTML) {
-        set_error_handler('errorhandler', E_ERROR);
+        set_error_handler('errorhandler', E_ALL);
+        set_exception_handler('exceptionhandler');
         register_shutdown_function('shutdownhandler');
     }
+}
+
+function get_errorlog_path(): string
+{
+    return __DIR__ . '/../var/errorlog/errorlog-' . date('Y-m-d');
+}
+
+function log_php_error_message(string $message): void
+{
+    error_log($message, 3, get_errorlog_path());
+}
+
+function render_internal_error_page(string $errtitle, string $errmsg = ''): void
+{
+    if (!headers_sent()) {
+        header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+    }
+
+    require __DIR__ . '/../html/error.php';
+    exit;
+}
+
+function exceptionhandler(Throwable $exception): void
+{
+    global $error_handled;
+
+    if ($error_handled) {
+        if (!headers_sent()) {
+            header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
+        }
+        echo 'Internal Server Error';
+        exit;
+    }
+    $error_handled = true;
+
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '-';
+    $error = 'Uncaught ' . get_class($exception) . ': ' . $exception->getMessage()
+        . ' at line ' . $exception->getLine() . ' of ' . $exception->getFile();
+    $trace = $exception->getTraceAsString();
+
+    log_php_error_message(
+        date('Y-m-d H:i:s') . ' PHP EXCEPTION' . "\n"
+        . 'Request: ' . $request_uri . "\n"
+        . $error . "\n"
+        . $trace . "\n"
+        . "-------------------------------------------------------------------------\n\n"
+    );
+
+    render_internal_error_page('PHP-Fehler', display_error() ? $error : '');
 }
 
 /**
@@ -32,19 +85,11 @@ function errorhandler($errno, $errstr, $errfile, $errline): void
 
     if (!$error_handled) {
         $error_handled = true;
-        $errtitle = 'PHP-Fehler';
 
         $error = "($errno) $errstr at line $errline in $errfile";
         php_errormail($error);
 
-        if (display_error()) {
-            $errmsg = $error;
-        } else {
-            $errmsg = '';
-        }
-
-        require __DIR__ . '/../html/error.php';
-        exit;
+        render_internal_error_page('PHP-Fehler', display_error() ? $error : '');
     }
 }
 
@@ -75,13 +120,7 @@ function shutdownhandler(): void
             ' at line ' . $error['line'] . ' of ' . $error['file'];
         php_errormail($error);
 
-        $errtitle = 'PHP-Fehler';
-        $errmsg = '';
-        if (display_error()) {
-            $errmsg = $error;
-        }
-
-        require __DIR__ . '/../html/error.php';
+        render_internal_error_page('PHP-Fehler', display_error() ? $error : '');
     }
 }
 
@@ -101,7 +140,14 @@ function display_error()
  */
 function php_errormail($errmsg): void
 {
-    global $opt, $sql_errormail, $absolute_server_URI;
+    global $opt, $sql_errormail;
+
+    $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '-';
+    $message = date('Y-m-d H:i:s') . ' PHP ERROR' . "\n"
+        . 'Request: ' . $request_uri . "\n"
+        . $errmsg . "\n"
+        . "-------------------------------------------------------------------------\n\n";
+    log_php_error_message($message);
 
     $sendMail = true;
     $subject = '[' . $opt['page']['domain'] . '] PHP error';
@@ -113,8 +159,7 @@ function php_errormail($errmsg): void
     }
 
     if ($sendMail === false) {
-        // @todo implement logging
-        // throw new \RuntimeException('the E-Mail can not be send.');
+        log_php_error_message('PHP error mail delivery failed for subject: ' . $subject);
     }
 }
 
@@ -130,29 +175,17 @@ function php_errormail($errmsg): void
  */
 function admin_errormail($to, $errortype, $message, $headers)
 {
-    global $opt;
-    $errorlog_dir = __DIR__ . '/../var/errorlog';
-    $errorlog_path = $errorlog_dir . '/errorlog-' . date('Y-m-d');
+    $errorlog_path = get_errorlog_path();
 
     $error_mail_limit = 32768;    // send max 32 KB = ca. 5-20 errors per day/logfile
 
     // All errors which may happen here are ignored, to avoid error recursions.
 
-    if (!is_dir($errorlog_dir)) {
-        @mkdir($errorlog_dir);
-    }
     $old_logsize = @filesize($errorlog_path) + 0;
     $msg = date('Y-m-d H:i:s.u') . ' ' . $errortype . "\n" . $message . "\n" .
         "-------------------------------------------------------------------------\n\n";
-    try {
-        error_log(
-            $msg,
-            3, // log to file
-            $errorlog_path
-        );
-    } catch (Exception $e) {
-        // @todo implement logging
-    }
+    log_php_error_message($msg);
+
     // @filesize() may still return the old size here, because logging takes place
     // asynchronously. Instead we calculate the new size:
     $new_logsize = $old_logsize + strlen($msg);

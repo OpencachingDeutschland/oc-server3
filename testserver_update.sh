@@ -54,6 +54,8 @@ cd ${CODE_ROOT}
 ./htdocs/bin/console translation:update ru --force
 ./htdocs/bin/console translation:import-legacy-translation
 
+systemctl reload php-fpm.service
+
 printf '\n***\n*** htdocs_symfony: update caniuse list and yarns \n***\n'
 cd ${CODE_ROOT}/htdocs_symfony
 npx update-browserslist-db@latest -y

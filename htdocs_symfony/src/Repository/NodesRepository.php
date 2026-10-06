@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\NodesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class NodesRepository extends ServiceEntityRepository
+class NodesRepository
 {
     private const TABLE = 'nodes';
 
@@ -45,7 +43,7 @@ class NodesRepository extends ServiceEntityRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -76,7 +74,7 @@ class NodesRepository extends ServiceEntityRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -106,7 +104,7 @@ class NodesRepository extends ServiceEntityRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -116,86 +114,19 @@ class NodesRepository extends ServiceEntityRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(NodesEntity $entity): NodesEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws RecordNotPersistedException
      */
-    public function update(NodesEntity $entity): NodesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
      * @throws InvalidArgumentException
      * @throws RecordNotPersistedException
      */
-    public function remove(NodesEntity $entity): NodesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
 
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
 
-        $entity->id = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(NodesEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'name' => $entity->name,
-                'url' => $entity->url,
-                'waypoint_prefix' => $entity->waypointPrefix,
-        ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): NodesEntity
-    {
-        $entity = new NodesEntity();
-        $entity->id = (int)$data['id'];
-        $entity->name = (string)$data['name'];
-        $entity->url = (string)$data['url'];
-        $entity->waypointPrefix = (string)$data['waypoint_prefix'];
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotFoundException

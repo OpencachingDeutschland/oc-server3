@@ -622,8 +622,8 @@ if ($error == false) {
                             }
                             if ($logtype > 0) {
                                 sql(
-                                    "INSERT INTO `cache_logs` (`node`, `cache_id`, `user_id`, `type`, `date`)
-                                         VALUES ('&1','&2','&3','&4','&5')",
+                                    "INSERT INTO `cache_logs` (`node`, `cache_id`, `user_id`, `type`, `date`, `text`, `text_html`, `text_htmledit`, `picture`, `needs_maintenance`, `listing_outdated`, `oc_team_comment`, `owner_notified`, `gdpr_deletion`)
+                                         VALUES ('&1','&2','&3','&4','&5', '', 0, 0, 0, 0, 0, 0, 0, 0)",
                                     $oc_nodeid,
                                     $cache_id,
                                     $usr['userid'],

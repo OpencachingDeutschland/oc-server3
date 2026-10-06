@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
-use Oc\Entity\GeoCacheTypeEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CacheTypeRepository extends ServiceEntityRepository
+class CacheTypeRepository
 {
     private const TABLE = 'cache_type';
 
@@ -45,7 +43,7 @@ class CacheTypeRepository extends ServiceEntityRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -76,7 +74,7 @@ class CacheTypeRepository extends ServiceEntityRepository
             throw new RecordNotFoundException('Record with given where clause not found');
         }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -106,7 +104,7 @@ class CacheTypeRepository extends ServiceEntityRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -116,100 +114,31 @@ class CacheTypeRepository extends ServiceEntityRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-                self::TABLE,
-                $databaseArray
-        );
-
-        $entity->id = (int)$this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-                self::TABLE,
-                $databaseArray,
-                ['id' => $entity->id]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      * @throws InvalidArgumentException
      */
-    public function remove(GeoCacheTypeEntity $entity): GeoCacheTypeEntity
+
+
+
+    /** @throws Exception */
+    public function fetchLookupTypes(string $lang): array
     {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $this->connection->delete(
-                self::TABLE,
-                ['id' => $entity->id]
-        );
-
-        $entity->id = 0;
-
-        return $entity;
-    }
-
-    public function getDatabaseArrayFromEntity(GeoCacheTypeEntity $entity): array
-    {
-        return [
-                'id' => $entity->id,
-                'name' => $entity->name,
-                'trans_id' => $entity->transId,
-                'ordinal' => $entity->ordinal,
-                'short' => $entity->short,
-                'de' => $entity->de,
-                'en' => $entity->en,
-                'icon_large' => $entity->iconLarge,
-                'short2' => $entity->short2,
-                'short2_trans_id' => $entity->short2TransId,
-                'kml_name' => $entity->kmlName,
-                'svg_name' => $entity->svgName,
-        ];
-    }
-
-    public function getEntityFromDatabaseArray(array $data): GeoCacheTypeEntity
-    {
-        $entity = new GeoCacheTypeEntity();
-        $entity->id = (int)$data['id'];
-        $entity->name = (string)$data['name'];
-        $entity->transId = (int)$data['trans_id'];
-        $entity->ordinal = (int)$data['ordinal'];
-        $entity->short = (string)$data['short'];
-        $entity->de = (string)$data['de'];
-        $entity->en = (string)$data['en'];
-        $entity->iconLarge = (string)$data['icon_large'];
-        $entity->short2 = (string)$data['short2'];
-        $entity->short2TransId = (int)$data['short2_trans_id'];
-        $entity->kmlName = (string)$data['kml_name'];
-        $entity->svgName = (string)$data['svg_name'];
-
-        return $entity;
+        return $this->connection->createQueryBuilder()
+            ->select('ct.id', 'IFNULL(stt.text, ct.en) AS name')
+            ->from('cache_type', 'ct')
+            ->leftJoin('ct', 'sys_trans', 'st', 'ct.trans_id = st.id')
+            ->leftJoin('st', 'sys_trans_text', 'stt', 'st.id = stt.trans_id AND stt.lang = :lang')
+            ->orderBy('ct.ordinal')
+            ->setParameter('lang', $lang)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 }

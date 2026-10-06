@@ -29,7 +29,7 @@
 
         {% else %}
             {{ 'The time your login was blocked has not yet expired.' | trans }}
-            {{ 'You have to wait until ' ~ user_login_block.loginBlockUntil | date('d.m.Y H:m') ~ ' before you can login as usual.' }}
+            {{ 'You have to wait until ' ~ user_login_block.login_block_until | date('d.m.Y H:m') ~ ' before you can login as usual.' }}
         {% endif %}
     </div>
 {% endblock %}

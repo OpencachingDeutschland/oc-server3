@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Oc\Entity\GeoCachesAttributesEntity;
 use Oc\Repository\Exception\RecordAlreadyExistsException;
 use Oc\Repository\Exception\RecordNotFoundException;
 use Oc\Repository\Exception\RecordNotPersistedException;
 use Oc\Repository\Exception\RecordsNotFoundException;
 
-class CachesAttributesRepository extends ServiceEntityRepository
+class CachesAttributesRepository
 {
     private const TABLE = 'caches_attributes';
 
@@ -44,7 +42,7 @@ class CachesAttributesRepository extends ServiceEntityRepository
         $records = [];
 
         foreach ($result as $item) {
-            $records[] = $this->getEntityFromDatabaseArray($item);
+            $records[] = $item;
         }
 
         return $records;
@@ -75,7 +73,7 @@ class CachesAttributesRepository extends ServiceEntityRepository
 //            throw new RecordNotFoundException('Record with given where clause not found');
 //        }
 
-        return $this->getEntityFromDatabaseArray($result);
+        return $result ?: null;
     }
 
     /**
@@ -105,7 +103,7 @@ class CachesAttributesRepository extends ServiceEntityRepository
         $entities = [];
 
         foreach ($result as $item) {
-            $entities[] = $this->getEntityFromDatabaseArray($item);
+            $entities[] = $item;
         }
 
         return $entities;
@@ -115,64 +113,16 @@ class CachesAttributesRepository extends ServiceEntityRepository
      * @throws RecordAlreadyExistsException
      * @throws Exception
      */
-    public function create(GeoCachesAttributesEntity $entity): GeoCachesAttributesEntity
-    {
-        if (!$entity->isNew()) {
-            throw new RecordAlreadyExistsException('The entity does already exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->insert(
-            self::TABLE,
-            $databaseArray
-        );
-
-        $entity->cacheId = (int) $this->connection->lastInsertId();
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function update(GeoCachesAttributesEntity $entity): GeoCachesAttributesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $databaseArray = $this->getDatabaseArrayFromEntity($entity);
-
-        $this->connection->update(
-            self::TABLE,
-            $databaseArray,
-            ['cache_id' => $entity->cacheId]
-        );
-
-        return $entity;
-    }
 
     /**
      * @throws RecordNotPersistedException
      * @throws Exception
      */
-    public function remove(GeoCachesAttributesEntity $entity): GeoCachesAttributesEntity
-    {
-        if ($entity->isNew()) {
-            throw new RecordNotPersistedException('The entity does not exist.');
-        }
-
-        $this->connection->delete(
-            self::TABLE,
-            ['cache_id' => $entity->cacheId]
-        );
-
-        $entity->cacheId = 0;
-
-        return $entity;
-    }
 
     /**
      * @throws Exception
@@ -195,20 +145,51 @@ class CachesAttributesRepository extends ServiceEntityRepository
         }
     }
 
-    public function getDatabaseArrayFromEntity(GeoCachesAttributesEntity $entity): array
+
+
+    // ── Extended query methods (CachesRepository refactor) ─────────────
+
+    /** @throws Exception */
+    public function fetchAttributesWithIcons(int $cacheId): array
     {
-        return [
-            'cache_id' => $entity->cacheId,
-            'attrib_id' => $entity->attribId,
-        ];
+        return $this->connection->createQueryBuilder()
+            ->select('ca.id', 'ca.name', 'ca.icon')
+            ->from('caches_attributes', 'cxa')
+            ->join('cxa', 'cache_attrib', 'ca', 'cxa.attrib_id = ca.id')
+            ->where('cxa.cache_id = :cacheId')
+            ->orderBy('ca.id')
+            ->setParameter('cacheId', $cacheId)
+            ->executeQuery()
+            ->fetchAllAssociative();
     }
 
-    public function getEntityFromDatabaseArray(array $data): GeoCachesAttributesEntity
+    /** @throws Exception */
+    public function fetchAttribIds(int $cacheId): array
     {
-        $entity = new GeoCachesAttributesEntity();
-        $entity->cacheId = (int) $data['cache_id'];
-        $entity->attribId = (int) $data['attrib_id'];
+        return array_column(
+            $this->connection->createQueryBuilder()
+                ->select('attrib_id')
+                ->from('caches_attributes')
+                ->where('cache_id = :cacheId')
+                ->setParameter('cacheId', $cacheId)
+                ->executeQuery()
+                ->fetchAllAssociative(),
+            'attrib_id'
+        );
+    }
 
-        return $entity;
+    /** @throws Exception */
+    public function replaceCacheAttributes(int $cacheId, array $attribIds): void
+    {
+        $this->connection->executeStatement(
+            'DELETE FROM caches_attributes WHERE cache_id = ?',
+            [$cacheId]
+        );
+        foreach ($attribIds as $attribId) {
+            $this->connection->insert('caches_attributes', [
+                'cache_id'  => $cacheId,
+                'attrib_id' => $attribId,
+            ]);
+        }
     }
 }

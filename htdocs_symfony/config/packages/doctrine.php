@@ -10,21 +10,4 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'url' => '%env(resolve:DATABASE_URL)%'
         ]
     ]);
-
-    $containerConfigurator->extension('doctrine', [
-        'orm' => [
-            'auto_generate_proxy_classes' => true,
-            'naming_strategy' => 'doctrine.orm.naming_strategy.underscore_number_aware',
-            'auto_mapping' => true,
-            'mappings' => [
-                'App' => [
-                    'is_bundle' => false,
-                    'type' => 'attribute',
-                    'dir' => '%kernel.project_dir%/src/Entity',
-                    'prefix' => 'Oc\Entity',
-                    'alias' => 'Oc'
-                ]
-            ]
-        ]
-    ]);
 };

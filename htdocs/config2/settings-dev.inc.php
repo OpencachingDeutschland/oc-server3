@@ -68,6 +68,13 @@ $opt['charset']['mysql'] = 'utf8mb4';
 $opt['logic']['node']['id'] = 4;
 $opt['logic']['waypoint_pool']['prefix'] = 'OC';
 
+// New UI (Symfony app) domain — where the legacy "use new UI" toggle redirects.
+// Rendered into <meta name="symfony-domain"> and read by oc-new-ui-toggle.js.
+// Default here targets the DDEV dev environment (ocde); other environments
+// (e.g. the bare-metal test/prod system) override this in their own
+// settings.inc.php after requiring this file.
+$opt['new_ui']['domain'] = 'try-opencaching.ddev.site';
+
 /* server options
  *
  */

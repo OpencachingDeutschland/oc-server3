@@ -1,0 +1,65 @@
+{% extends 'backoffice/base.html.twig' %}
+
+{% block page_content %}
+
+    <div>
+        <h3>{{ 'Security roles' | trans }}..</h3>
+        {% if auth.getUser() %}
+        <ul>
+            <li>{{ 'You are' | trans }}: {{ auth.getUser().username }}</li>
+            <li>{{ 'id' | trans }}: {{ auth.getUser().user_id }}</li>
+        </ul>
+        {% else %}
+        <p>{{ 'Not logged in' | trans }}</p>
+        {% endif %}
+    </div>
+
+    {% if auth.isGranted('ROLE_TEAM') %}
+        <hr>
+        <div>
+            <h3>
+                <a href="{{ path('backoffice_roles_teamlist') }}">{{ 'Show team overview' | trans }}..</a>
+            </h3>
+        </div>
+    {% endif %}
+
+    {% if auth.isGranted('ROLE_SUPPORT_HEAD') or auth.isGranted('ROLE_SOCIAL_HEAD') or auth.isGranted('ROLE_DEVELOPER_HEAD') %}
+        <hr>
+        <div>
+            <h3>
+                <a href="{{ path('backoffice_roles_search') }}">{{ 'Assign and remove roles' | trans }}..</a>
+            </h3>
+        </div>
+    {% endif %}
+
+    <hr>
+    {% if allRoles is defined %}
+        {% if allRoles %}
+            <h3>{{ 'List of all roles' | trans }}</h3>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>{{ 'id' | trans }}</th>
+                    <th>{{ ' ' }}</th>
+                    <th>{{ 'Role' | trans }}</th>
+                    <th>{{ 'Access' | trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for role in allRoles | sort %}
+                    <tr>
+                        <td>{{ role.id }}</td>
+                        <td> &nbsp;</td>
+                        <td>{{ role.role }}</td>
+                        <td>{% if auth.isGranted(role.role) %}
+                                {{ '✔️ You have access to this ROLE' | trans }}
+                            {% else %}
+                                {{ '🔴 Sorry. You don\'t have access to this ROLE' | trans }}
+                            {% endif %}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+{% endblock %}

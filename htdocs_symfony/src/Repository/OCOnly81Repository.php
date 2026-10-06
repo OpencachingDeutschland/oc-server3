@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
-class OCOnly81Repository extends ServiceEntityRepository
+class OCOnly81Repository
 {
     private Connection $connection;
 

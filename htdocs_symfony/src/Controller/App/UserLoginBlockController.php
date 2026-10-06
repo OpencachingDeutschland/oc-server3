@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Oc\Controller\App;
 
 use DateTime;
+use Doctrine\DBAL\Connection;
 use Exception;
 use Oc\Form\UserLoginBlockConfirm;
-use Oc\Repository\Exception\RecordNotFoundException;
-use Oc\Repository\UserLoginBlockRepository;
+use Oc\Security\Auth;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,18 +18,11 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class UserLoginBlockController extends AbstractController
 {
-    private SecurityController $securityController;
-
-    private UrlGeneratorInterface $urlGenerator;
-
-    private UserLoginBlockRepository $userLoginBlockRepository;
-
-    public function __construct(SecurityController $securityController, UrlGeneratorInterface $urlGenerator, UserLoginBlockRepository $userLoginBlockRepository)
-    {
-        $this->securityController = $securityController;
-        $this->urlGenerator = $urlGenerator;
-        $this->userLoginBlockRepository = $userLoginBlockRepository;
-    }
+    public function __construct(
+        private Connection $connection,
+        private UrlGeneratorInterface $urlGenerator,
+        private Auth $auth,
+    ) {}
 
     /**
      * @throws Exception
@@ -38,25 +31,23 @@ class UserLoginBlockController extends AbstractController
     public function showUserLoginBlockMessageOrRedirect(): Response
     {
         $form = $this->createForm(UserLoginBlockConfirm::class);
-        $user = $this->getUser();
+        $user = $this->auth->getUser();
 
         if ($user) {
-            try {
-                $userLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => $user->userId]);
-                $expirationTime = date_create_from_format('Y-m-d H:i:s', $userLoginBlock->loginBlockUntil);
+            $block = $this->connection->createQueryBuilder()
+                ->select('*')->from('user_login_block')
+                ->where('user_id = :uid')->setParameter('uid', $user['user_id'])
+                ->executeQuery()->fetchAssociative();
 
-                // Force user logout. User first has to confirm reading the block message before the login block is removed and he can login normally.
-                // TODO: logout() einbauen, sobald Funktion verfügbar ist. (wird erst ab Symfony 6.2 bereitgestellt. Davor gibt es nichts praktikables..)
-                // https://github.com/symfony/symfony/issues/40663
-                // https://symfony.com/doc/current/security.html
+            if ($block) {
+                $expirationTime = date_create_from_format('Y-m-d H:i:s', $block['login_block_until']);
 
                 return $this->render('app/user/showuserloginblock.html.twig', [
-                        'confirmButton' => $form->createView(),
-                        'user_login_block' => $userLoginBlock,
-                        'user_id' => $user->userId,
-                        'login_block_expired' => $expirationTime < new DateTime("now")
+                    'confirmButton' => $form->createView(),
+                    'user_login_block' => $block,
+                    'user_id' => $user['user_id'],
+                    'login_block_expired' => $expirationTime < new DateTime("now")
                 ]);
-            } catch (RecordNotFoundException $e) {
             }
         }
 
@@ -74,9 +65,8 @@ class UserLoginBlockController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $inputData = $form->getData();
-
-            $userLoginBlock = $this->userLoginBlockRepository->fetchOneBy(['user_id' => (string)$inputData['hidden_user_id']]);
-            $this->userLoginBlockRepository->remove($userLoginBlock);
+            $userId = (int) $inputData['hidden_user_id'];
+            $this->connection->delete('user_login_block', ['user_id' => $userId]);
         }
         return new RedirectResponse($this->urlGenerator->generate('app_index_index'));
     }

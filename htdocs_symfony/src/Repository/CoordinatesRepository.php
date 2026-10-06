@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Oc\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
-class CoordinatesRepository extends ServiceEntityRepository
+class CoordinatesRepository
 {
     private float $nLat;
 

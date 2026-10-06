@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Oc\Controller\Backoffice;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+class SecurityControllerBackoffice extends AbstractController
+{
+    public function __construct()
+    {
+    }
+}

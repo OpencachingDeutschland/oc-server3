@@ -79,6 +79,12 @@ function exceptionhandler(Throwable $exception): void
  */
 function errorhandler($errno, $errstr, $errfile, $errline): void
 {
+    // PHP 8.4 vendor code triggers many E_DEPRECATED notices that
+    // are not actionable for us. Skip them instead of producing a 500.
+    if ($errno === E_DEPRECATED || $errno === E_USER_DEPRECATED) {
+        return;
+    }
+
     // will catch a few runtime errors
 
     global $error_handled;

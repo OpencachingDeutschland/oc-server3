@@ -34,7 +34,11 @@ $env = 'prod';
 // has to be analyzed why
 $debug = true;
 
-if (isset($opt['debug']) && $opt['debug']) {
+// On deployed systems, $opt['debug'] is always truthy (set by settings-dev.inc.php)
+// which forces 'dev' env. But dev-mode bundles (WebProfiler, Debug) may not be
+// available or their cache dirs may have wrong ownership when built by root.
+// Keep prod on non-ddev environments.
+if (isset($opt['debug']) && $opt['debug'] && getenv('IS_DDEV') === '1') {
     $env = 'dev';
 }
 

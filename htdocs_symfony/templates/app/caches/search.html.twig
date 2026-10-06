@@ -1,55 +1,130 @@
-{% extends 'app/base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block data_page %}searchcaches{% endblock %}
+{% block data_map_js %}true{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'Searching…':                                  'Searching…'                                  | trans,
+    'Found %count% cache(s)':                      'Found %count% cache(s)'                      | trans,
+    'No caches found.':                            'No caches found.'                            | trans,
+    'limit reached — refine filters':              'limit reached — refine filters'              | trans,
+    'limit reached':                               'limit reached'                               | trans,
+    '%count% selected':                            '%count% selected'                            | trans,
+    'No coordinates available for these results.': 'No coordinates available for these results.' | trans,
+    'OC Code': 'OC Code' | trans,
+    'Name':    'Name'    | trans,
+    'Owner':   'Owner'   | trans,
+    'Type':    'Type'    | trans,
+    'D':       'D'       | trans,
+    'T':       'T'       | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/vendor/tabulator/tabulator.min.css">
+    <link rel="stylesheet" href="/css/tabulator_oc.css">
+    <style>
+        .oc-filter-bar { background: var(--oc-bg-surface); padding: 1rem 1.25rem; border-radius: 0.5rem; margin-bottom: 1rem; }
+        .actions-chevron { display: inline-block; transition: transform 0.2s ease; font-style: normal; }
+        #actionsToggle[aria-expanded="true"] .actions-chevron { transform: rotate(90deg); }
+        #mapRoot { width: 100%; }
+        footer { display: none !important; }
+    </style>
+{% endblock %}
 
 {% block page_content %}
+<div class="container-fluid px-0">
 
-    <div>
-        <h3>{{ 'Search for caches and users' | trans }}..</h3>
-        {% if cachesForm is defined %}
-            {{ form_start(cachesForm) }}
-            {{ form_widget(cachesForm) }}
-            {{ form_end(cachesForm) }}
-        {% endif %}
+    <h4 class="mb-3">{{ 'Search caches' | trans }}</h4>
+
+    <div class="oc-filter-bar">
+        <form id="searchForm">
+            <div class="row g-2 align-items-start mb-2">
+                <div class="col-12 col-md-4">
+                    <label class="form-label mb-1">{{ 'Keyword / WP code / owner' | trans }}</label>
+                    <input type="text" id="fq" class="form-control" placeholder="{{ 'e.g. Forest, OC12345, username' | trans }}">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label class="form-label mb-1">{{ 'Near city' | trans }}</label>
+                    <input type="text" id="fcity" class="form-control" placeholder="{{ 'e.g. Berlin, Hamburg' | trans }}">
+                    <div id="cityFeedback" class="form-text"></div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label mb-1">{{ 'Radius (km)' | trans }}</label>
+                    <select id="fradius" class="form-select">
+                        <option value="0">{{ '— no limit —' | trans }}</option>
+                        <option value="5">5 km</option>
+                        <option value="10">10 km</option>
+                        <option value="25">25 km</option>
+                        <option value="50">50 km</option>
+                        <option value="100">100 km</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-3">
+                    <label class="form-label mb-1">{{ 'Type' | trans }}</label>
+                    <select id="ftype" class="form-select">
+                        <option value="0">{{ 'All types' | trans }}</option>
+                        {% for t in types %}
+                            <option value="{{ t.id }}">{{ t.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row g-2 align-items-end">
+                <div class="col-auto">
+                    <label class="form-label mb-1">{{ 'Min D' | trans }}</label>
+                    <select id="fminDiff" class="form-select" style="width:72px">
+                        {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
+                            <option value="{{ v }}">{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <label class="form-label mb-1">{{ 'Max D' | trans }}</label>
+                    <select id="fmaxDiff" class="form-select" style="width:72px">
+                        {% for v in ['1.0','1.5','2.0','2.5','3.0','3.5','4.0','4.5','5.0'] %}
+                            <option value="{{ v }}" {% if v == '5.0' %}selected{% endif %}>{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col d-flex align-items-center gap-3 flex-wrap pt-3">
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="factiveOnly" checked>
+                        <label class="form-check-label" for="factiveOnly">{{ 'Active only' | trans }}</label>
+                    </div>
+                    <div class="form-check mb-0">
+                        <input class="form-check-input" type="checkbox" id="focOnly">
+                        <label class="form-check-label" for="focOnly">{{ 'OC only' | trans }}</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 ms-md-auto">
+                    <button type="submit" class="btn btn-primary w-100">{{ 'Search' | trans }}</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <hr>
+    <div id="statusBar" class="text-secondary small mb-1" style="min-height:1.4em;"></div>
 
-    <div>
-        {% if caches_by_searchfield is defined and caches_by_searchfield != 0 %}
-            {% if caches_by_searchfield %}
-                <br/>
-                <div> {{ 'Found' | trans }}: {{ caches_by_searchfield | length }} {{ 'cache(s)' | trans }}</div>
-                <br/>
-                <table class="table table-striped table-hover">
-                    <thead class="thead-dark">
-                    <tr>
-                        <th scope="col" class="asc">{{ 'OC code' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Cache title' | trans }}</th>
-                        <th scope="col" class="asc">{{ 'Owner name' | trans }}</th>
-                        <th scope="col">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for cache in caches_by_searchfield %}
-                        <tr>
-                            <td>{{ cache.wp_oc }}</td>
-                            <td>{{ cache.name }}</td>
-                            <td>{{ cache.username }}</td>
-                            <td>
-                                <a class="btn btn-primary"
-                                   href="{{ path('app_cache_by_wp_oc_gc', { 'wpID': cache.wp_oc }) }}">{{ 'Details' | trans }}</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <br/><br/>
-                <span>{{ 'No cache found' | trans }}.. :-(</span>
-            {% endif %}
-        {% endif %}
-
+    <div id="actionsPanel" style="display:none;" class="mb-2">
+        <button id="actionsToggle" class="btn btn-sm btn-link text-secondary px-0 text-decoration-none"
+                type="button" data-bs-toggle="collapse" data-bs-target="#actionsList" aria-expanded="false">
+            <span class="actions-chevron me-1">▶</span>{{ 'Actions' | trans }}
+        </button>
+        <div class="collapse" id="actionsList">
+            <div class="d-flex gap-2 flex-wrap mt-2 ms-3">
+                <button id="btnShowMap" class="btn btn-sm btn-outline-primary" type="button">
+                    ⊕ {{ 'Show on map' | trans }}
+                </button>
+            </div>
+        </div>
     </div>
 
-    <hr>
+    <div id="searchResults"></div>
 
+</div>
+{% endblock %}
+
+{% block page_content_after %}
+<div id="mapRoot"></div>
 {% endblock %}

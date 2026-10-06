@@ -1,0 +1,395 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}newcache{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .oc-form-section { background:var(--oc-bg-surface); border:1px solid var(--oc-table-border); border-radius:6px; margin-bottom:1.5rem; }
+        .oc-form-section-header { background:var(--oc-gray-400); color:var(--oc-text-primary); padding:8px 12px; font-weight:600; border-radius:5px 5px 0 0; }
+        [data-theme="dark"] .oc-form-section-header { background:var(--oc-gray-200); }
+        .oc-form-section-body { padding:1rem 1.25rem; }
+
+        .oc-field-row { display:flex; align-items:flex-start; gap:1rem; margin-bottom:0.85rem; }
+        .oc-field-label { min-width:160px; padding-top:0.4rem; color:var(--oc-text-secondary); font-size:0.9em; }
+        .oc-field-input { flex:1; }
+
+        .error-msg { color:var(--oc-danger,#dc3545); font-size:0.85em; margin-top:3px; }
+
+        .attr-group { display:inline-block; vertical-align:top; margin:4px 6px 4px 0; border:1px solid var(--oc-table-border); border-radius:4px; overflow:hidden; }
+        .attr-group-name { background:var(--oc-gray-400); font-size:0.75em; padding:2px 6px; text-align:center; }
+        [data-theme="dark"] .attr-group-name { background:var(--oc-gray-200); }
+        .attr-group-icons { padding:4px; display:flex; flex-wrap:wrap; gap:3px; background:var(--oc-bg-surface); }
+        .attr-icon { width:35px; height:35px; cursor:pointer; border-radius:4px; transition:opacity 0.1s; }
+        .attr-icon:hover { opacity:0.8; }
+
+        .dt-select { width:90px !important; display:inline-block; }
+
+        [data-theme="dark"] ::placeholder { color: var(--oc-text-secondary); opacity: 1; }
+        [data-theme="dark"] .form-select:disabled { background-color: var(--oc-bg-surface); color: var(--oc-text-secondary); border-color: var(--oc-table-border); }
+
+        @media (max-width:576px) {
+            .oc-field-row { flex-direction:column; gap:0.3rem; }
+            .oc-field-label { min-width:unset; padding-top:0; }
+        }
+
+        .wpt-row { display:flex; gap:6px; align-items:center; margin-bottom:6px; }
+        .wpt-row input, .wpt-row select { font-size:0.85rem; }
+        .wpt-row .wpt-coords { width:200px; }
+        .wpt-row .wpt-desc { flex:1; min-width:120px; }
+        .wpt-row .btn-remove { flex-shrink:0; }
+
+        .coords-input-wrap { display:flex; gap:4px; align-items:center; }
+        .map-pin-btn { flex-shrink:0; width:30px; height:30px; padding:0; border:1px solid var(--oc-table-border); border-radius:4px; background:var(--oc-bg-surface); color:var(--oc-link-color); cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; }
+        .map-pin-btn:hover { background:var(--oc-gray-400); }
+
+        #mapPickerBackdrop { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:9999; }
+        #mapPickerDialog  { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:520px; height:440px; max-width:95vw; max-height:90vh; background:var(--oc-bg-surface); border-radius:8px; z-index:10000; flex-direction:column; }
+        #mapPickerHeader  { padding:8px 12px; border-bottom:1px solid var(--oc-table-border); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+        #mapPickerHeader span { font-weight:600; font-size:0.95rem; }
+        #pickerMap        { flex:1; min-height:0; }
+        #mapPickerFooter  { padding:8px 12px; border-top:1px solid var(--oc-table-border); display:flex; justify-content:flex-end; gap:6px; align-items:center; flex-shrink:0; }
+        #mapPickerCoords  { font-family:'Courier New',monospace; font-size:0.85em; color:var(--oc-text-secondary); }
+    </style>
+{% endblock %}
+
+{% block page_content %}
+<div>
+
+    <h4 class="mb-3">{% if is_edit %}{{ 'Edit cache' | trans }}{% else %}{{ 'Submit a new cache' | trans }}{% endif %}</h4>
+
+    {% if errors is not empty %}
+    <div class="alert alert-danger py-2">
+        {% if errors._general is defined %}
+            {{ errors._general }}
+        {% else %}
+            {{ 'Some errors occurred, please check the marked fields.' | trans }}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{ path('app_cache_new') }}">
+        {% if is_edit %}<input type="hidden" name="edit_id" value="{{ edit_cache_id }}">{% endif %}
+
+        {# ── Basic Info ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Basic information' | trans }}</div>
+            <div class="oc-form-section-body">
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Name' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <input type="text" name="name" maxlength="60" class="form-control form-control-sm{% if errors.name is defined %} is-invalid{% endif %}" value="{{ form.name | e }}">
+                        {% if errors.name is defined %}<div class="error-msg">{{ errors.name }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Type' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <select name="type" class="form-select form-select-sm{% if errors.type is defined %} is-invalid{% endif %}" id="cacheType">
+                            <option value="">{{ 'Please select' | trans }}</option>
+                            {% for t in types %}
+                            <option value="{{ t.id }}"{% if form.type == t.id %} selected{% endif %}>{{ t.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if errors.type is defined %}<div class="error-msg">{{ errors.type }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Size' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <select name="size" class="form-select form-select-sm{% if errors.size is defined %} is-invalid{% endif %}" id="cacheSize">
+                            <option value="">{{ 'Please select' | trans }}</option>
+                            {% for s in sizes %}
+                            <option value="{{ s.id }}"{% if form.size == s.id %} selected{% endif %}>{{ s.name }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if errors.size is defined %}<div class="error-msg">{{ errors.size }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Difficulty / Terrain' | trans }} *</div>
+                    <div class="oc-field-input">
+                        {{ 'D' | trans }}
+                        <select name="difficulty" class="form-select form-select-sm dt-select{% if errors.dt is defined %} is-invalid{% endif %}">
+                            <option value="">–</option>
+                            {% for v in 2..10 %}
+                            <option value="{{ v }}"{% if form.difficulty == v %} selected{% endif %}>{{ (v / 2) | number_format(1) }}</option>
+                            {% endfor %}
+                        </select>
+                        &nbsp;{{ 'T' | trans }}
+                        <select name="terrain" class="form-select form-select-sm dt-select{% if errors.dt is defined %} is-invalid{% endif %}">
+                            <option value="">–</option>
+                            {% for v in 2..10 %}
+                            <option value="{{ v }}"{% if form.terrain == v %} selected{% endif %}>{{ (v / 2) | number_format(1) }}</option>
+                            {% endfor %}
+                        </select>
+                        {% if errors.dt is defined %}<div class="error-msg">{{ errors.dt }}</div>{% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {# ── Coordinates ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Coordinates' | trans }}</div>
+            <div class="oc-form-section-body">
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Coordinates' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <div class="coords-input-wrap">
+                            <input type="text" name="coords" maxlength="30" class="form-control form-control-sm{% if errors.coords is defined %} is-invalid{% endif %}" style="width:280px" value="{{ form.coords | e }}" placeholder="{{ 'e.g. N51 02.345 E009 43.210 or 51.123,9.456' | trans }}">
+                            <button type="button" class="map-pin-btn" title="{{ 'Pick on map' | trans }}"><i class="fas fa-map-pin"></i></button>
+                        </div>
+                        {% if errors.coords is defined %}<div class="error-msg">{{ errors.coords }}</div>{% endif %}
+                    </div>
+                </div>
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Country' | trans }}</div>
+                    <div class="oc-field-input">
+                        <select name="country" class="form-select form-select-sm" style="width:240px">
+                            {% for c in countries %}
+                            <option value="{{ c.short }}"{% if form.country == c.short %} selected{% endif %}>{{ c.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# ── Attributes ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Cache attributes' | trans }}</div>
+            <div class="oc-form-section-body">
+                <input type="hidden" id="cache_attribs" name="cache_attribs" value="{{ form.selected_attribs | join(';') }}">
+                <div id="attrPicker">
+                    {% set currentGroup = null %}
+                    {% for attr in attrs %}
+                        {% if attr.group_id != currentGroup %}
+                            {% if currentGroup is not null %}</div></div>{% endif %}
+                            {% set currentGroup = attr.group_id %}
+                            <div class="attr-group">
+                                <div class="attr-group-name">{{ attr.group_name }}</div>
+                                <div class="attr-group-icons">
+                        {% endif %}
+                        {% set isSelected = attr.id in form.selected_attribs %}
+                        <img class="attr-icon"
+                             id="attr{{ attr.id }}"
+                             data-id="{{ attr.id }}"
+                             data-icon-off="/images/attributes/{{ attr.icon_undef | split('/') | last }}"
+                             data-icon-on="/images/attributes/{{ attr.icon_large | split('/') | last }}"
+                             src="/images/attributes/{{ isSelected ? (attr.icon_large | split('/') | last) : (attr.icon_undef | split('/') | last) }}"
+                             title="{{ attr.name | e }}"
+                             alt="{{ attr.name | e }}"
+>
+                    {% endfor %}
+                    {% if currentGroup is not null %}</div></div>{% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# ── Description ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Description' | trans }}</div>
+            <div class="oc-form-section-body">
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Language' | trans }}</div>
+                    <div class="oc-field-input">
+                        <select name="desc_lang" class="form-select form-select-sm" style="width:220px">
+                            {% for l in languages %}
+                            <option value="{{ l.short }}"{% if form.desc_lang == l.short %} selected{% endif %}>{{ l.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Short description' | trans }}</div>
+                    <div class="oc-field-input">
+                        <input type="text" name="short_desc" maxlength="120" class="form-control form-control-sm" value="{{ form.short_desc | e }}">
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Description' | trans }}</div>
+                    <div class="oc-field-input">
+                        <textarea name="desc" rows="10" class="form-control form-control-sm" style="font-family:inherit; resize:vertical">{{ form.desc | e }}</textarea>
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Hint (encrypted)' | trans }}</div>
+                    <div class="oc-field-input">
+                        <textarea name="hints" rows="3" class="form-control form-control-sm" style="font-family:'Courier New',monospace; resize:vertical">{{ form.hints | e }}</textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {# ── Personal ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Personal notes & corrected coordinates' | trans }}</div>
+            <div class="oc-form-section-body">
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Personal cache note' | trans }}</div>
+                    <div class="oc-field-input">
+                        <textarea name="cache_note" rows="4" class="form-control form-control-sm" style="font-family:inherit; resize:vertical" placeholder="{{ 'Your personal notes about this cache (only visible to you)' | trans }}">{{ form.cache_note | e }}</textarea>
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Corrected coordinates' | trans }}</div>
+                    <div class="oc-field-input">
+                        <div class="coords-input-wrap">
+                            <input type="text" name="user_coords" maxlength="30" class="form-control form-control-sm{% if errors.user_coords is defined %} is-invalid{% endif %}" style="width:280px" value="{{ form.user_coords | e }}" placeholder="{{ 'e.g. N51 02.345 E009 43.210 or 51.123,9.456' | trans }}">
+                            <button type="button" class="map-pin-btn" title="{{ 'Pick on map' | trans }}"><i class="fas fa-map-pin"></i></button>
+                        </div>
+                        {% if errors.user_coords is defined %}<div class="error-msg">{{ errors.user_coords }}</div>{% endif %}
+                        <div class="text-secondary" style="font-size:0.8em; margin-top:3px">{{ 'Your own coordinates if the posted ones need correction (visible only to you)' | trans }}</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {# ── Additional Waypoints ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Additional Waypoints' | trans }}</div>
+            <div class="oc-form-section-body">
+                <div id="waypointsContainer"></div>
+                <button type="button" id="addWaypointBtn" class="btn btn-sm btn-outline-secondary mt-2">+ {{ 'Add waypoint' | trans }}</button>
+                <input type="hidden" name="waypoints_json" id="waypoints_json" value="{{ form.waypoints_json | e }}">
+                {% if errors.waypoints is defined %}<div class="error-msg mt-1">{{ errors.waypoints }}</div>{% endif %}
+            </div>
+        </div>
+
+        <template id="wptRowTemplate">
+            <div class="wpt-row">
+                <select class="form-select form-select-sm wpt-type" style="width:150px">
+                    <option value="">{{ 'Type' | trans }}</option>
+                    {% for wt in wptTypes %}
+                    <option value="{{ wt.id }}">{{ wt.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="coords-input-wrap" style="width:230px">
+                    <input type="text" class="form-control form-control-sm wpt-coords" maxlength="30" placeholder="{{ 'e.g. N51 02.345 E009 43.210' | trans }}">
+                    <button type="button" class="map-pin-btn" title="{{ 'Pick on map' | trans }}"><i class="fas fa-map-pin"></i></button>
+                </div>
+                <input type="text" class="form-control form-control-sm wpt-desc" maxlength="80" placeholder="{{ 'Description' | trans }}">
+                <button type="button" class="btn btn-sm btn-outline-danger btn-remove" title="{{ 'Remove' | trans }}">&times;</button>
+            </div>
+        </template>
+
+        {# ── Other fields ── #}
+        <div class="oc-form-section">
+            <div class="oc-form-section-header">{{ 'Other' | trans }}</div>
+            <div class="oc-form-section-body">
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Time effort (h)' | trans }}</div>
+                    <div class="oc-field-input d-flex align-items-center gap-3">
+                        <input type="text" name="search_time" maxlength="10" class="form-control form-control-sm{% if errors.search_time is defined %} is-invalid{% endif %}" style="width:90px" value="{{ form.search_time | e }}" placeholder="0">
+                        <span class="text-secondary" style="font-size:0.85em">{{ 'Distance (km)' | trans }}</span>
+                        <input type="text" name="way_length" maxlength="10" class="form-control form-control-sm{% if errors.way_length is defined %} is-invalid{% endif %}" style="width:90px" value="{{ form.way_length | e }}" placeholder="0">
+                        {% if errors.search_time is defined or errors.way_length is defined %}
+                        <div class="error-msg">{{ errors.search_time ?? errors.way_length }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'GC waypoint' | trans }}</div>
+                    <div class="oc-field-input">
+                        <input type="text" name="wp_gc" maxlength="12" class="form-control form-control-sm{% if errors.wp_gc is defined %} is-invalid{% endif %}" style="width:130px" value="{{ form.wp_gc | e }}" placeholder="GCxxxxx">
+                        {% if errors.wp_gc is defined %}<div class="error-msg">{{ errors.wp_gc }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Hidden since' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <input type="date" name="hidden_date" class="form-control form-control-sm{% if errors.hidden_date is defined %} is-invalid{% endif %}" style="width:180px" value="{{ form.hidden_date | e }}">
+                        {% if errors.hidden_date is defined %}<div class="error-msg">{{ errors.hidden_date }}</div>{% endif %}
+                    </div>
+                </div>
+
+                {% if not is_edit %}
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Publication' | trans }} *</div>
+                    <div class="oc-field-input">
+                        <div class="form-check mb-1">
+                            <input class="form-check-input" type="radio" name="publish" id="pub_now" value="now2"{% if form.publish == 'now2' %} checked{% endif %}>
+                            <label class="form-check-label" for="pub_now">{{ 'Publish now' | trans }}</label>
+                        </div>
+                        <div class="form-check mb-1 d-flex align-items-center gap-2">
+                            <input class="form-check-input" type="radio" name="publish" id="pub_later" value="later"{% if form.publish == 'later' %} checked{% endif %}>
+                            <label class="form-check-label" for="pub_later">{{ 'Publish on' | trans }}</label>
+                            <input type="date" name="activate_date" id="activate_date" class="form-control form-control-sm{% if errors.activate_date is defined %} is-invalid{% endif %}" style="width:170px" value="{{ form.activate_date | e }}">
+                            <select name="activate_hour" class="form-select form-select-sm" style="width:90px">
+                                {% for h in 0..23 %}
+                                <option value="{{ h }}"{% if form.activate_hour == h %} selected{% endif %}>{{ '%02d'|format(h) }}:00</option>
+                                {% endfor %}
+                            </select>
+                            {% if errors.activate_date is defined %}<div class="error-msg">{{ errors.activate_date }}</div>{% endif %}
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="publish" id="pub_notnow" value="notnow"{% if form.publish == 'notnow' %} checked{% endif %}>
+                            <label class="form-check-label" for="pub_notnow">{{ 'Do not publish now' | trans }}</label>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="oc-field-row">
+                    <div class="oc-field-label">{{ 'Log password' | trans }}</div>
+                    <div class="oc-field-input">
+                        <input type="text" name="log_pw" maxlength="20" class="form-control form-control-sm" style="width:180px" value="{{ form.log_pw | e }}" placeholder="{{ 'leave blank for none' | trans }}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {# ── TOS + Submit ── #}
+        {% if not is_edit %}
+        <div class="mb-3">
+            <div class="form-check{% if errors.tos is defined %} is-invalid{% endif %}">
+                <input class="form-check-input{% if errors.tos is defined %} is-invalid{% endif %}" type="checkbox" name="tos" id="tos" value="1"{% if form.tos %} checked{% endif %}>
+                <label class="form-check-label" for="tos">
+                    {{ 'I have read and agree to the Opencaching Terms of Service and Data License.' | trans }}
+                </label>
+            </div>
+            {% if errors.tos is defined %}<div class="error-msg ps-4">{{ errors.tos }}</div>{% endif %}
+        </div>
+        {% endif %}
+
+        <div class="mb-4">
+            <button type="submit" class="btn btn-danger">{% if is_edit %}{{ 'Update cache' | trans }}{% else %}{{ 'Submit cache' | trans }}{% endif %}</button>
+        </div>
+
+    </form>
+</div>
+
+{# ── Map Picker Modal ── #}
+<div id="mapPickerBackdrop"></div>
+<div id="mapPickerDialog">
+    <div id="mapPickerHeader">
+        <span>{{ 'Pick coordinates on map' | trans }}</span>
+        <button type="button" id="mapPickerClose" class="btn btn-sm btn-outline-secondary">&times;</button>
+    </div>
+    <div id="pickerMap"></div>
+    <div id="mapPickerFooter">
+        <span id="mapPickerCoords" style="flex:1;align-self:center;font-family:'Courier New',monospace;font-size:0.9em;color:var(--oc-text-secondary)"></span>
+        <button type="button" id="mapPickerCancel" class="btn btn-sm btn-outline-secondary">{{ 'Cancel' | trans }}</button>
+        <button type="button" id="mapPickerSave" class="btn btn-sm btn-primary">{{ 'Use these coordinates' | trans }}</button>
+    </div>
+</div>
+{% endblock %}
+

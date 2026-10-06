@@ -1,0 +1,261 @@
+{% extends 'base.html.twig' %}
+
+{% block data_page %}cache{% endblock %}
+{% block data_map_js %}true{% endblock %}
+
+{% block after_body_start %}
+    {# Globals the map modules look up via window/free variables.
+       uniCacheWP starts empty; cache.js cooks the OC object into it after
+       fetching /api/cache/{wp}, then calls handleWPs(). #}
+    <script>
+        window.uniCacheWP       = [];
+        window.defaultZoom      = 14;
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/vendor/tabulator/tabulator.min.css">
+    <link rel="stylesheet" href="/css/tabulator_oc.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <style>
+        .loading-indicator { display:flex; align-items:center; gap:10px; padding:20px; color:var(--oc-text-secondary); font-size:0.95em; }
+        .loading-indicator .spinner { width:20px; height:20px; border:2px solid var(--oc-gray-400); border-top-color:var(--oc-link-color); border-radius:50%; animation:spin 0.8s linear infinite; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .skeleton { background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size:200% 100%; animation:skeleton-loading 1.5s infinite; border-radius:4px; }
+        [data-theme="dark"] .skeleton { background:linear-gradient(90deg,var(--oc-gray-200) 25%,var(--oc-gray-100) 50%,var(--oc-gray-200) 75%); background-size:200% 100%; }
+        @keyframes skeleton-loading { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+        .skeleton-text  { height:1em; margin:0.5em 0; }
+        .skeleton-block { height:200px; }
+
+        #cache-error { display:none; padding:20px; background:var(--oc-danger); color:#fff; border-radius:8px; margin:20px 0; }
+
+        .oc-detail-table { width:100%; max-width:100%; border-collapse:collapse; table-layout:fixed; background-color:var(--oc-table-bg); color:var(--oc-text-primary); }
+        .oc-detail-table th, .oc-detail-table td { border:1px solid var(--oc-table-border); padding:3px 10px; word-wrap:break-word; overflow-wrap:break-word; font-size:1em; }
+        .oc-detail-table th { font-size:1.1em; }
+        .oc-detail-table tr:first-child th, .oc-detail-table tr:first-child td { border-top:none; }
+        .oc-detail-table tr:last-child td { border-bottom:none; }
+        .oc-detail-table th:first-child, .oc-detail-table td:first-child { border-left:none; }
+        .oc-detail-table th:last-child,  .oc-detail-table td:last-child  { border-right:none; }
+
+        .oc-cache-header { text-align:center; background-color:var(--oc-gray-400); padding:10px; }
+        [data-theme="dark"] .oc-cache-header { background-color:var(--oc-gray-200); }
+
+        input[type="text"].oc-coords-input {
+            border:none; text-align:left; vertical-align:middle;
+            width:12em; overflow:hidden; display:inline-block;
+            padding:0; margin:0;
+            background-color:var(--oc-bg-body); color:var(--oc-text-primary);
+        }
+        .oc-nowrap { white-space: nowrap; }
+
+        .pcnTextarea { border:none; resize:none; overflow:hidden; font-family:"Courier New",monospace; width:100%; background-color:var(--oc-bg-surface); font-size:0.9em; padding:5px 10px; color:var(--oc-text-primary); }
+        .logTextarea { border:none; resize:none; overflow:hidden; width:100%; background-color:var(--oc-input-bg); font-family:inherit; font-size:1em; padding:3px; color:var(--oc-text-primary); }
+
+        .attribute-container { width:35px; height:35px; object-fit:cover; border-radius:8px; }
+
+        #cache-description { overflow:hidden; word-wrap:break-word; overflow-wrap:break-word; }
+        #cache-description img { max-width:100%; height:auto; }
+        #cache-description *, #cache-description { max-width:100%; box-sizing:border-box; position:static !important; float:none !important; }
+        #cache-description table { table-layout:fixed; width:100%; }
+        #cache-description pre  { white-space:pre-wrap; overflow-x:auto; }
+
+        /* Light-island for listings with hard-coded colors/backgrounds that
+           would clash with a dark UI. The class is applied by cache.js when
+           cache_desc.desc_dark_unsafe is set, but the rules only kick in
+           under data-theme="dark" — in light mode the listing renders
+           normally and theme toggles need no JS re-run. */
+        [data-theme="dark"] #cache-description.cache-description-light-island {
+            background: #fff;
+            color: #222;
+            color-scheme: light;
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+        }
+        [data-theme="dark"] #cache-description.cache-description-light-island a { color: #06c; }
+
+        #logsTable .tabulator, #wptTable .tabulator { border:none !important; background:transparent !important; }
+        #logsTable .tabulator-row { background:transparent !important; }
+        #logsTable .tabulator-cell, #logsTable .tabulator-row { border:none !important; padding:0 !important; }
+        #wptTable  .tabulator-cell, #wptTable  .tabulator-row { border:none !important; padding:0 !important; }
+        .tabulator-cell div { margin:0 !important; padding:0 !important; width:100% !important; }
+        .wrap-text { word-wrap:break-word; white-space:pre-line; }
+        .row-transparent { background:transparent !important; }
+
+        #explore-container > .container-fluid > .row { display:flex !important; flex-wrap:wrap !important; }
+        #explore-container > .container-fluid > .row > .col-md-4 { overflow:hidden; }
+        @media (max-width:767.98px) {
+            #explore-container > .container-fluid > .row > .col-md-4,
+            #explore-container > .container-fluid > .row > .col-md-8 { flex:0 0 100% !important; max-width:100% !important; }
+        }
+
+        #mapRoot { height: calc(100vh - var(--oc-navbar-height)); width:100%; }
+        footer { display: none !important; }
+    </style>
+{% endblock %}
+
+{% block i18n %}<script>Object.assign(window.OCI18n, {{ {
+    'by:':                      'by:'                      | trans,
+    'Published:':               'Published:'               | trans,
+    'Finds:':                   'Finds:'                   | trans,
+    'Found:':                   'Found:'                   | trans,
+    'Finds':                    'Finds'                    | trans,
+    'Found it':                 'Found it'                 | trans,
+    "Didn't find it":           "Didn't find it"           | trans,
+    'Comment':                  'Comment'                  | trans,
+    'Attended':                 'Attended'                 | trans,
+    'Will attend':              'Will attend'              | trans,
+    'Archived':                 'Archived'                 | trans,
+    'Ready to search':          'Ready to search'          | trans,
+    'Temporarily unavailable':  'Temporarily unavailable'  | trans,
+    'Active':                   'Active'                   | trans,
+    'Disabled':                 'Disabled'                 | trans,
+    'Saved':                    'Saved'                    | trans,
+    'Submit':                   'Submit'                   | trans,
+    'Post Log':                 'Post Log'                 | trans,
+    'Posted!':                  'Posted!'                  | trans,
+    'Saved!':                   'Saved!'                   | trans,
+    'Compose New Log':          'Compose New Log'          | trans,
+    'Enter your log here...':   'Enter your log here...'   | trans,
+    'Delete this log from opencaching.de?': 'Delete this log from opencaching.de?' | trans,
+    'Joined':                   'Joined'                   | trans,
+    'Hides':                    'Hides'                    | trans,
+    'Hint':                     'Hint'                     | trans,
+    'Found Date':               'Found Date'               | trans,
+    'DNF Date':                 'DNF Date'                 | trans,
+    'Coordinates':              'Coordinates'              | trans,
+    'Prefix':                   'Prefix'                   | trans,
+    'Name':                     'Name'                     | trans,
+    'Type':                     'Type'                     | trans,
+    'Note':                     'Note'                     | trans,
+    'Needs maintenance':        'Needs maintenance'        | trans,
+    'Listing outdated':         'Listing outdated'         | trans,
+} | json_encode | raw }});</script>{% endblock %}
+
+{% block page_content %}
+<div id="explore-container" data-code="{{ wp }}">
+
+    <div id="cache-error"></div>
+
+    <div class="container-fluid px-0">
+        <div class="row">
+
+            <!-- Left column: Cache details -->
+            <div class="col-md-4 col-lg-4">
+
+                <div id="cache-skeleton" class="mt-2">
+                    <div class="skeleton skeleton-text" style="width:80%"></div>
+                    <div class="skeleton skeleton-text" style="width:60%"></div>
+                    <div class="skeleton skeleton-block"></div>
+                </div>
+
+                <script id="gcState" type="application/json">{}</script>
+
+                <div id="editCacheBtn" style="display:none; margin-bottom:8px;">
+                    <a id="editCacheLink" class="btn btn-sm btn-outline-primary" href="#">{{ 'Edit cache' | trans }}</a>
+                </div>
+
+                <table id="cache-table" class="oc-detail-table" style="display:none">
+                    <tr>
+                        <th colspan="2" class="oc-cache-header">
+                            <span id="cacheIcon"></span>
+                            <a id="cacheNameLink" href="#" style="color:var(--oc-text-primary)"></a>
+                        </th>
+                    </tr>
+                    <tr><td>{{ 'Reference' | trans }}</td><td><a id="cacheRefLink" href="#" target="_blank"></a> <span id="cacheStatus"></span></td></tr>
+                    <tr><td>{{ 'Country' | trans }}</td><td id="cacheCountry"></td></tr>
+                    <tr><td>{{ 'State/Province' | trans }}</td><td id="cacheState"></td></tr>
+                    <tr><td class="oc-nowrap">{{ 'Listing Coords' | trans }}</td><td id="cachePostedCoords"></td></tr>
+                    <tr>
+                        <td class="oc-nowrap">{{ 'Corrected Coords' | trans }}</td>
+                        <td class="oc-nowrap">
+                            <input type="text" class="oc-coords-input" id="editCoords" maxlength="22" value="" autocomplete="off" spellcheck="false">
+                        </td>
+                    </tr>
+                    <tr id="logPasswdRow" style="display:none">
+                        <td class="oc-nowrap">{{ 'Log Password' | trans }}</td>
+                        <td>
+                            <input type="text" class="oc-coords-input" id="editLogPasswd" maxlength="50" value="" autocomplete="off">
+                        </td>
+                    </tr>
+                    <tr><td>{{ 'Type' | trans }}</td><td id="cacheType"></td></tr>
+                    <tr><td>{{ 'D / T' | trans }}</td><td id="cacheDT"></td></tr>
+                    <tr><td>{{ 'Find Count' | trans }}</td><td id="cacheFindCount"></td></tr>
+                    <tr><td>{{ 'Recommendations' | trans }}</td><td id="cacheFavorites"></td></tr>
+                    <tr><td>{{ 'Placed / Hidden' | trans }}</td><td id="cachePlacedDate"></td></tr>
+                    <tr><td>{{ 'Published' | trans }}</td><td id="cachePublishedDate"></td></tr>
+                    <tr id="cacheTimeRow" style="display:none"><td>{{ 'Time required' | trans }}</td><td id="cacheTime"></td></tr>
+                    <tr id="foundRow" style="display:none"><td id="foundLabel">{{ 'Found Date' | trans }}</td><td id="cacheFoundDate"></td></tr>
+                    <tr id="gcCodeRow" style="display:none"><td>{{ 'GC Code' | trans }}</td><td id="cacheGcCode"></td></tr>
+                    <tr id="maintenanceRow" style="display:none"><td></td><td><span class="text-warning">⚠ {{ 'Needs maintenance' | trans }}</span></td></tr>
+                    <tr id="outdatedRow"    style="display:none"><td></td><td><span class="text-warning">⚠ {{ 'Listing outdated' | trans }}</span></td></tr>
+                    <tr>
+                        <td rowspan="2" style="vertical-align:top">{{ 'Owner' | trans }}</td>
+                        <td id="cacheOwner"></td>
+                    </tr>
+                    <tr><td id="cacheOwnerStats"></td></tr>
+                    <tr id="hintRow" style="display:none"><td colspan="2" valign="top" id="cacheHint"></td></tr>
+                </table>
+
+            </div>
+
+            <!-- Right column: Description and logs -->
+            <div class="col-md-8 col-lg-8">
+
+                <div id="description-skeleton" class="skeleton skeleton-block mb-3"></div>
+                <div id="cache-description" class="mb-3" style="display:none"></div>
+
+                <div class="mb-3">
+                    <div class="row" id="attributes"></div>
+                </div>
+
+                <div class="mb-3">
+                    <h5 id="additionalWP" class="p-2 bg-secondary text-white d-none">{{ 'Additional Waypoints' | trans }}</h5>
+                    <div id="wptTable"></div>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="p-2 bg-secondary text-white">{{ 'Personal Cache Notes' | trans }}</h5>
+                    <textarea class="pcnTextarea" id="editPCN"></textarea>
+                </div>
+
+                <!-- Edit / compose log section.
+                     Logic: if user has an own log, textarea is pre-populated and mode='editLog'.
+                     When user changes text, controls bar appears.
+                     The "New Log" checkbox morphs editing-existing → composing-new (and back). -->
+                <div id="editLog" style="display:none" class="mb-3">
+                    <h5 id="editLogHeader" class="p-2 bg-secondary text-white d-flex justify-content-between align-items-center">
+                        <span id="editLogHeaderText"></span>
+                        <button id="deleteLogBtn" class="btn btn-sm btn-outline-danger" style="display:none">{{ 'Delete Log' | trans }}</button>
+                    </h5>
+                    <textarea class="logTextarea" id="editLogText"></textarea>
+                    <div id="editLogControls" style="visibility:hidden" class="d-flex gap-2 align-items-center mt-2 flex-wrap">
+                        <input id="editLogDate" class="form-control w-auto" type="text" maxlength="24">
+                        <select id="editLogType" class="form-select w-auto"></select>
+                        <button id="editLogSave" class="btn btn-sm btn-danger">{{ 'Save' | trans }}</button>
+                        <div id="editLogCheckboxWrapper" style="display:none">
+                            <input type="checkbox" id="editLogCheckbox">
+                            <label for="editLogCheckbox">{{ 'New Log' | trans }}</label>
+                        </div>
+                        <span id="editLogMsg" style="color:var(--oc-danger);font-size:0.85em"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h5 class="p-2 bg-secondary text-white">{{ 'Latest Logs' | trans }}</h5>
+                    <div id="logsLoading" class="loading-indicator">
+                        <span class="spinner"></span>
+                        {{ 'Loading logs...' | trans }}
+                    </div>
+                    <div id="logsTable"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block page_content_after %}
+<div id="mapRoot"></div>
+{% endblock %}

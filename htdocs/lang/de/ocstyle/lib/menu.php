@@ -213,7 +213,7 @@ $menu = [
         'menustring' => t('Map'),
         'siteid' => 'map',
         'visible' => true,
-        'filename' => 'map2.php'
+        'filename' => 'map.php'
     ],
     [
         'title' => t('Admin'),

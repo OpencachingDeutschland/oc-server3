@@ -1,0 +1,108 @@
+menuNewsBlog: Blog
+menuNewsEvents: Events
+menuNewsLogpictures: 'Log pictures'
+menuNewsRecommendations: Recommendations
+menuNewsHidesGermany: 'New hides in Germany'
+menuNewsHidesWorld: 'New hides worldwide'
+menuNewsLogs: Logs
+menuBookmarksWatch: Watchlist
+menuBookmarksOwnLists: 'Own lists'
+menuBookmarksPublicLists: 'Public lists'
+menuBookmarksRecommendations: Recommendations
+menuBookmarksSearches: 'Saved searches'
+menuBookmarksIgnore: 'Ignore list'
+# Home page
+'Quick access': 'Quick access'
+'Live Map': 'Live Map'
+'Hide a cache': 'Hide a cache'
+'What is geocaching?': 'What is geocaching?'
+'Find': 'Find'
+'Log it': 'Log it'
+'Hide it': 'Hide it'
+'Get involved': 'Get involved'
+'Why OpenCaching?': 'Why OpenCaching?'
+'To the map': 'To the map'
+'Active caches': 'Active caches'
+'Log entries': 'Log entries'
+'Members': 'Members'
+'The open geocaching network — free, open, community-driven.': 'The open geocaching network — free, open, community-driven.'
+'No Google dependency': 'No Google dependency'
+'Completely free — no premium plans': 'Completely free — no premium plans'
+'Open data, open code': 'Open data, open code'
+'No tracking, no ads': 'No tracking, no ads'
+'GDPR-compliant, servers in Germany': 'GDPR-compliant, servers in Germany'
+'API for everyone — openly documented': 'API for everyone — openly documented'
+'Dark mode & mobile support': 'Dark mode & mobile support'
+'OpenCaching is part of a worldwide network of independent geocaching platforms.': 'OpenCaching is part of a worldwide network of independent geocaching platforms.'
+'Find a cache near you and navigate by GPS to the coordinates.': 'Find a cache near you and navigate by GPS to the coordinates.'
+'Sign the physical logbook and record your find online.': 'Sign the physical logbook and record your find online.'
+'Place your own cache and share your favourite spots with the community.': 'Place your own cache and share your favourite spots with the community.'
+'OpenCaching is open, free and entirely community-driven.': 'OpenCaching is open, free and entirely community-driven.'
+'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.': 'OpenCaching uses no proprietary map APIs. The live map runs on OpenStreetMap — open, free, no API key required.'
+# Cache detail page — table labels
+Reference: Reference
+'State/Province': State
+'Listing Coords': 'Listing Coords'
+'Corrected Coords': 'Corrected Coords'
+'Log Password': 'Log Password'
+'D / T': 'D / T'
+'Find Count': 'Find Count'
+'Placed / Hidden': 'Placed / Hidden'
+'Found Date': 'Found Date'
+'DNF Date': 'DNF Date'
+'GC Code': 'GC Code'
+Disabled: Disabled
+'Needs maintenance': 'Needs maintenance'
+'Listing outdated': 'Listing outdated'
+Hint: Hint
+# Cache detail page — log type names (JS)
+'Found it': 'Found it'
+"Didn't find it": "Didn't find it"
+'Ready to search': 'Ready to search'
+'Temporarily unavailable': 'Temporarily unavailable'
+# Cache detail page — JS UI strings
+Saved: Saved
+'Post Log': 'Post Log'
+'Posted!': 'Posted!'
+'Saved!': 'Saved!'
+'Compose New Log': 'Compose New Log'
+'Enter your log here...': 'Enter your log here...'
+'Delete this log from opencaching.de?': 'Delete this log from opencaching.de?'
+# Cache detail page — JS rendering strings
+'Joined:': 'Joined:'
+'Finds:': 'Finds:'
+'Hides:': 'Hides:'
+'Hint:': 'Hint:'
+# Cache detail page — waypoint table columns
+Coordinates: Coordinates
+Prefix: Prefix
+# Livemap filter modal
+'Filter Options': 'Filter Options'
+All: All
+None: None
+Close: Close
+'Cache Types': 'Cache Types'
+Min: Min
+Max: Max
+Traditional: Traditional
+Multi: Multi
+Virtual: Virtual
+Webcam: Webcam
+Event: Event
+Quiz: Quiz
+'Math/Physics': Math/Physics
+Moving: Moving
+'Drive-in': Drive-in
+Owned: Owned
+DNF: DNF
+'Corrected coords': 'Corrected coords'
+'Personal note': 'Personal note'
+Filter: Filter
+'Open filter settings': 'Open filter settings'
+'Time required': 'Time required'
+# Livemap city search
+'City or village…': 'City or village…'
+'My location': 'My location'
+'No results': 'No results'
+'Error searching': 'Error searching'
+'Location unavailable': 'Location unavailable'

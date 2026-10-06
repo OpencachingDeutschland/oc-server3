@@ -71,18 +71,6 @@
     "egulias/email-validator": {
         "version": "2.1.22"
     },
-    "kevinpapst/adminlte-bundle": {
-        "version": "3.6",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "0.9",
-            "ref": "36a77f782cd6f7cd761384c6a301fedf018e37e5"
-        },
-        "files": [
-            "config/packages/admin_lte.yaml"
-        ]
-    },
     "knplabs/knp-menu": {
         "version": "v3.1.2"
     },
@@ -471,25 +459,6 @@
         "files": [
             "config/packages/web_profiler.yaml",
             "config/routes/web_profiler.yaml"
-        ]
-    },
-    "symfony/webpack-encore-bundle": {
-        "version": "1.15",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "1.10",
-            "ref": "2e458cc7e6f1df1dad890eb104b81e4f302c9bd4"
-        },
-        "files": [
-            "assets/app.js",
-            "assets/bootstrap.js",
-            "assets/controllers.json",
-            "assets/controllers/hello_controller.js",
-            "assets/styles/app.css",
-            "config/packages/webpack_encore.yaml",
-            "package.json",
-            "webpack.config.js"
         ]
     },
     "symfony/yaml": {

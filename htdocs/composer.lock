@@ -3028,12 +3028,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpencachingDeutschland/okapi.git",
-                "reference": "3b41888b8cb09a6283e37c69cbef467d8e97128b"
+                "reference": "801a011cfcd02b545ffa198260d174b2dd93cf0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpencachingDeutschland/okapi/zipball/3b41888b8cb09a6283e37c69cbef467d8e97128b",
-                "reference": "3b41888b8cb09a6283e37c69cbef467d8e97128b",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/okapi/zipball/801a011cfcd02b545ffa198260d174b2dd93cf0c",
+                "reference": "801a011cfcd02b545ffa198260d174b2dd93cf0c",
                 "shasum": ""
             },
             "require": {
@@ -3049,7 +3049,7 @@
             "support": {
                 "source": "https://github.com/OpencachingDeutschland/okapi/tree/master"
             },
-            "time": "2026-10-07T11:00:45+00:00"
+            "time": "2026-10-11T08:03:44+00:00"
         },
         {
             "name": "psr/cache",

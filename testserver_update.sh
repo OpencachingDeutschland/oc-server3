@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
 #DESCRIPTION: update process for test.opencaching.de
+#USAGE: ./testserver_update.sh [REMOTE] [BRANCH]
+# Examples:
+#   ./testserver_update.sh                            # deploys origin/development (default)
+#   ./testserver_update.sh origin development         # deploys origin/development
+#   ./testserver_update.sh origin temp/combined-fixes # deploys origin/temp/combined-fixes
+#   ./testserver_update.sh <remote> <branch>          # deploys <remote>/<branch>
+
 CODE_ROOT="/var/www/gh-octest/code-root/code"
 
-git fetch origin
-git reset --hard origin/development
+# Parse parameters
+REMOTE_NAME="${1:-origin}"
+BRANCH_NAME="${2:-development}"
+
+git fetch "$REMOTE_NAME"
+git reset --hard "$REMOTE_NAME/$BRANCH_NAME"
 export COMPOSER_ALLOW_SUPERUSER=1
 
 printf '\n***\n*** htdocs: composer install \n***\n'

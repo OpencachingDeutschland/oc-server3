@@ -13,11 +13,14 @@ CODE_ROOT="/var/www/gh-octest/code-root/code"
 REMOTE_NAME="${1:-origin}"
 BRANCH_NAME="${2:-development}"
 
+printf '\n***\n*** GIT checkout \n***\n'
 git fetch "$REMOTE_NAME"
-git reset --hard "$REMOTE_NAME/$BRANCH_NAME"
-export COMPOSER_ALLOW_SUPERUSER=1
+git clean -fd
+git checkout -B "$BRANCH_NAME" "$REMOTE_NAME/$BRANCH_NAME"
+
 
 printf '\n***\n*** htdocs: composer install \n***\n'
+export COMPOSER_ALLOW_SUPERUSER=1
 cd ${CODE_ROOT}/htdocs && composer install --no-interaction --optimize-autoloader
 
 printf '\n***\n*** htdocs_symfony: composer install \n***\n'
@@ -66,6 +69,7 @@ cd ${CODE_ROOT}
 ./htdocs/bin/console translation:import-legacy-translation
 
 systemctl reload php-fpm.service
+
 
 printf '\n***\n*** htdocs_symfony: update caniuse list and yarns \n***\n'
 cd ${CODE_ROOT}/htdocs_symfony

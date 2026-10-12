@@ -1,24 +1,46 @@
 #!/usr/bin/env bash
 #DESCRIPTION: update process for test.opencaching.de
+#USAGE: ./testserver_update.sh [REMOTE] [BRANCH]
+# Examples:
+#   ./testserver_update.sh                            # deploys origin/development (default)
+#   ./testserver_update.sh origin development         # deploys origin/development
+#   ./testserver_update.sh origin temp/combined-fixes # deploys origin/temp/combined-fixes
+#   ./testserver_update.sh <remote> <branch>          # deploys <remote>/<branch>
+
+# Stop on any failed command, unset variable, or failure inside a pipe
+set -euo pipefail
+trap 'printf "\n***\n*** FAILED (exit %s) at line %s: %s\n***\n" "$?" "$LINENO" "$BASH_COMMAND" >&2' ERR
+
 CODE_ROOT="/var/www/gh-octest/code-root/code"
 
-git fetch origin
-git reset --hard origin/development
-export COMPOSER_ALLOW_SUPERUSER=1
+# Parse parameters
+REMOTE_NAME="${1:-origin}"
+BRANCH_NAME="${2:-development}"
+
+printf '\n***\n*** GIT checkout \n***\n'
+cd "${CODE_ROOT}"
+git fetch "$REMOTE_NAME"
+git clean -fd
+git checkout --force -B "$BRANCH_NAME" "$REMOTE_NAME/$BRANCH_NAME"
+
 
 printf '\n***\n*** htdocs: composer install \n***\n'
-cd ${CODE_ROOT}/htdocs && composer install --no-interaction --optimize-autoloader
+export COMPOSER_ALLOW_SUPERUSER=1
+cd "${CODE_ROOT}/htdocs"
+composer install --no-interaction --optimize-autoloader
 
 printf '\n***\n*** htdocs_symfony: composer install \n***\n'
-cd ${CODE_ROOT}/htdocs_symfony && composer install --no-interaction --optimize-autoloader
+cd "${CODE_ROOT}/htdocs_symfony"
+composer install --no-interaction --optimize-autoloader
 
 
 printf '\n***\n*** run database and cache updates \n***\n'
-cd ${CODE_ROOT}
+cd "${CODE_ROOT}"
 php bin/dbupdate.php
 
 printf '\n***\n*** Install OKAPI \n***\n'
-curl https://test.opencaching.de/okapi/update?install=true
+curl -f "https://test.opencaching.de/okapi/update?install=true" \
+  || printf '\n*** WARNING: OKAPI install request failed (exit %s), continuing\n' "$?" >&2
 
 printf '\n***\n*** updating database structures ... \n***\n'
 php bin/dbsv-update.php
@@ -26,23 +48,24 @@ php bin/db-import-static.php
 cd ${CODE_ROOT}/sql/stored-proc && php maintain.php
 
 printf '\n***\n*** htdocs: doctrine migration \n***\n'
-chmod 755 ${CODE_ROOT}/htdocs/bin/console
-chmod -R 777 ${CODE_ROOT}/htdocs/var
-${CODE_ROOT}/htdocs/bin/console doctrine:migrations:migrate -n
+cd "${CODE_ROOT}"
+chmod 755 "${CODE_ROOT}/htdocs/bin/console"
+chmod -R 777 "${CODE_ROOT}/htdocs/var"
+"${CODE_ROOT}/htdocs/bin/console" doctrine:migrations:migrate -n
 printf '\n***\nhtdocs_symfony: doctrine migration \n***\n'
-cd ${CODE_ROOT}/htdocs_symfony/bin/console doctrine:migrations:migrate -n
+"${CODE_ROOT}/htdocs_symfony/bin/console" doctrine:migrations:migrate -n
 
 printf '\n***\n*** update OKAPI \n***\n'
 php bin/okapi-update.php|grep -i -e current -e mutation
 
-printf '\n***\n*** htdocs: get translations.zip from oc.de \n***\n'
-cd ${CODE_ROOT}/htdocs
-curl -o translations.zip "https://www.opencaching.de/translations.zip"
+printf '\n***\n*** htdocs: get translations.zip \n***\n'
+cd "${CODE_ROOT}/htdocs"
+wget -O translations.zip "https://raw.githubusercontent.com/OpencachingDeutschland/oc-server3-translations/refs/heads/main/translations.zip"
 unzip -o translations.zip
 rm translations.zip
 
 printf '\n***\n*** htdocs: process translations \n***\n'
-cd ${CODE_ROOT}
+cd "${CODE_ROOT}"
 ./htdocs/bin/console translation:update de --force
 ./htdocs/bin/console translation:update el --force
 ./htdocs/bin/console translation:update en --force
@@ -56,8 +79,9 @@ cd ${CODE_ROOT}
 
 systemctl reload php-fpm.service
 
+
 printf '\n***\n*** htdocs_symfony: update caniuse list and yarns \n***\n'
-cd ${CODE_ROOT}/htdocs_symfony
+cd "${CODE_ROOT}/htdocs_symfony"
 npx update-browserslist-db@latest -y
 yarn install
 yarn dev

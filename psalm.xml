@@ -1,0 +1,8 @@
+<projectFiles>
+    <directory name="htdocs/src"/>
+    <directory name="htdocs/lib2"/>
+    <directory name="htdocs_symfony/src"/>
+    <ignoreFiles>
+        <directory name="htdocs/vendor"/>
+    </ignoreFiles>
+</projectFiles>

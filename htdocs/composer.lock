@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b14d94518689434b9b06ca3be49f77a",
+    "content-hash": "a0b260a712ba259372c97a586c3295d9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3027,13 +3027,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/opencaching/okapi.git",
-                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90"
+                "url": "https://github.com/OpencachingDeutschland/okapi.git",
+                "reference": "801a011cfcd02b545ffa198260d174b2dd93cf0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opencaching/okapi/zipball/3aab5717104f94cc9e6e36964d772ac31ef76b90",
-                "reference": "3aab5717104f94cc9e6e36964d772ac31ef76b90",
+                "url": "https://api.github.com/repos/OpencachingDeutschland/okapi/zipball/801a011cfcd02b545ffa198260d174b2dd93cf0c",
+                "reference": "801a011cfcd02b545ffa198260d174b2dd93cf0c",
                 "shasum": ""
             },
             "require": {
@@ -3047,10 +3047,9 @@
                 }
             },
             "support": {
-                "source": "https://github.com/opencaching/okapi/tree/master",
-                "issues": "https://github.com/opencaching/okapi/issues"
+                "source": "https://github.com/OpencachingDeutschland/okapi/tree/master"
             },
-            "time": "2024-12-10T09:13:30+00:00"
+            "time": "2026-10-11T08:03:44+00:00"
         },
         {
             "name": "psr/cache",

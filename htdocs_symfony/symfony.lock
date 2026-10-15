@@ -1,7 +1,4 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99"
-    },
     "doctrine/collections": {
         "version": "1.6.7"
     },
@@ -101,15 +98,6 @@
     "php": {
         "version": "7.2"
     },
-    "phpdocumentor/reflection-common": {
-        "version": "2.2.0"
-    },
-    "phpdocumentor/reflection-docblock": {
-        "version": "5.2.2"
-    },
-    "phpdocumentor/type-resolver": {
-        "version": "1.4.0"
-    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -117,9 +105,6 @@
         "version": "1.0.0"
     },
     "psr/event-dispatcher": {
-        "version": "1.0.0"
-    },
-    "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -151,9 +136,6 @@
         "files": [
             "bin/console"
         ]
-    },
-    "symfony/css-selector": {
-        "version": "v5.1.7"
     },
     "symfony/debug-bundle": {
         "version": "5.3",
@@ -193,9 +175,6 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v2.2.0"
-    },
-    "symfony/expression-language": {
-        "version": "v5.1.7"
     },
     "symfony/filesystem": {
         "version": "v5.1.7"
@@ -238,19 +217,10 @@
             "src/Kernel.php"
         ]
     },
-    "symfony/http-client": {
-        "version": "v5.1.7"
-    },
-    "symfony/http-client-contracts": {
-        "version": "v2.2.0"
-    },
     "symfony/http-foundation": {
         "version": "v5.1.7"
     },
     "symfony/http-kernel": {
-        "version": "v5.1.7"
-    },
-    "symfony/intl": {
         "version": "v5.1.7"
     },
     "symfony/mailer": {
@@ -457,9 +427,6 @@
     "symfony/var-exporter": {
         "version": "v5.1.7"
     },
-    "symfony/web-link": {
-        "version": "v5.1.7"
-    },
     "symfony/web-profiler-bundle": {
         "version": "5.3",
         "recipe": {
@@ -500,9 +467,6 @@
     },
     "twig/twig": {
         "version": "v3.0.5"
-    },
-    "webmozart/assert": {
-        "version": "1.9.1"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

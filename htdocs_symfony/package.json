@@ -1,22 +1,22 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.29.0",
-        "@babel/preset-env": "^7.29.0",
-        "@symfony/webpack-encore": "^6.0.0",
-        "autocomplete.js": "^0.38.1",
-        "core-js": "^3.49.0",
-        "file-loader": "^6.2.0",
+        "@babel/core": "^8.0.0",
+        "@babel/preset-env": "^8.0.0",
+        "@symfony/webpack-encore": "^7.0.0",
+        "autoprefixer": "^10.0.0",
+        "babel-plugin-polyfill-corejs3": "^1.0.0",
+        "core-js": "^3.50.0",
         "postcss": "^8.0.0",
+        "postcss-loader": "^8.0.0",
         "sass": "^1.99.0",
-        "sass-loader": "^16.0.0",
+        "sass-loader": "^17.0.0",
         "stylelint": "^17.0.0",
         "stylelint-config-sass-guidelines": "^13.0.0",
         "stylelint-config-standard": "^40.0.0",
         "stylelint-webpack-plugin": "^5.0.0",
-        "tslib": "^2.0.0",
         "webpack": "^5.106.0",
         "webpack-cli": "^7.0.0",
-        "webpack-dev-server": "^5.0.0",
+        "webpack-dev-server": "^6.0.0",
         "webpack-notifier": "^1.15.0"
     },
     "license": "UNLICENSED",
@@ -29,10 +29,9 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.11.0",
-        "autoprefixer": "^10.0.0",
+        "autocomplete.js": "^0.38.1",
         "bootstrap": "^5.3.0",
-        "jquery": "^4.0.0",
-        "postcss-loader": "^8.0.0"
+        "jquery": "^4.0.0"
     },
     "browserslist": [
         "defaults"

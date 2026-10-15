@@ -1,12 +1,15 @@
-const path = require('path');
+import path from 'path'
+import { fileURLToPath } from 'url';
 
 /**
  *
  * @type {Encore}
  */
-const Encore = require('@symfony/webpack-encore');
+import Encore from '@symfony/webpack-encore';
 
-const StylelintPlugin = require('stylelint-webpack-plugin');
+import StylelintPlugin from 'stylelint-webpack-plugin'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -31,10 +34,12 @@ Encore
 .enableSourceMaps(!Encore.isProduction())
 .enableVersioning(Encore.isProduction())
 
-// enables @babel/preset-env polyfills
-.configureBabelPresetEnv((config) => {
-    config.useBuiltIns = 'usage';
-    config.corejs = 3;
+// enables @babel/polyfill-corejs3 polyfills
+.configureBabel((babelConfig) => {
+    babelConfig.plugins.push([
+        'polyfill-corejs3',
+        { method: 'usage-global' },
+    ]);
 })
 
 // enables Loaders
@@ -105,4 +110,4 @@ Encore
 }))
 ;
 
-module.exports = Encore.getWebpackConfig();
+export default await Encore.getWebpackConfig();

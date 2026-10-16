@@ -99,33 +99,34 @@ class SessionDataCookie implements SessionDataInterface
             setcookie(
                 $opt['session']['cookiename'] . 'data',
                 $value,
-                time() + 365 * 24 * 60 * 60,
-                $opt['session']['path'] ?? '/',
-                $opt['session']['domain'] ?? '',
-                $https_session // https only?
+                [
+                    'expires' => time() + 365 * 24 * 60 * 60,
+                    'path' => $opt['session']['path'] ?? '/',
+                    'domain' => $opt['session']['domain'] ?? '',
+                    'secure' => $https_session,
+                    'httponly' => true,
+                    'samesite' => 'Lax',
+                ]
             );
 
             // if site is requested by http no session data is visible, so set cookie as flag to redirect to https
             setcookie(
                 $opt['session']['cookiename'] . 'https_session',
                 $https_session,
-                time() + 365 * 24 * 60 * 60,
-                $opt['session']['path'] ?? '/',
-                $opt['session']['domain'] ?? '',
-                false, // must be available for http
-                true // communication only, no js
+                [
+                    'expires' => time() + 365 * 24 * 60 * 60,
+                    'path' => $opt['session']['path'] ?? '/',
+                    'domain' => $opt['session']['domain'] ?? '',
+                    'secure' => false, // must be available for http
+                    'httponly' => true,
+                    'samesite' => 'Lax',
+                ]
             );
         }
     }
 
     public function close(): void
     {
-        global $opt;
-
-        setcookie(
-            $opt['session']['cookiename'] . 'data',
-            '',
-            time() - 1
-        );
+        $this->header();
     }
 }

@@ -81,6 +81,18 @@ if (!$tpl->is_cached()) {
         $attributes = OcLib2\attribute::getSelectableAttributesListArray(true);
         $tpl->assign('attributes', $attributes);
     }
+
+    if ($article === 'donations') {
+        require_once __DIR__ . '/lib2/donation.class.php';
+        $donationData = Donation::getProgress();
+        if ($donationData !== null) {
+            $tpl->assign('donation_active', $donationData['active']);
+            $tpl->assign('donation_year', $donationData['goalYear']);
+            $tpl->assign('donation_target', $donationData['goal']);
+            $tpl->assign('donation_current', $donationData['current']);
+            $tpl->assign('donation_last_updated', $donationData['updateDate']);
+        }
+    }
 }
 
 $tpl->display();

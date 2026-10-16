@@ -166,7 +166,8 @@ function assignFromDB($userid, $include_editor)
     sql_free_result($rs);
 
     if (isset($_REQUEST['desctext'])) {
-        $tpl->assign('desctext', $_REQUEST['desctext']);
+        $purifier = new OcHTMLPurifier($opt);
+        $tpl->assign('desctext', $purifier->purify($_REQUEST['desctext']));
     } else {
         $tpl->assign(
             'desctext',

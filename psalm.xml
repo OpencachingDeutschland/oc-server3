@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="4"
+    runTaintAnalysis="true"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="htdocs/src"/>
+        <directory name="htdocs/lib2"/>
+        <directory name="htdocs_symfony/src"/>
+    </projectFiles>
+</psalm>   

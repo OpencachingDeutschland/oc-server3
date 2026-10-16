@@ -64,7 +64,7 @@ class sqldebugger
         $command['mode'] = $db['mode'];
         $command['slave'] = $bQuerySlave;
         $command['server'] = $sServer;
-        $command['dblink'] = '' . $dblink;
+        $command['dblink'] = 'dblink ' . $dblink->host_info . '; ' . $dblink->server_version . '; '  . $dblink->client_info;
 
         $bUseExplain = false;
         $sql = trim($sql);

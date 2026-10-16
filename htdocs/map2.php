@@ -80,10 +80,10 @@ $tpl->assign('queryid', $nQueryId);
 if (!isset($_REQUEST['lat_min'])) {
     $tpl->assign('lat_min', null);
 } else {
-    $tpl->assign('lat_min', $_REQUEST['lat_min']);
-    $tpl->assign('lat_max', $_REQUEST['lat_max']);
-    $tpl->assign('lon_min', $_REQUEST['lon_min']);
-    $tpl->assign('lon_max', $_REQUEST['lon_max']);
+    $tpl->assign('lat_min', (float) $_REQUEST['lat_min']);
+    $tpl->assign('lat_max', (float) $_REQUEST['lat_max']);
+    $tpl->assign('lon_min', (float) $_REQUEST['lon_min']);
+    $tpl->assign('lon_max', (float) $_REQUEST['lon_max']);
 }
 
 // save options

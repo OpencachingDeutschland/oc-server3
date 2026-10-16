@@ -230,7 +230,7 @@ function show_tip(text)
     <input type="hidden" name="logid" value="{$logid}"/>
 {else}
     <input type="hidden" name="cacheid" value="{$cacheid}"/>
-    <input type="hidden" name="fieldnoteid" id="fieldnoteid" value="{$fieldnoteid}" />
+    <input type="hidden" name="fieldnoteid" id="fieldnoteid" value="{$fieldnoteid|escape}" />
 {/if}
 <input id="descMode" type="hidden" name="descMode" value="3" />
 <input id="oldDescMode" type="hidden" name="oldDescMode" value="3" />

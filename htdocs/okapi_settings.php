@@ -26,7 +26,7 @@ function get_okapi_settings()
 
         # Settings which ARE present in settings.inc.php:
 
-        'ADMINS'           => [$opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl'],
+        'ADMINS'           => [$opt['db']['warn']['mail'], 'rygielski@mimuw.edu.pl', 'hxdimpf@gmail.com'],
         'FROM_FIELD'       => $opt['mail']['contact'],
         'DATA_LICENSE_URL' => $opt['page']['absolute_url'] . $opt['logic']['license']['terms'],
         'DEBUG'            => ($opt['debug'] & DEBUG_DEVELOPER != 0),

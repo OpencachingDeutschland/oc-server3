@@ -112,6 +112,9 @@
 
 {if $opt.template.popup!=true}
 <div id="overall">
+    {if $opt.page.showdonations}
+        {include file="banners/donation_banner.tpl"}
+    {/if}
     <div id="langstripe">
 
         {* <!-- Navigation Level 1 --> *}

@@ -81,7 +81,7 @@ if (isset($_REQUEST['visitcounter']) && $_REQUEST['visitcounter'] == 1) {
 $bCrypt = !isset($_REQUEST['nocrypt']) || ($_REQUEST['nocrypt'] != 1);
 $tpl->assign('crypt', $bCrypt);
 
-$desclang = isset($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
+$desclang = isset($_REQUEST['desclang']) && ctype_alpha($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
 if ($desclang) {
     $sPreferedDescLang = $_REQUEST['desclang'] . ',' . $opt['template']['locale'] . ',EN';
 } else {
@@ -487,7 +487,8 @@ if (isset($_REQUEST['print']) && $_REQUEST['print'] == 'y') {
     $tpl->popup = 1;
     $tpl->assign('print', true);
     $tpl->name = 'viewcache_print';
-    $tpl->assign('log', $_REQUEST['log']);
+    $logParam = isset($_REQUEST['log']) && ctype_alnum($_REQUEST['log']) ? $_REQUEST['log'] : '';
+    $tpl->assign('log', $logParam);
 } else {
     $tpl->assign('print', false);
 }

@@ -18,8 +18,8 @@ if (isset($_REQUEST['lon'])) {
     $lon_float += $_REQUEST['lon'];
 }
 
-$cache_country = isset($_REQUEST['country']) ? $_REQUEST['country'] : false;
-$cache_desclang = isset($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
+$cache_country = isset($_REQUEST['country']) && ctype_alpha($_REQUEST['country']) ? $_REQUEST['country'] : false;
+$cache_desclang = isset($_REQUEST['desclang']) && ctype_alpha($_REQUEST['desclang']) ? $_REQUEST['desclang'] : false;
 
 $coord = new coordinate($lat_float, $lon_float);
 
@@ -111,7 +111,7 @@ if ($wp != '') {
     sql_free_result($rs);
 }
 $tpl->assign('wp', $wp);
-$childWp = isset($_REQUEST['childwp']) ? $_REQUEST['childwp'] : '';
+$childWp = isset($_REQUEST['childwp']) && ctype_alnum($_REQUEST['childwp']) ? $_REQUEST['childwp'] : '';
 $tpl->assign('childwp', $childWp);
 
 $tpl->display();

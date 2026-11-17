@@ -16,19 +16,46 @@
             <li><b><a href="/articles.php?page=verein">Devenir membre</a> :</b> Rejoignez l'association en tant que membre actif ou membre de soutien, et participez activement l'avenir d'Opencaching.</li>
         </ul>
 
-        <p>Utilisation de votre don : Tous les dons sont principalement utilisés pour l'exploitation des sites web et dans une moindre mesure à l'administration de l'association.</li></p>
+        {if $donation_active}
+        <h2>Progression des dons {$donation_year}</h2>
+        <p>Pour assurer le fonctionnement stable et à long terme d'Opencaching.de, des dons de {$donation_target} &euro; sont nécessaires pour {$donation_year}.</p>
+        <p>État actuel au {$donation_last_updated|date_format:$opt.format.datelong} :</p>
 
-        <h2>Faire un don par virement bancaire :</h2>
-        <p>Banque : Deutsche Skatbank<br />
-            Titulaire du compte : Opencaching Deutschland<br />
-            Adresse du titulaire : 46562 Voerde (Niederrhein), Germany<br />
-            IBAN: DE91 8306 5408 0007 0075 31<br />
-            BIC (SWIFT): GEN0DEF1SLR</p>
+        {include file="articles/donation_progress.tpl"}
+        {/if}
 
-        <p>Scannez ce code QR avec votre application bancaire pour<br>remplir automatiquement les détails du virement :</p>
-        <div style="display: inline-block; text-align: center;">
-            <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="Code QR EPC pour virement bancaire" style="width: 215px; height: 215px;" />
-            <br /><small>EPC QR Code</small>
-        </div>
+        <table>
+            <tr>
+                <td>
+                    <h2>Faire un don par virement bancaire :</h2>
+                    <p>Banque : Deutsche Skatbank<br />
+                        Titulaire du compte : Opencaching Deutschland<br />
+                        Adresse du titulaire : 46562 Voerde (Niederrhein), Germany<br />
+                        IBAN: DE91 8306 5408 0007 0075 31<br />
+                        BIC (SWIFT): GEN0DEF1SLR</p>
 
+                    <p>Ou scannez ce code QR avec votre application bancaire pour<br>remplir automatiquement les détails du virement :</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-epc-qr-code2.png" alt="Code QR EPC pour virement bancaire" style="width: 215px; height: 215px;" />
+                        <br /><small>EPC QR Code</small>
+                    </div>
+                </td>
+                <td>
+                    <h2>Faire un don par Wero :</h2>
+                    <p>Titulaire du compte : Opencaching Deutschland<br />
+                        E-mail : verein@opencaching.de<br />
+                        Transférer dès maintenant avec Wero : <a href="https://share.weropay.eu/p/1/c/M5TWKJJcFx" target="_blank">Wero</a><br /><br /><br />
+                    </p>
+
+                    <p>Ou scanner ce code QR avec votre application Wero pour<br>remplir automatiquement les détails du virement :</p>
+                    <div style="display: inline-block; text-align: center;">
+                        <img src="resource2/misc/donation/oc-wero-qr-code.png" alt="Code QR Wero pour le transfert" style="width: 215px; height: 215px;" />
+                        <br /><small>Wero QR-Code</small>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <h2>Utilisation de votre don</h2>
+        <p>Tous les dons sont principalement utilisés pour l'exploitation des sites web et dans une moindre mesure pour l'administration de l'association.</p>
     </div>

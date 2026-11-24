@@ -36,17 +36,13 @@
       <nobr><input type="text" name="lon_min" maxlength="6" value="{$lon_min}" class="input50" {if $disabled}disabled=""{/if} /> '</nobr>
     </td>
   </tr>
-
-  {if isset($coord_error)}
-  <tr>
-    <td colspan="3" class="errormsg">
-      {$coord_error}
-    </td>
-  </tr>
-  {/if}
-
 </table>
 </div>
+{if isset($coord_error)}
+<div id="coord_error" class="errormsg">
+  {$coord_error}
+</div>
+{/if}
 <input type="hidden" name="latitude" id="coord_lat" value="{$coord_latitude|default:''}" />
 <input type="hidden" name="longitude" id="coord_lon" value="{$coord_longitude|default:''}" />
 <a href="#" id="coord_toggle" style="display:none; font-size:11px"

@@ -1,7 +1,4 @@
 {
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99"
-    },
     "doctrine/collections": {
         "version": "1.6.7"
     },

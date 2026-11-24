@@ -513,7 +513,8 @@ sql(
             
             UPDATE `caches`
             SET
-                `needs_maintenance` =
+                /* IFNULL: no flagged log yet (e.g. first log) must give 0, not NULL (NOT NULL columns) */
+                `needs_maintenance` = IFNULL(
                     (SELECT GREATEST(0,`needs_maintenance`-1)
                      FROM `cache_logs`
                      WHERE
@@ -521,8 +522,8 @@ sql(
                         AND (`cache_logs`.`needs_maintenance`>0 OR `cache_logs`.`type` In (9,13,14))
                         ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
                         LIMIT 1
-                    ),
-                `listing_outdated` =
+                    ), 0),
+                `listing_outdated` = IFNULL(
                     (SELECT GREATEST(0,`listing_outdated`-1)
                      FROM `cache_logs`
                      WHERE
@@ -530,7 +531,7 @@ sql(
                         AND (`cache_logs`.`listing_outdated`>0 OR `cache_logs`.`type` In (9,13,14))
                      ORDER BY `order_date` DESC, `date_created` DESC, `id` DESC
                      LIMIT 1
-                    )
+                    ), 0)
                 /* same sorting order as in caches::getListingOutdatedLogUrl() */
             WHERE `caches`.`cache_id`=nCacheId;
         END IF;

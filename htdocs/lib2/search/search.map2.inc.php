@@ -36,8 +36,8 @@ if ($rMapCache = sql_fetch_assoc($rsMapCache)) {
 
     sql(
         "
-        INSERT INTO `map2_result` (`slave_id`, `sqlchecksum`, `sqlquery`, `date_created`, `date_lastqueried`)
-        VALUES ('&1', '&2', '&3', NOW(), NOW())",
+        INSERT INTO `map2_result` (`slave_id`, `sqlchecksum`, `sqlquery`, `shared_counter`, `request_counter`, `date_created`, `date_lastqueried`)
+        VALUES ('&1', '&2', '&3', 0, 0, NOW(), NOW())",
         $db['slave_id'],
         $sqlchecksum,
         $cachesFilter . "\n" . $sqlFilter

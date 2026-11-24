@@ -43,18 +43,53 @@ if ($isRedirect404) {
 $feeds = [
     'blog',
     'forum',
-    'wiki'
 ];
 $options = $feeds;
+$options[] = 'wiki';
 $options[] = 'newcaches';
+
+$default404 = isset($opt['page']['404']['www.opencaching.de']) ? $opt['page']['404']['www.opencaching.de'] : [];
+$server404 = isset($opt['page']['404'][$_SERVER['SERVER_NAME']]) ? $opt['page']['404'][$_SERVER['SERVER_NAME']] : [];
+
+$optionDefaults = [
+    'blog' => [
+        'show' => false,
+        'feedurl' => '',
+        'url' => '',
+        'timeout' => null,
+        'urlname' => '',
+    ],
+    'forum' => [
+        'show' => false,
+        'feedurl' => '',
+        'url' => '',
+        'timeout' => null,
+        'urlname' => '',
+    ],
+    'wiki' => [
+        'show' => false,
+        'url' => '',
+        'urlname' => '',
+    ],
+    'newcaches' => [
+        'show' => false,
+        'url' => '',
+        'urlname' => '',
+    ],
+];
 
 // simplify $opt
 foreach ($options as $option) {
-    if (isset($opt['page']['404'][$_SERVER['SERVER_NAME']][$option])) {
-        $opt404[$option] = $opt['page']['404'][$_SERVER['SERVER_NAME']][$option];
+    if (isset($server404[$option])) {
+        $opt404[$option] = $server404[$option];
+    } elseif (isset($default404[$option])) {
+        $opt404[$option] = $default404[$option];
     } else {
-        $opt404[$option] = $opt['page']['404']['www.opencaching.de'][$option];
+        $opt404[$option] = $optionDefaults[$option];
     }
+
+    $opt404[$option] += $optionDefaults[$option];
+
     if (isset($opt404[$option]['urlname']) && $opt404[$option]['urlname'] == '') {
         $opt404[$option]['urlname'] = parse_url($opt404[$option]['url'], PHP_URL_HOST);
     }
@@ -99,6 +134,9 @@ if ($isRedirect404) {
         )
     );
 }
+
+
+$tpl->assign('minimap_enabled', false);
 
 // assign $opt404
 $tpl->assign('opt404', $opt404);

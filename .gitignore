@@ -38,6 +38,7 @@
 
 # public OC site files
 /htdocs/robots.txt
+/htdocs_symfony/robots.txt
 
 # developer machine files
 /local/devel/okapi-update-settings.inc.php

@@ -362,23 +362,17 @@ SQL
         ]);
     }
 
+    /**
+     * The user's OKAPI Access Tokens and the applications the user authorized.
+     * (Only the user's own rows: the OKAPI consumers, i.e. the applications, are shared by all users.)
+     */
     private function deleteOkapiAuthorizations(int $userId): void
     {
-        $this->connection->executeQuery(<<<'SQL'
-            DELETE oa, oc
-            FROM okapi_authorizations oa
-            INNER JOIN okapi_consumers oc ON oa.consumer_key = oc.`key`
-            INNER JOIN okapi_nonces ono ON oa.consumer_key = ono.consumer_key
-            INNER JOIN okapi_diagnostics od ON oa.consumer_key = od.consumer_key
-            INNER JOIN okapi_cache oca ON oa.consumer_key = oca.`key`
-            INNER JOIN okapi_stats_hourly osh ON oa.consumer_key = osh.consumer_key
-            INNER JOIN okapi_stats_monthly osm ON oa.consumer_key = osm.consumer_key
-            INNER JOIN okapi_stats_temp ost ON oa.consumer_key = ost.consumer_key
-            INNER JOIN okapi_submitted_objects oso ON oa.consumer_key = oso.consumer_key
-            INNER JOIN okapi_tokens ot ON oa.consumer_key = ot.consumer_key
-            WHERE oa.user_id = :userId
-SQL
-, [
+        $this->connection->executeQuery('DELETE FROM okapi_tokens WHERE user_id = :userId', [
+            'userId' => $userId,
+        ]);
+
+        $this->connection->executeQuery('DELETE FROM okapi_authorizations WHERE user_id = :userId', [
             'userId' => $userId,
         ]);
     }

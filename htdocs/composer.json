@@ -59,7 +59,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/opencaching/okapi"
+      "url": "https://github.com/OpencachingDeutschland/okapi"
     },
     {
       "type": "vcs",
